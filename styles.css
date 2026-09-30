@@ -1,0 +1,48 @@
+/*
+ * styles.css — the Tailwind source-scanned entry point.
+ *
+ * Use this when the consuming project already runs Tailwind 4 and wants
+ * per-utility tree shaking:
+ *
+ *   @import "tailwindcss";
+ *   @import "tw-animate-css";
+ *   @import "@yanqing/ui/styles.css";
+ *   @custom-variant dark (&:where(.dark, .dark *));
+ *
+ * Projects without a Tailwind build should import the precompiled
+ * `@yanqing/ui/ui.css` instead. Do not import both.
+ */
+@source "./src/**/*.{ts,tsx}";
+
+@import "./theme.css";
+@import "./motion.css";
+@import "./components.css";
+
+@layer base {
+  /*
+   * The border default is normally supplied by the host application's Tailwind
+   * setup. Restating it here keeps the library correct standalone.
+   */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--qy-border);
+  }
+
+  body {
+    background-color: var(--qy-background);
+    color: var(--qy-foreground);
+    font-family: var(--qy-font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Tabular figures keep numeric columns and readouts from shifting as values
+   * update. Applied through an opt-in class rather than globally.
+   */
+  .qy-numeric {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}

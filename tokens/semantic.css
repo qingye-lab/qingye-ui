@@ -1,0 +1,137 @@
+/*
+ * Layer 2 — semantic tokens.
+ * Roles the product talks about: background, surface, border, foreground, status.
+ * Components reference only this layer. Light and dark are the same role names
+ * with different bindings, so every component themes without its own override.
+ */
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    color-scheme: light;
+
+    /* Canvas and surfaces, ordered from furthest to nearest. */
+    --qy-background: var(--qy-neutral-0);
+    --qy-surface: var(--qy-neutral-0);
+    --qy-surface-subtle: var(--qy-neutral-25);
+    --qy-surface-raised: var(--qy-neutral-0);
+    --qy-surface-inset: var(--qy-neutral-100);
+    --qy-surface-hover: var(--qy-neutral-100);
+    --qy-surface-active: var(--qy-neutral-150);
+    --qy-overlay: oklch(0.145 0 0 / 0.32);
+
+    /* Text, ordered from strongest to weakest. */
+    --qy-foreground: var(--qy-neutral-850);
+    --qy-foreground-strong: var(--qy-neutral-950);
+    --qy-foreground-muted: var(--qy-neutral-600);
+    --qy-foreground-subtle: var(--qy-neutral-500);
+    --qy-foreground-disabled: var(--qy-neutral-400);
+    --qy-foreground-inverse: var(--qy-neutral-0);
+
+    /* Lines. */
+    --qy-border: var(--qy-neutral-200);
+    --qy-border-subtle: var(--qy-neutral-150);
+    --qy-border-strong: var(--qy-neutral-300);
+    --qy-border-input: var(--qy-neutral-250);
+    --qy-border-hover: var(--qy-neutral-400);
+
+    /* Interaction. */
+    --qy-accent: var(--qy-neutral-100);
+    --qy-accent-foreground: var(--qy-neutral-900);
+    --qy-primary: var(--qy-neutral-850);
+    --qy-primary-foreground: var(--qy-neutral-0);
+    --qy-primary-hover: var(--qy-neutral-800);
+    --qy-ring: var(--qy-neutral-500);
+
+    /* Status: soft = tinted fill, solid = saturated mark, foreground = readable text. */
+    --qy-success-soft: oklch(0.975 0.02 151);
+    --qy-success: var(--qy-green-600);
+    --qy-success-foreground: var(--qy-green-700);
+    --qy-warning-soft: oklch(0.98 0.03 82);
+    --qy-warning: var(--qy-amber-600);
+    --qy-warning-foreground: var(--qy-amber-700);
+    --qy-danger-soft: oklch(0.975 0.02 27);
+    --qy-danger: var(--qy-red-600);
+    --qy-danger-foreground: var(--qy-red-700);
+    --qy-info-soft: oklch(0.975 0.02 258);
+    --qy-info: var(--qy-blue-600);
+    --qy-info-foreground: var(--qy-blue-700);
+
+    /* Charts. */
+    --qy-chart-1: var(--qy-neutral-850);
+    --qy-chart-2: var(--qy-blue-600);
+    --qy-chart-3: var(--qy-amber-600);
+    --qy-chart-4: var(--qy-red-600);
+    --qy-chart-5: var(--qy-violet-600);
+
+    /* Elevation. Shadows stay subtle; depth comes from borders and surface steps. */
+    --qy-shadow-panel: 0 1px 2px var(--qy-alpha-black-4);
+    --qy-shadow-control: 0 1px 2px var(--qy-alpha-black-4), 0 1px 0 var(--qy-alpha-black-4);
+    --qy-shadow-raised: 0 12px 32px -8px var(--qy-alpha-black-12), 0 2px 6px var(--qy-alpha-black-6);
+    --qy-shadow-action: inset 0 1px 0 var(--qy-alpha-white-16), 0 1px 2px var(--qy-alpha-black-12);
+    --qy-shadow-action-pressed: inset 0 1px 0 var(--qy-alpha-black-8);
+    --qy-highlight-inset: inset 0 1px 0 var(--qy-alpha-white-16);
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    color-scheme: dark;
+
+    --qy-background: var(--qy-neutral-950);
+    --qy-surface: var(--qy-neutral-900);
+    --qy-surface-subtle: var(--qy-neutral-950);
+    --qy-surface-raised: var(--qy-neutral-900);
+    --qy-surface-inset: var(--qy-neutral-850);
+    --qy-surface-hover: var(--qy-neutral-850);
+    --qy-surface-active: var(--qy-neutral-800);
+    --qy-overlay: oklch(0 0 0 / 0.6);
+
+    --qy-foreground: var(--qy-neutral-100);
+    --qy-foreground-strong: var(--qy-neutral-0);
+    --qy-foreground-muted: var(--qy-neutral-400);
+    --qy-foreground-subtle: var(--qy-neutral-500);
+    --qy-foreground-disabled: var(--qy-neutral-600);
+    --qy-foreground-inverse: var(--qy-neutral-950);
+
+    --qy-border: var(--qy-neutral-800);
+    --qy-border-subtle: var(--qy-neutral-850);
+    --qy-border-strong: var(--qy-neutral-700);
+    --qy-border-input: var(--qy-neutral-700);
+    --qy-border-hover: var(--qy-neutral-600);
+
+    --qy-accent: var(--qy-neutral-850);
+    --qy-accent-foreground: var(--qy-neutral-0);
+    --qy-primary: var(--qy-neutral-100);
+    --qy-primary-foreground: var(--qy-neutral-950);
+    --qy-primary-hover: var(--qy-neutral-0);
+    --qy-ring: var(--qy-neutral-500);
+
+    /* Dark status fills are low-chroma so they read as tint, not as glow. */
+    --qy-success-soft: oklch(0.24 0.04 151);
+    --qy-success: var(--qy-green-500);
+    --qy-success-foreground: var(--qy-green-500);
+    --qy-warning-soft: oklch(0.26 0.05 78);
+    --qy-warning: var(--qy-amber-500);
+    --qy-warning-foreground: var(--qy-amber-500);
+    --qy-danger-soft: oklch(0.25 0.05 27);
+    --qy-danger: var(--qy-red-500);
+    --qy-danger-foreground: var(--qy-red-500);
+    --qy-info-soft: oklch(0.25 0.05 258);
+    --qy-info: var(--qy-blue-500);
+    --qy-info-foreground: var(--qy-blue-500);
+
+    --qy-chart-1: var(--qy-neutral-100);
+    --qy-chart-2: var(--qy-blue-500);
+    --qy-chart-3: var(--qy-amber-500);
+    --qy-chart-4: var(--qy-red-500);
+    --qy-chart-5: var(--qy-violet-600);
+
+    /* Dark surfaces separate by lightness, so shadows carry less weight. */
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.24);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.32);
+    --qy-shadow-raised: 0 12px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.3);
+    --qy-shadow-action: inset 0 1px 0 var(--qy-alpha-white-10), 0 1px 2px oklch(0 0 0 / 0.4);
+    --qy-shadow-action-pressed: inset 0 1px 0 oklch(0 0 0 / 0.24);
+    --qy-highlight-inset: inset 0 1px 0 var(--qy-alpha-white-10);
+  }
+}

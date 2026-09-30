@@ -1,0 +1,294 @@
+/*
+ * theme.css — the single source of truth for this library's design tokens.
+ *
+ * Layer 1 primitives  -> tokens/primitives.css   raw values, no meaning
+ * Layer 2 semantic    -> tokens/semantic.css     roles, light + dark
+ * Layer 3 components  -> tokens/components.css   sizes, density, motion
+ *
+ * Components consume layer 2 and layer 3 only. The compatibility aliases at the
+ * bottom map legacy token names onto the new system so existing call sites keep
+ * working while new code targets the `--qy-*` names.
+ */
+@import "./tokens/primitives.css";
+@import "./tokens/semantic.css";
+@import "./tokens/components.css";
+
+@layer base {
+  :root {
+    /* --- Compatibility aliases: legacy name -> new role ------------------- */
+    --background: var(--qy-background);
+    --foreground: var(--qy-foreground);
+    --surface-subtle: var(--qy-surface-subtle);
+    --surface-raised: var(--qy-surface-raised);
+    --surface-inset: var(--qy-surface-inset);
+    --card: var(--qy-surface-raised);
+    --card-foreground: var(--qy-foreground);
+    --popover: var(--qy-surface-raised);
+    --popover-foreground: var(--qy-foreground);
+    --primary: var(--qy-primary);
+    --primary-foreground: var(--qy-primary-foreground);
+    --secondary: var(--qy-surface-inset);
+    --secondary-foreground: var(--qy-foreground);
+    --muted: var(--qy-surface-inset);
+    --muted-foreground: var(--qy-foreground-muted);
+    --accent: var(--qy-accent);
+    --accent-foreground: var(--qy-accent-foreground);
+    --destructive: var(--qy-danger);
+    --border: var(--qy-border);
+    --border-subtle: var(--qy-border-subtle);
+    --input: var(--qy-border-input);
+    --input-hover: var(--qy-border-hover);
+    --ring: var(--qy-ring);
+    --disabled-foreground: var(--qy-foreground-disabled);
+    --disabled-background: var(--qy-surface-inset);
+    --opacity-disabled: 0.64;
+
+    --status-positive: var(--qy-success);
+    --status-positive-foreground: var(--qy-success-foreground);
+    --status-positive-soft: var(--qy-success-soft);
+    --status-warning: var(--qy-warning);
+    --status-warning-foreground: var(--qy-warning-foreground);
+    --status-warning-soft: var(--qy-warning-soft);
+    --status-critical: var(--qy-danger);
+    --status-critical-foreground: var(--qy-danger-foreground);
+    --status-critical-soft: var(--qy-danger-soft);
+    --status-info: var(--qy-info);
+    --status-info-foreground: var(--qy-info-foreground);
+    --status-info-soft: var(--qy-info-soft);
+
+    --chart-1: var(--qy-chart-1);
+    --chart-2: var(--qy-chart-2);
+    --chart-3: var(--qy-chart-3);
+    --chart-4: var(--qy-chart-4);
+    --chart-5: var(--qy-chart-5);
+
+    --radius: var(--qy-radius);
+    --shape-sm: var(--qy-radius-sm);
+    --shape-md: var(--qy-radius-md);
+    --shape-lg: var(--qy-radius-lg);
+    --shape-xl: var(--qy-radius-xl);
+    --shape-2xl: var(--qy-radius-2xl);
+    --shape-badge: var(--qy-radius-xs);
+
+    --elevation-panel: var(--qy-shadow-panel);
+    --shadow-panel: var(--qy-shadow-panel);
+    --elevation-action: var(--qy-shadow-action);
+    --shadow-action: var(--qy-shadow-action);
+    --elevation-action-pressed: var(--qy-shadow-action-pressed);
+    --shadow-action-pressed: var(--qy-shadow-action-pressed);
+    --elevation-control: var(--qy-shadow-control);
+    --shadow-control: var(--qy-shadow-control);
+    --elevation-raised: var(--qy-shadow-raised);
+    --shadow-raised: var(--qy-shadow-raised);
+
+    --motion-press: var(--qy-duration-press);
+    --motion-fast: var(--qy-duration-fast);
+    --motion-feedback: var(--qy-duration-feedback);
+    --motion-base: var(--qy-duration-base);
+    --motion-stagger: var(--qy-stagger);
+    --ease-out: var(--qy-ease-out);
+    --ease-in-out: var(--qy-ease-in-out);
+    --ease-drawer: var(--qy-ease-drawer);
+    --ease-standard: var(--qy-ease-out);
+
+    --font-family-sans: var(--qy-font-sans);
+    --font-weight-normal: var(--qy-weight-regular);
+    --font-weight-medium: var(--qy-weight-medium);
+    --font-weight-semibold: var(--qy-weight-semibold);
+    --font-weight-bold: var(--qy-weight-semibold);
+
+    --type-display-size: var(--qy-text-display-size);
+    --type-display-leading: var(--qy-text-display-leading);
+    --type-title-size: var(--qy-text-title-size);
+    --type-title-leading: var(--qy-text-title-leading);
+    --type-heading-size: var(--qy-text-heading-size);
+    --type-heading-leading: var(--qy-text-heading-leading);
+    --type-body-size: var(--qy-text-body-size);
+    --type-body-leading: var(--qy-text-body-leading);
+    --type-label-size: var(--qy-text-label-size);
+    --type-label-leading: var(--qy-text-label-leading);
+    --type-caption-size: var(--qy-text-caption-size);
+    --type-caption-leading: var(--qy-text-caption-leading);
+    --type-page-size: var(--qy-text-display-size);
+    --type-page-leading: var(--qy-text-display-leading);
+    --type-panel-size: var(--qy-text-title-size);
+    --type-panel-leading: var(--qy-text-title-leading);
+    --type-section-size: var(--qy-text-heading-size);
+    --type-section-leading: var(--qy-text-heading-leading);
+    --text-page: var(--qy-text-display-size);
+    --text-section: var(--qy-text-heading-size);
+    --text-body: var(--qy-text-body-size);
+    --text-label: var(--qy-text-label-size);
+    --text-caption: var(--qy-text-caption-size);
+    --tracking-heading: var(--qy-tracking-heading);
+
+    --space-1: var(--qy-space-1);
+    --space-2: var(--qy-space-2);
+    --space-3: var(--qy-space-3);
+    --space-4: var(--qy-space-4);
+    --space-5: var(--qy-space-5);
+    --space-6: var(--qy-space-6);
+    --space-8: var(--qy-space-8);
+    --space-10: var(--qy-space-10);
+    --space-12: var(--qy-space-12);
+    --space-16: var(--qy-space-16);
+
+    --control-height-sm: var(--qy-control-sm);
+    --control-height: var(--qy-control-md);
+    --control-height-lg: var(--qy-control-lg);
+    --control-hit-target: var(--qy-touch-target);
+    --density-topbar-height: var(--qy-topbar-height);
+    --density-page-gutter: var(--qy-page-gutter);
+    --density-page-block: var(--qy-space-5);
+    --density-section-gap: var(--qy-section-gap);
+    --density-panel-gap: var(--qy-panel-gap);
+    --density-panel-padding: var(--qy-panel-padding);
+    --density-panel-padding-sm: var(--qy-panel-padding-sm);
+    --density-table-row: var(--qy-row-default);
+    --density-table-row-compact: var(--qy-row-compact);
+    --page-max-width: 105rem;
+
+    --radius-sm: var(--qy-radius-sm);
+    --radius-md: var(--qy-radius-md);
+    --radius-lg: var(--qy-radius-lg);
+    --radius-xl: var(--qy-radius-xl);
+    --radius-2xl: var(--qy-radius-2xl);
+
+    --sidebar: var(--qy-surface-subtle);
+    --sidebar-foreground: var(--qy-foreground);
+    --sidebar-primary: var(--qy-primary);
+    --sidebar-primary-foreground: var(--qy-primary-foreground);
+    --sidebar-accent: var(--qy-accent);
+    --sidebar-accent-foreground: var(--qy-accent-foreground);
+    --sidebar-border: var(--qy-border);
+    --sidebar-ring: var(--qy-ring);
+  }
+}
+
+/*
+ * Tailwind theme mapping. Kept in `@theme inline` so utilities such as
+ * `bg-background` / `text-muted-foreground` resolve to the live token value
+ * and therefore follow theme switches without recompilation.
+ */
+@theme inline {
+  --font-sans: var(--qy-font-sans);
+  --font-heading: var(--qy-font-sans);
+  --font-mono: var(--qy-font-mono);
+  --font-weight-normal: var(--qy-weight-regular);
+  --font-weight-medium: var(--qy-weight-medium);
+  --font-weight-semibold: var(--qy-weight-semibold);
+  --font-weight-bold: var(--qy-weight-semibold);
+
+  --text-display: var(--qy-text-display-size);
+  --text-display--line-height: var(--qy-text-display-leading);
+  --text-display--font-weight: var(--qy-weight-semibold);
+  --text-title: var(--qy-text-title-size);
+  --text-title--line-height: var(--qy-text-title-leading);
+  --text-title--font-weight: var(--qy-weight-semibold);
+  --text-heading: var(--qy-text-heading-size);
+  --text-heading--line-height: var(--qy-text-heading-leading);
+  --text-heading--font-weight: var(--qy-weight-semibold);
+  --text-page: var(--qy-text-display-size);
+  --text-page--line-height: var(--qy-text-display-leading);
+  --text-page--font-weight: var(--qy-weight-semibold);
+  --text-section: var(--qy-text-heading-size);
+  --text-section--line-height: var(--qy-text-heading-leading);
+  --text-section--font-weight: var(--qy-weight-semibold);
+  --text-panel: var(--qy-text-title-size);
+  --text-panel--line-height: var(--qy-text-title-leading);
+  --text-panel--font-weight: var(--qy-weight-semibold);
+  --text-body: var(--qy-text-body-size);
+  --text-body--line-height: var(--qy-text-body-leading);
+  --text-label: var(--qy-text-label-size);
+  --text-label--line-height: var(--qy-text-label-leading);
+  --text-caption: var(--qy-text-caption-size);
+  --text-caption--line-height: var(--qy-text-caption-leading);
+
+  --radius-xs: var(--qy-radius-xs);
+  --radius-sm: var(--qy-radius-sm);
+  --radius-md: var(--qy-radius-md);
+  --radius-lg: var(--qy-radius-lg);
+  --radius-xl: var(--qy-radius-xl);
+  --radius-2xl: var(--qy-radius-2xl);
+  --radius-badge: var(--qy-radius-xs);
+
+  --shadow-panel: var(--qy-shadow-panel);
+  --shadow-control: var(--qy-shadow-control);
+  --shadow-action: var(--qy-shadow-action);
+  --shadow-action-pressed: var(--qy-shadow-action-pressed);
+  --shadow-raised: var(--qy-shadow-raised);
+
+  --default-transition-duration: var(--qy-duration-fast);
+  --default-transition-timing-function: var(--qy-ease-out);
+
+  --color-background: var(--qy-background);
+  --color-foreground: var(--qy-foreground);
+  --color-foreground-strong: var(--qy-foreground-strong);
+  --color-foreground-muted: var(--qy-foreground-muted);
+  --color-foreground-subtle: var(--qy-foreground-subtle);
+  --color-foreground-inverse: var(--qy-foreground-inverse);
+  --color-surface: var(--qy-surface);
+  --color-surface-subtle: var(--qy-surface-subtle);
+  --color-surface-raised: var(--qy-surface-raised);
+  --color-surface-inset: var(--qy-surface-inset);
+  --color-card: var(--qy-surface-raised);
+  --color-card-foreground: var(--qy-foreground);
+  --color-popover: var(--qy-surface-raised);
+  --color-popover-foreground: var(--qy-foreground);
+  --color-primary: var(--qy-primary);
+  --color-primary-foreground: var(--qy-primary-foreground);
+  --color-secondary: var(--qy-surface-inset);
+  --color-secondary-foreground: var(--qy-foreground);
+  --color-muted: var(--qy-surface-inset);
+  --color-muted-foreground: var(--qy-foreground-muted);
+  --color-accent: var(--qy-accent);
+  --color-accent-foreground: var(--qy-accent-foreground);
+  --color-destructive: var(--qy-danger);
+  --color-destructive-foreground: var(--qy-danger-foreground);
+  --color-border: var(--qy-border);
+  --color-border-subtle: var(--qy-border-subtle);
+  --color-border-strong: var(--qy-border-strong);
+  --color-input: var(--qy-border-input);
+  --color-input-hover: var(--qy-border-hover);
+  --color-ring: var(--qy-ring);
+  --color-disabled-foreground: var(--qy-foreground-disabled);
+  --color-disabled-background: var(--qy-surface-inset);
+  --color-overlay: var(--qy-overlay);
+
+  --color-success: var(--qy-success);
+  --color-success-foreground: var(--qy-success-foreground);
+  --color-success-soft: var(--qy-success-soft);
+  --color-warning: var(--qy-warning);
+  --color-warning-foreground: var(--qy-warning-foreground);
+  --color-warning-soft: var(--qy-warning-soft);
+  --color-info: var(--qy-info);
+  --color-info-foreground: var(--qy-info-foreground);
+  --color-info-soft: var(--qy-info-soft);
+  --color-status-positive: var(--qy-success);
+  --color-status-positive-foreground: var(--qy-success-foreground);
+  --color-status-positive-soft: var(--qy-success-soft);
+  --color-status-warning: var(--qy-warning);
+  --color-status-warning-foreground: var(--qy-warning-foreground);
+  --color-status-warning-soft: var(--qy-warning-soft);
+  --color-status-critical: var(--qy-danger);
+  --color-status-critical-foreground: var(--qy-danger-foreground);
+  --color-status-critical-soft: var(--qy-danger-soft);
+  --color-status-info: var(--qy-info);
+  --color-status-info-foreground: var(--qy-info-foreground);
+  --color-status-info-soft: var(--qy-info-soft);
+
+  --color-chart-1: var(--qy-chart-1);
+  --color-chart-2: var(--qy-chart-2);
+  --color-chart-3: var(--qy-chart-3);
+  --color-chart-4: var(--qy-chart-4);
+  --color-chart-5: var(--qy-chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}

@@ -1,0 +1,55 @@
+/*
+ * Layer 1 — primitives.
+ * Raw palette values. No meaning, no component may reference these directly.
+ * Changing a value here changes every role built on top of it.
+ */
+@layer base {
+  :root {
+    /* Neutrals: a single hue-locked ramp keeps greys from drifting apart. */
+    --qy-neutral-0: oklch(1 0 0);
+    --qy-neutral-25: oklch(0.992 0 0);
+    --qy-neutral-50: oklch(0.985 0 0);
+    --qy-neutral-100: oklch(0.97 0 0);
+    --qy-neutral-150: oklch(0.955 0 0);
+    --qy-neutral-200: oklch(0.922 0 0);
+    --qy-neutral-250: oklch(0.89 0 0);
+    --qy-neutral-300: oklch(0.855 0 0);
+    --qy-neutral-400: oklch(0.78 0 0);
+    --qy-neutral-500: oklch(0.63 0 0);
+    --qy-neutral-600: oklch(0.52 0 0);
+    --qy-neutral-700: oklch(0.42 0 0);
+    --qy-neutral-800: oklch(0.3 0 0);
+    --qy-neutral-850: oklch(0.26 0 0);
+    --qy-neutral-900: oklch(0.21 0 0);
+    --qy-neutral-950: oklch(0.145 0 0);
+    --qy-neutral-1000: oklch(0.1 0 0);
+
+    /* Status hues, each with a ramp so soft/solid/text roles stay related. */
+    --qy-green-500: oklch(0.72 0.15 151);
+    --qy-green-600: oklch(0.6 0.14 151);
+    --qy-green-700: oklch(0.5 0.12 151);
+    --qy-amber-500: oklch(0.82 0.15 78);
+    --qy-amber-600: oklch(0.72 0.16 71);
+    --qy-amber-700: oklch(0.55 0.13 66);
+    --qy-red-500: oklch(0.68 0.19 27);
+    --qy-red-600: oklch(0.58 0.2 27);
+    --qy-red-700: oklch(0.5 0.18 27);
+    --qy-blue-500: oklch(0.7 0.15 258);
+    --qy-blue-600: oklch(0.58 0.19 258);
+    --qy-blue-700: oklch(0.49 0.17 258);
+
+    /* Chart series, deliberately distinguishable in greyscale order. */
+    --qy-violet-600: oklch(0.58 0.17 295);
+    --qy-teal-600: oklch(0.6 0.11 195);
+
+    /* Alpha overlays used for borders, fills and focus rings. */
+    --qy-alpha-black-4: oklch(0 0 0 / 0.04);
+    --qy-alpha-black-6: oklch(0 0 0 / 0.06);
+    --qy-alpha-black-8: oklch(0 0 0 / 0.08);
+    --qy-alpha-black-12: oklch(0 0 0 / 0.12);
+    --qy-alpha-black-32: oklch(0 0 0 / 0.32);
+    --qy-alpha-white-6: oklch(1 0 0 / 0.06);
+    --qy-alpha-white-10: oklch(1 0 0 / 0.1);
+    --qy-alpha-white-16: oklch(1 0 0 / 0.16);
+  }
+}

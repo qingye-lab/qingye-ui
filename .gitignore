@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.build-ui.css
+*.tgz
+.DS_Store
+*.log
+.vite/
+coverage/

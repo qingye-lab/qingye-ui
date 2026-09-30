@@ -1,0 +1,633 @@
+{
+  "source": "https://github.com/cosscom/coss/tree/main/apps/ui/registry/default",
+  "license": "MIT",
+  "retrieved": "2026-09-30",
+  "components": [
+    {
+      "file": "src/coss/button.tsx",
+      "registry": "https://coss.com/ui/r/button.json",
+      "upstreamPath": "apps/ui/registry/default/ui/button.tsx",
+      "upstreamSha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8",
+      "adaptedSha256": "5f186b887df914754ec795d04fe9eb37633e7e846a909cd1b724d4a1aa130547",
+      "adaptations": [
+        "Local imports; existing Lucide Spinner dependency",
+        "Expose loading as aria-busy",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Hide the existing decorative Spinner from the loading button accessible name",
+        "Mark button variants as qy-pressable so composed triggers retain press feedback when their data-slot changes"
+      ]
+    },
+    {
+      "file": "src/coss/input.tsx",
+      "registry": "https://coss.com/ui/r/input.json",
+      "upstreamPath": "apps/ui/registry/default/ui/input.tsx",
+      "upstreamSha256": "3d488d491eb4e63642adc8b9354b0b0cc5b8ec4e284bbc26da7e2516f24980a4",
+      "adaptedSha256": "729ba76bfdb27ba9dfe30e0b0da9a6527fa3a2b159ab75c20890f0001f67656b",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/textarea.tsx",
+      "registry": "https://coss.com/ui/r/textarea.json",
+      "upstreamPath": "apps/ui/registry/default/ui/textarea.tsx",
+      "upstreamSha256": "d153ed8f568a6ffb7b5438ea83385e3d327db9af45ef9fdd0822575d15c4e745",
+      "adaptedSha256": "97ba473ecf90c47df120b362a43305bc6be3e8aa9a0f4bfcf6fcc9c16811eac8",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/badge.tsx",
+      "registry": "https://coss.com/ui/r/badge.json",
+      "upstreamPath": "apps/ui/registry/default/ui/badge.tsx",
+      "upstreamSha256": "60f73554b462ec5e2929ccc58c0522b069c07e1268dbfb67749c2837347b788b",
+      "adaptedSha256": "5fd9e9159ef84ffd3a244186774d959ab89b6e1673bfa4ebc6709427de8dcd39",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/alert.tsx",
+      "registry": "https://coss.com/ui/r/alert.json",
+      "upstreamPath": "apps/ui/registry/default/ui/alert.tsx",
+      "upstreamSha256": "340fc98fae7b30d038e1b7bcbb632f551360cfd8e0803b62a8ddfc04c002119f",
+      "adaptedSha256": "36e57e7a6a4d3a79ee7b5a7813ebdeb8e0b7588a0dabfb08d925d7cbde13ab08",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/card.tsx",
+      "registry": "https://coss.com/ui/r/card.json",
+      "upstreamPath": "apps/ui/registry/default/ui/card.tsx",
+      "upstreamSha256": "b59dbc0bd5d61694fcf1948fb8134795b0f5a1bf0a28d8d6bc817297c73a006e",
+      "adaptedSha256": "5a0a930507d53cfc77de4722d3f5c17c8c84dd4f18a9de31cf4ac93ff56e66a6",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/checkbox.tsx",
+      "registry": "https://coss.com/ui/r/checkbox.json",
+      "upstreamPath": "apps/ui/registry/default/ui/checkbox.tsx",
+      "upstreamSha256": "a1b8b4180a39a47c47bd2b50e432d0911da6efe3b963b065b3b5cb8893760047",
+      "adaptedSha256": "d6b5ed79068811a81ca5f1969aca7e1a98628a55f6c6e6dccead6c13e671a61a",
+      "adaptations": [
+        "Local imports",
+        "Lucide icons replace inline SVG with the same size and stroke weight",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Keep the indicator mounted for interruptible check and uncheck opacity/scale transitions; reduced motion stays static"
+      ]
+    },
+    {
+      "file": "src/coss/input-group.tsx",
+      "registry": "https://coss.com/ui/r/input-group.json",
+      "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
+      "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
+      "adaptedSha256": "35ec45c7a14759f358d5c4f43fbca6d6590d2d8e9c2f8574a747739e58e163ee",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/select.tsx",
+      "registry": "https://coss.com/ui/r/select.json",
+      "upstreamPath": "apps/ui/registry/default/ui/select.tsx",
+      "upstreamSha256": "aa8821bbb4bd6b8b52a6cbaaf8d995f48b1001ad93d4bfa4e5b91b5e6d5f66a0",
+      "adaptedSha256": "1f0c20a0e0c2d29574e49efe0359ff092aca08f80a3eeb7986c104da6433249a",
+      "adaptations": [
+        "Local imports",
+        "Lucide icons replace inline SVG with the same size and stroke weight",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/tabs.tsx",
+      "registry": "https://coss.com/ui/r/tabs.json",
+      "upstreamPath": "apps/ui/registry/default/ui/tabs.tsx",
+      "upstreamSha256": "cbfe21ce54efe39cc02eb073a8327a4ab81b918d5745d986fdfae07d32204a7a",
+      "adaptedSha256": "d99c08d1a616553bcf83af7b51ed548c5b19698928c68fdae727e2eac2ed7429",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/segmented-control.tsx",
+      "registry": "https://coss.com/ui/r/segmented-control.json",
+      "upstreamPath": "apps/ui/registry/default/lib/segmented-control.ts",
+      "upstreamSha256": "c1cb84d02ac5b75aa08a70c205feb9cc8668ffbc19751e013364f547ae41a8a8",
+      "adaptedSha256": "91ec4311197a42cf71a278133d99286609d0790db6ecfa3e08cd739f5dc84dfd",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/tooltip.tsx",
+      "registry": "https://coss.com/ui/r/tooltip.json",
+      "upstreamPath": "apps/ui/registry/default/ui/tooltip.tsx",
+      "upstreamSha256": "0ac59089d1d813b7eb1cd9e08ed2ff3b3931e4024df649ddb45b1eb43d50f694",
+      "adaptedSha256": "44ba76d3ef103e47d07d4c568eb978bb3dcbf0a3da0e3049c8c05c0ed2fd5f29",
+      "adaptations": [
+        "Local imports",
+        "Forward existing alignOffset positioning prop",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/sheet.tsx",
+      "registry": "https://coss.com/ui/r/sheet.json",
+      "upstreamPath": "apps/ui/registry/default/ui/sheet.tsx",
+      "upstreamSha256": "74ce70050415c0ac6ad033a4d6770f023a736a9f24540c994e88c6934c16d9a4",
+      "adaptedSha256": "7bd1c53610474399847c14300d942c6c9fac03e4b20d0ae2b66def29fb96b5ef",
+      "adaptations": [
+        "Local imports",
+        "Chinese close label",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/table.tsx",
+      "registry": "https://coss.com/ui/r/table.json",
+      "upstreamPath": "apps/ui/registry/default/ui/table.tsx",
+      "upstreamSha256": "b21f811291d6a1706874cb37dd568b922fb5d8b053e6636b7b0e9e9c6320c98d",
+      "adaptedSha256": "cf460e60eaf0e75cc8888ef1efea386f20320c743dbc98b9dea238d44d7ffb5a",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/menu.tsx",
+      "registry": "https://coss.com/ui/r/menu.json",
+      "upstreamPath": "apps/ui/registry/default/ui/menu.tsx",
+      "upstreamSha256": "aeb2ebda24c8c90453fd7087bae8f14510f98e4eee75da5c084dfecaa56f2625",
+      "adaptedSha256": "46ff155875cb345512abdcc72e776165565de6467f8f74d15194f13c96d72ab5",
+      "adaptations": [
+        "Local imports",
+        "Lucide icons replace inline SVG with the same size and stroke weight",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/field.tsx",
+      "registry": "https://coss.com/ui/r/field.json",
+      "upstreamPath": "apps/ui/registry/default/ui/field.tsx",
+      "upstreamSha256": "02ffda39f73f04638f580fd1fbb76e783cb252f9a87ecebdd62fb4bd0d1393ff",
+      "adaptedSha256": "ffe3cf22139e8e544efda7ca70fc78ac83bab62aa5e93887eb1b8b7e2b7f77a9",
+      "adaptations": [
+        "Local imports"
+      ]
+    },
+    {
+      "file": "src/coss/scroll-area.tsx",
+      "registry": "https://coss.com/ui/r/scroll-area.json",
+      "upstreamPath": "apps/ui/registry/default/ui/scroll-area.tsx",
+      "upstreamSha256": "6274eace4599cba26e731b0f02cd2307d2207947162ccc575e45984e87aa269f",
+      "adaptedSha256": "07e32e8b3b54c56111d7df9542f9df7957b4d971e976faacb8afb68ae6bbb39c",
+      "adaptations": [
+        "Local imports"
+      ]
+    },
+    {
+      "file": "src/coss/combobox.tsx",
+      "registry": "https://coss.com/ui/r/combobox.json",
+      "upstreamPath": "apps/ui/registry/default/ui/combobox.tsx",
+      "upstreamSha256": "df233af98aa9141b3418489d20b71a693aa3d8672a3962e3d19576fb21383087",
+      "adaptedSha256": "53f40f13a528f61fd86ed0fecf1ac1a060ed9012f8aed2f29da558315075201c",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Lucide check icon replaces inline SVG",
+        "Chinese chip removal label",
+        "Retain existing Base UI 1.7 two-parameter Root API; omit newer createItems helper",
+        "Move the visual shell onto the Base UI Popup so its entrance and exit transitions are observed by the primitive",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/number-field.tsx",
+      "registry": "https://coss.com/ui/r/number-field.json",
+      "upstreamPath": "apps/ui/registry/default/ui/number-field.tsx",
+      "upstreamSha256": "e49f539416076d832d855e53be646fbc613ccaf0b419b8951f477267b81cdbde",
+      "adaptedSha256": "a8dc0b1c47f6cdccd4271bc3fd53fc3f8fc224f36f0b71dcad5d2cdff7b99900",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Lucide cursor icon replaces inline SVG; use semantic shadow",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/toast.tsx",
+      "registry": "https://coss.com/ui/r/toast.json",
+      "upstreamPath": "apps/ui/registry/default/ui/toast.tsx",
+      "upstreamSha256": "6c83bd6ab5a90388aa06380924381058746bf2bd5ebb7b2187496a59e7c517d6",
+      "adaptedSha256": "a797b39cd0718a4dcb68a8377cb51ad6bb88ab6a30ce27b73c9bbfe8f4447288",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Explicit optional undefined types for the project strict TypeScript contract",
+        "Add a keyboard-accessible Chinese close button using Toast.Close",
+        "Chinese toast viewport accessible label",
+        "Expose toast-root slot for shared timing and reduced-motion behavior",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/calendar.tsx",
+      "registry": "https://coss.com/ui/r/calendar.json",
+      "upstreamPath": "apps/ui/registry/default/ui/calendar.tsx",
+      "upstreamSha256": "e9046da3021b3bb1e77ae657cdacac79a15f71e99596984fbcd54f26f3b60179",
+      "adaptedSha256": "49e9ba73d3e8c2bd376a0c31b532ad08a374d33f9f970ce85f203cb19c1a3ce9",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Use DayPicker locale labels and month formatters; respect configured locale rather than browser defaults; keep 44px coarse-pointer cells",
+        "Inherit default date color from the Calendar root so later utility chunks cannot override selected contrast; keep enabled outside days and weekdays at the semantic muted color without alpha"
+      ]
+    },
+    {
+      "file": "src/coss/popover.tsx",
+      "registry": "https://coss.com/ui/r/popover.json",
+      "upstreamPath": "apps/ui/registry/default/ui/popover.tsx",
+      "upstreamSha256": "ff9b981ce4e68b86a266f69480c59967c7065aacfa2d4ce927d91a1eff0035cf",
+      "adaptedSha256": "454a986d554ae0087cfb2c4d5815a2f91b735ca2ca9db3b16180ff29d41f1a90",
+      "adaptations": [
+        "Local imports",
+        "Remove dark variants for the existing light-only theme; preserve light treatment"
+      ]
+    },
+    {
+      "file": "src/coss/accordion.tsx",
+      "registry": "https://coss.com/ui/r/accordion.json",
+      "upstreamPath": "apps/ui/registry/default/ui/accordion.tsx",
+      "upstreamSha256": "b975e2a75b37fb44bca277dd85bf0825e98c3531036ca8d1543f6f4556cf56a5",
+      "adaptedSha256": "82e0c668accc89a45d4a41c351c6c1b88b264257a31c3b4b6887822c6ad88f57",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/alert-dialog.tsx",
+      "registry": "https://coss.com/ui/r/alert-dialog.json",
+      "upstreamPath": "apps/ui/registry/default/ui/alert-dialog.tsx",
+      "upstreamSha256": "e6e8d2aee4115cb2e2d5bba7e3f16941a2cfaa12a2bceae70d605b1751706d82",
+      "adaptedSha256": "eeb4cfdf765e3be38243779983a3887ee7991707bdf239ed0676041f128794e8",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/autocomplete.tsx",
+      "registry": "https://coss.com/ui/r/autocomplete.json",
+      "upstreamPath": "apps/ui/registry/default/ui/autocomplete.tsx",
+      "upstreamSha256": "1298734859a47189abc821795ed082bc56b7dbe6de14859d539afc1adefc17d1",
+      "adaptedSha256": "77c00f1286c1e899d8e124b91db1cb4f2ce2bf4eae705c4c6ab075d5d594f04d",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/avatar.tsx",
+      "registry": "https://coss.com/ui/r/avatar.json",
+      "upstreamPath": "apps/ui/registry/default/ui/avatar.tsx",
+      "upstreamSha256": "a742f2d7c3aa1a867799e66fa7f3b37615e455906fa0117b66c49cfedca0a4f1",
+      "adaptedSha256": "d0acf3b0827f7d8a24472689da147f6a379e0472642a1a20798dd97bf80f0d34",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/breadcrumb.tsx",
+      "registry": "https://coss.com/ui/r/breadcrumb.json",
+      "upstreamPath": "apps/ui/registry/default/ui/breadcrumb.tsx",
+      "upstreamSha256": "e420178801b8d72238f1274c722a7ca4e9f9834bd58c7a45ba8d71a645f83c79",
+      "adaptedSha256": "7b4d00d8eecdc80938cd50d68b260538bdbf17b1694175c4e8465eec00d14b7f",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/checkbox-group.tsx",
+      "registry": "https://coss.com/ui/r/checkbox-group.json",
+      "upstreamPath": "apps/ui/registry/default/ui/checkbox-group.tsx",
+      "upstreamSha256": "f78494035296e12c0ff602022338bb8f37a46f3a15647b53f0b2e8ac6c97f45e",
+      "adaptedSha256": "c9dacaa8978fca362570bc1d6a74d750acbcb73af21a4455d009202f12a4a279",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/collapsible.tsx",
+      "registry": "https://coss.com/ui/r/collapsible.json",
+      "upstreamPath": "apps/ui/registry/default/ui/collapsible.tsx",
+      "upstreamSha256": "f70e7b9fde220ce5f039c93176a545a46a9b553ecdb23595a320e5163a95a1e8",
+      "adaptedSha256": "ab73227ca67e5291f6568a5401bdd1e4833927942cae4e4b34827fb60fb164e5",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/command.tsx",
+      "registry": "https://coss.com/ui/r/command.json",
+      "upstreamPath": "apps/ui/registry/default/ui/command.tsx",
+      "upstreamSha256": "4b40973632f7b13bd2212f094b805470aad29fb190a46001f92b13ff2350b7bd",
+      "adaptedSha256": "0c49232d1914a6f2bdc0c5047076f3eafdc640f132b40d3020252c0cd795ba24",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/context-menu.tsx",
+      "registry": "https://coss.com/ui/r/context-menu.json",
+      "upstreamPath": "apps/ui/registry/default/ui/context-menu.tsx",
+      "upstreamSha256": "a47c4563334813d12f0e46380a047483aed03d7ed3e37a9cfde5899f06761abf",
+      "adaptedSha256": "852fa609141ca8f60042c504271c8ce9fb6fbfeb1a06bbdd3551d3b46ede6db9",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Lucide check icon replaces upstream inline SVG"
+      ]
+    },
+    {
+      "file": "src/coss/dialog.tsx",
+      "registry": "https://coss.com/ui/r/dialog.json",
+      "upstreamPath": "apps/ui/registry/default/ui/dialog.tsx",
+      "upstreamSha256": "14ad87a5f81d7753e9a954aa0624df49168eccc2c8d3074a41ea0a8bed3970d5",
+      "adaptedSha256": "b692f5456a68499d3b0ff36f361ccf36c75a3d20fe7f179fa3187ff1e81c27ff",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/drawer.tsx",
+      "registry": "https://coss.com/ui/r/drawer.json",
+      "upstreamPath": "apps/ui/registry/default/ui/drawer.tsx",
+      "upstreamSha256": "e8edbf8de6192c4858395e8a99ed4d3c35fd583618b9cef4b76f260e90f6e4d1",
+      "adaptedSha256": "6e219578ab363aeb5ccf8a82f09e4a08b858cca996ce1cbb38e3396f1f5bd579",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Lucide check icon replaces upstream inline SVG",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/empty.tsx",
+      "registry": "https://coss.com/ui/r/empty.json",
+      "upstreamPath": "apps/ui/registry/default/ui/empty.tsx",
+      "upstreamSha256": "57341b5a985ba2cc229e4832ab8624b060d172706b678dd99a682fbb476d4aa9",
+      "adaptedSha256": "32e74739be0cceb4870946c5e191e78c894ade8b767bf78040cfa0c5cbbe232c",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/fieldset.tsx",
+      "registry": "https://coss.com/ui/r/fieldset.json",
+      "upstreamPath": "apps/ui/registry/default/ui/fieldset.tsx",
+      "upstreamSha256": "1ec36d2a2c60fd1ba229682a876f8d672ade66019513bac1a6747885d369f2a6",
+      "adaptedSha256": "e99787ce22bea5010cd02a458e8295c6f7599533a9bde7475e38a5def0aab220",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/form.tsx",
+      "registry": "https://coss.com/ui/r/form.json",
+      "upstreamPath": "apps/ui/registry/default/ui/form.tsx",
+      "upstreamSha256": "c08b75b48a90dd349763720e4ffb5423ae348ec0ef43c8c96110695d6fcf7404",
+      "adaptedSha256": "6afac1b936e124aefeaa6a3d53f79f89e8b069d2f430417895d6b70fcaec545d",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/frame.tsx",
+      "registry": "https://coss.com/ui/r/frame.json",
+      "upstreamPath": "apps/ui/registry/default/ui/frame.tsx",
+      "upstreamSha256": "55da638812d093e74ab7fb3cb141f01d834492b63b3e2e09880b9b1df24ee45c",
+      "adaptedSha256": "89ea13803932fe5a3f019109b052928bde9d0756922a48c034eaf4f4fb4168af",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/group.tsx",
+      "registry": "https://coss.com/ui/r/group.json",
+      "upstreamPath": "apps/ui/registry/default/ui/group.tsx",
+      "upstreamSha256": "d2392c54a90e353762779639971bb9aaa44759a7bda81ea0cf1462afbf4492b0",
+      "adaptedSha256": "447ccc14c2b3816adf3d862b17992c321dccd201475615c59693eeac9230eba6",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/kbd.tsx",
+      "registry": "https://coss.com/ui/r/kbd.json",
+      "upstreamPath": "apps/ui/registry/default/ui/kbd.tsx",
+      "upstreamSha256": "ad8f26b95d8307f460316cd27a2b595d04069df2561395b5d39067a99e407cb5",
+      "adaptedSha256": "1fb2edb53b774fcceb34a227b1a3f1696f5b77a94fa50e0bb25bdb10c2dd77f7",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/label.tsx",
+      "registry": "https://coss.com/ui/r/label.json",
+      "upstreamPath": "apps/ui/registry/default/ui/label.tsx",
+      "upstreamSha256": "edaf5fb049b3e2f27ddd70a6c6772c7d99e920c589b41019b8f4fa602113e695",
+      "adaptedSha256": "08b69a100bcad0a1445c449b3ff8f243067ff029cc9538192150a67d653d4f27",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/meter.tsx",
+      "registry": "https://coss.com/ui/r/meter.json",
+      "upstreamPath": "apps/ui/registry/default/ui/meter.tsx",
+      "upstreamSha256": "f7f0b85f6878378c76e66887a111a1cb8476ebea84a2ebb4f6d41fe0fbad8653",
+      "adaptedSha256": "9bfd103316976db4c3353b63d68394d9bcbd5feb295bd266ec49b509306614cf",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/otp-field.tsx",
+      "registry": "https://coss.com/ui/r/otp-field.json",
+      "upstreamPath": "apps/ui/registry/default/ui/otp-field.tsx",
+      "upstreamSha256": "4122b6f91e0c011a9bfe40b4ecad4d0b89a7b371e773adac6af6b2bcc5ac033e",
+      "adaptedSha256": "75c4806640b90ac2b3e41f2a971484d23f56a441b0eeadd00b0de996ca58565c",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/pagination.tsx",
+      "registry": "https://coss.com/ui/r/pagination.json",
+      "upstreamPath": "apps/ui/registry/default/ui/pagination.tsx",
+      "upstreamSha256": "4c3d048be127d228ad199b8555b833ffc26cd9506b4a75b4b298754833474993",
+      "adaptedSha256": "6d45910277a3f70f0b550a4195213766df962d4b87f304604803198f05b4635c",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/preview-card.tsx",
+      "registry": "https://coss.com/ui/r/preview-card.json",
+      "upstreamPath": "apps/ui/registry/default/ui/preview-card.tsx",
+      "upstreamSha256": "44741ce4217d89c19a485d6973c22c821ed9cf86b15dc03c7094308ae7faa6ba",
+      "adaptedSha256": "aa1dbf61189788afc7045a4a285829c9e51ebd0ec0fe92bf9f5bd52c045ddd9f",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/progress.tsx",
+      "registry": "https://coss.com/ui/r/progress.json",
+      "upstreamPath": "apps/ui/registry/default/ui/progress.tsx",
+      "upstreamSha256": "605ea95436094735fc94d2ae38fd50df2dcce1617b2a67c504114bd0e55cc2b2",
+      "adaptedSha256": "00a399779b0d4c2a92cd961945c816ca7155bbd13b67bdcbff523f499e663154",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/radio-group.tsx",
+      "registry": "https://coss.com/ui/r/radio-group.json",
+      "upstreamPath": "apps/ui/registry/default/ui/radio-group.tsx",
+      "upstreamSha256": "b2479e9967f0ba48d1acbb58a4fff7b919aa746bb8a61cbbff389baac02abbb7",
+      "adaptedSha256": "435d68f975fdb34d65e278341917a13cfed028dce75cc8bb707931594c370d52",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/separator.tsx",
+      "registry": "https://coss.com/ui/r/separator.json",
+      "upstreamPath": "apps/ui/registry/default/ui/separator.tsx",
+      "upstreamSha256": "48393a9f365097e350bb33f0e84d2df25efd6b374868aa075f8d6011378c1d6e",
+      "adaptedSha256": "09c9465dab150b015ce7263847f9648bd92f0a1677a88dd7b3891c9b46ef6972",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/sidebar.tsx",
+      "registry": "https://coss.com/ui/r/sidebar.json",
+      "upstreamPath": "apps/ui/registry/default/ui/sidebar.tsx",
+      "upstreamSha256": "11e0381340b46a53f5a52c6a2a6a81a4c957c3690f889089764b60ba3da51965",
+      "adaptedSha256": "3adcdc0573b01490e77a4f641825e4255e966f20e2391249ef094c51d1a31468",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Use semantic sidebar colors directly instead of wrapping OKLCH tokens in hsl()",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/skeleton.tsx",
+      "registry": "https://coss.com/ui/r/skeleton.json",
+      "upstreamPath": "apps/ui/registry/default/ui/skeleton.tsx",
+      "upstreamSha256": "02e61d00c76b7ed5a1979c37c2a86b8a837a013909e84ac21c40bb5b56f9afd2",
+      "adaptedSha256": "00761f6db239c68e2f0c2fea3d84cef399f3840688fa286d9697136547781159",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/slider.tsx",
+      "registry": "https://coss.com/ui/r/slider.json",
+      "upstreamPath": "apps/ui/registry/default/ui/slider.tsx",
+      "upstreamSha256": "abf488cac56c237b5eebef7c7c25ff38d07f72581a2b46c7158c019576c7fa71",
+      "adaptedSha256": "9bcab2267a70e189e84171d708a49e47adbab55faf632188cc5e58f0f586413e",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/spinner.tsx",
+      "registry": "https://coss.com/ui/r/spinner.json",
+      "upstreamPath": "apps/ui/registry/default/ui/spinner.tsx",
+      "upstreamSha256": "5116d0ec549bf70d20d5359a485e6792b6c87d89a389102ad6c3f44312c23972",
+      "adaptedSha256": "123599a8a48bac1b0c3fc1cfc5e57efabc71fdfd3a7e580d3ba7bbd83ef0231e",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+      ]
+    },
+    {
+      "file": "src/coss/switch.tsx",
+      "registry": "https://coss.com/ui/r/switch.json",
+      "upstreamPath": "apps/ui/registry/default/ui/switch.tsx",
+      "upstreamSha256": "2b3bada3d7234149b4d29918d5e312e62919938c2ae0ee61db81350438ad43c4",
+      "adaptedSha256": "84c3275f22525c49330be19c8f469c8f13939e97db329e2ff764da23ec73f111",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/toggle-group.tsx",
+      "registry": "https://coss.com/ui/r/toggle-group.json",
+      "upstreamPath": "apps/ui/registry/default/ui/toggle-group.tsx",
+      "upstreamSha256": "8c67854bffcf762299fb989721e47da30fea3268cb969fdc6c775c3fe89982bb",
+      "adaptedSha256": "17a71c1b0d23ea96170d67984315535aae2b868deeabb4df05420bec7442533b",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/toggle.tsx",
+      "registry": "https://coss.com/ui/r/toggle.json",
+      "upstreamPath": "apps/ui/registry/default/ui/toggle.tsx",
+      "upstreamSha256": "a32372d0eaa291bc81f61f4ddb1f5bb827c507fd53de03c6f709adc242ee5bfb",
+      "adaptedSha256": "cc043ba2691bef720de815dfcfc610506d0aaebc45a3e8e49240d9b6b14c5489",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/toolbar.tsx",
+      "registry": "https://coss.com/ui/r/toolbar.json",
+      "upstreamPath": "apps/ui/registry/default/ui/toolbar.tsx",
+      "upstreamSha256": "f08696682ad171b5a0d2c918202bcee10b9f6de1408a2a2e864f61e8d424dba2",
+      "adaptedSha256": "1dd7411d264de509bd36defaa78c28aeb581a47f46560f37c17781458da4c97d",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    },
+    {
+      "file": "src/coss/use-copy-to-clipboard.ts",
+      "registry": "https://coss.com/ui/r/use-copy-to-clipboard.json",
+      "upstreamPath": "apps/ui/registry/default/hooks/use-copy-to-clipboard.ts",
+      "upstreamSha256": "d2e9ba430e34dafd4ae7fe5403d2ad4987fdcd73f2a47bd0571c1f84c143536d",
+      "adaptedSha256": "60c9d7c0b4ef25a7ac14ebdafe8ad86e02ba5b7c899546b97dffdfb192055fce",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API",
+        "DOM timer type removes Node.js type requirement; guard unavailable Clipboard API"
+      ]
+    },
+    {
+      "file": "src/coss/use-media-query.ts",
+      "registry": "https://coss.com/ui/r/use-media-query.json",
+      "upstreamPath": "apps/ui/registry/default/hooks/use-media-query.ts",
+      "upstreamSha256": "17d75ccaf898415db77dd72659c9b1fdb9338290ae54e8371b772e0b221c9fca",
+      "adaptedSha256": "f72e650ea04730d1559685d72d34dd902a820676df20cb9532ac8fae03d4a363",
+      "adaptations": [
+        "Local imports; preserve the upstream public composition API"
+      ]
+    }
+  ]
+}

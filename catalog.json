@@ -1,0 +1,354 @@
+{
+  "retrieved": "2026-09-30",
+  "registry": "https://coss.com/ui/r/registry.json",
+  "scope": "Component types, not particle examples or website applications",
+  "components": [
+    {
+      "name": "accordion",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/accordion",
+      "docs": "https://coss.com/ui/docs/components/accordion"
+    },
+    {
+      "name": "alert",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/alert",
+      "docs": "https://coss.com/ui/docs/components/alert"
+    },
+    {
+      "name": "alert-dialog",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/alert-dialog",
+      "docs": "https://coss.com/ui/docs/components/alert-dialog"
+    },
+    {
+      "name": "autocomplete",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/autocomplete",
+      "docs": "https://coss.com/ui/docs/components/autocomplete"
+    },
+    {
+      "name": "avatar",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/avatar",
+      "docs": "https://coss.com/ui/docs/components/avatar"
+    },
+    {
+      "name": "badge",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/badge",
+      "docs": "https://coss.com/ui/docs/components/badge"
+    },
+    {
+      "name": "breadcrumb",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/breadcrumb",
+      "docs": "https://coss.com/ui/docs/components/breadcrumb"
+    },
+    {
+      "name": "button",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/button",
+      "docs": "https://coss.com/ui/docs/components/button"
+    },
+    {
+      "name": "calendar",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/calendar",
+      "docs": "https://coss.com/ui/docs/components/calendar"
+    },
+    {
+      "name": "card",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/card",
+      "docs": "https://coss.com/ui/docs/components/card"
+    },
+    {
+      "name": "checkbox",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/checkbox",
+      "docs": "https://coss.com/ui/docs/components/checkbox"
+    },
+    {
+      "name": "checkbox-group",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/checkbox-group",
+      "docs": "https://coss.com/ui/docs/components/checkbox-group"
+    },
+    {
+      "name": "collapsible",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/collapsible",
+      "docs": "https://coss.com/ui/docs/components/collapsible"
+    },
+    {
+      "name": "combobox",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/combobox",
+      "docs": "https://coss.com/ui/docs/components/combobox"
+    },
+    {
+      "name": "command",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/command",
+      "docs": "https://coss.com/ui/docs/components/command"
+    },
+    {
+      "name": "context-menu",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/context-menu",
+      "docs": "https://coss.com/ui/docs/components/context-menu"
+    },
+    {
+      "name": "dialog",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/dialog",
+      "docs": "https://coss.com/ui/docs/components/dialog"
+    },
+    {
+      "name": "drawer",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/drawer",
+      "docs": "https://coss.com/ui/docs/components/drawer"
+    },
+    {
+      "name": "empty",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/empty",
+      "docs": "https://coss.com/ui/docs/components/empty"
+    },
+    {
+      "name": "field",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/field",
+      "docs": "https://coss.com/ui/docs/components/field"
+    },
+    {
+      "name": "fieldset",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/fieldset",
+      "docs": "https://coss.com/ui/docs/components/fieldset"
+    },
+    {
+      "name": "form",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/form",
+      "docs": "https://coss.com/ui/docs/components/form"
+    },
+    {
+      "name": "frame",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/frame",
+      "docs": "https://coss.com/ui/docs/components/frame"
+    },
+    {
+      "name": "group",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/group",
+      "docs": "https://coss.com/ui/docs/components/group"
+    },
+    {
+      "name": "input",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/input",
+      "docs": "https://coss.com/ui/docs/components/input"
+    },
+    {
+      "name": "input-group",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/input-group",
+      "docs": "https://coss.com/ui/docs/components/input-group"
+    },
+    {
+      "name": "kbd",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/kbd",
+      "docs": "https://coss.com/ui/docs/components/kbd"
+    },
+    {
+      "name": "label",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/label",
+      "docs": "https://coss.com/ui/docs/components/label"
+    },
+    {
+      "name": "menu",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/menu",
+      "docs": "https://coss.com/ui/docs/components/menu"
+    },
+    {
+      "name": "meter",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/meter",
+      "docs": "https://coss.com/ui/docs/components/meter"
+    },
+    {
+      "name": "number-field",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/number-field",
+      "docs": "https://coss.com/ui/docs/components/number-field"
+    },
+    {
+      "name": "otp-field",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/otp-field",
+      "docs": "https://coss.com/ui/docs/components/otp-field"
+    },
+    {
+      "name": "pagination",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/pagination",
+      "docs": "https://coss.com/ui/docs/components/pagination"
+    },
+    {
+      "name": "popover",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/popover",
+      "docs": "https://coss.com/ui/docs/components/popover"
+    },
+    {
+      "name": "preview-card",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/preview-card",
+      "docs": "https://coss.com/ui/docs/components/preview-card"
+    },
+    {
+      "name": "progress",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/progress",
+      "docs": "https://coss.com/ui/docs/components/progress"
+    },
+    {
+      "name": "radio-group",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/radio-group",
+      "docs": "https://coss.com/ui/docs/components/radio-group"
+    },
+    {
+      "name": "scroll-area",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/scroll-area",
+      "docs": "https://coss.com/ui/docs/components/scroll-area"
+    },
+    {
+      "name": "select",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/select",
+      "docs": "https://coss.com/ui/docs/components/select"
+    },
+    {
+      "name": "separator",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/separator",
+      "docs": "https://coss.com/ui/docs/components/separator"
+    },
+    {
+      "name": "sheet",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/sheet",
+      "docs": "https://coss.com/ui/docs/components/sheet"
+    },
+    {
+      "name": "sidebar",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/sidebar",
+      "docs": "https://coss.com/ui/docs/components/sidebar"
+    },
+    {
+      "name": "skeleton",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/skeleton",
+      "docs": "https://coss.com/ui/docs/components/skeleton"
+    },
+    {
+      "name": "slider",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/slider",
+      "docs": "https://coss.com/ui/docs/components/slider"
+    },
+    {
+      "name": "spinner",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/spinner",
+      "docs": "https://coss.com/ui/docs/components/spinner"
+    },
+    {
+      "name": "switch",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/switch",
+      "docs": "https://coss.com/ui/docs/components/switch"
+    },
+    {
+      "name": "table",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/table",
+      "docs": "https://coss.com/ui/docs/components/table"
+    },
+    {
+      "name": "tabs",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/tabs",
+      "docs": "https://coss.com/ui/docs/components/tabs"
+    },
+    {
+      "name": "textarea",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/textarea",
+      "docs": "https://coss.com/ui/docs/components/textarea"
+    },
+    {
+      "name": "toast",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/toast",
+      "docs": "https://coss.com/ui/docs/components/toast"
+    },
+    {
+      "name": "toggle",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/toggle",
+      "docs": "https://coss.com/ui/docs/components/toggle"
+    },
+    {
+      "name": "toggle-group",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/toggle-group",
+      "docs": "https://coss.com/ui/docs/components/toggle-group"
+    },
+    {
+      "name": "toolbar",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/toolbar",
+      "docs": "https://coss.com/ui/docs/components/toolbar"
+    },
+    {
+      "name": "tooltip",
+      "source": "coss",
+      "import": "@qingye/ui-kit/components/tooltip",
+      "docs": "https://coss.com/ui/docs/components/tooltip"
+    },
+    {
+      "name": "segmented-control",
+      "source": "coss-pattern",
+      "import": "@qingye/ui-kit/components/segmented-control",
+      "docs": "https://coss.com/ui/docs/components/segmented-control"
+    },
+    {
+      "name": "date-picker",
+      "source": "coss-composition",
+      "import": "@qingye/ui-kit/components/date-picker",
+      "docs": "https://coss.com/ui/docs/components/date-picker"
+    }
+  ],
+  "extras": [
+    "password-input",
+    "search-input",
+    "file-upload",
+    "data-table",
+    "steps",
+    "timeline",
+    "tree",
+    "carousel",
+    "copy-button"
+  ]
+}
