@@ -26,7 +26,7 @@ export function Empty({
   return (
     <div
       className={cn(
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance px-6 py-12 text-center md:py-20",
+        "flex min-w-0 flex-1 flex-col items-center justify-center gap-(--qy-space-6) text-balance px-(--qy-space-6) py-(--qy-space-12) text-center md:py-[calc(var(--qy-space-1)*20)]",
         className,
       )}
       data-slot="empty"
@@ -63,7 +63,7 @@ export function EmptyMedia({
   // aria attributes are never duplicated.
   return (
     <div
-      className={cn("relative mb-6", className)}
+      className={cn("relative mb-(--qy-space-6)", className)}
       data-slot="empty-media"
       data-variant={variant}
       {...props}
@@ -122,7 +122,7 @@ export function EmptyDescription({
   return (
     <div
       className={cn(
-        "text-muted-foreground text-sm [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4 [[data-slot=empty-title]+&]:mt-1",
+        "text-muted-foreground text-sm [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4 [[data-slot=empty-title]+&]:mt-(--qy-space-1)",
         className,
       )}
       data-slot="empty-description"
@@ -138,7 +138,7 @@ export function EmptyContent({
   return (
     <div
       className={cn(
-        "flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm",
+        "flex w-full min-w-0 max-w-sm flex-col items-center gap-(--qy-space-4) text-balance text-sm",
         className,
       )}
       data-slot="empty-content"

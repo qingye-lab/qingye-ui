@@ -1,0 +1,6 @@
+# Keep generated evidence expandable while prioritizing source changes in review.
+docs/current-capabilities.json linguist-generated=true
+docs/current-capabilities.baseline.json linguist-generated=true
+docs/token-ledger.json linguist-generated=true
+docs/baseline/**/*.json linguist-generated=true
+docs/baseline/**/*.txt linguist-generated=true -whitespace

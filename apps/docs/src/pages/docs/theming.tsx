@@ -11,7 +11,7 @@ import { Switch } from "@qingye/ui/components/switch";
 import { Table, TableRow } from "@qingye/ui/components/table";
 import { useTheme } from "@qingye/ui/components/theme-provider";
 import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
-import { cn } from "@qingye/ui";
+import { cn } from "@qingye/ui/utils";
 import { useId, useMemo, useState, type CSSProperties } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
@@ -31,17 +31,25 @@ const BRANDS: Brand[] = [
     id: "ochre", label: "赭石", light: { primary: "oklch(0.52 0.13 50)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.12 55)" }, dark: { primary: "oklch(0.77 0.12 65)", foreground: "oklch(0.23 0.04 55)", ring: "oklch(0.62 0.1 60)" }, }, {
     id: "rose", label: "胭脂", light: { primary: "oklch(0.52 0.18 12)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.14 12)" }, dark: { primary: "oklch(0.74 0.14 12)", foreground: "oklch(0.22 0.05 12)", ring: "oklch(0.6 0.12 12)" }, }, ];
 
-const DEFAULT_RADIUS = 0.625;
+const DEFAULT_RADIUS = 0.5;
+const DEFAULT_PANEL_RADIUS = 0.75;
 
-function radiusVars(radius: number): Record<string, string> {
-  // Derived radii are resolved where they are declared (:root), so a scoped
-  // override has to restate them; at :root, --qy-radius alone is enough.
-  const r = `${radius}rem`;
+function radiusVars(radius: number, panelRadius: number): Record<string, string> {
+  // The isolated preview explicitly rebinds the roles used by its children.
+  // Production overrides live on html, where the library's aliases are resolved.
+  const root = `${radius}rem`;
+  const md = `max(0px, calc(${root} - 0.5px))`;
   return {
-    "--qy-radius": r, "--qy-radius-xs": `max(0rem, calc(${r} - 0.375rem))`, "--qy-radius-sm": `max(0rem, calc(${r} - 0.25rem))`, "--qy-radius-md": `max(0rem, calc(${r} - 0.125rem))`, "--qy-radius-lg": r, "--qy-radius-xl": `calc(${r} + 0.25rem)`, "--qy-radius-2xl": `calc(${r} + 0.375rem)`, "--radius": r, };
+    "--qy-radius": root,
+    "--qy-radius-md": md,
+    "--qy-radius-lg": root,
+    "--qy-radius-control": root,
+    "--qy-radius-panel": `${panelRadius}rem`,
+    "--radius-md": md,
+  };
 }
 
-function cssFor(brand: Brand, radius: number, compact: boolean): string {
+function cssFor(brand: Brand, radius: number, compact: boolean, panelRadius = DEFAULT_PANEL_RADIUS): string {
   const root: string[] = [];
   const dark: string[] = [];
   if (brand.light && brand.dark) {
@@ -49,11 +57,20 @@ function cssFor(brand: Brand, radius: number, compact: boolean): string {
     dark.push(`--qy-primary: ${brand.dark.primary};`, `--qy-primary-foreground: ${brand.dark.foreground};`, `--qy-ring: ${brand.dark.ring};`);
   }
   if (radius !== DEFAULT_RADIUS) root.push(`--qy-radius: ${radius}rem;`);
-  const blocks = [`@import "tailwindcss";`, `@import "@qingye/ui/styles.css";`];
-  if (root.length) blocks.push(`\n:root {\n${root.map((line) => `  ${line}`).join("\n")}\n}`);
-  if (dark.length) blocks.push(`\n.dark {\n${dark.map((line) => `  ${line}`).join("\n")}\n}`);
-  if (compact) blocks.push(`\n/* 在 <body> 或某个容器上：data-density="compact" */`);
-  if (!root.length && !dark.length && !compact) blocks.push(`\n/* 默认主题：无需覆盖 */`);
+  if (panelRadius !== DEFAULT_PANEL_RADIUS) root.push(`--qy-radius-panel: ${panelRadius}rem;`);
+  const selector = `html[data-brand="${brand.id}"]`;
+  const blocks = [`@import "tailwindcss";`, `@import "@qingye/ui/styles.css";`, `
+/* <html data-brand="${brand.id}"${compact ? ' data-density="compact"' : ""}> */`];
+  if (root.length) blocks.push(`
+${selector} {
+${root.map((line) => `  ${line}`).join("\n")}
+}`);
+  if (dark.length) blocks.push(`
+${selector}:is(.dark, [data-theme="dark"]) {
+${dark.map((line) => `  ${line}`).join("\n")}
+}`);
+  if (!root.length && !dark.length) blocks.push(`
+/* 缺省品牌可省略 data-brand；无需颜色或圆角覆盖。 */`);
   return blocks.join("\n");
 }
 
@@ -64,6 +81,7 @@ function ThemeBench() {
   const { resolvedTheme } = useTheme();
   const [brandId, setBrandId] = useState("indigo");
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
+  const [panelRadius, setPanelRadius] = useState(DEFAULT_PANEL_RADIUS);
   const [compact, setCompact] = useState(false);
   const densityId = useId();
   const brand = BRANDS.find((item) => item.id === brandId) ?? BRANDS[0]!;
@@ -72,7 +90,7 @@ function ThemeBench() {
   const style = useMemo(
     () =>
       ({
-        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}), ...radiusVars(radius), }) as CSSProperties, [palette, radius], );
+        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}), ...radiusVars(radius, panelRadius), }) as CSSProperties, [palette, radius, panelRadius], );
 
   return (
     <div className="my-6 overflow-hidden rounded-2xl border">
@@ -104,18 +122,25 @@ function ThemeBench() {
         <div className="flex min-w-48 flex-1 flex-col gap-2 sm:max-w-60">
           <div className="flex items-center justify-between">
             <span className="font-medium text-muted-foreground text-xs" id="radius-label">
-              圆角 --qy-radius
+              根圆角 --qy-radius
             </span>
             <span className="font-mono text-muted-foreground text-xs numeric">{radius.toFixed(3).replace(/0+$/, "").replace(/\.$/, "")}rem</span>
           </div>
           <Slider
             aria-labelledby="radius-label"
             max={1}
-            min={0.25}
+            min={0}
             onValueChange={(value) => setRadius(Array.isArray(value) ? value[0]! : (value as number))}
             step={0.125}
             value={radius}
           />
+        </div>
+        <div className="flex min-w-48 flex-1 flex-col gap-2 sm:max-w-60">
+          <div className="flex items-center justify-between">
+            <span className="font-medium text-muted-foreground text-xs" id="panel-radius-label">面板 --qy-radius-panel</span>
+            <span className="font-mono text-muted-foreground text-xs numeric">{panelRadius}rem</span>
+          </div>
+          <Slider aria-labelledby="panel-radius-label" max={1.5} min={0} onValueChange={(value) => setPanelRadius(Array.isArray(value) ? value[0]! : value as number)} step={0.125} value={panelRadius} />
         </div>
         <div className="flex items-center gap-2 sm:pb-1">
           <Switch checked={compact} id={densityId} onCheckedChange={setCompact} />
@@ -123,7 +148,7 @@ function ThemeBench() {
         </div>
       </div>
 
-      <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[minmax(0, 1fr)_minmax(0, 1.25fr)]" data-density={compact ? "compact" : undefined} style={style}>
+      <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]" data-density={compact ? "compact" : undefined} style={style}>
         <div className="flex flex-col gap-4">
           <Field>
             <FieldLabel>邀请成员</FieldLabel>
@@ -139,7 +164,7 @@ function ThemeBench() {
             <Badge variant="outline">3 个席位</Badge>
           </div>
         </div>
-        <div className={cn("min-w-0 overflow-hidden rounded-xl border")}>
+        <div className={cn("min-w-0 overflow-hidden rounded-panel border")}>
           <Table density={compact ? "compact" : "default"}>
             <TableHeader>
               <TableRow>
@@ -163,7 +188,7 @@ function ThemeBench() {
         </div>
       </div>
       <div className="border-t">
-        <CodeBlock className="my-0 rounded-none border-0" code={cssFor(brand, radius, compact)} lang="css" title="对应的 CSS" />
+        <CodeBlock className="my-0 rounded-none border-0" code={cssFor(brand, radius, compact, panelRadius)} lang="css" title="对应的 CSS" />
       </div>
     </div>
   );
@@ -178,7 +203,7 @@ const headScript = `<script>
   } catch (e) {}
 </script>`;
 
-const useThemeSnippet = `import { useTheme } from "@qingye/ui";
+const useThemeSnippet = `import { useTheme } from "@qingye/ui/components/theme-provider";
 
 export function ThemeSwitch() {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -194,7 +219,7 @@ export default function ThemingPage() {
   return (
     <article>
       <PageHeader
-        description="组件只读取语义令牌。改动几个 CSS 变量就能换品牌色、圆角和密度；深色模式是同一组名字的另一套取值。"
+        description="品牌、明暗与密度各自独立。通过文档级 CSS 覆盖颜色、控件与面板角色，组件继续使用同一套 API。"
         title="主题"
       />
 
@@ -234,33 +259,30 @@ export default function ThemingPage() {
       </P>
 
       <H2 id="playground">试一试</H2>
-      <P>选择一种品牌色、拖动圆角、打开紧凑密度。下方的 CSS 会同步更新，可以直接复制到项目里。</P>
+      <P>选择示例配色，分别调整根圆角和面板圆角，再切换紧凑密度。预览显式重绑局部角色；生成的 CSS 用于项目的 html 根节点。配色预设仅供本站演示，不是库内品牌包。</P>
       <ThemeBench />
 
       <H2 id="brand">品牌色</H2>
       <P>
-        在引入 <Code>styles.css</Code> 之后覆盖语义令牌。浅色写在 <Code>:root</Code>，深色写在 <Code>.dark</Code>：
+        在引入 <Code>styles.css</Code> 之后，用 <Code>html[data-brand]</Code> 覆盖项目品牌。缺省品牌不需要此属性；品牌、明暗、密度分别使用 <Code>data-brand</Code>、<Code>.light/.dark</Code>（Provider 默认）和 <Code>data-density</Code>。显式设置 <Code>attribute="data-theme"</Code> 时，明暗改用该属性，品牌不能写进它。
       </P>
       <CodeBlock code={cssFor(BRANDS[1]!, DEFAULT_RADIUS, false)} lang="css" title="src/index.css" />
       <Callout tone="warning" title="检查对比度">
-        主色与它的前景色之间至少要有 4.5:1 的对比度，浅色和深色都要验证。状态色（<Code>--qy-danger</Code> 等）的浅色填充由实色自动派生，改了实色，填充随之变化。
+        主色与它的前景色之间至少要有 4.5:1 的对比度，浅色和深色都要验证。危险状态 mark/边框用 <Code>--qy-danger</Code>，页面文字用 <Code>--qy-danger-foreground</Code>，实心动作填充和其上文字分别用 <Code>--qy-danger-fill</Code> / <Code>--qy-danger-on-fill</Code>；修改 mark 不会自动改实心动作填充。
       </Callout>
 
       <H2 id="radius">圆角</H2>
       <P>
-        所有圆角都从 <Code>--qy-radius</Code>（默认 0.625rem）派生：菜单项用 <Code>md</Code>，控件和浮层用 <Code>lg</Code>，卡片和弹窗用 <Code>2xl</Code>
-        ，嵌套圆角保持“外层减间距”。在 <Code>:root</Code> 上改这一个变量即可整体变圆或变方。
+        根圆角 <Code>--qy-radius</Code> 默认 0.5rem（8px），只联动 <Code>md</Code>（根减0.5px，最小0）与 <Code>lg</Code>。<Code>--qy-radius-control</Code> 默认接 lg；面板角色 <Code>--qy-radius-panel</Code> 默认接独立的 2xl（12px）。xs/sm/xl/2xl/full 保持独立。
       </P>
-      <CodeBlock code={`:root {\n  --qy-radius: 0.5rem;\n}`} lang="css" />
+      <CodeBlock code={`html[data-brand="project"] {\n  --qy-radius: 0.5rem;\n  --qy-radius-panel: 0.75rem;\n}`} lang="css" />
       <P className="text-[0.875rem] text-muted-foreground">
-        派生令牌在声明它们的 <Code>:root</Code> 上求值。如果只想让某个区域使用不同圆角，需要在那个容器上同时声明 <Code>--qy-radius-sm</Code> 到{" "}
-        <Code>--qy-radius-2xl</Code>，上面的示例就是这样做的。
+        接入 control/panel 角色的内高光按对应外层角色减1px并钳制到0。派生变量在声明节点求值；只在局部容器覆盖根变量不保证继承别名重新计算。上方预览显式重绑实际消费角色，不代表库已支持任意局部品牌或 Portal 品牌继承。
       </P>
 
       <H2 id="density">密度</H2>
       <P>
-        数据密集的界面可以在 <Code>{"<body>"}</Code> 或任意容器上加 <Code>data-density="compact"</Code>：表格行高从 48px 降到 40px，面板内边距与区块间距随之收紧，顶栏高度变为
-        48px。单个表格也可以用 <Code>{'<Table density="compact">'}</Code> 单独调整。
+        文档级密度可设置 <Code>{'<html data-density="compact">'}</Code>；局部容器也可选用 compact 规则。消费这些角色的表格行高从48px降到40px，面板 padding/gap 和 topbar 角色随之收紧。单个表格可用 <Code>{'<Table density="compact">'}</Code>；不是所有组件的几何尺寸都会随密度变化。
       </P>
       <CodeBlock code={`<main data-density="compact">\n  <Table>…</Table>\n</main>`} />
 
@@ -281,7 +303,7 @@ export default function ThemingPage() {
       <CodeBlock code={useThemeSnippet} />
       <H3 id="scoped">局部深色</H3>
       <P>
-        语义令牌也绑定在 <Code>.dark</Code> 类本身上，所以给任意容器加 <Code>className="dark"</Code>，其中的组件就按深色渲染，适合深色的代码区或预览框。
+        基础深色语义绑定也支持局部 <Code>className="dark"</Code>，适合预览框。项目的文档级品牌覆盖不会自动转成局部品牌，Portal 也不保证继承该容器配置；需要时明确设置对应作用域。
       </P>
     </article>
   );

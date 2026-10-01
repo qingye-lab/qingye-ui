@@ -1,0 +1,11 @@
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/theme-axes.test.tsx (5 tests) 90ms
+ ✓ test/theme-provider.test.tsx (7 tests) 120ms
+
+ Test Files  2 passed (2)
+      Tests  12 passed (12)
+   Start at  22:08:17
+   Duration  884ms (transform 82ms, setup 326ms, import 120ms, tests 210ms, environment 889ms)
+

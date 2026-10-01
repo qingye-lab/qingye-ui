@@ -5,7 +5,7 @@ export const meta = { title: "状态", description: "占位、跨年范围、禁
 
 export default function Demo() {
   return (
-    <div className="grid w-full max-w-2xl gap-5 sm:grid-cols-2">
+    <div className="grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
       <Field>
         <FieldLabel>活动周期</FieldLabel>
         <DateRangePicker placeholder="选择开始与结束日期" />

@@ -1,9 +1,8 @@
 name: Release
 
 # Push a tag like v0.2.0 to build the package and attach the tarball to a
-# GitHub release. Consumers install it with:
-#   gh release download v0.2.0 --repo qingye-lab/qingye-ui --pattern qingye-ui-0.2.0.tgz
-#   pnpm add ./qingye-ui-0.2.0.tgz
+# GitHub release. Consumers download and install the latest release with:
+#   gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 on:
   push:
     tags: ["v*"]
@@ -29,6 +28,21 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm --filter @qingye/ui test
       - run: pnpm --filter @qingye/ui build
+      - name: Build docs
+        run: pnpm --filter docs build
+      - name: Install audit browser
+        run: pnpm exec playwright-core install --with-deps chromium
+      - name: Browser audit
+        run: |
+          mkdir -p test-results/release-audit
+          node scripts/run-browser-audit.mjs --report test-results/release-audit/report.json
+      - name: Upload browser audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-browser-audit-evidence
+          path: test-results/release-audit/
+          if-no-files-found: warn
       - name: Pack
         run: |
           mkdir -p dist-pack

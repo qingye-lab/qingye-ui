@@ -1,0 +1,80 @@
+[
+  {
+    "variant": "light-desktop",
+    "pointer": "fine",
+    "parts": {
+      "wrapper": {
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "height": 32,
+        "width": 320,
+        "slot": "input-group"
+      },
+      "addon": {
+        "fontSize": "14px",
+        "lineHeight": "20px",
+        "height": 16,
+        "width": 25,
+        "slot": "input-group-addon"
+      },
+      "input": {
+        "fontSize": "14px",
+        "lineHeight": "30px",
+        "height": 30,
+        "width": 293,
+        "slot": "input"
+      }
+    }
+  },
+  {
+    "variant": "light-mobile",
+    "pointer": "coarse",
+    "parts": {
+      "wrapper": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "height": 44,
+        "width": 300,
+        "slot": "input-group"
+      },
+      "addon": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "height": 18,
+        "width": 27,
+        "slot": "input-group-addon"
+      },
+      "input": {
+        "fontSize": "16px",
+        "lineHeight": "34px",
+        "height": 42,
+        "width": 271,
+        "slot": "input"
+      }
+    }
+  },
+  {
+    "variant": "light-mobile-fine",
+    "pointer": "fine",
+    "parts": {
+      "wrapper": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "height": 36,
+        "width": 300
+      },
+      "addon": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "height": 18,
+        "width": 27
+      },
+      "input": {
+        "fontSize": "16px",
+        "lineHeight": "34px",
+        "height": 34,
+        "width": 271
+      }
+    }
+  }
+]

@@ -98,7 +98,7 @@ export function StatusDot({
     ),
     className: cn(
       "inline-flex min-w-0 items-center text-foreground",
-      size === "sm" ? "gap-1.5 text-xs" : "gap-2 text-sm",
+      size === "sm" ? "gap-[calc(var(--qy-space-1)*1.5)] text-xs" : "gap-(--qy-space-2) text-sm",
       className,
     ),
     "data-pulse": showPulse ? "" : undefined,

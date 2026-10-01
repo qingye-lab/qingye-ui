@@ -8,7 +8,7 @@
       "registry": "https://coss.com/ui/r/button.json",
       "upstreamPath": "apps/ui/registry/default/ui/button.tsx",
       "upstreamSha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8",
-      "adaptedSha256": "243260a65330f658b9fe3813ea991d752ebc64617fbdb52f6d5d9383d1dd2c81",
+      "adaptedSha256": "b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e",
       "adaptations": [
         "Local imports; existing Lucide Spinner dependency",
         "Expose loading as aria-busy",
@@ -18,7 +18,10 @@
         "Keep upstream light and dark treatment; the library ships both themes",
         "Use shared control elevation for outline variants while retaining shadow-free solid buttons",
         "Roomier default and large horizontal padding; keep responsive heights and touch targets",
-        "Animate surface, border and text feedback; secondary hover and pressed states use progressively stronger semantic fills"
+        "Animate surface, border and text feedback; secondary hover and pressed states use progressively stronger semantic fills",
+        "Use responsive control height roles and the shared coarse-pointer touch target",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive button text roles",
+        "Read the control radius role with clamped inner highlights; Read the action focus width/offset roles where the component previously defined them; Use destructive solid-fill backgrounds and on-fill text; retain the semantic destructive border for contrast against dark surfaces"
       ]
     },
     {
@@ -26,12 +29,16 @@
       "registry": "https://coss.com/ui/r/input.json",
       "upstreamPath": "apps/ui/registry/default/ui/input.tsx",
       "upstreamSha256": "3d488d491eb4e63642adc8b9354b0b0cc5b8ec4e284bbc26da7e2516f24980a4",
-      "adaptedSha256": "d940fde474d3f5651dd5a4803b6fc3633c8258e3b6dc633a7d9cc372960bfb1b",
+      "adaptedSha256": "a6ac174d2cf4e53776243dd5d194b31848eb16fed60851392dc8cd89e6ea6d89",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
         "Use the panel surface and shared control elevation; hover border feedback preserves disabled, focus and invalid states",
-        "Roomier default and large horizontal padding while preserving responsive heights, native semantics and autofill handling"
+        "Roomier default and large horizontal padding while preserving responsive heights, native semantics and autofill handling",
+        "Use responsive control interiors 2px below the owning border; preserve InputGroup border ownership and the coarse-pointer minimum",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
       ]
     },
     {
@@ -39,12 +46,15 @@
       "registry": "https://coss.com/ui/r/textarea.json",
       "upstreamPath": "apps/ui/registry/default/ui/textarea.tsx",
       "upstreamSha256": "3e30e41c099d7343cb0a603557acd4e8b7c94b43139a7a489df322c04c5f601c",
-      "adaptedSha256": "6aa89fc54c476efe5e5f57346da57bca8c912b54fa0391c751726125d65188dc",
+      "adaptedSha256": "381c16ffa575c69a2183b76068d42efdd680c7ca792ccb82448ead7cfc1d1dae",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
         "Match input panel surfaces, shared control elevation and guarded hover border feedback",
-        "Match default horizontal padding to the single-line input"
+        "Match default horizontal padding to the single-line input",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
       ],
       "retrieved": "2026-10-01"
     },
@@ -53,10 +63,12 @@
       "registry": "https://coss.com/ui/r/badge.json",
       "upstreamPath": "apps/ui/registry/default/ui/badge.tsx",
       "upstreamSha256": "60f73554b462ec5e2929ccc58c0522b069c07e1268dbfb67749c2837347b788b",
-      "adaptedSha256": "59832a047c9b33764043267e679f7ef69b913b4106016f1240e702908486dbfa",
+      "adaptedSha256": "2bebdb0486fa3873ef918a3977c893bb0e02d9e052fd48e6b76465c617842a74",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -64,11 +76,12 @@
       "registry": "https://coss.com/ui/r/alert.json",
       "upstreamPath": "apps/ui/registry/default/ui/alert.tsx",
       "upstreamSha256": "340fc98fae7b30d038e1b7bcbb632f551360cfd8e0803b62a8ddfc04c002119f",
-      "adaptedSha256": "d88150e4b06fc9548cf25815a207ab54933476abe9ac993e262b433ce5fdcdf2",
+      "adaptedSha256": "35533179af2e175217728abf236329081e09c058ea567f1ccbb33c228e39bea5",
       "adaptations": [
         "Local imports",
         "Stack AlertAction on its own row at phone widths: full-row column placement instead of a two-column span, which left the action beside the text in the three-column icon + action grid",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -76,14 +89,16 @@
       "registry": "https://coss.com/ui/r/card.json",
       "upstreamPath": "apps/ui/registry/default/ui/card.tsx",
       "upstreamSha256": "b59dbc0bd5d61694fcf1948fb8134795b0f5a1bf0a28d8d6bc817297c73a006e",
-      "adaptedSha256": "579339675913df00e6221d62f636e380c78eb35359c00024b72752a1e8978681",
+      "adaptedSha256": "daa6147f4df7eed4c784fb5be90b6d4e1a79d789483ea258aaf8d26029c11879",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
         "CardTitle uses the text-title step so it follows the type scale",
         "Card takes a size prop that drives its padding token",
         "Use shared panel elevation so white panels separate from the tinted canvas",
-        "CardTitle keeps the semantic title line height for readable wrapped headings"
+        "CardTitle keeps the semantic title line height for readable wrapped headings",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read panel density gap and body description text roles",
+        "Read the panel radius role with clamped inner highlights"
       ]
     },
     {
@@ -91,12 +106,13 @@
       "registry": "https://coss.com/ui/r/checkbox.json",
       "upstreamPath": "apps/ui/registry/default/ui/checkbox.tsx",
       "upstreamSha256": "a1b8b4180a39a47c47bd2b50e432d0911da6efe3b963b065b3b5cb8893760047",
-      "adaptedSha256": "b2b94ad04848341d41ed5f62c76fc643a5d99776d0512dcccf2266a26ccd07fd",
+      "adaptedSha256": "4bcc8bd38ca1ae1d1206fd5cf3e5ffb4ef18d1f7d672b035d2b8c53829a658f9",
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
         "Keep the indicator mounted for interruptible check and uncheck opacity/scale transitions; reduced motion stays static",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -104,12 +120,15 @@
       "registry": "https://coss.com/ui/r/input-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
       "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
-      "adaptedSha256": "fb1d55ea349fac4eca81eb049ac4c29eb2a5bb1d8dfc6dd3e59633500714a52b",
+      "adaptedSha256": "f3b493fc5d159111ea85d4d4e0fff634d651e5c1c2a0a5a71b7a8c807b76ac07",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
         "Match the input surface, shared control elevation and guarded hover border feedback",
-        "Coordinate addon and field spacing with the roomier default controls"
+        "Coordinate addon and field spacing with the roomier default controls",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
       ]
     },
     {
@@ -117,7 +136,7 @@
       "registry": "https://coss.com/ui/r/select.json",
       "upstreamPath": "apps/ui/registry/default/ui/select.tsx",
       "upstreamSha256": "aa8821bbb4bd6b8b52a6cbaaf8d995f48b1001ad93d4bfa4e5b91b5e6d5f66a0",
-      "adaptedSha256": "fc8ff29872cee0fcfbf8c88ddc83282b6c59c9d5d6bfc4c9000af5e2f9d55586",
+      "adaptedSha256": "c55b7efbfb2f83aa5426badcdbc1fdc1e63d82c5e7fdac631f1d9010b09f9410",
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
@@ -125,7 +144,11 @@
         "Placeholder text uses 72% opacity, matching the other form controls",
         "Match panel field surfaces and shared control elevation with guarded hover borders",
         "Roomier default and large horizontal padding without changing responsive heights",
-        "Floating options use the raised surface and shared raised elevation"
+        "Floating options use the raised surface and shared raised elevation",
+        "Use responsive trigger height roles and the shared coarse-pointer touch target",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
       ]
     },
     {
@@ -133,14 +156,16 @@
       "registry": "https://coss.com/ui/r/tabs.json",
       "upstreamPath": "apps/ui/registry/default/ui/tabs.tsx",
       "upstreamSha256": "cbfe21ce54efe39cc02eb073a8327a4ab81b918d5745d986fdfae07d32204a7a",
-      "adaptedSha256": "fd0177bf4b6205c89e4e7853a0d739b0d46309128f3042b33fa46de046b991e3",
+      "adaptedSha256": "1a074bb5181c3732a231bac84a34a8fbaeba4086c6d3e3ecacaf9d4f53726fc3",
       "adaptations": [
         "Local imports",
         "Touch hit area on the tab and list for coarse pointers",
         "Position the indicator from the tab top; touch-target padding inflated the list scrollHeight and shifted the bottom-anchored indicator",
         "Keep upstream light and dark treatment; the library ships both themes",
         "Inset track with a raised selected surface and shared control elevation in both themes",
-        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout"
+        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -148,14 +173,16 @@
       "registry": "https://coss.com/ui/r/segmented-control.json",
       "upstreamPath": "apps/ui/registry/default/lib/segmented-control.ts",
       "upstreamSha256": "c1cb84d02ac5b75aa08a70c205feb9cc8668ffbc19751e013364f547ae41a8a8",
-      "adaptedSha256": "6069b8bbadd6ffb9b2aa0d120b65afa2e6db8ed7330735badef8edcd7fa3f2fc",
+      "adaptedSha256": "64812ea8c71b19e572b6f8d1b5b29dae4f426c3f9999c3cafc228fb1121fcd32",
       "adaptations": [
         "Local imports",
         "Touch hit area on options for coarse pointers",
         "Animate colour and background too, so selection is not an instant switch",
         "Keep upstream light and dark treatment; the library ships both themes",
         "Match Tabs inset track and raised selected material in both themes",
-        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout"
+        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the control radius role with clamped inner highlights"
       ]
     },
     {
@@ -163,11 +190,12 @@
       "registry": "https://coss.com/ui/r/tooltip.json",
       "upstreamPath": "apps/ui/registry/default/ui/tooltip.tsx",
       "upstreamSha256": "0ac59089d1d813b7eb1cd9e08ed2ff3b3931e4024df649ddb45b1eb43d50f694",
-      "adaptedSha256": "1c4b0e15ed8445c21df672ce982c1f8c36dc95eeaf75a5940b379e7459d459a3",
+      "adaptedSha256": "388b6f5ea7e1036b725e03e2cc32d961075b8fb47dc02506c0bba80dd0686ffd",
       "adaptations": [
         "Local imports",
         "Forward existing alignOffset positioning prop",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -175,12 +203,13 @@
       "registry": "https://coss.com/ui/r/sheet.json",
       "upstreamPath": "apps/ui/registry/default/ui/sheet.tsx",
       "upstreamSha256": "74ce70050415c0ac6ad033a4d6770f023a736a9f24540c994e88c6934c16d9a4",
-      "adaptedSha256": "6951fa861ba50e3de1a5cbc54f973732a2c028205cbe75a09ccd786abff8f03e",
+      "adaptedSha256": "dea15cd5c30b4311ba86f974194e4d3cd55b3a857894d1b33b2738fbdac122b7",
       "adaptations": [
         "Local imports",
         "Chinese close label",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -188,10 +217,11 @@
       "registry": "https://coss.com/ui/r/table.json",
       "upstreamPath": "apps/ui/registry/default/ui/table.tsx",
       "upstreamSha256": "b21f811291d6a1706874cb37dd568b922fb5d8b053e6636b7b0e9e9c6320c98d",
-      "adaptedSha256": "6ebf0573a3d5e1bcf9ce5b02f787bc925e4602d138d92bc5a5c8a6b4aaf94a2d",
+      "adaptedSha256": "2087ba938b04b21b9091f0687b08fef0bb1968a22ad78524c148ee8e43aaadd3",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -199,11 +229,13 @@
       "registry": "https://coss.com/ui/r/menu.json",
       "upstreamPath": "apps/ui/registry/default/ui/menu.tsx",
       "upstreamSha256": "aeb2ebda24c8c90453fd7087bae8f14510f98e4eee75da5c084dfecaa56f2625",
-      "adaptedSha256": "7adaf625fc91157225ba0a48245fb1ae575e6f3d2fdcf9cb644c9d6ca4baf7c0",
+      "adaptedSha256": "0518107f97be668118fdf64d61941a0449268cf3d5f8c1cda3855143c59bf80b",
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -211,13 +243,14 @@
       "registry": "https://coss.com/ui/r/field.json",
       "upstreamPath": "apps/ui/registry/default/ui/field.tsx",
       "upstreamSha256": "02ffda39f73f04638f580fd1fbb76e783cb252f9a87ecebdd62fb4bd0d1393ff",
-      "adaptedSha256": "9c0d0209c0b4026549912713f2f5ccff7512c19792b9caafe96e411be4d1fffa",
+      "adaptedSha256": "64e67c09f39ddd573b62bca0b7dcad15be2a029392a87dcaefcadad4ccb715c5",
       "adaptations": [
         "Local imports",
         "Add orientation, FieldGroup, FieldContent, FieldTitle and FieldSeparator for complete form layouts",
         "FieldError accepts an errors array from form libraries, deduplicates messages, and renders whenever it has content",
         "FieldError outside a Field renders its own Field root so standalone errors still work",
-        "Export FieldSet and FieldLegend aliases from fieldset"
+        "Export FieldSet and FieldLegend aliases from fieldset",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles"
       ]
     },
     {
@@ -225,10 +258,12 @@
       "registry": "https://coss.com/ui/r/scroll-area.json",
       "upstreamPath": "apps/ui/registry/default/ui/scroll-area.tsx",
       "upstreamSha256": "6274eace4599cba26e731b0f02cd2307d2207947162ccc575e45984e87aa269f",
-      "adaptedSha256": "371697086b23d3130c8cfe38597ae8ef0cbe2d1419a8abc4e3d7fdf31a9da50c",
+      "adaptedSha256": "9680749038f5e1eb94d6df7f90b7ac89ee5684f1525c7077476bd81b53e87e12",
       "adaptations": [
         "Local imports",
-        "Add the missing scroll-area data-slot"
+        "Add the missing scroll-area data-slot",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -236,7 +271,7 @@
       "registry": "https://coss.com/ui/r/combobox.json",
       "upstreamPath": "apps/ui/registry/default/ui/combobox.tsx",
       "upstreamSha256": "df233af98aa9141b3418489d20b71a693aa3d8672a3962e3d19576fb21383087",
-      "adaptedSha256": "fd6edf4cbbfce88ff6d9f09b9c5731e475e08f39dd1cac19e41d46f3d8f433f7",
+      "adaptedSha256": "7684a3f44500f1bce9de02476d6f6a55a44e12bdfd77d689e5c4ed46bdc8d293",
       "adaptations": [
         "Local imports",
         "Lucide check icon replaces inline SVG",
@@ -244,7 +279,9 @@
         "Retain existing Base UI 1.7 two-parameter Root API; omit newer createItems helper",
         "Move the visual shell onto the Base UI Popup so its entrance and exit transitions are observed by the primitive",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Reserve trailing glyph geometry separately from the adjustable text gap",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles"
       ]
     },
     {
@@ -252,12 +289,15 @@
       "registry": "https://coss.com/ui/r/number-field.json",
       "upstreamPath": "apps/ui/registry/default/ui/number-field.tsx",
       "upstreamSha256": "e49f539416076d832d855e53be646fbc613ccaf0b419b8951f477267b81cdbde",
-      "adaptedSha256": "73533afe4bc1e5ed12559d9a2c3d3f530fb6c6997e17a498600f2d61896f65e2",
+      "adaptedSha256": "1d7755d92b28a9808c6c459b9408c56890dffcbcb85ee8ffd8f114bdce1b79d1",
       "adaptations": [
         "Local imports",
         "Lucide cursor icon replaces inline SVG; use semantic shadow",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
       ]
     },
     {
@@ -265,7 +305,7 @@
       "registry": "https://coss.com/ui/r/toast.json",
       "upstreamPath": "apps/ui/registry/default/ui/toast.tsx",
       "upstreamSha256": "6c83bd6ab5a90388aa06380924381058746bf2bd5ebb7b2187496a59e7c517d6",
-      "adaptedSha256": "25df389bc418ad6fb8679c9897acee6409cec9c397ff4cb3ed34547147a2421e",
+      "adaptedSha256": "70adc904fd92c8ed24870f4e4bfb34949f2b45fd273528e4e685088df142a59e",
       "adaptations": [
         "Local imports",
         "Explicit optional undefined types for the project strict TypeScript contract",
@@ -273,7 +313,8 @@
         "Chinese toast viewport accessible label",
         "Expose toast-root slot for shared timing and reduced-motion behavior",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -281,13 +322,15 @@
       "registry": "https://coss.com/ui/r/calendar.json",
       "upstreamPath": "apps/ui/registry/default/ui/calendar.tsx",
       "upstreamSha256": "e9046da3021b3bb1e77ae657cdacac79a15f71e99596984fbcd54f26f3b60179",
-      "adaptedSha256": "c7b46fff0cf17f7844e8ed25fe2942cf47529aeba4bd91d56c01597ae083cdb6",
+      "adaptedSha256": "c13768263411376cd8eef65e6772e4ea94e0e02039fe5343358f1c18b8c414b6",
       "adaptations": [
         "Local imports",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
         "Use DayPicker locale labels and month formatters; respect configured locale rather than browser defaults; keep 44px coarse-pointer cells",
         "Inherit default date color from the Calendar root so later utility chunks cannot override selected contrast; keep enabled outside days and weekdays at the semantic muted color without alpha",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles"
       ]
     },
     {
@@ -295,10 +338,11 @@
       "registry": "https://coss.com/ui/r/popover.json",
       "upstreamPath": "apps/ui/registry/default/ui/popover.tsx",
       "upstreamSha256": "ff9b981ce4e68b86a266f69480c59967c7065aacfa2d4ce927d91a1eff0035cf",
-      "adaptedSha256": "556da949009fc9cdbdb5eed11b0087d1e0c85ba7b7480e9678c158cd6e39764a",
+      "adaptedSha256": "c12f748ff8eb4835e733b4d11eb8d7249967e8a8eedb95c1159317d3b20daff1",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -306,11 +350,12 @@
       "registry": "https://coss.com/ui/r/accordion.json",
       "upstreamPath": "apps/ui/registry/default/ui/accordion.tsx",
       "upstreamSha256": "b975e2a75b37fb44bca277dd85bf0825e98c3531036ca8d1543f6f4556cf56a5",
-      "adaptedSha256": "4fa7b85f4cfb06690bdf0fa296021102df175dd0a9341041b710955ad0d5f73c",
+      "adaptedSha256": "be8e46c2016d9935406f3bd75204a8ac9db6421b3da4fc5344d057b34909118f",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Use data-disabled for the disabled state; Base UI only sets aria-disabled there",
-        "Tabular slot on the header and logical text alignment"
+        "Tabular slot on the header and logical text alignment",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -318,9 +363,11 @@
       "registry": "https://coss.com/ui/r/alert-dialog.json",
       "upstreamPath": "apps/ui/registry/default/ui/alert-dialog.tsx",
       "upstreamSha256": "e6e8d2aee4115cb2e2d5bba7e3f16941a2cfaa12a2bceae70d605b1751706d82",
-      "adaptedSha256": "4beb8705c0652a04786d2f5be08f4d6ad8851d0e546ff6c67dd6c41ebb9a64cb",
+      "adaptedSha256": "888e6c24d49b867043305a3f5ccba18a3ac6a633fa08112a5b8feeeb87a1555a",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the panel radius role with clamped inner highlights"
       ]
     },
     {
@@ -328,10 +375,11 @@
       "registry": "https://coss.com/ui/r/autocomplete.json",
       "upstreamPath": "apps/ui/registry/default/ui/autocomplete.tsx",
       "upstreamSha256": "1298734859a47189abc821795ed082bc56b7dbe6de14859d539afc1adefc17d1",
-      "adaptedSha256": "3210ce5a692d6fa0ed2105810366f2c3b3be3b2e817c689a4cae6094d3639dcb",
+      "adaptedSha256": "aeed657669c52e41d6ee8538ec2ba0ee96a5c455a3014802b6476e9ee2d41f27",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Reserve trailing glyph geometry separately from the adjustable text gap"
       ]
     },
     {
@@ -339,9 +387,10 @@
       "registry": "https://coss.com/ui/r/avatar.json",
       "upstreamPath": "apps/ui/registry/default/ui/avatar.tsx",
       "upstreamSha256": "a742f2d7c3aa1a867799e66fa7f3b37615e455906fa0117b66c49cfedca0a4f1",
-      "adaptedSha256": "cf6bc36c53c3b156a0c348dc2948a67c19c9d37020755745f2e5c411814f1584",
+      "adaptedSha256": "f7ed811070e5027f9011b53c9a0f6b00d74ec9dee722beae75485ea2f0192daa",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -349,12 +398,14 @@
       "registry": "https://coss.com/ui/r/breadcrumb.json",
       "upstreamPath": "apps/ui/registry/default/ui/breadcrumb.tsx",
       "upstreamSha256": "e420178801b8d72238f1274c722a7ca4e9f9834bd58c7a45ba8d71a645f83c79",
-      "adaptedSha256": "959858dcc5e5bb0cf19799c85d5a191a2ed60100ce5314f4251e88ec3528c61c",
+      "adaptedSha256": "f741b953915c493d9f3590a8b00da8ba538a23cfb9ecee07ef80fc469e176d2b",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
         "Visible focus ring on breadcrumb links",
-        "Flip the separator icon under rtl"
+        "Flip the separator icon under rtl",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -362,9 +413,10 @@
       "registry": "https://coss.com/ui/r/checkbox-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/checkbox-group.tsx",
       "upstreamSha256": "f78494035296e12c0ff602022338bb8f37a46f3a15647b53f0b2e8ac6c97f45e",
-      "adaptedSha256": "d5b770a5f9cdfa0f99d2825addcaed440a41c220b4bd9261416fc5b01133a63d",
+      "adaptedSha256": "c60887f5630721c96b7d9323dccedf4c19caf2feafcd04df08b95a24c7391319",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -382,9 +434,10 @@
       "registry": "https://coss.com/ui/r/command.json",
       "upstreamPath": "apps/ui/registry/default/ui/command.tsx",
       "upstreamSha256": "4b40973632f7b13bd2212f094b805470aad29fb190a46001f92b13ff2350b7bd",
-      "adaptedSha256": "e6d19d9db39f840d2ca02861c75e577393c09ebed7b9ec70e37a8bed003d5e16",
+      "adaptedSha256": "2067e551543ae5337953824a16c4e0306df83462db2fb381585e0bb1eecdd395",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -392,10 +445,12 @@
       "registry": "https://coss.com/ui/r/context-menu.json",
       "upstreamPath": "apps/ui/registry/default/ui/context-menu.tsx",
       "upstreamSha256": "a47c4563334813d12f0e46380a047483aed03d7ed3e37a9cfde5899f06761abf",
-      "adaptedSha256": "c8a18aaa9b275573e594fe0c6d412648fbd1c0f367747b0122e751d6bfd93e82",
+      "adaptedSha256": "e54da059fd799280160b056fea6b40203af3ecad3f55fe56f0e8c5c859e04d10",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Lucide check icon replaces upstream inline SVG"
+        "Lucide check icon replaces upstream inline SVG",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -403,10 +458,12 @@
       "registry": "https://coss.com/ui/r/dialog.json",
       "upstreamPath": "apps/ui/registry/default/ui/dialog.tsx",
       "upstreamSha256": "14ad87a5f81d7753e9a954aa0624df49168eccc2c8d3074a41ea0a8bed3970d5",
-      "adaptedSha256": "e1928e7cb1a0a2c7be15a8d1381d689f306ec72d1e9981518a7f4937593d7100",
+      "adaptedSha256": "a7bb4c84768769f1b4c567e2147649863c8f51dd5b321b2d0ea928569d7fb4c5",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the panel radius role with clamped inner highlights"
       ]
     },
     {
@@ -414,11 +471,13 @@
       "registry": "https://coss.com/ui/r/drawer.json",
       "upstreamPath": "apps/ui/registry/default/ui/drawer.tsx",
       "upstreamSha256": "e8edbf8de6192c4858395e8a99ed4d3c35fd583618b9cef4b76f260e90f6e4d1",
-      "adaptedSha256": "d9b9fbf41187b0eb7d9552f2dee29431d25f74dfeec97cf4537a33637e5d3d27",
+      "adaptedSha256": "a775fbfce3c85ac05bd4097fca64f41d119c415988981e931b9c47bda588eff7",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Lucide check icon replaces upstream inline SVG",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -426,11 +485,12 @@
       "registry": "https://coss.com/ui/r/empty.json",
       "upstreamPath": "apps/ui/registry/default/ui/empty.tsx",
       "upstreamSha256": "57341b5a985ba2cc229e4832ab8624b060d172706b678dd99a682fbb476d4aa9",
-      "adaptedSha256": "7cb447658bc5cc0003408fc0d4c0240650d7b08eb47b159e287a49174fac5f9d",
+      "adaptedSha256": "901c37ab8d8010d009552ba20e94c2780684e9fa9156fdacbc1fd08311794ff0",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "EmptyTitle takes a size prop instead of ad-hoc font sizes in call sites",
-        "Stop spreading props onto both the wrapper and the media element"
+        "Stop spreading props onto both the wrapper and the media element",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -438,10 +498,11 @@
       "registry": "https://coss.com/ui/r/fieldset.json",
       "upstreamPath": "apps/ui/registry/default/ui/fieldset.tsx",
       "upstreamSha256": "1ec36d2a2c60fd1ba229682a876f8d672ade66019513bac1a6747885d369f2a6",
-      "adaptedSha256": "51ce906882673b39eae3c771ca065c39445a2eed545d0a66e9c6c490b8e768f4",
+      "adaptedSha256": "6f650f6016b3a31b7c8c50d6b748e6ab12150a70630cdc6b4b848cc98e0e102b",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Add a label variant for the legend and export FieldSet/FieldLegend aliases"
+        "Add a label variant for the legend and export FieldSet/FieldLegend aliases",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -459,9 +520,10 @@
       "registry": "https://coss.com/ui/r/frame.json",
       "upstreamPath": "apps/ui/registry/default/ui/frame.tsx",
       "upstreamSha256": "55da638812d093e74ab7fb3cb141f01d834492b63b3e2e09880b9b1df24ee45c",
-      "adaptedSha256": "89ea13803932fe5a3f019109b052928bde9d0756922a48c034eaf4f4fb4168af",
+      "adaptedSha256": "ea208e6bcbf223433ded27a79bf1002432cc72ee21cf4ab3a11c662a163a4f3e",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -469,9 +531,11 @@
       "registry": "https://coss.com/ui/r/group.json",
       "upstreamPath": "apps/ui/registry/default/ui/group.tsx",
       "upstreamSha256": "d2392c54a90e353762779639971bb9aaa44759a7bda81ea0cf1462afbf4492b0",
-      "adaptedSha256": "447ccc14c2b3816adf3d862b17992c321dccd201475615c59693eeac9230eba6",
+      "adaptedSha256": "2826b46f1153f2796c64e47062d3a74ad10b41f5a6d531c0c269f901c0c2e7d4",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the control radius role with clamped inner highlights"
       ]
     },
     {
@@ -479,9 +543,10 @@
       "registry": "https://coss.com/ui/r/kbd.json",
       "upstreamPath": "apps/ui/registry/default/ui/kbd.tsx",
       "upstreamSha256": "ad8f26b95d8307f460316cd27a2b595d04069df2561395b5d39067a99e407cb5",
-      "adaptedSha256": "9826c99a05fa550b9d6ad72e569cb37609311d4abb5890eecc21511d149c5f2a",
+      "adaptedSha256": "a28f631dadc1ad2757d9de5fa5069e43f531152fb1c8d1c45f979a8ea4b0a310",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -489,9 +554,10 @@
       "registry": "https://coss.com/ui/r/label.json",
       "upstreamPath": "apps/ui/registry/default/ui/label.tsx",
       "upstreamSha256": "edaf5fb049b3e2f27ddd70a6c6772c7d99e920c589b41019b8f4fa602113e695",
-      "adaptedSha256": "08b69a100bcad0a1445c449b3ff8f243067ff029cc9538192150a67d653d4f27",
+      "adaptedSha256": "c1865b88555d0aae9aa6a934c6b19a68c3ec10eed26ed4cd4d13df8a6c14c18e",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles"
       ]
     },
     {
@@ -499,9 +565,10 @@
       "registry": "https://coss.com/ui/r/meter.json",
       "upstreamPath": "apps/ui/registry/default/ui/meter.tsx",
       "upstreamSha256": "f7f0b85f6878378c76e66887a111a1cb8476ebea84a2ebb4f6d41fe0fbad8653",
-      "adaptedSha256": "51d89eb4f821c0b1944bbeb0647fad09023505b2b0a29f7069a523a1c2777cf5",
+      "adaptedSha256": "e6985c24fd6958dd83a961d5648a858508a4c6a39412d355a76205cab3faa544",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -509,9 +576,11 @@
       "registry": "https://coss.com/ui/r/otp-field.json",
       "upstreamPath": "apps/ui/registry/default/ui/otp-field.tsx",
       "upstreamSha256": "4122b6f91e0c011a9bfe40b4ecad4d0b89a7b371e773adac6af6b2bcc5ac033e",
-      "adaptedSha256": "722536c519ad725c6610142d1cd3a8e81302a59ac2ff01d976c6d8e005ffbdb6",
+      "adaptedSha256": "1f67868206cdbc6052b35d7f63c001c8f55aace6f40eedf51bcaa304dec415c3",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles"
       ]
     },
     {
@@ -519,13 +588,14 @@
       "registry": "https://coss.com/ui/r/pagination.json",
       "upstreamPath": "apps/ui/registry/default/ui/pagination.tsx",
       "upstreamSha256": "4c3d048be127d228ad199b8555b833ffc26cd9506b4a75b4b298754833474993",
-      "adaptedSha256": "3678ade1d20e8a324725ab85d55ec111e9b89bfb3e9fcb64ac42a67dd3918e2c",
+      "adaptedSha256": "88ee9ba1620eae7f8fd3a517fac93ffb666bba3438d324228e5ffda81e0c9bb3",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
         "Add disabled semantics: drop href, leave the tab order, ignore onClick",
         "Tabular figures for page numbers",
-        "Flip the prev/next arrows under rtl"
+        "Flip the prev/next arrows under rtl",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -533,9 +603,10 @@
       "registry": "https://coss.com/ui/r/preview-card.json",
       "upstreamPath": "apps/ui/registry/default/ui/preview-card.tsx",
       "upstreamSha256": "44741ce4217d89c19a485d6973c22c821ed9cf86b15dc03c7094308ae7faa6ba",
-      "adaptedSha256": "2c86b47598e31b79b554c7ab1a1ef1866e83d2d69a9201285d0bce4ab9ba53cc",
+      "adaptedSha256": "e340220e1ee2a3e069ce54519041dcf407e1c0f716af4de16ceab141147da95d",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -543,9 +614,10 @@
       "registry": "https://coss.com/ui/r/progress.json",
       "upstreamPath": "apps/ui/registry/default/ui/progress.tsx",
       "upstreamSha256": "605ea95436094735fc94d2ae38fd50df2dcce1617b2a67c504114bd0e55cc2b2",
-      "adaptedSha256": "34271004b639f1997f3bf430c672105ca07b1b02751952ee6c300fba23c63344",
+      "adaptedSha256": "a1e11abf6582473e15447a385190d4298d007b9836e122a3f7e5203381709f7d",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -553,9 +625,11 @@
       "registry": "https://coss.com/ui/r/radio-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/radio-group.tsx",
       "upstreamSha256": "b2479e9967f0ba48d1acbb58a4fff7b919aa746bb8a61cbbff389baac02abbb7",
-      "adaptedSha256": "dcf9dee6cc9b7d8a89c62855312d7e47e4f2c7fdfc0a218ea06236f1c8fb0bfe",
+      "adaptedSha256": "4aa8063028360c0a1fe50b1b2cd67c18e89e633a73764b82873fc50455aca615",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -573,7 +647,7 @@
       "registry": "https://coss.com/ui/r/sidebar.json",
       "upstreamPath": "apps/ui/registry/default/ui/sidebar.tsx",
       "upstreamSha256": "11e0381340b46a53f5a52c6a2a6a81a4c957c3690f889089764b60ba3da51965",
-      "adaptedSha256": "d118fb6120637ea6211eaef4808af0bd3928d3d2877e767d4d94c9a13ff42e98",
+      "adaptedSha256": "b82030b6c170b5bbc010caa32bfc882722985c975660496cf39fa8adac6ef484",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Use semantic sidebar colors directly instead of wrapping OKLCH tokens in hsl()",
@@ -581,7 +655,9 @@
         "Degrade safely when the Cookie Store API is unavailable",
         "Mobile row heights grow to the touch minimum with matching action and badge offsets",
         "Use logical direction properties throughout",
-        "Zero the horizontal separator width when collapsed to icons"
+        "Zero the horizontal separator width when collapsed to icons",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -620,9 +696,10 @@
       "registry": "https://coss.com/ui/r/switch.json",
       "upstreamPath": "apps/ui/registry/default/ui/switch.tsx",
       "upstreamSha256": "2b3bada3d7234149b4d29918d5e312e62919938c2ae0ee61db81350438ad43c4",
-      "adaptedSha256": "ca9e6fa2310797783f6147cb7cd32d89355af1709ded5ed640ac8846a9b8ee4d",
+      "adaptedSha256": "6039cba5cae7cf2b38d2c1cbfe8d70bf12eaa1c227f750cc6d88a5165a8435bd",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -630,9 +707,10 @@
       "registry": "https://coss.com/ui/r/toggle-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/toggle-group.tsx",
       "upstreamSha256": "8c67854bffcf762299fb989721e47da30fea3268cb969fdc6c775c3fe89982bb",
-      "adaptedSha256": "17a71c1b0d23ea96170d67984315535aae2b868deeabb4df05420bec7442533b",
+      "adaptedSha256": "bba1c06c2dec7c9b572f965fa2cb476bf3ac7f2e6e63334b4c0d21d44b2720dc",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {
@@ -640,9 +718,11 @@
       "registry": "https://coss.com/ui/r/toggle.json",
       "upstreamPath": "apps/ui/registry/default/ui/toggle.tsx",
       "upstreamSha256": "a32372d0eaa291bc81f61f4ddb1f5bb827c507fd53de03c6f709adc242ee5bfb",
-      "adaptedSha256": "bcc799881a0a2fff819159bb63770cf436cea64079bb4e3dee574ff1ff96e112",
+      "adaptedSha256": "37b117bae96fe483e8380b2ea95033349e402a9899bd2f3e05c8a254bb442004",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+        "Read the control radius role with clamped inner highlights; Read the action focus width/offset roles where the component previously defined them"
       ]
     },
     {
@@ -650,10 +730,11 @@
       "registry": "https://coss.com/ui/r/toolbar.json",
       "upstreamPath": "apps/ui/registry/default/ui/toolbar.tsx",
       "upstreamSha256": "f08696682ad171b5a0d2c918202bcee10b9f6de1408a2a2e864f61e8d424dba2",
-      "adaptedSha256": "387b714c6a429728d971eb67f98f7cf54d1c8efb4ed75a62bbfc3aa52accc51e",
+      "adaptedSha256": "89cd361d27ed86cab68e37289a034c00c066790f96024d4a52abc7ca643051d0",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Vertical orientation support"
+        "Vertical orientation support",
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry"
       ]
     },
     {

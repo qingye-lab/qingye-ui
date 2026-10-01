@@ -136,9 +136,9 @@ export function Steps({
             </span>
             <span
               className={cn(
-                "flex min-w-0 flex-col gap-0.5",
-                vertical && size === "default" && "pt-1",
-                vertical ? "pe-1" : "pe-3",
+                "flex min-w-0 flex-col gap-[calc(var(--qy-space-1)*0.5)]",
+                vertical && size === "default" && "pt-(--qy-space-1)",
+                vertical ? "pe-(--qy-space-1)" : "pe-(--qy-space-3)",
               )}
               data-slot="steps-content"
             >
@@ -163,7 +163,7 @@ export function Steps({
 
         const bodyClassName = cn(
           "relative flex min-w-0 text-start",
-          vertical ? "flex-row gap-3" : "flex-col items-start gap-2",
+          vertical ? "flex-row gap-(--qy-space-3)" : "flex-col items-start gap-(--qy-space-2)",
         );
 
         return (
@@ -171,7 +171,7 @@ export function Steps({
             aria-current={interactive ? undefined : ariaCurrent}
             className={cn(
               "relative flex min-w-0",
-              vertical ? (size === "sm" ? "pb-4 last:pb-0" : "pb-6 last:pb-0") : "flex-1 last:flex-none",
+              vertical ? (size === "sm" ? "pb-(--qy-space-4) last:pb-0" : "pb-(--qy-space-6) last:pb-0") : "flex-1 last:flex-none",
             )}
             data-slot="steps-item"
             data-status={status}
@@ -183,8 +183,8 @@ export function Steps({
                 className={cn(
                   "pointer-events-none absolute bg-input transition-colors duration-(--qy-duration-base) ease-(--qy-ease-out) data-[status=complete]:bg-primary",
                   vertical
-                    ? "start-[calc(var(--step-indicator)/2-0.5px)] top-[calc(var(--step-indicator)+--spacing(1.5))] bottom-1.5 w-px"
-                    : "start-[calc(var(--step-indicator)+--spacing(2))] end-2 top-[calc(var(--step-indicator)/2-0.5px)] h-px",
+                    ? "start-[calc(var(--step-indicator)/2-0.5px)] top-[calc(var(--step-indicator)+var(--qy-space-1)*1.5)] bottom-[calc(var(--qy-space-1)*1.5)] w-px"
+                    : "start-[calc(var(--step-indicator)+var(--qy-space-2))] end-(--qy-space-2) top-[calc(var(--step-indicator)/2-0.5px)] h-px",
                 )}
                 data-slot="steps-connector"
                 data-status={status}
@@ -195,7 +195,7 @@ export function Steps({
                 aria-current={ariaCurrent}
                 className={cn(
                   bodyClassName,
-                  "cursor-pointer rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
+                  "cursor-pointer rounded-lg outline-none focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
                 )}
                 data-slot="steps-trigger"
                 disabled={item.disabled}

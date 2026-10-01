@@ -7,25 +7,28 @@ import { useMediaQuery } from "@qingye/ui/hooks/use-media-query";
 import { PlayIcon, RotateCcwIcon } from "lucide-react";
 import { Fragment, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { A, Code, H2, H3, P, PageHeader } from "@/components/prose";
+import { CodeBlock } from "@/components/code-block";
+import { repoFile } from "@/lib/site";
 
-// Token names come from the library's own CSS, so this page never drifts.
+// Names and utility aliases are extracted from the current library CSS.
 const tokenNames = (css: string, pattern: RegExp) => [...new Set([...css.matchAll(pattern)].map((match) => match[1]!))];
 
 const colorNames = tokenNames(semanticCss, /--qy-([a-z0-9-]+)\s*:/g).filter((name) => !name.startsWith("shadow-"));
 const shadowNames = tokenNames(semanticCss, /--qy-(shadow-[a-z0-9-]+)\s*:/g);
-const textRoles = tokenNames(componentsCss, /--qy-text-([a-z]+)-size\s*:/g);
+const textRoles = tokenNames(componentsCss, /--qy-text-([a-z0-9-]+)-size\s*:/g);
 const spaceNames = tokenNames(componentsCss, /--qy-(space-\d+)\s*:/g);
 const radiusNames = tokenNames(componentsCss, /--qy-(radius(?:-[a-z0-9]+)?)\s*:/g);
 const controlNames = tokenNames(componentsCss, /--qy-(control-[a-z]+)\s*:/g);
 const densityNames = ["touch-target", "row-default", "row-compact", "panel-padding", "panel-padding-sm", "panel-gap", "section-gap", "topbar-height"].filter(
   (name) => componentsCss.includes(`--qy-${name}:`),
 );
+const focusNames = tokenNames(componentsCss, /--qy-(focus-[a-z-]+)\s*:/g);
 const durationNames = tokenNames(componentsCss, /--qy-(duration-[a-z]+)\s*:/g);
 const easeNames = tokenNames(componentsCss, /--qy-(ease-[a-z-]+)\s*:/g);
 
 // Stable lists for the readers below (they are effect dependencies).
 const typeTokens = textRoles.flatMap((role) => [`text-${role}-size`, `text-${role}-leading`]);
-const controlTokens = [...controlNames, ...densityNames];
+const controlTokens = [...controlNames, "control-mobile-extra", ...densityNames];
 const motionTokens = [...durationNames, ...easeNames, "stagger"];
 
 /** `--qy-primary` → the Tailwind colour names that read it (`primary`). */
@@ -105,6 +108,7 @@ function formatColor(value?: Resolved) {
 
 /** `primary-foreground` is read on `primary`; status foregrounds are read on the page. */
 function surfaceFor(name: string): string | null {
+  if (name === "danger-on-fill") return "var(--qy-danger-fill)";
   const base = name.replace(/-foreground$/, "");
   if (base === name || /^(danger|warning|success|info)$/.test(base)) return null;
   return colorNames.includes(base) ? `var(--qy-${base})` : null;
@@ -112,7 +116,7 @@ function surfaceFor(name: string): string | null {
 
 function Swatch({ name, scheme }: { name: string; scheme: "light" | "dark" }) {
   const token = `var(--qy-${name})`;
-  const isText = name.includes("foreground");
+  const isText = name.includes("foreground") || name.endsWith("-on-fill");
   const isLine = /^(border|ring|sidebar-border|sidebar-ring)/.test(name);
   const surface = isText ? surfaceFor(name) : null;
   return (
@@ -257,7 +261,11 @@ function TokenTable({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
 const mono = (text: string) => <code className="font-mono text-[0.8125rem] text-foreground-strong">{text}</code>;
 const value = (text?: string) => <span className="font-mono text-[0.75rem] text-muted-foreground numeric">{text || "…"}</span>;
 
-const TYPE_WEIGHT: Record<string, number> = { display: 600, title: 600, heading: 600, label: 500 };
+const typeUtilities = new Map<string, string>();
+for (const [, utility, role] of themeCss.matchAll(/--text-([a-z0-9-]+):\s*var\(--qy-text-([a-z0-9-]+)-size\)/g)) {
+  typeUtilities.set(role!, `text-${utility}`);
+}
+const typeWeight = (role: string) => /^(display|title|heading)/.test(role) ? "var(--qy-weight-semibold)" : /^(label|button|field-label)/.test(role) ? "var(--qy-weight-medium)" : "var(--qy-weight-regular)";
 
 function TypeScale() {
   const values = useRootValues(typeTokens);
@@ -270,12 +278,12 @@ function TypeScale() {
           return (
             <li className="flex flex-col gap-2 px-4 py-4 sm:flex-row sm:items-baseline sm:gap-6" key={role}>
               <div className="flex w-32 shrink-0 flex-col gap-0.5" title={size}>
-                {mono(`text-${role}`)}
+                {mono(typeUtilities.get(role) ?? `--qy-text-${role}-size`)}
                 {value(size ? `${toPx(size)} / ${leading}` : undefined)}
               </div>
               <p
                 className="min-w-0 truncate text-foreground-strong"
-                style={{ fontSize: `var(--qy-text-${role}-size)`, lineHeight: `var(--qy-text-${role}-leading)`, fontWeight: TYPE_WEIGHT[role] ?? 400 }}
+                style={{ fontSize: `var(--qy-text-${role}-size)`, lineHeight: `var(--qy-text-${role}-leading)`, fontWeight: typeWeight(role) }}
               >
                 精致耐看 Refined 0123
               </p>
@@ -354,18 +362,33 @@ const CONTROL_SIZE: Record<string, "xs" | "sm" | "default" | "lg" | "xl"> = {
 
 function Controls() {
   const values = useRootValues(controlTokens);
+  const [heights, setHeights] = useState<Record<string, { desktop: number; narrow: number }>>({});
+  useLayoutEffect(() => {
+    const probe = document.createElement("span");
+    probe.style.cssText = "position:absolute;visibility:hidden;display:block;width:0";
+    document.documentElement.append(probe);
+    const result: Record<string, { desktop: number; narrow: number }> = {};
+    for (const name of controlNames) {
+      probe.style.height = `var(--qy-${name})`;
+      const desktop = Number.parseFloat(getComputedStyle(probe).height);
+      probe.style.height = `calc(var(--qy-${name}) + var(--qy-control-mobile-extra))`;
+      result[name] = { desktop, narrow: Number.parseFloat(getComputedStyle(probe).height) };
+    }
+    probe.remove();
+    setHeights(result);
+  }, []);
   return (
     <>
       <TokenTable
-        head={["令牌", "桌面", "移动端", "按钮"]}
+        head={["外部高度令牌", "桌面 ≥640px", "窄屏 <640px", "当前视口按钮"]}
         rows={controlNames.map((name) => {
           const desktop = values[name];
-          const px = desktop ? Number.parseFloat(desktop) * 16 : 0;
+          const used = heights[name];
           const size = CONTROL_SIZE[name];
           return [
             mono(`--qy-${name}`),
-            value(desktop ? `${desktop} · ${px}px` : undefined),
-            value(desktop ? `${px + 4}px` : undefined),
+            value(used ? `${desktop} · ${used.desktop}px` : undefined),
+            value(used ? `${used.narrow}px` : undefined),
             size ? (
               <Button aria-hidden="true" size={size} tabIndex={-1} variant="outline">
                 {size === "default" ? "默认" : size}
@@ -374,10 +397,22 @@ function Controls() {
           ];
         })}
       />
+      <P><Code>--qy-control-mobile-extra</Code>：{value(values["control-mobile-extra"])}。Input 内部高度减去父包装两个1px边框；InputGroup 的边框由父层拥有。</P>
       <TokenTable
         head={["密度令牌", "默认值"]}
         rows={densityNames.map((name) => [mono(`--qy-${name}`), value(values[name] ? `${values[name]} · ${toPx(values[name]!)}` : undefined)])}
       />
+    </>
+  );
+}
+
+function FocusTokens() {
+  const values = useRootValues(focusNames);
+  return (
+    <>
+      <TokenTable head={["焦点角色", "默认值"]} rows={focusNames.map((name) => [mono(`--qy-${name}`), value(values[name])])} />
+      <P>Button 及接入的动作部位读取 button width/offset；Input/InputGroup/Select 等输入部位读取 input 角色。修改输入宽度不会改变按钮环；保留 Accordion/Slider/Resizable/Calendar day 等自有几何，不代表全部焦点都由这两组参数接管。</P>
+      <CodeBlock code={`html[data-brand="project"] {\n  --qy-focus-input-width: 4px;\n  --qy-focus-input-offset: 0px;\n}`} lang="css" />
     </>
   );
 }
@@ -435,7 +470,7 @@ export default function TokensPage() {
   return (
     <article>
       <PageHeader
-        description="下面的每个数值都在页面加载时从库的 CSS 中读出，与组件实际使用的完全一致。"
+        description="名称与工具类映射来自当前库 CSS，取值在加载时读取。角色的具体消费范围见各节；列出变量不等于全部部位均已接入。"
         title="设计令牌"
       />
       <P>
@@ -446,26 +481,30 @@ export default function TokensPage() {
       <P>
         每个语义颜色都同时给出浅色与深色下的取值。中性色大多是半透明的黑或白，所以放在卡片、侧栏或浮层上都能保持相同的观感；色块按各自主题的背景展示。
       </P>
+      <P>危险 mark/边框、页面可读文字、实心动作底及其上文字分别是 <Code>danger</Code>、<Code>danger-foreground</Code>、<Code>danger-fill</Code>、<Code>danger-on-fill</Code>；on-fill 色样在 fill 背景上呈现。</P>
       <ColorTokens />
+      <P>库内 <A href={repoFile("packages/ui/test/color-check.ts")}>AST 颜色检查</A> 覆盖 className/style、cn/cva 和静态常量，属性 selector/URL fragment 不当作颜色误报。动态 props/import 等无法求值时记为 unresolved，不等于主题或对比度通过；这不是已发布的消费端 lint 插件。</P>
 
       <H2 id="typography">字号</H2>
       <P>
-        字号与行高成对出现，Tailwind 中写作 <Code>text-body</Code>、<Code>text-label</Code> 等。字重只用 400、500、600：标题 600，标签与按钮 500。
+        字号与行高成对出现。按钮用 <Code>text-button</Code>，输入用 <Code>text-field-input</Code>（<Code>text-input</Code> 是颜色），窄屏分别读取 mobile 角色；表单标签用 field-label，一般标签用 label。首批角色消费部位为 Button、Input/InputGroup、Textarea、NativeSelect、NumberField、Select 触发器、Label/FieldLabel/FieldTitle、CardDescription。拉丁字距按角色，CJK 保持自然字距；没有将所有内容排版都迁移。
       </P>
       <TypeScale />
 
       <H2 id="spacing">间距</H2>
       <P>
-        以 4px 为基数。组件内部间距直接使用 Tailwind 的 <Code>--spacing</Code>，这里的令牌供布局与自定义组件使用。
+        布局间距以 <Code>--qy-space-1</Code> 默认4px为基数，命名步从它派生。组件的 gap/padding/正 margin 等显式消费库间距；不改 Tailwind 全局 <Code>--spacing</Code>。图标、控件高度、thumb/marker 及固定字形预留保持自己的几何，负 margin 光学补偿也不会一起缩放。修改入口应设在 html；局部覆盖基础步不保证继承别名重新计算。
       </P>
       <Spacing />
 
       <H2 id="radius">圆角</H2>
       <P>
-        全部由 <Code>--qy-radius</Code> 派生。徽章与复选框用 <Code>sm</Code>，菜单项用 <Code>md</Code>，控件与浮层用 <Code>lg</Code>，提示条用 <Code>xl</Code>
-        ，卡片与弹窗用 <Code>2xl</Code>。
+        根圆角默认8px，只联动 md（根减0.5px，最小0）/lg。xs/sm/xl/2xl/full 独立；控件角色 <Code>--qy-radius-control</Code> 默认接 lg，Card/Dialog/AlertDialog 面板角色 <Code>--qy-radius-panel</Code> 默认接2xl（12px）。
       </P>
       <Radii />
+
+      <H2 id="focus">焦点</H2>
+      <FocusTokens />
 
       <H2 id="shadows">阴影</H2>
       <P>层次主要来自半透明边框，阴影只起辅助作用。下方按当前主题显示；深色下阴影更重，以便在暗背景上仍可分辨。</P>
@@ -473,7 +512,7 @@ export default function TokensPage() {
 
       <H2 id="controls">控件高度与密度</H2>
       <P>
-        控件高度令牌是桌面值。移动端统一加高 4px，避免 iOS 输入时缩放并方便点按；粗指针下独立控件的点击区扩展到 <Code>--qy-touch-target</Code>。
+        Button、Input、SelectTrigger/SelectButton 的控件令牌表示含边框的桌面外部高度；窄屏按 <Code>--qy-control-mobile-extra</Code> 加4px。Input 内层扣除两个1px边框，InputGroup 保留父层边框关系。粗指针下 Input/InputGroup 外部至少44px；Button/Select 保持角色视觉高度，以伪元素扩到 <Code>--qy-touch-target</Code>。窄屏与粗指针是独立条件。输入与默认按钮字号窄屏16px、桌面14px；避免 iOS 输入缩放依靠字号，不是加高4px。
       </P>
       <Controls />
 

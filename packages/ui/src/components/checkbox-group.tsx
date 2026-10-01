@@ -12,7 +12,7 @@ export function CheckboxGroup({
 }: CheckboxGroupPrimitive.Props): React.ReactElement {
   return (
     <CheckboxGroupPrimitive
-      className={cn("flex flex-col items-start gap-3", className)}
+      className={cn("flex flex-col items-start gap-(--qy-space-3)", className)}
       data-slot="checkbox-group"
       {...props}
     />

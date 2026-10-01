@@ -1,0 +1,14 @@
+{
+  "full-tests.txt": {
+    "sha256": "eafa030c2cfebbefd5342556166c5ad6ef035c267e54a662e191043265fb741d",
+    "bytes": 2898
+  },
+  "focused-tests.txt": {
+    "sha256": "16924200d645606d087f4f9102dddcf10b84490e8d6334cfb1c4e1f662e826e4",
+    "bytes": 486
+  },
+  "typecheck.txt": {
+    "sha256": "129cf9397241364ba47845d97011c34df91d9e56c853b3d177a305526d864760",
+    "bytes": 108
+  }
+}

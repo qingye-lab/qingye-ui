@@ -260,7 +260,7 @@ export function FileUpload({
 
   return (
     <div
-      className={cn("flex min-w-0 flex-col gap-3", className)}
+      className={cn("flex min-w-0 flex-col gap-(--qy-space-3)", className)}
       data-disabled={disabled ? "" : undefined}
       data-slot="file-upload"
     >
@@ -269,7 +269,7 @@ export function FileUpload({
           aria-describedby={describedBy}
           aria-invalid={invalid || undefined}
           aria-labelledby={labelId}
-          className="group/dropzone relative flex w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-border-strong border-dashed bg-muted/40 px-6 py-8 text-center outline-none transition-[background-color,border-color,box-shadow] hover:border-ring/64 hover:bg-muted/72 focus-visible:border-ring focus-visible:border-solid focus-visible:ring-[3px] focus-visible:ring-ring/24 disabled:cursor-not-allowed disabled:opacity-64 disabled:hover:border-border-strong disabled:hover:bg-muted/40 aria-invalid:border-destructive/48 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/16 data-dragging:border-ring data-dragging:border-solid data-dragging:bg-accent dark:bg-input/24 dark:hover:bg-input/40 dark:disabled:hover:bg-input/24 dark:focus-visible:aria-invalid:ring-destructive/24 dark:data-dragging:bg-input/40"
+          className="group/dropzone relative flex w-full cursor-pointer flex-col items-center justify-center gap-(--qy-space-3) rounded-xl border border-border-strong border-dashed bg-muted/40 px-(--qy-space-6) py-(--qy-space-8) text-center outline-none transition-[background-color,border-color,box-shadow] hover:border-ring/64 hover:bg-muted/72 focus-visible:border-ring focus-visible:border-solid focus-visible:ring-[length:var(--qy-focus-input-width)] focus-visible:ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background disabled:cursor-not-allowed disabled:opacity-64 disabled:hover:border-border-strong disabled:hover:bg-muted/40 aria-invalid:border-destructive/48 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/16 data-dragging:border-ring data-dragging:border-solid data-dragging:bg-accent dark:bg-input/24 dark:hover:bg-input/40 dark:disabled:hover:bg-input/24 dark:focus-visible:aria-invalid:ring-destructive/24 dark:data-dragging:bg-input/40"
           data-dragging={dragging ? "" : undefined}
           data-slot="file-upload-dropzone"
           disabled={disabled}
@@ -286,7 +286,7 @@ export function FileUpload({
           >
             <UploadIcon className="size-4.5 opacity-80 sm:size-4" />
           </span>
-          <span className="flex flex-col gap-1">
+          <span className="flex flex-col gap-(--qy-space-1)">
             <span className="font-medium text-base/5 text-foreground sm:text-sm/5" id={labelId}>
               {dragging ? messages.dropFilesActive : labelText}
             </span>
@@ -296,7 +296,7 @@ export function FileUpload({
           </span>
         </button>
       ) : (
-        <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1.5" {...dragProps}>
+        <div className="flex min-w-0 flex-wrap items-center gap-x-(--qy-space-3) gap-y-[calc(var(--qy-space-1)*1.5)]" {...dragProps}>
           <Button
             variant="outline"
             {...buttonProps}
@@ -356,7 +356,7 @@ export function FileUpload({
             const isImage = thumbnails && file.type.startsWith("image/");
             return (
               <li
-                className="flex min-w-0 items-center gap-3 px-3 py-2.5 not-last:border-b"
+                className="flex min-w-0 items-center gap-(--qy-space-3) px-(--qy-space-3) py-[calc(var(--qy-space-1)*2.5)] not-last:border-b"
                 data-invalid={error ? "" : undefined}
                 data-slot="file-upload-item"
                 key={`${file.name}-${file.size}-${file.lastModified}`}
@@ -371,8 +371,8 @@ export function FileUpload({
                 >
                   {isImage ? <FileThumbnail file={file} /> : <FileTypeIcon className="size-4.5 sm:size-4" file={file} />}
                 </span>
-                <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  <span className="flex min-w-0 items-baseline gap-2">
+                <span className="flex min-w-0 flex-1 flex-col gap-(--qy-space-1)">
+                  <span className="flex min-w-0 items-baseline gap-(--qy-space-2)">
                     <span className="min-w-0 flex-1 truncate font-medium text-sm" title={file.name}>
                       {file.name}
                     </span>
@@ -429,7 +429,7 @@ export function FileUpload({
       ) : null}
       {rejected.length ? (
         <div
-          className="flex flex-col gap-0.5 text-destructive-foreground text-xs"
+          className="flex flex-col gap-[calc(var(--qy-space-1)*0.5)] text-destructive-foreground text-xs"
           data-slot="file-upload-errors"
           id={errorsId}
           role="alert"

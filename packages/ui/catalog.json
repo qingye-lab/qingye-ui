@@ -2,7 +2,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye/ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Published component entry points and guidance from the local documentation",
   "components": [

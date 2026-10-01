@@ -13,7 +13,7 @@ export function Meter({
 }: MeterPrimitive.Root.Props): React.ReactElement {
   return (
     <MeterPrimitive.Root
-      className={cn("flex w-full flex-col gap-2", className)}
+      className={cn("flex w-full flex-col gap-(--qy-space-2)", className)}
       data-slot="meter"
       {...props}
     >

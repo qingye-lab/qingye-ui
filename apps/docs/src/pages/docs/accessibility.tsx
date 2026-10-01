@@ -104,16 +104,16 @@ export default function AccessibilityPage() {
         实现键盘交互、焦点管理与 ARIA 状态。组件库在此之上只加样式与少量组合，不重写、也不绕开这些行为：一个下拉菜单的方向键、首字母跳转与焦点回归，都与 Base UI 文档描述的一致。
       </P>
       <P>
-        每个组件页列出它的键盘交互；视觉上的要求（对比度、焦点环、触控尺寸）写在组件规范里，并在浅色、深色、桌面与 390px 宽度下逐一目检。
+        每个组件页列出它的键盘交互；视觉上的要求（对比度、焦点环、触控尺寸）写在组件规范里，验收时应在浅色、深色、桌面与390px宽度下分别检查，静态与浏览器检测不能代替读屏软件和完整键盘流程。
       </P>
 
       <H2 id="built-in">组件已经处理的</H2>
       <Facts
         items={[
           { term: "键盘", detail: "菜单、选择器、标签页、滑块等复合控件支持方向键、Home / End 与类型跳转；Esc 关闭浮层。" },
-          { term: "焦点", detail: "弹窗与抽屉打开时锁定焦点，关闭后归还给触发元素；焦点环统一用 focus-visible，只在键盘导航时出现。" },
+          { term: "焦点", detail: "弹窗与抽屉打开时管理焦点，关闭后归还给触发元素；使用 focus-visible/组合输入的对应条件。动作与输入有独立焦点 width/offset 角色，自有几何例外保留。" },
           { term: "语义", detail: "角色、状态与关联（aria-expanded、aria-controls、aria-invalid 等）由原语维护；分页、面包屑、侧栏带有默认的可访问名称。" },
-          { term: "触控", detail: "粗指针下，小于 44px 的独立控件通过 touch-target 扩大点击区，外观不变；列表行最小 44px。" },
+          { term: "触控", detail: "粗指针下目标最小44px：Input/InputGroup 外部高度达到44px，Button/Select 由伪元素扩大命中区，保留控件角色视觉高度；窄屏加高与粗指针分别判断。44px 是本库触屏目标，不代表 WCAG 2.2 AA 对所有元素统一要求44px。" },
           { term: "动效", detail: "遵循“减少动态效果”，并在键盘操作时跳过过渡。" },
           { term: "方向", detail: "只使用逻辑方向属性（ms / me / start / end），从右到左的界面无需改样式。" },
         ]}
@@ -142,6 +142,7 @@ export default function AccessibilityPage() {
 
       <H2 id="testing">如何测试</H2>
       <H3 id="testing-keyboard">键盘</H3>
+      <P>在浅色和深色下分别验证实际焦点环，输入与按钮的参数独立调整见 <A href="/docs/tokens#focus">焦点角色</A>。</P>
       <P>拔掉鼠标走一遍主流程。留意焦点是否始终可见、是否会落到被遮挡的元素上、浮层关闭后焦点回到了哪里。</P>
       <H3 id="testing-sr">读屏软件</H3>
       <P>

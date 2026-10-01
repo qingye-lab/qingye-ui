@@ -12,9 +12,11 @@ const managers = [
 type Manager = (typeof managers)[number]["id"];
 
 /** One install command, shown for each package manager. */
-export function InstallTabs({ pkg }: { pkg: string }) {
+export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCommand?: string }) {
   const [current, setCurrent] = useState<Manager>("pnpm");
-  const command = managers.find((manager) => manager.id === current)!.command(pkg);
+  const installCommand = (manager: (typeof managers)[number]) =>
+    downloadCommand ? `${downloadCommand} && ${manager.command(pkg)}` : manager.command(pkg);
+  const command = installCommand(managers.find((manager) => manager.id === current)!);
   return (
     <Tabs
       className="my-5 gap-0 overflow-hidden rounded-xl border bg-surface-subtle dark:bg-surface"
@@ -33,7 +35,7 @@ export function InstallTabs({ pkg }: { pkg: string }) {
       </div>
       {managers.map((manager) => (
         <TabsPanel key={manager.id} value={manager.id}>
-          <CodeView code={manager.command(pkg)} lang="text" wrap />
+          <CodeView code={installCommand(manager)} lang="text" wrap />
         </TabsPanel>
       ))}
     </Tabs>

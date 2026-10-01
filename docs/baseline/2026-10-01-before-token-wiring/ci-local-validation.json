@@ -1,0 +1,60 @@
+{
+  "scripts": [
+    {
+      "path": "scripts/audit.mjs",
+      "sha256": "23458b3a99039d3b70e14dc4983fc0e391330b36060c232a0698dfb132e44f0c"
+    },
+    {
+      "path": "scripts/audit-measure.mjs",
+      "sha256": "cf4df5b5210b4d900e30bb590416af014119f47106b0b8abe1086351eccda75a"
+    },
+    {
+      "path": "scripts/browser-runtime.mjs",
+      "sha256": "6f38b6e6eb68acef883baef4178622c7fd946c0cf59c67dab18dff582de11def"
+    },
+    {
+      "path": "scripts/run-browser-audit.mjs",
+      "sha256": "a26510bf56434edfcfea95e87e20bd6e6be17a1c29868ace8ef935547678820d"
+    },
+    {
+      "path": "scripts/test-audit.mjs",
+      "sha256": "036a256f06ae4b06916e322ded9b1b94a87a19e91d5db2d4feeb0f51dcff7d53"
+    },
+    {
+      "path": "scripts/shot.mjs",
+      "sha256": "93971304bb6e489cb18b6b79fb057acba2033a1761d473e3b8d4d78cd13cd6e4"
+    }
+  ],
+  "localCases": [
+    {
+      "name": "local-success",
+      "exit": 0,
+      "measurements": 1,
+      "problemCount": 0,
+      "ownedBrowserClosed": true,
+      "report": "test-results/ci-audit/local-success.json",
+      "log": "test-results/ci-audit/local-success.log"
+    },
+    {
+      "name": "local-failure",
+      "exit": 1,
+      "measurements": 1,
+      "problemCount": 2,
+      "ownedBrowserClosed": true,
+      "report": "test-results/ci-audit/local-failure.json",
+      "log": "test-results/ci-audit/local-failure.log"
+    },
+    {
+      "name": "local-interrupted",
+      "exit": 1,
+      "measurements": 1,
+      "problemCount": 3,
+      "ownedBrowserClosed": true,
+      "report": "test-results/ci-audit/local-interrupted.json",
+      "log": "test-results/ci-audit/local-interrupted.log"
+    }
+  ],
+  "remoteStatus": "NOT_RUN",
+  "libraryFactsLedgerUnit": "PASS",
+  "evidence": "test-results/ci-audit/receipt.json"
+}

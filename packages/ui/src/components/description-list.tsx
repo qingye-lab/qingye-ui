@@ -51,10 +51,10 @@ export function DescriptionList({
         ? cn(
             "grid grid-cols-[repeat(auto-fill,minmax(min(100%,var(--description-list-column)),1fr))]",
             // Divided grids run their hairlines edge to edge across a row.
-            divided ? "gap-x-0" : "gap-x-6",
+            divided ? "gap-x-0" : "gap-x-(--qy-space-6)",
           )
         : "flex flex-col",
-      divided ? "gap-y-0" : layout === "grid" ? "gap-y-5" : "gap-y-3",
+      divided ? "gap-y-0" : layout === "grid" ? "gap-y-(--qy-space-5)" : "gap-y-(--qy-space-3)",
       className,
     ),
     "data-divided": divided ? "" : undefined,
@@ -86,12 +86,12 @@ export function DescriptionListItem({
     className: cn(
       "min-w-0",
       layout === "horizontal"
-        ? "grid grid-cols-[minmax(0,var(--description-list-term))_minmax(0,1fr)] gap-x-4"
-        : "flex flex-col gap-1",
+        ? "grid grid-cols-[minmax(0,var(--description-list-term))_minmax(0,1fr)] gap-x-(--qy-space-4)"
+        : "flex flex-col gap-(--qy-space-1)",
       divided &&
         (layout === "grid"
-          ? "border-t pt-3 pe-6 pb-4"
-          : "py-3 not-last:border-b first:pt-0 last:pb-0"),
+          ? "border-t pt-(--qy-space-3) pe-(--qy-space-6) pb-(--qy-space-4)"
+          : "py-(--qy-space-3) not-last:border-b first:pt-0 last:pb-0"),
       className,
     ),
     "data-slot": "description-list-item",
@@ -111,7 +111,7 @@ export function DescriptionTerm({
 }: useRender.ComponentProps<"dt">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "wrap-break-word flex min-w-0 items-center gap-1.5 self-start text-muted-foreground leading-6 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+      "wrap-break-word flex min-w-0 items-center gap-[calc(var(--qy-space-1)*1.5)] self-start text-muted-foreground leading-6 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
       className,
     ),
     "data-slot": "description-term",
@@ -161,7 +161,7 @@ export function DescriptionDetails({
     ),
     className: cn(
       "wrap-break-word m-0 min-w-0 text-foreground leading-6",
-      copyable && "flex items-start gap-1",
+      copyable && "flex items-start gap-(--qy-space-1)",
       className,
     ),
     "data-slot": "description-details",

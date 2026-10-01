@@ -24,7 +24,7 @@ export function Tabs({
   return (
     <TabsPrimitive.Root
       className={cn(
-        "flex flex-col gap-2 data-[orientation=vertical]:flex-row",
+        "flex flex-col gap-(--qy-space-2) data-[orientation=vertical]:flex-row",
         className,
       )}
       data-slot="tabs"
@@ -46,11 +46,11 @@ export function TabsList({
   return (
     <TabsPrimitive.List
       className={cn(
-        "relative z-0 flex w-fit items-center justify-center gap-x-0.5 text-muted-foreground",
+        "relative z-0 flex w-fit items-center justify-center gap-x-[calc(var(--qy-space-1)*0.5)] text-muted-foreground",
         "data-[orientation=vertical]:flex-col",
         variant === "default"
-          ? "rounded-lg bg-muted p-0.5 text-muted-foreground inset-shadow-track"
-          : "data-[orientation=vertical]:px-1 data-[orientation=horizontal]:py-1 *:data-[slot=tabs-tab]:hover:bg-accent",
+          ? "rounded-lg bg-muted p-[calc(var(--qy-space-1)*0.5)] text-muted-foreground inset-shadow-track"
+          : "data-[orientation=vertical]:px-(--qy-space-1) data-[orientation=horizontal]:py-(--qy-space-1) *:data-[slot=tabs-tab]:hover:bg-accent",
         className,
       )}
       data-size={size}
@@ -88,7 +88,7 @@ export function TabsTab({
   return (
     <TabsPrimitive.Tab
       className={cn(
-        "touch-target relative flex shrink-0 grow cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent font-medium text-base outline-none transition-[color,background-color,box-shadow] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-disabled:pointer-events-none data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start data-active:text-foreground data-disabled:opacity-64 sm:text-sm",
+        "touch-target relative flex shrink-0 grow cursor-pointer items-center justify-center whitespace-nowrap rounded-md border border-transparent font-medium text-base outline-none transition-[color,background-color,box-shadow] hover:text-foreground focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring data-disabled:pointer-events-none data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start data-active:text-foreground data-disabled:opacity-64 sm:text-sm",
         segmentedControlItemLayoutClassName,
         segmentedControlItemSizeClassNames[resolvedSize],
         className,

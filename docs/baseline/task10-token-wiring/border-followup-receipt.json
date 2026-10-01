@@ -1,0 +1,29 @@
+{
+  "change": "Restore destructive solid button border-destructive; keep destructive-fill backgrounds and on-fill text",
+  "tests": {
+    "status": "PASS",
+    "count": 12,
+    "files": [
+      "test/button.test.tsx",
+      "test/text-role-merging.test.tsx"
+    ],
+    "command": "pnpm --filter @qingye/ui exec vitest run test/button.test.tsx test/button-loading.test.tsx test/text-role-merging.test.tsx",
+    "unmatchedFilter": "test/button-loading.test.tsx does not exist; observed 2 files/12 tests"
+  },
+  "typecheck": {
+    "status": "PASS",
+    "command": "pnpm --filter @qingye/ui typecheck"
+  },
+  "browserBorder": "NOT_RUN; A will retest",
+  "priorBrowserText": "A observed light 5.848–6.421 and dark 6.421–7.295 across normal/hover/pressed",
+  "logs": {
+    "tests": {
+      "path": "docs/baseline/task10-token-wiring/border-tests.txt",
+      "sha256": "1c49ca7c1c1f347d57e2518fca622db630440346a452695f772f4d1a6360597e"
+    },
+    "typecheck": {
+      "path": "docs/baseline/task10-token-wiring/border-typecheck.txt",
+      "sha256": "129cf9397241364ba47845d97011c34df91d9e56c853b3d177a305526d864760"
+    }
+  }
+}

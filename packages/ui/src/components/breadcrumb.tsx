@@ -23,7 +23,7 @@ export function BreadcrumbList({
   return (
     <ol
       className={cn(
-        "wrap-break-word flex flex-wrap items-center gap-1.5 text-muted-foreground text-sm sm:gap-2.5",
+        "wrap-break-word flex flex-wrap items-center gap-[calc(var(--qy-space-1)*1.5)] text-muted-foreground text-sm sm:gap-[calc(var(--qy-space-1)*2.5)]",
         className,
       )}
       data-slot="breadcrumb-list"
@@ -38,7 +38,7 @@ export function BreadcrumbItem({
 }: React.ComponentProps<"li">): React.ReactElement {
   return (
     <li
-      className={cn("inline-flex items-center gap-1.5", className)}
+      className={cn("inline-flex items-center gap-[calc(var(--qy-space-1)*1.5)]", className)}
       data-slot="breadcrumb-item"
       {...props}
     />
@@ -52,7 +52,7 @@ export function BreadcrumbLink({
 }: useRender.ComponentProps<"a">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+      "rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background",
       className,
     ),
     "data-slot": "breadcrumb-link",

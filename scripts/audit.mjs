@@ -1,59 +1,131 @@
-// Sweeps every component playground in light/dark at desktop and phone widths
-// and reports page errors, console errors, horizontal overflow and demos that
-// rendered nothing. Requires the docs dev server (pnpm dev).
+// Sweeps every component playground and reports page errors, console errors,
+// horizontal overflow, empty demos and children wider than their container.
+// Requires the docs dev server (pnpm dev).
 //
-//   node scripts/audit.mjs [slug…]
-import { existsSync, readdirSync } from "node:fs";
-import { homedir } from "node:os";
-import { join } from "node:path";
-import { chromium } from "playwright-core";
+//   node scripts/audit.mjs [slug…] [--only light-desktop,dark-mobile] [--report file.json]
+//
+// Exit code is 1 when anything was reported, so it can gate a release.
+import { readdirSync, writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { measurePlayground } from "./audit-measure.mjs";
+import { closeWithTimeout, selectVariants, withBrowser } from "./browser-runtime.mjs";
+
+const args = process.argv.slice(2);
+const valueFlags = new Set(["--only", "--report"]);
+for (let i = 0; i < args.length; i++) {
+  if (!args[i].startsWith("--")) continue;
+  if (!valueFlags.has(args[i])) throw new Error(`unknown flag: ${args[i]}`);
+  if (!args[i + 1] || args[i + 1].startsWith("--")) throw new Error(`missing value for ${args[i]}`);
+  i++;
+}
+const flag = (name) => {
+  const i = args.indexOf(name);
+  return i >= 0 ? args[i + 1] : undefined;
+};
+const reportPath = flag("--report");
+const requested = args.filter((a, i) => !a.startsWith("--") && !valueFlags.has(args[i - 1]));
 
 const base = process.env.DOCS_URL ?? "http://localhost:5180";
-const slugs = process.argv.slice(2).length
-  ? process.argv.slice(2)
-  : readdirSync("apps/docs/src/content").filter((d) => !d.startsWith("."));
-const shell = join(homedir(), "Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell");
-const launch = () => chromium.launch(existsSync(shell) ? { executablePath: shell } : {});
-let browser = await launch();
-const variants = [
-  { name: "light-desktop", theme: "light", width: 1100, height: 900 },
-  { name: "dark-mobile", theme: "dark", width: 390, height: 844, mobile: true },
-];
+const slugs = requested.length
+  ? requested
+  : readdirSync(fileURLToPath(new URL("../apps/docs/src/content", import.meta.url)), { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith(".")).map((d) => d.name).sort();
+
+const variants = selectVariants(flag("--only"));
+
+/** One page, measured. Page listeners are isolated per navigation. */
+async function inspect(page, slug, v, measurements) {
+  const found = [];
+  const pageError = (e) => found.push(`pageerror ${e.message.slice(0, 140)}`);
+  const consoleError = (m) => {
+    if (m.type() === "error") found.push(`console ${m.text().slice(0, 140)}`);
+  };
+  const crash = () => found.push("renderer crashed");
+  page.on("pageerror", pageError);
+  page.on("console", consoleError);
+  page.on("crash", crash);
+  try {
+    await page.goto(`${base}/playground/${slug}?theme=${v.theme}`, {
+      waitUntil: "networkidle",
+      timeout: 30000,
+    });
+    await page.waitForFunction(() =>
+      document.querySelector("[data-playground] [data-demo]") ||
+      [...document.querySelectorAll("[data-playground] > p")].some((p) => p.textContent.trim() === "还没有示例。"),
+    undefined, { timeout: 15000 });
+    await page.waitForTimeout(250);
+
+    // Explicit gate self-check: only the runner's fault-injection option sets
+    // this environment flag. Normal docs and audit runs are unchanged.
+    if (process.env.AUDIT_FIXTURE_OVERFLOW === "1") {
+      await page.evaluate(() => {
+        const fixture = document.createElement("div");
+        fixture.style.cssText = "width:2000px;height:20px;flex-shrink:0";
+        fixture.textContent = "audit overflow failure fixture";
+        document.querySelector("[data-demo]").append(fixture);
+      });
+    }
+    const result = await page.evaluate(measurePlayground);
+    measurements.push({ slug, variant: v.name, ...result });
+
+    if (result.demos === 0) found.push("no demos");
+    if (result.overflow > 1) found.push(`page overflow ${result.overflow}px`);
+    if (result.empty.length) found.push(`empty demos: ${result.empty.join(", ")}`);
+    if (result.invalidDeclarations.length) found.push(`invalid overflow declaration: ${result.invalidDeclarations.map((d) => `${d.demo}: ${d.value}`).join("; ")}`);
+    if (result.over.length) found.push(`wider than its container: ${result.over.map((item) => `${item.demo}: ${item.element} by ${item.excess}px`).join("; ")}`);
+  } catch (error) {
+    found.push(`load ${error.message.split("\n")[0].slice(0, 140)}`);
+  } finally {
+    page.off("pageerror", pageError);
+    page.off("console", consoleError);
+    page.off("crash", crash);
+  }
+  return found;
+}
 
 const problems = [];
-for (const slug of slugs) {
-  for (const v of variants) {
-    if (!browser.isConnected()) browser = await launch();
-    const errors = [];
-    let context;
-    try {
-      context = await browser.newContext({ viewport: { width: v.width, height: v.height }, isMobile: !!v.mobile, hasTouch: !!v.mobile, colorScheme: v.theme, reducedMotion: "reduce" });
-      const page = await context.newPage();
-      page.on("pageerror", (e) => errors.push(`pageerror ${e.message.slice(0, 140)}`));
-      page.on("console", (m) => { if (m.type() === "error") errors.push(`console ${m.text().slice(0, 140)}`); });
-      page.on("crash", () => errors.push("renderer crashed"));
-      await page.goto(`${base}/playground/${slug}?theme=${v.theme}`, { waitUntil: "networkidle", timeout: 30000 });
-      await page.waitForSelector("[data-playground] section, [data-playground] p", { timeout: 15000 });
-      await page.waitForTimeout(250);
-      const r = await page.evaluate(() => {
-        const overflow = document.documentElement.scrollWidth - window.innerWidth;
-        const empty = [...document.querySelectorAll("[data-demo]")]
-          .filter((s) => { const frame = s.lastElementChild; return frame && frame.getBoundingClientRect().height < 40 && !frame.textContent.trim(); })
-          .map((s) => s.getAttribute("data-demo"));
-        return { overflow, empty, demos: document.querySelectorAll("[data-demo]").length };
+const measurements = [];
+let lifecycle;
+const started = Date.now();
+let interrupted = false;
+const onInterrupt = () => { interrupted = true; };
+process.on("SIGINT", onInterrupt);
+process.on("SIGTERM", onInterrupt);
+try {
+  await withBrowser(async (browser, state) => {
+    lifecycle = state;
+    // Reuse one context and tab per emulation variant to scan serially and
+    // reduce resource overhead.
+    for (const v of variants) {
+      if (interrupted) throw new Error("audit interrupted");
+      const context = await browser.newContext({
+        viewport: { width: v.width, height: v.height },
+        isMobile: Boolean(v.mobile), hasTouch: Boolean(v.mobile),
+        colorScheme: v.theme, reducedMotion: "reduce",
       });
-      if (r.demos === 0) errors.push("no demos");
-      if (r.overflow > 1) errors.push(`page overflow ${r.overflow}px`);
-      if (r.empty.length) errors.push(`empty demos: ${r.empty.join(", ")}`);
-    } catch (e) {
-      errors.push(`load ${e.message.split("\n")[0].slice(0, 120)}`);
-    } finally {
-      await context?.close().catch(() => {});
+      try {
+        const page = await context.newPage();
+        for (const slug of slugs) {
+          if (interrupted) throw new Error("audit interrupted");
+          if (!browser.isConnected()) throw new Error(`browser disconnected before ${slug} [${v.name}]`);
+          for (const message of await inspect(page, slug, v, measurements)) {
+            problems.push(`${slug} [${v.name}] ${message}`);
+          }
+          console.log(`inspected ${slug} [${v.name}]`);
+        }
+      } finally {
+        try { await closeWithTimeout(context, "context"); }
+        catch (error) { problems.push(`${v.name} context cleanup ${error.message}`); }
+      }
     }
-    for (const e of errors) problems.push(`${slug} [${v.name}] ${e}`);
-  }
+  });
+} catch (error) {
+  problems.push(`harness ${error.message}`);
 }
-await browser.close().catch(() => {});
-console.log(`audited ${slugs.length} components × ${variants.length} variants`);
+process.off("SIGINT", onInterrupt);
+process.off("SIGTERM", onInterrupt);
+const report = { base, slugs, variants: variants.map((v) => v.name), lifecycle, elapsedMs: Date.now() - started, measurements, problems };
+if (reportPath) writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+console.log(`audited ${slugs.length} components × ${variants.length} variants (${measurements.length} measured)`);
 console.log(problems.length ? problems.join("\n") : "no problems");
 process.exitCode = problems.length ? 1 : 0;

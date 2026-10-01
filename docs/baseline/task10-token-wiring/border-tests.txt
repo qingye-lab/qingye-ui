@@ -1,0 +1,11 @@
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/button.test.tsx (2 tests) 107ms
+ ✓ test/text-role-merging.test.tsx (10 tests) 91ms
+
+ Test Files  2 passed (2)
+      Tests  12 passed (12)
+   Start at  22:22:43
+   Duration  1.14s (transform 132ms, setup 404ms, import 330ms, tests 197ms, environment 1.08s)
+

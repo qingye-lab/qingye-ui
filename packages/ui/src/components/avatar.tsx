@@ -111,7 +111,7 @@ export function AvatarGroupCount({
   return (
     <div
       className={cn(
-        "relative inline-flex size-8 min-w-fit shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--color-background),var(--color-foreground)_6%)] px-1 font-medium text-muted-foreground text-xs ring-2 ring-background numeric",
+        "relative inline-flex size-8 min-w-fit shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--color-background),var(--color-foreground)_6%)] px-(--qy-space-1) font-medium text-muted-foreground text-xs ring-2 ring-background numeric",
         // Matches the size of the avatars it follows.
         "group-has-data-[size=xs]/avatar-group:size-5 group-has-data-[size=xs]/avatar-group:text-[0.625rem] group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=sm]/avatar-group:text-[0.6875rem] group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=lg]/avatar-group:text-sm group-has-data-[size=xl]/avatar-group:size-12 group-has-data-[size=xl]/avatar-group:text-base",
         className,

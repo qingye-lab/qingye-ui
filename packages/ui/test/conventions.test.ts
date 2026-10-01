@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
+import { inspectColors } from "./color-check";
 
 /**
  * Convention checks over every component source file. STANDARDS.md is prose;
@@ -31,15 +32,14 @@ describe("component conventions", () => {
   });
 
   test("no hard-coded greys: colours come from semantic tokens or utilities", () => {
-    // Palette scales and raw hex/rgb values bypass the token layer and break
-    // theming. Chart series are the one sanctioned exception.
     const offenders: string[] = [];
-    for (const [file, source] of table) {
-      const hits = source.match(/\b(?:bg|text|border|ring|fill|stroke|from|to|via)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b/g);
-      if (hits) offenders.push(`${file}: ${[...new Set(hits)].join(", ")}`);
-      const withoutAttributeSelectors = source.replace(/\[[^\]]*#[0-9a-f]{3,6}[^\]]*\]/gi, "");
-      const raw = withoutAttributeSelectors.match(/(?<![\w-])#(?:[0-9a-f]{3}|[0-9a-f]{6})\b/gi);
-      if (raw) offenders.push(`${file}: ${[...new Set(raw)].join(", ")}`);
+    for (const file of files) {
+      // Parse original TSX, not the regex comment-stripped source. Selector
+      // literals stay separate from paint values, including arbitrary values.
+      const result = inspectColors(read(file), file);
+      for (const hit of result.violations) {
+        offenders.push(`${file}:${hit.line} (${hit.context}): ${hit.value}`);
+      }
     }
     expect(offenders).toEqual([]);
   });

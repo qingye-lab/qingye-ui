@@ -39,7 +39,7 @@ test("hyperlinks stay focusable and the ellipsis is decorative", () => {
     </BreadcrumbLink>,
   );
   const link = screen.getByRole("link", { name: "文档" });
-  expect(link).toHaveClass("custom", "hover:text-foreground", "focus-visible:ring-2");
+  expect(link).toHaveClass("custom", "hover:text-foreground", "focus-visible:ring-[length:var(--qy-focus-button-width)]");
   expect(link).toHaveAttribute("data-slot", "breadcrumb-link");
 
   render(<BreadcrumbEllipsis />);

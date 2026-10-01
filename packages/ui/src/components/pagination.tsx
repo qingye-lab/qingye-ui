@@ -35,7 +35,7 @@ export function PaginationContent({
 }: React.ComponentProps<"ul">): React.ReactElement {
   return (
     <ul
-      className={cn("flex flex-row items-center gap-1", className)}
+      className={cn("flex flex-row items-center gap-(--qy-space-1)", className)}
       data-slot="pagination-content"
       {...props}
     />

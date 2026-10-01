@@ -3,7 +3,14 @@ import { extendTailwindMerge } from "tailwind-merge";
 
 const mergeClasses = extendTailwindMerge({
   extend: {
-    theme: { text: ["display-lg", "display", "title", "heading", "body", "label", "caption"] },
+    theme: {
+      text: [
+        "display-lg", "display", "title", "heading", "body", "label", "caption",
+        "button", "button-mobile", "button-lg", "button-xs",
+        "field-input", "field-input-mobile", "field-label", "field-label-mobile",
+      ],
+      radius: ["control", "panel"],
+    },
   },
 });
 

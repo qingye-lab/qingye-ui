@@ -69,7 +69,7 @@ export function NativeSelect({
   return (
     <span
       className={cn(
-        "relative inline-flex w-full min-w-36 rounded-lg border border-input bg-background not-dark:bg-clip-padding text-base text-foreground shadow-xs/5 ring-ring/24 transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] not-has-[select:disabled]:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] has-focus-visible:border-ring has-focus-visible:ring-[3px] has-aria-invalid:border-destructive/36 has-focus-visible:has-aria-invalid:border-destructive/64 has-focus-visible:has-aria-invalid:ring-destructive/16 has-[select:disabled]:pointer-events-none has-[select:disabled]:opacity-64 has-[select:disabled,select:focus-visible,select[aria-invalid=true]]:shadow-none sm:text-sm dark:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-has-[select:disabled]:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+        "relative inline-flex w-full min-w-36 rounded-control border border-input bg-background not-dark:bg-clip-padding text-field-input-mobile text-foreground shadow-xs/5 ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-has-[select:disabled]:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] has-focus-visible:border-ring has-focus-visible:ring-[length:var(--qy-focus-input-width)] has-aria-invalid:border-destructive/36 has-focus-visible:has-aria-invalid:border-destructive/64 has-focus-visible:has-aria-invalid:ring-destructive/16 has-[select:disabled]:pointer-events-none has-[select:disabled]:opacity-64 has-[select:disabled,select:focus-visible,select[aria-invalid=true]]:shadow-none sm:text-field-input dark:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-has-[select:disabled]:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)]",
         className,
       )}
       data-size={size}
@@ -77,9 +77,9 @@ export function NativeSelect({
     >
       <FieldPrimitive.Control
         className={cn(
-          "h-8.5 w-full min-w-0 cursor-default appearance-none truncate rounded-[inherit] bg-transparent ps-[calc(--spacing(3)-1px)] pe-[calc(--spacing(8.5)-1px)] text-foreground outline-none pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] has-[option[value='']:checked]:text-muted-foreground/72 sm:h-7.5 sm:pe-[calc(--spacing(8)-1px)] [&_optgroup]:bg-popover [&_optgroup]:text-muted-foreground [&_option]:bg-popover [&_option]:text-popover-foreground",
+          "h-8.5 w-full min-w-0 cursor-default appearance-none truncate rounded-[inherit] bg-transparent ps-[calc(var(--qy-space-3)-1px)] pe-[calc(1.125rem+var(--qy-space-4)-1px)] text-foreground outline-none pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] has-[option[value='']:checked]:text-muted-foreground/72 sm:h-7.5 sm:pe-[calc(1rem+var(--qy-space-4)-1px)] [&_optgroup]:bg-popover [&_optgroup]:text-muted-foreground [&_option]:bg-popover [&_option]:text-popover-foreground",
           size === "sm" &&
-            "h-7.5 ps-[calc(--spacing(2.5)-1px)] pe-[calc(--spacing(7.5)-1px)] sm:h-6.5 sm:pe-[calc(--spacing(7)-1px)]",
+            "h-7.5 ps-[calc(calc(var(--qy-space-1)*2.5)-1px)] pe-[calc(1.125rem+var(--qy-space-3)-1px)] sm:h-6.5 sm:pe-[calc(1rem+var(--qy-space-3)-1px)]",
           size === "lg" && "h-9.5 sm:h-8.5",
           selectClassName,
         )}
@@ -99,8 +99,8 @@ export function NativeSelect({
         className={cn(
           "pointer-events-none absolute top-1/2 size-4.5 -translate-y-1/2 opacity-80 sm:size-4",
           size === "sm"
-            ? "end-[calc(--spacing(1.5)-1px)]"
-            : "end-[calc(--spacing(2)-1px)]",
+            ? "end-[calc(var(--qy-space-1)*1.5-1px)]"
+            : "end-[calc(var(--qy-space-2)-1px)]",
         )}
         data-slot="native-select-icon"
       />

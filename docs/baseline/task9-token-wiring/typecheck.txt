@@ -1,0 +1,4 @@
+
+> @qingye/ui@0.2.0 typecheck /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+> tsc -p tsconfig.json --noEmit
+

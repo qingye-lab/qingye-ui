@@ -37,7 +37,7 @@ test("AlertAction spans the full row on phone widths", () => {
 
 test("AlertAction stacks below the text on phone widths", () => {
   renderAlert(true);
-  expect(actionOf().className).toContain("max-sm:mt-2");
+  expect(actionOf().className).toContain("max-sm:mt-(--qy-space-2)");
 });
 
 test("AlertAction sits on the trailing column from sm up", () => {

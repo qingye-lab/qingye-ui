@@ -3,7 +3,7 @@ import { InstallTabs } from "@/components/install-tabs";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
 import { releaseDownloadCommand, releaseFile, SITE } from "@/lib/site";
 
-const providers = `import { ThemeProvider } from "@qingye/ui";
+const providers = `import { ThemeProvider } from "@qingye/ui/components/theme-provider";
 import { ToastProvider } from "@qingye/ui/components/toast";
 import { TooltipProvider } from "@qingye/ui/components/tooltip";
 import { createRoot } from "react-dom/client";
@@ -20,7 +20,7 @@ createRoot(document.getElementById("root")!).render(
   </ThemeProvider>,
 );`;
 
-const usage = `import { Button } from "@qingye/ui";
+const usage = `import { Button } from "@qingye/ui/components/button";
 import { toastManager } from "@qingye/ui/components/toast";
 
 export function SaveButton() {
@@ -57,12 +57,12 @@ export default function InstallationPage() {
 
       <H2 id="install">安装包</H2>
       <P>
-        当前版本 {SITE.version} 通过 GitHub Release 分发。仓库目前为私有，请使用有仓库访问权限且已登录的 GitHub CLI 下载，再安装本地包：
+        通过 GitHub Release 分发。仓库目前为私有，请先用有仓库访问权限的账号登录 GitHub CLI，再复制以下命令下载并安装最新版本：
       </P>
-      <CodeBlock code={releaseDownloadCommand} lang="text" title="下载发布包" />
-      <InstallTabs pkg={`./${releaseFile}`} />
+      <P className="text-sm text-muted-foreground">本站构建版本为 v{SITE.version}；以下命令下载 GitHub 标记的最新 Release，不按本站构建版本固定 tag。未发布的源码变化不会自动进入安装包。</P>
+      <InstallTabs downloadCommand={releaseDownloadCommand} pkg={`./${releaseFile}`} />
       <P className="text-[0.875rem] text-muted-foreground">
-        其他版本见 <A href={`${SITE.repo}/releases`}>Releases</A>。下载指定版本的包，可以让每次安装得到完全相同的代码。
+        保留并提交 <Code>{releaseFile}</Code>、<Code>package.json</Code> 和 lock 文件。日常 <Code>pnpm install</Code> 按 lock 复现；主动升级时重新运行上述命令。发布记录见 <A href={`${SITE.repo}/releases`}>Releases</A>。
       </P>
 
       <H2 id="styles">引入样式</H2>
@@ -133,7 +133,7 @@ export default function InstallationPage() {
       <CodeBlock code={usage} title="save-button.tsx" />
       <H3 id="per-component">按组件导入</H3>
       <P>
-        根入口可以被打包工具摇树（包内只有 CSS 声明了副作用）。如果希望依赖关系一目了然，或者打包工具不做摇树，可以从单个组件的入口导入：
+        推荐从单组件入口导入，避免加载未使用组件的依赖。根入口 <Code>@qingye/ui</Code> 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装可选 peer <Code>recharts</Code> 和 <Code>@tanstack/react-table</Code>：
       </P>
       <CodeBlock code={`import { Button } from "@qingye/ui/components/button";\nimport { Select, SelectItem, SelectPopup } from "@qingye/ui/components/select";`} />
       <P>

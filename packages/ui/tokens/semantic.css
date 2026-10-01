@@ -56,6 +56,8 @@
     /* Status: solid marks the state, foreground is readable text on the page. */
     --qy-danger: var(--qy-red-500);
     --qy-danger-foreground: var(--qy-red-700);
+    --qy-danger-fill: var(--qy-red-700);
+    --qy-danger-on-fill: var(--qy-white);
     --qy-warning: var(--qy-amber-500);
     --qy-warning-foreground: var(--qy-amber-700);
     --qy-success: var(--qy-emerald-500);
@@ -123,6 +125,8 @@
 
     --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
     --qy-danger-foreground: var(--qy-red-400);
+    --qy-danger-fill: var(--qy-red-700);
+    --qy-danger-on-fill: var(--qy-white);
     --qy-warning: var(--qy-amber-500);
     --qy-warning-foreground: var(--qy-amber-400);
     --qy-success: var(--qy-emerald-500);

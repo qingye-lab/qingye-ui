@@ -30,7 +30,7 @@ function PreviewFallback() {
 export default function HomePage() {
   useDocumentTitle();
   const [example, setExample] = useState("dashboard");
-  const install = `${releaseDownloadCommand}\npnpm add ./${releaseFile}`;
+  const install = `${releaseDownloadCommand} && pnpm add ./${releaseFile}`;
   return (
     <>
       <main className="qy-home outline-none" id="main" tabIndex={-1}>
@@ -67,7 +67,7 @@ export default function HomePage() {
           <Card className="qy-install-command"><code>{install}</code><CopyCodeButton value={install} /></Card>
         </section>
       </main>
-      <footer className="qy-home-footer"><div><span className="font-medium text-foreground">Qingye UI</span><span>青野 · 用心构建</span></div><div><ExternalLink href="https://base-ui.com">Base UI</ExternalLink><ExternalLink href="https://coss.com/ui">coss ui</ExternalLink><a className="focus-ring inline-flex items-center gap-1.5" href={SITE.repo} rel="noreferrer" target="_blank"><GitHubIcon className="size-3.5" />GitHub</a><span>v{SITE.version} · MIT</span></div></footer>
+      <footer className="qy-home-footer"><div><span className="font-medium text-foreground">Qingye UI</span><span>青野 · 用心构建</span></div><div><ExternalLink href="https://base-ui.com">Base UI</ExternalLink><ExternalLink href="https://coss.com/ui">coss ui</ExternalLink><a className="focus-ring inline-flex items-center gap-1.5" href={SITE.repo} rel="noreferrer" target="_blank"><GitHubIcon className="size-3.5" />GitHub</a><span>构建版本 v{SITE.version} · MIT</span></div></footer>
     </>
   );
 }

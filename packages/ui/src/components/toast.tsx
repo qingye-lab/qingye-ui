@@ -79,7 +79,7 @@ function Toasts({
       <Toast.Viewport
         aria-label={messages.notifications}
         className={cn(
-          "fixed z-60 mx-auto flex w-[calc(100%-var(--toast-inset)*2)] max-w-90 [--toast-inset:--spacing(4)] sm:[--toast-inset:--spacing(8)]",
+          "fixed z-60 mx-auto flex w-[calc(100%-var(--toast-inset)*2)] max-w-90 [--toast-inset:var(--qy-space-4)] sm:[--toast-inset:var(--qy-space-8)]",
           // Vertical positioning
           "data-[position*=top]:top-(--toast-inset)",
           "data-[position*=bottom]:bottom-(--toast-inset)",
@@ -113,7 +113,7 @@ function Toasts({
                 "data-[position*=top]:after:top-full",
                 "data-[position*=bottom]:after:bottom-full",
                 // Define some variables
-                "[--toast-calc-height:var(--toast-frontmost-height,var(--toast-height))] [--toast-gap:--spacing(3)] [--toast-peek:--spacing(3)] [--toast-scale:calc(max(0,1-(var(--toast-index)*.1)))] [--toast-shrink:calc(1-var(--toast-scale))]",
+                "[--toast-calc-height:var(--toast-frontmost-height,var(--toast-height))] [--toast-gap:var(--qy-space-3)] [--toast-peek:--spacing(3)] [--toast-scale:calc(max(0,1-(var(--toast-index)*.1)))] [--toast-shrink:calc(1-var(--toast-scale))]",
                 // Define offset-y variable
                 "data-[position*=top]:[--toast-calc-offset-y:calc(var(--toast-offset-y)+var(--toast-index)*var(--toast-gap)+var(--toast-swipe-movement-y))]",
                 "data-[position*=bottom]:[--toast-calc-offset-y:calc(var(--toast-offset-y)*-1+var(--toast-index)*var(--toast-gap)*-1+var(--toast-swipe-movement-y))]",
@@ -150,10 +150,10 @@ function Toasts({
               toast={toast}
             >
               <Toast.Content
-                className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm transition-opacity duration-250 data-behind:not-data-expanded:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100"
+                className="pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm transition-opacity duration-250 data-behind:not-data-expanded:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100"
                 data-slot="toast-content"
               >
-                <div className="flex min-w-0 gap-2">
+                <div className="flex min-w-0 gap-(--qy-space-2)">
                   {Icon && (
                     <div
                       className="[&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
@@ -163,7 +163,7 @@ function Toasts({
                     </div>
                   )}
 
-                  <div className="flex flex-col gap-0.5">
+                  <div className="flex flex-col gap-[calc(var(--qy-space-1)*0.5)]">
                     <Toast.Title
                       className="font-medium"
                       data-slot="toast-title"
@@ -174,7 +174,7 @@ function Toasts({
                     />
                   </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-1">
+                <div className="flex shrink-0 items-center gap-(--qy-space-1)">
                   {toast.actionProps && (
                     <Toast.Action
                       className={buttonVariants({ size: "xs" })}
@@ -251,12 +251,12 @@ function AnchoredToasts({
                 toast={toast}
               >
                 {tooltipStyle ? (
-                  <Toast.Content className="pointer-events-auto px-2 py-1">
+                  <Toast.Content className="pointer-events-auto px-(--qy-space-2) py-(--qy-space-1)">
                     <Toast.Title data-slot="toast-title" />
                   </Toast.Content>
                 ) : (
-                  <Toast.Content className="pointer-events-auto flex items-center justify-between gap-1.5 overflow-hidden px-3.5 py-3 text-sm">
-                    <div className="flex gap-2">
+                  <Toast.Content className="pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm">
+                    <div className="flex gap-(--qy-space-2)">
                       {Icon && (
                         <div
                           className="[&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
@@ -266,7 +266,7 @@ function AnchoredToasts({
                         </div>
                       )}
 
-                      <div className="flex flex-col gap-0.5">
+                      <div className="flex flex-col gap-[calc(var(--qy-space-1)*0.5)]">
                         <Toast.Title
                           className="font-medium"
                           data-slot="toast-title"

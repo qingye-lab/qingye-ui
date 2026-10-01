@@ -1,0 +1,48 @@
+{
+  "status": "PASS_LATEST_RELEASE_INSTALL_AND_REPEAT",
+  "verifiedRelease": "v0.2.0",
+  "asset": "qingye-ui-0.2.0.tgz",
+  "downloadedAs": "qingye-ui.tgz",
+  "sha256": "413c79956acb98830f00bc6fe6e5d1fac395707fab88ee8b242cf6a40b05eeab",
+  "latestSelection": "gh release download without tag; authenticated private repository access",
+  "command": "gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz",
+  "packageManager": "pnpm 10.12.1",
+  "node": "24.20.0",
+  "firstInstall": "PASS @qingye/ui 0.2.0 installed (21 dependencies); pnpm add exit 0",
+  "repeatInstall": {
+    "exitCode": 0,
+    "stdout": "Progress: resolved 0, reused 1, downloaded 0, added 0\nAlready up to date\nProgress: resolved 21, reused 21, downloaded 0, added 0, done\n\nDone in 669ms using pnpm v10.12.1\n"
+  },
+  "manifest": {
+    "name": "qingye-ui-install-check",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+      "@qingye/ui": "file:qingye-ui.tgz"
+    }
+  },
+  "subpathImports": {
+    "Button": true,
+    "ThemeProvider": true,
+    "ToastProvider": true,
+    "TooltipProvider": true
+  },
+  "rootImport": {
+    "status": "FAIL_RELEASE_0.2.0_EXISTING_LIMIT",
+    "error": "ERR_MODULE_NOT_FOUND: recharts imported from dist/components/chart.js",
+    "response": "Quick-start imports changed to explicit component entry points; library root API not modified"
+  },
+  "limits": [
+    "No future Release or automatic background upgrade tested; latest is selected when the command is run.",
+    "Published v0.2.0 was tested, not an unpublished new package.",
+    "npm/yarn variants and Tailwind/precompiled consumer build matrix were not executed."
+  ],
+  "samePathUpdateFixture": {
+    "status": "PASS",
+    "method": "Offline tarball metadata-only fixture from the downloaded release, version 0.2.1-install-probe; no new release published.",
+    "installedVersionAfterReplacement": "0.2.1-install-probe",
+    "restoredPublishedVersion": "0.2.0",
+    "result": "pnpm add ./qingye-ui.tgz refreshed the dependency after bytes changed at the same stable file path."
+  }
+}

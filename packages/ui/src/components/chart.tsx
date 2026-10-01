@@ -134,7 +134,7 @@ export function ChartContainer({
           "[&_.recharts-dot[stroke='#fff']]:stroke-card [&_.recharts-sector[stroke='#fff']]:stroke-card",
           "[&_.recharts-label]:fill-muted-foreground [&_.recharts-layer]:outline-hidden [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
           // Recharts' keyboard layer focuses the surface; show it like any control.
-          "has-[.recharts-surface:focus-visible]:ring-2 has-[.recharts-surface:focus-visible]:ring-ring has-[.recharts-surface:focus-visible]:ring-offset-1 has-[.recharts-surface:focus-visible]:ring-offset-background",
+          "has-[.recharts-surface:focus-visible]:ring-[length:var(--qy-focus-button-width)] has-[.recharts-surface:focus-visible]:ring-ring has-[.recharts-surface:focus-visible]:ring-offset-[length:var(--qy-focus-button-offset)] has-[.recharts-surface:focus-visible]:ring-offset-background",
           className,
         )}
         data-chart={chartId}
@@ -290,13 +290,13 @@ export function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "relative grid min-w-32 items-start gap-1.5 rounded-lg border bg-popover not-dark:bg-clip-padding px-2.5 py-2 text-popover-foreground text-xs shadow-lg/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+        "relative grid min-w-32 items-start gap-[calc(var(--qy-space-1)*1.5)] rounded-lg border bg-popover not-dark:bg-clip-padding px-[calc(var(--qy-space-1)*2.5)] py-(--qy-space-2) text-popover-foreground text-xs shadow-lg/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
         className,
       )}
       data-slot="chart-tooltip"
     >
       {nestLabel ? null : heading}
-      <div className="grid gap-1.5">
+      <div className="grid gap-[calc(var(--qy-space-1)*1.5)]">
         {items.map((item, index) => {
           const itemConfig = getPayloadConfig(config, item, itemKey(item));
           const indicatorColor =
@@ -309,7 +309,7 @@ export function ChartTooltipContent({
           return (
             <div
               className={cn(
-                "flex w-full flex-wrap gap-2 [&>svg]:size-2.5 [&>svg]:text-muted-foreground",
+                "flex w-full flex-wrap gap-(--qy-space-2) [&>svg]:size-2.5 [&>svg]:text-muted-foreground",
                 indicator === "dot" ? "items-center" : "items-stretch",
               )}
               data-slot="chart-tooltip-item"
@@ -336,7 +336,7 @@ export function ChartTooltipContent({
                         indicator === "line" && "w-1",
                         indicator === "dashed" &&
                           "w-0 border-[1.5px] border-dashed bg-transparent",
-                        nestLabel && indicator === "dashed" && "my-0.5",
+                        nestLabel && indicator === "dashed" && "my-[calc(var(--qy-space-1)*0.5)]",
                       )}
                       data-slot="chart-tooltip-indicator"
                       style={
@@ -346,11 +346,11 @@ export function ChartTooltipContent({
                   )}
                   <div
                     className={cn(
-                      "flex flex-1 justify-between gap-4 leading-none",
+                      "flex flex-1 justify-between gap-(--qy-space-4) leading-none",
                       nestLabel ? "items-end" : "items-center",
                     )}
                   >
-                    <div className="grid gap-1.5">
+                    <div className="grid gap-[calc(var(--qy-space-1)*1.5)]">
                       {nestLabel ? heading : null}
                       <span className="text-muted-foreground">{name}</span>
                     </div>
@@ -366,7 +366,7 @@ export function ChartTooltipContent({
                             ? item.value.toLocaleString(code)
                             : `${item.value}`}
                         {item.unit ? (
-                          <span className="ms-0.5 font-normal text-muted-foreground">
+                          <span className="ms-[calc(var(--qy-space-1)*0.5)] font-normal text-muted-foreground">
                             {item.unit}
                           </span>
                         ) : null}
@@ -411,8 +411,8 @@ export function ChartLegendContent({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5",
-        verticalAlign === "top" ? "pb-3" : "pt-3",
+        "flex flex-wrap items-center justify-center gap-x-(--qy-space-4) gap-y-[calc(var(--qy-space-1)*1.5)]",
+        verticalAlign === "top" ? "pb-(--qy-space-3)" : "pt-(--qy-space-3)",
         className,
       )}
       data-slot="chart-legend"
@@ -428,7 +428,7 @@ export function ChartLegendContent({
 
         return (
           <div
-            className="flex items-center gap-1.5 text-muted-foreground [&>svg]:size-3"
+            className="flex items-center gap-[calc(var(--qy-space-1)*1.5)] text-muted-foreground [&>svg]:size-3"
             data-slot="chart-legend-item"
             key={`${item.value ?? index}`}
           >

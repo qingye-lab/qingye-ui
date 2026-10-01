@@ -38,7 +38,7 @@ export function NavigationMenuList({
 }: NavigationMenuPrimitive.List.Props): React.ReactElement {
   return (
     <NavigationMenuPrimitive.List
-      className={cn("flex list-none items-center gap-0.5", className)}
+      className={cn("flex list-none items-center gap-[calc(var(--qy-space-1)*0.5)]", className)}
       data-slot="navigation-menu-list"
       {...props}
     />
@@ -60,7 +60,7 @@ export function NavigationMenuItem({
 
 /** Top-level trigger styling; also apply it to plain top-level links. */
 export const navigationMenuTriggerStyle = cva(
-  "relative inline-flex h-9 w-max shrink-0 cursor-default select-none items-center justify-center gap-1 whitespace-nowrap rounded-lg border border-transparent px-[calc(--spacing(3)-1px)] py-0 font-medium text-base text-foreground no-underline outline-none transition-colors pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background data-disabled:pointer-events-none data-active:bg-accent data-popup-open:bg-accent data-pressed:bg-accent data-disabled:opacity-64 sm:h-8 sm:text-sm [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "relative inline-flex h-9 w-max shrink-0 cursor-default select-none items-center justify-center gap-(--qy-space-1) whitespace-nowrap rounded-lg border border-transparent px-[calc(var(--qy-space-3)-1px)] py-0 font-medium text-base text-foreground no-underline outline-none transition-colors pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 hover:bg-accent focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background data-disabled:pointer-events-none data-active:bg-accent data-popup-open:bg-accent data-pressed:bg-accent data-disabled:opacity-64 sm:h-8 sm:text-sm [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
 );
 
 export function NavigationMenuTrigger({
@@ -92,7 +92,7 @@ export function NavigationMenuContent({
   return (
     <NavigationMenuPrimitive.Content
       className={cn(
-        "w-max max-w-[calc(100vw-2rem)] p-1 transition-[opacity,translate] duration-(--qy-duration-base) data-ending-style:opacity-0 data-starting-style:opacity-0 data-starting-style:data-[activation-direction=left]:-translate-x-6 data-starting-style:data-[activation-direction=right]:translate-x-6 data-ending-style:data-[activation-direction=left]:translate-x-6 data-ending-style:data-[activation-direction=right]:-translate-x-6",
+        "w-max max-w-[calc(100vw-2rem)] p-(--qy-space-1) transition-[opacity,translate] duration-(--qy-duration-base) data-ending-style:opacity-0 data-starting-style:opacity-0 data-starting-style:data-[activation-direction=left]:-translate-x-6 data-starting-style:data-[activation-direction=right]:translate-x-6 data-ending-style:data-[activation-direction=left]:translate-x-6 data-ending-style:data-[activation-direction=right]:-translate-x-6",
         className,
       )}
       data-slot="navigation-menu-content"
@@ -164,7 +164,7 @@ export function NavigationMenuLink({
   return (
     <NavigationMenuPrimitive.Link
       className={cn(
-        "grid grid-cols-[minmax(0,1fr)] content-start items-center gap-x-3 gap-y-0.5 rounded-sm px-2.5 py-2 text-base text-foreground no-underline outline-none transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:ring-2 focus-visible:ring-ring data-active:bg-accent has-data-[slot=navigation-menu-link-icon]:grid-cols-[auto_minmax(0,1fr)] sm:text-sm",
+        "grid grid-cols-[minmax(0,1fr)] content-start items-center gap-x-(--qy-space-3) gap-y-[calc(var(--qy-space-1)*0.5)] rounded-sm px-[calc(var(--qy-space-1)*2.5)] py-(--qy-space-2) text-base text-foreground no-underline outline-none transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring data-active:bg-accent has-data-[slot=navigation-menu-link-icon]:grid-cols-[auto_minmax(0,1fr)] sm:text-sm",
         className,
       )}
       data-slot="navigation-menu-link"

@@ -222,7 +222,7 @@ export default function MotionPage() {
 
       <H2 id="rules">编写组件时的约定</H2>
       <Ul>
-        <li>时长只用令牌：按压 100ms，反馈 140ms，展开与滑动 220ms，抽屉 450ms 配合 <Code>--qy-ease-drawer</Code>。</li>
+        <li>新增动效优先使用角色：press 为100ms，fast 为140ms，feedback 为180ms，base 为220ms。继承的 Drawer 450ms、Toast 250ms 等部位保留各自时长，不代表所有动效已接入同一角色；抽屉缓动用 <Code>--qy-ease-drawer</Code>。</li>
         <li>缓动默认 <Code>--qy-ease-out</Code>，不使用回弹；通知的成功脉冲是唯一例外。</li>
         <li>
           只动画 <Code>opacity</Code>、<Code>scale</Code>、<Code>translate</Code>、颜色与必要的 <Code>height</Code>，不动画会引起布局抖动的宽度和位置（指示条除外）。

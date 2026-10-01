@@ -1,0 +1,64 @@
+
+> @qingye/ui@0.2.0 test /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+> vitest run --maxWorkers\=2
+
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/combobox.test.tsx (17 tests) 1045ms
+ ✓ test/data-table.test.tsx (9 tests) 694ms
+ ✓ test/date-range-picker.test.tsx (9 tests) 1149ms
+   ✓ two clicks pick a range, apply it and close  407ms
+ ✓ test/autocomplete.test.tsx (12 tests) 739ms
+ ✓ test/tree.test.tsx (4 tests) 441ms
+ ✓ test/toast.test.tsx (11 tests) 444ms
+ ✓ test/overlays.test.tsx (7 tests) 367ms
+ ✓ test/date-time-picker.test.tsx (4 tests) 448ms
+   ✓ picking a day keeps the time; editing the time keeps the day  315ms
+ ✓ test/tag-input.test.tsx (13 tests) 362ms
+ ✓ test/command.test.tsx (7 tests) 285ms
+ ✓ test/carousel.test.tsx (5 tests) 250ms
+ ✓ test/date-picker.test.tsx (7 tests) 269ms
+ ✓ test/resizable.test.tsx (10 tests) 237ms
+ ✓ test/tabs.test.tsx (4 tests) 180ms
+ ✓ test/select.test.tsx (2 tests) 170ms
+ ✓ test/search-input.test.tsx (5 tests) 167ms
+ ✓ test/chart.test.tsx (6 tests) 151ms
+ ✓ test/field.test.tsx (10 tests) 149ms
+ ✓ test/disclosure.test.tsx (3 tests) 147ms
+ ✓ test/color-check.test.ts (49 tests) 149ms
+ ✓ test/file-upload.test.tsx (7 tests) 129ms
+ ✓ test/conventions.test.ts (7 tests) 110ms
+ ✓ test/progress-circle.test.tsx (3 tests) 83ms
+ ✓ test/steps.test.tsx (4 tests) 114ms
+ ✓ test/theme-provider.test.tsx (7 tests) 115ms
+ ✓ test/password-input.test.tsx (4 tests) 132ms
+ ✓ test/pagination.test.tsx (2 tests) 92ms
+ ✓ test/native-select.test.tsx (4 tests) 118ms
+ ✓ test/sidebar.test.tsx (1 test) 119ms
+ ✓ test/copy-button.test.tsx (7 tests) 98ms
+ ✓ test/slider.test.tsx (2 tests) 93ms
+ ✓ test/code-block.test.tsx (4 tests) 100ms
+ ✓ test/breadcrumb.test.tsx (2 tests) 75ms
+ ✓ test/page-header.test.tsx (2 tests) 80ms
+ ✓ test/theme-axes.test.tsx (5 tests) 87ms
+ ✓ test/description-list.test.tsx (2 tests) 82ms
+ ✓ test/button.test.tsx (2 tests) 82ms
+ ✓ test/timeline.test.tsx (2 tests) 72ms
+ ✓ test/item.test.tsx (2 tests) 70ms
+ ✓ test/typography.test.tsx (3 tests) 111ms
+ ✓ test/text-role-merging.test.tsx (10 tests) 71ms
+ ✓ test/alert.test.tsx (6 tests) 70ms
+ ✓ test/layout.test.tsx (4 tests) 62ms
+ ✓ test/stat.test.tsx (2 tests) 88ms
+ ✓ test/table.test.tsx (1 test) 72ms
+ ✓ test/empty.test.tsx (2 tests) 23ms
+ ✓ test/status-dot.test.tsx (2 tests) 21ms
+ ✓ test/motion-provider.test.tsx (2 tests) 10ms
+ ✓ test/radius-role-merging.test.ts (2 tests) 4ms
+
+ Test Files  49 passed (49)
+      Tests  297 passed (297)
+   Start at  22:12:15
+   Duration  18.71s (transform 854ms, setup 3.19s, import 10.12s, tests 10.22s, environment 9.76s)
+

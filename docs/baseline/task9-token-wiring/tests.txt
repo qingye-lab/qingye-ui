@@ -1,0 +1,62 @@
+
+> @qingye/ui@0.2.0 test /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+> vitest run --maxWorkers\=2
+
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/autocomplete.test.tsx (12 tests) 674ms
+ ✓ test/data-table.test.tsx (9 tests) 738ms
+ ✓ test/date-range-picker.test.tsx (9 tests) 1171ms
+   ✓ two clicks pick a range, apply it and close  416ms
+ ✓ test/combobox.test.tsx (17 tests) 1127ms
+ ✓ test/tree.test.tsx (4 tests) 438ms
+ ✓ test/date-time-picker.test.tsx (4 tests) 423ms
+ ✓ test/overlays.test.tsx (7 tests) 351ms
+ ✓ test/tag-input.test.tsx (13 tests) 345ms
+ ✓ test/command.test.tsx (7 tests) 261ms
+ ✓ test/carousel.test.tsx (5 tests) 254ms
+ ✓ test/toast.test.tsx (11 tests) 424ms
+ ✓ test/date-picker.test.tsx (7 tests) 326ms
+ ✓ test/resizable.test.tsx (10 tests) 232ms
+ ✓ test/field.test.tsx (10 tests) 139ms
+ ✓ test/select.test.tsx (2 tests) 192ms
+ ✓ test/tabs.test.tsx (4 tests) 207ms
+ ✓ test/search-input.test.tsx (5 tests) 174ms
+ ✓ test/chart.test.tsx (6 tests) 143ms
+ ✓ test/password-input.test.tsx (4 tests) 111ms
+ ✓ test/conventions.test.ts (7 tests) 115ms
+ ✓ test/color-check.test.ts (49 tests) 134ms
+ ✓ test/file-upload.test.tsx (7 tests) 128ms
+ ✓ test/theme-provider.test.tsx (7 tests) 112ms
+ ✓ test/disclosure.test.tsx (3 tests) 135ms
+ ✓ test/sidebar.test.tsx (1 test) 104ms
+ ✓ test/steps.test.tsx (4 tests) 112ms
+ ✓ test/description-list.test.tsx (2 tests) 84ms
+ ✓ test/copy-button.test.tsx (7 tests) 98ms
+ ✓ test/native-select.test.tsx (4 tests) 108ms
+ ✓ test/slider.test.tsx (2 tests) 93ms
+ ✓ test/code-block.test.tsx (4 tests) 92ms
+ ✓ test/typography.test.tsx (3 tests) 76ms
+ ✓ test/theme-axes.test.tsx (5 tests) 85ms
+ ✓ test/pagination.test.tsx (2 tests) 109ms
+ ✓ test/progress-circle.test.tsx (3 tests) 113ms
+ ✓ test/text-role-merging.test.tsx (10 tests) 75ms
+ ✓ test/page-header.test.tsx (2 tests) 85ms
+ ✓ test/button.test.tsx (2 tests) 83ms
+ ✓ test/breadcrumb.test.tsx (2 tests) 88ms
+ ✓ test/layout.test.tsx (4 tests) 66ms
+ ✓ test/item.test.tsx (2 tests) 78ms
+ ✓ test/stat.test.tsx (2 tests) 63ms
+ ✓ test/table.test.tsx (1 test) 59ms
+ ✓ test/timeline.test.tsx (2 tests) 80ms
+ ✓ test/alert.test.tsx (6 tests) 72ms
+ ✓ test/empty.test.tsx (2 tests) 21ms
+ ✓ test/status-dot.test.tsx (2 tests) 20ms
+ ✓ test/motion-provider.test.tsx (2 tests) 10ms
+
+ Test Files  48 passed (48)
+      Tests  295 passed (295)
+   Start at  22:09:16
+   Duration  18.47s (transform 733ms, setup 2.98s, import 9.73s, tests 10.23s, environment 9.81s)
+

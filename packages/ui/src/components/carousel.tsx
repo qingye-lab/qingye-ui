@@ -248,7 +248,7 @@ export function Carousel({
       <section
         aria-roledescription={messages.carousel}
         className={cn(
-          "relative flex min-w-0 flex-col gap-3 [--carousel-gap:--spacing(4)] [--carousel-per-view:1]",
+          "relative flex min-w-0 flex-col gap-(--qy-space-3) [--carousel-gap:var(--qy-space-4)] [--carousel-per-view:1]",
           className,
         )}
         data-slot="carousel"
@@ -290,7 +290,7 @@ export function CarouselContent({
   return (
     <div
       className={cn(
-        "flex snap-x snap-mandatory gap-(--carousel-gap) overflow-x-auto overscroll-x-contain rounded-xl outline-none [scrollbar-width:none] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background [&::-webkit-scrollbar]:hidden",
+        "flex snap-x snap-mandatory gap-(--carousel-gap) overflow-x-auto overscroll-x-contain rounded-xl outline-none [scrollbar-width:none] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background [&::-webkit-scrollbar]:hidden",
         className,
       )}
       data-slot="carousel-content"
@@ -416,7 +416,7 @@ export function CarouselDots({
         <button
           aria-current={i === index ? "true" : undefined}
           aria-label={messages.slideOf(i + 1, count)}
-          className="group/dot touch-target relative flex h-6 cursor-pointer items-center rounded-full px-1 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="group/dot touch-target relative flex h-6 cursor-pointer items-center rounded-full px-(--qy-space-1) outline-none focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring"
           data-slot="carousel-dot"
           // biome-ignore lint/suspicious/noArrayIndexKey: dots are positional
           key={i}

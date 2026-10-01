@@ -41,7 +41,7 @@ export function AutocompleteInput({
       {startAddon && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-y-0 start-px z-10 flex items-center ps-[calc(--spacing(3)-1px)] opacity-80 has-[+[data-size=sm]]:ps-[calc(--spacing(2.5)-1px)] [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:-mx-0.5"
+          className="pointer-events-none absolute inset-y-0 start-px z-10 flex items-center ps-[calc(var(--qy-space-3)-1px)] opacity-80 has-[+[data-size=sm]]:ps-[calc(calc(var(--qy-space-1)*2.5)-1px)] [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:-mx-0.5"
           data-slot="autocomplete-start-addon"
         >
           {startAddon}
@@ -50,10 +50,11 @@ export function AutocompleteInput({
       <AutocompletePrimitive.Input
         className={cn(
           startAddon &&
-            "data-[size=sm]:*:data-[slot=autocomplete-input]:ps-[calc(--spacing(7.5)-1px)] *:data-[slot=autocomplete-input]:ps-[calc(--spacing(8.5)-1px)] sm:data-[size=sm]:*:data-[slot=autocomplete-input]:ps-[calc(--spacing(7)-1px)] sm:*:data-[slot=autocomplete-input]:ps-[calc(--spacing(8)-1px)]",
+            "data-[size=sm]:*:data-[slot=autocomplete-input]:ps-[calc(1.125rem+var(--qy-space-3)-1px)] *:data-[slot=autocomplete-input]:ps-[calc(1.125rem+var(--qy-space-4)-1px)] sm:data-[size=sm]:*:data-[slot=autocomplete-input]:ps-[calc(1rem+var(--qy-space-3)-1px)] sm:*:data-[slot=autocomplete-input]:ps-[calc(1rem+var(--qy-space-4)-1px)]",
+          // Reserve fixed glyph width/centering/end offset; only the text gap follows spacing.
           sizeValue === "sm"
-            ? "has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-6.5"
-            : "has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-7",
+            ? "has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-[calc(1.125rem+7px+var(--qy-space-1)/4)] sm:has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-[calc(1rem+6px+var(--qy-space-1))]"
+            : "has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-[calc(1.125rem+9px+var(--qy-space-1)/4)] sm:has-[+[data-slot=autocomplete-trigger],+[data-slot=autocomplete-clear]]:*:data-[slot=autocomplete-input]:pe-[calc(1rem+8px+var(--qy-space-1))]",
           className,
         )}
         data-slot="autocomplete-input"
@@ -140,7 +141,7 @@ export function AutocompleteItem({
   return (
     <AutocompletePrimitive.Item
       className={cn(
-        "flex min-h-8 pointer-coarse:min-h-11 cursor-default select-none items-center rounded-sm px-2 py-1 text-base outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm",
+        "flex min-h-8 pointer-coarse:min-h-11 cursor-default select-none items-center rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm",
         className,
       )}
       data-slot="autocomplete-item"
@@ -157,7 +158,7 @@ export function AutocompleteSeparator({
 }: AutocompletePrimitive.Separator.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.Separator
-      className={cn("mx-2 my-1 h-px bg-border last:hidden", className)}
+      className={cn("mx-(--qy-space-2) my-(--qy-space-1) h-px bg-border last:hidden", className)}
       data-slot="autocomplete-separator"
       {...props}
     />
@@ -170,7 +171,7 @@ export function AutocompleteGroup({
 }: AutocompletePrimitive.Group.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.Group
-      className={cn("[[role=group]+&]:mt-1.5", className)}
+      className={cn("[[role=group]+&]:mt-[calc(var(--qy-space-1)*1.5)]", className)}
       data-slot="autocomplete-group"
       {...props}
     />
@@ -184,7 +185,7 @@ export function AutocompleteGroupLabel({
   return (
     <AutocompletePrimitive.GroupLabel
       className={cn(
-        "px-2 py-1.5 font-medium text-muted-foreground text-xs",
+        "px-(--qy-space-2) py-[calc(var(--qy-space-1)*1.5)] font-medium text-muted-foreground text-xs",
         className,
       )}
       data-slot="autocomplete-group-label"
@@ -200,7 +201,7 @@ export function AutocompleteEmpty({
   return (
     <AutocompletePrimitive.Empty
       className={cn(
-        "not-empty:p-2 text-center text-base text-muted-foreground sm:text-sm",
+        "not-empty:p-(--qy-space-2) text-center text-base text-muted-foreground sm:text-sm",
         className,
       )}
       data-slot="autocomplete-empty"
@@ -233,7 +234,7 @@ export function AutocompleteList({
     <ScrollArea overscrollContain scrollbarGutter scrollFade>
       <AutocompletePrimitive.List
         className={cn(
-          "not-empty:scroll-py-1 not-empty:p-1 in-data-has-overflow-y:pe-3",
+          "not-empty:scroll-py-(--qy-space-1) not-empty:p-(--qy-space-1) in-data-has-overflow-y:pe-(--qy-space-3)",
           className,
         )}
         data-slot="autocomplete-list"
@@ -270,7 +271,7 @@ export function AutocompleteStatus({
   return (
     <AutocompletePrimitive.Status
       className={cn(
-        "px-3 py-2 font-medium text-muted-foreground text-xs empty:m-0 empty:p-0",
+        "px-(--qy-space-3) py-(--qy-space-2) font-medium text-muted-foreground text-xs empty:m-0 empty:p-0",
         className,
       )}
       data-slot="autocomplete-status"

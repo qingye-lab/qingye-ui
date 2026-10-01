@@ -20,7 +20,7 @@ export function PageHeader({
 }: useRender.ComponentProps<"header">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex min-w-0 flex-wrap items-start gap-x-3 gap-y-4",
+      "flex min-w-0 flex-wrap items-start gap-x-(--qy-space-3) gap-y-(--qy-space-4)",
       "*:data-[slot=breadcrumb]:-mb-1 *:data-[slot=breadcrumb]:basis-full *:data-[slot=page-header-nav]:-mb-1 *:data-[slot=page-header-nav]:basis-full",
       className,
     ),
@@ -41,7 +41,7 @@ export function PageHeaderNav({
   ...props
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
-    className: cn("flex min-w-0 items-center gap-2", className),
+    className: cn("flex min-w-0 items-center gap-(--qy-space-2)", className),
     "data-slot": "page-header-nav",
   };
 
@@ -65,7 +65,7 @@ export function PageHeaderBack({
   return (
     <Button
       aria-label={messages.back}
-      className={cn("shrink-0 max-sm:-my-0.5 sm:my-0.5", className)}
+      className={cn("shrink-0 max-sm:-my-0.5 sm:my-[calc(var(--qy-space-1)*0.5)]", className)}
       data-slot="page-header-back"
       size="icon-sm"
       variant="outline"
@@ -86,7 +86,7 @@ export function PageHeaderContent({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "me-3 flex min-w-0 flex-[1_1_15rem] flex-col gap-1",
+      "me-(--qy-space-3) flex min-w-0 flex-[1_1_15rem] flex-col gap-(--qy-space-1)",
       className,
     ),
     "data-slot": "page-header-content",
@@ -147,7 +147,7 @@ export function PageHeaderMeta({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "mt-2 flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2 text-muted-foreground text-sm [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
+      "mt-(--qy-space-2) flex min-w-0 flex-wrap items-center gap-x-(--qy-space-4) gap-y-(--qy-space-2) text-muted-foreground text-sm [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:shrink-0",
       className,
     ),
     "data-slot": "page-header-meta",
@@ -167,7 +167,7 @@ export function PageHeaderActions({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex max-w-full shrink-0 flex-wrap items-center gap-2",
+      "flex max-w-full shrink-0 flex-wrap items-center gap-(--qy-space-2)",
       className,
     ),
     "data-slot": "page-header-actions",

@@ -141,7 +141,7 @@ export function DateTimePicker({
               aria-labelledby={labelledBy}
               aria-readonly={readOnly || undefined}
               aria-required={required || undefined}
-              className={cn(showClear && (size === "sm" ? "pe-8 sm:pe-7" : "pe-9 sm:pe-8"))}
+              className={cn(showClear && (size === "sm" ? "pe-[calc(1.75rem+2px+var(--qy-space-1)/2)] sm:pe-[calc(1.5rem+2px+var(--qy-space-1)/2)]" : "pe-[calc(1.75rem+4px+var(--qy-space-1))] sm:pe-[calc(1.5rem+4px+var(--qy-space-1))]"))}
               disabled={disabled}
               icon={showClear ? null : undefined}
               id={fieldId}
@@ -169,7 +169,7 @@ export function DateTimePicker({
             {...(disabledDates ? { disabled: disabledDates } : {})}
           />
           <div
-            className="-mx-2 mt-2 flex items-center gap-2 border-t px-3 pt-2"
+            className="-mx-2 mt-(--qy-space-2) flex items-center gap-(--qy-space-2) border-t px-(--qy-space-3) pt-(--qy-space-2)"
             data-slot="date-time-picker-footer"
           >
             <label className="shrink-0 text-muted-foreground text-sm" htmlFor={`${fieldId}-time`}>
@@ -188,7 +188,7 @@ export function DateTimePicker({
               type="time"
               value={withSeconds ? time : time.slice(0, 5)}
             />
-            <div className="ms-auto flex items-center gap-1">
+            <div className="ms-auto flex items-center gap-(--qy-space-1)">
               <Button
                 onClick={() => {
                   const now = formatLocalDateTime(new Date());

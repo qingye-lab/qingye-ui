@@ -1,6 +1,6 @@
 {
   "name": "@qingye/ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A React component library: accessible primitives, a layered design token system, and light/dark themes.",
   "license": "MIT",
   "type": "module",

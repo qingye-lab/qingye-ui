@@ -2,6 +2,8 @@
 
 `@qingye/ui` is a React component library (Base UI + Tailwind CSS 4) adapted from coss ui (MIT), plus locally authored components, and its documentation site.
 
+**建设纲领：** `/Volumes/SUNSANG 1/Codex/demo/qingye/docs/ui-component-system-plan.md`（v3.0 定稿）。本文件是它的库侧执行摘要；涉及方向、优先级、验收标准时以纲领为准。纲领只读，不在本仓库内。
+
 ## Layout
 
 - `packages/ui/src/components/<name>.tsx` — one component per file.
@@ -10,6 +12,7 @@
 - `packages/ui/coss-source.json` — upstream SHA and the list of local adaptations per coss file.
 - `packages/ui/test/*.test.tsx` — Vitest + Testing Library.
 - `apps/docs/src/content/<name>/meta.ts` and `demos/NN-<id>.tsx` — documentation per component (see `apps/docs/src/lib/types.ts`).
+- `scripts/audit.mjs` — 跨主题跨断点的浏览器扫描；CI/Release 通过 `scripts/run-browser-audit.mjs` 使用构建后的 docs preview。
 
 ## Rules
 
@@ -18,8 +21,90 @@
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
 - Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
 
+### 主题三轴（不得混用）
+
+品牌、明暗、密度是三个独立维度，明暗默认使用 class，也可显式使用属性模式：
+
+| 轴 | 属性 | 写入方 | 约束 |
+|---|---|---|---|
+| 明暗 | `.light` / `.dark`（默认）；`attribute="data-theme"` 时为 `data-theme` | `ThemeProvider` 运行时 JS | 所选明暗标记保留给 `light`/`dark`，不得复用为品牌；见 `theme-provider.tsx` |
+| 密度 | `data-density` | 组件或容器 | 已有 `components.css` 的 `[data-density="compact"]` |
+| 品牌 | `data-brand` | 项目静态配置 | 项目视觉身份只写这里；当前约定为文档级 `html[data-brand]`，见 `docs/decisions/theme-axes.md` |
+
+**禁止**把品牌写进 `data-theme`：
+
+```css
+/* 禁止：显式 data-theme 模式会被 ThemeProvider 覆盖 */
+[data-theme="sentinel"] { --qy-primary: ...; }
+
+/* 正确 */
+html[data-brand="sentinel"] { --qy-primary: ...; }
+```
+
+### token 必须真实接管组件
+
+- **新增或修改 token 时，必须让组件实际消费它。** `--qy-control-*` 已接通 Button、Input、Select 的响应式尺寸；初始零引用只保留在 `docs/current-capabilities.baseline.json`，不能当作当前待办（见 `docs/decisions/control-dimensions.md`）。
+- 改完重生成 `node scripts/gen-capabilities.mjs` 与 `node scripts/token-ledger.mjs`，核对实际部位和转发链，再验证受影响的 computed 值；源码引用数不代表运行时生效，旧指纹观测失效后须重测。
+- 组件固定几何尺寸不要依赖"调大全局 spacing 后顺便变大"，要有自己的尺寸角色（见 `STANDARDS.md` 第 2 节）。
+- 间距优先复用 `layout.tsx` 已有的 `gap-(--qy-space-N)` 写法，不要新造一套。
+- **不得为通过检查把散落值机械改名成新 token**。新增 token 须说明角色、作用范围、修改入口。
+
+### 控件尺寸关系
+
+改动尺寸时区分三个概念，不要混用同一个数值（见 `STANDARDS.md` 第 2 节）：
+
+| 概念 | 含义 |
+|---|---|
+| 控件外部尺寸 | 组件占位高度，由 `--qy-control-*` 控制 |
+| 内部可用尺寸 | 边框内可交互区域。Input 外层有边框，其内部高度与外层总高度相关 |
+| 触摸目标 | 粗指针下的最小命中区，由 `--qy-touch-target` 控制 |
+
+移动端比桌面端高 4px，`sm:` 回到桌面尺寸——这是既有约定，不要"统一"掉。
+
+### 检查器与诊断
+
+- **禁止只用正则扫整份 TSX 决定规则。** `packages/ui/test/conventions.test.ts` 的颜色检查已调用 `color-check.ts`，用 TypeScript AST 从原始 TSX 提取 class/style，并识别 arbitrary paint value；消费端规则同样须用 AST。
+- `bg-[#191919]`、`bg-[rgb(25,25,25)]` 等漏报已修，正反例见 `packages/ui/test/color-check.test.ts`；不得重新引入先删除含 hex 方括号再检查颜色的逻辑。静态无法求值的表达式保留 unresolved，不能宣称运行时已验证。
+- 诊断结果区分 `PASS` / `FAIL` / `UNVERIFIED` / `NOT_RUN`，后两者不得当通过。
+
+### 视觉与重构
+
+- 本仓库允许大幅调整与重构，包括破坏性变更；**不得因为 TS 没报错就当作无影响**。破坏外观约定须在提交说明中显式写出。
+- 视觉基线变化须单独列出，不能藏在 refactor 名义下。
+- 截图差异用于**发现变化**，不自动判定变化好坏。**不得为让测试通过而更新全部截图。**
+- 无障碍与对比度：正文 ≥ 4.5:1，辅助文字与图形边界 ≥ 3:1，浅色与深色都要测真实前景/背景组合。44px 是本库触屏目标，**不得声称它是 WCAG 2.2 AA 的统一最小值**（2.5.8 基础要求为 24×24px）。
+
+## 已完成，不要重复实施
+
+| 项 | 说明 |
+|---|---|
+| 包名迁移 | 已完成。`@yanqing/ui` → `@qingye/ui`。**命名统一用 Qingye** |
+| catalog 重建 | 已完成。生成器 `packages/ui/scripts/gen-catalog.mjs` 已接入 `build` 链 |
+| `audit.mjs` 增强及门禁 | 首批几何/动画误报已修正；CI 与 Release 已接入构建后审计，见 `docs/browser-audit.md` |
+
+`docs/decisions/branding-and-examples.md` 中残留的 `@yanqing/ui` 是**历史叙述，保留原样**，不是待修问题。
+
 ## Commands
 
 - `pnpm dev` — docs site at http://localhost:5180 (`/playground/<name>` shows one component's demos bare).
 - `node scripts/shot.mjs <name>` — light/dark × desktop/mobile screenshots of the playground into /tmp/yq-shots.
+- `node scripts/audit.mjs [slug…] [--only light-desktop,dark-mobile]` — 扫描 playground，报告页面错误、控制台错误、水平溢出、空 demo、子元素溢出。直接运行需 docs server；`scripts/run-browser-audit.mjs` 管理构建后的 preview。发现问题或执行/清理失败时退出码非 0。
 - `pnpm --filter @qingye/ui typecheck` / `test` / `build`; `pnpm --filter docs typecheck`.
+
+## 开工前必查
+
+```bash
+cd "/Volumes/SUNSANG 1/Codex/qingye-ui"
+git log --oneline -3
+git status --short
+```
+
+- 若 HEAD 与纲领所述基线不同，先重跑受影响条目的核实，**不盲目按纲领行号修改**。
+- 若工作区非干净，先说明如何处理未提交改动，再开工。
+- 本仓库基线在一日内移动过三次，务必先查再动。
+
+## `audit.mjs` 的当前验证边界
+
+- 已补偿负边距、边框/padding、设备像素舍入及 `display:contents` / 0×0 包装层；孤立纯旋转动画按受限规则归一化，Slider 文字只允许明确声明的有限溢出预算。保留 2px 阈值，不跳过整个 SVG 或组件，详见 `docs/browser-audit.md`。
+- `.github/workflows/ci.yml` 与 `release.yml` 已在 Pack/发布之前接入审计；真实 GitHub 注入溢出验证过失败会阻断 Pack，不能沿用旧“不得接入 CI”的待办。后续真实 DateRangePicker 窄屏发现与修复证据见 `docs/baseline/2026-10-01-ci-date-range-failure/` 和 `2026-10-01-date-range-ci-followup/`。
+- 已保存的 352 页扫描、fixtures 与台账观测只证明对应源码/构建和所测状态，不保证未来零误报或全部交互无问题。新的报告须核对实际几何及声明预算，不能直接按旧误报分类豁免；Release 工作流的接入不等于 tag 发布执行已验证。
