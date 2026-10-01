@@ -44,19 +44,21 @@
   - 伪元素：`before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-*)-1px)]`
 - 浅色下有边框的表面加 `not-dark:bg-clip-padding`，深色下背景延伸到半透明边框下方。
 - 深色输入类控件底色 `dark:bg-input/32`，悬停 `dark:hover:bg-input/64`。
-- 阴影克制：控件 `shadow-xs/5`，浮层 `shadow-lg/5`。不使用超过 `shadow-lg` 的阴影，弹窗用 `shadow-overlay` token。
+- **实心按钮不带外投影**：层次由填充色和内高光建立。外投影会让按钮像塑料凸起，超出其他体系（Linear / Vercel / Radix 的实心按钮均无投影）。
+- 其余阴影克制：控件 `shadow-xs/5`，浮层 `shadow-lg/5`，弹窗用 `shadow-overlay` token。
 
 ## 4. 圆角
 
-| 元素 | 圆角 |
-|---|---|
-| 徽章、复选框 | `rounded-sm` / `rounded-[.25rem]` |
-| 菜单项、小按钮 | `rounded-md` |
-| 控件、浮层 | `rounded-lg` |
-| 提示条 | `rounded-xl` |
-| 卡片、弹窗 | `rounded-2xl` |
+| 元素 | 值 | 用途 |
+|---|---|---|
+| `rounded-xs` | 4px | 徽章、复选框 |
+| `rounded-sm` | 6px | 菜单项、标签、行内控件 |
+| `rounded-md` | 7.5px | 小号控件 |
+| `rounded-lg` | **8px** | 按钮、输入框、浮层——控件默认档 |
+| `rounded-xl` | 10px | 提示条、内嵌面板 |
+| `rounded-2xl` | 12px | 卡片、弹窗 |
 
-嵌套圆角：内层 = 外层 − 间距。内高光伪元素比宿主小 1px。
+控件默认 8px、卡片 12px，比模板常见的 10px / 16px 更紧。嵌套圆角：内层 = 外层 − 0.5px（或减内边距），保持同心；内高光伪元素比宿主小 1px。
 
 ## 5. 状态
 
@@ -65,7 +67,7 @@
 | 状态 | 写法 |
 |---|---|
 | 悬停 | 填充 `hover:bg-accent` 或叠加 `/90`；不改变尺寸 |
-| 按下 | `data-pressed` / `:active`，阴影收起；`qy-pressable` 提供 0.97 缩放 |
+| 按下 | `data-pressed` / `:active`，阴影收起；`qy-pressable` 提供按压反馈 |
 | 键盘焦点 | 按钮类：`focus-visible:ring-2 ring-ring ring-offset-1 ring-offset-background`；输入类：`focus-visible:border-ring ring-[3px] ring-ring/24` |
 | 禁用 | `opacity-64` + `pointer-events-none`（或 `cursor-not-allowed`） |
 | 无效 | `aria-invalid:border-destructive/36`；聚焦时 `border-destructive/64 ring-destructive/16`；深色 `ring-destructive/24` |
@@ -85,9 +87,24 @@
 
 ## 7. 排版
 
-- 字重只用 400 / 500 / 600。标题 600，标签与按钮 500。
+参照对象是 Linear / Vercel / Radix 三家实测出的排版系统，不是浏览器默认值。
+
+- **字距随字号递减，不是全局常量**。字号越大，负字距越强：
+
+  | 文字档位 | 字号 | 字距 |
+  |---|---|---|
+  | `display-lg` | 40px | −0.032em |
+  | `display` | 32px | −0.032em |
+  | `title` | 18px | −0.022em |
+  | `heading` | 13px | −0.01em |
+  | `body` / `label` | 14 / 13px | −0.006em |
+  | `caption` | 12px | 0 |
+
+  一律用 `text-display` / `text-title` 这类语义类，不要手写 `text-[18px]` 或 `tracking-*`；这些值由 `tokens/components.css` 的 `--qy-text-*-tracking` 驱动。
+
+- 字重只用 400 / 500 / 600。标题 600，标签与按钮 500。不使用 700（大标题靠字号和字距建立层级，不靠加粗）。
 - 数字列、计数、时间、金额使用 `numeric`（等宽数字）。
-- 中文与英文混排不加额外空格处理；不对中文使用负字距。
+- **中文不套用负字距**：中日韩文本的 `letter-spacing` 保持 0，负字距只作用于拉丁文（`typography.tsx` 已用 `:lang()` 处理）。
 - 长文本：单行 `truncate`；多行说明 `text-balance` / `text-pretty`。
 
 ## 8. 无障碍
