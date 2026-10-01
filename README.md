@@ -40,6 +40,25 @@ export function App() {
 
 完整说明见文档站（`pnpm dev` 后访问 http://localhost:5180）。
 
+## 文档站部署
+
+在线文档：[Yanqing UI](https://yanqing-ui.pages.dev/)。
+
+文档站使用 Cloudflare Pages 原生 GitHub 关联部署，源仓库为 `qingye-lab/yanqing-ui`，生产分支为 `main`。推送到 `main` 后由 Cloudflare 拉取源码、构建并发布，无需在 GitHub Actions 中保存 Cloudflare API Token。
+
+| Cloudflare Pages 配置 | 值 |
+| --- | --- |
+| 项目名称 | `yanqing-ui` |
+| 根目录 | 仓库根目录 |
+| 构建命令 | `pnpm docs:build` |
+| 输出目录 | `apps/docs/dist` |
+| `NODE_VERSION` | `24.20.0` |
+| `PNPM_VERSION` | `10.12.1` |
+
+构建结果是 React 单页应用，使用 Pages 默认的路由回退；不要在输出根目录添加 `404.html`，否则直接访问组件文档或刷新页面会失去 SPA 回退。
+
+部署选择与验证方式见 [Cloudflare Pages 部署决策](./docs/decisions/cloudflare-pages.md)。
+
 ## 开发
 
 ```sh
