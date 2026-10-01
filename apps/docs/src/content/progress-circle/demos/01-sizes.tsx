@@ -1,4 +1,4 @@
-import { ProgressCircle } from "@yanqing/ui/components/progress-circle";
+import { ProgressCircle } from "@qingye/ui/components/progress-circle";
 
 export const meta = { title: "尺寸", description: "环的粗细随尺寸增长但增长得更慢，大环依然轻盈。" };
 

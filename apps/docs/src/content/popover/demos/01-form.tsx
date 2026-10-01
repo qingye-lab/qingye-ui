@@ -1,8 +1,8 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Field } from "@yanqing/ui/components/field";
-import { Form } from "@yanqing/ui/components/form";
-import { Popover, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@yanqing/ui/components/popover";
-import { Textarea } from "@yanqing/ui/components/textarea";
+import { Button } from "@qingye/ui/components/button";
+import { Field } from "@qingye/ui/components/field";
+import { Form } from "@qingye/ui/components/form";
+import { Popover, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Textarea } from "@qingye/ui/components/textarea";
 
 export const meta = { title: "基础用法", description: "点击打开，承载一个简短的表单。" };
 

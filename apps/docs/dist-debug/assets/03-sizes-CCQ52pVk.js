@@ -1,4 +1,0 @@
-const _03Sizes = 'import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui";\n\nexport const meta = { title: "尺寸", description: "sm 用于侧栏等紧凑区域，lg 留给一个视图里最重要的数字。" };\n\nconst sizes = [\n  { size: "sm", label: "小" },\n  { size: "default", label: "默认" },\n  { size: "lg", label: "大" },\n] as const;\n\nexport default function Demo() {\n  return (\n    <div className="flex w-full flex-wrap items-end justify-around gap-x-10 gap-y-8">\n      {sizes.map(({ size, label }) => (\n        <Stat key={size} size={size}>\n          <StatLabel>本月营收 · {label}</StatLabel>\n          <StatValue>\n            <StatUnit>¥</StatUnit>\n            128,460\n          </StatValue>\n          <StatDescription>\n            <StatDelta trend="up">+6.8%</StatDelta>\n            环比\n          </StatDescription>\n        </Stat>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _03Sizes as default
-};

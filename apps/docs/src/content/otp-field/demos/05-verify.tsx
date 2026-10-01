@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { OTPField, OTPFieldInput } from "@yanqing/ui/components/otp-field";
-import { Spinner } from "@yanqing/ui/components/spinner";
+import { Button } from "@qingye/ui/components/button";
+import { OTPField, OTPFieldInput } from "@qingye/ui/components/otp-field";
+import { Spinner } from "@qingye/ui/components/spinner";
 import { CircleCheckIcon } from "lucide-react";
 import { useState } from "react";
 

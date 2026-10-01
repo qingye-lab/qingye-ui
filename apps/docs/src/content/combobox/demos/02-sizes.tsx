@@ -1,4 +1,4 @@
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@yanqing/ui/components/combobox";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@qingye/ui/components/combobox";
 
 export const meta = { title: "尺寸与禁用" };
 

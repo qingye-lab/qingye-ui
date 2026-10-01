@@ -1,6 +1,6 @@
-import type { TreeNode } from "@yanqing/ui/components/tree";
-import { Button } from "@yanqing/ui/components/button";
-import { Tree } from "@yanqing/ui/components/tree";
+import type { TreeNode } from "@qingye/ui/components/tree";
+import { Button } from "@qingye/ui/components/button";
+import { Tree } from "@qingye/ui/components/tree";
 import { type ReactNode, useState } from "react";
 
 export const meta = { title: "受控展开与选中", description: "用 expanded 与 value 在外部控制，例如“全部展开”和联动详情。" };

@@ -1,4 +1,0 @@
-const _01Basic = 'import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui";\nimport { UserIcon } from "lucide-react";\n\nexport const meta = {\n  title: "图片与回退",\n  description: "没有图片或图片加载失败时显示 AvatarFallback，通常放姓氏或图标。",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Avatar>\n        <AvatarImage\n          alt="林晓雯"\n          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces"\n        />\n        <AvatarFallback>林</AvatarFallback>\n      </Avatar>\n      <Avatar>\n        <AvatarFallback>周</AvatarFallback>\n      </Avatar>\n      <Avatar>\n        <AvatarFallback>\n          <UserIcon aria-hidden="true" className="size-4 text-muted-foreground" />\n        </AvatarFallback>\n      </Avatar>\n    </>\n  );\n}\n';
-export {
-  _01Basic as default
-};

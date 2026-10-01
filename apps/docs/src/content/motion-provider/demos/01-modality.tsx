@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Kbd } from "@yanqing/ui/components/kbd";
-import { MotionProvider } from "@yanqing/ui/components/motion-provider";
+import { Button } from "@qingye/ui/components/button";
+import { Kbd } from "@qingye/ui/components/kbd";
+import { MotionProvider } from "@qingye/ui/components/motion-provider";
 import { useEffect, useState } from "react";
 
 export const meta = {

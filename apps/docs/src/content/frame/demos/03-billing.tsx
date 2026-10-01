@@ -1,7 +1,7 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui/components/frame";
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@yanqing/ui/components/meter";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@qingye/ui/components/frame";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye/ui/components/meter";
 
 export const meta = { title: "组合：账单概览", description: "套餐、用量与扣款信息分成三层：面板放主要内容，底部放次要信息。" };
 

@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 
 export const meta = { title: "在说明文字中" };
 

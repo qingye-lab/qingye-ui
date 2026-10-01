@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@yanqing/ui/components/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@qingye/ui/components/resizable";
 import { FileTextIcon, FolderIcon } from "lucide-react";
 
 export const meta = { title: "基础用法", description: "拖动中间的分隔条，或聚焦后用方向键调整。" };

@@ -1,4 +1,0 @@
-const _04Range = 'import { Field, FieldDescription, FieldLabel, NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui";\n\nexport const meta = { title: "范围与步长", description: "到达边界时对应按钮自动禁用；Shift + ↑ ↓ 按 largeStep 调整。" };\n\nexport default function Demo() {\n  return (\n    <Field className="w-full max-w-xs">\n      <FieldLabel>告警阈值（°C）</FieldLabel>\n      <NumberField defaultValue={38} largeStep={5} max={40} min={20} step={0.5}>\n        <NumberFieldGroup>\n          <NumberFieldDecrement />\n          <NumberFieldInput />\n          <NumberFieldIncrement />\n        </NumberFieldGroup>\n      </NumberField>\n      <FieldDescription>机房温度超过阈值时通知值班人员，范围 20 – 40。</FieldDescription>\n    </Field>\n  );\n}\n';
-export {
-  _04Range as default
-};

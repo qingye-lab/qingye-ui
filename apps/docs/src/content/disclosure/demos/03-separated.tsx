@@ -1,6 +1,6 @@
-import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui/components/disclosure";
-import { Label } from "@yanqing/ui/components/label";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@qingye/ui/components/disclosure";
+import { Label } from "@qingye/ui/components/label";
+import { Switch } from "@qingye/ui/components/switch";
 
 export const meta = {
   title: "收尾一个区域",

@@ -56,7 +56,7 @@ test("reads a function value at click time and keeps icon-only buttons labelled"
 test("shows and announces the failure when the browser rejects the write", async () => {
   mockClipboard(() => Promise.reject(new Error("denied")));
   const onCopyError = vi.fn();
-  render(<CopyButton onCopyError={onCopyError} value="https://yanqing.app" />);
+  render(<CopyButton onCopyError={onCopyError} value="https://qingye.example" />);
   const button = screen.getByRole("button");
 
   await act(async () => {

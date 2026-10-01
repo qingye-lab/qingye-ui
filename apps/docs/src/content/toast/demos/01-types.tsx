@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { toastManager } from "@yanqing/ui/components/toast";
+import { Button } from "@qingye/ui/components/button";
+import { toastManager } from "@qingye/ui/components/toast";
 
 export const meta = { title: "类型", description: "success、error、warning、info 对应不同的图标与颜色。" };
 

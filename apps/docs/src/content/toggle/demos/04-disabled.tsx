@@ -1,4 +1,4 @@
-import { Toggle } from "@yanqing/ui/components/toggle";
+import { Toggle } from "@qingye/ui/components/toggle";
 import { LockIcon } from "lucide-react";
 
 export const meta = { title: "禁用" };

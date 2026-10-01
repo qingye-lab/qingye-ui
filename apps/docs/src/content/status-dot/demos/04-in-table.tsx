@@ -1,6 +1,6 @@
-import type { StatusDotStatus } from "@yanqing/ui/components/status-dot";
-import { StatusDot } from "@yanqing/ui/components/status-dot";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import type { StatusDotStatus } from "@qingye/ui/components/status-dot";
+import { StatusDot } from "@qingye/ui/components/status-dot";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 
 export const meta = { title: "表格中的状态列", description: "状态列让圆点和文字一起扫读。", flush: true };
 

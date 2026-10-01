@@ -1,5 +1,5 @@
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 import { useState } from "react";
 
 export const meta = { title: "行选择", description: "选中行设置 data-state=\"selected\"；表头复选框在部分选中时显示为半选。" };

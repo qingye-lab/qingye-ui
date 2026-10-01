@@ -1,4 +1,0 @@
-const _01Stack = 'import { Button, Input, Label, Stack, Text } from "@yanqing/ui";\n\nexport const meta = { title: "Stack", description: "表单字段纵向排列：外层 gap 5 分隔字段，内层 gap 2 连接标签与输入。" };\n\nexport default function Demo() {\n  return (\n    <Stack as="form" className="w-full max-w-sm" gap={5} onSubmit={(event) => event.preventDefault()}>\n      <Stack gap={2}>\n        <Label htmlFor="team-name">团队名称</Label>\n        <Input defaultValue="青烟科技" id="team-name" />\n      </Stack>\n      <Stack gap={2}>\n        <Label htmlFor="team-slug">团队地址</Label>\n        <Input defaultValue="qingyan" id="team-slug" />\n        <Text size="caption" tone="muted">\n          成员通过 qingyan.tech/qingyan 访问团队主页。\n        </Text>\n      </Stack>\n      <Button className="self-start" type="submit">\n        保存\n      </Button>\n    </Stack>\n  );\n}\n';
-export {
-  _01Stack as default
-};

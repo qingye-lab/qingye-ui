@@ -34,7 +34,7 @@ export default function IntroductionPage() {
 
       <H2 id="what">它是什么</H2>
       <P>
-        <Code>@yanqing/ui</Code> 以 <A href="https://base-ui.com">Base UI</A> 负责行为与无障碍，以 Tailwind CSS 4 负责样式。大部分组件改编自{" "}
+        <Code>@qingye/ui</Code> 以 <A href="https://base-ui.com">Base UI</A> 负责行为与无障碍，以 Tailwind CSS 4 负责样式。大部分组件改编自{" "}
         <A href="https://coss.com/ui">coss ui</A>，另有一批本地编写的组合组件，例如日期时间选择、文件上传、数据表格、步骤与树。
       </P>
       <P>
@@ -56,7 +56,7 @@ export default function IntroductionPage() {
         <Code>MenuPrimitive</Code>），需要更底层的控制时可以直接使用。
       </P>
       <Callout title="许可">
-        Yanqing UI 以 MIT 许可发布。coss ui 与 Base UI 同为 MIT 许可；改编自 coss ui 的文件保留来源注释，版权声明收录在包内的{" "}
+        Qingye UI 以 MIT 许可发布。coss ui 与 Base UI 同为 MIT 许可；改编自 coss ui 的文件保留来源注释，版权声明收录在包内的{" "}
         <Code>THIRD_PARTY_NOTICES.md</Code>。
       </Callout>
 

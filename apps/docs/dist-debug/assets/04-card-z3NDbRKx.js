@@ -1,4 +1,0 @@
-const _04Card = 'import { Label, Switch } from "@yanqing/ui";\nimport { ShieldCheckIcon } from "lucide-react";\n\nexport const meta = { title: "卡片开关", description: "开启时卡片边框与底色随之变化。" };\n\nexport default function Demo() {\n  return (\n    <Label className="flex w-full max-w-sm items-start gap-3 rounded-lg border p-3 transition-colors hover:bg-accent/50 has-data-checked:border-primary/48 has-data-checked:bg-accent/50">\n      <ShieldCheckIcon aria-hidden="true" className="mt-px size-4.5 shrink-0 opacity-80 sm:size-4" />\n      <span className="flex min-w-0 flex-1 flex-col gap-1">\n        <span>登录二次验证</span>\n        <span className="font-normal text-muted-foreground text-xs">在新设备登录时要求输入短信验证码。</span>\n      </span>\n      <Switch defaultChecked />\n    </Label>\n  );\n}\n';
-export {
-  _04Card as default
-};

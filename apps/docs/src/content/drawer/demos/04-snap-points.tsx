@@ -1,6 +1,6 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Drawer, DrawerDescription, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Drawer, DrawerDescription, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye/ui/components/drawer";
 
 export const meta = {
   title: "吸附高度",

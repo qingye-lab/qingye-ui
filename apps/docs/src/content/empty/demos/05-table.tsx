@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@yanqing/ui/components/empty";
-import { Frame } from "@yanqing/ui/components/frame";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Button } from "@qingye/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@qingye/ui/components/empty";
+import { Frame } from "@qingye/ui/components/frame";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 
 export const meta = {
   title: "在表格中",

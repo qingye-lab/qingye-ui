@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui/components/button";
+import { Button } from "@qingye/ui/components/button";
 import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "@/components/prose";

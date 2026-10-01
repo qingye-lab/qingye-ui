@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui/components/button";
+import { Button } from "@qingye/ui/components/button";
 import { ChevronLeftIcon, ExternalLinkIcon } from "lucide-react";
 
 export const meta = {

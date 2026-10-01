@@ -1,4 +1,4 @@
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
 
 export const meta = { title: "多选", description: "列表在选择后保持打开；触发器上汇总显示。" };
 

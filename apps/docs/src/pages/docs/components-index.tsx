@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@yanqing/ui/components/empty";
-import { SearchInput } from "@yanqing/ui/components/search-input";
+import { Button } from "@qingye/ui/components/button";
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@qingye/ui/components/empty";
+import { SearchInput } from "@qingye/ui/components/search-input";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { H2, PageHeader } from "@/components/prose";

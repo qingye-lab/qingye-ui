@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
-import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
+import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 
 export const meta = { title: "状态", description: "占位、禁用与无效。" };
 

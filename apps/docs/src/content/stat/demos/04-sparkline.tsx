@@ -1,5 +1,5 @@
-import { Card, CardPanel } from "@yanqing/ui/components/card";
-import { Stat, StatDelta, StatDescription, StatLabel, StatSparkline, StatUnit, StatValue } from "@yanqing/ui/components/stat";
+import { Card, CardPanel } from "@qingye/ui/components/card";
+import { Stat, StatDelta, StatDescription, StatLabel, StatSparkline, StatUnit, StatValue } from "@qingye/ui/components/stat";
 import { ActivityIcon, ServerIcon } from "lucide-react";
 
 export const meta = {

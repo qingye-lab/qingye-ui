@@ -1,11 +1,11 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@yanqing/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
-import { Form } from "@yanqing/ui/components/form";
-import { Input } from "@yanqing/ui/components/input";
-import { Switch } from "@yanqing/ui/components/switch";
-import { Textarea } from "@yanqing/ui/components/textarea";
+import { Button } from "@qingye/ui/components/button";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Form } from "@qingye/ui/components/form";
+import { Input } from "@qingye/ui/components/input";
+import { Switch } from "@qingye/ui/components/switch";
+import { Textarea } from "@qingye/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = {

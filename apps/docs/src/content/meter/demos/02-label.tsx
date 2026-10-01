@@ -1,4 +1,4 @@
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@yanqing/ui/components/meter";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye/ui/components/meter";
 
 export const meta = { title: "标签与数值", description: "MeterValue 默认显示数值在范围内的百分比。" };
 

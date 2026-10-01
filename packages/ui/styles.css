@@ -2,11 +2,11 @@
  * styles.css — entry point for projects that run Tailwind CSS 4.
  *
  *   @import "tailwindcss";
- *   @import "@yanqing/ui/styles.css";
+ *   @import "@qingye/ui/styles.css";
  *
  * Tailwind scans the library source through the @source rule below, so only
  * the classes the components use are generated. Projects without Tailwind use
- * the precompiled `@yanqing/ui/ui.css` instead; never import both.
+ * the precompiled `@qingye/ui/ui.css` instead; never import both.
  */
 @source "./src";
 

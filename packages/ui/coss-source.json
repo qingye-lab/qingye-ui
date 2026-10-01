@@ -8,14 +8,17 @@
       "registry": "https://coss.com/ui/r/button.json",
       "upstreamPath": "apps/ui/registry/default/ui/button.tsx",
       "upstreamSha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8",
-      "adaptedSha256": "e8c710e978a01cfd20caec37a3d4292737ac040cd05ce7316cca8f2fd2705f44",
+      "adaptedSha256": "243260a65330f658b9fe3813ea991d752ebc64617fbdb52f6d5d9383d1dd2c81",
       "adaptations": [
         "Local imports; existing Lucide Spinner dependency",
         "Expose loading as aria-busy",
         "Hide the existing decorative Spinner from the loading button accessible name",
         "Mark button variants as qy-pressable so composed triggers retain press feedback when their data-slot changes",
         "Drop the outer drop shadow on filled variants; depth comes from the fill and inner highlight only",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use shared control elevation for outline variants while retaining shadow-free solid buttons",
+        "Roomier default and large horizontal padding; keep responsive heights and touch targets",
+        "Animate surface, border and text feedback; secondary hover and pressed states use progressively stronger semantic fills"
       ]
     },
     {
@@ -23,10 +26,12 @@
       "registry": "https://coss.com/ui/r/input.json",
       "upstreamPath": "apps/ui/registry/default/ui/input.tsx",
       "upstreamSha256": "3d488d491eb4e63642adc8b9354b0b0cc5b8ec4e284bbc26da7e2516f24980a4",
-      "adaptedSha256": "bc312984d30bbe87bf157881507c56aba46f8572f3e60ac3ca964e91f8713006",
+      "adaptedSha256": "d940fde474d3f5651dd5a4803b6fc3633c8258e3b6dc633a7d9cc372960bfb1b",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Use the panel surface and shared control elevation; hover border feedback preserves disabled, focus and invalid states",
+        "Roomier default and large horizontal padding while preserving responsive heights, native semantics and autofill handling"
       ]
     },
     {
@@ -34,10 +39,12 @@
       "registry": "https://coss.com/ui/r/textarea.json",
       "upstreamPath": "apps/ui/registry/default/ui/textarea.tsx",
       "upstreamSha256": "3e30e41c099d7343cb0a603557acd4e8b7c94b43139a7a489df322c04c5f601c",
-      "adaptedSha256": "00b6fe562a84b9312a74334dbc7796113c22b10dba8fec48b210b3b17f108a42",
+      "adaptedSha256": "6aa89fc54c476efe5e5f57346da57bca8c912b54fa0391c751726125d65188dc",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Match input panel surfaces, shared control elevation and guarded hover border feedback",
+        "Match default horizontal padding to the single-line input"
       ],
       "retrieved": "2026-10-01"
     },
@@ -69,12 +76,14 @@
       "registry": "https://coss.com/ui/r/card.json",
       "upstreamPath": "apps/ui/registry/default/ui/card.tsx",
       "upstreamSha256": "b59dbc0bd5d61694fcf1948fb8134795b0f5a1bf0a28d8d6bc817297c73a006e",
-      "adaptedSha256": "167ba5989f49262ae70f795141114fc1c69dc59f127a26df32e2ccf64ad9102a",
+      "adaptedSha256": "579339675913df00e6221d62f636e380c78eb35359c00024b72752a1e8978681",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
         "CardTitle uses the text-title step so it follows the type scale",
-        "Card takes a size prop that drives its padding token"
+        "Card takes a size prop that drives its padding token",
+        "Use shared panel elevation so white panels separate from the tinted canvas",
+        "CardTitle keeps the semantic title line height for readable wrapped headings"
       ]
     },
     {
@@ -95,10 +104,12 @@
       "registry": "https://coss.com/ui/r/input-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
       "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
-      "adaptedSha256": "5967968d75df4fadddc630058b023827a5a264b06ecfdd4e95fd19c31786f354",
+      "adaptedSha256": "fb1d55ea349fac4eca81eb049ac4c29eb2a5bb1d8dfc6dd3e59633500714a52b",
       "adaptations": [
         "Local imports",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Match the input surface, shared control elevation and guarded hover border feedback",
+        "Coordinate addon and field spacing with the roomier default controls"
       ]
     },
     {
@@ -106,12 +117,15 @@
       "registry": "https://coss.com/ui/r/select.json",
       "upstreamPath": "apps/ui/registry/default/ui/select.tsx",
       "upstreamSha256": "aa8821bbb4bd6b8b52a6cbaaf8d995f48b1001ad93d4bfa4e5b91b5e6d5f66a0",
-      "adaptedSha256": "c3cbedcbfbc3aab815d648573c49a33a7a364a077b51912da5999411c4016fea",
+      "adaptedSha256": "fc8ff29872cee0fcfbf8c88ddc83282b6c59c9d5d6bfc4c9000af5e2f9d55586",
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
         "Keep upstream light and dark treatment; the library ships both themes",
-        "Placeholder text uses 72% opacity, matching the other form controls"
+        "Placeholder text uses 72% opacity, matching the other form controls",
+        "Match panel field surfaces and shared control elevation with guarded hover borders",
+        "Roomier default and large horizontal padding without changing responsive heights",
+        "Floating options use the raised surface and shared raised elevation"
       ]
     },
     {
@@ -119,12 +133,14 @@
       "registry": "https://coss.com/ui/r/tabs.json",
       "upstreamPath": "apps/ui/registry/default/ui/tabs.tsx",
       "upstreamSha256": "cbfe21ce54efe39cc02eb073a8327a4ab81b918d5745d986fdfae07d32204a7a",
-      "adaptedSha256": "47314790ee7529fd73d135e583d02ac26875705f6a5dc6c831994c221a34dd2e",
+      "adaptedSha256": "fd0177bf4b6205c89e4e7853a0d739b0d46309128f3042b33fa46de046b991e3",
       "adaptations": [
         "Local imports",
         "Touch hit area on the tab and list for coarse pointers",
         "Position the indicator from the tab top; touch-target padding inflated the list scrollHeight and shifted the bottom-anchored indicator",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Inset track with a raised selected surface and shared control elevation in both themes",
+        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout"
       ]
     },
     {
@@ -132,12 +148,14 @@
       "registry": "https://coss.com/ui/r/segmented-control.json",
       "upstreamPath": "apps/ui/registry/default/lib/segmented-control.ts",
       "upstreamSha256": "c1cb84d02ac5b75aa08a70c205feb9cc8668ffbc19751e013364f547ae41a8a8",
-      "adaptedSha256": "0449430d025977b6458df9b8fc1e2aeaff312e9e90b4660d91ce2a56e23c9432",
+      "adaptedSha256": "6069b8bbadd6ffb9b2aa0d120b65afa2e6db8ed7330735badef8edcd7fa3f2fc",
       "adaptations": [
         "Local imports",
         "Touch hit area on options for coarse pointers",
         "Animate colour and background too, so selection is not an instant switch",
-        "Keep upstream light and dark treatment; the library ships both themes"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Match Tabs inset track and raised selected material in both themes",
+        "Inactive labels retain readable muted contrast; hover strengthens text without moving layout"
       ]
     },
     {

@@ -1,4 +1,4 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@yanqing/ui/components/navigation-menu";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@qingye/ui/components/navigation-menu";
 import { useState } from "react";
 
 export const meta = {

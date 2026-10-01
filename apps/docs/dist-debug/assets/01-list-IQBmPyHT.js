@@ -1,4 +1,0 @@
-const _01List = 'import { Skeleton } from "@yanqing/ui";\n\nexport const meta = { title: "列表", description: "圆形头像加两行文字；每行宽度略有不同，更接近真实内容。" };\n\nconst rows = [\n  { title: "w-28", subtitle: "w-44" },\n  { title: "w-20", subtitle: "w-52" },\n  { title: "w-24", subtitle: "w-36" },\n];\n\nexport default function Demo() {\n  return (\n    <div aria-busy="true" className="flex w-full max-w-sm flex-col gap-5">\n      <span className="sr-only">正在加载成员列表</span>\n      {rows.map((row, index) => (\n        <div key={index} className="flex items-center gap-3">\n          <Skeleton className="size-10 shrink-0 rounded-full" />\n          <div className="flex flex-col gap-2">\n            <Skeleton className={`h-4 ${row.title}`} />\n            <Skeleton className={`h-3 ${row.subtitle}`} />\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _01List as default
-};

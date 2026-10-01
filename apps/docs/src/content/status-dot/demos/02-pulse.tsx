@@ -1,4 +1,4 @@
-import { StatusDot } from "@yanqing/ui/components/status-dot";
+import { StatusDot } from "@qingye/ui/components/status-dot";
 
 export const meta = {
   title: "实时光环",

@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui/components/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
 
 export const meta = {
   title: "下划线",

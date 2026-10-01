@@ -1,5 +1,5 @@
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Switch } from "@qingye/ui/components/switch";
 
 export const meta = { title: "组合：设置列表", description: "标签与说明在左，开关靠右对齐。" };
 

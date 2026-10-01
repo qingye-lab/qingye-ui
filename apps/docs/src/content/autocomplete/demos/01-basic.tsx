@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "@yanqing/ui/components/autocomplete";
+import { Autocomplete, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "@qingye/ui/components/autocomplete";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "基础用法", description: "输入时给出建议，也可以直接提交任意文字。" };

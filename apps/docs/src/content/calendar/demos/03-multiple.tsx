@@ -1,4 +1,4 @@
-import { Calendar } from "@yanqing/ui/components/calendar";
+import { Calendar } from "@qingye/ui/components/calendar";
 import { useState } from "react";
 
 export const meta = { title: "多选", description: "最多选择 5 个值班日；周末不可选。" };

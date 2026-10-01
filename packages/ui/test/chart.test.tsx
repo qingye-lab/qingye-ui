@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { beforeAll, expect, test, vi } from "vitest";
 import {
   ChartContainer,
@@ -48,6 +48,41 @@ test("exposes series colours as CSS variables, falling back to chart tokens in c
   const css = container.querySelector("style")?.textContent ?? "";
   expect(css).toContain('[data-chart="chart-orders"]');
   expect(css).toContain("--color-delivery: #60a5fa;");
+});
+
+test.each(["light", "dark"])("semantic axis styles reach the rendered Cartesian tick text in %s mode", async (theme) => {
+  const { container } = render(
+    <ChartContainer className={theme} config={config}>
+      <RechartsPrimitive.BarChart data={[{ month: "9月", online: 100 }]}>
+        <RechartsPrimitive.XAxis dataKey="month" />
+        <RechartsPrimitive.YAxis />
+        <RechartsPrimitive.Bar dataKey="online" isAnimationActive={false} />
+      </RechartsPrimitive.BarChart>
+    </ChartContainer>,
+  );
+  const chart = container.querySelector<HTMLElement>("[data-slot=chart]")!;
+  await waitFor(() => {
+    expect(chart.querySelectorAll(".recharts-cartesian-axis-tick-label text").length).toBeGreaterThan(0);
+  });
+
+  // Exercise our selector against the installed Recharts DOM. jsdom cannot
+  // resolve themed CSS variables, but it can catch a rule that never reaches
+  // the text, leaving Recharts' default SVG fill visible in either theme.
+  const targetsFor = (utility: string) => {
+    const targets = new Set<Element>();
+    for (const rule of chart.className.matchAll(/\[(&[^\]]+)\]:([^ ]+)/g)) {
+      if (rule[2] !== utility) continue;
+      const selector = rule[1]!.replaceAll("_", " ").replace("&", ":scope");
+      chart.querySelectorAll(selector).forEach((node) => targets.add(node));
+    }
+    return targets;
+  };
+  const filled = targetsFor("fill-muted-foreground");
+  const numeric = targetsFor("tabular-nums");
+  chart.querySelectorAll(".recharts-cartesian-axis-tick-label text").forEach((tick) => {
+    expect(filled.has(tick)).toBe(true);
+    expect(numeric.has(tick)).toBe(true);
+  });
 });
 
 test("tooltip lists series in config order with labels and grouped numbers", () => {

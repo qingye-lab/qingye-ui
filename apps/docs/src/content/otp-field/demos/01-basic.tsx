@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { OTPField, OTPFieldInput } from "@yanqing/ui/components/otp-field";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { OTPField, OTPFieldInput } from "@qingye/ui/components/otp-field";
 
 export const meta = { title: "基础用法", description: "6 位数字验证码。" };
 

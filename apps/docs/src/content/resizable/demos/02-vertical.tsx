@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@yanqing/ui/components/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@qingye/ui/components/resizable";
 
 export const meta = { title: "纵向", description: "direction=\"vertical\" 上下排列，外层需要确定的高度。" };
 

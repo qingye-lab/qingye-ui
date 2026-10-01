@@ -1,4 +1,0 @@
-const _02Sizes = 'import { NativeSelect, NativeSelectOption } from "@yanqing/ui";\n\nexport const meta = { title: "尺寸", description: "与 Select 触发器相同的三档尺寸；移动端自动加高 4px。" };\n\nconst sizes = [\n  { size: "sm", label: "小" },\n  { size: "default", label: "默认" },\n  { size: "lg", label: "大" },\n] as const;\n\nexport default function Demo() {\n  return (\n    <div className="flex w-full max-w-xs flex-col gap-3">\n      {sizes.map(({ size, label }) => (\n        <NativeSelect aria-label={`${label}尺寸`} defaultValue="week" key={size} size={size}>\n          <NativeSelectOption value="day">按天汇总</NativeSelectOption>\n          <NativeSelectOption value="week">按周汇总</NativeSelectOption>\n          <NativeSelectOption value="month">按月汇总</NativeSelectOption>\n        </NativeSelect>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _02Sizes as default
-};

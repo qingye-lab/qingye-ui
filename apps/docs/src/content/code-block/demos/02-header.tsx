@@ -1,4 +1,4 @@
-import { CodeBlock } from "@yanqing/ui/components/code-block";
+import { CodeBlock } from "@qingye/ui/components/code-block";
 
 export const meta = { title: "文件名、行号与高亮", description: "标题栏显示文件名与语言；highlightLines 强调关键行。" };
 

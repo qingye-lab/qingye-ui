@@ -1,4 +1,4 @@
-import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui/components/description-list";
+import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@qingye/ui/components/description-list";
 
 export const meta = { title: "垂直布局", description: "名称在值的上方，适合窄栏或值较长的情形。" };
 
@@ -7,8 +7,8 @@ export default function Demo() {
     <DescriptionList className="w-full max-w-sm" divided layout="vertical">
       <DescriptionListItem>
         <DescriptionTerm>API 访问地址</DescriptionTerm>
-        <DescriptionDetails className="break-all font-mono text-[0.8125rem]" copyLabel="复制 API 访问地址" copyValue="https://api.yanqing.cn/v2/stores/xh-001/devices">
-          https://api.yanqing.cn/v2/stores/xh-001/devices
+        <DescriptionDetails className="break-all font-mono text-[0.8125rem]" copyLabel="复制 API 访问地址" copyValue="https://api.qingye.example/v2/stores/xh-001/devices">
+          https://api.qingye.example/v2/stores/xh-001/devices
         </DescriptionDetails>
       </DescriptionListItem>
       <DescriptionListItem>

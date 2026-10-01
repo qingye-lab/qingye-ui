@@ -1,6 +1,6 @@
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { CheckboxGroup } from "@yanqing/ui/components/checkbox-group";
-import { Label } from "@yanqing/ui/components/label";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
+import { Label } from "@qingye/ui/components/label";
 import { useState } from "react";
 
 export const meta = { title: "全选与半选", description: "父复选框根据子项自动显示全选、半选或未选。" };

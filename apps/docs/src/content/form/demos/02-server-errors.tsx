@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
-import { Form } from "@yanqing/ui/components/form";
-import { Input } from "@yanqing/ui/components/input";
+import { Button } from "@qingye/ui/components/button";
+import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Form } from "@qingye/ui/components/form";
+import { Input } from "@qingye/ui/components/input";
 import { useState } from "react";
 
 export const meta = {

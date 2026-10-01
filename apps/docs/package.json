@@ -12,7 +12,7 @@
     "@fontsource-variable/geist": "5.3.0",
     "@fontsource-variable/geist-mono": "5.2.7",
     "@tanstack/react-table": "8.21.3",
-    "@yanqing/ui": "workspace:*",
+    "@qingye/ui": "workspace:*",
     "lucide-react": "0.577.0",
     "react": "19.2.1",
     "react-dom": "19.2.1",

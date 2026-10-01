@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { DatePicker } from "@yanqing/ui/components/date-picker";
-import { Label } from "@yanqing/ui/components/label";
+import { Button } from "@qingye/ui/components/button";
+import { DatePicker } from "@qingye/ui/components/date-picker";
+import { Label } from "@qingye/ui/components/label";
 import { useState } from "react";
 
 export const meta = { title: "受控与快捷日期", description: "外部按钮直接写入值，日历打开时定位到对应月份。" };

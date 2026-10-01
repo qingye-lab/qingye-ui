@@ -1,5 +1,5 @@
-import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@yanqing/ui/components/alert-dialog";
-import { Button } from "@yanqing/ui/components/button";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
+import { Button } from "@qingye/ui/components/button";
 import { useState } from "react";
 
 export const meta = {

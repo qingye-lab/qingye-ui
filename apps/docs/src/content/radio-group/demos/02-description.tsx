@@ -1,5 +1,5 @@
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Radio, RadioGroup } from "@yanqing/ui/components/radio-group";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
 
 export const meta = { title: "带说明", description: "每个选项一个 Field，说明作为描述读出。" };
 

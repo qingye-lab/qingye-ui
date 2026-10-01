@@ -1,11 +1,11 @@
-import { SelectPopup } from "@yanqing/ui/components/select";
-import { Avatar } from "@yanqing/ui/components/avatar";
-import { SelectItem, SelectTrigger } from "@yanqing/ui/components/select";
-import { AvatarFallback } from "@yanqing/ui/components/avatar";
-import { Button } from "@yanqing/ui/components/button";
-import { DataTable } from "@yanqing/ui/components/data-table";
-import { Select, SelectValue } from "@yanqing/ui/components/select";
-import { type ColumnDef } from "@yanqing/ui";
+import { SelectPopup } from "@qingye/ui/components/select";
+import { Avatar } from "@qingye/ui/components/avatar";
+import { SelectItem, SelectTrigger } from "@qingye/ui/components/select";
+import { AvatarFallback } from "@qingye/ui/components/avatar";
+import { Button } from "@qingye/ui/components/button";
+import { DataTable } from "@qingye/ui/components/data-table";
+import { Select, SelectValue } from "@qingye/ui/components/select";
+import { type ColumnDef } from "@qingye/ui";
 import { DownloadIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 

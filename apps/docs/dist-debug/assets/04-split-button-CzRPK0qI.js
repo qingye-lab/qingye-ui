@@ -1,4 +1,0 @@
-const _04SplitButton = 'import { Button, Group, GroupSeparator, Menu, MenuItem, MenuPopup, MenuTrigger } from "@yanqing/ui";\nimport { ChevronDownIcon } from "lucide-react";\n\nexport const meta = { title: "拆分按钮", description: "主操作加一个展开更多选项的菜单。" };\n\nexport default function Demo() {\n  return (\n    <Group aria-label="合并方式">\n      <Button>合并请求</Button>\n      <GroupSeparator className="bg-primary-foreground/24" />\n      <Menu>\n        <MenuTrigger render={<Button aria-label="选择合并方式" size="icon" />}>\n          <ChevronDownIcon />\n        </MenuTrigger>\n        <MenuPopup align="end">\n          <MenuItem>创建合并提交</MenuItem>\n          <MenuItem>压缩后合并</MenuItem>\n          <MenuItem>变基后合并</MenuItem>\n        </MenuPopup>\n      </Menu>\n    </Group>\n  );\n}\n';
-export {
-  _04SplitButton as default
-};

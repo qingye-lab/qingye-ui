@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel } from "@yanqing/ui/components/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel } from "@qingye/ui/components/carousel";
 import { useState } from "react";
 
 export const meta = {

@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 
 export const meta = { title: "表头吸顶", description: "stickyHeader 配合 render 给容器限高，表体在固定表头下滚动。", flush: true };
 

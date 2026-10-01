@@ -16,13 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@yanqing/ui": ["../../packages/ui/src/index.ts"],
-      "@yanqing/ui/components/*": ["../../packages/ui/src/components/*"],
-      "@yanqing/ui/hooks/*": ["../../packages/ui/src/hooks/*"],
-      "@yanqing/ui/utils": ["../../packages/ui/src/utils.ts"],
-      "@yanqing/ui/locale": ["../../packages/ui/src/locale.tsx"],
-      "@yanqing/ui/locales/*": ["../../packages/ui/src/locales/*"],
-      "@yanqing/ui/package.json": ["../../packages/ui/package.json"]
+      "@qingye/ui": ["../../packages/ui/src/index.ts"],
+      "@qingye/ui/components/*": ["../../packages/ui/src/components/*"],
+      "@qingye/ui/hooks/*": ["../../packages/ui/src/hooks/*"],
+      "@qingye/ui/utils": ["../../packages/ui/src/utils.ts"],
+      "@qingye/ui/locale": ["../../packages/ui/src/locale.tsx"],
+      "@qingye/ui/locales/*": ["../../packages/ui/src/locales/*"],
+      "@qingye/ui/package.json": ["../../packages/ui/package.json"]
     }
   },
   "include": ["src", "vite.config.ts"]

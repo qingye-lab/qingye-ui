@@ -1,5 +1,5 @@
-import { RadioGroupPrimitive, RadioPrimitive } from "@yanqing/ui/components/radio-group";
-import { segmentedControlItemVariants, segmentedControlRootClassName } from "@yanqing/ui/components/segmented-control";
+import { RadioGroupPrimitive, RadioPrimitive } from "@qingye/ui/components/radio-group";
+import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
 
 export const meta = { title: "尺寸", description: "sm、default、lg 三档。" };
 

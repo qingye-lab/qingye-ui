@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@yanqing/ui/components/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@qingye/ui/components/breadcrumb";
 import { SlashIcon } from "lucide-react";
 
 export const meta = { title: "自定义分隔符", description: "斜线更接近文件路径与代码仓库的习惯。" };
@@ -14,7 +14,7 @@ export default function Demo() {
           <SlashIcon className="-rotate-12" />
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbLink href="#">yanqing-ui</BreadcrumbLink>
+          <BreadcrumbLink href="#">qingye-ui</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator>
           <SlashIcon className="-rotate-12" />

@@ -1,4 +1,0 @@
-const _03IconSizes = 'import { Button } from "@yanqing/ui";\nimport { PlusIcon } from "lucide-react";\n\nexport const meta = {\n  title: "仅图标",\n  description: "icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button aria-label="新建" size="icon-xs" variant="outline">\n        <PlusIcon aria-hidden="true" />\n      </Button>\n      <Button aria-label="新建" size="icon-sm" variant="outline">\n        <PlusIcon aria-hidden="true" />\n      </Button>\n      <Button aria-label="新建" size="icon" variant="outline">\n        <PlusIcon aria-hidden="true" />\n      </Button>\n      <Button aria-label="新建" size="icon-lg" variant="outline">\n        <PlusIcon aria-hidden="true" />\n      </Button>\n      <Button aria-label="新建" size="icon-xl" variant="outline">\n        <PlusIcon aria-hidden="true" />\n      </Button>\n    </>\n  );\n}\n';
-export {
-  _03IconSizes as default
-};

@@ -1,4 +1,4 @@
-import { OTPField, OTPFieldInput } from "@yanqing/ui/components/otp-field";
+import { OTPField, OTPFieldInput } from "@qingye/ui/components/otp-field";
 
 export const meta = { title: "字母数字与占位", description: "validationType=\"alphanumeric\" 接受字母和数字，并统一转为大写。" };
 

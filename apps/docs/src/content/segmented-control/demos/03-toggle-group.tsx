@@ -1,6 +1,6 @@
-import { segmentedControlItemVariants, segmentedControlRootClassName } from "@yanqing/ui/components/segmented-control";
-import { TogglePrimitive } from "@yanqing/ui/components/toggle";
-import { ToggleGroupPrimitive } from "@yanqing/ui/components/toggle-group";
+import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
+import { TogglePrimitive } from "@qingye/ui/components/toggle";
+import { ToggleGroupPrimitive } from "@qingye/ui/components/toggle-group";
 import { CalendarIcon, KanbanIcon, ListIcon } from "lucide-react";
 import { useState } from "react";
 

@@ -1,5 +1,5 @@
-import type { TreeNode } from "@yanqing/ui/components/tree";
-import { Tree } from "@yanqing/ui/components/tree";
+import type { TreeNode } from "@qingye/ui/components/tree";
+import { Tree } from "@qingye/ui/components/tree";
 import { FileCodeIcon, FileJsonIcon, FileTextIcon, FolderIcon, FolderOpenIcon } from "lucide-react";
 
 export const meta = { title: "文件目录", description: "文件夹展开时切换图标；参考线标出所在分支。" };

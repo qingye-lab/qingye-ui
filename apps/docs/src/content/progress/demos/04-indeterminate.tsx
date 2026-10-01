@@ -1,4 +1,4 @@
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack } from "@yanqing/ui/components/progress";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack } from "@qingye/ui/components/progress";
 
 export const meta = {
   title: "不确定进度",

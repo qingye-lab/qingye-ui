@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
+import { Button } from "@qingye/ui/components/button";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
 import { DownloadIcon } from "lucide-react";
 
 export const meta = { title: "组合：列表筛选栏", description: "小尺寸选择器与按钮排成一行，窄屏自动换行。" };

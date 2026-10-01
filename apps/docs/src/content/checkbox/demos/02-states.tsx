@@ -1,5 +1,5 @@
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Label } from "@yanqing/ui/components/label";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Label } from "@qingye/ui/components/label";
 
 export const meta = { title: "状态" };
 

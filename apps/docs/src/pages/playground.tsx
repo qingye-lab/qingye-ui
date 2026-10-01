@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { useTheme } from "@yanqing/ui";
+import { useTheme } from "@qingye/ui";
 import { findComponent, loadDemos, type LoadedDemo } from "@/lib/registry";
 
 /**

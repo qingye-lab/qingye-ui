@@ -1,6 +1,6 @@
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
-import { Kbd } from "@yanqing/ui/components/kbd";
-import { Spinner } from "@yanqing/ui/components/spinner";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
+import { Kbd } from "@qingye/ui/components/kbd";
+import { Spinner } from "@qingye/ui/components/spinner";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "按键提示与加载", description: "末端放快捷键提示，或在查询时显示 Spinner。" };

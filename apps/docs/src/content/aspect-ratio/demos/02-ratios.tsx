@@ -1,4 +1,4 @@
-import { AspectRatio } from "@yanqing/ui/components/aspect-ratio";
+import { AspectRatio } from "@qingye/ui/components/aspect-ratio";
 
 export const meta = { title: "常用比例", description: "宽度相同时，比例决定高度。" };
 

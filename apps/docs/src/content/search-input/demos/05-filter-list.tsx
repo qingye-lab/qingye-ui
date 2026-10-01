@@ -1,4 +1,4 @@
-import { SearchInput } from "@yanqing/ui/components/search-input";
+import { SearchInput } from "@qingye/ui/components/search-input";
 import { useState } from "react";
 
 export const meta = { title: "组合：筛选列表", description: "受控使用，实时过滤下方列表。" };

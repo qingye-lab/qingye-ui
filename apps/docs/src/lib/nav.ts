@@ -15,7 +15,7 @@ export const GUIDES: GuidePage[] = [
   {
     path: "/docs",
     title: "介绍",
-    description: "Yanqing UI 是什么、遵循哪些原则，以及它与 coss ui、Base UI 的关系。",
+    description: "Qingye UI 是什么、遵循哪些原则，以及它与 coss ui、Base UI 的关系。",
     group: "开始",
     file: "introduction.tsx",
     keywords: ["intro", "about", "原则", "coss", "base ui", "许可"],

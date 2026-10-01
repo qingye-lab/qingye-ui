@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 
 export const meta = { title: "基础用法", description: "在 Field 中使用时，标签与描述自动关联。" };
 

@@ -1,4 +1,0 @@
-const _03Format = 'import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui";\n\nexport const meta = {\n  title: "自定义数值",\n  description: "ProgressValue 接收一个函数，可以显示已完成量与总量；读屏文本用 getAriaValueText 同步。",\n};\n\nexport default function Demo() {\n  return (\n    <Progress\n      className="max-w-sm"\n      getAriaValueText={(_, value) => `已上传 ${value} MB，共 512 MB`}\n      max={512}\n      value={302}\n    >\n      <div className="flex items-center justify-between gap-2">\n        <ProgressLabel>上传安装包</ProgressLabel>\n        <ProgressValue className="text-muted-foreground">{(_, value) => `${value} / 512 MB`}</ProgressValue>\n      </div>\n      <ProgressTrack>\n        <ProgressIndicator />\n      </ProgressTrack>\n    </Progress>\n  );\n}\n';
-export {
-  _03Format as default
-};

@@ -1,17 +1,17 @@
-import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Card, CardDescription, CardHeader, CardTitle } from "@yanqing/ui/components/card";
-import { ItemGroup, Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemSeparator, ItemTitle } from "@yanqing/ui/components/item";
+import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@qingye/ui/components/card";
+import { ItemGroup, Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemSeparator, ItemTitle } from "@qingye/ui/components/item";
 import { XIcon } from "lucide-react";
 import { Fragment } from "react";
 
 export const meta = { title: "成员列表", description: "ItemGroup + ItemSeparator 组成列表；操作按钮的 aria-label 写明对象。" };
 
 const members = [
-  { name: "林嘉怡", initials: "林", email: "linjiayi@yanqing.cn", role: "店长" },
-  { name: "周子航", initials: "周", email: "zhouzihang@yanqing.cn", role: "收银" },
-  { name: "陈思远", initials: "陈", email: "chensiyuan@yanqing.cn", role: "后厨" },
+  { name: "林嘉怡", initials: "林", email: "linjiayi@qingye.example", role: "店长" },
+  { name: "周子航", initials: "周", email: "zhouzihang@qingye.example", role: "收银" },
+  { name: "陈思远", initials: "陈", email: "chensiyuan@qingye.example", role: "后厨" },
 ];
 
 export default function Demo() {

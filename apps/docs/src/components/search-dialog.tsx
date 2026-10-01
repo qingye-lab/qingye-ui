@@ -1,5 +1,5 @@
-import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel } from "@yanqing/ui/components/command";
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
+import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel } from "@qingye/ui/components/command";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 import { ArrowDownIcon, ArrowUpIcon, BoxIcon, CornerDownLeftIcon, FileTextIcon } from "lucide-react";
 import { Fragment, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";

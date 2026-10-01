@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Drawer, DrawerClose, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Button } from "@qingye/ui/components/button";
+import { Drawer, DrawerClose, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye/ui/components/drawer";
 
 export const meta = { title: "基础用法", description: "默认从底部滑出，showBar 显示拖动手柄，向下拖动即可关闭。" };
 

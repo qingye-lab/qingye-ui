@@ -1,8 +1,9 @@
 name: Release
 
-# Push a tag like v0.1.0 to build the package and attach the tarball to a
+# Push a tag like v0.2.0 to build the package and attach the tarball to a
 # GitHub release. Consumers install it with:
-#   pnpm add https://github.com/qingye-lab/yanqing-ui/releases/download/v0.1.0/yanqing-ui-0.1.0.tgz
+#   gh release download v0.2.0 --repo qingye-lab/qingye-ui --pattern qingye-ui-0.2.0.tgz
+#   pnpm add ./qingye-ui-0.2.0.tgz
 on:
   push:
     tags: ["v*"]
@@ -26,12 +27,12 @@ jobs:
           version=$(node -p "require('./packages/ui/package.json').version")
           test "v$version" = "$GITHUB_REF_NAME" || { echo "tag $GITHUB_REF_NAME != package v$version"; exit 1; }
       - run: pnpm typecheck
-      - run: pnpm --filter @yanqing/ui test
-      - run: pnpm --filter @yanqing/ui build
+      - run: pnpm --filter @qingye/ui test
+      - run: pnpm --filter @qingye/ui build
       - name: Pack
         run: |
           mkdir -p dist-pack
-          pnpm --filter @yanqing/ui pack --pack-destination ../../dist-pack
+          pnpm --filter @qingye/ui pack --pack-destination ../../dist-pack
           ls dist-pack
       - name: Create release
         env:

@@ -125,7 +125,8 @@ export function ChartContainer({
         className={cn(
           "flex aspect-video min-w-0 justify-center rounded-md text-xs outline-none",
           // Axes and grid: hairlines in the border colour, muted figures.
-          "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-axis-tick_text]:tabular-nums [&_.recharts-polar-angle-axis-tick_text]:fill-muted-foreground [&_.recharts-polar-radius-axis-tick_text]:fill-muted-foreground",
+          // Recharts 3.10 renders labels separately from the tick-line layer.
+          "[&_.recharts-cartesian-axis-tick-value]:fill-muted-foreground [&_.recharts-cartesian-axis-tick-value]:tabular-nums [&_.recharts-polar-angle-axis-tick_text]:fill-muted-foreground [&_.recharts-polar-radius-axis-tick_text]:fill-muted-foreground",
           "[&_.recharts-cartesian-axis-line[stroke='#666']]:stroke-border-strong [&_.recharts-cartesian-axis-tick-line[stroke='#666']]:stroke-border-strong [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border-strong",
           // Hover: a hairline crosshair on lines and areas, a faint band on bars.
           "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-border-strong [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted",

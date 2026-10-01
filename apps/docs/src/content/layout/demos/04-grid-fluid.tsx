@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
-import { Grid, Inline, Stack, Text } from "@yanqing/ui/components/layout";
+import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
+import { Grid, Inline, Stack, Text } from "@qingye/ui/components/layout";
 
 export const meta = {
   title: "按容器自适应",

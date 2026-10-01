@@ -1,5 +1,5 @@
-import { DatePicker } from "@yanqing/ui/components/date-picker";
-import { Label } from "@yanqing/ui/components/label";
+import { DatePicker } from "@qingye/ui/components/date-picker";
+import { Label } from "@qingye/ui/components/label";
 
 export const meta = { title: "基础用法", description: "触发器与 Select 同款；选中后可点末端按钮清除。" };
 

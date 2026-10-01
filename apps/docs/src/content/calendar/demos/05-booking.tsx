@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Calendar } from "@yanqing/ui/components/calendar";
-import { type DateRange } from "@yanqing/ui";
+import { Button } from "@qingye/ui/components/button";
+import { Calendar } from "@qingye/ui/components/calendar";
+import { type DateRange } from "@qingye/ui";
 import { useState } from "react";
 
 export const meta = { title: "组合：会议室预订", description: "日历放进卡片，下方汇总所选天数。" };

@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
-import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "@yanqing/ui/components/toolbar";
+import { Button } from "@qingye/ui/components/button";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "@qingye/ui/components/toolbar";
 import { Redo2Icon, Undo2Icon } from "lucide-react";
 
 export const meta = {

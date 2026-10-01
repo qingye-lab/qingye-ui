@@ -1,5 +1,5 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui/components/description-list";
+import { Badge } from "@qingye/ui/components/badge";
+import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@qingye/ui/components/description-list";
 
 export const meta = { title: "网格布局", description: "按容器宽度自动分列；窄屏单列，宽屏三到四列。可与 divided 同用。" };
 

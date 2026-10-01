@@ -1,4 +1,4 @@
-import { DatePicker } from "@yanqing/ui/components/date-picker";
+import { DatePicker } from "@qingye/ui/components/date-picker";
 
 export const meta = { title: "尺寸", description: "sm / default / lg，与同尺寸的 Input、Select 等高。" };
 

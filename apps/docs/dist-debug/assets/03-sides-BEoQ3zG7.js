@@ -1,4 +1,0 @@
-const _03Sides = 'import { Button, Popover, PopoverDescription, PopoverPopup, PopoverTrigger } from "@yanqing/ui";\n\nexport const meta = { title: "方向", description: "side 指定弹出方向；空间不足时自动翻转到对侧。" };\n\nconst sides = [\n  { side: "top", label: "上方" },\n  { side: "right", label: "右侧" },\n  { side: "bottom", label: "下方" },\n  { side: "left", label: "左侧" },\n] as const;\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-wrap justify-center gap-2">\n      {sides.map(({ side, label }) => (\n        <Popover key={side}>\n          <PopoverTrigger render={<Button variant="outline" />}>{label}</PopoverTrigger>\n          <PopoverPopup className="w-56" side={side}>\n            <PopoverDescription>从{label}弹出，与触发器保持 4px 间距。</PopoverDescription>\n          </PopoverPopup>\n        </Popover>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _03Sides as default
-};

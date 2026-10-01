@@ -1,4 +1,4 @@
-import { Spinner } from "@yanqing/ui";
+import { Spinner } from "@qingye/ui";
 
 export const meta = { title: "默认" };
 

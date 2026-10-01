@@ -1,5 +1,5 @@
-import { Card, CardFooter, CardHeader, CardPanel } from "@yanqing/ui/components/card";
-import { Skeleton } from "@yanqing/ui/components/skeleton";
+import { Card, CardFooter, CardHeader, CardPanel } from "@qingye/ui/components/card";
+import { Skeleton } from "@qingye/ui/components/skeleton";
 
 export const meta = { title: "卡片", description: "沿用 Card 的结构，只把内容换成占位块。" };
 

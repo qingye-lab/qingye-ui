@@ -1,5 +1,5 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui/components/frame";
+import { Badge } from "@qingye/ui/components/badge";
+import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@qingye/ui/components/frame";
 
 export const meta = { title: "基础", description: "标题与提示落在浅底上，主要内容放进白色面板。" };
 
@@ -12,7 +12,7 @@ export default function Demo() {
       </FrameHeader>
       <FramePanel className="flex flex-col gap-1.5">
         <div className="flex items-center justify-between gap-4">
-          <span className="truncate font-medium text-sm">shop.yanqing.cn</span>
+          <span className="truncate font-medium text-sm">shop.qingye.example</span>
           <Badge variant="success">已生效</Badge>
         </div>
         <span className="text-muted-foreground text-xs">SSL 证书将于 2027年1月12日自动续期</span>

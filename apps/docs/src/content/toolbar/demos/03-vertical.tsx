@@ -1,6 +1,6 @@
-import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
-import { Toolbar, ToolbarButton } from "@yanqing/ui/components/toolbar";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
+import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { Toolbar, ToolbarButton } from "@qingye/ui/components/toolbar";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
 import { HandIcon, MousePointer2Icon, SquareIcon, TypeIcon } from "lucide-react";
 
 export const meta = {

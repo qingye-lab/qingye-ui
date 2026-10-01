@@ -1,5 +1,5 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@yanqing/ui/components/item";
+import { Badge } from "@qingye/ui/components/badge";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@qingye/ui/components/item";
 import { ChevronRightIcon, FileTextIcon, StoreIcon } from "lucide-react";
 
 export const meta = {

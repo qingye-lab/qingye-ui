@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Drawer, DrawerDescription, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Button } from "@qingye/ui/components/button";
+import { Drawer, DrawerDescription, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye/ui/components/drawer";
 
 export const meta = {
   title: "样式变体",

@@ -1,8 +1,8 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle } from "@yanqing/ui/components/dialog";
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
-import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@yanqing/ui/components/menu";
+import { Button } from "@qingye/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle } from "@qingye/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
 import { EllipsisIcon, PencilIcon, UserPlusIcon } from "lucide-react";
 import { useState } from "react";
 

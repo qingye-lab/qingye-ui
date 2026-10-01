@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Steps } from "@yanqing/ui/components/steps";
+import { Button } from "@qingye/ui/components/button";
+import { Steps } from "@qingye/ui/components/steps";
 import { useState } from "react";
 
 export const meta = {

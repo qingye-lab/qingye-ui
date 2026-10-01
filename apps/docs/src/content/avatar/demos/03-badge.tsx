@@ -1,4 +1,4 @@
-import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
+import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "@qingye/ui/components/avatar";
 
 export const meta = {
   title: "状态标记",

@@ -1,5 +1,5 @@
-import { Input } from "@yanqing/ui/components/input";
-import { Label } from "@yanqing/ui/components/label";
+import { Input } from "@qingye/ui/components/input";
+import { Label } from "@qingye/ui/components/label";
 
 export const meta = { title: "关联输入框", description: "htmlFor 指向控件 id，点击标签即可聚焦。" };
 

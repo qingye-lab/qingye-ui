@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui/components/accordion";
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye/ui/components/accordion";
 
 export const meta = { title: "默认", description: "一次只展开一个分节。" };
 

@@ -1,6 +1,6 @@
-import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
-import { Label } from "@yanqing/ui/components/label";
-import { Radio, RadioGroup } from "@yanqing/ui/components/radio-group";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Label } from "@qingye/ui/components/label";
+import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
 
 export const meta = { title: "横向、禁用与错误" };
 

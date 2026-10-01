@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@yanqing/ui/components/popover";
+import { Button } from "@qingye/ui/components/button";
+import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 import { BellIcon, XIcon } from "lucide-react";
 
 export const meta = { title: "带关闭按钮", description: "PopoverClose 可放在任意位置，图标按钮需要 aria-label。" };

@@ -1,12 +1,12 @@
-import { cn } from "@yanqing/ui/utils";
+import { cn } from "@qingye/ui/utils";
 
-/** The mark: a rounded tile carrying a single-stroke Y. */
+/** The mark: a rounded tile carrying a single-stroke Q. */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg aria-hidden="true" className={cn("size-5", className)} fill="none" viewBox="0 0 20 20">
       <rect fill="currentColor" height="20" rx="5.5" width="20" />
       <path
-        d="M6.25 5.75 10 10.5l3.75-4.75M10 10.5v4"
+        d="M13.75 10a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM11.5 11.5l3 3"
         stroke="var(--qy-background)"
         strokeLinecap="round"
         strokeLinejoin="round"

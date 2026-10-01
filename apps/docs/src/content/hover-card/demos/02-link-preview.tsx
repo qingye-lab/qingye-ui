@@ -1,4 +1,4 @@
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@yanqing/ui";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@qingye/ui";
 import { CircleDotIcon, GitPullRequestIcon } from "lucide-react";
 
 export const meta = { title: "链接预览", description: "在工单、文档中引用其他条目时，悬停即可看到摘要，不必跳转。" };

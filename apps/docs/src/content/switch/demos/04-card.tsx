@@ -1,5 +1,5 @@
-import { Label } from "@yanqing/ui/components/label";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Label } from "@qingye/ui/components/label";
+import { Switch } from "@qingye/ui/components/switch";
 import { ShieldCheckIcon } from "lucide-react";
 
 export const meta = { title: "卡片开关", description: "开启时卡片边框与底色随之变化。" };

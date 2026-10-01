@@ -1,4 +1,4 @@
-import { Slider } from "@yanqing/ui/components/slider";
+import { Slider } from "@qingye/ui/components/slider";
 
 export const meta = { title: "刻度", description: "step 限定可选值，下方刻度标出每一档。" };
 

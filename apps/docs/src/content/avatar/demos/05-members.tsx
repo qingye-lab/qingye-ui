@@ -1,7 +1,7 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Card, CardAction, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@qingye/ui/components/avatar";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Card, CardAction, CardDescription, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
 import { UserPlusIcon } from "lucide-react";
 
 export const meta = { title: "组合：成员列表", description: "头像旁已有姓名时，图片 alt 留空，避免读屏重复朗读。" };
@@ -9,20 +9,20 @@ export const meta = { title: "组合：成员列表", description: "头像旁已
 const members = [
   {
     name: "林晓雯",
-    email: "linxiaowen@yanqing.cn",
+    email: "linxiaowen@qingye.example",
     role: "所有者",
     src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&crop=faces",
   },
   {
     name: "周子航",
-    email: "zhouzihang@yanqing.cn",
+    email: "zhouzihang@qingye.example",
     role: "管理员",
     src: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=96&h=96&fit=crop&crop=faces",
   },
-  { name: "陈思远", email: "chensiyuan@yanqing.cn", role: "成员" },
+  { name: "陈思远", email: "chensiyuan@qingye.example", role: "成员" },
   {
     name: "沈若溪",
-    email: "shenruoxi@yanqing.cn",
+    email: "shenruoxi@qingye.example",
     role: "成员",
     src: "https://images.unsplash.com/photo-1569913486515-b74bf7751574?w=96&h=96&fit=crop&crop=faces",
   },

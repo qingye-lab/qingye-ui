@@ -1,5 +1,5 @@
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxStatus } from "@yanqing/ui/components/combobox";
-import { Spinner } from "@yanqing/ui/components/spinner";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxStatus } from "@qingye/ui/components/combobox";
+import { Spinner } from "@qingye/ui/components/spinner";
 import { useRef, useState } from "react";
 
 export const meta = { title: "远程搜索", description: "filter={null} 关闭本地筛选；ComboboxStatus 播报加载状态。" };

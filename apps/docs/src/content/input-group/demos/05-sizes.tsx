@@ -1,4 +1,4 @@
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "尺寸", description: "size 写在 InputGroupInput 上，附加区域随之调整内边距。" };

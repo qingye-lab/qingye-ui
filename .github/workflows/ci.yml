@@ -22,14 +22,14 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
       - name: Test
-        run: pnpm --filter @yanqing/ui test
+        run: pnpm --filter @qingye/ui test
       - name: Build library
-        run: pnpm --filter @yanqing/ui build
+        run: pnpm --filter @qingye/ui build
       - name: Build docs
         run: pnpm --filter docs build
       - name: Pack
-        run: pnpm --filter @yanqing/ui pack --pack-destination ../../dist-pack
+        run: pnpm --filter @qingye/ui pack --pack-destination ../../dist-pack
       - uses: actions/upload-artifact@v4
         with:
-          name: yanqing-ui-package
+          name: qingye-ui-package
           path: dist-pack/*.tgz

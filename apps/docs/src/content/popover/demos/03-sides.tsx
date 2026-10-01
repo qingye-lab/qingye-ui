@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Popover, PopoverDescription, PopoverPopup, PopoverTrigger } from "@yanqing/ui/components/popover";
+import { Button } from "@qingye/ui/components/button";
+import { Popover, PopoverDescription, PopoverPopup, PopoverTrigger } from "@qingye/ui/components/popover";
 
 export const meta = { title: "方向", description: "side 指定弹出方向；空间不足时自动翻转到对侧。" };
 

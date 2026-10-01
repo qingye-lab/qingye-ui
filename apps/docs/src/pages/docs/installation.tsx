@@ -1,12 +1,11 @@
-import { ToastProvider } from "@yanqing/ui/components/toast";
-import { TooltipProvider } from "@yanqing/ui/components/tooltip";
 import { CodeBlock } from "@/components/code-block";
 import { InstallTabs } from "@/components/install-tabs";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
-import { releaseTarball, SITE } from "@/lib/site";
+import { releaseDownloadCommand, releaseFile, SITE } from "@/lib/site";
 
-const providers = `import { ThemeProvider } from "@yanqing/ui";
-import { toastManager } from "@yanqing/ui/components/toast";
+const providers = `import { ThemeProvider } from "@qingye/ui";
+import { ToastProvider } from "@qingye/ui/components/toast";
+import { TooltipProvider } from "@qingye/ui/components/tooltip";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
 import "./index.css";
@@ -18,9 +17,11 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </ToastProvider>
     </TooltipProvider>
-  </ThemeProvider>, );`;
+  </ThemeProvider>,
+);`;
 
-const usage = `import { Button } from "@yanqing/ui";
+const usage = `import { Button } from "@qingye/ui";
+import { toastManager } from "@qingye/ui/components/toast";
 
 export function SaveButton() {
   return (
@@ -47,7 +48,7 @@ export default function InstallationPage() {
             term: "可选依赖",
             detail: (
               <>
-                使用 DataTable 时另装 <Code>@tanstack/react-table</Code>；其余依赖（Base UI、图标等）会随包一起安装。
+                使用 DataTable 时另装 <Code>@tanstack/react-table</Code>，使用 Chart 时另装 <Code>recharts</Code>；两者是可选的 peer 依赖。其余依赖（Base UI、图标等）会随包一起安装。
               </>
             ),
           },
@@ -56,17 +57,18 @@ export default function InstallationPage() {
 
       <H2 id="install">安装包</H2>
       <P>
-        当前版本 {SITE.version} 通过 GitHub Release 分发。直接安装发布页上的 tarball：
+        当前版本 {SITE.version} 通过 GitHub Release 分发。仓库目前为私有，请使用有仓库访问权限且已登录的 GitHub CLI 下载，再安装本地包：
       </P>
-      <InstallTabs pkg={releaseTarball} />
+      <CodeBlock code={releaseDownloadCommand} lang="text" title="下载发布包" />
+      <InstallTabs pkg={`./${releaseFile}`} />
       <P className="text-[0.875rem] text-muted-foreground">
-        其他版本见 <A href={`${SITE.repo}/releases`}>Releases</A>。锁定到具体的 tarball 地址可以让每次安装得到完全相同的代码。
+        其他版本见 <A href={`${SITE.repo}/releases`}>Releases</A>。下载指定版本的包，可以让每次安装得到完全相同的代码。
       </P>
 
       <H2 id="styles">引入样式</H2>
       <H3 id="styles-tailwind">Tailwind CSS 4 项目</H3>
       <P>在全局 CSS 中，紧跟 Tailwind 之后引入组件库的样式入口：</P>
-      <CodeBlock code={`@import "tailwindcss";\n@import "@yanqing/ui/styles.css";`} lang="css" title="src/index.css" />
+      <CodeBlock code={`@import "tailwindcss";\n@import "@qingye/ui/styles.css";`} lang="css" title="src/index.css" />
       <P>
         <Code>styles.css</Code> 包含三层设计令牌、Tailwind 主题映射、<Code>touch-target</Code> 与 <Code>numeric</Code> 等工具类、动效策略，以及{" "}
         <Code>dark</Code> 自定义变体。它通过 <Code>@source</Code> 扫描组件源码，所以只会生成实际用到的类。
@@ -74,7 +76,7 @@ export default function InstallationPage() {
 
       <H3 id="styles-css">不使用 Tailwind 的项目</H3>
       <P>在应用入口导入一次预编译样式表：</P>
-      <CodeBlock code={`import "@yanqing/ui/ui.css";`} title="src/main.tsx" />
+      <CodeBlock code={`import "@qingye/ui/ui.css";`} title="src/main.tsx" />
       <P>
         <Code>ui.css</Code> 包含组件所需的全部样式和基础 reset，但不是完整的 Tailwind 工具集；页面自身的布局用你自己的 CSS 编写。
       </P>
@@ -133,9 +135,9 @@ export default function InstallationPage() {
       <P>
         根入口可以被打包工具摇树（包内只有 CSS 声明了副作用）。如果希望依赖关系一目了然，或者打包工具不做摇树，可以从单个组件的入口导入：
       </P>
-      <CodeBlock code={`import { Button } from "@yanqing/ui/components/button";\nimport { Select, SelectItem, SelectPopup } from "@yanqing/ui/components/select";`} />
+      <CodeBlock code={`import { Button } from "@qingye/ui/components/button";\nimport { Select, SelectItem, SelectPopup } from "@qingye/ui/components/select";`} />
       <P>
-        入口名与源码文件名一致，即 <Code>@yanqing/ui/components/&lt;name&gt;</Code>。每个组件页的“导入”一节都给出了对应路径。
+        入口名与源码文件名一致，即 <Code>@qingye/ui/components/&lt;name&gt;</Code>。每个组件页的“导入”一节都给出了对应路径。
       </P>
 
       <H2 id="typescript">TypeScript</H2>

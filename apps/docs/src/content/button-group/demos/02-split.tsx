@@ -1,8 +1,8 @@
-import { MenuItem, MenuPopup } from "@yanqing/ui/components/menu";
-import { MenuSeparator } from "@yanqing/ui/components/menu";
-import { Button } from "@yanqing/ui/components/button";
-import { Menu, MenuTrigger } from "@yanqing/ui/components/menu";
-import { ButtonGroup, ButtonGroupSeparator } from "@yanqing/ui";
+import { MenuItem, MenuPopup } from "@qingye/ui/components/menu";
+import { MenuSeparator } from "@qingye/ui/components/menu";
+import { Button } from "@qingye/ui/components/button";
+import { Menu, MenuTrigger } from "@qingye/ui/components/menu";
+import { ButtonGroup, ButtonGroupSeparator } from "@qingye/ui";
 import { ChevronDownIcon, CopyIcon, FileDownIcon, SendIcon } from "lucide-react";
 
 export const meta = { title: "拆分按钮", description: "主操作旁附一个展开更多选项的菜单。" };

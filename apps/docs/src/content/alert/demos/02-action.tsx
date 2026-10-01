@@ -1,5 +1,5 @@
-import { Alert, AlertAction, AlertDescription, AlertTitle } from "@yanqing/ui/components/alert";
-import { Button } from "@yanqing/ui/components/button";
+import { Alert, AlertAction, AlertDescription, AlertTitle } from "@qingye/ui/components/alert";
+import { Button } from "@qingye/ui/components/button";
 import { TriangleAlertIcon } from "lucide-react";
 
 export const meta = {

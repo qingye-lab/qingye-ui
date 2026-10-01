@@ -1,6 +1,6 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Frame } from "@yanqing/ui/components/frame";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Badge } from "@qingye/ui/components/badge";
+import { Frame } from "@qingye/ui/components/frame";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 
 export const meta = { title: "组合：订单状态", description: "表格状态列统一用 outline + 圆点，颜色之外始终保留文字。" };
 

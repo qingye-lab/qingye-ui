@@ -1,17 +1,17 @@
-import { TableBody, TableCell, TableHead } from "@yanqing/ui/components/table";
-import { TableHeader } from "@yanqing/ui/components/table";
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
-import { Label } from "@yanqing/ui/components/label";
-import { Slider } from "@yanqing/ui/components/slider";
-import { Switch } from "@yanqing/ui/components/switch";
-import { Table, TableRow } from "@yanqing/ui/components/table";
-import { useTheme } from "@yanqing/ui/components/theme-provider";
-import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
-import { cn } from "@yanqing/ui";
+import { TableBody, TableCell, TableHead } from "@qingye/ui/components/table";
+import { TableHeader } from "@qingye/ui/components/table";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
+import { Label } from "@qingye/ui/components/label";
+import { Slider } from "@qingye/ui/components/slider";
+import { Switch } from "@qingye/ui/components/switch";
+import { Table, TableRow } from "@qingye/ui/components/table";
+import { useTheme } from "@qingye/ui/components/theme-provider";
+import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { cn } from "@qingye/ui";
 import { useId, useMemo, useState, type CSSProperties } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
@@ -49,7 +49,7 @@ function cssFor(brand: Brand, radius: number, compact: boolean): string {
     dark.push(`--qy-primary: ${brand.dark.primary};`, `--qy-primary-foreground: ${brand.dark.foreground};`, `--qy-ring: ${brand.dark.ring};`);
   }
   if (radius !== DEFAULT_RADIUS) root.push(`--qy-radius: ${radius}rem;`);
-  const blocks = [`@import "tailwindcss";`, `@import "@yanqing/ui/styles.css";`];
+  const blocks = [`@import "tailwindcss";`, `@import "@qingye/ui/styles.css";`];
   if (root.length) blocks.push(`\n:root {\n${root.map((line) => `  ${line}`).join("\n")}\n}`);
   if (dark.length) blocks.push(`\n.dark {\n${dark.map((line) => `  ${line}`).join("\n")}\n}`);
   if (compact) blocks.push(`\n/* 在 <body> 或某个容器上：data-density="compact" */`);
@@ -178,7 +178,7 @@ const headScript = `<script>
   } catch (e) {}
 </script>`;
 
-const useThemeSnippet = `import { useTheme } from "@yanqing/ui";
+const useThemeSnippet = `import { useTheme } from "@qingye/ui";
 
 export function ThemeSwitch() {
   const { theme, resolvedTheme, setTheme } = useTheme();

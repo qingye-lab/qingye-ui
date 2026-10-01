@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui/components/number-field";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 
 export const meta = { title: "范围与步长", description: "到达边界时对应按钮自动禁用；Shift + ↑ ↓ 按 largeStep 调整。" };
 

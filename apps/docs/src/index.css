@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@yanqing/ui/styles.css";
+@import "@qingye/ui/styles.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
@@ -122,4 +122,45 @@
   :root:not([data-ui-input="keyboard"]) [data-route-enter] {
     animation: docs-enter var(--qy-duration-base) var(--qy-ease-out) backwards;
   }
+}
+
+/* Component composition previews are the centre of the landing page. */
+.qy-home { background: var(--qy-background); }
+.qy-home-hero { max-width: 960px; margin-inline: auto; padding: 68px 24px 48px; text-align: center; }
+.qy-home-hero h1 { margin: 0; color: var(--qy-foreground-strong); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.22; letter-spacing: 0; text-wrap: balance; }
+.qy-home-hero > p { margin: 19px 0 26px; color: var(--qy-foreground-muted); font-size: 1.0625rem; line-height: 1.7; text-wrap: balance; }
+.qy-home-facts { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 24px; margin-top: 22px; color: var(--qy-foreground-muted); font-size: 12px; }
+.qy-showcase { max-width: 1440px; padding-inline: 32px; margin-inline: auto; }
+.qy-showcase-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.qy-showcase-tabs { flex-wrap: nowrap; }
+.qy-showcase-tabs [data-slot="tabs-tab"] { min-width: 96px; }
+.qy-preview-open { display: inline-flex; align-items: center; gap: 5px; padding: 6px 0; color: var(--qy-foreground-muted); font-size: 12px; white-space: nowrap; }
+.qy-preview-open:hover { color: var(--qy-foreground); }
+.qy-showcase-frame { overflow: hidden; }
+.qy-showcase-frame > [data-slot="tabs-panel"] { margin: 0; }
+.qy-preview-loading { height: 760px; display: grid; place-items: center; color: var(--qy-foreground-muted); font-size: 13px; background: var(--qy-surface-subtle); }
+.qy-components-preview { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; padding: 32px; background: var(--qy-background); }
+.qy-showcase-caption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 16px; color: var(--qy-foreground-muted); font-size: 12px; }
+.qy-showcase-caption a { display: inline-flex; align-items: center; gap: 5px; }
+.qy-home-start { display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: 48px; max-width: 1376px; margin: 76px auto 56px; padding: 40px 0; border-top: 1px solid var(--qy-border); }
+.qy-home-start h2 { font-size: 26px; font-weight: 600; color: var(--qy-foreground-strong); }
+.qy-home-start p { margin-block: 10px 20px; color: var(--qy-foreground-muted); font-size: 14px; }
+.qy-install-command { flex-direction: row; align-items: center; gap: 16px; min-width: 0; padding: 16px 16px 16px 20px; }
+.qy-install-command code { min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; flex: 1; font-family: var(--qy-font-mono); font-size: 11px; line-height: 1.8; }
+.qy-home-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 26px 32px 32px; max-width: 1440px; margin-inline: auto; color: var(--qy-foreground-muted); font-size: 12px; }
+.qy-home-footer > div { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
+@media (max-width: 1450px) { .qy-home-start { margin-inline: 32px; } }
+@media (max-width: 640px) {
+  .qy-home-hero { padding: 48px 20px 36px; }
+  .qy-home-hero > p { font-size: 14px; margin-block: 16px 23px; }
+  .qy-home-facts { gap: 8px 16px; font-size: 11px; }
+  .qy-showcase { padding-inline: 14px; }
+  .qy-showcase-toolbar { gap: 10px; align-items: flex-start; flex-direction: column; }
+  .qy-showcase-tabs { width: 100%; }
+  .qy-showcase-tabs [data-slot="tabs-tab"] { min-width: 0; flex: 1; }
+  .qy-components-preview { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 16px; }
+  .qy-showcase-caption { font-size: 11px; }
+  .qy-home-start { grid-template-columns: minmax(0, 1fr); gap: 24px; margin: 48px 20px 20px; padding-block: 28px; }
+  .qy-home-start h2 { font-size: 22px; }
+  .qy-home-footer { padding-inline: 20px; }
 }

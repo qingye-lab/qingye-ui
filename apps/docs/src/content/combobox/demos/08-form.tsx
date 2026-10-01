@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@yanqing/ui/components/combobox";
-import { Field, FieldDescription, FieldError, FieldLabel } from "@yanqing/ui/components/field";
-import { Form } from "@yanqing/ui/components/form";
+import { Button } from "@qingye/ui/components/button";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@qingye/ui/components/combobox";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Form } from "@qingye/ui/components/form";
 import { useState, type FormEvent } from "react";
 
 export const meta = { title: "表单校验", description: "required 未选时由 Field 显示错误；提交值为选项的 value。" };

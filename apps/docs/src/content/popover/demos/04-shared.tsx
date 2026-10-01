@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
-import { Button } from "@yanqing/ui/components/button";
-import { Popover, PopoverCreateHandle, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@yanqing/ui/components/popover";
+import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
+import { Button } from "@qingye/ui/components/button";
+import { Popover, PopoverCreateHandle, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 import { BellIcon, UserIcon } from "lucide-react";
 import type { ComponentType } from "react";
 

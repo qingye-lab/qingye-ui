@@ -1,5 +1,5 @@
-import { CodeBlock } from "@yanqing/ui/components/code-block";
-import { Prose } from "@yanqing/ui/components/typography";
+import { CodeBlock } from "@qingye/ui/components/code-block";
+import { Prose } from "@qingye/ui/components/typography";
 
 export const meta = { title: "长文 Prose", description: "段落、列表、链接、引用、行内代码、表格、分隔线；内部的组件保持自身样式。" };
 
@@ -13,7 +13,7 @@ export default function Demo() {
       </p>
       <h2>准备工作</h2>
       <ul>
-        <li>确认门店网络可以访问 <code>api.yanqing.cn</code> 的 443 端口。</li>
+        <li>确认门店网络可以访问 <code>api.qingye.example</code> 的 443 端口。</li>
         <li>
           在后台创建门店并记下门店编号，例如 <code>XH-001</code>。
         </li>
@@ -33,7 +33,7 @@ export default function Demo() {
           绑定后约 <strong>30 秒</strong> 内状态变为「在线」。
         </li>
       </ol>
-      <CodeBlock code={`curl -s https://api.yanqing.cn/v2/stores/XH-001/devices \\\n  -H "Authorization: Bearer $TOKEN"`} filename="查询设备" />
+      <CodeBlock code={`curl -s https://api.qingye.example/v2/stores/XH-001/devices \\\n  -H "Authorization: Bearer $TOKEN"`} filename="查询设备" />
       <blockquote>
         <p>如果 5 分钟后仍显示离线，请先检查门店路由器是否拦截了出站连接，再联系技术支持。</p>
       </blockquote>

@@ -5,6 +5,8 @@ import { PlaygroundPage } from "./pages/playground";
 
 // Every page is its own chunk; the shell (header, sidebar, search trigger) stays eager.
 const Home = lazy(() => import("./pages/home"));
+const ExamplePage = lazy(() => import("./pages/examples"));
+const ExamplesPage = lazy(() => import("./pages/examples").then((module) => ({ default: module.ExamplesPage })));
 const Introduction = lazy(() => import("./pages/docs/introduction"));
 const Installation = lazy(() => import("./pages/docs/installation"));
 const Theming = lazy(() => import("./pages/docs/theming"));
@@ -24,6 +26,8 @@ export function App() {
       <Route element={<PlaygroundPage />} path="/playground/:slug" />
       <Route element={<SiteShell />}>
         <Route element={<Home />} index />
+        <Route element={<ExamplesPage />} path="examples" />
+        <Route element={<ExamplePage />} path="examples/:slug" />
         <Route element={<DocsLayout />} path="docs">
           <Route element={<Introduction />} index />
           <Route element={<Installation />} path="installation" />

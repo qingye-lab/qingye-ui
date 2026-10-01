@@ -1,0 +1,1 @@
+import{e as r}from"./index-Bp3wbe0b.js";import{u as o,m}from"./vendor-base-ui-NEp_fldd.js";function f({className:e,render:t,...a}){const s={className:r("inline-flex items-center gap-2 font-medium text-base/4.5 text-foreground sm:text-sm/4",e),"data-slot":"label"};return o({defaultTagName:"label",props:m(s,a),render:t})}export{f as L};

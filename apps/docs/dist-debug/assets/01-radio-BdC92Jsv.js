@@ -1,4 +1,0 @@
-const _01Radio = 'import {\n  RadioGroupPrimitive,\n  RadioPrimitive,\n  segmentedControlItemVariants,\n  segmentedControlRootClassName,\n} from "@yanqing/ui";\n\nexport const meta = {\n  title: "表单取值",\n  description: "基于 RadioGroup，值会随表单提交；grow 让两个选项等宽。",\n};\n\nconst item = segmentedControlItemVariants({ className: "grow", state: "checked" });\n\nexport default function Demo() {\n  return (\n    <RadioGroupPrimitive\n      aria-label="计费周期"\n      className={segmentedControlRootClassName}\n      defaultValue="monthly"\n      name="billing"\n    >\n      <RadioPrimitive.Root className={item} value="monthly">\n        按月付费\n      </RadioPrimitive.Root>\n      <RadioPrimitive.Root className={item} value="yearly">\n        按年付费\n        <span className="text-success-foreground text-xs">省 20%</span>\n      </RadioPrimitive.Root>\n    </RadioGroupPrimitive>\n  );\n}\n';
-export {
-  _01Radio as default
-};

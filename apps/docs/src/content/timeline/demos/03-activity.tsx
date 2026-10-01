@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
-import { Badge } from "@yanqing/ui/components/badge";
-import { Timeline, TimelineContent, TimelineDescription, TimelineHeader, TimelineItem, TimelineMarker, TimelineTime, TimelineTitle } from "@yanqing/ui/components/timeline";
+import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
+import { Badge } from "@qingye/ui/components/badge";
+import { Timeline, TimelineContent, TimelineDescription, TimelineHeader, TimelineItem, TimelineMarker, TimelineTime, TimelineTitle } from "@qingye/ui/components/timeline";
 import { PaperclipIcon, TagIcon } from "lucide-react";
 
 export const meta = { title: "动态与评论", description: "用子组件组合：头像标记、语句式标题与评论内容。" };

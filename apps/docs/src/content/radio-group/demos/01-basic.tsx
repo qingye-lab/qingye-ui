@@ -1,5 +1,5 @@
-import { Label } from "@yanqing/ui/components/label";
-import { Radio, RadioGroup } from "@yanqing/ui/components/radio-group";
+import { Label } from "@qingye/ui/components/label";
+import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
 
 export const meta = { title: "基础用法" };
 

@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
+import { Button } from "@qingye/ui/components/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "基础", description: "标题、内容与底部操作。" };
 

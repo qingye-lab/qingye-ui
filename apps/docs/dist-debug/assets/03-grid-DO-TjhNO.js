@@ -1,4 +1,0 @@
-const _03Grid = 'import { Grid, Stack, Text } from "@yanqing/ui";\n\nexport const meta = { title: "Grid", description: "columns={3}：手机一列，640px 起两列，1024px 起三列。" };\n\nconst stats = [\n  { label: "本月部署", value: "126", note: "较上月 +18" },\n  { label: "平均构建时长", value: "48 秒", note: "较上月 −6 秒" },\n  { label: "成功率", value: "99.2%", note: "失败 1 次" },\n];\n\nexport default function Demo() {\n  return (\n    <Grid className="w-full" columns={3} gap={3}>\n      {stats.map((stat) => (\n        <Stack className="rounded-xl border p-4" gap={1} key={stat.label}>\n          <Text size="caption" tone="muted">\n            {stat.label}\n          </Text>\n          <Text className="numeric font-semibold text-2xl">{stat.value}</Text>\n          <Text size="caption" tone="muted">\n            {stat.note}\n          </Text>\n        </Stack>\n      ))}\n    </Grid>\n  );\n}\n';
-export {
-  _03Grid as default
-};

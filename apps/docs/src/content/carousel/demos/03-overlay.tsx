@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@yanqing/ui/components/carousel";
+import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@qingye/ui/components/carousel";
 
 export const meta = {
   title: "按钮浮于两侧",

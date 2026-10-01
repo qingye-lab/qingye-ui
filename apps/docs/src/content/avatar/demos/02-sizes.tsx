@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@qingye/ui/components/avatar";
 
 export const meta = { title: "尺寸", description: "xs 到 xl 依次为 20 / 24 / 32 / 40 / 48px。" };
 

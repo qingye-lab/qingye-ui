@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTab } from "@yanqing/ui/components/tabs";
+import { Tabs, TabsList, TabsTab } from "@qingye/ui/components/tabs";
 
 export const meta = { title: "尺寸", description: "sm、default、lg 三档；移动端自动加高 4px。" };
 

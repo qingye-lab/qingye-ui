@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Menu, MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuPopup, MenuSeparator, MenuTrigger } from "@yanqing/ui/components/menu";
+import { Button } from "@qingye/ui/components/button";
+import { Menu, MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuPopup, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
 import { Columns3Icon } from "lucide-react";
 import { useState } from "react";
 

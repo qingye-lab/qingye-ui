@@ -1,4 +1,4 @@
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandPanel } from "@yanqing/ui/components/command";
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandPanel } from "@qingye/ui/components/command";
 
 export const meta = {
   title: "空状态",

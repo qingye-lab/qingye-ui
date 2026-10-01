@@ -1,0 +1,2 @@
+import{j as t}from"./vendor-react-DkPWdm9N.js";import{C as i}from"./code-block-BtPGJbWw.js";import"./index-Bp3wbe0b.js";import"./vendor-CtnXKZlY.js";import"./vendor-date-j_bVFt3w.js";import"./vendor-base-ui-NEp_fldd.js";import"./copy-button-CBhvgVqD.js";const d={title:"基础",description:"没有标题栏时，复制按钮在右上角，悬停或聚焦时出现。"},o=`pnpm add @qingye/ui
+pnpm add -D tailwindcss @tailwindcss/vite`;function c(){return t.jsx(i,{className:"w-full",code:o})}export{c as default,d as meta};

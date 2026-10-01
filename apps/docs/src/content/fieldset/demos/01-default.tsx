@@ -1,6 +1,6 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
-import { Input } from "@yanqing/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "默认" };
 

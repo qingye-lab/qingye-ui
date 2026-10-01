@@ -1,5 +1,5 @@
-import { Label } from "@yanqing/ui/components/label";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Label } from "@qingye/ui/components/label";
+import { Switch } from "@qingye/ui/components/switch";
 
 export const meta = { title: "基础用法" };
 

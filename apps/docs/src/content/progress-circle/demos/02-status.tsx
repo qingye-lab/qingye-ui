@@ -1,4 +1,4 @@
-import { ProgressCircle } from "@yanqing/ui/components/progress-circle";
+import { ProgressCircle } from "@qingye/ui/components/progress-circle";
 
 export const meta = { title: "状态色", description: "进度弧取状态色，轨道保持半透明中性。" };
 

@@ -1,6 +1,6 @@
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
-import { Input } from "@yanqing/ui/components/input";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "禁用", description: "disabled 作用于组内所有表单项，例如审核期间锁定资料。" };
 

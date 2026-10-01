@@ -1,4 +1,0 @@
-const _02Sizes = 'import { Button, Group, GroupSeparator } from "@yanqing/ui";\n\nexport const meta = { title: "尺寸与禁用", description: "组内控件统一尺寸；单个按钮可禁用。" };\n\nconst sizes = ["sm", "default", "lg"] as const;\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-col items-center gap-4">\n      {sizes.map((size) => (\n        <Group aria-label="缩放" key={size}>\n          <Button size={size} variant="outline">\n            缩小\n          </Button>\n          <GroupSeparator />\n          <Button className="numeric" disabled size={size} variant="outline">\n            100%\n          </Button>\n          <GroupSeparator />\n          <Button size={size} variant="outline">\n            放大\n          </Button>\n        </Group>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _02Sizes as default
-};

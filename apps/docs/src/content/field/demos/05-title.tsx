@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldTitle } from "@yanqing/ui/components/field";
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui/components/toggle-group";
+import { Field, FieldDescription, FieldTitle } from "@qingye/ui/components/field";
+import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@qingye/ui/components/toggle-group";
 
 export const meta = {
   title: "标题",

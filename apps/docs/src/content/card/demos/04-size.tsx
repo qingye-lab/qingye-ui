@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { Button } from "@qingye/ui/components/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
 
 export const meta = { title: "紧凑尺寸", description: "size=\"sm\" 把内边距从 24px 收到 16px，区块间距从 16px 收到 12px。" };
 

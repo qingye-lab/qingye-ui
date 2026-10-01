@@ -1,4 +1,0 @@
-const _02Actions = 'import { Button, Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui";\nimport { BookOpenIcon, RocketIcon } from "lucide-react";\n\nexport const meta = { title: "带操作", description: "EmptyContent 放下一步操作：一个主要按钮，最多再配一个次要按钮。" };\n\nexport default function Demo() {\n  return (\n    <Empty>\n      <EmptyHeader>\n        <EmptyMedia variant="icon">\n          <RocketIcon aria-hidden="true" />\n        </EmptyMedia>\n        <EmptyTitle>还没有部署</EmptyTitle>\n        <EmptyDescription>导入一个 Git 仓库，之后每次推送都会自动构建并部署。</EmptyDescription>\n      </EmptyHeader>\n      <EmptyContent>\n        <div className="flex flex-wrap justify-center gap-2">\n          <Button size="sm">导入仓库</Button>\n          <Button size="sm" variant="outline">\n            <BookOpenIcon aria-hidden="true" />\n            查看文档\n          </Button>\n        </div>\n      </EmptyContent>\n    </Empty>\n  );\n}\n';
-export {
-  _02Actions as default
-};

@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { DateTimePicker } from "@yanqing/ui/components/date-time-picker";
-import { Field, FieldDescription } from "@yanqing/ui/components/field";
-import { Label } from "@yanqing/ui/components/label";
+import { Button } from "@qingye/ui/components/button";
+import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
+import { Field, FieldDescription } from "@qingye/ui/components/field";
+import { Label } from "@qingye/ui/components/label";
 import { useState, type FormEvent } from "react";
 
 export const meta = { title: "组合：预约上门安装", description: "只能约今天以后的工作日，默认时间 09:00，通过 name 提交。" };

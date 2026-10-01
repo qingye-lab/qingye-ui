@@ -1,4 +1,0 @@
-const _03Field = 'import { Field, FieldDescription, FieldError, FieldLabel, PasswordInput } from "@yanqing/ui";\n\nexport const meta = { title: "配合 Field", description: "标签、规则说明与校验信息。提交后未满足 minLength 时显示错误。" };\n\nexport default function Demo() {\n  return (\n    <div className="grid w-full max-w-xs gap-5">\n      <Field>\n        <FieldLabel>新密码</FieldLabel>\n        <PasswordInput autoComplete="new-password" minLength={8} required />\n        <FieldDescription>至少 8 位，建议包含字母与数字。</FieldDescription>\n      </Field>\n      <Field invalid>\n        <FieldLabel>确认密码</FieldLabel>\n        <PasswordInput autoComplete="new-password" defaultValue="hangzhou" />\n        <FieldError>两次输入的密码不一致。</FieldError>\n      </Field>\n      <Field disabled>\n        <FieldLabel>当前密码</FieldLabel>\n        <PasswordInput defaultValue="unchanged" />\n      </Field>\n    </div>\n  );\n}\n';
-export {
-  _03Field as default
-};

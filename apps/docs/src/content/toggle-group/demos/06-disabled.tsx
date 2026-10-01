@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui/components/toggle-group";
+import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@qingye/ui/components/toggle-group";
 
 export const meta = { title: "禁用", description: "可禁用整组，或只禁用其中一项。" };
 

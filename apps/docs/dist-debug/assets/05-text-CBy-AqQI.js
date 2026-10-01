@@ -1,4 +1,0 @@
-const _05Text = 'import { Stack, Text } from "@yanqing/ui";\n\nexport const meta = { title: "Text", description: "三档字号与五种语义色；不设 tone 时继承父级颜色。" };\n\nexport default function Demo() {\n  return (\n    <Stack className="w-full max-w-sm" gap={4}>\n      <Stack gap={1}>\n        <Text as="p">正文 body · 部署完成后会发送邮件通知。</Text>\n        <Text as="p" size="label">\n          标签 label · 部署区域\n        </Text>\n        <Text as="p" size="caption">\n          说明 caption · 最近更新于 <time dateTime="2026-10-01T14:32">10 月 1 日 14:32</time>\n        </Text>\n      </Stack>\n      <Stack gap={1}>\n        <Text as="p" tone="muted">muted · 次要信息与说明文字</Text>\n        <Text as="p" tone="success">success · 证书已自动续期</Text>\n        <Text as="p" tone="warning">warning · 本月构建时长已用 85%</Text>\n        <Text as="p" tone="danger">danger · 域名解析校验失败</Text>\n      </Stack>\n    </Stack>\n  );\n}\n';
-export {
-  _05Text as default
-};

@@ -1,7 +1,7 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
-import { Kbd } from "@yanqing/ui/components/kbd";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Badge } from "@qingye/ui/components/badge";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@qingye/ui/components/empty";
+import { Kbd } from "@qingye/ui/components/kbd";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 import { CodeXmlIcon, LayersIcon } from "lucide-react";
 import { Component, use, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
@@ -86,7 +86,7 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
       <H2 id="usage">导入</H2>
       <CodeBlock code={importSnippet(entry.exports)} />
       <P className="mt-3 text-[0.875rem] text-muted-foreground">
-        也可以按组件入口导入，只打包这一个文件：<Code>@yanqing/ui/components/{entry.slug}</Code>
+        也可以按组件入口导入，只打包这一个文件：<Code>@qingye/ui/components/{entry.slug}</Code>
       </P>
 
       <H2 id="examples">示例</H2>

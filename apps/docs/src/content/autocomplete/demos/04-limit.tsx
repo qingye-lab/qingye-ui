@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus, useAutocompleteFilter } from "@yanqing/ui/components/autocomplete";
+import { Autocomplete, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus, useAutocompleteFilter } from "@qingye/ui/components/autocomplete";
 import { useState } from "react";
 
 export const meta = { title: "限制条数", description: "limit 截断列表，状态行提示还有多少条可以继续输入缩小范围。" };

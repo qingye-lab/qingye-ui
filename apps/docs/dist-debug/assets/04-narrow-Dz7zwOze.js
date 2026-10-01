@@ -1,4 +1,0 @@
-const _04Narrow = 'import { Button, PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@yanqing/ui";\nimport { PlusIcon } from "lucide-react";\n\nexport const meta = {\n  title: "按容器换行",\n  description: "放在窄容器（如侧栏布局的内容区）中时，操作按自身宽度换行，与视口无关。",\n};\n\nexport default function Demo() {\n  return (\n    <div className="w-full max-w-sm rounded-xl border border-dashed p-4">\n      <PageHeader>\n        <PageHeaderContent>\n          <PageHeaderTitle>优惠券</PageHeaderTitle>\n          <PageHeaderDescription>进行中 12 个，本月已核销 3,286 张。</PageHeaderDescription>\n        </PageHeaderContent>\n        <PageHeaderActions>\n          <Button size="sm">\n            <PlusIcon aria-hidden="true" />\n            新建优惠券\n          </Button>\n        </PageHeaderActions>\n      </PageHeader>\n    </div>\n  );\n}\n';
-export {
-  _04Narrow as default
-};

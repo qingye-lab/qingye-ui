@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Slider, SliderValue } from "@yanqing/ui/components/slider";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Slider, SliderValue } from "@qingye/ui/components/slider";
 
 export const meta = { title: "范围", description: "两个滑块分别命名，读屏能区分最低价与最高价。" };
 

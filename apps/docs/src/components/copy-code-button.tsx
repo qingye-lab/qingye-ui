@@ -1,9 +1,9 @@
-import { TooltipPopup } from "@yanqing/ui/components/tooltip";
-import { Button } from "@yanqing/ui/components/button";
-import { toastManager } from "@yanqing/ui/components/toast";
-import { Tooltip, TooltipTrigger } from "@yanqing/ui/components/tooltip";
-import { cn } from "@yanqing/ui";
-import { useUILocale } from "@yanqing/ui/locale";
+import { TooltipPopup } from "@qingye/ui/components/tooltip";
+import { Button } from "@qingye/ui/components/button";
+import { toastManager } from "@qingye/ui/components/toast";
+import { Tooltip, TooltipTrigger } from "@qingye/ui/components/tooltip";
+import { cn } from "@qingye/ui";
+import { useUILocale } from "@qingye/ui/locale";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 

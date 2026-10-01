@@ -1,6 +1,6 @@
-import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui/components/disclosure";
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
+import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@qingye/ui/components/disclosure";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = {
   title: "表单中的高级设置",

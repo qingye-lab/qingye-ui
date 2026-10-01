@@ -1,5 +1,5 @@
-import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@qingye/ui/components/empty";
 import { BellIcon } from "lucide-react";
 
 export const meta = { title: "在卡片中", description: "嵌在卡片里时收紧留白，标题降到 text-base。" };

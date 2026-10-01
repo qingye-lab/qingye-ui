@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { AnchoredToastProvider, anchoredToastManager } from "@yanqing/ui/components/toast";
+import { Button } from "@qingye/ui/components/button";
+import { AnchoredToastProvider, anchoredToastManager } from "@qingye/ui/components/toast";
 import { CopyIcon } from "lucide-react";
 import { useRef } from "react";
 
@@ -14,7 +14,7 @@ function CopyLink() {
   return (
     <Button
       onClick={() => {
-        void navigator.clipboard?.writeText("https://yanqing.cn/t/2318");
+        void navigator.clipboard?.writeText("https://qingye.example/t/2318");
         anchoredToastManager.add({
           title: "已复制",
           timeout: 1500,

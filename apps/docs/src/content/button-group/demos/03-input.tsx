@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Input } from "@yanqing/ui/components/input";
-import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
-import { ButtonGroup, ButtonGroupText } from "@yanqing/ui";
+import { Button } from "@qingye/ui/components/button";
+import { Input } from "@qingye/ui/components/input";
+import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
+import { ButtonGroup, ButtonGroupText } from "@qingye/ui";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "与输入框组合", description: "输入框、选择框、文字前缀与按钮拼接为一行。" };

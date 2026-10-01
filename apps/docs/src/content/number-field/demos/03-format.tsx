@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui/components/number-field";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 
 export const meta = { title: "格式化", description: "format 接受 Intl.NumberFormat 选项：货币、百分比、单位。" };
 

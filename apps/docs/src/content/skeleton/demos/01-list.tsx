@@ -1,4 +1,4 @@
-import { Skeleton } from "@yanqing/ui/components/skeleton";
+import { Skeleton } from "@qingye/ui/components/skeleton";
 
 export const meta = { title: "列表", description: "圆形头像加两行文字；每行宽度略有不同，更接近真实内容。" };
 

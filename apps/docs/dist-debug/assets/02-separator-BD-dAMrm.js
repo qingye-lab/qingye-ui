@@ -1,4 +1,0 @@
-const _02Separator = 'import { OTPField, OTPFieldInput, OTPFieldSeparator } from "@yanqing/ui";\n\nexport const meta = { title: "分组与大尺寸", description: "3-3 分组更易核对；lg 适合独立的验证页面。" };\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-col items-center gap-6">\n      <OTPField length={6} aria-label="邮箱验证码">\n        <OTPFieldInput />\n        <OTPFieldInput />\n        <OTPFieldInput />\n        <OTPFieldSeparator />\n        <OTPFieldInput />\n        <OTPFieldInput />\n        <OTPFieldInput />\n      </OTPField>\n      <OTPField length={4} size="lg" aria-label="设备配对码" defaultValue="2048">\n        {Array.from({ length: 4 }, (_, index) => (\n          <OTPFieldInput key={index} />\n        ))}\n      </OTPField>\n    </div>\n  );\n}\n';
-export {
-  _02Separator as default
-};

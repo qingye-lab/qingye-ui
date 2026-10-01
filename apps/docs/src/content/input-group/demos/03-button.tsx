@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@yanqing/ui/components/input-group";
+import { Button } from "@qingye/ui/components/button";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@qingye/ui/components/input-group";
 import { ArrowRightIcon, InfoIcon, RefreshCwIcon } from "lucide-react";
 
 export const meta = { title: "按钮", description: "InputGroupButton 默认是 ghost + icon-xs，与输入框内边距对齐。" };

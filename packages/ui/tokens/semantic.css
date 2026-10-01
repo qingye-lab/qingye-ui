@@ -8,7 +8,8 @@
  * Neutrals are deliberately translucent: borders, fills and hover states are
  * black or white at low alpha, so they read correctly on any surface they sit
  * on — a card, a sidebar, a popover — without per-surface overrides. The
- * values follow the coss ui neutral theme the components were tuned against.
+ * surface tones and elevations keep a clear page → panel → floating control
+ * hierarchy without tinting every component with the brand colour.
  */
 @layer base {
   :root,
@@ -17,19 +18,20 @@
     color-scheme: light;
 
     /*
-     * The page carries a 1–2% neutral tint while cards stay pure white, so a
-     * card separates from the page by surface tone rather than by shadow.
+     * The page carries a quiet neutral tint while panels stay white. The
+     * difference remains visible in an actual product layout, including when
+     * a consumer removes a card's elevation.
      */
-    --qy-background: color-mix(in srgb, var(--qy-white) 98.5%, var(--qy-neutral-950));
+    --qy-background: color-mix(in srgb, var(--qy-white) 96.5%, var(--qy-neutral-950));
     --qy-foreground: var(--qy-neutral-950);
 
     /* Surfaces, from the page outward. */
     --qy-surface: var(--qy-white);
     --qy-surface-raised: var(--qy-white);
     --qy-surface-subtle: var(--qy-neutral-50);
-    --qy-surface-inset: oklch(0 0 0 / 0.04);
-    --qy-surface-hover: oklch(0 0 0 / 0.04);
-    --qy-surface-active: oklch(0 0 0 / 0.08);
+    --qy-surface-inset: oklch(0 0 0 / 0.045);
+    --qy-surface-hover: oklch(0 0 0 / 0.065);
+    --qy-surface-active: oklch(0 0 0 / 0.1);
     --qy-overlay: oklch(0 0 0 / 0.32);
 
     /* Text, strongest to weakest. */
@@ -48,7 +50,7 @@
     /* Emphasis. */
     --qy-primary: var(--qy-neutral-800);
     --qy-primary-foreground: var(--qy-neutral-50);
-    --qy-accent: oklch(0 0 0 / 0.04);
+    --qy-accent: oklch(0 0 0 / 0.05);
     --qy-accent-foreground: var(--qy-foreground);
 
     /* Status: solid marks the state, foreground is readable text on the page. */
@@ -80,9 +82,10 @@
     --qy-sidebar-primary-foreground: var(--qy-neutral-0, var(--qy-white));
     --qy-sidebar-ring: var(--qy-neutral-400);
 
-    /* Elevation stays quiet; depth comes mostly from translucent borders. */
-    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.05);
+    /* A close contact shadow anchors the surface; the soft tail stays faint. */
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px -8px oklch(0 0 0 / 0.12);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.06), 0 2px 4px -2px oklch(0 0 0 / 0.06);
+    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.045);
     --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
     --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
   }
@@ -95,15 +98,15 @@
     --qy-foreground: var(--qy-neutral-100);
 
     --qy-surface: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
-    --qy-surface-raised: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-surface-raised: color-mix(in srgb, var(--qy-background) 94%, var(--qy-white));
     --qy-surface-subtle: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
     --qy-surface-inset: oklch(1 0 0 / 0.04);
-    --qy-surface-hover: oklch(1 0 0 / 0.04);
-    --qy-surface-active: oklch(1 0 0 / 0.08);
+    --qy-surface-hover: oklch(1 0 0 / 0.07);
+    --qy-surface-active: oklch(1 0 0 / 0.11);
     --qy-overlay: oklch(0 0 0 / 0.56);
 
     --qy-foreground-strong: var(--qy-white);
-    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 90%, var(--qy-white));
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 80%, var(--qy-white));
     --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 72%, transparent);
     --qy-foreground-inverse: var(--qy-neutral-800);
 
@@ -115,7 +118,7 @@
 
     --qy-primary: var(--qy-neutral-100);
     --qy-primary-foreground: var(--qy-neutral-800);
-    --qy-accent: oklch(1 0 0 / 0.04);
+    --qy-accent: oklch(1 0 0 / 0.055);
     --qy-accent-foreground: var(--qy-neutral-100);
 
     --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
@@ -145,8 +148,9 @@
     --qy-sidebar-primary-foreground: var(--qy-neutral-800);
     --qy-sidebar-ring: var(--qy-neutral-400);
 
-    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.24);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.3);
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.24);
+    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.2);
     --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.28);
     --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.64), 0 4px 12px oklch(0 0 0 / 0.32);
   }

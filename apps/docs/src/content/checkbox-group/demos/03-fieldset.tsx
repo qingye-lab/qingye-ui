@@ -1,7 +1,7 @@
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { CheckboxGroup } from "@yanqing/ui/components/checkbox-group";
-import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
-import { Label } from "@yanqing/ui/components/label";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Label } from "@qingye/ui/components/label";
 
 export const meta = { title: "横向排列与禁用", description: "Fieldset 命名整组；禁用的选项保持可见。" };
 

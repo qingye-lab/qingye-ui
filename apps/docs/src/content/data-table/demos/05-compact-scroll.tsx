@@ -1,5 +1,5 @@
-import { DataTable } from "@yanqing/ui/components/data-table";
-import { type ColumnDef } from "@yanqing/ui";
+import { DataTable } from "@qingye/ui/components/data-table";
+import { type ColumnDef } from "@qingye/ui";
 
 export const meta = {
   title: "紧凑与限高",

@@ -1,4 +1,4 @@
-import { Timeline } from "@yanqing/ui/components/timeline";
+import { Timeline } from "@qingye/ui/components/timeline";
 
 export const meta = { title: "紧凑与连接线", description: "density=\"compact\" 适合审计日志；connector 可选 dashed 或 none。" };
 

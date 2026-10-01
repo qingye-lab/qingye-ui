@@ -1,354 +1,2551 @@
 {
-  "retrieved": "2026-09-30",
-  "registry": "https://coss.com/ui/r/registry.json",
-  "scope": "Component types, not particle examples or website applications",
+  "name": "Qingye UI",
+  "nameZh": "青野 UI",
+  "package": "@qingye/ui",
+  "version": "0.2.0",
+  "generatedBy": "scripts/gen-catalog.mjs",
+  "scope": "Published component entry points and guidance from the local documentation",
   "components": [
     {
       "name": "accordion",
+      "title": "手风琴 Accordion",
+      "description": "一组可以逐个展开的分节，用于常见问题、分组设置这类“标题一览、按需展开”的内容。只有一个折叠区时用 Disclosure。",
+      "category": "数据展示",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/accordion",
-      "docs": "https://coss.com/ui/docs/components/accordion"
+      "import": "@qingye/ui/components/accordion",
+      "exports": [
+        "Accordion",
+        "AccordionItem",
+        "AccordionTrigger",
+        "AccordionPanel"
+      ],
+      "docs": "/docs/components/accordion",
+      "notes": [
+        "标题写成问题或名词短语，保持简短；内容很长时考虑拆成独立页面。",
+        "不要把必须阅读的信息藏在默认收起的分节里。"
+      ],
+      "keywords": [
+        "accordion",
+        "手风琴",
+        "折叠面板",
+        "FAQ",
+        "常见问题"
+      ]
     },
     {
       "name": "alert",
+      "title": "警告提示 Alert",
+      "description": "嵌在页面内容中的状态说明，持续显示直到问题解决，例如配额将满、同步失败、需要补充资料。临时反馈用 Toast，需要用户立即确认用 AlertDialog。",
+      "category": "反馈",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/alert",
-      "docs": "https://coss.com/ui/docs/components/alert"
+      "import": "@qingye/ui/components/alert",
+      "exports": [
+        "Alert",
+        "AlertTitle",
+        "AlertDescription",
+        "AlertAction"
+      ],
+      "docs": "/docs/components/alert",
+      "notes": [
+        "颜色不是唯一信息：始终配合图标与明确的标题文字。",
+        "role=\"alert\" 会让读屏器立即播报；页面加载时就存在、并不紧急的说明，可改为 role=\"status\" 或去掉 role。",
+        "操作按钮用 xs / sm 尺寸，最多两个；主要操作放在最后。"
+      ],
+      "keywords": [
+        "alert",
+        "callout",
+        "banner",
+        "警告",
+        "提示条",
+        "通知栏"
+      ]
     },
     {
       "name": "alert-dialog",
+      "title": "警示对话框 AlertDialog",
+      "description": "打断当前操作、要求用户明确回应的对话框，用于删除、撤销权限等不可逆操作的二次确认。点击遮罩不会关闭。",
+      "category": "浮层",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/alert-dialog",
-      "docs": "https://coss.com/ui/docs/components/alert-dialog"
+      "import": "@qingye/ui/components/alert-dialog",
+      "exports": [
+        "AlertDialog",
+        "AlertDialogTrigger",
+        "AlertDialogPopup",
+        "AlertDialogHeader",
+        "AlertDialogTitle",
+        "AlertDialogDescription",
+        "AlertDialogFooter",
+        "AlertDialogClose"
+      ],
+      "docs": "/docs/components/alert-dialog",
+      "notes": [
+        "标题写成问句并点明对象，例如“删除 3 台设备？”；按钮文案写具体动作，不要只写“确定”。",
+        "默认焦点落在“取消”，避免误按回车直接执行危险操作。",
+        "确认按钮用 destructive 样式；需要异步执行时保持打开并显示 loading，完成后再关闭。"
+      ],
+      "keywords": [
+        "alert dialog",
+        "confirm",
+        "确认框",
+        "二次确认",
+        "删除确认"
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "title": "宽高比 AspectRatio",
+      "description": "让内容按固定宽高比占位，常用于封面图、视频和地图。图片加载前就预留好空间，页面不会跳动。",
+      "category": "布局",
+      "source": "local",
+      "import": "@qingye/ui/components/aspect-ratio",
+      "exports": [
+        "AspectRatio"
+      ],
+      "docs": "/docs/components/aspect-ratio",
+      "notes": [
+        "子元素会被绝对定位铺满，图片和视频自己写 object-cover 或 object-contain 决定裁切方式。",
+        "宽度由父容器决定，高度随之计算；需要限制尺寸时给外层加 max-w-*。"
+      ],
+      "keywords": [
+        "aspect ratio",
+        "ratio",
+        "宽高比",
+        "比例",
+        "图片",
+        "视频",
+        "封面"
+      ]
     },
     {
       "name": "autocomplete",
+      "title": "自动完成 Autocomplete",
+      "description": "带建议列表的文本输入：用户可以选建议，也可以输入任意内容。值必须来自选项时用 Combobox。",
+      "category": "表单",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/autocomplete",
-      "docs": "https://coss.com/ui/docs/components/autocomplete"
+      "import": "@qingye/ui/components/autocomplete",
+      "exports": [
+        "Autocomplete",
+        "AutocompleteInput",
+        "AutocompletePopup",
+        "AutocompleteList",
+        "AutocompleteItem",
+        "AutocompleteEmpty",
+        "AutocompleteGroup",
+        "AutocompleteGroupLabel",
+        "AutocompleteCollection",
+        "AutocompleteStatus"
+      ],
+      "docs": "/docs/components/autocomplete",
+      "notes": [
+        "Autocomplete 不限制输入；需要校验值是否合法时改用 Combobox。",
+        "建议很多时用 limit 截断，并在 AutocompleteStatus 中说明还有多少条。"
+      ],
+      "keywords": [
+        "autocomplete",
+        "自动完成",
+        "搜索建议",
+        "联想",
+        "typeahead"
+      ]
     },
     {
       "name": "avatar",
+      "title": "头像 Avatar",
+      "description": "用图片或姓名缩写代表一个人或团队。图片加载失败或缺失时自动显示回退内容；多人时用头像组叠放。",
+      "category": "数据展示",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/avatar",
-      "docs": "https://coss.com/ui/docs/components/avatar"
+      "import": "@qingye/ui/components/avatar",
+      "exports": [
+        "Avatar",
+        "AvatarImage",
+        "AvatarFallback",
+        "AvatarBadge",
+        "AvatarGroup",
+        "AvatarGroupCount"
+      ],
+      "docs": "/docs/components/avatar",
+      "notes": [
+        "回退内容用一个汉字（通常是姓），最小两档尺寸放不下两个字。",
+        "在线状态不要只靠 AvatarBadge 的颜色，旁边同时用文字说明，如 “在线”“离开”。",
+        "头像组外层可加 aria-label（如 “共 9 位成员”），“+N” 本身对读屏来说信息不完整。",
+        "头像只是标识；需要点击查看资料时，把头像和姓名一起包在链接或按钮里，而不是单独让头像可点击。"
+      ],
+      "keywords": [
+        "avatar",
+        "头像",
+        "用户",
+        "user",
+        "成员",
+        "member",
+        "头像组",
+        "avatar group",
+        "在线状态",
+        "presence"
+      ]
     },
     {
       "name": "badge",
+      "title": "徽章 Badge",
+      "description": "标注状态、类别或数量的小标签。用于列表、表格和标题旁的辅助信息，不承载主要操作。",
+      "category": "数据展示",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/badge",
-      "docs": "https://coss.com/ui/docs/components/badge"
+      "import": "@qingye/ui/components/badge",
+      "exports": [
+        "Badge"
+      ],
+      "docs": "/docs/components/badge",
+      "notes": [
+        "颜色不能是唯一信息：保留状态文字，圆点与图标加 aria-hidden=\"true\"。",
+        "列表、表格里大量出现的状态用 outline + 圆点或浅底语义色；实色 default、destructive 只留给少数需要强调的标记。",
+        "计数加 numeric 使用等宽数字，超过上限显示 “99+”，避免宽度跳动。",
+        "需要点击时用 render 渲染为 <a> 或 <button>，不要在 <span> 上绑定 onClick；仅含图标的可点击徽章要提供 aria-label。"
+      ],
+      "keywords": [
+        "badge",
+        "徽章",
+        "标签",
+        "tag",
+        "状态",
+        "status",
+        "计数",
+        "count",
+        "chip"
+      ]
     },
     {
       "name": "breadcrumb",
+      "title": "面包屑 Breadcrumb",
+      "description": "显示当前页面在层级中的位置，并可逐级返回。放在页面标题上方，层级较深时把中间层收进省略菜单。",
+      "category": "导航",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/breadcrumb",
-      "docs": "https://coss.com/ui/docs/components/breadcrumb"
+      "import": "@qingye/ui/components/breadcrumb",
+      "exports": [
+        "Breadcrumb",
+        "BreadcrumbList",
+        "BreadcrumbItem",
+        "BreadcrumbLink",
+        "BreadcrumbPage",
+        "BreadcrumbSeparator",
+        "BreadcrumbEllipsis"
+      ],
+      "docs": "/docs/components/breadcrumb",
+      "notes": [
+        "最后一项用 BreadcrumbPage 表示当前页，不要做成链接。",
+        "省略菜单的触发按钮需要 aria-label，例如“显示更多路径”。",
+        "窄屏上用 hidden sm:inline-flex 隐藏中间层，并显示省略菜单，保证一行放得下。"
+      ],
+      "keywords": [
+        "breadcrumb",
+        "面包屑",
+        "路径",
+        "层级",
+        "导航"
+      ]
     },
     {
       "name": "button",
+      "title": "按钮 Button",
+      "description": "触发一个操作或提交表单。每个区域只放一个主按钮，其余用 outline、secondary、ghost 等次要样式。",
+      "category": "通用",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/button",
-      "docs": "https://coss.com/ui/docs/components/button"
+      "import": "@qingye/ui/components/button",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "docs": "/docs/components/button",
+      "notes": [
+        "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+        "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+        "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+        "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+        "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+      ],
+      "keywords": [
+        "button",
+        "按钮",
+        "操作",
+        "提交",
+        "loading"
+      ]
+    },
+    {
+      "name": "button-group",
+      "title": "按钮组 ButtonGroup",
+      "description": "把相关的按钮、输入框或选择框拼接成一个整体，共享边框与圆角，例如分页切换、拆分按钮和“输入 + 操作”。它是 Group 的 shadcn 命名别名，两者是同一个组件。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/button-group",
+      "exports": [
+        "ButtonGroup",
+        "ButtonGroupSeparator",
+        "ButtonGroupText"
+      ],
+      "docs": "/docs/components/button-group",
+      "notes": [
+        "只把同一主题的操作放在一组，最多 3–5 个；需要单选切换时用 ToggleGroup 或 SegmentedControl。",
+        "仅图标的按钮必须提供 aria-label。",
+        "实心按钮之间加 ButtonGroupSeparator，描边按钮自带边框，不需要分隔线。"
+      ],
+      "keywords": [
+        "button group",
+        "group",
+        "按钮组",
+        "拆分按钮",
+        "split button",
+        "segmented"
+      ]
     },
     {
       "name": "calendar",
+      "title": "日历 Calendar",
+      "description": "内联展示的月历，支持单选、范围和多选。需要放进表单字段时用 DatePicker。",
+      "category": "日期与时间",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/calendar",
-      "docs": "https://coss.com/ui/docs/components/calendar"
+      "import": "@qingye/ui/components/calendar",
+      "exports": [
+        "Calendar"
+      ],
+      "docs": "/docs/components/calendar",
+      "notes": [
+        "日历只负责挑选；在表单中收集日期用 DatePicker，它会提交 YYYY-MM-DD。",
+        "今天以日期下方的小圆点标出，不占用选中态的颜色。",
+        "触屏设备上每个日期格放大到 44px。"
+      ],
+      "keywords": [
+        "calendar",
+        "日历",
+        "日期",
+        "月历",
+        "date"
+      ]
     },
     {
       "name": "card",
+      "title": "卡片 Card",
+      "description": "把一组相关的内容和操作收进一个带边框的表面，例如设置项、统计指标或表单。CardFrame 在外层再包一圈浅底外框，用来收纳多张卡片或卡片样式的表格。",
+      "category": "布局",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/card",
-      "docs": "https://coss.com/ui/docs/components/card"
+      "import": "@qingye/ui/components/card",
+      "exports": [
+        "Card",
+        "CardHeader",
+        "CardTitle",
+        "CardDescription",
+        "CardAction",
+        "CardPanel",
+        "CardFooter"
+      ],
+      "docs": "/docs/components/card",
+      "notes": [
+        "卡片标题用 CardTitle 只是视觉层级；需要文档大纲时用 render 渲染为 <h2>、<h3>：<CardTitle render={<h3 />} />。",
+        "数字指标加 numeric，让并排卡片中的数字对齐、不随数值抖动。",
+        "整张卡片可点击时，用 render={<a href />} 渲染为链接，不要在卡片内再嵌套其他可交互元素。",
+        "不要层层嵌套卡片；需要把多张卡片归为一组时用 CardFrame。"
+      ],
+      "keywords": [
+        "card",
+        "卡片",
+        "面板",
+        "panel",
+        "容器",
+        "card frame",
+        "外框",
+        "统计卡片",
+        "设置卡片"
+      ]
+    },
+    {
+      "name": "carousel",
+      "title": "轮播 Carousel",
+      "description": "横向滑动浏览一组同类内容，例如商品图、案例或文章卡片。轨道是原生滚动容器：触屏滑动、触控板与惯性滚动都由浏览器提供；不会自动播放。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/carousel",
+      "exports": [
+        "Carousel",
+        "CarouselContent",
+        "CarouselItem",
+        "CarouselPrevious",
+        "CarouselNext",
+        "CarouselDots"
+      ],
+      "docs": "/docs/components/carousel",
+      "notes": [
+        "不提供自动播放：自动切换会打断阅读，也让读屏用户失去位置。",
+        "每张的内容应当完整独立；关键信息不要只放在第二张以后。",
+        "同时显示多张时，指示点按“可停靠的位置”计数，而不是按张数。",
+        "开启“减少动态效果”时，按钮与按键跳转不再平滑滚动。"
+      ],
+      "keywords": [
+        "carousel",
+        "轮播",
+        "幻灯片",
+        "滑动",
+        "gallery",
+        "slider"
+      ]
+    },
+    {
+      "name": "chart",
+      "title": "图表 Chart",
+      "description": "基于 Recharts 的图表外壳：用 config 统一管理系列名称与颜色，并把坐标轴、网格、提示框、图例调成与组件库一致的克制样式。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/chart",
+      "exports": [
+        "ChartContainer",
+        "ChartTooltip",
+        "ChartTooltipContent",
+        "ChartLegend",
+        "ChartLegendContent",
+        "RechartsPrimitive",
+        "type ChartConfig"
+      ],
+      "docs": "/docs/components/chart",
+      "notes": [
+        "recharts 是可选的 peer 依赖：用到图表时安装 recharts@^3.10.1。",
+        "两个及以上系列时总是显示图例；只有一个系列时用卡片标题说明内容，不再放图例。",
+        "颜色跟随实体而不是排名：筛选掉某个系列时，其余系列保持原色。超过 5 个系列请合并为「其他」或拆成多张小图。",
+        "不要使用双 Y 轴；量纲不同的两个指标分成两张图。",
+        "提示框只是增强：关键数值应同时出现在标题、Stat 或表格中，键盘与读屏用户才能获取。",
+        "颜色变量写成 var(--color-<key>)，config 的 key 需是合法的 CSS 标识符（字母、数字、连字符）。"
+      ],
+      "keywords": [
+        "chart",
+        "graph",
+        "recharts",
+        "图表",
+        "折线图",
+        "柱状图",
+        "面积图",
+        "环形图",
+        "饼图",
+        "可视化"
+      ]
     },
     {
       "name": "checkbox",
+      "title": "复选框 Checkbox",
+      "description": "独立的是 / 否选择，或在一组选项中多选。选择立即生效的开关设置改用 Switch。",
+      "category": "表单",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/checkbox",
-      "docs": "https://coss.com/ui/docs/components/checkbox"
+      "import": "@qingye/ui/components/checkbox",
+      "exports": [
+        "Checkbox"
+      ],
+      "docs": "/docs/components/checkbox",
+      "notes": [
+        "用 Label 包住复选框和文字，整行都可点击；触屏设备上点击区扩大到 44px，不改变外观。",
+        "说明文字放进 Field，以便作为 aria-describedby 读出。",
+        "一组复选框用 CheckboxGroup 管理数组值。"
+      ],
+      "keywords": [
+        "checkbox",
+        "复选框",
+        "勾选",
+        "多选"
+      ]
     },
     {
       "name": "checkbox-group",
+      "title": "复选框组 CheckboxGroup",
+      "description": "管理一组复选框的数组值，支持「全选」父复选框。",
+      "category": "表单",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/checkbox-group",
-      "docs": "https://coss.com/ui/docs/components/checkbox-group"
+      "import": "@qingye/ui/components/checkbox-group",
+      "exports": [
+        "CheckboxGroup",
+        "Checkbox"
+      ],
+      "docs": "/docs/components/checkbox-group",
+      "notes": [
+        "组需要名称：用 Fieldset + FieldsetLegend，或 aria-labelledby 指向可见标题。"
+      ],
+      "keywords": [
+        "checkbox group",
+        "复选框组",
+        "多选",
+        "全选"
+      ]
+    },
+    {
+      "name": "code-block",
+      "title": "代码块 CodeBlock",
+      "description": "只读的代码展示：可选文件名与语言标题、复制按钮、行号、行高亮、横向滚动与最大高度。另含行内代码 InlineCode。",
+      "category": "排版",
+      "source": "local",
+      "import": "@qingye/ui/components/code-block",
+      "exports": [
+        "CodeBlock",
+        "InlineCode"
+      ],
+      "docs": "/docs/components/code-block",
+      "notes": [
+        "代码区域始终 dir=\"ltr\"，在 RTL 页面中也保持从左到右。",
+        "需要语法高亮时在应用侧用 Shiki 等工具生成节点再传入，组件不绑定高亮库。",
+        "不要用 CodeBlock 展示需要编辑的内容；可编辑请用 Textarea。"
+      ],
+      "keywords": [
+        "code",
+        "pre",
+        "snippet",
+        "代码",
+        "代码块",
+        "复制",
+        "行号"
+      ]
     },
     {
       "name": "collapsible",
+      "title": "折叠 Collapsible",
+      "description": "无样式的折叠原语：一个触发器控制一块内容的展开与收起，高度平滑过渡。触发器外观完全自定，适合“显示更多”、树节点等。需要现成样式时用 Disclosure。",
+      "category": "布局",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/collapsible",
-      "docs": "https://coss.com/ui/docs/components/collapsible"
+      "import": "@qingye/ui/components/collapsible",
+      "exports": [
+        "Collapsible",
+        "CollapsibleTrigger",
+        "CollapsiblePanel"
+      ],
+      "docs": "/docs/components/collapsible",
+      "notes": [
+        "触发器的文字或图标要随状态变化（如“显示更多 / 收起”、箭头旋转），让状态可感知。"
+      ],
+      "keywords": [
+        "collapsible",
+        "折叠",
+        "展开",
+        "收起",
+        "显示更多"
+      ]
     },
     {
       "name": "combobox",
+      "title": "组合框 Combobox",
+      "description": "可输入筛选的选择器：从较长的列表中选一项或多项。只需要输入建议、不强制选中时用 Autocomplete。",
+      "category": "表单",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/combobox",
-      "docs": "https://coss.com/ui/docs/components/combobox"
+      "import": "@qingye/ui/components/combobox",
+      "exports": [
+        "Combobox",
+        "ComboboxInput",
+        "ComboboxPopup",
+        "ComboboxList",
+        "ComboboxItem",
+        "ComboboxEmpty",
+        "ComboboxGroup",
+        "ComboboxGroupLabel",
+        "ComboboxCollection",
+        "ComboboxChips",
+        "ComboboxChip",
+        "ComboboxChipsInput",
+        "ComboboxValue",
+        "ComboboxStatus"
+      ],
+      "docs": "/docs/components/combobox",
+      "notes": [
+        "列表较短（十项以内）且不需要搜索时用 Select。",
+        "单选时若希望打开后直接输入新关键词，用受控的 inputValue，在 onOpenChange 里清空。",
+        "远程搜索时设置 filter={null}，用 ComboboxStatus 播报「正在搜索」等状态。",
+        "多选标签的移除按钮名称来自 UI 语言（默认「移除」）。",
+        "移除按钮继承所在 ComboboxChip 的 aria-label，所以标签的 aria-label 要写成动作加内容（如「移除 生产环境」），否则读屏只能听到一串相同的「移除」。"
+      ],
+      "keywords": [
+        "combobox",
+        "组合框",
+        "可搜索下拉",
+        "多选",
+        "标签选择",
+        "autocomplete select"
+      ]
     },
     {
       "name": "command",
+      "title": "命令面板 Command",
+      "description": "可搜索的命令与导航列表，通常用快捷键唤起，让熟练用户不离开键盘就能跳转页面或执行操作。也可以内嵌在页面中作为可筛选的选择列表。",
+      "category": "导航",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/command",
-      "docs": "https://coss.com/ui/docs/components/command"
+      "import": "@qingye/ui/components/command",
+      "exports": [
+        "CommandDialog",
+        "CommandDialogTrigger",
+        "CommandDialogPopup",
+        "Command",
+        "CommandInput",
+        "CommandPanel",
+        "CommandList",
+        "CommandEmpty",
+        "CommandGroup",
+        "CommandGroupLabel",
+        "CommandCollection",
+        "CommandItem",
+        "CommandShortcut",
+        "CommandSeparator",
+        "CommandFooter"
+      ],
+      "docs": "/docs/components/command",
+      "notes": [
+        "全局快捷键需要自行注册，并在按下时调用 preventDefault，避免浏览器默认行为。",
+        "条目的 label 参与匹配；需要支持别名或拼音时，用 filteredItems 传入自己的筛选结果。",
+        "执行命令后关闭面板；跳转页面时，把焦点交给新页面的标题。"
+      ],
+      "keywords": [
+        "command",
+        "command palette",
+        "cmdk",
+        "命令面板",
+        "快捷搜索",
+        "⌘K"
+      ]
     },
     {
       "name": "context-menu",
+      "title": "右键菜单 ContextMenu",
+      "description": "在区域上点击右键（触屏长按）时出现的操作菜单，用于文件、卡片、表格行等对象的快捷操作。它是加速手段：同样的操作必须在界面其他位置也能完成。",
+      "category": "浮层",
       "source": "coss",
-      "import": "@qingye/ui-kit/components/context-menu",
-      "docs": "https://coss.com/ui/docs/components/context-menu"
+      "import": "@qingye/ui/components/context-menu",
+      "exports": [
+        "ContextMenu",
+        "ContextMenuTrigger",
+        "ContextMenuPopup",
+        "ContextMenuItem",
+        "ContextMenuSeparator",
+        "ContextMenuShortcut"
+      ],
+      "docs": "/docs/components/context-menu",
+      "notes": [
+        "右键菜单不易被发现，也难以用键盘或读屏器触达：其中每个操作都要在可见的按钮或 Menu 中另有入口。",
+        "触屏设备上长按触发；菜单项在粗指针下最小高度 44px。",
+        "菜单项与 Menu 一致，可以直接复用同一套操作定义。"
+      ],
+      "keywords": [
+        "context menu",
+        "right click",
+        "右键菜单",
+        "上下文菜单",
+        "长按"
+      ]
     },
     {
-      "name": "dialog",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/dialog",
-      "docs": "https://coss.com/ui/docs/components/dialog"
+      "name": "copy-button",
+      "title": "复制按钮 CopyButton",
+      "description": "把一段文本复制到剪贴板，并在按钮上就地确认。用于 API 密钥、邀请链接、订单号、命令等。",
+      "category": "工具",
+      "source": "local",
+      "import": "@qingye/ui/components/copy-button",
+      "exports": [
+        "CopyButton",
+        "useCopyToClipboard"
+      ],
+      "docs": "/docs/components/copy-button",
+      "notes": [
+        "成功时只把图标换成对勾，按钮宽度不变、相邻元素不跳动；图标以 140ms 的淡入缩放切换，减少动态效果时只保留淡入。读屏通过礼貌播报听到“已复制”。",
+        "剪贴板需要安全上下文（HTTPS 或 localhost）；失败时按钮显示“复制失败”，并调用 onCopyError，可在其中引导用户手动复制。",
+        "仅图标时务必让周围文字说明复制的是什么，或通过 copyLabel 写清楚，例如“复制 API 密钥”。"
+      ],
+      "keywords": [
+        "copy",
+        "复制",
+        "剪贴板",
+        "clipboard"
+      ]
     },
     {
-      "name": "drawer",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/drawer",
-      "docs": "https://coss.com/ui/docs/components/drawer"
-    },
-    {
-      "name": "empty",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/empty",
-      "docs": "https://coss.com/ui/docs/components/empty"
-    },
-    {
-      "name": "field",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/field",
-      "docs": "https://coss.com/ui/docs/components/field"
-    },
-    {
-      "name": "fieldset",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/fieldset",
-      "docs": "https://coss.com/ui/docs/components/fieldset"
-    },
-    {
-      "name": "form",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/form",
-      "docs": "https://coss.com/ui/docs/components/form"
-    },
-    {
-      "name": "frame",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/frame",
-      "docs": "https://coss.com/ui/docs/components/frame"
-    },
-    {
-      "name": "group",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/group",
-      "docs": "https://coss.com/ui/docs/components/group"
-    },
-    {
-      "name": "input",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/input",
-      "docs": "https://coss.com/ui/docs/components/input"
-    },
-    {
-      "name": "input-group",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/input-group",
-      "docs": "https://coss.com/ui/docs/components/input-group"
-    },
-    {
-      "name": "kbd",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/kbd",
-      "docs": "https://coss.com/ui/docs/components/kbd"
-    },
-    {
-      "name": "label",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/label",
-      "docs": "https://coss.com/ui/docs/components/label"
-    },
-    {
-      "name": "menu",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/menu",
-      "docs": "https://coss.com/ui/docs/components/menu"
-    },
-    {
-      "name": "meter",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/meter",
-      "docs": "https://coss.com/ui/docs/components/meter"
-    },
-    {
-      "name": "number-field",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/number-field",
-      "docs": "https://coss.com/ui/docs/components/number-field"
-    },
-    {
-      "name": "otp-field",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/otp-field",
-      "docs": "https://coss.com/ui/docs/components/otp-field"
-    },
-    {
-      "name": "pagination",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/pagination",
-      "docs": "https://coss.com/ui/docs/components/pagination"
-    },
-    {
-      "name": "popover",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/popover",
-      "docs": "https://coss.com/ui/docs/components/popover"
-    },
-    {
-      "name": "preview-card",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/preview-card",
-      "docs": "https://coss.com/ui/docs/components/preview-card"
-    },
-    {
-      "name": "progress",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/progress",
-      "docs": "https://coss.com/ui/docs/components/progress"
-    },
-    {
-      "name": "radio-group",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/radio-group",
-      "docs": "https://coss.com/ui/docs/components/radio-group"
-    },
-    {
-      "name": "scroll-area",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/scroll-area",
-      "docs": "https://coss.com/ui/docs/components/scroll-area"
-    },
-    {
-      "name": "select",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/select",
-      "docs": "https://coss.com/ui/docs/components/select"
-    },
-    {
-      "name": "separator",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/separator",
-      "docs": "https://coss.com/ui/docs/components/separator"
-    },
-    {
-      "name": "sheet",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/sheet",
-      "docs": "https://coss.com/ui/docs/components/sheet"
-    },
-    {
-      "name": "sidebar",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/sidebar",
-      "docs": "https://coss.com/ui/docs/components/sidebar"
-    },
-    {
-      "name": "skeleton",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/skeleton",
-      "docs": "https://coss.com/ui/docs/components/skeleton"
-    },
-    {
-      "name": "slider",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/slider",
-      "docs": "https://coss.com/ui/docs/components/slider"
-    },
-    {
-      "name": "spinner",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/spinner",
-      "docs": "https://coss.com/ui/docs/components/spinner"
-    },
-    {
-      "name": "switch",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/switch",
-      "docs": "https://coss.com/ui/docs/components/switch"
-    },
-    {
-      "name": "table",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/table",
-      "docs": "https://coss.com/ui/docs/components/table"
-    },
-    {
-      "name": "tabs",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/tabs",
-      "docs": "https://coss.com/ui/docs/components/tabs"
-    },
-    {
-      "name": "textarea",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/textarea",
-      "docs": "https://coss.com/ui/docs/components/textarea"
-    },
-    {
-      "name": "toast",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/toast",
-      "docs": "https://coss.com/ui/docs/components/toast"
-    },
-    {
-      "name": "toggle",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/toggle",
-      "docs": "https://coss.com/ui/docs/components/toggle"
-    },
-    {
-      "name": "toggle-group",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/toggle-group",
-      "docs": "https://coss.com/ui/docs/components/toggle-group"
-    },
-    {
-      "name": "toolbar",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/toolbar",
-      "docs": "https://coss.com/ui/docs/components/toolbar"
-    },
-    {
-      "name": "tooltip",
-      "source": "coss",
-      "import": "@qingye/ui-kit/components/tooltip",
-      "docs": "https://coss.com/ui/docs/components/tooltip"
-    },
-    {
-      "name": "segmented-control",
-      "source": "coss-pattern",
-      "import": "@qingye/ui-kit/components/segmented-control",
-      "docs": "https://coss.com/ui/docs/components/segmented-control"
+      "name": "data-table",
+      "title": "数据表格 DataTable",
+      "description": "基于 TanStack Table 的完整列表：排序、搜索、分页、行选择、批量操作、列显示切换与加载态。既可在客户端处理数据，也可交给服务端分页排序。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/data-table",
+      "exports": [
+        "DataTable",
+        "type ColumnDef",
+        "type DataTableBulkContext",
+        "type DataTableInstance"
+      ],
+      "docs": "/docs/components/data-table",
+      "notes": [
+        "传入 getRowId，让选择在排序、翻页和数据刷新后仍然指向同一行。",
+        "数字、金额、日期列设置 meta: { align: \"end\" }，表头排序图标随之放到左侧，数值右对齐便于比较。",
+        "文本列默认按语言的排序规则（Intl.Collator）比较，中文按拼音排序；用 collationLocale 可覆盖，给列写自己的 sortingFn 也可以。",
+        "服务端模式下同时设置 manualPagination、manualSorting（及需要的 manualFiltering）与 rowCount，并在 onXChange 中请求数据，请求期间传 loading。",
+        "搜索、筛选或排序变化时自动回到第一页；数据减少导致页码越界时自动退回最后一页。",
+        "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露，方向同时写给排序按钮的读屏文本。",
+        "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
+        "加载态渲染与当前每页行数相同的骨架行，数据到达时表格高度不跳动。"
+      ],
+      "keywords": [
+        "data table",
+        "datatable",
+        "数据表格",
+        "列表",
+        "分页",
+        "排序",
+        "tanstack"
+      ]
     },
     {
       "name": "date-picker",
-      "source": "coss-composition",
-      "import": "@qingye/ui-kit/components/date-picker",
-      "docs": "https://coss.com/ui/docs/components/date-picker"
+      "title": "日期选择器 DatePicker",
+      "description": "表单中的单个日期字段：外观与 Select 一致，点开后在日历中挑选，表单提交本地日期 YYYY-MM-DD。",
+      "category": "日期与时间",
+      "source": "local",
+      "import": "@qingye/ui/components/date-picker",
+      "exports": [
+        "DatePicker",
+        "DatePickerTrigger",
+        "DatePickerClear",
+        "formatLocalDate",
+        "parseLocalDate"
+      ],
+      "docs": "/docs/components/date-picker",
+      "notes": [
+        "表单值始终是本地日期 YYYY-MM-DD，不含时区，服务端按日期而非时间点处理。",
+        "与可见标签关联时，给 DatePicker 传 id 并让 Label 的 htmlFor 指向它；已选日期会作为描述读出。",
+        "需要选择时间时用 DateTimePicker；需要起止日期时用 DateRangePicker。"
+      ],
+      "keywords": [
+        "date picker",
+        "日期选择",
+        "日期",
+        "选择日期",
+        "datepicker"
+      ]
+    },
+    {
+      "name": "date-range-picker",
+      "title": "日期范围选择 DateRangePicker",
+      "description": "在一个弹层里选择开始与结束日期：第一次点击定起点，第二次点击定终点并立即生效。适合报表、订单筛选等按时间段查询的场景，可配合快捷范围。",
+      "category": "日期与时间",
+      "source": "local",
+      "import": "@qingye/ui/components/date-range-picker",
+      "exports": [
+        "DateRangePicker"
+      ],
+      "docs": "/docs/components/date-range-picker",
+      "notes": [
+        "只选了起点就关闭弹层时，原有的范围保持不变，不会留下半个范围。",
+        "隐藏字段输出本地日期，不受时区影响；服务端按自然日处理即可。",
+        "快捷范围由业务方传入，组件不预设文案，便于按场景调整（例如“上个季度”）。"
+      ],
+      "keywords": [
+        "date range",
+        "range picker",
+        "日期范围",
+        "时间段",
+        "起止日期",
+        "筛选"
+      ]
+    },
+    {
+      "name": "date-time-picker",
+      "title": "日期时间选择器 DateTimePicker",
+      "description": "同时选择日期与时刻，例如预约、发布时间。触发器与 DatePicker 一致，弹层底部输入时间。",
+      "category": "日期与时间",
+      "source": "local",
+      "import": "@qingye/ui/components/date-time-picker",
+      "exports": [
+        "DateTimePicker",
+        "formatLocalDateTime",
+        "parseLocalDateTime"
+      ],
+      "docs": "/docs/components/date-time-picker",
+      "notes": [
+        "值不含时区；需要时间点（UTC）时在提交前自行换算。",
+        "选择日期不会关闭弹层，方便接着调整时间；点「完成」或按 Esc 关闭。"
+      ],
+      "keywords": [
+        "datetime",
+        "date time picker",
+        "日期时间",
+        "时间选择",
+        "预约时间"
+      ]
+    },
+    {
+      "name": "description-list",
+      "title": "描述列表 DescriptionList",
+      "description": "以「名称—值」成对展示一个对象的详情，如订单信息、设备参数、账号资料。渲染为语义化的 <dl>。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/description-list",
+      "exports": [
+        "DescriptionList",
+        "DescriptionListItem",
+        "DescriptionTerm",
+        "DescriptionDetails"
+      ],
+      "docs": "/docs/components/description-list",
+      "notes": [
+        "名称列宽由 --description-list-term 控制（移动端 96px，桌面 144px），可在 className 中覆盖，例如 [--description-list-term:8rem]。",
+        "grid 布局按 --description-list-column（默认 10rem）自动决定列数，放在侧栏或窄卡片中也不会挤压。",
+        "空值显示「—」并保持对齐，不要省略整行，读者需要知道这一项存在但为空。",
+        "页面中有多个复制按钮时，用 copyLabel 写清复制的是什么，读屏用户才分得清。"
+      ],
+      "keywords": [
+        "description list",
+        "dl",
+        "key value",
+        "详情",
+        "描述列表",
+        "键值对",
+        "属性"
+      ]
+    },
+    {
+      "name": "dialog",
+      "title": "对话框 Dialog",
+      "description": "在当前页面之上打开一个模态窗口，用于填写表单、查看详情或完成一个独立的小任务。需要用户二次确认的危险操作改用 AlertDialog。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/dialog",
+      "exports": [
+        "Dialog",
+        "DialogTrigger",
+        "DialogPopup",
+        "DialogHeader",
+        "DialogTitle",
+        "DialogDescription",
+        "DialogPanel",
+        "DialogFooter",
+        "DialogClose"
+      ],
+      "docs": "/docs/components/dialog",
+      "notes": [
+        "每个对话框都要有 DialogTitle；没有可见标题时，用 aria-label 提供名称。",
+        "表单放在 <Form className=\"contents\"> 中包住 DialogPanel 与 DialogFooter，提交按钮才能触发提交。",
+        "有未保存内容时，在 onOpenChange 中拦截关闭并用 AlertDialog 确认。",
+        "嵌套对话框会自动让父级缩小后退，不要叠加超过两层。"
+      ],
+      "keywords": [
+        "dialog",
+        "modal",
+        "对话框",
+        "弹窗",
+        "模态框"
+      ]
+    },
+    {
+      "name": "disclosure",
+      "title": "展开区 Disclosure",
+      "description": "带样式的单个折叠区：一个标题行加箭头，点击展开次要内容，例如表单里的“高级设置”、卡片里的“构建日志”。并列的多个分节用 Accordion；需要完全自定义触发器用 Collapsible。",
+      "category": "布局",
+      "source": "local",
+      "import": "@qingye/ui/components/disclosure",
+      "exports": [
+        "Disclosure",
+        "DisclosureTrigger",
+        "DisclosurePanel"
+      ],
+      "docs": "/docs/components/disclosure",
+      "notes": [
+        "只放可以跳过的内容：必填字段、关键警告不要藏进默认收起的展开区。",
+        "标题写清楚里面是什么，例如“高级设置（超时、重试）”，而不是“更多”。",
+        "需要同时管理多个分节的展开状态时，用 Accordion。"
+      ],
+      "keywords": [
+        "disclosure",
+        "展开",
+        "折叠",
+        "高级设置",
+        "更多选项",
+        "详情"
+      ]
+    },
+    {
+      "name": "drawer",
+      "title": "抽屉 Drawer",
+      "description": "可拖拽关闭的边缘面板，移动端的首选浮层：支持拖动手柄、吸附高度、嵌套层叠和动作菜单。桌面端的详情面板用 Sheet 即可。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/drawer",
+      "exports": [
+        "Drawer",
+        "DrawerTrigger",
+        "DrawerPopup",
+        "DrawerHeader",
+        "DrawerTitle",
+        "DrawerDescription",
+        "DrawerPanel",
+        "DrawerFooter",
+        "DrawerClose"
+      ],
+      "docs": "/docs/components/drawer",
+      "notes": [
+        "拖动手柄只是视觉提示（aria-hidden），始终保留可点击的关闭方式：取消按钮、关闭按钮或点击遮罩。",
+        "同一操作在桌面用 Menu / Dialog、在移动端用 Drawer 时，用 useMediaQuery(\"max-md\") 切换，内容保持一致。",
+        "吸附点从小到大排列，最后一个通常为 1（全高）。"
+      ],
+      "keywords": [
+        "drawer",
+        "bottom sheet",
+        "抽屉",
+        "底部面板",
+        "动作面板",
+        "action sheet"
+      ]
+    },
+    {
+      "name": "empty",
+      "title": "空状态 Empty",
+      "description": "列表、表格或页面暂时没有内容时，说明原因并给出下一步。用于首次使用、筛选无结果和清空后的状态。",
+      "category": "反馈",
+      "source": "coss",
+      "import": "@qingye/ui/components/empty",
+      "exports": [
+        "Empty",
+        "EmptyHeader",
+        "EmptyMedia",
+        "EmptyTitle",
+        "EmptyDescription",
+        "EmptyContent"
+      ],
+      "docs": "/docs/components/empty",
+      "notes": [
+        "标题说明“现在是什么情况”，说明文字告诉用户“接下来能做什么”，再配一个主要操作；不要只写“暂无数据”。",
+        "筛选或搜索无结果时，在标题里带上关键词，并提供“清除筛选”的出口。",
+        "图标是装饰，加 aria-hidden=\"true\"；需要读屏感知的信息写进标题和说明。",
+        "嵌在卡片、表格等容器里时收紧上下留白，并给标题加 size=\"sm\"，避免喧宾夺主。"
+      ],
+      "keywords": [
+        "empty",
+        "空状态",
+        "空白",
+        "无数据",
+        "no data",
+        "暂无",
+        "empty state",
+        "无结果",
+        "no results",
+        "zero state"
+      ]
+    },
+    {
+      "name": "field",
+      "title": "表单项 Field",
+      "description": "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/field",
+      "exports": [
+        "Field",
+        "FieldLabel",
+        "FieldDescription",
+        "FieldError",
+        "FieldContent",
+        "FieldTitle",
+        "FieldGroup",
+        "FieldSeparator",
+        "FieldControl",
+        "FieldValidity"
+      ],
+      "docs": "/docs/components/field",
+      "notes": [
+        "没有 children 的 <FieldError /> 跟随 Base UI：字段无效时显示浏览器校验信息或 Form errors 中的同名错误。",
+        "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
+        "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
+        "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
+        "控件不是可接收 id 的原生输入时（如 FileUpload、ToggleGroup），在 FieldLabel 上写 htmlFor、在控件上写同值 id，标签才能正确关联；FieldDescription 会自动进入 aria-describedby。"
+      ],
+      "keywords": [
+        "field",
+        "表单项",
+        "校验",
+        "错误提示",
+        "label",
+        "description"
+      ]
+    },
+    {
+      "name": "fieldset",
+      "title": "字段组 Fieldset",
+      "description": "把一组相关的表单项放在同一个标题下，例如“发票信息”“通知方式”；可整体禁用。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/fieldset",
+      "exports": [
+        "Fieldset",
+        "FieldsetLegend",
+        "FieldSet",
+        "FieldLegend"
+      ],
+      "docs": "/docs/components/fieldset",
+      "notes": [
+        "读屏进入组内控件时会先读出组标题，标签可以写得更短，例如“城市”而不是“收货城市”。",
+        "一组复选框、单选按钮共用一个问题时，用 variant=\"label\" 的 legend 作为问题。"
+      ],
+      "keywords": [
+        "fieldset",
+        "legend",
+        "字段组",
+        "分组"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "title": "文件上传 FileUpload",
+      "description": "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/file-upload",
+      "exports": [
+        "FileUpload",
+        "formatFileSize"
+      ],
+      "docs": "/docs/components/file-upload",
+      "notes": [
+        "组件不上传文件：在 onFilesChange 中自行上传，再通过 getProgress / getError 回显状态。",
+        "说明文字写清允许的格式和大小，校验失败时会以 role=alert 读出原因。",
+        "图片缩略图使用对象 URL，文件移除或组件卸载时自动释放。"
+      ],
+      "keywords": [
+        "upload",
+        "file",
+        "dropzone",
+        "上传",
+        "附件",
+        "拖拽"
+      ]
+    },
+    {
+      "name": "form",
+      "title": "表单 Form",
+      "description": "基于 Base UI Form：提交时统一校验，把焦点移到第一个错误字段，并按字段名显示服务端返回的错误。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/form",
+      "exports": [
+        "Form"
+      ],
+      "docs": "/docs/components/form",
+      "notes": [
+        "提交按钮用 type=\"submit\"，请求期间设 loading，防止重复提交。",
+        "错误信息写清如何修正，例如“请填写 11 位手机号”，而不是“格式错误”。",
+        "Form 不发请求；在 onFormSubmit 里调用你的接口，把返回的字段错误交给 errors。"
+      ],
+      "keywords": [
+        "form",
+        "表单",
+        "提交",
+        "校验",
+        "validation"
+      ]
+    },
+    {
+      "name": "frame",
+      "title": "框架 Frame",
+      "description": "浅底外框里放一块或多块白色面板，把同一主题的信息归为一组，如账单概览、域名或构建设置。比 Card 更适合“一个标题 + 若干并列区块”的结构。",
+      "category": "布局",
+      "source": "coss",
+      "import": "@qingye/ui/components/frame",
+      "exports": [
+        "Frame",
+        "FrameHeader",
+        "FrameTitle",
+        "FrameDescription",
+        "FramePanel",
+        "FrameFooter"
+      ],
+      "docs": "/docs/components/frame",
+      "notes": [
+        "FrameTitle 默认是 <div>；需要进入文档大纲时，在内部放 <h2>/<h3>，或直接用标题元素加相同类名。",
+        "面板里的内容自行布局；多块面板并列时，每块只讲一件事。",
+        "Frame 也可以直接包住 <Table variant=\"card\">，让表头落在浅底上。",
+        "需要标题区带操作按钮时，给 FrameHeader 加 flex-row 与 justify-between。"
+      ],
+      "keywords": [
+        "frame",
+        "框架",
+        "外框",
+        "分组",
+        "panel",
+        "面板",
+        "section",
+        "区块"
+      ]
+    },
+    {
+      "name": "group",
+      "title": "控件组 Group",
+      "description": "把相邻的按钮、输入框、选择器拼成一个整体：共享边框、只在两端保留圆角。用于分段操作、带前后缀的输入、拆分按钮等。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/group",
+      "exports": [
+        "Group",
+        "GroupSeparator",
+        "GroupText"
+      ],
+      "docs": "/docs/components/group",
+      "notes": [
+        "同一组内的控件保持同一尺寸与样式（都用 outline 或都用 default）。",
+        "需要方向键漫游、单选或多选时，改用 ToggleGroup 或 Toolbar。",
+        "组可以嵌套：外层组的子组之间保留 8px 间距。"
+      ],
+      "keywords": [
+        "group",
+        "button group",
+        "控件组",
+        "按钮组",
+        "拆分按钮",
+        "输入组合"
+      ]
+    },
+    {
+      "name": "hover-card",
+      "title": "悬停卡片 HoverCard",
+      "description": "鼠标悬停或键盘聚焦链接时，预览链接背后的内容，例如成员资料或项目摘要。它是 PreviewCard 的 shadcn 命名别名，两者是同一个组件。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/hover-card",
+      "exports": [
+        "HoverCard",
+        "HoverCardTrigger",
+        "HoverCardContent"
+      ],
+      "docs": "/docs/components/hover-card",
+      "notes": [
+        "卡片只做预览：不要把唯一的操作入口放进去，触屏设备上它不会出现。",
+        "卡片内容在打开时才渲染，可以按需加载数据。",
+        "需要点击才出现、且包含表单或操作的浮层，请用 Popover。"
+      ],
+      "keywords": [
+        "hover card",
+        "preview card",
+        "悬停",
+        "预览",
+        "名片",
+        "资料卡"
+      ]
+    },
+    {
+      "name": "input",
+      "title": "输入框 Input",
+      "description": "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/input",
+      "exports": [
+        "Input"
+      ],
+      "docs": "/docs/components/input",
+      "notes": [
+        "每个输入框都要有可见标签（FieldLabel / Label）；只有搜索框等意义明确的场景才只用 aria-label。",
+        "占位文字只做示例，不要代替标签。",
+        "触屏设备上输入框最小高度为 44px，便于点按；字号在移动端为 16px，避免 iOS 聚焦时缩放。",
+        "type=\"file\" 用的是浏览器原生控件：Input 只提供外框样式，“Choose File / No file chosen”由浏览器按自身语言绘制，CSS 无法改写（::file-selector-button 不接受 content），也无对应属性可覆盖。中文界面请改用 FileUpload——它自带本地化文案、格式与大小校验和文件列表。"
+      ],
+      "keywords": [
+        "input",
+        "输入框",
+        "文本框",
+        "text field"
+      ]
+    },
+    {
+      "name": "input-group",
+      "title": "输入框组合 InputGroup",
+      "description": "在输入框内部加前后缀文字、图标、按键提示、按钮或工具栏，整体共用一个边框与焦点环。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/input-group",
+      "exports": [
+        "InputGroup",
+        "InputGroupAddon",
+        "InputGroupText",
+        "InputGroupInput",
+        "InputGroupTextarea",
+        "InputGroupButton"
+      ],
+      "docs": "/docs/components/input-group",
+      "notes": [
+        "前缀文字紧贴输入内容时，给 InputGroupInput 加 className=\"*:[input]:ps-0!\" 去掉多余间距。",
+        "组内仅图标的按钮必须提供 aria-label；装饰性图标加 aria-hidden。",
+        "密码与搜索有现成封装：PasswordInput、SearchInput。"
+      ],
+      "keywords": [
+        "input group",
+        "前缀",
+        "后缀",
+        "addon",
+        "单位",
+        "输入框组合"
+      ]
+    },
+    {
+      "name": "item",
+      "title": "条目 Item",
+      "description": "由媒体、标题、描述和操作组成的一行内容，用于成员列表、设置项、文件、通知等。API 与 shadcn/ui 的 Item 一致。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/item",
+      "exports": [
+        "ItemGroup",
+        "Item",
+        "ItemMedia",
+        "ItemContent",
+        "ItemTitle",
+        "ItemDescription",
+        "ItemActions",
+        "ItemHeader",
+        "ItemFooter",
+        "ItemSeparator"
+      ],
+      "docs": "/docs/components/item",
+      "notes": [
+        "整个条目可点击时用 render 渲染为 <a>，不要在内部再嵌套按钮或链接。",
+        "需要内部操作（如「移除」）时保持 Item 为 div，把操作放在 ItemActions 中。",
+        "仅图标的操作按钮必须有 aria-label，并写清对象，例如「移除 林嘉怡」。"
+      ],
+      "keywords": [
+        "item",
+        "list item",
+        "row",
+        "条目",
+        "列表项",
+        "设置项",
+        "成员"
+      ]
+    },
+    {
+      "name": "kbd",
+      "title": "按键 Kbd",
+      "description": "标示键盘按键或快捷键组合，用在说明文字、按钮、输入框提示与菜单中。",
+      "category": "排版",
+      "source": "coss",
+      "import": "@qingye/ui/components/kbd",
+      "exports": [
+        "Kbd",
+        "KbdGroup"
+      ],
+      "docs": "/docs/components/kbd",
+      "notes": [
+        "Kbd 只是视觉提示，不注册快捷键；真正的快捷键在应用中监听，并在控件上用 aria-keyshortcuts 声明，例如 aria-keyshortcuts=\"Meta+K\"。",
+        "按平台显示修饰键：macOS 用 ⌘ ⌥ ⇧ ⌃，Windows 与 Linux 用 Ctrl、Alt、Shift。",
+        "装饰性的提示（如输入框末端的 ⌘K）可加 aria-hidden，避免读屏重复朗读。"
+      ],
+      "keywords": [
+        "kbd",
+        "快捷键",
+        "按键",
+        "shortcut",
+        "hotkey"
+      ]
+    },
+    {
+      "name": "label",
+      "title": "标签 Label",
+      "description": "表单控件的可见标签。简单场景直接关联控件；需要说明与校验信息时改用 Field 与 FieldLabel。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/label",
+      "exports": [
+        "Label"
+      ],
+      "docs": "/docs/components/label",
+      "notes": [
+        "点击标签会聚焦或切换关联的控件，包裹复选框时整行都可点击。",
+        "在 Field 中请用 FieldLabel，它会自动关联控件并跟随禁用状态。",
+        "必填标记用文字或星号加说明，不要只靠颜色。"
+      ],
+      "keywords": [
+        "label",
+        "标签",
+        "表单标签"
+      ]
+    },
+    {
+      "name": "layout",
+      "title": "布局 Layout",
+      "description": "四个轻量的布局原语：纵向排列的 Stack、横向排列的 Inline、自动换行的 Grid，以及走字号阶梯的 Text。间距取自设计令牌，读 JSX 时就能看出意图；它们覆盖不到的情况，直接写 Tailwind 即可。",
+      "category": "布局",
+      "source": "local",
+      "import": "@qingye/ui/components/layout",
+      "exports": [
+        "Stack",
+        "Inline",
+        "Grid",
+        "Text"
+      ],
+      "docs": "/docs/components/layout",
+      "notes": [
+        "什么时候用：页面与卡片内部的常规排列——表单字段一列、标题配操作、卡片栅格。意图一目了然，间距自动对齐令牌。",
+        "什么时候直接写 Tailwind：需要响应式切换方向、复杂的跨列或定位、一次性的精细调整。原语与 Tailwind 可以混用，className 总是最后合并。",
+        "Grid 放在宽度不确定的容器里（侧栏、弹窗）时用 minItemWidth，它跟随容器而不是视口。",
+        "标题、长文排版与正文链接见排版类组件（Heading、Prose、TextLink）。"
+      ],
+      "keywords": [
+        "layout",
+        "布局",
+        "stack",
+        "inline",
+        "grid",
+        "text",
+        "间距",
+        "栅格"
+      ]
+    },
+    {
+      "name": "menu",
+      "title": "下拉菜单 Menu",
+      "description": "点击按钮后展开的操作列表，收纳次要操作、视图选项和导航链接。从表单中选值用 Select，右键菜单用 ContextMenu。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/menu",
+      "exports": [
+        "Menu",
+        "MenuTrigger",
+        "MenuPopup",
+        "MenuItem",
+        "MenuSeparator",
+        "MenuGroup",
+        "MenuGroupLabel",
+        "MenuShortcut"
+      ],
+      "docs": "/docs/components/menu",
+      "notes": [
+        "仅图标的触发器需要 aria-label，例如“更多操作”。",
+        "危险操作放在最后，用分隔线隔开并设 variant=\"destructive\"；不可撤销时再弹 AlertDialog 确认。",
+        "从菜单打开对话框时，对话框放在菜单之外并用状态控制，见 Dialog 的“从菜单打开”。",
+        "触屏设备上菜单项最小高度 44px，方便点按。"
+      ],
+      "keywords": [
+        "menu",
+        "dropdown",
+        "dropdown menu",
+        "下拉菜单",
+        "操作菜单",
+        "更多"
+      ]
+    },
+    {
+      "name": "menubar",
+      "title": "菜单栏 Menubar",
+      "description": "桌面应用式的一排菜单（文件 / 编辑 / 视图），适合编辑器、设计工具等命令很多的工作台。菜单内容沿用 Menu 的全部部件。",
+      "category": "导航",
+      "source": "local",
+      "import": "@qingye/ui/components/menubar",
+      "exports": [
+        "Menubar",
+        "MenubarMenu",
+        "MenubarTrigger",
+        "MenubarContent",
+        "MenubarItem",
+        "MenubarSeparator",
+        "MenubarShortcut"
+      ],
+      "docs": "/docs/components/menubar",
+      "notes": [
+        "MenubarShortcut 只是提示文字，快捷键本身需要由应用注册。",
+        "顶层菜单控制在 3–6 个；更深的层级放进二级菜单，不要超过两层。",
+        "窄屏上菜单栏会占满一行，建议把次要菜单合并为一个“更多”菜单。"
+      ],
+      "keywords": [
+        "menubar",
+        "menu bar",
+        "菜单栏",
+        "文件菜单",
+        "桌面应用",
+        "命令"
+      ]
+    },
+    {
+      "name": "meter",
+      "title": "度量 Meter",
+      "description": "在已知范围内显示一个静态数值，如存储占用、配额使用率、CPU 负载。表示任务完成进度时用 Progress。",
+      "category": "数据展示",
+      "source": "coss",
+      "import": "@qingye/ui/components/meter",
+      "exports": [
+        "Meter",
+        "MeterLabel",
+        "MeterValue",
+        "MeterTrack",
+        "MeterIndicator"
+      ],
+      "docs": "/docs/components/meter",
+      "notes": [
+        "Meter 必须有可访问名称：用 MeterLabel，或在 Meter 上传 aria-label。",
+        "按阈值换色时，同时用文字说明状态（如 “偏高”“接近上限”），颜色不是唯一信息。",
+        "自定义 MeterValue 显示内容时，用 getAriaValueText 让读屏朗读同样的信息。",
+        "Meter 表示静态度量；会随时间推进到 100% 的任务用 Progress。"
+      ],
+      "keywords": [
+        "meter",
+        "度量",
+        "用量",
+        "配额",
+        "quota",
+        "存储",
+        "storage",
+        "占用",
+        "gauge",
+        "使用率"
+      ]
+    },
+    {
+      "name": "motion-provider",
+      "title": "动效策略 MotionProvider",
+      "description": "记录用户最近一次使用的输入方式，写到 <html data-ui-input>：键盘操作时组件的过渡立即完成，鼠标与触屏时保留细微的动效。在应用根部挂载一次。",
+      "category": "工具",
+      "source": "local",
+      "import": "@qingye/ui/components/motion-provider",
+      "exports": [
+        "MotionProvider"
+      ],
+      "docs": "/docs/components/motion-provider",
+      "notes": [
+        "motion.css 读取这个属性：data-ui-input=\"keyboard\" 时，所有带 data-slot 的组件及 .qy-pressable 的过渡时长归零，带 data-motion 的入场动画停用——连续按方向键时，焦点与选中状态不必等动画。",
+        "鼠标与触屏下，.qy-pressable 元素按下时缩放到 0.97（100ms），菜单与选择器浮层从触发点淡入展开。",
+        "系统开启“减少动态效果”时，motion.css 只保留透明度与颜色的过渡，去掉位移、缩放与高度动画；这一层不依赖 MotionProvider。",
+        "自定义组件想遵循同一策略：给可样式化的元素加 data-slot，或给可按压元素加 qy-pressable 类即可，不要自己监听输入方式。",
+        "某次程序触发的变化不需要动画时，在元素上加 data-instant。"
+      ],
+      "keywords": [
+        "motion",
+        "动效",
+        "动画",
+        "键盘",
+        "input modality",
+        "reduced motion",
+        "减少动态效果"
+      ]
+    },
+    {
+      "name": "native-select",
+      "title": "原生选择框 NativeSelect",
+      "description": "外观与 Select 触发器一致的原生 <select>。手机上直接唤起系统选择器，适合移动优先的表单和很长的选项列表；需要图标、搜索或自定义选项时用 Select。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/native-select",
+      "exports": [
+        "NativeSelect",
+        "NativeSelectOption",
+        "NativeSelectOptGroup"
+      ],
+      "docs": "/docs/components/native-select",
+      "notes": [
+        "选项只能是纯文本：不能放图标、描述或多行内容，下拉列表的外观由操作系统决定。",
+        "几十上百项的列表（省份、国家、时区）优先用它，系统选择器在手机上比自定义弹层更顺手。",
+        "需要明确的“未选择”状态时设置 placeholder，并配合 required 让表单校验生效。"
+      ],
+      "keywords": [
+        "native select",
+        "select",
+        "下拉",
+        "选择框",
+        "原生",
+        "picker"
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "title": "导航菜单 NavigationMenu",
+      "description": "网站顶部的主导航：顶层触发器展开内容面板，面板之间切换时弹层平滑改变尺寸、内容沿移动方向淡入。适合官网与文档站；手机上建议改用 Sheet 抽屉菜单。",
+      "category": "导航",
+      "source": "local",
+      "import": "@qingye/ui/components/navigation-menu",
+      "exports": [
+        "NavigationMenu",
+        "NavigationMenuList",
+        "NavigationMenuItem",
+        "NavigationMenuTrigger",
+        "NavigationMenuContent",
+        "NavigationMenuLink"
+      ],
+      "docs": "/docs/components/navigation-menu",
+      "notes": [
+        "面板尺寸与位置的过渡只用 220ms 的缓出，退出更快；减少动态效果时只保留淡入淡出，键盘操作时立即切换。",
+        "手机上悬停不可用、面板空间有限，推荐窄屏改用 Sheet 抽屉菜单（见“响应式”示例）；组件本身在窄屏仍可点击使用，面板宽度不会超出屏幕。",
+        "面板里的链接数量控制在 6 个以内，每条说明不超过两行。"
+      ],
+      "keywords": [
+        "navigation menu",
+        "nav",
+        "mega menu",
+        "导航",
+        "顶部导航",
+        "主导航",
+        "下拉导航"
+      ]
+    },
+    {
+      "name": "number-field",
+      "title": "数字输入框 NumberField",
+      "description": "输入与步进数值，支持范围、步长、格式化（货币、百分比、单位）与拖动调整，适合数量、价格、阈值。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/number-field",
+      "exports": [
+        "NumberField",
+        "NumberFieldGroup",
+        "NumberFieldDecrement",
+        "NumberFieldInput",
+        "NumberFieldIncrement",
+        "NumberFieldScrubArea"
+      ],
+      "docs": "/docs/components/number-field",
+      "notes": [
+        "放在 Field 中并配 FieldLabel；单独使用时给 NumberField 传 aria-label。",
+        "单位、货币优先用 format 处理，输入时会被正确解析；需要固定前后缀文字时放进 InputGroup。"
+      ],
+      "keywords": [
+        "number",
+        "数字",
+        "数量",
+        "步进",
+        "stepper",
+        "金额"
+      ]
+    },
+    {
+      "name": "otp-field",
+      "title": "验证码输入 OTPField",
+      "description": "逐格输入短信或邮箱验证码，支持粘贴整串、自动跳格与退格回退。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/otp-field",
+      "exports": [
+        "OTPField",
+        "OTPFieldInput",
+        "OTPFieldSeparator"
+      ],
+      "docs": "/docs/components/otp-field",
+      "notes": [
+        "第一格默认 autocomplete=\"one-time-code\"，iOS 与 Android 可直接填入短信验证码。",
+        "给整组提供标签：FieldLabel 或 aria-label。"
+      ],
+      "keywords": [
+        "otp",
+        "验证码",
+        "一次性密码",
+        "pin",
+        "verification code"
+      ]
+    },
+    {
+      "name": "page-header",
+      "title": "页头 PageHeader",
+      "description": "页面顶部的标题区：可选面包屑、返回按钮、标题、描述、元信息与操作。操作在空间足够时与标题同行，空间不足时换到下方。",
+      "category": "布局",
+      "source": "local",
+      "import": "@qingye/ui/components/page-header",
+      "exports": [
+        "PageHeader",
+        "PageHeaderNav",
+        "PageHeaderBack",
+        "PageHeaderContent",
+        "PageHeaderTitle",
+        "PageHeaderDescription",
+        "PageHeaderMeta",
+        "PageHeaderActions"
+      ],
+      "docs": "/docs/components/page-header",
+      "notes": [
+        "一页只有一个 PageHeaderTitle（<h1>）。",
+        "操作不超过三个；更多操作收进「更多」菜单，窄屏时整行换到标题下方。",
+        "有面包屑时通常不需要返回按钮，二者择一即可。"
+      ],
+      "keywords": [
+        "page header",
+        "title",
+        "header",
+        "页头",
+        "页面标题",
+        "标题栏",
+        "返回"
+      ]
+    },
+    {
+      "name": "pagination",
+      "title": "分页 Pagination",
+      "description": "在多页列表之间跳转。页数多时用省略号收起中间页；移动端改用“第 3 / 12 页”加前后翻页的紧凑形式。",
+      "category": "导航",
+      "source": "coss",
+      "import": "@qingye/ui/components/pagination",
+      "exports": [
+        "Pagination",
+        "PaginationContent",
+        "PaginationItem",
+        "PaginationLink",
+        "PaginationPrevious",
+        "PaginationNext",
+        "PaginationEllipsis"
+      ],
+      "docs": "/docs/components/pagination",
+      "notes": [
+        "页码是导航：能用 URL 表示的页面优先用 href（如 ?page=3），便于分享与后退。",
+        "首页时禁用“上一页”、末页时禁用“下一页”，保持位置不变，避免整行跳动。",
+        "页码超过 7 个时保留首尾与当前页两侧，其余用省略号。",
+        "在表格下方与“每页行数”“共 N 条”组合，构成完整的列表底栏。"
+      ],
+      "keywords": [
+        "pagination",
+        "分页",
+        "翻页",
+        "页码"
+      ]
+    },
+    {
+      "name": "password-input",
+      "title": "密码输入框 PasswordInput",
+      "description": "带显示 / 隐藏切换的密码输入框，用于登录、注册与修改密码。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/password-input",
+      "exports": [
+        "PasswordInput"
+      ],
+      "docs": "/docs/components/password-input",
+      "notes": [
+        "切换按钮的名称固定为“显示密码”，是否已显示由 aria-pressed 表达，读屏会读作“显示密码，已按下”。",
+        "明文显示时关闭了自动大写、自动更正与拼写检查，避免密码被改写或上传到拼写服务。",
+        "已隐藏 Edge 自带的显示密码按钮，避免出现两个眼睛图标。"
+      ],
+      "keywords": [
+        "password",
+        "密码",
+        "显示密码",
+        "眼睛"
+      ]
+    },
+    {
+      "name": "popover",
+      "title": "气泡卡片 Popover",
+      "description": "点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/popover",
+      "exports": [
+        "Popover",
+        "PopoverTrigger",
+        "PopoverPopup",
+        "PopoverTitle",
+        "PopoverDescription",
+        "PopoverClose"
+      ],
+      "docs": "/docs/components/popover",
+      "notes": [
+        "Popover 默认非模态：点击外部或按 Esc 关闭，页面仍可滚动。",
+        "只放一两个操作；内容复杂或需要用户专心完成时改用 Dialog。",
+        "仅图标的触发器需要 aria-label。"
+      ],
+      "keywords": [
+        "popover",
+        "气泡",
+        "弹出框",
+        "浮层"
+      ]
+    },
+    {
+      "name": "preview-card",
+      "title": "预览卡片 PreviewCard",
+      "description": "悬停在链接上时显示目标内容的预览，例如成员资料、工单摘要。只是锦上添花：点击链接本身仍然能到达完整页面。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/preview-card",
+      "exports": [
+        "PreviewCard",
+        "PreviewCardTrigger",
+        "PreviewCardPopup"
+      ],
+      "docs": "/docs/components/preview-card",
+      "notes": [
+        "预览内容对读屏用户和触屏用户不可见或难以触达，不要放只能在卡片里完成的操作。",
+        "卡片里保持只读信息；需要按钮和表单时用 Popover。"
+      ],
+      "keywords": [
+        "preview card",
+        "hover card",
+        "悬停卡片",
+        "预览",
+        "名片"
+      ]
+    },
+    {
+      "name": "progress",
+      "title": "进度条 Progress",
+      "description": "显示一项任务的完成进度，如上传、导出、安装。进度未知时用不确定状态；表示容量、占比等静态度量请用 Meter。",
+      "category": "反馈",
+      "source": "coss",
+      "import": "@qingye/ui/components/progress",
+      "exports": [
+        "Progress",
+        "ProgressLabel",
+        "ProgressValue",
+        "ProgressTrack",
+        "ProgressIndicator"
+      ],
+      "docs": "/docs/components/progress",
+      "notes": [
+        "进度条必须有可访问名称：用 ProgressLabel，或在 Progress 上传 aria-label。",
+        "颜色不单独表达结果：完成或失败时同时给出文字或图标。",
+        "进度条描述随时间推进的任务；磁盘占用、配额等不会“完成”的数值用 Meter。",
+        "不确定状态在系统减少动态效果时改为缓慢的明暗变化。"
+      ],
+      "keywords": [
+        "progress",
+        "进度条",
+        "进度",
+        "上传",
+        "upload",
+        "加载",
+        "loading",
+        "indeterminate",
+        "不确定"
+      ]
+    },
+    {
+      "name": "progress-circle",
+      "title": "环形进度 ProgressCircle",
+      "description": "以圆环展示任务完成度或占用率，适合空间紧凑处（卡片角落、列表行）或需要在中心显示数值的场景。",
+      "category": "反馈",
+      "source": "local",
+      "import": "@qingye/ui/components/progress-circle",
+      "exports": [
+        "ProgressCircle"
+      ],
+      "docs": "/docs/components/progress-circle",
+      "notes": [
+        "给每个进度环一个可访问名称：aria-label，或 aria-labelledby 指向旁边的标题。",
+        "进度为 0 时不画进度弧（圆头线帽在 0 时会留下一个点）。",
+        "不确定进度在减少动态效果时放慢旋转而不是停止，与 Spinner 一致，避免看起来像卡死。"
+      ],
+      "keywords": [
+        "progress",
+        "circle",
+        "ring",
+        "radial",
+        "进度",
+        "环形",
+        "圆环",
+        "加载"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "title": "单选框组 RadioGroup",
+      "description": "在少量互斥选项中选一个，选项需要同时可见时使用；选项多时改用 Select。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/radio-group",
+      "exports": [
+        "RadioGroup",
+        "Radio"
+      ],
+      "docs": "/docs/components/radio-group",
+      "notes": [
+        "整组只有一个 Tab 停靠点，用方向键在选项间移动。",
+        "卡片式选项把整张卡片做成 Label，点击任意处都能选中。"
+      ],
+      "keywords": [
+        "radio",
+        "单选",
+        "单选框",
+        "radio group"
+      ]
+    },
+    {
+      "name": "resizable",
+      "title": "可调整面板 Resizable",
+      "description": "用拖动分隔条调整相邻面板的大小，适合文件浏览、编辑器、对比视图等多栏工作区。支持横向、纵向、嵌套、最小 / 最大尺寸与折叠，无第三方依赖。",
+      "category": "布局",
+      "source": "local",
+      "import": "@qingye/ui/components/resizable",
+      "exports": [
+        "ResizablePanelGroup",
+        "ResizablePanel",
+        "ResizableHandle"
+      ],
+      "docs": "/docs/components/resizable",
+      "notes": [
+        "分组会填满父元素，记得给外层一个确定的高度（例如 h-80），纵向分组尤其需要。",
+        "分隔条的可点按区域比 1px 线条宽，触屏下进一步加宽；拖动期间全局保持调整光标，不会误选文字。",
+        "不建议在手机上依赖拖动调整布局，窄屏可改为上下堆叠或用 Tabs 切换。"
+      ],
+      "keywords": [
+        "resizable",
+        "split",
+        "splitter",
+        "panel",
+        "分栏",
+        "拖动",
+        "调整大小",
+        "分隔条"
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "title": "滚动区域 Scroll Area",
+      "description": "在固定尺寸的区域内滚动内容，滚动条纤细且只在悬停或滚动时出现，可选边缘渐隐提示还有更多内容。",
+      "category": "布局",
+      "source": "coss",
+      "import": "@qingye/ui/components/scroll-area",
+      "exports": [
+        "ScrollArea",
+        "ScrollBar"
+      ],
+      "docs": "/docs/components/scroll-area",
+      "notes": [
+        "内容不多时直接用 overflow-auto 即可；需要统一的细滚动条或渐隐边缘时再用 ScrollArea。",
+        "横向滚动时给内容 w-max（或固定宽度），否则内容会被压缩到视口宽度。"
+      ],
+      "keywords": [
+        "scroll",
+        "scroll area",
+        "滚动",
+        "滚动条",
+        "overflow"
+      ]
+    },
+    {
+      "name": "search-input",
+      "title": "搜索框 SearchInput",
+      "description": "带搜索图标、清除按钮与快捷键提示的搜索输入框，用于列表筛选、全局搜索。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/search-input",
+      "exports": [
+        "SearchInput"
+      ],
+      "docs": "/docs/components/search-input",
+      "notes": [
+        "没有可见标签时提供 aria-label，例如“搜索订单”。",
+        "shortcut 只是提示，不注册快捷键；在应用里监听按键并给输入框加 aria-keyshortcuts。",
+        "对远程搜索做防抖时，loading 只在请求进行中开启，避免图标频繁闪动。"
+      ],
+      "keywords": [
+        "search",
+        "搜索",
+        "筛选",
+        "清除",
+        "⌘K"
+      ]
+    },
+    {
+      "name": "segmented-control",
+      "title": "分段控件 Segmented Control",
+      "description": "一组并排的互斥选项的外观。它只是一套样式，套在语义合适的原语上：表单取值用 RadioGroup，切换视图或筛选用 ToggleGroup，跳转地址用导航链接，切换面板用 Tabs。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/segmented-control",
+      "exports": [
+        "segmentedControlRootClassName",
+        "segmentedControlItemVariants"
+      ],
+      "docs": "/docs/components/segmented-control",
+      "notes": [
+        "先按交互选原语，再套样式：外观相同不是用 Tabs 或 ToggleGroup 的理由。",
+        "选项通常 2–4 个、文字简短；更多选项改用 Select。",
+        "给容器一个 aria-label，说明这组选项在选什么。",
+        "仅图标的选项必须有 aria-label；粗指针下点击区域自动扩大到 44px。"
+      ],
+      "keywords": [
+        "segmented",
+        "分段",
+        "分段控件",
+        "切换",
+        "单选",
+        "视图切换"
+      ]
+    },
+    {
+      "name": "select",
+      "title": "选择器 Select",
+      "description": "从一组固定选项中选择一个或多个。选项超过十几个或需要搜索时改用 Combobox。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/select",
+      "exports": [
+        "Select",
+        "SelectTrigger",
+        "SelectValue",
+        "SelectPopup",
+        "SelectItem",
+        "SelectGroup",
+        "SelectGroupLabel",
+        "SelectSeparator"
+      ],
+      "docs": "/docs/components/select",
+      "notes": [
+        "传入 items，SelectValue 才能在首次渲染时显示标签而不是原始值。",
+        "没有可见标签时给 Select 或 SelectTrigger 提供 aria-label。",
+        "多选时用 SelectValue 的 children 函数汇总显示，例如「前端、后端 等 3 项」。"
+      ],
+      "keywords": [
+        "select",
+        "下拉",
+        "选择",
+        "dropdown",
+        "picker"
+      ]
+    },
+    {
+      "name": "separator",
+      "title": "分隔线 Separator",
+      "description": "在内容组之间画一条 1px 的细线，横向分开段落区块，纵向分开行内的链接或操作。",
+      "category": "布局",
+      "source": "coss",
+      "import": "@qingye/ui/components/separator",
+      "exports": [
+        "Separator"
+      ],
+      "docs": "/docs/components/separator",
+      "notes": [
+        "只用于区分内容组；纯装饰的线条用边框（border-t 等）即可，不需要语义。",
+        "竖线放在 flex 行内才会自动拉伸；指定 h-4 之类的高度时以指定为准。"
+      ],
+      "keywords": [
+        "separator",
+        "divider",
+        "分隔线",
+        "分割线",
+        "hr"
+      ]
+    },
+    {
+      "name": "sheet",
+      "title": "侧边面板 Sheet",
+      "description": "从屏幕边缘滑入的模态面板，适合在不离开列表的情况下查看详情、编辑记录或设置筛选条件。需要拖拽手势或吸附高度时改用 Drawer。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/sheet",
+      "exports": [
+        "Sheet",
+        "SheetTrigger",
+        "SheetPopup",
+        "SheetHeader",
+        "SheetTitle",
+        "SheetDescription",
+        "SheetPanel",
+        "SheetFooter",
+        "SheetClose"
+      ],
+      "docs": "/docs/components/sheet",
+      "notes": [
+        "左右两侧用于详情与编辑，宽度上限 28rem；顶部、底部适合短内容，如通知或快捷设置。",
+        "窄屏下左右面板会留出 3rem 露出页面，提示用户仍在原页面之上。",
+        "需要移动端拖拽关闭、吸附点时使用 Drawer。"
+      ],
+      "keywords": [
+        "sheet",
+        "side panel",
+        "侧边栏",
+        "抽屉",
+        "面板"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "title": "侧边栏 Sidebar",
+      "description": "应用的主导航框架：分组菜单、子菜单、计数与操作，可折叠为图标栏；在窄屏上自动变为抽屉。适合后台、工作台这类常驻导航的应用。",
+      "category": "布局",
+      "source": "coss",
+      "import": "@qingye/ui/components/sidebar",
+      "exports": [
+        "SidebarProvider",
+        "Sidebar",
+        "SidebarHeader",
+        "SidebarContent",
+        "SidebarFooter",
+        "SidebarGroup",
+        "SidebarGroupLabel",
+        "SidebarMenu",
+        "SidebarMenuItem",
+        "SidebarMenuButton",
+        "SidebarInset",
+        "SidebarTrigger"
+      ],
+      "docs": "/docs/components/sidebar",
+      "notes": [
+        "侧栏桌面端使用 fixed 定位并占满视口高度；嵌在页面局部时（如本页示例），给 Provider 一个固定高度与 relative，并给 Sidebar 传 className=\"absolute h-full\"。",
+        "宽度只在 Provider 上覆盖 --sidebar-width，不要直接给 Sidebar 设宽度，否则折叠动画与占位会错位。",
+        "图标栏模式下给每个 SidebarMenuButton 设置 tooltip，否则折叠后无法辨认。",
+        "展开状态会写入名为 sidebar_state 的 Cookie（浏览器支持 Cookie Store API 时），服务端渲染可读取它作为 defaultOpen。",
+        "页面上同时存在多个 SidebarProvider 时，快捷键会同时作用于所有侧栏。"
+      ],
+      "keywords": [
+        "sidebar",
+        "侧边栏",
+        "侧栏",
+        "导航",
+        "app shell",
+        "抽屉"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "title": "骨架屏 Skeleton",
+      "description": "内容加载时先画出与真实布局一致的占位块，减少等待感和加载完成时的跳动。适合列表、卡片、表格等结构已知的区域。",
+      "category": "反馈",
+      "source": "coss",
+      "import": "@qingye/ui/components/skeleton",
+      "exports": [
+        "Skeleton"
+      ],
+      "docs": "/docs/components/skeleton",
+      "notes": [
+        "占位块的尺寸尽量与真实内容一致：头像用同样的直径，文字行高度接近字号，按钮用同样的高度与圆角，加载完成时不发生位移。",
+        "多个骨架共用同一道扫光（背景固定在视口上），一屏里放再多也不会显得杂乱。",
+        "在加载区域的容器上设 aria-busy=\"true\"，并放一段 sr-only 文字（如 “正在加载”），骨架本身对读屏无意义。",
+        "系统开启“减少动态效果”时扫光自动停止，只保留静态底色。",
+        "加载很快（< 300ms）的内容不要闪一下骨架；不知道结构的区域用 Spinner。"
+      ],
+      "keywords": [
+        "skeleton",
+        "骨架屏",
+        "占位",
+        "placeholder",
+        "加载",
+        "loading",
+        "shimmer"
+      ]
+    },
+    {
+      "name": "slider",
+      "title": "滑块 Slider",
+      "description": "在连续或分级的数值范围内拖动取值，适合音量、阈值、价格区间这类近似值；需要精确输入时配合 NumberField。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/slider",
+      "exports": [
+        "Slider",
+        "SliderValue"
+      ],
+      "docs": "/docs/components/slider",
+      "notes": [
+        "点击区域在轨道上下各扩展 8px（触屏 20px），细轨道也容易点中。",
+        "没有可见标签时提供 aria-label；有标签时把 FieldLabel 放进 Field。"
+      ],
+      "keywords": [
+        "slider",
+        "滑块",
+        "范围",
+        "range"
+      ]
+    },
+    {
+      "name": "spinner",
+      "title": "加载指示 Spinner",
+      "description": "表示正在加载或处理中的旋转指示器。用于等待时间不确定、且不值得显示进度的场景。",
+      "category": "反馈",
+      "source": "coss",
+      "import": "@qingye/ui/components/spinner",
+      "exports": [
+        "Spinner"
+      ],
+      "docs": "/docs/components/spinner",
+      "notes": [
+        "按钮内加载用 Button 的 loading 属性，不要自己塞 Spinner。",
+        "小于 200ms 的操作不要显示加载态，否则只会造成闪烁。",
+        "已知耗时且有进度时用 Progress，进度不确定才用 Spinner。",
+        "容器已有 role=\"status\" 或 aria-busy 时，用 aria-hidden 标记本组件，避免重复播报。"
+      ],
+      "keywords": [
+        "spinner",
+        "loader",
+        "loading",
+        "加载",
+        "转圈"
+      ]
+    },
+    {
+      "name": "stat",
+      "title": "指标 Stat",
+      "description": "展示单个关键数字：标签、数值、单位、与上一周期的变化和辅助说明。常放在 Card 中组成仪表盘的指标行。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/stat",
+      "exports": [
+        "Stat",
+        "StatLabel",
+        "StatValue",
+        "StatUnit",
+        "StatDelta",
+        "StatDescription",
+        "StatSparkline"
+      ],
+      "docs": "/docs/components/stat",
+      "notes": [
+        "变化量写成带符号的百分比并注明对比周期（较上周、环比），读者才能判断。",
+        "颜色只表达「好 / 坏」：指标以下降为好时用 inverse，不要反过来改 trend。",
+        "StatDelta 自带读屏前缀，颜色不是唯一信息；不要再在文字里重复「上升」。",
+        "一个视图只放一个 lg 指标；其余用默认或 sm，避免数字互相争抢。"
+      ],
+      "keywords": [
+        "stat",
+        "metric",
+        "kpi",
+        "指标",
+        "统计",
+        "数值",
+        "趋势"
+      ]
+    },
+    {
+      "name": "status-dot",
+      "title": "状态点 StatusDot",
+      "description": "用一个小圆点加文字表示对象当前的状态，如设备在线、任务运行、服务告警。实时状态可加柔和的呼吸光环。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/status-dot",
+      "exports": [
+        "StatusDot"
+      ],
+      "docs": "/docs/components/status-dot",
+      "notes": [
+        "优先写可见文字；只有在表格的状态列等上下文已经说明含义时才单独使用圆点。",
+        "pulse 只给真正实时变化的状态（直播中、正在同步、告警未处理），一屏不宜超过一两处。",
+        "状态色只表达状态，不要拿来区分普通类别；类别请用 Badge 或图表色。"
+      ],
+      "keywords": [
+        "status",
+        "dot",
+        "indicator",
+        "presence",
+        "状态",
+        "在线",
+        "指示灯"
+      ]
+    },
+    {
+      "name": "steps",
+      "title": "步骤条 Steps",
+      "description": "展示多步流程的进度：已完成、当前、未开始与出错。用于开户、下单、部署等有先后顺序的任务。",
+      "category": "导航",
+      "source": "local",
+      "import": "@qingye/ui/components/steps",
+      "exports": [
+        "Steps"
+      ],
+      "docs": "/docs/components/steps",
+      "notes": [
+        "当前步骤带 aria-current=\"step\"；每个步骤的状态以隐藏文字读出，不只依赖颜色。",
+        "线性流程中，只让已完成的步骤可点击：把之后的步骤设为 disabled。",
+        "超过 4 个步骤或在窄屏上，优先使用 vertical。"
+      ],
+      "keywords": [
+        "steps",
+        "stepper",
+        "步骤",
+        "进度",
+        "向导",
+        "wizard"
+      ]
+    },
+    {
+      "name": "switch",
+      "title": "开关 Switch",
+      "description": "切换一项立即生效的设置，例如启用通知。需要提交后才生效的选择用 Checkbox。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/switch",
+      "exports": [
+        "Switch"
+      ],
+      "docs": "/docs/components/switch",
+      "notes": [
+        "开关必须有可见标签说明它控制什么，标签写设置名而不是「开 / 关」。",
+        "触屏设备上点击区扩大到 44px，不改变外观。",
+        "从右到左（RTL）布局中滑块方向自动镜像。"
+      ],
+      "keywords": [
+        "switch",
+        "开关",
+        "toggle",
+        "启用"
+      ]
+    },
+    {
+      "name": "table",
+      "title": "表格 Table",
+      "description": "以行列呈现结构化数据，适合订单、设备、成员等需要对比与扫读的列表。需要排序、搜索、分页时改用 DataTable。",
+      "category": "数据展示",
+      "source": "coss",
+      "import": "@qingye/ui/components/table",
+      "exports": [
+        "Table",
+        "TableHeader",
+        "TableBody",
+        "TableFooter",
+        "TableRow",
+        "TableHead",
+        "TableCell",
+        "TableCaption"
+      ],
+      "docs": "/docs/components/table",
+      "notes": [
+        "数字、金额、日期列使用 text-end numeric，让位数对齐便于比较。",
+        "表格在窄屏上于容器内横向滚动，不会撑破页面；列宽靠内容决定，必要时给关键列 min-w-*。",
+        "选择列的复选框需要 aria-label；选中行设置 data-state=\"selected\"。",
+        "没有排序、筛选、分页需求时用 Table；需要这些交互时用 DataTable。"
+      ],
+      "keywords": [
+        "table",
+        "表格",
+        "列表",
+        "数据"
+      ]
+    },
+    {
+      "name": "tabs",
+      "title": "标签页 Tabs",
+      "description": "在同一位置切换几组相关内容，例如项目的概览、成员与设置。切换的是页面内的面板；跳转到不同地址请用导航链接。",
+      "category": "导航",
+      "source": "coss",
+      "import": "@qingye/ui/components/tabs",
+      "exports": [
+        "Tabs",
+        "TabsList",
+        "TabsTab",
+        "TabsPanel"
+      ],
+      "docs": "/docs/components/tabs",
+      "notes": [
+        "标签数量多、窄屏放不下时，把 TabsList 放进 ScrollArea 横向滚动，不要换行。",
+        "计数用 numeric 等宽数字，避免数字变化时标签宽度跳动。",
+        "仅图标的标签需要 aria-label。",
+        "粗指针设备上标签的点击区域自动扩大到 44px，外观不变。"
+      ],
+      "keywords": [
+        "tabs",
+        "标签页",
+        "选项卡",
+        "切换",
+        "underline"
+      ]
+    },
+    {
+      "name": "tag-input",
+      "title": "标签输入 TagInput",
+      "description": "在输入框里录入一组自由文本标签，例如关键词、邮箱或技能。回车或逗号确认，粘贴一列文本会自动拆分；从固定选项中多选时用 Combobox。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/tag-input",
+      "exports": [
+        "TagInput"
+      ],
+      "docs": "/docs/components/tag-input",
+      "notes": [
+        "重复的标签不会再次加入，已有的那个会短暂高亮并给出提示。",
+        "粘贴多行或逗号分隔的文本（例如从表格复制的一列）会一次加入多个标签。",
+        "中文输入法组字期间按回车不会误加标签。"
+      ],
+      "keywords": [
+        "tag input",
+        "tags",
+        "chips",
+        "标签",
+        "关键词",
+        "多值输入",
+        "token"
+      ]
+    },
+    {
+      "name": "textarea",
+      "title": "多行输入 Textarea",
+      "description": "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/textarea",
+      "exports": [
+        "Textarea"
+      ],
+      "docs": "/docs/components/textarea",
+      "notes": [
+        "需要限制最大高度时给外层加 max-h-* 并让 textarea 滚动，例如 className=\"*:max-h-40\"。",
+        "需要底部工具栏、发送按钮时用 InputGroup + InputGroupTextarea。"
+      ],
+      "keywords": [
+        "textarea",
+        "多行",
+        "文本域",
+        "备注"
+      ]
+    },
+    {
+      "name": "theme-provider",
+      "title": "主题 ThemeProvider",
+      "description": "管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。",
+      "category": "工具",
+      "source": "local",
+      "import": "@qingye/ui/components/theme-provider",
+      "exports": [
+        "ThemeProvider",
+        "useTheme",
+        "themeScript"
+      ],
+      "docs": "/docs/components/theme-provider",
+      "notes": [
+        "防止首屏闪烁：React 挂载前页面已经绘制，需要在 <head> 里、样式表之前放一段内联脚本先应用主题。单页应用把 themeScript() 的输出粘贴进 index.html 的 <script>；服务端渲染用 <script dangerouslySetInnerHTML={{ __html: themeScript() }} />。脚本参数必须与 ThemeProvider 一致。",
+        "主题菜单的文案用语言包中的 theme、lightTheme、darkTheme、systemTheme。",
+        "选择“跟随系统”后，操作系统切换深浅色时页面立即跟随，无需刷新。",
+        "只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。"
+      ],
+      "keywords": [
+        "theme",
+        "主题",
+        "深色模式",
+        "dark mode",
+        "浅色",
+        "跟随系统",
+        "color scheme"
+      ]
+    },
+    {
+      "name": "timeline",
+      "title": "时间线 Timeline",
+      "description": "按时间顺序列出事件：物流轨迹、部署记录、审批与评论动态。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/timeline",
+      "exports": [
+        "Timeline",
+        "TimelineItem",
+        "TimelineMarker",
+        "TimelineContent",
+        "TimelineHeader",
+        "TimelineTitle",
+        "TimelineTime",
+        "TimelineDescription"
+      ],
+      "docs": "/docs/components/timeline",
+      "notes": [
+        "时间写成用户熟悉的形式（“14:32”“昨天”），同时用 dateTime 提供 ISO 时间。",
+        "状态颜色只作辅助，标题文字要能单独说明发生了什么。",
+        "新事件在上的倒序最常见；保持同一页面内顺序一致。"
+      ],
+      "keywords": [
+        "timeline",
+        "时间线",
+        "动态",
+        "活动",
+        "日志",
+        "activity",
+        "feed"
+      ]
+    },
+    {
+      "name": "toast",
+      "title": "消息提示 Toast",
+      "description": "操作完成后在屏幕角落短暂出现的反馈，不打断当前任务。多条消息自动层叠，悬停或聚焦时展开；需要用户立即处理的信息改用 Alert 或 AlertDialog。",
+      "category": "反馈",
+      "source": "coss",
+      "import": "@qingye/ui/components/toast",
+      "exports": [
+        "ToastProvider",
+        "toastManager"
+      ],
+      "docs": "/docs/components/toast",
+      "notes": [
+        "整个应用只挂载一个 ToastProvider，在任何地方调用 toastManager 即可。",
+        "标题说结果（“已保存”），说明补充细节；不要把唯一的操作入口只放在消息里，它会自动消失。",
+        "悬停或聚焦消息区域时暂停计时并展开层叠；移动端可以左右或向下滑动关闭。",
+        "错误消息使用 priority: \"high\"，并给出下一步怎么做。"
+      ],
+      "keywords": [
+        "toast",
+        "notification",
+        "snackbar",
+        "消息",
+        "通知",
+        "轻提示"
+      ]
+    },
+    {
+      "name": "toggle",
+      "title": "切换按钮 Toggle",
+      "description": "可按下保持的双态按钮，用于开关一项格式或视图设置，例如加粗、收藏、显示网格。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/toggle",
+      "exports": [
+        "Toggle",
+        "toggleVariants"
+      ],
+      "docs": "/docs/components/toggle",
+      "notes": [
+        "仅图标的 Toggle 必须提供 aria-label，且文案不随状态改变——状态由 aria-pressed 表达。",
+        "一组互斥或相关的选项用 ToggleGroup，不要手动拼多个 Toggle。",
+        "需要立即生效并有“开 / 关”语义的设置项用 Switch。"
+      ],
+      "keywords": [
+        "toggle",
+        "切换",
+        "开关按钮",
+        "pressed"
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "title": "切换按钮组 ToggleGroup",
+      "description": "一组共享状态的 Toggle：单选用于视图或对齐方式，多选用于文字格式等可叠加的选项。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/toggle-group",
+      "exports": [
+        "ToggleGroup",
+        "ToggleGroupItem",
+        "ToggleGroupSeparator"
+      ],
+      "docs": "/docs/components/toggle-group",
+      "notes": [
+        "仅图标的子项提供 aria-label；需要说明时可包一层 Tooltip。",
+        "单选组至少保留一项选中时，在 onValueChange 中忽略空数组。"
+      ],
+      "keywords": [
+        "toggle group",
+        "按钮组",
+        "切换",
+        "对齐",
+        "视图切换"
+      ]
+    },
+    {
+      "name": "toolbar",
+      "title": "工具栏 Toolbar",
+      "description": "把一组相关控件（格式按钮、切换组、下拉选择）收进同一个可键盘漫游的容器，例如编辑器顶部的格式栏。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/toolbar",
+      "exports": [
+        "Toolbar",
+        "ToolbarButton",
+        "ToolbarGroup",
+        "ToolbarSeparator",
+        "ToolbarLink",
+        "ToolbarInput"
+      ],
+      "docs": "/docs/components/toolbar",
+      "notes": [
+        "给 Toolbar 一个 aria-label，说明它控制的对象，例如“正文格式”。",
+        "仅图标的按钮需要 aria-label，配合 Tooltip 给鼠标用户显示名称。",
+        "工具栏不换行：窄屏放不下时减少按钮，把次要操作收进“更多”菜单。"
+      ],
+      "keywords": [
+        "toolbar",
+        "工具栏",
+        "格式栏",
+        "编辑器"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "title": "文字提示 Tooltip",
+      "description": "悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。",
+      "category": "浮层",
+      "source": "coss",
+      "import": "@qingye/ui/components/tooltip",
+      "exports": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipPopup"
+      ],
+      "docs": "/docs/components/tooltip",
+      "notes": [
+        "提示不能替代可访问名称：仅图标的按钮仍然需要 aria-label。",
+        "触屏设备没有悬停，不要把关键信息只放在 Tooltip 里；需要点击查看的说明用 Popover 的 tooltipStyle。",
+        "禁用的按钮不会触发悬停事件；需要解释禁用原因时，把提示放在外层包裹元素上。",
+        "文档站与应用都应在根部挂载一次 TooltipProvider，不要在每个提示外再包一层。"
+      ],
+      "keywords": [
+        "tooltip",
+        "提示",
+        "文字提示",
+        "hint"
+      ]
+    },
+    {
+      "name": "tree",
+      "title": "树 Tree",
+      "description": "展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。完整遵循 WAI-ARIA 树形视图的键盘模型。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/tree",
+      "exports": [
+        "Tree",
+        "type TreeNode"
+      ],
+      "docs": "/docs/components/tree",
+      "notes": [
+        "树只有一个 Tab 停留点：进入时聚焦上次的节点或选中项，其余节点用方向键到达。",
+        "label 为自定义节点时提供 textValue，让键入查找可用。",
+        "节点很多时考虑默认只展开第一层，避免一次渲染过深的层级。"
+      ],
+      "keywords": [
+        "tree",
+        "树",
+        "目录",
+        "层级",
+        "文件",
+        "treeview"
+      ]
+    },
+    {
+      "name": "typography",
+      "title": "排版 Typography",
+      "description": "标题 Heading、长文容器 Prose 与文字链接 TextLink。字号取自类型令牌，中文长文使用更宽松的行高。正文与辅助文字请用布局中的 Text。",
+      "category": "排版",
+      "source": "local",
+      "import": "@qingye/ui/components/typography",
+      "exports": [
+        "Heading",
+        "Prose",
+        "TextLink"
+      ],
+      "docs": "/docs/components/typography",
+      "notes": [
+        "中文不加负字距：display 字号的收紧只在非中日韩语言下生效。",
+        "Prose 只作用于没有 data-slot 的普通元素；给其中某个元素加 className 会覆盖默认样式。",
+        "标题层级不要跳级；需要较小的视觉字号时改 size，不要用 h4 冒充小标题。",
+        "Text 组件（正文、标签、说明）在 layout 中，这里不重复定义。"
+      ],
+      "keywords": [
+        "typography",
+        "heading",
+        "prose",
+        "link",
+        "排版",
+        "标题",
+        "正文",
+        "链接",
+        "文章"
+      ]
     }
   ],
   "extras": [
-    "password-input",
-    "search-input",
-    "file-upload",
+    "aspect-ratio",
+    "carousel",
+    "chart",
+    "code-block",
+    "copy-button",
     "data-table",
+    "date-picker",
+    "date-range-picker",
+    "date-time-picker",
+    "description-list",
+    "disclosure",
+    "file-upload",
+    "item",
+    "layout",
+    "menubar",
+    "motion-provider",
+    "native-select",
+    "navigation-menu",
+    "page-header",
+    "password-input",
+    "progress-circle",
+    "resizable",
+    "search-input",
+    "stat",
+    "status-dot",
     "steps",
+    "tag-input",
+    "theme-provider",
     "timeline",
     "tree",
-    "carousel",
-    "copy-button"
+    "typography"
   ]
 }

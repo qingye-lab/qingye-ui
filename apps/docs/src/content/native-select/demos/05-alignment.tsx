@@ -1,6 +1,6 @@
-import { Input } from "@yanqing/ui/components/input";
-import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
+import { Input } from "@qingye/ui/components/input";
+import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
 
 export const meta = {
   title: "与 Select、Input 并排",

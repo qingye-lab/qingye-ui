@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
-import { cn } from "@yanqing/ui/utils";
+import { Button } from "@qingye/ui/components/button";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
+import { cn } from "@qingye/ui/utils";
 import { SearchIcon } from "lucide-react";
 import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";

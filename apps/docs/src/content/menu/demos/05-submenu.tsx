@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuSub, MenuSubPopup, MenuSubTrigger, MenuTrigger } from "@yanqing/ui/components/menu";
+import { Button } from "@qingye/ui/components/button";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuSub, MenuSubPopup, MenuSubTrigger, MenuTrigger } from "@qingye/ui/components/menu";
 import { FolderInputIcon, MailIcon, MessageSquareIcon, Share2Icon } from "lucide-react";
 
 export const meta = { title: "子菜单", description: "悬停或按 → 打开子菜单，按 ← 返回上一级。" };

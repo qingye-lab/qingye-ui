@@ -1,4 +1,4 @@
-import { Spinner } from "@yanqing/ui";
+import { Spinner } from "@qingye/ui";
 
 export const meta = { title: "行内", description: "与文字同高，用于「正在同步」「正在上传」这类短提示。" };
 

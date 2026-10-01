@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { DatePicker } from "@yanqing/ui/components/date-picker";
-import { Label } from "@yanqing/ui/components/label";
+import { Button } from "@qingye/ui/components/button";
+import { DatePicker } from "@qingye/ui/components/date-picker";
+import { Label } from "@qingye/ui/components/label";
 import { useState, type FormEvent } from "react";
 
 export const meta = { title: "表单提交", description: "通过 name 提交，值为本地日期 YYYY-MM-DD。" };

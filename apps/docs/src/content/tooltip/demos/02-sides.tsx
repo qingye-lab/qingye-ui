@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
+import { Button } from "@qingye/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
 
 export const meta = { title: "方向", description: "默认在上方；side 指定其他方向，空间不足时自动翻转。" };
 

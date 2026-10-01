@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
-import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@yanqing/ui/components/menu";
+import { Button } from "@qingye/ui/components/button";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
 import { ChevronDownIcon } from "lucide-react";
 
 export const meta = { title: "在菜单中", description: "菜单项末端标出对应快捷键。" };

@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
+import { Button } from "@qingye/ui/components/button";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 
 export const meta = {
   title: "在按钮中",

@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
-import { Field, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
+import { Button } from "@qingye/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 import { useState } from "react";
 
 export const meta = {

@@ -1,4 +1,4 @@
-import { Stack, Text } from "@yanqing/ui/components/layout";
+import { Stack, Text } from "@qingye/ui/components/layout";
 
 export const meta = { title: "Text", description: "三档字号与五种语义色；不设 tone 时继承父级颜色。" };
 

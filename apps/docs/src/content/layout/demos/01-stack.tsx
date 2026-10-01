@@ -1,7 +1,7 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Input } from "@yanqing/ui/components/input";
-import { Label } from "@yanqing/ui/components/label";
-import { Stack, Text } from "@yanqing/ui/components/layout";
+import { Button } from "@qingye/ui/components/button";
+import { Input } from "@qingye/ui/components/input";
+import { Label } from "@qingye/ui/components/label";
+import { Stack, Text } from "@qingye/ui/components/layout";
 
 export const meta = { title: "Stack", description: "表单字段纵向排列：外层 gap 5 分隔字段，内层 gap 2 连接标签与输入。" };
 

@@ -1,5 +1,5 @@
-import { Label } from "@yanqing/ui/components/label";
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
+import { Label } from "@qingye/ui/components/label";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
 
 export const meta = { title: "基础用法", description: "列表默认与触发器同宽，展开在正下方。" };
 

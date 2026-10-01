@@ -1,9 +1,9 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@yanqing/ui/components/menu";
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui/components/tabs";
-import { useMediaQuery } from "@yanqing/ui/hooks/use-media-query";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
+import { useMediaQuery } from "@qingye/ui/hooks/use-media-query";
 import { ChevronDownIcon, KeyboardIcon, MousePointer2Icon, RotateCcwIcon } from "lucide-react";
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { CodeBlock } from "@/components/code-block";

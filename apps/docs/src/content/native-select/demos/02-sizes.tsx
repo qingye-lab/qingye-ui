@@ -1,4 +1,4 @@
-import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
+import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 
 export const meta = { title: "尺寸", description: "与 Select 触发器相同的三档尺寸；移动端自动加高 4px。" };
 

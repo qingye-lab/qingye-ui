@@ -1,11 +1,14 @@
-# @yanqing/ui
+# 青野 UI · Qingye UI
 
 React 组件库：Base UI 原语 + coss ui（MIT）的组件设计 + 三层设计令牌，内置浅色 / 深色主题与动效规范。需要 React 19.2+。
 
 ## 安装
 
+仓库目前为私有，使用有仓库访问权限且已登录的 GitHub CLI 下载，再安装本地包：
+
 ```sh
-pnpm add https://github.com/qingye-lab/yanqing-ui/releases/download/v0.1.0/yanqing-ui-0.1.0.tgz
+gh release download v0.2.0 --repo qingye-lab/qingye-ui --pattern qingye-ui-0.2.0.tgz
+pnpm add ./qingye-ui-0.2.0.tgz
 ```
 
 `DataTable` 需要 `@tanstack/react-table`，`Chart` 需要 `recharts`；它们是可选的 peer 依赖，只在使用对应组件时安装。
@@ -16,7 +19,7 @@ pnpm add https://github.com/qingye-lab/yanqing-ui/releases/download/v0.1.0/yanqi
 
 ```css
 @import "tailwindcss";
-@import "@yanqing/ui/styles.css";
+@import "@qingye/ui/styles.css";
 ```
 
 `styles.css` 已声明 `dark` 变体（`.dark` 或 `data-theme="dark"` 祖先），无需重复配置。
@@ -24,7 +27,7 @@ pnpm add https://github.com/qingye-lab/yanqing-ui/releases/download/v0.1.0/yanqi
 **没有 Tailwind 的项目**——导入预编译样式（gzip 约 30 KB）：
 
 ```ts
-import "@yanqing/ui/ui.css";
+import "@qingye/ui/ui.css";
 ```
 
 两种方式二选一，不要同时导入。
@@ -32,7 +35,7 @@ import "@yanqing/ui/ui.css";
 ## 根部 Provider
 
 ```tsx
-import { ThemeProvider, ToastProvider, TooltipProvider } from "@yanqing/ui";
+import { ThemeProvider, ToastProvider, TooltipProvider } from "@qingye/ui";
 
 <ThemeProvider>
   <TooltipProvider>
@@ -58,8 +61,8 @@ import { ThemeProvider, ToastProvider, TooltipProvider } from "@yanqing/ui";
 ## 导入
 
 ```tsx
-import { Button, Dialog, DialogPopup } from "@yanqing/ui";          // 根入口
-import { Select } from "@yanqing/ui/components/select";             // 单组件入口
+import { Button, Dialog, DialogPopup } from "@qingye/ui";          // 根入口
+import { Select } from "@qingye/ui/components/select";             // 单组件入口
 ```
 
 已有 shadcn 命名的组件同时导出别名（`DropdownMenu*`、`DialogContent`、`SheetContent`、`TabsTrigger`、`TooltipContent` 等），便于迁移。
@@ -88,8 +91,8 @@ import { Select } from "@yanqing/ui/components/select";             // 单组件
 内置文案默认简体中文，不依赖浏览器语言。切换英文：
 
 ```tsx
-import { UILocaleProvider } from "@yanqing/ui/locale";
-import { enUS } from "@yanqing/ui/locales/en-US";
+import { UILocaleProvider } from "@qingye/ui/locale";
+import { enUS } from "@qingye/ui/locales/en-US";
 
 <UILocaleProvider locale={enUS}>…</UILocaleProvider>
 ```
@@ -105,7 +108,7 @@ import { enUS } from "@yanqing/ui/locales/en-US";
 适配自 coss ui 的组件记录在 `coss-source.json`（上游路径、SHA-256 与每项本地改动），`upstream/` 不随包发布。检查上游更新：
 
 ```sh
-pnpm --filter @yanqing/ui check:upstream
+pnpm --filter @qingye/ui check:upstream
 ```
 
 许可：MIT，见 `LICENSE` 与 `THIRD_PARTY_NOTICES.md`。

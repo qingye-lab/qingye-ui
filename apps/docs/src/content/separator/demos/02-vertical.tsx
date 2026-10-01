@@ -1,4 +1,4 @@
-import { Separator } from "@yanqing/ui/components/separator";
+import { Separator } from "@qingye/ui/components/separator";
 
 export const meta = { title: "纵向", description: "在 flex 行内自动拉伸到行高。" };
 

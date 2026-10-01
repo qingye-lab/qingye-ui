@@ -1,6 +1,6 @@
-import { Label } from "@yanqing/ui/components/label";
-import { Switch } from "@yanqing/ui/components/switch";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Label } from "@qingye/ui/components/label";
+import { Switch } from "@qingye/ui/components/switch";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 import { useState } from "react";
 
 export const meta = { title: "紧凑密度", description: "compact 将行高从 48px 收到 40px，适合信息密集的后台列表。" };

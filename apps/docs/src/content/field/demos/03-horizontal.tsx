@@ -1,6 +1,6 @@
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Field, FieldContent, FieldDescription, FieldLabel, FieldSeparator } from "@yanqing/ui/components/field";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldLabel, FieldSeparator } from "@qingye/ui/components/field";
+import { Switch } from "@qingye/ui/components/switch";
 
 export const meta = {
   title: "横向",

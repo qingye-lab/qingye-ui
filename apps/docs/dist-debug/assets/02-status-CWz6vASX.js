@@ -1,4 +1,0 @@
-const _02Status = 'import { ProgressCircle } from "@yanqing/ui";\n\nexport const meta = { title: "状态色", description: "进度弧取状态色，轨道保持半透明中性。" };\n\nconst items = [\n  { status: "default", value: 42, label: "默认" },\n  { status: "success", value: 100, label: "已完成" },\n  { status: "info", value: 64, label: "同步中" },\n  { status: "warning", value: 86, label: "容量偏高" },\n  { status: "error", value: 97, label: "即将耗尽" },\n] as const;\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-wrap items-start justify-center gap-6">\n      {items.map((item) => (\n        <div className="flex w-16 flex-col items-center gap-2" key={item.status}>\n          <ProgressCircle aria-label={item.label} showValue size="lg" status={item.status} value={item.value} />\n          <span className="text-muted-foreground text-xs">{item.label}</span>\n        </div>\n      ))}\n    </div>\n  );\n}\n';
-export {
-  _02Status as default
-};

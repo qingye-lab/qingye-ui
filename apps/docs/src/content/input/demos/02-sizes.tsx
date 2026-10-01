@@ -1,4 +1,4 @@
-import { Input } from "@yanqing/ui/components/input";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "尺寸", description: "sm 用于筛选栏与表格内，lg 用于登录等突出表单。" };
 

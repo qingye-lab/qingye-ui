@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Drawer, DrawerClose, DrawerMenu, DrawerMenuCheckboxItem, DrawerMenuGroup, DrawerMenuGroupLabel, DrawerMenuItem, DrawerMenuRadioGroup, DrawerMenuRadioItem, DrawerMenuSeparator, DrawerPanel, DrawerPopup, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Button } from "@qingye/ui/components/button";
+import { Drawer, DrawerClose, DrawerMenu, DrawerMenuCheckboxItem, DrawerMenuGroup, DrawerMenuGroupLabel, DrawerMenuItem, DrawerMenuRadioGroup, DrawerMenuRadioItem, DrawerMenuSeparator, DrawerPanel, DrawerPopup, DrawerTrigger } from "@qingye/ui/components/drawer";
 import { CopyIcon, EllipsisIcon, PencilIcon, Share2Icon, Trash2Icon } from "lucide-react";
 
 export const meta = {

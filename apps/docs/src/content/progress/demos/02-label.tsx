@@ -1,4 +1,4 @@
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui/components/progress";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye/ui/components/progress";
 
 export const meta = { title: "标签与数值", description: "标签和数值放在轨道上方的一行，两端对齐。" };
 

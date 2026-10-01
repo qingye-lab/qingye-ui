@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
+import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "状态", description: "无效、只读与禁用。" };
 

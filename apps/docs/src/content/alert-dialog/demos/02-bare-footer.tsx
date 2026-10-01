@@ -1,5 +1,5 @@
-import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@yanqing/ui/components/alert-dialog";
-import { Button } from "@yanqing/ui/components/button";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
+import { Button } from "@qingye/ui/components/button";
 
 export const meta = { title: "无底色底部", description: "非危险的确认，例如退出登录，用更轻的 bare 底部。" };
 

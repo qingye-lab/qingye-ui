@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
+import { Button } from "@qingye/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPopup, DialogTitle, DialogTrigger } from "@qingye/ui/components/dialog";
 
 export const meta = {
   title: "无底色底部",
@@ -14,7 +14,7 @@ export default function Demo() {
         <DialogHeader>
           <DialogTitle>导出 9 月账单</DialogTitle>
           <DialogDescription>
-            共 1,286 笔交易，生成完成后会发送到 finance@yanqing.cn。
+            共 1,286 笔交易，生成完成后会发送到 finance@qingye.example。
           </DialogDescription>
         </DialogHeader>
         <DialogFooter variant="bare">

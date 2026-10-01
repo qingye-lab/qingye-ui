@@ -1,0 +1,5 @@
+import{j as e}from"./vendor-react-DkPWdm9N.js";import{R as o,a as r,b as s}from"./resizable-BbmB283u.js";import"./index-Bp3wbe0b.js";import"./vendor-CtnXKZlY.js";import"./vendor-date-j_bVFt3w.js";import"./vendor-base-ui-NEp_fldd.js";const c={title:"纵向",description:'direction="vertical" 上下排列，外层需要确定的高度。'};function x(){return e.jsx("div",{className:"h-72 w-full max-w-2xl overflow-hidden rounded-xl border",children:e.jsxs(o,{direction:"vertical",children:[e.jsx(r,{defaultSize:64,minSize:30,children:e.jsx("pre",{className:"h-full overflow-auto p-4 font-mono text-xs leading-relaxed",children:e.jsx("code",{children:`export async function loadReport(id: string) {
+  const response = await fetch(\`/api/reports/\${id}\`);
+  if (!response.ok) throw new Error("报表加载失败");
+  return response.json();
+}`})})}),e.jsx(s,{"aria-label":"调整终端高度"}),e.jsx(r,{minSize:18,children:e.jsxs("div",{className:"flex h-full flex-col gap-1 overflow-auto bg-muted/48 p-4 font-mono text-muted-foreground text-xs",children:[e.jsx("span",{children:"$ pnpm test"}),e.jsx("span",{className:"text-success-foreground",children:"✓ 42 项测试通过（1.8 秒）"})]})})]})})}export{x as default,c as meta};

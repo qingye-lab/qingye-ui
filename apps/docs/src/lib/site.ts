@@ -1,16 +1,17 @@
-import pkg from "@yanqing/ui/package.json";
+import pkg from "@qingye/ui/package.json";
 
 export const SITE = {
-  name: "Yanqing UI",
+  name: "Qingye UI",
   packageName: pkg.name,
   version: pkg.version,
-  repo: "https://github.com/qingye-lab/yanqing-ui",
+  repo: "https://github.com/qingye-lab/qingye-ui",
   branch: "main",
 } as const;
 
 export const repoFile = (path: string) => `${SITE.repo}/blob/${SITE.branch}/${path}`;
 
-export const releaseTarball = `${SITE.repo}/releases/download/v${SITE.version}/yanqing-ui-${SITE.version}.tgz`;
+export const releaseFile = `qingye-ui-${SITE.version}.tgz`;
+export const releaseDownloadCommand = `gh release download v${SITE.version} --repo qingye-lab/qingye-ui --pattern ${releaseFile}`;
 
 export const editComponentUrl = (slug: string) => repoFile(`apps/docs/src/content/${slug}/meta.ts`);
 

@@ -1,5 +1,5 @@
-import { Calendar } from "@yanqing/ui/components/calendar";
-import { type DateRange } from "@yanqing/ui";
+import { Calendar } from "@qingye/ui/components/calendar";
+import { type DateRange } from "@qingye/ui";
 import { useState } from "react";
 
 export const meta = {

@@ -1,4 +1,0 @@
-const _01Basic = 'import { Button, PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@yanqing/ui";\nimport { DownloadIcon, PlusIcon } from "lucide-react";\n\nexport const meta = { title: "基础", description: "标题、描述与操作；窄屏时操作换到下方。" };\n\nexport default function Demo() {\n  return (\n    <PageHeader className="w-full">\n      <PageHeaderContent>\n        <PageHeaderTitle>设备管理</PageHeaderTitle>\n        <PageHeaderDescription>查看各门店终端的在线状态、固件版本与告警，支持批量重启和升级。</PageHeaderDescription>\n      </PageHeaderContent>\n      <PageHeaderActions>\n        <Button variant="outline">\n          <DownloadIcon aria-hidden="true" />\n          导出\n        </Button>\n        <Button>\n          <PlusIcon aria-hidden="true" />\n          添加设备\n        </Button>\n      </PageHeaderActions>\n    </PageHeader>\n  );\n}\n';
-export {
-  _01Basic as default
-};

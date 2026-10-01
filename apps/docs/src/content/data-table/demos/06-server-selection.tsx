@@ -1,7 +1,7 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
-import { DataTable } from "@yanqing/ui/components/data-table";
-import { type ColumnDef } from "@yanqing/ui";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { DataTable } from "@qingye/ui/components/data-table";
+import { type ColumnDef } from "@qingye/ui";
 import { SendIcon } from "lucide-react";
 import { useState } from "react";
 

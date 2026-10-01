@@ -1,5 +1,5 @@
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
-import { Kbd } from "@yanqing/ui/components/kbd";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
+import { Kbd } from "@qingye/ui/components/kbd";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "在输入框中", description: "放进 InputGroupAddon，提示唤起搜索的快捷键。" };

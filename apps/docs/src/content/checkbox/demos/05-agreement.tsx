@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Checkbox } from "@yanqing/ui/components/checkbox";
-import { Label } from "@yanqing/ui/components/label";
+import { Button } from "@qingye/ui/components/button";
+import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Label } from "@qingye/ui/components/label";
 import { useState } from "react";
 
 export const meta = { title: "组合：提交前确认", description: "未勾选时禁用提交按钮。" };

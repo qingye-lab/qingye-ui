@@ -1,4 +1,4 @@
-import { DateRangePicker } from "@yanqing/ui/components/date-range-picker";
+import { DateRangePicker } from "@qingye/ui/components/date-range-picker";
 
 export const meta = { title: "尺寸", description: "与 Select、Input 同一套高度。" };
 

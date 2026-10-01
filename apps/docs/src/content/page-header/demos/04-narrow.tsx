@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@yanqing/ui/components/page-header";
+import { Button } from "@qingye/ui/components/button";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye/ui/components/page-header";
 import { PlusIcon } from "lucide-react";
 
 export const meta = {

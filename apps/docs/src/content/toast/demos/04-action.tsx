@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { toastManager } from "@yanqing/ui/components/toast";
+import { Button } from "@qingye/ui/components/button";
+import { toastManager } from "@qingye/ui/components/toast";
 
 export const meta = { title: "带操作按钮", description: "可撤销的操作给出“撤销”，并适当延长显示时间。" };
 

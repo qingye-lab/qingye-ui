@@ -1,13 +1,13 @@
 {
-  "name": "yanqing-ui-workspace",
+  "name": "qingye-ui-workspace",
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "build": "pnpm --filter @yanqing/ui build",
+    "build": "pnpm --filter @qingye/ui build",
     "typecheck": "pnpm --recursive --if-present typecheck",
     "test": "pnpm --recursive --if-present test",
     "dev": "pnpm --filter docs dev",
-    "docs:build": "pnpm --filter @yanqing/ui build && pnpm --filter docs build",
+    "docs:build": "pnpm --filter @qingye/ui build && pnpm --filter docs build",
     "shot": "node scripts/shot.mjs"
   },
   "devDependencies": {

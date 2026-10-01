@@ -1,6 +1,6 @@
-import { Tabs, TabsList, TabsPanel } from "@yanqing/ui/components/tabs";
-import { TabsTab } from "@yanqing/ui/components/tabs";
-import { cn } from "@yanqing/ui";
+import { Tabs, TabsList, TabsPanel } from "@qingye/ui/components/tabs";
+import { TabsTab } from "@qingye/ui/components/tabs";
+import { cn } from "@qingye/ui";
 import { Component, useMemo, type ReactNode } from "react";
 import { cleanDemoSource } from "@/lib/highlight";
 import type { LoadedDemo } from "@/lib/registry";

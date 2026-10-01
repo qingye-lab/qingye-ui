@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Group, GroupSeparator } from "@yanqing/ui/components/group";
+import { Button } from "@qingye/ui/components/button";
+import { Group, GroupSeparator } from "@qingye/ui/components/group";
 import { ChevronLeftIcon, ChevronRightIcon, MinusIcon, PlusIcon } from "lucide-react";
 
 export const meta = { title: "纵向与嵌套", description: "纵向组里分隔线用 horizontal；嵌套的子组之间保留间距。" };

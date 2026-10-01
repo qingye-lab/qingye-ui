@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui/components/button";
+import { Button } from "@qingye/ui/components/button";
 
 export const meta = { title: "禁用", description: "不可用时降低不透明度并屏蔽指针事件。" };
 

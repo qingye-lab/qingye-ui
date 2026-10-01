@@ -1,4 +1,0 @@
-const _04Dot = 'import { Badge } from "@yanqing/ui";\n\nexport const meta = {\n  title: "状态圆点",\n  description: "outline 加一个彩色圆点，比整块底色更克制，适合表格和设备列表。",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Badge variant="outline">\n        <span aria-hidden="true" className="size-1.5 rounded-full bg-success" />\n        运行中\n      </Badge>\n      <Badge variant="outline">\n        <span aria-hidden="true" className="size-1.5 rounded-full bg-warning" />\n        维护中\n      </Badge>\n      <Badge variant="outline">\n        <span aria-hidden="true" className="size-1.5 rounded-full bg-destructive" />\n        故障\n      </Badge>\n      <Badge variant="outline">\n        <span aria-hidden="true" className="size-1.5 rounded-full bg-muted-foreground/64" />\n        已停止\n      </Badge>\n    </>\n  );\n}\n';
-export {
-  _04Dot as default
-};

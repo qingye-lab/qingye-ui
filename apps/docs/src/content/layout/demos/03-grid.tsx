@@ -1,4 +1,4 @@
-import { Grid, Stack, Text } from "@yanqing/ui/components/layout";
+import { Grid, Stack, Text } from "@qingye/ui/components/layout";
 
 export const meta = { title: "Grid", description: "columns={3}：手机一列，640px 起两列，1024px 起三列。" };
 

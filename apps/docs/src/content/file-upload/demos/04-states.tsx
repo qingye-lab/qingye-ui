@@ -1,4 +1,4 @@
-import { FileUpload } from "@yanqing/ui/components/file-upload";
+import { FileUpload } from "@qingye/ui/components/file-upload";
 
 export const meta = { title: "状态", description: "禁用与错误。错误状态要同时给出文字说明。" };
 

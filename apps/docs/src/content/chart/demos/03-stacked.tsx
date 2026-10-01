@@ -1,6 +1,6 @@
-import type { ChartConfig } from "@yanqing/ui/components/chart";
-import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, RechartsPrimitive } from "@yanqing/ui/components/chart";
+import type { ChartConfig } from "@qingye/ui/components/chart";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, RechartsPrimitive } from "@qingye/ui/components/chart";
 
 const { Bar, BarChart, CartesianGrid, XAxis, YAxis } = RechartsPrimitive;
 

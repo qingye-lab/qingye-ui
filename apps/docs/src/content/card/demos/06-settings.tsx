@@ -1,6 +1,6 @@
-import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Switch } from "@yanqing/ui/components/switch";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Switch } from "@qingye/ui/components/switch";
 
 export const meta = { title: "设置卡片", description: "Field 横向排列标签与开关，点击标签也能切换。" };
 
@@ -9,7 +9,7 @@ export default function Demo() {
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>邮件通知</CardTitle>
-        <CardDescription>选择哪些事件需要发送到 linxiaowen@yanqing.cn。</CardDescription>
+        <CardDescription>选择哪些事件需要发送到 linxiaowen@qingye.example。</CardDescription>
       </CardHeader>
       <CardPanel className="flex flex-col gap-5">
         <Field orientation="horizontal">

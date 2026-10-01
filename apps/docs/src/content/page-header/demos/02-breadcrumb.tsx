@@ -1,8 +1,8 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@yanqing/ui/components/breadcrumb";
-import { Button } from "@yanqing/ui/components/button";
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderMeta, PageHeaderTitle } from "@yanqing/ui/components/page-header";
-import { StatusDot } from "@yanqing/ui/components/status-dot";
+import { Badge } from "@qingye/ui/components/badge";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@qingye/ui/components/breadcrumb";
+import { Button } from "@qingye/ui/components/button";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderMeta, PageHeaderTitle } from "@qingye/ui/components/page-header";
+import { StatusDot } from "@qingye/ui/components/status-dot";
 import { CalendarIcon, MoreHorizontalIcon, RotateCwIcon } from "lucide-react";
 
 export const meta = { title: "面包屑与元信息", description: "Breadcrumb 直接放入即占满一行；元信息放状态、标签与时间。" };

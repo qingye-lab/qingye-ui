@@ -1,8 +1,8 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Field, FieldDescription } from "@yanqing/ui/components/field";
-import { FileUpload } from "@yanqing/ui/components/file-upload";
-import { Input } from "@yanqing/ui/components/input";
-import { Label } from "@yanqing/ui/components/label";
+import { Button } from "@qingye/ui/components/button";
+import { Field, FieldDescription } from "@qingye/ui/components/field";
+import { FileUpload } from "@qingye/ui/components/file-upload";
+import { Input } from "@qingye/ui/components/input";
+import { Label } from "@qingye/ui/components/label";
 import { useState, type FormEvent } from "react";
 
 export const meta = { title: "组合：提交工单", description: "通过 name 参与原生表单提交，FormData 中直接拿到 File。" };

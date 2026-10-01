@@ -1,4 +1,4 @@
-import { FileUpload } from "@yanqing/ui/components/file-upload";
+import { FileUpload } from "@qingye/ui/components/file-upload";
 
 export const meta = { title: "拖放区", description: "点击或拖入文件；不符合类型或大小的文件会被拒绝并说明原因。" };
 

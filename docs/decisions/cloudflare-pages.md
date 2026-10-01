@@ -5,7 +5,7 @@ Date: 2026-10-01
 
 ## Context
 
-用户要求通过 Cloudflare 关联 GitHub 发布 UI 组件网站，并明确本次包含当前未提交的 UI 修改。源仓库为私有仓库 `qingye-lab/yanqing-ui`，默认分支为 `main`。
+用户要求通过 Cloudflare 关联 GitHub 发布 UI 组件网站，并明确本次包含当前未提交的 UI 修改。源仓库为私有仓库 `qingye-lab/qingye-ui`，默认分支为 `main`。
 
 ## Evidence
 

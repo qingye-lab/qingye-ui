@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { Input } from "@yanqing/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "默认", description: "标签、控件、说明自上而下排列。" };
 

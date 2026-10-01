@@ -1,5 +1,5 @@
-import { Skeleton } from "@yanqing/ui/components/skeleton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
+import { Skeleton } from "@qingye/ui/components/skeleton";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 
 export const meta = { title: "表格行", description: "表头照常显示，只有表体用占位；数字列的占位同样靠右。" };
 

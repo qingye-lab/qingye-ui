@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui/components/disclosure";
+import { Button } from "@qingye/ui/components/button";
+import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@qingye/ui/components/disclosure";
 import { useState } from "react";
 
 export const meta = {

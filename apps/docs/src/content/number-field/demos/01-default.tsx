@@ -1,4 +1,4 @@
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui/components/number-field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 
 export const meta = { title: "默认", description: "点击按钮、按 ↑ ↓ 或直接输入。" };
 

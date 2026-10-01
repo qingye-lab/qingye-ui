@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
 import { BoldIcon, ItalicIcon, StrikethroughIcon, UnderlineIcon } from "lucide-react";
 
 export const meta = { title: "多选", description: "multiple 允许叠加，例如同时加粗与斜体。" };

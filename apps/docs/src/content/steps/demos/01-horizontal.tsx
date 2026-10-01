@@ -1,4 +1,4 @@
-import { Steps } from "@yanqing/ui/components/steps";
+import { Steps } from "@qingye/ui/components/steps";
 
 export const meta = { title: "水平步骤", description: "current 之前的步骤自动标记为已完成。" };
 

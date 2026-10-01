@@ -1,4 +1,4 @@
-import { CopyButton } from "@yanqing/ui/components/copy-button";
+import { CopyButton } from "@qingye/ui/components/copy-button";
 
 export const meta = { title: "样式与尺寸", description: "透传 Button 的 variant 与 size；icon-* 尺寸只显示图标。" };
 

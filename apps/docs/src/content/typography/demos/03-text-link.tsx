@@ -1,4 +1,4 @@
-import { TextLink } from "@yanqing/ui/components/typography";
+import { TextLink } from "@qingye/ui/components/typography";
 
 export const meta = { title: "文字链接", description: "默认样式、弱化样式与外部链接。" };
 

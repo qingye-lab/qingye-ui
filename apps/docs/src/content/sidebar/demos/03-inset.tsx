@@ -1,9 +1,9 @@
-import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton } from "@yanqing/ui/components/sidebar";
-import { SidebarProvider } from "@yanqing/ui/components/sidebar";
-import { SidebarTrigger } from "@yanqing/ui/components/sidebar";
+import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton } from "@qingye/ui/components/sidebar";
+import { SidebarProvider } from "@qingye/ui/components/sidebar";
+import { SidebarTrigger } from "@qingye/ui/components/sidebar";
 import { CSSProperties } from "react";
 import {
-  Sidebar } from "@yanqing/ui";
+  Sidebar } from "@qingye/ui";
 import { BookOpenIcon, FileTextIcon, StarIcon } from "lucide-react";
 
 export const meta = {

@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui/components/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
 import { useState } from "react";
 import { CodeView } from "./code-block";
 import { CopyCodeButton } from "./copy-code-button";

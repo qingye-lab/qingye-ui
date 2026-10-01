@@ -1,6 +1,6 @@
 # 组件规范
 
-这份规范定义 `@yanqing/ui` 每个组件必须满足的细节。新增或修改组件时逐条核对；评审以此为准。
+这份规范定义 `@qingye/ui` 每个组件必须满足的细节。新增或修改组件时逐条核对；评审以此为准。
 
 基调：**精致、耐看、不浮夸**。克制的层次靠半透明边框、细微内高光和准确的间距建立，不靠大面积色块、重阴影或装饰性动画。
 
@@ -32,12 +32,13 @@
 
 - 字号同理：移动端 `text-base`，`sm:text-sm`。
 - 图标：控件内 `size-4.5 sm:size-4`，`opacity-80`；小尺寸控件 `size-4 sm:size-3.5`。
-- 水平内边距写成 `px-[calc(--spacing(3)-1px)]`，扣掉 1px 边框，让文字与相邻无边框元素对齐。
+- 水平内边距扣掉 1px 边框，让文字与相邻无边框元素对齐。默认按钮与单行输入使用 `px-[calc(--spacing(3.5)-1px)]`，`lg` 使用 `px-[calc(--spacing(4)-1px)]`；密集的小尺寸沿用较紧的档位。
 - **触屏**：小于 44px 的独立控件加 `touch-target`（只扩大点击区，不改变外观）；列表行加 `pointer-coarse:min-h-11`；输入框在粗指针下最小高度 44px。
 
 ## 3. 表面与边框
 
 - 中性色**全部半透明**（见 `tokens/semantic.css`）：容器边框 `border`，控件边框 `border-input`。不要写死灰色。
+- 浅色页面底色略深于白色面板，卡片与输入类控件用 `bg-card`。分段控件的轨道用 `bg-muted inset-shadow-track`，选中项用 `bg-surface-raised`；深色的浮起表面比面板略亮。层次由共享 token 决定，不在演示页面另加覆盖样式。
 - 控件与卡片的内高光：
   - 浅色：`before:shadow-[0_1px_--theme(--color-black/4%)]`（底部一线阴影）
   - 深色：`dark:before:shadow-[0_-1px_--theme(--color-white/6%)]`（顶部一线高光）
@@ -45,7 +46,7 @@
 - 浅色下有边框的表面加 `not-dark:bg-clip-padding`，深色下背景延伸到半透明边框下方。
 - 深色输入类控件底色 `dark:bg-input/32`，悬停 `dark:hover:bg-input/64`。
 - **实心按钮不带外投影**：层次由填充色和内高光建立。外投影会让按钮像塑料凸起，超出其他体系（Linear / Vercel / Radix 的实心按钮均无投影）。
-- 其余阴影克制：控件 `shadow-xs/5`，浮层 `shadow-lg/5`，弹窗用 `shadow-overlay` token。
+- 其余阴影克制：控件 `shadow-control`，卡片 `shadow-panel`，浮层 `shadow-raised`，弹窗用 `shadow-overlay` token。软阴影与贴近表面的接触阴影共同建立层次，不将所有组件统一加深。
 
 ## 4. 圆角
 

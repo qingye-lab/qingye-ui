@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
-import { FileUpload } from "@yanqing/ui/components/file-upload";
+import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { FileUpload } from "@qingye/ui/components/file-upload";
 
 export const meta = {
   title: "文件选择",

@@ -1,4 +1,4 @@
-import { CodeBlock } from "@yanqing/ui/components/code-block";
+import { CodeBlock } from "@qingye/ui/components/code-block";
 
 export const meta = {
   title: "横向滚动、最大高度与换行",

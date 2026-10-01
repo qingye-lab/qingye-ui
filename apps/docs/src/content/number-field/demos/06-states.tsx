@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui/components/number-field";
+import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 
 export const meta = { title: "状态", description: "无效、只读与禁用。" };
 

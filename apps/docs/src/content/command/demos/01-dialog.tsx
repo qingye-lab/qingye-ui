@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandDialogTrigger, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel, CommandSeparator, CommandShortcut } from "@yanqing/ui/components/command";
-import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
+import { Button } from "@qingye/ui/components/button";
+import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandDialogTrigger, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel, CommandSeparator, CommandShortcut } from "@qingye/ui/components/command";
+import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 import {
   ArrowDownIcon,
   ArrowUpIcon,

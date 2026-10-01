@@ -1,4 +1,4 @@
-import { Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxValue } from "@yanqing/ui/components/combobox";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxValue } from "@qingye/ui/components/combobox";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 

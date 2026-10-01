@@ -1,5 +1,5 @@
-import { Badge } from "@yanqing/ui/components/badge";
-import { Button } from "@yanqing/ui/components/button";
+import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
 
 export const meta = { title: "计数", description: "加 numeric 使用等宽数字；超过上限显示 99+。" };
 

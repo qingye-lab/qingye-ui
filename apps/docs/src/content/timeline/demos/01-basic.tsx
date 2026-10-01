@@ -1,4 +1,4 @@
-import { Timeline } from "@yanqing/ui/components/timeline";
+import { Timeline } from "@qingye/ui/components/timeline";
 
 export const meta = { title: "基础用法", description: "items 快速生成；没有图标时标记为圆点。" };
 

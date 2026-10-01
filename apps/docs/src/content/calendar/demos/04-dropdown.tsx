@@ -1,4 +1,4 @@
-import { Calendar } from "@yanqing/ui/components/calendar";
+import { Calendar } from "@qingye/ui/components/calendar";
 import { useState } from "react";
 
 export const meta = {

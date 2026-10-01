@@ -1,5 +1,5 @@
-import { DateTimePicker } from "@yanqing/ui/components/date-time-picker";
-import { Label } from "@yanqing/ui/components/label";
+import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
+import { Label } from "@qingye/ui/components/label";
 import { useState } from "react";
 
 export const meta = { title: "基础用法", description: "先选日期，再在底部输入时间；值为本地时间字符串。" };

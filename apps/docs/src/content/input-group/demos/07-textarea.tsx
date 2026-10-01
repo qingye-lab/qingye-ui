@@ -1,4 +1,4 @@
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupTextarea } from "@yanqing/ui/components/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupTextarea } from "@qingye/ui/components/input-group";
 import { ArrowUpIcon, AtSignIcon, PaperclipIcon } from "lucide-react";
 
 export const meta = { title: "组合：消息输入框", description: "block-end 附加区域作为底部工具栏。" };

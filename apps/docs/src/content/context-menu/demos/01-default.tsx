@@ -1,4 +1,4 @@
-import { ContextMenu, ContextMenuItem, ContextMenuPopup, ContextMenuSeparator, ContextMenuShortcut, ContextMenuTrigger } from "@yanqing/ui/components/context-menu";
+import { ContextMenu, ContextMenuItem, ContextMenuPopup, ContextMenuSeparator, ContextMenuShortcut, ContextMenuTrigger } from "@qingye/ui/components/context-menu";
 import { CopyIcon, DownloadIcon, FileTextIcon, PencilIcon, Trash2Icon } from "lucide-react";
 
 export const meta = { title: "基础用法", description: "在卡片上点击右键，触屏设备上长按。" };

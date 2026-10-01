@@ -1,5 +1,5 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Spinner } from "@yanqing/ui/components/spinner";
+import { Button } from "@qingye/ui/components/button";
+import { Spinner } from "@qingye/ui/components/spinner";
 
 export const meta = {
   title: "自定义加载",

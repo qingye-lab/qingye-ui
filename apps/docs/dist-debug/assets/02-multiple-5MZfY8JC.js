@@ -1,4 +1,0 @@
-const _02Multiple = 'import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui";\nimport { BoldIcon, ItalicIcon, StrikethroughIcon, UnderlineIcon } from "lucide-react";\n\nexport const meta = { title: "多选", description: "multiple 允许叠加，例如同时加粗与斜体。" };\n\nexport default function Demo() {\n  return (\n    <ToggleGroup defaultValue={["bold", "italic"]} multiple>\n      <ToggleGroupItem aria-label="加粗" value="bold">\n        <BoldIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem aria-label="斜体" value="italic">\n        <ItalicIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem aria-label="下划线" value="underline">\n        <UnderlineIcon />\n      </ToggleGroupItem>\n      <ToggleGroupItem aria-label="删除线" value="strike">\n        <StrikethroughIcon />\n      </ToggleGroupItem>\n    </ToggleGroup>\n  );\n}\n';
-export {
-  _02Multiple as default
-};

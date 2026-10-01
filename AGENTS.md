@@ -1,6 +1,6 @@
 # Working in this repository
 
-`@yanqing/ui` is a React component library (Base UI + Tailwind CSS 4) adapted from coss ui (MIT), plus locally authored components, and its documentation site.
+`@qingye/ui` is a React component library (Base UI + Tailwind CSS 4) adapted from coss ui (MIT), plus locally authored components, and its documentation site.
 
 ## Layout
 
@@ -16,10 +16,10 @@
 - Follow `STANDARDS.md` for every component change.
 - Keep coss components close to upstream; change them only to fix a defect or meet `STANDARDS.md`, and record each change in `coss-source.json`.
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
-- Run `pnpm --filter @yanqing/ui gen:index` after adding or removing a component file.
+- Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
 
 ## Commands
 
 - `pnpm dev` — docs site at http://localhost:5180 (`/playground/<name>` shows one component's demos bare).
 - `node scripts/shot.mjs <name>` — light/dark × desktop/mobile screenshots of the playground into /tmp/yq-shots.
-- `pnpm --filter @yanqing/ui typecheck` / `test` / `build`; `pnpm --filter docs typecheck`.
+- `pnpm --filter @qingye/ui typecheck` / `test` / `build`; `pnpm --filter docs typecheck`.

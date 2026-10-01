@@ -1,4 +1,4 @@
-import { segmentedControlItemVariants, segmentedControlRootClassName } from "@yanqing/ui/components/segmented-control";
+import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
 
 export const meta = {
   title: "导航链接",

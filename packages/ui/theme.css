@@ -124,6 +124,8 @@
   --color-surface-raised: var(--qy-surface-raised);
   --color-surface-subtle: var(--qy-surface-subtle);
   --color-surface-inset: var(--qy-surface-inset);
+  --color-surface-hover: var(--qy-surface-hover);
+  --color-surface-active: var(--qy-surface-active);
   --color-foreground-strong: var(--qy-foreground-strong);
   --color-foreground-subtle: var(--qy-foreground-subtle);
   --color-border-subtle: var(--qy-border-subtle);
@@ -167,6 +169,7 @@
   --shadow-control: var(--qy-shadow-control);
   --shadow-raised: var(--qy-shadow-raised);
   --shadow-overlay: var(--qy-shadow-overlay);
+  --inset-shadow-track: var(--qy-shadow-inset);
 
   --ease-out: var(--qy-ease-out);
   --ease-in-out: var(--qy-ease-in-out);

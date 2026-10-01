@@ -1,4 +1,4 @@
-import { AspectRatio } from "@yanqing/ui/components/aspect-ratio";
+import { AspectRatio } from "@qingye/ui/components/aspect-ratio";
 import { PlayIcon } from "lucide-react";
 
 export const meta = { title: "课程卡片", description: "封面按 16:9 占位，叠加播放按钮与时长。" };

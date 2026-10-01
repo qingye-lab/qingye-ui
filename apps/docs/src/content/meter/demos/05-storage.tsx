@@ -1,6 +1,6 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@yanqing/ui/components/meter";
+import { Button } from "@qingye/ui/components/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye/ui/components/meter";
 
 export const meta = { title: "组合：存储空间", description: "总量在上，分类在下；分类用图表色区分，并配文字标签。" };
 

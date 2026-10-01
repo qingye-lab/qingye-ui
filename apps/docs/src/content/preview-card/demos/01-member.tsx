@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
-import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@yanqing/ui/components/preview-card";
+import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
+import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@qingye/ui/components/preview-card";
 
 export const meta = { title: "成员名片", description: "在正文中提到成员时，悬停查看对方的角色与近况。" };
 

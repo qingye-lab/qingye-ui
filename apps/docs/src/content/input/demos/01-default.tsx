@@ -1,4 +1,4 @@
-import { Input } from "@yanqing/ui/components/input";
+import { Input } from "@qingye/ui/components/input";
 
 export const meta = { title: "默认" };
 

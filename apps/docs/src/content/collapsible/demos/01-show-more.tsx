@@ -1,11 +1,11 @@
-import { Button } from "@yanqing/ui/components/button";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@yanqing/ui/components/collapsible";
+import { Button } from "@qingye/ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye/ui/components/collapsible";
 import { ChevronDownIcon, GitBranchIcon } from "lucide-react";
 import { useState } from "react";
 
 export const meta = { title: "显示更多", description: "先展示最常用的几项，其余收起。" };
 
-const repos = ["yanqing-ui", "yanqing-docs", "qingyan-site", "deploy-scripts", "design-tokens"];
+const repos = ["qingye-ui", "qingye-docs", "qingyan-site", "deploy-scripts", "design-tokens"];
 
 function Repo({ name }: { name: string }) {
   return (

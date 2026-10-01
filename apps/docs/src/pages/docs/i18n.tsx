@@ -1,13 +1,13 @@
-import { PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink } from "@yanqing/ui/components/pagination";
-import { PaginationNext } from "@yanqing/ui/components/pagination";
-import { TabsList } from "@yanqing/ui/components/tabs";
-import { UILocale } from "@yanqing/ui/locale";
-import { CopyButton } from "@yanqing/ui/components/copy-button";
-import { Pagination, PaginationPrevious } from "@yanqing/ui/components/pagination";
-import { SearchInput } from "@yanqing/ui/components/search-input";
-import { Tabs, TabsTab } from "@yanqing/ui/components/tabs";
-import { UILocaleProvider, zhCN } from "@yanqing/ui/locale";
-import { enUS } from "@yanqing/ui/locales/en-US";
+import { PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink } from "@qingye/ui/components/pagination";
+import { PaginationNext } from "@qingye/ui/components/pagination";
+import { TabsList } from "@qingye/ui/components/tabs";
+import { UILocale } from "@qingye/ui/locale";
+import { CopyButton } from "@qingye/ui/components/copy-button";
+import { Pagination, PaginationPrevious } from "@qingye/ui/components/pagination";
+import { SearchInput } from "@qingye/ui/components/search-input";
+import { Tabs, TabsTab } from "@qingye/ui/components/tabs";
+import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
+import { enUS } from "@qingye/ui/locales/en-US";
 import { useState } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { Callout, Code, H2, P, PageHeader } from "@/components/prose";
@@ -64,7 +64,7 @@ function LocalePreview() {
             <div className="w-full flex-1">
               <SearchInput aria-label={code === "en-US" ? "Search members" : "搜索成员"} defaultValue="林" />
             </div>
-            <CopyButton value="pnpm add @yanqing/ui" />
+            <CopyButton value="pnpm add @qingye/ui" />
           </div>
         </div>
       </UILocaleProvider>
@@ -122,7 +122,7 @@ export default function I18nPage() {
 
       <H2 id="english">切换到英文</H2>
       <CodeBlock
-        code={`import { UILocaleProvider } from "@yanqing/ui";\nimport { enUS } from "@yanqing/ui/locales/en-US";\n\nexport function Root() {\n  return (\n    <UILocaleProvider locale={enUS}>\n      <App />\n    </UILocaleProvider>\n  );\n}`}
+        code={`import { UILocaleProvider } from "@qingye/ui";\nimport { enUS } from "@qingye/ui/locales/en-US";\n\nexport function Root() {\n  return (\n    <UILocaleProvider locale={enUS}>\n      <App />\n    </UILocaleProvider>\n  );\n}`}
         title="root.tsx"
       />
       <P>
@@ -146,7 +146,7 @@ export default function I18nPage() {
       <H2 id="custom-components">在自己的组件里使用</H2>
       <P>封装业务组件时读取同一份文案，界面语言就能保持一致：</P>
       <CodeBlock
-        code={`import { useUILocale } from "@yanqing/ui";\n\nexport function ClearFilters({ onClear }: { onClear: () => void }) {\n  const { code, messages } = useUILocale(); // code: "zh-CN" | "en-US"\n  return <button onClick={onClear}>{messages.clear}</button>;\n}`}
+        code={`import { useUILocale } from "@qingye/ui";\n\nexport function ClearFilters({ onClear }: { onClear: () => void }) {\n  const { code, messages } = useUILocale(); // code: "zh-CN" | "en-US"\n  return <button onClick={onClear}>{messages.clear}</button>;\n}`}
       />
       <P className="text-[0.875rem] text-muted-foreground">
         向组件库新增内置文案时，需要同时补齐 <Code>src/locale.tsx</Code> 与 <Code>src/locales/en-US.ts</Code>，两边的键保持一一对应。
