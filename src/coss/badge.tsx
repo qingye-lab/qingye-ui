@@ -28,14 +28,14 @@ export const badgeVariants = cva(
         destructive:
           "bg-destructive text-white [button&,a&]:hover:bg-destructive/90",
         error:
-          "bg-destructive/8 text-destructive-foreground ",
-        info: "bg-info/8 text-info-foreground ",
+          "bg-destructive/8 text-destructive-foreground dark:bg-destructive/16",
+        info: "bg-info/8 text-info-foreground dark:bg-info/16",
         outline:
-          "border-input bg-background text-foreground  [button&,a&]:hover:bg-accent/50 ",
+          "border-input bg-background text-foreground dark:bg-input/32 [button&,a&]:hover:bg-accent/50 dark:[button&,a&]:hover:bg-input/48",
         secondary:
           "bg-secondary text-secondary-foreground [button&,a&]:hover:bg-secondary/90",
-        success: "bg-success/8 text-success-foreground ",
-        warning: "bg-warning/8 text-warning-foreground ",
+        success: "bg-success/8 text-success-foreground dark:bg-success/16",
+        warning: "bg-warning/8 text-warning-foreground dark:bg-warning/16",
       },
     },
   },
