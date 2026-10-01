@@ -24,3 +24,10 @@ globalThis.ResizeObserver ??= class {
   disconnect() {}
 } as unknown as typeof ResizeObserver;
 Element.prototype.scrollIntoView ??= () => {};
+
+/*
+ * ScrollArea polls Element.getAnimations to detect an in-flight scroll, and
+ * jsdom has no implementation. Without this the call throws from a timer,
+ * outside any test, and surfaces as an unhandled error that can mask real ones.
+ */
+Element.prototype.getAnimations ??= () => [];

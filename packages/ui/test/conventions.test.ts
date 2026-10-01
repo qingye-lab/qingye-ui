@@ -87,13 +87,26 @@ describe("component conventions", () => {
     expect(missing).toEqual([]);
   });
 
-  test("durations are either on the named scale or a token reference", () => {
-    // A duration that is not on the scale is a timing nobody chose deliberately.
-    const scale = new Set(["100", "150", "200", "250", "300", "450", "500"]);
+  test("straight durations are on Tailwind's scale or a deliberate exception", () => {
+    /*
+     * Components may use a raw duration class, but it should be a step that
+     * belongs to a scale. The exceptions below are inherited from coss upstream
+     * and are kept as-is so the register stays honest; anything else is a
+     * timing nobody chose on purpose. New motion should prefer the `--qy-*`
+     * duration tokens instead.
+     */
+    const scale = new Set(["75", "100", "150", "200", "300", "500", "700", "1000"]);
+    const inherited = new Map([
+      ["drawer.tsx", new Set(["450"])],
+      ["toast.tsx", new Set(["250"])],
+    ]);
     const offenders: string[] = [];
     for (const [file, source] of table) {
-      for (const hit of source.matchAll(/\bduration-(\d{3,})\b/g)) {
-        if (!scale.has(hit[1]!)) offenders.push(`${file}: duration-${hit[1]}`);
+      for (const hit of source.matchAll(/\bduration-(\d{3,}|75)\b/g)) {
+        const value = hit[1]!;
+        if (scale.has(value)) continue;
+        if (inherited.get(file)?.has(value)) continue;
+        offenders.push(`${file}: duration-${value}`);
       }
     }
     expect(offenders).toEqual([]);

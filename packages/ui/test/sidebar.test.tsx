@@ -12,8 +12,6 @@ import {
   useSidebar,
 } from "../src/components/sidebar";
 
-// jsdom lacks the Web Animations API that ScrollArea polls.
-Element.prototype.getAnimations ??= () => [];
 
 function State() {
   return <output data-testid="state">{useSidebar().state}</output>;
