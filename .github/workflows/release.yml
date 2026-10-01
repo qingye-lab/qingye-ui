@@ -32,8 +32,8 @@ jobs:
       - name: Pack
         run: |
           mkdir -p dist-pack
-          pnpm --filter @qingye/ui pack --pack-destination ../../dist-pack
-          ls dist-pack
+          pnpm --filter @qingye/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
+          ls dist-pack/*.tgz
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
