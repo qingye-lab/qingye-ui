@@ -1,7 +1,0 @@
-/* Deferred motion for the complete component catalogue. */
-@media (prefers-reduced-motion: reduce) {
-  /* New coss interactions also respect the system preference. */
-  :is([data-slot="accordion-panel"], [data-slot="accordion-trigger"], [data-slot="collapsible-panel"], [data-slot="dialog-popup"], [data-slot="dialog-backdrop"], [data-slot="drawer-popup"], [data-slot="drawer-backdrop"], [data-slot="command-dialog-popup"], [data-slot="command-dialog-backdrop"], [data-slot="autocomplete-popup"], [data-slot="preview-card-popup"], [data-slot="switch"], [data-slot="switch-thumb"], [data-slot="slider-thumb"], [data-slot="meter-indicator"]) {
-    transition-duration: 0s !important;
-  }
-}

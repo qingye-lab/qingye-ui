@@ -6,3 +6,6 @@ dist/
 *.log
 .vite/
 coverage/
+apps/docs/dist/
+.playwright/
+test-results/

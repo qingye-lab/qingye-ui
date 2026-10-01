@@ -1,0 +1,28 @@
+/*
+ * utilities.css — library-owned Tailwind utilities.
+ */
+
+/*
+ * Expands the hit area to the touch minimum on coarse pointers without
+ * changing the rendered size. The host must be positioned and must not clip
+ * overflow; the pseudo-element is centred so the target grows evenly.
+ */
+@utility touch-target {
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, var(--qy-touch-target));
+      height: max(100%, var(--qy-touch-target));
+      translate: -50% -50%;
+    }
+  }
+}
+
+/* Tabular figures for numeric readouts, tables and counters. */
+@utility numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}

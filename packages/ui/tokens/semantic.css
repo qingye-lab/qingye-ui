@@ -1,0 +1,163 @@
+/*
+ * Layer 2 — semantic tokens.
+ *
+ * Roles the interface talks about. Components reference only this layer (via
+ * the Tailwind mapping in theme.css), so light and dark are the same names with
+ * different bindings.
+ *
+ * Neutrals are deliberately translucent: borders, fills and hover states are
+ * black or white at low alpha, so they read correctly on any surface they sit
+ * on — a card, a sidebar, a popover — without per-surface overrides. The
+ * values follow the coss ui neutral theme the components were tuned against.
+ */
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    color-scheme: light;
+
+    --qy-background: var(--qy-white);
+    --qy-foreground: var(--qy-neutral-800);
+
+    /* Surfaces, from the page outward. */
+    --qy-surface: var(--qy-white);
+    --qy-surface-raised: var(--qy-white);
+    --qy-surface-subtle: var(--qy-neutral-50);
+    --qy-surface-inset: oklch(0 0 0 / 0.04);
+    --qy-surface-hover: oklch(0 0 0 / 0.04);
+    --qy-surface-active: oklch(0 0 0 / 0.08);
+    --qy-overlay: oklch(0 0 0 / 0.32);
+
+    /* Text, strongest to weakest. */
+    --qy-foreground-strong: var(--qy-neutral-950);
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 90%, var(--qy-black));
+    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 72%, transparent);
+    --qy-foreground-inverse: var(--qy-neutral-50);
+
+    /* Lines. */
+    --qy-border: oklch(0 0 0 / 0.08);
+    --qy-border-subtle: oklch(0 0 0 / 0.06);
+    --qy-border-strong: oklch(0 0 0 / 0.14);
+    --qy-border-input: oklch(0 0 0 / 0.1);
+    --qy-ring: var(--qy-neutral-400);
+
+    /* Emphasis. */
+    --qy-primary: var(--qy-neutral-800);
+    --qy-primary-foreground: var(--qy-neutral-50);
+    --qy-accent: oklch(0 0 0 / 0.04);
+    --qy-accent-foreground: var(--qy-neutral-800);
+
+    /* Status: solid marks the state, foreground is readable text on the page. */
+    --qy-danger: var(--qy-red-500);
+    --qy-danger-foreground: var(--qy-red-700);
+    --qy-warning: var(--qy-amber-500);
+    --qy-warning-foreground: var(--qy-amber-700);
+    --qy-success: var(--qy-emerald-500);
+    --qy-success-foreground: var(--qy-emerald-700);
+    --qy-info: var(--qy-blue-500);
+    --qy-info-foreground: var(--qy-blue-700);
+
+    /* Categorical series, ordered so neighbours stay distinguishable. */
+    --qy-chart-1: var(--qy-blue-500);
+    --qy-chart-2: var(--qy-emerald-500);
+    --qy-chart-3: var(--qy-amber-500);
+    --qy-chart-4: var(--qy-violet-500);
+    --qy-chart-5: var(--qy-rose-500);
+
+    --qy-code: var(--qy-white);
+    --qy-code-highlight: oklch(0 0 0 / 0.04);
+
+    --qy-sidebar: var(--qy-neutral-50);
+    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-neutral-800) 64%, var(--qy-sidebar));
+    --qy-sidebar-border: oklch(0 0 0 / 0.06);
+    --qy-sidebar-accent: oklch(0 0 0 / 0.04);
+    --qy-sidebar-accent-foreground: var(--qy-neutral-800);
+    --qy-sidebar-primary: var(--qy-neutral-800);
+    --qy-sidebar-primary-foreground: var(--qy-neutral-50);
+    --qy-sidebar-ring: var(--qy-neutral-400);
+
+    /* Elevation stays quiet; depth comes mostly from translucent borders. */
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.05);
+    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
+    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    color-scheme: dark;
+
+    --qy-background: color-mix(in srgb, var(--qy-neutral-950) 95%, var(--qy-white));
+    --qy-foreground: var(--qy-neutral-100);
+
+    --qy-surface: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-surface-raised: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-surface-subtle: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
+    --qy-surface-inset: oklch(1 0 0 / 0.04);
+    --qy-surface-hover: oklch(1 0 0 / 0.04);
+    --qy-surface-active: oklch(1 0 0 / 0.08);
+    --qy-overlay: oklch(0 0 0 / 0.56);
+
+    --qy-foreground-strong: var(--qy-white);
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 90%, var(--qy-white));
+    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 72%, transparent);
+    --qy-foreground-inverse: var(--qy-neutral-800);
+
+    --qy-border: oklch(1 0 0 / 0.06);
+    --qy-border-subtle: oklch(1 0 0 / 0.05);
+    --qy-border-strong: oklch(1 0 0 / 0.12);
+    --qy-border-input: oklch(1 0 0 / 0.08);
+    --qy-ring: var(--qy-neutral-500);
+
+    --qy-primary: var(--qy-neutral-100);
+    --qy-primary-foreground: var(--qy-neutral-800);
+    --qy-accent: oklch(1 0 0 / 0.04);
+    --qy-accent-foreground: var(--qy-neutral-100);
+
+    --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
+    --qy-danger-foreground: var(--qy-red-400);
+    --qy-warning: var(--qy-amber-500);
+    --qy-warning-foreground: var(--qy-amber-400);
+    --qy-success: var(--qy-emerald-500);
+    --qy-success-foreground: var(--qy-emerald-400);
+    --qy-info: var(--qy-blue-500);
+    --qy-info-foreground: var(--qy-blue-400);
+
+    --qy-chart-1: var(--qy-blue-400);
+    --qy-chart-2: var(--qy-emerald-400);
+    --qy-chart-3: var(--qy-amber-400);
+    --qy-chart-4: var(--qy-violet-400);
+    --qy-chart-5: var(--qy-rose-400);
+
+    --qy-code: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-code-highlight: oklch(1 0 0 / 0.04);
+
+    --qy-sidebar: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
+    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-neutral-100) 64%, var(--qy-sidebar));
+    --qy-sidebar-border: oklch(1 0 0 / 0.05);
+    --qy-sidebar-accent: oklch(1 0 0 / 0.04);
+    --qy-sidebar-accent-foreground: var(--qy-neutral-100);
+    --qy-sidebar-primary: var(--qy-neutral-100);
+    --qy-sidebar-primary-foreground: var(--qy-neutral-800);
+    --qy-sidebar-ring: var(--qy-neutral-400);
+
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.24);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.3);
+    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.28);
+    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.64), 0 4px 12px oklch(0 0 0 / 0.32);
+  }
+
+  /*
+   * Status fills derive from the solid colour, so a brand that retunes a
+   * status hue gets matching tints for free.
+   */
+  :root,
+  .light,
+  .dark,
+  [data-theme] {
+    --qy-danger-soft: color-mix(in srgb, var(--qy-danger) 8%, transparent);
+    --qy-warning-soft: color-mix(in srgb, var(--qy-warning) 8%, transparent);
+    --qy-success-soft: color-mix(in srgb, var(--qy-success) 8%, transparent);
+    --qy-info-soft: color-mix(in srgb, var(--qy-info) 8%, transparent);
+  }
+}

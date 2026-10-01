@@ -1,0 +1,108 @@
+/*
+ * Layer 3 — component tokens.
+ * Sizes, radii, density and motion that components consume directly.
+ * These exist so a consumer can retune the library (denser tables, rounder
+ * controls, slower motion) without editing component source.
+ */
+@layer base {
+  :root {
+    /* Type ramp. Sizes are paired with line heights and weights. */
+    --qy-font-sans: "Geist Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --qy-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --qy-weight-regular: 400;
+    --qy-weight-medium: 500;
+    --qy-weight-semibold: 600;
+
+    --qy-text-display-size: 1.75rem;
+    --qy-text-display-leading: 1.25;
+    --qy-text-title-size: 1.125rem;
+    --qy-text-title-leading: 1.4;
+    --qy-text-heading-size: 0.9375rem;
+    --qy-text-heading-leading: 1.5;
+    --qy-text-body-size: 0.875rem;
+    --qy-text-body-leading: 1.5;
+    --qy-text-label-size: 0.8125rem;
+    --qy-text-label-leading: 1.5;
+    --qy-text-caption-size: 0.75rem;
+    --qy-text-caption-leading: 1.5;
+    --qy-tracking-heading: -0.015em;
+    --qy-tracking-caps: 0.06em;
+
+    /* Spacing scale, 4px base. */
+    --qy-space-0: 0;
+    --qy-space-1: 0.25rem;
+    --qy-space-2: 0.5rem;
+    --qy-space-3: 0.75rem;
+    --qy-space-4: 1rem;
+    --qy-space-5: 1.25rem;
+    --qy-space-6: 1.5rem;
+    --qy-space-8: 2rem;
+    --qy-space-10: 2.5rem;
+    --qy-space-12: 3rem;
+    --qy-space-16: 4rem;
+
+    /* Radii. Control radii derive from the base so a brand can round everything. */
+    --qy-radius: 0.625rem;
+    --qy-radius-xs: calc(var(--qy-radius) - 0.375rem);
+    --qy-radius-sm: calc(var(--qy-radius) - 0.25rem);
+    --qy-radius-md: calc(var(--qy-radius) - 0.125rem);
+    --qy-radius-lg: var(--qy-radius);
+    --qy-radius-xl: calc(var(--qy-radius) + 0.25rem);
+    --qy-radius-2xl: calc(var(--qy-radius) + 0.375rem);
+    --qy-radius-full: 9999px;
+
+    /* Control heights. `md` is the default for form controls. */
+    --qy-control-xs: 1.5rem;
+    --qy-control-sm: 1.75rem;
+    --qy-control-md: 2rem;
+    --qy-control-lg: 2.25rem;
+    --qy-control-xl: 2.5rem;
+    /* Minimum touch target; enforced on coarse pointers. */
+    --qy-touch-target: 2.75rem;
+
+    /* Density. Tables and lists opt into `compact` rather than hardcoding. */
+    --qy-row-default: 3rem;
+    --qy-row-compact: 2.5rem;
+    --qy-panel-padding: var(--qy-space-6);
+    --qy-panel-padding-sm: var(--qy-space-4);
+    --qy-panel-gap: var(--qy-space-4);
+    --qy-section-gap: var(--qy-space-5);
+    --qy-page-gutter: clamp(1rem, 1.4vw, 1.75rem);
+    --qy-topbar-height: 3.5rem;
+
+    /* Motion. Short, eased, and interruptible; see motion.css. */
+    --qy-duration-instant: 0ms;
+    --qy-duration-press: 100ms;
+    --qy-duration-fast: 140ms;
+    --qy-duration-feedback: 180ms;
+    --qy-duration-base: 220ms;
+    --qy-duration-slow: 320ms;
+    --qy-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --qy-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --qy-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    --qy-ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
+    --qy-stagger: 40ms;
+
+    /* Focus ring, shared by every focusable control. */
+    --qy-focus-ring-width: 2px;
+    --qy-focus-ring-offset: 1px;
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --qy-topbar-height: 3.375rem;
+      --qy-page-gutter: var(--qy-space-4);
+      --qy-panel-padding: var(--qy-space-4);
+    }
+  }
+
+  /* A consumer can opt into a denser product chrome without touching components. */
+  [data-density="compact"] {
+    --qy-row-default: var(--qy-row-compact);
+    --qy-panel-padding: var(--qy-space-4);
+    --qy-panel-gap: var(--qy-space-3);
+    --qy-section-gap: var(--qy-space-4);
+    --qy-topbar-height: 3rem;
+  }
+}
