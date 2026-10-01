@@ -21,3 +21,5 @@ TS compiler API 从 JSX className/style、cn/clsx/cva、props 对象的 classNam
 检测词法只应用于 AST 提取的值。URL fragment、属性 selector、注释、非 paint 文字/尺寸、semantic CSS var 不报告。相同违规记录包含源码行号及 class/style 上下文。
 
 日志保存在 `docs/baseline/task5-color-check/`，同目录 `receipt.json` 记录每份小型日志的 SHA-256 与字节数。此验收没有启动浏览器，也没有修改 A/B 的事实台账、浏览器执行器或 AGENTS.md。
+
+本文的280项全库测试是任务5时点收据。后续token接线及输入字体namespace修复后的全库结果为50文件299项通过，详见 `docs/baseline/task9-token-wiring/input-role-followup-receipt.json`；未将后续数字回写为任务5当时的结果。

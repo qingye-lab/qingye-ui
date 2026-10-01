@@ -10,3 +10,5 @@
 - Calendar booking 在临时移除 flush 裁切后仍无越界：390px viewport 中 demo frame 350px、卡片 322px、日期格 44px。Pagination 窄屏点击 Next 和最后页的测量也无越界，详见 affected-final.json。
 
 构建、类型检查和测试输出来自同一视觉源码状态，详见 manifest 的 checks。未记录的耗时为 null；真实 GitHub CI 此时 NOT_RUN。本机 Playwright 自带 Chromium 153 约30秒退出的原因未验证，本次显式使用系统 Chrome154，并记录浏览器进程树与 profile、正常关闭证据。用户原有 docs dev server 被复用且保留。
+
+后续接线验收使用独立的 `docs/baseline/2026-10-01-accepted/receipt.json` 和 `test-results/ui-foundations-accepted/`，真实GitHub故障验证另存 `docs/baseline/2026-10-01-ci-gate-failure/receipt.json`。当前交付见 `docs/tasks-01-10-review.md`；本基线的历史观测不覆盖。

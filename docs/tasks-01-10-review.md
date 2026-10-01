@@ -9,7 +9,7 @@
 | 任务 | 实现与选择 | 验收证据 |
 |---|---|---|
 | 1 审计误报 | 扣除父边框/padding，补偿子负边距，设备像素取整；保留 2px 阈值。Slider 仅接受有结构约束的有限 `1em` 声明；无限纯旋转在零角度测稳定布局，随后恢复 | 23 个浏览器边界用例；接线前 352/352 页零报告，323797ms；2000px 真溢出退出 1；最终全量由 CI 执行 |
-| 2 CI | 构建后的 Vite preview，严格端口和就绪探测；安装 Playwright Chromium；PR 全量扫描；失败阻止 pack，Release 同样在发布前拦截 | 本地成功/注入失败/中断收尾均验证；真实 GitHub 红绿验证待完成 |
+| 2 CI | 构建后的 Vite preview，严格端口和就绪探测；安装 Playwright Chromium；PR 全量扫描；失败阻止 pack，Release 同样在发布前拦截 | 本地成功/注入失败/中断收尾均验证；真实 GitHub 故障验证完成，Pack被跳过；最终恢复为88×4，结果见PR #1的verify检查 |
 | 3 实现事实 | 自动生成当前清单，另保留首次快照；人工只标注未支持/未验证 | 88 个源码/catalog/dist 组件，57 coss / 31 local；导出由 AST 提取，来源追踪缺项不伪造 |
 | 4 消费台账 | JSON 分开存静态路径、运行观测和计算结论；源码变化使旧观测失效 | 首批 Button/Input/Dialog/Select/Card/Table；814 条静态路径，最终62 PASS、0 FAIL/UNVERIFIED、4 NOT_RUN |
 | 5 颜色 AST | TypeScript AST 提取 JSX class/style、cn/cva，解析嵌套 arbitrary value | 八个规定正反例、49 个辅助边界与 7 个 conventions 用例通过；145 个动态表达式无法静态确定，明确保留 |
@@ -47,6 +47,12 @@
 
 最终24张截图在 `test-results/ui-foundations-accepted/shots/`，与接线前截图分开。主代理复核原始字号、尺寸、间距、半径、焦点和对比度，并查看Select深色桌面与Input浅色桌面；没有以进程退出0代替各项数据判断。台账4个NOT_RUN是fine指针下不适用的coarse探针，对应coarse环境另有四个通过观测。
 
-此处只给出已执行的本地结论；真实GitHub CI门禁故障/恢复结果另行记录，不回写历史基线为全绿。
+真实GitHub故障验证见下；最终恢复配置的全量结果由PR当前verify检查给出，不回写历史基线为全绿。
 
 最后受影响7组件×4变体定向扫描28/28通过、0报告，扫描25864ms；真实Spinner/InputGroup共36次纯旋转规范化有原始关键帧与测量identity记录，用户原有dev server保留。可复查摘要与文件SHA256见 `docs/baseline/2026-10-01-accepted/receipt.json`。
+
+## 真实 CI 门禁
+
+[故障验证运行](https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837)在Ubuntu完成类型检查、299项测试、两项构建和浏览器安装，随后检测2000px注入元素，报告页面1106px/内部1312px越界，Browser audit退出1，Pack被跳过。audit测量2000ms，含preview管理3658ms，工作流589s（其中Ubuntu依赖/浏览器安装419s）；浏览器和preview均正常关闭。收据见 `docs/baseline/2026-10-01-ci-gate-failure/receipt.json`。
+
+最终配置已移除故障注入，恢复88组件×4变体全量审计；[PR #1](https://github.com/qingye-lab/qingye-ui/pull/1)的当前verify检查保存该配置的实际结果和报告。任务没有合并主分支、创建tag/release或部署生产。

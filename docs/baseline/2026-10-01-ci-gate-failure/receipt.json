@@ -1,0 +1,397 @@
+{
+  "status": "PASS_FAILURE_GATE_PROOF",
+  "run": {
+    "conclusion": "failure",
+    "headSha": "393315968b486772daa351501f20dbcc00a310e6",
+    "jobs": [
+      {
+        "completedAt": "2026-10-01T15:03:46Z",
+        "conclusion": "failure",
+        "databaseId": 110429005239,
+        "name": "verify",
+        "startedAt": "2026-10-01T14:53:57Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-01T14:54:00Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-01T14:53:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:54:01Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v5",
+            "number": 2,
+            "startedAt": "2026-10-01T14:54:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:54:03Z",
+            "conclusion": "success",
+            "name": "Run pnpm/action-setup@v4",
+            "number": 3,
+            "startedAt": "2026-10-01T14:54:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:54:08Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@v6",
+            "number": 4,
+            "startedAt": "2026-10-01T14:54:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:54:11Z",
+            "conclusion": "success",
+            "name": "Run pnpm install --frozen-lockfile",
+            "number": 5,
+            "startedAt": "2026-10-01T14:54:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:54:32Z",
+            "conclusion": "success",
+            "name": "Typecheck",
+            "number": 6,
+            "startedAt": "2026-10-01T14:54:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:56:04Z",
+            "conclusion": "success",
+            "name": "Test",
+            "number": 7,
+            "startedAt": "2026-10-01T14:54:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:56:13Z",
+            "conclusion": "success",
+            "name": "Build library",
+            "number": 8,
+            "startedAt": "2026-10-01T14:56:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T14:56:41Z",
+            "conclusion": "success",
+            "name": "Build docs",
+            "number": 9,
+            "startedAt": "2026-10-01T14:56:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:40Z",
+            "conclusion": "success",
+            "name": "Install audit browser",
+            "number": 10,
+            "startedAt": "2026-10-01T14:56:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:44Z",
+            "conclusion": "failure",
+            "name": "Browser audit",
+            "number": 11,
+            "startedAt": "2026-10-01T15:03:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:44Z",
+            "conclusion": "success",
+            "name": "Upload browser audit evidence",
+            "number": 12,
+            "startedAt": "2026-10-01T15:03:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:44Z",
+            "conclusion": "skipped",
+            "name": "Pack",
+            "number": 13,
+            "startedAt": "2026-10-01T15:03:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:44Z",
+            "conclusion": "skipped",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 14,
+            "startedAt": "2026-10-01T15:03:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:44Z",
+            "conclusion": "skipped",
+            "name": "Post Run actions/setup-node@v6",
+            "number": 26,
+            "startedAt": "2026-10-01T15:03:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:45Z",
+            "conclusion": "success",
+            "name": "Post Run pnpm/action-setup@v4",
+            "number": 27,
+            "startedAt": "2026-10-01T15:03:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:45Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v5",
+            "number": 28,
+            "startedAt": "2026-10-01T15:03:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-01T15:03:45Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 29,
+            "startedAt": "2026-10-01T15:03:45Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837/job/110429005239"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837"
+  },
+  "audit": {
+    "base": "http://127.0.0.1:5181",
+    "slugs": [
+      "button"
+    ],
+    "variants": [
+      "light-desktop"
+    ],
+    "lifecycle": {
+      "nodePid": 3989,
+      "executablePath": "/home/runner/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "version": "153.0.8010.12",
+      "processes": [
+        {
+          "pid": 4001,
+          "parent": 3989,
+          "profile": "/tmp/playwright_chromiumdev_profile-muM6VV"
+        }
+      ],
+      "descendantPids": [
+        4001,
+        4003,
+        4004,
+        4022,
+        4039,
+        4054
+      ],
+      "closed": true,
+      "disconnectedAt": "2026-10-01T15:03:43.756Z"
+    },
+    "elapsedMs": 2000,
+    "measurements": [
+      {
+        "slug": "button",
+        "variant": "light-desktop",
+        "demos": 10,
+        "overflow": 1106,
+        "empty": [],
+        "over": [
+          {
+            "demo": "variants",
+            "element": "div",
+            "excess": 1312,
+            "allowance": 0,
+            "text": "audit overflow failure fixture",
+            "marginLeft": 0,
+            "marginRight": 0,
+            "rect": {
+              "left": 206,
+              "right": 2206,
+              "width": 2000
+            },
+            "container": {
+              "left": 206,
+              "right": 894,
+              "width": 688
+            }
+          }
+        ],
+        "tolerance": 2,
+        "dpr": 1,
+        "normalized": {
+          "displayContents": 0,
+          "zeroSizeVisible": 0
+        },
+        "normalizedAnimations": [
+          {
+            "element": "svg",
+            "slot": "button-loading-indicator",
+            "animationName": "spin",
+            "currentTime": 716.5869999998962,
+            "timing": {
+              "delay": 0,
+              "direction": "normal",
+              "duration": 1000,
+              "easing": "linear",
+              "endDelay": 0,
+              "fill": "none",
+              "iterationStart": 0,
+              "iterations": "Infinity"
+            },
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "linear",
+                "composite": "replace",
+                "transform": "none",
+                "computedOffset": 0
+              },
+              {
+                "offset": 1,
+                "easing": "linear",
+                "composite": "auto",
+                "transform": "rotate(360deg)",
+                "computedOffset": 1
+              }
+            ],
+            "transformBefore": "matrix(-0.208401, -0.978043, 0.978043, -0.208401, 0, 0)",
+            "rotateBefore": "none",
+            "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+            "rotateMeasured": "none"
+          },
+          {
+            "element": "svg",
+            "slot": "button-loading-indicator",
+            "animationName": "spin",
+            "currentTime": 716.5869999998962,
+            "timing": {
+              "delay": 0,
+              "direction": "normal",
+              "duration": 1000,
+              "easing": "linear",
+              "endDelay": 0,
+              "fill": "none",
+              "iterationStart": 0,
+              "iterations": "Infinity"
+            },
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "linear",
+                "composite": "replace",
+                "transform": "none",
+                "computedOffset": 0
+              },
+              {
+                "offset": 1,
+                "easing": "linear",
+                "composite": "auto",
+                "transform": "rotate(360deg)",
+                "computedOffset": 1
+              }
+            ],
+            "transformBefore": "matrix(-0.208401, -0.978043, 0.978043, -0.208401, 0, 0)",
+            "rotateBefore": "none",
+            "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+            "rotateMeasured": "none"
+          },
+          {
+            "element": "svg",
+            "slot": "spinner",
+            "animationName": "spin",
+            "currentTime": 716.5869999998962,
+            "timing": {
+              "delay": 0,
+              "direction": "normal",
+              "duration": 1000,
+              "easing": "linear",
+              "endDelay": 0,
+              "fill": "none",
+              "iterationStart": 0,
+              "iterations": "Infinity"
+            },
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "linear",
+                "composite": "replace",
+                "transform": "none",
+                "computedOffset": 0
+              },
+              {
+                "offset": 1,
+                "easing": "linear",
+                "composite": "auto",
+                "transform": "rotate(360deg)",
+                "computedOffset": 1
+              }
+            ],
+            "transformBefore": "matrix(-0.208401, -0.978043, 0.978043, -0.208401, 0, 0)",
+            "rotateBefore": "none",
+            "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+            "rotateMeasured": "none"
+          },
+          {
+            "element": "svg",
+            "slot": "spinner",
+            "animationName": "spin",
+            "currentTime": 716.5869999998962,
+            "timing": {
+              "delay": 0,
+              "direction": "normal",
+              "duration": 1000,
+              "easing": "linear",
+              "endDelay": 0,
+              "fill": "none",
+              "iterationStart": 0,
+              "iterations": "Infinity"
+            },
+            "keyframes": [
+              {
+                "offset": 0,
+                "easing": "linear",
+                "composite": "replace",
+                "transform": "none",
+                "computedOffset": 0
+              },
+              {
+                "offset": 1,
+                "easing": "linear",
+                "composite": "auto",
+                "transform": "rotate(360deg)",
+                "computedOffset": 1
+              }
+            ],
+            "transformBefore": "matrix(-0.208401, -0.978043, 0.978043, -0.208401, 0, 0)",
+            "rotateBefore": "none",
+            "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+            "rotateMeasured": "none"
+          }
+        ],
+        "invalidDeclarations": [],
+        "declaredAllowances": []
+      }
+    ],
+    "problems": [
+      "button [light-desktop] page overflow 1106px",
+      "button [light-desktop] wider than its container: variants: div by 1312px"
+    ]
+  },
+  "runnerElapsedMs": 3658,
+  "browserInstallSeconds": 419,
+  "jobSeconds": 589,
+  "expectedExitCode": 1,
+  "pack": "skipped",
+  "cancellation": "No cancellation occurred; the run had completed before the request",
+  "logs": {
+    "path": "test-results/ci-remote-initial/run.log",
+    "sha256": "56f4b21bb1245af3be7cc183c1c83da9ead0ab330e291e2a40c4488871b400d1"
+  },
+  "artifactURL": "https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837/artifacts/11170274848"
+}

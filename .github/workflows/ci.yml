@@ -34,7 +34,7 @@ jobs:
       - name: Browser audit
         run: |
           mkdir -p test-results/ci-audit
-          node scripts/run-browser-audit.mjs button --only light-desktop --fixture-overflow --report test-results/ci-audit/report.json
+          node scripts/run-browser-audit.mjs --report test-results/ci-audit/report.json
       - name: Upload browser audit evidence
         if: always()
         uses: actions/upload-artifact@v4
