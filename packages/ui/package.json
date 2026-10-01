@@ -65,10 +65,14 @@
   "peerDependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "@tanstack/react-table": "^8.21.3"
+    "@tanstack/react-table": "^8.21.3",
+    "recharts": "^3.10.1"
   },
   "peerDependenciesMeta": {
     "@tanstack/react-table": {
+      "optional": true
+    },
+    "recharts": {
       "optional": true
     }
   },
@@ -95,7 +99,8 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/user-event": "14.6.1",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "5.1.2"
+    "@vitejs/plugin-react": "5.1.2",
+    "recharts": "3.10.1"
   },
   "keywords": [
     "react",
@@ -103,5 +108,14 @@
     "design-system",
     "components",
     "tailwind"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qingye-lab/yanqing-ui.git",
+    "directory": "packages/ui"
+  },
+  "homepage": "https://github.com/qingye-lab/yanqing-ui",
+  "publishConfig": {
+    "access": "restricted"
+  }
 }

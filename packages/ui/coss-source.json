@@ -4,7 +4,7 @@
   "retrieved": "2026-09-30",
   "components": [
     {
-      "file": "src/coss/button.tsx",
+      "file": "src/components/button.tsx",
       "registry": "https://coss.com/ui/r/button.json",
       "upstreamPath": "apps/ui/registry/default/ui/button.tsx",
       "upstreamSha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8",
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "file": "src/coss/input.tsx",
+      "file": "src/components/input.tsx",
       "registry": "https://coss.com/ui/r/input.json",
       "upstreamPath": "apps/ui/registry/default/ui/input.tsx",
       "upstreamSha256": "3d488d491eb4e63642adc8b9354b0b0cc5b8ec4e284bbc26da7e2516f24980a4",
@@ -29,7 +29,7 @@
       ]
     },
     {
-      "file": "src/coss/textarea.tsx",
+      "file": "src/components/textarea.tsx",
       "registry": "https://coss.com/ui/r/textarea.json",
       "upstreamPath": "apps/ui/registry/default/ui/textarea.tsx",
       "upstreamSha256": "d153ed8f568a6ffb7b5438ea83385e3d327db9af45ef9fdd0822575d15c4e745",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "file": "src/coss/badge.tsx",
+      "file": "src/components/badge.tsx",
       "registry": "https://coss.com/ui/r/badge.json",
       "upstreamPath": "apps/ui/registry/default/ui/badge.tsx",
       "upstreamSha256": "60f73554b462ec5e2929ccc58c0522b069c07e1268dbfb67749c2837347b788b",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "file": "src/coss/alert.tsx",
+      "file": "src/components/alert.tsx",
       "registry": "https://coss.com/ui/r/alert.json",
       "upstreamPath": "apps/ui/registry/default/ui/alert.tsx",
       "upstreamSha256": "340fc98fae7b30d038e1b7bcbb632f551360cfd8e0803b62a8ddfc04c002119f",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "file": "src/coss/card.tsx",
+      "file": "src/components/card.tsx",
       "registry": "https://coss.com/ui/r/card.json",
       "upstreamPath": "apps/ui/registry/default/ui/card.tsx",
       "upstreamSha256": "b59dbc0bd5d61694fcf1948fb8134795b0f5a1bf0a28d8d6bc817297c73a006e",
@@ -73,7 +73,7 @@
       ]
     },
     {
-      "file": "src/coss/checkbox.tsx",
+      "file": "src/components/checkbox.tsx",
       "registry": "https://coss.com/ui/r/checkbox.json",
       "upstreamPath": "apps/ui/registry/default/ui/checkbox.tsx",
       "upstreamSha256": "a1b8b4180a39a47c47bd2b50e432d0911da6efe3b963b065b3b5cb8893760047",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "file": "src/coss/input-group.tsx",
+      "file": "src/components/input-group.tsx",
       "registry": "https://coss.com/ui/r/input-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
       "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "file": "src/coss/select.tsx",
+      "file": "src/components/select.tsx",
       "registry": "https://coss.com/ui/r/select.json",
       "upstreamPath": "apps/ui/registry/default/ui/select.tsx",
       "upstreamSha256": "aa8821bbb4bd6b8b52a6cbaaf8d995f48b1001ad93d4bfa4e5b91b5e6d5f66a0",
@@ -109,7 +109,7 @@
       ]
     },
     {
-      "file": "src/coss/tabs.tsx",
+      "file": "src/components/tabs.tsx",
       "registry": "https://coss.com/ui/r/tabs.json",
       "upstreamPath": "apps/ui/registry/default/ui/tabs.tsx",
       "upstreamSha256": "cbfe21ce54efe39cc02eb073a8327a4ab81b918d5745d986fdfae07d32204a7a",
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "file": "src/coss/segmented-control.tsx",
+      "file": "src/components/segmented-control.tsx",
       "registry": "https://coss.com/ui/r/segmented-control.json",
       "upstreamPath": "apps/ui/registry/default/lib/segmented-control.ts",
       "upstreamSha256": "c1cb84d02ac5b75aa08a70c205feb9cc8668ffbc19751e013364f547ae41a8a8",
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "file": "src/coss/tooltip.tsx",
+      "file": "src/components/tooltip.tsx",
       "registry": "https://coss.com/ui/r/tooltip.json",
       "upstreamPath": "apps/ui/registry/default/ui/tooltip.tsx",
       "upstreamSha256": "0ac59089d1d813b7eb1cd9e08ed2ff3b3931e4024df649ddb45b1eb43d50f694",
@@ -143,7 +143,7 @@
       ]
     },
     {
-      "file": "src/coss/sheet.tsx",
+      "file": "src/components/sheet.tsx",
       "registry": "https://coss.com/ui/r/sheet.json",
       "upstreamPath": "apps/ui/registry/default/ui/sheet.tsx",
       "upstreamSha256": "74ce70050415c0ac6ad033a4d6770f023a736a9f24540c994e88c6934c16d9a4",
@@ -156,7 +156,7 @@
       ]
     },
     {
-      "file": "src/coss/table.tsx",
+      "file": "src/components/table.tsx",
       "registry": "https://coss.com/ui/r/table.json",
       "upstreamPath": "apps/ui/registry/default/ui/table.tsx",
       "upstreamSha256": "b21f811291d6a1706874cb37dd568b922fb5d8b053e6636b7b0e9e9c6320c98d",
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "file": "src/coss/menu.tsx",
+      "file": "src/components/menu.tsx",
       "registry": "https://coss.com/ui/r/menu.json",
       "upstreamPath": "apps/ui/registry/default/ui/menu.tsx",
       "upstreamSha256": "aeb2ebda24c8c90453fd7087bae8f14510f98e4eee75da5c084dfecaa56f2625",
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "file": "src/coss/field.tsx",
+      "file": "src/components/field.tsx",
       "registry": "https://coss.com/ui/r/field.json",
       "upstreamPath": "apps/ui/registry/default/ui/field.tsx",
       "upstreamSha256": "02ffda39f73f04638f580fd1fbb76e783cb252f9a87ecebdd62fb4bd0d1393ff",
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "file": "src/coss/scroll-area.tsx",
+      "file": "src/components/scroll-area.tsx",
       "registry": "https://coss.com/ui/r/scroll-area.json",
       "upstreamPath": "apps/ui/registry/default/ui/scroll-area.tsx",
       "upstreamSha256": "6274eace4599cba26e731b0f02cd2307d2207947162ccc575e45984e87aa269f",
@@ -199,7 +199,7 @@
       ]
     },
     {
-      "file": "src/coss/combobox.tsx",
+      "file": "src/components/combobox.tsx",
       "registry": "https://coss.com/ui/r/combobox.json",
       "upstreamPath": "apps/ui/registry/default/ui/combobox.tsx",
       "upstreamSha256": "df233af98aa9141b3418489d20b71a693aa3d8672a3962e3d19576fb21383087",
@@ -215,7 +215,7 @@
       ]
     },
     {
-      "file": "src/coss/number-field.tsx",
+      "file": "src/components/number-field.tsx",
       "registry": "https://coss.com/ui/r/number-field.json",
       "upstreamPath": "apps/ui/registry/default/ui/number-field.tsx",
       "upstreamSha256": "e49f539416076d832d855e53be646fbc613ccaf0b419b8951f477267b81cdbde",
@@ -228,7 +228,7 @@
       ]
     },
     {
-      "file": "src/coss/toast.tsx",
+      "file": "src/components/toast.tsx",
       "registry": "https://coss.com/ui/r/toast.json",
       "upstreamPath": "apps/ui/registry/default/ui/toast.tsx",
       "upstreamSha256": "6c83bd6ab5a90388aa06380924381058746bf2bd5ebb7b2187496a59e7c517d6",
@@ -244,7 +244,7 @@
       ]
     },
     {
-      "file": "src/coss/calendar.tsx",
+      "file": "src/components/calendar.tsx",
       "registry": "https://coss.com/ui/r/calendar.json",
       "upstreamPath": "apps/ui/registry/default/ui/calendar.tsx",
       "upstreamSha256": "e9046da3021b3bb1e77ae657cdacac79a15f71e99596984fbcd54f26f3b60179",
@@ -258,7 +258,7 @@
       ]
     },
     {
-      "file": "src/coss/popover.tsx",
+      "file": "src/components/popover.tsx",
       "registry": "https://coss.com/ui/r/popover.json",
       "upstreamPath": "apps/ui/registry/default/ui/popover.tsx",
       "upstreamSha256": "ff9b981ce4e68b86a266f69480c59967c7065aacfa2d4ce927d91a1eff0035cf",
@@ -269,7 +269,7 @@
       ]
     },
     {
-      "file": "src/coss/accordion.tsx",
+      "file": "src/components/accordion.tsx",
       "registry": "https://coss.com/ui/r/accordion.json",
       "upstreamPath": "apps/ui/registry/default/ui/accordion.tsx",
       "upstreamSha256": "b975e2a75b37fb44bca277dd85bf0825e98c3531036ca8d1543f6f4556cf56a5",
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "file": "src/coss/alert-dialog.tsx",
+      "file": "src/components/alert-dialog.tsx",
       "registry": "https://coss.com/ui/r/alert-dialog.json",
       "upstreamPath": "apps/ui/registry/default/ui/alert-dialog.tsx",
       "upstreamSha256": "e6e8d2aee4115cb2e2d5bba7e3f16941a2cfaa12a2bceae70d605b1751706d82",
@@ -289,7 +289,7 @@
       ]
     },
     {
-      "file": "src/coss/autocomplete.tsx",
+      "file": "src/components/autocomplete.tsx",
       "registry": "https://coss.com/ui/r/autocomplete.json",
       "upstreamPath": "apps/ui/registry/default/ui/autocomplete.tsx",
       "upstreamSha256": "1298734859a47189abc821795ed082bc56b7dbe6de14859d539afc1adefc17d1",
@@ -300,7 +300,7 @@
       ]
     },
     {
-      "file": "src/coss/avatar.tsx",
+      "file": "src/components/avatar.tsx",
       "registry": "https://coss.com/ui/r/avatar.json",
       "upstreamPath": "apps/ui/registry/default/ui/avatar.tsx",
       "upstreamSha256": "a742f2d7c3aa1a867799e66fa7f3b37615e455906fa0117b66c49cfedca0a4f1",
@@ -310,7 +310,7 @@
       ]
     },
     {
-      "file": "src/coss/breadcrumb.tsx",
+      "file": "src/components/breadcrumb.tsx",
       "registry": "https://coss.com/ui/r/breadcrumb.json",
       "upstreamPath": "apps/ui/registry/default/ui/breadcrumb.tsx",
       "upstreamSha256": "e420178801b8d72238f1274c722a7ca4e9f9834bd58c7a45ba8d71a645f83c79",
@@ -321,7 +321,7 @@
       ]
     },
     {
-      "file": "src/coss/checkbox-group.tsx",
+      "file": "src/components/checkbox-group.tsx",
       "registry": "https://coss.com/ui/r/checkbox-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/checkbox-group.tsx",
       "upstreamSha256": "f78494035296e12c0ff602022338bb8f37a46f3a15647b53f0b2e8ac6c97f45e",
@@ -331,7 +331,7 @@
       ]
     },
     {
-      "file": "src/coss/collapsible.tsx",
+      "file": "src/components/collapsible.tsx",
       "registry": "https://coss.com/ui/r/collapsible.json",
       "upstreamPath": "apps/ui/registry/default/ui/collapsible.tsx",
       "upstreamSha256": "f70e7b9fde220ce5f039c93176a545a46a9b553ecdb23595a320e5163a95a1e8",
@@ -341,7 +341,7 @@
       ]
     },
     {
-      "file": "src/coss/command.tsx",
+      "file": "src/components/command.tsx",
       "registry": "https://coss.com/ui/r/command.json",
       "upstreamPath": "apps/ui/registry/default/ui/command.tsx",
       "upstreamSha256": "4b40973632f7b13bd2212f094b805470aad29fb190a46001f92b13ff2350b7bd",
@@ -351,7 +351,7 @@
       ]
     },
     {
-      "file": "src/coss/context-menu.tsx",
+      "file": "src/components/context-menu.tsx",
       "registry": "https://coss.com/ui/r/context-menu.json",
       "upstreamPath": "apps/ui/registry/default/ui/context-menu.tsx",
       "upstreamSha256": "a47c4563334813d12f0e46380a047483aed03d7ed3e37a9cfde5899f06761abf",
@@ -362,7 +362,7 @@
       ]
     },
     {
-      "file": "src/coss/dialog.tsx",
+      "file": "src/components/dialog.tsx",
       "registry": "https://coss.com/ui/r/dialog.json",
       "upstreamPath": "apps/ui/registry/default/ui/dialog.tsx",
       "upstreamSha256": "14ad87a5f81d7753e9a954aa0624df49168eccc2c8d3074a41ea0a8bed3970d5",
@@ -373,7 +373,7 @@
       ]
     },
     {
-      "file": "src/coss/drawer.tsx",
+      "file": "src/components/drawer.tsx",
       "registry": "https://coss.com/ui/r/drawer.json",
       "upstreamPath": "apps/ui/registry/default/ui/drawer.tsx",
       "upstreamSha256": "e8edbf8de6192c4858395e8a99ed4d3c35fd583618b9cef4b76f260e90f6e4d1",
@@ -385,7 +385,7 @@
       ]
     },
     {
-      "file": "src/coss/empty.tsx",
+      "file": "src/components/empty.tsx",
       "registry": "https://coss.com/ui/r/empty.json",
       "upstreamPath": "apps/ui/registry/default/ui/empty.tsx",
       "upstreamSha256": "57341b5a985ba2cc229e4832ab8624b060d172706b678dd99a682fbb476d4aa9",
@@ -395,7 +395,7 @@
       ]
     },
     {
-      "file": "src/coss/fieldset.tsx",
+      "file": "src/components/fieldset.tsx",
       "registry": "https://coss.com/ui/r/fieldset.json",
       "upstreamPath": "apps/ui/registry/default/ui/fieldset.tsx",
       "upstreamSha256": "1ec36d2a2c60fd1ba229682a876f8d672ade66019513bac1a6747885d369f2a6",
@@ -405,7 +405,7 @@
       ]
     },
     {
-      "file": "src/coss/form.tsx",
+      "file": "src/components/form.tsx",
       "registry": "https://coss.com/ui/r/form.json",
       "upstreamPath": "apps/ui/registry/default/ui/form.tsx",
       "upstreamSha256": "c08b75b48a90dd349763720e4ffb5423ae348ec0ef43c8c96110695d6fcf7404",
@@ -415,7 +415,7 @@
       ]
     },
     {
-      "file": "src/coss/frame.tsx",
+      "file": "src/components/frame.tsx",
       "registry": "https://coss.com/ui/r/frame.json",
       "upstreamPath": "apps/ui/registry/default/ui/frame.tsx",
       "upstreamSha256": "55da638812d093e74ab7fb3cb141f01d834492b63b3e2e09880b9b1df24ee45c",
@@ -425,7 +425,7 @@
       ]
     },
     {
-      "file": "src/coss/group.tsx",
+      "file": "src/components/group.tsx",
       "registry": "https://coss.com/ui/r/group.json",
       "upstreamPath": "apps/ui/registry/default/ui/group.tsx",
       "upstreamSha256": "d2392c54a90e353762779639971bb9aaa44759a7bda81ea0cf1462afbf4492b0",
@@ -435,7 +435,7 @@
       ]
     },
     {
-      "file": "src/coss/kbd.tsx",
+      "file": "src/components/kbd.tsx",
       "registry": "https://coss.com/ui/r/kbd.json",
       "upstreamPath": "apps/ui/registry/default/ui/kbd.tsx",
       "upstreamSha256": "ad8f26b95d8307f460316cd27a2b595d04069df2561395b5d39067a99e407cb5",
@@ -445,7 +445,7 @@
       ]
     },
     {
-      "file": "src/coss/label.tsx",
+      "file": "src/components/label.tsx",
       "registry": "https://coss.com/ui/r/label.json",
       "upstreamPath": "apps/ui/registry/default/ui/label.tsx",
       "upstreamSha256": "edaf5fb049b3e2f27ddd70a6c6772c7d99e920c589b41019b8f4fa602113e695",
@@ -455,7 +455,7 @@
       ]
     },
     {
-      "file": "src/coss/meter.tsx",
+      "file": "src/components/meter.tsx",
       "registry": "https://coss.com/ui/r/meter.json",
       "upstreamPath": "apps/ui/registry/default/ui/meter.tsx",
       "upstreamSha256": "f7f0b85f6878378c76e66887a111a1cb8476ebea84a2ebb4f6d41fe0fbad8653",
@@ -465,7 +465,7 @@
       ]
     },
     {
-      "file": "src/coss/otp-field.tsx",
+      "file": "src/components/otp-field.tsx",
       "registry": "https://coss.com/ui/r/otp-field.json",
       "upstreamPath": "apps/ui/registry/default/ui/otp-field.tsx",
       "upstreamSha256": "4122b6f91e0c011a9bfe40b4ecad4d0b89a7b371e773adac6af6b2bcc5ac033e",
@@ -475,7 +475,7 @@
       ]
     },
     {
-      "file": "src/coss/pagination.tsx",
+      "file": "src/components/pagination.tsx",
       "registry": "https://coss.com/ui/r/pagination.json",
       "upstreamPath": "apps/ui/registry/default/ui/pagination.tsx",
       "upstreamSha256": "4c3d048be127d228ad199b8555b833ffc26cd9506b4a75b4b298754833474993",
@@ -486,7 +486,7 @@
       ]
     },
     {
-      "file": "src/coss/preview-card.tsx",
+      "file": "src/components/preview-card.tsx",
       "registry": "https://coss.com/ui/r/preview-card.json",
       "upstreamPath": "apps/ui/registry/default/ui/preview-card.tsx",
       "upstreamSha256": "44741ce4217d89c19a485d6973c22c821ed9cf86b15dc03c7094308ae7faa6ba",
@@ -496,7 +496,7 @@
       ]
     },
     {
-      "file": "src/coss/progress.tsx",
+      "file": "src/components/progress.tsx",
       "registry": "https://coss.com/ui/r/progress.json",
       "upstreamPath": "apps/ui/registry/default/ui/progress.tsx",
       "upstreamSha256": "605ea95436094735fc94d2ae38fd50df2dcce1617b2a67c504114bd0e55cc2b2",
@@ -506,7 +506,7 @@
       ]
     },
     {
-      "file": "src/coss/radio-group.tsx",
+      "file": "src/components/radio-group.tsx",
       "registry": "https://coss.com/ui/r/radio-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/radio-group.tsx",
       "upstreamSha256": "b2479e9967f0ba48d1acbb58a4fff7b919aa746bb8a61cbbff389baac02abbb7",
@@ -516,7 +516,7 @@
       ]
     },
     {
-      "file": "src/coss/separator.tsx",
+      "file": "src/components/separator.tsx",
       "registry": "https://coss.com/ui/r/separator.json",
       "upstreamPath": "apps/ui/registry/default/ui/separator.tsx",
       "upstreamSha256": "48393a9f365097e350bb33f0e84d2df25efd6b374868aa075f8d6011378c1d6e",
@@ -526,7 +526,7 @@
       ]
     },
     {
-      "file": "src/coss/sidebar.tsx",
+      "file": "src/components/sidebar.tsx",
       "registry": "https://coss.com/ui/r/sidebar.json",
       "upstreamPath": "apps/ui/registry/default/ui/sidebar.tsx",
       "upstreamSha256": "11e0381340b46a53f5a52c6a2a6a81a4c957c3690f889089764b60ba3da51965",
@@ -538,7 +538,7 @@
       ]
     },
     {
-      "file": "src/coss/skeleton.tsx",
+      "file": "src/components/skeleton.tsx",
       "registry": "https://coss.com/ui/r/skeleton.json",
       "upstreamPath": "apps/ui/registry/default/ui/skeleton.tsx",
       "upstreamSha256": "02e61d00c76b7ed5a1979c37c2a86b8a837a013909e84ac21c40bb5b56f9afd2",
@@ -548,7 +548,7 @@
       ]
     },
     {
-      "file": "src/coss/slider.tsx",
+      "file": "src/components/slider.tsx",
       "registry": "https://coss.com/ui/r/slider.json",
       "upstreamPath": "apps/ui/registry/default/ui/slider.tsx",
       "upstreamSha256": "abf488cac56c237b5eebef7c7c25ff38d07f72581a2b46c7158c019576c7fa71",
@@ -558,7 +558,7 @@
       ]
     },
     {
-      "file": "src/coss/spinner.tsx",
+      "file": "src/components/spinner.tsx",
       "registry": "https://coss.com/ui/r/spinner.json",
       "upstreamPath": "apps/ui/registry/default/ui/spinner.tsx",
       "upstreamSha256": "5116d0ec549bf70d20d5359a485e6792b6c87d89a389102ad6c3f44312c23972",
@@ -569,7 +569,7 @@
       ]
     },
     {
-      "file": "src/coss/switch.tsx",
+      "file": "src/components/switch.tsx",
       "registry": "https://coss.com/ui/r/switch.json",
       "upstreamPath": "apps/ui/registry/default/ui/switch.tsx",
       "upstreamSha256": "2b3bada3d7234149b4d29918d5e312e62919938c2ae0ee61db81350438ad43c4",
@@ -579,7 +579,7 @@
       ]
     },
     {
-      "file": "src/coss/toggle-group.tsx",
+      "file": "src/components/toggle-group.tsx",
       "registry": "https://coss.com/ui/r/toggle-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/toggle-group.tsx",
       "upstreamSha256": "8c67854bffcf762299fb989721e47da30fea3268cb969fdc6c775c3fe89982bb",
@@ -589,7 +589,7 @@
       ]
     },
     {
-      "file": "src/coss/toggle.tsx",
+      "file": "src/components/toggle.tsx",
       "registry": "https://coss.com/ui/r/toggle.json",
       "upstreamPath": "apps/ui/registry/default/ui/toggle.tsx",
       "upstreamSha256": "a32372d0eaa291bc81f61f4ddb1f5bb827c507fd53de03c6f709adc242ee5bfb",
@@ -599,7 +599,7 @@
       ]
     },
     {
-      "file": "src/coss/toolbar.tsx",
+      "file": "src/components/toolbar.tsx",
       "registry": "https://coss.com/ui/r/toolbar.json",
       "upstreamPath": "apps/ui/registry/default/ui/toolbar.tsx",
       "upstreamSha256": "f08696682ad171b5a0d2c918202bcee10b9f6de1408a2a2e864f61e8d424dba2",
@@ -609,7 +609,7 @@
       ]
     },
     {
-      "file": "src/coss/use-copy-to-clipboard.ts",
+      "file": "src/hooks/use-copy-to-clipboard.ts",
       "registry": "https://coss.com/ui/r/use-copy-to-clipboard.json",
       "upstreamPath": "apps/ui/registry/default/hooks/use-copy-to-clipboard.ts",
       "upstreamSha256": "d2e9ba430e34dafd4ae7fe5403d2ad4987fdcd73f2a47bd0571c1f84c143536d",
@@ -620,7 +620,7 @@
       ]
     },
     {
-      "file": "src/coss/use-media-query.ts",
+      "file": "src/hooks/use-media-query.ts",
       "registry": "https://coss.com/ui/r/use-media-query.json",
       "upstreamPath": "apps/ui/registry/default/hooks/use-media-query.ts",
       "upstreamSha256": "17d75ccaf898415db77dd72659c9b1fdb9338290ae54e8371b772e0b221c9fca",
@@ -629,5 +629,6 @@
         "Local imports; preserve the upstream public composition API"
       ]
     }
-  ]
+  ],
+  "baseline": "packages/ui/upstream/ holds the unmodified upstream files at the recorded SHA."
 }
