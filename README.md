@@ -89,7 +89,7 @@ node scripts/shot.mjs <component>     # 浅色/深色 × 桌面/手机截图
 
 ## 发布
 
-更新 `packages/ui/package.json` 的版本号，推送同名标签（如 `v0.2.0`），Release 工作流会构建并把 tarball 附加到 GitHub Release。
+更新 `packages/ui/package.json` 的版本号，推送匹配该版本的 `v<版本号>` 标签，Release 工作流会构建并把 tarball 附加到 GitHub Release。
 
 ## 许可
 

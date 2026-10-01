@@ -59,6 +59,7 @@ export default function InstallationPage() {
       <P>
         通过 GitHub Release 分发。仓库目前为私有，请先用有仓库访问权限的账号登录 GitHub CLI，再复制以下命令下载并安装最新版本：
       </P>
+      <P className="text-sm text-muted-foreground">本站构建版本为 v{SITE.version}；以下命令下载 GitHub 标记的最新 Release，不按本站构建版本固定 tag。未发布的源码变化不会自动进入安装包。</P>
       <InstallTabs downloadCommand={releaseDownloadCommand} pkg={`./${releaseFile}`} />
       <P className="text-[0.875rem] text-muted-foreground">
         保留并提交 <Code>{releaseFile}</Code>、<Code>package.json</Code> 和 lock 文件。日常 <Code>pnpm install</Code> 按 lock 复现；主动升级时重新运行上述命令。发布记录见 <A href={`${SITE.repo}/releases`}>Releases</A>。

@@ -75,22 +75,26 @@ import { Select } from "@qingye/ui/components/select";
 
 ## 主题定制
 
+品牌在 `<html data-brand="project">` 静态设置；缺省不需要品牌属性。ThemeProvider 默认在 html 切换 `.light/.dark`，显式 `attribute="data-theme"` 才写明暗属性；密度独立使用 `data-density`。示例 CSS 不是库内品牌包，局部容器与 Portal 品牌继承未自动支持。
+
 令牌分三层：`tokens/primitives.css`（原始色板）→ `tokens/semantic.css`（语义角色，浅色 + 深色）→ `tokens/components.css`（字号、间距、圆角、尺寸、密度、动效）。组件只读语义层和组件层。在导入 `styles.css` 之后覆盖 `--qy-*` 令牌即可定制：
 
 ```css
-:root {
+html[data-brand="project"] {
   --qy-primary: oklch(0.55 0.18 255);
   --qy-primary-foreground: oklch(0.99 0 0);
   --qy-radius: 0.5rem;
 }
-.dark {
+html[data-brand="project"]:is(.dark, [data-theme="dark"]) {
   --qy-primary: oklch(0.7 0.15 255);
 }
 ```
 
 不带前缀的 `--background`、`--card` 等是供 shadcn 生态读取的兼容变量，始终指向 `--qy-*`，不要直接覆盖。
 
-密度：在任意容器上设置 `data-density="compact"`，内部表格行高、面板内边距和间距随之收紧。
+根圆角默认8px，只联动 md/lg；`--qy-radius-control` 默认接lg，`--qy-radius-panel` 默认接独立2xl（12px）；xs/sm/xl/2xl/full保持独立。布局 spacing 由根 `--qy-space-1`（默认4px）派生命名步，组件显式消费布局间距，固定图标/控件几何不依赖全局 spacing。
+
+密度：html 或局部容器可设置 `data-density="compact"`，实际消费密度角色的表格/面板随之收紧，不声称所有尺寸都联动。
 
 ## 国际化
 

@@ -22,4 +22,6 @@ This macOS host's managed Chromium153 exited around30s without an identified cau
 
 ## Actual GitHub gate proof
 
+The following paragraph preserves the 2026-10-01 pre-release checkpoint. Later tag executions are recorded by the [Release workflow](https://github.com/qingye-lab/qingye-ui/actions/workflows/release.yml); its historical NOT_RUN status is not a claim about subsequent releases.
+
 The Ubuntu run [36879986837](https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837) executed the injected overflow audit after successful typecheck/tests/build/install. The report contains page overflow1106px and internal overflow1312px; audit returned1, Pack was skipped, and browser/preview both closed. The audit measured2000ms; runner3658ms; full job589s, including419s installing system/browser dependencies. See `docs/baseline/2026-10-01-ci-gate-failure/receipt.json`. The final workflow removes injection and restores88×4; its observed result is attached to the current verify check on [PR1](https://github.com/qingye-lab/qingye-ui/pull/1). The tag-triggered Release execution remains NOT_RUN.

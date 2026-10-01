@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-01T15:34:15.054Z",
-  "revision": "a6d699535e95e3962a0c5b495e192d202e94fb1f",
+  "generatedAt": "2026-10-01T16:42:05.983Z",
+  "revision": "443475f8f42ffcd52400c5a0b1666e34de16efab",
   "fingerprint": {
-    "sha256": "c1aaca6115ae95a4b9114510203098ada7da876118e91b8e4302923dc8267af3",
+    "sha256": "8daef1c1f3ba08a6aff601f52bb941e9f7c6de663be0758b2a6d10a8acc9c155",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -372,7 +372,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "0b4819d1d07ef731db74027df3abfcd7365f7d110d61e07b714dddc20e32cf4e"
+        "sha256": "8a42646e100e329e9ade0e36cb07fd4eb73166ab2d990f606a87a30fa0e5ba98"
       },
       {
         "path": "packages/ui/coss-source.json",
@@ -384,7 +384,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "906de88ab659603d654fc5ccffa1360e06d41583a7df181a3d60bbf6121c2023"
+        "sha256": "62cdbfc988a4d1a930b74d03622a950080ae1a8af0071c1d764cb86cfd4e5db1"
       },
       {
         "path": "packages/ui/src/components/accordion.tsx",
@@ -771,7 +771,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye/ui",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -896,7 +896,7 @@
         {
           "name": "AccordionPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/accordion.tsx",
             "line": 70
@@ -1096,7 +1096,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1207,7 +1207,7 @@
         {
           "name": "AlertDialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/alert-dialog.tsx",
             "line": 171
@@ -1484,7 +1484,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1661,7 +1661,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1761,7 +1761,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1862,7 +1862,7 @@
         {
           "name": "AutocompletePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
             "line": 307
@@ -2200,7 +2200,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2269,7 +2269,7 @@
         {
           "name": "AvatarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/avatar.tsx",
             "line": 125
@@ -2479,7 +2479,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2627,7 +2627,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2899,7 +2899,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3078,7 +3078,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3259,7 +3259,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3444,7 +3444,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3808,7 +3808,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4078,7 +4078,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4179,7 +4179,7 @@
         {
           "name": "RechartsPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/recharts@3.10.1_@types+react@19.2.7_react-dom@19.2.1_react@19.2.1__react-is@19.3.0_react@19.2.1_redux@5.0.1/node_modules/recharts/types/index\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/recharts@3.10.1_@types+react@19.2.7_react-dom@19.2.1_react@19.2.1__react-is@19.3.0_react@19.2.1_redux@5.0.1/node_modules/recharts/types/index\"",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
             "line": 456
@@ -4424,7 +4424,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4562,7 +4562,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4591,7 +4591,7 @@
         {
           "name": "CheckboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
             "line": 45
@@ -4704,7 +4704,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4884,7 +4884,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4930,7 +4930,7 @@
         {
           "name": "CollapsiblePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/collapsible.tsx",
             "line": 44
@@ -5082,7 +5082,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5223,7 +5223,7 @@
         {
           "name": "ComboboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
             "line": 430
@@ -5650,7 +5650,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5727,7 +5727,7 @@
         {
           "name": "CommandDialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
             "line": 275
@@ -6222,7 +6222,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6325,7 +6325,7 @@
         {
           "name": "ContextMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
             "line": 319
@@ -6642,7 +6642,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6800,7 +6800,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7184,7 +7184,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7510,7 +7510,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7695,7 +7695,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7921,7 +7921,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8131,7 +8131,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8250,7 +8250,7 @@
         {
           "name": "DialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/dialog.tsx",
             "line": 222
@@ -8578,7 +8578,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8790,7 +8790,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8979,7 +8979,7 @@
         {
           "name": "DrawerPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
             "line": 615
@@ -9345,7 +9345,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9595,7 +9595,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9697,7 +9697,7 @@
         {
           "name": "FieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
             "line": 230
@@ -10021,7 +10021,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10058,7 +10058,7 @@
         {
           "name": "FieldsetPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/fieldset.tsx",
             "line": 45
@@ -10181,7 +10181,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10409,7 +10409,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10543,7 +10543,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10765,7 +10765,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10969,7 +10969,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11017,7 +11017,7 @@
         {
           "name": "HoverCardPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/hover-card.tsx",
             "line": 10
@@ -11176,7 +11176,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11424,7 +11424,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11572,7 +11572,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11951,7 +11951,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12065,7 +12065,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12163,7 +12163,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12459,7 +12459,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12696,7 +12696,7 @@
         {
           "name": "MenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
             "line": 311
@@ -13112,7 +13112,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13525,7 +13525,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13570,7 +13570,7 @@
         {
           "name": "MeterPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/meter.tsx",
             "line": 83
@@ -13773,7 +13773,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13862,7 +13862,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14071,7 +14071,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14156,7 +14156,7 @@
         {
           "name": "NavigationMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
             "line": 222
@@ -14416,7 +14416,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14493,7 +14493,7 @@
         {
           "name": "NumberFieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
             "line": 157
@@ -14724,7 +14724,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14761,7 +14761,7 @@
         {
           "name": "OTPFieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/otp-field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/otp-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/otp-field.tsx",
             "line": 67
@@ -14937,7 +14937,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15217,7 +15217,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15508,7 +15508,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15633,7 +15633,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15703,7 +15703,7 @@
         {
           "name": "PopoverPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/popover.tsx",
             "line": 120
@@ -15955,7 +15955,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16019,7 +16019,7 @@
         {
           "name": "PreviewCardPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/preview-card.tsx",
             "line": 65
@@ -16190,7 +16190,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16341,7 +16341,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16386,7 +16386,7 @@
         {
           "name": "ProgressPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/progress.tsx",
             "line": 92
@@ -16588,7 +16588,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16643,7 +16643,7 @@
         {
           "name": "RadioPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/radio-group.tsx",
             "line": 45
@@ -16776,7 +16776,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17041,7 +17041,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17070,7 +17070,7 @@
         {
           "name": "ScrollAreaPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
             "line": 81
@@ -17203,7 +17203,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17349,7 +17349,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17531,7 +17531,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17625,7 +17625,7 @@
         {
           "name": "SelectPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
             "line": 253
@@ -17945,7 +17945,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18048,7 +18048,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18159,7 +18159,7 @@
         {
           "name": "SheetPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/sheet.tsx",
             "line": 234
@@ -18473,7 +18473,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19062,7 +19062,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19153,7 +19153,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19182,7 +19182,7 @@
         {
           "name": "SliderPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/slider.tsx",
             "line": 94
@@ -19337,7 +19337,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19433,7 +19433,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19767,7 +19767,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19910,7 +19910,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20103,7 +20103,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20132,7 +20132,7 @@
         {
           "name": "SwitchPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
             "line": 32
@@ -20226,7 +20226,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20553,7 +20553,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20607,7 +20607,7 @@
         {
           "name": "TabsPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
             "line": 117
@@ -20859,7 +20859,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21031,7 +21031,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21052,7 +21052,7 @@
         {
           "name": "FieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/textarea.tsx",
             "line": 60
@@ -21165,7 +21165,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21356,7 +21356,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21704,7 +21704,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21765,7 +21765,7 @@
         {
           "name": "ToastPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
             "line": 349
@@ -21959,7 +21959,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22188,7 +22188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22347,7 +22347,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22408,7 +22408,7 @@
         {
           "name": "ToolbarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toolbar.tsx",
             "line": 93
@@ -22611,7 +22611,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22665,7 +22665,7 @@
         {
           "name": "TooltipPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/demo/ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
             "line": 72
@@ -22866,7 +22866,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23079,7 +23079,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23300,7 +23300,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "0.2.0",
+        "version": "0.3.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {

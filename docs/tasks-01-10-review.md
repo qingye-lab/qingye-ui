@@ -1,5 +1,7 @@
 # 任务 1–10 交付与审查
 
+以下记录的是 2026-10-01 发布前的阶段验收，保留当时的版本、指纹和未执行项。之后的 AGENTS.md 修订、网站上线与 0.3.0 发布状态，以 [PR #1](https://github.com/qingye-lab/qingye-ui/pull/1)、[Releases](https://github.com/qingye-lab/qingye-ui/releases) 和关联工作流结果为准。
+
 范围是配套任务卡 1–10，基线 `fb8a389`。由三个 GPT-6.1 Sol 子代理分别负责浏览器与 CI、事实与消费台账、AST 与 token 接线，主代理下发边界并复核 diff、原始数据和失败路径。任务 11–40 不在本次交付内。
 
 用户原有 `AGENTS.md` 修改保留，不纳入提交；原有 `audit.mjs` 修改在其基础上修正。没有修改上游原始源码。交付位于 `codex/ui-foundations-01-10` 分支及 [PR #1](https://github.com/qingye-lab/qingye-ui/pull/1)。
