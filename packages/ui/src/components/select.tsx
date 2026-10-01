@@ -103,7 +103,7 @@ export function SelectValue({
   return (
     <SelectPrimitive.Value
       className={cn(
-        "flex-1 truncate data-placeholder:text-muted-foreground",
+        "flex-1 truncate data-placeholder:text-muted-foreground/72",
         className,
       )}
       data-slot="select-value"

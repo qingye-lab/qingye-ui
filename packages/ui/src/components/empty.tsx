@@ -93,13 +93,22 @@ export function EmptyMedia({
   );
 }
 
+export type EmptyTitleSize = "default" | "sm";
+
+/**
+ * The title is the loudest thing in an empty state, which suits a full-page or
+ * full-panel placeholder. Inside a card or a table cell the surrounding
+ * headings already set the level, so `size="sm"` steps it down to body size.
+ */
 export function EmptyTitle({
   className,
+  size = "default",
   ...props
-}: React.ComponentProps<"div">): React.ReactElement {
+}: React.ComponentProps<"div"> & { size?: EmptyTitleSize }): React.ReactElement {
   return (
     <div
-      className={cn("font-heading font-semibold text-xl", className)}
+      className={cn("font-heading font-semibold", size === "sm" ? "text-base" : "text-title", className)}
+      data-size={size}
       data-slot="empty-title"
       {...props}
     />

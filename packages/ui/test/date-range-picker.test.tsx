@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, test, vi } from "vitest";
@@ -109,7 +109,12 @@ test("a half-finished selection is discarded when the popup closes", async () =>
   await userEvent.click(day("2026年9月4日"));
   await userEvent.click(screen.getByRole("button", { name: "关闭" }));
   expect(onValueChange).not.toHaveBeenCalled();
-  expect(screen.getByRole("button", { name: /选择日期范围|2026/ })).not.toHaveTextContent("结束日期");
+  // Match the trigger by its container rather than a text pattern that can also
+  // hit the calendar's own date buttons.
+  const trigger = within(
+    document.querySelector("[data-slot=date-range-picker]") as HTMLElement,
+  ).getByRole("button");
+  expect(trigger).not.toHaveTextContent("结束日期");
 });
 
 test("controlled value renders the range and submits both hidden fields", async () => {

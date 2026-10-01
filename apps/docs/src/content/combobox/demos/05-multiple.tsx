@@ -12,7 +12,7 @@ export default function Demo() {
           {(value: string[]) => (
             <>
               {value.map((tag) => (
-                <ComboboxChip key={tag} aria-label={tag}>
+                <ComboboxChip key={tag} aria-label={`移除 ${tag}`}>
                   {tag}
                 </ComboboxChip>
               ))}

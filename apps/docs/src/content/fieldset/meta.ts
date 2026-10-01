@@ -15,7 +15,8 @@ export default {
     },
     {
       name: "FieldsetLegend",
-      description: "组标题，渲染为带语义的 legend。别名 FieldLegend。",
+      description:
+        "组标题，自动通过 aria-labelledby 关联到 <fieldset>，读屏进入组内控件前会先读出它。Base UI 渲染的是 div 而非原生 <legend>（原生 legend 无法随内容自动布局），语义由 aria-labelledby 提供。别名 FieldLegend。",
       props: [
         { name: "variant", type: '"legend" | "label"', default: '"legend"', description: "legend 为分节标题；label 与字段标签同级，用于一组复选框或单选。" },
       ],

@@ -49,9 +49,8 @@ export function Heading({
     className: cn(
       "text-balance font-heading font-semibold text-foreground",
       headingSizeClasses[resolvedSize],
-      // Latin display type tightens slightly; Chinese keeps its natural spacing.
-      resolvedSize === "display" &&
-        "tracking-(--qy-tracking-heading) [&:lang(ja)]:tracking-normal [&:lang(ko)]:tracking-normal [&:lang(zh)]:tracking-normal",
+      // CJK tracking is reset globally in utilities.css, which also covers body
+      // copy and elements rendered outside this component.
       className,
     ),
     "data-level": level,

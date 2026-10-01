@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
-import { EmptyMedia } from "../src/components/empty";
+import { EmptyMedia, EmptyTitle } from "../src/components/empty";
 
 test("EmptyMedia applies its props to the wrapper only", () => {
   const onClick = vi.fn();
@@ -18,4 +18,14 @@ test("EmptyMedia applies its props to the wrapper only", () => {
   expect(wrapper.querySelector("[data-slot=empty-media-content]")).toContainElement(screen.getByTestId("icon"));
   screen.getByTestId("icon").dispatchEvent(new MouseEvent("click", { bubbles: true }));
   expect(onClick).toHaveBeenCalledOnce();
+});
+
+test("EmptyTitle steps down to body size for nested containers", () => {
+  const { rerender } = render(<EmptyTitle>还没有项目</EmptyTitle>);
+  const title = screen.getByText("还没有项目");
+  expect(title).toHaveAttribute("data-size", "default");
+  expect(title).toHaveClass("text-title");
+
+  rerender(<EmptyTitle size="sm">还没有项目</EmptyTitle>);
+  expect(screen.getByText("还没有项目")).toHaveClass("text-base");
 });

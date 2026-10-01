@@ -70,7 +70,7 @@ export function DatePickerTrigger({
       data-slot="date-picker-trigger"
     >
       <span
-        className="min-w-0 flex-1 truncate numeric in-data-placeholder:text-muted-foreground"
+        className="min-w-0 flex-1 truncate numeric in-data-placeholder:text-muted-foreground/72"
         data-slot="date-picker-value"
         id={valueId}
       >

@@ -36,7 +36,14 @@ test("wires tabs to panels with the tab pattern", async () => {
 
   await userEvent.click(screen.getByRole("tab", { name: "成员" }));
   expect(screen.getByRole("tab", { name: "成员" })).toHaveAttribute("aria-selected", "true");
-  expect(screen.getByRole("tabpanel")).toHaveTextContent("成员内容");
+  /*
+   * During the transition both panels are in the DOM: the outgoing one is
+   * `inert` until its exit completes. Assert on the panel that is actually
+   * active rather than assuming a single tabpanel node.
+   */
+  const panels = screen.getAllByRole("tabpanel", { hidden: true });
+  const active = panels.find((panel) => !panel.hasAttribute("inert"));
+  expect(active).toHaveTextContent("成员内容");
 });
 
 test("moves with arrow keys and wraps at the ends", async () => {

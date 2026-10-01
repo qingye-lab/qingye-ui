@@ -29,7 +29,7 @@ export default function Demo() {
             <EmptyMedia variant="icon">
               <SearchIcon aria-hidden="true" />
             </EmptyMedia>
-            <EmptyTitle className="text-base">没有找到“{query}”</EmptyTitle>
+            <EmptyTitle size="sm">没有找到“{query}”</EmptyTitle>
             <EmptyDescription>换个关键词试试，或检查拼写。</EmptyDescription>
           </EmptyHeader>
           <EmptyContent>

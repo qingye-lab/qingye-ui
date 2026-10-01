@@ -138,6 +138,11 @@ export type DataTableProps<TData> = {
   maxHeight?: number | string;
   /** Pins the header row. Defaults to on when `maxHeight` is set. */
   stickyHeader?: boolean;
+  /**
+   * BCP 47 tag used to collate string columns. Defaults to the document
+   * language, so Chinese names sort by pinyin rather than by code point.
+   */
+  collationLocale?: string;
   className?: string;
 };
 
@@ -199,6 +204,7 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
     variant = "default",
     maxHeight,
     stickyHeader = maxHeight !== undefined,
+    collationLocale,
     className,
   } = props;
 
@@ -254,9 +260,35 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
     return [selectColumn, ...columns];
   }, [columns, selectable, messages.selectAllRows, messages.selectRow]);
 
+  // TanStack's string comparison is code-unit based, so every Chinese name
+  // sorts after every Latin one. `defaultColumn` only applies where the column
+  // does not name a `sortingFn` itself, so an explicit `datetime`/`basic`
+  // column keeps its own comparison.
+  const collator = useMemo(() => {
+    // The document language is the closest thing to the reader's locale; the
+    // fallback keeps server rendering deterministic.
+    const locale =
+      collationLocale ?? (typeof document === "undefined" ? "zh-CN" : document.documentElement.lang || "zh-CN");
+    return new Intl.Collator(locale, { numeric: true, sensitivity: "base" });
+  }, [collationLocale]);
+  const defaultColumn = useMemo<Partial<ColumnDef<TData, unknown>>>(
+    () => ({
+      sortingFn: (rowA, rowB, columnId) => {
+        const a = rowA.getValue(columnId);
+        const b = rowB.getValue(columnId);
+        if (a instanceof Date || b instanceof Date) return Number(a) - Number(b);
+        if (typeof a === "number" && typeof b === "number") return a - b;
+        if (a == null || b == null) return a === b ? 0 : a == null ? -1 : 1;
+        return collator.compare(String(a), String(b));
+      },
+    }),
+    [collator],
+  );
+
   const options: TableOptions<TData> = {
     data,
     columns: allColumns,
+    defaultColumn,
     state: { columnFilters, columnVisibility, globalFilter, pagination, rowSelection, sorting },
     onColumnFiltersChange: handleColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
@@ -295,7 +327,8 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
   const rows = table.getRowModel().rows;
   const toolbarContent = typeof toolbar === "function" ? toolbar(table) : toolbar;
   const showToolbar = enableGlobalFilter || toolbarContent != null || selectable || (enableColumnVisibility && hideableColumns.length > 0);
-  const skeletonRows = Math.min(pagination.pageSize, 8);
+  // Enough rows to fill the page, so the table does not jump when data lands.
+  const skeletonRows = Math.max(1, Math.min(pagination.pageSize, 20));
   const sizes = pageSizeOptions.includes(pagination.pageSize)
     ? pageSizeOptions
     : [...pageSizeOptions, pagination.pageSize].sort((a, b) => a - b);
@@ -390,7 +423,7 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
                     {!header.isPlaceholder && column.getCanSort() ? (
                       <button
                         className={cn(
-                          "group/sort touch-target relative -mx-1.5 inline-flex h-7 items-center gap-1 rounded-md px-1.5 font-medium outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-sorted:text-foreground",
+                          "group/sort touch-target relative -ms-1.5 inline-flex h-7 items-center gap-1 rounded-md px-1.5 font-medium outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-sorted:text-foreground",
                           meta?.align === "end" && "flex-row-reverse",
                         )}
                         data-slot="data-table-sort"
@@ -409,6 +442,11 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
                             className="size-3.5 opacity-40 transition-opacity group-hover/sort:opacity-80"
                           />
                         )}
+                        {/* The icon carries the direction visually; this states it in text.
+                            `aria-sort` on the cell names the state, not the button's meaning. */}
+                        {sorted ? (
+                          <span className="sr-only">{sorted === "asc" ? messages.sortAscending : messages.sortDescending}</span>
+                        ) : null}
                       </button>
                     ) : (
                       content

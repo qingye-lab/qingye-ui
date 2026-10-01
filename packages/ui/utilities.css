@@ -26,3 +26,20 @@
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
 }
+
+/*
+ * CJK text keeps its natural spacing.
+ *
+ * The type scale carries negative tracking because that is how Latin type is
+ * set: large sizes need to be pulled in. CJK glyphs are already tightly
+ * designed, so the same tracking crowds them — most visibly in headings, but it
+ * applies to body copy too. This is declared unlayered, and therefore beats the
+ * utility classes the scale generates, including in text rendered before a
+ * component has had a chance to opt out.
+ *
+ * `:lang()` matches the element itself and its descendants, so a document-level
+ * `lang="zh-CN"` is enough; `:lang(zh)` also matches `zh-Hans` and `zh-Hant`.
+ */
+:is(:lang(zh), :lang(ja), :lang(ko)) {
+  letter-spacing: normal;
+}

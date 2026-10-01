@@ -5,7 +5,7 @@ export default {
   description: "基于 TanStack Table 的完整列表：排序、搜索、分页、行选择、批量操作、列显示切换与加载态。既可在客户端处理数据，也可交给服务端分页排序。",
   category: "数据展示",
   source: "local",
-  exports: ["DataTable", "type ColumnDef"],
+  exports: ["DataTable", "type ColumnDef", "type DataTableBulkContext", "type DataTableInstance"],
   keywords: ["data table", "datatable", "数据表格", "列表", "分页", "排序", "tanstack"],
   api: [
     {
@@ -17,7 +17,9 @@ export default {
         { name: "getRowId", type: "(row, index) => string", description: "稳定的行 id，跨排序、分页、刷新保持选择。" },
         { name: "label", type: "string", default: "\"数据表格\"", description: "表格的无障碍名称。" },
         { name: "enableGlobalFilter", type: "boolean", default: "true", description: "显示搜索框，按所有列筛选。" },
+        { name: "searchPlaceholder", type: "string", default: "\"搜索表格\"", description: "搜索框的占位文字，同时作为它的无障碍名称。" },
         { name: "globalFilter / onGlobalFilterChange", type: "string / (value) => void", description: "受控搜索词。" },
+        { name: "collationLocale", type: "string", description: "文本列的排序语言标签（如 \"zh-CN\"）。默认取 <html lang>，因此中文按拼音而非码点排序；数字与日期列不受影响。" },
         { name: "columnFilters / onColumnFiltersChange", type: "ColumnFiltersState", description: "受控列筛选，常与 toolbar 中的自定义筛选配合。" },
         { name: "enableSorting", type: "boolean", default: "true", description: "点击表头排序；列上 enableSorting: false 可单独关闭，Shift 点击多列排序。" },
         { name: "sorting / defaultSorting / onSortingChange", type: "SortingState", description: "排序状态。" },
@@ -44,15 +46,18 @@ export default {
   ],
   keyboard: [
     { keys: "Tab", description: "依次聚焦搜索框、表头排序按钮、复选框和分页按钮。" },
-    { keys: "Enter / Space", description: "在表头上切换排序：升序、降序、取消（数字列先降序）。" },
-    { keys: "Shift + Enter", description: "在已有排序上追加排序列。" },
-    { keys: "Space", description: "切换当前行或全部行的选择。" },
+    { keys: "Enter / Space", description: "焦点在表头按钮上时切换排序：升序、降序、取消（数字列先降序）。" },
+    { keys: "Shift + Enter / Shift + Space", description: "焦点在表头按钮上时把该列追加到已有排序，实现多列排序。" },
+    { keys: "Space", description: "焦点在复选框上时切换该行或全部行的选择。" },
   ],
   notes: [
     "传入 getRowId，让选择在排序、翻页和数据刷新后仍然指向同一行。",
     "数字、金额、日期列设置 meta: { align: \"end\" }，表头排序图标随之放到左侧，数值右对齐便于比较。",
+    "文本列默认按语言的排序规则（Intl.Collator）比较，中文按拼音排序；用 collationLocale 可覆盖，给列写自己的 sortingFn 也可以。",
     "服务端模式下同时设置 manualPagination、manualSorting（及需要的 manualFiltering）与 rowCount，并在 onXChange 中请求数据，请求期间传 loading。",
     "搜索、筛选或排序变化时自动回到第一页；数据减少导致页码越界时自动退回最后一页。",
-    "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露。",
+    "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露，方向同时写给排序按钮的读屏文本。",
+    "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
+    "加载态渲染与当前每页行数相同的骨架行，数据到达时表格高度不跳动。",
   ],
 } satisfies ComponentMeta;

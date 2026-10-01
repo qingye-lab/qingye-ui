@@ -60,7 +60,7 @@ export function MeterIndicator({
 }: MeterPrimitive.Indicator.Props): React.ReactElement {
   return (
     <MeterPrimitive.Indicator
-      className={cn("bg-primary transition-all duration-500", className)}
+      className={cn("bg-primary transition-all duration-(--qy-duration-slow)", className)}
       data-slot="meter-indicator"
       {...props}
     />

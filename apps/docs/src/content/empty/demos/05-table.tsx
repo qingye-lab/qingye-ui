@@ -25,7 +25,7 @@ export default function Demo() {
             <TableCell colSpan={4} className="whitespace-normal">
               <Empty className="gap-4 px-4 py-10 md:py-10">
                 <EmptyHeader>
-                  <EmptyTitle className="text-base">没有符合条件的订单</EmptyTitle>
+                  <EmptyTitle size="sm">没有符合条件的订单</EmptyTitle>
                   <EmptyDescription>筛选条件：华东区 · 待付款 · 本月</EmptyDescription>
                 </EmptyHeader>
                 <EmptyContent>

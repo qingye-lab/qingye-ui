@@ -17,7 +17,7 @@ export default function Demo() {
             <EmptyMedia variant="icon">
               <BellIcon aria-hidden="true" />
             </EmptyMedia>
-            <EmptyTitle className="text-base">全部处理完了</EmptyTitle>
+            <EmptyTitle size="sm">全部处理完了</EmptyTitle>
             <EmptyDescription>新的审批和评论会出现在这里。</EmptyDescription>
           </EmptyHeader>
         </Empty>

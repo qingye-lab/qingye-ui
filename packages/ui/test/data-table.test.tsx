@@ -90,7 +90,8 @@ test("renders skeleton rows while loading and uses rowCount for server pages", (
     <DataTable columns={columns} data={[]} loading manualPagination onPaginationChange={onPaginationChange} rowCount={87} />,
   );
   expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
-  expect(document.querySelectorAll("[data-slot=data-table-skeleton-row]")).toHaveLength(8);
+  // One skeleton row per row the page will hold, so the table does not jump.
+  expect(document.querySelectorAll("[data-slot=data-table-skeleton-row]")).toHaveLength(10);
   expect(screen.getByRole("button", { name: "下一页" })).toBeDisabled();
 
   rerender(
@@ -106,4 +107,80 @@ test("hides columns through controlled visibility", () => {
   expect(screen.queryByRole("columnheader", { name: /价格/ })).not.toBeInTheDocument();
   rerender(<DataTable columns={columns} columnVisibility={{ price: true }} data={devices} />);
   expect(screen.getByRole("columnheader", { name: /价格/ })).toBeInTheDocument();
+});
+
+const cellText = (row: HTMLElement, index: number) => row.querySelectorAll("td")[index]?.textContent?.trim();
+
+test("appends a second column to the sort with Shift", async () => {
+  const user = userEvent.setup();
+  render(<DataTable columns={columns} data={devices} getRowId={(row) => row.id} />);
+  const nameHeader = screen.getByRole("columnheader", { name: /设备/ });
+  const priceHeader = screen.getByRole("columnheader", { name: /价格/ });
+
+  await user.click(nameHeader.querySelector("button")!);
+  await user.keyboard("{Shift>}");
+  await user.click(priceHeader.querySelector("button")!);
+  await user.keyboard("{/Shift}");
+
+  expect(nameHeader).toHaveAttribute("aria-sort", "ascending");
+  // The price column is numeric, so its own first click goes descending.
+  expect(priceHeader).toHaveAttribute("aria-sort", "descending");
+});
+
+test("selects a page size and keeps selection across a sort", async () => {
+  const user = userEvent.setup();
+  render(<DataTable columns={columns} data={devices} enableRowSelection getRowId={(row) => row.id} />);
+  expect(bodyRows()).toHaveLength(10);
+
+  await user.click(screen.getByRole("combobox", { name: "每页行数" }));
+  await user.click(await screen.findByRole("option", { name: "20" }));
+  expect(bodyRows()).toHaveLength(20);
+  expect(screen.getByText("第 1 / 2 页，共 23 条")).toBeInTheDocument();
+
+  // The checked row must still be the same device after the order changes.
+  // Cell 0 is the selection checkbox, so the name sits in cell 1.
+  const first = bodyRows()[0]!;
+  const name = cellText(first, 1);
+  await user.click(within(first).getByRole("checkbox", { name: "选择此行" }));
+  await user.click(screen.getByRole("columnheader", { name: /设备/ }).querySelector("button")!);
+
+  const stillSelected = bodyRows().find((row) => cellText(row, 1) === name);
+  expect(stillSelected).toHaveAttribute("data-state", "selected");
+});
+
+test("collates Chinese text by locale instead of code point", async () => {
+  const user = userEvent.setup();
+  // Code-point order is 上海 北京 厦门 成都 杭州 深圳 苏州;
+  // zh-CN collation is pinyin: 北京 成都 杭州 厦门 上海 深圳 苏州.
+  const names = ["上海云杉科技", "杭州青禾文化", "成都远山物流", "深圳明川电子", "北京拾光影业", "苏州木与石家居", "厦门潮汐咖啡"];
+  const rows = names.map((name, index) => ({ id: `c${index}`, name, price: index }));
+  render(<DataTable collationLocale="zh-CN" columns={columns} data={rows} getRowId={(row) => row.id} />);
+
+  await user.click(screen.getByRole("columnheader", { name: /设备/ }).querySelector("button")!);
+  expect(bodyRows().map((row) => cellText(row, 0))).toEqual([
+    "北京拾光影业",
+    "成都远山物流",
+    "杭州青禾文化",
+    "厦门潮汐咖啡",
+    "上海云杉科技",
+    "深圳明川电子",
+    "苏州木与石家居",
+  ]);
+});
+
+test("keeps numeric columns numeric and states the sort direction", async () => {
+  const user = userEvent.setup();
+  render(<DataTable columns={columns} data={devices} getRowId={(row) => row.id} />);
+  const priceHeader = screen.getByRole("columnheader", { name: /价格/ });
+  await user.click(priceHeader.querySelector("button")!);
+
+  // Numbers must not be collated as strings ("9" > "37").
+  const prices = bodyRows().map((row) => Number(cellText(row, 1)));
+  expect(prices).toEqual([...prices].sort((a, b) => b - a));
+
+  // The icon carries direction visually; the button also names it.
+  expect(priceHeader).toHaveAttribute("aria-sort", "descending");
+  expect(within(priceHeader).getByText("降序")).toBeInTheDocument();
+  await user.click(priceHeader.querySelector("button")!);
+  expect(within(priceHeader).getByText("升序")).toBeInTheDocument();
 });

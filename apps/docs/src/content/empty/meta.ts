@@ -25,7 +25,18 @@ export default {
         },
       ],
     },
-    { name: "EmptyTitle", description: "一句话说明当前状态，字号 xl / 600。" },
+    {
+      name: "EmptyTitle",
+      description: "一句话说明当前状态。默认 18px / 600；嵌在卡片或表格里时用 size=\"sm\" 降到正文大小。",
+      props: [
+        {
+          name: "size",
+          type: '"default" | "sm"',
+          default: '"default"',
+          description: "sm 使用正文大小，适合卡片、表格单元格等已有层级标题的容器。",
+        },
+      ],
+    },
     { name: "EmptyDescription", description: "补充原因或下一步；内部的 <a> 自动带下划线。" },
     { name: "EmptyContent", description: "操作区，放按钮、搜索框或链接，最大宽度 24rem。" },
   ],
@@ -33,6 +44,6 @@ export default {
     "标题说明“现在是什么情况”，说明文字告诉用户“接下来能做什么”，再配一个主要操作；不要只写“暂无数据”。",
     "筛选或搜索无结果时，在标题里带上关键词，并提供“清除筛选”的出口。",
     "图标是装饰，加 aria-hidden=\"true\"；需要读屏感知的信息写进标题和说明。",
-    "嵌在卡片、表格等容器里时收紧上下留白，并把标题字号降到 text-base，避免喧宾夺主。",
+    "嵌在卡片、表格等容器里时收紧上下留白，并给标题加 size=\"sm\"，避免喧宾夺主。",
   ],
 } satisfies ComponentMeta;

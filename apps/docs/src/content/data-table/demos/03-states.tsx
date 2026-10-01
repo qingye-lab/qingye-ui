@@ -50,7 +50,7 @@ export default function Demo() {
               <EmptyMedia variant="icon">
                 <ServerIcon />
               </EmptyMedia>
-              <EmptyTitle className="text-base">还没有实例</EmptyTitle>
+              <EmptyTitle size="sm">还没有实例</EmptyTitle>
               <EmptyDescription>创建第一台云服务器后，它会出现在这里。</EmptyDescription>
             </EmptyHeader>
             <EmptyContent>

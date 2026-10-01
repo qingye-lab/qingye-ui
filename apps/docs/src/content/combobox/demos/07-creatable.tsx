@@ -40,7 +40,7 @@ export default function Demo() {
           {(value: Label[]) => (
             <>
               {value.map((item) => (
-                <ComboboxChip key={item.value} aria-label={item.label}>
+                <ComboboxChip key={item.value} aria-label={`移除 ${item.label}`}>
                   {item.label}
                 </ComboboxChip>
               ))}

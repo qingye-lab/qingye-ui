@@ -64,7 +64,7 @@ export function ProgressIndicator({
   return (
     <ProgressPrimitive.Indicator
       className={cn(
-        "bg-primary transition-all duration-500",
+        "bg-primary transition-all duration-(--qy-duration-slow)",
         // Indeterminate (value={null}): a soft band sweeps the track, reusing the
         // skeleton keyframes; with reduced motion it only breathes in opacity.
         "data-indeterminate:h-full data-indeterminate:w-full data-indeterminate:animate-skeleton data-indeterminate:bg-transparent data-indeterminate:bg-[linear-gradient(90deg,transparent_28%,var(--color-primary)_42%,var(--color-primary)_58%,transparent_72%)] data-indeterminate:bg-size-[200%_100%] motion-reduce:data-indeterminate:animate-pulse motion-reduce:data-indeterminate:bg-primary/40 motion-reduce:data-indeterminate:bg-none",

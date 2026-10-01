@@ -12,10 +12,10 @@
       "adaptations": [
         "Local imports; existing Lucide Spinner dependency",
         "Expose loading as aria-busy",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Hide the existing decorative Spinner from the loading button accessible name",
         "Mark button variants as qy-pressable so composed triggers retain press feedback when their data-slot changes",
-        "Drop the outer drop shadow on filled variants; depth comes from the fill and inner highlight only"
+        "Drop the outer drop shadow on filled variants; depth comes from the fill and inner highlight only",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -26,7 +26,7 @@
       "adaptedSha256": "bc312984d30bbe87bf157881507c56aba46f8572f3e60ac3ca964e91f8713006",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -37,7 +37,7 @@
       "adaptedSha256": "00b6fe562a84b9312a74334dbc7796113c22b10dba8fec48b210b3b17f108a42",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ],
       "retrieved": "2026-10-01"
     },
@@ -49,7 +49,7 @@
       "adaptedSha256": "59832a047c9b33764043267e679f7ef69b913b4106016f1240e702908486dbfa",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -60,8 +60,8 @@
       "adaptedSha256": "d88150e4b06fc9548cf25815a207ab54933476abe9ac993e262b433ce5fdcdf2",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
-        "Stack AlertAction on its own row at phone widths: full-row column placement instead of a two-column span, which left the action beside the text in the three-column icon + action grid"
+        "Stack AlertAction on its own row at phone widths: full-row column placement instead of a two-column span, which left the action beside the text in the three-column icon + action grid",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -69,10 +69,12 @@
       "registry": "https://coss.com/ui/r/card.json",
       "upstreamPath": "apps/ui/registry/default/ui/card.tsx",
       "upstreamSha256": "b59dbc0bd5d61694fcf1948fb8134795b0f5a1bf0a28d8d6bc817297c73a006e",
-      "adaptedSha256": "159362169a9daac6b9a7ecbb715704c73f77e7cbc128645da91a198c0899a2d5",
+      "adaptedSha256": "167ba5989f49262ae70f795141114fc1c69dc59f127a26df32e2ccf64ad9102a",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "CardTitle uses the text-title step so it follows the type scale",
+        "Card takes a size prop that drives its padding token"
       ]
     },
     {
@@ -84,8 +86,8 @@
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
-        "Keep the indicator mounted for interruptible check and uncheck opacity/scale transitions; reduced motion stays static"
+        "Keep the indicator mounted for interruptible check and uncheck opacity/scale transitions; reduced motion stays static",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -96,7 +98,7 @@
       "adaptedSha256": "5967968d75df4fadddc630058b023827a5a264b06ecfdd4e95fd19c31786f354",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -108,7 +110,8 @@
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes",
+        "Placeholder text uses 72% opacity, matching the other form controls"
       ]
     },
     {
@@ -119,9 +122,9 @@
       "adaptedSha256": "47314790ee7529fd73d135e583d02ac26875705f6a5dc6c831994c221a34dd2e",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Touch hit area on the tab and list for coarse pointers",
-        "Position the indicator from the tab top; touch-target padding inflated the list scrollHeight and shifted the bottom-anchored indicator"
+        "Position the indicator from the tab top; touch-target padding inflated the list scrollHeight and shifted the bottom-anchored indicator",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -132,9 +135,9 @@
       "adaptedSha256": "0449430d025977b6458df9b8fc1e2aeaff312e9e90b4660d91ce2a56e23c9432",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Touch hit area on options for coarse pointers",
-        "Animate colour and background too, so selection is not an instant switch"
+        "Animate colour and background too, so selection is not an instant switch",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -146,7 +149,7 @@
       "adaptations": [
         "Local imports",
         "Forward existing alignOffset positioning prop",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -158,8 +161,8 @@
       "adaptations": [
         "Local imports",
         "Chinese close label",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -170,7 +173,7 @@
       "adaptedSha256": "6ebf0573a3d5e1bcf9ce5b02f787bc925e4602d138d92bc5a5c8a6b4aaf94a2d",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -182,7 +185,7 @@
       "adaptations": [
         "Local imports",
         "Lucide icons replace inline SVG with the same size and stroke weight",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -218,12 +221,12 @@
       "adaptedSha256": "fd6edf4cbbfce88ff6d9f09b9c5731e475e08f39dd1cac19e41d46f3d8f433f7",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Lucide check icon replaces inline SVG",
         "Chinese chip removal label",
         "Retain existing Base UI 1.7 two-parameter Root API; omit newer createItems helper",
         "Move the visual shell onto the Base UI Popup so its entrance and exit transitions are observed by the primitive",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -234,9 +237,9 @@
       "adaptedSha256": "73533afe4bc1e5ed12559d9a2c3d3f530fb6c6997e17a498600f2d61896f65e2",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Lucide cursor icon replaces inline SVG; use semantic shadow",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -247,12 +250,12 @@
       "adaptedSha256": "25df389bc418ad6fb8679c9897acee6409cec9c397ff4cb3ed34547147a2421e",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Explicit optional undefined types for the project strict TypeScript contract",
         "Add a keyboard-accessible Chinese close button using Toast.Close",
         "Chinese toast viewport accessible label",
         "Expose toast-root slot for shared timing and reduced-motion behavior",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -263,10 +266,10 @@
       "adaptedSha256": "c7b46fff0cf17f7844e8ed25fe2942cf47529aeba4bd91d56c01597ae083cdb6",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
         "Use DayPicker locale labels and month formatters; respect configured locale rather than browser defaults; keep 44px coarse-pointer cells",
-        "Inherit default date color from the Calendar root so later utility chunks cannot override selected contrast; keep enabled outside days and weekdays at the semantic muted color without alpha"
+        "Inherit default date color from the Calendar root so later utility chunks cannot override selected contrast; keep enabled outside days and weekdays at the semantic muted color without alpha",
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -277,7 +280,7 @@
       "adaptedSha256": "556da949009fc9cdbdb5eed11b0087d1e0c85ba7b7480e9678c158cd6e39764a",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Keep upstream light and dark treatment; the library ships both themes"
       ]
     },
     {
@@ -405,9 +408,11 @@
       "registry": "https://coss.com/ui/r/empty.json",
       "upstreamPath": "apps/ui/registry/default/ui/empty.tsx",
       "upstreamSha256": "57341b5a985ba2cc229e4832ab8624b060d172706b678dd99a682fbb476d4aa9",
-      "adaptedSha256": "ca04af8c2a94233dd72cf737c63ce9ef7560b8c3563da06926e13e3be6ad054f",
+      "adaptedSha256": "7cb447658bc5cc0003408fc0d4c0240650d7b08eb47b159e287a49174fac5f9d",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "EmptyTitle takes a size prop instead of ad-hoc font sizes in call sites",
+        "Stop spreading props onto both the wrapper and the media element"
       ]
     },
     {

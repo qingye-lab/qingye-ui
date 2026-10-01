@@ -66,5 +66,6 @@ export default {
     "单选时若希望打开后直接输入新关键词，用受控的 inputValue，在 onOpenChange 里清空。",
     "远程搜索时设置 filter={null}，用 ComboboxStatus 播报「正在搜索」等状态。",
     "多选标签的移除按钮名称来自 UI 语言（默认「移除」）。",
+    "移除按钮继承所在 ComboboxChip 的 aria-label，所以标签的 aria-label 要写成动作加内容（如「移除 生产环境」），否则读屏只能听到一串相同的「移除」。",
   ],
 } satisfies ComponentMeta;
