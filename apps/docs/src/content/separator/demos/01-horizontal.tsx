@@ -1,4 +1,4 @@
-import { Separator } from "@yanqing/ui";
+import { Separator } from "@yanqing/ui/components/separator";
 
 export const meta = { title: "横向" };
 

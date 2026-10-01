@@ -1,18 +1,7 @@
-import {
-  Badge,
-  Empty,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  Kbd,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
+import { Kbd } from "@yanqing/ui/components/kbd";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 import { CodeXmlIcon, LayersIcon } from "lucide-react";
 import { Component, use, type ReactNode } from "react";
 import { useParams } from "react-router-dom";

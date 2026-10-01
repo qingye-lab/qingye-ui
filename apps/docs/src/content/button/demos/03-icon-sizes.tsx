@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
 import { PlusIcon } from "lucide-react";
 
 export const meta = {

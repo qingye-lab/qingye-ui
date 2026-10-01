@@ -1,4 +1,6 @@
-import { Button, Checkbox, Progress } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Progress } from "@yanqing/ui/components/progress";
 import { RotateCcwIcon } from "lucide-react";
 import { Fragment, useId, useState } from "react";
 import { A, Code, Facts, H2, H3, P, PageHeader, Ul } from "@/components/prose";

@@ -1,4 +1,4 @@
-import { CodeBlock } from "@yanqing/ui";
+import { CodeBlock } from "@yanqing/ui/components/code-block";
 
 export const meta = { title: "基础", description: "没有标题栏时，复制按钮在右上角，悬停或聚焦时出现。" };
 

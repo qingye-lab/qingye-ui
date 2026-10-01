@@ -1,4 +1,4 @@
-import { OTPField, OTPFieldInput } from "@yanqing/ui";
+import { OTPField, OTPFieldInput } from "@yanqing/ui/components/otp-field";
 
 export const meta = { title: "状态", description: "错误、遮挡输入与禁用。" };
 

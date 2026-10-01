@@ -1,4 +1,5 @@
-import { Button, ProgressCircle } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { ProgressCircle } from "@yanqing/ui/components/progress-circle";
 import { useEffect, useState } from "react";
 
 export const meta = { title: "不确定进度与动态更新", description: "value 为 null 时旋转；数值变化时进度弧平滑过渡。" };

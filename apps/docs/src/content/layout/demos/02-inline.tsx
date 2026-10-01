@@ -1,4 +1,6 @@
-import { Badge, Button, Inline, Stack, Text } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Inline, Stack, Text } from "@yanqing/ui/components/layout";
 import { PlusIcon } from "lucide-react";
 
 export const meta = { title: "Inline", description: "标题与操作两端对齐；标签一行放不下时自动换行。" };

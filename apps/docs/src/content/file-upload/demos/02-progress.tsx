@@ -1,4 +1,5 @@
-import { Button, FileUpload } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { FileUpload } from "@yanqing/ui/components/file-upload";
 import { RotateCwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 

@@ -1,19 +1,11 @@
-import {
-  Button,
-  Checkbox,
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  Fieldset,
-  FieldsetLegend,
-  Form,
-  Input,
-  Switch,
-  Textarea,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@yanqing/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
+import { Form } from "@yanqing/ui/components/form";
+import { Input } from "@yanqing/ui/components/input";
+import { Switch } from "@yanqing/ui/components/switch";
+import { Textarea } from "@yanqing/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = {

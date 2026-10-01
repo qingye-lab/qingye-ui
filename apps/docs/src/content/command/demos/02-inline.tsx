@@ -1,4 +1,4 @@
-import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandPanel } from "@yanqing/ui";
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandPanel } from "@yanqing/ui/components/command";
 import { CheckIcon } from "lucide-react";
 import { useState } from "react";
 

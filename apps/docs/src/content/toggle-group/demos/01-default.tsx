@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
 
 export const meta = { title: "单选", description: "默认一次只按下一项，适合对齐方式、视图模式。" };

@@ -1,4 +1,5 @@
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, Label } from "@yanqing/ui";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@yanqing/ui/components/combobox";
+import { Label } from "@yanqing/ui/components/label";
 import { useState } from "react";
 
 export const meta = { title: "基础用法", description: "输入即筛选，方向键选择，回车确认。" };

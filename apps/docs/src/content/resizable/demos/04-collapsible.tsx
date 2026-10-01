@@ -1,10 +1,7 @@
-import {
-  Button,
-  ResizableHandle,
-  ResizablePanel,
-  type ResizablePanelHandle,
-  ResizablePanelGroup,
-} from "@yanqing/ui";
+import { ResizablePanel } from "@yanqing/ui/components/resizable";
+import { Button } from "@yanqing/ui/components/button";
+import { ResizableHandle, ResizablePanelGroup } from "@yanqing/ui/components/resizable";
+import { type ResizablePanelHandle } from "@yanqing/ui";
 import { HashIcon, PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 import { useRef, useState } from "react";
 

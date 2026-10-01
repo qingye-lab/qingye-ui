@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, Input } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = { title: "禁用", description: "Field 的 disabled 同时作用于标签与控件。" };
 

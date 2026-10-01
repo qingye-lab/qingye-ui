@@ -1,4 +1,5 @@
-import { FileUpload, type FileRejection } from "@yanqing/ui";
+import type { FileRejection } from "@yanqing/ui/components/file-upload";
+import { FileUpload } from "@yanqing/ui/components/file-upload";
 import { useState } from "react";
 
 export const meta = {

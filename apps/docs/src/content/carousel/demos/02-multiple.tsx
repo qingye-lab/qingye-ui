@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@yanqing/ui";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@yanqing/ui/components/carousel";
 
 export const meta = {
   title: "一次多张",

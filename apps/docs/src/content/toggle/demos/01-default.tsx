@@ -1,4 +1,4 @@
-import { Toggle } from "@yanqing/ui";
+import { Toggle } from "@yanqing/ui/components/toggle";
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 
 export const meta = { title: "默认", description: "按下后保持浅色填充，再次点击恢复。" };

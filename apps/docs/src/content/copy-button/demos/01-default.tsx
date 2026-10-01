@@ -1,4 +1,4 @@
-import { CopyButton } from "@yanqing/ui";
+import { CopyButton } from "@yanqing/ui/components/copy-button";
 
 export const meta = { title: "默认", description: "点击后图标变为对勾，2 秒后恢复；读屏会播报“已复制”。" };
 

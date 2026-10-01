@@ -1,4 +1,4 @@
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput, NumberFieldScrubArea } from "@yanqing/ui";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput, NumberFieldScrubArea } from "@yanqing/ui/components/number-field";
 
 export const meta = { title: "拖动调整", description: "在标签上左右拖动即可改值，适合设计、调参类界面。" };
 

@@ -1,4 +1,4 @@
-import { Badge } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
 
 export const meta = { title: "尺寸", description: "移动端自动加高，≥640px 回到桌面尺寸。" };
 

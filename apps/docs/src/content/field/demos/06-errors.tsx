@@ -1,4 +1,5 @@
-import { Field, FieldError, FieldLabel, Input } from "@yanqing/ui";
+import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 import { useState } from "react";
 
 export const meta = {

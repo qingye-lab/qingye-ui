@@ -1,4 +1,5 @@
-import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemHeader, ItemMedia, ItemTitle } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemHeader, ItemMedia, ItemTitle } from "@yanqing/ui/components/item";
 import { MapPinIcon } from "lucide-react";
 
 export const meta = {

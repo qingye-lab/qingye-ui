@@ -1,4 +1,5 @@
-import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from "@yanqing/ui/components/item";
 import { BellRingIcon, ShieldCheckIcon, WalletIcon } from "lucide-react";
 
 export const meta = { title: "样式", description: "default 透明、outline 卡片面、muted 浅底。" };

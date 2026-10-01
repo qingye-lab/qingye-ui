@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui";
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui/components/accordion";
 import { BellIcon, LockIcon, PaletteIcon } from "lucide-react";
 
 export const meta = { title: "放在卡片中", description: "加上边框与内边距，作为设置页的分组。" };

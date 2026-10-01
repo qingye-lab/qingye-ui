@@ -1,4 +1,5 @@
-import { DateRangePicker, Field, FieldLabel } from "@yanqing/ui";
+import { DateRangePicker } from "@yanqing/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
 
 export const meta = { title: "基础用法", description: "第一次点击定起点，第二次点击定终点；桌面端并排显示两个月。" };
 

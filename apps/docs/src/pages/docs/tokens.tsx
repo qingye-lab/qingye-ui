@@ -1,7 +1,9 @@
 import themeCss from "@yanqing/ui/theme.css?raw";
 import componentsCss from "@yanqing/ui/tokens/components.css?raw";
 import semanticCss from "@yanqing/ui/tokens/semantic.css?raw";
-import { Button, cn, useMediaQuery } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { cn } from "@yanqing/ui/utils";
+import { useMediaQuery } from "@yanqing/ui/hooks/use-media-query";
 import { PlayIcon, RotateCcwIcon } from "lucide-react";
 import { Fragment, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { A, Code, H2, H3, P, PageHeader } from "@/components/prose";

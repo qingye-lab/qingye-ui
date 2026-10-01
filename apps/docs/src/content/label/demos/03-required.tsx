@@ -1,4 +1,5 @@
-import { Input, Label } from "@yanqing/ui";
+import { Input } from "@yanqing/ui/components/input";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "必填与选填", description: "用星号或“选填”文字标示，并在控件上设 required。" };
 

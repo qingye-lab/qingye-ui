@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from "@yanqing/ui";
+import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
 
 export const meta = { title: "单键与组合" };
 

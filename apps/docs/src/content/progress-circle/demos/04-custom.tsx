@@ -1,4 +1,5 @@
-import { Card, CardPanel, ProgressCircle } from "@yanqing/ui";
+import { Card, CardPanel } from "@yanqing/ui/components/card";
+import { ProgressCircle } from "@yanqing/ui/components/progress-circle";
 
 export const meta = {
   title: "自定义中心内容",

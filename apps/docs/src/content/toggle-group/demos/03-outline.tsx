@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui/components/toggle-group";
 
 export const meta = { title: "描边", description: "outline 把子项拼成一个整体，可用分隔线区分。" };
 

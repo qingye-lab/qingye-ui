@@ -1,4 +1,8 @@
-import { Button, Field, FieldDescription, FileUpload, Input, Label } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldDescription } from "@yanqing/ui/components/field";
+import { FileUpload } from "@yanqing/ui/components/file-upload";
+import { Input } from "@yanqing/ui/components/input";
+import { Label } from "@yanqing/ui/components/label";
 import { useState, type FormEvent } from "react";
 
 export const meta = { title: "组合：提交工单", description: "通过 name 参与原生表单提交，FormData 中直接拿到 File。" };

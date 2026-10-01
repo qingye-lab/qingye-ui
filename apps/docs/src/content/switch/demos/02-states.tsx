@@ -1,4 +1,5 @@
-import { Label, Switch } from "@yanqing/ui";
+import { Label } from "@yanqing/ui/components/label";
+import { Switch } from "@yanqing/ui/components/switch";
 
 export const meta = { title: "状态" };
 

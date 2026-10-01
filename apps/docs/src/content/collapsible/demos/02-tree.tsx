@@ -1,4 +1,4 @@
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@yanqing/ui";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@yanqing/ui/components/collapsible";
 import { ChevronRightIcon, FileIcon, FolderIcon } from "lucide-react";
 
 export const meta = { title: "自定义触发器", description: "触发器完全自定：这里做成文件夹节点。" };

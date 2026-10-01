@@ -1,4 +1,5 @@
-import { ScrollArea, Separator } from "@yanqing/ui";
+import { ScrollArea } from "@yanqing/ui/components/scroll-area";
+import { Separator } from "@yanqing/ui/components/separator";
 import { Fragment } from "react";
 
 export const meta = { title: "纵向" };

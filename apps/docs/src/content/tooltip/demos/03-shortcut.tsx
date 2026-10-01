@@ -1,4 +1,6 @@
-import { Button, Kbd, KbdGroup, Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
 import { SaveIcon, SearchIcon } from "lucide-react";
 
 export const meta = { title: "附带快捷键", description: "在提示里用 Kbd 标出快捷键，帮助用户逐步记住。" };

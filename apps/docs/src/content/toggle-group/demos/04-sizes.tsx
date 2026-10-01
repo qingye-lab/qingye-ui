@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui/components/toggle-group";
 import { LayoutGridIcon, ListIcon } from "lucide-react";
 
 export const meta = { title: "尺寸", description: "size 统一作用于组内所有项。" };

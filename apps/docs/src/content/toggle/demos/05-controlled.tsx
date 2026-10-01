@@ -1,4 +1,4 @@
-import { Toggle } from "@yanqing/ui";
+import { Toggle } from "@yanqing/ui/components/toggle";
 import { BellIcon, BellOffIcon } from "lucide-react";
 import { useState } from "react";
 

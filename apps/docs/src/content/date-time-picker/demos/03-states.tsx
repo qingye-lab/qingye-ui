@@ -1,4 +1,6 @@
-import { DateTimePicker, Field, FieldDescription, FieldError, Label } from "@yanqing/ui";
+import { DateTimePicker } from "@yanqing/ui/components/date-time-picker";
+import { Field, FieldDescription, FieldError } from "@yanqing/ui/components/field";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "状态", description: "精确到秒、错误、只读与禁用。" };
 

@@ -1,4 +1,5 @@
-import { Checkbox, Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
 
 export const meta = { title: "带说明", description: "放进 Field，说明会作为复选框的描述读出。" };
 

@@ -1,19 +1,7 @@
-import {
-  Badge,
-  Button,
-  CardFrame,
-  CardFrameAction,
-  CardFrameDescription,
-  CardFrameFooter,
-  CardFrameHeader,
-  CardFrameTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { CardFrame, CardFrameAction, CardFrameDescription, CardFrameFooter, CardFrameHeader, CardFrameTitle } from "@yanqing/ui/components/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 import { DownloadIcon } from "lucide-react";
 
 export const meta = {

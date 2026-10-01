@@ -1,4 +1,4 @@
-import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "@yanqing/ui";
+import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "@yanqing/ui/components/autocomplete";
 
 export const meta = { title: "尺寸与禁用" };
 

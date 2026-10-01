@@ -1,4 +1,6 @@
-import { Button, Field, FieldGroup, FieldLabel, FieldSeparator, Input } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = { title: "分组与分隔", description: "FieldGroup 统一纵向间距；FieldSeparator 可带一段说明文字。" };
 

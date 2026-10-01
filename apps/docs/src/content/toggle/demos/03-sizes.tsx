@@ -1,4 +1,4 @@
-import { Toggle } from "@yanqing/ui";
+import { Toggle } from "@yanqing/ui/components/toggle";
 import { StarIcon } from "lucide-react";
 
 export const meta = { title: "尺寸" };

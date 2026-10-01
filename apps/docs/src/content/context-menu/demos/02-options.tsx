@@ -1,14 +1,4 @@
-import {
-  ContextMenu,
-  ContextMenuCheckboxItem,
-  ContextMenuGroup,
-  ContextMenuGroupLabel,
-  ContextMenuPopup,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from "@yanqing/ui";
+import { ContextMenu, ContextMenuCheckboxItem, ContextMenuGroup, ContextMenuGroupLabel, ContextMenuPopup, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuTrigger } from "@yanqing/ui/components/context-menu";
 
 export const meta = { title: "勾选与单选", description: "在看板空白处右键，调整视图选项；切换时菜单保持打开。" };
 

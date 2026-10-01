@@ -1,19 +1,9 @@
-import type { CSSProperties } from "react";
+import { SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton } from "@yanqing/ui/components/sidebar";
+import { SidebarProvider } from "@yanqing/ui/components/sidebar";
+import { SidebarTrigger } from "@yanqing/ui/components/sidebar";
+import { CSSProperties } from "react";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarInput,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSkeleton,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@yanqing/ui";
+  Sidebar } from "@yanqing/ui";
 import { BookOpenIcon, FileTextIcon, StarIcon } from "lucide-react";
 
 export const meta = {

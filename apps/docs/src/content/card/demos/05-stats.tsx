@@ -1,4 +1,5 @@
-import { Badge, Card, CardAction, CardDescription, CardHeader, CardPanel } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Card, CardAction, CardDescription, CardHeader, CardPanel } from "@yanqing/ui/components/card";
 import { TrendingUpIcon } from "lucide-react";
 
 export const meta = {

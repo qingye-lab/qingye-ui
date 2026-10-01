@@ -1,4 +1,5 @@
-import { type ColumnDef, DataTable, type PaginationState, type SortingState } from "@yanqing/ui";
+import { DataTable } from "@yanqing/ui/components/data-table";
+import { type ColumnDef, type PaginationState, type SortingState } from "@yanqing/ui";
 import { useEffect, useState } from "react";
 
 export const meta = {

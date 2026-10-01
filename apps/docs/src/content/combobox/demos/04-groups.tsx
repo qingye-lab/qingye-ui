@@ -1,15 +1,4 @@
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxEmpty,
-  ComboboxGroup,
-  ComboboxGroupLabel,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxPopup,
-  ComboboxSeparator,
-} from "@yanqing/ui";
+import { Combobox, ComboboxCollection, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSeparator } from "@yanqing/ui/components/combobox";
 import { Fragment } from "react";
 
 export const meta = { title: "分组", description: "筛选后空的分组会自动隐藏。" };

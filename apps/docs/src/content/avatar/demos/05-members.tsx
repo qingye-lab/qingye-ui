@@ -1,16 +1,7 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Badge,
-  Button,
-  Card,
-  CardAction,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-} from "@yanqing/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardAction, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
 import { UserPlusIcon } from "lucide-react";
 
 export const meta = { title: "组合：成员列表", description: "头像旁已有姓名时，图片 alt 留空，避免读屏重复朗读。" };

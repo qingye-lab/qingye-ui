@@ -1,4 +1,7 @@
-import { Avatar, AvatarFallback, Badge, HoverCard, HoverCardContent, HoverCardTrigger } from "@yanqing/ui";
+import { Avatar } from "@yanqing/ui/components/avatar";
+import { AvatarFallback } from "@yanqing/ui/components/avatar";
+import { Badge } from "@yanqing/ui/components/badge";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@yanqing/ui";
 import { CalendarDaysIcon, MapPinIcon } from "lucide-react";
 
 export const meta = { title: "成员资料", description: "悬停或用 Tab 聚焦 @林悦 查看资料卡。" };

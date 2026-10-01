@@ -1,4 +1,5 @@
-import { Card, CardPanel, Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui";
+import { Card, CardPanel } from "@yanqing/ui/components/card";
+import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui/components/stat";
 
 export const meta = { title: "基础", description: "放进 Card，数值使用等宽数字，变化量注明对比周期。" };
 

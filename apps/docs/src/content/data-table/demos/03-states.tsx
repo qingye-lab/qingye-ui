@@ -1,4 +1,11 @@
-import { Button, type ColumnDef, DataTable, Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle, Label, Switch } from "@yanqing/ui";
+import { EmptyContent, EmptyDescription, EmptyHeader } from "@yanqing/ui/components/empty";
+import { EmptyMedia } from "@yanqing/ui/components/empty";
+import { Button } from "@yanqing/ui/components/button";
+import { DataTable } from "@yanqing/ui/components/data-table";
+import { Empty, EmptyTitle } from "@yanqing/ui/components/empty";
+import { Label } from "@yanqing/ui/components/label";
+import { Switch } from "@yanqing/ui/components/switch";
+import { type ColumnDef } from "@yanqing/ui";
 import { ServerIcon } from "lucide-react";
 import { useState } from "react";
 

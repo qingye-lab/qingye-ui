@@ -1,4 +1,4 @@
-import { AspectRatio } from "@yanqing/ui";
+import { AspectRatio } from "@yanqing/ui/components/aspect-ratio";
 
 export const meta = { title: "基础用法", description: "16:9 的封面，圆角与裁切写在 AspectRatio 上。" };
 

@@ -1,4 +1,5 @@
-import { Button, toastManager } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { toastManager } from "@yanqing/ui/components/toast";
 
 export const meta = {
   title: "原地更新",

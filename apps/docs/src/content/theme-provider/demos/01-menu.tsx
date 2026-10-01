@@ -1,14 +1,8 @@
-import {
-  Button,
-  Menu,
-  MenuPopup,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuTrigger,
-  type Theme,
-  useTheme,
-  useUILocale,
-} from "@yanqing/ui";
+import type { Theme } from "@yanqing/ui/components/theme-provider";
+import { Button } from "@yanqing/ui/components/button";
+import { Menu, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@yanqing/ui/components/menu";
+import { useTheme } from "@yanqing/ui/components/theme-provider";
+import { useUILocale } from "@yanqing/ui/locale";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 
 export const meta = {

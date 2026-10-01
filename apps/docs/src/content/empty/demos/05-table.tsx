@@ -1,18 +1,7 @@
-import {
-  Button,
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyTitle,
-  Frame,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "@yanqing/ui/components/empty";
+import { Frame } from "@yanqing/ui/components/frame";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 
 export const meta = {
   title: "在表格中",

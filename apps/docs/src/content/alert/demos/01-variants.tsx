@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from "@yanqing/ui";
+import { Alert, AlertDescription, AlertTitle } from "@yanqing/ui/components/alert";
 import { CircleAlertIcon, CircleCheckIcon, InfoIcon, TerminalIcon, TriangleAlertIcon } from "lucide-react";
 
 export const meta = { title: "类型", description: "default、info、success、warning、error 五种语义。" };

@@ -1,20 +1,9 @@
-import {
-  Button,
-  Field,
-  FieldLabel,
-  Form,
-  Input,
-  Sheet,
-  SheetClose,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-  Textarea,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Form } from "@yanqing/ui/components/form";
+import { Input } from "@yanqing/ui/components/input";
+import { Sheet, SheetClose, SheetDescription, SheetFooter, SheetHeader, SheetPanel, SheetPopup, SheetTitle, SheetTrigger } from "@yanqing/ui/components/sheet";
+import { Textarea } from "@yanqing/ui/components/textarea";
 
 export const meta = { title: "基础用法", description: "默认从右侧滑入，适合在列表旁新建或编辑一条记录。" };
 

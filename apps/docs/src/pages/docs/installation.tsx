@@ -1,9 +1,12 @@
+import { ToastProvider } from "@yanqing/ui/components/toast";
+import { TooltipProvider } from "@yanqing/ui/components/tooltip";
 import { CodeBlock } from "@/components/code-block";
 import { InstallTabs } from "@/components/install-tabs";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
 import { releaseTarball, SITE } from "@/lib/site";
 
-const providers = `import { ThemeProvider, ToastProvider, TooltipProvider } from "@yanqing/ui";
+const providers = `import { ThemeProvider } from "@yanqing/ui";
+import { toastManager } from "@yanqing/ui/components/toast";
 import { createRoot } from "react-dom/client";
 import { App } from "./app";
 import "./index.css";
@@ -15,10 +18,9 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </ToastProvider>
     </TooltipProvider>
-  </ThemeProvider>,
-);`;
+  </ThemeProvider>, );`;
 
-const usage = `import { Button, toastManager } from "@yanqing/ui";
+const usage = `import { Button } from "@yanqing/ui";
 
 export function SaveButton() {
   return (

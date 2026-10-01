@@ -1,4 +1,5 @@
-import { Button, Group, GroupSeparator } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Group, GroupSeparator } from "@yanqing/ui/components/group";
 import { ArchiveIcon, ClockIcon, ReplyIcon } from "lucide-react";
 
 export const meta = { title: "默认", description: "outline 按钮相接，用 GroupSeparator 分隔。" };

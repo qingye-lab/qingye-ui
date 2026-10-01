@@ -1,28 +1,9 @@
-import {
-  Button,
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPanel,
-  DialogPopup,
-  DialogTitle,
-  DialogTrigger,
-  Drawer,
-  DrawerClose,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerPanel,
-  DrawerPopup,
-  DrawerTitle,
-  DrawerTrigger,
-  Field,
-  FieldLabel,
-  Input,
-  useMediaQuery,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
+import { Drawer, DrawerClose, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
+import { useMediaQuery } from "@yanqing/ui/hooks/use-media-query";
 
 export const meta = {
   title: "响应式：桌面对话框，移动端抽屉",

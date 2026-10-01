@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui/components/toggle-group";
 import { AlignEndHorizontalIcon, AlignStartHorizontalIcon, AlignCenterHorizontalIcon } from "lucide-react";
 
 export const meta = { title: "纵向", description: "orientation=\"vertical\" 时用 ↑ ↓ 移动焦点。" };

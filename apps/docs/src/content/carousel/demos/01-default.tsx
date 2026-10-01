@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@yanqing/ui";
+import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@yanqing/ui/components/carousel";
 
 export const meta = { title: "默认", description: "一次一张；在触屏上直接左右滑动。" };
 

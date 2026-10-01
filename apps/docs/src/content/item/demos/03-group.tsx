@@ -1,21 +1,8 @@
-import {
-  Avatar,
-  AvatarFallback,
-  Badge,
-  Button,
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  ItemGroup,
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemMedia,
-  ItemSeparator,
-  ItemTitle,
-} from "@yanqing/ui";
+import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardDescription, CardHeader, CardTitle } from "@yanqing/ui/components/card";
+import { ItemGroup, Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemSeparator, ItemTitle } from "@yanqing/ui/components/item";
 import { XIcon } from "lucide-react";
 import { Fragment } from "react";
 

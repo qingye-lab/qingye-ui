@@ -1,14 +1,5 @@
-import {
-  Button,
-  Card,
-  CardFrame,
-  CardFrameAction,
-  CardFrameDescription,
-  CardFrameFooter,
-  CardFrameHeader,
-  CardFrameTitle,
-  CardPanel,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardFrame, CardFrameAction, CardFrameDescription, CardFrameFooter, CardFrameHeader, CardFrameTitle, CardPanel } from "@yanqing/ui/components/card";
 import { KeyRoundIcon, PlusIcon } from "lucide-react";
 
 export const meta = {

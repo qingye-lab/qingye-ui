@@ -1,4 +1,6 @@
-import { Checkbox, Label, Switch } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Label } from "@yanqing/ui/components/label";
+import { Switch } from "@yanqing/ui/components/switch";
 
 export const meta = { title: "包裹控件", description: "包裹复选框或开关时，文字也是点击区域。" };
 

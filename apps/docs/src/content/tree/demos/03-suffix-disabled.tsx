@@ -1,4 +1,6 @@
-import { Badge, Tree, type TreeNode } from "@yanqing/ui";
+import type { TreeNode } from "@yanqing/ui/components/tree";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Tree } from "@yanqing/ui/components/tree";
 import { BuildingIcon, UsersIcon } from "lucide-react";
 
 export const meta = {

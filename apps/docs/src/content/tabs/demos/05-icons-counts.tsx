@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTab } from "@yanqing/ui";
+import { Tabs, TabsList, TabsTab } from "@yanqing/ui/components/tabs";
 import { ArchiveIcon, InboxIcon, SendIcon, Trash2Icon } from "lucide-react";
 
 export const meta = {

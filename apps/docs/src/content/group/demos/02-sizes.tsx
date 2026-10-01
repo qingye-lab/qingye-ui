@@ -1,4 +1,5 @@
-import { Button, Group, GroupSeparator } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Group, GroupSeparator } from "@yanqing/ui/components/group";
 
 export const meta = { title: "尺寸与禁用", description: "组内控件统一尺寸；单个按钮可禁用。" };
 

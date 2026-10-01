@@ -1,4 +1,6 @@
-import { Button, Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle, Input } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = {
   title: "分隔区块",

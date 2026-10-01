@@ -1,4 +1,4 @@
-import { PasswordInput } from "@yanqing/ui";
+import { PasswordInput } from "@yanqing/ui/components/password-input";
 
 export const meta = { title: "尺寸" };
 

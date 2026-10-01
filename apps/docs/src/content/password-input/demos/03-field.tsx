@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldError, FieldLabel, PasswordInput } from "@yanqing/ui";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@yanqing/ui/components/field";
+import { PasswordInput } from "@yanqing/ui/components/password-input";
 
 export const meta = { title: "配合 Field", description: "标签、规则说明与校验信息。提交后未满足 minLength 时显示错误。" };
 

@@ -1,15 +1,4 @@
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from "@yanqing/ui";
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubContent, MenubarSubTrigger, MenubarTrigger } from "@yanqing/ui/components/menubar";
 
 export const meta = { title: "桌面应用", description: "点击打开一个菜单后，左右方向键或悬停即可切换到相邻菜单。" };
 

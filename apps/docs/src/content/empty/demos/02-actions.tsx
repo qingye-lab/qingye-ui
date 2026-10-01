@@ -1,4 +1,5 @@
-import { Button, Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
 import { BookOpenIcon, RocketIcon } from "lucide-react";
 
 export const meta = { title: "带操作", description: "EmptyContent 放下一步操作：一个主要按钮，最多再配一个次要按钮。" };

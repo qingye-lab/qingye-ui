@@ -1,4 +1,4 @@
-import { cn } from "@yanqing/ui";
+import { cn } from "@yanqing/ui/utils";
 import { ArrowLeftIcon, ArrowRightIcon, SquarePenIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { componentPath, GUIDES, neighbours, OVERVIEW } from "@/lib/nav";

@@ -1,17 +1,9 @@
-import {
-  Button,
-  Menu,
-  MenuPopup,
-  MenuRadioGroup,
-  MenuRadioItem,
-  MenuTrigger,
-  Tooltip,
-  TooltipPopup,
-  TooltipTrigger,
-  useTheme,
-  useUILocale,
-  type Theme,
-} from "@yanqing/ui";
+import type { Theme } from "@yanqing/ui/components/theme-provider";
+import { Button } from "@yanqing/ui/components/button";
+import { Menu, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@yanqing/ui/components/menu";
+import { useTheme } from "@yanqing/ui/components/theme-provider";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
+import { useUILocale } from "@yanqing/ui/locale";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 
 export function ThemeMenu() {

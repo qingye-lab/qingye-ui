@@ -38,7 +38,11 @@
     "./catalog.json": "./catalog.json",
     "./package.json": "./package.json",
     "./utilities.css": "./utilities.css",
-    "./tokens/*": "./tokens/*"
+    "./tokens/*": "./tokens/*",
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.js"
+    }
   },
   "files": [
     "dist",

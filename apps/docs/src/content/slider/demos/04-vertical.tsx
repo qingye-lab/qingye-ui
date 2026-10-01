@@ -1,4 +1,4 @@
-import { Slider } from "@yanqing/ui";
+import { Slider } from "@yanqing/ui/components/slider";
 
 export const meta = { title: "竖向与禁用", description: "竖向滑块需要父元素有确定高度；禁用时整体降低不透明度。" };
 

@@ -1,23 +1,6 @@
-import {
-  Button,
-  Command,
-  CommandCollection,
-  CommandDialog,
-  CommandDialogPopup,
-  CommandDialogTrigger,
-  CommandEmpty,
-  CommandFooter,
-  CommandGroup,
-  CommandGroupLabel,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandPanel,
-  CommandSeparator,
-  CommandShortcut,
-  Kbd,
-  KbdGroup,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandDialogTrigger, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel, CommandSeparator, CommandShortcut } from "@yanqing/ui/components/command";
+import { Kbd, KbdGroup } from "@yanqing/ui/components/kbd";
 import {
   ArrowDownIcon,
   ArrowUpIcon,

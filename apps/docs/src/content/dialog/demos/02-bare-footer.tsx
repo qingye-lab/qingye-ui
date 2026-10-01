@@ -1,14 +1,5 @@
-import {
-  Button,
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPopup,
-  DialogTitle,
-  DialogTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
 
 export const meta = {
   title: "无底色底部",

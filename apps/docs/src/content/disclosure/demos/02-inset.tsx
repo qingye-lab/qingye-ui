@@ -1,4 +1,5 @@
-import { Badge, Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui/components/disclosure";
 import { TerminalIcon } from "lucide-react";
 
 export const meta = {

@@ -1,19 +1,8 @@
-import {
-  Button,
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  Frame,
-  FrameDescription,
-  FrameFooter,
-  FrameHeader,
-  FramePanel,
-  FrameTitle,
-  Input,
-  Switch,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from "@yanqing/ui/components/field";
+import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui/components/frame";
+import { Input } from "@yanqing/ui/components/input";
+import { Switch } from "@yanqing/ui/components/switch";
 
 export const meta = { title: "组合：构建设置", description: "表单放在面板里，保存操作放在外框底部。" };
 

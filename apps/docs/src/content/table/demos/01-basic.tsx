@@ -1,4 +1,5 @@
-import { Badge, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 
 export const meta = { title: "基础用法", description: "金额列右对齐并使用等宽数字。" };
 

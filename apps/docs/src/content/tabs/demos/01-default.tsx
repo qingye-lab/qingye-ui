@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui/components/tabs";
 
 export const meta = { title: "默认" };
 

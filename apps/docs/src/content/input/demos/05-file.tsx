@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, Input } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = { title: "文件", description: "需要拖拽、预览或多文件管理时用 FileUpload。" };
 

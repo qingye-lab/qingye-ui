@@ -1,14 +1,5 @@
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-  Select,
-  SelectItem,
-  SelectPopup,
-  SelectTrigger,
-  SelectValue,
-} from "@yanqing/ui";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@yanqing/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
 
 export const meta = { title: "状态", description: "禁用与校验失败。Field 内的 invalid 会传给触发器。" };
 

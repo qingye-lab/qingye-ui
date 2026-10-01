@@ -1,4 +1,4 @@
-import { SearchInput } from "@yanqing/ui";
+import { SearchInput } from "@yanqing/ui/components/search-input";
 
 export const meta = { title: "尺寸" };
 

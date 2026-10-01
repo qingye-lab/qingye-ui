@@ -1,4 +1,6 @@
-import { Button, Group, GroupSeparator, Menu, MenuItem, MenuPopup, MenuTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Group, GroupSeparator } from "@yanqing/ui/components/group";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@yanqing/ui/components/menu";
 import { ChevronDownIcon } from "lucide-react";
 
 export const meta = { title: "拆分按钮", description: "主操作加一个展开更多选项的菜单。" };

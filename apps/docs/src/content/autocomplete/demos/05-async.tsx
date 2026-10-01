@@ -1,12 +1,5 @@
-import {
-  Autocomplete,
-  AutocompleteInput,
-  AutocompleteItem,
-  AutocompleteList,
-  AutocompletePopup,
-  AutocompleteStatus,
-  Spinner,
-} from "@yanqing/ui";
+import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "@yanqing/ui/components/autocomplete";
+import { Spinner } from "@yanqing/ui/components/spinner";
 import { useRef, useState } from "react";
 
 export const meta = { title: "远程建议", description: "filter={null}，由接口返回建议；请求进行中显示加载状态。" };

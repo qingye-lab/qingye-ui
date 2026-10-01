@@ -1,16 +1,6 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarGroup,
-  AvatarImage,
-  Button,
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@yanqing/ui";
+import { Avatar, AvatarFallback, AvatarGroup, AvatarImage } from "@yanqing/ui/components/avatar";
+import { Button } from "@yanqing/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
 import { SendIcon } from "lucide-react";
 
 export const meta = { title: "头像组", description: "默认变体不加修饰，可以放头像组或插画。" };

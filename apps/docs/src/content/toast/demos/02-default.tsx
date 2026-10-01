@@ -1,4 +1,5 @@
-import { Button, toastManager } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { toastManager } from "@yanqing/ui/components/toast";
 
 export const meta = { title: "标题与说明", description: "不指定 type 时只显示文字；说明是可选的。" };
 

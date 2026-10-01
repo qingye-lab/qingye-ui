@@ -1,58 +1,33 @@
-import {
-  Avatar,
-  AvatarFallback,
-  Badge,
-  Button,
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-  Command,
-  CommandCollection,
-  CommandEmpty,
-  CommandFooter,
-  CommandGroup,
-  CommandGroupLabel,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandPanel,
-  CommandShortcut,
-  Field,
-  FieldDescription,
-  FieldLabel,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-  Kbd,
-  Label,
-  Radio,
-  RadioGroup,
-  Select,
-  SelectItem,
-  SelectPopup,
-  SelectTrigger,
-  SelectValue,
-  Separator,
-  Switch,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Tabs,
-  TabsList,
-  TabsPanel,
-  TabsTab,
-  toastManager,
-  useTheme,
-} from "@yanqing/ui";
+import { CardDescription, CardFooter, CardHeader } from "@yanqing/ui/components/card";
+import { CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList } from "@yanqing/ui/components/command";
+import { SelectPopup } from "@yanqing/ui/components/select";
+import { TableCell, TableHead } from "@yanqing/ui/components/table";
+import { Avatar } from "@yanqing/ui/components/avatar";
+import { CardAction, CardPanel } from "@yanqing/ui/components/card";
+import { CommandCollection, CommandPanel } from "@yanqing/ui/components/command";
+import { FieldDescription } from "@yanqing/ui/components/field";
+import { InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
+import { SelectItem, SelectTrigger } from "@yanqing/ui/components/select";
+import { TableBody, TableHeader } from "@yanqing/ui/components/table";
+import { TabsList, TabsPanel } from "@yanqing/ui/components/tabs";
+import { AvatarFallback } from "@yanqing/ui/components/avatar";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardTitle } from "@yanqing/ui/components/card";
+import { Command, CommandShortcut } from "@yanqing/ui/components/command";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
+import { InputGroup, InputGroupText } from "@yanqing/ui/components/input-group";
+import { Kbd } from "@yanqing/ui/components/kbd";
+import { Label } from "@yanqing/ui/components/label";
+import { Radio, RadioGroup } from "@yanqing/ui/components/radio-group";
+import { Select, SelectValue } from "@yanqing/ui/components/select";
+import { Separator } from "@yanqing/ui/components/separator";
+import { Switch } from "@yanqing/ui/components/switch";
+import { Table, TableRow } from "@yanqing/ui/components/table";
+import { Tabs, TabsTab } from "@yanqing/ui/components/tabs";
+import { useTheme } from "@yanqing/ui/components/theme-provider";
+import { toastManager } from "@yanqing/ui/components/toast";
 import { ArrowRightIcon, CornerDownLeftIcon, FolderPlusIcon, MoonIcon, SettingsIcon, UserPlusIcon } from "lucide-react";
 import { Fragment, useId, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
@@ -77,10 +52,7 @@ function SettingRow({ title, description, defaultChecked }: { title: string; des
 }
 
 const quietHours = [
-  { label: "不设置", value: "none" },
-  { label: "每天 22:00 – 08:00", value: "night" },
-  { label: "工作日 19:00 之后", value: "evening" },
-];
+  { label: "不设置", value: "none" }, { label: "每天 22:00 – 08:00", value: "night" }, { label: "工作日 19:00 之后", value: "evening" }, ];
 
 function NotificationsCard() {
   return (
@@ -173,18 +145,10 @@ function ProjectCard() {
 }
 
 const members = [
-  { name: "林晚", email: "lin.wan@example.com", role: "所有者", status: "online", active: "刚刚" },
-  { name: "周屿", email: "zhou.yu@example.com", role: "管理员", status: "online", active: "4 分钟前" },
-  { name: "陈默", email: "chen.mo@example.com", role: "成员", status: "away", active: "1 小时前" },
-  { name: "许知远", email: "xu.zy@example.com", role: "成员", status: "away", active: "昨天" },
-  { name: "宋青", email: "song.qing@example.com", role: "成员", status: "invited", active: "—" },
-] as const;
+  { name: "林晚", email: "lin.wan@example.com", role: "所有者", status: "online", active: "刚刚" }, { name: "周屿", email: "zhou.yu@example.com", role: "管理员", status: "online", active: "4 分钟前" }, { name: "陈默", email: "chen.mo@example.com", role: "成员", status: "away", active: "1 小时前" }, { name: "许知远", email: "xu.zy@example.com", role: "成员", status: "away", active: "昨天" }, { name: "宋青", email: "song.qing@example.com", role: "成员", status: "invited", active: "—" }, ] as const;
 
 const STATUS = {
-  online: { label: "在线", variant: "success" },
-  away: { label: "离开", variant: "secondary" },
-  invited: { label: "待接受", variant: "warning" },
-} as const;
+  online: { label: "在线", variant: "success" }, away: { label: "离开", variant: "secondary" }, invited: { label: "待接受", variant: "warning" }, } as const;
 
 function MembersCard() {
   return (
@@ -256,26 +220,11 @@ function PalettePreview() {
   const say = (title: string) => () => toastManager.add({ title, type: "info" });
   const groups: { value: string; items: PaletteItem[] }[] = [
     {
-      value: "操作",
-      items: [
-        { value: "new", label: "新建项目", icon: <FolderPlusIcon />, shortcut: "⌘N", run: say("演示：新建项目") },
-        { value: "invite", label: "邀请成员", icon: <UserPlusIcon />, shortcut: "⌘I", run: say("演示：邀请成员") },
-        {
-          value: "theme",
-          label: resolvedTheme === "dark" ? "切换到浅色" : "切换到深色",
-          icon: <MoonIcon />,
-          run: () => setTheme(resolvedTheme === "dark" ? "light" : "dark"),
-        },
-      ],
-    },
-    {
-      value: "前往",
-      items: [
-        { value: "settings", label: "项目设置", icon: <SettingsIcon />, run: say("演示：打开项目设置") },
-        { value: "github", label: "GitHub 仓库", icon: <GitHubIcon className="size-4" />, run: () => window.open(SITE.repo, "_blank", "noreferrer") },
-      ],
-    },
-  ];
+      value: "操作", items: [
+        { value: "new", label: "新建项目", icon: <FolderPlusIcon />, shortcut: "⌘N", run: say("演示：新建项目") }, { value: "invite", label: "邀请成员", icon: <UserPlusIcon />, shortcut: "⌘I", run: say("演示：邀请成员") }, {
+          value: "theme", label: resolvedTheme === "dark" ? "切换到浅色" : "切换到深色", icon: <MoonIcon />, run: () => setTheme(resolvedTheme === "dark" ? "light" : "dark"), }, ], }, {
+      value: "前往", items: [
+        { value: "settings", label: "项目设置", icon: <SettingsIcon />, run: say("演示：打开项目设置") }, { value: "github", label: "GitHub 仓库", icon: <GitHubIcon className="size-4" />, run: () => window.open(SITE.repo, "_blank", "noreferrer") }, ], }, ];
   return (
     <div className="relative flex flex-col rounded-2xl border bg-popover not-dark:bg-clip-padding shadow-xs/5 before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-2xl)-1px)] before:bg-muted/72">
       <Command items={groups}>
@@ -378,16 +327,8 @@ export default function HomePage() {
 
 const heroFiles = [
   {
-    id: "css",
-    name: "index.css",
-    lang: "css" as const,
-    code: `@import "tailwindcss";\n@import "@yanqing/ui/styles.css";\n\n/* 换成你的品牌色与圆角 */\n:root {\n  --qy-primary: oklch(0.51 0.18 268);\n  --qy-radius: 0.5rem;\n}`,
-  },
-  {
-    id: "tsx",
-    name: "save-button.tsx",
-    lang: "tsx" as const,
-    code: `import { Button, toastManager } from "@yanqing/ui";\n\nexport function SaveButton() {\n  return (\n    <Button onClick={() => toastManager.add({ title: "已保存" })}>\n      保存\n    </Button>\n  );\n}`,
+    id: "css", name: "index.css", lang: "css" as const, code: `@import "tailwindcss";\n@import "@yanqing/ui/styles.css";\n\n/* 换成你的品牌色与圆角 */\n:root {\n  --qy-primary: oklch(0.51 0.18 268);\n  --qy-radius: 0.5rem;\n}`, }, {
+    id: "tsx", name: "save-button.tsx", lang: "tsx" as const, code: `import { Button } from "@yanqing/ui";\n\nexport function SaveButton() {\n  return (\n    <Button onClick={() => toastManager.add({ title: "已保存" })}>\n      保存\n    </Button>\n  );\n}`,
   },
 ];
 

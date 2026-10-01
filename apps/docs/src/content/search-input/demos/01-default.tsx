@@ -1,4 +1,4 @@
-import { SearchInput } from "@yanqing/ui";
+import { SearchInput } from "@yanqing/ui/components/search-input";
 
 export const meta = { title: "默认", description: "输入后出现清除按钮，按 Esc 也可清空。" };
 

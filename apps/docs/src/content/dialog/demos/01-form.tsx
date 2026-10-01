@@ -1,19 +1,8 @@
-import {
-  Button,
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPanel,
-  DialogPopup,
-  DialogTitle,
-  DialogTrigger,
-  Field,
-  FieldLabel,
-  Form,
-  Input,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Form } from "@yanqing/ui/components/form";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = {
   title: "基础用法",

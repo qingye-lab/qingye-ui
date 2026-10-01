@@ -1,4 +1,5 @@
-import { Button, PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@yanqing/ui/components/page-header";
 import { DownloadIcon, PlusIcon } from "lucide-react";
 
 export const meta = { title: "基础", description: "标题、描述与操作；窄屏时操作换到下方。" };

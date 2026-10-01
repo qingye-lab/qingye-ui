@@ -1,4 +1,6 @@
-import { Checkbox, CheckboxGroup, Label } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { CheckboxGroup } from "@yanqing/ui/components/checkbox-group";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "基础用法" };
 

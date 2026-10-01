@@ -1,4 +1,4 @@
-import { InlineCode } from "@yanqing/ui";
+import { InlineCode } from "@yanqing/ui/components/code-block";
 
 export const meta = { title: "行内代码", description: "字号随所在文字缩放，长内容可在行间断开。" };
 

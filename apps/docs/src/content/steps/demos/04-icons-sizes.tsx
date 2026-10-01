@@ -1,4 +1,4 @@
-import { Steps } from "@yanqing/ui";
+import { Steps } from "@yanqing/ui/components/steps";
 import { CreditCardIcon, PackageCheckIcon, ShoppingCartIcon, TruckIcon } from "lucide-react";
 
 export const meta = { title: "图标与尺寸", description: "icon 替换序号；size=\"sm\" 适合卡片和侧栏。" };

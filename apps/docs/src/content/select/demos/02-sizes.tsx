@@ -1,4 +1,4 @@
-import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
 
 export const meta = { title: "尺寸与占位", description: "sm / default / lg；未选择时显示 placeholder。" };
 

@@ -1,4 +1,5 @@
-import { Field, FieldLabel, TagInput } from "@yanqing/ui";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { TagInput } from "@yanqing/ui/components/tag-input";
 
 export const meta = { title: "只读与禁用" };
 

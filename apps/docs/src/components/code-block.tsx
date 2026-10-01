@@ -1,4 +1,4 @@
-import { cn } from "@yanqing/ui";
+import { cn } from "@yanqing/ui/utils";
 import { useMemo, type ReactNode } from "react";
 import { highlight, type CodeLang } from "@/lib/highlight";
 import { CopyCodeButton } from "./copy-code-button";

@@ -1,4 +1,5 @@
-import { Button, Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
 import { CopyIcon, DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";
 
 export const meta = {

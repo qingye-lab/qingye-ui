@@ -1,32 +1,19 @@
-import {
-  CopyButton,
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-  SearchInput,
-  Tabs,
-  TabsList,
-  TabsTab,
-  UILocaleProvider,
-  zhCN,
-  type UILocale,
-} from "@yanqing/ui";
+import { PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink } from "@yanqing/ui/components/pagination";
+import { PaginationNext } from "@yanqing/ui/components/pagination";
+import { TabsList } from "@yanqing/ui/components/tabs";
+import { UILocale } from "@yanqing/ui/locale";
+import { CopyButton } from "@yanqing/ui/components/copy-button";
+import { Pagination, PaginationPrevious } from "@yanqing/ui/components/pagination";
+import { SearchInput } from "@yanqing/ui/components/search-input";
+import { Tabs, TabsTab } from "@yanqing/ui/components/tabs";
+import { UILocaleProvider, zhCN } from "@yanqing/ui/locale";
 import { enUS } from "@yanqing/ui/locales/en-US";
 import { useState } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { Callout, Code, H2, P, PageHeader } from "@/components/prose";
 
 const SAMPLES: Record<string, { zh: unknown[]; en: unknown[] }> = {
-  selectDateTime: { zh: ["开始"], en: ["start"] },
-  removeFile: { zh: ["报告.pdf"], en: ["report.pdf"] },
-  fileError: { zh: ["报告.pdf", "size"], en: ["report.pdf", "size"] },
-  pageSummary: { zh: [2, 5, 48], en: [2, 5, 48] },
-  selectedCount: { zh: [3], en: [3] },
-};
+  selectDateTime: { zh: ["开始"], en: ["start"] }, removeFile: { zh: ["报告.pdf"], en: ["report.pdf"] }, fileError: { zh: ["报告.pdf", "size"], en: ["report.pdf", "size"] }, pageSummary: { zh: [2, 5, 48], en: [2, 5, 48] }, selectedCount: { zh: [3], en: [3] }, };
 
 function show(value: unknown, args: unknown[] | undefined): { text: string; call?: string } {
   if (typeof value !== "function") return { text: String(value) };

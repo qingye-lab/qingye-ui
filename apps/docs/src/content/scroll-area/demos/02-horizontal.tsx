@@ -1,4 +1,4 @@
-import { ScrollArea } from "@yanqing/ui";
+import { ScrollArea } from "@yanqing/ui/components/scroll-area";
 
 export const meta = { title: "横向", description: "内容用 w-max 保持自身宽度。" };
 

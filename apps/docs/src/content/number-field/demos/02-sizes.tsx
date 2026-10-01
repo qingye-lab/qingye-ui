@@ -1,4 +1,4 @@
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@yanqing/ui/components/number-field";
 
 export const meta = { title: "尺寸" };
 

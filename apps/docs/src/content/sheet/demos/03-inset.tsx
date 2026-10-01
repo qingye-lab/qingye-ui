@@ -1,15 +1,5 @@
-import {
-  Button,
-  Sheet,
-  SheetClose,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Sheet, SheetClose, SheetDescription, SheetFooter, SheetHeader, SheetPanel, SheetPopup, SheetTitle, SheetTrigger } from "@yanqing/ui/components/sheet";
 
 export const meta = {
   title: "内嵌样式",

@@ -1,4 +1,4 @@
-import { themeScript } from "@yanqing/ui";
+import { themeScript } from "@yanqing/ui/components/theme-provider";
 
 export const meta = {
   title: "防闪烁脚本",

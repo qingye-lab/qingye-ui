@@ -1,4 +1,5 @@
-import { Checkbox, Label } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "卡片选项", description: "整张卡片是标签；选中时边框与底色一起变化。" };
 

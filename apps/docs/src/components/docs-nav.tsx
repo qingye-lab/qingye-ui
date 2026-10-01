@@ -1,4 +1,4 @@
-import { cn } from "@yanqing/ui";
+import { cn } from "@yanqing/ui/utils";
 import { useLayoutEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { navSections } from "@/lib/nav";

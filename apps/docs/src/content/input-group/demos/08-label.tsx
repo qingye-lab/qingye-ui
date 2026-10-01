@@ -1,4 +1,5 @@
-import { InputGroup, InputGroupAddon, InputGroupInput, Label } from "@yanqing/ui";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "组合：内嵌标签", description: "block-start 附加区域放标签，适合紧凑的卡片表单。" };
 

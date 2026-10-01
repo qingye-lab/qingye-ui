@@ -1,17 +1,6 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-  RechartsPrimitive,
-  type ChartConfig,
-} from "@yanqing/ui";
+import type { ChartConfig } from "@yanqing/ui/components/chart";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, RechartsPrimitive } from "@yanqing/ui/components/chart";
 
 const { Label, Pie, PieChart } = RechartsPrimitive;
 

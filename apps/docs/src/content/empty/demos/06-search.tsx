@@ -1,13 +1,6 @@
-import {
-  Button,
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-  SearchInput,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@yanqing/ui/components/empty";
+import { SearchInput } from "@yanqing/ui/components/search-input";
 import { SearchIcon } from "lucide-react";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import { Steps } from "@yanqing/ui";
+import { Steps } from "@yanqing/ui/components/steps";
 
 export const meta = { title: "垂直步骤", description: "说明较长或在窄屏上时使用。" };
 

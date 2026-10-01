@@ -1,4 +1,6 @@
-import { Alert, AlertDescription, AlertTitle, cn } from "@yanqing/ui";
+import { Alert, AlertDescription } from "@yanqing/ui/components/alert";
+import { AlertTitle } from "@yanqing/ui/components/alert";
+import { cn } from "@yanqing/ui";
 import { InfoIcon, LinkIcon, TriangleAlertIcon } from "lucide-react";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { Link } from "react-router-dom";

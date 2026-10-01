@@ -1,4 +1,4 @@
-import { CodeBlock } from "@yanqing/ui";
+import { CodeBlock } from "@yanqing/ui/components/code-block";
 
 export const meta = {
   title: "传入已高亮的节点",

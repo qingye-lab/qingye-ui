@@ -1,11 +1,4 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@yanqing/ui";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@yanqing/ui/components/breadcrumb";
 import { FileTextIcon, FolderIcon, HomeIcon } from "lucide-react";
 
 export const meta = { title: "带图标", description: "图标放在文字前，尺寸 4，仅首页可只用图标。" };

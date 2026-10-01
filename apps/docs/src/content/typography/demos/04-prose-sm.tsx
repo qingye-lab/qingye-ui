@@ -1,4 +1,4 @@
-import { Prose } from "@yanqing/ui";
+import { Prose } from "@yanqing/ui/components/typography";
 
 export const meta = { title: "紧凑长文", description: "size=\"sm\" 用于侧栏、抽屉中的说明文字。" };
 

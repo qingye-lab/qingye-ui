@@ -1,4 +1,5 @@
-import { Badge, DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui/components/description-list";
 
 export const meta = { title: "水平布局", description: "名称在左侧固定列，适合详情页和抽屉。" };
 

@@ -1,9 +1,5 @@
-import {
-  RadioGroupPrimitive,
-  RadioPrimitive,
-  segmentedControlItemVariants,
-  segmentedControlRootClassName,
-} from "@yanqing/ui";
+import { RadioGroupPrimitive, RadioPrimitive } from "@yanqing/ui/components/radio-group";
+import { segmentedControlItemVariants, segmentedControlRootClassName } from "@yanqing/ui/components/segmented-control";
 
 export const meta = { title: "禁用", description: "可以禁用单个选项，也可以禁用整组。" };
 

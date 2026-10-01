@@ -1,4 +1,4 @@
-import { MotionProvider } from "@yanqing/ui";
+import { MotionProvider } from "@yanqing/ui/components/motion-provider";
 
 export const meta = {
   title: "让自定义元素遵循策略",

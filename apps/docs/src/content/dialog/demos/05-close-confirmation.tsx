@@ -1,25 +1,8 @@
-import {
-  AlertDialog,
-  AlertDialogClose,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogPopup,
-  AlertDialogTitle,
-  Button,
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogPanel,
-  DialogPopup,
-  DialogTitle,
-  DialogTrigger,
-  Field,
-  FieldLabel,
-  Textarea,
-} from "@yanqing/ui";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle } from "@yanqing/ui/components/alert-dialog";
+import { Button } from "@yanqing/ui/components/button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@yanqing/ui/components/dialog";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Textarea } from "@yanqing/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = {

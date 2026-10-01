@@ -1,4 +1,6 @@
-import { DateRangePicker, type DateRangePreset, type DateRangeValue, Field, FieldLabel } from "@yanqing/ui";
+import type { DateRangePreset, DateRangeValue } from "@yanqing/ui/components/date-range-picker";
+import { DateRangePicker } from "@yanqing/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
 import { useState } from "react";
 
 export const meta = {

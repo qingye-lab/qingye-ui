@@ -1,4 +1,6 @@
-import { Button, Field, FieldLabel, TagInput } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { TagInput } from "@yanqing/ui/components/tag-input";
 import { useState } from "react";
 
 export const meta = {

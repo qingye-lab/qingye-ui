@@ -1,4 +1,5 @@
-import { Button, Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui/components/progress";
 import { CircleCheckIcon, FileArchiveIcon, FileImageIcon, FileTextIcon, RotateCwIcon } from "lucide-react";
 
 export const meta = { title: "组合：上传列表", description: "每个文件一条进度；完成和失败的文件换成状态说明与操作。" };

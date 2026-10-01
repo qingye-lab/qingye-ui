@@ -1,15 +1,4 @@
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuLinkDescription,
-  NavigationMenuLinkIcon,
-  NavigationMenuLinkTitle,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@yanqing/ui";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuLinkDescription, NavigationMenuLinkIcon, NavigationMenuLinkTitle, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@yanqing/ui/components/navigation-menu";
 import { BarChart3Icon, BookOpenIcon, LayersIcon, ShieldCheckIcon, WorkflowIcon, ZapIcon } from "lucide-react";
 
 export const meta = {

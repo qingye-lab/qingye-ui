@@ -1,4 +1,4 @@
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
 import { MailIcon, MapPinIcon } from "lucide-react";
 
 export const meta = { title: "图标", description: "图标放在首端说明内容类型，放在末端作为状态提示。" };

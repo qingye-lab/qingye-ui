@@ -1,4 +1,4 @@
-import { Badge } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
 import { BadgeCheckIcon, CircleCheckIcon, CircleXIcon, ClockIcon, GitBranchIcon, TriangleAlertIcon } from "lucide-react";
 
 export const meta = { title: "带图标", description: "图标放在文字前，尺寸随徽章自动调整。" };

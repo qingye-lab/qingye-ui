@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, TagInput } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { TagInput } from "@yanqing/ui/components/tag-input";
 
 export const meta = {
   title: "校验与上限",

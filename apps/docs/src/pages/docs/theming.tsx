@@ -1,24 +1,17 @@
-import {
-  Badge,
-  Button,
-  Checkbox,
-  cn,
-  Field,
-  FieldLabel,
-  Input,
-  Label,
-  Slider,
-  Switch,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  ToggleGroup,
-  ToggleGroupItem,
-  useTheme,
-} from "@yanqing/ui";
+import { TableBody, TableCell, TableHead } from "@yanqing/ui/components/table";
+import { TableHeader } from "@yanqing/ui/components/table";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
+import { Label } from "@yanqing/ui/components/label";
+import { Slider } from "@yanqing/ui/components/slider";
+import { Switch } from "@yanqing/ui/components/switch";
+import { Table, TableRow } from "@yanqing/ui/components/table";
+import { useTheme } from "@yanqing/ui/components/theme-provider";
+import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
+import { cn } from "@yanqing/ui";
 import { useId, useMemo, useState, type CSSProperties } from "react";
 import { CodeBlock } from "@/components/code-block";
 import { A, Callout, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
@@ -32,32 +25,11 @@ interface Brand {
 
 // Primaries keep at least 4.5:1 against their foreground in both themes.
 const BRANDS: Brand[] = [
-  { id: "neutral", label: "中性" },
-  {
-    id: "indigo",
-    label: "靛蓝",
-    light: { primary: "oklch(0.51 0.18 268)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.62 0.14 268)" },
-    dark: { primary: "oklch(0.72 0.13 268)", foreground: "oklch(0.21 0.04 268)", ring: "oklch(0.6 0.12 268)" },
-  },
-  {
-    id: "teal",
-    label: "青绿",
-    light: { primary: "oklch(0.5 0.09 190)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.64 0.09 190)" },
-    dark: { primary: "oklch(0.76 0.1 185)", foreground: "oklch(0.22 0.03 190)", ring: "oklch(0.6 0.08 190)" },
-  },
-  {
-    id: "ochre",
-    label: "赭石",
-    light: { primary: "oklch(0.52 0.13 50)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.12 55)" },
-    dark: { primary: "oklch(0.77 0.12 65)", foreground: "oklch(0.23 0.04 55)", ring: "oklch(0.62 0.1 60)" },
-  },
-  {
-    id: "rose",
-    label: "胭脂",
-    light: { primary: "oklch(0.52 0.18 12)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.14 12)" },
-    dark: { primary: "oklch(0.74 0.14 12)", foreground: "oklch(0.22 0.05 12)", ring: "oklch(0.6 0.12 12)" },
-  },
-];
+  { id: "neutral", label: "中性" }, {
+    id: "indigo", label: "靛蓝", light: { primary: "oklch(0.51 0.18 268)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.62 0.14 268)" }, dark: { primary: "oklch(0.72 0.13 268)", foreground: "oklch(0.21 0.04 268)", ring: "oklch(0.6 0.12 268)" }, }, {
+    id: "teal", label: "青绿", light: { primary: "oklch(0.5 0.09 190)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.64 0.09 190)" }, dark: { primary: "oklch(0.76 0.1 185)", foreground: "oklch(0.22 0.03 190)", ring: "oklch(0.6 0.08 190)" }, }, {
+    id: "ochre", label: "赭石", light: { primary: "oklch(0.52 0.13 50)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.12 55)" }, dark: { primary: "oklch(0.77 0.12 65)", foreground: "oklch(0.23 0.04 55)", ring: "oklch(0.62 0.1 60)" }, }, {
+    id: "rose", label: "胭脂", light: { primary: "oklch(0.52 0.18 12)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.14 12)" }, dark: { primary: "oklch(0.74 0.14 12)", foreground: "oklch(0.22 0.05 12)", ring: "oklch(0.6 0.12 12)" }, }, ];
 
 const DEFAULT_RADIUS = 0.625;
 
@@ -66,15 +38,7 @@ function radiusVars(radius: number): Record<string, string> {
   // override has to restate them; at :root, --qy-radius alone is enough.
   const r = `${radius}rem`;
   return {
-    "--qy-radius": r,
-    "--qy-radius-xs": `max(0rem, calc(${r} - 0.375rem))`,
-    "--qy-radius-sm": `max(0rem, calc(${r} - 0.25rem))`,
-    "--qy-radius-md": `max(0rem, calc(${r} - 0.125rem))`,
-    "--qy-radius-lg": r,
-    "--qy-radius-xl": `calc(${r} + 0.25rem)`,
-    "--qy-radius-2xl": `calc(${r} + 0.375rem)`,
-    "--radius": r,
-  };
+    "--qy-radius": r, "--qy-radius-xs": `max(0rem, calc(${r} - 0.375rem))`, "--qy-radius-sm": `max(0rem, calc(${r} - 0.25rem))`, "--qy-radius-md": `max(0rem, calc(${r} - 0.125rem))`, "--qy-radius-lg": r, "--qy-radius-xl": `calc(${r} + 0.25rem)`, "--qy-radius-2xl": `calc(${r} + 0.375rem)`, "--radius": r, };
 }
 
 function cssFor(brand: Brand, radius: number, compact: boolean): string {
@@ -94,10 +58,7 @@ function cssFor(brand: Brand, radius: number, compact: boolean): string {
 }
 
 const rows = [
-  { name: "季度报告.pdf", owner: "林晚", size: "2.4 MB", status: "已发布" },
-  { name: "品牌规范 v3", owner: "周屿", size: "18.0 MB", status: "审核中" },
-  { name: "访谈纪要", owner: "陈默", size: "312 KB", status: "草稿" },
-];
+  { name: "季度报告.pdf", owner: "林晚", size: "2.4 MB", status: "已发布" }, { name: "品牌规范 v3", owner: "周屿", size: "18.0 MB", status: "审核中" }, { name: "访谈纪要", owner: "陈默", size: "312 KB", status: "草稿" }, ];
 
 function ThemeBench() {
   const { resolvedTheme } = useTheme();
@@ -111,11 +72,7 @@ function ThemeBench() {
   const style = useMemo(
     () =>
       ({
-        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}),
-        ...radiusVars(radius),
-      }) as CSSProperties,
-    [palette, radius],
-  );
+        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}), ...radiusVars(radius), }) as CSSProperties, [palette, radius], );
 
   return (
     <div className="my-6 overflow-hidden rounded-2xl border">
@@ -166,7 +123,7 @@ function ThemeBench() {
         </div>
       </div>
 
-      <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)]" data-density={compact ? "compact" : undefined} style={style}>
+      <div className="grid gap-6 p-5 sm:p-6 md:grid-cols-[minmax(0, 1fr)_minmax(0, 1.25fr)]" data-density={compact ? "compact" : undefined} style={style}>
         <div className="flex flex-col gap-4">
           <Field>
             <FieldLabel>邀请成员</FieldLabel>

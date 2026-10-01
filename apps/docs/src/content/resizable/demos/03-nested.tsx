@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@yanqing/ui";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@yanqing/ui/components/resizable";
 
 export const meta = {
   title: "多栏与嵌套",

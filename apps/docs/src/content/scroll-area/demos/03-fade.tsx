@@ -1,4 +1,4 @@
-import { ScrollArea } from "@yanqing/ui";
+import { ScrollArea } from "@yanqing/ui/components/scroll-area";
 
 export const meta = {
   title: "边缘渐隐",

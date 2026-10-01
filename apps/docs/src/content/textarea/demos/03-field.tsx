@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, Textarea } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Textarea } from "@yanqing/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = { title: "配合标签与字数", description: "放在 Field 中，并用 maxLength 提示剩余字数。" };

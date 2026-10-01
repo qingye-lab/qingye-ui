@@ -1,4 +1,5 @@
-import { Field, FieldLabel, NativeSelect, NativeSelectOptGroup, NativeSelectOption } from "@yanqing/ui";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from "@yanqing/ui/components/native-select";
 
 export const meta = { title: "分组与长列表", description: "选项很多时用 optgroup 分组，系统选择器会自带滚动与快速定位。" };
 

@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
 import { UserIcon } from "lucide-react";
 
 export const meta = {

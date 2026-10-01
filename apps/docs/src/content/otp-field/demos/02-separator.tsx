@@ -1,4 +1,4 @@
-import { OTPField, OTPFieldInput, OTPFieldSeparator } from "@yanqing/ui";
+import { OTPField, OTPFieldInput, OTPFieldSeparator } from "@yanqing/ui/components/otp-field";
 
 export const meta = { title: "分组与大尺寸", description: "3-3 分组更易核对；lg 适合独立的验证页面。" };
 

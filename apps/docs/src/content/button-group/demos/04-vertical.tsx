@@ -1,4 +1,5 @@
-import { Button, ButtonGroup, ButtonGroupSeparator } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { ButtonGroup, ButtonGroupSeparator } from "@yanqing/ui";
 import { LayersIcon, LocateFixedIcon, MinusIcon, PlusIcon } from "lucide-react";
 
 export const meta = { title: "纵向与嵌套", description: "orientation=\"vertical\" 纵向排列；嵌套的按钮组之间自动留出间距。" };

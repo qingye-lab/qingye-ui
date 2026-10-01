@@ -1,4 +1,9 @@
-import { Button, cn, toastManager, Tooltip, TooltipPopup, TooltipTrigger, useUILocale } from "@yanqing/ui";
+import { TooltipPopup } from "@yanqing/ui/components/tooltip";
+import { Button } from "@yanqing/ui/components/button";
+import { toastManager } from "@yanqing/ui/components/toast";
+import { Tooltip, TooltipTrigger } from "@yanqing/ui/components/tooltip";
+import { cn } from "@yanqing/ui";
+import { useUILocale } from "@yanqing/ui/locale";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 

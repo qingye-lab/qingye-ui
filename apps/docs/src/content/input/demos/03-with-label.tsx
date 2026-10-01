@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, Input } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = { title: "配合标签", description: "放在 Field 中，标签、说明与输入框自动关联。" };
 

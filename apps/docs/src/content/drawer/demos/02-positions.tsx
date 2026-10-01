@@ -1,13 +1,5 @@
-import {
-  Button,
-  Drawer,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerPanel,
-  DrawerPopup,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Drawer, DrawerDescription, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
 
 export const meta = { title: "四个方向", description: "position 决定滑入的边和滑动关闭的方向。" };
 

@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, Input } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 import { useState } from "react";
 
 export const meta = { title: "字数提示", description: "用 maxLength 限制长度，并在说明里实时显示剩余字数。" };

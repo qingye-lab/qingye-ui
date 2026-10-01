@@ -1,4 +1,5 @@
-import { Card, Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui";
+import { Card } from "@yanqing/ui/components/card";
+import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui/components/stat";
 
 export const meta = {
   title: "指标网格",

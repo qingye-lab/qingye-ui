@@ -1,4 +1,4 @@
-import { Steps } from "@yanqing/ui";
+import { Steps } from "@yanqing/ui/components/steps";
 
 export const meta = { title: "出错状态", description: "status=\"error\" 覆盖推导出的状态，标出失败的步骤。" };
 

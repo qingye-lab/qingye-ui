@@ -1,4 +1,6 @@
-import { DatePicker, Field, FieldDescription, FieldError, Label } from "@yanqing/ui";
+import { DatePicker } from "@yanqing/ui/components/date-picker";
+import { Field, FieldDescription, FieldError } from "@yanqing/ui/components/field";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "状态", description: "不可选日期、错误、禁用与不可清除。" };
 

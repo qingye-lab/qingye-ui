@@ -1,4 +1,5 @@
-import { Field, FieldError, FieldLabel, Textarea } from "@yanqing/ui";
+import { Field, FieldError, FieldLabel } from "@yanqing/ui/components/field";
+import { Textarea } from "@yanqing/ui/components/textarea";
 
 export const meta = { title: "状态", description: "无效、只读与禁用。" };
 

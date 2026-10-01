@@ -1,4 +1,4 @@
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@yanqing/ui";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@yanqing/ui/components/input-group";
 
 export const meta = { title: "前后缀文字", description: "协议、域名、货币、单位等固定部分。" };
 

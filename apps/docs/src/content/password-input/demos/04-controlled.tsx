@@ -1,4 +1,6 @@
-import { Checkbox, Label, PasswordInput } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Label } from "@yanqing/ui/components/label";
+import { PasswordInput } from "@yanqing/ui/components/password-input";
 import { useState } from "react";
 
 export const meta = {

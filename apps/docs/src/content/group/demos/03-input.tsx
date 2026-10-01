@@ -1,4 +1,7 @@
-import { Button, Group, GroupSeparator, GroupText, Input, Label } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Group, GroupSeparator, GroupText } from "@yanqing/ui/components/group";
+import { Input } from "@yanqing/ui/components/input";
+import { Label } from "@yanqing/ui/components/label";
 import { CopyIcon } from "lucide-react";
 
 export const meta = { title: "前后缀与输入", description: "GroupText 作前缀，并渲染为 Label 关联输入框。" };

@@ -1,4 +1,5 @@
-import { Button, toastManager } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { toastManager } from "@yanqing/ui/components/toast";
 
 export const meta = { title: "加载中", description: "type=\"loading\" 显示旋转图标，任务结束后用 update 换成结果。" };
 

@@ -1,4 +1,4 @@
-import { PasswordInput } from "@yanqing/ui";
+import { PasswordInput } from "@yanqing/ui/components/password-input";
 
 export const meta = { title: "默认", description: "点击眼睛图标在明文与掩码之间切换。" };
 

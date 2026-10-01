@@ -1,4 +1,5 @@
-import { Kbd, SearchInput } from "@yanqing/ui";
+import { Kbd } from "@yanqing/ui/components/kbd";
+import { SearchInput } from "@yanqing/ui/components/search-input";
 
 export const meta = { title: "快捷键提示", description: "为空时在末端提示唤起快捷键。" };
 

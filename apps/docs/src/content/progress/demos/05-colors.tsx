@@ -1,4 +1,4 @@
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui/components/progress";
 import { CircleAlertIcon, CircleCheckIcon } from "lucide-react";
 
 export const meta = {

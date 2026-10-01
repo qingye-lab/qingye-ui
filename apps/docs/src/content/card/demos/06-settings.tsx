@@ -1,15 +1,6 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-  Switch,
-} from "@yanqing/ui";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { Switch } from "@yanqing/ui/components/switch";
 
 export const meta = { title: "设置卡片", description: "Field 横向排列标签与开关，点击标签也能切换。" };
 

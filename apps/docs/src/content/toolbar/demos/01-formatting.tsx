@@ -1,4 +1,6 @@
-import { Toggle, ToggleGroup, ToggleGroupItem, Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "@yanqing/ui";
+import { Toggle } from "@yanqing/ui/components/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "@yanqing/ui/components/toolbar";
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 
 export const meta = {

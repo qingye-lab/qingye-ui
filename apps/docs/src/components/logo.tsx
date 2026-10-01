@@ -1,4 +1,4 @@
-import { cn } from "@yanqing/ui";
+import { cn } from "@yanqing/ui/utils";
 
 /** The mark: a rounded tile carrying a single-stroke Y. */
 export function LogoMark({ className }: { className?: string }) {

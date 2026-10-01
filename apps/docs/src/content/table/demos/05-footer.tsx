@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@yanqing/ui";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 
 export const meta = { title: "合计行", description: "TableFooter 放汇总数据，底色与表体略有区分。" };
 

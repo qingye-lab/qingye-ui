@@ -1,14 +1,8 @@
-import {
-  Button,
-  Field,
-  Form,
-  Popover,
-  PopoverDescription,
-  PopoverPopup,
-  PopoverTitle,
-  PopoverTrigger,
-  Textarea,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field } from "@yanqing/ui/components/field";
+import { Form } from "@yanqing/ui/components/form";
+import { Popover, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@yanqing/ui/components/popover";
+import { Textarea } from "@yanqing/ui/components/textarea";
 
 export const meta = { title: "基础用法", description: "点击打开，承载一个简短的表单。" };
 

@@ -1,13 +1,4 @@
-import {
-  Select,
-  SelectGroup,
-  SelectGroupLabel,
-  SelectItem,
-  SelectPopup,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@yanqing/ui";
+import { Select, SelectGroup, SelectGroupLabel, SelectItem, SelectPopup, SelectSeparator, SelectTrigger, SelectValue } from "@yanqing/ui/components/select";
 import { Fragment } from "react";
 
 export const meta = { title: "分组与禁用项", description: "售罄的规格保留在列表中但不可选。" };

@@ -1,17 +1,6 @@
-import {
-  Button,
-  CardFrame,
-  CardFrameAction,
-  CardFrameDescription,
-  CardFrameHeader,
-  CardFrameTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { CardFrame, CardFrameAction, CardFrameDescription, CardFrameHeader, CardFrameTitle } from "@yanqing/ui/components/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@yanqing/ui/components/table";
 import { PlusIcon } from "lucide-react";
 
 export const meta = { title: "卡片样式", description: "variant=\"card\" 放进 CardFrame，表头落在外框的浅底上。" };

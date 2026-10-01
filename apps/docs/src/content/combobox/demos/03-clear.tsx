@@ -1,4 +1,4 @@
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@yanqing/ui";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup } from "@yanqing/ui/components/combobox";
 import { SearchIcon } from "lucide-react";
 
 export const meta = { title: "前置图标、清除与自动高亮", description: "autoHighlight 让回车直接选中第一个匹配项。" };

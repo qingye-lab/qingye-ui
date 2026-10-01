@@ -1,13 +1,5 @@
-import {
-  Button,
-  Sheet,
-  SheetDescription,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Sheet, SheetDescription, SheetHeader, SheetPanel, SheetPopup, SheetTitle, SheetTrigger } from "@yanqing/ui/components/sheet";
 
 export const meta = { title: "四个方向", description: "通过 side 指定滑入的边。" };
 

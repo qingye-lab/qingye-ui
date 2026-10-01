@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertTitle } from "@yanqing/ui";
+import { Alert, AlertDescription, AlertTitle } from "@yanqing/ui/components/alert";
 import { CircleAlertIcon } from "lucide-react";
 
 export const meta = {

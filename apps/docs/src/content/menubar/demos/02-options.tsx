@@ -1,15 +1,4 @@
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarGroup,
-  MenubarLabel,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarTrigger,
-} from "@yanqing/ui";
+import { Menubar, MenubarCheckboxItem, MenubarContent, MenubarGroup, MenubarLabel, MenubarMenu, MenubarRadioGroup, MenubarRadioItem, MenubarSeparator, MenubarTrigger } from "@yanqing/ui/components/menubar";
 import { useState } from "react";
 
 export const meta = { title: "勾选与单选", description: "视图选项用 CheckboxItem，互斥选项用 RadioGroup。" };

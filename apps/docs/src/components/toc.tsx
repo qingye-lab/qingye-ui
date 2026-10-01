@@ -1,4 +1,4 @@
-import { cn } from "@yanqing/ui";
+import { cn } from "@yanqing/ui/utils";
 import { useEffect, useState, type RefObject } from "react";
 import { useLocation } from "react-router-dom";
 import { useHashLink } from "@/lib/use-route-effects";

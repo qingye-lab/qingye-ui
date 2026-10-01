@@ -1,4 +1,4 @@
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@yanqing/ui";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@yanqing/ui/components/meter";
 
 export const meta = {
   title: "阈值颜色",

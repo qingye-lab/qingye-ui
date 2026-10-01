@@ -1,4 +1,4 @@
-import { TagInput } from "@yanqing/ui";
+import { TagInput } from "@yanqing/ui/components/tag-input";
 
 export const meta = { title: "尺寸", description: "高度与 Combobox 多选框一致，标签随尺寸缩放。" };
 

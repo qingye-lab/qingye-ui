@@ -1,4 +1,4 @@
-import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui";
+import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui/components/description-list";
 
 export const meta = { title: "垂直布局", description: "名称在值的上方，适合窄栏或值较长的情形。" };
 

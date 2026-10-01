@@ -1,4 +1,7 @@
-import { Button, Field, FieldLabel, Form, Textarea } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Form } from "@yanqing/ui/components/form";
+import { Textarea } from "@yanqing/ui/components/textarea";
 
 export const meta = { title: "组合：评论框", description: "多行输入下方放操作按钮，主按钮靠末端。" };
 

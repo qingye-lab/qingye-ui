@@ -1,4 +1,5 @@
-import { Button, Popover, PopoverPopup, PopoverTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Popover, PopoverPopup, PopoverTrigger } from "@yanqing/ui/components/popover";
 import { InfoIcon } from "lucide-react";
 
 export const meta = {

@@ -1,11 +1,5 @@
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-  Tooltip,
-  TooltipCreateHandle,
-  TooltipPopup,
-  TooltipTrigger,
-} from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
+import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@yanqing/ui/components/tooltip";
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
 
 export const meta = {

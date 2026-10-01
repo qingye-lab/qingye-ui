@@ -1,4 +1,7 @@
-import { Avatar, AvatarFallback, Button, Card, CardFooter, CardHeader, CardPanel, Skeleton } from "@yanqing/ui";
+import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardFooter, CardHeader, CardPanel } from "@yanqing/ui/components/card";
+import { Skeleton } from "@yanqing/ui/components/skeleton";
 import { RotateCwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 

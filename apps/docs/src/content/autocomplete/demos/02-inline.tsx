@@ -1,4 +1,5 @@
-import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, Label } from "@yanqing/ui";
+import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "@yanqing/ui/components/autocomplete";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "行内补全", description: "mode=\"both\"：高亮的建议直接补全到输入框里，方向键切换。" };
 

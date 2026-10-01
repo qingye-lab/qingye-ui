@@ -1,15 +1,4 @@
-import {
-  Autocomplete,
-  AutocompleteCollection,
-  AutocompleteEmpty,
-  AutocompleteGroup,
-  AutocompleteGroupLabel,
-  AutocompleteInput,
-  AutocompleteItem,
-  AutocompleteList,
-  AutocompletePopup,
-  AutocompleteSeparator,
-} from "@yanqing/ui";
+import { Autocomplete, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteSeparator } from "@yanqing/ui/components/autocomplete";
 import { Fragment } from "react";
 
 export const meta = { title: "分组与清除" };

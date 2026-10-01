@@ -1,4 +1,5 @@
-import { Button, ButtonGroup } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { ButtonGroup } from "@yanqing/ui";
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 export const meta = { title: "基础用法", description: "相邻按钮合并边框与圆角。" };

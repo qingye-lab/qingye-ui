@@ -1,4 +1,7 @@
-import { Button, DateRangePicker, Field, FieldLabel, NativeSelect, NativeSelectOption } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { DateRangePicker } from "@yanqing/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { NativeSelect, NativeSelectOption } from "@yanqing/ui/components/native-select";
 import { useState } from "react";
 
 export const meta = {

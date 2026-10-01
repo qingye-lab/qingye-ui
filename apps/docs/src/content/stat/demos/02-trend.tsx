@@ -1,4 +1,5 @@
-import { Card, CardPanel, Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui";
+import { Card, CardPanel } from "@yanqing/ui/components/card";
+import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui/components/stat";
 
 export const meta = {
   title: "趋势与反向指标",

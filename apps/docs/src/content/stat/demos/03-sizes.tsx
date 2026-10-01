@@ -1,4 +1,4 @@
-import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui";
+import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@yanqing/ui/components/stat";
 
 export const meta = { title: "尺寸", description: "sm 用于侧栏等紧凑区域，lg 留给一个视图里最重要的数字。" };
 

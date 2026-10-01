@@ -1,16 +1,9 @@
-import {
-  Button,
-  cn,
-  Sheet,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-  Tooltip,
-  TooltipPopup,
-  TooltipTrigger,
-} from "@yanqing/ui";
+import { SheetHeader, SheetPanel, SheetPopup, SheetTitle } from "@yanqing/ui/components/sheet";
+import { TooltipPopup } from "@yanqing/ui/components/tooltip";
+import { Button } from "@yanqing/ui/components/button";
+import { Sheet, SheetTrigger } from "@yanqing/ui/components/sheet";
+import { Tooltip, TooltipTrigger } from "@yanqing/ui/components/tooltip";
+import { cn } from "@yanqing/ui";
 import { MenuIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";

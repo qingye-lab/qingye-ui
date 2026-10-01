@@ -1,4 +1,4 @@
-import { StatusDot } from "@yanqing/ui";
+import { StatusDot } from "@yanqing/ui/components/status-dot";
 
 export const meta = { title: "状态", description: "离线为空心圆，与中性灰在形状上也能区分。" };
 

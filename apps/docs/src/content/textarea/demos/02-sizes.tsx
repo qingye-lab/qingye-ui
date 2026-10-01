@@ -1,4 +1,4 @@
-import { Textarea } from "@yanqing/ui";
+import { Textarea } from "@yanqing/ui/components/textarea";
 
 export const meta = { title: "尺寸" };
 

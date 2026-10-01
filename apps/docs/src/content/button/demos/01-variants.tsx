@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
 
 export const meta = {
   title: "样式",

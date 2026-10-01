@@ -1,4 +1,5 @@
-import { ScrollArea, Tabs, TabsList, TabsTab } from "@yanqing/ui";
+import { ScrollArea } from "@yanqing/ui/components/scroll-area";
+import { Tabs, TabsList, TabsTab } from "@yanqing/ui/components/tabs";
 
 export const meta = {
   title: "窄屏溢出",

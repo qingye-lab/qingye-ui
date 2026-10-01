@@ -1,4 +1,5 @@
-import { Field, FieldDescription, FieldLabel, TagInput } from "@yanqing/ui";
+import { Field, FieldDescription, FieldLabel } from "@yanqing/ui/components/field";
+import { TagInput } from "@yanqing/ui/components/tag-input";
 
 export const meta = { title: "基础用法", description: "回车或逗号确认；粘贴“设计, 运营, 增长”会拆成三个标签。" };
 

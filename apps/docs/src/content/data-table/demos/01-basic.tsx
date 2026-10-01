@@ -1,4 +1,6 @@
-import { Badge, type ColumnDef, DataTable } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { DataTable } from "@yanqing/ui/components/data-table";
+import { type ColumnDef } from "@yanqing/ui";
 
 export const meta = { title: "排序、搜索与分页", description: "点击表头排序，搜索覆盖所有列；金额和日期列右对齐。" };
 

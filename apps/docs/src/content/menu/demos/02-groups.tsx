@@ -1,16 +1,6 @@
-import {
-  Avatar,
-  AvatarFallback,
-  Button,
-  Menu,
-  MenuGroup,
-  MenuGroupLabel,
-  MenuItem,
-  MenuPopup,
-  MenuSeparator,
-  MenuShortcut,
-  MenuTrigger,
-} from "@yanqing/ui";
+import { Avatar, AvatarFallback } from "@yanqing/ui/components/avatar";
+import { Button } from "@yanqing/ui/components/button";
+import { Menu, MenuGroup, MenuGroupLabel, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger } from "@yanqing/ui/components/menu";
 import { CreditCardIcon, LogOutIcon, SettingsIcon, UserIcon, UserPlusIcon, UsersIcon } from "lucide-react";
 
 export const meta = { title: "分组与标题", description: "用 MenuGroup 与 MenuGroupLabel 组织较长的菜单。" };

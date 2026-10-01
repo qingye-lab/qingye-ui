@@ -1,4 +1,4 @@
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui/components/progress";
 
 export const meta = {
   title: "自定义数值",

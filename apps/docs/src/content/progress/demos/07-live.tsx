@@ -1,4 +1,5 @@
-import { Button, Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@yanqing/ui/components/progress";
 import { useEffect, useState } from "react";
 
 export const meta = { title: "动态更新", description: "value 变化时指示条平滑过渡，完成后切换为成功色。" };

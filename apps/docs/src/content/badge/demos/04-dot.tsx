@@ -1,4 +1,4 @@
-import { Badge } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
 
 export const meta = {
   title: "状态圆点",

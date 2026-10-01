@@ -1,14 +1,6 @@
-import {
-  Badge,
-  Button,
-  PageHeader,
-  PageHeaderActions,
-  PageHeaderBack,
-  PageHeaderContent,
-  PageHeaderDescription,
-  PageHeaderMeta,
-  PageHeaderTitle,
-} from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { PageHeader, PageHeaderActions, PageHeaderBack, PageHeaderContent, PageHeaderDescription, PageHeaderMeta, PageHeaderTitle } from "@yanqing/ui/components/page-header";
 
 export const meta = {
   title: "返回按钮",

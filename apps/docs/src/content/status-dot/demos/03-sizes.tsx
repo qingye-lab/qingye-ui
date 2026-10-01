@@ -1,4 +1,4 @@
-import { StatusDot } from "@yanqing/ui";
+import { StatusDot } from "@yanqing/ui/components/status-dot";
 
 export const meta = { title: "尺寸与仅圆点", description: "不写文字时组件输出读屏文本，例如「在线」。" };
 

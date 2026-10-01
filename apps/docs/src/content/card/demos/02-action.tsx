@@ -1,17 +1,6 @@
-import {
-  Button,
-  Card,
-  CardAction,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-  Menu,
-  MenuItem,
-  MenuPopup,
-  MenuSeparator,
-  MenuTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Card, CardAction, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger } from "@yanqing/ui/components/menu";
 import { EllipsisIcon } from "lucide-react";
 
 export const meta = { title: "头部操作", description: "CardAction 跨标题与说明两行，固定在右上角。" };

@@ -1,18 +1,7 @@
-import {
-  Button,
-  Drawer,
-  DrawerClose,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerPanel,
-  DrawerPopup,
-  DrawerTitle,
-  DrawerTrigger,
-  Field,
-  FieldLabel,
-  Input,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Drawer, DrawerClose, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPanel, DrawerPopup, DrawerTitle, DrawerTrigger } from "@yanqing/ui/components/drawer";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Input } from "@yanqing/ui/components/input";
 
 export const meta = {
   title: "嵌套抽屉",

@@ -1,11 +1,4 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@yanqing/ui";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@yanqing/ui/components/pagination";
 
 export const meta = { title: "默认", description: "页码少时全部列出；首页禁用“上一页”。" };
 

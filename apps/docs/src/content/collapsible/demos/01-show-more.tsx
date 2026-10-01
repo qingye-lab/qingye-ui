@@ -1,4 +1,5 @@
-import { Button, Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@yanqing/ui/components/collapsible";
 import { ChevronDownIcon, GitBranchIcon } from "lucide-react";
 import { useState } from "react";
 

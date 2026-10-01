@@ -1,4 +1,4 @@
-import { Timeline } from "@yanqing/ui";
+import { Timeline } from "@yanqing/ui/components/timeline";
 import { GitCommitHorizontalIcon, RocketIcon, ShieldAlertIcon, TriangleAlertIcon, UndoIcon } from "lucide-react";
 
 export const meta = { title: "图标与状态", description: "icon 作为标记，status 标出成功、警告、失败与提示。" };

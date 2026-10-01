@@ -1,4 +1,5 @@
-import { Badge, Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui/components/frame";
 
 export const meta = { title: "基础", description: "标题与提示落在浅底上，主要内容放进白色面板。" };
 

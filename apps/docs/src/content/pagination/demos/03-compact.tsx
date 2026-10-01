@@ -1,4 +1,4 @@
-import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@yanqing/ui";
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@yanqing/ui/components/pagination";
 import { type MouseEvent, useState } from "react";
 
 export const meta = {

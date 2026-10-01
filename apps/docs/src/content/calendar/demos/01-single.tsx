@@ -1,4 +1,4 @@
-import { Calendar } from "@yanqing/ui";
+import { Calendar } from "@yanqing/ui/components/calendar";
 import { useState } from "react";
 
 export const meta = { title: "单选", description: "今天以小圆点标出；补位的相邻月份日期也可点选。" };

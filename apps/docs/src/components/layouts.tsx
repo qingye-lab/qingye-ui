@@ -1,4 +1,4 @@
-import { ScrollArea } from "@yanqing/ui";
+import { ScrollArea } from "@yanqing/ui/components/scroll-area";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";

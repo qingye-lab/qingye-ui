@@ -1,15 +1,6 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardPanel,
-  CardTitle,
-  DescriptionDetails,
-  DescriptionList,
-  DescriptionListItem,
-  DescriptionTerm,
-  StatusDot,
-} from "@yanqing/ui";
+import { Card, CardDescription, CardHeader, CardPanel, CardTitle } from "@yanqing/ui/components/card";
+import { DescriptionDetails, DescriptionList, DescriptionListItem, DescriptionTerm } from "@yanqing/ui/components/description-list";
+import { StatusDot } from "@yanqing/ui/components/status-dot";
 import { CpuIcon, MapPinIcon, RadioTowerIcon, TimerIcon } from "lucide-react";
 
 export const meta = { title: "分隔线与图标", description: "divided 在条目间加发丝线；名称可带图标。" };

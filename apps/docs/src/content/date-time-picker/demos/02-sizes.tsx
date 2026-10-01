@@ -1,4 +1,4 @@
-import { DateTimePicker } from "@yanqing/ui";
+import { DateTimePicker } from "@yanqing/ui/components/date-time-picker";
 
 export const meta = { title: "尺寸" };
 

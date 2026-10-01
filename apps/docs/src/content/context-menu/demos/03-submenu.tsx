@@ -1,13 +1,4 @@
-import {
-  ContextMenu,
-  ContextMenuItem,
-  ContextMenuPopup,
-  ContextMenuSeparator,
-  ContextMenuSub,
-  ContextMenuSubPopup,
-  ContextMenuSubTrigger,
-  ContextMenuTrigger,
-} from "@yanqing/ui";
+import { ContextMenu, ContextMenuItem, ContextMenuPopup, ContextMenuSeparator, ContextMenuSub, ContextMenuSubPopup, ContextMenuSubTrigger, ContextMenuTrigger } from "@yanqing/ui/components/context-menu";
 
 export const meta = { title: "子菜单", description: "层级不超过两级；更深的选择改用对话框。" };
 

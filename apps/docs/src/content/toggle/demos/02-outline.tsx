@@ -1,4 +1,4 @@
-import { Toggle } from "@yanqing/ui";
+import { Toggle } from "@yanqing/ui/components/toggle";
 import { Grid3X3Icon, PinIcon } from "lucide-react";
 
 export const meta = { title: "描边", description: "放在工具栏或卡片上，需要与背景区分时使用。" };

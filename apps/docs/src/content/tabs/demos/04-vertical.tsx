@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@yanqing/ui/components/tabs";
 
 export const meta = { title: "纵向", description: "设置页常用；方向键改为上下。" };
 

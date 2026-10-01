@@ -1,4 +1,4 @@
-import { Button } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
 import { useState } from "react";
 
 export const meta = {

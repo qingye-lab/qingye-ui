@@ -1,4 +1,4 @@
-import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@yanqing/ui";
+import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@yanqing/ui/components/preview-card";
 
 export const meta = { title: "方向", description: "默认在下方，side 可改为上、左、右；空间不足时自动翻转。" };
 

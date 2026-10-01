@@ -1,4 +1,5 @@
-import { Button, Menu, MenuGroup, MenuGroupLabel, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Menu, MenuGroup, MenuGroupLabel, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@yanqing/ui/components/menu";
 import { ArrowDownUpIcon } from "lucide-react";
 import { useState } from "react";
 

@@ -1,4 +1,4 @@
-import { CopyButton } from "@yanqing/ui";
+import { CopyButton } from "@yanqing/ui/components/copy-button";
 
 export const meta = { title: "自定义文字", description: "用 children 写明复制的内容。" };
 

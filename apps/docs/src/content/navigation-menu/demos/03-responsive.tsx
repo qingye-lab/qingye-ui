@@ -1,21 +1,6 @@
-import {
-  Button,
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuLinkDescription,
-  NavigationMenuLinkTitle,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-  Sheet,
-  SheetHeader,
-  SheetPanel,
-  SheetPopup,
-  SheetTitle,
-  SheetTrigger,
-} from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuLinkDescription, NavigationMenuLinkTitle, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@yanqing/ui/components/navigation-menu";
+import { Sheet, SheetHeader, SheetPanel, SheetPopup, SheetTitle, SheetTrigger } from "@yanqing/ui/components/sheet";
 import { MenuIcon } from "lucide-react";
 
 export const meta = {

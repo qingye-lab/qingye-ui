@@ -1,4 +1,5 @@
-import { ToggleGroup, ToggleGroupItem, Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@yanqing/ui";
+import { ToggleGroup, ToggleGroupItem } from "@yanqing/ui/components/toggle-group";
+import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@yanqing/ui/components/tooltip";
 import { CodeIcon, ListOrderedIcon, QuoteIcon } from "lucide-react";
 
 export const meta = { title: "配合 Tooltip", description: "仅图标时，用 Tooltip 给鼠标用户补充说明。" };

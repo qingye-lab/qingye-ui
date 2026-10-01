@@ -1,4 +1,6 @@
-import { Checkbox, Fieldset, FieldsetLegend, Label } from "@yanqing/ui";
+import { Checkbox } from "@yanqing/ui/components/checkbox";
+import { Fieldset, FieldsetLegend } from "@yanqing/ui/components/fieldset";
+import { Label } from "@yanqing/ui/components/label";
 
 export const meta = { title: "作为问题", description: "variant=\"label\" 的标题与字段标签同级，适合一组复选框。" };
 

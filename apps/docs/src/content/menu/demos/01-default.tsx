@@ -1,4 +1,5 @@
-import { Button, Menu, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { Menu, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger } from "@yanqing/ui/components/menu";
 import { ArchiveIcon, CopyIcon, EllipsisIcon, PencilIcon, Share2Icon, Trash2Icon } from "lucide-react";
 
 export const meta = {

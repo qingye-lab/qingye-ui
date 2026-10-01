@@ -1,4 +1,6 @@
-import { Badge, Button, Frame, FrameDescription, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
+import { Frame, FrameDescription, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui/components/frame";
 import { ExternalLinkIcon } from "lucide-react";
 
 export const meta = { title: "多个面板", description: "相邻面板之间自动留出 4px，露出外框的浅底作为分隔。" };

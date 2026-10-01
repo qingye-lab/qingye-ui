@@ -1,4 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage, Badge } from "@yanqing/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@yanqing/ui/components/avatar";
+import { Badge } from "@yanqing/ui/components/badge";
 
 export const meta = { title: "组合：评论", description: "头像与姓名、时间组成评论头部，正文与姓名左对齐。" };
 

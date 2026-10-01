@@ -1,14 +1,4 @@
-import {
-  Combobox,
-  ComboboxChip,
-  ComboboxChips,
-  ComboboxChipsInput,
-  ComboboxEmpty,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxPopup,
-  ComboboxValue,
-} from "@yanqing/ui";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxEmpty, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxValue } from "@yanqing/ui/components/combobox";
 
 export const meta = { title: "多选标签", description: "已选项显示为标签；输入框为空时按 Backspace 移除最后一个。" };
 

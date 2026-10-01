@@ -1,12 +1,8 @@
-import {
-  RadioGroupPrimitive,
-  RadioPrimitive,
-  segmentedControlItemVariants,
-  segmentedControlRootClassName,
-  type Theme,
-  useTheme,
-  useUILocale,
-} from "@yanqing/ui";
+import type { Theme } from "@yanqing/ui/components/theme-provider";
+import { RadioGroupPrimitive, RadioPrimitive } from "@yanqing/ui/components/radio-group";
+import { segmentedControlItemVariants, segmentedControlRootClassName } from "@yanqing/ui/components/segmented-control";
+import { useTheme } from "@yanqing/ui/components/theme-provider";
+import { useUILocale } from "@yanqing/ui/locale";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 
 export const meta = {

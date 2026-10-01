@@ -1,4 +1,5 @@
-import { Field, FieldLabel, Slider, SliderValue } from "@yanqing/ui";
+import { Field, FieldLabel } from "@yanqing/ui/components/field";
+import { Slider, SliderValue } from "@yanqing/ui/components/slider";
 
 export const meta = { title: "标签与数值", description: "Field 提供标签，SliderValue 显示当前值。" };
 

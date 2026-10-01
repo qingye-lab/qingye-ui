@@ -1,4 +1,4 @@
-import { Heading } from "@yanqing/ui";
+import { Heading } from "@yanqing/ui/components/typography";
 
 export const meta = { title: "标题", description: "level 决定语义层级，size 决定字号，二者可以独立设置。" };
 

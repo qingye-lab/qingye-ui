@@ -1,4 +1,4 @@
-import { SearchInput } from "@yanqing/ui";
+import { SearchInput } from "@yanqing/ui/components/search-input";
 
 export const meta = { title: "加载与禁用", description: "loading 用 Spinner 替换搜索图标；禁用时不显示清除按钮。" };
 

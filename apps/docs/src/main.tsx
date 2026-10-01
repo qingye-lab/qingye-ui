@@ -1,4 +1,7 @@
-import { MotionProvider, ThemeProvider, ToastProvider, TooltipProvider } from "@yanqing/ui";
+import { MotionProvider } from "@yanqing/ui/components/motion-provider";
+import { ThemeProvider } from "@yanqing/ui/components/theme-provider";
+import { ToastProvider } from "@yanqing/ui/components/toast";
+import { TooltipProvider } from "@yanqing/ui/components/tooltip";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";

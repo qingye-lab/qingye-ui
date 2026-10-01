@@ -1,4 +1,5 @@
-import { CopyButton, InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui";
+import { CopyButton } from "@yanqing/ui/components/copy-button";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui/components/input-group";
 
 export const meta = { title: "组合：密钥输入框", description: "放进 InputGroupAddon，复制只读字段的内容。" };
 

@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui";
+import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui/components/accordion";
 
 export const meta = { title: "同时展开多个与禁用", description: "multiple 允许多个分节同时展开；单个分节可以禁用。" };
 

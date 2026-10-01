@@ -1,4 +1,5 @@
-import { Badge, Button } from "@yanqing/ui";
+import { Badge } from "@yanqing/ui/components/badge";
+import { Button } from "@yanqing/ui/components/button";
 import { XIcon } from "lucide-react";
 import { useState } from "react";
 

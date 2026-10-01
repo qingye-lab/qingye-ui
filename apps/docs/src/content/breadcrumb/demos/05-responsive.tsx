@@ -1,16 +1,5 @@
-import {
-  Breadcrumb,
-  BreadcrumbEllipsis,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-  Menu,
-  MenuItem,
-  MenuPopup,
-  MenuTrigger,
-} from "@yanqing/ui";
+import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@yanqing/ui/components/breadcrumb";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@yanqing/ui/components/menu";
 import { Fragment } from "react";
 
 export const meta = {

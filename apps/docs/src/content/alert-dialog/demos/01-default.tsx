@@ -1,14 +1,5 @@
-import {
-  AlertDialog,
-  AlertDialogClose,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogPopup,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
-} from "@yanqing/ui";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@yanqing/ui/components/alert-dialog";
+import { Button } from "@yanqing/ui/components/button";
 
 export const meta = { title: "删除确认", description: "不可逆的操作用 destructive 确认按钮，取消放在前面。" };
 

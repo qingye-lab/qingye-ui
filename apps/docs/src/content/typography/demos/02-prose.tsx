@@ -1,4 +1,5 @@
-import { CodeBlock, Prose } from "@yanqing/ui";
+import { CodeBlock } from "@yanqing/ui/components/code-block";
+import { Prose } from "@yanqing/ui/components/typography";
 
 export const meta = { title: "长文 Prose", description: "段落、列表、链接、引用、行内代码、表格、分隔线；内部的组件保持自身样式。" };
 

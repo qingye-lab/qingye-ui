@@ -1,4 +1,5 @@
-import { InputGroup, InputGroupAddon, InputGroupText, NumberField, NumberFieldInput } from "@yanqing/ui";
+import { InputGroup, InputGroupAddon, InputGroupText } from "@yanqing/ui/components/input-group";
+import { NumberField, NumberFieldInput } from "@yanqing/ui/components/number-field";
 
 export const meta = { title: "组合：带单位", description: "放进 InputGroup，前后加货币符号与币种。" };
 

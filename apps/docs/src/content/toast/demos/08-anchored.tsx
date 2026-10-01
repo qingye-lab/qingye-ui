@@ -1,4 +1,5 @@
-import { AnchoredToastProvider, anchoredToastManager, Button } from "@yanqing/ui";
+import { Button } from "@yanqing/ui/components/button";
+import { AnchoredToastProvider, anchoredToastManager } from "@yanqing/ui/components/toast";
 import { CopyIcon } from "lucide-react";
 import { useRef } from "react";
 
