@@ -1,0 +1,4 @@
+const _02Inset = 'import { Badge, Disclosure, DisclosurePanel, DisclosureTrigger } from "@yanqing/ui";\nimport { TerminalIcon } from "lucide-react";\n\nexport const meta = {\n  title: "独立区块",\n  description: "inset：自带边框，适合卡片中的详情或日志。",\n};\n\nconst log = [\n  "14:32:01  安装依赖  pnpm install --frozen-lockfile",\n  "14:32:19  构建  pnpm build",\n  "14:32:46  上传 128 个文件到 CDN",\n  "14:32:49  部署完成，耗时 48 秒",\n];\n\nexport default function Demo() {\n  return (\n    <Disclosure className="w-full max-w-md" defaultOpen variant="inset">\n      <DisclosureTrigger>\n        <TerminalIcon />\n        构建日志\n        <Badge variant="success">成功</Badge>\n      </DisclosureTrigger>\n      <DisclosurePanel>\n        <pre className="numeric overflow-x-auto rounded-lg bg-muted p-3 font-mono text-muted-foreground text-xs leading-relaxed">\n          {log.join("\\n")}\n        </pre>\n      </DisclosurePanel>\n    </Disclosure>\n  );\n}\n';
+export {
+  _02Inset as default
+};

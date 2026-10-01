@@ -1,0 +1,4 @@
+const _02Inline = 'import { Badge, Button, Inline, Stack, Text } from "@yanqing/ui";\nimport { PlusIcon } from "lucide-react";\n\nexport const meta = { title: "Inline", description: "标题与操作两端对齐；标签一行放不下时自动换行。" };\n\nconst tags = ["React", "TypeScript", "设计系统", "无障碍", "深色模式", "国际化"];\n\nexport default function Demo() {\n  return (\n    <Stack className="w-full max-w-md" gap={3}>\n      <Inline justify="between">\n        <Text as="p" className="font-medium">\n          技术标签\n        </Text>\n        <Button size="sm" variant="outline">\n          <PlusIcon />\n          添加\n        </Button>\n      </Inline>\n      <Inline as="ul" aria-label="技术标签">\n        {tags.map((tag) => (\n          <li key={tag}>\n            <Badge variant="outline">{tag}</Badge>\n          </li>\n        ))}\n      </Inline>\n    </Stack>\n  );\n}\n';
+export {
+  _02Inline as default
+};

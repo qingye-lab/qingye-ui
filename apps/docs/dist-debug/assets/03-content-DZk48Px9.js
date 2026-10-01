@@ -1,0 +1,4 @@
+const _03Content = 'import { Alert, AlertDescription, AlertTitle } from "@yanqing/ui";\nimport { CircleAlertIcon } from "lucide-react";\n\nexport const meta = {\n  title: "仅标题与多段说明",\n  description: "标题可以单独使用；说明里可以放列表等多段内容。",\n};\n\nexport default function Demo() {\n  return (\n    <div className="grid w-full max-w-xl gap-3">\n      <Alert variant="info">\n        <AlertTitle>你正在以只读身份查看“华东仓储”项目。</AlertTitle>\n      </Alert>\n      <Alert variant="destructive">\n        <CircleAlertIcon />\n        <AlertTitle>导入失败，共 3 处错误</AlertTitle>\n        <AlertDescription>\n          <ul className="list-disc ps-4">\n            <li>第 12 行：设备编号 YQ-SC-2039 已存在</li>\n            <li>第 27 行：所属仓库不能为空</li>\n            <li>第 41 行：负责人手机号格式不正确</li>\n          </ul>\n        </AlertDescription>\n      </Alert>\n    </div>\n  );\n}\n';
+export {
+  _03Content as default
+};

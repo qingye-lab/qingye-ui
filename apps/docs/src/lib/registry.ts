@@ -41,3 +41,8 @@ export async function loadDemos(slug: string): Promise<LoadedDemo[]> {
     }),
   );
 }
+
+/** How many demo files a component has, without loading them. */
+export function demoCount(slug: string): number {
+  return Object.keys(demoLoaders).filter((path) => slugOf(path) === slug).length;
+}

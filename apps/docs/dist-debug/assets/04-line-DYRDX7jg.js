@@ -1,0 +1,64 @@
+import { j as jsxRuntimeExports } from "./index-DM02Iz28.js";
+import { C as Card, a as CardHeader, b as CardTitle, c as CardDescription, d as CardPanel } from "./card-BUhACMgh.js";
+import { C as ChartContainer, R as RechartsPrimitive, a as ChartTooltip, b as ChartTooltipContent, c as ChartLegend, d as ChartLegendContent } from "./chart-B5x57z_Q.js";
+const { CartesianGrid, Line, LineChart, XAxis, YAxis } = RechartsPrimitive;
+const meta = {
+  title: "多系列折线图",
+  description: "2px 线宽，不画常驻数据点；悬停时出现带卡片色描边的圆点和竖向发丝线。"
+};
+const data = [
+  { week: "7/7", east: 182, south: 164, north: 141 },
+  { week: "7/14", east: 176, south: 171, north: 138 },
+  { week: "7/21", east: 191, south: 168, north: 149 },
+  { week: "7/28", east: 204, south: 175, north: 152 },
+  { week: "8/4", east: 198, south: 186, north: 147 },
+  { week: "8/11", east: 212, south: 181, north: 158 },
+  { week: "8/18", east: 219, south: 193, north: 163 },
+  { week: "8/25", east: 214, south: 201, north: 160 },
+  { week: "9/1", east: 226, south: 198, north: 171 },
+  { week: "9/8", east: 233, south: 207, north: 168 },
+  { week: "9/15", east: 241, south: 212, north: 176 },
+  { week: "9/22", east: 238, south: 219, north: 181 }
+];
+const config = {
+  east: { label: "华东", color: "var(--chart-1)" },
+  south: { label: "华南", color: "var(--chart-2)" },
+  north: { label: "华北", color: "var(--chart-4)" }
+};
+function Demo() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "w-full", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "各区域日均订单" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardDescription, { children: "近 12 周 · 单店日均（单）" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CardPanel, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChartContainer, { className: "aspect-auto h-64 w-full sm:h-72", config, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(LineChart, { accessibilityLayer: true, data, margin: { left: 0, right: 8, top: 8 }, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CartesianGrid, { vertical: false }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(XAxis, { axisLine: false, dataKey: "week", minTickGap: 16, tickLine: false, tickMargin: 8 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(YAxis, { axisLine: false, domain: [120, 250], ticks: [120, 160, 200, 240], tickLine: false, tickMargin: 4, width: "auto" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        ChartTooltip,
+        {
+          content: /* @__PURE__ */ jsxRuntimeExports.jsx(ChartTooltipContent, { indicator: "line", labelFormatter: (label) => `${label} 当周` })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ChartLegend, { content: /* @__PURE__ */ jsxRuntimeExports.jsx(ChartLegendContent, {}) }),
+      Object.keys(config).map((key) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Line,
+        {
+          activeDot: { r: 4, strokeWidth: 2 },
+          animationDuration: 600,
+          dataKey: key,
+          dot: false,
+          stroke: `var(--color-${key})`,
+          strokeWidth: 2,
+          type: "monotone"
+        },
+        key
+      ))
+    ] }) }) })
+  ] });
+}
+export {
+  Demo as default,
+  meta
+};

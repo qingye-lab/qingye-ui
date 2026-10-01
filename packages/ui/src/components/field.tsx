@@ -26,7 +26,7 @@ export function Field({
           "group/field flex gap-2",
           orientation === "vertical"
             ? "flex-col items-start"
-            : "flex-row items-center [&>[data-slot=field-content]]:flex-1",
+            : "flex-row items-center gap-3 has-[>[data-slot=field-content]]:items-start [&>[data-slot=field-content]]:flex-1 has-[>[data-slot=field-content]]:*:data-[slot=checkbox]:mt-px has-[>[data-slot=field-content]]:*:data-[slot=radio]:mt-px",
           className,
         )}
         data-orientation={orientation}
@@ -148,15 +148,22 @@ export function FieldDescription({
 
 type FieldErrorProps = FieldPrimitive.Error.Props & {
   /**
-   * Validation messages from a form library such as react-hook-form. Duplicates
-   * collapse; several distinct messages render as a list.
+   * Validation messages from a form library such as react-hook-form or
+   * TanStack Form. Empty entries are ignored, duplicates collapse, and several
+   * distinct messages render as a list.
    */
   errors?: ReadonlyArray<{ message?: string | undefined } | undefined>;
 };
 
+const fieldErrorClassName =
+  "text-destructive-foreground text-xs transition-[opacity,translate] duration-(--qy-duration-fast) ease-(--qy-ease-out) data-ending-style:duration-(--qy-duration-press) data-starting-style:-translate-y-0.5 data-starting-style:opacity-0 data-ending-style:opacity-0 [&_ul]:ms-4 [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-0.5";
+
 /**
- * Renders whenever it has content. Pass `match` to defer to Base UI's
- * constraint-validation states instead.
+ * With content (`children` or a non-empty `errors`), the message is shown
+ * as given — the caller decides when it renders. Without content it follows
+ * Base UI: the browser's validation message or the `Form` `errors` entry
+ * appears while the field is invalid. Pass `match` (for example
+ * `"valueMissing"`) to tie a custom message to one validity state.
  */
 export function FieldError({
   className,
@@ -173,7 +180,7 @@ export function FieldError({
     ] as string[];
     if (messages.length > 1) {
       return (
-        <ul className="ms-4 list-disc">
+        <ul>
           {messages.map((message) => (
             <li key={message}>{message}</li>
           ))}
@@ -182,19 +189,37 @@ export function FieldError({
     }
     return messages[0];
   }, [children, errors]);
-  if (!content && match === undefined) return null;
-  const error = (
+
+  if (!inField) {
+    // Outside a Field there is no validity to follow: render content as is.
+    if (!content) return null;
+    const { render: _render, style, ...rest } = props;
+    return (
+      <div
+        className={cn(fieldErrorClassName, typeof className === "string" ? className : undefined)}
+        data-slot="field-error"
+        style={typeof style === "function" ? undefined : style}
+        {...(rest as React.ComponentProps<"div">)}
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
     <FieldPrimitive.Error
-      className={cn("text-destructive-foreground text-xs", className)}
+      className={
+        typeof className === "function"
+          ? (state) => cn(fieldErrorClassName, className(state))
+          : cn(fieldErrorClassName, className)
+      }
       data-slot="field-error"
-      match={match ?? true}
+      match={match ?? (content ? true : undefined)}
       {...props}
-    >
-      {content}
-    </FieldPrimitive.Error>
+      // An explicit `children: undefined` would hide Base UI's own message.
+      {...(content ? { children: content } : null)}
+    />
   );
-  // Base UI requires a Field root; standalone errors get an invisible one.
-  return inField ? error : <FieldPrimitive.Root>{error}</FieldPrimitive.Root>;
 }
 
 export const FieldControl: typeof FieldPrimitive.Control =

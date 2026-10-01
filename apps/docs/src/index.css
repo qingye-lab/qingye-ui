@@ -7,4 +7,119 @@
 
 :root {
   --qy-font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Site chrome. */
+  --docs-header-height: 3.5rem;
+
+  /*
+   * Syntax colours for sugar-high. Three quiet hues (keyword, entity, string)
+   * over the neutral text; everything else stays in the foreground family.
+   */
+  --sh-keyword: oklch(0.5 0.15 300);
+  --sh-entity: oklch(0.5 0.14 255);
+  --sh-class: oklch(0.5 0.14 255);
+  --sh-string: oklch(0.5 0.1 165);
+  --sh-property: oklch(0.47 0.07 235);
+  --sh-identifier: var(--qy-foreground);
+  --sh-jsxliterals: var(--qy-foreground);
+  --sh-sign: var(--qy-foreground-muted);
+  --sh-comment: color-mix(in srgb, var(--qy-foreground-muted) 88%, transparent);
+  --sh-space: inherit;
+  --sh-break: inherit;
+}
+
+.dark,
+[data-theme="dark"] {
+  --sh-keyword: oklch(0.8 0.1 300);
+  --sh-entity: oklch(0.8 0.1 250);
+  --sh-class: oklch(0.8 0.1 250);
+  --sh-string: oklch(0.82 0.09 165);
+  --sh-property: oklch(0.82 0.05 235);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--docs-header-height) + 1.5rem);
+    scrollbar-color: color-mix(in srgb, var(--qy-foreground) 22%, transparent) transparent;
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--qy-info) 22%, transparent);
+    color: var(--qy-foreground-strong);
+  }
+
+  /* Programmatic focus targets (headings, <main>) never show a ring. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+/* Links and plain controls authored by the site, not the library. */
+@utility focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  &:focus-visible {
+    outline-color: var(--qy-ring);
+  }
+}
+
+/* --- Code ------------------------------------------------------------------ */
+
+.docs-code {
+  font-family: var(--qy-font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  font-variant-ligatures: none;
+  tab-size: 2;
+  color: var(--qy-foreground);
+}
+
+.docs-code .sh__line {
+  display: inline;
+}
+
+.docs-code .sh__token--comment {
+  font-style: italic;
+}
+
+/* Inline code inside running text. `inline` keeps it flowing with the sentence
+   instead of breaking a line on its own inside flex-column containers. */
+.docs-inline-code {
+  display: inline;
+  box-decoration-break: clone;
+  font-family: var(--qy-font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  border-radius: var(--qy-radius-sm);
+  background-color: var(--qy-surface-inset);
+  color: var(--qy-foreground-strong);
+  overflow-wrap: break-word;
+}
+
+/* --- Route content entry --------------------------------------------------- */
+
+@keyframes docs-enter {
+  from {
+    opacity: 0;
+    translate: 0 6px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-ui-input="keyboard"]) [data-route-enter] {
+    animation: docs-enter var(--qy-duration-base) var(--qy-ease-out) backwards;
+  }
 }

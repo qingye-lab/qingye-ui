@@ -1,0 +1,4 @@
+const _01Basic = 'import { Badge, Frame, FrameDescription, FrameFooter, FrameHeader, FramePanel, FrameTitle } from "@yanqing/ui";\n\nexport const meta = { title: "基础", description: "标题与提示落在浅底上，主要内容放进白色面板。" };\n\nexport default function Demo() {\n  return (\n    <Frame className="w-full max-w-lg">\n      <FrameHeader>\n        <FrameTitle>自定义域名</FrameTitle>\n        <FrameDescription>绑定后可以用自己的域名访问项目。</FrameDescription>\n      </FrameHeader>\n      <FramePanel className="flex flex-col gap-1.5">\n        <div className="flex items-center justify-between gap-4">\n          <span className="truncate font-medium text-sm">shop.yanqing.cn</span>\n          <Badge variant="success">已生效</Badge>\n        </div>\n        <span className="text-muted-foreground text-xs">SSL 证书将于 2027年1月12日自动续期</span>\n      </FramePanel>\n      <FrameFooter className="text-muted-foreground text-sm">DNS 记录变更最长需要 48 小时生效。</FrameFooter>\n    </Frame>\n  );\n}\n';
+export {
+  _01Basic as default
+};

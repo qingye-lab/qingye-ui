@@ -1,0 +1,4 @@
+const _03Fade = 'import { ScrollArea } from "@yanqing/ui";\n\nexport const meta = {\n  title: "边缘渐隐",\n  description: "scrollFade 只在还有内容的一侧渐隐，滚到底后自然消失。",\n};\n\nconst terms = [\n  "一、服务内容。青烟云为你提供云端部署、监控与日志服务，具体以控制台展示为准。",\n  "二、账号安全。你应妥善保管账号与访问令牌，因保管不当造成的损失由你自行承担。",\n  "三、数据处理。我们仅在提供服务所必需的范围内处理你的数据，不会出售给第三方。",\n  "四、费用与结算。按量计费项目每日结算，包年包月项目在开通时一次性扣费。",\n  "五、服务变更。重大变更将提前 30 日通过站内信与邮件通知。",\n  "六、争议解决。协议适用中华人民共和国法律，争议提交服务提供方所在地法院管辖。",\n];\n\nexport default function Demo() {\n  return (\n    <ScrollArea className="h-48 w-full max-w-sm rounded-lg border" scrollFade>\n      <div className="flex flex-col gap-3 p-4 text-muted-foreground text-sm leading-relaxed">\n        {terms.map((term) => (\n          <p key={term}>{term}</p>\n        ))}\n      </div>\n    </ScrollArea>\n  );\n}\n';
+export {
+  _03Fade as default
+};

@@ -1,75 +1,224 @@
 "use client";
 
-import { CalendarIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
+import * as React from "react";
 import { useUILocale } from "../locale";
-import { useId, useState, type ComponentProps } from "react";
-import { Calendar } from "./calendar";
+import { cn } from "../utils";
 import { Button } from "./button";
+import { Calendar, type Matcher } from "./calendar";
+import {
+  DatePickerClear,
+  DatePickerTrigger,
+  type DatePickerTriggerProps,
+  formatLocalDate,
+} from "./date-picker";
 import { Input } from "./input";
-import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "./input-group";
-import { Label } from "./label";
-import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "./popover";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "./popover";
 
-type DateTimePickerProps = Pick<ComponentProps<typeof Input>, "id" | "name" | "required" | "disabled" | "readOnly" | "aria-invalid" | "aria-describedby" | "aria-label"> & {
-  label: string;
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: ((value: string) => void) | undefined;
-};
+type CalendarProps = React.ComponentProps<typeof Calendar>;
 
+/** `YYYY-MM-DDTHH:mm:ss.sss` in local time, the format `<input type="datetime-local">` accepts. */
 export function formatLocalDateTime(date: Date): string {
   const pad = (number: number, width = 2) => String(number).padStart(width, "0");
   return `${pad(date.getFullYear(), 4)}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}.${pad(date.getMilliseconds(), 3)}`;
 }
 
-function selectedDate(value: string): Date | undefined {
-  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?$/.test(value)) return undefined;
+/** Parses a local `YYYY-MM-DDTHH:mm[:ss[.sss]]` string; returns `undefined` when it is not a real moment. */
+export function parseLocalDateTime(value: string | null | undefined): Date | undefined {
+  if (!value || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?$/.test(value)) return undefined;
   const date = new Date(value);
   if (!Number.isFinite(date.getTime()) || formatLocalDateTime(date).slice(0, 16) !== value.slice(0, 16)) return undefined;
   return date;
 }
 
-export function DateTimePicker({ id, name, label, value, defaultValue = "", onValueChange, disabled, readOnly, required, "aria-invalid": ariaInvalid, ...inputProps }: DateTimePickerProps) {
-  const { messages } = useUILocale();
-  const generatedId = useId();
+export type DateTimePickerProps = Omit<
+  DatePickerTriggerProps,
+  "children" | "value" | "defaultValue" | "onChange" | "placeholder" | "icon" | "valueId"
+> & {
+  /** Names the field in built-in labels, e.g. "开始" → "选择开始日期和时间". */
+  label?: string;
+  /** Local `YYYY-MM-DDTHH:mm` (seconds optional); empty string when unset. */
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  /** Submits the value through a hidden input; empty until both parts are valid. */
+  name?: string;
+  required?: boolean;
+  readOnly?: boolean;
+  placeholder?: string;
+  /** Time granularity in seconds, as on `<input type="time">`. */
+  step?: number;
+  /** Time used when a day is picked before any time. */
+  defaultTime?: string;
+  clearable?: boolean;
+  clearLabel?: string;
+  formatValue?: (value: Date) => string;
+  locale?: NonNullable<CalendarProps["locale"]>;
+  disabledDates?: Matcher | Matcher[];
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required" | "disabled">;
+  /** Class for the root wrapper; the trigger fills it. */
+  className?: string;
+};
+
+export function DateTimePicker({
+  label,
+  value,
+  defaultValue = "",
+  onValueChange,
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
+  name,
+  required,
+  readOnly = false,
+  disabled = false,
+  placeholder,
+  step = 60,
+  defaultTime = "00:00",
+  clearable = true,
+  clearLabel,
+  formatValue,
+  locale,
+  disabledDates,
+  calendarProps,
+  size = "default",
+  className,
+  id,
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
+  ...triggerProps
+}: DateTimePickerProps): React.ReactElement {
+  const { code, messages } = useUILocale();
+  const generatedId = React.useId();
   const fieldId = id ?? generatedId;
-  const [localValue, setLocalValue] = useState(defaultValue);
-  const [open, setOpen] = useState(false);
+  const triggerRef = React.useRef<HTMLButtonElement>(null);
+  const valueId = React.useId();
+  const [localValue, setLocalValue] = React.useState(defaultValue);
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
   const current = value ?? localValue;
-  const date = selectedDate(current);
-  const time = current.split("T")[1] ?? "00:00";
+  const date = parseLocalDateTime(current);
+  const time = date ? (current.split("T")[1] ?? defaultTime) : defaultTime;
+  const open = (openProp ?? internalOpen) && !disabled && !readOnly;
+  const withSeconds = step < 60;
+  const popupLabel = label ? messages.selectDateTime(label) : messages.selectDateTimePlaceholder;
+  const format =
+    formatValue ??
+    ((moment: Date) =>
+      new Intl.DateTimeFormat(locale?.code ?? code, {
+        dateStyle: "medium",
+        timeStyle: withSeconds ? "medium" : "short",
+      }).format(moment));
+
+  const setOpen = (next: boolean) => {
+    if (openProp === undefined) setInternalOpen(next);
+    onOpenChange?.(next);
+  };
   const update = (next: string) => {
-    setLocalValue(next);
+    if (value === undefined) setLocalValue(next);
     onValueChange?.(next);
   };
+  const showClear = clearable && date !== undefined && !disabled && !readOnly;
+  // Keep the picked moment audible when an external label names the trigger.
+  const labelledBy = ariaLabelledBy ? `${ariaLabelledBy} ${valueId}` : undefined;
+  const describedBy =
+    !ariaLabelledBy && (ariaLabel || id) && date
+      ? [valueId, ariaDescribedBy].filter(Boolean).join(" ")
+      : ariaDescribedBy;
 
   return (
-    <>
-      <Popover open={open} onOpenChange={setOpen}>
-        <InputGroup>
-          <InputGroupInput nativeInput id={fieldId} value={current.replace("T", " ")} placeholder="YYYY-MM-DD HH:mm" autoComplete="off" required={required} disabled={disabled} readOnly={readOnly} aria-invalid={ariaInvalid === false || ariaInvalid === "false" ? undefined : ariaInvalid} onChange={(event) => update(event.target.value.replace(" ", "T"))} {...inputProps} />
-          <InputGroupAddon align="inline-end">
-            <PopoverTrigger render={<InputGroupButton size="icon-sm" aria-label={messages.selectDateTime(label)} disabled={disabled || readOnly} />}><CalendarIcon /></PopoverTrigger>
-          </InputGroupAddon>
-        </InputGroup>
-        <PopoverContent align="start" aria-label={messages.selectDateTime(label)}>
-          <div className="grid gap-3">
-            <PopoverTitle className="sr-only">{label}</PopoverTitle>
-            <Calendar mode="single" selected={date} {...(date ? { defaultMonth: date } : {})} onSelect={(next) => {
-              if (next) update(`${formatLocalDateTime(next).slice(0, 10)}T${time}`);
-            }} />
-            <div className="grid gap-2">
-              <Label htmlFor={`${fieldId}-time`}>{messages.time}</Label>
-              <Input nativeInput id={`${fieldId}-time`} type="time" step="0.001" value={time} onChange={(event) => {
-                const day = date ?? new Date();
-                update(`${formatLocalDateTime(day).slice(0, 10)}T${event.target.value}`);
-              }} />
+    <div className={cn("relative flex w-full min-w-0", className)} data-slot="date-time-picker">
+      <Popover open={open} onOpenChange={(next) => !readOnly && setOpen(next)}>
+        <PopoverTrigger
+          render={
+            <DatePickerTrigger
+              {...triggerProps}
+              aria-describedby={describedBy}
+              aria-label={ariaLabel}
+              aria-labelledby={labelledBy}
+              aria-readonly={readOnly || undefined}
+              aria-required={required || undefined}
+              className={cn(showClear && (size === "sm" ? "pe-8 sm:pe-7" : "pe-9 sm:pe-8"))}
+              disabled={disabled}
+              icon={showClear ? null : undefined}
+              id={fieldId}
+              placeholder={placeholder ?? messages.selectDateTimePlaceholder}
+              ref={triggerRef}
+              size={size}
+              valueId={valueId}
+            />
+          }
+        >
+          {date ? format(date) : null}
+        </PopoverTrigger>
+        <PopoverPopup align="start" aria-label={popupLabel}>
+          <PopoverTitle className="sr-only">{popupLabel}</PopoverTitle>
+          <Calendar
+            autoFocus
+            {...calendarProps}
+            mode="single"
+            selected={date}
+            {...(calendarProps?.defaultMonth || date ? { defaultMonth: calendarProps?.defaultMonth ?? date! } : {})}
+            onSelect={(next: Date | undefined) => {
+              if (next) update(`${formatLocalDate(next)}T${time}`);
+            }}
+            {...(locale ? { locale } : {})}
+            {...(disabledDates ? { disabled: disabledDates } : {})}
+          />
+          <div
+            className="-mx-2 mt-2 flex items-center gap-2 border-t px-3 pt-2"
+            data-slot="date-time-picker-footer"
+          >
+            <label className="shrink-0 text-muted-foreground text-sm" htmlFor={`${fieldId}-time`}>
+              {messages.time}
+            </label>
+            <Input
+              className="w-auto"
+              id={`${fieldId}-time`}
+              nativeInput
+              onChange={(event) => {
+                if (!event.target.value) return;
+                update(`${formatLocalDate(date ?? new Date())}T${event.target.value}`);
+              }}
+              size="sm"
+              step={step}
+              type="time"
+              value={withSeconds ? time : time.slice(0, 5)}
+            />
+            <div className="ms-auto flex items-center gap-1">
+              <Button
+                onClick={() => {
+                  const now = formatLocalDateTime(new Date());
+                  update(withSeconds ? now.slice(0, 19) : now.slice(0, 16));
+                }}
+                size="sm"
+                variant="ghost"
+              >
+                {messages.now}
+              </Button>
+              <Button onClick={() => setOpen(false)} size="sm" variant="outline">
+                {messages.done}
+              </Button>
             </div>
-            <Button variant="outline" onClick={() => setOpen(false)}>{messages.done}</Button>
           </div>
-        </PopoverContent>
+        </PopoverPopup>
       </Popover>
-      {name ? <Input nativeInput unstyled className="hidden" type="hidden" name={name} value={date ? current : ""} /> : null}
-    </>
+      {showClear ? (
+        <DatePickerClear
+          aria-label={clearLabel ?? messages.clearDate}
+          onClick={() => {
+            update("");
+            triggerRef.current?.focus();
+          }}
+          size={size}
+        >
+          <XIcon aria-hidden="true" />
+        </DatePickerClear>
+      ) : null}
+      {name ? <input disabled={disabled} name={name} type="hidden" value={date ? current : ""} /> : null}
+    </div>
   );
 }

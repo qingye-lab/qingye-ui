@@ -1,105 +1,111 @@
-# @qingye/ui-kit
+# @yanqing/ui
 
-可供多个 React 项目复用的私有组件包。当前覆盖 coss 的全部 **54 个 registry 基础组件**、Date Picker 与 Segmented Control 组合模式、两个官方 Hook，以及 9 个本地通用组合组件。完整清单见 `catalog.json`。
+React 组件库：Base UI 原语 + coss ui（MIT）的组件设计 + 三层设计令牌，内置浅色 / 深色主题与动效规范。需要 React 19.2+。
 
 ## 安装
 
-需要 React / React DOM 19.2。在本仓库中使用 `workspace:*`；其他项目可以安装构建后的 tarball：
-
 ```sh
-# 本仓库根目录
-pnpm --filter @qingye/ui-kit build
-cd packages/ui-kit
-pnpm pack --pack-destination ../../output/ui-kit
-
-# 消费项目：替换为生成包的实际路径
-pnpm add /absolute/path/qingye-ui-kit-0.1.0-dev.2.tgz
+pnpm add https://github.com/qingye-lab/yanqing-ui/releases/download/v0.1.0/yanqing-ui-0.1.0.tgz
 ```
 
-包保持 `private: true`，本次没有公开发布。
+`DataTable` 需要 `@tanstack/react-table`，`Chart` 需要 `recharts`；它们是可选的 peer 依赖，只在使用对应组件时安装。
 
-## 普通 React 项目
+## 样式
 
-无需 Tailwind 编译器，导入预编译样式一次：
-
-`ui.css` 包含组件所需样式和基础 reset；应用自定义布局使用自己的 CSS，它不提供完整 Tailwind 工具全集。
-
-```tsx
-import "@qingye/ui-kit/ui.css";
-import { Button } from "@qingye/ui-kit/components/button";
-import { Dialog, DialogTrigger, DialogPopup, DialogHeader, DialogTitle,
-  DialogDescription } from "@qingye/ui-kit/components/dialog";
-import { PasswordInput, FileUpload, DataTable } from "@qingye/ui-kit/extras";
-import { ToastProvider } from "@qingye/ui-kit/components/toast";
-
-export function Example() {
-  return <ToastProvider>
-    <Dialog>
-      <DialogTrigger render={<Button />}>编辑</DialogTrigger>
-      <DialogPopup>
-        <DialogHeader>
-          <DialogTitle>编辑资料</DialogTitle>
-          <DialogDescription>修改你的偏好设置</DialogDescription>
-        </DialogHeader>
-      </DialogPopup>
-    </Dialog>
-  </ToastProvider>;
-}
-```
-
-一个应用只需一个 ToastProvider。操作结果通过 `toastManager.add` 展示；表单字段验证与持续上下文信息可以保留在页面中。FileUpload 负责选择、拖放、类型/数量/大小校验和移除，不发网络请求；真实上传由调用项目实现。
-
-## Tailwind 4 项目
-
-使用包内源码扫描，保持按需样式拆分；不要同时导入预编译 `ui.css`。
+**Tailwind CSS 4 项目**（推荐）——由 Tailwind 扫描组件源码，只生成实际用到的类：
 
 ```css
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "@qingye/ui-kit/styles.css";
-@custom-variant dark (&:where(.dark, .dark *));
+@import "@yanqing/ui/styles.css";
 ```
 
-需要相关控件的页面再导入 `business.css`（组合选择、数值、日历、Popover、Toast）、`catalog.css`（扩展的 coss 基础组件和本地组合组件）。共享动效从 `motion.css` 导入。
+`styles.css` 已声明 `dark` 变体（`.dark` 或 `data-theme="dark"` 祖先），无需重复配置。
 
-`styles.css` 是唯一 foundation tokens 和 Tailwind 语义映射来源，默认 light-only。消费项目可以在其后覆盖 `--primary`、`--primary-foreground`、`--radius`、`--font-family-sans` 等角色来定制品牌；修改颜色时应验证文字对比度。完整暗色主题尚未验收，不把上游 dark class 的存在视作暗色主题完成。
+**没有 Tailwind 的项目**——导入预编译样式（gzip 约 30 KB）：
 
-## 导出与组合
+```ts
+import "@yanqing/ui/ui.css";
+```
 
-- `@qingye/ui-kit` 保留现有工作台兼容接口，并补充没有同名冲突的基础组件。
-- `@qingye/ui-kit/primitives` 提供完整 coss 组合接口；它与现有根入口的 AlertDialog、Sidebar 等接口有区别。
-- `@qingye/ui-kit/components/<name>` 按组件导入；包括 `segmented-control` 的共享样式 recipe。
-- `@qingye/ui-kit/extras`：PasswordInput、SearchInput、FileUpload、DataTable、Steps、Timeline、Tree、Carousel、CopyButton。
+两种方式二选一，不要同时导入。
 
-## 语言与默认文案
-
-根入口、`primitives` 和逐组件入口共用语言配置，默认简体中文。它覆盖日历月份、星期、今天/选中状态和导航辅助标签，以及分页、加载、弹框/抽屉关闭、侧栏、选择器、数值输入、Toast 与通用扩展的默认文案；这些默认值不依赖浏览器语言。用户内容、列标题、业务文案和代码片段由调用项目提供。
-
-英文词条按需导入，在应用根部配置一次；宿主页面的 `lang` 也应与项目语言保持一致：
+## 根部 Provider
 
 ```tsx
-import { UILocaleProvider } from "@qingye/ui-kit/locale";
-import { enUS } from "@qingye/ui-kit/locales/en-US";
+import { ThemeProvider, ToastProvider, TooltipProvider } from "@yanqing/ui";
 
-<UILocaleProvider locale={enUS}>
-  <YourApp />
-</UILocaleProvider>
+<ThemeProvider>
+  <TooltipProvider>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+  </TooltipProvider>
+</ThemeProvider>
 ```
 
-中文应用不需要额外配置，也不加载英文词条。可以用 `messages={{ close: "关闭面板" }}` 局部覆写词条；嵌套 Provider 继承父级语言。组件自身的 `aria-label`、`closeProps`、`copyLabel`、`pageLabel` 等参数优先于默认值。切换 Provider 不重建组件，不清空输入、已选日期或展开状态。
+为避免首屏闪烁，在 `<head>` 中尽早应用已保存的主题：
 
-Calendar 保留 DayPicker 的 `locale`、`labels`、`formatters` 和 `weekStartsOn`；默认语言同时影响可见文案和辅助标签。月份下拉使用相同 locale，局部 `formatters` 只覆盖传入项。DatePicker 的按钮日期格式跟随其显式日历 locale 或 Provider，可以继续用 `formatDate` 替换；表单提交仍为本地 `YYYY-MM-DD`。DateTimePicker 的日期时间值和精度保持不变。当前内置语言为简体中文和美式英文，不宣称已翻译其他语言。
+```html
+<script>
+  try {
+    var t = localStorage.getItem("yq-theme");
+    var dark = t === "dark" || ((!t || t === "system") && matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.classList.toggle("dark", dark);
+  } catch (e) {}
+</script>
+```
 
-DataTable 使用 TanStack Table，可排序、搜索和分页，`columns` 使用 ColumnDef。它是客户端表格组合，服务端分页、虚拟列表和树形表格不包含在此接口中。Tree 支持受控展开/选择、上下左右/Home/End/Enter/Space 键及禁用项；Carousel 支持手动按钮和原生横向滑动，无自动播放。所有组合组件无业务 API、路由或会话依赖，界面文案可通过 props 替换。
+## 导入
 
-## 来源与更新
+```tsx
+import { Button, Dialog, DialogPopup } from "@yanqing/ui";          // 根入口
+import { Select } from "@yanqing/ui/components/select";             // 单组件入口
+```
 
-仅复用 MIT `apps/ui/registry/default`，不提取 AGPL `packages/ui`。保留完整 MIT 通知及上游/本地 SHA-256，见 `THIRD_PARTY_NOTICES.md` 与 `coss-source.json`。现有源码中的本地动效、触摸目标和兼容适配已记录，更新时审核差异后适配，不盲目覆盖。
+已有 shadcn 命名的组件同时导出别名（`DropdownMenu*`、`DialogContent`、`SheetContent`、`TabsTrigger`、`TooltipContent` 等），便于迁移。
+
+## 主题定制
+
+令牌分三层：`tokens/primitives.css`（原始色板）→ `tokens/semantic.css`（语义角色，浅色 + 深色）→ `tokens/components.css`（字号、间距、圆角、尺寸、密度、动效）。组件只读语义层和组件层。在导入 `styles.css` 之后覆盖 `--qy-*` 令牌即可定制：
+
+```css
+:root {
+  --qy-primary: oklch(0.55 0.18 255);
+  --qy-primary-foreground: oklch(0.99 0 0);
+  --qy-radius: 0.5rem;
+}
+.dark {
+  --qy-primary: oklch(0.7 0.15 255);
+}
+```
+
+不带前缀的 `--background`、`--card` 等是供 shadcn 生态读取的兼容变量，始终指向 `--qy-*`，不要直接覆盖。
+
+密度：在任意容器上设置 `data-density="compact"`，内部表格行高、面板内边距和间距随之收紧。
+
+## 国际化
+
+内置文案默认简体中文，不依赖浏览器语言。切换英文：
+
+```tsx
+import { UILocaleProvider } from "@yanqing/ui/locale";
+import { enUS } from "@yanqing/ui/locales/en-US";
+
+<UILocaleProvider locale={enUS}>…</UILocaleProvider>
+```
+
+可用 `messages={{ close: "关闭面板" }}` 局部覆写；组件自身的 `aria-label` 等参数优先于默认文案。
+
+## 动效
+
+`motion.css` 统一处理：按压反馈（`.qy-pressable`）、选择器与菜单弹层入场、键盘操作时即时切换、`prefers-reduced-motion` 下只保留透明度与颜色变化。可选的 `MotionProvider` 会在 `<html>` 上标记当前输入方式。
+
+## 来源
+
+适配自 coss ui 的组件记录在 `coss-source.json`（上游路径、SHA-256 与每项本地改动），`upstream/` 不随包发布。检查上游更新：
 
 ```sh
-pnpm --filter @qingye/ui-kit check:upstream
+pnpm --filter @yanqing/ui check:upstream
 ```
 
-这个命令只读取官方 registry、报告源码变化，不改组件；网络错误视为未验证。完整仓库 Fork 可以另行用于跟踪上游。当前包不依赖 Fork、coss 官网、后端或 Origin UI。
-
-DatePicker 复用官方 Calendar + Popover + Button 组合模式，支持受控/非受控日期、清除、禁用日期和本地 `YYYY-MM-DD` 表单值；与已有 DateTimePicker 分开导出，适用于只选日期的场景。
+许可：MIT，见 `LICENSE` 与 `THIRD_PARTY_NOTICES.md`。

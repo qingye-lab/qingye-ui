@@ -1,0 +1,4 @@
+const _04WithIcon = 'import { Button } from "@yanqing/ui";\nimport { ArrowRightIcon, ChevronDownIcon, DownloadIcon, Trash2Icon } from "lucide-react";\n\nexport const meta = {\n  title: "带图标",\n  description: "图标放在文字前表示动作类型，放在文字后表示去向或展开。图标会自动调整尺寸与透明度。",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button variant="outline">\n        <DownloadIcon aria-hidden="true" />\n        导出报表\n      </Button>\n      <Button>\n        下一步\n        <ArrowRightIcon aria-hidden="true" />\n      </Button>\n      <Button variant="ghost">\n        全部状态\n        <ChevronDownIcon aria-hidden="true" />\n      </Button>\n      <Button variant="destructive-outline">\n        <Trash2Icon aria-hidden="true" />\n        移入回收站\n      </Button>\n    </>\n  );\n}\n';
+export {
+  _04WithIcon as default
+};

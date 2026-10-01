@@ -50,12 +50,18 @@ export function PaginationItem({
 
 export type PaginationLinkProps = {
   isActive?: boolean;
+  /**
+   * Marks the link unavailable, e.g. "previous" on the first page. The link
+   * loses its `href` and leaves the tab order but keeps its place.
+   */
+  disabled?: boolean;
   size?: React.ComponentProps<typeof Button>["size"];
 } & useRender.ComponentProps<"a">;
 
 export function PaginationLink({
   className,
   isActive,
+  disabled = false,
   size = "icon",
   render,
   ...props
@@ -69,15 +75,27 @@ export function PaginationLink({
             size,
             variant: isActive ? "outline" : "ghost",
           }),
+          "numeric aria-disabled:pointer-events-none aria-disabled:opacity-64",
           className,
         ),
     "data-active": isActive,
     "data-slot": "pagination-link",
   };
+  // A disabled link keeps its slot but drops href and the caller's handler.
+  const disabledProps = disabled
+    ? {
+        "aria-disabled": true as const,
+        "data-disabled": "",
+        href: undefined,
+        onClick: undefined,
+        role: "link",
+        tabIndex: -1,
+      }
+    : undefined;
 
   return useRender({
     defaultTagName: "a",
-    props: mergeProps<"a">(defaultProps, props),
+    props: mergeProps<"a">(defaultProps, { ...props, ...disabledProps }),
     render,
   });
 }
@@ -95,7 +113,7 @@ export function PaginationPrevious({
       size="default"
       {...props}
     >
-      <ChevronLeftIcon className="sm:-ms-1" />
+      <ChevronLeftIcon className="sm:-ms-1 rtl:-scale-x-100" />
       <span className="max-sm:hidden">{children ?? messages.previousPage}</span>
     </PaginationLink>
   );
@@ -115,7 +133,7 @@ export function PaginationNext({
       {...props}
     >
       <span className="max-sm:hidden">{children ?? messages.nextPage}</span>
-      <ChevronRightIcon className="sm:-me-1" />
+      <ChevronRightIcon className="sm:-me-1 rtl:-scale-x-100" />
     </PaginationLink>
   );
 }

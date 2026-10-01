@@ -1,0 +1,4 @@
+const _01IconButtons = 'import { Button, Tooltip, TooltipPopup, TooltipTrigger } from "@yanqing/ui";\nimport { CopyIcon, DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";\n\nexport const meta = {\n  title: "图标按钮",\n  description: "第一次悬停按默认延迟出现；在相邻按钮间移动时立即切换，不再等待。",\n};\n\nconst actions = [\n  { label: "编辑", icon: PencilIcon },\n  { label: "复制", icon: CopyIcon },\n  { label: "下载", icon: DownloadIcon },\n  { label: "删除", icon: Trash2Icon },\n];\n\nexport default function Demo() {\n  return (\n    <div className="flex gap-1">\n      {actions.map(({ label, icon: Icon }) => (\n        <Tooltip key={label}>\n          <TooltipTrigger render={<Button aria-label={label} size="icon" variant="ghost" />}>\n            <Icon />\n          </TooltipTrigger>\n          <TooltipPopup>{label}</TooltipPopup>\n        </Tooltip>\n      ))}\n    </div>\n  );\n}\n';
+export {
+  _01IconButtons as default
+};

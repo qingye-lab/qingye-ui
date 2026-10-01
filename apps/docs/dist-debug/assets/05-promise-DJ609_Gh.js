@@ -1,0 +1,4 @@
+const _05Promise = 'import { Button, toastManager } from "@yanqing/ui";\n\nexport const meta = {\n  title: "跟随 Promise",\n  description: "toastManager.promise 在加载、成功、失败之间自动切换；这里随机成功或失败。",\n};\n\nfunction uploadFirmware() {\n  return new Promise<string>((resolve, reject) => {\n    setTimeout(() => (Math.random() > 0.3 ? resolve("v2.8.0") : reject(new Error("校验失败"))), 1800);\n  });\n}\n\nexport default function Demo() {\n  return (\n    <Button\n      onClick={() =>\n        toastManager\n          .promise(uploadFirmware(), {\n            loading: { title: "正在上传固件…", description: "请勿断开设备电源。" },\n            success: (version) => ({ title: "固件已更新", description: `12 台设备已升级到 ${version}。` }),\n            error: (error: Error) => ({ title: "固件上传失败", description: `${error.message}，请重新下载安装包。` }),\n          })\n          .catch(() => {})\n      }\n      variant="outline"\n    >\n      上传固件\n    </Button>\n  );\n}\n';
+export {
+  _05Promise as default
+};

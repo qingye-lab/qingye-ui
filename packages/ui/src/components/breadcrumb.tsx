@@ -51,7 +51,10 @@ export function BreadcrumbLink({
   ...props
 }: useRender.ComponentProps<"a">): React.ReactElement {
   const defaultProps = {
-    className: cn("transition-colors hover:text-foreground", className),
+    className: cn(
+      "rounded-sm outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background",
+      className,
+    ),
     "data-slot": "breadcrumb-link",
   };
 
@@ -84,7 +87,7 @@ export function BreadcrumbSeparator({
   return (
     <li
       aria-hidden="true"
-      className={cn("opacity-80 [&>svg]:size-4", className)}
+      className={cn("opacity-80 [&>svg]:size-4 rtl:[&>svg]:-scale-x-100", className)}
       data-slot="breadcrumb-separator"
       role="presentation"
       {...props}

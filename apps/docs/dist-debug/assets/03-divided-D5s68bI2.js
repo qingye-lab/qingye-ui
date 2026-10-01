@@ -1,0 +1,4 @@
+const _03Divided = 'import { Button, Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle, Input } from "@yanqing/ui";\n\nexport const meta = {\n  title: "分隔区块",\n  description: "头部加 border-b、底部加 border-t 后，CardPanel 自动恢复上下内边距；底部用 py-4 收成一条紧凑的操作栏。",\n};\n\nexport default function Demo() {\n  return (\n    <Card className="w-full max-w-lg">\n      <CardHeader className="border-b">\n        <CardTitle>项目名称</CardTitle>\n        <CardDescription>显示在控制台、通知邮件和访问链接中。</CardDescription>\n      </CardHeader>\n      <CardPanel>\n        <Input aria-label="项目名称" defaultValue="会员中心" />\n      </CardPanel>\n      <CardFooter className="justify-between gap-4 border-t py-4">\n        <span className="text-muted-foreground text-sm">最多 32 个字符。</span>\n        <Button size="sm">保存</Button>\n      </CardFooter>\n    </Card>\n  );\n}\n';
+export {
+  _03Divided as default
+};

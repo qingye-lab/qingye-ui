@@ -1,0 +1,4 @@
+const _06Errors = 'import { Field, FieldError, FieldLabel, Input } from "@yanqing/ui";\nimport { useState } from "react";\n\nexport const meta = {\n  title: "表单库错误",\n  description: "errors 接收 react-hook-form、TanStack Form 等给出的错误数组：自动去重，多条时显示为列表。",\n};\n\nfunction check(value: string) {\n  return [\n    value.length < 8 ? { message: "至少 8 位" } : undefined,\n    /\\d/.test(value) ? undefined : { message: "至少包含 1 个数字" },\n    /[A-Za-z]/.test(value) ? undefined : { message: "至少包含 1 个字母" },\n  ].filter(Boolean);\n}\n\nexport default function Demo() {\n  const [value, setValue] = useState("2026");\n  const errors = check(value);\n  return (\n    <Field className="w-full max-w-xs" invalid={errors.length > 0}>\n      <FieldLabel>设备管理密码</FieldLabel>\n      <Input onChange={(event) => setValue(event.target.value)} value={value} />\n      <FieldError errors={errors} />\n    </Field>\n  );\n}\n';
+export {
+  _06Errors as default
+};

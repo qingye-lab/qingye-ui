@@ -98,6 +98,18 @@ export function ThemeProvider({
     return () => query.removeEventListener("change", onChange);
   }, []);
 
+  // Follow changes made in another tab.
+  React.useEffect(() => {
+    if (!storageKey) return;
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== storageKey) return;
+      const value = event.newValue;
+      setThemeState(value === "light" || value === "dark" || value === "system" ? value : defaultTheme);
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [storageKey, defaultTheme]);
+
   React.useEffect(() => {
     apply(resolvedTheme, attribute, disableTransitionOnChange && !firstRun.current);
     firstRun.current = false;
@@ -122,6 +134,32 @@ export function ThemeProvider({
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+}
+
+export type ThemeScriptOptions = Pick<
+  ThemeProviderProps,
+  "defaultTheme" | "storageKey" | "attribute"
+>;
+
+/**
+ * Source of the inline script that applies the stored theme before first
+ * paint. Put it in `<head>`, ahead of any stylesheet, with the same options
+ * as the provider: paste the string into `index.html`, or render
+ * `<script dangerouslySetInnerHTML={{ __html: themeScript() }} />` from a
+ * server-rendered layout.
+ */
+export function themeScript({
+  defaultTheme = "system",
+  storageKey = "yq-theme",
+  attribute = "class",
+}: ThemeScriptOptions = {}): string {
+  const key = JSON.stringify(storageKey);
+  const fallback = JSON.stringify(defaultTheme);
+  const write =
+    attribute === "class"
+      ? 'r.classList.toggle("dark",d);r.classList.toggle("light",!d)'
+      : 'r.setAttribute("data-theme",d?"dark":"light")';
+  return `(function(){try{var k=${key},t=null;if(k)try{t=localStorage.getItem(k)}catch(e){}if(t!=="light"&&t!=="dark"&&t!=="system")t=${fallback};var d=t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches),r=document.documentElement;${write};r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
 }
 
 export function useTheme(): ThemeContextValue {

@@ -1,7 +1,7 @@
 {
   "source": "https://github.com/cosscom/coss/tree/main/apps/ui/registry/default",
   "license": "MIT",
-  "retrieved": "2026-09-30",
+  "retrieved": "2026-10-01",
   "components": [
     {
       "file": "src/components/button.tsx",
@@ -116,7 +116,9 @@
       "adaptedSha256": "d99c08d1a616553bcf83af7b51ed548c5b19698928c68fdae727e2eac2ed7429",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Touch hit area on the tab and list for coarse pointers",
+        "Position the indicator from the tab top; touch-target padding inflated the list scrollHeight and shifted the bottom-anchored indicator"
       ]
     },
     {
@@ -124,10 +126,12 @@
       "registry": "https://coss.com/ui/r/segmented-control.json",
       "upstreamPath": "apps/ui/registry/default/lib/segmented-control.ts",
       "upstreamSha256": "c1cb84d02ac5b75aa08a70c205feb9cc8668ffbc19751e013364f547ae41a8a8",
-      "adaptedSha256": "91ec4311197a42cf71a278133d99286609d0790db6ecfa3e08cd739f5dc84dfd",
+      "adaptedSha256": "0449430d025977b6458df9b8fc1e2aeaff312e9e90b4660d91ce2a56e23c9432",
       "adaptations": [
         "Local imports",
-        "Remove dark variants for the existing light-only theme; preserve light treatment"
+        "Remove dark variants for the existing light-only theme; preserve light treatment",
+        "Touch hit area on options for coarse pointers",
+        "Animate colour and background too, so selection is not an instant switch"
       ]
     },
     {
@@ -195,7 +199,8 @@
       "upstreamSha256": "6274eace4599cba26e731b0f02cd2307d2207947162ccc575e45984e87aa269f",
       "adaptedSha256": "07e32e8b3b54c56111d7df9542f9df7957b4d971e976faacb8afb68ae6bbb39c",
       "adaptations": [
-        "Local imports"
+        "Local imports",
+        "Add the missing scroll-area data-slot"
       ]
     },
     {
@@ -275,7 +280,9 @@
       "upstreamSha256": "b975e2a75b37fb44bca277dd85bf0825e98c3531036ca8d1543f6f4556cf56a5",
       "adaptedSha256": "82e0c668accc89a45d4a41c351c6c1b88b264257a31c3b4b6887822c6ad88f57",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Use data-disabled for the disabled state; Base UI only sets aria-disabled there",
+        "Tabular slot on the header and logical text alignment"
       ]
     },
     {
@@ -317,7 +324,9 @@
       "adaptedSha256": "7b4d00d8eecdc80938cd50d68b260538bdbf17b1694175c4e8465eec00d14b7f",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Visible focus ring on breadcrumb links",
+        "Flip the separator icon under rtl"
       ]
     },
     {
@@ -482,7 +491,10 @@
       "adaptedSha256": "6d45910277a3f70f0b550a4195213766df962d4b87f304604803198f05b4635c",
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Add disabled semantics: drop href, leave the tab order, ignore onClick",
+        "Tabular figures for page numbers",
+        "Flip the prev/next arrows under rtl"
       ]
     },
     {
@@ -534,7 +546,11 @@
       "adaptations": [
         "Local imports; preserve the upstream public composition API",
         "Use semantic sidebar colors directly instead of wrapping OKLCH tokens in hsl()",
-        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides"
+        "Read shared UI locale defaults across root, primitives and component imports; preserve caller label overrides",
+        "Degrade safely when the Cookie Store API is unavailable",
+        "Mobile row heights grow to the touch minimum with matching action and badge offsets",
+        "Use logical direction properties throughout",
+        "Zero the horizontal separator width when collapsed to icons"
       ]
     },
     {
@@ -605,7 +621,8 @@
       "upstreamSha256": "f08696682ad171b5a0d2c918202bcee10b9f6de1408a2a2e864f61e8d424dba2",
       "adaptedSha256": "1dd7411d264de509bd36defaa78c28aeb581a47f46560f37c17781458da4c97d",
       "adaptations": [
-        "Local imports; preserve the upstream public composition API"
+        "Local imports; preserve the upstream public composition API",
+        "Vertical orientation support"
       ]
     },
     {

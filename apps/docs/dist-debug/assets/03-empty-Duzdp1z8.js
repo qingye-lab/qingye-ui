@@ -1,0 +1,4 @@
+const _03Empty = 'import { Command, CommandEmpty, CommandInput, CommandItem, CommandList, CommandPanel } from "@yanqing/ui";\n\nexport const meta = {\n  title: "空状态",\n  description: "没有匹配项时显示 CommandEmpty；不传内容时使用内置文案。",\n};\n\nconst devices = ["仓库 3 号扫码枪", "前台标签打印机", "冷库温控器"];\n\nexport default function Demo() {\n  return (\n    <div className="w-full max-w-xs rounded-2xl border bg-muted/72">\n      <Command defaultValue="投影仪" items={devices}>\n        <CommandInput aria-label="搜索设备" autoFocus={false} />\n        <CommandPanel>\n          <CommandEmpty />\n          <CommandList>\n            {(device: string) => (\n              <CommandItem key={device} value={device}>\n                {device}\n              </CommandItem>\n            )}\n          </CommandList>\n        </CommandPanel>\n      </Command>\n    </div>\n  );\n}\n';
+export {
+  _03Empty as default
+};

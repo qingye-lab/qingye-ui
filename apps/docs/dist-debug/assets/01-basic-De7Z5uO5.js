@@ -1,0 +1,4 @@
+const _01Basic = 'import { Field, FieldDescription, FieldLabel, NativeSelect, NativeSelectOption } from "@yanqing/ui";\n\nexport const meta = { title: "基础用法", description: "在 Field 中使用时，标签与描述自动关联。" };\n\nexport default function Demo() {\n  return (\n    <Field className="w-full max-w-xs">\n      <FieldLabel>所在城市</FieldLabel>\n      <NativeSelect name="city" placeholder="选择城市">\n        <NativeSelectOption value="beijing">北京</NativeSelectOption>\n        <NativeSelectOption value="shanghai">上海</NativeSelectOption>\n        <NativeSelectOption value="guangzhou">广州</NativeSelectOption>\n        <NativeSelectOption value="shenzhen">深圳</NativeSelectOption>\n        <NativeSelectOption value="hangzhou">杭州</NativeSelectOption>\n        <NativeSelectOption value="chengdu">成都</NativeSelectOption>\n      </NativeSelect>\n      <FieldDescription>用于计算配送时效，可随时修改。</FieldDescription>\n    </Field>\n  );\n}\n';
+export {
+  _01Basic as default
+};

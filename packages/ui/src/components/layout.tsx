@@ -1,74 +1,243 @@
-import { createElement, type ComponentPropsWithRef } from "react";
+import type * as React from "react";
 import { cn } from "../utils";
 
-export type LayoutGap = "tight" | "compact" | "default" | "section";
+/*
+ * Layout primitives: a vertical stack, a horizontal row, a responsive grid and
+ * a body-text span. They exist so spacing comes from the token scale and
+ * reads as intent in JSX; anything they do not cover is one Tailwind class
+ * away, and plain Tailwind is just as welcome.
+ */
+
+/** A step of the spacing scale: `gap={4}` is `--qy-space-4` (1rem). */
+export type LayoutGap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16;
 
 const gapClasses: Record<LayoutGap, string> = {
-  tight: "gap-(--space-1)",
-  compact: "gap-(--space-2)",
-  default: "gap-(--space-4)",
-  section: "gap-(--density-section-gap)",
+  0: "gap-0",
+  1: "gap-(--qy-space-1)",
+  2: "gap-(--qy-space-2)",
+  3: "gap-(--qy-space-3)",
+  4: "gap-(--qy-space-4)",
+  5: "gap-(--qy-space-5)",
+  6: "gap-(--qy-space-6)",
+  8: "gap-(--qy-space-8)",
+  10: "gap-(--qy-space-10)",
+  12: "gap-(--qy-space-12)",
+  16: "gap-(--qy-space-16)",
 };
 
-type StackElement = "div" | "section" | "form" | "fieldset" | "article";
-export type StackProps<T extends StackElement = "div"> = {
-  as?: T;
-  gap?: LayoutGap;
-} & ComponentPropsWithRef<T>;
+/**
+ * `as` swaps the rendered element while keeping its own props typed: with
+ * `as="form"` the component accepts `onSubmit`, with `as="ol"` it does not.
+ */
+type PolymorphicProps<E extends React.ElementType, P> = P & {
+  as?: E;
+} & Omit<React.ComponentPropsWithRef<E>, keyof P | "as">;
 
-export function Stack<T extends StackElement = "div">({ as, gap = "default", className, ...props }: StackProps<T>) {
-  const element = as ?? "div";
-  return createElement(element, {
-    ...props,
-    "data-slot": "stack",
-    "data-gap": gap,
-    className: cn("flex min-w-0 flex-col", gapClasses[gap], element === "fieldset" && "m-0 border-0 p-0", className),
-  });
+const alignClasses = {
+  baseline: "items-baseline",
+  center: "items-center",
+  end: "items-end",
+  start: "items-start",
+  stretch: "items-stretch",
+} as const;
+
+const justifyClasses = {
+  between: "justify-between",
+  center: "justify-center",
+  end: "justify-end",
+  start: "justify-start",
+} as const;
+
+/* --- Stack --------------------------------------------------------------- */
+
+type StackElement =
+  | "div"
+  | "section"
+  | "article"
+  | "aside"
+  | "header"
+  | "footer"
+  | "main"
+  | "nav"
+  | "form"
+  | "fieldset"
+  | "ul"
+  | "ol"
+  | "li";
+
+export type StackProps<E extends StackElement = "div"> = PolymorphicProps<
+  E,
+  {
+    /** Space between children. @default 4 */
+    gap?: LayoutGap;
+    /** Cross-axis alignment. @default "stretch" */
+    align?: Exclude<keyof typeof alignClasses, "baseline">;
+  }
+>;
+
+/** Children in a column with even spacing. */
+export function Stack<E extends StackElement = "div">({
+  as,
+  gap = 4,
+  align = "stretch",
+  className,
+  ...props
+}: StackProps<E>): React.ReactElement {
+  const Component = (as ?? "div") as React.ElementType;
+  return (
+    <Component
+      className={cn("flex min-w-0 flex-col", gapClasses[gap], alignClasses[align], className)}
+      data-slot="stack"
+      {...props}
+    />
+  );
 }
 
-type InlineElement = "div" | "form" | "header" | "footer";
-export type InlineProps<T extends InlineElement = "div"> = {
-  as?: T;
-  gap?: LayoutGap;
-  align?: "center" | "start" | "end";
-  justify?: "start" | "between" | "end";
-  wrap?: boolean;
-} & ComponentPropsWithRef<T>;
+/* --- Inline -------------------------------------------------------------- */
 
-const alignClasses = { center: "items-center", start: "items-start", end: "items-end" };
-const justifyClasses = { start: "justify-start", between: "justify-between", end: "justify-end" };
+type InlineElement = "div" | "section" | "header" | "footer" | "nav" | "form" | "ul" | "ol" | "li";
 
-export function Inline<T extends InlineElement = "div">({ as, gap = "compact", align = "center", justify = "start", wrap = true, className, ...props }: InlineProps<T>) {
-  return createElement(as ?? "div", {
-    ...props,
-    "data-slot": "inline",
-    "data-gap": gap,
-    className: cn("flex min-w-0", gapClasses[gap], alignClasses[align], justifyClasses[justify], wrap && "flex-wrap", className),
-  });
+export type InlineProps<E extends InlineElement = "div"> = PolymorphicProps<
+  E,
+  {
+    /** Space between children. @default 2 */
+    gap?: LayoutGap;
+    /** Cross-axis alignment. @default "center" */
+    align?: keyof typeof alignClasses;
+    /** Main-axis distribution. @default "start" */
+    justify?: keyof typeof justifyClasses;
+    /** Let children wrap onto new lines instead of overflowing. @default true */
+    wrap?: boolean;
+  }
+>;
+
+/** Children in a row, vertically centred, wrapping when space runs out. */
+export function Inline<E extends InlineElement = "div">({
+  as,
+  gap = 2,
+  align = "center",
+  justify = "start",
+  wrap = true,
+  className,
+  ...props
+}: InlineProps<E>): React.ReactElement {
+  const Component = (as ?? "div") as React.ElementType;
+  return (
+    <Component
+      className={cn(
+        "flex min-w-0",
+        gapClasses[gap],
+        alignClasses[align],
+        justifyClasses[justify],
+        wrap && "flex-wrap",
+        className,
+      )}
+      data-slot="inline"
+      {...props}
+    />
+  );
 }
 
-export type GridProps = ComponentPropsWithRef<"div"> & { columns?: 1 | 2 | 3; gap?: LayoutGap };
-const columnClasses = { 1: "grid-cols-1", 2: "grid-cols-1 sm:grid-cols-2", 3: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3" };
+/* --- Grid ---------------------------------------------------------------- */
 
-export function Grid({ columns = 1, gap = "default", className, ...props }: GridProps) {
-  return <div {...props} data-slot="grid" data-columns={columns} data-gap={gap} className={cn("grid min-w-0", columnClasses[columns], gapClasses[gap], className)} />;
+type GridElement = "div" | "section" | "ul" | "ol";
+
+const columnClasses = {
+  1: "grid-cols-1",
+  2: "grid-cols-1 sm:grid-cols-2",
+  3: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+  4: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+} as const;
+
+export type GridProps<E extends GridElement = "div"> = PolymorphicProps<
+  E,
+  {
+    /**
+     * Column count at full width. Collapses to one column on phones and two
+     * from `sm`, following the viewport. @default 1
+     */
+    columns?: keyof typeof columnClasses;
+    /**
+     * Fit as many columns as the container allows, each at least this wide
+     * (any CSS length, e.g. `"14rem"`). Follows the container rather than the
+     * viewport, and takes precedence over `columns`.
+     */
+    minItemWidth?: string;
+    /** Space between cells. @default 4 */
+    gap?: LayoutGap;
+  }
+>;
+
+/** Equal-width cells that reflow on narrow screens. */
+export function Grid<E extends GridElement = "div">({
+  as,
+  columns = 1,
+  minItemWidth,
+  gap = 4,
+  className,
+  style,
+  ...props
+}: GridProps<E>): React.ReactElement {
+  const Component = (as ?? "div") as React.ElementType;
+  return (
+    <Component
+      className={cn(
+        "grid min-w-0",
+        minItemWidth
+          ? "grid-cols-[repeat(auto-fill,minmax(min(var(--grid-min-item),100%),1fr))]"
+          : columnClasses[columns],
+        gapClasses[gap],
+        className,
+      )}
+      data-slot="grid"
+      style={minItemWidth ? { "--grid-min-item": minItemWidth, ...style } : style}
+      {...props}
+    />
+  );
 }
 
-type TextElement = "p" | "span" | "small";
-export type TextProps<T extends TextElement = "span"> = {
-  as?: T;
-  size?: "body" | "label" | "caption";
-  tone?: "default" | "muted" | "danger";
-} & ComponentPropsWithRef<T>;
-const sizeClasses = { body: "text-body", label: "text-label", caption: "text-caption" };
-const toneClasses = { default: "text-foreground", muted: "text-muted-foreground", danger: "text-destructive" };
+/* --- Text ---------------------------------------------------------------- */
 
-export function Text<T extends TextElement = "span">({ as, size = "body", tone = "default", className, ...props }: TextProps<T>) {
-  return createElement(as ?? "span", {
-    ...props,
-    "data-slot": "text",
-    "data-size": size,
-    "data-tone": tone,
-    className: cn("m-0", sizeClasses[size], toneClasses[tone], className),
-  });
+type TextElement = "span" | "p" | "div" | "small" | "strong" | "em" | "time";
+
+const sizeClasses = {
+  body: "text-body",
+  caption: "text-caption",
+  label: "text-label",
+} as const;
+
+const toneClasses = {
+  danger: "text-destructive-foreground",
+  default: "text-foreground",
+  muted: "text-muted-foreground",
+  success: "text-success-foreground",
+  warning: "text-warning-foreground",
+} as const;
+
+export type TextProps<E extends TextElement = "span"> = PolymorphicProps<
+  E,
+  {
+    /** Type ramp step: body 14px, label 13px, caption 12px. @default "body" */
+    size?: keyof typeof sizeClasses;
+    /** Semantic colour. Inherits from the parent when omitted. */
+    tone?: keyof typeof toneClasses;
+  }
+>;
+
+/** Running text on the type ramp, in a semantic colour. */
+export function Text<E extends TextElement = "span">({
+  as,
+  size = "body",
+  tone,
+  className,
+  ...props
+}: TextProps<E>): React.ReactElement {
+  const Component = (as ?? "span") as React.ElementType;
+  return (
+    <Component
+      className={cn(sizeClasses[size], tone && toneClasses[tone], className)}
+      data-slot="text"
+      {...props}
+    />
+  );
 }

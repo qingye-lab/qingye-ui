@@ -1,0 +1,4 @@
+const _05Title = 'import { Field, FieldDescription, FieldTitle, ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";\n\nexport const meta = {\n  title: "标题",\n  description: "控件不是单个输入框时，用 FieldTitle 作标题并通过 aria-labelledby 关联。",\n};\n\nexport default function Demo() {\n  return (\n    <Field className="w-full max-w-xs">\n      <FieldTitle id="delivery-slot">配送时段</FieldTitle>\n      <ToggleGroup aria-labelledby="delivery-slot" defaultValue={["morning"]} variant="outline">\n        <ToggleGroupItem value="morning">上午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value="afternoon">下午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value="evening">晚间</ToggleGroupItem>\n      </ToggleGroup>\n      <FieldDescription>晚间时段仅限杭州主城区。</FieldDescription>\n    </Field>\n  );\n}\n';
+export {
+  _05Title as default
+};

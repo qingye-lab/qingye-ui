@@ -1,51 +1,127 @@
+"use client";
+
 import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
 import { ChevronDownIcon } from "lucide-react";
-import { createContext, useContext, useId, type ComponentProps } from "react";
-
+import * as React from "react";
 import { cn } from "../utils";
 
-type DisclosureVariant = "plain" | "inset" | "separated";
-type DisclosureContextValue = { contentId: string; variant: DisclosureVariant };
+/**
+ * A styled, single collapsible section: a labelled trigger with a chevron and
+ * a panel that animates its height. Use it for secondary content that most
+ * people skip — advanced settings, details, a log. For several sibling
+ * sections use Accordion; for a fully custom trigger use Collapsible.
+ */
+export type DisclosureVariant = "plain" | "inset" | "separated";
 
-const DisclosureContext = createContext<DisclosureContextValue | null>(null);
-type DisclosureTriggerProps = Omit<CollapsiblePrimitive.Trigger.Props, "aria-controls" | "nativeButton" | "render">;
-type DisclosureContentProps = Omit<ComponentProps<typeof CollapsiblePrimitive.Panel>, "id">;
-type DisclosureProps = CollapsiblePrimitive.Root.Props & { variant?: DisclosureVariant };
+const DisclosureContext: React.Context<DisclosureVariant> =
+  React.createContext<DisclosureVariant>("plain");
 
-export function Disclosure({ className, variant = "plain", ...props }: DisclosureProps) {
-  const contentId = `disclosure-${useId()}`;
+export type DisclosureProps = CollapsiblePrimitive.Root.Props & {
+  /**
+   * `plain`: an inline text trigger inside a form or card.
+   * `inset`: a self-contained bordered box.
+   * `separated`: a full-width row under a divider, closing off a section.
+   */
+  variant?: DisclosureVariant;
+};
+
+export function Disclosure({
+  className,
+  variant = "plain",
+  ...props
+}: DisclosureProps): React.ReactElement {
   return (
-    <DisclosureContext value={{ contentId, variant }}>
+    <DisclosureContext.Provider value={variant}>
       <CollapsiblePrimitive.Root
-        {...props}
-        data-slot="disclosure"
-        data-variant={variant}
         className={cn(
-          variant === "inset" && "grid gap-3 rounded-lg border border-border-subtle bg-surface-subtle px-3 py-2 text-muted-foreground",
-          variant === "separated" && "border-t border-border-subtle pt-4 text-muted-foreground",
+          "min-w-0",
+          variant === "inset" &&
+            "rounded-xl border bg-card not-dark:bg-clip-padding text-card-foreground",
+          variant === "separated" && "border-t",
           className,
         )}
+        data-slot="disclosure"
+        data-variant={variant}
+        {...props}
       />
-    </DisclosureContext>
+    </DisclosureContext.Provider>
   );
 }
 
-export function DisclosureTrigger({ children, className, ...props }: DisclosureTriggerProps) {
-  const context = useContext(DisclosureContext);
+export function DisclosureTrigger({
+  className,
+  children,
+  ...props
+}: CollapsiblePrimitive.Trigger.Props): React.ReactElement {
+  const variant = React.useContext(DisclosureContext);
   return (
     <CollapsiblePrimitive.Trigger
-      {...props}
+      className={cn(
+        "group/disclosure relative flex cursor-pointer select-none items-center font-medium text-base outline-none transition-[color,background-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 sm:text-sm",
+        "[&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+        variant === "plain" &&
+          "touch-target -mx-1 w-fit gap-1 rounded-md px-1 py-0.5 text-muted-foreground hover:text-foreground focus-visible:ring-offset-1 focus-visible:ring-offset-background data-panel-open:text-foreground",
+        variant === "inset" &&
+          "min-h-12 w-full justify-between gap-3 rounded-[calc(var(--radius-xl)-1px)] px-4 text-start hover:bg-accent focus-visible:ring-inset data-panel-open:rounded-b-none sm:min-h-11",
+        variant === "separated" &&
+          "min-h-12 w-full justify-between gap-3 rounded-md text-start text-muted-foreground hover:text-foreground focus-visible:ring-offset-1 focus-visible:ring-offset-background data-panel-open:text-foreground sm:min-h-11",
+        className,
+      )}
       data-slot="disclosure-trigger"
-      aria-controls={context?.contentId}
-      className={cn("group flex min-h-9 w-full items-center justify-between gap-2 rounded-lg text-left text-body font-medium text-muted-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/25 data-panel-open:text-foreground [@media(pointer:coarse)]:min-h-(--control-hit-target)", className)}
+      {...props}
     >
-      <span>{children}</span>
-      <ChevronDownIcon aria-hidden="true" className="size-4 shrink-0 transition-transform group-data-panel-open:rotate-180" />
+      <span className="flex min-w-0 items-center gap-2" data-slot="disclosure-label">
+        {children}
+      </span>
+      <ChevronDownIcon
+        aria-hidden="true"
+        className="transition-transform duration-(--qy-duration-base) ease-(--qy-ease-out) group-data-panel-open/disclosure:rotate-180"
+        data-slot="disclosure-indicator"
+      />
     </CollapsiblePrimitive.Trigger>
   );
 }
 
-export function DisclosureContent({ children, className, keepMounted = true, ...props }: DisclosureContentProps) {
-  const context = useContext(DisclosureContext);
-  return <CollapsiblePrimitive.Panel {...props} id={context?.contentId} data-slot="disclosure-content" keepMounted={keepMounted} className={cn("min-w-0", className)}><div className="min-w-0 pt-2">{children}</div></CollapsiblePrimitive.Panel>;
+export type DisclosurePanelProps = Omit<
+  CollapsiblePrimitive.Panel.Props,
+  "className"
+> & {
+  /** Applied to the inner content box, which carries the padding. */
+  className?: string;
+};
+
+/**
+ * Stays mounted while closed by default, so form fields inside keep their
+ * values and the browser's find-in-page can still reach the text.
+ */
+export function DisclosurePanel({
+  className,
+  children,
+  keepMounted = true,
+  ...props
+}: DisclosurePanelProps): React.ReactElement {
+  const variant = React.useContext(DisclosureContext);
+  return (
+    <CollapsiblePrimitive.Panel
+      className="h-(--collapsible-panel-height) overflow-hidden transition-[height,opacity] duration-(--qy-duration-base) ease-(--qy-ease-out) data-ending-style:h-0 data-starting-style:h-0 data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-(--qy-duration-fast)"
+      data-slot="disclosure-panel"
+      keepMounted={keepMounted}
+      {...props}
+    >
+      <div
+        className={cn(
+          "min-w-0",
+          variant === "plain" && "pt-3",
+          variant === "inset" && "px-4 pb-4",
+          variant === "separated" && "pb-4",
+          className,
+        )}
+        data-slot="disclosure-content"
+      >
+        {children}
+      </div>
+    </CollapsiblePrimitive.Panel>
+  );
 }
+
+export { DisclosurePanel as DisclosureContent };

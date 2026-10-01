@@ -1,0 +1,4 @@
+const _01Default = 'import { Accordion, AccordionItem, AccordionPanel, AccordionTrigger } from "@yanqing/ui";\n\nexport const meta = { title: "默认", description: "一次只展开一个分节。" };\n\nconst faqs = [\n  { q: "免费版有哪些限制？", a: "免费版最多 3 个项目、5 位成员，构建时长每月 300 分钟。" },\n  { q: "可以随时取消订阅吗？", a: "可以。取消后当前计费周期内仍可正常使用，到期后自动降级为免费版。" },\n  { q: "支持开具发票吗？", a: "支持增值税普通发票与专用发票，在「账单」页面填写抬头后申请，3 个工作日内开具。" },\n];\n\nexport default function Demo() {\n  return (\n    <Accordion className="w-full max-w-md" defaultValue={[faqs[0]!.q]}>\n      {faqs.map((faq) => (\n        <AccordionItem key={faq.q} value={faq.q}>\n          <AccordionTrigger>{faq.q}</AccordionTrigger>\n          <AccordionPanel>{faq.a}</AccordionPanel>\n        </AccordionItem>\n      ))}\n    </Accordion>\n  );\n}\n';
+export {
+  _01Default as default
+};

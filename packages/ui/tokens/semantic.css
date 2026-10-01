@@ -16,8 +16,12 @@
   [data-theme="light"] {
     color-scheme: light;
 
-    --qy-background: var(--qy-white);
-    --qy-foreground: var(--qy-neutral-800);
+    /*
+     * The page carries a 1–2% neutral tint while cards stay pure white, so a
+     * card separates from the page by surface tone rather than by shadow.
+     */
+    --qy-background: color-mix(in srgb, var(--qy-white) 98.5%, var(--qy-neutral-950));
+    --qy-foreground: var(--qy-neutral-950);
 
     /* Surfaces, from the page outward. */
     --qy-surface: var(--qy-white);
@@ -45,7 +49,7 @@
     --qy-primary: var(--qy-neutral-800);
     --qy-primary-foreground: var(--qy-neutral-50);
     --qy-accent: oklch(0 0 0 / 0.04);
-    --qy-accent-foreground: var(--qy-neutral-800);
+    --qy-accent-foreground: var(--qy-foreground);
 
     /* Status: solid marks the state, foreground is readable text on the page. */
     --qy-danger: var(--qy-red-500);
@@ -68,12 +72,12 @@
     --qy-code-highlight: oklch(0 0 0 / 0.04);
 
     --qy-sidebar: var(--qy-neutral-50);
-    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-neutral-800) 64%, var(--qy-sidebar));
+    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-foreground) 64%, var(--qy-sidebar));
     --qy-sidebar-border: oklch(0 0 0 / 0.06);
     --qy-sidebar-accent: oklch(0 0 0 / 0.04);
-    --qy-sidebar-accent-foreground: var(--qy-neutral-800);
-    --qy-sidebar-primary: var(--qy-neutral-800);
-    --qy-sidebar-primary-foreground: var(--qy-neutral-50);
+    --qy-sidebar-accent-foreground: var(--qy-foreground);
+    --qy-sidebar-primary: var(--qy-foreground);
+    --qy-sidebar-primary-foreground: var(--qy-neutral-0, var(--qy-white));
     --qy-sidebar-ring: var(--qy-neutral-400);
 
     /* Elevation stays quiet; depth comes mostly from translucent borders. */
@@ -133,7 +137,7 @@
     --qy-code-highlight: oklch(1 0 0 / 0.04);
 
     --qy-sidebar: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
-    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-neutral-100) 64%, var(--qy-sidebar));
+    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-foreground) 64%, var(--qy-sidebar));
     --qy-sidebar-border: oklch(1 0 0 / 0.05);
     --qy-sidebar-accent: oklch(1 0 0 / 0.04);
     --qy-sidebar-accent-foreground: var(--qy-neutral-100);

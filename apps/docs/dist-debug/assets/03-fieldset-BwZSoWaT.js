@@ -1,0 +1,4 @@
+const _03Fieldset = 'import { Checkbox, CheckboxGroup, Fieldset, FieldsetLegend, Label } from "@yanqing/ui";\n\nexport const meta = { title: "横向排列与禁用", description: "Fieldset 命名整组；禁用的选项保持可见。" };\n\nexport default function Demo() {\n  return (\n    <Fieldset className="max-w-md">\n      <FieldsetLegend>工作日</FieldsetLegend>\n      <CheckboxGroup defaultValue={["mon", "tue", "wed", "thu", "fri"]} className="flex-row flex-wrap gap-x-5 gap-y-3">\n        <Label><Checkbox value="mon" />周一</Label>\n        <Label><Checkbox value="tue" />周二</Label>\n        <Label><Checkbox value="wed" />周三</Label>\n        <Label><Checkbox value="thu" />周四</Label>\n        <Label><Checkbox value="fri" />周五</Label>\n        <Label><Checkbox value="sat" disabled />周六</Label>\n        <Label><Checkbox value="sun" disabled />周日</Label>\n      </CheckboxGroup>\n    </Fieldset>\n  );\n}\n';
+export {
+  _03Fieldset as default
+};

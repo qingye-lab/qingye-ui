@@ -13,6 +13,8 @@ import type * as React from "react";
 import { cn } from "../utils";
 import { useUILocale } from "../locale";
 
+export type { DateRange, Matcher } from "@daypicker/react";
+
 const buttonClassNames =
   "relative flex size-(--cell-size) text-base sm:text-sm items-center justify-center rounded-lg not-in-data-selected:hover:bg-accent disabled:pointer-events-none disabled:opacity-64 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0";
 
@@ -39,14 +41,14 @@ export function Calendar({
     ),
     dropdown: "absolute bg-popover inset-0 opacity-0",
     dropdown_root:
-      "relative has-focus:border-ring has-focus:ring-ring/50 has-focus:ring-[3px] border border-input shadow-xs/5 rounded-lg px-[calc(--spacing(3)-1px)] h-9 sm:h-8 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-me-1",
+      "relative has-focus-visible:border-ring has-focus-visible:ring-ring/24 has-focus-visible:ring-[3px] border border-input bg-background not-dark:bg-clip-padding dark:bg-input/32 shadow-xs/5 rounded-lg px-[calc(--spacing(3)-1px)] h-9 sm:h-8 [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:-me-1",
     dropdowns:
       "w-full flex items-center text-base sm:text-sm justify-center h-(--cell-size) gap-1.5 *:[span]:font-medium",
     hidden: "invisible",
     month: "w-full",
     month_caption:
       "relative mx-(--cell-size) px-1 mb-1 flex h-(--cell-size) items-center justify-center z-2",
-    months: "relative flex flex-col sm:flex-row gap-2",
+    months: "relative -m-0.5 flex flex-col gap-2 sm:flex-row",
     nav: "absolute top-0 flex w-full justify-between z-1",
     outside:
       "text-muted-foreground data-selected:bg-accent/50 data-selected:text-muted-foreground",
@@ -54,7 +56,7 @@ export function Calendar({
     range_middle: "range-middle",
     range_start: "range-start",
     today:
-      "*:after:pointer-events-none *:after:absolute *:after:bottom-1 *:after:start-1/2 *:after:z-1 *:after:size-[3px] *:after:-translate-x-1/2 *:after:rounded-full *:after:bg-primary [&[data-selected]:not(.range-middle)>*]:after:bg-background [&[data-disabled]>*]:after:bg-foreground/30",
+      "*:after:pointer-events-none *:after:absolute *:after:bottom-1 *:after:start-1/2 *:after:z-1 *:after:size-[3px] *:after:-translate-x-1/2 rtl:*:after:translate-x-1/2 *:after:rounded-full *:after:bg-primary [&[data-selected]:not(.range-middle)>*]:after:bg-background [&[data-disabled]>*]:after:bg-foreground/30",
     week_number:
       "size-(--cell-size) p-0 text-xs font-medium text-muted-foreground",
     weekday:
@@ -123,7 +125,7 @@ export function Calendar({
 
   const dayPickerProps = {
     className: cn(
-      "w-fit text-foreground [--cell-size:--spacing(10)] sm:[--cell-size:--spacing(9)] pointer-coarse:[--cell-size:var(--control-hit-target)]",
+      "w-fit text-foreground [--cell-size:--spacing(10)] sm:[--cell-size:--spacing(9)] pointer-coarse:[--cell-size:var(--qy-touch-target)]",
       className,
     ),
     classNames: mergedClassNames,

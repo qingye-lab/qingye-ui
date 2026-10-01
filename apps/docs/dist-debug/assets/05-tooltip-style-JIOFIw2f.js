@@ -1,0 +1,4 @@
+const _05TooltipStyle = 'import { Button, Popover, PopoverPopup, PopoverTrigger } from "@yanqing/ui";\nimport { InfoIcon } from "lucide-react";\n\nexport const meta = {\n  title: "点击说明",\n  description: "tooltipStyle 使用提示的紧凑样式。触屏没有悬停，需要让用户点开的说明用它代替 Tooltip。",\n};\n\nexport default function Demo() {\n  return (\n    <p className="flex items-center gap-1 text-sm">\n      <span className="numeric font-medium">设备在线率 96.4%</span>\n      <Popover>\n        <PopoverTrigger render={<Button aria-label="指标说明" size="icon-xs" variant="ghost" />}>\n          <InfoIcon />\n        </PopoverTrigger>\n        <PopoverPopup className="max-w-60" side="top" tooltipStyle>\n          过去 24 小时内至少上报过一次心跳的设备占比。\n        </PopoverPopup>\n      </Popover>\n    </p>\n  );\n}\n';
+export {
+  _05TooltipStyle as default
+};

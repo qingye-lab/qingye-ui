@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, type ReactNode } from "react";
 
 // One owner at the app root; the document attribute also covers portalled UI.

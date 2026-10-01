@@ -1,0 +1,4 @@
+const _01Default = 'import { Kbd, KbdGroup } from "@yanqing/ui";\n\nexport const meta = { title: "单键与组合" };\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-col items-center gap-4">\n      <div className="flex flex-wrap items-center justify-center gap-2">\n        <Kbd>⌘</Kbd>\n        <Kbd>⇧</Kbd>\n        <Kbd>⌥</Kbd>\n        <Kbd>⌃</Kbd>\n        <Kbd>Esc</Kbd>\n        <Kbd>Enter</Kbd>\n      </div>\n      <div className="flex flex-wrap items-center justify-center gap-3">\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>K</Kbd>\n        </KbdGroup>\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>⇧</Kbd>\n          <Kbd>P</Kbd>\n        </KbdGroup>\n        <KbdGroup>\n          <Kbd>Ctrl</Kbd>\n          <Kbd>Alt</Kbd>\n          <Kbd>Delete</Kbd>\n        </KbdGroup>\n      </div>\n    </div>\n  );\n}\n';
+export {
+  _01Default as default
+};

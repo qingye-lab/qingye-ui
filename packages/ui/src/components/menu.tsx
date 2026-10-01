@@ -165,7 +165,7 @@ export function MenuCheckboxItem({
       ) : (
         <>
           <MenuPrimitive.CheckboxItemIndicator className="col-start-1 -ms-0.5">
-            <CheckIcon aria-hidden="true" className="" strokeWidth={3} />
+            <CheckIcon aria-hidden="true" strokeWidth={3} />
           </MenuPrimitive.CheckboxItemIndicator>
           <span className="col-start-2">{children}</span>
         </>
@@ -195,7 +195,7 @@ export function MenuRadioItem({
       {...props}
     >
       <MenuPrimitive.RadioItemIndicator className="col-start-1 -ms-0.5">
-        <CheckIcon aria-hidden="true" className="" strokeWidth={3} />
+        <CheckIcon aria-hidden="true" strokeWidth={3} />
       </MenuPrimitive.RadioItemIndicator>
       <span className="col-start-2">{children}</span>
     </MenuPrimitive.RadioItem>

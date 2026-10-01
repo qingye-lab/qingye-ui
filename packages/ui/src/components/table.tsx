@@ -15,6 +15,11 @@ export type TableProps = React.ComponentProps<"table"> & {
   variant?: TableVariant;
   /** Row height; `compact` suits dense, scannable data. Both read from tokens. */
   density?: TableDensity;
+  /**
+   * Pins the header row while the body scrolls. The container is the scroll
+   * area, so give it a height, e.g. `render={<div className="max-h-80" />}`.
+   */
+  stickyHeader?: boolean;
   render?: useRender.ComponentProps<"div">["render"];
 };
 
@@ -22,6 +27,7 @@ export function Table({
   className,
   variant = "default",
   density = "default",
+  stickyHeader = false,
   render,
   ...props
 }: TableProps): React.ReactElement {
@@ -36,8 +42,11 @@ export function Table({
         {...props}
       />
     ),
-    className: "group/table relative w-full overflow-x-auto",
+    // --table-row carries the density so header and cells derive from one value.
+    className:
+      "group/table relative w-full overflow-x-auto [--table-row:var(--qy-row-default)] data-[density=compact]:[--table-row:var(--qy-row-compact)]",
     "data-density": density,
+    "data-sticky-header": stickyHeader ? "" : undefined,
     "data-slot": "table-container",
     "data-variant": variant,
   };
@@ -55,7 +64,7 @@ export function TableHeader({
 }: React.ComponentProps<"thead">): React.ReactElement {
   return (
     <thead
-      className={cn("[&_tr]:border-b", className)}
+      className={cn("not-in-data-sticky-header:[&_tr]:border-b [&_tr]:hover:bg-transparent!", className)}
       data-slot="table-header"
       {...props}
     />
@@ -117,7 +126,10 @@ export function TableHead({
   return (
     <th
       className={cn(
-        "h-(--qy-row-default) whitespace-nowrap px-2.5 text-left group-data-[density=compact]/table:h-(--qy-row-compact) align-middle font-medium text-muted-foreground leading-none has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
+        "h-[max(--spacing(9),calc(var(--table-row)_-_--spacing(2)))] whitespace-nowrap px-2.5 text-start align-middle font-medium text-muted-foreground leading-none has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
+        // Sticky header: an opaque fill and an inset hairline, because collapsed
+        // row borders do not travel with sticky cells.
+        "group-data-sticky-header/table:sticky group-data-sticky-header/table:top-0 group-data-sticky-header/table:z-10 group-data-sticky-header/table:bg-background group-data-sticky-header/table:shadow-[inset_0_-1px_var(--color-border)] in-data-[variant=card]:group-data-sticky-header/table:bg-[linear-gradient(--alpha(var(--color-muted)/72%),--alpha(var(--color-muted)/72%)),linear-gradient(var(--color-card),var(--color-card))] in-data-[variant=card]:group-data-sticky-header/table:shadow-none",
         className,
       )}
       data-slot="table-head"
@@ -133,7 +145,7 @@ export function TableCell({
   return (
     <td
       className={cn(
-        "h-(--qy-row-default) whitespace-nowrap bg-clip-padding px-2.5 py-2 in-data-[slot=table-footer]:py-3.5 group-data-[density=compact]/table:h-(--qy-row-compact) align-middle leading-none in-data-[variant=card]:first:ps-[calc(--spacing(2.5)-1px)] in-data-[variant=card]:last:pe-[calc(--spacing(2.5)-1px)] has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
+        "h-(--table-row) whitespace-nowrap bg-clip-padding px-2.5 py-2 in-data-[slot=table-footer]:py-3.5 align-middle leading-none in-data-[variant=card]:first:ps-[calc(--spacing(2.5)-1px)] in-data-[variant=card]:last:pe-[calc(--spacing(2.5)-1px)] has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
         className,
       )}
       data-slot="table-cell"

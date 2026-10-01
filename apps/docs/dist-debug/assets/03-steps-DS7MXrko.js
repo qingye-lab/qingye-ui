@@ -1,0 +1,4 @@
+const _03Steps = 'import { Slider } from "@yanqing/ui";\n\nexport const meta = { title: "刻度", description: "step 限定可选值，下方刻度标出每一档。" };\n\nconst levels = ["关闭", "低", "中", "高", "最大"];\n\nexport default function Demo() {\n  return (\n    <div className="w-full max-w-sm">\n      <Slider aria-label="新风档位" defaultValue={2} max={levels.length - 1} getAriaValueText={(_, value) => levels[value] ?? ""} />\n      <div aria-hidden="true" className="mt-3 flex justify-between px-2.5 text-muted-foreground text-xs sm:px-2">\n        {levels.map((level) => (\n          <span key={level} className="flex w-0 flex-col items-center gap-1.5">\n            <span className="h-1 w-px bg-muted-foreground/48" />\n            <span className="whitespace-nowrap">{level}</span>\n          </span>\n        ))}\n      </div>\n    </div>\n  );\n}\n';
+export {
+  _03Steps as default
+};

@@ -1,0 +1,4 @@
+const _02Sizes = 'import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@yanqing/ui";\n\nexport const meta = { title: "尺寸与占位", description: "sm / default / lg；未选择时显示 placeholder。" };\n\nconst sizes = ["sm", "default", "lg"] as const;\nconst items = { "1": "每 1 分钟", "5": "每 5 分钟", "15": "每 15 分钟", "60": "每小时" };\n\nexport default function Demo() {\n  return (\n    <div className="flex w-full max-w-64 flex-col gap-3">\n      {sizes.map((size) => (\n        <Select key={size} items={items} aria-label="采集频率">\n          <SelectTrigger size={size}>\n            <SelectValue placeholder="选择采集频率" />\n          </SelectTrigger>\n          <SelectPopup>\n            {Object.entries(items).map(([value, label]) => (\n              <SelectItem key={value} value={value}>\n                {label}\n              </SelectItem>\n            ))}\n          </SelectPopup>\n        </Select>\n      ))}\n    </div>\n  );\n}\n';
+export {
+  _02Sizes as default
+};

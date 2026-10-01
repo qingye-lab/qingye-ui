@@ -1,0 +1,4 @@
+const _03Sizes = 'import { StatusDot } from "@yanqing/ui";\n\nexport const meta = { title: "尺寸与仅圆点", description: "不写文字时组件输出读屏文本，例如「在线」。" };\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-col items-center gap-5">\n      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">\n        <StatusDot size="sm" status="online">\n          小\n        </StatusDot>\n        <StatusDot status="online">默认</StatusDot>\n        <StatusDot size="lg" status="online">\n          大\n        </StatusDot>\n      </div>\n      <div className="flex items-center gap-4">\n        <StatusDot size="sm" status="online" />\n        <StatusDot status="warning" />\n        <StatusDot size="lg" status="error" />\n        <StatusDot label="打印机缺纸" status="warning" />\n      </div>\n    </div>\n  );\n}\n';
+export {
+  _03Sizes as default
+};

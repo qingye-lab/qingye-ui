@@ -1,0 +1,4 @@
+const _04IconsSizes = 'import { Steps } from "@yanqing/ui";\nimport { CreditCardIcon, PackageCheckIcon, ShoppingCartIcon, TruckIcon } from "lucide-react";\n\nexport const meta = { title: "图标与尺寸", description: "icon 替换序号；size=\\"sm\\" 适合卡片和侧栏。" };\n\nconst items = [\n  { id: "order", title: "已下单", icon: <ShoppingCartIcon /> },\n  { id: "pay", title: "已付款", icon: <CreditCardIcon /> },\n  { id: "ship", title: "运输中", icon: <TruckIcon /> },\n  { id: "sign", title: "已签收", icon: <PackageCheckIcon /> },\n];\n\nexport default function Demo() {\n  return (\n    <div className="flex w-full max-w-xl flex-col gap-8">\n      <Steps current={2} items={items} label="订单进度" />\n      <Steps current={2} items={items} label="订单进度（小）" size="sm" />\n    </div>\n  );\n}\n';
+export {
+  _04IconsSizes as default
+};

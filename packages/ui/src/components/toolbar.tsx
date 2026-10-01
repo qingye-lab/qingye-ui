@@ -13,7 +13,7 @@ export function Toolbar({
   return (
     <ToolbarPrimitive.Root
       className={cn(
-        "relative flex gap-2 rounded-xl border bg-card not-dark:bg-clip-padding p-1 text-card-foreground",
+        "relative flex gap-2 rounded-xl border bg-card not-dark:bg-clip-padding p-1 text-card-foreground data-[orientation=vertical]:w-fit data-[orientation=vertical]:flex-col",
         className,
       )}
       data-slot="toolbar"
@@ -67,7 +67,7 @@ export function ToolbarGroup({
 }: ToolbarPrimitive.Group.Props): React.ReactElement {
   return (
     <ToolbarPrimitive.Group
-      className={cn("flex items-center gap-1", className)}
+      className={cn("flex items-center gap-1 data-[orientation=vertical]:flex-col", className)}
       data-slot="toolbar-group"
       {...props}
     />

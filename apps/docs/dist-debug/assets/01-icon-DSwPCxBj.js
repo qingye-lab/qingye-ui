@@ -1,0 +1,4 @@
+const _01Icon = 'import { InputGroup, InputGroupAddon, InputGroupInput } from "@yanqing/ui";\nimport { MailIcon, MapPinIcon } from "lucide-react";\n\nexport const meta = { title: "图标", description: "图标放在首端说明内容类型，放在末端作为状态提示。" };\n\nexport default function Demo() {\n  return (\n    <div className="flex w-full max-w-xs flex-col gap-3">\n      <InputGroup>\n        <InputGroupInput aria-label="邮箱" placeholder="name@company.com" type="email" />\n        <InputGroupAddon>\n          <MailIcon aria-hidden="true" />\n        </InputGroupAddon>\n      </InputGroup>\n      <InputGroup>\n        <InputGroupInput aria-label="收货地址" defaultValue="杭州市西湖区文三路 90 号" />\n        <InputGroupAddon align="inline-end">\n          <MapPinIcon aria-hidden="true" />\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  );\n}\n';
+export {
+  _01Icon as default
+};

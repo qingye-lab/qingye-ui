@@ -31,7 +31,7 @@ export function FieldsetLegend({
       className={cn(
         "text-foreground",
         variant === "legend"
-          ? "font-semibold text-base"
+          ? "font-semibold text-lg/6 sm:text-base/6"
           : "font-medium text-base/4.5 sm:text-sm/4",
         className,
       )}

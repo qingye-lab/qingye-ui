@@ -1,0 +1,4 @@
+const _04Sizes = 'import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";\nimport { LayoutGridIcon, ListIcon } from "lucide-react";\n\nexport const meta = { title: "尺寸", description: "size 统一作用于组内所有项。" };\n\nexport default function Demo() {\n  return (\n    <div className="flex flex-wrap items-center justify-center gap-4">\n      {(["sm", "default", "lg"] as const).map((size) => (\n        <ToggleGroup defaultValue={["grid"]} key={size} size={size} variant="outline">\n          <ToggleGroupItem aria-label="网格视图" value="grid">\n            <LayoutGridIcon />\n          </ToggleGroupItem>\n          <ToggleGroupSeparator />\n          <ToggleGroupItem aria-label="列表视图" value="list">\n            <ListIcon />\n          </ToggleGroupItem>\n        </ToggleGroup>\n      ))}\n    </div>\n  );\n}\n';
+export {
+  _04Sizes as default
+};

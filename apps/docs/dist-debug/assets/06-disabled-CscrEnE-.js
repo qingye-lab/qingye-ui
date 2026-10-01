@@ -1,0 +1,4 @@
+const _06Disabled = 'import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@yanqing/ui";\n\nexport const meta = { title: "禁用", description: "可禁用整组，或只禁用其中一项。" };\n\nexport default function Demo() {\n  return (\n    <>\n      <ToggleGroup defaultValue={["auto"]} disabled variant="outline">\n        <ToggleGroupItem value="auto">自动</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value="manual">手动</ToggleGroupItem>\n      </ToggleGroup>\n      <ToggleGroup defaultValue={["standard"]} variant="outline">\n        <ToggleGroupItem value="standard">标准</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value="express">加急</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem disabled value="same-day">\n          当日达\n        </ToggleGroupItem>\n      </ToggleGroup>\n    </>\n  );\n}\n';
+export {
+  _06Disabled as default
+};

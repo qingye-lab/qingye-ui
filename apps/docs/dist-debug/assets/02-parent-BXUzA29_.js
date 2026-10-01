@@ -1,0 +1,4 @@
+const _02Parent = 'import { Checkbox, CheckboxGroup, Label } from "@yanqing/ui";\nimport { useState } from "react";\n\nexport const meta = { title: "全选与半选", description: "父复选框根据子项自动显示全选、半选或未选。" };\n\nconst permissions = [\n  { value: "read", label: "查看设备" },\n  { value: "control", label: "远程控制" },\n  { value: "ota", label: "固件升级" },\n  { value: "delete", label: "删除设备" },\n];\n\nexport default function Demo() {\n  const [value, setValue] = useState(["read", "control"]);\n  return (\n    <CheckboxGroup\n      aria-label="运维角色权限"\n      value={value}\n      onValueChange={setValue}\n      allValues={permissions.map((item) => item.value)}\n    >\n      <Label><Checkbox parent />运维角色 · 全部权限</Label>\n      <div className="flex flex-col gap-3 ps-6">\n        {permissions.map((item) => (\n          <Label key={item.value}><Checkbox value={item.value} />{item.label}</Label>\n        ))}\n      </div>\n    </CheckboxGroup>\n  );\n}\n';
+export {
+  _02Parent as default
+};

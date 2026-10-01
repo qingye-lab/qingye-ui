@@ -1,0 +1,4 @@
+const _01Basic = 'import {\n  Button,\n  Card,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardPanel,\n  CardTitle,\n  Field,\n  FieldLabel,\n  Input,\n} from "@yanqing/ui";\n\nexport const meta = { title: "基础", description: "标题、内容与底部操作。" };\n\nexport default function Demo() {\n  return (\n    <Card className="w-full max-w-sm">\n      <CardHeader>\n        <CardTitle>创建项目</CardTitle>\n        <CardDescription>新项目默认部署到华东 1 区，可随时在设置中更改。</CardDescription>\n      </CardHeader>\n      <CardPanel>\n        <Field>\n          <FieldLabel>项目名称</FieldLabel>\n          <Input placeholder="例如：会员中心" />\n        </Field>\n      </CardPanel>\n      <CardFooter className="justify-end gap-2">\n        <Button variant="ghost">取消</Button>\n        <Button>创建</Button>\n      </CardFooter>\n    </Card>\n  );\n}\n';
+export {
+  _01Basic as default
+};
