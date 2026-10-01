@@ -1,0 +1,26 @@
+{
+  "task": 10,
+  "head": "fb8a389",
+  "stage": "applied; browser acceptance pending",
+  "tests": {
+    "status": "PASS",
+    "count": 297,
+    "command": "pnpm --filter @qingye/ui test --maxWorkers=2"
+  },
+  "typecheck": {
+    "status": "PASS",
+    "command": "pnpm --filter @qingye/ui typecheck"
+  },
+  "browser": "NOT_RUN by C; delegated to sole owner A",
+  "patchSha256": "e48d48ecbab0e74626015574d38372f9737f824dd449677a8836d6d13fdf7762",
+  "logs": {
+    "tests": {
+      "path": "docs/baseline/task10-token-wiring/tests.txt",
+      "sha256": "ad98552d072974bc547703bbe76e55e535591fecee5121435b3df4eb63a35439"
+    },
+    "typecheck": {
+      "path": "docs/baseline/task10-token-wiring/typecheck.txt",
+      "sha256": "129cf9397241364ba47845d97011c34df91d9e56c853b3d177a305526d864760"
+    }
+  }
+}

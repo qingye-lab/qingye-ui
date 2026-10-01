@@ -1,0 +1,13 @@
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/text-role-css.test.ts (1 test) 21ms
+ ✓ test/text-role-merging.test.tsx (11 tests) 132ms
+ ✓ test/native-select.test.tsx (4 tests) 177ms
+ ✓ test/select.test.tsx (2 tests) 197ms
+
+ Test Files  4 passed (4)
+      Tests  18 passed (18)
+   Start at  22:33:35
+   Duration  1.50s (transform 326ms, setup 748ms, import 997ms, tests 527ms, environment 2.14s)
+

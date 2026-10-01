@@ -57,20 +57,20 @@ export function DisclosureTrigger({
   return (
     <CollapsiblePrimitive.Trigger
       className={cn(
-        "group/disclosure relative flex cursor-pointer select-none items-center font-medium text-base outline-none transition-[color,background-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 sm:text-sm",
+        "group/disclosure relative flex cursor-pointer select-none items-center font-medium text-base outline-none transition-[color,background-color,box-shadow] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 sm:text-sm",
         "[&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
         variant === "plain" &&
-          "touch-target -mx-1 w-fit gap-1 rounded-md px-1 py-0.5 text-muted-foreground hover:text-foreground focus-visible:ring-offset-1 focus-visible:ring-offset-background data-panel-open:text-foreground",
+          "touch-target -mx-1 w-fit gap-(--qy-space-1) rounded-md px-(--qy-space-1) py-[calc(var(--qy-space-1)*0.5)] text-muted-foreground hover:text-foreground focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background data-panel-open:text-foreground",
         variant === "inset" &&
-          "min-h-12 w-full justify-between gap-3 rounded-[calc(var(--radius-xl)-1px)] px-4 text-start hover:bg-accent focus-visible:ring-inset data-panel-open:rounded-b-none sm:min-h-11",
+          "min-h-12 w-full justify-between gap-(--qy-space-3) rounded-[calc(var(--radius-xl)-1px)] px-(--qy-space-4) text-start hover:bg-accent focus-visible:ring-inset data-panel-open:rounded-b-none sm:min-h-11",
         variant === "separated" &&
-          "min-h-12 w-full justify-between gap-3 rounded-md text-start text-muted-foreground hover:text-foreground focus-visible:ring-offset-1 focus-visible:ring-offset-background data-panel-open:text-foreground sm:min-h-11",
+          "min-h-12 w-full justify-between gap-(--qy-space-3) rounded-md text-start text-muted-foreground hover:text-foreground focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background data-panel-open:text-foreground sm:min-h-11",
         className,
       )}
       data-slot="disclosure-trigger"
       {...props}
     >
-      <span className="flex min-w-0 items-center gap-2" data-slot="disclosure-label">
+      <span className="flex min-w-0 items-center gap-(--qy-space-2)" data-slot="disclosure-label">
         {children}
       </span>
       <ChevronDownIcon
@@ -111,9 +111,9 @@ export function DisclosurePanel({
       <div
         className={cn(
           "min-w-0",
-          variant === "plain" && "pt-3",
-          variant === "inset" && "px-4 pb-4",
-          variant === "separated" && "pb-4",
+          variant === "plain" && "pt-(--qy-space-3)",
+          variant === "inset" && "px-(--qy-space-4) pb-(--qy-space-4)",
+          variant === "separated" && "pb-(--qy-space-4)",
           className,
         )}
         data-slot="disclosure-content"

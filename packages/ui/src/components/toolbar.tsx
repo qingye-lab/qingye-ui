@@ -13,7 +13,7 @@ export function Toolbar({
   return (
     <ToolbarPrimitive.Root
       className={cn(
-        "relative flex gap-2 rounded-xl border bg-card not-dark:bg-clip-padding p-1 text-card-foreground data-[orientation=vertical]:w-fit data-[orientation=vertical]:flex-col",
+        "relative flex gap-(--qy-space-2) rounded-xl border bg-card not-dark:bg-clip-padding p-(--qy-space-1) text-card-foreground data-[orientation=vertical]:w-fit data-[orientation=vertical]:flex-col",
         className,
       )}
       data-slot="toolbar"
@@ -67,7 +67,7 @@ export function ToolbarGroup({
 }: ToolbarPrimitive.Group.Props): React.ReactElement {
   return (
     <ToolbarPrimitive.Group
-      className={cn("flex items-center gap-1 data-[orientation=vertical]:flex-col", className)}
+      className={cn("flex items-center gap-(--qy-space-1) data-[orientation=vertical]:flex-col", className)}
       data-slot="toolbar-group"
       {...props}
     />
@@ -81,7 +81,7 @@ export function ToolbarSeparator({
   return (
     <ToolbarPrimitive.Separator
       className={cn(
-        "shrink-0 bg-border data-[orientation=horizontal]:my-0.5 data-[orientation=vertical]:my-1.5 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:not-[[class^='h-']]:not-[[class*='_h-']]:self-stretch",
+        "shrink-0 bg-border data-[orientation=horizontal]:my-[calc(var(--qy-space-1)*0.5)] data-[orientation=vertical]:my-[calc(var(--qy-space-1)*1.5)] data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:not-[[class^='h-']]:not-[[class*='_h-']]:self-stretch",
         className,
       )}
       data-slot="toolbar-separator"

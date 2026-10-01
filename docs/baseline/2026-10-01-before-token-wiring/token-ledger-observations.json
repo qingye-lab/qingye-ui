@@ -1,0 +1,5415 @@
+{
+  "fingerprint": {
+    "sha256": "601bd953eb886f1590a8cc7bd332d4bd8e908620676149cf67ffab478bcb73f4",
+    "inputs": [
+      {
+        "path": "apps/docs/package.json",
+        "sha256": "69ef51ecf503d82e128e76f0835fb438025ad841cfa5360442b56034bc0f0fa9"
+      },
+      {
+        "path": "apps/docs/src/app.tsx",
+        "sha256": "8df557e34f67b3fd9e17cb6712222a1e8a9c5eb607625e1814fe802cf70baf92"
+      },
+      {
+        "path": "apps/docs/src/components/code-block.tsx",
+        "sha256": "b88d74bc68714938e7389c2bf1d84a4f9a64fe19838b0bceb0bdcd522460902a"
+      },
+      {
+        "path": "apps/docs/src/components/component-preview.tsx",
+        "sha256": "9d04967b3fed6726e97f23f0503f626c4fef561bb44735e722d758be6fbbb2e5"
+      },
+      {
+        "path": "apps/docs/src/components/copy-code-button.tsx",
+        "sha256": "9540f6428f099f9fb373650210cd87f8a20211b737900b344503b3307fbdbe4c"
+      },
+      {
+        "path": "apps/docs/src/components/demo.tsx",
+        "sha256": "9970ddd19350830756e126ace5130e9a7a671d26085c5d43043e34839b685711"
+      },
+      {
+        "path": "apps/docs/src/components/docs-nav.tsx",
+        "sha256": "f91d84fad61fe2866fc7ee09d9b6f7065845f275352b797ca6768e7dad746b19"
+      },
+      {
+        "path": "apps/docs/src/components/install-tabs.tsx",
+        "sha256": "5261000e53d01c53d0140ad496bcf42e518a7d017d540987717bbc23be84973f"
+      },
+      {
+        "path": "apps/docs/src/components/layouts.tsx",
+        "sha256": "6e480fab7ce512a81217a6502001ee65c03c85af046fabe733419c8bb9d15b97"
+      },
+      {
+        "path": "apps/docs/src/components/logo.tsx",
+        "sha256": "5ea94e1319733dbee66dd4c769963a92febdca98227d5c5e5dffa31181a93b8e"
+      },
+      {
+        "path": "apps/docs/src/components/pager.tsx",
+        "sha256": "fdd2391f12cc75ab202b2a090d557187552a7ea39ee7acb5cf2a5a137a9b6cb7"
+      },
+      {
+        "path": "apps/docs/src/components/prose.tsx",
+        "sha256": "a9cb4c341e6d873c83369953475ba8aeb29ea1f9868a6f1b4bd521ff94936e63"
+      },
+      {
+        "path": "apps/docs/src/components/search-dialog.tsx",
+        "sha256": "1331ae7a8414e25d534340d7f8c0afdb51529467f427e3eae4096b2f0024ef67"
+      },
+      {
+        "path": "apps/docs/src/components/search.tsx",
+        "sha256": "ff80a3ad46e7d813a42aa3857beab00d00a333d620ffd86a7c56e51c30759c69"
+      },
+      {
+        "path": "apps/docs/src/components/site-header.tsx",
+        "sha256": "97116a1fee78e01e43e16bffa9c336783b387b251d62cb42842710f4806fc9c1"
+      },
+      {
+        "path": "apps/docs/src/components/theme-menu.tsx",
+        "sha256": "9bbd2f5cb759aa2871b6fac9d6238f936d24edd19f5e554e6978c6d9778089a4"
+      },
+      {
+        "path": "apps/docs/src/components/toc.tsx",
+        "sha256": "4b88b1122cf32e12642388b99d40af2bc29e558eb23871c4aef3a712228232dc"
+      },
+      {
+        "path": "apps/docs/src/content/accordion/demos/01-default.tsx",
+        "sha256": "97276e8636103b269cc59436b7ddb8b9c9ceaff99c9cc9bf75dd5c770f21a48e"
+      },
+      {
+        "path": "apps/docs/src/content/accordion/demos/02-multiple.tsx",
+        "sha256": "1e8e4b875f1a92ef04486b022c99d3047b153e2d7ff830d8a3dedb13f74bea18"
+      },
+      {
+        "path": "apps/docs/src/content/accordion/demos/03-card.tsx",
+        "sha256": "c5e1fc92d94d8186c73c562b888ec4d043baad05067f44ef9ba27ed9552bd666"
+      },
+      {
+        "path": "apps/docs/src/content/accordion/meta.ts",
+        "sha256": "f8be40bb51c8972197c3414a10bb8992fd7c0205b278f08b82d8d2b2ee11fc5e"
+      },
+      {
+        "path": "apps/docs/src/content/alert-dialog/demos/01-default.tsx",
+        "sha256": "f66c76793f554484378a932f44f2d2ac7948e8c3a78da16345e3205a82ea544a"
+      },
+      {
+        "path": "apps/docs/src/content/alert-dialog/demos/02-bare-footer.tsx",
+        "sha256": "49b85b13414faed78b8a8c4d5a7bbc16c896c4131bd5b1f189d99d4e2f6ec0dc"
+      },
+      {
+        "path": "apps/docs/src/content/alert-dialog/demos/03-async.tsx",
+        "sha256": "c138eda0dc5f88b2c2ad251f44435c7d90d8fc5683fe3574fd26dd32eb56abbf"
+      },
+      {
+        "path": "apps/docs/src/content/alert-dialog/meta.ts",
+        "sha256": "7856fbcbbd7e192340ecdd670c8a6eef586b65936b041a108b036af91f8e7f4d"
+      },
+      {
+        "path": "apps/docs/src/content/alert/demos/01-variants.tsx",
+        "sha256": "305da746ba7cb83fc9f4346605d31ee2428ad59fc967cdc69be7b94aca8acbb6"
+      },
+      {
+        "path": "apps/docs/src/content/alert/demos/02-action.tsx",
+        "sha256": "fcbec1749a14cfc2095e8e4a636e151e1b7c820d4f01187f478e317f2a7ac6af"
+      },
+      {
+        "path": "apps/docs/src/content/alert/demos/03-content.tsx",
+        "sha256": "0018480a090f5a7d2e74a99fcfb4a4737e24ec8439459bd8b71e1ba5e762f5e9"
+      },
+      {
+        "path": "apps/docs/src/content/alert/meta.ts",
+        "sha256": "bb94f7fd3104f5275c8bb75b9253378a4b1bae9ccd3bc2255517515f5d5ce1cb"
+      },
+      {
+        "path": "apps/docs/src/content/aspect-ratio/demos/01-basic.tsx",
+        "sha256": "f5aac2f8aa1da046bbc91329931fe61d27e551aecd6731c519978123630c9f75"
+      },
+      {
+        "path": "apps/docs/src/content/aspect-ratio/demos/02-ratios.tsx",
+        "sha256": "e8de5085df6989b9815919d433742f48124cbf8870ddcb5186e0e316af4c5a76"
+      },
+      {
+        "path": "apps/docs/src/content/aspect-ratio/demos/03-media-card.tsx",
+        "sha256": "350c514914be6b7cf4b385915412c521278562d678d1244f0d45ea7493f8a2c4"
+      },
+      {
+        "path": "apps/docs/src/content/aspect-ratio/meta.ts",
+        "sha256": "2d5fd0b6194f3d01120b858a7fca0a9190112caf81f3d26cb39a06b3b0e42e12"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/01-basic.tsx",
+        "sha256": "1d7501fd712f2cba621b6721dca53e865d2a6850cda47bfe1ef4f0684391ad4f"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/02-inline.tsx",
+        "sha256": "35e3abaebcaca74d0ef7b4c68690bbb4c7b4bbcc275f5ed10d338db94dbccad5"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/03-groups.tsx",
+        "sha256": "bd3c361943fd1392702ec1298606ce06a07efb95d6f3a6117b0dddb760e24a28"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/04-limit.tsx",
+        "sha256": "1b5483252f423c66af09c215585a431e3a1ee5af30e51a6794a33559ae4a55fb"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/05-async.tsx",
+        "sha256": "1e945f7b598f927acd1411dd3e8cb7b65bd7496a3b2dc662e7985d912fc6c0c6"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/demos/06-sizes.tsx",
+        "sha256": "a8257c13413962c34eebeb1f1d011208a627781fbdd42b17787d22be3cb6f36a"
+      },
+      {
+        "path": "apps/docs/src/content/autocomplete/meta.ts",
+        "sha256": "752987c76456b18dd063e2fce620281be20d439721a7561a28d48671d1b6d4e3"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/01-basic.tsx",
+        "sha256": "fb9bfb3df37f9819021e8c2e8dc051e0370edd710603e072537231d31c8f512b"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/02-sizes.tsx",
+        "sha256": "366c1de7f21ef3558b42f953a4b64d6eda496996af7af39e0e0114548713745f"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/03-badge.tsx",
+        "sha256": "124787d456a10d404f9ca54c69fe9a26f0d60c75b05ee54aa606ebdcab563d1d"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/04-group.tsx",
+        "sha256": "c4c418db11b2d3b15075f0d6566ff82c08b3e42c32e3d6fe02e7df868e996428"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/05-members.tsx",
+        "sha256": "27496e4242f87809965be7300ce48dd94ee20e93e973b7062c1831c7d1fc253b"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/demos/06-comments.tsx",
+        "sha256": "3cda6b00f4a92c275688daa29b43b2ae0ce2bb6efeea81112edf404e7be040f6"
+      },
+      {
+        "path": "apps/docs/src/content/avatar/meta.ts",
+        "sha256": "3a9f5e0d20374c8f5e7c252e06192d4d9218f22aeeb84481047cdc737ed6717c"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/01-variants.tsx",
+        "sha256": "6246a994d60a28215ca65887b661a0d7c63ef735eff59d127aa4ef3047d9445d"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/02-sizes.tsx",
+        "sha256": "6ba78077e2a88c99a5d81f67a39f44176347fea8f3b7673b345abcfa935788f9"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/03-icons.tsx",
+        "sha256": "725cfe0eed7307a226587f4b9d79d060c4871d9a13fe3d0bfaf4393eae6916ee"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/04-dot.tsx",
+        "sha256": "ac94b838c6f43c41c0b8ce3c72a8bf8430c5be41835d9eac436c804dad7b31f8"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/05-count.tsx",
+        "sha256": "0e83aa957f426dc6ed4ee58268006000c324241fe1031fe5ae5e273de101c1ef"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/06-interactive.tsx",
+        "sha256": "45308c4b0c95da70d665ae647c2a96365303146a43d02f12b3ad54a62db52cb2"
+      },
+      {
+        "path": "apps/docs/src/content/badge/demos/07-orders.tsx",
+        "sha256": "2f61891131e2b5f3c5b14c0e02111deea097ce6553faeedc2dd588b4fa8cd34a"
+      },
+      {
+        "path": "apps/docs/src/content/badge/meta.ts",
+        "sha256": "5fbb78f418c3af05f0d55d93038587ae3211760b7b582b90086e13874f02122e"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/demos/01-default.tsx",
+        "sha256": "c6afca6962e61de5573391ba1502ee0fd7131132026ddb65823cb2fbb897fdb3"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/demos/02-ellipsis-menu.tsx",
+        "sha256": "84ffd0ccabd52256cd014d8069d1b69d83cb344468083e9af196bee0997876e0"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/demos/03-icons.tsx",
+        "sha256": "5b3efe07b3b3b991efacc5fb0c64423e32b2ca465ce431fed548d1eef25d91e3"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/demos/04-separator.tsx",
+        "sha256": "7051b209c820dcb3e5430c0ad5857bf6900fd45cdc6bf5c666fd554bed29871c"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/demos/05-responsive.tsx",
+        "sha256": "c0e1429718d374af124e5dd86d6f526c93e9d82e82cbe4742e76fdcf59844f22"
+      },
+      {
+        "path": "apps/docs/src/content/breadcrumb/meta.ts",
+        "sha256": "ccad2f79a1b0ece28cf91857da9311cc8d5117417c6b554632ca8e55efc7e951"
+      },
+      {
+        "path": "apps/docs/src/content/button-group/demos/01-basic.tsx",
+        "sha256": "d9c363911f89bab787ac0ecc3274d206bc589f4f522e2ffb495e76ea77f92f0a"
+      },
+      {
+        "path": "apps/docs/src/content/button-group/demos/02-split.tsx",
+        "sha256": "af0e7dd4e11de26e3e7b2680740411e9344ac3c70a875543ac8084b8d9734d41"
+      },
+      {
+        "path": "apps/docs/src/content/button-group/demos/03-input.tsx",
+        "sha256": "b1a32effda9609691c07f386804c105dd960680e397417309612ccbec254e016"
+      },
+      {
+        "path": "apps/docs/src/content/button-group/demos/04-vertical.tsx",
+        "sha256": "0116e0ee0c8a52f19695a45be129d4811de342dc83b73c8c52e60dcc2576b0c8"
+      },
+      {
+        "path": "apps/docs/src/content/button-group/meta.ts",
+        "sha256": "7dbc7f4e1e17fdde216968f7a158f82152cd0c6337e9251d18ee24297a378d59"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/01-variants.tsx",
+        "sha256": "a0cecafe33d099df5e36ffb00696053b179a0469666733a08251720e0e3f35c7"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/02-sizes.tsx",
+        "sha256": "c70506f7675829ceff348a5e3dbe66b0d39c75008dabf5ada9354f71e519e585"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/03-icon-sizes.tsx",
+        "sha256": "a8873d4c0d8210131e20064c5073ae056d46955f7e13cc108d1c4ba7195537af"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/04-with-icon.tsx",
+        "sha256": "b0ce0740f7595b7972ad0e0246e2eb6a997f04b90e5e0896ccb13378ef2c5f7f"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/05-link.tsx",
+        "sha256": "fffe43b2d48819cdd2674d86959e9dca6ab10190cf9a04fa4d93908338e94884"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/06-loading.tsx",
+        "sha256": "04bbfc57d0eed2a8386d75d4864c7eeeab0cdde9d93c4126a5bda6751409b8f5"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/07-loading-custom.tsx",
+        "sha256": "f1f78fe69d6b40872e1e8246930c82653a879b3357a0360a2781d164e04771cf"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/08-disabled.tsx",
+        "sha256": "603d1f0663a668983f91996ac731cfd22349cf8595929bb1768723f96d30c7c2"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/09-form-actions.tsx",
+        "sha256": "cb67a704cf614e06c0bdc90564884354037e18c6f4966b713b0cff5ebd792140"
+      },
+      {
+        "path": "apps/docs/src/content/button/demos/10-card-button.tsx",
+        "sha256": "ef8de99ac40981242780d9be34deea2a2ac0c703a5360a8ec4e5ddfcb4f5efcb"
+      },
+      {
+        "path": "apps/docs/src/content/button/meta.ts",
+        "sha256": "ed03ad84e212f1f48ff0da1b9dcb16aec6daa95dfd6c089fbd465a6fe1babbe0"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/demos/01-single.tsx",
+        "sha256": "74ef2fade087c3e241085c66878080603f21bc4e7f3eb51d4e7c2d93f84509e6"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/demos/02-range.tsx",
+        "sha256": "ec1e9ba4b38aea49b8427789b0b58eb81bdd70cd09d2e9cc8d0a7a55198856bb"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/demos/03-multiple.tsx",
+        "sha256": "6c383c8ff33f3ead80d75652fdd74552db34f28a76fb925df225046106a1f48b"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/demos/04-dropdown.tsx",
+        "sha256": "36c7ff9ee8b2352519c90420264822a4389ae846e5387a14caf53612b60ffe46"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/demos/05-booking.tsx",
+        "sha256": "72c1ae118b8f6361753a3f8ecd0c7f3d517c7a361fada462a23edd1651667281"
+      },
+      {
+        "path": "apps/docs/src/content/calendar/meta.ts",
+        "sha256": "19d9024e8f2709a4d41b622ce64274e60b6225fb2f46fcd5e5bc25a4a9c51b26"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/01-basic.tsx",
+        "sha256": "6db41ae6fa63f726c3fbdc0f5f1fd02067999f2ea6138fbb23dd04d73440cfa5"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/02-action.tsx",
+        "sha256": "8e464237f8b7180d60df6d6ef1bc5fbe9082f65cdab887c9f1e3e5e90532c81a"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/03-divided.tsx",
+        "sha256": "2a902c95b4b5f7c2a1166b6b071252185af5762e96455c6dbacbc8fca75cd87b"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/04-size.tsx",
+        "sha256": "d5b776818262c494ff615367e02cc7e6e4c7ded6dd94a6a9f55d420d436d6094"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/05-stats.tsx",
+        "sha256": "515d18a0adda0cd05b409a76399d49a4ca5dbd380023328dd0624e236f883cc7"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/06-settings.tsx",
+        "sha256": "e7e0d733a13c63812616827c9b018927f7d6b60cf69aafb6b5b8be36331f304a"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/07-frame-table.tsx",
+        "sha256": "8d69404e73b5f28d4e8c364f535e2c55409f8340aa553047dfd6e5fc6f33fa17"
+      },
+      {
+        "path": "apps/docs/src/content/card/demos/08-frame-cards.tsx",
+        "sha256": "2adf5b1f70ae274e389ca99b0a90475583631bb199a6d5a5080a8d1326a882f0"
+      },
+      {
+        "path": "apps/docs/src/content/card/meta.ts",
+        "sha256": "38e991461ff1d3ca6e5b4f0036d45ed01cb4d55911ad2f4839d2aad016d86d16"
+      },
+      {
+        "path": "apps/docs/src/content/carousel/demos/01-default.tsx",
+        "sha256": "571dd8cdde76acf5f5d9060d529cf0665f5a2a18ecb95b321e32d4583b0b3a2f"
+      },
+      {
+        "path": "apps/docs/src/content/carousel/demos/02-multiple.tsx",
+        "sha256": "7300a8a2a4744ce5db900051c99da4a59fafc7320df59ae99d86ccb2eabb6f18"
+      },
+      {
+        "path": "apps/docs/src/content/carousel/demos/03-overlay.tsx",
+        "sha256": "a06287dbf48d85eb5900088a1983d19b7abec9b237b731038629127f92e4a6bd"
+      },
+      {
+        "path": "apps/docs/src/content/carousel/demos/04-counter.tsx",
+        "sha256": "093554f9a425ed9a1cc10c80a43e43de375a4899d1e80bd3a23ca3f247426796"
+      },
+      {
+        "path": "apps/docs/src/content/carousel/meta.ts",
+        "sha256": "cf1468e0f2afca651c2875af4cac4fd8951fef32da82428d6deb98c6fea8e428"
+      },
+      {
+        "path": "apps/docs/src/content/chart/demos/01-area.tsx",
+        "sha256": "b6324a6ebccaa9b103f6a0f8578595f3be8d4205c70c5af0107ff96f9473cc98"
+      },
+      {
+        "path": "apps/docs/src/content/chart/demos/02-bar.tsx",
+        "sha256": "43e59fe6813d5fa4c279033549669b5994865b01e053272ea99d07077fde5c08"
+      },
+      {
+        "path": "apps/docs/src/content/chart/demos/03-stacked.tsx",
+        "sha256": "6d9c11bc6fc3952fd412e0343d0004ef90a0326d30f5c48ba93f017dfa433e5e"
+      },
+      {
+        "path": "apps/docs/src/content/chart/demos/04-line.tsx",
+        "sha256": "224b5ce65005b69694b8ed0dd83a321126415aff8edb6ab8ed6cb5803eea0363"
+      },
+      {
+        "path": "apps/docs/src/content/chart/demos/05-donut.tsx",
+        "sha256": "f36674899624e5c0776467e9bd0132bb3f930ed24a175bfa89fa9795ca352c7f"
+      },
+      {
+        "path": "apps/docs/src/content/chart/meta.ts",
+        "sha256": "406f4d0e53e2cda96f39a10b991b55f34446b9b0cfa9f38c56fc9852487de490"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox-group/demos/01-basic.tsx",
+        "sha256": "23dcf0a7a78b11e6ac3d127dceef6d4979c3c9421e5c0e6d0f63d86d76255932"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox-group/demos/02-parent.tsx",
+        "sha256": "0991c8ab25e376a5360a8282fd4e946884fc617ba76a2481c55efc3252ff05db"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox-group/demos/03-fieldset.tsx",
+        "sha256": "95a7ac882a661a87cabc8c333a2e566a2b9665293f5fc1a2761b38fe872ffe01"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox-group/meta.ts",
+        "sha256": "4c401576c22e5f90da1ff260219f18ccee9d3ff801fb4eb9cc8c28d18272e70f"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/demos/01-basic.tsx",
+        "sha256": "07e3e42e40af40437a732ac841ea2f8b0479186e246d42cc4e8e10bd1a575aaa"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/demos/02-states.tsx",
+        "sha256": "0a9dc5dfaa6215ce31faba8af36427fd96d3690ca96a1f533a2641b7a3d82e64"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/demos/03-description.tsx",
+        "sha256": "090fd7ab7bea33772520289ede121e09b4fd79205eb3596910bfad77329a7991"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/demos/04-card.tsx",
+        "sha256": "cdb7103076e2671798d7a502645a143bf94f7c3638c0d646259610776ef19766"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/demos/05-agreement.tsx",
+        "sha256": "4da937dee57e788ced648bc6bb5a4129ad8ce7d53d618b99d8bf775301860084"
+      },
+      {
+        "path": "apps/docs/src/content/checkbox/meta.ts",
+        "sha256": "ee9c9ff069c525b3d6bbf0fb502b6a5cab924b4dd4494ae444493a7feccf2701"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/demos/01-basic.tsx",
+        "sha256": "82aeeb17fdfbe522e8eddc75c463fd64fec1913cb03dbffd0b54ba6c4edec087"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/demos/02-header.tsx",
+        "sha256": "163d131f2010263663e282f233adf417105fd002d24cbc3b45ff58fa453a19c4"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/demos/03-scroll.tsx",
+        "sha256": "c2736730482c978f2b9def9d82d37d4ef83912b81f77b9a167e29c46392ce424"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/demos/04-highlighted.tsx",
+        "sha256": "bd31116006e2c1ddc0b8ae6c61961fb72acfe020b1c924cdfdf6f871a9f50222"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/demos/05-inline.tsx",
+        "sha256": "c252a81942587284c323d2e942d87b2e5b2ef4c38359019d245915ccc599d298"
+      },
+      {
+        "path": "apps/docs/src/content/code-block/meta.ts",
+        "sha256": "f6b09956add262d1ed980d5320eefb6a4f476472a3287dc0045980993801c897"
+      },
+      {
+        "path": "apps/docs/src/content/collapsible/demos/01-show-more.tsx",
+        "sha256": "28c1757363dccc8bccc673af40556e15fc48c55831a792c9335b886108a1eafe"
+      },
+      {
+        "path": "apps/docs/src/content/collapsible/demos/02-tree.tsx",
+        "sha256": "24c70b379e3a1e98ac50ca0800a416a9731a0d528b65e2613ca1811379e34cb0"
+      },
+      {
+        "path": "apps/docs/src/content/collapsible/meta.ts",
+        "sha256": "ce29d4129815e837bb13695c0774a76d972494bfd35cb92d0eaba27afb9ab75c"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/01-basic.tsx",
+        "sha256": "6c74030c91bae1f8783702e5536e47f243b3dde3582eb418bb92d4372ac2d60c"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/02-sizes.tsx",
+        "sha256": "4d93b42616925b52dbd9243ea3d43acdfb5fd75dc3faf331a3129f02229ffc5d"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/03-clear.tsx",
+        "sha256": "f83c33ff8070c16f595297f948f8c0ea0b768c13f9f9a7b2954110c94870dad1"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/04-groups.tsx",
+        "sha256": "3860b94bd9e9e9dc0350fd582a5aeb745cc732cd21fd6184bc344a4818dfb529"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/05-multiple.tsx",
+        "sha256": "007b83cbd9534c855f1bce7362ed2273e87446c87347b92998f4a5a653ea9005"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/06-async.tsx",
+        "sha256": "066abd032204b6caf658c19d80972460cceb1936e13018abb2c29f51685b0f9a"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/07-creatable.tsx",
+        "sha256": "d62fa11ea521782326392c282a4b5502445e19b99a8619132084c38253998871"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/demos/08-form.tsx",
+        "sha256": "7622c39cdb27fdb06babd41114e230c7b4ed3ecb599142bcb25399d20d17f249"
+      },
+      {
+        "path": "apps/docs/src/content/combobox/meta.ts",
+        "sha256": "ef2ffadd39434a1f40e4f2991c7ee59a2e11abbdd51dd2c53709959b35643b0c"
+      },
+      {
+        "path": "apps/docs/src/content/command/demos/01-dialog.tsx",
+        "sha256": "014b9bffe0c0ae17663a0fbcf3f2129152d1bbdd8f286e11050f3dfa8e223faf"
+      },
+      {
+        "path": "apps/docs/src/content/command/demos/02-inline.tsx",
+        "sha256": "ac3cfcc22dbf13e4f78f70e8df6caf6b6d6e7f92f679dc462fff55f1fb2b13b0"
+      },
+      {
+        "path": "apps/docs/src/content/command/demos/03-empty.tsx",
+        "sha256": "9edd35a6bb5242a8dd075fb1960cb2ebb31d395917f8d4d15ce42c7a054732e3"
+      },
+      {
+        "path": "apps/docs/src/content/command/meta.ts",
+        "sha256": "1285c796ac9bf7fe2022ba1194f4ffba4d11f9fefeff09ed78118340ec92c110"
+      },
+      {
+        "path": "apps/docs/src/content/context-menu/demos/01-default.tsx",
+        "sha256": "e272850f9d8b2f45ad7fbb2dd723ff765760988934194d77fe480d4ee911961e"
+      },
+      {
+        "path": "apps/docs/src/content/context-menu/demos/02-options.tsx",
+        "sha256": "57a7ad44ecde8a4666b5580a60431ddea5b233dc79ef9c92267e4adb78ce6597"
+      },
+      {
+        "path": "apps/docs/src/content/context-menu/demos/03-submenu.tsx",
+        "sha256": "9e4b1dd0aac005f18ed919b5dfe177322326684ecdcabea899848c2e168de75c"
+      },
+      {
+        "path": "apps/docs/src/content/context-menu/meta.ts",
+        "sha256": "e7bf69fa1e32858a5543c19995401725e0faec221a9855dac10281cd5b68771c"
+      },
+      {
+        "path": "apps/docs/src/content/copy-button/demos/01-default.tsx",
+        "sha256": "50b9d8e26aa8c44fa55bc562ccf74e2c4ae24d538d181158159f8edb191c941c"
+      },
+      {
+        "path": "apps/docs/src/content/copy-button/demos/02-variants.tsx",
+        "sha256": "3154ba98379bae7e4e172561ec18e39d15687b661fd8424bddc06bc0678e130b"
+      },
+      {
+        "path": "apps/docs/src/content/copy-button/demos/03-custom-label.tsx",
+        "sha256": "ea7f8c8478d6b419263f4608f10667ef6bfd28b5105c9b4395d40962e2a300fe"
+      },
+      {
+        "path": "apps/docs/src/content/copy-button/demos/04-in-input.tsx",
+        "sha256": "38b4e05f53b39edefd4d6e0750db9b3d1ddde9b8eca86444fdb0a062c4d22245"
+      },
+      {
+        "path": "apps/docs/src/content/copy-button/meta.ts",
+        "sha256": "291ec6ef800125a0550d8db41b20147ddc6370487bb5b469bcf1fc73bd356024"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/01-basic.tsx",
+        "sha256": "62121ebe3e86335b61f68b31d64db342bf3047cf349043ba02167463d7828d68"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/02-selection.tsx",
+        "sha256": "091a5dfc2ec5ce1120c40c67a1d8ea0c3640dc4aac7754c5446404fee8cbf421"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/03-states.tsx",
+        "sha256": "57a52d156a6921696ac06e69b59688f3023019313133e7649cc3e8041514f132"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/04-server.tsx",
+        "sha256": "c97b282743d9f0fda0d0f0f37d341612fdfb1c88f6fa06cb10b7504e8af6be13"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/05-compact-scroll.tsx",
+        "sha256": "1da2b0f2fef12f16175083f08347505218e44d40deff890c231f1096c588bc8c"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/demos/06-server-selection.tsx",
+        "sha256": "56f196b855d5d059b24d50b491c61c8ff34cd2ae6adc809d645e6500ac4f4129"
+      },
+      {
+        "path": "apps/docs/src/content/data-table/meta.ts",
+        "sha256": "03656837a692f3561d4a952cf40f81f370ce206cce31b78552881625bb2ce53d"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/demos/01-basic.tsx",
+        "sha256": "1d0ec5916659aef92399831639a56ea7a2bc5caa9c25c9699e4543df49672dd1"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/demos/02-sizes.tsx",
+        "sha256": "34ba521c4f591c4ddd107b11f6c7c0cc5c54a041d2c5508e63d2d3482c4b77e4"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/demos/03-states.tsx",
+        "sha256": "6d5c23af032f6453258172be90c74f5b664a1e9f2ce214e3d1373c310ed372b0"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/demos/04-form.tsx",
+        "sha256": "72b04970e23650030b29f2a08f3cca7e3a88062612b8b114b49b9148b06a08b4"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/demos/05-controlled.tsx",
+        "sha256": "dff1e0850dbe55f2b868e28d4f8e21eb6e73de3896fae1fa23ac83d1c831aa6d"
+      },
+      {
+        "path": "apps/docs/src/content/date-picker/meta.ts",
+        "sha256": "1aa16c5e43937247f7467cfbe30b64f83cf0c1961f160e4617cddb9b49fc9f63"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/demos/01-basic.tsx",
+        "sha256": "571888f37c85f7fc5eb2492c2f70462f396eaa1baf8fba3af22f8dfbe67c73eb"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/demos/02-presets.tsx",
+        "sha256": "e6ae284272379090b5a6bf3cba7bded31e366313b2ccbdcf9ac66479c13cb88f"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/demos/03-sizes.tsx",
+        "sha256": "db9be32bd6e9ad5c81fc33a6938be2a0d391b149596561f7f19a0266637b9c03"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/demos/04-states.tsx",
+        "sha256": "9875822571dee8facedef28dd663a3f077037ab515914458e41628bf6c655fb8"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/demos/05-form.tsx",
+        "sha256": "e97179f3e73991654d29eb7fe093d5301755fa7355ce0d19a7d85aea47fa7ddb"
+      },
+      {
+        "path": "apps/docs/src/content/date-range-picker/meta.ts",
+        "sha256": "50fc16f6f7702dadd186ec3bd2af1590421b450c14da05dddc47cf44f1aad87b"
+      },
+      {
+        "path": "apps/docs/src/content/date-time-picker/demos/01-basic.tsx",
+        "sha256": "eb880e38e0806e658b20560a3d3d38fdeb660665188ad2fa056de53239dee08e"
+      },
+      {
+        "path": "apps/docs/src/content/date-time-picker/demos/02-sizes.tsx",
+        "sha256": "908a8be522050c734d9beadaa78151a562fded1fce83b71ae504a6a097731f1a"
+      },
+      {
+        "path": "apps/docs/src/content/date-time-picker/demos/03-states.tsx",
+        "sha256": "903878fe61057222e10f7f4a5acd4a26d044cf82e0a94466e97e76fda812b3b5"
+      },
+      {
+        "path": "apps/docs/src/content/date-time-picker/demos/04-booking.tsx",
+        "sha256": "9ea119a6b1d1566ebe6381629633c5212722cf1ef9c9dc96b64a89e926007b03"
+      },
+      {
+        "path": "apps/docs/src/content/date-time-picker/meta.ts",
+        "sha256": "0d095ec7f329d4b55ea091be21e65d5d1a0ee08ab98ec64cd0a2420e2f3f53a0"
+      },
+      {
+        "path": "apps/docs/src/content/description-list/demos/01-horizontal.tsx",
+        "sha256": "a484117d43c80e33041bb0427cbcdcbd40e4f1799d73027f35a7bfd18938a8cf"
+      },
+      {
+        "path": "apps/docs/src/content/description-list/demos/02-divided.tsx",
+        "sha256": "83cbe62b11cf9f89eac2eeb48f66d2478194083228401c46c234e1d8751f95a8"
+      },
+      {
+        "path": "apps/docs/src/content/description-list/demos/03-vertical.tsx",
+        "sha256": "c47ab6088552e222f2b887bc1f0b005b615c26d78b7a4cae5c39cec5dfa8e1f1"
+      },
+      {
+        "path": "apps/docs/src/content/description-list/demos/04-grid.tsx",
+        "sha256": "707355c2d6f02a1168bad1077ebb1129dc39cc6eb75d80f555b32ade0938f1bd"
+      },
+      {
+        "path": "apps/docs/src/content/description-list/meta.ts",
+        "sha256": "965470dcdb383f1b6e022afc0d6897b64cfd448b07741dc4e398c7ee7ef88d1d"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/01-form.tsx",
+        "sha256": "f4cdc721034a3cbd0d0095e0972370f6334b212279ed699d05571927b4e58d6e"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/02-bare-footer.tsx",
+        "sha256": "17d7b681af267d0760aa2aacd96bd93e427f3fd2105578b09ce700bdf997867c"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/03-scrollable.tsx",
+        "sha256": "6e3d1d020e16722c206adc121b9c521ed7aa2c8fb6372bc0f3c32e99a4ab3a8a"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/04-nested.tsx",
+        "sha256": "e99db7692729064d7c8afc7b34e15dadd6424051c97754efc3bcb1f2ce671920"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/05-close-confirmation.tsx",
+        "sha256": "b5991a5cb2ed0b5c82e15c34bc97da985c0c57c1046f1d05fe65039c54ad1830"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/06-from-menu.tsx",
+        "sha256": "c06a0dd7dba42450556df6d999606191cf81a7ab2e63932ced2f6b555ec7f117"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/demos/07-destructive.tsx",
+        "sha256": "2be23d8cfec7ca6dd7718ffbcfe4f1c2e1abbd9ae6369eafdfce044e1c961c27"
+      },
+      {
+        "path": "apps/docs/src/content/dialog/meta.ts",
+        "sha256": "7e4c9e24254f40569d6cdee750060e72c4c6b432e0639c6e123affef292572bb"
+      },
+      {
+        "path": "apps/docs/src/content/disclosure/demos/01-plain.tsx",
+        "sha256": "4cd5b54baddfafc51940b5786cd6bd9c4751f59996ead6862bbc34cecf51e3ef"
+      },
+      {
+        "path": "apps/docs/src/content/disclosure/demos/02-inset.tsx",
+        "sha256": "af8412204c942c67fe79a6df97a49ca98d33c305d188186cd4bf433ef1a93a7b"
+      },
+      {
+        "path": "apps/docs/src/content/disclosure/demos/03-separated.tsx",
+        "sha256": "08473218062455e40adb7e4b8859afa76bcc50bac32269ab74ce602c88a9a44f"
+      },
+      {
+        "path": "apps/docs/src/content/disclosure/demos/04-controlled.tsx",
+        "sha256": "cf94dedd68e2644dc086dff74b3df5f0cae56fdc98fcbd9bc1739bbfa8fedbcf"
+      },
+      {
+        "path": "apps/docs/src/content/disclosure/meta.ts",
+        "sha256": "8e08af4b1d087a721f7ceb04d327ba23711084f8130711b8dcf2f59a70d20e4c"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/01-default.tsx",
+        "sha256": "cdbdb21323e911c36a43be9e8f1f667394572bed3f89d2ef9f73d64643916799"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/02-positions.tsx",
+        "sha256": "660c9a4877d49855cb66db81eb051d2fa2651efbc0e2fa98d7a794d0df6deec1"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/03-variants.tsx",
+        "sha256": "6718c9ee675b13d0f719c1cb5092f9e555400355dfb47003a58bca1ed3b66b78"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/04-snap-points.tsx",
+        "sha256": "74def803afea700740d095e518baad75be4fc2ae079c9cb4f4c5d31b2b739a08"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/05-nested.tsx",
+        "sha256": "0ff3e1d91ed853c44dd26691d2c7e9df3742fbc71165d4cee1bb06e8f1b46a97"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/06-action-menu.tsx",
+        "sha256": "68271e8f0af23a02f58d9b4f1c1ae56f2541657fb63382c178b66f2f008a98b9"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/demos/07-responsive.tsx",
+        "sha256": "f365ff645b3e0cd43ab07a8648f53091c91c41832155064ca332fb6bd13780f6"
+      },
+      {
+        "path": "apps/docs/src/content/drawer/meta.ts",
+        "sha256": "1d3c9230573b62153154dc6b28f4f39cc58714248dc95815a1f93efe95f46ddf"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/01-icon.tsx",
+        "sha256": "54fdb8242666ec6ea93100636af0f7387fb949fa9db1bdfe05186dcc88990130"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/02-actions.tsx",
+        "sha256": "b71fec89c20fdc959ba41cbb817fa0ccd5ec8ff927cbc906b75704126defb6ef"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/03-avatars.tsx",
+        "sha256": "e9a215de1f0c0b2a75b8d6657387d5f7ec369d2707bc262da2f90d0c7936532e"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/04-card.tsx",
+        "sha256": "5f1eba8cf1666e3ebbee1dc30b37a7c708971342382927d6b15253d6b9004e7c"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/05-table.tsx",
+        "sha256": "cc8eaba704b6b3e5470fc44052bfa2e10791622a230cc2535d0adf599702e439"
+      },
+      {
+        "path": "apps/docs/src/content/empty/demos/06-search.tsx",
+        "sha256": "735d8dcec9171c62022235232396b2af3cce00a1be122f928e5306aee0d7a595"
+      },
+      {
+        "path": "apps/docs/src/content/empty/meta.ts",
+        "sha256": "c81e032a92b94f425a2a83e74d28b7be93aa2bbc9cd686edde02ed03deeee152"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/01-default.tsx",
+        "sha256": "85ce3be01c7b113e0b81e725f3886da059719a9ef1adda3a73ae777a0ea8f972"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/02-validation.tsx",
+        "sha256": "e7eb56a1bd5602c2bd4170692fc9e6f43208ee897e20b8ef1ef7500df0c90161"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/03-horizontal.tsx",
+        "sha256": "02a0f7e4a0edc4e5920e8b0a312b9d030c0c3bc3b98f4f79e6dfa09a6c4eb522"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/04-group.tsx",
+        "sha256": "0460d756f25614c3f94a116f9a742bb90314f4f9acf84cadaab8194451b13c5d"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/05-title.tsx",
+        "sha256": "bba6bbd8a4cae337d545ed6b54467f4c923a866b86bbb8d5ff17c85742f2f5e1"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/06-errors.tsx",
+        "sha256": "bfed608938ea4228d7f3abc6970215505ba93bfb92252fe093e6632f7a417c99"
+      },
+      {
+        "path": "apps/docs/src/content/field/demos/07-disabled.tsx",
+        "sha256": "4156ba2e5b359eff351e8bf34f9f558d852af041a5d4ae7c08258fa45b6d935b"
+      },
+      {
+        "path": "apps/docs/src/content/field/meta.ts",
+        "sha256": "52a5ca1fead0f6d42a0c57c97ea38fdef7f223b1b70b1534e0752ebb7e16713a"
+      },
+      {
+        "path": "apps/docs/src/content/fieldset/demos/01-default.tsx",
+        "sha256": "333dee214a36177a2a87a04b04a70b8f1c2d061dbaaf9f1f523863f0b92556fb"
+      },
+      {
+        "path": "apps/docs/src/content/fieldset/demos/02-label-legend.tsx",
+        "sha256": "3bf59d4b7f314e514f0427261d8f7d08c25aaeb666359a33444c3db9c047142c"
+      },
+      {
+        "path": "apps/docs/src/content/fieldset/demos/03-disabled.tsx",
+        "sha256": "122dcfce1efa8251cca049fac1bcaf72b9ef6b426960545df0dbb0e3b98a71d4"
+      },
+      {
+        "path": "apps/docs/src/content/fieldset/meta.ts",
+        "sha256": "f5b477891727e961a6587b4fe24f96e83e5c44f7c34692d346d03f5e728f7281"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/01-dropzone.tsx",
+        "sha256": "fe85d25074f6fcbb434ac181f8e51629869f34b97488ff06f2d8de2fbbee9fd0"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/02-progress.tsx",
+        "sha256": "765b0e76332cb372bb89dd7fd6f47eb35be2b4a32ee9798af3ce08431c04923c"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/03-button.tsx",
+        "sha256": "1025113f1da9cea2e6bdbab2cbe16da5605386aa606a528a4deaa8b95a7c1a8a"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/04-states.tsx",
+        "sha256": "e4b8cfc562ea2e5d0f22be4aa00581f292b07d3b4383c0268d695c6cfba27ef1"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/05-validation.tsx",
+        "sha256": "63dab5276b1903f5cb01788e599e75986e059c58355e3cddaf79a4a56f213d60"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/demos/06-form.tsx",
+        "sha256": "6c361395c557855f6a7db2d034a47e4024115d902c78c6bd2e0769d81a87397c"
+      },
+      {
+        "path": "apps/docs/src/content/file-upload/meta.ts",
+        "sha256": "1d827bd9c490daebb89b60ec3b50834c28cc88a8ac60815ac5e88047cefbfb39"
+      },
+      {
+        "path": "apps/docs/src/content/form/demos/01-complete.tsx",
+        "sha256": "97e0c397ea5e81f292ebe1f0163169e5cdab466d09e9906d224ad3fd1fb64417"
+      },
+      {
+        "path": "apps/docs/src/content/form/demos/02-server-errors.tsx",
+        "sha256": "ad233afa590f5ad8f606bc16378f93f42364227f67f9b9f961c00204feaab33b"
+      },
+      {
+        "path": "apps/docs/src/content/form/meta.ts",
+        "sha256": "f5bc74009bbef0a6b4f8b610854262da538fea05d745544cd59100cc8713a059"
+      },
+      {
+        "path": "apps/docs/src/content/frame/demos/01-basic.tsx",
+        "sha256": "8af28604478a0f2a86e10305a81ee9a0fcbb4032c94a88c06349b832a951776d"
+      },
+      {
+        "path": "apps/docs/src/content/frame/demos/02-panels.tsx",
+        "sha256": "57762d408f0c27916392f8d02a93cb1e07c8efb518e8f51dbfe62649ba51ea2c"
+      },
+      {
+        "path": "apps/docs/src/content/frame/demos/03-billing.tsx",
+        "sha256": "af188318913642dd0405f8aa3c4818e501513f868fb5d825797907f9c10454e2"
+      },
+      {
+        "path": "apps/docs/src/content/frame/demos/04-settings.tsx",
+        "sha256": "f545d1e1c844031d26ca85f9f2d09cfce944943b45984d8fc51a8b70f239e6cc"
+      },
+      {
+        "path": "apps/docs/src/content/frame/meta.ts",
+        "sha256": "7e24f7c61b7ae44c12d3df5be48a068f04fbee782c47a1cdb80ef74d9c356186"
+      },
+      {
+        "path": "apps/docs/src/content/group/demos/01-default.tsx",
+        "sha256": "98c7e905442b7aded6744287903629d4b1cd3eec05e86b9694aeb08309e897a6"
+      },
+      {
+        "path": "apps/docs/src/content/group/demos/02-sizes.tsx",
+        "sha256": "540bbd25cb2ddbed63182e6ecb971cff81646c91cb6684e387e13ae888ea2787"
+      },
+      {
+        "path": "apps/docs/src/content/group/demos/03-input.tsx",
+        "sha256": "4cf9b759bd0f1aae50d4ea83dc112e9449209f9657f0e6c7a4812f53b460ac62"
+      },
+      {
+        "path": "apps/docs/src/content/group/demos/04-split-button.tsx",
+        "sha256": "9b9dd176c73e97686206101af98d7b94936ef3501e8796f7545007b98fe290ba"
+      },
+      {
+        "path": "apps/docs/src/content/group/demos/05-vertical-nested.tsx",
+        "sha256": "53b3711b99ad0f898e33f14ee778e433310734fe403483c6cef37ba4f5fbfcff"
+      },
+      {
+        "path": "apps/docs/src/content/group/meta.ts",
+        "sha256": "8eb7bbd67a340d1c9766bd93908c4b38f8c10be02353e92ad7f147534e340dfe"
+      },
+      {
+        "path": "apps/docs/src/content/hover-card/demos/01-profile.tsx",
+        "sha256": "3bb4bb631e426cb25368c1cd1b885d06acd0f7bc18956ebe3e27d6b25afd1717"
+      },
+      {
+        "path": "apps/docs/src/content/hover-card/demos/02-link-preview.tsx",
+        "sha256": "0f4241206636874941f3855cbf17eb52a1a650bd53f363ed38cd949c6f271b6b"
+      },
+      {
+        "path": "apps/docs/src/content/hover-card/meta.ts",
+        "sha256": "1603dc372d145aa315e67bc41e76e141944391fd95c26b74b4b58499e8e8f663"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/01-icon.tsx",
+        "sha256": "f64a041258889746caa884c4b923a7c71e1c3818b1a04e6bd20576955248c892"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/02-text.tsx",
+        "sha256": "8f6dee09173a9e1bb110fc93406dbebd9a57f1197fc6bcade8d3cff4ecfe3caa"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/03-button.tsx",
+        "sha256": "01107e7c9fe9a2e9d8a4bf7575679c1bbce5d89a57f0257c6c79b3839bb54e72"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/04-kbd.tsx",
+        "sha256": "b5a5e99812e7c75136062626f02133e84141cfc5c00287eeaefdbb72daa06a1b"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/05-sizes.tsx",
+        "sha256": "116705acc18637fe72cff38b7cb1f8bacb3575d83a1f84ace2394ec302fb8f8a"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/06-states.tsx",
+        "sha256": "c68b232de8a261b469a2299fe7bdf0871809ad9bc042a56482a106aad4e20a5f"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/07-textarea.tsx",
+        "sha256": "be25271e32ef60440adf8b28497f88ad52a2c40c7c7ff3238ee0bb4644477bb4"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/demos/08-label.tsx",
+        "sha256": "7955e3b1c88ce533cafba33f295323d8ffaf2f3c8bad46b552f9de8bc6f27a53"
+      },
+      {
+        "path": "apps/docs/src/content/input-group/meta.ts",
+        "sha256": "13b4d68bc96fb61cd14fbf28abd40e7643987aaa2e4f977cefec75e3c0912517"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/01-default.tsx",
+        "sha256": "01c31162bf86073a0d60a58a944fcb37f293c5d05164d8c041840878f4dca02b"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/02-sizes.tsx",
+        "sha256": "63ac5e0627cacd505470a4fb88783d923611b7aa1dc01cf478f6b0b66f58b0d3"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/03-with-label.tsx",
+        "sha256": "ef45a44ae0a75cd39ce069e48e92507691209c3c99465b35a7f53d59d3814785"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/04-states.tsx",
+        "sha256": "78e7682752855c77782c3c07d55a16ab75d465c1d8c524e8b07ed95389d29ff9"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/05-file.tsx",
+        "sha256": "2681e411d98286ec3801d11ea86626cdb82f7f0a583ef4f2f886cb9e77e85696"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/06-character-count.tsx",
+        "sha256": "4fecc006ac03047b0812336ca74ef286a53bb56c4636691b78a2470a8675cf20"
+      },
+      {
+        "path": "apps/docs/src/content/input/demos/07-native-file.tsx",
+        "sha256": "c90705bd1796c058c3da64255ae9405cab63e46b1635f96aa2bf7095d8725223"
+      },
+      {
+        "path": "apps/docs/src/content/input/meta.ts",
+        "sha256": "f2e9a93d38d771a3857844cc1caf63881df8e2700d25bb9aa81ab4b2b770599a"
+      },
+      {
+        "path": "apps/docs/src/content/item/demos/01-variants.tsx",
+        "sha256": "c164ff0d23cb94c146a6c45d71628148d6025c5c9d68c436f6486eaaaa97da5a"
+      },
+      {
+        "path": "apps/docs/src/content/item/demos/02-link.tsx",
+        "sha256": "3fcf7d5f9cee0a9ffbacde9c47f5724f1ab61e514c68476496168508200820ff"
+      },
+      {
+        "path": "apps/docs/src/content/item/demos/03-group.tsx",
+        "sha256": "7c376362df3d8ab3aa701afaa45f26536bcdf4f28b6cfb28c6b9bd1d27f1809c"
+      },
+      {
+        "path": "apps/docs/src/content/item/demos/04-media.tsx",
+        "sha256": "89add791bae1c302374686479453bb40cc7c7b0612f5bfdbf085c4e1a33609b9"
+      },
+      {
+        "path": "apps/docs/src/content/item/meta.ts",
+        "sha256": "65094d71e2b10ff422828f5a177c77469f93a3d1c8de62e768a2b9902538cbc4"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/demos/01-default.tsx",
+        "sha256": "16fdd959b21832e3b8770edd96ff5dcdab12e5c5e4a1e9c11aaee3283d65d7e2"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/demos/02-in-text.tsx",
+        "sha256": "d494ce4c60d5ec577f69500e8cf979499a8238731ebfe940babd66a2c5ced8e9"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/demos/03-in-button.tsx",
+        "sha256": "b9b1ea5b9d0848e25d3de3f91147f5998ab851224eb597b1dfb495048e793a1d"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/demos/04-in-input.tsx",
+        "sha256": "7841e61fc19bcbab5a4781116bec8fc611664bbf4478ccbda0163fd8d2b03034"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/demos/05-in-menu.tsx",
+        "sha256": "638459acf65650717b682c449137b9e8fa93f8721846ec444fd641e37d9281e8"
+      },
+      {
+        "path": "apps/docs/src/content/kbd/meta.ts",
+        "sha256": "b28c95a8f787748957df71d5942722a9de1292d58937739a5659051704e7f882"
+      },
+      {
+        "path": "apps/docs/src/content/label/demos/01-default.tsx",
+        "sha256": "2e83c80cadd933fec33fc031abab5e1e6fa2f11bed93f8715df9e0deb558c392"
+      },
+      {
+        "path": "apps/docs/src/content/label/demos/02-with-control.tsx",
+        "sha256": "915d3f7ec1c5dbdea8292dee875e1b94e5c227308b8bcca50c6c8edc4304140b"
+      },
+      {
+        "path": "apps/docs/src/content/label/demos/03-required.tsx",
+        "sha256": "ff4ead96b541beefdcecf8a944d91c3d4df5c6143b0a9e38f0f85d204a728122"
+      },
+      {
+        "path": "apps/docs/src/content/label/meta.ts",
+        "sha256": "1a6054252a44bdb31978be70e955ab92cf87af63f2864d2a1c4ca1d08ad49968"
+      },
+      {
+        "path": "apps/docs/src/content/layout/demos/01-stack.tsx",
+        "sha256": "f7952265741937bc74587496670b21085f4a5f6ffe5a122e5c74feaa2f88fc62"
+      },
+      {
+        "path": "apps/docs/src/content/layout/demos/02-inline.tsx",
+        "sha256": "7b12105e31c0ff10dacdd4037dda6b951c13b90d9360d3f95361dcf0c91a37a0"
+      },
+      {
+        "path": "apps/docs/src/content/layout/demos/03-grid.tsx",
+        "sha256": "7eaa6640e351760b513a4889b6dd1499cfcb17ef625c89f75da7342adc925ed5"
+      },
+      {
+        "path": "apps/docs/src/content/layout/demos/04-grid-fluid.tsx",
+        "sha256": "c7c980859923d4685ed8824e4d3e894c3f308ce01ba6d6d5094da1eb38fefa7c"
+      },
+      {
+        "path": "apps/docs/src/content/layout/demos/05-text.tsx",
+        "sha256": "1928fa7c6098348d1e6f4773ad26b45a3bfb3182ccedc81cc8cf23047d126c34"
+      },
+      {
+        "path": "apps/docs/src/content/layout/meta.ts",
+        "sha256": "11201610d6aa4e922c621ba0a265ef442e9722d7298cd3f7ce55abd34fb10498"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/01-default.tsx",
+        "sha256": "2c9109a38eb879bb000e73d7e55343398ddb8afddec577f542de11ca3c43b7a4"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/02-groups.tsx",
+        "sha256": "ee25752eedaccbcac7e274993708b1768be4ed3817a68886f8cebbc304dd9b7c"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/03-checkbox.tsx",
+        "sha256": "655851b5db5d24ee3bc78ca4eb5dd0e9b3071d8767837a8a4efe3395331da33f"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/04-radio.tsx",
+        "sha256": "d0b201799c5d701c774fa8be7049d2b32bb85f5ce23a7c08781c514935ea0a39"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/05-submenu.tsx",
+        "sha256": "60ab986c526553d44bc3874631e447b894e6dfb11d4653969e80beab990b9482"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/06-links.tsx",
+        "sha256": "8451180fdd2d3b5e9c267964c44d2b12abbbcd753d849ead0c01f5a592433feb"
+      },
+      {
+        "path": "apps/docs/src/content/menu/demos/07-hover.tsx",
+        "sha256": "74612ef89b7e4451dbfb7b4df60572b6fd7d7189070bc7583cb0a39141560e41"
+      },
+      {
+        "path": "apps/docs/src/content/menu/meta.ts",
+        "sha256": "957a81bec7a5904f98dd78fd07c24b05a3556bb01d5cd19222ecd6618d5f0721"
+      },
+      {
+        "path": "apps/docs/src/content/menubar/demos/01-app.tsx",
+        "sha256": "af869d5d86a83dd37a33b4f36bb3b1703e2724cbc16055fe9738d77c47d36543"
+      },
+      {
+        "path": "apps/docs/src/content/menubar/demos/02-options.tsx",
+        "sha256": "cf2f83222fe0b62c6944f8d3d0a6ca9b3f0ca1f1866b85c47bcba19dd20d8c1b"
+      },
+      {
+        "path": "apps/docs/src/content/menubar/meta.ts",
+        "sha256": "83ebdef102dc23205ca63a9c13553f7fd4f8e4b670a0a844d8542f4c88cdb122"
+      },
+      {
+        "path": "apps/docs/src/content/meter/demos/01-basic.tsx",
+        "sha256": "74d693f246bbf8b2cee10c8da73e6ebb506b1027d1311ca42fe8c00731386ff0"
+      },
+      {
+        "path": "apps/docs/src/content/meter/demos/02-label.tsx",
+        "sha256": "d32c26c1b4665f0fe27a1d3c4f3679961a2b3030f50ea7ced2fcfe637f96c9e2"
+      },
+      {
+        "path": "apps/docs/src/content/meter/demos/03-format.tsx",
+        "sha256": "65a6dd94a963cec01ba7cd9397492c89f0ed67bcbabd67d8b3ddd50405673aa8"
+      },
+      {
+        "path": "apps/docs/src/content/meter/demos/04-thresholds.tsx",
+        "sha256": "4d86af26fc51ff5ed42799989bd9bfc7fbfb7c816a969097836ae3c9f080a2ab"
+      },
+      {
+        "path": "apps/docs/src/content/meter/demos/05-storage.tsx",
+        "sha256": "ed222d2c44ea12e64f7c0e734a2b7d2ea3b3fae479cf979ffb89ee61bfcf6b94"
+      },
+      {
+        "path": "apps/docs/src/content/meter/meta.ts",
+        "sha256": "663575530aaf28614f63b0a0c295a3d2da4c7adb1a621452aa4e044e9f3ca484"
+      },
+      {
+        "path": "apps/docs/src/content/motion-provider/demos/01-modality.tsx",
+        "sha256": "56b9ce56418425aa3b7bdc4cb269604bacc04f0d76f9939a65abec3bf68abce9"
+      },
+      {
+        "path": "apps/docs/src/content/motion-provider/demos/02-custom.tsx",
+        "sha256": "b4d4ee829f44fef53de4dc18d5efd8bd7fb95b7748613884a67126c9bdb1df21"
+      },
+      {
+        "path": "apps/docs/src/content/motion-provider/meta.ts",
+        "sha256": "7fd4492ea435f26eef20329f3157ad494e83e60f1a2e86604c81cb7b174ef1e4"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/demos/01-basic.tsx",
+        "sha256": "8bb33a9147bb056ec17534b16fd5ede84176c04323e26be12bde6ec8121e58d3"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/demos/02-sizes.tsx",
+        "sha256": "68605b67982a4ddd10dd37d5a442f3551bf42e74684bec5997e62c82c973f18b"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/demos/03-states.tsx",
+        "sha256": "ef13eca4e23ed35d39da4d4ce6e3de66c33d04dbaca49ea132d5b6f4df4ca0cc"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/demos/04-groups.tsx",
+        "sha256": "8e7f301d33b344ef386ecadc9046a1f4aecd6c5531122d469ce3f6bb6f01b676"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/demos/05-alignment.tsx",
+        "sha256": "a243564c92cffe145fbcb384f0edc97c3256f43b67784fc98145858769bcc9a0"
+      },
+      {
+        "path": "apps/docs/src/content/native-select/meta.ts",
+        "sha256": "8afe2939138b884c3ebfd7af3a2391a683611c0d64c567019298c1213ab1b13c"
+      },
+      {
+        "path": "apps/docs/src/content/navigation-menu/demos/01-basic.tsx",
+        "sha256": "d079ad66c9e898c2e92beb72a8f9d20e6b707abe10e3d956ccadccb32cf7ff6c"
+      },
+      {
+        "path": "apps/docs/src/content/navigation-menu/demos/02-simple-links.tsx",
+        "sha256": "733a2dd1d94dbd69e5eac6b5a3c90ee3779cc01a759ca0e684ba8b5964809fdf"
+      },
+      {
+        "path": "apps/docs/src/content/navigation-menu/demos/03-responsive.tsx",
+        "sha256": "3f4349bc39956141835a76d8eade6748bf76d47d1f762f4339b8c8214f857164"
+      },
+      {
+        "path": "apps/docs/src/content/navigation-menu/meta.ts",
+        "sha256": "3fabd4579421b2d408a044a291311dadcf9be5b27b4b0de3e8ce4e3246e6d9e1"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/01-default.tsx",
+        "sha256": "b014aafee4a56dd9926dd0ae3e02fc47ca34118ab942c6e0de966aeac9d6f4f4"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/02-sizes.tsx",
+        "sha256": "810ee04c58e8067f64ccae824ed9b78ff1db006ed71f3ad1e616ab1a2883dd11"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/03-format.tsx",
+        "sha256": "69fbca1cd5cddba47fc7c307166c1355e1ae29f9a914bfdaae1b70d0d7be576e"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/04-range.tsx",
+        "sha256": "86e51b9fb711e847b8cdaaa9b3e5961559b92869a867c3397ab112eb0449b486"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/05-scrub.tsx",
+        "sha256": "29eec52a50389a8100f7948d60907fce48e12253d7c5380d67756346d7c9961e"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/06-states.tsx",
+        "sha256": "90a22f2a2e5dd34550107212d082fd107a4c9d4bc20f4b1c2726dcf80f89706b"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/demos/07-input-group.tsx",
+        "sha256": "3ab7ea5e10d46b0d207ca6c96ce838290aef5b441922e2e9bd47a66f3d176967"
+      },
+      {
+        "path": "apps/docs/src/content/number-field/meta.ts",
+        "sha256": "af2ed6fda7a8fc41b9bcd8026ec1b70989a3dbd2c1429237ba4e0c11a3ca98ae"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/demos/01-basic.tsx",
+        "sha256": "999d6f6ef7e8725025a118a6f90bc5fa4042e711f0e25c190f1ede009385cbb5"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/demos/02-separator.tsx",
+        "sha256": "70844832bc0f47624db04dcef7d38e2d695fc70407b688d0b3f1c852c7e56b9e"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/demos/03-alphanumeric.tsx",
+        "sha256": "b2a755fb9954bdaa9ca1bf27ccff221d944d32078e6ce09bf3f974e8dbc90251"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/demos/04-states.tsx",
+        "sha256": "382546d7dc51a78b70368c4bfad31b1b5ff221a1e767e6cabc24d929acf4f336"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/demos/05-verify.tsx",
+        "sha256": "380054da05035d153f33841f4bece702425a22207808d07c19a6362036a2edbb"
+      },
+      {
+        "path": "apps/docs/src/content/otp-field/meta.ts",
+        "sha256": "a8146d80b46d206a56fff3acd4a15b1be5f81343adb83386347d496e99237215"
+      },
+      {
+        "path": "apps/docs/src/content/page-header/demos/01-basic.tsx",
+        "sha256": "df28dd4f2c8bef36b262ead4a3257a12883bf91bbcacaa87c2ebabfe262a19dd"
+      },
+      {
+        "path": "apps/docs/src/content/page-header/demos/02-breadcrumb.tsx",
+        "sha256": "d65603b20796002b081ae4c17f60001e919dd8b65a2a3751d3772801d138a255"
+      },
+      {
+        "path": "apps/docs/src/content/page-header/demos/03-back.tsx",
+        "sha256": "e01776c9c3f947822071f204133dca400c1204ee0bdf48c0beccaf91087e384f"
+      },
+      {
+        "path": "apps/docs/src/content/page-header/demos/04-narrow.tsx",
+        "sha256": "03406c9dadd42da9667b797713e31a3d96f915c6eee18c6b0704461b6cf10565"
+      },
+      {
+        "path": "apps/docs/src/content/page-header/meta.ts",
+        "sha256": "702284ba8b73dbb153899c7aaef02caabef3b6df13e9c0473560c2a518d7f87a"
+      },
+      {
+        "path": "apps/docs/src/content/pagination/demos/01-default.tsx",
+        "sha256": "9ebae5d62cad99aff1e59ab180ddad54c7ca3839f4dc22fcc3b401ae79a15775"
+      },
+      {
+        "path": "apps/docs/src/content/pagination/demos/02-ellipsis.tsx",
+        "sha256": "483312d9830d17a24e73c99294d2a98709fe3111921cc797f68ead3cf52dc22f"
+      },
+      {
+        "path": "apps/docs/src/content/pagination/demos/03-compact.tsx",
+        "sha256": "51c2d0e95b9b62db8025ad3c849802430d622f3e366a5ca68c3522cf24625a4d"
+      },
+      {
+        "path": "apps/docs/src/content/pagination/demos/04-page-size.tsx",
+        "sha256": "e2e9ed3d9422f457e3765c0bf0236ab05b62078a19b77dbdbd2ac07fa5d63889"
+      },
+      {
+        "path": "apps/docs/src/content/pagination/meta.ts",
+        "sha256": "de8398a73603ed4061a4d7f9221dd0d9949433530c4fb0d61d7147ca69dd2f9a"
+      },
+      {
+        "path": "apps/docs/src/content/password-input/demos/01-default.tsx",
+        "sha256": "4654d1bfcbff160a8e431ab081b56e0fdb1cfbe46e5eca237bb120164b3c4a0d"
+      },
+      {
+        "path": "apps/docs/src/content/password-input/demos/02-sizes.tsx",
+        "sha256": "adc209602f1d81476e00493882e726fd9f08cd06e73c23e69212dfe461287b26"
+      },
+      {
+        "path": "apps/docs/src/content/password-input/demos/03-field.tsx",
+        "sha256": "f20dc59b07dd692f9848610341e5521a3ded44c410de993312579787a2fdf2ce"
+      },
+      {
+        "path": "apps/docs/src/content/password-input/demos/04-controlled.tsx",
+        "sha256": "7bb9d672975853c59b3420fa02b77dfcdd847e56603a0f5ebde01d0b6e182302"
+      },
+      {
+        "path": "apps/docs/src/content/password-input/meta.ts",
+        "sha256": "b60b80c318b5543a30e5e26783b7320e84e10ac0795651b7d7c509e41cb8c1fb"
+      },
+      {
+        "path": "apps/docs/src/content/popover/demos/01-form.tsx",
+        "sha256": "ca3490de99fa4659ee09bf3ebb743492ef36da0cb22d4ff4969b860546b21bb7"
+      },
+      {
+        "path": "apps/docs/src/content/popover/demos/02-close-button.tsx",
+        "sha256": "70c0e1a9745dedfd516d19b58879267f458ff6da0d154f5e31fcb38bddefe308"
+      },
+      {
+        "path": "apps/docs/src/content/popover/demos/03-sides.tsx",
+        "sha256": "69cccd6e6f32a168f48e734fb1d9eb6c631f4d0031313a71d6e90e8d9296aaaf"
+      },
+      {
+        "path": "apps/docs/src/content/popover/demos/04-shared.tsx",
+        "sha256": "1d926c917ccca66e876021b26b61182a34369e4837415bc670ab0d42aea92066"
+      },
+      {
+        "path": "apps/docs/src/content/popover/demos/05-tooltip-style.tsx",
+        "sha256": "3095c13c635d8105849d5b680a2efc5fb6cb36e6b7ec4049c05a434f7574e33c"
+      },
+      {
+        "path": "apps/docs/src/content/popover/meta.ts",
+        "sha256": "6fcfcca79308c28f4b0f50a3635e7d57fd10f3b047baafe4affca377ca36beb3"
+      },
+      {
+        "path": "apps/docs/src/content/preview-card/demos/01-member.tsx",
+        "sha256": "52280e74e6b4056d0cde8356610a1c6d18b9955efa859a5f91b6f7cb01280bd5"
+      },
+      {
+        "path": "apps/docs/src/content/preview-card/demos/02-sides.tsx",
+        "sha256": "9bed8249a1fba1716883bfcd4dbc5d0e385832c2cbcd430254df56fb615d6608"
+      },
+      {
+        "path": "apps/docs/src/content/preview-card/meta.ts",
+        "sha256": "049b8cd3c472f6c916618f2ad60ca78385788c63761a273477ef74f08f86127e"
+      },
+      {
+        "path": "apps/docs/src/content/progress-circle/demos/01-sizes.tsx",
+        "sha256": "4b76488b9ef6d240a23792dfe56ce626efa6ca51ec646267c47231b99ee56d7f"
+      },
+      {
+        "path": "apps/docs/src/content/progress-circle/demos/02-status.tsx",
+        "sha256": "184a1c47b90ebe0dfc17c7b19a0bb2c2017b3171963ce80d2de1037fdbc003f4"
+      },
+      {
+        "path": "apps/docs/src/content/progress-circle/demos/03-states.tsx",
+        "sha256": "eb7c08c44feeec44780ca951fb87e00592a3e04354fe4f0bde45e6c547c7f120"
+      },
+      {
+        "path": "apps/docs/src/content/progress-circle/demos/04-custom.tsx",
+        "sha256": "b376376071887562f2475725bcd41431aaa3054514b709dd0f8e5b3700181752"
+      },
+      {
+        "path": "apps/docs/src/content/progress-circle/meta.ts",
+        "sha256": "e70505655e838f37609bb0fbf606a1659770d0d380065fc237aef648c75735de"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/01-basic.tsx",
+        "sha256": "5e7e275545cd0361a356eca54dcce222af960bf781a0d9baf45b3cb69d0fa58c"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/02-label.tsx",
+        "sha256": "fd2a806678746b57fd70e680e4c02958f5a35b6f3983fe40ff4f56cce6f97b7a"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/03-format.tsx",
+        "sha256": "51239db22b390aa5da589e297aa67140435250c2ad5b169da20917260899ee66"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/04-indeterminate.tsx",
+        "sha256": "925b0af84f62a18a8d804b051b723aa38154bbc23867f31f642a14b98ca8e3ec"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/05-colors.tsx",
+        "sha256": "d4f7ff0079a4d8630ba29e764859b37ede9b1c3cb7ef8c97ccac3e8b6c31699c"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/06-uploads.tsx",
+        "sha256": "03ebab11c5deb1d190df91a2794e734df93f001666e90b38604a50af38cdf977"
+      },
+      {
+        "path": "apps/docs/src/content/progress/demos/07-live.tsx",
+        "sha256": "4471fc790efbf0367d9c787bf6338c2f33e78727167b711a01f092f3b11208eb"
+      },
+      {
+        "path": "apps/docs/src/content/progress/meta.ts",
+        "sha256": "fec5b4a1a127b317ac9283764a7de99dd5c9b89413e37ae0c9793f9c301b3c1f"
+      },
+      {
+        "path": "apps/docs/src/content/radio-group/demos/01-basic.tsx",
+        "sha256": "3ec92515bada951a893056cefb18ade938a3081221ae68d6ead2bac00f30a6e7"
+      },
+      {
+        "path": "apps/docs/src/content/radio-group/demos/02-description.tsx",
+        "sha256": "694cb94026ecf08b2132b15159ed5ba53590f31b31a387d773aa7c707eaaf245"
+      },
+      {
+        "path": "apps/docs/src/content/radio-group/demos/03-card.tsx",
+        "sha256": "aa73f346fdbf17279c8433784998a7f6cb894805a58e233df0d32a9df06fd3e4"
+      },
+      {
+        "path": "apps/docs/src/content/radio-group/demos/04-states.tsx",
+        "sha256": "ae26e759f8deb8ad3d2e64f05c02a52d7fa7b7db404c497bbe17b2a2ac91dbe1"
+      },
+      {
+        "path": "apps/docs/src/content/radio-group/meta.ts",
+        "sha256": "2f3ba02e8ee50c68ee8f55c6abd6b968756b641e25fbdfa30029cb3187d75938"
+      },
+      {
+        "path": "apps/docs/src/content/resizable/demos/01-basic.tsx",
+        "sha256": "5c5b01199f5222a9d75e7114d061189cc9a5c37a9c5eb9d0b1a161608954352c"
+      },
+      {
+        "path": "apps/docs/src/content/resizable/demos/02-vertical.tsx",
+        "sha256": "50f33553be518755f65d5fc0ee9375388feb5ffb992be23e4e19c06b8b9d4b10"
+      },
+      {
+        "path": "apps/docs/src/content/resizable/demos/03-nested.tsx",
+        "sha256": "b13d3dce508b42d554ac965bbd9f91974ecda6a19d1d22a19f7c2b823c1809ce"
+      },
+      {
+        "path": "apps/docs/src/content/resizable/demos/04-collapsible.tsx",
+        "sha256": "cd298c07adf4c19dff240ca439e2c57cd09b430cb5459d7235eb897a10be9e19"
+      },
+      {
+        "path": "apps/docs/src/content/resizable/meta.ts",
+        "sha256": "5caf84cbcffcb222ebca3e3e53fc11663357e8e3925e72b49ca5d4256f311f47"
+      },
+      {
+        "path": "apps/docs/src/content/scroll-area/demos/01-vertical.tsx",
+        "sha256": "5ca5c75e3de2ee0661fef5b9beb5a5c71836854ddd8033ff6a231c865975d76c"
+      },
+      {
+        "path": "apps/docs/src/content/scroll-area/demos/02-horizontal.tsx",
+        "sha256": "3e7b6170a07de9f584fdf439e9a1c8dd0d077c973fd20611b49d805f1285f41b"
+      },
+      {
+        "path": "apps/docs/src/content/scroll-area/demos/03-fade.tsx",
+        "sha256": "cf9134de88395bf0171034a9a22537bc6a588262636a5bf45b7e833606a7c15a"
+      },
+      {
+        "path": "apps/docs/src/content/scroll-area/meta.ts",
+        "sha256": "e40b052998ffbccae070a1ec2c2d998ea1ea68c222bf155efa729b888395bf82"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/demos/01-default.tsx",
+        "sha256": "2e01d30e1fa4895906a1aa6e893d7b268265b67536a8a2546d4b4847aa6e93dd"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/demos/02-shortcut.tsx",
+        "sha256": "66c3987f21f8ade3c976f73322e640f9bab3d53f593429fa9608b17975fb3465"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/demos/03-sizes.tsx",
+        "sha256": "d0f9d6b25580202d297cf11b656b1dbc2c6f4ae484c40e6bebe2e815941b3c24"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/demos/04-states.tsx",
+        "sha256": "db42dff57991dcad2a9d19af70e6f9cd702dedf4e60998889a7a71862afa587d"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/demos/05-filter-list.tsx",
+        "sha256": "4e65752d09b0d9215c1882c121dc90d8e2001583a8caf86e941144575c42b607"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/meta.ts",
+        "sha256": "6a88148bb81b092fde425cfad0b61bc840cdc6aa87c1082d6b39581eb4bb56ad"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/demos/01-radio.tsx",
+        "sha256": "5ad10cafd625f730ab861d2f92bfdf8ed2c24234ebc4dbb63d262f3dfdbb980f"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/demos/02-sizes.tsx",
+        "sha256": "24c52d56a78fcc0599c696f46928cb5efed635c8bdd9dfd427e0de8902358095"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/demos/03-toggle-group.tsx",
+        "sha256": "36554f092683498af7b0c85d5333fa17a517575d630ef9bb4cdb755afd201d9a"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/demos/04-navigation.tsx",
+        "sha256": "20a7c41eb37d26db838e91adb58b6d11ae990b52694a54b6080fe6a873841759"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/demos/05-disabled.tsx",
+        "sha256": "0ece515f284fd2c7dc61bc0e9a135e0e287a6947a921ad3cafa57c020b6fdd9b"
+      },
+      {
+        "path": "apps/docs/src/content/segmented-control/meta.ts",
+        "sha256": "19e189961079851aef5e93234ccaff64786e5807cc06ccf513f91603cf61e81a"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/01-basic.tsx",
+        "sha256": "f08def7c68b392fe8f9f31d8da6c119ac1620d08e8c955545c42bbf010bbdc27"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/02-sizes.tsx",
+        "sha256": "96137a9f4d8b228a72d4c57624b4528bb6572b79a51cd05af42f4c3c542bab5d"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/03-groups.tsx",
+        "sha256": "bed32527e880e1ccca03341fb324cf56595e2835dfde7644e1ef52e00a6bc11f"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/04-states.tsx",
+        "sha256": "f5844546a6f2390afbd1164976381cbd575056c187e0401399644c6c2f3b609c"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/05-multiple.tsx",
+        "sha256": "fefe9dcee98c35610315bbce0370dfb413bed64e6ab38a28297e059ba31c1762"
+      },
+      {
+        "path": "apps/docs/src/content/select/demos/06-toolbar.tsx",
+        "sha256": "eb9cbf97fa75abde60652aeb53d55ddddb20e2c9dc9492c6303c82a48bd7d923"
+      },
+      {
+        "path": "apps/docs/src/content/select/meta.ts",
+        "sha256": "0d49ed0967c72c44bfe67b81be0db04429a4c60e725837632280f0b2393ec9d2"
+      },
+      {
+        "path": "apps/docs/src/content/separator/demos/01-horizontal.tsx",
+        "sha256": "c295ef6aa1a3fb407378c4d578efc69078e3550de435327c430a47f0912f94bd"
+      },
+      {
+        "path": "apps/docs/src/content/separator/demos/02-vertical.tsx",
+        "sha256": "69f14c0ed5712a978ca9fc83d25694e9082eeb6ff9d562a0857a60a4f050e024"
+      },
+      {
+        "path": "apps/docs/src/content/separator/meta.ts",
+        "sha256": "885d132e2b878d30140ca6462d1376d022a421238c7554748ced3d1dfdc9f0c3"
+      },
+      {
+        "path": "apps/docs/src/content/sheet/demos/01-default.tsx",
+        "sha256": "39ce2f7afdec495bcb6520159bf7b0b251650015899336b57a456ea68c44f363"
+      },
+      {
+        "path": "apps/docs/src/content/sheet/demos/02-sides.tsx",
+        "sha256": "3918556dc893c6ebbaec22f91c909026510ce92588cead9ff6ec01f532bd61a7"
+      },
+      {
+        "path": "apps/docs/src/content/sheet/demos/03-inset.tsx",
+        "sha256": "965eed6a724da3e0842786ef8e61824fb822283987c9aa98dc9407830fd72df7"
+      },
+      {
+        "path": "apps/docs/src/content/sheet/meta.ts",
+        "sha256": "1bba16122ba17babfac023969b78c992d7a0a0d599e3b7008070da3174a37755"
+      },
+      {
+        "path": "apps/docs/src/content/sidebar/demos/01-app-shell.tsx",
+        "sha256": "d58b54528890d89003655ca9f63cee2ebb6025992a13d56216cdd75782440d91"
+      },
+      {
+        "path": "apps/docs/src/content/sidebar/demos/02-icon-collapsed.tsx",
+        "sha256": "c1ed1d989b59d628b1c2f6fef49d6b37de1c80427d49fc253416b596623d16fb"
+      },
+      {
+        "path": "apps/docs/src/content/sidebar/demos/03-inset.tsx",
+        "sha256": "1a7ca6fb390e86de8f07f152f128f6a96231b039c26b3c3abbccfd352e75184c"
+      },
+      {
+        "path": "apps/docs/src/content/sidebar/meta.ts",
+        "sha256": "c494de7a701ee7f498e06f2489007618763fa875edf3a18b8546c1bc2a5f1b3b"
+      },
+      {
+        "path": "apps/docs/src/content/skeleton/demos/01-list.tsx",
+        "sha256": "1541188a588491098c5000cf179d7bbeac4cd74420c062730b76963989631777"
+      },
+      {
+        "path": "apps/docs/src/content/skeleton/demos/02-card.tsx",
+        "sha256": "b6b36e980efd6d04ff6c85daa00d29007fab8c7fcc44149bb27d0cdad8548079"
+      },
+      {
+        "path": "apps/docs/src/content/skeleton/demos/03-table.tsx",
+        "sha256": "c2a32c04d8c3f61c42933acc11af6cfd968b9d65aed47e7bccfc4a9956a04414"
+      },
+      {
+        "path": "apps/docs/src/content/skeleton/demos/04-toggle.tsx",
+        "sha256": "2358ec12578cfc8a4899e58fffa2594cc19c38844d72e4c33beca735bca91899"
+      },
+      {
+        "path": "apps/docs/src/content/skeleton/meta.ts",
+        "sha256": "30a6a714fbdf06ae3aabf3adc2356d2ab9d0be227bbaf2bb509ff02fdc16ccf6"
+      },
+      {
+        "path": "apps/docs/src/content/slider/demos/01-basic.tsx",
+        "sha256": "fe1cc0ed3b30d9da17769c85fda4bfd5950c3f87e07b94eedb8e82dd90da6f5a"
+      },
+      {
+        "path": "apps/docs/src/content/slider/demos/02-range.tsx",
+        "sha256": "bd51eb49fba0a80973a1f89d606259340ca4fdcfe763dc233c172d50cfcc5c52"
+      },
+      {
+        "path": "apps/docs/src/content/slider/demos/03-steps.tsx",
+        "sha256": "ae0ecf1ca3c7f97d2e097d701d770de748c8eef0870002c191e75be8494fbe76"
+      },
+      {
+        "path": "apps/docs/src/content/slider/demos/04-vertical.tsx",
+        "sha256": "67dfa0377c1ebc4f00032111191d151537d7e8d3b40375880f6bd4e058f380a9"
+      },
+      {
+        "path": "apps/docs/src/content/slider/meta.ts",
+        "sha256": "eaffb3389b67f3ffa30ca7da799729a0771b2317944ebadc8b4ffdf6953f43fe"
+      },
+      {
+        "path": "apps/docs/src/content/spinner/demos/01-default.tsx",
+        "sha256": "94471843ba51dfa9682c0be82f553fcd22fc31d122f444d5f2796c8600d4ac85"
+      },
+      {
+        "path": "apps/docs/src/content/spinner/demos/02-inline.tsx",
+        "sha256": "61d3f62189e8c4b49a542b80c5a6d3e7851182175ecfdd08a3ec895d1d69d7df"
+      },
+      {
+        "path": "apps/docs/src/content/spinner/demos/03-contexts.tsx",
+        "sha256": "3f5b37d507db87d896b210439d9f044ac5d2f1155e98975a9deb858c42626662"
+      },
+      {
+        "path": "apps/docs/src/content/spinner/meta.ts",
+        "sha256": "a8fec96f0b93ae3ca991ec154c472966a8f07a8c204bbf5977c18b6314287799"
+      },
+      {
+        "path": "apps/docs/src/content/stat/demos/01-basic.tsx",
+        "sha256": "dbe224095d6a093a9f65049a818426acee8a4f07f1e10dd298adb8dc25ba0ff8"
+      },
+      {
+        "path": "apps/docs/src/content/stat/demos/02-trend.tsx",
+        "sha256": "a46b0e46cfdb9744c1241734edfc33357db7a6067ae376ba6932bc4b1abd75d6"
+      },
+      {
+        "path": "apps/docs/src/content/stat/demos/03-sizes.tsx",
+        "sha256": "96ca14e6037c7f912daac5603747c746e6fa2fd6c7d5047406b5057eae33ea27"
+      },
+      {
+        "path": "apps/docs/src/content/stat/demos/04-sparkline.tsx",
+        "sha256": "5a17c51b943fc36fc325405f3f377cd36f95c82af2aca5db65958621ed453618"
+      },
+      {
+        "path": "apps/docs/src/content/stat/demos/05-grid.tsx",
+        "sha256": "998a9fc5354bb65b22c9ecd57938dba98aa669b0e92d7f85e7aabc8af4e32327"
+      },
+      {
+        "path": "apps/docs/src/content/stat/meta.ts",
+        "sha256": "94004a6bb6a73cd7d69434c637000e767d9c6e2cb5fc8ccf79a68bcaf1be99f6"
+      },
+      {
+        "path": "apps/docs/src/content/status-dot/demos/01-statuses.tsx",
+        "sha256": "fcf48fe75ade8dc21709b378620f6fdb7a32d493ef7508db91ac2426e3c7002b"
+      },
+      {
+        "path": "apps/docs/src/content/status-dot/demos/02-pulse.tsx",
+        "sha256": "5b417b85614f327cdc6a92efe7e936afa454b7562be719c48677d5fc00f00230"
+      },
+      {
+        "path": "apps/docs/src/content/status-dot/demos/03-sizes.tsx",
+        "sha256": "6b5673de9cb257f3e1909bf46e1e5bc1570fae0127adcd33c0f6a3747d26574a"
+      },
+      {
+        "path": "apps/docs/src/content/status-dot/demos/04-in-table.tsx",
+        "sha256": "6de7230ed53a1a4e64dce8801dda7a6e445df3983b79e7cb6753df756287ad41"
+      },
+      {
+        "path": "apps/docs/src/content/status-dot/meta.ts",
+        "sha256": "35b34aebf6b7492f71ad36cdce004af2853d27d955b4827446d0b57c13d9a8ff"
+      },
+      {
+        "path": "apps/docs/src/content/steps/demos/01-horizontal.tsx",
+        "sha256": "87fa38aff423f12f71bd9027422925c243896cb02fcb1ac8e149f92701c03a35"
+      },
+      {
+        "path": "apps/docs/src/content/steps/demos/02-vertical.tsx",
+        "sha256": "d14697580f02234ca66608cd69e37e5489a039c7225fceae2ff6b9c480790411"
+      },
+      {
+        "path": "apps/docs/src/content/steps/demos/03-error.tsx",
+        "sha256": "7de53524ea30532765e48960bc8c0fbb495d7cceb26ee6bb7ece7850e1355128"
+      },
+      {
+        "path": "apps/docs/src/content/steps/demos/04-icons-sizes.tsx",
+        "sha256": "b9e47a2d30d950626a8dc51b9717ae1cdf0cf6a5f48238c1297ae8aa42826849"
+      },
+      {
+        "path": "apps/docs/src/content/steps/demos/05-clickable.tsx",
+        "sha256": "19ef39ebffc167a5f1ed18c871d9a41bc3c6ee3da16964142316b550f567f931"
+      },
+      {
+        "path": "apps/docs/src/content/steps/meta.ts",
+        "sha256": "528a570b209b9785bddc336817eb2983789666578d2b3d3321a16c46985600ef"
+      },
+      {
+        "path": "apps/docs/src/content/switch/demos/01-basic.tsx",
+        "sha256": "52b11430037979355e27c98fab0461294339bc932f892638f4274e4af66aeefe"
+      },
+      {
+        "path": "apps/docs/src/content/switch/demos/02-states.tsx",
+        "sha256": "17f187dea2de6f6dc3328b213f3c7dacbf4d86ff434d9d27a64e94dadcc08559"
+      },
+      {
+        "path": "apps/docs/src/content/switch/demos/03-settings.tsx",
+        "sha256": "6e858cb4cc59a707954f005071619d4800febf55c92f6c2d7d3c2a86d673fabd"
+      },
+      {
+        "path": "apps/docs/src/content/switch/demos/04-card.tsx",
+        "sha256": "533b1fafc3d825df70359ce64deeb5ea61d3ea1b9e071772e0cbd08e566d0289"
+      },
+      {
+        "path": "apps/docs/src/content/switch/meta.ts",
+        "sha256": "e24a442c98699d0dc73b3350a917335b089254c5865532343db9142bcefac6e9"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/01-basic.tsx",
+        "sha256": "49ccef135e2f42717c4b86086230510c57b3ec961427a5c29577fc198dd50b28"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/02-card.tsx",
+        "sha256": "82a4d40a5204bbf18a1ea945d7c27706fbb3d2048216d616888bd94fdee4202d"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/03-density.tsx",
+        "sha256": "d3e39181119d948f58328c90fc7c22e96ee429864f0bd4b7261f717b2a3456d3"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/04-selection.tsx",
+        "sha256": "a8f6c7772c25c0996bf1e55b819718c73c0b47f8db4b91bc77537c488d407040"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/05-footer.tsx",
+        "sha256": "2fd7c7f4aa7c01da6654779bed3dd11fb5be287d0793c42c3a408926d89db5bd"
+      },
+      {
+        "path": "apps/docs/src/content/table/demos/06-sticky-header.tsx",
+        "sha256": "07c85d6e57fdf337cda7199e1ce05d333839db9bf15a4b0b0f4ba7ba1956c764"
+      },
+      {
+        "path": "apps/docs/src/content/table/meta.ts",
+        "sha256": "c1a59a475da593f30670fd95f21f2dd980be5ba2a21a8bdb28ecee5cd54c5c63"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/01-default.tsx",
+        "sha256": "de6d888b72a3bb516245a90c93b23d8b699bfe90e32fb60f0f49ab53f6c888be"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/02-sizes.tsx",
+        "sha256": "fd9357e576ba538fe1df4ff22ed2684572ed8a396bbfddfd32d414b2e9e43b4b"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/03-underline.tsx",
+        "sha256": "555bd324191e5ac6ed9c58128e08a55d6a3a3c3e27257d9f850b4d62c90120bd"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/04-vertical.tsx",
+        "sha256": "064ead87413d8abc7ea49983ce2167598af2ffb39ce58fd1952176b84e5ab4d5"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/05-icons-counts.tsx",
+        "sha256": "674c07a9c7cb3b165ea925c40b15d61caaff18d8848d8e883a183fa25f9ac7f2"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/demos/06-overflow.tsx",
+        "sha256": "1ae9fe686002cec01e9c99d98fc561c6469f0a16f739c9522e36b715a4b15848"
+      },
+      {
+        "path": "apps/docs/src/content/tabs/meta.ts",
+        "sha256": "a3549f0cb522f63d79feb212bf1a59fcb71d8465568ac3adb9872f9f9fce4226"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/demos/01-basic.tsx",
+        "sha256": "faba364b5d47bb10a640d3324e4378fa8db3d68aca44e28b29975a35813f3a1e"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/demos/02-sizes.tsx",
+        "sha256": "7a1186dd296d9767128b84fa3651c905fac0ba592683ab906dbd33f3a6b88094"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/demos/03-validation.tsx",
+        "sha256": "435990061cd2790820b298215937647001a2030f56485e09938f6e3da9fdc26d"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/demos/04-states.tsx",
+        "sha256": "527c10aa46eeaa70dd08e58cd0cb1e5d1933162fe29612932148684a5b6712c6"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/demos/05-controlled.tsx",
+        "sha256": "043f181f5aca74c3e4d1b5fe7136c02adba424ecf5c250caf2d7d1154ac45dda"
+      },
+      {
+        "path": "apps/docs/src/content/tag-input/meta.ts",
+        "sha256": "2441ec45116a71857d6a6fe1a0f932fdf988aa8d956ccc764e2c2e2576b607d0"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/demos/01-default.tsx",
+        "sha256": "03a3d420965437cc2759ca86aae2dd893af334381bfe7deb2d75f9805f354a81"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/demos/02-sizes.tsx",
+        "sha256": "e5d0fb24940e1e607ab8be8672fd4ce1439de4d933bfd11f039b95828ea259ee"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/demos/03-field.tsx",
+        "sha256": "c013b8b82a5e806d912ab7358bfcf28d28d785f248f9455d96ea2e1331ab4959"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/demos/04-states.tsx",
+        "sha256": "1d1b46bf79f08265d9427306b12c27de123cbe2bb9fcd46a516e880e4f2bea8c"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/demos/05-with-actions.tsx",
+        "sha256": "2cd3a20941a4c89dff3bdb34744ca48d63d274e2bf48c664831b970827c29a09"
+      },
+      {
+        "path": "apps/docs/src/content/textarea/meta.ts",
+        "sha256": "2db2f2b9f96d1a28367d696af3d1bfe6e64139512ebe67f9e4d812b246a19902"
+      },
+      {
+        "path": "apps/docs/src/content/theme-provider/demos/01-menu.tsx",
+        "sha256": "c1c1a90f24e65bd2a188468d49fb43bc1eb9a5419ea710afe6461f613c00df74"
+      },
+      {
+        "path": "apps/docs/src/content/theme-provider/demos/02-segmented.tsx",
+        "sha256": "b0883d0b12f5e6b5a158c993877ce6b0bf97d4a46a9b311a5ca602a4ee631dec"
+      },
+      {
+        "path": "apps/docs/src/content/theme-provider/demos/03-head-script.tsx",
+        "sha256": "1faf147bd985c052eb2539ba79fe82935ccb5375215fc7fcc0373fedd4f938ca"
+      },
+      {
+        "path": "apps/docs/src/content/theme-provider/meta.ts",
+        "sha256": "dfef02e2691dcdb44c10fc4fd0d681854bf8880eb4592c78a71366a6fe9e8790"
+      },
+      {
+        "path": "apps/docs/src/content/timeline/demos/01-basic.tsx",
+        "sha256": "1cc1c4e1f511d77937fa510efecf70bfad1c6cb112a825c7a2381b0cff0a8b2e"
+      },
+      {
+        "path": "apps/docs/src/content/timeline/demos/02-icons.tsx",
+        "sha256": "a5bf65dd200bc029e0959d91fd5f9c513310f5bde1187b8f1597a6057df20fbe"
+      },
+      {
+        "path": "apps/docs/src/content/timeline/demos/03-activity.tsx",
+        "sha256": "1694bffa6c6bf84ed2b03a763f1c192ad31ce35ba7b8a84218c4ca6076ee7a21"
+      },
+      {
+        "path": "apps/docs/src/content/timeline/demos/04-compact.tsx",
+        "sha256": "986942b163fe4049c6cd44e5cad6e5967e136ea3d2b6b0de6bf29b9014df5b8d"
+      },
+      {
+        "path": "apps/docs/src/content/timeline/meta.ts",
+        "sha256": "c69341cccd936245f02030e9a3daf9e73dbe92687a831d9850d6cb9925b93ccc"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/01-types.tsx",
+        "sha256": "a64157aacc1e16dad0222f2eb1303818b72035dd3ee60e7527023cb576ac75c9"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/02-default.tsx",
+        "sha256": "4c33c56ee9b36dcd9ae7943a5d6bec7c96e03351de8fef86f14fba5f426a44b4"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/03-loading.tsx",
+        "sha256": "bcf86c8fc0f5b31b685b6309cbc89fc655c0ebcdae47f59b4db2b4b850d79a8b"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/04-action.tsx",
+        "sha256": "c998c031a98ac7b4de03ed7557373b457054622fd281ef2365009cdfda79885f"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/05-promise.tsx",
+        "sha256": "a66c9128f15bb288056f64befc712df08b2270898e59b0f0636e4591a54f6f28"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/06-update.tsx",
+        "sha256": "bc47fffb10ad29073dfefd1bcc240915a9fc8de22525b2f078c51111b9fa438e"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/07-stack.tsx",
+        "sha256": "a34215412caaf031f99112e43eae3b9660bfffd77a0b73881740e7571432ef38"
+      },
+      {
+        "path": "apps/docs/src/content/toast/demos/08-anchored.tsx",
+        "sha256": "39d046938cbe19d0423f2d6bbb8e09088c164e36eab49703e32937ff2653bc49"
+      },
+      {
+        "path": "apps/docs/src/content/toast/meta.ts",
+        "sha256": "600a8d3d6a8cca3213dd568f50c8a95084f0a8c0b48cee525076f20f09e64e08"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/01-default.tsx",
+        "sha256": "8a1b0619c4034adfe8e53a2d8ab0b5d27fe97df67b3453434c3586e0791f228c"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/02-multiple.tsx",
+        "sha256": "b8cd8b2cada9fe6623f48780ec46ccf15d120a864dec595b1ae2632c9d3a86b8"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/03-outline.tsx",
+        "sha256": "cdc1ce6f74843e6b922fe804c248957ce4830f562c73c1b3fc396aba8bdbdb78"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/04-sizes.tsx",
+        "sha256": "871c041c032bfdeff3e1ab00a5a8cb96eeebf50f76ae632dc54514daa1e863ff"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/05-vertical.tsx",
+        "sha256": "6b7307d180081c0ba25e2dbd70ed4d7088160fe2419d1350cb7544e4c51c8a34"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/06-disabled.tsx",
+        "sha256": "b1d93f61b83d08f12ee81680ec44f83d86d9b6cc7feff71017114279b785c7e9"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/demos/07-with-tooltip.tsx",
+        "sha256": "f581436af62c7c40e60c4818bb1d758fb0740d119f53c92c495329638623bdb9"
+      },
+      {
+        "path": "apps/docs/src/content/toggle-group/meta.ts",
+        "sha256": "15785a16ab66cf03f4f1839d7e334d611ea16d5439018ed4aee7cac1526c1c40"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/demos/01-default.tsx",
+        "sha256": "562dee30eb4a792da613814d10ae26aca712582283c4d5224ce18087ee564c7f"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/demos/02-outline.tsx",
+        "sha256": "1d0c6cfefcb62267c7ef11ac2401c5ea65fc9c8bcfd50d6c5527e3c463d94cb5"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/demos/03-sizes.tsx",
+        "sha256": "a32da87937ad3abbef57f1bc8a2b8eb2ecef51800c094878d7a24b43f71aae86"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/demos/04-disabled.tsx",
+        "sha256": "933e131eea4b6347496a8569d2e0878c6bcd1a8e23cd4e545a998986b80533a7"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/demos/05-controlled.tsx",
+        "sha256": "c7ccaa7c60f54c15b0e596e9d9dfa737554d06a525d28ea27764d762a956a25b"
+      },
+      {
+        "path": "apps/docs/src/content/toggle/meta.ts",
+        "sha256": "8a9a225376b080df0196d24472955d5f61d381a9d39f94b80e3eeffb4baa1b09"
+      },
+      {
+        "path": "apps/docs/src/content/toolbar/demos/01-formatting.tsx",
+        "sha256": "d4e627cbfefeb16b6e2121ff7f4ee4b5c5c8a3f78a9dbd21bc6eb6a371a6c3b2"
+      },
+      {
+        "path": "apps/docs/src/content/toolbar/demos/02-select-action.tsx",
+        "sha256": "41c5ed8bd704ae3c653d46d49cd4e5a28cd1f0a7afa79c5726edf5b3c9d02a4f"
+      },
+      {
+        "path": "apps/docs/src/content/toolbar/demos/03-vertical.tsx",
+        "sha256": "8cd5053f77c736db22a5ecff7258b261716e6e19766bf60322bdf7a689b660e9"
+      },
+      {
+        "path": "apps/docs/src/content/toolbar/meta.ts",
+        "sha256": "617de44681e43b0478fd094e567a0e6cb77a45bbe210577a8db40cb81fb10396"
+      },
+      {
+        "path": "apps/docs/src/content/tooltip/demos/01-icon-buttons.tsx",
+        "sha256": "f447ba4aed00e6f55304f9a6cfc9b8cd79ddc6b5858c2fca818e6e7fa6ef9ca8"
+      },
+      {
+        "path": "apps/docs/src/content/tooltip/demos/02-sides.tsx",
+        "sha256": "52f7cb6f202f973f6179da3096f2239ba4727892d4a5af9833a58e673bf94849"
+      },
+      {
+        "path": "apps/docs/src/content/tooltip/demos/03-shortcut.tsx",
+        "sha256": "6341c4bca93c97a604256b751c7095cef87335dac65925fb69f4402029f8fe33"
+      },
+      {
+        "path": "apps/docs/src/content/tooltip/demos/04-shared.tsx",
+        "sha256": "a816ad2fb58fc28be715d647e4a0cfafb69944c73e1b5d4ce3c992e90bc6d7dc"
+      },
+      {
+        "path": "apps/docs/src/content/tooltip/meta.ts",
+        "sha256": "69a4720aa86722d20a3ffd91d5a1ac6730bd5bdad036fa4e5b8044b48b3768c3"
+      },
+      {
+        "path": "apps/docs/src/content/tree/demos/01-files.tsx",
+        "sha256": "7fc2dca31158b825cdef5f974692db23b334c0c9afa0a33e8caa19b8cf8a4896"
+      },
+      {
+        "path": "apps/docs/src/content/tree/demos/02-controlled.tsx",
+        "sha256": "9a49c7f1257e4e9e98f843e1b756b580c143c718170dc05a400127790519dd77"
+      },
+      {
+        "path": "apps/docs/src/content/tree/demos/03-suffix-disabled.tsx",
+        "sha256": "1da22f509e4919112c121fb48ee3557fe92fb54cb717a9344ce8ea3f4be47ea7"
+      },
+      {
+        "path": "apps/docs/src/content/tree/meta.ts",
+        "sha256": "5fb924428fc704c08c02874ae4e0461ac270a31cb3eeb7747d7cd335dafcd348"
+      },
+      {
+        "path": "apps/docs/src/content/typography/demos/01-heading.tsx",
+        "sha256": "300b0546ca672809ed7300955096b888e77605aeccf32616d7a8154f72b16b29"
+      },
+      {
+        "path": "apps/docs/src/content/typography/demos/02-prose.tsx",
+        "sha256": "8756470b418cb6e4d6c14ba2c127b459f7adbc5becd14cdc926b329b3fe9104a"
+      },
+      {
+        "path": "apps/docs/src/content/typography/demos/03-text-link.tsx",
+        "sha256": "1417caa2685cd1ba961d8975c3eca8cdd1cb177611989f2a630f07ca21575ffa"
+      },
+      {
+        "path": "apps/docs/src/content/typography/demos/04-prose-sm.tsx",
+        "sha256": "43ca6d9d52a68f0c24b1e75a28fc7c5e59c222508b8130c6cf059946e7ffdcc3"
+      },
+      {
+        "path": "apps/docs/src/content/typography/meta.ts",
+        "sha256": "fca8cd4b84fa1c168cb69214d12f01632857102567dbf3b27bf3820cd0f630a5"
+      },
+      {
+        "path": "apps/docs/src/examples/dashboard.tsx",
+        "sha256": "6b1357c49438a894703429d578cdf218cf60ce24a2a26016eca48fdec3d2c6c5"
+      },
+      {
+        "path": "apps/docs/src/examples/examples.css",
+        "sha256": "ecab76a66b194ace71ab53ba70fd6d26f4751eacf9d058f87b4e2d3359238421"
+      },
+      {
+        "path": "apps/docs/src/examples/index.ts",
+        "sha256": "0a7958486bde86acc0eaefa9f73b1c4ae4a0cbec8851779081a37d5849066407"
+      },
+      {
+        "path": "apps/docs/src/examples/mail.tsx",
+        "sha256": "d7c9788e30c0e2b276a2b9043d6f679428138de27b19e8b7890a4b06c5556b8e"
+      },
+      {
+        "path": "apps/docs/src/examples/metadata.tsx",
+        "sha256": "2800042b96f496d882eb9d802bb1c3350797c14d3449207dc7d2bce8018fba1b"
+      },
+      {
+        "path": "apps/docs/src/examples/shared.tsx",
+        "sha256": "8a91d969226e6672c494a80bb57e12858addb0beb3a9bc852c51c2f9b0fc48d8"
+      },
+      {
+        "path": "apps/docs/src/examples/studio.tsx",
+        "sha256": "107cea5efbc27d960496fa9c653562c6d05210b1df3e40a23fdc03f5f83e77c9"
+      },
+      {
+        "path": "apps/docs/src/index.css",
+        "sha256": "916f90ea60ce55aeb7c4743f62a21ac712d57d4d2c61f9d730639f05726d377e"
+      },
+      {
+        "path": "apps/docs/src/lib/highlight.ts",
+        "sha256": "99b7a02345c437a207a79b0f13c59ffa487c53d06d9cf3f5896c04e57f11996a"
+      },
+      {
+        "path": "apps/docs/src/lib/nav.ts",
+        "sha256": "96d677bbb778b5d9607de96eb4845a6e77fd64ca1f370728ff3eb7d8b510ee18"
+      },
+      {
+        "path": "apps/docs/src/lib/registry.ts",
+        "sha256": "755699e8811f7a83e6bed364776c0549f0b90fb9da1f4d305ac4b0216532ec13"
+      },
+      {
+        "path": "apps/docs/src/lib/search.ts",
+        "sha256": "ce78cde3719755047f001d893120d082f67e2f53f34bf17b895600827ea8a4b6"
+      },
+      {
+        "path": "apps/docs/src/lib/site.ts",
+        "sha256": "424bde8cd35ee0c4e9ce56f3afd290f0f7db7d731f1b74590f7467081954948d"
+      },
+      {
+        "path": "apps/docs/src/lib/types.ts",
+        "sha256": "90b97d3b8cf5cf46fd50f4f89c5991aeeb36005662d77f56fad90a189f6cd3c2"
+      },
+      {
+        "path": "apps/docs/src/lib/use-route-effects.ts",
+        "sha256": "80d8b4161b6463f33052e8c72b4c57682c326ec7b709d006a7f76c20fbe8bfbf"
+      },
+      {
+        "path": "apps/docs/src/main.tsx",
+        "sha256": "7ac80a69400d50c976cdba66e9af3cd8ec9d53cff8a70343dcf2333d6beeef62"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/accessibility.tsx",
+        "sha256": "21abac5d828513d2bafa720e3aeda0ad44404aee2cd135f939dc1dea36b0cba8"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/component.tsx",
+        "sha256": "d013557600631fc1047717957f252846210371018d4b4565d4404bc5e1c382be"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/components-index.tsx",
+        "sha256": "f822f1e6baf1b61a85533a1a39d5dcaa9d3521272d108e725b3292353ade444d"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/i18n.tsx",
+        "sha256": "1afa2ebaed657b1825f1ad4c9b3efe23f7af9e43d7a20bf7e86107039ea35e35"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/installation.tsx",
+        "sha256": "8401b5c190681018529c9e344a7696f9fa1aa9c2ccfc50f91e32fe676a0f1ef2"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/introduction.tsx",
+        "sha256": "1d326475a5d15df88012b3398439249ee06d6179fa6e0a2d4d34298552b0a807"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/motion.tsx",
+        "sha256": "d738d19a7781c8c5c0b5012278deea11a22784cfb92bcc1c257b3c67c566efab"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/theming.tsx",
+        "sha256": "b071a309535d6270692ca9d842da12895181c82c6b2930861703b52ba1c0507f"
+      },
+      {
+        "path": "apps/docs/src/pages/docs/tokens.tsx",
+        "sha256": "09ba97582d17695b31de72ea1bb8510ca261a12b90fc95433a46320d98dc88ea"
+      },
+      {
+        "path": "apps/docs/src/pages/examples.tsx",
+        "sha256": "ed774ead5b43dc61d42b798d801b3cc68b7f69f58e24054e118381feb36b587d"
+      },
+      {
+        "path": "apps/docs/src/pages/home.tsx",
+        "sha256": "544afd8c9ba9ae8e02d3e586246c8a3e6f1cece9512e0c97bdf363ab0634b189"
+      },
+      {
+        "path": "apps/docs/src/pages/not-found.tsx",
+        "sha256": "9656743205305cccbc72772d5a1c31a5d24db69a6c3adad3131cf2c918089266"
+      },
+      {
+        "path": "apps/docs/src/pages/playground.tsx",
+        "sha256": "db1e1c79dbe03eeac01c1130cf013dbd582e23e70378aa594667e2fc551c1ee6"
+      },
+      {
+        "path": "packages/ui/motion.css",
+        "sha256": "072f3b15cfc385b1a96734ebb9fd370e559f5fb004239288417893de5a121ff0"
+      },
+      {
+        "path": "packages/ui/package.json",
+        "sha256": "906de88ab659603d654fc5ccffa1360e06d41583a7df181a3d60bbf6121c2023"
+      },
+      {
+        "path": "packages/ui/src/components/accordion.tsx",
+        "sha256": "4fa7b85f4cfb06690bdf0fa296021102df175dd0a9341041b710955ad0d5f73c"
+      },
+      {
+        "path": "packages/ui/src/components/alert-dialog.tsx",
+        "sha256": "4beb8705c0652a04786d2f5be08f4d6ad8851d0e546ff6c67dd6c41ebb9a64cb"
+      },
+      {
+        "path": "packages/ui/src/components/alert.tsx",
+        "sha256": "d88150e4b06fc9548cf25815a207ab54933476abe9ac993e262b433ce5fdcdf2"
+      },
+      {
+        "path": "packages/ui/src/components/aspect-ratio.tsx",
+        "sha256": "1ca76b9e2c37989152cb8bf2bd33ce5d704d435c2e89526fd241b231bfcf5ff0"
+      },
+      {
+        "path": "packages/ui/src/components/autocomplete.tsx",
+        "sha256": "3210ce5a692d6fa0ed2105810366f2c3b3be3b2e817c689a4cae6094d3639dcb"
+      },
+      {
+        "path": "packages/ui/src/components/avatar.tsx",
+        "sha256": "cf6bc36c53c3b156a0c348dc2948a67c19c9d37020755745f2e5c411814f1584"
+      },
+      {
+        "path": "packages/ui/src/components/badge.tsx",
+        "sha256": "59832a047c9b33764043267e679f7ef69b913b4106016f1240e702908486dbfa"
+      },
+      {
+        "path": "packages/ui/src/components/breadcrumb.tsx",
+        "sha256": "959858dcc5e5bb0cf19799c85d5a191a2ed60100ce5314f4251e88ec3528c61c"
+      },
+      {
+        "path": "packages/ui/src/components/button-group.tsx",
+        "sha256": "2eb315ba00d80c2bda3cdeed899b6194b1d9fc97095cecccaf8cf54d4ae6294c"
+      },
+      {
+        "path": "packages/ui/src/components/button.tsx",
+        "sha256": "243260a65330f658b9fe3813ea991d752ebc64617fbdb52f6d5d9383d1dd2c81"
+      },
+      {
+        "path": "packages/ui/src/components/calendar.tsx",
+        "sha256": "c7b46fff0cf17f7844e8ed25fe2942cf47529aeba4bd91d56c01597ae083cdb6"
+      },
+      {
+        "path": "packages/ui/src/components/card.tsx",
+        "sha256": "579339675913df00e6221d62f636e380c78eb35359c00024b72752a1e8978681"
+      },
+      {
+        "path": "packages/ui/src/components/carousel.tsx",
+        "sha256": "d041fc34280e2509dd610ee3335e5cb9f289f3e62d1eb2a59b68bea14cab7a09"
+      },
+      {
+        "path": "packages/ui/src/components/chart.tsx",
+        "sha256": "6b3f745e1cc63a3c2512d12f615e60294ca7ed96420ff3a20f8f1780a70d5720"
+      },
+      {
+        "path": "packages/ui/src/components/checkbox-group.tsx",
+        "sha256": "d5b770a5f9cdfa0f99d2825addcaed440a41c220b4bd9261416fc5b01133a63d"
+      },
+      {
+        "path": "packages/ui/src/components/checkbox.tsx",
+        "sha256": "b2b94ad04848341d41ed5f62c76fc643a5d99776d0512dcccf2266a26ccd07fd"
+      },
+      {
+        "path": "packages/ui/src/components/code-block.tsx",
+        "sha256": "992e1df40e96bbaffe48c83e44eaf7aaa3a8544c12e8c81402f3238e8cd85dc8"
+      },
+      {
+        "path": "packages/ui/src/components/collapsible.tsx",
+        "sha256": "ab73227ca67e5291f6568a5401bdd1e4833927942cae4e4b34827fb60fb164e5"
+      },
+      {
+        "path": "packages/ui/src/components/combobox.tsx",
+        "sha256": "fd6edf4cbbfce88ff6d9f09b9c5731e475e08f39dd1cac19e41d46f3d8f433f7"
+      },
+      {
+        "path": "packages/ui/src/components/command.tsx",
+        "sha256": "e6d19d9db39f840d2ca02861c75e577393c09ebed7b9ec70e37a8bed003d5e16"
+      },
+      {
+        "path": "packages/ui/src/components/context-menu.tsx",
+        "sha256": "c8a18aaa9b275573e594fe0c6d412648fbd1c0f367747b0122e751d6bfd93e82"
+      },
+      {
+        "path": "packages/ui/src/components/copy-button.tsx",
+        "sha256": "5cc8d591b31dc91729cc1ce34ab443b1974840effe1dcba2c5d88354a722a6aa"
+      },
+      {
+        "path": "packages/ui/src/components/data-table.tsx",
+        "sha256": "6585b147179643c25066aa34be5f0eb3e6b72b0f5ece9bb6d47751d928e2a242"
+      },
+      {
+        "path": "packages/ui/src/components/date-picker.tsx",
+        "sha256": "e70c6a6e8b20f4c13815e26111e4d01a14b252dd6a5300b8c38c026a08070438"
+      },
+      {
+        "path": "packages/ui/src/components/date-range-picker.tsx",
+        "sha256": "0a5278bb6e5fc917a6d844fff33568be1f5c1c3ecd5e3392d515c6d062072d4b"
+      },
+      {
+        "path": "packages/ui/src/components/date-time-picker.tsx",
+        "sha256": "f5a2ddb1ec61fddc57c1abd7298ea927bebf2f38453535e43637e8d6950f7777"
+      },
+      {
+        "path": "packages/ui/src/components/description-list.tsx",
+        "sha256": "9b76c588ed0e66e798733159387dfd314927cc5c4c5e58356e9dbc4c8e332fe6"
+      },
+      {
+        "path": "packages/ui/src/components/dialog.tsx",
+        "sha256": "e1928e7cb1a0a2c7be15a8d1381d689f306ec72d1e9981518a7f4937593d7100"
+      },
+      {
+        "path": "packages/ui/src/components/disclosure.tsx",
+        "sha256": "0a951e95688d8eff91b840bbcac77d7afa4e58b3c05928e8ede57ceee3a9beea"
+      },
+      {
+        "path": "packages/ui/src/components/drawer.tsx",
+        "sha256": "d9b9fbf41187b0eb7d9552f2dee29431d25f74dfeec97cf4537a33637e5d3d27"
+      },
+      {
+        "path": "packages/ui/src/components/empty.tsx",
+        "sha256": "7cb447658bc5cc0003408fc0d4c0240650d7b08eb47b159e287a49174fac5f9d"
+      },
+      {
+        "path": "packages/ui/src/components/field.tsx",
+        "sha256": "9c0d0209c0b4026549912713f2f5ccff7512c19792b9caafe96e411be4d1fffa"
+      },
+      {
+        "path": "packages/ui/src/components/fieldset.tsx",
+        "sha256": "51ce906882673b39eae3c771ca065c39445a2eed545d0a66e9c6c490b8e768f4"
+      },
+      {
+        "path": "packages/ui/src/components/file-upload.tsx",
+        "sha256": "1c938d1e012a961a3a7848892d55a7ad2409cd53d2c94dd29a4e6db9f4590d87"
+      },
+      {
+        "path": "packages/ui/src/components/form.tsx",
+        "sha256": "6afac1b936e124aefeaa6a3d53f79f89e8b069d2f430417895d6b70fcaec545d"
+      },
+      {
+        "path": "packages/ui/src/components/frame.tsx",
+        "sha256": "89ea13803932fe5a3f019109b052928bde9d0756922a48c034eaf4f4fb4168af"
+      },
+      {
+        "path": "packages/ui/src/components/group.tsx",
+        "sha256": "447ccc14c2b3816adf3d862b17992c321dccd201475615c59693eeac9230eba6"
+      },
+      {
+        "path": "packages/ui/src/components/hover-card.tsx",
+        "sha256": "05bdb7a7cd1b3ea92a8bda2da7dccdcc36e7f20b09bf664b90184049e97d9f10"
+      },
+      {
+        "path": "packages/ui/src/components/input-group.tsx",
+        "sha256": "fb1d55ea349fac4eca81eb049ac4c29eb2a5bb1d8dfc6dd3e59633500714a52b"
+      },
+      {
+        "path": "packages/ui/src/components/input.tsx",
+        "sha256": "d940fde474d3f5651dd5a4803b6fc3633c8258e3b6dc633a7d9cc372960bfb1b"
+      },
+      {
+        "path": "packages/ui/src/components/item.tsx",
+        "sha256": "bd2afc1a68580136123f63246cbee21881bd59753586eb78f37649dc43a235e2"
+      },
+      {
+        "path": "packages/ui/src/components/kbd.tsx",
+        "sha256": "9826c99a05fa550b9d6ad72e569cb37609311d4abb5890eecc21511d149c5f2a"
+      },
+      {
+        "path": "packages/ui/src/components/label.tsx",
+        "sha256": "08b69a100bcad0a1445c449b3ff8f243067ff029cc9538192150a67d653d4f27"
+      },
+      {
+        "path": "packages/ui/src/components/layout.tsx",
+        "sha256": "aa435569288e039061f954c2f2b760151702b69dec971ed50c2437e31d2c63ac"
+      },
+      {
+        "path": "packages/ui/src/components/menu.tsx",
+        "sha256": "7adaf625fc91157225ba0a48245fb1ae575e6f3d2fdcf9cb644c9d6ca4baf7c0"
+      },
+      {
+        "path": "packages/ui/src/components/menubar.tsx",
+        "sha256": "c15bf58375ef8f859f798f135874c97592a84e4679e4180eeb0f70fc15ae1e40"
+      },
+      {
+        "path": "packages/ui/src/components/meter.tsx",
+        "sha256": "51d89eb4f821c0b1944bbeb0647fad09023505b2b0a29f7069a523a1c2777cf5"
+      },
+      {
+        "path": "packages/ui/src/components/motion-provider.tsx",
+        "sha256": "8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2"
+      },
+      {
+        "path": "packages/ui/src/components/native-select.tsx",
+        "sha256": "0d3903e67d03c3f395470fdfbfda00ce4c026205bd5508a4e9197d1e32ef7c2c"
+      },
+      {
+        "path": "packages/ui/src/components/navigation-menu.tsx",
+        "sha256": "ec10083ff92b4206cd65c8d7b57c2919109529845350a205badda3626fdb15a7"
+      },
+      {
+        "path": "packages/ui/src/components/number-field.tsx",
+        "sha256": "73533afe4bc1e5ed12559d9a2c3d3f530fb6c6997e17a498600f2d61896f65e2"
+      },
+      {
+        "path": "packages/ui/src/components/otp-field.tsx",
+        "sha256": "722536c519ad725c6610142d1cd3a8e81302a59ac2ff01d976c6d8e005ffbdb6"
+      },
+      {
+        "path": "packages/ui/src/components/page-header.tsx",
+        "sha256": "ee6d9f9b7da4607581d44c128dcd75d6703423943622d3cb61daae767e5847f6"
+      },
+      {
+        "path": "packages/ui/src/components/pagination.tsx",
+        "sha256": "3678ade1d20e8a324725ab85d55ec111e9b89bfb3e9fcb64ac42a67dd3918e2c"
+      },
+      {
+        "path": "packages/ui/src/components/password-input.tsx",
+        "sha256": "e9536d3af196b68a3528d92d2ddf776de311b9f5ff407190c998ff8872dc74a9"
+      },
+      {
+        "path": "packages/ui/src/components/popover.tsx",
+        "sha256": "556da949009fc9cdbdb5eed11b0087d1e0c85ba7b7480e9678c158cd6e39764a"
+      },
+      {
+        "path": "packages/ui/src/components/preview-card.tsx",
+        "sha256": "2c86b47598e31b79b554c7ab1a1ef1866e83d2d69a9201285d0bce4ab9ba53cc"
+      },
+      {
+        "path": "packages/ui/src/components/progress-circle.tsx",
+        "sha256": "048f7e59b5cc7aa39444a0b571f6c7aaf3d3dc01561eff7dcd7f80039acec91c"
+      },
+      {
+        "path": "packages/ui/src/components/progress.tsx",
+        "sha256": "34271004b639f1997f3bf430c672105ca07b1b02751952ee6c300fba23c63344"
+      },
+      {
+        "path": "packages/ui/src/components/radio-group.tsx",
+        "sha256": "dcf9dee6cc9b7d8a89c62855312d7e47e4f2c7fdfc0a218ea06236f1c8fb0bfe"
+      },
+      {
+        "path": "packages/ui/src/components/resizable.tsx",
+        "sha256": "f16a2d17ae9c0dbed3d40744cb14dc270e0fd5fd0fa9014c1918a8c629f22449"
+      },
+      {
+        "path": "packages/ui/src/components/scroll-area.tsx",
+        "sha256": "371697086b23d3130c8cfe38597ae8ef0cbe2d1419a8abc4e3d7fdf31a9da50c"
+      },
+      {
+        "path": "packages/ui/src/components/search-input.tsx",
+        "sha256": "69e6260e0273603e7a1898d71251e8b4ef5f96a522676bc7c116f7c0e7d3bf65"
+      },
+      {
+        "path": "packages/ui/src/components/segmented-control.tsx",
+        "sha256": "6069b8bbadd6ffb9b2aa0d120b65afa2e6db8ed7330735badef8edcd7fa3f2fc"
+      },
+      {
+        "path": "packages/ui/src/components/select.tsx",
+        "sha256": "fc8ff29872cee0fcfbf8c88ddc83282b6c59c9d5d6bfc4c9000af5e2f9d55586"
+      },
+      {
+        "path": "packages/ui/src/components/separator.tsx",
+        "sha256": "09c9465dab150b015ce7263847f9648bd92f0a1677a88dd7b3891c9b46ef6972"
+      },
+      {
+        "path": "packages/ui/src/components/sheet.tsx",
+        "sha256": "6951fa861ba50e3de1a5cbc54f973732a2c028205cbe75a09ccd786abff8f03e"
+      },
+      {
+        "path": "packages/ui/src/components/sidebar.tsx",
+        "sha256": "d118fb6120637ea6211eaef4808af0bd3928d3d2877e767d4d94c9a13ff42e98"
+      },
+      {
+        "path": "packages/ui/src/components/skeleton.tsx",
+        "sha256": "00761f6db239c68e2f0c2fea3d84cef399f3840688fa286d9697136547781159"
+      },
+      {
+        "path": "packages/ui/src/components/slider.tsx",
+        "sha256": "9f28d7ad2b5b694742682f1ee34c026af946a8d52290f38036fd49e7455b3c1b"
+      },
+      {
+        "path": "packages/ui/src/components/spinner.tsx",
+        "sha256": "6e263420ee8a0ac0b2eac8ae333574205d5a849a67c49899cbf919cd04e8031e"
+      },
+      {
+        "path": "packages/ui/src/components/stat.tsx",
+        "sha256": "e386236a6fef5d2d1aca6fd3e7477b267586adb1426a574fdca43b8c4171fd98"
+      },
+      {
+        "path": "packages/ui/src/components/status-dot.tsx",
+        "sha256": "6f264722e71740bc352064028a6afc12a0c18f65f554700422aa9f9e1b704851"
+      },
+      {
+        "path": "packages/ui/src/components/steps.tsx",
+        "sha256": "53d3d7537442250860359da0daa6001dcb92afb4ecd21f515ec18033a29051ac"
+      },
+      {
+        "path": "packages/ui/src/components/switch.tsx",
+        "sha256": "ca9e6fa2310797783f6147cb7cd32d89355af1709ded5ed640ac8846a9b8ee4d"
+      },
+      {
+        "path": "packages/ui/src/components/table.tsx",
+        "sha256": "6ebf0573a3d5e1bcf9ce5b02f787bc925e4602d138d92bc5a5c8a6b4aaf94a2d"
+      },
+      {
+        "path": "packages/ui/src/components/tabs.tsx",
+        "sha256": "fd0177bf4b6205c89e4e7853a0d739b0d46309128f3042b33fa46de046b991e3"
+      },
+      {
+        "path": "packages/ui/src/components/tag-input.tsx",
+        "sha256": "4f6a436f09656848993036f67889fb0e9ac909749b79252f813bc611befc7679"
+      },
+      {
+        "path": "packages/ui/src/components/textarea.tsx",
+        "sha256": "6aa89fc54c476efe5e5f57346da57bca8c912b54fa0391c751726125d65188dc"
+      },
+      {
+        "path": "packages/ui/src/components/theme-provider.tsx",
+        "sha256": "7b0b37626ab5203a847354abfd607dbd0369fe3472a3e4cbb9a9062f38a6c822"
+      },
+      {
+        "path": "packages/ui/src/components/timeline.tsx",
+        "sha256": "757701a01a92faccf685c0cd0ff01cde13f2704296b2c319267cfffaaf73cfc5"
+      },
+      {
+        "path": "packages/ui/src/components/toast.tsx",
+        "sha256": "25df389bc418ad6fb8679c9897acee6409cec9c397ff4cb3ed34547147a2421e"
+      },
+      {
+        "path": "packages/ui/src/components/toggle-group.tsx",
+        "sha256": "17a71c1b0d23ea96170d67984315535aae2b868deeabb4df05420bec7442533b"
+      },
+      {
+        "path": "packages/ui/src/components/toggle.tsx",
+        "sha256": "bcc799881a0a2fff819159bb63770cf436cea64079bb4e3dee574ff1ff96e112"
+      },
+      {
+        "path": "packages/ui/src/components/toolbar.tsx",
+        "sha256": "387b714c6a429728d971eb67f98f7cf54d1c8efb4ed75a62bbfc3aa52accc51e"
+      },
+      {
+        "path": "packages/ui/src/components/tooltip.tsx",
+        "sha256": "1c4b0e15ed8445c21df672ce982c1f8c36dc95eeaf75a5940b379e7459d459a3"
+      },
+      {
+        "path": "packages/ui/src/components/tree.tsx",
+        "sha256": "146b128b0fc3fcb65809a6232522716bdb701912b2a378dae3341d09e3628d7e"
+      },
+      {
+        "path": "packages/ui/src/components/typography.tsx",
+        "sha256": "a95e623e436d9af782e11b8de936a4d2bd1383bce61a4133c66ac6cb4f6230ea"
+      },
+      {
+        "path": "packages/ui/src/hooks/use-copy-to-clipboard.ts",
+        "sha256": "abca2a575ee933b3239adafc58c92578ea8c9b88207e4b1a6b767e81ea9712c5"
+      },
+      {
+        "path": "packages/ui/src/hooks/use-media-query.ts",
+        "sha256": "f72e650ea04730d1559685d72d34dd902a820676df20cb9532ac8fae03d4a363"
+      },
+      {
+        "path": "packages/ui/src/index.ts",
+        "sha256": "5488b1ce578c7b14bca59b8d32cdfdd82458a0ecf2f61fe091eb4f3dab10c750"
+      },
+      {
+        "path": "packages/ui/src/locale.tsx",
+        "sha256": "f43afb3806c22214d580a4badec1ffd416c119f5e78b52e3cd66420497c9a7c1"
+      },
+      {
+        "path": "packages/ui/src/locales/en-US.ts",
+        "sha256": "b2faa05cac098fc2143808d9c3816af0db1a179854f95d736248772cd77910f5"
+      },
+      {
+        "path": "packages/ui/src/utils.ts",
+        "sha256": "7897efac0b28c408e3f75bb809b97eadfadb6774ee1ea5547355bf8d8e8b9ea8"
+      },
+      {
+        "path": "packages/ui/styles.css",
+        "sha256": "263414fe778aacfdd92a1a79a8e3314f324f072e1b44de77428eb94737c64ca1"
+      },
+      {
+        "path": "packages/ui/theme.css",
+        "sha256": "c140dd83ba28f0fa94ecd260c4b7b86198137cc56ba814a4eed63f4e69c9c967"
+      },
+      {
+        "path": "packages/ui/tokens/components.css",
+        "sha256": "ff7a27c917b3d71b789edf1d1d3ec9f293ac5c7e9acffb55a472e48b82fa4dd4"
+      },
+      {
+        "path": "packages/ui/tokens/primitives.css",
+        "sha256": "af3e9384486903d7c9550503137ead4902480ebb695a09a484e84c2e71083ae6"
+      },
+      {
+        "path": "packages/ui/tokens/semantic.css",
+        "sha256": "77e29828b4a7d884a22a0b9889ff630deb41d1c998b5649fa5f13d218eebe393"
+      },
+      {
+        "path": "packages/ui/utilities.css",
+        "sha256": "7a53224b7d754cd184267e3034430fa86a65e3025df84e975f7d390c721c4a22"
+      },
+      {
+        "path": "scripts/lib/token-ledger-probes.mjs",
+        "sha256": "d74c827352fc6c4a15e2461af2ab93709becf9aeb0949269645c482afd69ad36"
+      },
+      {
+        "path": "scripts/lib/token-ledger-static.mjs",
+        "sha256": "c249ce673d17b77f00b945beae842da0a475dbe0c832d7a4e89612d569e2b752"
+      },
+      {
+        "path": "scripts/lib/ui-facts.mjs",
+        "sha256": "b8046cd48ce5dc741345074dfb5aaaf93fec307ca4ba5a0c2457a534396c90a0"
+      },
+      {
+        "path": "scripts/token-ledger-runtime.mjs",
+        "sha256": "05fa7a296253e3dfc723019257622a6e3a812f919ba842d39c2b5b2ad653c5ca"
+      },
+      {
+        "path": "scripts/token-ledger.mjs",
+        "sha256": "46e41f0cba14aa2803d47b5b6bba0713b3051c4cf066fa4e0b790265631904c7"
+      }
+    ]
+  },
+  "runtime": {
+    "fingerprint": "601bd953eb886f1590a8cc7bd332d4bd8e908620676149cf67ffab478bcb73f4",
+    "measuredAt": "2026-10-01T14:05:25.684Z",
+    "browser": {
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "owner": "caller-provided page"
+    },
+    "observations": [
+      {
+        "id": "button-primary:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:41.093Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0.269 0 0)"
+          },
+          "token": "oklch(0.269 0 0)",
+          "rootToken": "oklch(0.269 0 0)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "input-control-inner:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-01T14:04:42.569Z",
+        "observation": "OBSERVED_NO_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "30px"
+          },
+          "token": "2rem",
+          "rootToken": "2rem",
+          "rect": {
+            "width": 318,
+            "height": 30
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "30px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 318,
+            "height": 30
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": []
+      },
+      {
+        "id": "dialog-surface:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:44.075Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
+          "rect": {
+            "width": 384,
+            "height": 307
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 384,
+            "height": 307
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"] > div",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:45.640Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
+          "rect": {
+            "width": 256,
+            "height": 150
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 256,
+            "height": 150
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "panel-padding:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card/CardPanel",
+        "part": "card-header",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"card-header\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-01T14:04:47.127Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "24px",
+            "padding-right": "24px"
+          },
+          "token": "1.5rem",
+          "rootToken": "1.5rem",
+          "rect": {
+            "width": 382,
+            "height": 90.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 382,
+            "height": 127.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:light:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-cell",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"table-cell\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-01T14:04:48.619Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "3rem",
+          "rootToken": "3rem",
+          "rect": {
+            "width": 157.84375,
+            "height": 48
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 157.84375,
+            "height": 67
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "button-primary:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:50.117Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0.97 0 0)"
+          },
+          "token": "oklch(0.97 0 0)",
+          "rootToken": "oklch(0.97 0 0)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "input-control-inner:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-01T14:04:51.581Z",
+        "observation": "OBSERVED_NO_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "30px"
+          },
+          "token": "2rem",
+          "rootToken": "2rem",
+          "rect": {
+            "width": 318,
+            "height": 30
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "30px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 318,
+            "height": 30
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": []
+      },
+      {
+        "id": "dialog-surface:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:53.034Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rect": {
+            "width": 384,
+            "height": 307
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 384,
+            "height": 307
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"] > div",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:54.516Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rect": {
+            "width": 256,
+            "height": 150
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 256,
+            "height": 150
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "panel-padding:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card/CardPanel",
+        "part": "card-header",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"card-header\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-01T14:04:56.029Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "24px",
+            "padding-right": "24px"
+          },
+          "token": "1.5rem",
+          "rootToken": "1.5rem",
+          "rect": {
+            "width": 382,
+            "height": 90.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 382,
+            "height": 127.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:dark:desktop:1280x900:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-cell",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"table-cell\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-01T14:04:57.515Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "3rem",
+          "rootToken": "3rem",
+          "rect": {
+            "width": 157.84375,
+            "height": 48
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 157.84375,
+            "height": 67
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "button-primary:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:04:58.987Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0.269 0 0)"
+          },
+          "token": "oklch(0.269 0 0)",
+          "rootToken": "oklch(0.269 0 0)",
+          "rect": {
+            "width": 60,
+            "height": 36
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 60,
+            "height": 36
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "input-control-inner:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-01T14:05:00.509Z",
+        "observation": "OBSERVED_NO_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "34px"
+          },
+          "token": "2rem",
+          "rootToken": "2rem",
+          "rect": {
+            "width": 298,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "34px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 298,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": []
+      },
+      {
+        "id": "dialog-surface:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:05:01.983Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
+          "rect": {
+            "width": 390,
+            "height": 370
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 390,
+            "height": 370
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"] > div",
+        "state": "open",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:05:03.499Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
+          "rect": {
+            "width": 256,
+            "height": 170
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 256,
+            "height": 170
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "panel-padding:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card/CardPanel",
+        "part": "card-header",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"card-header\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-01T14:05:05.023Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "16px",
+            "padding-right": "16px"
+          },
+          "token": "1rem",
+          "rootToken": "1rem",
+          "rect": {
+            "width": 298,
+            "height": 102.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 298,
+            "height": 127.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:light:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-cell",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"table-cell\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-01T14:05:06.536Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "3rem",
+          "rootToken": "3rem",
+          "rect": {
+            "width": 88.375,
+            "height": 48
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 88.375,
+            "height": 67
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "button-primary:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:05:08.010Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0.97 0 0)"
+          },
+          "token": "oklch(0.97 0 0)",
+          "rootToken": "oklch(0.97 0 0)",
+          "rect": {
+            "width": 60,
+            "height": 36
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 60,
+            "height": 36
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-slot": "button"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "input-control-inner:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-01T14:05:09.569Z",
+        "observation": "OBSERVED_NO_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "34px"
+          },
+          "token": "2rem",
+          "rootToken": "2rem",
+          "rect": {
+            "width": 298,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "34px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 298,
+            "height": 34
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": []
+      },
+      {
+        "id": "dialog-surface:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:05:11.051Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rect": {
+            "width": 390,
+            "height": 370
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 390,
+            "height": 370
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_l_",
+            "aria-describedby": "base-ui-_r_m_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"] > div",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-01T14:05:12.675Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rect": {
+            "width": 256,
+            "height": 170
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 256,
+            "height": 170
+          },
+          "tag": "DIV",
+          "slot": null,
+          "attributes": {},
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "panel-padding:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card/CardPanel",
+        "part": "card-header",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"card-header\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-01T14:05:14.233Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "16px",
+            "padding-right": "16px"
+          },
+          "token": "1rem",
+          "rootToken": "1rem",
+          "rect": {
+            "width": 298,
+            "height": 102.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 298,
+            "height": 127.296875
+          },
+          "tag": "DIV",
+          "slot": "card-header",
+          "attributes": {
+            "data-slot": "card-header"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:dark:mobile:390x844:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-cell",
+        "selector": "[data-demo=\"basic\"] [data-slot=\"table-cell\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-01T14:05:15.832Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "3rem",
+          "rootToken": "3rem",
+          "rect": {
+            "width": 88.375,
+            "height": 48
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 88.375,
+            "height": 67
+          },
+          "tag": "TD",
+          "slot": "table-cell",
+          "attributes": {
+            "data-slot": "table-cell"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "input-touch-inner:light:desktop:1280x900:coarse",
+        "pointer": "coarse",
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "63px",
+        "measuredAt": "2026-10-01T14:05:19.302Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "min-height": "42px",
+            "height": "42px"
+          },
+          "token": "2.75rem",
+          "rootToken": "2.75rem",
+          "rect": {
+            "width": 318,
+            "height": 42
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "after": {
+          "properties": {
+            "min-height": "61px",
+            "height": "61px"
+          },
+          "token": "63px",
+          "rootToken": "63px",
+          "rect": {
+            "width": 318,
+            "height": 61
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      },
+      {
+        "id": "input-touch-inner:dark:desktop:1280x900:coarse",
+        "pointer": "coarse",
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1280,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "63px",
+        "measuredAt": "2026-10-01T14:05:20.972Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "min-height": "42px",
+            "height": "42px"
+          },
+          "token": "2.75rem",
+          "rootToken": "2.75rem",
+          "rect": {
+            "width": 318,
+            "height": 42
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "after": {
+          "properties": {
+            "min-height": "61px",
+            "height": "61px"
+          },
+          "token": "63px",
+          "rootToken": "63px",
+          "rect": {
+            "width": 318,
+            "height": 61
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      },
+      {
+        "id": "input-touch-inner:light:mobile:390x844:coarse",
+        "pointer": "coarse",
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/input",
+        "override": "63px",
+        "measuredAt": "2026-10-01T14:05:22.552Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "min-height": "42px",
+            "height": "42px"
+          },
+          "token": "2.75rem",
+          "rootToken": "2.75rem",
+          "rect": {
+            "width": 298,
+            "height": 42
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "after": {
+          "properties": {
+            "min-height": "61px",
+            "height": "61px"
+          },
+          "token": "63px",
+          "rootToken": "63px",
+          "rect": {
+            "width": 298,
+            "height": 61
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      },
+      {
+        "id": "input-touch-inner:dark:mobile:390x844:coarse",
+        "pointer": "coarse",
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "mobile",
+        "size": {
+          "width": 390,
+          "height": 844
+        },
+        "route": "/playground/input",
+        "override": "63px",
+        "measuredAt": "2026-10-01T14:05:24.192Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "min-height": "42px",
+            "height": "42px"
+          },
+          "token": "2.75rem",
+          "rootToken": "2.75rem",
+          "rect": {
+            "width": 298,
+            "height": 42
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "after": {
+          "properties": {
+            "min-height": "61px",
+            "height": "61px"
+          },
+          "token": "63px",
+          "rootToken": "63px",
+          "rect": {
+            "width": 298,
+            "height": 61
+          },
+          "tag": "INPUT",
+          "slot": "input",
+          "attributes": {
+            "data-slot": "input",
+            "aria-label": "设备名称"
+          },
+          "pointer": "coarse"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      }
+    ],
+    "status": "OBSERVED",
+    "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
+  },
+  "computation": {
+    "staleRuntime": false,
+    "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
+    "cases": [
+      {
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "part": "button",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/button.tsx",
+              "line": 37
+            },
+            "className": "bg-primary",
+            "chain": [
+              {
+                "variable": "--color-primary",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 85
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-primary"
+            ]
+          }
+        ],
+        "evidenceId": "button-primary:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "part": "button",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/button.tsx",
+              "line": 37
+            },
+            "className": "bg-primary",
+            "chain": [
+              {
+                "variable": "--color-primary",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 85
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-primary"
+            ]
+          }
+        ],
+        "evidenceId": "button-primary:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "part": "button",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/button.tsx",
+              "line": 37
+            },
+            "className": "bg-primary",
+            "chain": [
+              {
+                "variable": "--color-primary",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 85
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-primary"
+            ]
+          }
+        ],
+        "evidenceId": "button-primary:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "part": "button",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/button.tsx",
+              "line": 37
+            },
+            "className": "bg-primary",
+            "chain": [
+              {
+                "variable": "--color-primary",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 85
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-primary"
+            ]
+          }
+        ],
+        "evidenceId": "button-primary:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "button-radius",
+        "token": "--qy-radius",
+        "part": "button",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "button-control",
+        "token": "--qy-control-md",
+        "part": "button",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "input-surface",
+        "token": "--qy-surface",
+        "part": "input-control",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "part": "input",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "coarse",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 27
+            },
+            "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]",
+            "chain": [
+              "--qy-touch-target"
+            ]
+          }
+        ],
+        "evidenceId": "input-touch-inner:light:desktop:1280x900:coarse"
+      },
+      {
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "part": "input",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "coarse",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 27
+            },
+            "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]",
+            "chain": [
+              "--qy-touch-target"
+            ]
+          }
+        ],
+        "evidenceId": "input-touch-inner:dark:desktop:1280x900:coarse"
+      },
+      {
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "part": "input",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "coarse",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 27
+            },
+            "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]",
+            "chain": [
+              "--qy-touch-target"
+            ]
+          }
+        ],
+        "evidenceId": "input-touch-inner:light:mobile:390x844:coarse"
+      },
+      {
+        "probeId": "input-touch-inner",
+        "token": "--qy-touch-target",
+        "part": "input",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "coarse",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 27
+            },
+            "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]",
+            "chain": [
+              "--qy-touch-target"
+            ]
+          }
+        ],
+        "evidenceId": "input-touch-inner:dark:mobile:390x844:coarse"
+      },
+      {
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "part": "input",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_NO_CHANGE",
+        "reason": "Valid injection and no measured effect; no static path in this case",
+        "staticRecordSources": [],
+        "evidenceId": "input-control-inner:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "part": "input",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_NO_CHANGE",
+        "reason": "Valid injection and no measured effect; no static path in this case",
+        "staticRecordSources": [],
+        "evidenceId": "input-control-inner:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "part": "input",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_NO_CHANGE",
+        "reason": "Valid injection and no measured effect; no static path in this case",
+        "staticRecordSources": [],
+        "evidenceId": "input-control-inner:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "input-control-inner",
+        "token": "--qy-control-md",
+        "part": "input",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_NO_CHANGE",
+        "reason": "Valid injection and no measured effect; no static path in this case",
+        "staticRecordSources": [],
+        "evidenceId": "input-control-inner:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "input-invalid-border",
+        "token": "--qy-danger",
+        "part": "input-control",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "part": "dialog-popup",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 93
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "part": "dialog-popup",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 93
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "part": "dialog-popup",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 93
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "part": "dialog-popup",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 93
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "dialog-radius",
+        "token": "--qy-radius-2xl",
+        "part": "dialog-popup",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "dialog-overlay-unconsumed",
+        "token": "--qy-overlay",
+        "part": "dialog-backdrop",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "part": "select-popup",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 158
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "part": "select-popup",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 158
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "part": "select-popup",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 158
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "part": "select-popup",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 158
+            },
+            "className": "bg-popover",
+            "chain": [
+              {
+                "variable": "--color-popover",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 83
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "select-highlight",
+        "token": "--qy-accent",
+        "part": "select-item",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "select-control",
+        "token": "--qy-control-md",
+        "part": "select-trigger",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "part": "card-header",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 156
+            },
+            "className": "p-(--card-spacing)",
+            "chain": [
+              {
+                "variable": "--card-spacing",
+                "source": {
+                  "path": "packages/ui/src/components/card.tsx",
+                  "line": 23
+                },
+                "condition": ""
+              },
+              "--qy-panel-padding"
+            ]
+          }
+        ],
+        "evidenceId": "panel-padding:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "part": "card-header",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 156
+            },
+            "className": "p-(--card-spacing)",
+            "chain": [
+              {
+                "variable": "--card-spacing",
+                "source": {
+                  "path": "packages/ui/src/components/card.tsx",
+                  "line": 23
+                },
+                "condition": ""
+              },
+              "--qy-panel-padding"
+            ]
+          }
+        ],
+        "evidenceId": "panel-padding:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "part": "card-header",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 156
+            },
+            "className": "p-(--card-spacing)",
+            "chain": [
+              {
+                "variable": "--card-spacing",
+                "source": {
+                  "path": "packages/ui/src/components/card.tsx",
+                  "line": 23
+                },
+                "condition": ""
+              },
+              "--qy-panel-padding"
+            ]
+          }
+        ],
+        "evidenceId": "panel-padding:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "part": "card-header",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 156
+            },
+            "className": "p-(--card-spacing)",
+            "chain": [
+              {
+                "variable": "--card-spacing",
+                "source": {
+                  "path": "packages/ui/src/components/card.tsx",
+                  "line": 23
+                },
+                "condition": ""
+              },
+              "--qy-panel-padding"
+            ]
+          }
+        ],
+        "evidenceId": "panel-padding:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "panel-spacing-forward",
+        "token": "--qy-space-6",
+        "part": "card-panel",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      },
+      {
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "part": "table-cell",
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 148
+            },
+            "className": "h-(--table-row)",
+            "chain": [
+              {
+                "variable": "--table-row",
+                "source": {
+                  "path": "packages/ui/src/components/table.tsx",
+                  "line": 47
+                },
+                "condition": ""
+              },
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:light:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "part": "table-cell",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 148
+            },
+            "className": "h-(--table-row)",
+            "chain": [
+              {
+                "variable": "--table-row",
+                "source": {
+                  "path": "packages/ui/src/components/table.tsx",
+                  "line": 47
+                },
+                "condition": ""
+              },
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:dark:desktop:1280x900:fine"
+      },
+      {
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "part": "table-cell",
+        "theme": "light",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 148
+            },
+            "className": "h-(--table-row)",
+            "chain": [
+              {
+                "variable": "--table-row",
+                "source": {
+                  "path": "packages/ui/src/components/table.tsx",
+                  "line": 47
+                },
+                "condition": ""
+              },
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:light:mobile:390x844:fine"
+      },
+      {
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "part": "table-cell",
+        "theme": "dark",
+        "viewport": "mobile",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 148
+            },
+            "className": "h-(--table-row)",
+            "chain": [
+              {
+                "variable": "--table-row",
+                "source": {
+                  "path": "packages/ui/src/components/table.tsx",
+                  "line": 47
+                },
+                "condition": ""
+              },
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:dark:mobile:390x844:fine"
+      },
+      {
+        "probeId": "table-compact-height",
+        "token": "--qy-row-compact",
+        "part": "table-cell",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "No runtime observation for this selected probe"
+      }
+    ],
+    "counts": {
+      "PASS": 28,
+      "FAIL": 0,
+      "UNVERIFIED": 0,
+      "NOT_RUN": 10
+    }
+  }
+}

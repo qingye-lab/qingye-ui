@@ -49,7 +49,7 @@ export function ItemSeparator({
 }
 
 export const itemVariants = cva(
-  "group/item relative flex min-w-0 flex-wrap items-center border border-transparent text-sm outline-none transition-[background-color,border-color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background [a&,button&]:cursor-pointer [button&]:w-full [button&]:text-start",
+  "group/item relative flex min-w-0 flex-wrap items-center border border-transparent text-sm outline-none transition-[background-color,border-color,box-shadow] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background [a&,button&]:cursor-pointer [button&]:w-full [button&]:text-start",
   {
     defaultVariants: {
       size: "default",
@@ -57,8 +57,8 @@ export const itemVariants = cva(
     },
     variants: {
       size: {
-        default: "gap-x-3.5 gap-y-3 rounded-xl p-4",
-        sm: "gap-x-2.5 gap-y-2 rounded-lg px-3 py-2.5 pointer-coarse:min-h-11",
+        default: "gap-x-[calc(var(--qy-space-1)*3.5)] gap-y-(--qy-space-3) rounded-xl p-(--qy-space-4)",
+        sm: "gap-x-[calc(var(--qy-space-1)*2.5)] gap-y-(--qy-space-2) rounded-lg px-(--qy-space-3) py-[calc(var(--qy-space-1)*2.5)] pointer-coarse:min-h-11",
       },
       variant: {
         default: "bg-transparent [a&,button&]:hover:bg-accent",
@@ -103,7 +103,7 @@ export function Item({
 }
 
 export const itemMediaVariants = cva(
-  "relative flex shrink-0 items-center justify-center gap-2 group-has-data-[slot=item-description]/item:self-start [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "relative flex shrink-0 items-center justify-center gap-(--qy-space-2) group-has-data-[slot=item-description]/item:self-start [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     defaultVariants: {
       variant: "default",
@@ -153,7 +153,7 @@ export function ItemContent({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex min-w-0 flex-1 flex-col gap-1 [&+[data-slot=item-content]]:flex-none",
+      "flex min-w-0 flex-1 flex-col gap-(--qy-space-1) [&+[data-slot=item-content]]:flex-none",
       className,
     ),
     "data-slot": "item-content",
@@ -173,7 +173,7 @@ export function ItemTitle({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex w-fit max-w-full items-center gap-2 font-medium text-foreground leading-snug",
+      "flex w-fit max-w-full items-center gap-(--qy-space-2) font-medium text-foreground leading-snug",
       className,
     ),
     "data-slot": "item-title",
@@ -212,7 +212,7 @@ export function ItemActions({
   ...props
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
-    className: cn("flex shrink-0 items-center gap-2", className),
+    className: cn("flex shrink-0 items-center gap-(--qy-space-2)", className),
     "data-slot": "item-actions",
   };
 
@@ -230,7 +230,7 @@ export function ItemHeader({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex basis-full items-center justify-between gap-2",
+      "flex basis-full items-center justify-between gap-(--qy-space-2)",
       className,
     ),
     "data-slot": "item-header",
@@ -250,7 +250,7 @@ export function ItemFooter({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex basis-full items-center justify-between gap-2",
+      "flex basis-full items-center justify-between gap-(--qy-space-2)",
       className,
     ),
     "data-slot": "item-footer",

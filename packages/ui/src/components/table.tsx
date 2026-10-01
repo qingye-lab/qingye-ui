@@ -126,7 +126,7 @@ export function TableHead({
   return (
     <th
       className={cn(
-        "h-[max(--spacing(9),calc(var(--table-row)_-_--spacing(2)))] whitespace-nowrap px-2.5 text-start align-middle font-medium text-muted-foreground leading-none has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
+        "h-[max(--spacing(9),calc(var(--table-row)_-_--spacing(2)))] whitespace-nowrap px-[calc(var(--qy-space-1)*2.5)] text-start align-middle font-medium text-muted-foreground leading-none has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
         // Sticky header: an opaque fill and an inset hairline, because collapsed
         // row borders do not travel with sticky cells.
         "group-data-sticky-header/table:sticky group-data-sticky-header/table:top-0 group-data-sticky-header/table:z-10 group-data-sticky-header/table:bg-background group-data-sticky-header/table:shadow-[inset_0_-1px_var(--color-border)] in-data-[variant=card]:group-data-sticky-header/table:bg-[linear-gradient(--alpha(var(--color-muted)/72%),--alpha(var(--color-muted)/72%)),linear-gradient(var(--color-card),var(--color-card))] in-data-[variant=card]:group-data-sticky-header/table:shadow-none",
@@ -145,7 +145,7 @@ export function TableCell({
   return (
     <td
       className={cn(
-        "h-(--table-row) whitespace-nowrap bg-clip-padding px-2.5 py-2 in-data-[slot=table-footer]:py-3.5 align-middle leading-none in-data-[variant=card]:first:ps-[calc(--spacing(2.5)-1px)] in-data-[variant=card]:last:pe-[calc(--spacing(2.5)-1px)] has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
+        "h-(--table-row) whitespace-nowrap bg-clip-padding px-[calc(var(--qy-space-1)*2.5)] py-(--qy-space-2) in-data-[slot=table-footer]:py-[calc(var(--qy-space-1)*3.5)] align-middle leading-none in-data-[variant=card]:first:ps-[calc(calc(var(--qy-space-1)*2.5)-1px)] in-data-[variant=card]:last:pe-[calc(calc(var(--qy-space-1)*2.5)-1px)] has-[[role=checkbox]]:w-px last:has-[[role=checkbox]]:ps-0 first:has-[[role=checkbox]]:pe-0",
         className,
       )}
       data-slot="table-cell"
@@ -161,7 +161,7 @@ export function TableCaption({
   return (
     <caption
       className={cn(
-        "in-data-[variant=card]:my-4 mt-4 text-muted-foreground text-sm",
+        "in-data-[variant=card]:my-(--qy-space-4) mt-(--qy-space-4) text-muted-foreground text-sm",
         className,
       )}
       data-slot="table-caption"

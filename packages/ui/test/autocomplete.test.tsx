@@ -291,8 +291,8 @@ describe("Autocomplete", () => {
       </Autocomplete>,
     );
     const input = screen.getByRole("combobox", { name: "帮助搜索" });
-    // The size variant is applied as height classes on the input itself.
-    expect(input).toHaveClass("h-7.5");
+    // Size is forwarded to the owning Input control, whose height follows the role token.
+    expect(input.closest("[data-slot=input-control]")).toHaveAttribute("data-size", "sm");
     expect(input).toBeDisabled();
   });
 

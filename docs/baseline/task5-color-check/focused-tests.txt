@@ -1,0 +1,13 @@
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/demo/ui/packages/ui
+
+ ✓ test/color-check.test.ts (49 tests) 804ms
+     ✓ all existing component sources avoid literal paint values  652ms
+ ✓ test/conventions.test.ts (7 tests) 928ms
+     ✓ no hard-coded greys: colours come from semantic tokens or utilities  907ms
+
+ Test Files  2 passed (2)
+      Tests  56 passed (56)
+   Start at  21:47:20
+   Duration  4.44s (transform 282ms, setup 670ms, import 2.07s, tests 1.73s, environment 2.87s)
+

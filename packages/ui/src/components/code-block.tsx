@@ -102,7 +102,7 @@ export function CodeBlock({
     >
       {hasHeader ? (
         <div
-          className="flex h-10 shrink-0 items-center gap-3 border-b ps-4 pe-2 text-xs"
+          className="flex h-10 shrink-0 items-center gap-(--qy-space-3) border-b ps-(--qy-space-4) pe-(--qy-space-2) text-xs"
           data-slot="code-block-header"
         >
           {filename !== undefined ? (
@@ -131,7 +131,7 @@ export function CodeBlock({
       )}
       <pre
         className={cn(
-          "m-0 min-h-0 overflow-auto py-3 font-mono text-[0.8125rem] leading-6 outline-none [font-variant-ligatures:none] [scrollbar-width:thin] focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-inset",
+          "m-0 min-h-0 overflow-auto py-(--qy-space-3) font-mono text-[0.8125rem] leading-6 outline-none [font-variant-ligatures:none] [scrollbar-width:thin] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring/50 focus-visible:ring-inset",
           maxHeight !== undefined && "max-h-(--code-block-max-height)",
           wrap
             ? "whitespace-pre-wrap [overflow-wrap:anywhere]"
@@ -146,10 +146,10 @@ export function CodeBlock({
             // With line numbers each line is a two-column grid, so the number
             // keeps its gutter and wrapped lines hang under their own text.
             lineNumbers
-              ? "has-[[data-line]]:grid has-[[data-line]]:grid-cols-[auto_1fr] has-[[data-line]]:px-4 [&_[data-line]]:[counter-increment:line] [&_[data-line]]:before:me-4 [&_[data-line]]:before:min-w-0 [&_[data-line]]:before:select-none [&_[data-line]]:before:text-end [&_[data-line]]:before:text-muted-foreground/64 [&_[data-line]]:before:content-[counter(line)]"
-              : "px-4",
+              ? "has-[[data-line]]:grid has-[[data-line]]:grid-cols-[auto_1fr] has-[[data-line]]:px-(--qy-space-4) [&_[data-line]]:[counter-increment:line] [&_[data-line]]:before:me-(--qy-space-4) [&_[data-line]]:before:min-w-0 [&_[data-line]]:before:select-none [&_[data-line]]:before:text-end [&_[data-line]]:before:text-muted-foreground/64 [&_[data-line]]:before:content-[counter(line)]"
+              : "px-(--qy-space-4)",
             "[&_[data-line]]:block [&_[data-line]]:min-h-[1lh]",
-            !lineNumbers && "[&_[data-line]]:px-4",
+            !lineNumbers && "[&_[data-line]]:px-(--qy-space-4)",
             "[&_[data-line][data-highlighted]]:bg-code-highlight [&_[data-line][data-highlighted]]:shadow-[inset_2px_0_0_var(--color-border-strong)]",
           )}
           data-slot="code-block-code"

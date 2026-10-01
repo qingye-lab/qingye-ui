@@ -99,7 +99,7 @@ export function DatePickerClear({
   return (
     <button
       className={cn(
-        "qy-pressable touch-target absolute top-1/2 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-foreground opacity-72 outline-none transition-[opacity,background-color] hover:bg-accent hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-ring sm:size-6 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "qy-pressable touch-target absolute top-1/2 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-foreground opacity-72 outline-none transition-[opacity,background-color] hover:bg-accent hover:opacity-100 focus-visible:opacity-100 focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring sm:size-6 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         size === "sm" ? "end-0.5" : "end-1",
         className,
       )}
@@ -221,7 +221,7 @@ export function DatePicker({
               ref={triggerRef}
               size={size}
               valueId={valueId}
-              className={cn(showClear && (size === "sm" ? "pe-8 sm:pe-7" : "pe-9 sm:pe-8"))}
+              className={cn(showClear && (size === "sm" ? "pe-[calc(1.75rem+2px+var(--qy-space-1)/2)] sm:pe-[calc(1.5rem+2px+var(--qy-space-1)/2)]" : "pe-[calc(1.75rem+4px+var(--qy-space-1))] sm:pe-[calc(1.5rem+4px+var(--qy-space-1))]"))}
             />
           }
         >

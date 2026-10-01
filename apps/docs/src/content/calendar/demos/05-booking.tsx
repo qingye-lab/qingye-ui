@@ -3,7 +3,7 @@ import { Calendar } from "@qingye/ui/components/calendar";
 import { type DateRange } from "@qingye/ui";
 import { useState } from "react";
 
-export const meta = { title: "组合：会议室预订", description: "日历放进卡片，下方汇总所选天数。" };
+export const meta = { title: "组合：会议室预订", description: "日历放进卡片，下方汇总所选天数。", flush: true };
 
 const format = new Intl.DateTimeFormat("zh-CN", { month: "long", day: "numeric", weekday: "short" });
 
@@ -17,7 +17,7 @@ export default function Demo() {
     range?.from && range.to ? Math.round((range.to.getTime() - range.from.getTime()) / 86_400_000) + 1 : 0;
 
   return (
-    <div className="flex w-fit flex-col rounded-2xl border bg-card shadow-xs/5">
+    <div className="mx-auto flex w-fit flex-col rounded-2xl border bg-card shadow-xs/5">
       <div className="p-2">
         <Calendar mode="range" selected={range} onSelect={setRange} disabled={{ before: today }} />
       </div>

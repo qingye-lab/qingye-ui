@@ -27,7 +27,7 @@ export function Stat({
 }: StatProps): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "group/stat flex min-w-0 flex-col gap-2 data-[size=sm]:gap-1.5",
+      "group/stat flex min-w-0 flex-col gap-(--qy-space-2) data-[size=sm]:gap-[calc(var(--qy-space-1)*1.5)]",
       className,
     ),
     "data-size": size,
@@ -48,7 +48,7 @@ export function StatLabel({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex min-w-0 items-center gap-1.5 font-medium text-muted-foreground text-sm group-data-[size=sm]/stat:text-xs [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+      "flex min-w-0 items-center gap-[calc(var(--qy-space-1)*1.5)] font-medium text-muted-foreground text-sm group-data-[size=sm]/stat:text-xs [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
       className,
     ),
     "data-slot": "stat-label",
@@ -68,7 +68,7 @@ export function StatValue({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex min-w-0 flex-wrap items-baseline gap-x-1 font-heading font-semibold text-2xl text-foreground leading-none numeric group-data-[size=lg]/stat:text-[2rem] group-data-[size=sm]/stat:text-xl",
+      "flex min-w-0 flex-wrap items-baseline gap-x-(--qy-space-1) font-heading font-semibold text-2xl text-foreground leading-none numeric group-data-[size=lg]/stat:text-[2rem] group-data-[size=sm]/stat:text-xl",
       className,
     ),
     "data-slot": "stat-value",
@@ -160,10 +160,10 @@ export function StatDelta({
       </>
     ),
     className: cn(
-      "inline-flex w-fit shrink-0 items-center gap-0.5 whitespace-nowrap font-medium text-sm leading-none numeric sm:text-xs [&_svg]:pointer-events-none [&_svg]:-mx-px [&_svg]:size-3.5 [&_svg]:shrink-0 sm:[&_svg]:size-3",
+      "inline-flex w-fit shrink-0 items-center gap-[calc(var(--qy-space-1)*0.5)] whitespace-nowrap font-medium text-sm leading-none numeric sm:text-xs [&_svg]:pointer-events-none [&_svg]:-mx-px [&_svg]:size-3.5 [&_svg]:shrink-0 sm:[&_svg]:size-3",
       "data-[sentiment=negative]:text-destructive-foreground data-[sentiment=neutral]:text-muted-foreground data-[sentiment=positive]:text-success-foreground",
       variant === "badge" &&
-        "h-5.5 rounded-sm px-1 data-[sentiment=negative]:bg-destructive/8 data-[sentiment=neutral]:bg-muted data-[sentiment=positive]:bg-success/8 sm:h-4.5 dark:data-[sentiment=negative]:bg-destructive/16 dark:data-[sentiment=positive]:bg-success/16",
+        "h-5.5 rounded-sm px-(--qy-space-1) data-[sentiment=negative]:bg-destructive/8 data-[sentiment=neutral]:bg-muted data-[sentiment=positive]:bg-success/8 sm:h-4.5 dark:data-[sentiment=negative]:bg-destructive/16 dark:data-[sentiment=positive]:bg-success/16",
       className,
     ),
     "data-sentiment": sentiment,
@@ -187,7 +187,7 @@ export function StatDescription({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 text-muted-foreground text-sm sm:text-xs",
+      "flex min-w-0 flex-wrap items-center gap-x-[calc(var(--qy-space-1)*1.5)] gap-y-(--qy-space-1) text-muted-foreground text-sm sm:text-xs",
       className,
     ),
     "data-slot": "stat-description",

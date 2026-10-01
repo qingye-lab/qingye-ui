@@ -5,6 +5,10 @@
  *   Layer 2  tokens/semantic.css     roles, light + dark
  *   Layer 3  tokens/components.css   type, space, radius, size, density, motion
  *
+ * Theme axes: html[data-brand] is project-owned; data-theme/.dark belong to
+ * ThemeProvider; data-density is independently set by the project/container.
+ * No data-brand means the existing default. See docs/decisions/theme-axes.md.
+ *
  * Customise the library by overriding `--qy-*` tokens after this file, for
  * example `:root { --qy-primary: …; --qy-radius: 0.5rem; }`.
  *
@@ -38,6 +42,8 @@
     --accent-foreground: var(--qy-accent-foreground);
     --destructive: var(--qy-danger);
     --destructive-foreground: var(--qy-danger-foreground);
+    --destructive-fill: var(--qy-danger-fill);
+    --destructive-on-fill: var(--qy-danger-on-fill);
     --info: var(--qy-info);
     --info-foreground: var(--qy-info-foreground);
     --success: var(--qy-success);
@@ -75,6 +81,9 @@
   --font-sans: var(--qy-font-sans);
   --font-heading: var(--qy-font-sans);
   --font-mono: var(--qy-font-mono);
+  --font-weight-normal: var(--qy-weight-regular);
+  --font-weight-medium: var(--qy-weight-medium);
+  --font-weight-semibold: var(--qy-weight-semibold);
 
   --color-background: var(--qy-background);
   --color-foreground: var(--qy-foreground);
@@ -92,6 +101,8 @@
   --color-accent-foreground: var(--qy-accent-foreground);
   --color-destructive: var(--qy-danger);
   --color-destructive-foreground: var(--qy-danger-foreground);
+  --color-destructive-fill: var(--qy-danger-fill);
+  --color-destructive-on-fill: var(--qy-danger-on-fill);
   --color-info: var(--qy-info);
   --color-info-foreground: var(--qy-info-foreground);
   --color-success: var(--qy-success);
@@ -135,12 +146,39 @@
   --color-success-soft: var(--qy-success-soft);
   --color-info-soft: var(--qy-info-soft);
 
+  --radius-control: var(--qy-radius-control);
+  --radius-panel: var(--qy-radius-panel);
   --radius-xs: var(--qy-radius-xs);
   --radius-sm: var(--qy-radius-sm);
   --radius-md: var(--qy-radius-md);
   --radius-lg: var(--qy-radius-lg);
   --radius-xl: var(--qy-radius-xl);
   --radius-2xl: var(--qy-radius-2xl);
+
+  --text-button: var(--qy-text-button-size);
+  --text-button--line-height: var(--qy-text-button-leading);
+  --text-button--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-mobile: var(--qy-text-button-mobile-size);
+  --text-button-mobile--line-height: var(--qy-text-button-mobile-leading);
+  --text-button-mobile--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-lg: var(--qy-text-button-lg-size);
+  --text-button-lg--line-height: var(--qy-text-button-lg-leading);
+  --text-button-lg--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-xs: var(--qy-text-button-xs-size);
+  --text-button-xs--line-height: var(--qy-text-button-xs-leading);
+  --text-button-xs--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-input: var(--qy-text-input-size);
+  --text-field-input--line-height: var(--qy-text-input-leading);
+  --text-field-input--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-input-mobile: var(--qy-text-input-mobile-size);
+  --text-field-input-mobile--line-height: var(--qy-text-input-mobile-leading);
+  --text-field-input-mobile--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-label: var(--qy-text-field-label-size);
+  --text-field-label--line-height: var(--qy-text-field-label-leading);
+  --text-field-label--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-label-mobile: var(--qy-text-field-label-mobile-size);
+  --text-field-label-mobile--line-height: var(--qy-text-field-label-mobile-leading);
+  --text-field-label-mobile--letter-spacing: var(--qy-text-label-tracking);
 
   --text-display-lg: var(--qy-text-display-lg-size);
   --text-display-lg--line-height: var(--qy-text-display-lg-leading);

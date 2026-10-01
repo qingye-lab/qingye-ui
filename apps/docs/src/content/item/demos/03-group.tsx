@@ -24,7 +24,7 @@ export default function Demo() {
       <ItemGroup className="px-2 pb-2">
         {members.map((member, index) => (
           <Fragment key={member.email}>
-            {index > 0 ? <ItemSeparator className="mx-2 w-auto" /> : null}
+            {index > 0 ? <ItemSeparator className="mx-2 data-[orientation=horizontal]:w-auto" /> : null}
             <Item size="sm">
               <ItemMedia variant="avatar">
                 <Avatar>

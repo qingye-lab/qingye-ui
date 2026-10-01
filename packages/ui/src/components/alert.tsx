@@ -11,7 +11,7 @@ import { cn } from "../utils";
 // otherwise it would claim the first column and push the title and description
 // side by side; on phone widths it spans the row instead and stacks below.
 const alertVariants = cva(
-  "relative grid w-full items-start gap-x-2 gap-y-0.5 rounded-xl border px-3.5 py-3 text-card-foreground text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:has-data-[slot=alert-action]:grid-cols-[calc(var(--spacing)*4)_1fr_auto] sm:has-data-[slot=alert-action]:grid-cols-[1fr_auto] [&>svg]:h-lh [&>svg]:w-4",
+  "relative grid w-full items-start gap-x-(--qy-space-2) gap-y-[calc(var(--qy-space-1)*0.5)] rounded-xl border px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-card-foreground text-sm has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] has-[>svg]:has-data-[slot=alert-action]:grid-cols-[calc(var(--spacing)*4)_1fr_auto] sm:has-data-[slot=alert-action]:grid-cols-[1fr_auto] [&>svg]:h-lh [&>svg]:w-4",
   {
     defaultVariants: {
       variant: "default",
@@ -68,7 +68,7 @@ export function AlertDescription({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2.5 text-muted-foreground [svg~&]:col-start-2",
+        "flex flex-col gap-[calc(var(--qy-space-1)*2.5)] text-muted-foreground [svg~&]:col-start-2",
         className,
       )}
       data-slot="alert-description"
@@ -84,7 +84,7 @@ export function AlertAction({
   return (
     <div
       className={cn(
-        "flex gap-1 max-sm:col-start-1 max-sm:col-end-[-1] max-sm:mt-2 sm:row-start-1 sm:row-end-3 sm:self-center sm:[[data-slot=alert-description]~&]:col-start-2 sm:[[data-slot=alert-title]~&]:col-start-2 sm:[svg~&]:col-start-2 sm:[svg~[data-slot=alert-description]~&]:col-start-3 sm:[svg~[data-slot=alert-title]~&]:col-start-3",
+        "flex gap-(--qy-space-1) max-sm:col-start-1 max-sm:col-end-[-1] max-sm:mt-(--qy-space-2) sm:row-start-1 sm:row-end-3 sm:self-center sm:[[data-slot=alert-description]~&]:col-start-2 sm:[[data-slot=alert-title]~&]:col-start-2 sm:[svg~&]:col-start-2 sm:[svg~[data-slot=alert-description]~&]:col-start-3 sm:[svg~[data-slot=alert-title]~&]:col-start-3",
         className,
       )}
       data-slot="alert-action"

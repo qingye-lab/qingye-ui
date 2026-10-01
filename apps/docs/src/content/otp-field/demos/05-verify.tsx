@@ -14,7 +14,7 @@ export default function Demo() {
     setTimeout(() => setStatus(code === "246810" ? "ok" : "error"), 600);
   };
   return (
-    <div className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border bg-card p-6 text-center shadow-xs/5">
+    <div className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border bg-card p-4 text-center shadow-xs/5 sm:p-6">
       <div className="flex flex-col gap-1">
         <h3 className="font-semibold text-base">输入验证码</h3>
         <p className="text-muted-foreground text-sm">我们向 zhang.wei@example.com 发送了 6 位验证码</p>

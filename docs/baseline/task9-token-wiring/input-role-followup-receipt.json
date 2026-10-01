@@ -1,0 +1,40 @@
+{
+  "change": "Rename new font-size utilities to field-input/field-input-mobile; retain existing input colour namespace and qy input typography source tokens",
+  "beforeCompiledCss": ".sm\\:text-input{color:var(--qy-border-input)}",
+  "beforeRuntime": "1280px Input/Select/InputGroup retained16px; intended desktop14px",
+  "tests": {
+    "status": "PASS",
+    "files": 4,
+    "count": 18,
+    "command": "pnpm --filter @qingye/ui exec vitest run test/text-role-merging.test.tsx test/text-role-css.test.ts test/input.test.tsx test/input-group.test.tsx test/native-select.test.tsx test/number-field.test.tsx test/select.test.tsx test/textarea.test.tsx",
+    "matchedFiles": [
+      "text-role-merging.test.tsx",
+      "text-role-css.test.ts",
+      "native-select.test.tsx",
+      "select.test.tsx"
+    ]
+  },
+  "typecheck": {
+    "status": "PASS",
+    "command": "pnpm --filter @qingye/ui typecheck"
+  },
+  "browserAfterFix": "NOT_RUN; A will remeasure desktop/narrow roles and lineboxes",
+  "logs": {
+    "tests": {
+      "path": "docs/baseline/task9-token-wiring/input-role-tests.txt",
+      "sha256": "3047286a3669a2447a6ebbf563bf7f25f66a985ce28b456c228dda8361afa03e"
+    },
+    "typecheck": {
+      "path": "docs/baseline/task9-token-wiring/input-role-typecheck.txt",
+      "sha256": "129cf9397241364ba47845d97011c34df91d9e56c853b3d177a305526d864760"
+    }
+  },
+  "fullUnit": {
+    "status": "PASS",
+    "files": 50,
+    "count": 299,
+    "command": "pnpm --filter @qingye/ui test --maxWorkers=2",
+    "log": "docs/baseline/task9-token-wiring/input-role-full-tests.txt",
+    "sha256": "7d8c819548c1e614a40bd80b357524a24b8a79a5e43824b0ee1f7c6bcb43417d"
+  }
+}

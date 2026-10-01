@@ -57,11 +57,11 @@ export function SheetViewport({
     <SheetPrimitive.Viewport
       className={cn(
         "fixed inset-0 z-50 grid",
-        side === "bottom" && "grid grid-rows-[1fr_auto] pt-12",
-        side === "top" && "grid grid-rows-[auto_1fr] pb-12",
+        side === "bottom" && "grid grid-rows-[1fr_auto] pt-(--qy-space-12)",
+        side === "top" && "grid grid-rows-[auto_1fr] pb-(--qy-space-12)",
         side === "left" && "flex justify-start",
         side === "right" && "flex justify-end",
-        variant === "inset" && "sm:p-4",
+        variant === "inset" && "sm:p-(--qy-space-4)",
         className,
       )}
       data-slot="sheet-viewport"
@@ -134,7 +134,7 @@ export function SheetHeader({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex flex-col gap-2 p-6 in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pb-3 max-sm:pb-4",
+      "flex flex-col gap-(--qy-space-2) p-(--qy-space-6) in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pb-(--qy-space-3) max-sm:pb-(--qy-space-4)",
       className,
     ),
     "data-slot": "sheet-header",
@@ -157,11 +157,11 @@ export function SheetFooter({
 }): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex flex-col-reverse gap-2 px-6 sm:flex-row sm:justify-end",
+      "flex flex-col-reverse gap-(--qy-space-2) px-(--qy-space-6) sm:flex-row sm:justify-end",
       variant === "default" &&
-        "border-t bg-muted/72 pt-4 pb-[calc(--spacing(4)+env(safe-area-inset-bottom,0px))] in-data-[side=top]:pb-4",
+        "border-t bg-muted/72 pt-(--qy-space-4) pb-[calc(var(--qy-space-4)+env(safe-area-inset-bottom,0px))] in-data-[side=top]:pb-(--qy-space-4)",
       variant === "bare" &&
-        "in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pt-3 pt-4 pb-[calc(--spacing(6)+env(safe-area-inset-bottom,0px))] in-data-[side=top]:pb-6",
+        "in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pt-(--qy-space-3) pt-(--qy-space-4) pb-[calc(var(--qy-space-6)+env(safe-area-inset-bottom,0px))] in-data-[side=top]:pb-(--qy-space-6)",
       className,
     ),
     "data-slot": "sheet-footer",
@@ -213,7 +213,7 @@ export function SheetPanel({
 }): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "p-6 in-[[data-slot=sheet-popup]:has([data-slot=sheet-header])]:pt-1 in-[[data-slot=sheet-popup]:has([data-slot=sheet-footer]:not(.border-t))]:pb-1",
+      "p-(--qy-space-6) in-[[data-slot=sheet-popup]:has([data-slot=sheet-header])]:pt-(--qy-space-1) in-[[data-slot=sheet-popup]:has([data-slot=sheet-footer]:not(.border-t))]:pb-(--qy-space-1)",
       className,
     ),
     "data-slot": "sheet-panel",

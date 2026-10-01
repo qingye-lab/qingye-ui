@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Qingye UI generated token ledger",
+  "type": "object",
+  "required": ["schemaVersion", "static", "runtime", "computation", "probePlan"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "static": {
+      "type": "object",
+      "required": ["fingerprint", "coveredComponents", "tokens", "records", "unresolved", "limitations"],
+      "properties": {
+        "fingerprint": { "$ref": "#/$defs/fingerprint" },
+        "records": { "type": "array", "items": { "type": "object", "required": ["token", "sourceComponent", "part", "selector", "precision", "property", "conditions", "source", "chain"], "properties": { "precision": { "enum": ["EXACT_SLOT", "EXACT_DESCENDANT"] } } } }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["fingerprint", "observations", "status"],
+      "properties": {
+        "fingerprint": { "type": ["string", "null"] },
+        "observations": { "type": "array", "items": { "type": "object", "required": ["id", "probeId", "observation", "validOverride"], "properties": { "observation": { "enum": ["OBSERVED_CHANGE", "OBSERVED_NO_CHANGE", "NOT_OBSERVED"] }, "validOverride": { "type": "boolean" } } } }
+      }
+    },
+    "computation": {
+      "type": "object",
+      "required": ["staleRuntime", "cases", "counts", "scope"],
+      "properties": { "cases": { "type": "array", "items": { "type": "object", "required": ["probeId", "status", "observation", "reason"], "properties": { "status": { "enum": ["PASS", "FAIL", "UNVERIFIED", "NOT_RUN"] } } } } }
+    },
+    "probePlan": { "type": "array" }
+  },
+  "$defs": {
+    "fingerprint": { "type": "object", "required": ["sha256", "inputs"], "properties": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }, "inputs": { "type": "array" } } }
+  }
+}

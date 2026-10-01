@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Qingye UI generated current implementation facts",
+  "type": "object",
+  "required": ["schemaVersion", "revision", "fingerprint", "package", "components", "tokens", "annotations"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "revision": { "type": "string" },
+    "fingerprint": { "type": "object", "required": ["sha256", "inputs"] },
+    "package": { "type": "object", "required": ["name", "version", "exports", "source"] },
+    "components": { "type": "array", "items": { "type": "object", "required": ["name", "status", "exports", "metadata", "provenance"], "properties": { "status": { "const": "PRESENT" }, "exports": { "type": "array", "items": { "type": "object", "required": ["name", "kind", "source"], "properties": { "kind": { "enum": ["value", "type"] } } } } } } },
+    "tokens": { "type": "array" },
+    "annotations": { "type": "object", "required": ["source", "entries"], "properties": { "entries": { "type": "array", "items": { "type": "object", "required": ["id", "status", "reason", "evidence"], "properties": { "status": { "enum": ["NOT_SUPPORTED", "UNVERIFIED"] } } } } } }
+  }
+}

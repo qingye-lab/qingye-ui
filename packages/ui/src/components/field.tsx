@@ -23,10 +23,10 @@ export function Field({
     <FieldContext.Provider value={true}>
       <FieldPrimitive.Root
         className={cn(
-          "group/field flex gap-2",
+          "group/field flex gap-(--qy-space-2)",
           orientation === "vertical"
             ? "flex-col items-start"
-            : "flex-row items-center gap-3 has-[>[data-slot=field-content]]:items-start [&>[data-slot=field-content]]:flex-1 has-[>[data-slot=field-content]]:*:data-[slot=checkbox]:mt-px has-[>[data-slot=field-content]]:*:data-[slot=radio]:mt-px",
+            : "flex-row items-center gap-(--qy-space-3) has-[>[data-slot=field-content]]:items-start [&>[data-slot=field-content]]:flex-1 has-[>[data-slot=field-content]]:*:data-[slot=checkbox]:mt-px has-[>[data-slot=field-content]]:*:data-[slot=radio]:mt-px",
           className,
         )}
         data-orientation={orientation}
@@ -44,7 +44,7 @@ export function FieldGroup({
 }: React.ComponentProps<"div">): React.ReactElement {
   return (
     <div
-      className={cn("flex w-full flex-col gap-5", className)}
+      className={cn("flex w-full flex-col gap-(--qy-space-5)", className)}
       data-slot="field-group"
       {...props}
     />
@@ -58,7 +58,7 @@ export function FieldContent({
 }: React.ComponentProps<"div">): React.ReactElement {
   return (
     <div
-      className={cn("flex min-w-0 flex-col gap-1", className)}
+      className={cn("flex min-w-0 flex-col gap-(--qy-space-1)", className)}
       data-slot="field-content"
       {...props}
     />
@@ -73,7 +73,7 @@ export function FieldTitle({
   return (
     <div
       className={cn(
-        "flex w-fit items-center gap-2 font-medium text-base/4.5 text-foreground sm:text-sm/4",
+        "flex w-fit items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground sm:text-field-label",
         className,
       )}
       data-slot="field-title"
@@ -96,7 +96,7 @@ export function FieldSeparator({
     >
       <Separator className="absolute inset-x-0 top-1/2" />
       {children ? (
-        <span className="relative mx-auto bg-background px-2 text-muted-foreground text-xs">
+        <span className="relative mx-auto bg-background px-(--qy-space-2) text-muted-foreground text-xs">
           {children}
         </span>
       ) : null}
@@ -111,7 +111,7 @@ export function FieldLabel({
   return (
     <FieldPrimitive.Label
       className={cn(
-        "inline-flex items-center gap-2 font-medium text-base/4.5 text-foreground data-disabled:opacity-64 sm:text-sm/4",
+        "inline-flex items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground data-disabled:opacity-64 sm:text-field-label",
         className,
       )}
       data-slot="field-label"
@@ -156,7 +156,7 @@ type FieldErrorProps = FieldPrimitive.Error.Props & {
 };
 
 const fieldErrorClassName =
-  "text-destructive-foreground text-xs transition-[opacity,translate] duration-(--qy-duration-fast) ease-(--qy-ease-out) data-ending-style:duration-(--qy-duration-press) data-starting-style:-translate-y-0.5 data-starting-style:opacity-0 data-ending-style:opacity-0 [&_ul]:ms-4 [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-0.5";
+  "text-destructive-foreground text-xs transition-[opacity,translate] duration-(--qy-duration-fast) ease-(--qy-ease-out) data-ending-style:duration-(--qy-duration-press) data-starting-style:-translate-y-0.5 data-starting-style:opacity-0 data-ending-style:opacity-0 [&_ul]:ms-(--qy-space-4) [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-[calc(var(--qy-space-1)*0.5)]";
 
 /**
  * With content (`children` or a non-empty `errors`), the message is shown

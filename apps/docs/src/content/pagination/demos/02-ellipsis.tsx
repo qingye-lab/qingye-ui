@@ -3,7 +3,7 @@ import { type MouseEvent, useState } from "react";
 
 export const meta = {
   title: "省略号",
-  description: "保留首尾与当前页两侧，其余收起。点击页码试试。",
+  description: "保留首尾与当前页，宽屏显示相邻页码。点击页码试试。",
 };
 
 const total = 20;
@@ -37,7 +37,7 @@ export default function Demo() {
               <PaginationEllipsis />
             </PaginationItem>
           ) : (
-            <PaginationItem key={p}>
+            <PaginationItem key={p} className={p !== 1 && p !== total && p !== page ? "max-sm:hidden" : undefined}>
               <PaginationLink href={`?page=${p}`} isActive={p === page} onClick={go(p)}>
                 {p}
               </PaginationLink>

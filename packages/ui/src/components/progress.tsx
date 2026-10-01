@@ -13,7 +13,7 @@ export function Progress({
 }: ProgressPrimitive.Root.Props): React.ReactElement {
   return (
     <ProgressPrimitive.Root
-      className={cn("flex w-full flex-col gap-2", className)}
+      className={cn("flex w-full flex-col gap-(--qy-space-2)", className)}
       data-slot="progress"
       {...props}
     >

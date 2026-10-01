@@ -213,7 +213,7 @@ export function Tree({
         >
           <div
             className={cn(
-              "relative flex min-h-8 cursor-pointer select-none items-center gap-1.5 rounded-md px-2 text-base text-foreground transition-colors pointer-coarse:min-h-11 hover:bg-accent sm:min-h-7 sm:text-sm",
+              "relative flex min-h-8 cursor-pointer select-none items-center gap-[calc(var(--qy-space-1)*1.5)] rounded-md px-(--qy-space-2) text-base text-foreground transition-colors pointer-coarse:min-h-11 hover:bg-accent sm:min-h-7 sm:text-sm",
               "data-selected:bg-(--qy-surface-active) data-disabled:cursor-not-allowed data-disabled:opacity-64 data-disabled:hover:bg-transparent",
             )}
             data-disabled={node.disabled ? "" : undefined}
@@ -268,9 +268,9 @@ export function Tree({
           {isOpen ? (
             <ul
               className={cn(
-                "m-0 mt-px flex list-none flex-col gap-px p-0 ps-1",
+                "m-0 mt-px flex list-none flex-col gap-px p-0 ps-(--qy-space-1)",
                 // The guide sits under the parent's chevron: row padding + half the chevron.
-                "ms-[calc(--spacing(3.5)-0.5px)]",
+                "ms-[calc(var(--qy-space-2)+1rem/2-2px-0.5px)]",
                 guides && "border-border border-s",
               )}
               data-motion="fade-in"

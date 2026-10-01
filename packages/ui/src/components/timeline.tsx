@@ -49,7 +49,7 @@ export function Timeline({
     <ol
       aria-label={label ?? messages.timeline}
       className={cn(
-        "group/timeline m-0 flex min-w-0 list-none flex-col p-0 [--timeline-dot:--spacing(2)] [--timeline-gap:--spacing(6)] [--timeline-marker:--spacing(6)] data-[density=compact]:[--timeline-dot:--spacing(1.5)] data-[density=compact]:[--timeline-gap:--spacing(3.5)] data-[density=compact]:[--timeline-marker:--spacing(5)]",
+        "group/timeline m-0 flex min-w-0 list-none flex-col p-0 [--timeline-dot:--spacing(2)] [--timeline-gap:var(--qy-space-6)] [--timeline-marker:--spacing(6)] data-[density=compact]:[--timeline-dot:--spacing(1.5)] data-[density=compact]:[--timeline-gap:calc(var(--qy-space-1)*3.5)] data-[density=compact]:[--timeline-marker:--spacing(5)]",
         className,
       )}
       data-connector={connector}
@@ -67,7 +67,7 @@ export function Timeline({
                   {item.time ? <TimelineTime dateTime={item.dateTime}>{item.time}</TimelineTime> : null}
                 </TimelineHeader>
                 {item.description ? <TimelineDescription>{item.description}</TimelineDescription> : null}
-                {item.content ? <div className="mt-2.5">{item.content}</div> : null}
+                {item.content ? <div className="mt-[calc(var(--qy-space-1)*2.5)]">{item.content}</div> : null}
               </TimelineContent>
             </TimelineItem>
           ))
@@ -81,10 +81,10 @@ export function TimelineItem({ className, ...props }: ComponentProps<"li">): Rea
   return (
     <li
       className={cn(
-        "relative flex min-w-0 gap-3 pb-(--timeline-gap) last:pb-0",
-        "before:pointer-events-none before:absolute before:start-[calc(var(--timeline-marker)/2-0.5px)] before:top-[calc(var(--timeline-marker)+--spacing(1.5))] before:bottom-1.5 before:border-s before:border-input last:before:hidden",
+        "relative flex min-w-0 gap-(--qy-space-3) pb-(--timeline-gap) last:pb-0",
+        "before:pointer-events-none before:absolute before:start-[calc(var(--timeline-marker)/2-0.5px)] before:top-[calc(var(--timeline-marker)+var(--qy-space-1)*1.5)] before:bottom-[calc(var(--qy-space-1)*1.5)] before:border-s before:border-input last:before:hidden",
         // Dots are small, so their rail runs from 4px under one dot to 4px above the next.
-        "has-[>[data-variant=dot]]:before:top-[calc(var(--timeline-marker)/2_+_var(--timeline-dot)/2_+_--spacing(1))] has-[>[data-variant=dot]]:before:bottom-[calc(var(--timeline-dot)/2_+_--spacing(1)_-_var(--timeline-marker)/2)]",
+        "has-[>[data-variant=dot]]:before:top-[calc(var(--timeline-marker)/2_+_var(--timeline-dot)/2_+_var(--qy-space-1))] has-[>[data-variant=dot]]:before:bottom-[calc(var(--timeline-dot)/2_+_var(--qy-space-1)_-_var(--timeline-marker)/2)]",
         "group-data-[connector=dashed]/timeline:before:border-dashed group-data-[connector=none]/timeline:before:hidden",
         className,
       )}
@@ -180,7 +180,7 @@ export function TimelineContent({ className, ...props }: ComponentProps<"div">):
 export function TimelineHeader({ className, ...props }: ComponentProps<"div">): ReactElement {
   return (
     <div
-      className={cn("flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5", className)}
+      className={cn("flex flex-wrap items-baseline justify-between gap-x-(--qy-space-3) gap-y-[calc(var(--qy-space-1)*0.5)]", className)}
       data-slot="timeline-header"
       {...props}
     />
@@ -214,7 +214,7 @@ export function TimelineDescription({ className, ...props }: ComponentProps<"div
   return (
     <div
       className={cn(
-        "mt-0.5 text-pretty text-muted-foreground text-sm group-data-[density=compact]/timeline:text-xs",
+        "mt-[calc(var(--qy-space-1)*0.5)] text-pretty text-muted-foreground text-sm group-data-[density=compact]/timeline:text-xs",
         className,
       )}
       data-slot="timeline-description"

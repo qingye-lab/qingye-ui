@@ -336,12 +336,12 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
   const tableProps = maxHeight === undefined ? {} : { render: <div style={{ maxHeight }} /> };
 
   return (
-    <div className={cn("flex min-w-0 flex-col gap-3", className)} data-slot="data-table">
+    <div className={cn("flex min-w-0 flex-col gap-(--qy-space-3)", className)} data-slot="data-table">
       {showToolbar ? (
         <div className="relative" data-slot="data-table-toolbar">
           {/* Selection mode overlays the toolbar row in place, so the table never shifts. */}
           <div
-            className={cn("flex flex-wrap items-center gap-2", selectedIds.length > 0 && "invisible")}
+            className={cn("flex flex-wrap items-center gap-(--qy-space-2)", selectedIds.length > 0 && "invisible")}
             data-slot="data-table-toolbar-content"
           >
             {enableGlobalFilter ? (
@@ -383,11 +383,11 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
           ) : null}
           {selectedIds.length > 0 ? (
             <div
-              className="absolute inset-x-0 top-0 flex h-9 min-w-0 items-center gap-2 sm:h-8"
+              className="absolute inset-x-0 top-0 flex h-9 min-w-0 items-center gap-(--qy-space-2) sm:h-8"
               data-motion="fade-in"
               data-slot="data-table-selection"
             >
-              <span aria-hidden="true" className="me-1 whitespace-nowrap font-medium text-sm numeric">
+              <span aria-hidden="true" className="me-(--qy-space-1) whitespace-nowrap font-medium text-sm numeric">
                 {messages.selectedCount(selectedIds.length)}
               </span>
               {bulkActions?.({
@@ -423,7 +423,7 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
                     {!header.isPlaceholder && column.getCanSort() ? (
                       <button
                         className={cn(
-                          "group/sort touch-target relative -ms-1.5 inline-flex h-7 items-center gap-1 rounded-md px-1.5 font-medium outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-sorted:text-foreground",
+                          "group/sort touch-target relative -ms-1.5 inline-flex h-7 items-center gap-(--qy-space-1) rounded-md px-[calc(var(--qy-space-1)*1.5)] font-medium outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring data-sorted:text-foreground",
                           meta?.align === "end" && "flex-row-reverse",
                         )}
                         data-slot="data-table-sort"
@@ -494,9 +494,9 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
             ))
           ) : (
             <TableRow className="hover:bg-transparent!">
-              <TableCell className="h-auto whitespace-normal py-10 text-center" colSpan={visibleColumns.length}>
+              <TableCell className="h-auto whitespace-normal py-(--qy-space-10) text-center" colSpan={visibleColumns.length}>
                 {empty ?? (
-                  <div className="flex flex-col items-center gap-3" data-slot="data-table-empty">
+                  <div className="flex flex-col items-center gap-(--qy-space-3)" data-slot="data-table-empty">
                     <p className="text-muted-foreground">{messages.noResults}</p>
                     {globalFilter ? (
                       <Button onClick={() => table.setGlobalFilter("")} size="sm" variant="outline">
@@ -512,12 +512,12 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
       </Table>
 
       {enablePagination ? (
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2" data-slot="data-table-pagination">
+        <div className="flex flex-wrap items-center justify-between gap-x-(--qy-space-4) gap-y-(--qy-space-2)" data-slot="data-table-pagination">
           <p aria-live="polite" className="text-muted-foreground text-sm numeric">
             {messages.pageSummary(Math.min(pagination.pageIndex + 1, pageCount), pageCount, total)}
           </p>
-          <div className="flex items-center gap-3 sm:gap-5">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-(--qy-space-3) sm:gap-(--qy-space-5)">
+            <div className="flex items-center gap-(--qy-space-2)">
               <span aria-hidden="true" className="text-muted-foreground text-sm max-sm:hidden">
                 {messages.rowsPerPage}
               </span>
@@ -540,7 +540,7 @@ export function DataTable<TData>(props: DataTableProps<TData>): ReactElement {
                 </SelectPopup>
               </Select>
             </div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-(--qy-space-1)">
               <Button
                 aria-label={messages.firstPage}
                 className="max-sm:hidden"

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "description": "Human-maintained limits only; generated implementation facts are never edited here. Revisit after the corresponding implementation tasks.",
+  "annotations": [
+    {
+      "id": "react-outside-declared-peer-range",
+      "status": "NOT_SUPPORTED",
+      "reason": "The manifest declares React and ReactDOM ^19.2.0. React 18 and React 19.0/19.1 are outside the declared support contract; this does not claim they are incapable of rendering.",
+      "evidence": ["packages/ui/package.json:peerDependencies.react", "packages/ui/package.json:peerDependencies.react-dom"]
+    },
+    {
+      "id": "packed-style-consumption",
+      "status": "UNVERIFIED",
+      "reason": "Export declarations and built CSS exist. Actual tgz installation into Tailwind and precompiled-only consumer fixtures has not been recorded by this inventory.",
+      "evidence": ["packages/ui/package.json", "packages/ui/styles.css", "packages/ui/dist/ui.css"]
+    },
+    {
+      "id": "optional-peer-isolation",
+      "status": "UNVERIFIED",
+      "reason": "Optional peer declarations do not establish that Button-only consumers build without Table/Chart peers.",
+      "evidence": ["packages/ui/package.json"]
+    },
+    {
+      "id": "theme-scope-and-portal",
+      "status": "UNVERIFIED",
+      "reason": "Multi-brand independence and Portal inheritance require dedicated rendered evidence; this inventory does not imply acceptance.",
+      "evidence": ["packages/ui/src/components/theme-provider.tsx", "packages/ui/src/components/dialog.tsx", "packages/ui/src/components/select.tsx"]
+    }
+  ]
+}

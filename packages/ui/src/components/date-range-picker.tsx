@@ -253,7 +253,7 @@ export function DateRangePicker({
               aria-label={ariaLabel}
               aria-labelledby={labelledBy}
               aria-required={required || undefined}
-              className={cn(showClear && (size === "sm" ? "pe-8 sm:pe-7" : "pe-9 sm:pe-8"))}
+              className={cn(showClear && (size === "sm" ? "pe-[calc(1.75rem+2px+var(--qy-space-1)/2)] sm:pe-[calc(1.5rem+2px+var(--qy-space-1)/2)]" : "pe-[calc(1.75rem+4px+var(--qy-space-1))] sm:pe-[calc(1.5rem+4px+var(--qy-space-1))]"))}
               disabled={disabled}
               icon={showClear ? null : undefined}
               id={id}
@@ -279,13 +279,13 @@ export function DateRangePicker({
         </PopoverTrigger>
         <PopoverPopup align="start" aria-label={popupLabel}>
           <div
-            className="flex flex-col gap-2 md:flex-row"
+            className="flex flex-col gap-(--qy-space-2) md:flex-row"
             data-slot="date-range-picker-content"
           >
             {presets?.length ? (
               <div
                 aria-label={messages.selectDateRange}
-                className="-mx-2 -mt-2 flex shrink-0 gap-1 overflow-x-auto border-b p-2 [scrollbar-width:none] md:mx-0 md:-ms-2 md:-my-2 md:w-32 md:flex-col md:overflow-visible md:border-e md:border-b-0"
+                className="-mx-2 -mt-2 flex shrink-0 gap-(--qy-space-1) overflow-x-auto border-b p-(--qy-space-2) [scrollbar-width:none] md:mx-0 md:-ms-2 md:-my-2 md:w-32 md:flex-col md:overflow-visible md:border-e md:border-b-0"
                 data-slot="date-range-picker-presets"
                 role="group"
               >

@@ -35,7 +35,7 @@ export function AccordionTrigger({
     <AccordionPrimitive.Header className="flex" data-slot="accordion-header">
       <AccordionPrimitive.Trigger
         className={cn(
-          "flex flex-1 cursor-pointer items-start justify-between gap-4 rounded-md py-4 text-start font-medium text-sm outline-none transition-all focus-visible:ring-[3px] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 data-panel-open:*:data-[slot=accordion-indicator]:rotate-180",
+          "flex flex-1 cursor-pointer items-start justify-between gap-(--qy-space-4) rounded-md py-(--qy-space-4) text-start font-medium text-sm outline-none transition-all focus-visible:ring-[3px] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 data-panel-open:*:data-[slot=accordion-indicator]:rotate-180",
           className,
         )}
         data-slot="accordion-trigger"
@@ -62,7 +62,7 @@ export function AccordionPanel({
       data-slot="accordion-panel"
       {...props}
     >
-      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+      <div className={cn("pt-0 pb-(--qy-space-4)", className)}>{children}</div>
     </AccordionPrimitive.Panel>
   );
 }

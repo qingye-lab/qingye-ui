@@ -22,11 +22,26 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
       - name: Test
-        run: pnpm --filter @qingye/ui test
+        run: |
+          pnpm --filter @qingye/ui test
+          node scripts/lib/facts-ledger.test.mjs
       - name: Build library
         run: pnpm --filter @qingye/ui build
       - name: Build docs
         run: pnpm --filter docs build
+      - name: Install audit browser
+        run: pnpm exec playwright-core install --with-deps chromium
+      - name: Browser audit
+        run: |
+          mkdir -p test-results/ci-audit
+          node scripts/run-browser-audit.mjs button --only light-desktop --fixture-overflow --report test-results/ci-audit/report.json
+      - name: Upload browser audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-audit-evidence
+          path: test-results/ci-audit/
+          if-no-files-found: warn
       - name: Pack
         run: |
           pnpm --filter @qingye/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"

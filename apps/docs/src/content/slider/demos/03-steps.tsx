@@ -12,7 +12,8 @@ export default function Demo() {
         {levels.map((level) => (
           <span key={level} className="flex w-0 flex-col items-center gap-1.5">
             <span className="h-1 w-px bg-muted-foreground/48" />
-            <span className="whitespace-nowrap">{level}</span>
+            {/* Two-character labels center on a zero-width tick, extending at most 1em per side. */}
+            <span className="whitespace-nowrap" data-audit-overflow-inline="1em">{level}</span>
           </span>
         ))}
       </div>
