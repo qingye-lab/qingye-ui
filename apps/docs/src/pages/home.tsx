@@ -30,7 +30,7 @@ function PreviewFallback() {
 export default function HomePage() {
   useDocumentTitle();
   const [example, setExample] = useState("dashboard");
-  const install = `${releaseDownloadCommand}\npnpm add ./${releaseFile}`;
+  const install = `${releaseDownloadCommand} && pnpm add ./${releaseFile}`;
   return (
     <>
       <main className="qy-home outline-none" id="main" tabIndex={-1}>

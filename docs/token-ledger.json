@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-01T14:45:45.705Z",
-  "revision": "fb8a38958b1740ec9288cdd7b6f76d8ac4952481",
+  "generatedAt": "2026-10-01T15:34:15.298Z",
+  "revision": "a6d699535e95e3962a0c5b495e192d202e94fb1f",
   "static": {
     "fingerprint": {
-      "sha256": "42d2c560332b379a371f7bc8f79f4bb20b439c45da16996a657dd9c976a3a595",
+      "sha256": "a92ca5f9fa283c5f4b14b4f93776b28b077efbfd18584c60740ab4320184dde4",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -41,7 +41,7 @@
         },
         {
           "path": "apps/docs/src/components/install-tabs.tsx",
-          "sha256": "5261000e53d01c53d0140ad496bcf42e518a7d017d540987717bbc23be84973f"
+          "sha256": "1f60f56667aac4e1aa244d6289a7549921eed3d9b84c3f66563b3ae411f30274"
         },
         {
           "path": "apps/docs/src/components/layouts.tsx",
@@ -653,7 +653,7 @@
         },
         {
           "path": "apps/docs/src/content/date-range-picker/demos/04-states.tsx",
-          "sha256": "9875822571dee8facedef28dd663a3f077037ab515914458e41628bf6c655fb8"
+          "sha256": "9ee90ecb88b46df3e6f35341148f9c2d36839056f1b6bbf9dccdf86456a40160"
         },
         {
           "path": "apps/docs/src/content/date-range-picker/demos/05-form.tsx",
@@ -2109,7 +2109,7 @@
         },
         {
           "path": "apps/docs/src/lib/site.ts",
-          "sha256": "424bde8cd35ee0c4e9ce56f3afd290f0f7db7d731f1b74590f7467081954948d"
+          "sha256": "63e55a0191a432b1841cbe5ce8bdee756a68d8812c7cf74ffb8d59a4225826f0"
         },
         {
           "path": "apps/docs/src/lib/types.ts",
@@ -2141,7 +2141,7 @@
         },
         {
           "path": "apps/docs/src/pages/docs/installation.tsx",
-          "sha256": "8401b5c190681018529c9e344a7696f9fa1aa9c2ccfc50f91e32fe676a0f1ef2"
+          "sha256": "0c18032cb5fbae7ff4a9cce92f4e026e8a6bc8435249e140e607d3073fc7d04c"
         },
         {
           "path": "apps/docs/src/pages/docs/introduction.tsx",
@@ -2165,7 +2165,7 @@
         },
         {
           "path": "apps/docs/src/pages/home.tsx",
-          "sha256": "544afd8c9ba9ae8e02d3e586246c8a3e6f1cece9512e0c97bdf363ab0634b189"
+          "sha256": "7da1f2a3707a8d26f3e77f396f79a3212ac217c25fdb7b667bf4edf4aa60ec50"
         },
         {
           "path": "apps/docs/src/pages/not-found.tsx",
@@ -36271,8 +36271,8 @@
     ]
   },
   "runtime": {
-    "fingerprint": "42d2c560332b379a371f7bc8f79f4bb20b439c45da16996a657dd9c976a3a595",
-    "measuredAt": "2026-10-01T14:48:15.577Z",
+    "fingerprint": "a92ca5f9fa283c5f4b14b4f93776b28b077efbfd18584c60740ab4320184dde4",
+    "measuredAt": "2026-10-01T15:40:53.291Z",
     "browser": {
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
       "owner": "caller-provided page"
@@ -36296,7 +36296,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:43.863Z",
+        "measuredAt": "2026-10-01T15:39:22.566Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36363,7 +36363,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-01T14:46:45.369Z",
+        "measuredAt": "2026-10-01T15:39:24.002Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36430,7 +36430,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:46:46.825Z",
+        "measuredAt": "2026-10-01T15:39:25.423Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36497,7 +36497,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:48.248Z",
+        "measuredAt": "2026-10-01T15:39:26.865Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36566,7 +36566,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:46:49.685Z",
+        "measuredAt": "2026-10-01T15:39:28.318Z",
         "observation": "NOT_OBSERVED",
         "validOverride": false,
         "skipReason": "Required pointer=coarse; existing context reports fine. Skipped before navigation."
@@ -36589,7 +36589,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:46:49.685Z",
+        "measuredAt": "2026-10-01T15:39:28.318Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36658,7 +36658,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:51.198Z",
+        "measuredAt": "2026-10-01T15:39:29.730Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36727,7 +36727,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:52.667Z",
+        "measuredAt": "2026-10-01T15:39:31.157Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36802,7 +36802,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-01T14:46:54.528Z",
+        "measuredAt": "2026-10-01T15:39:32.649Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36877,7 +36877,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:55.973Z",
+        "measuredAt": "2026-10-01T15:39:34.122Z",
         "observation": "OBSERVED_NO_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -36948,7 +36948,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:57.450Z",
+        "measuredAt": "2026-10-01T15:39:35.676Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37011,7 +37011,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:46:59.049Z",
+        "measuredAt": "2026-10-01T15:39:37.151Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37084,7 +37084,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:00.606Z",
+        "measuredAt": "2026-10-01T15:39:38.752Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37158,7 +37158,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:47:02.031Z",
+        "measuredAt": "2026-10-01T15:39:40.211Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37228,7 +37228,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:47:03.500Z",
+        "measuredAt": "2026-10-01T15:39:41.649Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37298,7 +37298,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:04.917Z",
+        "measuredAt": "2026-10-01T15:39:43.061Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37365,7 +37365,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:06.317Z",
+        "measuredAt": "2026-10-01T15:39:44.478Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37432,7 +37432,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:07.747Z",
+        "measuredAt": "2026-10-01T15:39:45.929Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37499,7 +37499,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-01T14:47:09.237Z",
+        "measuredAt": "2026-10-01T15:39:47.338Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37566,7 +37566,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:10.690Z",
+        "measuredAt": "2026-10-01T15:39:48.747Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37633,7 +37633,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:47:12.104Z",
+        "measuredAt": "2026-10-01T15:39:50.173Z",
         "observation": "NOT_OBSERVED",
         "validOverride": false,
         "skipReason": "Required pointer=coarse; existing context reports fine. Skipped before navigation."
@@ -37656,7 +37656,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:12.104Z",
+        "measuredAt": "2026-10-01T15:39:50.173Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37725,7 +37725,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:13.555Z",
+        "measuredAt": "2026-10-01T15:39:51.752Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37794,7 +37794,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:15.025Z",
+        "measuredAt": "2026-10-01T15:39:53.312Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37869,7 +37869,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-01T14:47:16.489Z",
+        "measuredAt": "2026-10-01T15:39:54.916Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -37944,7 +37944,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:17.932Z",
+        "measuredAt": "2026-10-01T15:39:56.345Z",
         "observation": "OBSERVED_NO_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38015,7 +38015,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:19.395Z",
+        "measuredAt": "2026-10-01T15:39:57.749Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38078,7 +38078,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:20.845Z",
+        "measuredAt": "2026-10-01T15:39:59.198Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38151,7 +38151,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:22.384Z",
+        "measuredAt": "2026-10-01T15:40:00.931Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38225,7 +38225,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:47:23.783Z",
+        "measuredAt": "2026-10-01T15:40:02.458Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38295,7 +38295,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:47:25.210Z",
+        "measuredAt": "2026-10-01T15:40:03.964Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38365,7 +38365,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:26.646Z",
+        "measuredAt": "2026-10-01T15:40:05.413Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38432,7 +38432,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:28.073Z",
+        "measuredAt": "2026-10-01T15:40:06.847Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38499,7 +38499,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:29.583Z",
+        "measuredAt": "2026-10-01T15:40:08.295Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38566,7 +38566,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-01T14:47:31.013Z",
+        "measuredAt": "2026-10-01T15:40:09.711Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38633,7 +38633,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:32.442Z",
+        "measuredAt": "2026-10-01T15:40:11.121Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38700,7 +38700,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:33.870Z",
+        "measuredAt": "2026-10-01T15:40:12.522Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38769,7 +38769,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:47:35.288Z",
+        "measuredAt": "2026-10-01T15:40:13.937Z",
         "observation": "NOT_OBSERVED",
         "validOverride": false,
         "skipReason": "Required pointer=coarse; existing context reports fine. Skipped before navigation."
@@ -38792,7 +38792,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:35.288Z",
+        "measuredAt": "2026-10-01T15:40:13.937Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38861,7 +38861,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:36.676Z",
+        "measuredAt": "2026-10-01T15:40:15.334Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -38930,7 +38930,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:38.132Z",
+        "measuredAt": "2026-10-01T15:40:16.752Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39005,7 +39005,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:39.599Z",
+        "measuredAt": "2026-10-01T15:40:18.218Z",
         "observation": "OBSERVED_NO_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39076,7 +39076,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:41.046Z",
+        "measuredAt": "2026-10-01T15:40:19.674Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39139,7 +39139,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:42.506Z",
+        "measuredAt": "2026-10-01T15:40:21.152Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39212,7 +39212,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:44.045Z",
+        "measuredAt": "2026-10-01T15:40:22.683Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39286,7 +39286,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:47:45.461Z",
+        "measuredAt": "2026-10-01T15:40:24.117Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39356,7 +39356,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:46.922Z",
+        "measuredAt": "2026-10-01T15:40:25.518Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39423,7 +39423,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:47:48.322Z",
+        "measuredAt": "2026-10-01T15:40:26.949Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39490,7 +39490,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:49.755Z",
+        "measuredAt": "2026-10-01T15:40:28.402Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39557,7 +39557,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-01T14:47:51.197Z",
+        "measuredAt": "2026-10-01T15:40:29.843Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39624,7 +39624,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:52.655Z",
+        "measuredAt": "2026-10-01T15:40:31.270Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39691,7 +39691,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:47:54.088Z",
+        "measuredAt": "2026-10-01T15:40:32.700Z",
         "observation": "NOT_OBSERVED",
         "validOverride": false,
         "skipReason": "Required pointer=coarse; existing context reports fine. Skipped before navigation."
@@ -39714,7 +39714,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:47:54.088Z",
+        "measuredAt": "2026-10-01T15:40:32.700Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39783,7 +39783,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:55.487Z",
+        "measuredAt": "2026-10-01T15:40:34.105Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39852,7 +39852,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:56.909Z",
+        "measuredAt": "2026-10-01T15:40:35.538Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39927,7 +39927,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:58.360Z",
+        "measuredAt": "2026-10-01T15:40:36.963Z",
         "observation": "OBSERVED_NO_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -39998,7 +39998,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:47:59.804Z",
+        "measuredAt": "2026-10-01T15:40:38.403Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40061,7 +40061,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-01T14:48:01.273Z",
+        "measuredAt": "2026-10-01T15:40:39.897Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40134,7 +40134,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-01T14:48:02.865Z",
+        "measuredAt": "2026-10-01T15:40:41.411Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40208,7 +40208,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-01T14:48:04.306Z",
+        "measuredAt": "2026-10-01T15:40:42.831Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40278,7 +40278,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:48:05.720Z",
+        "measuredAt": "2026-10-01T15:40:44.270Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40345,7 +40345,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-01T14:48:07.121Z",
+        "measuredAt": "2026-10-01T15:40:45.712Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40412,7 +40412,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:48:09.872Z",
+        "measuredAt": "2026-10-01T15:40:47.609Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40484,7 +40484,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:48:11.275Z",
+        "measuredAt": "2026-10-01T15:40:49.069Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40556,7 +40556,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:48:12.696Z",
+        "measuredAt": "2026-10-01T15:40:50.487Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -40628,7 +40628,7 @@
         },
         "route": "/playground/input",
         "override": "63px",
-        "measuredAt": "2026-10-01T14:48:14.104Z",
+        "measuredAt": "2026-10-01T15:40:51.891Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {

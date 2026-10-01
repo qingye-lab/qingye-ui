@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-01T14:45:45.412Z",
-  "revision": "fb8a38958b1740ec9288cdd7b6f76d8ac4952481",
+  "generatedAt": "2026-10-01T15:34:15.054Z",
+  "revision": "a6d699535e95e3962a0c5b495e192d202e94fb1f",
   "fingerprint": {
     "sha256": "c1aaca6115ae95a4b9114510203098ada7da876118e91b8e4302923dc8267af3",
     "inputs": [
@@ -27302,6 +27302,7 @@
     "scripts/audit-measure.mjs",
     "scripts/audit.mjs",
     "scripts/browser-runtime.mjs",
+    "scripts/date-range-demo-proof.mjs",
     "scripts/gen-capabilities.mjs",
     "scripts/lib/facts-ledger.test.mjs",
     "scripts/lib/token-ledger-probes.mjs",

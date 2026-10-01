@@ -7,12 +7,13 @@
 
 ## 使用
 
-当前组件包版本为 `0.2.0`。仓库目前为私有，使用有仓库访问权限且已登录的 GitHub CLI 下载指定版本，再安装本地包：
+仓库目前为私有，使用有仓库访问权限且已登录的 GitHub CLI，一次复制以下命令下载并安装最新 Release：
 
 ```sh
-gh release download v0.2.0 --repo qingye-lab/qingye-ui --pattern qingye-ui-0.2.0.tgz
-pnpm add ./qingye-ui-0.2.0.tgz
+gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 ```
+
+保留并提交 `qingye-ui.tgz`、`package.json` 和 lock 文件。日常 `pnpm install` 按 lock 复现；主动升级时重新运行上述命令。npm/yarn 项目将最后的安装命令换成 `npm install ./qingye-ui.tgz` / `yarn add ./qingye-ui.tgz`。
 
 Tailwind CSS 4 项目：
 
@@ -28,7 +29,8 @@ import "@qingye/ui/ui.css";
 ```
 
 ```tsx
-import { Button, ThemeProvider } from "@qingye/ui";
+import { Button } from "@qingye/ui/components/button";
+import { ThemeProvider } from "@qingye/ui/components/theme-provider";
 
 export function App() {
   return (
@@ -38,6 +40,8 @@ export function App() {
   );
 }
 ```
+
+按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。
 
 完整说明见文档站（`pnpm dev` 后访问 http://localhost:5180）。
 

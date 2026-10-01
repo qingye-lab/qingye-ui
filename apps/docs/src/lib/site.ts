@@ -10,8 +10,8 @@ export const SITE = {
 
 export const repoFile = (path: string) => `${SITE.repo}/blob/${SITE.branch}/${path}`;
 
-export const releaseFile = `qingye-ui-${SITE.version}.tgz`;
-export const releaseDownloadCommand = `gh release download v${SITE.version} --repo qingye-lab/qingye-ui --pattern ${releaseFile}`;
+export const releaseFile = "qingye-ui.tgz";
+export const releaseDownloadCommand = `gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber`;
 
 export const editComponentUrl = (slug: string) => repoFile(`apps/docs/src/content/${slug}/meta.ts`);
 

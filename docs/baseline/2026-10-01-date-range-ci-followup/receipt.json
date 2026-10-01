@@ -1,0 +1,288 @@
+{
+  "status": "PASS_FOCUSED_FOLLOWUP",
+  "sourceFingerprint": "a92ca5f9fa283c5f4b14b4f93776b28b077efbfd18584c60740ab4320184dde4",
+  "correction": "states demo explicit grid-cols-1 on narrow screens; sm:grid-cols-2 retained",
+  "pressure": [
+    {
+      "theme": "light",
+      "width": 300,
+      "inputFont": 16,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 45,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 300,
+      "afterFieldWidth": 300
+    },
+    {
+      "theme": "light",
+      "width": 300,
+      "inputFont": 18,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 45,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 329.84375,
+      "afterFieldWidth": 300
+    },
+    {
+      "theme": "light",
+      "width": 280,
+      "inputFont": 16,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 55,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 298.859375,
+      "afterFieldWidth": 280
+    },
+    {
+      "theme": "light",
+      "width": 280,
+      "inputFont": 18,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 55,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 329.84375,
+      "afterFieldWidth": 280
+    },
+    {
+      "theme": "dark",
+      "width": 300,
+      "inputFont": 16,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 45,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 300,
+      "afterFieldWidth": 300
+    },
+    {
+      "theme": "dark",
+      "width": 300,
+      "inputFont": 18,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 45,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 329.84375,
+      "afterFieldWidth": 300
+    },
+    {
+      "theme": "dark",
+      "width": 280,
+      "inputFont": 16,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 55,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 298.859375,
+      "afterFieldWidth": 280
+    },
+    {
+      "theme": "dark",
+      "width": 280,
+      "inputFont": 18,
+      "interaction": {
+        "opened": true,
+        "popup": {
+          "x": 55,
+          "y": 484.296875,
+          "width": 294,
+          "height": 308
+        },
+        "calendarCount": 1,
+        "accessibleBeforeOpen": "- button \"2025年12月20日 – 2026年1月5日\"",
+        "closedWithEscape": true
+      },
+      "beforeFieldWidth": 329.84375,
+      "afterFieldWidth": 280
+    }
+  ],
+  "auditVariants": [
+    {
+      "name": "light-desktop",
+      "theme": "light",
+      "width": 1100,
+      "height": 900
+    },
+    {
+      "name": "dark-desktop",
+      "theme": "dark",
+      "width": 1100,
+      "height": 900
+    },
+    {
+      "name": "light-mobile",
+      "theme": "light",
+      "width": 390,
+      "height": 844,
+      "mobile": true
+    },
+    {
+      "name": "dark-mobile",
+      "theme": "dark",
+      "width": 390,
+      "height": 844,
+      "mobile": true
+    }
+  ],
+  "installation": [
+    {
+      "manager": "pnpm",
+      "panelId": "base-ui-_r_k_",
+      "ariaSelected": "true",
+      "code": "gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "manager": "npm",
+      "panelId": "base-ui-_r_l_",
+      "ariaSelected": "true",
+      "code": "gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && npm install ./qingye-ui.tgz",
+      "width": 390,
+      "overflow": 0
+    },
+    {
+      "manager": "yarn",
+      "panelId": "base-ui-_r_m_",
+      "ariaSelected": "true",
+      "code": "gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && yarn add ./qingye-ui.tgz",
+      "width": 390,
+      "overflow": 0
+    }
+  ],
+  "ledgerCounts": {
+    "PASS": 62,
+    "FAIL": 0,
+    "UNVERIFIED": 0,
+    "NOT_RUN": 4
+  },
+  "errors": [],
+  "lifecycle": {
+    "nodePid": 28192,
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "version": "154.0.8037.58",
+    "processes": [
+      {
+        "pid": 28195,
+        "parent": 28192,
+        "profile": "/var/folders/jp/tkxkqws50fsdwv0bh7_9gg8w0000gn/T/playwright_chromiumdev_profile-GRYGD4"
+      }
+    ],
+    "descendantPids": [
+      28195,
+      28203,
+      28204,
+      28206,
+      28207,
+      31056,
+      31057,
+      31058
+    ],
+    "closed": true,
+    "disconnectedAt": "2026-10-01T15:40:53.419Z"
+  },
+  "preview": {
+    "pid": 28161,
+    "closed": true
+  },
+  "ownedPIDsAbsent": [
+    28161,
+    28192,
+    28195,
+    28203,
+    28204,
+    28206,
+    28207,
+    31056,
+    31057,
+    31058
+  ],
+  "runnerElapsedMs": 104611,
+  "evidence": [
+    {
+      "path": "test-results/date-range-ci-followup/accepted/proof.json",
+      "sha256": "5901bc0819e4d489231354fc21850f8f6a41c58808d57da68eafc00075a21367"
+    },
+    {
+      "path": "test-results/date-range-ci-followup/accepted.log",
+      "sha256": "37a9c13230ea80aa3aaff3c983171e444713b9dfdf69d014b005413232fd9b18"
+    },
+    {
+      "path": "test-results/date-range-ci-followup/accepted/states-light-280-font18.png",
+      "sha256": "e184019e8fd1c1dfb69eb971ead94c822037eccbfd09d8f91113f76cf59e2708"
+    },
+    {
+      "path": "test-results/date-range-ci-followup/accepted/states-dark-280-font18.png",
+      "sha256": "4d9ffe4b9d6eecee877939421df8e8ae6bd15ec1afa2daa9bb9d9c4f6f850a59"
+    },
+    {
+      "path": "test-results/ui-final/date-range-docs-build.log",
+      "sha256": "a5460b071aa9dffa6441eacc251f964d0530f6f31d411bc4f888015d941ba8d9"
+    }
+  ],
+  "priorAttempt": {
+    "path": "test-results/date-range-ci-followup/proof.json",
+    "status": "NOT_ACCEPTED",
+    "reason": "Installation probe selected outgoing animation panel using visible().first(); corrected to selected tab aria-controls and expected content, without changing component."
+  }
+}

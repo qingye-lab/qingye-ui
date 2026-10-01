@@ -1,9 +1,8 @@
 name: Release
 
 # Push a tag like v0.2.0 to build the package and attach the tarball to a
-# GitHub release. Consumers install it with:
-#   gh release download v0.2.0 --repo qingye-lab/qingye-ui --pattern qingye-ui-0.2.0.tgz
-#   pnpm add ./qingye-ui-0.2.0.tgz
+# GitHub release. Consumers download and install the latest release with:
+#   gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 on:
   push:
     tags: ["v*"]
