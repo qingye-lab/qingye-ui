@@ -17,5 +17,11 @@ export const enUS: UILocale = {
     fileError: (name, reason) => `${name}: ${reason === "type" ? "File type is not supported" : reason === "size" ? "File is too large" : "File count limit exceeded"}`,
     table: "Data table", noResults: "No matching results", searchTable: "Search table", pageSummary: (page, pages, total) => `Page ${page} of ${pages}, ${total} items`,
     steps: "Steps", timeline: "Timeline", carousel: "Carousel", slide: "Slide", previousSlide: "Previous slide", nextSlide: "Next slide",
+    clear: "Clear", cancel: "Cancel", confirm: "Confirm", apply: "Apply", reset: "Reset", back: "Back", search: "Search", expand: "Expand", collapse: "Collapse",
+    theme: "Theme", lightTheme: "Light", darkTheme: "Dark", systemTheme: "System",
+    selectPlaceholder: "Select…", searchPlaceholder: "Search…", commandPlaceholder: "Type a command or search…", addTag: "Add tag", tagInputHint: "Press Enter to add",
+    selectDateRange: "Select date range", startDate: "Start date", endDate: "End date", today: "Today",
+    rowsPerPage: "Rows per page", selectedCount: (count) => `${count} selected`, sortAscending: "Ascending", sortDescending: "Descending", toggleColumns: "Columns", firstPage: "First page", lastPage: "Last page", selectRow: "Select row", selectAllRows: "Select all rows",
+    trendUp: "Up", trendDown: "Down", trendFlat: "Flat", resize: "Resize", copyCode: "Copy code", showMore: "Show more", showLess: "Show less",
   },
 };

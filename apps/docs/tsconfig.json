@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["vite/client", "node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@yanqing/ui": ["../../packages/ui/src/index.ts"],
+      "@yanqing/ui/components/*": ["../../packages/ui/src/components/*"],
+      "@yanqing/ui/locale": ["../../packages/ui/src/locale.tsx"],
+      "@yanqing/ui/locales/*": ["../../packages/ui/src/locales/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

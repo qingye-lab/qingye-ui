@@ -16,6 +16,18 @@ export type UILocaleMessages = {
   fileError: (name: string, reason: "type" | "size" | "count") => string;
   table: string; noResults: string; searchTable: string; pageSummary: (page: number, pages: number, total: number) => string;
   steps: string; timeline: string; carousel: string; slide: string; previousSlide: string; nextSlide: string;
+  // General actions
+  clear: string; cancel: string; confirm: string; apply: string; reset: string; back: string; search: string; expand: string; collapse: string;
+  // Theme
+  theme: string; lightTheme: string; darkTheme: string; systemTheme: string;
+  // Selection and input
+  selectPlaceholder: string; searchPlaceholder: string; commandPlaceholder: string; addTag: string; tagInputHint: string;
+  // Dates
+  selectDateRange: string; startDate: string; endDate: string; today: string;
+  // Tables
+  rowsPerPage: string; selectedCount: (count: number) => string; sortAscending: string; sortDescending: string; toggleColumns: string; firstPage: string; lastPage: string; selectRow: string; selectAllRows: string;
+  // Data display
+  trendUp: string; trendDown: string; trendFlat: string; resize: string; copyCode: string; showMore: string; showLess: string;
 };
 
 export type UILocale = { code: "zh-CN" | "en-US"; messages: UILocaleMessages };
@@ -36,6 +48,12 @@ export const zhCN: UILocale = {
     fileError: (name, reason) => `${name}：${reason === "type" ? "文件类型不支持" : reason === "size" ? "文件过大" : "超出文件数量限制"}`,
     table: "数据表格", noResults: "没有匹配的结果", searchTable: "搜索表格", pageSummary: (page, pages, total) => `第 ${page} / ${pages} 页，共 ${total} 条`,
     steps: "步骤", timeline: "时间线", carousel: "轮播", slide: "幻灯片", previousSlide: "上一张", nextSlide: "下一张",
+    clear: "清除", cancel: "取消", confirm: "确认", apply: "应用", reset: "重置", back: "返回", search: "搜索", expand: "展开", collapse: "收起",
+    theme: "主题", lightTheme: "浅色", darkTheme: "深色", systemTheme: "跟随系统",
+    selectPlaceholder: "请选择", searchPlaceholder: "搜索…", commandPlaceholder: "输入命令或搜索…", addTag: "添加标签", tagInputHint: "按回车添加",
+    selectDateRange: "选择日期范围", startDate: "开始日期", endDate: "结束日期", today: "今天",
+    rowsPerPage: "每页行数", selectedCount: (count) => `已选 ${count} 项`, sortAscending: "升序", sortDescending: "降序", toggleColumns: "显示列", firstPage: "第一页", lastPage: "最后一页", selectRow: "选择此行", selectAllRows: "选择全部行",
+    trendUp: "上升", trendDown: "下降", trendFlat: "持平", resize: "调整大小", copyCode: "复制代码", showMore: "展开更多", showLess: "收起",
   },
 };
 

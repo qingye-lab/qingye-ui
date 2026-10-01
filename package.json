@@ -7,6 +7,10 @@
     "typecheck": "pnpm --recursive --if-present typecheck",
     "test": "pnpm --recursive --if-present test",
     "dev": "pnpm --filter docs dev",
-    "docs:build": "pnpm --filter @yanqing/ui build && pnpm --filter docs build"
+    "docs:build": "pnpm --filter @yanqing/ui build && pnpm --filter docs build",
+    "shot": "node scripts/shot.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "1.63.0"
   }
 }
