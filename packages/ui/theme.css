@@ -140,17 +140,27 @@
   --radius-xl: var(--qy-radius-xl);
   --radius-2xl: var(--qy-radius-2xl);
 
+  --text-display-lg: var(--qy-text-display-lg-size);
+  --text-display-lg--line-height: var(--qy-text-display-lg-leading);
+  --text-display-lg--font-weight: var(--qy-weight-semibold);
+  --text-display-lg--letter-spacing: var(--qy-text-display-tracking);
   --text-display: var(--qy-text-display-size);
+  --text-display--letter-spacing: var(--qy-text-display-tracking);
   --text-display--line-height: var(--qy-text-display-leading);
   --text-title: var(--qy-text-title-size);
+  --text-title--letter-spacing: var(--qy-text-title-tracking);
   --text-title--line-height: var(--qy-text-title-leading);
   --text-heading: var(--qy-text-heading-size);
+  --text-heading--letter-spacing: var(--qy-text-heading-tracking);
   --text-heading--line-height: var(--qy-text-heading-leading);
   --text-body: var(--qy-text-body-size);
+  --text-body--letter-spacing: var(--qy-text-body-tracking);
   --text-body--line-height: var(--qy-text-body-leading);
   --text-label: var(--qy-text-label-size);
+  --text-label--letter-spacing: var(--qy-text-label-tracking);
   --text-label--line-height: var(--qy-text-label-leading);
   --text-caption: var(--qy-text-caption-size);
+  --text-caption--letter-spacing: var(--qy-text-caption-tracking);
   --text-caption--line-height: var(--qy-text-caption-leading);
 
   --shadow-panel: var(--qy-shadow-panel);

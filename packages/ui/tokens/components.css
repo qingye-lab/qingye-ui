@@ -14,11 +14,13 @@
     --qy-weight-medium: 500;
     --qy-weight-semibold: 600;
 
-    --qy-text-display-size: 1.75rem;
-    --qy-text-display-leading: 1.25;
+    --qy-text-display-lg-size: 2.5rem;
+    --qy-text-display-lg-leading: 1.1;
+    --qy-text-display-size: 2rem;
+    --qy-text-display-leading: 1.15;
     --qy-text-title-size: 1.125rem;
-    --qy-text-title-leading: 1.4;
-    --qy-text-heading-size: 0.9375rem;
+    --qy-text-title-leading: 1.35;
+    --qy-text-heading-size: 0.8125rem;
     --qy-text-heading-leading: 1.5;
     --qy-text-body-size: 0.875rem;
     --qy-text-body-leading: 1.5;
@@ -26,7 +28,21 @@
     --qy-text-label-leading: 1.5;
     --qy-text-caption-size: 0.75rem;
     --qy-text-caption-leading: 1.5;
-    --qy-tracking-heading: -0.015em;
+
+    /*
+     * Tracking belongs to the scale, not to one global constant: 32px display
+     * type needs far more negative tracking than 12px caption text. These step
+     * from about -0.03em at display to 0 at caption, which is most of the
+     * difference between type that reads as designed and type left at default.
+     */
+    --qy-text-display-tracking: -0.032em;
+    --qy-text-title-tracking: -0.022em;
+    --qy-text-heading-tracking: -0.01em;
+    --qy-text-body-tracking: -0.006em;
+    --qy-text-label-tracking: -0.006em;
+    --qy-text-caption-tracking: 0em;
+
+    --qy-tracking-heading: var(--qy-text-title-tracking);
     --qy-tracking-caps: 0.06em;
 
     /* Spacing scale, 4px base. */
@@ -42,14 +58,18 @@
     --qy-space-12: 3rem;
     --qy-space-16: 4rem;
 
-    /* Radii. Control radii derive from the base so a brand can round everything. */
-    --qy-radius: 0.625rem;
-    --qy-radius-xs: calc(var(--qy-radius) - 0.375rem);
-    --qy-radius-sm: calc(var(--qy-radius) - 0.25rem);
-    --qy-radius-md: calc(var(--qy-radius) - 0.125rem);
+    /*
+     * Radii. Controls sit at 8px, small controls at 4–6px, and cards at 12px.
+     * Steps subtract half a pixel so a nested corner stays concentric inside the
+     * parent's inner edge.
+     */
+    --qy-radius: 0.5rem;
+    --qy-radius-xs: 0.25rem;
+    --qy-radius-sm: 0.375rem;
+    --qy-radius-md: calc(var(--qy-radius) - 0.5px);
     --qy-radius-lg: var(--qy-radius);
-    --qy-radius-xl: calc(var(--qy-radius) + 0.25rem);
-    --qy-radius-2xl: calc(var(--qy-radius) + 0.375rem);
+    --qy-radius-xl: 0.625rem;
+    --qy-radius-2xl: 0.75rem;
     --qy-radius-full: 9999px;
 
     /* Control heights. `md` is the default for form controls. */

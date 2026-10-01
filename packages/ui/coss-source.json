@@ -8,13 +8,14 @@
       "registry": "https://coss.com/ui/r/button.json",
       "upstreamPath": "apps/ui/registry/default/ui/button.tsx",
       "upstreamSha256": "1e65556bde3071f90f61825cf573aec74bdd8695824470bea3dae4d68a6b8fc8",
-      "adaptedSha256": "5f186b887df914754ec795d04fe9eb37633e7e846a909cd1b724d4a1aa130547",
+      "adaptedSha256": "e8c710e978a01cfd20caec37a3d4292737ac040cd05ce7316cca8f2fd2705f44",
       "adaptations": [
         "Local imports; existing Lucide Spinner dependency",
         "Expose loading as aria-busy",
         "Remove dark variants for the existing light-only theme; preserve light treatment",
         "Hide the existing decorative Spinner from the loading button accessible name",
-        "Mark button variants as qy-pressable so composed triggers retain press feedback when their data-slot changes"
+        "Mark button variants as qy-pressable so composed triggers retain press feedback when their data-slot changes",
+        "Drop the outer drop shadow on filled variants; depth comes from the fill and inner highlight only"
       ]
     },
     {
