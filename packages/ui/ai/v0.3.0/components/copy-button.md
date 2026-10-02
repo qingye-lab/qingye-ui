@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: 5cc8d591b31dc91729cc1ce34ab443b1974840effe1dcba2c5d88354a722a6aa
+Source SHA-256: f6871f339a81f4b6bd7cc2721b9673932290c481e54923aaa6e61a21c6cef6e7
 
 把一段文本复制到剪贴板，并在按钮上就地确认。用于 API 密钥、邀请链接、订单号、命令等。
 
 ## Use and ownership
-- 把一段文本复制到剪贴板，并在按钮上就地确认。用于 API 密钥、邀请链接、订单号、命令等。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 将当前对象的明确文本复制到剪贴板，并在动作处反馈结果。
+- Avoid: 请求发出就打对勾；旧请求的失败覆盖新结果；失败后隐藏原文本；把空串当作无请求。
+- Library: 剪贴板请求归属、等待状态、反馈计时、卸载后回调抑制。
+- Application: 被复制的对象和值、敏感数据策略、人工复制入口。
+
+## Composition
+- 复制值按原样写入，包括空串；等待复用 Button loading。成功与错误由 Clipboard Promise 结果决定；失败仍可重试和手动选择原文。
+
+## Responsive behavior
+- 图标按钮保留对象名称；成功不改变标签宽度，失败文字允许获得必要空间。
+
+## Customization
+- copyLabel/copiedLabel/errorLabel 说明对象与结果，timeout 决定反馈持续时间。
 
 ## Current exports
 - CopyButton: function; owner copy-button; PASS; props: CopyButtonProps
@@ -39,7 +48,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - children: ReactNode. 自定义按钮文字。
 
 ### useCopyToClipboard
-底层 Hook：{ copyToClipboard, isCopied }，参数 { timeout, onCopy, onError }。
+底层 Hook：{ copyToClipboard, isCopied, isCopying }，参数 { timeout, onCopy, onError }。最近一次调用拥有结果反馈；卸载后不再回调。
 
 ## Keyboard
 - Enter / Space: 复制。

@@ -2,7 +2,7 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "树 Tree",
-  description: "展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。完整遵循 WAI-ARIA 树形视图的键盘模型。",
+  description: "展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。以方向键在可见节点间移动，支持键入查找。",
   category: "数据展示",
   source: "local",
   exports: ["Tree", "type TreeNode"],
@@ -49,4 +49,34 @@ export default {
     "label 为自定义节点时提供 textValue，让键入查找可用。",
     "节点很多时考虑默认只展开第一层，避免一次渲染过深的层级。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "对象确有层级，用户需要展开、选中和在可见节点间定位。"
+    ],
+    "avoid": [
+      "把所有菜单改成树；父节点名字包含整棵子树；禁用或删除当前节点后焦点留在无效位置。"
+    ],
+    "composition": [
+      "每个 treeitem 只关联自己的 label 与 suffix；展开和选择分别受控，节点不可用时回到可见上下文而不擅自选择。"
+    ],
+    "stateOwner": {
+      "library": [
+        "树语义、键盘/键入查找、单一 Tab 点和焦点恢复。"
+      ],
+      "application": [
+        "稳定 ID、节点数据、惰性加载/失败/重试、展开策略与选中含义。"
+      ]
+    },
+    "responsive": [
+      "缩进占用容量时允许宿主增宽或缩短可见名称，完整可访问名称保留；suffix 不挤掉识别。"
+    ],
+    "customization": [
+      "textValue 支持复杂标签查找；guides 只是层级辅助，不改变可见关系。"
+    ]
+  },
 } satisfies ComponentMeta;

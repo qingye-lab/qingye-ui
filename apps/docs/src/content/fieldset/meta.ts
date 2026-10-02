@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Fieldset", "FieldsetLegend", "FieldSet", "FieldLegend"],
   keywords: ["fieldset", "legend", "字段组", "分组"],
+  design: {
+    "methods": [
+      "相成相制",
+      "布白有用",
+      "名实相符"
+    ],
+    "whenToUse": [
+      "给相关字段或选项提供共同问题与作用范围。"
+    ],
+    "avoid": [
+      "只有布局关系时不要额外制造语义分组；每个字段仍需自身名称。"
+    ],
+    "composition": [
+      "Legend 定义共同问题，Field 或 Radio/CheckboxGroup 承载组内独立控件。"
+    ],
+    "stateOwner": {
+      "library": [
+        "原生 fieldset、legend 关联与禁用传播。"
+      ],
+      "application": [
+        "分组问题、成员数据和操作范围。"
+      ]
+    },
+    "responsive": [
+      "组容器允许收缩，长 legend 可换行；组内字段按任务保留空间。"
+    ],
+    "customization": [
+      "variant=label 适合紧凑选项组，不以缩小命中区换密度。"
+    ]
+  },
   api: [
     {
       name: "Fieldset",

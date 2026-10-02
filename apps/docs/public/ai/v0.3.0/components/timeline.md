@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
-Source SHA-256: 09df54366ab23fc1801b63c831860e7596bf5abd1e6c720022684ddf67698333
+Source SHA-256: 37b83c995b955e384c5b4ecbc514e7c9eab8a698afa0c6087c64994151f7ca50
 
 按时间顺序列出事件：物流轨迹、部署记录、审批与评论动态。
 
 ## Use and ownership
-- 按时间顺序列出事件：物流轨迹、部署记录、审批与评论动态。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 按顺序追踪对象事件、发生时间及后续可查证内容。
+- Avoid: 装饰标记颜色是唯一状态；将预计事件写成已发生；状态变化抹掉早期事件；合法零值被省略。
+- Library: 事件解剖、时间元素、轨道和零值保留。
+- Application: 事件顺序、实际时间、状态、权限与详情导航。
+
+## Composition
+- 有序列表组织事件，time/dateTime 分别显示与机器表达；title 说事实，content 承接详情和附件。
+
+## Responsive behavior
+- 标题与时间可分行，长说明可阅读；紧凑密度保留事件之间可理解的距离。
+
+## Customization
+- density/connector 修改关系，marker 是装饰，不能隐藏事件事实或交互。
 
 ## Current exports
 - Timeline: function; owner timeline; PASS; props: TimelineProps

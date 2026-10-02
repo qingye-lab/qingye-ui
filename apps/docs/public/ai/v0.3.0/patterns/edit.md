@@ -11,6 +11,7 @@ Synthetic local application fixture. The application owns objects, drafts, selec
 
 ## apps/docs/src/patterns/edit.tsx
 ```tsx
+import { Label } from "@qingye/ui/components/label";
 import { Button, buttonVariants } from "@qingye/ui/components/button";
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
@@ -78,15 +79,18 @@ export default function EditPattern({ compact = false }: { compact?: boolean }) 
       {mode === "publish" && <p className="qy-task-kicker">发布会使资料进入可阅读状态；本示例只在当前浏览器模拟此结果。</p>}
     </form><aside className="qy-task-aside"><div><h3>从一件小事开始</h3><p>可以记录位置、变化和自己的判断。不需要照着固定提纲填写。</p></div><div><p className="qy-task-kicker">可忽略的写作示例</p><p>河岸的草木开始转黄，一条新踩出的路径穿过旧石阶。</p><Button onClick={() => { dispatch({ type: "change", key: "body", value: "河岸的草木开始转黄，一条新踩出的路径穿过旧石阶。" }); }} disabled={state.status === "unknown" || undoUnresolved} size="sm" variant="outline">采用这段示例</Button></div>{recovery && recovery.objectId === state.objectId && <div><h3>保留的上一份草稿</h3><p>{recovery.draft.title || "尚未命名"}</p><Button disabled={["saving", "unknown"].includes(state.status) || undoUnresolved} onClick={() => dispatch({ type: "restore", draft: recovery.draft })} variant="outline">恢复草稿</Button></div>}</aside></div>
     <Dialog onOpenChange={setConfirmDiscard} open={confirmDiscard}><DialogPopup><DialogHeader><DialogTitle>放弃这次修改？</DialogTitle><DialogDescription>当前输入会回到已保存版本。本示例会在当前浏览器会话保留一份可恢复草稿。</DialogDescription></DialogHeader><DialogFooter><Button onClick={() => setConfirmDiscard(false)} variant="outline">继续编辑</Button><Button onClick={discard}>放弃并保留草稿</Button></DialogFooter></DialogPopup></Dialog>
-    <FixtureSettings><div className="qy-task-fields"><label htmlFor="edit-object">当前编辑对象</label><NativeSelect disabled={state.undoStatus === "pending"} id="edit-object" onChange={(event) => dispatch({ type: "switch", objectId: event.target.value })} value={state.objectId}><NativeSelectOption value="field-note-01">资料 A</NativeSelectOption><NativeSelectOption value="field-note-02">资料 B</NativeSelectOption></NativeSelect><label htmlFor="undo-outcome">撤销响应</label><NativeSelect id="undo-outcome" onChange={(event) => setUndoOutcome(event.target.value as "success" | "failure")} value={undoOutcome}><NativeSelectOption value="success">撤销成功</NativeSelectOption><NativeSelectOption value="failure">撤销失败</NativeSelectOption></NativeSelect><Button disabled={!state.undo || undoUnresolved} onClick={() => dispatch({ type: "undo-expire" })} size="sm" variant="outline">重放撤销过期</Button></div><OutcomeChoice onChange={setOutcome} value={outcome} /><div className="qy-task-actions"><Button disabled={["saving", "unknown"].includes(state.status) || undoUnresolved} onClick={() => setMode(mode === "save" ? "publish" : "save")} size="sm" variant="outline">切换为{mode === "save" ? "发布" : "保存草稿"}</Button></div><p>草稿保留在此浏览器会话；关闭会话可能清除。已忽略的过期响应：{state.ignoredResponses}。保存核实由本地夹具返回原操作成功；撤销核实使用所选撤销响应。真实系统需由后端提供原请求的核实协议。</p></FixtureSettings>
+    <FixtureSettings><div className="qy-task-fields"><Label htmlFor="edit-object">当前编辑对象</Label><NativeSelect disabled={state.undoStatus === "pending"} id="edit-object" onChange={(event) => dispatch({ type: "switch", objectId: event.target.value })} value={state.objectId}><NativeSelectOption value="field-note-01">资料 A</NativeSelectOption><NativeSelectOption value="field-note-02">资料 B</NativeSelectOption></NativeSelect><Label htmlFor="undo-outcome">撤销响应</Label><NativeSelect id="undo-outcome" onChange={(event) => setUndoOutcome(event.target.value as "success" | "failure")} value={undoOutcome}><NativeSelectOption value="success">撤销成功</NativeSelectOption><NativeSelectOption value="failure">撤销失败</NativeSelectOption></NativeSelect><Button disabled={!state.undo || undoUnresolved} onClick={() => dispatch({ type: "undo-expire" })} size="sm" variant="outline">重放撤销过期</Button></div><OutcomeChoice onChange={setOutcome} value={outcome} /><div className="qy-task-actions"><Button disabled={["saving", "unknown"].includes(state.status) || undoUnresolved} onClick={() => setMode(mode === "save" ? "publish" : "save")} size="sm" variant="outline">切换为{mode === "save" ? "发布" : "保存草稿"}</Button></div><p>草稿保留在此浏览器会话；关闭会话可能清除。已忽略的过期响应：{state.ignoredResponses}。保存核实由本地夹具返回原操作成功；撤销核实使用所选撤销响应。真实系统需由后端提供原请求的核实协议。</p></FixtureSettings>
   </section>;
 }
 ```
 
 ## apps/docs/src/patterns/shared.tsx
 ```tsx
+import { Label } from "@qingye/ui/components/label";
 import { Alert, AlertDescription, AlertTitle } from "@qingye/ui/components/alert";
 import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye/ui/components/collapsible";
 import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import type { Outcome } from "./state";
@@ -98,11 +102,11 @@ export function useTaskTimers() {
   return (callback: () => void, delay = 700) => { const timer = setTimeout(() => { timers.current.delete(timer); callback(); }, delay); timers.current.add(timer); };
 }
 export function FixtureSettings({ children }: { children: ReactNode }) {
-  return <details className="qy-fixture-settings"><summary className="focus-ring">演示与状态</summary><p>使用合成资料和本地事件，可在这里重放异常；刷新或离开后的保留边界由各示例说明。</p><div className="qy-task-fields">{children}</div></details>;
+  return <Collapsible className="qy-fixture-settings"><CollapsibleTrigger render={<Button size="sm" variant="ghost" />}>演示与状态</CollapsibleTrigger><CollapsiblePanel keepMounted><p>使用合成资料和本地事件，可在这里重放异常；刷新或离开后的保留边界由各示例说明。</p><div className="qy-task-fields">{children}</div></CollapsiblePanel></Collapsible>;
 }
 export function OutcomeChoice({ value, onChange }: { value: Outcome; onChange: (value: Outcome) => void }) {
   const id = useId();
-  return <div className="qy-task-fields"><label htmlFor={id}>下次模拟响应</label><NativeSelect id={id} onChange={(event) => onChange(event.target.value as Outcome)} value={value}><NativeSelectOption value="success">成功</NativeSelectOption><NativeSelectOption value="failure">明确失败</NativeSelectOption><NativeSelectOption value="unknown">超时，结果未知</NativeSelectOption></NativeSelect></div>;
+  return <div className="qy-task-fields"><Label htmlFor={id}>下次模拟响应</Label><NativeSelect id={id} onChange={(event) => onChange(event.target.value as Outcome)} value={value}><NativeSelectOption value="success">成功</NativeSelectOption><NativeSelectOption value="failure">明确失败</NativeSelectOption><NativeSelectOption value="unknown">超时，结果未知</NativeSelectOption></NativeSelect></div>;
 }
 export function Notice({ title, children, tone = "info" }: { title: string; children?: ReactNode; tone?: "info" | "success" | "warning" | "error" }) {
   return <Alert role={tone === "error" ? "alert" : "status"} variant={tone}><AlertTitle>{title}</AlertTitle>{children && <AlertDescription>{children}</AlertDescription>}</Alert>;
@@ -263,8 +267,8 @@ export function queueTransition<T extends QueueItem>(item: T, stage: QueueStage)
 [data-pattern="review"] .qy-task-table { width:max-content; min-width:100%; }
 .qy-task-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--qy-space-4); padding-block:var(--qy-space-4); border-block-end:1px solid var(--qy-border); }
 .qy-fixture-settings { margin-block-start:var(--qy-space-5); padding:var(--qy-space-4); border-block-start:1px solid var(--qy-border); color:var(--qy-foreground-muted); font-size:var(--qy-text-caption-size); }
-.qy-fixture-settings summary { cursor:pointer; width:fit-content; }
-.qy-fixture-settings > p { margin-block:var(--qy-space-3); }
+.qy-fixture-settings [data-slot="collapsible-trigger"] { width:fit-content; }
+.qy-fixture-settings [data-slot="collapsible-panel"] > p { margin-block:var(--qy-space-3); }
 .qy-reading { max-width:36em; margin-inline:auto; font-size:var(--qy-text-body-size); line-height:2; }
 .qy-reading h2 { font-size:var(--qy-text-title-size); margin-block:var(--qy-section-gap) var(--qy-space-4); }
 .qy-reading p { margin-block:var(--qy-space-5); line-height:2; }

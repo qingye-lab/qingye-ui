@@ -103,12 +103,29 @@ test("arrow keys move between slides", async () => {
   const { scrollTo, track } = layout(4);
   fireEvent.scroll(track);
   await frame();
+  expect(track).toHaveAttribute("tabindex", "0");
 
   fireEvent.keyDown(track, { key: "ArrowRight" });
   expect(scrollTo).toHaveBeenLastCalledWith(expect.objectContaining({ left: WIDTH }));
   await frame();
   fireEvent.keyDown(track, { key: "ArrowLeft" });
   expect(scrollTo).toHaveBeenLastCalledWith(expect.objectContaining({ left: 0 }));
+});
+
+test("leaves arrow keys to a control inside a slide", async () => {
+  render(
+    <Carousel aria-label="方案">
+      <CarouselContent>
+        <CarouselItem><button role="tab" type="button">布局</button></CarouselItem>
+        <CarouselItem>二</CarouselItem>
+      </CarouselContent>
+    </Carousel>,
+  );
+  const { scrollTo, track } = layout(2);
+  fireEvent.scroll(track);
+  await frame();
+  fireEvent.keyDown(screen.getByRole("tab"), { key: "ArrowRight" });
+  expect(scrollTo).not.toHaveBeenCalled();
 });
 
 test("hides dots when every slide fits and sizes slides from slidesPerView", () => {

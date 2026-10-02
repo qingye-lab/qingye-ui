@@ -133,3 +133,32 @@ test("a button trigger associates its visible description", () => {
   render(<FileUpload variant="button" description="PDF，不超过 10 MB" />);
   expect(screen.getByRole("button", { name: "选择文件" })).toHaveAccessibleDescription("PDF，不超过 10 MB");
 });
+
+test("native submission keeps accepted files after rejected, duplicated or empty picker changes", () => {
+  const saved = file("invoice.pdf", "application/pdf");
+  vi.stubGlobal("DataTransfer", class {
+    private entries: File[] = [];
+    items = { add: (entry: File) => { this.entries.push(entry); } };
+    get files() { return this.entries; }
+  });
+  try {
+    const { container } = render(<FileUpload accept=".pdf" defaultFiles={[saved]} name="attachments" />);
+    const input = fileInput(container);
+    let nativeFiles: File[] = [];
+    // jsdom cannot construct a native FileList. Keep its file-list boundary
+    // observable while exercising the real picker and mirroring effects.
+    Object.defineProperty(input, "files", {
+      configurable: true,
+      get: () => nativeFiles,
+      set: (next: ArrayLike<File>) => { nativeFiles = Array.from(next); },
+    });
+    for (const incoming of [[file("notes.txt", "text/plain")], [saved], []]) {
+      nativeFiles = incoming;
+      fireEvent.change(input);
+      expect(nativeFiles).toEqual([saved]);
+      expect(screen.getByRole("list")).toHaveTextContent("invoice.pdf");
+    }
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});

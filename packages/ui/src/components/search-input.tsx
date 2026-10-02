@@ -92,6 +92,7 @@ export function SearchInput({
         onKeyDown={(event) => {
           onKeyDown?.(event);
           if (event.defaultPrevented || event.key !== "Escape" || !canClear) return;
+          if (event.nativeEvent.isComposing || event.keyCode === 229) return;
           // Clear first; a second Escape reaches enclosing dialogs and popovers.
           event.preventDefault();
           event.stopPropagation();

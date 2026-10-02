@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: bba1c06c2dec7c9b572f965fa2cb476bf3ac7f2e6e63334b4c0d21d44b2720dc
+Source SHA-256: defdd88bcc80894633f388061135acdbf02a0132880d954a57df7e1c4ca4a4ca
 
 一组共享状态的 Toggle：单选用于视图或对齐方式，多选用于文字格式等可叠加的选项。
 
 ## Use and ownership
-- 一组共享状态的 Toggle：单选用于视图或对齐方式，多选用于文字格式等可叠加的选项。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 选择单个视图或叠加多个格式，选项围绕同一设置对象。
+- Avoid: 按钮组的按下状态不能代替标签面板关系；单选是否允许清空由真实任务决定。
+- Library: 维护单选或多选值、pressed 状态、方向键焦点与布局方向；焦点移动与执行选择分开。
+- Application: 决定选项含义、必须保留的选择与实际格式或视图结果。
+
+## Composition
+- 多个 ToggleGroupItem 共用 value 和 variant；outline 可用 Separator 表达连续边界。
+
+## Responsive behavior
+- orientation=vertical 在 default 与 outline 都纵向排列；触屏下检查相邻命中区而非仅整组尺寸。
+
+## Customization
+- 组级 size 与 variant 建立一致关系；不通过子项颜色覆盖假装一个业务结果。
 
 ## Current exports
 - ToggleGroup: function; owner toggle-group; PASS; props: ToggleGroupPrimitive.Props &
@@ -169,19 +178,29 @@ export const meta = { title: "纵向", description: "orientation=\"vertical\" �
 
 export default function Demo() {
   return (
-    <ToggleGroup defaultValue={["top"]} orientation="vertical" variant="outline">
-      <ToggleGroupItem aria-label="顶部对齐" value="top">
-        <AlignStartHorizontalIcon />
-      </ToggleGroupItem>
-      <ToggleGroupSeparator orientation="horizontal" />
-      <ToggleGroupItem aria-label="垂直居中" value="middle">
-        <AlignCenterHorizontalIcon />
-      </ToggleGroupItem>
-      <ToggleGroupSeparator orientation="horizontal" />
-      <ToggleGroupItem aria-label="底部对齐" value="bottom">
-        <AlignEndHorizontalIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
+    <div className="flex items-start gap-(--qy-space-6)">
+      {(["default", "outline"] as const).map((variant) => (
+        <ToggleGroup
+          aria-label={variant === "default" ? "内容对齐" : "画板对齐"}
+          defaultValue={["top"]}
+          key={variant}
+          orientation="vertical"
+          variant={variant}
+        >
+          <ToggleGroupItem aria-label="顶部对齐" value="top">
+            <AlignStartHorizontalIcon />
+          </ToggleGroupItem>
+          {variant === "outline" && <ToggleGroupSeparator orientation="horizontal" />}
+          <ToggleGroupItem aria-label="垂直居中" value="middle">
+            <AlignCenterHorizontalIcon />
+          </ToggleGroupItem>
+          {variant === "outline" && <ToggleGroupSeparator orientation="horizontal" />}
+          <ToggleGroupItem aria-label="底部对齐" value="bottom">
+            <AlignEndHorizontalIcon />
+          </ToggleGroupItem>
+        </ToggleGroup>
+      ))}
+    </div>
   );
 }
 ```

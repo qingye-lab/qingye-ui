@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: 6039cba5cae7cf2b38d2c1cbfe8d70bf12eaa1c227f750cc6d88a5165a8435bd
+Source SHA-256: c4a2dd0b62ca05134fa037f0dd38c8f55f434a113ab0d2e48a8c0d2468783c8c
 
 切换一项立即生效的设置，例如启用通知。需要提交后才生效的选择用 Checkbox。
 
 ## Use and ownership
-- 切换一项立即生效的设置，例如启用通知。需要提交后才生效的选择用 Checkbox。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 控制具有开启和关闭含义的即时设置。
+- Avoid: 不要随开关变化改写设置名；远程写入失败需要恢复或明确说明状态。
+- Library: 二元状态、切换按键、可见焦点和 RTL 滑块方向。
+- Application: 远程结果、待保存状态、失败恢复和权限。
+
+## Composition
+- 水平 Field 将设置名与开关配对；必要说明跟随名称，避免再加开关动作按钮。
+
+## Responsive behavior
+- 保持紧凑外观与独立触屏命中区；长名称在相邻内容列内换行。
+
+## Customization
+- checked 由状态 owner 决定；项目主题只改视觉，不替代请求状态。
 
 ## Current exports
 - Switch: function; owner switch; PASS; props: SwitchPrimitive.Root.Props

@@ -34,4 +34,33 @@ export default {
     "选择“跟随系统”后，操作系统切换深浅色时页面立即跟随，无需刷新。",
     "只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "全应用共同选择浅色、深色或跟随系统，并在首屏一致应用。"
+    ],
+    "avoid": [
+      "把品牌写进 data-theme；多个 Provider 竞争同一 html；Script 与 Provider 的持久化键不同。"
+    ],
+    "composition": [
+      "根部一个 Provider 与同选项 themeScript 配对；useTheme 分别展示用户选择与实际 resolvedTheme。"
+    ],
+    "stateOwner": {
+      "library": [
+        "明暗应用、存储容错、系统偏好和跨标签页同步。"
+      ],
+      "application": [
+        "品牌 data-brand、密度 data-density、主题选择入口与集中主题。"
+      ]
+    },
+    "responsive": [
+      "主题切换保持对象、输入和焦点；真实控件、浮层与表面都检查明暗组合。"
+    ],
+    "customization": [
+      "attribute 只选 class 或明暗 data-theme，storageKey 决定偏好范围，品牌单独配置。"
+    ]
+  },
 } satisfies ComponentMeta;

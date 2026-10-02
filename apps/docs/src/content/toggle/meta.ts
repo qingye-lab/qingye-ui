@@ -3,6 +3,35 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "切换按钮 Toggle",
   description: "可按下保持的双态按钮，用于开关一项格式或视图设置，例如加粗、收藏、显示网格。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "开关可保持的一项模式或格式，例如显示网格与加粗。"
+    ],
+    "avoid": [
+      "不要把即时执行的命令或表单字段值伪装成 pressed；名称不随按下状态改成反义词。"
+    ],
+    "composition": [
+      "相关的多个模式交给 ToggleGroup；图标项保留稳定 aria-label，Tooltip 只补充名称展示。"
+    ],
+    "stateOwner": {
+      "library": [
+        "维护 pressed 与 aria-pressed、键盘激活和禁用；视觉随同一状态变化。"
+      ],
+      "application": [
+        "决定模式的实际效果、与内容选择的关联及保存策略。"
+      ]
+    },
+    "responsive": [
+      "三种尺寸分别保留移动占位差与触屏命中区；不能只减小按钮来增加工具数量。"
+    ],
+    "customization": [
+      "用 variant 和 size 控制表面与密度；按下强调必须与未选中、悬停和焦点可区分。"
+    ]
+  },
   category: "通用",
   source: "coss",
   exports: ["Toggle", "toggleVariants"],

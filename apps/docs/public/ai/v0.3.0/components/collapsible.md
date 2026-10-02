@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
-Source SHA-256: ab73227ca67e5291f6568a5401bdd1e4833927942cae4e4b34827fb60fb164e5
+Source SHA-256: f5fabcbd0117143423298e9c91d4c032b0fce0ddabe1025b94cb95f1bad12dff
 
 无样式的折叠原语：一个触发器控制一块内容的展开与收起，高度平滑过渡。触发器外观完全自定，适合“显示更多”、树节点等。需要现成样式时用 Disclosure。
 
 ## Use and ownership
-- 无样式的折叠原语：一个触发器控制一块内容的展开与收起，高度平滑过渡。触发器外观完全自定，适合“显示更多”、树节点等。需要现成样式时用 Disclosure。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 为自定义树节点或更多内容提供单块展开行为，外观由组合决定。
+- Avoid: 关闭只表示界面收起，不表示撤销或取消保存；不得依赖高度动画完成业务动作。
+- Library: 维护 open、aria-expanded、面板关联与可中断高度过渡。
+- Application: 决定触发器名称、树节点关系、内容来源与 keepMounted 后的工作保留政策。
+
+## Composition
+- Trigger 用 render 接 Button；现成单节样式用 Disclosure，多节共享展开关系用 Accordion。
+
+## Responsive behavior
+- 在布局改变时保留同一对象及所需状态；自定义触发器仍需焦点和足够触屏目标。
+
+## Customization
+- 只组合现有 render、open 与 keepMounted；展开时长和退出时长从公共动效角色读取。
 
 ## Current exports
 - Collapsible: function; owner collapsible; PASS; props: CollapsiblePrimitive.Root.Props

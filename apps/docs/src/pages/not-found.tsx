@@ -1,4 +1,4 @@
-import { Button } from "@qingye/ui/components/button";
+import { Button, buttonVariants } from "@qingye/ui/components/button";
 import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDocumentTitle } from "@/components/prose";
@@ -17,10 +17,10 @@ export function NotFoundContent({ detail }: { detail?: string }) {
         {detail ?? "链接可能已经调整，或者地址里有拼写错误。"}可以回到文档首页，或者直接搜索想找的组件。
       </p>
       <div className="flex flex-wrap gap-2 pt-1">
-        <Button nativeButton={false} render={<Link to="/docs" />}>
+        <Link className={buttonVariants()} to="/docs">
           <ArrowLeftIcon aria-hidden="true" />
           回到文档
-        </Button>
+        </Link>
         <Button onClick={openSearch} variant="outline">
           <SearchIcon aria-hidden="true" />
           搜索

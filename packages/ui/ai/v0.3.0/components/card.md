@@ -8,10 +8,19 @@ Source SHA-256: daa6147f4df7eed4c784fb5be90b6d4e1a79d789483ea258aaf8d26029c11879
 把一组相关的内容和操作收进一个带边框的表面，例如设置项、统计指标或表单。CardFrame 在外层再包一圈浅底外框，用来收纳多张卡片或卡片样式的表格。
 
 ## Use and ownership
-- 把一组相关的内容和操作收进一个带边框的表面，例如设置项、统计指标或表单。CardFrame 在外层再包一圈浅底外框，用来收纳多张卡片或卡片样式的表格。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 一个对象或任务需要独立边界，并且标题、内容与动作属于同一范围。
+- Avoid: 每段正文套卡片；整卡链接里嵌套按钮；把 CardTitle 的视觉大小当作标题语义。
+- Library: 表面、部位关系、尺寸角色与 render。
+- Application: 对象范围、标题级别、动作权限、草稿与异步结果。
+
+## Composition
+- 按需组合 Header/Panel/Footer；CardTitle render 为真实标题。整卡导航与卡内独立动作分别设计。
+
+## Responsive behavior
+- 长标题和动作共同占位时允许动作换行；卡片内部表格保留二维比较。
+
+## Customization
+- size 控制内容密度；表面来自集中主题，CardFrame 只用于需要共同外框的一组对象。
 
 ## Current exports
 - Card: function; owner card; PASS; props: CardProps

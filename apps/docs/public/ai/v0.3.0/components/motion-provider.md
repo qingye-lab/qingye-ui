@@ -8,10 +8,19 @@ Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
 记录用户最近一次使用的输入方式，写到 <html data-ui-input>：键盘操作时组件的过渡立即完成，鼠标与触屏时保留细微的动效。在应用根部挂载一次。
 
 ## Use and ownership
-- 记录用户最近一次使用的输入方式，写到 <html data-ui-input>：键盘操作时组件的过渡立即完成，鼠标与触屏时保留细微的动效。在应用根部挂载一次。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 统一让键盘操作即时完成，并让指针操作保留必要过渡。
+- Avoid: 在多个子树各挂一个 document owner；动画结束触发保存；减少动态效果后状态不可辨。
+- Library: 最近输入方式、监听清理与原文档属性恢复。
+- Application: 业务状态时机、根部装配和程序变化是否需要动画。
+
+## Composition
+- 根部一次挂载，document 属性覆盖 Portal；组件通过 data-slot/data-motion 使用公共 motion.css。
+
+## Responsive behavior
+- 布局变化与动画可被打断；键盘与系统减少动态效果分别检验。
+
+## Customization
+- 项目组合可使用 data-instant，但不再重复监听输入方式。
 
 ## Current exports
 - MotionProvider: function; owner motion-provider; PASS; props: { children: ReactNode }
@@ -85,14 +94,15 @@ export default function Demo() {
 }
 ```
 
-### 让自定义元素遵循策略
+### 组合控件遵循策略
 Source: apps/docs/src/content/motion-provider/demos/02-custom.tsx
 ```tsx
 import { MotionProvider } from "@qingye/ui/components/motion-provider";
+import { Button } from "@qingye/ui/components/button";
 
 export const meta = {
-  title: "让自定义元素遵循策略",
-  description: "加上 qy-pressable 获得按压反馈；加上 data-slot 后，键盘操作时它的过渡也会立即完成。",
+  title: "组合控件遵循策略",
+  description: "Button 已带 qy-pressable 与 data-slot。自定义内容复用控件后，按压与键盘策略继续由共享实现处理。",
 };
 
 const colors = [
@@ -106,15 +116,13 @@ export default function Demo() {
     <MotionProvider>
       <div aria-label="标签颜色" className="flex gap-3" role="group">
         {colors.map((color) => (
-          <button
-            className="qy-pressable flex items-center gap-2 rounded-lg border bg-card px-3 py-2 text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
-            data-slot="color-chip"
+          <Button
             key={color.name}
-            type="button"
+            variant="outline"
           >
             <span aria-hidden="true" className={`size-3 rounded-full ${color.value}`} />
             {color.name}
-          </button>
+          </Button>
         ))}
       </div>
     </MotionProvider>

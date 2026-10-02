@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: a6ac174d2cf4e53776243dd5d194b31848eb16fed60851392dc8cd89e6ea6d89
+Source SHA-256: e1f3f00992ff214f7d9ff13745f74972c32559e48fbb8ceae1f1ee92b53109ef
 
 单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。
 
 ## Use and ownership
-- 单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 填写单行名称、编号或联系方式，type 与真实输入内容匹配。
+- Avoid: 示例只放 placeholder；提交失败不应卸载或重置已有文字。
+- Library: 原生输入、字段关联、焦点与尺寸角色。
+- Application: 草稿、输入业务规则、保存结果及何时清除。
+
+## Composition
+- FieldLabel、Input 与必要的 FieldError 形成同一个字段；前后缀交给 InputGroup。
+
+## Responsive behavior
+- 窄容器中输入可以收缩；移动字号保留 16px，粗指针命中区保留 44px。
+
+## Customization
+- size 消费 --qy-control-*；className 调整外框，原生属性落到输入。
 
 ## Current exports
 - Input: function; owner input; PASS; props: InputProps

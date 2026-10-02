@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import { expect, test } from "vitest";
+import { expect, test, vi } from "vitest";
 import { DateTimePicker, formatLocalDateTime, parseLocalDateTime } from "../src/components/date-time-picker";
 
 test("parses only real local date-times", () => {
@@ -59,4 +59,25 @@ test("read-only never opens", async () => {
   expect(trigger).toHaveAttribute("aria-readonly", "true");
   await user.click(trigger);
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+});
+
+test("now and time editing cannot create a value on a disabled day", async () => {
+  const user = userEvent.setup();
+  const onValueChange = vi.fn();
+  const disabledDates = (date: Date) => date.toDateString() === new Date().toDateString();
+  render(<DateTimePicker aria-label="预约" defaultOpen disabledDates={disabledDates} onValueChange={onValueChange} />);
+  const now = screen.getByRole("button", { name: "此刻" });
+  expect(now).toBeDisabled();
+  await user.click(now);
+  fireEvent.change(screen.getByLabelText("时间"), { target: { value: "08:15" } });
+  expect(onValueChange).not.toHaveBeenCalled();
+});
+
+test("an existing date may still change time when today is disabled", () => {
+  const onValueChange = vi.fn();
+  render(<DateTimePicker defaultOpen defaultValue="2026-09-01T14:30"
+    disabledDates={(date) => date.getFullYear() !== 2026 || date.getMonth() !== 8 || date.getDate() !== 1}
+    onValueChange={onValueChange} />);
+  fireEvent.change(screen.getByLabelText("时间"), { target: { value: "08:15" } });
+  expect(onValueChange).toHaveBeenLastCalledWith("2026-09-01T08:15");
 });

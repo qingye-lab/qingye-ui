@@ -38,7 +38,7 @@ const projects = [
 export default function Demo() {
   return (
     <SidebarProvider className="relative h-80 min-h-0 md:h-[34rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]">
-      <Sidebar className="absolute h-full" collapsible="icon">
+      <Sidebar className="md:absolute md:h-full" collapsible="icon">
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>

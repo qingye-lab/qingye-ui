@@ -8,10 +8,19 @@ Source SHA-256: e6985c24fd6958dd83a961d5648a858508a4c6a39412d355a76205cab3faa544
 在已知范围内显示一个静态数值，如存储占用、配额使用率、CPU 负载。表示任务完成进度时用 Progress。
 
 ## Use and ownership
-- 在已知范围内显示一个静态数值，如存储占用、配额使用率、CPU 负载。表示任务完成进度时用 Progress。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在已知上下界内读出容量、用量或负载的测量值。
+- Avoid: 用 Meter 表示正在完成的任务；只靠条长和颜色说明接近上限；阈值解释与实际数值不一致。
+- Library: meter 原语、数值范围、标签和值的关系。
+- Application: 测量源、单位、阈值、采样时间与缺测。
+
+## Composition
+- Label 命名测量对象，Value 与单位共同说明事实；阈值信息配文字，自定义值同步 getAriaValueText。
+
+## Responsive behavior
+- 数值与标签可换行；条本身适应容器，保留必要文字。
+
+## Customization
+- min/max/format 定义量纲；主题只调整图形表达，状态规则由应用决定。
 
 ## Current exports
 - Meter: function; owner meter; PASS; props: MeterPrimitive.Root.Props

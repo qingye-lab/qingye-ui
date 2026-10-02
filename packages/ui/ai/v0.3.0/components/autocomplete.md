@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: aeed657669c52e41d6ee8538ec2ba0ee96a5c455a3014802b6476e9ee2d41f27
+Source SHA-256: b8f7efb9229a24813dec0a113732bcaea03fb9bddd6163761c44b8957a0c75b2
 
 带建议列表的文本输入：用户可以选建议，也可以输入任意内容。值必须来自选项时用 Combobox。
 
 ## Use and ownership
-- 带建议列表的文本输入：用户可以选建议，也可以输入任意内容。值必须来自选项时用 Combobox。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 为可自由提交的文本提供建议，用户无需选中列表项。
+- Avoid: 没有匹配建议不代表输入无效；不要把建议匹配当成必选规则。
+- Library: 建议导航、自由文本、清除及候选布局。
+- Application: 搜索请求、最终查询和异步结果归属。
+
+## Composition
+- Input 保留自由文本，Popup 提供可选建议；Empty 说明当前无匹配，Status 承接查询状态。
+
+## Responsive behavior
+- 候选长文字可换行，浮层受可用宽高限制，输入和清除按钮仍可达。
+
+## Customization
+- startAddon、showTrigger、showClear 使用共享部位；filter=null 用于远程建议。
 
 ## Current exports
 - Autocomplete: const; owner autocomplete; PASS
@@ -108,6 +117,7 @@ const questions = [
   "如何为子账号分配只读权限",
   "如何更换绑定的手机号",
   "发票申请与下载",
+  "跨区域容灾演练结束后如何核对主备切换、告警订阅和数据一致性",
 ];
 
 export default function Demo() {

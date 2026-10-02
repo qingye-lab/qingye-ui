@@ -150,20 +150,21 @@ function Toasts({
               toast={toast}
             >
               <Toast.Content
-                className="pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm transition-opacity duration-250 data-behind:not-data-expanded:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100"
+                className={cn("pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm transition-opacity duration-(--qy-duration-base) data-behind:not-data-expanded:pointer-events-none data-behind:opacity-0 data-expanded:opacity-100", toast.actionProps && "max-sm:flex-col max-sm:items-stretch")}
                 data-slot="toast-content"
               >
-                <div className="flex min-w-0 gap-(--qy-space-2)">
+                <div className="flex min-w-0 flex-1 gap-(--qy-space-2)">
                   {Icon && (
                     <div
-                      className="[&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+                      aria-hidden="true"
+                      className="shrink-0 [&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
                       data-slot="toast-icon"
                     >
                       <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" />
                     </div>
                   )}
 
-                  <div className="flex flex-col gap-[calc(var(--qy-space-1)*0.5)]">
+                  <div className="flex min-w-0 flex-col gap-[calc(var(--qy-space-1)*0.5)] [overflow-wrap:anywhere]">
                     <Toast.Title
                       className="font-medium"
                       data-slot="toast-title"
@@ -174,7 +175,7 @@ function Toasts({
                     />
                   </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-(--qy-space-1)">
+                <div className="flex shrink-0 items-center justify-end gap-(--qy-space-1)">
                   {toast.actionProps && (
                     <Toast.Action
                       className={buttonVariants({ size: "xs" })}
@@ -191,7 +192,7 @@ function Toasts({
                     )}
                     data-slot="toast-close"
                   >
-                    <XIcon />
+                    <XIcon aria-hidden="true" />
                   </Toast.Close>
                 </div>
               </Toast.Content>
@@ -255,18 +256,19 @@ function AnchoredToasts({
                     <Toast.Title data-slot="toast-title" />
                   </Toast.Content>
                 ) : (
-                  <Toast.Content className="pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm">
-                    <div className="flex gap-(--qy-space-2)">
+                  <Toast.Content className={cn("pointer-events-auto flex items-center justify-between gap-[calc(var(--qy-space-1)*1.5)] overflow-hidden px-[calc(var(--qy-space-1)*3.5)] py-(--qy-space-3) text-sm", toast.actionProps && "max-sm:flex-col max-sm:items-stretch")}>
+                    <div className="flex min-w-0 flex-1 gap-(--qy-space-2)">
                       {Icon && (
                         <div
-                          className="[&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
+                          aria-hidden="true"
+                          className="shrink-0 [&>svg]:h-lh [&>svg]:w-4 [&_svg]:pointer-events-none [&_svg]:shrink-0"
                           data-slot="toast-icon"
                         >
                           <Icon className="in-data-[type=loading]:animate-spin in-data-[type=error]:text-destructive in-data-[type=info]:text-info in-data-[type=success]:text-success in-data-[type=warning]:text-warning in-data-[type=loading]:opacity-80" />
                         </div>
                       )}
 
-                      <div className="flex flex-col gap-[calc(var(--qy-space-1)*0.5)]">
+                      <div className="flex min-w-0 flex-col gap-[calc(var(--qy-space-1)*0.5)] [overflow-wrap:anywhere]">
                         <Toast.Title
                           className="font-medium"
                           data-slot="toast-title"

@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: e20c594742686db24c1c8223806202d187f2994d323a52f527d275a290bd5068
+Source SHA-256: 722e292bd3ba22f341a3aeb3914253964200b6874ca28b32cd7f113f8ad0b330
 
 基于 Recharts 的图表外壳：用 config 统一管理系列名称与颜色，并把坐标轴、网格、提示框、图例调成与组件库一致的克制样式。
 
 ## Use and ownership
-- 基于 Recharts 的图表外壳：用 config 统一管理系列名称与颜色，并把坐标轴、网格、提示框、图例调成与组件库一致的克制样式。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 数据之间的趋势、分布或比较比单个数值更重要。
+- Avoid: 颜色随排名重排；缺测当零；重要值只在悬停 Tooltip 中；图表容器没有可访问名称或摘要。
+- Library: 系列样式变量、图例次序、提示框格式、Recharts 容器与焦点外观。
+- Application: 数据、单位、时间区间、缺测含义、系列过滤和无障碍摘要。
+
+## Composition
+- config 固定实体的名称和颜色；Tooltip/Legend 是增强，关键数值同时提供可阅读摘要或 Table。
+
+## Responsive behavior
+- 压缩空间时减少刻度与系列、拆成小图；保留可比较尺度，长系列名可换行。
+
+## Customization
+- config 与项目图表组合是修改入口；主题色修改后检查真实标记、轴和背景对比。
 
 ## Current exports
 - ChartConfig: type; owner chart; PASS

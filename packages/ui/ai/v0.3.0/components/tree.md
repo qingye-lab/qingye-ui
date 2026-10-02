@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: db80f048d0e8af9a393fc88c3ca8e2d5d250dcca6819a9ee46d85cd38fbce4c8
+Source SHA-256: d5a361f163023cf9f6f77772ec1e02302b20680b8b7353e7a9b401f8fe7e9af4
 
-展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。完整遵循 WAI-ARIA 树形视图的键盘模型。
+展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。以方向键在可见节点间移动，支持键入查找。
 
 ## Use and ownership
-- 展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。完整遵循 WAI-ARIA 树形视图的键盘模型。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 对象确有层级，用户需要展开、选中和在可见节点间定位。
+- Avoid: 把所有菜单改成树；父节点名字包含整棵子树；禁用或删除当前节点后焦点留在无效位置。
+- Library: 树语义、键盘/键入查找、单一 Tab 点和焦点恢复。
+- Application: 稳定 ID、节点数据、惰性加载/失败/重试、展开策略与选中含义。
+
+## Composition
+- 每个 treeitem 只关联自己的 label 与 suffix；展开和选择分别受控，节点不可用时回到可见上下文而不擅自选择。
+
+## Responsive behavior
+- 缩进占用容量时允许宿主增宽或缩短可见名称，完整可访问名称保留；suffix 不挤掉识别。
+
+## Customization
+- textValue 支持复杂标签查找；guides 只是层级辅助，不改变可见关系。
 
 ## Current exports
 - Tree: function; owner tree; PASS; props: TreeProps
@@ -216,6 +225,32 @@ export default function Demo() {
   const [failed, setFailed] = useState(false);
   const nodes: TreeNode[] = [{ id: "notes", label: "田野笔记", hasChildren: true, suffix: expanded.includes("notes") && !loaded ? failed ? "载入未完成" : "等待载入" : undefined, ...(loaded ? { children: [{ id: "river", label: "河岸观察" }, { id: "walk", label: "城南步行" }] } : {}) }];
   return <div className="flex w-full max-w-md flex-col gap-(--qy-space-4)"><Tree expanded={expanded} label="惰性资料目录" nodes={nodes} onExpandedChange={setExpanded} />{expanded.includes("notes") && !loaded && <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><Button onClick={() => { setLoaded(true); setFailed(false); }} size="sm" variant="outline">{failed ? "重试载入子项" : "载入子项"}</Button><Button onClick={() => setFailed(true)} size="sm" variant="ghost">模拟载入失败</Button><p role="status">{failed ? "未完成，父节点与展开状态保留。" : "演示使用本地事件，不会请求后端。"}</p></div>}</div>;
+}
+```
+
+### 访问状态变化
+Source: apps/docs/src/content/tree/demos/05-availability.tsx
+```tsx
+import { Button } from "@qingye/ui/components/button";
+import { Tree } from "@qingye/ui/components/tree";
+import { useState } from "react";
+
+export const meta = { title: "访问状态变化" };
+
+export default function Demo() {
+  const [paused, setPaused] = useState(false);
+  return (
+    <div className="flex w-full max-w-sm flex-col gap-3">
+      <Tree label="工作文件" nodes={[
+        { id: "draft", label: "设计草稿" },
+        { id: "report", label: "季度报告", disabled: paused },
+        { id: "archive", label: "归档记录" },
+      ]} />
+      <Button aria-pressed={paused} onClick={() => setPaused(!paused)} size="sm" variant="outline">
+        {paused ? "恢复报告访问" : "暂停报告访问"}
+      </Button>
+    </div>
+  );
 }
 ```
 

@@ -36,4 +36,33 @@ export default {
     "今天以日期下方的小圆点标出，不占用选中态的颜色。",
     "触屏设备上每个日期格放大到 44px。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "需要持续可见的自然日选择，或作为日期字段弹层内的选择工作面。"
+    ],
+    "avoid": [
+      "将月份导航边界误当作可选日期约束；用今天的标记冒充选中；只靠颜色区分禁用日。"
+    ],
+    "composition": [
+      "用 selected/onSelect 表达当前选择，用 disabled/min/max 表达限制；单字段提交复用 DatePicker。"
+    ],
+    "stateOwner": {
+      "library": [
+        "月历原语、日期焦点、语言、选中和禁用部位。"
+      ],
+      "application": [
+        "日期限制、已选值、时区解释和业务提交。"
+      ]
+    },
+    "responsive": [
+      "多个月份在窄屏纵向排列；触屏格遵守命中目标，不能为了排下两月压缩日期格。"
+    ],
+    "customization": [
+      "classNames/components 可修改部位，但保留日历按钮名称、键盘行为和真实状态。"
+    ]
+  },
 } satisfies ComponentMeta;

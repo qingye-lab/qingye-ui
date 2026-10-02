@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "按钮 Button",
   description: "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "执行命名明确的动作或提交表单；任务重点可以是保存、停止或保护当前工作。"
+    ],
+    "avoid": [
+      "不按固定四级套动作；loading 只表示正在等待，不能当成保存成功。"
+    ],
+    "composition": [
+      "提交用 type=submit；真实地址用 a / Link + buttonVariants；危险动作按后果决定是否接 AlertDialog。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供原生按钮、键盘焦点、loading 的忙碌与禁用状态，保持动作名称和内容宽度。"
+      ],
+      "application": [
+        "决定对象、操作范围、请求结果、重试和取消后台任务；加载结束与业务成功分别处理。"
+      ]
+    },
+    "responsive": [
+      "小尺寸通过粗指针命中区扩大可点范围；长动作名称优先简化对象表达，保留明确的动词。"
+    ],
+    "customization": [
+      "variant 决定视觉显著程度，size 决定控件占位；公共控制尺寸和触摸目标分别调整。"
+    ]
+  },
   category: "通用",
   source: "coss",
   exports: ["Button", "buttonVariants"],

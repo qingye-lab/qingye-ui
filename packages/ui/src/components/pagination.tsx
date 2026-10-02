@@ -9,7 +9,7 @@ import {
   ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react";
-import type * as React from "react";
+import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { type Button, buttonVariants } from "./button";
@@ -52,7 +52,8 @@ export type PaginationLinkProps = {
   isActive?: boolean;
   /**
    * Marks the link unavailable, e.g. "previous" on the first page. The link
-   * loses its `href` and leaves the tab order but keeps its place.
+   * becomes a native anchor without href and leaves the tab order, including
+   * when `render` supplies a router link. Its content and place remain intact.
    */
   disabled?: boolean;
   size?: React.ComponentProps<typeof Button>["size"];
@@ -68,16 +69,14 @@ export function PaginationLink({
 }: PaginationLinkProps): React.ReactElement {
   const defaultProps = {
     "aria-current": isActive ? ("page" as const) : undefined,
-    className: render
-      ? className
-      : cn(
-          buttonVariants({
-            size,
-            variant: isActive ? "outline" : "ghost",
-          }),
-          "numeric aria-disabled:pointer-events-none aria-disabled:opacity-64",
-          className,
-        ),
+    className: cn(
+      buttonVariants({
+        size,
+        variant: isActive ? "outline" : "ghost",
+      }),
+      "numeric aria-disabled:pointer-events-none aria-disabled:opacity-64",
+      className,
+    ),
     "data-active": isActive,
     "data-slot": "pagination-link",
   };
@@ -88,15 +87,45 @@ export function PaginationLink({
         "data-disabled": "",
         href: undefined,
         onClick: undefined,
+        onClickCapture: (event: React.MouseEvent<HTMLAnchorElement>) => {
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        onAuxClickCapture: (event: React.MouseEvent<HTMLAnchorElement>) => {
+          event.preventDefault();
+          event.stopPropagation();
+        },
         role: "link",
         tabIndex: -1,
       }
     : undefined;
+  // An opaque router component can recreate href from `to`, even when href
+  // is cleared. A disabled page uses a native inert destination instead of
+  // instantiating that component. Retain its content, name and presentation.
+  const resolvedRender: typeof render = disabled && render
+    ? (forwardedProps, state) => {
+        const candidate = typeof render === "function" ? render(forwardedProps, state) : render;
+        const renderedProps = React.isValidElement<Record<string, unknown>>(candidate) ? candidate.props : {};
+        const attributes = Object.fromEntries(Object.entries(renderedProps).filter(([key]) =>
+          key.startsWith("aria-") || key.startsWith("data-") || ["id", "title", "lang", "dir"].includes(key),
+        ));
+        return (
+          <a
+            {...attributes}
+            {...forwardedProps}
+            className={cn(forwardedProps.className, typeof renderedProps.className === "string" && renderedProps.className, className)}
+            style={{ ...(renderedProps.style as React.CSSProperties), ...forwardedProps.style }}
+          >
+            {forwardedProps.children === undefined ? renderedProps.children as React.ReactNode : forwardedProps.children}
+          </a>
+        );
+      }
+    : render;
 
   return useRender({
     defaultTagName: "a",
     props: mergeProps<"a">(defaultProps, { ...props, ...disabledProps }),
-    render,
+    render: resolvedRender,
   });
 }
 
@@ -145,12 +174,11 @@ export function PaginationEllipsis({
   const { messages } = useUILocale();
   return (
     <span
-      aria-hidden
       className={cn("flex min-w-7 justify-center", className)}
       data-slot="pagination-ellipsis"
       {...props}
     >
-      <MoreHorizontalIcon className="size-5 sm:size-4" />
+      <MoreHorizontalIcon aria-hidden="true" className="size-5 sm:size-4" />
       <span className="sr-only">{messages.morePages}</span>
     </span>
   );

@@ -46,3 +46,10 @@ export async function loadDemos(slug: string): Promise<LoadedDemo[]> {
 export function demoCount(slug: string): number {
   return Object.keys(demoLoaders).filter((path) => slugOf(path) === slug).length;
 }
+
+/** The first live example, without importing source text or the other demos. */
+export async function loadPreview(slug: string): Promise<DemoModule> {
+  const path = Object.keys(demoLoaders).filter((path) => slugOf(path) === slug).sort()[0];
+  if (!path) throw new Error(`No preview for ${slug}`);
+  return demoLoaders[path]!();
+}

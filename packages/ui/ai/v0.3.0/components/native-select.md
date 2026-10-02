@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: ba0a6f6b90ed83190dd75de25a013cc305d37e69865c2f23b7e70dd7086af59b
+Source SHA-256: abfb15c45ba5ed505b2bc199de62264f6049cff3530b3cacc76b149369a36d6e
 
 外观与 Select 触发器一致的原生 <select>。手机上直接唤起系统选择器，适合移动优先的表单和很长的选项列表；需要图标、搜索或自定义选项时用 Select。
 
 ## Use and ownership
-- 外观与 Select 触发器一致的原生 <select>。手机上直接唤起系统选择器，适合移动优先的表单和很长的选项列表；需要图标、搜索或自定义选项时用 Select。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 移动表单或长选项列表中使用系统选择器选择一个值。
+- Avoid: 占位选项不是有效值；required 时不能把默认第一项当成用户已选择。
+- Library: 原生选择、空值、字段关联与尺寸角色。
+- Application: 选项数据、当前值、业务必填规则和保存。
+
+## Composition
+- NativeSelectOption 与 OptGroup 保留原生选项关系，Field 承接名称和错误。
+
+## Responsive behavior
+- 使用平台选择面板；框内长值截断但保留完整原生选项文本。
+
+## Customization
+- size 跟随 --qy-control-*；selectClassName 调整输入部位而非外框。
 
 ## Current exports
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps

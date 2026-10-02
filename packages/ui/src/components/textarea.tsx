@@ -42,7 +42,7 @@ export function Textarea({
         render={(defaultProps: React.ComponentProps<"textarea">) => (
           <textarea
             className={cn(
-              "field-sizing-content min-h-17.5 w-full rounded-[inherit] px-[calc(calc(var(--qy-space-1)*3.5)-1px)] py-[calc(calc(var(--qy-space-1)*1.5)-1px)] text-foreground outline-none placeholder:text-muted-foreground/72 max-sm:min-h-20.5",
+              "field-sizing-content min-h-17.5 w-full rounded-[inherit] px-[calc(calc(var(--qy-space-1)*3.5)-1px)] py-[calc(calc(var(--qy-space-1)*1.5)-1px)] text-foreground outline-none placeholder:text-muted-foreground max-sm:min-h-20.5",
               size === "sm" &&
                 "min-h-16.5 px-[calc(calc(var(--qy-space-1)*2.5)-1px)] py-[calc(var(--qy-space-1)-1px)] max-sm:min-h-19.5",
               size === "lg" &&

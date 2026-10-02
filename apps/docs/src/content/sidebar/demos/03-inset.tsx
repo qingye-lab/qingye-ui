@@ -19,7 +19,7 @@ export default function Demo() {
       className="relative h-72 min-h-0 md:h-[26rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]"
       style={{ "--sidebar-width": "14rem" } as CSSProperties}
     >
-      <Sidebar className="absolute h-full" variant="inset">
+      <Sidebar className="md:absolute md:h-full" variant="inset">
         <SidebarHeader>
           <SidebarInput aria-label="搜索文档" placeholder="搜索文档…" />
         </SidebarHeader>

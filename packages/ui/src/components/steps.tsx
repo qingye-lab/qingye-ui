@@ -36,7 +36,7 @@ export type StepsProps = Omit<ComponentProps<"ol">, "children"> & {
 const indicatorClassNames: Record<StepStatus, string> = {
   complete: "border-primary bg-primary text-primary-foreground",
   current: "border-primary bg-background text-foreground shadow-[0_0_0_3px_--alpha(var(--color-primary)/10%)]",
-  error: "border-destructive bg-destructive text-white",
+  error: "border-destructive bg-destructive-fill text-destructive-on-fill",
   upcoming:
     "border-input bg-background text-muted-foreground in-[button:enabled:hover]:bg-[color-mix(in_srgb,var(--color-background),var(--color-foreground)_4%)]",
 };
@@ -143,7 +143,7 @@ export function Steps({
               data-slot="steps-content"
             >
               <span
-                className={cn("font-medium text-sm leading-5 transition-colors", titleClassNames[status])}
+                className={cn("max-w-full wrap-anywhere font-medium text-sm leading-5 transition-colors", titleClassNames[status])}
                 data-slot="steps-title"
               >
                 {item.title}
@@ -151,7 +151,7 @@ export function Steps({
               </span>
               {item.description ? (
                 <span
-                  className={cn("text-muted-foreground text-pretty", size === "sm" ? "text-xs leading-4" : "text-sm leading-5")}
+                  className={cn("max-w-full wrap-anywhere text-muted-foreground text-pretty", size === "sm" ? "text-xs leading-4" : "text-sm leading-5")}
                   data-slot="steps-description"
                 >
                   {item.description}
@@ -195,7 +195,7 @@ export function Steps({
                 aria-current={ariaCurrent}
                 className={cn(
                   bodyClassName,
-                  "cursor-pointer rounded-lg outline-none focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
+                  "pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:min-w-(--qy-touch-target) cursor-pointer rounded-lg outline-none focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed",
                 )}
                 data-slot="steps-trigger"
                 disabled={item.disabled}

@@ -8,6 +8,36 @@ export default {
   source: "local",
   exports: ["TagInput"],
   keywords: ["tag input", "tags", "chips", "标签", "关键词", "多值输入", "token"],
+  design: {
+    "methods": [
+      "名实相符",
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "输入并核对可自由定义的标签或收件人，逐项修改。"
+    ],
+    "avoid": [
+      "重复值不应再加入；被规则拒绝的文字保留用于修正，而非悄悄丢弃。"
+    ],
+    "composition": [
+      "标签、待确认文本与校验消息围绕同一集合；隐藏 inputs 提交已确认项。"
+    ],
+    "stateOwner": {
+      "library": [
+        "确认、去重、IME、键盘移除、焦点与继承禁用。"
+      ],
+      "application": [
+        "标签业务规则、集合上限、草稿和持久化。"
+      ]
+    },
+    "responsive": [
+      "标签可在框内换行，长项有截断但完整值继续保留；键盘焦点定位到当前项。"
+    ],
+    "customization": [
+      "validate 返回真实可修正原因；removeLabel 为自定义对象命名，size 调整密度。"
+    ]
+  },
   api: [
     {
       name: "TagInput",

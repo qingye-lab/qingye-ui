@@ -4,6 +4,35 @@ export default {
   title: "分段控件 Segmented Control",
   description:
     "一组并排的互斥选项的外观。它只是一套样式，套在语义合适的原语上：表单取值用 RadioGroup，切换视图或筛选用 ToggleGroup，跳转地址用导航链接，切换面板用 Tabs。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "为并列短选项提供共享外观，同时保留其原本的值、模式或地址语义。"
+    ],
+    "avoid": [
+      "外观相同不代表交互相同；不能给导航链接套上 tab 或 radio 的虚假状态。"
+    ],
+    "composition": [
+      "表单值用 RadioGroup，保持模式用 ToggleGroup，地址用 a / Link，面板关系用 Tabs。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供轨道、选项尺寸和 checked / pressed / aria-current 的状态样式，不创建状态机。"
+      ],
+      "application": [
+        "选择语义原语、定义选项与对象关系并决定选中值的真实效果。"
+      ]
+    },
+    "responsive": [
+      "选项超出容量时调整组合而不挤压文字与命中区；按所用原语验证方向键和触屏。"
+    ],
+    "customization": [
+      "state 必须匹配原语实际输出属性；集中修改轨道和选中表面角色，不复制到消费页面。"
+    ]
+  },
   category: "通用",
   source: "coss",
   exports: ["segmentedControlRootClassName", "segmentedControlItemVariants"],

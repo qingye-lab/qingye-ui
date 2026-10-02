@@ -115,6 +115,7 @@ export function SheetPopup({
             <SheetPrimitive.Close
               aria-label={messages.close}
               className="absolute end-2 top-2"
+              data-slot="sheet-close"
               render={<Button size="icon" variant="ghost" />}
               {...closeProps}
             >
@@ -134,7 +135,7 @@ export function SheetHeader({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex flex-col gap-(--qy-space-2) p-(--qy-space-6) in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pb-(--qy-space-3) max-sm:pb-(--qy-space-4)",
+      "flex flex-col gap-(--qy-space-2) p-(--qy-space-6) in-[[data-slot=sheet-popup]:has([data-slot=sheet-panel])]:pb-(--qy-space-3) in-[[data-slot=sheet-popup]:has(>[data-slot=sheet-close])]:pe-(--qy-space-12) max-sm:pb-(--qy-space-4)",
       className,
     ),
     "data-slot": "sheet-header",

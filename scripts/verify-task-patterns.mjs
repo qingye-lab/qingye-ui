@@ -206,7 +206,19 @@ try {
         await region.waitFor();
         return region;
       };
-      const settings = async (region) => { await region.locator('summary').click(); };
+      const settings = async (region) => {
+        const trigger = region.getByRole('button', { name: '演示与状态', exact: true });
+        const wasOpen = await trigger.getAttribute('aria-expanded') === 'true';
+        const panelId = await trigger.evaluate((element) => element.closest('[data-slot="collapsible"]').querySelector(':scope > [data-slot="collapsible-panel"]').id);
+        assert.ok(panelId, 'Fixture settings must expose its mounted panel');
+        await trigger.click();
+        // The library keeps the panel mounted through its exit phase. Take
+        // content snapshots only after that phase has established hidden state.
+        await page.waitForFunction(({ panelId, hidden }) => {
+          const panel = document.getElementById(panelId);
+          return panel && panel.hidden === hidden && !panel.hasAttribute('data-starting-style');
+        }, { panelId, hidden: wasOpen });
+      };
       const expectText = async (region, text) => { await region.getByText(text, { exact: true }).first().waitFor(); };
       const readEdit = async () => page.evaluate(() => JSON.parse(sessionStorage.getItem('qingye-task:edit')));
       const waitEditState = async (key, value, timeout = 10000) => page.waitForFunction(({ key, value }) => {

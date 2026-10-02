@@ -1,19 +1,95 @@
 import { buttonVariants } from "@qingye/ui/components/button";
+import { Card, CardFrame, CardFrameHeader, CardFrameTitle } from "@qingye/ui/components/card";
+import { Inline } from "@qingye/ui/components/layout";
+import { Skeleton } from "@qingye/ui/components/skeleton";
+import { Heading, TextLink } from "@qingye/ui/components/typography";
+import { Component, lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { CopyCodeButton } from "@/components/copy-code-button";
+import { ComponentThumbnail, hasComponentThumbnail } from "@/components/component-thumbnails";
 import { useDocumentTitle } from "@/components/prose";
-import { SITE, releaseDownloadCommand, releaseFile } from "@/lib/site";
-import EditPattern from "@/patterns/edit";
-import ReadPattern from "@/patterns/read";
-import "@/patterns/patterns.css";
+import { splitTitle } from "@/lib/nav";
+import { components, loadPreview, type ComponentEntry } from "@/lib/registry";
+import { SITE } from "@/lib/site";
+import "./home.css";
+
+const previews = new Map<string, ReturnType<typeof lazy>>();
+function previewFor(slug: string) {
+  let preview = previews.get(slug);
+  if (!preview) {
+    preview = lazy(() => loadPreview(slug));
+    previews.set(slug, preview);
+  }
+  return preview;
+}
+
+class PreviewBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() { return this.state.failed ? <span className="text-sm text-muted-foreground">打开示例</span> : this.props.children; }
+}
+
+function Preview({ slug }: { slug: string }) {
+  const host = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const target = host.current;
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) { setVisible(true); observer.disconnect(); }
+    }, { rootMargin: "200px" });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+  const curated = hasComponentThumbnail(slug);
+  const Demo = visible && !curated ? previewFor(slug) : null;
+  return <div className="home-preview" ref={host} inert aria-hidden="true">
+    {visible ? <PreviewBoundary><Suspense fallback={<Skeleton className="h-10 w-32" />}>
+      <div className={`home-preview-content${curated ? "" : " home-preview-demo"}`}>
+        {curated ? <ComponentThumbnail slug={slug} /> : Demo ? <Demo /> : null}
+      </div>
+    </Suspense></PreviewBoundary> : null}
+  </div>;
+}
+
+function ComponentCard({ entry }: { entry: ComponentEntry }) {
+  const { zh, en } = splitTitle(entry.title);
+  return <CardFrame className="home-component" data-component={entry.slug}>
+    <CardFrameHeader className="home-component-heading">
+      <CardFrameTitle render={<h2 />}>
+        <Link className="home-component-link focus-ring" to={`/docs/components/${entry.slug}`}>
+          {en || zh}{en && <span className="home-component-zh">{zh}</span>}
+        </Link>
+      </CardFrameTitle>
+    </CardFrameHeader>
+    <Card className="home-component-surface"><Preview slug={entry.slug} /></Card>
+  </CardFrame>;
+}
 
 export default function HomePage() {
   useDocumentTitle();
-  const install = `${releaseDownloadCommand} && pnpm add ./${releaseFile}`;
-  return <><main className="qy-home qy-task-home outline-none" id="main" tabIndex={-1}>
-    <header className="qy-task-home-intro" data-route-enter><p className="text-caption text-muted-foreground">Qingye UI · 青野</p><h1 className="text-display font-semibold" tabIndex={-1}>从一次使用开始。</h1><p>编辑、比较、阅读。可以继续，也可以停下。</p></header>
-    <section aria-label="试用工作台与阅读" className="qy-task-home-examples"><div><div className="qy-task-home-label"><span>工作台</span><Link className="focus-ring" to="/docs/patterns/edit">完整编辑模式 →</Link></div><div className="qy-pattern-frame"><EditPattern compact /></div><p className="qy-task-home-note">保存失败后输入仍在；结果未知先核实；放弃修改也保留恢复入口。</p></div><div><div className="qy-task-home-label"><span>阅读</span><Link className="focus-ring" to="/docs/patterns/read">完整阅读模式 →</Link></div><div className="qy-pattern-frame"><ReadPattern compact /></div><p className="qy-task-home-note">正文成为主轴，章节可以直达，停下以后仍能继续阅读。</p></div></section>
-    <section className="qy-task-home-method"><p className="text-caption text-muted-foreground">让文化成为设计的方法</p><h2 className="text-display font-semibold">器用为本，关系为法，合宜为度。</h2><p>Qingye UI 从使用出发，把名称、关系、空间与状态组织成可以理解、可以继续，也可以停下的界面。文化参与这些具体判断；专业工作台与舒展的阅读可以有不同面貌。</p><div className="qy-task-actions"><Link className={buttonVariants()} to="/docs/patterns">试用六种任务</Link><Link className={buttonVariants({ variant: "outline" })} to="/docs/design-philosophy">了解六种方法</Link><Link className={buttonVariants({ variant: "ghost" })} to="/docs/components">查找组件</Link></div></section>
-    <section className="qy-task-home-start"><div><h2 className="text-title font-semibold">带进你的项目</h2><p>React 公共组件、真实 API、项目主题与完整任务示例。</p><div className="qy-task-actions"><Link className="focus-ring underline" to="/docs/installation">安装与配置</Link><Link className="focus-ring underline" to="/docs/ai">交给 AI 使用</Link><Link className="focus-ring underline" to="/examples">已有产品示例</Link></div></div><div className="qy-install-command"><code>{install}</code><CopyCodeButton value={install} /></div></section>
-  </main><footer className="qy-home-footer"><div><span>Qingye UI</span><span>从器用出发，为使用留下余地。</span></div><div><a className="focus-ring" href={SITE.repo}>GitHub</a><Link className="focus-ring" to="/docs">来源与许可</Link><span>文档对应 v{SITE.version} · MIT</span></div></footer></>;
+  return <>
+    <main className="home-page outline-none" id="main" tabIndex={-1}>
+      <section className="home-intro" aria-labelledby="home-title">
+        <Heading level={1} id="home-title" className="home-title" tabIndex={-1}>基于 Base UI 的<br />React 组件库。</Heading>
+        <p className="home-lede">React · Tailwind CSS 4 · MIT</p>
+        <Inline className="home-actions" gap={3}>
+          <Link className={buttonVariants()} to="/docs/installation">开始使用</Link>
+          <Link className={buttonVariants({ variant: "outline" })} to="/examples">查看示例</Link>
+          <TextLink render={<Link to="/docs/ai" />} className="home-ai-link" variant="muted">AI 使用</TextLink>
+        </Inline>
+      </section>
+      <section className="home-gallery" aria-label="组件">
+        {components.map((entry) => <ComponentCard key={entry.slug} entry={entry} />)}
+      </section>
+    </main>
+    <footer className="home-footer">
+      <span>Qingye UI · 青野</span>
+      <nav aria-label="页脚导航">
+        <TextLink render={<Link to="/docs/design-philosophy" />} variant="muted">设计理念</TextLink>
+        <TextLink href="/design.md" download="qingye-design.md" variant="muted">design.md</TextLink>
+        <TextLink href={SITE.repo} variant="muted">GitHub</TextLink>
+        <TextLink render={<Link to="/docs" />} variant="muted">MIT</TextLink>
+      </nav>
+    </footer>
+  </>;
 }

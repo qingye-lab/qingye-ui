@@ -4,7 +4,9 @@
 
 **建设纲领：** `/Volumes/SUNSANG 1/Codex/demo/qingye/docs/ui-component-system-plan.md`（v3.0 定稿）。本文件是它的库侧执行摘要；涉及方向、优先级、验收标准时以纲领为准。纲领只读，不在本仓库内。
 
-**本次改造：** `design.md` 提供设计方法，`docs/plans/2026-10-02-design-system-renovation.md` 提供已授权范围与最新用户裁决，`docs/implementation/2026-10-02-execution.md` 记录执行证据。2026-10-02 用户已明确：三张视觉提案均不采用，视觉定稿后置；先遵守新理念、规范和定义，由主 agent 下发/审核、多 GPT-6.1 sol / xhigh 子 agent 按独立边界并行执行。该裁决优先于旧纲领的线性调度及选图前置；完整范围、真实契约和验收标准仍有效。
+**本次改造：** `design.md` 提供设计方法，`docs/plans/2026-10-02-design-system-renovation.md` 提供已授权范围与最新用户裁决，`docs/implementation/2026-10-02-execution.md` 记录执行证据。2026-10-02 用户已明确：三张视觉提案均不采用，视觉定稿后置；先遵守新理念、规范和定义，由主 agent 下发/审核、多 GPT-6.1 sol / xhigh 子 agent 按独立边界并行执行。该裁决优先于旧纲领的线性调度及选图前置；完整范围、真实契约和验收标准仍有效。同日后续用户要求重做官网、完整复用本库组件，并明确反对说明书式 UI；当前官网视觉与跨项目接入决定见 `docs/decisions/website-as-consumer.md`，该新裁决不再把首页视觉后置。
+
+**后续裁决：** 首页参考 coss UI 的简短介绍与组件目录布局；反对说明书式 UI。全部组件按真实语义、状态、关系和情境认真设计，必要时重构，不以保留 coss 实现为目标。官网作为公共组件的第一方消费端，具体边界见 `docs/decisions/website-as-consumer.md`。
 
 ## Layout
 
@@ -18,7 +20,12 @@
 
 ## Rules
 
+- **器用为本，关系为法，合宜为度。** 界面变更依据 `design.md` 的相关方法作出任务、语义、结构和状态判断；六种方法不要求逐处贴标签，也不能用文化装饰代替可用性。
+- `apps/docs` 是第一方消费项目，交互控件复用 `@qingye/ui` 及其公共组合；原生页面结构、表单语义、链接和组件 `render` 组合合法。必要的共享缺口回到库中解决，不在官网另造基础控件。
+- 根 `design.md` 是公开设计指南唯一源；`packages/ui/scripts/gen-catalog.mjs` 生成包内 `design.md`、网站 `/design.md`，并将其项目接入段投影到 `ai/SKILL.md`。不手工维护生成副本。
+- 消费项目接入需在自家 `AGENTS.md` 与 `design.md` 留下包内指南、当前 API 和项目主题/组合入口的持久引用，使用根指南中的可复制片段合并既有规则；本仓库不自动改写其他仓库的指导文件或权限。
 - Follow `STANDARDS.md` for every component change.
+- 网站界面避免说明书式文案：用真实内容与可操作状态表达能力，删除重复标签、显然的操作说明和设计自述；仅保留识别、决策、错误恢复所需的文字。完整方法放在指南中。
 - Treat coss as a replaceable implementation source. Reuse, adapt, or rebuild according to verified task, semantic, state, and maintenance needs under `design.md` and `STANDARDS.md`; record derived changes in `coss-source.json` and preserve truthful provenance. Evaluate accessibility primitives separately. Never edit the upstream baseline or relabel copied source as original.
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
 - Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.

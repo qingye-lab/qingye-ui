@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
-Source SHA-256: 9f28d7ad2b5b694742682f1ee34c026af946a8d52290f38036fd49e7455b3c1b
+Source SHA-256: ffe34a960b0e4af9403c7680845dc01287ba4f4a2c1ed76c34df648a2fb99918
 
 在连续或分级的数值范围内拖动取值，适合音量、阈值、价格区间这类近似值；需要精确输入时配合 NumberField。
 
 ## Use and ownership
-- 在连续或分级的数值范围内拖动取值，适合音量、阈值、价格区间这类近似值；需要精确输入时配合 NumberField。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 调整连续或分级的近似数值，范围关系比逐字输入更重要。
+- Avoid: 不能只靠滑块位置表达精确值；范围的两个滑块必须分别命名。
+- Library: 范围、步长、方向键与拖动、按滑块命名和本地化数值。
+- Application: 单位、业务范围、请求触发时机和保存结果。
+
+## Composition
+- SliderValue 展示当前值；精确任务配 NumberField，共享同一受控值。
+
+## Responsive behavior
+- 轨道保留调整空间与粗指针命中区；竖向滑块由宿主提供实际高度。
+
+## Customization
+- getAriaLabel 区分上下界，getAriaValueText 表达单位；format 默认跟随 UI locale。
 
 ## Current exports
 - Slider: function; owner slider; PASS; props: SliderPrimitive.Root.Props & {

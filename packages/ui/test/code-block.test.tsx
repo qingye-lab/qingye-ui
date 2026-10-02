@@ -45,6 +45,21 @@ test("pre-highlighted children without code copy their rendered text", async () 
   expect(writeText).toHaveBeenCalledWith("const a = 1;");
 });
 
+test("pre-highlighted lines preserve newlines and empty lines when copied", async () => {
+  const user = userEvent.setup();
+  const writeText = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText } });
+  render(
+    <CodeBlock lineNumbers wrap>
+      <span data-line=""><span>const</span> count = 0;</span>
+      <span data-line="" />
+      <span data-line=""><span>console</span>.log(count);</span>
+    </CodeBlock>,
+  );
+  await user.click(screen.getByRole("button", { name: "复制代码" }));
+  expect(writeText).toHaveBeenCalledWith("const count = 0;\n\nconsole.log(count);");
+});
+
 test("copyable={false} removes the button; InlineCode renders <code>", () => {
   render(
     <>

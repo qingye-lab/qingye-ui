@@ -8,10 +8,19 @@ Source SHA-256: 61b9f90ef9dbaa3677e84b2929f6e70e83ae3464bff917dc26d2407adfd2fbf1
 页面顶部的标题区：可选面包屑、返回按钮、标题、描述、元信息与操作。操作在空间足够时与标题同行，空间不足时换到下方。
 
 ## Use and ownership
-- 页面顶部的标题区：可选面包屑、返回按钮、标题、描述、元信息与操作。操作在空间足够时与标题同行，空间不足时换到下方。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 进入一个对象或任务页面时识别主体、范围和返回依据。
+- Avoid: 标题旁堆满设计解释；历史为空时只有无效返回；把导航链接转成 button 角色。
+- Library: 标题/事实/动作的解剖、固有换行和 Back 的控件外观。
+- Application: 路由、返回目标、对象名称、权限与动作状态。
+
+## Composition
+- Title 为真实 h1；Nav 承担来路，Meta 说明对象事实，Actions 作用于当前对象；直达页有明确父级出口。
+
+## Responsive behavior
+- 动作按内容空间换到下一行，长标题断行；不靠隐藏关键动作解决窄屏。
+
+## Customization
+- render 接入合法链接与标题；标题层级、文字角色和强调分别判断。
 
 ## Current exports
 - PageHeader: function; owner page-header; PASS; props: useRender.ComponentProps<"header">
@@ -39,7 +48,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### PageHeaderBack
 标题左侧的返回按钮（outline 小图标按钮），aria-label 默认取 locale.back。接受 Button 的全部属性。
-- render: ReactElement. 渲染为链接时传 render={<a href="…" />} 并设置 nativeButton={false}。
+- render: ReactElement. 更换返回命令的载体，仍遵循 Button 语义；目的地导航使用 a / Link 配合 buttonVariants。
 - onClick: () => void. 例如调用 history.back()。
 
 ### PageHeaderContent
@@ -55,7 +64,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 元信息行：Badge、StatusDot、创建时间等，自动换行。
 
 ### PageHeaderActions
-操作区；主操作放在最后（最靠右）。
+相关操作区，按当前任务安排次序与强调。
 
 ## Keyboard
 - Tab: 依次聚焦面包屑链接、返回按钮与操作按钮。
@@ -150,22 +159,25 @@ export default function Demo() {
 }
 ```
 
-### 返回按钮
+### 返回列表链接
 Source: apps/docs/src/content/page-header/demos/03-back.tsx
 ```tsx
 import { Badge } from "@qingye/ui/components/badge";
-import { Button } from "@qingye/ui/components/button";
-import { PageHeader, PageHeaderActions, PageHeaderBack, PageHeaderContent, PageHeaderDescription, PageHeaderMeta, PageHeaderTitle } from "@qingye/ui/components/page-header";
+import { Button, buttonVariants } from "@qingye/ui/components/button";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderMeta, PageHeaderTitle } from "@qingye/ui/components/page-header";
+import { ArrowLeftIcon } from "lucide-react";
 
 export const meta = {
-  title: "返回按钮",
-  description: "PageHeaderBack 放在标题左侧；渲染为链接时设置 nativeButton={false}。",
+  title: "返回列表链接",
+  description: "有明确目的地时使用真正链接和 buttonVariants；PageHeaderBack 用于应用管理的返回命令。",
 };
 
 export default function Demo() {
   return (
     <PageHeader className="w-full border-b pb-6">
-      <PageHeaderBack nativeButton={false} render={<a href="#orders" />} />
+      <a aria-label="返回订单列表" className={buttonVariants({ size: "icon-sm", variant: "outline" })} href="#orders">
+        <ArrowLeftIcon aria-hidden="true" />
+      </a>
       <PageHeaderContent>
         <PageHeaderTitle>订单 SO-20260930-004817</PageHeaderTitle>
         <PageHeaderDescription>2026-09-30 14:26 下单 · 小程序 · 自提</PageHeaderDescription>

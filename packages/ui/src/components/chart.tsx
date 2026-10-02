@@ -139,6 +139,7 @@ export function ChartContainer({
         )}
         data-chart={chartId}
         data-slot="chart"
+        id={id}
         style={{ ...colorVariables(config), ...style }}
         {...props}
       >

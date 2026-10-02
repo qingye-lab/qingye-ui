@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "右键菜单 ContextMenu",
   description: "在区域上点击右键（触屏长按）时出现的操作菜单，用于文件、卡片、表格行等对象的快捷操作。它是加速手段：同样的操作必须在界面其他位置也能完成。",
+  design: {
+    "methods": [
+      "展开有据",
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "为已定位对象提供右键或长按的快速操作，作为可见命令入口的补充。"
+    ],
+    "avoid": [
+      "不能让仅会发现右键的人才能完成任务；触发区域不能改变操作对象或忽略权限。"
+    ],
+    "composition": [
+      "与可见 Button / Menu 复用同一命令定义，子菜单、Checkbox、Radio 按实际命令或值关系组合。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理上下文触发、菜单键盘与焦点、碰撞定位；危险高亮、长标签和 RTL 子菜单保持真实表达。"
+      ],
+      "application": [
+        "提供当前对象、操作范围、可用条件和真实结果；长按不会自动创建业务选择。"
+      ]
+    },
+    "responsive": [
+      "触屏长按只作加速，保留可见替代入口；菜单范围限制在可用视口并支持内部滚动。"
+    ],
+    "customization": [
+      "沿用 Menu 的表面与状态角色；触发区域外观依据内容对象，避免另造命令语义。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

@@ -8,10 +8,19 @@ Source SHA-256: 05bdb7a7cd1b3ea92a8bda2da7dccdcc36e7f20b09bf664b90184049e97d9f10
 鼠标悬停或键盘聚焦链接时，预览链接背后的内容，例如成员资料或项目摘要。它是 PreviewCard 的 shadcn 命名别名，两者是同一个组件。
 
 ## Use and ownership
-- 鼠标悬停或键盘聚焦链接时，预览链接背后的内容，例如成员资料或项目摘要。它是 PreviewCard 的 shadcn 命名别名，两者是同一个组件。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 使用 shadcn 命名接入真实链接的只读预览。
+- Avoid: HoverCard 是 PreviewCard 的同一实现，不能给别名单独维护另一套行为或藏唯一入口。
+- Library: 共享 PreviewCard 的延迟、悬停 / 焦点与视口约束，不增加业务状态。
+- Application: 维护链接目标、可读摘要与实际访问权限。
+
+## Composition
+- 链接本身可直达完整页面；需要点击进行输入或命令时组合 Popover。
+
+## Responsive behavior
+- 粗指针不依赖 hover；长摘要按 PreviewCard 的可用范围换行和滚动。
+
+## Customization
+- 通过共有 side、align、className 调整对象关系，保留同一来源与主题表达。
 
 ## Current exports
 - HoverCard: const; owner preview-card; alias of PreviewCard; PASS

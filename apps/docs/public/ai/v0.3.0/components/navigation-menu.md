@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: 9655c4c76dd600f2328b249f3ebccd26ea934ec708749021d0ed124209d17369
+Source SHA-256: be2d825f83e9e9999c30201fd09a696b4a9171a8243d6757bedc1c405cf44159
 
 网站顶部的主导航：顶层触发器展开内容面板，面板之间切换时弹层平滑改变尺寸、内容沿移动方向淡入。适合官网与文档站；手机上建议改用 Sheet 抽屉菜单。
 
 ## Use and ownership
-- 网站顶部的主导航：顶层触发器展开内容面板，面板之间切换时弹层平滑改变尺寸、内容沿移动方向淡入。适合官网与文档站；手机上建议改用 Sheet 抽屉菜单。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 让网站导航地址及其必要分类可直达，面板提供目标选择依据。
+- Avoid: 不能为了面板效果强迫高频地址逐层探索；内容容量由任务决定，不机械限制为六条链接。
+- Library: 管理真实链接的 aria-current、触发面板、焦点与共享定位；内容与退出保持可达。
+- Application: 维护信息架构、实际路由、权限和进入目标后的返回依据。
+
+## Composition
+- 直接目标用 Link，分类用 Trigger + Content；需要移动导航时复用 Sheet，完整地址保持一致。
+
+## Responsive behavior
+- 触屏不依赖 hover；长标题与描述保留辨认信息，面板超过可用范围时调整布局或提供滚动。
+
+## Customization
+- 共享外观只表达分类与当前页；集中主题调整表面，side / align 依据实际导航对象选择。
 
 ## Current exports
 - NavigationMenu: function; owner navigation-menu; PASS; props: NavigationMenuPrimitive.Root.Props & {
@@ -143,9 +152,9 @@ export default function Demo() {
                 href="#"
               >
                 <ZapIcon aria-hidden="true" className="mb-6 size-5 opacity-80" />
-                <NavigationMenuLinkTitle>青云 UI 2.0</NavigationMenuLinkTitle>
+                <NavigationMenuLinkTitle>Qingye UI</NavigationMenuLinkTitle>
                 <NavigationMenuLinkDescription className="line-clamp-3">
-                  全新主题令牌与深色模式，现已发布。
+                  组件、主题与使用示例。
                 </NavigationMenuLinkDescription>
               </NavigationMenuLink>
               <ul className="grid gap-0.5">

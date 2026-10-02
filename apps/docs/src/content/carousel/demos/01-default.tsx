@@ -1,24 +1,27 @@
+import { AspectRatio } from "@qingye/ui/components/aspect-ratio";
 import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@qingye/ui/components/carousel";
 
 export const meta = { title: "默认", description: "一次一张；在触屏上直接左右滑动。" };
 
-const products = [
-  { name: "云台相机 Q3", price: "¥2,199", tone: "from-sky-100 to-indigo-200 dark:from-sky-950 dark:to-indigo-900" },
-  { name: "降噪耳机 Air", price: "¥899", tone: "from-emerald-100 to-teal-200 dark:from-emerald-950 dark:to-teal-900" },
-  { name: "机械键盘 K75", price: "¥649", tone: "from-amber-100 to-orange-200 dark:from-amber-950 dark:to-orange-900" },
-  { name: "便携屏 15.6″", price: "¥1,299", tone: "from-rose-100 to-fuchsia-200 dark:from-rose-950 dark:to-fuchsia-900" },
+const photographs = [
+  { title: "林间", image: "/examples/forest.jpg", alt: "阳光穿过林间的树木" },
+  { title: "山巅", image: "/examples/mountain.jpg", alt: "山峰与清晨的天空" },
+  { title: "桌边", image: "/examples/coffee.jpg", alt: "桌上的咖啡" },
+  { title: "工作台", image: "/examples/desk.jpg", alt: "桌面的工作用品" },
 ];
 
 export default function Demo() {
   return (
-    <Carousel aria-label="新品推荐" className="w-full max-w-md">
+    <Carousel aria-label="摄影集" className="w-full max-w-md">
       <CarouselContent>
-        {products.map((product) => (
-          <CarouselItem key={product.name}>
-            <div className={`flex aspect-[4/3] flex-col justify-end rounded-xl bg-gradient-to-br p-5 ${product.tone}`}>
-              <p className="font-semibold text-lg">{product.name}</p>
-              <p className="numeric text-foreground/70 text-sm">{product.price} 起</p>
-            </div>
+        {photographs.map((photograph) => (
+          <CarouselItem key={photograph.image}>
+            <figure className="overflow-hidden rounded-xl border">
+              <AspectRatio ratio={4 / 3}>
+                <img alt={photograph.alt} className="object-cover" loading="lazy" src={photograph.image} />
+              </AspectRatio>
+              <figcaption className="px-4 py-3 font-medium text-sm">{photograph.title}</figcaption>
+            </figure>
           </CarouselItem>
         ))}
       </CarouselContent>

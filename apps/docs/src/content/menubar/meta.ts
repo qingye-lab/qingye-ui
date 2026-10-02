@@ -4,6 +4,35 @@ export default {
   title: "菜单栏 Menubar",
   description:
     "桌面应用式的一排菜单（文件 / 编辑 / 视图），适合编辑器、设计工具等命令很多的工作台。菜单内容沿用 Menu 的全部部件。",
+  design: {
+    "methods": [
+      "相成相制",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "在编辑器或工具工作面集中收纳高频命令，保持对当前内容对象的连续操作。"
+    ],
+    "avoid": [
+      "网站的地址导航不因外形相近而改用应用菜单栏；快捷键提示不等于快捷键已注册。"
+    ],
+    "composition": [
+      "顶层用 MenubarMenu 和 Trigger；内容共享 Menu 的命令、选项、危险状态与子菜单。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供顶层方向键漫游、相邻菜单切换和内部菜单关系，复用 Menu 的长内容约束。"
+      ],
+      "application": [
+        "决定命令组织、文档选择、权限、快捷键冲突与执行结果。"
+      ]
+    },
+    "responsive": [
+      "窄屏按命令重要性保留直接入口并收纳次要命令；触屏检查顶层目标和菜单行。"
+    ],
+    "customization": [
+      "orientation 表达真实布局与键盘方向；层级关系不靠额外菜单深度解决。"
+    ]
+  },
   category: "导航",
   source: "local",
   exports: [

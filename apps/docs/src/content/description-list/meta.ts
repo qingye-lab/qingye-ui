@@ -30,7 +30,36 @@ export default {
   notes: [
     "名称列宽由 --description-list-term 控制（移动端 96px，桌面 144px），可在 className 中覆盖，例如 [--description-list-term:8rem]。",
     "grid 布局按 --description-list-column（默认 10rem）自动决定列数，放在侧栏或窄卡片中也不会挤压。",
-    "空值显示「—」并保持对齐，不要省略整行，读者需要知道这一项存在但为空。",
+    "分别说明未填写、尚未取得与不适用；零显示为零。只在破折号的含义已有明确约定时用它表示空值。",
     "页面中有多个复制按钮时，用 copyLabel 写清复制的是什么，读屏用户才分得清。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "一个对象的名称和值成对出现，读者需要辨认属性关系。"
+    ],
+    "avoid": [
+      "把零、未填写、不适用和未知都写成破折号；多对象比较拆成互不对齐的详情列。"
+    ],
+    "composition": [
+      "每个 Item 包含 Term 与 Details；复制值使用原文本并明确对象，说明和链接仍属于该值。"
+    ],
+    "stateOwner": {
+      "library": [
+        "dl/dt/dd 语义、成对布局、部位与复制组合。"
+      ],
+      "application": [
+        "属性事实、空值含义、单位和复制原文。"
+      ]
+    },
+    "responsive": [
+      "长标识符需能断行；horizontal 留名称列，过窄时在项目组合切到 vertical 或 grid。"
+    ],
+    "customization": [
+      "layout/--description-list-term/--description-list-column 调整关系；多个对象横向比较使用 Table。"
+    ]
+  },
 } satisfies ComponentMeta;

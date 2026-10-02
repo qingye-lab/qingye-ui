@@ -3,6 +3,35 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "文字提示 Tooltip",
   description: "悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。",
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "补充图标名称、快捷键或短解释，供悬停与键盘聚焦时阅读。"
+    ],
+    "avoid": [
+      "不能承担控件唯一可访问名称、关键后果、错误恢复或交互元素。"
+    ],
+    "composition": [
+      "图标 Button 自带 aria-label；应用根挂 TooltipProvider，点击式帮助用 Popover 的 tooltipStyle。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理提示延迟、trigger 关联、Esc 关闭与位置，提示不接管执行状态。"
+      ],
+      "application": [
+        "决定是否有必要补充以及文本与动作事实是否一致。"
+      ]
+    },
+    "responsive": [
+      "长词按可用宽度换行；触屏缺少悬停时正文或点击帮助仍可获得必需信息。"
+    ],
+    "customization": [
+      "用 side、align、anchor 调整位置；简短内容共享主题表面，避免逐个自定义延迟。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: ["Tooltip", "TooltipTrigger", "TooltipPopup"],

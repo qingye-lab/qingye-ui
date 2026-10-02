@@ -8,10 +8,19 @@ Source SHA-256: 2826b46f1153f2796c64e47062d3a74ad10b41f5a6d531c0c269f901c0c2e7d4
 把相邻的按钮、输入框、选择器拼成一个整体：共享边框、只在两端保留圆角。用于分段操作、带前后缀的输入、拆分按钮等。
 
 ## Use and ownership
-- 把相邻的按钮、输入框、选择器拼成一个整体：共享边框、只在两端保留圆角。用于分段操作、带前后缀的输入、拆分按钮等。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 把输入、单位、选择与操作组成一个连续的工作单元。
+- Avoid: 不可交互 GroupText 不能代替输入标签；role=group 不会把按钮变成单选项。
+- Library: 提供组边界、圆角拼接和焦点可见层次，保留子控件的原生行为。
+- Application: 负责字段名称、单位、值、提交动作与组的可访问名称。
+
+## Composition
+- 用 GroupText render 为 Label 关联字段；按控件关系决定是否加入 GroupSeparator。
+
+## Responsive behavior
+- 窄屏优先调整方向和内容容量，检查输入与操作各自可用宽度及触屏目标。
+
+## Customization
+- 复用公共间距和子控件尺寸；需要键盘漫游改用 Toolbar，保持选项状态改用 ToggleGroup。
 
 ## Current exports
 - ButtonGroup: function; owner group; alias of Group; PASS; props: {

@@ -21,8 +21,8 @@
 [data-pattern="review"] .qy-task-table { width:max-content; min-width:100%; }
 .qy-task-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--qy-space-4); padding-block:var(--qy-space-4); border-block-end:1px solid var(--qy-border); }
 .qy-fixture-settings { margin-block-start:var(--qy-space-5); padding:var(--qy-space-4); border-block-start:1px solid var(--qy-border); color:var(--qy-foreground-muted); font-size:var(--qy-text-caption-size); }
-.qy-fixture-settings summary { cursor:pointer; width:fit-content; }
-.qy-fixture-settings > p { margin-block:var(--qy-space-3); }
+.qy-fixture-settings [data-slot="collapsible-trigger"] { width:fit-content; }
+.qy-fixture-settings [data-slot="collapsible-panel"] > p { margin-block:var(--qy-space-3); }
 .qy-reading { max-width:36em; margin-inline:auto; font-size:var(--qy-text-body-size); line-height:2; }
 .qy-reading h2 { font-size:var(--qy-text-title-size); margin-block:var(--qy-section-gap) var(--qy-space-4); }
 .qy-reading p { margin-block:var(--qy-space-5); line-height:2; }

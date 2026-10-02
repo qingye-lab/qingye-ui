@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: a52ca28847c64cfcf9a6ebd4a82f3834e762494552d38fe7eec4682d56af8c42
+Source SHA-256: eebb854c97ccca5d76984b38707b887179e72911fecad988fd57e2e2c5653611
 
 展示单个关键数字：标签、数值、单位、与上一周期的变化和辅助说明。常放在 Card 中组成仪表盘的指标行。
 
 ## Use and ownership
-- 展示单个关键数字：标签、数值、单位、与上一周期的变化和辅助说明。常放在 Card 中组成仪表盘的指标行。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 读取一个关键量及其单位、比较周期与趋势。
+- Avoid: 零与未采集混淆；上涨永远绿色；缺测被删除后跨时间连接；为了层级让同级比较字号不同。
+- Library: 指标部位、方向文字、情感颜色与趋势线几何。
+- Application: 真实数值、周期、好坏规则、缺测事实与摘要。
+
+## Composition
+- Label/Value/Unit 明确量纲；Delta 的 trend 说明方向，inverse 说明好坏；Sparkline 缺测断线且保留时间位置。
+
+## Responsive behavior
+- 长标签和单位可换行，保留数值容量；迷你线不能成为唯一数据来源。
+
+## Customization
+- size 按任务层级选择，Sparkline label 提供趋势事实，主题不改变 inverse 的业务含义。
 
 ## Current exports
 - Stat: function; owner stat; PASS; props: StatProps
@@ -60,7 +69,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### StatSparkline
 不依赖图表库的迷你趋势线，颜色取 currentColor（默认 text-chart-1），线宽在任意尺寸下保持 1.5px。
-- data: readonly number[]. 按时间顺序的数值，至少两个点。
+- data: readonly number[]. 按时间顺序的数值，至少两个点；非有限数值保留时间位置并断开趋势线，末项缺测时不显示最新值圆点。
 - fill: boolean; default true. 线下方的淡色渐变。
 - showEnd: boolean; default true. 在最新值处画一个圆点。
 - label: string. 可访问的摘要，例如「近 12 周订单量持续上升」；不传时视为装饰。

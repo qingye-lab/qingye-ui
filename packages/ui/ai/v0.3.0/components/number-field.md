@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: 1d7755d92b28a9808c6c459b9408c56890dffcbcb85ee8ffd8f114bdce1b79d1
+Source SHA-256: bd51dda79a7a262e25396cc4903ad95e8ba9464549397da292f5053ea3be9e2e
 
 输入与步进数值，支持范围、步长、格式化（货币、百分比、单位）与拖动调整，适合数量、价格、阈值。
 
 ## Use and ownership
-- 输入与步进数值，支持范围、步长、格式化（货币、百分比、单位）与拖动调整，适合数量、价格、阈值。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 精确输入数量、金额或阈值，步进按钮为重复调整提供入口。
+- Avoid: 格式化文本不是提交值；拖动标签不能成为唯一的调整方法。
+- Library: 本地化解析、范围、步长、按键与尺寸角色。
+- Application: 业务单位、允许范围、草稿和提交结果。
+
+## Composition
+- 输入与增减按钮共享边界，焦点仍定位到实际部件；FieldLabel 或 root aria-label 命名输入。
+
+## Responsive behavior
+- 输入可收缩而增减动作保留；内部高度扣除外框边界，与同尺寸 Input 对齐。
+
+## Customization
+- size 消费已有 --qy-control-*；format 与 locale 负责显示和解析。
 
 ## Current exports
 - CursorGrowIcon: function; owner number-field; PASS; props: React.ComponentProps<"svg">

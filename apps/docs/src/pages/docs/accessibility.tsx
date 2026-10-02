@@ -1,5 +1,6 @@
 import { Button } from "@qingye/ui/components/button";
 import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Label } from "@qingye/ui/components/label";
 import { Progress } from "@qingye/ui/components/progress";
 import { RotateCcwIcon } from "lucide-react";
 import { Fragment, useId, useState } from "react";
@@ -27,7 +28,7 @@ const CHECKLIST: { group: string; items: string[] }[] = [
   {
     group: "视觉",
     items: [
-      "正文对比度不低于 4.5:1，辅助文字与图形边界不低于 3:1，浅色与深色都验证过。",
+      "普通大小文字（含辅助文字）对比度不低于 4.5:1；大文本与必要非文本按适用要求检查，浅色与深色都验证过。",
       "状态不只靠颜色表达：同时有文字或图标。",
       "放大到 200% 或 390px 宽度时内容不被截断，也没有横向滚动。",
     ],
@@ -76,9 +77,9 @@ function Checklist() {
                 return (
                   <li className="flex items-start gap-3" key={key}>
                     <Checkbox checked={done.has(key)} className="mt-0.5" id={id} onCheckedChange={(checked) => toggle(key, checked)} />
-                    <label className="cursor-pointer text-pretty text-[0.875rem] text-foreground/90 leading-relaxed" htmlFor={id}>
+                    <Label className="cursor-pointer text-pretty font-normal text-foreground/90 leading-relaxed" htmlFor={id}>
                       {item}
-                    </label>
+                    </Label>
                   </li>
                 );
               })}

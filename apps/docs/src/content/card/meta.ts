@@ -48,4 +48,33 @@ export default {
     "整张卡片可点击时，用 render={<a href />} 渲染为链接，不要在卡片内再嵌套其他可交互元素。",
     "不要层层嵌套卡片；需要把多张卡片归为一组时用 CardFrame。",
   ],
+  design: {
+    "methods": [
+      "相成相制",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "一个对象或任务需要独立边界，并且标题、内容与动作属于同一范围。"
+    ],
+    "avoid": [
+      "每段正文套卡片；整卡链接里嵌套按钮；把 CardTitle 的视觉大小当作标题语义。"
+    ],
+    "composition": [
+      "按需组合 Header/Panel/Footer；CardTitle render 为真实标题。整卡导航与卡内独立动作分别设计。"
+    ],
+    "stateOwner": {
+      "library": [
+        "表面、部位关系、尺寸角色与 render。"
+      ],
+      "application": [
+        "对象范围、标题级别、动作权限、草稿与异步结果。"
+      ]
+    },
+    "responsive": [
+      "长标题和动作共同占位时允许动作换行；卡片内部表格保留二维比较。"
+    ],
+    "customization": [
+      "size 控制内容密度；表面来自集中主题，CardFrame 只用于需要共同外框的一组对象。"
+    ]
+  },
 } satisfies ComponentMeta;

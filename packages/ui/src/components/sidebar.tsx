@@ -100,28 +100,25 @@ export function SidebarProvider({
   const [_open, _setOpen] = React.useState(defaultOpen);
   const open = openProp ?? _open;
   const setOpen = React.useCallback(
-    async (value: boolean | ((value: boolean) => boolean)) => {
+    (value: boolean | ((value: boolean) => boolean)) => {
       const openState = typeof value === "function" ? value(open) : value;
-      if (setOpenProp) {
-        setOpenProp(openState);
-      } else {
-        _setOpen(openState);
-      }
-
-      // This sets the cookie to keep the sidebar state. The Cookie Store API
-      // is missing in some browsers (and in jsdom); persistence is best effort.
-      if (typeof cookieStore === "undefined") return;
-      await cookieStore
-        .set({
-          expires: Date.now() + SIDEBAR_COOKIE_MAX_AGE * 1000,
-          name: SIDEBAR_COOKIE_NAME,
-          path: "/",
-          value: String(openState),
-        })
-        .catch(() => {});
+      if (openProp === undefined) _setOpen(openState);
+      setOpenProp?.(openState);
     },
-    [setOpenProp, open],
+    [openProp, setOpenProp, open],
   );
+
+  // Persist the accepted state, rather than a request a controlled owner may
+  // reject. Browsers without Cookie Store still retain the in-memory state.
+  React.useEffect(() => {
+    if (typeof cookieStore === "undefined") return;
+    void cookieStore.set({
+      expires: Date.now() + SIDEBAR_COOKIE_MAX_AGE * 1000,
+      name: SIDEBAR_COOKIE_NAME,
+      path: "/",
+      value: String(open),
+    }).catch(() => {});
+  }, [open]);
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
@@ -131,9 +128,14 @@ export function SidebarProvider({
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent): void => {
+      const target = event.target;
+      const editing = target instanceof Element && target.closest(
+        "input, textarea, select, [contenteditable]:not([contenteditable='false']), [role='textbox']",
+      );
       if (
-        event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
-        (event.metaKey || event.ctrlKey)
+        event.key.toLowerCase() === SIDEBAR_KEYBOARD_SHORTCUT &&
+        (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey &&
+        !event.repeat && !event.isComposing && !event.defaultPrevented && !editing
       ) {
         event.preventDefault();
         toggleSidebar();
@@ -189,6 +191,7 @@ export function Sidebar({
   variant = "sidebar",
   collapsible = "offcanvas",
   className,
+  style,
   children,
   ...props
 }: React.ComponentProps<"div"> & {
@@ -207,6 +210,7 @@ export function Sidebar({
           className,
         )}
         data-slot="sidebar"
+        style={style}
         {...props}
       >
         {children}
@@ -216,9 +220,9 @@ export function Sidebar({
 
   if (isMobile) {
     return (
-      <Sheet onOpenChange={setOpenMobile} open={openMobile} {...props}>
+      <Sheet onOpenChange={setOpenMobile} open={openMobile}>
         <SheetPopup
-          className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
+          className={cn("w-(--sidebar-width) max-w-[calc(100vw-var(--qy-space-12))] bg-sidebar p-0 text-sidebar-foreground", className)}
           data-mobile="true"
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -226,14 +230,16 @@ export function Sidebar({
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+              ...style,
             } as React.CSSProperties
           }
+          {...props}
         >
-          <SheetHeader className="sr-only">
-            <SheetTitle>{messages.sidebar}</SheetTitle>
-            <SheetDescription>{messages.sidebarDescription}</SheetDescription>
+          <SheetHeader className="shrink-0 px-(--qy-space-3) py-(--qy-space-3) pe-(--qy-space-12)">
+            <SheetTitle className="text-sm leading-6">{messages.sidebar}</SheetTitle>
+            <SheetDescription className="sr-only">{messages.sidebarDescription}</SheetDescription>
           </SheetHeader>
-          <div className="flex h-full w-full flex-col">{children}</div>
+          <div className="flex min-h-0 w-full flex-1 flex-col">{children}</div>
         </SheetPopup>
       </Sheet>
     );
@@ -273,6 +279,7 @@ export function Sidebar({
           className,
         )}
         data-slot="sidebar-container"
+        style={style}
         {...props}
       >
         <div
@@ -293,16 +300,17 @@ export function SidebarTrigger({
   ...props
 }: React.ComponentProps<typeof Button>): React.ReactElement {
   const { messages } = useUILocale();
-  const { toggleSidebar } = useSidebar();
+  const { isMobile, open, openMobile, toggleSidebar } = useSidebar();
 
   return (
     <Button
+      aria-expanded={isMobile ? openMobile : open}
       className={cn("size-7", className)}
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
         onClick?.(event);
-        toggleSidebar();
+        if (!event.defaultPrevented) toggleSidebar();
       }}
       size="icon"
       variant="ghost"
@@ -557,6 +565,7 @@ export function SidebarMenuButton({
 
   const defaultProps = {
     className: cn(sidebarMenuButtonVariants({ size, variant }), className),
+    "aria-current": isActive ? ("page" as const) : undefined,
     "data-active": isActive,
     "data-sidebar": "menu-button",
     "data-size": size,
@@ -741,6 +750,7 @@ export function SidebarMenuSubButton({
     ),
     "data-active": isActive,
     "data-sidebar": "menu-sub-button",
+    "aria-current": isActive ? ("page" as const) : undefined,
     "data-size": size,
     "data-slot": "sidebar-menu-sub-button",
   };

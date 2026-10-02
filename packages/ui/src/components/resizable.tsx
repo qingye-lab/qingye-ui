@@ -462,6 +462,9 @@ export function ResizablePanel({
       data-collapsed={collapsed ? "" : undefined}
       data-slot="resizable-panel"
       id={id}
+      // A hidden pane keeps its DOM (and draft) while leaving the focus and
+      // accessibility trees. A nonzero collapsed icon rail remains usable.
+      inert={size !== undefined && size <= EPSILON ? true : undefined}
       ref={(node) => {
         record.current.element = node;
         if (typeof ref === "function") return ref(node);

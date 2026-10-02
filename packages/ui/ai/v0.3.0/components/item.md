@@ -8,10 +8,19 @@ Source SHA-256: 5afb00639ed6638497b7bbb2e3fae841c553e475dc74636a9b17b7d8f02406b3
 由媒体、标题、描述和操作组成的一行内容，用于成员列表、设置项、文件、通知等。API 与 shadcn/ui 的 Item 一致。
 
 ## Use and ownership
-- 由媒体、标题、描述和操作组成的一行内容，用于成员列表、设置项、文件、通知等。API 与 shadcn/ui 的 Item 一致。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在列表中同时识别对象、读取摘要与执行针对该对象的操作。
+- Avoid: 整行链接内再放按钮；两行截断隐藏关键后果；ItemGroup 的视觉列表没有实际 listitem 关系。
+- Library: 媒体/摘要/动作部位、可样式化列表结构与焦点外观。
+- Application: 对象名称、导航、动作权限、摘要完整性和结果。
+
+## Composition
+- Content 和 Actions 分工；整行导航用链接，独立动作保留原生控件。自定义 render 保留原生列表或显式 listitem。
+
+## Responsive behavior
+- 窄屏让动作换行；必要完整说明覆盖 line-clamp-2，避免长名称把恢复动作推出工作面。
+
+## Customization
+- variant 选择边界；size 调整关系间距，真实标题通过 render 定义层级。
 
 ## Current exports
 - Item: function; owner item; PASS; props: ItemProps

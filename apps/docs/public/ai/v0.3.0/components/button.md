@@ -8,10 +8,19 @@ Source SHA-256: b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e
 触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。
 
 ## Use and ownership
-- 执行名称明确的动作。当前最重要的动作可以是保存，也可以是停止或返回。
-- Avoid: 不要把所有操作都叫确定；视觉样式不能隐式授权或决定风险。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 执行命名明确的动作或提交表单；任务重点可以是保存、停止或保护当前工作。
+- Avoid: 不按固定四级套动作；loading 只表示正在等待，不能当成保存成功。
+- Library: 提供原生按钮、键盘焦点、loading 的忙碌与禁用状态，保持动作名称和内容宽度。
+- Application: 决定对象、操作范围、请求结果、重试和取消后台任务；加载结束与业务成功分别处理。
+
+## Composition
+- 提交用 type=submit；真实地址用 a / Link + buttonVariants；危险动作按后果决定是否接 AlertDialog。
+
+## Responsive behavior
+- 小尺寸通过粗指针命中区扩大可点范围；长动作名称优先简化对象表达，保留明确的动词。
+
+## Customization
+- variant 决定视觉显著程度，size 决定控件占位；公共控制尺寸和触摸目标分别调整。
 
 ## Current exports
 - Button: function; owner button; PASS; props: ButtonProps
@@ -50,7 +59,7 @@ import { Button } from "@qingye/ui/components/button";
 
 export const meta = {
   title: "样式",
-  description: "一个区域只放一个主按钮；次要操作用 outline、secondary 或 ghost，危险操作用 destructive。",
+  description: "样式表达当前任务中的强调与后果；保存、退出或保护动作都可以成为重点，不按动作名称固定分级。",
 };
 
 export default function Demo() {
@@ -60,7 +69,7 @@ export default function Demo() {
       <Button variant="outline">取消</Button>
       <Button variant="secondary">存为草稿</Button>
       <Button variant="ghost">稍后再说</Button>
-      <Button variant="link">查看详情</Button>
+      <Button variant="link">展开记录</Button>
       <Button variant="destructive">删除设备</Button>
       <Button variant="destructive-outline">解除绑定</Button>
     </>
@@ -163,29 +172,30 @@ export default function Demo() {
 ### 作为链接
 Source: apps/docs/src/content/button/demos/05-link.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
+import { buttonVariants } from "@qingye/ui/components/button";
 import { ChevronLeftIcon, ExternalLinkIcon } from "lucide-react";
 
 export const meta = {
   title: "作为链接",
-  description: "导航用 render 渲染为 <a>，并设 nativeButton={false}，保留按钮外观与链接语义。",
+  description: "导航使用真正的 a 或路由 Link，配合 buttonVariants 复用按钮外观，保留链接语义与浏览器操作。",
 };
 
 export default function Demo() {
   return (
     <>
-      <Button nativeButton={false} render={<a href="#orders" />} variant="link">
+      <a className={buttonVariants({ variant: "link" })} href="#orders">
         <ChevronLeftIcon aria-hidden="true" />
         返回订单列表
-      </Button>
-      <Button
-        nativeButton={false}
-        render={<a href="https://example.com/help" rel="noreferrer" target="_blank" />}
-        variant="outline"
+      </a>
+      <a
+        className={buttonVariants({ variant: "outline" })}
+        href="https://example.com/help"
+        rel="noreferrer"
+        target="_blank"
       >
         帮助中心
         <ExternalLinkIcon aria-hidden="true" />
-      </Button>
+      </a>
     </>
   );
 }
@@ -283,17 +293,27 @@ import { Button } from "@qingye/ui/components/button";
 
 export const meta = {
   title: "组合：表单操作栏",
-  description: "主操作靠末端；危险操作与其他操作分开放置。",
+  description: "把相关操作放在一起，按当前任务安排强调。正常编辑时突出保存；需要阻止继续同步时突出停止。",
 };
 
 export default function Demo() {
   return (
-    <div className="flex w-full max-w-lg flex-col-reverse gap-2 sm:flex-row sm:items-center">
-      <Button className="sm:me-auto" variant="destructive-outline">
-        停用账号
-      </Button>
-      <Button variant="ghost">取消</Button>
-      <Button>保存设置</Button>
+    <div className="flex w-full max-w-lg flex-col gap-(--qy-space-5)">
+      <div className="flex flex-col gap-(--qy-space-2)">
+        <p className="text-caption text-muted-foreground">编辑设置</p>
+        <div className="flex flex-wrap gap-(--qy-action-gap)">
+          <Button>保存设置</Button>
+          <Button variant="outline">放弃这次修改</Button>
+          <Button variant="destructive-outline">停用账号</Button>
+        </div>
+      </div>
+      <div className="flex flex-col gap-(--qy-space-2)">
+        <p className="text-caption text-muted-foreground">发现同步对象有误</p>
+        <div className="flex flex-wrap gap-(--qy-action-gap)">
+          <Button variant="destructive">停止同步</Button>
+          <Button variant="outline">继续等待</Button>
+        </div>
+      </div>
     </div>
   );
 }

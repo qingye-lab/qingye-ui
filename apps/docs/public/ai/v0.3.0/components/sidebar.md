@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: b82030b6c170b5bbc010caa32bfc882722985c975660496cf39fa8adac6ef484
+Source SHA-256: be375c0f60b4e666c2835ab8a196e38c1446182ebe6e41efc581863f9ed55b6b
 
 应用的主导航框架：分组菜单、子菜单、计数与操作，可折叠为图标栏；在窄屏上自动变为抽屉。适合后台、工作台这类常驻导航的应用。
 
 ## Use and ownership
-- 应用的主导航框架：分组菜单、子菜单、计数与操作，可折叠为图标栏；在窄屏上自动变为抽屉。适合后台、工作台这类常驻导航的应用。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 保持工作区主导航常驻，让对象入口、当前页与分组关系在连续工作中可辨认。
+- Avoid: 折叠状态不能吞掉当前页语义；全局导航快捷键不能拦截输入、编辑器或合成输入。
+- Library: 管理受控 / 非受控开关、已接受状态的最佳努力持久化、移动关闭与焦点返回，透传原生属性。
+- Application: 维护真实路由、分组对象、权限与草稿；跨断点需要保留的子组件状态提升到稳定应用 owner。
+
+## Composition
+- Provider 关联桌面开关与移动 Sheet；导航项 isActive 表达当前页，次级内容按真实层级用 Collapsible。
+
+## Responsive behavior
+- 窄屏有可见工作区导航标题与关闭入口，正文可滚动；图标栏每项仍保留名称与当前页。
+
+## Customization
+- Provider 统一宽度，桌面局部演示定位限定 md:；自定义 style 在移动 Popup 保留，品牌不改变导航状态。
 
 ## Current exports
 - Sidebar: function; owner sidebar; PASS; props: React.ComponentProps<"div"> & {
@@ -64,7 +73,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Dependencies and providers
 - Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
-- 侧栏桌面端使用 fixed 定位并占满视口高度；嵌在页面局部时（如本页示例），给 Provider 一个固定高度与 relative，并给 Sidebar 传 className="absolute h-full"。
+- 侧栏桌面端使用 fixed 定位并占满视口高度；嵌在页面局部时（如本页示例），给 Provider 一个固定高度与 relative，并给 Sidebar 传 className="md:absolute md:h-full"。
 - 宽度只在 Provider 上覆盖 --sidebar-width，不要直接给 Sidebar 设宽度，否则折叠动画与占位会错位。
 - 页面上同时存在多个 SidebarProvider 时，快捷键会同时作用于所有侧栏。
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
@@ -73,7 +82,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### SidebarProvider
 包住侧栏与主区域，管理展开状态并注册 ⌘/Ctrl + B 快捷键。默认占满视口高度。
 - defaultOpen: boolean; default true. 桌面端初始是否展开。
-- open / onOpenChange: boolean / (open) => void. 受控展开状态。
+- open / onOpenChange: boolean / (open) => void. 受控展开状态；只传 onOpenChange 可观察非受控变化，不会阻止内部更新。
 - style: CSSProperties. 覆盖 --sidebar-width（默认 16rem）与 --sidebar-width-icon（默认 3rem）。
 
 ### Sidebar
@@ -81,6 +90,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - side: "left" | "right"; default "left". 停靠的一侧。
 - variant: "sidebar" | "floating" | "inset"; default "sidebar". 贴边、浮起卡片，或让主区域内嵌为卡片。
 - collapsible: "offcanvas" | "icon" | "none"; default "offcanvas". 折叠方式：完全收起、收成图标栏，或不可折叠。
+- className / style / 原生属性: div props. 透传到桌面容器或移动端弹层；移动端 style 与默认 18rem 宽度合并。局部定位仅用于 md: 及以上断点。
 
 ### SidebarHeader / SidebarFooter
 顶部与底部的固定区域，常放工作区切换和用户菜单。
@@ -96,7 +106,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### SidebarMenuButton
 菜单项的可点击区域，默认 <button>，用 render 换成链接。
-- isActive: boolean; default false. 当前页面。
+- isActive: boolean; default false. 当前页面，默认标记 aria-current="page"。
 - tooltip: string | TooltipPopup props. 折叠为图标栏时悬停显示的名称。
 - size: "sm" | "default" | "lg"; default "default". lg 用于工作区与用户这类两行内容。
 - variant: "default" | "outline"; default "default". outline 带细边框。
@@ -117,7 +127,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 侧栏内的搜索框与分隔线。
 
 ### SidebarTrigger
-切换侧栏的图标按钮；移动端打开抽屉。
+切换侧栏的图标按钮，aria-expanded 与当前模式同步；移动端打开抽屉，抽屉内有可见关闭入口。onClick 调用 preventDefault 可取消切换。
 
 ### SidebarRail
 侧栏边缘的细条，点击切换折叠。
@@ -129,7 +139,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 读取 state、open、isMobile、toggleSidebar 等状态，用于自定义触发器。
 
 ## Keyboard
-- ⌘ B / Ctrl B: 展开或折叠侧栏（移动端为打开或关闭抽屉）。
+- ⌘ B / Ctrl B: 展开或折叠侧栏（移动端为打开或关闭抽屉）；输入、可编辑区域、合成输入及已被处理的按键不触发。
 - Tab: 依次聚焦菜单项与操作按钮。
 - Esc: 关闭移动端抽屉。
 
@@ -177,7 +187,7 @@ const projects = [
 export default function Demo() {
   return (
     <SidebarProvider className="relative h-80 min-h-0 md:h-[34rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]">
-      <Sidebar className="absolute h-full" collapsible="icon">
+      <Sidebar className="md:absolute md:h-full" collapsible="icon">
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -346,7 +356,7 @@ export default function Demo() {
       className="relative h-72 min-h-0 md:h-[26rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]"
       defaultOpen={false}
     >
-      <Sidebar className="absolute h-full" collapsible="icon" variant="floating">
+      <Sidebar className="md:absolute md:h-full" collapsible="icon" variant="floating">
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
@@ -435,7 +445,7 @@ export default function Demo() {
       className="relative h-72 min-h-0 md:h-[26rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]"
       style={{ "--sidebar-width": "14rem" } as CSSProperties}
     >
-      <Sidebar className="absolute h-full" variant="inset">
+      <Sidebar className="md:absolute md:h-full" variant="inset">
         <SidebarHeader>
           <SidebarInput aria-label="搜索文档" placeholder="搜索文档…" />
         </SidebarHeader>

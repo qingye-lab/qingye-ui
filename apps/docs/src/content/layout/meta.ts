@@ -55,4 +55,33 @@ export default {
     "Grid 放在宽度不确定的容器里（侧栏、弹窗）时用 minItemWidth，它跟随容器而不是视口。",
     "标题、长文排版与正文链接见排版类组件（Heading、Prose、TextLink）。",
   ],
+  design: {
+    "methods": [
+      "布白有用",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "以 Stack/Inline/Grid 组织真实信息关系，Text 表达文字角色。"
+    ],
+    "avoid": [
+      "所有段落用相同 gap；Grid 重排丢失当前焦点；视觉标签替代 heading/label 的语义。"
+    ],
+    "composition": [
+      "as 选择正确 HTML 结构，gap 表达关系；Inline 换行，Grid minItemWidth 按宿主容量流动。"
+    ],
+    "stateOwner": {
+      "library": [
+        "布局、角色文字、属性透传与响应式列数。"
+      ],
+      "application": [
+        "任务分组、DOM 阅读顺序、语义元素和工作保留。"
+      ]
+    },
+    "responsive": [
+      "minItemWidth 跟随容器而 columns 跟随视口；重要二维比较仍用 Table。"
+    ],
+    "customization": [
+      "gap 使用既有空间档位，Text tone 只改强调，不能改变状态事实。"
+    ]
+  },
 } satisfies ComponentMeta;

@@ -231,3 +231,25 @@ test("four panels keep the total stable while dragging", async () => {
   expect(current.reduce((total, size) => total + size, 0)).toBeCloseTo(100, 5);
   expect(current[1]).toBe(40);
 });
+
+test("a zero-size panel becomes inert while preserving its draft for expansion", async () => {
+  const user = userEvent.setup();
+  render(
+    <ResizablePanelGroup>
+      <ResizablePanel collapsible defaultSize={30} minSize={20}>
+        <input aria-label="草稿" defaultValue="保留这段工作" />
+      </ResizablePanel>
+      <ResizableHandle aria-label="调整草稿区域" />
+      <ResizablePanel>预览</ResizablePanel>
+    </ResizablePanelGroup>,
+  );
+  const input = screen.getByRole("textbox", { name: "草稿" });
+  const handle = screen.getByRole("separator");
+  handle.focus();
+  await user.keyboard("{Enter}");
+  expect(input.closest("[data-slot=resizable-panel]")).toHaveAttribute("inert");
+  expect(input).toHaveValue("保留这段工作");
+  await user.keyboard("{Enter}");
+  expect(input.closest("[data-slot=resizable-panel]")).not.toHaveAttribute("inert");
+  expect(input).toHaveValue("保留这段工作");
+});

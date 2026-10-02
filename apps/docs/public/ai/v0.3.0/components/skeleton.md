@@ -8,10 +8,19 @@ Source SHA-256: 00761f6db239c68e2f0c2fea3d84cef399f3840688fa286d9697136547781159
 内容加载时先画出与真实布局一致的占位块，减少等待感和加载完成时的跳动。适合列表、卡片、表格等结构已知的区域。
 
 ## Use and ownership
-- 内容加载时先画出与真实布局一致的占位块，减少等待感和加载完成时的跳动。适合列表、卡片、表格等结构已知的区域。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 初次内容尚未到达，已知大致解剖需要稳定占位。
+- Avoid: 将错误、空数据和加载都显示骨架；重复播报每一条占位；刷新已有内容时全部替换。
+- Library: 占位视觉与公共减少动态效果策略。
+- Application: 加载状态、何时替换内容、失败和恢复。
+
+## Composition
+- 宿主统一 aria-busy 与加载名称，Skeleton 对齐真实内容结构；有效数据保留，失败显示可恢复信息。
+
+## Responsive behavior
+- 占位随真实布局换行与收列，避免固定宽度制造页面溢出。
+
+## Customization
+- className 设置真实内容的占位尺寸，数量按需要避免把等待变成装饰。
 
 ## Current exports
 - Skeleton: function; owner skeleton; PASS; props: React.ComponentProps<"div">

@@ -77,10 +77,10 @@ export function NativeSelect({
     >
       <FieldPrimitive.Control
         className={cn(
-          "h-8.5 w-full min-w-0 cursor-default appearance-none truncate rounded-[inherit] bg-transparent ps-[calc(var(--qy-space-3)-1px)] pe-[calc(1.125rem+var(--qy-space-4)-1px)] text-foreground outline-none pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] has-[option[value='']:checked]:text-muted-foreground/72 sm:h-7.5 sm:pe-[calc(1rem+var(--qy-space-4)-1px)] [&_optgroup]:bg-popover [&_optgroup]:text-muted-foreground [&_option]:bg-popover [&_option]:text-popover-foreground",
+          "h-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] w-full min-w-0 cursor-default appearance-none truncate rounded-[inherit] bg-transparent ps-[calc(var(--qy-space-3)-1px)] pe-[calc(1.125rem+var(--qy-space-4)-1px)] text-foreground outline-none pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] has-[option[value='']:checked]:text-muted-foreground sm:h-[calc(var(--qy-control-md)-2px)] sm:pe-[calc(1rem+var(--qy-space-4)-1px)] [&_optgroup]:bg-popover [&_optgroup]:text-muted-foreground [&_option]:bg-popover [&_option]:text-popover-foreground",
           size === "sm" &&
-            "h-7.5 ps-[calc(calc(var(--qy-space-1)*2.5)-1px)] pe-[calc(1.125rem+var(--qy-space-3)-1px)] sm:h-6.5 sm:pe-[calc(1rem+var(--qy-space-3)-1px)]",
-          size === "lg" && "h-9.5 sm:h-8.5",
+            "h-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra)-2px)] ps-[calc(calc(var(--qy-space-1)*2.5)-1px)] pe-[calc(1.125rem+var(--qy-space-3)-1px)] sm:h-[calc(var(--qy-control-sm)-2px)] sm:pe-[calc(1rem+var(--qy-space-3)-1px)]",
+          size === "lg" && "h-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra)-2px)] sm:h-[calc(var(--qy-control-lg)-2px)]",
           selectClassName,
         )}
         data-slot="native-select"

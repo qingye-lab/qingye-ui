@@ -8,10 +8,19 @@ Source SHA-256: 6afac1b936e124aefeaa6a3d53f79f89e8b069d2f430417895d6b70fcaec545d
 基于 Base UI Form：提交时统一校验，把焦点移到第一个错误字段，并按字段名显示服务端返回的错误。
 
 ## Use and ownership
-- 基于 Base UI Form：提交时统一校验，把焦点移到第一个错误字段，并按字段名显示服务端返回的错误。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 组织一组输入与一个明确提交动作，让校验与修正保持在原位。
+- Avoid: 浏览器校验通过和 onSubmit 触发都不代表后端保存成功。
+- Library: 提交、原生校验与字段错误分派。
+- Application: 草稿、请求、版本、结果未知和恢复流程。
+
+## Composition
+- Form 与具名 Field 关联提交值和 errors；提交按钮名称表达真实后果。
+
+## Responsive behavior
+- 提交反馈保留已填写的控件；小屏按阅读和修正顺序安排字段。
+
+## Customization
+- errors 接收服务端字段消息，应用决定何时清除或重新校验。
 
 ## Current exports
 - Form: function; owner form; PASS; props: FormPrimitive.Props

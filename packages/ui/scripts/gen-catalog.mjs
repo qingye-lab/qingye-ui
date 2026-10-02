@@ -6,7 +6,6 @@ import { fileURLToPath } from "node:url";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
 import { generateResourceFixtures } from "../../../apps/docs/scripts/generate-fixtures.mjs";
-generateResourceFixtures();
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const repo = resolve(root, "../..");
@@ -19,6 +18,16 @@ const hash = (text) => createHash("sha256").update(text).digest("hex");
 const write = (path, text) => { mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, text); };
 const json = (path, value) => write(path, `${JSON.stringify(value, null, 2)}\n`);
 const publicPath = (path) => path.replaceAll("\\", "/");
+const designGuide = read(join(repo, "design.md"));
+const adoptionStart = "<!-- qingye:project-adoption:start -->";
+const adoptionEnd = "<!-- qingye:project-adoption:end -->";
+const adoptionFrom = designGuide.indexOf(adoptionStart);
+const adoptionTo = designGuide.indexOf(adoptionEnd);
+if (adoptionFrom < 0 || adoptionTo <= adoptionFrom || designGuide.indexOf(adoptionStart, adoptionFrom + adoptionStart.length) >= 0 || designGuide.indexOf(adoptionEnd, adoptionTo + adoptionEnd.length) >= 0) {
+  throw new Error("design.md must contain exactly one complete Qingye project-adoption block");
+}
+const projectAdoption = designGuide.slice(adoptionFrom + adoptionStart.length, adoptionTo).trim();
+generateResourceFixtures();
 function loadData(path) {
   const { outputText } = ts.transpileModule(read(path), { fileName: path, compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } });
   const context = { exports: {} };
@@ -147,26 +156,49 @@ const catalog = {
   schemaVersion: 2, name: "Qingye UI", nameZh: "青野 UI", package: pkg.name, version: pkg.version,
   generatedBy: "scripts/gen-catalog.mjs", scope: "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   components, extras: components.filter((component) => component.source === "local").map((component) => component.name), patterns,
-  designGuide: { file: "design.md", sha256: hash(read(join(repo, "design.md"))) },
+  designGuide: { file: "design.md", sha256: hash(designGuide) },
   ai: { skill: "ai/SKILL.md", index: `ai/${versionPath}/llms.txt`, components: `ai/${versionPath}/components`, patterns: `ai/${versionPath}/patterns` },
   registry: { index: "registry/registry.json", items: "registry/r" },
 };
 json(join(root, "catalog.json"), catalog);
 json(join(docs, "public/catalog.json"), catalog);
-write(join(root, "design.md"), read(join(repo, "design.md")));
-write(join(docs, "public/design.md"), read(join(repo, "design.md")));
+write(join(root, "design.md"), designGuide);
+write(join(docs, "public/design.md"), designGuide);
 write(join(docs, "public/design-philosophy.md"), read(join(docs, "src/public-content/philosophy.md")));
 const aiRoot = join(root, "ai");
 const siteAi = join(docs, "public/ai");
 const bothAi = (path, text) => { write(join(aiRoot, path), text); write(join(siteAi, path), text); };
-const skill = `---\nname: qingye-ui\ndescription: Build complete React tasks using the installed Qingye UI version, public methods and verified facts.\n---\n\n# Qingye UI\n\nThis file accompanies ${pkg.name} ${pkg.version}. Read the installed version first; a website or upstream namesake may describe another API.\n\n1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Preserve unrelated work.\n2. State the object, action, scope, current status and work to retain. Use relevant methods; cultural terms are not HTML roles or API names.\n3. Load related resources from ai/v<installed-version>/components and patterns. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.\n4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.\n5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.\n6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.\n\nRead ../design.md for methods; ${versionPath}/installation.md for styles and dependencies; ${versionPath}/llms.txt for resources. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.\n\nRegistry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.\n`;
+const skill = `---
+name: qingye-ui
+description: Build complete React tasks using the installed Qingye UI version, public methods and verified facts.
+---
+
+# Qingye UI
+
+This file accompanies ${pkg.name} ${pkg.version}. Read the installed version first; a website or upstream namesake may describe another API.
+
+${projectAdoption}
+
+## Task workflow
+
+1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Check the project's persistent references described above when completing onboarding. Preserve unrelated work.
+2. State the object, action, scope, current status and work to retain. Use relevant methods; cultural terms are not HTML roles or API names.
+3. Load related resources from ai/v<installed-version>/components and patterns. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.
+4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
+5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
+6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
+
+Read ../design.md for methods; ${versionPath}/installation.md for styles and dependencies; ${versionPath}/llms.txt for resources. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
+
+Registry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.
+`;
 bothAi("SKILL.md", skill);
 const index = [`# Qingye UI ${pkg.version}`, "", `> Facts for ${pkg.name}@${pkg.version}. Runtime acceptance is separate.`, "", "## Start", "- [Design guide](/design.md)", `- [Installation](/ai/${versionPath}/installation.md)`, "- [Main skill](/ai/SKILL.md)", "", "## Components", ...components.map((component) => `- [${component.title}](/ai/${versionPath}/components/${component.name}.md): ${component.description}`), "", "## Patterns", ...patterns.map((pattern) => `- [${pattern.title}](/ai/${versionPath}/patterns/${pattern.slug}.md): ${pattern.description}`), ""].join("\n");
 bothAi(`${versionPath}/llms.txt`, index);
 write(join(docs, "public/llms.txt"), index);
 bothAi(`${versionPath}/installation.md`, `# Install ${pkg.name} ${pkg.version}\n\nUse this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.\n\nRequired peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => !pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}.\n\nOptional peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}; install only for relevant components.\n\nTailwind CSS 4: import @qingye/ui/styles.css after tailwindcss and scan the package source as documented in /docs/installation. Precompiled path: import @qingye/ui/ui.css once. Choose one path.\n\nThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.dark by default or explicit data-theme mode; density: data-density. Check provider guidance and current types.\n\nExamples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.\n`);
 for (const component of components) {
-  const markdown = [`# ${component.title}`, "", `Package: ${pkg.name}@${pkg.version}`, `Import: ${component.import}`, `Source: ${component.sourceFacts.file}`, `Source SHA-256: ${component.sourceFacts.sha256}`, "", component.description, "", "## Use and ownership", ...component.design.whenToUse.map((item) => `- ${item}`), ...component.design.avoid.map((item) => `- Avoid: ${item}`), ...component.design.stateOwner.library.map((item) => `- Library: ${item}`), ...component.design.stateOwner.application.map((item) => `- Application: ${item}`), "", "## Current exports", ...component.actualExports.map((item) => `- ${item.name}: ${item.kind}; owner ${item.owner ?? "external"}${item.aliasOf ? `; alias of ${item.aliasOf}` : ""}; ${item.status}${item.propsType ? `; props: ${item.propsType}` : ""}`), "", "Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.", "", "## Dependencies and providers", `- Runtime: ${component.dependencies.runtime.join(", ") || "none recorded"}`, `- Optional peers: ${component.dependencies.optionalPeers.join(", ") || "none recorded"}`, ...component.providers.guidance.map((item) => `- ${item.text}`), "- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.", "", "## Curated API", ...component.api.flatMap((part) => [`### ${part.name}`, part.description, ...(part.props ?? []).map((prop) => `- ${prop.name}: ${prop.type}${prop.default ? `; default ${prop.default}` : ""}. ${prop.description}`), ""]), "## Keyboard", ...component.keyboard.map((row) => `- ${row.keys}: ${row.description}`), "", "## Source examples", ...component.examples.flatMap((example) => [`### ${example.title}`, `Source: ${example.source}`, "```tsx", example.code.trim(), "```", ""]), ""].join("\n");
+  const markdown = [`# ${component.title}`, "", `Package: ${pkg.name}@${pkg.version}`, `Import: ${component.import}`, `Source: ${component.sourceFacts.file}`, `Source SHA-256: ${component.sourceFacts.sha256}`, "", component.description, "", "## Use and ownership", ...component.design.whenToUse.map((item) => `- ${item}`), ...component.design.avoid.map((item) => `- Avoid: ${item}`), ...component.design.stateOwner.library.map((item) => `- Library: ${item}`), ...component.design.stateOwner.application.map((item) => `- Application: ${item}`), "", "## Composition", ...component.design.composition.map((item) => `- ${item}`), "", "## Responsive behavior", ...component.design.responsive.map((item) => `- ${item}`), "", "## Customization", ...component.design.customization.map((item) => `- ${item}`), "", "## Current exports", ...component.actualExports.map((item) => `- ${item.name}: ${item.kind}; owner ${item.owner ?? "external"}${item.aliasOf ? `; alias of ${item.aliasOf}` : ""}; ${item.status}${item.propsType ? `; props: ${item.propsType}` : ""}`), "", "Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.", "", "## Dependencies and providers", `- Runtime: ${component.dependencies.runtime.join(", ") || "none recorded"}`, `- Optional peers: ${component.dependencies.optionalPeers.join(", ") || "none recorded"}`, ...component.providers.guidance.map((item) => `- ${item.text}`), "- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.", "", "## Curated API", ...component.api.flatMap((part) => [`### ${part.name}`, part.description, ...(part.props ?? []).map((prop) => `- ${prop.name}: ${prop.type}${prop.default ? `; default ${prop.default}` : ""}. ${prop.description}`), ""]), "## Keyboard", ...component.keyboard.map((row) => `- ${row.keys}: ${row.description}`), "", "## Source examples", ...component.examples.flatMap((example) => [`### ${example.title}`, `Source: ${example.source}`, "```tsx", example.code.trim(), "```", ""]), ""].join("\n");
   bothAi(`${versionPath}/components/${component.name}.md`, markdown);
 }
 for (const pattern of patterns) {

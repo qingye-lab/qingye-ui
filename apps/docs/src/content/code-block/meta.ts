@@ -35,4 +35,33 @@ export default {
     "需要语法高亮时在应用侧用 Shiki 等工具生成节点再传入，组件不绑定高亮库。",
     "不要用 CodeBlock 展示需要编辑的内容；可编辑请用 Textarea。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "阅读、选择和复制代码、命令或配置，源文本需要保持准确。"
+    ],
+    "avoid": [
+      "将代码展示当编辑器；把复制请求开始当成功；复制行号、折行空格或装饰文字。"
+    ],
+    "composition": [
+      "code 提供干净源文；预高亮 children 配合 code，行号与高亮只影响阅读。InlineCode 用于短的行内语法。"
+    ],
+    "stateOwner": {
+      "library": [
+        "滚动区域、行结构、复制反馈与部位。"
+      ],
+      "application": [
+        "源码、语法高亮生成、敏感信息遮蔽和代码说明。"
+      ]
+    },
+    "responsive": [
+      "比较缩进时保留横向滚动；阅读长参数时可 wrap，换行不能修改原文。"
+    ],
+    "customization": [
+      "maxHeight 约束工作面，wrap 决定阅读策略；文件名与语言用于识别而非重复解释。"
+    ]
+  },
 } satisfies ComponentMeta;

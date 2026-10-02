@@ -16,20 +16,43 @@ export function useCopyToClipboard({
    * origin) or when the browser rejects the write.
    */
   onError?: (error: unknown) => void;
-} = {}): { copyToClipboard: (value: string) => void; isCopied: boolean } {
+} = {}): { copyToClipboard: (value: string) => void; isCopied: boolean; isCopying: boolean } {
   const [isCopied, setIsCopied] = React.useState(false);
+  const [isCopying, setIsCopying] = React.useState(false);
   const timeoutIdRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const requestRef = React.useRef(0);
+  const mountedRef = React.useRef(true);
 
   const copyToClipboard = (value: string): void => {
+    const request = ++requestRef.current;
+    if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+    timeoutIdRef.current = null;
+    setIsCopied(false);
+    const ownsResult = () => mountedRef.current && request === requestRef.current;
+    const fail = (error: unknown) => {
+      if (!ownsResult()) return;
+      setIsCopying(false);
+      if (onError) onError(error);
+      else console.error(error);
+    };
     if (typeof window === "undefined" || !navigator.clipboard?.writeText) {
-      onError?.(new Error("Clipboard API unavailable"));
+      fail(new Error("Clipboard API unavailable"));
       return;
     }
 
-    if (!value) return;
+    setIsCopying(true);
+    let write: Promise<void>;
+    try {
+      write = navigator.clipboard.writeText(value);
+    } catch (error) {
+      fail(error);
+      return;
+    }
 
-    navigator.clipboard.writeText(value).then(
+    write.then(
       () => {
+        if (!ownsResult()) return;
+        setIsCopying(false);
         if (timeoutIdRef.current) {
           clearTimeout(timeoutIdRef.current);
         }
@@ -46,21 +69,21 @@ export function useCopyToClipboard({
           }, timeout);
         }
       },
-      (error: unknown) => {
-        if (onError) onError(error);
-        else console.error(error);
-      },
+      fail,
     );
   };
 
   // Cleanup timeout on unmount
   React.useEffect(() => {
+    mountedRef.current = true;
     return (): void => {
+      mountedRef.current = false;
+      requestRef.current++;
       if (timeoutIdRef.current) {
         clearTimeout(timeoutIdRef.current);
       }
     };
   }, []);
 
-  return { copyToClipboard, isCopied };
+  return { copyToClipboard, isCopied, isCopying };
 }

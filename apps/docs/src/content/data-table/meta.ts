@@ -60,4 +60,33 @@ export default {
     "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
     "初始加载渲染与每页行数相同的骨架行；刷新已有数据时保留有效行，不清空比较面。",
   ],
+  design: {
+    "methods": [
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "在同一二维工作面搜索、排序、选择并比较多行对象。"
+    ],
+    "avoid": [
+      "刷新已有行时卸载编辑面；用数组位置选择跨页对象；把当前页 rows 当成所有选中 ids；服务端请求结果无归属。"
+    ],
+    "composition": [
+      "Table 保留列关系，工具栏与选择范围并存；getRowId 锁定对象，批量操作核对 ids 与当前 data 中 rows 的差异。"
+    ],
+    "stateOwner": {
+      "library": [
+        "表格状态、分页范围修正、排序和搜索、初始骨架与刷新 aria-busy。"
+      ],
+      "application": [
+        "服务端请求、权限、稳定 ID、跨页范围、失败恢复与批量结果。"
+      ]
+    },
+    "responsive": [
+      "窄屏在表格容器滚动，不按列分别卡片化；工具栏换行，保留当前搜索与选择。"
+    ],
+    "customization": [
+      "列 meta 调整对齐和内容容量；固定关键识别列 enableHiding=false，密度不缩小文字或命中区。"
+    ]
+  },
 } satisfies ComponentMeta;

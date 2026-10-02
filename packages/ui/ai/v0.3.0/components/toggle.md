@@ -8,10 +8,19 @@ Source SHA-256: 37b117bae96fe483e8380b2ea95033349e402a9899bd2f3e05c8a254bb442004
 可按下保持的双态按钮，用于开关一项格式或视图设置，例如加粗、收藏、显示网格。
 
 ## Use and ownership
-- 可按下保持的双态按钮，用于开关一项格式或视图设置，例如加粗、收藏、显示网格。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 开关可保持的一项模式或格式，例如显示网格与加粗。
+- Avoid: 不要把即时执行的命令或表单字段值伪装成 pressed；名称不随按下状态改成反义词。
+- Library: 维护 pressed 与 aria-pressed、键盘激活和禁用；视觉随同一状态变化。
+- Application: 决定模式的实际效果、与内容选择的关联及保存策略。
+
+## Composition
+- 相关的多个模式交给 ToggleGroup；图标项保留稳定 aria-label，Tooltip 只补充名称展示。
+
+## Responsive behavior
+- 三种尺寸分别保留移动占位差与触屏命中区；不能只减小按钮来增加工具数量。
+
+## Customization
+- 用 variant 和 size 控制表面与密度；按下强调必须与未选中、悬停和焦点可区分。
 
 ## Current exports
 - Toggle: function; owner toggle; PASS; props: TogglePrimitive.Props &

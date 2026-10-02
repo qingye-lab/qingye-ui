@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
-Source SHA-256: 6f650f6016b3a31b7c8c50d6b748e6ab12150a70630cdc6b4b848cc98e0e102b
+Source SHA-256: 0fb846bb978074c1d118779da01cb472381aeb0ae31385b4d8335aaaf6cf1fb2
 
 把一组相关的表单项放在同一个标题下，例如“发票信息”“通知方式”；可整体禁用。
 
 ## Use and ownership
-- 把一组相关的表单项放在同一个标题下，例如“发票信息”“通知方式”；可整体禁用。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 给相关字段或选项提供共同问题与作用范围。
+- Avoid: 只有布局关系时不要额外制造语义分组；每个字段仍需自身名称。
+- Library: 原生 fieldset、legend 关联与禁用传播。
+- Application: 分组问题、成员数据和操作范围。
+
+## Composition
+- Legend 定义共同问题，Field 或 Radio/CheckboxGroup 承载组内独立控件。
+
+## Responsive behavior
+- 组容器允许收缩，长 legend 可换行；组内字段按任务保留空间。
+
+## Customization
+- variant=label 适合紧凑选项组，不以缩小命中区换密度。
 
 ## Current exports
 - Fieldset: function; owner fieldset; PASS; props: FieldsetPrimitive.Root.Props

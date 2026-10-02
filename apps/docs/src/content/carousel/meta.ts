@@ -27,8 +27,8 @@ export default {
     { name: "useCarousel", description: "在 Carousel 内读取 index、count、canPrevious、canNext 与 scrollTo，用于自定义计数或控件。" },
   ],
   keyboard: [
-    { keys: "← / →", description: "焦点在轮播内时切换上一张 / 下一张（从右到左布局时方向相反）。" },
-    { keys: "Tab", description: "依次聚焦每张中的链接与控件，被聚焦的一张会滚入视野。" },
+    { keys: "← / →", description: "焦点在滚动轨道上时切换上一张 / 下一张（从右到左布局时方向相反）；张内控件保留自己的按键行为。" },
+    { keys: "Tab", description: "聚焦滚动轨道、每张中的链接与控件，被聚焦的一张会滚入视野。" },
     { keys: "Enter / Space", description: "触发上一张、下一张或指示点。" },
   ],
   notes: [
@@ -37,4 +37,33 @@ export default {
     "同时显示多张时，指示点按“可停靠的位置”计数，而不是按张数。",
     "开启“减少动态效果”时，按钮与按键跳转不再平滑滚动。",
   ],
+  design: {
+    "methods": [
+      "展开有据",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "顺序浏览可独立理解的图像或内容，每张都能直接操作。"
+    ],
+    "avoid": [
+      "自动播放打断阅读；把关键结论只藏在后续张；父级抢走 Tab、Tree 等张内控件方向键。"
+    ],
+    "composition": [
+      "Content 的方向键负责位置，张内控件各自负责键盘；Previous/Next 到边界保留焦点，Dots 对应吸附位置。"
+    ],
+    "stateOwner": {
+      "library": [
+        "滚动、吸附位置、位置反馈、按键范围与无动画跳转。"
+      ],
+      "application": [
+        "内容顺序、位置受控值、每张的名称与进入详情后的返回。"
+      ]
+    },
+    "responsive": [
+      "按可读内容决定 slidesPerView；触屏原生滑动，多张并排时位置数与张数分别表达。"
+    ],
+    "customization": [
+      "用每视口变量与 gap 调整容量，避免为了固定张数压缩文字和命中区。"
+    ]
+  },
 } satisfies ComponentMeta;

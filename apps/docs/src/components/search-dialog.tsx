@@ -89,7 +89,7 @@ export default function SearchDialog({ open, onOpenChange }: { open: boolean; on
                           <span className="truncate">{entry.title}</span>
                           {entry.hint ? <span className="truncate text-muted-foreground text-xs">{entry.hint}</span> : null}
                           {searching && entry.group === "组件" ? (
-                            <span className="ms-auto shrink-0 ps-3 text-muted-foreground/80 text-xs">{entry.meta}</span>
+                            <span className="ms-auto shrink-0 ps-3 text-muted-foreground text-xs">{entry.meta}</span>
                           ) : null}
                         </CommandItem>
                       )}

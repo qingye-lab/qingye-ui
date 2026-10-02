@@ -51,4 +51,33 @@ export default {
     "分隔条的可点按区域比 1px 线条宽，触屏下进一步加宽；拖动期间全局保持调整光标，不会误选文字。",
     "不建议在手机上依赖拖动调整布局，窄屏可改为上下堆叠或用 Tabs 切换。",
   ],
+  design: {
+    "methods": [
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "编辑、浏览与比较需要共享空间，并允许人调整工作面比例。"
+    ],
+    "avoid": [
+      "收起到零仍能 Tab 进入隐藏字段；折叠卸载草稿；手机只能拖线到达内容；互相矛盾的 min/max。"
+    ],
+    "composition": [
+      "Panel 保留内容 DOM，零尺寸暂时 inert；非零图标栏仍可用。Handle 提供键盘伸缩，应用提供窄屏替代入口。"
+    ],
+    "stateOwner": {
+      "library": [
+        "分配/约束/折叠几何、分隔条键盘、零尺寸退场。"
+      ],
+      "application": [
+        "布局持久化、草稿、面板任务和响应式替代组合。"
+      ]
+    },
+    "responsive": [
+      "窄屏使用堆叠或 Tabs，切换仍保留工作；最小百分比需结合实际容器像素容量判断。"
+    ],
+    "customization": [
+      "minSize/maxSize/collapsedSize 描述可行约束；panelRef 在真实操作中恢复原有工作面。"
+    ]
+  },
 } satisfies ComponentMeta;

@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/preview-card
 Source: packages/ui/src/components/preview-card.tsx
-Source SHA-256: e340220e1ee2a3e069ce54519041dcf407e1c0f716af4de16ceab141147da95d
+Source SHA-256: a26ccb5e1bfe0d8a33fe369c087fd57773d7bd1d84881e98dbb2c008e7f97fe9
 
 悬停在链接上时显示目标内容的预览，例如成员资料、工单摘要。只是锦上添花：点击链接本身仍然能到达完整页面。
 
 ## Use and ownership
-- 悬停在链接上时显示目标内容的预览，例如成员资料、工单摘要。只是锦上添花：点击链接本身仍然能到达完整页面。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 预览真实链接背后的补充信息，帮助决定是否继续进入目标。
+- Avoid: 唯一操作与关键内容不能只放在悬停预览；预览出现不应阻碍直接访问链接。
+- Library: 管理预览延迟、焦点或悬停开关与碰撞定位，按可用视口限制内容范围。
+- Application: 提供真实地址、对象摘要、内容加载与访问权限；目标页面保留完整信息。
+
+## Composition
+- Trigger 始终保留真实 href；只读摘要放 Popup，需要表单或按钮时改用 Popover。
+
+## Responsive behavior
+- 预览长文本换行并限制到可用视口；触屏用户可通过原链接完成同一阅读。
+
+## Customization
+- 默认宽度适合摘要，调整 className 宽度时仍保留可用视口限制。
 
 ## Current exports
 - HoverCard: const; owner preview-card; alias of PreviewCard; PASS

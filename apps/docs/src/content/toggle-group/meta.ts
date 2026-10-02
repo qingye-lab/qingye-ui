@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "切换按钮组 ToggleGroup",
   description: "一组共享状态的 Toggle：单选用于视图或对齐方式，多选用于文字格式等可叠加的选项。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "选择单个视图或叠加多个格式，选项围绕同一设置对象。"
+    ],
+    "avoid": [
+      "按钮组的按下状态不能代替标签面板关系；单选是否允许清空由真实任务决定。"
+    ],
+    "composition": [
+      "多个 ToggleGroupItem 共用 value 和 variant；outline 可用 Separator 表达连续边界。"
+    ],
+    "stateOwner": {
+      "library": [
+        "维护单选或多选值、pressed 状态、方向键焦点与布局方向；焦点移动与执行选择分开。"
+      ],
+      "application": [
+        "决定选项含义、必须保留的选择与实际格式或视图结果。"
+      ]
+    },
+    "responsive": [
+      "orientation=vertical 在 default 与 outline 都纵向排列；触屏下检查相邻命中区而非仅整组尺寸。"
+    ],
+    "customization": [
+      "组级 size 与 variant 建立一致关系；不通过子项颜色覆盖假装一个业务结果。"
+    ]
+  },
   category: "通用",
   source: "coss",
   exports: ["ToggleGroup", "ToggleGroupItem", "ToggleGroupSeparator"],

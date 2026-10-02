@@ -155,6 +155,7 @@ export function FileUpload({
   const [internal, setInternal] = React.useState<readonly File[]>(defaultFiles);
   const [rejected, setRejected] = React.useState<FileRejection[]>([]);
   const [dragging, setDragging] = React.useState(false);
+  const [selectionRevision, markSelection] = React.useReducer((revision: number) => revision + 1, 0);
   const dragDepth = React.useRef(0);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
@@ -230,7 +231,7 @@ export function FileUpload({
     } catch {
       // Older browsers cannot assign FileList; the list is still available via onFilesChange.
     }
-  }, [current, name]);
+  }, [current, name, selectionRevision]);
 
   const dragProps = {
     onDragEnter: (event: React.DragEvent) => {
@@ -339,6 +340,10 @@ export function FileUpload({
           const picked = Array.from(event.currentTarget.files ?? []);
           event.currentTarget.value = "";
           add(picked);
+          // The picker replaced the native FileList even when all incoming
+          // files were rejected, duplicated, or cleared. Restore the accepted
+          // list after the caller has had a chance to accept a controlled change.
+          markSelection();
         }}
         ref={inputRef}
         tabIndex={-1}

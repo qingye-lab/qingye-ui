@@ -3,6 +3,35 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "面包屑 Breadcrumb",
   description: "显示当前页面在层级中的位置，并可逐级返回。放在页面标题上方，层级较深时把中间层收进省略菜单。",
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "表达当前页面所属层级并提供真实的上级返回地址。"
+    ],
+    "avoid": [
+      "层级路径不能伪装成浏览历史；只隐藏中间层而没有可达入口会丢失返回依据。"
+    ],
+    "composition": [
+      "上级用 Link，当前用 Page，压缩中间层时用有名称的 Menu 触发器包 Ellipsis。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供命名导航、顺序列表、aria-current 与装饰分隔符，链接保留原生语义。"
+      ],
+      "application": [
+        "定义真实层级、路由与返回时需要恢复的列表筛选、选择或滚动位置。"
+      ]
+    },
+    "responsive": [
+      "长路径可以换行或折叠中间层；当前对象仍可辨认，链接触屏目标按实际组合检查。"
+    ],
+    "customization": [
+      "改变分隔图形与布局不改变路径顺序；RTL 分隔方向跟随阅读方向。"
+    ]
+  },
   category: "导航",
   source: "coss",
   exports: [

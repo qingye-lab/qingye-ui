@@ -8,10 +8,19 @@ Source SHA-256: e9536d3af196b68a3528d92d2ddf776de311b9f5ff407190c998ff8872dc74a9
 带显示 / 隐藏切换的密码输入框，用于登录、注册与修改密码。
 
 ## Use and ownership
-- 带显示 / 隐藏切换的密码输入框，用于登录、注册与修改密码。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 输入密码，按需查看字符以核对输入。
+- Avoid: 显示密码只改变可见性，不能复制、清空或自动提交密码。
+- Library: 可见性切换、输入属性与禁用联动。
+- Application: 密码值、验证、凭据处理及关闭界面时的清理。
+
+## Composition
+- Field 命名输入；尾部 visibility toggle 用稳定名称和 aria-pressed 表达当前可见状态。
+
+## Responsive behavior
+- 输入为主要工作区，尾部图标按钮随尺寸变化并保留触屏命中区。
+
+## Customization
+- visible 支持由应用集中控制；showLabel 覆盖切换按钮名称。
 
 ## Current exports
 - PasswordInput: function; owner password-input; PASS; props: PasswordInputProps

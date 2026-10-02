@@ -8,10 +8,19 @@ Source SHA-256: 7b0b37626ab5203a847354abfd607dbd0369fe3472a3e4cbb9a9062f38a6c822
 管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。
 
 ## Use and ownership
-- 管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 文档级主题偏好与保存位置由宿主配置；品牌写 data-brand，密度写 data-density。
+- 全应用共同选择浅色、深色或跟随系统，并在首屏一致应用。
+- Avoid: 把品牌写进 data-theme；多个 Provider 竞争同一 html；Script 与 Provider 的持久化键不同。
+- Library: 明暗应用、存储容错、系统偏好和跨标签页同步。
+- Application: 品牌 data-brand、密度 data-density、主题选择入口与集中主题。
+
+## Composition
+- 根部一个 Provider 与同选项 themeScript 配对；useTheme 分别展示用户选择与实际 resolvedTheme。
+
+## Responsive behavior
+- 主题切换保持对象、输入和焦点；真实控件、浮层与表面都检查明暗组合。
+
+## Customization
+- attribute 只选 class 或明暗 data-theme，storageKey 决定偏好范围，品牌单独配置。
 
 ## Current exports
 - ResolvedTheme: type; owner theme-provider; PASS

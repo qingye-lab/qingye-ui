@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
-Source SHA-256: f16a2d17ae9c0dbed3d40744cb14dc270e0fd5fd0fa9014c1918a8c629f22449
+Source SHA-256: 1e25c2186ee6fed17254542a1b4864d4314de415d6a1286bacc37546439ccf6c
 
 用拖动分隔条调整相邻面板的大小，适合文件浏览、编辑器、对比视图等多栏工作区。支持横向、纵向、嵌套、最小 / 最大尺寸与折叠，无第三方依赖。
 
 ## Use and ownership
-- 用拖动分隔条调整相邻面板的大小，适合文件浏览、编辑器、对比视图等多栏工作区。支持横向、纵向、嵌套、最小 / 最大尺寸与折叠，无第三方依赖。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 编辑、浏览与比较需要共享空间，并允许人调整工作面比例。
+- Avoid: 收起到零仍能 Tab 进入隐藏字段；折叠卸载草稿；手机只能拖线到达内容；互相矛盾的 min/max。
+- Library: 分配/约束/折叠几何、分隔条键盘、零尺寸退场。
+- Application: 布局持久化、草稿、面板任务和响应式替代组合。
+
+## Composition
+- Panel 保留内容 DOM，零尺寸暂时 inert；非零图标栏仍可用。Handle 提供键盘伸缩，应用提供窄屏替代入口。
+
+## Responsive behavior
+- 窄屏使用堆叠或 Tabs，切换仍保留工作；最小百分比需结合实际容器像素容量判断。
+
+## Customization
+- minSize/maxSize/collapsedSize 描述可行约束；panelRef 在真实操作中恢复原有工作面。
 
 ## Current exports
 - ResizableDirection: type; owner resizable; PASS
@@ -259,6 +268,42 @@ export default function Demo() {
       <p className="text-muted-foreground text-xs numeric">
         当前布局：{sizes.map((size) => `${Math.round(size)}%`).join(" / ")}
       </p>
+    </div>
+  );
+}
+```
+
+### 收起与继续编辑
+Source: apps/docs/src/content/resizable/demos/05-draft.tsx
+```tsx
+import { Button } from "@qingye/ui/components/button";
+import { Label } from "@qingye/ui/components/label";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup, type ResizablePanelHandle } from "@qingye/ui/components/resizable";
+import { Textarea } from "@qingye/ui/components/textarea";
+import { useRef, useState } from "react";
+
+export const meta = { title: "收起与继续编辑" };
+
+export default function Demo() {
+  const editor = useRef<ResizablePanelHandle>(null);
+  const [collapsed, setCollapsed] = useState(false);
+  return (
+    <div className="flex w-full max-w-xl flex-col gap-3">
+      <Button onClick={() => collapsed ? editor.current?.expand() : editor.current?.collapse()} size="sm" variant="outline">
+        {collapsed ? "继续编辑" : "收起编辑区"}
+      </Button>
+      <ResizablePanelGroup className="h-64 overflow-hidden rounded-xl border">
+        <ResizablePanel collapsible defaultSize={55} minSize={30} onCollapse={() => setCollapsed(true)} onExpand={() => setCollapsed(false)} panelRef={editor}>
+          <div className="flex h-full flex-col gap-2 p-3">
+            <Label htmlFor="panel-draft">发布草稿</Label>
+            <Textarea className="min-h-0 flex-1" defaultValue="本次发布改善了窄屏阅读。" id="panel-draft" />
+          </div>
+        </ResizablePanel>
+        <ResizableHandle aria-label="调整编辑区宽度" />
+        <ResizablePanel minSize={30}>
+          <div className="p-3 text-sm">版本 0.3.0<br />发布前需要完成复核。</div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 }

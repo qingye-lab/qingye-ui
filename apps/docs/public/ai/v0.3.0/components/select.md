@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: c55b7efbfb2f83aa5426badcdbc1fdc1e63d82c5e7fdac631f1d9010b09f9410
+Source SHA-256: 9de817ef7478b6e2c99bf470a7694a77ac2660bc65b50e5542e9089bd4de769e
 
 从一组固定选项中选择一个或多个。选项超过十几个或需要搜索时改用 Combobox。
 
 ## Use and ownership
-- 从一组固定选项中选择一个或多个。选项超过十几个或需要搜索时改用 Combobox。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 选择一个或多个离散值，不需要输入筛选。
+- Avoid: 命令操作不要放进值选择器；关键选项差异不能只放 Tooltip。
+- Library: 选择、键盘导航、浮层定位和字段语义。
+- Application: 选项可用性、当前业务值及提交结果。
+
+## Composition
+- Trigger 展示当前值，Popup 中 Item、分组与勾选反馈构成完整选择关系。
+
+## Responsive behavior
+- 触发器允许内容收缩；选项保留完整文字，窄屏不得遮住当前选择。
+
+## Customization
+- size 调整触发器；render 组合仍遵守值选择语义。
 
 ## Current exports
 - Select: const; owner select; PASS

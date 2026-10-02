@@ -128,7 +128,6 @@ export function NavigationMenuViewport({
         align={align}
         alignOffset={alignOffset}
         className="z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-(--qy-duration-base) before:absolute before:content-[''] data-instant:transition-none data-[side=bottom]:before:inset-x-0 data-[side=bottom]:before:-top-2 data-[side=bottom]:before:h-2 data-[side=top]:before:inset-x-0 data-[side=top]:before:-bottom-2 data-[side=top]:before:h-2"
-        collisionAvoidance={{ side: "none" }}
         collisionPadding={collisionPadding}
         data-slot="navigation-menu-positioner"
         side={side}
@@ -136,14 +135,14 @@ export function NavigationMenuViewport({
       >
         <NavigationMenuPrimitive.Popup
           className={cn(
-            "relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-lg border bg-popover not-dark:bg-clip-padding text-popover-foreground shadow-lg/5 outline-none transition-[width,height,scale,opacity] duration-(--qy-duration-base) before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] data-ending-style:scale-98 data-starting-style:scale-98 data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-(--qy-duration-fast) dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+            "relative h-(--popup-height) max-h-(--available-height) w-(--popup-width) origin-(--transform-origin) rounded-lg border bg-popover not-dark:bg-clip-padding text-popover-foreground shadow-lg/5 outline-none transition-[width,height,scale,opacity] duration-(--qy-duration-base) before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] data-ending-style:scale-98 data-starting-style:scale-98 data-ending-style:opacity-0 data-starting-style:opacity-0 data-ending-style:duration-(--qy-duration-fast) dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
             className,
           )}
           data-slot="navigation-menu-popup"
           {...props}
         >
           <NavigationMenuPrimitive.Viewport
-            className="relative size-full overflow-hidden rounded-[calc(var(--radius-lg)-1px)]"
+            className="relative size-full max-h-[calc(var(--available-height)-2px)] overflow-x-hidden overflow-y-auto overscroll-contain rounded-[calc(var(--radius-lg)-1px)]"
             data-slot="navigation-menu-viewport"
           />
         </NavigationMenuPrimitive.Popup>

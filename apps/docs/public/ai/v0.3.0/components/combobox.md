@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 7684a3f44500f1bce9de02476d6f6a55a44e12bdfd77d689e5c4ed46bdc8d293
+Source SHA-256: 8b963b8e0d046aea07b886f622416b15aa7c0074b9b0fdb1a5878038230483d0
 
 可输入筛选的选择器：从较长的列表中选一项或多项。只需要输入建议、不强制选中时用 Autocomplete。
 
 ## Use and ownership
-- 可输入筛选的选择器：从较长的列表中选一项或多项。只需要输入建议、不强制选中时用 Autocomplete。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 从较长列表搜索并选择确定对象，多选时在同一工作区增减对象。
+- Avoid: 查询文字与已选值分别管理；刷新建议不应清掉已选对象。
+- Library: 过滤、选择、标签键盘导航、移除名称和可见焦点。
+- Application: 远程查询、权限、异步排序与持久化选择。
+
+## Composition
+- Input 或 Chips 承载输入，Popup 承载候选，Empty 和 Status 承接匹配与等待。
+
+## Responsive behavior
+- 长标签在控件内换行，当前键盘焦点保留；候选浮层受可用宽高限制。
+
+## Customization
+- 复杂 Chip 内容用 removeProps 命名移除动作；纯文字标签自动带上对象名。
 
 ## Current exports
 - Combobox: function; owner combobox; PASS; props: ComboboxPrimitive.Root.Props<Value, Multiple>
@@ -290,19 +299,19 @@ Source: apps/docs/src/content/combobox/demos/05-multiple.tsx
 ```tsx
 import { Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxEmpty, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxValue } from "@qingye/ui/components/combobox";
 
-export const meta = { title: "多选标签", description: "已选项显示为标签；输入框为空时按 Backspace 移除最后一个。" };
+export const meta = { title: "多选标签" };
 
-const tags = ["生产环境", "测试环境", "核心业务", "边缘节点", "待下线", "GPU", "高可用", "等保三级", "华东", "华北"];
+const tags = ["生产环境", "华东跨区域容灾与高可用服务的生产发布验证与灾后恢复协作流程", "核心业务", "边缘节点", "待下线", "GPU", "高可用", "等保三级", "华东", "华北"];
 
 export default function Demo() {
   return (
-    <Combobox items={tags} multiple defaultValue={["生产环境", "核心业务"]}>
+    <Combobox items={tags} multiple defaultValue={["生产环境", "华东跨区域容灾与高可用服务的生产发布验证与灾后恢复协作流程"]}>
       <ComboboxChips className="w-full max-w-sm">
         <ComboboxValue>
           {(value: string[]) => (
             <>
               {value.map((tag) => (
-                <ComboboxChip key={tag} aria-label={`移除 ${tag}`}>
+                <ComboboxChip key={tag} aria-label={tag}>
                   {tag}
                 </ComboboxChip>
               ))}

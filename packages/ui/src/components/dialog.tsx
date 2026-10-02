@@ -103,6 +103,7 @@ export function DialogPopup({
             <DialogPrimitive.Close
               aria-label={messages.close}
               className="absolute end-2 top-2"
+              data-slot="dialog-close"
               render={<Button size="icon" variant="ghost" />}
               {...closeProps}
             >
@@ -122,7 +123,7 @@ export function DialogHeader({
 }: useRender.ComponentProps<"div">): React.ReactElement {
   const defaultProps = {
     className: cn(
-      "flex flex-col gap-(--qy-space-2) p-(--qy-space-6) in-[[data-slot=dialog-popup]:has([data-slot=dialog-panel])]:pb-(--qy-space-3) max-sm:pb-(--qy-space-4)",
+      "flex flex-col gap-(--qy-space-2) p-(--qy-space-6) in-[[data-slot=dialog-popup]:has([data-slot=dialog-panel])]:pb-(--qy-space-3) in-[[data-slot=dialog-popup]:has(>[data-slot=dialog-close])]:pe-(--qy-space-12) max-sm:pb-(--qy-space-4)",
       className,
     ),
     "data-slot": "dialog-header",

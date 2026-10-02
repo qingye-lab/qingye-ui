@@ -22,4 +22,33 @@ export default {
     "已知耗时且有进度时用 Progress，进度不确定才用 Spinner。",
     "容器已有 role=\"status\" 或 aria-busy 时，用 aria-hidden 标记本组件，避免重复播报。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "已知正在等待但无法准确计量，且用户需要辨认等待对象。"
+    ],
+    "avoid": [
+      "重复 status 打断读屏；旋转等于任务成功；关键等待没有名称、失败或退出。"
+    ],
+    "composition": [
+      "独立 Spinner 使用等待名称；Button loading 内部 Spinner 装饰隐藏，由按钮保持动作名称和 aria-busy。"
+    ],
+    "stateOwner": {
+      "library": [
+        "加载标记、默认语言与旋转视觉。"
+      ],
+      "application": [
+        "任务等待、上下文名称、结果和中断/退出。"
+      ]
+    },
+    "responsive": [
+      "图标大小跟随宿主角色；等待不改变按钮宽度或隐藏仍有效的内容。"
+    ],
+    "customization": [
+      "aria-label 按实际任务覆盖默认加载，重复状态中的图标用 aria-hidden。"
+    ]
+  },
 } satisfies ComponentMeta;

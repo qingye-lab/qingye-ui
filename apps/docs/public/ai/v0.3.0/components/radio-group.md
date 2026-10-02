@@ -8,10 +8,19 @@ Source SHA-256: 4aa8063028360c0a1fe50b1b2cd67c18e89e633a73764b82873fc50455aca615
 在少量互斥选项中选一个，选项需要同时可见时使用；选项多时改用 Select。
 
 ## Use and ownership
-- 在少量互斥选项中选一个，选项需要同时可见时使用；选项多时改用 Select。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 同时比较少量互斥方案并选择其中一个。
+- Avoid: 不可把不同维度的选择混进同一组；选中状态不等于已保存。
+- Library: 单选值、组内方向键导航、焦点与禁用项。
+- Application: 方案数据、默认选项与提交结果。
+
+## Composition
+- FieldsetLegend 提供共同问题，每个 Radio 的标签说明不同选项及必要差异。
+
+## Responsive behavior
+- 窄屏可以改为纵排，仍同时保留互斥方案；每项命中区不随密度缩小。
+
+## Customization
+- 卡片或文本行都以 Label 组合 Radio，不能重做独立点击状态。
 
 ## Current exports
 - Radio: function; owner radio-group; PASS; props: RadioPrimitive.Root.Props

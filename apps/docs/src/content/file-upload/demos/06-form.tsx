@@ -22,11 +22,11 @@ export default function Demo() {
       </Field>
       <Field>
         <Label htmlFor="ticket-files">附件</Label>
-        <FileUpload id="ticket-files" name="attachments" variant="button" maxFiles={5} chooseLabel="添加附件" />
-        <FieldDescription>截图或日志，最多 5 个。</FieldDescription>
+        <FileUpload id="ticket-files" name="attachments" variant="button" accept=".png,.jpg,.jpeg,.pdf,.log,.txt" maxFiles={5} chooseLabel="添加附件" aria-describedby="ticket-files-description" />
+        <FieldDescription id="ticket-files-description">截图、PDF 或日志，最多 5 个。</FieldDescription>
       </Field>
       <Button type="submit" className="self-start">提交工单</Button>
-      {summary !== null ? <p className="text-muted-foreground text-xs">已提交：{summary}</p> : null}
+      {summary !== null ? <p role="status" className="text-muted-foreground text-xs">本次附件：{summary}</p> : null}
     </form>
   );
 }

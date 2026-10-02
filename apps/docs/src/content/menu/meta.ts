@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "下拉菜单 Menu",
   description: "点击按钮后展开的操作列表，收纳次要操作、视图选项和导航链接。从表单中选值用 Select，右键菜单用 ContextMenu。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "收纳同一对象的命令、相关模式或真实导航，核心操作仍可直接到达。"
+    ],
+    "avoid": [
+      "不能用 Menu 代替表单 Select；危险属性在键盘高亮时不能被普通项颜色覆盖。"
+    ],
+    "composition": [
+      "命令用 Item，地址用 LinkItem，保持选项用 Checkbox / Radio；不可逆命令按后果接 AlertDialog。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理菜单角色、方向键、高亮、子菜单、焦点返回与可用视口；长标签保持完整可读。"
+      ],
+      "application": [
+        "决定对象、命令范围、权限与执行结果；Shortcut 只展示快捷键而不注册。"
+      ]
+    },
+    "responsive": [
+      "菜单项在粗指针下保持整行目标；长对象名换行，超高菜单内部滚动，RTL 子菜单指向实际展开侧。"
+    ],
+    "customization": [
+      "variant 标识真实危险动作；集中主题控制高亮与辅助文字，窗口宽度受可用视口约束。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

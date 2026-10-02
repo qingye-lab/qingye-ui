@@ -8,6 +8,7 @@ import {
   type ReactElement,
   type ReactNode,
   useEffect,
+  useId,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -71,6 +72,7 @@ export function Tree({
   onBlur,
   ...props
 }: TreeProps): ReactElement {
+  const treeId = useId();
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [internalExpanded, setInternalExpanded] = useState<readonly string[]>(defaultExpanded);
   const [active, setActive] = useState<string | null>(null);
@@ -107,7 +109,10 @@ export function Tree({
     const previous = previousFocusable.current;
     previousFocusable.current = focusable;
     const oldElement = focusedItem.current;
-    if (!oldElement || oldElement.isConnected || document.activeElement !== document.body) return;
+    if (!oldElement) return;
+    const stillFocusable = focusable.some(({ node }) => node.id === oldElement.dataset.id);
+    if (oldElement.isConnected && stillFocusable) return;
+    if (document.activeElement !== oldElement && document.activeElement !== document.body) return;
     const oldIndex = previous.findIndex(({ node }) => node.id === oldElement.dataset.id);
     let parentId = previous[oldIndex]?.parentId;
     let replacement = focusable.find(({ node }) => node.id === oldElement.dataset.id);
@@ -233,11 +238,13 @@ export function Tree({
       const isOpen = parent && open.has(node.id);
       const selected = value === node.id;
       const icon = isOpen && node.expandedIcon ? node.expandedIcon : node.icon;
+      const labelId = `${treeId}-${encodeURIComponent(node.id)}-label`;
       return (
         <li
           aria-disabled={node.disabled || undefined}
           aria-expanded={parent ? isOpen : undefined}
           aria-level={level}
+          aria-labelledby={node.suffix != null ? `${labelId} ${labelId}-suffix` : labelId}
           aria-posinset={index + 1}
           aria-selected={selected}
           aria-setsize={list.length}
@@ -297,11 +304,11 @@ export function Tree({
                 {icon}
               </span>
             ) : null}
-            <span className="min-w-0 flex-1 truncate" data-slot="tree-label">
+            <span className="min-w-0 flex-1 truncate" data-slot="tree-label" id={labelId}>
               {node.label}
             </span>
             {node.suffix != null ? (
-              <span className="shrink-0 text-muted-foreground text-xs numeric" data-slot="tree-suffix">
+              <span className="shrink-0 text-muted-foreground text-xs numeric" data-slot="tree-suffix" id={`${labelId}-suffix`}>
                 {node.suffix}
               </span>
             ) : null}

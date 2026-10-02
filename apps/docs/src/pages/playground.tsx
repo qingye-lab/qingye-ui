@@ -52,7 +52,7 @@ export function PlaygroundPage() {
             <div className="flex flex-col gap-1">
               <h2 className="font-medium text-label text-muted-foreground">{demo.meta.title}</h2>
               {demo.meta.description ? (
-                <p className="max-w-prose text-balance text-caption text-muted-foreground/80">{demo.meta.description}</p>
+                <p className="max-w-prose text-balance text-caption text-muted-foreground">{demo.meta.description}</p>
               ) : null}
             </div>
             {/*

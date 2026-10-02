@@ -23,7 +23,7 @@ export default {
         { name: "formatDate / formatRange", type: "(date) => string / ({ from, to }) => string", description: "自定义触发器中的日期文案。默认中文只写一次年份：2026年9月1日 – 9月30日。" },
         { name: "open / defaultOpen / onOpenChange", type: "boolean / (open) => void", description: "受控 / 非受控的弹层开关。" },
         { name: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "触发器尺寸，与 Select 一致。" },
-        { name: "calendarProps", type: "CalendarProps", description: "透传给 Calendar，如 startMonth、endMonth、showWeekNumber。" },
+        { name: "calendarProps", type: "RangeCalendarProps", description: "范围模式的日历属性，如 startMonth、endMonth、min、max、excludeDisabled；min/max 按两端间的自然日跨度约束。日历选择与快捷范围遵守相同限制。" },
       ],
     },
   ],
@@ -39,4 +39,33 @@ export default {
     "隐藏字段输出本地日期，不受时区影响；服务端按自然日处理即可。",
     "快捷范围由业务方传入，组件不预设文案，便于按场景调整（例如“上个季度”）。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "明确起止日期的筛选或区间输入，只有完整范围才能提交。"
+    ],
+    "avoid": [
+      "半选结束日就修改正式值；关闭后保留过期 anchor；快捷范围绕过禁用或跨度限制。"
+    ],
+    "composition": [
+      "anchor 是库内临时选择，完整 range 是正式值；关闭放弃半选。日历与 preset 共用端点/min/max/excludeDisabled 规则。"
+    ],
+    "stateOwner": {
+      "library": [
+        "半选工作、预览、约束一致性、开关和清除。"
+      ],
+      "application": [
+        "业务范围、快捷值、禁用事实、表单校验和查询请求。"
+      ]
+    },
+    "responsive": [
+      "窄屏单月与横向快捷项，宽屏按容量显示两月；长范围仍保留完整可访问值。"
+    ],
+    "customization": [
+      "calendarProps 的 min/max 按自然日跨度，excludeDisabled 明确决定能否跨禁用日；导航月界限不代替 disabledDates。"
+    ]
+  },
 } satisfies ComponentMeta;

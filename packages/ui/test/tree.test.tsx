@@ -23,6 +23,7 @@ test("exposes tree semantics with a single tab stop", () => {
   render(<Tree defaultExpanded={["src"]} label="项目文件" nodes={nodes} />);
   expect(screen.getByRole("tree", { name: "项目文件" })).toBeInTheDocument();
   expect(item("src")).toHaveAttribute("aria-expanded", "true");
+  expect(item("src")).toHaveAccessibleName("src");
   expect(item("src")).toHaveAttribute("aria-level", "1");
   expect(item("index.ts")).toHaveAttribute("aria-level", "2");
   expect(item("index.ts")).toHaveAttribute("aria-posinset", "3");
@@ -31,6 +32,15 @@ test("exposes tree semantics with a single tab stop", () => {
   expect(item("secrets.ts")).toHaveAttribute("aria-disabled", "true");
   expect(item("package.json")).not.toHaveAttribute("aria-expanded");
   expect(screen.getAllByRole("treeitem").filter((element) => element.tabIndex === 0)).toEqual([item("src")]);
+});
+
+test("disabling a focused node moves focus to a surviving neighbor without selecting it", () => {
+  const onValueChange = vi.fn();
+  const { rerender } = render(<Tree label="项目文件" nodes={nodes} onValueChange={onValueChange} />);
+  item("docs").focus();
+  rerender(<Tree label="项目文件" nodes={[nodes[0]!, { ...nodes[1]!, disabled: true }, nodes[2]!]} onValueChange={onValueChange} />);
+  expect(item("package.json")).toHaveFocus();
+  expect(onValueChange).not.toHaveBeenCalled();
 });
 
 test("follows the APG keyboard model", async () => {

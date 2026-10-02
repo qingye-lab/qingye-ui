@@ -8,10 +8,19 @@ Source SHA-256: 888e6c24d49b867043305a3f5ccba18a3ac6a633fa08112a5b8feeeb87a1555a
 打断当前操作、要求用户明确回应的对话框，用于删除、撤销权限等不可逆操作的二次确认。点击遮罩不会关闭。
 
 ## Use and ownership
-- 打断当前操作、要求用户明确回应的对话框，用于删除、撤销权限等不可逆操作的二次确认。点击遮罩不会关闭。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 对具体对象和具体不可逆后果要求明确回应，如永久删除或撤销权限。
+- Avoid: 确认不应成为每次操作的例行阻碍；请求发出与完成、结果未知必须分开表达。
+- Library: 提供 alertdialog 名称与说明关联、焦点限制、遮罩不关闭和明确选择出口。
+- Application: 决定确认条件、操作范围、危险请求、失败或未知状态，以及何时允许关闭或重试。
+
+## Composition
+- Title 点明对象，Description 只说明必要后果，取消与执行动作并列，初始焦点按风险显式设置。
+
+## Responsive behavior
+- 贴底操作保留安全区；长后果说明不能让取消与执行动作不可达。
+
+## Customization
+- 视觉强弱跟随当前风险；destructive 指向真实危险动作，取消不被默认焦点顺序意外弱化。
 
 ## Current exports
 - AlertDialog: const; owner alert-dialog; PASS

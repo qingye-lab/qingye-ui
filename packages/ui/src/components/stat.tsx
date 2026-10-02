@@ -204,7 +204,7 @@ export interface StatSparklineProps extends Omit<
   React.ComponentProps<"div">,
   "children"
 > {
-  /** Values in time order; at least two points draw a line. */
+  /** Values in time order. Non-finite values preserve their time slot as a gap. */
   data: readonly number[];
   /** Soft wash under the line. */
   fill?: boolean;
@@ -235,10 +235,11 @@ export function StatSparkline({
   const min = Math.min(...points);
   const max = Math.max(...points);
   const range = max - min;
-  const coordinates = points.map((value, index) => {
+  const coordinates = data.map((value, index) => {
+    if (!Number.isFinite(value)) return null;
     const x =
-      points.length > 1
-        ? (index / (points.length - 1)) * SPARK_WIDTH
+      data.length > 1
+        ? (index / (data.length - 1)) * SPARK_WIDTH
         : SPARK_WIDTH;
     const y =
       range === 0
@@ -247,13 +248,19 @@ export function StatSparkline({
           (1 - (value - min) / range) * (SPARK_HEIGHT - SPARK_INSET * 2);
     return [x, y] as const;
   });
-  const line = coordinates
-    .map(
-      ([x, y], index) =>
-        `${index === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`,
-    )
-    .join(" ");
-  const area = `${line} L${SPARK_WIDTH} ${SPARK_HEIGHT} L0 ${SPARK_HEIGHT} Z`;
+  const segments: Array<Array<readonly [number, number]>> = [];
+  coordinates.forEach((point, index) => {
+    if (!point) return;
+    if (index === 0 || !coordinates[index - 1]) segments.push([]);
+    segments.at(-1)!.push(point);
+  });
+  const pathOf = (segment: Array<readonly [number, number]>) => segment.map(
+    ([x, y], index) => `${index === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`,
+  ).join(" ");
+  const line = segments.map(pathOf).join(" ");
+  const area = segments.filter((segment) => segment.length > 1).map((segment) =>
+    `${pathOf(segment)} L${segment.at(-1)![0].toFixed(2)} ${SPARK_HEIGHT} L${segment[0]![0].toFixed(2)} ${SPARK_HEIGHT} Z`,
+  ).join(" ");
   const end = coordinates.at(-1);
 
   return (
@@ -265,7 +272,7 @@ export function StatSparkline({
       role={label ? "img" : undefined}
       {...props}
     >
-      {coordinates.length > 1 ? (
+      {points.length > 1 ? (
         <svg
           aria-hidden="true"
           className="absolute inset-0 size-full overflow-visible"
@@ -302,7 +309,7 @@ export function StatSparkline({
           />
         </svg>
       ) : null}
-      {showEnd && end && coordinates.length > 1 ? (
+      {showEnd && end && points.length > 1 ? (
         <span
           className="absolute size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current ring-2 ring-card"
           data-slot="stat-sparkline-end"

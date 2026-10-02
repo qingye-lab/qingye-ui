@@ -33,3 +33,13 @@ test("sparkline is decorative unless labelled", () => {
   rerender(<StatSparkline data={[1, 3, 2, 5]} label="近 4 周上升" />);
   expect(screen.getByRole("img", { name: "近 4 周上升" })).toBeInTheDocument();
 });
+
+test("sparkline retains missing time slots and does not join across them", () => {
+  const { container, rerender } = render(<StatSparkline data={[1, 2, Number.NaN, 4, 5]} fill={false} />);
+  const path = container.querySelector("path[stroke]")?.getAttribute("d");
+  expect(path).toContain("L25.00");
+  expect(path).toContain("M75.00");
+  expect(path?.match(/M/g)).toHaveLength(2);
+  rerender(<StatSparkline data={[1, 2, Number.NaN]} />);
+  expect(container.querySelector("[data-slot=stat-sparkline-end]")).toBeNull();
+});

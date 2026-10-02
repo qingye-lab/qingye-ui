@@ -204,7 +204,7 @@ describe("Combobox multiple with chips", () => {
     const onValueChange = vi.fn();
     render(<Multiple onValueChange={onValueChange} />);
     // The chip itself carries the removed item's name as its accessible label.
-    expect(screen.getByRole("button", { name: "移除" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "移除 上海" })).toBeInTheDocument();
 
     const input = screen.getByRole("combobox", { name: "途经城市" });
     await user.click(input);
@@ -264,7 +264,7 @@ describe("Combobox multiple with chips", () => {
     await user.click(input);
     await screen.findByRole("listbox");
 
-    // Both remove buttons share the locale label "移除"; disambiguate by chip.
+    // Each remove action names the exact selected object.
     const chips = [...document.querySelectorAll("[data-slot=combobox-chip]")];
     expect(chips.map((chip) => chip.getAttribute("aria-label"))).toEqual(["移除 上海", "移除 杭州"]);
 
@@ -275,9 +275,25 @@ describe("Combobox multiple with chips", () => {
     expect(document.querySelector("[data-slot=combobox-chip]")).toHaveAttribute("aria-label", "移除 杭州");
   });
 
-  test("the chip remove button falls back to the UI locale label", () => {
+  test("the chip remove button names the action and selected object", () => {
     render(<Multiple />);
-    expect(screen.getByRole("button", { name: "移除" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "移除 上海" })).toBeInTheDocument();
+  });
+
+  test("chip removal names follow the locale and an explicit removeProps label wins", () => {
+    render(
+      <UILocaleProvider locale={enUS}>
+        <Combobox items={cities} multiple defaultValue={["上海", "杭州"]}>
+          <ComboboxChips>
+            <ComboboxChip>上海</ComboboxChip>
+            <ComboboxChip removeProps={{ "aria-label": "Remove Hangzhou from this route" }}>杭州</ComboboxChip>
+            <ComboboxChipsInput aria-label="Route" />
+          </ComboboxChips>
+        </Combobox>
+      </UILocaleProvider>,
+    );
+    expect(screen.getByRole("button", { name: "Remove 上海" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Remove Hangzhou from this route" })).toBeInTheDocument();
   });
 });
 

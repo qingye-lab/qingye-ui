@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 45bed260cb29f4550f891efd677df0206dcb4786adebb15ee0adc20c10278119
+Source SHA-256: dd8e1ab582916db19492be23a269a0c93ae25f9f394741283a6b81ef298652a4
 
 表单中的单个日期字段：外观与 Select 一致，点开后在日历中挑选，表单提交本地日期 YYYY-MM-DD。
 
 ## Use and ownership
-- 表单中的单个日期字段：外观与 Select 一致，点开后在日历中挑选，表单提交本地日期 YYYY-MM-DD。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 表单中选择一个自然日，显示与提交同一日期事实。
+- Avoid: 用 UTC 截断改变自然日；把 required 的隐藏字段当原生表单校验；名称遮住已选值。
+- Library: 日选择、值格式、开关、清除和焦点返回。
+- Application: 可选日期、必填校验、字段名称、提交和错误恢复。
+
+## Composition
+- 标签关联 trigger，选中值加入可访问描述；Calendar 选择后关闭，Clear 让值为空并返回字段。
+
+## Responsive behavior
+- 字段值可视觉截断但保留完整可访问内容；弹层需要容纳单月与触屏格。
+
+## Customization
+- formatDate 只改显示，name 的 YYYY-MM-DD 保持自然日提交；尺寸与其他表单控件一致。
 
 ## Current exports
 - DatePicker: function; owner date-picker; PASS; props: DatePickerProps

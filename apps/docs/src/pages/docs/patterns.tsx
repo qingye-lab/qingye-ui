@@ -1,4 +1,6 @@
 import { lazy, Suspense, useState } from "react";
+import { Button } from "@qingye/ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye/ui/components/collapsible";
 import { Link, useParams } from "react-router-dom";
 import { A, Facts, H2, P, PageHeader } from "@/components/prose";
 import { CodeBlock } from "@/components/code-block";
@@ -23,6 +25,6 @@ export default function PatternPage() {
     <P>状态演示在示例底部的“演示与状态”中。先操作正常路径，再重放相关异常。{pattern.slug === "edit" && "可以输入后选择失败或超时，再保存、核实、放弃或恢复。"}{pattern.slug === "collection" && "可选择跨页对象，比较密度，并仅重试失败项。"}{pattern.slug === "review" && "核对后改变范围或建议版本，会要求重新确认。"}{pattern.slug === "queue" && "取消请求有延迟，过晚取消会返回真实完成结果。"}{pattern.slug === "detail" && "同一对象支持直接链接；对象消失后提供稳定返回。"}{pattern.slug === "read" && "章节可直接进入，记下位置后可以继续阅读。"}</P>
     {pattern.slug === "collection" && <P>这个比较示例用 Table 保留二维关系与显式查询范围；需要排序、分页和列治理时使用 <A href="/docs/components/data-table#server-selection">真实 DataTable 跨页选择示例</A>：ids 是所有页的已选范围，rows 是当前 data 中的对象。</P>}
     <H2 id="components">组成部件</H2><P>{pattern.components.map((name, index) => <span key={name}>{index > 0 && " · "}<A href={`/docs/components/${name}`}>{name}</A></span>)}</P>
-    <H2 id="source">同源代码</H2><P>示例直接导入公共包；应用状态与项目布局集中在相邻文件。可以取得 <a className="focus-ring underline" href={`/ai/v${SITE.version}/patterns/${pattern.slug}.md`} download>版本化 Markdown</a>，或展开代码。</P><details onToggle={(event) => { if (event.currentTarget.open) Promise.all([pattern.slug + ".tsx", "state.ts", "shared.tsx", "patterns.css"].map(async (name) => { const text = await sources[`../../patterns/${name}`]?.(); return text ? `// ${name}\n${text}` : ""; })).then((files) => setCode(files.join("\n\n"))); }}><summary className="focus-ring cursor-pointer">查看当前示例源码</summary>{code ? <CodeBlock code={code} /> : <p>展开后读取同源代码。</p>}</details>
+    <H2 id="source">同源代码</H2><P>示例直接导入公共包；应用状态与项目布局集中在相邻文件。可以取得 <a className="focus-ring underline" href={`/ai/v${SITE.version}/patterns/${pattern.slug}.md`} download>版本化 Markdown</a>，或展开代码。</P><Collapsible onOpenChange={(open) => { if (open) Promise.all([pattern.slug + ".tsx", "state.ts", "shared.tsx", "patterns.css"].map(async (name) => { const text = await sources[`../../patterns/${name}`]?.(); return text ? `// ${name}\n${text}` : ""; })).then((files) => setCode(files.join("\n\n"))); }}><CollapsibleTrigger render={<Button size="sm" variant="outline" />}>查看当前示例源码</CollapsibleTrigger><CollapsiblePanel keepMounted>{code ? <CodeBlock code={code} /> : <p>展开后读取同源代码。</p>}</CollapsiblePanel></Collapsible>
   </article>;
 }

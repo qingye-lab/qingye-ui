@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "抽屉 Drawer",
   description: "可拖拽关闭的边缘面板，移动端的首选浮层：支持拖动手柄、吸附高度、嵌套层叠和动作菜单。桌面端的详情面板用 Sheet 即可。",
+  design: {
+    "methods": [
+      "随境取度",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "移动端需要拖动和吸附高度的边缘任务面板，或面向当前对象的动作列表。"
+    ],
+    "avoid": [
+      "拖动手柄不能成为唯一退出；手势关闭不等于业务取消，嵌套不能让父对象失去返回依据。"
+    ],
+    "composition": [
+      "Title 命名对象，Panel 区分可滚动可选取内容，Footer / Close 提供可点出口；动作选项复用 DrawerMenu。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理吸附、滑动、嵌套层次、名称与焦点；动作菜单的危险状态在悬停和焦点时持续可见。"
+      ],
+      "application": [
+        "决定退出条件、草稿保留、请求结果与何时禁止关闭；操作完成依据真实事件。"
+      ]
+    },
+    "responsive": [
+      "保证安全区、长内容滚动与可点击关闭；真实滑动手势要在触屏上验证，模拟键盘不替代。"
+    ],
+    "customization": [
+      "position 联动滑动方向，variant 控制边界；抽屉缓动来自公共 drawer 角色。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

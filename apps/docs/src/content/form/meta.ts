@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Form"],
   keywords: ["form", "表单", "提交", "校验", "validation"],
+  design: {
+    "methods": [
+      "进退相承",
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "组织一组输入与一个明确提交动作，让校验与修正保持在原位。"
+    ],
+    "avoid": [
+      "浏览器校验通过和 onSubmit 触发都不代表后端保存成功。"
+    ],
+    "composition": [
+      "Form 与具名 Field 关联提交值和 errors；提交按钮名称表达真实后果。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提交、原生校验与字段错误分派。"
+      ],
+      "application": [
+        "草稿、请求、版本、结果未知和恢复流程。"
+      ]
+    },
+    "responsive": [
+      "提交反馈保留已填写的控件；小屏按阅读和修正顺序安排字段。"
+    ],
+    "customization": [
+      "errors 接收服务端字段消息，应用决定何时清除或重新校验。"
+    ]
+  },
   api: [
     {
       name: "Form",

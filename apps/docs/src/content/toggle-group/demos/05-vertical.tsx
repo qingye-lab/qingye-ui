@@ -5,18 +5,28 @@ export const meta = { title: "纵向", description: "orientation=\"vertical\" �
 
 export default function Demo() {
   return (
-    <ToggleGroup defaultValue={["top"]} orientation="vertical" variant="outline">
-      <ToggleGroupItem aria-label="顶部对齐" value="top">
-        <AlignStartHorizontalIcon />
-      </ToggleGroupItem>
-      <ToggleGroupSeparator orientation="horizontal" />
-      <ToggleGroupItem aria-label="垂直居中" value="middle">
-        <AlignCenterHorizontalIcon />
-      </ToggleGroupItem>
-      <ToggleGroupSeparator orientation="horizontal" />
-      <ToggleGroupItem aria-label="底部对齐" value="bottom">
-        <AlignEndHorizontalIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
+    <div className="flex items-start gap-(--qy-space-6)">
+      {(["default", "outline"] as const).map((variant) => (
+        <ToggleGroup
+          aria-label={variant === "default" ? "内容对齐" : "画板对齐"}
+          defaultValue={["top"]}
+          key={variant}
+          orientation="vertical"
+          variant={variant}
+        >
+          <ToggleGroupItem aria-label="顶部对齐" value="top">
+            <AlignStartHorizontalIcon />
+          </ToggleGroupItem>
+          {variant === "outline" && <ToggleGroupSeparator orientation="horizontal" />}
+          <ToggleGroupItem aria-label="垂直居中" value="middle">
+            <AlignCenterHorizontalIcon />
+          </ToggleGroupItem>
+          {variant === "outline" && <ToggleGroupSeparator orientation="horizontal" />}
+          <ToggleGroupItem aria-label="底部对齐" value="bottom">
+            <AlignEndHorizontalIcon />
+          </ToggleGroupItem>
+        </ToggleGroup>
+      ))}
+    </div>
   );
 }

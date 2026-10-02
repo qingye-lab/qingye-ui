@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 1a074bb5181c3732a231bac84a34a8fbaeba4086c6d3e3ecacaf9d4f53726fc3
+Source SHA-256: 1f6f008ff2167c241614596134b1039646212e09c3b51ffb7f22acd0a1e50b42
 
 在同一位置切换几组相关内容，例如项目的概览、成员与设置。切换的是页面内的面板；跳转到不同地址请用导航链接。
 
 ## Use and ownership
-- 在同一位置切换几组相关内容，例如项目的概览、成员与设置。切换的是页面内的面板；跳转到不同地址请用导航链接。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在同一对象下切换几组有直接关系的内容面板，保留当前对象。
+- Avoid: 地址跳转用链接；切换面板不能无意丢失未保存字段，也不能把未聚焦面板的控件留在键盘路径。
+- Library: 管理 tablist、tab、tabpanel 关联、选中状态与键盘焦点；指示器只表达实际激活面板。
+- Application: 决定面板数据、未保存内容、关闭清除政策及是否持久保留编辑。
+
+## Composition
+- Tab 与 Panel 使用同一 value；长列表可置于横向 ScrollArea，编辑面板按需求选择 keepMounted。
+
+## Responsive behavior
+- 横向列表保持可达，不通过换行破坏顺序；纵向方向与方向键一致，窄屏保留面板宽度。
+
+## Customization
+- default 与 underline 表达不同边界；指示器使用公共展开时长，尺寸与状态不依赖动画完成。
 
 ## Current exports
 - Tabs: function; owner tabs; PASS; props: TabsPrimitive.Root.Props

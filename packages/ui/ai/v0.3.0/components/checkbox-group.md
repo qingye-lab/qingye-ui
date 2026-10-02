@@ -8,10 +8,19 @@ Source SHA-256: c60887f5630721c96b7d9323dccedf4c19caf2feafcd04df08b95a24c7391319
 管理一组复选框的数组值，支持「全选」父复选框。
 
 ## Use and ownership
-- 管理一组复选框的数组值，支持「全选」父复选框。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 管理一组可同时选择的条件，保留各项独立状态与共同范围。
+- Avoid: 父级全选只控制本组成员，不应默默扩展到未显示的其他对象。
+- Library: 成员关系、数组值、父子选择和禁用传播。
+- Application: 成员数据、范围定义和批量提交结果。
+
+## Composition
+- FieldsetLegend 命名范围，CheckboxGroup 管理数组，parent Checkbox 表达全选与半选。
+
+## Responsive behavior
+- 默认纵向排列以保留选项文字容量，紧凑时也保留各项命中区。
+
+## Customization
+- 用 group className 调整排列，成员仍使用 Checkbox 公共实现。
 
 ## Current exports
 - CheckboxGroup: function; owner checkbox-group; PASS; props: CheckboxGroupPrimitive.Props

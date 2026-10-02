@@ -64,10 +64,10 @@ export function Timeline({
               <TimelineContent>
                 <TimelineHeader>
                   <TimelineTitle>{item.title}</TimelineTitle>
-                  {item.time ? <TimelineTime dateTime={item.dateTime}>{item.time}</TimelineTime> : null}
+                  {item.time != null ? <TimelineTime dateTime={item.dateTime}>{item.time}</TimelineTime> : null}
                 </TimelineHeader>
-                {item.description ? <TimelineDescription>{item.description}</TimelineDescription> : null}
-                {item.content ? <div className="mt-[calc(var(--qy-space-1)*2.5)]">{item.content}</div> : null}
+                {item.description != null ? <TimelineDescription>{item.description}</TimelineDescription> : null}
+                {item.content != null ? <div className="mt-[calc(var(--qy-space-1)*2.5)]">{item.content}</div> : null}
               </TimelineContent>
             </TimelineItem>
           ))

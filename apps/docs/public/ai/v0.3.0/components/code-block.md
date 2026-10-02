@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 53c6868ad73534d727a3ef29aa08c9db748f8fa6aaf857c6e33b7d7fdf6d44e5
+Source SHA-256: 9417a37c196a25cbcc670dcc6e0e9f42a2c848a29ecf4acd02496c0950e9689e
 
 只读的代码展示：可选文件名与语言标题、复制按钮、行号、行高亮、横向滚动与最大高度。另含行内代码 InlineCode。
 
 ## Use and ownership
-- 只读的代码展示：可选文件名与语言标题、复制按钮、行号、行高亮、横向滚动与最大高度。另含行内代码 InlineCode。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 阅读、选择和复制代码、命令或配置，源文本需要保持准确。
+- Avoid: 将代码展示当编辑器；把复制请求开始当成功；复制行号、折行空格或装饰文字。
+- Library: 滚动区域、行结构、复制反馈与部位。
+- Application: 源码、语法高亮生成、敏感信息遮蔽和代码说明。
+
+## Composition
+- code 提供干净源文；预高亮 children 配合 code，行号与高亮只影响阅读。InlineCode 用于短的行内语法。
+
+## Responsive behavior
+- 比较缩进时保留横向滚动；阅读长参数时可 wrap，换行不能修改原文。
+
+## Customization
+- maxHeight 约束工作面，wrap 决定阅读策略；文件名与语言用于识别而非重复解释。
 
 ## Current exports
 - CodeBlock: function; owner code-block; PASS; props: CodeBlockProps

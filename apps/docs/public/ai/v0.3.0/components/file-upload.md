@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
-Source SHA-256: 6afa56806138516e949dac7c48c42569c41cf24197ed1d2f922558aca63f2a23
+Source SHA-256: 8325e43acae0b4c4e02ec063d0ddbb3320c638b7aeee8307d32886660afb13f2
 
 拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。
 
 ## Use and ownership
-- 拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 选择或拖入文件，逐项核对被接受文件、拒绝原因和上传状态。
+- Avoid: 选进队列不代表上传完成；进度不能伪造服务端处理或已取消结果。
+- Library: 文件选择、类型大小数量校验、已接受列表、原生提交镜像和移除焦点。
+- Application: 上传、重试、取消请求、结果核实与持久化。
+
+## Composition
+- 按钮或 dropzone 提供入口，列表保持文件身份，原位 rejection 和行内 actions 承接修正。
+
+## Responsive behavior
+- 长文件名收缩并保留完整 title；行内错误与恢复动作不能遮住移除入口。
+
+## Customization
+- getProgress 和 getError 只展示宿主事实，renderActions 复用公共 Button 实现恢复。
 
 ## Current exports
 - FileRejection: type; owner file-upload; PASS
@@ -40,7 +49,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - getProgress: (file, index) => number | null | undefined. 0–100 的上传进度；返回空值时显示文件大小。
 - getError: (file, index) => ReactNode. 单个文件的错误信息，例如上传失败。
 - renderActions: (file, index) => ReactNode. 每行移除按钮前的额外操作，例如重试。
-- name: string. 字段名；隐藏的文件输入与列表同步，原生表单提交可直接带上文件。
+- name: string. 字段名；浏览器支持 DataTransfer 时，隐藏输入与已接受列表同步；拒绝或重复选择不清掉原有文件。
 - invalid: boolean; default false. 错误边框；同时提供可见的错误文字。
 - disabled: boolean; default false. 禁用拖放、选择与移除。
 - label / description / chooseLabel: string / ReactNode. 覆盖默认文案。
@@ -260,11 +269,11 @@ export default function Demo() {
       </Field>
       <Field>
         <Label htmlFor="ticket-files">附件</Label>
-        <FileUpload id="ticket-files" name="attachments" variant="button" maxFiles={5} chooseLabel="添加附件" />
-        <FieldDescription>截图或日志，最多 5 个。</FieldDescription>
+        <FileUpload id="ticket-files" name="attachments" variant="button" accept=".png,.jpg,.jpeg,.pdf,.log,.txt" maxFiles={5} chooseLabel="添加附件" aria-describedby="ticket-files-description" />
+        <FieldDescription id="ticket-files-description">截图、PDF 或日志，最多 5 个。</FieldDescription>
       </Field>
       <Button type="submit" className="self-start">提交工单</Button>
-      {summary !== null ? <p className="text-muted-foreground text-xs">已提交：{summary}</p> : null}
+      {summary !== null ? <p role="status" className="text-muted-foreground text-xs">本次附件：{summary}</p> : null}
     </form>
   );
 }

@@ -39,6 +39,7 @@ export function Slider({
   return (
     <SliderPrimitive.Root
       className={cn("data-[orientation=horizontal]:w-full", className)}
+      data-slot="slider"
       defaultValue={defaultValue}
       locale={locale ?? code}
       max={max}

@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["InputGroup", "InputGroupAddon", "InputGroupText", "InputGroupInput", "InputGroupTextarea", "InputGroupButton"],
   keywords: ["input group", "前缀", "后缀", "addon", "单位", "输入框组合"],
+  design: {
+    "methods": [
+      "相成相制",
+      "布白有用",
+      "名实相符"
+    ],
+    "whenToUse": [
+      "让单位、附属动作或提示与一个文本工作区共享边界。"
+    ],
+    "avoid": [
+      "装饰图标不能变成第二个字段；addon 点击不能抢走链接或按钮自己的操作。"
+    ],
+    "composition": [
+      "Input 或 Textarea 是主工作区；inline addon 放短前后缀，block addon 放工具栏。"
+    ],
+    "stateOwner": {
+      "library": [
+        "输入部位、addon 焦点分派与公共按钮组合。"
+      ],
+      "application": [
+        "文本值、附属命令的业务后果和请求。"
+      ]
+    },
+    "responsive": [
+      "输入可收缩，附属动作保留；多行工具栏占独立行，长提示不挤压编辑区。"
+    ],
+    "customization": [
+      "Addon align 表达位置关系，InputGroupButton 复用 Button 的动作状态。"
+    ]
+  },
   api: [
     {
       name: "InputGroup",

@@ -8,10 +8,19 @@ Source SHA-256: c12f748ff8eb4835e733b4d11eb8d7249967e8a8eedb95c1159317d3b20daff1
 点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。
 
 ## Use and ownership
-- 点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在触发对象旁按需展示短表单、选择或可点击帮助，保持上下文。
+- Avoid: 不能把关键后果只塞进临时浮层；关闭不能被应用当成提交成功。
+- Library: 管理触发器与浮层关联、定位、碰撞、焦点和 close 请求，保留表单原生语义。
+- Application: 负责值、验证、提交与错误恢复；受控 open 不替代业务状态。
+
+## Composition
+- 可交互内容用 Popover；纯文本悬停补充用 Tooltip；需要独立模态任务时用 Dialog。
+
+## Responsive behavior
+- 根据可用高度滚动内容；窄屏仍提供触发与退出，表单长标签应保留可读宽度。
+
+## Customization
+- side、align 和 anchor 调整与对象的空间关系；tooltipStyle 只改变表面，不移除交互语义。
 
 ## Current exports
 - Popover: const; owner popover; PASS

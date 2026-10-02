@@ -18,6 +18,36 @@ export default {
     "AutocompleteStatus",
   ],
   keywords: ["autocomplete", "自动完成", "搜索建议", "联想", "typeahead"],
+  design: {
+    "methods": [
+      "展开有据",
+      "名实相符",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "为可自由提交的文本提供建议，用户无需选中列表项。"
+    ],
+    "avoid": [
+      "没有匹配建议不代表输入无效；不要把建议匹配当成必选规则。"
+    ],
+    "composition": [
+      "Input 保留自由文本，Popup 提供可选建议；Empty 说明当前无匹配，Status 承接查询状态。"
+    ],
+    "stateOwner": {
+      "library": [
+        "建议导航、自由文本、清除及候选布局。"
+      ],
+      "application": [
+        "搜索请求、最终查询和异步结果归属。"
+      ]
+    },
+    "responsive": [
+      "候选长文字可换行，浮层受可用宽高限制，输入和清除按钮仍可达。"
+    ],
+    "customization": [
+      "startAddon、showTrigger、showClear 使用共享部位；filter=null 用于远程建议。"
+    ]
+  },
   api: [
     {
       name: "Autocomplete",

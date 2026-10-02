@@ -8,10 +8,19 @@ Source SHA-256: d55163513720c27de3cbe3a4a74bb56f1174baa811f20953e3e214d4efcd10dd
 桌面应用式的一排菜单（文件 / 编辑 / 视图），适合编辑器、设计工具等命令很多的工作台。菜单内容沿用 Menu 的全部部件。
 
 ## Use and ownership
-- 桌面应用式的一排菜单（文件 / 编辑 / 视图），适合编辑器、设计工具等命令很多的工作台。菜单内容沿用 Menu 的全部部件。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在编辑器或工具工作面集中收纳高频命令，保持对当前内容对象的连续操作。
+- Avoid: 网站的地址导航不因外形相近而改用应用菜单栏；快捷键提示不等于快捷键已注册。
+- Library: 提供顶层方向键漫游、相邻菜单切换和内部菜单关系，复用 Menu 的长内容约束。
+- Application: 决定命令组织、文档选择、权限、快捷键冲突与执行结果。
+
+## Composition
+- 顶层用 MenubarMenu 和 Trigger；内容共享 Menu 的命令、选项、危险状态与子菜单。
+
+## Responsive behavior
+- 窄屏按命令重要性保留直接入口并收纳次要命令；触屏检查顶层目标和菜单行。
+
+## Customization
+- orientation 表达真实布局与键盘方向；层级关系不靠额外菜单深度解决。
 
 ## Current exports
 - Menubar: function; owner menubar; PASS; props: MenubarPrimitive.Props

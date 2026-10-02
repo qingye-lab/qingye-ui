@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/command
 Source: packages/ui/src/components/command.tsx
-Source SHA-256: 2067e551543ae5337953824a16c4e0306df83462db2fb381585e0bb1eecdd395
+Source SHA-256: e2c2aff82dcfb45987ad5a5cb920d9195feb03875361eed626276aecdef94de2
 
 可搜索的命令与导航列表，通常用快捷键唤起，让熟练用户不离开键盘就能跳转页面或执行操作。也可以内嵌在页面中作为可筛选的选择列表。
 
 ## Use and ownership
-- 可搜索的命令与导航列表，通常用快捷键唤起，让熟练用户不离开键盘就能跳转页面或执行操作。也可以内嵌在页面中作为可筛选的选择列表。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 用可搜索的命令或页面目标缩短熟练用户的操作路径，同时保留可见普通入口。
+- Avoid: 没有匹配与正在加载、失败不能混为同一空态；选择高亮项不等于业务执行成功。
+- Library: 管理筛选列表、键盘高亮和执行入口、空结果文本、Dialog 名称与焦点返回。
+- Application: 维护命令对象、搜索数据、权限、全局快捷键冲突与执行结果；跳转后把焦点交给目标页面。
+
+## Composition
+- Input + Panel / List 管理查找，Dialog 外壳管理唤起与返回；内嵌输入设置 autoFocus=false 保持当前工作。
+
+## Responsive behavior
+- 结果列表可滚动并保留搜索框；粗指针命令行保持可点高度，长目标名称优先保留辨认信息。
+
+## Customization
+- 自定义筛选通过 filteredItems 接入，快捷键提示保持可读；不把快捷键展示当成已注册能力。
 
 ## Current exports
 - Command: function; owner command; PASS; props: React.ComponentProps<typeof Autocomplete>

@@ -8,10 +8,19 @@ Source SHA-256: c1865b88555d0aae9aa6a934c6b19a68c3ec10eed26ed4cd4d13df8a6c14c18e
 表单控件的可见标签。简单场景直接关联控件；需要说明与校验信息时改用 Field 与 FieldLabel。
 
 ## Use and ownership
-- 表单控件的可见标签。简单场景直接关联控件；需要说明与校验信息时改用 Field 与 FieldLabel。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 为输入、选择或按钮式字段提供持续可见的名称。
+- Avoid: placeholder 独自命名；同一 htmlFor 指向多个控件；装饰的必填星号被当成校验。
+- Library: 原生 label、render 和标签文字角色。
+- Application: 字段 id、名称、必填规则、帮助与校验事实。
+
+## Composition
+- Label 的 htmlFor 对应唯一控件 id；复杂字段用 Field 的 Label/Description/Error 关系，标签保持对象名称。
+
+## Responsive behavior
+- 长标签允许换行，与对应字段保持邻接；调整密度不缩小可读文字。
+
+## Customization
+- 语义颜色与文字角色集中定义，必要时使用 render 接入原语标签而保留关联。
 
 ## Current exports
 - Label: function; owner label; PASS; props: useRender.ComponentProps<"label">

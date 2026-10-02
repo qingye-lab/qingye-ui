@@ -218,7 +218,9 @@ export function Carousel({
   const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     onKeyDown?.(event);
     if (event.defaultPrevented || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
-    if ((event.target as HTMLElement).closest("input, textarea, select, [contenteditable]")) return;
+    // A slide may contain a tab list, tree, slider or editable content. Those
+    // controls own their keys; only the focused track navigates the carousel.
+    if (event.target !== trackRef.current) return;
     event.preventDefault();
     const forward = (event.key === "ArrowRight") !== isRtl(event.currentTarget);
     if (forward) scrollNext();
@@ -295,6 +297,7 @@ export function CarouselContent({
       )}
       data-slot="carousel-content"
       ref={setRef}
+      tabIndex={0}
       {...props}
     >
       {slides.map((slide, index) => (

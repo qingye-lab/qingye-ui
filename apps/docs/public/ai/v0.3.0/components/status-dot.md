@@ -8,10 +8,19 @@ Source SHA-256: 8f8b0aea1b8692ed31c27fb99984d02a9aba51d58cac6abbb8e146834ed74da5
 用一个小圆点加文字表示对象当前的状态，如设备在线、任务运行、服务告警。实时状态可加柔和的呼吸光环。
 
 ## Use and ownership
-- 用一个小圆点加文字表示对象当前的状态，如设备在线、任务运行、服务告警。实时状态可加柔和的呼吸光环。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 以紧凑标记辅助识别在线、离线与异常状态。
+- Avoid: 只画有色点；脉冲冒充实时连接；未知与离线用同一事实；轮询变化全部自动播报。
+- Library: 形状、状态样式、默认名称与 pulse。
+- Application: 在线事实、采样时间、未知状态与实时订阅。
+
+## Composition
+- 可见文字或内置隐藏名称表达状态；离线用空心形状增强差异，必要时由应用在容器组织播报。
+
+## Responsive behavior
+- 窄屏仍保留状态名或完整可访问名称，不靠缩小文字隐藏差异。
+
+## Customization
+- status/label 表达真实事实；pulse 仅表示确有持续变化的状态。
 
 ## Current exports
 - StatusDot: function; owner status-dot; PASS; props: StatusDotProps

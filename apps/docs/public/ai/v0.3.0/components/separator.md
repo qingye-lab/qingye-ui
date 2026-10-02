@@ -8,10 +8,19 @@ Source SHA-256: 09c9465dab150b015ce7263847f9648bd92f0a1677a88dd7b3891c9b46ef6972
 在内容组之间画一条 1px 的细线，横向分开段落区块，纵向分开行内的链接或操作。
 
 ## Use and ownership
-- 在内容组之间画一条 1px 的细线，横向分开段落区块，纵向分开行内的链接或操作。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 需要视觉或语义分隔已经不同的内容范围。
+- Avoid: 每两行都画线；把 Separator 当可拖动分隔条；只靠线说明新任务开始。
+- Library: 分隔原语、方向与边界颜色。
+- Application: 内容分组、边界是否需要辅助技术感知。
+
+## Composition
+- 标题和间距先说明关系；separator 只是边界，需要调面板大小时用 ResizableHandle。
+
+## Responsive behavior
+- 横竖方向随实际布局选择，不用固定高度把相邻控件挤压。
+
+## Customization
+- orientation 决定几何；颜色来自边界角色，装饰与语义选择遵守当前原语 API。
 
 ## Current exports
 - Separator: function; owner separator; PASS; props: SeparatorPrimitive.Props

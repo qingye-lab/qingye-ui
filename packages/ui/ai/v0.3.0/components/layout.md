@@ -8,10 +8,19 @@ Source SHA-256: aa435569288e039061f954c2f2b760151702b69dec971ed50c2437e31d2c63ac
 四个轻量的布局原语：纵向排列的 Stack、横向排列的 Inline、自动换行的 Grid，以及走字号阶梯的 Text。间距取自设计令牌，读 JSX 时就能看出意图；它们覆盖不到的情况，直接写 Tailwind 即可。
 
 ## Use and ownership
-- 四个轻量的布局原语：纵向排列的 Stack、横向排列的 Inline、自动换行的 Grid，以及走字号阶梯的 Text。间距取自设计令牌，读 JSX 时就能看出意图；它们覆盖不到的情况，直接写 Tailwind 即可。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 以 Stack/Inline/Grid 组织真实信息关系，Text 表达文字角色。
+- Avoid: 所有段落用相同 gap；Grid 重排丢失当前焦点；视觉标签替代 heading/label 的语义。
+- Library: 布局、角色文字、属性透传与响应式列数。
+- Application: 任务分组、DOM 阅读顺序、语义元素和工作保留。
+
+## Composition
+- as 选择正确 HTML 结构，gap 表达关系；Inline 换行，Grid minItemWidth 按宿主容量流动。
+
+## Responsive behavior
+- minItemWidth 跟随容器而 columns 跟随视口；重要二维比较仍用 Table。
+
+## Customization
+- gap 使用既有空间档位，Text tone 只改强调，不能改变状态事实。
 
 ## Current exports
 - Grid: function; owner layout; PASS; props: GridProps<E>

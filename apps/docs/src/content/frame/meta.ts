@@ -27,4 +27,33 @@ export default {
     "Frame 也可以直接包住 <Table variant=\"card\">，让表头落在浅底上。",
     "需要标题区带操作按钮时，给 FrameHeader 加 flex-row 与 justify-between。",
   ],
+  design: {
+    "methods": [
+      "相成相制",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "多个相关面板需要共同外框，同时保留各自的内容工作面。"
+    ],
+    "avoid": [
+      "Frame 与 Card 无限套娃；仅为视觉留白分割同一任务；页内标题区被误解为全站 banner。"
+    ],
+    "composition": [
+      "Header/Title/Description 对应整组范围，Panel 对应具体工作面；Footer 放作用于整组的事实或操作。"
+    ],
+    "stateOwner": {
+      "library": [
+        "外框、内面板与部位间距。"
+      ],
+      "application": [
+        "面板归属、标题语义、操作范围与工作状态。"
+      ]
+    },
+    "responsive": [
+      "长内容留在各自面板中；窄屏先改布局，不为装下外框牺牲控件容量。"
+    ],
+    "customization": [
+      "外观在项目主题集中定义；需要真实语义元素时用原生结构围住 Frame，避免错误 landmark。"
+    ]
+  },
 } satisfies ComponentMeta;

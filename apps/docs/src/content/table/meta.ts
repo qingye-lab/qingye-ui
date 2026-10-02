@@ -36,4 +36,33 @@ export default {
     "选择列的复选框需要 aria-label；选中行设置 data-state=\"selected\"。",
     "没有排序、筛选、分页需求时用 Table；需要这些交互时用 DataTable。",
   ],
+  design: {
+    "methods": [
+      "布白有用",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "多对象共享同一组属性，读者需要跨行跨列比较。"
+    ],
+    "avoid": [
+      "窄屏自动把每行拆成不同卡片使列关系消失；tr 悬停外观被误解成可点击；数字列混合单位。"
+    ],
+    "composition": [
+      "table/thead/tbody/th/td 保留表结构；Caption 或 aria-label 命名对象，动作放真实按钮，数字列统一单位与对齐。"
+    ],
+    "stateOwner": {
+      "library": [
+        "语义表格、表面、密度和容器滚动。"
+      ],
+      "application": [
+        "列含义、scope/headers 的复杂关联、排序选择与行操作。"
+      ]
+    },
+    "responsive": [
+      "在外层容器横向滚动保留比较面；表头吸顶要有限高，必要列可指定最小宽度。"
+    ],
+    "customization": [
+      "density 调整行关系，className 属于 table；render 调整外容器，不能混淆两个入口。"
+    ]
+  },
 } satisfies ComponentMeta;

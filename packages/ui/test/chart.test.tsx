@@ -43,6 +43,7 @@ function Harness({ children }: { children: React.ReactNode }) {
 test("exposes series colours as CSS variables, falling back to chart tokens in config order", () => {
   const { container } = render(<Harness>{null}</Harness>);
   const chart = container.querySelector<HTMLElement>("[data-slot=chart]");
+  expect(chart).toHaveAttribute("id", "orders");
   expect(chart?.style.getPropertyValue("--color-online")).toBe("var(--chart-1)");
   expect(chart?.style.getPropertyValue("--color-store")).toBe("var(--chart-2)");
   const css = container.querySelector("style")?.textContent ?? "";

@@ -24,7 +24,7 @@ export function Input({
   ...props
 }: InputProps): React.ReactElement {
   const inputClassName = cn(
-    "h-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] w-full min-w-0 rounded-[inherit] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] px-[calc(calc(var(--qy-space-1)*3.5)-1px)] text-foreground leading-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] outline-none [transition:background-color_5000000s_ease-in-out_0s] placeholder:text-muted-foreground/72 sm:h-[calc(var(--qy-control-md)-2px)] sm:leading-[calc(var(--qy-control-md)-2px)] autofill:[-webkit-text-fill-color:var(--foreground)]",
+    "h-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] w-full min-w-0 rounded-[inherit] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] px-[calc(calc(var(--qy-space-1)*3.5)-1px)] text-foreground leading-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] outline-none [transition:background-color_5000000s_ease-in-out_0s] placeholder:text-muted-foreground sm:h-[calc(var(--qy-control-md)-2px)] sm:leading-[calc(var(--qy-control-md)-2px)] autofill:[-webkit-text-fill-color:var(--foreground)]",
     size === "sm" &&
       "h-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra)-2px)] px-[calc(calc(var(--qy-space-1)*2.5)-1px)] leading-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra)-2px)] sm:h-[calc(var(--qy-control-sm)-2px)] sm:leading-[calc(var(--qy-control-sm)-2px)]",
     size === "lg" && "h-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra)-2px)] px-[calc(var(--qy-space-4)-1px)] leading-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra)-2px)] sm:h-[calc(var(--qy-control-lg)-2px)] sm:leading-[calc(var(--qy-control-lg)-2px)]",

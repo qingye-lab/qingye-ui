@@ -22,6 +22,37 @@ export default {
     "ComboboxStatus",
   ],
   keywords: ["combobox", "组合框", "可搜索下拉", "多选", "标签选择", "autocomplete select"],
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据",
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "从较长列表搜索并选择确定对象，多选时在同一工作区增减对象。"
+    ],
+    "avoid": [
+      "查询文字与已选值分别管理；刷新建议不应清掉已选对象。"
+    ],
+    "composition": [
+      "Input 或 Chips 承载输入，Popup 承载候选，Empty 和 Status 承接匹配与等待。"
+    ],
+    "stateOwner": {
+      "library": [
+        "过滤、选择、标签键盘导航、移除名称和可见焦点。"
+      ],
+      "application": [
+        "远程查询、权限、异步排序与持久化选择。"
+      ]
+    },
+    "responsive": [
+      "长标签在控件内换行，当前键盘焦点保留；候选浮层受可用宽高限制。"
+    ],
+    "customization": [
+      "复杂 Chip 内容用 removeProps 命名移除动作；纯文字标签自动带上对象名。"
+    ]
+  },
   api: [
     {
       name: "Combobox",
@@ -65,7 +96,7 @@ export default {
     "列表较短（十项以内）且不需要搜索时用 Select。",
     "单选时若希望打开后直接输入新关键词，用受控的 inputValue，在 onOpenChange 里清空。",
     "远程搜索时设置 filter={null}，用 ComboboxStatus 播报「正在搜索」等状态。",
-    "多选标签的移除按钮名称来自 UI 语言（默认「移除」）。",
-    "移除按钮继承所在 ComboboxChip 的 aria-label，所以标签的 aria-label 要写成动作加内容（如「移除 生产环境」），否则读屏只能听到一串相同的「移除」。",
+    "纯文字多选标签的移除按钮自动命名为「移除 {标签}」，动作名称跟随 UI 语言。",
+    "复杂标签通过 removeProps 的 aria-label 明确命名移除对象；未设置时使用 Chip 的 aria-label。",
   ],
 } satisfies ComponentMeta;

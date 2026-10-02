@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: 388b6f5ea7e1036b725e03e2cc32d961075b8fb47dc02506c0bba80dd0686ffd
+Source SHA-256: e6bb7916da7c87bee93a011538823cdf4da4b04a57b3450b0a8e16c2bd394e99
 
 悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。
 
 ## Use and ownership
-- 悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 补充图标名称、快捷键或短解释，供悬停与键盘聚焦时阅读。
+- Avoid: 不能承担控件唯一可访问名称、关键后果、错误恢复或交互元素。
+- Library: 管理提示延迟、trigger 关联、Esc 关闭与位置，提示不接管执行状态。
+- Application: 决定是否有必要补充以及文本与动作事实是否一致。
+
+## Composition
+- 图标 Button 自带 aria-label；应用根挂 TooltipProvider，点击式帮助用 Popover 的 tooltipStyle。
+
+## Responsive behavior
+- 长词按可用宽度换行；触屏缺少悬停时正文或点击帮助仍可获得必需信息。
+
+## Customization
+- 用 side、align、anchor 调整位置；简短内容共享主题表面，避免逐个自定义延迟。
 
 ## Current exports
 - Tooltip: const; owner tooltip; PASS

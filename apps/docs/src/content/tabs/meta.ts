@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "标签页 Tabs",
   description: "在同一位置切换几组相关内容，例如项目的概览、成员与设置。切换的是页面内的面板；跳转到不同地址请用导航链接。",
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "在同一对象下切换几组有直接关系的内容面板，保留当前对象。"
+    ],
+    "avoid": [
+      "地址跳转用链接；切换面板不能无意丢失未保存字段，也不能把未聚焦面板的控件留在键盘路径。"
+    ],
+    "composition": [
+      "Tab 与 Panel 使用同一 value；长列表可置于横向 ScrollArea，编辑面板按需求选择 keepMounted。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理 tablist、tab、tabpanel 关联、选中状态与键盘焦点；指示器只表达实际激活面板。"
+      ],
+      "application": [
+        "决定面板数据、未保存内容、关闭清除政策及是否持久保留编辑。"
+      ]
+    },
+    "responsive": [
+      "横向列表保持可达，不通过换行破坏顺序；纵向方向与方向键一致，窄屏保留面板宽度。"
+    ],
+    "customization": [
+      "default 与 underline 表达不同边界；指示器使用公共展开时长，尺寸与状态不依赖动画完成。"
+    ]
+  },
   category: "导航",
   source: "coss",
   exports: ["Tabs", "TabsList", "TabsTab", "TabsPanel"],

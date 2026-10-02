@@ -1,6 +1,7 @@
 "use client";
 
 import { XIcon } from "lucide-react";
+import { dateMatchModifiers } from "@daypicker/react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -118,10 +119,14 @@ export function DateTimePicker({
     onOpenChange?.(next);
   };
   const update = (next: string) => {
+    const nextDate = parseLocalDateTime(next);
+    if (nextDate && disabledDates && dateMatchModifiers(nextDate, disabledDates)) return;
     if (value === undefined) setLocalValue(next);
     onValueChange?.(next);
   };
   const showClear = clearable && date !== undefined && !disabled && !readOnly;
+  const todayDisabled = Boolean(disabledDates && dateMatchModifiers(new Date(), disabledDates));
+  const timeDisabled = Boolean(disabledDates && dateMatchModifiers(date ?? new Date(), disabledDates));
   // Keep the picked moment audible when an external label names the trigger.
   const labelledBy = ariaLabelledBy ? `${ariaLabelledBy} ${valueId}` : undefined;
   const describedBy =
@@ -177,6 +182,7 @@ export function DateTimePicker({
             </label>
             <Input
               className="w-auto"
+              disabled={timeDisabled}
               id={`${fieldId}-time`}
               nativeInput
               onChange={(event) => {
@@ -190,6 +196,7 @@ export function DateTimePicker({
             />
             <div className="ms-auto flex items-center gap-(--qy-space-1)">
               <Button
+                disabled={todayDisabled}
                 onClick={() => {
                   const now = formatLocalDateTime(new Date());
                   update(withSeconds ? now.slice(0, 19) : now.slice(0, 16));

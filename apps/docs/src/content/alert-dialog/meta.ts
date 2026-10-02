@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "警示对话框 AlertDialog",
   description: "打断当前操作、要求用户明确回应的对话框，用于删除、撤销权限等不可逆操作的二次确认。点击遮罩不会关闭。",
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "对具体对象和具体不可逆后果要求明确回应，如永久删除或撤销权限。"
+    ],
+    "avoid": [
+      "确认不应成为每次操作的例行阻碍；请求发出与完成、结果未知必须分开表达。"
+    ],
+    "composition": [
+      "Title 点明对象，Description 只说明必要后果，取消与执行动作并列，初始焦点按风险显式设置。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供 alertdialog 名称与说明关联、焦点限制、遮罩不关闭和明确选择出口。"
+      ],
+      "application": [
+        "决定确认条件、操作范围、危险请求、失败或未知状态，以及何时允许关闭或重试。"
+      ]
+    },
+    "responsive": [
+      "贴底操作保留安全区；长后果说明不能让取消与执行动作不可达。"
+    ],
+    "customization": [
+      "视觉强弱跟随当前风险；destructive 指向真实危险动作，取消不被默认焦点顺序意外弱化。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
-Source SHA-256: be8e46c2016d9935406f3bd75204a8ac9db6421b3da4fc5344d057b34909118f
+Source SHA-256: 2800682e9df1c66c1f420b30ac23110f81e3adf0cb68e73b63d3034038c503ba
 
 一组可以逐个展开的分节，用于常见问题、分组设置这类“标题一览、按需展开”的内容。只有一个折叠区时用 Disclosure。
 
 ## Use and ownership
-- 一组可以逐个展开的分节，用于常见问题、分组设置这类“标题一览、按需展开”的内容。只有一个折叠区时用 Disclosure。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 围绕一组可独立阅读的章节按需展开，如问题列表和次要分组设置。
+- Avoid: 关键后果、必填项与错误恢复不能仅藏在关闭章节中；文档标题层级不能由视觉大小代替。
+- Library: 关联章节标题、展开按钮与面板，支持单开或多开、禁用及键盘导航。
+- Application: 决定章节分类、哪些内容必须先显示，及收起后的草稿保留与清除。
+
+## Composition
+- Trigger 通过 headerProps.render 匹配页面 h2 / h3 等层级；需要保留字段时为 Panel 设 keepMounted。
+
+## Responsive behavior
+- 长标题与箭头分别占位；窄屏展开文本应可读，粗指针检查整行目标。
+
+## Customization
+- 边界来自章节之间的分隔，不要求每节套卡片；展开与退出使用共享时长和缓动。
 
 ## Current exports
 - Accordion: function; owner accordion; PASS; props: AccordionPrimitive.Root.Props
@@ -19,7 +28,10 @@ Source SHA-256: be8e46c2016d9935406f3bd75204a8ac9db6421b3da4fc5344d057b34909118f
 - AccordionItem: function; owner accordion; PASS; props: AccordionPrimitive.Item.Props
 - AccordionPanel: function; owner accordion; PASS; props: AccordionPrimitive.Panel.Props
 - AccordionPrimitive: reexport; owner accordion; UNVERIFIED
-- AccordionTrigger: function; owner accordion; PASS; props: AccordionPrimitive.Trigger.Props
+- AccordionTrigger: function; owner accordion; PASS; props: AccordionPrimitive.Trigger.Props & {
+  /** Match the surrounding document heading level, e.g. render an h2. */
+  headerProps?: AccordionPrimitive.Header.Props;
+}
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -42,7 +54,8 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - disabled: boolean; default false. 禁用该分节。
 
 ### AccordionTrigger
-分节标题按钮，右侧箭头随展开旋转。外层自动包一个标题元素（h3）。
+分节标题按钮，右侧箭头随展开旋转；默认外层标题为 h3。
+- headerProps: Accordion.Header props. 设置标题层级与属性，例如 { render: <h2 /> }，以匹配所在文档结构。
 
 ### AccordionPanel
 分节内容，高度过渡展开与收起，可被中途打断。别名 AccordionContent。

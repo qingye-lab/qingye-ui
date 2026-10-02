@@ -8,6 +8,35 @@ export default {
   source: "local",
   exports: ["NativeSelect", "NativeSelectOption", "NativeSelectOptGroup"],
   keywords: ["native select", "select", "下拉", "选择框", "原生", "picker"],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "移动表单或长选项列表中使用系统选择器选择一个值。"
+    ],
+    "avoid": [
+      "占位选项不是有效值；required 时不能把默认第一项当成用户已选择。"
+    ],
+    "composition": [
+      "NativeSelectOption 与 OptGroup 保留原生选项关系，Field 承接名称和错误。"
+    ],
+    "stateOwner": {
+      "library": [
+        "原生选择、空值、字段关联与尺寸角色。"
+      ],
+      "application": [
+        "选项数据、当前值、业务必填规则和保存。"
+      ]
+    },
+    "responsive": [
+      "使用平台选择面板；框内长值截断但保留完整原生选项文本。"
+    ],
+    "customization": [
+      "size 跟随 --qy-control-*；selectClassName 调整输入部位而非外框。"
+    ]
+  },
   api: [
     {
       name: "NativeSelect",

@@ -177,3 +177,55 @@ test("numberOfMonths controls how many month grids render", () => {
   expect(screen.queryAllByText("2026年9月").length).toBe(1);
   unmount();
 });
+
+test("disabled preset endpoints cannot bypass disabled dates", async () => {
+  const onValueChange = vi.fn();
+  render(<DateRangePicker defaultOpen disabledDates={{ before: new Date(2026, 8, 10) }}
+    calendarProps={{ defaultMonth: SEPTEMBER }} onValueChange={onValueChange}
+    presets={[{ label: "早期记录", value: { from: new Date(2026, 8, 1), to: new Date(2026, 8, 5) } }]} />);
+  const preset = screen.getByRole("button", { name: "早期记录" });
+  await userEvent.click(preset);
+  expect(onValueChange).not.toHaveBeenCalled();
+  expect(preset).toBeDisabled();
+  expect(screen.getByRole("dialog")).toBeInTheDocument();
+});
+
+test("range length and excludeDisabled apply to calendar picks and presets", async () => {
+  const onValueChange = vi.fn();
+  render(<DateRangePicker defaultOpen disabledDates={new Date(2026, 8, 12)}
+    calendarProps={{ defaultMonth: SEPTEMBER, min: 2, max: 7, excludeDisabled: true }}
+    onValueChange={onValueChange}
+    presets={[
+      { label: "一天", value: { from: new Date(2026, 8, 4), to: new Date(2026, 8, 4) } },
+      { label: "跨禁用日", value: { from: new Date(2026, 8, 10), to: new Date(2026, 8, 15) } },
+      { label: "整月", value: { from: new Date(2026, 8, 1), to: new Date(2026, 8, 30) } },
+    ]} />);
+  for (const name of ["一天", "跨禁用日", "整月"]) expect(screen.getByRole("button", { name })).toBeDisabled();
+  await userEvent.click(day("2026年9月10日"));
+  await userEvent.click(day("2026年9月15日"));
+  expect(onValueChange).not.toHaveBeenCalled();
+  // The invalid end starts a new draft; a legal end completes it.
+  await userEvent.click(day("2026年9月18日"));
+  expect(onValueChange).toHaveBeenLastCalledWith({ from: new Date(2026, 8, 15), to: new Date(2026, 8, 18) });
+});
+
+test("external closure discards the partial draft without changing the committed range", async () => {
+  const range = { from: new Date(2026, 8, 1), to: new Date(2026, 8, 5) };
+  const onValueChange = vi.fn();
+  const props = { calendarProps: { defaultMonth: SEPTEMBER }, onValueChange, value: range };
+  const { rerender } = render(<DateRangePicker {...props} open />);
+  await userEvent.click(day("2026年9月10日"));
+  expect(screen.getByText("结束日期")).toBeInTheDocument();
+  rerender(<DateRangePicker {...props} open={false} />);
+  expect(document.querySelector("[data-slot=date-picker-value]")).not.toHaveTextContent("结束日期");
+  expect(onValueChange).not.toHaveBeenCalled();
+});
+
+test("disabled days inside a range remain allowed unless excludeDisabled was requested", async () => {
+  const onValueChange = vi.fn();
+  render(<DateRangePicker defaultOpen disabledDates={new Date(2026, 8, 12)}
+    calendarProps={{ defaultMonth: SEPTEMBER }} onValueChange={onValueChange}
+    presets={[{ label: "时间跨度", value: { from: new Date(2026, 8, 10), to: new Date(2026, 8, 15) } }]} />);
+  await userEvent.click(screen.getByRole("button", { name: "时间跨度" }));
+  expect(onValueChange).toHaveBeenCalledOnce();
+});

@@ -61,13 +61,13 @@ export function MenuPopup({
       >
         <MenuPrimitive.Popup
           className={cn(
-            "relative flex not-[class*='w-']:min-w-32 origin-(--transform-origin) rounded-lg border bg-popover not-dark:bg-clip-padding shadow-lg/5 outline-none before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] focus:outline-none dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+            "relative flex min-w-32 max-w-(--available-width) origin-(--transform-origin) rounded-lg border bg-popover not-dark:bg-clip-padding shadow-lg/5 outline-none before:pointer-events-none before:absolute before:inset-0 before:rounded-[calc(var(--radius-lg)-1px)] before:shadow-[0_1px_--theme(--color-black/4%)] focus:outline-none dark:before:shadow-[0_-1px_--theme(--color-white/6%)]",
             className,
           )}
           data-slot="menu-popup"
           {...props}
         >
-          <div className="max-h-(--available-height) w-full overflow-y-auto p-(--qy-space-1)">
+          <div className="max-h-(--available-height) w-full min-w-0 overflow-y-auto overscroll-contain p-(--qy-space-1)" data-slot="menu-scroll">
             {children}
           </div>
         </MenuPrimitive.Popup>
@@ -94,7 +94,7 @@ export function MenuItem({
   return (
     <MenuPrimitive.Item
       className={cn(
-        "flex min-h-8 pointer-coarse:min-h-11 cursor-default select-none items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-inset:ps-(--qy-space-8) data-[variant=destructive]:text-destructive-foreground data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not([class*='opacity-'])]:opacity-80 [&>svg:not([class*='size-'])]:size-4.5 sm:[&>svg:not([class*='size-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:-mx-0.5 [&>svg]:shrink-0",
+        "flex min-h-8 min-w-0 wrap-anywhere text-start pointer-coarse:min-h-11 cursor-default select-none items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-inset:ps-(--qy-space-8) data-[variant=destructive]:text-destructive-foreground data-highlighted:text-accent-foreground data-[variant=destructive]:data-highlighted:text-destructive-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not([class*='opacity-'])]:opacity-80 [&>svg:not([class*='size-'])]:size-4.5 sm:[&>svg:not([class*='size-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:-mx-0.5 [&>svg]:shrink-0",
         className,
       )}
       data-inset={inset}
@@ -118,7 +118,7 @@ export function MenuLinkItem({
   return (
     <MenuPrimitive.LinkItem
       className={cn(
-        "flex min-h-8 pointer-coarse:min-h-11 cursor-default select-none items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-inset:ps-(--qy-space-8) data-[variant=destructive]:text-destructive-foreground data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not([class*='opacity-'])]:opacity-80 [&>svg:not([class*='size-'])]:size-4.5 sm:[&>svg:not([class*='size-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:-mx-0.5 [&>svg]:shrink-0",
+        "flex min-h-8 min-w-0 wrap-anywhere text-start pointer-coarse:min-h-11 cursor-default select-none items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-inset:ps-(--qy-space-8) data-[variant=destructive]:text-destructive-foreground data-highlighted:text-accent-foreground data-[variant=destructive]:data-highlighted:text-destructive-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not([class*='opacity-'])]:opacity-80 [&>svg:not([class*='size-'])]:size-4.5 sm:[&>svg:not([class*='size-'])]:size-4 [&>svg]:pointer-events-none [&>svg]:-mx-0.5 [&>svg]:shrink-0",
         className,
       )}
       closeOnClick={closeOnClick}
@@ -145,8 +145,8 @@ export function MenuCheckboxItem({
       className={cn(
         "grid min-h-8 pointer-coarse:min-h-11 in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] cursor-default items-center gap-(--qy-space-2) rounded-sm py-(--qy-space-1) ps-(--qy-space-2) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         variant === "switch"
-          ? "grid-cols-[1fr_auto] gap-(--qy-space-4) pe-[calc(var(--qy-space-1)*1.5)]"
-          : "grid-cols-[.75rem_1fr] pe-(--qy-space-4)",
+          ? "grid-cols-[minmax(0,1fr)_auto] gap-(--qy-space-4) pe-[calc(var(--qy-space-1)*1.5)]"
+          : "grid-cols-[.75rem_minmax(0,1fr)] pe-(--qy-space-4)",
         className,
       )}
       data-slot="menu-checkbox-item"
@@ -154,7 +154,7 @@ export function MenuCheckboxItem({
     >
       {variant === "switch" ? (
         <>
-          <span className="col-start-1">{children}</span>
+          <span className="col-start-1 min-w-0 wrap-anywhere">{children}</span>
           <MenuPrimitive.CheckboxItemIndicator
             className="inset-shadow-[0_1px_--theme(--color-black/4%)] inline-flex h-[calc(var(--thumb-size)+2px)] w-[calc(var(--thumb-size)*2-2px)] shrink-0 items-center rounded-full p-px outline-none transition-[background-color,box-shadow] duration-200 [--thumb-size:--spacing(4)] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background data-checked:bg-primary data-unchecked:bg-input data-disabled:opacity-64 sm:[--thumb-size:--spacing(3)]"
             keepMounted
@@ -167,7 +167,7 @@ export function MenuCheckboxItem({
           <MenuPrimitive.CheckboxItemIndicator className="col-start-1 -ms-0.5">
             <CheckIcon aria-hidden="true" strokeWidth={3} />
           </MenuPrimitive.CheckboxItemIndicator>
-          <span className="col-start-2">{children}</span>
+          <span className="col-start-2 min-w-0 wrap-anywhere">{children}</span>
         </>
       )}
     </MenuPrimitive.CheckboxItem>
@@ -188,7 +188,7 @@ export function MenuRadioItem({
   return (
     <MenuPrimitive.RadioItem
       className={cn(
-        "grid min-h-8 pointer-coarse:min-h-11 in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] cursor-default grid-cols-[.75rem_1fr] items-center gap-(--qy-space-2) rounded-sm py-(--qy-space-1) ps-(--qy-space-2) pe-(--qy-space-4) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+        "grid min-h-8 pointer-coarse:min-h-11 in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] cursor-default grid-cols-[.75rem_minmax(0,1fr)] items-center gap-(--qy-space-2) rounded-sm py-(--qy-space-1) ps-(--qy-space-2) pe-(--qy-space-4) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className,
       )}
       data-slot="menu-radio-item"
@@ -197,7 +197,7 @@ export function MenuRadioItem({
       <MenuPrimitive.RadioItemIndicator className="col-start-1 -ms-0.5">
         <CheckIcon aria-hidden="true" strokeWidth={3} />
       </MenuPrimitive.RadioItemIndicator>
-      <span className="col-start-2">{children}</span>
+      <span className="col-start-2 min-w-0 wrap-anywhere">{children}</span>
     </MenuPrimitive.RadioItem>
   );
 }
@@ -242,7 +242,7 @@ export function MenuShortcut({
   return (
     <kbd
       className={cn(
-        "ms-auto font-medium font-sans text-muted-foreground/72 text-xs tracking-widest",
+        "ms-auto shrink-0 font-medium font-sans text-muted-foreground in-data-highlighted:text-current text-xs tracking-widest",
         className,
       )}
       data-slot="menu-shortcut"
@@ -268,7 +268,7 @@ export function MenuSubTrigger({
   return (
     <MenuPrimitive.SubmenuTrigger
       className={cn(
-        "flex min-h-8 pointer-coarse:min-h-11 items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-popup-open:bg-accent data-inset:ps-(--qy-space-8) data-highlighted:text-accent-foreground data-popup-open:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not(:last-child)]:-mx-0.5 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
+        "flex min-h-8 min-w-0 wrap-anywhere text-start pointer-coarse:min-h-11 items-center gap-(--qy-space-2) rounded-sm px-(--qy-space-2) py-(--qy-space-1) text-base text-foreground outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-popup-open:bg-accent data-inset:ps-(--qy-space-8) data-highlighted:text-accent-foreground data-popup-open:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&>svg:not(:last-child)]:-mx-0.5 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className,
       )}
       data-inset={inset}
@@ -276,7 +276,7 @@ export function MenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ms-auto -me-0.5 opacity-80" />
+      <ChevronRightIcon aria-hidden="true" className="ms-auto -me-0.5 opacity-80 rtl:-scale-x-100" />
     </MenuPrimitive.SubmenuTrigger>
   );
 }

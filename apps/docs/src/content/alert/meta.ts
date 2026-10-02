@@ -24,4 +24,34 @@ export default {
     "role=\"alert\" 会让读屏器立即播报；页面加载时就存在、并不紧急的说明，可改为 role=\"status\" 或去掉 role。",
     "操作按钮用 xs / sm 尺寸，最多两个；主要操作放在最后。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "页面内持续可见的状态、后果或修复入口，与相关对象邻接。"
+    ],
+    "avoid": [
+      "所有初始信息都 assertive 播报；同一个问题既重复 Alert 又 Toast；长说明挤掉修复动作。"
+    ],
+    "composition": [
+      "Title 说当前事实，Description 只保留修复所需细节，Action 承接对象。默认 role=alert，普通信息需显式选择 status 或移除 role。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提示部位、语义变体、动作换行和原生属性透传。"
+      ],
+      "application": [
+        "紧迫性、role 选择、持续问题、权限和恢复动作。"
+      ]
+    },
+    "responsive": [
+      "窄屏动作占整行，长说明允许换行；关键后果不藏 Tooltip，实测文字与边界对比。"
+    ],
+    "customization": [
+      "variant 只是视觉语义，role 与紧迫性单独判断，样式不能代替错误事实。"
+    ]
+  },
 } satisfies ComponentMeta;

@@ -49,3 +49,10 @@ test("composes parts and exposes density and connector", () => {
   expect(list).toHaveAttribute("data-connector", "dashed");
   expect(list.querySelector("[data-slot=timeline-marker]")).toHaveAttribute("data-variant", "plain");
 });
+
+test("preserves zero-valued event content", () => {
+  const { container } = render(<Timeline items={[{ id: "zero", title: "复核结果", time: 0, description: 0, content: 0 }]} />);
+  expect(container.querySelector("[data-slot=timeline-time]")).toHaveTextContent("0");
+  expect(container.querySelector("[data-slot=timeline-description]")).toHaveTextContent("0");
+  expect(screen.getByRole("listitem")).toHaveTextContent("复核结果000");
+});

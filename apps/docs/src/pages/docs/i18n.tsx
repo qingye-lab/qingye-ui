@@ -146,7 +146,7 @@ export default function I18nPage() {
       <H2 id="custom-components">在自己的组件里使用</H2>
       <P>封装业务组件时读取同一份文案，界面语言就能保持一致：</P>
       <CodeBlock
-        code={`import { useUILocale } from "@qingye/ui/locale";\n\nexport function ClearFilters({ onClear }: { onClear: () => void }) {\n  const { code, messages } = useUILocale(); // code: "zh-CN" | "en-US"\n  return <button onClick={onClear}>{messages.clear}</button>;\n}`}
+        code={`import { Button } from "@qingye/ui/components/button";\nimport { useUILocale } from "@qingye/ui/locale";\n\nexport function ClearFilters({ onClear }: { onClear: () => void }) {\n  const { code, messages } = useUILocale(); // code: "zh-CN" | "en-US"\n  return <Button onClick={onClear}>{messages.clear}</Button>;\n}`}
       />
       <P className="text-[0.875rem] text-muted-foreground">
         向组件库新增内置文案时，需要同时补齐 <Code>src/locale.tsx</Code> 与 <Code>src/locales/en-US.ts</Code>，两边的键保持一一对应。

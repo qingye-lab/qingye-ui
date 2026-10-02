@@ -1,8 +1,9 @@
 import { MotionProvider } from "@qingye/ui/components/motion-provider";
+import { Button } from "@qingye/ui/components/button";
 
 export const meta = {
-  title: "让自定义元素遵循策略",
-  description: "加上 qy-pressable 获得按压反馈；加上 data-slot 后，键盘操作时它的过渡也会立即完成。",
+  title: "组合控件遵循策略",
+  description: "Button 已带 qy-pressable 与 data-slot。自定义内容复用控件后，按压与键盘策略继续由共享实现处理。",
 };
 
 const colors = [
@@ -16,15 +17,13 @@ export default function Demo() {
     <MotionProvider>
       <div aria-label="标签颜色" className="flex gap-3" role="group">
         {colors.map((color) => (
-          <button
-            className="qy-pressable flex items-center gap-2 rounded-lg border bg-card px-3 py-2 text-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring"
-            data-slot="color-chip"
+          <Button
             key={color.name}
-            type="button"
+            variant="outline"
           >
             <span aria-hidden="true" className={`size-3 rounded-full ${color.value}`} />
             {color.name}
-          </button>
+          </Button>
         ))}
       </div>
     </MotionProvider>

@@ -23,4 +23,33 @@ export default {
     "自定义组件想遵循同一策略：给可样式化的元素加 data-slot，或给可按压元素加 qy-pressable 类即可，不要自己监听输入方式。",
     "某次程序触发的变化不需要动画时，在元素上加 data-instant。",
   ],
+  design: {
+    "methods": [
+      "随境取度",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "统一让键盘操作即时完成，并让指针操作保留必要过渡。"
+    ],
+    "avoid": [
+      "在多个子树各挂一个 document owner；动画结束触发保存；减少动态效果后状态不可辨。"
+    ],
+    "composition": [
+      "根部一次挂载，document 属性覆盖 Portal；组件通过 data-slot/data-motion 使用公共 motion.css。"
+    ],
+    "stateOwner": {
+      "library": [
+        "最近输入方式、监听清理与原文档属性恢复。"
+      ],
+      "application": [
+        "业务状态时机、根部装配和程序变化是否需要动画。"
+      ]
+    },
+    "responsive": [
+      "布局变化与动画可被打断；键盘与系统减少动态效果分别检验。"
+    ],
+    "customization": [
+      "项目组合可使用 data-instant，但不再重复监听输入方式。"
+    ]
+  },
 } satisfies ComponentMeta;

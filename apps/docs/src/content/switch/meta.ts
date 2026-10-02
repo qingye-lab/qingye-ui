@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Switch"],
   keywords: ["switch", "开关", "toggle", "启用"],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "控制具有开启和关闭含义的即时设置。"
+    ],
+    "avoid": [
+      "不要随开关变化改写设置名；远程写入失败需要恢复或明确说明状态。"
+    ],
+    "composition": [
+      "水平 Field 将设置名与开关配对；必要说明跟随名称，避免再加开关动作按钮。"
+    ],
+    "stateOwner": {
+      "library": [
+        "二元状态、切换按键、可见焦点和 RTL 滑块方向。"
+      ],
+      "application": [
+        "远程结果、待保存状态、失败恢复和权限。"
+      ]
+    },
+    "responsive": [
+      "保持紧凑外观与独立触屏命中区；长名称在相邻内容列内换行。"
+    ],
+    "customization": [
+      "checked 由状态 owner 决定；项目主题只改视觉，不替代请求状态。"
+    ]
+  },
   api: [
     {
       name: "Switch",

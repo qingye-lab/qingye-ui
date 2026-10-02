@@ -7,6 +7,36 @@ export default {
   source: "local",
   exports: ["SearchInput"],
   keywords: ["search", "搜索", "筛选", "清除", "⌘K"],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "编辑查询条件并筛选列表，清除后继续在同一输入框工作。"
+    ],
+    "avoid": [
+      "loading 只表示正在等待；输入法组字时的 Esc 不应清掉查询草稿。"
+    ],
+    "composition": [
+      "前部图标表达搜索，尾部清除与空值快捷键提示轮换；结果和空态由相邻列表承接。"
+    ],
+    "stateOwner": {
+      "library": [
+        "查询输入、清除动作、Esc 与焦点返回。"
+      ],
+      "application": [
+        "请求、防抖、过期结果保护及查询历史。"
+      ]
+    },
+    "responsive": [
+      "清除按钮预留空间；小屏保留输入字号与可达的清除命中区。"
+    ],
+    "customization": [
+      "loading、shortcut 和 clearLabel 使用当前属性，不另造搜索控件。"
+    ]
+  },
   api: [
     {
       name: "SearchInput",
@@ -24,7 +54,7 @@ export default {
     },
   ],
   keyboard: [
-    { keys: "Esc", description: "有内容时清空；再按一次交给外层（如关闭弹窗）。" },
+    { keys: "Esc", description: "有内容时清空；再按一次交给外层（如关闭弹窗）；输入法组字期间保留输入。" },
     { keys: "Tab", description: "从输入框移到清除按钮。" },
     { keys: "Enter / Space", description: "在清除按钮上清空，并把焦点还给输入框。" },
   ],

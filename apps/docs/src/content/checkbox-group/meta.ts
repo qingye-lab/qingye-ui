@@ -7,6 +7,35 @@ export default {
   source: "coss",
   exports: ["CheckboxGroup", "Checkbox"],
   keywords: ["checkbox group", "复选框组", "多选", "全选"],
+  design: {
+    "methods": [
+      "相成相制",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "管理一组可同时选择的条件，保留各项独立状态与共同范围。"
+    ],
+    "avoid": [
+      "父级全选只控制本组成员，不应默默扩展到未显示的其他对象。"
+    ],
+    "composition": [
+      "FieldsetLegend 命名范围，CheckboxGroup 管理数组，parent Checkbox 表达全选与半选。"
+    ],
+    "stateOwner": {
+      "library": [
+        "成员关系、数组值、父子选择和禁用传播。"
+      ],
+      "application": [
+        "成员数据、范围定义和批量提交结果。"
+      ]
+    },
+    "responsive": [
+      "默认纵向排列以保留选项文字容量，紧凑时也保留各项命中区。"
+    ],
+    "customization": [
+      "用 group className 调整排列，成员仍使用 Checkbox 公共实现。"
+    ]
+  },
   api: [
     {
       name: "CheckboxGroup",

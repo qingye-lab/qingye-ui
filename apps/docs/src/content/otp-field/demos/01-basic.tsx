@@ -12,7 +12,7 @@ export default function Demo() {
           <OTPFieldInput key={index} />
         ))}
       </OTPField>
-      <FieldDescription>已发送至 138 **** 6021</FieldDescription>
+      <FieldDescription>演示号码：138 **** 6021</FieldDescription>
     </Field>
   );
 }

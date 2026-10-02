@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: 1f67868206cdbc6052b35d7f63c001c8f55aace6f40eedf51bcaa304dec415c3
+Source SHA-256: 446ac0522da1ae9ba5149b636f37017db601ae2b3eaf04161a913256438681f9
 
 逐格输入短信或邮箱验证码，支持粘贴整串、自动跳格与退格回退。
 
 ## Use and ownership
-- 逐格输入短信或邮箱验证码，支持粘贴整串、自动跳格与退格回退。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 逐位核对短验证码，支持整串粘贴与自动填入。
+- Avoid: 填满仅表示输入完成，不能把 onValueComplete 当作验证成功。
+- Library: 字符规则、跳格、粘贴、键盘回退和字段关联。
+- Application: 校验请求、重发、有效期、尝试次数与敏感值清理。
+
+## Composition
+- 整组有统一名称，每格同属一个值；错误与等待围绕该验证码持续显示。
+
+## Responsive behavior
+- 粗指针每格至少 44×44px，格间距收紧；不足物理最小宽度的容器保留单行顺序并横向滚动，键盘聚焦可抵达后位。
+
+## Customization
+- length 与 validationType 来自真实码格式，normalizeValue 仅作明确规范化。
 
 ## Current exports
 - OTPField: function; owner otp-field; PASS; props: React.ComponentProps<typeof OTPFieldPrimitive.Root> & {
@@ -70,7 +79,7 @@ export default function Demo() {
           <OTPFieldInput key={index} />
         ))}
       </OTPField>
-      <FieldDescription>已发送至 138 **** 6021</FieldDescription>
+      <FieldDescription>演示号码：138 **** 6021</FieldDescription>
     </Field>
   );
 }
@@ -164,26 +173,26 @@ export default function Demo() {
 ### 组合：登录验证
 Source: apps/docs/src/content/otp-field/demos/05-verify.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
 import { OTPField, OTPFieldInput } from "@qingye/ui/components/otp-field";
 import { Spinner } from "@qingye/ui/components/spinner";
 import { CircleCheckIcon } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 export const meta = { title: "组合：登录验证", description: "填满后自动校验；示例验证码为 246810。" };
 
 export default function Demo() {
   const [value, setValue] = useState("");
   const [status, setStatus] = useState<"idle" | "checking" | "ok" | "error">("idle");
+  const statusId = useId();
   const verify = (code: string) => {
     setStatus("checking");
     setTimeout(() => setStatus(code === "246810" ? "ok" : "error"), 600);
   };
   return (
-    <div className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border bg-card p-4 text-center shadow-xs/5 sm:p-6">
+    <div className="flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-center">
       <div className="flex flex-col gap-1">
         <h3 className="font-semibold text-base">输入验证码</h3>
-        <p className="text-muted-foreground text-sm">我们向 zhang.wei@example.com 发送了 6 位验证码</p>
+        <p className="text-muted-foreground text-sm">演示邮箱：zhang.wei@example.com</p>
       </div>
       <OTPField
         length={6}
@@ -195,17 +204,17 @@ export default function Demo() {
         onValueComplete={verify}
         disabled={status === "checking" || status === "ok"}
         aria-label="邮箱验证码"
+        aria-describedby={status === "error" ? statusId : undefined}
       >
         {Array.from({ length: 6 }, (_, index) => (
           <OTPFieldInput key={index} aria-invalid={status === "error" || undefined} />
         ))}
       </OTPField>
-      <p aria-live="polite" className="flex h-5 items-center gap-1.5 text-sm">
+      <p id={statusId} aria-live="polite" className="flex h-5 items-center gap-1.5 text-sm">
         {status === "checking" ? <><Spinner className="size-4" />正在校验…</> : null}
         {status === "ok" ? <><CircleCheckIcon aria-hidden="true" className="size-4 text-success-foreground" />验证通过</> : null}
         {status === "error" ? <span className="text-destructive-foreground">验证码不正确，请重新输入</span> : null}
       </p>
-      <Button variant="ghost" size="sm" disabled className="numeric">重新发送（60 秒）</Button>
     </div>
   );
 }

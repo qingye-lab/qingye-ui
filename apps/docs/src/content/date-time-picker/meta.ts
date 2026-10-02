@@ -40,4 +40,33 @@ export default {
     "值不含时区；需要时间点（UTC）时在提交前自行换算。",
     "选择日期不会关闭弹层，方便接着调整时间；点「完成」或按 Esc 关闭。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "在同一字段选择一个本地日期与时间，便于连续调整。"
+    ],
+    "avoid": [
+      "选择日期就宣称预约成功；此刻或改时间绕过禁用日；Esc 被叫作撤销已生效的值。"
+    ],
+    "composition": [
+      "日历保留时刻，时间输入保留日期；此刻与时间编辑遵守 disabledDates；完成和 Esc 只是关闭，选择按当前 API 即时通知应用。"
+    ],
+    "stateOwner": {
+      "library": [
+        "日期/时间组合、输入限制、开关、只读、清除与本地解析。"
+      ],
+      "application": [
+        "时区换算、预约可用性、真实提交、后端校验与失败恢复。"
+      ]
+    },
+    "responsive": [
+      "窄屏核对日历和时间/此刻/完成同排容量，命中区不因 footer 紧凑缩小。"
+    ],
+    "customization": [
+      "step/defaultTime/formatValue 调整时间表达；需要确认才提交时应用另存草稿，不假定库已有事务。"
+    ]
+  },
 } satisfies ComponentMeta;

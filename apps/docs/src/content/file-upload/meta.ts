@@ -7,6 +7,37 @@ export default {
   source: "local",
   exports: ["FileUpload", "formatFileSize"],
   keywords: ["upload", "file", "dropzone", "上传", "附件", "拖拽"],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "进退相承",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "选择或拖入文件，逐项核对被接受文件、拒绝原因和上传状态。"
+    ],
+    "avoid": [
+      "选进队列不代表上传完成；进度不能伪造服务端处理或已取消结果。"
+    ],
+    "composition": [
+      "按钮或 dropzone 提供入口，列表保持文件身份，原位 rejection 和行内 actions 承接修正。"
+    ],
+    "stateOwner": {
+      "library": [
+        "文件选择、类型大小数量校验、已接受列表、原生提交镜像和移除焦点。"
+      ],
+      "application": [
+        "上传、重试、取消请求、结果核实与持久化。"
+      ]
+    },
+    "responsive": [
+      "长文件名收缩并保留完整 title；行内错误与恢复动作不能遮住移除入口。"
+    ],
+    "customization": [
+      "getProgress 和 getError 只展示宿主事实，renderActions 复用公共 Button 实现恢复。"
+    ]
+  },
   api: [
     {
       name: "FileUpload",
@@ -23,7 +54,7 @@ export default {
         { name: "getProgress", type: "(file, index) => number | null | undefined", description: "0–100 的上传进度；返回空值时显示文件大小。" },
         { name: "getError", type: "(file, index) => ReactNode", description: "单个文件的错误信息，例如上传失败。" },
         { name: "renderActions", type: "(file, index) => ReactNode", description: "每行移除按钮前的额外操作，例如重试。" },
-        { name: "name", type: "string", description: "字段名；隐藏的文件输入与列表同步，原生表单提交可直接带上文件。" },
+        { name: "name", type: "string", description: "字段名；浏览器支持 DataTransfer 时，隐藏输入与已接受列表同步；拒绝或重复选择不清掉原有文件。" },
         { name: "invalid", type: "boolean", default: "false", description: "错误边框；同时提供可见的错误文字。" },
         { name: "disabled", type: "boolean", default: "false", description: "禁用拖放、选择与移除。" },
         { name: "label / description / chooseLabel", type: "string / ReactNode", description: "覆盖默认文案。" },

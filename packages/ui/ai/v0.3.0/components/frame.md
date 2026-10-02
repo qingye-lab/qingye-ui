@@ -8,10 +8,19 @@ Source SHA-256: ea208e6bcbf223433ded27a79bf1002432cc72ee21cf4ab3a11c662a163a4f3e
 浅底外框里放一块或多块白色面板，把同一主题的信息归为一组，如账单概览、域名或构建设置。比 Card 更适合“一个标题 + 若干并列区块”的结构。
 
 ## Use and ownership
-- 浅底外框里放一块或多块白色面板，把同一主题的信息归为一组，如账单概览、域名或构建设置。比 Card 更适合“一个标题 + 若干并列区块”的结构。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 多个相关面板需要共同外框，同时保留各自的内容工作面。
+- Avoid: Frame 与 Card 无限套娃；仅为视觉留白分割同一任务；页内标题区被误解为全站 banner。
+- Library: 外框、内面板与部位间距。
+- Application: 面板归属、标题语义、操作范围与工作状态。
+
+## Composition
+- Header/Title/Description 对应整组范围，Panel 对应具体工作面；Footer 放作用于整组的事实或操作。
+
+## Responsive behavior
+- 长内容留在各自面板中；窄屏先改布局，不为装下外框牺牲控件容量。
+
+## Customization
+- 外观在项目主题集中定义；需要真实语义元素时用原生结构围住 Frame，避免错误 landmark。
 
 ## Current exports
 - Frame: function; owner frame; PASS; props: React.ComponentProps<"div">

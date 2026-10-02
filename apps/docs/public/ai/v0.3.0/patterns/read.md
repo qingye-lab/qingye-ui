@@ -48,8 +48,11 @@ export default function ReadPattern({ compact = false }: { compact?: boolean }) 
 
 ## apps/docs/src/patterns/shared.tsx
 ```tsx
+import { Label } from "@qingye/ui/components/label";
 import { Alert, AlertDescription, AlertTitle } from "@qingye/ui/components/alert";
 import { Badge } from "@qingye/ui/components/badge";
+import { Button } from "@qingye/ui/components/button";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye/ui/components/collapsible";
 import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import type { Outcome } from "./state";
@@ -61,11 +64,11 @@ export function useTaskTimers() {
   return (callback: () => void, delay = 700) => { const timer = setTimeout(() => { timers.current.delete(timer); callback(); }, delay); timers.current.add(timer); };
 }
 export function FixtureSettings({ children }: { children: ReactNode }) {
-  return <details className="qy-fixture-settings"><summary className="focus-ring">演示与状态</summary><p>使用合成资料和本地事件，可在这里重放异常；刷新或离开后的保留边界由各示例说明。</p><div className="qy-task-fields">{children}</div></details>;
+  return <Collapsible className="qy-fixture-settings"><CollapsibleTrigger render={<Button size="sm" variant="ghost" />}>演示与状态</CollapsibleTrigger><CollapsiblePanel keepMounted><p>使用合成资料和本地事件，可在这里重放异常；刷新或离开后的保留边界由各示例说明。</p><div className="qy-task-fields">{children}</div></CollapsiblePanel></Collapsible>;
 }
 export function OutcomeChoice({ value, onChange }: { value: Outcome; onChange: (value: Outcome) => void }) {
   const id = useId();
-  return <div className="qy-task-fields"><label htmlFor={id}>下次模拟响应</label><NativeSelect id={id} onChange={(event) => onChange(event.target.value as Outcome)} value={value}><NativeSelectOption value="success">成功</NativeSelectOption><NativeSelectOption value="failure">明确失败</NativeSelectOption><NativeSelectOption value="unknown">超时，结果未知</NativeSelectOption></NativeSelect></div>;
+  return <div className="qy-task-fields"><Label htmlFor={id}>下次模拟响应</Label><NativeSelect id={id} onChange={(event) => onChange(event.target.value as Outcome)} value={value}><NativeSelectOption value="success">成功</NativeSelectOption><NativeSelectOption value="failure">明确失败</NativeSelectOption><NativeSelectOption value="unknown">超时，结果未知</NativeSelectOption></NativeSelect></div>;
 }
 export function Notice({ title, children, tone = "info" }: { title: string; children?: ReactNode; tone?: "info" | "success" | "warning" | "error" }) {
   return <Alert role={tone === "error" ? "alert" : "status"} variant={tone}><AlertTitle>{title}</AlertTitle>{children && <AlertDescription>{children}</AlertDescription>}</Alert>;
@@ -226,8 +229,8 @@ export function queueTransition<T extends QueueItem>(item: T, stage: QueueStage)
 [data-pattern="review"] .qy-task-table { width:max-content; min-width:100%; }
 .qy-task-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--qy-space-4); padding-block:var(--qy-space-4); border-block-end:1px solid var(--qy-border); }
 .qy-fixture-settings { margin-block-start:var(--qy-space-5); padding:var(--qy-space-4); border-block-start:1px solid var(--qy-border); color:var(--qy-foreground-muted); font-size:var(--qy-text-caption-size); }
-.qy-fixture-settings summary { cursor:pointer; width:fit-content; }
-.qy-fixture-settings > p { margin-block:var(--qy-space-3); }
+.qy-fixture-settings [data-slot="collapsible-trigger"] { width:fit-content; }
+.qy-fixture-settings [data-slot="collapsible-panel"] > p { margin-block:var(--qy-space-3); }
 .qy-reading { max-width:36em; margin-inline:auto; font-size:var(--qy-text-body-size); line-height:2; }
 .qy-reading h2 { font-size:var(--qy-text-title-size); margin-block:var(--qy-section-gap) var(--qy-space-4); }
 .qy-reading p { margin-block:var(--qy-space-5); line-height:2; }

@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
-Source SHA-256: e54da059fd799280160b056fea6b40203af3ecad3f55fe56f0e8c5c859e04d10
+Source SHA-256: 99d8a1a2c3095e225391de403ce7ee98de373d85b8903e74640a9096d669223c
 
 在区域上点击右键（触屏长按）时出现的操作菜单，用于文件、卡片、表格行等对象的快捷操作。它是加速手段：同样的操作必须在界面其他位置也能完成。
 
 ## Use and ownership
-- 在区域上点击右键（触屏长按）时出现的操作菜单，用于文件、卡片、表格行等对象的快捷操作。它是加速手段：同样的操作必须在界面其他位置也能完成。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 为已定位对象提供右键或长按的快速操作，作为可见命令入口的补充。
+- Avoid: 不能让仅会发现右键的人才能完成任务；触发区域不能改变操作对象或忽略权限。
+- Library: 管理上下文触发、菜单键盘与焦点、碰撞定位；危险高亮、长标签和 RTL 子菜单保持真实表达。
+- Application: 提供当前对象、操作范围、可用条件和真实结果；长按不会自动创建业务选择。
+
+## Composition
+- 与可见 Button / Menu 复用同一命令定义，子菜单、Checkbox、Radio 按实际命令或值关系组合。
+
+## Responsive behavior
+- 触屏长按只作加速，保留可见替代入口；菜单范围限制在可用视口并支持内部滚动。
+
+## Customization
+- 沿用 Menu 的表面与状态角色；触发区域外观依据内容对象，避免另造命令语义。
 
 ## Current exports
 - ContextMenu: const; owner context-menu; PASS

@@ -8,10 +8,19 @@ Source SHA-256: 901c37ab8d8010d009552ba20e94c2780684e9fa9156fdacbc1fd08311794ff0
 列表、表格或页面暂时没有内容时，说明原因并给出下一步。用于首次使用、筛选无结果和清空后的状态。
 
 ## Use and ownership
-- 列表、表格或页面暂时没有内容时，说明原因并给出下一步。用于首次使用、筛选无结果和清空后的状态。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 初次无内容、筛选无结果或清空之后，需要让人找到有效下一步。
+- Avoid: 加载失败伪装成空数据；无结果清空筛选词；已有数据刷新时突然换成空态；显然的操作说明堆满空白。
+- Library: 空态的内容/媒体/操作结构与尺寸。
+- Application: 空与失败的判断、过滤条件、权限、恢复动作和数据到达。
+
+## Composition
+- 标题说明真实对象和原因，必要时给创建、清除筛选或返回；状态恢复后让位给内容。
+
+## Responsive behavior
+- 内嵌空态收紧留白与标题，长搜索词仍可阅读；动作按可用宽度换行。
+
+## Customization
+- EmptyTitle size 与宿主层级匹配，EmptyMedia 是可选内容，不以装饰掩盖缺少入口。
 
 ## Current exports
 - Empty: function; owner empty; PASS; props: React.ComponentProps<"div">

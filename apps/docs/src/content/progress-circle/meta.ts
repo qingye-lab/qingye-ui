@@ -28,4 +28,33 @@ export default {
     "进度为 0 时不画进度弧（圆头线帽在 0 时会留下一个点）。",
     "不确定进度在减少动态效果时放慢旋转而不是停止，与 Spinner 一致，避免看起来像卡死。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "随境取度"
+    ],
+    "whenToUse": [
+      "在紧凑位置表达任务进度，与任务名称和操作邻接。"
+    ],
+    "avoid": [
+      "环颜色被当作成功结论；只读到无名的百分比；中心内容包含必要操作却放进 progressbar。"
+    ],
+    "composition": [
+      "外围文本命名任务；value=null 表示未知。自定义中心内容通过 getAriaValueText 同步有意义的状态。"
+    ],
+    "stateOwner": {
+      "library": [
+        "环几何、不确定弧、progressbar 语义与中心表达。"
+      ],
+      "application": [
+        "真实进度、任务范围、结果和取消/重试操作。"
+      ]
+    },
+    "responsive": [
+      "小环省略中心数字时，附近仍要能读取进度；大环不为装饰压缩工作面。"
+    ],
+    "customization": [
+      "size/strokeWidth 按识别需要选择，status 只增强状态表达。"
+    ]
+  },
 } satisfies ComponentMeta;

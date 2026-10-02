@@ -94,7 +94,7 @@
 - [切换按钮组 ToggleGroup](/ai/v0.3.0/components/toggle-group.md): 一组共享状态的 Toggle：单选用于视图或对齐方式，多选用于文字格式等可叠加的选项。
 - [工具栏 Toolbar](/ai/v0.3.0/components/toolbar.md): 把一组相关控件（格式按钮、切换组、下拉选择）收进同一个可键盘漫游的容器，例如编辑器顶部的格式栏。
 - [文字提示 Tooltip](/ai/v0.3.0/components/tooltip.md): 悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。
-- [树 Tree](/ai/v0.3.0/components/tree.md): 展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。完整遵循 WAI-ARIA 树形视图的键盘模型。
+- [树 Tree](/ai/v0.3.0/components/tree.md): 展示层级数据并支持展开、收起与单选，例如文件目录、组织架构、商品类目。以方向键在可见节点间移动，支持键入查找。
 - [排版 Typography](/ai/v0.3.0/components/typography.md): 标题 Heading、长文容器 Prose 与文字链接 TextLink。字号取自类型令牌，中文长文使用更宽松的行高。正文与辅助文字请用布局中的 Text。
 
 ## Patterns

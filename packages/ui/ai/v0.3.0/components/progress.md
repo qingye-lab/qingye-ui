@@ -8,10 +8,19 @@ Source SHA-256: a1e11abf6582473e15447a385190d4298d007b9836e122a3f7e5203381709f7d
 显示一项任务的完成进度，如上传、导出、安装。进度未知时用不确定状态；表示容量、占比等静态度量请用 Meter。
 
 ## Use and ownership
-- 显示一项任务的完成进度，如上传、导出、安装。进度未知时用不确定状态；表示容量、占比等静态度量请用 Meter。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 说明一项任务正在推进，已知总量或结果尚未确定。
+- Avoid: 虚构百分比；100% 动画结束宣称服务端成功；失败只换条颜色；刷新抹掉有效结果。
+- Library: progressbar 数值与不确定原语、标签和值、轨道。
+- Application: 真实任务、计量源、结果、取消确认与重试。
+
+## Composition
+- value 来自任务计量，未知用 null；Label 命名任务，完成/失败/取消的文字与动作由应用提供。
+
+## Responsive behavior
+- 标签和值保持可读；进度条占可用宽度，不抢内容的工作空间。
+
+## Customization
+- format/getAriaValueText 对齐可见计量；状态色增强事实而不取代结果文字。
 
 ## Current exports
 - Progress: function; owner progress; PASS; props: ProgressPrimitive.Root.Props

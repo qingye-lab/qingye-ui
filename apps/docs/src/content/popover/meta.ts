@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "气泡卡片 Popover",
   description: "点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。",
+  design: {
+    "methods": [
+      "随境取度",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "在触发对象旁按需展示短表单、选择或可点击帮助，保持上下文。"
+    ],
+    "avoid": [
+      "不能把关键后果只塞进临时浮层；关闭不能被应用当成提交成功。"
+    ],
+    "composition": [
+      "可交互内容用 Popover；纯文本悬停补充用 Tooltip；需要独立模态任务时用 Dialog。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理触发器与浮层关联、定位、碰撞、焦点和 close 请求，保留表单原生语义。"
+      ],
+      "application": [
+        "负责值、验证、提交与错误恢复；受控 open 不替代业务状态。"
+      ]
+    },
+    "responsive": [
+      "根据可用高度滚动内容；窄屏仍提供触发与退出，表单长标签应保留可读宽度。"
+    ],
+    "customization": [
+      "side、align 和 anchor 调整与对象的空间关系；tooltipStyle 只改变表面，不移除交互语义。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: ["Popover", "PopoverTrigger", "PopoverPopup", "PopoverTitle", "PopoverDescription", "PopoverClose"],

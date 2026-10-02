@@ -38,4 +38,33 @@ export default {
     "计数加 numeric 使用等宽数字，超过上限显示 “99+”，避免宽度跳动。",
     "需要点击时用 render 渲染为 <a> 或 <button>，不要在 <span> 上绑定 onClick；仅含图标的可点击徽章要提供 aria-label。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "在对象旁标注状态、类别或计数，帮助扫读和比较。"
+    ],
+    "avoid": [
+      "用实色标签代替所有操作；仅颜色表达状态；对长状态名称无条件截断。"
+    ],
+    "composition": [
+      "Badge 保留状态文字；真正可点击的标签用 render 生成链接或 button，主要动作使用 Button。"
+    ],
+    "stateOwner": {
+      "library": [
+        "视觉变体、样式部位、可点击元素的焦点与触摸扩展。"
+      ],
+      "application": [
+        "状态事实、计数上限、操作范围和可访问名称。"
+      ]
+    },
+    "responsive": [
+      "短标签保持整词；长名称先缩短真实名称或允许布局换行，别挤掉同列数据。"
+    ],
+    "customization": [
+      "variant 表达当下强调程度，语义文字不因主题变更；数字使用 numeric。"
+    ]
+  },
 } satisfies ComponentMeta;

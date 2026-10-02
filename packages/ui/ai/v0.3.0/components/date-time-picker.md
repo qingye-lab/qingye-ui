@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 31bc16c9ea96427027c40058f724886b2cf753901c011f1b98a63acf92f63f7c
+Source SHA-256: e431ff5147548331da5c7dd2f59100976da10866cf48ef0023fe647f5a18ec44
 
 同时选择日期与时刻，例如预约、发布时间。触发器与 DatePicker 一致，弹层底部输入时间。
 
 ## Use and ownership
-- 同时选择日期与时刻，例如预约、发布时间。触发器与 DatePicker 一致，弹层底部输入时间。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 在同一字段选择一个本地日期与时间，便于连续调整。
+- Avoid: 选择日期就宣称预约成功；此刻或改时间绕过禁用日；Esc 被叫作撤销已生效的值。
+- Library: 日期/时间组合、输入限制、开关、只读、清除与本地解析。
+- Application: 时区换算、预约可用性、真实提交、后端校验与失败恢复。
+
+## Composition
+- 日历保留时刻，时间输入保留日期；此刻与时间编辑遵守 disabledDates；完成和 Esc 只是关闭，选择按当前 API 即时通知应用。
+
+## Responsive behavior
+- 窄屏核对日历和时间/此刻/完成同排容量，命中区不因 footer 紧凑缩小。
+
+## Customization
+- step/defaultTime/formatValue 调整时间表达；需要确认才提交时应用另存草稿，不假定库已有事务。
 
 ## Current exports
 - DateTimePicker: function; owner date-time-picker; PASS; props: DateTimePickerProps
@@ -173,6 +182,36 @@ export default function Demo() {
         </p>
       ) : null}
     </form>
+  );
+}
+```
+
+### 预约时间
+Source: apps/docs/src/content/date-time-picker/demos/05-availability.tsx
+```tsx
+import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
+import { Field, FieldDescription } from "@qingye/ui/components/field";
+import { Label } from "@qingye/ui/components/label";
+
+export const meta = { title: "预约时间" };
+
+export default function Demo() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  return (
+    <Field className="w-full max-w-sm">
+      <Label htmlFor="available-booking">预约时间</Label>
+      <DateTimePicker
+        aria-describedby="available-booking-hint"
+        calendarProps={{ defaultMonth: tomorrow }}
+        defaultTime="09:00"
+        disabledDates={{ before: tomorrow }}
+        id="available-booking"
+        label="预约"
+      />
+      <FieldDescription id="available-booking-hint">最早可预约明天。</FieldDescription>
+    </Field>
   );
 }
 ```

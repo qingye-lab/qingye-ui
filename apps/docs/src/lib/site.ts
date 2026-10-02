@@ -20,4 +20,4 @@ export const componentSourceUrl = (slug: string) => repoFile(`packages/ui/src/co
 export const editPageUrl = (file: string) => repoFile(`apps/docs/src/pages/docs/${file}`);
 
 /** `<title>` text for a page. */
-export const pageTitle = (title?: string) => (title ? `${title} · ${SITE.name}` : `${SITE.name} — 精致、耐看的 React 组件库`);
+export const pageTitle = (title?: string) => (title ? `${title} · ${SITE.name}` : `${SITE.name} — React 组件库`);

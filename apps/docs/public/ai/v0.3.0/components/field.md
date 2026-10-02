@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d
+Source SHA-256: c4768d9acd9d2d566a355d32594c857ba47035146a98e494fd1b1554ebf1be28
 
 把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。
 
 ## Use and ownership
-- 把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 把一个问题、控件、必要说明与原位错误放在同一关系中。
+- Avoid: 标签、示例和错误各自表达事实；不要给每个字段都重复一段操作说明。
+- Library: 控制关联、校验状态与描述、错误的可访问连接。
+- Application: 业务规则、草稿、后端错误和保存结果。
+
+## Composition
+- 纵向适合文字输入，水平适合复选或开关；FieldContent 容纳名称和必要说明。
+
+## Responsive behavior
+- 说明与错误可换行而不挤掉控件；横向名称列允许收缩。
+
+## Customization
+- orientation 调整字段关系；FieldTitle 不能冒充 label，非原生组合显式关联 id。
 
 ## Current exports
 - Field: function; owner field; PASS; props: FieldPrimitive.Root.Props & {

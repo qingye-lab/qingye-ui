@@ -29,13 +29,21 @@ export function AccordionItem({
 export function AccordionTrigger({
   className,
   children,
+  headerProps,
   ...props
-}: AccordionPrimitive.Trigger.Props): React.ReactElement {
+}: AccordionPrimitive.Trigger.Props & {
+  /** Match the surrounding document heading level, e.g. render an h2. */
+  headerProps?: AccordionPrimitive.Header.Props;
+}): React.ReactElement {
   return (
-    <AccordionPrimitive.Header className="flex" data-slot="accordion-header">
+    <AccordionPrimitive.Header
+      data-slot="accordion-header"
+      {...headerProps}
+      className={cn("flex", headerProps?.className)}
+    >
       <AccordionPrimitive.Trigger
         className={cn(
-          "flex flex-1 cursor-pointer items-start justify-between gap-(--qy-space-4) rounded-md py-(--qy-space-4) text-start font-medium text-sm outline-none transition-all focus-visible:ring-[3px] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 data-panel-open:*:data-[slot=accordion-indicator]:rotate-180",
+          "flex min-w-0 flex-1 cursor-pointer items-start justify-between gap-(--qy-space-4) rounded-md py-(--qy-space-4) text-start font-medium text-sm outline-none transition-[color,background-color,box-shadow] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-64 data-disabled:pointer-events-none data-disabled:opacity-64 data-panel-open:*:data-[slot=accordion-indicator]:rotate-180",
           className,
         )}
         data-slot="accordion-trigger"
@@ -43,7 +51,8 @@ export function AccordionTrigger({
       >
         {children}
         <ChevronDownIcon
-          className="pointer-events-none size-4 shrink-0 translate-y-0.5 opacity-80 transition-transform duration-200 ease-in-out"
+          aria-hidden="true"
+          className="pointer-events-none size-4 shrink-0 translate-y-0.5 opacity-80 transition-transform duration-(--qy-duration-base) ease-(--qy-ease-out)"
           data-slot="accordion-indicator"
         />
       </AccordionPrimitive.Trigger>
@@ -58,7 +67,7 @@ export function AccordionPanel({
 }: AccordionPrimitive.Panel.Props): React.ReactElement {
   return (
     <AccordionPrimitive.Panel
-      className="h-(--accordion-panel-height) overflow-hidden text-muted-foreground text-sm transition-[height] duration-200 ease-in-out data-ending-style:h-0 data-starting-style:h-0"
+      className="h-(--accordion-panel-height) overflow-hidden text-muted-foreground text-sm transition-[height] duration-(--qy-duration-base) ease-(--qy-ease-out) data-ending-style:h-0 data-starting-style:h-0 data-ending-style:duration-(--qy-duration-fast)"
       data-slot="accordion-panel"
       {...props}
     >

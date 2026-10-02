@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 88ee9ba1620eae7f8fd3a517fac93ffb666bba3438d324228e5ffda81e0c9bb3
+Source SHA-256: 08d499db60d491c44a49d85693c3a83af27ae2d7dd784fb03afb0839d04fa9a6
 
 在多页列表之间跳转。页数多时用省略号收起中间页；移动端改用“第 3 / 12 页”加前后翻页的紧凑形式。
 
 ## Use and ownership
-- 在多页列表之间跳转。页数多时用省略号收起中间页；移动端改用“第 3 / 12 页”加前后翻页的紧凑形式。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在可定位的多页内容之间前进、后退与直达，当前页有明确标识。
+- Avoid: 禁用首页上一页或末页下一页时，不得因路由组件自带目的地再次恢复导航；页数未知不能显示成零页。
+- Library: 提供导航名称、当前页、禁用目的地与激活阻止，省略页说明保留给辅助技术。
+- Application: 维护页数、数据请求、已加载内容、筛选与页码关系；失败时保留可继续操作的旧内容。
+
+## Composition
+- 用真实 href / 路由链接保留分享与浏览器返回；与总数和每页条数组成列表底栏。
+
+## Responsive behavior
+- 窄屏可用当前页 / 总页数与前后翻页；隐藏可见文字仍保留前后动作名称。
+
+## Customization
+- size 调整几何，render 接入路由链接并获得相同样式；disabled 改为无 href 原生链接占位，保留标签、名称、className 与 style。
 
 ## Current exports
 - Pagination: function; owner pagination; PASS; props: React.ComponentProps<"nav">
@@ -43,9 +52,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### PaginationLink
 页码链接，样式来自 Button，数字等宽。
 - isActive: boolean; default false. 当前页：outline 样式并带 aria-current="page"。
-- disabled: boolean; default false. 不可用：去掉 href、退出 Tab 顺序，并忽略 onClick。
+- disabled: boolean; default false. 不可用：输出无 href 的原生链接占位、退出 Tab 顺序并阻止激活；自定义路由组件也不会重新生成目的地。
 - size: Button size; default "icon". 按钮尺寸，页码默认为正方形。
-- render: ReactElement. 替换渲染元素。传入时不再附加按钮样式，需自行渲染 Button。
+- render: ReactElement | render function. 接入转发属性的路由 Link，仍提供页码样式。禁用时保留该元素的内容、名称与样式，以原生链接占位取代路由组件。
 
 ### PaginationPrevious
 上一页；窄屏只显示箭头，文字来自语言包，可用 children 覆盖。接受 PaginationLink 的全部属性。

@@ -8,10 +8,19 @@ Source SHA-256: 9680749038f5e1eb94d6df7f90b7ac89ee5684f1525c7077476bd81b53e87e12
 在固定尺寸的区域内滚动内容，滚动条纤细且只在悬停或滚动时出现，可选边缘渐隐提示还有更多内容。
 
 ## Use and ownership
-- 在固定尺寸的区域内滚动内容，滚动条纤细且只在悬停或滚动时出现，可选边缘渐隐提示还有更多内容。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 固定工作面需保留较长内容，并让滚动位置和边界可理解。
+- Avoid: 给所有页面再套嵌套滚动；渐隐遮住错误或末尾动作；容器没确定高度却期待纵向滚动。
+- Library: 滚动原语、视口、滚动条、边界渐隐与内容最小宽度。
+- Application: 高度边界、滚动恢复、名称和内容中的焦点顺序。
+
+## Composition
+- 宿主确定尺寸；Viewport 原语承担键盘滚动，滚动条与可选 fade 表达仍有内容，内容自身保留语义。
+
+## Responsive behavior
+- 宽内容按真实需求横向滚动；不要把表格列强制压成一行窄字。
+
+## Customization
+- fill/clampContentMinWidth/scrollbarGutter 按工作面选择，overscrollContain 只在需要局部滚动时开启。
 
 ## Current exports
 - ScrollArea: function; owner scroll-area; PASS; props: ScrollAreaPrimitive.Root.Props & {

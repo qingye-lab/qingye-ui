@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "步骤条 Steps",
   description: "展示多步流程的进度：已完成、当前、未开始与出错。用于开户、下单、部署等有先后顺序的任务。",
+  design: {
+    "methods": [
+      "名实相符",
+      "进退相承",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "表达确有先后关系的流程对象、当前位置与每步实际状态。"
+    ],
+    "avoid": [
+      "当前位置不能证明之前步骤已成功；不适合用线性步骤条表达无顺序的任务集合。"
+    ],
+    "composition": [
+      "current 提供默认推进关系，实际错误或未完成用 item.status 覆盖；可回到的步骤才提供 onStepClick。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供有序结构、状态文字、aria-current、禁用与方向键焦点；错误标记使用成对语义颜色。"
+      ],
+      "application": [
+        "负责真实完成证据、校验、是否允许跳步、草稿与重试恢复，不依据动画推断进度。"
+      ]
+    },
+    "responsive": [
+      "长标题或窄屏优先纵向；可点击步骤保留触屏目标，内容按可用宽度换行。"
+    ],
+    "customization": [
+      "orientation 与 size 调整阅读关系；icon 只替换普通序号，完成与错误仍保留明确标记。"
+    ]
+  },
   category: "导航",
   source: "local",
   exports: ["Steps"],

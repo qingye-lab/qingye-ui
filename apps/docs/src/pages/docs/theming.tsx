@@ -154,10 +154,10 @@ function ThemeBench() {
             <FieldLabel>邀请成员</FieldLabel>
             <Input defaultValue="lin.wan@example.com" type="email" />
           </Field>
-          <label className="flex items-center gap-2 text-sm">
+          <Label>
             <Checkbox defaultChecked />
             发送欢迎邮件
-          </label>
+          </Label>
           <div className="flex flex-wrap items-center gap-2">
             <Button>发送邀请</Button>
             <Button variant="outline">取消</Button>
@@ -203,15 +203,16 @@ const headScript = `<script>
   } catch (e) {}
 </script>`;
 
-const useThemeSnippet = `import { useTheme } from "@qingye/ui/components/theme-provider";
+const useThemeSnippet = `import { Button } from "@qingye/ui/components/button";
+import { useTheme } from "@qingye/ui/components/theme-provider";
 
 export function ThemeSwitch() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   // theme: "light" | "dark" | "system"；resolvedTheme 是实际生效的那一个
   return (
-    <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
+    <Button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
       当前：{theme}
-    </button>
+    </Button>
   );
 }`;
 

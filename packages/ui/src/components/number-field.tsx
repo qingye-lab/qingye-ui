@@ -11,14 +11,19 @@ import { Label } from "./label";
 
 export const NumberFieldContext: React.Context<{
   fieldId: string;
+  inputAria?: Pick<React.ComponentProps<"input">, "aria-label" | "aria-labelledby" | "aria-describedby">;
 } | null> = React.createContext<{
   fieldId: string;
+  inputAria?: Pick<React.ComponentProps<"input">, "aria-label" | "aria-labelledby" | "aria-describedby">;
 } | null>(null);
 
 export function NumberField({
   id,
   className,
   size = "default",
+  "aria-label": ariaLabel,
+  "aria-labelledby": ariaLabelledBy,
+  "aria-describedby": ariaDescribedBy,
   ...props
 }: NumberFieldPrimitive.Root.Props & {
   size?: "sm" | "default" | "lg";
@@ -26,15 +31,23 @@ export function NumberField({
   const { code } = useUILocale();
   const generatedId = React.useId();
   const fieldId = id ?? generatedId;
+  const inputAria = {
+    ...(ariaLabel !== undefined ? { "aria-label": ariaLabel } : {}),
+    ...(ariaLabelledBy !== undefined ? { "aria-labelledby": ariaLabelledBy } : ariaLabel ? { "aria-labelledby": "" } : {}),
+    ...(ariaDescribedBy !== undefined ? { "aria-describedby": ariaDescribedBy } : {}),
+  };
 
   return (
-    <NumberFieldContext.Provider value={{ fieldId }}>
+    <NumberFieldContext.Provider value={{ fieldId, inputAria }}>
       <NumberFieldPrimitive.Root
         locale={code}
         className={cn("flex w-full flex-col items-start gap-(--qy-space-2)", className)}
         data-size={size}
         data-slot="number-field"
         id={fieldId}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
         {...props}
       />
     </NumberFieldContext.Provider>
@@ -48,7 +61,7 @@ export function NumberFieldGroup({
   return (
     <NumberFieldPrimitive.Group
       className={cn(
-        "relative flex w-full justify-between rounded-control border border-input bg-background not-dark:bg-clip-padding text-field-input-mobile text-foreground shadow-xs/5 ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-data-disabled:not-focus-within:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] focus-within:border-ring focus-within:ring-[length:var(--qy-focus-input-width)] has-aria-invalid:border-destructive/36 focus-within:has-aria-invalid:border-destructive/64 focus-within:has-aria-invalid:ring-destructive/16 data-disabled:pointer-events-none data-disabled:opacity-64 sm:text-field-input dark:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-data-disabled:not-focus-within:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [[data-disabled],:focus-within,[aria-invalid]]:shadow-none",
+        "relative flex w-full min-w-0 justify-between rounded-control border border-input bg-background not-dark:bg-clip-padding text-field-input-mobile text-foreground shadow-xs/5 ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-data-disabled:not-has-focus-visible:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] has-focus-visible:border-ring has-focus-visible:ring-[length:var(--qy-focus-input-width)] has-aria-invalid:border-destructive/36 has-focus-visible:has-aria-invalid:border-destructive/64 has-focus-visible:has-aria-invalid:ring-destructive/16 data-disabled:pointer-events-none data-disabled:opacity-64 sm:text-field-input dark:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-data-disabled:not-has-focus-visible:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [[data-disabled],:has(:focus-visible),[aria-invalid]]:shadow-none",
         className,
       )}
       data-slot="number-field-group"
@@ -66,13 +79,13 @@ export function NumberFieldDecrement({
     <NumberFieldPrimitive.Decrement
       aria-label={messages.decrease}
       className={cn(
-        "relative flex shrink-0 cursor-pointer items-center justify-center rounded-s-[max(0px,calc(var(--qy-radius-control)-1px))] in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] transition-colors pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 hover:bg-accent data-disabled:pointer-events-none data-readonly:pointer-events-none not-in-data-disabled:data-disabled:*:opacity-40 data-readonly:*:opacity-40",
+        "relative flex shrink-0 cursor-pointer items-center justify-center rounded-s-[max(0px,calc(var(--qy-radius-control)-1px))] in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] outline-none transition-colors focus-visible:z-10 focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-inset focus-visible:ring-ring pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 hover:bg-accent data-disabled:pointer-events-none data-readonly:pointer-events-none not-in-data-disabled:data-disabled:*:opacity-40 data-readonly:*:opacity-40",
         className,
       )}
       data-slot="number-field-decrement"
       {...props}
     >
-      <MinusIcon />
+      <MinusIcon aria-hidden="true" />
     </NumberFieldPrimitive.Decrement>
   );
 }
@@ -86,13 +99,13 @@ export function NumberFieldIncrement({
     <NumberFieldPrimitive.Increment
       aria-label={messages.increase}
       className={cn(
-        "relative flex shrink-0 cursor-pointer items-center justify-center rounded-e-[max(0px,calc(var(--qy-radius-control)-1px))] in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] transition-colors pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 hover:bg-accent data-disabled:pointer-events-none data-readonly:pointer-events-none not-in-data-disabled:data-disabled:*:opacity-40 data-readonly:*:opacity-40",
+        "relative flex shrink-0 cursor-pointer items-center justify-center rounded-e-[max(0px,calc(var(--qy-radius-control)-1px))] in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] outline-none transition-colors focus-visible:z-10 focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-inset focus-visible:ring-ring pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 hover:bg-accent data-disabled:pointer-events-none data-readonly:pointer-events-none not-in-data-disabled:data-disabled:*:opacity-40 data-readonly:*:opacity-40",
         className,
       )}
       data-slot="number-field-increment"
       {...props}
     >
-      <PlusIcon />
+      <PlusIcon aria-hidden="true" />
     </NumberFieldPrimitive.Increment>
   );
 }
@@ -102,11 +115,16 @@ export function NumberFieldInput({
   ...props
 }: NumberFieldPrimitive.Input.Props): React.ReactElement {
   const { messages } = useUILocale();
+  const context = React.useContext(NumberFieldContext);
+  const inputAria = props["aria-label"] !== undefined
+    ? { ...context?.inputAria, "aria-labelledby": "" }
+    : context?.inputAria;
   return (
     <NumberFieldPrimitive.Input
       aria-roledescription={messages.numberInput}
+      {...inputAria}
       className={cn(
-        "h-8.5 pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] in-data-[size=lg]:h-9.5 in-data-[size=sm]:h-7.5 w-full min-w-0 grow bg-transparent in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] text-center text-foreground tabular-nums in-data-[size=lg]:leading-9.5 in-data-[size=sm]:leading-7.5 leading-8.5 outline-none sm:h-7.5 sm:in-data-[size=lg]:h-8.5 sm:in-data-[size=sm]:h-6.5 sm:in-data-[size=lg]:leading-8.5 sm:in-data-[size=sm]:leading-8.5 sm:leading-7.5",
+        "h-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)] in-data-[size=lg]:h-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra)-2px)] in-data-[size=sm]:h-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra)-2px)] w-full min-w-0 grow bg-transparent in-data-[size=sm]:px-[calc(calc(var(--qy-space-1)*2.5)-1px)] px-[calc(var(--qy-space-3)-1px)] text-center text-foreground placeholder:text-muted-foreground tabular-nums in-data-[size=lg]:leading-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra)-2px)] in-data-[size=sm]:leading-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra)-2px)] leading-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra)-2px)] outline-none sm:h-[calc(var(--qy-control-md)-2px)] sm:in-data-[size=lg]:h-[calc(var(--qy-control-lg)-2px)] sm:in-data-[size=sm]:h-[calc(var(--qy-control-sm)-2px)] sm:in-data-[size=lg]:leading-[calc(var(--qy-control-lg)-2px)] sm:in-data-[size=sm]:leading-[calc(var(--qy-control-sm)-2px)] sm:leading-[calc(var(--qy-control-md)-2px)]",
         className,
       )}
       data-slot="number-field-input"

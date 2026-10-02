@@ -1,6 +1,7 @@
 "use client";
 
 import { XIcon } from "lucide-react";
+import { dateMatchModifiers, rangeContainsModifiers } from "@daypicker/react";
 import * as React from "react";
 import { useMediaQuery } from "../hooks/use-media-query";
 import { useUILocale } from "../locale";
@@ -16,6 +17,7 @@ import {
 import { Popover, PopoverPopup, PopoverTrigger } from "./popover";
 
 type CalendarProps = React.ComponentProps<typeof Calendar>;
+type RangeCalendarProps = Extract<CalendarProps, { mode: "range" }>;
 type CalendarLocale = NonNullable<CalendarProps["locale"]>;
 
 /** A picked range. A committed value always carries both ends. */
@@ -67,7 +69,7 @@ export type DateRangePickerProps = Omit<
   disabledDates?: Matcher | Matcher[];
   /** Extra Calendar props such as `startMonth` or `endMonth`. */
   calendarProps?: Omit<
-    CalendarProps,
+    RangeCalendarProps,
     "mode" | "selected" | "onSelect" | "required" | "disabled" | "numberOfMonths"
   >;
   /** Class for the root wrapper; the trigger fills it. */
@@ -146,6 +148,12 @@ export function DateRangePicker({
   const range = complete(value === undefined ? internal : value);
   const open = (openProp ?? internalOpen) && !disabled;
   const localeCode = locale?.code ?? code;
+  React.useEffect(() => {
+    if (!open) {
+      setAnchor(null);
+      setHovered(null);
+    }
+  }, [open]);
 
   const setOpen = (next: boolean) => {
     setAnchor(null);
@@ -190,6 +198,17 @@ export function DateRangePicker({
     return new Intl.DateTimeFormat(localeCode, { dateStyle: "medium" }).formatRange(from, to);
   };
 
+  const isSelectable = (next: { from: Date; to: Date }) => {
+    if (disabledDates && (dateMatchModifiers(next.from, disabledDates) || dateMatchModifiers(next.to, disabledDates))) return false;
+    if (calendarProps?.excludeDisabled && disabledDates && rangeContainsModifiers(next, disabledDates)) return false;
+    // Calendar-day distance, independent of DST and either date's time part.
+    const ordinal = (day: Date) => Date.UTC(day.getFullYear(), day.getMonth(), day.getDate());
+    const days = (ordinal(next.to) - ordinal(next.from)) / 86400000;
+    if (calendarProps?.min && days < calendarProps.min) return false;
+    if (calendarProps?.max && days > calendarProps.max) return false;
+    return true;
+  };
+
   const pick = (day: Date) => {
     if (!anchor) {
       setAnchor(startOfDay(day));
@@ -197,6 +216,11 @@ export function DateRangePicker({
     }
     const next =
       day < anchor ? { from: startOfDay(day), to: anchor } : { from: anchor, to: startOfDay(day) };
+    if (!isSelectable(next)) {
+      setAnchor(startOfDay(day));
+      setHovered(null);
+      return;
+    }
     update(next);
     setOpen(false);
     triggerRef.current?.focus();
@@ -204,7 +228,7 @@ export function DateRangePicker({
 
   const applyPreset = (preset: DateRangePreset) => {
     const next = resolvePreset(preset);
-    if (!next) return;
+    if (!next || !isSelectable(next)) return;
     update({ from: startOfDay(next.from), to: startOfDay(next.to) });
     setOpen(false);
     triggerRef.current?.focus();
@@ -291,6 +315,7 @@ export function DateRangePicker({
               >
                 {presets.map((preset) => {
                   const resolved = resolvePreset(preset);
+                  const unavailable = !resolved || !isSelectable(resolved);
                   const active = Boolean(
                     resolved &&
                       range &&
@@ -302,6 +327,7 @@ export function DateRangePicker({
                     <Button
                       aria-pressed={active}
                       className="shrink-0 justify-start font-normal aria-pressed:bg-accent aria-pressed:font-medium md:w-full"
+                      disabled={unavailable}
                       key={preset.label}
                       onClick={() => applyPreset(preset)}
                       size="sm"
@@ -333,8 +359,14 @@ export function DateRangePicker({
                 previewMiddle: "[&>button]:rounded-none [&>button]:bg-accent",
               }}
               numberOfMonths={months}
-              onDayFocus={(day) => setHovered(day)}
-              onDayMouseEnter={(day) => setHovered(day)}
+              onDayFocus={(day, modifiers, event) => {
+                calendarProps?.onDayFocus?.(day, modifiers, event);
+                setHovered(day);
+              }}
+              onDayMouseEnter={(day, modifiers, event) => {
+                calendarProps?.onDayMouseEnter?.(day, modifiers, event);
+                setHovered(day);
+              }}
               onSelect={(_range: unknown, day: Date) => pick(day)}
               selected={selected}
               {...(locale ? { locale } : {})}

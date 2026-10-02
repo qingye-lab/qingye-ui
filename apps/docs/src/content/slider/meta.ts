@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Slider", "SliderValue"],
   keywords: ["slider", "滑块", "范围", "range"],
+  design: {
+    "methods": [
+      "布白有用",
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "调整连续或分级的近似数值，范围关系比逐字输入更重要。"
+    ],
+    "avoid": [
+      "不能只靠滑块位置表达精确值；范围的两个滑块必须分别命名。"
+    ],
+    "composition": [
+      "SliderValue 展示当前值；精确任务配 NumberField，共享同一受控值。"
+    ],
+    "stateOwner": {
+      "library": [
+        "范围、步长、方向键与拖动、按滑块命名和本地化数值。"
+      ],
+      "application": [
+        "单位、业务范围、请求触发时机和保存结果。"
+      ]
+    },
+    "responsive": [
+      "轨道保留调整空间与粗指针命中区；竖向滑块由宿主提供实际高度。"
+    ],
+    "customization": [
+      "getAriaLabel 区分上下界，getAriaValueText 表达单位；format 默认跟随 UI locale。"
+    ]
+  },
   api: [
     {
       name: "Slider",

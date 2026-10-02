@@ -7,6 +7,35 @@ export default {
   source: "coss",
   exports: ["Checkbox"],
   keywords: ["checkbox", "复选框", "勾选", "多选"],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "表达一个可勾选条件，或在多个独立条件中选择若干项。"
+    ],
+    "avoid": [
+      "半选只能表示部分成员选中，不能假装用户已确认全部。"
+    ],
+    "composition": [
+      "标签扩大行的操作范围；必要描述与错误放在同一 Field。"
+    ],
+    "stateOwner": {
+      "library": [
+        "checked、indeterminate、键盘切换和原生提交语义。"
+      ],
+      "application": [
+        "同意内容、批量范围及提交后果。"
+      ]
+    },
+    "responsive": [
+      "小方框保留触屏命中区；长标签换行时仍与所属选项对应。"
+    ],
+    "customization": [
+      "checked 与外观主题分离，项目组合决定卡片或列表载体。"
+    ]
+  },
   api: [
     {
       name: "Checkbox",

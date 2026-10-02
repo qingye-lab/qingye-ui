@@ -7,6 +7,35 @@ export default {
   source: "local",
   exports: ["PasswordInput"],
   keywords: ["password", "密码", "显示密码", "眼睛"],
+  design: {
+    "methods": [
+      "相成相制",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "输入密码，按需查看字符以核对输入。"
+    ],
+    "avoid": [
+      "显示密码只改变可见性，不能复制、清空或自动提交密码。"
+    ],
+    "composition": [
+      "Field 命名输入；尾部 visibility toggle 用稳定名称和 aria-pressed 表达当前可见状态。"
+    ],
+    "stateOwner": {
+      "library": [
+        "可见性切换、输入属性与禁用联动。"
+      ],
+      "application": [
+        "密码值、验证、凭据处理及关闭界面时的清理。"
+      ]
+    },
+    "responsive": [
+      "输入为主要工作区，尾部图标按钮随尺寸变化并保留触屏命中区。"
+    ],
+    "customization": [
+      "visible 支持由应用集中控制；showLabel 覆盖切换按钮名称。"
+    ]
+  },
   api: [
     {
       name: "PasswordInput",

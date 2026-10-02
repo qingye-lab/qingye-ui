@@ -52,4 +52,33 @@ export default {
     "与可见标签关联时，给 DatePicker 传 id 并让 Label 的 htmlFor 指向它；已选日期会作为描述读出。",
     "需要选择时间时用 DateTimePicker；需要起止日期时用 DateRangePicker。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "表单中选择一个自然日，显示与提交同一日期事实。"
+    ],
+    "avoid": [
+      "用 UTC 截断改变自然日；把 required 的隐藏字段当原生表单校验；名称遮住已选值。"
+    ],
+    "composition": [
+      "标签关联 trigger，选中值加入可访问描述；Calendar 选择后关闭，Clear 让值为空并返回字段。"
+    ],
+    "stateOwner": {
+      "library": [
+        "日选择、值格式、开关、清除和焦点返回。"
+      ],
+      "application": [
+        "可选日期、必填校验、字段名称、提交和错误恢复。"
+      ]
+    },
+    "responsive": [
+      "字段值可视觉截断但保留完整可访问内容；弹层需要容纳单月与触屏格。"
+    ],
+    "customization": [
+      "formatDate 只改显示，name 的 YYYY-MM-DD 保持自然日提交；尺寸与其他表单控件一致。"
+    ]
+  },
 } satisfies ComponentMeta;

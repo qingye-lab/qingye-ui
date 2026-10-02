@@ -28,4 +28,33 @@ export default {
     "内容不多时直接用 overflow-auto 即可；需要统一的细滚动条或渐隐边缘时再用 ScrollArea。",
     "横向滚动时给内容 w-max（或固定宽度），否则内容会被压缩到视口宽度。",
   ],
+  design: {
+    "methods": [
+      "布白有用",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "固定工作面需保留较长内容，并让滚动位置和边界可理解。"
+    ],
+    "avoid": [
+      "给所有页面再套嵌套滚动；渐隐遮住错误或末尾动作；容器没确定高度却期待纵向滚动。"
+    ],
+    "composition": [
+      "宿主确定尺寸；Viewport 原语承担键盘滚动，滚动条与可选 fade 表达仍有内容，内容自身保留语义。"
+    ],
+    "stateOwner": {
+      "library": [
+        "滚动原语、视口、滚动条、边界渐隐与内容最小宽度。"
+      ],
+      "application": [
+        "高度边界、滚动恢复、名称和内容中的焦点顺序。"
+      ]
+    },
+    "responsive": [
+      "宽内容按真实需求横向滚动；不要把表格列强制压成一行窄字。"
+    ],
+    "customization": [
+      "fill/clampContentMinWidth/scrollbarGutter 按工作面选择，overscrollContain 只在需要局部滚动时开启。"
+    ]
+  },
 } satisfies ComponentMeta;

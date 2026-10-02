@@ -8,10 +8,19 @@ Source SHA-256: 89cd361d27ed86cab68e37289a034c00c066790f96024d4a52abc7ca643051d0
 把一组相关控件（格式按钮、切换组、下拉选择）收进同一个可键盘漫游的容器，例如编辑器顶部的格式栏。
 
 ## Use and ownership
-- 把一组相关控件（格式按钮、切换组、下拉选择）收进同一个可键盘漫游的容器，例如编辑器顶部的格式栏。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 集中操作同一选中对象，如编辑器格式、视图工具与即时命令。
+- Avoid: 不要把任意按钮容器都叫 toolbar；工具栏焦点不能抢走正文中需要保留的选择和输入。
+- Library: 提供工具栏名称与方向键漫游、分组关系和原语禁用行为，保留各控件原本语义。
+- Application: 维护当前选中内容、工具效果、快捷键和命令执行状态；恢复正文焦点按应用编辑器处理。
+
+## Composition
+- Button、Toggle、Select 等通过 ToolbarButton render 参与漫游；有键盘编辑行为的字段用 ToolbarInput。
+
+## Responsive behavior
+- 窄屏保留常用命令，次要操作可进 Menu；不要用换行破坏可预期方向键关系。
+
+## Customization
+- orientation 决定布局与键盘方向；按钮表面由既有 Button / Toggle 组合，避免重复基础控件。
 
 ## Current exports
 - Toolbar: function; owner toolbar; PASS; props: ToolbarPrimitive.Root.Props

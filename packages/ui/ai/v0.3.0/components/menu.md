@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 0518107f97be668118fdf64d61941a0449268cf3d5f8c1cda3855143c59bf80b
+Source SHA-256: 6bee4a7fa2214a33347c496e48f5aa70253bd2e58df09b3797ecb1096ab9b091
 
 点击按钮后展开的操作列表，收纳次要操作、视图选项和导航链接。从表单中选值用 Select，右键菜单用 ContextMenu。
 
 ## Use and ownership
-- 点击按钮后展开的操作列表，收纳次要操作、视图选项和导航链接。从表单中选值用 Select，右键菜单用 ContextMenu。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 收纳同一对象的命令、相关模式或真实导航，核心操作仍可直接到达。
+- Avoid: 不能用 Menu 代替表单 Select；危险属性在键盘高亮时不能被普通项颜色覆盖。
+- Library: 管理菜单角色、方向键、高亮、子菜单、焦点返回与可用视口；长标签保持完整可读。
+- Application: 决定对象、命令范围、权限与执行结果；Shortcut 只展示快捷键而不注册。
+
+## Composition
+- 命令用 Item，地址用 LinkItem，保持选项用 Checkbox / Radio；不可逆命令按后果接 AlertDialog。
+
+## Responsive behavior
+- 菜单项在粗指针下保持整行目标；长对象名换行，超高菜单内部滚动，RTL 子菜单指向实际展开侧。
+
+## Customization
+- variant 标识真实危险动作；集中主题控制高亮与辅助文字，窗口宽度受可用视口约束。
 
 ## Current exports
 - DropdownMenu: const; owner menu; alias of Menu; PASS

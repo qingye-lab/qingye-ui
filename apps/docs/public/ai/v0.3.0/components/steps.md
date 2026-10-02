@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
-Source SHA-256: a86ce4e60a70350edc4dc98ca2fa89230dabc8aa90207bbb419c88abed7c3975
+Source SHA-256: 5e5326db935e490cfb5e6742d9817d44f85b1a7c9b2ad4f91f91385e1e468733
 
 展示多步流程的进度：已完成、当前、未开始与出错。用于开户、下单、部署等有先后顺序的任务。
 
 ## Use and ownership
-- 展示多步流程的进度：已完成、当前、未开始与出错。用于开户、下单、部署等有先后顺序的任务。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 表达确有先后关系的流程对象、当前位置与每步实际状态。
+- Avoid: 当前位置不能证明之前步骤已成功；不适合用线性步骤条表达无顺序的任务集合。
+- Library: 提供有序结构、状态文字、aria-current、禁用与方向键焦点；错误标记使用成对语义颜色。
+- Application: 负责真实完成证据、校验、是否允许跳步、草稿与重试恢复，不依据动画推断进度。
+
+## Composition
+- current 提供默认推进关系，实际错误或未完成用 item.status 覆盖；可回到的步骤才提供 onStepClick。
+
+## Responsive behavior
+- 长标题或窄屏优先纵向；可点击步骤保留触屏目标，内容按可用宽度换行。
+
+## Customization
+- orientation 与 size 调整阅读关系；icon 只替换普通序号，完成与错误仍保留明确标记。
 
 ## Current exports
 - StepItem: type; owner steps; PASS

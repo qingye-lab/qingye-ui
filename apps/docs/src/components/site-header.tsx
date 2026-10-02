@@ -1,8 +1,6 @@
 import { SheetHeader, SheetPanel, SheetPopup, SheetTitle } from "@qingye/ui/components/sheet";
-import { TooltipPopup } from "@qingye/ui/components/tooltip";
-import { Button } from "@qingye/ui/components/button";
+import { Button, buttonVariants } from "@qingye/ui/components/button";
 import { Sheet, SheetTrigger } from "@qingye/ui/components/sheet";
-import { Tooltip, TooltipTrigger } from "@qingye/ui/components/tooltip";
 import { cn } from "@qingye/ui";
 import { MenuIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -99,22 +97,15 @@ export function SiteHeader() {
         </nav>
         <div className="ms-auto flex items-center gap-1">
           <SearchTrigger className="me-1" />
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button
-                  aria-label="GitHub 仓库"
-                  nativeButton={false}
-                  render={<a href={SITE.repo} rel="noreferrer" target="_blank" />}
-                  size="icon"
-                  variant="ghost"
-                />
-              }
-            >
-              <GitHubIcon className="size-4" />
-            </TooltipTrigger>
-            <TooltipPopup>GitHub</TooltipPopup>
-          </Tooltip>
+          <a
+            aria-label="GitHub 仓库"
+            className={buttonVariants({ size: "icon", variant: "ghost" })}
+            href={SITE.repo}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <GitHubIcon className="size-4" />
+          </a>
           <ThemeMenu />
         </div>
       </div>

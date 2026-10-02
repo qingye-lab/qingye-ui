@@ -8,10 +8,19 @@ Source SHA-256: 2087ba938b04b21b9091f0687b08fef0bb1968a22ad78524c148ee8e43aaadd3
 以行列呈现结构化数据，适合订单、设备、成员等需要对比与扫读的列表。需要排序、搜索、分页时改用 DataTable。
 
 ## Use and ownership
-- 以行列呈现结构化数据，适合订单、设备、成员等需要对比与扫读的列表。需要排序、搜索、分页时改用 DataTable。
-- Avoid: 比较任务不应在窄屏直接删除关键列；保留二维关系，并给横向阅读清楚入口。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 多对象共享同一组属性，读者需要跨行跨列比较。
+- Avoid: 窄屏自动把每行拆成不同卡片使列关系消失；tr 悬停外观被误解成可点击；数字列混合单位。
+- Library: 语义表格、表面、密度和容器滚动。
+- Application: 列含义、scope/headers 的复杂关联、排序选择与行操作。
+
+## Composition
+- table/thead/tbody/th/td 保留表结构；Caption 或 aria-label 命名对象，动作放真实按钮，数字列统一单位与对齐。
+
+## Responsive behavior
+- 在外层容器横向滚动保留比较面；表头吸顶要有限高，必要列可指定最小宽度。
+
+## Customization
+- density 调整行关系，className 属于 table；render 调整外容器，不能混淆两个入口。
 
 ## Current exports
 - Table: function; owner table; PASS; props: TableProps

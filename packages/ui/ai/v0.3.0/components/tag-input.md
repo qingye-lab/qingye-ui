@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 4cc87b5c1f23fe49a6d628ab6105d3a855b6135b1fc6ea069244675d595c3e3f
+Source SHA-256: 3a97b165ec52d138d8a2e66397f3cfd1aa9b684d7cb4a7515e12cfec27de75cb
 
 在输入框里录入一组自由文本标签，例如关键词、邮箱或技能。回车或逗号确认，粘贴一列文本会自动拆分；从固定选项中多选时用 Combobox。
 
 ## Use and ownership
-- 在输入框里录入一组自由文本标签，例如关键词、邮箱或技能。回车或逗号确认，粘贴一列文本会自动拆分；从固定选项中多选时用 Combobox。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 输入并核对可自由定义的标签或收件人，逐项修改。
+- Avoid: 重复值不应再加入；被规则拒绝的文字保留用于修正，而非悄悄丢弃。
+- Library: 确认、去重、IME、键盘移除、焦点与继承禁用。
+- Application: 标签业务规则、集合上限、草稿和持久化。
+
+## Composition
+- 标签、待确认文本与校验消息围绕同一集合；隐藏 inputs 提交已确认项。
+
+## Responsive behavior
+- 标签可在框内换行，长项有截断但完整值继续保留；键盘焦点定位到当前项。
+
+## Customization
+- validate 返回真实可修正原因；removeLabel 为自定义对象命名，size 调整密度。
 
 ## Current exports
 - TagInput: function; owner tag-input; PASS; props: TagInputProps
@@ -117,12 +126,16 @@ export default function Demo() {
 ### 只读与禁用
 Source: apps/docs/src/content/tag-input/demos/04-states.tsx
 ```tsx
+import { Button } from "@qingye/ui/components/button";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
 import { TagInput } from "@qingye/ui/components/tag-input";
+import { useState } from "react";
 
 export const meta = { title: "只读与禁用" };
 
 export default function Demo() {
+  const [editable, setEditable] = useState(false);
   return (
     <div className="grid w-full max-w-2xl gap-5 sm:grid-cols-2">
       <Field>
@@ -131,8 +144,17 @@ export default function Demo() {
       </Field>
       <Field disabled>
         <FieldLabel>技能（禁用）</FieldLabel>
-        <TagInput defaultValue={["Figma", "原型设计"]} disabled />
+        <TagInput defaultValue={["Figma", "原型设计"]} />
       </Field>
+      <div className="flex flex-col gap-3">
+        <Fieldset disabled={!editable}>
+          <FieldsetLegend variant="label">交接标签</FieldsetLegend>
+          <TagInput aria-label="交接标签" defaultValue={["优先评审", "需要法务参与"]} />
+        </Fieldset>
+        <Button className="self-start" onClick={() => setEditable((current) => !current)} size="sm" variant="outline">
+          {editable ? "锁定标签" : "编辑标签"}
+        </Button>
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ export default {
       description: "语义层级与视觉字号分离：level 决定 <h1>–<h6>，size 决定字号。",
       props: [
         { name: "level", type: "1 | 2 | 3 | 4 | 5 | 6", default: "2", description: "文档大纲层级。" },
-        { name: "size", type: '"display" | "title" | "heading" | "label"', description: "28 / 18 / 15 / 13px，对应 --qy-text-* 令牌。默认：1→display，2→title，3–4→heading，5–6→label。" },
+        { name: "size", type: '"display" | "title" | "heading" | "label"', description: "对应 --qy-text-* 令牌中的视觉字号，与 level 无关。默认：1→display，2→title，3–4→heading，5–6→label。" },
         { name: "render", type: "ReactElement | (props) => ReactElement", description: "替换渲染元素。" },
       ],
     },
@@ -40,4 +40,33 @@ export default {
     "标题层级不要跳级；需要较小的视觉字号时改 size，不要用 h4 冒充小标题。",
     "Text 组件（正文、标签、说明）在 layout 中，这里不重复定义。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "以标题大纲、长文和行内链接建立阅读路径与深入依据。"
+    ],
+    "avoid": [
+      "视觉小字就跳到 h4；传统字体替代排版检查；链接只有弱颜色；长文样式覆盖嵌入控件。"
+    ],
+    "composition": [
+      "Heading level 决定大纲而 size 决定视觉；Prose 只样式化普通元素，TextLink 是有焦点和明确去向的链接。"
+    ],
+    "stateOwner": {
+      "library": [
+        "标题元素、文字角色、长文规则和外链提示。"
+      ],
+      "application": [
+        "内容层级、文档语言、阅读宽度、链接目标与媒体替代文本。"
+      ]
+    },
+    "responsive": [
+      "真实中文标点、长链接、代码和表格分别检查；比较表格需可滚动容器，不能只缩小字号。"
+    ],
+    "customization": [
+      "集中字体与文字角色是入口，CJK tracking 保持 0，render 不改变应有的可访问语义。"
+    ]
+  },
 } satisfies ComponentMeta;

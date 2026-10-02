@@ -40,4 +40,33 @@ export default {
     "进度条描述随时间推进的任务；磁盘占用、配额等不会“完成”的数值用 Meter。",
     "不确定状态在系统减少动态效果时改为缓慢的明暗变化。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "说明一项任务正在推进，已知总量或结果尚未确定。"
+    ],
+    "avoid": [
+      "虚构百分比；100% 动画结束宣称服务端成功；失败只换条颜色；刷新抹掉有效结果。"
+    ],
+    "composition": [
+      "value 来自任务计量，未知用 null；Label 命名任务，完成/失败/取消的文字与动作由应用提供。"
+    ],
+    "stateOwner": {
+      "library": [
+        "progressbar 数值与不确定原语、标签和值、轨道。"
+      ],
+      "application": [
+        "真实任务、计量源、结果、取消确认与重试。"
+      ]
+    },
+    "responsive": [
+      "标签和值保持可读；进度条占可用宽度，不抢内容的工作空间。"
+    ],
+    "customization": [
+      "format/getAriaValueText 对齐可见计量；状态色增强事实而不取代结果文字。"
+    ]
+  },
 } satisfies ComponentMeta;

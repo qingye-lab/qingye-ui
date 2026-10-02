@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Input"],
   keywords: ["input", "输入框", "文本框", "text field"],
+  design: {
+    "methods": [
+      "名实相符",
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "填写单行名称、编号或联系方式，type 与真实输入内容匹配。"
+    ],
+    "avoid": [
+      "示例只放 placeholder；提交失败不应卸载或重置已有文字。"
+    ],
+    "composition": [
+      "FieldLabel、Input 与必要的 FieldError 形成同一个字段；前后缀交给 InputGroup。"
+    ],
+    "stateOwner": {
+      "library": [
+        "原生输入、字段关联、焦点与尺寸角色。"
+      ],
+      "application": [
+        "草稿、输入业务规则、保存结果及何时清除。"
+      ]
+    },
+    "responsive": [
+      "窄容器中输入可以收缩；移动字号保留 16px，粗指针命中区保留 44px。"
+    ],
+    "customization": [
+      "size 消费 --qy-control-*；className 调整外框，原生属性落到输入。"
+    ]
+  },
   api: [
     {
       name: "Input",

@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "命令面板 Command",
   description: "可搜索的命令与导航列表，通常用快捷键唤起，让熟练用户不离开键盘就能跳转页面或执行操作。也可以内嵌在页面中作为可筛选的选择列表。",
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "用可搜索的命令或页面目标缩短熟练用户的操作路径，同时保留可见普通入口。"
+    ],
+    "avoid": [
+      "没有匹配与正在加载、失败不能混为同一空态；选择高亮项不等于业务执行成功。"
+    ],
+    "composition": [
+      "Input + Panel / List 管理查找，Dialog 外壳管理唤起与返回；内嵌输入设置 autoFocus=false 保持当前工作。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理筛选列表、键盘高亮和执行入口、空结果文本、Dialog 名称与焦点返回。"
+      ],
+      "application": [
+        "维护命令对象、搜索数据、权限、全局快捷键冲突与执行结果；跳转后把焦点交给目标页面。"
+      ]
+    },
+    "responsive": [
+      "结果列表可滚动并保留搜索框；粗指针命令行保持可点高度，长目标名称优先保留辨认信息。"
+    ],
+    "customization": [
+      "自定义筛选通过 filteredItems 接入，快捷键提示保持可读；不把快捷键展示当成已注册能力。"
+    ]
+  },
   category: "导航",
   source: "coss",
   exports: [

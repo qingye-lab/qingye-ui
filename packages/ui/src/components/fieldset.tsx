@@ -29,7 +29,7 @@ export function FieldsetLegend({
   return (
     <FieldsetPrimitive.Legend
       className={cn(
-        "text-foreground",
+        "max-w-full wrap-anywhere text-foreground",
         variant === "legend"
           ? "font-semibold text-lg/6 sm:text-base/6"
           : "font-medium text-base/4.5 sm:text-sm/4",

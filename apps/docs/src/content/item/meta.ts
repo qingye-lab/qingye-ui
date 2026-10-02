@@ -50,4 +50,33 @@ export default {
     "需要内部操作（如「移除」）时保持 Item 为 div，把操作放在 ItemActions 中。",
     "仅图标的操作按钮必须有 aria-label，并写清对象，例如「移除 林嘉怡」。",
   ],
+  design: {
+    "methods": [
+      "相成相制",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "在列表中同时识别对象、读取摘要与执行针对该对象的操作。"
+    ],
+    "avoid": [
+      "整行链接内再放按钮；两行截断隐藏关键后果；ItemGroup 的视觉列表没有实际 listitem 关系。"
+    ],
+    "composition": [
+      "Content 和 Actions 分工；整行导航用链接，独立动作保留原生控件。自定义 render 保留原生列表或显式 listitem。"
+    ],
+    "stateOwner": {
+      "library": [
+        "媒体/摘要/动作部位、可样式化列表结构与焦点外观。"
+      ],
+      "application": [
+        "对象名称、导航、动作权限、摘要完整性和结果。"
+      ]
+    },
+    "responsive": [
+      "窄屏让动作换行；必要完整说明覆盖 line-clamp-2，避免长名称把恢复动作推出工作面。"
+    ],
+    "customization": [
+      "variant 选择边界；size 调整关系间距，真实标题通过 render 定义层级。"
+    ]
+  },
 } satisfies ComponentMeta;

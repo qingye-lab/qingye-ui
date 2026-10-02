@@ -8,10 +8,19 @@ Source SHA-256: 35533179af2e175217728abf236329081e09c058ea567f1ccbb33c228e39bea5
 嵌在页面内容中的状态说明，持续显示直到问题解决，例如配额将满、同步失败、需要补充资料。临时反馈用 Toast，需要用户立即确认用 AlertDialog。
 
 ## Use and ownership
-- 嵌在页面内容中的状态说明，持续显示直到问题解决，例如配额将满、同步失败、需要补充资料。临时反馈用 Toast，需要用户立即确认用 AlertDialog。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 页面内持续可见的状态、后果或修复入口，与相关对象邻接。
+- Avoid: 所有初始信息都 assertive 播报；同一个问题既重复 Alert 又 Toast；长说明挤掉修复动作。
+- Library: 提示部位、语义变体、动作换行和原生属性透传。
+- Application: 紧迫性、role 选择、持续问题、权限和恢复动作。
+
+## Composition
+- Title 说当前事实，Description 只保留修复所需细节，Action 承接对象。默认 role=alert，普通信息需显式选择 status 或移除 role。
+
+## Responsive behavior
+- 窄屏动作占整行，长说明允许换行；关键后果不藏 Tooltip，实测文字与边界对比。
+
+## Customization
+- variant 只是视觉语义，role 与紧迫性单独判断，样式不能代替错误事实。
 
 ## Current exports
 - Alert: function; owner alert; PASS; props: React.ComponentProps<"div"> &

@@ -8,10 +8,19 @@ Source SHA-256: abb49bda6cea57df0665dc5b8c09c108fc49e2c2a1c74cc4ef71cf07d0133430
 在输入框内部加前后缀文字、图标、按键提示、按钮或工具栏，整体共用一个边框与焦点环。
 
 ## Use and ownership
-- 在输入框内部加前后缀文字、图标、按键提示、按钮或工具栏，整体共用一个边框与焦点环。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 让单位、附属动作或提示与一个文本工作区共享边界。
+- Avoid: 装饰图标不能变成第二个字段；addon 点击不能抢走链接或按钮自己的操作。
+- Library: 输入部位、addon 焦点分派与公共按钮组合。
+- Application: 文本值、附属命令的业务后果和请求。
+
+## Composition
+- Input 或 Textarea 是主工作区；inline addon 放短前后缀，block addon 放工具栏。
+
+## Responsive behavior
+- 输入可收缩，附属动作保留；多行工具栏占独立行，长提示不挤压编辑区。
+
+## Customization
+- Addon align 表达位置关系，InputGroupButton 复用 Button 的动作状态。
 
 ## Current exports
 - InputGroup: function; owner input-group; PASS; props: React.ComponentProps<"div">

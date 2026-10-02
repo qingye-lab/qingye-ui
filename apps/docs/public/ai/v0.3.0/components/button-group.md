@@ -8,10 +8,19 @@ Source SHA-256: 2eb315ba00d80c2bda3cdeed899b6194b1d9fc97095cecccaf8cf54d4ae6294c
 把相关的按钮、输入框或选择框拼接成一个整体，共享边框与圆角，例如分页切换、拆分按钮和“输入 + 操作”。它是 Group 的 shadcn 命名别名，两者是同一个组件。
 
 ## Use and ownership
-- 把相关的按钮、输入框或选择框拼接成一个整体，共享边框与圆角，例如分页切换、拆分按钮和“输入 + 操作”。它是 Group 的 shadcn 命名别名，两者是同一个组件。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 拼接围绕同一对象的动作，如执行与展开更多执行方式。
+- Avoid: 相邻边框不能把无关动作暗示成同一任务；视觉拼接不自动提供互斥选择或方向键。
+- Library: 合并相接边框、端部圆角和焦点层次；不接管子控件的值与 Tab 顺序。
+- Application: 命名这组操作并确定子项之间的真实关系、可用条件和结果。
+
+## Composition
+- ButtonGroup 是 Group 的同一实现；子项保留 Button、Input、Select 或真实链接的各自语义。
+
+## Responsive behavior
+- 竖向与横向按可用空间选择；密集拼接仍需检查相邻触屏命中区。
+
+## Customization
+- 通过 orientation 和子控件 size 建立一致几何；别为别名另建一套样式或状态。
 
 ## Current exports
 - ButtonGroup: function; owner group; alias of Group; PASS; props: {

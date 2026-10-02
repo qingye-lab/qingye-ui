@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 399e6869ec3c8f5bc6bc24bbd2ecf621e0f45b4930dbb33f7bdea382df40621e
+Source SHA-256: 60907c5479c510ec3c7152100842e4648c1fab3bdcdbab2edfe8a7d72bd27a86
 
 在一个弹层里选择开始与结束日期：第一次点击定起点，第二次点击定终点并立即生效。适合报表、订单筛选等按时间段查询的场景，可配合快捷范围。
 
 ## Use and ownership
-- 在一个弹层里选择开始与结束日期：第一次点击定起点，第二次点击定终点并立即生效。适合报表、订单筛选等按时间段查询的场景，可配合快捷范围。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 明确起止日期的筛选或区间输入，只有完整范围才能提交。
+- Avoid: 半选结束日就修改正式值；关闭后保留过期 anchor；快捷范围绕过禁用或跨度限制。
+- Library: 半选工作、预览、约束一致性、开关和清除。
+- Application: 业务范围、快捷值、禁用事实、表单校验和查询请求。
+
+## Composition
+- anchor 是库内临时选择，完整 range 是正式值；关闭放弃半选。日历与 preset 共用端点/min/max/excludeDisabled 规则。
+
+## Responsive behavior
+- 窄屏单月与横向快捷项，宽屏按容量显示两月；长范围仍保留完整可访问值。
+
+## Customization
+- calendarProps 的 min/max 按自然日跨度，excludeDisabled 明确决定能否跨禁用日；导航月界限不代替 disabledDates。
 
 ## Current exports
 - DateRangePicker: function; owner date-range-picker; PASS; props: DateRangePickerProps
@@ -39,7 +48,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - formatDate / formatRange: (date) => string / ({ from, to }) => string. 自定义触发器中的日期文案。默认中文只写一次年份：2026年9月1日 – 9月30日。
 - open / defaultOpen / onOpenChange: boolean / (open) => void. 受控 / 非受控的弹层开关。
 - size: "sm" | "default" | "lg"; default "default". 触发器尺寸，与 Select 一致。
-- calendarProps: CalendarProps. 透传给 Calendar，如 startMonth、endMonth、showWeekNumber。
+- calendarProps: RangeCalendarProps. 范围模式的日历属性，如 startMonth、endMonth、min、max、excludeDisabled；min/max 按两端间的自然日跨度约束。日历选择与快捷范围遵守相同限制。
 
 ## Keyboard
 - Enter / Space: 在触发器上打开弹层；在日期上选择起点或终点。
@@ -221,6 +230,36 @@ export default function Demo() {
       </div>
       {query ? <code className="truncate rounded-md bg-muted px-2 py-1 font-mono text-muted-foreground text-xs">?{query}</code> : null}
     </form>
+  );
+}
+```
+
+### 受限范围
+Source: apps/docs/src/content/date-range-picker/demos/06-constraints.tsx
+```tsx
+import { DateRangePicker } from "@qingye/ui/components/date-range-picker";
+import { Field, FieldDescription } from "@qingye/ui/components/field";
+import { Label } from "@qingye/ui/components/label";
+
+export const meta = { title: "受限范围" };
+
+export default function Demo() {
+  return (
+    <Field className="w-full max-w-sm">
+      <Label htmlFor="analysis-window">分析窗口</Label>
+      <DateRangePicker
+        aria-describedby="analysis-window-limits"
+        calendarProps={{ defaultMonth: new Date(2026, 8, 1), min: 2, max: 7, excludeDisabled: true }}
+        disabledDates={new Date(2026, 8, 12)}
+        id="analysis-window"
+        presets={[
+          { label: "9月4日—7日", value: { from: new Date(2026, 8, 4), to: new Date(2026, 8, 7) } },
+          { label: "9月10日—15日", value: { from: new Date(2026, 8, 10), to: new Date(2026, 8, 15) } },
+          { label: "整个9月", value: { from: new Date(2026, 8, 1), to: new Date(2026, 8, 30) } },
+        ]}
+      />
+      <FieldDescription id="analysis-window-limits">跨度 2—7 天；9 月 12 日暂停采集。</FieldDescription>
+    </Field>
   );
 }
 ```

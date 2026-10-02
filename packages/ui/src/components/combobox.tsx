@@ -21,6 +21,8 @@ export const ComboboxContext: React.Context<{
   multiple: false,
 });
 
+const ComboboxChipLabelContext = React.createContext<string | undefined>(undefined);
+
 export function Combobox<
   Value,
   Multiple extends boolean | undefined = false,
@@ -48,7 +50,7 @@ export function ComboboxChipsInput({
   return (
     <ComboboxPrimitive.Input
       className={cn(
-        "min-w-12 flex-1 text-base text-foreground outline-none sm:text-sm [[data-slot=combobox-chip]+&]:ps-[calc(var(--qy-space-1)*0.5)]",
+        "min-w-12 flex-1 text-base text-foreground outline-none placeholder:text-muted-foreground sm:text-sm [[data-slot=combobox-chip]+&]:ps-[calc(var(--qy-space-1)*0.5)]",
         sizeValue === "sm" ? "ps-[calc(var(--qy-space-1)*1.5)]" : "ps-(--qy-space-2)",
         className,
       )}
@@ -391,20 +393,28 @@ export function ComboboxChips({
 
 export function ComboboxChip({
   children,
+  className,
   removeProps,
   ...props
 }: ComboboxPrimitive.Chip.Props & {
   removeProps?: ComboboxPrimitive.ChipRemove.Props;
 }): React.ReactElement {
+  const { messages } = useUILocale();
+  const removeLabel = typeof children === "string" || typeof children === "number"
+    ? `${messages.remove} ${children}`
+    : props["aria-label"];
+
   return (
-    <ComboboxPrimitive.Chip
-      className="flex items-center rounded-[calc(var(--radius-md)-1px)] bg-accent ps-(--qy-space-2) font-medium text-accent-foreground text-sm outline-none sm:text-xs/(--text-xs--line-height) [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5"
-      data-slot="combobox-chip"
-      {...props}
-    >
-      {children}
-      <ComboboxChipRemove {...removeProps} />
-    </ComboboxPrimitive.Chip>
+    <ComboboxChipLabelContext.Provider value={removeLabel}>
+      <ComboboxPrimitive.Chip
+        className={cn("flex min-w-0 max-w-full items-center rounded-[calc(var(--radius-md)-1px)] bg-accent ps-(--qy-space-2) font-medium text-accent-foreground text-sm outline-none focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring sm:text-xs/(--text-xs--line-height) [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5", className)}
+        data-slot="combobox-chip"
+        {...props}
+      >
+        <span className="min-w-0 wrap-anywhere" data-slot="combobox-chip-label">{children}</span>
+        <ComboboxChipRemove {...removeProps} />
+      </ComboboxPrimitive.Chip>
+    </ComboboxChipLabelContext.Provider>
   );
 }
 
@@ -412,14 +422,15 @@ export function ComboboxChipRemove(
   props: ComboboxPrimitive.ChipRemove.Props,
 ): React.ReactElement {
   const { messages } = useUILocale();
+  const chipLabel = React.useContext(ComboboxChipLabelContext);
   return (
     <ComboboxPrimitive.ChipRemove
-      aria-label={messages.remove}
+      aria-label={chipLabel ?? messages.remove}
       className="h-full shrink-0 cursor-pointer px-[calc(var(--qy-space-1)*1.5)] opacity-80 hover:opacity-100 [&_svg:not([class*='size-'])]:size-4 sm:[&_svg:not([class*='size-'])]:size-3.5"
       data-slot="combobox-chip-remove"
       {...props}
     >
-      <XIcon />
+      <XIcon aria-hidden="true" />
     </ComboboxPrimitive.ChipRemove>
   );
 }

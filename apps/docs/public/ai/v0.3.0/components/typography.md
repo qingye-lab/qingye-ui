@@ -8,10 +8,19 @@ Source SHA-256: 789879528969abbfe44b9e8fa800e7ee117ed0e93eeee478371e7f188bc365b2
 标题 Heading、长文容器 Prose 与文字链接 TextLink。字号取自类型令牌，中文长文使用更宽松的行高。正文与辅助文字请用布局中的 Text。
 
 ## Use and ownership
-- 标题 Heading、长文容器 Prose 与文字链接 TextLink。字号取自类型令牌，中文长文使用更宽松的行高。正文与辅助文字请用布局中的 Text。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 以标题大纲、长文和行内链接建立阅读路径与深入依据。
+- Avoid: 视觉小字就跳到 h4；传统字体替代排版检查；链接只有弱颜色；长文样式覆盖嵌入控件。
+- Library: 标题元素、文字角色、长文规则和外链提示。
+- Application: 内容层级、文档语言、阅读宽度、链接目标与媒体替代文本。
+
+## Composition
+- Heading level 决定大纲而 size 决定视觉；Prose 只样式化普通元素，TextLink 是有焦点和明确去向的链接。
+
+## Responsive behavior
+- 真实中文标点、长链接、代码和表格分别检查；比较表格需可滚动容器，不能只缩小字号。
+
+## Customization
+- 集中字体与文字角色是入口，CJK tracking 保持 0，render 不改变应有的可访问语义。
 
 ## Current exports
 - Heading: function; owner typography; PASS; props: HeadingProps
@@ -34,7 +43,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Heading
 语义层级与视觉字号分离：level 决定 <h1>–<h6>，size 决定字号。
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. 文档大纲层级。
-- size: "display" | "title" | "heading" | "label". 28 / 18 / 15 / 13px，对应 --qy-text-* 令牌。默认：1→display，2→title，3–4→heading，5–6→label。
+- size: "display" | "title" | "heading" | "label". 对应 --qy-text-* 令牌中的视觉字号，与 level 无关。默认：1→display，2→title，3–4→heading，5–6→label。
 - render: ReactElement | (props) => ReactElement. 替换渲染元素。
 
 ### Prose

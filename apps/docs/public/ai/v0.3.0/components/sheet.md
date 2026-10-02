@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/sheet
 Source: packages/ui/src/components/sheet.tsx
-Source SHA-256: dea15cd5c30b4311ba86f974194e4d3cd55b3a857894d1b33b2738fbdac122b7
+Source SHA-256: 98c13cdb853383cf929d32946b3748d9778f9df366a7d2e7ee4d330c7295963e
 
 从屏幕边缘滑入的模态面板，适合在不离开列表的情况下查看详情、编辑记录或设置筛选条件。需要拖拽手势或吸附高度时改用 Drawer。
 
 ## Use and ownership
-- 从屏幕边缘滑入的模态面板，适合在不离开列表的情况下查看详情、编辑记录或设置筛选条件。需要拖拽手势或吸附高度时改用 Drawer。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 从列表进入详情、筛选或短编辑任务，同时保持返回当前列表的依据。
+- Avoid: 面板关闭不能冒充放弃草稿或取消请求；不要把宽屏任务直接塞进窄面板。
+- Library: 管理边缘展开、名称、焦点限制与返回、关闭入口及正文滚动。
+- Application: 管理对象、草稿、提交状态、错误恢复和关闭时是否保留工作。
+
+## Composition
+- Header 保留对象与退出，Panel 滚动工作内容，Footer 承接保存或应用；拖动需求交给 Drawer。
+
+## Responsive behavior
+- 窄屏保持内容宽度与退出空间；长标题避让内置 Close，底部操作避开安全区。
+
+## Customization
+- side 与 variant 改变停靠边界而非任务语义；表面与进入退出通过公共主题和动效调整。
 
 ## Current exports
 - Sheet: const; owner sheet; PASS

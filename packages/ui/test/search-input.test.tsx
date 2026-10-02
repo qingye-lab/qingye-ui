@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, test, vi } from "vitest";
@@ -39,6 +39,22 @@ test("Escape clears a non-empty field without bubbling, and bubbles once empty",
   expect(outer).not.toHaveBeenCalled();
   await user.keyboard("{Escape}");
   expect(outer).toHaveBeenCalledOnce();
+});
+
+test("Escape during IME composition preserves the query and does not clear", () => {
+  const onClear = vi.fn();
+  const onValueChange = vi.fn();
+  render(<SearchInput aria-label="搜索" defaultValue="正在组字" onClear={onClear} onValueChange={onValueChange} />);
+  const input = screen.getByRole("searchbox");
+  fireEvent.keyDown(input, { key: "Escape", isComposing: true });
+  fireEvent.keyDown(input, { key: "Escape", keyCode: 229 });
+  expect(input).toHaveValue("正在组字");
+  expect(onClear).not.toHaveBeenCalled();
+  expect(onValueChange).not.toHaveBeenCalled();
+
+  fireEvent.keyDown(input, { key: "Escape" });
+  expect(input).toHaveValue("");
+  expect(onClear).toHaveBeenCalledOnce();
 });
 
 test("works controlled", async () => {

@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "侧边面板 Sheet",
   description: "从屏幕边缘滑入的模态面板，适合在不离开列表的情况下查看详情、编辑记录或设置筛选条件。需要拖拽手势或吸附高度时改用 Drawer。",
+  design: {
+    "methods": [
+      "随境取度",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "从列表进入详情、筛选或短编辑任务，同时保持返回当前列表的依据。"
+    ],
+    "avoid": [
+      "面板关闭不能冒充放弃草稿或取消请求；不要把宽屏任务直接塞进窄面板。"
+    ],
+    "composition": [
+      "Header 保留对象与退出，Panel 滚动工作内容，Footer 承接保存或应用；拖动需求交给 Drawer。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理边缘展开、名称、焦点限制与返回、关闭入口及正文滚动。"
+      ],
+      "application": [
+        "管理对象、草稿、提交状态、错误恢复和关闭时是否保留工作。"
+      ]
+    },
+    "responsive": [
+      "窄屏保持内容宽度与退出空间；长标题避让内置 Close，底部操作避开安全区。"
+    ],
+    "customization": [
+      "side 与 variant 改变停靠边界而非任务语义；表面与进入退出通过公共主题和动效调整。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

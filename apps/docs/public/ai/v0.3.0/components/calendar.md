@@ -8,10 +8,19 @@ Source SHA-256: c13768263411376cd8eef65e6772e4ea94e0e02039fe5343358f1c18b8c414b6
 内联展示的月历，支持单选、范围和多选。需要放进表单字段时用 DatePicker。
 
 ## Use and ownership
-- 内联展示的月历，支持单选、范围和多选。需要放进表单字段时用 DatePicker。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 需要持续可见的自然日选择，或作为日期字段弹层内的选择工作面。
+- Avoid: 将月份导航边界误当作可选日期约束；用今天的标记冒充选中；只靠颜色区分禁用日。
+- Library: 月历原语、日期焦点、语言、选中和禁用部位。
+- Application: 日期限制、已选值、时区解释和业务提交。
+
+## Composition
+- 用 selected/onSelect 表达当前选择，用 disabled/min/max 表达限制；单字段提交复用 DatePicker。
+
+## Responsive behavior
+- 多个月份在窄屏纵向排列；触屏格遵守命中目标，不能为了排下两月压缩日期格。
+
+## Customization
+- classNames/components 可修改部位，但保留日历按钮名称、键盘行为和真实状态。
 
 ## Current exports
 - Calendar: function; owner calendar; PASS; props: React.ComponentProps<typeof DayPicker>

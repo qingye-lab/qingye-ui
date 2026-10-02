@@ -3,6 +3,36 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "对话框 Dialog",
   description: "在当前页面之上打开一个模态窗口，用于填写表单、查看详情或完成一个独立的小任务。需要用户二次确认的危险操作改用 AlertDialog。",
+  design: {
+    "methods": [
+      "随境取度",
+      "展开有据",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "在当前对象上完成确有必要独立聚焦的小任务，完成或退出后能合理返回。"
+    ],
+    "avoid": [
+      "不要把每个结果都变成模态；关闭窗口不等于撤销已保存动作或已取消后台请求。"
+    ],
+    "composition": [
+      "Header 标识对象，Panel 承载工作，Footer 承接保存与退出；从 Menu 打开时保留外部 Dialog owner。"
+    ],
+    "stateOwner": {
+      "library": [
+        "提供名称关联、焦点限制与返回、关闭原因、滚动正文及内置关闭入口的空间。"
+      ],
+      "application": [
+        "控制未保存内容、异步结果、错误恢复与关闭拦截；业务完成后才更新结果并决定退出。"
+      ]
+    },
+    "responsive": [
+      "贴底模式保留可见退出与安全区，长正文在 Panel 滚动；标题不能被关闭按钮覆盖。"
+    ],
+    "customization": [
+      "按任务选择底部贴合与 Footer 边界；showCloseButton 关闭时必须有明确替代退出。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: [

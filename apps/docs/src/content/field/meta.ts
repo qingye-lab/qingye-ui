@@ -7,6 +7,37 @@ export default {
   source: "coss",
   exports: ["Field", "FieldLabel", "FieldDescription", "FieldError", "FieldContent", "FieldTitle", "FieldGroup", "FieldSeparator", "FieldControl", "FieldValidity"],
   keywords: ["field", "表单项", "校验", "错误提示", "label", "description"],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "布白有用",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "把一个问题、控件、必要说明与原位错误放在同一关系中。"
+    ],
+    "avoid": [
+      "标签、示例和错误各自表达事实；不要给每个字段都重复一段操作说明。"
+    ],
+    "composition": [
+      "纵向适合文字输入，水平适合复选或开关；FieldContent 容纳名称和必要说明。"
+    ],
+    "stateOwner": {
+      "library": [
+        "控制关联、校验状态与描述、错误的可访问连接。"
+      ],
+      "application": [
+        "业务规则、草稿、后端错误和保存结果。"
+      ]
+    },
+    "responsive": [
+      "说明与错误可换行而不挤掉控件；横向名称列允许收缩。"
+    ],
+    "customization": [
+      "orientation 调整字段关系；FieldTitle 不能冒充 label，非原生组合显式关联 id。"
+    ]
+  },
   api: [
     {
       name: "Field",
@@ -43,6 +74,6 @@ export default {
     "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
     "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
     "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
-    "控件不是可接收 id 的原生输入时（如 FileUpload、ToggleGroup），在 FieldLabel 上写 htmlFor、在控件上写同值 id，标签才能正确关联；FieldDescription 会自动进入 aria-describedby。",
+    "没有注册到 Field 的组合控件（如 FileUpload）显式关联 label 的 htmlFor 与触发器 id，说明 id 通过 aria-describedby 传给控件。",
   ],
 } satisfies ComponentMeta;

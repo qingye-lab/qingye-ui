@@ -25,7 +25,7 @@ export default {
     },
     {
       name: "useCopyToClipboard",
-      description: "底层 Hook：{ copyToClipboard, isCopied }，参数 { timeout, onCopy, onError }。",
+      description: "底层 Hook：{ copyToClipboard, isCopied, isCopying }，参数 { timeout, onCopy, onError }。最近一次调用拥有结果反馈；卸载后不再回调。",
     },
   ],
   keyboard: [{ keys: "Enter / Space", description: "复制。" }],
@@ -34,4 +34,33 @@ export default {
     "剪贴板需要安全上下文（HTTPS 或 localhost）；失败时按钮显示“复制失败”，并调用 onCopyError，可在其中引导用户手动复制。",
     "仅图标时务必让周围文字说明复制的是什么，或通过 copyLabel 写清楚，例如“复制 API 密钥”。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "将当前对象的明确文本复制到剪贴板，并在动作处反馈结果。"
+    ],
+    "avoid": [
+      "请求发出就打对勾；旧请求的失败覆盖新结果；失败后隐藏原文本；把空串当作无请求。"
+    ],
+    "composition": [
+      "复制值按原样写入，包括空串；等待复用 Button loading。成功与错误由 Clipboard Promise 结果决定；失败仍可重试和手动选择原文。"
+    ],
+    "stateOwner": {
+      "library": [
+        "剪贴板请求归属、等待状态、反馈计时、卸载后回调抑制。"
+      ],
+      "application": [
+        "被复制的对象和值、敏感数据策略、人工复制入口。"
+      ]
+    },
+    "responsive": [
+      "图标按钮保留对象名称；成功不改变标签宽度，失败文字允许获得必要空间。"
+    ],
+    "customization": [
+      "copyLabel/copiedLabel/errorLabel 说明对象与结果，timeout 决定反馈持续时间。"
+    ]
+  },
 } satisfies ComponentMeta;

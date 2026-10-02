@@ -61,4 +61,33 @@ export default {
     "提示框只是增强：关键数值应同时出现在标题、Stat 或表格中，键盘与读屏用户才能获取。",
     "颜色变量写成 var(--color-<key>)，config 的 key 需是合法的 CSS 标识符（字母、数字、连字符）。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "数据之间的趋势、分布或比较比单个数值更重要。"
+    ],
+    "avoid": [
+      "颜色随排名重排；缺测当零；重要值只在悬停 Tooltip 中；图表容器没有可访问名称或摘要。"
+    ],
+    "composition": [
+      "config 固定实体的名称和颜色；Tooltip/Legend 是增强，关键数值同时提供可阅读摘要或 Table。"
+    ],
+    "stateOwner": {
+      "library": [
+        "系列样式变量、图例次序、提示框格式、Recharts 容器与焦点外观。"
+      ],
+      "application": [
+        "数据、单位、时间区间、缺测含义、系列过滤和无障碍摘要。"
+      ]
+    },
+    "responsive": [
+      "压缩空间时减少刻度与系列、拆成小图；保留可比较尺度，长系列名可换行。"
+    ],
+    "customization": [
+      "config 与项目图表组合是修改入口；主题色修改后检查真实标记、轴和背景对比。"
+    ]
+  },
 } satisfies ComponentMeta;

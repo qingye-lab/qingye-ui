@@ -8,10 +8,19 @@ Source SHA-256: 4bcc8bd38ca1ae1d1206fd5cf3e5ffb4ef18d1f7d672b035d2b8c53829a658f9
 独立的是 / 否选择，或在一组选项中多选。选择立即生效的开关设置改用 Switch。
 
 ## Use and ownership
-- 独立的是 / 否选择，或在一组选项中多选。选择立即生效的开关设置改用 Switch。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 表达一个可勾选条件，或在多个独立条件中选择若干项。
+- Avoid: 半选只能表示部分成员选中，不能假装用户已确认全部。
+- Library: checked、indeterminate、键盘切换和原生提交语义。
+- Application: 同意内容、批量范围及提交后果。
+
+## Composition
+- 标签扩大行的操作范围；必要描述与错误放在同一 Field。
+
+## Responsive behavior
+- 小方框保留触屏命中区；长标签换行时仍与所属选项对应。
+
+## Customization
+- checked 与外观主题分离，项目组合决定卡片或列表载体。
 
 ## Current exports
 - Checkbox: function; owner checkbox; PASS; props: CheckboxPrimitive.Root.Props

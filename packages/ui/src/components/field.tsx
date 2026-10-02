@@ -23,7 +23,7 @@ export function Field({
     <FieldContext.Provider value={true}>
       <FieldPrimitive.Root
         className={cn(
-          "group/field flex gap-(--qy-field-gap)",
+          "group/field flex min-w-0 gap-(--qy-field-gap)",
           orientation === "vertical"
             ? "flex-col items-start"
             : "flex-row items-center gap-(--qy-space-3) has-[>[data-slot=field-content]]:items-start [&>[data-slot=field-content]]:flex-1 has-[>[data-slot=field-content]]:*:data-[slot=checkbox]:mt-px has-[>[data-slot=field-content]]:*:data-[slot=radio]:mt-px",
@@ -73,7 +73,7 @@ export function FieldTitle({
   return (
     <div
       className={cn(
-        "flex w-fit items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground sm:text-field-label",
+        "flex w-fit max-w-full wrap-anywhere items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground sm:text-field-label",
         className,
       )}
       data-slot="field-title"
@@ -111,7 +111,7 @@ export function FieldLabel({
   return (
     <FieldPrimitive.Label
       className={cn(
-        "inline-flex items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground data-disabled:opacity-64 sm:text-field-label",
+        "inline-flex max-w-full wrap-anywhere items-center gap-(--qy-space-2) font-medium text-field-label-mobile text-foreground data-disabled:opacity-64 sm:text-field-label",
         className,
       )}
       data-slot="field-label"
@@ -139,7 +139,7 @@ export function FieldDescription({
 }: FieldPrimitive.Description.Props): React.ReactElement {
   return (
     <FieldPrimitive.Description
-      className={cn("text-muted-foreground text-xs", className)}
+      className={cn("max-w-full wrap-anywhere text-muted-foreground text-xs", className)}
       data-slot="field-description"
       {...props}
     />
@@ -156,7 +156,7 @@ type FieldErrorProps = FieldPrimitive.Error.Props & {
 };
 
 const fieldErrorClassName =
-  "text-destructive-foreground text-xs transition-[opacity,translate] duration-(--qy-duration-fast) ease-(--qy-ease-out) data-ending-style:duration-(--qy-duration-press) data-starting-style:-translate-y-0.5 data-starting-style:opacity-0 data-ending-style:opacity-0 [&_ul]:ms-(--qy-space-4) [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-[calc(var(--qy-space-1)*0.5)]";
+  "max-w-full wrap-anywhere text-destructive-foreground text-xs transition-[opacity,translate] duration-(--qy-duration-fast) ease-(--qy-ease-out) data-ending-style:duration-(--qy-duration-press) data-starting-style:-translate-y-0.5 data-starting-style:opacity-0 data-ending-style:opacity-0 [&_ul]:ms-(--qy-space-4) [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-[calc(var(--qy-space-1)*0.5)]";
 
 /**
  * With content (`children` or a non-empty `errors`), the message is shown

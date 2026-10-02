@@ -8,10 +8,19 @@ Source SHA-256: 6e263420ee8a0ac0b2eac8ae333574205d5a849a67c49899cbf919cd04e8031e
 表示正在加载或处理中的旋转指示器。用于等待时间不确定、且不值得显示进度的场景。
 
 ## Use and ownership
-- 表示正在加载或处理中的旋转指示器。用于等待时间不确定、且不值得显示进度的场景。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 已知正在等待但无法准确计量，且用户需要辨认等待对象。
+- Avoid: 重复 status 打断读屏；旋转等于任务成功；关键等待没有名称、失败或退出。
+- Library: 加载标记、默认语言与旋转视觉。
+- Application: 任务等待、上下文名称、结果和中断/退出。
+
+## Composition
+- 独立 Spinner 使用等待名称；Button loading 内部 Spinner 装饰隐藏，由按钮保持动作名称和 aria-busy。
+
+## Responsive behavior
+- 图标大小跟随宿主角色；等待不改变按钮宽度或隐藏仍有效的内容。
+
+## Customization
+- aria-label 按实际任务覆盖默认加载，重复状态中的图标用 aria-hidden。
 
 ## Current exports
 - Spinner: function; owner spinner; PASS; props: React.ComponentProps<typeof Loader2Icon>

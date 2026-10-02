@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
-Source SHA-256: 69e6260e0273603e7a1898d71251e8b4ef5f96a522676bc7c116f7c0e7d3bf65
+Source SHA-256: 5c829851e8998665f40c3163afee92eb62f8558570731ac36fe9b052d3409c8a
 
 带搜索图标、清除按钮与快捷键提示的搜索输入框，用于列表筛选、全局搜索。
 
 ## Use and ownership
-- 带搜索图标、清除按钮与快捷键提示的搜索输入框，用于列表筛选、全局搜索。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 对象、草稿、校验业务规则、版本与保存结果。
+- 编辑查询条件并筛选列表，清除后继续在同一输入框工作。
+- Avoid: loading 只表示正在等待；输入法组字时的 Esc 不应清掉查询草稿。
+- Library: 查询输入、清除动作、Esc 与焦点返回。
+- Application: 请求、防抖、过期结果保护及查询历史。
+
+## Composition
+- 前部图标表达搜索，尾部清除与空值快捷键提示轮换；结果和空态由相邻列表承接。
+
+## Responsive behavior
+- 清除按钮预留空间；小屏保留输入字号与可达的清除命中区。
+
+## Customization
+- loading、shortcut 和 clearLabel 使用当前属性，不另造搜索控件。
 
 ## Current exports
 - SearchInput: function; owner search-input; PASS; props: SearchInputProps
@@ -37,7 +46,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - placeholder: string; default locale: searchPlaceholder. 占位文字。
 
 ## Keyboard
-- Esc: 有内容时清空；再按一次交给外层（如关闭弹窗）。
+- Esc: 有内容时清空；再按一次交给外层（如关闭弹窗）；输入法组字期间保留输入。
 - Tab: 从输入框移到清除按钮。
 - Enter / Space: 在清除按钮上清空，并把焦点还给输入框。
 

@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Select", "SelectTrigger", "SelectValue", "SelectPopup", "SelectItem", "SelectGroup", "SelectGroupLabel", "SelectSeparator"],
   keywords: ["select", "下拉", "选择", "dropdown", "picker"],
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "选择一个或多个离散值，不需要输入筛选。"
+    ],
+    "avoid": [
+      "命令操作不要放进值选择器；关键选项差异不能只放 Tooltip。"
+    ],
+    "composition": [
+      "Trigger 展示当前值，Popup 中 Item、分组与勾选反馈构成完整选择关系。"
+    ],
+    "stateOwner": {
+      "library": [
+        "选择、键盘导航、浮层定位和字段语义。"
+      ],
+      "application": [
+        "选项可用性、当前业务值及提交结果。"
+      ]
+    },
+    "responsive": [
+      "触发器允许内容收缩；选项保留完整文字，窄屏不得遮住当前选择。"
+    ],
+    "customization": [
+      "size 调整触发器；render 组合仍遵守值选择语义。"
+    ]
+  },
   api: [
     {
       name: "Select",

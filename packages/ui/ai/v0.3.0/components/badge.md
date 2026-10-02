@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
-Source SHA-256: 2bebdb0486fa3873ef918a3977c893bb0e02d9e052fd48e6b76465c617842a74
+Source SHA-256: 0f896de22807399012382ca9f12016d417d0a13ab8ecaa941585043dba564d81
 
 标注状态、类别或数量的小标签。用于列表、表格和标题旁的辅助信息，不承载主要操作。
 
 ## Use and ownership
-- 标注状态、类别或数量的小标签。用于列表、表格和标题旁的辅助信息，不承载主要操作。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在对象旁标注状态、类别或计数，帮助扫读和比较。
+- Avoid: 用实色标签代替所有操作；仅颜色表达状态；对长状态名称无条件截断。
+- Library: 视觉变体、样式部位、可点击元素的焦点与触摸扩展。
+- Application: 状态事实、计数上限、操作范围和可访问名称。
+
+## Composition
+- Badge 保留状态文字；真正可点击的标签用 render 生成链接或 button，主要动作使用 Button。
+
+## Responsive behavior
+- 短标签保持整词；长名称先缩短真实名称或允许布局换行，别挤掉同列数据。
+
+## Customization
+- variant 表达当下强调程度，语义文字不因主题变更；数字使用 numeric。
 
 ## Current exports
 - Badge: function; owner badge; PASS; props: BadgeProps

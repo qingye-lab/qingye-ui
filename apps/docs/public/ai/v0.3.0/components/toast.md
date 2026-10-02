@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 70adc904fd92c8ed24870f4e4bfb34949f2b45fd273528e4e685088df142a59e
+Source SHA-256: 1e4f2469bcbba6c8ba28a3b1eba0aaf9c6565461ba2d738b4a1430637ce7a0b3
 
 操作完成后在屏幕角落短暂出现的反馈，不打断当前任务。多条消息自动层叠，悬停或聚焦时展开；需要用户立即处理的信息改用 Alert 或 AlertDialog。
 
 ## Use and ownership
-- 操作完成后在屏幕角落短暂出现的反馈，不打断当前任务。多条消息自动层叠，悬停或聚焦时展开；需要用户立即处理的信息改用 Alert 或 AlertDialog。
-- Avoid: 不要只在会消失的通知里表达需要修正的错误或唯一操作入口。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 短暂反馈已确认的结果，或在工作面之外补充不会阻断任务的状态。
+- Avoid: 请求开始就显示成功；上传成功写成设备升级完成；关键错误只有会消失的 Toast；撤销按钮不关联实际对象。
+- Library: 通知原语、堆叠、关闭、动作部位、长文本布局。
+- Application: Promise、真实结果、撤销可用性、持续错误与重试。
+
+## Composition
+- 同一对象通过 id 更新等待/结果；Action 到持久恢复入口，close 只是关闭通知。关键失败留在工作面。
+
+## Responsive behavior
+- 长文件名允许断行，窄屏动作另行排列，正文与关闭入口都可见；放大文字后仍需浏览器验证。
+
+## Customization
+- timeout 按必要阅读和行动时间选择，重要恢复不依赖默认消失时间。
 
 ## Current exports
 - anchoredToastManager: const; owner toast; PASS
@@ -330,6 +339,42 @@ export default function Demo() {
     <AnchoredToastProvider>
       <CopyLink />
     </AnchoredToastProvider>
+  );
+}
+```
+
+### 长内容与后续操作
+Source: apps/docs/src/content/toast/demos/09-long-content.tsx
+```tsx
+import { Button } from "@qingye/ui/components/button";
+import { toastManager } from "@qingye/ui/components/toast";
+import { useState } from "react";
+
+export const meta = { title: "长内容与后续操作" };
+
+export default function Demo() {
+  const [showFailures, setShowFailures] = useState(false);
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <Button
+        onClick={() => toastManager.add({
+          type: "warning",
+          title: "设备清单已导入，2 条记录需要处理",
+          description: "qingye-device-inventory-2026-10-02-east-region-final.csv：1 条序列号重复，1 条所属仓库不存在。",
+          timeout: 0,
+          actionProps: { children: "查看失败记录", onClick: () => setShowFailures(true) },
+        })}
+        variant="outline"
+      >
+        查看导入结果
+      </Button>
+      {showFailures ? (
+        <ul className="list-disc ps-5 text-sm" aria-label="失败记录">
+          <li>第 18 行：序列号 QY-0048 重复。</li>
+          <li>第 29 行：仓库「东区临时库」不存在。</li>
+        </ul>
+      ) : null}
+    </div>
   );
 }
 ```

@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/carousel
 Source: packages/ui/src/components/carousel.tsx
-Source SHA-256: 98455d60de988a4c4a891ffaa6df39a1fe0553f672446bc4b60c118e6b781b3d
+Source SHA-256: 350656318e04ae9be22df636618b5a7476fdeba909584fcbef55c19960fe5c85
 
 横向滑动浏览一组同类内容，例如商品图、案例或文章卡片。轨道是原生滚动容器：触屏滑动、触控板与惯性滚动都由浏览器提供；不会自动播放。
 
 ## Use and ownership
-- 横向滑动浏览一组同类内容，例如商品图、案例或文章卡片。轨道是原生滚动容器：触屏滑动、触控板与惯性滚动都由浏览器提供；不会自动播放。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 顺序浏览可独立理解的图像或内容，每张都能直接操作。
+- Avoid: 自动播放打断阅读；把关键结论只藏在后续张；父级抢走 Tab、Tree 等张内控件方向键。
+- Library: 滚动、吸附位置、位置反馈、按键范围与无动画跳转。
+- Application: 内容顺序、位置受控值、每张的名称与进入详情后的返回。
+
+## Composition
+- Content 的方向键负责位置，张内控件各自负责键盘；Previous/Next 到边界保留焦点，Dots 对应吸附位置。
+
+## Responsive behavior
+- 按可读内容决定 slidesPerView；触屏原生滑动，多张并排时位置数与张数分别表达。
+
+## Customization
+- 用每视口变量与 gap 调整容量，避免为了固定张数压缩文字和命中区。
 
 ## Current exports
 - Carousel: function; owner carousel; PASS; props: CarouselProps
@@ -55,35 +64,38 @@ Signatures may reference inherited types. Consult installed declarations; props 
 在 Carousel 内读取 index、count、canPrevious、canNext 与 scrollTo，用于自定义计数或控件。
 
 ## Keyboard
-- ← / →: 焦点在轮播内时切换上一张 / 下一张（从右到左布局时方向相反）。
-- Tab: 依次聚焦每张中的链接与控件，被聚焦的一张会滚入视野。
+- ← / →: 焦点在滚动轨道上时切换上一张 / 下一张（从右到左布局时方向相反）；张内控件保留自己的按键行为。
+- Tab: 聚焦滚动轨道、每张中的链接与控件，被聚焦的一张会滚入视野。
 - Enter / Space: 触发上一张、下一张或指示点。
 
 ## Source examples
 ### 默认
 Source: apps/docs/src/content/carousel/demos/01-default.tsx
 ```tsx
+import { AspectRatio } from "@qingye/ui/components/aspect-ratio";
 import { Carousel, CarouselContent, CarouselDots, CarouselItem, CarouselNext, CarouselPrevious } from "@qingye/ui/components/carousel";
 
 export const meta = { title: "默认", description: "一次一张；在触屏上直接左右滑动。" };
 
-const products = [
-  { name: "云台相机 Q3", price: "¥2,199", tone: "from-sky-100 to-indigo-200 dark:from-sky-950 dark:to-indigo-900" },
-  { name: "降噪耳机 Air", price: "¥899", tone: "from-emerald-100 to-teal-200 dark:from-emerald-950 dark:to-teal-900" },
-  { name: "机械键盘 K75", price: "¥649", tone: "from-amber-100 to-orange-200 dark:from-amber-950 dark:to-orange-900" },
-  { name: "便携屏 15.6″", price: "¥1,299", tone: "from-rose-100 to-fuchsia-200 dark:from-rose-950 dark:to-fuchsia-900" },
+const photographs = [
+  { title: "林间", image: "/examples/forest.jpg", alt: "阳光穿过林间的树木" },
+  { title: "山巅", image: "/examples/mountain.jpg", alt: "山峰与清晨的天空" },
+  { title: "桌边", image: "/examples/coffee.jpg", alt: "桌上的咖啡" },
+  { title: "工作台", image: "/examples/desk.jpg", alt: "桌面的工作用品" },
 ];
 
 export default function Demo() {
   return (
-    <Carousel aria-label="新品推荐" className="w-full max-w-md">
+    <Carousel aria-label="摄影集" className="w-full max-w-md">
       <CarouselContent>
-        {products.map((product) => (
-          <CarouselItem key={product.name}>
-            <div className={`flex aspect-[4/3] flex-col justify-end rounded-xl bg-gradient-to-br p-5 ${product.tone}`}>
-              <p className="font-semibold text-lg">{product.name}</p>
-              <p className="numeric text-foreground/70 text-sm">{product.price} 起</p>
-            </div>
+        {photographs.map((photograph) => (
+          <CarouselItem key={photograph.image}>
+            <figure className="overflow-hidden rounded-xl border">
+              <AspectRatio ratio={4 / 3}>
+                <img alt={photograph.alt} className="object-cover" loading="lazy" src={photograph.image} />
+              </AspectRatio>
+              <figcaption className="px-4 py-3 font-medium text-sm">{photograph.title}</figcaption>
+            </figure>
           </CarouselItem>
         ))}
       </CarouselContent>
@@ -232,6 +244,36 @@ export default function Demo() {
         <CarouselNext />
       </div>
       <p className="text-center text-muted-foreground text-xs">当前步骤：{steps[current]?.title}</p>
+    </Carousel>
+  );
+}
+```
+
+### 内容内的独立控件
+Source: apps/docs/src/content/carousel/demos/05-nested-controls.tsx
+```tsx
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@qingye/ui/components/carousel";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
+
+export const meta = { title: "内容内的独立控件" };
+
+export default function Demo() {
+  return (
+    <Carousel aria-label="文章方案" className="w-full max-w-md">
+      <CarouselContent>
+        <CarouselItem>
+          <Tabs className="flex min-h-44 flex-col gap-3 rounded-xl border p-4" defaultValue="summary">
+            <TabsList aria-label="文章视图">
+              <TabsTab value="summary">摘要</TabsTab>
+              <TabsTab value="detail">正文</TabsTab>
+            </TabsList>
+            <TabsPanel value="summary">以标题、段落与必要链接组织阅读。</TabsPanel>
+            <TabsPanel value="detail">长文的行高、段落间距与阅读宽度一起建立节奏。字号变化保留文档层级。</TabsPanel>
+          </Tabs>
+        </CarouselItem>
+        <CarouselItem><div className="min-h-44 rounded-xl border p-4">第二篇：在数据中保留必要的比较关系。</div></CarouselItem>
+      </CarouselContent>
+      <div className="flex justify-end gap-2"><CarouselPrevious /><CarouselNext /></div>
     </Carousel>
   );
 }

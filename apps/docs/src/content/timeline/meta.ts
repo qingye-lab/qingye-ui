@@ -38,4 +38,33 @@ export default {
     "状态颜色只作辅助，标题文字要能单独说明发生了什么。",
     "新事件在上的倒序最常见；保持同一页面内顺序一致。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "展开有据"
+    ],
+    "whenToUse": [
+      "按顺序追踪对象事件、发生时间及后续可查证内容。"
+    ],
+    "avoid": [
+      "装饰标记颜色是唯一状态；将预计事件写成已发生；状态变化抹掉早期事件；合法零值被省略。"
+    ],
+    "composition": [
+      "有序列表组织事件，time/dateTime 分别显示与机器表达；title 说事实，content 承接详情和附件。"
+    ],
+    "stateOwner": {
+      "library": [
+        "事件解剖、时间元素、轨道和零值保留。"
+      ],
+      "application": [
+        "事件顺序、实际时间、状态、权限与详情导航。"
+      ]
+    },
+    "responsive": [
+      "标题与时间可分行，长说明可阅读；紧凑密度保留事件之间可理解的距离。"
+    ],
+    "customization": [
+      "density/connector 修改关系，marker 是装饰，不能隐藏事件事实或交互。"
+    ]
+  },
 } satisfies ComponentMeta;

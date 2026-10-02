@@ -52,7 +52,7 @@ export function SelectButton({
   const defaultProps = {
     children: (
       <>
-        <span className="flex-1 truncate in-data-placeholder:text-muted-foreground/72">
+        <span className="flex-1 truncate in-data-placeholder:text-muted-foreground">
           {children}
         </span>
         <ChevronsUpDownIcon className={selectTriggerIconClassName} />
@@ -103,7 +103,7 @@ export function SelectValue({
   return (
     <SelectPrimitive.Value
       className={cn(
-        "flex-1 truncate data-placeholder:text-muted-foreground/72",
+        "flex-1 truncate data-placeholder:text-muted-foreground",
         className,
       )}
       data-slot="select-value"
@@ -145,7 +145,7 @@ export function SelectPopup({
         sideOffset={sideOffset}
       >
         <SelectPrimitive.Popup
-          className="origin-(--transform-origin) text-foreground outline-none"
+          className="max-w-(--available-width) origin-(--transform-origin) text-foreground outline-none"
           data-slot="select-popup"
           {...props}
         >
@@ -155,7 +155,7 @@ export function SelectPopup({
           >
             <ChevronUpIcon className="relative size-4.5 sm:size-4" />
           </SelectPrimitive.ScrollUpArrow>
-          <div className="relative h-full min-w-(--anchor-width) rounded-control border bg-popover not-dark:bg-clip-padding shadow-raised before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]">
+          <div className="relative h-full min-w-(--anchor-width) max-w-(--available-width) rounded-control border bg-popover not-dark:bg-clip-padding shadow-raised before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]">
             <SelectPrimitive.List
               className={cn(
                 "max-h-(--available-height) overflow-y-auto p-(--qy-space-1)",

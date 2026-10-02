@@ -8,10 +8,19 @@ Source SHA-256: 1ca76b9e2c37989152cb8bf2bd33ce5d704d435c2e89526fd241b231bfcf5ff0
 让内容按固定宽高比占位，常用于封面图、视频和地图。图片加载前就预留好空间，页面不会跳动。
 
 ## Use and ownership
-- 让内容按固定宽高比占位，常用于封面图、视频和地图。图片加载前就预留好空间，页面不会跳动。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 图片、视频或地图需要在资源到来前保留稳定位置。
+- Avoid: 把标题、正文和说明都塞进被绝对定位的媒体框；重要内容只能通过裁切后的图像识别。
+- Library: 有效比例归一化、媒体占位和 render 透传。
+- Application: 资源地址、替代文本、加载失败后的替换与焦点内容。
+
+## Composition
+- AspectRatio 只围住媒体，标题与说明放在同一 figure 的外部；object-cover 与 object-contain 按内容是否可裁切选择。
+
+## Responsive behavior
+- 宽度跟随容器；改变比例时核对主体是否仍完整，必要时移动裁切焦点。
+
+## Customization
+- 用 ratio 调整占位，className 集中定义裁切和圆角，比例不代替图片自身尺寸。
 
 ## Current exports
 - AspectRatio: function; owner aspect-ratio; PASS; props: AspectRatioProps
@@ -44,24 +53,7 @@ export default function Demo() {
   return (
     <div className="w-full max-w-lg">
       <AspectRatio className="overflow-hidden rounded-xl border bg-muted" ratio={16 / 9}>
-        <svg aria-label="湖畔晨雾的风景插画" preserveAspectRatio="xMidYMid slice" role="img" viewBox="0 0 1600 900">
-          <defs>
-            <linearGradient id="ar-sky" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="#dfe8f1" />
-              <stop offset="1" stopColor="#f6efe6" />
-            </linearGradient>
-            <linearGradient id="ar-lake" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stopColor="#c9d7e2" />
-              <stop offset="1" stopColor="#9fb3c4" />
-            </linearGradient>
-          </defs>
-          <rect fill="url(#ar-sky)" height="900" width="1600" />
-          <circle cx="1130" cy="300" fill="#f3d9b8" r="86" />
-          <path d="M0 560 L260 380 L430 500 L640 300 L900 520 L1080 420 L1300 560 L1600 400 L1600 900 L0 900 Z" fill="#b7c4cf" />
-          <path d="M0 640 L220 520 L420 610 L700 470 L960 620 L1240 520 L1600 640 L1600 900 L0 900 Z" fill="#8fa1b1" />
-          <rect fill="url(#ar-lake)" height="230" width="1600" y="670" />
-          <path d="M140 760 H520 M760 800 H1180 M300 840 H640" stroke="#e8eef3" strokeLinecap="round" strokeOpacity=".6" strokeWidth="6" />
-        </svg>
+        <img alt="阳光穿过林间的树木" className="object-cover" src="/examples/forest.jpg" />
       </AspectRatio>
     </div>
   );
@@ -98,40 +90,30 @@ export default function Demo() {
 }
 ```
 
-### 课程卡片
+### 内容封面
 Source: apps/docs/src/content/aspect-ratio/demos/03-media-card.tsx
 ```tsx
 import { AspectRatio } from "@qingye/ui/components/aspect-ratio";
-import { PlayIcon } from "lucide-react";
+export const meta = { title: "内容封面", description: "不同照片使用相同比例，标题保持在图片之外。" };
 
-export const meta = { title: "课程卡片", description: "封面按 16:9 占位，叠加播放按钮与时长。" };
-
-const lessons = [
-  { title: "设计系统中的间距与节奏", author: "林悦", duration: "12:48", hue: "from-[#e6ddd3] to-[#c9b8a6]" },
-  { title: "用 Tailwind CSS 4 构建主题令牌", author: "周屹", duration: "18:05", hue: "from-[#d7e1ea] to-[#a9bccd]" },
+const photographs = [
+  { title: "山间的第一束光", location: "高山记录", image: "/examples/mountain.jpg", alt: "山峰与清晨的天空" },
+  { title: "林中的步道", location: "林间记录", image: "/examples/forest.jpg", alt: "阳光穿过林间的树木" },
 ];
 
 export default function Demo() {
   return (
     <div className="grid w-full max-w-2xl gap-5 sm:grid-cols-2">
-      {lessons.map((lesson) => (
-        <article className="group flex flex-col gap-3" key={lesson.title}>
+      {photographs.map((photograph) => (
+        <figure className="flex min-w-0 flex-col gap-3" key={photograph.image}>
           <AspectRatio className="overflow-hidden rounded-xl border" ratio={16 / 9}>
-            <div className={`bg-linear-to-br ${lesson.hue} transition-[scale] duration-(--qy-duration-slow) group-hover:scale-[1.02]`} />
-            <div className="flex items-center justify-center">
-              <span className="flex size-11 items-center justify-center rounded-full bg-background/88 text-foreground shadow-sm/5 backdrop-blur-sm">
-                <PlayIcon aria-hidden="true" className="ms-0.5 size-4.5 fill-current" />
-              </span>
-            </div>
-            <div className="flex items-end justify-end p-2.5">
-              <span className="rounded-md bg-black/56 px-1.5 py-0.5 font-medium text-white text-xs numeric backdrop-blur-sm">{lesson.duration}</span>
-            </div>
+            <img alt={photograph.alt} className="object-cover" loading="lazy" src={photograph.image} />
           </AspectRatio>
-          <div className="flex flex-col gap-0.5">
-            <h3 className="font-medium text-sm">{lesson.title}</h3>
-            <p className="text-muted-foreground text-xs">{lesson.author}</p>
-          </div>
-        </article>
+          <figcaption className="flex flex-col gap-0.5">
+            <span className="font-medium text-sm">{photograph.title}</span>
+            <span className="text-muted-foreground text-xs">{photograph.location}</span>
+          </figcaption>
+        </figure>
       ))}
     </div>
   );

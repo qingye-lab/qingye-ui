@@ -7,9 +7,9 @@ import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Button, type ButtonProps } from "./button";
 
-type CopyStatus = "idle" | "copied" | "failed";
+type CopyStatus = "idle" | "copying" | "copied" | "failed";
 
-export type CopyButtonProps = Omit<ButtonProps, "value" | "loading"> & {
+export type CopyButtonProps = Omit<ButtonProps, "value"> & {
   /** Text to copy, or a function that returns it when the button is pressed. */
   value: string | (() => string);
   /** How long the copied or failed state is shown, in milliseconds. */
@@ -44,6 +44,7 @@ export function CopyButton({
   children,
   size,
   variant = "outline",
+  loading = false,
   onClick,
   ...props
 }: CopyButtonProps): React.ReactElement {
@@ -59,21 +60,27 @@ export function CopyButton({
 
   const announce = (text: string) =>
     setAnnouncement((previous) => ({ count: previous.count + 1, text }));
+  const clearFailureTimer = () => {
+    if (failTimer.current) clearTimeout(failTimer.current);
+    failTimer.current = null;
+  };
+  const reportError = (error: unknown) => {
+    setFailed(true);
+    announce(labels.failed);
+    clearFailureTimer();
+    if (timeout !== 0) failTimer.current = setTimeout(() => setFailed(false), timeout);
+    onCopyError?.(error);
+  };
 
-  const { copyToClipboard, isCopied } = useCopyToClipboard({
+  const { copyToClipboard, isCopied, isCopying } = useCopyToClipboard({
     timeout,
     onCopy: () => {
       setFailed(false);
+      clearFailureTimer();
       announce(labels.copied);
       onCopy?.();
     },
-    onError: (error) => {
-      setFailed(true);
-      announce(labels.failed);
-      if (failTimer.current) clearTimeout(failTimer.current);
-      if (timeout !== 0) failTimer.current = setTimeout(() => setFailed(false), timeout);
-      onCopyError?.(error);
-    },
+    onError: reportError,
   });
 
   React.useEffect(
@@ -83,7 +90,7 @@ export function CopyButton({
     [],
   );
 
-  const status: CopyStatus = failed ? "failed" : isCopied ? "copied" : "idle";
+  const status: CopyStatus = isCopying ? "copying" : failed ? "failed" : isCopied ? "copied" : "idle";
 
   // Once the confirmation lapses, drop it so it is not read out of context.
   React.useEffect(() => {
@@ -104,11 +111,21 @@ export function CopyButton({
         aria-label={iconOnly ? labels.idle : undefined}
         data-slot="copy-button"
         data-status={status}
+        loading={isCopying || loading}
         onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
           onClick?.(event);
-          if (event.defaultPrevented) return;
+          if (event.defaultPrevented || isCopying || loading) return;
+          clearFailureTimer();
           setFailed(false);
-          copyToClipboard(typeof value === "function" ? value() : value);
+          announce("");
+          let text: string;
+          try {
+            text = typeof value === "function" ? value() : value;
+          } catch (error) {
+            reportError(error);
+            return;
+          }
+          copyToClipboard(text);
         }}
         size={size}
         variant={variant}

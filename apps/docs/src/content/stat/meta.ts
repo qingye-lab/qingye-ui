@@ -33,7 +33,7 @@ export default {
       name: "StatSparkline",
       description: "不依赖图表库的迷你趋势线，颜色取 currentColor（默认 text-chart-1），线宽在任意尺寸下保持 1.5px。",
       props: [
-        { name: "data", type: "readonly number[]", description: "按时间顺序的数值，至少两个点。" },
+        { name: "data", type: "readonly number[]", description: "按时间顺序的数值，至少两个点；非有限数值保留时间位置并断开趋势线，末项缺测时不显示最新值圆点。" },
         { name: "fill", type: "boolean", default: "true", description: "线下方的淡色渐变。" },
         { name: "showEnd", type: "boolean", default: "true", description: "在最新值处画一个圆点。" },
         { name: "label", type: "string", description: "可访问的摘要，例如「近 12 周订单量持续上升」；不传时视为装饰。" },
@@ -44,6 +44,35 @@ export default {
     "变化量写成带符号的百分比并注明对比周期（较上周、环比），读者才能判断。",
     "颜色只表达「好 / 坏」：指标以下降为好时用 inverse，不要反过来改 trend。",
     "StatDelta 自带读屏前缀，颜色不是唯一信息；不要再在文字里重复「上升」。",
-    "一个视图只放一个 lg 指标；其余用默认或 sm，避免数字互相争抢。",
+    "lg 留给当下重要的指标；比较同级指标时保持相同字号与单位，不为制造层级改变它们的可比性。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "读取一个关键量及其单位、比较周期与趋势。"
+    ],
+    "avoid": [
+      "零与未采集混淆；上涨永远绿色；缺测被删除后跨时间连接；为了层级让同级比较字号不同。"
+    ],
+    "composition": [
+      "Label/Value/Unit 明确量纲；Delta 的 trend 说明方向，inverse 说明好坏；Sparkline 缺测断线且保留时间位置。"
+    ],
+    "stateOwner": {
+      "library": [
+        "指标部位、方向文字、情感颜色与趋势线几何。"
+      ],
+      "application": [
+        "真实数值、周期、好坏规则、缺测事实与摘要。"
+      ]
+    },
+    "responsive": [
+      "长标签和单位可换行，保留数值容量；迷你线不能成为唯一数据来源。"
+    ],
+    "customization": [
+      "size 按任务层级选择，Sparkline label 提供趋势事实，主题不改变 inverse 的业务含义。"
+    ]
+  },
 } satisfies ComponentMeta;

@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["NumberField", "NumberFieldGroup", "NumberFieldDecrement", "NumberFieldInput", "NumberFieldIncrement", "NumberFieldScrubArea"],
   keywords: ["number", "数字", "数量", "步进", "stepper", "金额"],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "精确输入数量、金额或阈值，步进按钮为重复调整提供入口。"
+    ],
+    "avoid": [
+      "格式化文本不是提交值；拖动标签不能成为唯一的调整方法。"
+    ],
+    "composition": [
+      "输入与增减按钮共享边界，焦点仍定位到实际部件；FieldLabel 或 root aria-label 命名输入。"
+    ],
+    "stateOwner": {
+      "library": [
+        "本地化解析、范围、步长、按键与尺寸角色。"
+      ],
+      "application": [
+        "业务单位、允许范围、草稿和提交结果。"
+      ]
+    },
+    "responsive": [
+      "输入可收缩而增减动作保留；内部高度扣除外框边界，与同尺寸 Input 对齐。"
+    ],
+    "customization": [
+      "size 消费已有 --qy-control-*；format 与 locale 负责显示和解析。"
+    ]
+  },
   api: [
     {
       name: "NumberField",

@@ -8,10 +8,19 @@ Source SHA-256: 048f7e59b5cc7aa39444a0b571f6c7aaf3d3dc01561eff7dcd7f80039acec91c
 以圆环展示任务完成度或占用率，适合空间紧凑处（卡片角落、列表行）或需要在中心显示数值的场景。
 
 ## Use and ownership
-- 以圆环展示任务完成度或占用率，适合空间紧凑处（卡片角落、列表行）或需要在中心显示数值的场景。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在紧凑位置表达任务进度，与任务名称和操作邻接。
+- Avoid: 环颜色被当作成功结论；只读到无名的百分比；中心内容包含必要操作却放进 progressbar。
+- Library: 环几何、不确定弧、progressbar 语义与中心表达。
+- Application: 真实进度、任务范围、结果和取消/重试操作。
+
+## Composition
+- 外围文本命名任务；value=null 表示未知。自定义中心内容通过 getAriaValueText 同步有意义的状态。
+
+## Responsive behavior
+- 小环省略中心数字时，附近仍要能读取进度；大环不为装饰压缩工作面。
+
+## Customization
+- size/strokeWidth 按识别需要选择，status 只增强状态表达。
 
 ## Current exports
 - ProgressCircle: function; owner progress-circle; PASS; props: ProgressCircleProps

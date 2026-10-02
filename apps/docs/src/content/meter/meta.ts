@@ -37,4 +37,33 @@ export default {
     "自定义 MeterValue 显示内容时，用 getAriaValueText 让读屏朗读同样的信息。",
     "Meter 表示静态度量；会随时间推进到 100% 的任务用 Progress。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "在已知上下界内读出容量、用量或负载的测量值。"
+    ],
+    "avoid": [
+      "用 Meter 表示正在完成的任务；只靠条长和颜色说明接近上限；阈值解释与实际数值不一致。"
+    ],
+    "composition": [
+      "Label 命名测量对象，Value 与单位共同说明事实；阈值信息配文字，自定义值同步 getAriaValueText。"
+    ],
+    "stateOwner": {
+      "library": [
+        "meter 原语、数值范围、标签和值的关系。"
+      ],
+      "application": [
+        "测量源、单位、阈值、采样时间与缺测。"
+      ]
+    },
+    "responsive": [
+      "数值与标签可换行；条本身适应容器，保留必要文字。"
+    ],
+    "customization": [
+      "min/max/format 定义量纲；主题只调整图形表达，状态规则由应用决定。"
+    ]
+  },
 } satisfies ComponentMeta;

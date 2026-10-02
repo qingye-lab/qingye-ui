@@ -64,7 +64,7 @@ export function TabsList({
         className={cn(
           // Positioned from the top: Base UI derives --active-tab-bottom from the
           // list's scrollHeight, which the coarse-pointer hit area inflates.
-          "absolute top-0 left-0 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) translate-y-(--active-tab-top) transition-[width,translate] duration-200 ease-in-out",
+          "absolute top-0 left-0 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) translate-y-(--active-tab-top) transition-[width,translate] duration-(--qy-duration-base) ease-(--qy-ease-out)",
           variant === "underline"
             ? "z-10 bg-primary data-[orientation=horizontal]:top-auto data-[orientation=horizontal]:bottom-0 data-[orientation=horizontal]:h-0.5 data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:-translate-x-px data-[orientation=horizontal]:translate-y-px"
             : "-z-1 rounded-md border border-border-subtle bg-surface-raised shadow-control",

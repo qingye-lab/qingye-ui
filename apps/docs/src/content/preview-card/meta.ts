@@ -3,6 +3,35 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "预览卡片 PreviewCard",
   description: "悬停在链接上时显示目标内容的预览，例如成员资料、工单摘要。只是锦上添花：点击链接本身仍然能到达完整页面。",
+  design: {
+    "methods": [
+      "展开有据",
+      "布白有用"
+    ],
+    "whenToUse": [
+      "预览真实链接背后的补充信息，帮助决定是否继续进入目标。"
+    ],
+    "avoid": [
+      "唯一操作与关键内容不能只放在悬停预览；预览出现不应阻碍直接访问链接。"
+    ],
+    "composition": [
+      "Trigger 始终保留真实 href；只读摘要放 Popup，需要表单或按钮时改用 Popover。"
+    ],
+    "stateOwner": {
+      "library": [
+        "管理预览延迟、焦点或悬停开关与碰撞定位，按可用视口限制内容范围。"
+      ],
+      "application": [
+        "提供真实地址、对象摘要、内容加载与访问权限；目标页面保留完整信息。"
+      ]
+    },
+    "responsive": [
+      "预览长文本换行并限制到可用视口；触屏用户可通过原链接完成同一阅读。"
+    ],
+    "customization": [
+      "默认宽度适合摘要，调整 className 宽度时仍保留可用视口限制。"
+    ]
+  },
   category: "浮层",
   source: "coss",
   exports: ["PreviewCard", "PreviewCardTrigger", "PreviewCardPopup"],

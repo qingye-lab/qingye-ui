@@ -28,7 +28,7 @@ export default function Demo() {
       className="relative h-72 min-h-0 md:h-[26rem] overflow-hidden rounded-[calc(var(--radius-xl)-1px)]"
       defaultOpen={false}
     >
-      <Sidebar className="absolute h-full" collapsible="icon" variant="floating">
+      <Sidebar className="md:absolute md:h-full" collapsible="icon" variant="floating">
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>

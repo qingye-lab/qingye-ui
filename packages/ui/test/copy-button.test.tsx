@@ -113,3 +113,71 @@ test("useCopyToClipboard reports an unavailable Clipboard API through onError", 
   act(() => result.current.copyToClipboard("secret"));
   expect(onError).toHaveBeenCalledOnce();
 });
+
+test("keeps the copy action busy until its own write settles", async () => {
+  let resolve!: () => void;
+  const writeText = mockClipboard(() => new Promise<void>((done) => { resolve = done; }));
+  render(<CopyButton value="draft" />);
+  const button = screen.getByRole("button", { name: "复制" });
+  fireEvent.click(button);
+  expect(button).toHaveAttribute("aria-busy", "true");
+  expect(button).toHaveAttribute("data-status", "copying");
+  fireEvent.click(button);
+  expect(writeText).toHaveBeenCalledOnce();
+  await act(async () => resolve());
+  expect(button).not.toHaveAttribute("aria-busy", "true");
+  expect(button).toHaveAttribute("data-status", "copied");
+});
+
+test("latest hook request owns feedback even when an older write rejects later", async () => {
+  let rejectFirst!: (error: Error) => void;
+  let resolveSecond!: () => void;
+  mockClipboard((value) => value === "first"
+    ? new Promise<void>((_resolve, reject) => { rejectFirst = reject; })
+    : new Promise<void>((resolve) => { resolveSecond = resolve; }));
+  const onError = vi.fn();
+  const onCopy = vi.fn();
+  const { result } = renderHook(() => useCopyToClipboard({ onError, onCopy }));
+  act(() => { result.current.copyToClipboard("first"); result.current.copyToClipboard("second"); });
+  await act(async () => resolveSecond());
+  await act(async () => rejectFirst(new Error("old failure")));
+  expect(result.current.isCopied).toBe(true);
+  expect(onCopy).toHaveBeenCalledOnce();
+  expect(onError).not.toHaveBeenCalled();
+});
+
+test("does not report a late copy result after its owner unmounts", async () => {
+  let resolve!: () => void;
+  mockClipboard(() => new Promise<void>((done) => { resolve = done; }));
+  const onCopy = vi.fn();
+  const { result, unmount } = renderHook(() => useCopyToClipboard({ onCopy }));
+  act(() => result.current.copyToClipboard("draft"));
+  unmount();
+  await act(async () => resolve());
+  expect(onCopy).not.toHaveBeenCalled();
+});
+
+test("copies an empty string as the exact requested value", async () => {
+  const writeText = mockClipboard(() => Promise.resolve());
+  render(<CopyButton value="" />);
+  await act(async () => fireEvent.click(screen.getByRole("button")));
+  expect(writeText).toHaveBeenCalledWith("");
+  expect(screen.getByRole("button")).toHaveAttribute("data-status", "copied");
+});
+
+test("a throwing value reader reports failure and remains retryable", async () => {
+  const writeText = mockClipboard(() => Promise.resolve());
+  const onCopyError = vi.fn();
+  let fail = true;
+  render(<CopyButton onCopyError={onCopyError} value={() => {
+    if (fail) throw new Error("value unavailable");
+    return "ready";
+  }} />);
+  await act(async () => fireEvent.click(screen.getByRole("button")));
+  expect(onCopyError).toHaveBeenCalledWith(expect.any(Error));
+  expect(screen.getByRole("button")).toHaveAttribute("data-status", "failed");
+  fail = false;
+  await act(async () => fireEvent.click(screen.getByRole("button")));
+  expect(writeText).toHaveBeenCalledWith("ready");
+  expect(screen.getByRole("button")).toHaveAttribute("data-status", "copied");
+});

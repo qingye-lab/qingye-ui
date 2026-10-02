@@ -60,10 +60,18 @@ export function CodeBlock({
   const usesSource =
     source !== undefined &&
     (children === undefined || typeof children === "string");
-  const lines = usesSource ? source.replace(/\n$/, "").split("\n") : [];
+  const lines = source !== undefined ? source.replace(/\n$/, "").split("\n") : [];
   const highlighted = new Set(highlightLines);
-  // Pre-highlighted children without `code`: copy the rendered text.
-  const copyValue = source ?? (() => codeRef.current?.textContent ?? "");
+  // Block lines do not contribute newlines to textContent. Preserve their
+  // boundaries when a highlighter supplies nodes without the original source.
+  const copyValue = source ?? (() => {
+    const element = codeRef.current;
+    if (!element) return "";
+    const lineElements = Array.from(element.querySelectorAll<HTMLElement>("[data-line]"));
+    return lineElements.length
+      ? lineElements.map((line) => line.textContent ?? "").join("\n")
+      : element.textContent ?? "";
+  });
   const hasHeader = filename !== undefined || language !== undefined;
   const gutter = `${Math.max(2, String(lines.length || 1).length)}ch`;
 
@@ -143,13 +151,15 @@ export function CodeBlock({
       >
         <code
           className={cn(
-            // With line numbers each line is a two-column grid, so the number
-            // keeps its gutter and wrapped lines hang under their own text.
+            "block min-w-full [counter-reset:line]",
+            wrap ? "w-full" : "w-max",
+            // Each line owns its gutter so wrapping keeps the continuation
+            // under the text, and inline highlighted nodes remain inline.
             lineNumbers
-              ? "has-[[data-line]]:grid has-[[data-line]]:grid-cols-[auto_1fr] has-[[data-line]]:px-(--qy-space-4) [&_[data-line]]:[counter-increment:line] [&_[data-line]]:before:me-(--qy-space-4) [&_[data-line]]:before:min-w-0 [&_[data-line]]:before:select-none [&_[data-line]]:before:text-end [&_[data-line]]:before:text-muted-foreground/64 [&_[data-line]]:before:content-[counter(line)]"
-              : "px-(--qy-space-4)",
+              ? "[&_[data-line]]:relative [&_[data-line]]:ps-[calc(var(--code-block-gutter)+var(--qy-space-4)*2)] [&_[data-line]]:pe-(--qy-space-4) [&_[data-line]]:[counter-increment:line] [&_[data-line]]:before:absolute [&_[data-line]]:before:start-(--qy-space-4) [&_[data-line]]:before:w-(--code-block-gutter) [&_[data-line]]:before:select-none [&_[data-line]]:before:text-end [&_[data-line]]:before:text-muted-foreground [&_[data-line]]:before:content-[counter(line)]"
+              : "[&_[data-line]]:px-(--qy-space-4)",
+            "not-has-[[data-line]]:px-(--qy-space-4)",
             "[&_[data-line]]:block [&_[data-line]]:min-h-[1lh]",
-            !lineNumbers && "[&_[data-line]]:px-(--qy-space-4)",
             "[&_[data-line][data-highlighted]]:bg-code-highlight [&_[data-line][data-highlighted]]:shadow-[inset_2px_0_0_var(--color-border-strong)]",
           )}
           data-slot="code-block-code"

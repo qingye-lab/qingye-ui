@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: a775fbfce3c85ac05bd4097fca64f41d119c415988981e931b9c47bda588eff7
+Source SHA-256: 881ad8ac62a6777c96411215a2ceb6e87a82346560b2e8da3f75a5bbdeb88012
 
 可拖拽关闭的边缘面板，移动端的首选浮层：支持拖动手柄、吸附高度、嵌套层叠和动作菜单。桌面端的详情面板用 Sheet 即可。
 
 ## Use and ownership
-- 可拖拽关闭的边缘面板，移动端的首选浮层：支持拖动手柄、吸附高度、嵌套层叠和动作菜单。桌面端的详情面板用 Sheet 即可。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 移动端需要拖动和吸附高度的边缘任务面板，或面向当前对象的动作列表。
+- Avoid: 拖动手柄不能成为唯一退出；手势关闭不等于业务取消，嵌套不能让父对象失去返回依据。
+- Library: 管理吸附、滑动、嵌套层次、名称与焦点；动作菜单的危险状态在悬停和焦点时持续可见。
+- Application: 决定退出条件、草稿保留、请求结果与何时禁止关闭；操作完成依据真实事件。
+
+## Composition
+- Title 命名对象，Panel 区分可滚动可选取内容，Footer / Close 提供可点出口；动作选项复用 DrawerMenu。
+
+## Responsive behavior
+- 保证安全区、长内容滚动与可点击关闭；真实滑动手势要在触屏上验证，模拟键盘不替代。
+
+## Customization
+- position 联动滑动方向，variant 控制边界；抽屉缓动来自公共 drawer 角色。
 
 ## Current exports
 - Drawer: function; owner drawer; PASS; props: DrawerPrimitive.Root.Props & {

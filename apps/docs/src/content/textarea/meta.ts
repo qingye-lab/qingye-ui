@@ -7,6 +7,36 @@ export default {
   source: "coss",
   exports: ["Textarea"],
   keywords: ["textarea", "多行", "文本域", "备注"],
+  design: {
+    "methods": [
+      "布白有用",
+      "随境取度",
+      "进退相承"
+    ],
+    "whenToUse": [
+      "编辑备注、正文或反馈，工作空间随内容增长。"
+    ],
+    "avoid": [
+      "不要用固定矮框隐藏长草稿；字符上限不能靠截断用户输入来表达。"
+    ],
+    "composition": [
+      "Field 提供名称和原位错误；底部工具栏用 InputGroupTextarea 与 block-end addon。"
+    ],
+    "stateOwner": {
+      "library": [
+        "多行编辑、字段关联与最小输入空间。"
+      ],
+      "application": [
+        "草稿、字数规则、自动保存及恢复策略。"
+      ]
+    },
+    "responsive": [
+      "限制高度时让内部滚动，保留完整文本；原生 rows 作为不支持自动高度时的起点。"
+    ],
+    "customization": [
+      "size 决定起始空间；外框 className 与原生 textarea 属性分别调整。"
+    ]
+  },
   api: [
     {
       name: "Textarea",

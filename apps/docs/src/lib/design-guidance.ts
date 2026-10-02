@@ -32,7 +32,6 @@ export function designFor(meta: ComponentMeta, slug: string): ComponentDesign {
     },
     responsive: ["窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"],
     customization: ["先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。", "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"],
-    ...meta.design,
   };
   if (slug === "button") {
     design.whenToUse = ["执行名称明确的动作。当前最重要的动作可以是保存，也可以是停止或返回。"];
@@ -41,5 +40,7 @@ export function designFor(meta: ComponentMeta, slug: string): ComponentDesign {
   if (slug === "table" || slug === "data-table") design.avoid = ["比较任务不应在窄屏直接删除关键列；保留二维关系，并给横向阅读清楚入口。"];
   if (slug === "toast") design.avoid = ["不要只在会消失的通知里表达需要修正的错误或唯一操作入口。"];
   if (slug === "theme-provider") design.stateOwner.application = ["文档级主题偏好与保存位置由宿主配置；品牌写 data-brand，密度写 data-density。"];
-  return design;
+  // Component decisions are authoritative; category and legacy slug rules only
+  // fill gaps for components that have not supplied a specific decision yet.
+  return { ...design, ...meta.design };
 }

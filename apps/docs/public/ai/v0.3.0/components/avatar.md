@@ -8,10 +8,19 @@ Source SHA-256: f7ed811070e5027f9011b53c9a0f6b00d74ec9dee722beae75485ea2f0192daa
 用图片或姓名缩写代表一个人或团队。图片加载失败或缺失时自动显示回退内容；多人时用头像组叠放。
 
 ## Use and ownership
-- 用图片或姓名缩写代表一个人或团队。图片加载失败或缺失时自动显示回退内容；多人时用头像组叠放。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 以图像或姓名缩写识别人、团队与集合成员。
+- Avoid: 把头像当作唯一姓名；在线状态只画绿色圆点；头像组的 +N 隐藏总人数含义。
+- Library: 图片加载与回退切换、尺寸、重叠关系。
+- Application: 人物身份、图片来源、姓名、成员总数与在线事实。
+
+## Composition
+- AvatarImage 与 AvatarFallback 共用身份；旁边已有姓名时图片 alt 留空，独立身份需有完整名称；状态配文字。
+
+## Responsive behavior
+- 小尺寸使用单字或可辨图标；头像组保留足够可见边缘，不把触摸操作压缩到头像直径。
+
+## Customization
+- size 调整身份标记，交互由包裹姓名与头像的公共链接或 Button 承担。
 
 ## Current exports
 - Avatar: function; owner avatar; PASS; props: AvatarPrimitive.Root.Props & { size?: AvatarSize }

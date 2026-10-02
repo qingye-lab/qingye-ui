@@ -22,4 +22,33 @@ export default {
     "在 Field 中请用 FieldLabel，它会自动关联控件并跟随禁用状态。",
     "必填标记用文字或星号加说明，不要只靠颜色。",
   ],
+  design: {
+    "methods": [
+      "名实相符",
+      "相成相制"
+    ],
+    "whenToUse": [
+      "为输入、选择或按钮式字段提供持续可见的名称。"
+    ],
+    "avoid": [
+      "placeholder 独自命名；同一 htmlFor 指向多个控件；装饰的必填星号被当成校验。"
+    ],
+    "composition": [
+      "Label 的 htmlFor 对应唯一控件 id；复杂字段用 Field 的 Label/Description/Error 关系，标签保持对象名称。"
+    ],
+    "stateOwner": {
+      "library": [
+        "原生 label、render 和标签文字角色。"
+      ],
+      "application": [
+        "字段 id、名称、必填规则、帮助与校验事实。"
+      ]
+    },
+    "responsive": [
+      "长标签允许换行，与对应字段保持邻接；调整密度不缩小可读文字。"
+    ],
+    "customization": [
+      "语义颜色与文字角色集中定义，必要时使用 render 接入原语标签而保留关联。"
+    ]
+  },
 } satisfies ComponentMeta;

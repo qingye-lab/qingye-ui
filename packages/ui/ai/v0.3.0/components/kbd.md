@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
-Source SHA-256: a28f631dadc1ad2757d9de5fa5069e43f531152fb1c8d1c45f979a8ea4b0a310
+Source SHA-256: 673023c15792f78413ae68384f841ba3b527df8d3fa7bcf9b7e9826ad37242b7
 
 标示键盘按键或快捷键组合，用在说明文字、按钮、输入框提示与菜单中。
 
 ## Use and ownership
-- 标示键盘按键或快捷键组合，用在说明文字、按钮、输入框提示与菜单中。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 提示实际存在的快捷键或记录一次键盘输入。
+- Avoid: 显示并未实现的快捷键；用 Kbd 当可点击按钮；图形按键符号没有可理解名称。
+- Library: kbd 语义与文字在按钮中的颜色继承。
+- Application: 平台快捷键、冲突处理、作用域与按键名称。
+
+## Composition
+- Kbd/KbdGroup 跟随对应动作的文字；实际监听在应用或原语中实现，提示不产生行为。
+
+## Responsive behavior
+- 复杂组合允许所在内容换行，不能缩小到不可辨的键帽。
+
+## Customization
+- className 控制呈现；平台符号与可访问文本按实际系统匹配。
 
 ## Current exports
 - Kbd: function; owner kbd; PASS; props: React.ComponentProps<"kbd">

@@ -50,9 +50,9 @@ export default function Demo() {
                 href="#"
               >
                 <ZapIcon aria-hidden="true" className="mb-6 size-5 opacity-80" />
-                <NavigationMenuLinkTitle>青云 UI 2.0</NavigationMenuLinkTitle>
+                <NavigationMenuLinkTitle>Qingye UI</NavigationMenuLinkTitle>
                 <NavigationMenuLinkDescription className="line-clamp-3">
-                  全新主题令牌与深色模式，现已发布。
+                  组件、主题与使用示例。
                 </NavigationMenuLinkDescription>
               </NavigationMenuLink>
               <ul className="grid gap-0.5">

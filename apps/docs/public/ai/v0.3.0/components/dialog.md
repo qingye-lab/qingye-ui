@@ -3,15 +3,24 @@
 Package: @qingye/ui@0.3.0
 Import: @qingye/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: a7bb4c84768769f1b4c567e2147649863c8f51dd5b321b2d0ea928569d7fb4c5
+Source SHA-256: f342c68f51f9cc7e0eea889ef13140b42b2238fb8910a1b87a9a9dd026e509c7
 
 在当前页面之上打开一个模态窗口，用于填写表单、查看详情或完成一个独立的小任务。需要用户二次确认的危险操作改用 AlertDialog。
 
 ## Use and ownership
-- 在当前页面之上打开一个模态窗口，用于填写表单、查看详情或完成一个独立的小任务。需要用户二次确认的危险操作改用 AlertDialog。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 在当前对象上完成确有必要独立聚焦的小任务，完成或退出后能合理返回。
+- Avoid: 不要把每个结果都变成模态；关闭窗口不等于撤销已保存动作或已取消后台请求。
+- Library: 提供名称关联、焦点限制与返回、关闭原因、滚动正文及内置关闭入口的空间。
+- Application: 控制未保存内容、异步结果、错误恢复与关闭拦截；业务完成后才更新结果并决定退出。
+
+## Composition
+- Header 标识对象，Panel 承载工作，Footer 承接保存与退出；从 Menu 打开时保留外部 Dialog owner。
+
+## Responsive behavior
+- 贴底模式保留可见退出与安全区，长正文在 Panel 滚动；标题不能被关闭按钮覆盖。
+
+## Customization
+- 按任务选择底部贴合与 Footer 边界；showCloseButton 关闭时必须有明确替代退出。
 
 ## Current exports
 - Dialog: const; owner dialog; PASS

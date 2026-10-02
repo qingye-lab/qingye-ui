@@ -111,7 +111,30 @@ export function TagInput({
   const flashTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
   const hintId = React.useId();
   const noticeId = React.useId();
-  const interactive = !disabled && !readOnly;
+  const [inheritedDisabled, setInheritedDisabled] = React.useState(false);
+  const isDisabled = Boolean(disabled) || inheritedDisabled;
+  const interactive = !isDisabled && !readOnly;
+
+  const syncInheritedDisabled = React.useCallback(() => {
+    setInheritedDisabled(Boolean(inputRef.current?.matches(":disabled")));
+  }, []);
+
+  React.useLayoutEffect(syncInheritedDisabled);
+
+  React.useLayoutEffect(() => {
+    const input = inputRef.current;
+    if (!input) return;
+    // A Field can update only its Control through context while TagInput's
+    // element stays stable. Native fieldsets disable descendants without
+    // changing the input's disabled attribute. Subscribe to both sources.
+    const observer = new MutationObserver(syncInheritedDisabled);
+    const options = { attributes: true, attributeFilter: ["disabled"] };
+    observer.observe(input, options);
+    for (let ancestor = input.parentElement; ancestor; ancestor = ancestor.parentElement) {
+      if (ancestor.tagName === "FIELDSET") observer.observe(ancestor, options);
+    }
+    return () => observer.disconnect();
+  }, [syncInheritedDisabled]);
 
   React.useEffect(() => () => clearTimeout(flashTimer.current), []);
 
@@ -270,7 +293,7 @@ export function TagInput({
     event: React.KeyboardEvent<HTMLSpanElement>,
     index: number,
   ) => {
-    if (event.target !== event.currentTarget || disabled) return;
+    if (event.target !== event.currentTarget || isDisabled) return;
     const rtl = isRtl(event.currentTarget);
     const previous = rtl ? "ArrowRight" : "ArrowLeft";
     const next = rtl ? "ArrowLeft" : "ArrowRight";
@@ -318,7 +341,7 @@ export function TagInput({
   };
 
   const handleControlMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled || event.target === inputRef.current) return;
+    if (isDisabled || event.target === inputRef.current) return;
     // Clicking the box or a tag places the caret in the input.
     event.preventDefault();
     inputRef.current?.focus();
@@ -338,12 +361,12 @@ export function TagInput({
     <>
       <div
         className={cn(
-          "relative inline-flex min-h-9 w-full cursor-text flex-wrap gap-(--qy-space-1) rounded-control border border-input bg-background not-dark:bg-clip-padding p-[calc(var(--qy-space-1)-1px)] text-base shadow-xs/5 outline-none ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-shadow *:min-h-7 before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-has-disabled:not-focus-within:not-has-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] focus-within:border-ring focus-within:ring-[length:var(--qy-focus-input-width)] has-disabled:pointer-events-none has-aria-invalid:border-destructive/36 has-disabled:opacity-64 has-[:disabled,[aria-invalid=true]]:shadow-none focus-within:shadow-none focus-within:has-aria-invalid:border-destructive/64 focus-within:has-aria-invalid:ring-destructive/16 pointer-coarse:min-h-11 pointer-coarse:*:min-h-9 sm:min-h-8 sm:text-sm sm:*:min-h-6 dark:not-has-disabled:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-has-disabled:not-focus-within:not-has-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)]",
+          "relative inline-flex min-h-9 w-full cursor-text flex-wrap gap-(--qy-space-1) rounded-control border border-input bg-background not-dark:bg-clip-padding p-[calc(var(--qy-space-1)-1px)] text-base shadow-xs/5 outline-none ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-shadow *:min-h-7 before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-has-disabled:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] has-focus-visible:border-ring has-focus-visible:ring-[length:var(--qy-focus-input-width)] has-disabled:pointer-events-none has-aria-invalid:border-destructive/36 has-disabled:opacity-64 has-[:disabled,[aria-invalid=true]]:shadow-none has-focus-visible:shadow-none has-focus-visible:has-aria-invalid:border-destructive/64 has-focus-visible:has-aria-invalid:ring-destructive/16 pointer-coarse:min-h-11 pointer-coarse:*:min-h-9 sm:min-h-8 sm:text-sm sm:*:min-h-6 dark:not-has-disabled:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-has-disabled:not-has-focus-visible:not-has-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)]",
           size === "sm" && "min-h-8 *:min-h-6 sm:min-h-7 sm:*:min-h-5",
           size === "lg" && "min-h-10 *:min-h-8 sm:min-h-9 sm:*:min-h-7",
           className,
         )}
-        data-disabled={disabled ? "" : undefined}
+        data-disabled={isDisabled ? "" : undefined}
         data-size={size}
         data-slot="tag-input"
         data-testid="tag-input"
@@ -390,7 +413,7 @@ export function TagInput({
           aria-invalid={invalid || undefined}
           autoComplete={inputProps.autoComplete ?? "off"}
           className={cn(
-            "min-w-12 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/72 sm:text-sm [[data-slot=tag-input-tag]+&]:ps-[calc(var(--qy-space-1)*0.5)]",
+            "min-w-12 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground sm:text-sm [[data-slot=tag-input-tag]+&]:ps-[calc(var(--qy-space-1)*0.5)]",
             size === "sm" ? "ps-[calc(var(--qy-space-1)*1.5)]" : "ps-(--qy-space-2)",
             inputClassName,
           )}
@@ -440,7 +463,7 @@ export function TagInput({
       {name
         ? tags.map((tag) => (
             <input
-              disabled={disabled}
+              disabled={isDisabled}
               key={tag}
               name={name}
               type="hidden"

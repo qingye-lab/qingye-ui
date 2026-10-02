@@ -8,10 +8,19 @@ Source SHA-256: 6d867ade3d6a3ce26a166dda3e5bd8bf2b6c3da46569b3f95fde92bf792fdf7c
 以「名称—值」成对展示一个对象的详情，如订单信息、设备参数、账号资料。渲染为语义化的 <dl>。
 
 ## Use and ownership
-- 以「名称—值」成对展示一个对象的详情，如订单信息、设备参数、账号资料。渲染为语义化的 <dl>。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
-- Library: 当前导出和属性定义的基础交互、可访问语义与样式。
-- Application: 数据、权限、动作范围、异步结果与持久化。
+- 一个对象的名称和值成对出现，读者需要辨认属性关系。
+- Avoid: 把零、未填写、不适用和未知都写成破折号；多对象比较拆成互不对齐的详情列。
+- Library: dl/dt/dd 语义、成对布局、部位与复制组合。
+- Application: 属性事实、空值含义、单位和复制原文。
+
+## Composition
+- 每个 Item 包含 Term 与 Details；复制值使用原文本并明确对象，说明和链接仍属于该值。
+
+## Responsive behavior
+- 长标识符需能断行；horizontal 留名称列，过窄时在项目组合切到 vertical 或 grid。
+
+## Customization
+- layout/--description-list-term/--description-list-column 调整关系；多个对象横向比较使用 Table。
 
 ## Current exports
 - DescriptionDetails: function; owner description-list; PASS; props: DescriptionDetailsProps
