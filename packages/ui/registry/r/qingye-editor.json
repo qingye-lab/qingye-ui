@@ -3,7 +3,7 @@
   "name": "qingye-editor",
   "type": "registry:block",
   "title": "Qingye project editor",
-  "description": "Project-owned composition sourced from @qingye/ui@0.3.0; draft and save callbacks belong to the application.",
+  "description": "Project-owned composition sourced from @qingye/ui@0.4.0; draft and save callbacks belong to the application.",
   "files": [
     {
       "path": "registry/resource-editor.tsx",
@@ -13,6 +13,6 @@
     }
   ],
   "dependencies": [
-    "@qingye/ui@0.3.0"
+    "@qingye/ui@0.4.0"
   ]
 }

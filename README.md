@@ -101,7 +101,9 @@ node scripts/shot.mjs <component>     # 浅色/深色 × 桌面/手机截图
 
 ## 发布
 
-更新 `packages/ui/package.json` 的版本号，推送匹配该版本的 `v<版本号>` 标签，Release 工作流会构建并把 tarball 附加到 GitHub Release。
+同步更新 `packages/ui/package.json`、`packages/tooling/package.json` 与 `apps/studio/package.json` 的版本号，运行 `pnpm --filter @qingye/ui gen:catalog` 刷新当前版本资料。推送匹配 UI 版本的 `v<版本号>` 标签，Release 工作流在类型、测试、浏览器和实际安装消费验证通过后，将 UI 与工具包的 tarball 附加到 GitHub Release。
+
+当前版本的变化与升级注意事项见 [v0.4.0 发布说明](./docs/releases/v0.4.0.md)。
 
 ## 许可
 

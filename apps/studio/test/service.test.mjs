@@ -12,7 +12,8 @@ test('local service protects origin/session/project, shares dry-run/apply and co
   const root=mkdtempSync(resolve(tmpdir(),'qingye-service-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
   const put=(path,value)=>{mkdirSync(dirname(resolve(root,path)),{recursive:true});writeFileSync(resolve(root,path),typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');};
   const packagePath=fileURLToPath(new URL('../../../packages/ui/',import.meta.url));
-  put('package.json',{name:'service-fixture',type:'module',dependencies:{'@qingye/ui':'0.3.0'}});mkdirSync(resolve(root,'node_modules/@qingye'),{recursive:true});symlinkSync(packagePath,resolve(root,'node_modules/@qingye/ui'));
+  const packageVersion=JSON.parse(readFileSync(resolve(packagePath,'package.json'),'utf8')).version;
+  put('package.json',{name:'service-fixture',type:'module',dependencies:{'@qingye/ui':packageVersion}});mkdirSync(resolve(root,'node_modules/@qingye'),{recursive:true});symlinkSync(packagePath,resolve(root,'node_modules/@qingye/ui'));
   put('ui.config.json',{schemaVersion:1,package:'@qingye/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'ui.theme.generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}});
   put('src/ui.ts','export { Button } from "@qingye/ui/components/button";');put('src/ui.css','');
   const theme={schemaVersion:1,brand:'fixture',common:{},light:{'--qy-primary':'#123456'},dark:{},compact:{}};put('ui.theme.json',theme);put('ui.theme.generated.css',themeCss(theme,'class'));

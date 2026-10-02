@@ -1,6 +1,6 @@
 {
   "name": "@qingye/tooling",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Explicit local project diagnostics and theme tools for Qingye UI",
   "type": "module",
   "license": "MIT",
