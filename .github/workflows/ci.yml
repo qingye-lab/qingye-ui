@@ -25,6 +25,7 @@ jobs:
         run: |
           pnpm test
           node scripts/lib/facts-ledger.test.mjs
+          node --test scripts/lib/process-exit.test.mjs
       - name: Build library
         run: pnpm --filter @qingye/ui build
       - name: Build Studio

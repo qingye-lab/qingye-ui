@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { chromium } from "playwright-core";
+import { waitForProcessExit } from "./lib/process-exit.mjs";
 
 export const variants = [
   { name: "light-desktop", theme: "light", width: 1100, height: 900 },
@@ -17,10 +18,10 @@ export function selectVariants(only) {
   return variants.filter((v) => names.includes(v.name));
 }
 
-const processes = () => execFileSync("ps", ["-axo", "pid=,ppid=,command="], { encoding: "utf8" })
+const processes = () => execFileSync("ps", ["-axo", "pid=,ppid=,stat=,command="], { encoding: "utf8" })
   .split("\n").map((line) => {
-    const match = line.match(/^\s*(\d+)\s+(\d+)\s+(.+)$/);
-    return match && { pid: Number(match[1]), parent: Number(match[2]), command: match[3] };
+    const match = line.match(/^\s*(\d+)\s+(\d+)\s+(\S+)\s+(.+)$/);
+    return match && { pid: Number(match[1]), parent: Number(match[2]), state: match[3], command: match[4] };
   }).filter(Boolean);
 
 export async function closeWithTimeout(resource, label) {
@@ -102,9 +103,10 @@ export async function withBrowser(run) {
     try { capture(); } catch (error) { errors.push(error); }
     try { await closeOwnedBrowser(); } catch (error) { errors.push(error); }
     try {
-      const alive = new Set(processes().map((p) => p.pid));
-      lifecycle.closed = lifecycle.descendantPids.every((pid) => !alive.has(pid));
-      console.log(`browser cleanup ${JSON.stringify({ nodePid: process.pid, closed: lifecycle.closed })}`);
+      const exit = await waitForProcessExit(lifecycle.descendantPids, processes);
+      lifecycle.closed = exit.closed;
+      lifecycle.exitCheck = exit;
+      console.log(`browser cleanup ${JSON.stringify({ nodePid: process.pid, ...exit })}`);
       if (!lifecycle.closed) errors.push(new Error("task-owned browser process remains after close"));
     } catch (error) {
       errors.push(error);

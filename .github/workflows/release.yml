@@ -28,6 +28,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm verify:facts
+      - run: node --test scripts/lib/process-exit.test.mjs
       - run: pnpm --filter @qingye/ui build
       - name: Build Studio
         run: pnpm studio:build
