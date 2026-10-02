@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "run": "n-t01-3",
+  "group": "new",
+  "task": "t01",
+  "replicate": 3,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "status": "PASS",
+  "promptSHA256": "5f513d23ee3d4241c919784e9918fd6673b3d555fe0106937474f445c005081d",
+  "taskSHA256": "23b64ed679a8bae9292a5fb876f60055a0819c650db8ce32f742e640ad93a117",
+  "fixtureSHA256": "7767ca2a47ee0cb8d31090bc08ab6e6732e0596e59e08f4e42da53c066becbfd",
+  "targetVersion": "0.3.0",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "sourceFiles": [
+    {
+      "path": "Editor.tsx",
+      "symlink": false,
+      "sha256": "d9f9647a0ca572f25ccc5d031656a345add12a8430e8ee0117b21f6a9f91678e"
+    },
+    {
+      "path": "report.md",
+      "symlink": false,
+      "sha256": "299c6e21ed32a618a2e2ea205b21ce893e98f3068e4cfa62827952b45bcf5cf9"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "69849c530bf1faad6a1ab2df6abe3d563c90ebefeeda0df9a74be240666f1b9d"
+    }
+  ],
+  "changedFiles": [
+    "Editor.tsx",
+    "report.md",
+    "state.ts"
+  ],
+  "materials": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "82b405706c3a61e21626159dafb4e802264dad7445c5e38a7d5fa0ca0e8b75b4"
+    },
+    {
+      "path": "cli-docs-button.json",
+      "symlink": false,
+      "sha256": "8f277f0525eda753eb53708107f24714640894b469f0a580baabf98759afb7ae"
+    },
+    {
+      "path": "cli-docs-field.json",
+      "symlink": false,
+      "sha256": "71034547a2db86acb73efac96a8bfef31872172346b121f4b7b33de7c162e110"
+    },
+    {
+      "path": "cli-docs-input.json",
+      "symlink": false,
+      "sha256": "1304569621c206b5c15193855201872f1b30bd7e9d527d68a1bcba53c100e3b7"
+    },
+    {
+      "path": "cli-docs-textarea.json",
+      "symlink": false,
+      "sha256": "d63ff9d338e8ceb75a554f9741285b59c7d11c7b8659441e71a40eacfb7d5981"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "41cfebfd52016681932f84a617c86544dd40d6f1b976de67b4c0e4b68b92b6bd"
+    }
+  ],
+  "checks": {
+    "snapshot": {
+      "status": "PASS",
+      "targetUnchanged": true,
+      "materialsUnchanged": true
+    },
+    "boundaries": {
+      "status": "PASS",
+      "failures": []
+    },
+    "types": {
+      "status": "PASS",
+      "diagnostics": [],
+      "invalidImports": 0,
+      "invalidProps": 0
+    },
+    "behavior": {
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "[state-loss] reducer retains an error draft and permits an intentional retry",
+          "status": "PASS",
+          "category": "state-loss",
+          "errors": []
+        },
+        {
+          "name": "[state-loss] late save response preserves newer typing and ignores stale requests",
+          "status": "PASS",
+          "category": "state-loss",
+          "errors": []
+        },
+        {
+          "name": "[false-success] unknown retains request identity and blocks duplicate writes",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[api] real fields call API with draft/version, preserve focus and later edits",
+          "status": "PASS",
+          "category": "api",
+          "errors": []
+        },
+        {
+          "name": "[state-loss] returned draft and inline error remain usable",
+          "status": "PASS",
+          "category": "state-loss",
+          "errors": []
+        },
+        {
+          "name": "[false-success] rejected transport is unknown until a real check confirms success",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[false-success] failed query remains unknown and does not clear the working draft",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        }
+      ],
+      "infrastructureError": null,
+      "exitCode": 0
+    }
+  },
+  "metrics": {
+    "invalidImports": 0,
+    "invalidProps": 0,
+    "typeErrors": 0,
+    "wrongOwnerOrScatteredEdits": 0,
+    "assertionFailures": 0,
+    "stateLossFailures": 0,
+    "falseSuccessFailures": 0,
+    "humanCorrections": 0,
+    "elapsedSeconds": 274.149,
+    "toolCalls": null,
+    "observedHarnessToolCalls": 1
+  },
+  "observations": {
+    "externalFileEdits": null,
+    "disallowedReads": null,
+    "transcript": null
+  },
+  "evaluatedAt": "2026-10-02T06:33:46.455Z",
+  "evaluationElapsedSeconds": 6.043,
+  "limitations": [
+    "Restricted fixture and small sample; no population-level model quality claim.",
+    "Behavior is jsdom/pure-state evidence, not real browser, assistive technology, visual or production acceptance.",
+    "Read/write scope is an instruction and transcript audit boundary, not OS filesystem isolation.",
+    "Only wrapper calls are automatically counted; total tools/human corrections/time remain null unless supplied by the independent runner."
+  ]
+}

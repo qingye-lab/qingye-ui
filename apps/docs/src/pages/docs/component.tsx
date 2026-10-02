@@ -1,3 +1,5 @@
+import { designFor } from "@/lib/design-guidance";
+import { Facts } from "@/components/prose";
 import { Badge } from "@qingye/ui/components/badge";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@qingye/ui/components/empty";
 import { Kbd } from "@qingye/ui/components/kbd";
@@ -52,6 +54,7 @@ export default function ComponentPage() {
 
 function ComponentDoc({ entry }: { entry: ComponentEntry }) {
   const { zh, en } = splitTitle(entry.title);
+  const design = designFor(entry, entry.slug);
   return (
     <article>
       <PageHeader
@@ -83,6 +86,8 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
         </div>
       </PageHeader>
 
+      <H2 id="decisions">使用判断</H2>
+      <Facts items={[{ term: "何时使用", detail: design.whenToUse.join(" ") }, { term: "避免", detail: design.avoid.join(" ") }, { term: "相关方法", detail: <A href="/docs/design-philosophy">{design.methods.join("、")}</A> }, { term: "状态归属", detail: `公共库：${design.stateOwner.library.join(" ")} 应用：${design.stateOwner.application.join(" ")}` }, { term: "响应与调整", detail: [...design.responsive, ...design.customization].join(" ") }]} />
       <H2 id="usage">导入</H2>
       <CodeBlock code={importSnippet(entry.exports)} />
       <P className="mt-3 text-[0.875rem] text-muted-foreground">

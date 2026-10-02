@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "n-t03-1",
+  "group": "new",
+  "task": "t03",
+  "replicate": 1,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "preparedAt": "2026-10-02T06:16:37.841Z",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "permittedFiles": [
+    "state.ts",
+    "BulkPanel.tsx",
+    "report.md"
+  ],
+  "fixedFiles": [],
+  "originalFiles": [
+    {
+      "path": "BulkPanel.tsx",
+      "symlink": false,
+      "sha256": "f12e88b96f024b65e9b74f1db669591dbc9b10f5f63902501cf93a147b7ee01e"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "f881f1878b34a92db838648a8b66ad070854f5d79b41f8571125050e6eb7f1c3"
+    }
+  ],
+  "materialFiles": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "b7af749ad95a097ab60e578e2d41b00f998d55268dd05c82108fb1e736af0d21"
+    },
+    {
+      "path": "cli-docs-button.json",
+      "symlink": false,
+      "sha256": "8f277f0525eda753eb53708107f24714640894b469f0a580baabf98759afb7ae"
+    },
+    {
+      "path": "cli-docs-data-table.json",
+      "symlink": false,
+      "sha256": "48d2c522332ef02495b8feff5bda14f691b1a80209304fe6300f82fcbac42770"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "c7da46759a2da9fbe100495a26fa860dbdf3b4fd0824a9de0df53e43c3aec135"
+    }
+  ],
+  "taskSHA256": "698904a565804884cbe2d429e18430f95ad398232aba4896098781e5be6ad32d",
+  "fixtureSHA256": "b5cc11d7736d7bdefbdba8fef207a00a89dcdd24501e3975c8b2791c6dc90fd5",
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "targetVersion": "0.3.0"
+}

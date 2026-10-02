@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync, existsSync, readFileSync, realpathSync } from
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OUT, ROOT, ts, files, recursiveFiles, read, json, parseTS, visit, exportedSymbols, metadata, tokenDefinitions, pathsForFacts, fingerprint, revision, exists } from './lib/ui-facts.mjs';
+import { componentProvenance } from './lib/component-provenance.mjs';
 
 export function generateCapabilities() {
   const paths = files('packages/ui/src/components', /\.tsx?$/);
@@ -14,7 +15,8 @@ export function generateCapabilities() {
     const name = path.split('/').pop().replace(/\.tsx?$/, '');
     const metaPath = `apps/docs/src/content/${name}/meta.ts`;
     const meta = metadata(metaPath);
-    const upstream = provenance.components.find((entry) => entry.file === `src/components/${name}.tsx`);
+    const origin = componentProvenance(path, provenance.components);
+    const upstream = origin?.entry;
     const valueExports = symbols[path].filter((entry) => entry.kind === 'value').map((entry) => entry.name);
     const usageResolution = meta.exports.map((raw) => {
       const kind = raw.startsWith('type ') ? 'type' : 'value';
@@ -26,7 +28,7 @@ export function generateCapabilities() {
     const missing = usageResolution.filter((entry) => entry.status === 'UNVERIFIED').map((entry) => entry.name);
     const entry = catalog.components.find((entry) => entry.name === name);
     const header = read(path).split('\n').slice(0, 4).filter((line) => /Adapted from|coss ui|locally authored/i.test(line));
-    return { name, status: 'PRESENT', source: path, exports: symbols[path], metadata: { path: metaPath, ...meta, usageResolution }, provenance: upstream ? { kind: 'coss', trackingStatus: 'PRESENT', header, ...upstream } : { kind: meta.source, source: metaPath, header, trackingStatus: meta.source === 'coss' ? 'UNVERIFIED' : 'PRESENT', ...(meta.source === 'coss' ? { reason: 'Metadata/source header marks coss, but no coss-source.json entry exists' } : {}) }, catalog: { present: Boolean(entry), version: catalog.version, source: 'packages/ui/catalog.json' }, dist: { js: exists(`packages/ui/dist/components/${name}.js`), declarations: exists(`packages/ui/dist/components/${name}.d.ts`), status: exists(`packages/ui/dist/components/${name}.js`) && exists(`packages/ui/dist/components/${name}.d.ts`) ? 'PRESENT' : 'NOT_RUN' }, consistency: { status: missing.length || !entry || (upstream ? 'coss' !== meta.source : meta.source === 'coss') ? 'UNVERIFIED' : 'PASS', missingPublicMetadataExports: missing } };
+    return { name, status: 'PRESENT', source: path, exports: symbols[path], metadata: { path: metaPath, ...meta, usageResolution }, provenance: upstream ? { kind: 'coss', trackingStatus: 'PRESENT', header, ...upstream, ...(origin.chain.length ? { aliasOf: origin.implementation, forwardingChain: origin.chain, evidenceKind: 'AST_PURE_REEXPORT' } : {}) } : { kind: meta.source, source: metaPath, header, trackingStatus: meta.source === 'coss' ? 'UNVERIFIED' : 'PRESENT', ...(meta.source === 'coss' ? { reason: 'Metadata/source header marks coss, but no direct or proven re-export coss-source.json entry exists' } : {}) }, catalog: { present: Boolean(entry), version: catalog.version, source: 'packages/ui/catalog.json' }, dist: { js: exists(`packages/ui/dist/components/${name}.js`), declarations: exists(`packages/ui/dist/components/${name}.d.ts`), status: exists(`packages/ui/dist/components/${name}.js`) && exists(`packages/ui/dist/components/${name}.d.ts`) ? 'PRESENT' : 'NOT_RUN' }, consistency: { status: missing.length || !entry || (upstream ? 'coss' !== meta.source : meta.source === 'coss') ? 'UNVERIFIED' : 'PASS', missingPublicMetadataExports: missing } };
   });
   const metadataFields = [];
   const types = parseTS('apps/docs/src/lib/types.ts');

@@ -23,10 +23,12 @@ jobs:
         run: pnpm typecheck
       - name: Test
         run: |
-          pnpm --filter @qingye/ui test
+          pnpm test
           node scripts/lib/facts-ledger.test.mjs
       - name: Build library
         run: pnpm --filter @qingye/ui build
+      - name: Build Studio
+        run: pnpm studio:build
       - name: Build docs
         run: pnpm --filter docs build
       - name: Install audit browser
@@ -35,6 +37,22 @@ jobs:
         run: |
           mkdir -p test-results/ci-audit
           node scripts/run-browser-audit.mjs --report test-results/ci-audit/report.json
+      - name: Task patterns and theme previews
+        run: |
+          node scripts/run-browser-audit.mjs --patterns
+          node scripts/run-browser-audit.mjs --foundations
+          node scripts/verify-studio.mjs
+      - name: Upload task and theme evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: task-and-theme-evidence
+          path: |
+            test-results/task-patterns/
+            test-results/ui-foundations-final/
+            test-results/studio/**/report.json
+            test-results/studio/**/*.png
+          if-no-files-found: warn
       - name: Upload browser audit evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -45,7 +63,24 @@ jobs:
       - name: Pack
         run: |
           pnpm --filter @qingye/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
+          pnpm --filter @qingye/tooling pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           ls dist-pack/*.tgz
+      - name: Verify installed package consumers
+        run: node scripts/verify-packed-consumers.mjs --tgz "dist-pack/qingye-ui-$(node -p "require('./packages/ui/package.json').version").tgz"
+      - name: Verify installed tooling
+        run: node scripts/verify-packed-tooling.mjs "dist-pack/qingye-ui-$(node -p "require('./packages/ui/package.json').version").tgz" "dist-pack/qingye-tooling-$(node -p "require('./packages/tooling/package.json').version").tgz"
+      - name: Upload installed consumer evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: installed-consumer-evidence
+          path: |
+            test-results/packed-consumers/**/report.json
+            test-results/packed-consumers/**/*.png
+            test-results/packed-consumers/**/*.log
+            test-results/packed-tooling/**/report.json
+            test-results/packed-tooling/**/*.log
+          if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         with:
           name: qingye-ui-package

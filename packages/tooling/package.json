@@ -1,0 +1,15 @@
+{
+  "name": "@qingye/tooling",
+  "version": "0.3.0",
+  "description": "Explicit local project diagnostics and theme tools for Qingye UI",
+  "type": "module",
+  "license": "MIT",
+  "bin": { "qingye-ui": "bin/qingye-ui.mjs" },
+  "exports": { ".": "./dist/index.js", "./schemas/*": "./schemas/*" },
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "bin", "schemas", "README.md"],
+  "scripts": { "build": "tsc", "typecheck": "tsc --noEmit", "test": "pnpm build && node --test test/*.test.mjs", "prepack": "pnpm build" },
+  "dependencies": { "typescript": "5.9.3", "postcss": "8.5.28" },
+  "devDependencies": { "@types/node": "24.10.1" },
+  "engines": { "node": ">=22" }
+}

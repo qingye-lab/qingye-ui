@@ -1,0 +1,128 @@
+/*
+ * motion.css — library-wide motion policy.
+ *
+ * Components carry their own transitions (tuned upstream). This file adds only
+ * what is global or missing:
+ *
+ *   1. Press feedback for anything marked `.qy-pressable`.
+ *   2. Entrance motion for select and menu popups, which ship without one.
+ *   3. Input modality: keyboard navigation is immediate, because repeated
+ *      arrow-key movement should never wait on an animation.
+ *   4. Reduced motion: movement is removed, state changes stay legible.
+ *
+ * Rules here are intentionally unlayered so they win over utility classes.
+ */
+
+/* --- 1. Press feedback --------------------------------------------------- */
+.qy-pressable {
+  transition-property: scale, box-shadow, background-color, color, border-color;
+  transition-duration: var(--qy-duration-press), var(--qy-duration-press),
+    var(--qy-duration-fast), var(--qy-duration-fast), var(--qy-duration-fast);
+  transition-timing-function: var(--qy-ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-ui-input="keyboard"])
+    .qy-pressable:not(:disabled, [aria-disabled="true"], [data-disabled], [data-loading]):active {
+    scale: 0.97;
+  }
+}
+
+/* --- 2. Popup entrance --------------------------------------------------- */
+:is([data-slot="select-popup"], [data-slot="menu-popup"]) {
+  transition-property: opacity, scale;
+  transition-duration: var(--qy-duration-fast);
+  transition-timing-function: var(--qy-ease-out);
+}
+
+:is([data-slot="select-popup"], [data-slot="menu-popup"]):is(
+    [data-starting-style],
+    [data-ending-style]
+  ) {
+  opacity: 0;
+  scale: 0.97;
+}
+
+/* Exit is quicker than entry: dismissal should feel instant. */
+:is([data-slot="select-popup"], [data-slot="menu-popup"])[data-ending-style] {
+  transition-duration: var(--qy-duration-press);
+}
+
+/* The check mark settles in rather than appearing. */
+[data-slot="checkbox-indicator"] {
+  transition:
+    opacity var(--qy-duration-press) var(--qy-ease-out),
+    scale var(--qy-duration-fast) var(--qy-ease-out),
+    background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+
+/* Programmatic changes that must not animate opt out with data-instant. */
+[data-slot][data-instant] {
+  transition-duration: 0s !important;
+}
+
+/* --- Content entry helpers ----------------------------------------------- */
+@keyframes qy-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes qy-rise-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+/* Feedback that appears in place, such as an inline confirmation. */
+[data-motion="fade-in"] {
+  animation: qy-fade-in var(--qy-duration-feedback) var(--qy-ease-out) backwards;
+}
+
+/* A section or panel arriving after navigation or a data load. */
+[data-motion="rise-in"] {
+  animation: qy-rise-in var(--qy-duration-base) var(--qy-ease-out) backwards;
+}
+
+/*
+ * Staggered children. Set `--qy-index` on each child; the delay is capped so
+ * a long list never crawls in.
+ */
+[data-motion="stagger"] > * {
+  animation: qy-rise-in var(--qy-duration-base) var(--qy-ease-out) backwards;
+  animation-delay: calc(var(--qy-stagger) * min(var(--qy-index, 0), 8));
+}
+
+/* --- 3. Keyboard input is immediate -------------------------------------- */
+:root[data-ui-input="keyboard"] :is(.qy-pressable, [data-slot], [data-slot]::before, [data-slot]::after) {
+  transition-duration: 0s !important;
+}
+
+:root[data-ui-input="keyboard"] [data-motion] {
+  animation: none;
+}
+
+/* --- 4. Reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  /* Keep colour and opacity changes; drop movement and size changes. */
+  :is(.qy-pressable, [data-slot], [data-slot]::before, [data-slot]::after) {
+    transition-property: opacity, color, background-color, border-color, box-shadow !important;
+  }
+
+  .qy-pressable:active {
+    scale: none;
+  }
+
+  /* Decorative keyframes stop; the loading spinner keeps turning. */
+  [data-slot="skeleton"],
+  [data-slot="toast-root"],
+  [data-slot="otp-field-caret"] {
+    animation: none !important;
+  }
+
+  [data-motion] {
+    animation-name: qy-fade-in !important;
+    animation-delay: 0s !important;
+  }
+}

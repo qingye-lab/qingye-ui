@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "brand": "azure",
+  "common": {
+    "--qy-radius-control": "0.5rem",
+    "--qy-radius-panel": "0.75rem"
+  },
+  "light": {
+    "--qy-primary": "#174c83",
+    "--qy-primary-foreground": "#ffffff"
+  },
+  "dark": {
+    "--qy-primary": "#93c5fd",
+    "--qy-primary-foreground": "#101827"
+  },
+  "compact": {
+    "--qy-control-md": "1.75rem",
+    "--qy-panel-padding": "1rem"
+  }
+}

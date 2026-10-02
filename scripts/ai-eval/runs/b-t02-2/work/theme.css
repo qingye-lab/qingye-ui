@@ -1,0 +1,4 @@
+/* Sentinel project theme: shared spacing between fields in a FieldGroup. */
+html[data-brand="sentinel"] {
+  --qy-field-group-gap: 12px;
+}

@@ -4,9 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/generate-fixtures.mjs && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/generate-fixtures.mjs && node --test test/*.test.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",

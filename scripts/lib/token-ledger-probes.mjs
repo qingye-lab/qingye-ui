@@ -1,6 +1,9 @@
 // Probe recipes describe experiments, not the generated token-consumer index.
 // Keep measured states narrow. These selectors come from the actual source/demos.
 export const PROBES = [
+  { id: 'field-relationship-gap', sourceComponent: 'field', demo: '01-default', part: 'field', selector: '[data-demo="01-default"] [data-slot="field"]', token: '--qy-field-gap', override: '17px', properties: ['gap'], state: 'default' },
+  { id: 'field-group-relationship-gap', sourceComponent: 'field', demo: '04-group', part: 'field-group', selector: '[data-demo="04-group"] [data-slot="field-group"]', token: '--qy-field-group-gap', override: '37px', properties: ['gap'], state: 'default' },
+  { id: 'table-bulk-action-gap', sourceComponent: 'data-table', demo: '02-selection', part: 'data-table-selection', selector: '[data-demo="02-selection"] [data-slot="data-table-selection"]', token: '--qy-action-gap', override: '17px', properties: ['gap'], state: 'selected', action: 'select-table-row' },
   { id: 'button-primary', sourceComponent: 'button', demo: '01-variants', part: 'button', selector: '[data-demo="01-variants"] [data-slot="button"]', token: '--qy-primary', override: 'rgb(12, 130, 210)', properties: ['background-color'], variant: 'default', state: 'default' },
   { id: 'button-radius', sourceComponent: 'button', demo: '01-variants', part: 'button', selector: '[data-demo="01-variants"] [data-slot="button"]', token: '--qy-radius', override: '19px', properties: ['border-radius'], variant: 'default', state: 'default' },
   { id: 'button-control', sourceComponent: 'button', demo: '01-variants', part: 'button', selector: '[data-demo="01-variants"] [data-slot="button"]', token: '--qy-control-md', override: '51px', properties: ['height'], variant: 'default', state: 'default' },

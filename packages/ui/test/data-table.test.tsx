@@ -102,6 +102,43 @@ test("renders skeleton rows while loading and uses rowCount for server pages", (
   expect(onPaginationChange).toHaveBeenLastCalledWith({ pageIndex: 1, pageSize: 10 });
 });
 
+test("external selection keeps the active query and its toolbar visible", async () => {
+  const user = userEvent.setup();
+  const props = { columns, data: devices, enableRowSelection: true, getRowId: (row: Device) => row.id };
+  const { rerender } = render(<DataTable {...props} rowSelection={{}} />);
+  const search = screen.getByRole("searchbox", { name: "搜索表格" });
+  await user.type(search, "收银");
+  rerender(<DataTable {...props} rowSelection={{ d1: true }} />);
+  expect(screen.getByRole("searchbox", { name: "搜索表格" })).toBe(search);
+  expect(search).toHaveFocus();
+  expect(search).toHaveValue("收银");
+  // jsdom checks the hiding hook; actual visibility and wrapping need a browser.
+  expect(search.closest("[data-slot=data-table-toolbar-content]")).not.toHaveClass("invisible");
+  expect(screen.getByRole("button", { name: "清除选择" })).toBeInTheDocument();
+});
+
+test("refresh keeps a row editor mounted, with its draft and focus", async () => {
+  const user = userEvent.setup();
+  const editableColumns: ColumnDef<Device>[] = [
+    { accessorKey: "name", header: "设备", cell: ({ row }) => <input aria-label="设备备注" defaultValue={row.original.name} /> },
+  ];
+  const props = { columns: editableColumns, data: devices.slice(0, 1), getRowId: (row: Device) => row.id };
+  const { rerender } = render(<DataTable {...props} />);
+  const editor = screen.getByRole("textbox", { name: "设备备注" });
+  await user.type(editor, " 待复核");
+  rerender(<DataTable {...props} loading />);
+  expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
+  expect(screen.getByRole("textbox", { name: "设备备注" })).toBe(editor);
+  expect(editor).toHaveValue("收银机 1 待复核");
+  expect(editor).toHaveFocus();
+  expect(document.querySelectorAll("[data-slot=data-table-skeleton-row]")).toHaveLength(0);
+  rerender(<DataTable {...props} loading={false} />);
+  expect(screen.getByRole("table")).not.toHaveAttribute("aria-busy");
+  expect(screen.getByRole("textbox", { name: "设备备注" })).toBe(editor);
+  expect(editor).toHaveValue("收银机 1 待复核");
+  expect(editor).toHaveFocus();
+});
+
 test("hides columns through controlled visibility", () => {
   const { rerender } = render(<DataTable columns={columns} columnVisibility={{ price: false }} data={devices} />);
   expect(screen.queryByRole("columnheader", { name: /价格/ })).not.toBeInTheDocument();

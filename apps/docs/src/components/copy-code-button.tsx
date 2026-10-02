@@ -7,7 +7,7 @@ import { useUILocale } from "@qingye/ui/locale";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export function CopyCodeButton({ value, className }: { value: string; className?: string }) {
+export function CopyCodeButton({ value, className, label: customLabel }: { value: string; className?: string; label?: string }) {
   const { messages } = useUILocale();
   const [copied, setCopied] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -24,7 +24,7 @@ export function CopyCodeButton({ value, className }: { value: string; className?
     }
   };
 
-  const label = copied ? messages.copied : messages.copyCode;
+  const label = copied ? messages.copied : customLabel ?? messages.copyCode;
   return (
     <>
       <Tooltip>

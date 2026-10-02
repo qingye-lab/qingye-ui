@@ -34,6 +34,17 @@ export interface KeyboardRow {
   description: string;
 }
 
+/** Public design guidance; APIs remain in the source and api metadata. */
+export interface ComponentDesign {
+  methods: string[];
+  whenToUse: string[];
+  avoid: string[];
+  composition: string[];
+  stateOwner: { library: string[]; application: string[] };
+  responsive: string[];
+  customization: string[];
+}
+
 /**
  * Written once per component at `src/content/<slug>/meta.ts`.
  * `<slug>` must match the library file name in packages/ui/src/components.
@@ -54,6 +65,7 @@ export interface ComponentMeta {
   notes?: string[];
   /** Search aliases, e.g. ["下拉", "dropdown"]. */
   keywords?: string[];
+  design?: Partial<ComponentDesign>;
 }
 
 /**

@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-01T16:42:05.983Z",
-  "revision": "443475f8f42ffcd52400c5a0b1666e34de16efab",
+  "generatedAt": "2026-10-02T09:19:05.738Z",
+  "revision": "f0de47747040dfe98d58598c0b5039bf2baed0ba",
   "fingerprint": {
-    "sha256": "8daef1c1f3ba08a6aff601f52bb941e9f7c6de663be0758b2a6d10a8acc9c155",
+    "sha256": "cd36d0041cf46db18ab36b6f83ff270bb527eb2f5d76a28e707a24f320ffcf3e",
     "inputs": [
       {
         "path": "apps/docs/package.json",
-        "sha256": "69ef51ecf503d82e128e76f0835fb438025ad841cfa5360442b56034bc0f0fa9"
+        "sha256": "bf3b92ea09c21304ba54228b091c6882504e06771dea7a036088c2ceec9106e9"
       },
       {
         "path": "apps/docs/src/content/accordion/meta.ts",
@@ -48,7 +48,7 @@
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
-        "sha256": "ed03ad84e212f1f48ff0da1b9dcb16aec6daa95dfd6c089fbd465a6fe1babbe0"
+        "sha256": "64c81cda40f93ac663d6e9023050838536f103b12b59727a0efafbeac83c8790"
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
@@ -100,7 +100,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "03656837a692f3561d4a952cf40f81f370ce206cce31b78552881625bb2ce53d"
+        "sha256": "391b6327d4edc10942f0b0336aa076bd6b7b2a0b7f5cf34bf327ef7f0e60cb8f"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -356,7 +356,7 @@
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
-        "sha256": "5fb924428fc704c08c02874ae4e0461ac270a31cb3eeb7747d7cd335dafcd348"
+        "sha256": "7f981c6fcbd8fec6a168db2203afaadb3d94521cbd02ab75d525d1421275aa69"
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
@@ -364,27 +364,27 @@
       },
       {
         "path": "apps/docs/src/lib/types.ts",
-        "sha256": "90b97d3b8cf5cf46fd50f4f89c5991aeeb36005662d77f56fad90a189f6cd3c2"
+        "sha256": "dfa9f42d58ef79c05ceebd526e6beb29fa532c0c56be13ebe31c441fa3a23ae6"
       },
       {
         "path": "package.json",
-        "sha256": "7f002f8e463a50c521ddb17e8639c8a8d3ac2d00a011670985e4e5f66fd60038"
+        "sha256": "00f06fb9e91e374482793ed737d6c177ec565a5d1e1c93f24756719301091434"
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "8a42646e100e329e9ade0e36cb07fd4eb73166ab2d990f606a87a30fa0e5ba98"
+        "sha256": "874618a7b80f754abe1b2f6433780b3ad2e67e73c3a895b4e6a327b27dcae8ef"
       },
       {
         "path": "packages/ui/coss-source.json",
-        "sha256": "b4e9e5b0b1deacb0365d7f2b7e67de272ad098cf7f78f41e5ce1bff86e092a1a"
+        "sha256": "4dd1f67a6a38426210fc956525266884332e688ea7a9b6b77eb89d144f2553b6"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "072f3b15cfc385b1a96734ebb9fd370e559f5fb004239288417893de5a121ff0"
+        "sha256": "eb7f23af407d6827f27009f2c2d5a656c4c69444e3a742a12716b1876a35e84c"
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "62cdbfc988a4d1a930b74d03622a950080ae1a8af0071c1d764cb86cfd4e5db1"
+        "sha256": "76d633370573f42ef6a653fea3c86f472f8540265aa593a743e4f82e207bd712"
       },
       {
         "path": "packages/ui/src/components/accordion.tsx",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "32570e0783f0d754626e2bdb984c03c5a6e9afab8de08058f41605d2fe062cec"
+        "sha256": "c3146b3c5864c1105352487fa99dca179448bf8f0311b514ecbb82f561ca789a"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -512,7 +512,7 @@
       },
       {
         "path": "packages/ui/src/components/field.tsx",
-        "sha256": "64e67c09f39ddd573b62bca0b7dcad15be2a029392a87dcaefcadad4ccb715c5"
+        "sha256": "6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d"
       },
       {
         "path": "packages/ui/src/components/fieldset.tsx",
@@ -520,7 +520,7 @@
       },
       {
         "path": "packages/ui/src/components/file-upload.tsx",
-        "sha256": "3ff724f1dc7d7a5c045420fd213ee8a397fb6b2fd36c90157fdace2e0a05af98"
+        "sha256": "6afa56806138516e949dac7c48c42569c41cf24197ed1d2f922558aca63f2a23"
       },
       {
         "path": "packages/ui/src/components/form.tsx",
@@ -540,7 +540,7 @@
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
-        "sha256": "f3b493fc5d159111ea85d4d4e0fff634d651e5c1c2a0a5a71b7a8c807b76ac07"
+        "sha256": "abb49bda6cea57df0665dc5b8c09c108fc49e2c2a1c74cc4ef71cf07d0133430"
       },
       {
         "path": "packages/ui/src/components/input.tsx",
@@ -696,7 +696,7 @@
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "84b77d8ec9a5feef64669b26ffb6d5af061e57b387854dd21fd585a85bfa80c6"
+        "sha256": "4cc87b5c1f23fe49a6d628ab6105d3a855b6135b1fc6ea069244675d595c3e3f"
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
@@ -732,7 +732,7 @@
       },
       {
         "path": "packages/ui/src/components/tree.tsx",
-        "sha256": "95dbcbf2a1b2f839270f6644476f21cdf915f92a8c09213c720bccde3dc4aa71"
+        "sha256": "db80f048d0e8af9a393fc88c3ca8e2d5d250dcca6819a9ee46d85cd38fbce4c8"
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
@@ -752,7 +752,7 @@
       },
       {
         "path": "packages/ui/tokens/components.css",
-        "sha256": "90a064768a8bebb8b755f275b98e186fbc3b14e50675e6f998c6e1928ee6bc8d"
+        "sha256": "5398764038be63d58bd75418a081f6a4cbb4dad40b94489a1869e9ba08357e92"
       },
       {
         "path": "packages/ui/tokens/primitives.css",
@@ -800,7 +800,10 @@
       "./utils": {
         "types": "./dist/utils.d.ts",
         "import": "./dist/utils.js"
-      }
+      },
+      "./design.md": "./design.md",
+      "./ai/*": "./ai/*",
+      "./registry/*": "./registry/*"
     },
     "dependencies": {
       "@base-ui/react": "1.7.0",
@@ -839,7 +842,10 @@
       "coss-source.json",
       "THIRD_PARTY_NOTICES.md",
       "README.md",
-      "LICENSE"
+      "LICENSE",
+      "design.md",
+      "ai",
+      "registry"
     ],
     "source": "packages/ui/package.json"
   },
@@ -3071,10 +3077,23 @@
       },
       "provenance": {
         "kind": "coss",
-        "source": "apps/docs/src/content/button-group/meta.ts",
+        "trackingStatus": "PRESENT",
         "header": [],
-        "trackingStatus": "UNVERIFIED",
-        "reason": "Metadata/source header marks coss, but no coss-source.json entry exists"
+        "file": "src/components/group.tsx",
+        "registry": "https://coss.com/ui/r/group.json",
+        "upstreamPath": "apps/ui/registry/default/ui/group.tsx",
+        "upstreamSha256": "d2392c54a90e353762779639971bb9aaa44759a7bda81ea0cf1462afbf4492b0",
+        "adaptedSha256": "2826b46f1153f2796c64e47062d3a74ad10b41f5a6d531c0c269f901c0c2e7d4",
+        "adaptations": [
+          "Local imports; preserve the upstream public composition API",
+          "Use the qy-space scale for layout spacing while preserving fixed component geometry",
+          "Read the control radius role with clamped inner highlights"
+        ],
+        "aliasOf": "packages/ui/src/components/group.tsx",
+        "forwardingChain": [
+          "packages/ui/src/components/group.tsx"
+        ],
+        "evidenceKind": "AST_PURE_REEXPORT"
       },
       "catalog": {
         "present": true,
@@ -3087,7 +3106,7 @@
         "status": "PRESENT"
       },
       "consistency": {
-        "status": "UNVERIFIED",
+        "status": "PASS",
         "missingPublicMetadataExports": []
       }
     },
@@ -3124,7 +3143,7 @@
       "metadata": {
         "path": "apps/docs/src/content/button/meta.ts",
         "title": "按钮 Button",
-        "description": "触发一个操作或提交表单。每个区域只放一个主按钮，其余用 outline、secondary、ghost 等次要样式。",
+        "description": "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
         "category": "通用",
         "source": "coss",
         "exports": [
@@ -3141,7 +3160,7 @@
         "api": [
           {
             "name": "Button",
-            "description": "渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+            "description": "渲染原生 <button>（默认 type=\"button\"）；通过 render 可更换命令载体。真正导航使用原生 a / Link 配合 buttonVariants，以保留链接语义。透传所有原生属性。",
             "props": [
               {
                 "name": "variant",
@@ -3170,13 +3189,13 @@
               {
                 "name": "render",
                 "type": "ReactElement | (props, state) => ReactElement",
-                "description": "替换渲染元素，例如 <a> 或路由库的 Link。"
+                "description": "替换命令的渲染元素；不会自动把按钮语义改成链接语义。"
               },
               {
                 "name": "nativeButton",
                 "type": "boolean",
                 "default": "true",
-                "description": "render 为非 <button> 元素时设为 false，以保持键盘与禁用语义。"
+                "description": "命令载体不是原生 <button> 时设为 false；仍保留按钮 role，导航应使用原生链接。"
               }
             ]
           },
@@ -3199,7 +3218,7 @@
           "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
           "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
           "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
-          "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+          "导航用原生 a / Link 配合 buttonVariants；Button render + nativeButton={false} 仍属于按钮命令语义，不要依靠它自动获得 link role。",
           "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
         ],
         "usageResolution": [
@@ -7039,7 +7058,7 @@
               {
                 "name": "bulkActions",
                 "type": "({ rows, ids, clear, table }) => ReactNode",
-                "description": "有选中行时显示在已选计数旁的批量操作。"
+                "description": "有选择时显示批量操作；ids 包含所有页的已选 ID，rows 只包含当前 data 中的已选对象。搜索与筛选继续可见。"
               },
               {
                 "name": "enableColumnVisibility",
@@ -7061,7 +7080,7 @@
                 "name": "loading",
                 "type": "boolean",
                 "default": "false",
-                "description": "以骨架行代替表体，并设置 aria-busy。"
+                "description": "初始无数据时显示骨架行；有数据刷新时保留原行，并设置 aria-busy。"
               },
               {
                 "name": "empty",
@@ -7119,7 +7138,7 @@
           "搜索、筛选或排序变化时自动回到第一页；数据减少导致页码越界时自动退回最后一页。",
           "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露，方向同时写给排序按钮的读屏文本。",
           "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
-          "加载态渲染与当前每页行数相同的骨架行，数据到达时表格高度不跳动。"
+          "初始加载渲染与每页行数相同的骨架行；刷新已有数据时保留有效行，不清空比较面。"
         ],
         "usageResolution": [
           {
@@ -10009,14 +10028,15 @@
         "registry": "https://coss.com/ui/r/field.json",
         "upstreamPath": "apps/ui/registry/default/ui/field.tsx",
         "upstreamSha256": "02ffda39f73f04638f580fd1fbb76e783cb252f9a87ecebdd62fb4bd0d1393ff",
-        "adaptedSha256": "64e67c09f39ddd573b62bca0b7dcad15be2a029392a87dcaefcadad4ccb715c5",
+        "adaptedSha256": "6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d",
         "adaptations": [
           "Local imports",
           "Add orientation, FieldGroup, FieldContent, FieldTitle and FieldSeparator for complete form layouts",
           "FieldError accepts an errors array from form libraries, deduplicates messages, and renders whenever it has content",
           "FieldError outside a Field renders its own Field root so standalone errors still work",
           "Export FieldSet and FieldLegend aliases from fieldset",
-          "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles"
+          "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles",
+          "Consume separate field and field-group relationship gaps while preserving existing defaults and horizontal label/control spacing"
         ]
       },
       "catalog": {
@@ -11169,10 +11189,22 @@
       },
       "provenance": {
         "kind": "coss",
-        "source": "apps/docs/src/content/hover-card/meta.ts",
+        "trackingStatus": "PRESENT",
         "header": [],
-        "trackingStatus": "UNVERIFIED",
-        "reason": "Metadata/source header marks coss, but no coss-source.json entry exists"
+        "file": "src/components/preview-card.tsx",
+        "registry": "https://coss.com/ui/r/preview-card.json",
+        "upstreamPath": "apps/ui/registry/default/ui/preview-card.tsx",
+        "upstreamSha256": "44741ce4217d89c19a485d6973c22c821ed9cf86b15dc03c7094308ae7faa6ba",
+        "adaptedSha256": "e340220e1ee2a3e069ce54519041dcf407e1c0f716af4de16ceab141147da95d",
+        "adaptations": [
+          "Local imports; preserve the upstream public composition API",
+          "Use the qy-space scale for layout spacing while preserving fixed component geometry"
+        ],
+        "aliasOf": "packages/ui/src/components/preview-card.tsx",
+        "forwardingChain": [
+          "packages/ui/src/components/preview-card.tsx"
+        ],
+        "evidenceKind": "AST_PURE_REEXPORT"
       },
       "catalog": {
         "present": true,
@@ -11185,7 +11217,7 @@
         "status": "PRESENT"
       },
       "consistency": {
-        "status": "UNVERIFIED",
+        "status": "PASS",
         "missingPublicMetadataExports": []
       }
     },
@@ -11215,7 +11247,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 113
+            "line": 117
           }
         },
         {
@@ -11223,7 +11255,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 98
+            "line": 102
           }
         },
         {
@@ -11231,7 +11263,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 83
+            "line": 86
           }
         },
         {
@@ -11239,7 +11271,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 105
+            "line": 109
           }
         }
       ],
@@ -11352,11 +11384,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 83
+              "line": 86
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 83
+              "line": 86
             },
             "status": "PRESENT"
           },
@@ -11365,11 +11397,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 98
+              "line": 102
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 98
+              "line": 102
             },
             "status": "PRESENT"
           },
@@ -11378,11 +11410,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 105
+              "line": 109
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 105
+              "line": 109
             },
             "status": "PRESENT"
           },
@@ -11391,11 +11423,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 113
+              "line": 117
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 113
+              "line": 117
             },
             "status": "PRESENT"
           }
@@ -11411,7 +11443,7 @@
         "registry": "https://coss.com/ui/r/input-group.json",
         "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
         "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
-        "adaptedSha256": "f3b493fc5d159111ea85d4d4e0fff634d651e5c1c2a0a5a71b7a8c807b76ac07",
+        "adaptedSha256": "abb49bda6cea57df0665dc5b8c09c108fc49e2c2a1c74cc4ef71cf07d0133430",
         "adaptations": [
           "Local imports",
           "Keep upstream light and dark treatment; the library ships both themes",
@@ -11419,7 +11451,8 @@
           "Coordinate addon and field spacing with the roomier default controls",
           "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
           "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
-          "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
+          "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes",
+          "Compose addon mouse handling with caller callbacks and respect preventDefault; expose the input-group text styling slot"
         ]
       },
       "catalog": {
@@ -22889,7 +22922,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 54
+            "line": 57
           }
         },
         {
@@ -22897,7 +22930,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -22905,7 +22938,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 32
+            "line": 35
           }
         }
       ],
@@ -22935,7 +22968,7 @@
               {
                 "name": "nodes",
                 "type": "TreeNode[]",
-                "description": "节点：{ id, label, children?, icon?, expandedIcon?, suffix?, textValue?, disabled? }。"
+                "description": "节点：{ id, label, children?, hasChildren?, icon?, expandedIcon?, suffix?, textValue?, disabled? }。"
               },
               {
                 "name": "label",
@@ -22999,6 +23032,11 @@
                 "name": "disabled",
                 "type": "boolean",
                 "description": "不可聚焦、选中或展开。"
+              },
+              {
+                "name": "hasChildren",
+                "type": "boolean",
+                "description": "惰性父节点尚无 children 时声明展开能力；加载、错误和重试由应用负责。"
               }
             ]
           }
@@ -23048,11 +23086,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 54
+              "line": 57
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 54
+              "line": 57
             },
             "status": "PRESENT"
           },
@@ -23061,11 +23099,11 @@
             "kind": "type",
             "componentEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 17
+              "line": 18
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 17
+              "line": 18
             },
             "status": "PRESENT"
           }
@@ -23369,6 +23407,24 @@
             "line": 124
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
+          "complete": true
+        }
+      ]
+    },
+    {
+      "name": "--qy-action-gap",
+      "definitions": [
+        {
+          "name": "--qy-action-gap",
+          "value": "var(--qy-space-2)",
+          "references": [
+            "--qy-space-2"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 118
+          },
+          "context": "@layer base {\n  :root",
           "complete": true
         }
       ]
@@ -24088,7 +24144,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 122
+            "line": 127
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24104,7 +24160,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 120
+            "line": 125
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24120,7 +24176,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 121
+            "line": 126
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24136,7 +24192,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 118
+            "line": 123
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24152,7 +24208,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 119
+            "line": 124
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24168,7 +24224,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 123
+            "line": 128
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24184,7 +24240,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 126
+            "line": 131
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24200,7 +24256,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 125
+            "line": 130
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24216,7 +24272,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 124
+            "line": 129
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24232,7 +24288,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 127
+            "line": 132
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24288,6 +24344,42 @@
       ]
     },
     {
+      "name": "--qy-field-gap",
+      "definitions": [
+        {
+          "name": "--qy-field-gap",
+          "value": "var(--qy-space-2)",
+          "references": [
+            "--qy-space-2"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 116
+          },
+          "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
+      "name": "--qy-field-group-gap",
+      "definitions": [
+        {
+          "name": "--qy-field-group-gap",
+          "value": "var(--qy-space-5)",
+          "references": [
+            "--qy-space-5"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 117
+          },
+          "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
       "name": "--qy-focus-button-offset",
       "definitions": [
         {
@@ -24298,7 +24390,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 135
+            "line": 140
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24316,7 +24408,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 134
+            "line": 139
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24332,7 +24424,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 137
+            "line": 142
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24348,7 +24440,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 136
+            "line": 141
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24364,7 +24456,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 132
+            "line": 137
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24380,7 +24472,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 131
+            "line": 136
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24868,7 +24960,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 114
+            "line": 119
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -24881,7 +24973,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 143
+            "line": 148
           },
           "context": "@media (max-width: 767px) {\n    :root",
           "complete": true
@@ -24912,7 +25004,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 152
+            "line": 157
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -24943,7 +25035,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 144
+            "line": 149
           },
           "context": "@media (max-width: 767px) {\n    :root",
           "complete": true
@@ -24956,7 +25048,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 151
+            "line": 156
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -25360,7 +25452,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 150
+            "line": 155
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -25391,7 +25483,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 153
+            "line": 158
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -25980,7 +26072,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 128
+            "line": 133
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26871,7 +26963,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 115
+            "line": 120
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26882,7 +26974,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 142
+            "line": 147
           },
           "context": "@media (max-width: 767px) {\n    :root",
           "complete": true
@@ -26893,7 +26985,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 154
+            "line": 159
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27188,7 +27280,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 43
+        "line": 54
       }
     },
     {
@@ -27197,7 +27289,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 45
+        "line": 56
       }
     },
     {
@@ -27206,7 +27298,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 46
+        "line": 57
       }
     },
     {
@@ -27215,7 +27307,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 48
+        "line": 59
       }
     },
     {
@@ -27224,7 +27316,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 50
+        "line": 61
       }
     },
     {
@@ -27233,7 +27325,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 51
+        "line": 62
       }
     },
     {
@@ -27242,7 +27334,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 52
+        "line": 63
       }
     },
     {
@@ -27251,7 +27343,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 54
+        "line": 65
       }
     },
     {
@@ -27260,7 +27352,16 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 56
+        "line": 67
+      }
+    },
+    {
+      "name": "design",
+      "type": "Partial<ComponentDesign>",
+      "optional": true,
+      "source": {
+        "path": "apps/docs/src/lib/types.ts",
+        "line": 68
       }
     }
   ],
@@ -27268,12 +27369,16 @@
     {
       "source": "package.json",
       "scripts": {
-        "build": "pnpm --filter @qingye/ui build",
-        "typecheck": "pnpm --recursive --if-present typecheck",
+        "build": "pnpm --filter @qingye/ui build && pnpm --filter @qingye/tooling build",
+        "typecheck": "pnpm --filter @qingye/tooling build && pnpm --recursive --if-present typecheck",
         "test": "pnpm --recursive --if-present test",
         "dev": "pnpm --filter docs dev",
         "docs:build": "pnpm --filter @qingye/ui build && pnpm --filter docs build",
-        "shot": "node scripts/shot.mjs"
+        "shot": "node scripts/shot.mjs",
+        "studio:dev": "pnpm --filter @qingye/tooling build && pnpm --filter @qingye/studio dev",
+        "studio:build": "pnpm --filter @qingye/tooling build && pnpm --filter @qingye/studio build",
+        "verify:facts": "node scripts/lib/facts-ledger.test.mjs",
+        "verify:package": "node scripts/verify-packed-consumers.mjs"
       }
     },
     {
@@ -27292,18 +27397,136 @@
       "source": "apps/docs/package.json",
       "scripts": {
         "dev": "vite",
-        "build": "tsc --noEmit && vite build",
+        "build": "node scripts/generate-fixtures.mjs && tsc --noEmit && vite build",
         "preview": "vite preview",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "test": "node scripts/generate-fixtures.mjs && node --test test/*.test.mjs"
       }
     }
   ],
   "scriptFiles": [
+    "scripts/ai-eval/check-types.mjs",
+    "scripts/ai-eval/evaluate.mjs",
+    "scripts/ai-eval/extract-materials.mjs",
+    "scripts/ai-eval/lib.mjs",
+    "scripts/ai-eval/prepare-matrix.mjs",
+    "scripts/ai-eval/prepare.mjs",
+    "scripts/ai-eval/record.mjs",
+    "scripts/ai-eval/runs/b-t01-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t01-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t01-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e392da7f-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/selftest.mjs",
+    "scripts/ai-eval/summarize.mjs",
+    "scripts/ai-eval/tool.mjs",
     "scripts/audit-measure.mjs",
     "scripts/audit.mjs",
     "scripts/browser-runtime.mjs",
     "scripts/date-range-demo-proof.mjs",
     "scripts/gen-capabilities.mjs",
+    "scripts/lib/browser-contrast.mjs",
+    "scripts/lib/component-provenance.mjs",
     "scripts/lib/facts-ledger.test.mjs",
     "scripts/lib/token-ledger-probes.mjs",
     "scripts/lib/token-ledger-static.mjs",
@@ -27316,6 +27539,10 @@
     "scripts/token-ledger-runtime.mjs",
     "scripts/token-ledger.mjs",
     "scripts/ui-foundations-runtime.mjs",
+    "scripts/verify-packed-consumers.mjs",
+    "scripts/verify-packed-tooling.mjs",
+    "scripts/verify-studio.mjs",
+    "scripts/verify-task-patterns.mjs",
     "scripts/verify-ui-foundations.mjs",
     "packages/ui/scripts/build.mjs",
     "packages/ui/scripts/check-upstream.mjs",

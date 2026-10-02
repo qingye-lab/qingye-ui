@@ -1,0 +1,4 @@
+/* Sentinel's field-group relationship is shared across color modes and densities. */
+html[data-brand="sentinel"] {
+  --qy-field-group-gap: 12px;
+}

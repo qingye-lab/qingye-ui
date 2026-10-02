@@ -28,10 +28,11 @@ export default function IntroductionPage() {
   return (
     <article>
       <PageHeader
-        description="一套面向中文产品的 React 组件库：可访问的交互原语、分层的设计令牌，以及仔细调校过的浅色与深色主题。"
+        description="从人的目的出发，组织名称、关系、空间与状态的 React 公共组件库。"
         title="介绍"
       />
 
+      <H2 id="purpose">器用、关系与合宜</H2><P>阅读、表达、比较与判断是目的，暂停、拒绝和改变决定也同样正常。Qingye UI 从中国传统思想、造物与艺术中借鉴方法，让文化参与命名、操作、空间与状态变化的判断。</P><P><A href="/docs/design-philosophy">六种方法</A>影响具体决定，同一方法可以形成不同面貌。先操作<A href="/docs/patterns">完整任务</A>，再查当前组件事实。</P>
       <H2 id="what">它是什么</H2>
       <P>
         <Code>@qingye/ui</Code> 以 <A href="https://base-ui.com">Base UI</A> 负责行为与无障碍，以 Tailwind CSS 4 负责样式。大部分组件改编自{" "}
@@ -43,12 +44,12 @@ export default function IntroductionPage() {
       </P>
 
       <H2 id="principles">设计原则</H2>
-      <P>基调是“精致、耐看、不浮夸”。具体落到四条：</P>
+      <P>方法落实到可理解的命名、完整状态与合适表达，也需要这些实现基础：</P>
       <Facts items={principles} />
 
       <H2 id="lineage">与 coss ui、Base UI 的关系</H2>
       <P>
-        <Strong>coss ui</Strong> 是 Cal.com 团队基于 Base UI 的组件集。这里的改编尽量贴近上游：只为修复缺陷或满足组件规范而改动，每处改动都登记在{" "}
+        <Strong>coss ui</Strong> 是 Cal.com 团队基于 Base UI 的组件集。当前实现保留了来自上游的部件与来源记录，按实际任务和公共规范调整；必要时可以重新设计共享外观和组合。已有改编记录在{" "}
         <Code>coss-source.json</Code>，未修改的上游源码保存在 <Code>packages/ui/upstream/</Code>，作为比对基线。
       </P>
       <P>

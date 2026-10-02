@@ -70,6 +70,62 @@ importers:
         specifier: 7.3.0
         version: 7.3.0(@types/node@24.10.1)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  apps/studio:
+    dependencies:
+      '@qingye/tooling':
+        specifier: workspace:*
+        version: link:../../packages/tooling
+      '@qingye/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      lucide-react:
+        specifier: 0.577.0
+        version: 0.577.0(react@19.2.1)
+      react:
+        specifier: 19.2.1
+        version: 19.2.1
+      react-dom:
+        specifier: 19.2.1
+        version: 19.2.1(react@19.2.1)
+    devDependencies:
+      '@tailwindcss/vite':
+        specifier: 4.3.3
+        version: 4.3.3(vite@7.3.0(@types/node@24.10.1)(jiti@2.7.0)(lightningcss@1.32.0))
+      '@types/node':
+        specifier: 24.10.1
+        version: 24.10.1
+      '@types/react':
+        specifier: 19.2.7
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: 19.2.3
+        version: 19.2.3(@types/react@19.2.7)
+      '@vitejs/plugin-react':
+        specifier: 5.1.2
+        version: 5.1.2(vite@7.3.0(@types/node@24.10.1)(jiti@2.7.0)(lightningcss@1.32.0))
+      tailwindcss:
+        specifier: 4.3.3
+        version: 4.3.3
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vite:
+        specifier: 7.3.0
+        version: 7.3.0(@types/node@24.10.1)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/tooling:
+    dependencies:
+      postcss:
+        specifier: 8.5.28
+        version: 8.5.28
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+    devDependencies:
+      '@types/node':
+        specifier: 24.10.1
+        version: 24.10.1
+
   packages/ui:
     dependencies:
       '@base-ui/react':

@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "run": "n-t03-3",
+  "group": "new",
+  "task": "t03",
+  "replicate": 3,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "status": "FAIL",
+  "promptSHA256": "5c6afbed2059c94fe8e3c021562d464d7794e05b21f3d8dd1dff81981b7c8347",
+  "taskSHA256": "698904a565804884cbe2d429e18430f95ad398232aba4896098781e5be6ad32d",
+  "fixtureSHA256": "b5cc11d7736d7bdefbdba8fef207a00a89dcdd24501e3975c8b2791c6dc90fd5",
+  "targetVersion": "0.3.0",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "sourceFiles": [
+    {
+      "path": "BulkPanel.tsx",
+      "symlink": false,
+      "sha256": "c492bdaae2b07a048cbc3b62e944345297cf688ef310ddbbd6d30d426a35220b"
+    },
+    {
+      "path": "report.md",
+      "symlink": false,
+      "sha256": "4d5879fd7cb50d05d2b8f04965f9428799f4e16706f823947a2082ca65791401"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "96a2c00e3fcadd4457b00edd9af9d074790b08bf408215b76a09c8800a2c7699"
+    }
+  ],
+  "changedFiles": [
+    "BulkPanel.tsx",
+    "report.md",
+    "state.ts"
+  ],
+  "materials": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "b7af749ad95a097ab60e578e2d41b00f998d55268dd05c82108fb1e736af0d21"
+    },
+    {
+      "path": "cli-docs-button.json",
+      "symlink": false,
+      "sha256": "8f277f0525eda753eb53708107f24714640894b469f0a580baabf98759afb7ae"
+    },
+    {
+      "path": "cli-docs-data-table.json",
+      "symlink": false,
+      "sha256": "48d2c522332ef02495b8feff5bda14f691b1a80209304fe6300f82fcbac42770"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "c7da46759a2da9fbe100495a26fa860dbdf3b4fd0824a9de0df53e43c3aec135"
+    }
+  ],
+  "checks": {
+    "snapshot": {
+      "status": "PASS",
+      "targetUnchanged": true,
+      "materialsUnchanged": true
+    },
+    "boundaries": {
+      "status": "PASS",
+      "failures": []
+    },
+    "types": {
+      "status": "PASS",
+      "diagnostics": [],
+      "invalidImports": 0,
+      "invalidProps": 0
+    },
+    "behavior": {
+      "status": "FAIL",
+      "assertions": [
+        {
+          "name": "[scope] IDs are stable, canonical and query-all captures the matching collection",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[scope] actual scope changes invalidate confirmation; identical updates do not",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[false-success] stale responses ignored and retry includes failures only",
+          "status": "FAIL",
+          "category": "false-success",
+          "errors": [
+            "AssertionError: expected true to be false // Object.is equality\n    at /Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/runs/n-t03-3/evaluation/contract.test.tsx:27:69\n    at file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:145:11\n    at file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:915:26\n    at file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:1243:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:1209:10)\n    at file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:1653:37\n    at Traces.$ (file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/vitest@4.0.16_@types+node@24.10.1_jiti@2.7.0_jsdom@27.4.0_lightningcss@1.32.0/node_modules/vitest/dist/chunks/traces.U4xDYhzZ.js:115:27)\n    at trace (file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/vitest@4.0.16_@types+node@24.10.1_jiti@2.7.0_jsdom@27.4.0_lightningcss@1.32.0/node_modules/vitest/dist/chunks/test.B8ej_ZHS.js:239:21)\n    at runTest (file:///Volumes/SUNSANG%201/Codex/qingye-ui/node_modules/.pnpm/@vitest+runner@4.0.16/node_modules/@vitest/runner/dist/index.js:1653:12)"
+          ]
+        },
+        {
+          "name": "[api] actual off-page IDs are submitted and retry cannot include unknown outcomes",
+          "status": "PASS",
+          "category": "api",
+          "errors": []
+        },
+        {
+          "name": "[scope] props scope changes require reconfirmation while row paging does not",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[false-success] network rejection is unknown and duplicate execution is blocked",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[false-success] rejected promise does not report IDs as success or retry them",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        }
+      ],
+      "infrastructureError": null,
+      "exitCode": 1
+    }
+  },
+  "metrics": {
+    "invalidImports": 0,
+    "invalidProps": 0,
+    "typeErrors": 0,
+    "wrongOwnerOrScatteredEdits": 0,
+    "assertionFailures": 1,
+    "stateLossFailures": 0,
+    "falseSuccessFailures": 1,
+    "humanCorrections": 0,
+    "elapsedSeconds": 283.566,
+    "toolCalls": null,
+    "observedHarnessToolCalls": 1
+  },
+  "observations": {
+    "externalFileEdits": null,
+    "disallowedReads": null,
+    "transcript": null
+  },
+  "evaluatedAt": "2026-10-02T06:55:37.532Z",
+  "evaluationElapsedSeconds": 6.021,
+  "limitations": [
+    "Restricted fixture and small sample; no population-level model quality claim.",
+    "Behavior is jsdom/pure-state evidence, not real browser, assistive technology, visual or production acceptance.",
+    "Read/write scope is an instruction and transcript audit boundary, not OS filesystem isolation.",
+    "Only wrapper calls are automatically counted; total tools/human corrections/time remain null unless supplied by the independent runner."
+  ]
+}

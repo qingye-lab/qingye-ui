@@ -4,6 +4,8 @@
 
 **建设纲领：** `/Volumes/SUNSANG 1/Codex/demo/qingye/docs/ui-component-system-plan.md`（v3.0 定稿）。本文件是它的库侧执行摘要；涉及方向、优先级、验收标准时以纲领为准。纲领只读，不在本仓库内。
 
+**本次改造：** `design.md` 提供设计方法，`docs/plans/2026-10-02-design-system-renovation.md` 提供已授权范围与最新用户裁决，`docs/implementation/2026-10-02-execution.md` 记录执行证据。2026-10-02 用户已明确：三张视觉提案均不采用，视觉定稿后置；先遵守新理念、规范和定义，由主 agent 下发/审核、多 GPT-6.1 sol / xhigh 子 agent 按独立边界并行执行。该裁决优先于旧纲领的线性调度及选图前置；完整范围、真实契约和验收标准仍有效。
+
 ## Layout
 
 - `packages/ui/src/components/<name>.tsx` — one component per file.
@@ -17,7 +19,7 @@
 ## Rules
 
 - Follow `STANDARDS.md` for every component change.
-- Keep coss components close to upstream; change them only to fix a defect or meet `STANDARDS.md`, and record each change in `coss-source.json`.
+- Treat coss as a replaceable implementation source. Reuse, adapt, or rebuild according to verified task, semantic, state, and maintenance needs under `design.md` and `STANDARDS.md`; record derived changes in `coss-source.json` and preserve truthful provenance. Evaluate accessibility primitives separately. Never edit the upstream baseline or relabel copied source as original.
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
 - Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
 
@@ -48,6 +50,7 @@ html[data-brand="sentinel"] { --qy-primary: ...; }
 - 组件固定几何尺寸不要依赖"调大全局 spacing 后顺便变大"，要有自己的尺寸角色（见 `STANDARDS.md` 第 2 节）。
 - 间距优先复用 `layout.tsx` 已有的 `gap-(--qy-space-N)` 写法，不要新造一套。
 - **不得为通过检查把散落值机械改名成新 token**。新增 token 须说明角色、作用范围、修改入口。
+- 默认主题的外观预设与硬要求分开：组件语义、状态真实性、可访问性和主题轴约束必须满足；具体配色、表面、轮廓和密度可由集中主题定义。视觉后置不允许牺牲这些硬要求。
 
 ### 控件尺寸关系
 
@@ -72,7 +75,7 @@ html[data-brand="sentinel"] { --qy-primary: ...; }
 - 本仓库允许大幅调整与重构，包括破坏性变更；**不得因为 TS 没报错就当作无影响**。破坏外观约定须在提交说明中显式写出。
 - 视觉基线变化须单独列出，不能藏在 refactor 名义下。
 - 截图差异用于**发现变化**，不自动判定变化好坏。**不得为让测试通过而更新全部截图。**
-- 无障碍与对比度：正文 ≥ 4.5:1，辅助文字与图形边界 ≥ 3:1，浅色与深色都要测真实前景/背景组合。44px 是本库触屏目标，**不得声称它是 WCAG 2.2 AA 的统一最小值**（2.5.8 基础要求为 24×24px）。
+- 无障碍与对比度：普通大小的文字（包括辅助文字）≥ 4.5:1，大文本及必要非文本按适用要求检查；必要控件边界与图形信息一般 ≥ 3:1。浅色与深色都要测真实组合，不能把所有辅助文字套用 3:1。44px 是本库触屏目标，**不得声称它是 WCAG 2.2 AA 的统一最小值**（2.5.8 基础要求为 24×24px）。
 
 ## 已完成，不要重复实施
 

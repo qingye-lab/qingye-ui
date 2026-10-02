@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "source": "packages/ui",
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "createdAt": "2026-10-02T06:43:57.383Z",
+  "reason": "Keep the initial library target constant for all 24 trials while independently fixing a discovered reduced-motion color defect. This immutable validation snapshot is not a product implementation or the final release target."
+}

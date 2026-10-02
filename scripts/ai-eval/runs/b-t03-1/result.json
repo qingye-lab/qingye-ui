@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "run": "b-t03-1",
+  "group": "baseline",
+  "task": "t03",
+  "replicate": 1,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "status": "PASS",
+  "promptSHA256": "7f97ffee8c8bf02513a00ff6c1443b577e06b79d62f0113723b5a499dfa40d68",
+  "taskSHA256": "698904a565804884cbe2d429e18430f95ad398232aba4896098781e5be6ad32d",
+  "fixtureSHA256": "b5cc11d7736d7bdefbdba8fef207a00a89dcdd24501e3975c8b2791c6dc90fd5",
+  "targetVersion": "0.3.0",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "sourceFiles": [
+    {
+      "path": "BulkPanel.tsx",
+      "symlink": false,
+      "sha256": "6a307190d34483cbaabd23a1b1f080e2a6cdb9ee4e4a02005dfaddee0cad679b"
+    },
+    {
+      "path": "report.md",
+      "symlink": false,
+      "sha256": "a0c43ea0829ce5c5956a5c18e893a896f536b04ab76c645d29f37059c76a61fb"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "9c44299e18913d29abd18d33f73d0723bfdd17b9237f1426dbc0d4c488e03371"
+    }
+  ],
+  "changedFiles": [
+    "BulkPanel.tsx",
+    "report.md",
+    "state.ts"
+  ],
+  "materials": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "52981b7c5777797e89b445e0eea6ff5125b3aa304586d135aeace679fd80becc"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "f707fa635b7bdf8d76656b074c96f242ad0889d34197dcdcf96dcd303a9f5c0a"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "185aef19335923fa68cfc64932a57c850754adf25b25ae44f0c1e014f8a548f0"
+    }
+  ],
+  "checks": {
+    "snapshot": {
+      "status": "PASS",
+      "targetUnchanged": true,
+      "materialsUnchanged": true
+    },
+    "boundaries": {
+      "status": "PASS",
+      "failures": []
+    },
+    "types": {
+      "status": "PASS",
+      "diagnostics": [],
+      "invalidImports": 0,
+      "invalidProps": 0
+    },
+    "behavior": {
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "[scope] IDs are stable, canonical and query-all captures the matching collection",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[scope] actual scope changes invalidate confirmation; identical updates do not",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[false-success] stale responses ignored and retry includes failures only",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[api] actual off-page IDs are submitted and retry cannot include unknown outcomes",
+          "status": "PASS",
+          "category": "api",
+          "errors": []
+        },
+        {
+          "name": "[scope] props scope changes require reconfirmation while row paging does not",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[false-success] network rejection is unknown and duplicate execution is blocked",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[false-success] rejected promise does not report IDs as success or retry them",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        }
+      ],
+      "infrastructureError": null,
+      "exitCode": 0
+    }
+  },
+  "metrics": {
+    "invalidImports": 0,
+    "invalidProps": 0,
+    "typeErrors": 0,
+    "wrongOwnerOrScatteredEdits": 0,
+    "assertionFailures": 0,
+    "stateLossFailures": 0,
+    "falseSuccessFailures": 0,
+    "humanCorrections": 0,
+    "elapsedSeconds": 305.375,
+    "toolCalls": null,
+    "observedHarnessToolCalls": 1
+  },
+  "observations": {
+    "externalFileEdits": null,
+    "disallowedReads": null,
+    "transcript": null
+  },
+  "evaluatedAt": "2026-10-02T07:03:22.547Z",
+  "evaluationElapsedSeconds": 1.703,
+  "limitations": [
+    "Restricted fixture and small sample; no population-level model quality claim.",
+    "Behavior is jsdom/pure-state evidence, not real browser, assistive technology, visual or production acceptance.",
+    "Read/write scope is an instruction and transcript audit boundary, not OS filesystem isolation.",
+    "Only wrapper calls are automatically counted; total tools/human corrections/time remain null unless supplied by the independent runner."
+  ]
+}

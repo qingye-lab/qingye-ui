@@ -1,0 +1,61 @@
+{
+  "package": "@qingye/ui",
+  "version": "0.3.0",
+  "schemaVersion": 1,
+  "components": [
+    {
+      "name": "button",
+      "title": "按钮 Button",
+      "description": "触发一个操作或提交表单。每个区域只放一个主按钮，其余用 outline、secondary、ghost 等次要样式。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/button",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "docs": "/docs/components/button",
+      "notes": [
+        "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+        "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+        "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+        "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+        "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+      ],
+      "keywords": [
+        "button",
+        "按钮",
+        "操作",
+        "提交",
+        "loading"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "title": "文件上传 FileUpload",
+      "description": "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/file-upload",
+      "exports": [
+        "FileUpload",
+        "formatFileSize"
+      ],
+      "docs": "/docs/components/file-upload",
+      "notes": [
+        "组件不上传文件：在 onFilesChange 中自行上传，再通过 getProgress / getError 回显状态。",
+        "说明文字写清允许的格式和大小，校验失败时会以 role=alert 读出原因。",
+        "图片缩略图使用对象 URL，文件移除或组件卸载时自动释放。"
+      ],
+      "keywords": [
+        "upload",
+        "file",
+        "dropzone",
+        "上传",
+        "附件",
+        "拖拽"
+      ]
+    }
+  ],
+  "patterns": []
+}

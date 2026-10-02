@@ -1,0 +1,692 @@
+{
+  "package": "@qingye/ui",
+  "version": "0.3.0",
+  "schemaVersion": 2,
+  "components": [
+    {
+      "name": "button",
+      "title": "按钮 Button",
+      "description": "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/button",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "docs": "/docs/components/button",
+      "notes": [
+        "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+        "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+        "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+        "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+        "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+      ],
+      "keywords": [
+        "button",
+        "按钮",
+        "操作",
+        "提交",
+        "loading"
+      ],
+      "api": [
+        {
+          "name": "Button",
+          "description": "渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+          "props": [
+            {
+              "name": "variant",
+              "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\" | \"destructive\" | \"destructive-outline\"",
+              "default": "\"default\"",
+              "description": "视觉样式。"
+            },
+            {
+              "name": "size",
+              "type": "\"xs\" | \"sm\" | \"default\" | \"lg\" | \"xl\" | \"icon-xs\" | \"icon-sm\" | \"icon\" | \"icon-lg\" | \"icon-xl\"",
+              "default": "\"default\"",
+              "description": "尺寸；icon-* 为仅图标的正方形按钮，与同名文字尺寸等高。"
+            },
+            {
+              "name": "loading",
+              "type": "boolean",
+              "default": "false",
+              "description": "显示居中的 Spinner、设置 aria-busy 并禁用，文字透明以保留宽度。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用；不透明度降至 64% 并屏蔽指针事件。"
+            },
+            {
+              "name": "render",
+              "type": "ReactElement | (props, state) => ReactElement",
+              "description": "替换渲染元素，例如 <a> 或路由库的 Link。"
+            },
+            {
+              "name": "nativeButton",
+              "type": "boolean",
+              "default": "true",
+              "description": "render 为非 <button> 元素时设为 false，以保持键盘与禁用语义。"
+            }
+          ]
+        },
+        {
+          "name": "buttonVariants",
+          "description": "cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Enter / Space",
+          "description": "触发按钮。"
+        },
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "移入、移出焦点；键盘聚焦时显示焦点环。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Button",
+          "kind": "function",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "propsType": "ButtonProps",
+          "signature": "Button({\n  className,\n  variant,\n  size,\n  render,\n  children,\n  loading = false,\n  disabled: disabledProp,\n  nativeButton,\n  ...props\n}: ButtonProps): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonProps",
+          "kind": "interface",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "buttonVariants",
+          "kind": "const",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "status": "UNVERIFIED",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ButtonProps",
+          "definition": "export interface ButtonProps extends useRender.ComponentProps<\"button\"> {\n  variant?: VariantProps<typeof buttonVariants>[\"variant\"];\n  size?: VariantProps<typeof buttonVariants>[\"size\"];\n  loading?: boolean;\n  /**\n   * Set to `false` when `render` produces a non-button element (for example a\n   * link styled as a button) so keyboard and disabled semantics stay correct.\n   */\n  nativeButton?: boolean;\n}"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Button",
+          "import": "@qingye/ui/components/button",
+          "owner": "button",
+          "status": "PASS"
+        },
+        {
+          "name": "buttonVariants",
+          "import": "@qingye/ui/components/button",
+          "owner": "button",
+          "status": "UNVERIFIED"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "lucide-react",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "variants",
+          "title": "样式",
+          "source": "apps/docs/src/content/button/demos/01-variants.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"样式\",\n  description: \"一个区域只放一个主按钮；次要操作用 outline、secondary 或 ghost，危险操作用 destructive。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button>保存</Button>\n      <Button variant=\"outline\">取消</Button>\n      <Button variant=\"secondary\">存为草稿</Button>\n      <Button variant=\"ghost\">稍后再说</Button>\n      <Button variant=\"link\">查看详情</Button>\n      <Button variant=\"destructive\">删除设备</Button>\n      <Button variant=\"destructive-outline\">解除绑定</Button>\n    </>\n  );\n}\n",
+          "sha256": "a0cecafe33d099df5e36ffb00696053b179a0469666733a08251720e0e3f35c7"
+        },
+        {
+          "id": "sizes",
+          "title": "尺寸",
+          "source": "apps/docs/src/content/button/demos/02-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"尺寸\",\n  description: \"xs 用于表格行内，sm 用于工具栏，lg / xl 用于登录与落地页。移动端统一加高 4px。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button size=\"xs\" variant=\"outline\">行内</Button>\n      <Button size=\"sm\" variant=\"outline\">工具栏</Button>\n      <Button variant=\"outline\">默认</Button>\n      <Button size=\"lg\" variant=\"outline\">登录</Button>\n      <Button size=\"xl\" variant=\"outline\">免费试用</Button>\n    </>\n  );\n}\n",
+          "sha256": "c70506f7675829ceff348a5e3dbe66b0d39c75008dabf5ada9354f71e519e585"
+        },
+        {
+          "id": "icon-sizes",
+          "title": "仅图标",
+          "source": "apps/docs/src/content/button/demos/03-icon-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { PlusIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"仅图标\",\n  description: \"icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button aria-label=\"新建\" size=\"icon-xs\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-sm\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-lg\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-xl\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "a8873d4c0d8210131e20064c5073ae056d46955f7e13cc108d1c4ba7195537af"
+        },
+        {
+          "id": "with-icon",
+          "title": "带图标",
+          "source": "apps/docs/src/content/button/demos/04-with-icon.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ArrowRightIcon, ChevronDownIcon, DownloadIcon, Trash2Icon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"带图标\",\n  description: \"图标放在文字前表示动作类型，放在文字后表示去向或展开。图标会自动调整尺寸与透明度。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button variant=\"outline\">\n        <DownloadIcon aria-hidden=\"true\" />\n        导出报表\n      </Button>\n      <Button>\n        下一步\n        <ArrowRightIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"ghost\">\n        全部状态\n        <ChevronDownIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"destructive-outline\">\n        <Trash2Icon aria-hidden=\"true\" />\n        移入回收站\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "b0ce0740f7595b7972ad0e0246e2eb6a997f04b90e5e0896ccb13378ef2c5f7f"
+        },
+        {
+          "id": "link",
+          "title": "作为链接",
+          "source": "apps/docs/src/content/button/demos/05-link.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronLeftIcon, ExternalLinkIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"作为链接\",\n  description: \"导航用 render 渲染为 <a>，并设 nativeButton={false}，保留按钮外观与链接语义。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button nativeButton={false} render={<a href=\"#orders\" />} variant=\"link\">\n        <ChevronLeftIcon aria-hidden=\"true\" />\n        返回订单列表\n      </Button>\n      <Button\n        nativeButton={false}\n        render={<a href=\"https://example.com/help\" rel=\"noreferrer\" target=\"_blank\" />}\n        variant=\"outline\"\n      >\n        帮助中心\n        <ExternalLinkIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "fffe43b2d48819cdd2674d86959e9dca6ab10190cf9a04fa4d93908338e94884"
+        },
+        {
+          "id": "loading",
+          "title": "加载中",
+          "source": "apps/docs/src/content/button/demos/06-loading.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"加载中\",\n  description: \"loading 显示居中的旋转指示并禁用按钮，文字透明但保留宽度，按钮不会跳动。\",\n};\n\nexport default function Demo() {\n  const [saving, setSaving] = useState(false);\n  const save = () => {\n    setSaving(true);\n    setTimeout(() => setSaving(false), 1500);\n  };\n  return (\n    <>\n      <Button loading={saving} onClick={save}>\n        保存更改\n      </Button>\n      <Button loading variant=\"outline\">\n        同步中\n      </Button>\n      <Button loading variant=\"destructive\">\n        删除中\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "04bbfc57d0eed2a8386d75d4864c7eeeab0cdde9d93c4126a5bda6751409b8f5"
+        },
+        {
+          "id": "loading-custom",
+          "title": "自定义加载",
+          "source": "apps/docs/src/content/button/demos/07-loading-custom.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/spinner"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Spinner } from \"@qingye/ui/components/spinner\";\n\nexport const meta = {\n  title: \"自定义加载\",\n  description: \"需要保留文字时，自行组合 Spinner 与 disabled，例如“正在上传 3 个文件”。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>\n        <Spinner />\n        正在上传 3 个文件\n      </Button>\n      <Button disabled size=\"sm\" variant=\"outline\">\n        <Spinner />\n        生成中\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "f1f78fe69d6b40872e1e8246930c82653a879b3357a0360a2781d164e04771cf"
+        },
+        {
+          "id": "disabled",
+          "title": "禁用",
+          "source": "apps/docs/src/content/button/demos/08-disabled.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = { title: \"禁用\", description: \"不可用时降低不透明度并屏蔽指针事件。\" };\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>提交审核</Button>\n      <Button disabled variant=\"outline\">\n        导出\n      </Button>\n      <Button disabled variant=\"secondary\">\n        存为草稿\n      </Button>\n      <Button disabled variant=\"destructive\">\n        删除\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "603d1f0663a668983f91996ac731cfd22349cf8595929bb1768723f96d30c7c2"
+        },
+        {
+          "id": "form-actions",
+          "title": "组合：表单操作栏",
+          "source": "apps/docs/src/content/button/demos/09-form-actions.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"组合：表单操作栏\",\n  description: \"主操作靠末端；危险操作与其他操作分开放置。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-lg flex-col-reverse gap-2 sm:flex-row sm:items-center\">\n      <Button className=\"sm:me-auto\" variant=\"destructive-outline\">\n        停用账号\n      </Button>\n      <Button variant=\"ghost\">取消</Button>\n      <Button>保存设置</Button>\n    </div>\n  );\n}\n",
+          "sha256": "cb67a704cf614e06c0bdc90564884354037e18c6f4966b713b0cff5ebd792140"
+        },
+        {
+          "id": "card-button",
+          "title": "组合：卡片式按钮",
+          "source": "apps/docs/src/content/button/demos/10-card-button.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronRightIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"组合：卡片式按钮\",\n  description: \"整块可点击的选项，悬停时箭头轻移提示去向。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-md gap-2\">\n      {[\n        { name: \"华东一区 · 杭州\", detail: \"12 台设备在线，1 台告警\" },\n        { name: \"华南二区 · 深圳\", detail: \"8 台设备在线\" },\n      ].map((region) => (\n        <Button className=\"h-auto! justify-between gap-4 px-4 py-3 text-start\" key={region.name} variant=\"outline\">\n          <span className=\"flex flex-col gap-0.5\">\n            <span>{region.name}</span>\n            <span className=\"whitespace-normal font-normal text-muted-foreground\">{region.detail}</span>\n          </span>\n          <ChevronRightIcon\n            aria-hidden=\"true\"\n            className=\"transition-transform duration-(--qy-duration-fast) in-[[data-slot=button]:hover]:translate-x-0.5\"\n          />\n        </Button>\n      ))}\n    </div>\n  );\n}\n",
+          "sha256": "ef8de99ac40981242780d9be34deea2a2ac0c703a5360a8ec4e5ddfcb4f5efcb"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制",
+          "随境取度"
+        ],
+        "whenToUse": [
+          "执行名称明确的动作。当前最重要的动作可以是保存，也可以是停止或返回。"
+        ],
+        "avoid": [
+          "不要把所有操作都叫确定；视觉样式不能隐式授权或决定风险。"
+        ],
+        "composition": [
+          "Button：渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+          "buttonVariants：cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "数据、权限、动作范围、异步结果与持久化。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/button.tsx",
+        "sha256": "b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    },
+    {
+      "name": "file-upload",
+      "title": "文件上传 FileUpload",
+      "description": "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。",
+      "category": "表单",
+      "source": "local",
+      "import": "@qingye/ui/components/file-upload",
+      "exports": [
+        "FileUpload",
+        "formatFileSize"
+      ],
+      "docs": "/docs/components/file-upload",
+      "notes": [
+        "组件不上传文件：在 onFilesChange 中自行上传，再通过 getProgress / getError 回显状态。",
+        "说明文字写清允许的格式和大小，校验失败时会以 role=alert 读出原因。",
+        "图片缩略图使用对象 URL，文件移除或组件卸载时自动释放。"
+      ],
+      "keywords": [
+        "upload",
+        "file",
+        "dropzone",
+        "上传",
+        "附件",
+        "拖拽"
+      ],
+      "api": [
+        {
+          "name": "FileUpload",
+          "description": "拖放区（或紧凑按钮）+ 文件列表 + 校验提示。",
+          "props": [
+            {
+              "name": "files / defaultFiles",
+              "type": "readonly File[]",
+              "description": "受控 / 非受控的文件列表。"
+            },
+            {
+              "name": "onFilesChange",
+              "type": "(files: File[]) => void",
+              "description": "添加或移除后调用，参数是完整列表。"
+            },
+            {
+              "name": "onReject",
+              "type": "(rejected: FileRejection[]) => void",
+              "description": "有文件未通过校验时调用；reason 为 type | size | count。"
+            },
+            {
+              "name": "accept",
+              "type": "string",
+              "description": "与 <input accept> 相同，例如 \"image/*,.pdf\"。"
+            },
+            {
+              "name": "maxSize",
+              "type": "number",
+              "default": "Infinity",
+              "description": "单个文件上限（字节）。"
+            },
+            {
+              "name": "maxFiles",
+              "type": "number",
+              "default": "Infinity",
+              "description": "最多保留的文件数；为 1 时新选的文件替换旧文件。"
+            },
+            {
+              "name": "variant",
+              "type": "\"dropzone\" | \"button\"",
+              "default": "\"dropzone\"",
+              "description": "大面积拖放区，或适合密集表单的按钮触发。"
+            },
+            {
+              "name": "thumbnails",
+              "type": "boolean",
+              "default": "false",
+              "description": "图片文件显示缩略图。"
+            },
+            {
+              "name": "getProgress",
+              "type": "(file, index) => number | null | undefined",
+              "description": "0–100 的上传进度；返回空值时显示文件大小。"
+            },
+            {
+              "name": "getError",
+              "type": "(file, index) => ReactNode",
+              "description": "单个文件的错误信息，例如上传失败。"
+            },
+            {
+              "name": "renderActions",
+              "type": "(file, index) => ReactNode",
+              "description": "每行移除按钮前的额外操作，例如重试。"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "字段名；隐藏的文件输入与列表同步，原生表单提交可直接带上文件。"
+            },
+            {
+              "name": "invalid",
+              "type": "boolean",
+              "default": "false",
+              "description": "错误边框；同时提供可见的错误文字。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用拖放、选择与移除。"
+            },
+            {
+              "name": "label / description / chooseLabel",
+              "type": "string / ReactNode",
+              "description": "覆盖默认文案。"
+            },
+            {
+              "name": "removeLabel / rejectionLabel",
+              "type": "(file) => string / (rejection) => string",
+              "description": "移除按钮名称与校验提示的文案。"
+            },
+            {
+              "name": "buttonProps",
+              "type": "ButtonProps",
+              "description": "button 形态下触发按钮的 variant、size 等。"
+            }
+          ]
+        },
+        {
+          "name": "formatFileSize",
+          "description": "字节数 → 「1.5 MB」这样的可读大小。"
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "description": "聚焦拖放区（或按钮），再依次聚焦每个文件的移除按钮。"
+        },
+        {
+          "keys": "Enter / Space",
+          "description": "打开系统文件选择框。"
+        },
+        {
+          "keys": "Enter / Space（移除按钮）",
+          "description": "移除该文件，焦点移到下一个文件或拖放区。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "FileRejection",
+          "kind": "type",
+          "owner": "file-upload",
+          "module": "@qingye/ui/components/file-upload",
+          "signature": "{ file: File; reason: \"type\" | \"size\" | \"count\" }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FileUpload",
+          "kind": "function",
+          "owner": "file-upload",
+          "module": "@qingye/ui/components/file-upload",
+          "propsType": "FileUploadProps",
+          "signature": "FileUpload({\n  files,\n  defaultFiles = [],\n  onFilesChange,\n  onReject,\n  accept = \"\",\n  maxSize = Number.POSITIVE_INFINITY,\n  maxFiles = Number.POSITIVE_INFINITY,\n  disabled = false,\n  invalid = false,\n  variant = \"dropzone\",\n  name,\n  id,\n  \"aria-describedby\": ariaDescribedBy,\n  label,\n  description,\n  chooseLabel,\n  removeLabel,\n  rejectionLabel,\n  thumbnails = false,\n  getProgress,\n  getError,\n  renderActions,\n  buttonProps,\n  className,\n}: FileUploadProps): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FileUploadProps",
+          "kind": "type",
+          "owner": "file-upload",
+          "module": "@qingye/ui/components/file-upload",
+          "signature": "{\n  /** Controlled file list. */\n  files?: readonly File[];\n  defaultFiles?: readonly File[];\n  onFilesChange?: (files: File[]) => void;\n  /** Files that failed `accept`, `maxSize` or `maxFiles`. */\n  onReject?: (rejected: FileRejection[]) => void;\n  /** Same syntax as `<input accept>`: `image/*`, `.pdf`, `application/zip`. */\n  accept?: string;\n  /** Largest allowed file in bytes. */\n  maxSize?: number;\n  /** Most files kept. With `1`, a new pick replaces the current file. */\n  maxFiles?: number;\n  disabled?: boolean;\n  /** Error styling for the drop zone or button; pair with a visible message. */\n  invalid?: boolean;\n  /** `dropzone` is a large target; `button` is a compact trigger for dense forms. */\n  variant?: \"dropzone\" | \"button\";\n  /**\n   * Field name. The hidden file input mirrors the list, so a native form\n   * submission carries the files (where the browser supports DataTransfer).\n   */\n  name?: string;\n  /** Id of the focusable trigger, for an external `<label htmlFor>`. */\n  id?: string;\n  \"aria-describedby\"?: string;\n  label?: string;\n  description?: React.ReactNode;\n  chooseLabel?: string;\n  removeLabel?: (file: File) => string;\n  rejectionLabel?: (rejection: FileRejection) => string;\n  /** Show image previews instead of type icons. */\n  thumbnails?: boolean;\n  /** Upload progress 0–100 for a file, or nothing when idle. The component never uploads. */\n  getProgress?: (file: File, index: number) => number | null | undefined;\n  /** Per-file error, e.g. a failed upload. */\n  getError?: (file: File, index: number) => React.ReactNode;\n  /** Extra actions per row, rendered before the remove button (e.g. retry). */\n  renderActions?: (file: File, index: number) => React.ReactNode;\n  /** Props for the trigger button in the `button` variant. */\n  buttonProps?: Omit<ButtonProps, \"onClick\" | \"disabled\" | \"type\" | \"children\">;\n  className?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "formatFileSize",
+          "kind": "function",
+          "owner": "file-upload",
+          "module": "@qingye/ui/components/file-upload",
+          "propsType": "number",
+          "signature": "formatFileSize(bytes: number): string",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "FileRejection",
+          "definition": "export type FileRejection = { file: File; reason: \"type\" | \"size\" | \"count\" };"
+        },
+        {
+          "name": "FileUploadProps",
+          "definition": "export type FileUploadProps = {\n  /** Controlled file list. */\n  files?: readonly File[];\n  defaultFiles?: readonly File[];\n  onFilesChange?: (files: File[]) => void;\n  /** Files that failed `accept`, `maxSize` or `maxFiles`. */\n  onReject?: (rejected: FileRejection[]) => void;\n  /** Same syntax as `<input accept>`: `image/*`, `.pdf`, `application/zip`. */\n  accept?: string;\n  /** Largest allowed file in bytes. */\n  maxSize?: number;\n  /** Most files kept. With `1`, a new pick replaces the current file. */\n  maxFiles?: number;\n  disabled?: boolean;\n  /** Error styling for the drop zone or button; pair with a visible message. */\n  invalid?: boolean;\n  /** `dropzone` is a large target; `button` is a compact trigger for dense forms. */\n  variant?: \"dropzone\" | \"button\";\n  /**\n   * Field name. The hidden file input mirrors the list, so a native form\n   * submission carries the files (where the browser supports DataTransfer).\n   */\n  name?: string;\n  /** Id of the focusable trigger, for an external `<label htmlFor>`. */\n  id?: string;\n  \"aria-describedby\"?: string;\n  label?: string;\n  description?: React.ReactNode;\n  chooseLabel?: string;\n  removeLabel?: (file: File) => string;\n  rejectionLabel?: (rejection: FileRejection) => string;\n  /** Show image previews instead of type icons. */\n  thumbnails?: boolean;\n  /** Upload progress 0–100 for a file, or nothing when idle. The component never uploads. */\n  getProgress?: (file: File, index: number) => number | null | undefined;\n  /** Per-file error, e.g. a failed upload. */\n  getError?: (file: File, index: number) => React.ReactNode;\n  /** Extra actions per row, rendered before the remove button (e.g. retry). */\n  renderActions?: (file: File, index: number) => React.ReactNode;\n  /** Props for the trigger button in the `button` variant. */\n  buttonProps?: Omit<ButtonProps, \"onClick\" | \"disabled\" | \"type\" | \"children\">;\n  className?: string;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "FileUpload",
+          "import": "@qingye/ui/components/file-upload",
+          "owner": "file-upload",
+          "status": "PASS"
+        },
+        {
+          "name": "formatFileSize",
+          "import": "@qingye/ui/components/file-upload",
+          "owner": "file-upload",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "lucide-react",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "dropzone",
+          "title": "拖放区",
+          "source": "apps/docs/src/content/file-upload/demos/01-dropzone.tsx",
+          "imports": [
+            "@qingye/ui/components/file-upload"
+          ],
+          "providers": [],
+          "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = { title: \"拖放区\", description: \"点击或拖入文件；不符合类型或大小的文件会被拒绝并说明原因。\" };\n\nconst sample = (name: string, type: string, size: number) => new File([new Uint8Array(size)], name, { type });\n\nexport default function Demo() {\n  return (\n    <FileUpload\n      className=\"w-full max-w-md\"\n      accept=\"image/*,.pdf\"\n      maxSize={10 * 1024 * 1024}\n      label=\"上传发票\"\n      description=\"支持 PNG、JPG、PDF，单个不超过 10 MB\"\n      defaultFiles={[\n        sample(\"2026年9月差旅发票.pdf\", \"application/pdf\", 248_000),\n        sample(\"酒店住宿水单-杭州.jpg\", \"image/jpeg\", 1_860_000),\n      ]}\n    />\n  );\n}\n",
+          "sha256": "fe85d25074f6fcbb434ac181f8e51629869f34b97488ff06f2d8de2fbbee9fd0"
+        },
+        {
+          "id": "progress",
+          "title": "缩略图、进度与错误",
+          "source": "apps/docs/src/content/file-upload/demos/02-progress.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/file-upload",
+            "lucide-react",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { RotateCwIcon } from \"lucide-react\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = {\n  title: \"缩略图、进度与错误\",\n  description: \"组件只展示状态：上传逻辑放在外部，通过 getProgress、getError 和 renderActions 回显。\",\n};\n\nconst photo = (name: string, hue: number) =>\n  new File(\n    [`<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 40 40\"><rect width=\"40\" height=\"40\" fill=\"hsl(${hue} 30% 62%)\"/><circle cx=\"28\" cy=\"13\" r=\"5\" fill=\"hsl(${hue} 40% 86%)\"/><path d=\"M0 40 14 22l10 10 6-6 10 14z\" fill=\"hsl(${hue} 28% 38%)\"/></svg>`],\n    name,\n    { type: \"image/svg+xml\" },\n  );\n\nconst initial = [photo(\"机柜正面-A03.svg\", 210), photo(\"配线架标签.svg\", 150), photo(\"UPS 告警面板.svg\", 20)];\n\nexport default function Demo() {\n  const [files, setFiles] = useState<File[]>(initial);\n  const [progress, setProgress] = useState(() => new Map<File, number>([[initial[0]!, 100], [initial[1]!, 64]]));\n  const [failed, setFailed] = useState(() => new Set<File>([initial[2]!]));\n\n  // Simulated upload: every file without progress starts climbing.\n  useEffect(() => {\n    const timer = setInterval(() => {\n      setProgress((previous) => {\n        const next = new Map(previous);\n        for (const file of files) {\n          if (failed.has(file)) continue;\n          const value = next.get(file) ?? 0;\n          if (value < 100) next.set(file, Math.min(100, value + 9));\n        }\n        return next;\n      });\n    }, 400);\n    return () => clearInterval(timer);\n  }, [files, failed]);\n\n  return (\n    <FileUpload\n      className=\"w-full max-w-md\"\n      accept=\"image/*\"\n      thumbnails\n      label=\"上传现场照片\"\n      description=\"巡检工单 #4821 · 最多 6 张\"\n      maxFiles={6}\n      files={files}\n      onFilesChange={setFiles}\n      getProgress={(file) => (progress.get(file) === 100 ? null : (progress.get(file) ?? 0))}\n      getError={(file) => (failed.has(file) ? \"上传失败：网络连接中断\" : null)}\n      renderActions={(file) =>\n        failed.has(file) ? (\n          <Button\n            size=\"icon-sm\"\n            variant=\"ghost\"\n            aria-label={`重试上传 ${file.name}`}\n            onClick={() => {\n              setFailed((previous) => new Set([...previous].filter((item) => item !== file)));\n              setProgress((previous) => new Map(previous).set(file, 0));\n            }}\n          >\n            <RotateCwIcon />\n          </Button>\n        ) : null\n      }\n    />\n  );\n}\n",
+          "sha256": "765b0e76332cb372bb89dd7fd6f47eb35be2b4a32ee9798af3ce08431c04923c"
+        },
+        {
+          "id": "button",
+          "title": "按钮触发",
+          "source": "apps/docs/src/content/file-upload/demos/03-button.tsx",
+          "imports": [
+            "@qingye/ui/components/file-upload",
+            "@qingye/ui/components/label"
+          ],
+          "providers": [],
+          "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { Label } from \"@qingye/ui/components/label\";\n\nexport const meta = { title: \"按钮触发\", description: \"variant=\\\"button\\\" 适合表单中的单个附件；maxFiles=1 时新文件替换旧文件。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-2\">\n      <Label htmlFor=\"contract-file\">签署版合同</Label>\n      <FileUpload\n        id=\"contract-file\"\n        variant=\"button\"\n        accept=\".pdf\"\n        maxFiles={1}\n        maxSize={20 * 1024 * 1024}\n        chooseLabel=\"选择 PDF\"\n        description=\"仅 PDF，不超过 20 MB\"\n      />\n    </div>\n  );\n}\n",
+          "sha256": "1025113f1da9cea2e6bdbab2cbe16da5605386aa606a528a4deaa8b95a7c1a8a"
+        },
+        {
+          "id": "states",
+          "title": "状态",
+          "source": "apps/docs/src/content/file-upload/demos/04-states.tsx",
+          "imports": [
+            "@qingye/ui/components/file-upload"
+          ],
+          "providers": [],
+          "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = { title: \"状态\", description: \"禁用与错误。错误状态要同时给出文字说明。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-2xl gap-6 sm:grid-cols-2\">\n      <FileUpload disabled label=\"上传固件包\" description=\"设备在线升级期间不可上传\" />\n      <div className=\"flex flex-col gap-2\">\n        <FileUpload invalid aria-describedby=\"id-card-error\" label=\"上传身份证照片\" description=\"正反面各一张，JPG 或 PNG\" accept=\"image/*\" />\n        <p id=\"id-card-error\" className=\"text-destructive-foreground text-xs\">请上传身份证正反面照片</p>\n      </div>\n    </div>\n  );\n}\n",
+          "sha256": "e4b8cfc562ea2e5d0f22be4aa00581f292b07d3b4383c0268d695c6cfba27ef1"
+        },
+        {
+          "id": "validation",
+          "title": "数量与大小限制",
+          "source": "apps/docs/src/content/file-upload/demos/05-validation.tsx",
+          "imports": [
+            "@qingye/ui/components/file-upload",
+            "react"
+          ],
+          "providers": [],
+          "code": "import type { FileRejection } from \"@qingye/ui/components/file-upload\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"数量与大小限制\",\n  description: \"最多 3 个文件、单个 2 MB。拖入超出的文件试试，被拒绝的文件会逐条列出原因。\",\n};\n\nexport default function Demo() {\n  const [rejected, setRejected] = useState<FileRejection[]>([]);\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-2\">\n      <FileUpload\n        maxFiles={3}\n        maxSize={2 * 1024 * 1024}\n        accept=\".csv,.xlsx\"\n        label=\"导入设备台账\"\n        description=\"CSV 或 Excel，最多 3 个，单个不超过 2 MB\"\n        onReject={setRejected}\n      />\n      <p className=\"text-muted-foreground text-xs numeric\">本次拒绝 {rejected.length} 个文件</p>\n    </div>\n  );\n}\n",
+          "sha256": "63dab5276b1903f5cb01788e599e75986e059c58355e3cddaf79a4a56f213d60"
+        },
+        {
+          "id": "form",
+          "title": "组合：提交工单",
+          "source": "apps/docs/src/content/file-upload/demos/06-form.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/file-upload",
+            "@qingye/ui/components/input",
+            "@qingye/ui/components/label",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldDescription } from \"@qingye/ui/components/field\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { Label } from \"@qingye/ui/components/label\";\nimport { useState, type FormEvent } from \"react\";\n\nexport const meta = { title: \"组合：提交工单\", description: \"通过 name 参与原生表单提交，FormData 中直接拿到 File。\" };\n\nexport default function Demo() {\n  const [summary, setSummary] = useState<string | null>(null);\n  const onSubmit = (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    const files = new FormData(event.currentTarget).getAll(\"attachments\") as File[];\n    setSummary(files.filter((file) => file.size > 0).map((file) => file.name).join(\"、\") || \"无附件\");\n  };\n  return (\n    <form className=\"flex w-full max-w-md flex-col gap-4\" onSubmit={onSubmit}>\n      <Field>\n        <Label htmlFor=\"ticket-title\">问题描述</Label>\n        <Input id=\"ticket-title\" defaultValue=\"3 楼会议室投影仪无法识别 HDMI 信号\" />\n      </Field>\n      <Field>\n        <Label htmlFor=\"ticket-files\">附件</Label>\n        <FileUpload id=\"ticket-files\" name=\"attachments\" variant=\"button\" maxFiles={5} chooseLabel=\"添加附件\" />\n        <FieldDescription>截图或日志，最多 5 个。</FieldDescription>\n      </Field>\n      <Button type=\"submit\" className=\"self-start\">提交工单</Button>\n      {summary !== null ? <p className=\"text-muted-foreground text-xs\">已提交：{summary}</p> : null}\n    </form>\n  );\n}\n",
+          "sha256": "6c361395c557855f6a7db2d034a47e4024115d902c78c6bd2e0769d81a87397c"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "布白有用",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "FileUpload：拖放区（或紧凑按钮）+ 文件列表 + 校验提示。",
+          "formatFileSize：字节数 → 「1.5 MB」这样的可读大小。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "对象、草稿、校验业务规则、版本与保存结果。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/file-upload.tsx",
+        "sha256": "6afa56806138516e949dac7c48c42569c41cf24197ed1d2f922558aca63f2a23",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "id": "queue",
+      "slug": "queue",
+      "title": "上传与处理",
+      "description": "区分传输、处理与结果，取消请求有等待和过晚取消分支。",
+      "components": [
+        "file-upload",
+        "progress",
+        "button",
+        "badge",
+        "alert"
+      ],
+      "states": [
+        "ready",
+        "transferring",
+        "processing",
+        "success",
+        "failure",
+        "unknown",
+        "cancelling",
+        "cancelled",
+        "too-late"
+      ],
+      "href": "/docs/patterns/queue",
+      "source": "apps/docs/src/patterns/queue.tsx",
+      "methods": [
+        "名实相符",
+        "相成相制",
+        "进退相承"
+      ]
+    }
+  ]
+}

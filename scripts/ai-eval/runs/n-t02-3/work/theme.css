@@ -1,0 +1,4 @@
+/* Sentinel field-group relationships share one project-level override. */
+html[data-brand="sentinel"] {
+  --qy-field-group-gap: 12px;
+}

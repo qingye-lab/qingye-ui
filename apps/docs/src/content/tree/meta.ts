@@ -12,7 +12,7 @@ export default {
       name: "Tree",
       description: "渲染 role=\"tree\" 的 <ul>，子节点位于 role=\"group\" 中；其余属性透传到根元素。",
       props: [
-        { name: "nodes", type: "TreeNode[]", description: "节点：{ id, label, children?, icon?, expandedIcon?, suffix?, textValue?, disabled? }。" },
+        { name: "nodes", type: "TreeNode[]", description: "节点：{ id, label, children?, hasChildren?, icon?, expandedIcon?, suffix?, textValue?, disabled? }。" },
         { name: "label", type: "string", description: "无障碍名称；也可传 aria-labelledby。" },
         { name: "value / defaultValue", type: "string | null", description: "选中的节点 id（单选）。" },
         { name: "onValueChange", type: "(id, node) => void", description: "选中变化。" },
@@ -30,6 +30,7 @@ export default {
         { name: "suffix", type: "ReactNode", description: "行尾内容，如数量、大小或徽章。" },
         { name: "textValue", type: "string", description: "label 不是纯文本时用于键入查找。" },
         { name: "disabled", type: "boolean", description: "不可聚焦、选中或展开。" },
+        { name: "hasChildren", type: "boolean", description: "惰性父节点尚无 children 时声明展开能力；加载、错误和重试由应用负责。" },
       ],
     },
   ],

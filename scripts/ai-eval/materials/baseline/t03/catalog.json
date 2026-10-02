@@ -1,0 +1,69 @@
+{
+  "package": "@qingye/ui",
+  "version": "0.3.0",
+  "schemaVersion": 1,
+  "components": [
+    {
+      "name": "button",
+      "title": "按钮 Button",
+      "description": "触发一个操作或提交表单。每个区域只放一个主按钮，其余用 outline、secondary、ghost 等次要样式。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/button",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "docs": "/docs/components/button",
+      "notes": [
+        "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+        "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+        "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+        "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+        "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+      ],
+      "keywords": [
+        "button",
+        "按钮",
+        "操作",
+        "提交",
+        "loading"
+      ]
+    },
+    {
+      "name": "data-table",
+      "title": "数据表格 DataTable",
+      "description": "基于 TanStack Table 的完整列表：排序、搜索、分页、行选择、批量操作、列显示切换与加载态。既可在客户端处理数据，也可交给服务端分页排序。",
+      "category": "数据展示",
+      "source": "local",
+      "import": "@qingye/ui/components/data-table",
+      "exports": [
+        "DataTable",
+        "type ColumnDef",
+        "type DataTableBulkContext",
+        "type DataTableInstance"
+      ],
+      "docs": "/docs/components/data-table",
+      "notes": [
+        "传入 getRowId，让选择在排序、翻页和数据刷新后仍然指向同一行。",
+        "数字、金额、日期列设置 meta: { align: \"end\" }，表头排序图标随之放到左侧，数值右对齐便于比较。",
+        "文本列默认按语言的排序规则（Intl.Collator）比较，中文按拼音排序；用 collationLocale 可覆盖，给列写自己的 sortingFn 也可以。",
+        "服务端模式下同时设置 manualPagination、manualSorting（及需要的 manualFiltering）与 rowCount，并在 onXChange 中请求数据，请求期间传 loading。",
+        "搜索、筛选或排序变化时自动回到第一页；数据减少导致页码越界时自动退回最后一页。",
+        "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露，方向同时写给排序按钮的读屏文本。",
+        "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
+        "加载态渲染与当前每页行数相同的骨架行，数据到达时表格高度不跳动。"
+      ],
+      "keywords": [
+        "data table",
+        "datatable",
+        "数据表格",
+        "列表",
+        "分页",
+        "排序",
+        "tanstack"
+      ]
+    }
+  ],
+  "patterns": []
+}

@@ -1,0 +1,68 @@
+{
+  "package": "@qingye/ui",
+  "version": "0.3.0",
+  "schemaVersion": 1,
+  "components": [
+    {
+      "name": "field",
+      "title": "表单项 Field",
+      "description": "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/field",
+      "exports": [
+        "Field",
+        "FieldLabel",
+        "FieldDescription",
+        "FieldError",
+        "FieldContent",
+        "FieldTitle",
+        "FieldGroup",
+        "FieldSeparator",
+        "FieldControl",
+        "FieldValidity"
+      ],
+      "docs": "/docs/components/field",
+      "notes": [
+        "没有 children 的 <FieldError /> 跟随 Base UI：字段无效时显示浏览器校验信息或 Form errors 中的同名错误。",
+        "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
+        "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
+        "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
+        "控件不是可接收 id 的原生输入时（如 FileUpload、ToggleGroup），在 FieldLabel 上写 htmlFor、在控件上写同值 id，标签才能正确关联；FieldDescription 会自动进入 aria-describedby。"
+      ],
+      "keywords": [
+        "field",
+        "表单项",
+        "校验",
+        "错误提示",
+        "label",
+        "description"
+      ]
+    },
+    {
+      "name": "input",
+      "title": "输入框 Input",
+      "description": "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/input",
+      "exports": [
+        "Input"
+      ],
+      "docs": "/docs/components/input",
+      "notes": [
+        "每个输入框都要有可见标签（FieldLabel / Label）；只有搜索框等意义明确的场景才只用 aria-label。",
+        "占位文字只做示例，不要代替标签。",
+        "触屏设备上输入框最小高度为 44px，便于点按；字号在移动端为 16px，避免 iOS 聚焦时缩放。",
+        "type=\"file\" 用的是浏览器原生控件：Input 只提供外框样式，“Choose File / No file chosen”由浏览器按自身语言绘制，CSS 无法改写（::file-selector-button 不接受 content），也无对应属性可覆盖。中文界面请改用 FileUpload——它自带本地化文案、格式与大小校验和文件列表。"
+      ],
+      "keywords": [
+        "input",
+        "输入框",
+        "文本框",
+        "text field"
+      ]
+    }
+  ],
+  "patterns": []
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1, "package": "@qingye/ui", "publicEntry": "src/ui.ts", "styleEntry": "src/ui.css",
+  "theme": { "source": "ui.theme.json", "generated": "ui.theme.generated.css", "mode": "class" },
+  "scan": ["src"], "compositions": [], "tokenSources": [], "adapters": [],
+  "diagnostics": { "preset": "personal", "mode": "report", "report": ".qingye/report.json" },
+  "ledger": "../../../../docs/token-ledger.json", "ledgerRoot": "../../../.."
+}

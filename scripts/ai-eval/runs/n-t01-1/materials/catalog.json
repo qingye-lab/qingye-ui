@@ -1,0 +1,1322 @@
+{
+  "package": "@qingye/ui",
+  "version": "0.3.0",
+  "schemaVersion": 2,
+  "components": [
+    {
+      "name": "button",
+      "title": "按钮 Button",
+      "description": "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
+      "category": "通用",
+      "source": "coss",
+      "import": "@qingye/ui/components/button",
+      "exports": [
+        "Button",
+        "buttonVariants"
+      ],
+      "docs": "/docs/components/button",
+      "notes": [
+        "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+        "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+        "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+        "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+        "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+      ],
+      "keywords": [
+        "button",
+        "按钮",
+        "操作",
+        "提交",
+        "loading"
+      ],
+      "api": [
+        {
+          "name": "Button",
+          "description": "渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+          "props": [
+            {
+              "name": "variant",
+              "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\" | \"destructive\" | \"destructive-outline\"",
+              "default": "\"default\"",
+              "description": "视觉样式。"
+            },
+            {
+              "name": "size",
+              "type": "\"xs\" | \"sm\" | \"default\" | \"lg\" | \"xl\" | \"icon-xs\" | \"icon-sm\" | \"icon\" | \"icon-lg\" | \"icon-xl\"",
+              "default": "\"default\"",
+              "description": "尺寸；icon-* 为仅图标的正方形按钮，与同名文字尺寸等高。"
+            },
+            {
+              "name": "loading",
+              "type": "boolean",
+              "default": "false",
+              "description": "显示居中的 Spinner、设置 aria-busy 并禁用，文字透明以保留宽度。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用；不透明度降至 64% 并屏蔽指针事件。"
+            },
+            {
+              "name": "render",
+              "type": "ReactElement | (props, state) => ReactElement",
+              "description": "替换渲染元素，例如 <a> 或路由库的 Link。"
+            },
+            {
+              "name": "nativeButton",
+              "type": "boolean",
+              "default": "true",
+              "description": "render 为非 <button> 元素时设为 false，以保持键盘与禁用语义。"
+            }
+          ]
+        },
+        {
+          "name": "buttonVariants",
+          "description": "cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Enter / Space",
+          "description": "触发按钮。"
+        },
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "移入、移出焦点；键盘聚焦时显示焦点环。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Button",
+          "kind": "function",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "propsType": "ButtonProps",
+          "signature": "Button({\n  className,\n  variant,\n  size,\n  render,\n  children,\n  loading = false,\n  disabled: disabledProp,\n  nativeButton,\n  ...props\n}: ButtonProps): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonProps",
+          "kind": "interface",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "buttonVariants",
+          "kind": "const",
+          "owner": "button",
+          "module": "@qingye/ui/components/button",
+          "status": "UNVERIFIED",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ButtonProps",
+          "definition": "export interface ButtonProps extends useRender.ComponentProps<\"button\"> {\n  variant?: VariantProps<typeof buttonVariants>[\"variant\"];\n  size?: VariantProps<typeof buttonVariants>[\"size\"];\n  loading?: boolean;\n  /**\n   * Set to `false` when `render` produces a non-button element (for example a\n   * link styled as a button) so keyboard and disabled semantics stay correct.\n   */\n  nativeButton?: boolean;\n}"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Button",
+          "import": "@qingye/ui/components/button",
+          "owner": "button",
+          "status": "PASS"
+        },
+        {
+          "name": "buttonVariants",
+          "import": "@qingye/ui/components/button",
+          "owner": "button",
+          "status": "UNVERIFIED"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "lucide-react",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "variants",
+          "title": "样式",
+          "source": "apps/docs/src/content/button/demos/01-variants.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"样式\",\n  description: \"一个区域只放一个主按钮；次要操作用 outline、secondary 或 ghost，危险操作用 destructive。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button>保存</Button>\n      <Button variant=\"outline\">取消</Button>\n      <Button variant=\"secondary\">存为草稿</Button>\n      <Button variant=\"ghost\">稍后再说</Button>\n      <Button variant=\"link\">查看详情</Button>\n      <Button variant=\"destructive\">删除设备</Button>\n      <Button variant=\"destructive-outline\">解除绑定</Button>\n    </>\n  );\n}\n",
+          "sha256": "a0cecafe33d099df5e36ffb00696053b179a0469666733a08251720e0e3f35c7"
+        },
+        {
+          "id": "sizes",
+          "title": "尺寸",
+          "source": "apps/docs/src/content/button/demos/02-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"尺寸\",\n  description: \"xs 用于表格行内，sm 用于工具栏，lg / xl 用于登录与落地页。移动端统一加高 4px。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button size=\"xs\" variant=\"outline\">行内</Button>\n      <Button size=\"sm\" variant=\"outline\">工具栏</Button>\n      <Button variant=\"outline\">默认</Button>\n      <Button size=\"lg\" variant=\"outline\">登录</Button>\n      <Button size=\"xl\" variant=\"outline\">免费试用</Button>\n    </>\n  );\n}\n",
+          "sha256": "c70506f7675829ceff348a5e3dbe66b0d39c75008dabf5ada9354f71e519e585"
+        },
+        {
+          "id": "icon-sizes",
+          "title": "仅图标",
+          "source": "apps/docs/src/content/button/demos/03-icon-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { PlusIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"仅图标\",\n  description: \"icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button aria-label=\"新建\" size=\"icon-xs\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-sm\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-lg\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-xl\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "a8873d4c0d8210131e20064c5073ae056d46955f7e13cc108d1c4ba7195537af"
+        },
+        {
+          "id": "with-icon",
+          "title": "带图标",
+          "source": "apps/docs/src/content/button/demos/04-with-icon.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ArrowRightIcon, ChevronDownIcon, DownloadIcon, Trash2Icon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"带图标\",\n  description: \"图标放在文字前表示动作类型，放在文字后表示去向或展开。图标会自动调整尺寸与透明度。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button variant=\"outline\">\n        <DownloadIcon aria-hidden=\"true\" />\n        导出报表\n      </Button>\n      <Button>\n        下一步\n        <ArrowRightIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"ghost\">\n        全部状态\n        <ChevronDownIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"destructive-outline\">\n        <Trash2Icon aria-hidden=\"true\" />\n        移入回收站\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "b0ce0740f7595b7972ad0e0246e2eb6a997f04b90e5e0896ccb13378ef2c5f7f"
+        },
+        {
+          "id": "link",
+          "title": "作为链接",
+          "source": "apps/docs/src/content/button/demos/05-link.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronLeftIcon, ExternalLinkIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"作为链接\",\n  description: \"导航用 render 渲染为 <a>，并设 nativeButton={false}，保留按钮外观与链接语义。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button nativeButton={false} render={<a href=\"#orders\" />} variant=\"link\">\n        <ChevronLeftIcon aria-hidden=\"true\" />\n        返回订单列表\n      </Button>\n      <Button\n        nativeButton={false}\n        render={<a href=\"https://example.com/help\" rel=\"noreferrer\" target=\"_blank\" />}\n        variant=\"outline\"\n      >\n        帮助中心\n        <ExternalLinkIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "fffe43b2d48819cdd2674d86959e9dca6ab10190cf9a04fa4d93908338e94884"
+        },
+        {
+          "id": "loading",
+          "title": "加载中",
+          "source": "apps/docs/src/content/button/demos/06-loading.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"加载中\",\n  description: \"loading 显示居中的旋转指示并禁用按钮，文字透明但保留宽度，按钮不会跳动。\",\n};\n\nexport default function Demo() {\n  const [saving, setSaving] = useState(false);\n  const save = () => {\n    setSaving(true);\n    setTimeout(() => setSaving(false), 1500);\n  };\n  return (\n    <>\n      <Button loading={saving} onClick={save}>\n        保存更改\n      </Button>\n      <Button loading variant=\"outline\">\n        同步中\n      </Button>\n      <Button loading variant=\"destructive\">\n        删除中\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "04bbfc57d0eed2a8386d75d4864c7eeeab0cdde9d93c4126a5bda6751409b8f5"
+        },
+        {
+          "id": "loading-custom",
+          "title": "自定义加载",
+          "source": "apps/docs/src/content/button/demos/07-loading-custom.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/spinner"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Spinner } from \"@qingye/ui/components/spinner\";\n\nexport const meta = {\n  title: \"自定义加载\",\n  description: \"需要保留文字时，自行组合 Spinner 与 disabled，例如“正在上传 3 个文件”。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>\n        <Spinner />\n        正在上传 3 个文件\n      </Button>\n      <Button disabled size=\"sm\" variant=\"outline\">\n        <Spinner />\n        生成中\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "f1f78fe69d6b40872e1e8246930c82653a879b3357a0360a2781d164e04771cf"
+        },
+        {
+          "id": "disabled",
+          "title": "禁用",
+          "source": "apps/docs/src/content/button/demos/08-disabled.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = { title: \"禁用\", description: \"不可用时降低不透明度并屏蔽指针事件。\" };\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>提交审核</Button>\n      <Button disabled variant=\"outline\">\n        导出\n      </Button>\n      <Button disabled variant=\"secondary\">\n        存为草稿\n      </Button>\n      <Button disabled variant=\"destructive\">\n        删除\n      </Button>\n    </>\n  );\n}\n",
+          "sha256": "603d1f0663a668983f91996ac731cfd22349cf8595929bb1768723f96d30c7c2"
+        },
+        {
+          "id": "form-actions",
+          "title": "组合：表单操作栏",
+          "source": "apps/docs/src/content/button/demos/09-form-actions.tsx",
+          "imports": [
+            "@qingye/ui/components/button"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"组合：表单操作栏\",\n  description: \"主操作靠末端；危险操作与其他操作分开放置。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-lg flex-col-reverse gap-2 sm:flex-row sm:items-center\">\n      <Button className=\"sm:me-auto\" variant=\"destructive-outline\">\n        停用账号\n      </Button>\n      <Button variant=\"ghost\">取消</Button>\n      <Button>保存设置</Button>\n    </div>\n  );\n}\n",
+          "sha256": "cb67a704cf614e06c0bdc90564884354037e18c6f4966b713b0cff5ebd792140"
+        },
+        {
+          "id": "card-button",
+          "title": "组合：卡片式按钮",
+          "source": "apps/docs/src/content/button/demos/10-card-button.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "lucide-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronRightIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"组合：卡片式按钮\",\n  description: \"整块可点击的选项，悬停时箭头轻移提示去向。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-md gap-2\">\n      {[\n        { name: \"华东一区 · 杭州\", detail: \"12 台设备在线，1 台告警\" },\n        { name: \"华南二区 · 深圳\", detail: \"8 台设备在线\" },\n      ].map((region) => (\n        <Button className=\"h-auto! justify-between gap-4 px-4 py-3 text-start\" key={region.name} variant=\"outline\">\n          <span className=\"flex flex-col gap-0.5\">\n            <span>{region.name}</span>\n            <span className=\"whitespace-normal font-normal text-muted-foreground\">{region.detail}</span>\n          </span>\n          <ChevronRightIcon\n            aria-hidden=\"true\"\n            className=\"transition-transform duration-(--qy-duration-fast) in-[[data-slot=button]:hover]:translate-x-0.5\"\n          />\n        </Button>\n      ))}\n    </div>\n  );\n}\n",
+          "sha256": "ef8de99ac40981242780d9be34deea2a2ac0c703a5360a8ec4e5ddfcb4f5efcb"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制",
+          "随境取度"
+        ],
+        "whenToUse": [
+          "执行名称明确的动作。当前最重要的动作可以是保存，也可以是停止或返回。"
+        ],
+        "avoid": [
+          "不要把所有操作都叫确定；视觉样式不能隐式授权或决定风险。"
+        ],
+        "composition": [
+          "Button：渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+          "buttonVariants：cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "数据、权限、动作范围、异步结果与持久化。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/button.tsx",
+        "sha256": "b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    },
+    {
+      "name": "field",
+      "title": "表单项 Field",
+      "description": "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/field",
+      "exports": [
+        "Field",
+        "FieldLabel",
+        "FieldDescription",
+        "FieldError",
+        "FieldContent",
+        "FieldTitle",
+        "FieldGroup",
+        "FieldSeparator",
+        "FieldControl",
+        "FieldValidity"
+      ],
+      "docs": "/docs/components/field",
+      "notes": [
+        "没有 children 的 <FieldError /> 跟随 Base UI：字段无效时显示浏览器校验信息或 Form errors 中的同名错误。",
+        "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
+        "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
+        "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
+        "控件不是可接收 id 的原生输入时（如 FileUpload、ToggleGroup），在 FieldLabel 上写 htmlFor、在控件上写同值 id，标签才能正确关联；FieldDescription 会自动进入 aria-describedby。"
+      ],
+      "keywords": [
+        "field",
+        "表单项",
+        "校验",
+        "错误提示",
+        "label",
+        "description"
+      ],
+      "api": [
+        {
+          "name": "Field",
+          "description": "基于 Base UI Field.Root。为内部控件提供 id、aria-describedby 与校验状态。",
+          "props": [
+            {
+              "name": "orientation",
+              "type": "\"vertical\" | \"horizontal\"",
+              "default": "\"vertical\"",
+              "description": "horizontal 让标签与控件并排，用于开关、复选框行。"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "字段名；在 Form 中用于提交值与匹配 errors。"
+            },
+            {
+              "name": "invalid",
+              "type": "boolean",
+              "description": "外部校验结果（如表单库）；为 true 时控件标记为无效。"
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用标签与控件。"
+            },
+            {
+              "name": "validate",
+              "type": "(value, formValues) => string | string[] | null",
+              "description": "自定义校验，返回错误信息。"
+            },
+            {
+              "name": "validationMode",
+              "type": "\"onSubmit\" | \"onBlur\" | \"onChange\"",
+              "default": "\"onSubmit\"",
+              "description": "何时校验。"
+            }
+          ]
+        },
+        {
+          "name": "FieldLabel",
+          "description": "标签，自动关联控件；禁用时一起变淡。"
+        },
+        {
+          "name": "FieldDescription",
+          "description": "说明文字，自动加入控件的 aria-describedby。"
+        },
+        {
+          "name": "FieldError",
+          "description": "错误信息，出现时轻微淡入，并加入 aria-describedby。",
+          "props": [
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "有内容时直接显示，由调用方决定何时渲染。"
+            },
+            {
+              "name": "errors",
+              "type": "Array<{ message?: string } | undefined>",
+              "description": "表单库的错误数组；去重，多条时显示为列表。"
+            },
+            {
+              "name": "match",
+              "type": "boolean | keyof ValidityState",
+              "description": "只在某个校验状态下显示，如 \"valueMissing\"、\"typeMismatch\"。"
+            }
+          ]
+        },
+        {
+          "name": "FieldContent",
+          "description": "横向表单项中包住标签与说明的一列。"
+        },
+        {
+          "name": "FieldTitle",
+          "description": "非 <label> 的标题，用于控件自带标签（如 ToggleGroup、选项卡片）的场景。"
+        },
+        {
+          "name": "FieldGroup",
+          "description": "一组表单项的纵向间距容器。"
+        },
+        {
+          "name": "FieldSeparator",
+          "description": "表单项之间的分隔线，可带一段短文字。"
+        },
+        {
+          "name": "FieldControl / FieldValidity",
+          "description": "Base UI 原语：自定义控件与读取校验状态。"
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "description": "按文档顺序在控件间移动；点击标签聚焦或切换对应控件。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Field",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "FieldPrimitive.Root.Props & {\n  /** `horizontal` places the label beside the control, for switches and checkboxes. */\n  orientation?: FieldOrientation;\n}",
+          "signature": "Field({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: FieldPrimitive.Root.Props & {\n  /** `horizontal` places the label beside the control, for switches and checkboxes. */\n  orientation?: FieldOrientation;\n}): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldContent",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "React.ComponentProps<\"div\">",
+          "signature": "FieldContent({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldControl",
+          "kind": "const",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "signature": "typeof FieldPrimitive.Control",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldDescription",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "FieldPrimitive.Description.Props",
+          "signature": "FieldDescription({\n  className,\n  ...props\n}: FieldPrimitive.Description.Props): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldError",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "FieldErrorProps",
+          "signature": "FieldError({\n  className,\n  children,\n  errors,\n  match,\n  ...props\n}: FieldErrorProps): React.ReactElement | null",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldGroup",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "React.ComponentProps<\"div\">",
+          "signature": "FieldGroup({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldItem",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "FieldPrimitive.Item.Props",
+          "signature": "FieldItem({\n  className,\n  ...props\n}: FieldPrimitive.Item.Props): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldLabel",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "FieldPrimitive.Label.Props",
+          "signature": "FieldLabel({\n  className,\n  ...props\n}: FieldPrimitive.Label.Props): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldLegend",
+          "kind": "function",
+          "owner": "fieldset",
+          "module": "@qingye/ui/components/fieldset",
+          "propsType": "FieldsetPrimitive.Legend.Props & {\n  /** `label` sizes the legend like a field label for compact groups. */\n  variant?: \"legend\" | \"label\";\n}",
+          "signature": "FieldsetLegend({\n  className,\n  variant = \"legend\",\n  ...props\n}: FieldsetPrimitive.Legend.Props & {\n  /** `label` sizes the legend like a field label for compact groups. */\n  variant?: \"legend\" | \"label\";\n}): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED",
+          "aliasOf": "FieldsetLegend"
+        },
+        {
+          "name": "FieldOrientation",
+          "kind": "type",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "signature": "\"vertical\" | \"horizontal\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldPrimitive",
+          "kind": "reexport",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "status": "UNVERIFIED",
+          "declarationStatus": "UNVERIFIED",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldSeparator",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "React.ComponentProps<\"div\">",
+          "signature": "FieldSeparator({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldSet",
+          "kind": "function",
+          "owner": "fieldset",
+          "module": "@qingye/ui/components/fieldset",
+          "propsType": "FieldsetPrimitive.Root.Props",
+          "signature": "Fieldset({\n  className,\n  ...props\n}: FieldsetPrimitive.Root.Props): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED",
+          "aliasOf": "Fieldset"
+        },
+        {
+          "name": "FieldTitle",
+          "kind": "function",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "propsType": "React.ComponentProps<\"div\">",
+          "signature": "FieldTitle({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldValidity",
+          "kind": "const",
+          "owner": "field",
+          "module": "@qingye/ui/components/field",
+          "signature": "typeof FieldPrimitive.Validity",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "FieldOrientation",
+          "definition": "export type FieldOrientation = \"vertical\" | \"horizontal\";"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Field",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldLabel",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldDescription",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldError",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldContent",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldTitle",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldGroup",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldSeparator",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldControl",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        },
+        {
+          "name": "FieldValidity",
+          "import": "@qingye/ui/components/field",
+          "owner": "field",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "default",
+          "title": "默认",
+          "source": "apps/docs/src/content/field/demos/01-default.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"默认\", description: \"标签、控件、说明自上而下排列。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>显示名称</FieldLabel>\n      <Input defaultValue=\"林晓\" />\n      <FieldDescription>同事在评论与提及中看到的名字。</FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "85ce3be01c7b113e0b81e725f3886da059719a9ef1adda3a73ae777a0ea8f972"
+        },
+        {
+          "id": "validation",
+          "title": "校验",
+          "source": "apps/docs/src/content/field/demos/02-validation.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = {\n  title: \"校验\",\n  description: \"validationMode=\\\"onBlur\\\" 在离开输入框时校验；match 让每条文案只对应一种错误。试着留空或输入不完整的邮箱。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\" validationMode=\"onBlur\">\n      <FieldLabel>\n        工作邮箱 <span aria-hidden=\"true\" className=\"text-destructive-foreground\">*</span>\n      </FieldLabel>\n      <Input placeholder=\"name@company.com\" required type=\"email\" />\n      <FieldError match=\"valueMissing\">请填写工作邮箱。</FieldError>\n      <FieldError match=\"typeMismatch\">邮箱格式不正确，例如 lin.xiao@company.com。</FieldError>\n    </Field>\n  );\n}\n",
+          "sha256": "e7eb56a1bd5602c2bd4170692fc9e6f43208ee897e20b8ef1ef7500df0c90161"
+        },
+        {
+          "id": "horizontal",
+          "title": "横向",
+          "source": "apps/docs/src/content/field/demos/03-horizontal.tsx",
+          "imports": [
+            "@qingye/ui/components/checkbox",
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/switch"
+          ],
+          "providers": [],
+          "code": "import { Checkbox } from \"@qingye/ui/components/checkbox\";\nimport { Field, FieldContent, FieldDescription, FieldLabel, FieldSeparator } from \"@qingye/ui/components/field\";\nimport { Switch } from \"@qingye/ui/components/switch\";\n\nexport const meta = {\n  title: \"横向\",\n  description: \"orientation=\\\"horizontal\\\" 用于开关与复选框；FieldContent 包住标签和说明，控件与第一行对齐。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-4\">\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel>设备离线提醒</FieldLabel>\n          <FieldDescription>设备超过 10 分钟未上报时，通过短信通知负责人。</FieldDescription>\n        </FieldContent>\n        <Switch defaultChecked />\n      </Field>\n      <FieldSeparator />\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel>每周运维报告</FieldLabel>\n          <FieldDescription>每周一 9:00 发送到团队邮箱。</FieldDescription>\n        </FieldContent>\n        <Switch />\n      </Field>\n      <FieldSeparator />\n      <Field orientation=\"horizontal\">\n        <Checkbox defaultChecked />\n        <FieldContent>\n          <FieldLabel>同步到企业微信</FieldLabel>\n          <FieldDescription>工单状态变化时推送到“运维值班”群。</FieldDescription>\n        </FieldContent>\n      </Field>\n      <Field orientation=\"horizontal\">\n        <Checkbox />\n        <FieldLabel>同时抄送给我</FieldLabel>\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "02a0f7e4a0edc4e5920e8b0a312b9d030c0c3bc3b98f4f79e6dfa09a6c4eb522"
+        },
+        {
+          "id": "group",
+          "title": "分组与分隔",
+          "source": "apps/docs/src/content/field/demos/04-group.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldGroup, FieldLabel, FieldSeparator } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"分组与分隔\", description: \"FieldGroup 统一纵向间距；FieldSeparator 可带一段说明文字。\" };\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"max-w-xs\">\n      <Field>\n        <FieldLabel>手机号</FieldLabel>\n        <Input autoComplete=\"tel\" inputMode=\"tel\" placeholder=\"138 0000 0000\" />\n      </Field>\n      <Button>获取验证码</Button>\n      <FieldSeparator>或</FieldSeparator>\n      <Button variant=\"outline\">使用企业微信登录</Button>\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "0460d756f25614c3f94a116f9a742bb90314f4f9acf84cadaab8194451b13c5d"
+        },
+        {
+          "id": "title",
+          "title": "标题",
+          "source": "apps/docs/src/content/field/demos/05-title.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/toggle-group"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldTitle } from \"@qingye/ui/components/field\";\nimport { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from \"@qingye/ui/components/toggle-group\";\n\nexport const meta = {\n  title: \"标题\",\n  description: \"控件不是单个输入框时，用 FieldTitle 作标题并通过 aria-labelledby 关联。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldTitle id=\"delivery-slot\">配送时段</FieldTitle>\n      <ToggleGroup aria-labelledby=\"delivery-slot\" defaultValue={[\"morning\"]} variant=\"outline\">\n        <ToggleGroupItem value=\"morning\">上午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value=\"afternoon\">下午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value=\"evening\">晚间</ToggleGroupItem>\n      </ToggleGroup>\n      <FieldDescription>晚间时段仅限杭州主城区。</FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "bba6bbd8a4cae337d545ed6b54467f4c923a866b86bbb8d5ff17c85742f2f5e1"
+        },
+        {
+          "id": "errors",
+          "title": "表单库错误",
+          "source": "apps/docs/src/content/field/demos/06-errors.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"表单库错误\",\n  description: \"errors 接收 react-hook-form、TanStack Form 等给出的错误数组：自动去重，多条时显示为列表。\",\n};\n\nfunction check(value: string) {\n  return [\n    value.length < 8 ? { message: \"至少 8 位\" } : undefined,\n    /\\d/.test(value) ? undefined : { message: \"至少包含 1 个数字\" },\n    /[A-Za-z]/.test(value) ? undefined : { message: \"至少包含 1 个字母\" },\n  ].filter(Boolean);\n}\n\nexport default function Demo() {\n  const [value, setValue] = useState(\"2026\");\n  const errors = check(value);\n  return (\n    <Field className=\"w-full max-w-xs\" invalid={errors.length > 0}>\n      <FieldLabel>设备管理密码</FieldLabel>\n      <Input onChange={(event) => setValue(event.target.value)} value={value} />\n      <FieldError errors={errors} />\n    </Field>\n  );\n}\n",
+          "sha256": "bfed608938ea4228d7f3abc6970215505ba93bfb92252fe093e6632f7a417c99"
+        },
+        {
+          "id": "disabled",
+          "title": "禁用",
+          "source": "apps/docs/src/content/field/demos/07-disabled.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"禁用\", description: \"Field 的 disabled 同时作用于标签与控件。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\" disabled>\n      <FieldLabel>组织 ID</FieldLabel>\n      <Input defaultValue=\"org_7f3a92c1\" />\n      <FieldDescription>创建后不可修改。</FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "4156ba2e5b359eff351e8bf34f9f558d852af041a5d4ae7c08258fa45b6d935b"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "布白有用",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "Field：基于 Base UI Field.Root。为内部控件提供 id、aria-describedby 与校验状态。",
+          "FieldLabel：标签，自动关联控件；禁用时一起变淡。",
+          "FieldDescription：说明文字，自动加入控件的 aria-describedby。",
+          "FieldError：错误信息，出现时轻微淡入，并加入 aria-describedby。",
+          "FieldContent：横向表单项中包住标签与说明的一列。",
+          "FieldTitle：非 <label> 的标题，用于控件自带标签（如 ToggleGroup、选项卡片）的场景。",
+          "FieldGroup：一组表单项的纵向间距容器。",
+          "FieldSeparator：表单项之间的分隔线，可带一段短文字。",
+          "FieldControl / FieldValidity：Base UI 原语：自定义控件与读取校验状态。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "对象、草稿、校验业务规则、版本与保存结果。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/field.tsx",
+        "sha256": "6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    },
+    {
+      "name": "input",
+      "title": "输入框 Input",
+      "description": "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/input",
+      "exports": [
+        "Input"
+      ],
+      "docs": "/docs/components/input",
+      "notes": [
+        "每个输入框都要有可见标签（FieldLabel / Label）；只有搜索框等意义明确的场景才只用 aria-label。",
+        "占位文字只做示例，不要代替标签。",
+        "触屏设备上输入框最小高度为 44px，便于点按；字号在移动端为 16px，避免 iOS 聚焦时缩放。",
+        "type=\"file\" 用的是浏览器原生控件：Input 只提供外框样式，“Choose File / No file chosen”由浏览器按自身语言绘制，CSS 无法改写（::file-selector-button 不接受 content），也无对应属性可覆盖。中文界面请改用 FileUpload——它自带本地化文案、格式与大小校验和文件列表。"
+      ],
+      "keywords": [
+        "input",
+        "输入框",
+        "文本框",
+        "text field"
+      ],
+      "api": [
+        {
+          "name": "Input",
+          "description": "基于 Base UI Input，外层 <span data-slot=\"input-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <input>。",
+          "props": [
+            {
+              "name": "size",
+              "type": "\"sm\" | \"default\" | \"lg\" | number",
+              "default": "\"default\"",
+              "description": "高度：28 / 32 / 36px（移动端各加 4px）；传数字时作为原生 size 属性。"
+            },
+            {
+              "name": "type",
+              "type": "string",
+              "default": "\"text\"",
+              "description": "原生类型。search 会隐藏浏览器自带的清除按钮；file 复用 Input 的外框样式，但控件本身是浏览器原生的，文案不可本地化（见下方说明）。"
+            },
+            {
+              "name": "aria-invalid",
+              "type": "boolean",
+              "description": "标记为无效；在 Field 中由校验自动设置。"
+            },
+            {
+              "name": "unstyled",
+              "type": "boolean",
+              "default": "false",
+              "description": "去掉外层样式，供 InputGroup 等组合使用。"
+            },
+            {
+              "name": "nativeInput",
+              "type": "boolean",
+              "default": "false",
+              "description": "渲染原生 <input> 而不注册到 Base UI Field。"
+            }
+          ]
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "description": "移入、移出焦点；键盘聚焦时显示焦点环。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Input",
+          "kind": "function",
+          "owner": "input",
+          "module": "@qingye/ui/components/input",
+          "propsType": "InputProps",
+          "signature": "Input({\n  className,\n  size = \"default\",\n  unstyled = false,\n  nativeInput = false,\n  style,\n  ...props\n}: InputProps): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputPrimitive",
+          "kind": "reexport",
+          "owner": "input",
+          "module": "@qingye/ui/components/input",
+          "status": "UNVERIFIED",
+          "declarationStatus": "UNVERIFIED",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputProps",
+          "kind": "type",
+          "owner": "input",
+          "module": "@qingye/ui/components/input",
+          "signature": "Omit<\n  InputPrimitive.Props & React.RefAttributes<HTMLInputElement>,\n  \"size\"\n> & {\n  size?: \"sm\" | \"default\" | \"lg\" | number;\n  unstyled?: boolean;\n  nativeInput?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "InputProps",
+          "definition": "export type InputProps = Omit<\n  InputPrimitive.Props & React.RefAttributes<HTMLInputElement>,\n  \"size\"\n> & {\n  size?: \"sm\" | \"default\" | \"lg\" | number;\n  unstyled?: boolean;\n  nativeInput?: boolean;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Input",
+          "import": "@qingye/ui/components/input",
+          "owner": "input",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "default",
+          "title": "默认",
+          "source": "apps/docs/src/content/input/demos/01-default.tsx",
+          "imports": [
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"默认\" };\n\nexport default function Demo() {\n  return <Input aria-label=\"设备名称\" className=\"max-w-xs\" placeholder=\"例如：3 号楼东侧摄像头\" />;\n}\n",
+          "sha256": "01c31162bf86073a0d60a58a944fcb37f293c5d05164d8c041840878f4dca02b"
+        },
+        {
+          "id": "sizes",
+          "title": "尺寸",
+          "source": "apps/docs/src/content/input/demos/02-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"尺寸\", description: \"sm 用于筛选栏与表格内，lg 用于登录等突出表单。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-xs flex-col gap-3\">\n      <Input aria-label=\"小\" placeholder=\"小 sm\" size=\"sm\" />\n      <Input aria-label=\"默认\" placeholder=\"默认 default\" />\n      <Input aria-label=\"大\" placeholder=\"大 lg\" size=\"lg\" />\n    </div>\n  );\n}\n",
+          "sha256": "63ac5e0627cacd505470a4fb88783d923611b7aa1dc01cf478f6b0b66f58b0d3"
+        },
+        {
+          "id": "with-label",
+          "title": "配合标签",
+          "source": "apps/docs/src/content/input/demos/03-with-label.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"配合标签\", description: \"放在 Field 中，标签、说明与输入框自动关联。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>\n        联系电话 <span className=\"text-destructive-foreground\">*</span>\n      </FieldLabel>\n      <Input autoComplete=\"tel\" inputMode=\"tel\" placeholder=\"138 0000 0000\" required type=\"tel\" />\n      <FieldDescription>仅用于工单进度通知。</FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "ef45a44ae0a75cd39ce069e48e92507691209c3c99465b35a7f53d59d3814785"
+        },
+        {
+          "id": "states",
+          "title": "状态",
+          "source": "apps/docs/src/content/input/demos/04-states.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"状态\", description: \"无效、只读与禁用。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-xs gap-5\">\n      <Field invalid>\n        <FieldLabel>邮箱</FieldLabel>\n        <Input defaultValue=\"li.na@company\" type=\"email\" />\n        <FieldError>邮箱格式不正确，例如 li.na@company.com</FieldError>\n      </Field>\n      <Field>\n        <FieldLabel>工号</FieldLabel>\n        <Input defaultValue=\"YQ-20481\" readOnly />\n      </Field>\n      <Field disabled>\n        <FieldLabel>所属部门</FieldLabel>\n        <Input defaultValue=\"运维中心\" />\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "78e7682752855c77782c3c07d55a16ab75d465c1d8c524e8b07ed95389d29ff9"
+        },
+        {
+          "id": "file",
+          "title": "文件选择",
+          "source": "apps/docs/src/content/input/demos/05-file.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/file-upload"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = {\n  title: \"文件选择\",\n  description: \"附件、证件、导入文件用 FileUpload：文案随界面语言、可校验格式与大小、可显示进度。用 htmlFor + id 关联标签。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-md\">\n      <FieldLabel htmlFor=\"license-file\">营业执照</FieldLabel>\n      <FileUpload\n        accept=\"image/*,.pdf\"\n        description=\"支持 JPG、PNG、PDF，不超过 10 MB\"\n        id=\"license-file\"\n        maxFiles={1}\n        maxSize={10 * 1024 * 1024}\n        name=\"license\"\n        variant=\"button\"\n      />\n      <FieldDescription>审核通过后可在“企业信息”中重新上传。</FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "2681e411d98286ec3801d11ea86626cdb82f7f0a583ef4f2f886cb9e77e85696"
+        },
+        {
+          "id": "character-count",
+          "title": "字数提示",
+          "source": "apps/docs/src/content/input/demos/06-character-count.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/input",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"字数提示\", description: \"用 maxLength 限制长度，并在说明里实时显示剩余字数。\" };\n\nexport default function Demo() {\n  const max = 20;\n  const [value, setValue] = useState(\"杭州滨江仓\");\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>仓库简称</FieldLabel>\n      <Input maxLength={max} onChange={(event) => setValue(event.target.value)} value={value} />\n      <FieldDescription aria-live=\"polite\" className=\"numeric\">\n        还可输入 {max - value.length} 个字\n      </FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "4fecc006ac03047b0812336ca74ef286a53bb56c4636691b78a2470a8675cf20"
+        },
+        {
+          "id": "native-file",
+          "title": "原生文件选择",
+          "source": "apps/docs/src/content/input/demos/07-native-file.tsx",
+          "imports": [
+            "@qingye/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = {\n  title: \"原生文件选择\",\n  description:\n    \"type=\\\"file\\\" 使用浏览器自带控件，外框沿用 Input 的样式，但“Choose File / No file chosen”由浏览器按其语言绘制，CSS 无法翻译或替换（::file-selector-button 不接受 content）。界面为中文时请用 FileUpload。\",\n};\n\nexport default function Demo() {\n  return <Input aria-label=\"导入设备清单\" className=\"max-w-xs\" type=\"file\" />;\n}\n",
+          "sha256": "c90705bd1796c058c3da64255ae9405cab63e46b1635f96aa2bf7095d8725223"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "布白有用",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "Input：基于 Base UI Input，外层 <span data-slot=\"input-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <input>。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "对象、草稿、校验业务规则、版本与保存结果。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/input.tsx",
+        "sha256": "a6ac174d2cf4e53776243dd5d194b31848eb16fed60851392dc8cd89e6ea6d89",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    },
+    {
+      "name": "textarea",
+      "title": "多行输入 Textarea",
+      "description": "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。",
+      "category": "表单",
+      "source": "coss",
+      "import": "@qingye/ui/components/textarea",
+      "exports": [
+        "Textarea"
+      ],
+      "docs": "/docs/components/textarea",
+      "notes": [
+        "需要限制最大高度时给外层加 max-h-* 并让 textarea 滚动，例如 className=\"*:max-h-40\"。",
+        "需要底部工具栏、发送按钮时用 InputGroup + InputGroupTextarea。"
+      ],
+      "keywords": [
+        "textarea",
+        "多行",
+        "文本域",
+        "备注"
+      ],
+      "api": [
+        {
+          "name": "Textarea",
+          "description": "基于 Base UI Field.Control。外层 <span data-slot=\"textarea-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。",
+          "props": [
+            {
+              "name": "size",
+              "type": "\"sm\" | \"default\" | \"lg\"",
+              "default": "\"default\"",
+              "description": "最小高度与内边距。"
+            },
+            {
+              "name": "rows",
+              "type": "number",
+              "description": "初始行数；内容增长时自动加高（field-sizing: content）。"
+            },
+            {
+              "name": "unstyled",
+              "type": "boolean",
+              "default": "false",
+              "description": "去掉外层样式，供 InputGroup 组合使用。"
+            }
+          ]
+        }
+      ],
+      "apiStatus": "curated-not-type-resolved",
+      "keyboard": [
+        {
+          "keys": "Tab",
+          "description": "移入、移出焦点。"
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "FieldPrimitive",
+          "kind": "reexport",
+          "owner": "textarea",
+          "module": "@qingye/ui/components/textarea",
+          "status": "UNVERIFIED",
+          "declarationStatus": "UNVERIFIED",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "Textarea",
+          "kind": "function",
+          "owner": "textarea",
+          "module": "@qingye/ui/components/textarea",
+          "propsType": "TextareaProps",
+          "signature": "Textarea({\n  className,\n  size = \"default\",\n  unstyled = false,\n  ref,\n  ...props\n}: TextareaProps): React.ReactElement",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TextareaProps",
+          "kind": "type",
+          "owner": "textarea",
+          "module": "@qingye/ui/components/textarea",
+          "signature": "React.ComponentPropsWithoutRef<\"textarea\"> &\n  React.RefAttributes<HTMLTextAreaElement> & {\n    size?: \"sm\" | \"default\" | \"lg\" | number;\n    unstyled?: boolean;\n  }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "TextareaProps",
+          "definition": "export type TextareaProps = React.ComponentPropsWithoutRef<\"textarea\"> &\n  React.RefAttributes<HTMLTextAreaElement> & {\n    size?: \"sm\" | \"default\" | \"lg\" | number;\n    unstyled?: boolean;\n  };"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Textarea",
+          "import": "@qingye/ui/components/textarea",
+          "owner": "textarea",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "required": [],
+        "status": "UNVERIFIED"
+      },
+      "examples": [
+        {
+          "id": "default",
+          "title": "默认",
+          "source": "apps/docs/src/content/textarea/demos/01-default.tsx",
+          "imports": [
+            "@qingye/ui/components/textarea"
+          ],
+          "providers": [],
+          "code": "import { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"默认\", description: \"高度随内容自动增长。\" };\n\nexport default function Demo() {\n  return <Textarea aria-label=\"备注\" className=\"max-w-sm\" placeholder=\"补充说明，例如送货前请电话联系\" />;\n}\n",
+          "sha256": "03a3d420965437cc2759ca86aae2dd893af334381bfe7deb2d75f9805f354a81"
+        },
+        {
+          "id": "sizes",
+          "title": "尺寸",
+          "source": "apps/docs/src/content/textarea/demos/02-sizes.tsx",
+          "imports": [
+            "@qingye/ui/components/textarea"
+          ],
+          "providers": [],
+          "code": "import { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"尺寸\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-sm flex-col gap-3\">\n      <Textarea aria-label=\"小\" placeholder=\"小 sm\" size=\"sm\" />\n      <Textarea aria-label=\"默认\" placeholder=\"默认 default\" />\n      <Textarea aria-label=\"大\" placeholder=\"大 lg\" size=\"lg\" />\n    </div>\n  );\n}\n",
+          "sha256": "e5d0fb24940e1e607ab8be8672fd4ce1439de4d933bfd11f039b95828ea259ee"
+        },
+        {
+          "id": "field",
+          "title": "配合标签与字数",
+          "source": "apps/docs/src/content/textarea/demos/03-field.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/textarea",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"配合标签与字数\", description: \"放在 Field 中，并用 maxLength 提示剩余字数。\" };\n\nexport default function Demo() {\n  const max = 200;\n  const [value, setValue] = useState(\"\");\n  return (\n    <Field className=\"w-full max-w-sm\">\n      <FieldLabel>问题描述</FieldLabel>\n      <Textarea\n        maxLength={max}\n        onChange={(event) => setValue(event.target.value)}\n        placeholder=\"请描述故障现象、出现时间和影响范围\"\n        value={value}\n      />\n      <FieldDescription aria-live=\"polite\" className=\"numeric self-end\">\n        {value.length} / {max}\n      </FieldDescription>\n    </Field>\n  );\n}\n",
+          "sha256": "c013b8b82a5e806d912ab7358bfcf28d28d785f248f9455d96ea2e1331ab4959"
+        },
+        {
+          "id": "states",
+          "title": "状态",
+          "source": "apps/docs/src/content/textarea/demos/04-states.tsx",
+          "imports": [
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/textarea"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"状态\", description: \"无效、只读与禁用。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-sm gap-5\">\n      <Field invalid>\n        <FieldLabel>退款原因</FieldLabel>\n        <Textarea defaultValue=\"不想要了\" />\n        <FieldError>请至少填写 10 个字，便于客服核实。</FieldError>\n      </Field>\n      <Field>\n        <FieldLabel>审核意见</FieldLabel>\n        <Textarea defaultValue=\"资料齐全，同意开通企业账户。—— 王敏，9 月 28 日\" readOnly />\n      </Field>\n      <Field disabled>\n        <FieldLabel>内部备注</FieldLabel>\n        <Textarea placeholder=\"仅管理员可编辑\" />\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "1d1b46bf79f08265d9427306b12c27de123cbe2bb9fcd46a516e880e4f2bea8c"
+        },
+        {
+          "id": "with-actions",
+          "title": "组合：评论框",
+          "source": "apps/docs/src/content/textarea/demos/05-with-actions.tsx",
+          "imports": [
+            "@qingye/ui/components/button",
+            "@qingye/ui/components/field",
+            "@qingye/ui/components/form",
+            "@qingye/ui/components/textarea"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Form } from \"@qingye/ui/components/form\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"组合：评论框\", description: \"多行输入下方放操作按钮，主按钮靠末端。\" };\n\nexport default function Demo() {\n  return (\n    <Form className=\"flex w-full max-w-sm flex-col gap-3\" onSubmit={(event) => event.preventDefault()}>\n      <Field name=\"comment\">\n        <FieldLabel>添加评论</FieldLabel>\n        <Textarea placeholder=\"@张伟 这台设备上周也报过同样的错误\" required />\n      </Field>\n      <div className=\"flex justify-end gap-2\">\n        <Button type=\"reset\" variant=\"ghost\">\n          清空\n        </Button>\n        <Button type=\"submit\">发表</Button>\n      </div>\n    </Form>\n  );\n}\n",
+          "sha256": "2cd3a20941a4c89dff3bdb34744ca48d63d274e2bf48c664831b970827c29a09"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "布白有用",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "Textarea：基于 Base UI Field.Control。外层 <span data-slot=\"textarea-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。"
+        ],
+        "stateOwner": {
+          "library": [
+            "当前导出和属性定义的基础交互、可访问语义与样式。"
+          ],
+          "application": [
+            "对象、草稿、校验业务规则、版本与保存结果。"
+          ]
+        },
+        "responsive": [
+          "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/textarea.tsx",
+        "sha256": "381c16ffa575c69a2183b76068d42efdd680c7ca792ccb82448ead7cfc1d1dae",
+        "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+      }
+    }
+  ],
+  "patterns": [
+    {
+      "id": "edit",
+      "slug": "edit",
+      "title": "编辑与恢复",
+      "description": "围绕同一份草稿，保存、失败、核实与放弃各有明确后果。",
+      "components": [
+        "field",
+        "input",
+        "textarea",
+        "button",
+        "alert",
+        "dialog"
+      ],
+      "states": [
+        "editing",
+        "saving",
+        "success",
+        "failure",
+        "unknown",
+        "restored"
+      ],
+      "href": "/docs/patterns/edit",
+      "source": "apps/docs/src/patterns/edit.tsx",
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "进退相承"
+      ]
+    }
+  ]
+}

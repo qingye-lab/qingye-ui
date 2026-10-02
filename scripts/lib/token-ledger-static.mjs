@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
-import { ts, recursiveFiles, hash, read, parseTS, visit, location, declarations, cssDeclarations, fingerprint, stylePaths, tokenDefinitions, exists } from './ui-facts.mjs';
+import { ts, files, recursiveFiles, hash, read, parseTS, visit, location, declarations, cssDeclarations, fingerprint, stylePaths, tokenDefinitions, exists } from './ui-facts.mjs';
 
-export const COMPONENTS = ['button', 'input', 'dialog', 'select', 'card', 'table'];
+export const COMPONENTS = files('packages/ui/src/components', /\.tsx?$/).map((path) => path.split('/').pop().replace(/\.tsx?$/, ''));
 const nameOf = (node, source) => node?.name && (ts.isIdentifier(node.name) || ts.isStringLiteral(node.name)) ? node.name.text : node?.name?.getText(source);
 function slotsIn(node) {
   const slots = new Set();

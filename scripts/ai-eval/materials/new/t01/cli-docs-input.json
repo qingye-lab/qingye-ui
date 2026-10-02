@@ -1,0 +1,255 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "input",
+    "title": "输入框 Input",
+    "description": "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。",
+    "category": "表单",
+    "source": "coss",
+    "import": "@qingye/ui/components/input",
+    "exports": [
+      "Input"
+    ],
+    "docs": "/docs/components/input",
+    "notes": [
+      "每个输入框都要有可见标签（FieldLabel / Label）；只有搜索框等意义明确的场景才只用 aria-label。",
+      "占位文字只做示例，不要代替标签。",
+      "触屏设备上输入框最小高度为 44px，便于点按；字号在移动端为 16px，避免 iOS 聚焦时缩放。",
+      "type=\"file\" 用的是浏览器原生控件：Input 只提供外框样式，“Choose File / No file chosen”由浏览器按自身语言绘制，CSS 无法改写（::file-selector-button 不接受 content），也无对应属性可覆盖。中文界面请改用 FileUpload——它自带本地化文案、格式与大小校验和文件列表。"
+    ],
+    "keywords": [
+      "input",
+      "输入框",
+      "文本框",
+      "text field"
+    ],
+    "api": [
+      {
+        "name": "Input",
+        "description": "基于 Base UI Input，外层 <span data-slot=\"input-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <input>。",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"default\" | \"lg\" | number",
+            "default": "\"default\"",
+            "description": "高度：28 / 32 / 36px（移动端各加 4px）；传数字时作为原生 size 属性。"
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "default": "\"text\"",
+            "description": "原生类型。search 会隐藏浏览器自带的清除按钮；file 复用 Input 的外框样式，但控件本身是浏览器原生的，文案不可本地化（见下方说明）。"
+          },
+          {
+            "name": "aria-invalid",
+            "type": "boolean",
+            "description": "标记为无效；在 Field 中由校验自动设置。"
+          },
+          {
+            "name": "unstyled",
+            "type": "boolean",
+            "default": "false",
+            "description": "去掉外层样式，供 InputGroup 等组合使用。"
+          },
+          {
+            "name": "nativeInput",
+            "type": "boolean",
+            "default": "false",
+            "description": "渲染原生 <input> 而不注册到 Base UI Field。"
+          }
+        ]
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Tab",
+        "description": "移入、移出焦点；键盘聚焦时显示焦点环。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "Input",
+        "kind": "function",
+        "owner": "input",
+        "module": "@qingye/ui/components/input",
+        "propsType": "InputProps",
+        "signature": "Input({\n  className,\n  size = \"default\",\n  unstyled = false,\n  nativeInput = false,\n  style,\n  ...props\n}: InputProps): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "InputPrimitive",
+        "kind": "reexport",
+        "owner": "input",
+        "module": "@qingye/ui/components/input",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "InputProps",
+        "kind": "type",
+        "owner": "input",
+        "module": "@qingye/ui/components/input",
+        "signature": "Omit<\n  InputPrimitive.Props & React.RefAttributes<HTMLInputElement>,\n  \"size\"\n> & {\n  size?: \"sm\" | \"default\" | \"lg\" | number;\n  unstyled?: boolean;\n  nativeInput?: boolean;\n}",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "InputProps",
+        "definition": "export type InputProps = Omit<\n  InputPrimitive.Props & React.RefAttributes<HTMLInputElement>,\n  \"size\"\n> & {\n  size?: \"sm\" | \"default\" | \"lg\" | number;\n  unstyled?: boolean;\n  nativeInput?: boolean;\n};"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "Input",
+        "import": "@qingye/ui/components/input",
+        "owner": "input",
+        "status": "PASS"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "clsx",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": []
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "default",
+        "title": "默认",
+        "source": "apps/docs/src/content/input/demos/01-default.tsx",
+        "imports": [
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"默认\" };\n\nexport default function Demo() {\n  return <Input aria-label=\"设备名称\" className=\"max-w-xs\" placeholder=\"例如：3 号楼东侧摄像头\" />;\n}\n",
+        "sha256": "01c31162bf86073a0d60a58a944fcb37f293c5d05164d8c041840878f4dca02b"
+      },
+      {
+        "id": "sizes",
+        "title": "尺寸",
+        "source": "apps/docs/src/content/input/demos/02-sizes.tsx",
+        "imports": [
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"尺寸\", description: \"sm 用于筛选栏与表格内，lg 用于登录等突出表单。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-xs flex-col gap-3\">\n      <Input aria-label=\"小\" placeholder=\"小 sm\" size=\"sm\" />\n      <Input aria-label=\"默认\" placeholder=\"默认 default\" />\n      <Input aria-label=\"大\" placeholder=\"大 lg\" size=\"lg\" />\n    </div>\n  );\n}\n",
+        "sha256": "63ac5e0627cacd505470a4fb88783d923611b7aa1dc01cf478f6b0b66f58b0d3"
+      },
+      {
+        "id": "with-label",
+        "title": "配合标签",
+        "source": "apps/docs/src/content/input/demos/03-with-label.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"配合标签\", description: \"放在 Field 中，标签、说明与输入框自动关联。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>\n        联系电话 <span className=\"text-destructive-foreground\">*</span>\n      </FieldLabel>\n      <Input autoComplete=\"tel\" inputMode=\"tel\" placeholder=\"138 0000 0000\" required type=\"tel\" />\n      <FieldDescription>仅用于工单进度通知。</FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "ef45a44ae0a75cd39ce069e48e92507691209c3c99465b35a7f53d59d3814785"
+      },
+      {
+        "id": "states",
+        "title": "状态",
+        "source": "apps/docs/src/content/input/demos/04-states.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"状态\", description: \"无效、只读与禁用。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-xs gap-5\">\n      <Field invalid>\n        <FieldLabel>邮箱</FieldLabel>\n        <Input defaultValue=\"li.na@company\" type=\"email\" />\n        <FieldError>邮箱格式不正确，例如 li.na@company.com</FieldError>\n      </Field>\n      <Field>\n        <FieldLabel>工号</FieldLabel>\n        <Input defaultValue=\"YQ-20481\" readOnly />\n      </Field>\n      <Field disabled>\n        <FieldLabel>所属部门</FieldLabel>\n        <Input defaultValue=\"运维中心\" />\n      </Field>\n    </div>\n  );\n}\n",
+        "sha256": "78e7682752855c77782c3c07d55a16ab75d465c1d8c524e8b07ed95389d29ff9"
+      },
+      {
+        "id": "file",
+        "title": "文件选择",
+        "source": "apps/docs/src/content/input/demos/05-file.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/file-upload"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = {\n  title: \"文件选择\",\n  description: \"附件、证件、导入文件用 FileUpload：文案随界面语言、可校验格式与大小、可显示进度。用 htmlFor + id 关联标签。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-md\">\n      <FieldLabel htmlFor=\"license-file\">营业执照</FieldLabel>\n      <FileUpload\n        accept=\"image/*,.pdf\"\n        description=\"支持 JPG、PNG、PDF，不超过 10 MB\"\n        id=\"license-file\"\n        maxFiles={1}\n        maxSize={10 * 1024 * 1024}\n        name=\"license\"\n        variant=\"button\"\n      />\n      <FieldDescription>审核通过后可在“企业信息”中重新上传。</FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "2681e411d98286ec3801d11ea86626cdb82f7f0a583ef4f2f886cb9e77e85696"
+      },
+      {
+        "id": "character-count",
+        "title": "字数提示",
+        "source": "apps/docs/src/content/input/demos/06-character-count.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"字数提示\", description: \"用 maxLength 限制长度，并在说明里实时显示剩余字数。\" };\n\nexport default function Demo() {\n  const max = 20;\n  const [value, setValue] = useState(\"杭州滨江仓\");\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>仓库简称</FieldLabel>\n      <Input maxLength={max} onChange={(event) => setValue(event.target.value)} value={value} />\n      <FieldDescription aria-live=\"polite\" className=\"numeric\">\n        还可输入 {max - value.length} 个字\n      </FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "4fecc006ac03047b0812336ca74ef286a53bb56c4636691b78a2470a8675cf20"
+      },
+      {
+        "id": "native-file",
+        "title": "原生文件选择",
+        "source": "apps/docs/src/content/input/demos/07-native-file.tsx",
+        "imports": [
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = {\n  title: \"原生文件选择\",\n  description:\n    \"type=\\\"file\\\" 使用浏览器自带控件，外框沿用 Input 的样式，但“Choose File / No file chosen”由浏览器按其语言绘制，CSS 无法翻译或替换（::file-selector-button 不接受 content）。界面为中文时请用 FileUpload。\",\n};\n\nexport default function Demo() {\n  return <Input aria-label=\"导入设备清单\" className=\"max-w-xs\" type=\"file\" />;\n}\n",
+        "sha256": "c90705bd1796c058c3da64255ae9405cab63e46b1635f96aa2bf7095d8725223"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "进退相承"
+      ],
+      "whenToUse": [
+        "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。"
+      ],
+      "avoid": [
+        "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+      ],
+      "composition": [
+        "Input：基于 Base UI Input，外层 <span data-slot=\"input-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <input>。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "对象、草稿、校验业务规则、版本与保存结果。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/input.tsx",
+      "sha256": "a6ac174d2cf4e53776243dd5d194b31848eb16fed60851392dc8cd89e6ea6d89",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

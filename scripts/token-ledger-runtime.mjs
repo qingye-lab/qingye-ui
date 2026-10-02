@@ -19,6 +19,10 @@ export function isExpectedTheme(evidence, requested, attribute) {
 const themeSnapshot = () => ({ classes: [...document.documentElement.classList], dataTheme: document.documentElement.getAttribute('data-theme'), colorScheme: document.documentElement.style.colorScheme });
 
 async function activate(page, probe) {
+  if (probe.action === 'select-table-row') {
+    await page.locator(`[data-demo="${probe.demo}"] tbody [role="checkbox"]`).first().click();
+    await page.locator(probe.selector).first().waitFor({ state: 'visible' });
+  }
   if (probe.action === 'open-dialog') {
     await page.locator(`[data-demo="${probe.demo}"] [data-slot="dialog-trigger"]`).first().click();
     await page.locator('[data-slot="dialog-popup"]').first().waitFor({ state: 'visible' });

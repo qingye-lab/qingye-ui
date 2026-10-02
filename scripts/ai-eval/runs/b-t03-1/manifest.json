@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "b-t03-1",
+  "group": "baseline",
+  "task": "t03",
+  "replicate": 1,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "preparedAt": "2026-10-02T06:16:37.716Z",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "permittedFiles": [
+    "state.ts",
+    "BulkPanel.tsx",
+    "report.md"
+  ],
+  "fixedFiles": [],
+  "originalFiles": [
+    {
+      "path": "BulkPanel.tsx",
+      "symlink": false,
+      "sha256": "f12e88b96f024b65e9b74f1db669591dbc9b10f5f63902501cf93a147b7ee01e"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "f881f1878b34a92db838648a8b66ad070854f5d79b41f8571125050e6eb7f1c3"
+    }
+  ],
+  "materialFiles": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "52981b7c5777797e89b445e0eea6ff5125b3aa304586d135aeace679fd80becc"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "f707fa635b7bdf8d76656b074c96f242ad0889d34197dcdcf96dcd303a9f5c0a"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "185aef19335923fa68cfc64932a57c850754adf25b25ae44f0c1e014f8a548f0"
+    }
+  ],
+  "taskSHA256": "698904a565804884cbe2d429e18430f95ad398232aba4896098781e5be6ad32d",
+  "fixtureSHA256": "b5cc11d7736d7bdefbdba8fef207a00a89dcdd24501e3975c8b2791c6dc90fd5",
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "targetVersion": "0.3.0"
+}

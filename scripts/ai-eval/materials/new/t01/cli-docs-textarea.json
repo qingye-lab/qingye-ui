@@ -1,0 +1,220 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "textarea",
+    "title": "多行输入 Textarea",
+    "description": "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。",
+    "category": "表单",
+    "source": "coss",
+    "import": "@qingye/ui/components/textarea",
+    "exports": [
+      "Textarea"
+    ],
+    "docs": "/docs/components/textarea",
+    "notes": [
+      "需要限制最大高度时给外层加 max-h-* 并让 textarea 滚动，例如 className=\"*:max-h-40\"。",
+      "需要底部工具栏、发送按钮时用 InputGroup + InputGroupTextarea。"
+    ],
+    "keywords": [
+      "textarea",
+      "多行",
+      "文本域",
+      "备注"
+    ],
+    "api": [
+      {
+        "name": "Textarea",
+        "description": "基于 Base UI Field.Control。外层 <span data-slot=\"textarea-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。",
+        "props": [
+          {
+            "name": "size",
+            "type": "\"sm\" | \"default\" | \"lg\"",
+            "default": "\"default\"",
+            "description": "最小高度与内边距。"
+          },
+          {
+            "name": "rows",
+            "type": "number",
+            "description": "初始行数；内容增长时自动加高（field-sizing: content）。"
+          },
+          {
+            "name": "unstyled",
+            "type": "boolean",
+            "default": "false",
+            "description": "去掉外层样式，供 InputGroup 组合使用。"
+          }
+        ]
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Tab",
+        "description": "移入、移出焦点。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "FieldPrimitive",
+        "kind": "reexport",
+        "owner": "textarea",
+        "module": "@qingye/ui/components/textarea",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "Textarea",
+        "kind": "function",
+        "owner": "textarea",
+        "module": "@qingye/ui/components/textarea",
+        "propsType": "TextareaProps",
+        "signature": "Textarea({\n  className,\n  size = \"default\",\n  unstyled = false,\n  ref,\n  ...props\n}: TextareaProps): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "TextareaProps",
+        "kind": "type",
+        "owner": "textarea",
+        "module": "@qingye/ui/components/textarea",
+        "signature": "React.ComponentPropsWithoutRef<\"textarea\"> &\n  React.RefAttributes<HTMLTextAreaElement> & {\n    size?: \"sm\" | \"default\" | \"lg\" | number;\n    unstyled?: boolean;\n  }",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "TextareaProps",
+        "definition": "export type TextareaProps = React.ComponentPropsWithoutRef<\"textarea\"> &\n  React.RefAttributes<HTMLTextAreaElement> & {\n    size?: \"sm\" | \"default\" | \"lg\" | number;\n    unstyled?: boolean;\n  };"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "Textarea",
+        "import": "@qingye/ui/components/textarea",
+        "owner": "textarea",
+        "status": "PASS"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "clsx",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": []
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "default",
+        "title": "默认",
+        "source": "apps/docs/src/content/textarea/demos/01-default.tsx",
+        "imports": [
+          "@qingye/ui/components/textarea"
+        ],
+        "providers": [],
+        "code": "import { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"默认\", description: \"高度随内容自动增长。\" };\n\nexport default function Demo() {\n  return <Textarea aria-label=\"备注\" className=\"max-w-sm\" placeholder=\"补充说明，例如送货前请电话联系\" />;\n}\n",
+        "sha256": "03a3d420965437cc2759ca86aae2dd893af334381bfe7deb2d75f9805f354a81"
+      },
+      {
+        "id": "sizes",
+        "title": "尺寸",
+        "source": "apps/docs/src/content/textarea/demos/02-sizes.tsx",
+        "imports": [
+          "@qingye/ui/components/textarea"
+        ],
+        "providers": [],
+        "code": "import { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"尺寸\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-sm flex-col gap-3\">\n      <Textarea aria-label=\"小\" placeholder=\"小 sm\" size=\"sm\" />\n      <Textarea aria-label=\"默认\" placeholder=\"默认 default\" />\n      <Textarea aria-label=\"大\" placeholder=\"大 lg\" size=\"lg\" />\n    </div>\n  );\n}\n",
+        "sha256": "e5d0fb24940e1e607ab8be8672fd4ce1439de4d933bfd11f039b95828ea259ee"
+      },
+      {
+        "id": "field",
+        "title": "配合标签与字数",
+        "source": "apps/docs/src/content/textarea/demos/03-field.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/textarea",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"配合标签与字数\", description: \"放在 Field 中，并用 maxLength 提示剩余字数。\" };\n\nexport default function Demo() {\n  const max = 200;\n  const [value, setValue] = useState(\"\");\n  return (\n    <Field className=\"w-full max-w-sm\">\n      <FieldLabel>问题描述</FieldLabel>\n      <Textarea\n        maxLength={max}\n        onChange={(event) => setValue(event.target.value)}\n        placeholder=\"请描述故障现象、出现时间和影响范围\"\n        value={value}\n      />\n      <FieldDescription aria-live=\"polite\" className=\"numeric self-end\">\n        {value.length} / {max}\n      </FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "c013b8b82a5e806d912ab7358bfcf28d28d785f248f9455d96ea2e1331ab4959"
+      },
+      {
+        "id": "states",
+        "title": "状态",
+        "source": "apps/docs/src/content/textarea/demos/04-states.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/textarea"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"状态\", description: \"无效、只读与禁用。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-sm gap-5\">\n      <Field invalid>\n        <FieldLabel>退款原因</FieldLabel>\n        <Textarea defaultValue=\"不想要了\" />\n        <FieldError>请至少填写 10 个字，便于客服核实。</FieldError>\n      </Field>\n      <Field>\n        <FieldLabel>审核意见</FieldLabel>\n        <Textarea defaultValue=\"资料齐全，同意开通企业账户。—— 王敏，9 月 28 日\" readOnly />\n      </Field>\n      <Field disabled>\n        <FieldLabel>内部备注</FieldLabel>\n        <Textarea placeholder=\"仅管理员可编辑\" />\n      </Field>\n    </div>\n  );\n}\n",
+        "sha256": "1d1b46bf79f08265d9427306b12c27de123cbe2bb9fcd46a516e880e4f2bea8c"
+      },
+      {
+        "id": "with-actions",
+        "title": "组合：评论框",
+        "source": "apps/docs/src/content/textarea/demos/05-with-actions.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/form",
+          "@qingye/ui/components/textarea"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Form } from \"@qingye/ui/components/form\";\nimport { Textarea } from \"@qingye/ui/components/textarea\";\n\nexport const meta = { title: \"组合：评论框\", description: \"多行输入下方放操作按钮，主按钮靠末端。\" };\n\nexport default function Demo() {\n  return (\n    <Form className=\"flex w-full max-w-sm flex-col gap-3\" onSubmit={(event) => event.preventDefault()}>\n      <Field name=\"comment\">\n        <FieldLabel>添加评论</FieldLabel>\n        <Textarea placeholder=\"@张伟 这台设备上周也报过同样的错误\" required />\n      </Field>\n      <div className=\"flex justify-end gap-2\">\n        <Button type=\"reset\" variant=\"ghost\">\n          清空\n        </Button>\n        <Button type=\"submit\">发表</Button>\n      </div>\n    </Form>\n  );\n}\n",
+        "sha256": "2cd3a20941a4c89dff3bdb34744ca48d63d274e2bf48c664831b970827c29a09"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "进退相承"
+      ],
+      "whenToUse": [
+        "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。"
+      ],
+      "avoid": [
+        "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+      ],
+      "composition": [
+        "Textarea：基于 Base UI Field.Control。外层 <span data-slot=\"textarea-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "对象、草稿、校验业务规则、版本与保存结果。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/textarea.tsx",
+      "sha256": "381c16ffa575c69a2183b76068d42efdd680c7ca792ccb82448ead7cfc1d1dae",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

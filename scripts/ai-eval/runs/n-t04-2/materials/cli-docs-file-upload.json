@@ -1,0 +1,350 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "file-upload",
+    "title": "文件上传 FileUpload",
+    "description": "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。",
+    "category": "表单",
+    "source": "local",
+    "import": "@qingye/ui/components/file-upload",
+    "exports": [
+      "FileUpload",
+      "formatFileSize"
+    ],
+    "docs": "/docs/components/file-upload",
+    "notes": [
+      "组件不上传文件：在 onFilesChange 中自行上传，再通过 getProgress / getError 回显状态。",
+      "说明文字写清允许的格式和大小，校验失败时会以 role=alert 读出原因。",
+      "图片缩略图使用对象 URL，文件移除或组件卸载时自动释放。"
+    ],
+    "keywords": [
+      "upload",
+      "file",
+      "dropzone",
+      "上传",
+      "附件",
+      "拖拽"
+    ],
+    "api": [
+      {
+        "name": "FileUpload",
+        "description": "拖放区（或紧凑按钮）+ 文件列表 + 校验提示。",
+        "props": [
+          {
+            "name": "files / defaultFiles",
+            "type": "readonly File[]",
+            "description": "受控 / 非受控的文件列表。"
+          },
+          {
+            "name": "onFilesChange",
+            "type": "(files: File[]) => void",
+            "description": "添加或移除后调用，参数是完整列表。"
+          },
+          {
+            "name": "onReject",
+            "type": "(rejected: FileRejection[]) => void",
+            "description": "有文件未通过校验时调用；reason 为 type | size | count。"
+          },
+          {
+            "name": "accept",
+            "type": "string",
+            "description": "与 <input accept> 相同，例如 \"image/*,.pdf\"。"
+          },
+          {
+            "name": "maxSize",
+            "type": "number",
+            "default": "Infinity",
+            "description": "单个文件上限（字节）。"
+          },
+          {
+            "name": "maxFiles",
+            "type": "number",
+            "default": "Infinity",
+            "description": "最多保留的文件数；为 1 时新选的文件替换旧文件。"
+          },
+          {
+            "name": "variant",
+            "type": "\"dropzone\" | \"button\"",
+            "default": "\"dropzone\"",
+            "description": "大面积拖放区，或适合密集表单的按钮触发。"
+          },
+          {
+            "name": "thumbnails",
+            "type": "boolean",
+            "default": "false",
+            "description": "图片文件显示缩略图。"
+          },
+          {
+            "name": "getProgress",
+            "type": "(file, index) => number | null | undefined",
+            "description": "0–100 的上传进度；返回空值时显示文件大小。"
+          },
+          {
+            "name": "getError",
+            "type": "(file, index) => ReactNode",
+            "description": "单个文件的错误信息，例如上传失败。"
+          },
+          {
+            "name": "renderActions",
+            "type": "(file, index) => ReactNode",
+            "description": "每行移除按钮前的额外操作，例如重试。"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "字段名；隐藏的文件输入与列表同步，原生表单提交可直接带上文件。"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "default": "false",
+            "description": "错误边框；同时提供可见的错误文字。"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "禁用拖放、选择与移除。"
+          },
+          {
+            "name": "label / description / chooseLabel",
+            "type": "string / ReactNode",
+            "description": "覆盖默认文案。"
+          },
+          {
+            "name": "removeLabel / rejectionLabel",
+            "type": "(file) => string / (rejection) => string",
+            "description": "移除按钮名称与校验提示的文案。"
+          },
+          {
+            "name": "buttonProps",
+            "type": "ButtonProps",
+            "description": "button 形态下触发按钮的 variant、size 等。"
+          }
+        ]
+      },
+      {
+        "name": "formatFileSize",
+        "description": "字节数 → 「1.5 MB」这样的可读大小。"
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Tab",
+        "description": "聚焦拖放区（或按钮），再依次聚焦每个文件的移除按钮。"
+      },
+      {
+        "keys": "Enter / Space",
+        "description": "打开系统文件选择框。"
+      },
+      {
+        "keys": "Enter / Space（移除按钮）",
+        "description": "移除该文件，焦点移到下一个文件或拖放区。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "FileRejection",
+        "kind": "type",
+        "owner": "file-upload",
+        "module": "@qingye/ui/components/file-upload",
+        "signature": "{ file: File; reason: \"type\" | \"size\" | \"count\" }",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FileUpload",
+        "kind": "function",
+        "owner": "file-upload",
+        "module": "@qingye/ui/components/file-upload",
+        "propsType": "FileUploadProps",
+        "signature": "FileUpload({\n  files,\n  defaultFiles = [],\n  onFilesChange,\n  onReject,\n  accept = \"\",\n  maxSize = Number.POSITIVE_INFINITY,\n  maxFiles = Number.POSITIVE_INFINITY,\n  disabled = false,\n  invalid = false,\n  variant = \"dropzone\",\n  name,\n  id,\n  \"aria-describedby\": ariaDescribedBy,\n  label,\n  description,\n  chooseLabel,\n  removeLabel,\n  rejectionLabel,\n  thumbnails = false,\n  getProgress,\n  getError,\n  renderActions,\n  buttonProps,\n  className,\n}: FileUploadProps): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FileUploadProps",
+        "kind": "type",
+        "owner": "file-upload",
+        "module": "@qingye/ui/components/file-upload",
+        "signature": "{\n  /** Controlled file list. */\n  files?: readonly File[];\n  defaultFiles?: readonly File[];\n  onFilesChange?: (files: File[]) => void;\n  /** Files that failed `accept`, `maxSize` or `maxFiles`. */\n  onReject?: (rejected: FileRejection[]) => void;\n  /** Same syntax as `<input accept>`: `image/*`, `.pdf`, `application/zip`. */\n  accept?: string;\n  /** Largest allowed file in bytes. */\n  maxSize?: number;\n  /** Most files kept. With `1`, a new pick replaces the current file. */\n  maxFiles?: number;\n  disabled?: boolean;\n  /** Error styling for the drop zone or button; pair with a visible message. */\n  invalid?: boolean;\n  /** `dropzone` is a large target; `button` is a compact trigger for dense forms. */\n  variant?: \"dropzone\" | \"button\";\n  /**\n   * Field name. The hidden file input mirrors the list, so a native form\n   * submission carries the files (where the browser supports DataTransfer).\n   */\n  name?: string;\n  /** Id of the focusable trigger, for an external `<label htmlFor>`. */\n  id?: string;\n  \"aria-describedby\"?: string;\n  label?: string;\n  description?: React.ReactNode;\n  chooseLabel?: string;\n  removeLabel?: (file: File) => string;\n  rejectionLabel?: (rejection: FileRejection) => string;\n  /** Show image previews instead of type icons. */\n  thumbnails?: boolean;\n  /** Upload progress 0–100 for a file, or nothing when idle. The component never uploads. */\n  getProgress?: (file: File, index: number) => number | null | undefined;\n  /** Per-file error, e.g. a failed upload. */\n  getError?: (file: File, index: number) => React.ReactNode;\n  /** Extra actions per row, rendered before the remove button (e.g. retry). */\n  renderActions?: (file: File, index: number) => React.ReactNode;\n  /** Props for the trigger button in the `button` variant. */\n  buttonProps?: Omit<ButtonProps, \"onClick\" | \"disabled\" | \"type\" | \"children\">;\n  className?: string;\n}",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "formatFileSize",
+        "kind": "function",
+        "owner": "file-upload",
+        "module": "@qingye/ui/components/file-upload",
+        "propsType": "number",
+        "signature": "formatFileSize(bytes: number): string",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "FileRejection",
+        "definition": "export type FileRejection = { file: File; reason: \"type\" | \"size\" | \"count\" };"
+      },
+      {
+        "name": "FileUploadProps",
+        "definition": "export type FileUploadProps = {\n  /** Controlled file list. */\n  files?: readonly File[];\n  defaultFiles?: readonly File[];\n  onFilesChange?: (files: File[]) => void;\n  /** Files that failed `accept`, `maxSize` or `maxFiles`. */\n  onReject?: (rejected: FileRejection[]) => void;\n  /** Same syntax as `<input accept>`: `image/*`, `.pdf`, `application/zip`. */\n  accept?: string;\n  /** Largest allowed file in bytes. */\n  maxSize?: number;\n  /** Most files kept. With `1`, a new pick replaces the current file. */\n  maxFiles?: number;\n  disabled?: boolean;\n  /** Error styling for the drop zone or button; pair with a visible message. */\n  invalid?: boolean;\n  /** `dropzone` is a large target; `button` is a compact trigger for dense forms. */\n  variant?: \"dropzone\" | \"button\";\n  /**\n   * Field name. The hidden file input mirrors the list, so a native form\n   * submission carries the files (where the browser supports DataTransfer).\n   */\n  name?: string;\n  /** Id of the focusable trigger, for an external `<label htmlFor>`. */\n  id?: string;\n  \"aria-describedby\"?: string;\n  label?: string;\n  description?: React.ReactNode;\n  chooseLabel?: string;\n  removeLabel?: (file: File) => string;\n  rejectionLabel?: (rejection: FileRejection) => string;\n  /** Show image previews instead of type icons. */\n  thumbnails?: boolean;\n  /** Upload progress 0–100 for a file, or nothing when idle. The component never uploads. */\n  getProgress?: (file: File, index: number) => number | null | undefined;\n  /** Per-file error, e.g. a failed upload. */\n  getError?: (file: File, index: number) => React.ReactNode;\n  /** Extra actions per row, rendered before the remove button (e.g. retry). */\n  renderActions?: (file: File, index: number) => React.ReactNode;\n  /** Props for the trigger button in the `button` variant. */\n  buttonProps?: Omit<ButtonProps, \"onClick\" | \"disabled\" | \"type\" | \"children\">;\n  className?: string;\n};"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "FileUpload",
+        "import": "@qingye/ui/components/file-upload",
+        "owner": "file-upload",
+        "status": "PASS"
+      },
+      {
+        "name": "formatFileSize",
+        "import": "@qingye/ui/components/file-upload",
+        "owner": "file-upload",
+        "status": "PASS"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": []
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "dropzone",
+        "title": "拖放区",
+        "source": "apps/docs/src/content/file-upload/demos/01-dropzone.tsx",
+        "imports": [
+          "@qingye/ui/components/file-upload"
+        ],
+        "providers": [],
+        "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = { title: \"拖放区\", description: \"点击或拖入文件；不符合类型或大小的文件会被拒绝并说明原因。\" };\n\nconst sample = (name: string, type: string, size: number) => new File([new Uint8Array(size)], name, { type });\n\nexport default function Demo() {\n  return (\n    <FileUpload\n      className=\"w-full max-w-md\"\n      accept=\"image/*,.pdf\"\n      maxSize={10 * 1024 * 1024}\n      label=\"上传发票\"\n      description=\"支持 PNG、JPG、PDF，单个不超过 10 MB\"\n      defaultFiles={[\n        sample(\"2026年9月差旅发票.pdf\", \"application/pdf\", 248_000),\n        sample(\"酒店住宿水单-杭州.jpg\", \"image/jpeg\", 1_860_000),\n      ]}\n    />\n  );\n}\n",
+        "sha256": "fe85d25074f6fcbb434ac181f8e51629869f34b97488ff06f2d8de2fbbee9fd0"
+      },
+      {
+        "id": "progress",
+        "title": "缩略图、进度与错误",
+        "source": "apps/docs/src/content/file-upload/demos/02-progress.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/file-upload",
+          "lucide-react",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { RotateCwIcon } from \"lucide-react\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = {\n  title: \"缩略图、进度与错误\",\n  description: \"组件只展示状态：上传逻辑放在外部，通过 getProgress、getError 和 renderActions 回显。\",\n};\n\nconst photo = (name: string, hue: number) =>\n  new File(\n    [`<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 40 40\"><rect width=\"40\" height=\"40\" fill=\"hsl(${hue} 30% 62%)\"/><circle cx=\"28\" cy=\"13\" r=\"5\" fill=\"hsl(${hue} 40% 86%)\"/><path d=\"M0 40 14 22l10 10 6-6 10 14z\" fill=\"hsl(${hue} 28% 38%)\"/></svg>`],\n    name,\n    { type: \"image/svg+xml\" },\n  );\n\nconst initial = [photo(\"机柜正面-A03.svg\", 210), photo(\"配线架标签.svg\", 150), photo(\"UPS 告警面板.svg\", 20)];\n\nexport default function Demo() {\n  const [files, setFiles] = useState<File[]>(initial);\n  const [progress, setProgress] = useState(() => new Map<File, number>([[initial[0]!, 100], [initial[1]!, 64]]));\n  const [failed, setFailed] = useState(() => new Set<File>([initial[2]!]));\n\n  // Simulated upload: every file without progress starts climbing.\n  useEffect(() => {\n    const timer = setInterval(() => {\n      setProgress((previous) => {\n        const next = new Map(previous);\n        for (const file of files) {\n          if (failed.has(file)) continue;\n          const value = next.get(file) ?? 0;\n          if (value < 100) next.set(file, Math.min(100, value + 9));\n        }\n        return next;\n      });\n    }, 400);\n    return () => clearInterval(timer);\n  }, [files, failed]);\n\n  return (\n    <FileUpload\n      className=\"w-full max-w-md\"\n      accept=\"image/*\"\n      thumbnails\n      label=\"上传现场照片\"\n      description=\"巡检工单 #4821 · 最多 6 张\"\n      maxFiles={6}\n      files={files}\n      onFilesChange={setFiles}\n      getProgress={(file) => (progress.get(file) === 100 ? null : (progress.get(file) ?? 0))}\n      getError={(file) => (failed.has(file) ? \"上传失败：网络连接中断\" : null)}\n      renderActions={(file) =>\n        failed.has(file) ? (\n          <Button\n            size=\"icon-sm\"\n            variant=\"ghost\"\n            aria-label={`重试上传 ${file.name}`}\n            onClick={() => {\n              setFailed((previous) => new Set([...previous].filter((item) => item !== file)));\n              setProgress((previous) => new Map(previous).set(file, 0));\n            }}\n          >\n            <RotateCwIcon />\n          </Button>\n        ) : null\n      }\n    />\n  );\n}\n",
+        "sha256": "765b0e76332cb372bb89dd7fd6f47eb35be2b4a32ee9798af3ce08431c04923c"
+      },
+      {
+        "id": "button",
+        "title": "按钮触发",
+        "source": "apps/docs/src/content/file-upload/demos/03-button.tsx",
+        "imports": [
+          "@qingye/ui/components/file-upload",
+          "@qingye/ui/components/label"
+        ],
+        "providers": [],
+        "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { Label } from \"@qingye/ui/components/label\";\n\nexport const meta = { title: \"按钮触发\", description: \"variant=\\\"button\\\" 适合表单中的单个附件；maxFiles=1 时新文件替换旧文件。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-2\">\n      <Label htmlFor=\"contract-file\">签署版合同</Label>\n      <FileUpload\n        id=\"contract-file\"\n        variant=\"button\"\n        accept=\".pdf\"\n        maxFiles={1}\n        maxSize={20 * 1024 * 1024}\n        chooseLabel=\"选择 PDF\"\n        description=\"仅 PDF，不超过 20 MB\"\n      />\n    </div>\n  );\n}\n",
+        "sha256": "1025113f1da9cea2e6bdbab2cbe16da5605386aa606a528a4deaa8b95a7c1a8a"
+      },
+      {
+        "id": "states",
+        "title": "状态",
+        "source": "apps/docs/src/content/file-upload/demos/04-states.tsx",
+        "imports": [
+          "@qingye/ui/components/file-upload"
+        ],
+        "providers": [],
+        "code": "import { FileUpload } from \"@qingye/ui/components/file-upload\";\n\nexport const meta = { title: \"状态\", description: \"禁用与错误。错误状态要同时给出文字说明。\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-2xl gap-6 sm:grid-cols-2\">\n      <FileUpload disabled label=\"上传固件包\" description=\"设备在线升级期间不可上传\" />\n      <div className=\"flex flex-col gap-2\">\n        <FileUpload invalid aria-describedby=\"id-card-error\" label=\"上传身份证照片\" description=\"正反面各一张，JPG 或 PNG\" accept=\"image/*\" />\n        <p id=\"id-card-error\" className=\"text-destructive-foreground text-xs\">请上传身份证正反面照片</p>\n      </div>\n    </div>\n  );\n}\n",
+        "sha256": "e4b8cfc562ea2e5d0f22be4aa00581f292b07d3b4383c0268d695c6cfba27ef1"
+      },
+      {
+        "id": "validation",
+        "title": "数量与大小限制",
+        "source": "apps/docs/src/content/file-upload/demos/05-validation.tsx",
+        "imports": [
+          "@qingye/ui/components/file-upload",
+          "react"
+        ],
+        "providers": [],
+        "code": "import type { FileRejection } from \"@qingye/ui/components/file-upload\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"数量与大小限制\",\n  description: \"最多 3 个文件、单个 2 MB。拖入超出的文件试试，被拒绝的文件会逐条列出原因。\",\n};\n\nexport default function Demo() {\n  const [rejected, setRejected] = useState<FileRejection[]>([]);\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-2\">\n      <FileUpload\n        maxFiles={3}\n        maxSize={2 * 1024 * 1024}\n        accept=\".csv,.xlsx\"\n        label=\"导入设备台账\"\n        description=\"CSV 或 Excel，最多 3 个，单个不超过 2 MB\"\n        onReject={setRejected}\n      />\n      <p className=\"text-muted-foreground text-xs numeric\">本次拒绝 {rejected.length} 个文件</p>\n    </div>\n  );\n}\n",
+        "sha256": "63dab5276b1903f5cb01788e599e75986e059c58355e3cddaf79a4a56f213d60"
+      },
+      {
+        "id": "form",
+        "title": "组合：提交工单",
+        "source": "apps/docs/src/content/file-upload/demos/06-form.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/file-upload",
+          "@qingye/ui/components/input",
+          "@qingye/ui/components/label",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldDescription } from \"@qingye/ui/components/field\";\nimport { FileUpload } from \"@qingye/ui/components/file-upload\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { Label } from \"@qingye/ui/components/label\";\nimport { useState, type FormEvent } from \"react\";\n\nexport const meta = { title: \"组合：提交工单\", description: \"通过 name 参与原生表单提交，FormData 中直接拿到 File。\" };\n\nexport default function Demo() {\n  const [summary, setSummary] = useState<string | null>(null);\n  const onSubmit = (event: FormEvent<HTMLFormElement>) => {\n    event.preventDefault();\n    const files = new FormData(event.currentTarget).getAll(\"attachments\") as File[];\n    setSummary(files.filter((file) => file.size > 0).map((file) => file.name).join(\"、\") || \"无附件\");\n  };\n  return (\n    <form className=\"flex w-full max-w-md flex-col gap-4\" onSubmit={onSubmit}>\n      <Field>\n        <Label htmlFor=\"ticket-title\">问题描述</Label>\n        <Input id=\"ticket-title\" defaultValue=\"3 楼会议室投影仪无法识别 HDMI 信号\" />\n      </Field>\n      <Field>\n        <Label htmlFor=\"ticket-files\">附件</Label>\n        <FileUpload id=\"ticket-files\" name=\"attachments\" variant=\"button\" maxFiles={5} chooseLabel=\"添加附件\" />\n        <FieldDescription>截图或日志，最多 5 个。</FieldDescription>\n      </Field>\n      <Button type=\"submit\" className=\"self-start\">提交工单</Button>\n      {summary !== null ? <p className=\"text-muted-foreground text-xs\">已提交：{summary}</p> : null}\n    </form>\n  );\n}\n",
+        "sha256": "6c361395c557855f6a7db2d034a47e4024115d902c78c6bd2e0769d81a87397c"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "进退相承"
+      ],
+      "whenToUse": [
+        "拖放或点选文件，按类型、大小和数量校验后列出。组件只管理文件列表，不发起上传；进度与错误由你传入。"
+      ],
+      "avoid": [
+        "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+      ],
+      "composition": [
+        "FileUpload：拖放区（或紧凑按钮）+ 文件列表 + 校验提示。",
+        "formatFileSize：字节数 → 「1.5 MB」这样的可读大小。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "对象、草稿、校验业务规则、版本与保存结果。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/file-upload.tsx",
+      "sha256": "6afa56806138516e949dac7c48c42569c41cf24197ed1d2f922558aca63f2a23",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

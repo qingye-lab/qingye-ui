@@ -1,0 +1,4 @@
+你是一次独立受限实现试验。请实现 /Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/runs/b-t04-2/input/task.md 的任务。
+只读该 task.md、/Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/runs/b-t04-2/work 的骨架及 /Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/runs/b-t04-2/materials 内分配资料。只在 /Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/runs/b-t04-2/work 写入；可改文件：state.ts、UploadPanel.tsx、report.md。不要读取仓库其它文件、其他试验、隐藏测试、脚本实现或参考答案；不要启动浏览器、子 agent、模型、网络、Git 操作或安装依赖。不要修改导出类型以躲避合同。
+可以执行可信类型检查：node /Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/check-types.mjs --run b-t04-2。本组不提供 Qingye CLI；使用已分配 README/catalog。
+真实目标组件版本在两组相同。完成代码、类型检查、report.md 后结束。隐藏断言由独立评估者稍后运行，不可获取。遇到资料不足，应在现有范围作可运行实现并明确边界，不请求改变任务范围。

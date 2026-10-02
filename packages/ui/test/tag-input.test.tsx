@@ -43,6 +43,10 @@ test("duplicates are not added twice", async () => {
   await userEvent.type(input, "设计{Enter}");
   expect(tags()).toEqual(["设计"]);
   expect(screen.getByTestId("tag-message")).toHaveTextContent("已添加");
+  const announcements = [...document.querySelectorAll('[aria-live="polite"]')]
+    .filter((region) => region.textContent?.includes("已添加"));
+  expect(announcements).toHaveLength(1);
+  expect(input.getAttribute("aria-describedby")).toContain(screen.getByTestId("tag-message").id);
 });
 
 test("Backspace on the empty input removes the last tag", async () => {

@@ -16,6 +16,11 @@ const I18n = lazy(() => import("./pages/docs/i18n"));
 const Accessibility = lazy(() => import("./pages/docs/accessibility"));
 const ComponentsIndex = lazy(() => import("./pages/docs/components-index"));
 const ComponentPage = lazy(() => import("./pages/docs/component"));
+const DesignPhilosophy = lazy(() => import("./pages/docs/design-philosophy"));
+const Foundations = lazy(() => import("./pages/docs/foundations"));
+const AI = lazy(() => import("./pages/docs/ai"));
+const PatternsIndex = lazy(() => import("./pages/docs/patterns").then((module) => ({ default: module.PatternsIndexPage })));
+const PatternPage = lazy(() => import("./pages/docs/patterns"));
 const NotFound = lazy(() => import("./pages/not-found"));
 const NotFoundInline = lazy(() => import("./pages/not-found").then((m) => ({ default: () => <m.NotFoundContent /> })));
 
@@ -32,6 +37,12 @@ export function App() {
           <Route element={<Introduction />} index />
           <Route element={<Installation />} path="installation" />
           <Route element={<Theming />} path="theming" />
+          <Route element={<DesignPhilosophy />} path="design-philosophy" />
+          <Route element={<Foundations />} path="foundations" />
+          <Route element={<AI />} path="ai" />
+          <Route element={<PatternsIndex />} path="patterns" />
+          <Route element={<PatternPage />} path="patterns/:slug" />
+          <Route element={<PatternPage />} path="patterns/:slug/:objectId" />
           <Route element={<Tokens />} path="tokens" />
           <Route element={<Motion />} path="motion" />
           <Route element={<I18n />} path="i18n" />

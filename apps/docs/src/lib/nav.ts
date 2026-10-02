@@ -1,3 +1,4 @@
+import { patterns } from "../patterns/metadata";
 import { CATEGORIES, type Category } from "./types";
 import { components, type ComponentEntry } from "./registry";
 
@@ -5,13 +6,18 @@ export interface GuidePage {
   path: string;
   title: string;
   description: string;
-  group: "开始" | "基础";
+  group: "开始" | "基础" | "任务";
   /** File under src/pages/docs, for the edit link. */
   file: string;
   keywords?: string[];
 }
 
 export const GUIDES: GuidePage[] = [
+  { path: "/docs/design-philosophy", title: "设计方法", description: "器用为本，关系为法，合宜为度；六种方法怎样参与设计判断。", group: "开始", file: "design-philosophy.tsx", keywords: ["文化", "方法", "理念", "名实", "布白"] },
+  { path: "/docs/foundations", title: "基础判断", description: "空间、密度、表面、中文排版、强调与状态。", group: "基础", file: "foundations.tsx", keywords: ["排版", "关系", "中文", "空间"] },
+  { path: "/docs/ai", title: "AI 使用", description: "同源设计指南、版本事实、主使用 Skill 与 Registry。", group: "开始", file: "ai.tsx", keywords: ["AI", "skill", "registry", "llms", "design.md"] },
+  { path: "/docs/patterns", title: "任务模式", description: "编辑、集合、详情、审核、队列与阅读。", group: "任务", file: "patterns.tsx", keywords: ["patterns", "恢复", "任务"] },
+  ...patterns.map((pattern) => ({ path: pattern.href, title: pattern.title, description: pattern.description, group: "任务" as const, file: "patterns.tsx", keywords: [pattern.slug, ...pattern.methods] })),
   {
     path: "/docs",
     title: "介绍",
@@ -115,6 +121,7 @@ export function navSections(): NavSection[] {
   return [
     { title: "开始", items: guide("开始") },
     { title: "基础", items: guide("基础") },
+    { title: "任务", items: guide("任务") },
     { title: "组件", items: [{ path: OVERVIEW.path, title: "总览" }] },
     ...componentsByCategory().map(({ category, items }) => ({
       title: category,

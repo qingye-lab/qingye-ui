@@ -120,7 +120,7 @@
       "registry": "https://coss.com/ui/r/input-group.json",
       "upstreamPath": "apps/ui/registry/default/ui/input-group.tsx",
       "upstreamSha256": "999f1e8aa29d4520aa4086f508cfd55503547822e4a6c4a2314e2fb14a351452",
-      "adaptedSha256": "f3b493fc5d159111ea85d4d4e0fff634d651e5c1c2a0a5a71b7a8c807b76ac07",
+      "adaptedSha256": "abb49bda6cea57df0665dc5b8c09c108fc49e2c2a1c74cc4ef71cf07d0133430",
       "adaptations": [
         "Local imports",
         "Keep upstream light and dark treatment; the library ships both themes",
@@ -128,7 +128,8 @@
         "Coordinate addon and field spacing with the roomier default controls",
         "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive input text roles",
         "Read the control radius role with clamped inner highlights; Read independent input focus width/offset roles",
-        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes"
+        "Use distinct field-input typography utility names to preserve the input colour contract and responsive font sizes",
+        "Compose addon mouse handling with caller callbacks and respect preventDefault; expose the input-group text styling slot"
       ]
     },
     {
@@ -243,14 +244,15 @@
       "registry": "https://coss.com/ui/r/field.json",
       "upstreamPath": "apps/ui/registry/default/ui/field.tsx",
       "upstreamSha256": "02ffda39f73f04638f580fd1fbb76e783cb252f9a87ecebdd62fb4bd0d1393ff",
-      "adaptedSha256": "64e67c09f39ddd573b62bca0b7dcad15be2a029392a87dcaefcadad4ccb715c5",
+      "adaptedSha256": "6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d",
       "adaptations": [
         "Local imports",
         "Add orientation, FieldGroup, FieldContent, FieldTitle and FieldSeparator for complete form layouts",
         "FieldError accepts an errors array from form libraries, deduplicates messages, and renders whenever it has content",
         "FieldError outside a Field renders its own Field root so standalone errors still work",
         "Export FieldSet and FieldLegend aliases from fieldset",
-        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles"
+        "Use the qy-space scale for layout spacing while preserving fixed component geometry; Read responsive field-label text roles",
+        "Consume separate field and field-group relationship gaps while preserving existing defaults and horizontal label/control spacing"
       ]
     },
     {

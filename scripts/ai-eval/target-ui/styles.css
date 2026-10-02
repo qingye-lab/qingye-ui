@@ -1,0 +1,42 @@
+/*
+ * styles.css — entry point for projects that run Tailwind CSS 4.
+ *
+ *   @import "tailwindcss";
+ *   @import "@qingye/ui/styles.css";
+ *
+ * Tailwind scans the library source through the @source rule below, so only
+ * the classes the components use are generated. Projects without Tailwind use
+ * the precompiled `@qingye/ui/ui.css` instead; never import both.
+ */
+@source "./src";
+
+/* `.dark` on any ancestor (usually <html>) switches the theme. */
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@import "./theme.css";
+@import "./utilities.css";
+@import "./motion.css";
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--qy-border);
+    outline-color: color-mix(in srgb, var(--qy-ring) 50%, transparent);
+  }
+
+  body {
+    background-color: var(--qy-background);
+    color: var(--qy-foreground);
+    font-family: var(--qy-font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--qy-font-mono);
+  }
+}

@@ -110,6 +110,12 @@
     transition-property: opacity, color, background-color, border-color, box-shadow !important;
   }
 
+  /* Input's long background transition prevents the browser's autofill paint.
+   * Adding color to that transition would also freeze theme text changes. */
+  input[data-slot="input"] {
+    transition-property: background-color !important;
+  }
+
   .qy-pressable:active {
     scale: none;
   }

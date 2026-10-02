@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "package": "@qingye/ui",
+  "publicEntry": "src/ui.ts",
+  "styleEntry": "src/theme.css",
+  "theme": {
+    "mode": "class",
+    "source": "theme.json",
+    "generated": "src/theme.generated.css"
+  },
+  "scan": [
+    "src"
+  ],
+  "compositions": [],
+  "tokenSources": [],
+  "adapters": [],
+  "diagnostics": {
+    "preset": "recommended",
+    "mode": "report",
+    "report": ".qingye/report.json"
+  }
+}

@@ -1,0 +1,268 @@
+/*
+ * theme.css — the design token entry point.
+ *
+ *   Layer 1  tokens/primitives.css   raw palette, no meaning
+ *   Layer 2  tokens/semantic.css     roles, light + dark
+ *   Layer 3  tokens/components.css   type, space, radius, size, density, motion
+ *
+ * Theme axes: html[data-brand] is project-owned; data-theme/.dark belong to
+ * ThemeProvider; data-density is independently set by the project/container.
+ * No data-brand means the existing default. See docs/decisions/theme-axes.md.
+ *
+ * Customise the library by overriding `--qy-*` tokens after this file, for
+ * example `:root { --qy-primary: …; --qy-radius: 0.5rem; }`.
+ *
+ * The unprefixed shadcn-style variables below (`--background`, `--card`, …)
+ * are a compatibility surface: components and third-party shadcn blocks read
+ * them in arbitrary values. They always resolve to the `--qy-*` tokens; do not
+ * override them directly.
+ */
+@import "./tokens/primitives.css";
+@import "./tokens/semantic.css";
+@import "./tokens/components.css";
+
+@layer base {
+  :root,
+  .light,
+  .dark,
+  [data-theme] {
+    --background: var(--qy-background);
+    --foreground: var(--qy-foreground);
+    --card: var(--qy-surface);
+    --card-foreground: var(--qy-foreground);
+    --popover: var(--qy-surface-raised);
+    --popover-foreground: var(--qy-foreground);
+    --primary: var(--qy-primary);
+    --primary-foreground: var(--qy-primary-foreground);
+    --secondary: var(--qy-surface-inset);
+    --secondary-foreground: var(--qy-foreground);
+    --muted: var(--qy-surface-inset);
+    --muted-foreground: var(--qy-foreground-muted);
+    --accent: var(--qy-accent);
+    --accent-foreground: var(--qy-accent-foreground);
+    --destructive: var(--qy-danger);
+    --destructive-foreground: var(--qy-danger-foreground);
+    --destructive-fill: var(--qy-danger-fill);
+    --destructive-on-fill: var(--qy-danger-on-fill);
+    --info: var(--qy-info);
+    --info-foreground: var(--qy-info-foreground);
+    --success: var(--qy-success);
+    --success-foreground: var(--qy-success-foreground);
+    --warning: var(--qy-warning);
+    --warning-foreground: var(--qy-warning-foreground);
+    --border: var(--qy-border);
+    --input: var(--qy-border-input);
+    --ring: var(--qy-ring);
+    --chart-1: var(--qy-chart-1);
+    --chart-2: var(--qy-chart-2);
+    --chart-3: var(--qy-chart-3);
+    --chart-4: var(--qy-chart-4);
+    --chart-5: var(--qy-chart-5);
+    --code: var(--qy-code);
+    --code-foreground: var(--qy-foreground);
+    --code-highlight: var(--qy-code-highlight);
+    --sidebar: var(--qy-sidebar);
+    --sidebar-foreground: var(--qy-sidebar-foreground);
+    --sidebar-border: var(--qy-sidebar-border);
+    --sidebar-accent: var(--qy-sidebar-accent);
+    --sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
+    --sidebar-primary: var(--qy-sidebar-primary);
+    --sidebar-primary-foreground: var(--qy-sidebar-primary-foreground);
+    --sidebar-ring: var(--qy-sidebar-ring);
+    --radius: var(--qy-radius);
+  }
+}
+
+/*
+ * Tailwind mapping. `inline` keeps utilities pointing at the live custom
+ * property, so theme switches apply without recompiling.
+ */
+@theme inline {
+  --font-sans: var(--qy-font-sans);
+  --font-heading: var(--qy-font-sans);
+  --font-mono: var(--qy-font-mono);
+  --font-weight-normal: var(--qy-weight-regular);
+  --font-weight-medium: var(--qy-weight-medium);
+  --font-weight-semibold: var(--qy-weight-semibold);
+
+  --color-background: var(--qy-background);
+  --color-foreground: var(--qy-foreground);
+  --color-card: var(--qy-surface);
+  --color-card-foreground: var(--qy-foreground);
+  --color-popover: var(--qy-surface-raised);
+  --color-popover-foreground: var(--qy-foreground);
+  --color-primary: var(--qy-primary);
+  --color-primary-foreground: var(--qy-primary-foreground);
+  --color-secondary: var(--qy-surface-inset);
+  --color-secondary-foreground: var(--qy-foreground);
+  --color-muted: var(--qy-surface-inset);
+  --color-muted-foreground: var(--qy-foreground-muted);
+  --color-accent: var(--qy-accent);
+  --color-accent-foreground: var(--qy-accent-foreground);
+  --color-destructive: var(--qy-danger);
+  --color-destructive-foreground: var(--qy-danger-foreground);
+  --color-destructive-fill: var(--qy-danger-fill);
+  --color-destructive-on-fill: var(--qy-danger-on-fill);
+  --color-info: var(--qy-info);
+  --color-info-foreground: var(--qy-info-foreground);
+  --color-success: var(--qy-success);
+  --color-success-foreground: var(--qy-success-foreground);
+  --color-warning: var(--qy-warning);
+  --color-warning-foreground: var(--qy-warning-foreground);
+  --color-border: var(--qy-border);
+  --color-input: var(--qy-border-input);
+  --color-ring: var(--qy-ring);
+  --color-overlay: var(--qy-overlay);
+  --color-chart-1: var(--qy-chart-1);
+  --color-chart-2: var(--qy-chart-2);
+  --color-chart-3: var(--qy-chart-3);
+  --color-chart-4: var(--qy-chart-4);
+  --color-chart-5: var(--qy-chart-5);
+  --color-code: var(--qy-code);
+  --color-code-foreground: var(--qy-foreground);
+  --color-code-highlight: var(--qy-code-highlight);
+  --color-sidebar: var(--qy-sidebar);
+  --color-sidebar-foreground: var(--qy-sidebar-foreground);
+  --color-sidebar-border: var(--qy-sidebar-border);
+  --color-sidebar-accent: var(--qy-sidebar-accent);
+  --color-sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
+  --color-sidebar-primary: var(--qy-sidebar-primary);
+  --color-sidebar-primary-foreground: var(--qy-sidebar-primary-foreground);
+  --color-sidebar-ring: var(--qy-sidebar-ring);
+
+  /* Extended roles beyond the shadcn set. */
+  --color-surface: var(--qy-surface);
+  --color-surface-raised: var(--qy-surface-raised);
+  --color-surface-subtle: var(--qy-surface-subtle);
+  --color-surface-inset: var(--qy-surface-inset);
+  --color-surface-hover: var(--qy-surface-hover);
+  --color-surface-active: var(--qy-surface-active);
+  --color-foreground-strong: var(--qy-foreground-strong);
+  --color-foreground-subtle: var(--qy-foreground-subtle);
+  --color-border-subtle: var(--qy-border-subtle);
+  --color-border-strong: var(--qy-border-strong);
+  --color-danger-soft: var(--qy-danger-soft);
+  --color-warning-soft: var(--qy-warning-soft);
+  --color-success-soft: var(--qy-success-soft);
+  --color-info-soft: var(--qy-info-soft);
+
+  --radius-control: var(--qy-radius-control);
+  --radius-panel: var(--qy-radius-panel);
+  --radius-xs: var(--qy-radius-xs);
+  --radius-sm: var(--qy-radius-sm);
+  --radius-md: var(--qy-radius-md);
+  --radius-lg: var(--qy-radius-lg);
+  --radius-xl: var(--qy-radius-xl);
+  --radius-2xl: var(--qy-radius-2xl);
+
+  --text-button: var(--qy-text-button-size);
+  --text-button--line-height: var(--qy-text-button-leading);
+  --text-button--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-mobile: var(--qy-text-button-mobile-size);
+  --text-button-mobile--line-height: var(--qy-text-button-mobile-leading);
+  --text-button-mobile--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-lg: var(--qy-text-button-lg-size);
+  --text-button-lg--line-height: var(--qy-text-button-lg-leading);
+  --text-button-lg--letter-spacing: var(--qy-text-label-tracking);
+  --text-button-xs: var(--qy-text-button-xs-size);
+  --text-button-xs--line-height: var(--qy-text-button-xs-leading);
+  --text-button-xs--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-input: var(--qy-text-input-size);
+  --text-field-input--line-height: var(--qy-text-input-leading);
+  --text-field-input--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-input-mobile: var(--qy-text-input-mobile-size);
+  --text-field-input-mobile--line-height: var(--qy-text-input-mobile-leading);
+  --text-field-input-mobile--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-label: var(--qy-text-field-label-size);
+  --text-field-label--line-height: var(--qy-text-field-label-leading);
+  --text-field-label--letter-spacing: var(--qy-text-label-tracking);
+  --text-field-label-mobile: var(--qy-text-field-label-mobile-size);
+  --text-field-label-mobile--line-height: var(--qy-text-field-label-mobile-leading);
+  --text-field-label-mobile--letter-spacing: var(--qy-text-label-tracking);
+
+  --text-display-lg: var(--qy-text-display-lg-size);
+  --text-display-lg--line-height: var(--qy-text-display-lg-leading);
+  --text-display-lg--font-weight: var(--qy-weight-semibold);
+  --text-display-lg--letter-spacing: var(--qy-text-display-tracking);
+  --text-display: var(--qy-text-display-size);
+  --text-display--letter-spacing: var(--qy-text-display-tracking);
+  --text-display--line-height: var(--qy-text-display-leading);
+  --text-title: var(--qy-text-title-size);
+  --text-title--letter-spacing: var(--qy-text-title-tracking);
+  --text-title--line-height: var(--qy-text-title-leading);
+  --text-heading: var(--qy-text-heading-size);
+  --text-heading--letter-spacing: var(--qy-text-heading-tracking);
+  --text-heading--line-height: var(--qy-text-heading-leading);
+  --text-body: var(--qy-text-body-size);
+  --text-body--letter-spacing: var(--qy-text-body-tracking);
+  --text-body--line-height: var(--qy-text-body-leading);
+  --text-label: var(--qy-text-label-size);
+  --text-label--letter-spacing: var(--qy-text-label-tracking);
+  --text-label--line-height: var(--qy-text-label-leading);
+  --text-caption: var(--qy-text-caption-size);
+  --text-caption--letter-spacing: var(--qy-text-caption-tracking);
+  --text-caption--line-height: var(--qy-text-caption-leading);
+
+  --shadow-panel: var(--qy-shadow-panel);
+  --shadow-control: var(--qy-shadow-control);
+  --shadow-raised: var(--qy-shadow-raised);
+  --shadow-overlay: var(--qy-shadow-overlay);
+  --inset-shadow-track: var(--qy-shadow-inset);
+
+  --ease-out: var(--qy-ease-out);
+  --ease-in-out: var(--qy-ease-in-out);
+  --ease-drawer: var(--qy-ease-drawer);
+  --default-transition-duration: var(--qy-duration-fast);
+  --default-transition-timing-function: var(--qy-ease-out);
+
+  /* Keyframe animations used by components (from the coss registry). */
+  --animate-skeleton: skeleton 2s -1s infinite linear;
+  --animate-caret-blink: caret-blink 1s ease-out infinite;
+  --animate-toast-success-odd: toast-success-odd 0.32s cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-success-even: toast-success-even 0.32s cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-error-odd: toast-error-odd 0.28s cubic-bezier(0.5, 1, 0.89, 1);
+  --animate-toast-error-even: toast-error-even 0.28s cubic-bezier(0.5, 1, 0.89, 1);
+
+  @keyframes skeleton {
+    to {
+      background-position: -200% 0;
+    }
+  }
+  @keyframes caret-blink {
+    0%,
+    70%,
+    100% {
+      opacity: 1;
+    }
+    20%,
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes toast-success-odd {
+    0% { scale: 1; }
+    30% { scale: 1.025; }
+    60% { scale: 0.99; }
+    100% { scale: 1; }
+  }
+  @keyframes toast-success-even {
+    0% { scale: 1; }
+    30% { scale: 1.025; }
+    60% { scale: 0.99; }
+    100% { scale: 1; }
+  }
+  @keyframes toast-error-odd {
+    0% { translate: 0 0; }
+    25% { translate: -3px 0; }
+    50% { translate: 3px 0; }
+    75% { translate: -3px 0; }
+    100% { translate: 0 0; }
+  }
+  @keyframes toast-error-even {
+    0% { translate: 0 0; }
+    25% { translate: -3px 0; }
+    50% { translate: 3px 0; }
+    75% { translate: -3px 0; }
+    100% { translate: 0 0; }
+  }
+}

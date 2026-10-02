@@ -58,6 +58,9 @@ export async function withBrowser(run) {
     const snapshot = processes();
     if (!owned.length) {
       owned = snapshot.filter((p) => p.parent === process.pid && p.command.includes("--remote-debugging-pipe"));
+      // chromium.executablePath() names full Chromium even when launch() chose
+      // headless shell. Record the process we actually own in runtime evidence.
+      if (owned[0]) lifecycle.executablePath = owned[0].command.split(" --")[0];
       lifecycle.processes = owned.map((p) => ({ pid: p.pid, parent: p.parent, profile: p.command.match(/--user-data-dir=(\S+)/)?.[1] }));
     }
     const profiles = lifecycle.processes.map((p) => p.profile).filter(Boolean);

@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "run": "n-t02-2",
+  "group": "new",
+  "task": "t02",
+  "replicate": 2,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "status": "PASS",
+  "promptSHA256": "377351124878819d10bc441b9f93026d3c94cd30714080314f7e5e76e213e050",
+  "taskSHA256": "6ea81c2c49141fb50f315dde692c4af4d91953ad49e0b01cb90f187f5ddfbdac",
+  "fixtureSHA256": "5f1024665a300e4343ec10cf866deda8af36236d69d1a87df32d72f8474ce7b5",
+  "targetVersion": "0.3.0",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "sourceFiles": [
+    {
+      "path": "Fields.tsx",
+      "symlink": false,
+      "sha256": "e6b653885ea6b46320d459b9d4f576b3c65f612bb67bb95e52b52b8afd83efbf"
+    },
+    {
+      "path": "report.md",
+      "symlink": false,
+      "sha256": "2bee426328fcf666307a431643b97442833b8740d795cc80c7e602cd810f1d4b"
+    },
+    {
+      "path": "theme.css",
+      "symlink": false,
+      "sha256": "68a5355f154208858f2bd96dc737de3704475c119688db7cd6f867ed7bf10669"
+    }
+  ],
+  "changedFiles": [
+    "report.md",
+    "theme.css"
+  ],
+  "materials": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "2d225c332d780cb3d882fc74696780faba439acc407835afc02a1493297d379e"
+    },
+    {
+      "path": "cli-docs-field.json",
+      "symlink": false,
+      "sha256": "71034547a2db86acb73efac96a8bfef31872172346b121f4b7b33de7c162e110"
+    },
+    {
+      "path": "cli-docs-input.json",
+      "symlink": false,
+      "sha256": "1304569621c206b5c15193855201872f1b30bd7e9d527d68a1bcba53c100e3b7"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "f9d1e2907638b3ca8ee2596918d14188774ac34a1a4e25d9618ed5ace2d2e3d2"
+    }
+  ],
+  "checks": {
+    "snapshot": {
+      "status": "PASS",
+      "targetUnchanged": true,
+      "materialsUnchanged": true
+    },
+    "boundaries": {
+      "status": "PASS",
+      "failures": []
+    },
+    "types": {
+      "status": "PASS",
+      "diagnostics": [],
+      "invalidImports": 0,
+      "invalidProps": 0
+    },
+    "behavior": {
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "[boundary] only the relationship token is declared at the project owner",
+          "status": "PASS",
+          "category": "boundary",
+          "errors": []
+        },
+        {
+          "name": "[scope] Sentinel light/dark and both density/marker modes use 12px",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[scope] default and unrelated brand preserve relationship and control roles",
+          "status": "PASS",
+          "category": "scope",
+          "errors": []
+        },
+        {
+          "name": "[api] two existing FieldGroups consume the public role without scattered page edits",
+          "status": "PASS",
+          "category": "api",
+          "errors": []
+        }
+      ],
+      "infrastructureError": null,
+      "exitCode": 0
+    }
+  },
+  "metrics": {
+    "invalidImports": 0,
+    "invalidProps": 0,
+    "typeErrors": 0,
+    "wrongOwnerOrScatteredEdits": 0,
+    "assertionFailures": 0,
+    "stateLossFailures": 0,
+    "falseSuccessFailures": 0,
+    "humanCorrections": 0,
+    "elapsedSeconds": 119.542,
+    "toolCalls": null,
+    "observedHarnessToolCalls": 1
+  },
+  "observations": {
+    "externalFileEdits": null,
+    "disallowedReads": null,
+    "transcript": null
+  },
+  "evaluatedAt": "2026-10-02T06:32:54.340Z",
+  "evaluationElapsedSeconds": 6.444,
+  "limitations": [
+    "Restricted fixture and small sample; no population-level model quality claim.",
+    "Behavior is jsdom/pure-state evidence, not real browser, assistive technology, visual or production acceptance.",
+    "Read/write scope is an instruction and transcript audit boundary, not OS filesystem isolation.",
+    "Only wrapper calls are automatically counted; total tools/human corrections/time remain null unless supplied by the independent runner."
+  ]
+}

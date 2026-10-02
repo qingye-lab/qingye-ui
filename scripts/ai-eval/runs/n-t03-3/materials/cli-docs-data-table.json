@@ -1,0 +1,504 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "data-table",
+    "title": "数据表格 DataTable",
+    "description": "基于 TanStack Table 的完整列表：排序、搜索、分页、行选择、批量操作、列显示切换与加载态。既可在客户端处理数据，也可交给服务端分页排序。",
+    "category": "数据展示",
+    "source": "local",
+    "import": "@qingye/ui/components/data-table",
+    "exports": [
+      "DataTable",
+      "type ColumnDef",
+      "type DataTableBulkContext",
+      "type DataTableInstance"
+    ],
+    "docs": "/docs/components/data-table",
+    "notes": [
+      "传入 getRowId，让选择在排序、翻页和数据刷新后仍然指向同一行。",
+      "数字、金额、日期列设置 meta: { align: \"end\" }，表头排序图标随之放到左侧，数值右对齐便于比较。",
+      "文本列默认按语言的排序规则（Intl.Collator）比较，中文按拼音排序；用 collationLocale 可覆盖，给列写自己的 sortingFn 也可以。",
+      "服务端模式下同时设置 manualPagination、manualSorting（及需要的 manualFiltering）与 rowCount，并在 onXChange 中请求数据，请求期间传 loading。",
+      "搜索、筛选或排序变化时自动回到第一页；数据减少导致页码越界时自动退回最后一页。",
+      "已选数量通过隐藏的 aria-live 区域播报；排序状态通过表头的 aria-sort 暴露，方向同时写给排序按钮的读屏文本。",
+      "受控某个状态时请一并提供对应的 onXChange，否则组件无法把排序、搜索等引起的翻页变化交回给你。",
+      "初始加载渲染与每页行数相同的骨架行；刷新已有数据时保留有效行，不清空比较面。"
+    ],
+    "keywords": [
+      "data table",
+      "datatable",
+      "数据表格",
+      "列表",
+      "分页",
+      "排序",
+      "tanstack"
+    ],
+    "api": [
+      {
+        "name": "DataTable",
+        "description": "泛型组件 DataTable<TData>。所有状态都支持受控（传值 + onXChange）与非受控。需要安装可选依赖 @tanstack/react-table。",
+        "props": [
+          {
+            "name": "data",
+            "type": "TData[]",
+            "description": "行数据；服务端分页时为当前页。"
+          },
+          {
+            "name": "columns",
+            "type": "ColumnDef<TData>[]",
+            "description": "列定义。meta 支持 label（列菜单名称）、align（\"start\" | \"center\" | \"end\"）、headerClassName、cellClassName。"
+          },
+          {
+            "name": "getRowId",
+            "type": "(row, index) => string",
+            "description": "稳定的行 id，跨排序、分页、刷新保持选择。"
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "default": "\"数据表格\"",
+            "description": "表格的无障碍名称。"
+          },
+          {
+            "name": "enableGlobalFilter",
+            "type": "boolean",
+            "default": "true",
+            "description": "显示搜索框，按所有列筛选。"
+          },
+          {
+            "name": "searchPlaceholder",
+            "type": "string",
+            "default": "\"搜索表格\"",
+            "description": "搜索框的占位文字，同时作为它的无障碍名称。"
+          },
+          {
+            "name": "globalFilter / onGlobalFilterChange",
+            "type": "string / (value) => void",
+            "description": "受控搜索词。"
+          },
+          {
+            "name": "collationLocale",
+            "type": "string",
+            "description": "文本列的排序语言标签（如 \"zh-CN\"）。默认取 <html lang>，因此中文按拼音而非码点排序；数字与日期列不受影响。"
+          },
+          {
+            "name": "columnFilters / onColumnFiltersChange",
+            "type": "ColumnFiltersState",
+            "description": "受控列筛选，常与 toolbar 中的自定义筛选配合。"
+          },
+          {
+            "name": "enableSorting",
+            "type": "boolean",
+            "default": "true",
+            "description": "点击表头排序；列上 enableSorting: false 可单独关闭，Shift 点击多列排序。"
+          },
+          {
+            "name": "sorting / defaultSorting / onSortingChange",
+            "type": "SortingState",
+            "description": "排序状态。"
+          },
+          {
+            "name": "enablePagination",
+            "type": "boolean",
+            "default": "true",
+            "description": "关闭后显示全部行，不渲染分页栏。"
+          },
+          {
+            "name": "pagination / onPaginationChange",
+            "type": "PaginationState",
+            "description": "受控页码与每页行数。"
+          },
+          {
+            "name": "defaultPageSize",
+            "type": "number",
+            "default": "10",
+            "description": "非受控时的初始每页行数。"
+          },
+          {
+            "name": "pageSizeOptions",
+            "type": "number[]",
+            "default": "[10, 20, 50]",
+            "description": "每页行数选项。"
+          },
+          {
+            "name": "manualPagination / manualSorting / manualFiltering",
+            "type": "boolean",
+            "default": "false",
+            "description": "交给服务端处理，表格按原样显示 data。"
+          },
+          {
+            "name": "rowCount",
+            "type": "number",
+            "description": "服务端总行数，用于页数与汇总。"
+          },
+          {
+            "name": "enableRowSelection",
+            "type": "boolean | (row) => boolean",
+            "default": "false",
+            "description": "添加复选框列；函数可按行禁用。"
+          },
+          {
+            "name": "rowSelection / defaultRowSelection / onRowSelectionChange",
+            "type": "RowSelectionState",
+            "description": "选中状态，以行 id 为键。"
+          },
+          {
+            "name": "bulkActions",
+            "type": "({ rows, ids, clear, table }) => ReactNode",
+            "description": "有选择时显示批量操作；ids 包含所有页的已选 ID，rows 只包含当前 data 中的已选对象。搜索与筛选继续可见。"
+          },
+          {
+            "name": "enableColumnVisibility",
+            "type": "boolean",
+            "default": "false",
+            "description": "显示列菜单，切换可隐藏的列（列上 enableHiding: false 可固定）。"
+          },
+          {
+            "name": "columnVisibility / defaultColumnVisibility / onColumnVisibilityChange",
+            "type": "VisibilityState",
+            "description": "列显示状态。"
+          },
+          {
+            "name": "toolbar",
+            "type": "ReactNode | (table) => ReactNode",
+            "description": "放在搜索框后的自定义筛选。"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "初始无数据时显示骨架行；有数据刷新时保留原行，并设置 aria-busy。"
+          },
+          {
+            "name": "empty",
+            "type": "ReactNode",
+            "description": "无数据时的内容；默认提示“没有匹配的结果”，有搜索词时附清除按钮。"
+          },
+          {
+            "name": "density",
+            "type": "\"default\" | \"compact\"",
+            "default": "\"default\"",
+            "description": "行高。"
+          },
+          {
+            "name": "variant",
+            "type": "\"default\" | \"card\"",
+            "default": "\"default\"",
+            "description": "表格样式，同 Table。"
+          },
+          {
+            "name": "maxHeight",
+            "type": "number | string",
+            "description": "限制表格高度，表体滚动，表头默认吸顶。"
+          },
+          {
+            "name": "stickyHeader",
+            "type": "boolean",
+            "description": "表头吸顶；设置 maxHeight 时默认开启。"
+          }
+        ]
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Tab",
+        "description": "依次聚焦搜索框、表头排序按钮、复选框和分页按钮。"
+      },
+      {
+        "keys": "Enter / Space",
+        "description": "焦点在表头按钮上时切换排序：升序、降序、取消（数字列先降序）。"
+      },
+      {
+        "keys": "Shift + Enter / Shift + Space",
+        "description": "焦点在表头按钮上时把该列追加到已有排序，实现多列排序。"
+      },
+      {
+        "keys": "Space",
+        "description": "焦点在复选框上时切换该行或全部行的选择。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "ColumnDef",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "ColumnFiltersState",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "DataTable",
+        "kind": "function",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "propsType": "DataTableProps<TData>",
+        "signature": "DataTable(props: DataTableProps<TData>): ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "DataTableBulkContext",
+        "kind": "type",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "signature": "{\n  /** Selected rows present in `data` (with manual pagination: the current page only). */\n  rows: TData[];\n  /** Every selected row id, including rows on other pages. */\n  ids: string[];\n  clear: () => void;\n  table: TanstackTable<TData>;\n}",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "DataTableInstance",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "aliasOf": "TanstackTable",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "DataTableProps",
+        "kind": "type",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "signature": "{\n  data: TData[];\n  columns: ColumnDef<TData, any>[];\n  /** Stable row ids keep selection correct across sorting, paging and refetches. */\n  getRowId?: (row: TData, index: number) => string;\n  /** Accessible name of the table. */\n  label?: string;\n\n  /** Search box filtering every column. */\n  enableGlobalFilter?: boolean;\n  searchPlaceholder?: string;\n  globalFilter?: string;\n  onGlobalFilterChange?: (value: string) => void;\n  columnFilters?: ColumnFiltersState;\n  onColumnFiltersChange?: (filters: ColumnFiltersState) => void;\n  /** Filtering happens on the server; rows are shown as given. */\n  manualFiltering?: boolean;\n\n  enableSorting?: boolean;\n  sorting?: SortingState;\n  defaultSorting?: SortingState;\n  onSortingChange?: (sorting: SortingState) => void;\n  /** Sorting happens on the server; rows are shown in the given order. */\n  manualSorting?: boolean;\n\n  enablePagination?: boolean;\n  pagination?: PaginationState;\n  /** Initial rows per page when `pagination` is uncontrolled. */\n  defaultPageSize?: number;\n  pageSizeOptions?: number[];\n  onPaginationChange?: (pagination: PaginationState) => void;\n  /** `data` is already the current page; pair with `rowCount`. */\n  manualPagination?: boolean;\n  /** Total rows on the server, for page count and summary. */\n  rowCount?: number;\n\n  /** Adds a checkbox column. A function decides per row. */\n  enableRowSelection?: boolean | ((row: Row<TData>) => boolean);\n  rowSelection?: RowSelectionState;\n  defaultRowSelection?: RowSelectionState;\n  onRowSelectionChange?: (selection: RowSelectionState) => void;\n  /** Actions shown next to the selected count, e.g. export or delete. */\n  bulkActions?: (context: DataTableBulkContext<TData>) => ReactNode;\n\n  /** Adds a menu for showing and hiding columns. */\n  enableColumnVisibility?: boolean;\n  columnVisibility?: VisibilityState;\n  defaultColumnVisibility?: VisibilityState;\n  onColumnVisibilityChange?: (visibility: VisibilityState) => void;\n\n  /** Custom filters, placed after the search box. */\n  toolbar?: ReactNode | ((table: TanstackTable<TData>) => ReactNode);\n  /** Marks the table busy. Shows skeletons for initial loading; retains existing rows during a refresh. */\n  loading?: boolean;\n  /** Content when there are no rows. */\n  empty?: ReactNode;\n  density?: TableDensity;\n  variant?: TableVariant;\n  /** Caps the table height; the body scrolls under a pinned header. */\n  maxHeight?: number | string;\n  /** Pins the header row. Defaults to on when `maxHeight` is set. */\n  stickyHeader?: boolean;\n  /**\n   * BCP 47 tag used to collate string columns. Defaults to the document\n   * language, so Chinese names sort by pinyin rather than by code point.\n   */\n  collationLocale?: string;\n  className?: string;\n}",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "PaginationState",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "RowSelectionState",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "SortingState",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "VisibilityState",
+        "kind": "reexport",
+        "owner": "data-table",
+        "module": "@qingye/ui/components/data-table",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "DataTableBulkContext",
+        "definition": "export type DataTableBulkContext<TData> = {\n  /** Selected rows present in `data` (with manual pagination: the current page only). */\n  rows: TData[];\n  /** Every selected row id, including rows on other pages. */\n  ids: string[];\n  clear: () => void;\n  table: TanstackTable<TData>;\n};"
+      },
+      {
+        "name": "DataTableProps",
+        "definition": "export type DataTableProps<TData> = {\n  data: TData[];\n  columns: ColumnDef<TData, any>[];\n  /** Stable row ids keep selection correct across sorting, paging and refetches. */\n  getRowId?: (row: TData, index: number) => string;\n  /** Accessible name of the table. */\n  label?: string;\n\n  /** Search box filtering every column. */\n  enableGlobalFilter?: boolean;\n  searchPlaceholder?: string;\n  globalFilter?: string;\n  onGlobalFilterChange?: (value: string) => void;\n  columnFilters?: ColumnFiltersState;\n  onColumnFiltersChange?: (filters: ColumnFiltersState) => void;\n  /** Filtering happens on the server; rows are shown as given. */\n  manualFiltering?: boolean;\n\n  enableSorting?: boolean;\n  sorting?: SortingState;\n  defaultSorting?: SortingState;\n  onSortingChange?: (sorting: SortingState) => void;\n  /** Sorting happens on the server; rows are shown in the given order. */\n  manualSorting?: boolean;\n\n  enablePagination?: boolean;\n  pagination?: PaginationState;\n  /** Initial rows per page when `pagination` is uncontrolled. */\n  defaultPageSize?: number;\n  pageSizeOptions?: number[];\n  onPaginationChange?: (pagination: PaginationState) => void;\n  /** `data` is already the current page; pair with `rowCount`. */\n  manualPagination?: boolean;\n  /** Total rows on the server, for page count and summary. */\n  rowCount?: number;\n\n  /** Adds a checkbox column. A function decides per row. */\n  enableRowSelection?: boolean | ((row: Row<TData>) => boolean);\n  rowSelection?: RowSelectionState;\n  defaultRowSelection?: RowSelectionState;\n  onRowSelectionChange?: (selection: RowSelectionState) => void;\n  /** Actions shown next to the selected count, e.g. export or delete. */\n  bulkActions?: (context: DataTableBulkContext<TData>) => ReactNode;\n\n  /** Adds a menu for showing and hiding columns. */\n  enableColumnVisibility?: boolean;\n  columnVisibility?: VisibilityState;\n  defaultColumnVisibility?: VisibilityState;\n  onColumnVisibilityChange?: (visibility: VisibilityState) => void;\n\n  /** Custom filters, placed after the search box. */\n  toolbar?: ReactNode | ((table: TanstackTable<TData>) => ReactNode);\n  /** Marks the table busy. Shows skeletons for initial loading; retains existing rows during a refresh. */\n  loading?: boolean;\n  /** Content when there are no rows. */\n  empty?: ReactNode;\n  density?: TableDensity;\n  variant?: TableVariant;\n  /** Caps the table height; the body scrolls under a pinned header. */\n  maxHeight?: number | string;\n  /** Pins the header row. Defaults to on when `maxHeight` is set. */\n  stickyHeader?: boolean;\n  /**\n   * BCP 47 tag used to collate string columns. Defaults to the document\n   * language, so Chinese names sort by pinyin rather than by code point.\n   */\n  collationLocale?: string;\n  className?: string;\n};"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "DataTable",
+        "import": "@qingye/ui/components/data-table",
+        "owner": "data-table",
+        "status": "PASS"
+      },
+      {
+        "name": "type ColumnDef",
+        "import": "@qingye/ui/components/data-table",
+        "owner": "data-table",
+        "status": "UNVERIFIED"
+      },
+      {
+        "name": "type DataTableBulkContext",
+        "import": "@qingye/ui/components/data-table",
+        "owner": "data-table",
+        "status": "PASS"
+      },
+      {
+        "name": "type DataTableInstance",
+        "import": "@qingye/ui/components/data-table",
+        "owner": "data-table",
+        "status": "UNVERIFIED"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": [
+        "@tanstack/react-table"
+      ]
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "basic",
+        "title": "排序、搜索与分页",
+        "source": "apps/docs/src/content/data-table/demos/01-basic.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/badge",
+          "@qingye/ui/components/data-table"
+        ],
+        "providers": [],
+        "code": "import { Badge } from \"@qingye/ui/components/badge\";\nimport { DataTable } from \"@qingye/ui/components/data-table\";\nimport { type ColumnDef } from \"@qingye/ui\";\n\nexport const meta = { title: \"排序、搜索与分页\", description: \"点击表头排序，搜索覆盖所有列；金额和日期列右对齐。\" };\n\ntype Order = { id: string; customer: string; city: string; status: \"已付款\" | \"待付款\" | \"已退款\"; amount: number; date: string };\n\nconst customers = [\"上海云杉科技\", \"杭州青禾文化\", \"成都远山物流\", \"深圳明川电子\", \"北京拾光影业\", \"苏州木与石家居\", \"厦门潮汐咖啡\"];\nconst cities = [\"上海\", \"杭州\", \"成都\", \"深圳\", \"北京\", \"苏州\", \"厦门\"];\nconst statuses = [\"已付款\", \"已付款\", \"待付款\", \"已付款\", \"已退款\"] as const;\n\nconst orders: Order[] = Array.from({ length: 32 }, (_, index) => ({\n  id: `SO-${20481 - index}`,\n  customer: customers[index % customers.length]!,\n  city: cities[index % cities.length]!,\n  status: statuses[index % statuses.length]!,\n  amount: 860 + ((index * 3779) % 31000),\n  date: `2026-09-${String(30 - (index % 28)).padStart(2, \"0\")}`,\n}));\n\nconst tone = { 已付款: \"bg-success\", 待付款: \"bg-warning\", 已退款: \"bg-muted-foreground/64\" };\n\nconst columns: ColumnDef<Order>[] = [\n  { accessorKey: \"id\", header: \"订单号\", cell: ({ getValue }) => <span className=\"font-medium numeric\">{getValue<string>()}</span> },\n  { accessorKey: \"customer\", header: \"客户\" },\n  { accessorKey: \"city\", header: \"城市\" },\n  {\n    accessorKey: \"status\",\n    header: \"状态\",\n    cell: ({ row }) => (\n      <Badge variant=\"outline\">\n        <span aria-hidden=\"true\" className={`size-1.5 rounded-full ${tone[row.original.status]}`} />\n        {row.original.status}\n      </Badge>\n    ),\n  },\n  {\n    accessorKey: \"amount\",\n    header: \"金额\",\n    meta: { align: \"end\" },\n    cell: ({ getValue }) => <span className=\"numeric\">¥{getValue<number>().toLocaleString(\"zh-CN\")}</span>,\n  },\n  { accessorKey: \"date\", header: \"下单日期\", meta: { align: \"end\", cellClassName: \"numeric text-muted-foreground\" } },\n];\n\nexport default function Demo() {\n  return <DataTable className=\"w-full\" columns={columns} data={orders} defaultSorting={[{ id: \"date\", desc: true }]} getRowId={(order) => order.id} label=\"订单\" />;\n}\n",
+        "sha256": "62121ebe3e86335b61f68b31d64db342bf3047cf349043ba02167463d7828d68"
+      },
+      {
+        "id": "selection",
+        "title": "选择、批量操作与列菜单",
+        "source": "apps/docs/src/content/data-table/demos/02-selection.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/avatar",
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/data-table",
+          "@qingye/ui/components/select",
+          "lucide-react",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { SelectPopup } from \"@qingye/ui/components/select\";\nimport { Avatar } from \"@qingye/ui/components/avatar\";\nimport { SelectItem, SelectTrigger } from \"@qingye/ui/components/select\";\nimport { AvatarFallback } from \"@qingye/ui/components/avatar\";\nimport { Button } from \"@qingye/ui/components/button\";\nimport { DataTable } from \"@qingye/ui/components/data-table\";\nimport { Select, SelectValue } from \"@qingye/ui/components/select\";\nimport { type ColumnDef } from \"@qingye/ui\";\nimport { DownloadIcon, Trash2Icon } from \"lucide-react\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"选择、批量操作与列菜单\",\n  description: \"勾选行后出现已选计数与批量操作；toolbar 放自定义筛选，列菜单切换可隐藏的列。\",\n};\n\ntype Member = { id: string; name: string; email: string; team: string; role: string; lastActive: string };\n\nconst people: Member[] = [\n  { id: \"u1\", name: \"林晓雯\", email: \"lin.xiaowen@yunshan.cn\", team: \"增长组\", role: \"管理员\", lastActive: \"2 分钟前\" },\n  { id: \"u2\", name: \"周子航\", email: \"zhou.zihang@yunshan.cn\", team: \"平台组\", role: \"成员\", lastActive: \"1 小时前\" },\n  { id: \"u3\", name: \"陈一诺\", email: \"chen.yinuo@yunshan.cn\", team: \"体验组\", role: \"成员\", lastActive: \"昨天\" },\n  { id: \"u4\", name: \"王嘉树\", email: \"wang.jiashu@yunshan.cn\", team: \"平台组\", role: \"所有者\", lastActive: \"3 天前\" },\n  { id: \"u5\", name: \"赵思远\", email: \"zhao.siyuan@yunshan.cn\", team: \"增长组\", role: \"成员\", lastActive: \"5 分钟前\" },\n  { id: \"u6\", name: \"孙可欣\", email: \"sun.kexin@yunshan.cn\", team: \"体验组\", role: \"访客\", lastActive: \"上周\" },\n];\n\nconst columns: ColumnDef<Member>[] = [\n  {\n    accessorKey: \"name\",\n    header: \"成员\",\n    cell: ({ row }) => (\n      <div className=\"flex items-center gap-2.5\">\n        <Avatar size=\"sm\">\n          <AvatarFallback>{row.original.name.slice(0, 1)}</AvatarFallback>\n        </Avatar>\n        <span className=\"font-medium\">{row.original.name}</span>\n      </div>\n    ),\n  },\n  { accessorKey: \"email\", header: \"邮箱\", cell: ({ getValue }) => <span className=\"text-muted-foreground\">{getValue<string>()}</span> },\n  { accessorKey: \"team\", header: \"团队\", filterFn: \"equalsString\" },\n  { accessorKey: \"role\", header: \"角色\" },\n  { accessorKey: \"lastActive\", header: \"最近活跃\", enableSorting: false, meta: { align: \"end\", cellClassName: \"text-muted-foreground\" } },\n];\n\nconst teams = [\n  { label: \"全部团队\", value: \"\" },\n  { label: \"增长组\", value: \"增长组\" },\n  { label: \"平台组\", value: \"平台组\" },\n  { label: \"体验组\", value: \"体验组\" },\n];\n\nexport default function Demo() {\n  const [members, setMembers] = useState(people);\n  return (\n    <DataTable\n      bulkActions={({ ids, clear }) => (\n        <>\n          <Button size=\"sm\" variant=\"outline\">\n            <DownloadIcon aria-hidden=\"true\" />\n            导出\n          </Button>\n          <Button\n            onClick={() => {\n              setMembers((current) => current.filter((member) => !ids.includes(member.id)));\n              clear();\n            }}\n            size=\"sm\"\n            variant=\"destructive-outline\"\n          >\n            <Trash2Icon aria-hidden=\"true\" />\n            移除\n          </Button>\n        </>\n      )}\n      className=\"w-full\"\n      columns={columns}\n      data={members}\n      defaultColumnVisibility={{ email: false }}\n      enableColumnVisibility\n      enableRowSelection={(row) => row.original.role !== \"所有者\"}\n      getRowId={(member) => member.id}\n      label=\"团队成员\"\n      searchPlaceholder=\"搜索成员\"\n      toolbar={(table) => (\n        <Select\n          items={teams}\n          onValueChange={(value) => table.getColumn(\"team\")?.setFilterValue(value || undefined)}\n          value={(table.getColumn(\"team\")?.getFilterValue() as string | undefined) ?? \"\"}\n        >\n          <SelectTrigger aria-label=\"按团队筛选\" className=\"w-auto min-w-32\">\n            <SelectValue />\n          </SelectTrigger>\n          <SelectPopup>\n            {teams.map((team) => (\n              <SelectItem key={team.value} value={team.value}>\n                {team.label}\n              </SelectItem>\n            ))}\n          </SelectPopup>\n        </Select>\n      )}\n    />\n  );\n}\n",
+        "sha256": "091a5dfc2ec5ce1120c40c67a1d8ea0c3640dc4aac7754c5446404fee8cbf421"
+      },
+      {
+        "id": "states",
+        "title": "加载与空状态",
+        "source": "apps/docs/src/content/data-table/demos/03-states.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/data-table",
+          "@qingye/ui/components/empty",
+          "@qingye/ui/components/label",
+          "@qingye/ui/components/switch",
+          "lucide-react",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { EmptyContent, EmptyDescription, EmptyHeader } from \"@qingye/ui/components/empty\";\nimport { EmptyMedia } from \"@qingye/ui/components/empty\";\nimport { Button } from \"@qingye/ui/components/button\";\nimport { DataTable } from \"@qingye/ui/components/data-table\";\nimport { Empty, EmptyTitle } from \"@qingye/ui/components/empty\";\nimport { Label } from \"@qingye/ui/components/label\";\nimport { Switch } from \"@qingye/ui/components/switch\";\nimport { type ColumnDef } from \"@qingye/ui\";\nimport { ServerIcon } from \"lucide-react\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"加载与空状态\", description: \"loading 显示骨架行；没有数据时显示 empty，可放入 Empty 组件引导下一步。\" };\n\ntype Server = { name: string; region: string; cpu: number };\n\nconst servers: Server[] = [\n  { name: \"api-prod-01\", region: \"华东 2（上海）\", cpu: 42 },\n  { name: \"api-prod-02\", region: \"华东 2（上海）\", cpu: 37 },\n  { name: \"worker-01\", region: \"华北 2（北京）\", cpu: 81 },\n];\n\nconst columns: ColumnDef<Server>[] = [\n  { accessorKey: \"name\", header: \"实例\", cell: ({ getValue }) => <span className=\"font-medium\">{getValue<string>()}</span> },\n  { accessorKey: \"region\", header: \"地域\" },\n  { accessorKey: \"cpu\", header: \"CPU\", meta: { align: \"end\" }, cell: ({ getValue }) => <span className=\"numeric\">{getValue<number>()}%</span> },\n];\n\nexport default function Demo() {\n  const [loading, setLoading] = useState(true);\n  const [empty, setEmpty] = useState(false);\n  return (\n    <div className=\"flex w-full flex-col gap-4\">\n      <div className=\"flex flex-wrap gap-x-6 gap-y-3\">\n        <Label>\n          <Switch checked={loading} onCheckedChange={setLoading} />\n          加载中\n        </Label>\n        <Label>\n          <Switch checked={empty} onCheckedChange={setEmpty} />\n          无数据\n        </Label>\n      </div>\n      <DataTable\n        columns={columns}\n        data={empty ? [] : servers}\n        defaultPageSize={5}\n        empty={\n          <Empty className=\"py-4 md:py-6\">\n            <EmptyHeader>\n              <EmptyMedia variant=\"icon\">\n                <ServerIcon />\n              </EmptyMedia>\n              <EmptyTitle size=\"sm\">还没有实例</EmptyTitle>\n              <EmptyDescription>创建第一台云服务器后，它会出现在这里。</EmptyDescription>\n            </EmptyHeader>\n            <EmptyContent>\n              <Button size=\"sm\">创建实例</Button>\n            </EmptyContent>\n          </Empty>\n        }\n        enableGlobalFilter={false}\n        label=\"云服务器\"\n        loading={loading}\n      />\n    </div>\n  );\n}\n",
+        "sha256": "57a52d156a6921696ac06e69b59688f3023019313133e7649cc3e8041514f132"
+      },
+      {
+        "id": "server",
+        "title": "服务端分页与排序",
+        "source": "apps/docs/src/content/data-table/demos/04-server.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/data-table",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { DataTable } from \"@qingye/ui/components/data-table\";\nimport { type ColumnDef, type PaginationState, type SortingState } from \"@qingye/ui\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = {\n  title: \"服务端分页与排序\",\n  description: \"manualPagination、manualSorting 与 rowCount 把分页排序交给接口；请求期间传 loading。\",\n};\n\ntype Ticket = { id: number; title: string; assignee: string; priority: number };\n\nconst titles = [\"支付回调超时\", \"导出报表缺少字段\", \"登录页验证码不显示\", \"订单列表加载缓慢\", \"发票抬头无法保存\", \"推送通知重复\"];\nconst assignees = [\"林晓雯\", \"周子航\", \"陈一诺\", \"王嘉树\"];\n\n// Stands in for a real API: sorts and slices 87 tickets after a short delay.\nfunction fetchTickets(pagination: PaginationState, sorting: SortingState) {\n  const all: Ticket[] = Array.from({ length: 87 }, (_, index) => ({\n    id: 1201 + index,\n    title: titles[index % titles.length]!,\n    assignee: assignees[index % assignees.length]!,\n    priority: (index * 7) % 4,\n  }));\n  const sort = sorting[0];\n  if (sort) all.sort((a, b) => (a[sort.id as keyof Ticket] > b[sort.id as keyof Ticket] ? 1 : -1) * (sort.desc ? -1 : 1));\n  const start = pagination.pageIndex * pagination.pageSize;\n  return new Promise<{ rows: Ticket[]; total: number }>((resolve) =>\n    setTimeout(() => resolve({ rows: all.slice(start, start + pagination.pageSize), total: all.length }), 600),\n  );\n}\n\nconst priorities = [\"P0 紧急\", \"P1 高\", \"P2 中\", \"P3 低\"];\n\nconst columns: ColumnDef<Ticket>[] = [\n  { accessorKey: \"id\", header: \"编号\", cell: ({ getValue }) => <span className=\"font-medium numeric\">#{getValue<number>()}</span> },\n  { accessorKey: \"title\", header: \"标题\", enableSorting: false },\n  { accessorKey: \"assignee\", header: \"负责人\" },\n  { accessorKey: \"priority\", header: \"优先级\", meta: { align: \"end\" }, cell: ({ getValue }) => priorities[getValue<number>()] },\n];\n\nexport default function Demo() {\n  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 });\n  const [sorting, setSorting] = useState<SortingState>([]);\n  const [result, setResult] = useState<{ rows: Ticket[]; total: number }>();\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    let current = true;\n    setLoading(true);\n    fetchTickets(pagination, sorting).then((next) => {\n      if (!current) return;\n      setResult(next);\n      setLoading(false);\n    });\n    return () => {\n      current = false;\n    };\n  }, [pagination, sorting]);\n\n  return (\n    <DataTable\n      className=\"w-full\"\n      columns={columns}\n      data={result?.rows ?? []}\n      enableGlobalFilter={false}\n      getRowId={(ticket) => String(ticket.id)}\n      label=\"工单\"\n      loading={loading}\n      manualPagination\n      manualSorting\n      onPaginationChange={setPagination}\n      onSortingChange={setSorting}\n      pagination={pagination}\n      rowCount={result?.total ?? 0}\n      sorting={sorting}\n    />\n  );\n}\n",
+        "sha256": "c97b282743d9f0fda0d0f0f37d341612fdfb1c88f6fa06cb10b7504e8af6be13"
+      },
+      {
+        "id": "compact-scroll",
+        "title": "紧凑与限高",
+        "source": "apps/docs/src/content/data-table/demos/05-compact-scroll.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/data-table"
+        ],
+        "providers": [],
+        "code": "import { DataTable } from \"@qingye/ui/components/data-table\";\nimport { type ColumnDef } from \"@qingye/ui\";\n\nexport const meta = {\n  title: \"紧凑与限高\",\n  description: \"density=\\\"compact\\\" 收紧行高，maxHeight 让表体在吸顶表头下滚动；关闭分页一次显示全部记录。\",\n};\n\ntype Event = { time: string; level: \"信息\" | \"警告\" | \"错误\"; source: string; message: string };\n\nconst messages = [\n  { level: \"信息\", source: \"gateway\", message: \"健康检查通过\" },\n  { level: \"警告\", source: \"billing\", message: \"账单生成耗时 4.2s，超过阈值\" },\n  { level: \"信息\", source: \"auth\", message: \"刷新访问令牌 128 个\" },\n  { level: \"错误\", source: \"payments\", message: \"微信支付回调签名校验失败\" },\n  { level: \"信息\", source: \"scheduler\", message: \"完成每日对账任务\" },\n] as const;\n\nconst events: Event[] = Array.from({ length: 24 }, (_, index) => ({\n  time: `15:${String(59 - index * 2).padStart(2, \"0\")}:${String((index * 17) % 60).padStart(2, \"0\")}`,\n  ...messages[index % messages.length]!,\n}));\n\nconst tone = { 信息: \"text-muted-foreground\", 警告: \"text-warning-foreground\", 错误: \"text-destructive-foreground\" };\n\nconst columns: ColumnDef<Event>[] = [\n  { accessorKey: \"time\", header: \"时间\", cell: ({ getValue }) => <span className=\"text-muted-foreground numeric\">{getValue<string>()}</span> },\n  { accessorKey: \"level\", header: \"级别\", cell: ({ row }) => <span className={`font-medium ${tone[row.original.level]}`}>{row.original.level}</span> },\n  { accessorKey: \"source\", header: \"来源\", cell: ({ getValue }) => <code className=\"text-xs\">{getValue<string>()}</code> },\n  { accessorKey: \"message\", header: \"内容\", enableSorting: false },\n];\n\nexport default function Demo() {\n  return (\n    <DataTable\n      className=\"w-full\"\n      columns={columns}\n      data={events}\n      density=\"compact\"\n      enablePagination={false}\n      label=\"系统日志\"\n      maxHeight={320}\n      searchPlaceholder=\"搜索日志\"\n    />\n  );\n}\n",
+        "sha256": "1da2b0f2fef12f16175083f08347505218e44d40deff890c231f1096c588bc8c"
+      },
+      {
+        "id": "server-selection",
+        "title": "跨页选择与批量操作",
+        "source": "apps/docs/src/content/data-table/demos/06-server-selection.tsx",
+        "imports": [
+          "@qingye/ui",
+          "@qingye/ui/components/badge",
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/data-table",
+          "lucide-react",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Badge } from \"@qingye/ui/components/badge\";\nimport { Button } from \"@qingye/ui/components/button\";\nimport { DataTable } from \"@qingye/ui/components/data-table\";\nimport { type ColumnDef } from \"@qingye/ui\";\nimport { SendIcon } from \"lucide-react\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"跨页选择与批量操作\",\n  description: \"服务端分页时选择按行 id 保留：ids 含所有已选行，rows 只有当前页的那部分。\",\n};\n\ntype Order = { id: string; customer: string; amount: number; status: \"待发货\" | \"已发货\" | \"已签收\" };\n\nconst customers = [\"上海云杉科技\", \"杭州青禾文化\", \"成都远山物流\", \"深圳明川电子\", \"北京拾光影业\", \"苏州木与石家居\"];\nconst statuses = [\"待发货\", \"已发货\", \"已签收\"] as const;\n\n// 64 orders the \"API\" hands out ten at a time.\nconst allOrders: Order[] = Array.from({ length: 64 }, (_, index) => ({\n  id: `SO-${20481 - index}`,\n  customer: customers[index % customers.length]!,\n  amount: 860 + ((index * 3779) % 31000),\n  status: statuses[index % statuses.length]!,\n}));\n\nconst columns: ColumnDef<Order>[] = [\n  { accessorKey: \"id\", header: \"订单号\", cell: ({ getValue }) => <span className=\"font-medium numeric\">{getValue<string>()}</span> },\n  { accessorKey: \"customer\", header: \"客户\" },\n  {\n    accessorKey: \"status\",\n    header: \"状态\",\n    cell: ({ row }) => (\n      <Badge variant={row.original.status === \"待发货\" ? \"warning\" : \"outline\"}>{row.original.status}</Badge>\n    ),\n  },\n  {\n    accessorKey: \"amount\",\n    header: \"金额\",\n    meta: { align: \"end\" },\n    cell: ({ getValue }) => <span className=\"numeric\">¥{getValue<number>().toLocaleString(\"zh-CN\")}</span>,\n  },\n];\n\nexport default function Demo() {\n  const [pageIndex, setPageIndex] = useState(0);\n  const [shipped, setShipped] = useState<string[]>([]);\n  const pageSize = 8;\n  const page = allOrders.slice(pageIndex * pageSize, pageIndex * pageSize + pageSize);\n\n  return (\n    <DataTable\n      bulkActions={({ ids, rows, clear }) => (\n        <>\n          <Button\n            onClick={() => {\n              // `ids` covers every page; `rows` would only cover the current one.\n              setShipped((current) => [...new Set([...current, ...ids])]);\n              clear();\n            }}\n            size=\"sm\"\n            variant=\"outline\"\n          >\n            <SendIcon aria-hidden=\"true\" />\n            标记发货（{ids.length}）\n          </Button>\n          <span className=\"hidden text-muted-foreground text-xs sm:inline\">本页 {rows.length} 行</span>\n        </>\n      )}\n      className=\"w-full\"\n      columns={columns}\n      data={page}\n      enableRowSelection\n      getRowId={(order) => order.id}\n      label=\"订单\"\n      manualPagination\n      onPaginationChange={(next) => setPageIndex(next.pageIndex)}\n      pagination={{ pageIndex, pageSize }}\n      rowCount={allOrders.length}\n      searchPlaceholder=\"搜索订单\"\n      toolbar={shipped.length > 0 ? <Badge variant=\"success\">已标记 {shipped.length} 单</Badge> : null}\n    />\n  );\n}\n",
+        "sha256": "56f196b855d5d059b24d50b491c61c8ff34cd2ae6adc809d645e6500ac4f4129"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "展开有据"
+      ],
+      "whenToUse": [
+        "基于 TanStack Table 的完整列表：排序、搜索、分页、行选择、批量操作、列显示切换与加载态。既可在客户端处理数据，也可交给服务端分页排序。"
+      ],
+      "avoid": [
+        "比较任务不应在窄屏直接删除关键列；保留二维关系，并给横向阅读清楚入口。"
+      ],
+      "composition": [
+        "DataTable：泛型组件 DataTable<TData>。所有状态都支持受控（传值 + onXChange）与非受控。需要安装可选依赖 @tanstack/react-table。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "数据、权限、动作范围、异步结果与持久化。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/data-table.tsx",
+      "sha256": "c3146b3c5864c1105352487fa99dca179448bf8f0311b514ecbb82f561ca789a",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

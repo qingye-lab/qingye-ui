@@ -1,6 +1,10 @@
 # 青野 UI · Qingye UI
 
-React 组件库：Base UI 原语 + coss ui（MIT）的组件设计 + 三层设计令牌，内置浅色 / 深色主题与动效规范。需要 React 19.2+。
+器用为本，关系为法，合宜为度。React 组件库使用 Base UI 原语，包含 coss ui（MIT）派生组件与本地实现，以任务关系、明确状态和恢复路径组织界面。内置分层令牌、浅深主题与动效规范，需要 React 19.2+。
+
+公开设计方法见随包提供的 `design.md`；`catalog.json` 包含当前导出、API 指引、来源、依赖与组合示例；`ai/SKILL.md` 和 `ai/v<版本>/` 供 AI 按安装版本查询。无法静态确认的 Provider 要求或继承签名保留未知，不等同于运行时验证。
+
+`registry/` 只提供引用共享包的项目 Provider / 主题模板，不复制基础组件。应用负责权限、草稿、请求、版本和结果；单独的 `@qingye/tooling` 提供本地诊断与主题操作，UI 不依赖它运行。
 
 ## 安装
 
@@ -69,7 +73,7 @@ import { Dialog, DialogPopup } from "@qingye/ui/components/dialog";
 import { Select } from "@qingye/ui/components/select";
 ```
 
-按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。
+按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。 如果包管理器关闭自动安装 peer，使用 Recharts 还需显式安装其要求的 `react-is`（与 React 主版本兼容）。
 
 已有 shadcn 命名的组件同时导出别名（`DropdownMenu*`、`DialogContent`、`SheetContent`、`TabsTrigger`、`TooltipContent` 等），便于迁移。
 

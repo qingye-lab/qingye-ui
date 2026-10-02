@@ -1,0 +1,4 @@
+/* Project theme owner: shared FieldGroup spacing for the Sentinel brand. */
+html[data-brand="sentinel"] {
+  --qy-field-group-gap: 12px;
+}

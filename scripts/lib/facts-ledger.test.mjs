@@ -3,7 +3,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync, readFileSync, rmSyn
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
-import { ROOT, OUT, cssDeclarations, recursiveFiles, exists } from './ui-facts.mjs';
+import { ROOT, OUT, cssDeclarations, recursiveFiles, exists, files } from './ui-facts.mjs';
 import { generateCapabilities, writeCapabilities } from '../gen-capabilities.mjs';
 import { generateStaticLedger } from './token-ledger-static.mjs';
 import { computeLedger, staticMatches } from '../token-ledger.mjs';
@@ -18,11 +18,20 @@ assert.equal(cap.components.find((entry) => entry.name === 'checkbox-group').met
 assert.ok(cap.components.find((entry) => entry.name === 'copy-button').metadata.usageResolution.find((entry) => entry.name === 'useCopyToClipboard').rootEntry);
 assert.ok(cap.tokens.some((token) => token.name === '--qy-control-md'));
 assert.ok(cap.scriptFiles.some((file) => file.endsWith('gen-index.mjs')));
+for (const [alias, owner] of [['button-group', 'group'], ['hover-card', 'preview-card']]) {
+  const item = cap.components.find((entry) => entry.name === alias);
+  assert.equal(item.provenance.trackingStatus, 'PRESENT');
+  assert.equal(item.provenance.aliasOf, `packages/ui/src/components/${owner}.tsx`);
+  assert.equal(item.provenance.evidenceKind, 'AST_PURE_REEXPORT');
+  assert.equal(item.consistency.status, 'PASS');
+}
+assert.equal(card.provenance.aliasOf, undefined);
 assert.deepEqual(cssDeclarations('/* --qy-fake: red; */ :root { --qy-real: color-mix(in srgb, var(--qy-primary) 50%, transparent); }', 'fixture.css').map((entry) => entry.name), ['--qy-real']);
 assert.deepEqual(cssDeclarations(':root { --qy-a: var(--qy-b); }', 'fixture.css')[0].references, ['--qy-b']);
 assert.equal(cssDeclarations(':root { --qy-a: calc(1px', 'fixture.css')[0].complete, false);
 const stat = generateStaticLedger();
-assert.equal(stat.coveredComponents.length, 6);
+assert.deepEqual(stat.coveredComponents.map((entry) => entry.sourceComponent), files('packages/ui/src/components', /\.tsx?$/).map((path) => path.split('/').pop().replace(/\.tsx?$/, '')));
+assert.ok(stat.records.some((record) => record.sourceComponent === 'field' && record.part === 'field'));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card-panel' && record.token === '--qy-space-6' && record.chain.some((step) => step.variable === '--card-spacing')));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'table' && record.part === 'table-cell' && record.token === '--qy-row-default' && record.chain.some((step) => step.variable === '--table-row')));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card-title' && record.token === '--qy-text-title-size' && record.property === 'font-size'));
@@ -40,6 +49,9 @@ for (const path of ['pnpm-lock.yaml', 'apps/docs/index.html', 'apps/docs/vite.co
 const primary = PROBES.find((probe) => probe.id === 'button-primary');
 assert.equal(primary.demo, 'variants');
 assert.ok(staticMatches(stat, primary).length);
+for (const id of ['field-relationship-gap', 'field-group-relationship-gap', 'table-bulk-action-gap']) {
+  assert.ok(staticMatches(stat, PROBES.find((probe) => probe.id === id)).length, `${id} has an exact static path before runtime verification`);
+}
 for (const probe of PROBES) assert.ok(!/^\d+-/.test(probe.demo));
 const observed = { id: 'button-primary:light:desktop', probeId: primary.id, theme: 'light', viewport: 'desktop', observation: 'OBSERVED_CHANGE', validOverride: true };
 assert.equal(computeLedger(stat, { fingerprint: stat.fingerprint.sha256, observations: [observed] }).cases.find((entry) => entry.probeId === primary.id).status, 'PASS');
@@ -70,5 +82,28 @@ const moduleURL = new URL('../gen-capabilities.mjs', import.meta.url).href;
 try {
   const response = execFileSync(process.execPath, ['--input-type=module', '-e', `const {generateCapabilities}=await import(${JSON.stringify(moduleURL)});const c=generateCapabilities();console.log(JSON.stringify({count:c.counts.components,dist:c.counts.dist,status:c.buildArtifacts.status,allNotRun:c.components.every(x=>x.dist.status==='NOT_RUN')}));`], { env: { ...process.env, QY_UI_ROOT: fixture, QY_UI_FACTS_OUT: resolve(fixture, 'docs') }, encoding: 'utf8' });
   assert.deepEqual(JSON.parse(response), { count: cap.counts.components, dist: 0, status: 'NOT_RUN', allNotRun: true });
+  const componentDir = resolve(fixture, 'packages/ui/src/components');
+  const facades = {
+    'forward-a.tsx': 'export * from "./forward-b";',
+    'forward-b.tsx': 'export { Group } from "./group";',
+    'wrapper.tsx': 'export { Group } from "./group"; export const localBehavior = 1;',
+    'mixed.tsx': 'export { Group } from "./group"; export { PreviewCard } from "./preview-card";',
+    'cycle-a.tsx': 'export * from "./cycle-b";',
+    'cycle-b.tsx': 'export * from "./cycle-a";',
+    'external.tsx': 'export * from "some-package";',
+    'types-only.tsx': 'export type { GroupProps } from "./group";',
+  };
+  for (const [name, source] of Object.entries(facades)) writeFileSync(resolve(componentDir, name), source);
+  const provenanceURL = new URL('./component-provenance.mjs', import.meta.url).href;
+  const outcome = execFileSync(process.execPath, ['--input-type=module', '-e', `
+    const {componentProvenance}=await import(${JSON.stringify(provenanceURL)});
+    const entries=[{file:'src/components/group.tsx'},{file:'src/components/preview-card.tsx'}];
+    const results=Object.fromEntries(${JSON.stringify(Object.keys(facades))}.map(name=>[name,componentProvenance('packages/ui/src/components/'+name,entries)]));
+    console.log(JSON.stringify(results));
+  `], { env: { ...process.env, QY_UI_ROOT: fixture }, encoding: 'utf8' });
+  const proven = JSON.parse(outcome);
+  assert.equal(proven['forward-a.tsx'].implementation, 'packages/ui/src/components/group.tsx');
+  assert.deepEqual(proven['forward-a.tsx'].chain, ['packages/ui/src/components/forward-b.tsx', 'packages/ui/src/components/group.tsx']);
+  for (const name of ['wrapper.tsx', 'mixed.tsx', 'cycle-a.tsx', 'cycle-b.tsx', 'external.tsx', 'types-only.tsx']) assert.equal(proven[name], null, name);
 } finally { rmSync(fixture, { recursive: true, force: true }); }
 console.log('facts-ledger checks passed: exports/aliases, source-only checkout, forwarding/typography, exact className parts, real demo ids, conflict/invalid/stale/NOT_RUN. Temporary fixture removed.');

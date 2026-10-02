@@ -1,0 +1,35 @@
+{
+  "artifactKind": "visual-concepts",
+  "createdOn": "2026-10-02",
+  "decision": "Q05",
+  "decisionStatus": "ALL_REJECTED_VISUAL_DEFERRED_BY_USER",
+  "generationTool": "built-in image_gen",
+  "designBrief": "Same Chinese content-library task with a management workbench and rich article reader. Preserve Qingye name, freshly review appearance, restrained identity through typography/proportion/relationships, and task-first presentation. These images are visual proposals, not interactive implementations.",
+  "limitations": [
+    "No runtime validation",
+    "No measured contrast evidence",
+    "No keyboard or screen-reader acceptance",
+    "No dark or narrow-screen variant acceptance",
+    "Image mock data is illustrative and must be normalized before implementation"
+  ],
+  "options": [
+    {
+      "displayOrder": 1,
+      "file": "option-01.png",
+      "sha256": "34cab2df975511d8c93724a3248abc190d8dd7777d23fbabb4555c792d0f1669",
+      "status": "REJECTED_BY_USER"
+    },
+    {
+      "displayOrder": 2,
+      "file": "option-02.png",
+      "sha256": "3e6165745f33ad1c81905abd8f310ea18e59c56b67285a615bde86b307a6adf2",
+      "status": "REJECTED_BY_USER"
+    },
+    {
+      "displayOrder": 3,
+      "file": "option-03.png",
+      "sha256": "34404a0b4cf84fd3f609f0a89fb23d11df39eb7d34f99fe83168465becaf6bde",
+      "status": "REJECTED_BY_USER"
+    }
+  ]
+}

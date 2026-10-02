@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "batch": "self-fe0a301a",
+  "status": "PASS",
+  "results": [
+    {
+      "run": "self-fe0a301a-t01-good",
+      "expected": "PASS",
+      "actual": "PASS",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 0,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t01-bad",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 2,
+        "stateLossFailures": 1,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t02-good",
+      "expected": "PASS",
+      "actual": "PASS",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 0,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t02-bad",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 2,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t03-good",
+      "expected": "PASS",
+      "actual": "PASS",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 0,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t03-bad",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 4,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 3,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t04-good",
+      "expected": "PASS",
+      "actual": "PASS",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 0,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-t04-bad",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 2,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 2,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-public-subpath",
+      "expected": "PASS",
+      "actual": "PASS",
+      "metrics": {
+        "invalidImports": 0,
+        "invalidProps": 0,
+        "typeErrors": 0,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": 0,
+        "stateLossFailures": 0,
+        "falseSuccessFailures": 0,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    },
+    {
+      "run": "self-fe0a301a-private-subpath",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "metrics": {
+        "invalidImports": 1,
+        "invalidProps": 0,
+        "typeErrors": 1,
+        "wrongOwnerOrScatteredEdits": 0,
+        "assertionFailures": null,
+        "stateLossFailures": null,
+        "falseSuccessFailures": null,
+        "humanCorrections": null,
+        "elapsedSeconds": null,
+        "toolCalls": null,
+        "observedHarnessToolCalls": 0
+      }
+    }
+  ],
+  "diagnosticProbes": [
+    {
+      "kind": "invalid-import",
+      "status": "PASS",
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": 2305,
+          "file": "scripts/ai-eval/runs/self-fe0a301a-invalid-import/work/Editor.tsx",
+          "line": 1,
+          "column": 10,
+          "message": "Module '\"@qingye/ui\"' has no exported member 'NonexistentQingyeWidget'.",
+          "category": "invalid-import"
+        }
+      ]
+    },
+    {
+      "kind": "invalid-prop",
+      "status": "PASS",
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": 2322,
+          "file": "scripts/ai-eval/runs/self-fe0a301a-invalid-prop/work/Editor.tsx",
+          "line": 25,
+          "column": 13,
+          "message": "Type '{ children: string; inventedAppearance: string; type: \"submit\"; disabled: boolean; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.\n  Property 'inventedAppearance' does not exist on type 'IntrinsicAttributes & ButtonProps'.",
+          "category": "invalid-prop"
+        }
+      ]
+    }
+  ]
+}

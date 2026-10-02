@@ -1,0 +1,48 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createServer} from 'node:http';
+import {mkdtempSync,mkdirSync,writeFileSync,rmSync,readFileSync,symlinkSync,cpSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createService,previewCompatibility,studioSourceSnapshot} from '../server/service.mjs';
+import {themeCss} from '@qingye/tooling';
+
+test('local service protects origin/session/project, shares dry-run/apply and conflicts',async t=>{
+  const root=mkdtempSync(resolve(tmpdir(),'qingye-service-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
+  const put=(path,value)=>{mkdirSync(dirname(resolve(root,path)),{recursive:true});writeFileSync(resolve(root,path),typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');};
+  const packagePath=fileURLToPath(new URL('../../../packages/ui/',import.meta.url));
+  put('package.json',{name:'service-fixture',type:'module',dependencies:{'@qingye/ui':'0.3.0'}});mkdirSync(resolve(root,'node_modules/@qingye'),{recursive:true});symlinkSync(packagePath,resolve(root,'node_modules/@qingye/ui'));
+  put('ui.config.json',{schemaVersion:1,package:'@qingye/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'ui.theme.generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}});
+  put('src/ui.ts','export { Button } from "@qingye/ui/components/button";');put('src/ui.css','');
+  const theme={schemaVersion:1,brand:'fixture',common:{},light:{'--qy-primary':'#123456'},dark:{},compact:{}};put('ui.theme.json',theme);put('ui.theme.generated.css',themeCss(theme,'class'));
+  const service=createService([root],{maxBytes:4096});const server=createServer((req,res)=>service.middleware(req,res,()=>{res.statusCode=404;res.end();}));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>server.close(resolve)));
+  const port=server.address().port,origin=`http://127.0.0.1:${port}`,request=(path,options)=>fetch(origin+path,options);
+  const initial=await request('/api/session');const session=await initial.json();assert.equal(session.projects.length,1);assert.equal(initial.headers.get('cache-control'),'no-store');
+  assert.equal((await request('/api/session',{headers:{Origin:'https://outside.example'}})).status,403);
+  assert.equal((await request('/api/project?project=../unregistered')).status,400);
+  const current=await (await request('/api/project?project=0')).json();const envelope={fingerprint:current.current.fingerprint,generatedFingerprint:current.current.generatedFingerprint,configFingerprint:current.current.configFingerprint,theme:{...theme,brand:'candidate'},apply:false};
+  const headers={'Content-Type':'application/json','Origin':origin,'X-Qingye-Session':session.nonce};
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers:{...headers,Origin:'https://outside.example'},body:JSON.stringify(envelope)})).status,403);
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers:{...headers,'X-Qingye-Session':'x'},body:JSON.stringify(envelope)})).status,403);
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers:{...headers,'X-Qingye-Session':'é'.repeat(64)},body:JSON.stringify(envelope)})).status,403);
+  const preview=await request('/api/theme?project=0',{method:'POST',headers,body:JSON.stringify(envelope)});assert.equal(preview.status,200);assert.equal(JSON.parse(readFileSync(resolve(root,'ui.theme.json'),'utf8')).brand,'fixture');
+  const applied=await request('/api/theme?project=0',{method:'POST',headers,body:JSON.stringify({...envelope,apply:true})});assert.equal(applied.status,200);assert.equal(JSON.parse(readFileSync(resolve(root,'ui.theme.json'),'utf8')).brand,'candidate');
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers,body:JSON.stringify({...envelope,apply:true})})).status,409);
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers,body:'{bad json'})).status,400);
+  assert.equal((await request('/api/theme?project=0',{method:'POST',headers,body:JSON.stringify({theme:'x'.repeat(5000)})})).status,400);
+  const report=await request('/api/check?project=0',{method:'POST',headers,body:JSON.stringify({save:true})});assert.equal(report.status,200);assert.equal((await (await request('/api/reports')).json()).projects[0].stale,false);
+});
+test('no explicit projects means no filesystem project access',async()=>{assert.equal(createService([]).projectCount,0);});
+test('same version alone cannot authorize Studio preview: catalog and source must match',t=>{
+  const root=mkdtempSync(resolve(tmpdir(),'qingye-preview-source-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
+  const own=fileURLToPath(new URL('../../../packages/ui/',import.meta.url)),packageRoot=resolve(root,'node_modules/@qingye/ui');mkdirSync(packageRoot,{recursive:true});
+  for(const name of ['package.json','catalog.json','src','tokens','theme.css','styles.css','motion.css','utilities.css'])cpSync(resolve(own,name),resolve(packageRoot,name),{recursive:true});
+  writeFileSync(resolve(root,'package.json'),JSON.stringify({name:'source-fixture',type:'module'}));
+  const config={schemaVersion:1,package:'@qingye/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}};
+  writeFileSync(resolve(root,'ui.config.json'),JSON.stringify(config));
+  assert.equal(previewCompatibility(root).available,true);
+  const builtSnapshot=studioSourceSnapshot();assert.equal(previewCompatibility(root,{...builtSnapshot,sourceFingerprint:'previous-built-source'}).available,false);
+  const catalogPath=resolve(packageRoot,'catalog.json'),catalogBefore=readFileSync(catalogPath,'utf8'),catalog=JSON.parse(catalogBefore);catalog.scope='Different same-version catalog';writeFileSync(catalogPath,JSON.stringify(catalog));assert.equal(previewCompatibility(root).available,false);
+  writeFileSync(catalogPath,catalogBefore);const sourcePath=resolve(packageRoot,'src/components/button.tsx');writeFileSync(sourcePath,readFileSync(sourcePath,'utf8')+'\n// changed same-version source\n');assert.equal(previewCompatibility(root).available,false);
+});

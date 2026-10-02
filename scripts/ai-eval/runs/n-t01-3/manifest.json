@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "n-t01-3",
+  "group": "new",
+  "task": "t01",
+  "replicate": 3,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "preparedAt": "2026-10-02T06:16:36.980Z",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "permittedFiles": [
+    "state.ts",
+    "Editor.tsx",
+    "report.md"
+  ],
+  "fixedFiles": [],
+  "originalFiles": [
+    {
+      "path": "Editor.tsx",
+      "symlink": false,
+      "sha256": "04c53b8ad57492236d4231ac1c636abff0c16d52559c6b32cb42e8f0f4cd6d58"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "83d7e8d6aade9f0efab80a6072a6f0f08070df6ade70c98989502033bbeafb9e"
+    }
+  ],
+  "materialFiles": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "82b405706c3a61e21626159dafb4e802264dad7445c5e38a7d5fa0ca0e8b75b4"
+    },
+    {
+      "path": "cli-docs-button.json",
+      "symlink": false,
+      "sha256": "8f277f0525eda753eb53708107f24714640894b469f0a580baabf98759afb7ae"
+    },
+    {
+      "path": "cli-docs-field.json",
+      "symlink": false,
+      "sha256": "71034547a2db86acb73efac96a8bfef31872172346b121f4b7b33de7c162e110"
+    },
+    {
+      "path": "cli-docs-input.json",
+      "symlink": false,
+      "sha256": "1304569621c206b5c15193855201872f1b30bd7e9d527d68a1bcba53c100e3b7"
+    },
+    {
+      "path": "cli-docs-textarea.json",
+      "symlink": false,
+      "sha256": "d63ff9d338e8ceb75a554f9741285b59c7d11c7b8659441e71a40eacfb7d5981"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "41cfebfd52016681932f84a617c86544dd40d6f1b976de67b4c0e4b68b92b6bd"
+    }
+  ],
+  "taskSHA256": "23b64ed679a8bae9292a5fb876f60055a0819c650db8ce32f742e640ad93a117",
+  "fixtureSHA256": "7767ca2a47ee0cb8d31090bc08ab6e6732e0596e59e08f4e42da53c066becbfd",
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "targetVersion": "0.3.0"
+}

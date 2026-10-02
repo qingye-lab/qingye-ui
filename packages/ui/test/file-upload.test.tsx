@@ -87,3 +87,49 @@ test("button variant and disabled state", () => {
   pick(container, [file("a.pdf", "application/pdf")]);
   expect(screen.queryByRole("list")).not.toBeInTheDocument();
 });
+
+test("duplicate picks at the limit are ignored while new files are rejected once", () => {
+  const first = file("a.pdf", "application/pdf");
+  const second = file("b.pdf", "application/pdf");
+  const extra = file("c.pdf", "application/pdf");
+  const onFilesChange = vi.fn();
+  const onReject = vi.fn();
+  const { container } = render(
+    <FileUpload files={[first, second]} maxFiles={2} onFilesChange={onFilesChange} onReject={onReject} />,
+  );
+  pick(container, [first, extra, second]);
+  expect(onFilesChange).not.toHaveBeenCalled();
+  expect(onReject).toHaveBeenCalledOnce();
+  expect(onReject).toHaveBeenCalledWith([{ file: extra, reason: "count" }]);
+  expect(screen.getByRole("alert")).toHaveTextContent("c.pdf");
+  expect(screen.getByRole("alert")).not.toHaveTextContent("a.pdf");
+});
+
+test("partial rejection keeps valid additions and reports all failures in one callback", () => {
+  const saved = file("a.pdf", "application/pdf");
+  const valid = file("b.pdf", "application/pdf");
+  const wrongType = file("notes.txt", "text/plain");
+  const tooLarge = file("large.pdf", "application/pdf", 100);
+  const extra = file("c.pdf", "application/pdf");
+  const onFilesChange = vi.fn();
+  const onReject = vi.fn();
+  const { container } = render(
+    <FileUpload files={[saved]} accept=".pdf" maxFiles={2} maxSize={50} onFilesChange={onFilesChange} onReject={onReject} />,
+  );
+  pick(container, [saved, valid, wrongType, tooLarge, extra]);
+  expect(onFilesChange).toHaveBeenCalledOnce();
+  expect(onFilesChange).toHaveBeenCalledWith([saved, valid]);
+  expect(onReject).toHaveBeenCalledOnce();
+  expect(onReject).toHaveBeenCalledWith([
+    { file: wrongType, reason: "type" },
+    { file: tooLarge, reason: "size" },
+    { file: extra, reason: "count" },
+  ]);
+  // A controlled component reports the proposal; it does not add rows itself.
+  expect(screen.getByRole("list")).not.toHaveTextContent("b.pdf");
+});
+
+test("a button trigger associates its visible description", () => {
+  render(<FileUpload variant="button" description="PDF，不超过 10 MB" />);
+  expect(screen.getByRole("button", { name: "选择文件" })).toHaveAccessibleDescription("PDF，不超过 10 MB");
+});

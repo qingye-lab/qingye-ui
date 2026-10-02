@@ -98,3 +98,74 @@ test("respects controlled value and expansion", async () => {
   await user.click(screen.getByText("src"));
   expect(item("src")).toHaveAttribute("aria-expanded", "true");
 });
+
+test("a lazy parent exposes expansion before its children arrive", async () => {
+  const user = userEvent.setup();
+  const onExpandedChange = vi.fn();
+  const { rerender } = render(
+    <Tree expanded={[]} label="资源" nodes={[{ id: "photos", label: "图像", hasChildren: true }]} onExpandedChange={onExpandedChange} />,
+  );
+  const parent = screen.getByRole("treeitem", { name: "图像" });
+  expect(parent).toHaveAttribute("aria-expanded", "false");
+  parent.focus();
+  await user.keyboard("{ArrowRight}");
+  expect(onExpandedChange).toHaveBeenLastCalledWith(["photos"]);
+  // Controlled expansion waits for its application owner.
+  expect(parent).toHaveAttribute("aria-expanded", "false");
+  rerender(
+    <Tree expanded={["photos"]} label="资源" nodes={[{ id: "photos", label: "图像", hasChildren: true, children: [{ id: "cover", label: "封面" }] }]} />,
+  );
+  expect(parent).toHaveAttribute("aria-expanded", "true");
+  await user.keyboard("{ArrowRight}");
+  expect(screen.getByRole("treeitem", { name: "封面" })).toHaveFocus();
+});
+
+test("deleting a focused child returns focus to its visible parent", () => {
+  const { rerender } = render(<Tree defaultExpanded={["src"]} label="项目文件" nodes={nodes} />);
+  item("index.ts").focus();
+  rerender(<Tree defaultExpanded={["src"]} label="项目文件" nodes={[{ ...nodes[0]!, children: [nodes[0]!.children![0]!] }, nodes[1]!, nodes[2]!]} />);
+  expect(item("src")).toHaveFocus();
+});
+
+test("deleting a focused root chooses a neighbor without changing selection", () => {
+  const onValueChange = vi.fn();
+  const { rerender } = render(<Tree label="项目文件" nodes={nodes} onValueChange={onValueChange} value="package" />);
+  item("docs").focus();
+  rerender(<Tree label="项目文件" nodes={[nodes[0]!, nodes[2]!]} onValueChange={onValueChange} value="package" />);
+  expect(item("package.json")).toHaveFocus();
+  expect(onValueChange).not.toHaveBeenCalled();
+});
+
+test("node removal does not take focus from a control outside the tree", () => {
+  const { rerender } = render(<><Tree label="项目文件" nodes={nodes} /><button type="button">返回集合</button></>);
+  item("docs").focus();
+  screen.getByRole("button", { name: "返回集合" }).focus();
+  rerender(<><Tree label="项目文件" nodes={[nodes[0]!, nodes[2]!]} /><button type="button">返回集合</button></>);
+  expect(screen.getByRole("button", { name: "返回集合" })).toHaveFocus();
+});
+
+test("an external collapse returns a focused descendant to its parent", () => {
+  const { rerender } = render(<Tree expanded={["src"]} label="项目文件" nodes={nodes} />);
+  item("index.ts").focus();
+  rerender(<Tree expanded={[]} label="项目文件" nodes={nodes} />);
+  expect(item("src")).toHaveFocus();
+});
+
+test("removing the last node leaves a focusable, named empty tree", () => {
+  const { rerender } = render(<Tree label="项目文件" nodes={[nodes[2]!]} />);
+  item("package.json").focus();
+  rerender(<Tree label="项目文件" nodes={[]} />);
+  expect(screen.getByRole("tree", { name: "项目文件" })).toHaveFocus();
+  expect(screen.getByRole("tree")).toHaveAttribute("tabindex", "0");
+});
+
+test("node removal does not restore an old tree focus after the user has left and blurred", () => {
+  const { rerender } = render(<><Tree label="项目文件" nodes={nodes} /><button type="button">返回集合</button></>);
+  item("docs").focus();
+  const outside = screen.getByRole("button", { name: "返回集合" });
+  outside.focus();
+  outside.blur();
+  expect(document.body).toHaveFocus();
+  rerender(<><Tree label="项目文件" nodes={[nodes[0]!, nodes[2]!]} /><button type="button">返回集合</button></>);
+  expect(document.body).toHaveFocus();
+});

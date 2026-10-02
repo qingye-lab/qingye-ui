@@ -1,0 +1,20 @@
+/* Qingye UI generated theme. READ ONLY; edit ui.theme.json. */
+html[data-brand="azure"] {
+  --qy-radius-control: 0.5rem;
+  --qy-radius-panel: 0.75rem;
+}
+
+html[data-brand="azure"].light {
+  --qy-primary: #174c83;
+  --qy-primary-foreground: #ffffff;
+}
+
+html[data-brand="azure"].dark {
+  --qy-primary: #93c5fd;
+  --qy-primary-foreground: #101827;
+}
+
+html[data-brand="azure"][data-density="compact"] {
+  --qy-control-md: 1.75rem;
+  --qy-panel-padding: 1rem;
+}

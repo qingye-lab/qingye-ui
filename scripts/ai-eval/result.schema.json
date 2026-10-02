@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Qingye restricted AI implementation trial result",
+  "type": "object",
+  "required": ["schemaVersion", "run", "group", "task", "replicate", "model", "reasoningEffort", "status", "checks", "metrics", "materials", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "run": { "type": "string" },
+    "group": { "enum": ["baseline", "new", "selftest"] },
+    "task": { "enum": ["t01", "t02", "t03", "t04"] },
+    "replicate": { "enum": [1, 2, 3] },
+    "model": { "const": "gpt-6.1-sol" },
+    "reasoningEffort": { "const": "xhigh" },
+    "status": { "enum": ["PASS", "FAIL", "UNVERIFIED", "NOT_RUN"] },
+    "metrics": {
+      "type": "object",
+      "required": ["invalidImports", "invalidProps", "typeErrors", "wrongOwnerOrScatteredEdits", "assertionFailures", "stateLossFailures", "falseSuccessFailures", "humanCorrections", "elapsedSeconds", "toolCalls", "observedHarnessToolCalls"],
+      "additionalProperties": { "type": ["number", "null"], "minimum": 0 }
+    },
+    "checks": { "type": "object", "required": ["snapshot", "boundaries", "types", "behavior"] },
+    "materials": { "type": "array" },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  }
+}

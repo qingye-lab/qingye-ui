@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "b-t02-2",
+  "group": "baseline",
+  "task": "t02",
+  "replicate": 2,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "preparedAt": "2026-10-02T06:16:37.071Z",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "permittedFiles": [
+    "theme.css",
+    "report.md"
+  ],
+  "fixedFiles": [
+    "Fields.tsx"
+  ],
+  "originalFiles": [
+    {
+      "path": "Fields.tsx",
+      "symlink": false,
+      "sha256": "e6b653885ea6b46320d459b9d4f576b3c65f612bb67bb95e52b52b8afd83efbf"
+    },
+    {
+      "path": "theme.css",
+      "symlink": false,
+      "sha256": "eb1dcf6531778a36b6717f0da1d541bc52a3380e34973c8248578dcc709fe119"
+    }
+  ],
+  "materialFiles": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "05a1b7206d2231fea6d99c5274414aea6de5ea648285019cba0f355a34e0b7d9"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "f707fa635b7bdf8d76656b074c96f242ad0889d34197dcdcf96dcd303a9f5c0a"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "f0bada22c505a7093019d31fc9a8fb41050d52a25b18873f2f9c05d4ed75550c"
+    }
+  ],
+  "taskSHA256": "6ea81c2c49141fb50f315dde692c4af4d91953ad49e0b01cb90f187f5ddfbdac",
+  "fixtureSHA256": "5f1024665a300e4343ec10cf866deda8af36236d69d1a87df32d72f8474ce7b5",
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "targetVersion": "0.3.0"
+}

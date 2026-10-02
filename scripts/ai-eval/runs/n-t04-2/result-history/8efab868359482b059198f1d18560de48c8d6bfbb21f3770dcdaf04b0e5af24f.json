@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "run": "n-t04-2",
+  "group": "new",
+  "task": "t04",
+  "replicate": 2,
+  "model": "gpt-6.1-sol",
+  "reasoningEffort": "xhigh",
+  "status": "PASS",
+  "promptSHA256": "93c2ddefbec884ad5503c4b440993cf6b1210b21bf2a9a8711d8884816b52316",
+  "taskSHA256": "316f76d9ac3339c7856fdf388ac9d71a83e9bd635c84f21a8af9ab23cf882bd9",
+  "fixtureSHA256": "723960517f1175c79359f4acda3abc75aecfeb2a03970821ac930fe330692cad",
+  "targetVersion": "0.3.0",
+  "budget": {
+    "tokens": null,
+    "seconds": null,
+    "enforcement": "Independent root runner; this harness does not invoke models"
+  },
+  "targetSourceSHA256": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991",
+  "sourceFiles": [
+    {
+      "path": "report.md",
+      "symlink": false,
+      "sha256": "988cd351a2e4f5e96db767bc2cd9b5d7b4b6c8604486b4cbea8b2f70223bab76"
+    },
+    {
+      "path": "state.ts",
+      "symlink": false,
+      "sha256": "99e0c3389ea70a08865097b58432cb38489f4f44dd396f9514e20b183aa7d296"
+    },
+    {
+      "path": "UploadPanel.tsx",
+      "symlink": false,
+      "sha256": "e032b2f6144ac10f3992f141729bdadb69b590074f399cb6463b1558ce00a231"
+    }
+  ],
+  "changedFiles": [
+    "report.md",
+    "state.ts",
+    "UploadPanel.tsx"
+  ],
+  "materials": [
+    {
+      "path": "catalog.json",
+      "symlink": false,
+      "sha256": "da3508503193b798a91c132c5c4d31d4a7074e80b764f8dd32eff0d3f94eb384"
+    },
+    {
+      "path": "cli-docs-button.json",
+      "symlink": false,
+      "sha256": "8f277f0525eda753eb53708107f24714640894b469f0a580baabf98759afb7ae"
+    },
+    {
+      "path": "cli-docs-file-upload.json",
+      "symlink": false,
+      "sha256": "1bef8c8d81c4882e60018fde31d631fc907899ee41823dfeecc9808e437f8042"
+    },
+    {
+      "path": "guide.md",
+      "symlink": false,
+      "sha256": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1"
+    },
+    {
+      "path": "manifest.json",
+      "symlink": false,
+      "sha256": "7f5b87d2a31da095d079b8fe921f9f3fe5c34f75e39c0ea016c66063bd6419cb"
+    }
+  ],
+  "checks": {
+    "snapshot": {
+      "status": "PASS",
+      "targetUnchanged": true,
+      "materialsUnchanged": true
+    },
+    "boundaries": {
+      "status": "PASS",
+      "failures": []
+    },
+    "types": {
+      "status": "PASS",
+      "diagnostics": [],
+      "invalidImports": 0,
+      "invalidProps": 0
+    },
+    "behavior": {
+      "status": "PASS",
+      "assertions": [
+        {
+          "name": "[false-success] 100 percent and transmission completion are not business completion",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[false-success] cancellation needs confirmation and ignores every late successful event",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[state-loss] confirmed cancel/error can restart with a distinct job and old events ignored",
+          "status": "PASS",
+          "category": "state-loss",
+          "errors": []
+        },
+        {
+          "name": "[api] real FileUpload slots retain the object and separate transmission/processing/done",
+          "status": "PASS",
+          "category": "api",
+          "errors": []
+        },
+        {
+          "name": "[false-success] late transport resolution after cancel request cannot start processing",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[false-success] processing finishes after cancellation but cannot notify completion",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        },
+        {
+          "name": "[state-loss] actual file error slot retains file and retry issues a new job",
+          "status": "PASS",
+          "category": "state-loss",
+          "errors": []
+        },
+        {
+          "name": "[false-success] cancelled transport rejection cannot become ordinary error",
+          "status": "PASS",
+          "category": "false-success",
+          "errors": []
+        }
+      ],
+      "infrastructureError": null,
+      "exitCode": 0
+    }
+  },
+  "metrics": {
+    "invalidImports": 0,
+    "invalidProps": 0,
+    "typeErrors": 0,
+    "wrongOwnerOrScatteredEdits": 0,
+    "assertionFailures": 0,
+    "stateLossFailures": 0,
+    "falseSuccessFailures": 0,
+    "humanCorrections": 0,
+    "elapsedSeconds": 261.556,
+    "toolCalls": null,
+    "observedHarnessToolCalls": 1
+  },
+  "observations": {
+    "externalFileEdits": null,
+    "disallowedReads": null,
+    "transcript": null
+  },
+  "evaluatedAt": "2026-10-02T07:02:09.013Z",
+  "evaluationElapsedSeconds": 5.708,
+  "limitations": [
+    "Restricted fixture and small sample; no population-level model quality claim.",
+    "Behavior is jsdom/pure-state evidence, not real browser, assistive technology, visual or production acceptance.",
+    "Read/write scope is an instruction and transcript audit boundary, not OS filesystem isolation.",
+    "Only wrapper calls are automatically counted; total tools/human corrections/time remain null unless supplied by the independent runner."
+  ]
+}

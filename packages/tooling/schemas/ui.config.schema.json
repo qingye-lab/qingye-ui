@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Explicit Qingye project configuration",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "package", "publicEntry", "styleEntry", "theme", "scan", "compositions", "tokenSources", "adapters", "diagnostics"],
+  "properties": {
+    "schemaVersion": { "const": 1 }, "package": { "const": "@qingye/ui" },
+    "publicEntry": { "$ref": "#/$defs/path" }, "styleEntry": { "$ref": "#/$defs/path" },
+    "theme": { "type": "object", "additionalProperties": false, "required": ["source", "generated", "mode"], "properties": { "source": { "$ref": "#/$defs/path" }, "generated": { "$ref": "#/$defs/path" }, "mode": { "enum": ["class", "data-theme"] }, "legacyCss": { "$ref": "#/$defs/paths" } } },
+    "scan": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/path" } },
+    "compositions": { "$ref": "#/$defs/paths" }, "tokenSources": { "$ref": "#/$defs/paths" }, "adapters": { "$ref": "#/$defs/paths" },
+    "diagnostics": { "type": "object", "additionalProperties": false, "required": ["preset", "mode", "report"], "properties": { "preset": { "enum": ["recommended", "personal", "legacy"] }, "mode": { "enum": ["report", "gate"] }, "report": { "$ref": "#/$defs/path" }, "exceptions": { "$ref": "#/$defs/path" }, "baseline": { "$ref": "#/$defs/path" } } },
+    "ledger": { "type": "string", "minLength": 1 }, "ledgerRoot": { "type": "string", "minLength": 1 }
+  },
+  "$defs": { "path": { "type": "string", "minLength": 1 }, "paths": { "type": "array", "items": { "$ref": "#/$defs/path" } } },
+  "$comment": "Paths resolve from the explicitly named project directory; managed/scan paths must remain within it. ledger and ledgerRoot may explicitly point at the existing read-only shared ledger."
+}

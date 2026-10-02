@@ -1,0 +1,4023 @@
+{
+  "schemaVersion": 1,
+  "artifactKind": "planning-coverage-snapshot",
+  "createdOn": "2026-10-02",
+  "visibility": "internal-not-for-package-or-public-site",
+  "plan": "2026-10-02-design-system-renovation.md",
+  "sourceDocumentVersion": "2.1",
+  "repositoryBaseline": {
+    "commit": "f0de47747040dfe98d58598c0b5039bf2baed0ba",
+    "packageVersion": "0.3.0",
+    "inputFingerprint": "8daef1c1f3ba08a6aff601f52bb941e9f7c6de663be0758b2a6d10a8acc9c155"
+  },
+  "generation": {
+    "method": "Extract Markdown component and representative acceptance rows plus V scenario tables; no UI execution. Work-package assignments reference the plan.",
+    "sourcePolicy": "This is a derivative requirements snapshot. Revise accepted source requirements before regenerating. Record execution evidence separately; never infer runtime acceptance from document coverage."
+  },
+  "sources": [
+    {
+      "name": "Qingye_UI_公开介绍稿_v2.md",
+      "sha256": "e094036078ae188a074059a6b0b878fb545f69fabdd8cb9a12e6f56b79997003"
+    },
+    {
+      "name": "Qingye_UI_设计理念_公开版_v2.md",
+      "sha256": "fdb4dfdd1d626241cd9cd46641221938d354ccdd6fbaddaa52f6c68faa0c4362"
+    },
+    {
+      "name": "Qingye_UI_设计理念_公开版_v2.docx",
+      "sha256": "6c78f780f698aeaa91df325317338edf6dcffc5fedaf5ae385b74aae9c554d84"
+    },
+    {
+      "name": "00_阅读顺序与版本变更_v2.1.md",
+      "sha256": "e0e6cac547027faccfc0a2e99fc02a4710e19d501aaa463921e2325ae815f7ae"
+    },
+    {
+      "name": "01_Qingye_UI_文化内核与组件设计系统_v2.1.md",
+      "sha256": "0c6667bfb8e3bbf700a2dc45cc55d87def4debb7f7dca2978d0ad21f547bfd1c"
+    },
+    {
+      "name": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sha256": "08a23cdb8b5a0c151525ac7227ef8f6d6747e678d40dfa5f23ca40f5994cb1c5"
+    },
+    {
+      "name": "03_实施与AI使用契约_v2.1.md",
+      "sha256": "c004624da08c70216e3ed67837e0343a31965553a0bc00b5344b3a736716319d"
+    },
+    {
+      "name": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sha256": "9987789d25f61bdfdf13aee3b3f0beb7391747226a92dad160e62f4d25be10ef"
+    },
+    {
+      "name": "05_研究依据与事实边界_v2.1.md",
+      "sha256": "8cf735454ebb5be55c146e0d7afeb17762b0b506747c61689de50743757c0fb9"
+    },
+    {
+      "name": "ui-component-system-plan.md",
+      "sha256": "4dde1222b998ea229a38c44bee5fb00180734d34925d441dc85935b1bc9c7091"
+    }
+  ],
+  "currentAliases": {
+    "button-group": "group",
+    "hover-card": "preview-card"
+  },
+  "counts": {
+    "componentCases": 88,
+    "scenarios": 30,
+    "patterns": 6
+  },
+  "componentCases": [
+    {
+      "id": "C001",
+      "module": "button",
+      "sourcePath": "packages/ui/src/components/button.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 27,
+      "methods": [
+        "M1",
+        "M2",
+        "M4"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "短边稳定、长边随内容；方整轮廓配控制圆角。普通任务组有主次，静态不堆阴影；危险语义与品牌强调分开。",
+        "states": "图标/文字共基线；hover、pressed、focus、busy 可区分。busy 保留原宽度和名称，不让按钮跳位。",
+        "principlesAndCustomization": "M1 M2 M4：分别描述动作含义、作用范围与显著程度；核心不固定为提交。状态未知时不把按钮改成成功，保护动作允许成为当下重点。\n覆盖：逐尺寸、长标签、中英混排、重复提交、键盘聚焦与相邻控件对齐；确认流程由操作风险决定，不由颜色自动决定。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 40,
+        "conditionsAndActions": "连续触发一个带受控等待状态的提交动作，再模拟失败",
+        "expected": "名称和外部尺寸保持可理解；等待不等于成功；重复激活按应用策略去重，失败后可继续",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；名称/几何断言、回调计数与失败截图"
+      }
+    },
+    {
+      "id": "C002",
+      "module": "button-group",
+      "sourcePath": "packages/ui/src/components/button-group.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 28,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "相关动作共享外轮廓和尺度；紧接组只在外围保留圆角，内部一道接缝，不叠两重边框。分离组用统一动作间距。",
+        "states": "各动作仍可独立聚焦；整体不是一个含糊的大按钮。危险动作可与普通组分隔，不强行塞入同一连体组。",
+        "principlesAndCustomization": "M2 M3：共界只表达任务相关，不表达固定四级角色；共同外轮廓与各自独立命中区同时验证，取消不可被连体外观弱化。\n覆盖：中间项删除、单项、竖排、RTL、换行、focus 不被父容器裁切；是否连体由任务关系选择。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 41,
+        "conditionsAndActions": "三项接合组中移除中间项，并用键盘依次聚焦剩余动作",
+        "expected": "接缝不叠加，外角正确；焦点完整；每个动作仍独立，取消没有被隐藏",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；组合截图、焦点轨迹"
+      }
+    },
+    {
+      "id": "C003",
+      "module": "toggle",
+      "sourcePath": "packages/ui/src/components/toggle.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 29,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "表示一个持续的开关态动作；选中需要形状/标记或程序化状态，不只靠浅色填充。",
+        "states": "按下反馈与持续选中分离；不把一次性提交做成 Toggle。",
+        "principlesAndCustomization": "M1 M6：按下态表达当前选择；可采用有明确待保存与失败反馈的乐观呈现；与一次性执行明确分开，异步失败由真实状态回报而非动画结束认定。\n覆盖：受控状态、键盘、disabled、快速切换、暗色和高对比；文本标签保持可理解。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 42,
+        "conditionsAndActions": "对持续选择先作本地切换，再模拟远端保存失败",
+        "expected": "本地选择与保存状态分开；可乐观呈现但不能伪报已持久化；恢复策略明确",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；选择属性、待保存/失败状态与应用事件"
+      }
+    },
+    {
+      "id": "C004",
+      "module": "toggle-group",
+      "sourcePath": "packages/ui/src/components/toggle-group.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 30,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "单选或多选关系清楚；外部作为一组、内部各项边界简化；图标按钮保留名称。",
+        "states": "组内选中模式明确，不与 Tabs 面板切换混淆；不同组间留有分隔。",
+        "principlesAndCustomization": "M1 M2：分清互斥、多选与允许空选；分组依据同一任务，不能仅因为视觉靠近就绑定为互斥状态。\n覆盖：单选/多选、空选择策略、键盘焦点移动、RTL 和长标签；产品选择须显式配置。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 43,
+        "conditionsAndActions": "配置单选、可空选及多选三个夹具，逐项操作",
+        "expected": "实际选择约束符合夹具；组间选择不互相污染；不套用Tabs面板语义",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；选择集合与键盘断言"
+      }
+    },
+    {
+      "id": "C005",
+      "module": "toolbar",
+      "sourcePath": "packages/ui/src/components/toolbar.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 31,
+      "methods": [
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "按选择、筛选、常用动作、更多动作组织；同组近、异组远。主操作不会被所有小图标争抢。",
+        "states": "溢出可进入菜单，但关键动作不只在 hover 可见；触屏有直接入口。选择态出现操作栏时避免焦点和内容意外跳动。",
+        "principlesAndCustomization": "M2 M3 M4：把操作角色和视觉分组分开；高信息量不等于所有工具高亮，情境工具出现时不得夺走当前搜索焦点。\n覆盖：窄屏、200% 缩放、长文案、键盘与可见性；只有实际承担 toolbar 语义时才使用相应角色。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 44,
+        "conditionsAndActions": "搜索框中输入时增加选中记录，使情境动作区出现",
+        "expected": "搜索内容及焦点保留；常用入口仍可发现；组间关系清楚且不挤出必要操作",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；前后焦点、输入值、窄屏截图"
+      }
+    },
+    {
+      "id": "C006",
+      "module": "copy-button",
+      "sourcePath": "packages/ui/src/components/copy-button.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 32,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "轻量工具，靠近被复制对象；复制完成在原处表达，不为小动作叠加弹窗。",
+        "states": "失败不能伪报成功；反馈文字/图标变化不改变布局；连续复制按真实结果更新。",
+        "principlesAndCustomization": "M1 M6：复制的是原文还是格式化结果应明确；Clipboard拒绝不报完成，成功反馈不能导致需要复制的对象消失。\n覆盖：权限拒绝、API 不可用、长内容、键盘与屏幕阅读器状态通知；不得静默上传剪贴板。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 45,
+        "conditionsAndActions": "复制带空格和换行的原文，再拒绝剪贴板写入",
+        "expected": "成功时复制内容准确；拒绝时不显示成功；失败说明不替换原文",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；模拟剪贴板结果、原文比对"
+      }
+    },
+    {
+      "id": "C007",
+      "module": "command",
+      "sourcePath": "packages/ui/src/components/command.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 33,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "搜索入口、结果分组、快捷键提示形成清楚纵向层级；当前结果是视觉焦点，不默认给所有结果装卡片。",
+        "states": "搜索/筛选与执行分开；名称明确，危险命令在执行层另行授权。",
+        "principlesAndCustomization": "M1 M5 M6：提供已知任务的直达，不代替可发现的普通入口；命令对象与范围清楚，用户取消检索不被视为同意执行。\n覆盖：IME、无结果、异步过期响应、键盘导航、Escape、返回焦点；快捷键不与产品/系统冲突。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 46,
+        "conditionsAndActions": "用中文输入法查询，选择一条命令之前按Escape",
+        "expected": "组合输入不中途执行；关闭查询不执行命令；返回合理焦点",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；IME人工记录、命令回调计数"
+      }
+    },
+    {
+      "id": "C008",
+      "module": "kbd",
+      "sourcePath": "packages/ui/src/components/kbd.tsx",
+      "family": "01 动作与工具组",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 34,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "作为辅助说明，不模拟厚重实体键帽；尺寸、基线和文字对比与相邻标签协调。",
+        "states": "按用户平台显示正确修饰键；必要快捷键说明不能只依赖此视觉部件。",
+        "principlesAndCustomization": "M1 M4：标注真实平台快捷键而非固定符号装饰；同一操作名称在快捷键提示和菜单中对应，未实现快捷键不展示。\n覆盖：长组合换行、字体回退、不同系统符号；不把仅装饰性的按键外观当真实可操作控件。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 47,
+        "conditionsAndActions": "为同一动作配置两个平台的快捷键及一个尚未实现的动作",
+        "expected": "提示对应实际绑定；未实现的快捷键不作为可用能力展示；长组合可读",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；绑定配置比对、换行截图"
+      }
+    },
+    {
+      "id": "C009",
+      "module": "input",
+      "sourcePath": "packages/ui/src/components/input.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 53,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "输入区有明确可识别边界；与 Button 外部尺寸对齐。默认围合，不为了留白变成无法辨认的空白。",
+        "states": "外边框、内输入高度与 hit area 分离；value、placeholder、readonly、disabled 清楚；焦点与错误可同时存在。",
+        "principlesAndCustomization": "M1 M3 M6：把输入容量、示例和真实值分开；不为消除空白预填有后果的内容，错误与验证不得清空用户工作。\n覆盖：IME、粘贴、自动填充、长值、缩放、清空、辅助技术名称；只允许集中 token/变体改变外观。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 70,
+        "conditionsAndActions": "输入长中文，在焦点未离开时显示校验错误，再调整容器宽度",
+        "expected": "值不清空、名称仍关联、焦点和错误均可辨；文本与命中区域不被裁切",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；value/label/focus、缩放截图"
+      }
+    },
+    {
+      "id": "C010",
+      "module": "input-group",
+      "sourcePath": "packages/ui/src/components/input-group.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 54,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "前缀、输入、单位、附属按钮共用一个输入框外轮廓；内部不再套完整 Input 外框。",
+        "states": "焦点可指明具体子动作；附属按钮不意外提交；前后缀按语言方向放置。",
+        "principlesAndCustomization": "M2 M3：共同边框属于协调作用，不合并子操作语义；单位是说明而非默认值，长辅助内容不能挤占主要输入。\n覆盖：双侧 addon、长单位、错误、disabled、窄屏；焦点环不裁切，组内触屏目标不互相覆盖。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 71,
+        "conditionsAndActions": "加入前缀、单位和清除按钮，在错误态用键盘操作",
+        "expected": "共同外框只承担协调；清除只清对应值、不提交表单；子动作焦点不裁切",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；表单提交计数、轮廓截图、焦点轨迹"
+      }
+    },
+    {
+      "id": "C011",
+      "module": "textarea",
+      "sourcePath": "packages/ui/src/components/textarea.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 55,
+      "methods": [
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "与单行输入同一表面和文字体系；给连续表达更充足的行高与内空间，不缩成装饰性多行格。",
+        "states": "自增高或滚动策略显式；输入中不抢焦点，不让自动增长推走关键操作。",
+        "principlesAndCustomization": "M3 M6：先给实际表达留容量；辅助文案与模板可选择、不自动侵入正文，返回预览后仍保留文本与合理光标位置。\n覆盖：长文、换行、IME、缩放、手动 resize、最大高度；内容不会因模式切换丢失。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 72,
+        "conditionsAndActions": "输入多段文字，切到预览，再返回继续编辑",
+        "expected": "正文保留；恢复策略明确；工具和占位不压缩工作区；不将模板自动写入正文",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；草稿值、编辑/预览状态、人工光标检查"
+      }
+    },
+    {
+      "id": "C012",
+      "module": "search-input",
+      "sourcePath": "packages/ui/src/components/search-input.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 56,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "搜索语义可见，图标退后、输入文字优先；清空按钮与搜索操作分工明确。",
+        "states": "空输入、查询中、无结果由模块区分；组合输入结束前不提交未完成中文。",
+        "principlesAndCustomization": "M1 M5 M6：查询词、筛选范围和实际结果构成同一语义链；清空不等于删除对象，返回列表后保留明确规定的查询上下文。\n覆盖：debounce/提交策略由应用选择；过期请求由应用处理；清空后焦点、读屏标签和结果反馈正确。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 73,
+        "conditionsAndActions": "发出查询A后立即输入B，使A最后返回，再清空",
+        "expected": "B的当前意图不被旧结果覆盖；清空仅改变查询，不删除集合对象",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；请求版本、查询值、结果对象"
+      }
+    },
+    {
+      "id": "C013",
+      "module": "password-input",
+      "sourcePath": "packages/ui/src/components/password-input.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 57,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "沿用输入框外观，显示/隐藏是原位辅助动作；不用装饰强化敏感字段。",
+        "states": "显示开关不清空值、不丢焦点；不阻碍密码管理器、粘贴和自动填充。",
+        "principlesAndCustomization": "M1 M2：显示与隐藏准确说明动作；隐私保护不能成为禁止粘贴或破坏密码管理器的理由，敏感数据不进入演示证据。\n覆盖：显示切换、autocomplete、错误、键盘与辅助标签；日志与截图使用假数据。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 74,
+        "conditionsAndActions": "粘贴密码后切换显示/隐藏，并模拟无效输入",
+        "expected": "值及可操作焦点稳定；名称明确；不将密码写入日志或截图证据",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；脱敏值比较、事件与安全证据审查"
+      }
+    },
+    {
+      "id": "C014",
+      "module": "number-field",
+      "sourcePath": "packages/ui/src/components/number-field.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 58,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "数值、单位、增减行为形成一个工具；增减按钮不比输入值更抢眼。",
+        "states": "不可把输入中间态强制格式化；步长、精度、上下限由业务声明。",
+        "principlesAndCustomization": "M1 M3 M6：空值、0、无效值、未知值不合并；用户输入中的中间态可继续编辑，约束由业务声明且就近说明。\n覆盖：空值、负数、小数、输入法/locale、min/max、连续按键；解析失败不默默改成 0。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 75,
+        "conditionsAndActions": "依次输入空值、0、负号中间态、合法小数和越界值",
+        "expected": "不把空值或解析失败变成0；编辑中间态允许完成；最终约束由配置决定",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；受控值及校验记录"
+      }
+    },
+    {
+      "id": "C015",
+      "module": "otp-field",
+      "sourcePath": "packages/ui/src/components/otp-field.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 59,
+      "methods": [
+        "M1",
+        "M2",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "分段框有节奏且被识别为同一输入任务；分隔位置服务编码规则，不仿印章或棋格。",
+        "states": "允许整体粘贴/自动填充；聚焦位置明确；校验失败后给出可恢复路径。",
+        "principlesAndCustomization": "M1 M2 M6：分格只是表示同一编码，不变成多个独立任务；示例不可被误提交，失败后的重试与重新发送区分。\n覆盖：粘贴、退格、重新输入、自动填充、移动端键盘、读屏；实际单输入/多输入模型以底座为准。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 76,
+        "conditionsAndActions": "整体粘贴验证码，模拟校验失败，然后重新发送",
+        "expected": "分格仍是一个编码任务；粘贴准确；重新输入与重新发送是不同动作",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；输入值、名称和请求计数"
+      }
+    },
+    {
+      "id": "C016",
+      "module": "tag-input",
+      "sourcePath": "packages/ui/src/components/tag-input.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 60,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "已选项像一组轻量标签，不给每项叠重阴影；输入位置和删除入口稳定。",
+        "states": "IME 中的 Enter 不误建标签；重复项、空项和最大数量策略可说明。",
+        "principlesAndCustomization": "M1 M3 M6：已选标签与尚未提交输入明确；建议不是已选择，IME期间不因Enter添项，删除只改变对应标签。\n覆盖：长标签折行、backspace、删除后焦点、触屏关闭按钮；标签选择与输入保持可访问。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 77,
+        "conditionsAndActions": "中文组合输入期间按Enter，确认后新增标签，再删除其中一项",
+        "expected": "组合期不误加标签；未提交输入与已选标签不同；删除范围和后继焦点正确",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；输入/标签集合、IME人工记录"
+      }
+    },
+    {
+      "id": "C017",
+      "module": "field",
+      "sourcePath": "packages/ui/src/components/field.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 61,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "Label、Control、Description/Error 为固定解剖；标签与控件近，字段与字段更远。",
+        "states": "说明不靠 placeholder；错误就近出现且可持续阅读；必填和校验时机明确。",
+        "principlesAndCustomization": "M1 M3 M4：label、帮助、错误各讲不同事实；错误可更醒目但不移走字段身份，辅助文本不为疏朗被截断到不可理解。\n覆盖：id/label/description/error 关联、长标签、200% 缩放；错误出现不重置输入或挤坏布局。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 78,
+        "conditionsAndActions": "同一字段同时出现说明、错误和焦点，随后显示长错误文本",
+        "expected": "Label、说明和错误关联正确；各自表达不同信息；不截断关键错误或清空值",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；可访问关系、长内容截图"
+      }
+    },
+    {
+      "id": "C018",
+      "module": "fieldset",
+      "sourcePath": "packages/ui/src/components/fieldset.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 62,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "相关字段共享一段空间与组标题；不用重复卡片包裹每个字段。",
+        "states": "组级说明与字段级说明分开；真正的语义分组优先采用 fieldset/legend。",
+        "principlesAndCustomization": "M2 M3：字段共组基于共同任务而非同一种输入类型；组级约束和单字段约束分别说明，不凑人为四角色。\n覆盖：嵌套层级、disabled 组、长 legend、读屏分组；装饰性 Section 不随便替换语义分组。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 79,
+        "conditionsAndActions": "组合多个字段，显示一条组级限制及一条字段错误",
+        "expected": "组名与字段名可区分；约束归属清楚；不按输入类型强行把无关任务分组",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；语义树、阅读顺序、人工审阅"
+      }
+    },
+    {
+      "id": "C019",
+      "module": "form",
+      "sourcePath": "packages/ui/src/components/form.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 63,
+      "methods": [
+        "M1",
+        "M2",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "以任务段落组织输入：段落有标题、内聚字段、组间留白；保存区归属明确。",
+        "states": "提交、校验、等待、失败、恢复为完整流程；是否自动保存由业务决定，组件不能擅自选择。",
+        "principlesAndCustomization": "M1 M2 M6：保存、发布、发送含义分开；提交超时允许结果待核实，完成与保护共同设计，草稿保留归应用明确管理。\n覆盖：Enter 提交、IME、重复提交、dirty state、异步错误、离开未保存提示；业务和请求由应用负责。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 80,
+        "conditionsAndActions": "编辑未保存内容，提交超时，然后查询到服务端已保存",
+        "expected": "先显示结果待核实；不因超时重复执行有副作用的提交；核实后更新真实结果",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；请求/核实日志、草稿与状态"
+      }
+    },
+    {
+      "id": "C020",
+      "module": "label",
+      "sourcePath": "packages/ui/src/components/label.tsx",
+      "family": "02 文本输入与表单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 64,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "标签先于控制项或处于既定位置；不通过过淡、过小来降低存在感。",
+        "states": "目标关联明确；optional/required 不仅用颜色表示。",
+        "principlesAndCustomization": "M1 M3：名称长期稳定，示例不能替代名称；短标签用于可扫，重要限制放说明而非挤入含糊缩写。\n覆盖：点击聚焦、图标控制命名、长文案、缩放、多语言；不得以占位文字完全替代。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 81,
+        "conditionsAndActions": "为输入指定可见标签，清除placeholder，再点击标签",
+        "expected": "仍有准确名称；点击关联到正确控件；必填信息不只通过颜色表达",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；名称和焦点断言"
+      }
+    },
+    {
+      "id": "C021",
+      "module": "checkbox",
+      "sourcePath": "packages/ui/src/components/checkbox.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 87,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "保留方形与勾选的熟悉语义；轮廓紧凑、状态清楚，不为文化象征变形。",
+        "states": "checked、unchecked、indeterminate、focus 同时可辨；错误不能只靠变色。",
+        "principlesAndCustomization": "M1 M2：勾选表达真实选择，部分选中不是第三种业务同意；涉及有后果的选择不因追求效率默认代选。\n覆盖：组全选/部分选、label 点击、键盘、触屏扩展不重叠；假数据验证受控行为。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 102,
+        "conditionsAndActions": "从部分选中变为全选，再单独取消一项",
+        "expected": "checked、indeterminate及焦点分别正确；部分选中不代表另一种业务授权",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；属性与选择集合"
+      }
+    },
+    {
+      "id": "C022",
+      "module": "checkbox-group",
+      "sourcePath": "packages/ui/src/components/checkbox-group.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 88,
+      "methods": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "组标题、选项和帮助形成共同空间；选项间距服从阅读和触摸，不为疏而拉得难以扫描。",
+        "states": "多选关系明确；全选动作说明范围；长描述按项归属。",
+        "principlesAndCustomization": "M1 M2 M3：全选需明确范围与排除项；选项密集但可操作，帮助文本归属对应选项，不把用户未选择当缺陷。\n覆盖：禁用部分、错误组、折行、键盘、选择范围说明；不要与 Radio 的互斥模型混用。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 103,
+        "conditionsAndActions": "查询结果包含可选与不可选项，执行组级全选",
+        "expected": "范围、排除项及汇总与实际集合一致；帮助属于对应组或选项",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；ID集合与汇总比对"
+      }
+    },
+    {
+      "id": "C023",
+      "module": "radio-group",
+      "sourcePath": "packages/ui/src/components/radio-group.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 89,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "保留圆形互斥标记；普通列表选择保持轻量；选项确有丰富差异时才使用选择卡。",
+        "states": "外观可分列表/卡片，互斥关系和键盘规则不能变；状态不只有边框一条淡色。",
+        "principlesAndCustomization": "M1 M3 M4：互斥关系清楚，默认选择与未作决定分开；丰富选项可用卡片，但视觉表现不可暗示未确认的推荐已采纳。\n覆盖：默认/无默认、箭头键、长描述、错误、disabled；列表/卡片可达性等价。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 104,
+        "conditionsAndActions": "使用需要用户明确决策且初始未选的夹具，键盘移动并确认",
+        "expected": "不把推荐样式当已选择；互斥关系正确；另一个有合理默认值的夹具仍可正常工作",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；默认值、选中状态及名称"
+      }
+    },
+    {
+      "id": "C024",
+      "module": "switch",
+      "sourcePath": "packages/ui/src/components/switch.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 90,
+      "methods": [
+        "M1",
+        "M4",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "明确表示设置开/关，不做一次性执行按钮；轨道与滑块的位置和文字共同表达状态。",
+        "states": "异步保存需区分处理中与最终状态；失败回退由应用提供真实状态和解释。",
+        "principlesAndCustomization": "M1 M4 M6：显示的是本地意图还是已保存结果须明确；等待与失败不伪装成功，快速切换不允许旧响应覆盖新意图。\n覆盖：标签、键盘、错误、快速切换、禁用原因；不把乐观显示当保存成功。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 105,
+        "conditionsAndActions": "连续切换开关，使旧保存响应晚于新响应",
+        "expected": "本地意图、保存中及服务端确认可区分；旧响应不覆盖当前意图",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；版本化请求与受控值"
+      }
+    },
+    {
+      "id": "C025",
+      "module": "slider",
+      "sourcePath": "packages/ui/src/components/slider.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 91,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "轨道、已选范围、滑块分明；数值任务附可读值或输入入口，不靠拖动精度。",
+        "states": "激活与聚焦不同；范围端点有明确角色；不为造型牺牲 hit area。",
+        "principlesAndCustomization": "M1 M3 M4：刻度与单位解释真实改变；精确任务有输入替代，主题滑块不得顺便改变业务风险策略。\n覆盖：键盘、触屏、最小/最大、步长、双端范围；提供适当非拖拽操作路径。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 106,
+        "conditionsAndActions": "分别用拖动、键盘和非拖拽点击/输入方式修改数值",
+        "expected": "范围、步长、单位一致；提供适合任务的非拖拽指针入口；不要求只靠精细拖动",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；三种输入结果、命中与标签"
+      }
+    },
+    {
+      "id": "C026",
+      "module": "select",
+      "sourcePath": "packages/ui/src/components/select.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 92,
+      "methods": [
+        "M1",
+        "M5"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "常用小集合选择：稳定触发器、轻量列表、明确选中标记；浮层与触发器同源。",
+        "states": "selected 与 highlighted/focused 分离；已选择内容回填位置不跳。",
+        "principlesAndCustomization": "M1 M5：展开为作出选择，不是增加浏览步骤；选中值与当前高亮分开，placeholder不冒充真实选项。\n覆盖：长选项、disabled、键盘、边缘碰撞、Portal 主题、窄屏；是否支持搜索不能靠名称推测。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 107,
+        "conditionsAndActions": "打开选项，移动高亮但不提交，然后按Escape",
+        "expected": "当前值不因高亮移动被误改；关闭后焦点回到合理位置；占位符不是有效选项",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；value/active/selected、焦点断言"
+      }
+    },
+    {
+      "id": "C027",
+      "module": "native-select",
+      "sourcePath": "packages/ui/src/components/native-select.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 93,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "保留原生选择的操作优势，周边尺寸、标签与主题一致；不假装能完全控制系统弹出菜单。",
+        "states": "应用只控制确实可样式化的部分；焦点、错误与disabled清楚。",
+        "principlesAndCustomization": "M1 M4：因使用情境保留原生优势；承认可样式化范围，不为了文化统一破坏系统选择与可访问性。\n覆盖：真实浏览器/系统选择器、移动端、长选项；不把桌面截图当所有平台外观承诺。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 108,
+        "conditionsAndActions": "在桌面及真实移动环境选择长标签选项",
+        "expected": "值和外部标签正确；浏览器原生选择器不被承诺为同一外观",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；平台记录、值断言及人工截图"
+      }
+    },
+    {
+      "id": "C028",
+      "module": "combobox",
+      "sourcePath": "packages/ui/src/components/combobox.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 94,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "输入与选择整合；匹配项突出但不高亮整块成噪音；空结果和加载位于列表语境。",
+        "states": "自由输入是否允许、选项身份、远程数据策略明确；不把高亮项当已提交值。",
+        "principlesAndCustomization": "M1 M5 M6：候选、键盘高亮、当前值分开；保留输入与查询上下文，旧请求不能把用户带回旧的候选空间。\n覆盖：IME、取消、键盘、clear、远程延迟/过期结果、虚拟列表；请求语义在应用。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 109,
+        "conditionsAndActions": "输入查询后等待异步候选，移动高亮、再取消",
+        "expected": "输入、候选、高亮、已提交值分开；过期候选不替换新查询",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；候选ID、值、响应顺序"
+      }
+    },
+    {
+      "id": "C029",
+      "module": "autocomplete",
+      "sourcePath": "packages/ui/src/components/autocomplete.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 95,
+      "methods": [
+        "M1",
+        "M3",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "建议辅助输入，不强迫用户选中；普通输入仍是主任务。",
+        "states": "候选可忽略；选中替换范围与当前文本保持一致；建议不遮住关键内容。",
+        "principlesAndCustomization": "M1 M3 M5：建议服务表达但不是替人决定；退出建议仍保留自由输入，默认不把第一条结果自动认作用户选择。\n覆盖：自由输入、IME、Escape 后保留值、长候选、加载；与 Combobox 的值契约分别核对。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 110,
+        "conditionsAndActions": "输入不匹配任何建议的内容，并关闭建议列表",
+        "expected": "允许按已声明策略保留自由输入；第一条建议不被无意接受",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；文本值和选择回调"
+      }
+    },
+    {
+      "id": "C030",
+      "module": "segmented-control",
+      "sourcePath": "packages/ui/src/components/segmented-control.tsx",
+      "family": "03 选择与数值调节",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 96,
+      "methods": [
+        "M1",
+        "M2",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "一个连续轨道内承载少量同级状态；选中面是一块清楚但不膨胀的实面。",
+        "states": "不把每项做成独立浮卡；焦点描边与选中填充各司其职。实际语义由任务和当前实现决定。",
+        "principlesAndCustomization": "M1 M2 M4：共同轨道表达同级关系，不自动决定是Tabs还是选项；运行情境改变强调时保留已选身份和键盘顺序。\n覆盖：标签宽度、换行/不换行策略、动画中断、RTL、键盘；不能仅因外形相似就伪装 Tabs。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 111,
+        "conditionsAndActions": "切换两个视图，再用键盘聚焦未选项",
+        "expected": "轨道共界、各项语义明确；focus与selected不同；视图选择不被误当表单提交",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；语义与选择属性、截图"
+      }
+    },
+    {
+      "id": "C031",
+      "module": "calendar",
+      "sourcePath": "packages/ui/src/components/calendar.tsx",
+      "family": "04 日期与时间",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 117,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "稳定七列节奏，月/年导航退后，日期可扫描；不强制农历、节气或传统图案。",
+        "states": "今天、选中、范围内、端点、焦点、禁用各有区别；周起始由 locale/项目声明。",
+        "principlesAndCustomization": "M1 M3 M4：密集日期格服务比较，月份之间有节奏；今日不是已选，禁用不是无数据，文化主题不自动增加历法信息。\n覆盖：跨月年、键盘、月份切换、长语言标签、触屏命中；日期边界由应用给定。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 126,
+        "conditionsAndActions": "跨月选择日期，叠加今天、焦点、禁用和区间状态",
+        "expected": "各状态可辨；月份切换不误选；周起始和日期身份按配置一致",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；日期值、状态组合截图"
+      }
+    },
+    {
+      "id": "C032",
+      "module": "date-picker",
+      "sourcePath": "packages/ui/src/components/date-picker.tsx",
+      "family": "04 日期与时间",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 118,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "输入与日历组成同一任务；显示格式明确，手输与面板选择有一致结果。",
+        "states": "无值/已选/错误/清空可辨；关闭浮层不误提交未完成输入。",
+        "principlesAndCustomization": "M1 M5 M6：手输与选择同一日期事实；取消保留既有值，未知格式不静默猜，展开返回与触发字段关联。\n覆盖：locale、解析失败、键盘、焦点返回、窄屏与Portal主题；不隐式猜日期格式。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 127,
+        "conditionsAndActions": "输入有歧义日期，取消面板，再以明确日期完成选择",
+        "expected": "不静默猜格式；取消遵循已声明草稿/已提交值策略；回填值准确",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；解析错误、前后值与焦点"
+      }
+    },
+    {
+      "id": "C033",
+      "module": "date-range-picker",
+      "sourcePath": "packages/ui/src/components/date-range-picker.tsx",
+      "family": "04 日期与时间",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 119,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "起止与区间语义直接可读；双月或单月由空间和任务选择，不仅为好看。",
+        "states": "起点、终点和中间区间分层；未完成区间不当作完整结果；快捷范围标明含义。",
+        "principlesAndCustomization": "M1 M3 M6：起点、终点与未完成范围分开；连续带表达范围，不以整齐掩盖跨月关系，面板切换不丢未完成选择。\n覆盖：同一天、跨月/年、最短最长范围、起止倒置、窄屏；不因面板变化丢失选择。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 128,
+        "conditionsAndActions": "先选起点，再跨月和窄屏切换，最后选终点",
+        "expected": "未完成范围保留且不假报完成；起止和中间关系连续可读",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；临时范围、提交范围、截图"
+      }
+    },
+    {
+      "id": "C034",
+      "module": "date-time-picker",
+      "sourcePath": "packages/ui/src/components/date-time-picker.tsx",
+      "family": "04 日期与时间",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 120,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "日期、时间、必要的时区说明有清楚顺序；不把一个字符串当所有语义。",
+        "states": "时间输入与日期选择可独立修正；时区由业务明确，前端不悄悄换算。",
+        "principlesAndCustomization": "M1 M4：格式、时区与业务截止含义分开；上下文允许简化显示但完整含义可查，不能因地区推测随意改时间。\n覆盖：locale、12/24小时、解析失败、业务涉及DST时的边界、取消；格式与持久化语义分离。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 129,
+        "conditionsAndActions": "在明确时区夹具中修改日期和时间，再取消或保存",
+        "expected": "格式、时区与持久化含义分开；不因设备地区自动改变已声明时区",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；显示/提交数据、业务时区配置"
+      }
+    },
+    {
+      "id": "C035",
+      "module": "item",
+      "sourcePath": "packages/ui/src/components/item.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 135,
+      "methods": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "用作列表中的一个可辨认对象：标题、描述、附属信息与动作各有固定位置；靠对齐和行间关系组成列表，不默认每行一张卡。",
+        "states": "导航、选择、展开和行内动作的命中区域明确；主文本长时不挤掉必要状态。",
+        "principlesAndCustomization": "M1 M2 M3：对象主体、辅助信息和操作有分工；对象可读性优先于按钮，整个行的动作与内嵌动作不冲突。\n覆盖：整行交互与子按钮不非法嵌套；长内容、触屏、focus、列表末项边界；状态按实际接口表达。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 149,
+        "conditionsAndActions": "同一行具有主链接、选择框和更多按钮，分别点击及键盘激活",
+        "expected": "三种操作互不误触；身份与状态可读；无非法嵌套交互",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；事件计数、DOM语义、焦点顺序"
+      }
+    },
+    {
+      "id": "C036",
+      "module": "card",
+      "sourcePath": "packages/ui/src/components/card.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 136,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "默认用于独立对象或可独立操作的内容；有真实边界再用卡片，不包裹所有段落。",
+        "states": "整卡可点击时子动作不得嵌套成非法交互；头/正文/尾按实际内容存在，不保留空壳。",
+        "principlesAndCustomization": "M2 M3：独立对象才需要相应围合；不存在标题或尾部时不填占位元素，视觉空处为内容变化保留而非造固定大空白。\n覆盖：内容长短、媒体/纯文本、点击语义、嵌套动作、对齐；透明/无框模式若新增先定义 API。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 150,
+        "conditionsAndActions": "分别渲染只读对象卡和有主链接及子按钮的卡",
+        "expected": "只读卡不假装可点击；子动作不触发主链接；无内容区域不留占位装饰",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；DOM语义、事件、长短内容截图"
+      }
+    },
+    {
+      "id": "C037",
+      "module": "frame",
+      "sourcePath": "packages/ui/src/components/frame.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 137,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "承担外框或区域围合时只建立必要一层边界；内部内容能通过对齐和空间分组。",
+        "states": "同级区域共享轮廓语言，避免内层再次加同样圆角/阴影；定义实际适用职责。",
+        "principlesAndCustomization": "M2 M3：负责的边界要明确；不能为了每段都有形式感反复套框，共同外框内仍允许必要分组与可见焦点。\n覆盖：紧接边界、嵌套圆角、overflow 与 focus；具体 Props 以当前源码为准。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 151,
+        "conditionsAndActions": "嵌套一组内容与一个有独立任务的子面板",
+        "expected": "边界有真实职责；不重复同强度阴影；允许合理内层边界且不裁焦点",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；轮廓截图、focus和overflow"
+      }
+    },
+    {
+      "id": "C038",
+      "module": "group",
+      "sourcePath": "packages/ui/src/components/group.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 138,
+      "methods": [
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "强调共同归属而不是默认添加视觉外壳；组内尺度统一，组与组有间距差异。",
+        "states": "可以只负责排列/边界融合，不把组容器当按钮；可访问分组需求单独选择语义元素。",
+        "principlesAndCustomization": "M2 M3：归属、排列与视觉共界不是同一职责；依真实任务选择，不用四个小分组凑配伍故事。\n覆盖：单项/多项、横纵向、长内容、RTL；不与 Fieldset 或 ButtonGroup 无意义重复封装。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 152,
+        "conditionsAndActions": "以同组任务与无关相邻任务分别组成界面",
+        "expected": "有共同任务才共组；分组不会无故改变子元素语义或键盘模型",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；语义树、组合人工审查"
+      }
+    },
+    {
+      "id": "C039",
+      "module": "layout",
+      "sourcePath": "packages/ui/src/components/layout.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 139,
+      "methods": [
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "复用现有 Stack/Inline/Grid/Text；同组内聚、组间清楚。布局跟内容关系走，不强制全站同一模板。",
+        "states": "页面和模块共享实际间距源；响应式不靠任意阈值散落每页；min-width 防溢出。",
+        "principlesAndCustomization": "M3 M4：支持差异化密度与稳定阅读轴；组内外的疏密由关系决定，不把所有局部按同一个倍数缩放。\n覆盖：窄屏、200%缩放、长内容、容器宽度、语义 as；已有组件先复用，不另造同义栈。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 153,
+        "conditionsAndActions": "同一模块加入长文本与错误，在宽窄容器间切换",
+        "expected": "阅读顺序和分组清楚；布局使用已登记尺度；不机械等比缩文字与命中区",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；布局几何、内容溢出、DOM顺序"
+      }
+    },
+    {
+      "id": "C040",
+      "module": "separator",
+      "sourcePath": "packages/ui/src/components/separator.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 140,
+      "methods": [
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "仅在关系靠留白不足或需要连续扫描时使用；普通内容不每段都加线。",
+        "states": "装饰线与语义分隔明确；渐隐/花纹不是默认。",
+        "principlesAndCustomization": "M3：线仅表达真实区隔；空白已足够时可省略，承担语义时仍要可识别，不机械以低对比实现含蓄。\n覆盖：orientation、辅助技术忽略或识别是否恰当、主题；必要控件边界与装饰分隔线分开验收。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 154,
+        "conditionsAndActions": "分别使用装饰分线、语义分隔与交互控件边界",
+        "expected": "三类职责分开；装饰线不过度播报；必要识别边界保持清楚",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；语义树、视觉审查"
+      }
+    },
+    {
+      "id": "C041",
+      "module": "resizable",
+      "sourcePath": "packages/ui/src/components/resizable.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 141,
+      "methods": [
+        "M3",
+        "M4",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "面板共享清楚分界，拖动柄适度可见；空间分配服务工作而非展示机械细节。",
+        "states": "尺寸变化不丢内容与焦点；临界尺寸不让一边消失；用户调整结果是否保存由应用。",
+        "principlesAndCustomization": "M3 M4 M6：空间控制权属于使用者；调整不擦除面板内容，保存偏好要有合理边界，不能为了自动适应反复覆盖用户尺寸。\n覆盖：键盘/非拖拽入口、触屏、min/max、缩放与布局恢复；不只有细线可拖。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 155,
+        "conditionsAndActions": "将主从面板缩到最小尺寸，再用键盘及非拖拽指针方式调整",
+        "expected": "两侧仍可用；限制明确；非拖拽替代可完成调整；状态不被卸载重置",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；尺寸、替代操作、草稿和焦点"
+      }
+    },
+    {
+      "id": "C042",
+      "module": "scroll-area",
+      "sourcePath": "packages/ui/src/components/scroll-area.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 142,
+      "methods": [
+        "M3",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "滚动存在和位置可被感知；不把“静”变成完全不可发现的内容溢出。",
+        "states": "保留正常滚轮、触屏、键盘行为；避免滚动劫持与无理由嵌套。",
+        "principlesAndCustomization": "M3 M5：未显示内容必须可发现；提供直达与定位，不靠隐藏滚动条增加探索感，也不改变用户滚动方向。\n覆盖：长内容、嵌套滚动、键盘、可见 focus、移动惯性；可用原生时不强制复杂替代。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 156,
+        "conditionsAndActions": "在包含嵌套滚动与键盘可聚焦内容的夹具中移动到底部",
+        "expected": "内容溢出可发现；焦点可见；普通滚动不被劫持或困住",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；键盘/触屏记录、焦点截图"
+      }
+    },
+    {
+      "id": "C043",
+      "module": "aspect-ratio",
+      "sourcePath": "packages/ui/src/components/aspect-ratio.tsx",
+      "family": "05 内容容器与布局",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 143,
+      "methods": [
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "为媒体保留有意的版面比例，减少内容加载时布局漂移。",
+        "states": "比例服务内容；人物/图表裁切策略明确，不强制所有图片相同比例。",
+        "principlesAndCustomization": "M3 M4：预留空间减少漂移，比例由内容决定；不得为了统一截掉图表关键数据或作品主体。\n覆盖：加载前后尺寸、object-fit、极窄宽度、真实图像；比率与裁切由项目集中约定。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 157,
+        "conditionsAndActions": "先显示媒体占位，再加载宽高不同的真实内容和失败状态",
+        "expected": "布局容量稳定；裁切策略可解释；失败仍有内容或替代入口",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；前后几何、裁切和替代内容"
+      }
+    },
+    {
+      "id": "C044",
+      "module": "page-header",
+      "sourcePath": "packages/ui/src/components/page-header.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 163,
+      "methods": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "标题、说明、主动作形成一个稳固起点；优先左侧文字轴，不为对称居中所有内容。",
+        "states": "标题与返回/面包屑不争主次；长标题时动作可以换行，不挤压内容到不可读。",
+        "principlesAndCustomization": "M1 M2 M3：标题定义当前对象和任务；页面重点可在内容而非操作，动作数量和强度由当前任务决定。\n覆盖：长中英标题、窄屏、返回路径、工具组顺序；内容页和工作台可采用不同集中模式。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 178,
+        "conditionsAndActions": "显示长标题、返回入口及多项操作，缩到窄屏",
+        "expected": "标题身份优先；操作可换行且可达；不强迫所有页面相同布局",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；阅读顺序、换行、焦点"
+      }
+    },
+    {
+      "id": "C045",
+      "module": "sidebar",
+      "sourcePath": "packages/ui/src/components/sidebar.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 164,
+      "methods": [
+        "M1",
+        "M4",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "当前路径稳定突出，其余项可扫描；层级靠缩进/分组而非每项卡片。",
+        "states": "折叠时标签仍可获知；当前路由、聚焦、展开三态不混；移动导航提供明确退出。",
+        "principlesAndCustomization": "M1 M4 M5：导航保留熟悉位置和直达；不要按实时热度重排，展开、当前路由与focus不是同一个状态。\n覆盖：键盘、长标签、active路径、折叠、窗口缩放、Portal；不让导航状态随临时 hover 消失。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 179,
+        "conditionsAndActions": "打开深层路由并折叠侧栏，再用键盘返回展开",
+        "expected": "当前位置、展开与focus不同；收起不丢可访问名称和直接入口",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；路由、aria状态、键盘记录"
+      }
+    },
+    {
+      "id": "C046",
+      "module": "navigation-menu",
+      "sourcePath": "packages/ui/src/components/navigation-menu.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 165,
+      "methods": [
+        "M1",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "面向目的地的导航，优先明白链接；子项面板有连续关系，不为动效绕路。",
+        "states": "站点导航不要仅因名字含 menu 就强套应用菜单键盘模型。",
+        "principlesAndCustomization": "M1 M5：目的地应可说明且可直接到达；探索模式不能取代高频入口，不把网站链接错误套用应用命令语义。\n覆盖：键盘、触屏、focus移动、当前页、开合边界；内容与ARIA角色按实际目的核对。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 180,
+        "conditionsAndActions": "分别用鼠标、键盘和触屏打开目的地导航",
+        "expected": "同一目的地可访问；普通站点链接不被错误套用应用菜单语义",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；角色、链接目标、输入方式记录"
+      }
+    },
+    {
+      "id": "C047",
+      "module": "breadcrumb",
+      "sourcePath": "packages/ui/src/components/breadcrumb.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 166,
+      "methods": [
+        "M1",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "低干扰地提供位置和上级路径；最后一级表明当前所在，分隔符不朗读成噪音。",
+        "states": "深层可折叠中间路径，但上级和当前位置保留；不承担主导航全部职责。",
+        "principlesAndCustomization": "M1 M5：描述层级路径而非伪造浏览历史；直接进入详情仍能找到合理上级，不要求按规定路径重新走一遍。\n覆盖：长名字、窄屏、当前项语义、折叠后可达性；不能截断后无方式识别路径。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 181,
+        "conditionsAndActions": "从深链接进入长层级页面，并折叠中间层级",
+        "expected": "当前位置真实；隐藏中间路径可达；不虚构不存在的用户历史",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；路由/文本、键盘与窄屏"
+      }
+    },
+    {
+      "id": "C048",
+      "module": "tabs",
+      "sourcePath": "packages/ui/src/components/tabs.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 167,
+      "methods": [
+        "M1",
+        "M4",
+        "M5"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "一条连续定位线/选中面承载当前视图；非选中项减弱但可读；面板与当前页签保持位置联系。",
+        "states": "focus、selected、loading不同；大延迟内容切换采用明确激活，不边走焦点边重复加载。",
+        "principlesAndCustomization": "M1 M4 M5：当前面板和聚焦页签分开；异步面板按延迟选择合适激活策略，切换不无故丢掉表单工作。\n覆盖：APG键盘行为、长标签、溢出策略、面板命名、恢复位置；只用于有对应内容面板的关系。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 182,
+        "conditionsAndActions": "让内容加载明显延迟，方向键聚焦下一页签但不激活",
+        "expected": "在手动激活夹具中内容不提前切换；focus、selected、busy各自准确",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；aria关系、加载计数、焦点"
+      }
+    },
+    {
+      "id": "C049",
+      "module": "accordion",
+      "sourcePath": "packages/ui/src/components/accordion.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 168,
+      "methods": [
+        "M3",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "标题本身是主内容，展开图标为辅助；组内保持同一边界节奏，展开处自然延伸。",
+        "states": "标题操作命中区域清楚；单开/多开策略明确；隐藏内容不含不可发现的必读风险。",
+        "principlesAndCustomization": "M3 M5：折叠仅隐藏可按需阅读的内容；风险与必要动作不藏，触发标题能让人判断里面是什么。\n覆盖：键盘、aria-expanded、内容关联、嵌套标题、动态高度与reduced motion。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 183,
+        "conditionsAndActions": "展开含异步内容的一节，再折叠并展开其他节",
+        "expected": "标题和内容关系正确；展开规则遵循单开/多开配置；关键风险不藏在不可发现位置",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；expanded属性、异步状态、人工审查"
+      }
+    },
+    {
+      "id": "C050",
+      "module": "disclosure",
+      "sourcePath": "packages/ui/src/components/disclosure.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 169,
+      "methods": [
+        "M3",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "渐进展示与当前对象相关的补充内容；折叠后仍能判断里面是什么。",
+        "states": "打开不重置上层状态；可在模块内原位展开，不默认制造新浮层。",
+        "principlesAndCustomization": "M3 M5 M6：按对象展开有理由的信息；展开无需重复加载已确认状态，关闭前不抛弃处于编辑的工作。\n覆盖：展开/折叠、焦点后继、加载/失败、长内容；模式以实际导出和API为准。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 184,
+        "conditionsAndActions": "进入一条记录的补充信息，失败后原位重试",
+        "expected": "对象身份保留；展开原因与入口清楚；失败不影响上层工作",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；对象ID、expanded状态、工作值"
+      }
+    },
+    {
+      "id": "C051",
+      "module": "collapsible",
+      "sourcePath": "packages/ui/src/components/collapsible.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 170,
+      "methods": [
+        "M3",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "轻量控制补充内容可见性；触发器、区域的关系明确，布局不为动画抖动。",
+        "states": "隐藏焦点中的内容前处理焦点；不把主动作藏入不可见区域。",
+        "principlesAndCustomization": "M3 M5：隐藏是展示策略不是权限或数据删除；受控范围清楚，里面有焦点时先决定合理的焦点后继。\n覆盖：受控/非受控、键盘、动态高度、嵌套和动画中断；与accordion边界清楚。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 185,
+        "conditionsAndActions": "焦点在展开区中时由外部条件请求折叠",
+        "expected": "焦点转到合理位置，不留在不可见内容；上层状态不无故重置",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；焦点、隐藏内容可达性"
+      }
+    },
+    {
+      "id": "C052",
+      "module": "pagination",
+      "sourcePath": "packages/ui/src/components/pagination.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 171,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "表达范围、当前位置与前后操作；不是一排同等高亮数字。",
+        "states": "加载不虚报新数据已到；禁用前后动作仍能解释；总量未知不得捏造页数。",
+        "principlesAndCustomization": "M1 M5 M6：页码、记录总数与选中范围分开；下一页未返回不宣告新内容已加载，返回保持明确规定的查询上下文。\n覆盖：第一页/末页、0/1页、总量变化、页尺寸变化、窄屏；和筛选/选择语义一致。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 186,
+        "conditionsAndActions": "筛选使当前页超出新范围，再令总数未知",
+        "expected": "按应用策略回到合法页；未知总数不伪造末页；加载与已到页不同",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；页参数、总量与显示比对"
+      }
+    },
+    {
+      "id": "C053",
+      "module": "tree",
+      "sourcePath": "packages/ui/src/components/tree.tsx",
+      "family": "06 导航、分节与渐进展开",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 172,
+      "methods": [
+        "M1",
+        "M3",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "层级可展开，缩进有节奏；祖先路径、当前焦点和选择各自可辨。",
+        "states": "展开箭头与节点主动作分工；惰性加载失败留在节点附近。",
+        "principlesAndCustomization": "M1 M3 M5：层级与当前节点关系可读；多层信息支持定位直达，惰性加载错误就近处理，不让用户在未知分支反复试探。\n覆盖：树键盘模型、选中/多选、长标签、异步节点、重命名、删除后焦点；数据仍归应用。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 187,
+        "conditionsAndActions": "展开惰性节点，模拟失败，重试后删除当前节点",
+        "expected": "展开、选择及focus独立；错误属于该节点；删除后有合理后继焦点",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；树状态、ID与焦点轨迹"
+      }
+    },
+    {
+      "id": "C054",
+      "module": "dialog",
+      "sourcePath": "packages/ui/src/components/dialog.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 193,
+      "methods": [
+        "M2",
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "一个明确的临时任务面；标题、正文、动作有完整留白和阅读顺序，不叠重纹理。",
+        "states": "模态性与焦点规则清楚；标题不为极简被删；内容可滚动而操作仍可找到。",
+        "principlesAndCustomization": "M2 M4 M5 M6：出现需独立任务理由，介入与风险匹配；主动作、保护和返回路径配合，不将Modal当所有详情的默认终点。\n覆盖：APG焦点、关闭、返回、窄屏、长正文、嵌套、Portal主题；新增外观不破坏底座。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 209,
+        "conditionsAndActions": "打开长表单，输入后失败，再取消关闭",
+        "expected": "标题与焦点策略正确；错误保留输入；关闭按草稿策略处理并返回合理位置",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；对话框语义、草稿、焦点、截图"
+      }
+    },
+    {
+      "id": "C055",
+      "module": "alert-dialog",
+      "sourcePath": "packages/ui/src/components/alert-dialog.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 194,
+      "methods": [
+        "M1",
+        "M2",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "确需中断的判断要直接说明对象、后果与动作；不把常规成功通知升级为强模态。",
+        "states": "危险操作具体命名；取消/返回明确；操作结果由应用确认后才表示成功。",
+        "principlesAndCustomization": "M1 M2 M4：高影响决定说清对象、后果、选择；默认焦点基于内容与风险，不把最强执行按钮永远设为起点。\n覆盖：读屏语义、初始焦点、后果信息、进行中/失败、重复激活；不把所有删除强制转成它。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 210,
+        "conditionsAndActions": "呈现高影响操作，改变受影响范围后再确认",
+        "expected": "对象、范围、后果和取消清楚；确认对应当前版本，不复用过期批准",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；确认版本/范围、事件与名称"
+      }
+    },
+    {
+      "id": "C056",
+      "module": "sheet",
+      "sourcePath": "packages/ui/src/components/sheet.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 195,
+      "methods": [
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "侧向或相应方向展开的任务面保留与原页面的联系；编辑与原对象有持续上下文。",
+        "states": "需要专注时模态、需要对照时另选持久面板模式；不可仅凭方向假定模态性。",
+        "principlesAndCustomization": "M4 M5 M6：承载方式服务对照或集中处理；不是侧边出现就天然保留上下文，草稿和返回位置需显式保留。\n覆盖：draft保留、dirty关闭策略、长表单、焦点、滚动、窄屏；状态所有权在应用。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 211,
+        "conditionsAndActions": "列表中打开编辑侧面，窄屏切换承载后返回",
+        "expected": "草稿和对象身份保留；保留上下文不要求强行显示挤压的原列表",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；路由/对象、草稿、窄屏截图"
+      }
+    },
+    {
+      "id": "C057",
+      "module": "drawer",
+      "sourcePath": "packages/ui/src/components/drawer.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 196,
+      "methods": [
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "移动或边缘展开的面板不模仿卷轴；把手/关闭与正文层级明确。",
+        "states": "拖拽不是唯一关闭方式；键盘出现后内容/动作仍可达；不强迫所有窄屏都用抽屉。",
+        "principlesAndCustomization": "M4 M5 M6：适应空间不能改变任务事实；滑动只是可选操作，关闭请求与保存/放弃区分，软键盘出现后仍能继续。\n覆盖：手势与滚动冲突、关闭替代、safe area、软键盘、focus、reduced motion。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 212,
+        "conditionsAndActions": "打开长内容抽屉，使用软键盘并以非拖拽方式关闭",
+        "expected": "必要内容和操作可达；关闭不只能拖拽；滚动和手势不误触",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；移动端人工记录、focus/scroll"
+      }
+    },
+    {
+      "id": "C058",
+      "module": "popover",
+      "sourcePath": "packages/ui/src/components/popover.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 197,
+      "methods": [
+        "M2",
+        "M5"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "为相关对象提供小范围补充和轻操作；位置与触发点相连，边缘碰撞时仍可理解来处。",
+        "states": "有交互内容时不使用tooltip语义；开合不吞掉用户点击与键盘。",
+        "principlesAndCustomization": "M2 M5：小范围补充需与来源对象相关；内容长到难以处理时换承载，不用层层嵌套制造路径。\n覆盖：定位翻转、点击外部、Escape、返回焦点、长内容；是否模态以具体实现声明。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 213,
+        "conditionsAndActions": "视口边缘打开含交互项的短任务浮层，随后Escape退出",
+        "expected": "定位变更可理解；不使用tooltip语义承载交互；焦点去向正确",
+        "owners": [
+          "L"
+        ],
+        "evidenceGuidance": "L；碰撞位置、角色、焦点"
+      }
+    },
+    {
+      "id": "C059",
+      "module": "menu",
+      "sourcePath": "packages/ui/src/components/menu.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 198,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "用于动作选择：文本、图标、快捷键、危险分组对齐；选中背景简洁，导航项与动作有清楚语义。",
+        "states": "危险动作与普通动作分组；不把菜单当长表单；激活、关闭与返回焦点稳定。",
+        "principlesAndCustomization": "M1 M2：动作名称与目标清楚；危险与普通操作适当分组，保护不等于把危险项藏得不可理解。\n覆盖：方向键、禁用项、submenu、typeahead、RTL、触屏和portal主题。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 214,
+        "conditionsAndActions": "激活普通命令、禁用命令和子菜单，再取消",
+        "expected": "命令名称和作用范围清楚；禁用不可执行；关闭/返回与子菜单关系正确",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；回调次数、键盘与菜单语义"
+      }
+    },
+    {
+      "id": "C060",
+      "module": "context-menu",
+      "sourcePath": "packages/ui/src/components/context-menu.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 199,
+      "methods": [
+        "M4",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "提供对象的补充操作，不是唯一入口；外观与普通Menu同源。",
+        "states": "鼠标右键之外保留更多按钮/键盘等入口；触屏长按不替代核心操作。",
+        "principlesAndCustomization": "M4 M5：它是捷径不是唯一道路；移动/键盘提供可发现等价入口，对象不能因菜单关闭丢失定位。\n覆盖：键盘触发、对象焦点、关闭恢复、目标定位、禁用动作；主动作不能只藏这里。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 215,
+        "conditionsAndActions": "不给右键或hover，使用可见更多入口及键盘访问同一对象操作",
+        "expected": "功能等价且对象一致；取消不执行；触屏不丢核心操作",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；对象ID、替代入口、事件"
+      }
+    },
+    {
+      "id": "C061",
+      "module": "menubar",
+      "sourcePath": "packages/ui/src/components/menubar.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 200,
+      "methods": [
+        "M1",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "适用于连续桌面工具命令；顶层可扫、下级可选；不用于伪装所有网站导航。",
+        "states": "一致的菜单角色与快捷操作，不跟随装饰性 hover 动画延迟响应。",
+        "principlesAndCustomization": "M1 M5：面向熟悉工具的直接命令路径；不把所有网站导航做成复杂应用菜单，只为实际任务承担键盘复杂度。\n覆盖：APG对应键盘模型、焦点与菜单循环、窄屏替代；组件适用场景需明确。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 216,
+        "conditionsAndActions": "用键盘跨顶层菜单和子菜单，再退出",
+        "expected": "符合所选菜单模型；显示快捷键与真实命令对应；窄屏有批准的替代",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；键盘轨迹、命令绑定"
+      }
+    },
+    {
+      "id": "C062",
+      "module": "tooltip",
+      "sourcePath": "packages/ui/src/components/tooltip.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 201,
+      "methods": [
+        "M1",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "只解释简短辅助信息，不装操作按钮和必须阅读的风险；轻量、靠近触发器。",
+        "states": "鼠标和键盘均可获知；触屏不依赖hover；关闭后原操作关系不变。",
+        "principlesAndCustomization": "M1 M5：辅助解释不替代名称和必读风险；重要内容应有持久位置，隐藏信息可发现而不依赖偶然hover。\n覆盖：focus触发、Escape、边缘位置、长文案边界；不能替代控件名称或可见字段说明。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 217,
+        "conditionsAndActions": "仅以键盘聚焦触发短说明，再移入提示区域和Escape关闭",
+        "expected": "名称不依赖tooltip；可按适用要求保持、关闭；不承载必读风险或按钮",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；聚焦/悬停过程、内容审查"
+      }
+    },
+    {
+      "id": "C063",
+      "module": "hover-card",
+      "sourcePath": "packages/ui/src/components/hover-card.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 202,
+      "methods": [
+        "M4",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "对象摘要可预览，但关键内容有直接点击/聚焦后的访问方式。",
+        "states": "不把完整详情仅放hover；用户跨越触发器与面板时不闪退。",
+        "principlesAndCustomization": "M4 M5：预览用于决定是否深入，不把完整业务塞进摘要；键盘和触屏可进入同等信息，不以停留时间推测意图执行。\n覆盖：键盘/触屏替代、停留/关闭、长摘要、快速移过多个对象；不误用tooltip语义。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 218,
+        "conditionsAndActions": "鼠标预览摘要，再仅用触屏或键盘访问同一对象",
+        "expected": "摘要不成为唯一可达信息；移动到面板不闪退；完整详情有清楚入口",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；三种输入路径、对象ID"
+      }
+    },
+    {
+      "id": "C064",
+      "module": "preview-card",
+      "sourcePath": "packages/ui/src/components/preview-card.tsx",
+      "family": "07 浮层与菜单",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 203,
+      "methods": [
+        "M2",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "摘要服务是否深入查看的判断：少量核心信息加明确入口，不在预览里堆第二个小应用。",
+        "states": "打开/关闭与对应对象一致；必要交互具备明确焦点路径。",
+        "principlesAndCustomization": "M2 M5：摘要选对当前判断有用的事实；可借上下文但不跨权限，缺失信息不填虚构内容保持好看。\n覆盖：内容缺失、异步、图像失败、键盘触屏；具体交互依当前API而非名称猜测。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 219,
+        "conditionsAndActions": "尝试预览一条含无权限字段的对象，再直达详情",
+        "expected": "展示只含授权信息；不靠模糊样式掩盖已取回的敏感内容；对象身份一致",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；合成权限夹具、DOM/响应审查"
+      }
+    },
+    {
+      "id": "C065",
+      "module": "table",
+      "sourcePath": "packages/ui/src/components/table.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 225,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "同列对齐、数字便于比较、行边界不过度重复；表头和正文有清楚层级。",
+        "states": "必要时支持横向滚动保留二维关系；不会为了留白去掉单位或比较列。",
+        "principlesAndCustomization": "M1 M3：二维比较关系优先，密度和色彩竞争独立调节；不能以疏朗为由拆散必须并置的列。\n覆盖：caption/headers语义、长内容、行高、粘性表头、键盘焦点；对齐与密度token真实生效。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 237,
+        "conditionsAndActions": "渲染长单元格及数字单位，缩窄并放大文本",
+        "expected": "保留二维比较与必要表头；内容不裁字；粘性表头不遮焦点",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；语义/几何、窄屏与放大截图"
+      }
+    },
+    {
+      "id": "C066",
+      "module": "data-table",
+      "sourcePath": "packages/ui/src/components/data-table.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 226,
+      "methods": [
+        "M1",
+        "M2",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "工具栏—表体—范围反馈组成连续工作区；筛选、选择与批量动作形成完整任务。",
+        "states": "区分已加载行、选中ID、服务端所有匹配结果；错误/无数据/无匹配分别显示。",
+        "principlesAndCustomization": "M1 M2 M3 M6：对象、查询、选择、部分结果对应；批量变更核对范围，保留有效工作，不把所有ID和所有筛选结果混为一谈。\n覆盖：稳定row id、跨页选择、异步刷新、排序、部分失败、窄屏；不无条件转卡片丢比较语义。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 238,
+        "conditionsAndActions": "跨页选择明确ID，再变化筛选并执行部分成功任务",
+        "expected": "当前rows、选择ID与所有匹配查询分清；汇总真实；成功项不被无意重试",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；ID/查询快照、单项结果与汇总"
+      }
+    },
+    {
+      "id": "C067",
+      "module": "description-list",
+      "sourcePath": "packages/ui/src/components/description-list.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 227,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "名称和值建立安静、稳定的阅读轴；长值可展开，不把每个键值对做卡片。",
+        "states": "未知、为空、不适用明确区分；可复制值与辅助动作就近安排。",
+        "principlesAndCustomization": "M1 M3：名称和值成稳定关系；空、未知、不适用各自说明，长值不能被截断到误导含义。\n覆盖：dt/dd语义、窄屏重排、长链接、双语言、单位；不可用破折号掩盖错误状态。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 239,
+        "conditionsAndActions": "显示空、未知、不适用及很长值，并复制其中一项",
+        "expected": "键值关系可读；三种缺值含义不同；复制范围准确",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；dt/dd语义、文案、复制结果"
+      }
+    },
+    {
+      "id": "C068",
+      "module": "typography",
+      "sourcePath": "packages/ui/src/components/typography.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 228,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "标题、正文、辅助内容分工；中文先验证字形、标点、行高，不默认套拉丁负字距。",
+        "states": "语义heading层级与视觉字号分开；工具文字和长文采用不同阅读角色。",
+        "principlesAndCustomization": "M1 M3 M4：语义层级与视觉档位分离；阅读与工具各取合宜，中文标点与字体回退用真实文本验证，不靠古典字体证明来源。\n覆盖：标点禁则、中英/数字混排、字体回退、200%缩放、文本间距调整；不强制古风字体。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 240,
+        "conditionsAndActions": "混合中文标点、拉丁字、数字、URL及字体回退，增大文字间距",
+        "expected": "语义标题层级不随视觉字号混乱；不裁字、不硬锁用户间距；禁则人工确认",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；语义树、多语言截图、人工排版记录"
+      }
+    },
+    {
+      "id": "C069",
+      "module": "stat",
+      "sourcePath": "packages/ui/src/components/stat.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 229,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "先表明指标、值、单位、范围/时间，再提供趋势；大数字不能脱离含义。",
+        "states": "未更新、缺数据、异常值明确；不凭正负值决定业务好坏。",
+        "principlesAndCustomization": "M1 M2：核心是指标含义和数值，不是大字号；单位、时间与口径共同支持判断，未知不自动归零，正负不自动等于好坏。\n覆盖：长数值、本地化、precision、stale态；上涨/下跌语义由业务token提供。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 241,
+        "conditionsAndActions": "展示未知值、零、负数及过期值，改变单位与时间范围",
+        "expected": "未知不归零；值/单位/口径/时间对应；涨跌不自动解释为好坏",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；数据与显示比对、人工扫描"
+      }
+    },
+    {
+      "id": "C070",
+      "module": "chart",
+      "sourcePath": "packages/ui/src/components/chart.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 230,
+      "methods": [
+        "M1",
+        "M3",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "数据为主，辅助网格为次；系列色、图例、坐标、单位必须帮助阅读，而不追求水墨效果。",
+        "states": "突出需要比较的系列；颜色不足以唯一表达；空/加载/错误不画假数据。",
+        "principlesAndCustomization": "M1 M3 M4：维持比较对象、单位与图例关系；高信息量不要求所有系列同等高亮，文化取向不能改数据含义。\n覆盖：主题切换、对比度、图例操作、触屏访问、可读替代表达；序列颜色和渲染数据集中适配。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 242,
+        "conditionsAndActions": "切主题、触屏查看数据，再移除颜色辨别条件",
+        "expected": "单位/图例/系列关系仍清楚；有适当文本或表格替代；不画假数据",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；数据比对、替代访问与主题截图"
+      }
+    },
+    {
+      "id": "C071",
+      "module": "code-block",
+      "sourcePath": "packages/ui/src/components/code-block.tsx",
+      "family": "08 数据与阅读呈现",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 231,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "代码可读和可复制优先；语法色有节制但清楚，工具按钮不遮挡正文。",
+        "states": "长行滚动或折行策略明确；复制反馈原位；不把代码截断得无法还原。",
+        "principlesAndCustomization": "M1 M3 M6：复制保留原始内容；工具退后但可找到，长行策略由使用情境选择，错误不通过静默截断解决。\n覆盖：语法主题、长内容、复制内容准确性、键盘、行号朗读策略；字符不被排版美化改写。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 243,
+        "conditionsAndActions": "渲染含空白的长代码，切换换行并复制",
+        "expected": "复制原文不被装饰改写；工具不遮内容；滚动与键盘可用",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；原文diff、键盘和截图"
+      }
+    },
+    {
+      "id": "C072",
+      "module": "badge",
+      "sourcePath": "packages/ui/src/components/badge.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 249,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "用于分类/状态的轻量标签，尺寸紧凑但文字可读；不同用途别混成一组五颜六色装饰。",
+        "states": "可移除标签与只读徽标不同；计数变化不造成大幅跳动。",
+        "principlesAndCustomization": "M1 M4：标签到底是分类、计数还是状态要明确；视觉强调随任务调整，不把所有类别默认套成风险颜色。\n覆盖：长文案、数字、状态语义、对比度；可点击时必须提供完整交互语义。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 261,
+        "conditionsAndActions": "同时展示分类、计数及状态，并使计数变长",
+        "expected": "职责不混淆；计数变化不遮正文；交互标签有真实操作语义",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；名称、计数、长文布局"
+      }
+    },
+    {
+      "id": "C073",
+      "module": "status-dot",
+      "sourcePath": "packages/ui/src/components/status-dot.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 250,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "点是辅助状态线索，与文字/可访问名称共同使用；不把小光点当唯一信息。",
+        "states": "可闪动仅限有必要的短时提示，不默认呼吸动画。",
+        "principlesAndCustomization": "M1 M4：点只辅助表达状态；待核实与健康不可同义，重要变化配可读取文字，不靠呼吸动画暗示系统可靠。\n覆盖：色觉、暗色、大小、文本等价；极小点不作为独立点击目标。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 262,
+        "conditionsAndActions": "状态从健康变为待核实，关闭动画并使用读屏",
+        "expected": "文字等价信息准确；未知不表示健康；小点不是唯一状态来源",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；状态数据、名称、辅助技术检查"
+      }
+    },
+    {
+      "id": "C074",
+      "module": "alert",
+      "sourcePath": "packages/ui/src/components/alert.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 251,
+      "methods": [
+        "M1",
+        "M2",
+        "M4"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "需要持续注意的信息在相关模块中清楚呈现；标题/说明/操作有层次，非所有提示都铺满强色。",
+        "states": "错误不可只闪一次；关闭权由信息性质决定；一个错误不在Alert和Toast重复播报。",
+        "principlesAndCustomization": "M1 M2 M4：显著性、持续时间与中断分别选择；局部失败不等于全站失败，恢复入口与错误对象相邻。\n覆盖：长内容、操作换行、读屏通知级别、无权限/失败/警告区别。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 263,
+        "conditionsAndActions": "同一模块持续出现需修正错误，随后显示恢复成功",
+        "expected": "错误就近且持续可达；不重复播报；恢复动作与对象明确",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；消息记录、事件与读屏人工检查"
+      }
+    },
+    {
+      "id": "C075",
+      "module": "toast",
+      "sourcePath": "packages/ui/src/components/toast.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 252,
+      "methods": [
+        "M1",
+        "M4",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "非阻断结果通知短而明确；位置不遮主要操作，不为表达情绪使用弹跳。",
+        "states": "重要失败/需处理事项不能只依赖短暂Toast；数量、停留和去重有策略。",
+        "principlesAndCustomization": "M1 M4 M6：轻量反馈只能讲已知结果；持续风险需要持续入口，撤销窗口要可用且边界真实，不能用闪现覆盖恢复设计。\n覆盖：暂停/可关闭、读屏、连续事件、重叠、安全区域；不存在成功事实时不显示成功。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 264,
+        "conditionsAndActions": "连续触发同一结果，再出现必须处理的重要失败",
+        "expected": "结果真实且去重；重要失败有持续入口；Toast不遮主要操作或抢焦点",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；通知队列、持续入口、焦点"
+      }
+    },
+    {
+      "id": "C076",
+      "module": "empty",
+      "sourcePath": "packages/ui/src/components/empty.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 253,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "说明当前位置为何无内容，并提供恰当下一步；图形不是必填项，避免大插画压过任务。",
+        "states": "首次为空、筛选无结果、无权限、加载失败分别处理。",
+        "principlesAndCustomization": "M1 M3：为空原因决定下一步；初次空白可开始，筛选无结果可清除，失败可重试，无权限可说明，不能全作占位插画。\n覆盖：清除筛选/创建/申请权限/重试等对应动作；状态准确，不能一律“暂无数据”。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 265,
+        "conditionsAndActions": "在同一集合中切换首次为空、无匹配、无权限和读取失败",
+        "expected": "分别提供合适说明与下一步；不能统一成装饰性暂无数据",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；夹具状态到文案/动作映射"
+      }
+    },
+    {
+      "id": "C077",
+      "module": "skeleton",
+      "sourcePath": "packages/ui/src/components/skeleton.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 254,
+      "methods": [
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "保留即将出现内容的主要结构和尺寸，不把整页每个细节都做动画。",
+        "states": "未知结构用通用进度/文本，而不画假布局；已有内容刷新时优先保留内容。",
+        "principlesAndCustomization": "M3 M6：预留可预测结构而不伪造确定性；已有内容刷新优先保留，停止等待后给真实结果或明确问题。\n覆盖：结束替换时不大跳位、reduced motion、busy语义、读取超时/失败与写入结果未知按事实分开；不无限占位。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 266,
+        "conditionsAndActions": "初始读取和已有内容刷新分别延迟，再返回读取错误",
+        "expected": "只在合理位置占位；刷新保留可用内容；读取错误不无限假装加载",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；布局、已有内容、错误状态"
+      }
+    },
+    {
+      "id": "C078",
+      "module": "spinner",
+      "sourcePath": "packages/ui/src/components/spinner.tsx",
+      "family": "09 状态、反馈与等待",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 255,
+      "methods": [
+        "M1",
+        "M4",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "仅表示未知进度的执行中；大小和位置从属于当前任务；不输出虚假百分比。",
+        "states": "需要名称/状态说明；并发任务不让每个小控件都持续旋转。",
+        "principlesAndCustomization": "M1 M4 M6：只表示处理中不表明进度；等待过长给合适状态与退出路径，静态替代仍可理解而非停止动画即隐藏任务。\n覆盖：等待/结束/失败、屏幕阅读器、reduced motion偏好及可理解静态替代；不遮正在编辑的内容。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 267,
+        "conditionsAndActions": "未知进度任务持续等待，再切为结果待核实并关闭动画",
+        "expected": "不捏造百分比；静态状态仍可理解；未知结果不继续冒充正在执行",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；事件与状态文本、reduced motion"
+      }
+    },
+    {
+      "id": "C079",
+      "module": "file-upload",
+      "sourcePath": "packages/ui/src/components/file-upload.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 273,
+      "methods": [
+        "M1",
+        "M2",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "选择入口、文件列表、进度、错误与动作原位相接；文件行有稳定身份与信息轴。",
+        "states": "失败项原位重试/移除；组件只展示状态和选择，上传/权限/取消执行由应用。",
+        "principlesAndCustomization": "M1 M2 M3 M6：空态让位给文件队列；每个文件保持身份，上传与处理分段，取消请求不冒充已取消，局部失败原位处理。\n覆盖：重复文件、类型/大小拒绝、键盘选择、进度、部分失败、删除后focus；拖放不是唯一入口。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 284,
+        "conditionsAndActions": "多文件上传后进入处理阶段，局部失败、取消请求和重新进入队列",
+        "expected": "文件身份稳定；传输与处理不同；取消未确认不报已取消；失败原位处理",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；文件/任务ID、阶段与事件日志"
+      }
+    },
+    {
+      "id": "C080",
+      "module": "progress",
+      "sourcePath": "packages/ui/src/components/progress.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 274,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "design": {
+        "composition": "明确表示可量化进度；轨道轻、进度实；状态文字与实际值一致。",
+        "states": "不能伪造线性前进；100%传输不自动等于业务处理完成。",
+        "principlesAndCustomization": "M1 M6：百分比只能对应有依据的阶段；满格后仍可能处理中，未知进度不能编造线性推进。\n覆盖：min/max/value、unknown模式、完成/失败、读屏更新节流、主题与缩放。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 285,
+        "conditionsAndActions": "先已知阶段进度，再变成未知的后续处理阶段",
+        "expected": "百分比仅用于有依据的阶段；100%传输不是全部成功；未知值不冒充确定值",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；阶段、value及文字"
+      }
+    },
+    {
+      "id": "C081",
+      "module": "progress-circle",
+      "sourcePath": "packages/ui/src/components/progress-circle.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 275,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "圆环适合局部、小范围进程，中心数字/文字优先；不作为纯装饰仪表。",
+        "states": "与线性Progress语义一致；尺寸小到不可读时不要强塞百分比。",
+        "principlesAndCustomization": "M1 M3：小空间表达同样真实进度；文字与环优先级按任务定，不为完整造型挤掉状态含义。\n覆盖：数值准确、长标签替代、读屏、reduced motion；不能用旋转代替错误说明。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 286,
+        "conditionsAndActions": "在小尺寸容器显示进度和长状态文本，随后切未知进度",
+        "expected": "数值准确；尺寸不足时提供可读替代表达；不为圆形挤掉含义",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；语义值、文字替代、截图"
+      }
+    },
+    {
+      "id": "C082",
+      "module": "meter",
+      "sourcePath": "packages/ui/src/components/meter.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 276,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "表示某区间内的测量值，不与任务进度混用；高低阈值有业务解释。",
+        "states": "正常/警戒等区间不只靠颜色；不把“数值大”默认当“更好”。",
+        "principlesAndCustomization": "M1 M4：测量值不是过程完成度；阈值、时间与单位明确，颜色随业务意义配置，不使用一套文化色替代判断。\n覆盖：上下界、阈值、空值/异常值、单位、可访问名称；测量和完成度分开。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 287,
+        "conditionsAndActions": "测量值为低、正常、过界与未知，随后改变业务阈值",
+        "expected": "它是测量而非完成度；单位、上下界与阈值准确；未知不默认为零",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；meter属性、配置与文案"
+      }
+    },
+    {
+      "id": "C083",
+      "module": "steps",
+      "sourcePath": "packages/ui/src/components/steps.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 277,
+      "methods": [
+        "M1",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "阶段顺序和当前位置清晰；线只是关系，不用精致连线替代阶段文案。",
+        "states": "当前、完成、失败、未开始、跳过区分；可点击跳转与纯状态项不同。",
+        "principlesAndCustomization": "M1 M5 M6：步骤支持前进与合理返回；已访问不是已完成，可跳过不是失败，流程无需被装成固定起承转合。\n覆盖：跳步限制、失败返回、长标题、窄屏、键盘；真实流程由应用控制。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 288,
+        "conditionsAndActions": "允许跳过一个步骤，返回修改前一步并模拟后续失效",
+        "expected": "访问/完成/跳过不同；依赖变化需要重新确认；不是所有访问过的步骤都完成",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；步骤依赖和状态、键盘"
+      }
+    },
+    {
+      "id": "C084",
+      "module": "timeline",
+      "sourcePath": "packages/ui/src/components/timeline.tsx",
+      "family": "10 文件、进度与过程",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 278,
+      "methods": [
+        "M1",
+        "M3",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "时间、事件、结果形成扫描轴；间距表达事件分组，不装饰成卷轴。",
+        "states": "事实顺序、时区和未知时间清楚；状态和责任信息按任务添加。",
+        "principlesAndCustomization": "M1 M3 M6：先后不等于因果；事件时间与状态准确，实时追加不夺走当前阅读位置，历史内容不被动效重写。\n覆盖：长事件、逆序/正序、实时插入不抢阅读位置、无事件；历史事实不被动画改写。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 289,
+        "conditionsAndActions": "在阅读旧事件时插入新事件，其中两条时间未知",
+        "expected": "不夺走阅读位置；时间未知不伪造顺序；视觉先后不宣称因果",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；滚动锚点、事件和时间"
+      }
+    },
+    {
+      "id": "C085",
+      "module": "avatar",
+      "sourcePath": "packages/ui/src/components/avatar.tsx",
+      "family": "11 媒体与对象识别",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 295,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "承担对象识别，不承担文化装饰；图片、姓名缩写和fallback保持同一尺度。",
+        "states": "人与组织可选不同集中形状；状态标记不遮身份且有文字等价。",
+        "principlesAndCustomization": "M1 M3：身份识别是目的；缺图fallback仍准确，不用人物/机构形状规则推测真实身份，不加无必要文化装饰。\n覆盖：加载失败、缺图、重名、长文本、装饰/信息图像alt策略；不把头像点单独当状态。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 302,
+        "conditionsAndActions": "图像加载失败、缺失以及重名三个对象并列",
+        "expected": "fallback能解释身份，装饰图与信息图alt策略合适；不靠图像猜角色",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；alt/名称、失败状态与截图"
+      }
+    },
+    {
+      "id": "C086",
+      "module": "carousel",
+      "sourcePath": "packages/ui/src/components/carousel.tsx",
+      "family": "11 媒体与对象识别",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 296,
+      "methods": [
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "用于确有序列浏览价值的媒体；当前项、前后入口和数量明了，不靠自动播放制造动感。",
+        "states": "默认不自动推进正在阅读内容；切换保持焦点和对应内容语义。",
+        "principlesAndCustomization": "M4 M5 M6：浏览允许直接跳至某项并自由返回；不强制自动推进或逐页看完，序列状态和当前阅读不因装饰改变。\n覆盖：键盘、触屏、停止自动运动、长内容、图片替代；必要信息不能只在隐藏页且不可发现。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 303,
+        "conditionsAndActions": "直接跳到中间项，键盘前后浏览，必要时暂停配置的自动播放",
+        "expected": "允许直达和返回；不强制读完；当前项与焦点正确，播放可控制",
+        "owners": [
+          "L",
+          "P",
+          "A"
+        ],
+        "evidenceGuidance": "L+P+A；序列索引、焦点、播放控制"
+      }
+    },
+    {
+      "id": "C087",
+      "module": "theme-provider",
+      "sourcePath": "packages/ui/src/components/theme-provider.tsx",
+      "family": "12 系统环境与偏好",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 309,
+      "methods": [
+        "M4",
+        "M5"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "无需可见装饰；保证整个工作环境的品牌、明暗一致，切换不会使浮层突然回到另一主题。",
+        "states": "区分品牌、明暗和密度；尊重用户偏好。当前文档级行为不冒充局部主题隔离。",
+        "principlesAndCustomization": "M4 M5：主题只改变授权的视觉范围；品牌、明暗、密度分开，用户选择优先，不能通过主题变更偷换交互策略。\n覆盖：持久化不可用、首次渲染、系统变化、跨标签页、Portal和预览iframe；不得忽略SSR/CSP实际条件。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 316,
+        "conditionsAndActions": "在两个隔离预览实例中改变一侧主题并打开所有浮层",
+        "expected": "品牌/明暗/密度不串用；Portal继承正确；另一实例和业务状态不变",
+        "owners": [
+          "L",
+          "P"
+        ],
+        "evidenceGuidance": "L+P；样式与对象状态、持久化失败夹具"
+      }
+    },
+    {
+      "id": "C088",
+      "module": "motion-provider",
+      "sourcePath": "packages/ui/src/components/motion-provider.tsx",
+      "family": "12 系统环境与偏好",
+      "sourceDocument": "02_全量组件模块设计与验收矩阵_v2.1.md",
+      "sourceLine": 310,
+      "methods": [
+        "M4",
+        "M6"
+      ],
+      "workPackages": [
+        "W05"
+      ],
+      "design": {
+        "composition": "无需创造文化化界面；统一输入方式、减少动效与运动策略，让控件响应一致。",
+        "states": "事件来源准确；策略不阻塞输入，不因统一取消动画而隐藏进行中状态。",
+        "principlesAndCustomization": "M4 M6：动效只传达状态而不定义业务状态；尊重输入和偏好，逻辑不可依赖动画播放完成才允许恢复或继续。\n覆盖：键盘/鼠标/触屏切换、prefers-reduced-motion、卸载清理、多实例；任务状态与动画开关分离。"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": [],
+      "acceptance": {
+        "sourceLine": 317,
+        "conditionsAndActions": "在键盘、鼠标及减少动态效果之间切换，执行中打断动画",
+        "expected": "状态与任务完成不依赖animationend；事件清理正确；控制方式改变不改用户意图",
+        "owners": [
+          "L",
+          "A"
+        ],
+        "evidenceGuidance": "L+A；事件监听、状态和动态效果记录"
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "V01",
+      "title": "动作名称与后果一致",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 23,
+      "methods": [
+        "M1"
+      ],
+      "owners": [
+        "L",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "同一位置可以保存草稿或对外发布，使用合成内容",
+        "执行操作": "切换任务模式并分别触发",
+        "预期结果": "显示保存草稿/发布等对应名称；应用回调与名称一致；发布后果在决定前可获知",
+        "明确失败": "一直写确定；发布模式调用保存回调或相反",
+        "证据": "可访问名称、事件payload、前后截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V02",
+      "title": "保护作用可以成为重点",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 35,
+      "methods": [
+        "M2",
+        "M4"
+      ],
+      "owners": [
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "一个持续处理任务发生需要人工停下核对的异常",
+        "执行操作": "进入异常状态并尝试停止、继续、退出",
+        "预期结果": "保护动作可得到适当强调；退出可发现；未获授权不继续；视觉没有固定四级角色",
+        "明确失败": "为了保持主按钮突出而隐藏停止；强加四个按钮",
+        "证据": "动作可达性、操作事件、人工层级审阅"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V03",
+      "title": "空白与示例分开",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 47,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "编辑器初始无用户内容，提供可忽略的示例",
+        "执行操作": "关闭示例、输入正文、保存",
+        "预期结果": "不采用示例也能开始；示例不进入提交值；必要标签与入口仍在",
+        "明确失败": "未经选择自动保存示例；装饰挤占输入区域",
+        "证据": "初始值、提交payload、工作区截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V04",
+      "title": "密度变化不改信息语义",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 59,
+      "methods": [
+        "M3",
+        "M4"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "相同数据有横向比较需求，标准和紧凑模式有明确设置",
+        "执行操作": "切换密度并放大文字",
+        "预期结果": "比较字段和单位仍在；可读性及命中区不机械缩小；信息量/空间/注意力分别审阅",
+        "明确失败": "为了紧凑删除关键列或切成无法比较的卡片",
+        "证据": "几何/可读性记录、模式前后截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V05",
+      "title": "输入中适配保持工作",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 71,
+      "methods": [
+        "M4",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "某表单含未保存草稿和当前焦点",
+        "执行操作": "缩窄容器并返回一个字段错误",
+        "预期结果": "保留草稿和正确对象；布局可调整但焦点可达；错误不吞掉说明",
+        "明确失败": "重新挂载导致草稿归零；焦点跳到不相干字段",
+        "证据": "草稿断言、focus、窄屏录像"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V06",
+      "title": "列表路径与直达路径都成立",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 83,
+      "methods": [
+        "M5",
+        "M6"
+      ],
+      "owners": [
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "同一详情有列表入口和直接链接入口",
+        "执行操作": "分别进入、编辑后返回",
+        "预期结果": "列表进入恢复有效的列表状态；直达提供稳定上级，不虚构历史；两条路径均可完成",
+        "明确失败": "直达后空白返回；强制重走列表才能编辑",
+        "证据": "路由和历史、列表状态、焦点"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V07",
+      "title": "预览不扩大权限",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 95,
+      "methods": [
+        "M2",
+        "M5"
+      ],
+      "owners": [
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "合成权限夹具隐藏对象的部分字段，禁止取回原始敏感字段",
+        "执行操作": "打开摘要、预览和详情，检查响应及DOM",
+        "预期结果": "三处遵守同一授权边界；无权限字段不进入前端载荷或隐蔽DOM",
+        "明确失败": "先取回再用模糊、透明或折叠隐藏数据",
+        "证据": "脱敏网络断言、DOM字段检查；非全系统安全审计"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V08",
+      "title": "超时不等于失败",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 107,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "owners": [
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "提交请求超时，服务端结果尚不明确；有状态核实接口",
+        "执行操作": "延迟返回后查询到原操作成功",
+        "预期结果": "先表示结果待核实；核实前不盲目重做副作用；成功后只计一次并说明结果",
+        "明确失败": "把超时当确定失败自动重试两次；先报成功",
+        "证据": "操作ID、提交/核实事件、结果"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V09",
+      "title": "取消请求与取消完成不同",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 119,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "后台任务允许请求取消，确认有延迟，存在过晚取消分支",
+        "执行操作": "发出取消并返回已取消或已经完成",
+        "预期结果": "取消中与终态分开；过晚取消说明真实结果；继续操作依实际状态",
+        "明确失败": "点取消立即记为已取消但任务仍完成",
+        "证据": "任务事件序列、文案/动作快照"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V10",
+      "title": "批量部分失败能继续",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 131,
+      "methods": [
+        "M1",
+        "M2",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "选择五个明确ID，三项成功、一项失败、一项未知",
+        "执行操作": "显示结果后点击重试失败项",
+        "预期结果": "汇总按真实结果分别计数；仅针对可安全重试的失败项；未知项先核实",
+        "明确失败": "重新处理全部成功项；把未知计入失败后重做",
+        "证据": "ID集合、单项状态与汇总、重试payload"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V11",
+      "title": "原触发对象消失后的返回",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 143,
+      "methods": [
+        "M5",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "从列表某项打开模态详情，期间该对象被删除",
+        "执行操作": "关闭详情",
+        "预期结果": "焦点到合理后继或集合标题；说明对象不可用；不返回不存在的节点",
+        "明确失败": "焦点丢到body或隐藏节点；伪造原对象",
+        "证据": "DOM焦点、对象状态、截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V12",
+      "title": "关闭动效仍然可用",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 155,
+      "methods": [
+        "M4",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "同一任务有进入/退出动效、加载和结果反馈",
+        "执行操作": "启用减少动态效果，并在动作中途再次操作",
+        "预期结果": "状态、取消和结果不依赖动效结束；名称和反馈仍可获得",
+        "明确失败": "等不到animationend使界面卡住；隐藏进行中状态",
+        "证据": "状态断言、媒体偏好、键盘轨迹"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V13",
+      "title": "InputGroup共同边界与独立操作",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 167,
+      "methods": [
+        "M1",
+        "M2",
+        "M3"
+      ],
+      "owners": [
+        "L"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "Field中含前缀、输入、单位和清除按钮",
+        "执行操作": "正常/错误/焦点三态切换，再清除",
+        "预期结果": "有共同主外框；清除可独立聚焦且不提交；Label关联输入本体",
+        "明确失败": "多重边框；清除触发表单提交；焦点被裁",
+        "证据": "组合截图、提交计数、label和focus"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V14",
+      "title": "相邻触屏目标不互抢",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 179,
+      "methods": [
+        "M2",
+        "M4"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "窄屏工具栏含相邻小控件和扩展命中区",
+        "执行操作": "以明确坐标点击边缘与各自中心",
+        "预期结果": "点击命中预期动作；目标尺寸按适用标准和本库目标记录；例外明确",
+        "明确失败": "伪元素覆盖邻项导致误触；只量CSS宽度未检验命中",
+        "证据": "命中路径、坐标和几何；人工触屏验证"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V15",
+      "title": "焦点、选中、错误彼此独立",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 191,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "owners": [
+        "L"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "含页签、选择项和无效输入的联合夹具",
+        "执行操作": "聚焦未选项，再聚焦已选项和无效输入",
+        "预期结果": "三种语义和可见线索不合并；颜色之外有合适线索；键盘仍可继续",
+        "明确失败": "选中看作焦点；无效状态覆盖focus使其不可见",
+        "证据": "aria/DOM断言、状态组合截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V16",
+      "title": "慢加载Tabs不随焦点误切换",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 203,
+      "methods": [
+        "M1",
+        "M4",
+        "M5"
+      ],
+      "owners": [
+        "L",
+        "A"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "采用手动激活的慢加载Tabs，第一页已打开",
+        "执行操作": "方向键移到第二页签，随后显式激活",
+        "预期结果": "仅移动焦点不加载或切换；激活后状态准确；返回保留策略明确",
+        "明确失败": "焦点经过每项都发请求并不断切面板",
+        "证据": "selected、focus、加载回调计数"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V17",
+      "title": "空、无结果、无权限、失败各有出口",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 215,
+      "methods": [
+        "M1",
+        "M3"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "同一集合配置四种互斥事实状态",
+        "执行操作": "分别进入并选择提供的下一步",
+        "预期结果": "初始空可创建；无结果可调整查询；无权限按产品提供说明/申请；失败可重试或说明",
+        "明确失败": "全部暂无数据；无权限错误诱导用户创建重复对象",
+        "证据": "状态到文案/动作映射、回调"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V18",
+      "title": "主题改变有生效范围",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 227,
+      "methods": [
+        "M3",
+        "M4"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W06",
+        "W08"
+      ],
+      "scenario": {
+        "前置条件": "两个独立主题实例和已登记token消费部位",
+        "执行操作": "只更改A主题的控件高度、圆角及品牌参数",
+        "预期结果": "A登记部位按预期变更，未登记对象不误变；B不变；草稿和权限不变",
+        "明确失败": "只改定义没改组件；B串色；主题切换改了保存策略",
+        "证据": "computed style/几何差分、对象状态"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V19",
+      "title": "浮层继承与主题隔离",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 239,
+      "methods": [
+        "M2",
+        "M4",
+        "M5"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W06",
+        "W08"
+      ],
+      "scenario": {
+        "前置条件": "两个隔离预览含Dialog、Menu、Select、Toast",
+        "执行操作": "在两侧打开浮层后切换一侧明暗/密度",
+        "预期结果": "浮层继承各自主题；焦点与滚动不跨实例；品牌不占用明暗维度",
+        "明确失败": "Portal回到默认主题；两个预览相互影响",
+        "证据": "浮层样式、焦点、隔离实例截图"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V20",
+      "title": "中文输入与过期响应",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 251,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "搜索或标签输入包含IME及异步请求",
+        "执行操作": "组合输入中按Enter，并让旧响应最后返回",
+        "预期结果": "组合过程不误提交；确认输入后按策略查询；旧响应不覆盖最新意图",
+        "明确失败": "中途加标签或提交；旧结果取代新结果",
+        "证据": "真实IME人工记录、受控异步事件"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V21",
+      "title": "长文本、缩放与文字间距",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 263,
+      "methods": [
+        "M3",
+        "M4"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W03",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "中英长标签、URL、数值、错误组成代表页面",
+        "执行操作": "200%文字放大；按适用要求覆盖文字间距；320 CSS px视口测试重排",
+        "预期结果": "内容和动作仍可获得；必要二维表格按其例外保留比较；不裁关键文案",
+        "明确失败": "用固定高度裁字；以统一为由!important锁死间距",
+        "证据": "不同测试分别截图和记录；不混同其通过结论"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V22",
+      "title": "真实主题对比度",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 275,
+      "methods": [
+        "M1",
+        "M4"
+      ],
+      "owners": [
+        "L",
+        "P"
+      ],
+      "workPackages": [
+        "W03",
+        "W05",
+        "W06",
+        "W08"
+      ],
+      "scenario": {
+        "前置条件": "两个主题含普通辅助文字、错误、选中、focus与半透明表面",
+        "执行操作": "采集实际组合并评估适用阈值",
+        "预期结果": "文本与必要非文本按各自条款评估；来源和叠加背景明确；装饰线不误套控件阈值",
+        "明确失败": "辅助小字全部按3:1；只测基础颜色不测实际背景",
+        "证据": "配色对、测量方法与人工确认"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V23",
+      "title": "异步乱序不覆盖新草稿",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 287,
+      "methods": [
+        "M1",
+        "M6"
+      ],
+      "owners": [
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "对象A旧请求仍在执行，用户转向B并修改草稿",
+        "执行操作": "A迟到响应与B保存响应交错返回",
+        "预期结果": "按对象ID/版本接收；B草稿不被A污染；不因列表刷新丢当前任务",
+        "明确失败": "仅凭最后返回覆盖当前对象；盲目重置表单",
+        "证据": "对象ID、版本、草稿和请求序列"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V24",
+      "title": "确认绑定具体内容与范围",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 299,
+      "methods": [
+        "M1",
+        "M2",
+        "M6"
+      ],
+      "owners": [
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "用户审阅的是对象版本1及明确范围",
+        "执行操作": "确认前对象、变更方案或范围发生变化",
+        "预期结果": "使旧确认失效或重新审阅差异；不把旧同意套给新对象",
+        "明确失败": "仅保存approved=true，无范围/版本核对",
+        "证据": "版本/范围摘要、再次审阅与提交payload"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V25",
+      "title": "重试条件与幂等责任明确",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 311,
+      "methods": [
+        "M2",
+        "M6"
+      ],
+      "owners": [
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "副作用任务存在可安全重试与不可确认结果两种夹具",
+        "执行操作": "分别触发重试、状态核实",
+        "预期结果": "应用按真实能力处理去重/核实；组件不声称提供服务端幂等；失败提示不诱导危险重复",
+        "明确失败": "给所有失败自动重试；UI库声明保证后台只执行一次",
+        "证据": "操作ID、请求计数及协议说明"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V26",
+      "title": "取消编辑与撤销已保存动作分开",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 323,
+      "methods": [
+        "M1",
+        "M2",
+        "M6"
+      ],
+      "owners": [
+        "L",
+        "P",
+        "A"
+      ],
+      "workPackages": [
+        "W04",
+        "W05"
+      ],
+      "scenario": {
+        "前置条件": "一个动作尚未保存，另一个动作已保存且提供限时撤销",
+        "执行操作": "分别取消草稿、执行撤销、过期后再尝试",
+        "预期结果": "名称及后果准确；取消不误删已保存结果；撤销失败/过期如实说明",
+        "明确失败": "把关闭窗口称作撤销成功；撤销不可用仍显示成功",
+        "证据": "草稿/服务端状态、撤销事件"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V27",
+      "title": "安装产物而非仅workspace验证",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 335,
+      "methods": [
+        "M1",
+        "M2"
+      ],
+      "owners": [
+        "L"
+      ],
+      "workPackages": [
+        "W11"
+      ],
+      "scenario": {
+        "前置条件": "组件库已生成真实包；建立源样式和预编译两类消费夹具",
+        "执行操作": "分别安装并构建，再加载Button-only及Table/Chart页面",
+        "预期结果": "两种入口按说明运行，不重复导入；按需入口不因无关可选依赖出错",
+        "明确失败": "仅workspace可运行就宣称发布包可用；加载两套样式",
+        "证据": "包校验和、安装/构建日志、浏览器记录"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V28",
+      "title": "AI正确选择修改归属",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 347,
+      "methods": [
+        "M1",
+        "M2",
+        "M4"
+      ],
+      "owners": [
+        "P",
+        "T"
+      ],
+      "workPackages": [
+        "W07",
+        "W08",
+        "W09",
+        "W12"
+      ],
+      "scenario": {
+        "前置条件": "任务为全项目收紧字段间距，已有共享组件与项目主题",
+        "执行操作": "要求Agent实现并运行消费端诊断",
+        "预期结果": "改集中项目主题或已登记组合；不在多页覆盖样式、不复制基础源码；报告真实检查范围",
+        "明确失败": "批量散改className；凭空新增同义token或假命令",
+        "证据": "diff、来源索引、真实命令结果"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V29",
+      "title": "诊断模式与旧问题基线",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 359,
+      "methods": [
+        "M1",
+        "M4",
+        "M6"
+      ],
+      "owners": [
+        "T"
+      ],
+      "workPackages": [
+        "W07",
+        "W12"
+      ],
+      "scenario": {
+        "前置条件": "personal+report中存在已知旧问题和一个新增确定违规",
+        "执行操作": "运行检查，随后显式启用一条gate规则，并模拟扫描器故障",
+        "预期结果": "report仍完整报告；gate仅按批准阈值；执行故障返回失败且不伪装全通过；旧基线不自动扩大",
+        "明确失败": "report吞掉错误；新增问题进入基线；扫描崩溃仍显示PASS",
+        "证据": "退出码、JSON诊断、基线diff"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    },
+    {
+      "id": "V30",
+      "title": "视觉结果必须回到任务判断",
+      "sourceDocument": "04_跨组件验收场景与记录模板_v2.1.md",
+      "sourceLine": 371,
+      "methods": [
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "owners": [
+        "P"
+      ],
+      "workPackages": [
+        "W04",
+        "W10",
+        "W12"
+      ],
+      "scenario": {
+        "前置条件": "同样内容的设置、集合比较、阅读三个候选模块",
+        "执行操作": "去掉文化词与装饰，比较正常、长内容及失败场景",
+        "预期结果": "评审能指出具体取舍、反例和代价；高密度仍可比较，阅读仍以内容为主；不以文化分数替代操作证据",
+        "明确失败": "只说更东方；所有页面套同一低密度模板；人为拉长流程",
+        "证据": "人工决策记录、失败场景及待修改项"
+      },
+      "validationStatus": "NOT_RUN",
+      "evidence": []
+    }
+  ],
+  "patterns": [
+    {
+      "id": "P01",
+      "title": "设置与内容编辑",
+      "composition": "Field/InputGroup/Form/Button/Alert",
+      "scenarios": [
+        "V01",
+        "V03",
+        "V05",
+        "V08",
+        "V13",
+        "V20",
+        "V23",
+        "V26"
+      ],
+      "applicationResponsibility": "草稿持久化、并发版本、发布结果",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    },
+    {
+      "id": "P02",
+      "title": "集合查询与比较",
+      "composition": "Toolbar/SearchInput/DataTable/Pagination",
+      "scenarios": [
+        "V04",
+        "V10",
+        "V17",
+        "V24",
+        "V25"
+      ],
+      "applicationResponsibility": "服务端查询全选、真实批量结果",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    },
+    {
+      "id": "P03",
+      "title": "主从详情与预览",
+      "composition": "Item/Table/Sheet/Preview/Navigation",
+      "scenarios": [
+        "V06",
+        "V07",
+        "V11",
+        "V19",
+        "V23"
+      ],
+      "applicationResponsibility": "进入依据、路由、权限、对象生命周期",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    },
+    {
+      "id": "P04",
+      "title": "差异审核",
+      "composition": "DescriptionList/Table/Checkbox/Alert/Button",
+      "scenarios": [
+        "V02",
+        "V15",
+        "V24",
+        "V26"
+      ],
+      "applicationResponsibility": "提案版本、确认绑定、真实提交和撤回",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    },
+    {
+      "id": "P05",
+      "title": "上传与处理队列",
+      "composition": "FileUpload/Progress/Steps/Alert/Toast",
+      "scenarios": [
+        "V08",
+        "V09",
+        "V10",
+        "V12",
+        "V25"
+      ],
+      "applicationResponsibility": "上传凭证、后台阶段、取消确认和去重",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    },
+    {
+      "id": "P06",
+      "title": "阅读与画廊",
+      "composition": "Typography/Grid/AspectRatio/Card/Carousel",
+      "scenarios": [
+        "V03",
+        "V12",
+        "V21",
+        "V30"
+      ],
+      "applicationResponsibility": "内容权限、阅读位置、媒体资源策略",
+      "workPackage": "W04",
+      "validationStatus": "NOT_RUN"
+    }
+  ],
+  "userConstraints": [
+    {
+      "id": "intent-philosophy",
+      "requirement": "每项实质改造遵循设计理念，形成任务、方法、具体取舍与可观察结果的对应，不以参考库外观或文化装饰替代。",
+      "workPackages": [
+        "W01",
+        "W03",
+        "W04",
+        "W05",
+        "W10",
+        "W12"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "intent-public-website",
+      "requirement": "可公开理念与方法融入官网首页、理念、基础、组件、模式、主题、AI 页面及 design.md 下载；不只作为独立附件。",
+      "workPackages": [
+        "W01",
+        "W09",
+        "W10",
+        "W11"
+      ],
+      "status": "PLANNED"
+    },
+    {
+      "id": "intent-replaceable-coss",
+      "requirement": "coss 是可替换来源；按实际适用性选择复用、适配或自建，必要时整体替换 coss 层；底层无障碍原语独立评估。",
+      "workPackages": [
+        "W00",
+        "W01",
+        "W03",
+        "W05",
+        "W10",
+        "W11"
+      ],
+      "status": "PLANNED"
+    }
+  ],
+  "userDecisions": [
+    {
+      "id": "Q01",
+      "decision": "现有外观无必须保留项，按理念重新设计；保留青野 / Qingye 名称。",
+      "source": "用户于 2026-10-02 回复 A A A A",
+      "decisionStatus": "CONFIRMED",
+      "implementationStatus": "NOT_RUN",
+      "workPackages": [
+        "W03",
+        "W05",
+        "W06",
+        "W10"
+      ]
+    },
+    {
+      "id": "Q02",
+      "decision": "默认主题有克制的辨识度，以排版、比例和组件关系建立性格；项目主题保持独立。",
+      "source": "用户于 2026-10-02 回复 A A A A",
+      "decisionStatus": "CONFIRMED",
+      "implementationStatus": "NOT_RUN",
+      "workPackages": [
+        "W03",
+        "W06"
+      ]
+    },
+    {
+      "id": "Q03",
+      "decision": "工作台与阅读展示并列作为设计样例；六种任务模式仍完整交付。",
+      "source": "用户于 2026-10-02 回复 A A A A",
+      "decisionStatus": "CONFIRMED",
+      "implementationStatus": "NOT_RUN",
+      "workPackages": [
+        "W03",
+        "W04",
+        "W10"
+      ]
+    },
+    {
+      "id": "Q04",
+      "decision": "官网先展示可操作的任务界面，再从具体设计解释理念。",
+      "source": "用户于 2026-10-02 回复 A A A A",
+      "decisionStatus": "CONFIRMED",
+      "implementationStatus": "NOT_RUN",
+      "workPackages": [
+        "W01",
+        "W10"
+      ]
+    }
+  ],
+  "pendingUserReviews": [
+    {
+      "id": "Q05",
+      "topic": "具体视觉",
+      "decisionStatus": "DEFERRED_BY_USER",
+      "requiredEvidence": [
+        "同一任务的候选方案",
+        "选定方案的明暗与窄屏实样",
+        "与现有外观的差异表"
+      ],
+      "workPackages": [
+        "W03",
+        "W06"
+      ],
+      "artifacts": [
+        "2026-10-02-design-options/option-01.png",
+        "2026-10-02-design-options/option-02.png",
+        "2026-10-02-design-options/option-03.png"
+      ],
+      "artifactStatus": "ALL_CONCEPTS_REJECTED",
+      "blocksImplementation": false
+    },
+    {
+      "id": "Q06",
+      "topic": "任务体验",
+      "decisionStatus": "REVIEW_AFTER_IMPLEMENTATION",
+      "requiredEvidence": [
+        "工作台与阅读展示的可操作样例",
+        "正常、失败、取消、恢复和返回路径"
+      ],
+      "workPackages": [
+        "W04"
+      ],
+      "blocksImplementation": false
+    }
+  ],
+  "executionDirective": {
+    "date": "2026-10-02",
+    "status": "AUTHORIZED",
+    "model": "gpt-6.1-sol",
+    "reasoningEffort": "xhigh",
+    "mode": "parallel-agents-with-root-review",
+    "visualDirection": "DEFERRED_BY_USER",
+    "source": "用户明确拒绝三张图、视觉后置并要求多子agent并行执行计划。"
+  }
+}

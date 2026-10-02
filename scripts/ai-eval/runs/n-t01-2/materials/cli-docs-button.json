@@ -1,0 +1,314 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "button",
+    "title": "按钮 Button",
+    "description": "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
+    "category": "通用",
+    "source": "coss",
+    "import": "@qingye/ui/components/button",
+    "exports": [
+      "Button",
+      "buttonVariants"
+    ],
+    "docs": "/docs/components/button",
+    "notes": [
+      "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
+      "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
+      "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
+      "导航用 render={<a href=… />} 并设 nativeButton={false}，不要在 onClick 里跳转。",
+      "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。"
+    ],
+    "keywords": [
+      "button",
+      "按钮",
+      "操作",
+      "提交",
+      "loading"
+    ],
+    "api": [
+      {
+        "name": "Button",
+        "description": "渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+        "props": [
+          {
+            "name": "variant",
+            "type": "\"default\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\" | \"destructive\" | \"destructive-outline\"",
+            "default": "\"default\"",
+            "description": "视觉样式。"
+          },
+          {
+            "name": "size",
+            "type": "\"xs\" | \"sm\" | \"default\" | \"lg\" | \"xl\" | \"icon-xs\" | \"icon-sm\" | \"icon\" | \"icon-lg\" | \"icon-xl\"",
+            "default": "\"default\"",
+            "description": "尺寸；icon-* 为仅图标的正方形按钮，与同名文字尺寸等高。"
+          },
+          {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "显示居中的 Spinner、设置 aria-busy 并禁用，文字透明以保留宽度。"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "禁用；不透明度降至 64% 并屏蔽指针事件。"
+          },
+          {
+            "name": "render",
+            "type": "ReactElement | (props, state) => ReactElement",
+            "description": "替换渲染元素，例如 <a> 或路由库的 Link。"
+          },
+          {
+            "name": "nativeButton",
+            "type": "boolean",
+            "default": "true",
+            "description": "render 为非 <button> 元素时设为 false，以保持键盘与禁用语义。"
+          }
+        ]
+      },
+      {
+        "name": "buttonVariants",
+        "description": "cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Enter / Space",
+        "description": "触发按钮。"
+      },
+      {
+        "keys": "Tab / Shift+Tab",
+        "description": "移入、移出焦点；键盘聚焦时显示焦点环。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "Button",
+        "kind": "function",
+        "owner": "button",
+        "module": "@qingye/ui/components/button",
+        "propsType": "ButtonProps",
+        "signature": "Button({\n  className,\n  variant,\n  size,\n  render,\n  children,\n  loading = false,\n  disabled: disabledProp,\n  nativeButton,\n  ...props\n}: ButtonProps): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "ButtonProps",
+        "kind": "interface",
+        "owner": "button",
+        "module": "@qingye/ui/components/button",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "buttonVariants",
+        "kind": "const",
+        "owner": "button",
+        "module": "@qingye/ui/components/button",
+        "status": "UNVERIFIED",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "ButtonProps",
+        "definition": "export interface ButtonProps extends useRender.ComponentProps<\"button\"> {\n  variant?: VariantProps<typeof buttonVariants>[\"variant\"];\n  size?: VariantProps<typeof buttonVariants>[\"size\"];\n  loading?: boolean;\n  /**\n   * Set to `false` when `render` produces a non-button element (for example a\n   * link styled as a button) so keyboard and disabled semantics stay correct.\n   */\n  nativeButton?: boolean;\n}"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "Button",
+        "import": "@qingye/ui/components/button",
+        "owner": "button",
+        "status": "PASS"
+      },
+      {
+        "name": "buttonVariants",
+        "import": "@qingye/ui/components/button",
+        "owner": "button",
+        "status": "UNVERIFIED"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "lucide-react",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": []
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "variants",
+        "title": "样式",
+        "source": "apps/docs/src/content/button/demos/01-variants.tsx",
+        "imports": [
+          "@qingye/ui/components/button"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"样式\",\n  description: \"一个区域只放一个主按钮；次要操作用 outline、secondary 或 ghost，危险操作用 destructive。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button>保存</Button>\n      <Button variant=\"outline\">取消</Button>\n      <Button variant=\"secondary\">存为草稿</Button>\n      <Button variant=\"ghost\">稍后再说</Button>\n      <Button variant=\"link\">查看详情</Button>\n      <Button variant=\"destructive\">删除设备</Button>\n      <Button variant=\"destructive-outline\">解除绑定</Button>\n    </>\n  );\n}\n",
+        "sha256": "a0cecafe33d099df5e36ffb00696053b179a0469666733a08251720e0e3f35c7"
+      },
+      {
+        "id": "sizes",
+        "title": "尺寸",
+        "source": "apps/docs/src/content/button/demos/02-sizes.tsx",
+        "imports": [
+          "@qingye/ui/components/button"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"尺寸\",\n  description: \"xs 用于表格行内，sm 用于工具栏，lg / xl 用于登录与落地页。移动端统一加高 4px。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button size=\"xs\" variant=\"outline\">行内</Button>\n      <Button size=\"sm\" variant=\"outline\">工具栏</Button>\n      <Button variant=\"outline\">默认</Button>\n      <Button size=\"lg\" variant=\"outline\">登录</Button>\n      <Button size=\"xl\" variant=\"outline\">免费试用</Button>\n    </>\n  );\n}\n",
+        "sha256": "c70506f7675829ceff348a5e3dbe66b0d39c75008dabf5ada9354f71e519e585"
+      },
+      {
+        "id": "icon-sizes",
+        "title": "仅图标",
+        "source": "apps/docs/src/content/button/demos/03-icon-sizes.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "lucide-react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { PlusIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"仅图标\",\n  description: \"icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button aria-label=\"新建\" size=\"icon-xs\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-sm\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-lg\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n      <Button aria-label=\"新建\" size=\"icon-xl\" variant=\"outline\">\n        <PlusIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "a8873d4c0d8210131e20064c5073ae056d46955f7e13cc108d1c4ba7195537af"
+      },
+      {
+        "id": "with-icon",
+        "title": "带图标",
+        "source": "apps/docs/src/content/button/demos/04-with-icon.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "lucide-react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ArrowRightIcon, ChevronDownIcon, DownloadIcon, Trash2Icon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"带图标\",\n  description: \"图标放在文字前表示动作类型，放在文字后表示去向或展开。图标会自动调整尺寸与透明度。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button variant=\"outline\">\n        <DownloadIcon aria-hidden=\"true\" />\n        导出报表\n      </Button>\n      <Button>\n        下一步\n        <ArrowRightIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"ghost\">\n        全部状态\n        <ChevronDownIcon aria-hidden=\"true\" />\n      </Button>\n      <Button variant=\"destructive-outline\">\n        <Trash2Icon aria-hidden=\"true\" />\n        移入回收站\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "b0ce0740f7595b7972ad0e0246e2eb6a997f04b90e5e0896ccb13378ef2c5f7f"
+      },
+      {
+        "id": "link",
+        "title": "作为链接",
+        "source": "apps/docs/src/content/button/demos/05-link.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "lucide-react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronLeftIcon, ExternalLinkIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"作为链接\",\n  description: \"导航用 render 渲染为 <a>，并设 nativeButton={false}，保留按钮外观与链接语义。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button nativeButton={false} render={<a href=\"#orders\" />} variant=\"link\">\n        <ChevronLeftIcon aria-hidden=\"true\" />\n        返回订单列表\n      </Button>\n      <Button\n        nativeButton={false}\n        render={<a href=\"https://example.com/help\" rel=\"noreferrer\" target=\"_blank\" />}\n        variant=\"outline\"\n      >\n        帮助中心\n        <ExternalLinkIcon aria-hidden=\"true\" />\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "fffe43b2d48819cdd2674d86959e9dca6ab10190cf9a04fa4d93908338e94884"
+      },
+      {
+        "id": "loading",
+        "title": "加载中",
+        "source": "apps/docs/src/content/button/demos/06-loading.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"加载中\",\n  description: \"loading 显示居中的旋转指示并禁用按钮，文字透明但保留宽度，按钮不会跳动。\",\n};\n\nexport default function Demo() {\n  const [saving, setSaving] = useState(false);\n  const save = () => {\n    setSaving(true);\n    setTimeout(() => setSaving(false), 1500);\n  };\n  return (\n    <>\n      <Button loading={saving} onClick={save}>\n        保存更改\n      </Button>\n      <Button loading variant=\"outline\">\n        同步中\n      </Button>\n      <Button loading variant=\"destructive\">\n        删除中\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "04bbfc57d0eed2a8386d75d4864c7eeeab0cdde9d93c4126a5bda6751409b8f5"
+      },
+      {
+        "id": "loading-custom",
+        "title": "自定义加载",
+        "source": "apps/docs/src/content/button/demos/07-loading-custom.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/spinner"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Spinner } from \"@qingye/ui/components/spinner\";\n\nexport const meta = {\n  title: \"自定义加载\",\n  description: \"需要保留文字时，自行组合 Spinner 与 disabled，例如“正在上传 3 个文件”。\",\n};\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>\n        <Spinner />\n        正在上传 3 个文件\n      </Button>\n      <Button disabled size=\"sm\" variant=\"outline\">\n        <Spinner />\n        生成中\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "f1f78fe69d6b40872e1e8246930c82653a879b3357a0360a2781d164e04771cf"
+      },
+      {
+        "id": "disabled",
+        "title": "禁用",
+        "source": "apps/docs/src/content/button/demos/08-disabled.tsx",
+        "imports": [
+          "@qingye/ui/components/button"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = { title: \"禁用\", description: \"不可用时降低不透明度并屏蔽指针事件。\" };\n\nexport default function Demo() {\n  return (\n    <>\n      <Button disabled>提交审核</Button>\n      <Button disabled variant=\"outline\">\n        导出\n      </Button>\n      <Button disabled variant=\"secondary\">\n        存为草稿\n      </Button>\n      <Button disabled variant=\"destructive\">\n        删除\n      </Button>\n    </>\n  );\n}\n",
+        "sha256": "603d1f0663a668983f91996ac731cfd22349cf8595929bb1768723f96d30c7c2"
+      },
+      {
+        "id": "form-actions",
+        "title": "组合：表单操作栏",
+        "source": "apps/docs/src/content/button/demos/09-form-actions.tsx",
+        "imports": [
+          "@qingye/ui/components/button"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\n\nexport const meta = {\n  title: \"组合：表单操作栏\",\n  description: \"主操作靠末端；危险操作与其他操作分开放置。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-lg flex-col-reverse gap-2 sm:flex-row sm:items-center\">\n      <Button className=\"sm:me-auto\" variant=\"destructive-outline\">\n        停用账号\n      </Button>\n      <Button variant=\"ghost\">取消</Button>\n      <Button>保存设置</Button>\n    </div>\n  );\n}\n",
+        "sha256": "cb67a704cf614e06c0bdc90564884354037e18c6f4966b713b0cff5ebd792140"
+      },
+      {
+        "id": "card-button",
+        "title": "组合：卡片式按钮",
+        "source": "apps/docs/src/content/button/demos/10-card-button.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "lucide-react"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { ChevronRightIcon } from \"lucide-react\";\n\nexport const meta = {\n  title: \"组合：卡片式按钮\",\n  description: \"整块可点击的选项，悬停时箭头轻移提示去向。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-md gap-2\">\n      {[\n        { name: \"华东一区 · 杭州\", detail: \"12 台设备在线，1 台告警\" },\n        { name: \"华南二区 · 深圳\", detail: \"8 台设备在线\" },\n      ].map((region) => (\n        <Button className=\"h-auto! justify-between gap-4 px-4 py-3 text-start\" key={region.name} variant=\"outline\">\n          <span className=\"flex flex-col gap-0.5\">\n            <span>{region.name}</span>\n            <span className=\"whitespace-normal font-normal text-muted-foreground\">{region.detail}</span>\n          </span>\n          <ChevronRightIcon\n            aria-hidden=\"true\"\n            className=\"transition-transform duration-(--qy-duration-fast) in-[[data-slot=button]:hover]:translate-x-0.5\"\n          />\n        </Button>\n      ))}\n    </div>\n  );\n}\n",
+        "sha256": "ef8de99ac40981242780d9be34deea2a2ac0c703a5360a8ec4e5ddfcb4f5efcb"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "相成相制",
+        "随境取度"
+      ],
+      "whenToUse": [
+        "执行名称明确的动作。当前最重要的动作可以是保存，也可以是停止或返回。"
+      ],
+      "avoid": [
+        "不要把所有操作都叫确定；视觉样式不能隐式授权或决定风险。"
+      ],
+      "composition": [
+        "Button：渲染原生 <button>（默认 type=\"button\"）；通过 render 可渲染为链接等元素。透传所有原生属性。",
+        "buttonVariants：cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "数据、权限、动作范围、异步结果与持久化。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/button.tsx",
+      "sha256": "b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

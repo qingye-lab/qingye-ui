@@ -48,7 +48,7 @@ export default function InstallationPage() {
             term: "可选依赖",
             detail: (
               <>
-                使用 DataTable 时另装 <Code>@tanstack/react-table</Code>，使用 Chart 时另装 <Code>recharts</Code>；两者是可选的 peer 依赖。其余依赖（Base UI、图标等）会随包一起安装。
+                使用 DataTable 时另装 <Code>@tanstack/react-table</Code>，使用 Chart 时另装 <Code>recharts</Code>；两者是可选的 peer 依赖。其余依赖（Base UI、图标等）会随包一起安装。 若关闭自动安装 peer，还需为 Recharts 安装与 React 主版本兼容的 react-is。
               </>
             ),
           },

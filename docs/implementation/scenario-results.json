@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "artifactKind": "joint-scenario-execution",
+  "visibility": "internal-not-for-package-or-public-site",
+  "createdOn": "2026-10-02",
+  "baseline": "f0de477",
+  "deliveryStatus": "IMPLEMENTED_WITH_MANUAL_ACCEPTANCE_PENDING",
+  "counts": {
+    "PASS": 23,
+    "UNVERIFIED": 7
+  },
+  "scenarios": [
+    {
+      "id": "V01",
+      "title": "动作名称与后果一致",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "保存草稿/发布名称、请求 action 和提交前后果说明",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V02",
+      "title": "保护作用可以成为重点",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "取消请求、继续/放弃编辑和失败恢复动作可达",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "保护动作的人工层级与理解评审未执行",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V03",
+      "title": "空白与示例分开",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "初始空草稿、示例显式采用、实际提交值",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V04",
+      "title": "密度变化不改信息语义",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "紧凑切换和文字放大保留表头、行、单位；108组布局检查",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "信息量和注意力的人工作业评审未执行",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V05",
+      "title": "输入中适配保持工作",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "输入中320/1280缩窄还原、字段校验、正文和可达焦点保持",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V06",
+      "title": "列表路径与直达路径都成立",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "集合进入/返回恢复查询选择；详情直达和缺失对象稳定上级",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V07",
+      "title": "预览不扩大权限",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "合成权限白名单DTO的HTTP响应、集合/预览/全部详情DOM及构建扫描",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V08",
+      "title": "超时不等于失败",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "提交未知状态禁止再次提交，按原请求核实成功；迟到A与B隔离",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V09",
+      "title": "取消请求与取消完成不同",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "取消中、确认取消、过晚取消分别显示，保留真实终态",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V10",
+      "title": "批量部分失败能继续",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "跨页五ID三成功一失败一未知；仅明确失败ID重试",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V11",
+      "title": "原触发对象消失后的返回",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "预览对象消失后关闭回焦集合标题，删除项不被伪造",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V12",
+      "title": "关闭动效仍然可用",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "所有任务流程在prefers-reduced-motion:reduce下运行，取消/结果不依赖animationend",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V13",
+      "title": "InputGroup共同边界与独立操作",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "InputGroup真实单外框、label/前缀聚焦、清除独立聚焦且提交计数为0",
+      "evidence": [
+        {
+          "path": "test-results/packed-consumers/run-PXygRU/report.json",
+          "sha256": "53e4a7c38bff70a08fbd6b85d419328bada8d660789722d949514ad66a935251"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V14",
+      "title": "相邻触屏目标不互抢",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "两个相邻目标的粗指针44px命中几何、中心和边缘坐标真实touch事件命中",
+      "evidence": [
+        {
+          "path": "test-results/packed-consumers/run-PXygRU/report.json",
+          "sha256": "53e4a7c38bff70a08fbd6b85d419328bada8d660789722d949514ad66a935251"
+        }
+      ],
+      "remaining": "物理触屏未验证；浏览器合成触摸不代替真机",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V15",
+      "title": "焦点、选中、错误彼此独立",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "Tabs焦点/选择ARIA独立；错误InputGroup的边框、focus与清除动作",
+      "evidence": [
+        {
+          "path": "test-results/packed-consumers/run-PXygRU/report.json",
+          "sha256": "53e4a7c38bff70a08fbd6b85d419328bada8d660789722d949514ad66a935251"
+        }
+      ],
+      "remaining": "完整状态组合的人工可见线索审阅未执行",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V16",
+      "title": "慢加载Tabs不随焦点误切换",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "手动Tabs方向键只移焦点，Enter才选择和增加一次加载计数",
+      "evidence": [
+        {
+          "path": "test-results/packed-consumers/run-PXygRU/report.json",
+          "sha256": "53e4a7c38bff70a08fbd6b85d419328bada8d660789722d949514ad66a935251"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V17",
+      "title": "空、无结果、无权限、失败各有出口",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "五种集合事实的区别、下一步回调、查询选择保留，无权限不冒充已授权",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V18",
+      "title": "主题改变有生效范围",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "两个文档主题/草稿/选择/错误独立；圆角候选与应用前后computed、外部冲突保留；尺寸另见foundation；响应B→A后保留B，应用只写B，读取期间不可应用",
+      "evidence": [
+        {
+          "path": "test-results/studio/run-Mu74Dw/report.json",
+          "sha256": "fafc47b302ad3260d9fadffe7ed6075ca22bb226a36c8c1fd86ae5c6380654a2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V19",
+      "title": "浮层继承与主题隔离",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "两侧Select/Menu/Dialog/Toast在所属文档；实际表面RGBA匹配角色token；右侧浮层打开时切明暗密度，左侧草稿主题不变，Escape回焦",
+      "evidence": [
+        {
+          "path": "test-results/studio/run-Mu74Dw/report.json",
+          "sha256": "fafc47b302ad3260d9fadffe7ed6075ca22bb226a36c8c1fd86ae5c6380654a2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V20",
+      "title": "中文输入与过期响应",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "过期查询被忽略；TagInput合成composition事件另由组件单测验证",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "真实中文IME和实际候选窗口未验证",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V21",
+      "title": "长文本、缩放与文字间距",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "六模式108组320/390/1280、明暗、单独200%字体/文字间距及联合检查，字形裁切、动作命中和局部滚动",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V22",
+      "title": "真实主题对比度",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "24基础截图、danger边界组合与台账；任务/Studio/安装包实际普通文本>=4.5，大文本>=3",
+      "evidence": [
+        {
+          "path": "test-results/ui-foundations-final/runtime.json",
+          "sha256": "335997ee92e3ccb4383df37d9d217be8aff4fc2d4a112f1803e827648a2c94c9"
+        }
+      ],
+      "remaining": "半透明/opacity/图像背景与全部非文本适用性的人工确认仍未执行",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V23",
+      "title": "异步乱序不覆盖新草稿",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "A/B请求和版本隔离、迟到A不污染B，返回A先核实原请求；后续草稿保留",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V24",
+      "title": "确认绑定具体内容与范围",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "建议版本/范围变更使原确认失效；未知状态禁止再次采用",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V25",
+      "title": "重试条件与幂等责任明确",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "明确失败项重试和未知核实分开，保留操作ID与请求计数；公开应用责任说明",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V26",
+      "title": "取消编辑与撤销已保存动作分开",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "草稿放弃恢复、保存后的撤销成功/失败/真实15秒过期分别检查；撤销中离页返回/刷新转待核实，成功/失败后保留后续草稿并可继续编辑",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V27",
+      "title": "安装产物而非仅workspace验证",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "真实tgz安装、两种样式×Button-only/full独立typecheck/build/browser；最新tar逐文件等价398文件",
+      "evidence": [
+        {
+          "path": "test-results/packed-consumers/run-PXygRU/report.json",
+          "sha256": "53e4a7c38bff70a08fbd6b85d419328bada8d660789722d949514ad66a935251"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V28",
+      "title": "AI正确选择修改归属",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "六次集中字段间距试验正确归属并保留原始CSS；root补实际安装CLI检查，不冒充agent自己执行",
+      "evidence": [
+        {
+          "path": "scripts/ai-eval/summary.json",
+          "sha256": "4c9ca866b71f28bea8f037369f856cc3b8a280e4795f2f89d7eb996303978a1d"
+        },
+        {
+          "path": "test-results/ai-consumer-diagnostics/report.json",
+          "sha256": "35afc2d3bcb148578b88cd889d77d76dff51d8ab948c8c43ba2e37a17dfb6315"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V29",
+      "title": "诊断模式与旧问题基线",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_REQUIRED_FOR_THIS_FIXTURE",
+      "acceptanceStatus": "PASS",
+      "observed": "实际CLI report/gate退出码、错误保留与并发冲突；31项工具单测含完整扫描集合陈旧判定；新增源码后旧报告保持原字节并显示UNVERIFIED",
+      "evidence": [
+        {
+          "path": "test-results/packed-tooling/run-Rt2tPL/report.json",
+          "sha256": "58f7f4e8c1ec77d183b8ae8f5fac2271a8cabf91194fe2019fd77d405246dbac"
+        }
+      ],
+      "remaining": "",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    },
+    {
+      "id": "V30",
+      "title": "视觉结果必须回到任务判断",
+      "automaticStatus": "PASS",
+      "manualStatus": "NOT_RUN",
+      "acceptanceStatus": "UNVERIFIED",
+      "observed": "工作台/集合/阅读真实任务与失败场景已交付，内部自动走查有证据",
+      "evidence": [
+        {
+          "path": "test-results/task-patterns/report.json",
+          "sha256": "e182d4a9eafa05d78f004010d07edb6c2a80c380f937ed590cfd11b9f68ef6b2"
+        }
+      ],
+      "remaining": "用户已后置视觉定稿；真实参与者任务理解、具体取舍和视觉审阅未执行",
+      "scope": "合成应用/固定组件夹具；不推导生产后端或未测状态"
+    }
+  ],
+  "commonLimitations": [
+    "PASS仅指明确列出的夹具和断言，不表示整个组件、真实业务或所有设备通过。",
+    "真实中文IME、物理触屏、读屏及人工视觉/任务判断未执行。",
+    "V07/V08/V09/V10/V23/V25/V26只证明注入状态/本地应用合同，不证明真实服务端权限、幂等、取消或撤销能力。",
+    "W12固定任务无统一可强制token上限，未测出新资料错误率或工时优势。"
+  ]
+}

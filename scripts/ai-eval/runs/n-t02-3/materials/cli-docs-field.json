@@ -1,0 +1,519 @@
+{
+  "status": "PASS",
+  "installedVersion": "0.3.0",
+  "catalogSchemaVersion": 2,
+  "entry": {
+    "name": "field",
+    "title": "表单项 Field",
+    "description": "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。",
+    "category": "表单",
+    "source": "coss",
+    "import": "@qingye/ui/components/field",
+    "exports": [
+      "Field",
+      "FieldLabel",
+      "FieldDescription",
+      "FieldError",
+      "FieldContent",
+      "FieldTitle",
+      "FieldGroup",
+      "FieldSeparator",
+      "FieldControl",
+      "FieldValidity"
+    ],
+    "docs": "/docs/components/field",
+    "notes": [
+      "没有 children 的 <FieldError /> 跟随 Base UI：字段无效时显示浏览器校验信息或 Form errors 中的同名错误。",
+      "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
+      "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
+      "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
+      "控件不是可接收 id 的原生输入时（如 FileUpload、ToggleGroup），在 FieldLabel 上写 htmlFor、在控件上写同值 id，标签才能正确关联；FieldDescription 会自动进入 aria-describedby。"
+    ],
+    "keywords": [
+      "field",
+      "表单项",
+      "校验",
+      "错误提示",
+      "label",
+      "description"
+    ],
+    "api": [
+      {
+        "name": "Field",
+        "description": "基于 Base UI Field.Root。为内部控件提供 id、aria-describedby 与校验状态。",
+        "props": [
+          {
+            "name": "orientation",
+            "type": "\"vertical\" | \"horizontal\"",
+            "default": "\"vertical\"",
+            "description": "horizontal 让标签与控件并排，用于开关、复选框行。"
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "description": "字段名；在 Form 中用于提交值与匹配 errors。"
+          },
+          {
+            "name": "invalid",
+            "type": "boolean",
+            "description": "外部校验结果（如表单库）；为 true 时控件标记为无效。"
+          },
+          {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "禁用标签与控件。"
+          },
+          {
+            "name": "validate",
+            "type": "(value, formValues) => string | string[] | null",
+            "description": "自定义校验，返回错误信息。"
+          },
+          {
+            "name": "validationMode",
+            "type": "\"onSubmit\" | \"onBlur\" | \"onChange\"",
+            "default": "\"onSubmit\"",
+            "description": "何时校验。"
+          }
+        ]
+      },
+      {
+        "name": "FieldLabel",
+        "description": "标签，自动关联控件；禁用时一起变淡。"
+      },
+      {
+        "name": "FieldDescription",
+        "description": "说明文字，自动加入控件的 aria-describedby。"
+      },
+      {
+        "name": "FieldError",
+        "description": "错误信息，出现时轻微淡入，并加入 aria-describedby。",
+        "props": [
+          {
+            "name": "children",
+            "type": "ReactNode",
+            "description": "有内容时直接显示，由调用方决定何时渲染。"
+          },
+          {
+            "name": "errors",
+            "type": "Array<{ message?: string } | undefined>",
+            "description": "表单库的错误数组；去重，多条时显示为列表。"
+          },
+          {
+            "name": "match",
+            "type": "boolean | keyof ValidityState",
+            "description": "只在某个校验状态下显示，如 \"valueMissing\"、\"typeMismatch\"。"
+          }
+        ]
+      },
+      {
+        "name": "FieldContent",
+        "description": "横向表单项中包住标签与说明的一列。"
+      },
+      {
+        "name": "FieldTitle",
+        "description": "非 <label> 的标题，用于控件自带标签（如 ToggleGroup、选项卡片）的场景。"
+      },
+      {
+        "name": "FieldGroup",
+        "description": "一组表单项的纵向间距容器。"
+      },
+      {
+        "name": "FieldSeparator",
+        "description": "表单项之间的分隔线，可带一段短文字。"
+      },
+      {
+        "name": "FieldControl / FieldValidity",
+        "description": "Base UI 原语：自定义控件与读取校验状态。"
+      }
+    ],
+    "apiStatus": "curated-not-type-resolved",
+    "keyboard": [
+      {
+        "keys": "Tab",
+        "description": "按文档顺序在控件间移动；点击标签聚焦或切换对应控件。"
+      }
+    ],
+    "actualExports": [
+      {
+        "name": "Field",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "FieldPrimitive.Root.Props & {\n  /** `horizontal` places the label beside the control, for switches and checkboxes. */\n  orientation?: FieldOrientation;\n}",
+        "signature": "Field({\n  className,\n  orientation = \"vertical\",\n  ...props\n}: FieldPrimitive.Root.Props & {\n  /** `horizontal` places the label beside the control, for switches and checkboxes. */\n  orientation?: FieldOrientation;\n}): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldContent",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "React.ComponentProps<\"div\">",
+        "signature": "FieldContent({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldControl",
+        "kind": "const",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "signature": "typeof FieldPrimitive.Control",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldDescription",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "FieldPrimitive.Description.Props",
+        "signature": "FieldDescription({\n  className,\n  ...props\n}: FieldPrimitive.Description.Props): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldError",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "FieldErrorProps",
+        "signature": "FieldError({\n  className,\n  children,\n  errors,\n  match,\n  ...props\n}: FieldErrorProps): React.ReactElement | null",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldGroup",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "React.ComponentProps<\"div\">",
+        "signature": "FieldGroup({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldItem",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "FieldPrimitive.Item.Props",
+        "signature": "FieldItem({\n  className,\n  ...props\n}: FieldPrimitive.Item.Props): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldLabel",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "FieldPrimitive.Label.Props",
+        "signature": "FieldLabel({\n  className,\n  ...props\n}: FieldPrimitive.Label.Props): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldLegend",
+        "kind": "function",
+        "owner": "fieldset",
+        "module": "@qingye/ui/components/fieldset",
+        "propsType": "FieldsetPrimitive.Legend.Props & {\n  /** `label` sizes the legend like a field label for compact groups. */\n  variant?: \"legend\" | \"label\";\n}",
+        "signature": "FieldsetLegend({\n  className,\n  variant = \"legend\",\n  ...props\n}: FieldsetPrimitive.Legend.Props & {\n  /** `label` sizes the legend like a field label for compact groups. */\n  variant?: \"legend\" | \"label\";\n}): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED",
+        "aliasOf": "FieldsetLegend"
+      },
+      {
+        "name": "FieldOrientation",
+        "kind": "type",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "signature": "\"vertical\" | \"horizontal\"",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldPrimitive",
+        "kind": "reexport",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "status": "UNVERIFIED",
+        "declarationStatus": "UNVERIFIED",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldSeparator",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "React.ComponentProps<\"div\">",
+        "signature": "FieldSeparator({\n  children,\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldSet",
+        "kind": "function",
+        "owner": "fieldset",
+        "module": "@qingye/ui/components/fieldset",
+        "propsType": "FieldsetPrimitive.Root.Props",
+        "signature": "Fieldset({\n  className,\n  ...props\n}: FieldsetPrimitive.Root.Props): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED",
+        "aliasOf": "Fieldset"
+      },
+      {
+        "name": "FieldTitle",
+        "kind": "function",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "propsType": "React.ComponentProps<\"div\">",
+        "signature": "FieldTitle({\n  className,\n  ...props\n}: React.ComponentProps<\"div\">): React.ReactElement",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      },
+      {
+        "name": "FieldValidity",
+        "kind": "const",
+        "owner": "field",
+        "module": "@qingye/ui/components/field",
+        "signature": "typeof FieldPrimitive.Validity",
+        "status": "PASS",
+        "declarationStatus": "PASS",
+        "typeResolution": "UNVERIFIED"
+      }
+    ],
+    "types": [
+      {
+        "name": "FieldOrientation",
+        "definition": "export type FieldOrientation = \"vertical\" | \"horizontal\";"
+      }
+    ],
+    "usageImports": [
+      {
+        "name": "Field",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldLabel",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldDescription",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldError",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldContent",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldTitle",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldGroup",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldSeparator",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldControl",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      },
+      {
+        "name": "FieldValidity",
+        "import": "@qingye/ui/components/field",
+        "owner": "field",
+        "status": "PASS"
+      }
+    ],
+    "dependencies": {
+      "runtime": [
+        "@base-ui/react",
+        "clsx",
+        "react",
+        "tailwind-merge"
+      ],
+      "optionalPeers": []
+    },
+    "providers": {
+      "exports": [],
+      "guidance": [],
+      "required": [],
+      "status": "UNVERIFIED"
+    },
+    "examples": [
+      {
+        "id": "default",
+        "title": "默认",
+        "source": "apps/docs/src/content/field/demos/01-default.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"默认\", description: \"标签、控件、说明自上而下排列。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>显示名称</FieldLabel>\n      <Input defaultValue=\"林晓\" />\n      <FieldDescription>同事在评论与提及中看到的名字。</FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "85ce3be01c7b113e0b81e725f3886da059719a9ef1adda3a73ae777a0ea8f972"
+      },
+      {
+        "id": "validation",
+        "title": "校验",
+        "source": "apps/docs/src/content/field/demos/02-validation.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = {\n  title: \"校验\",\n  description: \"validationMode=\\\"onBlur\\\" 在离开输入框时校验；match 让每条文案只对应一种错误。试着留空或输入不完整的邮箱。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\" validationMode=\"onBlur\">\n      <FieldLabel>\n        工作邮箱 <span aria-hidden=\"true\" className=\"text-destructive-foreground\">*</span>\n      </FieldLabel>\n      <Input placeholder=\"name@company.com\" required type=\"email\" />\n      <FieldError match=\"valueMissing\">请填写工作邮箱。</FieldError>\n      <FieldError match=\"typeMismatch\">邮箱格式不正确，例如 lin.xiao@company.com。</FieldError>\n    </Field>\n  );\n}\n",
+        "sha256": "e7eb56a1bd5602c2bd4170692fc9e6f43208ee897e20b8ef1ef7500df0c90161"
+      },
+      {
+        "id": "horizontal",
+        "title": "横向",
+        "source": "apps/docs/src/content/field/demos/03-horizontal.tsx",
+        "imports": [
+          "@qingye/ui/components/checkbox",
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/switch"
+        ],
+        "providers": [],
+        "code": "import { Checkbox } from \"@qingye/ui/components/checkbox\";\nimport { Field, FieldContent, FieldDescription, FieldLabel, FieldSeparator } from \"@qingye/ui/components/field\";\nimport { Switch } from \"@qingye/ui/components/switch\";\n\nexport const meta = {\n  title: \"横向\",\n  description: \"orientation=\\\"horizontal\\\" 用于开关与复选框；FieldContent 包住标签和说明，控件与第一行对齐。\",\n};\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full max-w-md flex-col gap-4\">\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel>设备离线提醒</FieldLabel>\n          <FieldDescription>设备超过 10 分钟未上报时，通过短信通知负责人。</FieldDescription>\n        </FieldContent>\n        <Switch defaultChecked />\n      </Field>\n      <FieldSeparator />\n      <Field orientation=\"horizontal\">\n        <FieldContent>\n          <FieldLabel>每周运维报告</FieldLabel>\n          <FieldDescription>每周一 9:00 发送到团队邮箱。</FieldDescription>\n        </FieldContent>\n        <Switch />\n      </Field>\n      <FieldSeparator />\n      <Field orientation=\"horizontal\">\n        <Checkbox defaultChecked />\n        <FieldContent>\n          <FieldLabel>同步到企业微信</FieldLabel>\n          <FieldDescription>工单状态变化时推送到“运维值班”群。</FieldDescription>\n        </FieldContent>\n      </Field>\n      <Field orientation=\"horizontal\">\n        <Checkbox />\n        <FieldLabel>同时抄送给我</FieldLabel>\n      </Field>\n    </div>\n  );\n}\n",
+        "sha256": "02a0f7e4a0edc4e5920e8b0a312b9d030c0c3bc3b98f4f79e6dfa09a6c4eb522"
+      },
+      {
+        "id": "group",
+        "title": "分组与分隔",
+        "source": "apps/docs/src/content/field/demos/04-group.tsx",
+        "imports": [
+          "@qingye/ui/components/button",
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Button } from \"@qingye/ui/components/button\";\nimport { Field, FieldGroup, FieldLabel, FieldSeparator } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"分组与分隔\", description: \"FieldGroup 统一纵向间距；FieldSeparator 可带一段说明文字。\" };\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"max-w-xs\">\n      <Field>\n        <FieldLabel>手机号</FieldLabel>\n        <Input autoComplete=\"tel\" inputMode=\"tel\" placeholder=\"138 0000 0000\" />\n      </Field>\n      <Button>获取验证码</Button>\n      <FieldSeparator>或</FieldSeparator>\n      <Button variant=\"outline\">使用企业微信登录</Button>\n    </FieldGroup>\n  );\n}\n",
+        "sha256": "0460d756f25614c3f94a116f9a742bb90314f4f9acf84cadaab8194451b13c5d"
+      },
+      {
+        "id": "title",
+        "title": "标题",
+        "source": "apps/docs/src/content/field/demos/05-title.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/toggle-group"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldTitle } from \"@qingye/ui/components/field\";\nimport { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from \"@qingye/ui/components/toggle-group\";\n\nexport const meta = {\n  title: \"标题\",\n  description: \"控件不是单个输入框时，用 FieldTitle 作标题并通过 aria-labelledby 关联。\",\n};\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldTitle id=\"delivery-slot\">配送时段</FieldTitle>\n      <ToggleGroup aria-labelledby=\"delivery-slot\" defaultValue={[\"morning\"]} variant=\"outline\">\n        <ToggleGroupItem value=\"morning\">上午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value=\"afternoon\">下午</ToggleGroupItem>\n        <ToggleGroupSeparator />\n        <ToggleGroupItem value=\"evening\">晚间</ToggleGroupItem>\n      </ToggleGroup>\n      <FieldDescription>晚间时段仅限杭州主城区。</FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "bba6bbd8a4cae337d545ed6b54467f4c923a866b86bbb8d5ff17c85742f2f5e1"
+      },
+      {
+        "id": "errors",
+        "title": "表单库错误",
+        "source": "apps/docs/src/content/field/demos/06-errors.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input",
+          "react"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldError, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\nimport { useState } from \"react\";\n\nexport const meta = {\n  title: \"表单库错误\",\n  description: \"errors 接收 react-hook-form、TanStack Form 等给出的错误数组：自动去重，多条时显示为列表。\",\n};\n\nfunction check(value: string) {\n  return [\n    value.length < 8 ? { message: \"至少 8 位\" } : undefined,\n    /\\d/.test(value) ? undefined : { message: \"至少包含 1 个数字\" },\n    /[A-Za-z]/.test(value) ? undefined : { message: \"至少包含 1 个字母\" },\n  ].filter(Boolean);\n}\n\nexport default function Demo() {\n  const [value, setValue] = useState(\"2026\");\n  const errors = check(value);\n  return (\n    <Field className=\"w-full max-w-xs\" invalid={errors.length > 0}>\n      <FieldLabel>设备管理密码</FieldLabel>\n      <Input onChange={(event) => setValue(event.target.value)} value={value} />\n      <FieldError errors={errors} />\n    </Field>\n  );\n}\n",
+        "sha256": "bfed608938ea4228d7f3abc6970215505ba93bfb92252fe093e6632f7a417c99"
+      },
+      {
+        "id": "disabled",
+        "title": "禁用",
+        "source": "apps/docs/src/content/field/demos/07-disabled.tsx",
+        "imports": [
+          "@qingye/ui/components/field",
+          "@qingye/ui/components/input"
+        ],
+        "providers": [],
+        "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye/ui/components/field\";\nimport { Input } from \"@qingye/ui/components/input\";\n\nexport const meta = { title: \"禁用\", description: \"Field 的 disabled 同时作用于标签与控件。\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-xs\" disabled>\n      <FieldLabel>组织 ID</FieldLabel>\n      <Input defaultValue=\"org_7f3a92c1\" />\n      <FieldDescription>创建后不可修改。</FieldDescription>\n    </Field>\n  );\n}\n",
+        "sha256": "4156ba2e5b359eff351e8bf34f9f558d852af041a5d4ae7c08258fa45b6d935b"
+      }
+    ],
+    "design": {
+      "methods": [
+        "名实相符",
+        "布白有用",
+        "进退相承"
+      ],
+      "whenToUse": [
+        "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。"
+      ],
+      "avoid": [
+        "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+      ],
+      "composition": [
+        "Field：基于 Base UI Field.Root。为内部控件提供 id、aria-describedby 与校验状态。",
+        "FieldLabel：标签，自动关联控件；禁用时一起变淡。",
+        "FieldDescription：说明文字，自动加入控件的 aria-describedby。",
+        "FieldError：错误信息，出现时轻微淡入，并加入 aria-describedby。",
+        "FieldContent：横向表单项中包住标签与说明的一列。",
+        "FieldTitle：非 <label> 的标题，用于控件自带标签（如 ToggleGroup、选项卡片）的场景。",
+        "FieldGroup：一组表单项的纵向间距容器。",
+        "FieldSeparator：表单项之间的分隔线，可带一段短文字。",
+        "FieldControl / FieldValidity：Base UI 原语：自定义控件与读取校验状态。"
+      ],
+      "stateOwner": {
+        "library": [
+          "当前导出和属性定义的基础交互、可访问语义与样式。"
+        ],
+        "application": [
+          "对象、草稿、校验业务规则、版本与保存结果。"
+        ]
+      },
+      "responsive": [
+        "窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。"
+      ],
+      "customization": [
+        "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+        "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+      ]
+    },
+    "sourceFacts": {
+      "file": "packages/ui/src/components/field.tsx",
+      "sha256": "6262d323b28d23f0bc25297be977606f38c47784a0196181b38578793a3d112d",
+      "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
+    }
+  },
+  "limitation": "Only published facts of the installed version; documented provider guidance does not prove every runtime prerequisite."
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "group": "new",
+  "task": "t02",
+  "sources": {
+    "guide": "design.md",
+    "catalog": "packages/ui/catalog.json",
+    "cli": "packages/tooling/dist/cli.js"
+  },
+  "cliProject": "/Volumes/SUNSANG 1/Codex/qingye-ui/scripts/ai-eval/materials/new/_cli-project",
+  "hashes": {
+    "guide": "8a2ddfe3eb83653f9ff1c8d64d8b7628fcd52cf68ef58d44ae28c2dfff9839b1",
+    "catalog": "496303c2fc3b100ad05134cc76eafa1c0d6bc91f6e30d34a624e13468133cea7",
+    "targetPackage": "76d633370573f42ef6a653fea3c86f472f8540265aa593a743e4f82e207bd712",
+    "targetSource": "3917aa87202a547497226491e732082892e3d00f17b50194a5c770868addb991"
+  },
+  "targetVersion": "0.3.0",
+  "sourceFacts": [
+    {
+      "name": "field",
+      "fingerprint": null
+    },
+    {
+      "name": "input",
+      "fingerprint": null
+    }
+  ],
+  "extractedAt": "2026-10-02T06:09:26.330Z"
+}

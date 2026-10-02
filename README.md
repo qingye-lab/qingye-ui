@@ -1,9 +1,13 @@
 # 青野 UI · Qingye UI
 
-一套可在多个 React 项目中复用的组件库：基于 [Base UI](https://base-ui.com) 的可访问原语，采用 [coss ui](https://coss.com/ui)（MIT）的组件设计，配合三层设计令牌、浅色 / 深色双主题和库级动效规范。
+器用为本，关系为法，合宜为度。Qingye UI 将这些立场落实在 React 组件、任务组合与项目主题中：名称说明真实动作，相关内容便于比较，失败后保留继续工作的条件。
+
+组件使用 [Base UI](https://base-ui.com) 原语，部分改编自 [coss ui](https://coss.com/ui)（MIT），也包含本地实现。设计方法决定组件取舍，来源不构成永久结构限制。理念与 AI 使用约定见 [design.md](./design.md)。
 
 - `packages/ui` — 组件库 `@qingye/ui`
-- `apps/docs` — 文档站与组件示例
+- `apps/docs` — 公开理念、组件文档与六种可运行任务模式
+- `packages/tooling` — 独立于 UI 运行时的项目查询、AST 诊断和主题工具
+- `apps/studio` — 显式登记项目的本地 Theme Studio
 
 ## 使用
 
@@ -41,7 +45,7 @@ export function App() {
 }
 ```
 
-按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。
+按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。 如果包管理器关闭自动安装 peer，使用 Recharts 还需显式安装其要求的 `react-is`（与 React 主版本兼容）。
 
 完整说明见文档站（`pnpm dev` 后访问 http://localhost:5180）。
 
@@ -66,7 +70,9 @@ export function App() {
 
 ## 组件组合演示
 
-文档站首页展示经营概览、青野邮箱、媒体资源与组件预览，也可以打开独立演示页面。每个 demo 用完整页面展示组件的组合、状态和交互；按钮、输入、菜单、表格、图表与弹窗等控件均复用 `@qingye/ui`。
+文档站以可操作任务承载设计方法。`/docs/patterns` 包含资料编辑、集合比较、主从详情、修改审核、上传处理队列和阅读。失败、未知结果、范围变化和返回路径是示例的一部分；这些使用合成资料，不证明真实后端协议。
+
+原有完整页面示例继续保留，公共控件复用 `@qingye/ui`：
 
 - `/examples` — 示例入口
 - `/examples/dashboard` — 经营概览：指标、图表、筛选、表格与编辑
@@ -80,10 +86,16 @@ export function App() {
 ```sh
 pnpm install
 pnpm dev                              # 文档站
-pnpm --filter @qingye/ui test        # 单元测试
+pnpm test                            # 库、工具与本地服务测试
+pnpm typecheck                       # 工作区类型检查
+pnpm studio:build                    # 本地 Studio 构建
 pnpm --filter @qingye/ui build       # 构建组件库
 node scripts/shot.mjs <component>     # 浅色/深色 × 桌面/手机截图
 ```
+
+工具命令与显式项目配置见 [Tooling README](./packages/tooling/README.md)，本地预览、写入和版本边界见 [Studio README](./apps/studio/README.md)。工具默认报告问题；没有把退出码 0 等同于全部诊断通过。
+
+发布包带有同源生成的 `catalog.json`、`design.md`、按版本区分的 `ai/` 资料与薄层 `registry/` 模板。组件基础实现留在共享包，项目只拥有主题、组合与应用状态。
 
 组件规范见 [STANDARDS.md](./STANDARDS.md)，协作约定见 [AGENTS.md](./AGENTS.md)。
 
