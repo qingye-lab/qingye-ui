@@ -2,79 +2,47 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "卡片 Card",
-  description: "把一组相关的内容和操作收进一个带边框的表面，例如设置项、统计指标或表单。CardFrame 在外层再包一圈浅底外框，用来收纳多张卡片或卡片样式的表格。",
+  titleEn: "Card",
+  description: "为可独立识别的对象建立内容边界。",
+  descriptionEn: "Bound an independently identifiable object.",
   category: "布局",
-  source: "coss",
-  exports: ["Card", "CardHeader", "CardTitle", "CardDescription", "CardAction", "CardPanel", "CardFooter"],
-  keywords: ["card", "卡片", "面板", "panel", "容器", "card frame", "外框", "统计卡片", "设置卡片"],
+  layer: "pattern",
+  source: "local",
+  exports: ["Card"],
+  keywords: ["card", "卡片", "独立对象", "panel", "面板"],
   api: [
     {
       name: "Card",
-      description: "根元素，圆角 2xl、半透明边框与一线内高光。内边距由 --card-spacing 控制，移动端自动收紧。",
+      description: "面板表面、边界与圆角。不生成标题、内容槽、内边距或排列方式。",
+      descriptionEn: "Panel surface, boundary and radius. It supplies no title, content slots, padding or layout.",
       props: [
-        { name: "size", type: '"default" | "sm"', default: '"default"', description: "sm 收紧内边距与区块间距，适合仪表盘和侧栏。" },
-        { name: "render", type: "ReactElement | (props) => ReactElement", description: "替换渲染元素，例如 <section> 或 <a>。" },
+        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "组合为 article、section 或原生链接，完整保留事件与 ref。", descriptionEn: "Compose an article, section or native link while retaining handlers and refs." },
+        { name: "className / style", type: "string / CSSProperties", description: "消费端按对象关系组合布局与内缘；外部类最后合并。", descriptionEn: "Compose layout and content inset for this object. Caller classes are merged last." },
+        { name: "原生属性", type: "ComponentPropsWithRef<\"div\">", description: "透传 id、aria-*、data-*、事件与 ref。", descriptionEn: "Forward id, aria-*, data-*, events and ref." },
       ],
     },
-    {
-      name: "CardHeader",
-      description: "标题区。包含 CardAction 时自动变成两列，操作贴右上角。加 className=\"border-b\" 得到带分隔线的头部。",
-    },
-    { name: "CardTitle", description: "标题，字重 600。" },
-    { name: "CardDescription", description: "标题下方的辅助说明，弱化颜色。" },
-    { name: "CardAction", description: "放在 CardHeader 内的操作区，跨标题与说明两行，靠右对齐。" },
-    {
-      name: "CardPanel",
-      description: "主体内容。紧跟无分隔线的头部或底部时自动去掉相邻一侧的内边距；别名 CardContent。",
-    },
-    {
-      name: "CardFooter",
-      description: "底部操作区，横向排列。加 className=\"border-t\" 得到带分隔线的底部。",
-    },
-    {
-      name: "CardFrame",
-      description: "浅底外框，可容纳 CardFrameHeader、多张 Card 或 <Table variant=\"card\">，内部卡片会去掉阴影并贴合外框圆角。",
-      props: [{ name: "render", type: "ReactElement | (props) => ReactElement", description: "替换渲染元素。" }],
-    },
-    { name: "CardFrameHeader", description: "外框的标题区，包含 CardFrameAction 时自动两列。" },
-    { name: "CardFrameTitle", description: "外框标题。" },
-    { name: "CardFrameDescription", description: "外框说明文字。" },
-    { name: "CardFrameAction", description: "外框标题区右侧的操作。" },
-    { name: "CardFrameFooter", description: "外框底部，通常放汇总或次要说明。" },
   ],
+  decisions: "对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。",
+  decisionsEn: "Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons.",
   notes: [
-    "卡片标题用 CardTitle 只是视觉层级；需要文档大纲时用 render 渲染为 <h2>、<h3>：<CardTitle render={<h3 />} />。",
-    "数字指标加 numeric，让并排卡片中的数字对齐、不随数值抖动。",
-    "整张卡片可点击时，用 render={<a href />} 渲染为链接，不要在卡片内再嵌套其他可交互元素。",
-    "不要层层嵌套卡片；需要把多张卡片归为一组时用 CardFrame。",
+    "标题用 Heading 或真实 h2/h3；内容与动作由 Stack、Inline 和原生结构组合。",
+    "size、CardHeader/Title/Description/Action/Panel/Content/Footer 与 CardFrame* 已移除。",
+    "只有同一轮廓等距内缩时才计算内圆角；独立子控件保留自身圆角。",
+    "密度、方向与语言由容器继承；Card 不写入这些标记。",
+  ],
+  notesEn: [
+    "Use Heading or a real h2/h3, and compose content and actions with Stack, Inline and native structure.",
+    "size, CardHeader/Title/Description/Action/Panel/Content/Footer and CardFrame* have been removed.",
+    "Calculate an inner radius only for an equally inset contour of the same surface. Independent controls keep their own radii.",
+    "Density, direction and language belong to the containing context. Card sets no such markers.",
   ],
   design: {
-    "methods": [
-      "相成相制",
-      "布白有用"
-    ],
-    "whenToUse": [
-      "一个对象或任务需要独立边界，并且标题、内容与动作属于同一范围。"
-    ],
-    "avoid": [
-      "每段正文套卡片；整卡链接里嵌套按钮；把 CardTitle 的视觉大小当作标题语义。"
-    ],
-    "composition": [
-      "按需组合 Header/Panel/Footer；CardTitle render 为真实标题。整卡导航与卡内独立动作分别设计。"
-    ],
-    "stateOwner": {
-      "library": [
-        "表面、部位关系、尺寸角色与 render。"
-      ],
-      "application": [
-        "对象范围、标题级别、动作权限、草稿与异步结果。"
-      ]
-    },
-    "responsive": [
-      "长标题和动作共同占位时允许动作换行；卡片内部表格保留二维比较。"
-    ],
-    "customization": [
-      "size 控制内容密度；表面来自集中主题，CardFrame 只用于需要共同外框的一组对象。"
-    ]
+    methods: ["相成相制", "布白有用"],
+    whenToUse: ["对象需要独立识别、排序或操作，其边界参与任务关系。"],
+    avoid: ["去掉边框关系不变的内容；整卡链接嵌套交互；用卡片代替所有分节。"],
+    composition: ["仅消费 Card 边界；Heading、Stack、Inline、原生表单与列表负责内容关系。"],
+    stateOwner: { library: ["面板边界、表面、圆角与 render 透传。"], application: ["对象身份、标题级别、布局、草稿与异步事实。"] },
+    responsive: ["消费端允许长标题和动作换行；比较任务保留必要维度。"],
+    customization: ["通过集中主题调整面板角色，内容布局由组合提供。"],
   },
 } satisfies ComponentMeta;

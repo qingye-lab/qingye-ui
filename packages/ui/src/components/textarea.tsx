@@ -1,60 +1,78 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/textarea.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
-import { Field as FieldPrimitive } from "@base-ui/react/field";
-import { mergeProps } from "@base-ui/react/merge-props";
-import type * as React from "react";
+import { Field as TextareaPrimitive } from "@base-ui/react/field";
+import * as React from "react";
+import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
-export type TextareaProps = React.ComponentPropsWithoutRef<"textarea"> &
-  React.RefAttributes<HTMLTextAreaElement> & {
-    size?: "sm" | "default" | "lg" | number;
-    unstyled?: boolean;
+export type TextareaSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type TextareaProps = Omit<React.ComponentPropsWithRef<"textarea">, "className" | "style"> &
+  Pick<TextareaPrimitive.Control.Props, "className" | "style" | "render" | "onValueChange"> & {
+    size?: TextareaSize;
   };
 
-export function Textarea({
-  className,
-  size = "default",
-  unstyled = false,
-  ref,
-  ...props
-}: TextareaProps): React.ReactElement {
-  return (
-    <span
-      className={
-        cn(
-          !unstyled &&
-            "relative inline-flex w-full rounded-control border border-input bg-card not-dark:bg-clip-padding text-field-input-mobile shadow-control ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-[background-color,border-color,box-shadow] not-has-disabled:not-has-focus-visible:not-has-aria-invalid:hover:border-border-strong before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] has-focus-visible:has-aria-invalid:border-destructive/64 has-focus-visible:has-aria-invalid:ring-destructive/16 has-aria-invalid:border-destructive/36 has-focus-visible:border-ring has-disabled:opacity-64 has-[:disabled,:focus-visible,[aria-invalid]]:shadow-none has-focus-visible:ring-[length:var(--qy-focus-input-width)] not-has-disabled:has-not-focus-visible:not-has-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] sm:text-field-input dark:bg-input/32 dark:has-aria-invalid:ring-destructive/24 dark:not-has-disabled:has-not-focus-visible:not-has-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)]",
-          className,
-        ) || undefined
-      }
-      data-size={size}
-      data-slot="textarea-control"
-    >
-      <FieldPrimitive.Control
-        ref={ref}
-        value={props.value}
-        defaultValue={props.defaultValue}
-        disabled={props.disabled}
-        id={props.id}
-        name={props.name}
-        render={(defaultProps: React.ComponentProps<"textarea">) => (
-          <textarea
-            className={cn(
-              "field-sizing-content min-h-17.5 w-full rounded-[inherit] px-[calc(calc(var(--qy-space-1)*3.5)-1px)] py-[calc(calc(var(--qy-space-1)*1.5)-1px)] text-foreground outline-none placeholder:text-muted-foreground max-sm:min-h-20.5",
-              size === "sm" &&
-                "min-h-16.5 px-[calc(calc(var(--qy-space-1)*2.5)-1px)] py-[calc(var(--qy-space-1)-1px)] max-sm:min-h-19.5",
-              size === "lg" &&
-                "min-h-18.5 py-[calc(var(--qy-space-2)-1px)] max-sm:min-h-21.5",
-            )}
-            data-slot="textarea"
-            {...mergeProps(defaultProps, props)}
-          />
-        )}
-      />
-    </span>
-  );
+const textProfiles: Record<TextareaSize, string> = {
+  xs: "text-control-xs-mobile sm:text-control-xs",
+  sm: "text-control-sm-mobile sm:text-control-sm",
+  md: "text-control-md-mobile sm:text-control-md",
+  lg: "text-control-lg-mobile sm:text-control-lg",
+  xl: "text-control-xl-mobile sm:text-control-xl",
+};
+
+/** 多行编辑；rows 是起始容量，invalid 由 aria-invalid 或所在 Field 声明。 */
+export function Textarea({ size = "md", rows = 3, className, style, render, ref, ...props }: TextareaProps) {
+  const { messages } = useUILocale();
+  const nodeRef = React.useRef<HTMLTextAreaElement | null>(null);
+  const [focused, setFocused] = React.useState(false);
+  const [readOnly, setReadOnly] = React.useState(Boolean(props.readOnly));
+  const setRef = React.useCallback((node: HTMLElement | null) => {
+    nodeRef.current = node as HTMLTextAreaElement | null;
+    if (node) setReadOnly(Boolean((node as HTMLTextAreaElement).readOnly));
+    const cleanup = typeof ref === "function" ? ref(node as HTMLTextAreaElement | null) : undefined;
+    if (ref && typeof ref !== "function") ref.current = node as HTMLTextAreaElement | null;
+    return () => {
+      nodeRef.current = null;
+      if (typeof cleanup === "function") cleanup();
+      else if (typeof ref === "function") ref(null);
+      else if (ref) ref.current = null;
+    };
+  }, [ref]);
+  React.useEffect(() => { setReadOnly(Boolean(nodeRef.current?.readOnly)); });
+  const realState = (state: TextareaPrimitive.Control.State) => ({ ...state, focused });
+  const variables = {
+    "--qy-textarea-height": `var(--qy-control-${size})`,
+    "--qy-textarea-height-narrow": `var(--qy-control-${size}-narrow)`,
+    "--qy-textarea-leading": `var(--qy-text-control-${size}-leading)`,
+    "--qy-textarea-leading-narrow": `var(--qy-text-control-${size}-mobile-leading)`,
+    "--qy-textarea-padding": `var(--qy-control-${size}-padding-bordered)`,
+    "--qy-textarea-rows": rows,
+    "--qy-textarea-radius": size === "xs" || size === "sm" ? `var(--qy-radius-${size})` : "var(--qy-radius-control)",
+  } as React.CSSProperties;
+  // Field.Control 的公开类型以 input 为默认标签。仅此适配点转接原生 textarea
+  // 属性；公开事件/ref 仍是 HTMLTextAreaElement，原语承担注册、名称和说明关联。
+  const { onFocus, onBlur, ...nativeProps } = props;
+  const controlProps = nativeProps as unknown as TextareaPrimitive.Control.Props;
+  return <div data-slot="textarea-control" data-size={size} className="min-w-0 w-full">
+    <TextareaPrimitive.Control
+      data-slot="textarea"
+      {...controlProps}
+      ref={setRef}
+      {...{ rows }}
+      onFocus={(event) => { setFocused(true); onFocus?.(event as unknown as React.FocusEvent<HTMLTextAreaElement>); }}
+      onBlur={(event) => { setFocused(false); onBlur?.(event as unknown as React.FocusEvent<HTMLTextAreaElement>); }}
+      render={typeof render === "function" ? (elementProps, state) => render(elementProps, realState(state)) : render ?? <textarea />}
+      className={(state) => cn(
+        "peer touch-target block w-full min-w-0 resize-y [field-sizing:content] rounded-(--qy-textarea-radius) border border-input bg-card text-foreground outline-none placeholder:text-muted-foreground dark:bg-surface-inset",
+        "px-(--qy-textarea-padding) py-[calc((var(--qy-textarea-height-narrow)-var(--qy-textarea-leading-narrow)-2px)/2)] sm:py-[calc((var(--qy-textarea-height)-var(--qy-textarea-leading)-2px)/2)]",
+        "min-h-[calc(var(--qy-textarea-rows)*var(--qy-textarea-leading-narrow)+var(--qy-textarea-height-narrow)-var(--qy-textarea-leading-narrow))] sm:min-h-[calc(var(--qy-textarea-rows)*var(--qy-textarea-leading)+var(--qy-textarea-height)-var(--qy-textarea-leading))] pointer-coarse:min-h-[max(var(--qy-touch-target),calc(var(--qy-textarea-rows)*var(--qy-textarea-leading-narrow)+var(--qy-textarea-height-narrow)-var(--qy-textarea-leading-narrow)))] sm:pointer-coarse:min-h-[max(var(--qy-touch-target),calc(var(--qy-textarea-rows)*var(--qy-textarea-leading)+var(--qy-textarea-height)-var(--qy-textarea-leading)))]",
+        "transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring disabled:opacity-64 [&[readonly]]:border-dashed not-disabled:not-read-only:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground",
+        textProfiles[size],
+        typeof className === "function" ? className(realState(state)) : className,
+      )}
+      style={(state) => ({ ...variables, ...(typeof style === "function" ? style(realState(state)) : style) })}
+    />
+    {readOnly ? <span data-slot="textarea-readonly" aria-hidden="true" className="mt-(--qy-field-gap) block text-caption text-muted-foreground">{messages.readOnly}</span> : null}
+  </div>;
 }
 
-export { FieldPrimitive };
+export { TextareaPrimitive };

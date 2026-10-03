@@ -1,59 +1,32 @@
 import type { ComponentMeta } from "@/lib/types";
-
 export default {
-  title: "字段组 Fieldset",
-  description: "把一组相关的表单项放在同一个标题下，例如“发票信息”“通知方式”；可整体禁用。",
-  category: "表单",
-  source: "coss",
-  exports: ["Fieldset", "FieldsetLegend", "FieldSet", "FieldLegend"],
-  keywords: ["fieldset", "legend", "字段组", "分组"],
+  title: "字段组 Fieldset", titleEn: "Fieldset",
+  description: "为一组相关字段提供共同名称与禁用范围。", descriptionEn: "Give related fields a shared name and disabled scope.",
+  category: "表单", layer: "primitive", source: "local",
+  exports: ["Fieldset", "FieldsetLegend"], keywords: ["fieldset", "legend", "字段组", "共同问题"],
+  decisions: "共同名称说明范围；每个字段仍由自己的标签命名。只有位置关系时用 FieldGroup。",
+  decisionsEn: "The shared name identifies the scope; every field keeps its own label. Use FieldGroup for placement alone.",
   design: {
-    "methods": [
-      "相成相制",
-      "布白有用",
-      "名实相符"
-    ],
-    "whenToUse": [
-      "给相关字段或选项提供共同问题与作用范围。"
-    ],
-    "avoid": [
-      "只有布局关系时不要额外制造语义分组；每个字段仍需自身名称。"
-    ],
-    "composition": [
-      "Legend 定义共同问题，Field 或 Radio/CheckboxGroup 承载组内独立控件。"
-    ],
-    "stateOwner": {
-      "library": [
-        "原生 fieldset、legend 关联与禁用传播。"
-      ],
-      "application": [
-        "分组问题、成员数据和操作范围。"
-      ]
-    },
-    "responsive": [
-      "组容器允许收缩，长 legend 可换行；组内字段按任务保留空间。"
-    ],
-    "customization": [
-      "variant=label 适合紧凑选项组，不以缩小命中区换密度。"
-    ]
+    methods: ["名实相符", "相成相制", "布白有用"],
+    whenToUse: ["一组字段或选项需要共同名称。"],
+    avoid: ["仅为排版创建语义分组；共同名称代替单项名称。"],
+    composition: ["Legend 命名组；Field 命名单值；原生控件同样保留字段组语义。"],
+    stateOwner: {library: ["Base UI 分组命名、原生字段组与禁用传播。"], application: ["共同问题、成员和值。"]},
+    responsive: ["组与长 legend 可收缩换行；字段间消费 field-group-gap。"],
+    customization: ["无额外围合；variant 改共同名称的文字档，render 可替换 legend 元素。"],
   },
   api: [
-    {
-      name: "Fieldset",
-      description: "基于 Base UI Fieldset，渲染 <fieldset>，子项纵向排列、间距 16px。别名 FieldSet。",
-      props: [{ name: "disabled", type: "boolean", default: "false", description: "禁用组内所有表单项。" }],
-    },
-    {
-      name: "FieldsetLegend",
-      description:
-        "组标题，自动通过 aria-labelledby 关联到 <fieldset>，读屏进入组内控件前会先读出它。Base UI 渲染的是 div 而非原生 <legend>（原生 legend 无法随内容自动布局），语义由 aria-labelledby 提供。别名 FieldLegend。",
-      props: [
-        { name: "variant", type: '"legend" | "label"', default: '"legend"', description: "legend 为分节标题；label 与字段标签同级，用于一组复选框或单选。" },
-      ],
-    },
+    {name: "Fieldset", description: "Base UI Root，默认 fieldset；使用字段组间隔。", descriptionEn: "Base UI Root, rendered as fieldset with field-group spacing.", props: [
+      {name: "disabled", type: "boolean", default: "false", description: "禁用整组控件。", descriptionEn: "Disables controls throughout the group."},
+      {name: "className / style / render / ref", type: "Base UI Fieldset.Root props", description: "透传原生属性；样式支持状态函数。", descriptionEn: "Native props are forwarded; styles support state functions."},
+    ]},
+    {name: "FieldsetLegend", description: "默认真实 legend；Base UI 同时维护 aria-labelledby。", descriptionEn: "A real legend by default; Base UI also maintains aria-labelledby.", props: [
+      {name: "variant", type: '"legend" | "label"', default: '"legend"', description: "分节名称用 heading 档，共同问题用 label 档。具体文字值是预设。", descriptionEn: "Heading profile for a section name, label profile for a shared question. Text values are presets."},
+      {name: "render", type: "Base UI render", description: "可替换元素，命名关联仍保留。", descriptionEn: "Replaces the element while retaining the naming association."},
+    ]},
+    {name: "FieldsetPrimitive", description: "Base UI 公共组合出口。", descriptionEn: "Base UI public composition outlet."},
   ],
-  notes: [
-    "读屏进入组内控件时会先读出组标题，标签可以写得更短，例如“城市”而不是“收货城市”。",
-    "一组复选框、单选按钮共用一个问题时，用 variant=\"label\" 的 legend 作为问题。",
-  ],
+  keyboard: [{keys: "Tab / Shift+Tab", description: "按文档顺序访问组内控件；禁用控件不进入焦点顺序。", descriptionEn: "Visit controls in document order; disabled controls leave the tab order."}],
+  notes: ["Fieldset 不绘制额外卡片或边框。共同名称不能代替每个输入的名称。", "FieldSet / FieldLegend 别名已删除，统一用 Fieldset / FieldsetLegend。"],
+  notesEn: ["Fieldset adds no card or border. A shared name does not replace individual input names.", "FieldSet / FieldLegend aliases have been removed. Use Fieldset / FieldsetLegend."],
 } satisfies ComponentMeta;

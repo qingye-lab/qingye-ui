@@ -2,68 +2,77 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "按钮 Button",
-  description: "触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。",
+  titleEn: "Button",
+  description: "触发有明确对象与后果的动作；状态由调用方持有。",
+  descriptionEn: "Trigger a named action with a clear object and consequence. The caller owns its state.",
+  decisions: "等待、进行中、结果未知期间保留焦点并阻止重复触发。结果未知需要调用方先核实；危险动作必须与可见后果共处，色调不代表授权。",
+  decisionsEn: "Waiting, in-progress, and unknown states retain focus and block repeated activation. The caller must verify an unknown result. Danger actions require a visible consequence; tone never grants permission.",
   design: {
-    "methods": [
-      "名实相符",
-      "相成相制",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "执行命名明确的动作或提交表单；任务重点可以是保存、停止或保护当前工作。"
-    ],
-    "avoid": [
-      "不按固定四级套动作；loading 只表示正在等待，不能当成保存成功。"
-    ],
-    "composition": [
-      "提交用 type=submit；真实地址用 a / Link + buttonVariants；危险动作按后果决定是否接 AlertDialog。"
-    ],
-    "stateOwner": {
-      "library": [
-        "提供原生按钮、键盘焦点、loading 的忙碌与禁用状态，保持动作名称和内容宽度。"
-      ],
-      "application": [
-        "决定对象、操作范围、请求结果、重试和取消后台任务；加载结束与业务成功分别处理。"
-      ]
+    methods: ["名实相符", "相成相制", "进退相承", "随境取度"],
+    whenToUse: ["执行有对象与后果的命令、提交表单或停止当前任务。"],
+    avoid: ["导航用原生链接；不把等待结束当作成功，不把未知当作失败或可立即重试。"],
+    composition: ["危险动作使用 ButtonProtection，或由自身 aria-describedby 关联已有的非空后果说明；确认条件、权限与远端核实属于应用。"],
+    stateOwner: {
+      library: ["原生与非原生命令语义、焦点、激活保护、动作名称及 locale 状态表达。"],
+      application: ["对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。"],
     },
-    "responsive": [
-      "小尺寸通过粗指针命中区扩大可点范围；长动作名称优先简化对象表达，保留明确的动词。"
-    ],
-    "customization": [
-      "variant 决定视觉显著程度，size 决定控件占位；公共控制尺寸和触摸目标分别调整。"
-    ]
+    responsive: ["尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。"],
+    customization: ["variant、tone、size 与 shape 分别选择呈现、后果、尺寸与内容形态。"],
   },
   category: "通用",
-  source: "coss",
-  exports: ["Button", "buttonVariants"],
-  keywords: ["button", "按钮", "操作", "提交", "loading"],
+  layer: "primitive",
+  source: "local",
+  exports: ["Button", "ButtonProtection", "ButtonPrimitive", "buttonVariants"],
+  keywords: ["button", "按钮", "操作", "提交", "waiting", "unknown", "危险动作"],
   api: [
     {
       name: "Button",
-      description: "渲染原生 <button>（默认 type=\"button\"）；通过 render 可更换命令载体。真正导航使用原生 a / Link 配合 buttonVariants，以保留链接语义。透传所有原生属性。",
+      description: "默认渲染 type=button 的原生按钮，透传原生属性、ref、事件和派生 data-slot。状态不会自行推进。",
+      descriptionEn: "Renders a native type=button control by default and forwards native attributes, refs, events, and derived data-slot values. It never advances its own operation state.",
       props: [
-        { name: "variant", type: '"default" | "outline" | "secondary" | "ghost" | "link" | "destructive" | "destructive-outline"', default: '"default"', description: "视觉样式。" },
-        { name: "size", type: '"xs" | "sm" | "default" | "lg" | "xl" | "icon-xs" | "icon-sm" | "icon" | "icon-lg" | "icon-xl"', default: '"default"', description: "尺寸；icon-* 为仅图标的正方形按钮，与同名文字尺寸等高。" },
-        { name: "loading", type: "boolean", default: "false", description: "显示居中的 Spinner、设置 aria-busy 并禁用，文字透明以保留宽度。" },
-        { name: "disabled", type: "boolean", default: "false", description: "禁用；不透明度降至 64% 并屏蔽指针事件。" },
-        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "替换命令的渲染元素；不会自动把按钮语义改成链接语义。" },
-        { name: "nativeButton", type: "boolean", default: "true", description: "命令载体不是原生 <button> 时设为 false；仍保留按钮 role，导航应使用原生链接。" },
+        { name: "variant", type: '"solid" | "bordered" | "quiet"', default: '"solid"', description: "填充、边框或无边框的表达，不表示权限。", descriptionEn: "Filled, bordered, or borderless presentation; it does not express permission." },
+        { name: "tone", type: '"neutral" | "danger"', default: '"neutral"', description: "动作后果；danger 使用 ButtonProtection，或 aria-describedby 关联文档中已有的非空说明。开发环境挂载后校验；生产环境不抛错。", descriptionEn: "The action's consequence. Use ButtonProtection or aria-describedby linked to existing nonblank text. Development validation runs after mounting; production does not throw." },
+        { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "按所在位置选尺寸，与强调独立。", descriptionEn: "Choose by position, independently of emphasis." },
+        { name: "shape", type: '"label" | "icon"', default: '"label"', description: "图标是形态；icon 必须有 aria-label 或 aria-labelledby。", descriptionEn: "Icon is a shape, not another size. Supply aria-label or aria-labelledby for it." },
+        { name: "state", type: '"idle" | "waiting" | "in-progress" | "unknown" | "failed"', default: '"idle"', description: "调用方持有的事实。等待与进行中设置 aria-busy；结果未知单独呈现。前三种未完成状态阻止重复触发，failed 可由调用方提供恢复操作。", descriptionEn: "Caller-owned facts. Waiting and in-progress set aria-busy; unknown remains distinct. Those three states block repeat activation. The caller may provide recovery after confirmed failure." },
+        { name: "disabled", type: "boolean", default: "false", description: "动作不可用，退出 Tab 顺序；与未完成事实可以共存。", descriptionEn: "Makes the action unavailable and removes it from the tab order. It may coexist with an unfinished state." },
+        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "Base UI 组合入口，可渲染其他命令载体或触发器；保留真实语义。", descriptionEn: "The Base UI composition entry for another command carrier or trigger. Preserve its actual semantics." },
+        { name: "nativeButton", type: "boolean", default: "true", description: "非 button 命令载体设为 false，仍使用按钮语义；导航使用原生 a + buttonVariants。", descriptionEn: "Set false for a non-button command carrier; it retains button semantics. Use a native anchor with buttonVariants for navigation." },
       ],
     },
     {
-      name: "buttonVariants",
-      description: "cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。",
+      name: "ButtonProtection",
+      description: "可见后果与动作成组，并关联 aria-describedby；已有说明可由 Button 直接关联。容器的 consequence 必须非空，不替应用确认、判断权限或执行请求。",
+      descriptionEn: "Groups a visible consequence with actions and links aria-describedby. A Button can directly reference an existing description instead. The container requires nonblank consequence text; it does not confirm, authorize, or run a request.",
+      props: [
+        { name: "consequence", type: "string", description: "必填非空文字，说明当前对象、版本与变更的后果。", descriptionEn: "Required nonblank text describing the consequence for the current object, version, and change." },
+        { name: "children", type: "ReactNode", description: "相关动作与必要退出入口。", descriptionEn: "Related actions and any required exit." },
+      ],
     },
+    { name: "buttonVariants", description: "与 Button 同一套尺寸、形态、强调和色调，用于保留原生链接等元素语义的组合。", descriptionEn: "The same size, shape, emphasis, and tone styles for compositions that retain native element semantics, such as links." },
+    { name: "ButtonPrimitive", description: "Base UI 无障碍原语；应用优先使用 Button 的状态与保护契约。", descriptionEn: "The Base UI accessibility primitive. Prefer Button's state and protection contract in applications." },
   ],
   keyboard: [
-    { keys: "Enter / Space", description: "触发按钮。" },
-    { keys: "Tab / Shift+Tab", description: "移入、移出焦点；键盘聚焦时显示焦点环。" },
+    { keys: "Enter / Space", description: "触发可用动作；等待、进行中或结果未知时不触发。", descriptionEn: "Activate an available action. Waiting, in-progress, and unknown actions do not activate." },
+    { keys: "Tab / Shift+Tab", description: "移入或移出焦点；未完成状态保留位置，disabled 退出 Tab 顺序。", descriptionEn: "Move focus. Unfinished states retain their position; disabled actions leave the tab order." },
+    { keys: "ArrowUp / ArrowDown", description: "组合菜单或列表触发器按原语操作；未完成状态阻止展开。", descriptionEn: "Follow the primitive's menu or list trigger behavior. Unfinished states block opening." },
   ],
   notes: [
-    "仅图标的按钮必须提供 aria-label，图标加 aria-hidden。",
-    "危险操作用 destructive；不可撤销时配合 AlertDialog 二次确认。",
-    "loading 与 disabled 一样会禁用按钮，并保留原有宽度；需要显示进度文字时用 Spinner + disabled 自行组合。",
-    "导航用原生 a / Link 配合 buttonVariants；Button render + nativeButton={false} 仍属于按钮命令语义，不要依靠它自动获得 link role。",
-    "触屏设备上小于 44px 的按钮会自动扩大点击区域，外观不变。",
+    "动作可访问名称保持不变；状态通过独立 description 与 live region 表达。文字形态同时显示状态文字，图标形态使用不同状态图形。",
+    "危险色调不代表授权。后果必须真实说明当前对象；确认条件与核实结果由调用方负责。",
+    "danger 的 DOM 关联在挂载后的 effect 校验：同次挂载的相邻说明可被找到；SSR 不校验，开发环境提交 DOM 后才报错。后续异步才出现的说明应先挂载再启用 danger。生产环境不抛错；文本存在不等于后果正确或可见，调用方仍需核对。",
+    "结果未知默认阻止重复执行；调用方应提供独立核实入口，收到可靠事实后再更新 state。",
+    "导航使用原生 a / Link + buttonVariants；nativeButton=false 的 Button 仍是命令语义。",
+    "小控件通过 touch-target 扩大命中区到本库 44px 目标，密度与外观尺寸不改变这一目标。",
+    "实心入口与父表面对比不足时，消费组合通过 className 添加可辨认边界，并使用同档 padding-bordered；同底色边界示例展示这一入口，组件不读取 DOM 推断承载面。",
+  ],
+  notesEn: [
+    "The action's accessible name stays unchanged. Status uses a separate description and live region. Label buttons also display status text; icon buttons use distinct status glyphs.",
+    "Danger tone grants no permission. Describe the consequence for the actual object; the caller owns confirmation conditions and verification.",
+    "The danger association is checked in an effect after mounting. Adjacent text mounted in the same commit is available. SSR skips validation; development throws after DOM commit. Mount asynchronous descriptions before enabling danger. Production does not throw. Text presence alone does not prove a correct or visible consequence; the caller must verify it.",
+    "Unknown results block repeated execution by default. Provide a separate verification action and update state only after reliable facts arrive.",
+    "Use a native anchor or router Link with buttonVariants for navigation. A nativeButton=false Button remains a command.",
+    "touch-target expands small controls to the library's 44px touch target without changing visual dimensions or shrinking it with density.",
+    "When a solid action lacks contrast with its parent, the consumer adds a visible boundary through className and uses the matching padding-bordered profile. The same-surface example demonstrates this entry; the component does not inspect the DOM to infer its surface.",
   ],
 } satisfies ComponentMeta;

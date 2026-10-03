@@ -1,45 +1,34 @@
-import type { Theme } from "@qingye/ui/components/theme-provider";
-import { RadioGroupPrimitive, RadioPrimitive } from "@qingye/ui/components/radio-group";
-import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
+import { Inline, Stack } from "@qingye/ui/components/layout";
 import { useTheme } from "@qingye/ui/components/theme-provider";
+import { Text } from "@qingye/ui/components/typography";
 import { useUILocale } from "@qingye/ui/locale";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { useId } from "react";
 
-export const meta = {
-  title: "设置页中的分段选择",
-  description: "设置页里直接平铺三个选项；下方显示用户的选择与实际生效的主题。",
-};
-
-const item = segmentedControlItemVariants({ state: "checked" });
+export const meta = { title: "外观设置", titleEn: "Appearance settings" };
 
 export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <RadioGroupPrimitive
-        aria-label={messages.theme}
-        className={segmentedControlRootClassName}
-        onValueChange={(value) => setTheme(value as Theme)}
-        value={theme}
-      >
-        <RadioPrimitive.Root className={item} value="light">
-          <SunIcon />
-          {messages.lightTheme}
-        </RadioPrimitive.Root>
-        <RadioPrimitive.Root className={item} value="dark">
-          <MoonIcon />
-          {messages.darkTheme}
-        </RadioPrimitive.Root>
-        <RadioPrimitive.Root className={item} value="system">
-          <MonitorIcon />
-          {messages.systemTheme}
-        </RadioPrimitive.Root>
-      </RadioGroupPrimitive>
-      <p className="text-muted-foreground text-xs">
-        theme = <code className="font-mono text-foreground">{theme}</code>，resolvedTheme ={" "}
-        <code className="font-mono text-foreground">{resolvedTheme}</code>
-      </p>
-    </div>
-  );
+  const name = useId();
+  const options = [
+    { value: "light", label: messages.lightTheme, icon: SunIcon },
+    { value: "dark", label: messages.darkTheme, icon: MoonIcon },
+    { value: "system", label: messages.systemTheme, icon: MonitorIcon },
+  ] as const;
+  return <Stack gap="field">
+    <fieldset className="min-w-0">
+      <legend className="mb-(--qy-field-gap) text-label">{messages.theme}</legend>
+      <Inline gap="actions">
+        {options.map(({ value, label, icon: Icon }) => <label key={value}>
+          <Inline gap="field" render={<span />}>
+            <input type="radio" className="focus-visible:outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset" name={name} value={value} checked={theme === value} onChange={() => setTheme(value)} />
+            <Icon aria-hidden="true" className="size-(--qy-control-md-icon)" />
+            <Text render={<span />}>{label}</Text>
+          </Inline>
+        </label>)}
+      </Inline>
+    </fieldset>
+    <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
+  </Stack>;
 }

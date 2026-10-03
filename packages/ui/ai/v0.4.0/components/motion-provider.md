@@ -5,7 +5,7 @@ Import: @qingye/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
 
-记录用户最近一次使用的输入方式，写到 <html data-ui-input>：键盘操作时组件的过渡立即完成，鼠标与触屏时保留细微的动效。在应用根部挂载一次。
+在应用根部记录输入方式，键盘操作跳过过渡。
 
 ## Use and ownership
 - 统一让键盘操作即时完成，并让指针操作保留必要过渡。
@@ -30,7 +30,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Dependencies and providers
 - Runtime: react
 - Optional peers: none recorded
-- 系统开启“减少动态效果”时，motion.css 只保留透明度与颜色的过渡，去掉位移、缩放与高度动画；这一层不依赖 MotionProvider。
+- 只在应用根部挂载一次；示例复用本站根部的 MotionProvider。
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
@@ -45,16 +45,13 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/motion-provider/demos/01-modality.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { Kbd } from "@qingye/ui/components/kbd";
-import { MotionProvider } from "@qingye/ui/components/motion-provider";
+import { Inline, Stack } from "@qingye/ui/components/layout";
+import { Text } from "@qingye/ui/components/typography";
 import { useEffect, useState } from "react";
 
-export const meta = {
-  title: "输入方式",
-  description: "移动鼠标或按 Tab 键，观察 <html data-ui-input> 的变化。实际应用中 MotionProvider 放在根部。",
-};
+export const meta = { title: "输入方式", titleEn: "Input modality" };
 
-function useInputModality() {
+export default function Demo() {
   const [input, setInput] = useState<string | null>(null);
   useEffect(() => {
     const root = document.documentElement;
@@ -64,68 +61,33 @@ function useInputModality() {
     observer.observe(root, { attributeFilter: ["data-ui-input"] });
     return () => observer.disconnect();
   }, []);
-  return input;
-}
 
-function Readout() {
-  const input = useInputModality();
   return (
-    <p className="text-muted-foreground text-sm">
-      data-ui-input = <code className="font-mono text-foreground">{input ?? "—"}</code>
-    </p>
-  );
-}
-
-export default function Demo() {
-  return (
-    <MotionProvider>
-      <div className="flex flex-col items-center gap-4">
-        <Readout />
-        <div className="flex gap-2">
-          <Button variant="outline">保存草稿</Button>
-          <Button>发布</Button>
-        </div>
-        <p className="text-muted-foreground text-xs">
-          按 <Kbd>Tab</Kbd> 切换焦点时焦点环立即出现；用鼠标点击按钮可以看到 0.97 的按压缩放。
-        </p>
-      </div>
-    </MotionProvider>
+    <Stack gap="panel">
+      <Inline gap="actions"><Button>保存</Button><Button variant="bordered">取消</Button></Inline>
+      <Text step="support" className="text-muted-foreground" role="status">输入方式：{input === "keyboard" ? "键盘" : input === "pointer" ? "指针" : "待检测"}</Text>
+    </Stack>
   );
 }
 ```
 
-### 组合控件遵循策略
+### 即时变化
 Source: apps/docs/src/content/motion-provider/demos/02-custom.tsx
 ```tsx
-import { MotionProvider } from "@qingye/ui/components/motion-provider";
 import { Button } from "@qingye/ui/components/button";
+import { Inline } from "@qingye/ui/components/layout";
+import { useState } from "react";
 
-export const meta = {
-  title: "组合控件遵循策略",
-  description: "Button 已带 qy-pressable 与 data-slot。自定义内容复用控件后，按压与键盘策略继续由共享实现处理。",
-};
-
-const colors = [
-  { name: "青", value: "bg-teal-500" },
-  { name: "靛", value: "bg-indigo-500" },
-  { name: "琥珀", value: "bg-amber-500" },
-];
+export const meta = { title: "即时变化", titleEn: "Instant changes" };
 
 export default function Demo() {
+  const [normal, setNormal] = useState(false);
+  const [instant, setInstant] = useState(false);
   return (
-    <MotionProvider>
-      <div aria-label="标签颜色" className="flex gap-3" role="group">
-        {colors.map((color) => (
-          <Button
-            key={color.name}
-            variant="outline"
-          >
-            <span aria-hidden="true" className={`size-3 rounded-full ${color.value}`} />
-            {color.name}
-          </Button>
-        ))}
-      </div>
-    </MotionProvider>
+    <Inline gap="actions">
+      <Button variant="bordered" aria-pressed={normal} onClick={() => setNormal(!normal)}>常规</Button>
+      <Button variant="bordered" data-instant aria-pressed={instant} onClick={() => setInstant(!instant)}>即时</Button>
+    </Inline>
   );
 }
 ```

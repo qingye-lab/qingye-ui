@@ -1,20 +1,21 @@
+import { useState } from "react";
+import { Button } from "@qingye/ui/components/button";
 import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = {
-  title: "校验",
-  description: "validationMode=\"onBlur\" 在离开输入框时校验；match 让每条文案只对应一种错误。试着留空或输入不完整的邮箱。",
-};
+export const meta = { title: "校验", titleEn: "Validation" };
 
 export default function Demo() {
+  const [value, setValue] = useState("");
+  const [error, setError] = useState<string>();
   return (
-    <Field className="w-full max-w-xs" validationMode="onBlur">
-      <FieldLabel>
-        工作邮箱 <span aria-hidden="true" className="text-destructive-foreground">*</span>
-      </FieldLabel>
-      <Input placeholder="name@company.com" required type="email" />
-      <FieldError match="valueMissing">请填写工作邮箱。</FieldError>
-      <FieldError match="typeMismatch">邮箱格式不正确，例如 lin.xiao@company.com。</FieldError>
-    </Field>
+    <form noValidate className="flex w-full max-w-xs flex-col gap-(--qy-field-group-gap)" onSubmit={(event) => {
+      event.preventDefault();
+      const input = event.currentTarget.elements.namedItem("email") as HTMLInputElement;
+      setError(input.validity.valueMissing ? "请填写邮箱。" : input.validity.typeMismatch ? "邮箱地址不完整。" : undefined);
+    }}>
+      <Field invalid={Boolean(error)}><FieldLabel>邮箱</FieldLabel><Input name="email" required type="email" value={value} onValueChange={setValue} autoComplete="email" /><FieldError>{error}</FieldError></Field>
+      <Button type="submit">校验</Button>
+    </form>
   );
 }

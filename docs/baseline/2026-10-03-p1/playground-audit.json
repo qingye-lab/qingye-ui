@@ -1,0 +1,609 @@
+{
+  "base": "http://127.0.0.1:5181",
+  "slugs": [
+    "button",
+    "input",
+    "card",
+    "popover"
+  ],
+  "variants": [
+    "light-desktop",
+    "dark-desktop",
+    "light-mobile",
+    "dark-mobile"
+  ],
+  "lifecycle": {
+    "nodePid": 8298,
+    "executablePath": "/Users/tangyuan/Library/Caches/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+    "version": "153.0.8010.12",
+    "processes": [
+      {
+        "pid": 8316,
+        "parent": 8298,
+        "profile": "/var/folders/jp/tkxkqws50fsdwv0bh7_9gg8w0000gn/T/playwright_chromiumdev_profile-KvTKC6"
+      }
+    ],
+    "descendantPids": [
+      8316,
+      8318,
+      8319,
+      8474
+    ],
+    "closed": true,
+    "disconnectedAt": "2026-10-03T05:21:25.467Z",
+    "exitCheck": {
+      "closed": true,
+      "elapsedMs": 26,
+      "remainingProcesses": [],
+      "exitedAwaitingReap": []
+    }
+  },
+  "elapsedMs": 14015,
+  "measurements": [
+    {
+      "slug": "button",
+      "variant": "light-desktop",
+      "demos": 11,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 749.9480000240505,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(-0.000326725, -1, 1, -0.000326725, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        },
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 749.9480000240505,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(-0.000326725, -1, 1, -0.000326725, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        }
+      ],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "input",
+      "variant": "light-desktop",
+      "demos": 10,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "card",
+      "variant": "light-desktop",
+      "demos": 8,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "popover",
+      "variant": "light-desktop",
+      "demos": 5,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "button",
+      "variant": "dark-desktop",
+      "demos": 11,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 766.6319999387265,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(0.104312, -0.994545, 0.994545, 0.104312, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        },
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 766.6319999387265,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(0.104312, -0.994545, 0.994545, 0.104312, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        }
+      ],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "input",
+      "variant": "dark-desktop",
+      "demos": 10,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "card",
+      "variant": "dark-desktop",
+      "demos": 8,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "popover",
+      "variant": "dark-desktop",
+      "demos": 5,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "button",
+      "variant": "light-mobile",
+      "demos": 11,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 749.9389999340848,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(-0.000383275, -1, 1, -0.000383275, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        },
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 749.9389999340848,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(-0.000383275, -1, 1, -0.000383275, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        }
+      ],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "input",
+      "variant": "light-mobile",
+      "demos": 10,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "card",
+      "variant": "light-mobile",
+      "demos": 8,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "popover",
+      "variant": "light-mobile",
+      "demos": 5,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "button",
+      "variant": "dark-mobile",
+      "demos": 11,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 766.5760000254736,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(0.103962, -0.994581, 0.994581, 0.103962, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        },
+        {
+          "element": "svg",
+          "slot": "button-state-indicator",
+          "animationName": "spin",
+          "currentTime": 766.5760000254736,
+          "timing": {
+            "delay": 0,
+            "direction": "normal",
+            "duration": 1000,
+            "easing": "linear",
+            "endDelay": 0,
+            "fill": "none",
+            "iterationStart": 0,
+            "iterations": "Infinity"
+          },
+          "keyframes": [
+            {
+              "offset": 0,
+              "easing": "linear",
+              "composite": "replace",
+              "transform": "none",
+              "computedOffset": 0
+            },
+            {
+              "offset": 1,
+              "easing": "linear",
+              "composite": "auto",
+              "transform": "rotate(360deg)",
+              "computedOffset": 1
+            }
+          ],
+          "transformBefore": "matrix(0.103962, -0.994581, 0.994581, 0.103962, 0, 0)",
+          "rotateBefore": "none",
+          "transformMeasured": "matrix(1, 0, 0, 1, 0, 0)",
+          "rotateMeasured": "none"
+        }
+      ],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "input",
+      "variant": "dark-mobile",
+      "demos": 10,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "card",
+      "variant": "dark-mobile",
+      "demos": 8,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    },
+    {
+      "slug": "popover",
+      "variant": "dark-mobile",
+      "demos": 5,
+      "overflow": 0,
+      "empty": [],
+      "over": [],
+      "tolerance": 2,
+      "dpr": 1,
+      "normalized": {
+        "displayContents": 0,
+        "zeroSizeVisible": 0
+      },
+      "normalizedAnimations": [],
+      "invalidDeclarations": [],
+      "declaredAllowances": []
+    }
+  ],
+  "problems": []
+}

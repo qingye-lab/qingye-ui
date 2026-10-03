@@ -7,11 +7,13 @@ import { DocFooter } from "./pager";
 import { SearchProvider } from "./search";
 import { SiteHeader } from "./site-header";
 import { TableOfContents } from "./toc";
+import { DocsBreadcrumbs } from "./docs-breadcrumbs";
+import { routeVisitKey } from "@/lib/paths";
 
 function SkipLink() {
   return (
     <a
-      className="sr-only fixed start-3 top-3 z-50 rounded-lg border bg-popover px-3 py-2 font-medium text-sm shadow-lg/5 focus-visible:not-sr-only focus-visible:ring-2 focus-visible:ring-ring"
+      className="sr-only fixed start-3 top-3 z-50 rounded-lg border bg-popover px-3 py-2 font-medium text-body shadow-lg/5 focus-visible:not-sr-only focus-visible:ring-2 focus-visible:ring-ring"
       href="#main"
       onClick={(event) => {
         event.preventDefault();
@@ -55,8 +57,9 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
       </aside>
       <div className="flex min-w-0 flex-1 gap-12 lg:ps-10 xl:ps-12">
         <main className="min-w-0 flex-1 pt-8 pb-16 outline-none sm:pt-10" id="main" tabIndex={-1}>
-          <div className="mx-auto w-full max-w-[48rem]" data-route-enter key={pathname} ref={article}>
+          <div className="mx-auto w-full max-w-[48rem]" data-route-enter key={routeVisitKey(pathname)} ref={article}>
             {/* No Suspense here: the shell's boundary lets navigation keep the old page until the new one is ready. */}
+            <DocsBreadcrumbs />
             {children ?? <Outlet />}
             <DocFooter path={pathname} />
           </div>

@@ -1,0 +1,70 @@
+{
+  "final_generation_run": 3,
+  "generation_log": "> @qingye/ui@0.4.0 gen:catalog /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui\n> node scripts/gen-catalog.mjs\n\ncatalog.json: 88 components; 6 patterns; AI and Registry generated",
+  "stability": {
+    "checked": "2026-10-03T00:43:10.718196+00:00",
+    "elapsed_seconds": 99.857445,
+    "changed_meta": [],
+    "status_unchanged": true
+  },
+  "meta_files": 88,
+  "git_status_content_entries": 475,
+  "verification": {
+    "ui_typecheck": "PASS",
+    "ui_test": {
+      "status": "PASS",
+      "files": 61,
+      "tests": 483
+    },
+    "docs_typecheck": "PASS",
+    "docs_test": {
+      "status": "PASS",
+      "tests": 52
+    },
+    "final_guidance_tests": {
+      "status": "PASS",
+      "files": 2,
+      "tests": 11
+    }
+  },
+  "ai_only": {
+    "status": "PASS",
+    "isolation": "only package/ai extracted from npm pack --ignore-scripts; no parent guide, catalog or source",
+    "bans": {
+      "count": 8,
+      "chain": [
+        "SKILL.md",
+        "style.md#设计契约"
+      ]
+    },
+    "philosophy": {
+      "methods": 6,
+      "chain": [
+        "SKILL.md",
+        "design-philosophy.md"
+      ]
+    },
+    "components": {
+      "count": 88,
+      "example_chain": [
+        "SKILL.md",
+        "v0.4.0/llms.txt",
+        "v0.4.0/components/button.md#use-and-ownership"
+      ]
+    },
+    "patterns": {
+      "count": 6,
+      "example_chain": [
+        "SKILL.md",
+        "v0.4.0/llms.txt",
+        "v0.4.0/patterns/read.md#设计判断"
+      ]
+    },
+    "outside_ai": {
+      "../../design.md": "the complete public guide remains in the package parent; none of the four checked routes needs it"
+    },
+    "limits": "asset reachability and contents verified; backend protocols, browser appearance, and actual agent design choices were not evaluated"
+  },
+  "pack_command": "npm pack --ignore-scripts --json --pack-destination /tmp/qingye-w5",
+  "packed_ai_files_matching_worktree": 99
+}

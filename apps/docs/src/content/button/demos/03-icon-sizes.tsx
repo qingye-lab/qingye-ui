@@ -1,29 +1,14 @@
 import { Button } from "@qingye/ui/components/button";
 import { PlusIcon } from "lucide-react";
 
-export const meta = {
-  title: "仅图标",
-  description: "icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。",
-};
+export const meta = { title: "图标形态", titleEn: "Icon shape" };
 
 export default function Demo() {
-  return (
-    <>
-      <Button aria-label="新建" size="icon-xs" variant="outline">
+  return <>
+    {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+      <Button aria-label="新建设备" key={size} shape="icon" size={size} variant="quiet">
         <PlusIcon aria-hidden="true" />
       </Button>
-      <Button aria-label="新建" size="icon-sm" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon-lg" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon-xl" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-    </>
-  );
+    ))}
+  </>;
 }

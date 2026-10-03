@@ -1,8 +1,13 @@
-import { componentPath, GUIDES, OVERVIEW, splitTitle } from "./nav";
+import { componentPath, GUIDES, OVERVIEW } from "./nav";
 import { components } from "./registry";
+import { localizedMeta } from "./localized-meta";
+import { localePath, routeIdentity, type DocsLocale } from "./paths";
+import { componentLabel } from "./nav";
 
 export interface SearchEntry {
-  /** Route path; also the item's identity. */
+  /** Language-neutral content identity; value is the navigable localized URL. */
+  id: string;
+  /** Navigable URL in the selected language; id remains the content identity. */
   value: string;
   /** What the input shows when the entry is chosen. */
   label: string;
@@ -13,25 +18,26 @@ export interface SearchEntry {
   haystack: { strong: string[]; weak: string[] };
 }
 
-export function searchEntries(): SearchEntry[] {
+export function searchEntries(locale: DocsLocale = "zh"): SearchEntry[] {
   const guides: SearchEntry[] = [...GUIDES, { ...OVERVIEW, keywords: ["components", "全部", "列表", "overview"] }].map((page) => ({
-    value: page.path,
-    label: page.title,
-    title: page.title,
+    id: routeIdentity(page.path),
+    value: localePath(page.path, locale),
+    label: localizedMeta(page, locale).title,
+    title: localizedMeta(page, locale).title,
     group: "文档",
     meta: "指南",
-    haystack: { strong: [page.title, ...(page.keywords ?? [])], weak: [page.description] },
+    haystack: { strong: [localizedMeta(page, locale).title, ...(page.keywords ?? [])], weak: [localizedMeta(page, locale).description] },
   }));
   const items: SearchEntry[] = components.map((entry) => {
-    const { zh, en } = splitTitle(entry.title);
+    const meta = localizedMeta(entry, locale);
     return {
-      value: componentPath(entry.slug),
-      label: entry.title,
-      title: zh,
-      ...(en ? { hint: en } : {}),
+      id: componentPath(entry.slug),
+      value: componentPath(entry.slug, locale),
+      label: meta.title,
+      ...componentLabel(entry, locale),
       group: "组件",
       meta: entry.category,
-      haystack: { strong: [entry.title, entry.slug, entry.slug.replace(/-/g, " "), ...(entry.keywords ?? [])], weak: [entry.description, ...entry.exports] },
+      haystack: { strong: [meta.title, entry.slug, entry.slug.replace(/-/g, " "), ...(entry.keywords ?? [])], weak: [meta.description, ...entry.exports] },
     };
   });
   return [...guides, ...items];
@@ -44,7 +50,7 @@ export function score(entry: SearchEntry, query: string): number {
   const terms = norm(query).split(" ").filter(Boolean);
   if (!terms.length) return 1;
   // The entry's own identity (slug / English name) outranks a keyword that merely matches.
-  const identity = entry.value.split("/").pop() ?? "";
+  const identity = entry.id.split("/").pop() ?? "";
   let total = identity === norm(query).replace(/\s+/g, "-") ? 50 : identity.startsWith(terms[0]!) ? 15 : 0;
   for (const term of terms) {
     let best = 0;

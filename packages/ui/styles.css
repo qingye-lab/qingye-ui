@@ -25,6 +25,25 @@
     outline-color: color-mix(in srgb, var(--qy-ring) 50%, transparent);
   }
 
+  /*
+   * 基础层 §15：焦点信号不得只存在于一个会被系统剥夺的通道里。
+   *
+   * 本库把焦点画成 box-shadow（外环或内描边），而强制颜色模式会移除
+   * box-shadow 并强制系统色。此时按钮的 border-width 可能是 0、边框色又
+   * 与背景同色，焦点就完全消失 —— 键盘用户看不到位置。
+   *
+   * box-shadow 在此不可用，outline 是仍然可绘制的通道，且系统会强制它的
+   * 颜色，因此不必也不应该自行声明颜色。组件已经声明 `outline-none`，
+   * 那条工具类位于 utilities 层，层序胜过选择器特异性，所以这里必须用
+   * !important 才能恢复焦点：这是唯一为了满足可访问底线而越过常规层序的地方。
+   */
+  @media (forced-colors: active) {
+    :focus-visible {
+      outline: 2px solid !important;
+      outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important;
+    }
+  }
+
   body {
     background-color: var(--qy-background);
     color: var(--qy-foreground);

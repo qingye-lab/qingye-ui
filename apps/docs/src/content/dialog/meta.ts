@@ -1,100 +1,44 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "对话框 Dialog",
-  description: "在当前页面之上打开一个模态窗口，用于填写表单、查看详情或完成一个独立的小任务。需要用户二次确认的危险操作改用 AlertDialog。",
-  design: {
-    "methods": [
-      "随境取度",
-      "展开有据",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "在当前对象上完成确有必要独立聚焦的小任务，完成或退出后能合理返回。"
-    ],
-    "avoid": [
-      "不要把每个结果都变成模态；关闭窗口不等于撤销已保存动作或已取消后台请求。"
-    ],
-    "composition": [
-      "Header 标识对象，Panel 承载工作，Footer 承接保存与退出；从 Menu 打开时保留外部 Dialog owner。"
-    ],
-    "stateOwner": {
-      "library": [
-        "提供名称关联、焦点限制与返回、关闭原因、滚动正文及内置关闭入口的空间。"
-      ],
-      "application": [
-        "控制未保存内容、异步结果、错误恢复与关闭拦截；业务完成后才更新结果并决定退出。"
-      ]
-    },
-    "responsive": [
-      "贴底模式保留可见退出与安全区，长正文在 Panel 滚动；标题不能被关闭按钮覆盖。"
-    ],
-    "customization": [
-      "按任务选择底部贴合与 Footer 边界；showCloseButton 关闭时必须有明确替代退出。"
-    ]
-  },
-  category: "浮层",
-  source: "coss",
-  exports: [
-    "Dialog",
-    "DialogTrigger",
-    "DialogPopup",
-    "DialogHeader",
-    "DialogTitle",
-    "DialogDescription",
-    "DialogPanel",
-    "DialogFooter",
-    "DialogClose",
-  ],
-  keywords: ["dialog", "modal", "对话框", "弹窗", "模态框"],
+  title: "对话框 Dialog", titleEn: "Dialog",
+  description: "接管整个工作面，完成当前编辑或决定后返回。", descriptionEn: "Take over the work surface for an edit or decision, then return.",
+  category: "浮层", layer: "primitive", source: "local",
+  exports: ["Dialog", "DialogTrigger", "DialogPopup", "DialogHeader", "DialogTitle", "DialogDescription", "DialogPanel", "DialogFooter", "DialogClose"],
+  keywords: ["dialog", "modal", "对话框", "阻断", "编辑"],
+  decisions: "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
+  decisionsEn: "Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.",
   api: [
-    {
-      name: "Dialog",
-      description: "根组件，管理打开状态。",
-      props: [
-        { name: "open / defaultOpen", type: "boolean", default: "false", description: "受控 / 非受控的打开状态。" },
-        { name: "onOpenChange", type: "(open, details) => void", description: "打开状态变化时调用；details.reason 可区分 Esc、点击遮罩等来源。" },
-        { name: "modal", type: 'boolean | "trap-focus"', default: "true", description: "模态时锁定页面滚动并把焦点限制在对话框内。" },
-        { name: "disablePointerDismissal", type: "boolean", default: "false", description: "禁止点击遮罩关闭，适合填写中的表单。" },
-        { name: "handle", type: "DialogCreateHandle()", description: "把对话框与外部触发器关联，例如从菜单项打开。" },
-      ],
-    },
-    { name: "DialogTrigger", description: "打开对话框的按钮；用 render 渲染为 Button。" },
-    {
-      name: "DialogPopup",
-      description: "对话框本体，自带遮罩、视口与右上角关闭按钮。别名 DialogContent。",
-      props: [
-        { name: "showCloseButton", type: "boolean", default: "true", description: "显示右上角关闭按钮。" },
-        { name: "bottomStickOnMobile", type: "boolean", default: "true", description: "窄屏时贴底显示，便于单手操作。" },
-        { name: "closeProps", type: "DialogClose props", description: "透传给内置关闭按钮。" },
-        { name: "initialFocus / finalFocus", type: "RefObject | boolean | fn", description: "打开时聚焦的元素 / 关闭后焦点返回的元素，默认分别为首个可聚焦元素与触发器。" },
-        { name: "portalProps", type: "DialogPortal props", description: "例如 container，指定挂载节点。" },
-      ],
-    },
-    { name: "DialogHeader", description: "标题区，包含 DialogTitle 与 DialogDescription。" },
-    { name: "DialogTitle", description: "标题，自动作为对话框的可访问名称。" },
-    { name: "DialogDescription", description: "补充说明，自动关联为 aria-describedby。" },
-    {
-      name: "DialogPanel",
-      description: "正文区；内容超出时在此区域内滚动，头部与底部保持固定。",
-      props: [{ name: "scrollFade", type: "boolean", default: "true", description: "滚动边缘显示渐隐遮罩。" }],
-    },
-    {
-      name: "DialogFooter",
-      description: "操作区；窄屏时按钮纵向排列，主按钮在上。",
-      props: [{ name: "variant", type: '"default" | "bare"', default: '"default"', description: "default 带分隔线与底色；bare 无背景。" }],
-    },
-    { name: "DialogClose", description: "关闭对话框的按钮。" },
+    { name: "Dialog", description: "固定完整阻断模式，保留原语的受控、非受控与共享触发入口。", descriptionEn: "Always fully modal, retaining controlled, uncontrolled and shared-trigger state.", props: [
+      { name: "open / defaultOpen", type: "boolean", default: "false", description: "应用控制状态 / 初始展开状态。", descriptionEn: "Controlled state / initial uncontrolled state." },
+      { name: "onOpenChange", type: "(open, details) => void", description: "收到打开/关闭请求及原因；不表示提交或取消业务。", descriptionEn: "Receive state requests and reasons, without implying business submission or cancellation." },
+      { name: "handle / triggerId / defaultTriggerId", type: "DialogPrimitive.Root.Props", description: "关联共享、受控或初始展开的触发者。", descriptionEn: "Associate shared, controlled or initially open triggers." },
+      { name: "disablePointerDismissal", type: "boolean", default: "false", description: "应用确需阻止点遮罩关闭时启用，仍须保留明确退出。", descriptionEn: "Prevent backdrop dismissal when required, keeping an explicit exit." },
+    ] },
+    { name: "DialogPopup", description: "组合 Portal、遮罩与视口，内容固有宽度受视口约束；不提供尺寸变体。", descriptionEn: "Compose a portal, backdrop and viewport with content-driven width and no size variants.", props: [
+      { name: "initialFocus", type: "true | RefObject<HTMLElement | null> | (interaction) => HTMLElement | true | null", default: "true", description: "默认首个控件；触摸进入面板。可指定字段、标题或面板；不支持 false。", descriptionEn: "First control by default, or the panel on touch. A field, heading or panel can be specified; false is unsupported." },
+      { name: "finalFocus", type: "true | RefObject<HTMLElement | null> | (interaction) => HTMLElement | true | null", default: "true", description: "默认触发者；触发者会被移除时指定可聚焦上级，不能返回 false。", descriptionEn: "Return to the trigger by default. Provide a focusable parent if it disappears; false is unsupported." },
+      { name: "portalProps / backdropProps / viewportProps", type: "DialogPrimitive.Portal.Props / Backdrop.Props / Viewport.Props", description: "容器、ref、样式、事件与 render 透传；局部语言、密度、方向需明确 Portal 容器。", descriptionEn: "Forward containers, refs, styling, events and render. Set the portal container for local language, density or direction." },
+      { name: "render / ref / className / style", type: "DialogPrimitive.Popup.Props", description: "覆盖呈现与组合，className 支持原语状态函数。", descriptionEn: "Compose or override presentation; className supports primitive state functions." },
+    ] },
+    { name: "DialogTitle / DialogDescription", description: "原语建立可访问名称与说明的关联；说明不是重复标题。", descriptionEn: "Primitive-managed accessible name and description; avoid repeating the title." },
+    { name: "DialogTrigger / DialogClose", description: "默认复用 Button，支持 render/ref/事件；Close 缺少 children 时读取 locale.close。", descriptionEn: "Use Button by default, with render/ref/events. An empty Close reads locale.close." },
+    { name: "DialogHeader / DialogPanel / DialogFooter", description: "名称、工作内容、动作的分组关系。支持 useRender 组合；不产生另一层围合。", descriptionEn: "Group names, working content and actions, with useRender composition and no extra enclosure." },
+    { name: "DialogCreateHandle / DialogPrimitive", description: "类型化共享触发 handle 与所用 Base UI 原语命名空间。", descriptionEn: "Typed shared-trigger handle and the Base UI primitive namespace." },
   ],
   keyboard: [
-    { keys: "Esc", description: "关闭当前（最上层）对话框，焦点回到触发器。" },
-    { keys: "Tab / Shift + Tab", description: "在对话框内循环移动焦点。" },
-    { keys: "Enter / Space", description: "在触发器上打开对话框。" },
+    { keys: "Enter / Space", description: "从触发者进入对话框。", descriptionEn: "Open from the trigger." },
+    { keys: "Tab / Shift+Tab", description: "在当前最上层对话框内循环。", descriptionEn: "Cycle within the topmost dialog." },
+    { keys: "Esc", description: "关闭当前层并返回触发者或 finalFocus。", descriptionEn: "Close this layer and return to its trigger or finalFocus." },
   ],
-  notes: [
-    "每个对话框都要有 DialogTitle；没有可见标题时，用 aria-label 提供名称。",
-    "表单放在 <Form className=\"contents\"> 中包住 DialogPanel 与 DialogFooter，提交按钮才能触发提交。",
-    "有未保存内容时，在 onOpenChange 中拦截关闭并用 AlertDialog 确认。",
-    "嵌套对话框会自动让父级缩小后退，不要叠加超过两层。",
-  ],
+  notes: ["不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。", "草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。", "危险动作复用可见非空后果的 aria-describedby 或 ButtonProtection。", "无触发者的程序打开也须指定有意义的 finalFocus。", "没有 z-index 预设；与高层级宿主共处的遮挡风险尚未验证。"],
+  notesEn: ["Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.", "The application owns drafts. Name closing, discarding, saving and undo separately.", "Associate danger actions with visible nonempty consequences using aria-describedby or ButtonProtection.", "Programmatic opening without a trigger needs a meaningful finalFocus target.", "No z-index preset is applied. Occlusion by high-layer hosts remains unverified."],
+  design: {
+    methods: ["展开有据", "相成相制", "名实相符", "进退相承"],
+    whenToUse: ["需要停下主线才能完成的编辑或决定。"], avoid: ["可就地完成的高频编辑。", "必须明确回应的决定改用 AlertDialog。"],
+    composition: ["Title/Description 关联名称与必要说明。", "Header/Panel/Footer 组织输入与动作，不提供业务状态。"],
+    stateOwner: { library: ["open、焦点困住、滚动锁、背景阻断与返回。"], application: ["草稿、版本、保存、失败、放弃与持久化。"] },
+    responsive: ["内容固有宽度受视口限制；长内容在面板内滚动。", "既有控件窄屏 token 与触摸目标仍由控件消费；本批演示只验桌面。"],
+    customization: ["表面、圆角、遮罩、阴影读取既有角色。", "入退唯一归 motion.css；不在调用点另写动画。"],
+  },
 } satisfies ComponentMeta;

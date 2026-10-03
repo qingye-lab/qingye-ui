@@ -3,32 +3,31 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
-Source SHA-256: 0fb846bb978074c1d118779da01cb472381aeb0ae31385b4d8335aaaf6cf1fb2
+Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
 
-把一组相关的表单项放在同一个标题下，例如“发票信息”“通知方式”；可整体禁用。
+为一组相关字段提供共同名称与禁用范围。
 
 ## Use and ownership
-- 给相关字段或选项提供共同问题与作用范围。
-- Avoid: 只有布局关系时不要额外制造语义分组；每个字段仍需自身名称。
-- Library: 原生 fieldset、legend 关联与禁用传播。
-- Application: 分组问题、成员数据和操作范围。
+- 一组字段或选项需要共同名称。
+- Avoid: 仅为排版创建语义分组；共同名称代替单项名称。
+- Library: Base UI 分组命名、原生字段组与禁用传播。
+- Application: 共同问题、成员和值。
 
 ## Composition
-- Legend 定义共同问题，Field 或 Radio/CheckboxGroup 承载组内独立控件。
+- Legend 命名组；Field 命名单值；原生控件同样保留字段组语义。
 
 ## Responsive behavior
-- 组容器允许收缩，长 legend 可换行；组内字段按任务保留空间。
+- 组与长 legend 可收缩换行；字段间消费 field-group-gap。
 
 ## Customization
-- variant=label 适合紧凑选项组，不以缩小命中区换密度。
+- 无额外围合；variant 改共同名称的文字档，render 可替换 legend 元素。
 
 ## Current exports
-- Fieldset: function; owner fieldset; PASS; props: FieldsetPrimitive.Root.Props
-- FieldsetLegend: function; owner fieldset; PASS; props: FieldsetPrimitive.Legend.Props & {
-  /** `label` sizes the legend like a field label for compact groups. */
-  variant?: "legend" | "label";
-}
+- Fieldset: function; owner fieldset; PASS; props: FieldsetProps
+- FieldsetLegend: function; owner fieldset; PASS; props: FieldsetLegendProps
+- FieldsetLegendProps: type; owner fieldset; PASS
 - FieldsetPrimitive: reexport; owner fieldset; UNVERIFIED
+- FieldsetProps: type; owner fieldset; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -39,96 +38,61 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Fieldset
-基于 Base UI Fieldset，渲染 <fieldset>，子项纵向排列、间距 16px。别名 FieldSet。
-- disabled: boolean; default false. 禁用组内所有表单项。
+Base UI Root，默认 fieldset；使用字段组间隔。
+- disabled: boolean; default false. 禁用整组控件。
+- className / style / render / ref: Base UI Fieldset.Root props. 透传原生属性；样式支持状态函数。
 
 ### FieldsetLegend
-组标题，自动通过 aria-labelledby 关联到 <fieldset>，读屏进入组内控件前会先读出它。Base UI 渲染的是 div 而非原生 <legend>（原生 legend 无法随内容自动布局），语义由 aria-labelledby 提供。别名 FieldLegend。
-- variant: "legend" | "label"; default "legend". legend 为分节标题；label 与字段标签同级，用于一组复选框或单选。
+默认真实 legend；Base UI 同时维护 aria-labelledby。
+- variant: "legend" | "label"; default "legend". 分节名称用 heading 档，共同问题用 label 档。具体文字值是预设。
+- render: Base UI render. 可替换元素，命名关联仍保留。
+
+### FieldsetPrimitive
+Base UI 公共组合出口。
 
 ## Keyboard
+- Tab / Shift+Tab: 按文档顺序访问组内控件；禁用控件不进入焦点顺序。
 
 ## Source examples
-### 默认
+### 字段组
 Source: apps/docs/src/content/fieldset/demos/01-default.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "默认" };
+export const meta = { title: "字段组", titleEn: "Related fields" };
 
 export default function Demo() {
-  return (
-    <Fieldset className="max-w-sm">
-      <FieldsetLegend>发票信息</FieldsetLegend>
-      <Field>
-        <FieldLabel>发票抬头</FieldLabel>
-        <Input defaultValue="杭州言青科技有限公司" />
-      </Field>
-      <Field>
-        <FieldLabel>纳税人识别号</FieldLabel>
-        <Input className="numeric" placeholder="18 位统一社会信用代码" />
-        <FieldDescription>可在营业执照上找到。</FieldDescription>
-      </Field>
-    </Fieldset>
-  );
+  return <Fieldset className="w-full max-w-sm"><FieldsetLegend>名称</FieldsetLegend><Field><FieldLabel>全称</FieldLabel><Input defaultValue="青野" /></Field><Field><FieldLabel>简称</FieldLabel><Input /></Field></Fieldset>;
 }
 ```
 
-### 作为问题
+### 标签档
 Source: apps/docs/src/content/fieldset/demos/02-label-legend.tsx
 ```tsx
 import { Checkbox } from "@qingye/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Label } from "@qingye/ui/components/label";
 
-export const meta = { title: "作为问题", description: "variant=\"label\" 的标题与字段标签同级，适合一组复选框。" };
+export const meta = { title: "标签档", titleEn: "Label legend" };
 
 export default function Demo() {
-  return (
-    <Fieldset className="max-w-sm gap-3">
-      <FieldsetLegend variant="label">通过哪些方式通知你？</FieldsetLegend>
-      <Label>
-        <Checkbox defaultChecked name="channel" value="sms" />
-        短信
-      </Label>
-      <Label>
-        <Checkbox defaultChecked name="channel" value="email" />
-        邮件
-      </Label>
-      <Label>
-        <Checkbox name="channel" value="wecom" />
-        企业微信
-      </Label>
-    </Fieldset>
-  );
+  return <Fieldset className="w-full max-w-sm"><FieldsetLegend variant="label">选项</FieldsetLegend><Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel>选项一</FieldLabel></Field><Field orientation="horizontal"><Checkbox /><FieldLabel>选项二</FieldLabel></Field></Fieldset>;
 }
 ```
 
-### 禁用
+### 整组禁用
 Source: apps/docs/src/content/fieldset/demos/03-disabled.tsx
 ```tsx
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "禁用", description: "disabled 作用于组内所有表单项，例如审核期间锁定资料。" };
+export const meta = { title: "整组禁用", titleEn: "Disabled group" };
 
 export default function Demo() {
-  return (
-    <Fieldset className="max-w-sm" disabled>
-      <FieldsetLegend>开户资料（审核中）</FieldsetLegend>
-      <Field>
-        <FieldLabel>开户银行</FieldLabel>
-        <Input defaultValue="招商银行杭州分行" />
-      </Field>
-      <Field>
-        <FieldLabel>银行账号</FieldLabel>
-        <Input className="numeric" defaultValue="5719 0012 3456 789" />
-      </Field>
-    </Fieldset>
-  );
+  return <Fieldset className="w-full max-w-sm" disabled><FieldsetLegend>名称</FieldsetLegend><Field><FieldLabel>全称</FieldLabel><Input defaultValue="青野" /></Field><Field><FieldLabel>简称</FieldLabel><Input defaultValue="Qingye" /></Field></Fieldset>;
 }
 ```
 

@@ -1,13 +1,8 @@
+import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "尺寸", description: "sm 用于筛选栏与表格内，lg 用于登录等突出表单。" };
+export const meta = { title: "位置档案", titleEn: "Size profiles" };
 
 export default function Demo() {
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-3">
-      <Input aria-label="小" placeholder="小 sm" size="sm" />
-      <Input aria-label="默认" placeholder="默认 default" />
-      <Input aria-label="大" placeholder="大 lg" size="lg" />
-    </div>
-  );
+  return <div className="grid w-full max-w-sm gap-(--qy-field-group-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map((size) => <Field key={size}><FieldLabel>{size}</FieldLabel><Input size={size} defaultValue="青野 · Qingye" /></Field>)}</div>;
 }

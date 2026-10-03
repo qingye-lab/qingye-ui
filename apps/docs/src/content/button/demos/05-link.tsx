@@ -1,27 +1,15 @@
 import { buttonVariants } from "@qingye/ui/components/button";
-import { ChevronLeftIcon, ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 
-export const meta = {
-  title: "作为链接",
-  description: "导航使用真正的 a 或路由 Link，配合 buttonVariants 复用按钮外观，保留链接语义与浏览器操作。",
-};
+export const meta = { title: "链接", titleEn: "Links" };
 
 export default function Demo() {
   return (
-    <>
-      <a className={buttonVariants({ variant: "link" })} href="#orders">
-        <ChevronLeftIcon aria-hidden="true" />
-        返回订单列表
+    <div className="flex flex-wrap gap-(--qy-action-gap)">
+      <a className={buttonVariants({ variant: "quiet" })} href="/docs/button">按钮文档</a>
+      <a className={buttonVariants({ variant: "bordered" })} href="/design.md" rel="noreferrer" target="_blank">
+        设计指南<ExternalLinkIcon aria-hidden="true" />
       </a>
-      <a
-        className={buttonVariants({ variant: "outline" })}
-        href="https://example.com/help"
-        rel="noreferrer"
-        target="_blank"
-      >
-        帮助中心
-        <ExternalLinkIcon aria-hidden="true" />
-      </a>
-    </>
+    </div>
   );
 }

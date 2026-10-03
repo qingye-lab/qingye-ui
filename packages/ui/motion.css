@@ -1,11 +1,11 @@
 /*
  * motion.css — library-wide motion policy.
  *
- * Components carry their own transitions (tuned upstream). This file adds only
- * what is global or missing:
+ * Foundation §12 owns popup entry/exit here. Components retain live interaction
+ * mechanics (for example drawer swiping) and provide structural data hooks.
  *
  *   1. Press feedback for anything marked `.qy-pressable`.
- *   2. Entrance motion for select and menu popups, which ship without one.
+ *   2. Popup entry/exit, backdrop fades and popup content crossfades.
  *   3. Input modality: keyboard navigation is immediate, because repeated
  *      arrow-key movement should never wait on an animation.
  *   4. Reduced motion: movement is removed, state changes stay legible.
@@ -28,24 +28,217 @@
   }
 }
 
-/* --- 2. Popup entrance --------------------------------------------------- */
-:is([data-slot="select-popup"], [data-slot="menu-popup"]) {
+/* --- 2. Popup entry and exit --------------------------------------------- */
+/* `motion.css` owns popup entry and exit: start/end scale and opacity, the
+ * durations, and the reduced-motion fallback. Components supply structure,
+ * the trigger's transform origin, and their `data-slot`; they must not declare
+ * a second set of entry values. Preserve the existing 0.98 popup preset;
+ * press feedback describes a different relationship and retains 0.97. */
+:is(
+  [data-slot="select-popup"],
+  [data-slot="menu-popup"],
+  [data-slot="menu-sub-content"],
+  [data-slot="context-menu-popup"],
+  [data-slot="context-menu-sub-content"],
+  [data-slot="autocomplete-popup"],
+  [data-slot="combobox-popup"],
+  [data-slot="popover-popup"],
+  [data-slot="tooltip-popup"],
+  [data-slot="navigation-menu-popup"]
+) {
   transition-property: opacity, scale;
   transition-duration: var(--qy-duration-fast);
   transition-timing-function: var(--qy-ease-out);
 }
 
-:is([data-slot="select-popup"], [data-slot="menu-popup"]):is(
-    [data-starting-style],
-    [data-ending-style]
-  ) {
+:is(
+  [data-slot="select-popup"],
+  [data-slot="menu-popup"],
+  [data-slot="menu-sub-content"],
+  [data-slot="context-menu-popup"],
+  [data-slot="context-menu-sub-content"],
+  [data-slot="autocomplete-popup"],
+  [data-slot="combobox-popup"],
+  [data-slot="popover-popup"],
+  [data-slot="tooltip-popup"],
+  [data-slot="navigation-menu-popup"]
+):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
-  scale: 0.97;
+  scale: 0.98;
 }
 
 /* Exit is quicker than entry: dismissal should feel instant. */
-:is([data-slot="select-popup"], [data-slot="menu-popup"])[data-ending-style] {
+:is(
+  [data-slot="select-popup"],
+  [data-slot="menu-popup"],
+  [data-slot="menu-sub-content"],
+  [data-slot="context-menu-popup"],
+  [data-slot="context-menu-sub-content"],
+  [data-slot="autocomplete-popup"],
+  [data-slot="combobox-popup"],
+  [data-slot="popover-popup"],
+  [data-slot="tooltip-popup"]
+)[data-ending-style] {
   transition-duration: var(--qy-duration-press);
+}
+
+/* 共享内容切换不是第二套入场参数；尚未重写的浮层保持原有尺寸过渡。 */
+:is(
+  [data-slot="tooltip-popup"],
+  [data-slot="navigation-menu-popup"]
+) {
+  transition-property: width, height, scale, opacity;
+}
+
+/* 基础层 §12、STANDARDS §6：Popover 宽度立即换位，只有必要高度与入退继续过渡。 */
+[data-slot="popover-popup"] {
+  transition-property: height, scale, opacity;
+}
+
+/* Modal windows and navigation's larger panel keep their existing slower
+ * entry. Opacity used for dialog nesting is an ongoing state, not entry/exit. */
+:is(
+  [data-slot="dialog-popup"],
+  [data-slot="alert-dialog-popup"]
+) {
+  transition-property: scale, opacity, translate;
+  transition-duration: var(--qy-duration-base);
+  transition-timing-function: var(--qy-ease-out);
+}
+
+[data-slot="navigation-menu-popup"] {
+  transition-duration: var(--qy-duration-base);
+}
+
+:is(
+  [data-slot="dialog-popup"],
+  [data-slot="alert-dialog-popup"]
+):is([data-starting-style], [data-ending-style]) {
+  opacity: 0;
+}
+
+:is(
+  [data-slot="dialog-popup"],
+  [data-slot="alert-dialog-popup"],
+  [data-slot="navigation-menu-popup"]
+)[data-ending-style] {
+  transition-duration: var(--qy-duration-fast);
+}
+
+@media (width >= 40rem) {
+  :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"]):is(
+    [data-starting-style], [data-ending-style]
+  ) {
+    scale: 0.98;
+  }
+}
+
+@media (width < 40rem) {
+  :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"])[data-bottom-stick-on-mobile]:is(
+    [data-starting-style], [data-ending-style]
+  ) {
+    translate: 0 1rem;
+  }
+}
+
+:is(
+  [data-slot="dialog-backdrop"],
+  [data-slot="alert-dialog-backdrop"]
+) {
+  transition-property: opacity;
+  transition-duration: var(--qy-duration-base);
+  transition-timing-function: var(--qy-ease-out);
+}
+
+:is(
+  [data-slot="dialog-backdrop"],
+  [data-slot="alert-dialog-backdrop"],
+  [data-slot="drawer-backdrop"]
+):is([data-starting-style], [data-ending-style]) {
+  opacity: 0;
+}
+
+:is(
+  [data-slot="dialog-backdrop"],
+  [data-slot="alert-dialog-backdrop"]
+)[data-ending-style] {
+  transition-duration: var(--qy-duration-fast);
+}
+
+/* Popup viewport content has its own crossfade when the trigger changes.
+ * Keep that distinct from scaling the surrounding popup, with one owner. */
+:is([data-slot="popover-viewport"], [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]) {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: var(--qy-duration-fast);
+  transition-timing-function: var(--qy-ease-out);
+}
+:is([data-slot="popover-viewport"], [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]):is(
+  [data-starting-style], [data-ending-style]
+) {
+  opacity: 0;
+}
+
+[data-slot="navigation-menu-content"] {
+  transition-property: opacity, translate;
+  transition-duration: var(--qy-duration-base);
+  transition-timing-function: var(--qy-ease-out);
+}
+[data-slot="navigation-menu-content"]:is([data-starting-style], [data-ending-style]) {
+  opacity: 0;
+}
+[data-slot="navigation-menu-content"][data-ending-style] {
+  transition-duration: var(--qy-duration-fast);
+}
+[data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="left"],
+[data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="right"] {
+  translate: -1.5rem 0;
+}
+[data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="right"],
+[data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="left"] {
+  translate: 1.5rem 0;
+}
+
+/* Drawer translates offscreen rather than using the small-popup scale preset.
+ * Live swipe and nested-stack transforms stay in the component; only the
+ * appearance/dismissal overrides and their timing belong to this layer. */
+[data-slot="drawer-popup"] {
+  transition-property: transform, box-shadow, height, background-color;
+  transition-duration: var(--qy-duration-drawer);
+  transition-timing-function: var(--qy-ease-drawer);
+}
+[data-slot="drawer-backdrop"] {
+  transition-property: opacity;
+  transition-duration: var(--qy-duration-drawer);
+  transition-timing-function: var(--qy-ease-drawer);
+}
+[data-slot="drawer-popup"][data-position="bottom"]:not([data-starting-style], [data-ending-style]) {
+  transition-property: transform, box-shadow, height, background-color, margin, padding;
+}
+[data-slot="drawer-popup"]:is([data-starting-style], [data-ending-style]) {
+  --tw-shadow-color: transparent;
+}
+[data-slot="drawer-popup"][data-position="bottom"]:is([data-starting-style], [data-ending-style]) {
+  transform: translateY(calc(100% + env(safe-area-inset-bottom, 0px) + var(--inset)));
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+[data-slot="drawer-popup"][data-position="top"]:is([data-starting-style], [data-ending-style]) {
+  transform: translateY(calc(-100% - var(--inset)));
+}
+[data-slot="drawer-popup"][data-position="left"]:is([data-starting-style], [data-ending-style]) {
+  transform: translateX(calc(-100% - var(--inset)));
+}
+[data-slot="drawer-popup"][data-position="right"]:is([data-starting-style], [data-ending-style]) {
+  transform: translateX(calc(100% + var(--inset)));
+}
+:is([data-slot="drawer-popup"], [data-slot="drawer-backdrop"])[data-ending-style] {
+  /* Preserve the existing velocity-adjusted 400ms exit at strength 1:
+   * 450ms × 8/9. The duration token remains the single adjustment entry. */
+  transition-duration: calc(var(--drawer-swipe-strength, 1) * var(--qy-duration-drawer) * 8 / 9);
+}
+[data-slot="drawer-backdrop"][data-swiping] {
+  transition-duration: var(--qy-duration-instant);
 }
 
 /* The check mark settles in rather than appearing. */
@@ -120,8 +313,29 @@
     scale: none;
   }
 
-  /* Decorative keyframes stop; the loading spinner keeps turning. */
-  [data-slot="skeleton"],
+  /* Popup start/end movement has no separate component fallback. Preserve
+   * opacity, while removing the scale/translate portion of appearance. Live
+   * dialog nesting and drawer swipe transforms remain their current state. */
+  :is(
+    [data-slot="select-popup"],
+    [data-slot="menu-popup"],
+    [data-slot="menu-sub-content"],
+    [data-slot="context-menu-popup"],
+    [data-slot="context-menu-sub-content"],
+    [data-slot="autocomplete-popup"],
+    [data-slot="combobox-popup"],
+    [data-slot="popover-popup"],
+    [data-slot="tooltip-popup"],
+    [data-slot="navigation-menu-popup"],
+    [data-slot="dialog-popup"],
+    [data-slot="alert-dialog-popup"],
+    [data-slot="navigation-menu-content"]
+  ):is([data-starting-style], [data-ending-style]) {
+    scale: none !important;
+    translate: none !important;
+  }
+
+  /* Toast and the pending OTP caret opt out of decorative keyframes. */
   [data-slot="toast-root"],
   [data-slot="otp-field-caret"] {
     animation: none !important;

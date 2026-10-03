@@ -58,10 +58,10 @@ function Checklist() {
     <div className="my-6 overflow-hidden rounded-xl border">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-b bg-surface-subtle/60 px-4 py-3 dark:bg-surface/40">
         <Progress aria-label="核对进度" className="w-32 flex-none" max={TOTAL} value={done.size} />
-        <span aria-live="polite" className="text-muted-foreground text-xs numeric">
+        <span aria-live="polite" className="text-muted-foreground text-caption numeric">
           已核对 {done.size} / {TOTAL}
         </span>
-        <Button className="ms-auto" disabled={!done.size} onClick={() => setDone(new Set())} size="xs" variant="ghost">
+        <Button className="ms-auto" disabled={!done.size} onClick={() => setDone(new Set())} size="xs" variant="quiet">
           <RotateCcwIcon aria-hidden="true" />
           清空
         </Button>
@@ -69,7 +69,7 @@ function Checklist() {
       <div className="divide-y">
         {CHECKLIST.map((group, g) => (
           <fieldset className="m-0 border-0 px-4 py-4" key={group.group}>
-            <legend className="float-start mb-3 w-full font-medium text-foreground-strong text-sm">{group.group}</legend>
+            <legend className="float-start mb-3 w-full font-medium text-foreground-strong text-body">{group.group}</legend>
             <ul className="clear-both flex flex-col gap-3">
               {group.items.map((item, i) => {
                 const key = `${g}-${i}`;
@@ -94,18 +94,14 @@ function Checklist() {
 export default function AccessibilityPage() {
   return (
     <article>
-      <PageHeader
-        description="组件负责交互语义与键盘行为，应用负责名称、结构与内容。这一页说明两边各自的职责，并给出上线前的检查清单。"
-        title="无障碍"
-      />
+      <PageHeader title="无障碍" />
 
       <H2 id="approach">做法</H2>
       <P>
-        交互行为来自 <A href="https://base-ui.com">Base UI</A>，它按 <A href="https://www.w3.org/WAI/ARIA/apg/">WAI-ARIA APG</A>{" "}
-        实现键盘交互、焦点管理与 ARIA 状态。组件库在此之上只加样式与少量组合，不重写、也不绕开这些行为：一个下拉菜单的方向键、首字母跳转与焦点回归，都与 Base UI 文档描述的一致。
+        菜单、选择器等复合控件使用 <A href="https://base-ui.com">Base UI</A> 原语。修改这些组件时，对照 <A href="https://www.w3.org/WAI/ARIA/apg/">WAI-ARIA APG</A> 核验键盘交互、焦点管理与 ARIA 状态。
       </P>
       <P>
-        每个组件页列出它的键盘交互；视觉上的要求（对比度、焦点环、触控尺寸）写在组件规范里，验收时应在浅色、深色、桌面与390px宽度下分别检查，静态与浏览器检测不能代替读屏软件和完整键盘流程。
+        在组件页查键盘交互，在组件规范中查对比度、焦点环与触控尺寸。上线前分别检查浅色、深色、桌面与 390px 宽度，并用读屏软件和键盘走完主流程；静态检查与浏览器检测不能替代这两项。
       </P>
 
       <H2 id="built-in">组件已经处理的</H2>
@@ -138,13 +134,13 @@ export default function AccessibilityPage() {
       </Ul>
 
       <H2 id="checklist">检查清单</H2>
-      <P>评审一个页面时逐项勾选。勾选状态只保存在当前页面里。</P>
+      <P>刷新或离开页面后，勾选结果会清空。</P>
       <Checklist />
 
       <H2 id="testing">如何测试</H2>
       <H3 id="testing-keyboard">键盘</H3>
-      <P>在浅色和深色下分别验证实际焦点环，输入与按钮的参数独立调整见 <A href="/docs/tokens#focus">焦点角色</A>。</P>
-      <P>拔掉鼠标走一遍主流程。留意焦点是否始终可见、是否会落到被遮挡的元素上、浮层关闭后焦点回到了哪里。</P>
+      <P>分别检查浅色、深色主题下的焦点环；输入框与按钮的焦点环参数可分别调整，见 <A href="/docs/tokens#focus">焦点角色</A>。</P>
+      <P>只用键盘走完主流程，检查焦点是否始终可见、是否被遮挡，以及关闭浮层后是否回到触发元素。</P>
       <H3 id="testing-sr">读屏软件</H3>
       <P>
         macOS 用 VoiceOver（<Code>⌘ F5</Code> 开启，<Code>⌃ ⌥ →</Code> 逐项浏览），Windows 用 NVDA。确认每个控件读出的名称、角色和状态都符合预期。

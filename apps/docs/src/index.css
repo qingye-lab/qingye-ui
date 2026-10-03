@@ -76,7 +76,78 @@
   }
 }
 
+/* The shared docs navigation keeps its 15rem rail. Both parts of a component
+   name wrap inside that budget, including the translated/mobile navigation. */
+:where(nav[aria-label="文档导航"]) li > a {
+  flex-wrap: wrap;
+  column-gap: var(--qy-space-2);
+  row-gap: var(--qy-space-1);
+}
+:where(nav[aria-label="文档导航"]) li > a > span {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  flex-shrink: 1;
+  white-space: normal;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+}
+
+/* Page-level composition for DocsLayout. Keep its existing 48rem reading
+   measure and 15rem/13rem rails; reveal the TOC only when all three fit.
+   Anchoring the article at the same start also prevents a lateral jump.
+   The container budget follows enlarged text as well as viewport changes. */
+:where(div:has(> aside[aria-label="侧栏"])) > div {
+  container: docs-reading-layout / inline-size;
+}
+:where(div:has(> aside[aria-label="侧栏"])) > div > aside[aria-label="本页目录"] {
+  display: none;
+}
+@media (min-width: 1024px) {
+  :where(div:has(> aside[aria-label="侧栏"])) > div {
+    padding-inline-start: var(--qy-space-10);
+  }
+  :where(div:has(> aside[aria-label="侧栏"])) > div > main {
+    flex: 0 1 48rem;
+    inline-size: 100%;
+    max-inline-size: 48rem;
+  }
+}
+/* 48rem article + 13rem TOC + the existing 3rem region gap. */
+@container docs-reading-layout (min-width: 64rem) {
+  :where(div:has(> aside[aria-label="侧栏"])) > div > aside[aria-label="本页目录"] {
+    display: block;
+  }
+}
+
 /* --- Code ------------------------------------------------------------------ */
+
+/* Article rank has one scale, including API names rendered in monospace.
+   Page-specific utilities may adjust spacing, but not a heading's rank. */
+.docs-page-title,
+.docs-section-heading { min-inline-size: 0; overflow-wrap: anywhere; }
+h2.docs-section-heading { font-size: var(--qy-text-chapter-size); line-height: var(--qy-text-chapter-leading); }
+h3.docs-section-heading { font-size: var(--qy-text-heading-size); line-height: var(--qy-text-heading-leading); }
+
+/* Standalone workspaces share the site's page-title rank. Embedded demos keep
+   their local heading level and scale. */
+.example-page h1.example-screen-title {
+  font-size: var(--qy-text-display-size);
+  line-height: var(--qy-text-display-leading);
+}
+.example-page h1.example-screen-title:not(:is(:lang(zh), :lang(ja), :lang(ko))) {
+  letter-spacing: var(--qy-text-display-tracking);
+}
+
+/* The frame gutter aligns preview content with its tabs and copy action.
+   Flush demos intentionally own their edge-to-edge composition. */
+.docs-demo-frame { --docs-demo-gutter: var(--qy-space-4); }
+.docs-demo-chrome,
+.docs-demo-preview { padding: var(--docs-demo-gutter); }
+.docs-demo-chrome { padding-block: var(--qy-space-2); }
+@media (min-width: 640px) {
+  .docs-demo-frame { --docs-demo-gutter: var(--qy-space-6); }
+}
 
 .docs-code {
   font-family: var(--qy-font-mono);
@@ -96,12 +167,17 @@
 }
 
 /* Inline code inside running text. `inline` keeps it flowing with the sentence
-   instead of breaking a line on its own inside flex-column containers. */
+   instead of breaking a line on its own inside flex-column containers.
+
+   A plain ratio lands off the ramp: 0.85em over 14px body copy renders 11.9px,
+   a size no step names. The sentence steps it sits in (body, reading, prose)
+   are all within 2px of each other, so one named step serves all of them and
+   stays on the ramp. */
 .docs-inline-code {
   display: inline;
   box-decoration-break: clone;
   font-family: var(--qy-font-mono);
-  font-size: 0.85em;
+  font-size: var(--qy-text-caption-size);
   padding: 0.1em 0.35em;
   border-radius: var(--qy-radius-sm);
   background-color: var(--qy-surface-inset);

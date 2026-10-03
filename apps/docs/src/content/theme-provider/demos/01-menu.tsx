@@ -1,42 +1,31 @@
-import type { Theme } from "@qingye/ui/components/theme-provider";
 import { Button } from "@qingye/ui/components/button";
-import { Menu, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye/ui/components/menu";
-import { useTheme } from "@qingye/ui/components/theme-provider";
+import { Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { useTheme, type Theme } from "@qingye/ui/components/theme-provider";
+import { Text } from "@qingye/ui/components/typography";
 import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useId } from "react";
 
-export const meta = {
-  title: "主题菜单",
-  description: "顶栏里最常见的形式：图标显示当前生效的主题，菜单里三选一。文案来自语言包。",
-};
+export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
 
 export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
-  const options = [
-    { value: "light", label: messages.lightTheme, icon: SunIcon },
-    { value: "dark", label: messages.darkTheme, icon: MoonIcon },
-    { value: "system", label: messages.systemTheme, icon: MonitorIcon },
-  ] as const;
+  const id = useId();
   const Current = resolvedTheme === "dark" ? MoonIcon : SunIcon;
-
-  return (
-    <Menu>
-      <MenuTrigger render={<Button aria-label={messages.theme} size="icon" variant="outline" />}>
-        <Current />
-      </MenuTrigger>
-      <MenuPopup className="min-w-36">
-        <MenuRadioGroup onValueChange={(value) => setTheme(value as Theme)} value={theme}>
-          {options.map(({ value, label, icon: Icon }) => (
-            <MenuRadioItem key={value} value={value}>
-              <span className="flex items-center gap-2">
-                <Icon aria-hidden="true" className="size-4 opacity-72" />
-                {label}
-              </span>
-            </MenuRadioItem>
-          ))}
-        </MenuRadioGroup>
-      </MenuPopup>
-    </Menu>
-  );
+  return <Popover>
+    <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
+    <PopoverPopup>
+      <Stack gap="field">
+        <PopoverTitle>{messages.theme}</PopoverTitle>
+        <select id={id} aria-label={messages.theme} className="max-w-full border border-input bg-background text-body focus-visible:outline-none focus-visible:border-ring" value={theme} onChange={event => setTheme(event.target.value as Theme)}>
+          <option value="light">{messages.lightTheme}</option>
+          <option value="dark">{messages.darkTheme}</option>
+          <option value="system">{messages.systemTheme}</option>
+        </select>
+        <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
+      </Stack>
+    </PopoverPopup>
+  </Popover>;
 }

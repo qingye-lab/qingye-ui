@@ -1,23 +1,15 @@
-import { Field, FieldDescription, FieldTitle } from "@qingye/ui/components/field";
-import { ToggleGroup, ToggleGroupItem, ToggleGroupSeparator } from "@qingye/ui/components/toggle-group";
+import { useId } from "react";
+import { Field, FieldDescription, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
-export const meta = {
-  title: "标题",
-  description: "控件不是单个输入框时，用 FieldTitle 作标题并通过 aria-labelledby 关联。",
-};
+export const meta = { title: "标题与自命名控件", titleEn: "Title and self-named control" };
 
 export default function Demo() {
+  const titleId = useId();
   return (
-    <Field className="w-full max-w-xs">
-      <FieldTitle id="delivery-slot">配送时段</FieldTitle>
-      <ToggleGroup aria-labelledby="delivery-slot" defaultValue={["morning"]} variant="outline">
-        <ToggleGroupItem value="morning">上午</ToggleGroupItem>
-        <ToggleGroupSeparator />
-        <ToggleGroupItem value="afternoon">下午</ToggleGroupItem>
-        <ToggleGroupSeparator />
-        <ToggleGroupItem value="evening">晚间</ToggleGroupItem>
-      </ToggleGroup>
-      <FieldDescription>晚间时段仅限杭州主城区。</FieldDescription>
-    </Field>
+    <FieldGroup className="w-full max-w-xs">
+      <Field><FieldTitle id={titleId}>设备名称</FieldTitle><Input aria-labelledby={titleId} defaultValue="青野" /></Field>
+      <Field><FieldTitle>备注</FieldTitle><FieldDescription>未填写。</FieldDescription></Field>
+    </FieldGroup>
   );
 }

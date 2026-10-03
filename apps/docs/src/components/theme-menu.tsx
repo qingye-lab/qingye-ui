@@ -21,7 +21,7 @@ export function ThemeMenu() {
         <TooltipTrigger
           render={
             <MenuTrigger
-              render={<Button aria-label={`${messages.theme}：${options.find((o) => o.value === theme)?.label ?? ""}`} size="icon" variant="ghost" />}
+              render={<Button shape="icon" aria-label={`${messages.theme}：${options.find((o) => o.value === theme)?.label ?? ""}`} size="md" variant="quiet" />}
             />
           }
         >

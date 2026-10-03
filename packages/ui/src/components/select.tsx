@@ -1,253 +1,132 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/select.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
-import { mergeProps } from "@base-ui/react/merge-props";
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { useRender } from "@base-ui/react/use-render";
-import { cva, type VariantProps } from "class-variance-authority";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronsUpDownIcon,
-  ChevronUpIcon,
-} from "lucide-react";
-import type * as React from "react";
+import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import * as React from "react";
+import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
-export const Select: typeof SelectPrimitive.Root = SelectPrimitive.Root;
+export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, "multiple">;
+export type SelectSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & { size?: SelectSize };
+export type SelectValueProps = React.ComponentProps<typeof SelectPrimitive.Value>;
+export type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>;
+export type SelectPopupProps = React.ComponentProps<typeof SelectPrimitive.Popup> &
+  Pick<SelectPrimitive.Positioner.Props, "side" | "align" | "sideOffset" | "alignOffset" | "alignItemWithTrigger"> &
+  Pick<SelectPrimitive.Portal.Props, "container">;
 
-export const selectTriggerVariants = cva(
-  "relative inline-flex min-h-[calc(var(--qy-control-md)+var(--qy-control-mobile-extra))] w-full min-w-36 select-none items-center justify-between gap-(--qy-space-2) rounded-control border border-input bg-card not-dark:bg-clip-padding px-[calc(calc(var(--qy-space-1)*3.5)-1px)] text-start text-field-input-mobile text-foreground shadow-control outline-none ring-ring/24 ring-offset-[length:var(--qy-focus-input-offset)] ring-offset-background transition-[background-color,border-color,box-shadow] before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_1px_--theme(--color-black/4%)] pointer-coarse:after:absolute pointer-coarse:after:size-full pointer-coarse:after:min-h-(--qy-touch-target) focus-visible:border-ring focus-visible:ring-[length:var(--qy-focus-input-width)] aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/16 not-data-disabled:not-focus-visible:not-aria-invalid:hover:border-border-strong hover:bg-surface-subtle data-disabled:pointer-events-none data-disabled:opacity-64 sm:min-h-(--qy-control-md) sm:text-field-input dark:bg-input/32 dark:hover:bg-input/64 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-focus-visible:not-aria-invalid:not-data-pressed:before:shadow-[0_-1px_--theme(--color-white/6%)] [&_svg:not([class*='opacity-'])]:opacity-80 [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 [[data-disabled],:focus-visible,[aria-invalid],[data-pressed]]:shadow-none",
-  {
-    defaultVariants: {
-      size: "default",
-    },
-    variants: {
-      size: {
-        default: "",
-        lg: "min-h-[calc(var(--qy-control-lg)+var(--qy-control-mobile-extra))] px-[calc(var(--qy-space-4)-1px)] sm:min-h-(--qy-control-lg)",
-        sm: "min-h-[calc(var(--qy-control-sm)+var(--qy-control-mobile-extra))] gap-[calc(var(--qy-space-1)*1.5)] px-[calc(calc(var(--qy-space-1)*2.5)-1px)] sm:min-h-(--qy-control-sm)",
-      },
-    },
-  },
-);
+const textProfiles: Record<SelectSize, string> = {
+  xs: "text-control-xs-mobile sm:text-control-xs",
+  sm: "text-control-sm-mobile sm:text-control-sm",
+  md: "text-control-md-mobile sm:text-control-md",
+  lg: "text-control-lg-mobile sm:text-control-lg",
+  xl: "text-control-xl-mobile sm:text-control-xl",
+};
 
-export const selectTriggerIconClassName = "-me-1 size-4.5 opacity-80 sm:size-4";
-
-export interface SelectButtonProps extends useRender.ComponentProps<"button"> {
-  size?: VariantProps<typeof selectTriggerVariants>["size"];
+const EmptyValueLabel = React.createContext<React.ReactNode>(undefined);
+function triggerState(state: SelectPrimitive.Trigger.State): SelectPrimitive.Trigger.State {
+  return state.value === "" ? { ...state, placeholder: false } : state;
 }
 
-export function SelectButton({
-  className,
-  size,
-  render,
-  children,
-  ...props
-}: SelectButtonProps): React.ReactElement {
-  const typeValue: React.ButtonHTMLAttributes<HTMLButtonElement>["type"] =
-    render ? undefined : "button";
-
-  const defaultProps = {
-    children: (
-      <>
-        <span className="flex-1 truncate in-data-placeholder:text-muted-foreground">
-          {children}
-        </span>
-        <ChevronsUpDownIcon className={selectTriggerIconClassName} />
-      </>
-    ),
-    className: cn(selectTriggerVariants({ size }), "min-w-0", className),
-    "data-slot": "select-button",
-    type: typeValue,
-  };
-
-  return useRender({
-    defaultTagName: "button",
-    props: mergeProps<"button">(defaultProps, props),
-    render,
-  });
+function TriggerElement({ elementProps, state, render }: { elementProps: React.ComponentPropsWithRef<"button">; state: SelectPrimitive.Trigger.State; render: SelectTriggerProps["render"] }) {
+  const { ref, ...props } = elementProps;
+  return useRender({ defaultTagName: "button", ref, render: typeof render === "function" ? (p) => render(p, state) : render, props: { ...props, "data-placeholder": state.placeholder ? "" : undefined } });
 }
 
-export function SelectTrigger({
-  className,
-  size = "default",
-  children,
-  "aria-label": ariaLabel,
-  "aria-labelledby": ariaLabelledBy,
-  ...props
-}: SelectPrimitive.Trigger.Props &
-  VariantProps<typeof selectTriggerVariants>): React.ReactElement {
-  return (
-    <SelectPrimitive.Trigger
-      aria-label={ariaLabel}
-      // An explicit aria-label must not be overridden by Base UI's automatic labelling.
-      aria-labelledby={ariaLabelledBy ?? (ariaLabel ? "" : undefined)}
-      className={cn(selectTriggerVariants({ size }), className)}
-      data-slot="select-trigger"
-      {...props}
+function ValueElement({ elementProps, state, render }: { elementProps: React.ComponentPropsWithRef<"span">; state: SelectPrimitive.Value.State; render: SelectValueProps["render"] }) {
+  const { ref, ...props } = elementProps;
+  return useRender({ defaultTagName: "span", ref, render: typeof render === "function" ? (p) => render(p, state) : render, props: { ...props, "data-placeholder": state.placeholder ? "" : undefined } });
+}
+
+/** 单值选择，null 是未选择。展开列表默认不阻断其余字段。 */
+export function Select<Value>({ modal = false, ...props }: SelectProps<Value>) {
+  // Base UI 1.7 把序列化为 "" 的值视为占位。这里只修正空字符串的名称与占位表达，
+  // 值、隐藏 input、键盘及校验仍由原语拥有，不伪造另一套选择状态。
+  const items = props.items;
+  const emptyLabel = Array.isArray(items)
+    ? items.flatMap(item => "items" in item ? item.items : [item]).find(item => item.value === "")?.label
+    : (items as Record<string, React.ReactNode> | undefined)?.[""];
+  return <EmptyValueLabel.Provider value={emptyLabel}><SelectPrimitive.Root {...props} multiple={false} modal={modal} /></EmptyValueLabel.Provider>;
+}
+
+export function SelectTrigger({ size = "md", children, className, style, render, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...props }: SelectTriggerProps) {
+  const variables = {
+    "--qy-select-height": `var(--qy-control-${size})`,
+    "--qy-select-height-narrow": `var(--qy-control-${size}-narrow)`,
+    "--qy-select-padding": `var(--qy-control-${size}-padding-bordered)`,
+    "--qy-select-icon": `var(--qy-control-${size}-icon)`,
+    "--qy-select-icon-narrow": `var(--qy-control-${size}-icon-narrow)`,
+    ...(size === "xs" || size === "sm" ? { "--qy-radius-control": `var(--qy-radius-${size})` } : {}),
+  } as React.CSSProperties;
+  return <SelectPrimitive.Trigger
+    data-slot="select-trigger" data-size={size} {...props}
+    aria-label={ariaLabel}
+    // Base UI adds FieldLabel automatically; an explicit name must override it.
+    aria-labelledby={ariaLabelledBy ?? (ariaLabel ? "" : undefined)}
+    render={(elementProps, state) => <TriggerElement elementProps={elementProps} state={triggerState(state)} render={render} />}
+    className={(state) => cn(
+      "inline-flex w-full min-w-0 items-center justify-between gap-(--qy-field-gap) min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-control border border-input bg-card px-(--qy-select-padding) text-foreground outline-none dark:bg-surface-inset transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
+      textProfiles[size],
+      state.disabled && "cursor-not-allowed opacity-64",
+      state.readOnly && "border-dashed",
+      typeof className === "function" ? className(triggerState(state)) : className,
+    )}
+    style={(state) => ({ ...variables, ...(typeof style === "function" ? style(triggerState(state)) : style) })}
+  >{children ?? <SelectValue />}
+    <SelectPrimitive.Icon data-slot="select-icon" className="pointer-events-none flex shrink-0 items-center text-muted-foreground">
+      <ChevronDownIcon aria-hidden="true" className="size-(--qy-select-icon-narrow) sm:size-(--qy-select-icon)" />
+    </SelectPrimitive.Icon>
+  </SelectPrimitive.Trigger>;
+}
+
+export function SelectValue({ placeholder, className, style, render, children, ...props }: SelectValueProps) {
+  const { messages } = useUILocale();
+  const emptyLabel = React.useContext(EmptyValueLabel);
+  const valueState = (state: SelectPrimitive.Value.State) => state.value === "" ? { ...state, placeholder: false } : state;
+  return <SelectPrimitive.Value
+    data-slot="select-value" {...props} placeholder={placeholder ?? messages.selectPlaceholder}
+    className={(state) => cn("min-w-0 text-start whitespace-normal wrap-break-word data-placeholder:text-muted-foreground", typeof className === "function" ? className(valueState(state)) : className)}
+    style={typeof style === "function" ? (state) => style(valueState(state)) : style}
+    render={(elementProps, state) => <ValueElement elementProps={state.value === "" && children == null ? { ...elementProps, children: emptyLabel ?? "" } : elementProps} state={valueState(state)} render={render} />}
+  >{children}</SelectPrimitive.Value>;
+}
+
+/** 入退交给 motion.css；Portal 自然绘制顺序不替用户裁定 z-index。 */
+export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = 0, alignOffset, alignItemWithTrigger = false, className, children, ...props }: SelectPopupProps) {
+  return <SelectPrimitive.Portal container={container} data-slot="select-portal">
+    <SelectPrimitive.Positioner
+      data-slot="select-positioner" side={side} align={align} alignOffset={alignOffset} alignItemWithTrigger={alignItemWithTrigger}
+      sideOffset={sideOffset}
     >
-      {children}
-      <SelectPrimitive.Icon data-slot="select-icon">
-        <ChevronsUpDownIcon className={selectTriggerIconClassName} />
-      </SelectPrimitive.Icon>
-    </SelectPrimitive.Trigger>
-  );
-}
-
-export function SelectValue({
-  className,
-  ...props
-}: SelectPrimitive.Value.Props): React.ReactElement {
-  return (
-    <SelectPrimitive.Value
-      className={cn(
-        "flex-1 truncate data-placeholder:text-muted-foreground",
-        className,
-      )}
-      data-slot="select-value"
-      {...props}
-    />
-  );
-}
-
-export function SelectPopup({
-  className,
-  children,
-  side = "bottom",
-  sideOffset = 4,
-  align = "start",
-  alignOffset = 0,
-  alignItemWithTrigger = false,
-  anchor,
-  portalProps,
-  ...props
-}: SelectPrimitive.Popup.Props & {
-  portalProps?: SelectPrimitive.Portal.Props;
-  side?: SelectPrimitive.Positioner.Props["side"];
-  sideOffset?: SelectPrimitive.Positioner.Props["sideOffset"];
-  align?: SelectPrimitive.Positioner.Props["align"];
-  alignOffset?: SelectPrimitive.Positioner.Props["alignOffset"];
-  alignItemWithTrigger?: SelectPrimitive.Positioner.Props["alignItemWithTrigger"];
-  anchor?: SelectPrimitive.Positioner.Props["anchor"];
-}): React.ReactElement {
-  return (
-    <SelectPrimitive.Portal {...portalProps}>
-      <SelectPrimitive.Positioner
-        align={align}
-        alignItemWithTrigger={alignItemWithTrigger}
-        alignOffset={alignOffset}
-        anchor={anchor}
-        className="z-50 select-none"
-        data-slot="select-positioner"
-        side={side}
-        sideOffset={sideOffset}
+      <SelectPrimitive.Popup
+        data-slot="select-popup" {...props}
+        className={(state) => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border-strong bg-surface-raised text-foreground outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)}
       >
-        <SelectPrimitive.Popup
-          className="max-w-(--available-width) origin-(--transform-origin) text-foreground outline-none"
-          data-slot="select-popup"
-          {...props}
-        >
-          <SelectPrimitive.ScrollUpArrow
-            className="top-0 z-50 flex h-6 w-full cursor-default items-center justify-center before:pointer-events-none before:absolute before:inset-x-px before:top-px before:h-[200%] before:rounded-t-[max(0px,calc(var(--qy-radius-control)-1px))] before:bg-linear-to-b before:from-50% before:from-popover"
-            data-slot="select-scroll-up-arrow"
-          >
-            <ChevronUpIcon className="relative size-4.5 sm:size-4" />
-          </SelectPrimitive.ScrollUpArrow>
-          <div className="relative h-full min-w-(--anchor-width) max-w-(--available-width) rounded-control border bg-popover not-dark:bg-clip-padding shadow-raised before:pointer-events-none before:absolute before:inset-0 before:rounded-[max(0px,calc(var(--qy-radius-control)-1px))] before:shadow-[0_1px_--theme(--color-black/4%)] dark:before:shadow-[0_-1px_--theme(--color-white/6%)]">
-            <SelectPrimitive.List
-              className={cn(
-                "max-h-(--available-height) overflow-y-auto p-(--qy-space-1)",
-                className,
-              )}
-              data-slot="select-list"
-            >
-              {children}
-            </SelectPrimitive.List>
-          </div>
-          <SelectPrimitive.ScrollDownArrow
-            className="bottom-0 z-50 flex h-6 w-full cursor-default items-center justify-center before:pointer-events-none before:absolute before:inset-x-px before:bottom-px before:h-[200%] before:rounded-b-[max(0px,calc(var(--qy-radius-control)-1px))] before:bg-linear-to-t before:from-50% before:from-popover"
-            data-slot="select-scroll-down-arrow"
-          >
-            <ChevronDownIcon className="relative size-4.5 sm:size-4" />
-          </SelectPrimitive.ScrollDownArrow>
-        </SelectPrimitive.Popup>
-      </SelectPrimitive.Positioner>
-    </SelectPrimitive.Portal>
-  );
+        <SelectPrimitive.List data-slot="select-list" className="max-h-(--available-height) overflow-y-auto overscroll-contain p-(--qy-space-1)">{children}</SelectPrimitive.List>
+      </SelectPrimitive.Popup>
+    </SelectPrimitive.Positioner>
+  </SelectPrimitive.Portal>;
 }
 
-export function SelectItem({
-  className,
-  children,
-  ...props
-}: SelectPrimitive.Item.Props): React.ReactElement {
-  return (
-    <SelectPrimitive.Item
-      className={cn(
-        "grid min-h-8 pointer-coarse:min-h-11 in-data-[side=none]:min-w-[calc(var(--anchor-width)+1.25rem)] cursor-default grid-cols-[1rem_minmax(0,1fr)] items-center gap-(--qy-space-2) rounded-sm py-(--qy-space-1) ps-(--qy-space-2) pe-(--qy-space-4) text-base outline-none data-disabled:pointer-events-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-disabled:opacity-64 sm:min-h-7 sm:text-sm [&_svg:not([class*='size-'])]:size-4.5 sm:[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
-        className,
-      )}
-      data-slot="select-item"
-      {...props}
-    >
-      <SelectPrimitive.ItemIndicator className="col-start-1">
-        <CheckIcon aria-hidden="true" strokeWidth={3} />
-      </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText className="wrap-anywhere col-start-2 min-w-0">
-        {children}
-      </SelectPrimitive.ItemText>
-    </SelectPrimitive.Item>
-  );
+export function SelectItem({ children, className, ...props }: SelectItemProps) {
+  return <SelectPrimitive.Item
+    data-slot="select-item" {...props}
+    className={(state) => cn("grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-(--qy-field-gap) rounded-item px-(--qy-control-md-padding) py-(--qy-space-1) text-control-md-mobile sm:text-control-md outline-none data-highlighted:bg-accent data-disabled:cursor-not-allowed data-disabled:opacity-64", typeof className === "function" ? className(state) : className)}
+  >
+    <SelectPrimitive.ItemText data-slot="select-item-text" className="min-w-0 whitespace-normal wrap-break-word">{children}</SelectPrimitive.ItemText>
+    <span aria-hidden="true" className="flex size-(--qy-control-md-icon-narrow) items-center justify-center sm:size-(--qy-control-md-icon)">
+      <SelectPrimitive.ItemIndicator data-slot="select-item-indicator"><CheckIcon aria-hidden="true" className="size-full" /></SelectPrimitive.ItemIndicator>
+    </span>
+  </SelectPrimitive.Item>;
 }
 
-export function SelectSeparator({
-  className,
-  ...props
-}: SelectPrimitive.Separator.Props): React.ReactElement {
-  return (
-    <SelectPrimitive.Separator
-      className={cn("mx-(--qy-space-2) my-(--qy-space-1) h-px bg-border", className)}
-      data-slot="select-separator"
-      {...props}
-    />
-  );
+export function SelectGroup({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Group>) {
+  return <SelectPrimitive.Group data-slot="select-group" {...props} className={(state) => cn("min-w-0", typeof className === "function" ? className(state) : className)} />;
 }
 
-export function SelectGroup(
-  props: SelectPrimitive.Group.Props,
-): React.ReactElement {
-  return <SelectPrimitive.Group data-slot="select-group" {...props} />;
+export function SelectGroupLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.GroupLabel>) {
+  return <SelectPrimitive.GroupLabel data-slot="select-group-label" {...props} className={(state) => cn("min-w-0 px-(--qy-control-md-padding) py-(--qy-space-1) text-label text-muted-foreground wrap-break-word", typeof className === "function" ? className(state) : className)} />;
 }
 
-export function SelectLabel({
-  className,
-  ...props
-}: SelectPrimitive.Label.Props): React.ReactElement {
-  return (
-    <SelectPrimitive.Label
-      className={cn(
-        "not-in-data-[slot=field]:mb-(--qy-space-2) inline-flex cursor-default items-center gap-(--qy-space-2) font-medium text-base/4.5 text-foreground sm:text-sm/4",
-        className,
-      )}
-      data-slot="select-label"
-      {...props}
-    />
-  );
-}
-
-export function SelectGroupLabel({
-  className,
-  ...props
-}: SelectPrimitive.GroupLabel.Props): React.ReactElement {
-  return (
-    <SelectPrimitive.GroupLabel
-      className={cn("px-(--qy-space-2) py-[calc(var(--qy-space-1)*1.5)] font-medium text-muted-foreground text-xs", className)}
-      data-slot="select-group-label"
-      {...props}
-    />
-  );
-}
-
-export { SelectPrimitive, SelectPopup as SelectContent };
+export { SelectPrimitive };

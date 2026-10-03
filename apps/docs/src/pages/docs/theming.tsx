@@ -96,7 +96,7 @@ function ThemeBench() {
     <div className="my-6 overflow-hidden rounded-2xl border">
       <div className="flex flex-col gap-4 border-b bg-surface-subtle/60 p-4 sm:flex-row sm:flex-wrap sm:items-end sm:gap-x-8 dark:bg-surface/40">
         <div className="flex flex-col gap-2">
-          <span className="font-medium text-muted-foreground text-xs" id="brand-label">
+          <span className="font-medium text-muted-foreground text-caption" id="brand-label">
             品牌色
           </span>
           <ToggleGroup
@@ -114,17 +114,17 @@ function ThemeBench() {
                   className="size-3 rounded-full border border-foreground/10"
                   style={{ background: (resolvedTheme === "dark" ? item.dark : item.light)?.primary ?? "var(--qy-neutral-800)" }}
                 />
-                <span className="text-xs">{item.label}</span>
+                <span className="text-caption">{item.label}</span>
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
         </div>
         <div className="flex min-w-48 flex-1 flex-col gap-2 sm:max-w-60">
           <div className="flex items-center justify-between">
-            <span className="font-medium text-muted-foreground text-xs" id="radius-label">
+            <span className="font-medium text-muted-foreground text-caption" id="radius-label">
               根圆角 --qy-radius
             </span>
-            <span className="font-mono text-muted-foreground text-xs numeric">{radius.toFixed(3).replace(/0+$/, "").replace(/\.$/, "")}rem</span>
+            <span className="font-mono text-muted-foreground text-caption numeric">{radius.toFixed(3).replace(/0+$/, "").replace(/\.$/, "")}rem</span>
           </div>
           <Slider
             aria-labelledby="radius-label"
@@ -137,8 +137,8 @@ function ThemeBench() {
         </div>
         <div className="flex min-w-48 flex-1 flex-col gap-2 sm:max-w-60">
           <div className="flex items-center justify-between">
-            <span className="font-medium text-muted-foreground text-xs" id="panel-radius-label">面板 --qy-radius-panel</span>
-            <span className="font-mono text-muted-foreground text-xs numeric">{panelRadius}rem</span>
+            <span className="font-medium text-muted-foreground text-caption" id="panel-radius-label">面板 --qy-radius-panel</span>
+            <span className="font-mono text-muted-foreground text-caption numeric">{panelRadius}rem</span>
           </div>
           <Slider aria-labelledby="panel-radius-label" max={1.5} min={0} onValueChange={(value) => setPanelRadius(Array.isArray(value) ? value[0]! : value as number)} step={0.125} value={panelRadius} />
         </div>
@@ -160,7 +160,7 @@ function ThemeBench() {
           </Label>
           <div className="flex flex-wrap items-center gap-2">
             <Button>发送邀请</Button>
-            <Button variant="outline">取消</Button>
+            <Button variant="quiet">取消</Button>
             <Badge variant="outline">3 个席位</Badge>
           </div>
         </div>
@@ -220,7 +220,6 @@ export default function ThemingPage() {
   return (
     <article>
       <PageHeader
-        description="品牌、明暗与密度各自独立。通过文档级 CSS 覆盖颜色、控件与面板角色，组件继续使用同一套 API。"
         title="主题"
       />
 
@@ -239,7 +238,7 @@ export default function ThemingPage() {
             term: "语义",
             detail: (
               <>
-                <Code>tokens/semantic.css</Code>：界面谈论的角色，例如 <Code>--qy-primary</Code>、<Code>--qy-border</Code>、<Code>--qy-danger</Code>。浅色与深色是同名变量的两套绑定。
+                <Code>tokens/semantic.css</Code>：颜色角色，例如 <Code>--qy-primary</Code>、<Code>--qy-border</Code>、<Code>--qy-danger</Code>。浅色与深色是同名变量的两套绑定。
               </>
             ),
           },
@@ -247,7 +246,7 @@ export default function ThemingPage() {
             term: "组件",
             detail: (
               <>
-                <Code>tokens/components.css</Code>：字号、间距、圆角、控件高度、密度与动效。让你不改源码就能把表格调密、把控件调圆、把动效调慢。
+                <Code>tokens/components.css</Code>：字号、间距、圆角、控件高度、密度与动效。覆盖这些变量即可调整已有组件，无需修改组件源码或 API。
               </>
             ),
           },
@@ -260,30 +259,30 @@ export default function ThemingPage() {
       </P>
 
       <H2 id="playground">试一试</H2>
-      <P>选择示例配色，分别调整根圆角和面板圆角，再切换紧凑密度。预览显式重绑局部角色；生成的 CSS 用于项目的 html 根节点。配色预设仅供本站演示，不是库内品牌包。</P>
+      <P>预览中的颜色和圆角仅影响示例，生成的 CSS 应写在项目的 html 上。配色预设只用于本站示例，库内不提供这些品牌包。</P>
       <ThemeBench />
 
       <H2 id="brand">品牌色</H2>
       <P>
-        在引入 <Code>styles.css</Code> 之后，用 <Code>html[data-brand]</Code> 覆盖项目品牌。缺省品牌不需要此属性；品牌、明暗、密度分别使用 <Code>data-brand</Code>、<Code>.light/.dark</Code>（Provider 默认）和 <Code>data-density</Code>。显式设置 <Code>attribute="data-theme"</Code> 时，明暗改用该属性，品牌不能写进它。
+        在引入 <Code>styles.css</Code> 之后，用 <Code>html[data-brand]</Code> 覆盖项目品牌。默认明暗标记为 <Code>.light/.dark</Code>，密度用 <Code>data-density</Code>；品牌仅写入 <Code>data-brand</Code>，缺省品牌可省略该属性。使用 <Code>attribute="data-theme"</Code> 时，<Code>data-theme</Code> 仅保存 light/dark，不可填写品牌名。
       </P>
       <CodeBlock code={cssFor(BRANDS[1]!, DEFAULT_RADIUS, false)} lang="css" title="src/index.css" />
       <Callout tone="warning" title="检查对比度">
-        主色与它的前景色之间至少要有 4.5:1 的对比度，浅色和深色都要验证。危险状态 mark/边框用 <Code>--qy-danger</Code>，页面文字用 <Code>--qy-danger-foreground</Code>，实心动作填充和其上文字分别用 <Code>--qy-danger-fill</Code> / <Code>--qy-danger-on-fill</Code>；修改 mark 不会自动改实心动作填充。
+        主色与它的前景色之间至少要有 4.5:1 的对比度，浅色和深色都要验证。修改危险标记和边框的 <Code>--qy-danger</Code> 后，实心动作底色仍需另改 <Code>--qy-danger-fill</Code>；各角色对应关系见 <A href="/docs/tokens#colors">颜色令牌</A>。
       </Callout>
 
       <H2 id="radius">圆角</H2>
       <P>
-        根圆角 <Code>--qy-radius</Code> 默认 0.5rem（8px），只联动 <Code>md</Code>（根减0.5px，最小0）与 <Code>lg</Code>。<Code>--qy-radius-control</Code> 默认接 lg；面板角色 <Code>--qy-radius-panel</Code> 默认接独立的 2xl（12px）。xs/sm/xl/2xl/full 保持独立。
+        在 html[data-brand] 上设置 <Code>--qy-radius</Code> 调整控件圆角，设置 <Code>--qy-radius-panel</Code> 调整面板圆角。默认值与联动范围见 <A href="/docs/tokens#radius">设计令牌</A>。
       </P>
       <CodeBlock code={`html[data-brand="project"] {\n  --qy-radius: 0.5rem;\n  --qy-radius-panel: 0.75rem;\n}`} lang="css" />
-      <P className="text-[0.875rem] text-muted-foreground">
-        接入 control/panel 角色的内高光按对应外层角色减1px并钳制到0。派生变量在声明节点求值；只在局部容器覆盖根变量不保证继承别名重新计算。上方预览显式重绑实际消费角色，不代表库已支持任意局部品牌或 Portal 品牌继承。
+      <P className="text-body text-muted-foreground">
+        把这些覆盖写在 html；局部容器修改根变量时，继承的派生变量不一定重新计算。
       </P>
 
       <H2 id="density">密度</H2>
       <P>
-        文档级密度可设置 <Code>{'<html data-density="compact">'}</Code>；局部容器也可选用 compact 规则。消费这些角色的表格行高从48px降到40px，面板 padding/gap 和 topbar 角色随之收紧。单个表格可用 <Code>{'<Table density="compact">'}</Code>；不是所有组件的几何尺寸都会随密度变化。
+        在 html 或局部容器设置 <Code>data-density="compact"</Code>，或给单个 Table 设置 <Code>density="compact"</Code>。表格行高默认从 48px 变为 40px，面板 gap 与 section-gap 同时减小；控件高度和触摸目标不变。面板 padding 和 topbar 高度按视口宽度变化，不由 compact 控制。密度只影响已使用这些变量的组件。
       </P>
       <CodeBlock code={`<main data-density="compact">\n  <Table>…</Table>\n</main>`} />
 
@@ -297,7 +296,7 @@ export default function ThemingPage() {
         React 挂载之前页面已经开始绘制。把下面的脚本放进 <Code>{"<head>"}</Code>，在首帧之前读出保存的主题，就不会出现浅色闪烁：
       </P>
       <CodeBlock code={headScript} lang="html" title="index.html" />
-      <P className="text-[0.875rem] text-muted-foreground">
+      <P className="text-body text-muted-foreground">
         修改了 <Code>storageKey</Code> 或 <Code>attribute</Code> 时，脚本里的键名与写法要一起改。
       </P>
       <H3 id="use-theme">读取与切换</H3>

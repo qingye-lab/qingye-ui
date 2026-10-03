@@ -1,33 +1,38 @@
-# 单选框组 RadioGroup
+# 单选组 RadioGroup
 
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: 4aa8063028360c0a1fe50b1b2cd67c18e89e633a73764b82873fc50455aca615
+Source SHA-256: daeeb0c15d39c4ba850fd2d6e5e9dba613e835d4776d44f7b7dc33ab78bf1a71
 
-在少量互斥选项中选一个，选项需要同时可见时使用；选项多时改用 Select。
+从同时可见的少量候选中取一个值。
 
 ## Use and ownership
-- 同时比较少量互斥方案并选择其中一个。
-- Avoid: 不可把不同维度的选择混进同一组；选中状态不等于已保存。
-- Library: 单选值、组内方向键导航、焦点与禁用项。
-- Application: 方案数据、默认选项与提交结果。
+- 少量互斥候选，必须同时看见才能比较
+- Avoid: 可收起列表用 Select
+- Avoid: 多选用 Checkbox
+- Avoid: 命令用 Menu，视角切换用 Tabs
+- Avoid: 复杂属性比较用应用比较结构
+- Library: 焦点、方向键、非受控值
+- Application: 受控值、候选、invalid、提交与结果
 
 ## Composition
-- FieldsetLegend 提供共同问题，每个 Radio 的标签说明不同选项及必要差异。
+- FieldTitle → RadioGroup aria-labelledby；FieldItem + FieldLabel 命名单项；FieldDescription + FieldError 保留关联
 
 ## Responsive behavior
-- 窄屏可以改为纵排，仍同时保留互斥方案；每项命中区不随密度缩小。
+- 读既有窄屏尺寸与粗指针命中角色；本批只做桌面检查
 
 ## Customization
-- 卡片或文本行都以 Label 组合 Radio，不能重做独立点击状态。
+- 同档文字行高、圆形身份、主题表面与边框；不新增外围焦点圈
 
 ## Current exports
-- Radio: function; owner radio-group; PASS; props: RadioPrimitive.Root.Props
-- RadioGroup: function; owner radio-group; PASS; props: RadioGroupPrimitive.Props
-- RadioGroupItem: function; owner radio-group; alias of Radio; PASS; props: RadioPrimitive.Root.Props
+- Radio: function; owner radio-group; PASS; props: RadioProps<Value>
+- RadioGroup: function; owner radio-group; PASS; props: RadioGroupProps<Value>
 - RadioGroupPrimitive: reexport; owner radio-group; UNVERIFIED
+- RadioGroupProps: type; owner radio-group; PASS
 - RadioPrimitive: reexport; owner radio-group; UNVERIFIED
+- RadioProps: type; owner radio-group; PASS
+- RadioSize: type; owner radio-group; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -38,148 +43,128 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### RadioGroup
-Base UI RadioGroup。
-- value / defaultValue / onValueChange: unknown. 受控 / 非受控的选中值。
-- name / required / disabled / readOnly: string / boolean. 表单字段名与状态。
-- aria-labelledby: string. 指向组标题；或放进 Fieldset 用 FieldsetLegend 命名。
+可见互斥候选的共同状态与组语义。
+- value / defaultValue: Value. 受控值或真实初始选择。省略初值保持未选择；受控可用 null。
+- onValueChange: (value, eventDetails) => void. 原语值变化，可通过 eventDetails.cancel() 取消。
+- name / form / inputRef: string / string / Ref<HTMLInputElement>. 表单名、外部表单与隐藏 input 引用。未选不提交该字段。
+- disabled / readOnly / required: boolean; default false. 禁用、只读与原生约束；required 不自行推断 invalid。
+- aria-labelledby / aria-label: string. 组的名称；FieldTitle 的 id 可作为 aria-labelledby。
+- render / ref / className / style: Base UI composition. 组根元素与状态样式入口。
 
 ### Radio
-单个选项（别名 RadioGroupItem）。触屏设备上点击区扩大到 44px。
-- value: unknown. 此选项的值。
-- disabled: boolean. 禁用此选项。
-- aria-invalid: boolean. 错误边框。
+圆形单选入口与中心选中点。
+- value: Value. 组内唯一候选值；空字符串、0 与 null 未选择不同。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 圆形外径读同档文字行高；命中区单独读取 touch-target。
+- disabled / readOnly / required: boolean. 原语支持组与项的真实限制，Field disabled 也可传递。
+- render / nativeButton / ref / inputRef: Base UI composition. 默认原生 button，保留隐藏 radio input；改成非 button 时显式 nativeButton=false。
+- children / className / style: ReactNode / Base UI state callbacks. 替换指示部位或覆写样式；名称放在 FieldLabel 中。
+
+### RadioGroupPrimitive / RadioPrimitive
+Base UI 组与 Radio 原语出口。
 
 ## Keyboard
-- Tab: 进入组时聚焦选中项（无选中时为第一项）。
-- ↑ ↓ ← →: 移动并选中上一个 / 下一个选项。
-- Space: 选中当前聚焦项。
+- Tab / Shift+Tab: 组保留一个停靠点；已选项或第一个可用项获得焦点。
+- ↑ / ↓ / ← / →: 移动并选择候选，跳过禁用项，在组内循环。
+- Space: 选择当前候选。Home/End、类型搜索不属于此 Radio 原语契约。
 
 ## Source examples
-### 基础用法
-Source: apps/docs/src/content/radio-group/demos/01-basic.tsx
+### 尺寸
+Source: apps/docs/src/content/radio-group/demos/01-sizes.tsx
 ```tsx
-import { Label } from "@qingye/ui/components/label";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
+import { useId } from "react";
+import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { RadioGroup, Radio, type RadioSize } from "@qingye/ui/components/radio-group";
 
-export const meta = { title: "基础用法" };
+export const meta = { title: "尺寸", titleEn: "Sizes" };
 
-export default function Demo() {
-  return (
-    <div className="flex flex-col gap-3">
-      <span id="billing" className="font-medium text-sm">计费方式</span>
-      <RadioGroup aria-labelledby="billing" defaultValue="monthly">
-        <Label><Radio value="hourly" />按量付费</Label>
-        <Label><Radio value="monthly" />包年包月</Label>
-        <Label><Radio value="spot" disabled />抢占式实例（当前地域不可用）</Label>
-      </RadioGroup>
-    </div>
-  );
-}
-```
-
-### 带说明
-Source: apps/docs/src/content/radio-group/demos/02-description.tsx
-```tsx
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
-
-export const meta = { title: "带说明", description: "每个选项一个 Field，说明作为描述读出。" };
-
+const sizes: RadioSize[] = ["xs", "sm", "md", "lg", "xl"];
+const textClasses: Record<RadioSize, string> = {
+  xs: "text-control-xs", sm: "text-control-sm", md: "text-control-md", lg: "text-control-lg", xl: "text-control-xl",
+};
 const options = [
-  { value: "rolling", label: "滚动发布", description: "逐台替换实例，服务不中断，耗时较长。" },
-  { value: "blue-green", label: "蓝绿发布", description: "新旧两套环境并行，切换流量后可秒级回滚。" },
-  { value: "recreate", label: "重建", description: "先停止全部旧实例再启动新版本，期间服务不可用。" },
+  { value: "left", label: "左对齐" },
+  { value: "center", label: "居中" },
+  { value: "right", label: "右对齐" },
 ];
 
 export default function Demo() {
+  const id = useId();
   return (
-    <RadioGroup aria-label="发布策略" defaultValue="rolling" className="max-w-sm gap-4">
-      {options.map((option) => (
-        <Field key={option.value} orientation="horizontal" className="items-start">
-          <Radio value={option.value} className="mt-px" />
-          <FieldContent>
-            <FieldLabel>{option.label}</FieldLabel>
-            <FieldDescription>{option.description}</FieldDescription>
-          </FieldContent>
+    <FieldGroup className="grid w-full grid-cols-5 items-start">
+      {sizes.map(size => (
+        <Field key={size}>
+          <FieldTitle id={`${id}-${size}`}>{size}</FieldTitle>
+          <RadioGroup aria-labelledby={`${id}-${size}`} defaultValue="center">
+            {options.map(option => (
+              <FieldItem key={option.value}>
+                <Radio value={option.value} size={size} />
+                <FieldLabel className={textClasses[size]}>{option.label}</FieldLabel>
+              </FieldItem>
+            ))}
+          </RadioGroup>
         </Field>
       ))}
-    </RadioGroup>
+    </FieldGroup>
   );
 }
 ```
 
-### 卡片选项
-Source: apps/docs/src/content/radio-group/demos/03-card.tsx
+### 状态
+Source: apps/docs/src/content/radio-group/demos/02-states.tsx
 ```tsx
-import { Label } from "@qingye/ui/components/label";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
+import { useId, useState } from "react";
+import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
 
-export const meta = { title: "卡片选项", description: "适合套餐、方案这类需要对比的选择。" };
+export const meta = { title: "状态", titleEn: "States" };
 
-const plans = [
-  { value: "basic", name: "基础版", detail: "10 台设备 · 7 天数据", price: "¥0" },
-  { value: "pro", name: "专业版", detail: "200 台设备 · 90 天数据", price: "¥299/月" },
-  { value: "enterprise", name: "企业版", detail: "不限设备 · 私有部署", price: "联系销售" },
+const states = [
+  { id: "unselected", label: "未选择" },
+  { id: "selected", label: "已选择" },
+  { id: "invalid", label: "无效" },
+  { id: "readonly", label: "只读" },
+  { id: "disabled", label: "禁用" },
+  { id: "disabled-item", label: "禁用项" },
+];
+const options = [
+  { value: "left", label: "左对齐" },
+  { value: "center", label: "居中" },
+  { value: "right", label: "右对齐" },
 ];
 
 export default function Demo() {
+  const id = useId();
+  const [requiredValue, setRequiredValue] = useState<string | null>(null);
   return (
-    <RadioGroup aria-label="订阅套餐" defaultValue="pro" className="grid w-full max-w-2xl gap-2 sm:grid-cols-3">
-      {plans.map((plan) => (
-        <Label
-          key={plan.value}
-          className="flex items-start gap-3 rounded-lg border p-3 transition-colors hover:bg-accent/50 has-data-checked:border-primary/48 has-data-checked:bg-accent/50"
-        >
-          <Radio value={plan.value} className="mt-px" />
-          <span className="flex min-w-0 flex-col gap-1">
-            <span>{plan.name}</span>
-            <span className="font-normal text-muted-foreground text-xs">{plan.detail}</span>
-            <span className="mt-1 font-semibold text-sm numeric">{plan.price}</span>
-          </span>
-        </Label>
-      ))}
-    </RadioGroup>
-  );
-}
-```
-
-### 横向、禁用与错误
-Source: apps/docs/src/content/radio-group/demos/04-states.tsx
-```tsx
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Label } from "@qingye/ui/components/label";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
-
-export const meta = { title: "横向、禁用与错误" };
-
-export default function Demo() {
-  return (
-    <div className="flex w-full max-w-lg flex-col gap-6">
-      <Fieldset>
-        <FieldsetLegend>巡检频率</FieldsetLegend>
-        <RadioGroup defaultValue="week" className="flex-row flex-wrap gap-x-5 gap-y-3">
-          <Label><Radio value="day" />每天</Label>
-          <Label><Radio value="week" />每周</Label>
-          <Label><Radio value="month" />每月</Label>
-        </RadioGroup>
-      </Fieldset>
-      <Fieldset>
-        <FieldsetLegend>机房（已锁定）</FieldsetLegend>
-        <RadioGroup defaultValue="hz" disabled className="flex-row flex-wrap gap-x-5 gap-y-3">
-          <Label><Radio value="hz" />杭州 IDC</Label>
-          <Label><Radio value="sh" />上海 IDC</Label>
-        </RadioGroup>
-      </Fieldset>
-      <Fieldset>
-        <FieldsetLegend>故障等级</FieldsetLegend>
-        <RadioGroup aria-describedby="level-error" className="flex-row flex-wrap gap-x-5 gap-y-3">
-          <Label><Radio value="p1" aria-invalid />P1 紧急</Label>
-          <Label><Radio value="p2" aria-invalid />P2 严重</Label>
-          <Label><Radio value="p3" aria-invalid />P3 一般</Label>
-        </RadioGroup>
-        <p id="level-error" className="text-destructive-foreground text-xs">请选择故障等级</p>
-      </Fieldset>
-    </div>
+    <FieldGroup className="grid w-full grid-cols-3 items-start">
+      {states.map(state => {
+        const invalid = state.id === "invalid" && requiredValue === null;
+        return (
+          <Field key={state.id} invalid={invalid} disabled={state.id === "disabled"}>
+            <FieldTitle id={`${id}-${state.id}`}>
+              {state.id === "invalid" && !invalid ? "已选择" : state.label}
+            </FieldTitle>
+            <RadioGroup
+              aria-labelledby={`${id}-${state.id}`}
+              defaultValue={state.id === "unselected" || state.id === "invalid" ? null : "center"}
+              readOnly={state.id === "readonly"}
+              disabled={state.id === "disabled"}
+              onValueChange={value => {
+                if (state.id === "invalid") setRequiredValue(value);
+              }}
+            >
+              {options.map(option => (
+                <FieldItem key={option.value}>
+                  <Radio value={option.value} disabled={state.id === "disabled-item" && option.value === "right"} />
+                  <FieldLabel>{option.label}</FieldLabel>
+                </FieldItem>
+              ))}
+            </RadioGroup>
+            {invalid && <FieldError>请选择对齐方式。</FieldError>}
+          </Field>
+        );
+      })}
+    </FieldGroup>
   );
 }
 ```

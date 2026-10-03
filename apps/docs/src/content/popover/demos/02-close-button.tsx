@@ -1,24 +1,22 @@
 import { Button } from "@qingye/ui/components/button";
+import { Inline, Stack } from "@qingye/ui/components/layout";
 import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { BellIcon, XIcon } from "lucide-react";
+import { InfoIcon, XIcon } from "lucide-react";
 
-export const meta = { title: "带关闭按钮", description: "PopoverClose 可放在任意位置，图标按钮需要 aria-label。" };
+export const meta = { title: "关闭按钮", titleEn: "Close button" };
 
 export default function Demo() {
   return (
     <Popover>
-      <PopoverTrigger render={<Button aria-label="通知" size="icon" variant="outline" />}>
-        <BellIcon />
-      </PopoverTrigger>
+      <PopoverTrigger render={<Button aria-label="详细信息" shape="icon" variant="quiet" />}><InfoIcon aria-hidden="true" /></PopoverTrigger>
       <PopoverPopup className="w-72">
-        <PopoverClose aria-label="关闭" className="absolute end-2 top-2" render={<Button size="icon-sm" variant="ghost" />}>
-          <XIcon />
-        </PopoverClose>
-        <div className="mb-3 grid gap-1.5 pe-6">
-          <PopoverTitle className="text-base">没有新通知</PopoverTitle>
-          <PopoverDescription>今天的 12 条告警都已处理完毕。</PopoverDescription>
-        </div>
-        <PopoverClose render={<Button size="sm" variant="outline" />}>查看历史</PopoverClose>
+        <Stack gap="panel">
+          <Inline gap="panel" className="justify-between">
+            <PopoverTitle>青野 Qingye UI</PopoverTitle>
+            <PopoverClose aria-label="关闭" render={<Button shape="icon" size="sm" variant="quiet" />}><XIcon aria-hidden="true" /></PopoverClose>
+          </Inline>
+          <PopoverDescription>React 组件库</PopoverDescription>
+        </Stack>
       </PopoverPopup>
     </Popover>
   );

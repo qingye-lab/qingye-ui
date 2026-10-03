@@ -1,30 +1,26 @@
+import { useState } from "react";
 import { Button } from "@qingye/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { CopyIcon, DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { BoldIcon, ItalicIcon } from "lucide-react";
 
-export const meta = {
-  title: "图标按钮",
-  description: "第一次悬停按默认延迟出现；在相邻按钮间移动时立即切换，不再等待。",
-};
-
-const actions = [
-  { label: "编辑", icon: PencilIcon },
-  { label: "复制", icon: CopyIcon },
-  { label: "下载", icon: DownloadIcon },
-  { label: "删除", icon: Trash2Icon },
-];
+export const meta = { title: "文字格式" };
 
 export default function Demo() {
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
   return (
-    <div className="flex gap-1">
-      {actions.map(({ label, icon: Icon }) => (
-        <Tooltip key={label}>
-          <TooltipTrigger render={<Button aria-label={label} size="icon" variant="ghost" />}>
-            <Icon />
-          </TooltipTrigger>
-          <TooltipPopup>{label}</TooltipPopup>
+    <div className="flex flex-col gap-(--qy-field-group-gap)">
+      <div className="flex gap-(--qy-action-gap)">
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>强调项目名称</TooltipPopup>
         </Tooltip>
-      ))}
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><ItalicIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>标记作品名称或引用</TooltipPopup>
+        </Tooltip>
+      </div>
+      <p className="text-body text-foreground" aria-live="polite">{bold ? <strong>{italic ? <em>青野组件库</em> : "青野组件库"}</strong> : italic ? <em>青野组件库</em> : "青野组件库"}</p>
     </div>
   );
 }

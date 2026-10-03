@@ -1,51 +1,37 @@
-# 气泡卡片 Popover
+# 浮起面板 Popover
 
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: c12f748ff8eb4835e733b4d11eb8d7249967e8a8eedb95c1159317d3b20daff1
+Source SHA-256: d7ab675f6f0670100370b276b4176bb9de11a29b4fedef31787f2918192e689d
 
-点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。
+与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 
 ## Use and ownership
-- 在触发对象旁按需展示短表单、选择或可点击帮助，保持上下文。
-- Avoid: 不能把关键后果只塞进临时浮层；关闭不能被应用当成提交成功。
-- Library: 管理触发器与浮层关联、定位、碰撞、焦点和 close 请求，保留表单原生语义。
-- Application: 负责值、验证、提交与错误恢复；受控 open 不替代业务状态。
+- 在触发对象旁展开局部操作或补充信息，主工作面仍可使用。
+- Avoid: 阻断式任务；唯一关键后果；把关闭当成保存或取消成功。
+- Library: 本地打开请求、触发关联、定位、焦点与返回。
+- Application: 草稿、业务动作、异步结果、受控 open 与触发器消失后的返回目标。
 
 ## Composition
-- 可交互内容用 Popover；纯文本悬停补充用 Tooltip；需要独立模态任务时用 Dialog。
+- Trigger 关联对象；Title/Description 建立名称；Close、Esc 与外部入口提供返回。
 
 ## Responsive behavior
-- 根据可用高度滚动内容；窄屏仍提供触发与退出，表单长标签应保留可读宽度。
+- 在可用高度内滚动，保留焦点内缘；关闭方式与非阻断语义不变。
 
 ## Customization
-- side、align 和 anchor 调整与对象的空间关系；tooltipStyle 只改变表面，不移除交互语义。
+- 集中表面与浮层圆角；原生属性与定位层透传；不按子内容追加视觉特判。
 
 ## Current exports
-- Popover: const; owner popover; PASS
+- Popover: function; owner popover; PASS; props: PopoverProps<Payload>
 - PopoverClose: function; owner popover; PASS; props: PopoverPrimitive.Close.Props
-- PopoverContent: function; owner popover; alias of PopoverPopup; PASS; props: PopoverPrimitive.Popup.Props & {
-  portalProps?: PopoverPrimitive.Portal.Props;
-  side?: PopoverPrimitive.Positioner.Props["side"];
-  align?: PopoverPrimitive.Positioner.Props["align"];
-  sideOffset?: PopoverPrimitive.Positioner.Props["sideOffset"];
-  alignOffset?: PopoverPrimitive.Positioner.Props["alignOffset"];
-  tooltipStyle?: boolean;
-  anchor?: PopoverPrimitive.Positioner.Props["anchor"];
-}
+- PopoverContent: function; owner popover; alias of PopoverPopup; PASS; props: PopoverPopupProps
 - PopoverCreateHandle: const; owner popover; PASS
 - PopoverDescription: function; owner popover; PASS; props: PopoverPrimitive.Description.Props
-- PopoverPopup: function; owner popover; PASS; props: PopoverPrimitive.Popup.Props & {
-  portalProps?: PopoverPrimitive.Portal.Props;
-  side?: PopoverPrimitive.Positioner.Props["side"];
-  align?: PopoverPrimitive.Positioner.Props["align"];
-  sideOffset?: PopoverPrimitive.Positioner.Props["sideOffset"];
-  alignOffset?: PopoverPrimitive.Positioner.Props["alignOffset"];
-  tooltipStyle?: boolean;
-  anchor?: PopoverPrimitive.Positioner.Props["anchor"];
-}
+- PopoverPopup: function; owner popover; PASS; props: PopoverPopupProps
+- PopoverPopupProps: interface; owner popover; PASS
 - PopoverPrimitive: reexport; owner popover; UNVERIFIED
+- PopoverProps: type; owner popover; PASS
 - PopoverTitle: function; owner popover; PASS; props: PopoverPrimitive.Title.Props
 - PopoverTrigger: function; owner popover; PASS; props: PopoverPrimitive.Trigger.Props
 
@@ -54,220 +40,189 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
+- 默认 Portal 挂到 body，无法继承触发者局部 DOM 上下文；container 必须在打开前挂载。
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
 ### Popover
-根组件，管理打开状态。
-- open / defaultOpen: boolean; default false. 受控 / 非受控的打开状态。
-- onOpenChange: (open, details) => void. 打开状态变化时调用。
-- modal: boolean | "trap-focus"; default false. 设为 true 时锁定页面滚动与外部交互。
-- handle: PopoverCreateHandle(). 多个触发器共用一个浮层，切换时浮层平滑移动并变换尺寸。
+管理非阻断打开状态，完整继承 Base UI Root 的控制契约。modal 已移除。
+- open / defaultOpen: boolean; default false. 受控 / 非受控打开状态。
+- onOpenChange: (open, details) => void. 原语报告请求及原因，应用决定受控状态。
+- handle / triggerId / defaultTriggerId: Handle / string. 共享触发器或受控初始打开时，建立明确关联。
 
-### PopoverTrigger
-触发按钮。
-- openOnHover: boolean; default false. 悬停时也打开，配合 delay 使用。
-- handle / payload: Handle / unknown. 与共享浮层关联，并传入要渲染的内容。
+### PopoverTrigger / PopoverClose
+原生触发与关闭入口；支持 render、ref、style、事件及按状态求值的 className。
 
 ### PopoverPopup
-浮层本体，自动避开视口边缘。别名 PopoverContent。
-- side: "top" | "right" | "bottom" | "left" | "inline-start" | "inline-end"; default "bottom". 相对触发器的方向，空间不足时自动翻转。
-- align: "start" | "center" | "end"; default "center". 沿边的对齐方式。
-- sideOffset / alignOffset: number; default 4 / 0. 与触发器的距离 / 对齐偏移。
-- tooltipStyle: boolean; default false. 使用 Tooltip 的紧凑样式，适合触屏上的点击说明。
-- anchor: Element | RefObject. 锚定到触发器以外的元素。
+浮起表面、定位与可滚动内容层；别名 PopoverContent。无日历或 tooltip 样式特判。
+- side / align: Positioner.Props; default bottom / center. 相对触发者的方向与对齐；由原语处理碰撞。
+- sideOffset / alignOffset / anchor: Positioner.Props; default 0 / 0 / trigger. 明确定位关系。默认间距沿用原语 0，不推断内容类型。
+- initialFocus / finalFocus: Popup.Props; default true / true. 默认原语管理焦点与返回；触发者将被移除时，finalFocus 指定有意义上级。
+- portalProps: Portal.Props. 局部密度、方向、语言或主题需保留时，将 container 指向已挂载的上下文容器。
+- positionerProps / viewportProps: Positioner.Props / Viewport.Props. 透传定位层与内容层的 className、style、ref、render 和原生属性。
 
 ### PopoverTitle / PopoverDescription
-标题与说明，自动关联为浮层的可访问名称与描述。
+关联浮层的可访问名称与说明。
 
-### PopoverClose
-关闭浮层的按钮。
+### PopoverCreateHandle / PopoverPrimitive
+类型化共享触发器 handle 与 Base UI 原语命名空间。
 
 ## Keyboard
 - Enter / Space: 在触发器上打开或关闭。
-- Esc: 关闭浮层，焦点回到触发器。
-- Tab: 在浮层内移动焦点；移出浮层时自动关闭。
+- Esc: 关闭并返回触发者，或指定的 finalFocus。
+- Tab / Shift+Tab: 遍历内容，允许离开浮层回到工作面。
 
 ## Source examples
-### 基础用法
+### 多行输入
 Source: apps/docs/src/content/popover/demos/01-form.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { Field } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { Popover, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 import { Textarea } from "@qingye/ui/components/textarea";
+import { useState } from "react";
 
-export const meta = { title: "基础用法", description: "点击打开，承载一个简短的表单。" };
+export const meta = { title: "多行输入", titleEn: "Multiline input" };
 
 export default function Demo() {
+  const [draft, setDraft] = useState("");
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="outline" />}>意见反馈</PopoverTrigger>
+      <PopoverTrigger render={<Button variant="quiet" />}>编辑备注</PopoverTrigger>
       <PopoverPopup className="w-80">
-        <div className="mb-4 grid gap-1.5">
-          <PopoverTitle className="text-base">意见反馈</PopoverTitle>
-          <PopoverDescription>告诉我们哪里用得不顺手，产品团队每周都会阅读。</PopoverDescription>
-        </div>
-        <Form className="grid gap-3" onSubmit={(event) => event.preventDefault()}>
+        <Stack gap="panel">
+          <PopoverTitle>编辑备注</PopoverTitle>
           <Field>
-            <Textarea aria-label="反馈内容" placeholder="例如：批量导出时希望能选择字段" />
+            <FieldLabel>备注</FieldLabel>
+            <Textarea onChange={(event) => setDraft(event.target.value)} value={draft} />
           </Field>
-          <Button type="submit">提交反馈</Button>
-        </Form>
+          <PopoverClose render={<Button variant="quiet" />}>关闭</PopoverClose>
+        </Stack>
       </PopoverPopup>
     </Popover>
   );
 }
 ```
 
-### 带关闭按钮
+### 关闭按钮
 Source: apps/docs/src/content/popover/demos/02-close-button.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
+import { Inline, Stack } from "@qingye/ui/components/layout";
 import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { BellIcon, XIcon } from "lucide-react";
+import { InfoIcon, XIcon } from "lucide-react";
 
-export const meta = { title: "带关闭按钮", description: "PopoverClose 可放在任意位置，图标按钮需要 aria-label。" };
+export const meta = { title: "关闭按钮", titleEn: "Close button" };
 
 export default function Demo() {
   return (
     <Popover>
-      <PopoverTrigger render={<Button aria-label="通知" size="icon" variant="outline" />}>
-        <BellIcon />
-      </PopoverTrigger>
+      <PopoverTrigger render={<Button aria-label="详细信息" shape="icon" variant="quiet" />}><InfoIcon aria-hidden="true" /></PopoverTrigger>
       <PopoverPopup className="w-72">
-        <PopoverClose aria-label="关闭" className="absolute end-2 top-2" render={<Button size="icon-sm" variant="ghost" />}>
-          <XIcon />
-        </PopoverClose>
-        <div className="mb-3 grid gap-1.5 pe-6">
-          <PopoverTitle className="text-base">没有新通知</PopoverTitle>
-          <PopoverDescription>今天的 12 条告警都已处理完毕。</PopoverDescription>
-        </div>
-        <PopoverClose render={<Button size="sm" variant="outline" />}>查看历史</PopoverClose>
+        <Stack gap="panel">
+          <Inline gap="panel" className="justify-between">
+            <PopoverTitle>青野 Qingye UI</PopoverTitle>
+            <PopoverClose aria-label="关闭" render={<Button shape="icon" size="sm" variant="quiet" />}><XIcon aria-hidden="true" /></PopoverClose>
+          </Inline>
+          <PopoverDescription>React 组件库</PopoverDescription>
+        </Stack>
       </PopoverPopup>
     </Popover>
   );
 }
 ```
 
-### 方向
+### 位置
 Source: apps/docs/src/content/popover/demos/03-sides.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { Popover, PopoverDescription, PopoverPopup, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Inline } from "@qingye/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 
-export const meta = { title: "方向", description: "side 指定弹出方向；空间不足时自动翻转到对侧。" };
+export const meta = { title: "位置", titleEn: "Placement" };
 
-const sides = [
+const places = [
   { side: "top", label: "上方" },
-  { side: "right", label: "右侧" },
+  { side: "inline-end", label: "行尾" },
   { side: "bottom", label: "下方" },
-  { side: "left", label: "左侧" },
+  { side: "inline-start", label: "行首" },
 ] as const;
 
 export default function Demo() {
   return (
-    <div className="flex flex-wrap justify-center gap-2">
-      {sides.map(({ side, label }) => (
-        <Popover key={side}>
-          <PopoverTrigger render={<Button variant="outline" />}>{label}</PopoverTrigger>
-          <PopoverPopup className="w-56" side={side}>
-            <PopoverDescription>从{label}弹出，与触发器保持 4px 间距。</PopoverDescription>
+    <Inline className="justify-center">
+      {places.map(({ side, label }) => (
+        <Popover key={label}>
+          <PopoverTrigger render={<Button variant="quiet" />}>{label}</PopoverTrigger>
+          <PopoverPopup side={side}>
+            <PopoverTitle>{label}</PopoverTitle>
           </PopoverPopup>
         </Popover>
       ))}
-    </div>
+    </Inline>
   );
 }
 ```
 
-### 多个触发器共用浮层
+### 共享面板
 Source: apps/docs/src/content/popover/demos/04-shared.tsx
 ```tsx
-import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
 import { Button } from "@qingye/ui/components/button";
-import { Popover, PopoverCreateHandle, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { BellIcon, UserIcon } from "lucide-react";
-import type { ComponentType } from "react";
+import { Inline, Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverClose, PopoverCreateHandle, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { useMemo } from "react";
 
-export const meta = {
-  title: "多个触发器共用浮层",
-  description: "通过 handle 共用一个浮层，在触发器之间切换时，浮层平滑移动并变换尺寸。",
-};
-
-const handle = PopoverCreateHandle<ComponentType>();
-
-function Notifications() {
-  return (
-    <div className="grid gap-1.5">
-      <PopoverTitle className="text-base">通知</PopoverTitle>
-      <PopoverDescription>暂时没有新的通知。</PopoverDescription>
-    </div>
-  );
-}
-
-function Profile() {
-  return (
-    <div className="grid w-52 gap-3">
-      <div className="flex items-center gap-3">
-        <Avatar>
-          <AvatarFallback>林</AvatarFallback>
-        </Avatar>
-        <div className="min-w-0">
-          <PopoverTitle className="truncate font-medium text-sm">林嘉禾</PopoverTitle>
-          <PopoverDescription className="text-xs">产品设计师</PopoverDescription>
-        </div>
-      </div>
-      <Button size="sm" variant="outline">
-        退出登录
-      </Button>
-    </div>
-  );
-}
+export const meta = { title: "共享面板", titleEn: "Shared popup" };
 
 export default function Demo() {
+  const handle = useMemo(() => PopoverCreateHandle<string>(), []);
   return (
-    <div className="flex gap-2">
-      <PopoverTrigger handle={handle} payload={Notifications} render={<Button aria-label="通知" size="icon" variant="outline" />}>
-        <BellIcon />
-      </PopoverTrigger>
-      <PopoverTrigger handle={handle} payload={Profile} render={<Button aria-label="个人资料" size="icon" variant="outline" />}>
-        <UserIcon />
-      </PopoverTrigger>
+    <Inline>
+      <PopoverTrigger handle={handle} payload="第一项" render={<Button variant="quiet" />}>第一项</PopoverTrigger>
+      <PopoverTrigger handle={handle} payload="第二项" render={<Button variant="quiet" />}>第二项</PopoverTrigger>
       <Popover handle={handle}>
-        {({ payload: Content }) => <PopoverPopup>{Content ? <Content /> : null}</PopoverPopup>}
+        {({ payload }) => (
+          <PopoverPopup>
+            <Stack gap="panel">
+              <PopoverTitle>{payload}</PopoverTitle>
+              <PopoverClose render={<Button size="sm" variant="quiet" />}>关闭</PopoverClose>
+            </Stack>
+          </PopoverPopup>
+        )}
       </Popover>
-    </div>
+    </Inline>
   );
 }
 ```
 
-### 点击说明
-Source: apps/docs/src/content/popover/demos/05-tooltip-style.tsx
+### 局部语言与密度
+Source: apps/docs/src/content/popover/demos/05-context.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { Popover, PopoverPopup, PopoverTrigger } from "@qingye/ui/components/popover";
-import { InfoIcon } from "lucide-react";
+import { Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { useRef } from "react";
 
-export const meta = {
-  title: "点击说明",
-  description: "tooltipStyle 使用提示的紧凑样式。触屏没有悬停，需要让用户点开的说明用它代替 Tooltip。",
-};
+import { Text } from "@qingye/ui/components/typography";
+
+export const meta = { title: "局部语言与密度", titleEn: "Local language and density" };
 
 export default function Demo() {
+  const context = useRef<HTMLDivElement>(null);
   return (
-    <p className="flex items-center gap-1 text-sm">
-      <span className="numeric font-medium">设备在线率 96.4%</span>
+    <div data-density="compact" dir="rtl" lang="ar" ref={context}>
       <Popover>
-        <PopoverTrigger render={<Button aria-label="指标说明" size="icon-xs" variant="ghost" />}>
-          <InfoIcon />
-        </PopoverTrigger>
-        <PopoverPopup className="max-w-60" side="top" tooltipStyle>
-          过去 24 小时内至少上报过一次心跳的设备占比。
+        <PopoverTrigger render={<Button variant="quiet" />}>فتح</PopoverTrigger>
+        <PopoverPopup portalProps={{ container: context }}>
+          <Stack gap="panel">
+            <PopoverTitle>ملاحظة</PopoverTitle>
+            <Text>نص قصير.</Text>
+            <PopoverClose render={<Button size="sm" variant="quiet" />}>إغلاق</PopoverClose>
+          </Stack>
         </PopoverPopup>
       </Popover>
-    </p>
+    </div>
   );
 }
 ```

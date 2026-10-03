@@ -3,28 +3,29 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
-Source SHA-256: 09c9465dab150b015ce7263847f9648bd92f0a1677a88dd7b3891c9b46ef6972
+Source SHA-256: 050cdccb70cb4d1d342f31fb6721107b46497f2ad1baaf444270cc082555a103
 
-在内容组之间画一条 1px 的细线，横向分开段落区块，纵向分开行内的链接或操作。
+在已有内容组之间表达分界，可选择语义分隔或装饰线。
 
 ## Use and ownership
-- 需要视觉或语义分隔已经不同的内容范围。
-- Avoid: 每两行都画线；把 Separator 当可拖动分隔条；只靠线说明新任务开始。
-- Library: 分隔原语、方向与边界颜色。
-- Application: 内容分组、边界是否需要辅助技术感知。
+- 两组内容确需可辨认分界。
+- Avoid: 每两行画线；把静态分界当拖动入口。
+- Library: Base UI 分隔原语、方向、装饰选择。
+- Application: 分界位置与辅助技术是否需要感知。
 
 ## Composition
-- 标题和间距先说明关系；separator 只是边界，需要调面板大小时用 ResizableHandle。
+- 标题说明内容范围；有文字的 FieldSeparator 使用装饰线避免重复语义。
 
 ## Responsive behavior
-- 横竖方向随实际布局选择，不用固定高度把相邻控件挤压。
+- 长轴跟随容器；竖线依实际行布局拉伸。
 
 ## Customization
-- orientation 决定几何；颜色来自边界角色，装饰与语义选择遵守当前原语 API。
+- 强边界颜色与 1px 线条为表达预设；className 最后合并，render 与原生属性透传。
 
 ## Current exports
-- Separator: function; owner separator; PASS; props: SeparatorPrimitive.Props
+- Separator: function; owner separator; PASS; props: SeparatorProps
 - SeparatorPrimitive: reexport; owner separator; UNVERIFIED
+- SeparatorProps: type; owner separator; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -35,66 +36,45 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Separator
-带 role="separator" 的细线，颜色为半透明边框色，在任何底色上都协调。
-- orientation: "horizontal" | "vertical"; default "horizontal". 横线占满宽度；竖线在 flex 行内自动拉伸到行高，也可用 h-* 指定高度。
+基于 Base UI Separator；默认 role=separator。
+- orientation: "horizontal" | "vertical"; default "horizontal". 横向跨容器；纵向在 flex 行里拉伸。
+- decorative: boolean; default false. true 时 role=presentation 且 aria-hidden=true。
+- className / style / render / ref: Base UI Separator props. 作用于分界本身；样式支持方向状态函数。
+
+### SeparatorPrimitive
+Base UI 原语出口。
 
 ## Keyboard
+- 无: 静态分隔不进入键盘焦点顺序。
 
 ## Source examples
-### 横向
+### 水平分界
 Source: apps/docs/src/content/separator/demos/01-horizontal.tsx
 ```tsx
 import { Separator } from "@qingye/ui/components/separator";
-
-export const meta = { title: "横向" };
-
+export const meta = { title: "水平分界", titleEn: "Horizontal separator" };
 export default function Demo() {
-  return (
-    <div className="w-full max-w-xs text-sm">
-      <div className="flex flex-col gap-1">
-        <p className="font-medium">青烟设计系统</p>
-        <p className="text-muted-foreground">克制、耐看的界面组件与设计令牌。</p>
-      </div>
-      <Separator className="my-4" />
-      <div className="flex flex-col gap-1">
-        <p className="font-medium">版本 0.1.0</p>
-        <p className="text-muted-foreground">2026 年 10 月 1 日发布</p>
-      </div>
-    </div>
-  );
+  return <div className="flex w-full max-w-xs flex-col gap-(--qy-field-group-gap) text-body"><section><h3 className="text-heading">文字</h3><p>青野 Qingye UI</p></section><Separator /><section><h3 className="text-heading">数字</h3><p className="numeric">0123456789</p></section></div>;
 }
 ```
 
-### 纵向
+### 行内分界
 Source: apps/docs/src/content/separator/demos/02-vertical.tsx
 ```tsx
 import { Separator } from "@qingye/ui/components/separator";
-
-export const meta = { title: "纵向", description: "在 flex 行内自动拉伸到行高。" };
-
+export const meta = { title: "行内分界", titleEn: "Inline boundary" };
 export default function Demo() {
-  return (
-    <div className="flex flex-col items-center gap-6 text-sm">
-      <nav aria-label="页脚" className="flex items-center gap-3 text-muted-foreground">
-        <a className="hover:text-foreground" href="#">文档</a>
-        <Separator orientation="vertical" />
-        <a className="hover:text-foreground" href="#">更新日志</a>
-        <Separator orientation="vertical" />
-        <a className="hover:text-foreground" href="#">问题反馈</a>
-      </nav>
-      <div className="flex h-12 items-center gap-4 rounded-xl border px-4">
-        <div>
-          <div className="text-muted-foreground text-xs">今日访问</div>
-          <div className="numeric font-medium">3,206</div>
-        </div>
-        <Separator orientation="vertical" />
-        <div>
-          <div className="text-muted-foreground text-xs">转化率</div>
-          <div className="numeric font-medium">4.8%</div>
-        </div>
-      </div>
-    </div>
-  );
+  return <nav aria-label="项目资料" className="flex items-center gap-(--qy-field-gap) text-body"><a href="/design.md">设计指南</a><Separator orientation="vertical" /><a href="https://github.com/qingye-lab/qingye-ui">仓库</a></nav>;
+}
+```
+
+### 装饰线
+Source: apps/docs/src/content/separator/demos/03-decorative.tsx
+```tsx
+import { Separator } from "@qingye/ui/components/separator";
+export const meta = { title: "装饰线", titleEn: "Decorative line" };
+export default function Demo() {
+  return <div className="flex w-full max-w-xs flex-col gap-(--qy-field-gap)"><h3 className="text-heading">青野 Qingye UI</h3><Separator decorative /><p className="text-body">React 组件库</p></div>;
 }
 ```
 

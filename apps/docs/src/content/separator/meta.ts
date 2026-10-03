@@ -1,52 +1,24 @@
 import type { ComponentMeta } from "@/lib/types";
-
 export default {
-  title: "分隔线 Separator",
-  description: "在内容组之间画一条 1px 的细线，横向分开段落区块，纵向分开行内的链接或操作。",
-  category: "布局",
-  source: "coss",
-  exports: ["Separator"],
-  keywords: ["separator", "divider", "分隔线", "分割线", "hr"],
-  api: [
-    {
-      name: "Separator",
-      description: "带 role=\"separator\" 的细线，颜色为半透明边框色，在任何底色上都协调。",
-      props: [
-        { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "横线占满宽度；竖线在 flex 行内自动拉伸到行高，也可用 h-* 指定高度。" },
-      ],
-    },
-  ],
-  notes: [
-    "只用于区分内容组；纯装饰的线条用边框（border-t 等）即可，不需要语义。",
-    "竖线放在 flex 行内才会自动拉伸；指定 h-4 之类的高度时以指定为准。",
-  ],
+  title: "分隔线 Separator", titleEn: "Separator",
+  description: "在已有内容组之间表达分界，可选择语义分隔或装饰线。", descriptionEn: "Express a boundary between content groups as a semantic separator or decorative line.",
+  category: "布局", layer: "primitive", source: "local", exports: ["Separator"], keywords: ["separator", "分界", "decorative", "装饰"],
+  decisions: "标题与间距足够表达关系时不加线。Separator 没有拖动、按钮或面板调整行为。", decisionsEn: "Omit a line when headings and spacing already express the relation. Separator has no drag, button, or panel-resizing behavior.",
   design: {
-    "methods": [
-      "相成相制",
-      "布白有用"
-    ],
-    "whenToUse": [
-      "需要视觉或语义分隔已经不同的内容范围。"
-    ],
-    "avoid": [
-      "每两行都画线；把 Separator 当可拖动分隔条；只靠线说明新任务开始。"
-    ],
-    "composition": [
-      "标题和间距先说明关系；separator 只是边界，需要调面板大小时用 ResizableHandle。"
-    ],
-    "stateOwner": {
-      "library": [
-        "分隔原语、方向与边界颜色。"
-      ],
-      "application": [
-        "内容分组、边界是否需要辅助技术感知。"
-      ]
-    },
-    "responsive": [
-      "横竖方向随实际布局选择，不用固定高度把相邻控件挤压。"
-    ],
-    "customization": [
-      "orientation 决定几何；颜色来自边界角色，装饰与语义选择遵守当前原语 API。"
-    ]
+    methods: ["名实相符", "布白有用"], whenToUse: ["两组内容确需可辨认分界。"], avoid: ["每两行画线；把静态分界当拖动入口。"],
+    composition: ["标题说明内容范围；有文字的 FieldSeparator 使用装饰线避免重复语义。"],
+    stateOwner: {library: ["Base UI 分隔原语、方向、装饰选择。"], application: ["分界位置与辅助技术是否需要感知。"]},
+    responsive: ["长轴跟随容器；竖线依实际行布局拉伸。"], customization: ["强边界颜色与 1px 线条为表达预设；className 最后合并，render 与原生属性透传。"],
   },
+  api: [
+    {name: "Separator", description: "基于 Base UI Separator；默认 role=separator。", descriptionEn: "Based on Base UI Separator; role=separator by default.", props: [
+      {name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "横向跨容器；纵向在 flex 行里拉伸。", descriptionEn: "Horizontal spans the container; vertical stretches in a flex row."},
+      {name: "decorative", type: "boolean", default: "false", description: "true 时 role=presentation 且 aria-hidden=true。", descriptionEn: "When true, uses role=presentation and aria-hidden=true."},
+      {name: "className / style / render / ref", type: "Base UI Separator props", description: "作用于分界本身；样式支持方向状态函数。", descriptionEn: "Applied to the separator; styles support orientation state functions."},
+    ]},
+    {name: "SeparatorPrimitive", description: "Base UI 原语出口。", descriptionEn: "Base UI primitive outlet."},
+  ],
+  keyboard: [{keys: "无", description: "静态分隔不进入键盘焦点顺序。", descriptionEn: "A static separator does not enter the tab order."}],
+  notes: ["装饰线不承担辅助技术语义。需要拖动改变尺寸时使用具有调整行为的控件。", "必要非文本边界与真实承载面的对比至少 3:1；图片与未知承载面另行验证。"],
+  notesEn: ["Decorative lines carry no assistive-technology semantics. Use a control with resize behavior when dragging must change dimensions.", "Necessary non-text boundaries need at least 3:1 contrast against the real carrier. Images and unknown carriers need separate checks."],
 } satisfies ComponentMeta;

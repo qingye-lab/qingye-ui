@@ -1,0 +1,505 @@
+{
+  "base": "http://localhost:5180",
+  "startedAt": "2026-10-03T02:32:59.686Z",
+  "checks": [
+    {
+      "name": "loading menu blocks pointer and keyboard activation, retains focus and recovers",
+      "details": {}
+    },
+    {
+      "name": "late string promise success clears unknown presentation",
+      "details": {
+        "text": "上传完成"
+      }
+    },
+    {
+      "name": "late string promise failure clears unknown presentation",
+      "details": {
+        "text": "上传失败"
+      }
+    },
+    {
+      "name": "late object promise success clears unknown presentation",
+      "details": {
+        "text": "上传完成文件 A"
+      }
+    },
+    {
+      "name": "late object promise failure clears unknown presentation",
+      "details": {
+        "text": "上传失败文件 A"
+      }
+    },
+    {
+      "name": "unread mail remains readable at 1280px",
+      "details": {}
+    },
+    {
+      "name": "toggle responsive typography 1280px light",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "tabs responsive typography 1280px light",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "tag-input responsive typography 1280px light",
+      "details": {
+        "size": 12,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "table header density and theme overrides 1280px light",
+      "details": {
+        "natural": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "before": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "after": [
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "compact",
+            "height": 56
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          }
+        ],
+        "wrappedHeight": 756.5
+      }
+    },
+    {
+      "name": "toggle responsive typography 1280px dark",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "tabs responsive typography 1280px dark",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "tag-input responsive typography 1280px dark",
+      "details": {
+        "size": 12,
+        "weight": "500",
+        "override": 15
+      }
+    },
+    {
+      "name": "table header density and theme overrides 1280px dark",
+      "details": {
+        "natural": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "before": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "after": [
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "compact",
+            "height": 56
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          }
+        ],
+        "wrappedHeight": 756.5
+      }
+    },
+    {
+      "name": "unread mail remains readable at 390px",
+      "details": {}
+    },
+    {
+      "name": "toggle responsive typography 390px light",
+      "details": {
+        "size": 16,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "tabs responsive typography 390px light",
+      "details": {
+        "size": 16,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "tag-input responsive typography 390px light",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "table header density and theme overrides 390px light",
+      "details": {
+        "natural": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 42
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 42.5
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "before": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "after": [
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "compact",
+            "height": 56
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          }
+        ],
+        "wrappedHeight": 756.5
+      }
+    },
+    {
+      "name": "toggle responsive typography 390px dark",
+      "details": {
+        "size": 16,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "tabs responsive typography 390px dark",
+      "details": {
+        "size": 16,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "tag-input responsive typography 390px dark",
+      "details": {
+        "size": 14,
+        "weight": "500",
+        "override": 19
+      }
+    },
+    {
+      "name": "table header density and theme overrides 390px dark",
+      "details": {
+        "natural": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 42
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 42.5
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "before": [
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "compact",
+            "height": 36
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          },
+          {
+            "density": "default",
+            "height": 40
+          }
+        ],
+        "after": [
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "compact",
+            "height": 56
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          },
+          {
+            "density": "default",
+            "height": 72
+          }
+        ],
+        "wrappedHeight": 756.5
+      }
+    }
+  ],
+  "errors": [],
+  "lifecycle": {
+    "nodePid": 22359,
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "version": "154.0.8037.97",
+    "processes": [
+      {
+        "pid": 22360,
+        "parent": 22359,
+        "profile": "/var/folders/jp/tkxkqws50fsdwv0bh7_9gg8w0000gn/T/playwright_chromiumdev_profile-lKp3hQ"
+      }
+    ],
+    "descendantPids": [
+      22360,
+      22367,
+      22368,
+      22369,
+      22389,
+      22391,
+      22392
+    ],
+    "closed": true,
+    "disconnectedAt": "2026-10-03T02:33:14.614Z",
+    "exitCheck": {
+      "closed": true,
+      "elapsedMs": 19,
+      "remainingProcesses": [],
+      "exitedAwaitingReap": []
+    }
+  },
+  "completedAt": "2026-10-03T02:33:14.785Z"
+}

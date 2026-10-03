@@ -1,56 +1,26 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "多行输入 Textarea",
-  description: "多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。",
-  category: "表单",
-  source: "coss",
-  exports: ["Textarea"],
-  keywords: ["textarea", "多行", "文本域", "备注"],
+  title: "多行输入 Textarea", titleEn: "Textarea",
+  description: "编辑备注、消息等多行文本。", descriptionEn: "Edit multiline notes and messages.",
+  category: "表单", layer: "primitive", source: "local", exports: ["Textarea", "TextareaPrimitive"],
+  api: [{ name: "Textarea", description: "可与 Field 组合的原生 textarea。", props: [
+    { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "同档控件几何、文字及有边框内距。" },
+    { name: "rows", type: "number", default: "3", description: "最小起始行数；内容可自动增高，仍可手工调整高度。" },
+    { name: "value / defaultValue", type: "string", description: "受控值或非受控初值。" },
+    { name: "onValueChange", type: "(value, eventDetails) => void", description: "原语的值变化回调，可调用 eventDetails.cancel()。" },
+    { name: "aria-invalid", type: "boolean | 'true' | 'false'", description: "调用方声明的错误事实；也可由 Field invalid 传入。" },
+    { name: "disabled / readOnly", type: "boolean", default: "false", description: "禁用不参与 Tab/提交；只读仍可聚焦和提交，显示已有 locale 的只读文案。" },
+    { name: "maxLength", type: "number", description: "浏览器执行的字符长度上限，不由计数文案实施限制。" },
+    { name: "render / ref / className / style", type: "Base UI render / textarea ref / state-aware styling", description: "真实 textarea 的组合与样式入口；render 必须保留 textarea 语义、属性及事件。" },
+  ] }, { name: "TextareaPrimitive", description: "Base UI Field 命名空间；Textarea 使用其 Control 的 textarea render 出口。" }],
+  keyboard: [{ keys: "Tab / Shift+Tab", description: "按文档顺序移动焦点。" }, { keys: "Enter", description: "插入换行，不提交表单。" }],
+  notes: ["名称使用 FieldLabel 或真实 label；placeholder 不代替名称。", "自动增高使用 CSS field-sizing:content；不支持时保留 rows 与原生手工调整。", "错误、提交与持久化事实由应用提供，失败后保留草稿。", "默认表面与尺寸是集中预设；聚焦只变边框颜色。"],
+  decisions: "字符计数只描述当前值。限制由 maxLength 或应用规则执行；错误内容不会让 Textarea 自行判定 invalid。",
   design: {
-    "methods": [
-      "布白有用",
-      "随境取度",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "编辑备注、正文或反馈，工作空间随内容增长。"
-    ],
-    "avoid": [
-      "不要用固定矮框隐藏长草稿；字符上限不能靠截断用户输入来表达。"
-    ],
-    "composition": [
-      "Field 提供名称和原位错误；底部工具栏用 InputGroupTextarea 与 block-end addon。"
-    ],
-    "stateOwner": {
-      "library": [
-        "多行编辑、字段关联与最小输入空间。"
-      ],
-      "application": [
-        "草稿、字数规则、自动保存及恢复策略。"
-      ]
-    },
-    "responsive": [
-      "限制高度时让内部滚动，保留完整文本；原生 rows 作为不支持自动高度时的起点。"
-    ],
-    "customization": [
-      "size 决定起始空间；外框 className 与原生 textarea 属性分别调整。"
-    ]
+    methods: ["名实相符", "相成相制", "进退相承"], whenToUse: ["多行纯文本、备注、消息"], avoid: ["单行值用 Input", "富文本编辑需编辑器"],
+    composition: ["Field + FieldLabel + Textarea + FieldDescription / FieldError"],
+    stateOwner: { library: ["焦点、原生编辑、非受控值"], application: ["受控值、invalid、保存与错误事实"] },
+    responsive: ["同名文字档及 -narrow 尺寸已接线；本批只验桌面"], customization: ["已有控制档 token；className/style 属于实际 textarea"],
   },
-  api: [
-    {
-      name: "Textarea",
-      description: "基于 Base UI Field.Control。外层 <span data-slot=\"textarea-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。",
-      props: [
-        { name: "size", type: '"sm" | "default" | "lg"', default: '"default"', description: "最小高度与内边距。" },
-        { name: "rows", type: "number", description: "初始行数；内容增长时自动加高（field-sizing: content）。" },
-        { name: "unstyled", type: "boolean", default: "false", description: "去掉外层样式，供 InputGroup 组合使用。" },
-      ],
-    },
-  ],
-  keyboard: [{ keys: "Tab", description: "移入、移出焦点。" }],
-  notes: [
-    "需要限制最大高度时给外层加 max-h-* 并让 textarea 滚动，例如 className=\"*:max-h-40\"。",
-    "需要底部工具栏、发送按钮时用 InputGroup + InputGroupTextarea。",
-  ],
 } satisfies ComponentMeta;

@@ -1,0 +1,353 @@
+$ pnpm --filter @qingye/ui typecheck
+
+> @qingye/ui@0.4.0 typecheck /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui
+> tsc -p tsconfig.json --noEmit
+
+
+
+$ pnpm --filter @qingye/ui test
+
+> @qingye/ui@0.4.0 test /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui
+> vitest run
+
+
+ RUN  v4.0.16 /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui
+
+ ✓ test/focus-contract.test.tsx (8 tests) 1005ms
+   ✓ focus paint has no detached offsets or translucent ring/24 in actual TSX literals  334ms
+   ✓ xs Button and Input keep caller radius overrides after size selection  540ms
+ ✓ test/popover.test.tsx (13 tests) 2479ms
+   ✓ keyboard opens a named non-modal popup and Escape returns to its trigger  362ms
+   ✓ Tab can leave a non-modal popup for the next background control  370ms
+   ✓ closing and reopening preserves an application-owned draft  312ms
+ ✓ test/autocomplete.test.tsx (12 tests) 2483ms
+     ✓ starts closed and reveals suggestions once you type  697ms
+     ✓ filters as you type and keeps free text  409ms
+ ✓ test/button.test.tsx (31 tests) 2355ms
+   ✓ a waiting Menu trigger blocks the mousedown that opens its composed popup and recovers  347ms
+ ✓ test/combobox.test.tsx (18 tests) 3163ms
+     ✓ opens on click and filters as you type  673ms
+     ✓ choosing an option calls onValueChange and closes  385ms
+   ✓ a long list stays scrollable and only renders matching rows  421ms
+ ✓ test/data-table.test.tsx (15 tests) 3061ms
+   ✓ paginates, sorts from a header button and reports the page  895ms
+   ✓ selects a page size and keeps selection across a sort  743ms
+ ✓ test/toast.test.tsx (32 tests) 1319ms
+ ✓ test/search-input.test.tsx (11 tests) 688ms
+ ✓ test/command.test.tsx (7 tests) 914ms
+   ✓ typing filters the list down to matching items  401ms
+ ✓ test/date-time-picker.test.tsx (7 tests) 1518ms
+   ✓ picking a day keeps the time; editing the time keeps the day  696ms
+ ✓ test/sidebar.test.tsx (8 tests) 697ms
+   ✓ toggles without the Cookie Store API and with the keyboard shortcut  351ms
+ ✓ test/tag-input.test.tsx (22 tests) 1642ms
+ ✓ test/carousel.test.tsx (7 tests) 660ms
+ ✓ test/tree.test.tsx (16 tests) 882ms
+stdout | test/contrast-check.test.ts > resolved library contrast > light: real role pairs meet their thresholds
+contrast light: 190 library pairs PASS; 869 source contexts UNVERIFIED (runtime/inherited cascade; require browser evidence)
+
+stdout | test/contrast-check.test.ts > resolved library contrast > dark: real role pairs meet their thresholds
+contrast dark: 190 library pairs PASS; 869 source contexts UNVERIFIED (runtime/inherited cascade; require browser evidence)
+
+ ✓ test/contrast-check.test.ts (35 tests) 595ms
+ ✓ test/overlays.test.tsx (7 tests) 831ms
+   ✓ dialog opens from its trigger, exposes a name, and closes with Escape back to the trigger  322ms
+ ✓ test/resizable.test.tsx (14 tests) 784ms
+ ✓ test/toolbar.test.tsx (9 tests) 680ms
+   ✓ Home and End move to the endpoints and keep one roving tab stop  423ms
+ ✓ test/file-upload.test.tsx (16 tests) 948ms
+ ✓ test/input.test.tsx (22 tests) 883ms
+ ✓ test/number-field.test.tsx (8 tests) 361ms
+ ✓ test/native-select.test.tsx (4 tests) 233ms
+ ✓ test/disclosure.test.tsx (3 tests) 309ms
+ ✓ test/select.test.tsx (2 tests) 379ms
+ ✓ test/date-range-picker.test.tsx (13 tests) 5115ms
+   ✓ two clicks pick a range, apply it and close  1041ms
+   ✓ clicking an earlier day after the first click still produces an ordered range  651ms
+   ✓ a preset applies the whole range at once  328ms
+   ✓ a half-finished selection is discarded when the popup closes  779ms
+   ✓ range length and excludeDisabled apply to calendar picks and presets  992ms
+   ✓ external closure discards the partial draft without changing the committed range  332ms
+   ✓ disabled days inside a range remain allowed unless excludeDisabled was requested  388ms
+ ✓ test/type-migration.test.ts (12 tests) 9260ms
+   ✓ weight migration preserves complete mobile steps and responsive medium weight  496ms
+   ✓ compact pair migration consumes the whole line-height suffix before applying weight  926ms
+   ✓ migrations own class syntax and leave prose, selectors and utility prefixes intact  787ms
+   ✓ weight migration respects complete steps and breakpoint overrides: text-support-mobile font-medium sm:text-support  1212ms
+   ✓ weight migration respects complete steps and breakpoint overrides: font-medium text-support-mobile sm:font-normal sm:text-support  867ms
+   ✓ weight migration respects complete steps and breakpoint overrides: font-normal text-support-mobile sm:text-support  961ms
+   ✓ weight migration respects complete steps and breakpoint overrides: font-medium text-caption-strong sm:text-support-strong  1027ms
+   ✓ weight migration respects complete steps and breakpoint overrides: font-medium text-reading  942ms
+   ✓ weight migration respects complete steps and breakpoint overrides: font-semibold text-title sm:text-support  1032ms
+   ✓ unknown runtime class assembly stays unmodified and explicitly unresolved  645ms
+   ✓ docs migration retires role names only inside AST-owned classes  316ms
+ ✓ test/readonly-expression.test.tsx (5 tests) 493ms
+   ✓ readonly Input (native=false) is identified, focusable, immutable and submitted  308ms
+ ✓ test/tabs.test.tsx (4 tests) 766ms
+   ✓ wires tabs to panels with the tab pattern  566ms
+ ✓ test/pagination.test.tsx (7 tests) 312ms
+ ✓ test/field.test.tsx (10 tests) 416ms
+ ✓ test/password-input.test.tsx (8 tests) 455ms
+ ✓ test/date-picker.test.tsx (7 tests) 619ms
+     ✓ picks a day, submits YYYY-MM-DD and closes back to the trigger  511ms
+ ✓ test/color-check.test.ts (49 tests) 325ms
+ ✓ test/progress-circle.test.tsx (6 tests) 287ms
+ ✓ test/page-header.test.tsx (2 tests) 248ms
+ ✓ test/chart.test.tsx (6 tests) 316ms
+ ✓ test/description-list.test.tsx (2 tests) 235ms
+ ✓ test/accordion.test.tsx (2 tests) 395ms
+ ✓ test/date-readonly-contract.test.tsx (4 tests) 733ms
+   ✓ switching a date picker to read-only closes an existing popup without clearing its value  357ms
+ ✓ test/theme-provider.test.tsx (7 tests) 416ms
+ ✓ test/copy-button.test.tsx (12 tests) 462ms
+ ✓ test/spinner.test.tsx (5 tests) 249ms
+ ✓ test/code-block.test.tsx (5 tests) 327ms
+ ✓ test/theme-axes.test.tsx (5 tests) 213ms
+ ✓ test/breadcrumb.test.tsx (2 tests) 261ms
+ ✓ test/table.test.tsx (2 tests) 266ms
+ ✓ test/input-group.test.tsx (4 tests) 481ms
+ ✓ test/conventions.test.ts (7 tests) 403ms
+     ✓ no hard-coded greys: colours come from semantic tokens or utilities  382ms
+ ✓ test/slider.test.tsx (2 tests) 263ms
+ ✓ test/steps.test.tsx (4 tests) 346ms
+ ✓ test/status-dot.test.tsx (8 tests) 191ms
+ ✓ test/typography.test.tsx (5 tests) 326ms
+ ✓ test/layout.test.tsx (5 tests) 194ms
+ ✓ test/text-role-merging.test.tsx (11 tests) 267ms
+ ✓ test/alert.test.tsx (13 tests) 237ms
+ ✓ test/stat.test.tsx (3 tests) 188ms
+ ✓ test/card.test.tsx (4 tests) 230ms
+ ✓ test/item.test.tsx (2 tests) 176ms
+ ✓ test/timeline.test.tsx (4 tests) 329ms
+ ✓ test/public-guidance.test.ts (4 tests) 163ms
+ ✓ test/toggle-group.test.tsx (2 tests) 318ms
+ ✓ test/foundation-tokens.test.ts (11 tests) 65ms
+ ✓ test/text-role-css.test.ts (1 test) 22ms
+ ✓ test/empty.test.tsx (2 tests) 35ms
+ ✓ test/popup-motion.test.ts (4 tests) 70ms
+ ✓ test/motion-provider.test.tsx (2 tests) 13ms
+ ✓ test/radius-role-merging.test.ts (5 tests) 7ms
+ ✓ test/style-contract.test.ts (8 tests) 29ms
+
+ Test Files  68 passed (68)
+      Tests  613 passed (613)
+   Start at  15:56:48
+   Duration  15.92s (transform 3.01s, setup 10.20s, import 32.54s, tests 55.39s, environment 31.85s)
+
+
+
+$ pnpm --filter docs typecheck
+
+> docs@ typecheck /Volumes/SUNSANG 1/Codex/qingye-ui/apps/docs
+> tsc --noEmit
+
+
+
+$ pnpm --filter @qingye/ui build
+
+> @qingye/ui@0.4.0 build /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui
+> pnpm gen:catalog && tsc -p tsconfig.json && node scripts/build.mjs
+
+
+> @qingye/ui@0.4.0 gen:catalog /Volumes/SUNSANG 1/Codex/qingye-ui/packages/ui
+> node scripts/gen-catalog.mjs
+
+catalog.json: 86 components; 6 patterns; AI and Registry generated
+≈ tailwindcss v4.3.3
+
+Done in 121ms
+dist/ui.css 344.1 KB
+
+
+$ node scripts/probe-focus.mjs --matrix docs/implementation/2026-10-03-focus-probes 6
+owned browser pid=52062 parent=52045
+light-desktop solid-xs: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x24 after=804x24 unchanged=true
+light-desktop quiet-xs: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x24 after=804x24 unchanged=true
+light-desktop input-xs: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x24 after=804x24 unchanged=true
+light-desktop solid-sm: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x28 after=804x28 unchanged=true
+light-desktop quiet-sm: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x28 after=804x28 unchanged=true
+light-desktop input-sm: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x28 after=804x28 unchanged=true
+light-desktop solid-md: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x32 after=804x32 unchanged=true
+light-desktop quiet-md: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x32 after=804x32 unchanged=true
+light-desktop input-md: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x32 after=804x32 unchanged=true
+light-desktop input-md-hover: PASS contrast=15.133529 sameBorder=true
+light-desktop solid-lg: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x36 after=804x36 unchanged=true
+light-desktop quiet-lg: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x36 after=804x36 unchanged=true
+light-desktop input-lg: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x36 after=804x36 unchanged=true
+light-desktop solid-xl: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x40 after=804x40 unchanged=true
+light-desktop quiet-xl: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x40 after=804x40 unchanged=true
+light-desktop input-xl: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x40 after=804x40 unchanged=true
+light-desktop danger: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=84x32 after=84x32 unchanged=true
+light-desktop switch: PASS signal=#0a0a0a adjacent=#7f7f7f contrast=4.944460 before=30x18 after=30x18 unchanged=true
+light-desktop switch-checked: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=30x18 after=30x18 unchanged=true
+light-desktop switch-invalid: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=30x18 after=30x18 unchanged=true
+light-desktop badge: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x18 after=804x18 unchanged=true
+light-desktop menu-solid: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x32 after=804x32 unchanged=true
+light-desktop disclosure: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=84x24 after=84x24 unchanged=true
+light-desktop group-action: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=44x24 after=44x24 unchanged=true
+light-desktop tabs-other: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=50x26 after=50x26 unchanged=true
+light-desktop tabs-underline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=56x30 after=56x30 unchanged=true
+light-desktop segmented-other: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=50x26 after=50x26 unchanged=true
+light-desktop checkbox: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=16x16 after=16x16 unchanged=true
+light-desktop checkbox-checked: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=16x16 after=16x16 unchanged=true
+light-desktop radio-checked: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=16x16 after=16x16 unchanged=true
+light-desktop radio: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=16x16 after=16x16 unchanged=true
+light-desktop toggle-outline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x28 after=804x28 unchanged=true
+light-desktop badge-outline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x18 after=804x18 unchanged=true
+light-desktop select: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x32 after=804x32 unchanged=true
+light-desktop declared-carrier: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=804x32 after=804x32 unchanged=true
+light-desktop tabs-selected: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=50x26 after=50x26 unchanged=true
+light-desktop segmented-selected: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=50x26 after=50x26 unchanged=true
+light-desktop invalid-input: PASS signal=#c10007 adjacent=#ffffff contrast=6.420920 before=804x32 after=804x32 unchanged=true
+light-desktop invalid-input-hover: PASS contrast=6.420920 sameBorder=true
+light-desktop textarea: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x72 after=804x72 unchanged=true
+light-desktop group-input: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x32 after=804x32 unchanged=true
+light-desktop native-select: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=804x32 after=804x32 unchanged=true
+light-desktop slider: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=16x16 after=16x16 unchanged=true
+light-desktop select-option: PASS signal=#262626 adjacent=#f2f2f2 contrast=13.518178 before=794x28 after=794x28 unchanged=true
+dark-desktop solid-xs: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x24 after=804x24 unchanged=true
+dark-desktop quiet-xs: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x24 after=804x24 unchanged=true
+dark-desktop input-xs: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x24 after=804x24 unchanged=true
+dark-desktop solid-sm: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x28 after=804x28 unchanged=true
+dark-desktop quiet-sm: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x28 after=804x28 unchanged=true
+dark-desktop input-sm: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x28 after=804x28 unchanged=true
+dark-desktop solid-md: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x32 after=804x32 unchanged=true
+dark-desktop quiet-md: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x32 after=804x32 unchanged=true
+dark-desktop input-md: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x32 after=804x32 unchanged=true
+dark-desktop input-md-hover: PASS contrast=11.620304 sameBorder=true
+dark-desktop solid-lg: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x36 after=804x36 unchanged=true
+dark-desktop quiet-lg: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x36 after=804x36 unchanged=true
+dark-desktop input-lg: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x36 after=804x36 unchanged=true
+dark-desktop solid-xl: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x40 after=804x40 unchanged=true
+dark-desktop quiet-xl: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x40 after=804x40 unchanged=true
+dark-desktop input-xl: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x40 after=804x40 unchanged=true
+dark-desktop danger: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=84x32 after=84x32 unchanged=true
+dark-desktop switch: PASS signal=#ffffff adjacent=#7f7f7f contrast=3.996331 before=30x18 after=30x18 unchanged=true
+dark-desktop switch-checked: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=30x18 after=30x18 unchanged=true
+dark-desktop switch-invalid: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=30x18 after=30x18 unchanged=true
+dark-desktop badge: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x18 after=804x18 unchanged=true
+dark-desktop menu-solid: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x32 after=804x32 unchanged=true
+dark-desktop disclosure: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=84x24 after=84x24 unchanged=true
+dark-desktop group-action: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=44x24 after=44x24 unchanged=true
+dark-desktop tabs-other: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=50x26 after=50x26 unchanged=true
+dark-desktop tabs-underline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=56x30 after=56x30 unchanged=true
+dark-desktop segmented-other: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=50x26 after=50x26 unchanged=true
+dark-desktop checkbox: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=16x16 after=16x16 unchanged=true
+dark-desktop checkbox-checked: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=16x16 after=16x16 unchanged=true
+dark-desktop radio-checked: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=16x16 after=16x16 unchanged=true
+dark-desktop radio: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=16x16 after=16x16 unchanged=true
+dark-desktop toggle-outline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x28 after=804x28 unchanged=true
+dark-desktop badge-outline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x18 after=804x18 unchanged=true
+dark-desktop select: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x32 after=804x32 unchanged=true
+dark-desktop declared-carrier: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=804x32 after=804x32 unchanged=true
+dark-desktop tabs-selected: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=50x26 after=50x26 unchanged=true
+dark-desktop segmented-selected: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=50x26 after=50x26 unchanged=true
+dark-desktop invalid-input: PASS signal=#ff7376 adjacent=#1b1b1b contrast=6.533696 before=804x32 after=804x32 unchanged=true
+dark-desktop invalid-input-hover: PASS contrast=6.533696 sameBorder=true
+dark-desktop textarea: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x72 after=804x72 unchanged=true
+dark-desktop group-input: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x32 after=804x32 unchanged=true
+dark-desktop native-select: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=804x32 after=804x32 unchanged=true
+dark-desktop slider: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=16x16 after=16x16 unchanged=true
+dark-desktop select-option: PASS signal=#d4d4d4 adjacent=#303030 contrast=8.900998 before=794x28 after=794x28 unchanged=true
+light-mobile solid-xs: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x28 after=326x28 unchanged=true
+light-mobile quiet-xs: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x28 after=326x28 unchanged=true
+light-mobile input-xs: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x28 after=326x28 unchanged=true
+light-mobile solid-sm: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x32 after=326x32 unchanged=true
+light-mobile quiet-sm: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x32 after=326x32 unchanged=true
+light-mobile input-sm: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x32 after=326x32 unchanged=true
+light-mobile solid-md: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x36 after=326x36 unchanged=true
+light-mobile quiet-md: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x36 after=326x36 unchanged=true
+light-mobile input-md: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x36 after=326x36 unchanged=true
+light-mobile input-md-hover: PASS contrast=15.133529 sameBorder=true
+light-mobile solid-lg: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x40 after=326x40 unchanged=true
+light-mobile quiet-lg: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x40 after=326x40 unchanged=true
+light-mobile input-lg: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x40 after=326x40 unchanged=true
+light-mobile solid-xl: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x44 after=326x44 unchanged=true
+light-mobile quiet-xl: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x44 after=326x44 unchanged=true
+light-mobile input-xl: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x44 after=326x44 unchanged=true
+light-mobile danger: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=88x36 after=88x36 unchanged=true
+light-mobile switch: PASS signal=#0a0a0a adjacent=#7f7f7f contrast=4.944460 before=38x22 after=38x22 unchanged=true
+light-mobile switch-checked: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=38x22 after=38x22 unchanged=true
+light-mobile switch-invalid: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=38x22 after=38x22 unchanged=true
+light-mobile badge: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x22 after=326x22 unchanged=true
+light-mobile menu-solid: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x36 after=326x36 unchanged=true
+light-mobile disclosure: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=94x28 after=94x28 unchanged=true
+light-mobile group-action: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=48x28 after=48x28 unchanged=true
+light-mobile tabs-other: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=52x30 after=52x30 unchanged=true
+light-mobile tabs-underline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=58x34 after=58x34 unchanged=true
+light-mobile segmented-other: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=52x30 after=52x30 unchanged=true
+light-mobile checkbox: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=18x18 after=18x18 unchanged=true
+light-mobile checkbox-checked: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=18x18 after=18x18 unchanged=true
+light-mobile radio-checked: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=18x18 after=18x18 unchanged=true
+light-mobile radio: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=18x18 after=18x18 unchanged=true
+light-mobile toggle-outline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x32 after=326x32 unchanged=true
+light-mobile badge-outline: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x22 after=326x22 unchanged=true
+light-mobile select: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x36 after=326x36 unchanged=true
+light-mobile declared-carrier: PASS signal=#fafafa adjacent=#262626 contrast=14.498978 before=326x36 after=326x36 unchanged=true
+light-mobile tabs-selected: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=52x30 after=52x30 unchanged=true
+light-mobile segmented-selected: PASS signal=#262626 adjacent=#f4f4f4 contrast=13.759422 before=52x30 after=52x30 unchanged=true
+light-mobile invalid-input: PASS signal=#c10007 adjacent=#ffffff contrast=6.420920 before=326x36 after=326x36 unchanged=true
+light-mobile invalid-input-hover: PASS contrast=6.420920 sameBorder=true
+light-mobile textarea: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x84 after=326x84 unchanged=true
+light-mobile group-input: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x36 after=326x36 unchanged=true
+light-mobile native-select: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=326x36 after=326x36 unchanged=true
+light-mobile slider: PASS signal=#262626 adjacent=#ffffff contrast=15.133529 before=20x20 after=20x20 unchanged=true
+light-mobile select-option: PASS signal=#262626 adjacent=#f2f2f2 contrast=13.518178 before=316x32 after=316x32 unchanged=true
+dark-mobile solid-xs: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x28 after=326x28 unchanged=true
+dark-mobile quiet-xs: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x28 after=326x28 unchanged=true
+dark-mobile input-xs: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x28 after=326x28 unchanged=true
+dark-mobile solid-sm: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x32 after=326x32 unchanged=true
+dark-mobile quiet-sm: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x32 after=326x32 unchanged=true
+dark-mobile input-sm: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x32 after=326x32 unchanged=true
+dark-mobile solid-md: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x36 after=326x36 unchanged=true
+dark-mobile quiet-md: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x36 after=326x36 unchanged=true
+dark-mobile input-md: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x36 after=326x36 unchanged=true
+dark-mobile input-md-hover: PASS contrast=11.620304 sameBorder=true
+dark-mobile solid-lg: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x40 after=326x40 unchanged=true
+dark-mobile quiet-lg: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x40 after=326x40 unchanged=true
+dark-mobile input-lg: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x40 after=326x40 unchanged=true
+dark-mobile solid-xl: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x44 after=326x44 unchanged=true
+dark-mobile quiet-xl: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x44 after=326x44 unchanged=true
+dark-mobile input-xl: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x44 after=326x44 unchanged=true
+dark-mobile danger: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=88x36 after=88x36 unchanged=true
+dark-mobile switch: PASS signal=#ffffff adjacent=#7f7f7f contrast=3.996331 before=38x22 after=38x22 unchanged=true
+dark-mobile switch-checked: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=38x22 after=38x22 unchanged=true
+dark-mobile switch-invalid: PASS signal=#ffffff adjacent=#c10007 contrast=6.420920 before=38x22 after=38x22 unchanged=true
+dark-mobile badge: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x22 after=326x22 unchanged=true
+dark-mobile menu-solid: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x36 after=326x36 unchanged=true
+dark-mobile disclosure: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=94x28 after=94x28 unchanged=true
+dark-mobile group-action: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=48x28 after=48x28 unchanged=true
+dark-mobile tabs-other: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=52x30 after=52x30 unchanged=true
+dark-mobile tabs-underline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=58x34 after=58x34 unchanged=true
+dark-mobile segmented-other: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=52x30 after=52x30 unchanged=true
+dark-mobile checkbox: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=18x18 after=18x18 unchanged=true
+dark-mobile checkbox-checked: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=18x18 after=18x18 unchanged=true
+dark-mobile radio-checked: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=18x18 after=18x18 unchanged=true
+dark-mobile radio: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=18x18 after=18x18 unchanged=true
+dark-mobile toggle-outline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x32 after=326x32 unchanged=true
+dark-mobile badge-outline: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x22 after=326x22 unchanged=true
+dark-mobile select: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x36 after=326x36 unchanged=true
+dark-mobile declared-carrier: PASS signal=#262626 adjacent=#f5f5f5 contrast=13.881030 before=326x36 after=326x36 unchanged=true
+dark-mobile tabs-selected: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=52x30 after=52x30 unchanged=true
+dark-mobile segmented-selected: PASS signal=#d4d4d4 adjacent=#242424 contrast=10.480125 before=52x30 after=52x30 unchanged=true
+dark-mobile invalid-input: PASS signal=#ff7376 adjacent=#1b1b1b contrast=6.533696 before=326x36 after=326x36 unchanged=true
+dark-mobile invalid-input-hover: PASS contrast=6.533696 sameBorder=true
+dark-mobile textarea: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x84 after=326x84 unchanged=true
+dark-mobile group-input: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x36 after=326x36 unchanged=true
+dark-mobile native-select: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=326x36 after=326x36 unchanged=true
+dark-mobile slider: PASS signal=#d4d4d4 adjacent=#1b1b1b contrast=11.620304 before=20x20 after=20x20 unchanged=true
+dark-mobile select-option: PASS signal=#d4d4d4 adjacent=#303030 contrast=8.900998 before=316x32 after=316x32 unchanged=true
+focus-probe: {"PASS":180,"FAIL":0,"UNVERIFIED":0,"NOT_RUN":0}; errors=0; cleanup=PASS
+
+
+$ node scripts/gen-capabilities.mjs
+current-capabilities: 86 components, 347 tokens; 629b3c66ae76010553767a6cec078be493d01025f881c5ba7420f26328fc5065
+
+
+$ node scripts/token-ledger.mjs
+token-ledger: 7721 static paths; {"PASS":0,"FAIL":0,"UNVERIFIED":0,"NOT_RUN":78}; stale=true
+
+$ grep -ro 'ring-offset' packages/ui/src | wc -l
+0
+$ grep -ro 'ring-ring/24' packages/ui/src | wc -l
+0

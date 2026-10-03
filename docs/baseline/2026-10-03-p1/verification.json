@@ -1,0 +1,116 @@
+{
+  "recordedAt": "2026-10-03T05:29:28.855620+00:00",
+  "head": "275d730",
+  "commands": [
+    {
+      "command": "pnpm --filter @qingye/ui typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter @qingye/ui test",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter @qingye/ui build",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter docs typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter docs build",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/verify-p1-runtime.mjs docs/baseline/2026-10-03-p1",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/run-browser-audit.mjs button input card popover --report docs/baseline/2026-10-03-p1/playground-audit.json",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter @qingye/ui gen:index",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm --filter @qingye/ui gen:catalog",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/gen-capabilities.mjs",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/token-ledger.mjs",
+      "status": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "unitTestFiles": 67,
+  "unitTests": 603,
+  "browserAssertions": 240,
+  "auditPages": 16,
+  "checks": {
+    "upstreamAbsent": true,
+    "removedInputsAbsentFromDist": true,
+    "runtimeCssMatches": true,
+    "runtimePass": true,
+    "auditPass": true,
+    "runtimeCleanup": true,
+    "auditCleanup": true
+  },
+  "criterionExceptions": [
+    {
+      "id": "G12",
+      "status": "FAIL",
+      "scope": "literal unconditional return to trigger after Tab departure / outside focusable click",
+      "reason": "Base UI retains the user-selected background focus; conflicts with a literal reading of family-overlay decision 2"
+    }
+  ],
+  "oldTokenObservations": {
+    "status": "NOT_RUN",
+    "count": 78,
+    "stale": true
+  },
+  "unverified": [
+    "physical iOS input zoom and touch",
+    "VoiceOver",
+    "all consumer themes and combinations"
+  ],
+  "fingerprints": {
+    "packages/ui/src/components/button.tsx": "e7755a48dc5a87cd38a1b83701ba74478f707d75c0bb26434f4b4de6ddd585bc",
+    "packages/ui/src/components/input.tsx": "37a6c628cfa3bb9064ae17c7cd1c38c631e3ed2469dbe90534d2faf20ad4db16",
+    "packages/ui/src/components/card.tsx": "872679149dbc306e4f81177b8ac677fa1387db92f266dac67b9c61360ab9a02b",
+    "packages/ui/src/components/popover.tsx": "6f0cea73fb9ebb040154f220b6bfc4d1bbe8e3bdd4fadcb66255832a1132fddd",
+    "packages/ui/src/components/input-group.tsx": "97437dba1f56bff18f0cc64845375eb8e50284a2fd27d1cb98e895ede733c1e3",
+    "packages/ui/src/components/autocomplete.tsx": "b458e26017c60acae864c9c6c2accbd10508370dcd841c2673406e5a2e75364b",
+    "packages/ui/src/components/combobox.tsx": "583bdeca88147d3f45d06267f17efe97b8ef6903821edf3ef28422ed151ce666",
+    "packages/ui/src/locale.tsx": "7bd3e872f0dde8b28302e80476a3dce8682b459fa167169cb9c6510a47f4c009",
+    "packages/ui/src/locales/en-US.ts": "252aeb1a89600210c3ed8bb57df2b52ba8c8748f5a1470741cb882f3106dc82c",
+    "packages/ui/tokens/components.css": "70dc4e96bfb1d312cba72164852a36a24e95605df8709a5d299d6314f58a4dc5",
+    "packages/ui/theme.css": "14b95a769749a57870ae710043e8074984a2cad9431eaab4e8e36b19415aad49",
+    "packages/ui/motion.css": "35348981bd0e5e487f8dc03d30a33d6285c8bc447b58935c63aa2ca3526c8394",
+    "packages/ui/dist/ui.css": "553a63be82d05bd9b4133a116c45af0f297a8e05a88d8fe8cb2b550a808a2026",
+    "docs/decisions/2026-10-03-foundation.md": "bc3aa47bf2a41325cc474d7a85763bc22a66db6bab8d3c400ff9f8c71a1313c6",
+    "docs/decisions/component-layering.md": "ecdc0e07c042b66b7cec54262131d444450d5e70cd32bb7ac862e7c314992e93",
+    "docs/decisions/2026-10-03-family-action.md": "ffaee3978666676e9ddf80d34472a0cb3425be0d9b9cfc650dcab896cb95b8dc",
+    "docs/decisions/2026-10-03-family-form.md": "4b257833b94a96a13ee0ba13754debf5891263a36f099bbb3e37fec426a940ba",
+    "docs/decisions/2026-10-03-family-display.md": "15de23561f7c9ebea33055cc3867e2aaa55d260c5e50915423e7868e179fd250",
+    "docs/decisions/2026-10-03-family-overlay.md": "34473b78b5bb2b1aa6b9e73ccea748635917e527dc923999f899303a43bcbb5f",
+    "docs/decisions/2026-10-03-family-selector.md": "364cb599dd0aa61aceda41029c994504e20a9cd70dfef5d38ca720e339171a3c",
+    "design.md": "efe208ec2c7770b60050615ca1f44013179e882de7d2eaa4fbd0b69e3ff03fe8",
+    "STANDARDS.md": "a4422c9eabdb4217dc2395aee82d844b4c0ee409edc8e2e8976de6714752d6ae"
+  }
+}

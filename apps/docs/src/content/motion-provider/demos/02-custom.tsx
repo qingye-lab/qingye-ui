@@ -1,31 +1,16 @@
-import { MotionProvider } from "@qingye/ui/components/motion-provider";
 import { Button } from "@qingye/ui/components/button";
+import { Inline } from "@qingye/ui/components/layout";
+import { useState } from "react";
 
-export const meta = {
-  title: "组合控件遵循策略",
-  description: "Button 已带 qy-pressable 与 data-slot。自定义内容复用控件后，按压与键盘策略继续由共享实现处理。",
-};
-
-const colors = [
-  { name: "青", value: "bg-teal-500" },
-  { name: "靛", value: "bg-indigo-500" },
-  { name: "琥珀", value: "bg-amber-500" },
-];
+export const meta = { title: "即时变化", titleEn: "Instant changes" };
 
 export default function Demo() {
+  const [normal, setNormal] = useState(false);
+  const [instant, setInstant] = useState(false);
   return (
-    <MotionProvider>
-      <div aria-label="标签颜色" className="flex gap-3" role="group">
-        {colors.map((color) => (
-          <Button
-            key={color.name}
-            variant="outline"
-          >
-            <span aria-hidden="true" className={`size-3 rounded-full ${color.value}`} />
-            {color.name}
-          </Button>
-        ))}
-      </div>
-    </MotionProvider>
+    <Inline gap="actions">
+      <Button variant="bordered" aria-pressed={normal} onClick={() => setNormal(!normal)}>常规</Button>
+      <Button variant="bordered" data-instant aria-pressed={instant} onClick={() => setInstant(!instant)}>即时</Button>
+    </Inline>
   );
 }

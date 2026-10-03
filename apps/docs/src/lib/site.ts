@@ -1,4 +1,5 @@
 import pkg from "@qingye/ui/package.json";
+import { localePath, PATHS, type DocsLocale } from "./paths";
 
 export const SITE = {
   name: "Qingye UI",
@@ -6,7 +7,10 @@ export const SITE = {
   version: pkg.version,
   repo: "https://github.com/qingye-lab/qingye-ui",
   branch: "main",
+  base: "https://ui.xflux.cc",
 } as const;
+
+export const siteUrl = (path = PATHS.home as string, locale: DocsLocale = "zh") => `${SITE.base}${localePath(path, locale)}`;
 
 export const repoFile = (path: string) => `${SITE.repo}/blob/${SITE.branch}/${path}`;
 

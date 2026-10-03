@@ -1,6 +1,6 @@
 # 青野 UI · Qingye UI
 
-器用为本，关系为法，合宜为度。React 组件库使用 Base UI 原语，包含 coss ui（MIT）派生组件与本地实现，以任务关系、明确状态和恢复路径组织界面。内置分层令牌、浅深主题与动效规范，需要 React 19.2+。
+器用为本，关系为法，合宜为度。React 组件库使用 Base UI 原语，组件依据本库设计指南与公共 API 编写，以任务关系、明确状态和恢复路径组织界面。内置分层令牌、浅深主题与动效规范，需要 React 19.2+。
 
 公开设计方法见随包提供的 `design.md`；`catalog.json` 包含当前导出、API 指引、来源、依赖与组合示例；`ai/SKILL.md` 和 `ai/v<版本>/` 供 AI 按安装版本查询。无法静态确认的 Provider 要求或继承签名保留未知，不等同于运行时验证。
 
@@ -117,12 +117,8 @@ import { enUS } from "@qingye/ui/locales/en-US";
 
 `motion.css` 统一处理：按压反馈（`.qy-pressable`）、选择器与菜单弹层入场、键盘操作时即时切换、`prefers-reduced-motion` 下只保留透明度与颜色变化。可选的 `MotionProvider` 会在 `<html>` 上标记当前输入方式。
 
-## 来源
+## 许可
 
-适配自 coss ui 的组件记录在 `coss-source.json`（上游路径、SHA-256 与每项本地改动），`upstream/` 不随包发布。检查上游更新：
+MIT，见 `LICENSE`。第三方依赖的许可由各自的软件包提供。
 
-```sh
-pnpm --filter @qingye/ui check:upstream
-```
-
-许可：MIT，见 `LICENSE` 与 `THIRD_PARTY_NOTICES.md`。
+公开 API 变更：2026-10-03 删除无仓库内消费者的 `useIsMobile`。需要同一宽度查询时使用 `useMediaQuery("max-md")`；匹配结果不表示物理设备身份。

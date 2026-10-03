@@ -4,6 +4,7 @@ import { cn } from "@qingye/ui/utils";
 import { SearchIcon } from "lucide-react";
 import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { routeVisitKey } from "@/lib/paths";
 
 const loadDialog = () => import("./search-dialog");
 const SearchDialog = lazy(loadDialog);
@@ -22,6 +23,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { pathname } = useLocation();
+  const visit = routeVisitKey(pathname);
 
   const openSearch = useCallback(() => {
     setMounted(true);
@@ -50,7 +52,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Any navigation closes the palette.
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => setOpen(false), [visit]);
 
   return (
     <SearchContext.Provider value={{ openSearch }}>
@@ -71,26 +73,23 @@ export function SearchTrigger({ className }: { className?: string }) {
   const [mac, setMac] = useState(true);
   useEffect(() => setMac(isMac()), []);
   return (
-    <>
-      <Button
-        aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
-        className={cn(
-          "hidden h-8 w-56 justify-start gap-2 ps-2.5 pe-1.5 font-normal text-muted-foreground shadow-none md:inline-flex lg:w-64 sm:h-8",
-          className,
-        )}
-        onClick={openSearch}
-        variant="outline"
-      >
-        <SearchIcon aria-hidden="true" />
-        <span className="flex-1 text-start">搜索文档…</span>
-        <KbdGroup>
-          <Kbd>{mac ? "⌘" : "Ctrl"}</Kbd>
-          <Kbd>K</Kbd>
-        </KbdGroup>
-      </Button>
-      <Button aria-label="搜索文档" className="md:hidden" onClick={openSearch} size="icon" variant="ghost">
-        <SearchIcon aria-hidden="true" />
-      </Button>
-    </>
+    <Button shape="icon"
+      aria-label="搜索文档"
+      aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
+      className={cn(
+        "shrink-0 font-normal text-muted-foreground shadow-none md:h-8 md:w-56 md:justify-start md:gap-2 md:ps-2.5 md:pe-1.5 lg:w-64 pointer-coarse:min-h-11 pointer-coarse:min-w-11",
+        className,
+      )}
+      onClick={openSearch}
+      size="md"
+      variant="quiet"
+    >
+      <SearchIcon aria-hidden="true" />
+      <span className="hidden flex-1 text-start md:inline">搜索文档</span>
+      <KbdGroup className="hidden md:flex pointer-coarse:hidden">
+        <Kbd>{mac ? "⌘" : "Ctrl"}</Kbd>
+        <Kbd>K</Kbd>
+      </KbdGroup>
+    </Button>
   );
 }

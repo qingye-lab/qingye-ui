@@ -1,27 +1,16 @@
-import { Button } from "@qingye/ui/components/button";
-import { Card, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Card } from "@qingye/ui/components/card";
+import { Stack } from "@qingye/ui/components/layout";
+import { Heading, Text } from "@qingye/ui/components/typography";
 
-export const meta = { title: "基础", description: "标题、内容与底部操作。" };
+export const meta = { title: "内容", titleEn: "Content" };
 
 export default function Demo() {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>创建项目</CardTitle>
-        <CardDescription>新项目默认部署到华东 1 区，可随时在设置中更改。</CardDescription>
-      </CardHeader>
-      <CardPanel>
-        <Field>
-          <FieldLabel>项目名称</FieldLabel>
-          <Input placeholder="例如：会员中心" />
-        </Field>
-      </CardPanel>
-      <CardFooter className="justify-end gap-2">
-        <Button variant="ghost">取消</Button>
-        <Button>创建</Button>
-      </CardFooter>
+    <Card className="w-full max-w-sm" render={<article aria-labelledby="card-note-title" />}>
+      <Stack gap="panel" className="p-(--qy-panel-padding)">
+        <Heading id="card-note-title" level={3}>便签</Heading>
+        <Text>青野 · Qingye</Text>
+      </Stack>
     </Card>
   );
 }

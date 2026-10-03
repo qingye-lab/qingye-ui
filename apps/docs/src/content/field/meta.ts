@@ -1,79 +1,58 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "表单项 Field",
-  description: "把标签、控件、说明与错误信息组织成一个表单项，自动处理关联、禁用与校验状态。",
-  category: "表单",
-  source: "coss",
-  exports: ["Field", "FieldLabel", "FieldDescription", "FieldError", "FieldContent", "FieldTitle", "FieldGroup", "FieldSeparator", "FieldControl", "FieldValidity"],
-  keywords: ["field", "表单项", "校验", "错误提示", "label", "description"],
+  title: "字段 Field", titleEn: "Field",
+  description: "关联一个值的名称、控件、说明与调用方提供的错误。",
+  descriptionEn: "Connect one value's name, control, description, and caller-supplied errors.",
+  category: "表单", layer: "primitive", source: "local",
+  exports: ["Field", "FieldLabel", "FieldDescription", "FieldError", "FieldTitle", "FieldContent", "FieldGroup", "FieldSeparator", "FieldItem", "FieldControl", "FieldValidity"],
+  keywords: ["field", "字段", "名称", "错误", "label", "description"],
+  decisions: "invalid 与错误内容分别传入。Field 关联名称与错误，不自行校验或推断提交结果。",
+  decisionsEn: "Supply invalid and error content separately. Field connects names and errors without validating or inferring submission results.",
   design: {
-    "methods": [
-      "名实相符",
-      "相成相制",
-      "布白有用",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "把一个问题、控件、必要说明与原位错误放在同一关系中。"
-    ],
-    "avoid": [
-      "标签、示例和错误各自表达事实；不要给每个字段都重复一段操作说明。"
-    ],
-    "composition": [
-      "纵向适合文字输入，水平适合复选或开关；FieldContent 容纳名称和必要说明。"
-    ],
-    "stateOwner": {
-      "library": [
-        "控制关联、校验状态与描述、错误的可访问连接。"
-      ],
-      "application": [
-        "业务规则、草稿、后端错误和保存结果。"
-      ]
-    },
-    "responsive": [
-      "说明与错误可换行而不挤掉控件；横向名称列允许收缩。"
-    ],
-    "customization": [
-      "orientation 调整字段关系；FieldTitle 不能冒充 label，非原生组合显式关联 id。"
-    ]
+    methods: ["名实相符", "相成相制", "布白有用", "进退相承"],
+    whenToUse: ["一个值需要持续名称、必要说明或就地错误。"],
+    avoid: ["placeholder 代替名称；Toast 代替字段错误；超时冒充格式错误。"],
+    composition: ["Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。"],
+    stateOwner: {library: ["名称、说明和错误的可访问连接；焦点、触及、禁用传播。"], application: ["值、规则、invalid、错误内容、草稿与送达结果。"]},
+    responsive: ["长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。"],
+    customization: ["className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。"],
   },
   api: [
-    {
-      name: "Field",
-      description: "基于 Base UI Field.Root。为内部控件提供 id、aria-describedby 与校验状态。",
-      props: [
-        { name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "horizontal 让标签与控件并排，用于开关、复选框行。" },
-        { name: "name", type: "string", description: "字段名；在 Form 中用于提交值与匹配 errors。" },
-        { name: "invalid", type: "boolean", description: "外部校验结果（如表单库）；为 true 时控件标记为无效。" },
-        { name: "disabled", type: "boolean", default: "false", description: "禁用标签与控件。" },
-        { name: "validate", type: "(value, formValues) => string | string[] | null", description: "自定义校验，返回错误信息。" },
-        { name: "validationMode", type: '"onSubmit" | "onBlur" | "onChange"', default: '"onSubmit"', description: "何时校验。" },
-      ],
-    },
-    { name: "FieldLabel", description: "标签，自动关联控件；禁用时一起变淡。" },
-    { name: "FieldDescription", description: "说明文字，自动加入控件的 aria-describedby。" },
-    {
-      name: "FieldError",
-      description: "错误信息，出现时轻微淡入，并加入 aria-describedby。",
-      props: [
-        { name: "children", type: "ReactNode", description: "有内容时直接显示，由调用方决定何时渲染。" },
-        { name: "errors", type: "Array<{ message?: string } | undefined>", description: "表单库的错误数组；去重，多条时显示为列表。" },
-        { name: "match", type: "boolean | keyof ValidityState", description: "只在某个校验状态下显示，如 \"valueMissing\"、\"typeMismatch\"。" },
-      ],
-    },
-    { name: "FieldContent", description: "横向表单项中包住标签与说明的一列。" },
-    { name: "FieldTitle", description: "非 <label> 的标题，用于控件自带标签（如 ToggleGroup、选项卡片）的场景。" },
-    { name: "FieldGroup", description: "一组表单项的纵向间距容器。" },
-    { name: "FieldSeparator", description: "表单项之间的分隔线，可带一段短文字。" },
-    { name: "FieldControl / FieldValidity", description: "Base UI 原语：自定义控件与读取校验状态。" },
+    {name: "Field", description: "Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldPrimitive。", descriptionEn: "Shared Base UI Field.Root context. Full automatic-validation APIs remain on FieldPrimitive.", props: [
+      {name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "纵向编辑或横向选项，不改变关联。", descriptionEn: "Vertical editing or a horizontal option; associations stay intact."},
+      {name: "invalid", type: "boolean", default: "false", description: "由调用方声明。原生约束、失焦、错误内容不推断此状态。", descriptionEn: "Declared by the caller. Native constraints, blur, and error content do not infer it."},
+      {name: "disabled", type: "boolean", default: "false", description: "禁用关联控件，禁用值不参加原生提交。", descriptionEn: "Disables registered controls; disabled values are omitted from native submission."},
+      {name: "name / dirty / touched", type: "Base UI Field.Root props", description: "字段名及调用方管理的编辑事实。", descriptionEn: "Field name and caller-managed editing facts."},
+      {name: "className / style / render / ref", type: "Base UI Field.Root props", description: "作用于字段根；样式支持状态函数。", descriptionEn: "Applied to the field root; styles support state functions."},
+    ]},
+    {name: "FieldLabel", description: "自动命名注册控件，支持显式 htmlFor 与原语 nativeLabel/render。", descriptionEn: "Names a registered control; supports explicit htmlFor and primitive nativeLabel/render."},
+    {name: "FieldDescription", description: "必要辅助事实；注册到 aria-describedby。", descriptionEn: "Necessary supporting facts registered in aria-describedby."},
+    {name: "FieldError", description: "只显示调用方错误，显示时加入 aria-describedby。", descriptionEn: "Shows caller-supplied errors and registers in aria-describedby when visible.", props: [
+      {name: "children", type: "ReactNode", description: "显式内容优先；无内容不生成浏览器或 Form 错误。", descriptionEn: "Explicit content takes precedence; no content means no browser or Form error is generated."},
+      {name: "errors", type: "ReadonlyArray<{ message?: string } | undefined>", description: "忽略空项、去重；多条用列表。", descriptionEn: "Skips empty entries, deduplicates, and lists multiple messages."},
+      {name: "match", type: "boolean | keyof ValidityState", default: "true", description: "保留原语过滤接口；false 隐藏。内容与 invalid 分别由调用方决定。", descriptionEn: "Primitive filtering interface; false hides the message. The caller supplies content and invalid separately."},
+    ]},
+    {name: "FieldTitle", description: "普通事实标题；用于自命名控件或无输入事实，不是 label。", descriptionEn: "A plain fact heading for self-named controls or facts without input; it is not a label."},
+    {name: "FieldContent", description: "横向字段的名称、说明内容列。", descriptionEn: "The name and description column of a horizontal field."},
+    {name: "FieldGroup", description: "字段之间的关系间隔，没有 group 语义。", descriptionEn: "Spacing between fields, without group semantics."},
+    {name: "FieldSeparator", description: "字段组分界；有文字时两侧线为装饰。", descriptionEn: "A boundary between field groups; flanking lines are decorative when text is supplied."},
+    {name: "FieldItem", description: "同一 Field 内某个控件与标签的局部关联。", descriptionEn: "Scopes a particular control and label within one Field."},
+    {name: "FieldControl / FieldValidity / FieldPrimitive", description: "直接的原语注册、状态读取与完整 API 出口。", descriptionEn: "Direct primitive outlets for registration, state reading, and the full API."},
   ],
-  keyboard: [{ keys: "Tab", description: "按文档顺序在控件间移动；点击标签聚焦或切换对应控件。" }],
+  keyboard: [{keys: "Tab / Shift+Tab", description: "按文档顺序进入控件；点击关联标签聚焦或切换控件。", descriptionEn: "Follow document order; activating an associated label focuses or toggles the control."}],
   notes: [
-    "没有 children 的 <FieldError /> 跟随 Base UI：字段无效时显示浏览器校验信息或 Form errors 中的同名错误。",
-    "自定义文案时用 match 绑定具体校验状态，例如 <FieldError match=\"valueMissing\">请填写邮箱</FieldError>；不写 match 的文案会一直显示。",
-    "接入 react-hook-form 等表单库时，用 invalid 标记字段，并把错误交给 errors。",
-    "一组相关的表单项用 Fieldset 与 FieldsetLegend（别名 FieldSet、FieldLegend）包起来。",
-    "没有注册到 Field 的组合控件（如 FileUpload）显式关联 label 的 htmlFor 与触发器 id，说明 id 通过 aria-describedby 传给控件。",
+    "Field 不接受 validate、validationMode、validationDebounceTime、actionsRef。应用用自己的校验过程把结果传入；需要原语自动校验时完整使用 FieldPrimitive。",
+    "FieldError 无内容时不渲染。字段外给定内容可以显示，但不会关联别处的控件。",
+    "未注册的自命名控件需要显式 aria-labelledby 和 aria-describedby；FieldTitle 不代替这一连接。",
+    "共同范围从 components/fieldset 导入 Fieldset / FieldsetLegend；FieldSet / FieldLegend 别名已删除。",
+    "样式消费 field-gap、field-group-gap 和文字档；具体数值是集中预设。",
+  ],
+  notesEn: [
+    "Field excludes validate, validationMode, validationDebounceTime, and actionsRef. Pass results from application validation; use the full FieldPrimitive composition for primitive-managed validation.",
+    "FieldError renders nothing without supplied content. Standalone content does not associate with another control.",
+    "Unregistered self-named controls need explicit aria-labelledby and aria-describedby. FieldTitle does not supply those connections.",
+    "Import Fieldset / FieldsetLegend from components/fieldset. FieldSet / FieldLegend aliases have been removed.",
+    "Styles consume field-gap, field-group-gap, and text profiles. Their numerical values are centralized presets.",
   ],
 } satisfies ComponentMeta;

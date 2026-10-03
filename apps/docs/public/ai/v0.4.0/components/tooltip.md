@@ -3,128 +3,116 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: e6bb7916da7c87bee93a011538823cdf4da4b04a57b3450b0a8e16c2bd394e99
+Source SHA-256: 6972d75fc5562f802db893b986cb6a7617fb6309ce4f502074ad85efbb26e20b
 
-悬停或聚焦时出现的简短说明，常用于解释图标按钮或展示快捷键。内容只能是纯文本提示，不放可交互元素。
+悬停或聚焦时阅读快捷键、格式与短解释。
 
 ## Use and ownership
-- 补充图标名称、快捷键或短解释，供悬停与键盘聚焦时阅读。
-- Avoid: 不能承担控件唯一可访问名称、关键后果、错误恢复或交互元素。
-- Library: 管理提示延迟、trigger 关联、Esc 关闭与位置，提示不接管执行状态。
-- Application: 决定是否有必要补充以及文本与动作事实是否一致。
+- 在已可辨认的对象或动作旁补充快捷键、格式或简短上下文。
+- Avoid: 唯一名称、唯一关键后果、禁用原因、失败恢复或可交互内容。
+- Library: 聚焦/悬停展开、关联、延迟、定位与 Esc。
+- Application: 补充内容与受控 open。
 
 ## Composition
-- 图标 Button 自带 aria-label；应用根挂 TooltipProvider，点击式帮助用 Popover 的 tooltipStyle。
+- 控件自带名称；Tooltip 关联补充文字；持续结果放在对象旁。
 
 ## Responsive behavior
-- 长词按可用宽度换行；触屏缺少悬停时正文或点击帮助仍可获得必需信息。
+- 按原语可用宽度换行；控制文字保留窄屏角色，必要信息始终可见。
 
 ## Customization
-- 用 side、align、anchor 调整位置；简短内容共享主题表面，避免逐个自定义延迟。
+- 应用根共享延迟；使用已有表面、阴影和圆角 token。
 
 ## Current exports
-- Tooltip: const; owner tooltip; PASS
-- TooltipContent: function; owner tooltip; alias of TooltipPopup; PASS; props: TooltipPrimitive.Popup.Props & {
-  align?: TooltipPrimitive.Positioner.Props["align"];
-  alignOffset?: TooltipPrimitive.Positioner.Props["alignOffset"];
-  side?: TooltipPrimitive.Positioner.Props["side"];
-  sideOffset?: TooltipPrimitive.Positioner.Props["sideOffset"];
-  anchor?: TooltipPrimitive.Positioner.Props["anchor"];
-  portalProps?: TooltipPrimitive.Portal.Props;
-}
-- TooltipCreateHandle: const; owner tooltip; PASS
-- TooltipPopup: function; owner tooltip; PASS; props: TooltipPrimitive.Popup.Props & {
-  align?: TooltipPrimitive.Positioner.Props["align"];
-  alignOffset?: TooltipPrimitive.Positioner.Props["alignOffset"];
-  side?: TooltipPrimitive.Positioner.Props["side"];
-  sideOffset?: TooltipPrimitive.Positioner.Props["sideOffset"];
-  anchor?: TooltipPrimitive.Positioner.Props["anchor"];
-  portalProps?: TooltipPrimitive.Portal.Props;
-}
+- Tooltip: function; owner tooltip; PASS; props: TooltipPrimitive.Root.Props<Payload>
+- TooltipContent: function; owner tooltip; alias of TooltipPopup; PASS; props: TooltipPopupProps
+- TooltipCreateHandle: const; owner tooltip; UNVERIFIED
+- TooltipPopup: function; owner tooltip; PASS; props: TooltipPopupProps
 - TooltipPrimitive: reexport; owner tooltip; UNVERIFIED
-- TooltipProvider: const; owner tooltip; PASS
+- TooltipProvider: const; owner tooltip; UNVERIFIED
 - TooltipTrigger: function; owner tooltip; PASS; props: TooltipPrimitive.Trigger.Props
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, react
 - Optional peers: none recorded
-- 文档站与应用都应在根部挂载一次 TooltipProvider，不要在每个提示外再包一层。
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
 ### TooltipProvider
-在应用根部挂载一次。相邻的提示共享延迟：第一个按默认延迟出现，移动到下一个时立即显示。
-- delay: number; default 600. 首次悬停到出现的等待时间（毫秒）。保留默认值，避免鼠标划过时到处弹出。
-- closeDelay: number; default 0. 离开后关闭前的等待时间。
+共享指针延迟。键盘聚焦立即展开。
+- delay: number; default 600. 首次悬停等待毫秒数，原语预设，可由应用覆盖。
+- closeDelay: number; default 0. 离开触发者和提示后的等待时间。
+- timeout: number; default 400. 连续提示立即展开的共享窗口，原语预设。
 
 ### Tooltip
-根组件。
-- open / defaultOpen: boolean; default false. 受控 / 非受控的打开状态。
-- onOpenChange: (open, details) => void. 打开状态变化时调用。
-- disabled: boolean; default false. 临时停用提示。
-- handle: TooltipCreateHandle(). 多个触发器共用一个提示，切换时提示平滑移动。
+非阻断打开状态。提示可被悬停，不接收交互内容。
+- open / defaultOpen: boolean; default false. 受控 / 非受控打开。
+- onOpenChange: (open, details) => void. 接收实际请求与原因；受控值由应用决定。
+- disabled: boolean; default false. 停用提示，不停用触发控件的动作。
+- disableHoverablePopup: boolean; default false. 类型保留兼容；包装始终使用 false，满足可悬停约束。
+- trackCursorAxis: "none" | "x" | "y" | "both"; default none. both 归一为 none，以保留指针移入提示的通路；其余取值透传。
+- handle / triggerId / defaultTriggerId: Handle / string. 关联共享触发者及受控或初始展开。
 
 ### TooltipTrigger
-触发元素；用 render 渲染为 Button 等控件。
-- delay / closeDelay: number. 单独覆盖 Provider 的延迟。
+支持 render、ref、事件、ARIA 和按状态求值的 className。
+- delay / closeDelay: number. 覆盖当前触发者的指针延迟。
+- disabled: boolean; default false. 仅停用提示。原生禁用动作通过 render 的控件声明。
 
-### TooltipPopup
-提示本体。别名 TooltipContent。
-- side: "top" | "right" | "bottom" | "left" | "inline-start" | "inline-end"; default "top". 相对触发器的方向，空间不足时自动翻转。
-- align: "start" | "center" | "end"; default "center". 沿边的对齐方式。
-- sideOffset / alignOffset: number; default 4 / 0. 与触发器的距离 / 对齐偏移。
+### TooltipPopup / TooltipContent
+提示正文与定位。可换行；入退由 motion.css 管理。
+- side / align: Positioner.Props; default top / center. 原语默认位置，空间不足时自动翻转。
+- sideOffset / alignOffset / anchor: Positioner.Props; default 0 / 0 / trigger. 相对锚点的显式位置关系。
+- portalProps: Portal.Props. container 可保留局部语言、方向和密度。默认挂到 body。
+
+### TooltipCreateHandle / TooltipPrimitive
+共享触发者的类型化 handle 与 Base UI 公共原语。
 
 ## Keyboard
-- Tab: 聚焦触发器时显示提示。
-- Esc: 关闭提示，焦点保持在触发器上。
+- Tab / Shift+Tab: 聚焦即显示，离开时关闭；不困住焦点。
+- Esc: 收起提示，焦点保持当前触发者。
 
 ## Source examples
-### 图标按钮
+### 文字格式
 Source: apps/docs/src/content/tooltip/demos/01-icon-buttons.tsx
 ```tsx
+import { useState } from "react";
 import { Button } from "@qingye/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { CopyIcon, DownloadIcon, PencilIcon, Trash2Icon } from "lucide-react";
+import { BoldIcon, ItalicIcon } from "lucide-react";
 
-export const meta = {
-  title: "图标按钮",
-  description: "第一次悬停按默认延迟出现；在相邻按钮间移动时立即切换，不再等待。",
-};
-
-const actions = [
-  { label: "编辑", icon: PencilIcon },
-  { label: "复制", icon: CopyIcon },
-  { label: "下载", icon: DownloadIcon },
-  { label: "删除", icon: Trash2Icon },
-];
+export const meta = { title: "文字格式" };
 
 export default function Demo() {
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
   return (
-    <div className="flex gap-1">
-      {actions.map(({ label, icon: Icon }) => (
-        <Tooltip key={label}>
-          <TooltipTrigger render={<Button aria-label={label} size="icon" variant="ghost" />}>
-            <Icon />
-          </TooltipTrigger>
-          <TooltipPopup>{label}</TooltipPopup>
+    <div className="flex flex-col gap-(--qy-field-group-gap)">
+      <div className="flex gap-(--qy-action-gap)">
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>强调项目名称</TooltipPopup>
         </Tooltip>
-      ))}
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><ItalicIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>标记作品名称或引用</TooltipPopup>
+        </Tooltip>
+      </div>
+      <p className="text-body text-foreground" aria-live="polite">{bold ? <strong>{italic ? <em>青野组件库</em> : "青野组件库"}</strong> : italic ? <em>青野组件库</em> : "青野组件库"}</p>
     </div>
   );
 }
 ```
 
-### 方向
+### 位置
 Source: apps/docs/src/content/tooltip/demos/02-sides.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
 
-export const meta = { title: "方向", description: "默认在上方；side 指定其他方向，空间不足时自动翻转。" };
+export const meta = { title: "位置", titleEn: "Placement" };
 
-const sides = [
+const places = [
   { side: "top", label: "上方" },
   { side: "right", label: "右侧" },
   { side: "bottom", label: "下方" },
@@ -132,104 +120,59 @@ const sides = [
 ] as const;
 
 export default function Demo() {
-  return (
-    <div className="flex flex-wrap justify-center gap-2">
-      {sides.map(({ side, label }) => (
-        <Tooltip key={side}>
-          <TooltipTrigger render={<Button variant="outline" />}>{label}</TooltipTrigger>
-          <TooltipPopup side={side}>显示在{label}</TooltipPopup>
-        </Tooltip>
-      ))}
-    </div>
-  );
+  return <div className="flex gap-(--qy-action-gap)">{places.map(({ side, label }) => <Tooltip key={side}><TooltipTrigger render={<Button variant="quiet" />}>{label}</TooltipTrigger><TooltipPopup side={side}>{side}</TooltipPopup></Tooltip>)}</div>;
 }
 ```
 
-### 附带快捷键
+### 快捷键
 Source: apps/docs/src/content/tooltip/demos/03-shortcut.tsx
 ```tsx
+import { useState } from "react";
 import { Button } from "@qingye/ui/components/button";
-import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { SaveIcon, SearchIcon } from "lucide-react";
+import { BoldIcon } from "lucide-react";
 
-export const meta = { title: "附带快捷键", description: "在提示里用 Kbd 标出快捷键，帮助用户逐步记住。" };
+export const meta = { title: "快捷键" };
 
 export default function Demo() {
+  const [bold, setBold] = useState(false);
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-(--qy-field-group-gap)" onKeyDown={(event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "b") {
+        event.preventDefault();
+        setBold((value) => !value);
+      }
+    }}>
       <Tooltip>
-        <TooltipTrigger render={<Button aria-label="搜索" size="icon" variant="outline" />}>
-          <SearchIcon />
-        </TooltipTrigger>
-        <TooltipPopup>
-          <span className="flex items-center gap-2">
-            搜索
-            <KbdGroup>
-              <Kbd>⌘</Kbd>
-              <Kbd>K</Kbd>
-            </KbdGroup>
-          </span>
-        </TooltipPopup>
+        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+        <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>
       </Tooltip>
-      <Tooltip>
-        <TooltipTrigger render={<Button variant="outline" />}>
-          <SaveIcon />
-          保存草稿
-        </TooltipTrigger>
-        <TooltipPopup>
-          <span className="flex items-center gap-2">
-            保存到本机
-            <KbdGroup>
-              <Kbd>⌘</Kbd>
-              <Kbd>S</Kbd>
-            </KbdGroup>
-          </span>
-        </TooltipPopup>
-      </Tooltip>
+      <p className="text-body text-foreground">{bold ? <strong>让器物服务于人</strong> : "让器物服务于人"}</p>
     </div>
   );
 }
 ```
 
-### 工具栏共用提示
+### 段落对齐
 Source: apps/docs/src/content/tooltip/demos/04-shared.tsx
 ```tsx
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { useMemo, useState } from "react";
+import { Button } from "@qingye/ui/components/button";
 import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
 import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
 
-export const meta = {
-  title: "工具栏共用提示",
-  description: "通过 handle 让一组触发器共用一个提示，切换时提示跟随移动，而不是闪烁重建。",
-};
-
-const handle = TooltipCreateHandle<string>();
+export const meta = { title: "段落对齐" };
 
 const items = [
-  { value: "left", label: "左对齐", icon: AlignLeftIcon },
-  { value: "center", label: "居中对齐", icon: AlignCenterIcon },
-  { value: "right", label: "右对齐", icon: AlignRightIcon },
-];
+  { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: AlignLeftIcon },
+  { value: "center", label: "居中对齐", detail: "段落沿中央排列", icon: AlignCenterIcon },
+  { value: "right", label: "右对齐", detail: "段落靠右边缘排列", icon: AlignRightIcon },
+] as const;
 
 export default function Demo() {
-  return (
-    <>
-      <ToggleGroup defaultValue={["left"]}>
-        {items.map(({ value, label, icon: Icon }) => (
-          <TooltipTrigger
-            handle={handle}
-            key={value}
-            payload={label}
-            render={<ToggleGroupItem aria-label={label} value={value} />}
-          >
-            <Icon />
-          </TooltipTrigger>
-        ))}
-      </ToggleGroup>
-      <Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip>
-    </>
-  );
+  const handle = useMemo(() => TooltipCreateHandle<string>(), []);
+  const [align, setAlign] = useState<"left" | "center" | "right">("left");
+  return <div className="flex flex-col gap-(--qy-field-group-gap)"><div role="group" aria-label="段落对齐" className="flex gap-(--qy-action-gap)">{items.map(({ value, label, detail, icon: Icon }) => <TooltipTrigger handle={handle} key={value} payload={detail} render={<Button variant="quiet" shape="icon" aria-label={label} aria-pressed={align === value} onClick={() => setAlign(value)} />}><Icon aria-hidden="true" /></TooltipTrigger>)}</div><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip><p className="text-body text-foreground" style={{ textAlign: align }}>青野组件库，器用为本。</p></div>;
 }
 ```
 

@@ -90,10 +90,9 @@ describe("component conventions", () => {
   test("straight durations are on Tailwind's scale or a deliberate exception", () => {
     /*
      * Components may use a raw duration class, but it should be a step that
-     * belongs to a scale. The exceptions below are inherited from coss upstream
-     * and are kept as-is so the register stays honest; anything else is a
-     * timing nobody chose on purpose. New motion should prefer the `--qy-*`
-     * duration tokens instead.
+     * belongs to a scale. The existing per-file exception register below stays
+     * unchanged; it grants no exception to any other component or duration.
+     * New motion should prefer the `--qy-*` duration tokens instead.
      */
     const scale = new Set(["75", "100", "150", "200", "300", "500", "700", "1000"]);
     const inherited = new Map([

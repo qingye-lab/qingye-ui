@@ -1,45 +1,36 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/checkbox.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
-import { MinusIcon, CheckIcon } from "lucide-react";
-
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
-import type React from "react";
+import { CheckIcon, MinusIcon } from "lucide-react";
+import * as React from "react";
 import { cn } from "../utils";
 
-export function Checkbox({
-  className,
-  ...props
-}: CheckboxPrimitive.Root.Props): React.ReactElement {
-  return (
-    <CheckboxPrimitive.Root
-      className={cn(
-        "touch-target relative inline-flex size-4.5 shrink-0 items-center justify-center rounded-[.25rem] border border-input bg-background not-dark:bg-clip-padding shadow-xs/5 outline-none ring-ring transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-[3px] not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 data-disabled:cursor-not-allowed data-disabled:opacity-64 sm:size-4 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
-        className,
-      )}
-      data-slot="checkbox"
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        keepMounted
-        className="absolute -inset-px flex items-center justify-center rounded-[.25rem] text-primary-foreground data-unchecked:opacity-0 data-unchecked:scale-90 data-checked:bg-primary data-indeterminate:text-foreground"
-        data-slot="checkbox-indicator"
-        render={(
-          props: React.ComponentProps<"span">,
-          state: CheckboxPrimitive.Indicator.State,
-        ) => (
-          <span {...props}>
-            {state.indeterminate ? (
-              <MinusIcon aria-hidden="true" className="size-3.5 sm:size-3" strokeWidth={3} />
-            ) : (
-              <CheckIcon aria-hidden="true" className="size-3.5 sm:size-3" strokeWidth={3} />
-            )}
-          </span>
-        )}
-      />
-    </CheckboxPrimitive.Root>
-  );
+export type CheckboxSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type CheckboxProps = React.ComponentProps<typeof CheckboxPrimitive.Root> & { size?: CheckboxSize };
+
+/** 部分选中是调用方给定的集合事实；原语保留 mixed、键盘与表单语义。 */
+export function Checkbox({ size = "md", children, className, style, ...props }: CheckboxProps) {
+  const variables = {
+    "--qy-checkbox-edge": `var(--qy-text-control-${size}-leading)`,
+    "--qy-checkbox-edge-narrow": `calc(var(--qy-text-control-${size}-leading) + var(--qy-control-${size}-narrow) - var(--qy-control-${size}))`,
+  } as React.CSSProperties;
+  return <CheckboxPrimitive.Root
+    data-slot="checkbox" data-size={size} {...props}
+    className={(state) => cn(
+      "touch-target inline-flex shrink-0 items-center justify-center align-middle outline-none size-(--qy-checkbox-edge-narrow) sm:size-(--qy-checkbox-edge) rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge-narrow)/4))] sm:rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge)/4))] border transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
+      state.checked || state.indeterminate
+        ? "border-transparent bg-primary text-primary-foreground focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-primary-foreground"
+        : "border-input bg-card text-foreground dark:bg-surface-inset focus-visible:border-ring not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground",
+      state.disabled && "cursor-not-allowed opacity-64",
+      state.readOnly && "data-readonly:border-dashed",
+      typeof className === "function" ? className(state) : className,
+    )}
+    style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
+  >{children ?? <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="pointer-events-none flex size-full items-center justify-center"
+    render={(indicatorProps, state) => <span {...indicatorProps}>{state.indeterminate
+      ? <MinusIcon aria-hidden="true" className="size-3/4" />
+      : <CheckIcon aria-hidden="true" className="size-3/4" />}</span>}
+  />}</CheckboxPrimitive.Root>;
 }
 
 export { CheckboxPrimitive };

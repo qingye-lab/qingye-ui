@@ -1,196 +1,112 @@
-# 警示对话框 AlertDialog
+# 决定对话框 AlertDialog
 
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: 888e6c24d49b867043305a3f5ccba18a3ac6a633fa08112a5b8feeeb87a1555a
+Source SHA-256: 21e2832b614bd90f5594b7818c96d69c3a8a3e9358e111dded83e4bccc69f59e
 
-打断当前操作、要求用户明确回应的对话框，用于删除、撤销权限等不可逆操作的二次确认。点击遮罩不会关闭。
+阻断整个工作面，要求对当前对象作出明确选择。
 
 ## Use and ownership
-- 对具体对象和具体不可逆后果要求明确回应，如永久删除或撤销权限。
-- Avoid: 确认不应成为每次操作的例行阻碍；请求发出与完成、结果未知必须分开表达。
-- Library: 提供 alertdialog 名称与说明关联、焦点限制、遮罩不关闭和明确选择出口。
-- Application: 决定确认条件、操作范围、危险请求、失败或未知状态，以及何时允许关闭或重试。
+- 必须在继续前回应的决定。
+- Avoid: 通知、成功反馈、可就地编辑的内容。
+- Library: open、焦点困住、滚动锁、背景阻断和返回。
+- Application: 决定内容、后果与继续动作。
 
 ## Composition
-- Title 点明对象，Description 只说明必要后果，取消与执行动作并列，初始焦点按风险显式设置。
+- 返回与继续动作同处，必要后果可关联。
 
 ## Responsive behavior
-- 贴底操作保留安全区；长后果说明不能让取消与执行动作不可达。
+- 内容决定宽度，视口限制上限；本批只验桌面。
 
 ## Customization
-- 视觉强弱跟随当前风险；destructive 指向真实危险动作，取消不被默认焦点顺序意外弱化。
+- 与 Dialog 复用圆角、表面、遮罩及阴影角色。
+- 默认进入面板；入退只由 motion.css 提供。
 
 ## Current exports
-- AlertDialog: const; owner alert-dialog; PASS
-- AlertDialogBackdrop: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Backdrop.Props
+- AlertDialog: function; owner alert-dialog; PASS; props: AlertDialogProps<Payload>
 - AlertDialogClose: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Close.Props
-- AlertDialogContent: function; owner alert-dialog; alias of AlertDialogPopup; PASS; props: AlertDialogPrimitive.Popup.Props & {
-  bottomStickOnMobile?: boolean;
-  portalProps?: AlertDialogPrimitive.Portal.Props;
-}
-- AlertDialogCreateHandle: const; owner alert-dialog; PASS
+- AlertDialogCreateHandle: const; owner alert-dialog; UNVERIFIED
 - AlertDialogDescription: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Description.Props
-- AlertDialogFooter: function; owner alert-dialog; PASS; props: React.ComponentProps<"div"> & {
-  variant?: "default" | "bare";
-}
-- AlertDialogHeader: function; owner alert-dialog; PASS; props: React.ComponentProps<"div">
-- AlertDialogOverlay: function; owner alert-dialog; alias of AlertDialogBackdrop; PASS; props: AlertDialogPrimitive.Backdrop.Props
-- AlertDialogPopup: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Popup.Props & {
-  bottomStickOnMobile?: boolean;
-  portalProps?: AlertDialogPrimitive.Portal.Props;
-}
-- AlertDialogPortal: const; owner alert-dialog; PASS
+- AlertDialogFooter: function; owner alert-dialog; PASS; props: DialogGroupProps
+- AlertDialogHeader: function; owner alert-dialog; PASS; props: DialogGroupProps
+- AlertDialogPanel: function; owner alert-dialog; PASS; props: DialogGroupProps
+- AlertDialogPopup: function; owner alert-dialog; PASS; props: AlertDialogPopupProps
+- AlertDialogPopupProps: type; owner alert-dialog; PASS
 - AlertDialogPrimitive: reexport; owner alert-dialog; UNVERIFIED
+- AlertDialogProps: type; owner alert-dialog; PASS
 - AlertDialogTitle: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Title.Props
-- AlertDialogTrigger: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Trigger.Props
-- AlertDialogViewport: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Viewport.Props
+- AlertDialogTrigger: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Trigger.Props<Payload>
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
 ### AlertDialog
-根组件，管理打开状态。
-- open / defaultOpen: boolean; default false. 受控 / 非受控的打开状态。
-- onOpenChange: (open, details) => void. 打开状态变化时调用。
-- handle: AlertDialogCreateHandle(). 与外部触发器关联。
-
-### AlertDialogTrigger
-打开确认框的按钮。
+保留 open/defaultOpen/onOpenChange/handle；原语固定阻断并禁止外部指针关闭。
 
 ### AlertDialogPopup
-确认框本体，自带遮罩；不含右上角关闭按钮，用户必须做出选择。别名 AlertDialogContent。
-- bottomStickOnMobile: boolean; default true. 窄屏时贴底显示。
-- initialFocus: RefObject | boolean | fn. 打开时聚焦的元素，默认为第一个按钮（通常是“取消”）。
-- portalProps: AlertDialogPortal props. 指定挂载节点等。
+与 Dialog 同样的承载结构与内容尺寸关系，默认聚焦面板。
+- initialFocus: DialogFocusTarget; default panel. 可指定保留动作、确认字段或可聚焦标题；危险按钮不得作为默认落点。
+- finalFocus: DialogFocusTarget; default trigger. 触发者移除后由应用指定有意义的上级。
+- portalProps / backdropProps / viewportProps: DialogPopupProps. 透传承载层的容器、样式、render、ref 与原生属性。
 
-### AlertDialogHeader
-标题区；窄屏居中，宽屏左对齐。
+### AlertDialogTitle / AlertDialogDescription
+说明当前选择与必要后果，建立可访问关联。
 
-### AlertDialogTitle
-标题，用问句直接说明后果。
+### AlertDialogTrigger / AlertDialogClose
+默认组合 Button。Close 由调用方明确命名，如“返回”；不执行继续动作。
 
-### AlertDialogDescription
-说明影响范围与能否撤销。
+### AlertDialogHeader / AlertDialogPanel / AlertDialogFooter
+复用 Dialog 的名称、工作内容与动作分组，具有各自 data-slot。
 
-### AlertDialogFooter
-操作区；取消放在前，确认放在后。
-- variant: "default" | "bare"; default "default". default 带分隔线与底色；bare 无背景。
-
-### AlertDialogClose
-关闭按钮；用 render 渲染为“取消”或确认按钮。
+### AlertDialogCreateHandle / AlertDialogPrimitive
+共享触发 handle 和所用 Base UI 原语命名空间。
 
 ## Keyboard
-- Esc: 取消并关闭，焦点回到触发器。
-- Tab / Shift + Tab: 在按钮之间循环移动焦点。
-- Enter / Space: 执行当前聚焦的按钮。
+- Enter / Space: 打开决定。
+- Tab / Shift+Tab: 在最上层决定内循环，背景不可操作。
+- Esc: 离开这次决定并返回；危险动作不执行。
 
 ## Source examples
-### 删除确认
-Source: apps/docs/src/content/alert-dialog/demos/01-default.tsx
+### 确认与返回
+Source: apps/docs/src/content/alert-dialog/demos/01-confirmation.tsx
 ```tsx
+import { useId, useState } from "react";
 import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
 import { Button } from "@qingye/ui/components/button";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "删除确认", description: "不可逆的操作用 destructive 确认按钮，取消放在前面。" };
-
-export default function Demo() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="destructive-outline" />}>删除设备</AlertDialogTrigger>
-      <AlertDialogPopup>
-        <AlertDialogHeader>
-          <AlertDialogTitle>删除“仓库 3 号扫码枪”？</AlertDialogTitle>
-          <AlertDialogDescription>
-            设备的 1,024 条扫码记录会一并删除，且无法恢复。设备需要重新绑定才能再次使用。
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogClose render={<Button variant="ghost" />}>取消</AlertDialogClose>
-          <AlertDialogClose render={<Button variant="destructive" />}>删除设备</AlertDialogClose>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
-    </AlertDialog>
-  );
-}
-```
-
-### 无底色底部
-Source: apps/docs/src/content/alert-dialog/demos/02-bare-footer.tsx
-```tsx
-import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
-import { Button } from "@qingye/ui/components/button";
-
-export const meta = { title: "无底色底部", description: "非危险的确认，例如退出登录，用更轻的 bare 底部。" };
-
-export default function Demo() {
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger render={<Button variant="outline" />}>退出登录</AlertDialogTrigger>
-      <AlertDialogPopup className="sm:max-w-sm">
-        <AlertDialogHeader>
-          <AlertDialogTitle>退出当前账号？</AlertDialogTitle>
-          <AlertDialogDescription>未同步的离线草稿会保留在本机，下次登录后继续同步。</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter variant="bare">
-          <AlertDialogClose render={<Button variant="ghost" />}>取消</AlertDialogClose>
-          <AlertDialogClose render={<Button />}>退出</AlertDialogClose>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
-    </AlertDialog>
-  );
-}
-```
-
-### 异步执行
-Source: apps/docs/src/content/alert-dialog/demos/03-async.tsx
-```tsx
-import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
-import { Button } from "@qingye/ui/components/button";
-import { useState } from "react";
-
-export const meta = {
-  title: "异步执行",
-  description: "确认后保持打开并显示加载，请求完成再关闭；执行期间禁止取消。",
-};
+export const meta = { title: "确认与返回", titleEn: "Confirmation and return" };
 
 export default function Demo() {
   const [open, setOpen] = useState(false);
-  const [pending, setPending] = useState(false);
-
-  const revoke = async () => {
-    setPending(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setPending(false);
-    setOpen(false);
-  };
+  const [value, setValue] = useState("青野");
+  const consequenceId = useId();
 
   return (
-    <AlertDialog onOpenChange={(next) => !pending && setOpen(next)} open={open}>
-      <AlertDialogTrigger render={<Button variant="outline" />}>撤销访问权限</AlertDialogTrigger>
-      <AlertDialogPopup>
-        <AlertDialogHeader>
-          <AlertDialogTitle>撤销周以宁的访问权限？</AlertDialogTitle>
-          <AlertDialogDescription>
-            对方会立即退出“华东仓储”项目，已分配给 TA 的 6 张工单将回到待分配列表。
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogClose disabled={pending} render={<Button variant="ghost" />}>
-            取消
-          </AlertDialogClose>
-          <Button loading={pending} onClick={revoke} variant="destructive">
-            撤销权限
-          </Button>
-        </AlertDialogFooter>
-      </AlertDialogPopup>
-    </AlertDialog>
+    <div className="grid w-full max-w-sm gap-(--qy-panel-gap)">
+      <Field><FieldLabel>备注</FieldLabel><Input value={value} onValueChange={setValue} /></Field>
+      <p id={consequenceId} className="text-support text-muted-foreground">清空后，输入内容无法恢复。</p>
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogTrigger render={<Button variant="bordered" tone="danger" aria-describedby={consequenceId} />} className="justify-self-start">清空输入</AlertDialogTrigger>
+        <AlertDialogPopup>
+          <AlertDialogHeader>
+            <AlertDialogTitle>清空输入？</AlertDialogTitle>
+            <AlertDialogDescription id={`${consequenceId}-popup`}>当前备注将被清空。</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogClose render={<Button variant="bordered" />}>返回</AlertDialogClose>
+            <Button tone="danger" aria-describedby={`${consequenceId}-popup`} onClick={() => { setValue(""); setOpen(false); }}>清空输入</Button>
+          </AlertDialogFooter>
+        </AlertDialogPopup>
+      </AlertDialog>
+    </div>
   );
 }
 ```

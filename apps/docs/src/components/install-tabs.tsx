@@ -26,7 +26,7 @@ export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCom
       <div className="flex items-center justify-between gap-2 border-b py-1 ps-1.5 pe-1.5">
         <TabsList aria-label="包管理器" size="sm" variant="underline">
           {managers.map((manager) => (
-            <TabsTab className="font-mono text-xs" key={manager.id} value={manager.id}>
+            <TabsTab className="font-mono text-caption" key={manager.id} value={manager.id}>
               {manager.id}
             </TabsTab>
           ))}

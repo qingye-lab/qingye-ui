@@ -35,7 +35,7 @@ export default function InstallationPage() {
   return (
     <article>
       <PageHeader
-        description="组件库以单个包发布。根据项目是否使用 Tailwind CSS 4 选择一种样式接入方式，再在应用根部挂载 Provider。"
+        description="组件库以单个包发布；按项目是否使用 Tailwind CSS 4 选择样式入口，再在应用根部挂载 Provider。"
         title="安装"
       />
 
@@ -59,9 +59,9 @@ export default function InstallationPage() {
       <P>
         通过 GitHub Release 分发。仓库目前为私有，请先用有仓库访问权限的账号登录 GitHub CLI，再复制以下命令下载并安装最新版本：
       </P>
-      <P className="text-sm text-muted-foreground">本站构建版本为 v{SITE.version}；以下命令下载 GitHub 标记的最新 Release，不按本站构建版本固定 tag。未发布的源码变化不会自动进入安装包。</P>
+      <P className="text-body text-muted-foreground">本站构建版本为 v{SITE.version}；以下命令下载 GitHub 标记的最新 Release，不按本站构建版本固定 tag。未发布的源码变化不会自动进入安装包。</P>
       <InstallTabs downloadCommand={releaseDownloadCommand} pkg={`./${releaseFile}`} />
-      <P className="text-[0.875rem] text-muted-foreground">
+      <P className="text-body text-muted-foreground">
         保留并提交 <Code>{releaseFile}</Code>、<Code>package.json</Code> 和 lock 文件。日常 <Code>pnpm install</Code> 按 lock 复现；主动升级时重新运行上述命令。发布记录见 <A href={`${SITE.repo}/releases`}>Releases</A>。
       </P>
 
@@ -85,7 +85,7 @@ export default function InstallationPage() {
       </Callout>
 
       <H2 id="providers">挂载 Provider</H2>
-      <P>在应用根部挂载一次。顺序没有强制要求，下面是推荐写法：</P>
+      <P>在应用根部各挂载一次。Provider 的顺序没有强制要求。</P>
       <CodeBlock code={providers} title="src/main.tsx" />
       <Facts
         items={[

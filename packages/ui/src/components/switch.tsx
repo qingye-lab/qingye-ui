@@ -1,32 +1,29 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/switch.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
-import type React from "react";
+import * as React from "react";
 import { cn } from "../utils";
 
-export function Switch({
-  className,
-  ...props
-}: SwitchPrimitive.Root.Props): React.ReactElement {
-  return (
-    <SwitchPrimitive.Root
-      className={cn(
-        "touch-target relative inline-flex h-[calc(var(--thumb-size)+2px)] w-[calc(var(--thumb-size)*2-2px)] shrink-0 items-center rounded-full p-px outline-none transition-[background-color,box-shadow] duration-(--qy-duration-fast) ease-(--qy-ease-out) [--thumb-size:--spacing(5)] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background aria-invalid:ring-[length:var(--qy-focus-button-width)] aria-invalid:ring-destructive/64 focus-visible:aria-invalid:ring-destructive/48 data-disabled:cursor-not-allowed data-checked:bg-primary data-unchecked:bg-input data-disabled:opacity-64 sm:[--thumb-size:--spacing(4)]",
-        className,
-      )}
-      data-slot="switch"
-      {...props}
-    >
-      <SwitchPrimitive.Thumb
-        className={cn(
-          "pointer-events-none block aspect-square h-full origin-left in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]:not-data-disabled:scale-x-110 in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]:rounded-[var(--thumb-size)/calc(var(--thumb-size)*1.1)] rounded-(--thumb-size) bg-background shadow-sm/5 will-change-transform [transition:translate_var(--qy-duration-fast)_var(--qy-ease-out),border-radius_var(--qy-duration-fast),scale_var(--qy-duration-press)_var(--qy-duration-press),transform-origin_var(--qy-duration-fast)] data-checked:origin-[var(--thumb-size)_50%] data-checked:translate-x-[calc(var(--thumb-size)-4px)] rtl:not-data-checked:origin-right rtl:data-checked:origin-left rtl:data-checked:-translate-x-[calc(var(--thumb-size)-4px)]",
-        )}
-        data-slot="switch-thumb"
-      />
-    </SwitchPrimitive.Root>
-  );
+export type SwitchSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type SwitchProps = React.ComponentProps<typeof SwitchPrimitive.Root> & { size?: SwitchSize };
+
+/** 立即生效的设置；请求与持久化结果由应用持有，不从位置变化推断保存。 */
+export function Switch({ size = "md", children, className, style, ...props }: SwitchProps) {
+  const variables = {
+    "--qy-switch-height": `var(--qy-text-control-${size}-leading)`,
+    "--qy-switch-height-narrow": `calc(var(--qy-text-control-${size}-leading) + var(--qy-control-${size}-narrow) - var(--qy-control-${size}))`,
+    "--qy-switch-inset": "calc(var(--qy-focus-quiet-width) + var(--qy-focus-ring-width))",
+  } as React.CSSProperties;
+  return <SwitchPrimitive.Root
+    data-slot="switch" data-size={size} {...props}
+    className={(state) => cn(
+      "touch-target relative inline-flex shrink-0 items-center align-middle outline-none h-(--qy-switch-height-narrow) w-[calc(2*var(--qy-switch-height-narrow))] sm:h-(--qy-switch-height) sm:w-[calc(2*var(--qy-switch-height))] rounded-[min(var(--qy-radius-control),calc(var(--qy-switch-height-narrow)/4))] sm:rounded-[min(var(--qy-radius-control),calc(var(--qy-switch-height)/4))] px-(--qy-switch-inset) transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)]",
+      state.checked ? "bg-primary text-primary-foreground focus-visible:ring-primary-foreground" : "bg-muted-foreground text-background focus-visible:ring-background",
+      state.disabled && "cursor-not-allowed opacity-64",
+      typeof className === "function" ? className(state) : className,
+    )}
+    style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
+  >{children ?? <SwitchPrimitive.Thumb data-slot="switch-thumb" className="pointer-events-none block size-[calc(var(--qy-switch-height-narrow)-2*var(--qy-switch-inset))] sm:size-[calc(var(--qy-switch-height)-2*var(--qy-switch-inset))] rounded-full bg-current transition-transform duration-(--qy-duration-fast) ease-(--qy-ease-out) data-checked:translate-x-(--qy-switch-height-narrow) sm:data-checked:translate-x-(--qy-switch-height) rtl:data-checked:-translate-x-(--qy-switch-height-narrow) sm:rtl:data-checked:-translate-x-(--qy-switch-height) motion-reduce:transition-none" />}</SwitchPrimitive.Root>;
 }
 
 export { SwitchPrimitive };

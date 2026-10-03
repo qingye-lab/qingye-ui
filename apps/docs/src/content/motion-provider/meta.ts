@@ -2,9 +2,11 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "动效策略 MotionProvider",
-  description:
-    "记录用户最近一次使用的输入方式，写到 <html data-ui-input>：键盘操作时组件的过渡立即完成，鼠标与触屏时保留细微的动效。在应用根部挂载一次。",
+  titleEn: "MotionProvider",
+  description: "在应用根部记录输入方式，键盘操作跳过过渡。",
+  descriptionEn: "Record input modality at the application root and skip transitions for keyboard input.",
   category: "工具",
+  layer: "foundation",
   source: "local",
   exports: ["MotionProvider"],
   keywords: ["motion", "动效", "动画", "键盘", "input modality", "reduced motion", "减少动态效果"],
@@ -17,12 +19,19 @@ export default {
     },
   ],
   notes: [
-    "motion.css 读取这个属性：data-ui-input=\"keyboard\" 时，所有带 data-slot 的组件及 .qy-pressable 的过渡时长归零，带 data-motion 的入场动画停用——连续按方向键时，焦点与选中状态不必等动画。",
-    "鼠标与触屏下，.qy-pressable 元素按下时缩放到 0.97（100ms），菜单与选择器浮层从触发点淡入展开。",
-    "系统开启“减少动态效果”时，motion.css 只保留透明度与颜色的过渡，去掉位移、缩放与高度动画；这一层不依赖 MotionProvider。",
-    "自定义组件想遵循同一策略：给可样式化的元素加 data-slot，或给可按压元素加 qy-pressable 类即可，不要自己监听输入方式。",
-    "某次程序触发的变化不需要动画时，在元素上加 data-instant。",
+    "只在应用根部挂载一次；示例复用本站根部的 MotionProvider。",
+    "motion.css 读取 data-ui-input；键盘下过渡时长归零，指针下保留过渡。",
+    "系统减少动态效果由 motion.css 处理，独立于输入方式。",
+    "data-instant 让当前元素跳过过渡；自定义部位使用 data-slot 或 qy-pressable 接入公共策略。",
   ],
+  notesEn: [
+    "Mount once at the application root. These demos reuse the site's root MotionProvider.",
+    "motion.css reads data-ui-input, skipping transitions for keyboard input and retaining them for pointer input.",
+    "motion.css handles the system reduced-motion preference independently of input modality.",
+    "data-instant skips an element's transition. Custom parts use data-slot or qy-pressable for the shared policy.",
+  ],
+  decisions: "键盘与减少动态效果会跳过部分过渡。状态直接更新，不依赖动画结束。",
+  decisionsEn: "Keyboard and reduced-motion policies skip some transitions. Update state directly, independently of animation completion.",
   design: {
     "methods": [
       "随境取度",

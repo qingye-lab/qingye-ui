@@ -1,60 +1,19 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "开关 Switch",
-  description: "切换一项立即生效的设置，例如启用通知。需要提交后才生效的选择用 Checkbox。",
-  category: "表单",
-  source: "coss",
-  exports: ["Switch"],
-  keywords: ["switch", "开关", "toggle", "启用"],
-  design: {
-    "methods": [
-      "名实相符",
-      "随境取度",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "控制具有开启和关闭含义的即时设置。"
-    ],
-    "avoid": [
-      "不要随开关变化改写设置名；远程写入失败需要恢复或明确说明状态。"
-    ],
-    "composition": [
-      "水平 Field 将设置名与开关配对；必要说明跟随名称，避免再加开关动作按钮。"
-    ],
-    "stateOwner": {
-      "library": [
-        "二元状态、切换按键、可见焦点和 RTL 滑块方向。"
-      ],
-      "application": [
-        "远程结果、待保存状态、失败恢复和权限。"
-      ]
-    },
-    "responsive": [
-      "保持紧凑外观与独立触屏命中区；长名称在相邻内容列内换行。"
-    ],
-    "customization": [
-      "checked 由状态 owner 决定；项目主题只改视觉，不替代请求状态。"
-    ]
-  },
-  api: [
-    {
-      name: "Switch",
-      description: "Base UI Switch.Root，渲染为 <button role=\"switch\"> 加隐藏的原生输入。",
-      props: [
-        { name: "checked / defaultChecked / onCheckedChange", type: "boolean / (checked, details) => void", description: "受控 / 非受控的开关状态。" },
-        { name: "name / value", type: "string", description: "表单字段名与提交值。" },
-        { name: "disabled / readOnly / required", type: "boolean", description: "禁用、只读、必填。" },
-      ],
-    },
-  ],
-  keyboard: [
-    { keys: "Space / Enter", description: "切换开关。" },
-    { keys: "Tab", description: "移到下一个控件。" },
-  ],
-  notes: [
-    "开关必须有可见标签说明它控制什么，标签写设置名而不是「开 / 关」。",
-    "触屏设备上点击区扩大到 44px，不改变外观。",
-    "从右到左（RTL）布局中滑块方向自动镜像。",
-  ],
+  title: "开关 Switch", titleEn: "Switch", description: "立即改变当前设置的开/关状态。", descriptionEn: "Immediately change the on/off state of a current setting.",
+  category: "表单", layer: "primitive", source: "local", exports: ["Switch", "SwitchPrimitive"],
+  api: [{ name: "Switch", description: "保持名称稳定，用 aria-checked 表达开与关。", props: [
+    { name: "checked / defaultChecked", type: "boolean", description: "受控设置值或非受控初值。" },
+    { name: "onCheckedChange", type: "(checked, eventDetails) => void", description: "立即设置的变化入口；请求与持久化由应用承担。" },
+    { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "同名文字行高决定轨道高；宽为其两倍。" },
+    { name: "disabled / readOnly", type: "boolean", default: "false", description: "禁用不参与 Tab/提交；只读仍可聚焦、提交但不可改变。" },
+    { name: "aria-invalid", type: "boolean | 'true' | 'false'", description: "调用方或 Field 声明无效，保留当前开/关事实。" },
+    { name: "name / value / uncheckedValue / form", type: "string", description: "原语隐藏输入的提交入口；不代表必须等待表单提交才生效。" },
+    { name: "render / ref / inputRef / className / style", type: "Base UI composition", description: "根部位与隐藏 input 的组合；渲染 button 时设置 nativeButton。" },
+  ] }, { name: "SwitchPrimitive", description: "完整 Base UI Switch 命名空间，包含 Root 与 Thumb。" }],
+  keyboard: [{ keys: "Tab / Shift+Tab", description: "进入或离开开关。" }, { keys: "Space", description: "立即切换当前设置。" }],
+  notes: ["名称不随开关状态改变。", "不支持部分选中；多选或待提交选择用 Checkbox。", "异步保存的等待、未知和失败属于应用，不能用滑块动画表示请求成功。"],
+  decisions: "只有当前设置立即改变时才用 Switch。条款同意、待提交选择和不可逆命令分别使用 Checkbox 或明确的动作与结果反馈。",
+  design: { methods: ["名实相符", "进退相承"], whenToUse: ["立即生效的二值设置"], avoid: ["待提交选择用 Checkbox", "不可逆命令用 Button", "结果未知时先核实"], composition: ["Field + FieldLabel + Switch + FieldDescription / FieldError"], stateOwner: { library: ["焦点、键盘、非受控 checked"], application: ["当前设置、请求与保存结果、invalid"] }, responsive: ["窄屏保留控件高+4px，命中区不随密度缩小；本批只验桌面"], customization: ["主题填充及前景、同名文字行高、focus宽度"] },
 } satisfies ComponentMeta;

@@ -1,13 +1,15 @@
 import { buttonVariants } from "@qingye/ui/components/button";
-import { Card, CardFrame, CardFrameHeader, CardFrameTitle } from "@qingye/ui/components/card";
+import { Card } from "@qingye/ui/components/card";
 import { Inline } from "@qingye/ui/components/layout";
 import { Skeleton } from "@qingye/ui/components/skeleton";
 import { Heading, TextLink } from "@qingye/ui/components/typography";
 import { Component, lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/components/locale-link";
 import { ComponentThumbnail, hasComponentThumbnail } from "@/components/component-thumbnails";
 import { useDocumentTitle } from "@/components/prose";
-import { splitTitle } from "@/lib/nav";
+import { componentLabel, componentPath } from "@/lib/nav";
+import { useDocsLocale } from "@/lib/docs-locale";
+import { localizedMeta } from "@/lib/localized-meta";
 import { components, loadPreview, type ComponentEntry } from "@/lib/registry";
 import { SITE } from "@/lib/site";
 import "./home.css";
@@ -25,7 +27,7 @@ function previewFor(slug: string) {
 class PreviewBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() { return this.state.failed ? <span className="text-sm text-muted-foreground">打开示例</span> : this.props.children; }
+  render() { return this.state.failed ? <span className="text-body text-muted-foreground">打开示例</span> : this.props.children; }
 }
 
 function Preview({ slug }: { slug: string }) {
@@ -52,17 +54,19 @@ function Preview({ slug }: { slug: string }) {
 }
 
 function ComponentCard({ entry }: { entry: ComponentEntry }) {
-  const { zh, en } = splitTitle(entry.title);
-  return <CardFrame className="home-component" data-component={entry.slug}>
-    <CardFrameHeader className="home-component-heading">
-      <CardFrameTitle render={<h2 />}>
-        <Link className="home-component-link focus-ring" to={`/docs/components/${entry.slug}`}>
-          {en || zh}{en && <span className="home-component-zh">{zh}</span>}
+  const locale = useDocsLocale();
+  entry = localizedMeta(entry, locale);
+  const { title, hint } = componentLabel(entry, locale);
+  return <section className="home-component" data-component={entry.slug}>
+    <header className="flex items-center gap-(--qy-panel-gap) p-(--qy-panel-padding) home-component-heading">
+      <h2 className="text-heading">
+        <Link className="home-component-link focus-ring" to={componentPath(entry.slug, locale)}>
+          <span>{title}</span>{hint && <span className="home-component-hint">{hint}</span>}
         </Link>
-      </CardFrameTitle>
-    </CardFrameHeader>
+      </h2>
+    </header>
     <Card className="home-component-surface"><Preview slug={entry.slug} /></Card>
-  </CardFrame>;
+  </section>;
 }
 
 export default function HomePage() {
@@ -74,7 +78,7 @@ export default function HomePage() {
         <p className="home-lede">React · Tailwind CSS 4 · MIT</p>
         <Inline className="home-actions" gap={3}>
           <Link className={buttonVariants()} to="/docs/installation">开始使用</Link>
-          <Link className={buttonVariants({ variant: "outline" })} to="/examples">查看示例</Link>
+          <Link className={buttonVariants({ variant: "quiet" })} to="/examples">查看示例</Link>
           <TextLink render={<Link to="/docs/ai" />} className="home-ai-link" variant="muted">AI 使用</TextLink>
         </Inline>
       </section>

@@ -91,7 +91,7 @@ export function tokenDefinitions() {
 export function pathsForFacts() {
   const components = files('packages/ui/src/components', /\.tsx?$/);
   const metadataPaths = components.map((path) => `apps/docs/src/content/${path.split('/').pop().replace(/\.tsx?$/, '')}/meta.ts`);
-  return [...components, ...metadataPaths, ...stylePaths(), 'packages/ui/package.json', 'package.json', 'apps/docs/package.json', 'apps/docs/src/lib/types.ts', 'packages/ui/catalog.json', 'packages/ui/coss-source.json', 'packages/ui/src/index.ts'];
+  return [...components, ...metadataPaths, ...stylePaths(), 'packages/ui/package.json', 'package.json', 'apps/docs/package.json', 'apps/docs/src/lib/types.ts', 'design.md', 'packages/ui/catalog.json', 'packages/ui/src/index.ts'];
 }
 export const exists = (path) => existsSync(resolve(ROOT, path));
 export const relativePath = (path) => relative(ROOT, path);

@@ -1,0 +1,268 @@
+{
+  "sorting": {
+    "zh": {
+      "lang": "zh-CN",
+      "rows": [
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "杭州青禾文化"
+      ]
+    },
+    "en": {
+      "lang": "en-US",
+      "rows": [
+        "上海云杉科技",
+        "上海云杉科技",
+        "上海云杉科技",
+        "上海云杉科技",
+        "上海云杉科技",
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "厦门潮汐咖啡"
+      ]
+    },
+    "zhAgain": {
+      "lang": "zh-CN",
+      "rows": [
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "北京拾光影业",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "成都远山物流",
+        "杭州青禾文化"
+      ]
+    }
+  },
+  "mixed": {
+    "english": {
+      "lang": "en-US",
+      "path": "/en/components/button",
+      "title": "[W4.2 fixture] Button",
+      "description": "[W4.2 fixture] Button description",
+      "nav": "[W4.2 fixture] Button",
+      "crumbs": "[W4.2 fixture] Introduction组件总览[W4.2 fixture] Button",
+      "prev": "/en/docs/components",
+      "next": "/en/docs/components/button-group",
+      "theme": "Theme：System",
+      "copy": "Copy code"
+    },
+    "search": [
+      "[W4.2 fixture] Button[W4.2 fixture] General",
+      "按钮组ButtonGroup[W4.2 fixture] General",
+      "控件组Group[W4.2 fixture] General",
+      "复制按钮CopyButton工具",
+      "输入框组合InputGroup表单",
+      "侧边栏Sidebar布局",
+      "工具栏Toolbar[W4.2 fixture] General"
+    ],
+    "searchDestination": "http://localhost:5180/en/docs/components/button",
+    "fallback": "按钮组ButtonGroup"
+  },
+  "scrollSwitch": {
+    "before": {
+      "scrollY": 700,
+      "rect": {
+        "x": 1173.3125,
+        "y": 14,
+        "width": 38.6875,
+        "height": 28,
+        "top": 14,
+        "right": 1212,
+        "bottom": 42,
+        "left": 1173.3125
+      },
+      "header": "sticky"
+    },
+    "after": {
+      "path": "/en/components/button",
+      "lang": "en-US",
+      "scrollY": 700,
+      "state": {
+        "usr": {
+          "localeSwitchScroll": 700
+        },
+        "key": "neze5qd4",
+        "idx": 1
+      }
+    }
+  },
+  "scrollHistory": {
+    "newPage": {
+      "path": "/en/docs/installation",
+      "scrollY": 0
+    },
+    "enBack": {
+      "path": "/en/components/button",
+      "lang": "en-US",
+      "scrollY": 900
+    },
+    "zhBack": {
+      "path": "/components/button",
+      "lang": "zh-CN",
+      "scrollY": 700
+    }
+  },
+  "routesAndMobile": {
+    "before": {
+      "path": "/en/components/button",
+      "search": "?view=code",
+      "hash": "#usage",
+      "lang": "en-US"
+    },
+    "after": {
+      "path": "/components/button",
+      "search": "?view=code",
+      "hash": "#usage",
+      "lang": "zh-CN"
+    },
+    "fallback": "按钮组ButtonGroup",
+    "mobile": {
+      "lang": "en-US",
+      "path": "/en/components/button",
+      "overflow": 0,
+      "switch": "/components/button"
+    },
+    "mobileNav": [
+      "/en",
+      "/en/examples",
+      "/en/docs/design-philosophy",
+      "/en/docs/ai",
+      "/en/docs",
+      "/en/docs/installation",
+      "/en/docs/foundations",
+      "/en/docs/theming",
+      "/en/docs/tokens",
+      "/en/docs/motion",
+      "/en/docs/i18n",
+      "/en/docs/accessibility",
+      "/en/docs/patterns",
+      "/en/docs/patterns/edit",
+      "/en/docs/patterns/collection",
+      "/en/docs/patterns/detail",
+      "/en/docs/patterns/review",
+      "/en/docs/patterns/queue",
+      "/en/docs/patterns/read",
+      "/en/docs/components",
+      "/en/components/button",
+      "/en/docs/components/button-group",
+      "/en/docs/components/group",
+      "/en/docs/components/segmented-control",
+      "/en/docs/components/toggle",
+      "/en/docs/components/toggle-group",
+      "/en/docs/components/toolbar",
+      "/en/docs/components/autocomplete",
+      "/en/docs/components/checkbox",
+      "/en/docs/components/checkbox-group",
+      "/en/docs/components/combobox",
+      "/en/docs/components/field",
+      "/en/docs/components/fieldset",
+      "/en/docs/components/file-upload",
+      "/en/docs/components/form",
+      "/en/docs/components/input",
+      "/en/docs/components/input-group",
+      "/en/docs/components/label",
+      "/en/docs/components/native-select",
+      "/en/docs/components/number-field",
+      "/en/docs/components/otp-field",
+      "/en/docs/components/password-input",
+      "/en/docs/components/radio-group",
+      "/en/docs/components/search-input",
+      "/en/docs/components/select",
+      "/en/docs/components/slider",
+      "/en/docs/components/switch",
+      "/en/docs/components/tag-input",
+      "/en/docs/components/textarea",
+      "/en/docs/components/calendar",
+      "/en/docs/components/date-picker",
+      "/en/docs/components/date-range-picker",
+      "/en/docs/components/date-time-picker",
+      "/en/docs/components/accordion",
+      "/en/docs/components/avatar",
+      "/en/docs/components/badge",
+      "/en/docs/components/carousel",
+      "/en/docs/components/chart",
+      "/en/docs/components/data-table",
+      "/en/docs/components/description-list",
+      "/en/docs/components/item",
+      "/en/docs/components/meter",
+      "/en/docs/components/stat",
+      "/en/docs/components/status-dot",
+      "/en/docs/components/table",
+      "/en/docs/components/timeline",
+      "/en/docs/components/tree",
+      "/en/docs/components/alert",
+      "/en/docs/components/empty",
+      "/en/docs/components/progress",
+      "/en/docs/components/progress-circle",
+      "/en/docs/components/skeleton",
+      "/en/docs/components/spinner",
+      "/en/docs/components/toast",
+      "/en/docs/components/alert-dialog",
+      "/en/docs/components/context-menu",
+      "/en/docs/components/dialog",
+      "/en/docs/components/drawer",
+      "/en/docs/components/hover-card",
+      "/en/docs/components/menu",
+      "/en/docs/components/popover",
+      "/en/docs/components/preview-card",
+      "/en/docs/components/sheet",
+      "/en/docs/components/tooltip",
+      "/en/docs/components/breadcrumb",
+      "/en/docs/components/command",
+      "/en/docs/components/menubar",
+      "/en/docs/components/navigation-menu",
+      "/en/docs/components/pagination",
+      "/en/docs/components/steps",
+      "/en/docs/components/tabs",
+      "/en/docs/components/aspect-ratio",
+      "/en/docs/components/card",
+      "/en/docs/components/collapsible",
+      "/en/docs/components/disclosure",
+      "/en/docs/components/frame",
+      "/en/docs/components/layout",
+      "/en/docs/components/page-header",
+      "/en/docs/components/resizable",
+      "/en/docs/components/scroll-area",
+      "/en/docs/components/separator",
+      "/en/docs/components/sidebar",
+      "/en/docs/components/code-block",
+      "/en/docs/components/kbd",
+      "/en/docs/components/typography",
+      "/en/docs/components/copy-button",
+      "/en/docs/components/motion-provider",
+      "/en/docs/components/theme-provider"
+    ],
+    "patternReturn": "/en/docs/patterns/collection",
+    "exampleLinks": [
+      "/en/examples/dashboard",
+      "/en/examples/mail",
+      "/en/examples/studio"
+    ],
+    "errors": []
+  },
+  "keyboard": {
+    "path": "/en/components/button",
+    "search": "?view=code",
+    "lang": "en-US",
+    "focused": "H1",
+    "heading": "按钮Button"
+  },
+  "notes": [
+    "Mixed English metadata was injected into intercepted browser responses only; no content/meta file was edited.",
+    "Scrolling at language switch was verified with a DOM click to avoid Playwright auto-scroll; keyboard activation was verified separately.",
+    "Earlier editing-time HMR errors and failed probe attempts are not counted as passing checks; cold navigation probes recorded no runtime errors."
+  ]
+}

@@ -35,6 +35,26 @@ This file accompanies @qingye/ui 0.4.0. Read the installed version first; a webs
 
 包升级后仍读取安装版指南和声明；网站资料用于发现，不能替代本地版本事实。其他技术栈可把完整指南保存为项目文档并引用该路径，采用设计方法，但须另行验证平台语义，不能假定本库 API 可用。
 
+## Style contract
+
+Read [style.md](style.md) before implementing UI. It contains the 设计契约 from
+../design.md and the component implementation rules from STANDARDS.md.
+
+These are bans, not preferences:
+
+NG1. 复述标题或相邻元素已经表达的内容
+NG2. 把本来有主次的信息平铺为等权
+NG3. 在同一产品面上混用互不相干的设计语言
+NG4. 用卡片围合没有独立身份的内容
+NG5. 标题上方加 kicker 或 eyebrow
+NG6. 用装饰性动效交代状态，或让任务结果依赖动画结束
+NG7. 让唯一的关键后果只存在于会消失的提示里
+NG8. 在界面文案里解释自身的设计或实现
+
+Also binding: prose length and text size must never change the structure;
+density tightens spacing and never shrinks type; sizes come from the named type
+steps, never a one-off value.
+
 ## Task workflow
 
 1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Check the project's persistent references described above when completing onboarding. Preserve unrelated work.
@@ -44,6 +64,6 @@ This file accompanies @qingye/ui 0.4.0. Read the installed version first; a webs
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
-Read ../design.md for methods; v0.4.0/installation.md for styles and dependencies; v0.4.0/llms.txt for resources. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
+Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](v0.4.0/installation.md) for styles and dependencies; [the resource index](v0.4.0/llms.txt) for component and pattern constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
 
 Registry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.

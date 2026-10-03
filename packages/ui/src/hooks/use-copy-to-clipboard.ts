@@ -1,8 +1,6 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/hooks/use-copy-to-clipboard.ts.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
-import * as React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useCopyToClipboard({
   timeout = 2000,
@@ -11,79 +9,57 @@ export function useCopyToClipboard({
 }: {
   timeout?: number;
   onCopy?: () => void;
-  /**
-   * Called when the Clipboard API is unavailable (for example on an insecure
-   * origin) or when the browser rejects the write.
-   */
   onError?: (error: unknown) => void;
 } = {}): { copyToClipboard: (value: string) => void; isCopied: boolean; isCopying: boolean } {
-  const [isCopied, setIsCopied] = React.useState(false);
-  const [isCopying, setIsCopying] = React.useState(false);
-  const timeoutIdRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const requestRef = React.useRef(0);
-  const mountedRef = React.useRef(true);
+  const [isCopied, setCopied] = useState(false);
+  const [isCopying, setCopying] = useState(false);
+  const mounted = useRef(true);
+  const request = useRef(0);
+  const reset = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const copyToClipboard = (value: string): void => {
-    const request = ++requestRef.current;
-    if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
-    timeoutIdRef.current = null;
-    setIsCopied(false);
-    const ownsResult = () => mountedRef.current && request === requestRef.current;
-    const fail = (error: unknown) => {
-      if (!ownsResult()) return;
-      setIsCopying(false);
-      if (onError) onError(error);
-      else console.error(error);
-    };
-    if (typeof window === "undefined" || !navigator.clipboard?.writeText) {
-      fail(new Error("Clipboard API unavailable"));
-      return;
-    }
-
-    setIsCopying(true);
-    let write: Promise<void>;
-    try {
-      write = navigator.clipboard.writeText(value);
-    } catch (error) {
-      fail(error);
-      return;
-    }
-
-    write.then(
-      () => {
-        if (!ownsResult()) return;
-        setIsCopying(false);
-        if (timeoutIdRef.current) {
-          clearTimeout(timeoutIdRef.current);
-        }
-        setIsCopied(true);
-
-        if (onCopy) {
-          onCopy();
-        }
-
-        if (timeout !== 0) {
-          timeoutIdRef.current = setTimeout(() => {
-            setIsCopied(false);
-            timeoutIdRef.current = null;
-          }, timeout);
-        }
-      },
-      fail,
-    );
-  };
-
-  // Cleanup timeout on unmount
-  React.useEffect(() => {
-    mountedRef.current = true;
-    return (): void => {
-      mountedRef.current = false;
-      requestRef.current++;
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current);
-      }
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      request.current += 1;
+      if (reset.current !== null) clearTimeout(reset.current);
     };
   }, []);
+
+  const copyToClipboard = useCallback((value: string): void => {
+    if (!mounted.current) return;
+    const current = ++request.current;
+    if (reset.current !== null) clearTimeout(reset.current);
+    reset.current = null;
+    setCopied(false);
+    setCopying(true);
+    const active = () => mounted.current && current === request.current;
+
+    void (async () => {
+      try {
+        if (typeof navigator === "undefined" || typeof navigator.clipboard?.writeText !== "function") {
+          throw new Error("Clipboard API is unavailable");
+        }
+        await navigator.clipboard.writeText(value);
+      } catch (error: unknown) {
+        if (active()) {
+          setCopying(false);
+          setCopied(false);
+          onError?.(error);
+        }
+        return;
+      }
+      if (!active()) return;
+      setCopying(false);
+      setCopied(true);
+      // This timer clears feedback only; it never establishes the result.
+      reset.current = setTimeout(() => {
+        reset.current = null;
+        if (active()) setCopied(false);
+      }, timeout);
+      onCopy?.();
+    })();
+  }, [timeout, onCopy, onError]);
 
   return { copyToClipboard, isCopied, isCopying };
 }

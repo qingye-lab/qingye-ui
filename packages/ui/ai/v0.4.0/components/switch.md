@@ -3,28 +3,32 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: c4a2dd0b62ca05134fa037f0dd38c8f55f434a113ab0d2e48a8c0d2468783c8c
+Source SHA-256: 703471aef9cb0db0fcc831071e07e2039c5cc11e6b685d336bca4cc8e623ec62
 
-切换一项立即生效的设置，例如启用通知。需要提交后才生效的选择用 Checkbox。
+立即改变当前设置的开/关状态。
 
 ## Use and ownership
-- 控制具有开启和关闭含义的即时设置。
-- Avoid: 不要随开关变化改写设置名；远程写入失败需要恢复或明确说明状态。
-- Library: 二元状态、切换按键、可见焦点和 RTL 滑块方向。
-- Application: 远程结果、待保存状态、失败恢复和权限。
+- 立即生效的二值设置
+- Avoid: 待提交选择用 Checkbox
+- Avoid: 不可逆命令用 Button
+- Avoid: 结果未知时先核实
+- Library: 焦点、键盘、非受控 checked
+- Application: 当前设置、请求与保存结果、invalid
 
 ## Composition
-- 水平 Field 将设置名与开关配对；必要说明跟随名称，避免再加开关动作按钮。
+- Field + FieldLabel + Switch + FieldDescription / FieldError
 
 ## Responsive behavior
-- 保持紧凑外观与独立触屏命中区；长名称在相邻内容列内换行。
+- 窄屏保留控件高+4px，命中区不随密度缩小；本批只验桌面
 
 ## Customization
-- checked 由状态 owner 决定；项目主题只改视觉，不替代请求状态。
+- 主题填充及前景、同名文字行高、focus宽度
 
 ## Current exports
-- Switch: function; owner switch; PASS; props: SwitchPrimitive.Root.Props
+- Switch: function; owner switch; PASS; props: SwitchProps
 - SwitchPrimitive: reexport; owner switch; UNVERIFIED
+- SwitchProps: type; owner switch; PASS
+- SwitchSize: type; owner switch; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -35,104 +39,83 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Switch
-Base UI Switch.Root，渲染为 <button role="switch"> 加隐藏的原生输入。
-- checked / defaultChecked / onCheckedChange: boolean / (checked, details) => void. 受控 / 非受控的开关状态。
-- name / value: string. 表单字段名与提交值。
-- disabled / readOnly / required: boolean. 禁用、只读、必填。
+保持名称稳定，用 aria-checked 表达开与关。
+- checked / defaultChecked: boolean. 受控设置值或非受控初值。
+- onCheckedChange: (checked, eventDetails) => void. 立即设置的变化入口；请求与持久化由应用承担。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 同名文字行高决定轨道高；宽为其两倍。
+- disabled / readOnly: boolean; default false. 禁用不参与 Tab/提交；只读仍可聚焦、提交但不可改变。
+- aria-invalid: boolean | 'true' | 'false'. 调用方或 Field 声明无效，保留当前开/关事实。
+- name / value / uncheckedValue / form: string. 原语隐藏输入的提交入口；不代表必须等待表单提交才生效。
+- render / ref / inputRef / className / style: Base UI composition. 根部位与隐藏 input 的组合；渲染 button 时设置 nativeButton。
+
+### SwitchPrimitive
+完整 Base UI Switch 命名空间，包含 Root 与 Thumb。
 
 ## Keyboard
-- Space / Enter: 切换开关。
-- Tab: 移到下一个控件。
+- Tab / Shift+Tab: 进入或离开开关。
+- Space: 立即切换当前设置。
 
 ## Source examples
-### 基础用法
-Source: apps/docs/src/content/switch/demos/01-basic.tsx
-```tsx
-import { Label } from "@qingye/ui/components/label";
-import { Switch } from "@qingye/ui/components/switch";
-
-export const meta = { title: "基础用法" };
-
-export default function Demo() {
-  return (
-    <Label>
-      <Switch defaultChecked />
-      夜间免打扰
-    </Label>
-  );
-}
-```
-
 ### 状态
-Source: apps/docs/src/content/switch/demos/02-states.tsx
+Source: apps/docs/src/content/switch/demos/01-states.tsx
 ```tsx
-import { Label } from "@qingye/ui/components/label";
+import { useState } from "react";
+import { Field, FieldContent, FieldError, FieldLabel } from "@qingye/ui/components/field";
 import { Switch } from "@qingye/ui/components/switch";
 
-export const meta = { title: "状态" };
+export const meta = { title: "状态", titleEn: "States" };
 
 export default function Demo() {
+  const [checked, setChecked] = useState(false);
   return (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-      <Label><Switch />关闭</Label>
-      <Label><Switch defaultChecked />开启</Label>
-      <Label><Switch disabled />禁用</Label>
-      <Label><Switch disabled defaultChecked />禁用开启</Label>
+    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
+      <Field orientation="horizontal">
+        <Switch checked={checked} onCheckedChange={setChecked} />
+        <FieldContent><FieldLabel>显示网格</FieldLabel><span className="text-support">{checked ? "开启" : "关闭"}</span></FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <Switch defaultChecked />
+        <FieldContent><FieldLabel>显示标尺</FieldLabel></FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <Switch disabled />
+        <FieldContent><FieldLabel>禁用（关）</FieldLabel></FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <Switch disabled defaultChecked />
+        <FieldContent><FieldLabel>禁用（开）</FieldLabel></FieldContent>
+      </Field>
+      <Field orientation="horizontal">
+        <Switch readOnly defaultChecked />
+        <FieldContent><FieldLabel>只读</FieldLabel></FieldContent>
+      </Field>
+      <Field orientation="horizontal" invalid>
+        <Switch />
+        <FieldContent><FieldLabel>无效</FieldLabel><FieldError>请检查此项。</FieldError></FieldContent>
+      </Field>
     </div>
   );
 }
 ```
 
-### 组合：设置列表
-Source: apps/docs/src/content/switch/demos/03-settings.tsx
+### 尺寸
+Source: apps/docs/src/content/switch/demos/02-sizes.tsx
 ```tsx
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Field, FieldContent, FieldLabel } from "@qingye/ui/components/field";
 import { Switch } from "@qingye/ui/components/switch";
 
-export const meta = { title: "组合：设置列表", description: "标签与说明在左，开关靠右对齐。" };
-
-const settings = [
-  { id: "offline", label: "设备离线提醒", description: "设备连续 5 分钟无心跳时推送通知。", checked: true },
-  { id: "digest", label: "每日运行摘要", description: "每天 08:30 发送前一天的告警与能耗汇总。", checked: true },
-  { id: "beta", label: "参与新功能内测", description: "提前体验新版控制台，可能存在不稳定的情况。" },
-];
+export const meta = { title: "尺寸", titleEn: "Sizes" };
 
 export default function Demo() {
   return (
-    <div className="flex w-full max-w-md flex-col divide-y rounded-xl border">
-      {settings.map((item) => (
-        <Field key={item.id} orientation="horizontal" className="gap-4 px-4 py-3">
-          <FieldContent>
-            <FieldLabel>{item.label}</FieldLabel>
-            <FieldDescription>{item.description}</FieldDescription>
-          </FieldContent>
-          <Switch defaultChecked={item.checked} />
+    <div className="grid gap-(--qy-field-group-gap)">
+      {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+        <Field key={size} orientation="horizontal">
+          <Switch size={size} />
+          <FieldContent><FieldLabel>{size}</FieldLabel></FieldContent>
         </Field>
       ))}
     </div>
-  );
-}
-```
-
-### 卡片开关
-Source: apps/docs/src/content/switch/demos/04-card.tsx
-```tsx
-import { Label } from "@qingye/ui/components/label";
-import { Switch } from "@qingye/ui/components/switch";
-import { ShieldCheckIcon } from "lucide-react";
-
-export const meta = { title: "卡片开关", description: "开启时卡片边框与底色随之变化。" };
-
-export default function Demo() {
-  return (
-    <Label className="flex w-full max-w-sm items-start gap-3 rounded-lg border p-3 transition-colors hover:bg-accent/50 has-data-checked:border-primary/48 has-data-checked:bg-accent/50">
-      <ShieldCheckIcon aria-hidden="true" className="mt-px size-4.5 shrink-0 opacity-80 sm:size-4" />
-      <span className="flex min-w-0 flex-1 flex-col gap-1">
-        <span>登录二次验证</span>
-        <span className="font-normal text-muted-foreground text-xs">在新设备登录时要求输入短信验证码。</span>
-      </span>
-      <Switch defaultChecked />
-    </Label>
   );
 }
 ```

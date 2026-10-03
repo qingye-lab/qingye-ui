@@ -4,7 +4,13 @@ import type { UILocale } from "../locale";
 export const enUS: UILocale = {
   code: "en-US",
   messages: {
-    close: "Close", loading: "Loading", breadcrumb: "Breadcrumb", more: "More",
+    buttonWaiting: "Waiting", buttonInProgress: "In progress", buttonUnknown: "Result unknown", buttonFailed: "Failed", inputClear: "Clear input",
+    close: "Close", loading: "Loading", readOnly: "Read only", breadcrumb: "Breadcrumb", more: "More",
+    retryFile: (name) => `Retry ${name}`, dismissFileRejection: (name) => `Dismiss rejection for ${name}`, fileUploadInvalid: "File selection or upload has an error",
+    dataTableResultUnknown: "The current query result is unconfirmed", dataTableResultStale: "A response from an earlier query was ignored",
+    toastSuccess: "Succeeded",
+    toastResultUnknown: "The operation result is unconfirmed", toastResultUnknownDescription: "Check the result.",
+    timelineStatus: (status) => ({ primary: "Highlighted", success: "Success", warning: "Warning", error: "Failed", info: "Information" })[status],
     pagination: "Pagination", previousPage: "Previous", nextPage: "Next", morePages: "More pages",
     sidebar: "Workspace navigation", sidebarDescription: "Main workspace navigation", toggleSidebar: "Toggle sidebar",
     showOptions: "Show options", clearSelection: "Clear selection", remove: "Remove",
@@ -17,6 +23,7 @@ export const enUS: UILocale = {
     fileError: (name, reason) => `${name}: ${reason === "type" ? "File type is not supported" : reason === "size" ? "File is too large" : "File count limit exceeded"}`,
     selectDateTimePlaceholder: "Select date and time", now: "Now", dropFilesActive: "Release to add files", fileProgress: (name) => `Upload progress for ${name}`, fileCount: (count) => (count === 1 ? "1 file" : `${count} files`),
     table: "Data table", noResults: "No matching results", searchTable: "Search table", pageSummary: (page, pages, total) => `Page ${page} of ${pages}, ${total} items`,
+    loadFailed: "Could not load data", retry: "Retry",
     steps: "Steps", stepComplete: "Completed", stepCurrent: "Current", stepUpcoming: "Not started", stepError: "Error", timeline: "Timeline", carousel: "Carousel", slide: "Slide", slideOf: (index, total) => `${index} of ${total}`, previousSlide: "Previous slide", nextSlide: "Next slide",
     clear: "Clear", cancel: "Cancel", confirm: "Confirm", apply: "Apply", reset: "Reset", back: "Back", search: "Search", expand: "Expand", collapse: "Collapse",
     theme: "Theme", lightTheme: "Light", darkTheme: "Dark", systemTheme: "System",
@@ -24,6 +31,6 @@ export const enUS: UILocale = {
     selectDateRange: "Select date range", startDate: "Start date", endDate: "End date", today: "Today",
     rowsPerPage: "Rows per page", selectedCount: (count) => `${count} selected`, sortAscending: "Ascending", sortDescending: "Descending", toggleColumns: "Columns", firstPage: "First page", lastPage: "Last page", selectRow: "Select row", selectAllRows: "Select all rows",
     trendUp: "Up", trendDown: "Down", trendFlat: "Flat", resize: "Resize", copyCode: "Copy code", showMore: "Show more", showLess: "Show less",
-    statusLabel: (status) => ({ online: "Online", offline: "Offline", warning: "Warning", error: "Error", info: "Info", neutral: "Unknown" })[status], opensInNewTab: "(opens in a new tab)",
+    statusLabel: (status) => ({ online: "Online", offline: "Offline", warning: "Warning", error: "Error", info: "Info", neutral: "Unknown", pending: "Pending", "in-progress": "In progress", unknown: "Outcome unknown" })[status], opensInNewTab: "(opens in a new tab)",
   },
 };

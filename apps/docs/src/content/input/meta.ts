@@ -2,59 +2,62 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "输入框 Input",
-  description: "单行文本输入。配合 Field 提供标签、说明与校验信息；需要前后缀、图标或按钮时用 InputGroup。",
+  titleEn: "Input",
+  description: "输入一个文本值。搜索、密码与清空动作使用同一个输入入口。",
+  descriptionEn: "Enter one text value. Search, password visibility, and clearing use the same input.",
   category: "表单",
-  source: "coss",
+  source: "local",
+  layer: "primitive",
   exports: ["Input"],
-  keywords: ["input", "输入框", "文本框", "text field"],
+  keywords: ["input", "输入框", "文本框", "search", "搜索", "password", "密码", "clear"],
+  decisions: "输入框只持有输入值；搜索结果与提交由调用方处理。Placeholder 不能代替持续可见的名称。",
+  decisionsEn: "Input holds the entered value; the caller handles search results and submission. A placeholder does not replace a persistent visible name.",
   design: {
-    "methods": [
-      "名实相符",
-      "布白有用",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "填写单行名称、编号或联系方式，type 与真实输入内容匹配。"
-    ],
-    "avoid": [
-      "示例只放 placeholder；提交失败不应卸载或重置已有文字。"
-    ],
-    "composition": [
-      "FieldLabel、Input 与必要的 FieldError 形成同一个字段；前后缀交给 InputGroup。"
-    ],
-    "stateOwner": {
-      "library": [
-        "原生输入、字段关联、焦点与尺寸角色。"
-      ],
-      "application": [
-        "草稿、输入业务规则、保存结果及何时清除。"
-      ]
+    methods: ["名实相符", "相成相制", "进退相承"],
+    whenToUse: ["输入一个文本值，原生 type 与内容匹配；搜索结果和提交行为由组合负责。"],
+    avoid: ["用 placeholder 代替名称；把超时变成无效；把未知转成空串或 0；校验失败清空草稿。"],
+    composition: ["与 FieldLabel、FieldDescription、FieldError 共处；额外单位、标记和动作交给 InputGroup。"],
+    stateOwner: {
+      library: ["原生输入、Field 关联、焦点、清空与密码可见性。"],
+      application: ["值的含义、校验事实、候选范围、未知/不适用及送达结果。"],
     },
-    "responsive": [
-      "窄容器中输入可以收缩；移动字号保留 16px，粗指针命中区保留 44px。"
-    ],
-    "customization": [
-      "size 消费 --qy-control-*；className 调整外框，原生属性落到输入。"
-    ]
+    responsive: ["xs/sm/md/lg/xl 消费基础层档案；窄屏增加 4px，粗指针编辑区至少 44px。"],
+    customization: ["className、style、render 与 ref 属于真实 input；controlClassName 属于编辑边界。"],
   },
-  api: [
-    {
-      name: "Input",
-      description: "基于 Base UI Input，外层 <span data-slot=\"input-control\"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <input>。",
-      props: [
-        { name: "size", type: '"sm" | "default" | "lg" | number', default: '"default"', description: "高度：28 / 32 / 36px（移动端各加 4px）；传数字时作为原生 size 属性。" },
-        { name: "type", type: "string", default: '"text"', description: "原生类型。search 会隐藏浏览器自带的清除按钮；file 复用 Input 的外框样式，但控件本身是浏览器原生的，文案不可本地化（见下方说明）。" },
-        { name: "aria-invalid", type: "boolean", description: "标记为无效；在 Field 中由校验自动设置。" },
-        { name: "unstyled", type: "boolean", default: "false", description: "去掉外层样式，供 InputGroup 等组合使用。" },
-        { name: "nativeInput", type: "boolean", default: "false", description: "渲染原生 <input> 而不注册到 Base UI Field。" },
-      ],
-    },
+  api: [{
+    name: "Input",
+    description: "真实边框界定编辑区；Base UI Input 保留 Field 注册和原生属性。",
+    descriptionEn: "A real border identifies the editable area. Base UI Input retains Field registration and native attributes.",
+    props: [
+      { name: "type", type: "React.HTMLInputTypeAttribute", default: '"text"', description: "search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。", descriptionEn: "search adds a search marker and clearing; password adds visibility. Neither supplies a field name or placeholder." },
+      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl" | number', default: '"md"', description: "位置对应的几何与控件文字档；数字保留原生 size 的字符宽度含义。", descriptionEn: "Geometry and control text profile for the location. A number retains native size semantics." },
+      { name: "value / defaultValue / onValueChange", type: "原生值 / 初始值 / (value, details) => void", description: "支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。", descriptionEn: "Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path." },
+      { name: "clearable / clearLabel / onClear", type: "boolean / string / () => void", default: "type === search", description: "非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。", descriptionEn: "Clear a nonempty editable value and return focus to the input. Hidden when disabled or read only." },
+      { name: "visibilityToggle", type: "boolean", default: "type === password", description: "password 的可选附属动作，不更改内容或提交表单。", descriptionEn: "Optional password adjunct that preserves the value and does not submit a form." },
+      { name: "visible / defaultVisible / onVisibleChange", type: "boolean / boolean / (visible) => void", default: "defaultVisible: false", description: "独立支持受控与非受控可见性。", descriptionEn: "Controlled or uncontrolled password visibility." },
+      { name: "showLabel", type: "string", description: "可见性开关的稳定名称，默认从 locale 读取；aria-pressed 表达当前可见性。", descriptionEn: "Stable toggle name from the locale by default. aria-pressed reports visibility." },
+      { name: "readOnly", type: "boolean", default: "false", description: "保留焦点、复制与表单提交，阻止编辑与清空；默认显示只读标记。", descriptionEn: "Retains focus, copying, and form submission while blocking edits and clearing. Shows a read-only marker." },
+      { name: "className / style / render / ref", type: "Base UI Input props", description: "全部作用于真实 input；className/style 支持状态函数。", descriptionEn: "Applied to the real input. className/style support state functions." },
+      { name: "controlClassName", type: "string", description: "调整共同编辑边界，例如宽度与所在布局；不替代原生属性。", descriptionEn: "Styles the shared editable boundary, including its width and placement." },
+      { name: "unstyled", type: "boolean", default: "false", description: "由 InputGroup 等公共组合承担边界；保留内高、档案与原生状态。", descriptionEn: "Lets a public composition such as InputGroup supply the boundary while retaining inner geometry and native state." },
+      { name: "nativeInput", type: "boolean", default: "false", description: "已由 FieldControl 或其他原语注册时使用原生出口；保留 render/ref/事件，避免重复注册。", descriptionEn: "Native outlet for an input already registered by FieldControl or another primitive. Retains render, refs, and events without double registration." },
+    ],
+  }],
+  keyboard: [
+    { keys: "Tab / Shift+Tab", description: "在输入与可用附属动作之间移动；禁用动作不进入顺序。", descriptionEn: "Move between the input and available adjuncts. Disabled actions leave the tab order." },
+    { keys: "Escape", description: "可清空且非空时清空，后续 Escape 返回外层；输入法组字及调用方取消时保留草稿。", descriptionEn: "Clear an eligible nonempty value; a later Escape reaches the parent. Composition and caller cancellation preserve the draft." },
+    { keys: "Enter / Space", description: "焦点在附属按钮上时立即执行，不提交表单。", descriptionEn: "Activate a focused adjunct immediately without submitting the form." },
   ],
-  keyboard: [{ keys: "Tab", description: "移入、移出焦点；键盘聚焦时显示焦点环。" }],
   notes: [
-    "每个输入框都要有可见标签（FieldLabel / Label）；只有搜索框等意义明确的场景才只用 aria-label。",
-    "占位文字只做示例，不要代替标签。",
-    "触屏设备上输入框最小高度为 44px，便于点按；字号在移动端为 16px，避免 iOS 聚焦时缩放。",
-    "type=\"file\" 用的是浏览器原生控件：Input 只提供外框样式，“Choose File / No file chosen”由浏览器按自身语言绘制，CSS 无法改写（::file-selector-button 不接受 content），也无对应属性可覆盖。中文界面请改用 FileUpload——它自带本地化文案、格式与大小校验和文件列表。",
+    "aria-invalid 来自应用或浏览器校验；值的真伪与是否送达分开表达。",
+    "提供 FieldLabel、原生 label 或 aria-label。Placeholder 是输入提示，不是名称。",
+    "原 SearchInput / PasswordInput 改为 Input type=\"search\" / type=\"password\"；loading 与 shortcut 改为明确的状态或 InputGroup 组合。size=\"default\" 改为 \"md\"；旧外框 className 改为 controlClassName。",
+    "type=\"file\" 保留浏览器文件选择行为与语言；文件列表和业务校验由调用方提供。",
+  ],
+  notesEn: [
+    "aria-invalid comes from application or browser validation. Value validity and delivery are separate facts.",
+    "Provide FieldLabel, a native label, or aria-label. A placeholder is a hint rather than a name.",
+    "Replace SearchInput / PasswordInput with Input type=\"search\" / type=\"password\". Express loading and shortcuts through explicit state or InputGroup composition. Replace size=\"default\" with \"md\" and outer className with controlClassName.",
+    "type=\"file\" retains browser behavior and language. The caller owns file lists and business validation.",
   ],
 } satisfies ComponentMeta;

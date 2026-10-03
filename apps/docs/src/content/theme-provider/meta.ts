@@ -2,9 +2,12 @@ import type { ComponentMeta } from "@/lib/types";
 
 export default {
   title: "主题 ThemeProvider",
+  titleEn: "ThemeProvider",
   description:
     "管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。",
+  descriptionEn: "Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.",
   category: "工具",
+  layer: "foundation",
   source: "local",
   exports: ["ThemeProvider", "useTheme", "themeScript"],
   keywords: ["theme", "主题", "深色模式", "dark mode", "浅色", "跟随系统", "color scheme"],
@@ -30,10 +33,12 @@ export default {
   ],
   notes: [
     "防止首屏闪烁：React 挂载前页面已经绘制，需要在 <head> 里、样式表之前放一段内联脚本先应用主题。单页应用把 themeScript() 的输出粘贴进 index.html 的 <script>；服务端渲染用 <script dangerouslySetInnerHTML={{ __html: themeScript() }} />。脚本参数必须与 ThemeProvider 一致。",
-    "主题菜单的文案用语言包中的 theme、lightTheme、darkTheme、systemTheme。",
+    "主题选择的文案用语言包中的 theme、lightTheme、darkTheme、systemTheme。",
     "选择“跟随系统”后，操作系统切换深浅色时页面立即跟随，无需刷新。",
     "只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。",
   ],
+  decisions: "ThemeProvider 把 data-theme 留给 light 和 dark；项目的品牌标记写在 data-brand，写进 data-theme 的品牌会在切换明暗时被覆盖。",
+  decisionsEn: "ThemeProvider reserves data-theme for light and dark. Store the project's brand identifier in data-brand; if ThemeProvider uses data-theme, it overwrites any brand identifier in that attribute when the mode changes.",
   design: {
     "methods": [
       "名实相符",

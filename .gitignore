@@ -9,3 +9,7 @@ coverage/
 apps/docs/dist/
 .playwright/
 test-results/
+
+# Playwright CLI session logs and browser output (probe scratch)
+.playwright-cli/
+output/

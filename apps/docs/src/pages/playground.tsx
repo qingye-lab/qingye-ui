@@ -1,3 +1,5 @@
+import { useDocsLocale } from "@/lib/docs-locale";
+import { localizedMeta } from "@/lib/localized-meta";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useTheme } from "@qingye/ui";
@@ -9,6 +11,7 @@ import { findComponent, loadDemos, type LoadedDemo } from "@/lib/registry";
  */
 export function PlaygroundPage() {
   const { slug = "" } = useParams();
+  const locale = useDocsLocale();
   const [params] = useSearchParams();
   const { setTheme } = useTheme();
   const [demos, setDemos] = useState<LoadedDemo[] | null>(null);
@@ -27,12 +30,13 @@ export function PlaygroundPage() {
     };
   }, [slug]);
 
-  const entry = findComponent(slug);
+  const found = findComponent(slug);
+  const entry = found ? localizedMeta(found, locale) : undefined;
 
   return (
     <main className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-5 py-10 sm:px-10 sm:py-14" data-playground={slug}>
       <header className="flex flex-col gap-2 border-b pb-6">
-        <h1 className="font-semibold text-title tracking-heading">{entry?.title ?? slug}</h1>
+        <h1 className="text-balance text-display text-foreground-strong">{entry?.title ?? slug}</h1>
         {entry ? (
           <p className="max-w-prose text-balance text-muted-foreground text-body">{entry.description}</p>
         ) : (
@@ -50,9 +54,9 @@ export function PlaygroundPage() {
         {demos?.map((demo) => (
           <section className="flex flex-col gap-3" data-demo={demo.id} key={demo.id}>
             <div className="flex flex-col gap-1">
-              <h2 className="font-medium text-label text-muted-foreground">{demo.meta.title}</h2>
-              {demo.meta.description ? (
-                <p className="max-w-prose text-balance text-caption text-muted-foreground">{demo.meta.description}</p>
+              <h2 className="font-medium text-label text-muted-foreground">{localizedMeta(demo.meta, locale).title}</h2>
+              {localizedMeta(demo.meta, locale).description ? (
+                <p className="max-w-prose text-balance text-caption text-muted-foreground">{localizedMeta(demo.meta, locale).description}</p>
               ) : null}
             </div>
             {/*

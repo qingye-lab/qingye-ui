@@ -1,83 +1,72 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "气泡卡片 Popover",
-  description: "点击触发、锚定在元素旁的非模态浮层，承载简短表单、筛选或补充信息。只读的悬停提示用 Tooltip，悬停预览用 PreviewCard。",
-  design: {
-    "methods": [
-      "随境取度",
-      "展开有据",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "在触发对象旁按需展示短表单、选择或可点击帮助，保持上下文。"
-    ],
-    "avoid": [
-      "不能把关键后果只塞进临时浮层；关闭不能被应用当成提交成功。"
-    ],
-    "composition": [
-      "可交互内容用 Popover；纯文本悬停补充用 Tooltip；需要独立模态任务时用 Dialog。"
-    ],
-    "stateOwner": {
-      "library": [
-        "管理触发器与浮层关联、定位、碰撞、焦点和 close 请求，保留表单原生语义。"
-      ],
-      "application": [
-        "负责值、验证、提交与错误恢复；受控 open 不替代业务状态。"
-      ]
-    },
-    "responsive": [
-      "根据可用高度滚动内容；窄屏仍提供触发与退出，表单长标签应保留可读宽度。"
-    ],
-    "customization": [
-      "side、align 和 anchor 调整与对象的空间关系；tooltipStyle 只改变表面，不移除交互语义。"
-    ]
-  },
+  title: "浮起面板 Popover",
+  titleEn: "Popover",
+  description: "与触发对象绑定的非阻断浮层，承载局部操作与补充信息。",
+  descriptionEn: "A trigger-bound non-modal popup for local actions and supplementary information.",
   category: "浮层",
-  source: "coss",
+  layer: "primitive",
+  source: "local",
   exports: ["Popover", "PopoverTrigger", "PopoverPopup", "PopoverTitle", "PopoverDescription", "PopoverClose"],
-  keywords: ["popover", "气泡", "弹出框", "浮层"],
+  keywords: ["popover", "浮层", "非阻断", "气泡"],
+  decisions: "关闭只收起浮层，不代表提交或撤销完成。草稿与结果由应用持有；唯一的关键后果须留在持续工作面。",
+  decisionsEn: "Closing hides the popup; it does not complete submission or undo. The application owns drafts and results. Keep essential consequences on the persistent work surface.",
   api: [
     {
       name: "Popover",
-      description: "根组件，管理打开状态。",
+      description: "管理非阻断打开状态，完整继承 Base UI Root 的控制契约。modal 已移除。",
+      descriptionEn: "Manage non-modal open state with the Base UI Root contract. modal has been removed.",
       props: [
-        { name: "open / defaultOpen", type: "boolean", default: "false", description: "受控 / 非受控的打开状态。" },
-        { name: "onOpenChange", type: "(open, details) => void", description: "打开状态变化时调用。" },
-        { name: "modal", type: 'boolean | "trap-focus"', default: "false", description: "设为 true 时锁定页面滚动与外部交互。" },
-        { name: "handle", type: "PopoverCreateHandle()", description: "多个触发器共用一个浮层，切换时浮层平滑移动并变换尺寸。" },
+        { name: "open / defaultOpen", type: "boolean", default: "false", description: "受控 / 非受控打开状态。", descriptionEn: "Controlled / uncontrolled open state." },
+        { name: "onOpenChange", type: "(open, details) => void", description: "原语报告请求及原因，应用决定受控状态。", descriptionEn: "Receive the requested state and reason; the application owns controlled state." },
+        { name: "handle / triggerId / defaultTriggerId", type: "Handle / string", description: "共享触发器或受控初始打开时，建立明确关联。", descriptionEn: "Associate shared triggers or a controlled/initially open popup." },
       ],
     },
     {
-      name: "PopoverTrigger",
-      description: "触发按钮。",
-      props: [
-        { name: "openOnHover", type: "boolean", default: "false", description: "悬停时也打开，配合 delay 使用。" },
-        { name: "handle / payload", type: "Handle / unknown", description: "与共享浮层关联，并传入要渲染的内容。" },
-      ],
+      name: "PopoverTrigger / PopoverClose",
+      description: "原生触发与关闭入口；支持 render、ref、style、事件及按状态求值的 className。",
+      descriptionEn: "Native trigger and close controls supporting render, ref, style, events and state class functions.",
     },
     {
       name: "PopoverPopup",
-      description: "浮层本体，自动避开视口边缘。别名 PopoverContent。",
+      description: "浮起表面、定位与可滚动内容层；别名 PopoverContent。无日历或 tooltip 样式特判。",
+      descriptionEn: "Raised surface, positioning and scrollable content. Aliased as PopoverContent, with no calendar or tooltip-specific variant.",
       props: [
-        { name: "side", type: '"top" | "right" | "bottom" | "left" | "inline-start" | "inline-end"', default: '"bottom"', description: "相对触发器的方向，空间不足时自动翻转。" },
-        { name: "align", type: '"start" | "center" | "end"', default: '"center"', description: "沿边的对齐方式。" },
-        { name: "sideOffset / alignOffset", type: "number", default: "4 / 0", description: "与触发器的距离 / 对齐偏移。" },
-        { name: "tooltipStyle", type: "boolean", default: "false", description: "使用 Tooltip 的紧凑样式，适合触屏上的点击说明。" },
-        { name: "anchor", type: "Element | RefObject", description: "锚定到触发器以外的元素。" },
+        { name: "side / align", type: "Positioner.Props", default: "bottom / center", description: "相对触发者的方向与对齐；由原语处理碰撞。", descriptionEn: "Anchor-relative side and alignment with primitive-owned collision handling." },
+        { name: "sideOffset / alignOffset / anchor", type: "Positioner.Props", default: "0 / 0 / trigger", description: "明确定位关系。默认间距沿用原语 0，不推断内容类型。", descriptionEn: "Explicit positioning. Default offsets follow the primitive at zero." },
+        { name: "initialFocus / finalFocus", type: "Popup.Props", default: "true / true", description: "默认原语管理焦点与返回；触发者将被移除时，finalFocus 指定有意义上级。", descriptionEn: "Primitive-managed focus and return. Set finalFocus to a meaningful parent when the trigger will disappear." },
+        { name: "portalProps", type: "Portal.Props", description: "局部密度、方向、语言或主题需保留时，将 container 指向已挂载的上下文容器。", descriptionEn: "Use a mounted context container to retain local density, direction, language or theme." },
+        { name: "positionerProps / viewportProps", type: "Positioner.Props / Viewport.Props", description: "透传定位层与内容层的 className、style、ref、render 和原生属性。", descriptionEn: "Forward classes, styles, refs, render and native attributes to the positioning and content layers." },
       ],
     },
-    { name: "PopoverTitle / PopoverDescription", description: "标题与说明，自动关联为浮层的可访问名称与描述。" },
-    { name: "PopoverClose", description: "关闭浮层的按钮。" },
+    { name: "PopoverTitle / PopoverDescription", description: "关联浮层的可访问名称与说明。", descriptionEn: "Associate the popup's accessible name and description." },
+    { name: "PopoverCreateHandle / PopoverPrimitive", description: "类型化共享触发器 handle 与 Base UI 原语命名空间。", descriptionEn: "Typed shared-trigger handle and the Base UI primitive namespace." },
   ],
   keyboard: [
-    { keys: "Enter / Space", description: "在触发器上打开或关闭。" },
-    { keys: "Esc", description: "关闭浮层，焦点回到触发器。" },
-    { keys: "Tab", description: "在浮层内移动焦点；移出浮层时自动关闭。" },
+    { keys: "Enter / Space", description: "在触发器上打开或关闭。", descriptionEn: "Open or close from the trigger." },
+    { keys: "Esc", description: "关闭并返回触发者，或指定的 finalFocus。", descriptionEn: "Close and return to the trigger or finalFocus target." },
+    { keys: "Tab / Shift+Tab", description: "遍历内容，允许离开浮层回到工作面。", descriptionEn: "Traverse content and leave the popup for the work surface." },
   ],
   notes: [
-    "Popover 默认非模态：点击外部或按 Esc 关闭，页面仍可滚动。",
-    "只放一两个操作；内容复杂或需要用户专心完成时改用 Dialog。",
-    "仅图标的触发器需要 aria-label。",
+    "Popover 始终非阻断；需要阻断决定时用 Dialog 或 AlertDialog。",
+    "点击外部入口后保留该入口的焦点，键盘关闭则返回触发者。",
+    "默认 Portal 挂到 body，无法继承触发者局部 DOM 上下文；container 必须在打开前挂载。",
+    "开关、焦点与定位由 Base UI 管理；入退动效仅由 motion.css 管理。",
   ],
+  notesEn: [
+    "Popover is always non-modal. Use Dialog or AlertDialog for a blocking decision.",
+    "Outside clicks retain focus on the clicked control; keyboard dismissal returns to the trigger.",
+    "The default body portal cannot inherit the trigger's local DOM context. Mount container before opening.",
+    "Base UI owns open state, focus and positioning; motion.css owns entry and exit motion.",
+  ],
+  design: {
+    methods: ["展开有据", "进退相承", "相成相制"],
+    whenToUse: ["在触发对象旁展开局部操作或补充信息，主工作面仍可使用。"],
+    avoid: ["阻断式任务；唯一关键后果；把关闭当成保存或取消成功。"],
+    composition: ["Trigger 关联对象；Title/Description 建立名称；Close、Esc 与外部入口提供返回。"],
+    stateOwner: { library: ["本地打开请求、触发关联、定位、焦点与返回。"], application: ["草稿、业务动作、异步结果、受控 open 与触发器消失后的返回目标。"] },
+    responsive: ["在可用高度内滚动，保留焦点内缘；关闭方式与非阻断语义不变。"],
+    customization: ["集中表面与浮层圆角；原生属性与定位层透传；不按子内容追加视觉特判。"],
+  },
 } satisfies ComponentMeta;

@@ -1,199 +1,166 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createRef } from "react";
 import { expect, test } from "vitest";
-import { Button } from "../src/components/button";
-import { Switch } from "../src/components/switch";
-import {
-  Field,
-  FieldContent,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldSeparator,
-  FieldTitle,
-} from "../src/components/field";
-import { Fieldset, FieldsetLegend } from "../src/components/fieldset";
-import { Form } from "../src/components/form";
+import { Field, FieldContent, FieldControl, FieldDescription, FieldError, FieldGroup, FieldItem, FieldLabel, FieldSeparator, FieldTitle, FieldValidity } from "../src/components/field";
 import { Input } from "../src/components/input";
 
-test("renders given content immediately and links it to the control", () => {
-  render(
-    <Field invalid>
-      <FieldLabel>邮箱</FieldLabel>
-      <Input />
-      <FieldError>邮箱格式不正确</FieldError>
-    </Field>,
-  );
+test("a label names and focuses its registered Input", async () => {
+  const user = userEvent.setup();
+  render(<Field><FieldLabel>邮箱</FieldLabel><Input /></Field>);
   const input = screen.getByLabelText("邮箱");
-  const error = screen.getByText("邮箱格式不正确");
+  await user.click(screen.getByText("邮箱"));
+  expect(input).toHaveFocus();
+});
+
+test("description and supplied error both describe the same control", () => {
+  render(<Field invalid><FieldLabel>邮箱</FieldLabel><Input /><FieldDescription id="email-help">说明</FieldDescription><FieldError id="email-error">邮箱地址不完整</FieldError></Field>);
+  const input = screen.getByLabelText("邮箱");
   expect(input).toHaveAttribute("aria-invalid", "true");
-  expect(input.getAttribute("aria-describedby")).toContain(error.id);
+  expect(input.getAttribute("aria-describedby")?.split(/\s+/)).toEqual(expect.arrayContaining(["email-help", "email-error"]));
+  expect(input).toHaveAccessibleDescription("说明 邮箱地址不完整");
 });
 
-test("collapses form-library errors and lists distinct messages", async () => {
-  const { rerender } = render(
-    <Field invalid>
-      <Input aria-label="密码" />
-      <FieldError errors={[{ message: "至少 8 位" }, undefined, { message: "至少 8 位" }]} />
-    </Field>,
-  );
-  expect(screen.getByText("至少 8 位").tagName).toBe("DIV");
-
-  rerender(
-    <Field invalid>
-      <Input aria-label="密码" />
-      <FieldError errors={[{ message: "至少 8 位" }, { message: "至少包含 1 个数字" }]} />
-    </Field>,
-  );
-  expect(screen.getAllByRole("listitem").map((item) => item.textContent)).toEqual(["至少 8 位", "至少包含 1 个数字"]);
-
-  rerender(
-    <Field>
-      <Input aria-label="密码" />
-      <FieldError errors={[]} />
-    </Field>,
-  );
-  // The node stays mounted for its exit transition, then removes itself.
-  await waitFor(() => expect(document.querySelector("[data-slot=field-error]")).toBeNull());
+test("supplied errors do not infer invalid; only the caller toggles it and the draft survives", async () => {
+  const fixture = (invalid?: boolean) => <Field invalid={invalid}><FieldLabel>邮箱</FieldLabel><Input defaultValue="li.na@" /><FieldError>邮箱地址不完整</FieldError></Field>;
+  const { rerender } = render(fixture());
+  const input = screen.getByLabelText("邮箱");
+  expect(screen.getByText("邮箱地址不完整")).toBeInTheDocument();
+  expect(input).not.toHaveAttribute("aria-invalid", "true");
+  rerender(fixture(true));
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  rerender(fixture(false));
+  await waitFor(() => expect(input).not.toHaveAttribute("aria-invalid", "true"));
+  expect(input).toHaveValue("li.na@");
 });
 
-test("without content, follows Base UI: shows Form errors by field name", async () => {
+test("native validity and blur do not infer invalid or invent an error", async () => {
   const user = userEvent.setup();
-  render(
-    <Form errors={{ code: "编号已被占用" }}>
-      <Field name="code">
-        <FieldLabel>设备编号</FieldLabel>
-        <Input defaultValue="HZ-031" />
-        <FieldError />
-      </Field>
-    </Form>,
-  );
-  expect(screen.getByText("编号已被占用")).toBeInTheDocument();
-  await user.type(screen.getByLabelText("设备编号"), "2");
-  // Clearing the message starts an exit transition; the text is gone from the
-  // accessibility tree immediately, the node unmounts once it settles.
-  await waitFor(() => expect(screen.queryByText("编号已被占用")).not.toBeInTheDocument());
+  render(<form><Field><FieldLabel>邮箱</FieldLabel><Input required type="email" /><FieldError /></Field><button type="button">继续</button></form>);
+  const input = screen.getByLabelText("邮箱") as HTMLInputElement;
+  await user.type(input, "li.na@");
+  await user.tab();
+  expect(input.validity.valid).toBe(false);
+  expect(input).not.toHaveAttribute("aria-invalid", "true");
+  expect(document.querySelector("[data-slot=field-error]")).toBeNull();
 });
 
-test("match ties a custom message to one validity state on submit", async () => {
+test("native invalid events keep browser constraints and caller handlers without inferring invalid", () => {
+  let observed = false;
+  render(<form><Field onInvalidCapture={() => { observed = true; }}><FieldLabel>邮箱</FieldLabel><Input required type="email" /><FieldError /></Field></form>);
+  const input = screen.getByLabelText("邮箱") as HTMLInputElement;
+  fireEvent.invalid(input);
+  expect(observed).toBe(true);
+  expect(input.validity.valid).toBe(false);
+  expect(input).not.toHaveAttribute("aria-invalid", "true");
+  expect(document.querySelector("[data-slot=field-error]")).toBeNull();
+});
+
+test("an empty supplied error list removes its association without removing help", async () => {
+  const fixture = (errors: {message: string}[]) => <Field invalid><FieldLabel>编号</FieldLabel><Input /><FieldDescription id="code-help">说明</FieldDescription><FieldError id="code-error" errors={errors} /></Field>;
+  const { rerender } = render(fixture([{message: "编号已被占用"}]));
+  expect(screen.getByLabelText("编号")).toHaveAccessibleDescription("说明 编号已被占用");
+  rerender(fixture([]));
+  await waitFor(() => expect(screen.getByLabelText("编号")).toHaveAttribute("aria-describedby", "code-help"));
+  expect(screen.queryByText("编号已被占用")).not.toBeInTheDocument();
+});
+
+test("errors ignore empty entries, deduplicate, list distinct messages, and prefer children", () => {
+  const { rerender } = render(<Field><Input aria-label="密码" /><FieldError errors={[undefined, {}, {message: ""}, {message: "  "}, {message: "至少 8 位"}, {message: "至少 8 位"}, {message: "包含数字"}]} /></Field>);
+  expect(screen.getAllByRole("listitem").map(item => item.textContent)).toEqual(["至少 8 位", "包含数字"]);
+  rerender(<Field><Input aria-label="密码" /><FieldError errors={[{message: "列表错误"}]}>调用方内容</FieldError></Field>);
+  expect(screen.getByText("调用方内容")).toBeInTheDocument();
+  expect(screen.queryByText("列表错误")).not.toBeInTheDocument();
+});
+
+test("a single supplied error has no unnecessary list", () => {
+  render(<Field invalid><Input aria-label="编号" /><FieldError errors={[{message: "编号已被占用"}]} /></Field>);
+  expect(screen.getByText("编号已被占用").tagName).toBe("DIV");
+  expect(screen.queryByRole("list")).toBeNull();
+});
+
+test("empty or whitespace-only content creates no error node or description association", () => {
+  const { rerender } = render(<Field invalid><Input aria-label="编号" /><FieldError>{""}</FieldError></Field>);
+  expect(document.querySelector("[data-slot=field-error]")).toBeNull();
+  expect(screen.getByLabelText("编号")).not.toHaveAttribute("aria-describedby");
+  rerender(<Field invalid><Input aria-label="编号" /><FieldError>{"  "}</FieldError></Field>);
+  expect(document.querySelector("[data-slot=field-error]")).toBeNull();
+});
+
+test("standalone errors forward native props, refs, and render without a Field", () => {
+  const ref = createRef<HTMLDivElement>();
+  render(<FieldError role="alert" ref={ref} render={<section />} className="text-body" data-owner="upload">文件过大</FieldError>);
+  const error = screen.getByRole("alert");
+  expect(error.tagName).toBe("SECTION");
+  expect(error).toHaveAttribute("data-owner", "upload");
+  expect(error).toHaveClass("text-body");
+  expect(ref.current).toBe(error);
+});
+
+test("explicit match=false hides a supplied error", () => {
+  render(<Field invalid><FieldLabel>邮箱</FieldLabel><Input /><FieldError match={false}>暂不显示</FieldError></Field>);
+  expect(screen.queryByText("暂不显示")).toBeNull();
+  expect(screen.getByLabelText("邮箱")).not.toHaveAttribute("aria-describedby");
+});
+
+test("horizontal native checkbox keeps label and description associations", async () => {
   const user = userEvent.setup();
-  render(
-    <Form onSubmit={(event) => event.preventDefault()}>
-      <Field name="email">
-        <FieldLabel>工作邮箱</FieldLabel>
-        <Input required type="email" />
-        <FieldError match="valueMissing">请填写工作邮箱</FieldError>
-        <FieldError match="typeMismatch">邮箱格式不正确</FieldError>
-      </Field>
-      <Button type="submit">提交</Button>
-    </Form>,
-  );
-  expect(screen.queryByText("请填写工作邮箱")).not.toBeInTheDocument();
-  await user.click(screen.getByRole("button", { name: "提交" }));
-  expect(screen.getByText("请填写工作邮箱")).toBeInTheDocument();
-  expect(screen.queryByText("邮箱格式不正确")).not.toBeInTheDocument();
-  expect(screen.getByLabelText("工作邮箱")).toHaveFocus();
+  render(<Field orientation="horizontal"><FieldControl type="checkbox" /><FieldContent><FieldLabel>选项</FieldLabel><FieldDescription>说明</FieldDescription></FieldContent></Field>);
+  const control = screen.getByLabelText("选项");
+  expect(control).toHaveAccessibleDescription("说明");
+  expect(control.closest("[data-slot=field]")).toHaveAttribute("data-orientation", "horizontal");
+  await user.click(screen.getByText("选项"));
+  expect(control).toBeChecked();
 });
 
-test("renders standalone outside a Field", () => {
-  render(<FieldError role="alert">文件过大</FieldError>);
-  expect(screen.getByRole("alert")).toHaveTextContent("文件过大");
-  expect(screen.getByRole("alert")).toHaveAttribute("data-slot", "field-error");
+test("disabled Field propagates to the control; readOnly retains form data", () => {
+  render(<form data-testid="form"><Field disabled name="locked"><FieldLabel>名称</FieldLabel><Input defaultValue="原值" /></Field><Field name="code"><FieldLabel>编号</FieldLabel><Input readOnly defaultValue="value" /></Field></form>);
+  expect(screen.getByLabelText("名称")).toBeDisabled();
+  expect(screen.getByLabelText("编号")).not.toBeDisabled();
+  const data = new FormData(screen.getByTestId("form") as HTMLFormElement);
+  expect(data.has("locked")).toBe(false);
+  expect(data.get("code")).toBe("value");
 });
 
-test("orientation switches the layout and is exposed as a data attribute", () => {
-  const { container, rerender } = render(
-    <Field orientation="horizontal">
-      <FieldContent>
-        <FieldLabel>每周运维报告</FieldLabel>
-      </FieldContent>
-      <Switch />
-    </Field>,
-  );
-  const vertical = container.querySelector('[data-slot="field"]')!;
-  expect(vertical).toHaveAttribute("data-orientation", "horizontal");
-
-  rerender(
-    <Field>
-      <FieldLabel>组织 ID</FieldLabel>
-      <Input />
-    </Field>,
-  );
-  expect(container.querySelector('[data-slot="field"]')).toHaveAttribute(
-    "data-orientation",
-    "vertical",
-  );
+test("FieldTitle is a fact heading and never automatically labels a control", () => {
+  render(<Field><FieldTitle id="fact-name">名称</FieldTitle><FieldDescription>待核实</FieldDescription><button>填写</button></Field>);
+  expect(screen.getByText("名称").tagName).toBe("DIV");
+  expect(screen.getByText("名称")).not.toHaveAttribute("for");
+  expect(screen.getByRole("button", {name: "填写"})).not.toHaveAttribute("aria-labelledby");
 });
 
-test("a horizontal field still links its label and description to the control", () => {
-  render(
-    <Field orientation="horizontal">
-      <FieldContent>
-        <FieldLabel>设备离线提醒</FieldLabel>
-      </FieldContent>
-      <Switch />
-    </Field>,
-  );
-  expect(screen.getByRole("switch", { name: "设备离线提醒" })).toBeInTheDocument();
+test("FieldItem scopes each repeated control's label", () => {
+  render(<Field><FieldTitle>选项</FieldTitle><FieldItem><FieldControl type="checkbox" id="option-alpha" /><FieldLabel htmlFor="option-alpha">选项一</FieldLabel></FieldItem><FieldItem><FieldControl type="checkbox" id="option-beta" /><FieldLabel htmlFor="option-beta">选项二</FieldLabel></FieldItem></Field>);
+  expect(screen.getByLabelText("选项一")).toHaveAttribute("id", "option-alpha");
+  expect(screen.getByLabelText("选项二")).toHaveAttribute("id", "option-beta");
 });
 
-test("FieldGroup, FieldTitle and FieldSeparator keep their slots", () => {
-  render(
-    <FieldGroup className="gap-8">
-      <Field>
-        <FieldTitle>配送时段</FieldTitle>
-        <Input aria-label="配送备注" />
-      </Field>
-      <FieldSeparator>或</FieldSeparator>
-      <Field>
-        <FieldLabel>手机号</FieldLabel>
-        <Input />
-      </Field>
-    </FieldGroup>,
-  );
-  const group = screen.getByText("配送时段").closest("[data-slot=field-group]");
-  expect(group).not.toBeNull();
-  // External classes win over the internal gap.
-  expect(group).toHaveClass("gap-8");
-  expect(screen.getByText("配送时段")).toHaveAttribute("data-slot", "field-title");
-  expect(
-    document.querySelector("[data-slot=field-separator]"),
-  ).toHaveTextContent("或");
+test("FieldValidity remains an unwrapped primitive outlet", () => {
+  render(<Field invalid><FieldControl aria-label="编号" /><FieldValidity>{validity => <output>{String(validity.state.valid)}</output>}</FieldValidity></Field>);
+  expect(screen.getByRole("status")).toHaveTextContent("false");
 });
 
-test("FieldSet and FieldLegend alias the Fieldset parts and disable the whole group", () => {
-  render(
-    <Fieldset disabled>
-      <FieldsetLegend>开户资料</FieldsetLegend>
-      <Field>
-        <FieldLabel>开户银行</FieldLabel>
-        <Input defaultValue="招商银行杭州分行" />
-      </Field>
-    </Fieldset>,
-  );
-  const group = document.querySelector("[data-slot=fieldset]")!;
-  expect(group.tagName).toBe("FIELDSET");
-  expect(group).toBeDisabled();
-  expect(screen.getByLabelText("开户银行")).toBeDisabled();
-  // The legend labels the group, so a reader hears it before the controls.
-  const legend = document.querySelector("[data-slot=fieldset-legend]")!;
-  expect(group.getAttribute("aria-labelledby")).toBe(legend.id);
-  expect(legend).toHaveTextContent("开户资料");
+test("layout parts preserve slots, refs, render and caller class precedence", () => {
+  const ref = createRef<HTMLDivElement>();
+  const { container } = render(<FieldGroup render={<section />} ref={ref} className="gap-8"><Field data-owner="test" className={() => "gap-3"}><FieldTitle>编号</FieldTitle><FieldDescription>不适用</FieldDescription></Field><FieldSeparator>或</FieldSeparator></FieldGroup>);
+  expect(ref.current?.tagName).toBe("SECTION");
+  expect(ref.current).toHaveClass("gap-8");
+  expect(ref.current).not.toHaveClass("gap-(--qy-field-group-gap)");
+  expect(container.querySelector("[data-slot=field]")).toHaveClass("gap-3");
+  expect(container.querySelector("[data-slot=field]")).toHaveAttribute("data-owner", "test");
+  expect(screen.getByText("编号")).toHaveAttribute("data-slot", "field-title");
+  expect(screen.queryByRole("separator")).toBeNull();
+  expect(container.querySelectorAll('[data-slot=separator][aria-hidden=true]')).toHaveLength(2);
 });
 
-test("a field-set legend labelled as a question names the group for its controls", () => {
-  render(
-    <Fieldset>
-      <FieldsetLegend variant="label">通过哪些方式通知你？</FieldsetLegend>
-      <Field orientation="horizontal">
-        <Switch defaultChecked />
-        <FieldLabel>短信</FieldLabel>
-      </Field>
-    </Fieldset>,
-  );
-  const legend = screen.getByText("通过哪些方式通知你？");
-  expect(legend).toHaveAttribute("data-variant", "label");
-  expect(document.querySelector("[data-slot=fieldset]")!.getAttribute("aria-labelledby")).toBe(
-    legend.id,
-  );
+test("FieldSeparator without text reuses one semantic separator", () => {
+  render(<FieldSeparator />);
+  expect(screen.getAllByRole("separator")).toHaveLength(1);
+});
+
+test("FieldControl can register an explicitly native Input without a second registration", () => {
+  render(<Field><FieldLabel>备注</FieldLabel><FieldControl render={<Input nativeInput />} /><FieldDescription>说明</FieldDescription></Field>);
+  expect(screen.getByLabelText("备注")).toHaveAccessibleDescription("说明");
+  fireEvent.change(screen.getByLabelText("备注"), { target: { value: "内容" } });
+  expect(screen.getByLabelText("备注")).toHaveValue("内容");
 });

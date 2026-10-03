@@ -1,19 +1,12 @@
-import { Heading } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye/ui/components/layout";
+import { Heading, Text } from "@qingye/ui/components/typography";
 
-export const meta = { title: "标题", description: "level 决定语义层级，size 决定字号，二者可以独立设置。" };
-
+export const meta = { title: "标题与正文", titleEn: "Headings and body text" };
 export default function Demo() {
-  return (
-    <div className="flex w-full flex-col gap-4">
-      <Heading level={1}>门店运营概览</Heading>
-      <Heading level={2}>本周订单与营收</Heading>
-      <Heading level={3}>徐汇漕溪北路店</Heading>
-      <Heading level={4} size="label">
-        设备与人员
-      </Heading>
-      <Heading level={2} size="heading" className="text-muted-foreground">
-        level 2 · size heading
-      </Heading>
-    </div>
-  );
+  return <Stack gap="section" className="w-full max-w-xl" lang="zh-CN">
+    <Heading level={3} step="display">青野 Qingye UI</Heading>
+    <Heading level={4} step="title">标题 Title</Heading>
+    <Heading level={5} step="chapter">章节 Chapter</Heading>
+    <Stack gap="field"><Heading level={6} step="heading">小标题 Heading</Heading><Text step="reading">青野 Qingye UI，文字与标点。</Text><Text>第一行文字。第二行文字。</Text></Stack>
+  </Stack>;
 }

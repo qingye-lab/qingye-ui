@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { expect, test } from "vitest";
@@ -39,4 +39,15 @@ test("component Markdown carries the catalog's composition, responsive and custo
       for (const decision of component.design[key]) expect(markdown).toContain(decision);
     }
   }
+});
+
+
+test("current component resources match the live public catalog after a removal", () => {
+  const catalog = JSON.parse(read("packages/ui/catalog.json"));
+  const names = catalog.components.map((component: { name: string }) => `${component.name}.md`).sort();
+  for (const base of ["packages/ui/ai", "apps/docs/public/ai"]) {
+    expect(readdirSync(resolve(root, base, `v${catalog.version}/components`)).filter((name) => name.endsWith(".md")).sort()).toEqual(names);
+  }
+  expect(names).not.toContain("search-input.md");
+  expect(names).not.toContain("password-input.md");
 });

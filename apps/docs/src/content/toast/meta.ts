@@ -1,81 +1,50 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "消息提示 Toast",
-  description: "操作完成后在屏幕角落短暂出现的反馈，不打断当前任务。多条消息自动层叠，悬停或聚焦时展开；需要用户立即处理的信息改用 Alert 或 AlertDialog。",
-  category: "反馈",
-  source: "coss",
-  exports: ["ToastProvider", "toastManager"],
-  keywords: ["toast", "notification", "snackbar", "消息", "通知", "轻提示"],
+  title: "通知 Toast", titleEn: "Toast",
+  description: "补充可恢复、非关键的操作事实，保持当前工作不中断。",
+  descriptionEn: "Report recoverable, non-critical facts while the current work continues.",
+  category: "反馈", layer: "primitive", source: "local",
+  exports: ["ToastProvider", "toastManager", "AnchoredToastProvider", "anchoredToastManager", "ToastPrimitive"],
+  keywords: ["toast", "notification", "通知", "消息"],
   api: [
-    {
-      name: "ToastProvider",
-      description: "在应用根部挂载一次，负责渲染全部消息。",
-      props: [
-        { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "消息出现的位置。" },
-        { name: "limit", type: "number", default: "3", description: "同时可见的最大数量，超出的旧消息淡出。" },
-        { name: "timeout", type: "number", default: "5000", description: "默认自动关闭时间（毫秒），0 表示不自动关闭。" },
-      ],
-    },
-    {
-      name: "toastManager.add(options)",
-      description: "添加一条消息并返回 id；传入已存在的 id 会原地更新并重新计时。",
-      props: [
-        { name: "title / description", type: "ReactNode", description: "标题与补充说明。" },
-        { name: "type", type: '"success" | "error" | "warning" | "info" | "loading"', description: "决定图标与颜色；loading 显示旋转图标。" },
-        { name: "timeout", type: "number", default: "5000", description: "本条的自动关闭时间；带操作按钮时建议延长。" },
-        { name: "priority", type: '"low" | "high"', default: '"low"', description: "high 会被读屏器立即播报，用于错误。" },
-        { name: "actionProps", type: "ButtonProps", description: "操作按钮，例如“撤销”。" },
-        { name: "id", type: "string", description: "自定义 id，用于去重或更新。" },
-      ],
-    },
-    { name: "toastManager.update(id, options)", description: "原地更新一条消息的内容或类型。" },
-    { name: "toastManager.promise(promise, { loading, success, error })", description: "随 Promise 状态自动切换：加载中 → 成功 / 失败。" },
-    { name: "toastManager.close(id?)", description: "关闭指定消息；不传 id 时关闭全部。" },
-    {
-      name: "AnchoredToastProvider / anchoredToastManager",
-      description: "锚定在某个元素旁的消息，例如复制成功的小提示。用法同上，额外传 positionerProps.anchor；data.tooltipStyle 使用紧凑样式。",
-    },
+    { name: "ToastProvider", description: "同一通知通道挂载一次。", props: [
+      { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "通知区域的位置。" },
+      { name: "timeout", type: "number", default: "5000", description: "普通通知与成功的阅读时限，0 为持续显示。" },
+      { name: "loadingTimeout", type: "number", default: "30000", description: "1—2147483647 的整数毫秒。等待/进行中到期仅转为持续 unknown，不推断后台结果；悬停不延长结果期限。" },
+      { name: "limit", type: "number", default: "3", description: "原语限制可见条数，超额根隐藏且 inert；不能作为关键结果的唯一承载。" },
+      { name: "toastManager", type: "ToastPrimitive.createToastManager() 的返回值", description: "可选的独立通知通道；省略时用导出的全局 manager。" },
+      { name: "portalProps", type: "ToastPrimitive.Portal.Props", description: "自定义 Portal 容器、方向和语言等属性。" },
+    ] },
+    { name: "toastManager.add(options)", description: "返回 id。相同 id 原位更新。", props: [
+      { name: "title / description", type: "ReactNode", description: "对象、结果与必要恢复依据。" },
+      { name: "type", type: "string", description: "waiting / in-progress / unknown / failed / success；保留 loading（进行中）、error（失败）、info 与 warning。" },
+      { name: "timeout", type: "number", description: "失败/未知/等待/进行中强制持续显示，其他类型按指定时限关闭。" },
+      { name: "priority", type: '"low" | "high"', default: '"low"', description: "low 使用礼貌 status；high 使用原语 alert。失败不自动打断播报。" },
+      { name: "actionProps", type: "React.ComponentPropsWithoutRef<'button'>", description: "应用提供操作与真实处理器，只执行一次；恢复落点仍留在页面。" },
+      { name: "data.rootProps", type: "ToastPrimitive.Root.Props 的可透传部分", description: "透传 id、ARIA、事件、style、render 与 ref，不接管 children/className/toast/swipeDirection。" },
+    ] },
+    { name: "toastManager.update(id, options)", description: "用真实结果更新同一对象。离开持续状态时显式指定 timeout；Promise 成功自动恢复 Provider 时限。" },
+    { name: "toastManager.promise(promise, { loading, success, error })", description: "进行中→真实成功/失败；超期先转未知，迟到结果继续更新同一条。响应丢失须由应用保留未知，不能将网络拒绝当业务失败。" },
+    { name: "toastManager.close(id?)", description: "关闭指定/全部通知，不取消或撤销业务任务。" },
+    { name: "AnchoredToastProvider / anchoredToastManager", description: "局部通知单独通道；positionerProps.anchor 指向关联元素。data.tooltipStyle 收紧内缘，完整说明与关闭仍保留。" },
+    { name: "ToastPrimitive", description: "Base UI Toast 原语命名空间；useToastManager 可管理所在 Provider 通道。" },
   ],
   keyboard: [
-    { keys: "F6", description: "把焦点移到消息区域。" },
-    { keys: "Tab", description: "在消息内的操作与关闭按钮之间移动。" },
-    { keys: "Esc", description: "关闭当前聚焦的消息。" },
+    { keys: "F6", description: "主动进入通知区域。" },
+    { keys: "Tab", description: "到达通知操作与关闭，聚焦时暂停消失计时。" },
+    { keys: "Esc", description: "关闭聚焦通知并返回原焦点。" },
   ],
-  notes: [
-    "整个应用只挂载一个 ToastProvider，在任何地方调用 toastManager 即可。",
-    "标题说结果（“已保存”），说明补充细节；不要把唯一的操作入口只放在消息里，它会自动消失。",
-    "悬停或聚焦消息区域时暂停计时并展开层叠；移动端可以左右或向下滑动关闭。",
-    "错误消息使用 priority: \"high\"，并给出下一步怎么做。",
-  ],
+  notes: ["悬停、聚焦与窗口失焦暂停自动消失；结果未知期限继续计时。", "普通成功默认短暂；失败/未知持续但仍可关闭。重要事实和恢复入口必须留在对象页面。"],
+  decisions: "通知不抢焦点。未知表示结果未确认，失败表示已有失败事实；关闭只关闭通知。字段错误、不可逆后果和需决策的失败留在工作面或确认结构，不能只用 Toast。",
+  decisionsEn: "A notification does not take focus. Unknown means no reliable result; failed means a confirmed failure. Dismissal only closes the notification. Keep field errors, irreversible consequences and decisions on the task surface or in a confirmation structure.",
   design: {
-    "methods": [
-      "名实相符",
-      "随境取度",
-      "进退相承"
-    ],
-    "whenToUse": [
-      "短暂反馈已确认的结果，或在工作面之外补充不会阻断任务的状态。"
-    ],
-    "avoid": [
-      "请求开始就显示成功；上传成功写成设备升级完成；关键错误只有会消失的 Toast；撤销按钮不关联实际对象。"
-    ],
-    "composition": [
-      "同一对象通过 id 更新等待/结果；Action 到持久恢复入口，close 只是关闭通知。关键失败留在工作面。"
-    ],
-    "stateOwner": {
-      "library": [
-        "通知原语、堆叠、关闭、动作部位、长文本布局。"
-      ],
-      "application": [
-        "Promise、真实结果、撤销可用性、持续错误与重试。"
-      ]
-    },
-    "responsive": [
-      "长文件名允许断行，窄屏动作另行排列，正文与关闭入口都可见；放大文字后仍需浏览器验证。"
-    ],
-    "customization": [
-      "timeout 按必要阅读和行动时间选择，重要恢复不依赖默认消失时间。"
-    ]
+    methods: ["随境取度", "名实相符", "进退相承"],
+    whenToUse: ["非关键、可恢复、无需打断当前工作的补充事实。"],
+    avoid: ["所有错误都用通知；关键后果只留在可关闭消息里；请求发出就宣布完成。"],
+    composition: ["同一 id 连接等待和结果；对象页面保留失败、未知与核对入口。"],
+    stateOwner: { library: ["可访问原语、呈现、关闭、暂停、等待期限与长期状态。"], application: ["对象、真实结果、优先级、业务取消、核对和重试。"] },
+    responsive: ["组件保留已有控件 narrow token；本次页面验证仅桌面≥1100px。"],
+    customization: ["样式使用既有角色；时限与位置是选择/预设。入场由 motion.css 原位淡入、退出即时，减少动态效果后文字仍成立。"],
   },
 } satisfies ComponentMeta;

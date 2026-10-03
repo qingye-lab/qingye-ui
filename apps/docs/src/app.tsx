@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { DocsLayout, SiteShell } from "./components/layouts";
 import { PlaygroundPage } from "./pages/playground";
+import { DOCS_LOCALES, PATHS, localePath } from "./lib/paths";
 
 // Every page is its own chunk; the shell (header, sidebar, search trigger) stays eager.
 const Home = lazy(() => import("./pages/home"));
@@ -27,32 +28,42 @@ const NotFoundInline = lazy(() => import("./pages/not-found").then((m) => ({ def
 export function App() {
   return (
     <Routes>
-      {/* Bare demo harness for screenshots: no site chrome. */}
-      <Route element={<PlaygroundPage />} path="/playground/:slug" />
-      <Route element={<SiteShell />}>
-        <Route element={<Home />} index />
-        <Route element={<ExamplesPage />} path="examples" />
-        <Route element={<ExamplePage />} path="examples/:slug" />
-        <Route element={<DocsLayout />} path="docs">
-          <Route element={<Introduction />} index />
-          <Route element={<Installation />} path="installation" />
-          <Route element={<Theming />} path="theming" />
-          <Route element={<DesignPhilosophy />} path="design-philosophy" />
-          <Route element={<Foundations />} path="foundations" />
-          <Route element={<AI />} path="ai" />
-          <Route element={<PatternsIndex />} path="patterns" />
-          <Route element={<PatternPage />} path="patterns/:slug" />
-          <Route element={<PatternPage />} path="patterns/:slug/:objectId" />
-          <Route element={<Tokens />} path="tokens" />
-          <Route element={<Motion />} path="motion" />
-          <Route element={<I18n />} path="i18n" />
-          <Route element={<Accessibility />} path="accessibility" />
-          <Route element={<ComponentsIndex />} path="components" />
-          <Route element={<ComponentPage />} path="components/:slug" />
-          <Route element={<NotFoundInline />} path="*" />
+      {DOCS_LOCALES.map((locale) => (
+        <Route key={locale} path={localePath(PATHS.home, locale)}>
+          {/* Bare demo harness for screenshots: no site chrome. */}
+          <Route element={<PlaygroundPage />} path="playground/:slug" />
+          <Route element={<SiteShell />}>
+            <Route element={<Home />} index />
+            <Route element={<ExamplesPage />} path="examples" />
+            <Route element={<ExamplePage />} path="examples/:slug" />
+            {/* Short component URLs share content identity with the established docs URLs. */}
+            <Route element={<DocsLayout />} path="components">
+              <Route element={<ComponentsIndex />} index />
+              <Route element={<ComponentPage />} path=":slug" />
+              <Route element={<NotFoundInline />} path="*" />
+            </Route>
+            <Route element={<DocsLayout />} path="docs">
+              <Route element={<Introduction />} index />
+              <Route element={<Installation />} path="installation" />
+              <Route element={<Theming />} path="theming" />
+              <Route element={<DesignPhilosophy />} path="design-philosophy" />
+              <Route element={<Foundations />} path="foundations" />
+              <Route element={<AI />} path="ai" />
+              <Route element={<PatternsIndex />} path="patterns" />
+              <Route element={<PatternPage />} path="patterns/:slug" />
+              <Route element={<PatternPage />} path="patterns/:slug/:objectId" />
+              <Route element={<Tokens />} path="tokens" />
+              <Route element={<Motion />} path="motion" />
+              <Route element={<I18n />} path="i18n" />
+              <Route element={<Accessibility />} path="accessibility" />
+              <Route element={<ComponentsIndex />} path="components" />
+              <Route element={<ComponentPage />} path="components/:slug" />
+              <Route element={<NotFoundInline />} path="*" />
+            </Route>
+            <Route element={<NotFound />} path="*" />
+          </Route>
         </Route>
-        <Route element={<NotFound />} path="*" />
-      </Route>
+      ))}
     </Routes>
   );
 }

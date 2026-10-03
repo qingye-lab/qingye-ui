@@ -3,28 +3,32 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: b866e49c3ceb8a1ae3e24af07b04be899e8eacf127fbf72419cf6146e92f9a0e
+Source SHA-256: 8ce98a093d8ada83f28ed805733269684452c9cdba5b848000a9b8ef65a6e420
 
-触发名称明确的操作或提交表单。按当前任务安排显著程度，完成与保护动作都可以成为重点。
+触发有明确对象与后果的动作；状态由调用方持有。
 
 ## Use and ownership
-- 执行命名明确的动作或提交表单；任务重点可以是保存、停止或保护当前工作。
-- Avoid: 不按固定四级套动作；loading 只表示正在等待，不能当成保存成功。
-- Library: 提供原生按钮、键盘焦点、loading 的忙碌与禁用状态，保持动作名称和内容宽度。
-- Application: 决定对象、操作范围、请求结果、重试和取消后台任务；加载结束与业务成功分别处理。
+- 执行有对象与后果的命令、提交表单或停止当前任务。
+- Avoid: 导航用原生链接；不把等待结束当作成功，不把未知当作失败或可立即重试。
+- Library: 原生与非原生命令语义、焦点、激活保护、动作名称及 locale 状态表达。
+- Application: 对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。
 
 ## Composition
-- 提交用 type=submit；真实地址用 a / Link + buttonVariants；危险动作按后果决定是否接 AlertDialog。
+- 危险动作使用 ButtonProtection，或由自身 aria-describedby 关联已有的非空后果说明；确认条件、权限与远端核实属于应用。
 
 ## Responsive behavior
-- 小尺寸通过粗指针命中区扩大可点范围；长动作名称优先简化对象表达，保留明确的动词。
+- 尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。
 
 ## Customization
-- variant 决定视觉显著程度，size 决定控件占位；公共控制尺寸和触摸目标分别调整。
+- variant、tone、size 与 shape 分别选择呈现、后果、尺寸与内容形态。
 
 ## Current exports
 - Button: function; owner button; PASS; props: ButtonProps
+- ButtonPrimitive: reexport; owner button; UNVERIFIED
 - ButtonProps: interface; owner button; PASS
+- ButtonProtection: function; owner button; PASS; props: ButtonProtectionProps
+- ButtonProtectionProps: interface; owner button; PASS
+- ButtonState: type; owner button; PASS
 - buttonVariants: const; owner button; UNVERIFIED
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
@@ -36,320 +40,172 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Button
-渲染原生 <button>（默认 type="button"）；通过 render 可更换命令载体。真正导航使用原生 a / Link 配合 buttonVariants，以保留链接语义。透传所有原生属性。
-- variant: "default" | "outline" | "secondary" | "ghost" | "link" | "destructive" | "destructive-outline"; default "default". 视觉样式。
-- size: "xs" | "sm" | "default" | "lg" | "xl" | "icon-xs" | "icon-sm" | "icon" | "icon-lg" | "icon-xl"; default "default". 尺寸；icon-* 为仅图标的正方形按钮，与同名文字尺寸等高。
-- loading: boolean; default false. 显示居中的 Spinner、设置 aria-busy 并禁用，文字透明以保留宽度。
-- disabled: boolean; default false. 禁用；不透明度降至 64% 并屏蔽指针事件。
-- render: ReactElement | (props, state) => ReactElement. 替换命令的渲染元素；不会自动把按钮语义改成链接语义。
-- nativeButton: boolean; default true. 命令载体不是原生 <button> 时设为 false；仍保留按钮 role，导航应使用原生链接。
+默认渲染 type=button 的原生按钮，透传原生属性、ref、事件和派生 data-slot。状态不会自行推进。
+- variant: "solid" | "bordered" | "quiet"; default "solid". 填充、边框或无边框的表达，不表示权限。
+- tone: "neutral" | "danger"; default "neutral". 动作后果；danger 使用 ButtonProtection，或 aria-describedby 关联文档中已有的非空说明。开发环境挂载后校验；生产环境不抛错。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 按所在位置选尺寸，与强调独立。
+- shape: "label" | "icon"; default "label". 图标是形态；icon 必须有 aria-label 或 aria-labelledby。
+- state: "idle" | "waiting" | "in-progress" | "unknown" | "failed"; default "idle". 调用方持有的事实。等待与进行中设置 aria-busy；结果未知单独呈现。前三种未完成状态阻止重复触发，failed 可由调用方提供恢复操作。
+- disabled: boolean; default false. 动作不可用，退出 Tab 顺序；与未完成事实可以共存。
+- render: ReactElement | (props, state) => ReactElement. Base UI 组合入口，可渲染其他命令载体或触发器；保留真实语义。
+- nativeButton: boolean; default true. 非 button 命令载体设为 false，仍使用按钮语义；导航使用原生 a + buttonVariants。
+
+### ButtonProtection
+可见后果与动作成组，并关联 aria-describedby；已有说明可由 Button 直接关联。容器的 consequence 必须非空，不替应用确认、判断权限或执行请求。
+- consequence: string. 必填非空文字，说明当前对象、版本与变更的后果。
+- children: ReactNode. 相关动作与必要退出入口。
 
 ### buttonVariants
-cva 样式函数，供需要按钮外观但不渲染 Button 的场景使用，如分页链接。
+与 Button 同一套尺寸、形态、强调和色调，用于保留原生链接等元素语义的组合。
+
+### ButtonPrimitive
+Base UI 无障碍原语；应用优先使用 Button 的状态与保护契约。
 
 ## Keyboard
-- Enter / Space: 触发按钮。
-- Tab / Shift+Tab: 移入、移出焦点；键盘聚焦时显示焦点环。
+- Enter / Space: 触发可用动作；等待、进行中或结果未知时不触发。
+- Tab / Shift+Tab: 移入或移出焦点；未完成状态保留位置，disabled 退出 Tab 顺序。
+- ArrowUp / ArrowDown: 组合菜单或列表触发器按原语操作；未完成状态阻止展开。
 
 ## Source examples
-### 样式
+### 变体与色调
 Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
+import { Button, ButtonProtection } from "@qingye/ui/components/button";
 
-export const meta = {
-  title: "样式",
-  description: "样式表达当前任务中的强调与后果；保存、退出或保护动作都可以成为重点，不按动作名称固定分级。",
-};
+export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
 
 export default function Demo() {
   return (
-    <>
-      <Button>保存</Button>
-      <Button variant="outline">取消</Button>
-      <Button variant="secondary">存为草稿</Button>
-      <Button variant="ghost">稍后再说</Button>
-      <Button variant="link">展开记录</Button>
-      <Button variant="destructive">删除设备</Button>
-      <Button variant="destructive-outline">解除绑定</Button>
-    </>
+    <div className="flex w-full flex-col gap-(--qy-section-gap)">
+      <div className="flex flex-wrap gap-(--qy-action-gap)">
+        <Button>保存</Button>
+        <Button variant="bordered">取消</Button>
+        <Button variant="quiet">编辑</Button>
+      </div>
+      <ButtonProtection consequence="删除后，内容无法恢复。">
+        <Button tone="danger">删除</Button>
+        <Button tone="danger" variant="bordered">删除</Button>
+        <Button tone="danger" variant="quiet">删除</Button>
+      </ButtonProtection>
+    </div>
   );
 }
 ```
 
-### 尺寸
+### 位置与尺寸
 Source: apps/docs/src/content/button/demos/02-sizes.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
 
-export const meta = {
-  title: "尺寸",
-  description: "xs 用于表格行内，sm 用于工具栏，lg / xl 用于登录与落地页。移动端统一加高 4px。",
-};
+export const meta = { title: "位置与尺寸", titleEn: "Size by position" };
 
 export default function Demo() {
-  return (
-    <>
-      <Button size="xs" variant="outline">行内</Button>
-      <Button size="sm" variant="outline">工具栏</Button>
-      <Button variant="outline">默认</Button>
-      <Button size="lg" variant="outline">登录</Button>
-      <Button size="xl" variant="outline">免费试用</Button>
-    </>
-  );
+  return <>
+    <Button size="xs" variant="quiet">编辑此行</Button>
+    <Button size="sm" variant="quiet">筛选设备</Button>
+    <Button size="md">保存设置</Button>
+    <Button size="lg">登录工作区</Button>
+    <Button size="xl">创建工作区</Button>
+  </>;
 }
 ```
 
-### 仅图标
+### 图标形态
 Source: apps/docs/src/content/button/demos/03-icon-sizes.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
 import { PlusIcon } from "lucide-react";
 
-export const meta = {
-  title: "仅图标",
-  description: "icon-* 尺寸为正方形，与同级文字按钮等高。仅图标的按钮必须提供 aria-label。",
-};
+export const meta = { title: "图标形态", titleEn: "Icon shape" };
 
 export default function Demo() {
-  return (
-    <>
-      <Button aria-label="新建" size="icon-xs" variant="outline">
+  return <>
+    {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+      <Button aria-label="新建设备" key={size} shape="icon" size={size} variant="quiet">
         <PlusIcon aria-hidden="true" />
       </Button>
-      <Button aria-label="新建" size="icon-sm" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon-lg" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-      <Button aria-label="新建" size="icon-xl" variant="outline">
-        <PlusIcon aria-hidden="true" />
-      </Button>
-    </>
-  );
+    ))}
+  </>;
 }
 ```
 
-### 带图标
+### 动作与图标
 Source: apps/docs/src/content/button/demos/04-with-icon.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { ArrowRightIcon, ChevronDownIcon, DownloadIcon, Trash2Icon } from "lucide-react";
+import { ArrowRightIcon, ChevronDownIcon, DownloadIcon } from "lucide-react";
 
-export const meta = {
-  title: "带图标",
-  description: "图标放在文字前表示动作类型，放在文字后表示去向或展开。图标会自动调整尺寸与透明度。",
-};
+export const meta = { title: "动作与图标", titleEn: "Actions and icons" };
 
 export default function Demo() {
-  return (
-    <>
-      <Button variant="outline">
-        <DownloadIcon aria-hidden="true" />
-        导出报表
-      </Button>
-      <Button>
-        下一步
-        <ArrowRightIcon aria-hidden="true" />
-      </Button>
-      <Button variant="ghost">
-        全部状态
-        <ChevronDownIcon aria-hidden="true" />
-      </Button>
-      <Button variant="destructive-outline">
-        <Trash2Icon aria-hidden="true" />
-        移入回收站
-      </Button>
-    </>
-  );
+  return <>
+    <Button variant="quiet"><DownloadIcon aria-hidden="true" />导出十月报表</Button>
+    <Button>查看核对结果<ArrowRightIcon aria-hidden="true" /></Button>
+    <Button variant="quiet">设备操作<ChevronDownIcon aria-hidden="true" /></Button>
+  </>;
 }
 ```
 
-### 作为链接
+### 链接
 Source: apps/docs/src/content/button/demos/05-link.tsx
 ```tsx
 import { buttonVariants } from "@qingye/ui/components/button";
-import { ChevronLeftIcon, ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "lucide-react";
 
-export const meta = {
-  title: "作为链接",
-  description: "导航使用真正的 a 或路由 Link，配合 buttonVariants 复用按钮外观，保留链接语义与浏览器操作。",
-};
+export const meta = { title: "链接", titleEn: "Links" };
 
 export default function Demo() {
   return (
-    <>
-      <a className={buttonVariants({ variant: "link" })} href="#orders">
-        <ChevronLeftIcon aria-hidden="true" />
-        返回订单列表
+    <div className="flex flex-wrap gap-(--qy-action-gap)">
+      <a className={buttonVariants({ variant: "quiet" })} href="/docs/button">按钮文档</a>
+      <a className={buttonVariants({ variant: "bordered" })} href="/design.md" rel="noreferrer" target="_blank">
+        设计指南<ExternalLinkIcon aria-hidden="true" />
       </a>
-      <a
-        className={buttonVariants({ variant: "outline" })}
-        href="https://example.com/help"
-        rel="noreferrer"
-        target="_blank"
-      >
-        帮助中心
-        <ExternalLinkIcon aria-hidden="true" />
-      </a>
-    </>
+    </div>
   );
 }
 ```
 
-### 加载中
-Source: apps/docs/src/content/button/demos/06-loading.tsx
+### 状态
+Source: apps/docs/src/content/button/demos/06-states.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { useState } from "react";
+import { SaveIcon } from "lucide-react";
 
-export const meta = {
-  title: "加载中",
-  description: "loading 显示居中的旋转指示并禁用按钮，文字透明但保留宽度，按钮不会跳动。",
-};
-
-export default function Demo() {
-  const [saving, setSaving] = useState(false);
-  const save = () => {
-    setSaving(true);
-    setTimeout(() => setSaving(false), 1500);
-  };
-  return (
-    <>
-      <Button loading={saving} onClick={save}>
-        保存更改
-      </Button>
-      <Button loading variant="outline">
-        同步中
-      </Button>
-      <Button loading variant="destructive">
-        删除中
-      </Button>
-    </>
-  );
-}
-```
-
-### 自定义加载
-Source: apps/docs/src/content/button/demos/07-loading-custom.tsx
-```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Spinner } from "@qingye/ui/components/spinner";
-
-export const meta = {
-  title: "自定义加载",
-  description: "需要保留文字时，自行组合 Spinner 与 disabled，例如“正在上传 3 个文件”。",
-};
+export const meta = { title: "状态", titleEn: "States" };
 
 export default function Demo() {
   return (
-    <>
-      <Button disabled>
-        <Spinner />
-        正在上传 3 个文件
-      </Button>
-      <Button disabled size="sm" variant="outline">
-        <Spinner />
-        生成中
-      </Button>
-    </>
-  );
-}
-```
-
-### 禁用
-Source: apps/docs/src/content/button/demos/08-disabled.tsx
-```tsx
-import { Button } from "@qingye/ui/components/button";
-
-export const meta = { title: "禁用", description: "不可用时降低不透明度并屏蔽指针事件。" };
-
-export default function Demo() {
-  return (
-    <>
-      <Button disabled>提交审核</Button>
-      <Button disabled variant="outline">
-        导出
-      </Button>
-      <Button disabled variant="secondary">
-        存为草稿
-      </Button>
-      <Button disabled variant="destructive">
-        删除
-      </Button>
-    </>
-  );
-}
-```
-
-### 组合：表单操作栏
-Source: apps/docs/src/content/button/demos/09-form-actions.tsx
-```tsx
-import { Button } from "@qingye/ui/components/button";
-
-export const meta = {
-  title: "组合：表单操作栏",
-  description: "把相关操作放在一起，按当前任务安排强调。正常编辑时突出保存；需要阻止继续同步时突出停止。",
-};
-
-export default function Demo() {
-  return (
-    <div className="flex w-full max-w-lg flex-col gap-(--qy-space-5)">
-      <div className="flex flex-col gap-(--qy-space-2)">
-        <p className="text-caption text-muted-foreground">编辑设置</p>
-        <div className="flex flex-wrap gap-(--qy-action-gap)">
-          <Button>保存设置</Button>
-          <Button variant="outline">放弃这次修改</Button>
-          <Button variant="destructive-outline">停用账号</Button>
-        </div>
+    <div className="grid w-full gap-(--qy-section-gap)">
+      <div className="flex flex-wrap gap-(--qy-action-gap)">
+        {(["idle", "waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
+          <Button key={state} state={state}>保存</Button>
+        ))}
+        <Button disabled>保存</Button>
       </div>
-      <div className="flex flex-col gap-(--qy-space-2)">
-        <p className="text-caption text-muted-foreground">发现同步对象有误</p>
-        <div className="flex flex-wrap gap-(--qy-action-gap)">
-          <Button variant="destructive">停止同步</Button>
-          <Button variant="outline">继续等待</Button>
-        </div>
+      <div className="flex flex-wrap gap-(--qy-action-gap)">
+        {(["waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
+          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><SaveIcon aria-hidden="true" /></Button>
+        ))}
+        <Button aria-label="保存" disabled shape="icon" variant="quiet"><SaveIcon aria-hidden="true" /></Button>
       </div>
     </div>
   );
 }
 ```
 
-### 组合：卡片式按钮
-Source: apps/docs/src/content/button/demos/10-card-button.tsx
+### 组合：同底色的边界
+Source: apps/docs/src/content/button/demos/07-boundary.tsx
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { ChevronRightIcon } from "lucide-react";
 
-export const meta = {
-  title: "组合：卡片式按钮",
-  description: "整块可点击的选项，悬停时箭头轻移提示去向。",
-};
+export const meta = { title: "组合：同底色的边界", titleEn: "Composition: boundary on the same surface" };
 
 export default function Demo() {
-  return (
-    <div className="grid w-full max-w-md gap-2">
-      {[
-        { name: "华东一区 · 杭州", detail: "12 台设备在线，1 台告警" },
-        { name: "华南二区 · 深圳", detail: "8 台设备在线" },
-      ].map((region) => (
-        <Button className="h-auto! justify-between gap-4 px-4 py-3 text-start" key={region.name} variant="outline">
-          <span className="flex flex-col gap-0.5">
-            <span>{region.name}</span>
-            <span className="whitespace-normal font-normal text-muted-foreground">{region.detail}</span>
-          </span>
-          <ChevronRightIcon
-            aria-hidden="true"
-            className="transition-transform duration-(--qy-duration-fast) in-[[data-slot=button]:hover]:translate-x-0.5"
-          />
-        </Button>
-      ))}
-    </div>
-  );
+  return <div className="w-full rounded-panel bg-(--device-carrier) [--device-carrier:var(--qy-primary)] [--device-boundary:var(--qy-primary-foreground)] p-(--qy-panel-padding) text-primary-foreground">
+    {/* 基础层 §5：实心入口与父面同色，显式补必要边界，并消费 §1 的边框换算。 */}
+    <Button className="border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-boundary-inset)] focus-visible:inset-ring-(--device-boundary)">继续核对设备</Button>
+  </div>;
 }
 ```
 

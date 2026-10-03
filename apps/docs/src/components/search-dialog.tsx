@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { CATEGORIES } from "@/lib/types";
 import { score, searchEntries, type SearchEntry } from "@/lib/search";
 import { focusPageHeading } from "@/lib/use-route-effects";
+import { useDocsLocale } from "@/lib/docs-locale";
+import { navLabel } from "@/lib/nav";
 
 interface Group {
   value: string;
@@ -37,7 +39,8 @@ function resultGroups(entries: SearchEntry[], query: string): Group[] {
 
 export default function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const navigate = useNavigate();
-  const entries = useMemo(searchEntries, []);
+  const locale = useDocsLocale();
+  const entries = useMemo(() => searchEntries(locale), [locale]);
   const all = useMemo(() => browseGroups(entries), [entries]);
   const [query, setQuery] = useState("");
   const filtered = useMemo(() => (query.trim() ? resultGroups(entries, query) : all), [entries, all, query]);
@@ -77,19 +80,19 @@ export default function SearchDialog({ open, onOpenChange }: { open: boolean; on
               {(group: Group, index: number) => (
                 <Fragment key={group.value}>
                   <CommandGroup className={index > 0 ? "mt-2" : undefined} items={group.items}>
-                    <CommandGroupLabel>{group.value}</CommandGroupLabel>
+                    <CommandGroupLabel>{navLabel(group.value, locale)}</CommandGroupLabel>
                     <CommandCollection>
                       {(entry: SearchEntry) => (
-                        <CommandItem className="gap-2.5" key={entry.value} onClick={() => choose(entry)} value={entry}>
+                        <CommandItem className="gap-2.5" key={entry.id} onClick={() => choose(entry)} value={entry}>
                           {entry.group === "文档" ? (
                             <FileTextIcon aria-hidden="true" className="size-4 shrink-0 opacity-60" />
                           ) : (
                             <BoxIcon aria-hidden="true" className="size-4 shrink-0 opacity-60" />
                           )}
                           <span className="truncate">{entry.title}</span>
-                          {entry.hint ? <span className="truncate text-muted-foreground text-xs">{entry.hint}</span> : null}
+                          {entry.hint ? <span className="truncate text-muted-foreground text-caption">{entry.hint}</span> : null}
                           {searching && entry.group === "组件" ? (
-                            <span className="ms-auto shrink-0 ps-3 text-muted-foreground text-xs">{entry.meta}</span>
+                            <span className="ms-auto shrink-0 ps-3 text-muted-foreground text-caption">{navLabel(entry.meta, locale)}</span>
                           ) : null}
                         </CommandItem>
                       )}
@@ -99,7 +102,7 @@ export default function SearchDialog({ open, onOpenChange }: { open: boolean; on
               )}
             </CommandList>
           </CommandPanel>
-          <CommandFooter>
+          <CommandFooter className="pointer-coarse:hidden">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5">
                 <KbdGroup>

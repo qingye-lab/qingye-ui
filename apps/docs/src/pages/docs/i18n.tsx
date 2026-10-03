@@ -4,7 +4,7 @@ import { TabsList } from "@qingye/ui/components/tabs";
 import { UILocale } from "@qingye/ui/locale";
 import { CopyButton } from "@qingye/ui/components/copy-button";
 import { Pagination, PaginationPrevious } from "@qingye/ui/components/pagination";
-import { SearchInput } from "@qingye/ui/components/search-input";
+import { Input } from "@qingye/ui/components/input";
 import { Tabs, TabsTab } from "@qingye/ui/components/tabs";
 import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
 import { enUS } from "@qingye/ui/locales/en-US";
@@ -27,7 +27,7 @@ function LocalePreview() {
   return (
     <div className="my-6 overflow-hidden rounded-xl border">
       <div className="flex items-center justify-between gap-3 border-b bg-surface-subtle/60 py-1.5 ps-4 pe-1.5 dark:bg-surface/40">
-        <span className="text-muted-foreground text-xs">内置文案随语言切换，示例内容本身不变</span>
+        <span className="text-muted-foreground text-caption">内置文案随语言切换，示例内容本身不变</span>
         <Tabs onValueChange={(value) => setCode(value as typeof code)} value={code}>
           <TabsList aria-label="界面语言" size="sm">
             <TabsTab value="zh-CN">简体中文</TabsTab>
@@ -62,7 +62,7 @@ function LocalePreview() {
           </Pagination>
           <div className="flex w-full max-w-sm flex-col items-center gap-3 sm:flex-row">
             <div className="w-full flex-1">
-              <SearchInput aria-label={code === "en-US" ? "Search members" : "搜索成员"} defaultValue="林" />
+              <Input type="search" aria-label={code === "en-US" ? "Search members" : "搜索成员"} defaultValue="林" />
             </div>
             <CopyButton value="Qingye UI" />
           </div>
@@ -77,8 +77,8 @@ function MessagesTable() {
   const keys = Object.keys(zhCN.messages) as (keyof typeof zhCN.messages)[];
   return (
     <div className="my-4 overflow-x-auto rounded-xl border">
-      <table className="w-full min-w-[34rem] text-sm">
-        <thead className="border-b bg-surface-subtle/60 text-muted-foreground text-xs dark:bg-surface/40">
+      <table className="w-full min-w-[34rem] text-body">
+        <thead className="border-b bg-surface-subtle/60 text-muted-foreground text-caption dark:bg-surface/40">
           <tr>
             <th className="px-4 py-2 text-start font-medium">键</th>
             <th className="px-4 py-2 text-start font-medium">简体中文</th>
@@ -92,8 +92,8 @@ function MessagesTable() {
             return (
               <tr key={key}>
                 <td className="px-4 py-2 align-top">
-                  <code className="font-mono text-[0.8125rem] text-foreground-strong">{key}</code>
-                  {zh.call ? <code className="font-mono text-[0.75rem] text-muted-foreground">{zh.call}</code> : null}
+                  <code className="font-mono text-heading text-foreground-strong">{key}</code>
+                  {zh.call ? <code className="font-mono text-caption text-muted-foreground">{zh.call}</code> : null}
                 </td>
                 <td className="px-4 py-2 align-top text-foreground/85">{zh.text}</td>
                 <td className="px-4 py-2 align-top text-foreground/85" lang="en">
@@ -112,7 +112,7 @@ export default function I18nPage() {
   return (
     <article>
       <PageHeader
-        description="组件内置的文案（关闭、加载中、分页、清除……）默认是简体中文，可以整体切换为英文，也可以只改其中几条。"
+        description="内置文案默认使用简体中文；UILocaleProvider 可切换为英文或覆盖指定词条。"
         title="国际化"
       />
       <P>
@@ -126,7 +126,7 @@ export default function I18nPage() {
         title="root.tsx"
       />
       <P>
-        英文词条是单独的入口，只用中文的应用不会把它打包进来。别忘了同时把 <Code>{'<html lang="en">'}</Code> 设成对应语言，读屏软件依赖它选择发音。
+        英文词条是单独的入口，只用中文的应用不会把它打包进来。同时将文档设为 <Code>{'<html lang="en">'}</Code>，读屏软件据此选择发音。
       </P>
       <div id="i18n-demo">
         <LocalePreview />
@@ -134,26 +134,24 @@ export default function I18nPage() {
 
       <H2 id="overrides">覆盖部分文案</H2>
       <P>
-        只想改几条时传 <Code>messages</Code>。它会与上层的语言合并，所以可以在某个区域里再嵌套一层：
+        <Code>messages</Code> 会与上层语言的词条合并；只在某个区域改文案时，在该区域嵌套 <Code>UILocaleProvider</Code>。
       </P>
       <CodeBlock
         code={`<UILocaleProvider messages={{ noResults: "暂无数据", close: "收起" }}>\n  <DataTable … />\n</UILocaleProvider>`}
       />
       <Callout title="带参数的文案">
-        少数文案是函数，例如 <Code>pageSummary(page, pages, total)</Code>、<Code>selectedCount(count)</Code>，覆盖时同样传入函数，便于处理语序与单复数。
+        少数文案是函数，例如 <Code>pageSummary(page, pages, total)</Code>、<Code>selectedCount(count)</Code>，覆盖时同样传入函数，便于处理语序与单复数。下表中的函数词条显示示例调用结果。
       </Callout>
 
       <H2 id="custom-components">在自己的组件里使用</H2>
-      <P>封装业务组件时读取同一份文案，界面语言就能保持一致：</P>
       <CodeBlock
         code={`import { Button } from "@qingye/ui/components/button";\nimport { useUILocale } from "@qingye/ui/locale";\n\nexport function ClearFilters({ onClear }: { onClear: () => void }) {\n  const { code, messages } = useUILocale(); // code: "zh-CN" | "en-US"\n  return <Button onClick={onClear}>{messages.clear}</Button>;\n}`}
       />
-      <P className="text-[0.875rem] text-muted-foreground">
+      <P className="text-body text-muted-foreground">
         向组件库新增内置文案时，需要同时补齐 <Code>src/locale.tsx</Code> 与 <Code>src/locales/en-US.ts</Code>，两边的键保持一一对应。
       </P>
 
       <H2 id="messages">内置文案一览</H2>
-      <P>下表直接读取库中的两套词条，带参数的文案以示例参数调用后显示。</P>
       <MessagesTable />
     </article>
   );

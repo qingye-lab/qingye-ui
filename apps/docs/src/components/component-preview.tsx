@@ -2,7 +2,7 @@ import { useTheme } from "@qingye/ui/components/theme-provider";
 import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
 import { Badge } from "@qingye/ui/components/badge";
 import { Button } from "@qingye/ui/components/button";
-import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Card } from "@qingye/ui/components/card";
 import { Command, CommandCollection, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel, CommandShortcut } from "@qingye/ui/components/command";
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle } from "@qingye/ui/components/dialog";
 import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
@@ -27,7 +27,7 @@ function SettingRow({ title, description, checked, onCheckedChange }: { title: s
     <div className="flex items-center justify-between gap-4">
       <div className="flex min-w-0 flex-col gap-0.5">
         <Label htmlFor={id}>{title}</Label>
-        <span className="text-muted-foreground text-xs">{description}</span>
+        <span className="text-muted-foreground text-caption">{description}</span>
       </div>
       <Switch checked={checked} onCheckedChange={onCheckedChange} id={id} />
     </div>
@@ -43,11 +43,11 @@ function NotificationsCard() {
   const [preferences, setPreferences] = useState(defaultNotifications);
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-base">通知</CardTitle>
-        <CardDescription>选择你希望收到的提醒。</CardDescription>
-      </CardHeader>
-      <CardPanel className="flex flex-col gap-4">
+      <header className="grid gap-(--qy-panel-gap)">
+        <h3 className="text-heading text-prose">通知</h3>
+        <p className="text-body text-muted-foreground">选择你希望收到的提醒。</p>
+      </header>
+      <div className="p-(--qy-panel-padding) flex flex-col gap-4">
         <SettingRow checked={preferences.comments} onCheckedChange={(comments) => setPreferences((current) => ({ ...current, comments }))} description="有人回复或 @ 你时" title="评论与提及" />
         <SettingRow checked={preferences.weekly} onCheckedChange={(weekly) => setPreferences((current) => ({ ...current, weekly }))} description="每周一上午汇总项目进展" title="每周摘要" />
         <SettingRow checked={preferences.updates} onCheckedChange={(updates) => setPreferences((current) => ({ ...current, updates }))} description="新功能与改进说明" title="产品更新" />
@@ -68,15 +68,15 @@ function NotificationsCard() {
           </Select>
           <FieldDescription>这段时间内只推送紧急通知。</FieldDescription>
         </Field>
-      </CardPanel>
-      <CardFooter className="justify-end gap-2">
-        <Button onClick={() => setPreferences(defaultNotifications)} size="sm" variant="ghost">
+      </div>
+      <footer className="flex items-center gap-(--qy-action-gap) p-(--qy-panel-padding) justify-end gap-2">
+        <Button onClick={() => setPreferences(defaultNotifications)} size="sm" variant="quiet">
           恢复默认
         </Button>
         <Button onClick={() => toastManager.add({ title: "演示偏好已保存", description: `已启用 ${[preferences.comments, preferences.weekly, preferences.updates].filter(Boolean).length} 类通知。刷新后恢复默认。`, type: "success" })} size="sm">
           保存更改
         </Button>
-      </CardFooter>
+      </footer>
     </Card>
   );
 }
@@ -92,11 +92,11 @@ function ProjectCard() {
       if (!project.name.trim() || !project.slug.trim()) return;
       toastManager.add({ title: `已创建“${project.name.trim()}”`, description: `演示项目 · ${project.visibility === "members" ? "仅成员可见" : "组织内可见"} · /${project.slug.trim()}`, type: "success" });
     }}><Card>
-      <CardHeader>
-        <CardTitle className="text-base">新建项目</CardTitle>
-        <CardDescription>项目创建后可以随时修改这些设置。</CardDescription>
-      </CardHeader>
-      <CardPanel className="flex flex-col gap-4">
+      <header className="grid gap-(--qy-panel-gap)">
+        <h3 className="text-heading text-prose">新建项目</h3>
+        <p className="text-body text-muted-foreground">项目创建后可以随时修改这些设置。</p>
+      </header>
+      <div className="p-(--qy-panel-padding) flex flex-col gap-4">
         <Field>
           <FieldLabel>项目名称</FieldLabel>
           <Input aria-label="新项目名称" required value={project.name} onChange={(event) => setProject((current) => ({ ...current, name: event.target.value }))} />
@@ -111,7 +111,7 @@ function ProjectCard() {
           </InputGroup>
         </Field>
         <div className="flex flex-col gap-2.5">
-          <span className="font-medium text-sm" id={visibilityId}>
+          <span className="font-medium text-body" id={visibilityId}>
             可见范围
           </span>
           <RadioGroup aria-labelledby={visibilityId} className="gap-2.5" value={project.visibility} onValueChange={(visibility) => setProject((current) => ({ ...current, visibility: String(visibility) }))}>
@@ -125,15 +125,15 @@ function ProjectCard() {
             </Label>
           </RadioGroup>
         </div>
-      </CardPanel>
-      <CardFooter className="justify-end gap-2">
-        <Button onClick={() => setProject(defaultProject)} size="sm" variant="outline" type="button">
+      </div>
+      <footer className="flex items-center gap-(--qy-action-gap) p-(--qy-panel-padding) justify-end gap-2">
+        <Button onClick={() => setProject(defaultProject)} size="sm" variant="quiet" type="button">
           重置
         </Button>
         <Button type="submit" size="sm">
           创建项目
         </Button>
-      </CardFooter>
+      </footer>
     </Card></form>
   );
 }
@@ -151,16 +151,16 @@ function MembersCard({ inviteOpen, onInviteOpenChange }: { inviteOpen: boolean; 
   const [email, setEmail] = useState("");
   return (
     <Card className="overflow-hidden">
-      <CardHeader>
-        <CardTitle className="text-base">成员</CardTitle>
-        <CardDescription>{people.length} 人 · {people.filter((member) => member.status === "online").length} 人在线</CardDescription>
-        <CardAction>
-          <Button onClick={() => onInviteOpenChange(true)} size="sm" variant="outline">
+      <header className="grid gap-(--qy-panel-gap)">
+        <h3 className="text-heading text-prose">成员</h3>
+        <p className="text-body text-muted-foreground">{people.length} 人 · {people.filter((member) => member.status === "online").length} 人在线</p>
+        <div className="flex items-center gap-(--qy-action-gap)">
+          <Button onClick={() => onInviteOpenChange(true)} size="sm" variant="quiet">
             <UserPlusIcon aria-hidden="true" />
             邀请
           </Button>
-        </CardAction>
-      </CardHeader>
+        </div>
+      </header>
       <div className="border-t">
         <Table density="compact">
           <TableHeader>
@@ -183,7 +183,7 @@ function MembersCard({ inviteOpen, onInviteOpenChange }: { inviteOpen: boolean; 
                       </Avatar>
                       <div className="flex flex-col gap-1">
                         <span className="font-medium">{member.name}</span>
-                        <span className="text-muted-foreground text-xs">{member.email}</span>
+                        <span className="text-muted-foreground text-caption">{member.email}</span>
                       </div>
                     </div>
                   </TableCell>
@@ -210,7 +210,7 @@ function MembersCard({ inviteOpen, onInviteOpenChange }: { inviteOpen: boolean; 
         setEmail("");
         onInviteOpenChange(false);
         toastManager.add({ title: "演示成员已添加", description: "展示待接受状态，没有发送邀请邮件。", type: "success" });
-      }}><DialogHeader><DialogTitle>邀请成员</DialogTitle><DialogDescription>添加一条演示成员记录，观察表格与状态更新。</DialogDescription></DialogHeader><DialogPanel><Field><FieldLabel>成员邮箱</FieldLabel><Input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></Field></DialogPanel><DialogFooter><Button type="button" variant="outline" onClick={() => onInviteOpenChange(false)}>取消</Button><Button type="submit">添加成员</Button></DialogFooter></form></DialogPopup></Dialog>
+      }}><DialogHeader><DialogTitle>邀请成员</DialogTitle><DialogDescription>添加一条演示成员记录，观察表格与状态更新。</DialogDescription></DialogHeader><DialogPanel><Field><FieldLabel>成员邮箱</FieldLabel><Input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></Field></DialogPanel><DialogFooter><Button type="button" variant="quiet" onClick={() => onInviteOpenChange(false)}>取消</Button><Button type="submit">添加成员</Button></DialogFooter></form></DialogPopup></Dialog>
     </Card>
   );
 }

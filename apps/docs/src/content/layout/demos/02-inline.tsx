@@ -1,31 +1,14 @@
-import { Badge } from "@qingye/ui/components/badge";
 import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack, Text } from "@qingye/ui/components/layout";
-import { PlusIcon } from "lucide-react";
+import { Inline, Stack } from "@qingye/ui/components/layout";
+import { Text } from "@qingye/ui/components/typography";
 
-export const meta = { title: "Inline", description: "标题与操作两端对齐；标签一行放不下时自动换行。" };
-
-const tags = ["React", "TypeScript", "设计系统", "无障碍", "深色模式", "国际化"];
+export const meta = { title: "横向排列与对齐", titleEn: "Inline layout and alignment" };
 
 export default function Demo() {
   return (
-    <Stack className="w-full max-w-md" gap={3}>
-      <Inline justify="between">
-        <Text as="p" className="font-medium">
-          技术标签
-        </Text>
-        <Button size="sm" variant="outline">
-          <PlusIcon />
-          添加
-        </Button>
-      </Inline>
-      <Inline as="ul" aria-label="技术标签">
-        {tags.map((tag) => (
-          <li key={tag}>
-            <Badge variant="outline">{tag}</Badge>
-          </li>
-        ))}
-      </Inline>
+    <Stack gap="section" className="w-full">
+      <Inline gap="actions" align="center"><Button size="sm">保存</Button><Button size="lg" variant="bordered">取消</Button></Inline>
+      <Inline gap="panel" align="baseline" wrap={false}><Text step="heading" render={<span />}>青野</Text><Text render={<span />}>Qingye</Text></Inline>
     </Stack>
   );
 }

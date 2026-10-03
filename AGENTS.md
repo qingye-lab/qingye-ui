@@ -1,22 +1,43 @@
 # Working in this repository
 
-`@qingye/ui` is a React component library (Base UI + Tailwind CSS 4) adapted from coss ui (MIT), plus locally authored components, and its documentation site.
+`@qingye/ui` is a React component library (Base UI + Tailwind CSS 4) and its documentation site. Components are authored from the design basis in `design.md`; see 「重写进行中」 below for the current state.
 
 **建设纲领：** `/Volumes/SUNSANG 1/Codex/demo/qingye/docs/ui-component-system-plan.md`（v3.0 定稿）。本文件是它的库侧执行摘要；涉及方向、优先级、验收标准时以纲领为准。纲领只读，不在本仓库内。
 
 **本次改造：** `design.md` 提供设计方法，`docs/plans/2026-10-02-design-system-renovation.md` 提供已授权范围与最新用户裁决，`docs/implementation/2026-10-02-execution.md` 记录执行证据。2026-10-02 用户已明确：三张视觉提案均不采用，视觉定稿后置；先遵守新理念、规范和定义，由主 agent 下发/审核、多 GPT-6.1 sol / xhigh 子 agent 按独立边界并行执行。该裁决优先于旧纲领的线性调度及选图前置；完整范围、真实契约和验收标准仍有效。同日后续用户要求重做官网、完整复用本库组件，并明确反对说明书式 UI；当前官网视觉与跨项目接入决定见 `docs/decisions/website-as-consumer.md`，该新裁决不再把首页视觉后置。
 
-**后续裁决：** 首页参考 coss UI 的简短介绍与组件目录布局；反对说明书式 UI。全部组件按真实语义、状态、关系和情境认真设计，必要时重构，不以保留 coss 实现为目标。官网作为公共组件的第一方消费端，具体边界见 `docs/decisions/website-as-consumer.md`。
+**当下进行：全部组件按 `design.md` 从零重写，不以保留任何既存实现为目标。**
+三个独立审查者的结论与逐值处置见 `docs/decisions/2026-10-03-value-adjudication.md`：
+过去把「作者选的」写成「理念要求的」是主要缺陷，因此**每个值都必须能回答
+「哪条关系决定了它」，否则如实标为预设。**
 
 ## Layout
 
-- `packages/ui/src/components/<name>.tsx` — one component per file.
+- `packages/ui/src/components/<name>.tsx` — one component per file. **Only components rewritten under the current design basis live here**; see 「重写进行中」 below.
 - `packages/ui/tokens/*.css`, `theme.css`, `motion.css`, `utilities.css`, `styles.css` — tokens and global CSS.
-- `packages/ui/upstream/` — unmodified coss sources, the baseline for diffs. Never edit.
-- `packages/ui/coss-source.json` — upstream SHA and the list of local adaptations per coss file.
 - `packages/ui/test/*.test.tsx` — Vitest + Testing Library.
 - `apps/docs/src/content/<name>/meta.ts` and `demos/NN-<id>.tsx` — documentation per component (see `apps/docs/src/lib/types.ts`).
 - `scripts/audit.mjs` — 跨主题跨断点的浏览器扫描；CI/Release 通过 `scripts/run-browser-audit.mjs` 使用构建后的 docs preview。
+
+## 重写进行中（2026-10-03 起）
+
+全部组件正按 `design.md` 从零重写。已完成的组件才位于 `src/components/`；
+**尚未重写的组件不在本仓库**，被移到仓库外的归档，以免上游实现的既有取值
+影响新设计（审查证据：同名属性与旧实现逐字相同的比例，见
+`docs/decisions/2026-10-03-value-adjudication.md` 第四节）。
+
+重写期间的硬规则：
+
+- **不得参考上游实现来推导任何设计值。** 需要判断时只依据 `design.md`。
+  一个值若只能从「旧实现就是这么写的」得到理由，它的定位是**预设**，
+  必须在基础层文档里如此标注，不得写成「推导」。
+- **不得把上游代码复制回来。** 归档区只用于取证与法律记录，不是实现来源。
+- 2026-10-03 来源收尾取证通过，已删除上游 MIT 声明与来源清单；
+  本库 MIT 许可正文继续分发。清单外的脚本、LICENSE 附注与官网引用仍待相应 owner
+  收尾，不能把本轮冻结比对门禁当作全部历史来源已获证明；见
+  `docs/decisions/2026-10-03-provenance-closure.md`。
+- 仓库外冻结副本与归档区保留，只用于来源证据与历史记录，不作为实现来源。
+
 
 ## Rules
 
@@ -26,7 +47,7 @@
 - 消费项目接入需在自家 `AGENTS.md` 与 `design.md` 留下包内指南、当前 API 和项目主题/组合入口的持久引用，使用根指南中的可复制片段合并既有规则；本仓库不自动改写其他仓库的指导文件或权限。
 - Follow `STANDARDS.md` for every component change.
 - 网站界面避免说明书式文案：用真实内容与可操作状态表达能力，删除重复标签、显然的操作说明和设计自述；仅保留识别、决策、错误恢复所需的文字。完整方法放在指南中。
-- Treat coss as a replaceable implementation source. Reuse, adapt, or rebuild according to verified task, semantic, state, and maintenance needs under `design.md` and `STANDARDS.md`; record derived changes in `coss-source.json` and preserve truthful provenance. Evaluate accessibility primitives separately. Never edit the upstream baseline or relabel copied source as original.
+- Treat the upstream sources as a **closed reference**. They are no longer in this repository and must not be reintroduced. Rebuild each component from verified task, semantic, state and maintenance needs under `design.md` and `STANDARDS.md`. Evaluate accessibility primitives separately. Never relabel copied source as original.
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
 - Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
 

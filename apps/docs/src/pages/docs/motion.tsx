@@ -13,7 +13,7 @@ function Stage({ children, caption }: { children: ReactNode; caption?: ReactNode
   return (
     <figure className="my-5 overflow-hidden rounded-xl border">
       <div className="flex min-h-32 flex-wrap items-center justify-center gap-3 p-6 sm:p-8">{children}</div>
-      {caption ? <figcaption className="border-t bg-surface-subtle/60 px-4 py-2.5 text-muted-foreground text-xs leading-relaxed dark:bg-surface/40">{caption}</figcaption> : null}
+      {caption ? <figcaption className="border-t bg-surface-subtle/60 px-4 py-2.5 text-muted-foreground text-caption leading-relaxed dark:bg-surface/40">{caption}</figcaption> : null}
     </figure>
   );
 }
@@ -42,15 +42,15 @@ function Timeline() {
       <div className="flex flex-col gap-3">
         {rows.map((row) => (
           <div className="grid grid-cols-[2.5rem_minmax(0,1fr)_3.5rem] items-center gap-3" key={row.label}>
-            <span className="text-muted-foreground text-xs">{row.label}</span>
+            <span className="text-muted-foreground text-caption">{row.label}</span>
             <div className="h-2 rounded-full bg-foreground/6">
               <div className="h-full rounded-full bg-foreground/56" style={{ width: `${(row.ms / 200) * 100}%` }} />
             </div>
-            <span className="text-end font-mono text-muted-foreground text-xs numeric">{row.ms}ms</span>
+            <span className="text-end font-mono text-muted-foreground text-caption numeric">{row.ms}ms</span>
           </div>
         ))}
       </div>
-      <figcaption className="mt-3 text-muted-foreground text-xs">菜单与选择器浮层的进入和退出时长，按同一比例绘制。</figcaption>
+      <figcaption className="mt-3 text-muted-foreground text-caption">菜单与选择器浮层的进入和退出时长，按同一比例绘制。</figcaption>
     </figure>
   );
 }
@@ -77,7 +77,7 @@ function StaggerDemo() {
         <ul className="flex flex-col gap-1.5" data-motion="stagger" key={run}>
           {items.map((item, index) => (
             <li
-              className="flex items-center justify-between rounded-lg border px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg border px-3 py-2 text-body"
               key={item}
               style={{ "--qy-index": index } as CSSProperties}
             >
@@ -86,7 +86,7 @@ function StaggerDemo() {
             </li>
           ))}
         </ul>
-        <Button className="self-start" onClick={() => setRun((value) => value + 1)} size="sm" variant="outline">
+        <Button className="self-start" onClick={() => setRun((value) => value + 1)} size="sm" variant="quiet">
           <RotateCcwIcon aria-hidden="true" />
           重播
         </Button>
@@ -101,34 +101,33 @@ export default function MotionPage() {
   return (
     <article>
       <PageHeader
-        description="动效只用来说明状态的变化：短、缓出、随时可以被打断。全库的策略集中在 motion.css，组件不各自发明。"
+        description="动效只用于提示状态变化；关闭动画后，用户仍须能确认状态并完成操作。"
         title="动效"
       />
       <P>
-        <Code>motion.css</Code> 随 <Code>styles.css</Code> 一起引入，只补充全局或缺失的部分：按压反馈、选择器与菜单的入场、键盘即时与减少动态效果。组件自带的过渡保留上游调校，时长与缓动见{" "}
+        引入 <Code>styles.css</Code> 会同时加载 <Code>motion.css</Code>，其中包含按压反馈、键盘即时切换和减少动态效果的规则。菜单与选择器原有实现缺少的入场动效也由它补充。组件自带的过渡保留上游调校；令牌取值见{" "}
         <A href="/docs/tokens#motion">设计令牌</A>。
       </P>
 
       <H2 id="press">按压反馈</H2>
       <P>
-        带 <Code>qy-pressable</Code> 类的元素在按下时缩到 0.97，用时 100ms，松开即回。<Code>Button</Code> 默认带有它；禁用、加载中的元素不缩放。
+        使用指针且未开启“减少动态效果”时，带 <Code>qy-pressable</Code> 类的元素按下时缩放至 0.97，默认用时 100ms；松开后按同一时长复位。<Code>Button</Code> 默认带有它；禁用、加载中的元素不缩放。
       </P>
-      <Stage caption="按住按钮不放，能感到它轻微下沉；松手后立即复位。">
+      <Stage caption="按住按钮查看缩放，松手后恢复原尺寸。">
         <Button>主要操作</Button>
-        <Button variant="outline">次要操作</Button>
-        <Button loading variant="outline">
+        <Button variant="quiet">次要操作</Button>
+        <Button state={(true) ? "in-progress" : "idle"} variant="quiet">
           加载中
         </Button>
       </Stage>
 
       <H2 id="popups">浮层从触发点展开</H2>
       <P>
-        浮层以 <Code>origin-(--transform-origin)</Code> 为原点，从 <Code>scale-98</Code> 与透明开始展开，所以总是像从触发它的按钮里长出来。选择器和菜单上游没有入场动效，由{" "}
-        <Code>motion.css</Code> 补上。
+        菜单与选择器以 <Code>origin-(--transform-origin)</Code> 为缩放原点，从 <Code>0.97</Code> 倍大小和透明状态展开。
       </P>
       <Stage caption="分别打开菜单和选择器，注意它们从按钮所在的一侧展开。">
         <Menu>
-          <MenuTrigger render={<Button variant="outline" />}>
+          <MenuTrigger render={<Button variant="quiet" />}>
             更多操作
             <ChevronDownIcon aria-hidden="true" />
           </MenuTrigger>
@@ -155,14 +154,13 @@ export default function MotionPage() {
 
       <H2 id="exit">退出比进入快</H2>
       <P>
-        出现时给眼睛一点时间定位，消失时不该让人等。菜单与选择器以 140ms 进入、100ms 退出；动画进行中再次操作会从当前状态继续，而不是排队播放。
+        动画进行中再次操作，菜单与选择器从当前状态继续过渡。
       </P>
       <Timeline />
 
       <H2 id="keyboard">键盘操作即时</H2>
       <P>
-        反复按方向键时，每一步都不该等动画。<Code>MotionProvider</Code> 在 <Code>{"<html>"}</Code> 上记录最近一次输入来自键盘还是指针（
-        <Code>data-ui-input</Code>），键盘输入期间，带 <Code>data-slot</Code> 的组件跳过过渡。
+        <Code>MotionProvider</Code> 在 <Code>{"<html>"}</Code> 的 <Code>data-ui-input</Code> 属性上记录最近一次输入方式。值为 <Code>keyboard</Code> 时，带 <Code>data-slot</Code> 或 <Code>qy-pressable</Code> 的元素跳过过渡，带 <Code>data-motion</Code> 的元素停用动画。
       </P>
       <Stage
         caption={
@@ -182,13 +180,13 @@ export default function MotionPage() {
             <TabsTab value="activity">动态</TabsTab>
             <TabsTab value="settings">设置</TabsTab>
           </TabsList>
-          <TabsPanel className="px-1 pt-2 text-muted-foreground text-sm" value="overview">
+          <TabsPanel className="px-1 pt-2 text-muted-foreground text-body" value="overview">
             项目概况与关键指标。
           </TabsPanel>
-          <TabsPanel className="px-1 pt-2 text-muted-foreground text-sm" value="activity">
+          <TabsPanel className="px-1 pt-2 text-muted-foreground text-body" value="activity">
             最近的提交与评论。
           </TabsPanel>
-          <TabsPanel className="px-1 pt-2 text-muted-foreground text-sm" value="settings">
+          <TabsPanel className="px-1 pt-2 text-muted-foreground text-body" value="settings">
             成员、权限与通知。
           </TabsPanel>
         </Tabs>
@@ -196,20 +194,19 @@ export default function MotionPage() {
 
       <H2 id="reduced-motion">减少动态效果</H2>
       <P>
-        系统开启“减少动态效果”后，位移和缩放全部取消，只保留透明度与颜色的变化，状态依然清楚；骨架屏闪光、通知抖动这类装饰性动画停止，加载指示继续转动，因为它在传达“仍在进行”。
+        系统开启“减少动态效果”后，组件过渡只保留透明度、颜色与阴影变化，进场辅助改为无延迟的淡入。骨架屏闪光与通知抖动停止；加载指示仍会旋转，表示任务正在进行。
       </P>
-      <P className="text-[0.875rem] text-muted-foreground">
+      <P className="text-body text-muted-foreground">
         当前系统设置：<Strong>{reduced ? "已开启减少动态效果" : "未开启"}</Strong>。在 Chrome 开发者工具的 Rendering 面板中可以模拟这一设置。
       </P>
 
       <H2 id="helpers">进场辅助</H2>
-      <P>页面内容在导航或数据加载后出现时，可以借用三个属性，而不必自己写关键帧：</P>
       <Ul>
         <li>
           <Code>data-motion="fade-in"</Code>：原地淡入，用于行内反馈。
         </li>
         <li>
-          <Code>data-motion="rise-in"</Code>：淡入并上移 4px，用于新出现的区块。
+          <Code>data-motion="rise-in"</Code>：淡入并上移 4px，用于导航或数据加载后新出现的区块。
         </li>
         <li>
           <Code>data-motion="stagger"</Code>：子元素依次上移淡入，配合 <Code>--qy-index</Code>。
@@ -222,13 +219,13 @@ export default function MotionPage() {
 
       <H2 id="rules">编写组件时的约定</H2>
       <Ul>
-        <li>新增动效优先使用角色：press 为100ms，fast 为140ms，feedback 为180ms，base 为220ms。继承的 Drawer 450ms、Toast 250ms 等部位保留各自时长，不代表所有动效已接入同一角色；抽屉缓动用 <Code>--qy-ease-drawer</Code>。</li>
+        <li>新增动效使用时长角色，取值见 <A href="/docs/tokens#motion">设计令牌</A>。Drawer 450ms、Toast 250ms 等部位仍保留各自时长，尚未全部接入时长角色；抽屉缓动使用 <Code>--qy-ease-drawer</Code>。</li>
         <li>缓动默认 <Code>--qy-ease-out</Code>，不使用回弹；通知的成功脉冲是唯一例外。</li>
         <li>
           只动画 <Code>opacity</Code>、<Code>scale</Code>、<Code>translate</Code>、颜色与必要的 <Code>height</Code>，不动画会引起布局抖动的宽度和位置（指示条除外）。
         </li>
         <li>
-          程序触发、不该有过渡的变化，在元素上加 <Code>data-instant</Code>。
+          程序触发的变化需要立即呈现时，在带 <Code>data-slot</Code> 的元素上加 <Code>data-instant</Code>。
         </li>
         <li>键盘即时与减少动态效果由 motion.css 统一处理，组件内不要重复实现。</li>
       </Ul>

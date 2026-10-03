@@ -126,7 +126,7 @@ function Swatch({ name, scheme }: { name: string; scheme: "light" | "dark" }) {
     >
       {isText ? (
         <span
-          className="grid size-8 place-items-center rounded-md font-semibold text-[0.9375rem]"
+          className="grid size-8 place-items-center rounded-md font-semibold text-reading"
           style={{ color: token, ...(surface ? { background: surface } : {}) }}
         >
           Aa
@@ -160,7 +160,7 @@ function ColorTokens() {
           <Fragment key={group.id}>
             <H3 id={group.id}>{group.title}</H3>
             <div className="overflow-hidden rounded-xl border">
-              <div className="hidden grid-cols-[6.25rem_minmax(0,1fr)_7.5rem_7.5rem] gap-4 border-b bg-surface-subtle/60 px-4 py-2 text-muted-foreground text-xs sm:grid dark:bg-surface/40">
+              <div className="hidden grid-cols-[6.25rem_minmax(0,1fr)_7.5rem_7.5rem] gap-4 border-b bg-surface-subtle/60 px-4 py-2 text-muted-foreground text-caption sm:grid dark:bg-surface/40">
                 <span>浅色 / 深色</span>
                 <span>令牌</span>
                 <span>浅色</span>
@@ -181,8 +181,8 @@ function ColorTokens() {
                         <Swatch name={name} scheme="dark" />
                       </div>
                       <div className="flex min-w-0 flex-col gap-0.5">
-                        <code className="truncate font-mono text-[0.8125rem] text-foreground-strong">--qy-{name}</code>
-                        <span className="truncate text-muted-foreground text-xs">
+                        <code className="truncate font-mono text-heading text-foreground-strong">--qy-{name}</code>
+                        <span className="truncate text-muted-foreground text-caption">
                           {utilities.length ? (
                             <>
                               Tailwind：<span className="font-mono">{utilities.join(" / ")}</span>
@@ -192,7 +192,7 @@ function ColorTokens() {
                           )}
                         </span>
                       </div>
-                      <div className="col-start-2 flex gap-3 font-mono text-[0.75rem] text-foreground/80 numeric sm:contents">
+                      <div className="col-start-2 flex gap-3 font-mono text-caption text-foreground/80 numeric sm:contents">
                         <span className="truncate" title={light?.raw}>
                           <span className="text-foreground-subtle sm:hidden">浅 </span>
                           {formatColor(light)}
@@ -232,8 +232,8 @@ const toPx = (value: string) => {
 function TokenTable({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
   return (
     <div className="my-4 overflow-x-auto rounded-xl border">
-      <table className="w-full min-w-[30rem] text-sm">
-        <thead className="border-b bg-surface-subtle/60 text-start text-muted-foreground text-xs dark:bg-surface/40">
+      <table className="w-full min-w-[30rem] text-body">
+        <thead className="border-b bg-surface-subtle/60 text-start text-muted-foreground text-caption dark:bg-surface/40">
           <tr>
             {head.map((cell) => (
               <th className="px-4 py-2 text-start font-medium" key={cell}>
@@ -258,8 +258,8 @@ function TokenTable({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
   );
 }
 
-const mono = (text: string) => <code className="font-mono text-[0.8125rem] text-foreground-strong">{text}</code>;
-const value = (text?: string) => <span className="font-mono text-[0.75rem] text-muted-foreground numeric">{text || "…"}</span>;
+const mono = (text: string) => <code className="font-mono text-heading text-foreground-strong">{text}</code>;
+const value = (text?: string) => <span className="font-mono text-caption text-muted-foreground numeric">{text || "…"}</span>;
 
 const typeUtilities = new Map<string, string>();
 for (const [, utility, role] of themeCss.matchAll(/--text-([a-z0-9-]+):\s*var\(--qy-text-([a-z0-9-]+)-size\)/g)) {
@@ -345,7 +345,7 @@ function Shadows() {
       {shadowNames.map((name) => (
         <li className="flex flex-col gap-3" key={name}>
           <div className="h-16 rounded-xl bg-card" style={{ boxShadow: `var(--qy-${name})` }} />
-          <code className="font-mono text-[0.75rem] text-foreground-strong">--qy-{name}</code>
+          <code className="font-mono text-caption text-foreground-strong">--qy-{name}</code>
         </li>
       ))}
     </ul>
@@ -390,14 +390,14 @@ function Controls() {
             value(used ? `${desktop} · ${used.desktop}px` : undefined),
             value(used ? `${used.narrow}px` : undefined),
             size ? (
-              <Button aria-hidden="true" size={size} tabIndex={-1} variant="outline">
+              <Button aria-hidden="true" size={size === "default" ? "md" : size} tabIndex={-1} variant="quiet">
                 {size === "default" ? "默认" : size}
               </Button>
             ) : null,
           ];
         })}
       />
-      <P><Code>--qy-control-mobile-extra</Code>：{value(values["control-mobile-extra"])}。Input 内部高度减去父包装两个1px边框；InputGroup 的边框由父层拥有。</P>
+      <P>窄屏增高量 <Code>--qy-control-mobile-extra</Code> 为 {value(values["control-mobile-extra"])}。Input 内部高度比含边框的外部高度小 2px；InputGroup 使用父层边框。</P>
       <TokenTable
         head={["密度令牌", "默认值"]}
         rows={densityNames.map((name) => [mono(`--qy-${name}`), value(values[name] ? `${values[name]} · ${toPx(values[name]!)}` : undefined)])}
@@ -411,8 +411,8 @@ function FocusTokens() {
   return (
     <>
       <TokenTable head={["焦点角色", "默认值"]} rows={focusNames.map((name) => [mono(`--qy-${name}`), value(values[name])])} />
-      <P>Button 及接入的动作部位读取 button width/offset；Input/InputGroup/Select 等输入部位读取 input 角色。修改输入宽度不会改变按钮环；保留 Accordion/Slider/Resizable/Calendar day 等自有几何，不代表全部焦点都由这两组参数接管。</P>
-      <CodeBlock code={`html[data-brand="project"] {\n  --qy-focus-input-width: 4px;\n  --qy-focus-input-offset: 0px;\n}`} lang="css" />
+      <P>有可见边界的控件保持 1px border，使用 --qy-focus-boundary-inset 增加 1px 内侧描边。无边界入口使用 --qy-focus-ring-width 的 2px 贴边环；实心填充配 --qy-focus-ring-on-solid 并向内绘制，其它填充在控件上声明 --qy-focus-ring-color。信号合成色与实际比较对象至少为 3:1，全部无 offset。</P>
+      <CodeBlock code={`html[data-brand="project"] {\n  --qy-focus-ring-width: 2px;\n  --qy-focus-boundary-inset: 1px;\n  --qy-focus-ring-on-solid: var(--qy-primary-foreground);\n}`} lang="css" />
     </>
   );
 }
@@ -432,11 +432,11 @@ function MotionTokens() {
   return (
     <>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <Button onClick={() => setPlayed((value) => !value)} size="sm" variant="outline">
+        <Button onClick={() => setPlayed((value) => !value)} size="sm" variant="quiet">
           {played ? <RotateCcwIcon aria-hidden="true" /> : <PlayIcon aria-hidden="true" />}
           {played ? "回到起点" : "播放"}
         </Button>
-        <span className="text-muted-foreground text-xs">
+        <span className="text-muted-foreground text-caption">
           {reduced ? "系统开启了“减少动态效果”，示例改为即时切换。" : "所有圆点同时出发，到达的先后就是时长的差别。"}
         </span>
       </div>
@@ -458,9 +458,8 @@ function MotionTokens() {
           track({ transitionDuration: "600ms", transitionTimingFunction: `var(--qy-${name})` }),
         ])}
       />
-      <P className="text-[0.875rem] text-muted-foreground">
-        <Code>--qy-ease-spring</Code> 只用于通知的成功脉冲，其余动效一律不回弹。列表逐项进场的间隔是 <Code>--qy-stagger</Code>（{values.stagger || "…"}
-        ），最多累计 8 项。
+      <P className="text-body text-muted-foreground">
+        <Code>--qy-ease-spring</Code> 用于通知的成功脉冲，其他缓动的使用约定见 <A href="/docs/motion#rules">动效</A>。<Code>--qy-stagger</Code> 为 {values.stagger || "…"}，列表延迟最多累加 8 项；用法见 <A href="/docs/motion#helpers">进场辅助</A>。
       </P>
     </>
   );
@@ -470,36 +469,30 @@ export default function TokensPage() {
   return (
     <article>
       <PageHeader
-        description="名称与工具类映射来自当前库 CSS，取值在加载时读取。角色的具体消费范围见各节；列出变量不等于全部部位均已接入。"
+        description="名称和工具类对应当前库 CSS，取值在页面加载时读取。只有使用该变量的组件会随覆盖值改变。"
         title="设计令牌"
       />
-      <P>
-        令牌分为原语、语义与组件三层，见 <A href="/docs/theming#layers">主题</A>。组件只读取语义与组件两层；覆盖它们就能定制整个库。
-      </P>
 
       <H2 id="colors">颜色</H2>
-      <P>
-        每个语义颜色都同时给出浅色与深色下的取值。中性色大多是半透明的黑或白，所以放在卡片、侧栏或浮层上都能保持相同的观感；色块按各自主题的背景展示。
-      </P>
-      <P>危险 mark/边框、页面可读文字、实心动作底及其上文字分别是 <Code>danger</Code>、<Code>danger-foreground</Code>、<Code>danger-fill</Code>、<Code>danger-on-fill</Code>；on-fill 色样在 fill 背景上呈现。</P>
+      <P>危险状态的标记和边框用 <Code>danger</Code>，页面文字用 <Code>danger-foreground</Code>；实心动作的底色与文字分别用 <Code>danger-fill</Code> 和 <Code>danger-on-fill</Code>。<Code>danger-on-fill</Code> 色样显示在 <Code>danger-fill</Code> 背景上。</P>
       <ColorTokens />
-      <P>库内 <A href={repoFile("packages/ui/test/color-check.ts")}>AST 颜色检查</A> 覆盖 className/style、cn/cva 和静态常量，属性 selector/URL fragment 不当作颜色误报。动态 props/import 等无法求值时记为 unresolved，不等于主题或对比度通过；这不是已发布的消费端 lint 插件。</P>
+      <P>库内的 <A href={repoFile("packages/ui/test/color-check.ts")}>AST 颜色检查</A> 会读取 className/style、cn/cva 和静态常量，并区分颜色、属性选择器与 URL 片段。动态 props 或 import 无法求值时记为 unresolved，仍需检查实际配色与对比度；此检查器尚未发布为消费项目的 lint 插件。</P>
 
       <H2 id="typography">字号</H2>
       <P>
-        字号与行高成对出现。按钮用 <Code>text-button</Code>，输入用 <Code>text-field-input</Code>（<Code>text-input</Code> 是颜色），窄屏分别读取 mobile 角色；表单标签用 field-label，一般标签用 label。首批角色消费部位为 Button、Input/InputGroup、Textarea、NativeSelect、NumberField、Select 触发器、Label/FieldLabel/FieldTitle、CardDescription。拉丁字距按角色，CJK 保持自然字距；没有将所有内容排版都迁移。
+        按钮用 <Code>text-button</Code>，输入用 <Code>text-field-input</Code>；<Code>text-input</Code> 是颜色类。窄屏使用对应的 mobile 字号角色。表单标签用 <Code>text-field-label</Code>，一般标签用 <Code>text-label</Code>。这些角色已用于 Button、Input/InputGroup、Textarea、NativeSelect、NumberField、Select 触发器、Label/FieldLabel/FieldTitle 和 CardDescription。拉丁文字按角色设置字距，CJK 使用自然字距；其余内容排版未全部接入。
       </P>
       <TypeScale />
 
       <H2 id="spacing">间距</H2>
       <P>
-        布局间距以 <Code>--qy-space-1</Code> 默认4px为基数，命名步从它派生。组件的 gap/padding/正 margin 等显式消费库间距；不改 Tailwind 全局 <Code>--spacing</Code>。图标、控件高度、thumb/marker 及固定字形预留保持自己的几何，负 margin 光学补偿也不会一起缩放。修改入口应设在 html；局部覆盖基础步不保证继承别名重新计算。
+        在 html 上修改 <Code>--qy-space-1</Code>（默认 4px），其余命名间距随之变化。组件的 gap、padding 与正 margin 使用这些变量，Tailwind 的 <Code>--spacing</Code> 保持不变。图标、控件高度、thumb/marker、字形预留和负 margin 补偿各用自己的尺寸，不随基础间距缩放。局部容器覆盖 <Code>--qy-space-1</Code> 时，继承的派生变量不一定重新计算。
       </P>
       <Spacing />
 
       <H2 id="radius">圆角</H2>
       <P>
-        根圆角默认8px，只联动 md（根减0.5px，最小0）/lg。xs/sm/xl/2xl/full 独立；控件角色 <Code>--qy-radius-control</Code> 默认接 lg，Card/Dialog/AlertDialog 面板角色 <Code>--qy-radius-panel</Code> 默认接2xl（12px）。
+        xs/sm 控件圆角为 6px/7px，md 直接取 8px；lg 读取默认 8px 的 <Code>--qy-radius</Code>，并供 <Code>--qy-radius-control</Code> 使用。五档独立控件满足圆角不超过短边的 25%。标记用 marker（4px），菜单行与标签用 item（6px）。<Code>--qy-radius-panel</Code> 默认 12px；嵌套内角按实际内缩换算，1px 内缩的高光才减 1px。
       </P>
       <Radii />
 
@@ -507,19 +500,15 @@ export default function TokensPage() {
       <FocusTokens />
 
       <H2 id="shadows">阴影</H2>
-      <P>层次主要来自半透明边框，阴影只起辅助作用。下方按当前主题显示；深色下阴影更重，以便在暗背景上仍可分辨。</P>
       <Shadows />
 
       <H2 id="controls">控件高度与密度</H2>
       <P>
-        Button、Input、SelectTrigger/SelectButton 的控件令牌表示含边框的桌面外部高度；窄屏按 <Code>--qy-control-mobile-extra</Code> 加4px。Input 内层扣除两个1px边框，InputGroup 保留父层边框关系。粗指针下 Input/InputGroup 外部至少44px；Button/Select 保持角色视觉高度，以伪元素扩到 <Code>--qy-touch-target</Code>。窄屏与粗指针是独立条件。输入与默认按钮字号窄屏16px、桌面14px；避免 iOS 输入缩放依靠字号，不是加高4px。
+        Button、Input 与 SelectTrigger/SelectButton 的控件令牌表示含边框的桌面高度。窄屏增加 <Code>--qy-control-mobile-extra</Code>，默认 4px。粗指针下，Input/InputGroup 的外部高度至少为 --qy-touch-target（默认 44px）；Button/Select 的可见高度不变，命中区通过伪元素扩至 <Code>--qy-touch-target</Code>。窄屏按视口宽度判断，粗指针按输入设备判断，可同时生效。输入与默认按钮的字号在窄屏为 16px、桌面为 14px；防止 iOS 输入缩放要调整字号，增加控件高度不起作用。
       </P>
       <Controls />
 
       <H2 id="motion">动效</H2>
-      <P>
-        时长短、缓动统一、随时可被打断。使用规则见 <A href="/docs/motion">动效</A>。
-      </P>
       <MotionTokens />
     </article>
   );

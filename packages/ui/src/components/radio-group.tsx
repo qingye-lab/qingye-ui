@@ -1,45 +1,40 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/radio-group.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
 "use client";
 
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
-import type React from "react";
+import * as React from "react";
 import { cn } from "../utils";
 
-export function RadioGroup({
-  className,
-  ...props
-}: RadioGroupPrimitive.Props): React.ReactElement {
-  return (
-    <RadioGroupPrimitive
-      className={cn("flex flex-col gap-(--qy-space-3)", className)}
-      data-slot="radio-group"
-      {...props}
-    />
-  );
+export type RadioGroupProps<Value = unknown> = RadioGroupPrimitive.Props<Value>;
+export type RadioSize = "xs" | "sm" | "md" | "lg" | "xl";
+export type RadioProps<Value = unknown> = RadioPrimitive.Root.Props<Value> & {
+  size?: RadioSize;
+};
+
+/** 少量同时可见的互斥候选；不给初值即保持未选择。 */
+export function RadioGroup<Value>({ className, ...props }: RadioGroupProps<Value>) {
+  return <RadioGroupPrimitive
+    data-slot="radio-group" {...props}
+    className={(state) => cn("flex min-w-0 flex-col gap-(--qy-field-gap)", typeof className === "function" ? className(state) : className)}
+  />;
 }
 
-export function Radio({
-  className,
-  ...props
-}: RadioPrimitive.Root.Props): React.ReactElement {
-  return (
-    <RadioPrimitive.Root
-      className={cn(
-        "touch-target relative inline-flex size-4.5 shrink-0 items-center justify-center rounded-full border border-input bg-background not-dark:bg-clip-padding shadow-xs/5 outline-none transition-shadow before:pointer-events-none before:absolute before:inset-0 before:rounded-full not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_1px_--theme(--color-black/4%)] focus-visible:ring-[length:var(--qy-focus-button-width)] focus-visible:ring-ring focus-visible:ring-offset-[length:var(--qy-focus-button-offset)] focus-visible:ring-offset-background aria-invalid:border-destructive/36 focus-visible:aria-invalid:border-destructive/64 focus-visible:aria-invalid:ring-destructive/48 data-disabled:cursor-not-allowed data-disabled:opacity-64 sm:size-4 dark:not-data-checked:bg-input/32 dark:aria-invalid:ring-destructive/24 dark:not-data-disabled:not-data-checked:not-aria-invalid:before:shadow-[0_-1px_--theme(--color-white/6%)] [[data-disabled],[data-checked],[aria-invalid]]:shadow-none",
-        className,
-      )}
-      data-slot="radio"
-      {...props}
-    >
-      <RadioPrimitive.Indicator
-        keepMounted
-        className="absolute -inset-px flex size-4.5 items-center justify-center rounded-full transition-[opacity,scale,background-color] duration-(--qy-duration-fast) ease-out before:size-2 before:rounded-full before:bg-primary-foreground data-unchecked:scale-90 data-unchecked:opacity-0 data-checked:bg-primary sm:size-4 sm:before:size-1.5"
-        data-slot="radio-indicator"
-      />
-    </RadioPrimitive.Root>
-  );
+/** 圆形是单选身份；外圈始终有边框，焦点只改变这条边框的颜色。 */
+export function Radio<Value>({ size = "md", className, style, children, render = <button type="button" />, nativeButton = true, ...props }: RadioProps<Value>) {
+  const variables = {
+    "--qy-radio-edge": `var(--qy-text-control-${size}-leading)`,
+    "--qy-radio-edge-narrow": `calc(var(--qy-text-control-${size}-leading) + var(--qy-control-${size}-narrow) - var(--qy-control-${size}))`,
+  } as React.CSSProperties;
+  return <RadioPrimitive.Root
+    data-slot="radio-group-item" data-size={size} {...props} render={render} nativeButton={nativeButton}
+    className={(state) => cn(
+      "touch-target inline-flex shrink-0 items-center justify-center align-middle size-(--qy-radio-edge-narrow) sm:size-(--qy-radio-edge) rounded-full border border-input bg-card text-primary outline-none dark:bg-surface-inset transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
+      state.disabled && "cursor-not-allowed opacity-64",
+      state.readOnly && "border-dashed",
+      typeof className === "function" ? className(state) : className,
+    )}
+    style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
+  >{children ?? <RadioPrimitive.Indicator data-slot="radio-group-indicator" className="pointer-events-none size-1/2 rounded-full bg-primary" />}</RadioPrimitive.Root>;
 }
 
-export { RadioGroupPrimitive, RadioPrimitive, Radio as RadioGroupItem };
+export { RadioGroupPrimitive, RadioPrimitive };

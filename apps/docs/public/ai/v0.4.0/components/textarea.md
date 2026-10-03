@@ -3,29 +3,31 @@
 Package: @qingye/ui@0.4.0
 Import: @qingye/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: 34c663ac7d40f6a36ea8a7e002217464a9235e67e58942a7316ebbbe49e1a9c0
+Source SHA-256: 0c4f16373d4eee7859a9bd9c5c58e7d9b8e143c05e023bb1d68eaec2f96093d4
 
-多行文本输入，高度随内容增长。用于备注、描述、反馈等较长的文字。
+编辑备注、消息等多行文本。
 
 ## Use and ownership
-- 编辑备注、正文或反馈，工作空间随内容增长。
-- Avoid: 不要用固定矮框隐藏长草稿；字符上限不能靠截断用户输入来表达。
-- Library: 多行编辑、字段关联与最小输入空间。
-- Application: 草稿、字数规则、自动保存及恢复策略。
+- 多行纯文本、备注、消息
+- Avoid: 单行值用 Input
+- Avoid: 富文本编辑需编辑器
+- Library: 焦点、原生编辑、非受控值
+- Application: 受控值、invalid、保存与错误事实
 
 ## Composition
-- Field 提供名称和原位错误；底部工具栏用 InputGroupTextarea 与 block-end addon。
+- Field + FieldLabel + Textarea + FieldDescription / FieldError
 
 ## Responsive behavior
-- 限制高度时让内部滚动，保留完整文本；原生 rows 作为不支持自动高度时的起点。
+- 同名文字档及 -narrow 尺寸已接线；本批只验桌面
 
 ## Customization
-- size 决定起始空间；外框 className 与原生 textarea 属性分别调整。
+- 已有控制档 token；className/style 属于实际 textarea
 
 ## Current exports
-- FieldPrimitive: reexport; owner textarea; UNVERIFIED
 - Textarea: function; owner textarea; PASS; props: TextareaProps
+- TextareaPrimitive: reexport; owner textarea; UNVERIFIED
 - TextareaProps: type; owner textarea; PASS
+- TextareaSize: type; owner textarea; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -36,127 +38,92 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Textarea
-基于 Base UI Field.Control。外层 <span data-slot="textarea-control"> 承载边框与焦点环，className 作用于外层；其余属性透传给 <textarea>。
-- size: "sm" | "default" | "lg"; default "default". 最小高度与内边距。
-- rows: number. 初始行数；内容增长时自动加高（field-sizing: content）。
-- unstyled: boolean; default false. 去掉外层样式，供 InputGroup 组合使用。
+可与 Field 组合的原生 textarea。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 同档控件几何、文字及有边框内距。
+- rows: number; default 3. 最小起始行数；内容可自动增高，仍可手工调整高度。
+- value / defaultValue: string. 受控值或非受控初值。
+- onValueChange: (value, eventDetails) => void. 原语的值变化回调，可调用 eventDetails.cancel()。
+- aria-invalid: boolean | 'true' | 'false'. 调用方声明的错误事实；也可由 Field invalid 传入。
+- disabled / readOnly: boolean; default false. 禁用不参与 Tab/提交；只读仍可聚焦和提交，显示已有 locale 的只读文案。
+- maxLength: number. 浏览器执行的字符长度上限，不由计数文案实施限制。
+- render / ref / className / style: Base UI render / textarea ref / state-aware styling. 真实 textarea 的组合与样式入口；render 必须保留 textarea 语义、属性及事件。
+
+### TextareaPrimitive
+Base UI Field 命名空间；Textarea 使用其 Control 的 textarea render 出口。
 
 ## Keyboard
-- Tab: 移入、移出焦点。
+- Tab / Shift+Tab: 按文档顺序移动焦点。
+- Enter: 插入换行，不提交表单。
 
 ## Source examples
-### 默认
-Source: apps/docs/src/content/textarea/demos/01-default.tsx
+### 多行文本
+Source: apps/docs/src/content/textarea/demos/01-value.tsx
 ```tsx
-import { Textarea } from "@qingye/ui/components/textarea";
-
-export const meta = { title: "默认", description: "高度随内容自动增长。" };
-
-export default function Demo() {
-  return <Textarea aria-label="备注" className="max-w-sm" placeholder="补充说明，例如送货前请电话联系" />;
-}
-```
-
-### 尺寸
-Source: apps/docs/src/content/textarea/demos/02-sizes.tsx
-```tsx
-import { Textarea } from "@qingye/ui/components/textarea";
-
-export const meta = { title: "尺寸" };
-
-export default function Demo() {
-  return (
-    <div className="flex w-full max-w-sm flex-col gap-3">
-      <Textarea aria-label="小" placeholder="小 sm" size="sm" />
-      <Textarea aria-label="默认" placeholder="默认 default" />
-      <Textarea aria-label="大" placeholder="大 lg" size="lg" />
-    </div>
-  );
-}
-```
-
-### 配合标签与字数
-Source: apps/docs/src/content/textarea/demos/03-field.tsx
-```tsx
+import { useState } from "react";
 import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
 import { Textarea } from "@qingye/ui/components/textarea";
-import { useState } from "react";
 
-export const meta = { title: "配合标签与字数", description: "放在 Field 中，并用 maxLength 提示剩余字数。" };
+export const meta = { title: "多行文本", titleEn: "Multiline text" };
 
 export default function Demo() {
-  const max = 200;
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState("第一行文字。\n第二行文字。");
   return (
-    <Field className="w-full max-w-sm">
-      <FieldLabel>问题描述</FieldLabel>
-      <Textarea
-        maxLength={max}
-        onChange={(event) => setValue(event.target.value)}
-        placeholder="请描述故障现象、出现时间和影响范围"
-        value={value}
-      />
-      <FieldDescription aria-live="polite" className="numeric self-end">
-        {value.length} / {max}
-      </FieldDescription>
+    <Field className="w-full max-w-lg">
+      <FieldLabel>备注</FieldLabel>
+      <Textarea name="note" value={value} onValueChange={setValue} maxLength={160} />
+      <FieldDescription>{value.length} / 160</FieldDescription>
     </Field>
   );
 }
 ```
 
 ### 状态
-Source: apps/docs/src/content/textarea/demos/04-states.tsx
+Source: apps/docs/src/content/textarea/demos/02-states.tsx
 ```tsx
 import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
 import { Textarea } from "@qingye/ui/components/textarea";
 
-export const meta = { title: "状态", description: "无效、只读与禁用。" };
+export const meta = { title: "状态", titleEn: "States" };
 
 export default function Demo() {
   return (
-    <div className="grid w-full max-w-sm gap-5">
+    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
       <Field invalid>
-        <FieldLabel>退款原因</FieldLabel>
-        <Textarea defaultValue="不想要了" />
-        <FieldError>请至少填写 10 个字，便于客服核实。</FieldError>
+        <FieldLabel>无效</FieldLabel>
+        <Textarea defaultValue="待检查的文字。" />
+        <FieldError>请检查内容。</FieldError>
       </Field>
       <Field>
-        <FieldLabel>审核意见</FieldLabel>
-        <Textarea defaultValue="资料齐全，同意开通企业账户。—— 王敏，9 月 28 日" readOnly />
+        <FieldLabel>只读</FieldLabel>
+        <Textarea readOnly defaultValue={"第一行文字。\n第二行文字。"} />
       </Field>
-      <Field disabled>
-        <FieldLabel>内部备注</FieldLabel>
-        <Textarea placeholder="仅管理员可编辑" />
+      <Field>
+        <FieldLabel>禁用</FieldLabel>
+        <Textarea disabled defaultValue="暂不可编辑。" />
       </Field>
     </div>
   );
 }
 ```
 
-### 组合：评论框
-Source: apps/docs/src/content/textarea/demos/05-with-actions.tsx
+### 尺寸
+Source: apps/docs/src/content/textarea/demos/03-sizes.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
 import { Textarea } from "@qingye/ui/components/textarea";
 
-export const meta = { title: "组合：评论框", description: "多行输入下方放操作按钮，主按钮靠末端。" };
+export const meta = { title: "尺寸", titleEn: "Sizes" };
 
 export default function Demo() {
   return (
-    <Form className="flex w-full max-w-sm flex-col gap-3" onSubmit={(event) => event.preventDefault()}>
-      <Field name="comment">
-        <FieldLabel>添加评论</FieldLabel>
-        <Textarea placeholder="@张伟 这台设备上周也报过同样的错误" required />
-      </Field>
-      <div className="flex justify-end gap-2">
-        <Button type="reset" variant="ghost">
-          清空
-        </Button>
-        <Button type="submit">发表</Button>
-      </div>
-    </Form>
+    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
+      {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
+        <Field key={size}>
+          <FieldLabel>{size}</FieldLabel>
+          <Textarea size={size} defaultValue={"第一行文字。\n第二行文字。"} />
+        </Field>
+      ))}
+    </div>
   );
 }
 ```

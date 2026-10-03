@@ -1,26 +1,26 @@
 import { Button } from "@qingye/ui/components/button";
-import { Field } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { Popover, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 import { Textarea } from "@qingye/ui/components/textarea";
+import { useState } from "react";
 
-export const meta = { title: "基础用法", description: "点击打开，承载一个简短的表单。" };
+export const meta = { title: "多行输入", titleEn: "Multiline input" };
 
 export default function Demo() {
+  const [draft, setDraft] = useState("");
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="outline" />}>意见反馈</PopoverTrigger>
+      <PopoverTrigger render={<Button variant="quiet" />}>编辑备注</PopoverTrigger>
       <PopoverPopup className="w-80">
-        <div className="mb-4 grid gap-1.5">
-          <PopoverTitle className="text-base">意见反馈</PopoverTitle>
-          <PopoverDescription>告诉我们哪里用得不顺手，产品团队每周都会阅读。</PopoverDescription>
-        </div>
-        <Form className="grid gap-3" onSubmit={(event) => event.preventDefault()}>
+        <Stack gap="panel">
+          <PopoverTitle>编辑备注</PopoverTitle>
           <Field>
-            <Textarea aria-label="反馈内容" placeholder="例如：批量导出时希望能选择字段" />
+            <FieldLabel>备注</FieldLabel>
+            <Textarea onChange={(event) => setDraft(event.target.value)} value={draft} />
           </Field>
-          <Button type="submit">提交反馈</Button>
-        </Form>
+          <PopoverClose render={<Button variant="quiet" />}>关闭</PopoverClose>
+        </Stack>
       </PopoverPopup>
     </Popover>
   );

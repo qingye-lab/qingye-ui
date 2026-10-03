@@ -1,11 +1,8 @@
-import { Button } from "@qingye/ui/components/button";
-import { Empty, EmptyDescription, EmptyHeader, EmptyTitle } from "@qingye/ui/components/empty";
-import { SearchInput } from "@qingye/ui/components/search-input";
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/components/locale-link";
 import { H2, PageHeader } from "@/components/prose";
-import { componentPath, componentsByCategory, splitTitle } from "@/lib/nav";
-import { components, type ComponentEntry } from "@/lib/registry";
+import { componentLabel, componentPath, componentsByCategory } from "@/lib/nav";
+import { useDocsLocale } from "@/lib/docs-locale";
+import { navLabel } from "@/lib/nav";
 
 const CATEGORY_IDS: Record<string, string> = {
   通用: "general",
@@ -21,76 +18,33 @@ const CATEGORY_IDS: Record<string, string> = {
   其他: "other",
 };
 
-function matches(entry: ComponentEntry, query: string) {
-  const q = query.trim().toLowerCase();
-  if (!q) return true;
-  const haystack = [entry.title, entry.slug, entry.description, entry.category, ...(entry.keywords ?? []), ...entry.exports]
-    .join(" ")
-    .toLowerCase();
-  return q.split(/\s+/).every((term) => haystack.includes(term));
-}
-
 export default function ComponentsIndexPage() {
-  const [query, setQuery] = useState("");
-  const groups = useMemo(
-    () =>
-      componentsByCategory()
-        .map((group) => ({ ...group, items: group.items.filter((entry) => matches(entry, query)) }))
-        .filter((group) => group.items.length),
-    [query],
-  );
-  const shown = groups.reduce((sum, group) => sum + group.items.length, 0);
-  const categories = componentsByCategory().length;
+  const locale = useDocsLocale();
+  const groups = componentsByCategory(locale);
 
   return (
     <article>
-      <PageHeader
-        description={`${components.length} 个组件，按用途分为 ${categories} 类。每个组件页都有可交互的示例、导入方式、API 与键盘说明。`}
-        title="组件"
-      />
-      <div className="sticky top-(--docs-header-height) z-10 -mx-1 mb-2 bg-background px-1 pt-1 pb-3">
-        <div className="flex items-center gap-3">
-          <div className="min-w-0 flex-1 sm:max-w-sm">
-            <SearchInput aria-label="筛选组件" onValueChange={setQuery} placeholder="筛选：名称、用途或关键词" value={query} />
-          </div>
-          <span aria-live="polite" className="shrink-0 text-muted-foreground text-xs numeric">
-            {query.trim() ? `${shown} 个结果` : `共 ${components.length} 个`}
-          </span>
-        </div>
-      </div>
-
-      {groups.length === 0 ? (
-        <Empty className="rounded-xl border border-dashed py-12 md:py-14">
-          <EmptyHeader>
-            <EmptyTitle className="text-base">没有匹配“{query.trim()}”的组件</EmptyTitle>
-            <EmptyDescription>换个说法试试，例如“下拉”“date”“表格”，或者清除筛选查看全部。</EmptyDescription>
-          </EmptyHeader>
-          <Button onClick={() => setQuery("")} size="sm" variant="outline">
-            清除筛选
-          </Button>
-        </Empty>
-      ) : null}
-
+      <PageHeader title="组件" />
       {groups.map((group) => (
         <section aria-labelledby={CATEGORY_IDS[group.category] ?? group.category} className="mt-10 first-of-type:mt-6" key={group.category}>
-          <H2 className="mt-0 mb-3 text-[1.0625rem]" id={CATEGORY_IDS[group.category] ?? group.category}>
-            {group.category}
-            <span className="ms-2 font-normal text-muted-foreground text-[0.8125rem] numeric">{group.items.length}</span>
+          <H2 className="mt-0 mb-3" id={CATEGORY_IDS[group.category] ?? group.category}>
+            {navLabel(group.category, locale)}
+            <span className="ms-2 font-normal text-muted-foreground text-heading numeric">{group.items.length}</span>
           </H2>
           <ul className="grid gap-2 sm:grid-cols-2">
             {group.items.map((entry) => {
-              const { zh, en } = splitTitle(entry.title);
+              const { title, hint } = componentLabel(entry, locale);
               return (
                 <li key={entry.slug}>
                   <Link
-                    className="focus-ring flex h-full flex-col gap-1 rounded-xl border px-4 py-3 transition-colors hover:bg-accent/60"
-                    to={componentPath(entry.slug)}
+                    className="focus-ring flex h-full min-w-0 flex-col gap-(--qy-space-1) rounded-md px-(--qy-space-3) py-(--qy-space-3) transition-colors hover:bg-accent/60"
+                    to={componentPath(entry.slug, locale)}
                   >
-                    <span className="flex items-baseline gap-2">
-                      <span className="font-medium text-[0.9375rem] text-foreground-strong">{zh}</span>
-                      {en ? <span className="truncate text-muted-foreground text-xs">{en}</span> : null}
+                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-(--qy-space-2) gap-y-(--qy-space-1) [overflow-wrap:anywhere]">
+                      <span className="min-w-0 font-medium text-reading text-foreground-strong">{title}</span>
+                      {hint ? <span className="min-w-0 text-muted-foreground text-caption">{hint}</span> : null}
                     </span>
-                    <span className="line-clamp-2 text-pretty text-[0.8125rem] text-muted-foreground leading-relaxed">{entry.description}</span>
+                    <span className="text-pretty text-heading text-muted-foreground leading-relaxed [overflow-wrap:anywhere]">{entry.description}</span>
                   </Link>
                 </li>
               );

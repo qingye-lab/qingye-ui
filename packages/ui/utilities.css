@@ -4,11 +4,21 @@
 
 /*
  * Expands the hit area to the touch minimum on coarse pointers without
- * changing the rendered size. The host must be positioned and must not clip
- * overflow; the pseudo-element is centred so the target grows evenly.
+ * changing the rendered size; the pseudo-element is centred so the target
+ * grows evenly.
+ *
+ * The utility owns its own positioning context. An absolutely positioned
+ * pseudo-element resolves against the nearest positioned ancestor, so a static
+ * host would place the target against the viewport instead of the control —
+ * `max(100%, …)` then reads the viewport width and the hit area swallows the
+ * whole screen. Requiring callers to remember `relative` is an unenforced
+ * precondition across every consumer; establishing it here removes that class
+ * of defect. A host that needs different positioning states it explicitly and
+ * wins by cascade order. The host must not clip overflow.
  */
 @utility touch-target {
   @media (pointer: coarse) {
+    position: relative;
     &::after {
       content: "";
       position: absolute;
@@ -23,6 +33,12 @@
 
 /* Tabular figures for numeric readouts, tables and counters. */
 @utility numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Foundation §8: a metric is a numerical readout, so its step owns numeric. */
+@utility text-metric {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
 }

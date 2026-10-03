@@ -1,87 +1,26 @@
 import type { ComponentMeta } from "@/lib/types";
 
 export default {
-  title: "布局 Layout",
-  description:
-    "四个轻量的布局原语：纵向排列的 Stack、横向排列的 Inline、自动换行的 Grid，以及走字号阶梯的 Text。间距取自设计令牌，读 JSX 时就能看出意图；它们覆盖不到的情况，直接写 Tailwind 即可。",
-  category: "布局",
-  source: "local",
-  exports: ["Stack", "Inline", "Grid", "Text"],
-  keywords: ["layout", "布局", "stack", "inline", "grid", "text", "间距", "栅格"],
+  title: "布局 Layout", titleEn: "Layout", category: "布局", layer: "foundation", source: "local",
+  description: "用纵向堆叠与横向排列组织内容，间隔按字段、动作、面板或分节关系选择。",
+  descriptionEn: "Arrange content vertically or side by side using field, action, panel and section spacing roles.",
+  exports: ["Stack", "Inline"], keywords: ["关系间隔", "布局", "stack", "inline", "spacing"],
+  decisions: "Stack 纵向排列，Inline 横向排列并默认换行。gap 选择字段、动作或分节关系；语义由 render 与内容提供。",
+  decisionsEn: "Stack flows vertically; Inline flows horizontally and wraps by default. Choose field, action or section spacing with gap; render and content supply semantics.",
   api: [
-    {
-      name: "Stack",
-      description: "子元素纵向排列，间距均匀。",
-      props: [
-        { name: "gap", type: "0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16", default: "4", description: "间距档位，对应 --qy-space-*（4 = 1rem）。" },
-        { name: "align", type: '"stretch" | "start" | "center" | "end"', default: '"stretch"', description: "交叉轴对齐。" },
-        { name: "as", type: '"div" | "section" | "article" | "form" | "fieldset" | "ul" | "ol" | …', default: '"div"', description: "渲染的元素，属性类型随之变化。" },
-      ],
-    },
-    {
-      name: "Inline",
-      description: "子元素横向排列、垂直居中，空间不足时换行。",
-      props: [
-        { name: "gap", type: "同 Stack", default: "2", description: "间距档位。" },
-        { name: "align", type: '"center" | "start" | "end" | "baseline" | "stretch"', default: '"center"', description: "交叉轴对齐；混排不同字号时用 baseline。" },
-        { name: "justify", type: '"start" | "center" | "end" | "between"', default: '"start"', description: "主轴分布；标题与操作两端对齐用 between。" },
-        { name: "wrap", type: "boolean", default: "true", description: "是否允许换行。" },
-        { name: "as", type: '"div" | "header" | "footer" | "nav" | "ul" | …', default: '"div"', description: "渲染的元素。" },
-      ],
-    },
-    {
-      name: "Grid",
-      description: "等宽单元格，窄屏自动减少列数。",
-      props: [
-        { name: "columns", type: "1 | 2 | 3 | 4", default: "1", description: "宽屏列数；手机一列，640px 起两列，1024px 起达到设定值。按视口计算。" },
-        { name: "minItemWidth", type: "string", description: "每格最小宽度（如 \"14rem\"），按容器宽度放下尽可能多的列，优先于 columns。" },
-        { name: "gap", type: "同 Stack", default: "4", description: "间距档位。" },
-        { name: "as", type: '"div" | "section" | "ul" | "ol"', default: '"div"', description: "渲染的元素。" },
-      ],
-    },
-    {
-      name: "Text",
-      description: "走字号阶梯与语义色的文字。",
-      props: [
-        { name: "size", type: '"body" | "label" | "caption"', default: '"body"', description: "14px 正文、13px 标签、12px 说明。" },
-        { name: "tone", type: '"default" | "muted" | "success" | "warning" | "danger"', description: "语义色；不传时继承父级颜色。" },
-        { name: "as", type: '"span" | "p" | "div" | "small" | "strong" | "em" | "time"', default: '"span"', description: "渲染的元素。" },
-      ],
-    },
+    { name: "Stack", description: "按内容顺序纵向排列。", descriptionEn: "Vertical content flow.", props: [
+      { name: "gap", type: '"field" | "fields" | "actions" | "panel" | "section"', default: '"panel"', description: "分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。", descriptionEn: "Reads the corresponding relationship token." },
+      { name: "align", type: '"start" | "center" | "end" | "stretch" | "baseline"', default: '"stretch"', description: "横轴对齐。", descriptionEn: "Cross-axis alignment." },
+      { name: "render / ref / 原生属性", type: "useRender.ComponentProps<\"div\">", description: "替换元素，透传事件、语言、方向、密度与原生属性。", descriptionEn: "Replace the element and forward native props, events and environment attributes." },
+    ] },
+    { name: "Inline", description: "相邻动作或内容，可换行。", descriptionEn: "Adjacent actions or content with wrapping.", props: [
+      { name: "gap", type: "LayoutGap", default: '"actions"', description: "与 Stack 相同的关系角色。", descriptionEn: "The same relationship roles as Stack." },
+      { name: "align", type: "StackProps[\"align\"]", default: '"center"', description: "横排的垂直对齐。", descriptionEn: "Vertical alignment in a row." },
+      { name: "wrap", type: "boolean", default: "true", description: "保留全部内容并允许折行。false 需由消费方验证容量。", descriptionEn: "Retains all content and permits wrapping. Consumers must verify capacity when false." },
+      { name: "render / ref / 原生属性", type: "useRender.ComponentProps<\"div\">", description: "默认 div；没有自动 group/toolbar 语义。", descriptionEn: "Defaults to div with no automatic group or toolbar role." },
+    ] },
   ],
-  notes: [
-    "什么时候用：页面与卡片内部的常规排列——表单字段一列、标题配操作、卡片栅格。意图一目了然，间距自动对齐令牌。",
-    "什么时候直接写 Tailwind：需要响应式切换方向、复杂的跨列或定位、一次性的精细调整。原语与 Tailwind 可以混用，className 总是最后合并。",
-    "Grid 放在宽度不确定的容器里（侧栏、弹窗）时用 minItemWidth，它跟随容器而不是视口。",
-    "标题、长文排版与正文链接见排版类组件（Heading、Prose、TextLink）。",
-  ],
-  design: {
-    "methods": [
-      "布白有用",
-      "随境取度"
-    ],
-    "whenToUse": [
-      "以 Stack/Inline/Grid 组织真实信息关系，Text 表达文字角色。"
-    ],
-    "avoid": [
-      "所有段落用相同 gap；Grid 重排丢失当前焦点；视觉标签替代 heading/label 的语义。"
-    ],
-    "composition": [
-      "as 选择正确 HTML 结构，gap 表达关系；Inline 换行，Grid minItemWidth 按宿主容量流动。"
-    ],
-    "stateOwner": {
-      "library": [
-        "布局、角色文字、属性透传与响应式列数。"
-      ],
-      "application": [
-        "任务分组、DOM 阅读顺序、语义元素和工作保留。"
-      ]
-    },
-    "responsive": [
-      "minItemWidth 跟随容器而 columns 跟随视口；重要二维比较仍用 Table。"
-    ],
-    "customization": [
-      "gap 使用既有空间档位，Text tone 只改强调，不能改变状态事实。"
-    ]
-  },
+  notes: ["布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。", "角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。", "方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。"],
+  notesEn: ["Layout adds no border, surface, padding or business state; use Card for independent object boundaries.", "Role values are theme presets. Explain special className/style overrides in the project composition.", "Direction, language and density follow the DOM; wrapping does not reorder content."],
+  design: { methods: ["布白有用", "相成相制"], whenToUse: ["内容组或动作组需要一致、可独立调整的关系间隔。"], avoid: ["把布局当围合或页面骨架；用数字 gap 代替关系判断。"], composition: ["Stack render 成 section；Inline 组合现有动作；比较保留原生 table/grid。"], stateOwner: { library: ["方向排列、对齐、换行与角色接线。"], application: ["对象、顺序、区域语义、数据与持久状态。"] }, customization: ["优先修改已有角色 token；className/style 是项目特殊关系的例外出口。"], responsive: ["默认换行保留内容；本批页面按裁决只验桌面。"] },
 } satisfies ComponentMeta;

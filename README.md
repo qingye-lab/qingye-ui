@@ -2,7 +2,7 @@
 
 器用为本，关系为法，合宜为度。Qingye UI 将这些立场落实在 React 组件、任务组合与项目主题中：名称说明真实动作，相关内容便于比较，失败后保留继续工作的条件。
 
-组件使用 [Base UI](https://base-ui.com) 原语，部分改编自 [coss ui](https://coss.com/ui)（MIT），也包含本地实现。设计方法决定组件取舍，来源不构成永久结构限制。理念与 AI 使用约定见 [design.md](./design.md)。
+组件依据本库设计指南与 [Base UI](https://base-ui.com) 原语的公共 API 编写。理念与 AI 使用约定见 [design.md](./design.md)。
 
 - `packages/ui` — 组件库 `@qingye/ui`
 - `apps/docs` — 公开理念、组件文档与六种可运行任务模式
@@ -107,4 +107,6 @@ node scripts/shot.mjs <component>     # 浅色/深色 × 桌面/手机截图
 
 ## 许可
 
-MIT。部分组件改编自 coss ui（MIT），详见 [THIRD_PARTY_NOTICES](./packages/ui/THIRD_PARTY_NOTICES.md)。
+MIT，见 [LICENSE](./LICENSE)。第三方依赖的许可由各自的软件包提供。
+
+2026-10-03 删除公开导出 `useIsMobile`，属于破坏性 API 变更；查询同一宽度条件时使用 `useMediaQuery("max-md")`。来源收尾的证据与保留边界见[决策](./docs/decisions/2026-10-03-provenance-closure.md)。

@@ -5,9 +5,9 @@
  * the Tailwind mapping in theme.css), so light and dark are the same names with
  * different bindings.
  *
- * Neutrals are deliberately translucent: borders, fills and hover states are
- * black or white at low alpha, so they read correctly on any surface they sit
- * on — a card, a sidebar, a popover — without per-surface overrides. The
+ * Neutrals are deliberately translucent. Required control boundaries carry
+ * enough contrast; quiet separators and surface fills have separate roles.
+ * Their contrast is checked over the actual supported surface composites. The
  * surface tones and elevations keep a clear page → panel → floating control
  * hierarchy without tinting every component with the brand colour.
  */
@@ -36,16 +36,18 @@
 
     /* Text, strongest to weakest. */
     --qy-foreground-strong: var(--qy-neutral-950);
-    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 90%, var(--qy-black));
-    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 72%, transparent);
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 72%, var(--qy-black));
+    /* Include inset/hover/active layers, not just the unpainted page. */
+    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 96%, transparent);
     --qy-foreground-inverse: var(--qy-neutral-50);
 
     /* Lines. */
     --qy-border: oklch(0 0 0 / 0.08);
     --qy-border-subtle: oklch(0 0 0 / 0.06);
-    --qy-border-strong: oklch(0 0 0 / 0.14);
-    --qy-border-input: oklch(0 0 0 / 0.1);
-    --qy-ring: var(--qy-neutral-400);
+    --qy-border-strong: oklch(0 0 0 / 0.54);
+    --qy-border-input: oklch(0 0 0 / 0.5);
+    /* Keep the default 50%-alpha outline above 3:1 on the page and panels. */
+    --qy-ring: var(--qy-neutral-800);
 
     /* Emphasis. */
     --qy-primary: var(--qy-neutral-800);
@@ -58,17 +60,17 @@
     --qy-danger-foreground: var(--qy-red-700);
     --qy-danger-fill: var(--qy-red-700);
     --qy-danger-on-fill: var(--qy-white);
-    --qy-warning: var(--qy-amber-500);
-    --qy-warning-foreground: var(--qy-amber-700);
-    --qy-success: var(--qy-emerald-500);
-    --qy-success-foreground: var(--qy-emerald-700);
+    --qy-warning: var(--qy-amber-700);
+    --qy-warning-foreground: color-mix(in srgb, var(--qy-amber-700) 90%, var(--qy-black));
+    --qy-success: var(--qy-emerald-700);
+    --qy-success-foreground: color-mix(in srgb, var(--qy-emerald-700) 90%, var(--qy-black));
     --qy-info: var(--qy-blue-500);
     --qy-info-foreground: var(--qy-blue-700);
 
     /* Categorical series, ordered so neighbours stay distinguishable. */
     --qy-chart-1: var(--qy-blue-500);
-    --qy-chart-2: var(--qy-emerald-500);
-    --qy-chart-3: var(--qy-amber-500);
+    --qy-chart-2: var(--qy-emerald-700);
+    --qy-chart-3: var(--qy-amber-700);
     --qy-chart-4: var(--qy-violet-500);
     --qy-chart-5: var(--qy-rose-500);
 
@@ -82,7 +84,7 @@
     --qy-sidebar-accent-foreground: var(--qy-foreground);
     --qy-sidebar-primary: var(--qy-foreground);
     --qy-sidebar-primary-foreground: var(--qy-neutral-0, var(--qy-white));
-    --qy-sidebar-ring: var(--qy-neutral-400);
+    --qy-sidebar-ring: var(--qy-ring);
 
     /* A close contact shadow anchors the surface; the soft tail stays faint. */
     --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px -8px oklch(0 0 0 / 0.12);
@@ -108,15 +110,17 @@
     --qy-overlay: oklch(0 0 0 / 0.56);
 
     --qy-foreground-strong: var(--qy-white);
-    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 80%, var(--qy-white));
-    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 72%, transparent);
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-400) 80%, var(--qy-white));
+    /* Keep the alpha variant readable over raised, inset and active layers. */
+    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 96%, transparent);
     --qy-foreground-inverse: var(--qy-neutral-800);
 
     --qy-border: oklch(1 0 0 / 0.06);
     --qy-border-subtle: oklch(1 0 0 / 0.05);
-    --qy-border-strong: oklch(1 0 0 / 0.12);
-    --qy-border-input: oklch(1 0 0 / 0.08);
-    --qy-ring: var(--qy-neutral-500);
+    --qy-border-strong: oklch(1 0 0 / 0.5);
+    --qy-border-input: oklch(1 0 0 / 0.44);
+    /* Pair with the light ring; the default 50%-alpha outline stays visible. */
+    --qy-ring: var(--qy-neutral-300);
 
     --qy-primary: var(--qy-neutral-100);
     --qy-primary-foreground: var(--qy-neutral-800);
@@ -124,7 +128,7 @@
     --qy-accent-foreground: var(--qy-neutral-100);
 
     --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
-    --qy-danger-foreground: var(--qy-red-400);
+    --qy-danger-foreground: color-mix(in srgb, var(--qy-red-400) 90%, var(--qy-white));
     --qy-danger-fill: var(--qy-red-700);
     --qy-danger-on-fill: var(--qy-white);
     --qy-warning: var(--qy-amber-500);
@@ -150,7 +154,7 @@
     --qy-sidebar-accent-foreground: var(--qy-neutral-100);
     --qy-sidebar-primary: var(--qy-neutral-100);
     --qy-sidebar-primary-foreground: var(--qy-neutral-800);
-    --qy-sidebar-ring: var(--qy-neutral-400);
+    --qy-sidebar-ring: var(--qy-ring);
 
     --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
     --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.24);

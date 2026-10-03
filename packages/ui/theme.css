@@ -148,6 +148,9 @@
 
   --radius-control: var(--qy-radius-control);
   --radius-panel: var(--qy-radius-panel);
+  --radius-overlay: var(--qy-radius-overlay);
+  --radius-marker: var(--qy-radius-marker);
+  --radius-item: var(--qy-radius-item);
   --radius-xs: var(--qy-radius-xs);
   --radius-sm: var(--qy-radius-sm);
   --radius-md: var(--qy-radius-md);
@@ -155,53 +158,172 @@
   --radius-xl: var(--qy-radius-xl);
   --radius-2xl: var(--qy-radius-2xl);
 
-  --text-button: var(--qy-text-button-size);
-  --text-button--line-height: var(--qy-text-button-leading);
-  --text-button--letter-spacing: var(--qy-text-label-tracking);
-  --text-button-mobile: var(--qy-text-button-mobile-size);
-  --text-button-mobile--line-height: var(--qy-text-button-mobile-leading);
-  --text-button-mobile--letter-spacing: var(--qy-text-label-tracking);
-  --text-button-lg: var(--qy-text-button-lg-size);
-  --text-button-lg--line-height: var(--qy-text-button-lg-leading);
-  --text-button-lg--letter-spacing: var(--qy-text-label-tracking);
-  --text-button-xs: var(--qy-text-button-xs-size);
-  --text-button-xs--line-height: var(--qy-text-button-xs-leading);
-  --text-button-xs--letter-spacing: var(--qy-text-label-tracking);
-  --text-field-input: var(--qy-text-input-size);
-  --text-field-input--line-height: var(--qy-text-input-leading);
-  --text-field-input--letter-spacing: var(--qy-text-label-tracking);
-  --text-field-input-mobile: var(--qy-text-input-mobile-size);
-  --text-field-input-mobile--line-height: var(--qy-text-input-mobile-leading);
-  --text-field-input-mobile--letter-spacing: var(--qy-text-label-tracking);
-  --text-field-label: var(--qy-text-field-label-size);
-  --text-field-label--line-height: var(--qy-text-field-label-leading);
-  --text-field-label--letter-spacing: var(--qy-text-label-tracking);
-  --text-field-label-mobile: var(--qy-text-field-label-mobile-size);
-  --text-field-label-mobile--line-height: var(--qy-text-field-label-mobile-leading);
-  --text-field-label-mobile--letter-spacing: var(--qy-text-label-tracking);
-
+  /* Foundation §8: every semantic utility consumes its own complete quartet.
+   * -mobile is the narrow-screen companion, paired with sm:text-ROLE. */
   --text-display-lg: var(--qy-text-display-lg-size);
   --text-display-lg--line-height: var(--qy-text-display-lg-leading);
-  --text-display-lg--font-weight: var(--qy-weight-semibold);
-  --text-display-lg--letter-spacing: var(--qy-text-display-tracking);
+  --text-display-lg--letter-spacing: var(--qy-text-display-lg-tracking);
+  --text-display-lg--font-weight: var(--qy-text-display-lg-weight);
+
   --text-display: var(--qy-text-display-size);
-  --text-display--letter-spacing: var(--qy-text-display-tracking);
   --text-display--line-height: var(--qy-text-display-leading);
+  --text-display--letter-spacing: var(--qy-text-display-tracking);
+  --text-display--font-weight: var(--qy-text-display-weight);
+
   --text-title: var(--qy-text-title-size);
-  --text-title--letter-spacing: var(--qy-text-title-tracking);
   --text-title--line-height: var(--qy-text-title-leading);
+  --text-title--letter-spacing: var(--qy-text-title-tracking);
+  --text-title--font-weight: var(--qy-text-title-weight);
+
+  --text-chapter: var(--qy-text-chapter-size);
+  --text-chapter--line-height: var(--qy-text-chapter-leading);
+  --text-chapter--letter-spacing: var(--qy-text-chapter-tracking);
+  --text-chapter--font-weight: var(--qy-text-chapter-weight);
+
   --text-heading: var(--qy-text-heading-size);
-  --text-heading--letter-spacing: var(--qy-text-heading-tracking);
   --text-heading--line-height: var(--qy-text-heading-leading);
+  --text-heading--letter-spacing: var(--qy-text-heading-tracking);
+  --text-heading--font-weight: var(--qy-text-heading-weight);
+
   --text-body: var(--qy-text-body-size);
-  --text-body--letter-spacing: var(--qy-text-body-tracking);
   --text-body--line-height: var(--qy-text-body-leading);
-  --text-label: var(--qy-text-label-size);
-  --text-label--letter-spacing: var(--qy-text-label-tracking);
-  --text-label--line-height: var(--qy-text-label-leading);
+  --text-body--letter-spacing: var(--qy-text-body-tracking);
+  --text-body--font-weight: var(--qy-text-body-weight);
+
+  --text-body-strong: var(--qy-text-body-strong-size);
+  --text-body-strong--line-height: var(--qy-text-body-strong-leading);
+  --text-body-strong--letter-spacing: var(--qy-text-body-strong-tracking);
+  --text-body-strong--font-weight: var(--qy-text-body-strong-weight);
+
+  --text-reading: var(--qy-text-reading-size);
+  --text-reading--line-height: var(--qy-text-reading-leading);
+  --text-reading--letter-spacing: var(--qy-text-reading-tracking);
+  --text-reading--font-weight: var(--qy-text-reading-weight);
+
+  --text-prose: var(--qy-text-prose-size);
+  --text-prose--line-height: var(--qy-text-prose-leading);
+  --text-prose--letter-spacing: var(--qy-text-prose-tracking);
+  --text-prose--font-weight: var(--qy-text-prose-weight);
+
+  --text-prose-strong: var(--qy-text-prose-strong-size);
+  --text-prose-strong--line-height: var(--qy-text-prose-strong-leading);
+  --text-prose-strong--letter-spacing: var(--qy-text-prose-strong-tracking);
+  --text-prose-strong--font-weight: var(--qy-text-prose-strong-weight);
+
+  --text-support: var(--qy-text-support-size);
+  --text-support--line-height: var(--qy-text-support-leading);
+  --text-support--letter-spacing: var(--qy-text-support-tracking);
+  --text-support--font-weight: var(--qy-text-support-weight);
+
+  --text-support-mobile: var(--qy-text-support-mobile-size);
+  --text-support-mobile--line-height: var(--qy-text-support-mobile-leading);
+  --text-support-mobile--letter-spacing: var(--qy-text-support-mobile-tracking);
+  --text-support-mobile--font-weight: var(--qy-text-support-mobile-weight);
+
+  --text-support-strong: var(--qy-text-support-strong-size);
+  --text-support-strong--line-height: var(--qy-text-support-strong-leading);
+  --text-support-strong--letter-spacing: var(--qy-text-support-strong-tracking);
+  --text-support-strong--font-weight: var(--qy-text-support-strong-weight);
+
+  --text-support-strong-mobile: var(--qy-text-support-strong-mobile-size);
+  --text-support-strong-mobile--line-height: var(--qy-text-support-strong-mobile-leading);
+  --text-support-strong-mobile--letter-spacing: var(--qy-text-support-strong-mobile-tracking);
+  --text-support-strong-mobile--font-weight: var(--qy-text-support-strong-mobile-weight);
+
+  --text-dense: var(--qy-text-dense-size);
+  --text-dense--line-height: var(--qy-text-dense-leading);
+  --text-dense--letter-spacing: var(--qy-text-dense-tracking);
+  --text-dense--font-weight: var(--qy-text-dense-weight);
+
+  --text-dense-mobile: var(--qy-text-dense-mobile-size);
+  --text-dense-mobile--line-height: var(--qy-text-dense-mobile-leading);
+  --text-dense-mobile--letter-spacing: var(--qy-text-dense-mobile-tracking);
+  --text-dense-mobile--font-weight: var(--qy-text-dense-mobile-weight);
+
+  --text-dense-strong: var(--qy-text-dense-strong-size);
+  --text-dense-strong--line-height: var(--qy-text-dense-strong-leading);
+  --text-dense-strong--letter-spacing: var(--qy-text-dense-strong-tracking);
+  --text-dense-strong--font-weight: var(--qy-text-dense-strong-weight);
+
+  --text-dense-strong-mobile: var(--qy-text-dense-strong-mobile-size);
+  --text-dense-strong-mobile--line-height: var(--qy-text-dense-strong-mobile-leading);
+  --text-dense-strong-mobile--letter-spacing: var(--qy-text-dense-strong-mobile-tracking);
+  --text-dense-strong-mobile--font-weight: var(--qy-text-dense-strong-mobile-weight);
+
   --text-caption: var(--qy-text-caption-size);
-  --text-caption--letter-spacing: var(--qy-text-caption-tracking);
   --text-caption--line-height: var(--qy-text-caption-leading);
+  --text-caption--letter-spacing: var(--qy-text-caption-tracking);
+  --text-caption--font-weight: var(--qy-text-caption-weight);
+
+  --text-caption-strong: var(--qy-text-caption-strong-size);
+  --text-caption-strong--line-height: var(--qy-text-caption-strong-leading);
+  --text-caption-strong--letter-spacing: var(--qy-text-caption-strong-tracking);
+  --text-caption-strong--font-weight: var(--qy-text-caption-strong-weight);
+
+  --text-label: var(--qy-text-label-size);
+  --text-label--line-height: var(--qy-text-label-leading);
+  --text-label--letter-spacing: var(--qy-text-label-tracking);
+  --text-label--font-weight: var(--qy-text-label-weight);
+
+  --text-metric: var(--qy-text-metric-size);
+  --text-metric--line-height: var(--qy-text-metric-leading);
+  --text-metric--letter-spacing: var(--qy-text-metric-tracking);
+  --text-metric--font-weight: var(--qy-text-metric-weight);
+
+  --text-micro: var(--qy-text-micro-size);
+  --text-micro--line-height: var(--qy-text-micro-leading);
+  --text-micro--letter-spacing: var(--qy-text-micro-tracking);
+  --text-micro--font-weight: var(--qy-text-micro-weight);
+
+  --text-control-xs: var(--qy-text-control-xs-size);
+  --text-control-xs--line-height: var(--qy-text-control-xs-leading);
+  --text-control-xs--letter-spacing: var(--qy-text-control-xs-tracking);
+  --text-control-xs--font-weight: var(--qy-text-control-xs-weight);
+
+  --text-control-xs-mobile: var(--qy-text-control-xs-mobile-size);
+  --text-control-xs-mobile--line-height: var(--qy-text-control-xs-mobile-leading);
+  --text-control-xs-mobile--letter-spacing: var(--qy-text-control-xs-mobile-tracking);
+  --text-control-xs-mobile--font-weight: var(--qy-text-control-xs-mobile-weight);
+
+  --text-control-sm: var(--qy-text-control-sm-size);
+  --text-control-sm--line-height: var(--qy-text-control-sm-leading);
+  --text-control-sm--letter-spacing: var(--qy-text-control-sm-tracking);
+  --text-control-sm--font-weight: var(--qy-text-control-sm-weight);
+
+  --text-control-sm-mobile: var(--qy-text-control-sm-mobile-size);
+  --text-control-sm-mobile--line-height: var(--qy-text-control-sm-mobile-leading);
+  --text-control-sm-mobile--letter-spacing: var(--qy-text-control-sm-mobile-tracking);
+  --text-control-sm-mobile--font-weight: var(--qy-text-control-sm-mobile-weight);
+
+  --text-control-md: var(--qy-text-control-md-size);
+  --text-control-md--line-height: var(--qy-text-control-md-leading);
+  --text-control-md--letter-spacing: var(--qy-text-control-md-tracking);
+  --text-control-md--font-weight: var(--qy-text-control-md-weight);
+
+  --text-control-md-mobile: var(--qy-text-control-md-mobile-size);
+  --text-control-md-mobile--line-height: var(--qy-text-control-md-mobile-leading);
+  --text-control-md-mobile--letter-spacing: var(--qy-text-control-md-mobile-tracking);
+  --text-control-md-mobile--font-weight: var(--qy-text-control-md-mobile-weight);
+
+  --text-control-lg: var(--qy-text-control-lg-size);
+  --text-control-lg--line-height: var(--qy-text-control-lg-leading);
+  --text-control-lg--letter-spacing: var(--qy-text-control-lg-tracking);
+  --text-control-lg--font-weight: var(--qy-text-control-lg-weight);
+
+  --text-control-lg-mobile: var(--qy-text-control-lg-mobile-size);
+  --text-control-lg-mobile--line-height: var(--qy-text-control-lg-mobile-leading);
+  --text-control-lg-mobile--letter-spacing: var(--qy-text-control-lg-mobile-tracking);
+  --text-control-lg-mobile--font-weight: var(--qy-text-control-lg-mobile-weight);
+
+  --text-control-xl: var(--qy-text-control-xl-size);
+  --text-control-xl--line-height: var(--qy-text-control-xl-leading);
+  --text-control-xl--letter-spacing: var(--qy-text-control-xl-tracking);
+  --text-control-xl--font-weight: var(--qy-text-control-xl-weight);
+
+  --text-control-xl-mobile: var(--qy-text-control-xl-mobile-size);
+  --text-control-xl-mobile--line-height: var(--qy-text-control-xl-mobile-leading);
+  --text-control-xl-mobile--letter-spacing: var(--qy-text-control-xl-mobile-tracking);
+  --text-control-xl-mobile--font-weight: var(--qy-text-control-xl-mobile-weight);
 
   --shadow-panel: var(--qy-shadow-panel);
   --shadow-control: var(--qy-shadow-control);
@@ -214,55 +336,4 @@
   --ease-drawer: var(--qy-ease-drawer);
   --default-transition-duration: var(--qy-duration-fast);
   --default-transition-timing-function: var(--qy-ease-out);
-
-  /* Keyframe animations used by components (from the coss registry). */
-  --animate-skeleton: skeleton 2s -1s infinite linear;
-  --animate-caret-blink: caret-blink 1s ease-out infinite;
-  --animate-toast-success-odd: toast-success-odd 0.32s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-success-even: toast-success-even 0.32s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-error-odd: toast-error-odd 0.28s cubic-bezier(0.5, 1, 0.89, 1);
-  --animate-toast-error-even: toast-error-even 0.28s cubic-bezier(0.5, 1, 0.89, 1);
-
-  @keyframes skeleton {
-    to {
-      background-position: -200% 0;
-    }
-  }
-  @keyframes caret-blink {
-    0%,
-    70%,
-    100% {
-      opacity: 1;
-    }
-    20%,
-    50% {
-      opacity: 0;
-    }
-  }
-  @keyframes toast-success-odd {
-    0% { scale: 1; }
-    30% { scale: 1.025; }
-    60% { scale: 0.99; }
-    100% { scale: 1; }
-  }
-  @keyframes toast-success-even {
-    0% { scale: 1; }
-    30% { scale: 1.025; }
-    60% { scale: 0.99; }
-    100% { scale: 1; }
-  }
-  @keyframes toast-error-odd {
-    0% { translate: 0 0; }
-    25% { translate: -3px 0; }
-    50% { translate: 3px 0; }
-    75% { translate: -3px 0; }
-    100% { translate: 0 0; }
-  }
-  @keyframes toast-error-even {
-    0% { translate: 0 0; }
-    25% { translate: -3px 0; }
-    50% { translate: 3px 0; }
-    75% { translate: -3px 0; }
-    100% { translate: 0 0; }
-  }
 }

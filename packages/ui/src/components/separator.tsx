@@ -1,23 +1,28 @@
-// Adapted from coss ui (MIT), apps/ui/registry/default/ui/separator.tsx.
-// See ../../THIRD_PARTY_NOTICES.md and ../../coss-source.json.
+"use client";
+
 import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
-import type React from "react";
+import * as React from "react";
 import { cn } from "../utils";
 
-export function Separator({
-  className,
-  orientation = "horizontal",
-  ...props
-}: SeparatorPrimitive.Props): React.ReactElement {
+export type SeparatorProps = React.ComponentProps<typeof SeparatorPrimitive> & {
+  /** 已有文字/结构表达分界时，线条仅作装饰。 */
+  decorative?: boolean;
+};
+
+export function Separator({ orientation = "horizontal", decorative = false, className, ...props }: SeparatorProps) {
   return (
     <SeparatorPrimitive
-      className={cn(
-        "shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:not-[[class^='h-']]:not-[[class*='_h-']]:self-stretch",
-        className,
-      )}
       data-slot="separator"
-      orientation={orientation}
       {...props}
+      orientation={orientation}
+      role={decorative ? "presentation" : props.role ?? "separator"}
+      aria-hidden={decorative ? true : props["aria-hidden"]}
+      className={(state) => cn(
+        // 分界的长轴跟随容器；1px 是线条预设，颜色消费既有强边界角色。
+        "shrink-0 border-border-strong",
+        state.orientation === "horizontal" ? "h-0 w-full border-b" : "w-0 self-stretch border-s",
+        typeof className === "function" ? className(state) : className,
+      )}
     />
   );
 }

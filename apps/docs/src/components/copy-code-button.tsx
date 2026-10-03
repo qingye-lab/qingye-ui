@@ -1,51 +1,15 @@
-import { TooltipPopup } from "@qingye/ui/components/tooltip";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
-import { Tooltip, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { cn } from "@qingye/ui";
+import { CopyButton } from "@qingye/ui/components/copy-button";
+import { cn } from "@qingye/ui/utils";
 import { useUILocale } from "@qingye/ui/locale";
-import { CheckIcon, CopyIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
 
-export function CopyCodeButton({ value, className, label: customLabel }: { value: string; className?: string; label?: string }) {
+/** The site's code-copy presentation; clipboard state belongs to the library. */
+export function CopyCodeButton({ value, className, label }: { value: string; className?: string; label?: string }) {
   const { messages } = useUILocale();
-  const [copied, setCopied] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
-  useEffect(() => () => clearTimeout(timer.current), []);
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(true);
-      clearTimeout(timer.current);
-      timer.current = setTimeout(() => setCopied(false), 1600);
-    } catch {
-      toastManager.add({ title: messages.copyError, type: "error" });
-    }
-  };
-
-  const label = copied ? messages.copied : customLabel ?? messages.copyCode;
-  return (
-    <>
-      <Tooltip>
-        <TooltipTrigger
-          render={
-            <Button
-              aria-label={label}
-              className={cn("text-muted-foreground hover:text-foreground", className)}
-              onClick={copy}
-              size="icon-sm"
-              variant="ghost"
-            />
-          }
-        >
-          {copied ? <CheckIcon aria-hidden="true" /> : <CopyIcon aria-hidden="true" />}
-        </TooltipTrigger>
-        <TooltipPopup>{label}</TooltipPopup>
-      </Tooltip>
-      <span aria-live="polite" className="sr-only">
-        {copied ? messages.copied : ""}
-      </span>
-    </>
-  );
+  return <CopyButton shape="icon"
+    className={cn("text-muted-foreground hover:text-foreground", className)}
+    copyLabel={label ?? messages.copyCode}
+    size="sm"
+    value={value}
+    variant="quiet"
+  />;
 }

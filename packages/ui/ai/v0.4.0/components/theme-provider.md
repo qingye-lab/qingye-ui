@@ -57,100 +57,78 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Keyboard
 
 ## Source examples
-### 主题菜单
+### 按需选择外观
 Source: apps/docs/src/content/theme-provider/demos/01-menu.tsx
 ```tsx
-import type { Theme } from "@qingye/ui/components/theme-provider";
 import { Button } from "@qingye/ui/components/button";
-import { Menu, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye/ui/components/menu";
-import { useTheme } from "@qingye/ui/components/theme-provider";
+import { Stack } from "@qingye/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { useTheme, type Theme } from "@qingye/ui/components/theme-provider";
+import { Text } from "@qingye/ui/components/typography";
 import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useId } from "react";
 
-export const meta = {
-  title: "主题菜单",
-  description: "顶栏里最常见的形式：图标显示当前生效的主题，菜单里三选一。文案来自语言包。",
-};
+export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
 
 export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
+  const id = useId();
+  const Current = resolvedTheme === "dark" ? MoonIcon : SunIcon;
+  return <Popover>
+    <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
+    <PopoverPopup>
+      <Stack gap="field">
+        <PopoverTitle>{messages.theme}</PopoverTitle>
+        <select id={id} aria-label={messages.theme} className="max-w-full border border-input bg-background text-body focus-visible:outline-none focus-visible:border-ring" value={theme} onChange={event => setTheme(event.target.value as Theme)}>
+          <option value="light">{messages.lightTheme}</option>
+          <option value="dark">{messages.darkTheme}</option>
+          <option value="system">{messages.systemTheme}</option>
+        </select>
+        <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
+      </Stack>
+    </PopoverPopup>
+  </Popover>;
+}
+```
+
+### 外观设置
+Source: apps/docs/src/content/theme-provider/demos/02-segmented.tsx
+```tsx
+import { Inline, Stack } from "@qingye/ui/components/layout";
+import { useTheme } from "@qingye/ui/components/theme-provider";
+import { Text } from "@qingye/ui/components/typography";
+import { useUILocale } from "@qingye/ui/locale";
+import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { useId } from "react";
+
+export const meta = { title: "外观设置", titleEn: "Appearance settings" };
+
+export default function Demo() {
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { messages } = useUILocale();
+  const name = useId();
   const options = [
     { value: "light", label: messages.lightTheme, icon: SunIcon },
     { value: "dark", label: messages.darkTheme, icon: MoonIcon },
     { value: "system", label: messages.systemTheme, icon: MonitorIcon },
   ] as const;
-  const Current = resolvedTheme === "dark" ? MoonIcon : SunIcon;
-
-  return (
-    <Menu>
-      <MenuTrigger render={<Button aria-label={messages.theme} size="icon" variant="outline" />}>
-        <Current />
-      </MenuTrigger>
-      <MenuPopup className="min-w-36">
-        <MenuRadioGroup onValueChange={(value) => setTheme(value as Theme)} value={theme}>
-          {options.map(({ value, label, icon: Icon }) => (
-            <MenuRadioItem key={value} value={value}>
-              <span className="flex items-center gap-2">
-                <Icon aria-hidden="true" className="size-4 opacity-72" />
-                {label}
-              </span>
-            </MenuRadioItem>
-          ))}
-        </MenuRadioGroup>
-      </MenuPopup>
-    </Menu>
-  );
-}
-```
-
-### 设置页中的分段选择
-Source: apps/docs/src/content/theme-provider/demos/02-segmented.tsx
-```tsx
-import type { Theme } from "@qingye/ui/components/theme-provider";
-import { RadioGroupPrimitive, RadioPrimitive } from "@qingye/ui/components/radio-group";
-import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
-
-export const meta = {
-  title: "设置页中的分段选择",
-  description: "设置页里直接平铺三个选项；下方显示用户的选择与实际生效的主题。",
-};
-
-const item = segmentedControlItemVariants({ state: "checked" });
-
-export default function Demo() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  const { messages } = useUILocale();
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <RadioGroupPrimitive
-        aria-label={messages.theme}
-        className={segmentedControlRootClassName}
-        onValueChange={(value) => setTheme(value as Theme)}
-        value={theme}
-      >
-        <RadioPrimitive.Root className={item} value="light">
-          <SunIcon />
-          {messages.lightTheme}
-        </RadioPrimitive.Root>
-        <RadioPrimitive.Root className={item} value="dark">
-          <MoonIcon />
-          {messages.darkTheme}
-        </RadioPrimitive.Root>
-        <RadioPrimitive.Root className={item} value="system">
-          <MonitorIcon />
-          {messages.systemTheme}
-        </RadioPrimitive.Root>
-      </RadioGroupPrimitive>
-      <p className="text-muted-foreground text-xs">
-        theme = <code className="font-mono text-foreground">{theme}</code>，resolvedTheme ={" "}
-        <code className="font-mono text-foreground">{resolvedTheme}</code>
-      </p>
-    </div>
-  );
+  return <Stack gap="field">
+    <fieldset className="min-w-0">
+      <legend className="mb-(--qy-field-gap) text-label">{messages.theme}</legend>
+      <Inline gap="actions">
+        {options.map(({ value, label, icon: Icon }) => <label key={value}>
+          <Inline gap="field" render={<span />}>
+            <input type="radio" className="focus-visible:outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset" name={name} value={value} checked={theme === value} onChange={() => setTheme(value)} />
+            <Icon aria-hidden="true" className="size-(--qy-control-md-icon)" />
+            <Text render={<span />}>{label}</Text>
+          </Inline>
+        </label>)}
+      </Inline>
+    </fieldset>
+    <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
+  </Stack>;
 }
 ```
 
@@ -162,12 +140,12 @@ import { themeScript } from "@qingye/ui/components/theme-provider";
 export const meta = {
   title: "防闪烁脚本",
   description:
-    "themeScript() 生成的源码，放进 index.html 的 <head>、样式表之前；参数与 ThemeProvider 保持一致。",
+    "防闪烁脚本放在 <head> 中的样式表之前，参数与 ThemeProvider 一致。",
 };
 
 export default function Demo() {
   return (
-    <pre className="w-full max-w-xl overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-muted p-4 font-mono text-muted-foreground text-xs leading-relaxed [font-variant-ligatures:none]">
+    <pre className="w-full max-w-xl overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-muted p-4 font-mono text-muted-foreground text-caption leading-relaxed [font-variant-ligatures:none]">
       {`<script>${themeScript({ storageKey: "yq-theme" })}</script>`}
     </pre>
   );

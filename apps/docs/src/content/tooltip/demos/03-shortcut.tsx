@@ -1,42 +1,24 @@
+import { useState } from "react";
 import { Button } from "@qingye/ui/components/button";
-import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { SaveIcon, SearchIcon } from "lucide-react";
+import { BoldIcon } from "lucide-react";
 
-export const meta = { title: "附带快捷键", description: "在提示里用 Kbd 标出快捷键，帮助用户逐步记住。" };
+export const meta = { title: "快捷键" };
 
 export default function Demo() {
+  const [bold, setBold] = useState(false);
   return (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-(--qy-field-group-gap)" onKeyDown={(event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "b") {
+        event.preventDefault();
+        setBold((value) => !value);
+      }
+    }}>
       <Tooltip>
-        <TooltipTrigger render={<Button aria-label="搜索" size="icon" variant="outline" />}>
-          <SearchIcon />
-        </TooltipTrigger>
-        <TooltipPopup>
-          <span className="flex items-center gap-2">
-            搜索
-            <KbdGroup>
-              <Kbd>⌘</Kbd>
-              <Kbd>K</Kbd>
-            </KbdGroup>
-          </span>
-        </TooltipPopup>
+        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+        <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>
       </Tooltip>
-      <Tooltip>
-        <TooltipTrigger render={<Button variant="outline" />}>
-          <SaveIcon />
-          保存草稿
-        </TooltipTrigger>
-        <TooltipPopup>
-          <span className="flex items-center gap-2">
-            保存到本机
-            <KbdGroup>
-              <Kbd>⌘</Kbd>
-              <Kbd>S</Kbd>
-            </KbdGroup>
-          </span>
-        </TooltipPopup>
-      </Tooltip>
+      <p className="text-body text-foreground">{bold ? <strong>让器物服务于人</strong> : "让器物服务于人"}</p>
     </div>
   );
 }

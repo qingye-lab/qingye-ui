@@ -7,7 +7,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { Button } from "@qingye/ui/components/button";
 import { ButtonGroup } from "@qingye/ui/components/button-group";
 import { Calendar } from "@qingye/ui/components/calendar";
-import { Card, CardHeader, CardPanel, CardTitle } from "@qingye/ui/components/card";
+import { Card } from "@qingye/ui/components/card";
 import { Checkbox } from "@qingye/ui/components/checkbox";
 import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
 import { CodeBlock } from "@qingye/ui/components/code-block";
@@ -30,11 +30,11 @@ import { Meter } from "@qingye/ui/components/meter";
 import { NativeSelect, NativeSelectOption } from "@qingye/ui/components/native-select";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 import { OTPField, OTPFieldInput } from "@qingye/ui/components/otp-field";
-import { PasswordInput } from "@qingye/ui/components/password-input";
+
 import { Progress } from "@qingye/ui/components/progress";
 import { ProgressCircle } from "@qingye/ui/components/progress-circle";
 import { Radio, RadioGroup, RadioGroupPrimitive, RadioPrimitive } from "@qingye/ui/components/radio-group";
-import { SearchInput } from "@qingye/ui/components/search-input";
+
 import { segmentedControlItemVariants, segmentedControlRootClassName } from "@qingye/ui/components/segmented-control";
 import { Separator } from "@qingye/ui/components/separator";
 import { Skeleton } from "@qingye/ui/components/skeleton";
@@ -63,7 +63,7 @@ const row = "flex flex-wrap items-center justify-center gap-(--qy-space-2)";
 
 function ThemeThumbnail() {
   const { resolvedTheme } = useTheme();
-  return <div className={row}><Button aria-pressed={resolvedTheme === "light"} size="sm" variant={resolvedTheme === "light" ? "default" : "outline"}><Sun aria-hidden="true" />浅色</Button><Button aria-pressed={resolvedTheme === "dark"} size="sm" variant={resolvedTheme === "dark" ? "default" : "outline"}><Moon aria-hidden="true" />深色</Button></div>;
+  return <div className={row}><Button aria-pressed={resolvedTheme === "light"} size="sm" variant={resolvedTheme === "light" ? "solid" : "quiet"}><Sun aria-hidden="true" />浅色</Button><Button aria-pressed={resolvedTheme === "dark"} size="sm" variant={resolvedTheme === "dark" ? "solid" : "quiet"}><Moon aria-hidden="true" />深色</Button></div>;
 }
 
 function subscribeInputModality(notify: () => void) {
@@ -75,13 +75,13 @@ function subscribeInputModality(notify: () => void) {
 function MotionThumbnail() {
   // The site's one MotionProvider owns this attribute; previews only observe it.
   const input = useSyncExternalStore(subscribeInputModality, () => document.documentElement.getAttribute("data-ui-input") ?? "—", () => "—");
-  return <div className={row}><Kbd>Tab</Kbd><Badge variant="outline">{input}</Badge><Button aria-label="添加" size="icon-sm" variant="outline"><Plus aria-hidden="true" /></Button></div>;
+  return <div className={row}><Kbd>Tab</Kbd><Badge variant="outline">{input}</Badge><Button shape="icon" aria-label="添加" size="sm" variant="quiet"><Plus aria-hidden="true" /></Button></div>;
 }
 
 function ToastThumbnail() {
   // Consume the root provider without adding notifications during rendering.
   const { add } = ToastPrimitive.useToastManager();
-  return <Button onClick={() => add({ title: "资料已保存", type: "success" })} size="sm" variant="outline"><Bell aria-hidden="true" />显示通知</Button>;
+  return <Button onClick={() => add({ title: "资料已保存", type: "success" })} size="sm" variant="quiet"><Bell aria-hidden="true" />显示通知</Button>;
 }
 
 // These are small compositions of the current library, not another set of controls.
@@ -109,16 +109,16 @@ const previews: Record<string, () => ReactNode> = {
     <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="#">首页</BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbLink href="#">项目</BreadcrumbLink></BreadcrumbItem><BreadcrumbSeparator /><BreadcrumbItem><BreadcrumbPage>资料</BreadcrumbPage></BreadcrumbItem></BreadcrumbList></Breadcrumb>
   ),
   button: () => (
-    <div className="flex max-w-52 flex-wrap justify-center gap-(--qy-space-2)"><Button size="sm">保存</Button><Button size="sm" variant="outline">取消</Button><Button aria-label="添加" size="icon-sm" variant="secondary"><Plus aria-hidden="true" /></Button><Button size="sm" variant="ghost">查看记录</Button></div>
+    <div className="flex max-w-52 flex-wrap justify-center gap-(--qy-space-2)"><Button size="sm">保存</Button><Button size="sm" variant="quiet">取消</Button><Button shape="icon" aria-label="添加" size="sm" variant="quiet"><Plus aria-hidden="true" /></Button><Button size="sm" variant="quiet">查看记录</Button></div>
   ),
   "button-group": () => (
-    <ButtonGroup><Button size="sm" variant="outline">日</Button><Button size="sm" variant="outline">周</Button><Button size="sm" variant="outline">月</Button></ButtonGroup>
+    <ButtonGroup><Button size="sm" variant="quiet">日</Button><Button size="sm" variant="quiet">周</Button><Button size="sm" variant="quiet">月</Button></ButtonGroup>
   ),
   calendar: () => (
     <Calendar className="shrink-0 scale-[0.62]" defaultMonth={new Date(2026, 9, 1)} mode="single" selected={new Date(2026, 9, 12)} />
   ),
   card: () => (
-    <Card className="w-full max-w-56" size="sm"><CardHeader><CardTitle>青野设计</CardTitle></CardHeader><CardPanel className="flex items-center justify-between"><Avatar size="sm"><AvatarFallback>青</AvatarFallback></Avatar><Badge variant="success">已发布</Badge></CardPanel></Card>
+    <Card className="w-full max-w-56" ><header className="grid gap-(--qy-panel-gap)"><h3 className="text-heading">青野设计</h3></header><div className="p-(--qy-panel-padding) flex items-center justify-between"><Avatar size="sm"><AvatarFallback>青</AvatarFallback></Avatar><Badge variant="success">已发布</Badge></div></Card>
   ),
   checkbox: () => (
     <div className={column}><Label><Checkbox defaultChecked />邮件通知</Label><Label><Checkbox />桌面通知</Label></div>
@@ -130,7 +130,7 @@ const previews: Record<string, () => ReactNode> = {
     <CodeBlock className="w-full max-w-60" code={'import { Button } from "@qingye/ui";\n\n<Button>保存</Button>'} copyable={false} filename="app.tsx" lineNumbers />
   ),
   collapsible: () => (
-    <Collapsible className={column} defaultOpen><CollapsibleTrigger render={<Button size="sm" variant="outline" />}>最近项目</CollapsibleTrigger><CollapsiblePanel><Item size="sm" variant="outline"><ItemContent><ItemTitle>青野设计</ItemTitle></ItemContent></Item></CollapsiblePanel></Collapsible>
+    <Collapsible className={column} defaultOpen><CollapsibleTrigger render={<Button size="sm" variant="quiet" />}>最近项目</CollapsibleTrigger><CollapsiblePanel><Item size="sm" variant="outline"><ItemContent><ItemTitle>青野设计</ItemTitle></ItemContent></Item></CollapsiblePanel></Collapsible>
   ),
   "copy-button": () => <CopyButton size="sm" value="pnpm add @qingye/ui">复制命令</CopyButton>,
   "description-list": () => (
@@ -140,7 +140,7 @@ const previews: Record<string, () => ReactNode> = {
     <Disclosure className="w-full max-w-56" defaultOpen variant="inset"><DisclosureTrigger>高级设置</DisclosureTrigger><DisclosurePanel><Label><Switch defaultChecked />邮件通知</Label></DisclosurePanel></Disclosure>
   ),
   empty: () => (
-    <Empty className="gap-(--qy-space-3) p-(--qy-space-4)"><EmptyHeader><EmptyMedia variant="icon"><Inbox aria-hidden="true" /></EmptyMedia><EmptyTitle size="sm">暂无文件</EmptyTitle></EmptyHeader><Button size="sm" variant="outline"><Plus aria-hidden="true" />添加文件</Button></Empty>
+    <Empty className="gap-(--qy-space-3) p-(--qy-space-4)"><EmptyHeader><EmptyMedia variant="icon"><Inbox aria-hidden="true" /></EmptyMedia><EmptyTitle size="sm">暂无文件</EmptyTitle></EmptyHeader><Button size="sm" variant="quiet"><Plus aria-hidden="true" />添加文件</Button></Empty>
   ),
   field: () => <Field className="w-full max-w-56"><FieldLabel>显示名称</FieldLabel><Input defaultValue="林晚" readOnly /></Field>,
   fieldset: () => <Fieldset className="w-full max-w-56"><FieldsetLegend>联系信息</FieldsetLegend><Field><FieldLabel>邮箱</FieldLabel><Input defaultValue="lin@qingye.io" readOnly /></Field></Fieldset>,
@@ -160,11 +160,9 @@ const previews: Record<string, () => ReactNode> = {
   "native-select": () => <NativeSelect aria-label="项目" className="w-full max-w-56" defaultValue="design"><NativeSelectOption value="design">青野设计</NativeSelectOption><NativeSelectOption value="research">用户研究</NativeSelectOption></NativeSelect>,
   "number-field": () => <NumberField aria-label="数量" className="w-40" defaultValue={12} min={0}><NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup></NumberField>,
   "otp-field": () => <OTPField aria-label="验证码" defaultValue="4802" length={4}>{Array.from({ length: 4 }, (_, index) => <OTPFieldInput key={index} />)}</OTPField>,
-  "password-input": () => <PasswordInput aria-label="密码" className="w-full max-w-56" defaultValue="Qingye2026" readOnly />,
   progress: () => <div className={column}><div className="flex items-center justify-between text-caption"><span>正在上传</span><span className="numeric">68%</span></div><Progress aria-label="上传进度" value={68} /></div>,
   "progress-circle": () => <div className={row}><ProgressCircle aria-label="上传进度" showValue size="lg" value={68} /><ProgressCircle aria-label="下载进度" size="sm" value={32} /></div>,
   "radio-group": () => <RadioGroup aria-label="计费周期" defaultValue="monthly"><Label><Radio value="monthly" />按月付费</Label><Label><Radio value="yearly" />按年付费</Label></RadioGroup>,
-  "search-input": () => <SearchInput aria-label="搜索文件" className="w-full max-w-56" defaultValue="设计规范" />,
   "segmented-control": () => <RadioGroupPrimitive aria-label="计费周期" className={segmentedControlRootClassName} defaultValue="monthly"><RadioPrimitive.Root className={segmentedControlItemVariants({ state: "checked" })} value="monthly">按月</RadioPrimitive.Root><RadioPrimitive.Root className={segmentedControlItemVariants({ state: "checked" })} value="yearly">按年</RadioPrimitive.Root></RadioGroupPrimitive>,
   separator: () => <div className={column}><span className="text-caption">个人资料</span><Separator /><span className="text-caption text-muted-foreground">安全设置</span></div>,
   skeleton: () => <div className={column}><div className="flex items-center gap-(--qy-space-3)"><Skeleton className="size-10 rounded-full" /><div className="flex flex-1 flex-col gap-(--qy-space-2)"><Skeleton className="h-3 w-24" /><Skeleton className="h-3 w-36" /></div></div><Skeleton className="h-3 w-full" /><Skeleton className="h-3 w-3/4" /></div>,

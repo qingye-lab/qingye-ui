@@ -1,6 +1,7 @@
 import { cn } from "@qingye/ui/utils";
 import { useEffect, useState, type RefObject } from "react";
 import { useLocation } from "react-router-dom";
+import { routeVisitKey } from "@/lib/paths";
 import { useHashLink } from "@/lib/use-route-effects";
 
 interface TocItem {
@@ -10,11 +11,12 @@ interface TocItem {
 }
 
 const same = (a: TocItem[], b: TocItem[]) =>
-  a.length === b.length && a.every((item, i) => item.id === b[i]!.id && item.text === b[i]!.text);
+  a.length === b.length && a.every((item, i) => item.id === b[i]!.id && item.text === b[i]!.text && item.level === b[i]!.level);
 
 /** Reads the article's `[data-toc]` headings, so pages never maintain a list by hand. */
 function useHeadings(container: RefObject<HTMLElement | null>) {
   const { pathname } = useLocation();
+  const visit = routeVisitKey(pathname);
   const [items, setItems] = useState<TocItem[]>([]);
   useEffect(() => {
     const root = container.current;
@@ -33,12 +35,12 @@ function useHeadings(container: RefObject<HTMLElement | null>) {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(scan);
     });
-    observer.observe(root, { childList: true, subtree: true });
+    observer.observe(root, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["id", "data-toc"] });
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, [container, pathname]);
+  }, [container, visit]);
   return items;
 }
 
@@ -48,7 +50,7 @@ function useActiveHeading(items: TocItem[]) {
     if (!items.length) return setActive(null);
     let frame = 0;
     const update = () => {
-      const offset = 112;
+      const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
       let current = items[0]!.id;
       for (const item of items) {
         const el = document.getElementById(item.id);
@@ -83,7 +85,7 @@ export function TableOfContents({ container }: { container: RefObject<HTMLElemen
   if (items.length < 2) return null;
   return (
     <nav aria-labelledby="toc-title" className="flex flex-col gap-3">
-      <p className="font-medium text-foreground-strong text-xs" id="toc-title">
+      <p className="font-medium text-foreground-strong text-caption" id="toc-title">
         本页目录
       </p>
       <ul className="flex flex-col border-s">
@@ -94,7 +96,7 @@ export function TableOfContents({ container }: { container: RefObject<HTMLElemen
               <a
                 aria-current={current ? "location" : undefined}
                 className={cn(
-                  "focus-ring relative -ms-px block rounded-e-sm border-s border-transparent py-1 text-[0.8125rem] leading-snug transition-colors",
+                  "focus-ring relative -ms-px block rounded-e-sm border-s border-transparent py-1 text-heading leading-snug transition-colors [overflow-wrap:anywhere]",
                   item.level === 3 ? "ps-6" : "ps-3",
                   current
                     ? "border-foreground font-medium text-foreground-strong"

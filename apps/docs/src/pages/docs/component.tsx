@@ -1,11 +1,7 @@
-import { designFor } from "@/lib/design-guidance";
-import { Facts } from "@/components/prose";
-import { Badge } from "@qingye/ui/components/badge";
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@qingye/ui/components/empty";
+import { pageDecisionsFor } from "@/lib/design-guidance";
 import { Kbd } from "@qingye/ui/components/kbd";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
-import { CodeXmlIcon, LayersIcon } from "lucide-react";
-import { Component, use, type ReactNode } from "react";
+import { use, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { CodeBlock } from "@/components/code-block";
 import { DemoFrame } from "@/components/demo";
@@ -13,9 +9,31 @@ import { A, Code, H2, H3, P, PageHeader } from "@/components/prose";
 import { importSnippet } from "@/lib/highlight";
 import { splitTitle } from "@/lib/nav";
 import { findComponent, loadDemos, type ComponentEntry, type LoadedDemo } from "@/lib/registry";
-import { componentSourceUrl } from "@/lib/site";
 import type { ApiPart, KeyboardRow } from "@/lib/types";
 import { NotFoundContent } from "../not-found";
+import { useDocsLocale } from "@/lib/docs-locale";
+import { localizedMeta } from "@/lib/localized-meta";
+import { ContentBoundary } from "@/components/content-boundary";
+import { PageState } from "@/components/page-state";
+
+const componentCopy = {
+  zh: {
+    examples: "示例", import: "导入", decisions: "判断", api: "API", keyboard: "键盘交互", notes: "使用建议",
+    jump: "跳到 API 与使用建议", prop: "属性", type: "类型", default: "默认值", description: "说明",
+    key: "按键", action: "行为", or: "或", noDefault: "无",
+    noDemos: "暂无示例", demosFailed: "示例暂时无法加载", browse: "浏览其他组件",
+    importBefore: "按组件入口导入只打包这一个文件：", importAfter: "。两种入口的取舍见 ", installation: "安装", importEnd: "。",
+    notFound: (slug: string) => `没有名为 “${slug}” 的组件文档。`,
+  },
+  en: {
+    examples: "Examples", import: "Import", decisions: "Decisions", api: "API", keyboard: "Keyboard interactions", notes: "Usage notes",
+    jump: "Jump to API and usage notes", prop: "Prop", type: "Type", default: "Default", description: "Description",
+    key: "Key", action: "Action", or: "or", noDefault: "None",
+    noDemos: "No examples yet", demosFailed: "Examples could not be loaded", browse: "Browse other components",
+    importBefore: "Import from the component entry to bundle just this file: ", importAfter: ". Compare the two entry points in ", installation: "Installation", importEnd: ".",
+    notFound: (slug: string) => `No component documentation found for “${slug}”.`,
+  },
+};
 
 const cache = new Map<string, Promise<LoadedDemo[]>>();
 
@@ -30,31 +48,35 @@ function demosFor(slug: string): Promise<LoadedDemo[]> {
   return promise;
 }
 
-class LoadBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
-  state = { error: null as Error | null };
-  static getDerivedStateFromError(error: Error) {
-    return { error };
-  }
-  render() {
-    if (!this.state.error) return this.props.children;
-    return (
-      <p className="mt-6 text-muted-foreground text-sm" role="status">
-        示例加载失败：<span className="font-mono text-xs">{this.state.error.message}</span>
-      </p>
-    );
-  }
-}
-
 export default function ComponentPage() {
   const { slug = "" } = useParams();
-  const entry = findComponent(slug);
-  if (!entry) return <NotFoundContent detail={`没有名为 “${slug}” 的组件文档。`} />;
+  const locale = useDocsLocale();
+  const found = findComponent(slug);
+  const entry = found ? localizedMeta(found, locale) : undefined;
+  if (!entry) return <NotFoundContent detail={componentCopy[locale].notFound(slug)} />;
   return <ComponentDoc entry={entry} />;
 }
 
+/**
+ * One component page, in reading order.
+ *
+ * The page opens with the component itself — title, one sentence, then the
+ * first live example. What used to sit here was a five-row 使用判断 definition list built by
+ * `designFor()`, roughly 600 characters long on all 88 pages; it pushed the
+ * component to the third screenful and rendered a Button-level warning
+ * ("loading 只表示正在等待，不能当成保存成功") at the same visual weight as a
+ * sentence every component repeated. The reference tail below carries what a
+ * reader still needs, at the length the component actually has something to
+ * say: `decisions` renders as one paragraph and renders nothing when absent.
+ *
+ * The five synthesized fields are still produced for the catalog — see
+ * `gen-catalog.mjs` and `ai/v<version>/components/<name>.md`. Only this page
+ * stopped reading them.
+ */
 function ComponentDoc({ entry }: { entry: ComponentEntry }) {
+  const text = componentCopy[useDocsLocale()];
   const { zh, en } = splitTitle(entry.title);
-  const design = designFor(entry, entry.slug);
+  const decisions = pageDecisionsFor(entry);
   return (
     <article>
       <PageHeader
@@ -63,50 +85,44 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
         title={
           <>
             {zh}
-            {en ? <span className="ms-3 font-normal text-[0.6em] text-muted-foreground align-[0.12em]">{en}</span> : null}
+            {en ? <span className="ms-3 align-[0.12em] text-caption text-muted-foreground">{en}</span> : null}
           </>
         }
-      >
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-sm">
-          <Badge size="lg" variant="outline">
-            {entry.category}
-          </Badge>
-          <Badge size="lg" variant="secondary">
-            {entry.source === "coss" ? "源自 coss ui" : "本地组件"}
-          </Badge>
-          <a
-            className="focus-ring inline-flex items-center gap-1.5 rounded-sm text-muted-foreground transition-colors hover:text-foreground"
-            href={componentSourceUrl(entry.slug)}
-            rel="noreferrer"
-            target="_blank"
-          >
-            <CodeXmlIcon aria-hidden="true" className="size-3.5" />
-            源码
-          </a>
-        </div>
-      </PageHeader>
+      />
 
-      <H2 id="decisions">使用判断</H2>
-      <Facts items={[{ term: "何时使用", detail: design.whenToUse.join(" ") }, { term: "避免", detail: design.avoid.join(" ") }, { term: "相关方法", detail: <A href="/docs/design-philosophy">{design.methods.join("、")}</A> }, { term: "状态归属", detail: `公共库：${design.stateOwner.library.join(" ")} 应用：${design.stateOwner.application.join(" ")}` }, { term: "响应与调整", detail: [...design.responsive, ...design.customization].join(" ") }]} />
-      <H2 id="usage">导入</H2>
+      <H2 id="examples">{text.examples}</H2>
+      <ContentBoundary key={entry.slug} title={text.demosFailed}>
+        <Demos slug={entry.slug} />
+      </ContentBoundary>
+
+      {referenceAnchor(entry) ? (
+        <P className="mt-2 text-body text-muted-foreground">
+          <A href={referenceAnchor(entry)}>{text.jump}</A>
+        </P>
+      ) : null}
+
+      <H2 id="usage">{text.import}</H2>
       <CodeBlock code={importSnippet(entry.exports)} />
-      <P className="mt-3 text-[0.875rem] text-muted-foreground">
-        也可以按组件入口导入，只打包这一个文件：<Code>@qingye/ui/components/{entry.slug}</Code>
+      <P className="mt-3 text-body text-muted-foreground">
+        {text.importBefore}<Code>@qingye/ui/components/{entry.slug}</Code>{text.importAfter}
+        <A href="/docs/installation#per-component">{text.installation}</A>{text.importEnd}
       </P>
 
-      <H2 id="examples">示例</H2>
-      <LoadBoundary>
-        <Demos slug={entry.slug} />
-      </LoadBoundary>
+      {decisions ? (
+        <>
+          <H2 id="decisions">{text.decisions}</H2>
+          <P>{renderInline(decisions)}</P>
+        </>
+      ) : null}
 
       {entry.api.length ? <ApiReference parts={entry.api} /> : null}
       {entry.keyboard?.length ? <KeyboardTable rows={entry.keyboard} /> : null}
       {entry.notes?.length ? (
         <>
-          <H2 id="notes">使用建议</H2>
+          <H2 id="notes">{text.notes}</H2>
           <ul className="my-4 flex max-w-[42rem] flex-col gap-2.5">
             {entry.notes.map((note) => (
-              <li className="flex gap-3 text-[0.9375rem] text-foreground/90 leading-[1.75]" key={note}>
+              <li className="flex gap-3 text-reading text-foreground/90 leading-[1.75]" key={note}>
                 <span aria-hidden="true" className="mt-[0.8em] size-1 shrink-0 rounded-full bg-foreground/40" />
                 <span className="text-pretty">{renderInline(note)}</span>
               </li>
@@ -118,21 +134,27 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
   );
 }
 
+/**
+ * Where the reference tail starts for this component, or "" when it has none.
+ *
+ * The jump link exists because the example now comes first: a reader who
+ * already knows what the component does wants the API table, and measuring
+ * scroll distance by hand is worse than one link. It points at the first
+ * section that will actually render, so it never lands on nothing.
+ */
+function referenceAnchor(entry: ComponentEntry): string {
+  if (!entry.api.length && !entry.keyboard?.length && !entry.notes?.length) return "";
+  return entry.api.length ? "#api" : entry.keyboard?.length ? "#keyboard" : "#notes";
+}
+
 function Demos({ slug }: { slug: string }) {
+  const text = componentCopy[useDocsLocale()];
   const demos = use(demosFor(slug));
   if (!demos.length) {
     return (
-      <Empty className="mt-4 rounded-xl border border-dashed py-12 md:py-14">
-        <EmptyHeader>
-          <EmptyMedia variant="icon">
-            <LayersIcon aria-hidden="true" />
-          </EmptyMedia>
-          <EmptyTitle className="text-base">示例整理中</EmptyTitle>
-          <EmptyDescription>
-            这个组件的示例还在编写。可以先阅读下方的 API，或在 <A href="/docs/components">组件总览</A> 中浏览其他组件。
-          </EmptyDescription>
-        </EmptyHeader>
-      </Empty>
+      <PageState headingLevel={3} title={text.noDemos}>
+        <A href="/docs/components">{text.browse}</A>
+      </PageState>
     );
   }
   return (
@@ -155,15 +177,16 @@ function renderInline(text: string): ReactNode {
 const partId = (name: string) => `api-${name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase()}`;
 
 function ApiReference({ parts }: { parts: ApiPart[] }) {
+  const text = componentCopy[useDocsLocale()];
   return (
     <>
-      <H2 id="api">API</H2>
+      <H2 id="api">{text.api}</H2>
       {parts.map((part) => (
         <section className="mt-8 border-t pt-6 first:mt-5 first:border-t-0 first:pt-0" key={part.name}>
-          <H3 className="mt-0 mb-1.5 font-mono font-medium text-[0.9375rem]" id={partId(part.name)}>
+          <H3 className="mt-0 mb-1.5 font-mono text-reading" id={partId(part.name)}>
             {part.name}
           </H3>
-          <p className="mb-3 max-w-[42rem] text-pretty text-[0.875rem] text-muted-foreground leading-relaxed">{renderInline(part.description)}</p>
+          <p className="mb-3 max-w-[42rem] text-pretty text-body text-muted-foreground leading-relaxed">{renderInline(part.description)}</p>
           {part.props?.length ? (
             <div className="overflow-hidden rounded-xl border">
               <Table className="min-w-[36rem] table-fixed" density="compact">
@@ -175,31 +198,31 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
                 </colgroup>
                 <TableHeader className="bg-surface-subtle/60 dark:bg-surface/40">
                   <TableRow className="hover:bg-transparent">
-                    <TableHead className="ps-4 text-xs">属性</TableHead>
-                    <TableHead className="text-xs">类型</TableHead>
-                    <TableHead className="text-xs">默认值</TableHead>
-                    <TableHead className="pe-4 text-xs">说明</TableHead>
+                    <TableHead className="ps-4 text-caption">{text.prop}</TableHead>
+                    <TableHead className="text-caption">{text.type}</TableHead>
+                    <TableHead className="text-caption">{text.default}</TableHead>
+                    <TableHead className="pe-4 text-caption">{text.description}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {part.props.map((prop) => (
                     <TableRow className="hover:bg-transparent" key={prop.name}>
                       <TableCell className="whitespace-normal py-2.5 ps-4 align-top">
-                        <code className="break-words font-mono font-medium text-[0.8125rem] text-foreground-strong">{prop.name}</code>
+                        <code className="break-words font-mono text-heading text-foreground-strong">{prop.name}</code>
                       </TableCell>
                       <TableCell className="whitespace-normal py-2.5 align-top">
-                        <code className="break-words font-mono text-[0.75rem] text-(--sh-entity) leading-relaxed">{prop.type}</code>
+                        <code className="break-words font-mono text-caption text-(--sh-entity) leading-relaxed">{prop.type}</code>
                       </TableCell>
                       <TableCell className="whitespace-normal py-2.5 align-top">
                         {prop.default ? (
-                          <code className="break-words font-mono text-[0.75rem] text-foreground/80">{prop.default}</code>
+                          <code className="break-words font-mono text-caption text-foreground/80">{prop.default}</code>
                         ) : (
-                          <span aria-label="无" className="text-foreground-subtle">
+                          <span aria-label={text.noDefault} className="text-foreground-subtle">
                             —
                           </span>
                         )}
                       </TableCell>
-                      <TableCell className="whitespace-normal py-2.5 pe-4 align-top text-[0.8125rem] text-foreground/85 leading-relaxed">
+                      <TableCell className="whitespace-normal py-2.5 pe-4 align-top text-heading text-foreground/85 leading-relaxed">
                         {renderInline(prop.description)}
                       </TableCell>
                     </TableRow>
@@ -215,17 +238,18 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
 }
 
 function Keys({ value }: { value: string }) {
+  const text = componentCopy[useDocsLocale()];
   // "Enter / Space" → alternatives; "Shift + Tab" → a chord.
   const alternatives = value.split(/\s+\/\s+|\s*或\s*/);
   return (
     <span className="flex flex-wrap items-center gap-1.5">
       {alternatives.map((alt, i) => (
         <span className="flex items-center gap-1" key={i}>
-          {i > 0 ? <span className="me-0.5 text-muted-foreground text-xs">或</span> : null}
+          {i > 0 ? <span className="me-0.5 text-muted-foreground text-caption">{text.or}</span> : null}
           {alt.split(/\s*\+\s*/).map((key, j) => (
             <span className="flex items-center gap-1" key={j}>
-              {j > 0 ? <span className="text-muted-foreground text-xs">+</span> : null}
-              <Kbd className="h-6 min-w-6 px-1.5 font-mono text-[0.75rem] text-foreground/85">{key}</Kbd>
+              {j > 0 ? <span className="text-muted-foreground text-caption">+</span> : null}
+              <Kbd className="h-6 min-w-6 px-1.5 font-mono text-caption text-foreground/85">{key}</Kbd>
             </span>
           ))}
         </span>
@@ -235,15 +259,16 @@ function Keys({ value }: { value: string }) {
 }
 
 function KeyboardTable({ rows }: { rows: KeyboardRow[] }) {
+  const text = componentCopy[useDocsLocale()];
   return (
     <>
-      <H2 id="keyboard">键盘交互</H2>
+      <H2 id="keyboard">{text.keyboard}</H2>
       <div className="overflow-hidden rounded-xl border">
         <Table density="compact">
           <TableHeader className="bg-surface-subtle/60 dark:bg-surface/40">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="w-[40%] ps-4 text-xs">按键</TableHead>
-              <TableHead className="pe-4 text-xs">行为</TableHead>
+              <TableHead className="w-[40%] ps-4 text-caption">{text.key}</TableHead>
+              <TableHead className="pe-4 text-caption">{text.action}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -252,7 +277,7 @@ function KeyboardTable({ rows }: { rows: KeyboardRow[] }) {
                 <TableCell className="whitespace-normal py-2.5 ps-4 align-top">
                   <Keys value={row.keys} />
                 </TableCell>
-                <TableCell className="whitespace-normal py-2.5 pe-4 align-top text-[0.8125rem] text-foreground/85 leading-relaxed">
+                <TableCell className="whitespace-normal py-2.5 pe-4 align-top text-heading text-foreground/85 leading-relaxed">
                   {renderInline(row.description)}
                 </TableCell>
               </TableRow>

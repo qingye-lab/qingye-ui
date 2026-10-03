@@ -1,13 +1,14 @@
-import test from "node:test";
+import test, { before, after } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { runInNewContext } from "node:vm";
-import ts from "typescript";
+import { fileURLToPath } from "node:url";
+import { createServer } from "vite";
 
-const source = readFileSync(new URL("../src/lib/design-guidance.ts", import.meta.url), "utf8");
-const context = { exports: {} };
-runInNewContext(ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText, context);
-const { designFor } = context.exports;
+let server, designFor;
+before(async () => {
+  server = await createServer({ root: fileURLToPath(new URL("..", import.meta.url)), server: { middlewareMode: true, hmr: false }, appType: "custom", logLevel: "error" });
+  ({ designFor } = await server.ssrLoadModule("/src/lib/design-guidance.ts"));
+});
+after(async () => { await server?.close(); });
 const meta = { description: "A task-specific component", category: "通用", api: [] };
 
 test("component decisions survive legacy slug defaults in the site and catalog projection", () => {

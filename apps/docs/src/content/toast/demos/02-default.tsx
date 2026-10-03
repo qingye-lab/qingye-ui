@@ -1,20 +1,21 @@
+import { useEffect, useId } from "react";
 import { Button } from "@qingye/ui/components/button";
 import { toastManager } from "@qingye/ui/components/toast";
 
-export const meta = { title: "标题与说明", description: "不指定 type 时只显示文字；说明是可选的。" };
+export const meta = { title: "正文", titleEn: "Content" };
 
 export default function Demo() {
+  const id = useId();
+  useEffect(() => () => toastManager.close(id), [id]);
   return (
-    <div className="flex flex-wrap justify-center gap-2">
-      <Button onClick={() => toastManager.add({ title: "链接已复制" })} variant="outline">
-        仅标题
-      </Button>
-      <Button
-        onClick={() => toastManager.add({ title: "已安排巡检", description: "10 月 8 日（周三）09:00，负责人周以宁。" })}
-        variant="outline"
-      >
-        标题与说明
-      </Button>
+    <div className="flex gap-(--qy-action-gap)">
+      <Button variant="bordered" onClick={() => toastManager.add({ id, title: "青野 Qingye UI", timeout: 5000 })}>短文字</Button>
+      <Button variant="bordered" onClick={() => toastManager.add({
+        id,
+        title: "青野 Qingye UI · Button / Input / Textarea / Popover / Tooltip / Toast",
+        description: "按钮、输入框、多行输入、浮起面板、文字提示与通知。中文标点：，。；！？",
+        timeout: 5000,
+      })}>长文字</Button>
     </div>
   );
 }
