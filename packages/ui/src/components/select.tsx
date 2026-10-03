@@ -6,6 +6,7 @@ import { CheckIcon, ChevronDownIcon } from "lucide-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
+import { useFloatingLayer } from "../floating-layer";
 
 export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, "multiple">;
 export type SelectSize = "xs" | "sm" | "md" | "lg" | "xl";
@@ -14,7 +15,7 @@ export type SelectValueProps = React.ComponentProps<typeof SelectPrimitive.Value
 export type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>;
 export type SelectPopupProps = React.ComponentProps<typeof SelectPrimitive.Popup> &
   Pick<SelectPrimitive.Positioner.Props, "side" | "align" | "sideOffset" | "alignOffset" | "alignItemWithTrigger"> &
-  Pick<SelectPrimitive.Portal.Props, "container">;
+  Pick<SelectPrimitive.Portal.Props, "container"> & { positionerProps?: SelectPrimitive.Positioner.Props };
 
 const textProfiles: Record<SelectSize, string> = {
   xs: "text-control-xs-mobile sm:text-control-xs",
@@ -92,12 +93,15 @@ export function SelectValue({ placeholder, className, style, render, children, .
   >{children}</SelectPrimitive.Value>;
 }
 
-/** 入退交给 motion.css；Portal 自然绘制顺序不替用户裁定 z-index。 */
-export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = 0, alignOffset, alignItemWithTrigger = false, className, children, ...props }: SelectPopupProps) {
+/** 入退交给 motion.css；候选继承实际所属工作面的层级。 */
+export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = 0, alignOffset, alignItemWithTrigger = false, positionerProps, className, children, ...props }: SelectPopupProps) {
+  const layer = useFloatingLayer("popup");
   return <SelectPrimitive.Portal container={container} data-slot="select-portal">
     <SelectPrimitive.Positioner
       data-slot="select-positioner" side={side} align={align} alignOffset={alignOffset} alignItemWithTrigger={alignItemWithTrigger}
       sideOffset={sideOffset}
+      {...positionerProps}
+      style={state => ({ ...layer, ...(typeof positionerProps?.style === "function" ? positionerProps.style(state) : positionerProps?.style) })}
     >
       <SelectPrimitive.Popup
         data-slot="select-popup" {...props}

@@ -2,7 +2,7 @@
 // horizontal overflow, empty demos and children wider than their container.
 // Requires the docs dev server (pnpm dev).
 //
-//   node scripts/audit.mjs [slug…] [--only light-desktop,dark-mobile] [--report file.json]
+//   node scripts/audit.mjs [slug…] [--only light-desktop,dark-desktop] [--report file.json]
 //
 // Exit code is 1 when anything was reported, so it can gate a release.
 import { readdirSync, writeFileSync } from "node:fs";
@@ -51,7 +51,7 @@ async function inspect(page, slug, v, measurements) {
     });
     await page.waitForFunction(() =>
       document.querySelector("[data-playground] [data-demo]") ||
-      [...document.querySelectorAll("[data-playground] > p")].some((p) => p.textContent.trim() === "还没有示例。"),
+      document.querySelector('[data-slot="empty"][data-state="empty"]'),
     undefined, { timeout: 15000 });
     await page.waitForTimeout(250);
 

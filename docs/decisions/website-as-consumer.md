@@ -1,20 +1,46 @@
 # 官网作为组件库的第一方消费端
 
-2026-10-02。依据用户最新裁决：首页参考 [coss UI](https://coss.com/ui) 的布局；反对说明书式界面；组件按实际使用需求设计，允许重构而不强留 coss 实现。
+当前裁决：2026-10-03 重写任务，执行收尾跨至 2026-10-04。取代本文件早期的 88 模块、业务任务模拟和移动外壳安排；历史裁决见对应日期的计划与执行记录。
 
-- 首页用简短产品介绍、开始使用/示例入口与组件预览目录建立顺序。移除双长任务和后续摘记叙事方案；它们均不作为本轮视觉验收结果。
-- 组件预览实际渲染 `@qingye/ui`；卡片由 CardFrame/Card 构成，标题由 Heading 承担，布局使用公共组件与页面 CSS。预览不抢焦点，整个卡片链接进入可操作的组件文档。
-- 官网不复制一套基础控件。页面结构、列表、原生链接与库 `render` 根元素保留正确 HTML 语义；链接外观可使用 `buttonVariants`，不能把导航强制改为 button 角色。
-- 结构和状态承担解释。界面删除重复标签、显然的操作说明、设计自述与装饰性描述；保留真实内容、动作、必要后果和错误恢复。方法的完整说明属于设计指南和文档。
-- 根 `design.md` 是公开指南唯一源。生成器写入网站与包，并将项目接入段同步到 AI Skill。AI 文档提供可复制的 AGENTS/design 项目片段；消费项目持续读取实际安装版本，不凭网站版本猜测 API。
-- 全部 88 个库模块按独立边界由子代理逐项检查并实施，主 agent 审核集成。语义、状态、层级、密度、窄屏、长内容和键盘路径须有具体判断；可以保留成熟实现，不以重写数量或统一换皮为验收。
+## 任务与边界
 
-## 验证入口
+官网帮助人识别组件、打开真实示例、查当前 API，并把同源设计指南带入项目。当前目标为已重写的 83 个组件，目录数量与示例来自 `content/*/meta.ts` 和当前 registry，不另维护计数或示例库存。
 
-- `pnpm --filter docs check:components`：TypeScript AST 检查实际 JSX 控件与 Button 导航，不把代码字符串算作渲染控件，不把任意 `render` 属性当通行证。它不是全部运行时语义或第三方组件审计。
-- `pnpm --filter docs test`：控制复用正反例、任务状态测试和公开资料约束。
-- `pnpm --filter @qingye/ui exec vitest run test/public-guidance.test.ts`：指南副本、catalog 哈希和 Skill 接入段同源。
-- `pnpm docs:build`；构建后的 preview 上检查首页 1440px / 390px、浅色 / 深色、组件预览、键盘、导航、复制与溢出。改变视觉后查看截图；不能只用类型检查代替。
-- `scripts/verify-task-patterns.mjs`：共享任务模式正常与异常路径。折叠入口按可访问按钮名称定位，避免锁定原生 summary。
+- 首页用简短介绍、开始使用和组件预览目录组织桌面浏览。每个目录对象用当前公共 Card、Heading 和真实第一 demo；预览 inert、aria-hidden，卡片链接进入可操作的文档。
+- `/docs/components/:slug` 与 `/components/:slug` 共用组件内容身份；playground 裸页消费同一 registry 和 demo ID。预览、源码、API 与键盘信息保留各自用途。
+- `/examples` 只呈现 InputGroup、Tabs、FilterBar、BulkActionBar、DataTable、Toolbar 的简单公共组合。实际 demo 展示本地内容和 caller 管理的状态，不模拟业务对象、请求、权限或服务结果。
+- `/docs/patterns` 是当前 Pattern 公共结构目录。已删除业务模式的详情路由进入 not-found，不从归档恢复旧消费者。`generate-fixtures.mjs` 保持构建调用入口但不再生成无人消费的假业务资源。
+- 所有交互控件复用本库公开组合；页面结构、表单分组和原生链接保留 HTML 语义。链接外观可用 `buttonVariants`。NativeSelect 的原生 option/optgroup 是其必要结构，并非一套另造的基础控件。
+- 当前范围是桌面网站，Header 直接呈现导航；不为旧 Sheet 恢复移动菜单，也不恢复 Skeleton、Disclosure、Frame、Command 等禁用模块。
 
-证据保存在 `test-results/home-renovation/`；最终采用的画面和已放弃方案分别标注。视口模拟不等于真机、屏幕阅读器或真实中文输入法验收。
+## 语义与状态
+
+搜索由当前公开的 inline Combobox 与 Dialog 组成。结果来自当前指南与组件，caller 排序并提供目的地；无匹配不能发明结果。选择结果后把页面标题/主区域返回给 Dialog 的 `finalFocus`，由原语实际聚焦，避免在关闭回调中提前 focus 造成重入；取消归还原触发位置。
+
+草稿和已应用条件分别保存；应用后才改变结果，取消回到已应用条件。Tabs 保留隐藏面板的草稿。复制成功由 Clipboard Promise 确认，拒绝后呈现公共 CopyButton 错误反馈。加载和渲染失败按对应局部说明，重试不丢弃文档邻接内容；未知、空与不适用分别使用当前 Empty 状态。
+
+侧栏选中项在当前原生 ScrollArea 容器内滚动到可见处，使用真实 `data-slot="scroll-area"`，不依赖已删除的 Viewport 部件。
+
+## 表达取值
+
+| 取值 | 归属与理由 |
+| --- | --- |
+| 控件、对象边界、字号与焦点 | 公共组件和当前角色接管；页面链接 focus 使用 quiet 角色向盒内绘制。 |
+| 页面间隔与动作共置 | field/fields/actions/panel/section 关系角色；Chrome 与正文属于不同阅读位置。 |
+| 首页 90rem 容量，四列目录，70rem/50rem 降列 | 官网桌面预设，用于同时识别多个组件；不写成理念强制值。 |
+| 文档 48rem、组合目录 72rem 容量 | 官网阅读与并置预设；长 API 表使用公共 TableContainer 保留比较列和键盘滚动。 |
+| 预览 15rem 高、20rem 内容容量、0.8 缩放 | 缩略目录预设，只用于识别；完整可操作示例不缩放。浏览器需检查裁切与识别能力。 |
+| Header z=1、SkipLink z=2 | 页面 chrome 的集中预设，低于公共 popup=10 与 modal=30。浮层由共享层级工具管理。 |
+| 主题试验台配色与圆角范围 | 官网预设；真实公共角色消费，不能凭预设声明对比度通过。 |
+
+## 双语与同源指南
+
+页面 chrome、指南正文、加载/错误恢复及非示例组件资料选择路由语言；具体作者 demo 可保留原示例内容。组件页显式传 locale 到公共 metadata/decision 接口，缺译事实由接口按字段保留，不用通用英语覆盖作者判断。
+
+根 `design.md` 是设计指南唯一源。AI 页面消费 `designEntryFor(locale)`，同源抽取指南、AGENTS/design 接入片段与任务提示；中文 `/design.md` 契约保持，英文入口为 `/design.en.md` 与对应 AI 资源。哲学英文源为 `public-content/philosophy.en.md`，用 canonical 中文源 SHA256 绑定翻译；方法标题生成稳定 `method-1..6`，不修改中文正文、不执行 Markdown HTML。
+
+## 验证边界
+
+本批执行者只运行定点 strict TS、官网真实 DOM/SSR 契约和 TypeScript AST 控件检查。执行记录见 `docs/implementation/2026-10-03-website-consumer.md`。
+
+生成、构建、浏览器由主 agent 串行执行。桌面浅深色首页预览容量、组件页长表、搜索、复制、组合状态、英文路由和公开 Markdown 是实际验收对象；类型检查和 DOM 契约不代表人工视觉、辅助技术或真机验收。没有恢复旧业务测试，也不为通过测试恢复被禁用模块。

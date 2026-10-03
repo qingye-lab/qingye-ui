@@ -18,7 +18,7 @@ export default {
     },
     responsive: ["尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。"],
     customization: ["variant、tone、size 与 shape 分别选择呈现、后果、尺寸与内容形态。"],
-  },
+  }, designEn: {"whenToUse":["Run a command with an object and consequence, submit a form, or stop the current task."],"avoid":["Use native links for navigation. Finished waiting does not establish success, and unknown is neither failure nor permission to retry immediately."],"composition":["Danger actions use ButtonProtection or aria-describedby associated with existing nonblank consequence text. Applications own confirmation criteria, permissions, and remote verification."],"stateOwner":{"library":["Native and non-native command semantics, focus, activation guards, action names, and localized states."],"application":["Objects, scope, consequences, permissions, request facts, verification, recovery, and background cancellation."]},"responsive":["Choose dimensions for position; long labels may wrap and grow, icons retain matching geometry, and touch targets remain separate from appearance."],"customization":["variant, tone, size, and shape independently select presentation, consequence, dimensions, and content form."]},
   category: "通用",
   layer: "primitive",
   source: "local",

@@ -66,7 +66,7 @@ Decided for Popover（2026-10-03，按逐值裁决修订）；其余重写目标
 
 ### 决定 3：**动画所有权在 `motion.css`**
 
-基础层 §12 的所有权选择：Popover / Tooltip 组件提供结构、原语测得的触发点原点与 data-slot，入退由 motion.css 接管，不声明第二套入场参数。当前起止 scale 0.98 / opacity 0、进入 140ms / 退出 100ms 均为**预设**，不得写成关系唯一决定。Popover 与 Tooltip 的 z-50 也是**继承预设**。
+基础层 §12 的所有权选择：Popover / Tooltip / HoverCard 提供结构、原语测得的触发点原点与 data-slot，入退由 motion.css 接管，不声明第二套入场参数。当前起止 scale 0.98 / opacity 0、进入 140ms / 退出 100ms 均为**预设**，不得写成关系唯一决定。各自 Positioner 消费公开 `useFloatingLayer("popup")`；modal 根使用真实 active 的 FloatingLayerScope，集中整数为预设，父候选与后开启工作面的先后为关系约束。
 
 ### Popover 当前的焦点与命中
 
@@ -74,7 +74,7 @@ Popover 固定 modal=false，不困住底层工作面；非阻断**不等于面�
 
 裸 Trigger / Close 当前有透明占位边框与 2px 自盒内线；Button 组合使用相应按钮档的焦点机制，须核对没有重复信号。touch-target 在粗指针下**自建定位上下文**，命中层至少库内 44px，不再依赖调用方手写 relative；这避免 static 宿主把命中层解析到视口。2px 与 44px 是**选择**，不冒充 WCAG AA 强制数值；强制颜色由 styles.css 统一回退，完整组合矩阵仍为 UNVERIFIED，见基础层 §15。
 
-当前 Popover 面板读 rounded-overlay（12px）、surface-raised、容器 border 与 shadow-raised，内容滚动层读 `--qy-panel-padding-sm`（16px）。圆角、阴影和 padding 是**选择或预设**；必要识别机制要存在，但描边不是所有浮层的必选机制。Tooltip 的局部阴影与伪元素高光仍是保留实现预设，不把本族写成已全部按共享角色重写。
+当前 Popover 面板读 rounded-overlay（12px）、surface-raised、容器 border 与 shadow-raised，内容滚动层读 `--qy-panel-padding-sm`（16px）。Tooltip / HoverCard 也读取 raised，Dialog / AlertDialog / Drawer 读取 overlay 阴影与阻断遮罩。圆角、阴影和 padding 是**选择或预设**；必要识别机制要存在，但描边不是所有浮层的必选机制，角色收敛不等于所有组合已验收。
 
 ### 决定 4：**阻断性必须被正确声明**
 
@@ -156,6 +156,6 @@ NG7。Tooltip 与 HoverCard 是会消失的，因此它们**不得承载唯一�
 ## Consequences
 
 - 当前 Popover 面板实际获得焦点，不能删除其只变色的信号或用非阻断身份否认这个事实。
-- 其余浮层已归档，本文记录重写目标，不沿用旧文件行数或组件页数量描述当前实现。
-- Tooltip 仍有待重写预设；完整强制颜色组合与面板焦点落点的任务适合性分别验证，不从一次审查外推全部 PASS。
+- 浮层按批次重写，当前源与对应批次记录实际完成情况，不沿用旧行数或页数描述现状。
+- 完整强制颜色、共享层级 computed 与面板焦点落点按真实任务分别验证，不从一次审查外推全部 PASS。
 - ConfirmAction 为拟议 Pattern，实际 danger Button 已有两种合法后果关联路径，由 B 的新实现证据验收。

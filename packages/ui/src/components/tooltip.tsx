@@ -4,6 +4,7 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import * as React from "react";
 import { cn } from "../utils.js";
 import { Button } from "./button.js";
+import { useFloatingLayer } from "../floating-layer";
 
 const TooltipProvider = TooltipPrimitive.Provider;
 const TooltipCreateHandle = TooltipPrimitive.createHandle;
@@ -86,6 +87,7 @@ type TooltipPopupProps = TooltipPrimitive.Popup.Props & {
   sideOffset?: TooltipPrimitive.Positioner.Props["sideOffset"];
   anchor?: TooltipPrimitive.Positioner.Props["anchor"];
   portalProps?: TooltipPrimitive.Portal.Props;
+  positionerProps?: TooltipPrimitive.Positioner.Props;
 };
 
 function TooltipPopup({
@@ -95,10 +97,12 @@ function TooltipPopup({
   sideOffset,
   anchor,
   portalProps,
+  positionerProps,
   className,
   children,
   ...popupProps
 }: TooltipPopupProps): React.ReactElement {
+  const layer = useFloatingLayer("popup");
   // Foundation presets: raised surface/shadow and overlay radius. Motion owns entry/exit.
   const surface = "max-w-(--available-width) origin-(--transform-origin) rounded-overlay bg-surface-raised text-foreground shadow-raised text-control-sm-mobile sm:text-control-sm min-h-(--qy-control-sm-narrow) sm:min-h-(--qy-control-sm) px-(--qy-control-sm-padding) py-[calc((var(--qy-control-sm-narrow)-var(--qy-text-control-sm-mobile-leading))/2)] sm:py-[calc((var(--qy-control-sm)-var(--qy-text-control-sm-leading))/2)] [overflow-wrap:anywhere]";
   const association = React.useContext(TooltipAssociation);
@@ -130,6 +134,8 @@ function TooltipPopup({
         side={side}
         sideOffset={sideOffset}
         anchor={anchor}
+        {...positionerProps}
+        style={state => ({ ...layer, ...(typeof positionerProps?.style === "function" ? positionerProps.style(state) : positionerProps?.style) })}
       >
         <TooltipPrimitive.Popup
           data-slot="tooltip-popup"

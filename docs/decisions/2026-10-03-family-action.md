@@ -2,9 +2,9 @@
 
 ## Status
 
-Decided for Button（2026-10-03，按用户逐值裁决修订）；其余族成员仍为 Proposed。依据根 [design.md](../../design.md)、[基础层](2026-10-03-foundation.md)与[组件分层](component-layering.md)。
+Decided for Button / ConfirmAction（2026-10-04，确认组合按第十二批实现）；本次仅同步 ConfirmAction 及其相关状态事实。依据根 [design.md](../../design.md)、[基础层](2026-10-03-foundation.md)、[组件分层](component-layering.md)与[第十二批决定](2026-10-03-batch12-confirm-upload.md)。
 
-当前本族已有 Button（含 ButtonProtection）与 Toast。其他成员是重写目标，不表示本仓库已经导出。真实取值读当前源码；具体数值区分选择与预设，不从旧实现推出设计要求。Button 的后果关联诊断由并行任务 B 实现，本文记录裁定契约，不代替其验收。
+本批新增 ConfirmAction，复用当前 ButtonProtection 与 AlertDialog/Input/Field。其它族成员的状态未在本次核对，本文历史“待重写”条目不作为今日 inventory；当前能力读各组件源码与所属批次报告。具体数值区分选择与预设，不从旧实现推出设计要求。本文记录契约，不代替运行验收。
 
 ## 一、这一族处理什么真实问题
 
@@ -54,7 +54,7 @@ Toast 的 loading 默认 30000ms 后变为持续 unknown，保留对象内容；
 | 分组 | 当前 / 目标成员 | 定位 |
 |---|---|---|
 | 动作 | 当前 Button；ButtonGroup、Toggle、ToggleGroup、CopyButton 待重写 | 触发动作的原语与组合 |
-| 保护关系 | 当前 ButtonProtection；ConfirmAction 为拟议 Pattern | 后果关联、必要确认与返回 |
+| 保护关系 | 当前 ButtonProtection 与 ConfirmAction Pattern | 后果关联、当前快照确认、失效后重新阅读与返回 |
 | 就地反馈 | Alert、PendingValue 待重写 | 在场对象的事实 |
 | 通知 | 当前 Toast，含 anchored 入口 | 应用给出的通知事实 |
 | 进度 | Progress、ProgressCircle 待重写 | 已确认进度 |
@@ -115,7 +115,15 @@ shape 为 label / icon，独立于 size；图标居中按档案换算。小入�
 </section>
 ```
 
-ConfirmAction 仍为拟议的确认 Pattern，不把它写成当前必需组件或已导出 API。本文不新增 Button consequence 属性。
+ConfirmAction 已作为当前 Pattern 导出，是否使用仍按实际保护任务决定。本文不新增 Button consequence 属性。
+
+### ConfirmAction 当前快照契约
+
+snapshot 明确 objectId/objectLabel/version/change/consequence。打开时复制并冻结已读事实，当前任一字段或确认文字条件变化使旧认可失效；可见状态说明与“重新阅读”更新快照并清空旧输入。数据恢复成旧值不自动复活认可。可选 confirmationText 与可见 confirmationLabel 通过 Field/Input 准确匹配；没有任务依据不强制所有确认都输入文字。
+
+onConfirm(snapshot,event) 只请求动作。组件不发网络、不等待 Promise 推断成功、不自动关窗；受控打开拒绝与事件取消都不产生结果。应用提供 state 与 disabled，waiting/in-progress/unknown 阻止重复动作。返回/关闭只退出本界面，不宣称已取消后台操作。AlertDialog 提供模态与触发焦点返回，ButtonProtection 保持所确认后果可见并关联，尺寸/文字/焦点消费既有角色。
+
+同批 FileUpload 只改变本地已接受集合；本地移除不代表取消上传或删除服务端文件。上传 waiting/in-progress/failed/unknown/success 标签、可靠进度分母与恢复动作均由应用明确提供，组件不凭 Promise 或动画推断。
 
 ## 七、评审检查
 
@@ -134,11 +142,11 @@ ConfirmAction 仍为拟议的确认 Pattern，不把它写成当前必需组件�
 
 ## Alternatives
 
-联合状态是当前接口选择，boolean loading 不因类型而违背理念。三档按边界机制区分，不固定编码主次。已有后果可用 aria-describedby 关联，专用结构用于确需共同组织的情境。Button 不承担业务确认或授权，ConfirmAction 是否落地按任务另定。
+联合状态是当前接口选择，boolean loading 不因类型而违背理念。三档按边界机制区分，不固定编码主次。已有后果可用 aria-describedby 关联，专用结构用于确需共同组织的情境。Button 不承担业务确认或授权；当前 ConfirmAction 承担已读快照确认，也不拥有权限和操作结果。
 
 ## Consequences
 
 - Button 已有三档、独立 tone、五档同名文字与状态联合；后果关联诊断的新契约由 B 实现并验证，不能只凭文档记 PASS。
 - 新契约须验证共同结构、外部非空说明、空/缺失说明，以及开发/生产差别；本任务不改测试。
 - Toast 仍有局部视觉与动效预设，职责规范不表示全部保留用法已重写。
-- 其余族成员属于后续重写目标，不沿用旧文件行数、旧示例数量或旧实现取值作为当前计划依据。
+- ConfirmAction 的全部快照字段失效、重新阅读、事件取消、受控拒绝、busy/unknown 与返回焦点已有定向行为证据，真实模态/浅深仍由主任务验证。其它成员状态不在本次同步范围；不沿用旧文件行数、旧示例数量或旧实现取值作为当前依据。

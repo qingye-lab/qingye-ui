@@ -23,7 +23,7 @@ before(async () => {
   globalThis.ResizeObserver = class { observe() {} unobserve() {} disconnect() {} };
   dom.window.scrollTo = () => {};
   dom.window.Element.prototype.scrollIntoView = () => {};
-  server = await createServer({ root: fileURLToPath(new URL("..", import.meta.url)), server: { middlewareMode: true, hmr: false }, appType: "custom", logLevel: "error" });
+  server = await createServer({ root: fileURLToPath(new URL("..", import.meta.url)), server: { middlewareMode: true, hmr: false, ws: false }, appType: "custom", logLevel: "error" });
   fixture = await server.ssrLoadModule("/test/fixtures/docs-shell.tsx");
 });
 afterEach(async () => {

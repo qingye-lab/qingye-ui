@@ -1,6 +1,6 @@
 {
   "name": "@qingye/ui",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "A React component library: accessible primitives, a layered design token system, and light/dark themes.",
   "license": "MIT",
   "type": "module",
@@ -43,9 +43,14 @@
       "types": "./dist/utils.d.ts",
       "import": "./dist/utils.js"
     },
+    "./floating-layer": {
+      "types": "./dist/floating-layer.d.ts",
+      "import": "./dist/floating-layer.js"
+    },
     "./design.md": "./design.md",
     "./ai/*": "./ai/*",
-    "./registry/*": "./registry/*"
+    "./registry/*": "./registry/*",
+    "./design.en.md": "./design.en.md"
   },
   "files": [
     "dist",
@@ -59,6 +64,7 @@
     "README.md",
     "LICENSE",
     "design.md",
+    "design.en.md",
     "ai",
     "registry"
   ],

@@ -2,7 +2,8 @@
 
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import { useRender } from "@base-ui/react/use-render";
-import { useRef, type ReactElement } from "react";
+import { useRef, useState, type ReactElement } from "react";
+import { FloatingLayerScope, useFloatingLayer } from "../floating-layer";
 import { Button } from "./button";
 import { DialogHeader, DialogPanel, DialogFooter, type DialogGroupProps, type DialogPopupProps } from "./dialog";
 import { cn } from "../utils";
@@ -10,8 +11,12 @@ import { cn } from "../utils";
 export type AlertDialogProps<Payload = unknown> = AlertDialogPrimitive.Root.Props<Payload>;
 
 export function AlertDialog<Payload = unknown>(props: AlertDialogProps<Payload>): ReactElement {
+  const [open, setOpen] = useState(props.defaultOpen ?? false);
   // 原语固定 modal 与 disablePointerDismissal；遮罩不是明确的决定。
-  return <AlertDialogPrimitive.Root {...props} />;
+  return <FloatingLayerScope active={props.open ?? open}><AlertDialogPrimitive.Root {...props} onOpenChange={(next, details) => {
+    props.onOpenChange?.(next, details);
+    if (!details.isCanceled && props.open === undefined) setOpen(next);
+  }} /></FloatingLayerScope>;
 }
 
 export const AlertDialogCreateHandle = AlertDialogPrimitive.createHandle;
@@ -23,6 +28,8 @@ export function AlertDialogTrigger<Payload = unknown>({ render, ...props }: Aler
 export type AlertDialogPopupProps = DialogPopupProps;
 
 export function AlertDialogPopup({ portalProps, backdropProps, viewportProps, initialFocus, className, ref, ...props }: AlertDialogPopupProps): ReactElement {
+  const backdropLayer = useFloatingLayer("backdrop");
+  const surfaceLayer = useFloatingLayer("surface");
   const panel = useRef<HTMLDivElement>(null);
   // 公共 useRender 合并 caller ref（含 React 19 cleanup），不覆盖调用方 render。
   const popup = useRender({ ref: [panel, ref ?? null], render: <AlertDialogPrimitive.Popup {...props}
@@ -31,10 +38,12 @@ export function AlertDialogPopup({ portalProps, backdropProps, viewportProps, in
       "pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border-strong bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
       typeof className === "function" ? className(state) : className,
     )} /> });
-  return <AlertDialogPrimitive.Portal {...portalProps}>
+  return <AlertDialogPrimitive.Portal {...portalProps} keepMounted={false}>
     <AlertDialogPrimitive.Backdrop {...backdropProps} data-slot="alert-dialog-backdrop"
+      style={state => ({ ...backdropLayer, ...(typeof backdropProps?.style === "function" ? backdropProps.style(state) : backdropProps?.style) })}
       className={(state) => cn("fixed inset-0 bg-overlay", typeof backdropProps?.className === "function" ? backdropProps.className(state) : backdropProps?.className)} />
     <AlertDialogPrimitive.Viewport {...viewportProps} data-slot="alert-dialog-viewport"
+      style={state => ({ ...surfaceLayer, ...(typeof viewportProps?.style === "function" ? viewportProps.style(state) : viewportProps?.style) })}
       className={(state) => cn("pointer-events-none fixed inset-0 flex min-w-0 items-center justify-center p-(--qy-panel-padding)", typeof viewportProps?.className === "function" ? viewportProps.className(state) : viewportProps?.className)}>
       {popup}
     </AlertDialogPrimitive.Viewport>

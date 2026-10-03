@@ -347,6 +347,50 @@
     /* Minimum touch target; enforced on coarse pointers. */
     --qy-touch-target: 2.75rem;
 
+    /* Selection batch 6: independent slider geometry presets, not spacing.
+     * Track/Indicator consume thickness; vertical Control consumes its working
+     * length. Retune here or in the project theme; choices are documented in
+     * docs/decisions/2026-10-03-batch6-selection.md. */
+    --qy-slider-track-size: 4px;
+    --qy-slider-vertical-length: 10rem;
+
+    /* Batch 7 passive display roles. Each entry is a preset and is independently
+     * overridable here or by the project theme. Live consumers are named below;
+     * these dimensions do not derive from the global spacing scale. */
+    /* Avatar identity samples; Avatar Root consumes the selected profile. */
+    --qy-avatar-xs: var(--qy-control-xs);
+    --qy-avatar-sm: var(--qy-control-sm);
+    --qy-avatar-md: var(--qy-control-md);
+    --qy-avatar-lg: var(--qy-control-lg);
+    --qy-avatar-xl: var(--qy-control-xl);
+    /* ProgressCircle's SVG viewport, separate from avatars and controls. */
+    --qy-progress-circle-xs: var(--qy-control-xs);
+    --qy-progress-circle-sm: var(--qy-control-sm);
+    --qy-progress-circle-md: var(--qy-control-md);
+    --qy-progress-circle-lg: var(--qy-control-lg);
+    --qy-progress-circle-xl: var(--qy-control-xl);
+    --qy-progress-circle-stroke: 2px;
+    /* StatusDot graphic; MeterTrack and ProgressTrack each own their thickness. */
+    --qy-status-dot-size: 0.5rem;
+    --qy-meter-track-size: 0.5rem;
+    --qy-progress-track-size: 0.5rem;
+    /* Glyph enclosures: Badge and native Kbd consume their respective padding. */
+    --qy-badge-padding-inline: 0.5em;
+    --qy-badge-padding-block: 0.125em;
+    --qy-kbd-padding-inline: 0.375em;
+    --qy-kbd-padding-block: 0.125em;
+
+    /* Floating relationship defaults; utility + actual Backdrop/Viewport/
+     * Positioner consumers own modal order through React context. Integers and
+     * step are presets; newer modal > older owned popup > its surface, and notification < document popup
+     * are relationship constraints. Retune as one scale in a project theme. */
+    --qy-layer-notification: 5;
+    --qy-layer-popup: 10;
+    --qy-layer-modal: 30;
+    --qy-layer-modal-step: 10;
+    --qy-layer-surface-offset: 1;
+    --qy-layer-owned-popup-offset: 2;
+
     /* Foundation §3 spacing roles: rows express list item occupancy; panel
      * padding expresses inner edge → content (default or compact surface); panel
      * gap expresses paragraphs inside that panel; section gap separates sections.

@@ -18,8 +18,12 @@ export type Category = (typeof CATEGORIES)[number];
 
 export interface ApiProp {
   name: string;
+  /** Translate descriptive labels; actual property identifiers stay unchanged. */
+  nameEn?: string;
   type: string;
+  typeEn?: string;
   default?: string;
+  defaultEn?: string;
   description: string;
   descriptionEn?: string;
 }
@@ -34,6 +38,7 @@ export interface ApiPart {
 
 export interface KeyboardRow {
   keys: string;
+  keysEn?: string;
   description: string;
   descriptionEn?: string;
 }
@@ -48,6 +53,11 @@ export interface ComponentDesign {
   responsive: string[];
   customization: string[];
 }
+
+/** Parallel authored sections; omitted or blank entries retain the source. */
+export type ComponentDesignTranslation = Partial<Omit<ComponentDesign, "methods" | "stateOwner">> & {
+  stateOwner?: Partial<ComponentDesign["stateOwner"]>;
+};
 
 /**
  * Written once per component at `src/content/<slug>/meta.ts`.
@@ -74,6 +84,7 @@ export interface ComponentMeta extends LocalizedMeta {
   /** Search aliases, e.g. ["下拉", "dropdown"]. */
   keywords?: string[];
   design?: Partial<ComponentDesign>;
+  designEn?: ComponentDesignTranslation;
   /**
    * What a reader would get wrong about *this* component, in one place.
    *

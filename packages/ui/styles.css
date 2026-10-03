@@ -39,7 +39,7 @@
    */
   @media (forced-colors: active) {
     :focus-visible {
-      outline: 2px solid !important;
+      outline: var(--qy-focus-ring-width) solid !important;
       outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important;
     }
   }

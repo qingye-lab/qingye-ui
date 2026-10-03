@@ -7,6 +7,7 @@ import { runInNewContext } from "node:vm";
 import ts from "typescript";
 import { generateResourceFixtures } from "../../../apps/docs/scripts/generate-fixtures.mjs";
 import { renderPatternGuidance } from "./pattern-guidance.mjs";
+import { embeddedTranslation, standaloneTranslation, projectImplementationLinks, projectPackagePhilosophy } from "./resource-translations.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const repo = resolve(root, "../..");
@@ -20,6 +21,8 @@ const write = (path, text) => { mkdirSync(dirname(path), { recursive: true }); w
 const json = (path, value) => write(path, `${JSON.stringify(value, null, 2)}\n`);
 const publicPath = (path) => path.replaceAll("\\", "/");
 const designGuide = read(join(repo, "design.md"));
+const guideTranslation = embeddedTranslation(designGuide, "design.md");
+const designGuideEn = guideTranslation.english;
 const adoptionStart = "<!-- qingye:project-adoption:start -->";
 const adoptionEnd = "<!-- qingye:project-adoption:end -->";
 const adoptionFrom = designGuide.indexOf(adoptionStart);
@@ -28,6 +31,15 @@ if (adoptionFrom < 0 || adoptionTo <= adoptionFrom || designGuide.indexOf(adopti
   throw new Error("design.md must contain exactly one complete Qingye project-adoption block");
 }
 const projectAdoption = designGuide.slice(adoptionFrom + adoptionStart.length, adoptionTo).trim();
+const adoptionStartEn = "<!-- qingye:project-adoption:en:start -->";
+const adoptionEndEn = "<!-- qingye:project-adoption:en:end -->";
+function sectionBetween(source, start, end, label) {
+  const from = source.indexOf(start);
+  const to = source.indexOf(end, from + start.length);
+  if (from < 0 || to <= from || source.indexOf(start, from + start.length) >= 0) throw new Error(`Missing or repeated ${label}`);
+  return source.slice(from + start.length, to).trim();
+}
+const projectAdoptionEn = sectionBetween(designGuideEn, adoptionStartEn, adoptionEndEn, "English project adoption");
 
 // The style contract is the 设计契约 section of the same guide, given to an AI
 // without the surrounding argument. Extracted rather than restated so the two
@@ -44,13 +56,16 @@ const deliveryEnd = designGuide.indexOf(adoptionStart, deliveryStart);
 if (deliveryStart < 0 || deliveryEnd <= deliveryStart) throw new Error("design.md must contain the delivery checks before project adoption");
 const deliveryChecks = designGuide.slice(deliveryStart, deliveryEnd).trim();
 const standards = read(join(repo, "STANDARDS.md"));
+const standardsTranslation = embeddedTranslation(standards, "STANDARDS.md");
 const philosophy = read(join(docs, "src/public-content/philosophy.md"));
+const philosophyEnSource = read(join(docs, "src/public-content/philosophy.en.md"));
+const philosophyEn = standaloneTranslation(philosophy, philosophyEnSource, "philosophy.md");
+const packagedPhilosophy = projectPackagePhilosophy(philosophy);
+const packagedPhilosophyEn = projectPackagePhilosophy(philosophyEn, "en");
 // The public guide owns design rules; STANDARDS owns implementation details.
 // Resolve their cross-references inside the existing AI delivery file.
-const implementationStandards = standards.replace(/^# 组件规范\n\n/, "")
-  .replace(/^## /gm, "### ")
-  .replaceAll("(design.md#六种方法)", "(design-philosophy.md)")
-  .replace(/\(design\.md#([^)]*)\)/g, "(#$1)");
+const implementationStandards = projectImplementationLinks(standardsTranslation.canonical)
+  .replace(/^# 组件规范\n\n/, "").replace(/^## /gm, "### ");
 
 // The skill carries the same ban list, extracted rather than retyped: a
 // hand-written English summary drifts from the Chinese table it summarises.
@@ -59,6 +74,13 @@ const banSummary = [...banTable.matchAll(/^\|\s*(NG\d)\s*\|\s*([^|]+?)\s*\|/gm)]
   .map((match) => `${match[1]}. ${match[2]}`)
   .join("\n");
 if (!banSummary) throw new Error("design.md 设计契约 must list bans as NG1..NGn rows");
+const designContractEn = sectionBetween(designGuideEn, "## Design contract\n", "\n## Assigning changes", "English design contract");
+const deliveryChecksEn = sectionBetween(designGuideEn, "## Delivery checks for people and AI\n", adoptionStartEn, "English delivery checks");
+const banTableEn = designContractEn.split("### Bans")[1]?.split("\n###")[0] ?? "";
+const banSummaryEn = [...banTableEn.matchAll(/^\|\s*(NG\d)\s*\|\s*([^|]+?)\s*\|/gm)].map(match => `${match[1]}. ${match[2]}`).join("\n");
+if (!banSummaryEn) throw new Error("English design contract must retain the NG ban rows.");
+const implementationStandardsEn = projectImplementationLinks(standardsTranslation.english, "en")
+  .replace(/^# Component Standards\n\n/, "").replace(/^## /gm, "### ");
 // Pattern 层由多个原语组合而成；其原语尚未重写时整层在仓库外归档
 // （见 docs/decisions/2026-10-03-archive-pending-rewrite.md）。缺席时不生成夹具。
 const patternMetadata = join(docs, "src/patterns/metadata.ts");
@@ -83,6 +105,7 @@ function loadData(path) {
   return context.exports;
 }
 const { designFor } = loadData(join(docs, "src/lib/design-guidance.ts"));
+const { localizedMeta } = loadData(join(docs, "src/lib/localized-meta.ts"));
 const { patterns } = hasPatterns ? loadData(patternMetadata) : { patterns: [] };
 const astCache = new Map();
 function sourceFile(path) {
@@ -168,6 +191,7 @@ function demoTitle(path) {
   return path.split("/").pop().replace(/\.tsx$/, "");
 }
 const packageOf = (value) => value.startsWith("@") ? value.split("/").slice(0, 2).join("/") : value.split("/")[0];
+const categoryLabelsEn = { "通用": "General", "表单": "Forms", "日期与时间": "Date and time", "数据展示": "Data display", "反馈": "Feedback", "浮层": "Overlays", "导航": "Navigation", "布局": "Layout", "排版": "Typography", "工具": "Utilities" };
 const publicExports = exportsOf(join(root, "src/index.ts"));
 const components = names.map((name) => {
   const metaPath = join(content, name, "meta.ts");
@@ -190,6 +214,8 @@ const components = names.map((name) => {
     return { id: file.replace(/\.tsx$/, "").replace(/^\d+-/, ""), title: demoTitle(path), source: publicPath(relative(repo, path)), imports: importsOf(path), providers: providersIn(path), code: read(path), sha256: hash(read(path)) };
   }) : [];
   const types = sourceFile(path).statements.filter((node) => exported(node) && (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node))).map((node) => ({ name: node.name.text, definition: node.getText(sourceFile(path)) }));
+  const englishMeta = localizedMeta(meta, "en");
+  const providerNoteIndices = (meta.notes ?? []).map((note, index) => /Provider|上下文/.test(note) ? index : -1).filter(index => index >= 0);
   return {
     name, title: meta.title, description: meta.description, category: meta.category, source: meta.source,
     ...(meta.layer ? { layer: meta.layer } : {}),
@@ -199,6 +225,12 @@ const components = names.map((name) => {
     dependencies: { runtime: imports.filter((item) => pkg.dependencies?.[item] || (pkg.peerDependencies?.[item] && !pkg.peerDependenciesMeta?.[item]?.optional)), optionalPeers: imports.filter((item) => pkg.peerDependenciesMeta?.[item]?.optional) },
     providers: { exports: actualExports.filter((item) => /Provider$/.test(item.name)).map((item) => item.name), guidance: (meta.notes ?? []).filter((note) => /Provider|上下文/.test(note)).map((text) => ({ text, source: publicPath(relative(repo, metaPath)), certainty: "documented" })), required: [], status: "UNVERIFIED" },
     examples, design: designFor(meta, name), sourceFacts: { file: publicPath(relative(repo, path)), sha256: hash(read(path)), extraction: "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED." },
+    ...(meta.decisions ? { decisions: meta.decisions } : {}),
+    localized: { en: {
+      title: englishMeta.title, description: englishMeta.description, category: categoryLabelsEn[meta.category] ?? meta.category,
+      ...(englishMeta.decisions ? { decisions: englishMeta.decisions } : {}), notes: englishMeta.notes ?? [], api: englishMeta.api, keyboard: englishMeta.keyboard ?? [], design: designFor(meta, name, "en"),
+      providerGuidance: providerNoteIndices.map(index => ({ text: englishMeta.notes[index], source: publicPath(relative(repo, metaPath)), certainty: "documented" })),
+    } },
   };
 });
 const versionPath = `v${pkg.version}`;
@@ -206,19 +238,39 @@ const catalog = {
   schemaVersion: 2, name: "Qingye UI", nameZh: "青野 UI", package: pkg.name, version: pkg.version,
   generatedBy: "scripts/gen-catalog.mjs", scope: "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   components, extras: components.filter((component) => component.source === "local").map((component) => component.name), patterns,
-  designGuide: { file: "design.md", sha256: hash(designGuide), styleContract: { file: "ai/style.md", section: "设计契约", implementation: { source: "STANDARDS.md", sha256: hash(standards), section: "公共组件实现" } }, philosophy: { file: "ai/design-philosophy.md", sha256: hash(philosophy) } },
-  ai: { skill: "ai/SKILL.md", index: `ai/${versionPath}/llms.txt`, components: `ai/${versionPath}/components`, patterns: `ai/${versionPath}/patterns` },
+  designGuide: {
+    file: "design.md", sha256: hash(designGuide),
+    styleContract: { file: "ai/style.md", section: "设计契约", implementation: { source: "STANDARDS.md", sha256: hash(standards), section: "公共组件实现" } },
+    philosophy: {
+      file: "ai/design-philosophy.md", sha256: hash(packagedPhilosophy),
+      source: "apps/docs/src/public-content/philosophy.md", sourceSha256: hash(philosophy),
+      projections: { website: { file: "ai/design-philosophy.md", sha256: hash(philosophy) } },
+      localized: { en: {
+        file: "ai/design-philosophy.en.md", sha256: hash(packagedPhilosophyEn),
+        source: "apps/docs/src/public-content/philosophy.en.md", sourceSha256: hash(philosophyEnSource),
+        projections: { website: { file: "ai/design-philosophy.en.md", sha256: hash(philosophyEn) } },
+      } },
+    },
+  },
+  ai: { skill: "ai/SKILL.md", index: `ai/${versionPath}/llms.txt`, components: `ai/${versionPath}/components`, ...(patterns.length ? { patterns: `ai/${versionPath}/patterns` } : {}) },
+  localized: { en: { designGuide: "design.en.md", styleContract: "ai/style.en.md", philosophy: "ai/design-philosophy.en.md", skill: "ai/SKILL.en.md", index: `ai/${versionPath}/en/llms.txt`, components: `ai/${versionPath}/en/components` } },
   registry: { index: "registry/registry.json", items: "registry/r" },
 };
 json(join(root, "catalog.json"), catalog);
 json(join(docs, "public/catalog.json"), catalog);
 write(join(root, "design.md"), designGuide);
 write(join(docs, "public/design.md"), designGuide);
+write(join(root, "design.en.md"), designGuideEn);
+write(join(docs, "public/design.en.md"), designGuideEn);
 write(join(docs, "public/design-philosophy.md"), philosophy);
+write(join(docs, "public/design-philosophy.en.md"), philosophyEn);
 const aiRoot = join(root, "ai");
 const siteAi = join(docs, "public/ai");
 const bothAi = (path, text) => { write(join(aiRoot, path), text); write(join(siteAi, path), text); };
-bothAi("design-philosophy.md", philosophy);
+write(join(aiRoot, "design-philosophy.md"), packagedPhilosophy);
+write(join(aiRoot, "design-philosophy.en.md"), packagedPhilosophyEn);
+write(join(siteAi, "design-philosophy.md"), philosophy);
+write(join(siteAi, "design-philosophy.en.md"), philosophyEn);
 const skill = `---
 name: qingye-ui
 description: Build complete React tasks using the installed Qingye UI version, public methods and verified facts.
@@ -247,12 +299,12 @@ steps, never a one-off value.
 
 1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Check the project's persistent references described above when completing onboarding. Preserve unrelated work.
 2. State the object, action, scope, current status and work to retain. Use relevant methods; cultural terms are not HTML roles or API names.
-3. Load related resources from ai/v<installed-version>/components and patterns. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.
+3. Load related resources from ai/v<installed-version>/components${patterns.length ? " and patterns" : ""}. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
-Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](${versionPath}/installation.md) for styles and dependencies; [the resource index](${versionPath}/llms.txt) for component and pattern constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
+Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](${versionPath}/installation.md) for styles and dependencies; [the resource index](${versionPath}/llms.txt) for ${patterns.length ? "component and pattern" : "component"} constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
 
 Registry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.
 `;
@@ -276,6 +328,8 @@ bothAi("style.md", [
   "",
   "## 公共组件实现",
   "",
+  "下文的基础层与逐值裁决路径是仓库内部取证来源，不随包分发。公开可执行准则见[指南交付检查](../design.md#人和-ai-的交付检查)与[本文件焦点章节](#5-状态与焦点)。当前值与预设分类见下文正文，组件决定与 API 见 [catalog.json](../catalog.json)。",
+  "",
   implementationStandards.trim(),
   "",
   "---",
@@ -284,10 +338,35 @@ bothAi("style.md", [
   "",
 ].join("\n"));
 bothAi("SKILL.md", skill);
+const skillEn = skill.replace(projectAdoption, projectAdoptionEn).replace(banSummary, banSummaryEn)
+  .replace("Read [style.md](style.md) before implementing UI. It contains the 设计契约 from\n../design.md and the component implementation rules from STANDARDS.md.", "Read [style.en.md](style.en.md) before implementing UI. It contains the translated design contract from ../design.en.md and implementation rules from STANDARDS.md; Chinese source criteria remain canonical.")
+  .replaceAll("[design-philosophy.md](design-philosophy.md)", "[design-philosophy.en.md](design-philosophy.en.md)")
+  .replaceAll("[the public guide](../design.md)", "[the public guide](../design.en.md)")
+  .replace("installed package.json, catalog.json and design.md", "installed package.json, catalog.json and design.en.md")
+  .replace(`ai/v<installed-version>/components${patterns.length ? " and patterns" : ""}`, "ai/v<installed-version>/en/components")
+  .replace(`(${versionPath}/llms.txt)`, `(${versionPath}/en/llms.txt)`)
+  .replace("Also binding: prose length and text size must never change the structure;\ndensity tightens spacing and never shrinks type; sizes come from the named type\nsteps, never a one-off value.", "Preserve grouping, hierarchy, and action reachability when text grows. Density may tighten relationship spacing without shrinking text or targets. Reuse named control/text profiles; actual data dimensions retain their task-defined values.")
+  .replace("Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.", "Examples retain their authored language and local component state; they do not prove backend permissions, persistence, idempotency or cancellation.");
+bothAi("SKILL.en.md", skillEn);
+bothAi("style.en.md", [
+  "# Qingye UI Style Contract", "",
+  "Generated from the English source blocks in root design.md and STANDARDS.md. The Chinese criteria remain canonical; source hashes prevent silent translation drift.", "",
+  `Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](${versionPath}/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.`, "",
+  "## Use", "",
+  "1. Read the bans before implementing.",
+  "2. Check each observable criterion in the actual result.",
+  "3. Identify conflicts with confirmed project choices before deciding; do not silently override them.",
+  "4. Report PASS, FAIL, UNVERIFIED, or NOT_RUN. Unrun checks are never passes.", "",
+  "## Design contract", "", designContractEn, "", "## Delivery checks for people and AI", "", deliveryChecksEn, "",
+  "## Public component implementation", "",
+  "Foundation and value-adjudication paths below identify repository evidence, which is not distributed in the package. Public criteria are in [Delivery checks](../design.en.md#delivery-checks-for-people-and-ai) and [this file's focus section](#5-states-and-focus). Current values and preset classifications are stated below; component decisions and APIs are in [catalog.json](../catalog.json).", "",
+  implementationStandardsEn.trim(), "",
+  "Generated by packages/ui/scripts/gen-catalog.mjs. Edit canonical source translation blocks; manual edits to this file are overwritten.", "",
+].join("\n"));
 // 当前版本的组件与模式资源跟随真实入口删除；其他版本的历史分发资料不在此处清理。
 const patternSlugs = patterns.map((pattern) => pattern.slug);
 for (const base of [aiRoot, join(docs, "public/ai")]) {
-  for (const [kind, kept] of [["components", names], ["patterns", patternSlugs]]) {
+  for (const [kind, kept] of [["components", names], ["patterns", patternSlugs], ["en/components", names]]) {
     const directory = join(base, versionPath, kind);
     if (!existsSync(directory)) continue;
     for (const file of readdirSync(directory)) {
@@ -296,17 +375,26 @@ for (const base of [aiRoot, join(docs, "public/ai")]) {
   }
 }
 
-function resourceIndex(target) {
-  return [`# Qingye UI ${pkg.version}`, "", `> Facts for ${pkg.name}@${pkg.version}. Runtime acceptance is separate.`, "", "## Start", `- [Design guide](${target("design.md")})`, `- [Style contract](${target("ai/style.md")}): the bans, observable criteria and component implementation rules`, `- [Design philosophy](${target("ai/design-philosophy.md")}): how the methods came to be`, `- [Installation](${target(`ai/${versionPath}/installation.md`)})`, `- [Main skill](${target("ai/SKILL.md")})`, "", "## Components", ...components.map((component) => `- [${component.title}](${target(`ai/${versionPath}/components/${component.name}.md`)}): ${component.description}`), "", "## Patterns", ...patterns.map((pattern) => `- [${pattern.title}](${target(`ai/${versionPath}/patterns/${pattern.slug}.md`)}): ${pattern.description}`), ""].join("\n");
+function resourceIndex(target, locale = "zh") {
+  const en = locale === "en";
+  const language = en ? ".en" : "";
+  const componentDirectory = en ? "en/components" : "components";
+  return [`# Qingye UI ${pkg.version}`, "", `> Facts for ${pkg.name}@${pkg.version}. Runtime acceptance is separate.`, "", "## Start", `- [Design guide](${target(`design${language}.md`)})`, `- [Style contract](${target(`ai/style${language}.md`)}): bans, observable criteria and component implementation rules`, `- [Design philosophy](${target(`ai/design-philosophy${language}.md`)}): method sources`, `- [Installation](${target(`ai/${versionPath}/installation.md`)})`, `- [Main skill](${target(`ai/SKILL${language}.md`)})`, "", "## Components", ...components.map(component => {
+    const entry = en ? component.localized.en : component;
+    return `- [${entry.title}](${target(`ai/${versionPath}/${componentDirectory}/${component.name}.md`)}): ${entry.description}`;
+  }), ...(patterns.length && !en ? ["", "## Patterns", ...patterns.map(pattern => `- [${pattern.title}](${target(`ai/${versionPath}/patterns/${pattern.slug}.md`)}): ${pattern.description}`)] : []), ""].join("\n");
 }
 // Relative links work in an unpacked package and at the versioned website URL.
 bothAi(`${versionPath}/llms.txt`, resourceIndex((path) => publicPath(relative(join(aiRoot, versionPath), join(root, path)))));
 const index = resourceIndex((path) => `/${path}`);
 write(join(docs, "public/llms.txt"), index);
+bothAi(`${versionPath}/en/llms.txt`, resourceIndex(path => publicPath(relative(join(aiRoot, versionPath, "en"), join(root, path))), "en"));
+write(join(docs, "public/llms.en.txt"), resourceIndex(path => `/${path}`, "en"));
 bothAi(`${versionPath}/installation.md`, `# Install ${pkg.name} ${pkg.version}\n\nUse this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.\n\nRequired peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => !pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}.\n\nOptional peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}; install only for relevant components.\n\nTailwind CSS 4: import @qingye/ui/styles.css after tailwindcss and scan the package source as documented in /docs/installation. Precompiled path: import @qingye/ui/ui.css once. Choose one path.\n\nThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.dark by default or explicit data-theme mode; density: data-density. Check provider guidance and current types.\n\nExamples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.\n`);
-for (const component of components) {
-  const markdown = [`# ${component.title}`, "", `Package: ${pkg.name}@${pkg.version}`, `Import: ${component.import}`, `Source: ${component.sourceFacts.file}`, `Source SHA-256: ${component.sourceFacts.sha256}`, "", component.description, "", "## Use and ownership", ...component.design.whenToUse.map((item) => `- ${item}`), ...component.design.avoid.map((item) => `- Avoid: ${item}`), ...component.design.stateOwner.library.map((item) => `- Library: ${item}`), ...component.design.stateOwner.application.map((item) => `- Application: ${item}`), "", "## Composition", ...component.design.composition.map((item) => `- ${item}`), "", "## Responsive behavior", ...component.design.responsive.map((item) => `- ${item}`), "", "## Customization", ...component.design.customization.map((item) => `- ${item}`), "", "## Current exports", ...component.actualExports.map((item) => `- ${item.name}: ${item.kind}; owner ${item.owner ?? "external"}${item.aliasOf ? `; alias of ${item.aliasOf}` : ""}; ${item.status}${item.propsType ? `; props: ${item.propsType}` : ""}`), "", "Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.", "", "## Dependencies and providers", `- Runtime: ${component.dependencies.runtime.join(", ") || "none recorded"}`, `- Optional peers: ${component.dependencies.optionalPeers.join(", ") || "none recorded"}`, ...component.providers.guidance.map((item) => `- ${item.text}`), "- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.", "", "## Curated API", ...component.api.flatMap((part) => [`### ${part.name}`, part.description, ...(part.props ?? []).map((prop) => `- ${prop.name}: ${prop.type}${prop.default ? `; default ${prop.default}` : ""}. ${prop.description}`), ""]), "## Keyboard", ...component.keyboard.map((row) => `- ${row.keys}: ${row.description}`), "", "## Source examples", ...component.examples.flatMap((example) => [`### ${example.title}`, `Source: ${example.source}`, "```tsx", example.code.trim(), "```", ""]), ""].join("\n");
-  bothAi(`${versionPath}/components/${component.name}.md`, markdown);
+for (const baseComponent of components) for (const locale of ["zh", "en"]) {
+  const component = locale === "en" ? { ...baseComponent, ...baseComponent.localized.en, providers: { ...baseComponent.providers, guidance: baseComponent.localized.en.providerGuidance } } : baseComponent;
+  const markdown = [`# ${component.title}`, "", `Package: ${pkg.name}@${pkg.version}`, `Import: ${component.import}`, `Source: ${component.sourceFacts.file}`, `Source SHA-256: ${component.sourceFacts.sha256}`, "", component.description, "", ...(component.decisions ? ["## Decision", component.decisions, ""] : []), ...(component.notes?.length ? ["## Notes", ...component.notes.map(note => `- ${note}`), ""] : []), "## Use and ownership", ...component.design.whenToUse.map((item) => `- ${item}`), ...component.design.avoid.map((item) => `- Avoid: ${item}`), ...component.design.stateOwner.library.map((item) => `- Library: ${item}`), ...component.design.stateOwner.application.map((item) => `- Application: ${item}`), "", "## Composition", ...component.design.composition.map((item) => `- ${item}`), "", "## Responsive behavior", ...component.design.responsive.map((item) => `- ${item}`), "", "## Customization", ...component.design.customization.map((item) => `- ${item}`), "", "## Current exports", ...component.actualExports.map((item) => `- ${item.name}: ${item.kind}; owner ${item.owner ?? "external"}${item.aliasOf ? `; alias of ${item.aliasOf}` : ""}; ${item.status}${item.propsType ? `; props: ${item.propsType}` : ""}`), "", "Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.", "", "## Dependencies and providers", `- Runtime: ${component.dependencies.runtime.join(", ") || "none recorded"}`, `- Optional peers: ${component.dependencies.optionalPeers.join(", ") || "none recorded"}`, ...component.providers.guidance.map((item) => `- ${item.text}`), "- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.", "", "## Curated API", ...component.api.flatMap((part) => [`### ${part.name}`, part.description, ...(part.props ?? []).map((prop) => `- ${prop.name}: ${prop.type}${prop.default ? `; default ${prop.default}` : ""}. ${prop.description}`), ""]), "## Keyboard", ...component.keyboard.map((row) => `- ${row.keys}: ${row.description}`), "", "## Source examples", ...component.examples.flatMap((example) => [`### ${example.title}`, `Source: ${example.source}`, "```tsx", example.code.trim(), "```", ""]), ""].join("\n").trimEnd() + "\n";
+  bothAi(`${versionPath}/${locale === "en" ? "en/" : ""}components/${component.name}.md`, markdown);
 }
 for (const pattern of patterns) {
   const files = [pattern.source, ...(pattern.slug === "read" ? ["apps/docs/src/patterns/metadata.ts"] : []), "apps/docs/src/patterns/shared.tsx", "apps/docs/src/patterns/state.ts", "apps/docs/src/patterns/patterns.css", "apps/docs/src/patterns/authorized-resources.json"].filter((path) => existsSync(join(repo, path)));

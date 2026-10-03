@@ -34,11 +34,11 @@ export function DocFooter({ path }: { path: string }) {
           target="_blank"
         >
           <SquarePenIcon aria-hidden="true" className="size-3.5" />
-          在 GitHub 上编辑
+          {locale === "en" ? "Edit on GitHub" : "在 GitHub 上编辑"}
         </a>
       ) : null}
       {prev || next ? (
-        <nav aria-label="相邻页面" className="grid grid-cols-2 gap-3">
+        <nav aria-label={locale === "en" ? "Adjacent pages" : "相邻页面"} className="grid grid-cols-2 gap-3">
           {prev ? (
             <PagerLink direction="prev" title={prev.title} to={prev.path} />
           ) : (

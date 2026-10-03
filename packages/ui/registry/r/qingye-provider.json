@@ -3,7 +3,7 @@
   "name": "qingye-provider",
   "type": "registry:block",
   "title": "Qingye shared package entry",
-  "description": "Project provider template referencing @qingye/ui@0.4.0; choose a CSS path separately.",
+  "description": "Project provider template referencing @qingye/ui@1.0.0; choose a CSS path separately.",
   "files": [
     {
       "path": "registry/qingye-provider.tsx",
@@ -13,6 +13,6 @@
     }
   ],
   "dependencies": [
-    "@qingye/ui@0.4.0"
+    "@qingye/ui@1.0.0"
   ]
 }

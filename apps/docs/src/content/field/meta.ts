@@ -17,7 +17,7 @@ export default {
     stateOwner: {library: ["名称、说明和错误的可访问连接；焦点、触及、禁用传播。"], application: ["值、规则、invalid、错误内容、草稿与送达结果。"]},
     responsive: ["长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。"],
     customization: ["className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。"],
-  },
+  }, designEn: {"whenToUse":["A value needs a persistent name, necessary explanation, or in-place error."],"avoid":["Placeholders instead of names, Toast instead of field errors, or timeouts presented as format errors."],"composition":["Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only."],"stateOwner":{"library":["Accessible name/description/error associations; focus, touched state, and disabled propagation."],"application":["Values, rules, invalid facts, error content, drafts, and delivery outcomes."]},"responsive":["Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing."],"customization":["External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label."]},
   api: [
     {name: "Field", description: "Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldPrimitive。", descriptionEn: "Shared Base UI Field.Root context. Full automatic-validation APIs remain on FieldPrimitive.", props: [
       {name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "纵向编辑或横向选项，不改变关联。", descriptionEn: "Vertical editing or a horizontal option; associations stay intact."},

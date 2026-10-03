@@ -2,6 +2,8 @@ import { readFileSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { expect, test } from "vitest";
+import { extractPublicTranslation } from "../../../apps/docs/src/lib/public-translations.mjs";
+import { projectImplementationLinks, projectPackagePhilosophy } from "../scripts/resource-translations.mjs";
 
 const root = resolve(__dirname, "../../..");
 const read = (path: string) => readFileSync(resolve(root, path), "utf8");
@@ -51,7 +53,18 @@ test("the package index resolves locally and the philosophy ships inside ai", ()
   }
   for (const target of links(index)) expect(existsSync(resolve(ai, version, target)), `missing index target: ${target}`).toBe(true);
   const philosophy = read("apps/docs/src/public-content/philosophy.md");
-  for (const target of ["packages/ui/ai/design-philosophy.md", "apps/docs/public/ai/design-philosophy.md", "apps/docs/public/design-philosophy.md"]) expect(read(target)).toBe(philosophy);
+  expect(read("packages/ui/ai/design-philosophy.md")).toBe(projectPackagePhilosophy(philosophy));
+  for (const target of ["apps/docs/public/ai/design-philosophy.md", "apps/docs/public/design-philosophy.md"]) expect(read(target)).toBe(philosophy);
+  const philosophyFacts = JSON.parse(read("packages/ui/catalog.json")).designGuide.philosophy;
+  for (const [facts, packagePath, sitePath, sourcePath] of [
+    [philosophyFacts, "packages/ui/ai/design-philosophy.md", "apps/docs/public/ai/design-philosophy.md", "apps/docs/src/public-content/philosophy.md"],
+    [philosophyFacts.localized.en, "packages/ui/ai/design-philosophy.en.md", "apps/docs/public/ai/design-philosophy.en.md", "apps/docs/src/public-content/philosophy.en.md"],
+  ]) {
+    const checksum = (path: string) => createHash("sha256").update(read(path)).digest("hex");
+    expect(facts.sha256).toBe(checksum(packagePath));
+    expect(facts.sourceSha256).toBe(checksum(sourcePath));
+    expect(facts.projections.website.sha256).toBe(checksum(sitePath));
+  }
   const skill = read("packages/ui/ai/SKILL.md");
   for (const target of ["style.md", "design-philosophy.md", `${version}/llms.txt`]) {
     expect(links(skill)).toContain(target);
@@ -74,15 +87,65 @@ test("the style contract ships and is reachable in a consuming project", () => {
 
 test("component implementation rules have one source and reach the existing shipped style file", () => {
   const standards = read("STANDARDS.md");
+  const { canonical, english } = extractPublicTranslation(standards);
   const style = read("packages/ui/ai/style.md");
-  // Check the authored implementation clauses, not only a manifest declaration.
-  for (const line of standards.split("\n").filter((line) => line.trim().length > 20 && !line.startsWith("#") && !line.includes("](design.md"))) expect(style).toContain(line);
+  const styleEn = read("packages/ui/ai/style.en.md");
+  expect(english, "STANDARDS.md must contain its authored English translation").toBeTruthy();
+  // Every actual clause reaches its language's style resource. Only link targets
+  // change for the distributed location; translation bookkeeping is not a clause.
+  for (const [locale, body, projected] of [["zh", canonical, style], ["en", english!, styleEn]] as const) {
+    for (const clause of body.split("\n").filter(line => line.trim() && !line.startsWith("#"))) {
+      const expected = projectImplementationLinks(clause, locale);
+      expect(projected, `${locale} implementation clause missing: ${clause}`).toContain(expected);
+    }
+  }
   expect(style).toContain("## 公共组件实现");
+  expect(styleEn).toContain("## Public component implementation");
+  expect(read("apps/docs/public/ai/style.en.md")).toBe(styleEn);
   const catalog = JSON.parse(read("packages/ui/catalog.json"));
   expect(catalog.designGuide.styleContract.implementation.sha256).toBe(createHash("sha256").update(standards).digest("hex"));
   // Overlapping contrast rules are referenced, rather than maintained twice.
   expect(standards).not.toContain("4.5:1");
   expect(style).toContain("4.5:1");
+});
+
+test("public prose projections keep criteria and resolve package links without shipping internal evidence", () => {
+  const standards = extractPublicTranslation(read("STANDARDS.md"));
+  const zh = projectImplementationLinks(standards.canonical);
+  const en = projectImplementationLinks(standards.english!, "en");
+  expect(zh).toContain("[design.md「名称与状态」](../design.md#名称与状态)");
+  expect(en).toContain("[Delivery checks](../design.en.md#delivery-checks-for-people-and-ai)");
+  expect(zh).toContain("基础层（仓库内部取证：`docs/decisions/2026-10-03-foundation.md`）");
+  expect(en).toContain("foundation (repository evidence: `docs/decisions/2026-10-03-foundation.md`)");
+  for (const body of [zh, en]) {
+    expect(body).not.toMatch(/\]\(docs\/decisions\//);
+    for (const target of links(body)) {
+      const [path, fragment] = target.split("#");
+      if (/^https?:/.test(path)) continue;
+      const file = resolve(ai, path);
+      expect(existsSync(file), `projected public target missing: ${target}`).toBe(true);
+      if (fragment) {
+        const headings = [...readFileSync(file, "utf8").matchAll(/^#{1,6}\s+(.+)$/gm)].map(match => match[1].toLowerCase().replace(/[^\p{L}\p{N}\s_-]/gu, "").replace(/ /g, "-"));
+        expect(headings, `projected heading missing: ${target}`).toContain(fragment);
+      }
+    }
+  }
+  // Round-tripping only relocated link syntax retains every authored criterion.
+  let restored = zh.replace(/\]\(\.\.\/(design\.md[^)]*)\)/g, "]($1)");
+  for (const original of standards.canonical.matchAll(/\[([^\]]+)\]\((docs\/decisions\/2026-10-03-(?:foundation|value-adjudication)\.md(?:#[^)]*)?)\)/g)) {
+    restored = restored.replaceAll(`${original[1]}（仓库内部取证：\`${original[2]}\`）`, original[0]);
+  }
+  expect(restored).toBe(standards.canonical);
+  const philosophy = read("apps/docs/src/public-content/philosophy.md");
+  const packagePhilosophy = projectPackagePhilosophy(philosophy);
+  expect(links(packagePhilosophy)).toContain("../design.md");
+  expect(links(packagePhilosophy)).toContain("https://ui.xflux.cc/docs/ai#project-rules");
+  const philosophyEn = read("apps/docs/src/public-content/philosophy.en.md");
+  const packagePhilosophyEn = projectPackagePhilosophy(philosophyEn, "en");
+  expect(links(packagePhilosophyEn)).toContain("../design.en.md");
+  expect(links(packagePhilosophyEn)).toContain("https://ui.xflux.cc/en/docs/ai#project-rules");
+  expect(packagePhilosophyEn.replace("](../design.en.md)", "](/design.en.md)").replace("](https://ui.xflux.cc/en/docs/ai#project-rules)", "](/docs/ai#project-rules)"))
+    .toBe(philosophyEn);
 });
 
 test("an agent restricted to ai can follow the design asset routes", () => {

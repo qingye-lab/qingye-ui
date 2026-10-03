@@ -24,7 +24,8 @@ export function readContrast(element) {
   const borderBackground = s.backgroundClip.split(',')[0].trim() === 'padding-box' ? outer : effectiveBackground;
   const effectiveBorder = compose(border, borderBackground);
   const threshold = parseFloat(s.fontSize) >= 24 || (parseFloat(s.fontSize) >= 18.6667 && Number(s.fontWeight) >= 700) ? 3 : 4.5;
-  return { text: element.textContent.trim(), fgCSS: s.color, bgCSS: s.backgroundColor, borderCSS: s.borderTopColor, foreground: fg, background: bg, border, outer, effectiveBackground, effectiveForeground, effectiveBorder, textContrast: ratio(effectiveForeground, effectiveBackground), textThreshold: threshold, borderOuterContrast: ratio(effectiveBorder, outer), borderWidth: s.borderTopWidth, opacity: s.opacity, fontSize: s.fontSize, fontWeight: s.fontWeight, ancestors, unsupported, backgroundClip: s.backgroundClip, pseudoState: { hover: element.matches(':hover'), active: element.matches(':active') } };
+  const rect = element.getBoundingClientRect();
+  return { text: element.textContent.trim(), fgCSS: s.color, bgCSS: s.backgroundColor, borderCSS: s.borderTopColor, foreground: fg, background: bg, border, outer, effectiveBackground, effectiveForeground, effectiveBorder, textContrast: ratio(effectiveForeground, effectiveBackground), textThreshold: threshold, borderOuterContrast: ratio(effectiveBorder, outer), borderInnerContrast: ratio(effectiveBorder, effectiveBackground), borderWidth: s.borderTopWidth, outline: { style: s.outlineStyle, width: s.outlineWidth, offset: s.outlineOffset }, boxShadow: s.boxShadow, opacity: s.opacity, fontSize: s.fontSize, fontWeight: s.fontWeight, ancestors, unsupported, backgroundClip: s.backgroundClip, dimensions: { width: rect.width, height: rect.height }, pseudoState: { hover: element.matches(':hover'), active: element.matches(':active'), focusVisible: element.matches(':focus-visible') } };
 }
 async function visit(page, baseURL, slug, theme = 'light') {
   await page.goto(`${baseURL}/playground/${slug}?theme=${theme}`, { waitUntil: 'networkidle' });
@@ -60,8 +61,8 @@ export async function probeDanger(page, baseURL) {
   const rows = [];
   for (const theme of ['light', 'dark']) {
     await visit(page, baseURL, 'button', theme);
-    for (const [variant, label] of [['filled', '删除设备'], ['outline', '解除绑定']]) {
-      const button = page.locator('[data-demo="variants"]').getByRole('button', { name: label, exact: true });
+    for (const [variant, label] of [['solid', '删除'], ['bordered', '删除'], ['quiet', '删除']]) {
+      const button = page.locator(`[data-demo="variants"] [data-slot="button"][data-tone="danger"][data-variant="${variant}"]`);
       for (const state of ['normal', 'hover', 'pressed']) {
         await button.scrollIntoViewIfNeeded();
         if (state === 'normal') await page.mouse.move(0, 0); else await button.hover();
@@ -69,7 +70,11 @@ export async function probeDanger(page, baseURL) {
         let sample;
         try { await page.waitForTimeout(250); sample = await button.evaluate(readContrast); }
         finally { if (state === 'pressed') { await page.mouse.move(0, 0); await page.mouse.up(); } }
-        rows.push({ theme, variant, state, ...sample, pass: !sample.unsupported.length && sample.textContrast >= sample.textThreshold });
+        // This demo identifies each action with visible text. Its resting
+        // outline supplements that label; focus remains a separate necessity.
+        // W3C Understanding 1.4.11, Boundaries: a named button need not rely
+        // on the boundary to identify its presence.
+        rows.push({ theme, variant, state, ...sample, boundaryRequired: false, boundaryReason: 'Visible action label identifies the control; resting outline supplements it.', pass: sample.text === label && !sample.unsupported.length && sample.textContrast >= sample.textThreshold });
       }
     }
     // Read the danger foreground on a page text node using the existing role.
@@ -86,14 +91,64 @@ export async function probeDanger(page, baseURL) {
   }
   return rows;
 }
+export function dangerFocusFailures(before, focused) {
+  const failures = [];
+  if (!focused.pseudoState?.focusVisible) failures.push('focus-visible');
+  if (before.unsupported?.length || focused.unsupported?.length) failures.push('unsupported-paint');
+  if (focused.text !== before.text || !(focused.textContrast >= focused.textThreshold)) failures.push('text-contrast');
+  if (!(focused.borderOuterContrast >= 3)) failures.push('focus-outer-contrast');
+  if (!(focused.borderInnerContrast >= 3)) failures.push('focus-inner-contrast');
+  if (!(parseFloat(focused.borderWidth) > 0) || focused.borderWidth !== before.borderWidth) failures.push('focus-border-width');
+  if (!['width','height'].every(key => Number.isFinite(before.dimensions?.[key]) && before.dimensions[key] > 0 && focused.dimensions?.[key] === before.dimensions[key])) failures.push('focus-dimensions');
+  if (!focused.outline || focused.boxShadow === undefined) failures.push('missing-focus-paint');
+  else {
+    const outline = focused.outline;
+    const outwardOutline = outline.style !== 'none' && parseFloat(outline.width) > 0 && parseFloat(outline.offset) > -parseFloat(outline.width);
+    // CSS shadows are separated only at commas outside color functions.
+    const shadows = focused.boxShadow.split(/,(?![^()]*\))/);
+    const outwardShadow = shadows.some(shadow => !shadow.includes('inset') && Array.from(shadow.matchAll(/(-?(?:\d*\.)?\d+)px/g), match => Number(match[1])).some(value => value !== 0));
+    if (outwardOutline || outwardShadow) failures.push('outward-focus-paint');
+  }
+  return failures;
+}
+export async function probeDangerFocus(page, baseURL) {
+  const rows = [];
+  for (const theme of ['light', 'dark']) {
+    await visit(page, baseURL, 'button', theme);
+    const button = page.locator('[data-demo="variants"] [data-slot="button"][data-tone="danger"][data-variant="bordered"]');
+    await button.scrollIntoViewIfNeeded(); await page.mouse.move(0, 0);
+    const before = await button.evaluate(readContrast);
+    // Reach the real button using Tab; programmatic focus is not evidence of
+    // its keyboard path. The bound counts actual possible stops on this page.
+    const stops = await page.locator('button,input:not([type="hidden"]),select,textarea,a[href],[tabindex]').count();
+    for (let i = 0; i <= stops; i++) {
+      await page.keyboard.press('Tab');
+      if (await button.evaluate(element => element === document.activeElement)) break;
+    }
+    let error;
+    try {
+      // The public bordered danger role uses opaque danger text for focus.
+      // Wait for that actual CSS transition endpoint, without a fixed delay.
+      await page.waitForFunction(element => {
+        const style = getComputedStyle(element);
+        return element.matches(':focus-visible') && style.borderTopColor === style.color;
+      }, await button.elementHandle());
+    } catch (cause) { error = cause.message; }
+    const focused = await button.evaluate(readContrast);
+    const failures = dangerFocusFailures(before, focused);
+    if (before.text !== '删除') failures.push('visible-action-label');
+    if (error) failures.push('focus-endpoint');
+    rows.push({ theme, variant: 'bordered', state: 'focus', before, focused, restingBoundaryRequired: false, restingBoundaryReason: 'Visible action label identifies the control; resting outline supplements it.', focusBoundaryRequired: true, failures, error, pass: failures.length === 0 });
+  }
+  return rows;
+}
 export async function probeFixedReserves(page, baseURL, { width = 1280 } = {}) {
   const priorViewport = page.viewportSize(); await page.setViewportSize({ width, height: 900 });
   const rows = [];
   try {
     for (const [component, controlSelector, iconSelector] of [
-      ['date-picker', '[data-demo="basic"] [data-slot="date-picker-trigger"]', '[data-demo="basic"] [data-slot="date-picker-clear"]'],
-      ['native-select', '[data-demo="sizes"] [data-slot="native-select-control"][data-size="sm"] select', '[data-demo="sizes"] [data-slot="native-select-control"][data-size="sm"] [data-slot="native-select-icon"]'],
-      ['combobox', '[data-demo="clear"] input', '[data-demo="clear"] [data-slot="combobox-clear"] svg'],
+      ['input', '[data-demo="search"] [data-slot="input-control"]', '[data-demo="search"] [data-slot="input-clear"] svg'],
+      ['select', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"]', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"] [data-slot="select-icon"] svg'],
     ]) {
       await visit(page, baseURL, component);
       const oldStyle = await page.evaluate(() => document.documentElement.getAttribute('style'));
@@ -105,7 +160,9 @@ export async function probeFixedReserves(page, baseURL, { width = 1280 } = {}) {
             const control = document.querySelector(controlSelector), icon = document.querySelector(iconSelector);
             if (!control || !icon) return { missing: { control: !control, icon: !icon } };
             const r = control.getBoundingClientRect(), i = icon.getBoundingClientRect(), s = getComputedStyle(control);
-            const padding = parseFloat(s.paddingInlineEnd), border = parseFloat(s.borderRightWidth), contentRight = r.right - border - padding;
+            const padding = parseFloat(s.paddingInlineEnd), border = parseFloat(s.borderRightWidth);
+            const content = control.querySelector('input,[data-slot="select-value"]');
+            const contentRight = content?.getBoundingClientRect().right ?? r.right - border - padding;
             return { padding, border, contentRight, control: { left: r.left, right: r.right, height: r.height, width: r.width }, icon: { left: i.left, right: i.right, width: i.width, height: i.height }, gapToIcon: i.left - contentRight, pointer: matchMedia('(pointer:coarse)').matches ? 'coarse' : 'fine' };
           }, { controlSelector, iconSelector });
           states.push({ space, ...sample });
@@ -116,15 +173,15 @@ export async function probeFixedReserves(page, baseURL, { width = 1280 } = {}) {
   } finally { if (priorViewport) await page.setViewportSize(priorViewport); }
   return rows;
 }
-export async function probeInputTypography(page, baseURL, { width = 1280, theme = 'light' } = {}) {
+export async function probeInputTypography(page, baseURL, { width = 1280, theme = 'light', components = ['input','select','input-group'] } = {}) {
   const prior = page.viewportSize(); await page.setViewportSize({ width, height: 900 });
   const rows = [];
   try {
     for (const [component, selector, parts] of [
-      ['input', '[data-demo="default"] [data-slot="input-control"]', [['wrapper', null], ['inner', 'input']]],
-      ['select', '[data-demo="basic"] [data-slot="select-trigger"]', [['trigger', null], ['value', '[data-slot="select-value"]']]],
-      ['input-group', '[data-demo="icon"] [data-slot="input-group"]', [['wrapper', null], ['addon', '[data-slot="input-group-addon"]'], ['inner', 'input']]],
-    ]) {
+      ['input', '[data-demo="default"] [data-slot="input-control"]', [['wrapper', null, false], ['inner', 'input', true]]],
+      ['select', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"]', [['trigger', null, true], ['value', '[data-slot="select-value"]', true]]],
+      ['input-group', '[data-demo="addon"] [data-slot="input-group"]', [['wrapper', null, true], ['addon', '[data-slot="input-group-addon"]', true], ['inner', 'input', true]]],
+    ].filter(([component]) => components.includes(component))) {
       await visit(page, baseURL, component, theme);
       const samples = await page.locator(selector).first().evaluate((wrapper, parts) => {
         const canvas = new OffscreenCanvas(1, 1), ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -132,18 +189,23 @@ export async function probeInputTypography(page, baseURL, { width = 1280, theme 
         const root = getComputedStyle(document.documentElement);
         const foreground = rgba(root.getPropertyValue('--foreground').trim());
         const borderInput = rgba(root.getPropertyValue('--input').trim());
-        return parts.map(([part, selector]) => {
+        return parts.map(([part, selector, typographyOwner]) => {
           const element = selector ? wrapper.querySelector(selector) : wrapper;
           if (!element) return { part, missing: true };
           const s = getComputedStyle(element), parent = getComputedStyle(element.parentElement);
-          return { part, fontSize: s.fontSize, lineHeight: s.lineHeight, color: s.color, rgba: rgba(s.color), foreground, borderInput, parentColor: parent.color, parentRGBA: rgba(parent.color), height: element.getBoundingClientRect().height };
+          return { part, typographyOwner, fontSize: s.fontSize, lineHeight: s.lineHeight, color: s.color, rgba: rgba(s.color), foreground, borderInput, parentColor: parent.color, parentRGBA: rgba(parent.color), height: element.getBoundingClientRect().height };
         });
       }, parts);
       const expectedSize = width >= 640 ? 14 : 16;
       const expectedLeading = width >= 640 ? 20 : 24;
-      const failures = samples.filter(x => x.missing || parseFloat(x.fontSize) !== expectedSize || (x.part !== 'inner' && parseFloat(x.lineHeight) !== expectedLeading) || (x.part !== 'addon' && JSON.stringify(x.rgba) !== JSON.stringify(x.foreground))).map(x => x.part);
+      const failures = typographyFailures(samples, { expectedSize, expectedLeading });
       rows.push({ component, width, theme, expectedSize, expectedLeading, samples, failures, pass: failures.length === 0 });
     }
   } finally { if (prior) await page.setViewportSize(prior); }
   return rows;
+}
+export function typographyFailures(samples, { expectedSize, expectedLeading }) {
+  // Input's grid wrapper owns geometry, while the native input owns text.
+  // Preserve both measurements; only text-owning parts have a typography role.
+  return samples.filter(x => x.missing || (x.typographyOwner && (parseFloat(x.fontSize) !== expectedSize || parseFloat(x.lineHeight) !== expectedLeading || (x.part !== 'addon' && JSON.stringify(x.rgba) !== JSON.stringify(x.foreground))))).map(x => x.part);
 }

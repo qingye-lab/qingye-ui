@@ -1,6 +1,6 @@
 import type { Theme } from "@qingye/ui/components/theme-provider";
 import { Button } from "@qingye/ui/components/button";
-import { Menu, MenuPopup, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye/ui/components/menu";
+import { Menu, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye/ui/components/menu";
 import { useTheme } from "@qingye/ui/components/theme-provider";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
 import { useUILocale } from "@qingye/ui/locale";
@@ -29,7 +29,7 @@ export function ThemeMenu() {
         </TooltipTrigger>
         <TooltipPopup>{messages.theme}</TooltipPopup>
       </Tooltip>
-      <MenuPopup align="end" className="min-w-36">
+      <MenuPortal><MenuPositioner align="end"><MenuPopup className="min-w-36">
         <MenuRadioGroup onValueChange={(value) => setTheme(value as Theme)} value={theme}>
           {options.map(({ value, label, icon: Icon }) => (
             <MenuRadioItem key={value} value={value}>
@@ -40,7 +40,7 @@ export function ThemeMenu() {
             </MenuRadioItem>
           ))}
         </MenuRadioGroup>
-      </MenuPopup>
+      </MenuPopup></MenuPositioner></MenuPortal>
     </Menu>
   );
 }

@@ -5,7 +5,7 @@ import { navSections } from "@/lib/nav";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { localePath, routeIdentity, routeVisitKey } from "@/lib/paths";
 
-/** The documentation index, shared by the desktop sidebar and the mobile sheet. */
+/** The documentation index in the desktop sidebar. */
 export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; className?: string }) {
   const locale = useDocsLocale();
   const sections = navSections(locale);
@@ -17,17 +17,16 @@ export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; cl
   useLayoutEffect(() => {
     const nav = root.current;
     const current = nav?.querySelector<HTMLElement>('[aria-current="page"]');
-    const viewport = nav?.closest<HTMLElement>('[data-slot="scroll-area-viewport"]');
+    const viewport = nav?.closest<HTMLElement>('[data-slot="scroll-area"]');
     if (!current || !viewport) return;
     const item = current.getBoundingClientRect();
     const box = viewport.getBoundingClientRect();
-    if (item.top < box.top + 8 || item.bottom > box.bottom - 8) {
-      viewport.scrollTop += item.top - box.top - box.height / 3;
-    }
+    if (item.top < box.top) viewport.scrollTop += item.top - box.top;
+    else if (item.bottom > box.bottom) viewport.scrollTop += item.bottom - box.bottom;
   }, [visit]);
 
   return (
-    <nav aria-label="文档导航" className={cn("flex flex-col gap-6 text-body", className)} ref={root}>
+    <nav aria-label={locale === "en" ? "Documentation navigation" : "文档导航"} className={cn("flex flex-col gap-6 text-body", className)} ref={root}>
       {sections.map((section) => (
         <div className="flex flex-col gap-1" key={section.title}>
           <p className="px-2.5 pb-1 font-medium text-foreground-strong text-caption">{section.title}</p>

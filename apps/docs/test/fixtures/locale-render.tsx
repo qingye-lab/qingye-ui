@@ -28,7 +28,7 @@ export const thirdLanguage: UILocale = { code: "fr-CA", messages: zhCN.messages 
 export const routeMatches = (path: string) => matchRoutes(createRoutesFromElements(App().props.children), path);
 export const knownPaths = [paths.PATHS.home, ...GUIDES.map((guide) => guide.path), paths.PATHS.components,
   ...originalSlugs.map((slug) => paths.componentPath(slug)), "/components/button", "/playground/button",
-  "/examples", "/examples/mail", "/examples/dashboard", "/examples/studio", "/docs/patterns/detail/r1"];
+  "/examples", "/examples/input-group", "/examples/filter-bar", "/examples/data-table"];
 
 export const referenceMeta: ComponentEntry = {
   slug: "reference-fixture", title: "参考夹具 ReferenceFixture", titleEn: "Reference fixture",

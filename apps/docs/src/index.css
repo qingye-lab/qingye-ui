@@ -69,10 +69,9 @@
 
 /* Links and plain controls authored by the site, not the library. */
 @utility focus-ring {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
+  outline: none;
   &:focus-visible {
-    outline-color: var(--qy-ring);
+    box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
   }
 }
 
@@ -97,17 +96,17 @@
    measure and 15rem/13rem rails; reveal the TOC only when all three fit.
    Anchoring the article at the same start also prevents a lateral jump.
    The container budget follows enlarged text as well as viewport changes. */
-:where(div:has(> aside[aria-label="侧栏"])) > div {
+:where(div:has(> aside[data-docs-sidebar])) > div {
   container: docs-reading-layout / inline-size;
 }
-:where(div:has(> aside[aria-label="侧栏"])) > div > aside[aria-label="本页目录"] {
+:where(div:has(> aside[data-docs-sidebar])) > div > aside[data-docs-toc] {
   display: none;
 }
 @media (min-width: 1024px) {
-  :where(div:has(> aside[aria-label="侧栏"])) > div {
+  :where(div:has(> aside[data-docs-sidebar])) > div {
     padding-inline-start: var(--qy-space-10);
   }
-  :where(div:has(> aside[aria-label="侧栏"])) > div > main {
+  :where(div:has(> aside[data-docs-sidebar])) > div > main {
     flex: 0 1 48rem;
     inline-size: 100%;
     max-inline-size: 48rem;
@@ -115,7 +114,7 @@
 }
 /* 48rem article + 13rem TOC + the existing 3rem region gap. */
 @container docs-reading-layout (min-width: 64rem) {
-  :where(div:has(> aside[aria-label="侧栏"])) > div > aside[aria-label="本页目录"] {
+  :where(div:has(> aside[data-docs-sidebar])) > div > aside[data-docs-toc] {
     display: block;
   }
 }
@@ -203,3 +202,7 @@ h3.docs-section-heading { font-size: var(--qy-text-heading-size); line-height: v
 /* Existing component-composition preview remains available to its consumers. */
 .qy-components-preview { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; padding: 32px; background: var(--qy-background); }
 @media (max-width: 640px) { .qy-components-preview { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 16px; } }
+
+/* Persistent page chrome remains below document popups and modal work surfaces. */
+.docs-site-header { z-index: 1; }
+.docs-skip-link { z-index: 2; }

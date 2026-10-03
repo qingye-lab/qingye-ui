@@ -2,13 +2,28 @@
 
 ## Status
 
-Proposed（2026-10-03）。七族判据第六份。依据 [design.md](../../design.md)、[基础层](2026-10-03-foundation.md)、[组件分层](component-layering.md)。
+Current capability recorded（2026-10-04，第十批）；以下族级判据仍有未覆盖项，不能以组件已导出推断全部验收。依据 [design.md](../../design.md)、[基础层](2026-10-03-foundation.md)、[组件分层](component-layering.md)与[第十批执行证据](../implementation/2026-10-03-batch10-date-input.md)。
+
+## 当前能力与边界
+
+| 当前组件 | 真实值与编辑入口 | 提交与退出 |
+|---|---|---|
+| Calendar | 当地 Date；single/multiple/range 由安装版 DayPicker 提供；完整网格键盘与年月导航 | 无原生表单值；调用方持有选中值，formatLocalDate/parseLocalDate 不经 UTC 移日 |
+| DatePicker | 受控 Date/undefined；原生 date Input 可直接键入，Calendar 提供辅助选择 | Field name 对应真实 YYYY-MM-DD；选择后关闭，清除请求 undefined，拒绝变更保留原值 |
+| DateRangePicker | 受控完整 from/to；独立范围草稿，当前展示 Input 只读，编辑经日历键盘 | Apply 才请求完整值；不完整不提交；确认端点为 name.from/name.to，Cancel/Escape 保留原值 |
+| DateTimePicker | 受控无时区 YYYY-MM-DDTHH:mm[:ss] wall-clock 文本；原生 datetime-local，或日期/time 草稿 | 仅确认 Input 提交；草稿无 name，空时间不补 now，完整后 Apply 仍须调用方接受 |
+
+四者复用当前 Field/Input/Button/Popover 与 DayPicker10 公共 API。readOnly 保留提交、disabled/Field disabled 排除并阻止附属动作；根与真实输入通过公开 render/ref/ARIA/events 定制。五档控制与文字共用已有角色；本批无新增几何/色彩 token。
+
+原生 min/max/step 与 Calendar disabled/startMonth/endMonth 是独立约束入口，**调用方同步两者并做所需的应用校验**；DateRange 不声称有原生日期边界/required 校验。日历禁用有原语的非颜色语义，业务理由由调用方可见内容给出，库不猜不可用原因。默认中文/英文日期语言跟随 UILocale，其它 locale、周起始日、RTL 与历法通过 DayPicker 公共 props 明确提供。
+
+**仍未覆盖/验收**：Range 分别键入两个端点；跨午夜自动刷新 today；其它历法/RTL、辅助技术、窄屏和200%文字。默认 today 是原语运行时事实，不是提交值；本批没有新增时钟订阅，不承诺挂载不重渲染时午夜自动更新。旧族级“直接键入区间”仍是缺口，不能改写为已经满足。真实浅深桌面值路径 PASS 见执行记录；它不代替这些未验证项。
 
 ## 一、这一族处理什么真实问题
 
-一个人要**给出一个时间点或一段时间**，而这个时间**有时区、有历法、有「相对现在」的含义**。
+一个人要给出一个日子、日期区间或日期与时间。当地日期、无时区墙上时间与带时区的绝对瞬间是不同事实，必须明确哪一种是应用需要的值。
 
-不是「选个日期」，是：选定一个具体的日子、选定一段区间的起止、选定精确到时刻的时间，并且**这些值在跨越时区、跨越夏令时、跨越午夜之后仍然指的是同一件事**。
+当前 DatePicker/DateRangePicker 持有当地日期，DateTimePicker 持有 wall-clock 文本；组件不自行把它们转换成 UTC 瞬间。跨时区、夏令时与相对日期的解释规则归应用，不能用组件的默认浏览器环境冒充业务规则。
 
 **核心问题**：如何让「用户的时间意图」与「系统存储的时间事实」之间不产生歧义。
 
@@ -100,7 +115,7 @@ Proposed（2026-10-03）。七族判据第六份。依据 [design.md](../../desi
 |---|---|---|
 | `Calendar` | 历法位置选择 | 键盘导航完整；禁用日有理由；「今天」来自运行时 |
 | `DatePicker` | 单日期输入 | 部分输入不静默补齐；可键入 |
-| `DateRangePicker` | 区间输入 | 端点反向可见；起始与结束各自可清除 |
+| `DateRangePicker` | 完整区间与草稿 | 完整外部端点必须有序，反向外部值拒绝；草稿顺序由日历选择语义可见呈现；当前清除针对完整确认范围 |
 | `DateTimePicker` | 日期 + 时刻 | 时区策略必须由应用声明；组件不猜 |
 
 ## 六、这一族最容易做错的六件事
@@ -116,7 +131,7 @@ Proposed（2026-10-03）。七族判据第六份。依据 [design.md](../../desi
 
 ## 七、与基础层的关系
 
-消费 §1/§2（控件几何）、§5（边界）、§8（文字档：日历格子的数字用 `numeric`）、§9（状态归属：选中是组件自持，**但时区与相对时间策略归应用**）、§12（动效：日历浮层归 `motion.css`）、§14（方向与语言：**日历的周起始日与 RTL 需专门处理**）、§15（键盘导航：日历是重点）、§17（内容容量：部分输入与未知）。
+消费 §1/§2（控件几何）、§5（边界）、§8（当前日期按钮数字使用同档 text-control）、§9（状态归属：日期/范围确认值由调用方持有，原语拥有导航/选择交互，**时区与相对时间策略归应用**）、§12（动效：日历浮层归 `motion.css`）、§14（方向与语言：**日历的周起始日与 RTL 需专门处理**）、§15（键盘导航：日历是重点）、§17（内容容量：部分输入与未知）。
 
 **本族不新建数值。** 需要时回基础层补。
 
@@ -135,6 +150,6 @@ Proposed（2026-10-03）。七族判据第六份。依据 [design.md](../../desi
 ## Consequences
 
 - 四个组件都涉及本地化与历法，重写时必须按 §14 单独验证周起始日、格式与 RTL。
-- `date-range-picker`（406 行）此前在窄屏发现过真实溢出问题（见 `docs/baseline/2026-10-01-ci-date-range-failure/`），重写时必须以该场景为验收之一。
-- 部分输入的处理策略需要新增到 `Field` 的契约中（表单族），因为它是字段级的校验事实。
-- 时区策略需要在文档中明确由应用声明，并给出示例。
+- 当前 Range 的分别键入入口仍未提供；此族级目标保留，不以日历键盘检查冒充直接键入通过。
+- 部分输入不得产生伪造完整值；当前 date/datetime-local 的部分编辑由浏览器承接，Range 的部分值只作为草稿。
+- 原生范围/步长与日历规则、时区/DST 策略由应用明确声明；公开 metadata 已记录同步责任与无时区 wall-clock 定义。

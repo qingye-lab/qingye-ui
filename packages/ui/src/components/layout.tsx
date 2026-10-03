@@ -35,7 +35,7 @@ export function Stack({ gap = "panel", align = "stretch", className, render, ...
   const defaultProps = {
     "data-slot": "stack",
     "data-gap": gap,
-    className: cn("flex min-w-0 flex-col [&>*]:min-w-0 [&>*]:max-w-full", gaps[gap], alignments[align], className),
+    className: cn("flex min-w-0 flex-col [:where(&>*)]:min-w-0 [:where(&>*)]:max-w-full", gaps[gap], alignments[align], className),
   };
   return useRender({
     defaultTagName: "div",
@@ -49,7 +49,7 @@ export function Inline({ gap = "actions", align = "center", wrap = true, classNa
   const defaultProps = {
     "data-slot": "inline",
     "data-gap": gap,
-    className: cn("flex min-w-0 [&>*]:min-w-0 [&>*]:max-w-full", wrap ? "flex-wrap" : "flex-nowrap", gaps[gap], alignments[align], className),
+    className: cn("flex min-w-0 [:where(&>*)]:min-w-0 [:where(&>*)]:max-w-full", wrap ? "flex-wrap" : "flex-nowrap", gaps[gap], alignments[align], className),
   };
   return useRender({
     defaultTagName: "div",

@@ -18,8 +18,8 @@ export default function Demo() {
 
   return (
     <Stack gap="panel">
-      <Inline gap="actions"><Button>保存</Button><Button variant="bordered">取消</Button></Inline>
-      <Text step="support" className="text-muted-foreground" role="status">输入方式：{input === "keyboard" ? "键盘" : input === "pointer" ? "指针" : "待检测"}</Text>
+      <Inline gap="actions"><Button>按钮</Button><Button variant="bordered">按钮</Button></Inline>
+      <Text step="support" className="text-muted-foreground">输入方式：{input === "keyboard" ? "键盘" : input === "pointer" ? "指针" : "待检测"}</Text>
     </Stack>
   );
 }

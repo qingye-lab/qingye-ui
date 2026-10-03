@@ -1,6 +1,6 @@
 import { pageDecisionsFor } from "@/lib/design-guidance";
 import { Kbd } from "@qingye/ui/components/kbd";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
+import { Table, TableContainer, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 import { use, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { CodeBlock } from "@/components/code-block";
@@ -62,7 +62,7 @@ export default function ComponentPage() {
  *
  * The page opens with the component itself — title, one sentence, then the
  * first live example. What used to sit here was a five-row 使用判断 definition list built by
- * `designFor()`, roughly 600 characters long on all 88 pages; it pushed the
+ * `designFor()`, roughly 600 characters long across the previous catalog; it pushed the
  * component to the third screenful and rendered a Button-level warning
  * ("loading 只表示正在等待，不能当成保存成功") at the same visual weight as a
  * sentence every component repeated. The reference tail below carries what a
@@ -74,9 +74,10 @@ export default function ComponentPage() {
  * stopped reading them.
  */
 function ComponentDoc({ entry }: { entry: ComponentEntry }) {
-  const text = componentCopy[useDocsLocale()];
+  const locale = useDocsLocale();
+  const text = componentCopy[locale];
   const { zh, en } = splitTitle(entry.title);
-  const decisions = pageDecisionsFor(entry);
+  const decisions = pageDecisionsFor(entry, locale);
   return (
     <article>
       <PageHeader
@@ -148,11 +149,12 @@ function referenceAnchor(entry: ComponentEntry): string {
 }
 
 function Demos({ slug }: { slug: string }) {
-  const text = componentCopy[useDocsLocale()];
+  const locale = useDocsLocale();
+  const text = componentCopy[locale];
   const demos = use(demosFor(slug));
   if (!demos.length) {
     return (
-      <PageState headingLevel={3} title={text.noDemos}>
+      <PageState state="empty" headingLevel={3} title={text.noDemos}>
         <A href="/docs/components">{text.browse}</A>
       </PageState>
     );
@@ -177,7 +179,8 @@ function renderInline(text: string): ReactNode {
 const partId = (name: string) => `api-${name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase()}`;
 
 function ApiReference({ parts }: { parts: ApiPart[] }) {
-  const text = componentCopy[useDocsLocale()];
+  const locale = useDocsLocale();
+  const text = componentCopy[locale];
   return (
     <>
       <H2 id="api">{text.api}</H2>
@@ -188,8 +191,8 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
           </H3>
           <p className="mb-3 max-w-[42rem] text-pretty text-body text-muted-foreground leading-relaxed">{renderInline(part.description)}</p>
           {part.props?.length ? (
-            <div className="overflow-hidden rounded-xl border">
-              <Table className="min-w-[36rem] table-fixed" density="compact">
+            <TableContainer className="rounded-panel border border-border">
+              <Table className="min-w-[36rem] table-fixed" data-density="compact">
                 <colgroup>
                   <col className="w-[26%]" />
                   <col className="w-[30%]" />
@@ -229,7 +232,7 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
                   ))}
                 </TableBody>
               </Table>
-            </div>
+            </TableContainer>
           ) : null}
         </section>
       ))}
@@ -238,7 +241,8 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
 }
 
 function Keys({ value }: { value: string }) {
-  const text = componentCopy[useDocsLocale()];
+  const locale = useDocsLocale();
+  const text = componentCopy[locale];
   // "Enter / Space" → alternatives; "Shift + Tab" → a chord.
   const alternatives = value.split(/\s+\/\s+|\s*或\s*/);
   return (
@@ -259,12 +263,13 @@ function Keys({ value }: { value: string }) {
 }
 
 function KeyboardTable({ rows }: { rows: KeyboardRow[] }) {
-  const text = componentCopy[useDocsLocale()];
+  const locale = useDocsLocale();
+  const text = componentCopy[locale];
   return (
     <>
       <H2 id="keyboard">{text.keyboard}</H2>
-      <div className="overflow-hidden rounded-xl border">
-        <Table density="compact">
+      <TableContainer className="rounded-panel border border-border">
+        <Table data-density="compact">
           <TableHeader className="bg-surface-subtle/60 dark:bg-surface/40">
             <TableRow className="hover:bg-transparent">
               <TableHead className="w-[40%] ps-4 text-caption">{text.key}</TableHead>
@@ -284,7 +289,7 @@ function KeyboardTable({ rows }: { rows: KeyboardRow[] }) {
             ))}
           </TableBody>
         </Table>
-      </div>
+      </TableContainer>
     </>
   );
 }

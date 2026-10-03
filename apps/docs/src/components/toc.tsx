@@ -1,6 +1,7 @@
 import { cn } from "@qingye/ui/utils";
 import { useEffect, useState, type RefObject } from "react";
 import { useLocation } from "react-router-dom";
+import { useDocsLocale } from "@/lib/docs-locale";
 import { routeVisitKey } from "@/lib/paths";
 import { useHashLink } from "@/lib/use-route-effects";
 
@@ -79,6 +80,7 @@ function useActiveHeading(items: TocItem[]) {
 }
 
 export function TableOfContents({ container }: { container: RefObject<HTMLElement | null> }) {
+  const en = useDocsLocale() === "en";
   const items = useHeadings(container);
   const active = useActiveHeading(items);
   const onHashClick = useHashLink();
@@ -86,7 +88,7 @@ export function TableOfContents({ container }: { container: RefObject<HTMLElemen
   return (
     <nav aria-labelledby="toc-title" className="flex flex-col gap-3">
       <p className="font-medium text-foreground-strong text-caption" id="toc-title">
-        本页目录
+        {en ? "On this page" : "本页目录"}
       </p>
       <ul className="flex flex-col border-s">
         {items.map((item) => {

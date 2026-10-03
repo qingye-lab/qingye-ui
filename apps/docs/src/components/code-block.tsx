@@ -51,7 +51,7 @@ export function CodeBlock({
           <CopyCodeButton value={code} />
         </figcaption>
       ) : (
-        <div className="absolute end-1.5 top-1.5 z-10">
+        <div className="absolute end-1.5 top-1.5">
           <CopyCodeButton className="bg-surface-subtle dark:bg-surface" value={code} />
         </div>
       )}

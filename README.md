@@ -1,112 +1,94 @@
 # 青野 UI · Qingye UI
 
-器用为本，关系为法，合宜为度。Qingye UI 将这些立场落实在 React 组件、任务组合与项目主题中：名称说明真实动作，相关内容便于比较，失败后保留继续工作的条件。
+器用为本，关系为法，合宜为度。
 
-组件依据本库设计指南与 [Base UI](https://base-ui.com) 原语的公共 API 编写。理念与 AI 使用约定见 [design.md](./design.md)。
+Qingye UI is a React component library built from the design basis in [design.md](./design.md), using accessible [Base UI](https://base-ui.com) primitives. The current source contains **83 component modules**. Applications own their data, validation, requests, permissions and results; the library provides controls and reusable structural relationships.
 
-- `packages/ui` — 组件库 `@qingye/ui`
-- `apps/docs` — 公开理念、组件文档与六种可运行任务模式
-- `packages/tooling` — 独立于 UI 运行时的项目查询、AST 诊断和主题工具
-- `apps/studio` — 显式登记项目的本地 Theme Studio
+| Workspace | Purpose | Current version |
+| --- | --- | --- |
+| [packages/ui](./packages/ui/README.md) | `@qingye/ui`, components and public design resources | **1.0.0 — local, unreleased candidate** |
+| [apps/docs](./apps/docs) | Chinese and English component documentation, playgrounds and six simple compositions | Private documentation app |
+| [packages/tooling](./packages/tooling/README.md) | `@qingye/tooling`, explicit project queries, AST diagnostics and theme tools | 0.4.0 |
+| [apps/studio](./apps/studio/README.md) | Local Theme Studio for explicitly registered projects | 0.4.0, private |
 
-## 使用
+The UI candidate introduces breaking API and visual changes. Read the [1.0.0 candidate notes](./docs/releases/v1.0.0.md) before migrating an existing consumer. Tooling and private Studio have their own version and API boundaries.
 
-仓库目前为私有，使用有仓库访问权限且已登录的 GitHub CLI，一次复制以下命令下载并安装最新 Release：
+## Install a published release
+
+With repository access and an authenticated GitHub CLI:
 
 ```sh
 gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 ```
 
-保留并提交 `qingye-ui.tgz`、`package.json` 和 lock 文件。日常 `pnpm install` 按 lock 复现；主动升级时重新运行上述命令。npm/yarn 项目将最后的安装命令换成 `npm install ./qingye-ui.tgz` / `yarn add ./qingye-ui.tgz`。
+This downloads the **latest published GitHub Release**, not the current workspace candidate. It does not select 1.0.0 until that version is published. Keep the tarball, `package.json` and lockfile in the consumer repository; ordinary installs then reproduce the selected release. Run the download command again when upgrading. For npm or Yarn, replace the final install command with `npm install ./qingye-ui.tgz` or `yarn add ./qingye-ui.tgz`.
 
-Tailwind CSS 4 项目：
+For a Tailwind CSS 4 project:
 
 ```css
 @import "tailwindcss";
 @import "@qingye/ui/styles.css";
 ```
 
-没有 Tailwind 的项目导入预编译样式：
+For a project without Tailwind, use the compiled stylesheet instead:
 
 ```ts
 import "@qingye/ui/ui.css";
 ```
 
+Use one stylesheet route. Public component entries are `@qingye/ui/components/<name>`:
+
 ```tsx
 import { Button } from "@qingye/ui/components/button";
-import { ThemeProvider } from "@qingye/ui/components/theme-provider";
-
-export function App() {
-  return (
-    <ThemeProvider>
-      <Button>开始</Button>
-    </ThemeProvider>
-  );
-}
+import { Dialog, DialogPopup } from "@qingye/ui/components/dialog";
+import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye/ui/components/tabs";
 ```
 
-按组件导入可避免加载未使用组件的依赖。根入口 `@qingye/ui` 会导出 Chart/DataTable；在不消除未用导出的环境中（如直接由 Node 加载），仍需安装 `recharts` 与 `@tanstack/react-table` 这两个可选 peer。 如果包管理器关闭自动安装 peer，使用 Recharts 还需显式安装其要求的 `react-is`（与 React 主版本兼容）。
+React and React DOM must satisfy `^19.2.0`. Chart uses the optional `recharts` peer; DataTable uses the optional `@tanstack/react-table` peer. Per-component imports keep unrelated dependencies out of the import graph. The aggregate `@qingye/ui` entry also exports Chart and DataTable; loading it without eliminating unused exports can require both peers. See the [package README](./packages/ui/README.md) for providers, localization and package resources.
 
-完整说明见文档站（`pnpm dev` 后访问 http://localhost:5180）。
+## Documentation and compositions
 
-## 文档站部署
+The documentation site is configured at [ui.xflux.cc](https://ui.xflux.cc); English pages start at [/en](https://ui.xflux.cc/en). Run `pnpm dev` for the local site at `http://localhost:5180`.
 
-在线文档：[青野 UI · Qingye UI](https://yanqing-ui.pages.dev/)。部署沿用现有 Pages 项目标识与域名；品牌、源码和 GitHub 仓库统一使用 Qingye UI。
+Component pages live at `/docs/components/<name>` and isolated demos at `/playground/<name>`. `/examples` contains six simple compositions using the current public components:
 
-文档站使用 Cloudflare Pages 原生 GitHub 关联部署，源仓库为 `qingye-lab/qingye-ui`，生产分支为 `main`。推送到 `main` 后由 Cloudflare 拉取源码、构建并发布，无需在 GitHub Actions 中保存 Cloudflare API Token。
-
-| Cloudflare Pages 配置 | 值 |
+| Composition | Route |
 | --- | --- |
-| 项目名称 | `yanqing-ui` |
-| 根目录 | 仓库根目录 |
-| 构建命令 | `pnpm docs:build` |
-| 输出目录 | `apps/docs/dist` |
-| `NODE_VERSION` | `24.20.0` |
-| `PNPM_VERSION` | `10.12.1` |
+| InputGroup | `/examples/input-group` |
+| Tabs | `/examples/tabs` |
+| FilterBar | `/examples/filter-bar` |
+| BulkActionBar | `/examples/bulk-action-bar` |
+| DataTable | `/examples/data-table` |
+| Toolbar | `/examples/toolbar` |
 
-构建结果是 React 单页应用，使用 Pages 默认的路由回退；不要在输出根目录添加 `404.html`，否则直接访问组件文档或刷新页面会失去 SPA 回退。
+These demonstrations use local data and state. The former dashboard, mail, media Studio and business task pages are no longer supported example routes. The separate local Theme Studio remains in `apps/studio`.
 
-部署选择与验证方式见 [Cloudflare Pages 部署决策](./docs/decisions/cloudflare-pages.md)。
+## Design and AI resources
 
-## 组件组合演示
+The root [design.md](./design.md) is the sole authored source for the public design guide. Its methods retain their Chinese names: 名实相符、相成相制、布白有用、随境取度、展开有据、进退相承. [STANDARDS.md](./STANDARDS.md) specifies the component implementation contracts, and [component-layering.md](./docs/decisions/component-layering.md) records the library boundary.
 
-文档站以可操作任务承载设计方法。`/docs/patterns` 包含资料编辑、集合比较、主从详情、修改审核、上传处理队列和阅读。失败、未知结果、范围变化和返回路径是示例的一部分；这些使用合成资料，不证明真实后端协议。
+The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v1.0.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
 
-原有完整页面示例继续保留，公共控件复用 `@qingye/ui`：
-
-- `/examples` — 示例入口
-- `/examples/dashboard` — 经营概览：指标、图表、筛选、表格与编辑
-- `/examples/mail` — 青野邮箱：邮件阅读、搜索、星标、归档和回复
-- `/examples/studio` — 媒体资源：分类、搜索、收藏、视图切换、资源预览与文件上传
-
-示例使用本地数据，操作只改变演示状态。页面布局和内容服务于组件能力展示，不提供实际邮件服务、邀请或上传后端。
-
-## 开发
+## Development
 
 ```sh
 pnpm install
-pnpm dev                              # 文档站
-pnpm test                            # 库、工具与本地服务测试
-pnpm typecheck                       # 工作区类型检查
-pnpm studio:build                    # 本地 Studio 构建
-pnpm --filter @qingye/ui build       # 构建组件库
-node scripts/shot.mjs <component>     # 浅色/深色 × 桌面/手机截图
+pnpm dev                         # Documentation site
+pnpm --filter @qingye/ui build   # UI package and generated catalog
+pnpm --filter docs typecheck    # Documentation types
+pnpm studio:build               # Local Theme Studio
+pnpm typecheck                  # Workspace type checks
+pnpm test                       # Workspace tests
 ```
 
-工具命令与显式项目配置见 [Tooling README](./packages/tooling/README.md)，本地预览、写入和版本边界见 [Studio README](./apps/studio/README.md)。工具默认报告问题；没有把退出码 0 等同于全部诊断通过。
+Follow [AGENTS.md](./AGENTS.md) and the [current rewrite roadmap](./docs/plans/2026-10-03-rewrite-roadmap.md). Verification is proportional to the changed contract; a successful static check does not establish runtime or visual acceptance. Browser ownership and cleanup rules apply to all browser runners.
 
-发布包带有同源生成的 `catalog.json`、`design.md`、按版本区分的 `ai/` 资料与薄层 `registry/` 模板。组件基础实现留在共享包，项目只拥有主题、组合与应用状态。
+## Release
 
-组件规范见 [STANDARDS.md](./STANDARDS.md)，协作约定见 [AGENTS.md](./AGENTS.md)。
+The Release workflow checks that an explicitly approved `v<version>` tag matches `packages/ui/package.json`. It runs its validation gates, packs UI and tooling at **their own manifest versions**, verifies installed consumers, and attaches both tarballs to a GitHub Release. A UI major release does not require an unrelated tooling bump or a matching private Studio version. See [release.yml](./.github/workflows/release.yml) for the executable process.
 
-## 发布
+**1.0.0 is a local unreleased candidate.** A workspace version, generated catalog or local build is not a published release. Candidate status and breaking changes are recorded in [v1.0.0.md](./docs/releases/v1.0.0.md); [v0.4.0.md](./docs/releases/v0.4.0.md) remains a historical release note.
 
-同步更新 `packages/ui/package.json`、`packages/tooling/package.json` 与 `apps/studio/package.json` 的版本号，运行 `pnpm --filter @qingye/ui gen:catalog` 刷新当前版本资料。推送匹配 UI 版本的 `v<版本号>` 标签，Release 工作流在类型、测试、浏览器和实际安装消费验证通过后，将 UI 与工具包的 tarball 附加到 GitHub Release。
+## License
 
-当前版本的变化与升级注意事项见 [v0.4.0 发布说明](./docs/releases/v0.4.0.md)。
-
-## 许可
-
-MIT，见 [LICENSE](./LICENSE)。第三方依赖的许可由各自的软件包提供。
-
-2026-10-03 删除公开导出 `useIsMobile`，属于破坏性 API 变更；查询同一宽度条件时使用 `useMediaQuery("max-md")`。来源收尾的证据与保留边界见[决策](./docs/decisions/2026-10-03-provenance-closure.md)。
+MIT; see [LICENSE](./LICENSE). Third-party dependencies distribute their own licenses. The [provenance closure decision](./docs/decisions/2026-10-03-provenance-closure.md) records the scope of the source review and retained evidence.

@@ -44,6 +44,7 @@
   [data-slot="combobox-popup"],
   [data-slot="popover-popup"],
   [data-slot="tooltip-popup"],
+  [data-slot="hover-card-popup"],
   [data-slot="navigation-menu-popup"]
 ) {
   transition-property: opacity, scale;
@@ -61,6 +62,7 @@
   [data-slot="combobox-popup"],
   [data-slot="popover-popup"],
   [data-slot="tooltip-popup"],
+  [data-slot="hover-card-popup"],
   [data-slot="navigation-menu-popup"]
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
@@ -77,7 +79,8 @@
   [data-slot="autocomplete-popup"],
   [data-slot="combobox-popup"],
   [data-slot="popover-popup"],
-  [data-slot="tooltip-popup"]
+  [data-slot="tooltip-popup"],
+  [data-slot="hover-card-popup"]
 )[data-ending-style] {
   transition-duration: var(--qy-duration-press);
 }
@@ -85,6 +88,7 @@
 /* 共享内容切换不是第二套入场参数；尚未重写的浮层保持原有尺寸过渡。 */
 :is(
   [data-slot="tooltip-popup"],
+  [data-slot="hover-card-popup"],
   [data-slot="navigation-menu-popup"]
 ) {
   transition-property: width, height, scale, opacity;
@@ -199,47 +203,40 @@
   translate: 1.5rem 0;
 }
 
-/* Drawer translates offscreen rather than using the small-popup scale preset.
- * Live swipe and nested-stack transforms stay in the component; only the
- * appearance/dismissal overrides and their timing belong to this layer. */
+/* Drawer consumes public swipe/snap facts. Offscreen travel equals its own
+ * border-box extent; no inherited inset or velocity multiplier preset. */
 [data-slot="drawer-popup"] {
-  transition-property: transform, box-shadow, height, background-color;
+  transform: translate(var(--drawer-swipe-movement-x, 0px), var(--drawer-swipe-movement-y, 0px));
+  transition-property: transform, opacity;
   transition-duration: var(--qy-duration-drawer);
   transition-timing-function: var(--qy-ease-drawer);
+}
+[data-slot="drawer-popup"][data-swipe-direction="down"] {
+  transform: translate(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-swipe-movement-y, 0px) + var(--drawer-snap-point-offset, 0px)));
+}
+[data-slot="drawer-popup"][data-swipe-direction="up"] {
+  transform: translate(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-swipe-movement-y, 0px) - var(--drawer-snap-point-offset, 0px)));
 }
 [data-slot="drawer-backdrop"] {
-  transition-property: opacity;
-  transition-duration: var(--qy-duration-drawer);
-  transition-timing-function: var(--qy-ease-drawer);
+  transition: opacity var(--qy-duration-drawer) var(--qy-ease-drawer);
 }
-[data-slot="drawer-popup"][data-position="bottom"]:not([data-starting-style], [data-ending-style]) {
-  transition-property: transform, box-shadow, height, background-color, margin, padding;
-}
-[data-slot="drawer-popup"]:is([data-starting-style], [data-ending-style]) {
-  --tw-shadow-color: transparent;
-}
-[data-slot="drawer-popup"][data-position="bottom"]:is([data-starting-style], [data-ending-style]) {
-  transform: translateY(calc(100% + env(safe-area-inset-bottom, 0px) + var(--inset)));
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-[data-slot="drawer-popup"][data-position="top"]:is([data-starting-style], [data-ending-style]) {
-  transform: translateY(calc(-100% - var(--inset)));
-}
-[data-slot="drawer-popup"][data-position="left"]:is([data-starting-style], [data-ending-style]) {
-  transform: translateX(calc(-100% - var(--inset)));
-}
-[data-slot="drawer-popup"][data-position="right"]:is([data-starting-style], [data-ending-style]) {
-  transform: translateX(calc(100% + var(--inset)));
-}
+[data-slot="drawer-popup"][data-swipe-direction="down"]:is([data-starting-style], [data-ending-style]) { transform: translateY(100%); }
+[data-slot="drawer-popup"][data-swipe-direction="up"]:is([data-starting-style], [data-ending-style]) { transform: translateY(-100%); }
+[data-slot="drawer-popup"][data-swipe-direction="left"]:is([data-starting-style], [data-ending-style]) { transform: translateX(-100%); }
+[data-slot="drawer-popup"][data-swipe-direction="right"]:is([data-starting-style], [data-ending-style]) { transform: translateX(100%); }
 :is([data-slot="drawer-popup"], [data-slot="drawer-backdrop"])[data-ending-style] {
-  /* Preserve the existing velocity-adjusted 400ms exit at strength 1:
-   * 450ms × 8/9. The duration token remains the single adjustment entry. */
-  transition-duration: calc(var(--drawer-swipe-strength, 1) * var(--qy-duration-drawer) * 8 / 9);
+  transition-duration: var(--qy-duration-fast);
 }
-[data-slot="drawer-backdrop"][data-swiping] {
+:is([data-slot="drawer-popup"], [data-slot="drawer-backdrop"])[data-swiping] {
   transition-duration: var(--qy-duration-instant);
 }
+
+/* Disclosure keeps draft-bearing content mounted; state and visibility are
+ * owned by the primitive, never by an animation-completion callback. */
+:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"]) {
+  transition: opacity var(--qy-duration-fast) var(--qy-ease-out);
+}
+:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"]):is([data-starting-style], [data-ending-style]) { opacity: 0; }
 
 /* The check mark settles in rather than appearing. */
 [data-slot="checkbox-indicator"] {
@@ -326,6 +323,7 @@
     [data-slot="combobox-popup"],
     [data-slot="popover-popup"],
     [data-slot="tooltip-popup"],
+    [data-slot="hover-card-popup"],
     [data-slot="navigation-menu-popup"],
     [data-slot="dialog-popup"],
     [data-slot="alert-dialog-popup"],
@@ -333,6 +331,11 @@
   ):is([data-starting-style], [data-ending-style]) {
     scale: none !important;
     translate: none !important;
+  }
+
+  [data-slot="drawer-popup"]:is([data-starting-style], [data-ending-style]) {
+    transform: none !important;
+    opacity: 0;
   }
 
   /* Toast and the pending OTP caret opt out of decorative keyframes. */

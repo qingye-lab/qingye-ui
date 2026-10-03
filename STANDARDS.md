@@ -6,7 +6,7 @@
 
 设计硬要求引用 [design.md「必须」](design.md#必须)，不在本规范另立副本。数值须区分推导、约束、选择与预设：约束内的一个值不自动成为唯一推导，继承值也不能改名后写成理念要求。当前尺寸、配色、字距、阴影与时长中没有唯一依据的值标为预设。
 
-当前仓库有 11 个组件文件，四个试点是 Button、Input、Card、Popover。其余保留组件仍有直接空间阶梯、局部动效和高光；以下重写规则不等于它们全部已满足。未归档组件的现状从当前源码读取，归档组件不作为设计值来源。
+组件按当前分层与路线图逐批重写，已完成文件从 `packages/ui/src/components/` 读取；完成情况与检查证据见各批实施记录，不用不断变化的文件数代替验收。归档组件不作为实现或设计值来源。
 
 ## 1. 结构与 API
 
@@ -52,7 +52,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 - 表面读语义角色，不写死灰色。surface/raised 当前浅色为白色，深色用不透明 color-mix 配色；surface-inset、线与反馈层为半透明，须按真实叠层测合成结果。
 - Input 当前外层为 1px 共同边界；内部 input 透明。深色外层读内嵌表面。Card / Popover 当前各有 1px 容器边界；这描述现状，不证明所有情境都必须保留线。
-- 高光与阴影按上引删去检验判断。当前 solid Button 无外投影；Card 默认 shadow-panel 的独立用途**未证，UNVERIFIED**。Popover 默认 shadow-raised；所有阴影参数都是预设。Tooltip / Toast 仍保留局部阴影与伪元素高光，不能宣称已经统一或已证明必要。
+- 高光与阴影按上引删去检验判断。当前 solid Button 和 Card 无默认外投影；Card 移除 shadow-panel 是可逆默认选择，独立用途未证不等于所有项目都不得使用。Popover / Tooltip 读取 shadow-raised，Dialog / Drawer 读取 shadow-overlay；所有阴影参数都是预设，使用角色不证明其在每个组合中必要。
 - 必要边界的对比判据引用[基础层 §16](docs/decisions/2026-10-03-foundation.md#16-对比底线)；不存在运行时自动读取父背景、自动补边框的库契约。G9 项目声明协议仍未定，不能把提案当现有 API。
 
 ## 4. 圆角
@@ -86,7 +86,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。Input 清空/密码原生附属按钮与裸 Popover 入口目前用 2px 内线，不能把它们误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
 
-强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：当前宽度 2px，位置按焦点宽度取负，系统色接管；`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
+强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：宽度和内缩位置均读取局部 `--qy-focus-ring-width`，默认 2px，quiet 为 1px；系统色接管。`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
 
 测试 focus-visible 使用真实 `keyboard.press("Tab")`，等过渡至少 500ms 再取 computed 值；聚焦前后宽高不变、信号可见、无外扩。静态样式与候选覆盖页不等于运行验收。
 
@@ -141,3 +141,149 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 检查范围与证据状态引用 [design.md「人和 AI 的交付检查」](design.md#人和-ai-的交付检查)，按当前任务影响与用户裁定选择组合；焦点采样方式见本规范 §5。截图只发现变化，不为通过而批量更新。改断言必须逐条说明理由。
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
+
+<!-- qingye:translation:en:start source-sha256=ae0639c956d8ce3ca8f1eaf3c01d280ae500c44f15e3622061d085594639bb7c -->
+# Component Standards
+
+These are implementation rules for `@qingye/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
+
+## 0. Requirements, choices, and presets
+
+Design requirements refer to [Required](design.en.md#required), without establishing a second normative copy here. Classify values as derived, constrained, chosen, or preset. One value within a constraint is not automatically a unique derivation; renaming an inherited value cannot turn it into a design requirement. Current dimensions, colors, tracking, shadows, and durations without a unique basis are presets.
+
+Components are rewritten by current layers and roadmap batches. Read completed files in `packages/ui/src/components/` and their execution records for evidence. A changing file count cannot establish acceptance. Archived components are not implementation or design-value sources.
+
+## 1. Structure and API
+
+- One component per `packages/ui/src/components/<name>.tsx` file, named in kebab-case.
+- Styleable parts have `data-slot`. Merge external classes last; forward id, ARIA, data attributes, and events.
+- Use Base UI `render`, `useRender`, and `mergeProps` to replace rendered elements. Avoid aliases or an `as` API without a task basis. Current Card is a composition entry without automatic title slots or padding.
+- Components based on Base UI export their primitive namespace. Controlled state retains applicable controlled and uncontrolled entries. Assign responsibilities using [Assigning changes](design.en.md#assigning-changes).
+- Request facts and outcome inference follow [Names and states](design.en.md#names-and-states). Button currently chooses `idle / waiting / in-progress / unknown / failed`. A boolean loading prop could also respect ownership; the union is a choice rather than a design requirement.
+- Danger consequences must be visible and associated. Place a danger Button inside ButtonProtection or reference existing nonblank text through `aria-describedby`. Development throws when neither exists; production does not. Missing runtime `process` is treated as production. ButtonProtection requires visible nonblank consequence text about the current object. Do not duplicate a reliable existing explanation. See foundation §18 and batch 3 D for the missing-runtime check.
+
+## 2. Dimensions
+
+Size and emphasis are independent choices; using size for expression requires a task reason. Outer heights, type sizes, and the narrow-screen +4px are current presets. Size can communicate importance when justified. The default `sm:` breakpoint is 640px and restores desktop profiles; coarse-pointer hit areas are handled separately.
+
+| Size | Desktop / narrow outer height | Matching text profile | Desktop / narrow font size | Desktop / narrow line height | Desktop visual allowance per vertical side |
+|---|---|---|---|---|---|
+| `xs` | 24 / 28px | `text-control-xs` | 12 / 14px | 16 / 20px | 4px |
+| `sm` | 28 / 32px | `text-control-sm` | 13 / 14px | 18 / 20px | 5px |
+| `md` | 32 / 36px | `text-control-md` | 14 / 15px | 20 / 22px | 6px |
+| `lg` | 36 / 40px | `text-control-lg` | 16 / 17px | 24 / 24px | 6px |
+| `xl` | 40 / 44px | `text-control-xl` | 18 / 19px | 26 / 28px | 7px |
+
+Pixel conversions assume a 16px root font. Button and Input consume their matching text profile, using `-mobile` classes on narrow screens and desktop classes at `sm:`. Earlier lg reused md type and xl reused lg type; added height without line-height growth left 8px per side. The current 4/5/6/6/7px allowances are calculated from chosen outer heights and line heights; see foundation §2 and §8.
+
+- Distinguish occupied outer dimensions, usable space inside borders, and touch hit dimensions. Outer heights consume dimension roles rather than increasing indirectly with global spacing.
+- Horizontal allowances of 10/12/14/16/16px, roughly 40–44%, are presets rather than minimum content capacity. Capacity depends on actual width, text, icons, and adjunct actions. Bordered/Input profiles subtract the actual 1px border from padding to align text origins; borderless profiles use unadjusted padding. See foundation §1.
+- Icons use the same profile. Desktop xs/sm use 14px, md/lg 16px, xl 18px; narrow profiles use 16/16/18/18/20px. All are presets. Icon is a shape axis; centering allowance derives from outer height and icon dimensions.
+- Independent controls below the library's 44px target use `touch-target`. On coarse pointers, it establishes its own positioning context and centers an expanded pseudo-element. Check clipping, neighboring overlap, and accidental viewport targets. Input's coarse-pointer minimum outer height reads `--qy-touch-target` without changing its nominal profile.
+
+## 3. Surfaces and boundaries
+
+Task criteria come from [Space and surfaces](design.en.md#space-and-surfaces) and [Removal](design.en.md#tests-of-judgment). Foundation §5 and §6 describe the selected identification mechanisms.
+
+| Current Button variant | Boundary mechanism | Focus mechanism |
+|---|---|---|
+| `solid` | Fill; no default border or external shadow | 2px contrasting line inside the fill |
+| `bordered` | White surface in light mode with a boundary line; card surface in dark mode | Change the existing 1px border's color |
+| `quiet` | Transparent by default; content identifies the entry | 1px line inside its own box |
+
+These three variants are current choices, not fixed importance levels; tone is independent. The user's rule to retain borders when a surface matches its background motivates bordered, without adding lines to entries already distinguished by fill.
+
+Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`, and `--qy-ring` through `--qy-button-bordered-border-focus`. Current light mode uses black at 50% alpha and dark mode white at 44%; the chosen 50% is not the current value for both. Danger bordered locally mixes danger text at 50%, with opaque danger text for focus.
+
+- Use semantic surface roles rather than hard-coded gray. Surface/raised currently use white in light mode and opaque color mixes in dark mode. Surface-inset, lines, and feedback layers are translucent; measure their actual compositions.
+- Input currently has a 1px shared outer boundary and a transparent inner input; dark mode reads the inset surface. Current Card/Popover each have a 1px container boundary. This records implementation rather than requiring a line in every context.
+- Judge highlights and shadows with the removal test. Current solid Button and Card have no default external shadow. Removing Card's shadow-panel is a reversible default choice; an unproven independent purpose does not forbid shadows in every project. Popover/Tooltip consume shadow-raised and Dialog/Drawer shadow-overlay. All parameters are presets; consuming a role does not establish necessity in every composition.
+- Necessary boundary contrast refers to foundation §16. No library contract reads parent backgrounds or adds borders automatically. The G9 project declaration protocol is undecided; proposals are not current APIs.
+
+## 4. Radii
+
+Current square independent controls use `r ≤ 25% × nominal outer height`. The 25% criterion is chosen; 6/7/8px are choices within it. Taking the upper bound for xs/sm/md is not the only solution; lg/xl retain 8px. Check actual widths, zoom, and wrapping.
+
+| Current class / role | Value | Consumer |
+|---|---|---|
+| `rounded-xs` / `rounded-sm` | 6 / 7px | xs / sm controls |
+| `rounded-control` | 8px | md/lg/xl Button and Input |
+| `rounded-panel` | 12px | Card |
+| `rounded-overlay` | 12px | Popover panel; independent adjustment entry |
+| `rounded-md` / `rounded-lg` | 8 / 8px | Independent geometry / default control chain |
+| `rounded-xl` / `rounded-2xl` | 10 / 12px | Other geometry presets |
+| `rounded-marker` / `rounded-item` | 4 / 6px | Defined marker/item presets, without a matching rewritten component in this source record |
+
+`--qy-radius-md` is direct; `--qy-radius-lg` reads `--qy-radius`. Equal current values do not establish a nested contour relationship. Use `inner radius = max(0, outer radius − inset)` only for an equal inset of the same carrying contour; negatives become square corners. Independent child objects do not follow it: an independent 8px Button inside Card is not forced to derive its radius from Card padding. See foundation §4 and §18.
+
+## 5. States and focus
+
+Ownership and simultaneous states follow [Names and states](design.en.md#names-and-states). This table records current part implementations.
+
+| State | Current expression and classification |
+|---|---|
+| hover / pressed | solid fill `/90` is an inherited preset; bordered/quiet use accent or danger-soft without layout changes. qy-pressable's 0.97 scale is a preset |
+| focus-visible | No additional outer ring. Input, focusable Card, Popover panel, and bordered Button change existing border color without thickness changes. solid uses an internal 2px line; quiet an internal 1px line |
+| disabled | Native/ARIA semantics and event guards apply independently. Current opacity-64 is an inherited preset rather than a substitute for actual disabled behavior |
+| invalid | Caller-declared facts. Input retains aria-invalid and an error border, changing to danger text color on focus at the same 1px width without an added inner ring |
+| waiting / in-progress / unknown / failed | Button expresses supplied facts and retains the action name. Busy and unknown block repeated activation without inferring success or retry |
+| selected / open | Consume actual primitive data states; preserve semantics when changing appearance |
+
+Foundation §15 records focus values: `--qy-focus-ring-width` currently chooses 2px and `--qy-focus-quiet-width` 1px. Input's clear/password adjunct buttons and bare Popover entries currently use 2px internal lines, rather than quiet Button's 1px. Popover panel actually receives focus; review observed focus-visible after opening with Enter, and its border only changes color.
+
+In forced colors, systems remove box shadows. `styles.css` restores CSS outline with width and inward offset reading local `--qy-focus-ring-width`: 2px by default and 1px for quiet. System colors take over; `!important` overrides utilities-layer outline-none. Widths are choices rather than AA minimums. The full forced-color composition matrix remains UNVERIFIED.
+
+Test focus-visible through actual `keyboard.press("Tab")`, wait at least 500ms for transitions, then read computed values. Dimensions must remain unchanged, the signal visible, and the outline internal. Static styles and a candidate coverage page are not runtime acceptance.
+
+## 6. Motion
+
+- Actual changes, interruption, and continuity follow [Change and recovery](design.en.md#change-and-recovery) and ban NG6.
+- Durations and curves are presets. Current press is 100ms, fast 140ms, feedback 180ms, base 220ms, slow 320ms, drawer 450ms. Consume roles instead of another inline value for the same purpose; see foundation §12.
+- motion.css owns Popover/Tooltip entry and exit. Components provide structure, trigger position, and slots. Initial scale 0.98 and opacity 0 are inherited presets whose migration into a shared file does not change provenance. Entry at 140ms and exit at 100ms are policy choices.
+- Toast retains local entry/exit and stacking; theme.css also contains success/error animations. These values are presets. This source does not claim complete motion consolidation across retained components.
+- MotionProvider records input method and switches instantly for keyboard. Reduced motion removes translation and scale while retaining readable color, opacity, and loading indications. Runtime acceptance follows [Delivery checks](design.en.md#delivery-checks-for-people-and-ai).
+
+## 7. Typography and capacity
+
+Each semantic profile includes font size, line height, tracking, and weight; current values are presets. Control profiles are separate from content profiles. Hierarchy follows [Emphasis and content](design.en.md#emphasis-and-content).
+
+| Content profile | Current font size | Current tracking |
+|---|---|---|
+| `display-lg` / `display` | 40 / 32px | −0.032em |
+| `title` | 24px | −0.022em |
+| `chapter` | 22px | −0.02em |
+| `heading` | 16px | −0.012em |
+| `body` / `label` | 14 / 13px | −0.006em |
+| `caption` | 12px | 0 |
+| `micro` | 11px | +0.01em |
+
+- Font size does not uniquely determine tracking; the default pattern is not a hard ban. Current weights are 400/500/600. Theme changes require actual hierarchy and contrast checks rather than making a preference universal.
+- utilities.css uses :lang to set Chinese/Japanese/Korean tracking to normal. The source records no typography-component ownership of this rule. Check typography with Emphasis and content and Delivery checks.
+- numeric serves numeric columns and counts; text-metric includes tabular numerals.
+- Choose truncation, wrapping, text-balance, and text-pretty for the task. Single-line truncation is not mandatory. Button currently permits wrapping. Consequences and empty values follow Names and states and NG7; see foundation §14 and §17 for capacity.
+
+## 8. Accessibility
+
+- Preserve primitive keyboard, naming, state, and focus behavior. Hide decorative icons and name icon-only entries.
+- Contrast follows [Delivery checks](design.en.md#delivery-checks-for-people-and-ai) and foundation §16 without copying its numbers here. Composition is described in foundation §5.
+- Applicable focus criteria, hit targets, and project choices refer to foundation §15 and Delivery checks. Current mechanisms are in §5 above.
+- Graphics must express states through names, text, icons, and ARIA as well as color.
+
+## 9. Internationalization, direction, and theme axes
+
+- Built-in strings use useUILocale; add keys to both src/locale.tsx and src/locales/en-US.ts. Caller-supplied explicit names take precedence.
+- Prefer logical directions. Keep physical direction where its task requires it, such as arrow positioning. Check actual Portal language, direction, and density containers.
+- Independent axes and compact presentation follow Required and Space and surfaces. ThemeProvider defaults to class with an explicit attribute mode. Current document-level brand and compact wiring are in foundation §13.
+
+## 10. Appearance and implementation provenance
+
+Accept actual combinations through Delivery checks; composition and light/dark sampling follow foundation §16. Provenance and design derivation are separate. Retain legally required notices for distributed derived files. Never read archived component source to decide values or call renamed copies original work.
+
+## 11. Documentation and acceptance
+
+Component documentation follows [Executable protocols](design.en.md#executable-protocols); interface copy follows [Copy](design.en.md#copy). These standards record implementation rules only.
+
+Select checks and combinations by current task impact and user decisions, using Delivery checks for evidence statuses and §5 above for focus sampling. Screenshots reveal changes; do not update them in bulk to pass. Explain every changed assertion.
+
+Generating AI style resources and the unified build follows completion of parallel tasks; it is outside an individual component batch.
+<!-- qingye:translation:en:end -->

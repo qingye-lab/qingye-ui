@@ -150,7 +150,7 @@ export function Callout({
 }) {
   const Icon = tone === "warning" ? TriangleAlertIcon : InfoIcon;
   return (
-    <Alert className={cn("my-6 max-w-[42rem]", className)} role="note" variant={tone}>
+    <Alert className={cn("my-6 max-w-[42rem]", className)} role="note" tone={tone}>
       <Icon aria-hidden="true" />
       {title ? <AlertTitle>{title}</AlertTitle> : null}
       <AlertDescription className="text-foreground/80 leading-relaxed">{children}</AlertDescription>

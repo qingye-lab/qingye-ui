@@ -6,6 +6,7 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Button } from "./button";
+import { useFloatingLayer } from "../floating-layer";
 
 export type ToastPosition = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export interface ToastProviderProps extends Toast.Provider.Props {
@@ -147,14 +148,16 @@ function Notices({ position = "bottom-right", portalProps, loadingTimeout, ancho
 }) {
   const manager = Toast.useToastManager<ToastData>();
   const { messages } = useUILocale();
+  const layer = useFloatingLayer("notification");
   return (
     <Toast.Portal {...portalProps}>
       <Toast.Viewport
         data-slot="toast-viewport"
         aria-label={messages.notifications}
         aria-live="off"
+        style={layer}
         className={anchored ? "outline-none" : cn(
-          "pointer-events-none fixed z-50 flex w-max max-w-[calc(100vw-var(--qy-space-6)*2)] max-h-[calc(100vh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
+          "pointer-events-none fixed flex w-max max-w-[calc(100vw-var(--qy-space-6)*2)] max-h-[calc(100vh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
           positions[position],
         )}
       >
@@ -163,8 +166,9 @@ function Notices({ position = "bottom-right", portalProps, loadingTimeout, ancho
             key={notice.id}
             toast={notice}
             data-slot="toast-positioner"
-            className="z-50 w-max max-w-[calc(100vw-var(--qy-space-6)*2)]"
+            className="w-max max-w-[calc(100vw-var(--qy-space-6)*2)]"
             {...notice.positionerProps}
+            style={state => ({ ...layer, ...(typeof notice.positionerProps?.style === "function" ? notice.positionerProps.style(state) : notice.positionerProps?.style) })}
           >
             <NoticeBody notice={notice} manager={manager} loadingTimeout={loadingTimeout} anchored />
           </Toast.Positioner>

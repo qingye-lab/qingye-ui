@@ -1,9 +1,15 @@
 import guide from "../../../../design.md?raw";
+import type { DocsLocale } from "./paths";
+import { extractPublicTranslation } from "./public-translations.mjs";
 
 /** Keep the site copy actions tied to the authored root guide. */
-export function extractDesignEntry(source: string) {
-  const startMarker = "<!-- qingye:project-adoption:start -->";
-  const endMarker = "<!-- qingye:project-adoption:end -->";
+export function extractDesignEntry(source: string, locale: DocsLocale = "zh") {
+  const translation = extractPublicTranslation(source);
+  const selected = locale === "en" ? translation.english : translation.canonical;
+  if (!selected) throw new Error("design.md has no authored English translation.");
+  const startMarker = locale === "en" ? "<!-- qingye:project-adoption:en:start -->" : "<!-- qingye:project-adoption:start -->";
+  const endMarker = locale === "en" ? "<!-- qingye:project-adoption:en:end -->" : "<!-- qingye:project-adoption:end -->";
+  source = selected;
   const start = source.indexOf(startMarker);
   const end = source.indexOf(endMarker);
   if (start < 0 || end < start || start !== source.lastIndexOf(startMarker) || end !== source.lastIndexOf(endMarker)) {
@@ -19,11 +25,12 @@ export function extractDesignEntry(source: string) {
 
   const task = [...source.matchAll(/^```text\r?\n([\s\S]*?)\r?\n```[ \t]*$/gm)].at(-1)?.[1]?.trim();
   if (!task) throw new Error("design.md must contain the task-entry text block.");
-  return { agents, design, task };
+  return { guide: selected, agents, design, task };
 }
 
 const entry = extractDesignEntry(guide);
-export const DESIGN_GUIDE = guide;
+export function designEntryFor(locale: DocsLocale = "zh") { return locale === "zh" ? entry : extractDesignEntry(guide, locale); }
+export const DESIGN_GUIDE = entry.guide;
 export const PROJECT_AGENTS = entry.agents;
 export const PROJECT_DESIGN = entry.design;
 export const TASK_PROMPT = entry.task;

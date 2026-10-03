@@ -1,3 +1,4 @@
+import { Button } from "@qingye/ui/components/button";
 import { useRef } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { DemoFrame } from "../../src/components/demo";
@@ -11,7 +12,7 @@ function Article({ title }: { title: string }) {
     <main ref={article}>
       <h1>Button 按钮</h1>
       <H2 id="examples">示例</H2>
-      <DemoFrame slug="button" demo={{ id: "long-name", source: "const demo = true;", meta: { title }, default: () => <button>示例内容</button> }} />
+      <DemoFrame slug="button" demo={{ id: "long-name", source: "const demo = true;", meta: { title }, default: () => <Button>示例内容</Button> }} />
       <H3 id="api-button">Button</H3>
     </main>
     <TableOfContents container={article} />

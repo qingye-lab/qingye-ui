@@ -67,3 +67,15 @@ test("the website uses library controls", () => {
   assert.deepEqual(result.violations, []);
   assert.ok(result.files > 0);
 });
+
+test("native select options are structural children of the actual public NativeSelect, not independent controls", () => {
+  const result = inspectLibraryControls(`
+    import { NativeSelect as Choice } from "@qingye/ui/components/native-select";
+    import * as UI from "@qingye/ui";
+    import { NativeSelect as Unrelated } from "./other";
+    const View = () => <><Choice><optgroup label="A"><option value="0">Zero</option></optgroup></Choice><UI.NativeSelect><option>One</option></UI.NativeSelect><Choice render={<select><option>Two</option></select>} /><Unrelated><option>Invalid</option></Unrelated><option>Detached</option></>;
+  `);
+  assert.equal(result.violations.length, 2);
+  assert.ok(result.violations.every(violation => violation.message.includes("native option inside NativeSelect")));
+  assert.equal(result.renderPrimitives, 1);
+});

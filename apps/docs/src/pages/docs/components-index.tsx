@@ -24,7 +24,7 @@ export default function ComponentsIndexPage() {
 
   return (
     <article>
-      <PageHeader title="组件" />
+      <PageHeader title={locale === "en" ? "Components" : "组件"} />
       {groups.map((group) => (
         <section aria-labelledby={CATEGORY_IDS[group.category] ?? group.category} className="mt-10 first-of-type:mt-6" key={group.category}>
           <H2 className="mt-0 mb-3" id={CATEGORY_IDS[group.category] ?? group.category}>

@@ -7,7 +7,7 @@ export function CopyCodeButton({ value, className, label }: { value: string; cla
   const { messages } = useUILocale();
   return <CopyButton shape="icon"
     className={cn("text-muted-foreground hover:text-foreground", className)}
-    copyLabel={label ?? messages.copyCode}
+    aria-label={label ?? messages.copyCode}
     size="sm"
     value={value}
     variant="quiet"

@@ -3,6 +3,7 @@ import { Stack } from "@qingye/ui/components/layout";
 import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
 import { useTheme, type Theme } from "@qingye/ui/components/theme-provider";
 import { Text } from "@qingye/ui/components/typography";
+import { NativeSelect } from "@qingye/ui/components/native-select";
 import { useUILocale } from "@qingye/ui/locale";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useId } from "react";
@@ -19,11 +20,11 @@ export default function Demo() {
     <PopoverPopup>
       <Stack gap="field">
         <PopoverTitle>{messages.theme}</PopoverTitle>
-        <select id={id} aria-label={messages.theme} className="max-w-full border border-input bg-background text-body focus-visible:outline-none focus-visible:border-ring" value={theme} onChange={event => setTheme(event.target.value as Theme)}>
+        <NativeSelect id={id} aria-label={messages.theme} value={theme} onChange={event => setTheme(event.target.value as Theme)}>
           <option value="light">{messages.lightTheme}</option>
           <option value="dark">{messages.darkTheme}</option>
           <option value="system">{messages.systemTheme}</option>
-        </select>
+        </NativeSelect>
         <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
       </Stack>
     </PopoverPopup>

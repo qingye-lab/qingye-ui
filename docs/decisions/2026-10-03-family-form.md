@@ -93,7 +93,7 @@ Decided for Input（2026-10-03，按逐值裁决修订）；其余重写目标�
 | `FieldContent` | 横向字段的内容列 | 仅为 `horizontal` 服务 |
 | `FieldSeparator` | 字段组之间的分界 | 有分界需求时才用，不替代间距 |
 | `FieldControl` / `FieldValidity` | 无障碍原语的两个出口 | 直接转出，不包装 |
-| `Form` | 提交上下文与错误聚合 | 不含业务逻辑：不发请求 |
+| `Form` | 原生提交范围与重置上下文 | 使用原生 onSubmit / FormData；平台约束由 noValidate 控制，应用显式提供 Field.invalid 与就地 FieldError，不发请求、不分发或推断校验/结果事实 |
 | `Fieldset` | 一组相关字段的共同名称 | — |
 | `Input` | 单值文本输入 | 吸收原 `search-input`、`password-input` 为形态，不独立成组件 |
 | `Textarea` | 多行文本输入 | 与 Input 共享边界规则；`field-sizing-content` |

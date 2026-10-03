@@ -1,134 +1,21 @@
-import { Command, CommandCollection, CommandDialog, CommandDialogPopup, CommandEmpty, CommandFooter, CommandGroup, CommandGroupLabel, CommandInput, CommandItem, CommandList, CommandPanel } from "@qingye/ui/components/command";
-import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
-import { ArrowDownIcon, ArrowUpIcon, BoxIcon, CornerDownLeftIcon, FileTextIcon } from "lucide-react";
-import { Fragment, useMemo, useRef, useState } from "react";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@qingye/ui/components/combobox";
+import { Dialog, DialogClose, DialogHeader, DialogPopup, DialogTitle } from "@qingye/ui/components/dialog";
+import { Inline } from "@qingye/ui/components/layout";
+import { useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CATEGORIES } from "@/lib/types";
 import { score, searchEntries, type SearchEntry } from "@/lib/search";
-import { focusPageHeading } from "@/lib/use-route-effects";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { navLabel } from "@/lib/nav";
-
-interface Group {
-  value: string;
-  items: SearchEntry[];
-}
-
-function browseGroups(entries: SearchEntry[]): Group[] {
-  const docs = entries.filter((entry) => entry.group === "文档");
-  const byCategory = CATEGORIES.map((category) => ({
-    value: category,
-    items: entries.filter((entry) => entry.group === "组件" && entry.meta === category),
-  }));
-  const known = new Set<string>(CATEGORIES);
-  const other = entries.filter((entry) => entry.group === "组件" && !known.has(entry.meta));
-  return [{ value: "文档", items: docs }, ...byCategory, { value: "其他", items: other }].filter((group) => group.items.length);
-}
-
-function resultGroups(entries: SearchEntry[], query: string): Group[] {
-  const ranked = entries
-    .map((entry) => ({ entry, rank: score(entry, query) }))
-    .filter((item) => item.rank > 0)
-    .sort((a, b) => b.rank - a.rank);
-  const pick = (group: SearchEntry["group"]) => ranked.filter((item) => item.entry.group === group).map((item) => item.entry);
-  return [
-    { value: "组件", items: pick("组件") },
-    { value: "文档", items: pick("文档") },
-  ].filter((group) => group.items.length);
-}
-
 export default function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
-  const navigate = useNavigate();
-  const locale = useDocsLocale();
+  const locale = useDocsLocale(); const navigate = useNavigate(); const input = useRef<HTMLInputElement | null>(null); const navigated = useRef(false); const [query, setQuery] = useState("");
   const entries = useMemo(() => searchEntries(locale), [locale]);
-  const all = useMemo(() => browseGroups(entries), [entries]);
-  const [query, setQuery] = useState("");
-  const filtered = useMemo(() => (query.trim() ? resultGroups(entries, query) : all), [entries, all, query]);
-  const navigated = useRef(false);
-  const searching = query.trim().length > 0;
-
-  const choose = (entry: SearchEntry) => {
-    navigated.current = true;
-    onOpenChange(false);
-    navigate(entry.value);
-  };
-
-  return (
-    <CommandDialog
-      onOpenChange={(next) => {
-        if (next) navigated.current = false;
-        onOpenChange(next);
-      }}
-      onOpenChangeComplete={(next) => {
-        if (!next) setQuery("");
-      }}
-      open={open}
-    >
-      <CommandDialogPopup
-        aria-label="搜索文档"
-        finalFocus={() => {
-          if (!navigated.current) return true;
-          focusPageHeading();
-          return false;
-        }}
-      >
-        <Command filteredItems={filtered} items={all} onValueChange={setQuery} value={query}>
-          <CommandInput aria-label="搜索组件与文档" placeholder="搜索组件、指南或关键词…" />
-          <CommandPanel>
-            <CommandEmpty>没有找到与“{query.trim()}”相关的内容。</CommandEmpty>
-            <CommandList className="max-h-[min(24rem,60dvh)]">
-              {(group: Group, index: number) => (
-                <Fragment key={group.value}>
-                  <CommandGroup className={index > 0 ? "mt-2" : undefined} items={group.items}>
-                    <CommandGroupLabel>{navLabel(group.value, locale)}</CommandGroupLabel>
-                    <CommandCollection>
-                      {(entry: SearchEntry) => (
-                        <CommandItem className="gap-2.5" key={entry.id} onClick={() => choose(entry)} value={entry}>
-                          {entry.group === "文档" ? (
-                            <FileTextIcon aria-hidden="true" className="size-4 shrink-0 opacity-60" />
-                          ) : (
-                            <BoxIcon aria-hidden="true" className="size-4 shrink-0 opacity-60" />
-                          )}
-                          <span className="truncate">{entry.title}</span>
-                          {entry.hint ? <span className="truncate text-muted-foreground text-caption">{entry.hint}</span> : null}
-                          {searching && entry.group === "组件" ? (
-                            <span className="ms-auto shrink-0 ps-3 text-muted-foreground text-caption">{navLabel(entry.meta, locale)}</span>
-                          ) : null}
-                        </CommandItem>
-                      )}
-                    </CommandCollection>
-                  </CommandGroup>
-                </Fragment>
-              )}
-            </CommandList>
-          </CommandPanel>
-          <CommandFooter className="pointer-coarse:hidden">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5">
-                <KbdGroup>
-                  <Kbd>
-                    <ArrowUpIcon aria-hidden="true" />
-                  </Kbd>
-                  <Kbd>
-                    <ArrowDownIcon aria-hidden="true" />
-                  </Kbd>
-                </KbdGroup>
-                选择
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Kbd>
-                  <CornerDownLeftIcon aria-hidden="true" />
-                </Kbd>
-                打开
-              </span>
-            </div>
-            <span className="flex items-center gap-1.5">
-              <Kbd>Esc</Kbd>
-              关闭
-            </span>
-          </CommandFooter>
-        </Command>
-      </CommandDialogPopup>
-    </CommandDialog>
-  );
+  const filtered = useMemo(() => query.trim() ? entries.map(entry => ({ entry, rank: score(entry, query) })).filter(item => item.rank > 0).sort((a, b) => b.rank - a.rank).map(item => item.entry) : entries, [entries, query]);
+  function changeOpen(next: boolean) { if (next) navigated.current = false; onOpenChange(next); }
+  return <Combobox<SearchEntry> items={entries} filteredItems={filtered} filter={null} inline open={open} onOpenChange={changeOpen} value={null} inputValue={query} onInputValueChange={setQuery} itemToStringLabel={entry => entry.title} itemToStringValue={entry => entry.id} isItemEqualToValue={(a, b) => a.id === b.id} autoHighlight onValueChange={entry => { if (!entry) return; navigated.current = true; onOpenChange(false); navigate(entry.value); }}>
+    <Dialog open={open} onOpenChange={changeOpen} onOpenChangeComplete={next => { if (!next) setQuery(""); }}><DialogPopup className="w-[min(40rem,100%)]" initialFocus={input} finalFocus={() => { if (!navigated.current) return true; const target = document.querySelector<HTMLElement>("main h1") ?? document.querySelector<HTMLElement>("main"); if (target && !target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1"); return target ?? true; }}>
+      <DialogHeader><Inline className="justify-between"><DialogTitle>{locale === "en" ? "Search documentation" : "搜索文档"}</DialogTitle><DialogClose /></Inline></DialogHeader>
+      <ComboboxInput ref={input} aria-label={locale === "en" ? "Search components and guides" : "搜索组件与指南"} placeholder={locale === "en" ? "Component, guide or keyword" : "组件、指南或关键词"} />
+      <ComboboxEmpty>{locale === "en" ? "No matching content" : "没有匹配的内容"}</ComboboxEmpty><ComboboxList className="max-h-[min(28rem,60dvh)]">{(entry: SearchEntry) => <ComboboxItem key={entry.id} value={entry}><span className="min-w-0 flex-1 wrap-anywhere">{entry.title}</span><span className="ms-(--qy-field-gap) text-support text-muted-foreground">{navLabel(entry.meta, locale)}</span></ComboboxItem>}</ComboboxList>
+    </DialogPopup></Dialog>
+  </Combobox>;
 }

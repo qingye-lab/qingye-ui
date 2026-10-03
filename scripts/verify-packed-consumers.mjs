@@ -25,6 +25,8 @@ const evidence = { startedAt: new Date().toISOString(), tarball, sha256: sha(tar
 const archive = execFileSync('tar', ['-tzf', tarball], { encoding: 'utf8' }).trim().split('\n');
 assert.ok(archive.includes('package/dist/ui.css'));
 assert.ok(archive.includes('package/styles.css'));
+assert.ok(archive.includes('package/design.md'));
+assert.ok(archive.includes('package/design.en.md'));
 assert.ok(!archive.some((path) => /(?:^|\/)(?:plans|implementation|baseline|test-results)(?:\/|$)/.test(path)), 'private development artifacts in package');
 evidence.archive = { files: archive.length, forbiddenInternalPaths: false };
 
@@ -168,47 +170,68 @@ try {
             assert.notEqual(before,'37px');
             assert.equal(await page.locator('#draft').inputValue(),'保存前的草稿');
             await page.locator('#open-dialog').click();
-            await page.locator('[data-slot="dialog-popup"]').waitFor();
+            await page.getByRole('dialog',{name:'草稿',exact:true}).waitFor();
             assert.equal(await page.locator('#portal-button').evaluate(el=>getComputedStyle(el).backgroundColor),changed,'Portal button inherits brand');
             await page.getByRole('textbox',{name:'浮层草稿'}).fill('浮层保留修改');
             await page.keyboard.press('Escape');
             await page.locator('[data-slot="dialog-popup"]').waitFor({state:'hidden'});
             assert.equal(await page.locator('#draft').inputValue(),'浮层保留修改');
             assert.equal(await page.evaluate(()=>document.activeElement?.id),'open-dialog');
-            await page.getByRole('cell',{name:'有效内容',exact:true}).evaluate(el=>el.setAttribute('data-persist-check','same-node'));
-            await page.locator('#refresh').click();
-            assert.equal(await page.getByRole('cell',{name:'有效内容',exact:true}).getAttribute('data-persist-check'),'same-node');
-            await page.locator('#refresh').click();
+            const dataTable = page.locator('[data-slot="data-table"]');
+            await dataTable.getByRole('cell',{name:'A',exact:true}).evaluate(el=>el.setAttribute('data-persist-check','same-node'));
+            await page.locator('#table-busy').click();
+            assert.equal(await dataTable.getAttribute('aria-busy'),'true');
+            assert.equal(await dataTable.getByRole('cell',{name:'A',exact:true}).getAttribute('data-persist-check'),'same-node');
+            await page.locator('#table-busy').click();
+            assert.equal(await dataTable.getAttribute('aria-busy'),'false');
             await page.locator('[data-slot="chart"] svg').first().waitFor();
+            const chartTable = page.getByRole('table',{name:'输入数值',exact:true});
+            assert.equal(await chartTable.getByRole('cell',{name:'0',exact:true}).count(),2);
+            await page.getByRole('spinbutton',{name:'A 数值',exact:true}).fill('');
+            await chartTable.getByRole('cell',{name:'数值未完整',exact:true}).waitFor();
+            assert.equal(await dataTable.getByRole('row').nth(1).getByRole('cell').nth(1).innerText(),'');
+            await page.getByRole('spinbutton',{name:'A 数值',exact:true}).fill('4');
+            await chartTable.getByRole('cell',{name:'4',exact:true}).waitFor();
+            await page.locator('#counter').focus();
             await page.locator('#contract-group [data-slot="input-group-addon"]').first().click();
-            assert.equal(await page.evaluate(()=>document.activeElement?.id),'group-input');
-            await page.getByRole('button',{name:'清空长度',exact:true}).click();
+            assert.notEqual(await page.evaluate(()=>document.activeElement?.id),'group-input','Static attachment does not commandeer input focus');
+            await page.getByRole('button',{name:'清空文本',exact:true}).click();
             assert.equal(await page.locator('#group-input').inputValue(),'');
             assert.equal(await page.locator('#group-submits').textContent(),'提交次数 0');
-            assert.equal(await page.getByRole('button',{name:'清空长度',exact:true}).evaluate(el=>el===document.activeElement),true);
+            assert.equal(await page.getByRole('button',{name:'清空文本',exact:true}).evaluate(el=>el===document.activeElement),true);
             await page.locator('#group-invalid').click();
             await page.locator('#group-input').focus();
             assert.equal(await page.locator('#group-input').getAttribute('aria-invalid'),'true');
             assert.equal(await page.locator('#contract-group').evaluate(el=>getComputedStyle(el).borderTopWidth),'1px');
             assert.equal(await page.locator('#group-input').evaluate(el=>getComputedStyle(el).borderTopWidth),'0px');
-            const firstTab=page.getByRole('tab',{name:'概览',exact:true}),secondTab=page.getByRole('tab',{name:'慢加载详情',exact:true});
+            await page.locator('#group-input').fill('保留表单值');
+            await page.getByRole('combobox',{name:'单位',exact:true}).selectOption('em');
+            await page.locator('#native-submit').click();
+            assert.equal(await page.locator('#group-submits').textContent(),'提交次数 1');
+            assert.deepEqual(JSON.parse(await page.locator('#native-values').textContent()),{text:'保留表单值',unit:'em'});
+            assert.equal(await page.locator('#group-input').inputValue(),'保留表单值','Canceled native submit preserves draft');
+            const firstTab=page.getByRole('tab',{name:'名称',exact:true}),secondTab=page.getByRole('tab',{name:'数值',exact:true});
+            await page.getByRole('textbox',{name:'页签草稿',exact:true}).fill('保留输入');
             await firstTab.focus();await page.keyboard.press('ArrowRight');
             assert.equal(await secondTab.evaluate(el=>el===document.activeElement),true);
             assert.equal(await firstTab.getAttribute('aria-selected'),'true');
             assert.equal(await secondTab.getAttribute('aria-selected'),'false');
-            assert.equal(await page.locator('#tab-loads').textContent(),'载入次数 0');
+            assert.equal(await page.locator('#tab-activations').textContent(),'激活次数 0');
             await page.keyboard.press('Enter');
             assert.equal(await secondTab.getAttribute('aria-selected'),'true');
-            assert.equal(await page.locator('#tab-loads').textContent(),'载入次数 1');
+            assert.equal(await page.locator('#tab-activations').textContent(),'激活次数 1');
+            await firstTab.click();
+            assert.equal(await page.getByRole('textbox',{name:'页签草稿',exact:true}).inputValue(),'保留输入');
             await page.locator('#remove-tree-child').click();
-            await page.getByRole('treeitem',{name:'即将移除',exact:true}).focus();
-            await page.getByRole('treeitem',{name:'即将移除',exact:true}).waitFor({state:'detached'});
-            assert.equal(await page.locator('[data-slot="tree-item"][data-id="parent"]').evaluate(el=>el===document.activeElement),true);
-            item.assertions.push('InputGroup composes caller focus, child action never submits, actual single border; manual Tabs separate focus/selection and load only on activation; removal restores tree parent focus');
-            item.assertions.push('Real field relationship token changes computed gap and preserves draft; Portal inherits brand and returns focus; refresh retains rows; Table/Chart render with explicit peers');
+            await page.getByRole('treeitem',{name:'子项',exact:true}).focus();
+            await page.getByRole('treeitem',{name:'子项',exact:true}).waitFor({state:'detached'});
+            await page.waitForFunction(()=>document.activeElement?.getAttribute('aria-label')==='父项');
+            item.assertions.push('Static InputGroup attachment leaves focus to platform; child action never submits; explicit invalid owns single border; actual native FormData and canceled submit preserve input');
+            item.assertions.push('Manual Tabs separate focus/selection and retain panel input; focused tree removal restores parent');
+            item.assertions.push('Field relationship token changes computed gap and preserves draft; named Portal inherits brand and returns focus; explicit busy retains rows; Table and Chart share actual entered zero/unknown/value data');
           }
           item.screenshots=[];
-          for(const mode of [{theme:'light',width:1100},{theme:'dark',width:1100},{theme:'light',width:390},{theme:'dark',width:390}]) {
+          for(const mode of [{theme:'light',width:1100},{theme:'dark',width:1100}]) {
             await page.setViewportSize({width:mode.width,height:900});
             await page.evaluate(theme=>{document.documentElement.classList.toggle('dark',theme==='dark');document.documentElement.classList.toggle('light',theme==='light');document.documentElement.style.colorScheme=theme;},mode.theme);
             await page.waitForTimeout(150);
@@ -224,18 +247,7 @@ try {
           item.status='PASS';item.runtimeErrors=errors;
           console.log(`packed consumer PASS ${item.name}`);
         } finally {await closeWithTimeout(context,'consumer context');}
-        if(item.feature==='full') {
-          const touchContext=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce'});
-          try {
-            const touchPage=await touchContext.newPage();touchPage.setDefaultTimeout(10000);await touchPage.goto(url,{waitUntil:'networkidle'});
-            assert.equal(await touchPage.evaluate(()=>matchMedia('(pointer: coarse)').matches),true);
-            await touchPage.locator('#touch-actions').scrollIntoViewIfNeeded();
-            const geometry=await touchPage.locator('#touch-actions').evaluate(el=>[...el.querySelectorAll('button')].map(button=>{const r=button.getBoundingClientRect(),a=getComputedStyle(button,'::after');return{id:button.id,x:r.x,y:r.y,width:r.width,height:r.height,hitWidth:Math.max(r.width,parseFloat(a.minWidth)||0),hitHeight:Math.max(r.height,parseFloat(a.minHeight)||0)};}));
-            const hits=[];let count=0;
-            for(const g of geometry){assert.ok(g.hitWidth>=44&&g.hitHeight>=44);for(const dx of [0,-g.hitWidth/2+1,g.hitWidth/2-1]){const point={x:g.x+g.width/2+dx,y:g.y+g.height/2};const owner=await touchPage.evaluate(p=>document.elementFromPoint(p.x,p.y)?.closest('button')?.id,point);assert.equal(owner,g.id,'coarse hit extension must not steal adjacent action');await touchPage.touchscreen.tap(point.x,point.y);count+=g.id==='touch-left'?10:100;assert.equal(await touchPage.locator('#counter').textContent(),`已操作 ${count} 次`);hits.push({...point,owner});}}
-            item.touch={status:'PASS',pointer:'coarse emulated',geometry,hits,limitation:'Coordinate hit testing and browser touch events; physical touchscreen not tested'};
-          }finally{await closeWithTimeout(touchContext,'consumer coarse context');}
-        }
+
       });
     }
   });

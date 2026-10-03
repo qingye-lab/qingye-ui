@@ -12,18 +12,17 @@ import { isExpectedTheme } from '../token-ledger-runtime.mjs';
 
 const cap = generateCapabilities();
 const card = cap.components.find((entry) => entry.name === 'card');
-assert.equal(card.exports.find((entry) => entry.name === 'CardContent').target, 'CardPanel');
+assert.deepEqual(card.exports.filter(entry => entry.kind === 'value').map(entry => entry.name), ['Card']);
 assert.equal(card.exports.find((entry) => entry.name === 'CardProps').kind, 'type');
-assert.equal(cap.components.find((entry) => entry.name === 'checkbox-group').metadata.usageResolution.find((entry) => entry.name === 'Checkbox').status, 'PRESENT');
-assert.ok(cap.components.find((entry) => entry.name === 'copy-button').metadata.usageResolution.find((entry) => entry.name === 'useCopyToClipboard').rootEntry);
+assert.equal(cap.components.find((entry) => entry.name === 'checkbox-group').metadata.usageResolution.find((entry) => entry.name === 'CheckboxGroup').status, 'PRESENT');
+assert.ok(cap.components.find((entry) => entry.name === 'copy-button').metadata.usageResolution.find((entry) => entry.name === 'CopyButton').rootEntry);
 assert.ok(cap.tokens.some((token) => token.name === '--qy-control-md'));
 assert.ok(cap.scriptFiles.some((file) => file.endsWith('gen-index.mjs')));
-for (const [alias, owner] of [['button-group', 'group'], ['hover-card', 'preview-card']]) {
-  const item = cap.components.find((entry) => entry.name === alias);
+for (const name of ['button-group', 'hover-card']) {
+  const item = cap.components.find((entry) => entry.name === name);
   assert.equal(item.provenance.trackingStatus, 'PRESENT');
-  assert.equal(item.provenance.aliasOf, `packages/ui/src/components/${owner}.tsx`);
-  assert.equal(item.provenance.evidenceKind, 'AST_PURE_REEXPORT');
-  assert.equal(item.consistency.status, 'PASS');
+  assert.equal(item.provenance.aliasOf, undefined);
+  assert.equal(item.provenance.verificationStatus, 'NOT_RUN', 'Author classification is not independent provenance verification');
 }
 assert.equal(card.provenance.aliasOf, undefined);
 assert.deepEqual(cssDeclarations('/* --qy-fake: red; */ :root { --qy-real: color-mix(in srgb, var(--qy-primary) 50%, transparent); }', 'fixture.css').map((entry) => entry.name), ['--qy-real']);
@@ -32,35 +31,37 @@ assert.equal(cssDeclarations(':root { --qy-a: calc(1px', 'fixture.css')[0].compl
 const stat = generateStaticLedger();
 assert.deepEqual(stat.coveredComponents.map((entry) => entry.sourceComponent), files('packages/ui/src/components', /\.tsx?$/).map((path) => path.split('/').pop().replace(/\.tsx?$/, '')));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'field' && record.part === 'field'));
-assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card-panel' && record.token === '--qy-space-6' && record.chain.some((step) => step.variable === '--card-spacing')));
-assert.ok(stat.records.some((record) => record.sourceComponent === 'table' && record.part === 'table-cell' && record.token === '--qy-row-default' && record.chain.some((step) => step.variable === '--table-row')));
-assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card-title' && record.token === '--qy-text-title-size' && record.property === 'font-size'));
-assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card-title' && record.token === '--qy-text-title-leading' && record.property === 'line-height'));
-assert.ok(!stat.records.some((record) => record.sourceComponent === 'input' && record.part === 'input-control' && record.token === '--qy-touch-target' && record.property === 'min-height'));
+assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card' && record.token === '--qy-radius-panel' && record.property === 'border-radius'));
+assert.ok(stat.records.some((record) => record.sourceComponent === 'table' && record.part === 'table-row' && record.token === '--qy-row-default' && record.property === 'height'));
+assert.ok(!stat.records.some((record) => record.sourceComponent === 'card' && ['card-title', 'card-header', 'card-panel'].includes(record.part)), 'Card owns a content boundary, not caller headings or padding');
+assert.ok(stat.records.some((record) => record.sourceComponent === 'field' && record.part === 'field-label' && record.token === '--qy-text-label-size' && record.property === 'font-size'));
+assert.ok(stat.records.some((record) => record.sourceComponent === 'field' && record.part === 'field-label' && record.token === '--qy-text-label-leading' && record.property === 'line-height'));
+assert.ok(stat.records.some((record) => record.sourceComponent === 'input' && record.part === 'input-control' && record.token === '--qy-touch-target' && record.property === 'min-height'));
 assert.ok(!stat.records.some((record) => record.sourceComponent === 'button' && record.part === 'button-loading-indicator' && record.property === 'background-color' && record.token === '--qy-primary'));
 assert.equal(isExpectedTheme({ classes: ['light'], dataTheme: null, colorScheme: 'light' }, 'light', 'class'), true);
 assert.equal(isExpectedTheme({ classes: [], dataTheme: 'light', colorScheme: 'light' }, 'light', 'class'), false);
 assert.equal(isExpectedTheme({ classes: ['light'], dataTheme: 'dark', colorScheme: 'light' }, 'light', 'class'), false);
 assert.equal(isExpectedTheme({ classes: ['light', 'dark'], dataTheme: null, colorScheme: 'light' }, 'light', 'class'), false);
 assert.equal(isExpectedTheme({ classes: [], dataTheme: 'dark', colorScheme: 'dark' }, 'dark', 'data-theme'), true);
-assert.ok(stat.fingerprint.inputs.some((input) => input.path.endsWith('apps/docs/src/content/select/demos/01-basic.tsx')));
+assert.ok(stat.fingerprint.inputs.some((input) => input.path.endsWith('apps/docs/src/content/select/demos/01-sizes.tsx')));
 assert.ok(stat.fingerprint.inputs.some((input) => input.path.endsWith('scripts/lib/token-ledger-probes.mjs')));
 for (const path of ['pnpm-lock.yaml', 'apps/docs/index.html', 'apps/docs/vite.config.ts'].filter(exists)) assert.ok(stat.fingerprint.inputs.some((input) => input.path === path));
-const primary = PROBES.find((probe) => probe.id === 'button-primary');
-assert.equal(primary.demo, 'variants');
+const primary = PROBES.find((probe) => probe.id === 'field-relationship-gap');
+assert.equal(primary.demo, 'default');
 assert.ok(staticMatches(stat, primary).length);
-for (const id of ['field-relationship-gap', 'field-group-relationship-gap', 'table-bulk-action-gap']) {
+for (const id of ['field-relationship-gap', 'card-role-radius', 'table-default-height']) {
   assert.ok(staticMatches(stat, PROBES.find((probe) => probe.id === id)).length, `${id} has an exact static path before runtime verification`);
 }
 for (const probe of PROBES) assert.ok(!/^\d+-/.test(probe.demo));
-const observed = { id: 'button-primary:light:desktop', probeId: primary.id, theme: 'light', viewport: 'desktop', observation: 'OBSERVED_CHANGE', validOverride: true };
+const observed = { id: 'field-relationship-gap:light:desktop', probeId: primary.id, theme: 'light', viewport: 'desktop', observation: 'OBSERVED_CHANGE', validOverride: true };
 assert.equal(computeLedger(stat, { fingerprint: stat.fingerprint.sha256, observations: [observed] }).cases.find((entry) => entry.probeId === primary.id).status, 'PASS');
 assert.equal(computeLedger(stat, { fingerprint: stat.fingerprint.sha256, observations: [{ ...observed, observation: 'OBSERVED_NO_CHANGE' }] }).cases.find((entry) => entry.probeId === primary.id).status, 'UNVERIFIED');
 assert.equal(computeLedger(stat, { fingerprint: 'stale', observations: [observed] }).cases.find((entry) => entry.probeId === primary.id).status, 'NOT_RUN');
 assert.equal(computeLedger(stat, { fingerprint: stat.fingerprint.sha256, observations: [{ ...observed, validOverride: false }] }).cases.find((entry) => entry.probeId === primary.id).status, 'UNVERIFIED');
 assert.equal(computeLedger(stat, { fingerprint: stat.fingerprint.sha256, observations: [{ ...observed, observation: 'NOT_OBSERVED', skipReason: 'Required pointer not available' }] }).cases.find((entry) => entry.probeId === primary.id).status, 'NOT_RUN');
 assert.ok(computeLedger(stat, { fingerprint: null, observations: [] }).cases.every((entry) => entry.status === 'NOT_RUN'));
-const noPathProbe = PROBES.find((probe) => probe.id === 'dialog-overlay-unconsumed');
+const noPathProbe = PROBES.find((probe) => !staticMatches(stat, probe).length);
+assert.ok(noPathProbe, 'Unresolved dynamic consumption remains represented rather than fabricated');
 const noPath = { ...observed, id: 'overlay', probeId: noPathProbe.id, observation: 'OBSERVED_NO_CHANGE' };
 // This only applies while source has no path; later token wiring changes the expectation.
 if (!staticMatches(stat, noPathProbe).length) {
@@ -87,7 +88,7 @@ try {
     'forward-a.tsx': 'export * from "./forward-b";',
     'forward-b.tsx': 'export { Group } from "./group";',
     'wrapper.tsx': 'export { Group } from "./group"; export const localBehavior = 1;',
-    'mixed.tsx': 'export { Group } from "./group"; export { PreviewCard } from "./preview-card";',
+    'mixed.tsx': 'export { Group } from "./group"; export { Card } from "./card";',
     'cycle-a.tsx': 'export * from "./cycle-b";',
     'cycle-b.tsx': 'export * from "./cycle-a";',
     'external.tsx': 'export * from "some-package";',
@@ -97,7 +98,7 @@ try {
   const provenanceURL = new URL('./component-provenance.mjs', import.meta.url).href;
   const outcome = execFileSync(process.execPath, ['--input-type=module', '-e', `
     const {componentProvenance}=await import(${JSON.stringify(provenanceURL)});
-    const entries=[{file:'src/components/group.tsx'},{file:'src/components/preview-card.tsx'}];
+    const entries=[{file:'src/components/group.tsx'},{file:'src/components/card.tsx'}];
     const results=Object.fromEntries(${JSON.stringify(Object.keys(facades))}.map(name=>[name,componentProvenance('packages/ui/src/components/'+name,entries)]));
     console.log(JSON.stringify(results));
   `], { env: { ...process.env, QY_UI_ROOT: fixture }, encoding: 'utf8' });

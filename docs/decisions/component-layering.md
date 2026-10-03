@@ -2,7 +2,7 @@
 
 ## Status
 
-Applied（2026-10-03）。本文档是组件库分层的一级判据，供 84 个组件的独立重写使用。[design.md 的系统分层](../../design.md#系统分层) 给出五层定义，本文给出每个组件的归属、判据和拒绝过的替代方案。
+Applied（2026-10-03）。本文档是组件库分层的一级判据，供 83 个组件的独立重写使用。[design.md 的系统分层](../../design.md#系统分层) 给出五层定义，本文给出每个组件的归属、判据和拒绝过的替代方案。
 
 组件数量：88 → **83**。删除 9 个，合并 2 个，新增 6 个。
 
@@ -84,7 +84,7 @@ Capability 与 Experience **不进本库**。`STANDARDS.md` 第 1 节规定组�
 | `virtual-list` | Primitive | 长集合的可达性与渲染边界 | 随境取度：`data-table` 之外的长列表此前无可靠实现 |
 | `locale-switch` | Primitive | 切换应用语言 | 相成相制：库自身消费 locale，切换控件却要各应用自造，与「内置文案统一走 locale」不一致 |
 
-### 84 个组件的分层归属
+### 83 个组件的分层归属
 
 **Foundation（6）** —— 不含交互，是值、角色与底线：
 
@@ -130,7 +130,7 @@ table 是 Pattern 而非 Primitive：它无业务对象成立，但表达的是�
 
 ## Consequences
 
-- `apps/docs` 的组件页从 88 页减为 84 页；被删组件的页、示例与 `meta.ts` 一并移除。
+- 目标组件页为 83 页；被删组件的页、示例与 `meta.ts` 一并移除。逐批完成数量另由当前源与生成投影记录。
 - `apps/docs/src/content/{sheet,disclosure,frame,preview-card,spinner,skeleton,command,menubar,resizable,search-input,password-input}/` 删除；`input` 页需要新增覆盖搜索与密码形态的示例。
 - 所有组件的 `meta.ts` 增加 `layer` 字段，值为 `foundation` / `primitive` / `pattern` 之一，供目录、检索与 AI 消费。
 - 导航分组由「按领域」（表单 / 浮层 / 数据展示）改为「按层」（Foundation / Primitive / Pattern），使层级在文档站上可见。

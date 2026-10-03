@@ -27,9 +27,9 @@ export function DemoFrame({ slug, demo }: { slug: string; demo: LoadedDemo }) {
       ) : null}
       <Tabs className={cn("docs-demo-frame gap-0 overflow-hidden rounded-xl border bg-background", !meta.description && "mt-3")} defaultValue="preview">
         <div className="docs-demo-chrome flex flex-wrap items-center justify-between gap-(--qy-space-2) border-b bg-surface-subtle/60 dark:bg-surface/40">
-          <TabsList aria-label={`${meta.title}：预览或代码`} size="sm">
-            <TabsTab value="preview">预览</TabsTab>
-            <TabsTab value="code">代码</TabsTab>
+          <TabsList aria-label={locale === "en" ? `${meta.title}: preview or source` : `${meta.title}：预览或代码`}>
+            <TabsTab value="preview">{locale === "en" ? "Preview" : "预览"}</TabsTab>
+            <TabsTab value="code">{locale === "en" ? "Source" : "代码"}</TabsTab>
           </TabsList>
           <CopyCodeButton value={source} />
         </div>
@@ -42,7 +42,7 @@ export function DemoFrame({ slug, demo }: { slug: string; demo: LoadedDemo }) {
           keepMounted
           value="preview"
         >
-          <ContentBoundary title="这个示例暂时无法显示">
+          <ContentBoundary title={locale === "en" ? "This example is unavailable" : "这个示例暂时无法显示"}>
             <Demo />
           </ContentBoundary>
         </TabsPanel>

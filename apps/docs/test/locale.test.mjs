@@ -6,12 +6,12 @@ import { createServer } from "vite";
 let server;
 let fixture;
 before(async () => {
-  server = await createServer({ root: fileURLToPath(new URL("..", import.meta.url)), server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
+  server = await createServer({ root: fileURLToPath(new URL("..", import.meta.url)), server: { middlewareMode: true, hmr: false, ws: false }, appType: "custom", logLevel: "error" });
   fixture = await server.ssrLoadModule("/test/fixtures/locale-render.tsx");
 });
 after(async () => { await server?.close(); });
 
-test("both route trees match every guide and all 88 components, aliases, examples and deep links", () => {
+test("both route trees match every guide and all current components, aliases and simple compositions", () => {
   for (const locale of ["zh", "en"]) for (const path of fixture.knownPaths) {
     const url = fixture.paths.localePath(path, locale);
     const matches = fixture.routeMatches(url);

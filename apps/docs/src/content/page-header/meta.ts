@@ -1,0 +1,12 @@
+import type { ComponentMeta } from "@/lib/types";
+export default {
+  title: "页面标题 PageHeader", titleEn: "PageHeader", description: "页面名称、上下文与相关动作共置。", descriptionEn: "Co-locate a page name, context and related actions.",
+  category: "布局", layer: "pattern", source: "local", exports: ["PageHeader", "PageHeaderContent", "PageHeaderTitle", "PageHeaderDescription", "PageHeaderActions"],
+  decisions: "header 按任务关系共置内容；无自动面包屑、路由或维护者标签。标题层级独立于视觉文字档。", decisionsEn: "A header co-locates task-related content without automatic breadcrumbs, routing or maintainer labels. Heading level is independent of visual scale.",
+  design: { methods: ["相成相制", "布白有用"], whenToUse: ["页面名称和与本任务有关的动作需要共置。"], avoid: ["普通章节标题使用 Heading；持续的成组操作使用 Toolbar。"], stateOwner: { library: ["标题、上下文与动作的关系布局。"], application: ["页面名称、标题层级、内容事实与动作可用性。"] }, responsive: ["标题与动作可换行，保留原生焦点顺序。"] }, designEn: {"whenToUse":["A page name and actions for its current task need to appear together."],"avoid":["Use Heading for ordinary section titles and Toolbar for persistent grouped operations."],"stateOwner":{"library":["Relationship layout for titles, context, and actions."],"application":["Page names, heading levels, content facts, and action availability."]},"responsive":["Titles and actions wrap while retaining native focus order."]},
+  api: [
+    { name: "PageHeader", description: "原生 header。", descriptionEn: "A native header.", props: [{ name: "children / render / ref / native props", type: "useRender.ComponentProps<header>", description: "结构、ARIA、ref 与事件传入实际 header。", descriptionEn: "Structure, ARIA, refs and events reach the actual header." }] },
+    { name: "PageHeaderContent / PageHeaderDescription / PageHeaderActions", description: "div / p / div 内容槽。", descriptionEn: "div / p / div content slots.", props: [{ name: "children / render / ref / native props", type: "useRender.ComponentProps<div | p>", description: "应用提供上下文与真实操作，动作使用公共 Button 或链接。", descriptionEn: "The caller provides context and actual actions using public Button or links." }] },
+    { name: "PageHeaderTitle", description: "复用 Heading。", descriptionEn: "A Heading composition.", props: [{ name: "level / step / render / ref / Heading props", type: "HeadingProps", default: 'level=1, step="chapter"', description: "嵌入章节时调整 level；文字尺度是既有预设。", descriptionEn: "Adjust level for nested sections; text scale is an existing preset." }] },
+  ], notes: ["无需动作时省略动作槽；不复制已经明确的路径或操作说明。"], notesEn: ["Omit absent actions; do not duplicate an already clear path or action instructions."],
+} satisfies ComponentMeta;

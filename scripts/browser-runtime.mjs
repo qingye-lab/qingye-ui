@@ -5,8 +5,6 @@ import { waitForProcessExit } from "./lib/process-exit.mjs";
 export const variants = [
   { name: "light-desktop", theme: "light", width: 1100, height: 900 },
   { name: "dark-desktop", theme: "dark", width: 1100, height: 900 },
-  { name: "light-mobile", theme: "light", width: 390, height: 844, mobile: true },
-  { name: "dark-mobile", theme: "dark", width: 390, height: 844, mobile: true },
 ];
 
 export function selectVariants(only) {

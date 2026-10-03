@@ -6,7 +6,7 @@ import SelectStates from "@/content/select/demos/02-states";
 export default function SelectorsReview() {
   return (
     <section id="selectors-review" className="grid gap-(--qy-space-8) py-(--qy-space-8)">
-      <h2 className="text-title text-foreground">RadioGroup / Select</h2>
+      <h2 className="text-chapter text-foreground">RadioGroup / Select</h2>
       <section className="grid gap-(--qy-field-group-gap)">
         <h3 className="text-heading text-foreground">RadioGroup · 尺寸</h3>
         <RadioSizes />

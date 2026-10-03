@@ -3,12 +3,12 @@ import { localizedMeta } from "./localized-meta";
 import type { DocsLocale } from "./paths";
 
 export const METHODS = [
-  { name: "名实相符", decision: "名称说明对象、动作与真实结果。", example: "保存超时后显示结果待核实，输入继续保留。", avoid: "请求发出就宣布已保存。", href: "/docs/patterns/edit" },
-  { name: "相成相制", decision: "内容、操作、说明与保护共同完成任务。", example: "审核范围改变后重新确认；停止可以成为当下重点。", avoid: "把保护动作永远放在最弱的位置。", href: "/docs/patterns/review" },
-  { name: "布白有用", decision: "关系间隔、工作容量与判断余地分别安排。", example: "比较字段同时保留，正文给阅读留出空间。", avoid: "为了低密度删掉比较列，或把示例自动变成输入。", href: "/docs/patterns/collection" },
-  { name: "随境取度", decision: "按任务选择显著程度、持续时间和是否中断。", example: "字段错误原位出现，长阅读以正文为主。", avoid: "所有错误只用短暂通知，所有结果都弹窗。", href: "/docs/patterns/read" },
-  { name: "展开有据", decision: "深入有理由，直接抵达与合理返回并存。", example: "详情保留明确对象；直达有稳定的上级入口。", avoid: "重要后果只藏在 Tooltip，返回依赖不存在的历史。", href: "/docs/patterns/detail" },
-  { name: "进退相承", decision: "等待、失败、未知、取消与恢复围绕同一对象。", example: "取消请求与已取消分开，批量只重试失败项。", avoid: "关闭窗口就称为取消后台任务。", href: "/docs/patterns/queue" },
+  { name: "名实相符", decision: "名称说明对象、动作与真实结果。", example: "保存超时后显示结果待核实，输入继续保留。", avoid: "请求发出就宣布已保存。", href: "/docs/design-philosophy#method-1" },
+  { name: "相成相制", decision: "内容、操作、说明与保护共同完成任务。", example: "审核范围改变后重新确认；停止可以成为当下重点。", avoid: "把保护动作永远放在最弱的位置。", href: "/docs/design-philosophy#method-2" },
+  { name: "布白有用", decision: "关系间隔、工作容量与判断余地分别安排。", example: "比较字段同时保留，正文给阅读留出空间。", avoid: "为了低密度删掉比较列，或把示例自动变成输入。", href: "/docs/design-philosophy#method-3" },
+  { name: "随境取度", decision: "按任务选择显著程度、持续时间和是否中断。", example: "字段错误原位出现，长阅读以正文为主。", avoid: "所有错误只用短暂通知，所有结果都弹窗。", href: "/docs/design-philosophy#method-4" },
+  { name: "展开有据", decision: "深入有理由，直接抵达与合理返回并存。", example: "详情保留明确对象；直达有稳定的上级入口。", avoid: "重要后果只藏在 Tooltip，返回依赖不存在的历史。", href: "/docs/design-philosophy#method-5" },
+  { name: "进退相承", decision: "等待、失败、未知、取消与恢复围绕同一对象。", example: "取消请求与已取消分开，批量只重试失败项。", avoid: "关闭窗口就称为取消后台任务。", href: "/docs/design-philosophy#method-6" },
 ] as const;
 
 const METHODS_EN = {
@@ -66,45 +66,18 @@ export function designFor(meta: ComponentMeta, slug: string, locale: DocsLocale 
   if (slug === "theme-provider") design.stateOwner.application = [en ? "The host configures document-level theme preferences and storage; use data-brand for brand and data-density for density." : "文档级主题偏好与保存位置由宿主配置；品牌写 data-brand，密度写 data-density。"];
   // Component decisions are authoritative; category and legacy slug rules only
   // fill gaps for components that have not supplied a specific decision yet.
-  const result = { ...design, ...meta.design };
+  const result = { ...design, ...content.design };
   if (en) result.methods = result.methods.map((name) => METHODS_EN[name as keyof typeof METHODS_EN]?.name ?? name);
   return result;
 }
 
-/**
- * The component page's one decision paragraph, or an empty string.
- *
- * Deliberately not routed through `designFor`. That function synthesises every
- * omitted field, so a page reading it can never be empty: it would print the
- * category's `avoid` line and the library-wide `responsive`/`customization`
- * strings on all 88 pages whether or not they say anything about the
- * component. Filling is right for the catalog — a machine consumer wants the
- * default written out — and wrong for a page, where the whole point is that a
- * component with nothing component-specific to say renders nothing. So this
- * reads the authored fields directly and never falls back to a default.
- *
- * The source is `decisions` when a component has been given one, and otherwise
- * its own authored `avoid` plus the `application` half of `stateOwner` — the
- * one thing a demo cannot show, namely what the library leaves to the host.
- * Measured across all 88 metas: every authored `avoid` is component-specific
- * (0/88 match the category default, avg 39 chars) and 88/88 author an
- * `application`, so the derived paragraph averages ~64 characters and carries
- * a real prohibition rather than filler. That is why the fallback exists: an
- * all-empty opt-in would drop Button's "loading 只表示正在等待，不能当成保存成功"
- * and Command's empty-vs-loading-vs-failed distinction from the page entirely
- * until a later copy pass, which is the one loss the restructure may not take.
- *
- * Returns "" only when a component has none of the three authored. `whenToUse`,
- * `composition`, `stateOwner.library`, `responsive` and `customization` are
- * never read here: they stay in `design{}` for `gen-catalog.mjs`, which keeps
- * projecting them into ai/v<version>/components/<name>.md for machine consumers.
- * Pass a locale for raw metadata. ComponentPage already passes the entry from
- * `localizedMeta(found, locale)`, so its decision has been selected upstream.
- */
+/** The page reads authored decisions only; synthesized catalog defaults stay out.
+ * Missing English sections retain their source instead of a generic prohibition. */
 export function pageDecisionsFor(meta: ComponentMeta, locale: DocsLocale = "zh"): string {
-  const authored = localizedMeta(meta, locale).decisions?.trim();
+  const content = localizedMeta(meta, locale);
+  const authored = content.decisions?.trim();
   if (authored) return authored;
-  const parts = [...(meta.design?.avoid ?? []), ...(meta.design?.stateOwner?.application ?? [])]
+  const parts = [...(content.design?.avoid ?? []), ...(content.design?.stateOwner?.application ?? [])]
     .map((part) => part.trim())
     .filter(Boolean);
   return parts.join(" ");

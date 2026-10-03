@@ -2,6 +2,7 @@
 
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import type React from "react";
+import { useFloatingLayer } from "../floating-layer";
 import { cn } from "../utils";
 
 export const PopoverCreateHandle: typeof PopoverPrimitive.createHandle =
@@ -66,6 +67,7 @@ export function PopoverPopup({
   viewportProps,
   ...props
 }: PopoverPopupProps): React.ReactElement {
+  const layer = useFloatingLayer("popup");
   // 基础层 §4、§6：临时浮起有自己的圆角与表面身份，不因子内容是日历而改变。
   // 基础层 §12：这里只提供定位、origin 与 slot；入退参数完全归 motion.css。
   // 基础层 §15、§18：外层不裁切焦点；滚动层内缘用面板角色留出焦点空间。
@@ -82,9 +84,10 @@ export function PopoverPopup({
         alignOffset={alignOffset}
         anchor={anchor}
         {...positionerProps}
+        style={state => ({ ...layer, ...(typeof positionerProps?.style === "function" ? positionerProps.style(state) : positionerProps?.style) })}
         className={(state) =>
           cn(
-            "z-50 h-(--positioner-height) w-(--positioner-width) max-h-(--available-height) max-w-(--available-width)",
+            "h-(--positioner-height) w-(--positioner-width) max-h-(--available-height) max-w-(--available-width)",
             typeof positionerProps?.className === "function"
               ? positionerProps.className(state)
               : positionerProps?.className,

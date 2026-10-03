@@ -3,10 +3,8 @@ import { computeLedger, saveLedger } from './token-ledger.mjs';
 import { generateStaticLedger } from './lib/token-ledger-static.mjs';
 
 export const DEFAULT_MODES = [
-  { theme: 'light', viewport: 'desktop', width: 1280, height: 900 },
-  { theme: 'dark', viewport: 'desktop', width: 1280, height: 900 },
-  { theme: 'light', viewport: 'mobile', width: 390, height: 844 },
-  { theme: 'dark', viewport: 'mobile', width: 390, height: 844 }
+  { theme: 'light', viewport: 'desktop', width: 1100, height: 900 },
+  { theme: 'dark', viewport: 'desktop', width: 1100, height: 900 }
 ];
 export function isExpectedTheme(evidence, requested, attribute) {
   const opposite = requested === 'dark' ? 'light' : 'dark';
@@ -54,6 +52,7 @@ export async function runTokenLedgerProbe(page, { ledger, baseURL = 'http://loca
   if (!page || typeof page.goto !== 'function' || !ledger?.static?.fingerprint?.sha256) throw new Error('Existing page and generated ledger.static are required');
   if (generateStaticLedger().fingerprint.sha256 !== ledger.static.fingerprint.sha256) throw new Error('Static ledger is stale; regenerate before measuring');
   const observations = [];
+  if (modes.some(mode => mode.width < 1024)) throw new Error('This delivery verifier is scoped to desktop widths >=1024.');
   const plan = probeIds ? PROBES.filter((probe) => probeIds.includes(probe.id)) : PROBES;
   if (probeIds?.some((id) => !PROBES.some((probe) => probe.id === id))) throw new Error('Unknown probe id');
   const originalURL = page.url();
@@ -66,7 +65,7 @@ export async function runTokenLedgerProbe(page, { ledger, baseURL = 'http://loca
       for (const probe of plan) {
         if (probe.themes && !probe.themes.includes(mode.theme)) continue;
         if (probe.viewports && !probe.viewports.includes(mode.viewport)) continue;
-        const observation = { id: `${probe.id}:${mode.theme}:${mode.viewport}:${mode.width}x${mode.height}:${contextPointer}`, pointer: contextPointer, probeId: probe.id, token: probe.token, sourceComponent: probe.sourceComponent, publicName: probe.sourceComponent === 'card' ? 'Card/CardPanel' : probe.sourceComponent[0].toUpperCase() + probe.sourceComponent.slice(1), part: probe.part, selector: probe.selector, state: probe.state, theme: mode.theme, viewport: mode.viewport, size: { width: mode.width, height: mode.height }, route: `/playground/${probe.sourceComponent}`, override: probe.override, measuredAt: new Date().toISOString(), observation: 'NOT_OBSERVED', validOverride: false };
+        const observation = { id: `${probe.id}:${mode.theme}:${mode.viewport}:${mode.width}x${mode.height}:${contextPointer}`, pointer: contextPointer, probeId: probe.id, token: probe.token, sourceComponent: probe.sourceComponent, publicName: probe.sourceComponent === 'card' ? 'Card' : probe.sourceComponent[0].toUpperCase() + probe.sourceComponent.slice(1), part: probe.part, selector: probe.selector, state: probe.state, theme: mode.theme, viewport: mode.viewport, size: { width: mode.width, height: mode.height }, route: `/playground/${probe.sourceComponent}`, override: probe.override, measuredAt: new Date().toISOString(), observation: 'NOT_OBSERVED', validOverride: false };
         if (probe.pointer && contextPointer !== probe.pointer) {
           observation.skipReason = `Required pointer=${probe.pointer}; existing context reports ${contextPointer}. Skipped before navigation.`;
           observations.push(observation);

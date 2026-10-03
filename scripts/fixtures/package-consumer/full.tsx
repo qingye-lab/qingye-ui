@@ -1,60 +1,65 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
+import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
 import { Button } from "@qingye/ui/components/button";
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupButton, InputGroupText } from "@qingye/ui/components/input-group";
+import { Field, FieldControl, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { Form } from "@qingye/ui/components/form";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
+import { NativeSelect } from "@qingye/ui/components/native-select";
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye/ui/components/tabs";
 import { Tree } from "@qingye/ui/components/tree";
 import { Input } from "@qingye/ui/components/input";
 import { Dialog, DialogTrigger, DialogPopup, DialogHeader, DialogTitle, DialogDescription, DialogPanel, DialogFooter, DialogClose } from "@qingye/ui/components/dialog";
 import { DataTable } from "@qingye/ui/components/data-table";
-import { ChartContainer, RechartsPrimitive } from "@qingye/ui/components/chart";
+import { Chart, type ChartRow } from "@qingye/ui/components/chart";
 import { ThemeProvider } from "@qingye/ui/components/theme-provider";
 import "./style.css";
 
-const { BarChart, Bar, XAxis, CartesianGrid } = RechartsPrimitive;
-const data = [{ id: "alpha", title: "有效内容", amount: 3 }, { id: "beta", title: "另一条内容", amount: 6 }];
-const columns = [{ accessorKey: "title", header: "内容" }, { accessorKey: "amount", header: "数量" }];
-
+type Entry = { id: string; label: string; raw: string };
+const columns: ColumnDef<Entry>[] = [{ accessorKey: "label", header: "项" }, { accessorKey: "raw", header: "输入值" }];
 function App() {
   const [text, setText] = React.useState("保留草稿");
   const [count, setCount] = React.useState(0);
-  const [loading, setLoading] = React.useState(false);
+  const [busy, setBusy] = React.useState(false);
+  const [entries, setEntries] = React.useState<Entry[]>([{ id: "a", label: "A", raw: "0" }, { id: "b", label: "B", raw: "0" }]);
+  const table = useReactTable({ data: entries, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel() });
+  const rows: ChartRow[] = entries.map(entry => ({ id: entry.id, label: entry.label, values: { value: entry.raw.trim() && Number.isFinite(Number(entry.raw)) ? Number(entry.raw) : { state: "unknown", label: "数值未完整" } } }));
   const [groupValue, setGroupValue] = React.useState("保留这一输入");
   const [invalid, setInvalid] = React.useState(false);
   const [submits, setSubmits] = React.useState(0);
+  const [formData, setFormData] = React.useState("");
   const [tab, setTab] = React.useState("first");
-  const [loads, setLoads] = React.useState(0);
+  const [activations, setActivations] = React.useState(0);
   const [child, setChild] = React.useState(true);
   const timer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   React.useEffect(() => () => clearTimeout(timer.current), []);
-  return <ThemeProvider defaultTheme="light" disableTransitionOnChange>
+  return <ThemeProvider defaultTheme="light" storageKey={null} disableTransitionOnChange>
     <main>
-      <h1>真实包消费</h1>
-      <Button id="counter" onClick={() => setCount((value) => value + 1)}>已操作 {count} 次</Button>
+      <h1>包消费</h1>
+      <Button id="counter" onClick={() => setCount(value => value + 1)}>已操作 {count} 次</Button>
       <FieldGroup id="field-group">
-        <Field><FieldLabel>草稿名称</FieldLabel><Input id="draft" value={text} onChange={(event) => setText(event.target.value)} /></Field>
+        <Field><FieldLabel>草稿名称</FieldLabel><Input id="draft" value={text} onChange={event => setText(event.target.value)} /></Field>
         <Field><FieldLabel>备注</FieldLabel><Input defaultValue="既有内容" /></Field>
       </FieldGroup>
       <Dialog>
-        <DialogTrigger render={<Button id="open-dialog" variant="outline" />}>打开详情</DialogTrigger>
+        <DialogTrigger render={<Button id="open-dialog" variant="bordered" />}>打开浮层</DialogTrigger>
         <DialogPopup>
-          <DialogHeader><DialogTitle>确认对象</DialogTitle><DialogDescription>这一浮层读取当前文档的主题。</DialogDescription></DialogHeader>
-          <DialogPanel><Input aria-label="浮层草稿" value={text} onChange={(event) => setText(event.target.value)} /><Button id="portal-button">浮层操作</Button></DialogPanel>
-          <DialogFooter><DialogClose render={<Button variant="ghost" />}>返回</DialogClose></DialogFooter>
+          <DialogHeader><DialogTitle>草稿</DialogTitle><DialogDescription>当前值</DialogDescription></DialogHeader>
+          <DialogPanel><Input aria-label="浮层草稿" value={text} onChange={event => setText(event.target.value)} /><Button id="portal-button">浮层操作</Button></DialogPanel>
+          <DialogFooter><DialogClose render={<Button variant="quiet" />}>返回</DialogClose></DialogFooter>
         </DialogPopup>
       </Dialog>
-      <section aria-label="按需表格"><Button id="refresh" variant="outline" onClick={() => setLoading((value) => !value)}>{loading ? "完成刷新" : "开始刷新"}</Button><DataTable columns={columns} data={data} getRowId={(row) => row.id} label="内容" loading={loading} /></section>
+      <section aria-label="表格状态"><Button id="table-busy" variant="bordered" aria-pressed={busy} onClick={() => setBusy(value => !value)}>表格 busy 属性</Button><DataTable table={table} caption="输入值" emptyContent="没有输入项" busy={busy} /></section>
       <section aria-label="输入共同边界">
-        <form onSubmit={(event) => { event.preventDefault(); setSubmits((value) => value + 1); }}>
-          <Field invalid={invalid}><FieldLabel>长度</FieldLabel><InputGroup id="contract-group"><InputGroupAddon onMouseDown={() => setCount((value) => value + 1)}><InputGroupText>长度</InputGroupText></InputGroupAddon><InputGroupInput id="group-input" value={groupValue} onChange={(event) => setGroupValue(event.target.value)} /><InputGroupAddon align="inline-end"><InputGroupText>米</InputGroupText><InputGroupButton aria-label="清空长度" onClick={() => setGroupValue("")}>×</InputGroupButton></InputGroupAddon></InputGroup></Field>
-          <p id="group-submits">提交次数 {submits}</p>
-        </form><Button id="group-invalid" onClick={() => setInvalid((value) => !value)}>切换字段错误</Button>
+        <Form noValidate onSubmit={event => { event.preventDefault(); setSubmits(value => value + 1); setFormData(JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)))); }}>
+          <Field name="text" invalid={invalid}><FieldLabel>文本</FieldLabel><InputGroup id="contract-group"><InputGroupAddon>文本</InputGroupAddon><InputGroupInput id="group-input" value={groupValue} onChange={event => setGroupValue(event.target.value)} /><InputGroupAddon><Button type="button" variant="quiet" size="md" className="min-h-0 self-stretch sm:min-h-0" aria-label="清空文本" onClick={() => setGroupValue("")}>清空</Button></InputGroupAddon></InputGroup><FieldError errors={invalid ? [{ message: "当前显式错误" }] : []} /></Field>
+          <Field name="unit"><FieldLabel>单位</FieldLabel><FieldControl defaultValue="px" render={<NativeSelect><optgroup label="单位"><option value="px">px</option><option value="em">em</option><option disabled value="disabled">禁用</option></optgroup></NativeSelect>} /></Field>
+          <Button type="submit" id="native-submit">提交字段</Button><output id="group-submits">提交次数 {submits}</output><output id="native-values">{formData}</output>
+        </Form><Button id="group-invalid" onClick={() => setInvalid(value => !value)}>切换字段错误</Button>
       </section>
-      <section aria-label="手动页签"><Tabs value={tab} onValueChange={(value) => { setTab(String(value)); setLoads((value) => value + 1); }}><TabsList activateOnFocus={false}><TabsTab value="first">概览</TabsTab><TabsTab value="second">慢加载详情</TabsTab></TabsList><TabsPanel value="first">现有概览</TabsPanel><TabsPanel value="second">按显式激活载入的内容</TabsPanel></Tabs><p id="tab-loads">载入次数 {loads}</p></section>
-      <section aria-label="树焦点恢复"><Button id="remove-tree-child" onClick={() => { clearTimeout(timer.current); timer.current=setTimeout(() => setChild(false),500); }}>延迟移除子项</Button><Tree label="资料树" defaultExpanded={["parent"]} nodes={[{id:"parent",label:"资料目录",hasChildren:true,children:child?[{id:"child",label:"即将移除"}]:[]},{id:"neighbor",label:"相邻对象"}]} /><Button id="outside-tree">树外操作</Button></section>
-      <section aria-label="相邻触摸动作" id="touch-actions" style={{display:"flex",gap:"12px"}}><Button id="touch-left" size="icon-sm" aria-label="前一个动作" onClick={() => setCount(value=>value+10)}>←</Button><Button id="touch-right" size="icon-sm" aria-label="后一个动作" onClick={() => setCount(value=>value+100)}>→</Button></section>
-      <section aria-label="按需图表"><ChartContainer config={{ amount: { label: "数量", color: "var(--chart-1)" } }} style={{ height: 220, width: "100%" }}><BarChart data={data} accessibilityLayer><CartesianGrid vertical={false} /><XAxis dataKey="title" /><Bar dataKey="amount" fill="var(--color-amount)" isAnimationActive={false} /></BarChart></ChartContainer></section>
+      <section aria-label="手动页签"><Tabs value={tab} onValueChange={value => { setTab(String(value)); setActivations(value => value + 1); }}><TabsList activateOnFocus={false} aria-label="输入视角"><TabsTab value="first">名称</TabsTab><TabsTab value="second">数值</TabsTab></TabsList><TabsPanel value="first"><Input aria-label="页签草稿" defaultValue="保留页签输入" /></TabsPanel><TabsPanel value="second">0</TabsPanel></Tabs><output id="tab-activations">激活次数 {activations}</output></section>
+      <section aria-label="树焦点恢复"><Button id="remove-tree-child" onClick={() => { clearTimeout(timer.current); timer.current = setTimeout(() => setChild(false), 500); }}>延迟移除子项</Button><Tree aria-label="层级集合" defaultExpandedIds={["parent"]} nodes={[{ id: "parent", label: "父项", children: child ? [{ id: "child", label: "子项" }] : [] }, { id: "neighbor", label: "相邻项" }]} /><Button id="outside-tree">树外操作</Button></section>
+      <section aria-label="同源图表">{entries.map(entry => <Field key={entry.id}><FieldLabel>{entry.label} 数值</FieldLabel><Input type="number" value={entry.raw} onChange={event => setEntries(value => value.map(item => item.id === entry.id ? { ...item, raw: event.target.value } : item))} /></Field>)}<Chart label="输入数值" categoryLabel="项" valueLabel="数值" rows={rows} series={[{ key: "value", label: "数值" }]} /></section>
     </main>
   </ThemeProvider>;
 }

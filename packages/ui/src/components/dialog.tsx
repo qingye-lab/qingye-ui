@@ -3,6 +3,8 @@
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { useRender } from "@base-ui/react/use-render";
 import type React from "react";
+import { useState } from "react";
+import { FloatingLayerScope, useFloatingLayer } from "../floating-layer";
 import { Button } from "./button";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -10,8 +12,12 @@ import { cn } from "../utils";
 export type DialogProps<Payload = unknown> = Omit<DialogPrimitive.Root.Props<Payload>, "modal">;
 
 export function Dialog<Payload = unknown>(props: DialogProps<Payload>): React.ReactElement {
+  const [open, setOpen] = useState(props.defaultOpen ?? false);
   // 浮层族决定 1、4：语义、焦点困住与背景阻断一起交给原语。
-  return <DialogPrimitive.Root {...props} modal />;
+  return <FloatingLayerScope active={props.open ?? open}><DialogPrimitive.Root {...props} modal onOpenChange={(next, details) => {
+    props.onOpenChange?.(next, details);
+    if (!details.isCanceled && props.open === undefined) setOpen(next);
+  }} /></FloatingLayerScope>;
 }
 
 export const DialogCreateHandle = DialogPrimitive.createHandle;
@@ -27,16 +33,21 @@ export type DialogFocusTarget = true | React.RefObject<HTMLElement | null> |
 export interface DialogPopupProps extends Omit<DialogPrimitive.Popup.Props, "initialFocus" | "finalFocus"> {
   initialFocus?: DialogFocusTarget;
   finalFocus?: DialogFocusTarget;
-  portalProps?: DialogPrimitive.Portal.Props;
+  /** Retained closed portals fail sibling-modal ARIA isolation in Base UI 1.7. */
+  portalProps?: Omit<DialogPrimitive.Portal.Props, "keepMounted">;
   backdropProps?: DialogPrimitive.Backdrop.Props;
   viewportProps?: DialogPrimitive.Viewport.Props;
 }
 
 export function DialogPopup({ portalProps, backdropProps, viewportProps, className, ...props }: DialogPopupProps): React.ReactElement {
-  return <DialogPrimitive.Portal {...portalProps}>
+  const backdropLayer = useFloatingLayer("backdrop");
+  const surfaceLayer = useFloatingLayer("surface");
+  return <DialogPrimitive.Portal {...portalProps} keepMounted={false}>
     <DialogPrimitive.Backdrop {...backdropProps} data-slot="dialog-backdrop"
+      style={state => ({ ...backdropLayer, ...(typeof backdropProps?.style === "function" ? backdropProps.style(state) : backdropProps?.style) })}
       className={(state) => cn("fixed inset-0 bg-overlay", typeof backdropProps?.className === "function" ? backdropProps.className(state) : backdropProps?.className)} />
     <DialogPrimitive.Viewport {...viewportProps} data-slot="dialog-viewport"
+      style={state => ({ ...surfaceLayer, ...(typeof viewportProps?.style === "function" ? viewportProps.style(state) : viewportProps?.style) })}
       className={(state) => cn("pointer-events-none fixed inset-0 flex min-w-0 items-center justify-center p-(--qy-panel-padding)", typeof viewportProps?.className === "function" ? viewportProps.className(state) : viewportProps?.className)}>
       <DialogPrimitive.Popup {...props} aria-modal="true" data-slot="dialog-popup"
         className={(state) => cn(

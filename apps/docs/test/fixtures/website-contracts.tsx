@@ -1,0 +1,21 @@
+import { MemoryRouter } from "react-router-dom";
+import { renderToStaticMarkup } from "react-dom/server";
+import { matchRoutes, createRoutesFromElements } from "react-router-dom";
+import { App } from "../../src/app";
+import Home from "../../src/pages/home";
+import AIPage from "../../src/pages/docs/ai";
+export { designEntryFor } from "../../src/lib/design-entry";
+import DesignPhilosophyPage from "../../src/pages/docs/design-philosophy";
+import { ComponentPreview } from "../../src/components/component-preview";
+import ExamplePage from "../../src/pages/examples";
+import { Route, Routes } from "react-router-dom";
+export { components, loadPreview } from "../../src/lib/registry";
+export { GUIDES } from "../../src/lib/nav";
+export { searchEntries, score } from "../../src/lib/search";
+export const routeMatches = (url: string) => matchRoutes(createRoutesFromElements(App().props.children),url);
+export const homeMarkup = (locale: string) => renderToStaticMarkup(<MemoryRouter initialEntries={[locale === "en" ? "/en" : "/"]}><Home /></MemoryRouter>);
+export const methodsMarkup = (locale: string) => renderToStaticMarkup(<MemoryRouter initialEntries={[locale === "en" ? "/en/docs/design-philosophy" : "/docs/design-philosophy"]}><DesignPhilosophyPage /></MemoryRouter>);
+export const previewScene = (slug: string) => <MemoryRouter><ComponentPreview slug={slug} /></MemoryRouter>;
+export const missingExampleScene = () => <MemoryRouter initialEntries={["/en/examples/mail"]}><Routes><Route path="/en/examples/:slug" element={<ExamplePage />} /></Routes></MemoryRouter>;
+
+export const aiMarkup = () => renderToStaticMarkup(<MemoryRouter initialEntries={["/en/docs/ai"]}><AIPage /></MemoryRouter>);

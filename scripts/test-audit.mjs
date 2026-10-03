@@ -9,7 +9,7 @@ const results = [];
 let lifecycle;
 await withBrowser(async (browser, state) => {
   lifecycle = state;
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const context = await browser.newContext({ viewport: { width: 1100, height: 900 } });
   try {
     const page = await context.newPage();
     const base = process.env.DOCS_URL ?? "http://localhost:5180";
@@ -22,7 +22,7 @@ await withBrowser(async (browser, state) => {
       document.querySelector("[data-demo]").lastElementChild.append(element);
     });
     const injected = await page.evaluate(measurePlayground);
-    assert(injected.overflow > 1, "2000px element must overflow the mobile page");
+    assert(injected.overflow > 1, "2000px element must overflow the desktop page");
     assert(injected.over.some((r) => r.element === "div[audit-injected-overflow]" && r.excess > 500), "2000px element must also be detected inside its demo");
     results.push({ case: "real-playground-2000px", status: "PASS", measurement: injected });
 

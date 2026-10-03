@@ -8,7 +8,7 @@ import ts from "typescript";
 const controls = new Map([
   ["button", "Button"], ["input", "Input / Checkbox / Switch"],
   ["select", "NativeSelect / Select"], ["textarea", "Textarea"],
-  ["option", "NativeSelectOption"], ["optgroup", "NativeSelectOptGroup"],
+  ["option", "native option inside NativeSelect"], ["optgroup", "native optgroup inside NativeSelect"],
   ["label", "Label / FieldLabel"], ["progress", "Progress"], ["meter", "Meter"],
   ["details", "Collapsible"], ["summary", "CollapsibleTrigger"], ["dialog", "Dialog"],
 ]);
@@ -34,6 +34,7 @@ export function inspectLibraryControls(source, file = "source.tsx") {
   const libraryNames = new Set();
   const libraryNamespaces = new Set();
   const buttonNames = new Set();
+  const nativeSelectNames = new Set();
   const routeLinks = new Set();
   for (const node of ast.statements) {
     if (!ts.isImportDeclaration(node) || !ts.isStringLiteral(node.moduleSpecifier) || node.importClause?.isTypeOnly) continue;
@@ -48,18 +49,32 @@ export function inspectLibraryControls(source, file = "source.tsx") {
       if (isLibrary(module)) {
         libraryNames.add(binding.name.text);
         if (exported === "Button") buttonNames.add(binding.name.text);
+        if (exported === "NativeSelect") nativeSelectNames.add(binding.name.text);
       }
       if ((module === "react-router-dom" || module === "react-router") && exported === "Link") routeLinks.add(binding.name.text);
     }
   }
   const isLibraryTag = (name) => libraryNames.has(name) || libraryNamespaces.has(name.split(".")[0]);
+  const isNativeSelect = name => nativeSelectNames.has(name) || (libraryNamespaces.has(name.split(".")[0]) && name.split(".").slice(1).join(".") === "NativeSelect");
+  function inNativeSelect(node) {
+    for (let parent = node.parent; parent; parent = parent.parent) {
+      if (!ts.isJsxElement(parent)) continue;
+      const tag = parent.openingElement.tagName.getText(ast);
+      if (isNativeSelect(tag)) return true;
+      if (tag === "select") {
+        const owner = renderOwner(parent.openingElement);
+        return Boolean(owner && isNativeSelect(owner.tagName.getText(ast)));
+      }
+    }
+    return false;
+  }
   const violations = ast.parseDiagnostics.map((diagnostic) => ({ file, line: ast.getLineAndCharacterOfPosition(diagnostic.start ?? 0).line + 1, message: ts.flattenDiagnosticMessageText(diagnostic.messageText, " ") }));
   let renderPrimitives = 0;
   function visit(node) {
     if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
       const tag = node.tagName.getText(ast);
       const replacement = controls.get(tag);
-      if (replacement) {
+      if (replacement && !((tag === "option" || tag === "optgroup") && inNativeSelect(node))) {
         const owner = renderOwner(node);
         if (owner && isLibraryTag(owner.tagName.getText(ast))) renderPrimitives += 1;
         else violations.push({ file, line: ast.getLineAndCharacterOfPosition(node.getStart(ast)).line + 1, message: `Use ${replacement} for <${tag}>; native controls are allowed only as a library render root.` });

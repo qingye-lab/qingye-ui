@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "决定对话框 AlertDialog", titleEn: "AlertDialog",
   description: "阻断整个工作面，要求对当前对象作出明确选择。", descriptionEn: "Block the work surface for an explicit decision about the current object.",
-  category: "浮层", layer: "primitive", source: "local",
+  category: "浮层", layer: "pattern", source: "local",
   exports: ["AlertDialog", "AlertDialogTrigger", "AlertDialogPopup", "AlertDialogHeader", "AlertDialogTitle", "AlertDialogDescription", "AlertDialogPanel", "AlertDialogFooter", "AlertDialogClose"],
   keywords: ["alertdialog", "确认", "决定", "删除", "危险"],
   decisions: "点遮罩不关闭，默认聚焦面板。Esc 与返回按钮只关闭对话框；继续动作由调用方处理。",
@@ -25,8 +25,8 @@ export default {
     { keys: "Tab / Shift+Tab", description: "在最上层决定内循环，背景不可操作。", descriptionEn: "Cycle within the topmost decision while the background is unavailable." },
     { keys: "Esc", description: "离开这次决定并返回；危险动作不执行。", descriptionEn: "Leave this decision and return without executing the danger action." },
   ],
-  notes: ["普通编辑使用 Dialog；不需要中断时用就地确认或面板。", "后果必须可见并与危险按钮关联。", "关闭与继续动作分别处理。", "必须提供明确的返回选择，不能只依赖 Esc。", "不提供尺寸变体，也不写 z-index 预设；高层级宿主的遮挡风险未验证。"],
-  notesEn: ["Use Dialog for ordinary edits, or inline confirmation when interruption is unnecessary.", "Keep consequences visible and associated with the danger action.", "Handle closing and the affirmative action separately.", "Provide an explicit return choice; Escape alone is insufficient.", "No size variants or z-index preset are applied; high-layer host occlusion remains unverified."],
+  notes: ["普通编辑使用 Dialog；不需要中断时用就地确认或面板。", "后果必须可见并与危险按钮关联。", "关闭与继续动作分别处理。", "必须提供明确的返回选择，不能只依赖 Esc。", "共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。", "ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合未修复该原语缺陷。"],
+  notesEn: ["Use Dialog for ordinary edits, or inline confirmation when interruption is unnecessary.", "Keep consequences visible and associated with the danger action.", "Handle closing and the affirmative action separately.", "Provide an explicit return choice; Escape alone is insufficient.", "Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.", "ARIA evidence narrows the contract: Portal forces keepMounted=false, even for JavaScript callers passing true. The application holds drafts explicitly; direct Primitive composition remains affected."],
   design: {
     methods: ["名实相符", "相成相制", "展开有据", "进退相承"],
     whenToUse: ["必须在继续前回应的决定。"], avoid: ["通知、成功反馈、可就地编辑的内容。"],
@@ -34,5 +34,5 @@ export default {
     stateOwner: { library: ["open、焦点困住、滚动锁、背景阻断和返回。"], application: ["决定内容、后果与继续动作。"] },
     responsive: ["内容决定宽度，视口限制上限；本批只验桌面。"],
     customization: ["与 Dialog 复用圆角、表面、遮罩及阴影角色。", "默认进入面板；入退只由 motion.css 提供。"],
-  },
+  }, designEn: {"whenToUse":["A decision requiring a response before proceeding."],"avoid":["Notifications, success feedback, or content that can be edited in place."],"composition":["Return and continue actions appear together, with necessary consequences associated."],"stateOwner":{"library":["Open state, focus trapping, scroll lock, background blocking, and return."],"application":["Decision content, consequences, and continuing actions."]},"responsive":["Content determines width within viewport limits; this batch checked desktop only."],"customization":["Shares Dialog radius, surfaces, backdrop, and shadow roles.","Focus enters the panel by default; motion.css alone supplies entry and exit."]},
 } satisfies ComponentMeta;

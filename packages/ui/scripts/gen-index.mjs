@@ -13,6 +13,7 @@ const lines = [
   '// Per-component entry points: "@qingye/ui/components/<name>".',
   'export { cn } from "./utils";',
   'export * from "./locale";',
+  'export * from "./floating-layer";',
   'export * from "./hooks/use-copy-to-clipboard";',
   'export * from "./hooks/use-media-query";',
   ...names.map((name) => `export * from "./components/${name}";`),

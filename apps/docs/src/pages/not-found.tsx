@@ -2,21 +2,22 @@ import { Button, buttonVariants } from "@qingye/ui/components/button";
 import { ArrowLeftIcon, SearchIcon } from "lucide-react";
 import { Link } from "@/components/locale-link";
 import { useDocumentTitle } from "@/components/prose";
+import { useDocsLocale } from "@/lib/docs-locale";
 import { useSearch } from "@/components/search";
 import { PageState } from "@/components/page-state";
 
 export function NotFoundContent({ detail }: { detail?: string }) {
-  useDocumentTitle("页面不存在");
+  const locale = useDocsLocale(); useDocumentTitle(locale === "en" ? "Page not found" : "页面不存在");
   const { openSearch } = useSearch();
   return (
-    <PageState headingLevel={1} title="没有找到这个页面" description={detail}>
+    <PageState state="not-applicable" headingLevel={1} title={locale === "en" ? "Page not found" : "没有找到这个页面"} description={detail}>
         <Link className={buttonVariants()} to="/docs">
           <ArrowLeftIcon aria-hidden="true" />
-          回到文档
+          {locale === "en" ? "Back to docs" : "回到文档"}
         </Link>
         <Button onClick={openSearch} variant="quiet">
           <SearchIcon aria-hidden="true" />
-          搜索
+          {locale === "en" ? "Search" : "搜索"}
         </Button>
     </PageState>
   );

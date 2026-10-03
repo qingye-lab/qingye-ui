@@ -1,0 +1,95 @@
+# Qingye UI 1.0.0
+
+> Facts for @qingye/ui@1.0.0. Runtime acceptance is separate.
+
+## Start
+- [Design guide](/design.en.md)
+- [Style contract](/ai/style.en.md): bans, observable criteria and component implementation rules
+- [Design philosophy](/ai/design-philosophy.en.md): method sources
+- [Installation](/ai/v1.0.0/installation.md)
+- [Main skill](/ai/SKILL.en.md)
+
+## Components
+- [Accordion](/ai/v1.0.0/en/components/accordion.md): Reveal content from each item's named trigger.
+- [Alert](/ai/v1.0.0/en/components/alert.md): Static local information, with announcements only when requested.
+- [AlertDialog](/ai/v1.0.0/en/components/alert-dialog.md): Block the work surface for an explicit decision about the current object.
+- [Aspect ratio](/ai/v1.0.0/en/components/aspect-ratio.md): Set a preferred width-to-height relation without cropping content.
+- [Autocomplete](/ai/v1.0.0/en/components/autocomplete.md): Edit free text with optional suggestions.
+- [Avatar](/ai/v1.0.0/en/components/avatar.md): An image with one named identity and a fallback.
+- [Badge](/ai/v1.0.0/en/components/badge.md): A short marker.
+- [Breadcrumb](/ai/v1.0.0/en/components/breadcrumb.md): Parent links and an explicit current location.
+- [BulkActionBar](/ai/v1.0.0/en/components/bulk-action-bar.md): Shared actions with explicit targets, versions and scope.
+- [Button](/ai/v1.0.0/en/components/button.md): Trigger a named action with a clear object and consequence. The caller owns its state.
+- [ButtonGroup](/ai/v1.0.0/en/components/button-group.md): Give actions in one scope a shared name and spacing.
+- [Calendar](/ai/v1.0.0/en/components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
+- [Card](/ai/v1.0.0/en/components/card.md): Bound an independently identifiable object.
+- [Carousel](/ai/v1.0.0/en/components/carousel.md): Manually read finite content with an actual position and clear boundaries.
+- [Chart](/ai/v1.0.0/en/components/chart.md): Present real data with a same-source plot, axes, legend and visible numeric table.
+- [Checkbox](/ai/v1.0.0/en/components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
+- [CheckboxGroup](/ai/v1.0.0/en/components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
+- [CodeBlock](/ai/v1.0.0/en/components/code-block.md): Literal text with actual copy results.
+- [Collapsible](/ai/v1.0.0/en/components/collapsible.md): Reveal additional content for the same object.
+- [Combobox](/ai/v1.0.0/en/components/combobox.md): Filter candidates and confirm one value, with query text separate from selection.
+- [ConfirmAction](/ai/v1.0.0/en/components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
+- [ContextMenu](/ai/v1.0.0/en/components/context-menu.md): A context-menu enhancement for commands on the current object.
+- [Copy button](/ai/v1.0.0/en/components/copy-button.md): Copy supplied text and reflect the clipboard write result.
+- [DataTable](/ai/v1.0.0/en/components/data-table.md): Comparison, sorting and scoped selection for a real caller-owned collection.
+- [DatePicker](/ai/v1.0.0/en/components/date-picker.md): Edit one local date or choose it from a calendar.
+- [DateRangePicker](/ai/v1.0.0/en/components/date-range-picker.md): Edit a calendar range draft and explicitly apply complete endpoints.
+- [DateTimePicker](/ai/v1.0.0/en/components/date-time-picker.md): Edit complete local wall-clock date/time, or apply calendar and time drafts.
+- [DescriptionList](/ai/v1.0.0/en/components/description-list.md): Native relationships between names and values.
+- [Dialog](/ai/v1.0.0/en/components/dialog.md): Take over the work surface for an edit or decision, then return.
+- [Drawer](/ai/v1.0.0/en/components/drawer.md): Enter an edge-aligned work surface and return to its entry point.
+- [Empty](/ai/v1.0.0/en/components/empty.md): Distinguish zero results, unknown and not applicable.
+- [Field](/ai/v1.0.0/en/components/field.md): Connect one value's name, control, description, and caller-supplied errors.
+- [Fieldset](/ai/v1.0.0/en/components/fieldset.md): Give related fields a shared name and disabled scope.
+- [FileUpload](/ai/v1.0.0/en/components/file-upload.md): Choose or drop local files, retaining accepted files and real rejection reasons.
+- [FilterBar](/ai/v1.0.0/en/components/filter-bar.md): Shows draft conditions separately from applied facts.
+- [Form](/ai/v1.0.0/en/components/form.md): A native field submission scope and reset context.
+- [Group](/ai/v1.0.0/en/components/group.md): Arrange related members with a direction and a spacing role.
+- [HoverCard](/ai/v1.0.0/en/components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
+- [Input](/ai/v1.0.0/en/components/input.md): Enter one text value. Search, password visibility, and clearing use the same input.
+- [InputGroup](/ai/v1.0.0/en/components/input-group.md): Give an input and its markers, units or actions one editing boundary.
+- [Item](/ai/v1.0.0/en/components/item.md): Content, navigation and related actions.
+- [Kbd](/ai/v1.0.0/en/components/kbd.md): A native keyboard key display.
+- [Label](/ai/v1.0.0/en/components/label.md): Name one control with a native label.
+- [Layout](/ai/v1.0.0/en/components/layout.md): Arrange content vertically or side by side using field, action, panel and section spacing roles.
+- [Locale switch](/ai/v1.0.0/en/components/locale-switch.md): Request an application locale change and show the current Provider value.
+- [Menu](/ai/v1.0.0/en/components/menu.md): Temporary commands and choices related to the current task.
+- [Meter](/ai/v1.0.0/en/components/meter.md): A real measurement over a valid range.
+- [MotionProvider](/ai/v1.0.0/en/components/motion-provider.md): Record input modality at the application root and skip transitions for keyboard input.
+- [NativeSelect](/ai/v1.0.0/en/components/native-select.md): Keep the platform picker, native options and form values.
+- [NavigationMenu](/ai/v1.0.0/en/components/navigation-menu.md): Real links and expandable navigation groups.
+- [NumberField](/ai/v1.0.0/en/components/number-field.md): Edit an optional number and adjust it by a declared step.
+- [OtpField](/ai/v1.0.0/en/components/otp-field.md): Present a fixed-length text value in segments.
+- [PageHeader](/ai/v1.0.0/en/components/page-header.md): Co-locate a page name, context and related actions.
+- [Pagination](/ai/v1.0.0/en/components/pagination.md): Page position, real actions and explicit unknown totals.
+- [PendingValue](/ai/v1.0.0/en/components/pending-value.md): An unresolved write result with its original value.
+- [Popover](/ai/v1.0.0/en/components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
+- [Progress](/ai/v1.0.0/en/components/progress.md): Confirmed task completion or an explicit indeterminate state.
+- [ProgressCircle](/ai/v1.0.0/en/components/progress-circle.md): The same confirmed progress contract in a circle.
+- [RadioGroup](/ai/v1.0.0/en/components/radio-group.md): Choose one value from a small set of visible options.
+- [Scroll area](/ai/v1.0.0/en/components/scroll-area.md): Native scrolling within a bounded viewport.
+- [SegmentedControl](/ai/v1.0.0/en/components/segmented-control.md): Enter one value from a small set of visible segments.
+- [Select](/ai/v1.0.0/en/components/select.md): Choose one value from a collapsible set of options.
+- [Separator](/ai/v1.0.0/en/components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.
+- [Sidebar](/ai/v1.0.0/en/components/sidebar.md): Persistent navigation with reversible collapse.
+- [Slider](/ai/v1.0.0/en/components/slider.md): Enter a number or an ordered range within explicit bounds.
+- [Stat](/ai/v1.0.0/en/components/stat.md): Values, units and explanations supplied independently.
+- [StatusDot](/ai/v1.0.0/en/components/status-dot.md): A state graphic and its visible name.
+- [Steps](/ai/v1.0.0/en/components/steps.md): An ordered process with application-owned progress.
+- [Switch](/ai/v1.0.0/en/components/switch.md): Immediately change the on/off state of a current setting.
+- [Table](/ai/v1.0.0/en/components/table.md): Native two-dimensional relationships with complete comparison columns.
+- [Tabs](/ai/v1.0.0/en/components/tabs.md): Different views of one object with panel drafts retained.
+- [TagInput](/ai/v1.0.0/en/components/tag-input.md): Confirm a string collection while keeping its unconfirmed draft.
+- [Textarea](/ai/v1.0.0/en/components/textarea.md): Edit multiline notes and messages.
+- [ThemeProvider](/ai/v1.0.0/en/components/theme-provider.md): Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.
+- [Timeline](/ai/v1.0.0/en/components/timeline.md): Preserve input order and actual times.
+- [Toast](/ai/v1.0.0/en/components/toast.md): Report recoverable, non-critical facts while the current work continues.
+- [Toggle](/ai/v1.0.0/en/components/toggle.md): A two-state pressed button with a stable name.
+- [ToggleGroup](/ai/v1.0.0/en/components/toggle-group.md): A shared single or multiple selection of pressed buttons.
+- [Toolbar](/ai/v1.0.0/en/components/toolbar.md): Actual groups, arrow-key focus and operable actions.
+- [Tooltip](/ai/v1.0.0/en/components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
+- [Tree](/ai/v1.0.0/en/components/tree.md): Hierarchy, expansion, focus and independent single selection for stable nodes.
+- [Typography](/ai/v1.0.0/en/components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
+- [Virtual list](/ai/v1.0.0/en/components/virtual-list.md): An accessible window over a fixed-height collection with stable item identity.

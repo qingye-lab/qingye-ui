@@ -1,4 +1,3 @@
-import { patterns } from "../patterns/metadata";
 import { CATEGORIES, type Category } from "./types";
 import { components, type ComponentEntry } from "./registry";
 import { localizedMeta, type LocalizedMeta } from "./localized-meta";
@@ -16,14 +15,13 @@ export interface GuidePage extends LocalizedMeta {
 }
 
 export const GUIDES: GuidePage[] = [
-  { path: guidePath("design-philosophy"), title: "设计方法", description: "器用为本，关系为法，合宜为度；六种方法怎样参与设计判断。", group: "开始", file: "design-philosophy.tsx", keywords: ["文化", "方法", "理念", "名实", "布白"] },
-  { path: guidePath("foundations"), title: "基础判断", description: "空间、密度、表面、中文排版、强调与状态。", group: "基础", file: "foundations.tsx", keywords: ["排版", "关系", "中文", "空间"] },
-  { path: guidePath("ai"), title: "AI 使用", description: "同源设计指南、版本事实、主使用 Skill 与 Registry。", group: "开始", file: "ai.tsx", keywords: ["AI", "skill", "registry", "llms", "design.md"] },
-  { path: guidePath("patterns"), title: "任务模式", description: "编辑、集合、详情、审核、队列与阅读。", group: "任务", file: "patterns.tsx", keywords: ["patterns", "恢复", "任务"] },
-  ...patterns.map((pattern) => ({ path: pattern.href, title: pattern.title, description: pattern.description, group: "任务" as const, file: "patterns.tsx", keywords: [pattern.slug, ...pattern.methods] })),
+  { path: guidePath("design-philosophy"), title: "设计方法", titleEn: "Design methods", descriptionEn: "How the six methods guide design decisions.", description: "器用为本，关系为法，合宜为度；六种方法怎样参与设计判断。", group: "开始", file: "design-philosophy.tsx", keywords: ["文化", "方法", "理念", "名实", "布白"] },
+  { path: guidePath("foundations"), title: "基础判断", titleEn: "Foundations", descriptionEn: "Space, density, surfaces, typography, emphasis and state.", description: "空间、密度、表面、中文排版、强调与状态。", group: "基础", file: "foundations.tsx", keywords: ["排版", "关系", "中文", "空间"] },
+  { path: guidePath("ai"), title: "AI 使用", titleEn: "Using AI", descriptionEn: "Shared design guidance, version facts, skills and registry.", description: "同源设计指南、版本事实、主使用 Skill 与 Registry。", group: "开始", file: "ai.tsx", keywords: ["AI", "skill", "registry", "llms", "design.md"] },
+  { path: guidePath("patterns"), title: "组件组合", description: "以真实组件组合表达应用事实。", titleEn: "Composition", descriptionEn: "Compose current components around application-owned facts.", group: "任务", file: "patterns.tsx", keywords: ["patterns", "恢复", "任务"] },
   {
     path: PATHS.docs,
-    title: "介绍",
+    title: "介绍", titleEn: "Introduction", descriptionEn: "The design basis and accessible behavior provided by public Base UI primitives.",
     description: "Qingye UI 的设计依据，以及 Base UI 公共原语承担的可访问行为。",
     group: "开始",
     file: "introduction.tsx",
@@ -31,7 +29,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("installation"),
-    title: "安装",
+    title: "安装", titleEn: "Installation", descriptionEn: "Set up the library and required providers in React with Tailwind CSS 4.",
     description: "在 Tailwind CSS 4 或普通 React 项目中接入组件库，并挂载所需的 Provider。",
     group: "开始",
     file: "installation.tsx",
@@ -39,7 +37,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("theming"),
-    title: "主题",
+    title: "主题", titleEn: "Theming", descriptionEn: "Independent brand, light/dark and density settings.",
     description: "三层令牌、品牌色与圆角覆盖、紧凑密度，以及无闪烁的深色模式。",
     group: "基础",
     file: "theming.tsx",
@@ -47,7 +45,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("tokens"),
-    title: "设计令牌",
+    title: "设计令牌", titleEn: "Design tokens", descriptionEn: "Current theme roles and actual values.",
     description: "实时读取的颜色、字号、间距、圆角、阴影、控件高度与动效令牌。",
     group: "基础",
     file: "tokens.tsx",
@@ -55,7 +53,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("motion"),
-    title: "动效",
+    title: "动效", titleEn: "Motion", descriptionEn: "State transitions, keyboard input and reduced motion.",
     description: "按压反馈、浮层入场、退出快于进入、键盘即时与减少动态效果。",
     group: "基础",
     file: "motion.tsx",
@@ -63,7 +61,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("i18n"),
-    title: "国际化",
+    title: "国际化", titleEn: "Internationalization", descriptionEn: "Locale providers and built-in messages.",
     description: "UILocaleProvider、英文词条与局部覆盖内置文案。",
     group: "基础",
     file: "i18n.tsx",
@@ -71,7 +69,7 @@ export const GUIDES: GuidePage[] = [
   },
   {
     path: guidePath("accessibility"),
-    title: "无障碍",
+    title: "无障碍", titleEn: "Accessibility", descriptionEn: "Semantic and interaction requirements and verification limits.",
     description: "组件遵循的无障碍做法，以及上线前的检查清单。",
     group: "基础",
     file: "accessibility.tsx",
@@ -81,14 +79,13 @@ export const GUIDES: GuidePage[] = [
 
 export const OVERVIEW: LocalizedMeta & { path: string; description: string } = {
   path: PATHS.components,
-  title: "组件总览",
+  title: "组件总览", titleEn: "Components", descriptionEn: "Browse the current components by category.",
   description: "按类别浏览全部组件。",
 };
 
 /** Shell labels use the same optional parallel-field contract as content. */
-export const NAV_LABELS: Record<string, LocalizedMeta> = Object.fromEntries(
-  [...CATEGORIES, "其他", "开始", "基础", "任务", "组件", "总览", "文档", "指南", "示例"].map((title) => [title, { title }]),
-);
+const labels: Record<string, string> = {"通用": "General", "表单": "Forms", "日期与时间": "Date and time", "数据展示": "Data display", "反馈": "Feedback", "浮层": "Overlays", "导航": "Navigation", "布局": "Layout", "排版": "Typography", "工具": "Utilities", "其他": "Other", "开始": "Getting started", "基础": "Foundations", "任务": "Composition", "组件": "Components", "总览": "Overview", "文档": "Docs", "指南": "Guides", "示例": "Examples"};
+export const NAV_LABELS: Record<string, LocalizedMeta> = Object.fromEntries(Object.entries(labels).map(([title, titleEn]) => [title, { title, titleEn }]));
 export const navLabel = (title: string, locale: DocsLocale) => localizedMeta(NAV_LABELS[title] ?? { title }, locale).title;
 
 export interface NavItem {

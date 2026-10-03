@@ -37,7 +37,7 @@ export default {
         { name: "sideOffset / alignOffset / anchor", type: "Positioner.Props", default: "0 / 0 / trigger", description: "明确定位关系。默认间距沿用原语 0，不推断内容类型。", descriptionEn: "Explicit positioning. Default offsets follow the primitive at zero." },
         { name: "initialFocus / finalFocus", type: "Popup.Props", default: "true / true", description: "默认原语管理焦点与返回；触发者将被移除时，finalFocus 指定有意义上级。", descriptionEn: "Primitive-managed focus and return. Set finalFocus to a meaningful parent when the trigger will disappear." },
         { name: "portalProps", type: "Portal.Props", description: "局部密度、方向、语言或主题需保留时，将 container 指向已挂载的上下文容器。", descriptionEn: "Use a mounted context container to retain local density, direction, language or theme." },
-        { name: "positionerProps / viewportProps", type: "Positioner.Props / Viewport.Props", description: "透传定位层与内容层的 className、style、ref、render 和原生属性。", descriptionEn: "Forward classes, styles, refs, render and native attributes to the positioning and content layers." },
+        { name: "positionerProps / viewportProps", type: "Positioner.Props / Viewport.Props", description: "透传 className、style、ref、render 和原生属性；Positioner 共享 popup 层级先合并，调用方 style 最后合并。", descriptionEn: "Forward classes, styles, refs, render and native attributes. Shared popup layers are merged before caller Positioner styles." },
       ],
     },
     { name: "PopoverTitle / PopoverDescription", description: "关联浮层的可访问名称与说明。", descriptionEn: "Associate the popup's accessible name and description." },
@@ -68,5 +68,5 @@ export default {
     stateOwner: { library: ["本地打开请求、触发关联、定位、焦点与返回。"], application: ["草稿、业务动作、异步结果、受控 open 与触发器消失后的返回目标。"] },
     responsive: ["在可用高度内滚动，保留焦点内缘；关闭方式与非阻断语义不变。"],
     customization: ["集中表面与浮层圆角；原生属性与定位层透传；不按子内容追加视觉特判。"],
-  },
+  }, designEn: {"whenToUse":["Disclose local actions or supplementary information beside an object while the main workspace remains usable."],"avoid":["Blocking tasks, the only critical consequence, or treating closure as successful save/cancellation."],"composition":["Trigger associates the object; Title/Description establish names; Close, Escape, and external entries provide return."],"stateOwner":{"library":["Local open requests, trigger associations, positioning, focus, and return."],"application":["Drafts, business actions, asynchronous outcomes, controlled open, and return targets after the trigger disappears."]},"responsive":["Scroll within available height with internal focus; exit mechanisms and nonblocking semantics remain unchanged."],"customization":["Central surfaces and popup radii; forward native and positioning props without child-specific visual exceptions."]},
 } satisfies ComponentMeta;

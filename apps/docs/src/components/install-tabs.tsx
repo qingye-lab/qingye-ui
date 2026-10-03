@@ -1,4 +1,5 @@
 import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
+import { useDocsLocale } from "@/lib/docs-locale";
 import { useState } from "react";
 import { CodeView } from "./code-block";
 import { CopyCodeButton } from "./copy-code-button";
@@ -13,6 +14,7 @@ type Manager = (typeof managers)[number]["id"];
 
 /** One install command, shown for each package manager. */
 export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCommand?: string }) {
+  const en = useDocsLocale() === "en";
   const [current, setCurrent] = useState<Manager>("pnpm");
   const installCommand = (manager: (typeof managers)[number]) =>
     downloadCommand ? `${downloadCommand} && ${manager.command(pkg)}` : manager.command(pkg);
@@ -24,7 +26,7 @@ export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCom
       value={current}
     >
       <div className="flex items-center justify-between gap-2 border-b py-1 ps-1.5 pe-1.5">
-        <TabsList aria-label="包管理器" size="sm" variant="underline">
+        <TabsList aria-label={en ? "Package manager" : "包管理器"}>
           {managers.map((manager) => (
             <TabsTab className="font-mono text-caption" key={manager.id} value={manager.id}>
               {manager.id}

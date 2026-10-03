@@ -1,6 +1,6 @@
 name: Release
 
-# Push a tag like v0.2.0 to build the package and attach the tarball to a
+# Push an explicitly approved version tag to build the package and attach the tarball to a
 # GitHub release. Consumers download and install the latest release with:
 #   gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 on:
@@ -28,7 +28,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm verify:facts
-      - run: node --test scripts/lib/process-exit.test.mjs
+      - run: node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs
+      - run: pnpm --filter @qingye/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
       - run: pnpm --filter @qingye/ui build
       - name: Build Studio
         run: pnpm studio:build
@@ -40,12 +41,12 @@ jobs:
         run: |
           mkdir -p test-results/release-audit
           node scripts/run-browser-audit.mjs --report test-results/release-audit/report.json
-      - name: Task patterns and theme previews
+      - name: Current compositions, foundations and Studio
         run: |
           node scripts/run-browser-audit.mjs --patterns
           node scripts/run-browser-audit.mjs --foundations
           node scripts/verify-studio.mjs
-      - name: Upload task and theme evidence
+      - name: Upload composition and theme evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:

@@ -14,8 +14,8 @@ export default {
     {
       name: "MotionProvider",
       description:
-        "无界面组件。挂载时把 data-ui-input 设为 pointer；捕获到 keydown 改为 keyboard，pointerdown 或 pointermove 改回 pointer；卸载时还原。属性写在 <html> 上，因此也覆盖传送到 body 的浮层。",
-      props: [{ name: "children", type: "ReactNode", description: "应用内容。" }],
+        "无界面组件。挂载时把 data-ui-input 设为 pointer；捕获到 keydown 改为 keyboard，pointerdown 或 pointermove 改回 pointer；卸载时还原。属性写在 <html> 上，因此也覆盖传送到 body 的浮层。", descriptionEn: "No visible UI. Mount sets data-ui-input to pointer; captured keydown switches to keyboard, pointerdown/pointermove to pointer. Unmount restores the previous value. The html attribute also covers body Portals.",
+      props: [{ name: "children", type: "ReactNode", description: "应用内容。", descriptionEn: "Application content." }],
     },
   ],
   notes: [
@@ -60,5 +60,5 @@ export default {
     "customization": [
       "项目组合可使用 data-instant，但不再重复监听输入方式。"
     ]
-  },
+  }, designEn: {"whenToUse":["Keyboard actions complete immediately while pointer actions retain necessary transitions."],"avoid":["Multiple document owners in separate subtrees; saving on animation completion; indistinguishable states with reduced motion."],"composition":["Mount once at the root. Document attributes cover Portals; components use shared motion.css through data-slot/data-motion."],"stateOwner":{"library":["Recent input method, listener cleanup, and original document attribute restoration."],"application":["Business state timing, root assembly, and whether programmatic changes need animation."]},"responsive":["Layouts and animation permit interruption; keyboard and system reduced motion are checked separately."],"customization":["Project compositions may use data-instant without registering another input-method listener."]},
 } satisfies ComponentMeta;

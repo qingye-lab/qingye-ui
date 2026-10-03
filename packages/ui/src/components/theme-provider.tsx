@@ -50,16 +50,12 @@ function readStored(key: string | null): Theme | null {
 
 function apply(resolved: ResolvedTheme, attribute: "class" | "data-theme", quiet: boolean) {
   const root = document.documentElement;
-  let restore: (() => void) | undefined;
+  let style: HTMLStyleElement | undefined;
+  let frame: number | undefined;
   if (quiet) {
-    const style = document.createElement("style");
+    style = document.createElement("style");
     style.textContent = "*,*::before,*::after{transition:none!important}";
     document.head.appendChild(style);
-    restore = () => {
-      // Force a style flush before re-enabling transitions.
-      void window.getComputedStyle(document.body).opacity;
-      requestAnimationFrame(() => style.remove());
-    };
   }
   if (attribute === "class") {
     root.classList.toggle("dark", resolved === "dark");
@@ -68,7 +64,15 @@ function apply(resolved: ResolvedTheme, attribute: "class" | "data-theme", quiet
     root.setAttribute("data-theme", resolved);
   }
   root.style.colorScheme = resolved;
-  restore?.();
+  if (style) {
+    // Flush the actual new theme before restoring transitions.
+    void window.getComputedStyle(document.body).opacity;
+    frame = requestAnimationFrame(() => style?.remove());
+  }
+  return () => {
+    if (frame !== undefined) cancelAnimationFrame(frame);
+    style?.remove();
+  };
 }
 
 /**
@@ -83,26 +87,30 @@ export function ThemeProvider({
   attribute = "class",
   disableTransitionOnChange = true,
 }: ThemeProviderProps): React.ReactElement {
-  const [theme, setThemeState] = React.useState<Theme>(
-    () => readStored(storageKey) ?? defaultTheme,
-  );
-  const [system, setSystem] = React.useState<ResolvedTheme>(systemTheme);
+  // Server and hydration start from the same choice; effects resolve client
+  // storage/system facts without overwriting the first-paint script meanwhile.
+  const [theme, setThemeState] = React.useState<Theme>(defaultTheme);
+  const [system, setSystem] = React.useState<ResolvedTheme>("light");
+  const [ready, setReady] = React.useState(false);
   const resolvedTheme: ResolvedTheme = theme === "system" ? system : theme;
   const firstRun = React.useRef(true);
 
   React.useEffect(() => {
+    setThemeState(readStored(storageKey) ?? defaultTheme);
+    setSystem(systemTheme());
+    setReady(true);
     if (!window.matchMedia) return;
     const query = window.matchMedia(DARK_QUERY);
     const onChange = () => setSystem(query.matches ? "dark" : "light");
     query.addEventListener("change", onChange);
     return () => query.removeEventListener("change", onChange);
-  }, []);
+  }, [storageKey, defaultTheme]);
 
   // Follow changes made in another tab.
   React.useEffect(() => {
     if (!storageKey) return;
     const onStorage = (event: StorageEvent) => {
-      if (event.key !== storageKey) return;
+      if (event.key !== null && event.key !== storageKey) return;
       const value = event.newValue;
       setThemeState(value === "light" || value === "dark" || value === "system" ? value : defaultTheme);
     };
@@ -111,9 +119,11 @@ export function ThemeProvider({
   }, [storageKey, defaultTheme]);
 
   React.useEffect(() => {
-    apply(resolvedTheme, attribute, disableTransitionOnChange && !firstRun.current);
+    if (!ready) return;
+    const cleanup = apply(resolvedTheme, attribute, disableTransitionOnChange && !firstRun.current);
     firstRun.current = false;
-  }, [resolvedTheme, attribute, disableTransitionOnChange]);
+    return cleanup;
+  }, [ready, resolvedTheme, attribute, disableTransitionOnChange]);
 
   const setTheme = React.useCallback(
     (next: Theme) => {
@@ -159,7 +169,7 @@ export function themeScript({
     attribute === "class"
       ? 'r.classList.toggle("dark",d);r.classList.toggle("light",!d)'
       : 'r.setAttribute("data-theme",d?"dark":"light")';
-  return `(function(){try{var k=${key},t=null;if(k)try{t=localStorage.getItem(k)}catch(e){}if(t!=="light"&&t!=="dark"&&t!=="system")t=${fallback};var d=t==="dark"||(t==="system"&&matchMedia("(prefers-color-scheme: dark)").matches),r=document.documentElement;${write};r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
+  return `(function(){try{var k=${key},t=null;if(k)try{t=localStorage.getItem(k)}catch(e){}if(t!=="light"&&t!=="dark"&&t!=="system")t=${fallback};var d=t==="dark"||(t==="system"&&typeof matchMedia==="function"&&matchMedia("(prefers-color-scheme: dark)").matches),r=document.documentElement;${write};r.style.colorScheme=d?"dark":"light"}catch(e){}})()`;
 }
 
 export function useTheme(): ThemeContextValue {

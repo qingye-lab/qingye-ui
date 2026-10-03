@@ -1,0 +1,11 @@
+import { Button } from "@qingye/ui/components/button";
+import { ButtonGroup } from "@qingye/ui/components/button-group";
+import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Form } from "@qingye/ui/components/form";
+import { Input } from "@qingye/ui/components/input";
+import { Stack } from "@qingye/ui/components/layout";
+
+export const meta = { title: "字段错误与重置", titleEn: "Field error and reset" };
+export default function Demo() {
+  return <Form className="w-full max-w-sm" onSubmit={event => event.preventDefault()}><Stack gap="fields"><Field name="value" invalid><FieldLabel>值</FieldLabel><Input defaultValue="值" /><FieldError errors={[{ message: "不可用" }]} /></Field><ButtonGroup aria-label="表单动作"><Button type="submit">提交</Button><Button type="reset" variant="bordered">重置</Button></ButtonGroup></Stack></Form>;
+}

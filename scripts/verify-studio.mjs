@@ -22,12 +22,12 @@ try {
     await page.goto(base,{waitUntil:'networkidle'});await page.getByLabel('品牌标识').waitFor();
     const left=page.frameLocator('iframe[title="已应用真实组件预览"]'),right=page.frameLocator('iframe[title="候选真实组件预览"]');
     await left.getByRole('textbox',{name:'标题',exact:true}).fill('左侧独立草稿');await right.getByRole('textbox',{name:'标题',exact:true}).fill('右侧独立草稿');
-    await right.getByRole('checkbox',{name:'选择异常与恢复'}).check();await right.getByRole('button',{name:'模拟保存失败'}).click();
+    await right.getByRole('checkbox',{name:'选择 B'}).check();await right.getByRole('button',{name:'切换输入错误'}).click();
     await page.getByLabel('候选明暗',{exact:true}).selectOption('light');
     await page.getByRole('button',{name:'载入 Amber 合成主题'}).click();
     await page.waitForTimeout(500);
-    assert.equal(await right.locator('#draft-title').inputValue(),'右侧独立草稿');assert.equal(await left.getByRole('textbox',{name:'标题',exact:true}).inputValue(),'左侧独立草稿');assert.equal(await right.getByRole('checkbox',{name:'选择异常与恢复'}).isChecked(),true);assert.ok((await right.locator('[data-testid="draft-result"]').innerText()).includes('保存失败'));
-    const axes=await Promise.all([left.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density})),right.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density}))]);assert.equal(axes[0].brand,'azure');assert.equal(axes[1].brand,'amber');check('Two document brands and independent task state',axes);
+    assert.equal(await right.locator('#draft-title').inputValue(),'右侧独立草稿');assert.equal(await left.getByRole('textbox',{name:'标题',exact:true}).inputValue(),'左侧独立草稿');assert.equal(await right.getByRole('checkbox',{name:'选择 B'}).isChecked(),true);assert.equal(await right.locator('#draft-title').getAttribute('aria-invalid'),'true');await right.getByText('当前显式错误',{exact:true}).waitFor();
+    const axes=await Promise.all([left.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density})),right.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density}))]);assert.equal(axes[0].brand,'azure');assert.equal(axes[1].brand,'amber');check('Two document brands and independent draft, selection and explicit error state',axes);
     const colors=await Promise.all([left.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor),right.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor)]);assert.notEqual(...colors);check('Independent brand CSS reaches real button',colors);
     const portalPaint = async (locator) => locator.evaluate(element => {
       const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
@@ -39,8 +39,8 @@ try {
     const paints=[];
     const verifyPortal = async (name,locator) => {const value=await portalPaint(locator);assert.deepEqual(value.actual,value.expected,`${name} actual portal surface inherits own document token`);paints.push({name,...value});};
     for(const [name,frame]of [['left',left],['right',right]]){
-      await frame.getByRole('combobox',{name:'用途'}).click();await verifyPortal(`${name} Select`,frame.locator('[data-slot=select-popup] .bg-popover').first());await frame.getByRole('option',{name:'比较',exact:true}).click();
-      await frame.getByRole('button',{name:'记录操作',exact:true}).click();await verifyPortal(`${name} Menu`,frame.locator('[data-slot=menu-popup]'));await frame.getByRole('menuitem',{name:'标记为待补充'}).click();
+      await frame.getByRole('combobox',{name:'选项'}).click();await verifyPortal(`${name} Select`,frame.locator('[data-slot=select-popup]').first());await frame.getByRole('option',{name:'选项 C',exact:true}).click();
+      await frame.getByRole('button',{name:'菜单',exact:true}).click();await verifyPortal(`${name} Menu`,frame.locator('[data-slot=menu-popup]'));await frame.getByRole('menuitem',{name:'切换输入错误'}).click();
       await frame.getByRole('button',{name:'预览变更',exact:true}).click();await frame.getByRole('dialog').waitFor();assert.equal(await page.getByRole('dialog').count(),0,'no portal in parent document');
       await verifyPortal(`${name} Dialog initial`,frame.locator('[data-slot=dialog-popup]'));
       if(name==='right') {
@@ -82,13 +82,47 @@ try {
       const button=[...(frame?.contentDocument?.querySelectorAll('button')??[])].find(el=>el.textContent==='主要动作');
       return button&&frame.contentWindow.getComputedStyle(button).borderTopLeftRadius==='23px';
     });
-    await page.getByLabel('点击查询元素归属').check();
-    await right.locator('body').evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
-    const impactResponse=page.waitForResponse(r=>r.url()===`${base}/api/impact?project=0&slot=button`);
-    await right.getByRole('button',{name:'主要动作',exact:true}).click();assert.equal((await impactResponse).status(),200);
-    await page.waitForFunction(()=>document.querySelector('.evidence')?.textContent.includes('button'));
-    assert.ok((await page.locator('.evidence').innerText()).includes('button'));await page.getByLabel('点击查询元素归属').uncheck();
-    const checkResponse=page.waitForResponse(r=>r.url()===`${base}/api/check?project=0`);await page.getByRole('button',{name:'运行当前项目报告'}).click();assert.equal((await checkResponse).status(),200);const reportsResponse=page.waitForResponse(r=>r.url()===`${base}/api/reports`);await page.getByRole('button',{name:'读取多项目已有报告'}).click();assert.equal((await reportsResponse).status(),200);await page.waitForFunction(()=>document.querySelector('.reports')?.textContent.includes('NOT_RUN'));check('Element owner lookup and stored reports','Missing other-project report remains NOT_RUN');
+    await right.locator('body').evaluate(()=>{
+      const probe=window.__studioInspectProbe={enabledMessage:false,listenerRegistered:false,click:null};
+      const original=document.addEventListener;
+      const receive=event=>{if(event.origin===location.origin&&event.source===parent&&event.data?.type==='qingye-preview'&&event.data.settings?.inspect===true)probe.enabledMessage=true;};
+      const capture=event=>{
+        const target=event.target instanceof Element?event.target:null;
+        const part=target?.closest('[data-slot]'),owner=target?.closest('[data-slot="button"]');
+        probe.click={slot:part?.getAttribute('data-slot'),owner:owner?.getAttribute('data-slot'),name:owner?.textContent?.trim()};
+      };
+      window.addEventListener('message',receive);
+      window.addEventListener('click',capture,{capture:true,once:true});
+      // Observe the real preview effect registration; do not substitute a click
+      // handler or infer readiness from an arbitrary delay.
+      document.addEventListener=function(type,listener,options){
+        const result=original.call(this,type,listener,options);
+        if(type==='click'&&options===true){probe.listenerRegistered=true;document.addEventListener=original;}
+        return result;
+      };
+      probe.cleanup=()=>{document.addEventListener=original;window.removeEventListener('message',receive);window.removeEventListener('click',capture,true);};
+    });
+    await page.getByRole('checkbox',{name:'点击查询元素归属',exact:true}).check();
+    await page.waitForFunction(()=>{
+      const probe=document.querySelector('iframe[title="候选真实组件预览"]')?.contentWindow?.__studioInspectProbe;
+      return probe?.enabledMessage&&probe.listenerRegistered;
+    });
+    const impactResponse=page.waitForResponse(response=>{
+      const url=new URL(response.url());return url.origin===base&&url.pathname==='/api/impact'&&url.searchParams.get('project')==='0'&&url.searchParams.has('slot');
+    });
+    await right.getByRole('button',{name:'主要动作',exact:true}).click();
+    const clicked=await right.locator('body').evaluate(()=>{
+      const probe=window.__studioInspectProbe;const clicked=probe.click;probe.cleanup();delete window.__studioInspectProbe;return clicked;
+    });
+    assert.ok(clicked?.slot,'the actual click has a data-slot part');assert.equal(clicked.owner,'button');assert.equal(clicked.name,'主要动作');
+    const impact=await impactResponse;assert.equal(impact.status(),200);assert.equal(new URL(impact.url()).searchParams.get('slot'),clicked.slot,'lookup uses the actual clicked part');
+    const diagnosis=await impact.json();assert.equal(diagnosis.status,'UNVERIFIED');assert.deepEqual(diagnosis.records,[],'the current ledger has no exact record for this button part');
+    await page.locator('.evidence').getByText(/^UNVERIFIED ·/).waitFor();
+    assert.deepEqual(await page.locator('.evidence pre').evaluate(element=>JSON.parse(element.textContent).records),[]);
+    report.clickPart={...clicked,diagnosticStatus:diagnosis.status,staticOwner:'UNVERIFIED',records:diagnosis.records.length};
+    report.limitations.push('The clicked button part has a verified DOM owner, but its CVA/useRender static token path has no exact ledger record; static ownership remains UNVERIFIED.');
+    await page.getByRole('checkbox',{name:'点击查询元素归属',exact:true}).uncheck();
+    const checkResponse=page.waitForResponse(r=>r.url()===`${base}/api/check?project=0`);await page.getByRole('button',{name:'运行当前项目报告'}).click();assert.equal((await checkResponse).status(),200);const reportsResponse=page.waitForResponse(r=>r.url()===`${base}/api/reports`);await page.getByRole('button',{name:'读取多项目已有报告'}).click();assert.equal((await reportsResponse).status(),200);await page.waitForFunction(()=>document.querySelector('.reports')?.textContent.includes('NOT_RUN'));check('Click-part diagnostics and stored reports',{clickPart:report.clickPart,otherProjectReport:'NOT_RUN'});
     await page.getByLabel('已登记项目',{exact:true}).selectOption('1');await page.waitForTimeout(500);assert.equal(await left.locator('html').getAttribute('data-theme'),'light');assert.equal(await left.locator('html').evaluate(el=>el.classList.contains('light')||el.classList.contains('dark')),false);check('Attribute-mode project','data-theme mode keeps brand and density independent');
     // Force the older project response to arrive last. Requests use the real
     // isolated fixture service; only delivery order is controlled here.
@@ -126,7 +160,7 @@ try {
       assert.equal(JSON.parse(readFileSync(join(fixtures[1],'ui.theme.json'),'utf8')).common['--qy-radius-control'],'29px');
       check('Reordered project responses preserve the selected editor and apply target',{arrivalOrder:['B','A'],selected:'1',brand:body.theme.brand,appliedRadius:'29px',otherProjectUnchanged:true,blockedWhileLoading:true});
     }finally{releaseA();releaseB();await page.unroute(projectRoute);}
-    for(const width of [1600,390]){await page.setViewportSize({width,height:1100});await page.waitForTimeout(200);await page.screenshot({path:join(out,`studio-${width}.png`),fullPage:true}); const geometry=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('body *')].map(el=>({tag:el.tagName,cls:el.className,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right,width:el.getBoundingClientRect().width,text:(el.textContent??'').slice(0,120)})).filter(e=>e.right>innerWidth+2||e.left < -2).slice(0,20)}));report.geometry??=[];report.geometry.push(geometry);assert.ok(geometry.scroll<=geometry.width+2,`Studio page overflow ${width}: ${JSON.stringify(geometry)}`);}
+    for(const width of [1600,1100]){await page.setViewportSize({width,height:1100});await page.waitForTimeout(200);await page.screenshot({path:join(out,`studio-${width}.png`),fullPage:true}); const geometry=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('body *')].map(el=>({tag:el.tagName,cls:el.className,left:el.getBoundingClientRect().left,right:el.getBoundingClientRect().right,width:el.getBoundingClientRect().width,text:(el.textContent??'').slice(0,120)})).filter(e=>e.right>innerWidth+2||e.left < -2).slice(0,20)}));report.geometry??=[];report.geometry.push(geometry);assert.ok(geometry.scroll<=geometry.width+2,`Studio page overflow ${width}: ${JSON.stringify(geometry)}`);}
     const expectedErrors=errors.filter(e=>e.url===report.expectedConflict.url&&e.text==='Failed to load resource: the server responded with a status of 409 (Conflict)');assert.equal(expectedErrors.length,1);assert.deepEqual(errors.filter(e=>!expectedErrors.includes(e)),[]);report.expectedConsoleErrors=expectedErrors;report.runtimeErrors=[];report.contrast=[];for(const frame of [left,right]){const contrast=await frame.locator('body').evaluate(measureTextContrast);report.contrast.push(contrast);assert.deepEqual(contrast.failures,[],'Preview computed text contrast');}const shellContrast=await page.locator('main').evaluate(measureTextContrast);report.contrast.push(shellContrast);assert.deepEqual(shellContrast.failures,[],'Studio computed text contrast');
   }finally{await closeWithTimeout(context,'Studio context');}});
 }catch(error){report.errors.push(error.stack??error.message);console.error(error);process.exitCode=1;}

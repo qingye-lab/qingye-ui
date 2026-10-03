@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
+import ts from "typescript";
 import { inspectColors } from "./color-check";
 
 /**
@@ -23,6 +24,67 @@ function code(file: string) {
 }
 
 const table = files.map((file) => [file, code(file)] as const);
+
+/** Follow emitted JSX/useRender props; comments and unrelated objects are not hooks. */
+function inspectSlotHook(source: string, filename = "fixture.tsx") {
+  const ast = ts.createSourceFile(filename, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let interactive = false;
+  let hooked = false;
+  const nativeControls = new Set(["button", "input", "select", "textarea", "a"]);
+  const primitiveParts = new Set(["Root", "Trigger", "Popup", "Item", "Tab", "Panel", "Handle", "DayPicker"]);
+  const keyOf = (name: ts.PropertyName) => ts.isIdentifier(name) || ts.isStringLiteral(name) ? name.text : undefined;
+  const unwrap = (value: ts.Expression): ts.Expression => ts.isParenthesizedExpression(value) || ts.isAsExpression(value) || ts.isSatisfiesExpression(value) ? unwrap(value.expression) : value;
+  function initializer(reference: ts.Identifier): ts.Expression | undefined {
+    for (let scope: ts.Node | undefined = reference.parent; scope; scope = scope.parent) {
+      if (!ts.isBlock(scope) && !ts.isSourceFile(scope)) continue;
+      for (const statement of scope.statements) if (ts.isVariableStatement(statement)) {
+        for (const declaration of statement.declarationList.declarations) {
+          if (ts.isIdentifier(declaration.name) && declaration.name.text === reference.text) return declaration.initializer;
+        }
+      }
+    }
+    return undefined;
+  }
+  function hasSlot(expression: ts.Expression, seen = new Set<ts.Node>()): boolean {
+    const value = unwrap(expression);
+    if (seen.has(value)) return false;
+    seen.add(value);
+    if (ts.isIdentifier(value)) {
+      const definition = initializer(value);
+      return Boolean(definition && hasSlot(definition, seen));
+    }
+    if (ts.isCallExpression(value) && ts.isIdentifier(value.expression) && value.expression.text === "mergeProps") return value.arguments.some(argument => hasSlot(argument, seen));
+    if (!ts.isObjectLiteralExpression(value)) return false;
+    return value.properties.some(property => {
+      if (ts.isSpreadAssignment(property)) return hasSlot(property.expression, seen);
+      if (!ts.isPropertyAssignment(property) || keyOf(property.name) !== "data-slot") return false;
+      const slot = unwrap(property.initializer);
+      return !(ts.isIdentifier(slot) && slot.text === "undefined") && slot.kind !== ts.SyntaxKind.NullKeyword && (!ts.isStringLiteral(slot) || Boolean(slot.text.trim()));
+    });
+  }
+  function visit(node: ts.Node) {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const tag = node.tagName;
+      if (ts.isIdentifier(tag) && nativeControls.has(tag.text) || ts.isPropertyAccessExpression(tag) && tag.expression.getText(ast).endsWith("Primitive") && primitiveParts.has(tag.name.text)) interactive = true;
+      for (const attribute of node.attributes.properties) {
+        if (ts.isJsxAttribute(attribute) && attribute.name.getText(ast) === "data-slot") hooked = true;
+        if (ts.isJsxSpreadAttribute(attribute) && hasSlot(attribute.expression)) hooked = true;
+      }
+    }
+    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === "useRender") {
+      const options = node.arguments[0];
+      if (options && ts.isObjectLiteralExpression(options)) for (const property of options.properties) {
+        if (!ts.isPropertyAssignment(property)) continue;
+        const key = keyOf(property.name);
+        if (key === "defaultTagName" && ts.isStringLiteral(property.initializer) && nativeControls.has(property.initializer.text)) interactive = true;
+        if ((key === "props" || key === "defaultProps") && hasSlot(property.initializer)) hooked = true;
+      }
+    }
+    ts.forEachChild(node, visit);
+  }
+  visit(ast);
+  return { interactive, hooked };
+}
 
 describe("component conventions", () => {
   test("every component file is non-trivial and exports something", () => {
@@ -79,12 +141,28 @@ describe("component conventions", () => {
 
   test("interactive parts carry a data-slot hook", () => {
     const missing: string[] = [];
-    for (const [file, source] of table) {
-      const isInteractive = /<(?:button|input|select|textarea|a)\b/.test(source) ||
-        /Primitive\.(?:Root|Trigger|Popup|Item|Tab|Panel|Handle)/.test(source);
-      if (isInteractive && !/data-slot=/.test(source)) missing.push(file);
+    for (const file of files) {
+      const { interactive, hooked } = inspectSlotHook(read(file), file);
+      if (interactive && !hooked) missing.push(file);
     }
     expect(missing).toEqual([]);
+  });
+
+  test("slot hook AST follows JSX and emitted props without accepting prose or unused objects", () => {
+    for (const source of [
+      'return <button data-slot="action" />;',
+      'return useRender({ defaultTagName: "input", props: { "data-slot": "input" } });',
+      'const defaults = { "data-slot": "action" }; return useRender({ defaultTagName: "button", props: mergeProps(defaults, props) });',
+      'const defaults = { "data-slot": "action" }; return <button {...defaults} />;',
+    ]) expect(inspectSlotHook(source)).toEqual({ interactive: true, hooked: true });
+    for (const source of [
+      '/* data-slot="action" */ return <button />;',
+      'const prose = "data-slot=action"; return <button />;',
+      'const unused = { "data-slot": "action" }; return <button />;',
+      'return useRender({ defaultTagName: "input", props: { "data-slot": undefined } });',
+      'const defaults = { "data-slot": "unused" }; function Action() { const defaults = {}; return useRender({ defaultTagName: "button", props: defaults }); }',
+      'return <ActionPrimitive.Trigger />;',
+    ]) expect(inspectSlotHook(source)).toEqual({ interactive: true, hooked: false });
   });
 
   test("straight durations are on Tailwind's scale or a deliberate exception", () => {

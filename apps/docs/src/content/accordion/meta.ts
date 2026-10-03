@@ -1,0 +1,18 @@
+import type { ComponentMeta } from "@/lib/types";
+export default {
+  title: "分组展开 Accordion", titleEn: "Accordion",
+  description: "按各项名称主动展开内容。", descriptionEn: "Reveal content from each item's named trigger.",
+  category: "布局", layer: "primitive", source: "local",
+  exports: ["Accordion", "AccordionItem", "AccordionHeader", "AccordionTrigger", "AccordionPanel", "AccordionPrimitive"],
+  keywords: ["accordion", "disclosure", "展开", "折叠"],
+  decisions: "标题、触发与内容保持同一项关系；关闭不删除输入或宣告业务取消。",
+  decisionsEn: "Keep heading, trigger and content related to the same item; closing neither removes inputs nor declares business cancellation.",
+  api: [
+    { name: "Accordion", description: "同组展开的状态与保留策略。", descriptionEn: "Expansion state and retention policy for one group.", props: [{ name: "value / defaultValue / onValueChange", type: "AccordionPrimitive.Root.Props", description: "应用控制或原语持有展开项；事件可取消。", descriptionEn: "Application-controlled or primitive-owned expanded items; the event can be canceled." }, { name: "multiple", type: "boolean", default: "false", description: "允许多项共同展开。", descriptionEn: "Allow several items to remain expanded together." }, { name: "keepMounted", type: "boolean", default: "true", description: "保留关闭内容和原生字段；需要移除时显式关闭。", descriptionEn: "Retain closed content and native fields; explicitly opt out when removal is required." }, { name: "disabled", type: "boolean", description: "禁用整组。", descriptionEn: "Disable the whole group." }] },
+    { name: "AccordionItem", description: "一项的身份与禁用。", descriptionEn: "One item's identity and disabled state.", props: [{ name: "value / disabled", type: "AccordionPrimitive.Item.Props", description: "稳定项标识与单项禁用。", descriptionEn: "A stable item identifier and per-item disabling." }] },
+    { name: "AccordionHeader / AccordionTrigger / AccordionPanel", description: "原生 heading、Button 组合与关联内容；支持 render/ref/事件和状态 className。标题层级由调用方 render 调整。", descriptionEn: "Native heading, Button composition, and associated content. Forward render, refs, events, and state className. The caller sets the heading level through render." },
+  ],
+  keyboard: [{ keys: "Enter / Space", description: "切换当前项。", descriptionEn: "Toggle the current item." }, { keys: "Tab / Shift+Tab", description: "访问启用触发与展开内容中的控件。", descriptionEn: "Reach enabled triggers and controls in expanded content." }],
+  notes: ["名称必须说明被展开的内容。", "单段内容使用 Collapsible；不得用隐藏内容暗示已经阅读或完成。", "keepMounted 保留真实表单字段，应用决定是否禁用隐藏字段。"], notesEn: ["Names must identify the content being disclosed.","Use Collapsible for a single section. Hidden content does not imply reading or completion.","keepMounted retains actual form fields; the application determines whether hidden fields are disabled."],
+  design: { methods: ["展开有据", "名实相符", "进退相承"], whenToUse: ["有限的同组内容需要主动选择展开。"], avoid: ["唯一关键后果仅存在于默认隐藏内容。"], composition: ["Item 包含 Header/Trigger 与 Panel；默认 Trigger 复用 Button。"], stateOwner: { library: ["展开状态、ARIA 关联与原语键盘。"], application: ["项内容、稳定标识、输入和业务事实。"] }, responsive: ["长名称与内容换行；不以固定高度裁去文字。"], customization: ["使用现有 field gap 和文字角色，入退归 motion.css。"] }, designEn: {"whenToUse":["A finite group of content needs deliberate disclosure."],"avoid":["Putting the only critical consequence in initially hidden content."],"composition":["Item contains Header/Trigger and Panel; the default Trigger uses Button."],"stateOwner":{"library":["Expansion state, ARIA associations, and primitive keyboard behavior."],"application":["Item content, stable identifiers, inputs, and business facts."]},"responsive":["Long names and content wrap instead of being cut by a fixed height."],"customization":["Existing field gaps and text roles; motion.css owns entry and exit."]},
+} satisfies ComponentMeta;

@@ -14,7 +14,7 @@ export default {
     stateOwner: {library: ["Base UI 分组命名、原生字段组与禁用传播。"], application: ["共同问题、成员和值。"]},
     responsive: ["组与长 legend 可收缩换行；字段间消费 field-group-gap。"],
     customization: ["无额外围合；variant 改共同名称的文字档，render 可替换 legend 元素。"],
-  },
+  }, designEn: {"whenToUse":["A group of fields or options needs a shared name."],"avoid":["Semantic groups for layout alone or a shared name replacing individual names."],"composition":["Legend names the group; Field names one value. Native controls retain fieldset semantics."],"stateOwner":{"library":["Base UI group naming, native fieldsets, and disabled propagation."],"application":["The shared question, members, and values."]},"responsive":["Groups and long legends shrink/wrap; fields consume field-group-gap."],"customization":["No extra enclosure. variant chooses the shared name's text profile; render can replace the legend element."]},
   api: [
     {name: "Fieldset", description: "Base UI Root，默认 fieldset；使用字段组间隔。", descriptionEn: "Base UI Root, rendered as fieldset with field-group spacing.", props: [
       {name: "disabled", type: "boolean", default: "false", description: "禁用整组控件。", descriptionEn: "Disables controls throughout the group."},

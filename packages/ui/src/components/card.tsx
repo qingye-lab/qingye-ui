@@ -18,7 +18,7 @@ export function Card({
   // 不在父容器覆盖控件圆角。密度、方向、语言沿容器继承，不由 Card 写入。
   const defaultProps = {
     className: cn(
-      "min-w-0 rounded-panel border border-border bg-card text-card-foreground shadow-panel focus-visible:outline-none focus-visible:border-ring",
+      "min-w-0 rounded-panel border border-border bg-card text-card-foreground focus-visible:outline-none focus-visible:border-ring",
       className,
     ),
     "data-slot": "card",

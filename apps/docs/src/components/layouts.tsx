@@ -8,12 +8,14 @@ import { SearchProvider } from "./search";
 import { SiteHeader } from "./site-header";
 import { TableOfContents } from "./toc";
 import { DocsBreadcrumbs } from "./docs-breadcrumbs";
+import { useDocsLocale } from "@/lib/docs-locale";
 import { routeVisitKey } from "@/lib/paths";
 
 function SkipLink() {
+  const en = useDocsLocale() === "en";
   return (
     <a
-      className="sr-only fixed start-3 top-3 z-50 rounded-lg border bg-popover px-3 py-2 font-medium text-body shadow-lg/5 focus-visible:not-sr-only focus-visible:ring-2 focus-visible:ring-ring"
+      className="docs-skip-link sr-only focus-ring fixed start-3 top-3 rounded-item border border-border bg-surface-raised px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body-strong focus-visible:not-sr-only"
       href="#main"
       onClick={(event) => {
         event.preventDefault();
@@ -22,7 +24,7 @@ function SkipLink() {
         main?.scrollIntoView({ block: "start" });
       }}
     >
-      跳到正文
+      {en ? "Skip to content" : "跳到正文"}
     </a>
   );
 }
@@ -46,12 +48,13 @@ export function SiteShell() {
 }
 
 export function DocsLayout({ children }: { children?: ReactNode }) {
+  const en = useDocsLocale() === "en";
   const { pathname } = useLocation();
   const article = useRef<HTMLDivElement>(null);
   return (
     <div className="mx-auto flex w-full max-w-[90rem] px-4 sm:px-6 lg:px-8">
-      <aside aria-label="侧栏" className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-60 shrink-0 lg:block">
-        <ScrollArea className="-ms-2.5 pe-4" scrollFade>
+      <aside data-docs-sidebar aria-label={en ? "Documentation sidebar" : "侧栏"} className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-60 shrink-0 lg:block">
+        <ScrollArea className="h-full -ms-2.5 pe-4">
           <DocsNav className="py-8" />
         </ScrollArea>
       </aside>
@@ -64,7 +67,7 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
             <DocFooter path={pathname} />
           </div>
         </main>
-        <aside aria-label="本页目录" className="hidden w-52 shrink-0 xl:block">
+        <aside data-docs-toc aria-label={en ? "On this page" : "本页目录"} className="hidden w-52 shrink-0 xl:block">
           <div className="sticky top-(--docs-header-height) max-h-[calc(100dvh-var(--docs-header-height))] overflow-y-auto pt-10 pb-8 [scrollbar-width:none]">
             <TableOfContents container={article} />
           </div>

@@ -53,6 +53,7 @@ export default {
         { name: "side / align", type: "Positioner.Props", default: "top / center", description: "原语默认位置，空间不足时自动翻转。", descriptionEn: "Primitive positioning defaults with collision handling." },
         { name: "sideOffset / alignOffset / anchor", type: "Positioner.Props", default: "0 / 0 / trigger", description: "相对锚点的显式位置关系。", descriptionEn: "Explicit positioning relative to the anchor." },
         { name: "portalProps", type: "Portal.Props", description: "container 可保留局部语言、方向和密度。默认挂到 body。", descriptionEn: "Set container to retain local language, direction and density; default portal target is body." },
+        { name: "positionerProps", type: "Positioner.Props", description: "自身公开定位层透传 render/ref/事件及状态样式；共享 popup 层级先合并，调用方 style 后合并。", descriptionEn: "Forward render, refs, events and state styles to its own Positioner, merging caller styles after shared popup layers." },
       ],
     },
     { name: "TooltipCreateHandle / TooltipPrimitive", description: "共享触发者的类型化 handle 与 Base UI 公共原语。", descriptionEn: "Typed shared-trigger handles and the public Base UI namespace." },
@@ -79,5 +80,5 @@ export default {
     stateOwner: { library: ["聚焦/悬停展开、关联、延迟、定位与 Esc。"], application: ["补充内容与受控 open。"] },
     responsive: ["按原语可用宽度换行；控制文字保留窄屏角色，必要信息始终可见。"],
     customization: ["应用根共享延迟；使用已有表面、阴影和圆角 token。"],
-  },
+  }, designEn: {"whenToUse":["Add shortcuts, format information, or brief context beside an identifiable object/action."],"avoid":["Sole names, sole critical consequences, disabled reasons, failure recovery, or interactive content."],"composition":["Controls have their own names; Tooltip associates supplementary text. Persistent outcomes stay beside objects."],"stateOwner":{"library":["Focus/hover opening, associations, delays, positioning, and Escape."],"application":["Supplementary content and controlled open state."]},"responsive":["Wrap within primitive available width; control text retains narrow roles and necessary information stays visible."],"customization":["Shared root delays and existing surface/shadow/radius tokens."]},
 } satisfies ComponentMeta;

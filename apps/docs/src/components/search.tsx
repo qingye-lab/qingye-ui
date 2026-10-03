@@ -1,9 +1,10 @@
 import { Button } from "@qingye/ui/components/button";
-import { Kbd, KbdGroup } from "@qingye/ui/components/kbd";
+import { Kbd } from "@qingye/ui/components/kbd";
 import { cn } from "@qingye/ui/utils";
 import { SearchIcon } from "lucide-react";
 import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { useDocsLocale } from "@/lib/docs-locale";
 import { routeVisitKey } from "@/lib/paths";
 
 const loadDialog = () => import("./search-dialog");
@@ -69,15 +70,15 @@ export function SearchProvider({ children }: { children: ReactNode }) {
 export const useSearch = () => useContext(SearchContext);
 
 export function SearchTrigger({ className }: { className?: string }) {
-  const { openSearch } = useSearch();
+  const { openSearch } = useSearch(); const locale = useDocsLocale(); const label = locale === "en" ? "Search documentation" : "搜索文档";
   const [mac, setMac] = useState(true);
   useEffect(() => setMac(isMac()), []);
   return (
-    <Button shape="icon"
-      aria-label="搜索文档"
+    <Button shape="label"
+      aria-label={label}
       aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
       className={cn(
-        "shrink-0 font-normal text-muted-foreground shadow-none md:h-8 md:w-56 md:justify-start md:gap-2 md:ps-2.5 md:pe-1.5 lg:w-64 pointer-coarse:min-h-11 pointer-coarse:min-w-11",
+        "shrink-0 text-muted-foreground",
         className,
       )}
       onClick={openSearch}
@@ -85,11 +86,11 @@ export function SearchTrigger({ className }: { className?: string }) {
       variant="quiet"
     >
       <SearchIcon aria-hidden="true" />
-      <span className="hidden flex-1 text-start md:inline">搜索文档</span>
-      <KbdGroup className="hidden md:flex pointer-coarse:hidden">
+      <span>{label}</span>
+      <span className="hidden items-center gap-(--qy-space-1) md:inline-flex pointer-coarse:hidden">
         <Kbd>{mac ? "⌘" : "Ctrl"}</Kbd>
         <Kbd>K</Kbd>
-      </KbdGroup>
+      </span>
     </Button>
   );
 }

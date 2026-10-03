@@ -1,0 +1,22 @@
+import type { ComponentMeta } from "@/lib/types";
+
+export default {
+  title: "日期范围 DateRangePicker", titleEn: "DateRangePicker",
+  description: "在日历中编辑范围草稿，明确应用完整的起止日期。", descriptionEn: "Edit a calendar range draft and explicitly apply complete endpoints.",
+  category: "日期与时间", source: "local", layer: "pattern", exports: ["DateRangePicker"], keywords: ["date range", "日期范围", "calendar", "起止"],
+  decisions: "只有完整 from/to 才是确认值。未完成范围留在展开草稿中，取消或 Escape 保留原确认值；应用才请求替换。",
+  decisionsEn: "Only complete from/to endpoints form a confirmed value. Incomplete ranges stay in the popup draft. Cancel or Escape preserves the prior value; Apply requests a replacement.",
+  api: [{ name: "DateRangePicker", description: "只读范围展示、日历草稿与明确应用动作的组合。", descriptionEn: "A composition of range display, calendar draft, and explicit Apply.", props: [
+    { name: "value / onValueChange", type: "{ from: Date; to: Date } | undefined / (value, event) => void", description: "受控完整范围；起点须不晚于终点。清除请求 undefined，不生成缺端点提交值。", descriptionEn: "Controlled complete range with ordered endpoints. Clearing requests undefined; partial ranges never submit." },
+    { name: "name / form", type: "string", description: "确认端点序列化为 name.from 与 name.to 的当地 YYYY-MM-DD。Field 可提供 name；展示 input 本身不提交。", descriptionEn: "Confirmed endpoints submit local YYYY-MM-DD under name.from and name.to. Field may provide the name; the display input does not submit." },
+    { name: "disabled / readOnly", type: "boolean", default: "false", description: "禁用/只读阻止展开与改值；Field 禁用也约束附属动作。只读确认端点仍提交，禁用排除。", descriptionEn: "Block opening and changes, including Field disabled. Read-only endpoints submit; disabled endpoints are excluded." },
+    { name: "calendarProps", type: "CalendarProps except owned selection props", description: "min/max 指日期间隔规则，excludeDisabled 约束跨禁用日期。默认同日范围合法；要跨日明确传 min。mode 固定 range。", descriptionEn: "min/max declare day interval rules; excludeDisabled constrains disabled days. Same-day ranges are valid by default; require a cross-day range with min. Mode is range." },
+    { name: "inputProps", type: "Input display props", description: "展示出口的 ref/render/ARIA/events/placeholder；无原生 date 输入 min/max 校验，范围规则在 calendarProps 与应用校验中声明。", descriptionEn: "ref, render, ARIA, events, and placeholder for the display. There is no native date min/max validation; declare rules in calendarProps and application validation." },
+    { name: "size", type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: "展示、日历、应用/取消/清除读取相同档位。", descriptionEn: "Display, calendar, Apply, Cancel, and Clear share one profile." },
+    { name: "render / ref / className / style / ARIA / events", type: "div composition props", description: "属于组合根；输入命名与错误由 Field 公共组合提供。", descriptionEn: "Applied to the composition root; Field provides input naming and errors." },
+  ] }],
+  keyboard: [{ keys: "Calendar keys", description: "在真实网格中选择范围草稿。", descriptionEn: "Select a range draft in the real calendar grid." }, { keys: "Tab / Enter", description: "到应用、取消、清除动作；未完成草稿不能应用。", descriptionEn: "Reach Apply, Cancel, and Clear. An incomplete draft cannot be applied." }, { keys: "Escape", description: "关闭草稿并返回触发入口，保留确认端点。", descriptionEn: "Close the draft and return to its trigger, preserving confirmed endpoints." }],
+  notes: ["范围展示固定只读；编辑在日历中完成，不把展示文字当提交值。", "每次打开从当前调用方值建立草稿；没有默认业务长度或自动纠正。", "调用方若需提交时范围验证，应在应用与 FieldError 中表达。"],
+  notesEn: ["The display is read-only; calendar editing never submits its display text.", "Each opening starts from the current caller value. There is no default business duration or automatic repair.", "Express submission-time range validation in the application and FieldError."],
+  design: { methods: ["名实相符", "进退相承", "相成相制"], composition: ["Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"], stateOwner: { library: ["展开、本次范围草稿、焦点返回"], application: ["完整确认范围、允许日期、提交结果"] }, responsive: ["五档控件与文字；日历粗指针单元采用真实触摸尺寸"], customization: ["calendarProps、inputProps、组合根与集中主题"] }, designEn: {"composition":["Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"],"stateOwner":{"library":["Opening, the current range draft, and focus return."],"application":["Complete confirmed ranges, permitted dates, and submission outcomes."]},"responsive":["Five matching control/text profiles; coarse-pointer calendar cells have actual touch dimensions."],"customization":["calendarProps, inputProps, composition root, and central theme."]},
+} satisfies ComponentMeta;

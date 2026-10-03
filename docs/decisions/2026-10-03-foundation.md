@@ -4,7 +4,7 @@
 
 Applied（2026-10-03，按逐值裁决修订）。设计依据是根 [design.md](../../design.md)，值的定位按[逐值裁决第三、四节](2026-10-03-value-adjudication.md)。实现规则见 [STANDARDS.md](../../STANDARDS.md)。
 
-本文描述当前仓库的基础层与消费部位。现存组件为 Button、Input、Card、Popover、Field、Fieldset、Separator、Toast、Tooltip、ThemeProvider、MotionProvider，共 11 个文件；未重写组件已归档，不能把它们的旧用法写成当前事实。四个试点之外的保留实现仍有待重写的规则差异，下面逐项列明。
+本文描述当前仓库的基础层与消费部位。组件按分层和路线图逐批重写，当前完成情况从组件源与各批实施记录读取；未重写组件已归档，不能把旧用法写成当前事实，也不以浮动文件计数代替验收。
 
 | 定位 | 含义 |
 |---|---|
@@ -13,7 +13,7 @@ Applied（2026-10-03，按逐值裁决修订）。设计依据是根 [design.md]
 | **选择** | 在约束内选定的机制或取值，另一个满足条件的选择也可能成立 |
 | **预设** | 当前集中默认值，尚无关系能唯一决定；继承值也按此记录 |
 
-当前数值读取自 `packages/ui/tokens/*.css`、`theme.css`、`styles.css`、`utilities.css`、`motion.css` 与这 11 个组件。除另注明外，px 换算以根字号 16px 为基准；源码中的 rem 值仍随根字号变化。源码接线核对不等于浏览器验收，未实测的组合记为 `UNVERIFIED`，未运行的检查记为 `NOT_RUN`。
+当前数值读取自 `packages/ui/tokens/*.css`、`theme.css`、`styles.css`、`utilities.css`、`motion.css` 与当前已重写组件。除另注明外，px 换算以根字号 16px 为基准；源码中的 rem 值仍随根字号变化。源码接线核对不等于浏览器验收，未实测的组合记为 `UNVERIFIED`，未运行的检查记为 `NOT_RUN`。
 
 ## Context
 
@@ -140,9 +140,9 @@ neutral bordered 的 `--qy-button-bordered-border` 引用 `--qy-border-input`，
 | `--qy-surface-raised` | 临时浮起 | Popover、Tooltip、Toast |
 | `--qy-surface-subtle` | 从属区域底面 | 当前保留组件无直接消费 |
 | `--qy-surface-inset` | 内嵌区或轨道，不表示失败/禁用 | 深色 Input |
-| `--qy-overlay` | 阻断遮罩 | 当前无阻断组件消费 |
+| `--qy-overlay` | 阻断遮罩 | Dialog、AlertDialog、完整阻断 Drawer |
 
-浅色的 surface 与 raised 当前同为白色，深色分别以 background 的 98% / 94% 与白色混合；同色不抹掉角色差别。inset 是半透明层，不能当作最终背景色。Card 无默认内边距和标题槽，但仍默认同时挂面、线与 `shadow-panel`。该阴影的独立用途**未证，UNVERIFIED**；需有无阴影的真实组合比较，不能把默认存在当作必要性证据。
+浅色的 surface 与 raised 当前同为白色，深色分别以 background 的 98% / 94% 与白色混合；同色不抹掉角色差别。inset 是半透明层，不能当作最终背景色。Card 无默认内边距、标题槽或阴影，面与线保留当前对象身份。移除 shadow-panel 为主 agent 可逆默认选择，用户未作阴影偏好裁决；独立用途未证不能写成所有项目禁用阴影。
 
 所有阴影参数都是**预设**。当前 token 的真实值如下，括号为黑色 alpha：
 
@@ -154,7 +154,13 @@ neutral bordered 的 `--qy-button-bordered-border` 引用 `--qy-border-input`，
 | `--qy-shadow-raised` | `0 10px 32px -8px`（12%）+ `0 2px 6px`（5%） | 同几何（50% / 28%） |
 | `--qy-shadow-overlay` | `0 24px 64px -16px`（20%）+ `0 4px 12px`（6%） | 同几何（64% / 32%） |
 
-Card 消费 panel，Popover 消费 raised；其余阴影角色目前无组件直接消费。Tooltip 与 Toast 仍有局部阴影和伪元素高光，属于保留实现的**预设**，未完成本节的角色收敛，不能声称已统一。
+Popover / Tooltip / HoverCard 消费 raised，Dialog / AlertDialog / Drawer 消费 overlay；Card 不默认消费 panel。参数与选择仍为**预设**，共享角色不能代替真实组合的删去检验。
+
+### 浮层所属与开启顺序
+
+公开 `FloatingLayerScope active` 只接收真实 modal 开启事实；`useFloatingLayer(role)` 返回样式，供各自公开 Positioner、Backdrop 或 Viewport 合并。Portal 保留 React 所属上下文，不要求替换候选原语。调用方 style 和状态回调最后合并，可覆盖默认顺序，覆盖者须承担遮挡关系。
+
+`components.css` 集中预设 notification5、文档 popup10、modal30、开启序列步长10、surface偏移1、owned-popup偏移2。约束是所属候选高于父面、嵌套或后开启 modal 遮住旧面候选、通知低于候选和关键动作；具体整数不是唯一推导。仅客户端真实开启推进一个模块 serial，不订阅全局 manager；取消或受控拒绝不推进，关闭保留退出层，重新开启推进。嵌套初始同时展开在父更新后保持子序列更高，StrictMode 不重复抬升已有真实开启。
 
 ## 7. 颜色角色
 
@@ -191,7 +197,7 @@ Card 消费 panel，Popover 消费 raised；其余阴影角色目前无组件直
 | `metric` | 24px | 1.1；附带等宽数字 | 600 |
 | `micro` | 11px | 1.2 | 500 |
 
-每个文字档由自己的 size/leading/tracking/weight 四元组和 `theme.css` 映射共同定义。优先用完整语义类；只有确有不同职责时才覆写一项并说明。当前 Toast 标题仍单写 `font-medium`，不能宣称 11 个组件已全部收敛。
+每个文字档由自己的 size/leading/tracking/weight 四元组和 `theme.css` 映射共同定义。优先用完整语义类；只有确有不同职责时才覆写一项并说明。各组件的实际消费按当前源与对应批次核对。
 
 ### 五档控件文字
 
@@ -263,7 +269,7 @@ Toast 的 loading 默认 30000ms 后改成持续 unknown，保留原对象内容
 | `--qy-ease-spring` | `cubic-bezier(0.34, 1.3, 0.64, 1)` | 回弹预设；当前组件无直接消费 |
 | `--qy-stagger` | 40ms | 内容错峰预设 |
 
-**所有权选择**：Popover / Tooltip 的入退由 `motion.css` 拥有，组件提供位置、触发点与 slot，不另写入退参数。起止 `scale(0.98)` 与 `opacity(0)` 是继承的**预设**，迁入共享文件不改变来源。MotionProvider 在文档根记录键盘/指针方式；keyboard 下即时切换，reduce 下删除位移与缩放并保留可读状态。
+**所有权选择**：Popover / Tooltip / HoverCard 的入退由 `motion.css` 拥有，组件提供位置、触发点与 slot，不另写入退参数。起止 `scale(0.98)` 与 `opacity(0)` 是**预设**。Drawer 读取公开 swipe 位移和 snap offset，入退行程按自身完整边缘长度，时长读取 drawer/fast 角色；Accordion / Collapsible 不让隐藏语义等待淡出。MotionProvider 在文档根记录键盘/指针方式并清理监听；keyboard 下即时切换，reduce 删除入退位移与缩放，直接手势仍反映实际移动。状态不等待动画完成。
 
 当前 Toast 仍有局部入退、堆叠参数与 theme.css 的成功/错误动画，FieldError 也保留局部反馈。它们的数值是保留实现的**预设**；不能写成全部动效已经由一个文件接管。`motion.css` 中未归档的旧 slot 策略不证明相应组件仍存在。
 
@@ -312,7 +318,7 @@ compact 不改触摸目标或控件文字。组件尺寸在 640px 切换，页�
 | `--qy-button-bordered-border-focus` | 默认 `--qy-ring`；danger 局部为危险文字色 | **选择**：只改变已有边框颜色 |
 | inset 线的位置 | 贴着对象盒内侧，不参与布局 | **推导**：不能新增外围圈；具体 1/2px 宽度仍是选择 |
 | 强制颜色 fallback 的通道 | `styles.css` 统一恢复 CSS `outline` | **选择**：系统会移除 box-shadow，需要仍可绘制的焦点机制 |
-| 强制颜色 fallback 宽度 | `2px solid !important` | **选择**：可见回退宽度，不由 AA 唯一决定 |
+| 强制颜色 fallback 宽度 | `var(--qy-focus-ring-width) solid !important`，默认2px，quiet局部1px | **选择**：可见回退宽度，不由 AA 唯一决定；局部宽度与内缩一致防止外扩 |
 | 强制颜色 fallback 位置 | `outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important`，默认 −2px | **选择**：当前向内回退，服务于用户不外扩要求 |
 | 强制颜色 fallback 颜色 | 不自行指定，由系统色接管 | **选择**：保留系统控制；不能从默认主题色推断其对比 |
 | fallback 的优先级 | `!important` | **推导**：在当前层序中，base 普通声明不足以覆盖 utilities 的 outline-none |
@@ -377,7 +383,7 @@ Button 允许标签换行，Input 让实际文本占剩余宽度；必要对象�
 | 未消费角色 | row、部分 panel/section、marker/item、部分阴影与抽屉动效仍有定义；不声称它们已接管归档组件 |
 | `--qy-topbar-height` | 56px，≤767px 时 54px；现存组件无直接消费，不据此推导站点实高 |
 | 保留基础组件 | Field / Fieldset / Toast / Tooltip / Separator 仍有直接阶梯、局部值或高光；全部值按预设核对，不读取归档实现来补理由 |
-| 未验证决定 | Card 默认阴影独立用途、G9 项目声明协议、完整强制颜色矩阵为 `UNVERIFIED` |
+| 未验证决定 | Card 无默认阴影的实际视觉组合、G9 项目声明协议、完整强制颜色矩阵按实际证据分别验收 |
 
 ## Alternatives
 

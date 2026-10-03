@@ -1,0 +1,15 @@
+import type { ComponentMeta } from "@/lib/types";
+export default {
+  title: "路径 Breadcrumb", titleEn: "Breadcrumb", description: "父级链接与明确的当前位置。", descriptionEn: "Parent links and an explicit current location.",
+  category: "导航", layer: "pattern", source: "local", exports: ["Breadcrumb", "BreadcrumbList", "BreadcrumbItem", "BreadcrumbLink", "BreadcrumbCurrent", "BreadcrumbSeparator"],
+  decisions: "有序列表表达路径；Current 显式标记应用当前位置，分隔符不进入可访问名称。", decisionsEn: "An ordered list expresses the path; Current identifies the supplied location and separators are decorative.",
+  design: { methods: ["名实相符", "展开有据"], whenToUse: ["对象有明确父级路径，直达后仍需识别位置。"], avoid: ["平级目的地切换用 NavigationMenu 或普通导航链接，不虚构父级。"], stateOwner: { library: ["原生导航、列表、当前页语义与焦点。"], application: ["真实父级路径、当前位置及导航目标。"] }, responsive: ["长路径换行，保留完整位置名称。"] }, designEn: {"whenToUse":["An object has an actual parent path and direct arrivals need to identify their location."],"avoid":["Use NavigationMenu or ordinary links for peer destinations; do not invent parents."],"stateOwner":{"library":["Native navigation, lists, current-page semantics, and focus."],"application":["Actual parent paths, current location, and navigation targets."]},"responsive":["Long paths wrap while retaining full location names."]},
+  api: [
+    { name: "Breadcrumb", description: "有名称的 nav。", descriptionEn: "A named nav.", props: [{ name: "aria-label / render / ref / native props", type: "useRender.ComponentProps<nav>", description: "默认名称来自 locale，属性转发实际导航。", descriptionEn: "The default name is localized; props reach actual navigation." }] },
+    { name: "BreadcrumbList / BreadcrumbItem", description: "ol / li 保留路径顺序。", descriptionEn: "ol / li preserve ancestor order.", props: [{ name: "render / ref / native props", type: "useRender.ComponentProps<ol | li>", description: "替换元素须保留列表语义。", descriptionEn: "Rendered replacements must retain list semantics." }] },
+    { name: "BreadcrumbLink", description: "真实链接。", descriptionEn: "A real anchor.", props: [{ name: "href / render / ref / native props", type: "useRender.ComponentProps<a>", description: "导航目的、事件与 ref 属于实际链接。", descriptionEn: "Destination, events and ref belong to the actual link." }] },
+    { name: "BreadcrumbCurrent", description: "默认 span，aria-current=page。", descriptionEn: "A span with aria-current=page.", props: [{ name: "children / render / native props", type: "useRender.ComponentProps<span>", description: "需要当前页链接时可 render 为 a。", descriptionEn: "Render an anchor when the current location must remain a link." }] },
+    { name: "BreadcrumbSeparator", description: "装饰分隔符。", descriptionEn: "A decorative separator.", props: [{ name: "children / render / native props", type: "useRender.ComponentProps<span>", default: 'children="/"', description: "默认斜线是预设；只放在 li 内。", descriptionEn: "The slash is a preset; place it inside a li." }] },
+  ], keyboard: [{ keys: "Tab / Enter", description: "原生链接聚焦与导航。", descriptionEn: "Native link focus and navigation." }],
+  notes: ["不读取 URL、历史或自动创建父级；ol 直接子项必须是 li。"], notesEn: ["Does not read URLs or history or create ancestors; direct ol children must be li."],
+} satisfies ComponentMeta;

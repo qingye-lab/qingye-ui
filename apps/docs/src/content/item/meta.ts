@@ -1,0 +1,13 @@
+import type { ComponentMeta } from "@/lib/types";
+export default {
+  title: "条目 Item", titleEn: "Item", description: "内容、入口与附属动作的关系。", descriptionEn: "Content, navigation and related actions.",
+  category: "数据展示", layer: "pattern", source: "local", exports: ["Item", "ItemContent", "ItemTitle", "ItemDescription", "ItemActions", "ItemLink"],
+  decisions: "条目不内建业务对象。整体链接不包含其他交互动作；有附属动作时链接与按钮保持兄弟关系。", decisionsEn: "Items contain no built-in business objects. A whole-item link cannot contain interactive controls; separate links and buttons when secondary actions exist.",
+  design: { methods: ["名实相符", "相成相制"], whenToUse: ["一个通用条目需要名称、补充内容与相关动作。"], avoid: ["多维比较使用 Table；不为没有目的的条目生成链接。"], stateOwner: { library: ["条目关系、render 转发与焦点。"], application: ["条目内容、真实导航目标与操作状态。"] }, responsive: ["正文可换行，附属动作保留容量。"] }, designEn: {"whenToUse":["A general item needs a name, supplementary content, and related actions."],"avoid":["Use Table for multidimensional comparison; do not create links without an actual destination."],"stateOwner":{"library":["Item relationships, render forwarding, and focus."],"application":["Item content, actual navigation targets, and action states."]},"responsive":["Body text wraps while adjunct actions retain capacity."]},
+  api: [
+    { name: "Item", description: "默认 div，可 render 为 li 或独立 a。", descriptionEn: "A div that may render a li or standalone anchor.", props: [{ name: "render / ref / children / native props", type: "useRender.ComponentProps<div>", description: "实际元素接收事件与 ref；列表中显式 render 为 li。", descriptionEn: "Events and ref reach the actual element; explicitly render li inside a list." }] },
+    { name: "ItemContent / ItemTitle / ItemDescription / ItemActions", description: "div / div / p / div 关系槽。", descriptionEn: "div / div / p / div relationship slots.", props: [{ name: "children / render / ref / native props", type: "useRender.ComponentProps<div | p>", description: "标题不是默认章节标题；动作组合公共 Button。", descriptionEn: "The title is not automatically a document heading; compose public Button actions." }] },
+    { name: "ItemLink", description: "真实导航链接。", descriptionEn: "A real navigation link.", props: [{ name: "href / render / ref / native props", type: "useRender.ComponentProps<a>", description: "保留目标、ARIA 和消费者事件。", descriptionEn: "Preserve destinations, ARIA and caller events." }] },
+  ], keyboard: [{ keys: "Tab / Enter", description: "实际链接与按钮沿用原生顺序。", descriptionEn: "Actual links and buttons use native focus order." }],
+  notes: ["不在 a 中嵌套按钮、链接或其他交互控件；无需动作时不生成假入口。"], notesEn: ["Never nest buttons, links or interactive controls inside an anchor; absent actions generate no fake entry."],
+} satisfies ComponentMeta;

@@ -36,3 +36,12 @@ test("removes the attribute on unmount, or restores a previous value", () => {
   second.unmount();
   expect(root).toHaveAttribute("data-ui-input", "keyboard");
 });
+
+test("B8 removed modality listeners do not change the restored document state", () => {
+  root.setAttribute("data-ui-input", "keyboard");
+  const { unmount } = render(<MotionProvider>内容</MotionProvider>);
+  unmount();
+  fireEvent.pointerDown(document.body);
+  fireEvent.pointerMove(document.body);
+  expect(root).toHaveAttribute("data-ui-input", "keyboard");
+});

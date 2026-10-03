@@ -23,7 +23,7 @@ export default {
     },
     responsive: ["xs/sm/md/lg/xl 消费基础层档案；窄屏增加 4px，粗指针编辑区至少 44px。"],
     customization: ["className、style、render 与 ref 属于真实 input；controlClassName 属于编辑边界。"],
-  },
+  }, designEn: {"whenToUse":["Enter one text value with a matching native type; composition owns search results and submission."],"avoid":["Placeholders replacing names; timeouts treated as invalid; unknown converted to empty or zero; drafts cleared after validation failure."],"composition":["Keep FieldLabel, FieldDescription, and FieldError together; InputGroup supplies extra units, markers, and actions."],"stateOwner":{"library":["Native input, Field associations, focus, clearing, and password visibility."],"application":["Value meaning, validation facts, candidate scope, unknown/not-applicable values, and delivery outcomes."]},"responsive":["xs/sm/md/lg/xl use foundation profiles; narrow heights add 4px and coarse-pointer editing areas are at least 44px."],"customization":["className, style, render, and refs belong to the actual input; controlClassName belongs to its editing boundary."]},
   api: [{
     name: "Input",
     description: "真实边框界定编辑区；Base UI Input 保留 Field 注册和原生属性。",
@@ -31,7 +31,7 @@ export default {
     props: [
       { name: "type", type: "React.HTMLInputTypeAttribute", default: '"text"', description: "search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。", descriptionEn: "search adds a search marker and clearing; password adds visibility. Neither supplies a field name or placeholder." },
       { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl" | number', default: '"md"', description: "位置对应的几何与控件文字档；数字保留原生 size 的字符宽度含义。", descriptionEn: "Geometry and control text profile for the location. A number retains native size semantics." },
-      { name: "value / defaultValue / onValueChange", type: "原生值 / 初始值 / (value, details) => void", description: "支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。", descriptionEn: "Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path." },
+      { name: "value / defaultValue / onValueChange", type: "原生值 / 初始值 / (value, details) => void", typeEn: "Native value / initial value / (value, details) => void", description: "支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。", descriptionEn: "Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path." },
       { name: "clearable / clearLabel / onClear", type: "boolean / string / () => void", default: "type === search", description: "非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。", descriptionEn: "Clear a nonempty editable value and return focus to the input. Hidden when disabled or read only." },
       { name: "visibilityToggle", type: "boolean", default: "type === password", description: "password 的可选附属动作，不更改内容或提交表单。", descriptionEn: "Optional password adjunct that preserves the value and does not submit a form." },
       { name: "visible / defaultVisible / onVisibleChange", type: "boolean / boolean / (visible) => void", default: "defaultVisible: false", description: "独立支持受控与非受控可见性。", descriptionEn: "Controlled or uncontrolled password visibility." },
