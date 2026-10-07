@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: e8acd2b60038a7cedd170011947140d6c70ae2d18802618942946b782b43ceda
+Source SHA-256: b51acf251a0804792370d6cad9330c80faa37a60a64d93842eab229e62334551
 
 Give an input and its markers, units or actions one editing boundary.
 
@@ -17,14 +17,14 @@ InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focu
 ## Use and ownership
 - An input shares one editing scope with units, markers, or adjunct actions.
 - Avoid: Unrelated actions attached to an input; naming the input through an adjunct or placeholder alone.
-- Library: Shared boundary, five size profiles, and Input's native interaction.
+- Library: Shared boundary, geometry wiring, and Input's native interaction.
 - Application: Input values, adjunct actions, names, and validation facts.
 
 ## Composition
 - FieldLabel names the input; aria-describedby explicitly associates necessary adjunct explanations. Existing search/password forms use Input directly.
 
 ## Responsive behavior
-- Input takes remaining width; matching text/control profiles determine dimensions while coarse-pointer targets remain separate.
+- Input takes remaining width; boundary and inner Input share one geometry following the density axis, while coarse-pointer targets remain separate.
 
 ## Customization
 - Root styles own the shared boundary. Input className/style/render/refs own the actual input; adjuncts have independent render.
@@ -47,7 +47,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Curated API
 ### InputGroup
 A shared editing boundary with no extra field role.
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". One profile for the outer boundary and inner Input; values are foundation presets.
 - render / ref / native props: useRender.ComponentProps<div>. Composition props for the common boundary.
 
 ### InputGroupInput

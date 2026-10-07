@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
-Source SHA-256: 8e6f73b918b19e37f9cf1153ea932f64151eda8ece2cd70fa46f86a14f6c2bad
+Source SHA-256: 642be77029202e1a51b8583d9d89ca5048613a7fcace731d7af08b3db529529e
 
 名称和值的原生关系。
 
@@ -69,8 +69,17 @@ Source: apps/docs/src/content/description-list/demos/01-values.tsx
 ```tsx
 import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye/ui/components/description-list";
 import type { DemoMeta } from "@/lib/types";
+
 export const meta = { title: "值与未知", titleEn: "Values and uncertainty" } satisfies DemoMeta;
+
 export default function Demo() {
-  return <DescriptionList><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>数量</DescriptionListTerm><DescriptionListDetail>{0}</DescriptionListDetail></DescriptionListItem><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>宽度</DescriptionListTerm><DescriptionListDetail>未知</DescriptionListDetail></DescriptionListItem><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>名称</DescriptionListTerm><DescriptionListDetail>一段更长的名称，保留完整内容与原生名称值关系</DescriptionListDetail></DescriptionListItem></DescriptionList>;
+  // 名称按内容宽度成列，多行共用同一条值的起始线；窄屏自动回到名称在上。
+  // 演示只给名称与值，不编造业务流程（值可以是 0，也可以是「未知」）。
+  return <DescriptionList className="max-w-md">
+    <DescriptionListItem><DescriptionListTerm>名称</DescriptionListTerm><DescriptionListDetail>接入与设备</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>记录数</DescriptionListTerm><DescriptionListDetail className="numeric">{0}</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>最近同步</DescriptionListTerm><DescriptionListDetail>未知</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>保留策略</DescriptionListTerm><DescriptionListDetail>滚动保留最近 90 天，更早的记录按周归档</DescriptionListDetail></DescriptionListItem>
+  </DescriptionList>;
 }
 ```

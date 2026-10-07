@@ -258,6 +258,41 @@
   }
 }
 
+/* Indeterminate progress: one band travelling across its track. The band is a
+ * fifth of the track — narrow enough that it does not read as a determinate
+ * fraction, wide enough to stay visible at 8px tall. A determinate bar is
+ * anchored to the track's start; this one roams, and that is the whole
+ * difference between "unknown fraction" and "this much done". The animation is
+ * owned here rather than by a component class list, so reduced motion can settle
+ * it in one place (see section 4). */
+@keyframes qy-progress-slide {
+  from {
+    translate: -100% 0;
+  }
+  to {
+    translate: 500% 0;
+  }
+}
+
+[data-slot="progress-indicator"].qy-progress-indeterminate {
+  width: 20%;
+  animation: qy-progress-slide 1.5s var(--qy-ease-in-out) infinite;
+}
+
+/* RTL: the band travels the other way, matching reading direction. */
+[dir="rtl"] [data-slot="progress-indicator"].qy-progress-indeterminate {
+  animation-name: qy-progress-slide-rtl;
+}
+
+@keyframes qy-progress-slide-rtl {
+  from {
+    translate: 100% 0;
+  }
+  to {
+    translate: -500% 0;
+  }
+}
+
 @keyframes qy-rise-in {
   from {
     opacity: 0;
@@ -342,6 +377,15 @@
   [data-slot="toast-root"],
   [data-slot="otp-field-caret"] {
     animation: none !important;
+  }
+
+  /* Indeterminate progress settles into a fixed band. The movement is what
+   * reduced motion removes; the band itself is information — it says "a track
+   * exists and something is in flight" — so it stays, centred, like a determinate
+   * bar with an unknown fraction. */
+  [data-slot="progress-indicator"].qy-progress-indeterminate {
+    animation: none !important;
+    translate: 100% 0;
   }
 
   [data-motion] {

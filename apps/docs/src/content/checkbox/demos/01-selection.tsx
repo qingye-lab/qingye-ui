@@ -10,7 +10,7 @@ export default function Demo() {
   const [second, setSecond] = useState(false);
   return (
     <Fieldset>
-      <FieldsetLegend>选项</FieldsetLegend>
+      <FieldsetLegend>通知范围</FieldsetLegend>
       <Field orientation="horizontal">
         <Checkbox checked={first && second} indeterminate={first !== second} onCheckedChange={(checked) => { setFirst(checked); setSecond(checked); }} />
         <FieldLabel>全选</FieldLabel>

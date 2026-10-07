@@ -8,7 +8,8 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Button } from "./button";
-import { Input, type InputProps, type InputSize } from "./input";
+import { Input, type InputProps } from "./input";
+import { InputGroup } from "./input-group";
 
 export type TagInputChangeDetails = {
   reason: "add" | "remove";
@@ -26,20 +27,14 @@ export type TagInputProps = Omit<useRender.ComponentProps<"div">, "defaultValue"
   onDraftChange?: (draft: string) => void;
   name?: string;
   form?: string;
-  size?: InputSize;
   disabled?: boolean;
   readOnly?: boolean;
   /** FieldLabel 注册真实草稿入口；额外属性、render 与 ref 也属于该入口。 */
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "name" | "size">;
 };
 
-const textProfiles: Record<InputSize, string> = {
-  xs: "text-control-xs-mobile sm:text-control-xs",
-  sm: "text-control-sm-mobile sm:text-control-sm",
-  md: "text-control-md-mobile sm:text-control-md",
-  lg: "text-control-lg-mobile sm:text-control-lg",
-  xl: "text-control-xl-mobile sm:text-control-xl",
-};
+// 标签文字比控件低一档：标签是边界内的从属对象，与 md 标签高度取 xs 控件外高同一关系。
+const chipText = "text-control-md-mobile sm:text-control-md";
 
 // Field still registers the editing entrance; only confirmed hidden inputs own submission names.
 function DraftInputSurface({ elementProps, state, render }: { elementProps: React.ComponentPropsWithRef<"input">; state: InputPrimitive.State; render: InputProps["render"] }) {
@@ -49,7 +44,7 @@ function DraftInputSurface({ elementProps, state, render }: { elementProps: Reac
 /** 已确认集合与草稿分开；受控添加尚未接受时不清除草稿。 */
 export function TagInput({
   value: valueProp, defaultValue = [], onValueChange, draft: draftProp, defaultDraft = "", onDraftChange,
-  name, form, size = "md", disabled = false, readOnly = false, inputProps = {},
+  name, form, disabled = false, readOnly = false, inputProps = {},
   className, render, ref, ...props
 }: TagInputProps) {
   const { messages } = useUILocale();
@@ -142,31 +137,44 @@ export function TagInput({
     } else if (inputExternalRef) inputExternalRef.current = node;
   }, [inputExternalRef]);
 
+  // 基础层 §4、§6（2026-10-04 打磨）：已确认的标签、草稿与添加动作共用一条可换行的编辑边界。
+  // 内缩由「标签高 = xs 控件外高」推出（(32 − 2 − 24) / 2 = 3px 默认档）；标签高、圆角按同心换算。
+  // 几何改读填值控件角色层（用户裁决 2026-10-05）：紧凑密度收紧边界时，标签随之收窄，文字不变。
+  const chipFrame = {
+    "--qy-tag-inset": "calc((var(--qy-fill-height) - 2px - var(--qy-control-xs)) / 2)",
+    "--qy-tag-chip": "calc(var(--qy-fill-height) - 2px - 2 * var(--qy-tag-inset))",
+    "--qy-tag-radius": "max(0px, calc(var(--qy-fill-radius) - 1px - var(--qy-tag-inset)))",
+    "--qy-tag-padding": "calc(var(--qy-fill-padding) - var(--qy-tag-inset))",
+  } as React.CSSProperties;
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
     "data-slot": "tag-input",
     "data-disabled": blocked.disabled ? "" : undefined,
     "data-readonly": blocked.readOnly ? "" : undefined,
-    style: { "--qy-tag-padding": `var(--qy-control-${size}-padding)` } as React.CSSProperties,
+    style: chipFrame,
   }, props, {
     className: cn("flex min-w-0 flex-col gap-(--qy-field-gap)", className),
     children: <>
-      {value.length > 0 && <ul data-slot="tag-input-items" className="flex min-w-0 flex-wrap gap-(--qy-action-gap)">
-        {value.map((tag, index) => <li key={`${index}:${tag}`} data-slot="tag-input-item" className="flex min-w-0 max-w-full items-center gap-(--qy-space-1) rounded-item bg-surface-inset ps-(--qy-tag-padding) text-foreground">
-          <span data-slot="tag-input-value" className={cn("min-w-0 wrap-break-word", textProfiles[size])}>{tag}</span>
-          {!blocked.readOnly && <Button ref={node => { removeRefs.current[index] = node; }} data-slot="tag-input-remove" size={size} variant="quiet" shape="icon" type="button" disabled={blocked.disabled} className="pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target)"
-            aria-label={messages.removeTag(tag)} onClick={event => remove(index, event)}
-            onKeyDown={event => {
-              if (event.defaultPrevented || event.nativeEvent.isComposing || event.keyCode === 229) return;
-              if (event.key === "Backspace" || event.key === "Delete") { event.preventDefault(); remove(index, event); }
-              else if (event.key === "ArrowLeft") { event.preventDefault(); (removeRefs.current[index - 1] ?? inputRef.current)?.focus(); }
-              else if (event.key === "ArrowRight") { event.preventDefault(); (removeRefs.current[index + 1] ?? inputRef.current)?.focus(); }
-            }}
-          ><XIcon aria-hidden="true" /></Button>}
-        </li>)}
-      </ul>}
-      <div data-slot="tag-input-editor" className="flex min-w-0 items-start gap-(--qy-action-gap)">
-        <Input {...nativeInputProps} ref={setInputRef} size={size} value={draft} form={form} disabled={disabled || nativeInputProps.disabled} readOnly={readOnly || nativeInputProps.readOnly}
-          controlClassName={cn("min-w-0 flex-1", controlClassName)}
+      <InputGroup data-slot="tag-input-control" data-readonly={blocked.readOnly ? "" : undefined} className="items-center gap-(--qy-tag-inset) p-(--qy-tag-inset)">
+        {value.length > 0 && <ul data-slot="tag-input-items" className="flex min-w-0 max-w-full flex-wrap gap-(--qy-tag-inset)">
+          {value.map((tag, index) => <li key={`${index}:${tag}`} data-slot="tag-input-item" className="flex h-(--qy-tag-chip) min-w-0 max-w-full items-center rounded-(--qy-tag-radius) bg-accent ps-(--qy-tag-padding) text-foreground data-[readonly]:pe-(--qy-tag-padding)" data-readonly={blocked.readOnly ? "" : undefined}>
+            <span data-slot="tag-input-value" className={cn("min-w-0 truncate", chipText)}>{tag}</span>
+            {!blocked.readOnly && <Button ref={node => { removeRefs.current[index] = node; }} data-slot="tag-input-remove" size="xs" variant="quiet" shape="icon" type="button" disabled={blocked.disabled}
+              className="size-(--qy-tag-chip) min-h-0 rounded-(--qy-tag-radius) text-muted-foreground hover:text-foreground sm:size-(--qy-tag-chip) sm:min-h-0 [&_svg]:size-[1em] sm:[&_svg]:size-[1em]"
+              aria-label={messages.removeTag(tag)} onClick={event => remove(index, event)}
+              onKeyDown={event => {
+                if (event.defaultPrevented || event.nativeEvent.isComposing || event.keyCode === 229) return;
+                if (event.key === "Backspace" || event.key === "Delete") { event.preventDefault(); remove(index, event); }
+                else if (event.key === "ArrowLeft") { event.preventDefault(); (removeRefs.current[index - 1] ?? inputRef.current)?.focus(); }
+                else if (event.key === "ArrowRight") { event.preventDefault(); (removeRefs.current[index + 1] ?? inputRef.current)?.focus(); }
+              }}
+            ><XIcon aria-hidden="true" /></Button>}
+          </li>)}
+        </ul>}
+        {/* 草稿与添加动作成对换行：添加只作用于草稿，二者分到两行时动作失去对象。 */}
+        <div data-slot="tag-input-editor" className="flex min-w-[min(100%,10em)] flex-1 items-center gap-(--qy-tag-inset)">
+        <Input {...nativeInputProps} ref={setInputRef} value={draft} form={form} disabled={disabled || nativeInputProps.disabled} readOnly={readOnly || nativeInputProps.readOnly} unstyled
+          controlClassName={cn("min-h-(--qy-tag-chip) min-w-0 flex-1 sm:min-h-(--qy-tag-chip) pointer-coarse:min-h-(--qy-tag-chip)", controlClassName)}
+          className="px-(--qy-tag-padding)"
           render={(elementProps, state) => <DraftInputSurface elementProps={elementProps} state={state} render={inputRender} />}
           aria-describedby={[describedBy, feedback ? feedbackId : undefined].filter(Boolean).join(" ") || undefined}
           onChange={event => {
@@ -188,8 +196,10 @@ export function TagInput({
             }
           }}
         />
-        {!blocked.readOnly && <Button data-slot="tag-input-add" variant="bordered" size={size} type="button" disabled={blocked.disabled} onClick={add} className="shrink-0 whitespace-nowrap [&_[data-slot=button-content]]:whitespace-nowrap pointer-coarse:min-h-(--qy-touch-target)">{messages.addTag}</Button>}
-      </div>
+        {!blocked.readOnly && <Button data-slot="tag-input-add" variant="quiet" type="button" disabled={blocked.disabled} onClick={add}
+          className={cn("h-(--qy-tag-chip) min-h-0 shrink-0 whitespace-nowrap rounded-(--qy-tag-radius) px-(--qy-tag-padding) text-muted-foreground hover:text-foreground sm:min-h-0 [&_[data-slot=button-content]]:whitespace-nowrap", chipText)}>{messages.addTag}</Button>}
+        </div>
+      </InputGroup>
       {feedback && <div id={feedbackId} data-slot="tag-input-feedback" role="status" className="text-support-mobile text-muted-foreground sm:text-support">{feedback}</div>}
       {name && value.map((tag, index) => <input key={index} type="hidden" name={name} value={tag} form={form} disabled={blocked.disabled} />)}
     </>,

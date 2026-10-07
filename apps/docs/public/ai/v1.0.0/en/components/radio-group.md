@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: daeeb0c15d39c4ba850fd2d6e5e9dba613e835d4776d44f7b7dc33ab78bf1a71
+Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
 
 Choose one value from a small set of visible options.
 
@@ -40,7 +40,6 @@ Use RadioGroup when candidates must be compared together, and Select when they c
 - RadioGroupProps: type; owner radio-group; PASS
 - RadioPrimitive: reexport; owner radio-group; UNVERIFIED
 - RadioProps: type; owner radio-group; PASS
-- RadioSize: type; owner radio-group; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -62,7 +61,6 @@ Shared state and group semantics for visible mutually exclusive candidates.
 ### Radio
 Circular single-choice entry with a central selected dot.
 - value: Value. A unique candidate value; empty string, zero, and null/no selection differ.
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". Circle diameter reads matching text line height; touch-target separately supplies its hit area.
 - disabled / readOnly / required: boolean. Primitive group/item limits are actual restrictions, including propagated Field disabled.
 - render / nativeButton / ref / inputRef: Base UI composition. Defaults to native button while retaining a hidden radio input. Set nativeButton=false for another element.
 - children / className / style: ReactNode / Base UI state callbacks. Replace the indicator or override styles; FieldLabel supplies the name.
@@ -76,42 +74,38 @@ Public Base UI group and Radio primitives.
 - Space: Select the current candidate. Home/End and typeahead are outside this Radio primitive contract.
 
 ## Source examples
-### 尺寸
-Source: apps/docs/src/content/radio-group/demos/01-sizes.tsx
+### 跟随标签
+Source: apps/docs/src/content/radio-group/demos/01-labels.tsx
 ```tsx
 import { useId } from "react";
 import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio, type RadioSize } from "@qingye/ui/components/radio-group";
+import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
-const sizes: RadioSize[] = ["xs", "sm", "md", "lg", "xl"];
-const textClasses: Record<RadioSize, string> = {
-  xs: "text-control-xs", sm: "text-control-sm", md: "text-control-md", lg: "text-control-lg", xl: "text-control-xl",
-};
 const options = [
   { value: "left", label: "左对齐" },
   { value: "center", label: "居中" },
   { value: "right", label: "右对齐" },
 ];
 
+// 单选标记只有一种几何，跟随它那一项标签的文字档（用户裁决 2026-10-05）。
 export default function Demo() {
   const id = useId();
   return (
-    <FieldGroup className="grid w-full grid-cols-5 items-start">
-      {sizes.map(size => (
-        <Field key={size}>
-          <FieldTitle id={`${id}-${size}`}>{size}</FieldTitle>
-          <RadioGroup aria-labelledby={`${id}-${size}`} defaultValue="center">
-            {options.map(option => (
-              <FieldItem key={option.value}>
-                <Radio value={option.value} size={size} />
-                <FieldLabel className={textClasses[size]}>{option.label}</FieldLabel>
-              </FieldItem>
-            ))}
-          </RadioGroup>
-        </Field>
-      ))}
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      <Field>
+        <FieldTitle id={`${id}-body`}>正文标签</FieldTitle>
+        <RadioGroup aria-labelledby={`${id}-body`} defaultValue="center">
+          {options.map(option => <FieldItem key={option.value}><Radio value={option.value} /><FieldLabel>{option.label}</FieldLabel></FieldItem>)}
+        </RadioGroup>
+      </Field>
+      <Field>
+        <FieldTitle id={`${id}-support`}>紧凑标签</FieldTitle>
+        <RadioGroup aria-labelledby={`${id}-support`} defaultValue="center">
+          {options.map(option => <FieldItem key={option.value}><Radio value={option.value} /><FieldLabel className="text-support">{option.label}</FieldLabel></FieldItem>)}
+        </RadioGroup>
+      </Field>
     </FieldGroup>
   );
 }

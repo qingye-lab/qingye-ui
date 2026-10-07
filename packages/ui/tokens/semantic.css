@@ -1,61 +1,61 @@
 /*
- * Layer 2 — semantic tokens.
+ * Layer 2 — 墨与纸：语义角色。
  *
- * Roles the interface talks about. Components reference only this layer (via
- * the Tailwind mapping in theme.css), so light and dark are the same names with
- * different bindings.
+ * 墨分五色（design.md「表达九法」；基础层 §7）。张彦远：「运墨而五色具。」
+ * 界面的层级由一条有限的墨阶承担，文字、线与承载面都从这里取色，墨阶外不另造灰：
  *
- * Neutrals are deliberately translucent. Required control boundaries carry
- * enough contrast; quiet separators and surface fills have separate roles.
- * Their contrast is checked over the actual supported surface composites. The
- * surface tones and elevations keep a clear page → panel → floating control
- * hierarchy without tinting every component with the brand colour.
+ *   焦 88%   正文与标题、实心填充、焦点线
+ *   浓 66%   辅助文字：在最深的叠层（清墨面上的淡染）上仍保持 4.5:1 的最淡一级（约束推导，下限约 65%）
+ *   重 50%   必要的控件边界：输入框、bordered 按钮、未选中的标记
+ *   淡 24%   读数的凹槽：进度、计量、滑块轨道
+ *   清  8%   容器线；彩色的柔底
+ *
+ * 染：面的浓度取同级线的一半——同样的墨，薄薄一层面看上去与一道细线一样淡。
+ *   清染 4%  内嵌承载面、悬停、页面底纸
+ *   淡染 12% 按下
+ *
+ * 字与实心与纸调和成不透明色：它们的对比不能随下面的叠层漂移。
+ * 线与染保持透明：叠在任何纸上，读出来是同一级墨。
+ * 浅色主题的墨是黑、纸是白；深色主题的墨是白、纸是深灰。阶的比例两边相同。
+ *
+ * 彩色随类赋彩：只表达危险、警示、成功、信息与数据系列。默认主题没有品牌强调色，
+ * 强调就是焦墨；品牌在 html[data-brand] 上覆写 --qy-primary，用法如一方印，少而明确。
  */
 @layer base {
   :root,
   .light,
+  .dark,
+  [data-theme] {
+    --qy-ink-jiao: 88%;
+    --qy-ink-nong: 66%;
+    --qy-ink-zhong: 50%;
+    --qy-ink-dan: 24%;
+    --qy-ink-qing: 8%;
+    --qy-wash-qing: calc(var(--qy-ink-qing) / 2);
+    --qy-wash-dan: calc(var(--qy-ink-dan) / 2);
+  }
+
+  :root,
+  .light,
   [data-theme="light"] {
     color-scheme: light;
+    --qy-ink: var(--qy-black);
+    --qy-paper: var(--qy-white);
 
-    /*
-     * The page carries a quiet neutral tint while panels stay white. The
-     * difference remains visible in an actual product layout, including when
-     * a consumer removes a card's elevation.
-     */
-    --qy-background: color-mix(in srgb, var(--qy-white) 96.5%, var(--qy-neutral-950));
-    --qy-foreground: var(--qy-neutral-950);
+    /* 纸：面板是纸本色；页面底纸上一层清染，去掉卡片阴影后面板与页面仍分得开。 */
+    --qy-surface: var(--qy-paper);
+    --qy-surface-raised: var(--qy-paper);
+    --qy-background: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), var(--qy-paper));
 
-    /* Surfaces, from the page outward. */
-    --qy-surface: var(--qy-white);
-    --qy-surface-raised: var(--qy-white);
-    --qy-surface-subtle: var(--qy-neutral-50);
-    --qy-surface-inset: oklch(0 0 0 / 0.045);
-    --qy-surface-hover: oklch(0 0 0 / 0.065);
-    --qy-surface-active: oklch(0 0 0 / 0.1);
+    /* 遮罩与阴影是影，不是墨：它们表达「在上面」，按预设取值。 */
     --qy-overlay: oklch(0 0 0 / 0.32);
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px -8px oklch(0 0 0 / 0.12);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.06), 0 2px 4px -2px oklch(0 0 0 / 0.06);
+    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.045);
+    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
+    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
 
-    /* Text, strongest to weakest. */
-    --qy-foreground-strong: var(--qy-neutral-950);
-    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-500) 72%, var(--qy-black));
-    /* Include inset/hover/active layers, not just the unpainted page. */
-    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 96%, transparent);
-    --qy-foreground-inverse: var(--qy-neutral-50);
-
-    /* Lines. */
-    --qy-border: oklch(0 0 0 / 0.08);
-    --qy-border-subtle: oklch(0 0 0 / 0.06);
-    --qy-border-strong: oklch(0 0 0 / 0.54);
-    --qy-border-input: oklch(0 0 0 / 0.5);
-    /* Keep the default 50%-alpha outline above 3:1 on the page and panels. */
-    --qy-ring: var(--qy-neutral-800);
-
-    /* Emphasis. */
-    --qy-primary: var(--qy-neutral-800);
-    --qy-primary-foreground: var(--qy-neutral-50);
-    --qy-accent: oklch(0 0 0 / 0.05);
-    --qy-accent-foreground: var(--qy-foreground);
-
-    /* Status: solid marks the state, foreground is readable text on the page. */
+    /* 状态色（随类赋彩）：标记色 / 纸上可读的文字色 / 实心填充与其前景。预设。 */
     --qy-danger: var(--qy-red-500);
     --qy-danger-foreground: var(--qy-red-700);
     --qy-danger-fill: var(--qy-red-700);
@@ -67,65 +67,33 @@
     --qy-info: var(--qy-blue-500);
     --qy-info-foreground: var(--qy-blue-700);
 
-    /* Categorical series, ordered so neighbours stay distinguishable. */
-    --qy-chart-1: var(--qy-blue-500);
-    --qy-chart-2: var(--qy-emerald-700);
-    --qy-chart-3: var(--qy-amber-700);
-    --qy-chart-4: var(--qy-violet-500);
-    --qy-chart-5: var(--qy-rose-500);
-
-    --qy-code: var(--qy-white);
-    --qy-code-highlight: oklch(0 0 0 / 0.04);
-
-    --qy-sidebar: var(--qy-neutral-50);
-    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-foreground) 64%, var(--qy-sidebar));
-    --qy-sidebar-border: oklch(0 0 0 / 0.06);
-    --qy-sidebar-accent: oklch(0 0 0 / 0.04);
-    --qy-sidebar-accent-foreground: var(--qy-foreground);
-    --qy-sidebar-primary: var(--qy-foreground);
-    --qy-sidebar-primary-foreground: var(--qy-neutral-0, var(--qy-white));
-    --qy-sidebar-ring: var(--qy-ring);
-
-    /* A close contact shadow anchors the surface; the soft tail stays faint. */
-    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px -8px oklch(0 0 0 / 0.12);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.06), 0 2px 4px -2px oklch(0 0 0 / 0.06);
-    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.045);
-    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
-    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
+    /* 数据系列（随类赋彩）：两个以上系列才取色，单一系列用焦墨。
+     * 顺序本身是色觉安全的机制：按 dataviz 校验器，相邻两色在三类色觉缺陷下 ΔE ≥ 15、
+     * 正常色觉 ≥ 30，五色对白纸均 ≥ 3:1；前三色两两之间也通过（散点等全比较形式以三色为限）。
+     * 不复用状态色的 token：同一页上「系列 2」与「成功」不能是同一个色。 */
+    --qy-chart-1: var(--qy-huaqing-500);
+    --qy-chart-2: var(--qy-zheshi-500);
+    --qy-chart-3: var(--qy-shilv-500);
+    --qy-chart-4: var(--qy-tenghuang-500);
+    --qy-chart-5: var(--qy-yanzhi-500);
   }
 
   .dark,
   [data-theme="dark"] {
     color-scheme: dark;
-
+    --qy-ink: var(--qy-white);
+    /* 深色的纸：页面最深，面板与浮层逐级提亮。预设。 */
     --qy-background: color-mix(in srgb, var(--qy-neutral-950) 95%, var(--qy-white));
-    --qy-foreground: var(--qy-neutral-100);
-
-    --qy-surface: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-paper: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
+    --qy-surface: var(--qy-paper);
     --qy-surface-raised: color-mix(in srgb, var(--qy-background) 94%, var(--qy-white));
-    --qy-surface-subtle: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
-    --qy-surface-inset: oklch(1 0 0 / 0.04);
-    --qy-surface-hover: oklch(1 0 0 / 0.07);
-    --qy-surface-active: oklch(1 0 0 / 0.11);
+
     --qy-overlay: oklch(0 0 0 / 0.56);
-
-    --qy-foreground-strong: var(--qy-white);
-    --qy-foreground-muted: color-mix(in srgb, var(--qy-neutral-400) 80%, var(--qy-white));
-    /* Keep the alpha variant readable over raised, inset and active layers. */
-    --qy-foreground-subtle: color-mix(in srgb, var(--qy-foreground-muted) 96%, transparent);
-    --qy-foreground-inverse: var(--qy-neutral-800);
-
-    --qy-border: oklch(1 0 0 / 0.06);
-    --qy-border-subtle: oklch(1 0 0 / 0.05);
-    --qy-border-strong: oklch(1 0 0 / 0.5);
-    --qy-border-input: oklch(1 0 0 / 0.44);
-    /* Pair with the light ring; the default 50%-alpha outline stays visible. */
-    --qy-ring: var(--qy-neutral-300);
-
-    --qy-primary: var(--qy-neutral-100);
-    --qy-primary-foreground: var(--qy-neutral-800);
-    --qy-accent: oklch(1 0 0 / 0.055);
-    --qy-accent-foreground: var(--qy-neutral-100);
+    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
+    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.24);
+    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.2);
+    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.28);
+    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.64), 0 4px 12px oklch(0 0 0 / 0.32);
 
     --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
     --qy-danger-foreground: color-mix(in srgb, var(--qy-red-400) 90%, var(--qy-white));
@@ -138,42 +106,77 @@
     --qy-info: var(--qy-blue-500);
     --qy-info-foreground: var(--qy-blue-400);
 
-    --qy-chart-1: var(--qy-blue-400);
-    --qy-chart-2: var(--qy-emerald-400);
-    --qy-chart-3: var(--qy-amber-400);
-    --qy-chart-4: var(--qy-violet-400);
-    --qy-chart-5: var(--qy-rose-400);
-
-    --qy-code: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
-    --qy-code-highlight: oklch(1 0 0 / 0.04);
-
-    --qy-sidebar: color-mix(in srgb, var(--qy-neutral-950) 97%, var(--qy-white));
-    --qy-sidebar-foreground: color-mix(in srgb, var(--qy-foreground) 64%, var(--qy-sidebar));
-    --qy-sidebar-border: oklch(1 0 0 / 0.05);
-    --qy-sidebar-accent: oklch(1 0 0 / 0.04);
-    --qy-sidebar-accent-foreground: var(--qy-neutral-100);
-    --qy-sidebar-primary: var(--qy-neutral-100);
-    --qy-sidebar-primary-foreground: var(--qy-neutral-800);
-    --qy-sidebar-ring: var(--qy-ring);
-
-    --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.24);
-    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.2);
-    --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.28);
-    --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.64), 0 4px 12px oklch(0 0 0 / 0.32);
+    /* 深色另行选定并校验（对深纸均 ≥ 3:1）：紫 600 在深纸上只有 2.99:1，改用紫 500。 */
+    --qy-chart-1: var(--qy-huaqing-400);
+    --qy-chart-2: var(--qy-zheshi-400);
+    --qy-chart-3: var(--qy-shilv-400);
+    --qy-chart-4: var(--qy-tenghuang-400);
+    --qy-chart-5: var(--qy-yanzhi-400);
   }
 
   /*
-   * Status fills derive from the solid colour, so a brand that retunes a
-   * status hue gets matching tints for free.
+   * 墨阶到角色的对应。写在每个明暗根上，使局部切换明暗时随该根的墨与纸重算。
    */
   :root,
   .light,
   .dark,
   [data-theme] {
-    --qy-danger-soft: color-mix(in srgb, var(--qy-danger) 8%, transparent);
-    --qy-warning-soft: color-mix(in srgb, var(--qy-warning) 8%, transparent);
-    --qy-success-soft: color-mix(in srgb, var(--qy-success) 8%, transparent);
-    --qy-info-soft: color-mix(in srgb, var(--qy-info) 8%, transparent);
+    /* 字：焦与浓，与纸调和为不透明色。 */
+    --qy-foreground: color-mix(in srgb, var(--qy-ink) var(--qy-ink-jiao), var(--qy-paper));
+    --qy-foreground-strong: var(--qy-foreground);
+    --qy-foreground-muted: color-mix(in srgb, var(--qy-ink) var(--qy-ink-nong), var(--qy-paper));
+    --qy-foreground-subtle: var(--qy-foreground-muted);
+    --qy-foreground-inverse: var(--qy-paper);
+
+    /* 线：重与清，透明叠合。焦点线取焦墨。 */
+    --qy-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
+    --qy-border-subtle: var(--qy-border);
+    --qy-border-input: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
+    --qy-border-strong: var(--qy-border-input);
+    --qy-ring: var(--qy-foreground);
+
+    /* 实心：焦墨，配纸色前景。悬停 = 填充色与纸调和、纸占一级清墨：淡一级，仍在墨阶上，
+     * 不用透明度另造一级灰。危险填充同一规则。 */
+    --qy-primary: var(--qy-foreground);
+    --qy-primary-foreground: var(--qy-paper);
+    --qy-primary-hover: color-mix(in srgb, var(--qy-primary) calc(100% - var(--qy-ink-qing)), var(--qy-paper));
+    --qy-danger-fill-hover: color-mix(in srgb, var(--qy-danger-fill) calc(100% - var(--qy-ink-qing)), var(--qy-paper));
+
+    /* 面：清染与淡染，透明叠合。 */
+    --qy-surface-inset: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
+    /* 反馈三级：静止的内嵌面清染（4%）→ 悬停清墨（8%）→ 按下淡染（12%），每级深一级。
+     * 悬停是要被看见的反馈，不能与静止的面同一浓度。 */
+    --qy-surface-hover: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
+    --qy-surface-active: color-mix(in srgb, var(--qy-ink) var(--qy-wash-dan), transparent);
+    --qy-surface-subtle: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), var(--qy-paper));
+    --qy-accent: var(--qy-surface-hover);
+    --qy-accent-foreground: var(--qy-foreground);
+
+    /* 凹槽：淡墨，不透明——它是读数的一半，必须在任何承载面上都看得见。 */
+    --qy-groove-surface: color-mix(in srgb, var(--qy-ink) var(--qy-ink-dan), var(--qy-paper));
+    /* 并列候选的轨道：纸本色加一道清墨线（正常状态不铺灰底）。 */
+    --qy-track-surface: var(--qy-surface);
+    --qy-track-border: var(--qy-border);
+
+    /* 柔底：透明叠合，放在任何纸上都比所在的纸深一级。彩色取该色的清墨浓度（8%）；
+     * 墨取清染（4%）——同为 8% 时黑墨比明亮的色相暗得多，取染的浓度两者才读来同重。 */
+    --qy-neutral-soft: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
+    --qy-danger-soft: color-mix(in srgb, var(--qy-danger) var(--qy-ink-qing), transparent);
+    --qy-warning-soft: color-mix(in srgb, var(--qy-warning) var(--qy-ink-qing), transparent);
+    --qy-success-soft: color-mix(in srgb, var(--qy-success) var(--qy-ink-qing), transparent);
+    --qy-info-soft: color-mix(in srgb, var(--qy-info) var(--qy-ink-qing), transparent);
+
+    --qy-code: var(--qy-surface);
+    --qy-code-highlight: var(--qy-surface-inset);
+
+    /* 侧栏：页面底纸上的一列，用同一套墨。 */
+    --qy-sidebar: var(--qy-background);
+    --qy-sidebar-foreground: var(--qy-foreground-muted);
+    --qy-sidebar-border: var(--qy-border);
+    --qy-sidebar-accent: var(--qy-surface-hover);
+    --qy-sidebar-accent-foreground: var(--qy-foreground);
+    --qy-sidebar-primary: var(--qy-primary);
+    --qy-sidebar-primary-foreground: var(--qy-primary-foreground);
+    --qy-sidebar-ring: var(--qy-ring);
   }
 }

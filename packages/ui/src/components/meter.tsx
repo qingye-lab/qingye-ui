@@ -10,7 +10,7 @@ export function Meter({ value, min = 0, max = 100, locale, className, ...props }
   return <MeterPrimitive.Root data-slot="meter" {...props} value={value} min={min} max={max} locale={locale ?? code} className={state => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-foreground", typeof className === "function" ? className(state) : className)} />;
 }
 export function MeterTrack({ className, ...props }: React.ComponentProps<typeof MeterPrimitive.Track>) {
-  return <MeterPrimitive.Track data-slot="meter-track" {...props} className={state => cn("h-(--qy-meter-track-size) w-full min-w-0 overflow-hidden rounded-marker bg-surface-inset", typeof className === "function" ? className(state) : className)} />;
+  return <MeterPrimitive.Track data-slot="meter-track" {...props} className={state => cn("h-(--qy-readout-track-size) w-full min-w-0 overflow-hidden rounded-marker bg-(--qy-groove-surface)", typeof className === "function" ? className(state) : className)} />;
 }
 export function MeterIndicator({ className, ...props }: React.ComponentProps<typeof MeterPrimitive.Indicator>) {
   return <MeterPrimitive.Indicator data-slot="meter-indicator" {...props} className={state => cn("h-full bg-primary", typeof className === "function" ? className(state) : className)} />;

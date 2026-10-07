@@ -9,35 +9,62 @@ const declaration = (name: string) => {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return tokens.match(new RegExp(`${escaped}:\\s*([^;]+);`))?.[1];
 };
-const pixelPreset = (name: string) => {
-  const value = declaration(name)!;
-  return Number.parseFloat(value) * (value.endsWith("rem") ? 16 : 1);
+
+// 以材为祖（基础层 §1–2）：几何由材与分推出。断言的是关系而不是逐个预设：
+// 改材或分，下面每一条都应当仍然成立。px 由一个只认 var/calc/rem/px 的小求值器算出。
+const px = (expression: string, depth = 0): number => {
+  if (depth > 20) throw new Error(`unresolvable: ${expression}`);
+  const resolved = expression.replace(/var\((--[a-z0-9-]+)\)/g, (_m, name: string) => {
+    const value = declaration(name);
+    if (value === undefined) throw new Error(`missing ${name}`);
+    return `(${px(value, depth + 1)})`;
+  });
+  const arithmetic = resolved.replace(/calc\(/g, "(").replace(/(-?[0-9.]+)rem/g, (_m, n: string) => String(Number(n) * 16)).replace(/(-?[0-9.]+)px/g, "$1");
+  if (!/^[0-9.+\-*/() ]+$/.test(arithmetic)) throw new Error(`not arithmetic: ${arithmetic}`);
+  return Function(`return (${arithmetic});`)() as number;
 };
 
-// Structural assertions are separate from the browser computed-value evidence.
-// They defend the prescribed profile and independence while runtime verification
-// confirms these values actually reach real components.
-test.each([
-  ["xs", 24, 10], ["sm", 28, 12], ["md", 32, 14], ["lg", 36, 16], ["xl", 40, 16],
-] as const)("%s control keeps the authoritative outer/padding preset independently of spacing", (size, height, padding) => {
-  expect(pixelPreset(`--qy-control-${size}`)).toBe(height);
-  expect(pixelPreset(`--qy-control-${size}-padding`)).toBe(padding);
-  // The authority's percentages are rounded table labels (lg=44.444...%).
-  expect(Math.round(padding / height * 100)).toBeGreaterThanOrEqual(40);
-  expect(Math.round(padding / height * 100)).toBeLessThanOrEqual(44);
-  expect(padding).toBeLessThanOrEqual(height / 2);
+test("材与分是唯一的两个尺度锚点：材 20px，分 = 材 / 5", () => {
+  expect(px("var(--qy-cai)")).toBe(20);
+  expect(declaration("--qy-fen")).toBe("calc(var(--qy-cai) / 5)");
+  expect(px("var(--qy-fen)")).toBe(4);
+});
+
+test.each([["xs", 1], ["sm", 2], ["md", 3], ["lg", 4], ["xl", 5]] as const)(
+  "%s 控件外高 = 材 + %i 分，留白与圆角由外高推出", (size, grade) => {
+  const height = px(`var(--qy-control-${size})`);
+  expect(height).toBe(20 + grade * 4);
+  // 窄屏升一等。
+  expect(px(`var(--qy-control-${size}-narrow)`)).toBe(height + 4);
+  // 横向留白 = (外高 − 分) / 2 = 纵向余量 + 2 分。
+  expect(px(`var(--qy-control-${size}-padding)`)).toBe((height - 4) / 2);
+  expect(px(`var(--qy-control-${size}-padding)`)).toBe((height - 20) / 2 + 8);
   expect(declaration(`--qy-control-${size}-padding-bordered`)).toBe(`calc(var(--qy-control-${size}-padding) - 1px)`);
-  expect(declaration(`--qy-control-${size}-narrow`)).toBe(`calc(var(--qy-control-${size}) + var(--qy-control-mobile-extra))`);
-  expect(declaration(`--qy-control-${size}-icon-padding`)).toBe(`calc((var(--qy-control-${size}) - var(--qy-control-${size}-icon)) / 2)`);
+  // 图标为偶数且整像素居中。
+  const icon = px(`var(--qy-control-${size}-icon)`);
+  expect(icon % 2).toBe(0);
+  expect((height - icon) % 2).toBe(0);
+  // 几何不读间距阶梯：调全局间距不会顺带改控件。
   expect(declaration(`--qy-control-${size}`)).not.toContain("--qy-space-");
-  expect(declaration(`--qy-control-${size}-padding`)).not.toContain("--qy-space-");
+});
+
+test("圆角：方整控件 r = min(外高 / 4, 2 分)；浮层内项与控件同角且同心", () => {
+  const radius = (size: string) => px(`var(--qy-radius-${size === "md" || size === "lg" || size === "xl" ? "control" : size})`);
+  for (const size of ["xs", "sm", "md", "lg", "xl"]) expect(radius(size)).toBe(Math.min(px(`var(--qy-control-${size})`) / 4, 8));
+  expect(px("var(--qy-radius-overlay)") - px("var(--qy-overlay-inset)")).toBe(px("var(--qy-radius-control)"));
+  expect(px("var(--qy-radius-marker)")).toBe(px("var(--qy-marker-size)") / 4);
+});
+
+test("文字行高都在分格上", () => {
+  for (const role of TEXT_STEPS) expect(px(`var(--qy-text-${role}-leading)`) % 4, role).toBe(0);
+  expect(px("var(--qy-text-body-leading)")).toBe(px("var(--qy-cai)"));
 });
 
 test.each([
   ["xs", 12, 14], ["sm", 13, 14], ["md", 14, 15], ["lg", 16, 17],
 ] as const)("control-%s has independent desktop/narrow typography with all four properties", (size, desktop, narrow) => {
-  expect(pixelPreset(`--qy-text-control-${size}-size`)).toBe(desktop);
-  expect(pixelPreset(`--qy-text-control-${size}-mobile-size`)).toBe(narrow);
+  expect(px(`var(--qy-text-control-${size}-size)`)).toBe(desktop);
+  expect(px(`var(--qy-text-control-${size}-mobile-size)`)).toBe(narrow);
   for (const suffix of ["", "-mobile"]) for (const property of ["size", "leading", "tracking", "weight"]) {
     const value = declaration(`--qy-text-control-${size}${suffix}-${property}`);
     expect(value).toBeDefined();
@@ -56,7 +83,7 @@ test("the converged registry contains exactly the semantic steps with no retired
   expect(TEXT_STEPS).toContain("dense-strong-mobile");
 });
 
-test("every semantic step compiles its own quartet and metric includes numerical alignment", async () => {
+test("every semantic step compiles its own quartet; metric leaves figure alignment to numeric", async () => {
   const theme = read("../theme.css").replace(/@import "\.\/([^\"]+)";/g, (_match, path: string) => read(`../${path}`));
   const compiler = await compile(`${read("../node_modules/tailwindcss/theme.css")}\n${theme}\n${read("../utilities.css")}\n@tailwind utilities;`);
   const css = compiler.build(TEXT_STEPS.map((role) => `text-${role}`));
@@ -72,7 +99,7 @@ test("every semantic step compiles its own quartet and metric includes numerical
     expect(rule).toContain(`letter-spacing: var(--tw-tracking, var(--qy-text-${role}-tracking))`);
     expect(rule).toContain(`font-weight: var(--tw-font-weight, var(--qy-text-${role}-weight))`);
   }
+  // 单独的大号读数用比例数字；等宽只在需要纵向对齐时由 numeric 显式加上（基础层 §8）。
   const metric = rules("metric");
-  expect(metric).toContain("font-variant-numeric: tabular-nums");
-  expect(metric).toContain('font-feature-settings: "tnum" 1');
+  expect(metric).not.toContain("tabular-nums");
 });

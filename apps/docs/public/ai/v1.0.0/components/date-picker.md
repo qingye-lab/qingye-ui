@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 648faa4d52599809a5db20634cbf4f7a8587ca864c8ccc76afd267f0f7e22eb4
+Source SHA-256: daf434b224b6e3ae8c6bfb0ccdb6232a6073d98904bc400d0876b483030d4037
 
 编辑一个当地日期，或展开日历选择。
 
@@ -25,7 +25,7 @@ value 是调用方持有的当地 Date。输入和日历选择只请求变更；
 - Field + FieldLabel + DatePicker + FieldDescription / FieldError
 
 ## Responsive behavior
-- 五档 control 与同名文字，内部边框焦点；粗指针使用库内触摸目标
+- 一套几何，跟随密度轴，紧凑不缩小文字，内部边框焦点；粗指针使用库内触摸目标
 
 ## Customization
 - inputProps、calendarProps、根 render/ref 和现有主题角色
@@ -47,7 +47,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - value / onValueChange: Date | undefined / (value, event) => void. 受控日期；调用方接受回调才改变事实，undefined 表示空。有效年份为 1–9999。
 - name / form: string. 真实 date input 参与原生 FormData；Field name 可提供共同命名。序列化为当地 YYYY-MM-DD。
 - disabled / readOnly: boolean; default false. 阻止输入与附属选择/清除；Field 禁用同样约束动作。只读值提交，禁用值不提交。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 输入、按钮和日历使用同一 control/text 档。
 - inputProps: Input props except owned value/type/name/form/state. ref/render/ARIA/events/min/max/step/required 属于真实 date input。onChange 的 preventDefault 或 preventBaseUIHandler 可取消请求。
 - calendarProps: CalendarProps except mode/selected/onSelect/required. 控制日期禁用、导航边界、locale 等；mode 与确认值由组合持有。native min/max/step 与日历 disabled/范围需调用方同步。
 - render / ref / className / style / ARIA / events: div composition props. 属于组合根；实际输入出口放在 inputProps。
@@ -71,19 +70,32 @@ export default function Demo() {
 }
 ```
 
-### 五档
-Source: apps/docs/src/content/date-picker/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/date-picker/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
 import { DatePicker } from "@qingye/ui/components/date-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import type { InputSize } from "@qingye/ui/components/input";
-export const meta = { title: "五档", titleEn: "Five sizes" };
-function DateSize({ size }: { size: InputSize }) {
+import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+
+export const meta = { title: "密度", titleEn: "Density" };
+
+function Picker() {
   const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));
-  return <Field><FieldLabel>{size}</FieldLabel><DatePicker size={size} value={value} onValueChange={setValue} /></Field>;
+  return <DatePicker value={value} onValueChange={setValue} />;
 }
+
 export default function Demo() {
-  return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2 lg:grid-cols-3">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <DateSize key={size} size={size} />)}<Field disabled><FieldLabel>禁用日期</FieldLabel><DatePicker value={new Date(2026, 9, 3)} onValueChange={() => {}} /></Field></div>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Picker />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

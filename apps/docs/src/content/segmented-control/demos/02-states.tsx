@@ -3,7 +3,7 @@ import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye/ui/components
 import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
 
 export const meta = { title: "状态", titleEn: "States" };
-const items = <><SegmentedControlItem value="alpha">甲</SegmentedControlItem><SegmentedControlItem value="beta">乙</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>丙</SegmentedControlItem></>;
+const items = <><SegmentedControlItem value="alpha">左</SegmentedControlItem><SegmentedControlItem value="beta">中</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>右</SegmentedControlItem></>;
 export default function Demo() {
   const id = useId();
   return <FieldGroup className="grid sm:grid-cols-3">

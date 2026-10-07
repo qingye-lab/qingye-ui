@@ -18,13 +18,15 @@ test("native label, optgroup and selected value remain part of the actual form",
 });
 
 test("multiple and native size preserve array form values and platform list capacity", async () => {
-  const { container } = render(<form><NativeSelect aria-label="选项" name="choice" multiple size={4} controlSize="xl" defaultValue={["a"]}><option value="a">一</option><option value="b">二</option><option value="c">三</option></NativeSelect></form>);
+  const { container } = render(<form><NativeSelect aria-label="选项" name="choice" multiple size={4} defaultValue={["a"]}><option value="a">一</option><option value="b">二</option><option value="c">三</option></NativeSelect></form>);
   const select = screen.getByRole("listbox", { name: "选项" });
   await userEvent.selectOptions(select, ["a", "b"]);
   expect(select).toHaveAttribute("size", "4");
   expect(select).toHaveValue(["a", "b"]);
-  expect(select).toHaveClass("text-control-xl-mobile");
-  expect(select).not.toHaveClass("min-h-(--qy-control-xl-narrow)");
+  // 用户裁决 2026-10-05：原生 size 只表示列表显示行数，与呈现几何无关。
+  // 列表形态的高度由行数决定，因此这里没有单值形态的几何下限。
+  expect(select).toHaveClass("text-control-md-mobile", "sm:text-control-md");
+  expect(select).not.toHaveClass("min-h-(--qy-fill-height-narrow)");
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(["a", "b"]);
 });
 

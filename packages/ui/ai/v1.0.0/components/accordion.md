@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
-Source SHA-256: ad50046eae1b5b374b3da1dc03c19042c1a9453c2f4ca9c521f387aec6599370
+Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
 
 按各项名称主动展开内容。
 
@@ -41,7 +41,7 @@ Source SHA-256: ad50046eae1b5b374b3da1dc03c19042c1a9453c2f4ca9c521f387aec6599370
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 

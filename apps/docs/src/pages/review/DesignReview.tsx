@@ -17,6 +17,9 @@ if (typeof document !== "undefined" && !document.querySelector('link[rel="icon"]
 }
 
 const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+// 用户裁决 2026-10-05：填值控件不再按尺寸档放大，紧凑由密度轴承担；
+// Button 仍保留五档（命令类的尺寸表达位置），两者的审查方式因此不同。
+const densities = ["default", "compact"] as const;
 const variants = ["solid", "bordered", "quiet"] as const;
 const states = ["idle", "waiting", "in-progress", "unknown", "failed"] as const;
 
@@ -88,9 +91,9 @@ export default function DesignReview() {
           </div>
         </Section>
 
-        <Section id="input-review" title="Input · 尺寸与状态" fact="输入主体聚焦时边框只变色，不加粗。">
-          <div className="grid grid-cols-5 gap-(--qy-panel-gap)">
-            {sizes.map((size) => <Field key={size}><FieldLabel>{size}</FieldLabel><Input size={size} defaultValue="青野" /></Field>)}
+        <Section id="input-review" title="Input · 密度与状态" fact="输入主体聚焦时边框只变色，不加粗。">
+          <div className="grid grid-cols-2 items-start gap-(--qy-panel-gap)">
+            {densities.map((density) => <div data-density={density} key={density}><Field><FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel><Input defaultValue="青野" /></Field></div>)}
           </div>
           <div className="mt-(--qy-field-group-gap) grid grid-cols-4 items-start gap-(--qy-panel-gap)">
             <Field><FieldLabel>静态</FieldLabel><Input defaultValue="青野" /></Field>

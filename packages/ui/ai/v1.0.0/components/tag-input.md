@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: d93690a4178e8229e96341c856544ee18cee7ccfbd84bda8f4316dec968eab4b
+Source SHA-256: 640ae3434bbf41910e0a475d9e032d3172ec4da7b44cdfe509f98d9e86ad7031
 
 确认字符串集合，保留尚未确认的编辑草稿。
 
@@ -26,7 +26,7 @@ Enter 或添加按钮才确认；两端空白去除，精确字符串去重且�
 - Field + FieldLabel + TagInput + FieldDescription / Error
 
 ## Responsive behavior
-- 确认项允许换行，草稿取剩余宽度；五档同名 control/text
+- 确认项允许换行，草稿取剩余宽度；一套几何，跟随密度轴，紧凑不缩小文字
 
 ## Customization
 - root render/ref 与 inputProps 的真实输入出口分开
@@ -50,7 +50,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - onValueChange: (value: string[], details: TagInputChangeDetails) => void. details 有 add/remove、tag、event、cancel() 与 isCanceled；受控添加接受前保留草稿。
 - draft / defaultDraft / onDraftChange: string / string / (draft: string) => void; default defaultDraft: ''. 独立的待确认编辑文本；刷新集合不清草稿。
 - name / form: string. 只提交确认项，使用同名表单键；草稿不提交为集合项。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 草稿、确认项文字与动作使用同档角色。
 - inputProps: Input props (excluding collection-owned value/name/size). 真实草稿 Input 的 render/ref/ARIA/事件/样式；FieldLabel 注册此入口。
 - disabled / readOnly: boolean; default false. 同时约束草稿与确认项操作；只读仍提交确认项，禁用不提交。
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. 属于根容器；改渲染元素须保持结构与子控件。
@@ -81,19 +80,27 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/tag-input/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/tag-input/demos/02-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { TagInput } from "@qingye/ui/components/tag-input";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" } satisfies DemoMeta;
-const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    {sizes.map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><TagInput size={size} defaultValue={["React"]} /></Field>)}
-  </FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <TagInput defaultValue={["前端", "设计"]} />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

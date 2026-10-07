@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
-Source SHA-256: 2cd976d39cfc860e1e9d237f93138b290ee840a3c238bbcd974f52c981976162
+Source SHA-256: 8eca1a66ac09de34c9d92b74b51ebfa17ebb2f2516f7c5ea411124087e18eccc
 
 父级链接与明确的当前位置。
 
@@ -50,7 +50,7 @@ Source SHA-256: 2cd976d39cfc860e1e9d237f93138b290ee840a3c238bbcd974f52c981976162
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 

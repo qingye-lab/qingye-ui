@@ -18,8 +18,8 @@ export function Separator({ orientation = "horizontal", decorative = false, clas
       role={decorative ? "presentation" : props.role ?? "separator"}
       aria-hidden={decorative ? true : props["aria-hidden"]}
       className={(state) => cn(
-        // 分界的长轴跟随容器；1px 是线条预设，颜色消费既有强边界角色。
-        "shrink-0 border-border-strong",
+        // 骨法用笔：分节首先靠间距（疏密有致），这条线只是辅助，取清墨；重墨留给「这里可以编辑」的边界。
+        "shrink-0 border-border",
         state.orientation === "horizontal" ? "h-0 w-full border-b" : "w-0 self-stretch border-s",
         typeof className === "function" ? className(state) : className,
       )}

@@ -18,7 +18,7 @@ Project `AGENTS.md`:
 ```md
 ## Qingye UI
 
-- Before interface work, read this project's design.md and node_modules/@qingye/ui/design.en.md. Use relevant methods to judge the task, semantics, structure, and states.
+- Before interface work, read this project's design.md and node_modules/@qingye/ui/design.en.md. Use the six methods of use to judge the task, semantics, structure, and states, and the nine methods of expression to decide measure, ink, line, shape, and placement.
 - Before implementation, check the installed @qingye/ui package.json, catalog.json, declarations, and related examples. Reuse shared interactive controls; the project owns themes and public compositions, and the application owns permissions, drafts, requests, and outcomes.
 - Verify normal and relevant failure, cancellation, or recovery paths. Check keyboard access, names, contrast, narrow layouts, and long text according to impact. Report only observed checks.
 ```
@@ -28,7 +28,7 @@ Project `design.md`:
 ```md
 ## Qingye UI methods
 
-Purpose first. Relationships guide the form. Fitness sets the measure. Use 名实相符 (semantic fidelity), 相成相制 (mutual support and restraint), 布白有用 (purposeful space), 随境取度 (contextual fitness), 展开有据 (justified disclosure), and 进退相承 (continuity of progress and retreat) from node_modules/@qingye/ui/design.en.md. Ordinary components use relevant methods; complete tasks check all six questions. The Chinese method names remain canonical.
+Purpose first. Relationships guide the form. Fitness sets the measure. From node_modules/@qingye/ui/design.en.md, the six methods of use (名实相符, 相成相制, 布白有用, 随境取度, 展开有据, 进退相承) address tasks and semantics; the nine methods of expression (以材为祖, 疏密有致, 墨分五色, 骨法用笔, 应物象形, 经营位置, 绘事后素, 气韵生动, 材有美) address measure and form. Ordinary components use relevant methods; complete tasks check every question. The Chinese method names remain canonical.
 
 Component capabilities come from the installed @qingye/ui catalog.json, types, and examples. Brand, appearance, and density are independent. Record actual entries for the central theme, public compositions, and verification commands here, and keep them current.
 ```
@@ -49,6 +49,7 @@ NG5. Add a kicker or eyebrow above a heading
 NG6. Explain states through decorative motion, or make completion depend on animation
 NG7. Put a critical consequence solely in a disappearing hint
 NG8. Explain the interface's design or implementation in interface copy
+NG9. Express state by adding shape: outward focus rings, thickened borders, dimensions that change with state
 
 Preserve grouping, hierarchy, and action reachability when text grows. Density may tighten relationship spacing without shrinking text or targets. Reuse named control/text profiles; actual data dimensions retain their task-defined values.
 

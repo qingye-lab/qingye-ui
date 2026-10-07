@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: f78ba4050cf415b455d71fc655927ace84897ba5466d838aa946ef4076e54997
+Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
 
 Block the work surface for an explicit decision about the current object.
 

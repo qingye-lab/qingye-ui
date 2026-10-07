@@ -82,8 +82,8 @@ test("invalid supplied configuration is rejected explicitly while decimal steps 
 
 test("root and thumb render/ref/ARIA/events/styles preserve composition", async () => {
   const ref = createRef<HTMLDivElement>(); const thumbRef = createRef<HTMLDivElement>(); const inputRef = createRef<HTMLInputElement>(); const key = vi.fn();
-  render(<Slider ref={ref} size="xl" render={<div data-rendered="yes" />} className={state => state.disabled ? "caller-disabled" : "caller-enabled"} style={{ color: "var(--qy-foreground)" }}><SliderControl><SliderTrack><SliderIndicator /><SliderThumb ref={thumbRef} inputRef={inputRef} render={<div data-thumb-rendered="yes" />} aria-label="数值" aria-describedby="details" aria-valuetext="当前数值" onKeyDown={key} /></SliderTrack></SliderControl></Slider>);
-  const input = await screen.findByRole("slider"); expect(ref.current).toHaveAttribute("data-rendered", "yes"); expect(ref.current).toHaveClass("caller-enabled", "text-control-xl-mobile", "sm:text-control-xl");
+  render(<Slider ref={ref} render={<div data-rendered="yes" />} className={state => state.disabled ? "caller-disabled" : "caller-enabled"} style={{ color: "var(--qy-foreground)" }}><SliderControl><SliderTrack><SliderIndicator /><SliderThumb ref={thumbRef} inputRef={inputRef} render={<div data-thumb-rendered="yes" />} aria-label="数值" aria-describedby="details" aria-valuetext="当前数值" onKeyDown={key} /></SliderTrack></SliderControl></Slider>);
+  const input = await screen.findByRole("slider"); expect(ref.current).toHaveAttribute("data-rendered", "yes"); expect(ref.current).toHaveClass("caller-enabled", "text-control-md-mobile", "sm:text-control-md");
   expect(thumbRef.current).toHaveAttribute("data-slot", "slider-thumb"); expect(thumbRef.current).toHaveAttribute("data-thumb-rendered", "yes"); expect(inputRef.current).toBe(input); expect(input).toHaveAttribute("aria-describedby", "details"); expect(input).toHaveAttribute("aria-valuetext", "当前数值");
   await userEvent.tab(); await userEvent.keyboard("{ArrowRight}"); expect(key).toHaveBeenCalled();
 });

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: a25be1083ddc026428a32026614e3f4eaddcdf6b883012b297f764aac42ef11a
+Source SHA-256: 341b3221272b3b11edb786eff56d9cdba77db386ad426476010a66beb672efe6
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -31,6 +31,8 @@ level determines h1–h6 and step selects appearance. render changes actual sema
 - The central theme owns text profiles; override individual roles only for specific responsibilities.
 
 ## Current exports
+- Code: function; owner typography; PASS; props: CodeProps
+- CodeProps: type; owner typography; PASS
 - Heading: function; owner typography; PASS; props: HeadingProps
 - HeadingProps: type; owner typography; PASS
 - Text: function; owner typography; PASS; props: TextProps
@@ -45,6 +47,10 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
+### Code
+Code within running text: monospace at 0.875 of the surrounding size rounded to whole pixels, on the ink soft fill, following its line.
+- render / ref / native props: useRender.ComponentProps<"code">. Forward attributes and refs to the native code element.
+
 ### Heading
 A real heading with independent outline level and visual step.
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. Heading level in the document outline.

@@ -13,18 +13,16 @@
 - [Accordion](components/accordion.md): Reveal content from each item's named trigger.
 - [Alert](components/alert.md): Static local information, with announcements only when requested.
 - [AlertDialog](components/alert-dialog.md): Block the work surface for an explicit decision about the current object.
-- [Aspect ratio](components/aspect-ratio.md): Set a preferred width-to-height relation without cropping content.
 - [Autocomplete](components/autocomplete.md): Edit free text with optional suggestions.
 - [Avatar](components/avatar.md): An image with one named identity and a fallback.
-- [Badge](components/badge.md): A short marker.
+- [Badge](components/badge.md): A short marker that keeps its content name without inferring state.
 - [Breadcrumb](components/breadcrumb.md): Parent links and an explicit current location.
 - [BulkActionBar](components/bulk-action-bar.md): Shared actions with explicit targets, versions and scope.
 - [Button](components/button.md): Trigger a named action with a clear object and consequence. The caller owns its state.
 - [ButtonGroup](components/button-group.md): Give actions in one scope a shared name and spacing.
 - [Calendar](components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
 - [Card](components/card.md): Bound an independently identifiable object.
-- [Carousel](components/carousel.md): Manually read finite content with an actual position and clear boundaries.
-- [Chart](components/chart.md): Present real data with a same-source plot, axes, legend and visible numeric table.
+- [Chart](components/chart.md): Seven task-chosen forms—line, bar, area, area-stacked, bar-horizontal, bar-stacked and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
 - [CodeBlock](components/code-block.md): Literal text with actual copy results.
@@ -33,6 +31,7 @@
 - [ConfirmAction](components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
 - [ContextMenu](components/context-menu.md): A context-menu enhancement for commands on the current object.
 - [Copy button](components/copy-button.md): Copy supplied text and reflect the clipboard write result.
+- [CornerMark](components/corner-mark.md): A count or presence dot anchored to a host's corner, never part of the host's own content.
 - [DataTable](components/data-table.md): Comparison, sorting and scoped selection for a real caller-owned collection.
 - [DatePicker](components/date-picker.md): Edit one local date or choose it from a calendar.
 - [DateRangePicker](components/date-range-picker.md): Edit a calendar range draft and explicitly apply complete endpoints.
@@ -46,7 +45,7 @@
 - [FileUpload](components/file-upload.md): Choose or drop local files, retaining accepted files and real rejection reasons.
 - [FilterBar](components/filter-bar.md): Shows draft conditions separately from applied facts.
 - [Form](components/form.md): A native field submission scope and reset context.
-- [Group](components/group.md): Arrange related members with a direction and a spacing role.
+- [Heatmap](components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
 - [HoverCard](components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
 - [Input](components/input.md): Enter one text value. Search, password visibility, and clearing use the same input.
 - [InputGroup](components/input-group.md): Give an input and its markers, units or actions one editing boundary.
@@ -54,12 +53,13 @@
 - [Kbd](components/kbd.md): A native keyboard key display.
 - [Label](components/label.md): Name one control with a native label.
 - [Layout](components/layout.md): Arrange content vertically or side by side using field, action, panel and section spacing roles.
+- [Link](components/link.md): A text entry that goes to an address; every text link in the library shares this one treatment.
 - [Locale switch](components/locale-switch.md): Request an application locale change and show the current Provider value.
 - [Menu](components/menu.md): Temporary commands and choices related to the current task.
 - [Meter](components/meter.md): A real measurement over a valid range.
 - [MotionProvider](components/motion-provider.md): Record input modality at the application root and skip transitions for keyboard input.
 - [NativeSelect](components/native-select.md): Keep the platform picker, native options and form values.
-- [NavigationMenu](components/navigation-menu.md): Real links and expandable navigation groups.
+- [NavigationMenu](components/navigation-menu.md): Real links, expandable navigation groups, and in-panel group names with descriptions.
 - [NumberField](components/number-field.md): Edit an optional number and adjust it by a declared step.
 - [OtpField](components/otp-field.md): Present a fixed-length text value in segments.
 - [PageHeader](components/page-header.md): Co-locate a page name, context and related actions.
@@ -67,14 +67,17 @@
 - [PendingValue](components/pending-value.md): An unresolved write result with its original value.
 - [Popover](components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
 - [Progress](components/progress.md): Confirmed task completion or an explicit indeterminate state.
-- [ProgressCircle](components/progress-circle.md): The same confirmed progress contract in a circle.
+- [Proportion](components/proportion.md): Which parts make up a whole and how much each takes.
+- [Prose](components/prose.md): Typesets already-rendered Markdown or rich text as an independent reading paper; headings, lists, quotes, code and tables read existing text tiers and ink roles.
 - [RadioGroup](components/radio-group.md): Choose one value from a small set of visible options.
+- [ScatterChart](components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](components/scroll-area.md): Native scrolling within a bounded viewport.
 - [SegmentedControl](components/segmented-control.md): Enter one value from a small set of visible segments.
 - [Select](components/select.md): Choose one value from a collapsible set of options.
 - [Separator](components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.
-- [Sidebar](components/sidebar.md): Persistent navigation with reversible collapse.
+- [Sidebar](components/sidebar.md): Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 - [Slider](components/slider.md): Enter a number or an ordered range within explicit bounds.
+- [Sparkline](components/sparkline.md): A small line set in a line of text, showing how a reading has recently changed.
 - [Stat](components/stat.md): Values, units and explanations supplied independently.
 - [StatusDot](components/status-dot.md): A state graphic and its visible name.
 - [Steps](components/steps.md): An ordered process with application-owned progress.
@@ -86,10 +89,11 @@
 - [ThemeProvider](components/theme-provider.md): Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.
 - [Timeline](components/timeline.md): Preserve input order and actual times.
 - [Toast](components/toast.md): Report recoverable, non-critical facts while the current work continues.
-- [Toggle](components/toggle.md): A two-state pressed button with a stable name.
-- [ToggleGroup](components/toggle-group.md): A shared single or multiple selection of pressed buttons.
+- [Toc](components/toc.md): A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
+- [Toggle](components/toggle.md): A two-state toggle that holds its pressed fact until toggled again, with a stable name.
+- [ToggleGroup](components/toggle-group.md): A shared single or multiple set of toggles whose pressed fact persists.
 - [Toolbar](components/toolbar.md): Actual groups, arrow-key focus and operable actions.
 - [Tooltip](components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
-- [Tree](components/tree.md): Hierarchy, expansion, focus and independent single selection for stable nodes.
+- [Tree](components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [Typography](components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 - [Virtual list](components/virtual-list.md): An accessible window over a fixed-height collection with stable item identity.

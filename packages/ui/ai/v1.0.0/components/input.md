@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: 5c4c1e1a52bdf42332b150a7ac805f98fc8468a37c336c537d80ea1879fb24ab
+Source SHA-256: c641304f552231513c6b8a2f8b0b7e70e533769f87bb2a845397f880d7d41fee
 
 输入一个文本值。搜索、密码与清空动作使用同一个输入入口。
 
@@ -35,7 +35,6 @@ Source SHA-256: 5c4c1e1a52bdf42332b150a7ac805f98fc8468a37c336c537d80ea1879fb24ab
 - Input: function; owner input; PASS; props: InputProps
 - InputPrimitive: reexport; owner input; UNVERIFIED
 - InputProps: type; owner input; PASS
-- InputSize: type; owner input; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -48,7 +47,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Input
 真实边框界定编辑区；Base UI Input 保留 Field 注册和原生属性。
 - type: React.HTMLInputTypeAttribute; default "text". search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。
-- size: "xs" | "sm" | "md" | "lg" | "xl" | number; default "md". 位置对应的几何与控件文字档；数字保留原生 size 的字符宽度含义。
 - value / defaultValue / onValueChange: 原生值 / 初始值 / (value, details) => void. 支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。
 - clearable / clearLabel / onClear: boolean / string / () => void; default type === search. 非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。
 - visibilityToggle: boolean; default type === password. password 的可选附属动作，不更改内容或提交表单。
@@ -79,16 +77,28 @@ export default function Demo() {
 }
 ```
 
-### 位置档案
-Source: apps/docs/src/content/input/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/input/demos/02-density.tsx
 ```tsx
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "位置档案", titleEn: "Size profiles" };
+export const meta = { title: "密度", titleEn: "Density" };
 
+// 填值控件只有一套几何，紧凑密度收紧容器，不改值文字（用户裁决 2026-10-05）。
 export default function Demo() {
-  return <div className="grid w-full max-w-sm gap-(--qy-field-group-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map((size) => <Field key={size}><FieldLabel>{size}</FieldLabel><Input size={size} defaultValue="青野 · Qingye" /></Field>)}</div>;
+  return (
+    <div className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Input name={`device-${density}`} defaultValue="3 号楼东侧摄像头" />
+          </Field>
+        </div>
+      ))}
+    </div>
+  );
 }
 ```
 

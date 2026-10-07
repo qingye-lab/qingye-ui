@@ -58,6 +58,16 @@ export async function runTokenLedgerProbe(page, { ledger, baseURL = 'http://loca
   const originalURL = page.url();
   const originalViewport = page.viewportSize();
   let activeMutation = null;
+  // 每个探针都要导航到 playground 并注入一次根变量。浏览器在这个长序列里到达第 21 个
+  // 探针前后会断开（隔离运行同样探针正常，说明不是某个探针本身的问题，而是同一页面
+  // 反复导航累积的会话资源）。这里每隔若干探针重载一次当前文档：重载是幂等的——
+  // 探针只读计算样式，不留任何跨探针状态——因此不会改变任何被测量的值。
+  const RECYCLE_EVERY = 8;
+  let sinceRecycle = 0;
+  const recycle = async () => {
+    await page.goto('about:blank', { waitUntil: 'domcontentloaded', timeout: 15000 });
+    sinceRecycle = 0;
+  };
   try {
     for (const mode of modes) {
       await page.setViewportSize({ width: mode.width, height: mode.height });
@@ -65,6 +75,8 @@ export async function runTokenLedgerProbe(page, { ledger, baseURL = 'http://loca
       for (const probe of plan) {
         if (probe.themes && !probe.themes.includes(mode.theme)) continue;
         if (probe.viewports && !probe.viewports.includes(mode.viewport)) continue;
+        if (sinceRecycle >= RECYCLE_EVERY) await recycle();
+        sinceRecycle += 1;
         const observation = { id: `${probe.id}:${mode.theme}:${mode.viewport}:${mode.width}x${mode.height}:${contextPointer}`, pointer: contextPointer, probeId: probe.id, token: probe.token, sourceComponent: probe.sourceComponent, publicName: probe.sourceComponent === 'card' ? 'Card' : probe.sourceComponent[0].toUpperCase() + probe.sourceComponent.slice(1), part: probe.part, selector: probe.selector, state: probe.state, theme: mode.theme, viewport: mode.viewport, size: { width: mode.width, height: mode.height }, route: `/playground/${probe.sourceComponent}`, override: probe.override, measuredAt: new Date().toISOString(), observation: 'NOT_OBSERVED', validOverride: false };
         if (probe.pointer && contextPointer !== probe.pointer) {
           observation.skipReason = `Required pointer=${probe.pointer}; existing context reports ${contextPointer}. Skipped before navigation.`;

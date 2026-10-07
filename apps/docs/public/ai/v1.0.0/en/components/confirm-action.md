@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
-Source SHA-256: e2f89c0cd00ce4ed718ac07fcb0f37476caefe0d4c870beca1d1ac5da5061fdb
+Source SHA-256: 96af79d77096a5ea1475c727911be72e610793c1d86863db460857f087c54225
 
 Confirm a specific object, version, and change; review again when content changes.
 
@@ -52,7 +52,7 @@ A confirmation composition of AlertDialog, ButtonProtection, and optional Field/
 - state / disabled: ButtonState / boolean; default 'idle' / false. waiting, in-progress, and unknown block requests. Busy/unknown retain Button's focusable ARIA-disabled behavior; explicit disabled is native. Back only closes this UI.
 - confirmationText / confirmationLabel: string / ReactNode. Optional exact text match with a required visible label. FieldDescription shows the expected text. Reviewing or reopening clears prior input.
 - open / defaultOpen / onOpenChange: AlertDialog public props. Controlled or uncontrolled opening. onOpenChange details.cancel() can reject it; the controlled caller decides opening and closing.
-- size / tone: InputSize / ButtonTone; default 'md' / 'danger'. Input and actions share one of five control/text profiles. Tone expresses consequences without granting permission.
+- tone: ButtonTone; default 'danger'. The confirmation input follows the one fill-control geometry (density axis); action buttons keep Button size steps because size expresses position. Tone expresses consequences without granting permission.
 - triggerProps / confirmProps / inputProps / popupProps: Current public component props. Customize real outlets' render, refs, ARIA, and events. Canceling confirmProps.onClick blocks a request. A danger trigger still requires visible consequence association on its page.
 - children: ReactNode. Additional real review content or application-provided state and recovery outlets in the panel.
 
@@ -83,13 +83,22 @@ export default function Demo() {
 }
 ```
 
-### 五档与未知
-Source: apps/docs/src/content/confirm-action/demos/02-sizes.tsx
+### 结果未知
+Source: apps/docs/src/content/confirm-action/demos/02-outcome.tsx
 ```tsx
 import { ConfirmAction } from "@qingye/ui/components/confirm-action";
-export const meta = { title: "五档与未知", titleEn: "Five sizes and unknown" };
+
+export const meta = { title: "结果未知", titleEn: "Unknown outcome" };
+
 const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
+
+// 结果未知阻止默认再次触发，控件不以超时或动画宣布成功。
 export default function Demo() {
-  return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <ConfirmAction key={size} size={size} snapshot={snapshot} title={`${size} · A → B`} triggerLabel={size} actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={() => {}} />)}<ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" state="unknown" onConfirm={() => {}} /></div>;
+  return (
+    <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
+      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" state="unknown" onConfirm={() => {}} />
+      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="等待中的核对" actionLabel="请求 A → B" state="waiting" onConfirm={() => {}} />
+    </div>
+  );
 }
 ```

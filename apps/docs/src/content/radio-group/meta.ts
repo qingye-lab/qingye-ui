@@ -16,7 +16,6 @@ export default {
     ] },
     { name: "Radio", description: "圆形单选入口与中心选中点。", descriptionEn: "Circular single-choice entry with a central selected dot.", props: [
       { name: "value", type: "Value", description: "组内唯一候选值；空字符串、0 与 null 未选择不同。", descriptionEn: "A unique candidate value; empty string, zero, and null/no selection differ." },
-      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "圆形外径读同档文字行高；命中区单独读取 touch-target。", descriptionEn: "Circle diameter reads matching text line height; touch-target separately supplies its hit area." },
       { name: "disabled / readOnly / required", type: "boolean", description: "原语支持组与项的真实限制，Field disabled 也可传递。", descriptionEn: "Primitive group/item limits are actual restrictions, including propagated Field disabled." },
       { name: "render / nativeButton / ref / inputRef", type: "Base UI composition", description: "默认原生 button，保留隐藏 radio input；改成非 button 时显式 nativeButton=false。", descriptionEn: "Defaults to native button while retaining a hidden radio input. Set nativeButton=false for another element." },
       { name: "children / className / style", type: "ReactNode / Base UI state callbacks", description: "替换指示部位或覆写样式；名称放在 FieldLabel 中。", descriptionEn: "Replace the indicator or override styles; FieldLabel supplies the name." },

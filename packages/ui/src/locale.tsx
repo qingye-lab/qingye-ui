@@ -22,9 +22,10 @@ export type UILocaleMessages = {
   addFiles: string; dropFiles: string; chooseFiles: string; removeFile: (name: string) => string;
   fileError: (name: string, reason: "type" | "size" | "count") => string;
   selectDateTimePlaceholder: string; now: string; dropFilesActive: string; fileProgress: (name: string) => string; fileCount: (count: number) => string;
-  table: string; noResults: string; searchTable: string; pageSummary: (page: number, pages: number, total: number) => string;
+  table: string; chartData: string; sparklineSummary: (label: string, first: string, last: string, min: string, max: string) => string; sparklineEmpty: (label: string) => string; proportionRest: string; statDelta: (direction: "up" | "down" | "flat", amount: string, period: string) => string; statDeltaFlat: string; proportionShare: (value: string, percent: string) => string; noResults: string; searchTable: string; pageSummary: (page: number, pages: number, total: number) => string;
+  scatterPointColumn: string; heatmapCell: (rowLabel: string, columnLabel: string, value: string) => string; heatmapUnavailable: (rowLabel: string, columnLabel: string, stateLabel: string) => string; heatmapScaleFrom: string; heatmapScaleTo: string;
   loadFailed: string; retry: string;
-  steps: string; stepComplete: string; stepCurrent: string; stepUpcoming: string; stepError: string; timeline: string; carousel: string; slide: string; slideOf: (index: number, total: number) => string; previousSlide: string; nextSlide: string;
+  steps: string; stepComplete: string; stepCurrent: string; stepUpcoming: string; stepError: string; timeline: string;
   // General actions
   clear: string; cancel: string; confirm: string; apply: string; reset: string; back: string; search: string; expand: string; collapse: string;
   // Theme
@@ -40,6 +41,8 @@ export type UILocaleMessages = {
   // Data display
   trendUp: string; trendDown: string; trendFlat: string; resize: string; copyCode: string; showMore: string; showLess: string;
   statusLabel: (status: "online" | "offline" | "warning" | "error" | "info" | "neutral" | "pending" | "in-progress" | "unknown") => string; opensInNewTab: string;
+  toc: string;
+  unreadCount: (count: number) => string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -66,9 +69,10 @@ export const zhCN: UILocale = {
     addFiles: "添加文件", dropFiles: "拖入文件，或选择本地文件", chooseFiles: "选择文件", removeFile: (name) => `移除 ${name}`,
     fileError: (name, reason) => `${name}：${reason === "type" ? "文件类型不支持" : reason === "size" ? "文件过大" : "超出文件数量限制"}`,
     selectDateTimePlaceholder: "选择日期和时间", now: "此刻", dropFilesActive: "松开即可添加", fileProgress: (name) => `${name} 上传进度`, fileCount: (count) => `${count} 个文件`,
-    table: "数据表格", noResults: "没有匹配的结果", searchTable: "搜索表格", pageSummary: (page, pages, total) => `第 ${page} / ${pages} 页，共 ${total} 条`,
+    table: "数据表格", chartData: "查看数据", sparklineSummary: (label, first, last, min, max) => `${label}：从 ${first} 到 ${last}，最低 ${min}，最高 ${max}`, sparklineEmpty: label => `${label}：没有可用的数值`, proportionRest: "其余", statDelta: (direction, amount, period) => direction === "flat" ? `${period}持平` : `${period}${direction === "up" ? "增加" : "减少"} ${amount}`, statDeltaFlat: "持平", proportionShare: (value, percent) => `${value}（${percent}）`, noResults: "没有匹配的结果", searchTable: "搜索表格", pageSummary: (page, pages, total) => `第 ${page} / ${pages} 页，共 ${total} 条`,
+    scatterPointColumn: "数据点", heatmapCell: (rowLabel, columnLabel, value) => `${rowLabel}${columnLabel}：${value}`, heatmapUnavailable: (rowLabel, columnLabel, stateLabel) => `${rowLabel}${columnLabel}：${stateLabel}`, heatmapScaleFrom: "最低", heatmapScaleTo: "最高",
     loadFailed: "数据加载失败", retry: "重试",
-    steps: "步骤", stepComplete: "已完成", stepCurrent: "进行中", stepUpcoming: "未开始", stepError: "出错", timeline: "时间线", carousel: "轮播", slide: "幻灯片", slideOf: (index, total) => `第 ${index} 张，共 ${total} 张`, previousSlide: "上一张", nextSlide: "下一张",
+    steps: "步骤", stepComplete: "已完成", stepCurrent: "进行中", stepUpcoming: "未开始", stepError: "出错", timeline: "时间线",
     clear: "清除", cancel: "取消", confirm: "确认", apply: "应用", reset: "重置", back: "返回", search: "搜索", expand: "展开", collapse: "收起",
     theme: "主题", lightTheme: "浅色", darkTheme: "深色", systemTheme: "跟随系统",
     selectPlaceholder: "请选择", searchPlaceholder: "搜索…", commandPlaceholder: "输入命令或搜索…", addTag: "添加标签", tagInputHint: "按回车添加", tagLimit: (max) => `最多添加 ${max} 个标签`, tagExists: (tag) => `“${tag}”已添加`,
@@ -78,6 +82,8 @@ export const zhCN: UILocale = {
     confirmContentChanged: "对象、版本或变更已改变，请重新阅读。", confirmReviewLatest: "重新阅读",
     trendUp: "上升", trendDown: "下降", trendFlat: "持平", resize: "调整大小", copyCode: "复制代码", showMore: "展开更多", showLess: "收起",
     statusLabel: (status) => ({ online: "在线", offline: "离线", warning: "警告", error: "异常", info: "提示", neutral: "未知", pending: "等待中", "in-progress": "进行中", unknown: "结果未知" })[status], opensInNewTab: "（在新标签页中打开）",
+    toc: "本页目录",
+    unreadCount: (count) => `${count} 条未读`,
   },
 };
 

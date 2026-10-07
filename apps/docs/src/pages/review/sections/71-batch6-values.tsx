@@ -1,9 +1,9 @@
 import NumberValues from "@/content/number-field/demos/01-values";
-import NumberSizes from "@/content/number-field/demos/02-sizes";
+import NumberSizes from "@/content/number-field/demos/02-density";
 import OtpInput from "@/content/otp-field/demos/01-input";
-import OtpSizes from "@/content/otp-field/demos/02-sizes";
+import OtpSizes from "@/content/otp-field/demos/02-density";
 import TagCollections from "@/content/tag-input/demos/01-collections";
-import TagSizes from "@/content/tag-input/demos/02-sizes";
+import TagSizes from "@/content/tag-input/demos/02-density";
 
 export default function Batch6ValuesReview() {
   return <section id="batch6-values" className="border-t border-border py-(--qy-section-gap)">

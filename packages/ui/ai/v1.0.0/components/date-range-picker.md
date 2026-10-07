@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 0756b2aaa5ffde9ddc3af080eec04742cd6c5860c487a63a28a649dc209131b1
+Source SHA-256: 00f85ac23ea34b74309d86c0f93e849fb5a49579d4a0b97075dc4add4d748a21
 
 在日历中编辑范围草稿，明确应用完整的起止日期。
 
@@ -25,7 +25,7 @@ Source SHA-256: 0756b2aaa5ffde9ddc3af080eec04742cd6c5860c487a63a28a649dc209131b1
 - Field + FieldLabel + DateRangePicker + FieldDescription / FieldError
 
 ## Responsive behavior
-- 五档控件与文字；日历粗指针单元采用真实触摸尺寸
+- 一套几何，跟随密度轴，紧凑不缩小文字；日历粗指针单元采用真实触摸尺寸
 
 ## Customization
 - calendarProps、inputProps、组合根与集中主题
@@ -50,7 +50,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - disabled / readOnly: boolean; default false. 禁用/只读阻止展开与改值；Field 禁用也约束附属动作。只读确认端点仍提交，禁用排除。
 - calendarProps: CalendarProps except owned selection props. min/max 指日期间隔规则，excludeDisabled 约束跨禁用日期。默认同日范围合法；要跨日明确传 min。mode 固定 range。
 - inputProps: Input display props. 展示出口的 ref/render/ARIA/events/placeholder；无原生 date 输入 min/max 校验，范围规则在 calendarProps 与应用校验中声明。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 展示、日历、应用/取消/清除读取相同档位。
 - render / ref / className / style / ARIA / events: div composition props. 属于组合根；输入命名与错误由 Field 公共组合提供。
 
 ## Keyboard

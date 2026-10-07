@@ -3,12 +3,12 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: e1ebba3241f6b53ab8d4ecea5135376ca3be3afe498d118cb43a4c05be9e1f74
+Source SHA-256: 7885ec5af69af08427069c47a31e9cb2a01dee3416d18289f3d995356e281b0d
 
 Values, units and explanations supplied independently.
 
 ## Decision
-dl/dt/dd preserve metric relationships; zero remains visible and the application explains unknown and inapplicable values. No inferred trends or business judgments.
+dl/dt/dd preserve metric relationships; zero remains visible and the application explains unknown and inapplicable values. A change names its reference period and shows direction with an arrow and text; only the application declares good or bad, otherwise it stays in ink.
 
 ## Notes
 - Definitions, update times and changes are application facts; descriptions are optional.
@@ -20,6 +20,7 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 - Application: Measurement definitions, numeric states, update times, and change facts.
 
 ## Composition
+- StatDelta: Change against a reference period (dd).
 - Stat: A dl with required state.
 - StatLabel / StatValue / StatDescription: dt / dd / dd parts.
 - StatUnit: A span inside StatValue.
@@ -33,6 +34,8 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 
 ## Current exports
 - Stat: function; owner stat; PASS; props: StatProps
+- StatDelta: function; owner stat; PASS; props: StatDeltaProps
+- StatDeltaProps: type; owner stat; PASS
 - StatDescription: function; owner stat; PASS; props: StatDescriptionProps
 - StatDescriptionProps: type; owner stat; PASS
 - StatLabel: function; owner stat; PASS; props: StatLabelProps
@@ -47,11 +50,18 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
+### StatDelta
+Change against a reference period (dd).
+- value: number. The signed change.
+- period: string. The reference period such as "vs last week"; required.
+- format: (absolute: number) => string. How the absolute value is shown, such as a percentage.
+- sentiment: "good" | "bad". Good or bad as declared by the application; otherwise ink.
+
 ### Stat
 A dl with required state.
 - state: "known" | "unknown" | "not-applicable". An application-owned metric state that generates no replacement value.
@@ -77,5 +87,22 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "明确的数值状态", titleEn: "Explicit metric states" } satisfies DemoMeta;
 export default function Demo() {
   return <Inline gap="section" align="start"><Stat state="known"><StatLabel>数量</StatLabel><StatValue>{0}<StatUnit>项</StatUnit></StatValue></Stat><Stat state="unknown"><StatLabel>宽度</StatLabel><StatValue>未知</StatValue></Stat><Stat state="not-applicable"><StatLabel>高度</StatLabel><StatValue>不适用</StatValue></Stat></Inline>;
+}
+```
+
+### 变化量与趋势
+Source: apps/docs/src/content/stat/demos/02-delta.tsx
+```tsx
+import { Inline } from "@qingye/ui/components/layout";
+import { Sparkline } from "@qingye/ui/components/sparkline";
+import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "变化量与趋势", titleEn: "Change and trend" } satisfies DemoMeta;
+export default function Demo() {
+  return <Inline gap="section" align="start">
+    <Stat state="known"><StatLabel>本周同步</StatLabel><StatValue>1,284<StatUnit>次</StatUnit></StatValue><StatDelta value={12.4} period="较上周" format={n => `${n}%`} /><dd className="m-0"><Sparkline label="近 8 周同步次数" values={[980, 1010, 1102, 1080, 1150, 1120, 1142, 1284]} /></dd></Stat>
+    <Stat state="known"><StatLabel>失败</StatLabel><StatValue>18<StatUnit>次</StatUnit></StatValue><StatDelta value={6} period="较上周" sentiment="bad" /></Stat>
+    <Stat state="known"><StatLabel>平均延迟</StatLabel><StatValue>140<StatUnit>毫秒</StatUnit></StatValue><StatDelta value={-22} period="较上周" sentiment="good" format={n => `${n} 毫秒`} /></Stat>
+  </Inline>;
 }
 ```

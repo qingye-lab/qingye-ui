@@ -17,7 +17,6 @@ export default {
       { name: "itemToStringLabel / itemToStringValue / isItemEqualToValue", type: "Base UI Root props", description: "对象候选的名称、序列化与相等关系。", descriptionEn: "Names, serialization, and equality for object candidates." },
     ] },
     { name: "SelectTrigger", description: "有边框的选择入口，与 Input 同档。", descriptionEn: "A bordered selection entry matching Input's profile.", props: [
-      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "同名文字、外高、padding-bordered 和图标档。", descriptionEn: "Matching text, outer height, padding-bordered, and icon profiles." },
       { name: "children", type: "ReactNode", description: "省略时提供 SelectValue；内含展开图标。", descriptionEn: "Defaults to SelectValue with a disclosure icon." },
       { name: "render / ref / className / style / ARIA", type: "Base UI composition", description: "保留真实触发器的事件、名称和样式入口。", descriptionEn: "Retain actual trigger events, names, and styling entries." },
     ] },

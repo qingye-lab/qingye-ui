@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
-Source SHA-256: d391e8a36257aeefed300d4fcc33092473aba83c810781808cc103fb259f2550
+Source SHA-256: 06f82f20353a0b0d5c28462653c250eef347cd8d1a277812a3f7f49b4aec25d4
 
 Enter a number or an ordered range within explicit bounds.
 
@@ -42,7 +42,6 @@ Slider inputs actual numeric values. Use Progress for progress and Meter for mea
 - SliderLabelProps: type; owner slider; PASS
 - SliderPrimitive: reexport; owner slider; UNVERIFIED
 - SliderProps: type; owner slider; PASS
-- SliderSize: type; owner slider; PASS
 - SliderThumb: function; owner slider; PASS; props: SliderThumbProps
 - SliderThumbProps: type; owner slider; PASS
 - SliderTrack: function; owner slider; PASS; props: SliderTrackProps
@@ -66,7 +65,7 @@ Value and range state with public parts for composition.
 - onValueChange / onValueCommitted: (value, details) => void. Immediate changes and the current interaction's commit. details.reason identifies keyboard/drag/track-press/input-change; changes are cancelable. Commit does not establish successful persistence.
 - disabled / readOnly: boolean; default false. Disabled excludes form submission. Read-only retains names, focus, values, and submission while canceling primitive changes.
 - name / form: string. Form name and external form; multiple Thumbs serialize repeated fields under the same name.
-- size / orientation / thumbAlignment: SliderSize / "horizontal" | "vertical" / Base UI alignment; default "md" / "horizontal" / "edge". Five matching control/text-control profiles; edge keeps endpoints within the workspace.
+- orientation / thumbAlignment: "horizontal" | "vertical" / Base UI alignment; default "horizontal" / "edge". The working height follows the one fill-control geometry; the thumb follows its label text and is untouched by density. edge keeps endpoints within the workspace.
 - format / locale / render / ref / className / style: Base UI props. Number formatting, locale, root composition, and primitive state styles; theme axes remain independent.
 
 ### SliderControl / SliderTrack / SliderIndicator
@@ -92,19 +91,54 @@ Base UI Slider primitive namespace.
 - PageUp / PageDown / Shift+Arrow keys: Change by largeStep within range and neighboring-value constraints.
 
 ## Source examples
-### 数值与区间
+### 数值、单位与精确输入
 Source: apps/docs/src/content/slider/demos/01-values.tsx
 ```tsx
 import { useState } from "react";
-import { FieldGroup } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "@qingye/ui/components/slider";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye/ui/components/number-field";
+import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye/ui/components/slider";
+import { Inline } from "@qingye/ui/components/layout";
 
-export const meta = { title: "数值与区间", titleEn: "Value and range" };
+export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
+
+/* 评审 2026-10-05：滑块的**位置不是可靠的数据表达**。只有一条轨道时，用户知道
+ * 自己大致拖到了哪里，但不知道自己设置了什么。数值任务至少要给出：
+ *   当前值 + 单位；范围的两端；需要精确设置时的非拖拽路径。
+ * 拖拽不是唯一入口——键盘方向键、以及这里的数字输入都能到达同一个值。 */
 export default function Demo() {
-  const [value, setValue] = useState(25); const [range, setRange] = useState<readonly number[]>([20, 80]);
-  return <FieldGroup className="grid sm:grid-cols-2">
-    <Slider name="value" value={value} onValueChange={setValue} min={0} max={100} step={5}><div className="flex items-center justify-between gap-(--qy-field-gap)"><SliderLabel>数值</SliderLabel><SliderValue /></div><SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl></Slider>
-    <Slider name="range" value={range} onValueChange={setRange} min={0} max={100} step={5} minStepsBetweenValues={2} thumbCollisionBehavior="none"><div className="flex items-center justify-between gap-(--qy-field-gap)"><SliderLabel>区间</SliderLabel><SliderValue>{formatted => formatted.join(" – ")}</SliderValue></div><SliderControl><SliderTrack><SliderIndicator /><SliderThumb index={0} aria-label="下限" /><SliderThumb index={1} aria-label="上限" /></SliderTrack></SliderControl></Slider>
+  const [threshold, setThreshold] = useState(60);
+  const [range, setRange] = useState<readonly number[]>([20, 80]);
+
+  return <FieldGroup className="grid gap-(--qy-field-group-gap) sm:grid-cols-2">
+    <Field>
+      {/* SliderValue 读 Slider 根的真实值，因此标签行必须在根之内。 */}
+      <Slider name="threshold" value={threshold} onValueChange={setThreshold} min={0} max={100} step={5}>
+        <div className="flex items-center justify-between gap-(--qy-field-gap)">
+          <FieldLabel>告警阈值</FieldLabel>
+          <SliderValue className="text-body-strong">{(formatted) => `${formatted}%`}</SliderValue>
+        </div>
+        <SliderControl><SliderTrack><SliderIndicator /><SliderThumb aria-label="告警阈值百分比" /></SliderTrack></SliderControl>
+      </Slider>
+      {/* 范围两端：让「偏左」有一个可读的参照。 */}
+      <div className="flex justify-between text-caption text-muted-foreground"><span>0%（每次同步都告警）</span><span>100%（从不告警）</span></div>
+      {/* 非拖拽路径：需要精确值时不必拖到难以确定的位置。
+       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。 */}
+      <Inline gap="field"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5} aria-label="告警阈值，精确输入"><NumberFieldGroup><NumberFieldInput /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></Inline>
+      <FieldDescription>拖拽、方向键或上面的输入都能改到同一个值。</FieldDescription>
+    </Field>
+
+    <Field>
+      <Slider name="retention" value={range} onValueChange={setRange} min={0} max={100} step={5} minStepsBetweenValues={2} thumbCollisionBehavior="none">
+        <div className="flex items-center justify-between gap-(--qy-field-gap)">
+          <FieldLabel>保留区间</FieldLabel>
+          <SliderValue className="text-body-strong">{(formatted: readonly string[]) => `${formatted[0]}–${formatted[1]} 天`}</SliderValue>
+        </div>
+        <SliderControl><SliderTrack><SliderIndicator /><SliderThumb index={0} aria-label="保留天数下限" /><SliderThumb index={1} aria-label="保留天数上限" /></SliderTrack></SliderControl>
+      </Slider>
+      <div className="flex justify-between text-caption text-muted-foreground"><span>0 天</span><span>100 天</span></div>
+      <FieldDescription>两个抓手之间有最小间隔，不会交叉。</FieldDescription>
+    </Field>
   </FieldGroup>;
 }
 ```
@@ -127,15 +161,30 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/slider/demos/03-sizes.tsx
+### 密度
+Source: apps/docs/src/content/slider/demos/03-density.tsx
 ```tsx
-import { FieldGroup } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue, type SliderSize } from "@qingye/ui/components/slider";
+import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from "@qingye/ui/components/slider";
+import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
-const sizes: SliderSize[] = ["xs", "sm", "md", "lg", "xl"];
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
+
+const control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>;
+
+// 滑块的工作高度跟随填值控件角色层；抓手跟随标签文字，密度不改它。
 export default function Demo() {
-  return <FieldGroup>{sizes.map(size => <Slider key={size} size={size} defaultValue={50}><div className="flex items-center justify-between gap-(--qy-field-gap)"><SliderLabel>{size}</SliderLabel><SliderValue /></div><SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl></Slider>)}</FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-section-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Slider defaultValue={50}><div className="flex items-center justify-between gap-(--qy-field-gap)"><SliderValue /></div>{control}</Slider>
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

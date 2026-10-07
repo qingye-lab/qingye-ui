@@ -1,389 +1,364 @@
 /*
- * Layer 3 — component tokens.
- * Sizes, radii, density and motion that components consume directly.
- * These exist so a consumer can retune the library (denser tables, rounder
- * controls, slower motion) without editing component source.
+ * Layer 3 — 法度：尺度、文字、圆角、疏密与动效。
+ *
+ * 以材为祖（design.md「表达九法」；基础层 §1）。《营造法式》：「凡构屋之制，皆以材为祖」。
+ * 本层只有三个自由量，其余几何都写成它们的关系：
+ *
+ *   材 --qy-cai   正文的一行（14px 正文的行高 20px）。人读的是字，几何从这一行出发。
+ *   分 --qy-fen   材 ÷ 5 = 4px。全部几何的单位；半分（2px）只用于贴身的细部。
+ *   等 n          控件外高 = 材 + n 分（xs…xl 为 1…5 等）。窄屏升一等；紧凑密度降一等。
+ *
+ * 屋有大小，人无大小：等与密度改变控件和间距，不改变内容文字的字号。
+ * 每个值的注释写明它由哪条关系决定；写不出关系的标「预设」。修改入口是锚点本身。
  */
 @layer base {
   :root {
-    /* Foundation §8: semantic text presets. Each step owns all four properties.
-     * Modification entry point: override that step's --qy-text-ROLE-* quartet.
-     * Content roles describe hierarchy; control roles describe control geometry.
-     * Equal values are independent presets, never aliases to a content step.
-     * Scopes and live consumers: docs/implementation/2026-10-03-f1-text-convergence.md.
-     */
-    --qy-font-sans: "Geist Variable", ui-sans-serif, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    /* ─── 锚点 ─────────────────────────────────────────────── */
+    --qy-cai: 1.25rem;
+    --qy-fen: calc(var(--qy-cai) / 5);
+
+    /* 字体（材有美）：全项目一套系统字体（用户裁决 2026-10-07），界面与长文同用。
+     * 各平台先取系统界面字体（苹方、微软雅黑、思源黑体），中文与拉丁字面成对设计，
+     * 同一行只有一套 x 高度与灰度。system-ui 是关键字，不能加引号。项目可在品牌层覆写。 */
+    --qy-font-sans: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+      "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
     --qy-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     --qy-weight-regular: 400;
     --qy-weight-medium: 500;
     --qy-weight-semibold: 600;
 
-    /* Page titles: display/display-lg; blocks: title; subsections: chapter. */
+    /* ─── 文字（基础层 §8）────────────────────────────────────
+     * 行高一律是分的整数倍（分格）：上下堆叠的文字行落在同一张 4px 格上，
+     * 并排的不同文字档基线可以对齐（行气）。字号是预设；相邻内容档至少差 1.2 倍，
+     * 两档字号相差无几时，层级交给墨色与字重（墨分五色），不再加一档字号。
+     * 每档自带 size / leading / tracking / weight 四项，可单独覆写。 */
 
+    /* 页面标题：12 分 / 10 分行高。 */
     --qy-text-display-lg-size: 2.5rem;
-    --qy-text-display-lg-leading: 1.1;
+    --qy-text-display-lg-leading: calc(12 * var(--qy-fen));
     --qy-text-display-lg-tracking: -0.032em;
     --qy-text-display-lg-weight: var(--qy-weight-semibold);
 
     --qy-text-display-size: 2rem;
-    --qy-text-display-leading: 1.15;
+    --qy-text-display-leading: calc(10 * var(--qy-fen));
     --qy-text-display-tracking: -0.032em;
     --qy-text-display-weight: var(--qy-weight-semibold);
 
+    /* 区块标题 24/32；小节 20/28（与 title 相差 1.2 倍，原 22px 与 24px 几乎读不出差别）。 */
     --qy-text-title-size: 1.5rem;
-    --qy-text-title-leading: 1.35;
+    --qy-text-title-leading: calc(8 * var(--qy-fen));
     --qy-text-title-tracking: -0.022em;
     --qy-text-title-weight: var(--qy-weight-semibold);
 
-    --qy-text-chapter-size: 1.375rem;
-    --qy-text-chapter-leading: 1.3;
-    --qy-text-chapter-tracking: -0.02em;
+    --qy-text-chapter-size: 1.25rem;
+    --qy-text-chapter-leading: calc(7 * var(--qy-fen));
+    --qy-text-chapter-tracking: -0.018em;
     --qy-text-chapter-weight: var(--qy-weight-semibold);
 
-    /* A bounded object title: cards, panels and popup headings; 16px is a preset. */
-
+    /* 有界对象的标题：卡片、面板、浮层。16/24。 */
     --qy-text-heading-size: 1rem;
-    --qy-text-heading-leading: 1.4;
+    --qy-text-heading-leading: calc(6 * var(--qy-fen));
     --qy-text-heading-tracking: -0.012em;
     --qy-text-heading-weight: var(--qy-weight-semibold);
 
-    /* Product body, long reading and rich text remain distinct reading contexts. */
-
+    /* 正文：行高就是材。 */
     --qy-text-body-size: 0.875rem;
-    --qy-text-body-leading: 1.5;
+    --qy-text-body-leading: var(--qy-cai);
     --qy-text-body-tracking: -0.006em;
     --qy-text-body-weight: var(--qy-weight-regular);
 
     --qy-text-body-strong-size: 0.875rem;
-    --qy-text-body-strong-leading: 1.5;
+    --qy-text-body-strong-leading: var(--qy-cai);
     --qy-text-body-strong-tracking: -0.006em;
     --qy-text-body-strong-weight: var(--qy-weight-medium);
 
-    --qy-text-reading-size: 0.9375rem;
-    --qy-text-reading-leading: 1.7;
-    --qy-text-reading-tracking: -0.004em;
+    /* 长文阅读与富文本：16/28，行高 1.75，适合中文长段。两档同值，分别可调。 */
+    --qy-text-reading-size: 1rem;
+    --qy-text-reading-leading: calc(7 * var(--qy-fen));
+    --qy-text-reading-tracking: 0em;
     --qy-text-reading-weight: var(--qy-weight-regular);
 
-    --qy-text-prose-size: 0.9375rem;
-    --qy-text-prose-leading: 1.6;
-    --qy-text-prose-tracking: -0.008em;
+    /* 长文正文：与界面同一套字体（用户裁决 2026-10-07：项目字体统一）。16/28；汉字不收紧字距，
+       负字距是拉丁字体的习惯，汉字紧排反而显挤。 */
+    --qy-text-prose-size: 1rem;
+    --qy-text-prose-leading: calc(7 * var(--qy-fen));
+    --qy-text-prose-tracking: 0em;
     --qy-text-prose-weight: var(--qy-weight-regular);
 
-    --qy-text-prose-strong-size: 0.9375rem;
-    --qy-text-prose-strong-leading: 1.6;
-    --qy-text-prose-strong-tracking: -0.008em;
+    --qy-text-prose-strong-size: 1rem;
+    --qy-text-prose-strong-leading: calc(7 * var(--qy-fen));
+    --qy-text-prose-strong-tracking: -0.006em;
     --qy-text-prose-strong-weight: var(--qy-weight-medium);
 
-    /* Assistance is supporting copy; dense text is collection/chrome content.
-     * -strong is emphasis within that role; -mobile is its narrow-screen companion.
-     * Use text-ROLE-mobile sm:text-ROLE. Names derive from role + emphasis + viewport. */
-
-    --qy-text-support-size: 0.875rem;
-    --qy-text-support-leading: 1.25rem;
+    /* 辅助说明与字段名：13px，仍占一材的行高，与正文行逐行对齐。
+     * 说明从属于名称，不得大于 label（基础层 §8 约束）。 */
+    --qy-text-support-size: 0.8125rem;
+    --qy-text-support-leading: var(--qy-cai);
     --qy-text-support-tracking: -0.006em;
     --qy-text-support-weight: var(--qy-weight-regular);
 
     --qy-text-support-mobile-size: 1rem;
-    --qy-text-support-mobile-leading: 1.5rem;
+    --qy-text-support-mobile-leading: calc(6 * var(--qy-fen));
     --qy-text-support-mobile-tracking: -0.012em;
     --qy-text-support-mobile-weight: var(--qy-weight-regular);
 
-    --qy-text-support-strong-size: 0.875rem;
-    --qy-text-support-strong-leading: 1.25rem;
+    --qy-text-support-strong-size: 0.8125rem;
+    --qy-text-support-strong-leading: var(--qy-cai);
     --qy-text-support-strong-tracking: -0.006em;
     --qy-text-support-strong-weight: var(--qy-weight-medium);
 
     --qy-text-support-strong-mobile-size: 1rem;
-    --qy-text-support-strong-mobile-leading: 1.5rem;
+    --qy-text-support-strong-mobile-leading: calc(6 * var(--qy-fen));
     --qy-text-support-strong-mobile-tracking: -0.012em;
     --qy-text-support-strong-mobile-weight: var(--qy-weight-medium);
 
+    --qy-text-label-size: 0.8125rem;
+    --qy-text-label-leading: var(--qy-cai);
+    --qy-text-label-tracking: -0.006em;
+    --qy-text-label-weight: var(--qy-weight-medium);
+
+    /* 密集区内容（表格、标记、工具条）：12/16，四分一行。 */
     --qy-text-dense-size: 0.75rem;
-    --qy-text-dense-leading: 1rem;
+    --qy-text-dense-leading: calc(4 * var(--qy-fen));
     --qy-text-dense-tracking: 0em;
     --qy-text-dense-weight: var(--qy-weight-regular);
 
     --qy-text-dense-mobile-size: 0.875rem;
-    --qy-text-dense-mobile-leading: 1.25rem;
+    --qy-text-dense-mobile-leading: var(--qy-cai);
     --qy-text-dense-mobile-tracking: -0.006em;
     --qy-text-dense-mobile-weight: var(--qy-weight-regular);
 
     --qy-text-dense-strong-size: 0.75rem;
-    --qy-text-dense-strong-leading: 1rem;
+    --qy-text-dense-strong-leading: calc(4 * var(--qy-fen));
     --qy-text-dense-strong-tracking: 0em;
     --qy-text-dense-strong-weight: var(--qy-weight-medium);
 
     --qy-text-dense-strong-mobile-size: 0.875rem;
-    --qy-text-dense-strong-mobile-leading: 1.25rem;
+    --qy-text-dense-strong-mobile-leading: var(--qy-cai);
     --qy-text-dense-strong-mobile-tracking: -0.006em;
     --qy-text-dense-strong-mobile-weight: var(--qy-weight-medium);
 
-    /* Caption: smallest explanation; label: field name; metric: numerical readout;
-     * micro: text bounded by a marker shape. Metric also owns tabular numerals. */
-
+    /* 最小的说明文字：12px 仍占一材的行高，多行中文不挤，与正文行对齐。 */
     --qy-text-caption-size: 0.75rem;
-    --qy-text-caption-leading: 1.5;
+    --qy-text-caption-leading: var(--qy-cai);
     --qy-text-caption-tracking: 0em;
     --qy-text-caption-weight: var(--qy-weight-regular);
 
     --qy-text-caption-strong-size: 0.75rem;
-    --qy-text-caption-strong-leading: 1.5;
+    --qy-text-caption-strong-leading: var(--qy-cai);
     --qy-text-caption-strong-tracking: 0em;
     --qy-text-caption-strong-weight: var(--qy-weight-medium);
 
-    --qy-text-label-size: 0.8125rem;
-    --qy-text-label-leading: 1.5;
-    --qy-text-label-tracking: -0.006em;
-    --qy-text-label-weight: var(--qy-weight-medium);
-
+    /* 读数：24/28，自带等宽数字。 */
     --qy-text-metric-size: 1.5rem;
-    --qy-text-metric-leading: 1.1;
+    --qy-text-metric-leading: calc(7 * var(--qy-fen));
     --qy-text-metric-tracking: -0.024em;
     --qy-text-metric-weight: var(--qy-weight-semibold);
 
+    /* 标记框内的拉丁缩写；中文不用此档。 */
     --qy-text-micro-size: 0.6875rem;
-    --qy-text-micro-leading: 1.2;
+    --qy-text-micro-leading: calc(4 * var(--qy-fen));
     --qy-text-micro-tracking: 0.01em;
     --qy-text-micro-weight: var(--qy-weight-medium);
 
-    /* Control text (§8 independent table): every size step takes the text step of
-     * the same name (xs→xs … xl→xl), so height and type grow together. Raising
-     * height alone turns the increase into vertical slack: lg once took md type
-     * (per-side 6→8px, text share 62.5%→55.6%) and xl once took lg type (8px).
-     * Sizes, leading, tracking and medium weight are presets, adjustable here. */
-
+    /* 控件文字：按钮名称属于按钮本身，随等变化；填值控件的值始终读 md 档（正文尺寸）。
+     * 行高仍在分格上：xs 4 分，sm/md 一材，lg 6 分，xl 7 分。字号为预设。 */
     --qy-text-control-xs-size: 0.75rem;
-    --qy-text-control-xs-leading: 1rem;
+    --qy-text-control-xs-leading: calc(4 * var(--qy-fen));
     --qy-text-control-xs-tracking: 0em;
-    --qy-text-control-xs-weight: var(--qy-weight-medium);
+    --qy-text-control-xs-weight: var(--qy-weight-regular);
 
     --qy-text-control-xs-mobile-size: 0.875rem;
-    --qy-text-control-xs-mobile-leading: 1.25rem;
+    --qy-text-control-xs-mobile-leading: var(--qy-cai);
     --qy-text-control-xs-mobile-tracking: -0.006em;
-    --qy-text-control-xs-mobile-weight: var(--qy-weight-medium);
+    --qy-text-control-xs-mobile-weight: var(--qy-weight-regular);
 
     --qy-text-control-sm-size: 0.8125rem;
-    --qy-text-control-sm-leading: 1.125rem;
+    --qy-text-control-sm-leading: var(--qy-cai);
     --qy-text-control-sm-tracking: -0.006em;
-    --qy-text-control-sm-weight: var(--qy-weight-medium);
+    --qy-text-control-sm-weight: var(--qy-weight-regular);
 
     --qy-text-control-sm-mobile-size: 0.875rem;
-    --qy-text-control-sm-mobile-leading: 1.25rem;
+    --qy-text-control-sm-mobile-leading: var(--qy-cai);
     --qy-text-control-sm-mobile-tracking: -0.006em;
-    --qy-text-control-sm-mobile-weight: var(--qy-weight-medium);
+    --qy-text-control-sm-mobile-weight: var(--qy-weight-regular);
 
     --qy-text-control-md-size: 0.875rem;
-    --qy-text-control-md-leading: 1.25rem;
+    --qy-text-control-md-leading: var(--qy-cai);
     --qy-text-control-md-tracking: -0.006em;
-    --qy-text-control-md-weight: var(--qy-weight-medium);
+    --qy-text-control-md-weight: var(--qy-weight-regular);
 
     --qy-text-control-md-mobile-size: 0.9375rem;
-    --qy-text-control-md-mobile-leading: 1.375rem;
+    --qy-text-control-md-mobile-leading: calc(6 * var(--qy-fen));
     --qy-text-control-md-mobile-tracking: -0.008em;
-    --qy-text-control-md-mobile-weight: var(--qy-weight-medium);
+    --qy-text-control-md-mobile-weight: var(--qy-weight-regular);
 
     --qy-text-control-lg-size: 1rem;
-    --qy-text-control-lg-leading: 1.5rem;
+    --qy-text-control-lg-leading: calc(6 * var(--qy-fen));
     --qy-text-control-lg-tracking: -0.012em;
-    --qy-text-control-lg-weight: var(--qy-weight-medium);
+    --qy-text-control-lg-weight: var(--qy-weight-regular);
 
     --qy-text-control-lg-mobile-size: 1.0625rem;
-    --qy-text-control-lg-mobile-leading: 1.5rem;
+    --qy-text-control-lg-mobile-leading: calc(6 * var(--qy-fen));
     --qy-text-control-lg-mobile-tracking: -0.016em;
-    --qy-text-control-lg-mobile-weight: var(--qy-weight-medium);
+    --qy-text-control-lg-mobile-weight: var(--qy-weight-regular);
 
-    /* xl (preset): type grows with height so the 4px over lg is not pure slack.
-     * Desktop 40px − 26px leading = 7px per side (lg 6); narrow 44 − 28 = 8. */
     --qy-text-control-xl-size: 1.125rem;
-    --qy-text-control-xl-leading: 1.625rem;
+    --qy-text-control-xl-leading: calc(7 * var(--qy-fen));
     --qy-text-control-xl-tracking: -0.016em;
-    --qy-text-control-xl-weight: var(--qy-weight-medium);
+    --qy-text-control-xl-weight: var(--qy-weight-regular);
 
     --qy-text-control-xl-mobile-size: 1.1875rem;
-    --qy-text-control-xl-mobile-leading: 1.75rem;
+    --qy-text-control-xl-mobile-leading: calc(7 * var(--qy-fen));
     --qy-text-control-xl-mobile-tracking: -0.018em;
-    --qy-text-control-xl-mobile-weight: var(--qy-weight-medium);
+    --qy-text-control-xl-mobile-weight: var(--qy-weight-regular);
 
-    --qy-tracking-heading: var(--qy-text-title-tracking);
-    --qy-tracking-caps: 0.06em;
-
-    /* Spacing scale, 4px base. */
+    /* ─── 间距阶梯（分的倍数）──────────────────────────────── */
     --qy-space-0: 0;
-    --qy-space-1: 0.25rem;
-    --qy-space-2: calc(var(--qy-space-1) * 2);
-    --qy-space-3: calc(var(--qy-space-1) * 3);
-    --qy-space-4: calc(var(--qy-space-1) * 4);
-    --qy-space-5: calc(var(--qy-space-1) * 5);
-    --qy-space-6: calc(var(--qy-space-1) * 6);
-    --qy-space-8: calc(var(--qy-space-1) * 8);
-    --qy-space-10: calc(var(--qy-space-1) * 10);
-    --qy-space-12: calc(var(--qy-space-1) * 12);
-    --qy-space-16: calc(var(--qy-space-1) * 16);
+    --qy-space-1: var(--qy-fen);
+    --qy-space-2: calc(var(--qy-fen) * 2);
+    --qy-space-3: calc(var(--qy-fen) * 3);
+    --qy-space-4: calc(var(--qy-fen) * 4);
+    --qy-space-5: calc(var(--qy-fen) * 5);
+    --qy-space-6: calc(var(--qy-fen) * 6);
+    --qy-space-8: calc(var(--qy-fen) * 8);
+    --qy-space-10: calc(var(--qy-fen) * 10);
+    --qy-space-12: calc(var(--qy-fen) * 12);
+    --qy-space-16: calc(var(--qy-fen) * 16);
 
-    /* Foundation §4: control r <= min(w,h)/4. xs/sm reach that bound at
-     * 24/28px; md and larger retain the 8px control identity. These are size
-     * choices, not nested-corner offsets. A real inset determines concentricity.
-     * Marker/item roles preserve the independent 4/6px non-control geometry. */
-    --qy-radius: 0.5rem;
-    --qy-radius-xs: 6px;
-    --qy-radius-sm: 7px;
-    --qy-radius-md: 8px;
-    --qy-radius-lg: var(--qy-radius);
-    --qy-radius-xl: 0.625rem;
-    --qy-radius-2xl: 0.75rem;
-    --qy-radius-full: 9999px;
-    --qy-radius-marker: 4px;
-    --qy-radius-item: 6px;
-    /* Outer role entry points; the existing radius family remains mixed. */
-    --qy-radius-control: var(--qy-radius-lg);
-    --qy-radius-panel: var(--qy-radius-2xl);
-    /* 基础层 §4：临时浮起有独立几何身份，不能随面板品牌覆写一起变。 */
-    --qy-radius-overlay: 0.75rem;
+    /* ─── 等：控件外部尺寸（基础层 §2）─────────────────────────
+     * 外高 = 材 + n 分。窄屏升一等（+1 分），所以窄屏的 xs 与桌面的 sm 同高。
+     * 横向留白 = (外高 − 分) / 2，即「纵向余量 + 2 分」：文字两侧总比上下多一个
+     * 组内间隔，读来是一行而不是一块。有边框时扣 1px，使文字起点与无边框形态一致。
+     * 图标 = 该等字号 + 2px，取偶数：与汉字字面等高，并能在偶数外高里整像素居中。
+     * 图标形按钮是边长等于外高的正方形，内容居中，不靠留白去凑。 */
+    --qy-control-mobile-extra: var(--qy-fen);
 
-    /* Foundation §§1–2: size profiles, selected by position, never importance.
-     * The narrow +4px conversion is foundation-internal. Components consume the
-     * converted dimensions and never reference --qy-control-mobile-extra.
-     * Horizontal space is a fixed preset per outer-height identity (40–44%).
-     * Bordered padding subtracts 1px so the TEXT ORIGIN aligns with an adjacent
-     * borderless element: border + padding equals the same horizontal space.
-     * Block padding is only the remaining height after the line box and borders;
-     * it never determines the height. Icon-form padding is (outer − icon)/2.
-     * Modify one profile here, including its matched text-control quartet above;
-     * global spacing changes relationships without changing control geometry. */
-
-    --qy-control-mobile-extra: 4px;
-
-    /* xs: text-control-xs; icons follow the control icon presets in STANDARDS §2. */
-    --qy-control-xs: 1.5rem;
+    --qy-control-xs: calc(var(--qy-cai) + 1 * var(--qy-fen));
     --qy-control-xs-narrow: calc(var(--qy-control-xs) + var(--qy-control-mobile-extra));
-    --qy-control-xs-padding: 10px;
+    --qy-control-xs-padding: calc((var(--qy-control-xs) - var(--qy-fen)) / 2);
     --qy-control-xs-padding-bordered: calc(var(--qy-control-xs-padding) - 1px);
     --qy-control-xs-icon: 0.875rem;
     --qy-control-xs-icon-narrow: 1rem;
-    --qy-control-xs-icon-padding: calc((var(--qy-control-xs) - var(--qy-control-xs-icon)) / 2);
-    --qy-control-xs-icon-padding-narrow: calc((var(--qy-control-xs-narrow) - var(--qy-control-xs-icon-narrow)) / 2);
-    --qy-control-xs-icon-padding-bordered: calc(var(--qy-control-xs-icon-padding) - 1px);
-    --qy-control-xs-icon-padding-bordered-narrow: calc(var(--qy-control-xs-icon-padding-narrow) - 1px);
 
-    /* sm: text-control-sm; icons follow the control icon presets in STANDARDS §2. */
-    --qy-control-sm: 1.75rem;
+    --qy-control-sm: calc(var(--qy-cai) + 2 * var(--qy-fen));
     --qy-control-sm-narrow: calc(var(--qy-control-sm) + var(--qy-control-mobile-extra));
-    --qy-control-sm-inner: calc(var(--qy-control-sm) - 2px);
-    --qy-control-sm-inner-narrow: calc(var(--qy-control-sm-narrow) - 2px);
-    --qy-control-sm-padding: 12px;
+    --qy-control-sm-padding: calc((var(--qy-control-sm) - var(--qy-fen)) / 2);
     --qy-control-sm-padding-bordered: calc(var(--qy-control-sm-padding) - 1px);
-    --qy-control-sm-padding-block-bordered: calc((var(--qy-control-sm) - var(--qy-text-control-sm-leading) - 2px) / 2);
-    --qy-control-sm-padding-block-bordered-narrow: calc((var(--qy-control-sm-narrow) - var(--qy-text-control-sm-mobile-leading) - 2px) / 2);
     --qy-control-sm-icon: 0.875rem;
     --qy-control-sm-icon-narrow: 1rem;
-    --qy-control-sm-icon-padding: calc((var(--qy-control-sm) - var(--qy-control-sm-icon)) / 2);
-    --qy-control-sm-icon-padding-narrow: calc((var(--qy-control-sm-narrow) - var(--qy-control-sm-icon-narrow)) / 2);
-    --qy-control-sm-icon-padding-bordered: calc(var(--qy-control-sm-icon-padding) - 1px);
-    --qy-control-sm-icon-padding-bordered-narrow: calc(var(--qy-control-sm-icon-padding-narrow) - 1px);
-    --qy-control-sm-padding-with-icon: calc(var(--qy-control-sm-padding-bordered) + var(--qy-control-sm-icon));
-    --qy-control-sm-padding-with-icon-narrow: calc(var(--qy-control-sm-padding-bordered) + var(--qy-control-sm-icon-narrow));
 
-    /* md: text-control-md; icons follow the control icon presets in STANDARDS §2. */
-    --qy-control-md: 2rem;
+    --qy-control-md: calc(var(--qy-cai) + 3 * var(--qy-fen));
     --qy-control-md-narrow: calc(var(--qy-control-md) + var(--qy-control-mobile-extra));
-    --qy-control-md-inner: calc(var(--qy-control-md) - 2px);
-    --qy-control-md-inner-narrow: calc(var(--qy-control-md-narrow) - 2px);
-    --qy-control-md-padding: 14px;
+    --qy-control-md-padding: calc((var(--qy-control-md) - var(--qy-fen)) / 2);
     --qy-control-md-padding-bordered: calc(var(--qy-control-md-padding) - 1px);
-    --qy-control-md-padding-block-bordered: calc((var(--qy-control-md) - var(--qy-text-control-md-leading) - 2px) / 2);
-    --qy-control-md-padding-block-bordered-narrow: calc((var(--qy-control-md-narrow) - var(--qy-text-control-md-mobile-leading) - 2px) / 2);
     --qy-control-md-icon: 1rem;
-    --qy-control-md-icon-narrow: 1.125rem;
-    --qy-control-md-icon-padding: calc((var(--qy-control-md) - var(--qy-control-md-icon)) / 2);
-    --qy-control-md-icon-padding-narrow: calc((var(--qy-control-md-narrow) - var(--qy-control-md-icon-narrow)) / 2);
-    --qy-control-md-icon-padding-bordered: calc(var(--qy-control-md-icon-padding) - 1px);
-    --qy-control-md-icon-padding-bordered-narrow: calc(var(--qy-control-md-icon-padding-narrow) - 1px);
-    --qy-control-md-padding-with-icon: calc(var(--qy-control-md-padding-bordered) + var(--qy-control-md-icon));
-    --qy-control-md-padding-with-icon-narrow: calc(var(--qy-control-md-padding-bordered) + var(--qy-control-md-icon-narrow));
+    --qy-control-md-icon-narrow: 1rem;
 
-    /* lg: text-control-md; icons follow the control icon presets in STANDARDS §2. */
-    --qy-control-lg: 2.25rem;
+    --qy-control-lg: calc(var(--qy-cai) + 4 * var(--qy-fen));
     --qy-control-lg-narrow: calc(var(--qy-control-lg) + var(--qy-control-mobile-extra));
-    --qy-control-lg-inner: calc(var(--qy-control-lg) - 2px);
-    --qy-control-lg-inner-narrow: calc(var(--qy-control-lg-narrow) - 2px);
-    --qy-control-lg-padding: 16px;
+    --qy-control-lg-padding: calc((var(--qy-control-lg) - var(--qy-fen)) / 2);
     --qy-control-lg-padding-bordered: calc(var(--qy-control-lg-padding) - 1px);
-    --qy-control-lg-padding-block-bordered: calc((var(--qy-control-lg) - var(--qy-text-control-lg-leading) - 2px) / 2);
-    --qy-control-lg-padding-block-bordered-narrow: calc((var(--qy-control-lg-narrow) - var(--qy-text-control-lg-mobile-leading) - 2px) / 2);
-    --qy-control-lg-icon: 1rem;
+    --qy-control-lg-icon: 1.125rem;
     --qy-control-lg-icon-narrow: 1.125rem;
-    --qy-control-lg-icon-padding: calc((var(--qy-control-lg) - var(--qy-control-lg-icon)) / 2);
-    --qy-control-lg-icon-padding-narrow: calc((var(--qy-control-lg-narrow) - var(--qy-control-lg-icon-narrow)) / 2);
-    --qy-control-lg-icon-padding-bordered: calc(var(--qy-control-lg-icon-padding) - 1px);
-    --qy-control-lg-icon-padding-bordered-narrow: calc(var(--qy-control-lg-icon-padding-narrow) - 1px);
-    --qy-control-lg-padding-with-icon: calc(var(--qy-control-lg-padding-bordered) + var(--qy-control-lg-icon));
-    --qy-control-lg-padding-with-icon-narrow: calc(var(--qy-control-lg-padding-bordered) + var(--qy-control-lg-icon-narrow));
 
-    /* xl: text-control-xl; icons follow the control icon presets in STANDARDS §2. */
-    --qy-control-xl: 2.5rem;
+    --qy-control-xl: calc(var(--qy-cai) + 5 * var(--qy-fen));
     --qy-control-xl-narrow: calc(var(--qy-control-xl) + var(--qy-control-mobile-extra));
-    --qy-control-xl-padding: 16px;
+    --qy-control-xl-padding: calc((var(--qy-control-xl) - var(--qy-fen)) / 2);
     --qy-control-xl-padding-bordered: calc(var(--qy-control-xl-padding) - 1px);
-    --qy-control-xl-icon: 1.125rem;
+    --qy-control-xl-icon: 1.25rem;
     --qy-control-xl-icon-narrow: 1.25rem;
-    --qy-control-xl-icon-padding: calc((var(--qy-control-xl) - var(--qy-control-xl-icon)) / 2);
-    --qy-control-xl-icon-padding-narrow: calc((var(--qy-control-xl-narrow) - var(--qy-control-xl-icon-narrow)) / 2);
-    --qy-control-xl-icon-padding-bordered: calc(var(--qy-control-xl-icon-padding) - 1px);
-    --qy-control-xl-icon-padding-bordered-narrow: calc(var(--qy-control-xl-icon-padding-narrow) - 1px);
-    /* §1: an embedded clear action reserves its full xs control footprint,
-     * placement inset and half a field relationship gap, not only its glyph.
-     * Shared consumers: DatePicker / DateRangePicker / DateTimePicker triggers.
-     * Insets preserve their existing sm and default placement; lg shares md's
-     * placement because changing the outer step does not move this action. */
-    --qy-control-clear-inset-sm: calc((var(--qy-control-sm) - var(--qy-control-xs)) / 2);
-    --qy-control-clear-inset: calc((var(--qy-control-md) - var(--qy-control-xs)) / 2);
-    --qy-control-sm-clear-reserve: calc(var(--qy-control-xs) + var(--qy-control-clear-inset-sm) + var(--qy-field-gap) / 2);
-    --qy-control-sm-clear-reserve-narrow: calc(var(--qy-control-xs-narrow) + var(--qy-control-clear-inset-sm) + var(--qy-field-gap) / 2);
-    --qy-control-md-clear-reserve: calc(var(--qy-control-xs) + var(--qy-control-clear-inset) + var(--qy-field-gap) / 2);
-    --qy-control-md-clear-reserve-narrow: calc(var(--qy-control-xs-narrow) + var(--qy-control-clear-inset) + var(--qy-field-gap) / 2);
-    --qy-control-lg-clear-reserve: calc(var(--qy-control-xs) + var(--qy-control-clear-inset) + var(--qy-field-gap) / 2);
-    --qy-control-lg-clear-reserve-narrow: calc(var(--qy-control-xs-narrow) + var(--qy-control-clear-inset) + var(--qy-field-gap) / 2);
-    /* Minimum touch target; enforced on coarse pointers. */
+
+    /* 同一控件内图标与文字、名称与状态的间隔：一分半。比组内间隔小一级，图标与名称读作一体。 */
+    --qy-control-content-gap: calc(1.5 * var(--qy-fen));
+
+    /* 粗指针命中区：库内选择，不随等与密度变化，也不是 WCAG AA 的统一下限。 */
     --qy-touch-target: 2.75rem;
 
-    /* Selection batch 6: independent slider geometry presets, not spacing.
-     * Track/Indicator consume thickness; vertical Control consumes its working
-     * length. Retune here or in the project theme; choices are documented in
-     * docs/decisions/2026-10-03-batch6-selection.md. */
-    --qy-slider-track-size: 4px;
-    --qy-slider-vertical-length: 10rem;
+    /* ─── 圆角（应物象形；基础层 §4）──────────────────────────
+     * 方以载事：独立控件 r = min(外高 / 4, 2 分)。xs、sm 落在四分之一处（6、7px），
+     * md 以上取 2 分。浮层圆角 = 控件圆角 + 浮层内缩，使浮层里的行项与控件同角、且内外同心。
+     * 面板与浮层同为承载面，取同一圆角。标记 r = 标记边长 / 4 = 1 分。 */
+    --qy-radius: calc(2 * var(--qy-fen));
+    --qy-radius-xs: calc(var(--qy-control-xs) / 4);
+    --qy-radius-sm: calc(var(--qy-control-sm) / 4);
+    --qy-radius-md: var(--qy-radius);
+    --qy-radius-lg: var(--qy-radius);
+    --qy-radius-xl: calc(2.5 * var(--qy-fen));
+    --qy-radius-2xl: calc(3 * var(--qy-fen));
+    --qy-radius-full: 9999px;
+    --qy-radius-marker: var(--qy-fen);
+    --qy-radius-item: var(--qy-radius-xs);
+    --qy-radius-control: var(--qy-radius-lg);
+    --qy-overlay-inset: var(--qy-fen);
+    --qy-radius-overlay: calc(var(--qy-radius-control) + var(--qy-overlay-inset));
+    --qy-radius-overlay-item: max(0px, calc(var(--qy-radius-overlay) - var(--qy-overlay-inset)));
+    --qy-radius-panel: var(--qy-radius-overlay);
 
-    /* Batch 7 passive display roles. Each entry is a preset and is independently
-     * overridable here or by the project theme. Live consumers are named below;
-     * these dimensions do not derive from the global spacing scale. */
-    /* Avatar identity samples; Avatar Root consumes the selected profile. */
+    /* 并列候选的轨道（基础层 §6）：整组占一个控件高度；候选高与圆角由外高与内缩倒推，
+     * 按档位取值的部分在 src/track.ts。内缩半分：一分时 md 候选只剩 22px。
+     * 轨道圆角 = 同档控件圆角、候选圆角按同心换算，都在轨道元素上就地推导，不设全局入口——
+     * 要改它们，改控件圆角（2026-10-07 删去两条永远被覆盖的 :root 声明）。 */
+    --qy-track-inset: calc(var(--qy-fen) / 2);
+
+    /* ─── 填值控件与标记：只有一等（基础层 §2）──────────────────
+     * 填值控件读这一层，不读档位；默认 md 等，紧凑密度降为 sm 等（见下方改绑）。
+     * 值的文字始终是 md 文字档（正文尺寸），不随密度变。 */
+    --qy-fill-height: var(--qy-control-md);
+    --qy-fill-height-narrow: var(--qy-control-md-narrow);
+    --qy-fill-padding: var(--qy-control-md-padding-bordered);
+    --qy-fill-icon: var(--qy-control-md-icon);
+    --qy-fill-icon-narrow: var(--qy-control-md-icon-narrow);
+    --qy-fill-text-leading: var(--qy-text-control-md-leading);
+    --qy-fill-text-leading-narrow: var(--qy-text-control-md-mobile-leading);
+    --qy-fill-radius: var(--qy-radius-control);
+
+    /* 勾选与单选的标记：边长 = 材 − 分 = 16px，坐在标签那一行（一材）里，上下各留半分；
+     * 与同一行里的图标（md 图标 16px）同大。窄屏升一等到一材。密度不改标记：它跟随文字。 */
+    --qy-marker-size: calc(var(--qy-cai) - var(--qy-fen));
+    --qy-marker-size-narrow: var(--qy-cai);
+    /* 标记在那一行里上下居中：外加 (材 − 标记) / 2，使标记连同空白正好占一行，
+     * 多行标签时对齐第一行（行气）。窄屏标记已等于一材，外加为 0。 */
+    --qy-marker-inset: calc((var(--qy-cai) - var(--qy-marker-size)) / 2);
+    --qy-marker-inset-narrow: calc((var(--qy-cai) - var(--qy-marker-size-narrow)) / 2);
+    /* 开关不是标记，是一条供一个点滑动的槽（方以载事）：高一材、长两材，与标签行同高。 */
+    --qy-switch-size: var(--qy-cai);
+    --qy-switch-size-narrow: calc(var(--qy-cai) + var(--qy-fen));
+
+    /* 读数轨道与点：分的倍数，预设。滑块轨道细（抓手承担位置）；进度、计量、占比是同一种读数轨道
+       （轨道本身就是读数），一个关系一个名字（2026-10-07 合并原 meter / progress 两个同值名）。 */
+    --qy-slider-track-size: var(--qy-fen);
+    --qy-slider-vertical-length: calc(8 * var(--qy-cai));
+    --qy-status-dot-size: calc(2 * var(--qy-fen));
+    --qy-readout-track-size: calc(2 * var(--qy-fen));
+
+    /* 头像按等取样：身份样本的大小由所在位置的控件等决定。 */
     --qy-avatar-xs: var(--qy-control-xs);
     --qy-avatar-sm: var(--qy-control-sm);
     --qy-avatar-md: var(--qy-control-md);
     --qy-avatar-lg: var(--qy-control-lg);
     --qy-avatar-xl: var(--qy-control-xl);
-    /* ProgressCircle's SVG viewport, separate from avatars and controls. */
-    --qy-progress-circle-xs: var(--qy-control-xs);
-    --qy-progress-circle-sm: var(--qy-control-sm);
-    --qy-progress-circle-md: var(--qy-control-md);
-    --qy-progress-circle-lg: var(--qy-control-lg);
-    --qy-progress-circle-xl: var(--qy-control-xl);
-    --qy-progress-circle-stroke: 2px;
-    /* StatusDot graphic; MeterTrack and ProgressTrack each own their thickness. */
-    --qy-status-dot-size: 0.5rem;
-    --qy-meter-track-size: 0.5rem;
-    --qy-progress-track-size: 0.5rem;
-    /* Glyph enclosures: Badge and native Kbd consume their respective padding. */
-    --qy-badge-padding-inline: 0.5em;
-    --qy-badge-padding-block: 0.125em;
-    --qy-kbd-padding-inline: 0.375em;
-    --qy-kbd-padding-block: 0.125em;
 
-    /* Floating relationship defaults; utility + actual Backdrop/Viewport/
-     * Positioner consumers own modal order through React context. Integers and
-     * step are presets; newer modal > older owned popup > its surface, and notification < document popup
-     * are relationship constraints. Retune as one scale in a project theme. */
+    /*
+     * Kbd：键帽外高固定 4 分，字在其中居中，字号随所在文字取整；横向 1 分。只用清墨线一种机制。 */
+    --qy-kbd-padding-inline: var(--qy-fen);
+
+    /* ─── 疏密（疏密有致；基础层 §3）──────────────────────────
+     * 间距是分组的第一手段，三级逐级拉开：
+     *   组内  2 分（8px）       名称、控件、说明之间；相邻动作之间
+     *   组间  一「疏密之材」     字段与字段、面板内段落之间——空出一行正文
+     *   节间  两「疏密之材」     章节之间——空出两行
+     * 「疏密之材」默认就是材（20px）；紧凑密度把它换成 4 分（16px），文字的材不变。
+     * 依赖它的派生值写在下方 `:root, [data-density]` 块，使局部改密度时随之重算。 */
+    --qy-space-module: var(--qy-cai);
+    --qy-field-gap: calc(2 * var(--qy-fen));
+    --qy-action-gap: calc(2 * var(--qy-fen));
+    /* 层级缩进：3 分，明显小于行高，又大到一眼数得出级数。预设；密度不改层级深度。 */
+    --qy-level-indent: calc(3 * var(--qy-fen));
+    --qy-page-gutter: clamp(1rem, 1.4vw, 1.75rem);
+
+    /* 浮起的层序（基础层 §6）。整数与步长是预设；新开 modal 高于旧面的候选、
+     * 通知低于文档候选是关系约束。项目主题可整体换一套。 */
     --qy-layer-notification: 5;
     --qy-layer-popup: 10;
     --qy-layer-modal: 30;
@@ -391,36 +366,14 @@
     --qy-layer-surface-offset: 1;
     --qy-layer-owned-popup-offset: 2;
 
-    /* Foundation §3 spacing roles: rows express list item occupancy; panel
-     * padding expresses inner edge → content (default or compact surface); panel
-     * gap expresses paragraphs inside that panel; section gap separates sections.
-     * These nine roles already exist: no missing role or semantic duplication.
-     * Density changes relationships, independently of control/touch geometry. */
-    --qy-row-default: 3rem;
-    --qy-row-compact: 2.5rem;
-    --qy-panel-padding: var(--qy-space-6);
-    --qy-panel-padding-sm: var(--qy-space-4);
-    --qy-panel-gap: var(--qy-space-4);
-    --qy-section-gap: var(--qy-space-5);
-    /* Field gap: label/control/error within one field. Field-group gap: one
-     * field → the next. Action gap: adjacent actions in the same action group.
-     * Live consumers include Field/FieldGroup and grouped task actions. */
-    --qy-field-gap: var(--qy-space-2);
-    --qy-field-group-gap: var(--qy-space-5);
-    --qy-action-gap: var(--qy-space-2);
-    --qy-page-gutter: clamp(1rem, 1.4vw, 1.75rem);
-    --qy-topbar-height: 3.5rem;
-
-    /* Motion. Short, eased, and interruptible; see motion.css. */
+    /* ─── 动（气韵生动；基础层 §12）───────────────────────────
+     * 同一类变化用同一节拍。时长与曲线为预设。 */
     --qy-duration-instant: 0ms;
     --qy-duration-press: 100ms;
     --qy-duration-fast: 140ms;
     --qy-duration-feedback: 180ms;
     --qy-duration-base: 220ms;
     --qy-duration-slow: 320ms;
-    /* A drawer travels further than a popup, so it needs its own role rather
-     * than reusing `base` or writing 450ms at a call site. Paired with
-     * `--qy-ease-drawer`, which is the curve designed for that distance. */
     --qy-duration-drawer: 450ms;
     --qy-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --qy-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -428,74 +381,63 @@
     --qy-ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
     --qy-stagger: 40ms;
 
-    /* Foundation §15: focus strengthens a property the control already has,
-     * never a ring drawn outside it (user ruling 2026-10-03: 「控件外面不出现任何一圈」).
-     *
-     *   bordered (input, card, popover panel): the border only DARKENS. No
-     *     inward thickening — the colour change alone moves the input edge from
-     *     3.95:1 to 15.13:1 against white (user ruling: 「不做加粗，只做加黑」).
-     *   solid fill: a 2px contrasting line inside the fill (preset width).
-     *   bordered button: same as an input — the 50% border only darkens.
-     *   quiet (no fill, no border): a thin 1px line inside its own box.
-     *
-     * WCAG AA asks for a visible indicator (2.4.7) at ≥3:1 (1.4.11); the 2px
-     * area minimum is 2.4.13, level AAA. Widths here are presets, not floors. */
+    /* ─── 焦点（骨法用笔；基础层 §15）─────────────────────────
+     * 焦点只让已有的线加深，不加粗，不外扩（用户裁决：「控件外面不出现任何一圈」）。
+     * 实心填充没有线可加深，在填充内侧画一道反色线；它是全库唯一的 2px 线，
+     * 因为焦点必须一瞥可见。无填充无边框的入口在自身盒内画 1px。 */
     --qy-focus-ring-width: 2px;
     --qy-focus-quiet-width: 1px;
   }
 
-  /* Rebind at each appearance root so the fill/foreground pair follows theme
-   * changes. A solid primary fill uses its contrasting on-fill foreground:
-   * light: neutral-50 on neutral-800; dark: neutral-800 on neutral-100.
-   * Quiet controls resolve against the locally painted carrier via --qy-ring.
-   * A component with another fill must set --qy-focus-ring-color locally. */
+  /* 依赖疏密之材或填值高度的派生值：在每个密度容器上重算。
+   * 自定义属性里的 var() 在声明处求值后才继承，只在 :root 声明的话，
+   * 局部 data-density 改了锚点，这些派生值仍是根上的旧值。 */
+  :root,
+  [data-density] {
+    --qy-field-group-gap: var(--qy-space-module);
+    --qy-panel-gap: var(--qy-space-module);
+    --qy-section-gap: calc(2 * var(--qy-space-module));
+    /* 面板内缘比组间多一分：面板里的内容先彼此成组，再与边框成组。 */
+    --qy-panel-padding: calc(var(--qy-space-module) + var(--qy-fen));
+    /* 小浮层（Popover、Alert）内缘比组间少一分：它通常只装一组内容。 */
+    --qy-panel-padding-sm: calc(var(--qy-space-module) - var(--qy-fen));
+    /* 列表行 = 一个填值控件 + 上下各一个组内间隔。 */
+    --qy-row-default: calc(var(--qy-fill-height) + 2 * var(--qy-field-gap));
+  }
+
   :root,
   .light,
   .dark,
   [data-theme] {
     --qy-focus-ring-on-solid: var(--qy-primary-foreground);
     --qy-focus-ring-color: var(--qy-ring);
-    /* Bordered button: white ground, so the line carries the boundary (user rule:
-     * 「和按钮和背景色一致的时候才保留边框」). Border strength matches the input
-     * (user ruling 2026-10-03: 50%), 3.95:1 on white; focus darkens it to the ring
-     * colour (15.13:1) with no thickening — the same behaviour as an input. */
+    /* bordered 按钮：底色与承载面相同，由线划出范围（骨法用笔）；与输入框同一条「重」墨线。
+     * 聚焦时线加深到焦墨，不加粗。 */
     --qy-button-bordered-border: var(--qy-border-input);
     --qy-button-bordered-border-focus: var(--qy-ring);
   }
 
   /*
-   * Density and the viewport are two different axes, and neither may decide the
-   * other by source order. `[data-density="compact"]` and the `:root` inside a
-   * narrow-screen media query have equal specificity, so when they set the same
-   * token the block that comes later wins silently — compact used to override
-   * mobile at every width, on tokens it has no reason to own.
-   *
-   * The split: the narrow-screen query owns viewport geometry (how much room
-   * the device has), compact owns relationships (how tightly content packs).
-   * The two blocks now share no token, so the order no longer matters.
-   *
-   * Two tokens left this block:
-   * `--qy-panel-padding` because compact and narrow both resolved it to
-   * `--qy-space-4`, so compact's copy was inert; `--qy-topbar-height` because
-   * chrome height is viewport geometry, which compact has no standing to set.
-   * (The narrow-screen value is SMALLER than the desktop one; see the query
-   * below. This token currently has no consumer in the library — the docs site
-   * measures its own header height in JS.)
-   *
-   * `--qy-touch-target` is untouched by density on purpose.
+   * 紧凑密度：降一等。控件从 md 等降到 sm 等，疏密之材从一材换成 4 分。
+   * 文字、标记与触摸目标不变（屋有大小，人无大小）。
+   * 窄屏媒体查询只管视口几何（页边距、面板内缘），与密度不共享 token，顺序无关。
    */
   [data-density="compact"] {
-    --qy-row-default: var(--qy-row-compact);
-    --qy-panel-gap: var(--qy-space-3);
-    --qy-section-gap: var(--qy-space-4);
+    --qy-space-module: calc(4 * var(--qy-fen));
+    --qy-fill-height: var(--qy-control-sm);
+    --qy-fill-height-narrow: var(--qy-control-sm-narrow);
+    --qy-fill-padding: var(--qy-control-sm-padding-bordered);
+    --qy-fill-icon: var(--qy-control-sm-icon);
+    --qy-fill-icon-narrow: var(--qy-control-sm-icon-narrow);
+    --qy-fill-radius: var(--qy-radius-sm);
   }
 
-  /* Narrow screens: tighter gutter and a slightly shorter topbar than desktop,
-   * at any density. */
   @media (max-width: 767px) {
     :root {
-      --qy-topbar-height: 3.375rem;
       --qy-page-gutter: var(--qy-space-4);
+    }
+    :root,
+    [data-density] {
       --qy-panel-padding: var(--qy-space-4);
     }
   }

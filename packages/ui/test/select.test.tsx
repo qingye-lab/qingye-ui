@@ -257,3 +257,14 @@ test("refs, consumer render/styles/ARIA, explicit Portal container and group sem
     expect(portal.querySelector("[data-slot=select-popup]")).not.toBeNull();
   } finally { portal.remove(); }
 });
+
+test("a set value without items warns in development, because the trigger can only show the raw value", () => {
+  const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  const { unmount } = render(<Select defaultValue="alpha"><SelectTrigger aria-label="选项" /><SelectPopup><Options /></SelectPopup></Select>);
+  expect(warn).toHaveBeenCalledWith(expect.stringContaining("`items` is missing"));
+  unmount();
+  warn.mockClear();
+  render(<Fixture />);
+  expect(warn).not.toHaveBeenCalled();
+  warn.mockRestore();
+});

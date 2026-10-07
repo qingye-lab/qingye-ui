@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
-Source SHA-256: 0b0c4cceffa33d5fb7c8e003374f02a021a4b92f3ba55f6d8e19caf67d334f83
+Source SHA-256: 05e4da919c2cd7cbb9cc674aa24aaf72f4bb04f03427773105236184a55c6aa8
 
 应用事实决定的有序过程。
 
@@ -45,7 +45,7 @@ Source SHA-256: 0b0c4cceffa33d5fb7c8e003374f02a021a4b92f3ba55f6d8e19caf67d334f83
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 

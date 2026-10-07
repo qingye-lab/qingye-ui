@@ -79,3 +79,17 @@ export function Text({ step = "body", numeric = false, className, render, ...pro
     props: mergeProps<"p">(defaultProps, props),
   });
 }
+
+export type CodeProps = useRender.ComponentProps<"code">;
+/**
+ * 正文里的一段代码（基础层 §8、§19）：等宽字，字号为所在文字的 0.875 倍并取整像素
+ * （等宽字面偏大，略收一些；em 换算不能落成小数字号）；面取墨的柔底（一种机制），
+ * 横向留白 1 分；跨行时每段各自带面。不另设行高，跟随所在那一行。
+ */
+export function Code({ className, render, ...props }: CodeProps) {
+  return useRender({
+    defaultTagName: "code",
+    render,
+    props: mergeProps({ "data-slot": "code", className: cn("rounded-marker bg-neutral-soft px-(--qy-fen) font-mono text-[round(0.875em,1px)] [box-decoration-break:clone] wrap-anywhere", className) }, props),
+  });
+}

@@ -24,7 +24,7 @@ Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 - 窄容器保留必要内容与可达操作；布局改变时保留对象、输入和焦点。
 
 ## Customization
-- NativeSelect 五档/公开出口与显式名称
+- NativeSelect 的公开出口与显式名称
 
 ## Current exports
 - LocaleSwitch: function; owner locale-switch; PASS; props: LocaleSwitchProps
@@ -34,7 +34,7 @@ Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -43,7 +43,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 复用 NativeSelect；UILocaleProvider 是唯一当前值来源。
 - options: readonly { locale: UILocale; label: string; disabled?: boolean }[]. 消费项目提供可选语言与名称，code 必须非空且唯一。当前 code 未列入时显示其禁用事实选项。
 - onLocaleChange: (locale: UILocale, event: ChangeEvent<HTMLSelectElement>) => void. 请求新 locale；应用更新 Provider 后才改变选择事实，拒绝时保留原值。
-- controlSize: xs | sm | md | lg | xl; default md. 同名 control/text 的五档，与 NativeSelect 相同。
 - name / form / disabled / render / ref / onChange / ARIA: NativeSelectProps. 原生表单、禁用与出口；onChange preventDefault 可取消请求；默认名称读 messages.language。
 
 ## Keyboard
@@ -65,16 +64,30 @@ export default function Demo() {
 }
 ```
 
-### 五档与禁用
-Source: apps/docs/src/content/locale-switch/demos/02-sizes.tsx
+### 密度与禁用
+Source: apps/docs/src/content/locale-switch/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
 import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
 import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
 import { enUS } from "@qingye/ui/locales/en-US";
-export const meta = { title: "五档与禁用", titleEn: "Sizes and disabled" };
+
+export const meta = { title: "密度与禁用", titleEn: "Density and disabled" };
+
 export default function Demo() {
   const [locale, setLocale] = useState(zhCN);
-  return <UILocaleProvider locale={locale}><div className="flex flex-wrap items-center gap-(--qy-action-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map(controlSize => <LocaleSwitch key={controlSize} controlSize={controlSize} aria-label={controlSize} className="w-auto" options={[{ locale: zhCN, label: "中文" }, { locale: enUS, label: "English" }]} onLocaleChange={setLocale} disabled={controlSize === "xl"} />)}</div></UILocaleProvider>;
+  const options = [{ locale: zhCN, label: "中文" }, { locale: enUS, label: "English" }];
+  return (
+    <UILocaleProvider locale={locale}>
+      <div className="flex flex-wrap items-start gap-(--qy-panel-gap)">
+        {(["default", "compact"] as const).map((density) => (
+          <div data-density={density} key={density}>
+            <LocaleSwitch aria-label={density === "compact" ? "语言 · 紧凑" : "语言"} className="w-auto" options={options} onLocaleChange={setLocale} />
+          </div>
+        ))}
+        <LocaleSwitch aria-label="语言 · 禁用" className="w-auto" options={options} onLocaleChange={setLocale} disabled />
+      </div>
+    </UILocaleProvider>
+  );
 }
 ```

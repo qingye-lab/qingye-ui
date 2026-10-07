@@ -3,12 +3,12 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: f7fb48bcedd89b0e07ca23767029cc59468efada0fde59bfe6de7834d8a6ca41
+Source SHA-256: 5b53a97e3c9230aa849fa02f74fc90f5dfdc69e4ba5e9457268eddd8c1338095
 
 Enter one value from a small set of visible segments.
 
 ## Decision
-SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for pressed tools allowing all items to be released.
+SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released.
 
 ## Use and ownership
 - A few mutually exclusive values benefit from side-by-side comparison.
@@ -89,7 +89,7 @@ import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye/ui/components
 import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
 
 export const meta = { title: "状态", titleEn: "States" };
-const items = <><SegmentedControlItem value="alpha">甲</SegmentedControlItem><SegmentedControlItem value="beta">乙</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>丙</SegmentedControlItem></>;
+const items = <><SegmentedControlItem value="alpha">左</SegmentedControlItem><SegmentedControlItem value="beta">中</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>右</SegmentedControlItem></>;
 export default function Demo() {
   const id = useId();
   return <FieldGroup className="grid sm:grid-cols-3">

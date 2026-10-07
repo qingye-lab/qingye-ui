@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: 73755fb868bbf1b9d78486c8c616eefe566e27bf5c8cca469d7c31c1f255d71e
+Source SHA-256: b002f563908a1a11537d5f45c8908002037fc050a096284506879ab575131e30
 
 从边缘进入工作面，再返回入口。
 

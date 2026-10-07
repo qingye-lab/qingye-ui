@@ -3,15 +3,15 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 0c6075becf42680a09312f73e073e4c01b8d341fb26a55b8ac22a407ad8a3df9
+Source SHA-256: 492cabf9207da7da4f7619fddf89ba897fc440a79e179b2ffdf29d1f29af9674
 
-长期导航与可逆收起。
+长期导航、收起为图标 rail 与二级子级。
 
 ## Decision
-收起只改变导航可见性，保留挂载；active 与路由由应用明确提供。
+收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。
 
 ## Notes
-- 应用决定宽度与收起策略；始终保留可见 Toggle。
+- 应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。
 
 ## Use and ownership
 - 工作面旁的长期导航。
@@ -23,6 +23,7 @@ Source SHA-256: 0c6075becf42680a09312f73e073e4c01b8d341fb26a55b8ac22a407ad8a3df9
 - Sidebar / SidebarToggle：aside 与可逆开关。
 - SidebarContent / SidebarGroup / SidebarGroupLabel：原生 nav 与导航组。
 - SidebarLink：真实页面链接。
+- SidebarSub / SidebarSubTrigger / SidebarSubContent：可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 
 ## Responsive behavior
 - 桌面保持真实结构；菜单受可用空间限制，表格保留完整比较列。
@@ -42,6 +43,12 @@ Source SHA-256: 0c6075becf42680a09312f73e073e4c01b8d341fb26a55b8ac22a407ad8a3df9
 - SidebarLink: function; owner sidebar; PASS; props: SidebarLinkProps
 - SidebarLinkProps: type; owner sidebar; PASS
 - SidebarProps: type; owner sidebar; PASS
+- SidebarSub: function; owner sidebar; PASS; props: SidebarSubProps
+- SidebarSubContent: function; owner sidebar; PASS; props: SidebarSubContentProps
+- SidebarSubContentProps: type; owner sidebar; PASS
+- SidebarSubProps: type; owner sidebar; PASS
+- SidebarSubTrigger: function; owner sidebar; PASS; props: SidebarSubTriggerProps
+- SidebarSubTriggerProps: type; owner sidebar; PASS
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
@@ -64,17 +71,26 @@ aside 与可逆开关。
 
 ### SidebarLink
 真实页面链接。
-- href / active: native anchor / boolean. active 显式写 aria-current；收起焦点内容会返回 Toggle。
+- href / active: native anchor / boolean. active 显式写 aria-current；焦点所在之处收起后真的不可达时，才会回退到 Toggle（例如焦点原本在一个二级子级里，侧栏收起换成 rail）。
+- icon: ReactNode. 收起为 rail 时唯一可见的识别物；没有图标的条目收起后没有可展示的内容。名称（children）在 rail 下只是视觉隐藏（sr-only），可访问名称不变，并由 Tooltip 把名称重新摆给看得见的人。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+### SidebarSub / SidebarSubTrigger / SidebarSubContent
+可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
+- SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. 展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。
+- SidebarSubTrigger：icon: ReactNode. 与 SidebarLink 的 icon 同一分工；rail 下按钮不再承担内嵌展开，只作为 Popover 入口，避免收起侧栏悄悄改变用户没点开过的展开记忆。
 
 ## Keyboard
 
 ## Source examples
-### 可逆导航
+### 可逆导航与二级
 Source: apps/docs/src/content/sidebar/demos/01-task.tsx
 ```tsx
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarToggle } from "@qingye/ui/components/sidebar";
+import { LayoutPanelLeftIcon, ListTreeIcon, SquareStackIcon } from "lucide-react";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye/ui/components/sidebar";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "可逆导航", titleEn: "Reversible navigation" } satisfies DemoMeta;
-export default function Demo() { return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active>侧栏导航</SidebarLink><SidebarLink href="/components/tabs">视角标签</SidebarLink><SidebarLink href="/components/tree">层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>; }
+export const meta = { title: "可逆导航与二级", titleEn: "Reversible navigation with a sub-level" } satisfies DemoMeta;
+export default function Demo() {
+  return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active icon={<LayoutPanelLeftIcon aria-hidden="true" />}>侧栏导航</SidebarLink><SidebarSub defaultOpen><SidebarSubTrigger icon={<SquareStackIcon aria-hidden="true" />}>视角标签</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/components/tabs">标签页</SidebarLink><SidebarLink href="/components/segmented-control">分段控件</SidebarLink></SidebarSubContent></SidebarSub><SidebarLink href="/components/tree" icon={<ListTreeIcon aria-hidden="true" />}>层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
+}
 ```

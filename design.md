@@ -4,7 +4,7 @@
 
 这份文件帮助人和 AI 作出界面设计决定。它说明如何命名、组织、呈现和承接任务，不是组件 API 清单，也不表示文中提到的能力已经实现。使用组件时，仍需读取当前安装版本的类型、文档和示例。
 
-Qingye UI 从中国传统思想、造物与艺术中借鉴方法。文化参与具体判断；界面不需要使用传统图案、仿古字体或某套指定配色。专业工具、内容展示与日常应用可以有不同面貌。
+Qingye UI 从中国传统的经典与东方美学中取法：思想给出判断的次序，造物给出尺度的法度，书画与园林给出疏密、墨色、线与位置的经营。**取其法，不取其形**——文化参与具体判断，界面不使用传统图案、仿古字体或印章卷轴一类装饰。专业工具、内容展示与日常应用可以有不同面貌。
 
 设计理念决定目标，实现来源服从目标。本库组件为原创实现，依据本文件、`STANDARDS.md` 与无障碍原语的公共 API 编写。是否使用无障碍原语和其他成熟底座另行依据实际能力判断，不因替换外观层而重复发明所有基础交互。
 
@@ -28,22 +28,52 @@ Qingye UI 从中国传统思想、造物与艺术中借鉴方法。文化参与�
 
 **表达服从判断，判断服从任务。** 没有任务依据的差异应收敛；有任务依据的差异必须保留。参考实现、流行样式与个人偏好在任务依据面前不作数。
 
-**能组合解决的不增加配置，能复用关系的不新增组件。** 每多一个属性、变体或组件，就多一个需要判断的决策。设计系统的主要价值是消除无价值决策，而不是提供更多可能。
+**能组合解决的不增加配置，能复用关系的不新增组件。** 《老子》：「少则得，多则惑。」每多一个属性、变体或组件，就多一个需要判断的决策。设计系统的主要价值是消除无价值决策，而不是提供更多可能。
 
-## 六种方法
+**文质彬彬。** 语义与关系是质，表达是文。《论语·雍也》：「质胜文则野，文胜质则史。」语义正确而形制粗糙，与外观精致而状态失真，同样不算完成。两者各有方法：质依下文的器用六法，文依表达九法；分别判断，不互相代替。
 
-方法用于作判断，不用于命名样式，也不保证出现在每个组件里。普通组件只采用相关方法；完整任务检查六类问题。方法名称不是 HTML/ARIA `role`，也不是六个主题参数。
+## 总纲与取法
 
-| 方法 | English | 设计决定 | 应避免的结果 |
+| 总纲 | 出处 | 含义 |
+|---|---|---|
+| 器用为本 | 《易·系辞》「形而下者谓之器」；《考工记》以「良」论器 | 组件是器，先成其用。语义、状态与可达不成立，形制不予讨论 |
+| 关系为法 | 《老子》「有无相生，难易相成，长短相形，高下相倾」 | 大小、轻重、疏密只在相互比较中成立。要突出一处，先减弱它周围的，而不是继续加强它自己 |
+| 合宜为度 | 《考工记》「天有时，地有气，材有美，工有巧，合此四者，然后可以为良」；《园冶》「巧于因借，精在体宜」 | 好坏看是否合于情境、环境、媒介与工艺，不看是否用尽。组件从所在环境承接密度、明暗、方向与语言，不让调用方逐个配置 |
+
+一条传统方法进入本指南，须同时满足三条：**有出处**，能指出原文或公认手法；**能生成**，能作出一个判断或决定一类取值；**能检验**，给出可观察的判据。缺一条不收。不取的东西：传统纹样与图案装饰、仿古与书法字体用于界面文字、印章卷轴宣纸一类元素、以五行方位附会配色、内容本身不是竖排时的竖排。
+
+## 器用六法
+
+器用六法处理语义、关系与任务。方法用于作判断，不用于命名样式，也不保证出现在每个组件里。普通组件只采用相关方法；完整任务检查六类问题。方法名称不是 HTML/ARIA `role`，也不是主题参数。
+
+| 方法 | 出处 | 设计决定 | 应避免的结果 |
 |---|---|---|---|
-| 名实相符 | Semantic fidelity | 名称说明对象、动作和后果；等待、成功、失败、结果未知按真实事件表达 | 所有动作都叫“确定”；请求发出就显示“已保存” |
-| 相成相制 | Mutual support and restraint | 让内容、说明、操作和保护措施共同完成任务；功能作用与视觉强调分别判断 | 固定四级按钮；异常时仍弱化停止操作；每处重复警告 |
-| 布白有用 | Purposeful space | 分别安排关系间隔、可工作的空间与判断余地；保留有用的信息密度 | 每段都套卡片；为了留白藏比较列；示例自动成为提交内容 |
-| 随境取度 | Contextual fitness | 按任务选择显著程度、持续时间与是否中断；改变布局时保留正在发生的工作 | 所有错误只用 Toast；所有结果都弹窗；输入中突然重排并丢失焦点 |
-| 展开有据 | Justified disclosure | 提供有理由的预览与深入，同时支持直接抵达和合理返回 | 高频任务必须逐层探索；关键后果只在 Tooltip 中；直达详情无法返回 |
-| 进退相承 | Continuity of progress and retreat | 正常、等待、失败、未知、取消与恢复围绕同一对象连续发生 | 失败清空草稿；关闭窗口被称为撤销成功；业务完成依赖动画结束 |
+| 名实相符 | 《论语·子路》「名不正，则言不顺」 | 名称说明对象、动作和后果；等待、成功、失败、结果未知按真实事件表达 | 所有动作都叫“确定”；请求发出就显示“已保存” |
+| 相成相制 | 《素问》君臣佐使 | 让内容、说明、操作和保护措施共同完成任务；功能作用与视觉强调分别判断 | 固定四级按钮；异常时仍弱化停止操作；每处重复警告 |
+| 布白有用 | 《老子》「当其无，有室之用」 | 分别安排关系间隔、可工作的空间与判断余地；保留有用的信息密度 | 每段都套卡片；为了留白藏比较列；示例自动成为提交内容 |
+| 随境取度 | 《中庸》「君子而时中」 | 按任务选择显著程度、持续时间与是否中断；改变布局时保留正在发生的工作 | 所有错误只用 Toast；所有结果都弹窗；输入中突然重排并丢失焦点 |
+| 展开有据 | 园林框景、借景与移步换景 | 提供有理由的预览与深入，同时支持直接抵达和合理返回 | 高频任务必须逐层探索；关键后果只在 Tooltip 中；直达详情无法返回 |
+| 进退相承 | 《易·乾·文言》「知进退存亡而不失其正」 | 正常、等待、失败、未知、取消与恢复围绕同一对象连续发生 | 失败清空草稿；关闭窗口被称为撤销成功；业务完成依赖动画结束 |
 
-Six methods, in short: name what is true, let parts constrain each other, spend space on meaning, fit the context, disclose only with reason, and keep waiting, failure, cancellation and recovery on one object. The Chinese names are the source of truth for judgement; the English column exists so the same reasoning is readable outside this document.
+## 表达九法
+
+表达九法处理尺度、墨色、线、形、位置、表面与动，是「三件事的顺序」里第三步的方法。它们决定一类取值从哪里来，而不只给出风格方向；具体数值记录在基础层，并注明来源。
+
+| 方法 | 出处 | 设计决定 | 应避免的结果 |
+|---|---|---|---|
+| 以材为祖 | 《营造法式》「凡构屋之制，皆以材为祖」 | 全部几何由一个基本量派生：材是正文的一行，分是材的整除单位；尺寸档与密度只换「等」，各部位同比变化 | 每个控件各定一套尺寸；放大容器连带放大其中内容的字号 |
+| 疏密有致 | 邓石如「疏处可以走马，密处不使透风，常计白以当黑」 | 间距是分组的第一手段：组内紧、组间松、章节更松，级差一眼可辨；空白与笔墨同样经营 | 间距平均分布；靠线和卡片补救本该由间距表达的分组 |
+| 墨分五色 | 张彦远「运墨而五色具」；谢赫「随类赋彩」 | 一条有限的中性墨阶承担文字、线与承载面的全部层级；彩色只随语义类别施用；品牌强调色如一方印，少而明确 | 墨阶外另造灰；用彩色装饰或区分无语义的东西 |
+| 骨法用笔 | 谢赫「骨法用笔」 | 线是结构：只在面无法划出范围时用线；线宽统一，强调靠墨色加浓而不靠加粗；一个范围只用一种边界机制 | 填充之外再描边；焦点加粗或外扩一圈；线、底色与阴影叠加表达同一范围 |
+| 应物象形 | 谢赫「应物象形」 | 形随物性：方以载事，可操作与可编辑的范围方整而转角有缓；圆以标点，只给点与身份；同一轮廓等距内缩时内外同心 | 圆角大小随手取；方轮廓里放不同心的圆；以新增形状表达状态 |
+| 经营位置 | 谢赫「经营位置」；书法章法与行气 | 主次先由位置与留白确立，再施尺寸与墨色；一个视图只有一个君；同一行同高、同基线，边缘落在少数对齐线上 | 靠颜色和尺寸堆出重点；同一行控件高低不齐 |
+| 绘事后素 | 《论语·八佾》「绘事后素」 | 先有素地，后施色彩；表面平净，不用装饰性的渐变、纹理与高光；阴影只表达真实的浮起；正常状态不铺无事实的灰底 | 同一平面加阴影；正常状态铺灰底；用质感代替比例 |
+| 气韵生动 | 谢赫「气韵生动」 | 动不离位：动效从变化发生处开始，说明来处与去处，可中断；同类变化同一节拍，整体读来贯通 | 与位置无关的装饰动效；同类过渡各用各的时长 |
+| 材有美 | 《考工记》「材有美」 | 顺着媒介做：几何落在整像素上；默认系统字体，使中西字面成对；保留平台原生行为；中文排版用真实标点与混排检查 | 半像素边与模糊线；外加拉丁字体使同一行出现两套 x 高度；覆盖平台的可访问行为 |
+
+**屋有大小，人无大小。** 材分制给房屋分等，住在里面的人身高不变。尺寸档与密度换的是控件与间距的「等」；人要读的内容文字由阅读需要决定，不随容器缩放。按钮名称是按钮本身的一部分，可以随按钮的等变化；输入值、选项与正文是内容，不随之变化。
+
+基础层的质量看自由值的数量：材、分与少数比例由人选定，其余几何都应能写成材与分的关系，并说明系数由哪条关系决定。说不出关系的值只能标为预设，并应逐步收敛。
 
 ## 系统分层
 
@@ -95,7 +125,7 @@ Pattern 是比 Primitive 更值得沉淀的资产：`Button`、`Select`、`Dialo
 | 正常转为失败 | 反馈显著性、可用恢复动作 | 草稿、对象身份、未受影响内容 |
 | 指针转为触摸 | 命中区域、可见入口 | 任务与控制语义 |
 | 宽屏转为窄屏 | 承载方式、换行、部分摘要 | 已输入内容、选中范围、返回线索 |
-| 用户选择紧凑 | 关系间距、辅助信息呈现 | 可读性、焦点、必要说明 |
+| 用户选择紧凑 | 关系间距、控件的外高与留白、辅助信息呈现 | 内容文字的字号、可读性、焦点、触摸目标、必要说明 |
 | 内容需要比较 | 表格与并置 | 比较所需的二维关系 |
 | 内容彼此独立 | 卡片与围合 | 独立对象的边界 |
 
@@ -113,6 +143,8 @@ Pattern 是比 Primitive 更值得沉淀的资产：`Button`、`Select`、`Dialo
 | 使 | 引导下一步与去向 |
 
 例如删除账号：君是删除本身；臣说明影响；佐包含危险提示、确认输入与不可逆说明；使提供取消与返回入口。判断时检查佐的位置是否与风险相称，以及使是否真实存在。
+
+一个视图只有一个君。君的地位先由位置与留白确立（经营位置），再由尺寸与墨色加强；两个同等强调的入口并列，说明主意图还没有定。
 
 ## 把关系落实到界面
 
@@ -163,7 +195,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 
 ### 视觉基调
 
-视觉不通过中国元素表达，而是通过关系表达。下列各项是判断，不是风格清单：内容开放而操作有界；页面有呼吸而组内关系紧密；用关系成组而不靠万物卡片；轮廓方整而转角有缓；强调是稀缺资源；动不离位。
+视觉不通过中国元素表达，而是通过关系表达，方法见表达九法。落到一个界面上，它们读出来是：内容开放而操作有界；组内紧密而组间舒展；用间距成组而不靠万物卡片；以墨阶分层而彩色稀少；轮廓方整而转角有缓；状态只改变已有的属性；动不离位。
 
 ## 设计契约
 
@@ -194,6 +226,10 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 | NG6 | 用装饰性动效交代状态，或让任务结果依赖动画结束 | 关闭动画后，状态不可理解或任务无法完成 |
 | NG7 | 让唯一的关键后果只存在于会消失的提示里 | 提示消失后无法再确认该后果 |
 | NG8 | 在界面文案里解释自身的设计或实现 | 该句描述的是做法本身，而非对象、后果或恢复方式 |
+| NG9 | 以新增形状表达状态：外扩的焦点圈、加粗的边框、随状态改变的尺寸 | 状态切换前后，元素的外缘或尺寸发生变化 |
+| NG10 | 使用没有语义类别的彩色 | 去掉该色相后，读者失去的不是危险、警示、成功、信息、数据系列或品牌中的任何一类 |
+| NG11 | 用两种以上机制重复划出同一个范围 | 去掉其中一种（线、底色或阴影）后，范围仍然清楚 |
+| NG12 | 装饰性表面：渐变、纹理、同一平面上的阴影 | 删去后理解、层次与操作都不变 |
 
 ### 文案
 
@@ -223,6 +259,14 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 **五、归属检验。** 每项改动能落在公共组件库、项目设计层、应用或开发工具之一。不把业务状态塞进样式层，也不把基础控件复制到多个页面。
 
 **六、证据检验。** 声称状态已发生、对比度达标、键盘可用或行为正确时，给出实际运行的检查。没有证据的能力记为未验证，不记为通过。
+
+**七、灰度检验。** 把界面转为灰度，层级与状态仍然可读；状态不只靠色相表达。
+
+**八、疏密检验。** 去掉所有线与底色，分组仍然读得出来；组内、组间、章节三级间距逐级拉开，同一关系在全库只有一个间距值。
+
+**九、行气检验。** 同一行的元素外高一致、文字同基线；一个区块的对齐线可以数出来，并且数量少。
+
+**十、分格检验。** 每个几何值都能写成材与分的关系，并指出系数由哪条关系决定；每个值记录来源：锚点、派生或裁决。《礼记·月令》：「物勒工名，以考其诚。」
 
 ## 明确修改归属
 
@@ -265,7 +309,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 ```md
 ## Qingye UI
 
-- 界面设计先读本项目 design.md 与 node_modules/@qingye/ui/design.md，依据相关方法判断任务、语义、结构和状态。
+- 界面设计先读本项目 design.md 与 node_modules/@qingye/ui/design.md，依据器用六法判断任务、语义、结构和状态，依据表达九法决定尺度、墨色、线、形与位置。
 - 实现前核对已安装 @qingye/ui 的 package.json、catalog.json、声明和相关示例；交互控件复用共享包，项目负责主题与公共组合，应用负责权限、草稿、请求和结果。
 - 验证正常与相关失败、取消或恢复路径，并按影响检查键盘、可访问名称、对比度、窄屏和长文本；仅报告实际运行的检查。
 ```
@@ -275,7 +319,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 ```md
 ## Qingye UI 方法
 
-器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye/ui/design.md 的名实相符、相成相制、布白有用、随境取度、展开有据、进退相承；普通组件采用相关方法，完整任务检查六类问题。
+器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye/ui/design.md：器用六法（名实相符、相成相制、布白有用、随境取度、展开有据、进退相承）处理任务与语义，表达九法（以材为祖、疏密有致、墨分五色、骨法用笔、应物象形、经营位置、绘事后素、气韵生动、材有美）处理尺度与形制；普通组件采用相关方法，完整任务检查全部问题。
 
 组件能力以本项目已安装 @qingye/ui 的 catalog.json、类型和示例为准。品牌、明暗、密度独立；集中主题、公共组合和验证命令在本文件记录实际入口，变更时更新。
 ```
@@ -296,14 +340,14 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=bcc08a34414257046c9952c9fdd7e66a84b6bb831d7cf31dd17bd1c13c199a1c -->
+<!-- qingye:translation:en:start source-sha256=8ca9acfdc1af08019109913a8008b555bf0cdad57a8a09f2a59b69058625ae31 -->
 # Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
 
 This guide helps people and AI make interface decisions. It explains how to name, organize, present, and support tasks. It is neither an API inventory nor a claim that every capability mentioned here is implemented. Read the types, documentation, and examples for the currently installed version before using a component.
 
-Qingye UI draws methods from traditional Chinese thought, craft, and art. Culture informs concrete judgments; an interface need not use traditional patterns, antique typefaces, or a prescribed palette. Professional tools, content displays, and everyday applications can look different.
+Qingye UI takes its methods from Chinese classics and Eastern aesthetics: philosophy orders judgments, craft supplies a system of measure, and calligraphy, painting, and gardens supply the handling of density, ink, line, and placement. **Take the method, not the motif.** Culture informs concrete judgments; interfaces use no traditional patterns, antique typefaces, seals, scrolls, or similar decoration. Professional tools, content displays, and everyday applications can look different.
 
 The design basis determines the goal; implementation choices serve it. Components in this library are original implementations written from this guide, `STANDARDS.md`, and the public APIs of accessibility primitives. Decide whether to use such primitives or another mature foundation by its actual capabilities. Replacing presentation does not require reinventing every basic interaction.
 
@@ -327,22 +371,52 @@ Make every interface decision in this order, without skipping a step.
 
 **Expression serves judgment; judgment serves the task.** Converge differences with no task basis; retain differences the task requires. A reference implementation, popular style, or personal preference cannot override that basis.
 
-**Use composition before adding configuration, and reuse relationships before adding components.** Every prop, variant, or component introduces another decision. A design system removes decisions with no value rather than multiplying possibilities.
+**Use composition before adding configuration, and reuse relationships before adding components.** Laozi: "With little, one gains; with much, one is confused." Every prop, variant, or component introduces another decision. A design system removes decisions with no value rather than multiplying possibilities.
 
-## Six methods
+**Substance and form in balance (文质彬彬).** Semantics and relationships are substance; expression is form. The Analects: "When substance exceeds form, the result is crude; when form exceeds substance, the result is clerical." Correct semantics with rough form, and refined appearance with false states, are equally unfinished. Each side has its methods: substance follows the six methods of use, form follows the nine methods of expression. Judge them separately; neither substitutes for the other.
 
-The methods guide judgment. They are neither style names nor requirements for every component. Ordinary components use relevant methods; a complete task checks all six questions. Their names are not HTML/ARIA roles or six theme parameters. The Chinese names remain the canonical terms for judgment.
+## Principles and sources
 
-| Method | English | Design decision | Avoid |
+| Principle | Source | Meaning |
+|---|---|---|
+| Purpose first (器用为本) | *Book of Changes*: "What is below form is called the vessel"; *Kaogongji* judges a vessel by whether it is good | A component is a vessel; its use comes first. Without semantics, states, and reachability, form is not discussed |
+| Relationships guide the form (关系为法) | Laozi: "Being and nonbeing produce each other … long and short shape each other, high and low lean on each other" | Size, weight, and density exist only by comparison. To bring one thing forward, first quiet what surrounds it rather than amplifying it further |
+| Fitness sets the measure (合宜为度) | *Kaogongji*: "Heaven has its seasons, earth its energies, materials their beauty, craft its skill; combine these four and the work is good"; *Yuanye*: "skill in borrowing, precision in fitness" | Quality means fitting context, environment, medium, and craft, not exhausting every means. Components inherit density, appearance, direction, and language from their surroundings instead of requiring per-call configuration |
+
+A traditional method enters this guide only when it meets three conditions: **a source**, an identifiable text or recognized technique; **generation**, it makes a judgment or determines a class of values; **a test**, an observable criterion. Anything missing one is excluded. Not borrowed: traditional patterns as decoration, antique or calligraphic typefaces for interface text, seals, scrolls, paper textures, palettes justified by the five phases or directions, and vertical text unless the content itself is vertical.
+
+## Six methods of use
+
+The six methods of use address semantics, relationships, and tasks. They guide judgment; they are neither style names nor requirements for every component. Ordinary components use relevant methods; a complete task checks all six questions. Their names are not HTML/ARIA roles or theme parameters. The Chinese names remain canonical.
+
+| Method | Source | Design decision | Avoid |
 |---|---|---|---|
-| 名实相符 | Semantic fidelity | Name the object, action, and consequence; express waiting, success, failure, and unknown results from actual events | Calling every action Confirm; announcing Saved when a request was only sent |
-| 相成相制 | Mutual support and restraint | Let content, explanations, actions, and safeguards complete the task together; judge functional roles separately from visual emphasis | Fixed button hierarchies; weakening Stop during a failure; repeating warnings everywhere |
-| 布白有用 | Purposeful space | Arrange relationship spacing, working capacity, and room for judgment separately; retain useful information density | Wrapping every section in a card; hiding comparison columns for whitespace; submitting examples automatically |
-| 随境取度 | Contextual fitness | Choose emphasis, duration, and interruption for the task; preserve active work when changing layouts | Putting every error in a Toast or every result in a dialog; losing focus through rearrangement while typing |
-| 展开有据 | Justified disclosure | Provide previews and deeper access for a reason, with direct arrival and a reasonable way back | Making frequent tasks require layered exploration; putting critical consequences only in a Tooltip; details with no return path |
-| 进退相承 | Continuity of progress and retreat | Keep normal work, waiting, failure, uncertainty, cancellation, and recovery tied to the same object | Clearing drafts after failure; calling window closure successful cancellation; making completion depend on an animation |
+| 名实相符 Semantic fidelity | Analects: "If names are not correct, language will not accord" | Name the object, action, and consequence; express waiting, success, failure, and unknown results from actual events | Calling every action Confirm; announcing Saved when a request was only sent |
+| 相成相制 Mutual support and restraint | *Suwen*: sovereign, minister, assistant, envoy | Let content, explanations, actions, and safeguards complete the task together; judge functional roles separately from visual emphasis | Fixed button hierarchies; weakening Stop during a failure; repeating warnings everywhere |
+| 布白有用 Purposeful space | Laozi: "Where the room is empty lies its use" | Arrange relationship spacing, working capacity, and room for judgment separately; retain useful information density | Wrapping every section in a card; hiding comparison columns for whitespace; submitting examples automatically |
+| 随境取度 Contextual fitness | *Doctrine of the Mean*: "the noble person is timely in the mean" | Choose emphasis, duration, and interruption for the task; preserve active work when changing layouts | Putting every error in a Toast or every result in a dialog; losing focus through rearrangement while typing |
+| 展开有据 Justified disclosure | Garden framing, borrowed views, and changing views with each step | Provide previews and deeper access for a reason, with direct arrival and a reasonable way back | Making frequent tasks require layered exploration; putting critical consequences only in a Tooltip; details with no return path |
+| 进退相承 Continuity of progress and retreat | *Book of Changes*: "knowing advance and retreat, survival and loss, without losing what is right" | Keep normal work, waiting, failure, uncertainty, cancellation, and recovery tied to the same object | Clearing drafts after failure; calling window closure successful cancellation; making completion depend on an animation |
 
-Name what is true, let parts constrain each other, spend space on meaning, fit the context, disclose for a reason, and keep waiting, failure, cancellation, and recovery on one object. The English terms make the same reasoning readable; they do not replace the Chinese criteria.
+## Nine methods of expression
+
+The nine methods of expression address measure, ink, line, shape, placement, surface, and motion: the third step in the order of decisions. They determine where a class of values comes from rather than only suggesting a style. Concrete values live in the foundation layer with their sources.
+
+| Method | Source | Design decision | Avoid |
+|---|---|---|---|
+| 以材为祖 Module as ancestor | *Yingzao Fashi*: "All building begins from the cai module" | Derive all geometry from one base measure: the module is one line of body text; the unit divides it. Size steps and density change only the grade, scaling parts together | A separate size table per control; enlarging a container and the type of its content with it |
+| 疏密有致 Ordered density | Deng Shiru: "Where sparse, a horse may run; where dense, no wind passes; count the white as black" | Spacing is the first means of grouping: tight within groups, looser between them, looser still between sections, with steps that read at a glance. Space is composed as carefully as ink | Evenly distributed spacing; lines and cards repairing groups that spacing should express |
+| 墨分五色 Five tones of ink | Zhang Yanyuan: "Handle ink and the five colors are present"; Xie He: "apply color by category" | One limited neutral ink ladder carries the hierarchy of text, lines, and surfaces. Hue is applied only by semantic category; a brand accent acts like a seal, rare and specific | Extra grays outside the ladder; hue used as decoration or to separate things without meaning |
+| 骨法用笔 Bone method of the brush | Xie He: "bone method in using the brush" | Lines are structure: draw one only where a surface cannot mark a boundary. Use one line weight; emphasize by deepening ink, not thickening. One boundary mechanism per region | Outlining a filled shape; thickened or outward focus rings; line, fill, and shadow restating one boundary |
+| 应物象形 Form follows the object | Xie He: "correspond to the object in depicting form" | Square for things that carry work: actionable and editable regions are square with eased corners. Round for points and identities only. Equal insets of one contour stay concentric | Arbitrary radii; nonconcentric rounds inside square contours; new shapes expressing state |
+| 经营位置 Composition of placement | Xie He: "planning placement"; calligraphic layout and line flow | Establish priority through position and space before size and ink. One sovereign per view. Items in a row share height and baseline; edges fall on few alignment lines | Building emphasis by piling color and size; uneven control heights within a row |
+| 绘事后素 Plain ground before color | Analects: "Painting comes after the plain ground" | A plain ground first, color after. Surfaces stay clean, without decorative gradients, textures, or highlights. Shadows express actual elevation only; normal states carry no factless gray fill | Shadows within one plane; gray fills on normal states; texture standing in for proportion |
+| 气韵生动 Resonant vitality | Xie He: "resonance of spirit, vitality of movement" | Motion keeps its place: it begins where the change happens, shows origin and destination, and can be interrupted. Similar changes share one rhythm so the whole reads as continuous | Decorative motion unrelated to position; similar transitions with unrelated durations |
+| 材有美 Respect the material | *Kaogongji*: "materials have their beauty" | Work with the medium: geometry on whole pixels; system fonts by default so Latin and Chinese faces pair; preserve native platform behavior; check Chinese typesetting with real punctuation and mixed scripts | Half-pixel edges and blurred lines; an added Latin face producing two x-heights in one line; overriding platform accessibility |
+
+**The house has grades; people do not.** The module system grades buildings while their occupants keep their height. Size steps and density change the grade of controls and spacing; the content text people read is set by reading needs and does not scale with its container. A button's name is part of the button and may follow its grade; input values, options, and body text are content and do not.
+
+The quality of a foundation is measured by its number of free values. People choose the module, the unit, and a few ratios; every other dimension should be expressible through them, with the relationship that sets each coefficient. A value without such a relationship can only be recorded as a preset and should converge over time.
 
 ## System layers
 
@@ -394,7 +468,7 @@ Defaults change with the situation; they are neither averages nor one strength a
 | Normal work becomes failure | Feedback emphasis and recovery actions | Drafts, object identity, unaffected content |
 | Pointer becomes touch | Hit areas and visible entries | Task and control semantics |
 | Wide screen becomes narrow | Container, wrapping, selected summaries | Input, selected scope, clues for returning |
-| A user chooses compact density | Relationship spacing and supporting information | Readability, focus, necessary explanations |
+| A user chooses compact density | Relationship spacing, control heights and padding, supporting information | Content type size, readability, focus, touch targets, necessary explanations |
 | Content needs comparison | Tables and juxtaposition | Required two-dimensional relationships |
 | Content is independent | Cards and enclosure | Independent object boundaries |
 
@@ -412,6 +486,8 @@ This method describes actions within one interface. It is neither a global compo
 | 使 | Direction toward the next step and a way out |
 
 For account deletion, deletion is 君; explaining the impact is 臣; danger notices, confirmation input, and irreversible consequences are 佐; cancel and return are 使. Check whether safeguards sit proportionately to the risk and whether the way out actually exists.
+
+A view has one 君. Its position and surrounding space establish it first (composition of placement); size and ink reinforce it. Two equally emphasized entries side by side mean the main intent is not yet decided.
 
 ## Applying relationships to interfaces
 
@@ -462,7 +538,7 @@ Motion explains actual changes and permits interruption. With reduced motion, na
 
 ### Visual character
 
-Relationships carry the character without Chinese decoration. These are judgments rather than a style checklist: open content with bounded actions; breathing room between sections and tight relationships within groups; grouping through relationships rather than universal cards; square contours with moderated corners; scarce emphasis; motion that preserves position.
+Relationships carry the character without Chinese decoration; the methods are the nine methods of expression. In an interface they read as open content with bounded actions; tight groups with generous space between them; grouping by spacing rather than universal cards; hierarchy by ink tones with rare hue; square contours with eased corners; states that change only existing properties; motion that keeps its place.
 
 ## Design contract
 
@@ -493,6 +569,10 @@ These practices have no acceptable presentation rationale. Lack of a better solu
 | NG6 | Explain states through decorative motion, or make completion depend on animation | Turning animation off makes a state unclear or a task impossible |
 | NG7 | Put a critical consequence solely in a disappearing hint | Once the hint disappears, the consequence cannot be checked |
 | NG8 | Explain the interface's design or implementation in interface copy | The sentence describes a technique rather than the object, consequence, or recovery |
+| NG9 | Express state by adding shape: outward focus rings, thickened borders, dimensions that change with state | The element's outer edge or dimensions differ before and after the state change |
+| NG10 | Use hue without a semantic category | Removing the hue loses none of danger, warning, success, information, a data series, or brand |
+| NG11 | Mark one region with more than one mechanism | Removing one of line, fill, or shadow leaves the region equally clear |
+| NG12 | Decorative surfaces: gradients, textures, shadows within one plane | Removing them leaves understanding, layering, and operation unchanged |
 
 ### Copy
 
@@ -522,6 +602,14 @@ Tutorials, installation steps, error recovery, and permission explanations are n
 **5. Ownership.** Assign each change to the public library, project design layer, application, or development tooling. Keep business state out of styles and shared foundation controls out of page copies.
 
 **6. Evidence.** Claims about states, contrast, keyboard access, and correct behavior need observed checks. Record unsupported claims as unverified rather than passed.
+
+**7. Grayscale.** In grayscale, hierarchy and states remain readable; no state depends on hue alone.
+
+**8. Density.** With every line and fill removed, groups remain readable; spacing widens step by step within groups, between groups, and between sections, and one relationship uses one spacing value across the library.
+
+**9. Line flow.** Items in one row share outer height and text baseline; a block's alignment lines are countable and few.
+
+**10. Module.** Every dimension is expressible through the module and unit, with the relationship that sets its coefficient; every value records its source as anchor, derivation, or ruling. *Book of Rites*: "Inscribe the maker's name on the object, to examine its sincerity."
 
 ## Assigning changes
 
@@ -564,7 +652,7 @@ Project `AGENTS.md`:
 ```md
 ## Qingye UI
 
-- Before interface work, read this project's design.md and node_modules/@qingye/ui/design.en.md. Use relevant methods to judge the task, semantics, structure, and states.
+- Before interface work, read this project's design.md and node_modules/@qingye/ui/design.en.md. Use the six methods of use to judge the task, semantics, structure, and states, and the nine methods of expression to decide measure, ink, line, shape, and placement.
 - Before implementation, check the installed @qingye/ui package.json, catalog.json, declarations, and related examples. Reuse shared interactive controls; the project owns themes and public compositions, and the application owns permissions, drafts, requests, and outcomes.
 - Verify normal and relevant failure, cancellation, or recovery paths. Check keyboard access, names, contrast, narrow layouts, and long text according to impact. Report only observed checks.
 ```
@@ -574,7 +662,7 @@ Project `design.md`:
 ```md
 ## Qingye UI methods
 
-Purpose first. Relationships guide the form. Fitness sets the measure. Use 名实相符 (semantic fidelity), 相成相制 (mutual support and restraint), 布白有用 (purposeful space), 随境取度 (contextual fitness), 展开有据 (justified disclosure), and 进退相承 (continuity of progress and retreat) from node_modules/@qingye/ui/design.en.md. Ordinary components use relevant methods; complete tasks check all six questions. The Chinese method names remain canonical.
+Purpose first. Relationships guide the form. Fitness sets the measure. From node_modules/@qingye/ui/design.en.md, the six methods of use (名实相符, 相成相制, 布白有用, 随境取度, 展开有据, 进退相承) address tasks and semantics; the nine methods of expression (以材为祖, 疏密有致, 墨分五色, 骨法用笔, 应物象形, 经营位置, 绘事后素, 气韵生动, 材有美) address measure and form. Ordinary components use relevant methods; complete tasks check every question. The Chinese method names remain canonical.
 
 Component capabilities come from the installed @qingye/ui catalog.json, types, and examples. Brand, appearance, and density are independent. Record actual entries for the central theme, public compositions, and verification commands here, and keep them current.
 ```

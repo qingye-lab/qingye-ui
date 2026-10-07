@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 0756b2aaa5ffde9ddc3af080eec04742cd6c5860c487a63a28a649dc209131b1
+Source SHA-256: 00f85ac23ea34b74309d86c0f93e849fb5a49579d4a0b97075dc4add4d748a21
 
 Edit a calendar range draft and explicitly apply complete endpoints.
 
@@ -50,7 +50,6 @@ A composition of range display, calendar draft, and explicit Apply.
 - disabled / readOnly: boolean; default false. Block opening and changes, including Field disabled. Read-only endpoints submit; disabled endpoints are excluded.
 - calendarProps: CalendarProps except owned selection props. min/max declare day interval rules; excludeDisabled constrains disabled days. Same-day ranges are valid by default; require a cross-day range with min. Mode is range.
 - inputProps: Input display props. ref, render, ARIA, events, and placeholder for the display. There is no native date min/max validation; declare rules in calendarProps and application validation.
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. Display, calendar, Apply, Cancel, and Clear share one profile.
 - render / ref / className / style / ARIA / events: div composition props. Applied to the composition root; Field provides input naming and errors.
 
 ## Keyboard

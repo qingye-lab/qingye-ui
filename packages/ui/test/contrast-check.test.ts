@@ -32,7 +32,8 @@ describe("resolved library contrast", () => {
     tokens.set("--qy-border-input", "oklch(1 0 0 / 0.08)");
     expect(libraryPairs("dark").map((p) => checkPair(p, tokens)).some((r) => r.status === "FAIL" && r.pair.startsWith("border-input"))).toBe(true);
     const light = tokenValues(sources, "light");
-    light.set("--qy-emerald-700", "oklch(0.696 0.17 162.48)");
+    // chart-2 引用赭石 500（2026-10-07 系列色取颜料）；把它改浅，别名链上的回归必须被发现。
+    light.set("--qy-zheshi-500", "oklch(0.9 0.05 45)");
     expect(checkPair({ pair: "changed chart primitive", foreground: "var(--qy-chart-2)", background: ["var(--qy-surface)"], minimum: 3 }, light).status).toBe("FAIL");
     tokens.set("--qy-foreground-muted", "color-mix(in srgb, var(--qy-neutral-500) 80%, var(--qy-white))");
     expect(libraryPairs("dark").map((p) => checkPair(p, tokens)).some((r) => r.status === "FAIL" && r.minimum === 4.5 && r.pair.includes("surface-raised"))).toBe(true);

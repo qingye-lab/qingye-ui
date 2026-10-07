@@ -3,9 +3,9 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: 4c2e32ceae7b39accaf0736cf6c6f87afc11f3bb29b333865483550c1ae384ff
+Source SHA-256: ed2975eaef4efdd23d3aace19334e907b27581ae8700a49a0a09b8bbb50dff0f
 
-A two-state pressed button with a stable name.
+A two-state toggle that holds its pressed fact until toggled again, with a stable name.
 
 ## Notes
 - Names stay stable; aria-pressed expresses state.
@@ -45,7 +45,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Curated API
 ### Toggle
 An independent pressed boolean fact.
-- pressed / defaultPressed: boolean. Controlled state or uncontrolled initial value; unpressed by default.
+- pressed / defaultPressed: boolean. Controlled state or uncontrolled initial value; un-toggled by default.
 - onPressedChange: (pressed: boolean, details) => void. Supplies pressed facts, cancelable through details.cancel().
 - size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". Five matching control/text-control profiles with narrow-screen +4px.
 - shape: "label" | "icon"; default "label". Text/icon geometry; icon-only buttons need an accessible name.
@@ -61,14 +61,14 @@ Public Base UI pressed-state primitive.
 - Space / Enter: Toggle pressed/unpressed.
 
 ## Source examples
-### 按压
+### 切换态
 Source: apps/docs/src/content/toggle/demos/01-pressed.tsx
 ```tsx
 import { useState } from "react";
 import { BoldIcon } from "lucide-react";
 import { Toggle } from "@qingye/ui/components/toggle";
 
-export const meta = { title: "按压", titleEn: "Pressed" };
+export const meta = { title: "切换态", titleEn: "Toggled state" };
 export default function Demo() {
   const [pressed, setPressed] = useState(false);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
-Source SHA-256: 531a868f9e27b52394e0a5bce3089f9a51ef10ae16be266f1701362062c339a5
+Source SHA-256: b242907ef4830b800cce0154c41b225bee52164ba08e8d5ee2671c3e5f115c9f
 
 短标记，保留内容名称而不推断状态。
 
@@ -17,10 +17,10 @@ Source SHA-256: 531a868f9e27b52394e0a5bce3089f9a51ef10ae16be266f1701362062c339a5
 - Application: 对象、内容、值、状态与请求结果。
 
 ## Composition
-- className、style 与 render 属于标记；五档使用同名文字。
+- className、style 与 render 属于标记；标记没有尺寸档，与它标注的那段文字同大。
 
 ## Responsive behavior
-- 五档文字沿用同名文字角色；短标记可换行，不吞掉内容。
+- 标记随所处文字缩放；短标记可换行，不吞掉内容。
 
 ## Customization
 - 使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。
@@ -28,7 +28,7 @@ Source SHA-256: 531a868f9e27b52394e0a5bce3089f9a51ef10ae16be266f1701362062c339a5
 ## Current exports
 - Badge: function; owner badge; PASS; props: BadgeProps
 - BadgeProps: type; owner badge; PASS
-- BadgeSize: type; owner badge; PASS
+- BadgeTone: type; owner badge; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -39,9 +39,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### Badge
-className、style 与 render 属于标记；五档使用同名文字。
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "sm". 同名文字档，字形围合使用 badge padding。
-- variant: "neutral" | "emphasis"; default "neutral". 视觉强调，不编码请求状态或权限。
+className、style 与 render 属于标记；标记没有尺寸档，与它标注的那段文字同大。
+- variant: "neutral" | "emphasis"; default "neutral". neutral 是浓墨的字；emphasis 是焦墨加中等字重，要读者注意但不归入状态类别，所以不用色相。
+- tone: "info" | "success" | "warning" | "danger". 调用方声明的状态类别：该状态的文字色加中等字重。组件不从文字猜类别。
 - render / ref / 原生属性: current public component props. 属性、事件与ref透传实际元素；样式由className/style调整。
 
 ## Keyboard
@@ -52,8 +52,16 @@ Source: apps/docs/src/content/badge/demos/01-states.tsx
 ```tsx
 import { Badge } from "@qingye/ui/components/badge";
 import { Inline } from "@qingye/ui/components/layout";
+
 export const meta = { title: "标记", titleEn: "Markers" };
+
+// 标记没有尺寸档：它标注哪段文字就与哪段文字同大（用户裁决 2026-10-05）。
 export default function Demo() {
-  return <Inline>{(["xs","sm","md","lg","xl"] as const).map(size => <Badge key={size} size={size}>{size}</Badge>)}<Badge variant="emphasis">重点</Badge></Inline>;
+  return (
+    <div className="grid gap-(--qy-field-group-gap)">
+      <Inline><Badge>草稿</Badge><Badge>已完成</Badge><Badge variant="emphasis">重点</Badge><Badge tone="warning">即将过期</Badge><Badge tone="danger">同步失败</Badge></Inline>
+      <p className="text-support text-muted-foreground">与紧凑文字同行时 <Badge>待确认</Badge></p>
+    </div>
+  );
 }
 ```

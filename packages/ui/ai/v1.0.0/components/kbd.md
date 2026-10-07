@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
-Source SHA-256: e81b386c99af334e17849f1ed4d40fc442a375431878d5e0970c18e573395d75
+Source SHA-256: 9bd05176bc2643148c87c549a69cddb63fb6ffe48a2a15f4f1e00567f4491703
 
 用原生键位元素显示真实快捷键。
 

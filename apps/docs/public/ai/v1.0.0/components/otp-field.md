@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: ecf81069c9e53fe4a6290c8200223e56c2b8624d6bbe7493b414b4e367a88edb
+Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
 
 分段呈现一个固定长度文本值。
 
@@ -48,7 +48,6 @@ Input 的分段呈现，Field 注册一次。
 - length: number. 必填正整数，以 Unicode code point 计。超长用户插入整次拒绝并说明；外部值完整呈现，不截断。
 - value / defaultValue: string; default defaultValue: ''. 受控或非受控文本，保留前导零。
 - onValueChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void. 请求文本变化；受控调用方拒绝更新时原值不变。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 分段读同档控件宽高与文字；粗指针读取触摸目标。
 - inputMode / autoComplete: native input props; default autoComplete: 'one-time-code'. inputMode 由真实字符范围决定；type 始终 text，不自动转换为数值。
 - render / ref / className / style / ARIA / events: Input props. 全部属于真实 input；render 必须保持 input 语义、受控值和事件。
 - controlClassName: string. 调整分段容器的位置与布局。
@@ -81,19 +80,27 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/otp-field/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/otp-field/demos/02-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { OtpField } from "@qingye/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" } satisfies DemoMeta;
-const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    {sizes.map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><OtpField size={size} length={4} defaultValue="01" /></Field>)}
-  </FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <OtpField length={4} defaultValue="01" />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 486ba3b82da427a6085f568a96c5c360b8d1fe4dc6a718d904ab8d7dc95141ba
+Source SHA-256: 4160264b8ef339847634ddfe8e82481f20bb3cb4df1735f35eb3012c58b2c856
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -49,7 +49,6 @@ A real datetime-local input composed with calendar and time drafts.
 - disabled / readOnly: boolean; default false. Block native editing and popup changes, including Field disabled. Read-only values submit; disabled values do not.
 - inputProps: Input props except owned value/type/name/form/state. Native min, max, step, required, ARIA, events, refs, and render. step also reaches the time draft. onChange can cancel native edit requests.
 - calendarProps: CalendarProps except owned selection props. Declare disabled dates and navigation bounds. Synchronize native min/max, calendar rules, and draft-apply validation in the caller; datetime bounds do not imply disabled calendar days.
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. Datetime input, calendar, time input, and actions share one control/text profile.
 - render / ref / className / style / ARIA / events: div composition props. Composition root outlet; customize the actual input through inputProps.
 
 ## Keyboard

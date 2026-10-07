@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 149d6d6f59ea6911b9b506b9b40ddffc05551e8be4e0192bd15ee20f6d2c0568
+Source SHA-256: 5c905501ff0720016458025f843386b60aacab774dd79f7a280da3400ab19160
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
@@ -25,7 +25,7 @@ Dates use local year, month, and day. The caller declares same-day rules and una
 - Calendar or Field + DatePicker.
 
 ## Responsive behavior
-- Five matching text profiles, narrow-screen +4px, and actual coarse-pointer cell targets.
+- One geometry following the density axis; compact tightens the container, never the text; narrow-screen +4px, and actual coarse-pointer cell targets.
 
 ## Customization
 - CalendarProps, classNames, components, and central theme roles.
@@ -52,7 +52,6 @@ Uses the installed DayPicker date, month navigation, keyboard, and selection sem
 - month / defaultMonth / onMonthChange: Date / Date / (month: Date) => void. Controlled or uncontrolled month navigation; the primitive defaults to the current month.
 - disabled / hidden / startMonth / endMonth: DayPicker public props. Declare unavailable days, hidden days, and navigation bounds. disabled does not repair an existing selection.
 - min / max / excludeDisabled: range mode: number / number / boolean. The caller declares range length and disabled-day rules. Same-day complete ranges are allowed by default.
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. Day and navigation buttons use one control/text profile; coarse-pointer cells use touch-target.
 - locale / labels / formatters: DayPicker public props. Chinese/English date language and names follow UILocale. Supply a DayPicker locale for other date languages.
 - render / ref / className / style / classNames / components: div composition / DayPicker public props. Compose the root and override public parts. A custom Root must preserve refs and semantics.
 

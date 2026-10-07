@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 3c23403e6ca6bd38e4444fa4aedc84b16dd40398820232819fac1b49d8c1f4ff
+Source SHA-256: fab9c47240bce473770ae04af39d5afb0a3d8a6fd7c698bfce1b9d3ab47eaa63
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -25,7 +25,7 @@ Source SHA-256: 3c23403e6ca6bd38e4444fa4aedc84b16dd40398820232819fac1b49d8c1f4ff
 - Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item
 
 ## Responsive behavior
-- 五档同名文字与控制几何，浮层受可用空间约束
+- 一套几何，跟随密度轴，紧凑不缩小文字；浮层受可用空间约束
 
 ## Customization
 - 公开 parts/原语、render/ref/ARIA/events 与共享浮层
@@ -33,7 +33,8 @@ Source SHA-256: 3c23403e6ca6bd38e4444fa4aedc84b16dd40398820232819fac1b49d8c1f4ff
 ## Current exports
 - Autocomplete: function; owner autocomplete; PASS; props: AutocompleteProps<Value>
 - AutocompleteClear: function; owner autocomplete; PASS; props: AutocompletePrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>
-- AutocompleteEmpty: const; owner autocomplete; UNVERIFIED
+- AutocompleteControl: function; owner autocomplete; PASS; props: InputGroupProps
+- AutocompleteEmpty: function; owner autocomplete; PASS; props: AutocompletePrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>
 - AutocompleteInput: function; owner autocomplete; PASS; props: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - AutocompleteItem: function; owner autocomplete; PASS; props: AutocompletePrimitive.Item.Props & React.RefAttributes<HTMLDivElement>
 - AutocompleteList: function; owner autocomplete; PASS; props: AutocompletePrimitive.List.Props & React.RefAttributes<HTMLDivElement>
@@ -56,7 +57,7 @@ Base UI 文本建议上下文，固定 list 模式。
 - value / defaultValue / onValueChange: string / string / (value, details) => void. 受控或非受控自由文本；details.cancel() 可拒绝编辑或接受建议请求。
 - items / itemToStringValue / filter: readonly Value[] / Base UI public props. 提供平坦建议数组、建议文字与过滤规则；对象建议显式定义文本。分组等高级组合可用 AutocompletePrimitive。
 - name / form / required / disabled / readOnly: Base UI Root props. 实际 Input 与 Field 注册一次，FormData 提交自由文本；只读提交、禁用排除。
-- open / defaultOpen / onOpenChange / size: Base UI open props / 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default size: 'md'. 展开可控；文本、动作与建议项共享五档尺寸。
+- open / defaultOpen / onOpenChange: Base UI open props. 展开可控；文本、动作与建议项共用一套几何，跟随密度轴。
 
 ### AutocompleteInput / AutocompleteTrigger / AutocompleteClear
 共享 Input/Button 的真实出口，透传 ref/render/ARIA/events；清除请求空文本。
@@ -80,24 +81,42 @@ Base UI 文本建议上下文，固定 list 模式。
 Source: apps/docs/src/content/autocomplete/demos/01-text.tsx
 ```tsx
 import { useState } from "react";
-import { Autocomplete, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
+import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 export const meta = { title: "自由文本", titleEn: "Free text" };
 const items = ["青叶", "青山", "白云"];
 export default function Demo() {
   const [value, setValue] = useState("");
-  return <form><Field name="text"><FieldLabel>文字</FieldLabel><Autocomplete items={items} value={value} onValueChange={setValue}><div className="flex min-w-0 gap-(--qy-action-gap)"><AutocompleteInput /><AutocompleteClear /><AutocompleteTrigger /></div><AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup></Autocomplete><output className="text-support text-muted-foreground">{value || "—"}</output></Field></form>;
+  return <form><Field name="text"><FieldLabel>文字</FieldLabel><Autocomplete items={items} value={value} onValueChange={setValue}><AutocompleteControl><AutocompleteInput /><AutocompleteClear /><AutocompleteTrigger /></AutocompleteControl><AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup></Autocomplete><output className="text-support text-muted-foreground">{value || "—"}</output></Field></form>;
 }
 ```
 
-### 五档与只读
-Source: apps/docs/src/content/autocomplete/demos/02-sizes.tsx
+### 密度与只读
+Source: apps/docs/src/content/autocomplete/demos/02-density.tsx
 ```tsx
-import { Autocomplete, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
+import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
-export const meta = { title: "五档与只读", titleEn: "Five sizes and read-only" };
-const items = ["青叶", "青山", "白云"];
+
+export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
+
+const items = ["3 号楼东侧", "3 号楼西侧", "4 号楼南门"];
+
 export default function Demo() {
-  return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2 lg:grid-cols-3">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><Autocomplete size={size} items={items} defaultValue="青"><div className="flex min-w-0 gap-(--qy-action-gap)"><AutocompleteInput /><AutocompleteTrigger /></div><AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup></Autocomplete></Field>)}<Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue="自由文本"><div className="flex min-w-0 gap-(--qy-action-gap)"><AutocompleteInput /><AutocompleteTrigger /></div></Autocomplete></Field></div>;
+  return (
+    <div className="grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Autocomplete items={items} defaultValue="3 号楼东侧">
+              <AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl>
+              <AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup>
+            </Autocomplete>
+          </Field>
+        </div>
+      ))}
+      <Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue="3 号楼东侧"><AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl></Autocomplete></Field>
+    </div>
+  );
 }
 ```

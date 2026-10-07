@@ -132,7 +132,7 @@ export default function Demo() {
       setError(input.validity.valueMissing ? "请填写邮箱。" : input.validity.typeMismatch ? "邮箱地址不完整。" : undefined);
     }}>
       <Field invalid={Boolean(error)}><FieldLabel>邮箱</FieldLabel><Input name="email" required type="email" value={value} onValueChange={setValue} autoComplete="email" /><FieldError>{error}</FieldError></Field>
-      <Button type="submit">校验</Button>
+      <Button className="self-start" type="submit">检查</Button>
     </form>
   );
 }

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
-Source SHA-256: 48ae638f73c4c2aceac9839caaa4fd9d2f17dba13d4a2d5f61c209abccc7438b
+Source SHA-256: 99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2
 
 Confirmed task completion or an explicit indeterminate state.
 
@@ -27,7 +27,8 @@ Animation and time establish no completion fact. Zero differs from null.
 
 ## Current exports
 - Progress: function; owner progress; PASS; props: ProgressProps
-- ProgressIndicator: function; owner progress; PASS; props: React.ComponentProps<typeof ProgressPrimitive.Indicator>
+- ProgressIndicator: function; owner progress; PASS; props: ProgressIndicatorProps
+- ProgressIndicatorProps: type; owner progress; PASS
 - ProgressLabel: function; owner progress; PASS; props: React.ComponentProps<typeof ProgressPrimitive.Label>
 - ProgressPrimitive: reexport; owner progress; UNVERIFIED
 - ProgressProps: type; owner progress; PASS
@@ -59,7 +60,7 @@ Confirmed readings retain number formatting; actual null defaults to localized i
 The visual progress track consumes an independent thickness role.
 
 ### ProgressIndicator
-Confirmed progress ratio; indeterminate state shows a dashed boundary without a ratio.
+Confirmed progress ratio; the indeterminate state is a moving narrow band with the same form as determinate progress, only its position unknown.
 
 ### ProgressPrimitive
 Public Base UI Progress primitive.

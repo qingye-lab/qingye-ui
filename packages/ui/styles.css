@@ -44,10 +44,16 @@
     }
   }
 
+  /* 以材为祖：文档的默认文字就是正文的一行（14/20），不落回浏览器的 16px。
+   * 没有指定文字档的内容（以及跟随所在文字的标记）都从这一行继承。 */
   body {
     background-color: var(--qy-background);
     color: var(--qy-foreground);
     font-family: var(--qy-font-sans);
+    font-size: var(--qy-text-body-size);
+    line-height: var(--qy-text-body-leading);
+    letter-spacing: var(--qy-text-body-tracking);
+    font-weight: var(--qy-text-body-weight);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

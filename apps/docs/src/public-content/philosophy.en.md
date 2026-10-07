@@ -1,4 +1,4 @@
-<!-- qingye:translation-source:sha256=940a8200cf4dc39c7248e498602a95bc4057f1845cca04da87f249047a59cabe -->
+<!-- qingye:translation-source:sha256=4f37e69759d8f8b5ee8735df2d6abc3c87e1c4cbca8c0750eb4a9a0631ac24df -->
 # Qingye UI Design Philosophy
 
 ## Culture as a method of design
@@ -9,15 +9,23 @@
 
 Qingye UI addresses a concrete question: how can digital interfaces carry human purposes more clearly? People come to read, express, compare, and decide. They also hesitate, change their minds, and encounter errors. Design should give these real actions an appropriate place.
 
-We draw methods from Chinese traditions of making, thought, and art. Our interest lies in how an object serves its use, how parts work together, how density is organized, and how change is carried forward. Culture participates in design decisions, rather than merely explaining a finished interface.
+We take our methods from Chinese classics and Eastern aesthetics. Philosophy orders our judgments; the craft of building supplies a system of measure; calligraphy, painting, and gardens supply the handling of density, ink, line, and placement. Culture participates in design decisions, rather than merely explaining a finished interface.
 
-This is neither a reproduction of traditional forms nor an attempt to define one aesthetic as “Chinese.” We select ideas relevant to contemporary digital life and translate them into methods that people can understand, discuss, and use today.
+We take the method, not the motif. No cloud patterns, lattice windows, seals, or antique typefaces appear in the interface. What tradition leaves us is how an object serves its use, how dimensions form a set, how ink creates layers, and how empty space is composed. We select what is relevant to contemporary digital life and translate it into methods people can understand, discuss, and test today.
+
+## Substance and form
+
+The Analects say: “When substance exceeds form, the result is crude; when form exceeds substance, the result is clerical. Only when form and substance are in balance is one a person of quality.” 〔8〕
+
+Interfaces have substance and form too. Accurate names, truthful states, and recovery after failure are substance. A consistent system of measure, layered ink, and lines and spaces each in their place are form. With substance alone, an interface works but feels rough; with form alone, it looks refined but tells untruths.
+
+The methods therefore form two groups. The six methods of use address tasks and semantics; the nine methods of expression address measure and form. Each group is judged separately; neither substitutes for the other.
 
 ## Build a whole through relationships
 
 Two buttons relate through more than primary and secondary emphasis: they may advance an action and protect the person taking it. Space and content relate through more than size: space can hold expression or distinguish groups. A process relates to what precedes and follows it through confirmation, return, and continuation as well as sequence.
 
-Qingye UI develops its design through these relationships. Forms may change; they should not obscure human purposes.
+The Laozi says that “long and short shape each other; high and low lean on each other.” Size, weight, and density exist only by comparison. Qingye UI develops its design through these relationships: to bring one thing forward, first quiet what surrounds it rather than amplifying it further.
 
 ---
 
@@ -39,17 +47,15 @@ Around a task, some elements help complete it, some help explain it, some protec
 
 Protection is not inherently secondary. When something goes wrong, “Stop” may deserve more emphasis than “Continue.” During reading, the body text may matter more than any button. Responsibility and prominence require separate judgments.
 
-A good composition helps its parts accomplish the task together, rather than asking every part to draw equal attention to itself.
-
----
+A view has one chief. Two equally prominent entries side by side mean the main intent has not yet been decided.
 
 ## 03  布白有用 — Space serves a purpose
 
-The Laozi discusses the roles of what is present and absent in objects. The calligraphic and painting principle of “reckoning the white as black” asks us to attend to unmarked space alongside ink. These are distinct ideas, yet both encourage careful design of places that are not filled. 〔3〕〔4〕
+The Laozi uses the hub of a wheel, a vessel, and doors and windows to show that “where the room is empty lies its use.” Empty space has its purpose. 〔3〕
 
 Empty space has different responsibilities in an interface. Gaps make relationships legible; inputs hold a person's expression; a canvas leaves room for content and action; an unmade choice leaves room for judgment. Emptiness is not always a defect for the system to eliminate quickly.
 
-Space does not require an airy layout everywhere. Data for comparison can be dense, while separate tasks can stand farther apart. We organize density instead of distributing all content with one uniform gap.
+Space does not require an airy layout everywhere. Data for comparison can be dense, while separate tasks can stand farther apart. How space is graded and grouped is described under “Ordered density” below.
 
 Necessary labels, entry points, and guidance should remain. Leaving space invites use; it should not leave people unable to begin.
 
@@ -77,7 +83,7 @@ Entering a part should not erase the whole. After returning, people should still
 
 ## 06  进退相承 — Carry continuity through change
 
-We borrow the attention of “shi” to organization and the direction of change, interpreting it as continuity between interface states. There is no compulsory direction: continuing, pausing, returning, and refusing are all actions a person may need. 〔7〕
+The Book of Changes speaks of “knowing advance and retreat, survival and loss, without losing what is right.” We borrow the view that advancing and retreating are equally legitimate and connected: continuing, pausing, returning, and refusing are all actions a person may need. 〔7〕
 
 Validation after input, waiting after submission, and correction after failure should concern the same piece of work. A failure should not arbitrarily erase earlier effort; returning should not force someone to find the context again.
 
@@ -87,23 +93,95 @@ We want interfaces that make progress easy and allow people to stop with dignity
 
 ---
 
+## 07  以材为祖 — The module as ancestor
+
+The Song dynasty building standard Yingzao Fashi states: “All building begins from the cai module.” A whole building fixes one base measure, the cai, and writes the dimensions of every member as a number of its fen units. Buildings fall into eight grades; changing the grade changes only the size of the module, while proportions between members stay the same. 〔9〕
+
+An interface's module is one line of body text. People read text, so control heights, padding, spacing, corner radii, and markers all derive from that line and its unit. Size steps and compact density only change the grade: parts change together rather than being adjusted one by one.
+
+The module system carries a further idea: a building has grades, but the people inside it keep their height. Controls and spacing may change with the grade; the content people read is sized for reading and does not grow or shrink with its box. A button's name is part of the button and may follow its grade; input values, options, and body text are content and stay at body size.
+
+A system of measure is judged by how many of its values are set without a relationship. The fewer there are, the more one change carries through the whole, and the less styles drift apart.
+
+## 08  疏密有致 — Ordered density
+
+Deng Shiru said of calligraphy: “Where sparse, a horse may run; where dense, no wind passes; count the white as black, and wonder appears.” Da Chongguang wrote: “Empty and solid produce each other; where nothing is painted, the scene is complete.” 〔4〕
+
+Space is composed as carefully as ink, and sparse and dense must stand clearly apart. In an interface, spacing is the first means of grouping: tight within a group, looser between groups, looser still between sections, with each step visible at a glance. What spacing can separate needs no extra line or card.
+
+Evenly distributed spacing means no grouping. With every border and fill removed, an interface's groups should still be readable.
+
+## 09  墨分五色 — Five tones of ink
+
+Zhang Yanyuan wrote: “Handle the ink and the five colors are present.” With one ink, tone alone separates near and far, main and secondary, and texture. Xie He's six principles add “apply color according to category”: color follows the kind of thing it depicts. 〔10〕〔11〕
+
+Qingye UI carries its hierarchy with one limited neutral ink ladder. Text, lines, and surfaces all take their color from it; adjacent steps remain distinguishable, and no grays are invented outside it. Hue expresses only facts with a category: danger, warning, success, information, and data series.
+
+A brand may have one accent color, used like a seal on a painting: in few places, over small areas, with clear meaning. Without a brand color, emphasis is the deepest step of ink.
+
+In grayscale, hierarchy and states should remain readable.
+
+## 10  骨法用笔 — The bone method of the brush
+
+The second of Xie He's principles is “the bone method in using the brush”: lines are structure, and every stroke carries something. 〔11〕
+
+A line appears in an interface for one reason: a surface cannot mark the boundary. A filled button needs no outline; an input that shares the white of its surroundings uses a line to mark where editing happens. One region uses one mechanism; line, fill, and shadow do not restate the same boundary.
+
+Line weight stays uniform, and emphasis comes from deepening the ink rather than thickening the stroke. Focus, errors, and selection only darken an existing line. No ring is drawn outside the control, and its dimensions do not change between states.
+
+## 11  应物象形 — Form follows the object
+
+“Correspond to the object in depicting form”: shape follows the nature of the thing. 〔11〕
+
+Regions for acting and editing are places of work; their contours are square with eased corners. Only things that mark a point or an identity, such as status dots, avatars, and radio marks, are round. When one contour is inset by an equal distance, the inner corner shrinks with the outer one, keeping them concentric.
+
+A state changes properties the shape already has: tone, fill, position. It does not add a new shape.
+
+## 12  经营位置 — Composition of placement
+
+“Planning placement” is the principle of composing a picture. Calligraphy speaks of line flow: within a line, each character answers the last, and energy passes from one line to the next. 〔11〕
+
+Priority comes first from position and space, then from size, ink, and fill. A view's chief should be the first thing seen by position alone. Inputs, buttons, and segmented controls in one row share their height, and their text sits on one baseline; left and right edges fall on a few alignment lines. Composition must hold when text grows, languages change, or content is enlarged.
+
+## 13  绘事后素 — A plain ground before color
+
+Confucius said that “painting comes after the plain ground.” Zhu Xi explained this as laying a clean ground before applying color. 〔12〕
+
+An interface begins with a plain ground. Surfaces stay clean, without decorative gradients, textures, or highlights. Shadows express actual elevation only, such as a popup lying over content; things on one plane receive no shadow. Normal states carry no gray fill: gray is a step of ink and needs a fact to express.
+
+Quality comes from proportion and material, not added ornament.
+
+## 14  气韵生动 — Resonance and vitality
+
+“Resonance of spirit, vitality of movement” heads the six principles: the parts of a picture pass into one whole, with breath and rhythm. 〔11〕
+
+Motion in an interface keeps its place. It begins where the change happens, shows where it comes from and where it goes, and can be interrupted. Similar changes share one rhythm, and similar lists share one row spacing, so the whole reads as one thing rather than a pile of parts. Outcomes never depend on an animation finishing, and everything holds with motion turned off.
+
+## 15  材有美 — Respect the material
+
+The Kaogong Ji says: “Heaven has its seasons, earth its energies, materials their beauty, craft its skill; combine these four and the work is good.” 〔13〕
+
+The screen has its own material: pixels, system fonts, input methods, and platform behavior. Geometry falls on whole pixels so lines stay crisp. System fonts are the default, so Chinese and Latin faces are designed as a pair and one line carries one weight and gray. Native platform behavior and accessibility are preserved. Chinese typesetting is checked with real punctuation, mixed scripts, and long words rather than settled by one tracking rule.
+
+---
+
 ## In components
 
-Buttons name actions and consequences clearly, with prominence appropriate to the current task. Input areas leave room for expression, while labels, descriptions, and errors have distinct places. Related controls may share a boundary while keeping their individual operations clear.
+Buttons name actions and consequences clearly, with prominence appropriate to the current task; their height derives from one line of body text and matches the inputs in the same row. Input areas leave room for expression, while labels, descriptions, and errors have distinct places; on focus the edge darkens without spreading or thickening.
 
-Tables keep comparison content visible together, without manufacturing density by continually shrinking text. Cards enclose content when it represents an independent object, rather than putting every paragraph into the same box.
+Tables keep comparison content visible together, without manufacturing density by continually shrinking text. Grouping starts with spacing, and cards enclose content only when it represents an independent object. The ink ladder carries hierarchy; hue appears only where a state is real.
 
-Dialogs concern a specific matter and state its object, impact, and choices. Necessary warnings should not disappear into a fleeting notification; a lightweight result need not become an interruption.
+Dialogs concern a specific matter and state its object, impact, and choices. A dialog lies over content and therefore casts a shadow. Necessary warnings should not disappear into a fleeting notification; a lightweight result need not become an interruption.
 
 ## Across a complete task
 
 Consider editing information: a person enters a detail view from a list and sees which object they are editing; relevant comparison information remains accessible. After a change, saving and discarding have distinct meanings. If saving fails, the input remains and the problem is explained nearby. When the work ends, the person can return to its original context.
 
-This process can express naming, cooperation, space, proportion, disclosure, and continuity without relying on traditional ornament. The refinement of individual components and their ability to complete a task together require joint judgment.
+This process can express naming, cooperation, space, proportion, disclosure, and continuity without relying on traditional ornament, while its measure, ink, lines, and placement follow the nine methods of expression. The refinement of individual components and their ability to complete a task together require joint judgment.
 
 ## Across different products
 
-The same methods do not require the same appearance. Content presentation may use striking images; professional tools may hold dense information; everyday applications may feel lighter. Qingye UI aims to preserve understandable relationships, rather than place all products within one aesthetic.
+The same methods do not require the same appearance. Content presentation may use striking images; professional tools may hold dense information; everyday applications may feel lighter. A brand may bring its own accent color and typeface, and the module may change grade; understandable relationships stay the same.
 
 Clarity, readability, and operability are prerequisites for expression. Culture is no reason to lower them, and people should not need cultural terminology to have a good experience.
 
@@ -119,9 +197,9 @@ These six words describe experiences we hope to achieve, rather than an appearan
 
 ## Culture continues through method
 
-Tradition gives us starting points for thought, rather than answers exempt from examination. We learn from different traditions, contemporary design, and actual use. Similar methods arising from similar problems do not diminish the value of cultural translation.
+Tradition gives us starting points for thought, rather than answers exempt from examination. Every method taken from tradition must meet three conditions: it has an identifiable source, it makes a decision in the interface, and it can be tested. However appealing, a method that fails any of them is not adopted.
 
-Qingye UI is concerned with whether these ideas make a name more accurate, a set of actions more complete, a space more useful, or a change easier to understand, rather than whether people can identify a cultural symbol.
+Qingye UI is concerned with whether these ideas make a name more accurate, a set of actions more complete, a space more useful, a system of measure more consistent, or a change easier to understand, rather than whether people can identify a cultural symbol.
 
 When culture participates in these concrete judgments, it lives in the relationship between people and tools as well as in an interface's appearance.
 
@@ -147,14 +225,26 @@ The method names and digital interface examples in this document are Qingye UI's
 
 〔2〕Nanjing University of Chinese Medicine Museum, “君臣佐使” (2023). The original concept concerns principal treatment, assistance, constraint, guidance, and coordination. We borrow its cooperative relationships without constructing four levels of controls.
 
-〔3〕Laozi, chapters 2 and 11. The former concerns the mutual arising of presence and absence; the latter explains use through empty space in objects. We distinguish relational gaps from space available for use.
+〔3〕Laozi, chapters 2 and 11. The former concerns the mutual arising of presence and absence and the mutual shaping of long and short; the latter explains use through empty space in objects. We distinguish relational gaps from space available for use.
 
-〔4〕“Reckoning the white as black” and discussions of density, with reference to Shi Zhewen, “ ‘计白当黑’: 邓石如的书、印、诗,” Guangming Daily (2019), quoting Yizhou Shuangji. We do not directly reproduce its rhetoric of extreme density and sparseness.
+〔4〕Deng Shiru as recorded in Bao Shichen, Yizhou Shuangji, “Shu Shu, Part One,” with reference to Shi Zhewen, “ ‘计白当黑’: 邓石如的书、印、诗,” Guangming Daily (2019); Da Chongguang, Huaquan. We take the method of graded density without reproducing its rhetoric of extremes.
 
 〔5〕The phrase “君子而时中” in the Doctrine of the Mean in the Book of Rites, and related explanations in Zhuzi Yulei, volume 63. We draw on contextual fitness, without reducing the Doctrine of the Mean to an adaptive interface.
 
 〔6〕Shanghai Municipal Landscaping and City Appearance Administrative Bureau, “中国古典园林的造园手法” (2023). We borrow contextual organization without treating concealment and winding paths as universal interaction goals.
 
-〔7〕The chapter “势” in The Art of War and related commentary on organization and tendency. We take inspiration from relationships and continuity, without aiming to confront, control, or manipulate users.
+〔7〕Book of Changes, Qian, “Wenyan.” We take only the idea that advance and retreat are equally legitimate and continuous.
 
-*Design philosophy, second edition · October 2026. The document version is not the software version.*
+〔8〕Analects, Yong Ye. We use substance and form to refer to semantics and expression, without its original judgment of character.
+
+〔9〕Li Jie, Yingzao Fashi, volume 4, “Major carpentry, part one: the cai module.” We borrow the modular relationship among module, unit, and grade, not its specific proportions.
+
+〔10〕Zhang Yanyuan, Lidai Minghua Ji, volume 2. “Five tones of ink” is a later summary of the idea.
+
+〔11〕The six principles in the preface to Xie He's Guhua Pinlu. We adopt resonance, bone method, correspondence to the object, color by category, and placement. “Transmission by copying” concerns copying models and conflicts with this library's rule against basing work on existing implementations, so it is not adopted.
+
+〔12〕Analects, Ba Yi, with Zhu Xi's commentary that the plain ground comes first.
+
+〔13〕Rites of Zhou, Kaogong Ji. We take the phrase “materials have their beauty” as a requirement to design with the nature of the screen.
+
+*Design philosophy, third edition · October 2026. The document version is not the software version.*

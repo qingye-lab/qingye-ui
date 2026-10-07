@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: ecf81069c9e53fe4a6290c8200223e56c2b8624d6bbe7493b414b4e367a88edb
+Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
 
 Present a fixed-length text value in segments.
 
@@ -48,7 +48,6 @@ Segmented presentation of Input with one Field registration.
 - length: number. Required positive integer, counted as Unicode code points. Over-capacity insertions are rejected whole with feedback. External values are shown in full.
 - value / defaultValue: string; default defaultValue: ''. Controlled or uncontrolled text; leading zeros remain.
 - onValueChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void. Requests a text change. A controlled caller may retain the previous value.
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. Segments use matching control dimensions and text; coarse pointers use the touch target.
 - inputMode / autoComplete: native input props; default autoComplete: 'one-time-code'. Choose inputMode for the character set. The input type remains text.
 - render / ref / className / style / ARIA / events: Input props. Applied to the real input. Render must retain input semantics, its controlled value, and events.
 - controlClassName: string. Styles the segmented container's placement and layout.
@@ -81,19 +80,27 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/otp-field/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/otp-field/demos/02-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { OtpField } from "@qingye/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" } satisfies DemoMeta;
-const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    {sizes.map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><OtpField size={size} length={4} defaultValue="01" /></Field>)}
-  </FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <OtpField length={4} defaultValue="01" />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

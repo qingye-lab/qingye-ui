@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
-Source SHA-256: 39a31009ca965aee49f262ee5c0a1a78ecf8b2a8f07d1044f9490f5274645929
+Source SHA-256: f200a4d74d3714395c9e0b80ce2bae27edfb3d8d4bf7764ae5a88475e273d502
 
 Shared actions with explicit targets, versions and scope.
 
@@ -73,7 +73,7 @@ import { Inline, Stack } from "@qingye/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "对象与当前版本", titleEn: "Targets and current versions" } satisfies DemoMeta;
 export default function Demo() {
-  const [items, setItems] = React.useState([{ id: "a", label: "条目 A", version: 0, marked: false }, { id: "b", label: "条目 B", version: 1, marked: false }]); const [selected, setSelected] = React.useState<string[]>(["a"]); const [result, setResult] = React.useState("未执行");
+  const [items, setItems] = React.useState([{ id: "a", label: "接入设备", version: 0, marked: false }, { id: "b", label: "权限与角色", version: 1, marked: false }]); const [selected, setSelected] = React.useState<string[]>(["a"]); const [result, setResult] = React.useState("未执行");
   return <Stack>{items.map(item => <Inline key={item.id}><Checkbox aria-label={`选择 ${item.label}`} checked={selected.includes(item.id)} onCheckedChange={checked => setSelected(value => checked ? [...value, item.id] : value.filter(id => id !== item.id))} /><span className="text-body">{item.label} · {item.marked ? "已标记" : "未标记"}</span></Inline>)}<BulkActionBar targets={items.filter(item => selected.includes(item.id))} scope="本地集合所选条目" onClear={() => setSelected([])}><BulkActionBarActions><BulkActionBarAction onExecute={snapshot => { const ids = new Set(snapshot.targets.map(item => item.id)); setItems(value => value.map(item => ids.has(item.id) ? { ...item, marked: true, version: item.version + 1 } : item)); setResult(`已标记 ${snapshot.targets.length} 项`); }}>标记</BulkActionBarAction><BulkActionBarClear /></BulkActionBarActions></BulkActionBar><output className="text-support">{result}</output></Stack>;
 }
 ```

@@ -1,6 +1,6 @@
-import RadioSizes from "@/content/radio-group/demos/01-sizes";
+import RadioSizes from "@/content/radio-group/demos/01-labels";
 import RadioStates from "@/content/radio-group/demos/02-states";
-import SelectSizes from "@/content/select/demos/01-sizes";
+import SelectSizes from "@/content/select/demos/01-density";
 import SelectStates from "@/content/select/demos/02-states";
 
 export default function SelectorsReview() {

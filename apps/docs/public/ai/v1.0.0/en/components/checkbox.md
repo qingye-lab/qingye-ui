@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: e26f238e4ac7e3639b3a97216d825d867d7e7df132b2e486b527de1201a2ac02
+Source SHA-256: 4053f3f931945f4a87ec2e70b853b39450aa6055774f634ef30508e5ef814099
 
 Choose an independent yes/no value or multiple items in a set.
 
@@ -35,7 +35,6 @@ Use Checkbox for independent options and Switch for an immediate setting change.
 - Checkbox: function; owner checkbox; PASS; props: CheckboxProps
 - CheckboxPrimitive: reexport; owner checkbox; UNVERIFIED
 - CheckboxProps: type; owner checkbox; PASS
-- CheckboxSize: type; owner checkbox; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -50,7 +49,6 @@ Base UI checkbox semantics and mixed state.
 - checked / defaultChecked: boolean. Controlled checked value or uncontrolled initial value.
 - indeterminate: boolean; default false. Actual partial collection selection; aria-checked is mixed.
 - onCheckedChange: (checked, eventDetails) => void. Cancelable selection change; the application handles collection updates.
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". The visible box uses the matching text line height; touch-target separately supplies its hit area.
 - disabled / readOnly: boolean; default false. Disabled skips keyboard access and submission; read-only retains focus/submission without toggling.
 - aria-invalid: boolean | 'true' | 'false'. An explicit invalid fact, also available through Field invalid.
 - name / value / uncheckedValue / form: string. Preserve actual form submission through the primitive's hidden input.
@@ -79,7 +77,7 @@ export default function Demo() {
   const [second, setSecond] = useState(false);
   return (
     <Fieldset>
-      <FieldsetLegend>选项</FieldsetLegend>
+      <FieldsetLegend>通知范围</FieldsetLegend>
       <Field orientation="horizontal">
         <Checkbox checked={first && second} indeterminate={first !== second} onCheckedChange={(checked) => { setFirst(checked); setSecond(checked); }} />
         <FieldLabel>全选</FieldLabel>
@@ -112,17 +110,25 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/checkbox/demos/03-sizes.tsx
+### 跟随标签
+Source: apps/docs/src/content/checkbox/demos/03-labels.tsx
 ```tsx
 import { Checkbox } from "@qingye/ui/components/checkbox";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Heading } from "@qingye/ui/components/typography";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
+// 标记只有一种几何，跟随相邻标签的文字档（用户裁决 2026-10-05）：
+// 勾选框与它旁边那行字同高，因此列表项里的标记和标题旁的标记由文字本身决定。
 export default function Demo() {
-  return <div className="grid gap-(--qy-field-group-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
-    <Field key={size} orientation="horizontal"><Checkbox size={size} defaultChecked /><FieldLabel>{size}</FieldLabel></Field>
-  ))}</div>;
+  return (
+    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
+      <Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel>正文标签</FieldLabel></Field>
+      <Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel className="text-support">紧凑标签</FieldLabel></Field>
+      <Field orientation="horizontal"><Checkbox defaultChecked /><span className="text-reading">说明性文字，标记与它同高</span></Field>
+      <Field orientation="horizontal"><Checkbox defaultChecked /><Heading level={4} className="text-heading">分区标题</Heading></Field>
+    </div>
+  );
 }
 ```

@@ -70,6 +70,6 @@ test("composition inherits context and explicit concentric rounding does not rep
   expect(inner).not.toHaveAttribute("dir");
   expect(inner).not.toHaveAttribute("lang");
   expect(inner.style.borderRadius).toContain("var(--qy-field-gap)");
-  expect(screen.getByRole("textbox").closest('[data-slot="input-control"]')).toHaveClass("rounded-control");
+  expect(screen.getByRole("textbox").closest('[data-slot="input-control"]')).toHaveClass("rounded-(--qy-fill-radius)");
   expect(screen.getByTestId("outer").style.getPropertyValue("--qy-radius-control")).toBe("");
 });

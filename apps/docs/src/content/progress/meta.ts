@@ -90,7 +90,7 @@ export default {
     },
     {
       "name": "ProgressIndicator",
-      "description": "已确认进度的比例；不定状态显示无比例的虚线边界。", descriptionEn: "Confirmed progress ratio; indeterminate state shows a dashed boundary without a ratio."
+      "description": "已确认进度的比例；不定状态是一段移动的窄带，与确定态同形，只是位置不可知。", descriptionEn: "Confirmed progress ratio; the indeterminate state is a moving narrow band with the same form as determinate progress, only its position unknown."
     },
     {
       "name": "ProgressPrimitive",

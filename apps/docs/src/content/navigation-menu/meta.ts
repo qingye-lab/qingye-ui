@@ -2,8 +2,8 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   "title": "导航菜单 NavigationMenu",
   "titleEn": "NavigationMenu",
-  "description": "真实链接与可展开的导航分组。",
-  "descriptionEn": "Real links and expandable navigation groups.",
+  "description": "真实链接、可展开的导航分组与面板内的组名、说明。",
+  "descriptionEn": "Real links, expandable navigation groups, and in-panel group names with descriptions.",
   "category": "导航",
   "layer": "pattern",
   "source": "local",
@@ -15,6 +15,8 @@ export default {
     "NavigationMenuTrigger",
     "NavigationMenuLink",
     "NavigationMenuContent",
+    "NavigationMenuGroup",
+    "NavigationMenuGroupLabel",
     "NavigationMenuPositioner",
     "NavigationMenuPopup",
     "NavigationMenuViewport",
@@ -54,10 +56,29 @@ export default {
           "descriptionEn": "Href identifies a real destination; active writes aria-current=page."
         },
         {
+          "name": "description（NavigationMenuLink，面板内使用）",
+          "type": "ReactNode",
+          "description": "一行浓墨说明，只在能帮读者判断去留时给出；顶栏导航线的单行目的地不接受它。",
+          "descriptionEn": "One muted description line, given only when it helps the reader decide; a single-line top-bar destination does not accept it."
+        },
+        {
           "name": "render / ref / native props",
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
           "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "NavigationMenuGroup / NavigationMenuGroupLabel",
+      "description": "面板内的分组与不可操作的组名。",
+      "descriptionEn": "In-panel grouping and a non-interactive group name.",
+      "props": [
+        {
+          "name": "render / ref / native props",
+          "type": "Base UI part props",
+          "description": "组名不是链接也不是按钮，只识别不操作；组间距比组内更松，没有分组时面板仍是一份紧凑列表。",
+          "descriptionEn": "The group name is neither a link nor a button; it identifies and does not act. Spacing between groups is looser than within one, and a panel with no groups stays a compact list."
         }
       ]
     },

@@ -95,7 +95,7 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
       data-motion={notice.transitionStatus === "ending" ? undefined : "fade-in"}
       swipeDirection={anchored ? [] : ["left", "right"]}
       className={cn(
-        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border-strong bg-surface-raised text-foreground outline-none focus-visible:border-ring data-limited:hidden",
+        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border bg-surface-raised text-foreground outline-none focus-visible:border-ring data-limited:hidden",
         notice.data?.tooltipStyle ? "p-(--qy-space-2)" : "p-(--qy-panel-padding-sm)",
       )}
       {...rootProps}

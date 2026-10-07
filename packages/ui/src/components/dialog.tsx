@@ -52,7 +52,7 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
       <DialogPrimitive.Popup {...props} aria-modal="true" data-slot="dialog-popup"
         className={(state) => cn(
           // 内容固有宽度 + 视口上限；浮层身份读既有角色，入退只在 motion.css。
-          "pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border-strong bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
+          "pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
           typeof className === "function" ? className(state) : className,
         )} />
     </DialogPrimitive.Viewport>

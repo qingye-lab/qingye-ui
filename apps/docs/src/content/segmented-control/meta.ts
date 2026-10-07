@@ -17,7 +17,7 @@ export default {
     { name: "SegmentedControlPrimitive / SegmentedControlItemPrimitive", description: "Base UI RadioGroup 与 Radio 原语公共出口。", descriptionEn: "Public Base UI RadioGroup and Radio primitives." },
   ],
   keyboard: [{ keys: "Tab / Shift+Tab", description: "在组内保留一个停靠点。", descriptionEn: "Retain one tab stop within the group." }, { keys: "↑ / ↓ / ← / →", description: "移动并选择候选，跳过禁用项。", descriptionEn: "Move and select candidates, skipping disabled items." }, { keys: "Space", description: "选择当前项；Home/End 不属于 Radio 原语契约。", descriptionEn: "Select the current item; Home/End are outside the Radio primitive contract." }],
-  decisions: "SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全取消的工具按压用 ToggleGroup。", decisionsEn: "SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for pressed tools allowing all items to be released.",
+  decisions: "SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。", decisionsEn: "SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released.",
   design: {
     methods: ["名实相符", "相成相制", "随境取度"], whenToUse: ["少量可并列比较的互斥值"], avoid: ["面板视角用 Tabs", "候选较长或可收起用 Select", "独立二态使用 Toggle"],
     composition: ["FieldTitle 命名组；FieldDescription/FieldError 关联输入；候选 children 是名称"], stateOwner: { library: ["非受控值、焦点、方向键"], application: ["受控值、候选、invalid、提交"] },

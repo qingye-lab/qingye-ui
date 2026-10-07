@@ -78,3 +78,15 @@ return useMediaQuery("max-md");
 当前 metadata 的 source 全为 local。保留该字段及 catalog 的来源投影，只将类型收窄为 local，避免无必要改变 catalog 消费契约；生成器校验当前来源，拒绝缺失或不符的分类。能力事实生成器移除已删除清单及其匹配、计数、注释扫描，按当前本库编写事实输出；缺少真实输入仍抛错。PASS 仅表示静态目录一致，UNVERIFIED 与 NOT_RUN 不转为成功，来源标签不构成独立历史作者证明。
 
 两份 LICENSE 只删除末尾两行过时附注，MIT 正文保留。官网来源写为依据 design.md 编写、Base UI 公共原语承担相应可访问行为；不声称已归档能力仍可用。conventions 仅改过时注释，原规则、例外集合与断言不变。运行授权的类型检查、测试、一次库 build 与忽略 prepack 的 pack dry-run；后者避免隐式第二次 build。生成产物仅由授权命令刷新，历史资料与范围外文件不手改。最终结果及每条 grep 保留理由将记入 N 报告。
+
+## N：来源尾项完成记录
+
+2026-10-03。**N 授权来源尾项 PASS**。上述 M/H 段落保留各自当时证据；其“清单外引用待收尾”状态现由本节更新。完整删除边界、逐条 grep 保留理由、既有断言处置与日志见 [N 报告](../implementation/2026-10-03-batch5-n-provenance-tail.md)。
+
+六个动画变量与六套 keyframes 已整段删除；删前指定消费者范围无命中，删后保留主题声明及动效目标/值/媒体上下文的 AST 对照通过。motion.css 中 skeleton、preview-card、command、sheet 部位已删，其余指定已删除组件无选择器；归档待重写组件的选择器保留。两份 LICENSE 的 MIT 正文逐字保留，过时两行附注已删。未来 OTP 的光标决定由重写任务承担。
+
+旧清单读取、来源匹配分支和 coss 计数已移除。事实生成器可运行：20个组件、357个 qy token；当前组件/catalog/dist/local 均20，静态一致性全部 PASS，独立来源比较明确 NOT_RUN。缺 metadata/必要指纹文件抛 ENOENT；分类错误或缺 catalog 项保持 UNVERIFIED，无 dist 保持 NOT_RUN。source 类型收窄到 local，20份 metadata 不变，catalog 投影契约保留且生成器新增分类校验。官网来源与注释已经同步；conventions 的规则、例外与断言未变。
+
+UI typecheck PASS；31文件/468测试 PASS；唯一一次库 build PASS（20组件、0 patterns、76.5KB CSS）。packages/ui 下 pack dry-run 用 ignore-scripts 避免重复 build，123文件含1076字节 MIT LICENSE，无已删来源文件或旧动画。构建后范围 grep 只保留两条普通 upstream 用语：gen-catalog 的安装版本优先约束，以及 design-guidance 的前置数据流说明，逐条理由见报告。
+
+**官网 typecheck 仍 FAIL，125条既有诊断**，构建前后均如此。保持当前其余工作区/依赖、用 CompilerHost 代入 N 修改前快照后，全部125条诊断逐项相同，N 未引入新的类型错误。官网外壳、浏览器验收与发布不纳入来源尾项完成状态。M 无对应原文文件的进一步独立来源证明继续 UNVERIFIED；没有读取或修改冻结/归档源码，没有把标签或本轮删除冒充完整历史作者证明。

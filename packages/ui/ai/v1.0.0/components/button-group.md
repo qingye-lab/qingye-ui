@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 430ee68fa0bd7dc3a270f4f537587075d520d0eb529fe2b877af2e4d1ad5701d
+Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
 
 为同一范围的动作提供共同名称与间隔。
 

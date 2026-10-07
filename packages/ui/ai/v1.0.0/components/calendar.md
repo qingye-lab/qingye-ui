@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 149d6d6f59ea6911b9b506b9b40ddffc05551e8be4e0192bd15ee20f6d2c0568
+Source SHA-256: 5c905501ff0720016458025f843386b60aacab774dd79f7a280da3400ab19160
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 
@@ -25,7 +25,7 @@ Source SHA-256: 149d6d6f59ea6911b9b506b9b40ddffc05551e8be4e0192bd15ee20f6d2c0568
 - Calendar 或 Field + DatePicker
 
 ## Responsive behavior
-- 五档同名文字，窄屏 +4px，粗指针实体单元命中
+- 一套几何，跟随密度轴，紧凑不缩小文字；窄屏 +4px，粗指针实体单元命中
 
 ## Customization
 - CalendarProps、classNames、components 与集中主题角色
@@ -52,7 +52,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - month / defaultMonth / onMonthChange: Date / Date / (month: Date) => void. 受控或非受控年月导航；未指定时采用 DayPicker 当前月份默认值。
 - disabled / hidden / startMonth / endMonth: DayPicker public props. 明确不可选日期、隐藏日期与导航范围。disabled 不替调用方纠正已有选中值。
 - min / max / excludeDisabled: range mode: number / number / boolean. 范围长度与跨禁用日期的规则由调用方显式声明。默认允许同日完整范围。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 日期与导航按钮消费同档 control/text；粗指针单元采用 touch-target。
 - locale / labels / formatters: DayPicker public props. 默认按 UILocale 的中文/英文提供日期语言与名称；其他日期语言可传 DayPicker locale。
 - render / ref / className / style / classNames / components: div composition / DayPicker public props. 根出口支持组合；classNames/components 显式覆写实际部位。替换 Root 时由调用方保留 ref 与语义。
 

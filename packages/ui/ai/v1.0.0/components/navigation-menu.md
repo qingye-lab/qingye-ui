@@ -3,9 +3,9 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: a29ac0a115bd1732a7a0c452313dbf9f1d14865eb2224f82741f9f481767d613
+Source SHA-256: c62142d34159b0261c8642b28b1987dac7d4d7dd9243f17d5ed399cd5c5540c3
 
-真实链接与可展开的导航分组。
+真实链接、可展开的导航分组与面板内的组名、说明。
 
 ## Decision
 active 是应用提供的页面事实，库不读 URL 或把命令推断成导航。
@@ -22,6 +22,7 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 ## Composition
 - NavigationMenu / NavigationMenuList / NavigationMenuItem：nav、ul 与稳定 value 的导航项。
 - NavigationMenuTrigger / NavigationMenuLink：组触发器与真实链接。
+- NavigationMenuGroup / NavigationMenuGroupLabel：面板内的分组与不可操作的组名。
 - NavigationMenuContent / NavigationMenuPortal / NavigationMenuPositioner / NavigationMenuPopup / NavigationMenuViewport / NavigationMenuPrimitive：同一导航 Root 的内容与浮层。
 
 ## Responsive behavior
@@ -34,6 +35,10 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 - NavigationMenu: function; owner navigation-menu; PASS; props: NavigationMenuProps<Value>
 - NavigationMenuContent: function; owner navigation-menu; PASS; props: NavigationMenuContentProps
 - NavigationMenuContentProps: type; owner navigation-menu; PASS
+- NavigationMenuGroup: function; owner navigation-menu; PASS; props: NavigationMenuGroupProps
+- NavigationMenuGroupLabel: function; owner navigation-menu; PASS; props: NavigationMenuGroupLabelProps
+- NavigationMenuGroupLabelProps: type; owner navigation-menu; PASS
+- NavigationMenuGroupProps: type; owner navigation-menu; PASS
 - NavigationMenuItem: function; owner navigation-menu; PASS; props: NavigationMenuItemProps
 - NavigationMenuItemProps: type; owner navigation-menu; PASS
 - NavigationMenuLink: function; owner navigation-menu; PASS; props: NavigationMenuLinkProps
@@ -55,7 +60,7 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -68,7 +73,12 @@ nav、ul 与稳定 value 的导航项。
 ### NavigationMenuTrigger / NavigationMenuLink
 组触发器与真实链接。
 - href / active: native link / boolean. href 指向真实位置；active 写 aria-current=page。
+- description（NavigationMenuLink，面板内使用）: ReactNode. 一行浓墨说明，只在能帮读者判断去留时给出；顶栏导航线的单行目的地不接受它。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+### NavigationMenuGroup / NavigationMenuGroupLabel
+面板内的分组与不可操作的组名。
+- render / ref / native props: Base UI part props. 组名不是链接也不是按钮，只识别不操作；组间距比组内更松，没有分组时面板仍是一份紧凑列表。
 
 ### NavigationMenuContent / NavigationMenuPortal / NavigationMenuPositioner / NavigationMenuPopup / NavigationMenuViewport / NavigationMenuPrimitive
 同一导航 Root 的内容与浮层。
@@ -77,13 +87,23 @@ nav、ul 与稳定 value 的导航项。
 ## Keyboard
 
 ## Source examples
-### 真实目的地
+### 真实目的地与分组
 Source: apps/docs/src/content/navigation-menu/demos/01-task.tsx
 ```tsx
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuPopup, NavigationMenuViewport } from "@qingye/ui/components/navigation-menu";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuPopup, NavigationMenuViewport } from "@qingye/ui/components/navigation-menu";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "真实目的地", titleEn: "Real destinations" } satisfies DemoMeta;
+export const meta = { title: "真实目的地与分组", titleEn: "Real destinations, grouped" } satisfies DemoMeta;
 export default function Demo() {
-  return <NavigationMenu aria-label="组件导航"><NavigationMenuList><NavigationMenuItem value="current"><NavigationMenuLink href="/components/navigation-menu" active>导航菜单</NavigationMenuLink></NavigationMenuItem><NavigationMenuItem value="inputs"><NavigationMenuTrigger>输入</NavigationMenuTrigger><NavigationMenuContent><NavigationMenuLink href="/components/input">文本输入</NavigationMenuLink><NavigationMenuLink href="/components/field">字段</NavigationMenuLink></NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;
+  return <NavigationMenu aria-label="组件导航"><NavigationMenuList><NavigationMenuItem value="current"><NavigationMenuLink href="/components/navigation-menu" active>导航菜单</NavigationMenuLink></NavigationMenuItem><NavigationMenuItem value="inputs"><NavigationMenuTrigger>输入</NavigationMenuTrigger><NavigationMenuContent>
+    <NavigationMenuGroup>
+      <NavigationMenuGroupLabel>文本</NavigationMenuGroupLabel>
+      <NavigationMenuLink href="/components/input" description="单行文本与附属动作">文本输入</NavigationMenuLink>
+      <NavigationMenuLink href="/components/field">字段</NavigationMenuLink>
+    </NavigationMenuGroup>
+    <NavigationMenuGroup>
+      <NavigationMenuGroupLabel>选择</NavigationMenuGroupLabel>
+      <NavigationMenuLink href="/components/select">选择框</NavigationMenuLink>
+    </NavigationMenuGroup>
+  </NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;
 }
 ```

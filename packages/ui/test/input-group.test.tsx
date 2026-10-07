@@ -56,12 +56,14 @@ test("root and addon render, refs, native props and caller classes compose indep
   const input = createRef<HTMLInputElement>();
   const addon = createRef<HTMLSpanElement>();
   const changed = vi.fn();
-  render(<InputGroup ref={root} size="xl" data-owner="caller" className="w-auto" render={<section />}><InputGroupInput ref={input} aria-label="数值" id="number" onChange={changed} render={<input data-rendered="yes" />} /><InputGroupAddon ref={addon} className="px-0" render={<span id="unit" />}>px</InputGroupAddon></InputGroup>);
+  render(<InputGroup ref={root} data-owner="caller" className="w-auto" render={<section />}><InputGroupInput ref={input} aria-label="数值" id="number" onChange={changed} render={<input data-rendered="yes" />} /><InputGroupAddon ref={addon} className="px-0" render={<span id="unit" />}>px</InputGroupAddon></InputGroup>);
   expect(root.current?.tagName).toBe("SECTION");
   expect(root.current).toHaveAttribute("data-owner", "caller");
   expect(root.current).toHaveClass("w-auto");
   expect(input.current).toBe(screen.getByRole("textbox"));
-  expect(input.current).toHaveClass("text-control-xl-mobile");
+  // 用户裁决 2026-10-05：边界与内部输入共用一套几何，值文字始终是正文尺寸。
+  expect(input.current).toHaveClass("text-control-md-mobile", "sm:text-control-md");
+  expect(root.current).toHaveClass("min-h-(--qy-fill-height-narrow)");
   expect(addon.current).toHaveAttribute("id", "unit");
   expect(addon.current).toHaveClass("px-0");
   await userEvent.type(input.current!, "1");

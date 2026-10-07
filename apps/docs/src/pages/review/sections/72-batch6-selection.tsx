@@ -8,7 +8,7 @@ import SegmentValue from "@/content/segmented-control/demos/01-values";
 import SegmentStates from "@/content/segmented-control/demos/02-states";
 import SliderValues from "@/content/slider/demos/01-values";
 import SliderStates from "@/content/slider/demos/02-states";
-import SliderSizes from "@/content/slider/demos/03-sizes";
+import SliderSizes from "@/content/slider/demos/03-density";
 
 export default function Batch6SelectionReview() {
   return <section id="batch6-selection" className="grid gap-(--qy-section-gap) py-(--qy-section-gap)">

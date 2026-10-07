@@ -25,6 +25,27 @@ function code(file: string) {
 
 const table = files.map((file) => [file, code(file)] as const);
 
+const HAN = /[一-鿿]/;
+
+/**
+ * String literals the module actually emits, read from the AST. Comments are not
+ * AST nodes, so prose about the code can never be reported as user-visible copy;
+ * a literal in a type position (`"xs" | "sm"`) is a type, not text on screen.
+ */
+function literalStrings(source: string, filename = "fixture.tsx"): string[] {
+  const ast = ts.createSourceFile(filename, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const found: string[] = [];
+  const visit = (node: ts.Node) => {
+    if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) {
+      const parent = node.parent as ts.Node;
+      if (!ts.isLiteralTypeNode(parent) && !ts.isTypeNode(parent)) found.push(node.text);
+    }
+    ts.forEachChild(node, visit);
+  };
+  ts.forEachChild(ast, visit);
+  return found;
+}
+
 /** Follow emitted JSX/useRender props; comments and unrelated objects are not hooks. */
 function inspectSlotHook(source: string, filename = "fixture.tsx") {
   const ast = ts.createSourceFile(filename, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
@@ -130,11 +151,13 @@ describe("component conventions", () => {
     // A literal Chinese string in a component is a string that cannot be
     // translated or overridden; demo and docs copy lives outside this folder.
     const offenders: string[] = [];
-    for (const [file, source] of table) {
+    for (const file of files) {
       if (file === "locale.tsx") continue;
-      const withoutLocaleImports = source.replace(/^import[\s\S]*?from "\.\.\/locale";$/gm, "");
-      const hits = withoutLocaleImports.match(/["'`][^"'`]*[一-鿿][^"'`]*["'`]/g);
-      if (hits) offenders.push(`${file}: ${hits.slice(0, 3).join(" ")}`);
+      // 用 AST 取真正的字符串字面量，不用正则扫全文：正则分不清「字符串里的中文」
+      // 和「注释里的中文」，而且字符类允许跨行，会把一行注释和邻近的属性文本粘成
+      // 一个假命中（2026-10-05 打磨时，新增的中文说明注释曾被误报为界面文案）。
+      const hits = literalStrings(read(file), file).filter((text) => HAN.test(text));
+      if (hits.length) offenders.push(`${file}: ${hits.slice(0, 3).join(" ")}`);
     }
     expect(offenders).toEqual([]);
   });

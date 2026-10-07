@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: 0c4f16373d4eee7859a9bd9c5c58e7d9b8e143c05e023bb1d68eaec2f96093d4
+Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13
 
 Edit multiline notes and messages.
 
@@ -36,7 +36,6 @@ Character counts describe the current value only. maxLength or application rules
 - Textarea: function; owner textarea; PASS; props: TextareaProps
 - TextareaPrimitive: reexport; owner textarea; UNVERIFIED
 - TextareaProps: type; owner textarea; PASS
-- TextareaSize: type; owner textarea; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -48,7 +47,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ## Curated API
 ### Textarea
 A native textarea composable with Field.
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". Matching control geometry, text, and bordered padding.
 - rows: number; default 3. Minimum starting rows; content may grow automatically and still be resized manually.
 - value / defaultValue: string. Controlled value or uncontrolled initial value.
 - onValueChange: (value, eventDetails) => void. Primitive value callback, cancelable with eventDetails.cancel().
@@ -115,22 +113,25 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/textarea/demos/03-sizes.tsx
+### 密度
+Source: apps/docs/src/content/textarea/demos/03-density.tsx
 ```tsx
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Textarea } from "@qingye/ui/components/textarea";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "密度", titleEn: "Density" };
 
+// 多行编辑的高度由 rows 与内容决定，密度只收紧容器与内边距。
 export default function Demo() {
   return (
-    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
-      {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
-        <Field key={size}>
-          <FieldLabel>{size}</FieldLabel>
-          <Textarea size={size} defaultValue={"第一行文字。\n第二行文字。"} />
-        </Field>
+    <div className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Textarea rows={3} defaultValue={"第一行文字。\n第二行文字。"} />
+          </Field>
+        </div>
       ))}
     </div>
   );

@@ -78,8 +78,12 @@ export function resolveColor(value: string, tokens: Map<string, string>, visitin
     const args = split(value.slice(10, -1), ",");
     if (args.length !== 3 || args[0] !== "in srgb") throw new Error(`Unsupported interpolation: ${value}`);
     const entries = args.slice(1).map((arg) => {
-      const match = /^(.*)\s+([\d.]+%)$/.exec(arg);
-      return { color: resolveColor(match ? match[1]! : arg, tokens, visiting), weight: match ? number(match[2]!) : undefined };
+      // 权重可以是字面百分比，也可以是 var() 或 calc()（墨阶把浓度写成 token）。
+      const words = split(arg, " ").filter(Boolean);
+      const last = words.length > 1 ? words.at(-1)! : undefined;
+      const weight = last === undefined ? undefined : resolvePercent(last, tokens, visiting);
+      const color = weight === undefined ? arg : words.slice(0, -1).join(" ");
+      return { color: resolveColor(color, tokens, visiting), weight };
     });
     const [a, b] = entries;
     const wa = a!.weight ?? (b!.weight === undefined ? 0.5 : 1 - b!.weight);
@@ -113,6 +117,23 @@ export function resolveColor(value: string, tokens: Map<string, string>, visitin
   return [4.0767416621 * x - 3.3077115913 * y + 0.2309699292 * z, -1.2684380046 * x + 2.6097574011 * y - 0.3413193965 * z, -0.0041960863 * x - 0.7034186147 * y + 1.707614701 * z].map((v) => clamp(encode(v))).concat(clamp(number(alpha))) as RGBA;
 }
 
+/** A color-mix weight: literal %, var() to a %, or calc() of those. Undefined when it is not a weight. */
+function resolvePercent(value: string, tokens: Map<string, string>, visiting: Set<string>): number | undefined {
+  if (/^[\d.]+%$/.test(value)) return number(value);
+  if (!/^(var|calc)\(/.test(value)) return undefined;
+  const expanded = value.replace(/var\((--[\w-]+)\)/g, (_m, name: string) => {
+    if (visiting.has(name)) throw new Error(`Cyclic token: ${name}`);
+    const binding = tokens.get(name);
+    if (!binding) throw new Error(`Unknown token: ${name}`);
+    const resolved = resolvePercent(binding.trim(), tokens, new Set([...visiting, name]));
+    if (resolved === undefined) throw new Error(`Not a percentage: ${name}`);
+    return `(${resolved})`;
+  });
+  const arithmetic = expanded.replace(/calc\(/g, "(").replace(/([\d.]+)%/g, (_m, n: string) => String(Number(n) / 100));
+  if (!/^[\d.+\-*/() ]+$/.test(arithmetic)) throw new Error(`Unsupported weight: ${value}`);
+  return Function(`return (${arithmetic});`)() as number;
+}
+
 export function composite(f: RGBA, b: RGBA): RGBA {
   const alpha = f[3] + b[3] * (1 - f[3]);
   return alpha ? [0, 1, 2].map((i) => (f[i]! * f[3] + b[i]! * b[3] * (1 - f[3])) / alpha).concat(alpha) as RGBA : [0, 0, 0, 0];
@@ -141,7 +162,7 @@ export function checkPair(pair: ContrastPair, tokens: Map<string, string>): Cont
  * Arrays paint bottom -> top. This checks defaults, not arbitrary consumers.
  * Input/Select/Button: boundary around inset/hover/active control fills.
  * Popover/Menu/Chart: secondary text on raised surfaces and selected rows.
- * StatusDot/Alert/ProgressCircle/Chart: marks, not small text at 3:1.
+ * StatusDot/Alert/Chart: marks, not small text at 3:1.
  * Badge/Timeline: status text over the real translucent status fill.
  */
 export function libraryPairs(appearance: Appearance): ContrastPair[] {
@@ -158,9 +179,13 @@ export function libraryPairs(appearance: Appearance): ContrastPair[] {
     }
     for (const mark of ["chart-1", "chart-2", "chart-3", "chart-4", "chart-5", "warning", "success", "info", "danger"]) add(`${mark} on ${surface}`, token(mark), [token(surface)], 3);
     for (const state of ["danger", "warning", "success", "info"]) {
-      add(`${state} Alert icon on 4% fill over ${surface}`, token(state), [token(surface), alpha(state, 4)], 3);
-      add(`${state} Badge text on status fill over ${surface}`, token(`${state}-foreground`), [token(surface), alpha(state, appearance === "dark" ? 16 : 8)], 4.5);
+      add(`${state} Alert icon on its soft fill over ${surface}`, token(`${state}-foreground`), [token(surface), token(`${state}-soft`)], 3);
+      // 标记是正文里的一段字：状态文字色直接压在纸上。
+      add(`${state} Badge text on ${surface}`, token(`${state}-foreground`), [token(surface)], 4.5);
     }
+    add(`Alert description on neutral-soft over ${surface}`, token("foreground-muted"), [token(surface), token("neutral-soft")], 4.5);
+    for (const state of ["danger", "warning", "success", "info"]) add(`Alert description on ${state} soft fill over ${surface}`, token("foreground-muted"), [token(surface), token(`${state}-soft`)], 4.5);
+
     add(`StatusDot muted indicator on ${surface}`, token("foreground-muted"), [token(surface)], 3);
     add(`Calendar disabled/outside date on ${surface}`, token("foreground-muted"), [token(surface)], 4.5);
     add(`Calendar selected range-middle date on ${surface}`, token("foreground"), [token(surface), token("accent")], 4.5);

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
-Source SHA-256: dfec9ff84e6dc8e1a1700d2f81a72e0b7939b719b796a1ea06f689c289122fb8
+Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
 
 An unresolved write result with its original value.
 

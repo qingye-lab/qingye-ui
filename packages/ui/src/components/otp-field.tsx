@@ -3,28 +3,20 @@
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
-import { Input, type InputProps, type InputSize } from "./input";
+import { Input, type InputProps } from "./input";
 
 export type OtpFieldProps = Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "size" | "maxLength" | "clearable" | "visibilityToggle"> & {
   /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */
   length: number;
-  size?: InputSize;
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const profiles: Record<InputSize, string> = {
-  xs: "rounded-xs text-control-xs-mobile sm:text-control-xs",
-  sm: "rounded-sm text-control-sm-mobile sm:text-control-sm",
-  md: "rounded-control text-control-md-mobile sm:text-control-md",
-  lg: "rounded-control text-control-lg-mobile sm:text-control-lg",
-  xl: "rounded-control text-control-xl-mobile sm:text-control-xl",
-};
 
 /** 一个可选择和复制的真实文本输入；分段只是呈现，长度完成不代表验证。 */
 export function OtpField({
-  length, size = "md", value: valueProp, defaultValue = "", onValueChange,
+  length, value: valueProp, defaultValue = "", onValueChange,
   className, controlClassName, ref, onChange, onSelect, onFocus, onBlur, onPaste,
   "aria-describedby": describedBy, ...props
 }: OtpFieldProps) {
@@ -61,11 +53,11 @@ export function OtpField({
   }, [defaultValue, valueProp, props.form]);
 
   return <div data-slot="otp-field" className={cn("flex min-w-0 flex-col gap-(--qy-field-gap)", controlClassName)}>
-    <div data-slot="otp-field-segments" className="group/otp relative grid w-fit max-w-full gap-(--qy-field-gap) has-[input:disabled]:opacity-64"
+    <div data-slot="otp-field-segments" className="group/otp relative grid w-fit max-w-full gap-(--qy-field-gap)"
       style={{
         gridTemplateColumns: `repeat(${Math.max(length, characters.length)}, minmax(0, 1fr))`,
-        "--qy-otp-cell": `var(--qy-control-${size})`,
-        "--qy-otp-cell-narrow": `var(--qy-control-${size}-narrow)`,
+        "--qy-otp-cell": "var(--qy-fill-height)",
+        "--qy-otp-cell-narrow": "var(--qy-fill-height-narrow)",
       } as React.CSSProperties}
       onPointerDown={event => {
         if (event.defaultPrevented || event.button !== 0) return;
@@ -85,12 +77,11 @@ export function OtpField({
         data-active={index === active ? "" : undefined}
         data-selected={index >= countBefore(selection.start) && index < countBefore(selection.end) ? "" : undefined}
         className={cn(
-          "flex aspect-square min-w-0 w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-card text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) dark:bg-surface-inset group-has-[input:read-only]/otp:border-dashed group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-accent",
+          "flex aspect-square min-w-0 rounded-(--qy-fill-radius) text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-card text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) dark:bg-surface-inset group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-accent",
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
-          profiles[size],
         )}
       >{characters[index] ?? ""}</span>)}
-      <Input {...props} ref={setRef} size={size} type="text" value={value} unstyled clearable={false} visibilityToggle={false}
+      <Input {...props} ref={setRef} type="text" value={value} unstyled clearable={false} visibilityToggle={false}
         data-slot="otp-field-input" autoComplete={props.autoComplete ?? "one-time-code"}
         aria-describedby={[describedBy, feedback ? feedbackId : undefined].filter(Boolean).join(" ") || undefined}
         controlClassName="absolute inset-0 pointer-events-none" className={state => cn("opacity-0", typeof className === "function" ? className(state) : className)}

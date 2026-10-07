@@ -10,7 +10,8 @@ describe("Breadcrumb", () => {
     expect(screen.getAllByRole("listitem")).toHaveLength(2);
     expect(screen.getByRole("link")).toHaveAttribute("href", "/");
     expect(screen.getByText("内容")).toHaveAttribute("aria-current", "page");
-    expect(screen.getByText("/")).toHaveAttribute("aria-hidden", "true");
+    // 分隔是一枚装饰性的小箭头（不再是字面的「/」），对读屏隐藏。
+    expect(document.querySelector("[data-slot=breadcrumb-separator]")).toHaveAttribute("aria-hidden", "true");
   });
   it("forwards the real link ref, render attributes and action", () => {
     const ref = React.createRef<HTMLAnchorElement>(); const onClick = vi.fn((event: React.MouseEvent) => event.preventDefault());

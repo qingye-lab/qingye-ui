@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "@qingye/ui/styles.css";
-@import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
 @source "./";

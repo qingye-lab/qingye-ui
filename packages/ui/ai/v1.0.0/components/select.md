@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 7ed7a92052f70401ba4362a3e1ed152c74ab65e5aa824720499fbeb16879979d
+Source SHA-256: bcd61db277cc04554f93a2726bdf140efe7c15e9b427ba2197f7b32b07be98da
 
 从可收起的候选列表中取一个值。
 
@@ -44,7 +44,6 @@ Source SHA-256: 7ed7a92052f70401ba4362a3e1ed152c74ab65e5aa824720499fbeb16879979d
 - SelectPopupProps: type; owner select; PASS
 - SelectPrimitive: reexport; owner select; UNVERIFIED
 - SelectProps: type; owner select; PASS
-- SelectSize: type; owner select; PASS
 - SelectTrigger: function; owner select; PASS; props: SelectTriggerProps
 - SelectTriggerProps: type; owner select; PASS
 - SelectValue: function; owner select; PASS; props: SelectValueProps
@@ -71,7 +70,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### SelectTrigger
 有边框的选择入口，与 Input 同档。
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 同名文字、外高、padding-bordered 和图标档。
 - children: ReactNode. 省略时提供 SelectValue；内含展开图标。
 - render / ref / className / style / ARIA: Base UI composition. 保留真实触发器的事件、名称和样式入口。
 
@@ -107,15 +105,14 @@ Portal、定位、面板与可滚动 List 的共同组合。
 - Esc: 关闭并回到触发器，保留原值。
 
 ## Source examples
-### 尺寸
-Source: apps/docs/src/content/select/demos/01-sizes.tsx
+### 密度
+Source: apps/docs/src/content/select/demos/01-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Select, SelectItem, SelectPopup, SelectTrigger, type SelectSize } from "@qingye/ui/components/select";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "密度", titleEn: "Density" };
 
-const sizes: SelectSize[] = ["xs", "sm", "md", "lg", "xl"];
 const options = [
   { value: "left", label: "左对齐" },
   { value: "center", label: "居中" },
@@ -124,17 +121,19 @@ const options = [
 
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-5 items-start">
-      {sizes.map(size => (
-        <Field key={size}>
-          <FieldLabel>{size}</FieldLabel>
-          <Select items={options} defaultValue="center">
-            <SelectTrigger size={size} />
-            <SelectPopup>
-              {options.map(option => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
-            </SelectPopup>
-          </Select>
-        </Field>
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Select items={options} defaultValue="center">
+              <SelectTrigger />
+              <SelectPopup>
+                {options.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectPopup>
+            </Select>
+          </Field>
+        </div>
       ))}
     </FieldGroup>
   );

@@ -3,7 +3,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
-import { Button, type ButtonProps } from "./button";
+import { Button, type ButtonProps, buttonVariants } from "./button";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -23,9 +23,30 @@ export function PaginationItem({ render, className, ...props }: PaginationItemPr
   return useRender({ defaultTagName: "li", render, props: mergeProps({ "data-slot": "pagination-item", className: cn("min-w-0", className) }, props) });
 }
 export type PaginationLinkProps = useRender.ComponentProps<"a"> & { page: number };
+/**
+ * 基础层 §6（2026-10-05 打磨）：当前页原来是「加粗 + 下划线」同其余链接一样，
+ * 在 1 2 3 4 里看不出现在停在哪一页。当前位置是**事实**，不是强调——它与勾选、
+ * 开关、分段控件选中同一角色，因此同样用填充表达：当前页是一枚实心控件，
+ * 其余页是安静的链接。下划线留给「这里可以离开」，不在当前页上出现。
+ */
 export function PaginationLink({ page, render, className, ...props }: PaginationLinkProps) {
   const current = React.useContext(PageContext) === page;
-  return useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "pagination-link", "data-page": page, "aria-current": current ? "page" : undefined, className: cn("touch-target inline-flex min-w-0 rounded-item text-body text-foreground underline underline-offset-2 outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", current && "text-body-strong", className) }, props) });
+  return useRender({
+    defaultTagName: "a",
+    render,
+    props: mergeProps(
+      { "data-slot": "pagination-link", "data-page": page, "aria-current": current ? "page" : undefined },
+      props,
+      {
+        className: cn(
+          // 成排的同等入口（基础层 §19）：复用按钮画法；最小宽度等于外高，单个数字时是正方形。
+          buttonVariants({ variant: current ? "solid" : "quiet" }),
+          "min-w-(--qy-fill-height-narrow) font-normal numeric sm:min-w-(--qy-fill-height)",
+          className,
+        ),
+      },
+    ),
+  });
 }
 export type PaginationPreviousProps = ButtonProps;
 export function PaginationPrevious({ children, ...props }: PaginationPreviousProps) {

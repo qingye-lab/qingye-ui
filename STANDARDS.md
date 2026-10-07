@@ -12,6 +12,7 @@
 
 - 一个组件一个文件，位于 `packages/ui/src/components/<name>.tsx`，文件名用 kebab-case。
 - 可样式化部位带 `data-slot`；外部类最后合并，透传 id、ARIA、data 属性与事件。
+- `cn()` 只在变体与选择器字符串完全相同时把两条类当作同一属性的冲突去重；作用于同一元素的不同选择器会同时留下，谁生效由样式表顺序决定。同一元素同一属性分量只留一个来源。
 - 改渲染元素使用 Base UI `render`、`useRender` 与 `mergeProps`；不新增无任务依据的别名或 `as` API。当前 Card 是组合入口，不自动提供标题槽或 padding。
 - 基于 Base UI 的组件导出所用原语命名空间。可控状态同时保留适用的受控与非受控入口；职责按 [design.md「明确修改归属」](design.md#明确修改归属) 判断。
 - 请求事实与结果推断按 [design.md「名称与状态」](design.md#名称与状态)。Button 当前选择状态联合 `idle / waiting / in-progress / unknown / failed`；boolean loading 也能符合状态归属，联合不是理念强制。
@@ -19,22 +20,20 @@
 
 ## 2. 尺寸
 
-尺寸与强调两轴独立可选；尺寸参与表达须有任务理由。外高、字号与窄屏 +4px 是当前预设，不能说尺寸绝不表达重要性。`sm:` 默认 640px 回到桌面档；粗指针的命中要求另行处理。
+几何由材（20px，正文一行）与分（4px）派生，见基础层 §1–§2。不在组件里另写尺寸数值；需要新尺寸时先找它与材、分的关系。
 
-| size | 桌面外高 / 窄屏外高 | 同名文字档 | 字号（桌面 / 窄屏） | 行高（桌面 / 窄屏） | 桌面每侧垂直视觉余量 |
-|---|---|---|---|---|---|
-| `xs` | 24 / 28px | `text-control-xs` | 12 / 14px | 16 / 20px | 4px |
-| `sm` | 28 / 32px | `text-control-sm` | 13 / 14px | 18 / 20px | 5px |
-| `md` | 32 / 36px | `text-control-md` | 14 / 15px | 20 / 22px | 6px |
-| `lg` | 36 / 40px | `text-control-lg` | 16 / 17px | 24 / 24px | 6px |
-| `xl` | 40 / 44px | `text-control-xl` | 18 / 19px | 26 / 28px | 7px |
+| 等 | 外高 = 材 + n 分 | 窄屏 | 横向留白 = (外高 − 分) / 2 | 圆角 | 图标 | 按钮文字档 |
+|---|---|---|---|---|---|---|
+| `xs` | 24px | 28px | 10px | 6px | 14px | 12/16 |
+| `sm` | 28px | 32px | 12px | 7px | 14px | 13/20 |
+| `md` | 32px | 36px | 14px | 8px | 16px | 14/20 |
+| `lg` | 36px | 40px | 16px | 8px | 18px | 16/24 |
+| `xl` | 40px | 44px | 18px | 8px | 20px | 18/28 |
 
-px 换算以根字号 16px 为基准。Button 与 Input 每档读取同名文字档，窄屏用其 `-mobile` 类，`sm:` 回到桌面类。lg 曾借 md 的文字档，xl 曾借 lg 的文字档，只增高而未增行高，使每侧空白变成 8px；当前 4/5/6/6/7px 是选定外高与行高的换算结果，见基础层 §2、§8。
-
-- 区分外部占位、边框内可用尺寸与触摸命中尺寸。外高取尺寸角色，不通过调大全局 spacing 间接改变。
-- 水平视觉留白 10/12/14/16/16px、约 40–44% 是预设，不是容量底线；容量由实际宽度与文字、图标、附属操作决定。bordered / Input 的同档 padding 扣实际 1px 边框，保持文字起点；无边框读未扣边框的档案，见基础层 §1。
-- 图标也读同档角色。桌面 xs/sm 为 14px、md/lg 为 16px、xl 为 18px；窄屏分别 16/16/18/18/20px，均为预设。图标形态是 shape 轴，居中余量按外高与图标尺寸换算。
-- 小于库内 44px 目标的独立控件使用 touch-target。该工具类在粗指针下**自建定位上下文**，居中扩展伪元素，不依赖调用方另写 relative；验证无裁切、相邻覆盖或视口误命中。Input 粗指针下最小外高读 `--qy-touch-target`，不改变名义档位。
+- 只有命令类（Button 及其派生）提供五等；名称随等变化。填值控件与标记只读角色层（`--qy-fill-*`、`--qy-marker-size`），不提供 `size`；紧凑密度由 `data-density` 表达。值的文字始终是 md 文字档。
+- 区分外部占位、边框内可用尺寸与触摸命中尺寸。有 1px 边框时留白扣 1px，保持文字起点。
+- 小于 44px 的独立控件使用 `touch-target`；它在粗指针下自建定位上下文，验证无裁切、相邻覆盖或视口误命中。
+- 标记坐在标签行内并居中（`--qy-marker-inset`）；开关读 `--qy-switch-size`。
 
 ## 3. 表面与边界
 
@@ -48,7 +47,7 @@ px 换算以根字号 16px 为基准。Button 与 Input 每档读取同名文字
 
 三档是当前选择，不固定对应三种重要性；tone 独立。用户规则「和背景色一致时才保留边框」解释 bordered 的来由，不给已有足够填充的入口重复补线。
 
-neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚焦 `--qy-button-bordered-border-focus` 读 `--qy-ring`。浅色当前为黑色 alpha 50%，深色当前为白色 alpha 44%；不能把用户选定的 50% 写成两色现值。danger bordered 局部用危险文字色 50% 合成，焦点读不透明危险文字色。
+neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚焦 `--qy-button-bordered-border-focus` 读 `--qy-ring`。两色均为墨阶的「重」（50%）：浅色为黑、深色为白。danger bordered 局部用危险文字色 50% 合成，焦点读不透明危险文字色。
 
 - 表面读语义角色，不写死灰色。surface/raised 当前浅色为白色，深色用不透明 color-mix 配色；surface-inset、线与反馈层为半透明，须按真实叠层测合成结果。
 - Input 当前外层为 1px 共同边界；内部 input 透明。深色外层读内嵌表面。Card / Popover 当前各有 1px 容器边界；这描述现状，不证明所有情境都必须保留线。
@@ -57,19 +56,19 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 ## 4. 圆角
 
-当前方整独立控件采用 `r ≤ 25% × 名义外高` 的约束；25% 是选定判据，6/7/8px 是区间内的选择。xs/sm/md 取上限不是唯一解，lg/xl 保持 8px；真实宽度、放大与换行仍需核对。
+方以载事，圆以标点（基础层 §4）。独立控件 r = min(外高 / 4, 2 分)；只有点与身份（状态点、头像、单选标记、滑块抓手）用圆。
 
-| 当前类 / 角色 | 值 | 消费 |
+| 类 / 角色 | 值 | 关系 |
 |---|---|---|
-| `rounded-xs` / `rounded-sm` | 6 / 7px | xs / sm 控件 |
-| `rounded-control` | 8px | md/lg/xl Button 与 Input |
-| `rounded-panel` | 12px | Card |
-| `rounded-overlay` | 12px | Popover 面板，独立修改入口 |
-| `rounded-md` / `rounded-lg` | 8 / 8px | 独立几何档 / 默认控件链 |
-| `rounded-xl` / `rounded-2xl` | 10 / 12px | 其他几何预设 |
-| `rounded-marker` / `rounded-item` | 4 / 6px | 已定义标记/行项预设，当前无对应重写组件 |
+| `rounded-xs` / `rounded-sm` | 6 / 7px | 外高 / 4 |
+| `rounded-control` | 8px | 2 分 |
+| `rounded-overlay` | 12px | 控件圆角 + 浮层内缩 |
+| `--qy-radius-overlay-item` | 8px | 浮层圆角 − 内缩 |
+| `rounded-panel` | 12px | 与浮层同为承载面 |
+| `rounded-marker` | 4px | 标记边长 / 4 |
+| `rounded-item` | 6px | 与最小控件同角 |
 
-`--qy-radius-md` 是直接值，`--qy-radius-lg` 读取 `--qy-radius`；当前同值不表示内外层关系。只有**同一承载轮廓等距内缩**时才用 `r内 = max(0, r外 − inset)`，负值退化为直角。独立子对象不适用：Card 内的独立 8px Button 不随 Card 的 padding 强制换算，见基础层 §4、§18。
+只有同一轮廓等距内缩时才用 `r内 = max(0, r外 − inset)`，负值退化为直角。独立子对象（Card 里的按钮）保持自己的角色。
 
 ## 5. 状态与焦点
 
@@ -102,19 +101,21 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 每个语义档自带字号、行高、字距与字重；当前数值都是预设。控制档独立于内容档，文字层级判据引用 [design.md「强调与内容」](design.md#强调与内容)。
 
-| 内容档 | 当前字号 | 当前字距 |
+| 内容档 | 字号 / 行高 | 字重 |
 |---|---|---|
-| `display-lg` / `display` | 40 / 32px | −0.032em |
-| `title` | 24px | −0.022em |
-| `chapter` | 22px | −0.02em |
-| `heading` | 16px | −0.012em |
-| `body` / `label` | 14 / 13px | −0.006em |
-| `caption` | 12px | 0 |
-| `micro` | 11px | +0.01em |
+| `display-lg` / `display` | 40/48、32/40 | 600 |
+| `title` / `chapter` / `heading` | 24/32、20/28、16/24 | 600 |
+| `body` | 14/20 | 400 |
+| `reading` / `prose` | 16/28 | 400 |
+| `support` / `label` | 13/20 | 400 / 500 |
+| `caption` / `dense` | 12/20、12/16 | 400 |
+| `metric` | 24/28 | 600 |
+| `micro` | 11/16 | 500 |
 
+- 行高一律是分的整数倍；字号为预设，相邻内容档至少差约 1.2 倍。字号相差无几时用墨色与字重分层。
 - 字距不由字号唯一决定，默认规律不作为硬禁令。当前字重 400/500/600；改主题值须检查真实层级与对比，不能把当前偏好变成普遍要求。
 - utilities.css 用 :lang 将中日韩字距设为 normal；当前无 typography 组件负责这件事。排版验收引用 [design.md「强调与内容」](design.md#强调与内容)和[交付检查](design.md#人和-ai-的交付检查)。
-- numeric 用于数字列、计数等；text-metric 自带等宽数字。
+- numeric（等宽数字）只用于需要纵向对齐的数：表格列、坐标轴、计数器；单独的大号读数（text-metric）用比例数字。
 - 截断、换行、text-balance、text-pretty 按任务选择，不规定单行必截断。Button 当前允许标签换行；后果与空值的判据引用 [design.md「名称与状态」](design.md#名称与状态)及[禁止 NG7](design.md#禁止)，具体容量见基础层 §14、§17。
 
 ## 8. 无障碍
@@ -142,7 +143,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=ae0639c956d8ce3ca8f1eaf3c01d280ae500c44f15e3622061d085594639bb7c -->
+<!-- qingye:translation:en:start source-sha256=a24dd1609b53755e07bb1697d37a5319bf88ea5683cca2254ec5fd73d93a153c -->
 # Component Standards
 
 These are implementation rules for `@qingye/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -157,6 +158,7 @@ Components are rewritten by current layers and roadmap batches. Read completed f
 
 - One component per `packages/ui/src/components/<name>.tsx` file, named in kebab-case.
 - Styleable parts have `data-slot`. Merge external classes last; forward id, ARIA, data attributes, and events.
+- `cn()` deduplicates two classes only when their variant and selector strings are identical; different selectors reaching the same element both remain, and stylesheet order decides. Give each property component of an element one source.
 - Use Base UI `render`, `useRender`, and `mergeProps` to replace rendered elements. Avoid aliases or an `as` API without a task basis. Current Card is a composition entry without automatic title slots or padding.
 - Components based on Base UI export their primitive namespace. Controlled state retains applicable controlled and uncontrolled entries. Assign responsibilities using [Assigning changes](design.en.md#assigning-changes).
 - Request facts and outcome inference follow [Names and states](design.en.md#names-and-states). Button currently chooses `idle / waiting / in-progress / unknown / failed`. A boolean loading prop could also respect ownership; the union is a choice rather than a design requirement.
@@ -164,22 +166,20 @@ Components are rewritten by current layers and roadmap batches. Read completed f
 
 ## 2. Dimensions
 
-Size and emphasis are independent choices; using size for expression requires a task reason. Outer heights, type sizes, and the narrow-screen +4px are current presets. Size can communicate importance when justified. The default `sm:` breakpoint is 640px and restores desktop profiles; coarse-pointer hit areas are handled separately.
+Geometry derives from the module (20px, one line of body text) and the unit (4px); see foundation §1–§2. Components do not write their own dimension values; a new dimension starts from its relationship to the module and unit.
 
-| Size | Desktop / narrow outer height | Matching text profile | Desktop / narrow font size | Desktop / narrow line height | Desktop visual allowance per vertical side |
-|---|---|---|---|---|---|
-| `xs` | 24 / 28px | `text-control-xs` | 12 / 14px | 16 / 20px | 4px |
-| `sm` | 28 / 32px | `text-control-sm` | 13 / 14px | 18 / 20px | 5px |
-| `md` | 32 / 36px | `text-control-md` | 14 / 15px | 20 / 22px | 6px |
-| `lg` | 36 / 40px | `text-control-lg` | 16 / 17px | 24 / 24px | 6px |
-| `xl` | 40 / 44px | `text-control-xl` | 18 / 19px | 26 / 28px | 7px |
+| Grade | Height = module + n units | Narrow | Horizontal space = (height − unit) / 2 | Radius | Icon | Button text |
+|---|---|---|---|---|---|---|
+| `xs` | 24px | 28px | 10px | 6px | 14px | 12/16 |
+| `sm` | 28px | 32px | 12px | 7px | 14px | 13/20 |
+| `md` | 32px | 36px | 14px | 8px | 16px | 14/20 |
+| `lg` | 36px | 40px | 16px | 8px | 18px | 16/24 |
+| `xl` | 40px | 44px | 18px | 8px | 20px | 18/28 |
 
-Pixel conversions assume a 16px root font. Button and Input consume their matching text profile, using `-mobile` classes on narrow screens and desktop classes at `sm:`. Earlier lg reused md type and xl reused lg type; added height without line-height growth left 8px per side. The current 4/5/6/6/7px allowances are calculated from chosen outer heights and line heights; see foundation §2 and §8.
-
-- Distinguish occupied outer dimensions, usable space inside borders, and touch hit dimensions. Outer heights consume dimension roles rather than increasing indirectly with global spacing.
-- Horizontal allowances of 10/12/14/16/16px, roughly 40–44%, are presets rather than minimum content capacity. Capacity depends on actual width, text, icons, and adjunct actions. Bordered/Input profiles subtract the actual 1px border from padding to align text origins; borderless profiles use unadjusted padding. See foundation §1.
-- Icons use the same profile. Desktop xs/sm use 14px, md/lg 16px, xl 18px; narrow profiles use 16/16/18/18/20px. All are presets. Icon is a shape axis; centering allowance derives from outer height and icon dimensions.
-- Independent controls below the library's 44px target use `touch-target`. On coarse pointers, it establishes its own positioning context and centers an expanded pseudo-element. Check clipping, neighboring overlap, and accidental viewport targets. Input's coarse-pointer minimum outer height reads `--qy-touch-target` without changing its nominal profile.
+- Only commands (Button and its derivatives) offer five grades; names follow the grade. Fill controls and markers read role layers (`--qy-fill-*`, `--qy-marker-size`) without a `size` prop; compact density uses `data-density`. Value text always uses the md text profile.
+- Distinguish occupied dimensions, usable space inside borders, and touch hit dimensions. A 1px border subtracts 1px from padding to keep the text origin.
+- Independent controls below 44px use `touch-target`, which establishes its own positioning context on coarse pointers; check clipping, neighboring overlap, and viewport hits.
+- Markers sit centered in their label line (`--qy-marker-inset`); Switch reads `--qy-switch-size`.
 
 ## 3. Surfaces and boundaries
 
@@ -193,7 +193,7 @@ Task criteria come from [Space and surfaces](design.en.md#space-and-surfaces) an
 
 These three variants are current choices, not fixed importance levels; tone is independent. The user's rule to retain borders when a surface matches its background motivates bordered, without adding lines to entries already distinguished by fill.
 
-Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`, and `--qy-ring` through `--qy-button-bordered-border-focus`. Current light mode uses black at 50% alpha and dark mode white at 44%; the chosen 50% is not the current value for both. Danger bordered locally mixes danger text at 50%, with opaque danger text for focus.
+Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`, and `--qy-ring` through `--qy-button-bordered-border-focus`. Both appearances use the ink ladder's heavy step (50%): black in light mode and white in dark mode. Danger bordered locally mixes danger text at 50%, with opaque danger text for focus.
 
 - Use semantic surface roles rather than hard-coded gray. Surface/raised currently use white in light mode and opaque color mixes in dark mode. Surface-inset, lines, and feedback layers are translucent; measure their actual compositions.
 - Input currently has a 1px shared outer boundary and a transparent inner input; dark mode reads the inset surface. Current Card/Popover each have a 1px container boundary. This records implementation rather than requiring a line in every context.
@@ -202,19 +202,19 @@ Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`
 
 ## 4. Radii
 
-Current square independent controls use `r ≤ 25% × nominal outer height`. The 25% criterion is chosen; 6/7/8px are choices within it. Taking the upper bound for xs/sm/md is not the only solution; lg/xl retain 8px. Check actual widths, zoom, and wrapping.
+Square for work, round for points (foundation §4). Independent controls use r = min(height / 4, 2 units); only points and identities (status dots, avatars, radio marks, slider thumbs) are round.
 
-| Current class / role | Value | Consumer |
+| Class / role | Value | Relationship |
 |---|---|---|
-| `rounded-xs` / `rounded-sm` | 6 / 7px | xs / sm controls |
-| `rounded-control` | 8px | md/lg/xl Button and Input |
-| `rounded-panel` | 12px | Card |
-| `rounded-overlay` | 12px | Popover panel; independent adjustment entry |
-| `rounded-md` / `rounded-lg` | 8 / 8px | Independent geometry / default control chain |
-| `rounded-xl` / `rounded-2xl` | 10 / 12px | Other geometry presets |
-| `rounded-marker` / `rounded-item` | 4 / 6px | Defined marker/item presets, without a matching rewritten component in this source record |
+| `rounded-xs` / `rounded-sm` | 6 / 7px | height / 4 |
+| `rounded-control` | 8px | 2 units |
+| `rounded-overlay` | 12px | control radius + overlay inset |
+| `--qy-radius-overlay-item` | 8px | overlay radius − inset |
+| `rounded-panel` | 12px | same carrying surface as overlays |
+| `rounded-marker` | 4px | marker edge / 4 |
+| `rounded-item` | 6px | same as the smallest control |
 
-`--qy-radius-md` is direct; `--qy-radius-lg` reads `--qy-radius`. Equal current values do not establish a nested contour relationship. Use `inner radius = max(0, outer radius − inset)` only for an equal inset of the same carrying contour; negatives become square corners. Independent child objects do not follow it: an independent 8px Button inside Card is not forced to derive its radius from Card padding. See foundation §4 and §18.
+Use `inner radius = max(0, outer radius − inset)` only for an equal inset of the same contour; negatives become square. Independent child objects such as a Button inside a Card keep their own role.
 
 ## 5. States and focus
 
@@ -247,19 +247,21 @@ Test focus-visible through actual `keyboard.press("Tab")`, wait at least 500ms f
 
 Each semantic profile includes font size, line height, tracking, and weight; current values are presets. Control profiles are separate from content profiles. Hierarchy follows [Emphasis and content](design.en.md#emphasis-and-content).
 
-| Content profile | Current font size | Current tracking |
+| Content profile | Size / line height | Weight |
 |---|---|---|
-| `display-lg` / `display` | 40 / 32px | −0.032em |
-| `title` | 24px | −0.022em |
-| `chapter` | 22px | −0.02em |
-| `heading` | 16px | −0.012em |
-| `body` / `label` | 14 / 13px | −0.006em |
-| `caption` | 12px | 0 |
-| `micro` | 11px | +0.01em |
+| `display-lg` / `display` | 40/48, 32/40 | 600 |
+| `title` / `chapter` / `heading` | 24/32, 20/28, 16/24 | 600 |
+| `body` | 14/20 | 400 |
+| `reading` / `prose` | 16/28 | 400 |
+| `support` / `label` | 13/20 | 400 / 500 |
+| `caption` / `dense` | 12/20, 12/16 | 400 |
+| `metric` | 24/28 | 600 |
+| `micro` | 11/16 | 500 |
 
+- Every line height is a whole number of units; sizes are presets, with adjacent content profiles at least about 1.2× apart. When sizes are close, ink tone and weight carry the hierarchy.
 - Font size does not uniquely determine tracking; the default pattern is not a hard ban. Current weights are 400/500/600. Theme changes require actual hierarchy and contrast checks rather than making a preference universal.
 - utilities.css uses :lang to set Chinese/Japanese/Korean tracking to normal. The source records no typography-component ownership of this rule. Check typography with Emphasis and content and Delivery checks.
-- numeric serves numeric columns and counts; text-metric includes tabular numerals.
+- numeric (tabular figures) serves numbers that align vertically: table columns, axes, counters. Standalone large readouts (text-metric) use proportional figures.
 - Choose truncation, wrapping, text-balance, and text-pretty for the task. Single-line truncation is not mandatory. Button currently permits wrapping. Consequences and empty values follow Names and states and NG7; see foundation §14 and §17 for capacity.
 
 ## 8. Accessibility
@@ -287,3 +289,4 @@ Select checks and combinations by current task impact and user decisions, using 
 
 Generating AI style resources and the unified build follows completion of parallel tasks; it is outside an individual component batch.
 <!-- qingye:translation:en:end -->
+

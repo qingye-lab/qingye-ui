@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: d93690a4178e8229e96341c856544ee18cee7ccfbd84bda8f4316dec968eab4b
+Source SHA-256: 640ae3434bbf41910e0a475d9e032d3172ec4da7b44cdfe509f98d9e86ad7031
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -50,7 +50,6 @@ Public composition of confirmed items, a draft input, and non-submitting actions
 - onValueChange: (value: string[], details: TagInputChangeDetails) => void. Details includes add/remove, tag, event, cancel(), and isCanceled. Controlled additions retain the draft until accepted.
 - draft / defaultDraft / onDraftChange: string / string / (draft: string) => void; default defaultDraft: ''. Independent unconfirmed text. Refreshing the collection retains the draft.
 - name / form: string. Submit confirmed items as repeated form keys; the draft does not become a collection item.
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. Draft, confirmed text, and actions use the same profile.
 - inputProps: Input props (excluding collection-owned value/name/size). The real draft Input's render, refs, ARIA, events, and styling. FieldLabel registers this input.
 - disabled / readOnly: boolean; default false. Constrain the draft and item actions together. Read-only confirmed items submit; disabled items do not.
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. Applied to the root container. Render must retain its structure and children.
@@ -81,19 +80,27 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/tag-input/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/tag-input/demos/02-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { TagInput } from "@qingye/ui/components/tag-input";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" } satisfies DemoMeta;
-const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    {sizes.map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><TagInput size={size} defaultValue={["React"]} /></Field>)}
-  </FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <TagInput defaultValue={["前端", "设计"]} />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

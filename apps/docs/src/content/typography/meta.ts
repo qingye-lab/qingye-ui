@@ -4,10 +4,13 @@ export default {
   title: "排版 Typography", titleEn: "Typography", category: "排版", layer: "foundation", source: "local",
   description: "标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。",
   descriptionEn: "Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.",
-  exports: ["Heading", "Text"], keywords: ["文字", "标题", "numeric", "heading", "text"],
+  exports: ["Heading", "Text", "Code"], keywords: ["文字", "标题", "numeric", "heading", "text"],
   decisions: "level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文依 lang 使用正常字距，numeric 不格式化值。",
   decisionsEn: "level determines h1–h6 and step selects appearance. render changes actual semantics; language controls CJK tracking and numeric does not format values.",
   api: [
+    { name: "Code", description: "正文里的一段代码：等宽字，字号为所在文字的 0.875 倍并取整像素，墨的柔底，跟随所在那一行。", descriptionEn: "Code within running text: monospace at 0.875 of the surrounding size rounded to whole pixels, on the ink soft fill, following its line.", props: [
+      { name: "render / ref / 原生属性", nameEn: "render / ref / native props", type: "useRender.ComponentProps<\"code\">", description: "属性与 ref 透传原生 code 元素。", descriptionEn: "Forward attributes and refs to the native code element." },
+    ] },
     { name: "Heading", description: "真实标题，层级与字号分离。", descriptionEn: "A real heading with independent outline level and visual step.", props: [
       { name: "level", type: "1 | 2 | 3 | 4 | 5 | 6", default: "2", description: "文档大纲中的标题级别。", descriptionEn: "Heading level in the document outline." },
       { name: "step", type: "TextStep", default: '"heading"', description: "src/text-steps.ts 中已有档；不由 level 推断。", descriptionEn: "An existing TextStep, independent of level." },

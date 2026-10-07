@@ -17,8 +17,8 @@ export function PublicMarkdown({ source }: { source: string }) {
     if (block.startsWith("### ")) return <H3 id={`public-section-${++heading}`} key={index}>{inline(block.replace(/^###\s+/, ""))}</H3>;
     if (block.startsWith("## ")) {
       const title = block.replace(/^##\s+/, "");
-      const method = title.match(/^0([1-6])\s/);
-      return <H2 id={method ? `method-${method[1]}` : `public-section-${++heading}`} key={index}>{inline(title)}</H2>;
+      const method = title.match(/^(\d{2})\s/);
+      return <H2 id={method ? `method-${Number(method[1])}` : `public-section-${++heading}`} key={index}>{inline(title)}</H2>;
     }
     return <P key={index}>{block.split("\n").map((line, i) => <Fragment key={i}>{i > 0 && <br />}{inline(line)}</Fragment>)}</P>;
   })}</>;

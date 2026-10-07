@@ -23,3 +23,57 @@ describe("Tree", () => {
     const { unmount } = render(<Tree nodes={[]} />); expect(screen.getByText("没有条目")).toBeInTheDocument(); unmount(); expect(() => render(<Tree nodes={[{ id: "same", label: "一" }, { id: "same", label: "二" }]} />)).toThrow("unique");
   });
 });
+const checkNodes: TreeNode[] = [{ id: "p", label: "父", children: [{ id: "p1", label: "子一" }, { id: "p2", label: "子二" }, { id: "p3", label: "禁用子", disabled: true }] }, { id: "q", label: "独立叶子" }];
+describe("Tree checkable", () => {
+  it("cascades a branch click onto enabled leaves, derives mixed/true and exposes aria-multiselectable", async () => {
+    const user = userEvent.setup(); render(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} />);
+    expect(screen.getByRole("tree")).toHaveAttribute("aria-multiselectable", "true");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("treeitem", { name: "子一" }));
+    expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "mixed");
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "子二" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "禁用子" })).toHaveAttribute("aria-checked", "false");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "true");
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "false");
+    expect(screen.getByRole("treeitem", { name: "子二" })).toHaveAttribute("aria-checked", "false");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
+  });
+  it("preserves a disabled leaf's own checked fact through cascade in either direction", async () => {
+    const user = userEvent.setup(); render(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} defaultCheckedIds={["p3"]} />);
+    expect(screen.getByRole("treeitem", { name: "禁用子" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(screen.getByRole("treeitem", { name: "禁用子" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "true");
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(screen.getByRole("treeitem", { name: "禁用子" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
+  });
+  it("supports controlled checkedIds and honors cancellation without emitting leaf ids for a branch", async () => {
+    const user = userEvent.setup(); const onCheckedChange = vi.fn();
+    const { rerender } = render(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} checkedIds={[]} onCheckedChange={onCheckedChange} />);
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(onCheckedChange).toHaveBeenCalledWith(expect.arrayContaining(["p1", "p2"]), expect.anything());
+    expect(onCheckedChange.mock.calls[0]![0]).not.toContain("p");
+    expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "false");
+    rerender(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} checkedIds={["p1", "p2"]} onCheckedChange={onCheckedChange} />);
+    expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "true");
+    const cancel = vi.fn((_, details) => details.cancel());
+    rerender(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} checkedIds={["p1", "p2"]} onCheckedChange={cancel} />);
+    await user.click(screen.getByRole("treeitem", { name: "父" }));
+    expect(cancel).toHaveBeenCalled(); expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "true");
+  });
+  it("toggles the focused node with Space, leaves Enter a no-op, and keeps arrow navigation", async () => {
+    const user = userEvent.setup(); render(<Tree aria-label="权限" nodes={checkNodes} checkable />);
+    await user.tab(); expect(screen.getByRole("treeitem", { name: "父" })).toHaveFocus();
+    await user.keyboard("{ArrowRight}"); expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-expanded", "true");
+    await user.keyboard("{ArrowDown}"); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveFocus();
+    await user.keyboard(" "); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
+    await user.keyboard("{Enter}"); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
+    await user.keyboard(" "); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "false");
+  });
+});

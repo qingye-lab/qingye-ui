@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 486ba3b82da427a6085f568a96c5c360b8d1fe4dc6a718d904ab8d7dc95141ba
+Source SHA-256: 4160264b8ef339847634ddfe8e82481f20bb3cb4df1735f35eb3012c58b2c856
 
 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 
@@ -25,7 +25,7 @@ value 是 YYYY-MM-DDTHH:mm[:ss] 的无时区 wall-clock 文本。它不表示 UT
 - Field + FieldLabel + DateTimePicker + FieldDescription / FieldError
 
 ## Responsive behavior
-- 五档 control/text，内部焦点与真实粗指针目标
+- 一套几何，跟随密度轴，紧凑不缩小文字；内部焦点与真实粗指针目标
 
 ## Customization
 - inputProps、calendarProps、组合根与现有主题
@@ -49,7 +49,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - disabled / readOnly: boolean; default false. 阻止原生编辑与展开修改；Field disabled 同样约束动作。只读值提交，禁用值不提交。
 - inputProps: Input props except owned value/type/name/form/state. 真实输入的 min/max/step/required/ARIA/events/ref/render；step 同时交给草稿 time Input。onChange 可取消原生编辑请求。
 - calendarProps: CalendarProps except owned selection props. 声明日期禁用与导航边界。native min/max 与日历规则及草稿应用校验需调用方同步；库不从 datetime 边界猜禁用日期。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. datetime 输入、日历、time 输入与动作同档 control/text。
 - render / ref / className / style / ARIA / events: div composition props. 组合根出口；实际输入出口通过 inputProps 定制。
 
 ## Keyboard

@@ -6,7 +6,6 @@ export default {
   api: [{ name: "Switch", description: "保持名称稳定，用 aria-checked 表达开与关。", descriptionEn: "Keep names stable and use aria-checked for on/off.", props: [
     { name: "checked / defaultChecked", type: "boolean", description: "受控设置值或非受控初值。", descriptionEn: "Controlled setting or uncontrolled initial value." },
     { name: "onCheckedChange", type: "(checked, eventDetails) => void", description: "立即设置的变化入口；请求与持久化由应用承担。", descriptionEn: "An immediate setting change; the application owns requests and persistence." },
-    { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "同名文字行高决定轨道高；宽为其两倍。", descriptionEn: "Matching text line height determines track height; width is twice that height." },
     { name: "disabled / readOnly", type: "boolean", default: "false", description: "禁用不参与 Tab/提交；只读仍可聚焦、提交但不可改变。", descriptionEn: "Disabled excludes tabbing/submission; read-only retains focus/submission without changes." },
     { name: "aria-invalid", type: "boolean | 'true' | 'false'", description: "调用方或 Field 声明无效，保留当前开/关事实。", descriptionEn: "Caller or Field declares invalid while retaining the actual on/off state." },
     { name: "name / value / uncheckedValue / form", type: "string", description: "原语隐藏输入的提交入口；不代表必须等待表单提交才生效。", descriptionEn: "Primitive hidden input submission; this does not require waiting for form submission before taking effect." },

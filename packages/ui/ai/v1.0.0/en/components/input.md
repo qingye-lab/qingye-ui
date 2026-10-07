@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: 5c4c1e1a52bdf42332b150a7ac805f98fc8468a37c336c537d80ea1879fb24ab
+Source SHA-256: c641304f552231513c6b8a2f8b0b7e70e533769f87bb2a845397f880d7d41fee
 
 Enter one text value. Search, password visibility, and clearing use the same input.
 
@@ -35,7 +35,6 @@ Input holds the entered value; the caller handles search results and submission.
 - Input: function; owner input; PASS; props: InputProps
 - InputPrimitive: reexport; owner input; UNVERIFIED
 - InputProps: type; owner input; PASS
-- InputSize: type; owner input; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -48,7 +47,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Input
 A real border identifies the editable area. Base UI Input retains Field registration and native attributes.
 - type: React.HTMLInputTypeAttribute; default "text". search adds a search marker and clearing; password adds visibility. Neither supplies a field name or placeholder.
-- size: "xs" | "sm" | "md" | "lg" | "xl" | number; default "md". Geometry and control text profile for the location. A number retains native size semantics.
 - value / defaultValue / onValueChange: Native value / initial value / (value, details) => void. Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path.
 - clearable / clearLabel / onClear: boolean / string / () => void; default type === search. Clear a nonempty editable value and return focus to the input. Hidden when disabled or read only.
 - visibilityToggle: boolean; default type === password. Optional password adjunct that preserves the value and does not submit a form.
@@ -79,16 +77,28 @@ export default function Demo() {
 }
 ```
 
-### 位置档案
-Source: apps/docs/src/content/input/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/input/demos/02-density.tsx
 ```tsx
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
 
-export const meta = { title: "位置档案", titleEn: "Size profiles" };
+export const meta = { title: "密度", titleEn: "Density" };
 
+// 填值控件只有一套几何，紧凑密度收紧容器，不改值文字（用户裁决 2026-10-05）。
 export default function Demo() {
-  return <div className="grid w-full max-w-sm gap-(--qy-field-group-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map((size) => <Field key={size}><FieldLabel>{size}</FieldLabel><Input size={size} defaultValue="青野 · Qingye" /></Field>)}</div>;
+  return (
+    <div className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Input name={`device-${density}`} defaultValue="3 号楼东侧摄像头" />
+          </Field>
+        </div>
+      ))}
+    </div>
+  );
 }
 ```
 

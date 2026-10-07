@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: dd07802562280c5ac4750a028410951df07bdaf740a11b82946bc6244b36aa08
+Source SHA-256: c402b617d2d1c92bd68ca35a2f2f95e81719ba7e92e5015281a8204d91b1c91e
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -88,10 +88,16 @@ import { Button } from "@qingye/ui/components/button";
 import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "比较与排序", titleEn: "Comparison and sorting" } satisfies DemoMeta;
-const rows = [{ name: "A", width: 24, height: 16, count: 0 }, { name: "B", width: 16, height: 24, count: 2 }, { name: "C", width: 32, height: 24, count: 1 }];
+// 列都是同一种量纲（像素与条数），行是真实对象，不是甲乙丙。
+const rows = [
+  { name: "紧凑工具条", width: 24, height: 24, count: 0 },
+  { name: "列表行操作", width: 28, height: 28, count: 2 },
+  { name: "面板主入口", width: 36, height: 36, count: 1 },
+];
 export default function Demo() {
   const [descending, setDescending] = useState(false);
   const sorted = [...rows].sort((a, b) => descending ? b.count - a.count : a.count - b.count);
-  return <TableContainer><Table><TableCaption>尺寸与数量</TableCaption><TableHeader><TableRow><TableHead>条目</TableHead><TableHead>宽度</TableHead><TableHead>高度</TableHead><TableHead aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}>数量 {descending ? "↓" : "↑"}</Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="numeric">{row.width}</TableCell><TableCell className="numeric">{row.height}</TableCell><TableCell className="numeric">{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
+  // 数字列右对齐；排序箭头放在列名前，列名仍落在列的右缘上。正在排序的列名是当前状态，用焦墨。
+  return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead><TableHead className="text-end" aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}><span aria-hidden="true">{descending ? "↓" : "↑"}</span>数量</Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell><TableCell className="text-end numeric">{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
 }
 ```

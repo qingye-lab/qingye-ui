@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 26479f21d19d54f3fb3d9901063d726e77d447bfa89165651efdd6ddd78941b2
+Source SHA-256: 92f985024836565c9306fcd5c21aa194bfd99a04cfde19e84a97ce7fce1e3cfc
 
 筛选候选并确认一个值，查询文字与选择事实分别持有。
 
@@ -25,7 +25,7 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 - Field + FieldLabel + Combobox / Input / actions / Popup / List / Item
 
 ## Responsive behavior
-- 五档 control/text，浮层按可用宽度与高度定位
+- 一套几何，跟随密度轴，紧凑不缩小文字；浮层按可用宽度与高度定位
 
 ## Customization
 - 每部位 render/ref/ARIA/events，公开原语与共享浮层角色
@@ -33,7 +33,8 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 ## Current exports
 - Combobox: function; owner combobox; PASS; props: ComboboxProps<Value>
 - ComboboxClear: function; owner combobox; PASS; props: ComboboxPrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>
-- ComboboxEmpty: const; owner combobox; UNVERIFIED
+- ComboboxControl: function; owner combobox; PASS; props: InputGroupProps
+- ComboboxEmpty: function; owner combobox; PASS; props: ComboboxPrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>
 - ComboboxInput: function; owner combobox; PASS; props: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - ComboboxItem: function; owner combobox; PASS; props: ComboboxPrimitive.Item.Props & React.RefAttributes<HTMLDivElement>
 - ComboboxList: function; owner combobox; PASS; props: ComboboxPrimitive.List.Props & React.RefAttributes<HTMLDivElement>
@@ -57,7 +58,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - inputValue / defaultInputValue / onInputValueChange: string / string / (value, details) => void. 独立过滤文字；不序列化成候选值，也不因清空查询清除确认候选。
 - items / itemToStringLabel / itemToStringValue / isItemEqualToValue: Base UI public props. 调用方提供候选、可读名称、表单值与身份比较；对象值须定义有意义的名称与提交表示。
 - name / form / required / disabled / readOnly: Base UI Root props. Field 命名与错误连接由原语承担；FormData 只提交确认候选。只读保留提交，禁用排除。
-- open / defaultOpen / onOpenChange / size: Base UI open props / 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default size: 'md'. 展开可控；输入、动作、候选项同档 control/text。multiple 固定 false。
+- open / defaultOpen / onOpenChange: Base UI open props. 展开可控；输入、动作、候选项共用一套几何，跟随密度轴。multiple 固定 false。
 
 ### ComboboxInput / ComboboxTrigger / ComboboxClear
 公开原语复用 Input 原生出口与 Button；事件、ARIA、render 状态与 ref 透传，Field 注册一次。
@@ -81,24 +82,42 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/combobox/demos/01-choice.tsx
 ```tsx
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
+import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
-const items = ["甲", "乙", "丙"];
+const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {
-  const [value, setValue] = useState<string | null>("甲");
-  return <form><Field name="choice"><FieldLabel>候选</FieldLabel><Combobox items={items} value={value} onValueChange={setValue}><div className="flex min-w-0 gap-(--qy-action-gap)"><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></div><ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox><output className="text-support text-muted-foreground">{value ?? "—"}</output></Field></form>;
+  const [value, setValue] = useState<string | null>("陈致远");
+  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel><Combobox items={members} value={value} onValueChange={setValue}><ComboboxControl><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field></form>;
 }
 ```
 
-### 五档与只读
-Source: apps/docs/src/content/combobox/demos/02-sizes.tsx
+### 密度与只读
+Source: apps/docs/src/content/combobox/demos/02-density.tsx
 ```tsx
-import { Combobox, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
+import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
-export const meta = { title: "五档与只读", titleEn: "Five sizes and read-only" };
-const items = ["甲", "乙", "丙"];
+
+export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
+
+const items = ["机柜 A", "机柜 B", "机柜 C"];
+
 export default function Demo() {
-  return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2 lg:grid-cols-3">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><Combobox size={size} items={items} defaultValue="甲"><div className="flex min-w-0 gap-(--qy-action-gap)"><ComboboxInput /><ComboboxTrigger /></div><ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field>)}<Field><FieldLabel>只读候选</FieldLabel><Combobox readOnly items={items} defaultValue="甲"><div className="flex min-w-0 gap-(--qy-action-gap)"><ComboboxInput /><ComboboxTrigger /></div></Combobox></Field></div>;
+  return (
+    <div className="grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <Combobox items={items} defaultValue="机柜 A">
+              <ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl>
+              <ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup>
+            </Combobox>
+          </Field>
+        </div>
+      ))}
+      <Field><FieldLabel>只读候选</FieldLabel><Combobox readOnly items={items} defaultValue="机柜 A"><ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl></Combobox></Field>
+    </div>
+  );
 }
 ```

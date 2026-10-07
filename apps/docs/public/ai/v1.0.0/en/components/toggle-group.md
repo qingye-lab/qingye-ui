@@ -3,9 +3,9 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: e29f7460f8c3c0f8233856e687168c06a585f73932bab933b89faab34fe2fa64
+Source SHA-256: 5d256c5fb1da637e482bceff8a8da71997dabdf6288ab97666cc1cd2aa6b2f48
 
-A shared single or multiple selection of pressed buttons.
+A shared single or multiple set of toggles whose pressed fact persists.
 
 ## Notes
 - No name or hidden form value. Use SegmentedControl for submitted mutually exclusive values.
@@ -77,8 +77,8 @@ export const meta = { title: "单选与多选", titleEn: "Single and multiple" }
 export default function Demo() {
   const id = useId(); const [single, setSingle] = useState(["alpha"]); const [multiple, setMultiple] = useState(["alpha"]);
   return <FieldGroup className="grid sm:grid-cols-2">
-    <Field><FieldTitle id={`${id}-single`}>单选按压</FieldTitle><ToggleGroup aria-labelledby={`${id}-single`} value={single} onValueChange={setSingle}><ToggleGroupItem value="alpha">甲</ToggleGroupItem><ToggleGroupItem value="beta">乙</ToggleGroupItem><ToggleGroupItem value="gamma">丙</ToggleGroupItem></ToggleGroup><output className="text-support text-foreground">{single.length} 项</output></Field>
-    <Field><FieldTitle id={`${id}-multiple`}>多选按压</FieldTitle><ToggleGroup multiple aria-labelledby={`${id}-multiple`} value={multiple} onValueChange={setMultiple}><ToggleGroupItem value="alpha">甲</ToggleGroupItem><ToggleGroupItem value="beta">乙</ToggleGroupItem><ToggleGroupItem value="gamma">丙</ToggleGroupItem></ToggleGroup><output className="text-support text-foreground">{multiple.length} 项</output></Field>
+    <Field><FieldTitle id={`${id}-single`}>单选切换</FieldTitle><ToggleGroup aria-labelledby={`${id}-single`} value={single} onValueChange={setSingle}><ToggleGroupItem value="alpha">名称</ToggleGroupItem><ToggleGroupItem value="beta">记录数</ToggleGroupItem><ToggleGroupItem value="gamma">最近同步</ToggleGroupItem></ToggleGroup><output className="text-support text-foreground">{single.length} 列可见</output></Field>
+    <Field><FieldTitle id={`${id}-multiple`}>多选切换</FieldTitle><ToggleGroup multiple aria-labelledby={`${id}-multiple`} value={multiple} onValueChange={setMultiple}><ToggleGroupItem value="alpha">名称</ToggleGroupItem><ToggleGroupItem value="beta">记录数</ToggleGroupItem><ToggleGroupItem value="gamma">最近同步</ToggleGroupItem></ToggleGroup><output className="text-support text-foreground">{multiple.length} 列可见</output></Field>
   </FieldGroup>;
 }
 ```
@@ -91,8 +91,8 @@ import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group
 export const meta = { title: "方向与禁用", titleEn: "Orientation and disabled" };
 export default function Demo() {
   return <div className="flex flex-wrap items-start gap-(--qy-field-group-gap)">
-    <ToggleGroup orientation="vertical" loopFocus={false} aria-label="纵向候选" defaultValue={["alpha"]}><ToggleGroupItem value="alpha">甲</ToggleGroupItem><ToggleGroupItem value="beta" disabled>乙</ToggleGroupItem><ToggleGroupItem value="gamma">丙</ToggleGroupItem></ToggleGroup>
-    <ToggleGroup disabled aria-label="禁用候选" defaultValue={["alpha"]}><ToggleGroupItem value="alpha">甲</ToggleGroupItem><ToggleGroupItem value="beta">乙</ToggleGroupItem></ToggleGroup>
+    <ToggleGroup orientation="vertical" loopFocus={false} aria-label="纵向切换候选" defaultValue={["alpha"]}><ToggleGroupItem value="alpha">名称</ToggleGroupItem><ToggleGroupItem value="beta" disabled>记录数</ToggleGroupItem><ToggleGroupItem value="gamma">最近同步</ToggleGroupItem></ToggleGroup>
+    <ToggleGroup disabled aria-label="禁用的切换候选" defaultValue={["alpha"]}><ToggleGroupItem value="alpha">名称</ToggleGroupItem><ToggleGroupItem value="beta">记录数</ToggleGroupItem></ToggleGroup>
   </div>;
 }
 ```

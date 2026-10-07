@@ -30,7 +30,6 @@ export default {
     descriptionEn: "A real border identifies the editable area. Base UI Input retains Field registration and native attributes.",
     props: [
       { name: "type", type: "React.HTMLInputTypeAttribute", default: '"text"', description: "search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。", descriptionEn: "search adds a search marker and clearing; password adds visibility. Neither supplies a field name or placeholder." },
-      { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl" | number', default: '"md"', description: "位置对应的几何与控件文字档；数字保留原生 size 的字符宽度含义。", descriptionEn: "Geometry and control text profile for the location. A number retains native size semantics." },
       { name: "value / defaultValue / onValueChange", type: "原生值 / 初始值 / (value, details) => void", typeEn: "Native value / initial value / (value, details) => void", description: "支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。", descriptionEn: "Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path." },
       { name: "clearable / clearLabel / onClear", type: "boolean / string / () => void", default: "type === search", description: "非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。", descriptionEn: "Clear a nonempty editable value and return focus to the input. Hidden when disabled or read only." },
       { name: "visibilityToggle", type: "boolean", default: "type === password", description: "password 的可选附属动作，不更改内容或提交表单。", descriptionEn: "Optional password adjunct that preserves the value and does not submit a form." },

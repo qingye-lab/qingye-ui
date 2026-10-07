@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 070f5fc49f3a258a15676a612d2ff2a27d9f55b9abbce0add1b59770e46ff127
+Source SHA-256: f75c8f55e055fe78f9216d9a940cf521c9f60ef03d7c3af4b4fd6b0234073427
 
 Different views of one object with panel drafts retained.
 
@@ -44,7 +44,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -78,5 +78,5 @@ import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { Input } from "@qingye/ui/components/input";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "同一条目的两个视角", titleEn: "Two views of one item" } satisfies DemoMeta;
-export default function Demo() { return <Tabs defaultValue="text"><TabsList aria-label="条目视角"><TabsTab value="text">名称</TabsTab><TabsTab value="facts">事实</TabsTab><TabsTab value="unused" disabled>历史</TabsTab></TabsList><TabsPanel value="text"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue="条目 A" /></Field></TabsPanel><TabsPanel value="facts"><dl className="m-0 text-body"><dt>标识</dt><dd className="m-0">a</dd><dt>数量</dt><dd className="m-0">0</dd></dl></TabsPanel></Tabs>; }
+export default function Demo() { return <Tabs defaultValue="text"><TabsList aria-label="条目视角"><TabsTab value="text">名称</TabsTab><TabsTab value="facts">事实</TabsTab><TabsTab value="unused" disabled>历史</TabsTab></TabsList><TabsPanel value="text"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue="接入与设备" /></Field></TabsPanel><TabsPanel value="facts"><dl className="m-0 text-body"><dt>标识</dt><dd className="m-0">devices</dd><dt>记录数</dt><dd className="m-0">12</dd></dl></TabsPanel></Tabs>; }
 ```

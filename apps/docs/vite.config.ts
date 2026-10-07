@@ -24,6 +24,19 @@ export default defineConfig({
   server: { port: 5180, strictPort: true },
   build: {
     rollupOptions: {
+      /*
+       * Three entries, each its own page:
+       *   index.html    the docs site (site shell + routed pages)
+       *   review.html   the component review matrix (no site shell)
+       *   preview.html  one real interface composed from the library
+       * The latter two mount their own roots; they are not routes of the site,
+       * so the shell never has to know about them.
+       */
+      input: {
+        index: fileURLToPath(new URL("./index.html", import.meta.url)),
+        review: fileURLToPath(new URL("./review.html", import.meta.url)),
+        preview: fileURLToPath(new URL("./preview.html", import.meta.url)),
+      },
       output: {
         /*
          * The shell imports from the library's root entry, which re-exports

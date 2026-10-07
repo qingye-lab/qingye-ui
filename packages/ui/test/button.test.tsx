@@ -384,7 +384,17 @@ test.each(["solid", "bordered", "quiet"] as const)("%s exposes its current varia
 
 test.each(["xs", "sm", "md", "lg", "xl"] as const)("bordered %s consumes a real border and its matching padding", (size) => {
   render(<Button size={size} variant="bordered">保留名称</Button>);
-  expect(screen.getByRole("button")).toHaveClass("border", "border-(--qy-button-bordered-border)", "focus-visible:border-(--qy-button-bordered-border-focus)", `px-(--qy-control-${size}-padding-bordered)`);
+  // md 与填值控件同行，几何读填值角色层（默认密度下等于 md 档的取值）；其余四档读自己的档位。
+  const padding = size === "md" ? "px-(--qy-fill-padding)" : `px-(--qy-control-${size}-padding-bordered)`;
+  expect(screen.getByRole("button")).toHaveClass("border", "border-(--qy-button-bordered-border)", "focus-visible:border-(--qy-button-bordered-border-focus)", padding);
+});
+
+test("md follows the fill-control role so it stays the height of the inputs beside it; other sizes keep their own profile", () => {
+  const { rerender } = render(<Button>保存</Button>);
+  expect(screen.getByRole("button")).toHaveClass("min-h-(--qy-fill-height-narrow)", "sm:min-h-(--qy-fill-height)", "rounded-(--qy-fill-radius)");
+  rerender(<Button size="lg">保存</Button>);
+  expect(screen.getByRole("button")).toHaveClass("sm:min-h-(--qy-control-lg)");
+  expect(screen.getByRole("button")).not.toHaveClass("sm:min-h-(--qy-fill-height)");
 });
 
 test("a danger action accepts a nonempty DOM description mounted after the button", () => {

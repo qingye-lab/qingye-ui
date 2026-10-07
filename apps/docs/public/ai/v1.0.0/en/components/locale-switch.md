@@ -24,7 +24,7 @@ Request an application locale change and show the current Provider value.
 - Keep essential content and actions reachable in narrow containers; preserve the object, input, and focus when the layout changes.
 
 ## Customization
-- NativeSelect's five profiles/public composition and explicit names.
+- NativeSelect public composition and explicit names.
 
 ## Current exports
 - LocaleSwitch: function; owner locale-switch; PASS; props: LocaleSwitchProps
@@ -34,7 +34,7 @@ Request an application locale change and show the current Provider value.
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -43,7 +43,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Uses NativeSelect; UILocaleProvider alone supplies the current value.
 - options: readonly { locale: UILocale; label: string; disabled?: boolean }[]. The consumer supplies available languages and names. Codes must be nonblank and unique; an unlisted current code appears as a disabled factual option.
 - onLocaleChange: (locale: UILocale, event: ChangeEvent<HTMLSelectElement>) => void. Requests a locale; selection changes only after the application updates Provider. Refusal retains the previous value.
-- controlSize: xs | sm | md | lg | xl; default md. The same five matching control/text profiles as NativeSelect.
 - name / form / disabled / render / ref / onChange / ARIA: NativeSelectProps. Native form, disabling, and composition. onChange preventDefault cancels a request; the default name reads messages.language.
 
 ## Keyboard
@@ -65,16 +64,30 @@ export default function Demo() {
 }
 ```
 
-### 五档与禁用
-Source: apps/docs/src/content/locale-switch/demos/02-sizes.tsx
+### 密度与禁用
+Source: apps/docs/src/content/locale-switch/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
 import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
 import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
 import { enUS } from "@qingye/ui/locales/en-US";
-export const meta = { title: "五档与禁用", titleEn: "Sizes and disabled" };
+
+export const meta = { title: "密度与禁用", titleEn: "Density and disabled" };
+
 export default function Demo() {
   const [locale, setLocale] = useState(zhCN);
-  return <UILocaleProvider locale={locale}><div className="flex flex-wrap items-center gap-(--qy-action-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map(controlSize => <LocaleSwitch key={controlSize} controlSize={controlSize} aria-label={controlSize} className="w-auto" options={[{ locale: zhCN, label: "中文" }, { locale: enUS, label: "English" }]} onLocaleChange={setLocale} disabled={controlSize === "xl"} />)}</div></UILocaleProvider>;
+  const options = [{ locale: zhCN, label: "中文" }, { locale: enUS, label: "English" }];
+  return (
+    <UILocaleProvider locale={locale}>
+      <div className="flex flex-wrap items-start gap-(--qy-panel-gap)">
+        {(["default", "compact"] as const).map((density) => (
+          <div data-density={density} key={density}>
+            <LocaleSwitch aria-label={density === "compact" ? "语言 · 紧凑" : "语言"} className="w-auto" options={options} onLocaleChange={setLocale} />
+          </div>
+        ))}
+        <LocaleSwitch aria-label="语言 · 禁用" className="w-auto" options={options} onLocaleChange={setLocale} disabled />
+      </div>
+    </UILocaleProvider>
+  );
 }
 ```

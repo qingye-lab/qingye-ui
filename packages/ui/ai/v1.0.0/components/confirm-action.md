@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
-Source SHA-256: e2f89c0cd00ce4ed718ac07fcb0f37476caefe0d4c870beca1d1ac5da5061fdb
+Source SHA-256: 96af79d77096a5ea1475c727911be72e610793c1d86863db460857f087c54225
 
 确认具体对象、版本与变更，内容改变后重新阅读。
 
@@ -25,7 +25,7 @@ Source SHA-256: e2f89c0cd00ce4ed718ac07fcb0f37476caefe0d4c870beca1d1ac5da5061fdb
 - ConfirmAction + 明确 snapshot/文字 + 应用 state/onConfirm
 
 ## Responsive behavior
-- 公共控件五档及同名文字；模态消费共享可用空间和焦点机制
+- 一套几何，跟随密度轴，紧凑不缩小文字；模态消费共享可用空间和焦点机制
 
 ## Customization
 - 各公共部件 props、children 与现有主题
@@ -52,7 +52,7 @@ AlertDialog、ButtonProtection 与可选 Field/Input 的确认组合。
 - state / disabled: ButtonState / boolean; default 'idle' / false. waiting/in-progress/unknown 阻止再次请求；busy/unknown 保留原 Button 的可聚焦 ARIA 禁用，明确 disabled 用原生禁用。返回只关闭界面。
 - confirmationText / confirmationLabel: string / ReactNode. 可选准确匹配文字，必须同时给出可见标签；FieldDescription 显示需要的文字。重新阅读或重新打开清旧输入。
 - open / defaultOpen / onOpenChange: AlertDialog public props. 受控或非受控展开，onOpenChange details.cancel() 可拒绝；受控调用方决定是否打开/关闭。
-- size / tone: InputSize / ButtonTone; default 'md' / 'danger'. 五档输入/动作同名 control/text；tone 表达调用方后果，不赋予权限。
+- tone: ButtonTone; default 'danger'. 核对输入框读填值控件的一套几何（跟随密度轴）；动作按钮仍用 Button 的尺寸档，因为大小表达位置。tone 表达调用方后果，不赋予权限。
 - triggerProps / confirmProps / inputProps / popupProps: Current public component props. 定制真实出口的 render/ref/ARIA/events；confirmProps.onClick 的事件取消阻止请求。危险 trigger 仍需其所在页面的可见后果关联。
 - children: ReactNode. 附加真实核对内容或应用提供的状态/恢复入口，位于确认面板。
 
@@ -83,13 +83,22 @@ export default function Demo() {
 }
 ```
 
-### 五档与未知
-Source: apps/docs/src/content/confirm-action/demos/02-sizes.tsx
+### 结果未知
+Source: apps/docs/src/content/confirm-action/demos/02-outcome.tsx
 ```tsx
 import { ConfirmAction } from "@qingye/ui/components/confirm-action";
-export const meta = { title: "五档与未知", titleEn: "Five sizes and unknown" };
+
+export const meta = { title: "结果未知", titleEn: "Unknown outcome" };
+
 const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
+
+// 结果未知阻止默认再次触发，控件不以超时或动画宣布成功。
 export default function Demo() {
-  return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <ConfirmAction key={size} size={size} snapshot={snapshot} title={`${size} · A → B`} triggerLabel={size} actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={() => {}} />)}<ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" state="unknown" onConfirm={() => {}} /></div>;
+  return (
+    <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
+      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" state="unknown" onConfirm={() => {}} />
+      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="等待中的核对" actionLabel="请求 A → B" state="waiting" onConfirm={() => {}} />
+    </div>
+  );
 }
 ```

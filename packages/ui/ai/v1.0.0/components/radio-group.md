@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: daeeb0c15d39c4ba850fd2d6e5e9dba613e835d4776d44f7b7dc33ab78bf1a71
+Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
 
 从同时可见的少量候选中取一个值。
 
@@ -40,7 +40,6 @@ Source SHA-256: daeeb0c15d39c4ba850fd2d6e5e9dba613e835d4776d44f7b7dc33ab78bf1a71
 - RadioGroupProps: type; owner radio-group; PASS
 - RadioPrimitive: reexport; owner radio-group; UNVERIFIED
 - RadioProps: type; owner radio-group; PASS
-- RadioSize: type; owner radio-group; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -62,7 +61,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Radio
 圆形单选入口与中心选中点。
 - value: Value. 组内唯一候选值；空字符串、0 与 null 未选择不同。
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 圆形外径读同档文字行高；命中区单独读取 touch-target。
 - disabled / readOnly / required: boolean. 原语支持组与项的真实限制，Field disabled 也可传递。
 - render / nativeButton / ref / inputRef: Base UI composition. 默认原生 button，保留隐藏 radio input；改成非 button 时显式 nativeButton=false。
 - children / className / style: ReactNode / Base UI state callbacks. 替换指示部位或覆写样式；名称放在 FieldLabel 中。
@@ -76,42 +74,38 @@ Base UI 组与 Radio 原语出口。
 - Space: 选择当前候选。Home/End、类型搜索不属于此 Radio 原语契约。
 
 ## Source examples
-### 尺寸
-Source: apps/docs/src/content/radio-group/demos/01-sizes.tsx
+### 跟随标签
+Source: apps/docs/src/content/radio-group/demos/01-labels.tsx
 ```tsx
 import { useId } from "react";
 import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio, type RadioSize } from "@qingye/ui/components/radio-group";
+import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
-const sizes: RadioSize[] = ["xs", "sm", "md", "lg", "xl"];
-const textClasses: Record<RadioSize, string> = {
-  xs: "text-control-xs", sm: "text-control-sm", md: "text-control-md", lg: "text-control-lg", xl: "text-control-xl",
-};
 const options = [
   { value: "left", label: "左对齐" },
   { value: "center", label: "居中" },
   { value: "right", label: "右对齐" },
 ];
 
+// 单选标记只有一种几何，跟随它那一项标签的文字档（用户裁决 2026-10-05）。
 export default function Demo() {
   const id = useId();
   return (
-    <FieldGroup className="grid w-full grid-cols-5 items-start">
-      {sizes.map(size => (
-        <Field key={size}>
-          <FieldTitle id={`${id}-${size}`}>{size}</FieldTitle>
-          <RadioGroup aria-labelledby={`${id}-${size}`} defaultValue="center">
-            {options.map(option => (
-              <FieldItem key={option.value}>
-                <Radio value={option.value} size={size} />
-                <FieldLabel className={textClasses[size]}>{option.label}</FieldLabel>
-              </FieldItem>
-            ))}
-          </RadioGroup>
-        </Field>
-      ))}
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      <Field>
+        <FieldTitle id={`${id}-body`}>正文标签</FieldTitle>
+        <RadioGroup aria-labelledby={`${id}-body`} defaultValue="center">
+          {options.map(option => <FieldItem key={option.value}><Radio value={option.value} /><FieldLabel>{option.label}</FieldLabel></FieldItem>)}
+        </RadioGroup>
+      </Field>
+      <Field>
+        <FieldTitle id={`${id}-support`}>紧凑标签</FieldTitle>
+        <RadioGroup aria-labelledby={`${id}-support`} defaultValue="center">
+          {options.map(option => <FieldItem key={option.value}><Radio value={option.value} /><FieldLabel className="text-support">{option.label}</FieldLabel></FieldItem>)}
+        </RadioGroup>
+      </Field>
     </FieldGroup>
   );
 }

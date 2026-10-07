@@ -31,14 +31,9 @@
   }
 }
 
-/* Tabular figures for numeric readouts, tables and counters. */
+/* 等宽数字只用于需要纵向对齐的数：表格列、坐标轴、计数器（基础层 §8）。
+ * 单独的大号读数用字体自身的比例数字——等宽会让「121」在大字号下显得松散。 */
 @utility numeric {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-/* Foundation §8: a metric is a numerical readout, so its step owns numeric. */
-@utility text-metric {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
 }

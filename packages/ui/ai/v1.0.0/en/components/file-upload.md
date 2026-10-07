@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
-Source SHA-256: f189c712d67ade0d51f090126273e74a86a62184ff17c94f5adff953aae557fe
+Source SHA-256: 8401f44ad4592a64c2fcb9d8bb6399a8409aa2c439f04c08783aefa8fcd5741e
 
 Choose or drop local files, retaining accepted files and real rejection reasons.
 
@@ -58,7 +58,7 @@ A native file input composed with dropping, accepted files, and real rule valida
 - disabled / readOnly: boolean; default false. Block selecting, dropping, and removing, including Field/native fieldset disabled. Read-only submits; disabled is excluded. Uncanceled native reset restores initial uncontrolled defaultValue and retains controlled values.
 - getStatus: (file) => {state, label, progress?} | undefined. Caller-provided waiting/in-progress/failed/unknown/success and a visible label. Only in-progress accepts {value,min?,max}; max is a known denominator and null is indeterminate.
 - renderFileActions: (file, status) => ReactNode. Real application recovery/check actions, never executed automatically. Local removal does not imply canceling an upload or deleting a server object.
-- size / inputProps / render / ref / ARIA / events: InputSize / current Input props / div composition; default size: 'md'. Native input and actions share one profile. Input supports render, refs, and events. required is not exposed because the chooser clears; validate the current set in the application with FieldError.
+- inputProps / render / ref / ARIA / events: current Input props / div composition. The chooser shares one geometry with the editing boundary (density axis). Input supports render, refs, and events. required is not exposed because the chooser clears; validate the current set in the application with FieldError.
 
 ### FileUploadPrimitive
 The installed Input primitive namespace.
@@ -82,15 +82,29 @@ export default function Demo() {
 }
 ```
 
-### 五档与只读
-Source: apps/docs/src/content/file-upload/demos/02-sizes.tsx
+### 密度与只读
+Source: apps/docs/src/content/file-upload/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { FileUpload } from "@qingye/ui/components/file-upload";
-export const meta = { title: "五档与只读", titleEn: "Five sizes and read-only" };
+
+export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
+
 export default function Demo() {
-  const [local] = useState(() => new File(["A"], "A.txt", { type: "text/plain" }));
-  return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2 lg:grid-cols-3">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><FileUpload size={size} /></Field>)}<Field><FieldLabel>只读文件</FieldLabel><FileUpload defaultValue={[local]} readOnly /></Field></div>;
+  const [stored] = useState(() => new File(["A"], "现场照片.jpg", { type: "image/jpeg" }));
+  return (
+    <div className="grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <FileUpload />
+          </Field>
+        </div>
+      ))}
+      <Field><FieldLabel>只读文件</FieldLabel><FileUpload defaultValue={[stored]} readOnly /></Field>
+    </div>
+  );
 }
 ```

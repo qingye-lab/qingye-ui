@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
-Source SHA-256: f189c712d67ade0d51f090126273e74a86a62184ff17c94f5adff953aae557fe
+Source SHA-256: 8401f44ad4592a64c2fcb9d8bb6399a8409aa2c439f04c08783aefa8fcd5741e
 
 选择或拖入本地文件，保留已接受集合与真实拒绝原因。
 
@@ -27,7 +27,7 @@ Source SHA-256: f189c712d67ade0d51f090126273e74a86a62184ff17c94f5adff953aae557fe
 - Field + FieldLabel + FileUpload + 实际规则说明/FieldError
 
 ## Responsive behavior
-- 原生 Input/Button 五档同名文字，文件名按真实容量换行
+- 原生 Input/Button 一套几何，跟随密度轴，紧凑不缩小文字，文件名按真实容量换行
 
 ## Customization
 - Input/根 render/ref/ARIA/events、getStatus、恢复入口及现有主题
@@ -58,7 +58,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - disabled / readOnly: boolean; default false. 阻止选择、拖放和移除；Field/原生 fieldset 禁用同样约束。只读文件继续提交，禁用排除。原生 reset 未取消时非受控恢复初始 defaultValue，受控值保留。
 - getStatus: (file) => {state, label, progress?} | undefined. 调用方真实 waiting/in-progress/failed/unknown/success 与可见 label。只有 in-progress 可提供 {value, min?, max}；max 是调用方已知分母，null 为不定进度。
 - renderFileActions: (file, status) => ReactNode. 应用的实际恢复/核对入口，组件不自动执行；本地移除不表示取消上传或删除服务端对象。
-- size / inputProps / render / ref / ARIA / events: InputSize / current Input props / div composition; default size: 'md'. 原生输入与动作同档；Input 出口支持 render/ref/events。required 不暴露，chooser 会清空；集合必填由应用按当前 value 校验并用 FieldError 表达。
+- inputProps / render / ref / ARIA / events: current Input props / div composition. 选择动作与编辑边界共用一套几何（跟随密度轴）；Input 出口支持 render/ref/events。required 不暴露，chooser 会清空；集合必填由应用按当前 value 校验并用 FieldError 表达。
 
 ### FileUploadPrimitive
 所用安装版 Input 原语命名空间。
@@ -82,15 +82,29 @@ export default function Demo() {
 }
 ```
 
-### 五档与只读
-Source: apps/docs/src/content/file-upload/demos/02-sizes.tsx
+### 密度与只读
+Source: apps/docs/src/content/file-upload/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
 import { Field, FieldLabel } from "@qingye/ui/components/field";
 import { FileUpload } from "@qingye/ui/components/file-upload";
-export const meta = { title: "五档与只读", titleEn: "Five sizes and read-only" };
+
+export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
+
 export default function Demo() {
-  const [local] = useState(() => new File(["A"], "A.txt", { type: "text/plain" }));
-  return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2 lg:grid-cols-3">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><FileUpload size={size} /></Field>)}<Field><FieldLabel>只读文件</FieldLabel><FileUpload defaultValue={[local]} readOnly /></Field></div>;
+  const [stored] = useState(() => new File(["A"], "现场照片.jpg", { type: "image/jpeg" }));
+  return (
+    <div className="grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <FileUpload />
+          </Field>
+        </div>
+      ))}
+      <Field><FieldLabel>只读文件</FieldLabel><FileUpload defaultValue={[stored]} readOnly /></Field>
+    </div>
+  );
 }
 ```

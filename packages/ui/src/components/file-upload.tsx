@@ -7,7 +7,7 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Button, buttonVariants } from "./button";
-import { Input, type InputProps, type InputSize } from "./input";
+import { Input, type InputProps } from "./input";
 import { Progress, ProgressIndicator, ProgressTrack } from "./progress";
 
 export type FileUploadRejection = { file: File; reason: "type" | "size" | "count" };
@@ -40,7 +40,6 @@ export type FileUploadProps = Omit<useRender.ComponentProps<"div">, "children" |
   maxSize?: number;
   disabled?: boolean;
   readOnly?: boolean;
-  size?: InputSize;
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "name" | "form" | "accept" | "multiple" | "required" | "disabled" | "readOnly" | "size">;
   getStatus?: (file: File) => FileUploadStatus | undefined;
   renderFileActions?: (file: File, status: FileUploadStatus | undefined) => React.ReactNode;
@@ -57,16 +56,21 @@ function validateRules(accept: string | undefined, maxFiles: number | undefined,
   if (accept?.split(",").map(rule => rule.trim()).filter(Boolean).some(rule => !/^\.[\w.-]+$|^[\w!#$&^.+-]+\/(?:[\w!#$&^.+-]+|\*)$/.test(rule))) throw new TypeError("FileUpload accept requires comma-separated extensions or MIME types.");
 }
 type InputMeta = { name: string | undefined; disabled: boolean };
-function ChooserSurface({ elementProps, state, render, onMeta, size, label }: { elementProps: React.ComponentPropsWithRef<"input">; state: FileUploadPrimitive.State; render: InputProps["render"]; onMeta: (meta: InputMeta) => void; size: InputSize; label: string }) {
+function ChooserSurface({ elementProps, state, render, onMeta, label }: { elementProps: React.ComponentPropsWithRef<"input">; state: FileUploadPrimitive.State; render: InputProps["render"]; onMeta: (meta: InputMeta) => void; label: string }) {
   React.useLayoutEffect(() => onMeta({ name: elementProps.name, disabled: Boolean(elementProps.disabled) }), [elementProps.name, elementProps.disabled, onMeta]);
   // Field registration keeps names/errors, while this native outlet is a selection draft.
   const { value: _value, defaultValue: _defaultValue, name: _name, required: _required, ...nativeProps } = elementProps;
-  const input = useRender({ defaultTagName: "input", render, ref: elementProps.ref, state: { ...state }, props: { ...nativeProps, className: cn("absolute inset-0 h-full cursor-pointer opacity-0", nativeProps.className) } });
-  return <>{input}<span aria-hidden="true" data-slot="file-upload-chooser-label" className={cn(buttonVariants({ variant: "quiet", size }), "pointer-events-none col-start-2 row-start-1 min-h-0 px-(--qy-input-padding) sm:min-h-0")}>{label}</span></>;
+  // 原生 file input 的文本（"未选择任何文件"）不随 opacity:0 消失，它仍然参与布局：
+  // 盒子被压到 82px 时内容仍有 217px，`overflow: clip` 只裁掉像素，不消除溢出。
+  // 用与 .sr-only 同一套办法把内容真正移出布局：裁到一个点、禁止换行、零内距。
+  // 不用 `contain: strict`——它的 size 包含会让这个撑满父级的点击目标塌掉。
+  // 视觉本就为 0（透明度 0），所以这些声明不改变任何可见像素，只让溢出不再存在。
+  const input = useRender({ defaultTagName: "input", render, ref: elementProps.ref, state: { ...state }, props: { ...nativeProps, className: cn("absolute inset-0 h-full w-full cursor-pointer overflow-hidden border-0 p-0 opacity-0 [clip-path:inset(50%)]", nativeProps.className) } });
+  return <>{input}<span aria-hidden="true" data-slot="file-upload-chooser-label" className={cn(buttonVariants({ variant: "quiet" }), "pointer-events-none col-start-2 row-start-1 min-h-0 px-(--qy-fill-padding) sm:min-h-0")}>{label}</span></>;
 }
 
 /** Local accepted Files only. Upload facts and recovery remain with the application. */
-export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, disabled = false, readOnly = false, size = "md", inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, ...props }: FileUploadProps) {
+export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, disabled = false, readOnly = false, inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, ...props }: FileUploadProps) {
   validateRules(accept, maxFiles, maxSize);
   const { messages } = useUILocale();
   const initial = React.useRef([...defaultValue]);
@@ -168,7 +172,7 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
     onDragLeave: (event: React.DragEvent<HTMLDivElement>) => { onDragLeave?.(event); if (!event.defaultPrevented && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) setDragging(false); },
     onDrop: (event: React.DragEvent<HTMLDivElement>) => { onDrop?.(event); const canceled = event.defaultPrevented; event.preventDefault(); setDragging(false); if (!canceled) add(Array.from(event.dataTransfer.files), "drop", event); },
     children: <>
-      <Input {...inputRest} ref={setInputRef} type="file" name={name} form={form} accept={accept} multiple={multiple} size={size} disabled={disabled} readOnly={readOnly} controlClassName={cn("w-fit", inputRest.controlClassName)} value={value.map(file => file.name).join(", ")} render={(elementProps, state) => <ChooserSurface elementProps={elementProps} state={state} render={inputRender} onMeta={onMeta} size={size} label={messages.chooseFiles} />}
+      <Input {...inputRest} ref={setInputRef} type="file" name={name} form={form} accept={accept} multiple={multiple} disabled={disabled} readOnly={readOnly} controlClassName={cn("w-fit", inputRest.controlClassName)} value={value.map(file => file.name).join(", ")} render={(elementProps, state) => <ChooserSurface elementProps={elementProps} state={state} render={inputRender} onMeta={onMeta} label={messages.chooseFiles} />}
         onClick={event => { onClick?.(event); if (blocked) event.preventDefault(); }}
         onChange={event => { onChange?.(event); const canceled = event.defaultPrevented || event.baseUIHandlerPrevented; event.preventBaseUIHandler(); if (!canceled) add(Array.from(event.currentTarget.files ?? []), "select", event); event.currentTarget.value = ""; }} />
       {!blocked && <p className="text-support text-muted-foreground">{messages.dropFiles}</p>}
@@ -176,13 +180,13 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
         const status = getStatus?.(file);
         if (status && !status.label.trim()) throw new TypeError("FileUpload status requires a visible factual label.");
         return <li key={fileKey(file)} data-slot="file-upload-file" className="grid min-w-0 gap-(--qy-field-gap)" onFocusCapture={event => { focusedFile.current = { file, index: value.indexOf(file), element: event.target }; }} onBlurCapture={event => { if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) focusedFile.current = undefined; }}>
-          <div className="flex min-w-0 items-start gap-(--qy-action-gap)"><span className="min-w-0 flex-1 text-body wrap-anywhere">{file.name}</span><Button ref={node => { if (node) removeButtons.current.set(file, node); else removeButtons.current.delete(file); }} size={size} variant="quiet" disabled={blocked} aria-label={messages.removeFile(file.name)} onClick={event => request(value.filter(item => item !== file), "remove", [], [file], event)}>{messages.remove}</Button></div>
+          <div className="flex min-w-0 items-start gap-(--qy-action-gap)"><span className="min-w-0 flex-1 text-body wrap-anywhere">{file.name}</span><Button ref={node => { if (node) removeButtons.current.set(file, node); else removeButtons.current.delete(file); }} variant="quiet" disabled={blocked} aria-label={messages.removeFile(file.name)} onClick={event => request(value.filter(item => item !== file), "remove", [], [file], event)}>{messages.remove}</Button></div>
           {status && <p role="status" className={cn("text-support wrap-anywhere", status.state === "failed" ? "text-destructive-foreground" : "text-muted-foreground")}>{status.label}</p>}
           {status?.state === "in-progress" && status.progress && <Progress {...status.progress} aria-label={messages.fileProgress(file.name)}><ProgressTrack><ProgressIndicator /></ProgressTrack></Progress>}
           {renderFileActions?.(file, status)}
         </li>;
       })}</ul>}
-      {rejections.length > 0 && <ul data-slot="file-upload-rejections" className="grid min-w-0 gap-(--qy-field-gap)">{rejections.map((rejection, index) => <li key={index} className="flex min-w-0 items-start gap-(--qy-action-gap)"><span role="alert" className="min-w-0 flex-1 text-support text-destructive-foreground wrap-anywhere">{messages.fileError(rejection.file.name, rejection.reason)}</span><Button size={size} variant="quiet" aria-label={messages.dismissFileRejection(rejection.file.name)} onClick={() => setRejections(current => current.filter(item => item !== rejection))}>{messages.close}</Button></li>)}</ul>}
+      {rejections.length > 0 && <ul data-slot="file-upload-rejections" className="grid min-w-0 gap-(--qy-field-gap)">{rejections.map((rejection, index) => <li key={index} className="flex min-w-0 items-start gap-(--qy-action-gap)"><span role="alert" className="min-w-0 flex-1 text-support text-destructive-foreground wrap-anywhere">{messages.fileError(rejection.file.name, rejection.reason)}</span><Button variant="quiet" aria-label={messages.dismissFileRejection(rejection.file.name)} onClick={() => setRejections(current => current.filter(item => item !== rejection))}>{messages.close}</Button></li>)}</ul>}
     </>,
   }) });
 }

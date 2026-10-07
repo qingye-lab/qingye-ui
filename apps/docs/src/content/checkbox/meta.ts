@@ -7,7 +7,6 @@ export default {
     { name: "checked / defaultChecked", type: "boolean", description: "受控选中值或非受控初值。", descriptionEn: "Controlled checked value or uncontrolled initial value." },
     { name: "indeterminate", type: "boolean", default: "false", description: "集合部分选中的事实；aria-checked 为 mixed。", descriptionEn: "Actual partial collection selection; aria-checked is mixed." },
     { name: "onCheckedChange", type: "(checked, eventDetails) => void", description: "选择变化，可取消。集合更新由应用处理。", descriptionEn: "Cancelable selection change; the application handles collection updates." },
-    { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "可见方框采用同名文字行高，命中区另由 touch-target 提供。", descriptionEn: "The visible box uses the matching text line height; touch-target separately supplies its hit area." },
     { name: "disabled / readOnly", type: "boolean", default: "false", description: "禁用跳过键盘并不提交；只读可聚焦、提交但不可切换。", descriptionEn: "Disabled skips keyboard access and submission; read-only retains focus/submission without toggling." },
     { name: "aria-invalid", type: "boolean | 'true' | 'false'", description: "显式无效事实；Field invalid 也可传入。", descriptionEn: "An explicit invalid fact, also available through Field invalid." },
     { name: "name / value / uncheckedValue / form", type: "string", description: "保留原语隐藏输入的真实表单提交语义。", descriptionEn: "Preserve actual form submission through the primitive's hidden input." },

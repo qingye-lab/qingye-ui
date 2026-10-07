@@ -5,7 +5,6 @@ export default {
   description: "编辑备注、消息等多行文本。", descriptionEn: "Edit multiline notes and messages.",
   category: "表单", layer: "primitive", source: "local", exports: ["Textarea", "TextareaPrimitive"],
   api: [{ name: "Textarea", description: "可与 Field 组合的原生 textarea。", descriptionEn: "A native textarea composable with Field.", props: [
-    { name: "size", type: '"xs" | "sm" | "md" | "lg" | "xl"', default: '"md"', description: "同档控件几何、文字及有边框内距。", descriptionEn: "Matching control geometry, text, and bordered padding." },
     { name: "rows", type: "number", default: "3", description: "最小起始行数；内容可自动增高，仍可手工调整高度。", descriptionEn: "Minimum starting rows; content may grow automatically and still be resized manually." },
     { name: "value / defaultValue", type: "string", description: "受控值或非受控初值。", descriptionEn: "Controlled value or uncontrolled initial value." },
     { name: "onValueChange", type: "(value, eventDetails) => void", description: "原语的值变化回调，可调用 eventDetails.cancel()。", descriptionEn: "Primitive value callback, cancelable with eventDetails.cancel()." },

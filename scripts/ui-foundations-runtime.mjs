@@ -148,7 +148,7 @@ export async function probeFixedReserves(page, baseURL, { width = 1280 } = {}) {
   try {
     for (const [component, controlSelector, iconSelector] of [
       ['input', '[data-demo="search"] [data-slot="input-control"]', '[data-demo="search"] [data-slot="input-clear"] svg'],
-      ['select', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"]', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"] [data-slot="select-icon"] svg'],
+      ['select', '[data-demo="density"] [data-slot="select-trigger"]', '[data-demo="density"] [data-slot="select-trigger"] [data-slot="select-icon"] svg'],
     ]) {
       await visit(page, baseURL, component);
       const oldStyle = await page.evaluate(() => document.documentElement.getAttribute('style'));
@@ -179,7 +179,7 @@ export async function probeInputTypography(page, baseURL, { width = 1280, theme 
   try {
     for (const [component, selector, parts] of [
       ['input', '[data-demo="default"] [data-slot="input-control"]', [['wrapper', null, false], ['inner', 'input', true]]],
-      ['select', '[data-demo="sizes"] [data-slot="select-trigger"][data-size="md"]', [['trigger', null, true], ['value', '[data-slot="select-value"]', true]]],
+      ['select', '[data-demo="density"] [data-slot="select-trigger"]', [['trigger', null, true], ['value', '[data-slot="select-value"]', true]]],
       ['input-group', '[data-demo="addon"] [data-slot="input-group"]', [['wrapper', null, true], ['addon', '[data-slot="input-group-addon"]', true], ['inner', 'input', true]]],
     ].filter(([component]) => components.includes(component))) {
       await visit(page, baseURL, component, theme);

@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
-Source SHA-256: 48ae638f73c4c2aceac9839caaa4fd9d2f17dba13d4a2d5f61c209abccc7438b
+Source SHA-256: 99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2
 
 表达可靠分母的任务进度或明确不定状态。
 
@@ -27,7 +27,8 @@ Source SHA-256: 48ae638f73c4c2aceac9839caaa4fd9d2f17dba13d4a2d5f61c209abccc7438b
 
 ## Current exports
 - Progress: function; owner progress; PASS; props: ProgressProps
-- ProgressIndicator: function; owner progress; PASS; props: React.ComponentProps<typeof ProgressPrimitive.Indicator>
+- ProgressIndicator: function; owner progress; PASS; props: ProgressIndicatorProps
+- ProgressIndicatorProps: type; owner progress; PASS
 - ProgressLabel: function; owner progress; PASS; props: React.ComponentProps<typeof ProgressPrimitive.Label>
 - ProgressPrimitive: reexport; owner progress; UNVERIFIED
 - ProgressProps: type; owner progress; PASS
@@ -59,7 +60,7 @@ Label 关联任务；Value 默认按真实 null 显示已有 locale 的进行中
 实际进度的视觉轨道；消费独立轨厚角色。
 
 ### ProgressIndicator
-已确认进度的比例；不定状态显示无比例的虚线边界。
+已确认进度的比例；不定状态是一段移动的窄带，与确定态同形，只是位置不可知。
 
 ### ProgressPrimitive
 Base UI Progress 公共原语。

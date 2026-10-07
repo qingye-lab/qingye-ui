@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: a25be1083ddc026428a32026614e3f4eaddcdf6b883012b297f764aac42ef11a
+Source SHA-256: 341b3221272b3b11edb786eff56d9cdba77db386ad426476010a66beb672efe6
 
 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
 
@@ -31,6 +31,8 @@ level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文
 - 集中主题修改文字档；特殊职责才单项覆写。
 
 ## Current exports
+- Code: function; owner typography; PASS; props: CodeProps
+- CodeProps: type; owner typography; PASS
 - Heading: function; owner typography; PASS; props: HeadingProps
 - HeadingProps: type; owner typography; PASS
 - Text: function; owner typography; PASS; props: TextProps
@@ -45,6 +47,10 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
+### Code
+正文里的一段代码：等宽字，字号为所在文字的 0.875 倍并取整像素，墨的柔底，跟随所在那一行。
+- render / ref / 原生属性: useRender.ComponentProps<"code">. 属性与 ref 透传原生 code 元素。
+
 ### Heading
 真实标题，层级与字号分离。
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. 文档大纲中的标题级别。

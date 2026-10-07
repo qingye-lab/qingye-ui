@@ -4,7 +4,7 @@
 
 Applied（2026-10-03）。本文档是组件库分层的一级判据，供 83 个组件的独立重写使用。[design.md 的系统分层](../../design.md#系统分层) 给出五层定义，本文给出每个组件的归属、判据和拒绝过的替代方案。
 
-组件数量：88 → **83**。删除 9 个，合并 2 个，新增 6 个。
+组件数量：88 → **83**。删除 9 个，合并 2 个，新增 6 个。2026-10-07 盘点后为 **82**：删除 `group`、`aspect-ratio`、`progress-circle`、`carousel`，新增 `link`、`sparkline`、`proportion`，判据见 [2026-10-07-component-inventory.md](2026-10-07-component-inventory.md)。
 
 （初版本文档把 `field-error` 列为新增项。核实后发现 `packages/ui/src/components/field.tsx` 已导出 `FieldError`，且它已按上下文正确处理校验归属，无需新增。错误归属的处理写入 `docs/decisions/2026-10-03-family-form.md`。）
 
@@ -84,23 +84,23 @@ Capability 与 Experience **不进本库**。`STANDARDS.md` 第 1 节规定组�
 | `virtual-list` | Primitive | 长集合的可达性与渲染边界 | 随境取度：`data-table` 之外的长列表此前无可靠实现 |
 | `locale-switch` | Primitive | 切换应用语言 | 相成相制：库自身消费 locale，切换控件却要各应用自造，与「内置文案统一走 locale」不一致 |
 
-### 83 个组件的分层归属
+### 82 个组件的分层归属（2026-10-07）
 
-**Foundation（6）** —— 不含交互，是值、角色与底线：
+**Foundation（5）** —— 不含交互，是值、角色与底线：
 
-`layout`、`typography`、`motion-provider`、`theme-provider`、`separator`、`aspect-ratio`
+`layout`、`typography`、`motion-provider`、`theme-provider`、`separator`
 
-其中 layout 提供布局组合原语，typography 提供语义文字角色，motion-provider 与 theme-provider 提供主题与动效的运行时契约，separator 与 aspect-ratio 无状态、无交互，是几何角色。
+其中 layout 提供布局组合原语，typography 提供语义文字角色，motion-provider 与 theme-provider 提供主题与动效的运行时契约，separator 无状态、无交互，是几何角色。
 
-**Primitive（44）** —— 不能继续拆分而不破坏交互语义：
+**Primitive（45）** —— 不能继续拆分而不破坏交互语义：
 
-`accordion`、`alert`、`avatar`、`badge`、`button`、`button-group`、`checkbox`、`checkbox-group`、`collapsible`、`copy-button`、`dialog`、`drawer`、`field`、`fieldset`、`form`、`group`、`hover-card`、`input`、`input-group`、`kbd`、`label`、`locale-switch`、`meter`、`native-select`、`number-field`、`otp-field`、`pending-value`、`popover`、`progress`、`progress-circle`、`radio-group`、`scroll-area`、`segmented-control`、`select`、`slider`、`status-dot`、`switch`、`tag-input`、`textarea`、`toast`、`toggle`、`toggle-group`、`tooltip`、`virtual-list`
+`accordion`、`alert`、`avatar`、`badge`、`button`、`button-group`、`checkbox`、`checkbox-group`、`collapsible`、`copy-button`、`dialog`、`drawer`、`field`、`fieldset`、`form`、`hover-card`、`input`、`input-group`、`kbd`、`label`、`link`、`locale-switch`、`meter`、`native-select`、`number-field`、`otp-field`、`pending-value`、`popover`、`progress`、`proportion`、`radio-group`、`scroll-area`、`segmented-control`、`select`、`slider`、`sparkline`、`status-dot`、`switch`、`tag-input`、`textarea`、`toast`、`toggle`、`toggle-group`、`tooltip`、`virtual-list`
 
 承载类组件不在此列：card 与 item 移到 Pattern，因为它们表达的是「内容成组」这一关系，而不是控件语义。
 
-**Pattern（33）** —— 无业务对象仍成立，解决一类反复出现的问题：
+**Pattern（32）** —— 无业务对象仍成立，解决一类反复出现的问题：
 
-`alert-dialog`、`autocomplete`、`breadcrumb`、`bulk-action-bar`、`calendar`、`card`、`carousel`、`chart`、`code-block`、`combobox`、`confirm-action`、`context-menu`、`data-table`、`date-picker`、`date-range-picker`、`date-time-picker`、`description-list`、`empty`、`file-upload`、`filter-bar`、`item`、`menu`、`navigation-menu`、`page-header`、`pagination`、`sidebar`、`stat`、`steps`、`table`、`tabs`、`timeline`、`toolbar`、`tree`
+`alert-dialog`、`autocomplete`、`breadcrumb`、`bulk-action-bar`、`calendar`、`card`、`chart`、`code-block`、`combobox`、`confirm-action`、`context-menu`、`data-table`、`date-picker`、`date-range-picker`、`date-time-picker`、`description-list`、`empty`、`file-upload`、`filter-bar`、`item`、`menu`、`navigation-menu`、`page-header`、`pagination`、`sidebar`、`stat`、`steps`、`table`、`tabs`、`timeline`、`toolbar`、`tree`
 
 table 是 Pattern 而非 Primitive：它无业务对象成立，但表达的是「比较」这一关系，需要列定义、排序与空态的共同契约。
 

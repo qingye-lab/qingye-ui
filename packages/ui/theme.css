@@ -93,6 +93,8 @@
   --color-popover-foreground: var(--qy-foreground);
   --color-primary: var(--qy-primary);
   --color-primary-foreground: var(--qy-primary-foreground);
+  --color-primary-hover: var(--qy-primary-hover);
+  --color-destructive-fill-hover: var(--qy-danger-fill-hover);
   --color-secondary: var(--qy-surface-inset);
   --color-secondary-foreground: var(--qy-foreground);
   --color-muted: var(--qy-surface-inset);
@@ -141,6 +143,7 @@
   --color-foreground-subtle: var(--qy-foreground-subtle);
   --color-border-subtle: var(--qy-border-subtle);
   --color-border-strong: var(--qy-border-strong);
+  --color-neutral-soft: var(--qy-neutral-soft);
   --color-danger-soft: var(--qy-danger-soft);
   --color-warning-soft: var(--qy-warning-soft);
   --color-success-soft: var(--qy-success-soft);

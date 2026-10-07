@@ -173,20 +173,22 @@ test("the native reset observer preserves caller ref cleanup", () => {
   expect(cleanup).toHaveBeenCalledOnce();
 });
 
-test.each(["xs", "sm", "md", "lg", "xl"] as const)("%s consumes the matching foundation size and independent control text profile", (size) => {
-  const { container } = render(<Input aria-label="名称" size={size} />);
+// 用户裁决 2026-10-05：填值控件只有一套几何，跟随密度轴，不再按档位放大。
+// 这组断言把契约钉在角色 token 上：组件不写死尺寸，只读角色层；
+// 密度改绑角色层时无需改组件。值文字始终是正文尺寸，不随容器变化。
+test("one geometry reads the fill-control role, not a size step", () => {
+  const { container } = render(<Input aria-label="名称" />);
   const shell = container.querySelector<HTMLElement>("[data-slot=input-control]")!;
-  expect(shell).toHaveAttribute("data-size", size);
-  expect(shell.style.getPropertyValue("--qy-input-height")).toBe(`var(--qy-control-${size})`);
-  expect(shell.style.getPropertyValue("--qy-input-padding")).toBe(`var(--qy-control-${size}-padding-bordered)`);
-  // 每个尺寸档取同名的文字档。lg 曾取 md、xl 曾取 lg，此断言曾把前者写成期望值。
-  expect(screen.getByRole("textbox")).toHaveClass(`text-control-${size}-mobile`);
+  expect(shell).not.toHaveAttribute("data-size");
+  expect(shell).not.toHaveStyle({ "--qy-input-height": "var(--qy-control-md)" });
+  expect(shell.className).toContain("min-h-(--qy-fill-height)");
+  expect(shell.className).toContain("rounded-(--qy-fill-radius)");
+  expect(screen.getByRole("textbox")).toHaveClass("text-control-md-mobile", "sm:text-control-md");
 });
 
-test("numeric size preserves its native meaning while using the standard visual profile", () => {
-  const { container } = render(<Input aria-label="名称" size={24} />);
+test("numeric size keeps its native character-width meaning", () => {
+  render(<Input aria-label="名称" size={24} />);
   expect(screen.getByRole("textbox")).toHaveAttribute("size", "24");
-  expect(container.querySelector("[data-slot=input-control]")).toHaveAttribute("data-size", "md");
 });
 
 

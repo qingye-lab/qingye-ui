@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BoldIcon } from "lucide-react";
 import { Toggle } from "@qingye/ui/components/toggle";
 
-export const meta = { title: "按压", titleEn: "Pressed" };
+export const meta = { title: "切换态", titleEn: "Toggled state" };
 export default function Demo() {
   const [pressed, setPressed] = useState(false);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">

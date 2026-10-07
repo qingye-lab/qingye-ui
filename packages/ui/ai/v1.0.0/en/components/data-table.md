@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 6313affe4fc777784287b601733b60430c3bbe748181643867f1709ed07ee0ca
+Source SHA-256: 6c90102f2bc72cc10b6b9a886cc1a8f2f9e64f91aac5bf57befb245b63422055
 
 Comparison, sorting and scoped selection for a real caller-owned collection.
 
@@ -77,12 +77,27 @@ import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } fro
 import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye/ui/components/data-table";
 import { Stack } from "@qingye/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
+
 export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;
+
 type Entry = { id: string; label: string; count: number };
-const data: Entry[] = [{ id: "a", label: "条目 A", count: 0 }, { id: "b", label: "条目 B", count: 3 }, { id: "c", label: "条目 C", count: 1 }];
+const data: Entry[] = [
+  { id: "sensors", label: "接入设备", count: 12 },
+  { id: "roles", label: "权限与角色", count: 8 },
+  { id: "sync", label: "同步与导出", count: 0 },
+];
+
 export default function Demo() {
-  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [{ id: "selection", enableSorting: false, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择当前本地集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择 ${row.original.label}`} /> }, { accessorKey: "label", meta: { rowHeader: true }, header: "条目" }, { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>数量</DataTableSortButton>, sortDescFirst: false }], []);
+  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [
+    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。
+    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择当前本地集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },
+    { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
+    { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
+  ], []);
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });
-  return <Stack><DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" /><output className="text-support">已选标识：{table.getSelectedRowModel().rows.map(row => row.id).join("、") || "无"}</output></Stack>;
+  return <Stack>
+    <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
+    <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>
+  </Stack>;
 }
 ```

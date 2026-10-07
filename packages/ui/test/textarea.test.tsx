@@ -119,11 +119,13 @@ test("native properties, typed events, custom render and ref reach the textarea"
   expect(control).toHaveStyle({ color: "var(--qy-foreground)" });
 });
 
-test.each(["xs", "sm", "md", "lg", "xl"] as const)("%s uses the same named text, bordered padding and narrow geometry", (size) => {
-  render(<Textarea aria-label="备注" size={size} />);
+// 用户裁决 2026-10-05：填值控件只有一套几何，跟随密度轴。多行编辑的高度由
+// rows 与内容决定，分档位没有意义。断言钉在角色 token 上：组件只引用角色层。
+test("one geometry reads the fill-control role and keeps body-sized text", () => {
+  render(<Textarea aria-label="备注" />);
   const control = screen.getByRole("textbox");
-  expect(control).toHaveClass(`text-control-${size}-mobile`, `sm:text-control-${size}`);
-  expect(control.style.getPropertyValue("--qy-textarea-padding")).toBe(`var(--qy-control-${size}-padding-bordered)`);
-  expect(control.style.getPropertyValue("--qy-textarea-height-narrow")).toBe(`var(--qy-control-${size}-narrow)`);
+  expect(control).toHaveClass("text-control-md-mobile", "sm:text-control-md");
+  expect(control.style.getPropertyValue("--qy-textarea-padding")).toBe("var(--qy-fill-padding)");
+  expect(control.style.getPropertyValue("--qy-textarea-height-narrow")).toBe("var(--qy-fill-height-narrow)");
   expect(control).toHaveAttribute("rows", "3");
 });

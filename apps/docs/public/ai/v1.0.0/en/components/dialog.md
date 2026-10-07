@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: f8ccfe9259be947e8dfb3a086445160c366544e33cded24c1239c2a9750fd576
+Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
 
 Take over the work surface for an edit or decision, then return.
 

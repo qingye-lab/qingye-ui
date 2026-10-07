@@ -1,6 +1,15 @@
 import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye/ui/components/description-list";
 import type { DemoMeta } from "@/lib/types";
+
 export const meta = { title: "值与未知", titleEn: "Values and uncertainty" } satisfies DemoMeta;
+
 export default function Demo() {
-  return <DescriptionList><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>数量</DescriptionListTerm><DescriptionListDetail>{0}</DescriptionListDetail></DescriptionListItem><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>宽度</DescriptionListTerm><DescriptionListDetail>未知</DescriptionListDetail></DescriptionListItem><DescriptionListItem className="sm:grid-cols-2"><DescriptionListTerm>名称</DescriptionListTerm><DescriptionListDetail>一段更长的名称，保留完整内容与原生名称值关系</DescriptionListDetail></DescriptionListItem></DescriptionList>;
+  // 名称按内容宽度成列，多行共用同一条值的起始线；窄屏自动回到名称在上。
+  // 演示只给名称与值，不编造业务流程（值可以是 0，也可以是「未知」）。
+  return <DescriptionList className="max-w-md">
+    <DescriptionListItem><DescriptionListTerm>名称</DescriptionListTerm><DescriptionListDetail>接入与设备</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>记录数</DescriptionListTerm><DescriptionListDetail className="numeric">{0}</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>最近同步</DescriptionListTerm><DescriptionListDetail>未知</DescriptionListDetail></DescriptionListItem>
+    <DescriptionListItem><DescriptionListTerm>保留策略</DescriptionListTerm><DescriptionListDetail>滚动保留最近 90 天，更早的记录按周归档</DescriptionListDetail></DescriptionListItem>
+  </DescriptionList>;
 }

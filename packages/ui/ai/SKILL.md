@@ -18,7 +18,7 @@ This file accompanies @qingye/ui 1.0.0. Read the installed version first; a webs
 ```md
 ## Qingye UI
 
-- 界面设计先读本项目 design.md 与 node_modules/@qingye/ui/design.md，依据相关方法判断任务、语义、结构和状态。
+- 界面设计先读本项目 design.md 与 node_modules/@qingye/ui/design.md，依据器用六法判断任务、语义、结构和状态，依据表达九法决定尺度、墨色、线、形与位置。
 - 实现前核对已安装 @qingye/ui 的 package.json、catalog.json、声明和相关示例；交互控件复用共享包，项目负责主题与公共组合，应用负责权限、草稿、请求和结果。
 - 验证正常与相关失败、取消或恢复路径，并按影响检查键盘、可访问名称、对比度、窄屏和长文本；仅报告实际运行的检查。
 ```
@@ -28,7 +28,7 @@ This file accompanies @qingye/ui 1.0.0. Read the installed version first; a webs
 ```md
 ## Qingye UI 方法
 
-器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye/ui/design.md 的名实相符、相成相制、布白有用、随境取度、展开有据、进退相承；普通组件采用相关方法，完整任务检查六类问题。
+器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye/ui/design.md：器用六法（名实相符、相成相制、布白有用、随境取度、展开有据、进退相承）处理任务与语义，表达九法（以材为祖、疏密有致、墨分五色、骨法用笔、应物象形、经营位置、绘事后素、气韵生动、材有美）处理尺度与形制；普通组件采用相关方法，完整任务检查全部问题。
 
 组件能力以本项目已安装 @qingye/ui 的 catalog.json、类型和示例为准。品牌、明暗、密度独立；集中主题、公共组合和验证命令在本文件记录实际入口，变更时更新。
 ```
@@ -50,6 +50,7 @@ NG5. 标题上方加 kicker 或 eyebrow
 NG6. 用装饰性动效交代状态，或让任务结果依赖动画结束
 NG7. 让唯一的关键后果只存在于会消失的提示里
 NG8. 在界面文案里解释自身的设计或实现
+NG9. 以新增形状表达状态：外扩的焦点圈、加粗的边框、随状态改变的尺寸
 
 Also binding: prose length and text size must never change the structure;
 density tightens spacing and never shrinks type; sizes come from the named type

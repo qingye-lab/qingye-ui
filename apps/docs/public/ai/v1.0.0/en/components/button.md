@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 8ce98a093d8ada83f28ed805733269684452c9cdba5b848000a9b8ef65a6e420
+Source SHA-256: 917075f0aba4a2e8a107f94beb71a3ab4cb1d6d59bd2e2190f2348b815942c7e
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 

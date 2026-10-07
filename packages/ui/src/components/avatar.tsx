@@ -10,7 +10,7 @@ const sizes = {
 };
 export function Avatar({ label, size = "md", className, ...props }: AvatarProps) {
   if (!label?.trim()) throw new Error("Avatar requires a non-empty label for its identity sample.");
-  return <AvatarPrimitive.Root role="img" aria-label={label} data-slot="avatar" data-size={size} {...props} className={state => cn("relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-surface-subtle text-foreground outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-ring", sizes[size], typeof className === "function" ? className(state) : className)} />;
+  return <AvatarPrimitive.Root role="img" aria-label={label} data-slot="avatar" data-size={size} {...props} className={state => cn("relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-(--qy-surface-active) text-foreground has-[img]:inset-ring has-[img]:inset-ring-border outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-ring", sizes[size], typeof className === "function" ? className(state) : className)} />;
 }
 export function AvatarImage({ className, alt = "", ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return <AvatarPrimitive.Image data-slot="avatar-image" alt={alt} {...props} className={state => cn("size-full object-cover", typeof className === "function" ? className(state) : className)} />;

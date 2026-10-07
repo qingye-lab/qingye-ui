@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: f879be54d2b8c7bc52678b0e5e07c4b7ad48bb859375075de3b9300510182f3b
+Source SHA-256: 4fabab19635e16474b8b1fab6d23a11c086a9cc9e14fd8b585abbe9930fa1fd2
 
 编辑可为空的数值，并按指定步长增减。
 
@@ -26,7 +26,7 @@ Source SHA-256: f879be54d2b8c7bc52678b0e5e07c4b7ad48bb859375075de3b9300510182f3b
 - Field + FieldLabel + NumberField / Group / Input / steppers + FieldDescription / Error
 
 ## Responsive behavior
-- 五档同名文字与窄屏 +4px；粗指针编辑/步进采用库内触摸目标
+- 一套几何，跟随密度轴，紧凑不缩小文字与窄屏 +4px；粗指针编辑/步进采用库内触摸目标
 
 ## Customization
 - Root 与每部件支持 render/ref；集中角色决定表面与尺寸
@@ -54,7 +54,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - min / max / step: number / number / number | 'any'; default step: 1. 范围约束直接编辑与表单校验，步进夹在范围内；step='any' 关闭步长校验，交互仍按 1 增减。显式 min 与 step 才始终启用步长提交校验。
 - snapOnStep / smallStep / largeStep: boolean / number / number; default false / 0.1 / 10. 是否吸附与 Alt/Shift 步长是独立的显式选项。
 - onValueCommitted: (value, details) => void. blur 或步进提交回调，只描述编辑结束，不代表已保存。
-- size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; default 'md'. 共同边界、输入与步进读取同档 control/text 角色。
 - name / form / required / disabled / readOnly: Base UI Root props. 原生表单与语义入口；只读继续参与提交，禁用不提交。
 - locale / format: Intl.LocalesArgument / Intl.NumberFormatOptions. 显式数字格式；未指定精度时不因聚焦/失焦丢弃外部数值精度。
 
@@ -98,19 +97,29 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/number-field/demos/02-sizes.tsx
+### 密度
+Source: apps/docs/src/content/number-field/demos/02-density.tsx
 ```tsx
 import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" } satisfies DemoMeta;
-const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
+export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    {sizes.map(size => <Field key={size}><FieldLabel>{size}</FieldLabel><NumberField size={size} defaultValue={0}><NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup></NumberField></Field>)}
-  </FieldGroup>;
+  return (
+    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "并发上限" : "重试次数"}</FieldLabel>
+            <NumberField defaultValue={3}>
+              <NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup>
+            </NumberField>
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
 }
 ```

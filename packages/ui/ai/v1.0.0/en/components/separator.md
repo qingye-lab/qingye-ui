@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
-Source SHA-256: 050cdccb70cb4d1d342f31fb6721107b46497f2ad1baaf444270cc082555a103
+Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
 
 Express a boundary between content groups as a semantic separator or decorative line.
 

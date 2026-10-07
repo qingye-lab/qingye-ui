@@ -3,7 +3,7 @@
 Package: @qingye/ui@1.0.0
 Import: @qingye/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: 703471aef9cb0db0fcc831071e07e2039c5cc11e6b685d336bca4cc8e623ec62
+Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91
 
 立即改变当前设置的开/关状态。
 
@@ -36,7 +36,6 @@ Source SHA-256: 703471aef9cb0db0fcc831071e07e2039c5cc11e6b685d336bca4cc8e623ec62
 - Switch: function; owner switch; PASS; props: SwitchProps
 - SwitchPrimitive: reexport; owner switch; UNVERIFIED
 - SwitchProps: type; owner switch; PASS
-- SwitchSize: type; owner switch; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
@@ -50,7 +49,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 保持名称稳定，用 aria-checked 表达开与关。
 - checked / defaultChecked: boolean. 受控设置值或非受控初值。
 - onCheckedChange: (checked, eventDetails) => void. 立即设置的变化入口；请求与持久化由应用承担。
-- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 同名文字行高决定轨道高；宽为其两倍。
 - disabled / readOnly: boolean; default false. 禁用不参与 Tab/提交；只读仍可聚焦、提交但不可改变。
 - aria-invalid: boolean | 'true' | 'false'. 调用方或 Field 声明无效，保留当前开/关事实。
 - name / value / uncheckedValue / form: string. 原语隐藏输入的提交入口；不代表必须等待表单提交才生效。
@@ -106,23 +104,21 @@ export default function Demo() {
 }
 ```
 
-### 尺寸
-Source: apps/docs/src/content/switch/demos/02-sizes.tsx
+### 跟随标签
+Source: apps/docs/src/content/switch/demos/02-labels.tsx
 ```tsx
 import { Field, FieldContent, FieldLabel } from "@qingye/ui/components/field";
 import { Switch } from "@qingye/ui/components/switch";
 
-export const meta = { title: "尺寸", titleEn: "Sizes" };
+export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
+// 开关的轨道高度跟随相邻标签的文字档；密度与容器高度都不改它。
 export default function Demo() {
   return (
-    <div className="grid gap-(--qy-field-group-gap)">
-      {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
-        <Field key={size} orientation="horizontal">
-          <Switch size={size} />
-          <FieldContent><FieldLabel>{size}</FieldLabel></FieldContent>
-        </Field>
-      ))}
+    <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
+      <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><FieldLabel>显示网格</FieldLabel></FieldContent></Field>
+      <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><FieldLabel className="text-support">跟随紧凑标签</FieldLabel></FieldContent></Field>
+      <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><span className="text-reading">说明性文字，轨道与它同高</span></FieldContent></Field>
     </div>
   );
 }

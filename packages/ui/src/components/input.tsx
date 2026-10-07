@@ -8,10 +8,9 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
-export type InputSize = "xs" | "sm" | "md" | "lg" | "xl";
 export type InputProps = Omit<InputPrimitive.Props, "size"> & React.RefAttributes<HTMLInputElement> & {
-  /** 控件位置对应的档案；数字保留原生 input.size 的字符宽度含义。 */
-  size?: InputSize | number;
+  /** 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。 */
+  size?: number | undefined;
   /** 编辑边界的样式入口；className / style / render 始终属于真实输入。 */
   controlClassName?: string;
   /** 由 InputGroup 提供共同边界时使用，不移除输入几何和原生语义。 */
@@ -31,28 +30,13 @@ export type InputProps = Omit<InputPrimitive.Props, "size"> & React.RefAttribute
   showLabel?: string;
 };
 
-const textProfiles: Record<InputSize, string> = {
-  xs: "text-control-xs-mobile sm:text-control-xs",
-  sm: "text-control-sm-mobile sm:text-control-sm",
-  md: "text-control-md-mobile sm:text-control-md",
-  // 基础层 §2、§8：每档使用同名的文字档，与 Button 一致。`lg` 曾取 `md` 的文字档，
-  // 多出的 4px 高度全部变成纵向空白（每侧 6→8px，文字占比 62.5%→55.6%），
-  // 低于 `xl`。纵向内距由 token 按同一 leading 推导，两者必须同时改。
-  lg: "text-control-lg-mobile sm:text-control-lg",
-  xl: "text-control-xl-mobile sm:text-control-xl",
-};
-
-// 基础层 §1/§2/§8：档案只接线既有几何与文字角色，不在组件内新定尺寸。
-function profileVariables(size: InputSize): React.CSSProperties {
-  return {
-    "--qy-input-height": `var(--qy-control-${size})`,
-    ...(size === "xs" || size === "sm" ? { "--qy-radius-control": `var(--qy-radius-${size})` } : {}),
-    "--qy-input-height-narrow": `var(--qy-control-${size}-narrow)`,
-    "--qy-input-padding": `var(--qy-control-${size}-padding-bordered)`,
-    "--qy-input-icon": `var(--qy-control-${size}-icon)`,
-    "--qy-input-icon-narrow": `var(--qy-control-${size}-icon-narrow)`,
-  } as React.CSSProperties;
-}
+/**
+ * 基础层 §2/§8、用户裁决 2026-10-05：填值控件只有一套几何，跟随密度轴；
+ * 值文字始终是正文字号。角色层在 tokens/components.css 定义，组件只读角色。
+ * 用 `text-control-md[-mobile]` 是**取正文尺寸的既有文字档**，不是「选了 md 档」：
+ * 值与选项是内容，字号不随容器高度变化。紧凑密度只改几何 token，不改这里。
+ */
+const textProfile = "text-control-md-mobile sm:text-control-md";
 
 /** 原生出口仍保留 render、样式状态函数和事件组合；不注册第二个 FieldControl。 */
 function NativeInput({ ref, className, style, render, onValueChange, ...props }: InputPrimitive.Props & React.RefAttributes<HTMLInputElement>): React.ReactElement {
@@ -114,7 +98,7 @@ function NativeInput({ ref, className, style, render, onValueChange, ...props }:
 }
 
 export function Input({
-  size = "md",
+  size,
   className,
   controlClassName,
   unstyled = false,
@@ -137,7 +121,6 @@ export function Input({
   const { messages } = useUILocale();
   const generatedId = React.useId();
   const inputId = id ?? generatedId;
-  const profile = typeof size === "number" ? "md" : size;
   const inputRef = React.useRef<HTMLInputElement | null>(null);
   const [observedValue, setObservedValue] = React.useState(String(props.defaultValue ?? ""));
   const [uncontrolledVisible, setUncontrolledVisible] = React.useState(defaultVisible);
@@ -195,7 +178,8 @@ export function Input({
     id: inputId,
     ref: setInputRef,
     type: password && visible ? "text" : type,
-    size: typeof size === "number" ? size : undefined,
+    // 原生字符宽度属性原样透传；它不参与呈现，几何来自填值控件角色层。
+    size,
     "data-slot": (props as InputPrimitive.Props & { "data-slot"?: string })["data-slot"] ?? "input",
     onChange: (event) => { onChange?.(event); setObservedValue(event.currentTarget.value); },
     onKeyDown: (event) => {
@@ -207,40 +191,47 @@ export function Input({
       clear();
     },
     className: (state) => cn(
-      "col-start-2 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-input-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
-      textProfiles[profile],
+      "col-start-2 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
+      textProfile,
       type === "search" && "[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none",
       password && "[&::-ms-reveal]:hidden",
-      type === "file" && "file:bg-transparent file:text-foreground file:[font:inherit]",
+      // 基础层 §1、§8：带前置图标时，图标与文字的关系同按钮内图标与文字，用控件内间隔。
+      type === "search" && "ps-(--qy-control-content-gap)",
+      // 平台文件选择没有可设置的垂直对齐；行高取边框内高度让两段文字居中。按钮名称是动作，文件名是结果。
+      type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2px)] sm:leading-[calc(var(--qy-fill-height)-2px)] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",
       typeof className === "function" ? className(state) : className,
     ),
   };
   // 基础层 §15：这些动作按钮与输入框共用同一条外边界，外描边会越过它 —
   // 用户的明确要求是「控件外面不出现任何一圈」。信号因此落在按钮自己的盒内。
-  const actionClassName = "relative qy-pressable touch-target row-start-1 flex shrink-0 items-center justify-center self-stretch rounded-[max(0px,calc(var(--qy-radius-control)-1px))] bg-transparent text-muted-foreground outline-none hover:bg-accent hover:text-foreground active:bg-accent focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-64 [&_svg]:size-(--qy-input-icon-narrow) sm:[&_svg]:size-(--qy-input-icon)";
+  const actionClassName = "relative qy-pressable touch-target row-start-1 flex shrink-0 items-center justify-center self-stretch rounded-[max(0px,calc(var(--qy-fill-radius)-1px))] bg-transparent text-muted-foreground outline-none hover:bg-accent hover:text-foreground active:bg-accent focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-64 [&_svg]:size-(--qy-fill-icon-narrow) sm:[&_svg]:size-(--qy-fill-icon)";
 
   return (
     <div
       data-slot="input-control"
-      data-size={profile}
       data-readonly={blocked.readOnly ? "" : undefined}
       className={cn(
         // 基础层 §5/§15：真实边框标出编辑范围；仅已声明 aria-invalid=true 才进入错误色。
         "relative grid w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center",
         unstyled
-          ? "min-h-[calc(var(--qy-input-height-narrow)-2px)] sm:min-h-[calc(var(--qy-input-height)-2px)] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]"
-          : "min-h-(--qy-input-height-narrow) sm:min-h-(--qy-input-height) pointer-coarse:min-h-(--qy-touch-target)",
-        !unstyled && "rounded-control border border-input bg-card text-foreground transition-[border-color,box-shadow,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring has-[input:disabled]:opacity-64 not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground dark:bg-surface-inset",
-        !unstyled && blocked.readOnly && "border-dashed",
+          ? "min-h-[calc(var(--qy-fill-height-narrow)-2px)] sm:min-h-[calc(var(--qy-fill-height)-2px)] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]"
+          : "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height) pointer-coarse:min-h-(--qy-touch-target)",
+        !unstyled && "rounded-(--qy-fill-radius) border border-input bg-card text-foreground transition-[border-color,box-shadow,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground dark:bg-surface-inset",
+        /* 基础层 §5、§9（2026-10-05 打磨）：**只读与禁用互换视觉职责**。
+         *  只读 = 不能在这里编辑，但内容照常阅读、选取、复制 → 保留正常底与边界，
+         *    只把编辑的暗示去掉（值仍是前景色），旁边给「只读」说明。
+         *  禁用 = 当前不可操作 → 改用不活跃的承载面，文字降为辅助色。
+         * 打磨前两者反了：只读用灰底（读起来像「坏了」），禁用反而近白底。 */
+        !unstyled && "has-[input:disabled]:bg-surface-inset has-[input:disabled]:text-muted-foreground has-[input:disabled]:border-border",
+        !unstyled && blocked.readOnly && "border-border",
         controlClassName,
       )}
-      style={profileVariables(profile)}
     >
-      {type === "search" ? <span className="col-start-1 row-start-1 ps-(--qy-input-padding) text-muted-foreground" data-slot="input-search-icon"><SearchIcon aria-hidden="true" className="size-(--qy-input-icon-narrow) sm:size-(--qy-input-icon)" /></span> : null}
+      {type === "search" ? <span className="col-start-1 row-start-1 ps-(--qy-fill-padding) text-muted-foreground" data-slot="input-search-icon"><SearchIcon aria-hidden="true" className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" /></span> : null}
       {nativeInput ? <NativeInput {...inputProps} /> : <InputPrimitive {...inputProps} />}
       {(canClear || showVisibility || (blocked.readOnly && !unstyled)) ? (
         <span data-slot="input-adjuncts" className="col-start-3 row-start-1 flex self-stretch items-center">
-          {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="pe-(--qy-input-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
+          {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="pe-(--qy-fill-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
           {canClear ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-clear" aria-label={clearLabel ?? (type === "search" ? messages.clearSearch : messages.inputClear)} onClick={clear}><XIcon aria-hidden="true" /></button> : null}
           {showVisibility ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-visibility" aria-controls={inputId} aria-label={showLabel ?? messages.showPassword} aria-pressed={visible} disabled={blocked.disabled} onClick={() => { if (inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return; const next = !visible; if (visibleProp === undefined) setUncontrolledVisible(next); onVisibleChange?.(next); }}>
             {visible ? <EyeOffIcon aria-hidden="true" /> : <EyeIcon aria-hidden="true" />}
