@@ -1,1 +1,0 @@
-import{j as t}from"./vendor-react-DkPWdm9N.js";import{I as o}from"./input-B9dGVqBj.js";import"./index-Bp3wbe0b.js";import"./vendor-CtnXKZlY.js";import"./vendor-date-j_bVFt3w.js";import"./vendor-base-ui-NEp_fldd.js";const s={title:"默认"};function l(){return t.jsx(o,{"aria-label":"设备名称",className:"max-w-xs",placeholder:"例如：3 号楼东侧摄像头"})}export{l as default,s as meta};

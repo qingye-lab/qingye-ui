@@ -1,1 +1,0 @@
-import{j as t}from"./vendor-react-DkPWdm9N.js";import{e as s}from"./index-Bp3wbe0b.js";import{av as a}from"./vendor-base-ui-NEp_fldd.js";function x({className:o,...r}){return t.jsx(a,{className:s("flex flex-col items-start gap-3",o),"data-slot":"checkbox-group",...r})}export{x as C};

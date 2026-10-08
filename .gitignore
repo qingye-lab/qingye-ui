@@ -7,9 +7,15 @@ dist/
 .vite/
 coverage/
 apps/docs/dist/
+apps/docs/dist-debug/
 .playwright/
 test-results/
 
 # Playwright CLI session logs and browser output (probe scratch)
 .playwright-cli/
 output/
+
+# Local agent and design-tool state
+.claude/
+.impeccable/
+apps/docs/.impeccable/
