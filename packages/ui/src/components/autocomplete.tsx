@@ -1,7 +1,7 @@
 "use client";
 
 import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
-import { ChevronDownIcon, XIcon } from "lucide-react";
+import { IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { useFloatingLayer } from "../floating-layer";
@@ -30,13 +30,13 @@ export function AutocompleteTrigger({ render, children, ...props }: Autocomplete
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <ChevronDownIcon aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
+  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
 }
 export function AutocompleteClear({ render, children, ...props }: AutocompletePrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <XIcon aria-hidden="true" />}</AutocompletePrimitive.Clear>;
+  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
 }
 export type AutocompletePopupProps = AutocompletePrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: AutocompletePrimitive.Portal.Props["container"]; positionerProps?: AutocompletePrimitive.Positioner.Props };
 export function AutocompletePopup({ container, positionerProps, className, ...props }: AutocompletePopupProps) {

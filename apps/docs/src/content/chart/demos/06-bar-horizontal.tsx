@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "排行：横向柱", titleEn: "Ranking: horizontal bars" };
 const sources = [["接入设备", 1284], ["权限与角色", 42], ["同步与导出", 0], ["操作记录", 90512], ["回调地址", 6]] as const;
 export default function Demo() {

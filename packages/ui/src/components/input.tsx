@@ -3,7 +3,7 @@
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { EyeIcon, EyeOffIcon, SearchIcon, XIcon } from "lucide-react";
+import { IconEye, IconEyeOff, IconSearch, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -227,14 +227,14 @@ export function Input({
         controlClassName,
       )}
     >
-      {type === "search" ? <span className="col-start-1 row-start-1 ps-(--qy-fill-padding) text-muted-foreground" data-slot="input-search-icon"><SearchIcon aria-hidden="true" className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" /></span> : null}
+      {type === "search" ? <span className="col-start-1 row-start-1 ps-(--qy-fill-padding) text-muted-foreground" data-slot="input-search-icon"><IconSearch aria-hidden="true" className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" /></span> : null}
       {nativeInput ? <NativeInput {...inputProps} /> : <InputPrimitive {...inputProps} />}
       {(canClear || showVisibility || (blocked.readOnly && !unstyled)) ? (
         <span data-slot="input-adjuncts" className="col-start-3 row-start-1 flex self-stretch items-center">
           {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="pe-(--qy-fill-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
-          {canClear ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-clear" aria-label={clearLabel ?? (type === "search" ? messages.clearSearch : messages.inputClear)} onClick={clear}><XIcon aria-hidden="true" /></button> : null}
+          {canClear ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-clear" aria-label={clearLabel ?? (type === "search" ? messages.clearSearch : messages.inputClear)} onClick={clear}><IconX aria-hidden="true" /></button> : null}
           {showVisibility ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-visibility" aria-controls={inputId} aria-label={showLabel ?? messages.showPassword} aria-pressed={visible} disabled={blocked.disabled} onClick={() => { if (inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return; const next = !visible; if (visibleProp === undefined) setUncontrolledVisible(next); onVisibleChange?.(next); }}>
-            {visible ? <EyeOffIcon aria-hidden="true" /> : <EyeIcon aria-hidden="true" />}
+            {visible ? <IconEyeOff aria-hidden="true" /> : <IconEye aria-hidden="true" />}
           </button> : null}
         </span>
       ) : null}

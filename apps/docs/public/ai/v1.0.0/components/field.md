@@ -1,7 +1,7 @@
 # 字段 Field
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/field
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: 4f3e1980271449013140a6fefb8c901af3205262a643cbce344ed7df67e1676e
 
@@ -102,8 +102,8 @@ Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldP
 ### 标签与说明
 Source: apps/docs/src/content/field/demos/01-default.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "标签与说明", titleEn: "Label and description" };
 
@@ -116,9 +116,9 @@ export default function Demo() {
 Source: apps/docs/src/content/field/demos/02-validation.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "校验", titleEn: "Validation" };
 
@@ -141,8 +141,8 @@ export default function Demo() {
 ### 横向组合
 Source: apps/docs/src/content/field/demos/03-horizontal.tsx
 ```tsx
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "横向组合", titleEn: "Horizontal composition" };
 
@@ -154,9 +154,9 @@ export default function Demo() {
 ### 字段组
 Source: apps/docs/src/content/field/demos/04-group.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "字段组", titleEn: "Field groups" };
 
@@ -175,8 +175,8 @@ export default function Demo() {
 Source: apps/docs/src/content/field/demos/05-title.tsx
 ```tsx
 import { useId } from "react";
-import { Field, FieldDescription, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "标题与自命名控件", titleEn: "Title and self-named control" };
 
@@ -195,8 +195,8 @@ export default function Demo() {
 Source: apps/docs/src/content/field/demos/06-errors.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 export const meta = { title: "错误列表", titleEn: "Error list" };
 export default function Demo() {
   const [value, setValue] = useState("2026");
@@ -208,8 +208,8 @@ export default function Demo() {
 ### 禁用
 Source: apps/docs/src/content/field/demos/07-disabled.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "禁用", titleEn: "Disabled" };
 

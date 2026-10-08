@@ -1,4 +1,4 @@
-import { Prose } from "@qingye/ui/components/prose";
+import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "代码块、表格与任务清单", titleEn: "Code blocks, tables and task lists" } satisfies DemoMeta;
 export default function Demo() {

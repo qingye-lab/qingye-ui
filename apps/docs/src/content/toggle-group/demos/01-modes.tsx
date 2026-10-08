@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
-import { Field, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { Field, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 
 export const meta = { title: "单选与多选", titleEn: "Single and multiple" };
 export default function Demo() {

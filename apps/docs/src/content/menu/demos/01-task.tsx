@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye/ui/components/menu";
-import { Inline, Stack } from "@qingye/ui/components/layout";
+import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye_lab/ui/components/menu";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "当前条目的命令", titleEn: "Commands for the current item" } satisfies DemoMeta;
 export default function Demo() {

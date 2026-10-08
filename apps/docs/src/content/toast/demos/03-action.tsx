@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "操作", titleEn: "Action" };
 

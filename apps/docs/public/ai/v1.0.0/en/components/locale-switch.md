@@ -1,7 +1,7 @@
 # Locale switch
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/locale-switch
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 
@@ -34,7 +34,7 @@ Request an application locale change and show the current Provider value.
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -53,10 +53,10 @@ Uses NativeSelect; UILocaleProvider alone supplies the current value.
 Source: apps/docs/src/content/locale-switch/demos/01-provider.tsx
 ```tsx
 import { useState } from "react";
-import { CopyButton } from "@qingye/ui/components/copy-button";
-import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
+import { LocaleSwitch } from "@qingye_lab/ui/components/locale-switch";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 export const meta = { title: "当前语言", titleEn: "Current locale" };
 export default function Demo() {
   const [locale, setLocale] = useState(zhCN);
@@ -68,9 +68,9 @@ export default function Demo() {
 Source: apps/docs/src/content/locale-switch/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
-import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { LocaleSwitch } from "@qingye_lab/ui/components/locale-switch";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 
 export const meta = { title: "密度与禁用", titleEn: "Density and disabled" };
 

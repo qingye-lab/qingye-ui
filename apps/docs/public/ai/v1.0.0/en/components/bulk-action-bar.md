@@ -1,9 +1,9 @@
 # BulkActionBar
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/bulk-action-bar
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
-Source SHA-256: f200a4d74d3714395c9e0b80ce2bae27edfb3d8d4bf7764ae5a88475e273d502
+Source SHA-256: c8f48a1a7981e1ff7c53d581e28d26e19a61e2cefe8ff78b049d7fd50c78ae35
 
 Shared actions with explicit targets, versions and scope.
 
@@ -44,7 +44,7 @@ Targets and scope are required; execution receives the current target/version sn
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -67,9 +67,9 @@ Related actions and selection clearing.
 Source: apps/docs/src/content/bulk-action-bar/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye/ui/components/bulk-action-bar";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Inline, Stack } from "@qingye/ui/components/layout";
+import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye_lab/ui/components/bulk-action-bar";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "对象与当前版本", titleEn: "Targets and current versions" } satisfies DemoMeta;
 export default function Demo() {

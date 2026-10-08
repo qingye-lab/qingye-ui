@@ -1,7 +1,7 @@
 # 滑块 Slider
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/slider
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 06f82f20353a0b0d5c28462653c250eef347cd8d1a277812a3f7f49b4aec25d4
 
@@ -95,10 +95,10 @@ Base UI Slider 原语命名空间。
 Source: apps/docs/src/content/slider/demos/01-values.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye/ui/components/number-field";
-import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye/ui/components/slider";
-import { Inline } from "@qingye/ui/components/layout";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
+import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
 
@@ -146,8 +146,8 @@ export default function Demo() {
 ### 状态与方向
 Source: apps/docs/src/content/slider/demos/02-states.tsx
 ```tsx
-import { Field, FieldError, FieldGroup } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "@qingye/ui/components/slider";
+import { Field, FieldError, FieldGroup } from "@qingye_lab/ui/components/field";
+import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "@qingye_lab/ui/components/slider";
 
 export const meta = { title: "状态与方向", titleEn: "States and orientation" };
 const control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>;
@@ -164,8 +164,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/slider/demos/03-density.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from "@qingye/ui/components/slider";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from "@qingye_lab/ui/components/slider";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

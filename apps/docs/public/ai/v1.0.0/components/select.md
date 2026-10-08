@@ -1,9 +1,9 @@
 # 选择器 Select
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/select
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: bcd61db277cc04554f93a2726bdf140efe7c15e9b427ba2197f7b32b07be98da
+Source SHA-256: f3eedd535ff725a4488564bf2ab329a9a14c8791ab17e1580a8e674af87f9abc
 
 从可收起的候选列表中取一个值。
 
@@ -52,7 +52,7 @@ Source SHA-256: bcd61db277cc04554f93a2726bdf140efe7c15e9b427ba2197f7b32b07be98da
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -108,8 +108,8 @@ Portal、定位、面板与可滚动 List 的共同组合。
 ### 密度
 Source: apps/docs/src/content/select/demos/01-density.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
 
 export const meta = { title: "密度", titleEn: "Density" };
 
@@ -144,8 +144,8 @@ export default function Demo() {
 Source: apps/docs/src/content/select/demos/02-states.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Select, SelectGroup, SelectGroupLabel, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectGroup, SelectGroupLabel, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye_lab/ui/components/select";
 
 export const meta = { title: "状态与分组", titleEn: "States and groups" };
 

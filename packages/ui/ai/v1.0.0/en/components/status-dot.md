@@ -1,9 +1,9 @@
 # StatusDot
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/status-dot
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
-Source SHA-256: 590294f7c1634e157f5983792a592ef5adc93c77bc60336e2b45e01fe3b43227
+Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
 
 A state graphic and its visible name.
 
@@ -50,8 +50,8 @@ Default names use locale; label may identify a specific object. The glyph is not
 ### 状态
 Source: apps/docs/src/content/status-dot/demos/01-states.tsx
 ```tsx
-import { StatusDot } from "@qingye/ui/components/status-dot";
-import { Inline } from "@qingye/ui/components/layout";
+import { StatusDot } from "@qingye_lab/ui/components/status-dot";
+import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "状态", titleEn: "States" };
 export default function Demo() { return <Inline>{(["online","offline","pending","in-progress","unknown","warning","error"] as const).map(status => <StatusDot key={status} status={status} />)}</Inline>; }
 ```

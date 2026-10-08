@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 export const meta = { title: "错误列表", titleEn: "Error list" };
 export default function Demo() {
   const [value, setValue] = useState("2026");

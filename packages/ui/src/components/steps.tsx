@@ -3,7 +3,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { useUILocale } from "../locale";
-import { CheckIcon, XIcon } from "lucide-react";
+import { IconCheck, IconX } from "@tabler/icons-react";
 import { threadClassName } from "../thread";
 import { cn } from "../utils";
 
@@ -40,7 +40,11 @@ export function Step({ state, render, className, children, ...props }: StepProps
       state === "complete" ? "after:bg-foreground" : "after:bg-border",
       className),
     children: <>
-      <span aria-hidden="true" data-slot="step-marker" className={cn("inline-flex size-(--qy-cai) items-center justify-center rounded-full text-dense numeric [&_svg]:size-3", marker[state])}>{state === "complete" ? <CheckIcon strokeWidth={2.5} /> : state === "error" ? <XIcon strokeWidth={2.5} /> : null}</span>
+      {/* 骨法用笔：全局一律用 Tabler 默认 stroke=2（24 视盒），在本库图标档位
+          14–20px 上渲染约 1.17–1.67px，线宽落在同一墨阶区间，不逐处设置。
+          此处是唯一例外：12px 的极小对勾/叉号若仍用 stroke=2 会渲染约 1px，
+          在 20px 圆内过细难辨；stroke=2.5 在 12px 下渲染约 1.25px，回到同一区间。 */}
+      <span aria-hidden="true" data-slot="step-marker" className={cn("inline-flex size-(--qy-cai) items-center justify-center rounded-full text-dense numeric [&_svg]:size-3", marker[state])}>{state === "complete" ? <IconCheck stroke={2.5} /> : state === "error" ? <IconX stroke={2.5} /> : null}</span>
       <div className="min-w-0">{children}</div>
       <span data-slot="step-state" className="sr-only">{label}</span>
     </> }, props) });

@@ -1,5 +1,5 @@
-import { Field, FieldControl, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Field, FieldControl, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "字段错误", titleEn: "Field error" };
 export default function Demo() {

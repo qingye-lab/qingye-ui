@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "一眼占比：环形", titleEn: "At-a-glance share: donut" };
 export default function Demo() {
   return <Chart type="donut" className="w-full max-w-xs" label="本周记录来源占比" categoryLabel="周" valueLabel="记录数"

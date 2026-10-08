@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 
 export const meta = { title: "方向与禁用", titleEn: "Orientation and disabled" };
 export default function Demo() {

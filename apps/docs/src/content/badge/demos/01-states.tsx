@@ -1,5 +1,5 @@
-import { Badge } from "@qingye/ui/components/badge";
-import { Inline } from "@qingye/ui/components/layout";
+import { Badge } from "@qingye_lab/ui/components/badge";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "标记", titleEn: "Markers" };
 

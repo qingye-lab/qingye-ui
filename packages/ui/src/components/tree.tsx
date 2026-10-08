@@ -1,7 +1,7 @@
 "use client";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { CheckIcon, ChevronRightIcon, MinusIcon } from "lucide-react";
+import { IconCheck, IconChevronRight, IconMinus } from "@tabler/icons-react";
 import * as React from "react";
 import { Button } from "./button";
 import { useUILocale } from "../locale";
@@ -42,7 +42,7 @@ function CheckMarker({ state, dim }: { state: TreeCheckedState; dim: boolean }) 
       isChecked ? "border-transparent bg-primary text-primary-foreground" : "border-input bg-card dark:bg-surface-inset",
       dim && "opacity-64",
     )}
-  >{state === "mixed" ? <MinusIcon aria-hidden="true" className="size-3/4" /> : state === true ? <CheckIcon aria-hidden="true" className="size-3/4" /> : null}</span>;
+  >{state === "mixed" ? <IconMinus aria-hidden="true" className="size-3/4" /> : state === true ? <IconCheck aria-hidden="true" className="size-3/4" /> : null}</span>;
 }
 export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedChange, selectedId, defaultSelectedId = null, onSelectionChange, selectable = true, checkable = false, checkedIds, defaultCheckedIds = [], onCheckedChange, disabled = false, emptyContent, render, ref, className, onFocusCapture, onBlurCapture, ...props }: TreeProps) {
   const { messages } = useUILocale();
@@ -130,7 +130,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       const checkDim = checkable && (isDisabled || (branch && collectLeaves(node).every(leaf => leaf.disabled)));
       return <li key={node.id} data-slot="tree-item" role="treeitem" aria-label={node.label} aria-level={level} aria-expanded={branch ? open : undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
         <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selected === node.id && selectable && "bg-(--qy-surface-active)", isDisabled && "opacity-64")}>
-          {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-label={`${open ? messages.collapse : messages.expand} ${node.label}`} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><ChevronRightIcon aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
+          {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-label={`${open ? messages.collapse : messages.expand} ${node.label}`} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><IconChevronRight aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
           {checkable && <CheckMarker state={checkState} dim={Boolean(checkDim)} />}
           <span data-slot="tree-label" className="min-w-0 text-body wrap-anywhere">{node.label}</span>
         </div>
@@ -139,5 +139,5 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       </li>;
     });
   }
-  return useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-multiselectable": checkable || undefined, "aria-disabled": disabled || undefined, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) ownsFocus.current = false; onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: nodes.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? messages.treeEmpty}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
+  return useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-disabled": disabled || undefined, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) ownsFocus.current = false; onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: nodes.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? messages.treeEmpty}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
 }

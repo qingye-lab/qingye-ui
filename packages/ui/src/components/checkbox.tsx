@@ -1,7 +1,7 @@
 "use client";
 
 import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
-import { CheckIcon, MinusIcon } from "lucide-react";
+import { IconCheck, IconMinus } from "@tabler/icons-react";
 import * as React from "react";
 import { cn } from "../utils";
 
@@ -30,8 +30,8 @@ export function Checkbox({ children, className, style, ...props }: CheckboxProps
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
   >{children ?? <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="pointer-events-none flex size-full items-center justify-center"
     render={(indicatorProps, state) => <span {...indicatorProps}>{state.indeterminate
-      ? <MinusIcon aria-hidden="true" className="size-3/4" />
-      : <CheckIcon aria-hidden="true" className="size-3/4" />}</span>}
+      ? <IconMinus aria-hidden="true" className="size-3/4" />
+      : <IconCheck aria-hidden="true" className="size-3/4" />}</span>}
   />}</CheckboxPrimitive.Root>;
 }
 

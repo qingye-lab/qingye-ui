@@ -1,9 +1,9 @@
 # Table
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/table
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: c402b617d2d1c92bd68ca35a2f2f95e81719ba7e92e5015281a8204d91b1c91e
+Source SHA-256: d6deb800c9b45381c226153c0ba491a2a63f34a53a04f233a97cc3a203310c7f
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -84,8 +84,8 @@ A td that preserves zero.
 Source: apps/docs/src/content/table/demos/01-comparison.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "比较与排序", titleEn: "Comparison and sorting" } satisfies DemoMeta;
 // 列都是同一种量纲（像素与条数），行是真实对象，不是甲乙丙。

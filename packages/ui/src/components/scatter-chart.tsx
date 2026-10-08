@@ -4,8 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { CartesianGrid, Scatter, ScatterChart as RechartsScatterChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import * as React from "react";
-import { AxisTick, chartFrameClassName, MARK, MARKERS, Marker, PLOT_PRESETS, type ChartMarker, type ChartStyle } from "./chart";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "./collapsible";
+import { AxisTick, ChartHeader, chartFrameClassName, legendClassName, useChartData, MARK, MARKERS, Marker, PLOT_PRESETS, type ChartMarker, type ChartStyle } from "./chart";
 import { Empty } from "./empty";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { useUILocale } from "../locale";
@@ -85,10 +84,10 @@ function niceScale(values: readonly number[], count = 5) {
 
 export function ScatterChart({ label, state = "ready", render, ref, className, style, ...props }: ScatterChartProps) {
   if (!label.trim()) throw new Error("ScatterChart requires a nonempty accessible label.");
-  const titleId = React.useId();
+  const titleId = React.useId(); const dataView = useChartData();
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
-  let content: React.ReactNode;
+  let content: React.ReactNode; let legend: React.ReactNode = null;
   const { xLabel, yLabel, series, formatX, formatY, children, ...native } = props as Omit<ScatterBaseProps, "label"> & Partial<Extract<ScatterChartProps, { state?: "ready" }>> & { children?: React.ReactNode };
   if (state !== "ready") content = <Empty state={state}>{children}</Empty>;
   else {
@@ -107,8 +106,8 @@ export function ScatterChart({ label, state = "ready", render, ref, className, s
     const xs = allPoints.map(point => point.x), ys = allPoints.map(point => point.y);
     const x = niceScale(xs), y = niceScale(ys);
     const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + 8;
+    legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
     content = <>
-      {!single && <ul data-slot="chart-legend" className="flex min-w-0 flex-wrap gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) text-support">{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>}
       <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
       <div data-slot="chart-plot" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
         <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: MARK, right: MARK, bottom: 0, left: 0 }}>
@@ -120,23 +119,18 @@ export function ScatterChart({ label, state = "ready", render, ref, className, s
         </RechartsScatterChart></ResponsiveContainer>
       </div>
       <div data-slot="chart-category-axis" className="min-w-0 text-end text-dense text-muted-foreground wrap-anywhere">{xLabel}</div>
-      <Collapsible data-slot="chart-data">
-        <CollapsibleTrigger className="text-support text-muted-foreground">{messages.chartData}</CollapsibleTrigger>
-        <CollapsiblePanel>
-          <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead>{xLabel}</TableHead><TableHead>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
+      {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead>{xLabel}</TableHead><TableHead>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
             {projected.flatMap(item => item.points.map(point => <TableRow key={`${item.key}:${point.id}`}>
               <TableHead scope="row">{single ? point.label : `${item.label} · ${point.label}`}</TableHead>
               <TableCell className="numeric">{showX(point.x)}</TableCell>
               <TableCell className="numeric">{showY(point.y)}</TableCell>
             </TableRow>))}
-          </TableBody></Table></TableContainer>
-        </CollapsiblePanel>
-      </Collapsible>
+          </TableBody></Table></TableContainer></div>}
     </>;
   }
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
     "data-slot": "scatter-chart", "data-state": state, "aria-labelledby": titleId,
     className: cn(chartFrameClassName, className),
-    style: { ...PLOT_PRESETS, ...style }, children: <><figcaption id={titleId} className="mb-(--qy-field-gap) min-w-0 text-heading wrap-anywhere">{label}</figcaption>{content}</>,
+    style: { ...PLOT_PRESETS, ...style }, children: <><ChartHeader titleId={titleId} label={label} legend={legend} toggle={state === "ready" ? dataView.toggle : undefined} />{content}</>,
   }) });
 }

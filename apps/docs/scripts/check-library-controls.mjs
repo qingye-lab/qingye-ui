@@ -12,7 +12,7 @@ const controls = new Map([
   ["label", "Label / FieldLabel"], ["progress", "Progress"], ["meter", "Meter"],
   ["details", "Collapsible"], ["summary", "CollapsibleTrigger"], ["dialog", "Dialog"],
 ]);
-const isLibrary = (module) => module === "@qingye/ui" || module.startsWith("@qingye/ui/");
+const isLibrary = (module) => module === "@qingye_lab/ui" || module.startsWith("@qingye_lab/ui/");
 const openingOf = (node) => ts.isJsxElement(node) ? node.openingElement : ts.isJsxSelfClosingElement(node) ? node : undefined;
 const hasAttribute = (node, name) => node.attributes.properties.some((attribute) => ts.isJsxAttribute(attribute) && attribute.name.getText() === name);
 
@@ -34,7 +34,7 @@ export function inspectLibraryControls(source, file = "source.tsx") {
   const libraryNames = new Set();
   const libraryNamespaces = new Set();
   const buttonNames = new Set();
-  const nativeSelectNames = new Set();
+  const nativeSelectNames = new Set(); const proseNames = new Set();
   const routeLinks = new Set();
   for (const node of ast.statements) {
     if (!ts.isImportDeclaration(node) || !ts.isStringLiteral(node.moduleSpecifier) || node.importClause?.isTypeOnly) continue;
@@ -50,12 +50,18 @@ export function inspectLibraryControls(source, file = "source.tsx") {
         libraryNames.add(binding.name.text);
         if (exported === "Button") buttonNames.add(binding.name.text);
         if (exported === "NativeSelect") nativeSelectNames.add(binding.name.text);
+        if (exported === "Prose") proseNames.add(binding.name.text);
       }
       if ((module === "react-router-dom" || module === "react-router") && exported === "Link") routeLinks.add(binding.name.text);
     }
   }
   const isLibraryTag = (name) => libraryNames.has(name) || libraryNamespaces.has(name.split(".")[0]);
   const isNativeSelect = name => nativeSelectNames.has(name) || (libraryNamespaces.has(name.split(".")[0]) && name.split(".").slice(1).join(".") === "NativeSelect");
+  // 长文里的任务勾选框与折叠块是 Markdown 渲染出的内容，不是网站另造的控件：只在 Prose 之内、只这几种标签（input、details 与其 summary）豁免。
+  function inProse(node) {
+    for (let parent = node.parent; parent; parent = parent.parent) if (ts.isJsxElement(parent) && proseNames.has(parent.openingElement.tagName.getText(ast))) return true;
+    return false;
+  }
   function inNativeSelect(node) {
     for (let parent = node.parent; parent; parent = parent.parent) {
       if (!ts.isJsxElement(parent)) continue;
@@ -74,7 +80,7 @@ export function inspectLibraryControls(source, file = "source.tsx") {
     if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
       const tag = node.tagName.getText(ast);
       const replacement = controls.get(tag);
-      if (replacement && !((tag === "option" || tag === "optgroup") && inNativeSelect(node))) {
+      if (replacement && !((tag === "option" || tag === "optgroup") && inNativeSelect(node)) && !((tag === "input" || tag === "details" || tag === "summary") && inProse(node))) {
         const owner = renderOwner(node);
         if (owner && isLibraryTag(owner.tagName.getText(ast))) renderPrimitives += 1;
         else violations.push({ file, line: ast.getLineAndCharacterOfPosition(node.getStart(ast)).line + 1, message: `Use ${replacement} for <${tag}>; native controls are allowed only as a library render root.` });

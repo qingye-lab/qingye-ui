@@ -1,7 +1,7 @@
-import { Card } from "@qingye/ui/components/card";
-import { Button } from "@qingye/ui/components/button";
-import { Input } from "@qingye/ui/components/input";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export default function FocusFallback() {
   return (

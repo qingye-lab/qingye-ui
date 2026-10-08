@@ -1,6 +1,6 @@
-import { Button } from "@qingye/ui/components/button";
-import { Card } from "@qingye/ui/components/card";
-import { useTheme } from "@qingye/ui/components/theme-provider";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Card } from "@qingye_lab/ui/components/card";
+import { useTheme } from "@qingye_lab/ui/components/theme-provider";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { localizedMeta } from "@/lib/localized-meta";
 import { ContentBoundary } from "@/components/content-boundary";

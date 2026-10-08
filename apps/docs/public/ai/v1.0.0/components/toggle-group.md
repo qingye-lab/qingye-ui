@@ -1,9 +1,9 @@
 # 切换组 ToggleGroup
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/toggle-group
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: 5d256c5fb1da637e482bceff8a8da71997dabdf6288ab97666cc1cd2aa6b2f48
+Source SHA-256: e6d0a41d40a88d1ab06acaef373625825365b9c0a7215e0b982508522a5285a9
 
 关联一组单选或多选的切换按钮：选项保持切换状态。
 
@@ -38,7 +38,7 @@ Source SHA-256: 5d256c5fb1da637e482bceff8a8da71997dabdf6288ab97666cc1cd2aa6b2f48
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -70,8 +70,8 @@ Base UI 切换组原语；项原语由 TogglePrimitive 导出。
 Source: apps/docs/src/content/toggle-group/demos/01-modes.tsx
 ```tsx
 import { useId, useState } from "react";
-import { Field, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { Field, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 
 export const meta = { title: "单选与多选", titleEn: "Single and multiple" };
 export default function Demo() {
@@ -86,7 +86,7 @@ export default function Demo() {
 ### 方向与禁用
 Source: apps/docs/src/content/toggle-group/demos/02-orientation.tsx
 ```tsx
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 
 export const meta = { title: "方向与禁用", titleEn: "Orientation and disabled" };
 export default function Demo() {

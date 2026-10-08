@@ -1,4 +1,4 @@
-import { Prose } from "@qingye/ui/components/prose";
+import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标题、段落、列表与引用", titleEn: "Headings, paragraphs, lists and quotes" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,4 +1,4 @@
-import { VirtualList } from "@qingye/ui/components/virtual-list";
+import { VirtualList } from "@qingye_lab/ui/components/virtual-list";
 export const meta = { title: "集合窗口", titleEn: "Collection window" };
 const items = Array.from({ length: 100 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
 const rowSize = 48;

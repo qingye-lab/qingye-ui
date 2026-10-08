@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Item, ItemTitle } from "@qingye/ui/components/item";
-import { Stack } from "@qingye/ui/components/layout";
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye/ui/components/page-header";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye_lab/ui/components/page-header";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "名称与任务动作", titleEn: "Name and task actions" } satisfies DemoMeta;
 export default function Demo() {

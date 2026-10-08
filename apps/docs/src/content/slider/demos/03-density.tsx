@@ -1,5 +1,5 @@
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from "@qingye/ui/components/slider";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from "@qingye_lab/ui/components/slider";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

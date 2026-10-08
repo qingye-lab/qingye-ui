@@ -1,5 +1,5 @@
-import { Chart } from "@qingye/ui/components/chart";
-import { Stack } from "@qingye/ui/components/layout";
+import { Chart } from "@qingye_lab/ui/components/chart";
+import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "未知与空", titleEn: "Unknown and empty" };
 export default function Demo() {
   return <Stack gap="section" className="w-full max-w-2xl">

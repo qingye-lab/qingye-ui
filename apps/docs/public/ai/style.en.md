@@ -102,7 +102,7 @@ This document changes no user authorization, collaboration rules, or release per
 
 Foundation and value-adjudication paths below identify repository evidence, which is not distributed in the package. Public criteria are in [Delivery checks](../design.en.md#delivery-checks-for-people-and-ai) and [this file's focus section](#5-states-and-focus). Current values and preset classifications are stated below; component decisions and APIs are in [catalog.json](../catalog.json).
 
-These are implementation rules for `@qingye/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](../design.en.md). Current values and classifications are recorded in the foundation (repository evidence: `docs/decisions/2026-10-03-foundation.md`), revised through value adjudication (repository evidence: `docs/decisions/2026-10-03-value-adjudication.md`). The Chinese source remains authoritative; the generator checks this translation's source hash.
+These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](../design.en.md). Current values and classifications are recorded in the foundation (repository evidence: `docs/decisions/2026-10-03-foundation.md`), revised through value adjudication (repository evidence: `docs/decisions/2026-10-03-value-adjudication.md`). The Chinese source remains authoritative; the generator checks this translation's source hash.
 
 ### 0. Requirements, choices, and presets
 

@@ -1,7 +1,7 @@
 # 分组展开 Accordion
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/accordion
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
 
@@ -41,7 +41,7 @@ Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -68,9 +68,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 展开与禁用
 Source: apps/docs/src/content/accordion/demos/01-states.tsx
 ```tsx
-import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye/ui/components/accordion";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye_lab/ui/components/accordion";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
 export const meta = { title: "展开与禁用", titleEn: "Open and disabled" };
 export default function AccordionDemo() {
   return <Accordion multiple defaultValue={["first"]} className="w-full max-w-sm">

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { DatePicker } from "@qingye/ui/components/date-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DatePicker } from "@qingye_lab/ui/components/date-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "日期", titleEn: "Date" };
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));

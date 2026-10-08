@@ -8,21 +8,18 @@
  * 页面自带明暗与密度切换：两者是主题三轴里可以实时切换的两轴（品牌由项目静态配置），
  * 切换只改属性，不改任何组件代码。
  */
-import { ThemeProvider, useTheme } from "@qingye/ui/components/theme-provider";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
+import { ThemeProvider, useTheme } from "@qingye_lab/ui/components/theme-provider";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import PreviewApp from "./pages/preview/PreviewApp";
-import SettingsPage from "./pages/preview/SettingsPage";
-import WorkbenchPage from "./pages/preview/WorkbenchPage";
-import DetailPage from "./pages/preview/DetailPage";
 import InputsPage from "./pages/preview/InputsPage";
 import DataPage from "./pages/preview/DataPage";
 import NavigationPage from "./pages/preview/NavigationPage";
 import OverlayPage from "./pages/preview/OverlayPage";
 import CompositionPage from "./pages/preview/CompositionPage";
 import { isPreviewPage, PreviewShell, type PreviewPageId } from "./pages/preview/shell";
-import { ToastProvider } from "@qingye/ui/components/toast";
+import { ToastProvider } from "@qingye_lab/ui/components/toast";
 import "./index.css";
 
 type Density = "default" | "compact";
@@ -46,9 +43,6 @@ function Shell() {
         {page === "navigation" && <NavigationPage />}
         {page === "overlay" && <OverlayPage />}
         {page === "composition" && <CompositionPage />}
-        {page === "settings" && <SettingsPage />}
-        {page === "workbench" && <WorkbenchPage />}
-        {page === "detail" && <DetailPage />}
       </PreviewShell>
     </div>
   );

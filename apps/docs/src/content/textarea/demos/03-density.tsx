@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

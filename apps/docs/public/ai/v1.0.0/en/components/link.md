@@ -1,7 +1,7 @@
 # Link
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/link
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: df69ad19901d776578f8dcb288ae1a4907a55645774cf3b5d2976389349c820d
 
@@ -52,7 +52,7 @@ The same treatment as a class name, for components that render a primitive's own
 ### 正文中的链接
 Source: apps/docs/src/content/link/demos/01-inline.tsx
 ```tsx
-import { Link } from "@qingye/ui/components/link";
+import { Link } from "@qingye_lab/ui/components/link";
 export const meta = { title: "正文中的链接", titleEn: "Links in text" };
 export default function Demo() {
   return <p className="max-w-prose text-body text-foreground">同步失败的记录保留在 <Link href="#records">接入记录</Link> 中，修正来源后可以 <Link href="#retry">重新同步</Link>。删除集合前，请先阅读 <Link href="#retention">保留策略</Link>。</p>;

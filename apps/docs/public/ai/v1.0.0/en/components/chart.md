@@ -1,9 +1,9 @@
 # Chart
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/chart
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 665f8e2dba10328154c68fc5b349ac2846a8675e45a343b66079911f8ddf1474
+Source SHA-256: 81a078d00a598526e2bbcb5996702a0d94dc030bfaf7fed0ff06de8af39c901e
 
 Seven task-chosen forms—line, bar, area, area-stacked, bar-horizontal, bar-stacked and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -36,10 +36,9 @@ Known zero, empty data, unknown and not-applicable values remain distinct. Unava
 
 ## Current exports
 - AxisTick: function; owner chart; PASS; props: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }
-- BAR_MAX: const; owner chart; UNVERIFIED
-- BAR_RADIUS: const; owner chart; UNVERIFIED
 - Chart: function; owner chart; PASS; props: ChartProps
 - chartFrameClassName: const; owner chart; UNVERIFIED
+- ChartHeader: function; owner chart; PASS; props: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
 - ChartMarker: type; owner chart; PASS
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
@@ -50,6 +49,7 @@ Known zero, empty data, unknown and not-applicable values remain distinct. Unava
 - ChartType: type; owner chart; PASS
 - ChartUnavailableValue: type; owner chart; PASS
 - ChartValue: type; owner chart; PASS
+- legendClassName: const; owner chart; UNVERIFIED
 - LegendKey: function; owner chart; PASS; props: { series: ChartProjectedSeries; type: ChartType }
 - MARK: const; owner chart; UNVERIFIED
 - Marker: function; owner chart; PASS; props: { color: string; marker: ChartMarker; cx?: number; cy?: number }
@@ -58,13 +58,13 @@ Known zero, empty data, unknown and not-applicable values remain distinct. Unava
 - PLOT_PRESETS: const; owner chart; PASS
 - ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode }
 - readValue: function; owner chart; PASS; props: ChartRow
-- STROKE: const; owner chart; UNVERIFIED
 - SURFACE_GAP: const; owner chart; UNVERIFIED
+- useChartData: function; owner chart; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: recharts
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -88,7 +88,7 @@ A named figure, shared axis units, distinct series shapes and a visible same-sou
 ### 趋势：折线
 Source: apps/docs/src/content/chart/demos/01-trend.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "趋势：折线", titleEn: "Trend: line" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const ok = [42, 48, 45, 51, 58, 31, 28];
@@ -103,7 +103,7 @@ export default function Demo() {
 ### 比较：柱状，单一系列用墨
 Source: apps/docs/src/content/chart/demos/02-compare.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "比较：柱状，单一系列用墨", titleEn: "Comparison: bars, one series in ink" };
 const sources = [["接口推送", 1284], ["定时导入", 912], ["数据库连接", 640], ["手动上传", 155]] as const;
 export default function Demo() {
@@ -116,8 +116,8 @@ export default function Demo() {
 ### 未知与空
 Source: apps/docs/src/content/chart/demos/03-unknown.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
-import { Stack } from "@qingye/ui/components/layout";
+import { Chart } from "@qingye_lab/ui/components/chart";
+import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "未知与空", titleEn: "Unknown and empty" };
 export default function Demo() {
   return <Stack gap="section" className="w-full max-w-2xl">
@@ -131,7 +131,7 @@ export default function Demo() {
 ### 随时间的量：面积
 Source: apps/docs/src/content/chart/demos/04-area.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "随时间的量：面积", titleEn: "Quantity over time: area" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const records = [812, 940, 1024, 980, 1180, 640, 560];
@@ -145,7 +145,7 @@ export default function Demo() {
 ### 随时间的构成：堆叠面积
 Source: apps/docs/src/content/chart/demos/05-area-stacked.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "随时间的构成：堆叠面积", titleEn: "Composition over time: stacked area" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const api = [612, 640, 700, 680, 820, 440, 360];
@@ -161,7 +161,7 @@ export default function Demo() {
 ### 排行：横向柱
 Source: apps/docs/src/content/chart/demos/06-bar-horizontal.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "排行：横向柱", titleEn: "Ranking: horizontal bars" };
 const sources = [["接入设备", 1284], ["权限与角色", 42], ["同步与导出", 0], ["操作记录", 90512], ["回调地址", 6]] as const;
 export default function Demo() {
@@ -174,7 +174,7 @@ export default function Demo() {
 ### 构成比较：堆叠柱
 Source: apps/docs/src/content/chart/demos/07-bar-stacked.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "构成比较：堆叠柱", titleEn: "Composition comparison: stacked bars" };
 const sources = [["接口推送", 412, 9], ["定时导入", 288, 21], ["数据库连接", 197, 4], ["手动上传", 96, 12]] as const;
 export default function Demo() {
@@ -187,7 +187,7 @@ export default function Demo() {
 ### 一眼占比：环形
 Source: apps/docs/src/content/chart/demos/08-donut.tsx
 ```tsx
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "一眼占比：环形", titleEn: "At-a-glance share: donut" };
 export default function Demo() {
   return <Chart type="donut" className="w-full max-w-xs" label="本周记录来源占比" categoryLabel="周" valueLabel="记录数"

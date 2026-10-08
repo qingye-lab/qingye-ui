@@ -1,4 +1,4 @@
 {
-  "compilerOptions": { "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"], "module": "ESNext", "moduleResolution": "Bundler", "jsx": "react-jsx", "strict": true, "skipLibCheck": true, "noEmit": true, "types": ["vite/client", "node"], "paths": { "@qingye/ui/components/*": ["../../packages/ui/src/components/*"], "@qingye/ui/locale": ["../../packages/ui/src/locale.tsx"], "@qingye/ui/utils": ["../../packages/ui/src/utils.ts"] } },
+  "compilerOptions": { "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"], "module": "ESNext", "moduleResolution": "Bundler", "jsx": "react-jsx", "strict": true, "skipLibCheck": true, "noEmit": true, "types": ["vite/client", "node"], "paths": { "@qingye_lab/ui/components/*": ["../../packages/ui/src/components/*"], "@qingye_lab/ui/locale": ["../../packages/ui/src/locale.tsx"], "@qingye_lab/ui/utils": ["../../packages/ui/src/utils.ts"] } },
   "include": ["src", "vite.config.ts"]
 }

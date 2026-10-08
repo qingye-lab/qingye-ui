@@ -1,44 +1,185 @@
-import themeCss from "@qingye/ui/theme.css?raw";
-import componentsCss from "@qingye/ui/tokens/components.css?raw";
-import semanticCss from "@qingye/ui/tokens/semantic.css?raw";
-import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import { A, Code, H2, P, PageHeader } from "@/components/prose";
+import themeCss from "@qingye_lab/ui/theme.css?raw";
+import componentsCss from "@qingye_lab/ui/tokens/components.css?raw";
+import semanticCss from "@qingye_lab/ui/tokens/semantic.css?raw";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/ui/components/collapsible";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
+import { useLayoutEffect, useRef, useState } from "react";
+import { H2, PageHeader } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
-const names = (css: string) => [...new Set([...css.matchAll(/--qy-([a-z0-9-]+)\s*:/g)].map(match => match[1]!))];
-const colors = names(semanticCss).filter(name => !name.startsWith("shadow-"));
-const roles = names(componentsCss);
-const groups = [
-  { id: "typography", zh: "排版", en: "Typography", names: roles.filter(name => name.startsWith("text-")) },
-  { id: "spacing", zh: "间距与容量", en: "Spacing and capacity", names: roles.filter(name => /^(space-|field-|action-|panel-|section-|row-|topbar-)/.test(name)) },
-  { id: "radius", zh: "圆角", en: "Radii", names: roles.filter(name => name.startsWith("radius")) },
-  { id: "focus", zh: "焦点", en: "Focus", names: roles.filter(name => name.startsWith("focus-")) },
-  { id: "controls", zh: "控件尺寸与命中区", en: "Control dimensions and targets", names: roles.filter(name => /^(control-|touch-target)/.test(name)) },
-  { id: "motion", zh: "动效", en: "Motion", names: roles.filter(name => /^(duration-|ease-|stagger)/.test(name)) },
-];
-const allNames = [...colors, ...roles];
-const utility = (name: string) => [...themeCss.matchAll(/--(?:color|radius|text)-([a-z0-9-]+):\s*var\(--qy-([a-z0-9-]+)\)/g)].filter(match => match[2] === name).map(match => match[1]).join(" / ");
-function useValues() {
-  const { resolvedTheme } = useTheme();
-  const [values,setValues] = useState<Record<string,string>>({});
-  useLayoutEffect(() => { const style = getComputedStyle(document.documentElement); setValues(Object.fromEntries(allNames.map(name => [name,style.getPropertyValue(`--qy-${name}`).trim()]))); },[resolvedTheme]);
-  return values;
+import { colorOf, Probe, SECTIONS, SOURCES, useAppearanceKey, useMeasured, type Row, type Source, type Value } from "./foundations-ledger";
+import { SPECIMENS } from "./foundations-specimens";
+import "./tokens.css";
+
+/*
+ * 设计令牌页 = 法度台账（基础层 docs/decisions/2026-10-03-foundation.md 的公开投影）。
+ * - 名实相符：每行写入口、实测值、与锚点的关系、来源类别；值在当前主题与密度里实测。
+ * - 以材为祖：按材与分、等、疏密、圆角、墨与彩、文字、动分节，每节一个原尺寸标本。
+ * - 疏密有致：节与节 3 材（预设，与设计理念页同值），节内标题、出处、标本、台账之间是组间距。
+ * - 台账之外的入口收在文末，只列名称、值与工具类，不写关系（它们没有在基础层单独立项）。
+ */
+
+const ROWS = SECTIONS.flatMap((section) => section.rows);
+const names = (css: string) => [...new Set([...css.matchAll(/--qy-([a-z0-9-]+)\s*:/g)].map((match) => match[1]!))];
+const covered = new Set(
+  ROWS.flatMap((row) => {
+    const m = row.measure;
+    if (m.kind === "type") return [`text-${m.step}-size`, `text-${m.step}-leading`];
+    return [...m.exprs.join(" ").matchAll(/--qy-([a-z0-9-]+)/g)].map((match) => match[1]!);
+  }).concat(ROWS.flatMap((row) => [...row.entry.matchAll(/--qy-([a-z0-9-]+)/g)].map((match) => match[1]!))),
+);
+const REST = [...names(semanticCss), ...names(componentsCss)].filter((name, index, all) => !covered.has(name) && all.indexOf(name) === index);
+const utility = (name: string) =>
+  [...themeCss.matchAll(/--(?:color|radius|text)-([a-z0-9-]+):\s*var\(--qy-([a-z0-9-]+)\)/g)].filter((match) => match[2] === name).map((match) => match[1]).join(" / ");
+
+function relation(row: Row, value: Value | undefined, fen: number, cai: number, en: boolean) {
+  if (row.measure.kind !== "type" || !value?.leading) return en ? row.rel.en : row.rel.zh;
+  const units = value.leading / fen;
+  if (value.leading === cai) return en ? "Line height = one module" : "行高 = 一材";
+  return en ? `Line height = ${units} units` : `行高 = ${units} 分`;
 }
-function ColorSample({ name }: { name: string }) {
-  const { resolvedTheme } = useTheme();
-  const probe = useRef<HTMLSpanElement>(null); const [computed,setComputed] = useState("");
-  const text = name.includes("foreground") || name.endsWith("on-fill");
-  const base = name === "danger-on-fill" ? "danger-fill" : name.replace(/-foreground$/," ").trim();
-  const hasBase = base !== name && colors.includes(base);
-  useLayoutEffect(() => { if (probe.current) { const style = getComputedStyle(probe.current); setComputed(text ? style.color : style.backgroundColor); } },[name,text,resolvedTheme]);
-  const style = { ...(text ? { color: `var(--qy-${name})`, backgroundColor: hasBase ? `var(--qy-${base})` : "var(--qy-background)" } : { backgroundColor: `var(--qy-${name})` }) } as CSSProperties;
-  return <span ref={probe} className="inline-flex min-w-11 min-h-11 items-center justify-center rounded-item border border-border text-body" style={style} title={computed}>{text ? "Aa" : ""}</span>;
+
+function ValueCell({ value, en }: { value: Value | undefined; en: boolean }) {
+  if (!value) return <>…</>;
+  if (value.colors) {
+    return (
+      <span className="ledger-colors">
+        {value.colors.map((color, index) => (
+          <span key={index}>
+            <span aria-hidden="true" className="ledger-swatch" style={{ backgroundColor: color.hex, opacity: color.alpha / 100 }} />
+            {color.alpha < 100 ? `${color.hex} ${color.alpha}%` : color.hex}
+          </span>
+        ))}
+      </span>
+    );
+  }
+  return (
+    <>
+      {value.text}
+      {value.compact ? <span className="ledger-compact">{en ? "Compact" : "紧凑"} {value.compact}</span> : null}
+    </>
+  );
 }
-function TokenRows({ list, values, caption, en, paint = false }: { list: string[]; values: Record<string,string>; caption: string; en: boolean; paint?: boolean }) {
-  return <TableContainer><Table data-density="compact"><TableCaption>{caption}</TableCaption><TableHeader><TableRow><TableHead>{en ? "Token" : "令牌"}</TableHead><TableHead>{en ? "Current value" : "当前取值"}</TableHead><TableHead>{en ? "Utility alias" : "工具类别名"}</TableHead>{paint && <TableHead>{en ? "Current theme" : "当前主题"}</TableHead>}</TableRow></TableHeader><TableBody>{list.map(name => <TableRow key={name}><TableCell><code className="font-mono">--qy-{name}</code></TableCell><TableCell className="wrap-anywhere font-mono">{values[name] || "…"}</TableCell><TableCell className="wrap-anywhere font-mono">{utility(name) || "—"}</TableCell>{paint && <TableCell><ColorSample name={name} /></TableCell>}</TableRow>)}</TableBody></Table></TableContainer>;
+
+function sourceName(id: Source, en: boolean) {
+  const source = SOURCES.find((item) => item.id === id)!;
+  return en ? source.en : source.zh;
 }
+
+/** 台账之外的入口：主题切换后重读当前值。 */
+function useRestValues() {
+  const appearance = useAppearanceKey();
+  const probe = useRef<HTMLDivElement>(null);
+  const [values, setValues] = useState<Record<string, string>>({});
+  useLayoutEffect(() => {
+    const el = probe.current;
+    const canvas = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+    if (!el || !canvas) return;
+    const next: Record<string, string> = {};
+    for (const name of REST) {
+      const raw = getComputedStyle(el).getPropertyValue(`--qy-${name}`).trim();
+      let text = raw;
+      if (name.startsWith("shadow-") || name.startsWith("font-") || /^-?[\d.]+(ms|s|em)?$/.test(raw) || raw.startsWith("cubic-bezier")) text = raw;
+      else if (/oklch|color-mix|rgb|#|color\(/.test(raw)) {
+        el.style.backgroundColor = `var(--qy-${name})`;
+        const color = colorOf(getComputedStyle(el).backgroundColor, canvas);
+        text = color.alpha < 100 ? `${color.hex} ${color.alpha}%` : color.hex;
+        el.style.backgroundColor = "";
+      } else {
+        el.style.inlineSize = `var(--qy-${name})`;
+        const width = Number.parseFloat(getComputedStyle(el).inlineSize);
+        if (Number.isFinite(width)) text = `${Math.round(width * 100) / 100}${/%/.test(raw) && !/px|rem/.test(raw) ? "%" : "px"}`;
+        el.style.inlineSize = "";
+      }
+      next[name] = text;
+    }
+    setValues(next);
+  }, [appearance]);
+  return [probe, values] as const;
+}
+
 export default function TokensPage() {
-  const en = useDocsLocale() === "en"; const values = useValues();
-  return <article><PageHeader title={en ? "Design tokens" : "设计令牌"} description={en ? "Names come from the current stylesheet. Values are read from this page's actual theme after mounting." : "名称来自当前样式表，取值在挂载后读取本页实际主题。"} /><P>{en ? "An override affects components that consume its role. Inspect the rendered result; a source reference or a color swatch alone does not prove contrast or usability." : "覆盖会影响实际消费该角色的组件。需要检查渲染结果；源码引用或单个色样不能证明对比度与可用性。"} <A href="/docs/theming">{en ? "Project theme entry" : "项目主题入口"}</A></P><H2 id="colors">{en ? "Colors" : "颜色"}</H2><P>{en ? "Switch the site's light and dark theme to inspect each combination. Filled actions and their text use paired roles; supporting text still needs the applicable text contrast." : "切换本站浅深色检查实际组合。实心动作与文字使用配对角色，辅助文字仍须满足适用文字对比度。"}</P><TokenRows list={colors} values={values} en={en} paint caption={en ? "Semantic colors in the current theme" : "当前主题的语义颜色"} />{groups.map(group => <section key={group.id}><H2 id={group.id}>{en ? group.en : group.zh}</H2><TokenRows list={group.names} values={values} en={en} caption={en ? group.en : group.zh} /></section>)}<P><Code>--qy-control-*</Code>{en ? " describes the control's external size. Narrow-viewport size and coarse-pointer targets are separate conditions. Focus roles draw inside the control boundary." : " 表达控件外部尺寸，窄视口尺寸与粗指针命中区分别判断；焦点角色绘制在控件边界内。"}</P></article>;
+  const en = useDocsLocale() === "en";
+  const [filter, setFilter] = useState<Source | "all">("all");
+  const [host, values] = useMeasured(ROWS);
+  const [restProbe, restValues] = useRestValues();
+  const unit = (entry: string) => Number.parseFloat(values.get(ROWS.find((row) => row.entry === entry)!)?.text ?? "") || 0;
+  const [fen, cai] = [unit("--qy-fen"), unit("--qy-cai")];
+  const count = (id: Source) => ROWS.filter((row) => row.src.includes(id)).length;
+  const head = en ? ["Entry", "Value", "Relation", "Source"] : ["入口", "值", "关系", "来源"];
+
+  return (
+    <article className="ledger">
+      <PageHeader title={en ? "Design tokens" : "设计令牌"} />
+      <div className="ledger-sources">
+        <SegmentedControl aria-label={en ? "Source" : "来源"} onValueChange={(value) => setFilter(value as Source | "all")} value={filter}>
+          <SegmentedControlItem value="all">{en ? "All" : "全部"} {ROWS.length}</SegmentedControlItem>
+          {SOURCES.map((source) => <SegmentedControlItem key={source.id} value={source.id}>{en ? source.en : source.zh} {count(source.id)}</SegmentedControlItem>)}
+        </SegmentedControl>
+        <dl className="ledger-legend">
+          {SOURCES.map((source) => (
+            <div data-current={filter === source.id || undefined} key={source.id}>
+              <dt>{en ? source.en : source.zh}</dt>
+              <dd>{en ? source.note.en : source.note.zh}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+
+      {SECTIONS.map((section) => {
+        const Specimen = SPECIMENS[section.id]!;
+        const rows = section.rows.filter((row) => filter === "all" || row.src.includes(filter));
+        const headingId = section.id;
+        // 筛选时只留有该来源的节，标本让位给台账：此时读者在查值，不在看形。
+        if (!rows.length) return null;
+        return (
+          <section className="ledger-section" key={section.id}>
+            <H2 id={headingId}>{en ? section.title.en : section.title.zh}</H2>
+            <p className="ledger-origin">{en ? section.origin.en : section.origin.zh}</p>
+            {filter === "all" ? <Specimen en={en} /> : null}
+            <TableContainer data-density="compact">
+              <Table aria-labelledby={headingId} className="ledger-table">
+                <TableHeader><TableRow>{head.map((label) => <TableHead key={label}>{label}</TableHead>)}</TableRow></TableHeader>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow key={row.entry}>
+                      <TableCell><code>{row.entry}</code></TableCell>
+                      <TableCell className="ledger-value"><ValueCell en={en} value={values.get(row)} /></TableCell>
+                      <TableCell>{relation(row, values.get(row), fen, cai, en)}</TableCell>
+                      <TableCell className="ledger-source">{row.src.map((id) => sourceName(id, en)).join(en ? ", " : "、")}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </section>
+        );
+      })}
+
+      {filter === "all" ? <section className="ledger-section">
+        <H2 id="others">{en ? "Other entries" : "其余入口"}</H2>
+        <Collapsible>
+          <CollapsibleTrigger>{en ? `${REST.length} entries` : `${REST.length} 个入口`}</CollapsibleTrigger>
+          <CollapsiblePanel>
+            <TableContainer data-density="compact">
+              <Table aria-labelledby="others" className="ledger-table ledger-rest">
+                <TableHeader><TableRow><TableHead>{head[0]}</TableHead><TableHead>{head[1]}</TableHead><TableHead>{en ? "Utility" : "工具类"}</TableHead></TableRow></TableHeader>
+                <TableBody>
+                  {REST.map((name) => (
+                    <TableRow key={name}>
+                      <TableCell><code>--qy-{name}</code></TableCell>
+                      <TableCell className="ledger-value">{restValues[name] ?? "…"}</TableCell>
+                      <TableCell className="ledger-value">{utility(name) || "—"}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </CollapsiblePanel>
+        </Collapsible>
+      </section> : null}
+      <Probe host={host} />
+      <div aria-hidden="true" className="ledger-probe" ref={restProbe} />
+    </article>
+  );
 }

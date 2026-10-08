@@ -1,7 +1,7 @@
 # 名称与值 DescriptionList
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/description-list
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 642be77029202e1a51b8583d9d89ca5048613a7fcace731d7af08b3db529529e
 
@@ -67,7 +67,7 @@ div 成组名称与值。
 ### 值与未知
 Source: apps/docs/src/content/description-list/demos/01-values.tsx
 ```tsx
-import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye/ui/components/description-list";
+import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "值与未知", titleEn: "Values and uncertainty" } satisfies DemoMeta;

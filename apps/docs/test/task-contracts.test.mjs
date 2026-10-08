@@ -21,18 +21,33 @@ test("search uses actual content identities, ranks component names, and requires
   assert.equal(ranked[0].entry.id,"/docs/components/input-group");
   assert.equal(fixture.score(ranked[0].entry,"input qqzznonexistent"),0);
 });
-test("homepage exposes one destination per current component without mounting a fake control gallery",() => {
-  const markup = fixture.homeMarkup("en");
-  assert.equal([...markup.matchAll(/data-component="/g)].length,fixture.components.length);
-  for (const item of fixture.components) assert.ok(markup.includes(`href="/en/docs/components/${item.slug}"`),item.slug);
-  assert.doesNotMatch(markup,/<input|<select|<textarea|aria-label="发送邀请"/);
+test("homepage: motto and sources, three chapters from the philosophy text with real components, and release installation",() => {
+  for (const locale of ["en","zh"]) {
+    const markup = fixture.homeMarkup(locale); const prefix = locale === "en" ? "/en" : "";
+    assert.equal([...markup.matchAll(/<h1[ >]/g)].length,1);
+    for (const path of ["/docs/installation","/docs/components","/docs/design-philosophy#method-1","/docs/design-philosophy#method-9","/docs/tokens"]) assert.ok(markup.includes(`href="${prefix}${path}"`),path);
+    assert.equal([...markup.matchAll(/class="home-chapter"/g)].length,4);
+    assert.match(markup,/home-sources/); assert.match(markup,/data-slot="button"/); for (const state of ["idle","waiting","in-progress","unknown","failed"]) assert.match(markup,new RegExp(`data-slot="button" data-state="${state}"`),state); for (const size of ["xs","sm","md","lg","xl"]) assert.match(markup,new RegExp(`data-size="${size}" data-slot="button"`),size); assert.match(markup,/data-slot="code-block"/);
+    assert.doesNotMatch(markup,/type="search"|data-slot="checkbox"/);
+    assert.match(markup,/pnpm add \.\/qingye_lab-ui-1\.0\.0\.tgz/); assert.doesNotMatch(markup,/gh release download/);
+  }
+  assert.match(fixture.homeMarkup("zh"),/器用为本[\s\S]*怎样让数字界面更清楚地承载人的目的/);
+  assert.match(fixture.homeMarkup("en"),/Purpose first\.[\s\S]*Begin with use/);
 });
-test("English philosophy has six stable method anchors and translated body, without displaying provenance metadata",() => {
+test("philosophy keeps fifteen stable method anchors, links every citation to its note in the source list, and shows no provenance metadata",() => {
   const markup = fixture.methodsMarkup("en");
-  for (let index=1;index<=6;index++) assert.equal([...markup.matchAll(new RegExp(`id="method-${index}"`,"g"))].length,1);
   assert.match(markup,/Begin with use/); assert.match(markup,/Nanjing University of Chinese Medicine Museum/);
   assert.doesNotMatch(markup,/qingye:translation-source|怎样让数字界面/);
   const zh = fixture.methodsMarkup("zh"); assert.match(zh,/从使用出发/);
+  for (const page of [markup,zh]) {
+    for (let index=1;index<=15;index++) assert.equal([...page.matchAll(new RegExp(`id="method-${index}"`,"g"))].length,1,`method-${index}`);
+    for (let index=1;index<=13;index++) {
+      assert.equal([...page.matchAll(new RegExp(`id="note-${index}"`,"g"))].length,1,`note ${index}`);
+      assert.match(page,new RegExp(`href="#note-${index}"[^>]*>${index}<`),`citation ${index}`);
+    }
+    assert.match(page,/id="sources"/);
+    assert.doesNotMatch(page,/〔\d+〕/);
+  }
 });
 
 test("English AI adoption consumes the authored English guide and keeps localized resource destinations", () => {
@@ -40,6 +55,6 @@ test("English AI adoption consumes the authored English guide and keeps localize
   assert.match(entry.agents,/AGENTS|Qingye|qingye/); assert.match(entry.guide,/Semantic fidelity/);
   assert.doesNotMatch(entry.agents,/界面任务|设计指南/);
   const markup = fixture.aiMarkup();
-  assert.match(markup,/Bring methods and facts to AI/); assert.match(markup,/href="\/design.en.md"/); assert.match(markup,/href="\/ai\/SKILL.en.md"/); assert.match(markup,/href="\/en\/docs\/installation"/);
-  assert.match(markup,/Make project guidance persistent/); assert.doesNotMatch(markup,/让项目引用持续生效|把方法与事实交给 AI/);
+  assert.match(markup,/Using AI/); assert.match(markup,/href="\/design.en.md"/); assert.match(markup,/href="\/ai\/SKILL.en.md"/); assert.match(markup,/href="\/en\/docs\/installation"/);
+  assert.match(markup,/Add to a project/); assert.doesNotMatch(markup,/接入项目|AI 使用/);
 });

@@ -1,5 +1,5 @@
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 
 export const meta = { title: "位置", titleEn: "Placement" };
 

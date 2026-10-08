@@ -63,8 +63,8 @@ export function cleanDemoSource(source: string): string {
   return code.replace(/\n{3,}/g, "\n\n").trim() + "\n";
 }
 
-/** `import { A, B } from "@qingye/ui";`, wrapped when it gets long. */
-export function importSnippet(names: readonly string[], from = "@qingye/ui"): string {
+/** `import { A, B } from "@qingye_lab/ui";`, wrapped when it gets long. */
+export function importSnippet(names: readonly string[], from = "@qingye_lab/ui"): string {
   const one = `import { ${names.join(", ")} } from "${from}";`;
   if (one.length <= 72 || names.length < 2) return one;
   return `import {\n${names.map((name) => `  ${name},`).join("\n")}\n} from "${from}";`;

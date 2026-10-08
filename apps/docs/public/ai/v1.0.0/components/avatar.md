@@ -1,7 +1,7 @@
 # 身份图像 Avatar
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/avatar
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: 62091f6ab8f49a63451d9d99467147b81e5ca7d169c0492174c5c2aceb24ded7
 
@@ -64,8 +64,8 @@ Base UI Avatar 公共原语，供需要原语完整组合能力的调用方使�
 ### 图片与回退
 Source: apps/docs/src/content/avatar/demos/01-states.tsx
 ```tsx
-import { Avatar, AvatarFallback, AvatarImage } from "@qingye/ui/components/avatar";
-import { Inline } from "@qingye/ui/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@qingye_lab/ui/components/avatar";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "图片与回退", titleEn: "Image and fallback" };
 

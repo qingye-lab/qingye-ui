@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "比较：柱状，单一系列用墨", titleEn: "Comparison: bars, one series in ink" };
 const sources = [["接口推送", 1284], ["定时导入", 912], ["数据库连接", 640], ["手动上传", 155]] as const;
 export default function Demo() {

@@ -1,7 +1,7 @@
 import { useId } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
-import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
+import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "状态", titleEn: "States" };
 export default function Demo() {

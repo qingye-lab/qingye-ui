@@ -1,7 +1,7 @@
 # 分段文本 OtpField
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/otp-field
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
 
@@ -38,7 +38,7 @@ Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -63,8 +63,8 @@ Input 的分段呈现，Field 注册一次。
 ### 文本
 Source: apps/docs/src/content/otp-field/demos/01-input.tsx
 ```tsx
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { OtpField } from "@qingye/ui/components/otp-field";
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "文本", titleEn: "Text" } satisfies DemoMeta;
@@ -83,8 +83,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/otp-field/demos/02-density.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { OtpField } from "@qingye/ui/components/otp-field";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

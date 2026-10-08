@@ -1,6 +1,6 @@
-import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye/ui/components/accordion";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye_lab/ui/components/accordion";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
 export const meta = { title: "展开与禁用", titleEn: "Open and disabled" };
 export default function AccordionDemo() {
   return <Accordion multiple defaultValue={["first"]} className="w-full max-w-sm">

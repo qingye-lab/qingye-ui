@@ -1,5 +1,5 @@
-import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye_lab/ui/components/autocomplete";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

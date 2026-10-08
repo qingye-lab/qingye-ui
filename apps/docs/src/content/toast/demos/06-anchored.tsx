@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { AnchoredToastProvider, ToastPrimitive } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { AnchoredToastProvider, ToastPrimitive } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "关联入口", titleEn: "Anchored notification" };
 

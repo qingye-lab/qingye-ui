@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "比较与排序", titleEn: "Comparison and sorting" } satisfies DemoMeta;
 // 列都是同一种量纲（像素与条数），行是真实对象，不是甲乙丙。

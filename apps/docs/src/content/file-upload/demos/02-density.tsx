@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { FileUpload } from "@qingye/ui/components/file-upload";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

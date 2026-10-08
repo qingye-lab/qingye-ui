@@ -1,9 +1,9 @@
 # Drawer
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/drawer
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: b002f563908a1a11537d5f45c8908002037fc050a096284506879ab575131e30
+Source SHA-256: 155fc699f13ffd26579fd21761a48300c4a83ba8ecb1112db6146e443eccb83c
 
 Enter an edge-aligned work surface and return to its entry point.
 
@@ -48,7 +48,7 @@ Public swipeDirection controls the edge. Actual modality controls focus and back
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -79,12 +79,12 @@ Use Button; Close reads locale.close when children are omitted.
 ### 方向与嵌套返回
 Source: apps/docs/src/content/drawer/demos/01-states.tsx
 ```tsx
-import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye/ui/components/drawer";
-import { Dialog, DialogClose, DialogPopup, DialogTitle, DialogTrigger } from "@qingye/ui/components/dialog";
-import { Popover, PopoverPopup, PopoverTrigger } from "@qingye/ui/components/popover";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
-import { Inline } from "@qingye/ui/components/layout";
+import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye_lab/ui/components/drawer";
+import { Dialog, DialogClose, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Popover, PopoverPopup, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "方向与嵌套返回", titleEn: "Edges and nested return" };
 export default function DrawerDemo() {
   return <Inline gap="fields">{(["left", "right", "up", "down"] as const).map(direction => <Drawer key={direction} swipeDirection={direction}><DrawerTrigger>{direction}</DrawerTrigger><DrawerPopup><DrawerTitle>{direction}</DrawerTitle><DrawerContent><Label htmlFor={`drawer-${direction}`}>输入</Label><Input id={`drawer-${direction}`} /><Popover><PopoverTrigger>补充</PopoverTrigger><PopoverPopup>补充内容</PopoverPopup></Popover><Dialog><DialogTrigger>内层</DialogTrigger><DialogPopup><DialogTitle>内层</DialogTitle><DialogClose /></DialogPopup></Dialog><DrawerClose /></DrawerContent></DrawerPopup></Drawer>)}</Inline>;

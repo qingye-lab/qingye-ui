@@ -300,7 +300,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 <!-- qingye:project-adoption:start -->
 ## 在项目中持续使用
 
-接入 `@qingye/ui` 时，把方法与真实 API 的引用留在项目的 `AGENTS.md` 和 `design.md`，后续任务沿用。以下片段合并到已有文件，保留原有规则和项目事实，遵守项目指导文件的写入权限；本指南不授权自动修改其他仓库或覆盖文件。合并时查明并记录项目集中主题、公共组合和验证命令的实际入口；尚不存在的入口如实注明。
+接入 `@qingye_lab/ui` 时，把方法与真实 API 的引用留在项目的 `AGENTS.md` 和 `design.md`，后续任务沿用。以下片段合并到已有文件，保留原有规则和项目事实，遵守项目指导文件的写入权限；本指南不授权自动修改其他仓库或覆盖文件。合并时查明并记录项目集中主题、公共组合和验证命令的实际入口；尚不存在的入口如实注明。
 
 若已安装版本尚未包含本指南，可把下载文件保存为 `docs/qingye-design.md`，并将下方片段中的指南路径改为该路径；组件 API 仍按已安装的包核对。
 
@@ -309,8 +309,8 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 ```md
 ## Qingye UI
 
-- 界面设计先读本项目 design.md 与 node_modules/@qingye/ui/design.md，依据器用六法判断任务、语义、结构和状态，依据表达九法决定尺度、墨色、线、形与位置。
-- 实现前核对已安装 @qingye/ui 的 package.json、catalog.json、声明和相关示例；交互控件复用共享包，项目负责主题与公共组合，应用负责权限、草稿、请求和结果。
+- 界面设计先读本项目 design.md 与 node_modules/@qingye_lab/ui/design.md，依据器用六法判断任务、语义、结构和状态，依据表达九法决定尺度、墨色、线、形与位置。
+- 实现前核对已安装 @qingye_lab/ui 的 package.json、catalog.json、声明和相关示例；交互控件复用共享包，项目负责主题与公共组合，应用负责权限、草稿、请求和结果。
 - 验证正常与相关失败、取消或恢复路径，并按影响检查键盘、可访问名称、对比度、窄屏和长文本；仅报告实际运行的检查。
 ```
 
@@ -319,9 +319,9 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 ```md
 ## Qingye UI 方法
 
-器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye/ui/design.md：器用六法（名实相符、相成相制、布白有用、随境取度、展开有据、进退相承）处理任务与语义，表达九法（以材为祖、疏密有致、墨分五色、骨法用笔、应物象形、经营位置、绘事后素、气韵生动、材有美）处理尺度与形制；普通组件采用相关方法，完整任务检查全部问题。
+器用为本，关系为法，合宜为度。具体判断依据 node_modules/@qingye_lab/ui/design.md：器用六法（名实相符、相成相制、布白有用、随境取度、展开有据、进退相承）处理任务与语义，表达九法（以材为祖、疏密有致、墨分五色、骨法用笔、应物象形、经营位置、绘事后素、气韵生动、材有美）处理尺度与形制；普通组件采用相关方法，完整任务检查全部问题。
 
-组件能力以本项目已安装 @qingye/ui 的 catalog.json、类型和示例为准。品牌、明暗、密度独立；集中主题、公共组合和验证命令在本文件记录实际入口，变更时更新。
+组件能力以本项目已安装 @qingye_lab/ui 的 catalog.json、类型和示例为准。品牌、明暗、密度独立；集中主题、公共组合和验证命令在本文件记录实际入口，变更时更新。
 ```
 
 包升级后仍读取安装版指南和声明；网站资料用于发现，不能替代本地版本事实。其他技术栈可把完整指南保存为项目文档并引用该路径，采用设计方法，但须另行验证平台语义，不能假定本库 API 可用。
@@ -330,7 +330,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 
 ## 交给 AI 的任务入口
 
-先完成上面的项目引用，再把具体任务交给 AI。若使用 `@qingye/ui`，同时提供当前安装版本或允许 AI 在项目中读取。
+先完成上面的项目引用，再把具体任务交给 AI。若使用 `@qingye_lab/ui`，同时提供当前安装版本或允许 AI 在项目中读取。
 
 ```text
 请依据 design.md 完成这次界面任务，并遵守项目现有协作规则。
@@ -340,7 +340,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=8ca9acfdc1af08019109913a8008b555bf0cdad57a8a09f2a59b69058625ae31 -->
+<!-- qingye:translation:en:start source-sha256=bd8bed97b9f0af52e6ca8ce32a13d56b163d5005dc75219733c60c55c05a5c8b -->
 # Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
@@ -643,7 +643,7 @@ This document changes no user authorization, collaboration rules, or release per
 <!-- qingye:project-adoption:en:start -->
 ## Continued use in a project
 
-When adopting `@qingye/ui`, keep references to the methods and actual APIs in the project's `AGENTS.md` and `design.md` for later tasks. Merge these snippets into existing files, preserving rules and project facts and respecting permission to edit guidance. This guide does not authorize automatic edits to other repositories or file replacement. Find and record actual entries for the central theme, public compositions, and verification commands; state clearly when an entry does not exist.
+When adopting `@qingye_lab/ui`, keep references to the methods and actual APIs in the project's `AGENTS.md` and `design.md` for later tasks. Merge these snippets into existing files, preserving rules and project facts and respecting permission to edit guidance. This guide does not authorize automatic edits to other repositories or file replacement. Find and record actual entries for the central theme, public compositions, and verification commands; state clearly when an entry does not exist.
 
 If the installed package lacks this guide, save the download as `docs/qingye-design.md` and replace the guide paths below. Continue checking APIs against the installed package.
 
@@ -652,8 +652,8 @@ Project `AGENTS.md`:
 ```md
 ## Qingye UI
 
-- Before interface work, read this project's design.md and node_modules/@qingye/ui/design.en.md. Use the six methods of use to judge the task, semantics, structure, and states, and the nine methods of expression to decide measure, ink, line, shape, and placement.
-- Before implementation, check the installed @qingye/ui package.json, catalog.json, declarations, and related examples. Reuse shared interactive controls; the project owns themes and public compositions, and the application owns permissions, drafts, requests, and outcomes.
+- Before interface work, read this project's design.md and node_modules/@qingye_lab/ui/design.en.md. Use the six methods of use to judge the task, semantics, structure, and states, and the nine methods of expression to decide measure, ink, line, shape, and placement.
+- Before implementation, check the installed @qingye_lab/ui package.json, catalog.json, declarations, and related examples. Reuse shared interactive controls; the project owns themes and public compositions, and the application owns permissions, drafts, requests, and outcomes.
 - Verify normal and relevant failure, cancellation, or recovery paths. Check keyboard access, names, contrast, narrow layouts, and long text according to impact. Report only observed checks.
 ```
 
@@ -662,9 +662,9 @@ Project `design.md`:
 ```md
 ## Qingye UI methods
 
-Purpose first. Relationships guide the form. Fitness sets the measure. From node_modules/@qingye/ui/design.en.md, the six methods of use (名实相符, 相成相制, 布白有用, 随境取度, 展开有据, 进退相承) address tasks and semantics; the nine methods of expression (以材为祖, 疏密有致, 墨分五色, 骨法用笔, 应物象形, 经营位置, 绘事后素, 气韵生动, 材有美) address measure and form. Ordinary components use relevant methods; complete tasks check every question. The Chinese method names remain canonical.
+Purpose first. Relationships guide the form. Fitness sets the measure. From node_modules/@qingye_lab/ui/design.en.md, the six methods of use (名实相符, 相成相制, 布白有用, 随境取度, 展开有据, 进退相承) address tasks and semantics; the nine methods of expression (以材为祖, 疏密有致, 墨分五色, 骨法用笔, 应物象形, 经营位置, 绘事后素, 气韵生动, 材有美) address measure and form. Ordinary components use relevant methods; complete tasks check every question. The Chinese method names remain canonical.
 
-Component capabilities come from the installed @qingye/ui catalog.json, types, and examples. Brand, appearance, and density are independent. Record actual entries for the central theme, public compositions, and verification commands here, and keep them current.
+Component capabilities come from the installed @qingye_lab/ui catalog.json, types, and examples. Brand, appearance, and density are independent. Record actual entries for the central theme, public compositions, and verification commands here, and keep them current.
 ```
 
 After upgrades, read the installed guide and declarations again. Website resources help discovery but cannot replace local version facts. Other stacks may save this guide in project documentation and apply its methods, but must verify platform semantics separately; these React APIs cannot be assumed to apply.
@@ -673,7 +673,7 @@ After upgrades, read the installed guide and declarations again. Website resourc
 
 ## Giving a task to AI
 
-Establish the project references above before giving a specific task to AI. When using `@qingye/ui`, supply the installed version or allow it to read that version from the project.
+Establish the project references above before giving a specific task to AI. When using `@qingye_lab/ui`, supply the installed version or allow it to read that version from the project.
 
 ```text
 Complete this interface task from design.md while following the project's collaboration rules.

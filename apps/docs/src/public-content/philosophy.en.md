@@ -1,4 +1,4 @@
-<!-- qingye:translation-source:sha256=4f37e69759d8f8b5ee8735df2d6abc3c87e1c4cbca8c0750eb4a9a0631ac24df -->
+<!-- qingye:translation-source:sha256=7eb72c1318326c04e3835a842087d1dfaf97b014661fac997d2291e57a43e065 -->
 # Qingye UI Design Philosophy
 
 ## Culture as a method of design
@@ -215,7 +215,7 @@ The [design guide](/design.en.md) turns these methods into concrete design judgm
 
 ## About contemporary translation
 
-The method names and digital interface examples in this document are Qingye UI's contemporary design expressions. The sources below identify intellectual references; they do not suggest that classical texts directly prescribed modern interface rules or establish that these rules have been validated through use.
+The method names and digital interface examples in this document are Qingye UI's contemporary design expressions. The sources cited in the notes identify intellectual references; they do not suggest that classical texts directly prescribed modern interface rules or establish that these rules have been validated through use.
 
 “Start with use” draws on the Kaogong Ji in the Rites of Zhou and its joint consideration of material, craft, and surrounding conditions. We take inspiration related to fitness for use, without treating it as a summary of all Chinese tradition.
 

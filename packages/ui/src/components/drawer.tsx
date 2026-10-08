@@ -27,7 +27,8 @@ export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, "initialFocus" 
   backdropProps?: DrawerPrimitive.Backdrop.Props;
   viewportProps?: DrawerPrimitive.Viewport.Props;
 };
-const edges = { down: "inset-x-0 bottom-0 w-full", up: "inset-x-0 top-0 w-full", left: "inset-y-0 left-0 h-full w-fit", right: "inset-y-0 right-0 h-full w-fit" };
+// 抽屉贴着视口的一边：贴边那一侧没有圆角也没有线——它是从边上拉出来的，不是浮在空中的一张卡（应物象形）。
+const edges = { down: "inset-x-0 bottom-0 w-full rounded-b-none border-b-0", up: "inset-x-0 top-0 w-full rounded-t-none border-t-0", left: "inset-y-0 left-0 h-full w-fit rounded-s-none border-s-0", right: "inset-y-0 right-0 h-full w-fit rounded-e-none border-e-0" };
 export function DrawerPopup({ portalProps, backdropProps, viewportProps, className, ...props }: DrawerPopupProps) {
   const modal = React.useContext(DrawerModality);
   const backdrop = useFloatingLayer("backdrop");

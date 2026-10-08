@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "趋势：折线", titleEn: "Trend: line" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const ok = [42, 48, 45, 51, 58, 31, 28];

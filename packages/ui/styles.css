@@ -64,4 +64,20 @@
   pre {
     font-family: var(--qy-font-mono);
   }
+
+  /* 骨法用笔：线是结构，线宽统一。Tabler 图标在 24 视盒上默认 stroke=2；
+   * 渲染线宽 = stroke × 实际像素尺寸 / 24。本库控件图标档位（--qy-control-*-icon）
+   * 落在 14–20px，默认 stroke=2 已渲染约 1.17–1.67px，同处一个墨阶区间，
+   * 不需要逐处覆盖——这条规则就是「不覆盖」，在此单点声明并强制，防止任何
+   * 调用处意外改写 Tabler 自身默认值。 */
+  svg.tabler-icon {
+    stroke-width: 2;
+  }
+
+  /* 唯一例外：Steps 12px 对勾/叉号标记（20px 圆内）。stroke=2 在 12px 下只
+   * 渲染约 1px，细到难辨；stroke=2.5 渲染约 1.25px，回到同一墨阶区间。
+   * 组件侧已用 stroke={2.5} 传值，这里同步声明，使两处不致漂移。 */
+  [data-slot="step-marker"] svg.tabler-icon {
+    stroke-width: 2.5;
+  }
 }

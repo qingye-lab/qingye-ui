@@ -2,7 +2,7 @@
 
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
-import { CircleHelpIcon, CircleXIcon, HourglassIcon, LoaderCircleIcon } from "lucide-react";
+import { IconHelpCircle, IconCircleX, IconHourglass, IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -147,10 +147,10 @@ export function Button({
     }
   });
   const status = {
-    waiting: { label: messages.buttonWaiting, icon: HourglassIcon },
-    "in-progress": { label: messages.buttonInProgress, icon: LoaderCircleIcon },
-    unknown: { label: messages.buttonUnknown, icon: CircleHelpIcon },
-    failed: { label: messages.buttonFailed, icon: CircleXIcon },
+    waiting: { label: messages.buttonWaiting, icon: IconHourglass },
+    "in-progress": { label: messages.buttonInProgress, icon: IconLoader2 },
+    unknown: { label: messages.buttonUnknown, icon: IconHelpCircle },
+    failed: { label: messages.buttonFailed, icon: IconCircleX },
   };
   const presented = state === "idle" ? undefined : status[state];
   const busy = state === "waiting" || state === "in-progress" || busyFact === true || busyFact === "true";
@@ -196,7 +196,9 @@ export function Button({
        * 现在按钮只承载**动作**（名称 + 一个状态图标），宽度不再随状态改变；
        * 结果由按钮旁边的状态文字表达，它不是控件，点它不会触发任何东西。
        * 两者的可访问关联仍在（aria-describedby → 该状态元素），读屏听到的与看到的一致。 */}
-      <span className="inline-flex min-w-0 max-w-full items-center gap-(--qy-action-gap)" data-slot="button-with-status">
+      {/* 外层只在有结果文字时才成为一个盒；平时不参与布局（contents），按钮本身就是布局项——
+       *  调用方写在按钮上的外边距、对齐、不收缩因此直接生效，不被一层看不见的包裹吞掉。 */}
+      <span className={presented ? "inline-flex min-w-0 max-w-full items-center gap-(--qy-action-gap)" : "contents"} data-slot="button-with-status">
         <ButtonPrimitive
           {...props}
           aria-busy={busy || busyFact}

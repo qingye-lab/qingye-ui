@@ -1,9 +1,9 @@
 # 行内趋势 Sparkline
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/sparkline
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
-Source SHA-256: f3fd43ffd81ec1bfc724e2d537a0fbad5dbf5087db3a2036bc871bd96babcaad
+Source SHA-256: 6bdcb8341745f74716030677ccef202bdb9017cc6a56aaa264d50382e9a0804e
 
 坐在文字行里的小型折线，说明一个读数最近怎样变化。
 
@@ -50,7 +50,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 读数旁的趋势
 Source: apps/docs/src/content/sparkline/demos/01-inline.tsx
 ```tsx
-import { Sparkline } from "@qingye/ui/components/sparkline";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
 export const meta = { title: "读数旁的趋势", titleEn: "Trend beside a reading" };
 export default function Demo() {
   return <div className="grid gap-(--qy-field-group-gap) text-body">

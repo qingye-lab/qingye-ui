@@ -1,7 +1,7 @@
 // 对齐审计（基础层 §19）：在页面里执行，返回半像素、同行控件高度、字号、行高与名称列对齐的偏差。由 scripts/align-audit.mjs 注入。
 window.__align = () => {
   const out = { page: location.hash, rows: [], halfPx: [], controls: [], fontSize: [], leading: [] };
-  const sizes = new Set([11,12,13,14,15,16,17,18,19,20,24,32,40]);
+  const sizes = new Set([11,12,13,14,15,16,17,18,19,20,22,24,28,32,40]); // 22、28：长文的节与篇（text-prose-h2 / -h1）
   const center = r => (r.top + r.bottom) / 2;
   const firstText = el => { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { if (n.textContent.trim() && n.parentElement.getBoundingClientRect().height) { const rg = document.createRange(); rg.selectNodeContents(n); const rr = rg.getClientRects()[0]; if (rr) return { rect: rr, el: n.parentElement }; } } };
   // 文字行盒的中心：行高与字面的中心一致（中文字面居中于行）。

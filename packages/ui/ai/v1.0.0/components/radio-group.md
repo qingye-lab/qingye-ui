@@ -1,7 +1,7 @@
 # 单选组 RadioGroup
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/radio-group
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
 
@@ -78,8 +78,8 @@ Base UI 组与 Radio 原语出口。
 Source: apps/docs/src/content/radio-group/demos/01-labels.tsx
 ```tsx
 import { useId } from "react";
-import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
+import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
+import { RadioGroup, Radio } from "@qingye_lab/ui/components/radio-group";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
@@ -115,8 +115,8 @@ export default function Demo() {
 Source: apps/docs/src/content/radio-group/demos/02-states.tsx
 ```tsx
 import { useId, useState } from "react";
-import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
+import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
+import { RadioGroup, Radio } from "@qingye_lab/ui/components/radio-group";
 
 export const meta = { title: "状态", titleEn: "States" };
 

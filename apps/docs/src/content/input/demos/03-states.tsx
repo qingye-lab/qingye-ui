@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "字段状态", titleEn: "Field states" };
 

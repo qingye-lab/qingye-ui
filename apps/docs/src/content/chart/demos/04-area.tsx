@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "随时间的量：面积", titleEn: "Quantity over time: area" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const records = [812, 940, 1024, 980, 1180, 640, 560];

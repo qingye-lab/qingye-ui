@@ -1,7 +1,7 @@
 # 浮起面板 Popover
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/popover
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 9f9eb4f052d7aa7179e2ef48069533993ff88efba27d291f79d3a9e1bc362879
 
@@ -85,11 +85,11 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 多行输入
 Source: apps/docs/src/content/popover/demos/01-form.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = { title: "多行输入", titleEn: "Multiline input" };
@@ -117,22 +117,22 @@ export default function Demo() {
 ### 关闭按钮
 Source: apps/docs/src/content/popover/demos/02-close-button.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { InfoIcon, XIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverDescription, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { IconInfoCircle, IconX } from "@tabler/icons-react";
 
 export const meta = { title: "关闭按钮", titleEn: "Close button" };
 
 export default function Demo() {
   return (
     <Popover>
-      <PopoverTrigger render={<Button aria-label="详细信息" shape="icon" variant="quiet" />}><InfoIcon aria-hidden="true" /></PopoverTrigger>
+      <PopoverTrigger render={<Button aria-label="详细信息" shape="icon" variant="quiet" />}><IconInfoCircle aria-hidden="true" /></PopoverTrigger>
       <PopoverPopup className="w-72">
         <Stack gap="panel">
           <Inline gap="panel" className="justify-between">
             <PopoverTitle>青野 Qingye UI</PopoverTitle>
-            <PopoverClose aria-label="关闭" render={<Button shape="icon" size="sm" variant="quiet" />}><XIcon aria-hidden="true" /></PopoverClose>
+            <PopoverClose aria-label="关闭" render={<Button shape="icon" size="sm" variant="quiet" />}><IconX aria-hidden="true" /></PopoverClose>
           </Inline>
           <PopoverDescription>React 组件库</PopoverDescription>
         </Stack>
@@ -145,9 +145,9 @@ export default function Demo() {
 ### 位置
 Source: apps/docs/src/content/popover/demos/03-sides.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
-import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 
 export const meta = { title: "位置", titleEn: "Placement" };
 
@@ -177,9 +177,9 @@ export default function Demo() {
 ### 共享面板
 Source: apps/docs/src/content/popover/demos/04-shared.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverCreateHandle, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverCreateHandle, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useMemo } from "react";
 
 export const meta = { title: "共享面板", titleEn: "Shared popup" };
@@ -208,12 +208,12 @@ export default function Demo() {
 ### 局部语言与密度
 Source: apps/docs/src/content/popover/demos/05-context.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useRef } from "react";
 
-import { Text } from "@qingye/ui/components/typography";
+import { Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "局部语言与密度", titleEn: "Local language and density" };
 

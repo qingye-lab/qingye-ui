@@ -1,9 +1,9 @@
 # Combobox
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/combobox
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 92f985024836565c9306fcd5c21aa194bfd99a04cfde19e84a97ce7fce1e3cfc
+Source SHA-256: 83deba918ea963676d4053fa9c97c0a14a39dc0f2f23edf5a2b0c79ad422d590
 
 Filter candidates and confirm one value, with query text separate from selection.
 
@@ -47,7 +47,7 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -82,8 +82,8 @@ The installed Base UI Combobox namespace.
 Source: apps/docs/src/content/combobox/demos/01-choice.tsx
 ```tsx
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
 const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {
@@ -95,8 +95,8 @@ export default function Demo() {
 ### 密度与只读
 Source: apps/docs/src/content/combobox/demos/02-density.tsx
 ```tsx
-import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

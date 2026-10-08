@@ -1,6 +1,6 @@
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@qingye/ui/components/combobox";
-import { Dialog, DialogClose, DialogHeader, DialogPopup, DialogTitle } from "@qingye/ui/components/dialog";
-import { Inline } from "@qingye/ui/components/layout";
+import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@qingye_lab/ui/components/combobox";
+import { Dialog, DialogClose, DialogHeader, DialogPopup, DialogTitle } from "@qingye_lab/ui/components/dialog";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import { useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { score, searchEntries, type SearchEntry } from "@/lib/search";

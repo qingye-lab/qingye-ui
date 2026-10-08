@@ -102,7 +102,7 @@
 
 下文的基础层与逐值裁决路径是仓库内部取证来源，不随包分发。公开可执行准则见[指南交付检查](../design.md#人和-ai-的交付检查)与[本文件焦点章节](#5-状态与焦点)。当前值与预设分类见下文正文，组件决定与 API 见 [catalog.json](../catalog.json)。
 
-这份规范记录 `@qingye/ui` 的组件实现规则。生成器将它投影为随包分发的 `ai/style.md`，不手改生成副本。设计依据是根 [design.md](../design.md)，当前值与定位见基础层（仓库内部取证：`docs/decisions/2026-10-03-foundation.md`），按逐值裁决（仓库内部取证：`docs/decisions/2026-10-03-value-adjudication.md`）修订。
+这份规范记录 `@qingye_lab/ui` 的组件实现规则。生成器将它投影为随包分发的 `ai/style.md`，不手改生成副本。设计依据是根 [design.md](../design.md)，当前值与定位见基础层（仓库内部取证：`docs/decisions/2026-10-03-foundation.md`），按逐值裁决（仓库内部取证：`docs/decisions/2026-10-03-value-adjudication.md`）修订。
 
 ### 0. 硬要求、选择与预设
 

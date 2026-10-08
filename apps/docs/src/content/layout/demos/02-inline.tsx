@@ -1,6 +1,6 @@
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Text } from "@qingye/ui/components/typography";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "横向排列与对齐", titleEn: "Inline layout and alignment" };
 

@@ -1,4 +1,4 @@
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 import { Component, type ReactNode } from "react";
 import { focusPageHeading } from "@/lib/use-route-effects";
 import { PageState } from "./page-state";

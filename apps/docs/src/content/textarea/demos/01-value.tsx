@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "多行文本", titleEn: "Multiline text" };
 

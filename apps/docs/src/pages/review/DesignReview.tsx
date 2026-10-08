@@ -1,11 +1,11 @@
 import { Fragment, type ReactNode } from "react";
-import { Button, ButtonProtection } from "@qingye/ui/components/button";
-import { Input } from "@qingye/ui/components/input";
-import { Card } from "@qingye/ui/components/card";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { PlusIcon } from "lucide-react";
+import { Button, ButtonProtection } from "@qingye_lab/ui/components/button";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { useTheme } from "@qingye_lab/ui/components/theme-provider";
+import { IconPlus } from "@tabler/icons-react";
 
 // The standalone entry needs its icon before React commits, before window.load.
 if (typeof document !== "undefined" && !document.querySelector('link[rel="icon"]')) {
@@ -62,7 +62,7 @@ export default function DesignReview() {
             ))}
           </div>
           <div className="mt-(--qy-field-group-gap) flex items-center gap-(--qy-action-gap)">
-            {sizes.map((size) => <Button key={size} size={size} shape="icon" variant="bordered" aria-label={`添加 · ${size}`}><PlusIcon aria-hidden="true" /></Button>)}
+            {sizes.map((size) => <Button key={size} size={size} shape="icon" variant="bordered" aria-label={`添加 · ${size}`}><IconPlus aria-hidden="true" /></Button>)}
           </div>
         </Section>
 

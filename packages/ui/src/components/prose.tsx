@@ -38,7 +38,7 @@ export type ProseProps = useRender.ComponentProps<"article">;
  * `:first-child`/`:last-child` 是逐父元素求值的，这条规则对列表项、引用、详情框内部的
  * 首尾块同样成立，不止对纸的直接子元素。
  *
- * 标题层级（墨分五色、以材为祖）：h1 读 title（24/32）、h2 读 chapter（20/28）、
+ * 标题层级：长文自有一阶（篇 28/36、节 22/32、小节 18/28、h4 正文加字重），每级约 1.25 倍；此前借界面的 title/chapter 层级读不出来。旧注：h1 读 title（24/32）、h2 读 chapter（20/28）、
  * h3 读 heading（16/24），都是基础层 §8 已有的内容档，不新开尺寸。h4 读 body-strong
  * （14/20，字重 500）：它与 heading 只差 2px（16→14，约 1.14 倍），低于「相邻内容档至少
  * 差 1.2 倍」的门槛，按基础层 §8 的例外——两档字号相差无几时，层级交给墨色与字重，不再
@@ -129,10 +129,11 @@ const RHYTHM = [
 
 const HEADINGS = [
   // 标题读已有内容档，不新开尺寸；h4 与 heading 字号相差无几，按基础层 §8 的例外交给字重。
-  "[&_h1]:m-0 [&_h1]:mt-(--qy-section-gap) [&_h1]:mb-(--qy-field-gap) [&_h1]:text-title",
-  "[&_h2]:m-0 [&_h2]:mt-(--qy-section-gap) [&_h2]:mb-(--qy-field-gap) [&_h2]:text-chapter",
-  "[&_h3]:m-0 [&_h3]:mt-(--qy-field-group-gap) [&_h3]:mb-(--qy-field-gap) [&_h3]:text-heading",
-  "[&_h4]:m-0 [&_h4]:mt-(--qy-field-group-gap) [&_h4]:mb-(--qy-field-gap) [&_h4]:text-body-strong",
+  // 总标题统领全文，与正文隔一个组间距；小节标题只隔一个组内间隔——层级越高，离正文越远，不倒置。
+  "[&_h1]:m-0 [&_h1]:mt-(--qy-section-gap) [&_h1]:mb-(--qy-field-group-gap) [&_h1]:text-prose-h1",
+  "[&_h2]:m-0 [&_h2]:mt-(--qy-section-gap) [&_h2]:mb-(--qy-field-gap) [&_h2]:text-prose-h2",
+  "[&_h3]:m-0 [&_h3]:mt-(--qy-field-group-gap) [&_h3]:mb-(--qy-field-gap) [&_h3]:text-prose-h3",
+  "[&_h4]:m-0 [&_h4]:mt-(--qy-field-group-gap) [&_h4]:mb-(--qy-field-gap) [&_h4]:text-prose-strong",
   "[&_:where(h1,h2,h3,h4):first-child]:mt-0",
 ].join(" ");
 

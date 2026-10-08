@@ -1,6 +1,6 @@
 import { useId } from "react";
-import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
+import { Field, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
+import { RadioGroup, Radio } from "@qingye_lab/ui/components/radio-group";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 

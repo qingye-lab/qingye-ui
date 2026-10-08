@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@qingye/ui/components/tooltip";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 
 const sides = ["top", "right", "bottom", "left"] as const;
 const labels = { top: "上", right: "右", bottom: "下", left: "左" };

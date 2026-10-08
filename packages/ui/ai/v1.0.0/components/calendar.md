@@ -1,9 +1,9 @@
 # 日历 Calendar
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/calendar
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 5c905501ff0720016458025f843386b60aacab774dd79f7a280da3400ab19160
+Source SHA-256: 7a47bbc0043172cd71716aa38ee26f34bd2160bae3e7011184f8c36d1a77b1a9
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 
@@ -41,7 +41,7 @@ Source SHA-256: 5c905501ff0720016458025f843386b60aacab774dd79f7a280da3400ab19160
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -71,7 +71,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/calendar/demos/01-single.tsx
 ```tsx
 import { useState } from "react";
-import { Calendar, formatLocalDate } from "@qingye/ui/components/calendar";
+import { Calendar, formatLocalDate } from "@qingye_lab/ui/components/calendar";
 export const meta = { title: "单日", titleEn: "Single day" };
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));
@@ -83,7 +83,7 @@ export default function Demo() {
 Source: apps/docs/src/content/calendar/demos/02-range.tsx
 ```tsx
 import { useState } from "react";
-import { Calendar, formatLocalDate, type CalendarDateRange } from "@qingye/ui/components/calendar";
+import { Calendar, formatLocalDate, type CalendarDateRange } from "@qingye_lab/ui/components/calendar";
 export const meta = { title: "范围与禁用日期", titleEn: "Range and disabled dates" };
 export default function Demo() {
   const [value, setValue] = useState<CalendarDateRange | undefined>({ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) });

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Input } from "@qingye/ui/components/input";
-import { VirtualList } from "@qingye/ui/components/virtual-list";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Input } from "@qingye_lab/ui/components/input";
+import { VirtualList } from "@qingye_lab/ui/components/virtual-list";
 export const meta = { title: "项身份与焦点", titleEn: "Identity and focus" };
 const initial = Array.from({ length: 40 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
 const rowSize = 48;

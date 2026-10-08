@@ -1,9 +1,9 @@
 # Input
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/input
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: c641304f552231513c6b8a2f8b0b7e70e533769f87bb2a845397f880d7d41fee
+Source SHA-256: c9f579088e74b98cdb50e18cb34aadd8a64cb51a3569961faea4b93aabf9e3f5
 
 Enter one text value. Search, password visibility, and clearing use the same input.
 
@@ -39,7 +39,7 @@ Input holds the entered value; the caller handles search results and submission.
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -67,8 +67,8 @@ A real border identifies the editable area. Base UI Input retains Field registra
 ### 设备名称
 Source: apps/docs/src/content/input/demos/01-default.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "设备名称", titleEn: "Device name" };
 
@@ -80,8 +80,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/input/demos/02-density.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "密度", titleEn: "Density" };
 
@@ -105,8 +105,8 @@ export default function Demo() {
 ### 字段状态
 Source: apps/docs/src/content/input/demos/03-states.tsx
 ```tsx
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "字段状态", titleEn: "Field states" };
 
@@ -118,8 +118,8 @@ export default function Demo() {
 ### 文件选择
 Source: apps/docs/src/content/input/demos/04-file.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "文件选择", titleEn: "File selection" };
 
@@ -131,8 +131,8 @@ export default function Demo() {
 ### 字数提示
 Source: apps/docs/src/content/input/demos/05-character-count.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 import { useState } from "react";
 
 export const meta = { title: "字数提示", titleEn: "Character limit" };
@@ -155,8 +155,8 @@ export default function Demo() {
 ### 搜索与清空
 Source: apps/docs/src/content/input/demos/06-search.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "搜索与清空", titleEn: "Search and clearing" };
 
@@ -168,8 +168,8 @@ export default function Demo() {
 ### 密码
 Source: apps/docs/src/content/input/demos/07-password.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 import { useState } from "react";
 
 export const meta = { title: "密码", titleEn: "Password" };

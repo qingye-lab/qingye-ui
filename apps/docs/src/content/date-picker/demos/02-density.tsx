@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { DatePicker } from "@qingye/ui/components/date-picker";
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { DatePicker } from "@qingye_lab/ui/components/date-picker";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

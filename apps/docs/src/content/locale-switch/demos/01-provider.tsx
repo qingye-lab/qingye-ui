@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { CopyButton } from "@qingye/ui/components/copy-button";
-import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
+import { LocaleSwitch } from "@qingye_lab/ui/components/locale-switch";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 export const meta = { title: "当前语言", titleEn: "Current locale" };
 export default function Demo() {
   const [locale, setLocale] = useState(zhCN);

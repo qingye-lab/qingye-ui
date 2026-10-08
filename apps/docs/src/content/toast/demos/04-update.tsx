@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { ToastPrimitive } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ToastPrimitive } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "更新与关闭", titleEn: "Update and close" };
 

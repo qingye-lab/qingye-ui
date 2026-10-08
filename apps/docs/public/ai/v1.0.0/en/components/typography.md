@@ -1,9 +1,9 @@
 # Typography
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/typography
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: 341b3221272b3b11edb786eff56d9cdba77db386ad426476010a66beb672efe6
+Source SHA-256: 64ed7fbd3f048ea0688b218a0b216d0efba870c6c9700fa372413f52c54e46ab
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -70,8 +70,8 @@ Body copy, supporting text or numbers; defaults to p.
 ### 标题与正文
 Source: apps/docs/src/content/typography/demos/01-heading.tsx
 ```tsx
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "标题与正文", titleEn: "Headings and body text" };
 export default function Demo() {
@@ -87,8 +87,8 @@ export default function Demo() {
 ### 文字档与数字
 Source: apps/docs/src/content/typography/demos/02-values.tsx
 ```tsx
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "文字档与数字", titleEn: "Text steps and numbers" };
 export default function Demo() {

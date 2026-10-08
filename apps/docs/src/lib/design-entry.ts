@@ -32,5 +32,3 @@ const entry = extractDesignEntry(guide);
 export function designEntryFor(locale: DocsLocale = "zh") { return locale === "zh" ? entry : extractDesignEntry(guide, locale); }
 export const DESIGN_GUIDE = entry.guide;
 export const PROJECT_AGENTS = entry.agents;
-export const PROJECT_DESIGN = entry.design;
-export const TASK_PROMPT = entry.task;

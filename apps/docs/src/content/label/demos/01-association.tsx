@@ -1,7 +1,7 @@
 import { useId } from "react";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
-import { Stack } from "@qingye/ui/components/layout";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "名称关联", titleEn: "Label association" };
 export default function Demo() {

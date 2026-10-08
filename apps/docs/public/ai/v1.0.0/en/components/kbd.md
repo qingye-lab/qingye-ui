@@ -1,7 +1,7 @@
 # Kbd
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/kbd
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: 9bd05176bc2643148c87c549a69cddb63fb6ffe48a2a15f4f1e00567f4491703
 
@@ -47,8 +47,8 @@ Compose native kbd content; the application determines platform key mappings.
 ### 键位
 Source: apps/docs/src/content/kbd/demos/01-states.tsx
 ```tsx
-import { Kbd } from "@qingye/ui/components/kbd";
-import { Inline } from "@qingye/ui/components/layout";
+import { Kbd } from "@qingye_lab/ui/components/kbd";
+import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "键位", titleEn: "Keys" };
 export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd aria-label="Command">⌘</Kbd><Kbd>Enter</Kbd></Inline>; }
 ```

@@ -15,9 +15,9 @@ const SegmentSize = React.createContext<SegmentedControlSize>("md");
 
 /** 分段候选产生一个 radio 值；没有初值时保持未选择，不拥有任何面板。 */
 export function SegmentedControl<Value>({ size = "md", className, ...props }: SegmentedControlProps<Value>) {
-  // 基础层 §6：并列候选是**同一个值**的几段，围在一个共享凹槽里；选中段从槽里
-  // 浮起。轨道几何与候选几何分离——轨道是一个凹面，候选无边框无填充，只有选中
-  // 才浮起。与 ToggleGroup、Tabs 用同一组轨道 token，三处不再是三种画法。
+  // 基础层 §6：并列候选是**同一个值**的几段，围在同一条轨道里（白底加容器线，不是凹槽）。
+  // 轨道几何与候选几何分离：候选的高与圆角由轨道倒推，选中段用填充表达当前值，
+  // 未选段只有文字。与 ToggleGroup、Tabs 用同一组轨道 token（src/track.ts）。
   return <SegmentSize.Provider value={size}><SegmentedControlPrimitive data-slot="segmented-control" data-size={size} {...props}
     className={(state) => cn(
       // 整组占一个控件高度（几何见 src/track.ts）。

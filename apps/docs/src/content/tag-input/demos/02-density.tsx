@@ -1,5 +1,5 @@
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { TagInput } from "@qingye/ui/components/tag-input";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { TagInput } from "@qingye_lab/ui/components/tag-input";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

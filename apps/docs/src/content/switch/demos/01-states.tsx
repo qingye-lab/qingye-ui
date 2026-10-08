@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldContent, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Switch } from "@qingye/ui/components/switch";
+import { Field, FieldContent, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Switch } from "@qingye_lab/ui/components/switch";
 
 export const meta = { title: "状态", titleEn: "States" };
 

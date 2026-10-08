@@ -1,4 +1,4 @@
-import { Toggle, type ToggleSize } from "@qingye/ui/components/toggle";
+import { Toggle, type ToggleSize } from "@qingye_lab/ui/components/toggle";
 
 export const meta = { title: "尺寸", titleEn: "Sizes" };
 const sizes: ToggleSize[] = ["xs", "sm", "md", "lg", "xl"];

@@ -2,7 +2,7 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { ChevronDownIcon } from "lucide-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import { cn } from "../utils";
 import { fillStateNative } from "../fill-state";
 
@@ -47,7 +47,7 @@ export function NativeSelect({ className, render, ref, multiple, size, ...props 
   return (
     <span className="relative inline-grid w-fit max-w-full min-w-0 self-start align-top" data-slot="native-select-wrapper">
       {select}
-      <ChevronDownIcon aria-hidden="true" className={cn("pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground", iconPosition)} data-slot="native-select-icon" />
+      <IconChevronDown aria-hidden="true" className={cn("pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground", iconPosition)} data-slot="native-select-icon" />
     </span>
   );
 }

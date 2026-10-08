@@ -1,7 +1,7 @@
 # 上下文菜单 ContextMenu
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/context-menu
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
 
@@ -54,7 +54,7 @@ Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -84,9 +84,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/context-menu/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuPositioner, ContextMenuPopup, ContextMenuItem } from "@qingye/ui/components/context-menu";
-import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem } from "@qingye/ui/components/menu";
-import { Inline, Stack } from "@qingye/ui/components/layout";
+import { ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuPositioner, ContextMenuPopup, ContextMenuItem } from "@qingye_lab/ui/components/context-menu";
+import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem } from "@qingye_lab/ui/components/menu";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "可见入口与右键", titleEn: "Visible and context triggers" } satisfies DemoMeta;
 export default function Demo() {

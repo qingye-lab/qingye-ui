@@ -1,10 +1,7 @@
 {
   "schemaVersion": 1,
   "brand": "amber",
-  "common": {
-    "--qy-radius-control": "0.25rem",
-    "--qy-radius-panel": "0.5rem"
-  },
+  "common": {},
   "light": {
     "--qy-primary": "#774517",
     "--qy-primary-foreground": "#ffffff"
@@ -13,8 +10,5 @@
     "--qy-primary": "#f3c58b",
     "--qy-primary-foreground": "#261809"
   },
-  "compact": {
-    "--qy-control-md": "1.75rem",
-    "--qy-panel-padding": "1rem"
-  }
+  "compact": {}
 }

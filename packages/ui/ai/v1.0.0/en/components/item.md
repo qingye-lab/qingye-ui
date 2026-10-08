@@ -1,7 +1,7 @@
 # Item
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/item
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: e13727a9c1c89fe005b40eccaa7a01c30d57027b66a9c511e897c3e54b56a850
 
@@ -73,9 +73,9 @@ A real navigation link.
 Source: apps/docs/src/content/item/demos/01-entry.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemLink, ItemTitle } from "@qingye/ui/components/item";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemLink, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "入口与独立动作", titleEn: "Navigation and separate actions" } satisfies DemoMeta;

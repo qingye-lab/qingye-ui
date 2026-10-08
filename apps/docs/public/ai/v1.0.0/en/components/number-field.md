@@ -1,9 +1,9 @@
 # NumberField
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/number-field
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: 4fabab19635e16474b8b1fab6d23a11c086a9cc9e14fd8b585abbe9930fa1fd2
+Source SHA-256: 7dd45e6592f116b40b7a0794577d8492b47fb298b646a95397ed4f2680e51bda
 
 Edit an optional number and adjust it by a declared step.
 
@@ -43,7 +43,7 @@ Direct edits outside the range remain intact for native range validation. Steppi
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -79,8 +79,8 @@ The installed Base UI NumberField namespace.
 ### 值与范围
 Source: apps/docs/src/content/number-field/demos/01-values.tsx
 ```tsx
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "值与范围", titleEn: "Values and bounds" } satisfies DemoMeta;
@@ -100,8 +100,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/number-field/demos/02-density.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

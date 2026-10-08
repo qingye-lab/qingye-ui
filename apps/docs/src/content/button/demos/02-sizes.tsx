@@ -1,4 +1,4 @@
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "位置与尺寸", titleEn: "Size by position" };
 

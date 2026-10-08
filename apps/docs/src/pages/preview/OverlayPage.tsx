@@ -1,30 +1,30 @@
 import * as React from "react";
-import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye/ui/components/accordion";
-import { Alert, AlertDescription, AlertTitle } from "@qingye/ui/components/alert";
-import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye/ui/components/alert-dialog";
-import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye/ui/components/bulk-action-bar";
-import { Button } from "@qingye/ui/components/button";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye/ui/components/collapsible";
-import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye/ui/components/confirm-action";
-import { CopyButton } from "@qingye/ui/components/copy-button";
-import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye/ui/components/dialog";
-import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye/ui/components/drawer";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { HoverCard, HoverCardPopup, HoverCardTrigger } from "@qingye/ui/components/hover-card";
-import { Input } from "@qingye/ui/components/input";
-import { Kbd } from "@qingye/ui/components/kbd";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
-import { PendingValue } from "@qingye/ui/components/pending-value";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { Separator } from "@qingye/ui/components/separator";
-import { Textarea } from "@qingye/ui/components/textarea";
-import { toastManager } from "@qingye/ui/components/toast";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
-import { CircleAlertIcon, CircleCheckIcon, InfoIcon, PencilIcon, TriangleAlertIcon } from "lucide-react";
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye_lab/ui/components/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye_lab/ui/components/alert-dialog";
+import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye_lab/ui/components/bulk-action-bar";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/ui/components/collapsible";
+import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye_lab/ui/components/drawer";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { HoverCard, HoverCardPopup, HoverCardTrigger } from "@qingye_lab/ui/components/hover-card";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Kbd } from "@qingye_lab/ui/components/kbd";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { LocaleSwitch } from "@qingye_lab/ui/components/locale-switch";
+import { PendingValue } from "@qingye_lab/ui/components/pending-value";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Separator } from "@qingye_lab/ui/components/separator";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
+import { toastManager } from "@qingye_lab/ui/components/toast";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
+import { IconAlertCircle, IconCircleCheck, IconInfoCircle, IconPencil, IconAlertTriangle } from "@tabler/icons-react";
 import { COLLECTIONS, GalleryPage, Row, Section } from "./gallery";
 
 /* 浮层与反馈：对话框按「是否必须先回应」区分；轻量浮层不阻断工作面；
@@ -102,7 +102,7 @@ export default function OverlayPage() {
       </Row>
       <Row label="提示">
         <Tooltip>
-          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="重命名" />}><PencilIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="重命名" />}><IconPencil aria-hidden="true" /></TooltipTrigger>
           <TooltipPopup>重命名集合</TooltipPopup>
         </Tooltip>
         <span className="text-support text-muted-foreground">悬停或聚焦图标按钮</span>
@@ -122,10 +122,10 @@ export default function OverlayPage() {
     <Section title="反馈">
       <Row label="就地说明" block lead="panel">
         <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2">
-          <Alert><InfoIcon aria-hidden="true" /><div className="grid gap-1"><AlertTitle>草稿已保留</AlertTitle><AlertDescription>离开这一页不会丢失本次填写的内容。</AlertDescription></div></Alert>
-          <Alert tone="success"><CircleCheckIcon aria-hidden="true" /><div className="grid gap-1"><AlertTitle>规则已启用</AlertTitle><AlertDescription>新的匹配条件对之后导入的记录生效。</AlertDescription></div></Alert>
-          <Alert tone="warning"><TriangleAlertIcon aria-hidden="true" /><div className="grid gap-1"><AlertTitle>同步时间较旧</AlertTitle><AlertDescription>最近一次同步在 3 天前，数字可能不是最新的。</AlertDescription></div></Alert>
-          <Alert tone="danger"><CircleAlertIcon aria-hidden="true" /><div className="grid gap-1"><AlertTitle>导出未完成</AlertTitle><AlertDescription>连接中断，原数据仍在，可以重新导出。</AlertDescription></div></Alert>
+          <Alert><IconInfoCircle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>草稿已保留</AlertTitle><AlertDescription>离开这一页不会丢失本次填写的内容。</AlertDescription></div></Alert>
+          <Alert tone="success"><IconCircleCheck aria-hidden="true" /><div className="grid gap-1"><AlertTitle>规则已启用</AlertTitle><AlertDescription>新的匹配条件对之后导入的记录生效。</AlertDescription></div></Alert>
+          <Alert tone="warning"><IconAlertTriangle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>同步时间较旧</AlertTitle><AlertDescription>最近一次同步在 3 天前，数字可能不是最新的。</AlertDescription></div></Alert>
+          <Alert tone="danger"><IconAlertCircle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>导出未完成</AlertTitle><AlertDescription>连接中断，原数据仍在，可以重新导出。</AlertDescription></div></Alert>
         </div>
       </Row>
       <Row label="通知">

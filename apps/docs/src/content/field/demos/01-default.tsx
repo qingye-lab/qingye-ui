@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "标签与说明", titleEn: "Label and description" };
 

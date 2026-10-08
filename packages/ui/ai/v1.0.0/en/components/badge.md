@@ -1,7 +1,7 @@
 # Badge
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/badge
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: b242907ef4830b800cce0154c41b225bee52164ba08e8d5ee2671c3e5f115c9f
 
@@ -50,8 +50,8 @@ className, style, and render belong to the marker; a marker has no size scale an
 ### 标记
 Source: apps/docs/src/content/badge/demos/01-states.tsx
 ```tsx
-import { Badge } from "@qingye/ui/components/badge";
-import { Inline } from "@qingye/ui/components/layout";
+import { Badge } from "@qingye_lab/ui/components/badge";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "标记", titleEn: "Markers" };
 

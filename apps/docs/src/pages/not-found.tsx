@@ -1,5 +1,5 @@
-import { Button, buttonVariants } from "@qingye/ui/components/button";
-import { ArrowLeftIcon, SearchIcon } from "lucide-react";
+import { Button, buttonVariants } from "@qingye_lab/ui/components/button";
+import { IconArrowLeft, IconSearch } from "@tabler/icons-react";
 import { Link } from "@/components/locale-link";
 import { useDocumentTitle } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
@@ -12,11 +12,11 @@ export function NotFoundContent({ detail }: { detail?: string }) {
   return (
     <PageState state="not-applicable" headingLevel={1} title={locale === "en" ? "Page not found" : "没有找到这个页面"} description={detail}>
         <Link className={buttonVariants()} to="/docs">
-          <ArrowLeftIcon aria-hidden="true" />
+          <IconArrowLeft aria-hidden="true" />
           {locale === "en" ? "Back to docs" : "回到文档"}
         </Link>
         <Button onClick={openSearch} variant="quiet">
-          <SearchIcon aria-hidden="true" />
+          <IconSearch aria-hidden="true" />
           {locale === "en" ? "Search" : "搜索"}
         </Button>
     </PageState>

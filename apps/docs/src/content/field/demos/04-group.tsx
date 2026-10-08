@@ -1,6 +1,6 @@
-import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldGroup, FieldLabel, FieldSeparator } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "字段组", titleEn: "Field groups" };
 

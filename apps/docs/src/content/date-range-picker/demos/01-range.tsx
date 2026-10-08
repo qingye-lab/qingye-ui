@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { DateRangePicker, type DateRangeValue } from "@qingye/ui/components/date-range-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateRangePicker, type DateRangeValue } from "@qingye_lab/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "起止日期", titleEn: "Date endpoints" };
 export default function Demo() {
   const [value, setValue] = useState<DateRangeValue | undefined>();

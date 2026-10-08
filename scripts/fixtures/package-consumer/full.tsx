@@ -1,18 +1,18 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldControl, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
-import { NativeSelect } from "@qingye/ui/components/native-select";
-import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye/ui/components/tabs";
-import { Tree } from "@qingye/ui/components/tree";
-import { Input } from "@qingye/ui/components/input";
-import { Dialog, DialogTrigger, DialogPopup, DialogHeader, DialogTitle, DialogDescription, DialogPanel, DialogFooter, DialogClose } from "@qingye/ui/components/dialog";
-import { DataTable } from "@qingye/ui/components/data-table";
-import { Chart, type ChartRow } from "@qingye/ui/components/chart";
-import { ThemeProvider } from "@qingye/ui/components/theme-provider";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldControl, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Form } from "@qingye_lab/ui/components/form";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye_lab/ui/components/tabs";
+import { Tree } from "@qingye_lab/ui/components/tree";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Dialog, DialogTrigger, DialogPopup, DialogHeader, DialogTitle, DialogDescription, DialogPanel, DialogFooter, DialogClose } from "@qingye_lab/ui/components/dialog";
+import { DataTable } from "@qingye_lab/ui/components/data-table";
+import { Chart, type ChartRow } from "@qingye_lab/ui/components/chart";
+import { ThemeProvider } from "@qingye_lab/ui/components/theme-provider";
 import "./style.css";
 
 type Entry = { id: string; label: string; raw: string };
@@ -59,7 +59,7 @@ function App() {
       </section>
       <section aria-label="手动页签"><Tabs value={tab} onValueChange={value => { setTab(String(value)); setActivations(value => value + 1); }}><TabsList activateOnFocus={false} aria-label="输入视角"><TabsTab value="first">名称</TabsTab><TabsTab value="second">数值</TabsTab></TabsList><TabsPanel value="first"><Input aria-label="页签草稿" defaultValue="保留页签输入" /></TabsPanel><TabsPanel value="second">0</TabsPanel></Tabs><output id="tab-activations">激活次数 {activations}</output></section>
       <section aria-label="树焦点恢复"><Button id="remove-tree-child" onClick={() => { clearTimeout(timer.current); timer.current = setTimeout(() => setChild(false), 500); }}>延迟移除子项</Button><Tree aria-label="层级集合" defaultExpandedIds={["parent"]} nodes={[{ id: "parent", label: "父项", children: child ? [{ id: "child", label: "子项" }] : [] }, { id: "neighbor", label: "相邻项" }]} /><Button id="outside-tree">树外操作</Button></section>
-      <section aria-label="同源图表">{entries.map(entry => <Field key={entry.id}><FieldLabel>{entry.label} 数值</FieldLabel><Input type="number" value={entry.raw} onChange={event => setEntries(value => value.map(item => item.id === entry.id ? { ...item, raw: event.target.value } : item))} /></Field>)}<Chart label="输入数值" categoryLabel="项" valueLabel="数值" rows={rows} series={[{ key: "value", label: "数值" }]} /></section>
+      <section aria-label="同源图表">{entries.map(entry => <Field key={entry.id}><FieldLabel>{entry.label} 数值</FieldLabel><Input type="number" value={entry.raw} onChange={event => setEntries(value => value.map(item => item.id === entry.id ? { ...item, raw: event.target.value } : item))} /></Field>)}<Chart type="bar" label="输入数值" categoryLabel="项" valueLabel="数值" rows={rows} series={[{ key: "value", label: "数值" }]} /></section>
     </main>
   </ThemeProvider>;
 }

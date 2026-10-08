@@ -1,7 +1,7 @@
 # 阅读目录 Toc
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/toc
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
 
@@ -72,8 +72,8 @@ scanTocHeadings 的 React 封装：内容变化（含异步加载）时用 Mutat
 ### 随滚动更新当前项
 Source: apps/docs/src/content/toc/demos/01-scroll-spy.tsx
 ```tsx
-import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye/ui/components/toc";
-import { Inline } from "@qingye/ui/components/layout";
+import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;
@@ -107,7 +107,7 @@ export default function Demo() {
 ### 手写目录与两级层级
 Source: apps/docs/src/content/toc/demos/02-explicit-items.tsx
 ```tsx
-import { Toc } from "@qingye/ui/components/toc";
+import { Toc } from "@qingye_lab/ui/components/toc";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "手写目录与两级层级", titleEn: "A hand-written list with two levels" } satisfies DemoMeta;
 export default function Demo() {

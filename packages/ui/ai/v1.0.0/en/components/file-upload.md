@@ -1,7 +1,7 @@
 # FileUpload
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/file-upload
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: 8401f44ad4592a64c2fcb9d8bb6399a8409aa2c439f04c08783aefa8fcd5741e
 
@@ -43,7 +43,7 @@ The component manages local selection only. The application supplies upload stat
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -72,8 +72,8 @@ The installed Input primitive namespace.
 Source: apps/docs/src/content/file-upload/demos/01-files.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { FileUpload } from "@qingye/ui/components/file-upload";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
 export const meta = { title: "本地文件", titleEn: "Local files" };
 const maxBytes = 64 * 1024;
 export default function Demo() {
@@ -86,8 +86,8 @@ export default function Demo() {
 Source: apps/docs/src/content/file-upload/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { FileUpload } from "@qingye/ui/components/file-upload";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

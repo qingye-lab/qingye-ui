@@ -1,4 +1,4 @@
-import { Proportion } from "@qingye/ui/components/proportion";
+import { Proportion } from "@qingye_lab/ui/components/proportion";
 export const meta = { title: "部分与剩余", titleEn: "Parts and remainder" };
 export default function Demo() {
   return <div className="grid w-full max-w-xl gap-(--qy-section-gap)">

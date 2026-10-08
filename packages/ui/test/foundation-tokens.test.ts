@@ -20,8 +20,9 @@ const px = (expression: string, depth = 0): number => {
     return `(${px(value, depth + 1)})`;
   });
   const arithmetic = resolved.replace(/calc\(/g, "(").replace(/(-?[0-9.]+)rem/g, (_m, n: string) => String(Number(n) * 16)).replace(/(-?[0-9.]+)px/g, "$1");
-  if (!/^[0-9.+\-*/() ]+$/.test(arithmetic)) throw new Error(`not arithmetic: ${arithmetic}`);
-  return Function(`return (${arithmetic});`)() as number;
+  if (!/^(?:[0-9.+\-*/(), ]|round)+$/.test(arithmetic)) throw new Error(`not arithmetic: ${arithmetic}`);
+  // CSS round(值, 步长)：取最近的步长倍数，正数恰在中点时向上。
+  return Function("round", `return (${arithmetic});`)((value: number, step: number) => Math.round(value / step) * step) as number;
 };
 
 test("材与分是唯一的两个尺度锚点：材 20px，分 = 材 / 5", () => {
@@ -48,11 +49,13 @@ test.each([["xs", 1], ["sm", 2], ["md", 3], ["lg", 4], ["xl", 5]] as const)(
   expect(declaration(`--qy-control-${size}`)).not.toContain("--qy-space-");
 });
 
-test("圆角：方整控件 r = min(外高 / 4, 2 分)；浮层内项与控件同角且同心", () => {
-  const radius = (size: string) => px(`var(--qy-radius-${size === "md" || size === "lg" || size === "xl" ? "control" : size})`);
-  for (const size of ["xs", "sm", "md", "lg", "xl"]) expect(radius(size)).toBe(Math.min(px(`var(--qy-control-${size})`) / 4, 8));
+test("圆角与外高成比例 r = round(外高 × 5/16)；浮层内项与控件同角且同心；面板 4 分", () => {
+  for (const size of ["xs", "sm", "md", "lg", "xl"]) expect(px(`var(--qy-radius-${size})`), size).toBe(Math.round(px(`var(--qy-control-${size})`) * 5 / 16));
+  expect([8, 9, 10, 11, 13]).toEqual(["xs", "sm", "md", "lg", "xl"].map(size => px(`var(--qy-radius-${size})`)));
+  expect(px("var(--qy-radius-control)")).toBe(px("var(--qy-radius-md)"));
   expect(px("var(--qy-radius-overlay)") - px("var(--qy-overlay-inset)")).toBe(px("var(--qy-radius-control)"));
-  expect(px("var(--qy-radius-marker)")).toBe(px("var(--qy-marker-size)") / 4);
+  expect(px("var(--qy-radius-marker)")).toBe(Math.round(px("var(--qy-marker-size)") * 5 / 16));
+  expect(px("var(--qy-radius-panel)")).toBe(4 * px("var(--qy-fen)"));
 });
 
 test("文字行高都在分格上", () => {
@@ -75,7 +78,8 @@ test.each([
 test("the converged registry contains exactly the semantic steps with no retired names", () => {
   // 31 → 33（2026-10-03）：control-xl / control-xl-mobile。xl 档曾借用 lg 文字档，
   // 高度增加只换来纵向空白；每个尺寸档现在都有同名文字档。
-  expect(TEXT_STEPS).toHaveLength(33);
+  // 33 → 36（2026-10-08）：prose-h1 / -h2 / -h3。长文自有标题阶梯，界面的 title/chapter 读不出长文层级。
+  expect(TEXT_STEPS).toHaveLength(36);
   for (const role of ["lead", "subheading", "panel-title", "micro-tight", "button", "field-input", "field-label"]) expect(TEXT_STEPS).not.toContain(role);
   for (const role of TEXT_STEPS) for (const property of ["size", "leading", "tracking", "weight"]) expect(declaration(`--qy-text-${role}-${property}`)).toBeDefined();
   // Assistance and dense-region content are distinct semantic scopes (§8).

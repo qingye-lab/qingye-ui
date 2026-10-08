@@ -1,4 +1,4 @@
-import { Sparkline } from "@qingye/ui/components/sparkline";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
 export const meta = { title: "读数旁的趋势", titleEn: "Trend beside a reading" };
 export default function Demo() {
   return <div className="grid gap-(--qy-field-group-gap) text-body">

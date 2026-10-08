@@ -9,10 +9,10 @@
       "path": "registry/qingye.theme.css",
       "type": "registry:file",
       "target": "styles/qingye.theme.css",
-      "content": "/* Project-owned theme. Shared foundation components stay in @qingye/ui. */\nhtml[data-brand=\"project\"] {\n  /* Override paired roles after checking foreground/background contrast. */\n}\n/* Appearance uses ThemeProvider; density uses data-density. */\n"
+      "content": "/* Project-owned theme. Shared foundation components stay in @qingye_lab/ui. */\nhtml[data-brand=\"project\"] {\n  /* Override paired roles after checking foreground/background contrast. */\n}\n/* Appearance uses ThemeProvider; density uses data-density. */\n"
     }
   ],
   "dependencies": [
-    "@qingye/ui@1.0.0"
+    "@qingye_lab/ui@1.0.0"
   ]
 }

@@ -1,9 +1,9 @@
 import { Fragment } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Switch } from "@qingye/ui/components/switch";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { Switch } from "@qingye_lab/ui/components/switch";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 // 用户裁决 2026-10-05：填值控件与勾选类只有一套几何，紧凑由密度轴承担；
 // 所以这张表按密度取列，不再按尺寸档取列。

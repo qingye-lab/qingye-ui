@@ -41,7 +41,7 @@ export function CornerMark(props: CornerMarkProps) {
   const isDot = "dot" in props && props.dot === true;
   const count = "count" in props ? props.count : undefined;
   const max = "max" in props && props.max ? props.max : 99;
-  if (process.env.NODE_ENV !== "production" && !label?.trim()) {
+  if (typeof process !== "undefined" && process.env.NODE_ENV !== "production" && !label?.trim()) {
     throw new Error("CornerMark requires a non-empty label so its mark reaches assistive technology.");
   }
   // 零计数不是「0」这个数字需要被看到，而是当前没有要提醒的事——角标连带 label 一起消失，

@@ -1,18 +1,18 @@
 import * as React from "react";
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
-import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
-import { Prose } from "@qingye/ui/components/prose";
-import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye/ui/components/toc";
-import { Text } from "@qingye/ui/components/typography";
-import { ChevronDownIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+import { Prose } from "@qingye_lab/ui/components/prose";
+import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { IconChevronDown } from "@tabler/icons-react";
 import { GalleryPage, Row, Section } from "./gallery";
 
 /* 组合：评审 2026-10-05 第二包——「分开摆着都协调，不代表放在同一行里仍协调」。
@@ -62,7 +62,7 @@ export default function CompositionPage() {
         <ButtonGroup aria-label="集合动作">
           <Button state={saveState} onClick={() => { setSaveState("in-progress"); window.setTimeout(() => setSaveState("idle"), 900); }}>保存</Button>
           <Menu>
-            <MenuTrigger render={<Button variant="bordered" />}>更多<ChevronDownIcon aria-hidden="true" /></MenuTrigger>
+            <MenuTrigger render={<Button variant="bordered" />}>更多<IconChevronDown aria-hidden="true" /></MenuTrigger>
             <MenuPortal><MenuPositioner><MenuPopup>
               <MenuItem>另存为模板</MenuItem>
               <MenuItem>复制集合</MenuItem>
@@ -129,7 +129,7 @@ export default function CompositionPage() {
     </Section>
 
     <Section title="长文阅读">
-      <Row label="阅读面" block lead="framed-chapter">
+      <Row label="阅读面" block lead="framed-prose">
         {/* 目录在左、文章在右：两者是同一份标题数据的两种呈现，不是各自维护的列表
          * （经营位置：一屏只有一个版心，目录贴着它，不另起一张纸）。 */}
         <Inline gap="panel" align="start" className="flex-wrap">

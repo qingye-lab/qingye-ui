@@ -1,4 +1,4 @@
-import { Heatmap } from "@qingye/ui/components/heatmap";
+import { Heatmap } from "@qingye_lab/ui/components/heatmap";
 export const meta = { title: "每周时段的同步热度", titleEn: "Sync activity by weekday and hour" };
 const days = [
   { key: "mon", label: "周一" }, { key: "tue", label: "周二" }, { key: "wed", label: "周三" },

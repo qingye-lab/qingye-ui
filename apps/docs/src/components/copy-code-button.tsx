@@ -1,6 +1,6 @@
-import { CopyButton } from "@qingye/ui/components/copy-button";
-import { cn } from "@qingye/ui/utils";
-import { useUILocale } from "@qingye/ui/locale";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
+import { cn } from "@qingye_lab/ui/utils";
+import { useUILocale } from "@qingye_lab/ui/locale";
 
 /** The site's code-copy presentation; clipboard state belongs to the library. */
 export function CopyCodeButton({ value, className, label }: { value: string; className?: string; label?: string }) {

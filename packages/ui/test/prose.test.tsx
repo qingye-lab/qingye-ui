@@ -86,20 +86,21 @@ test("the reading pane is a paper distinct from the page background, with a meas
   expect(article.className).toContain("text-reading");
 });
 
-test("headings read existing content tiers with spacing that grows toward the preceding block", () => {
+test("headings read the prose heading scale with spacing that grows toward the preceding block", () => {
   render(<Prose>内容</Prose>);
   const classList = screen.getByRole("article").className;
   // h1/h2 前留节间（两材），h3/h4 前留组间（一材）；标题靠近它统领的内容（组内）。
-  expect(classList).toContain("[&_h1]:text-title");
+  expect(classList).toContain("[&_h1]:text-prose-h1");
   expect(classList).toContain("[&_h1]:mt-(--qy-section-gap)");
-  expect(classList).toContain("[&_h2]:text-chapter");
+  expect(classList).toContain("[&_h2]:text-prose-h2");
   expect(classList).toContain("[&_h2]:mt-(--qy-section-gap)");
-  expect(classList).toContain("[&_h3]:text-heading");
+  expect(classList).toContain("[&_h3]:text-prose-h3");
   expect(classList).toContain("[&_h3]:mt-(--qy-field-group-gap)");
-  // h4 复用 body-strong：与 heading 字号相差无几，交给字重，不新开尺寸。
-  expect(classList).toContain("[&_h4]:text-body-strong");
+  // h4 是正文加字重：长文阶梯的最下一级。
+  expect(classList).toContain("[&_h4]:text-prose-strong");
   expect(classList).toContain("[&_:where(h1,h2,h3,h4):first-child]:mt-0");
-  for (const level of ["h1", "h2", "h3", "h4"]) expect(classList).toContain(`[&_${level}]:mb-(--qy-field-gap)`);
+  expect(classList).toContain("[&_h1]:mb-(--qy-field-group-gap)");
+  for (const level of ["h2", "h3", "h4"]) expect(classList).toContain(`[&_${level}]:mb-(--qy-field-gap)`);
 });
 
 test("paragraphs, lists and blocks share one group-gap token instead of inventing per-element spacing", () => {

@@ -1,6 +1,6 @@
 # 组件规范
 
-这份规范记录 `@qingye/ui` 的组件实现规则。生成器将它投影为随包分发的 `ai/style.md`，不手改生成副本。设计依据是根 [design.md](design.md)，当前值与定位见[基础层](docs/decisions/2026-10-03-foundation.md)，按[逐值裁决](docs/decisions/2026-10-03-value-adjudication.md)修订。
+这份规范记录 `@qingye_lab/ui` 的组件实现规则。生成器将它投影为随包分发的 `ai/style.md`，不手改生成副本。设计依据是根 [design.md](design.md)，当前值与定位见[基础层](docs/decisions/2026-10-03-foundation.md)，按[逐值裁决](docs/decisions/2026-10-03-value-adjudication.md)修订。
 
 ## 0. 硬要求、选择与预设
 
@@ -143,10 +143,10 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=a24dd1609b53755e07bb1697d37a5319bf88ea5683cca2254ec5fd73d93a153c -->
+<!-- qingye:translation:en:start source-sha256=5d77a1dd9ba876cd1cc8c6bca014cc45d77003fdc3190aa275c35def413364d9 -->
 # Component Standards
 
-These are implementation rules for `@qingye/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
+These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
 
 ## 0. Requirements, choices, and presets
 

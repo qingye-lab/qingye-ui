@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
-import { Field, FieldTitle } from "@qingye/ui/components/field";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
+import { Field, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 
 export const meta = { title: "单值", titleEn: "One value" };
 export default function Demo() {

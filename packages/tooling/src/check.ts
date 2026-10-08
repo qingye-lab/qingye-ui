@@ -106,7 +106,7 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
     function moduleRule(node: ts.ImportDeclaration | ts.ExportDeclaration) {
       if (!node.moduleSpecifier || !ts.isStringLiteral(node.moduleSpecifier)) return;
       const moduleName = node.moduleSpecifier.text;
-      if (moduleName.startsWith('@qingye/ui/') && !isPublicSubpath(project,moduleName.slice('@qingye/ui'.length))) {add('imports/private','FAIL',path,lineOf(node),moduleName,'Import through an installed package public export');return;}
+      if (moduleName.startsWith('@qingye_lab/ui/') && !isPublicSubpath(project,moduleName.slice('@qingye_lab/ui'.length))) {add('imports/private','FAIL',path,lineOf(node),moduleName,'Import through an installed package public export');return;}
       const resolved = ts.resolveModuleName(moduleName,path,program.getCompilerOptions(),ts.sys).resolvedModule;
       if (!resolved) { add('imports/unresolved','UNVERIFIED',path,lineOf(node),moduleName,'Resolve the actual dependency/alias; unresolved modules are not validated'); return; }
       const symbol = checker.getSymbolAtLocation(node.moduleSpecifier);

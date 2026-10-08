@@ -1,4 +1,4 @@
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 import { useRef } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { DemoFrame } from "../../src/components/demo";

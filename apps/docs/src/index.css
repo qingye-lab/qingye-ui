@@ -1,14 +1,35 @@
 @import "tailwindcss";
-@import "@qingye/ui/styles.css";
-@import "@fontsource-variable/geist-mono";
+@import "@qingye_lab/ui/styles.css";
 
 @source "./";
 
 :root {
-  --qy-font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
-
   /* Site chrome. */
   --docs-header-height: 3.5rem;
+
+
+  /*
+   * Documentation frame (以材为祖). Every width is a count of 材 or of reading
+   * characters; the counts are presets, the units are the library's.
+   *   rail     12 材  the sidebar
+   *   column   40 材  article column, wide enough for code and demos
+   *   toc      10 材  the on-page contents
+   *   measure  34 reading characters, the running-text line length (same as
+   *            the design-methods page)
+   * Regions are separated by the library's section gap (2 材).
+   */
+  /*
+   * Site frame: the header, the home page, the documentation and the examples
+   * share one centred width, so switching pages never moves an edge.
+   * 66 材 = rail 12 + gap 2 + column 40 + gap 2 + contents 10 (the documentation
+   * frame exactly); the gutter is the smallest margin a narrower window keeps.
+   */
+  --site-width: calc(66 * var(--qy-cai));
+  --site-gutter: calc(2 * var(--qy-cai));
+  --docs-rail: calc(12 * var(--qy-cai));
+  --docs-column: calc(40 * var(--qy-cai));
+  --docs-toc: calc(10 * var(--qy-cai));
+  --docs-measure: calc(34 * var(--qy-text-reading-size));
 
   /*
    * Syntax colours for sugar-high. Three quiet hues (keyword, entity, string)
@@ -38,7 +59,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: calc(var(--docs-header-height) + 1.5rem);
+    scroll-padding-top: calc(var(--docs-header-height) + var(--qy-cai));
     scrollbar-color: color-mix(in srgb, var(--qy-foreground) 22%, transparent) transparent;
     -webkit-tap-highlight-color: transparent;
     text-size-adjust: 100%;
@@ -74,49 +95,37 @@
   }
 }
 
-/* The shared docs navigation keeps its 15rem rail. Both parts of a component
-   name wrap inside that budget, including the translated/mobile navigation. */
-:where(nav[aria-label="文档导航"]) li > a {
-  flex-wrap: wrap;
-  column-gap: var(--qy-space-2);
-  row-gap: var(--qy-space-1);
-}
-:where(nav[aria-label="文档导航"]) li > a > span {
-  min-inline-size: 0;
-  max-inline-size: 100%;
-  flex-shrink: 1;
-  white-space: normal;
-  overflow: visible;
-  overflow-wrap: anywhere;
-  text-overflow: clip;
-}
-
-/* Page-level composition for DocsLayout. Keep its existing 48rem reading
-   measure and 15rem/13rem rails; reveal the TOC only when all three fit.
-   Anchoring the article at the same start also prevents a lateral jump.
-   The container budget follows enlarged text as well as viewport changes. */
-:where(div:has(> aside[data-docs-sidebar])) > div {
+/* Page-level composition for DocsLayout: rail | column | toc. The column keeps
+   one start edge; the TOC appears only when all three fit, so the article never
+   shifts sideways. The container budget follows enlarged text as well as the
+   viewport. */
+:where([data-docs-frame]) > [data-docs-body] {
   container: docs-reading-layout / inline-size;
 }
-:where(div:has(> aside[data-docs-sidebar])) > div > aside[data-docs-toc] {
+:where([data-docs-frame]) > [data-docs-body] > [data-docs-toc] {
   display: none;
 }
 @media (min-width: 1024px) {
-  :where(div:has(> aside[data-docs-sidebar])) > div {
-    padding-inline-start: var(--qy-space-10);
+  :where([data-docs-frame]) > [data-docs-body] {
+    padding-inline-start: var(--qy-section-gap);
   }
-  :where(div:has(> aside[data-docs-sidebar])) > div > main {
-    flex: 0 1 48rem;
+  :where([data-docs-frame]) > [data-docs-body] > main {
+    flex: 0 1 var(--docs-column);
     inline-size: 100%;
-    max-inline-size: 48rem;
+    max-inline-size: var(--docs-column);
   }
 }
-/* 48rem article + 13rem TOC + the existing 3rem region gap. */
-@container docs-reading-layout (min-width: 64rem) {
-  :where(div:has(> aside[data-docs-sidebar])) > div > aside[data-docs-toc] {
+/* column 40 材 + section gap 2 材 + toc 10 材 = 52 材 = 1040px = 65rem.
+   Container conditions cannot read custom properties, so the sum is spelled out. */
+@container docs-reading-layout (min-width: 65rem) {
+  :where([data-docs-frame]) > [data-docs-body] > [data-docs-toc] {
     display: block;
   }
 }
+
+/* One scrollbar gutter on every page: a page that scrolls and one that does not keep the same width. */
+html { scrollbar-gutter: stable; }
+.site-frame { width: min(100% - 2 * var(--site-gutter), var(--site-width)); margin-inline: auto; }
 
 /* --- Code ------------------------------------------------------------------ */
 
@@ -124,28 +133,10 @@
    Page-specific utilities may adjust spacing, but not a heading's rank. */
 .docs-page-title,
 .docs-section-heading { min-inline-size: 0; overflow-wrap: anywhere; }
-h2.docs-section-heading { font-size: var(--qy-text-chapter-size); line-height: var(--qy-text-chapter-leading); }
-h3.docs-section-heading { font-size: var(--qy-text-heading-size); line-height: var(--qy-text-heading-leading); }
-
-/* Standalone workspaces share the site's page-title rank. Embedded demos keep
-   their local heading level and scale. */
-.example-page h1.example-screen-title {
-  font-size: var(--qy-text-display-size);
-  line-height: var(--qy-text-display-leading);
-}
-.example-page h1.example-screen-title:not(:is(:lang(zh), :lang(ja), :lang(ko))) {
-  letter-spacing: var(--qy-text-display-tracking);
-}
-
-/* The frame gutter aligns preview content with its tabs and copy action.
-   Flush demos intentionally own their edge-to-edge composition. */
-.docs-demo-frame { --docs-demo-gutter: var(--qy-space-4); }
-.docs-demo-chrome,
-.docs-demo-preview { padding: var(--docs-demo-gutter); }
-.docs-demo-chrome { padding-block: var(--qy-space-2); }
-@media (min-width: 640px) {
-  .docs-demo-frame { --docs-demo-gutter: var(--qy-space-6); }
-}
+/* Chinese running text justifies with strict line breaking. */
+:lang(zh) .docs-p { text-align: justify; line-break: strict; }
+/* Source markers are superscript numbers that link to the note list at the end of a page. */
+.docs-ref { position: relative; inset-block-start: -0.5em; margin-inline-start: 1px; font-size: var(--qy-text-caption-size); line-height: 0; font-variant-numeric: tabular-nums; }
 
 .docs-code {
   font-family: var(--qy-font-mono);
@@ -164,25 +155,6 @@ h3.docs-section-heading { font-size: var(--qy-text-heading-size); line-height: v
   font-style: italic;
 }
 
-/* Inline code inside running text. `inline` keeps it flowing with the sentence
-   instead of breaking a line on its own inside flex-column containers.
-
-   A plain ratio lands off the ramp: 0.85em over 14px body copy renders 11.9px,
-   a size no step names. The sentence steps it sits in (body, reading, prose)
-   are all within 2px of each other, so one named step serves all of them and
-   stays on the ramp. */
-.docs-inline-code {
-  display: inline;
-  box-decoration-break: clone;
-  font-family: var(--qy-font-mono);
-  font-size: var(--qy-text-caption-size);
-  padding: 0.1em 0.35em;
-  border-radius: var(--qy-radius-sm);
-  background-color: var(--qy-surface-inset);
-  color: var(--qy-foreground-strong);
-  overflow-wrap: break-word;
-}
-
 /* --- Route content entry --------------------------------------------------- */
 
 @keyframes docs-enter {
@@ -197,10 +169,6 @@ h3.docs-section-heading { font-size: var(--qy-text-heading-size); line-height: v
     animation: docs-enter var(--qy-duration-base) var(--qy-ease-out) backwards;
   }
 }
-
-/* Existing component-composition preview remains available to its consumers. */
-.qy-components-preview { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px; padding: 32px; background: var(--qy-background); }
-@media (max-width: 640px) { .qy-components-preview { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 16px; } }
 
 /* Persistent page chrome remains below document popups and modal work surfaces. */
 .docs-site-header { z-index: 1; }

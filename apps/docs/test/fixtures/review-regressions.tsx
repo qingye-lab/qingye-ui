@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
-import { Button } from "@qingye/ui/components/button";
-import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@qingye/ui/components/menu";
-import { ToastPrimitive, ToastProvider } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { ToastPrimitive, ToastProvider } from "@qingye_lab/ui/components/toast";
 
 /** Imported only by the development browser regression runner. */
 export function mountReviewRegressions(host: HTMLElement) {

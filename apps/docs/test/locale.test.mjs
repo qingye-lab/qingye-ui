@@ -1,5 +1,6 @@
 import test, { before, after } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
 
@@ -121,13 +122,14 @@ test("all blank English fields fall back and untranslated reference arrays retai
   assert.equal(localizedMeta(unchanged, "en").api, unchanged.api);
 });
 
-test("English component reference renders translated content, labels, and the original section order", async () => {
+test("English component reference renders translated content, labels, and the section order", async () => {
   const en = await fixture.renderDecisionPage("en", fixture.referenceMeta.slug);
   const headings = [...en.matchAll(/<h2\b[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)];
-  assert.deepEqual(headings.map(match => match[1]), ["examples", "usage", "decisions", "api", "keyboard", "notes"]);
-  ["Examples", "Import", "Decisions", "API", "Keyboard interactions", "Usage notes"].forEach((label, index) => assert.ok(headings[index][2].includes(`>${label}</span>`), label));
-  assert.doesNotMatch(en, /<dl\b/);
-  assert.match(en, /href="\/en\/docs\/components\/reference-fixture#api"[^>]*>Jump to API and usage notes<\/a>/);
+  assert.deepEqual(headings.map(match => match[1]), ["examples", "decisions", "import", "api", "keyboard", "notes"]);
+  ["Examples", "Decisions", "Import", "API", "Keyboard interactions", "Usage notes"].forEach((label, index) => assert.ok(headings[index][2].includes(`>${label}</span>`), label));
+  // Synthesized category defaults stay in the catalog; the page shows authored sections and stated facts only.
+  assert.doesNotMatch(en, /Do not substitute styling for semantics|id="when"|id="state"|<dt>Layer<\/dt>|<dt>Methods<\/dt>/);
+  assert.match(en, /<dt>Exports<\/dt><dd[^>]*>1<\/dd>/);
   for (const header of ["Prop", "Type", "Default", "Description", "Key", "Action"]) assert.match(en, new RegExp(`<th\\b[^>]*>${header}</th>`));
   assert.match(en, /aria-label="None"[^>]*>—<\/span>/);
   assert.match(en, /Import from the component entry to bundle just this file:/);
@@ -148,7 +150,6 @@ test("English component reference renders translated content, labels, and the or
   assert.match(zh, /aria-label="无"[^>]*>—<\/span>/);
   assert.match(zh, />或<\/span>/);
   assert.match(zh, /暂无示例/);
-  assert.match(zh, /跳到 API 与使用建议/);
   assert.match(zh, /触发部件中文/);
   assert.doesNotMatch(zh, /Trigger description|First note/);
 });
@@ -167,7 +168,15 @@ test("design methods and synthesized guidance select English while the catalog d
   assert.equal(methodsFor("zh"), METHODS);
   assert.deepEqual(methodsFor("en").map(method => method.name), names);
   const page = fixture.renderMethodsPage("en");
-  for (const name of names) assert.ok(page.includes(name), name);
+  const pageText = page.replace(/<[^>]*>/g, "");
+  const philosophy = readFileSync(new URL("../src/public-content/philosophy.en.md", import.meta.url), "utf8");
+  const headings = [...philosophy.matchAll(/^## (\d{2})\s+(.+)$/gm)];
+  assert.equal(headings.length, 15);
+  for (const [, number, heading] of headings) {
+    assert.ok(pageText.includes(heading), heading);
+    assert.ok(page.includes(`id="method-${Number(number)}"`), `method-${Number(number)}`);
+  }
+  assert.match(page, /Download design\.md/);
   for (const category of ["通用", "表单", "浮层"]) {
     const meta = { ...referenceMeta, category };
     const en = designFor(meta, meta.slug, "en");

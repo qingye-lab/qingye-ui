@@ -1,6 +1,6 @@
 import { useId } from "react";
-import { Field, FieldDescription, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "标题与自命名控件", titleEn: "Title and self-named control" };
 

@@ -1,5 +1,5 @@
-import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

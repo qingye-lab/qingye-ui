@@ -1,7 +1,7 @@
 # Virtual list
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/virtual-list
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 3543991a92bb175ae6d33351e09983ca82ef9282223fb68199844b3a037d009b
 
@@ -57,7 +57,7 @@ Collection rendering boundary with actual list/listitem semantics, without selec
 ### 集合窗口
 Source: apps/docs/src/content/virtual-list/demos/01-window.tsx
 ```tsx
-import { VirtualList } from "@qingye/ui/components/virtual-list";
+import { VirtualList } from "@qingye_lab/ui/components/virtual-list";
 export const meta = { title: "集合窗口", titleEn: "Collection window" };
 const items = Array.from({ length: 100 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
 const rowSize = 48;
@@ -70,9 +70,9 @@ export default function Demo() {
 Source: apps/docs/src/content/virtual-list/demos/02-focus.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Input } from "@qingye/ui/components/input";
-import { VirtualList } from "@qingye/ui/components/virtual-list";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Input } from "@qingye_lab/ui/components/input";
+import { VirtualList } from "@qingye_lab/ui/components/virtual-list";
 export const meta = { title: "项身份与焦点", titleEn: "Identity and focus" };
 const initial = Array.from({ length: 40 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
 const rowSize = 48;

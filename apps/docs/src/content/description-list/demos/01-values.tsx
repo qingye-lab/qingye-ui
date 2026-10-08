@@ -1,4 +1,4 @@
-import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye/ui/components/description-list";
+import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "值与未知", titleEn: "Values and uncertainty" } satisfies DemoMeta;

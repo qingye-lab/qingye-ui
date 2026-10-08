@@ -1,9 +1,9 @@
 # 侧栏导航 Sidebar
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/sidebar
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 492cabf9207da7da4f7619fddf89ba897fc440a79e179b2ffdf29d1f29af9674
+Source SHA-256: a02db68627ad2040187d6d11629fe57fca3dea50b217161484adc6611e5b7763
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -55,7 +55,7 @@ Source SHA-256: 492cabf9207da7da4f7619fddf89ba897fc440a79e179b2ffdf29d1f29af9674
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -86,11 +86,11 @@ aside 与可逆开关。
 ### 可逆导航与二级
 Source: apps/docs/src/content/sidebar/demos/01-task.tsx
 ```tsx
-import { LayoutPanelLeftIcon, ListTreeIcon, SquareStackIcon } from "lucide-react";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye/ui/components/sidebar";
+import { IconLayoutSidebar, IconListTree, IconStack2 } from "@tabler/icons-react";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "可逆导航与二级", titleEn: "Reversible navigation with a sub-level" } satisfies DemoMeta;
 export default function Demo() {
-  return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active icon={<LayoutPanelLeftIcon aria-hidden="true" />}>侧栏导航</SidebarLink><SidebarSub defaultOpen><SidebarSubTrigger icon={<SquareStackIcon aria-hidden="true" />}>视角标签</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/components/tabs">标签页</SidebarLink><SidebarLink href="/components/segmented-control">分段控件</SidebarLink></SidebarSubContent></SidebarSub><SidebarLink href="/components/tree" icon={<ListTreeIcon aria-hidden="true" />}>层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
+  return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink><SidebarSub defaultOpen><SidebarSubTrigger icon={<IconStack2 aria-hidden="true" />}>视角标签</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/components/tabs">标签页</SidebarLink><SidebarLink href="/components/segmented-control">分段控件</SidebarLink></SidebarSubContent></SidebarSub><SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
 }
 ```

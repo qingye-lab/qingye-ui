@@ -1,1 +1,1 @@
-{"name":"qingye-studio-azure-fixture","private":true,"type":"module","dependencies":{"@qingye/ui":"workspace:*"}}
+{"name":"qingye-studio-azure-fixture","private":true,"type":"module","dependencies":{"@qingye_lab/ui":"workspace:*"}}

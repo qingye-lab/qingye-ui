@@ -1,7 +1,7 @@
 export type Status = 'PASS' | 'FAIL' | 'UNVERIFIED' | 'NOT_RUN';
 export type Theme = { schemaVersion: 1; brand: string; common: Record<string,string>; light: Record<string,string>; dark: Record<string,string>; compact: Record<string,string> };
 export type ProjectConfig = {
-  schemaVersion: 1; package: '@qingye/ui'; publicEntry: string; styleEntry: string;
+  schemaVersion: 1; package: '@qingye_lab/ui'; publicEntry: string; styleEntry: string;
   theme: { source: string; generated: string; mode: 'class' | 'data-theme'; legacyCss?: string[] };
   scan: string[]; compositions: string[]; tokenSources: string[]; adapters: string[];
   diagnostics: { preset: 'recommended' | 'personal' | 'legacy'; mode: 'report' | 'gate'; exceptions?: string; baseline?: string; report: string };

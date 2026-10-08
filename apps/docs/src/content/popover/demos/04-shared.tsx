@@ -1,6 +1,6 @@
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverCreateHandle, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverCreateHandle, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useMemo } from "react";
 
 export const meta = { title: "共享面板", titleEn: "Shared popup" };

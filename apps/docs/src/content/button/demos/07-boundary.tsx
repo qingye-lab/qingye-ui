@@ -1,4 +1,4 @@
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "组合：同底色的边界", titleEn: "Composition: boundary on the same surface" };
 

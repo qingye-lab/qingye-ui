@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
-import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye/ui/components/confirm-action";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
 export const meta = { title: "当前快照", titleEn: "Current snapshot" };
 export default function Demo() {
   const [version, setVersion] = useState(1);

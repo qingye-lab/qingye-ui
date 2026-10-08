@@ -56,7 +56,7 @@ export type TableHeadProps = useRender.ComponentProps<"th">;
  * 一列一条边（§19）；悬停底向外伸出，不把列名推进去。
  */
 export function TableHead({ render, className, scope = "col", ...props }: TableHeadProps) {
-  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-slot=button-with-status]]:-mx-(--qy-control-sm-padding)", className) }, props) });
+  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-slot=button-with-status]>:first-child]:-mx-(--qy-control-sm-padding)", className) }, props) });
 }
 export type TableCellProps = useRender.ComponentProps<"td">;
 export function TableCell({ render, className, ...props }: TableCellProps) {

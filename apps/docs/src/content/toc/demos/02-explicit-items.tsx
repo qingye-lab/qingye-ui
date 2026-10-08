@@ -1,4 +1,4 @@
-import { Toc } from "@qingye/ui/components/toc";
+import { Toc } from "@qingye_lab/ui/components/toc";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "手写目录与两级层级", titleEn: "A hand-written list with two levels" } satisfies DemoMeta;
 export default function Demo() {

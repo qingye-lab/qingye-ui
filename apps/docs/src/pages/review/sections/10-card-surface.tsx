@@ -1,4 +1,4 @@
-import { Card } from "@qingye/ui/components/card";
+import { Card } from "@qingye_lab/ui/components/card";
 import { useEffect, useRef, useState } from "react";
 
 const treatments = [

@@ -1,7 +1,7 @@
 # 字段组 Fieldset
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/fieldset
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
 
@@ -64,9 +64,9 @@ Base UI 公共组合出口。
 ### 字段组
 Source: apps/docs/src/content/fieldset/demos/01-default.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "字段组", titleEn: "Related fields" };
 
@@ -78,9 +78,9 @@ export default function Demo() {
 ### 标签档
 Source: apps/docs/src/content/fieldset/demos/02-label-legend.tsx
 ```tsx
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
 
 export const meta = { title: "标签档", titleEn: "Label legend" };
 
@@ -92,9 +92,9 @@ export default function Demo() {
 ### 整组禁用
 Source: apps/docs/src/content/fieldset/demos/03-disabled.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "整组禁用", titleEn: "Disabled group" };
 

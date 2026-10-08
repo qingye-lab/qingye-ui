@@ -1,7 +1,7 @@
 "use client";
 
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
-import { CheckIcon, ChevronDownIcon, XIcon } from "lucide-react";
+import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { useFloatingLayer } from "../floating-layer";
@@ -38,13 +38,13 @@ export function ComboboxTrigger({ render, children, ...props }: ComboboxPrimitiv
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <ComboboxPrimitive.Trigger data-slot="combobox-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <ChevronDownIcon aria-hidden="true" />}</ComboboxPrimitive.Trigger>;
+  return <ComboboxPrimitive.Trigger data-slot="combobox-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</ComboboxPrimitive.Trigger>;
 }
 export function ComboboxClear({ render, children, ...props }: ComboboxPrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <ComboboxPrimitive.Clear data-slot="combobox-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <XIcon aria-hidden="true" />}</ComboboxPrimitive.Clear>;
+  return <ComboboxPrimitive.Clear data-slot="combobox-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, inControl && "aspect-square", elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</ComboboxPrimitive.Clear>;
 }
 export type ComboboxPopupProps = ComboboxPrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: ComboboxPrimitive.Portal.Props["container"]; positionerProps?: ComboboxPrimitive.Positioner.Props };
 export function ComboboxPopup({ container, positionerProps, className, ...props }: ComboboxPopupProps) {
@@ -61,7 +61,7 @@ export function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Pro
 export function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props & React.RefAttributes<HTMLDivElement>) {
   return <ComboboxPrimitive.Item data-slot="combobox-item" {...props} className={state => cn("flex items-center", overlayItemClassName, candidateItemClassName, typeof className === "function" ? className(state) : className)}>
     <span className="min-w-0 flex-1" data-slot="combobox-item-text">{children}</span>
-    <ComboboxPrimitive.ItemIndicator data-slot="combobox-item-indicator" className="flex shrink-0 items-center [&_svg]:size-(--qy-fill-icon)"><CheckIcon aria-hidden="true" /></ComboboxPrimitive.ItemIndicator>
+    <ComboboxPrimitive.ItemIndicator data-slot="combobox-item-indicator" className="flex shrink-0 items-center [&_svg]:size-(--qy-fill-icon)"><IconCheck aria-hidden="true" /></ComboboxPrimitive.ItemIndicator>
   </ComboboxPrimitive.Item>;
 }
 export function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {

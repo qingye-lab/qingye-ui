@@ -19,7 +19,7 @@ The schemas live in `schemas/`. Required managed and scan paths are project rela
 ```json
 {
   "schemaVersion": 1,
-  "package": "@qingye/ui",
+  "package": "@qingye_lab/ui",
   "publicEntry": "src/ui.ts",
   "styleEntry": "src/ui.css",
   "theme": { "source": "ui.theme.json", "generated": "ui.theme.generated.css", "mode": "class" },

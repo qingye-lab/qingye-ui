@@ -1,9 +1,9 @@
 # Toast
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/toast
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: e75a2d84d1e2b79ce53fdb5488e2d991f81a71ed32ff03bc9677ca56d6469ed3
+Source SHA-256: c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -43,7 +43,7 @@ A notification does not take focus. Unknown means no reliable result; failed mea
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -91,8 +91,8 @@ Base UI Toast primitive namespace; useToastManager manages the owning Provider c
 Source: apps/docs/src/content/toast/demos/01-types.tsx
 ```tsx
 import { useEffect, useId } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "类型", titleEn: "Types" };
 
@@ -125,8 +125,8 @@ export default function Demo() {
 Source: apps/docs/src/content/toast/demos/02-default.tsx
 ```tsx
 import { useEffect, useId } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "正文", titleEn: "Content" };
 
@@ -151,8 +151,8 @@ export default function Demo() {
 Source: apps/docs/src/content/toast/demos/03-action.tsx
 ```tsx
 import { useEffect, useId, useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "操作", titleEn: "Action" };
 
@@ -177,8 +177,8 @@ export default function Demo() {
 Source: apps/docs/src/content/toast/demos/04-update.tsx
 ```tsx
 import { useEffect, useId, useRef } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { ToastPrimitive } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ToastPrimitive } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "更新与关闭", titleEn: "Update and close" };
 
@@ -203,8 +203,8 @@ export default function Demo() {
 Source: apps/docs/src/content/toast/demos/05-stack.tsx
 ```tsx
 import { useEffect, useRef } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { toastManager } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "堆叠", titleEn: "Stack" };
 
@@ -225,8 +225,8 @@ export default function Demo() {
 Source: apps/docs/src/content/toast/demos/06-anchored.tsx
 ```tsx
 import { useEffect, useId, useRef } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { AnchoredToastProvider, ToastPrimitive } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { AnchoredToastProvider, ToastPrimitive } from "@qingye_lab/ui/components/toast";
 
 export const meta = { title: "关联入口", titleEn: "Anchored notification" };
 

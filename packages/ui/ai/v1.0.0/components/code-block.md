@@ -1,9 +1,9 @@
 # 代码 CodeBlock
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/code-block
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 3f34e5f075101b032c1a6977304d95c61cb0d2c9911c060e5310f37900fb619e
+Source SHA-256: 64c687b312485e84b125bdcc8b61db12ba06eb6cd4e4198840f46533dffac097
 
 文本原样展示与真实复制结果。
 
@@ -36,7 +36,7 @@ pre/code 保留空白、字符与完整宽度，不伪造高亮。复制复用 u
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -56,7 +56,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 原样文本与复制
 Source: apps/docs/src/content/code-block/demos/01-text.tsx
 ```tsx
-import { CodeBlock } from "@qingye/ui/components/code-block";
+import { CodeBlock } from "@qingye_lab/ui/components/code-block";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "原样文本与复制", titleEn: "Literal text and copy" } satisfies DemoMeta;
 export default function Demo() {

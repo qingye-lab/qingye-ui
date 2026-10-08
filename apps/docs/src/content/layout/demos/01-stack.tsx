@@ -1,6 +1,6 @@
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "纵向排列", titleEn: "Vertical layout" };
 

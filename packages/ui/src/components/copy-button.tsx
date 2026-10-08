@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, CopyIcon } from "lucide-react";
+import { IconCheck, IconCopy } from "@tabler/icons-react";
 import * as React from "react";
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
 import { useUILocale } from "../locale";
@@ -24,7 +24,7 @@ export function CopyButton({ value, timeout = 2000, onCopySuccess, onCopyError, 
     onError: error => { setFailed(true); onCopyError?.(error); },
   });
   const copied = isCopied && confirmedValue === value;
-  const Icon = copied ? CheckIcon : CopyIcon;
+  const Icon = copied ? IconCheck : IconCopy;
   return <>
     <Button {...props} data-slot="copy-button" variant={variant} shape={shape} state={isCopying ? "in-progress" : "idle"}
       aria-label={props["aria-label"] ?? messages.copy}

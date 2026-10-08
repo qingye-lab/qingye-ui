@@ -37,6 +37,7 @@ export function parseLocalDate(text: string): Date | undefined {
 /** Mature date semantics with current control geometry and locally formatted names. */
 export function Calendar({ className, classNames, components, style, locale, labels, render, ref, ...props }: CalendarProps) {
   const { code, messages } = useUILocale();
+  const nameList = new Intl.ListFormat(code, { type: "conjunction", style: "narrow" });
   const dateName = (date: Date) => new Intl.DateTimeFormat(code, { year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(date);
   // 日期格与翻页按钮都是「在网格里选一个日期」的位置：几何跟随填值控件角色层，
   // 大小不表达重要性（用户裁决 2026-10-05）。单元格宽度另由 --qy-calendar-cell 定。
@@ -57,7 +58,7 @@ export function Calendar({ className, classNames, components, style, locale, lab
     labels={{
       labelNext: () => messages.nextMonth, labelPrevious: () => messages.previousMonth,
       labelMonthDropdown: () => messages.month, labelYearDropdown: () => messages.year,
-      labelDayButton: (date, modifiers) => [dateName(date), modifiers.today ? messages.today : "", modifiers.selected ? messages.selectedDate : ""].filter(Boolean).join("，"),
+      labelDayButton: (date, modifiers) => nameList.format([dateName(date), modifiers.today ? messages.today : "", modifiers.selected ? messages.selectedDate : ""].filter(Boolean)),
       labelGrid: date => new Intl.DateTimeFormat(code, { year: "numeric", month: "long" }).format(date), ...labels,
     }}
   /></RootComposition.Provider>;

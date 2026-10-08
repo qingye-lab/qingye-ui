@@ -13,4 +13,11 @@ describe("Steps", () => {
     render(<Steps><Step state="error"><StepTitle><a href="#edit">重新编辑</a></StepTitle></Step><Step state="complete"><StepTitle>另一步</StepTitle></Step></Steps>);
     expect(screen.getByText("出错")).toBeInTheDocument(); expect(screen.getByRole("link")).toHaveAttribute("href", "#edit"); expect(screen.getByText("已完成")).toBeInTheDocument();
   });
+  it("renders only its marker, content and state as grid items", () => {
+    render(<Steps><Step state="complete"><StepTitle>一</StepTitle></Step></Steps>);
+    const item = screen.getByRole("listitem");
+    // 网格只有三格：点、内容、读屏状态；源码注释误写进 JSX 时会多出一个文本节点挤进一材宽的列。
+    expect([...item.childNodes].filter(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim())).toHaveLength(0);
+    expect(item.textContent).toBe("一已完成");
+  });
 });

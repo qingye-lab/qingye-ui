@@ -1,7 +1,7 @@
 # 动效策略 MotionProvider
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/motion-provider
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
 
@@ -53,9 +53,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 输入方式
 Source: apps/docs/src/content/motion-provider/demos/01-modality.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Text } from "@qingye/ui/components/typography";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Text } from "@qingye_lab/ui/components/typography";
 import { useEffect, useState } from "react";
 
 export const meta = { title: "输入方式", titleEn: "Input modality" };
@@ -83,8 +83,8 @@ export default function Demo() {
 ### 即时变化
 Source: apps/docs/src/content/motion-provider/demos/02-custom.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import { useState } from "react";
 
 export const meta = { title: "即时变化", titleEn: "Instant changes" };

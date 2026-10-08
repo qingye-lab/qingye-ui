@@ -1,5 +1,5 @@
-import { Field, FieldContent, FieldLabel } from "@qingye/ui/components/field";
-import { Switch } from "@qingye/ui/components/switch";
+import { Field, FieldContent, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Switch } from "@qingye_lab/ui/components/switch";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 

@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
-import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
-import { RadioGroup, Radio } from "@qingye/ui/components/radio-group";
+import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
+import { RadioGroup, Radio } from "@qingye_lab/ui/components/radio-group";
 
 export const meta = { title: "状态", titleEn: "States" };
 

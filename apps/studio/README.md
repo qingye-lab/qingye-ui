@@ -1,6 +1,6 @@
 # Qingye Theme Studio
 
-The local application uses the shared `@qingye/tooling` service, actual library components and two independent iframe documents. Visual finalization is deferred; Azure and Amber are synthetic integration fixtures, not an approved default redesign.
+The local application uses the shared `@qingye/tooling` service, actual library components and two independent iframe documents. Azure and Amber are integration fixtures with brand paint only; sizing, typography, radius and density come from the library. `/preview.html` shows the unmodified library theme.
 
 ```sh
 pnpm --filter @qingye/tooling build
@@ -14,7 +14,7 @@ pnpm --filter @qingye/studio build
 QINGYE_STUDIO_PROJECTS='/absolute/app-a,/absolute/app-b' pnpm --filter @qingye/studio exec vite preview --host 127.0.0.1 --port 5181
 ```
 
-The two fixture paths are `apps/studio/fixtures/azure` and `apps/studio/fixtures/amber`. If copying them outside the workspace for acceptance, link/install the intended actual `@qingye/ui` package into that explicit copy; module lookup must not be replaced with an implicit workspace fallback. Adjust its read-only ledger/root references explicitly when the copy changes location.
+The two fixture paths are `apps/studio/fixtures/azure` and `apps/studio/fixtures/amber`. If copying them outside the workspace for acceptance, link/install the intended actual `@qingye_lab/ui` package into that explicit copy; module lookup must not be replaced with an implicit workspace fallback. Adjust its read-only ledger/root references explicitly when the copy changes location.
 
 The local API accepts fixed project IDs, not arbitrary request paths. All requests require a loopback Host; cross-origin requests are refused. Mutations require same-origin `Origin`, JSON, a service session token, bounded request size and source fingerprints. Responses disable caching. Tokens and local paths stay in this local application; no account, remote model or telemetry is used.
 
@@ -22,7 +22,9 @@ Studio's Vite build uses this workspace's installed UI source. Preview metadata 
 
 The editor supports registered overrides, import/export, a validated candidate diff, guarded apply, reset of unapplied work and reread after an external edit. Basic parameters are brand paint pairing, preview light/dark, preview standard/compact, control height, control radius and panel radius. Advanced fields come from the installed token registry; their impact is limited to the existing ledger's mapped/measured parts. No slider changes authorization or business save strategy.
 
-Each iframe mounts its own `ThemeProvider` with `storageKey={null}` and its own Toast manager. Messages update brand, chosen brightness mode, density and generated CSS without remounting the preview task. Drafts, query, object selection, simulated outcome and open state belong to that iframe. Previews cover real Button/Input, InputGroup, an edit form with failure recovery, a selected collection, reading and Menu/Select/Dialog/Toast portals. Simulated results are explicitly labeled and never write business data.
+Each iframe mounts its own `ThemeProvider` with `storageKey={null}` and its own Toast manager. Messages update brand, chosen brightness mode, density and generated CSS without remounting the preview task. The document draft, filtering, related-document selection and open state belong to that iframe. Applying changes affects only that local preview; an empty document name produces a real validation error. Menu, Select, Dialog and Toast use the same library components and remain in their owning document. Studio shell typography is scoped so it cannot replace preview or Portal typography.
+
+`node scripts/verify-studio.mjs` uses isolated fixture copies and an ephemeral port. It captures `library-default-light.png` and `library-default-dark.png` before stress mutations, and checks 10px control radii and the 16px Card radius against the current default. Later screenshots with 19–29px test overrides are stress evidence; they do not represent the library's default appearance. The runner closes its own browser and server, leaving the normal Studio service untouched.
 
 “影响” reads the existing static/runtime ledger. Element inspection uses actual `data-slot` markers; no marker/mapping is unknown ownership. The current project report uses the shared scanner, and the multi-project panel reads existing reports without starting scans. Missing/stale evidence remains `UNVERIFIED/NOT_RUN`.
 

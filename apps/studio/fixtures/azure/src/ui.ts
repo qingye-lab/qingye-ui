@@ -1,2 +1,2 @@
-export { Button } from '@qingye/ui/components/button';
-export { Input } from '@qingye/ui/components/input';
+export { Button } from '@qingye_lab/ui/components/button';
+export { Input } from '@qingye_lab/ui/components/input';

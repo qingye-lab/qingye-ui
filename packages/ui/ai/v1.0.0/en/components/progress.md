@@ -1,7 +1,7 @@
 # Progress
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/progress
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2
 
@@ -71,8 +71,8 @@ Public Base UI Progress primitive.
 ### 已确认与不定进度
 Source: apps/docs/src/content/progress/demos/01-states.tsx
 ```tsx
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye/ui/components/progress";
-import { Stack } from "@qingye/ui/components/layout";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye_lab/ui/components/progress";
+import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "已确认与不定进度", titleEn: "Confirmed and indeterminate progress" };
 export default function Demo() { return <Stack gap="fields" className="w-full max-w-sm">{([0,50,100,null] as const).map((value,index) => <Progress key={index} value={value}><ProgressLabel>进度</ProgressLabel><ProgressValue /><ProgressTrack><ProgressIndicator /></ProgressTrack></Progress>)}</Stack>; }
 ```

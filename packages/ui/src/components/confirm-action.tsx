@@ -35,6 +35,7 @@ function capture(snapshot: ConfirmActionSnapshot) { return Object.freeze({ ...sn
 /** Confirmation binds to a reviewed snapshot; requesting an action never announces its result. */
 export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onConfirm, state = "idle", disabled = false, tone = "danger", confirmationText, confirmationLabel, triggerProps = {}, confirmProps = {}, inputProps = {}, popupProps, children, open: openProp, defaultOpen = false, onOpenChange, ...props }: ConfirmActionProps) {
   const { messages } = useUILocale();
+  const consequenceId = React.useId();
   const currentKey = snapshotKey(snapshot, confirmationText);
   const hasConfirmationLabel = React.Children.toArray(confirmationLabel).some(child => typeof child !== "string" || child.trim() !== "");
   if (confirmationText !== undefined && (!confirmationText || !hasConfirmationLabel)) throw new TypeError("ConfirmAction confirmationText requires non-empty text and a visible confirmationLabel.");
@@ -61,7 +62,10 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
     if (next) reread();
     if (openProp === undefined) setLocalOpen(next);
   }}>
-    <AlertDialogTrigger render={<Button {...triggerProps} state={state} disabled={disabled} />}>{triggerLabel}</AlertDialogTrigger>
+    {/* 触发只是开始一个有后果的流程：描边加同一色调；实心的危险色留给对话框里最后确认的那一下（君位：一个流程一个最重点）。 */}
+    {/* 后果在按下之前就可读到：触发按钮关联快照里的后果（只给读屏，界面上由调用方的说明承担）。 */}
+    <span id={consequenceId} className="sr-only">{snapshot.consequence}</span>
+    <AlertDialogTrigger render={<Button variant="bordered" tone={tone} {...triggerProps} aria-describedby={[triggerProps["aria-describedby"], consequenceId].filter(Boolean).join(" ")} state={state} disabled={disabled} />}>{triggerLabel}</AlertDialogTrigger>
     <AlertDialogPopup {...popupProps}>
       <AlertDialogHeader><AlertDialogTitle>{title}</AlertDialogTitle></AlertDialogHeader>
       <AlertDialogPanel><div data-slot="confirm-action-snapshot" className="grid min-w-0 gap-(--qy-field-gap)">

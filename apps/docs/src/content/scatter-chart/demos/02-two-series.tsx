@@ -1,4 +1,4 @@
-import { ScatterChart } from "@qingye/ui/components/scatter-chart";
+import { ScatterChart } from "@qingye_lab/ui/components/scatter-chart";
 export const meta = { title: "两个来源的记录数与失败率", titleEn: "Two sources, records vs. failure rate" };
 export default function Demo() {
   return <ScatterChart className="w-full max-w-2xl" label="设备与审计来源的记录数与失败率" xLabel="记录数" yLabel="失败率"

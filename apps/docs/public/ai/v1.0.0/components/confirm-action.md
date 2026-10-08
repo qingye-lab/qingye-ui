@@ -1,9 +1,9 @@
 # 确认动作 ConfirmAction
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/confirm-action
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
-Source SHA-256: 96af79d77096a5ea1475c727911be72e610793c1d86863db460857f087c54225
+Source SHA-256: 6003731bc618e0b8fc86e80a9f526e4acc7bfb3bd045095cfa395f32d8822283
 
 确认具体对象、版本与变更，内容改变后重新阅读。
 
@@ -39,7 +39,7 @@ Source SHA-256: 96af79d77096a5ea1475c727911be72e610793c1d86863db460857f087c54225
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -69,9 +69,9 @@ AlertDialog、ButtonProtection 与可选 Field/Input 的确认组合。
 Source: apps/docs/src/content/confirm-action/demos/01-snapshot.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
-import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye/ui/components/confirm-action";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
 export const meta = { title: "当前快照", titleEn: "Current snapshot" };
 export default function Demo() {
   const [version, setVersion] = useState(1);
@@ -86,7 +86,7 @@ export default function Demo() {
 ### 结果未知
 Source: apps/docs/src/content/confirm-action/demos/02-outcome.tsx
 ```tsx
-import { ConfirmAction } from "@qingye/ui/components/confirm-action";
+import { ConfirmAction } from "@qingye_lab/ui/components/confirm-action";
 
 export const meta = { title: "结果未知", titleEn: "Unknown outcome" };
 

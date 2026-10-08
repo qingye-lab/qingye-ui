@@ -1,7 +1,7 @@
 # 构成 Proportion
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/proportion
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: a6ca2d97dabe3018be157df2cffedebdb00938e6f8b098267ddb16010fd2877c
 
@@ -51,7 +51,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 部分与剩余
 Source: apps/docs/src/content/proportion/demos/01-storage.tsx
 ```tsx
-import { Proportion } from "@qingye/ui/components/proportion";
+import { Proportion } from "@qingye_lab/ui/components/proportion";
 export const meta = { title: "部分与剩余", titleEn: "Parts and remainder" };
 export default function Demo() {
   return <div className="grid w-full max-w-xl gap-(--qy-section-gap)">

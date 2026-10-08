@@ -71,7 +71,7 @@ test("every documented type step is pinned in the precompiled stylesheet", () =>
   // theme.css names the steps; src/text-steps.ts is the list `cn()` and the
   // library build both read. A step in one and not the other either loses its
   // size at runtime (tailwind-merge reads an unknown `text-*` as a colour) or
-  // never reaches `@qingye/ui/ui.css`. Both failures are quiet, so they are
+  // never reaches `@qingye_lab/ui/ui.css`. Both failures are quiet, so they are
   // checked rather than trusted.
   const theme = readFileSync(join(repo, "packages/ui/theme.css"), "utf8");
   const declared = [...theme.matchAll(/^\s*--text-([a-z][a-z-]*?):\s*var\(--qy-text-[a-z-]+-size\)/gm)].map((match) => match[1]);

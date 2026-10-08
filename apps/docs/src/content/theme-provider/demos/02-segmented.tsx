@@ -1,10 +1,10 @@
-import { Label } from "@qingye/ui/components/label";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { Text } from "@qingye/ui/components/typography";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
-import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { useTheme } from "@qingye_lab/ui/components/theme-provider";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { Radio, RadioGroup } from "@qingye_lab/ui/components/radio-group";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 
 export const meta = { title: "外观设置", titleEn: "Appearance settings" };
 
@@ -12,9 +12,9 @@ export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
   const options = [
-    { value: "light", label: messages.lightTheme, icon: SunIcon },
-    { value: "dark", label: messages.darkTheme, icon: MoonIcon },
-    { value: "system", label: messages.systemTheme, icon: MonitorIcon },
+    { value: "light", label: messages.lightTheme, icon: IconSun },
+    { value: "dark", label: messages.darkTheme, icon: IconMoon },
+    { value: "system", label: messages.systemTheme, icon: IconDeviceDesktop },
   ] as const;
   return <Stack gap="field">
     <fieldset className="min-w-0">

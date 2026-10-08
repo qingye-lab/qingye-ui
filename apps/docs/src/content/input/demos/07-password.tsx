@@ -1,5 +1,5 @@
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 import { useState } from "react";
 
 export const meta = { title: "密码", titleEn: "Password" };

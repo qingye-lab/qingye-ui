@@ -3,7 +3,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { useRender } from "@base-ui/react/use-render";
-import { XIcon } from "lucide-react";
+import { IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -36,6 +36,9 @@ export type TagInputProps = Omit<useRender.ComponentProps<"div">, "defaultValue"
 // 标签文字比控件低一档：标签是边界内的从属对象，与 md 标签高度取 xs 控件外高同一关系。
 const chipText = "text-control-md-mobile sm:text-control-md";
 
+// 默认值用稳定引用：每次渲染新建的空数组会让依赖它的 effect 反复重订阅。
+const NO_TAGS: readonly string[] = Object.freeze([]);
+
 // Field still registers the editing entrance; only confirmed hidden inputs own submission names.
 function DraftInputSurface({ elementProps, state, render }: { elementProps: React.ComponentPropsWithRef<"input">; state: InputPrimitive.State; render: InputProps["render"] }) {
   return useRender({ defaultTagName: "input", render, state: { ...state }, ref: elementProps.ref, props: { ...elementProps, name: undefined } });
@@ -43,7 +46,7 @@ function DraftInputSurface({ elementProps, state, render }: { elementProps: Reac
 
 /** 已确认集合与草稿分开；受控添加尚未接受时不清除草稿。 */
 export function TagInput({
-  value: valueProp, defaultValue = [], onValueChange, draft: draftProp, defaultDraft = "", onDraftChange,
+  value: valueProp, defaultValue = NO_TAGS, onValueChange, draft: draftProp, defaultDraft = "", onDraftChange,
   name, form, disabled = false, readOnly = false, inputProps = {},
   className, render, ref, ...props
 }: TagInputProps) {
@@ -167,7 +170,7 @@ export function TagInput({
                 else if (event.key === "ArrowLeft") { event.preventDefault(); (removeRefs.current[index - 1] ?? inputRef.current)?.focus(); }
                 else if (event.key === "ArrowRight") { event.preventDefault(); (removeRefs.current[index + 1] ?? inputRef.current)?.focus(); }
               }}
-            ><XIcon aria-hidden="true" /></Button>}
+            ><IconX aria-hidden="true" /></Button>}
           </li>)}
         </ul>}
         {/* 草稿与添加动作成对换行：添加只作用于草稿，二者分到两行时动作失去对象。 */}

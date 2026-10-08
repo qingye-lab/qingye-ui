@@ -1,7 +1,7 @@
 # 测量 Meter
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/meter
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: de0a572e25222332f6ee27c73e0a933fb66a5344d9c63f541af9882849be3383
 
@@ -69,8 +69,8 @@ Base UI Meter 公共原语。
 ### 测量值
 Source: apps/docs/src/content/meter/demos/01-states.tsx
 ```tsx
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye/ui/components/meter";
-import { Stack } from "@qingye/ui/components/layout";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye_lab/ui/components/meter";
+import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "测量值", titleEn: "Measurements" };
 export default function Demo() { return <Stack gap="fields" className="w-full max-w-sm">{[0,40,100].map(value => <Meter key={value} value={value}><MeterLabel>测量</MeterLabel><MeterValue /><MeterTrack><MeterIndicator /></MeterTrack></Meter>)}</Stack>; }
 ```

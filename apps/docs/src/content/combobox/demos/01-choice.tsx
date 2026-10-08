@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
 const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {

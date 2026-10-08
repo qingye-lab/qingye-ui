@@ -1,7 +1,7 @@
 // Caller owns page/context/browser lifecycle. Every export uses only the supplied tab.
 const slots = {
   button: '[data-slot="button"]', input: '[data-slot="input-control"]',
-  select: '[data-slot="select-trigger"][data-size="md"]', group: '[data-slot="input-group"]',
+  select: '[data-slot="select-trigger"]', group: '[data-slot="input-group"]',
   card: '[data-slot="card"]', field: '[data-slot="field"]',
 };
 async function route(page, baseURL, component, theme) {

@@ -1,4 +1,4 @@
-import { cn } from "@qingye/ui/utils";
+import { cn } from "@qingye_lab/ui/utils";
 
 /** The mark: a rounded tile carrying a single-stroke Q. */
 export function LogoMark({ className }: { className?: string }) {

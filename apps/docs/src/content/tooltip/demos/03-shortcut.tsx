@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { BoldIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { IconBold } from "@tabler/icons-react";
 
 export const meta = { title: "快捷键" };
 
@@ -15,7 +15,7 @@ export default function Demo() {
       }
     }}>
       <Tooltip>
-        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><IconBold aria-hidden="true" /></TooltipTrigger>
         <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>
       </Tooltip>
       <p className="text-body text-foreground">{bold ? <strong>让器物服务于人</strong> : "让器物服务于人"}</p>

@@ -4,7 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Text as RechartsText, Tooltip, XAxis, YAxis } from "recharts";
 import * as React from "react";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "./collapsible";
+import { Button } from "./button";
 import { Empty } from "./empty";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { useUILocale } from "../locale";
@@ -67,9 +67,9 @@ const CHART_TYPES = new Set<ChartType>(["line", "bar", "area", "area-stacked", "
 export const PLOT_PRESETS: ChartStyle = { "--qy-chart-plot-height": "calc(10 * var(--qy-cai))" };
 export const MARKERS: readonly ChartMarker[] = ["circle", "square", "triangle", "diamond", "cross"];
 export const MARK = 8;
-export const STROKE = 2;
-export const BAR_MAX = 24;
-export const BAR_RADIUS = 4;
+const STROKE = 2;
+const BAR_MAX = 24;
+const BAR_RADIUS = 4;
 export const SURFACE_GAP = 2;
 
 export function MarkerShape({ marker }: { marker: ChartMarker }) {
@@ -247,12 +247,31 @@ export function readValue(row: ChartRow, key: string): ChartValue {
 }
 
 /** 同源的图形、命名的轴、图例（两个以上系列）与按需展开的等价数据表。 */
+/** 「查看数据」：图的等价数据表按需展开在图下；按钮在标题栏右端，展开时像被按下。Chart、ScatterChart、Heatmap 共用。 */
+export function useChartData() {
+  const id = React.useId(); const [open, setOpen] = React.useState(false); const { messages } = useUILocale();
+  const toggle = <Button data-slot="chart-data-toggle" variant="quiet" size="sm" aria-expanded={open} aria-controls={id} onClick={() => setOpen(value => !value)} className="-me-(--qy-control-sm-padding) shrink-0 whitespace-nowrap text-muted-foreground aria-expanded:bg-(--qy-surface-active) aria-expanded:text-foreground">{messages.chartData}</Button>;
+  return { id, open, toggle };
+}
+
+/** 图的标题栏一行（经营位置）：图名在左；图例与「查看数据」在右，同一条行中线。三种图一种画法（NG3）。 */
+export function ChartHeader({ titleId, label, legend, toggle }: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }) {
+  return <div data-slot="chart-header" className="mb-(--qy-field-gap) flex min-h-(--qy-control-sm) min-w-0 flex-wrap items-center gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) [&_[data-slot=button-content]]:whitespace-nowrap">
+    {/* 图名所在的行恒为一个小号控件高：标题栏折行时，第一行的中线也不动。 */}
+    <figcaption id={titleId} className="flex min-h-(--qy-control-sm) min-w-0 grow items-center text-heading wrap-anywhere">{label}</figcaption>
+    {legend}{toggle}
+  </div>;
+}
+
+/** 图例：一行色块与名称，浓墨小字。 */
+export const legendClassName = "m-0 flex min-w-0 list-none flex-wrap gap-x-(--qy-field-group-gap) gap-y-(--qy-field-gap) p-0 text-support text-muted-foreground";
+
 export function Chart({ label, state = "ready", render, ref, className, style, ...props }: ChartProps) {
   if (!label.trim()) throw new Error("Chart requires a nonempty accessible label.");
-  const titleId = React.useId();
+  const titleId = React.useId(); const dataView = useChartData();
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
-  let content: React.ReactNode;
+  let content: React.ReactNode; let legend: React.ReactNode = null;
   const { type, categoryLabel, valueLabel, series, rows, total, formatValue, renderPlot, children, ...native } = props as Omit<ChartBaseProps, "label"> & Partial<Extract<ChartProps, { state?: "ready" }>> & { children?: React.ReactNode };
   if (state !== "ready") content = <Empty state={state}>{children}</Empty>;
   else {
@@ -285,24 +304,24 @@ export function Chart({ label, state = "ready", render, ref, className, style, .
     };
     const projection: ChartPlotData = { type, data, series: projected, categoryLabel, valueLabel, ...(type === "donut" && total !== undefined ? { total } : {}) };
     const isDonut = type === "donut";
+    legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><LegendKey series={item} type={type} /><span>{item.label}</span></li>)}</ul>;
     content = <>
-      {!single && <ul data-slot="chart-legend" className="flex min-w-0 flex-wrap gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) text-support">{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><LegendKey series={item} type={type} /><span>{item.label}</span></li>)}</ul>}
       {/* 看得见的只有量的名字（单位）：刻度上的类别（周一…、各来源）已经自说自话，再标「日期」是重复。
           类别轴名留给读屏与数据表的表头。 */}
       {!isDonut && <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{valueLabel}</div>}
       {numeric && <div data-slot="chart-plot" aria-hidden={renderPlot ? undefined : true} style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">{renderPlot ? renderPlot(projection) : <DefaultPlot {...projection} number={number} format={format} />}</div>}
+      {isDonut && <div className="flex justify-center [&_[data-slot=chart-legend]]:justify-center">{legend}</div>}
       {!isDonut && <div data-slot="chart-category-axis" className="sr-only">{categoryLabel}</div>}
-      <Collapsible data-slot="chart-data">
-        <CollapsibleTrigger className="text-support text-muted-foreground">{messages.chartData}</CollapsibleTrigger>
-        <CollapsiblePanel>
-          <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} className="text-end">{item.label}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map(item => { const value = readValue(row, item.key); return <TableCell key={item.key} className="text-end numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? formatValue?.(value, item, row) ?? number.format(value) : value.label}</TableCell>; })}</TableRow>)}</TableBody></Table></TableContainer>
-        </CollapsiblePanel>
-      </Collapsible>
+      {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} className="text-end">{item.label}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map(item => { const value = readValue(row, item.key); return <TableCell key={item.key} className="text-end numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? formatValue?.(value, item, row) ?? number.format(value) : value.label}</TableCell>; })}</TableRow>)}</TableBody></Table></TableContainer></div>}
     </>;
   }
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
     "data-slot": "chart", "data-state": state, "data-type": state === "ready" ? type : undefined, "aria-labelledby": titleId,
     className: cn(chartFrameClassName, className),
-    style: { ...PLOT_PRESETS, ...style }, children: <><figcaption id={titleId} className="mb-(--qy-field-gap) min-w-0 text-heading wrap-anywhere">{label}</figcaption>{content}</>,
+    style: { ...PLOT_PRESETS, ...style }, children: <>
+      {/* 环形图的图例在环下：它是一个整体的几部分，名称挨着环读；标题栏只留图名与「查看数据」。 */}
+      <ChartHeader titleId={titleId} label={label} legend={type === "donut" ? null : legend} toggle={state === "ready" ? dataView.toggle : undefined} />
+      {content}
+    </>,
   }) });
 }

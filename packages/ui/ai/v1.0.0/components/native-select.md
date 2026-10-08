@@ -1,9 +1,9 @@
 # 原生选择 NativeSelect
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/native-select
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: de504f5d2c34fdeb5652b21e7958519351485f310f2c3ca0be61b00d078d2eb7
+Source SHA-256: b96a77f4cb67f667c5d1510c085a96c06681bfb2fd12a7cb509910f1a417ea04
 
 保留平台选择器、原生选项与表单值。
 
@@ -36,7 +36,7 @@ Source SHA-256: de504f5d2c34fdeb5652b21e7958519351485f310f2c3ca0be61b00d078d2eb7
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -55,8 +55,8 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/native-select/demos/01-density.tsx
 ```tsx
 import { useId } from "react";
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "密度", titleEn: "Density" };
 
@@ -85,9 +85,9 @@ export default function Demo() {
 Source: apps/docs/src/content/native-select/demos/02-list-and-disabled.tsx
 ```tsx
 import { useId } from "react";
-import { Label } from "@qingye/ui/components/label";
-import { Stack } from "@qingye/ui/components/layout";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "多选与禁用", titleEn: "Multiple and disabled" };
 export default function Demo() {
@@ -103,8 +103,8 @@ export default function Demo() {
 ### 字段错误
 Source: apps/docs/src/content/native-select/demos/03-field.tsx
 ```tsx
-import { Field, FieldControl, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Field, FieldControl, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "字段错误", titleEn: "Field error" };
 export default function Demo() {

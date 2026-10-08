@@ -2,19 +2,19 @@
 
 器用为本，关系为法，合宜为度。
 
-`@qingye/ui` provides **83 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
+`@qingye_lab/ui` provides **87 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
 
-The workspace version **1.0.0 is a local, unreleased candidate** with breaking API and visual changes. The installation command below downloads the latest published release, which can differ from this README's workspace version.
+Version **1.0.0** introduces breaking API and visual changes from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
 
 ## Installation
 
-With repository access and an authenticated GitHub CLI:
+Install from npm:
 
 ```sh
-gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
+npm install @qingye_lab/ui
 ```
 
-Keep the tarball, `package.json` and lockfile in the consumer repository. Ordinary installs reproduce that release; run the download command again when upgrading. For npm or Yarn, replace the final install command with `npm install ./qingye-ui.tgz` or `yarn add ./qingye-ui.tgz`.
+Or use `pnpm add @qingye_lab/ui` / `yarn add @qingye_lab/ui`. To select this version explicitly, install `@qingye_lab/ui@1.0.0`.
 
 Chart requires the optional `recharts` peer (`^3.10.1`); DataTable requires the optional `@tanstack/react-table` peer (`^8.21.3`). Install the peer for the component you use. If automatic peer installation is disabled, also satisfy Recharts' `react-is` requirement with a version compatible with your React version.
 
@@ -24,7 +24,7 @@ For a Tailwind CSS 4 project:
 
 ```css
 @import "tailwindcss";
-@import "@qingye/ui/styles.css";
+@import "@qingye_lab/ui/styles.css";
 ```
 
 `styles.css` declares the dark variant for `.dark` or `data-theme="dark"` ancestors.
@@ -32,7 +32,7 @@ For a Tailwind CSS 4 project:
 For a project without Tailwind, import the compiled stylesheet instead:
 
 ```ts
-import "@qingye/ui/ui.css";
+import "@qingye_lab/ui/ui.css";
 ```
 
 Use one stylesheet route.
@@ -42,12 +42,12 @@ Use one stylesheet route.
 Import the component module you use:
 
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Dialog, DialogPopup } from "@qingye/ui/components/dialog";
-import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye/ui/components/tabs";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Dialog, DialogPopup } from "@qingye_lab/ui/components/dialog";
+import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye_lab/ui/components/tabs";
 ```
 
-The `@qingye/ui` aggregate entry exports current components and hooks, including `useMediaQuery`. Loading it without eliminating unused exports can require both optional Chart/DataTable peers. Locale, utilities and floating-layer helpers have public entries at `@qingye/ui/locale`, `@qingye/ui/locales/<name>`, `@qingye/ui/utils` and `@qingye/ui/floating-layer`.
+The `@qingye_lab/ui` aggregate entry exports current components and hooks, including `useMediaQuery`. Loading it without eliminating unused exports can require both optional Chart/DataTable peers. Locale, utilities and floating-layer helpers have public entries at `@qingye_lab/ui/locale`, `@qingye_lab/ui/locales/<name>`, `@qingye_lab/ui/utils` and `@qingye_lab/ui/floating-layer`.
 
 There are no compatibility aliases for `DropdownMenu*`, `DialogContent`, `SheetContent` or `TabsTrigger`. `TooltipContent` remains an exported alias of `TooltipPopup`. Query the installed `catalog.json` and declarations for the actual part names. `useIsMobile` has been removed; `useMediaQuery("max-md")` queries the former width condition without classifying the physical device.
 
@@ -56,9 +56,9 @@ There are no compatibility aliases for `DropdownMenu*`, `DialogContent`, `SheetC
 Use the providers required by the components in your application:
 
 ```tsx
-import { ThemeProvider } from "@qingye/ui/components/theme-provider";
-import { ToastProvider } from "@qingye/ui/components/toast";
-import { TooltipProvider } from "@qingye/ui/components/tooltip";
+import { ThemeProvider } from "@qingye_lab/ui/components/theme-provider";
+import { ToastProvider } from "@qingye_lab/ui/components/toast";
+import { TooltipProvider } from "@qingye_lab/ui/components/tooltip";
 
 <ThemeProvider>
   <TooltipProvider>
@@ -72,8 +72,8 @@ import { TooltipProvider } from "@qingye/ui/components/tooltip";
 Built-in messages default to Simplified Chinese independently of browser language. To use English:
 
 ```tsx
-import { UILocaleProvider } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { UILocaleProvider } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 
 <UILocaleProvider locale={enUS}>…</UILocaleProvider>
 ```

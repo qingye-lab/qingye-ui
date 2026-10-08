@@ -21,3 +21,11 @@ test("no known values is stated rather than drawn as a flat line", () => {
   expect(container.querySelector("path")).toBeNull();
   expect(() => render(<Sparkline label="x" values={[NaN]} />)).toThrow(TypeError);
 });
+
+test("an isolated known point between unknowns is drawn as a dot, not dropped", () => {
+  const { container } = render(<Sparkline label="延迟" values={[1, null, 3, null, 5]} />);
+  expect(container.querySelectorAll("path")).toHaveLength(0);
+  // 两个孤立点画小点，末点由「当前点」标记承担，不重复。
+  expect(container.querySelectorAll("[data-slot='sparkline-point']")).toHaveLength(2);
+  expect(container.querySelectorAll("circle")).toHaveLength(3);
+});

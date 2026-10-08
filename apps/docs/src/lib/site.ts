@@ -1,10 +1,11 @@
-import pkg from "@qingye/ui/package.json";
+import pkg from "@qingye_lab/ui/package.json";
 import { localePath, PATHS, type DocsLocale } from "./paths";
 
 export const SITE = {
   name: "Qingye UI",
   packageName: pkg.name,
   version: pkg.version,
+  npmPublished: false,
   repo: "https://github.com/qingye-lab/qingye-ui",
   branch: "main",
   base: "https://ui.xflux.cc",
@@ -14,14 +15,13 @@ export const siteUrl = (path = PATHS.home as string, locale: DocsLocale = "zh") 
 
 export const repoFile = (path: string) => `${SITE.repo}/blob/${SITE.branch}/${path}`;
 
-export const releaseFile = "qingye-ui.tgz";
-export const releaseDownloadCommand = `gh release download --repo qingye-lab/qingye-ui --pattern 'qingye-ui-*.tgz' --output qingye-ui.tgz --clobber`;
+export const releaseFile = `${pkg.name.slice(1).replace('/', '-')}-${pkg.version}.tgz`;
+export const installTarget = SITE.npmPublished ? SITE.packageName : `./${releaseFile}`;
+
 
 export const editComponentUrl = (slug: string) => repoFile(`apps/docs/src/content/${slug}/meta.ts`);
-
-export const componentSourceUrl = (slug: string) => repoFile(`packages/ui/src/components/${slug}.tsx`);
 
 export const editPageUrl = (file: string) => repoFile(`apps/docs/src/pages/docs/${file}`);
 
 /** `<title>` text for a page. */
-export const pageTitle = (title?: string) => (title ? `${title} · ${SITE.name}` : `${SITE.name} — React 组件库`);
+export const pageTitle = (title?: string, locale: DocsLocale = "zh") => (title ? `${title} · ${SITE.name}` : `${SITE.name} — ${locale === "en" ? "React components" : "React 组件库"}`);

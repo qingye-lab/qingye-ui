@@ -2,8 +2,8 @@
 
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import * as React from "react";
-import { cn } from "../utils.js";
-import { Button } from "./button.js";
+import { cn } from "../utils";
+import { Button } from "./button";
 import { useFloatingLayer } from "../floating-layer";
 
 const TooltipProvider = TooltipPrimitive.Provider;

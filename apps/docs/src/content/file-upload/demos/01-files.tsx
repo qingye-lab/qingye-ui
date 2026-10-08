@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { FileUpload } from "@qingye/ui/components/file-upload";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
 export const meta = { title: "本地文件", titleEn: "Local files" };
 const maxBytes = 64 * 1024;
 export default function Demo() {

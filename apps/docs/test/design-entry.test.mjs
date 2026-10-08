@@ -21,7 +21,7 @@ test("English guide and adoption outlets use the authored source block while Chi
   assert.doesNotMatch(zh.guide, /# Qingye UI Design Guide/);
   assert.match(en.guide, /^# Qingye UI Design Guide/);
   assert.match(en.agents, /Before interface work/);
-  assert.match(en.agents, /node_modules\/@qingye\/ui\/design\.en\.md/);
+  assert.match(en.agents, /node_modules\/@qingye_lab\/ui\/design\.en\.md/);
   assert.match(en.design, /The Chinese method names remain canonical/);
   assert.match(en.task, /actual evidence, and unverified areas/);
   assert.doesNotMatch(en.agents, /界面设计先读/);

@@ -1,4 +1,4 @@
-import { Chart } from "@qingye/ui/components/chart";
+import { Chart } from "@qingye_lab/ui/components/chart";
 export const meta = { title: "随时间的构成：堆叠面积", titleEn: "Composition over time: stacked area" };
 const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
 const api = [612, 640, 700, 680, 820, 440, 360];

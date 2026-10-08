@@ -2,7 +2,7 @@
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { useRender } from "@base-ui/react/use-render";
-import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { candidateItemClassName, overlayItemClassName } from "../overlay-item";
@@ -90,7 +90,7 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(triggerState(state)) : style) })}
   >{children ?? <SelectValue />}
     <SelectPrimitive.Icon data-slot="select-icon" className="pointer-events-none flex shrink-0 items-center text-muted-foreground">
-      <ChevronDownIcon aria-hidden="true" className="size-(--qy-select-icon-narrow) sm:size-(--qy-select-icon)" />
+      <IconChevronDown aria-hidden="true" className="size-(--qy-select-icon-narrow) sm:size-(--qy-select-icon)" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>;
 }
@@ -134,7 +134,7 @@ export function SelectItem({ children, className, ...props }: SelectItemProps) {
   >
     <SelectPrimitive.ItemText data-slot="select-item-text" className="min-w-0 whitespace-normal wrap-break-word">{children}</SelectPrimitive.ItemText>
     <span aria-hidden="true" className="flex size-(--qy-fill-icon-narrow) items-center justify-center sm:size-(--qy-fill-icon)">
-      <SelectPrimitive.ItemIndicator data-slot="select-item-indicator"><CheckIcon aria-hidden="true" className="size-full" /></SelectPrimitive.ItemIndicator>
+      <SelectPrimitive.ItemIndicator data-slot="select-item-indicator"><IconCheck aria-hidden="true" className="size-full" /></SelectPrimitive.ItemIndicator>
     </span>
   </SelectPrimitive.Item>;
 }

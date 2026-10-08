@@ -1,7 +1,7 @@
 "use client";
 
 import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
-import { MinusIcon, PlusIcon } from "lucide-react";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -79,7 +79,7 @@ export function NumberFieldDecrement({ className, children, render, nativeButton
     render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} nativeButton={nativeButton} className={elementProps.className ?? ""}
       render={typeof render === "function" ? buttonProps => render(buttonProps, state) : render}
     />}
-  >{children ?? <MinusIcon aria-hidden="true" />}</NumberFieldPrimitive.Decrement>;
+  >{children ?? <IconMinus aria-hidden="true" />}</NumberFieldPrimitive.Decrement>;
 }
 
 export function NumberFieldIncrement({ className, children, render, nativeButton = true, ...props }: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>) {
@@ -89,7 +89,7 @@ export function NumberFieldIncrement({ className, children, render, nativeButton
     render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} nativeButton={nativeButton} className={elementProps.className ?? ""}
       render={typeof render === "function" ? buttonProps => render(buttonProps, state) : render}
     />}
-  >{children ?? <PlusIcon aria-hidden="true" />}</NumberFieldPrimitive.Increment>;
+  >{children ?? <IconPlus aria-hidden="true" />}</NumberFieldPrimitive.Increment>;
 }
 
 export { NumberFieldPrimitive };

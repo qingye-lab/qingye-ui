@@ -4,7 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
-import { ChevronRightIcon } from "lucide-react";
+import { IconChevronRight } from "@tabler/icons-react";
 
 export type BreadcrumbProps = useRender.ComponentProps<"nav">;
 /**
@@ -32,6 +32,6 @@ export function BreadcrumbCurrent({ render, className, ...props }: BreadcrumbCur
   return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-current", "aria-current": "page", className: cn("min-w-0 text-foreground", className) }, props) });
 }
 export type BreadcrumbSeparatorProps = useRender.ComponentProps<"span">;
-export function BreadcrumbSeparator({ render, className, children = <ChevronRightIcon className="size-(--qy-control-sm-icon)" />, ...props }: BreadcrumbSeparatorProps) {
+export function BreadcrumbSeparator({ render, className, children = <IconChevronRight className="size-(--qy-control-sm-icon)" />, ...props }: BreadcrumbSeparatorProps) {
   return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-separator", "aria-hidden": true, children, className: cn("inline-flex shrink-0 text-input", className) }, props) });
 }

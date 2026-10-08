@@ -1,7 +1,7 @@
 # 链接预览 HoverCard
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/hover-card
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: f8127bb393799cab3bb83d3e54f2fcddf479e38d000adce7e821eff75e01d54c
 
@@ -69,9 +69,9 @@ Base UI PreviewCard 公共 Root，保留 open/defaultOpen/onOpenChange、payload
 ### 悬停与焦点
 Source: apps/docs/src/content/hover-card/demos/01-states.tsx
 ```tsx
-import { HoverCard, HoverCardPopup, HoverCardTrigger } from "@qingye/ui/components/hover-card";
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
+import { HoverCard, HoverCardPopup, HoverCardTrigger } from "@qingye_lab/ui/components/hover-card";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "悬停与焦点", titleEn: "Hover and focus" };
 export default function HoverCardDemo() {
   return <Inline gap="fields"><HoverCard><HoverCardTrigger href="#hover-card-target">内容入口</HoverCardTrigger><HoverCardPopup>补充内容</HoverCardPopup></HoverCard><Button variant="quiet">下一控件</Button><span id="hover-card-target" className="text-body">内容</span></Inline>;

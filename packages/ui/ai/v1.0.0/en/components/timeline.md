@@ -1,7 +1,7 @@
 # Timeline
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/timeline
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: cb38f1cd0e5ba64470cb11efec7700e026a5e152bec8eef0eb018e22c13e17a6
 
@@ -69,7 +69,7 @@ div / p content slots.
 ### 输入序列
 Source: apps/docs/src/content/timeline/demos/01-sequence.tsx
 ```tsx
-import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye/ui/components/timeline";
+import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "输入序列", titleEn: "Input sequence" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,6 +1,6 @@
-import { Card } from "@qingye/ui/components/card";
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

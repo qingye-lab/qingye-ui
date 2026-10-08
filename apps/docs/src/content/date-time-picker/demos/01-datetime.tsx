@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateTimePicker } from "@qingye_lab/ui/components/date-time-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "日期与时间", titleEn: "Date and time" };
 export default function Demo() {
   const [value, setValue] = useState<string | undefined>();

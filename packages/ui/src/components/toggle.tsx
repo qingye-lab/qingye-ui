@@ -18,7 +18,7 @@ export function Toggle<Value extends string>({ size = "md", shape = "label", cla
   //
   // 旧实现按压后用 64% 灰填充，与禁用态同色，看起来像用不了。现在按压态有真实
   // 填充与配对前景，禁用仍是降不透明度，两者在明度与色彩两处同时区分。
-  // 成组的按压项见 ToggleGroup：它们围在一个共享凹槽里，项内不再画线。
+  // 成组的按压项见 ToggleGroup：它们围在同一条轨道里（白底加容器线），项内不再画线。
   return <TogglePrimitive data-slot="toggle" data-size={size} data-shape={shape} {...props}
     className={(state) => cn(
       buttonVariants({ size, shape, tone: "neutral", variant: state.pressed ? "solid" : "bordered" }),

@@ -1,5 +1,5 @@
-import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye/ui/components/toc";
-import { Inline } from "@qingye/ui/components/layout";
+import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;

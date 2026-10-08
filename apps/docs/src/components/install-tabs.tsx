@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye_lab/ui/components/tabs";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { useState } from "react";
 import { CodeView } from "./code-block";
@@ -21,11 +21,11 @@ export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCom
   const command = installCommand(managers.find((manager) => manager.id === current)!);
   return (
     <Tabs
-      className="my-5 gap-0 overflow-hidden rounded-xl border bg-surface-subtle dark:bg-surface"
+      className="my-(--qy-space-module) gap-0 overflow-hidden rounded-panel bg-surface-inset"
       onValueChange={(value) => setCurrent(value as Manager)}
       value={current}
     >
-      <div className="flex items-center justify-between gap-2 border-b py-1 ps-1.5 pe-1.5">
+      <div className="flex items-center justify-between gap-(--qy-field-gap) border-b py-(--qy-fen) ps-(--qy-fen) pe-(--qy-fen)">
         <TabsList aria-label={en ? "Package manager" : "包管理器"}>
           {managers.map((manager) => (
             <TabsTab className="font-mono text-caption" key={manager.id} value={manager.id}>

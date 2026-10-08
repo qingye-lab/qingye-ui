@@ -7,7 +7,7 @@ import AIPage from "../../src/pages/docs/ai";
 export { designEntryFor } from "../../src/lib/design-entry";
 import DesignPhilosophyPage from "../../src/pages/docs/design-philosophy";
 import { ComponentPreview } from "../../src/components/component-preview";
-import ExamplePage from "../../src/pages/examples";
+import ExamplesGallery from "../../src/examples/gallery";
 import { Route, Routes } from "react-router-dom";
 export { components, loadPreview } from "../../src/lib/registry";
 export { GUIDES } from "../../src/lib/nav";
@@ -16,6 +16,6 @@ export const routeMatches = (url: string) => matchRoutes(createRoutesFromElement
 export const homeMarkup = (locale: string) => renderToStaticMarkup(<MemoryRouter initialEntries={[locale === "en" ? "/en" : "/"]}><Home /></MemoryRouter>);
 export const methodsMarkup = (locale: string) => renderToStaticMarkup(<MemoryRouter initialEntries={[locale === "en" ? "/en/docs/design-philosophy" : "/docs/design-philosophy"]}><DesignPhilosophyPage /></MemoryRouter>);
 export const previewScene = (slug: string) => <MemoryRouter><ComponentPreview slug={slug} /></MemoryRouter>;
-export const missingExampleScene = () => <MemoryRouter initialEntries={["/en/examples/mail"]}><Routes><Route path="/en/examples/:slug" element={<ExamplePage />} /></Routes></MemoryRouter>;
+export const missingExampleScene = (url = "/en/examples/mail") => <MemoryRouter initialEntries={[url]}><Routes><Route path="/en/examples/*" element={<ExamplesGallery />} /><Route path="/examples/*" element={<ExamplesGallery />} /></Routes></MemoryRouter>;
 
 export const aiMarkup = () => renderToStaticMarkup(<MemoryRouter initialEntries={["/en/docs/ai"]}><AIPage /></MemoryRouter>);

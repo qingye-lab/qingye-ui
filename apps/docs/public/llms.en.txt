@@ -1,6 +1,6 @@
 # Qingye UI 1.0.0
 
-> Facts for @qingye/ui@1.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@1.0.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.en.md)

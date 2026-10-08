@@ -1,6 +1,6 @@
 import { useId } from "react";
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

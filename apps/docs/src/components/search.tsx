@@ -1,7 +1,7 @@
-import { Button } from "@qingye/ui/components/button";
-import { Kbd } from "@qingye/ui/components/kbd";
-import { cn } from "@qingye/ui/utils";
-import { SearchIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Kbd } from "@qingye_lab/ui/components/kbd";
+import { cn } from "@qingye_lab/ui/utils";
+import { IconSearch } from "@tabler/icons-react";
 import { createContext, lazy, Suspense, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { useDocsLocale } from "@/lib/docs-locale";
@@ -85,7 +85,7 @@ export function SearchTrigger({ className }: { className?: string }) {
       size="md"
       variant="quiet"
     >
-      <SearchIcon aria-hidden="true" />
+      <IconSearch aria-hidden="true" />
       <span>{label}</span>
       <span className="hidden items-center gap-(--qy-space-1) md:inline-flex pointer-coarse:hidden">
         <Kbd>{mac ? "⌘" : "Ctrl"}</Kbd>

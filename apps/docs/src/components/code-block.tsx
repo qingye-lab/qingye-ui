@@ -1,4 +1,4 @@
-import { cn } from "@qingye/ui/utils";
+import { cn } from "@qingye_lab/ui/utils";
 import { useMemo, type ReactNode } from "react";
 import { highlight, type CodeLang } from "@/lib/highlight";
 import { CopyCodeButton } from "./copy-code-button";
@@ -20,7 +20,7 @@ export function CodeView({
   return (
     <pre
       className={cn(
-        "docs-code focus-ring overflow-x-auto px-4 py-3.5 [scrollbar-width:thin]",
+        "docs-code focus-ring overflow-x-auto px-(--qy-space-4) py-(--qy-space-3) [scrollbar-width:thin]",
         wrap && "whitespace-pre-wrap [overflow-wrap:anywhere]",
         className,
       )}
@@ -44,18 +44,18 @@ export function CodeBlock({
   className?: string;
 }) {
   return (
-    <figure className={cn("group/code relative my-5 min-w-0 overflow-hidden rounded-xl border bg-surface-subtle dark:bg-surface", className)}>
+    <figure className={cn("group/code relative my-(--qy-space-module) min-w-0 overflow-hidden rounded-panel bg-surface-inset", className)}>
       {title ? (
-        <figcaption className="flex h-10 items-center justify-between gap-2 border-b ps-4 pe-1.5 text-muted-foreground text-caption">
+        <figcaption className="flex items-center justify-between gap-(--qy-field-gap) border-b py-(--qy-fen) ps-(--qy-space-4) pe-(--qy-fen) text-muted-foreground text-caption">
           <span className="truncate font-mono">{title}</span>
           <CopyCodeButton value={code} />
         </figcaption>
       ) : (
-        <div className="absolute end-1.5 top-1.5">
-          <CopyCodeButton className="bg-surface-subtle dark:bg-surface" value={code} />
+        <div className="absolute end-(--qy-fen) top-(--qy-fen)">
+          <CopyCodeButton value={code} />
         </div>
       )}
-      <CodeView className={title ? undefined : "pe-12"} code={code} lang={lang} />
+      <CodeView className={title ? undefined : "pe-[calc(2*var(--qy-cai))]"} code={code} lang={lang} />
     </figure>
   );
 }

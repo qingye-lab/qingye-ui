@@ -1,5 +1,5 @@
-import { Button } from "@qingye/ui/components/button";
-import { Inline } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import { useState } from "react";
 
 export const meta = { title: "即时变化", titleEn: "Instant changes" };

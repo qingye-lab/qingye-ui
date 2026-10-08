@@ -1,9 +1,9 @@
 # 导航菜单 NavigationMenu
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/navigation-menu
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: c62142d34159b0261c8642b28b1987dac7d4d7dd9243f17d5ed399cd5c5540c3
+Source SHA-256: 556a511e65cc132455dc7682ff20bbc397bcce73ba677a2806b9b7e360067781
 
 真实链接、可展开的导航分组与面板内的组名、说明。
 
@@ -60,7 +60,7 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -90,7 +90,7 @@ nav、ul 与稳定 value 的导航项。
 ### 真实目的地与分组
 Source: apps/docs/src/content/navigation-menu/demos/01-task.tsx
 ```tsx
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuPopup, NavigationMenuViewport } from "@qingye/ui/components/navigation-menu";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuPopup, NavigationMenuViewport } from "@qingye_lab/ui/components/navigation-menu";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "真实目的地与分组", titleEn: "Real destinations, grouped" } satisfies DemoMeta;
 export default function Demo() {

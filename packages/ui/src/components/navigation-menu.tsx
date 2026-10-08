@@ -4,7 +4,7 @@ import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/naviga
 import { useRender } from "@base-ui/react/use-render";
 import type * as React from "react";
 import { useFloatingLayer } from "../floating-layer";
-import { ChevronDownIcon } from "lucide-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import { navLineCurrentClassName, navLineItemClassName, navLineListClassName } from "../nav-line";
 import { cn } from "../utils";
 
@@ -17,7 +17,7 @@ export type NavigationMenuItemProps = NavigationMenuPrimitive.Item.Props;
 export function NavigationMenuItem({ className, ...props }: NavigationMenuItemProps) { return <NavigationMenuPrimitive.Item data-slot="navigation-menu-item" {...props} className={state => cn("min-w-0", typeof className === "function" ? className(state) : className)} />; }
 export type NavigationMenuTriggerProps = NavigationMenuPrimitive.Trigger.Props;
 /** 展开一组目的地：与其他目的地同一条导航线，尾部一枚箭头说明可以展开，展开时旋转半周。 */
-export function NavigationMenuTrigger({ className, children, ...props }: NavigationMenuTriggerProps) { return <NavigationMenuPrimitive.Trigger data-slot="navigation-menu-trigger" {...props} className={state => cn(navLineItemClassName, "group/nav", state.open && "text-foreground", typeof className === "function" ? className(state) : className)}>{children}<ChevronDownIcon aria-hidden="true" className="text-muted-foreground transition-transform duration-(--qy-duration-base) ease-(--qy-ease-out) group-data-[popup-open]/nav:rotate-180 motion-reduce:transition-none" /></NavigationMenuPrimitive.Trigger>; }
+export function NavigationMenuTrigger({ className, children, ...props }: NavigationMenuTriggerProps) { return <NavigationMenuPrimitive.Trigger data-slot="navigation-menu-trigger" {...props} className={state => cn(navLineItemClassName, "group/nav", state.open && "text-foreground", typeof className === "function" ? className(state) : className)}>{children}<IconChevronDown aria-hidden="true" className="text-muted-foreground transition-transform duration-(--qy-duration-base) ease-(--qy-ease-out) group-data-[popup-open]/nav:rotate-180 motion-reduce:transition-none" /></NavigationMenuPrimitive.Trigger>; }
 export type NavigationMenuLinkProps = NavigationMenuPrimitive.Link.Props & { description?: React.ReactNode };
 /**
  * description 只在面板内使用（NavigationMenuContent 对 [data-slot=navigation-menu-link] 的

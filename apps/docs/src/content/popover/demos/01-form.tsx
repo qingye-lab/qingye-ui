@@ -1,8 +1,8 @@
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 import { useState } from "react";
 
 export const meta = { title: "多行输入", titleEn: "Multiline input" };

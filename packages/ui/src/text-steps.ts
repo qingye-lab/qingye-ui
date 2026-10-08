@@ -12,7 +12,7 @@
  *           who do not run Tailwind.
  *
  * A step missing from `css` drops the size at runtime; a step missing from
- * `build` is absent from `@qingye/ui/ui.css`. Both are quiet. Add a step here
+ * `build` is absent from `@qingye_lab/ui/ui.css`. Both are quiet. Add a step here
  * and both follow.
  *
  * Ordering does not matter; names must match `--text-<name>` in theme.css and
@@ -30,6 +30,9 @@ export const TEXT_STEPS = [
   "reading",
   "prose",
   "prose-strong",
+  "prose-h1",
+  "prose-h2",
+  "prose-h3",
   "support",
   "support-mobile",
   "support-strong",

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Stack } from "@qingye/ui/components/layout";
-import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye/ui/components/toolbar";
-import { Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye_lab/ui/components/toolbar";
+import { Text } from "@qingye_lab/ui/components/typography";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "命令、分组与焦点", titleEn: "Commands, groups and focus" } satisfies DemoMeta;
 export default function Demo() {

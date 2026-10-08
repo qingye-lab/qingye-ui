@@ -1,4 +1,4 @@
-import { Button, ButtonProtection } from "@qingye/ui/components/button";
+import { Button, ButtonProtection } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
 

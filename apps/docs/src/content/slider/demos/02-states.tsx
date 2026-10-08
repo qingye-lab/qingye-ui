@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldGroup } from "@qingye/ui/components/field";
-import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "@qingye/ui/components/slider";
+import { Field, FieldError, FieldGroup } from "@qingye_lab/ui/components/field";
+import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "@qingye_lab/ui/components/slider";
 
 export const meta = { title: "状态与方向", titleEn: "States and orientation" };
 const control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>;

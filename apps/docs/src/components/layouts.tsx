@@ -1,4 +1,4 @@
-import { ScrollArea } from "@qingye/ui/components/scroll-area";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";
@@ -47,31 +47,40 @@ export function SiteShell() {
   );
 }
 
+/*
+ * The documentation frame: index rail, article column, on-page contents.
+ * Regions are told apart by space alone (疏密有致): no rule between them and no
+ * tinted rail. The frame is the site frame, the same width as the header, so the
+ * wordmark, the sidebar and the contents column sit on edges the header already set.
+ * All three regions start one section gap below the header, so the first group
+ * name, the page title and the first contents entry share a top line.
+ */
 export function DocsLayout({ children }: { children?: ReactNode }) {
-  const en = useDocsLocale() === "en";
   const { pathname } = useLocation();
+  const visit = routeVisitKey(pathname);
   const article = useRef<HTMLDivElement>(null);
   return (
-    <div className="mx-auto flex w-full max-w-[90rem] px-4 sm:px-6 lg:px-8">
-      <aside data-docs-sidebar aria-label={en ? "Documentation sidebar" : "侧栏"} className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-60 shrink-0 lg:block">
-        <ScrollArea className="h-full -ms-2.5 pe-4">
-          <DocsNav className="py-8" />
+    <div className="site-frame flex" data-docs-frame>
+      <div className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-(--docs-rail) shrink-0 lg:block" data-docs-sidebar>
+        <ScrollArea className="h-full">
+          <DocsNav className="py-(--qy-section-gap) pe-(--qy-panel-padding)" />
         </ScrollArea>
-      </aside>
-      <div className="flex min-w-0 flex-1 gap-12 lg:ps-10 xl:ps-12">
-        <main className="min-w-0 flex-1 pt-8 pb-16 outline-none sm:pt-10" id="main" tabIndex={-1}>
-          <div className="mx-auto w-full max-w-[48rem]" data-route-enter key={routeVisitKey(pathname)} ref={article}>
+      </div>
+      <div className="flex min-w-0 flex-1 gap-(--qy-section-gap)" data-docs-body>
+        <main className="min-w-0 flex-1 pt-(--qy-section-gap) pb-[calc(2*var(--qy-section-gap))] outline-none" id="main" tabIndex={-1}>
+          <div className="w-full" data-route-enter key={visit} ref={article}>
             {/* No Suspense here: the shell's boundary lets navigation keep the old page until the new one is ready. */}
             <DocsBreadcrumbs />
             {children ?? <Outlet />}
             <DocFooter path={pathname} />
           </div>
         </main>
-        <aside data-docs-toc aria-label={en ? "On this page" : "本页目录"} className="hidden w-52 shrink-0 xl:block">
-          <div className="sticky top-(--docs-header-height) max-h-[calc(100dvh-var(--docs-header-height))] overflow-y-auto pt-10 pb-8 [scrollbar-width:none]">
-            <TableOfContents container={article} />
+        <div className="w-(--docs-toc) shrink-0" data-docs-toc>
+          <div className="sticky top-(--docs-header-height) max-h-[calc(100dvh-var(--docs-header-height))] overflow-y-auto pt-(--qy-section-gap) pb-(--qy-section-gap) [scrollbar-width:none]">
+            {/* Keyed by visit: the article remounts per route, so the heading scan restarts on the new node. */}
+            <TableOfContents container={article} key={visit} />
           </div>
-        </aside>
+        </div>
       </div>
     </div>
   );

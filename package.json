@@ -3,11 +3,11 @@
   "private": true,
   "packageManager": "pnpm@10.12.1",
   "scripts": {
-    "build": "pnpm --filter @qingye/ui build && pnpm --filter @qingye/tooling build",
+    "build": "pnpm --filter @qingye_lab/ui build && pnpm --filter @qingye/tooling build",
     "typecheck": "pnpm --filter @qingye/tooling build && pnpm --recursive --if-present typecheck",
     "test": "pnpm --recursive --if-present test",
     "dev": "pnpm --filter docs dev",
-    "docs:build": "pnpm --filter @qingye/ui build && pnpm --filter docs build",
+    "docs:build": "pnpm --filter @qingye_lab/ui build && pnpm --filter docs build",
     "shot": "node scripts/shot.mjs",
     "studio:dev": "pnpm --filter @qingye/tooling build && pnpm --filter @qingye/studio dev",
     "studio:build": "pnpm --filter @qingye/tooling build && pnpm --filter @qingye/studio build",

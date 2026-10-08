@@ -1,0 +1,59 @@
+/*
+ * 设计令牌页（法度台账）。标本与页题、节题的字见 foundations.css。
+ * - 疏密：来源筛选与图例之间一个组间距，图例与第一节 3 材；节内出处、标本、台账之间一个组间距。
+ * - 台账：库内 Table 的纸。入口与值用等宽字（比较字符与数位）；来源不着色，彩色只给语义（NG10）。
+ * - 筛选（经营位置）：当前来源的说明由浓墨加深为焦墨，状态只加深已有的墨，不另加形状。
+ */
+.ledger-sources { display: grid; justify-items: start; gap: var(--qy-field-group-gap); }
+.ledger-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  margin: 0;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+.ledger-legend div { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--qy-field-gap); }
+.ledger-legend dt { font-weight: var(--qy-weight-medium); color: var(--qy-foreground); }
+.ledger-legend dd { margin: 0; color: var(--qy-foreground-muted); }
+.ledger-legend [data-current] dd { color: var(--qy-foreground); }
+
+.ledger-section { margin-top: calc(3 * var(--qy-cai)); }
+.ledger-section > [data-slot="table-container"],
+.ledger-section > [data-slot="collapsible"] { margin-top: var(--qy-field-group-gap); }
+
+.ledger-table { table-layout: fixed; }
+.ledger-table th:nth-child(1) { inline-size: 28%; }
+.ledger-table th:nth-child(2) { inline-size: 25%; }
+.ledger-table th:nth-child(4) { inline-size: 8em; }
+.ledger-rest th:nth-child(2) { inline-size: 35%; }
+.ledger-rest th:nth-child(3) { inline-size: 25%; }
+.ledger-table code,
+.ledger-value {
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-caption-size);
+  overflow-wrap: anywhere;
+}
+.ledger-value { font-variant-numeric: tabular-nums; }
+.ledger-compact { display: block; color: var(--qy-foreground-muted); }
+.ledger-colors { display: grid; gap: calc(var(--qy-fen) / 2); }
+.ledger-colors > span { display: inline-flex; align-items: center; gap: var(--qy-control-content-gap); }
+.ledger-swatch {
+  flex: none;
+  inline-size: calc(3 * var(--qy-fen));
+  block-size: calc(3 * var(--qy-fen));
+  border-radius: calc(var(--qy-fen) / 2);
+  /* 与承载面同色的值（纸色）由线划出范围。 */
+  box-shadow: inset 0 0 0 1px var(--qy-border);
+}
+.ledger-source { white-space: nowrap; }
+
+/* 实测用的探针：在当前主题与密度里求值，不参与布局与读屏。宽 100px，所以百分比读出的像素数即百分数。 */
+.ledger-probe {
+  position: absolute;
+  inline-size: 100px;
+  block-size: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}

@@ -1,7 +1,7 @@
 # 页面标题 PageHeader
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/page-header
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 2ddf687ece1fb57e7e294da98ac5051c921f14bf493d7e3393828b5b60b3cd9d
 
@@ -70,10 +70,10 @@ div / p / div 内容槽。
 Source: apps/docs/src/content/page-header/demos/01-title.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Item, ItemTitle } from "@qingye/ui/components/item";
-import { Stack } from "@qingye/ui/components/layout";
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye/ui/components/page-header";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye_lab/ui/components/page-header";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "名称与任务动作", titleEn: "Name and task actions" } satisfies DemoMeta;
 export default function Demo() {

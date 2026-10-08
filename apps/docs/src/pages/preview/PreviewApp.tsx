@@ -1,29 +1,29 @@
 import * as React from "react";
-import { Badge } from "@qingye/ui/components/badge";
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
-import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { NativeSelect } from "@qingye/ui/components/native-select";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye/ui/components/number-field";
-import { OtpField } from "@qingye/ui/components/otp-field";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
-import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
-import { Separator } from "@qingye/ui/components/separator";
-import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye/ui/components/slider";
-import { Switch } from "@qingye/ui/components/switch";
-import { TagInput } from "@qingye/ui/components/tag-input";
-import { Textarea } from "@qingye/ui/components/textarea";
-import { Toggle } from "@qingye/ui/components/toggle";
-import { ToggleGroup, ToggleGroupItem } from "@qingye/ui/components/toggle-group";
-import { Heading, Text } from "@qingye/ui/components/typography";
-import { DownloadIcon, EllipsisIcon, PlusIcon } from "lucide-react";
-import { Kbd } from "@qingye/ui/components/kbd";
+import { Badge } from "@qingye_lab/ui/components/badge";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
+import { OtpField } from "@qingye_lab/ui/components/otp-field";
+import { Radio, RadioGroup } from "@qingye_lab/ui/components/radio-group";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+import { Separator } from "@qingye_lab/ui/components/separator";
+import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
+import { Switch } from "@qingye_lab/ui/components/switch";
+import { TagInput } from "@qingye_lab/ui/components/tag-input";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
+import { Toggle } from "@qingye_lab/ui/components/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
+import { IconDownload, IconDots, IconPlus } from "@tabler/icons-react";
+import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { fieldGrid, GalleryPage, Row, Section } from "./gallery";
 
 /* 这一页只放**基础组件**：一个界面里会反复出现、且不依赖具体业务才成立的那些。
@@ -71,7 +71,7 @@ export default function PreviewApp() {
         <Stack gap="fields">
           <Row label="变体"><Button>保存</Button><Button variant="bordered">预览</Button><Button variant="quiet">取消</Button><Button tone="danger">删除</Button><Button variant="bordered" tone="danger">删除</Button><Button variant="quiet" tone="danger">删除</Button></Row>
           <Row label="尺寸"><Button size="xs">保存</Button><Button size="sm">保存</Button><Button size="md">保存</Button><Button size="lg">保存</Button><Button size="xl">保存</Button></Row>
-          <Row label="图标形"><Button shape="icon" aria-label="新建集合"><PlusIcon aria-hidden="true" /></Button><Button shape="icon" variant="bordered" aria-label="导出"><DownloadIcon aria-hidden="true" /></Button><Button shape="icon" variant="quiet" aria-label="更多操作"><EllipsisIcon aria-hidden="true" /></Button></Row>
+          <Row label="图标形"><Button shape="icon" aria-label="新建集合"><IconPlus aria-hidden="true" /></Button><Button shape="icon" variant="bordered" aria-label="导出"><IconDownload aria-hidden="true" /></Button><Button shape="icon" variant="quiet" aria-label="更多操作"><IconDots aria-hidden="true" /></Button></Row>
           <Row label="状态"><Button state="waiting">保存</Button><Button state="in-progress">保存</Button><Button state="unknown">保存</Button><Button state="failed">保存</Button><Button disabled>保存</Button></Row>
           <Row label="动作组"><ButtonGroup aria-label="页面动作"><Button variant="bordered">导出</Button><Button>保存</Button></ButtonGroup><ButtonGroup aria-label="行内动作"><Button variant="quiet">复制</Button><Button variant="quiet">重命名</Button></ButtonGroup></Row>
           <Row label="切换"><Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle><Toggle shape="icon" aria-label="斜体">I</Toggle><ToggleGroup value={[view]} onValueChange={next => setView(next[0] ?? view)} aria-label="显示列"><ToggleGroupItem value="名称">名称</ToggleGroupItem><ToggleGroupItem value="记录数">记录数</ToggleGroupItem><ToggleGroupItem value="最近同步">最近同步</ToggleGroupItem></ToggleGroup></Row>

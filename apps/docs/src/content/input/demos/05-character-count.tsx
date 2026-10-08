@@ -1,5 +1,5 @@
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 import { useState } from "react";
 
 export const meta = { title: "字数提示", titleEn: "Character limit" };

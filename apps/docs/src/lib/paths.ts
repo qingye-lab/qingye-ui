@@ -42,7 +42,6 @@ export function localePath(href: string, locale: DocsLocale): string {
 
 export const guidePath = (name: string, locale: DocsLocale = "zh") => localePath(`${PATHS.docs}/${name}`, locale);
 export const componentPath = (slug: string, locale: DocsLocale = "zh") => localePath(`${PATHS.components}/${slug}`, locale);
-export const patternPath = (slug: string, locale: DocsLocale = "zh") => guidePath(`patterns/${slug}`, locale);
 export const routeVisitKey = (pathname: string) => `${splitLocalePath(pathname).locale}:${routeIdentity(pathname)}`;
 
 /** A scroll position belongs to one visit, including its language. */

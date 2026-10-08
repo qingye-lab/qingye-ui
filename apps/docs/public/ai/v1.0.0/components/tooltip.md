@@ -1,9 +1,9 @@
 # 文字提示 Tooltip
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/tooltip
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: 394252761d402aa08c82695c9aec8ce6a3f7d5353278d561cde436ad02841c39
+Source SHA-256: b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312
 
 悬停或聚焦时阅读快捷键、格式与短解释。
 
@@ -42,7 +42,7 @@ Source SHA-256: 394252761d402aa08c82695c9aec8ce6a3f7d5353278d561cde436ad02841c39
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, react
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -86,9 +86,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/tooltip/demos/01-icon-buttons.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { BoldIcon, ItalicIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { IconBold, IconItalic } from "@tabler/icons-react";
 
 export const meta = { title: "文字格式" };
 
@@ -99,11 +99,11 @@ export default function Demo() {
     <div className="flex flex-col gap-(--qy-field-group-gap)">
       <div className="flex gap-(--qy-action-gap)">
         <Tooltip>
-          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><IconBold aria-hidden="true" /></TooltipTrigger>
           <TooltipPopup>强调项目名称</TooltipPopup>
         </Tooltip>
         <Tooltip>
-          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><ItalicIcon aria-hidden="true" /></TooltipTrigger>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><IconItalic aria-hidden="true" /></TooltipTrigger>
           <TooltipPopup>标记作品名称或引用</TooltipPopup>
         </Tooltip>
       </div>
@@ -116,8 +116,8 @@ export default function Demo() {
 ### 位置
 Source: apps/docs/src/content/tooltip/demos/02-sides.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 
 export const meta = { title: "位置", titleEn: "Placement" };
 
@@ -137,9 +137,9 @@ export default function Demo() {
 Source: apps/docs/src/content/tooltip/demos/03-shortcut.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { BoldIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { IconBold } from "@tabler/icons-react";
 
 export const meta = { title: "快捷键" };
 
@@ -153,7 +153,7 @@ export default function Demo() {
       }
     }}>
       <Tooltip>
-        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><BoldIcon aria-hidden="true" /></TooltipTrigger>
+        <TooltipTrigger render={<Button aria-label="粗体" aria-pressed={bold} variant="quiet" shape="icon" onClick={() => setBold((value) => !value)} />}><IconBold aria-hidden="true" /></TooltipTrigger>
         <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>
       </Tooltip>
       <p className="text-body text-foreground">{bold ? <strong>让器物服务于人</strong> : "让器物服务于人"}</p>
@@ -166,16 +166,16 @@ export default function Demo() {
 Source: apps/docs/src/content/tooltip/demos/04-shared.tsx
 ```tsx
 import { useMemo, useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { IconAlignCenter, IconAlignLeft, IconAlignRight } from "@tabler/icons-react";
 
 export const meta = { title: "段落对齐" };
 
 const items = [
-  { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: AlignLeftIcon },
-  { value: "center", label: "居中对齐", detail: "段落沿中央排列", icon: AlignCenterIcon },
-  { value: "right", label: "右对齐", detail: "段落靠右边缘排列", icon: AlignRightIcon },
+  { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: IconAlignLeft },
+  { value: "center", label: "居中对齐", detail: "段落沿中央排列", icon: IconAlignCenter },
+  { value: "right", label: "右对齐", detail: "段落靠右边缘排列", icon: IconAlignRight },
 ] as const;
 
 export default function Demo() {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createRoot } from "react-dom/client";
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 import "./style.css";
 
 function App() {

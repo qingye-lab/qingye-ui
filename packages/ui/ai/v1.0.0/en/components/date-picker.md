@@ -1,9 +1,9 @@
 # DatePicker
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/date-picker
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: daf434b224b6e3ae8c6bfb0ccdb6232a6073d98904bc400d0876b483030d4037
+Source SHA-256: 25433dbde65ece2b891604c011dfadb154689a8e98ad07dbdbbb9d7639d8c8e5
 
 Edit one local date or choose it from a calendar.
 
@@ -37,7 +37,7 @@ The caller owns the local Date. Input and calendar selection request changes; cl
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -61,8 +61,8 @@ A single-date composition of Input, Button, Popover, and Calendar.
 Source: apps/docs/src/content/date-picker/demos/01-date.tsx
 ```tsx
 import { useState } from "react";
-import { DatePicker } from "@qingye/ui/components/date-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DatePicker } from "@qingye_lab/ui/components/date-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "日期", titleEn: "Date" };
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));
@@ -74,8 +74,8 @@ export default function Demo() {
 Source: apps/docs/src/content/date-picker/demos/02-density.tsx
 ```tsx
 import { useState } from "react";
-import { DatePicker } from "@qingye/ui/components/date-picker";
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
+import { DatePicker } from "@qingye_lab/ui/components/date-picker";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

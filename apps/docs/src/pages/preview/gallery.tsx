@@ -1,5 +1,5 @@
 import type * as React from "react";
-import { Heading } from "@qingye/ui/components/typography";
+import { Heading } from "@qingye_lab/ui/components/typography";
 
 /* 组件页共用的版式：「名称列 + 内容列」。
  * 名称说明这是什么，内容列里的控件按真实尺寸排；同一节共用一条左边线，方便横向比对——
@@ -38,13 +38,12 @@ const LEAD = {
   // 带一道线与浮层内缩（1 分）的框，第一行是一个控件（如侧栏右上的收起）。
   "inset-control": "min-h-[calc(2*(1px+var(--qy-overlay-inset))+var(--qy-fill-height))]",
   "framed-heading": "min-h-[calc(2*(1px+var(--qy-panel-padding-sm))+6*var(--qy-fen))]",
-  // 图的纸：一道线、面板内缘，第一行是图名（6 分）。
-  "framed-panel-heading": "min-h-[calc(2*(1px+var(--qy-panel-padding))+6*var(--qy-fen))]",
+  // 图的纸：一道线、面板内缘，第一行是标题栏（图名与「查看数据」同一行，高一个小号控件）。
+  "framed-panel-heading": "min-h-[calc(2*(1px+var(--qy-panel-padding))+var(--qy-control-sm))]",
   // 表格的纸：一道线、小面板内缘，第一行是表名（一材）。
   "framed-caption": "min-h-[calc(2*(1px+var(--qy-panel-padding-sm))+var(--qy-cai))]",
-  // 独立成篇的纸（Prose）：一道线、完整面板内缘（多组内容先彼此成组，再与边框成组），
-  // 第一行是小节标题（7 分，chapter）。
-  "framed-chapter": "min-h-[calc(2*(1px+var(--qy-panel-padding))+var(--qy-text-chapter-leading))]",
+  // 长文的纸：一道线、面板内缘，第一行是节标题（text-prose-h2 的行高）。
+  "framed-prose": "min-h-[calc(2*(1px+var(--qy-panel-padding))+var(--qy-text-prose-h2-leading))]",
   "control-sm": "min-h-(--qy-control-sm)",
   "padded-text": "min-h-[calc(2*var(--qy-field-gap)+var(--qy-cai))]",
   "framed-row": "min-h-[calc(2px+var(--qy-row-default))]",

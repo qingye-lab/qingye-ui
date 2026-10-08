@@ -1,20 +1,20 @@
-import type { Theme } from "@qingye/ui/components/theme-provider";
-import { Button } from "@qingye/ui/components/button";
-import { Menu, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye/ui/components/menu";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import type { Theme } from "@qingye_lab/ui/components/theme-provider";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Menu, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { useTheme } from "@qingye_lab/ui/components/theme-provider";
+import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 
 export function ThemeMenu() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
-  const options: { value: Theme; label: string; icon: typeof SunIcon }[] = [
-    { value: "light", label: messages.lightTheme, icon: SunIcon },
-    { value: "dark", label: messages.darkTheme, icon: MoonIcon },
-    { value: "system", label: messages.systemTheme, icon: MonitorIcon },
+  const options: { value: Theme; label: string; icon: typeof IconSun }[] = [
+    { value: "light", label: messages.lightTheme, icon: IconSun },
+    { value: "dark", label: messages.darkTheme, icon: IconMoon },
+    { value: "system", label: messages.systemTheme, icon: IconDeviceDesktop },
   ];
-  const Current = resolvedTheme === "dark" ? MoonIcon : SunIcon;
+  const Current = resolvedTheme === "dark" ? IconMoon : IconSun;
   return (
     <Menu>
       <Tooltip>

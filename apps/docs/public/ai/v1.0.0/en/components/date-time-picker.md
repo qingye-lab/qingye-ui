@@ -1,9 +1,9 @@
 # DateTimePicker
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/date-time-picker
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 4160264b8ef339847634ddfe8e82481f20bb3cb4df1735f35eb3012c58b2c856
+Source SHA-256: 0dc3f2a052df85796a0828e48914bb6b211f419c91f8b36ef6d3d29b7ad679f9
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -37,7 +37,7 @@ value is unzoned YYYY-MM-DDTHH:mm[:ss] wall-clock text, not a UTC instant. The a
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -61,8 +61,8 @@ A real datetime-local input composed with calendar and time drafts.
 Source: apps/docs/src/content/date-time-picker/demos/01-datetime.tsx
 ```tsx
 import { useState } from "react";
-import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateTimePicker } from "@qingye_lab/ui/components/date-time-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "日期与时间", titleEn: "Date and time" };
 export default function Demo() {
   const [value, setValue] = useState<string | undefined>();
@@ -73,8 +73,8 @@ export default function Demo() {
 ### 只读与禁用
 Source: apps/docs/src/content/date-time-picker/demos/02-states.tsx
 ```tsx
-import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateTimePicker } from "@qingye_lab/ui/components/date-time-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "只读与禁用", titleEn: "Read-only and disabled" };
 export default function Demo() {
   return <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2"><Field><FieldLabel>只读日期时间</FieldLabel><DateTimePicker value="2026-10-03T12:30" onValueChange={() => {}} readOnly /></Field><Field disabled><FieldLabel>禁用日期时间</FieldLabel><DateTimePicker value="2026-10-03T12:30" onValueChange={() => {}} /></Field></div>;

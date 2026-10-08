@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye_lab/ui/components/autocomplete";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "自由文本", titleEn: "Free text" };
 const items = ["青叶", "青山", "白云"];
 export default function Demo() {

@@ -1,13 +1,13 @@
 /** 预览页共用的外壳：页面切换、密度与明暗开关。切换器本身就是被预览的组件。 */
 import * as React from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
-import { Tabs, TabsList, TabsTab } from "@qingye/ui/components/tabs";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+import { Tabs, TabsList, TabsTab } from "@qingye_lab/ui/components/tabs";
 import type { Density } from "./types";
 
-export type PreviewPageId = "components" | "inputs" | "data" | "navigation" | "overlay" | "composition" | "settings" | "workbench" | "detail";
+export type PreviewPageId = "components" | "inputs" | "data" | "navigation" | "overlay" | "composition";
 
-/* 前五个是组件页（按用途分组），后三个是用这些组件拼出的真实页面。 */
+/* 组件页按用途分组。用组件拼出的真实页面在示例应用（/examples/workspace），不在这里。 */
 export const PREVIEW_PAGES: readonly { id: PreviewPageId; label: string }[] = [
   { id: "components", label: "基础" },
   { id: "inputs", label: "进阶输入" },
@@ -15,9 +15,6 @@ export const PREVIEW_PAGES: readonly { id: PreviewPageId; label: string }[] = [
   { id: "navigation", label: "导航" },
   { id: "overlay", label: "浮层与反馈" },
   { id: "composition", label: "组合" },
-  { id: "settings", label: "设置页" },
-  { id: "workbench", label: "集合工作台" },
-  { id: "detail", label: "编辑详情" },
 ];
 
 const DENSITY_ITEMS = [{ value: "default", label: "默认密度" }, { value: "compact", label: "紧凑密度" }];

@@ -1,7 +1,7 @@
 import * as React from "react";
-import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye/ui/components/bulk-action-bar";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Inline, Stack } from "@qingye/ui/components/layout";
+import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye_lab/ui/components/bulk-action-bar";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "对象与当前版本", titleEn: "Targets and current versions" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,9 +1,9 @@
 # Checkbox
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/checkbox
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 4053f3f931945f4a87ec2e70b853b39450aa6055774f634ef30508e5ef814099
+Source SHA-256: 0afaa4d2c5e82b58a6a1f892af37bc9b08c50cccb8081adbabb3c5abab4209fb
 
 Choose an independent yes/no value or multiple items in a set.
 
@@ -39,7 +39,7 @@ Use Checkbox for independent options and Switch for an immediate setting change.
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -66,9 +66,9 @@ The complete Base UI Checkbox namespace, including Root and Indicator.
 Source: apps/docs/src/content/checkbox/demos/01-selection.tsx
 ```tsx
 import { useState } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
 
 export const meta = { title: "部分选中", titleEn: "Partial selection" };
 
@@ -92,8 +92,8 @@ export default function Demo() {
 ### 状态
 Source: apps/docs/src/content/checkbox/demos/02-states.tsx
 ```tsx
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldContent, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldContent, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "状态", titleEn: "States" };
 
@@ -113,9 +113,9 @@ export default function Demo() {
 ### 跟随标签
 Source: apps/docs/src/content/checkbox/demos/03-labels.tsx
 ```tsx
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Heading } from "@qingye/ui/components/typography";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Heading } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 

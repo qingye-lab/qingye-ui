@@ -1,9 +1,9 @@
 # Prose
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/prose
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
-Source SHA-256: 9971982165aa4dcfcc915522efc483144d3de9b1ea9b2416f1175214fcce6c00
+Source SHA-256: 1bedf9965e31b679df997fb01a3a9a41cb4464f76634276731cc374c402f080c
 
 Typesets already-rendered Markdown or rich text as an independent reading paper; headings, lists, quotes, code and tables read existing text tiers and ink roles.
 
@@ -54,7 +54,7 @@ The reading-pane container; renders as article by default.
 ### 标题、段落、列表与引用
 Source: apps/docs/src/content/prose/demos/01-article.tsx
 ```tsx
-import { Prose } from "@qingye/ui/components/prose";
+import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标题、段落、列表与引用", titleEn: "Headings, paragraphs, lists and quotes" } satisfies DemoMeta;
 export default function Demo() {
@@ -79,7 +79,7 @@ export default function Demo() {
 ### 代码块、表格与任务清单
 Source: apps/docs/src/content/prose/demos/02-code-table-tasks.tsx
 ```tsx
-import { Prose } from "@qingye/ui/components/prose";
+import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "代码块、表格与任务清单", titleEn: "Code blocks, tables and task lists" } satisfies DemoMeta;
 export default function Demo() {

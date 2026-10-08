@@ -1,6 +1,6 @@
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Heading } from "@qingye/ui/components/typography";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Heading } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 

@@ -4,7 +4,7 @@ import {existsSync,readdirSync,readFileSync,realpathSync} from 'node:fs';
 import {dirname,resolve,relative} from 'node:path';
 import { loadProject, projectInfo, getTheme, updateTheme, checkProject, readReports, getImpact, ToolError,hash } from '@qingye/tooling';
 
-const ownPackageRoot=dirname(realpathSync(createRequire(new URL('../package.json',import.meta.url)).resolve('@qingye/ui/package.json')));
+const ownPackageRoot=dirname(realpathSync(createRequire(new URL('../package.json',import.meta.url)).resolve('@qingye_lab/ui/package.json')));
 function sourceFingerprint(root){
   const files=[];
   const walk=path=>{if(!existsSync(path))return;for(const entry of readdirSync(path,{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name))){const child=resolve(path,entry.name);if(entry.isDirectory())walk(child);else if(/\.(tsx?|css)$/.test(entry.name))files.push(child);}};
@@ -14,7 +14,7 @@ function sourceFingerprint(root){
 }
 export function studioSourceSnapshot(){
   const own=JSON.parse(readFileSync(resolve(ownPackageRoot,'package.json'),'utf8'));
-  return {version:own.version,source:'Studio local @qingye/ui source (Vite alias)',catalogFingerprint:hash(readFileSync(resolve(ownPackageRoot,'catalog.json'),'utf8')),sourceFingerprint:sourceFingerprint(ownPackageRoot)};
+  return {version:own.version,source:'Studio local @qingye_lab/ui source (Vite alias)',catalogFingerprint:hash(readFileSync(resolve(ownPackageRoot,'catalog.json'),'utf8')),sourceFingerprint:sourceFingerprint(ownPackageRoot)};
 }
 export function previewCompatibility(projectPath,snapshot=studioSourceSnapshot()){
   const target=loadProject(projectPath),targetCatalog=hash(readFileSync(resolve(target.packageRoot,'catalog.json'),'utf8')),targetSource=sourceFingerprint(target.packageRoot);

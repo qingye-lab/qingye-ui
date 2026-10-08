@@ -1,7 +1,7 @@
 # CheckboxGroup
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/checkbox-group
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
 
@@ -67,9 +67,9 @@ The public Base UI collection primitive.
 Source: apps/docs/src/content/checkbox-group/demos/01-selection.tsx
 ```tsx
 import { useId, useState } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
-import { Field, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
+import { Field, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "集合", titleEn: "Collection" };
 const options = [{ value: "alpha", label: "甲" }, { value: "beta", label: "乙" }, { value: "gamma", label: "丙" }];
@@ -90,9 +90,9 @@ export default function Demo() {
 Source: apps/docs/src/content/checkbox-group/demos/02-states.tsx
 ```tsx
 import { useId } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
-import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
+import { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "状态", titleEn: "States" };
 export default function Demo() {

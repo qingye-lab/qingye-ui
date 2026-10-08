@@ -1,19 +1,19 @@
 import * as React from "react";
-import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye/ui/components/breadcrumb";
-import { Button } from "@qingye/ui/components/button";
-import { ContextMenu, ContextMenuItem, ContextMenuPopup, ContextMenuPortal, ContextMenuPositioner, ContextMenuTrigger } from "@qingye/ui/components/context-menu";
-import { Stack } from "@qingye/ui/components/layout";
-import { Menu, MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "@qingye/ui/components/menu";
-import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
-import { CornerMark } from "@qingye/ui/components/corner-mark";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuPopup, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuTrigger, NavigationMenuViewport } from "@qingye/ui/components/navigation-menu";
-import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye/ui/components/page-header";
-import { Separator } from "@qingye/ui/components/separator";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye/ui/components/sidebar";
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye/ui/components/tabs";
-import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye/ui/components/toolbar";
-import { Text } from "@qingye/ui/components/typography";
-import { BoldIcon, CableIcon, ItalicIcon, ListIcon, RefreshCwIcon, ScrollTextIcon, ShieldCheckIcon, UnderlineIcon, UsersIcon } from "lucide-react";
+import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ContextMenu, ContextMenuItem, ContextMenuPopup, ContextMenuPortal, ContextMenuPositioner, ContextMenuTrigger } from "@qingye_lab/ui/components/context-menu";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Menu, MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { CornerMark } from "@qingye_lab/ui/components/corner-mark";
+import { NavigationMenu, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuPopup, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuTrigger, NavigationMenuViewport } from "@qingye_lab/ui/components/navigation-menu";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderDescription, PageHeaderTitle } from "@qingye_lab/ui/components/page-header";
+import { Separator } from "@qingye_lab/ui/components/separator";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye_lab/ui/components/tabs";
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye_lab/ui/components/toolbar";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { IconBold, IconPlugConnected, IconItalic, IconList, IconRefresh, IconFileText, IconShieldCheck, IconUnderline, IconUsers } from "@tabler/icons-react";
 import { GalleryPage, Row, Section } from "./gallery";
 
 /* 导航：路径、视角切换、站点导航、侧栏、命令菜单、右键菜单、工具条与页面标题。
@@ -102,20 +102,20 @@ export default function NavigationPage() {
             <SidebarGroup>
               <SidebarGroupLabel>本地集合</SidebarGroupLabel>
               <SidebarSub defaultOpen>
-                <SidebarSubTrigger icon={<CableIcon aria-hidden="true" />}>接入设备</SidebarSubTrigger>
+                <SidebarSubTrigger icon={<IconPlugConnected aria-hidden="true" />}>接入设备</SidebarSubTrigger>
                 <SidebarSubContent>
                   <SidebarLink href="#devices" active>设备列表</SidebarLink>
                   <SidebarLink href="#devices-endpoint">接入地址</SidebarLink>
                   <SidebarLink href="#devices-sync">同步日志</SidebarLink>
                 </SidebarSubContent>
               </SidebarSub>
-              <SidebarLink href="#roles" icon={<ShieldCheckIcon aria-hidden="true" />}>权限与角色</SidebarLink>
-              <SidebarLink href="#sync" icon={<RefreshCwIcon aria-hidden="true" />}>同步与导出</SidebarLink>
+              <SidebarLink href="#roles" icon={<IconShieldCheck aria-hidden="true" />}>权限与角色</SidebarLink>
+              <SidebarLink href="#sync" icon={<IconRefresh aria-hidden="true" />}>同步与导出</SidebarLink>
             </SidebarGroup>
             <SidebarGroup>
               <SidebarGroupLabel>工作区</SidebarGroupLabel>
-              <SidebarLink href="#members" icon={<UsersIcon aria-hidden="true" />}>成员</SidebarLink>
-              <SidebarLink href="#audit" icon={<ScrollTextIcon aria-hidden="true" />} count={5}>审计日志</SidebarLink>
+              <SidebarLink href="#members" icon={<IconUsers aria-hidden="true" />}>成员</SidebarLink>
+              <SidebarLink href="#audit" icon={<IconFileText aria-hidden="true" />} count={5}>审计日志</SidebarLink>
             </SidebarGroup>
           </SidebarContent>
         </Sidebar>
@@ -163,12 +163,12 @@ export default function NavigationPage() {
         <Stack gap="field">
           <Toolbar aria-label="文本格式">
             <ToolbarGroup aria-label="字形">
-              <ToolbarButton shape="icon" aria-label="加粗" aria-pressed={format.bold} onClick={() => setFormat(value => ({ ...value, bold: !value.bold }))}><BoldIcon aria-hidden="true" /></ToolbarButton>
-              <ToolbarButton shape="icon" aria-label="斜体" aria-pressed={format.italic} onClick={() => setFormat(value => ({ ...value, italic: !value.italic }))}><ItalicIcon aria-hidden="true" /></ToolbarButton>
-              <ToolbarButton shape="icon" aria-label="下划线" aria-pressed={format.underline} onClick={() => setFormat(value => ({ ...value, underline: !value.underline }))}><UnderlineIcon aria-hidden="true" /></ToolbarButton>
+              <ToolbarButton shape="icon" aria-label="加粗" aria-pressed={format.bold} onClick={() => setFormat(value => ({ ...value, bold: !value.bold }))}><IconBold aria-hidden="true" /></ToolbarButton>
+              <ToolbarButton shape="icon" aria-label="斜体" aria-pressed={format.italic} onClick={() => setFormat(value => ({ ...value, italic: !value.italic }))}><IconItalic aria-hidden="true" /></ToolbarButton>
+              <ToolbarButton shape="icon" aria-label="下划线" aria-pressed={format.underline} onClick={() => setFormat(value => ({ ...value, underline: !value.underline }))}><IconUnderline aria-hidden="true" /></ToolbarButton>
             </ToolbarGroup>
             <ToolbarSeparator />
-            <ToolbarGroup aria-label="段落"><ToolbarButton shape="icon" aria-label="列表"><ListIcon aria-hidden="true" /></ToolbarButton></ToolbarGroup>
+            <ToolbarGroup aria-label="段落"><ToolbarButton shape="icon" aria-label="列表"><IconList aria-hidden="true" /></ToolbarButton></ToolbarGroup>
             <ToolbarSeparator />
             <ToolbarLink href="#help">格式说明</ToolbarLink>
           </Toolbar>

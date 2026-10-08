@@ -1,9 +1,9 @@
 # TagInput
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/tag-input
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 640ae3434bbf41910e0a475d9e032d3172ec4da7b44cdfe509f98d9e86ad7031
+Source SHA-256: 855ae9505fc6259647cc2243f33910b843e1a79568853115ce73eb0868b9f71d
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -39,7 +39,7 @@ Only Enter or Add confirms a tag. Confirmation trims surrounding whitespace and 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -64,8 +64,8 @@ Public composition of confirmed items, a draft input, and non-submitting actions
 ### 集合与草稿
 Source: apps/docs/src/content/tag-input/demos/01-collections.tsx
 ```tsx
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { TagInput } from "@qingye/ui/components/tag-input";
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { TagInput } from "@qingye_lab/ui/components/tag-input";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "集合与草稿", titleEn: "Collection and draft" } satisfies DemoMeta;
@@ -83,8 +83,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/tag-input/demos/02-density.tsx
 ```tsx
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { TagInput } from "@qingye/ui/components/tag-input";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { TagInput } from "@qingye_lab/ui/components/tag-input";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

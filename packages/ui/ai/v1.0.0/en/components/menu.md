@@ -1,9 +1,9 @@
 # Menu
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/menu
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: f465cbfa11005ef6f41a52e9f092368bea25f42369fcc4ed189b1cebadaf1710
+Source SHA-256: 215f8f86d55ac9671b12dc0dcab497b2236acc6ac6847926d0b617ea5544795c
 
 Temporary commands and choices related to the current task.
 
@@ -65,7 +65,7 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Dangerous actions require explicit consequences and separate protection; Root, Portal, Positioner and Popup share one context.
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
@@ -99,8 +99,8 @@ Group semantics and the public primitive namespace.
 Source: apps/docs/src/content/menu/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye/ui/components/menu";
-import { Inline, Stack } from "@qingye/ui/components/layout";
+import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye_lab/ui/components/menu";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "当前条目的命令", titleEn: "Commands for the current item" } satisfies DemoMeta;
 export default function Demo() {

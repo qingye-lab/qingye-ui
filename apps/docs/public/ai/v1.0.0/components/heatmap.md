@@ -1,9 +1,9 @@
 # 两维度的量 Heatmap
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/heatmap
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: b04c75d57c9bf8111bb8de76c6062d094ecae776f7e818d21494213e33761cc8
+Source SHA-256: 32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足），可聚焦的格与按需展开的数据表。
 
@@ -41,7 +41,7 @@ Source SHA-256: b04c75d57c9bf8111bb8de76c6062d094ecae776f7e818d21494213e33761cc8
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: recharts
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -61,7 +61,7 @@ figure 名称、两个命名的类别轴、单色顺序色阶的网格与同源�
 ### 每周时段的同步热度
 Source: apps/docs/src/content/heatmap/demos/01-sync-heatmap.tsx
 ```tsx
-import { Heatmap } from "@qingye/ui/components/heatmap";
+import { Heatmap } from "@qingye_lab/ui/components/heatmap";
 export const meta = { title: "每周时段的同步热度", titleEn: "Sync activity by weekday and hour" };
 const days = [
   { key: "mon", label: "周一" }, { key: "tue", label: "周二" }, { key: "wed", label: "周三" },
@@ -82,7 +82,7 @@ export default function Demo() {
 ### 含未统计格
 Source: apps/docs/src/content/heatmap/demos/02-unknown.tsx
 ```tsx
-import { Heatmap } from "@qingye/ui/components/heatmap";
+import { Heatmap } from "@qingye_lab/ui/components/heatmap";
 export const meta = { title: "含未统计格", titleEn: "With an unavailable cell" };
 const days = [{ key: "mon", label: "周一" }, { key: "tue", label: "周二" }, { key: "wed", label: "周三" }];
 export default function Demo() {

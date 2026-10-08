@@ -3,11 +3,14 @@ import { spawn, execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, cpSync, symlinkSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
+import { createServer } from 'node:net';
 import { withBrowser, closeWithTimeout } from './browser-runtime.mjs';
 import { measureTextContrast } from './lib/browser-contrast.mjs';
 
 const root=process.cwd(),outBase=resolve('test-results/studio');mkdirSync(outBase,{recursive:true});
-const out=mkdtempSync(join(outBase,'run-')),port=5182,base=`http://127.0.0.1:${port}`;
+const out=mkdtempSync(join(outBase,'run-'));
+const port=await new Promise((resolvePort,reject)=>{const reservation=createServer();reservation.once('error',reject);reservation.listen(0,'127.0.0.1',()=>{const port=reservation.address().port;reservation.close(error=>error?reject(error):resolvePort(port));});});
+const base=`http://127.0.0.1:${port}`;
 const fixtures=['azure','amber'].map(brand=>{const dest=join(out,brand);cpSync(resolve('apps/studio/fixtures',brand),dest,{recursive:true});symlinkSync(resolve('apps/studio/node_modules'),join(dest,'node_modules'));const config=JSON.parse(readFileSync(join(dest,'ui.config.json'),'utf8'));config.ledger=resolve('docs/token-ledger.json');config.ledgerRoot=root;writeFileSync(join(dest,'ui.config.json'),JSON.stringify(config,null,2)+'\n');return dest;});
 const report={startedAt:new Date().toISOString(),fixtures,cases:[],errors:[],limitations:['Uses isolated local fixture projects; no real product theme was written.','Computed properties and keyboard checks do not prove physical-device, IME or screen-reader acceptance.']};
 const members=group=>execFileSync('ps',['-axo','pid=,ppid=,pgid='],{encoding:'utf8'}).trim().split('\n').map(line=>line.trim().split(/\s+/).map(Number)).filter(row=>row[2]===group);
@@ -19,16 +22,31 @@ try {
   let ready=false;for(let i=0;i<120;i++){if(launchError)throw launchError;if(server.exitCode!==null)throw Error(logs);try{const r=await fetch(`${base}/api/session`,{signal:AbortSignal.timeout(500)});const s=await r.json();if(r.ok&&s.projects?.length===2){ready=true;break;}}catch{}await delay(250);}assert.ok(ready,'Studio readiness');
   await withBrowser(async(browser,lifecycle)=>{report.lifecycle=lifecycle;const context=await browser.newContext({viewport:{width:1600,height:1100},reducedMotion:'reduce',acceptDownloads:true});try{
     const page=await context.newPage(),errors=[];page.setDefaultTimeout(10000);page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push({text:m.text(),url:m.location().url});});
+    await page.goto(`${base}/preview.html`,{waitUntil:'networkidle'});
+    report.libraryDefaults=[];
+    for(const scheme of ['light','dark']){
+      await page.evaluate(scheme=>window.postMessage({type:'qingye-preview',settings:{theme:{schemaVersion:1,brand:'qingye',common:{},light:{},dark:{},compact:{}},css:'',scheme,density:'default',mode:'class',inspect:false}},window.location.origin),scheme);
+      await page.waitForFunction(scheme=>document.documentElement.classList.contains(scheme),scheme);
+      const geometry=await page.locator('.preview-page').evaluate(root=>['button','input-control','select-trigger','textarea','card'].map(slot=>{const element=root.querySelector(`[data-slot="${slot}"]`),style=getComputedStyle(element);return {slot,height:element.getBoundingClientRect().height,radius:style.borderTopLeftRadius,fontSize:style.fontSize};}));
+      for(const sample of geometry)assert.equal(sample.radius,sample.slot==='card'?'16px':'10px',`${scheme} library default ${sample.slot} radius`);
+      assert.equal(geometry.find(sample=>sample.slot==='button').height,32);
+      assert.equal(await page.getByRole('button',{name:'还原',exact:true}).isDisabled(),true);
+      const contrast=await page.locator('.preview-page').evaluate(measureTextContrast);assert.deepEqual(contrast.failures,[]);
+      await page.screenshot({path:join(out,`library-default-${scheme}.png`),fullPage:true});
+      report.libraryDefaults.push({scheme,geometry,contrast});
+    }
+    check('Unmodified library geometry and both preview themes',report.libraryDefaults.map(({scheme,geometry})=>({scheme,geometry})));
     await page.goto(base,{waitUntil:'networkidle'});await page.getByLabel('品牌标识').waitFor();
     const left=page.frameLocator('iframe[title="已应用真实组件预览"]'),right=page.frameLocator('iframe[title="候选真实组件预览"]');
-    await left.getByRole('textbox',{name:'标题',exact:true}).fill('左侧独立草稿');await right.getByRole('textbox',{name:'标题',exact:true}).fill('右侧独立草稿');
-    await right.getByRole('checkbox',{name:'选择 B'}).check();await right.getByRole('button',{name:'切换输入错误'}).click();
+    await left.getByRole('textbox',{name:'名称',exact:true}).fill('左侧独立草稿');await right.getByRole('textbox',{name:'备注',exact:true}).fill('右侧独立草稿');
+    await right.getByRole('textbox',{name:'名称',exact:true}).fill('');
+    await right.getByRole('checkbox',{name:'选择 组件目录'}).check();await right.getByRole('button',{name:'应用到预览',exact:true}).click();
     await page.getByLabel('候选明暗',{exact:true}).selectOption('light');
-    await page.getByRole('button',{name:'载入 Amber 合成主题'}).click();
+    await page.getByRole('button',{name:'试用 Amber 配色'}).click();
     await page.waitForTimeout(500);
-    assert.equal(await right.locator('#draft-title').inputValue(),'右侧独立草稿');assert.equal(await left.getByRole('textbox',{name:'标题',exact:true}).inputValue(),'左侧独立草稿');assert.equal(await right.getByRole('checkbox',{name:'选择 B'}).isChecked(),true);assert.equal(await right.locator('#draft-title').getAttribute('aria-invalid'),'true');await right.getByText('当前显式错误',{exact:true}).waitFor();
+    assert.equal(await right.locator('#draft-title').inputValue(),'');assert.equal(await right.locator('#draft-notes').inputValue(),'右侧独立草稿');assert.equal(await left.getByRole('textbox',{name:'名称',exact:true}).inputValue(),'左侧独立草稿');assert.equal(await right.getByRole('checkbox',{name:'选择 组件目录'}).isChecked(),true);assert.equal(await right.locator('#draft-title').getAttribute('aria-invalid'),'true');await right.getByText('请输入文档名称。',{exact:true}).waitFor();
     const axes=await Promise.all([left.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density})),right.locator('html').evaluate(el=>({brand:el.dataset.brand,classes:el.className,density:el.dataset.density}))]);assert.equal(axes[0].brand,'azure');assert.equal(axes[1].brand,'amber');check('Two document brands and independent draft, selection and explicit error state',axes);
-    const colors=await Promise.all([left.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor),right.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor)]);assert.notEqual(...colors);check('Independent brand CSS reaches real button',colors);
+    const colors=await Promise.all([left.getByRole('button',{name:'应用到预览',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor),right.getByRole('button',{name:'应用到预览',exact:true}).evaluate(el=>getComputedStyle(el).backgroundColor)]);assert.notEqual(...colors);check('Independent brand CSS reaches real button',colors);
     const portalPaint = async (locator) => locator.evaluate(element => {
       const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
       const rgba=color=>{ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);return [...ctx.getImageData(0,0,1,1).data];};
@@ -39,36 +57,37 @@ try {
     const paints=[];
     const verifyPortal = async (name,locator) => {const value=await portalPaint(locator);assert.deepEqual(value.actual,value.expected,`${name} actual portal surface inherits own document token`);paints.push({name,...value});};
     for(const [name,frame]of [['left',left],['right',right]]){
-      await frame.getByRole('combobox',{name:'选项'}).click();await verifyPortal(`${name} Select`,frame.locator('[data-slot=select-popup]').first());await frame.getByRole('option',{name:'选项 C',exact:true}).click();
-      await frame.getByRole('button',{name:'菜单',exact:true}).click();await verifyPortal(`${name} Menu`,frame.locator('[data-slot=menu-popup]'));await frame.getByRole('menuitem',{name:'切换输入错误'}).click();
-      await frame.getByRole('button',{name:'预览变更',exact:true}).click();await frame.getByRole('dialog').waitFor();assert.equal(await page.getByRole('dialog').count(),0,'no portal in parent document');
+      await frame.getByRole('combobox',{name:'分类'}).click();await verifyPortal(`${name} Select`,frame.locator('[data-slot=select-popup]').first());await frame.getByRole('option',{name:'记录',exact:true}).click();
+      await frame.getByRole('button',{name:'更多',exact:true}).click();await verifyPortal(`${name} Menu`,frame.locator('[data-slot=menu-popup]'));await frame.getByRole('menuitem',{name:'清空备注'}).click();
+      await frame.getByRole('button',{name:'查看内容',exact:true}).click();await frame.getByRole('dialog').waitFor();assert.equal(await page.getByRole('dialog').count(),0,'no portal in parent document');
       await verifyPortal(`${name} Dialog initial`,frame.locator('[data-slot=dialog-popup]'));
       if(name==='right') {
         await page.getByLabel('候选明暗',{exact:true}).selectOption('dark');await page.getByLabel('候选密度',{exact:true}).selectOption('default');await page.waitForTimeout(200);assert.equal(await right.locator('html').evaluate(el=>el.classList.contains('dark')&&el.dataset.density==='default'),true);
         await verifyPortal('right Dialog changed while open',frame.locator('[data-slot=dialog-popup]'));
         assert.equal(await left.locator('html').evaluate(el=>el.classList.contains('dark')),false);
-        assert.equal(await left.getByRole('textbox',{name:'标题',exact:true}).inputValue(),'左侧独立草稿');
-        assert.equal(await right.locator('#draft-title').inputValue(),'右侧独立草稿');
+        assert.equal(await left.getByRole('textbox',{name:'名称',exact:true}).inputValue(),'左侧独立草稿');
+        assert.equal(await right.locator('#draft-title').inputValue(),'');
         await frame.getByRole('dialog').click();
       }
-      await page.keyboard.press('Escape');await frame.getByRole('dialog').waitFor({state:'hidden'});assert.equal(await frame.getByRole('button',{name:'预览变更',exact:true}).evaluate(el=>el===document.activeElement),true);
-      await frame.getByRole('button',{name:'展示 Toast',exact:true}).click();await frame.getByText('本地通知预览',{exact:true}).waitFor();await verifyPortal(`${name} Toast`,frame.locator('[data-slot=toast-root]').first());
+      await page.keyboard.press('Escape');await frame.getByRole('dialog').waitFor({state:'hidden'});assert.equal(await frame.getByRole('button',{name:'查看内容',exact:true}).evaluate(el=>el===document.activeElement),true);
+      if(!(await frame.locator('#draft-title').inputValue()).trim())await frame.locator('#draft-title').fill('当前文档');
+      await frame.getByRole('button',{name:'应用到预览',exact:true}).click();await frame.getByText('已应用到当前预览',{exact:true}).waitFor();await verifyPortal(`${name} Toast`,frame.locator('[data-slot=toast-root]').first());
       check(`${name} Select/Menu/Dialog/Toast in owned document`,'Dialog Escape returns focus; parent contains no dialog');
     }
     check('Portal computed surfaces follow each document through independent theme/density changes',paints);
     await page.getByLabel('候选明暗',{exact:true}).selectOption('light');await page.getByLabel('候选密度',{exact:true}).selectOption('default');
     await page.getByRole('button',{name:'重置未应用修改'}).click();await page.getByLabel('编辑范围',{exact:true}).selectOption('common');
     const radius=page.getByLabel('--qy-radius-control',{exact:true});await radius.fill('19px');await page.waitForTimeout(500);
-    assert.equal(await right.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
-    assert.notEqual(await left.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
+    assert.equal(await right.getByRole('button',{name:'应用到预览',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
+    assert.notEqual(await left.getByRole('button',{name:'应用到预览',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
     await page.getByRole('button',{name:'应用主题',exact:true}).click();await page.getByText('主题源与生成 CSS 已应用。实际浏览器效果需要继续核验。',{exact:true}).waitFor();
     assert.equal(JSON.parse(readFileSync(join(fixtures[0],'ui.theme.json'),'utf8')).common['--qy-radius-control'],'19px');
     await page.waitForFunction(()=>{
       const frame=document.querySelector('iframe[title="已应用真实组件预览"]');
-      const button=[...(frame?.contentDocument?.querySelectorAll('button')??[])].find(el=>el.textContent==='主要动作');
+      const button=[...(frame?.contentDocument?.querySelectorAll('button')??[])].find(el=>el.textContent==='应用到预览');
       return button&&frame.contentWindow.getComputedStyle(button).borderTopLeftRadius==='19px';
     });
-    assert.equal(await left.getByRole('button',{name:'主要动作',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
+    assert.equal(await left.getByRole('button',{name:'应用到预览',exact:true}).evaluate(el=>getComputedStyle(el).borderTopLeftRadius),'19px');
     check('Diff/apply writes source and CSS then updates applied preview','19px reaches both real buttons after explicit apply');
     await radius.fill('21px');await page.waitForTimeout(400);
     const source=join(fixtures[0],'ui.theme.json'),external=JSON.parse(readFileSync(source,'utf8'));external.common['--qy-radius-control']='23px';writeFileSync(source,JSON.stringify(external,null,2)+'\n');
@@ -79,7 +98,7 @@ try {
     await page.locator('#theme-import').setInputFiles({name:'import.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({...external,common:{...external.common,'--qy-radius-control':'17px'}}))});await page.waitForTimeout(500);assert.equal(await radius.inputValue(),'17px');await page.getByRole('button',{name:'重置未应用修改'}).click();assert.equal(await radius.inputValue(),'23px');check('Export/import/reset','Candidate-only import/reset preserves applied source');
     await page.waitForFunction(()=>{
       const frame=document.querySelector('iframe[title="候选真实组件预览"]');
-      const button=[...(frame?.contentDocument?.querySelectorAll('button')??[])].find(el=>el.textContent==='主要动作');
+      const button=[...(frame?.contentDocument?.querySelectorAll('button')??[])].find(el=>el.textContent==='应用到预览');
       return button&&frame.contentWindow.getComputedStyle(button).borderTopLeftRadius==='23px';
     });
     await right.locator('body').evaluate(()=>{
@@ -102,7 +121,7 @@ try {
       };
       probe.cleanup=()=>{document.addEventListener=original;window.removeEventListener('message',receive);window.removeEventListener('click',capture,true);};
     });
-    await page.getByRole('checkbox',{name:'点击查询元素归属',exact:true}).check();
+    await page.getByRole('checkbox',{name:'查看部位引用',exact:true}).check();
     await page.waitForFunction(()=>{
       const probe=document.querySelector('iframe[title="候选真实组件预览"]')?.contentWindow?.__studioInspectProbe;
       return probe?.enabledMessage&&probe.listenerRegistered;
@@ -110,18 +129,22 @@ try {
     const impactResponse=page.waitForResponse(response=>{
       const url=new URL(response.url());return url.origin===base&&url.pathname==='/api/impact'&&url.searchParams.get('project')==='0'&&url.searchParams.has('slot');
     });
-    await right.getByRole('button',{name:'主要动作',exact:true}).click();
+    await right.getByRole('button',{name:'应用到预览',exact:true}).click();
     const clicked=await right.locator('body').evaluate(()=>{
       const probe=window.__studioInspectProbe;const clicked=probe.click;probe.cleanup();delete window.__studioInspectProbe;return clicked;
     });
-    assert.ok(clicked?.slot,'the actual click has a data-slot part');assert.equal(clicked.owner,'button');assert.equal(clicked.name,'主要动作');
+    assert.ok(clicked?.slot,'the actual click has a data-slot part');assert.equal(clicked.owner,'button');assert.equal(clicked.name,'应用到预览');
     const impact=await impactResponse;assert.equal(impact.status(),200);assert.equal(new URL(impact.url()).searchParams.get('slot'),clicked.slot,'lookup uses the actual clicked part');
-    const diagnosis=await impact.json();assert.equal(diagnosis.status,'UNVERIFIED');assert.deepEqual(diagnosis.records,[],'the current ledger has no exact record for this button part');
-    await page.locator('.evidence').getByText(/^UNVERIFIED ·/).waitFor();
-    assert.deepEqual(await page.locator('.evidence pre').evaluate(element=>JSON.parse(element.textContent).records),[]);
-    report.clickPart={...clicked,diagnosticStatus:diagnosis.status,staticOwner:'UNVERIFIED',records:diagnosis.records.length};
-    report.limitations.push('The clicked button part has a verified DOM owner, but its CVA/useRender static token path has no exact ledger record; static ownership remains UNVERIFIED.');
-    await page.getByRole('checkbox',{name:'点击查询元素归属',exact:true}).uncheck();
+    const ledger=JSON.parse(readFileSync(resolve('docs/token-ledger.json'),'utf8'));
+    const expectedRecords=ledger.static.records.filter(entry=>entry.part===clicked.slot||entry.selector?.includes(`data-slot=${clicked.slot}`)||entry.selector?.includes(`data-slot="${clicked.slot}"`));
+    const expectedStatus=expectedRecords.length?'PASS':'UNVERIFIED';
+    const diagnosis=await impact.json();assert.equal(diagnosis.staticFresh,true);assert.equal(diagnosis.status,expectedStatus);assert.deepEqual(diagnosis.records,expectedRecords,'click diagnostics must return the current static ledger matches');
+    await page.locator('.evidence').getByText(new RegExp(`^${expectedStatus} ·`)).waitFor();
+    assert.deepEqual(await page.locator('.evidence pre').evaluate(element=>JSON.parse(element.textContent).records),expectedRecords);
+    const exactOwner=expectedRecords.some(entry=>entry.part===clicked.slot&&entry.sourceComponent===clicked.owner);
+    report.clickPart={...clicked,diagnosticStatus:diagnosis.status,staticOwner:exactOwner?'PRESENT':'UNVERIFIED',records:diagnosis.records.length};
+    if(!exactOwner)report.limitations.push('The clicked button has a verified DOM owner. Selector references in the static ledger do not establish an exact token path for that clicked part; static ownership remains UNVERIFIED.');
+    await page.getByRole('checkbox',{name:'查看部位引用',exact:true}).uncheck();
     const checkResponse=page.waitForResponse(r=>r.url()===`${base}/api/check?project=0`);await page.getByRole('button',{name:'运行当前项目报告'}).click();assert.equal((await checkResponse).status(),200);const reportsResponse=page.waitForResponse(r=>r.url()===`${base}/api/reports`);await page.getByRole('button',{name:'读取多项目已有报告'}).click();assert.equal((await reportsResponse).status(),200);await page.waitForFunction(()=>document.querySelector('.reports')?.textContent.includes('NOT_RUN'));check('Click-part diagnostics and stored reports',{clickPart:report.clickPart,otherProjectReport:'NOT_RUN'});
     await page.getByLabel('已登记项目',{exact:true}).selectOption('1');await page.waitForTimeout(500);assert.equal(await left.locator('html').getAttribute('data-theme'),'light');assert.equal(await left.locator('html').evaluate(el=>el.classList.contains('light')||el.classList.contains('dark')),false);check('Attribute-mode project','data-theme mode keeps brand and density independent');
     // Force the older project response to arrive last. Requests use the real

@@ -214,7 +214,7 @@ The [design guide](../design.en.md) turns these methods into concrete design jud
 
 ## About contemporary translation
 
-The method names and digital interface examples in this document are Qingye UI's contemporary design expressions. The sources below identify intellectual references; they do not suggest that classical texts directly prescribed modern interface rules or establish that these rules have been validated through use.
+The method names and digital interface examples in this document are Qingye UI's contemporary design expressions. The sources cited in the notes identify intellectual references; they do not suggest that classical texts directly prescribed modern interface rules or establish that these rules have been validated through use.
 
 “Start with use” draws on the Kaogong Ji in the Rites of Zhou and its joint consideration of material, craft, and surrounding conditions. We take inspiration related to fitness for use, without treating it as a summary of all Chinese tradition.
 

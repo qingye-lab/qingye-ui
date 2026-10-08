@@ -19,10 +19,10 @@ const command = (args, expected = 0) => {
   report.checks.push({args,exitCode:result.status}); return result.stdout;
 };
 try {
-  put('package.json', { name:'packed-tooling-check', private:true, type:'module', dependencies:{'@qingye/ui':`file:${ui}`,'@qingye/tooling':`file:${tooling}`,react:'19.2.1','react-dom':'19.2.1'} });
+  put('package.json', { name:'packed-tooling-check', private:true, type:'module', dependencies:{'@qingye_lab/ui':`file:${ui}`,'@qingye/tooling':`file:${tooling}`,react:'19.2.1','react-dom':'19.2.1'} });
   put('.npmrc','auto-install-peers=false\n');
   command(['install','--ignore-workspace','--no-frozen-lockfile','--ignore-scripts']);
-  for (const name of ['ui','tooling']) assert.ok(!realpathSync(join(directory,`node_modules/@qingye/${name}`)).startsWith(resolve(`packages/${name}`)));
+  for (const [name, packageName] of [['ui','@qingye_lab/ui'],['tooling','@qingye/tooling']]) assert.ok(!realpathSync(join(directory,`node_modules/${packageName}`)).startsWith(resolve(`packages/${name}`)));
   const cli = (args, exit=0) => JSON.parse(command(['exec','qingye-ui',...args,'--project',directory,'--json'],exit));
   const info = cli(['info']); assert.equal(info.missingConfig,'ui.config.json');
   const dry = cli(['init']); assert.equal(dry.applied,false); assert.equal(existsSync(join(directory,'ui.config.json')),false);

@@ -1,7 +1,7 @@
 # Empty
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/empty
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 79d0c56344b661ec6edb67229e663d8b42f56036620bdcbc3c5a05711299f3c0
 
@@ -70,10 +70,10 @@ p explanation and div action grouping.
 Source: apps/docs/src/content/empty/demos/01-states.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye/ui/components/empty";
-import { Item, ItemTitle } from "@qingye/ui/components/item";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Item, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "零、未知与不适用", titleEn: "Zero, unknown and not applicable" } satisfies DemoMeta;
 export default function Demo() {

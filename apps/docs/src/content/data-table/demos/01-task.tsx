@@ -1,7 +1,7 @@
 import * as React from "react";
 import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye/ui/components/data-table";
-import { Stack } from "@qingye/ui/components/layout";
+import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;

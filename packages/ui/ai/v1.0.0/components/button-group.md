@@ -1,7 +1,7 @@
 # 动作组 ButtonGroup
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/button-group
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
 
@@ -50,8 +50,8 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 动作范围
 Source: apps/docs/src/content/button-group/demos/01-actions.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
 
 export const meta = { title: "动作范围", titleEn: "Action scope" };
 export default function Demo() {
@@ -62,8 +62,8 @@ export default function Demo() {
 ### 纵向
 Source: apps/docs/src/content/button-group/demos/02-vertical.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
 
 export const meta = { title: "纵向", titleEn: "Vertical" };
 export default function Demo() {

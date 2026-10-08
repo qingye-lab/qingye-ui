@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@qingye/ui/components/theme-provider";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
+import { ThemeProvider } from "@qingye_lab/ui/components/theme-provider";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import DesignReview from "./pages/review/DesignReview";

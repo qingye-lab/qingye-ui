@@ -13,9 +13,9 @@ test('local service protects origin/session/project, shares dry-run/apply and co
   const put=(path,value)=>{mkdirSync(dirname(resolve(root,path)),{recursive:true});writeFileSync(resolve(root,path),typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');};
   const packagePath=fileURLToPath(new URL('../../../packages/ui/',import.meta.url));
   const packageVersion=JSON.parse(readFileSync(resolve(packagePath,'package.json'),'utf8')).version;
-  put('package.json',{name:'service-fixture',type:'module',dependencies:{'@qingye/ui':packageVersion}});mkdirSync(resolve(root,'node_modules/@qingye'),{recursive:true});symlinkSync(packagePath,resolve(root,'node_modules/@qingye/ui'));
-  put('ui.config.json',{schemaVersion:1,package:'@qingye/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'ui.theme.generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}});
-  put('src/ui.ts','export { Button } from "@qingye/ui/components/button";');put('src/ui.css','');
+  put('package.json',{name:'service-fixture',type:'module',dependencies:{'@qingye_lab/ui':packageVersion}});mkdirSync(resolve(root,'node_modules/@qingye_lab'),{recursive:true});symlinkSync(packagePath,resolve(root,'node_modules/@qingye_lab/ui'));
+  put('ui.config.json',{schemaVersion:1,package:'@qingye_lab/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'ui.theme.generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}});
+  put('src/ui.ts','export { Button } from "@qingye_lab/ui/components/button";');put('src/ui.css','');
   const theme={schemaVersion:1,brand:'fixture',common:{},light:{'--qy-primary':'#123456'},dark:{},compact:{}};put('ui.theme.json',theme);put('ui.theme.generated.css',themeCss(theme,'class'));
   const service=createService([root],{maxBytes:4096});const server=createServer((req,res)=>service.middleware(req,res,()=>{res.statusCode=404;res.end();}));await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>server.close(resolve)));
   const port=server.address().port,origin=`http://127.0.0.1:${port}`,request=(path,options)=>fetch(origin+path,options);
@@ -37,10 +37,10 @@ test('local service protects origin/session/project, shares dry-run/apply and co
 test('no explicit projects means no filesystem project access',async()=>{assert.equal(createService([]).projectCount,0);});
 test('same version alone cannot authorize Studio preview: catalog and source must match',t=>{
   const root=mkdtempSync(resolve(tmpdir(),'qingye-preview-source-'));t.after(()=>rmSync(root,{recursive:true,force:true}));
-  const own=fileURLToPath(new URL('../../../packages/ui/',import.meta.url)),packageRoot=resolve(root,'node_modules/@qingye/ui');mkdirSync(packageRoot,{recursive:true});
+  const own=fileURLToPath(new URL('../../../packages/ui/',import.meta.url)),packageRoot=resolve(root,'node_modules/@qingye_lab/ui');mkdirSync(packageRoot,{recursive:true});
   for(const name of ['package.json','catalog.json','src','tokens','theme.css','styles.css','motion.css','utilities.css'])cpSync(resolve(own,name),resolve(packageRoot,name),{recursive:true});
   writeFileSync(resolve(root,'package.json'),JSON.stringify({name:'source-fixture',type:'module'}));
-  const config={schemaVersion:1,package:'@qingye/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}};
+  const config={schemaVersion:1,package:'@qingye_lab/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}};
   writeFileSync(resolve(root,'ui.config.json'),JSON.stringify(config));
   assert.equal(previewCompatibility(root).available,true);
   const builtSnapshot=studioSourceSnapshot();assert.equal(previewCompatibility(root,{...builtSnapshot,sourceFingerprint:'previous-built-source'}).available,false);

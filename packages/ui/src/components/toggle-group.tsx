@@ -14,7 +14,7 @@ const GroupSize = React.createContext<ToggleSize>("md");
 export function ToggleGroup<Value extends string>({ size = "md", className, ...props }: ToggleGroupProps<Value>) {
   // 基础层 §6：一组由一个名字命名、由方向键作为一个单位操作的候选，是**同一个
   // 控件的几段**，不是几个各自带框的按钮。与分段控件共用一组轨道 token——
-  // 同一种关系（并列候选围在一个凹槽里）只能有一种画法（design.md NG3）。
+  // 同一种关系（并列候选围在同一条轨道里）只能有一种画法（design.md NG3）。
   // 不提供「是否用轨道」的配置：能组合解决的不增加配置。
   return <GroupSize.Provider value={size}><ToggleGroupPrimitive data-slot="toggle-group" data-size={size} {...props}
     className={(state) => cn(
@@ -27,7 +27,7 @@ export function ToggleGroup<Value extends string>({ size = "md", className, ...p
 
 export function ToggleGroupItem<Value extends string>({ size, className, ...props }: ToggleGroupItemProps<Value>) {
   const groupSize = React.useContext(GroupSize);
-  // 未按压：无边框无填充，只有文字——凹槽已经承担整组的边界。
+  // 未按压：无边框无填充，只有文字——轨道的容器线已经承担整组的边界。
   // 按压：用 solid 填充，不加阴影（填充已划出范围，NG11）。这与勾选、开关、分段控件的选中同一角色
   // （「取值与默认不同」），并且与禁用态（降不透明度）在明度与色彩两处区分。
   return <Toggle data-slot="toggle-group-item" size={size ?? groupSize} {...props}

@@ -1,7 +1,7 @@
 # Textarea
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/textarea
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13
 
@@ -67,8 +67,8 @@ The Base UI Field namespace; Textarea uses its Control's textarea render outlet.
 Source: apps/docs/src/content/textarea/demos/01-value.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "多行文本", titleEn: "Multiline text" };
 
@@ -87,8 +87,8 @@ export default function Demo() {
 ### 状态
 Source: apps/docs/src/content/textarea/demos/02-states.tsx
 ```tsx
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "状态", titleEn: "States" };
 
@@ -116,8 +116,8 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/textarea/demos/03-density.tsx
 ```tsx
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

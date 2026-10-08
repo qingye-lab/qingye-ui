@@ -1,7 +1,7 @@
 # Form
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/form
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 709b9bf716341fea67ac612ce770cc44ec07f68b6308a5e9766a2efa06cf93bd
 
@@ -54,11 +54,11 @@ A real native form with no request or error aggregation.
 Source: apps/docs/src/content/form/demos/01-submit.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Form } from "@qingye_lab/ui/components/form";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "提交值", titleEn: "Submitted value" };
 export default function Demo() {
@@ -70,12 +70,12 @@ export default function Demo() {
 ### 字段错误与重置
 Source: apps/docs/src/content/form/demos/02-error-and-reset.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Form } from "@qingye_lab/ui/components/form";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "字段错误与重置", titleEn: "Field error and reset" };
 export default function Demo() {

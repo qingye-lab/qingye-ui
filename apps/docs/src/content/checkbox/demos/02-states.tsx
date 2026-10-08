@@ -1,5 +1,5 @@
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldContent, FieldError, FieldLabel } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldContent, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "状态", titleEn: "States" };
 

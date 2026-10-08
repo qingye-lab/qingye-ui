@@ -1,5 +1,5 @@
-import { DateRangePicker } from "@qingye/ui/components/date-range-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateRangePicker } from "@qingye_lab/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "只读与禁用", titleEn: "Read-only and disabled" };
 const value = { from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) };
 export default function Demo() {

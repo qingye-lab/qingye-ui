@@ -1,5 +1,5 @@
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "横向组合", titleEn: "Horizontal composition" };
 

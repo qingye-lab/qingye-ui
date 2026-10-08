@@ -14,10 +14,10 @@ const service=()=>({name:'qingye-local-projects',configureServer(server:any){con
 export default defineConfig({
   plugins:[react(),tailwindcss(),service()],
   resolve:{alias:[
-    {find:/^@qingye\/ui\/components\/(.*)$/,replacement:`${ui}src/components/$1`},
-    {find:/^@qingye\/ui\/locale$/,replacement:`${ui}src/locale.tsx`},
-    {find:/^@qingye\/ui\/utils$/,replacement:`${ui}src/utils.ts`},
-    {find:/^@qingye\/ui\/(.*\.css)$/,replacement:`${ui}$1`},
+    {find:/^@qingye_lab\/ui\/components\/(.*)$/,replacement:`${ui}src/components/$1`},
+    {find:/^@qingye_lab\/ui\/locale$/,replacement:`${ui}src/locale.tsx`},
+    {find:/^@qingye_lab\/ui\/utils$/,replacement:`${ui}src/utils.ts`},
+    {find:/^@qingye_lab\/ui\/(.*\.css)$/,replacement:`${ui}$1`},
   ]},
   server:{host:'127.0.0.1',port:5181,strictPort:true},preview:{host:'127.0.0.1',port:5181,strictPort:true},
   build:{rollupOptions:{input:{studio:fileURLToPath(new URL('./index.html',import.meta.url)),preview:fileURLToPath(new URL('./preview.html',import.meta.url))}}}

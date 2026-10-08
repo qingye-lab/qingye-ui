@@ -1,9 +1,9 @@
 # 路径 Breadcrumb
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/breadcrumb
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
-Source SHA-256: 8eca1a66ac09de34c9d92b74b51ebfa17ebb2f2516f7c5ea411124087e18eccc
+Source SHA-256: 8d49e58718d80bd16970cfab80ccac01a981a0ad2ca51088e5960eb50ce79c3e
 
 父级链接与明确的当前位置。
 
@@ -50,7 +50,7 @@ Source SHA-256: 8eca1a66ac09de34c9d92b74b51ebfa17ebb2f2516f7c5ea411124087e18eccc
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -82,7 +82,7 @@ ol / li 保留路径顺序。
 ### 父级与当前页
 Source: apps/docs/src/content/breadcrumb/demos/01-path.tsx
 ```tsx
-import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye/ui/components/breadcrumb";
+import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "父级与当前页", titleEn: "Ancestors and current page" } satisfies DemoMeta;
 export default function Demo() {

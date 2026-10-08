@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
-import { TEXT_STEPS } from "./text-steps.js";
+import { TEXT_STEPS } from "./text-steps";
 
 const mergeClasses = extendTailwindMerge({
   extend: {

@@ -11,8 +11,8 @@ test("native control JSX is checked while strings and layout remain content", ()
 
 test("library render roots include aliases, namespaces and callbacks", () => {
   const result = inspectLibraryControls(`
-    import { Item as Row } from "@qingye/ui/components/item";
-    import * as UI from "@qingye/ui";
+    import { Item as Row } from "@qingye_lab/ui/components/item";
+    import * as UI from "@qingye_lab/ui";
     export const View = () => <>
       <Row render={<button type="button" />} />
       <UI.Badge render={(props) => <button {...props} />} />
@@ -25,7 +25,7 @@ test("library render roots include aliases, namespaces and callbacks", () => {
 
 test("render attributes do not exempt unrelated or nested controls", () => {
   const result = inspectLibraryControls(`
-    import { Item } from "@qingye/ui/components/item";
+    import { Item } from "@qingye_lab/ui/components/item";
     import { Other } from "./other";
     export const View = () => <>
       <Other render={<button />} />
@@ -44,7 +44,7 @@ test("disclosure controls use Collapsible while code strings remain examples", (
 
 test("Button navigation is distinct from commands and native styled links", () => {
   const result = inspectLibraryControls(`
-    import { Button as Action, buttonVariants } from "@qingye/ui/components/button";
+    import { Button as Action, buttonVariants } from "@qingye_lab/ui/components/button";
     import { Link as RouteLink } from "react-router-dom";
     export const View = () => <>
       <Action render={<a href="/docs" />} nativeButton={false}>Docs</Action>
@@ -62,6 +62,14 @@ test("syntax errors cannot be reported as passing controls", () => {
   assert.ok(inspectLibraryControls("export const View = () => <button").violations.length);
 });
 
+test("rendered Markdown inside Prose may hold native task checkboxes and details; the same tags outside Prose may not", () => {
+  const result = inspectLibraryControls(`
+    import { Prose } from "@qingye_lab/ui/components/prose";
+    const View = () => <><Prose><ul><li><input type="checkbox" checked readOnly />完成</li></ul><details><summary>更多</summary>内容</details></Prose><input /><details /></>;
+  `);
+  assert.equal(result.violations.length, 2);
+});
+
 test("the website uses library controls", () => {
   const result = inspectDocsControls();
   assert.deepEqual(result.violations, []);
@@ -70,8 +78,8 @@ test("the website uses library controls", () => {
 
 test("native select options are structural children of the actual public NativeSelect, not independent controls", () => {
   const result = inspectLibraryControls(`
-    import { NativeSelect as Choice } from "@qingye/ui/components/native-select";
-    import * as UI from "@qingye/ui";
+    import { NativeSelect as Choice } from "@qingye_lab/ui/components/native-select";
+    import * as UI from "@qingye_lab/ui";
     import { NativeSelect as Unrelated } from "./other";
     const View = () => <><Choice><optgroup label="A"><option value="0">Zero</option></optgroup></Choice><UI.NativeSelect><option>One</option></UI.NativeSelect><Choice render={<select><option>Two</option></select>} /><Unrelated><option>Invalid</option></Unrelated><option>Detached</option></>;
   `);

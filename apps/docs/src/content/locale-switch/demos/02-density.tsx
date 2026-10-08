@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { LocaleSwitch } from "@qingye/ui/components/locale-switch";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { LocaleSwitch } from "@qingye_lab/ui/components/locale-switch";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 
 export const meta = { title: "密度与禁用", titleEn: "Density and disabled" };
 

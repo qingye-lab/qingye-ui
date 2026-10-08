@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Tree, type TreeNode } from "@qingye/ui/components/tree";
-import { Stack } from "@qingye/ui/components/layout";
+import { Tree, type TreeNode } from "@qingye_lab/ui/components/tree";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "级联勾选：成员权限", titleEn: "Cascading check: member permissions" } satisfies DemoMeta;

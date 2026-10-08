@@ -9,7 +9,7 @@ import { Popover, PopoverTrigger, PopoverPopup } from "./popover";
 import { Tooltip, TooltipTrigger, TooltipPopup } from "./tooltip";
 import { DisclosureIcon } from "../disclosure";
 import { useUILocale } from "../locale";
-import { PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
+import { IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand } from "@tabler/icons-react";
 import { cn } from "../utils";
 
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
@@ -44,7 +44,7 @@ export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange
 export type SidebarToggleProps = ButtonProps;
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
-  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <PanelLeftOpenIcon aria-hidden="true" /> : <PanelLeftCloseIcon aria-hidden="true" />)}</Button></div>;
+  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" />)}</Button></div>;
 }
 export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
@@ -69,7 +69,7 @@ export function SidebarContent({ id, render, className, onFocusCapture, onBlurCa
     ref: [context.content, ref ?? null],
     props: mergeProps({
       "data-slot": "sidebar-content", id: actualId,
-      className: cn("grid min-w-0 gap-(--qy-field-group-gap)", className),
+      className: cn("grid min-w-0 content-start gap-(--qy-field-group-gap)", className),
       onFocusCapture(event: React.FocusEvent<HTMLElement>) { context.contentFocused.current = true; onFocusCapture?.(event); },
       onBlurCapture(event: React.FocusEvent<HTMLElement>) { if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node)) context.contentFocused.current = false; onBlurCapture?.(event); },
     }, props),

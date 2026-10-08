@@ -11,7 +11,7 @@ import { renderToString } from "react-dom/server";
 import ts from "typescript";
 import { expect, expectTypeOf, test, vi } from "vitest";
 import { cva } from "class-variance-authority";
-import * as icons from "lucide-react";
+import * as icons from "@tabler/icons-react";
 import { Button, ButtonPrimitive, ButtonProtection, type ButtonProps, type ButtonState } from "../src/components/button";
 import { UILocaleProvider, useUILocale } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
@@ -440,7 +440,7 @@ test.each(["neutral", "danger"] as const)("a %s button mounts when the runtime p
   const dependencies: Record<string, unknown> = {
     "@base-ui/react/button": { Button: ButtonPrimitive },
     "class-variance-authority": { cva },
-    "lucide-react": icons,
+    "@tabler/icons-react": icons,
     react: React,
     "../locale": { useUILocale },
     "../utils": { cn },
@@ -481,7 +481,7 @@ test("the registry editor template compiles against current source props and rej
   const options: ts.CompilerOptions = {
     strict: true, noEmit: true, skipLibCheck: true, jsx: ts.JsxEmit.ReactJSX,
     target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, moduleResolution: ts.ModuleResolutionKind.Bundler,
-    baseUrl: process.cwd(), paths: { "@qingye/ui/components/*": ["src/components/*"] },
+    baseUrl: process.cwd(), paths: { "@qingye_lab/ui/components/*": ["src/components/*"] },
   };
   const check = (source: string) => {
     const host = ts.createCompilerHost(options);

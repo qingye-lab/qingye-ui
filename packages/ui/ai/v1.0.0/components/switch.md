@@ -1,7 +1,7 @@
 # 开关 Switch
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/switch
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91
 
@@ -66,8 +66,8 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Source: apps/docs/src/content/switch/demos/01-states.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldContent, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Switch } from "@qingye/ui/components/switch";
+import { Field, FieldContent, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Switch } from "@qingye_lab/ui/components/switch";
 
 export const meta = { title: "状态", titleEn: "States" };
 
@@ -107,8 +107,8 @@ export default function Demo() {
 ### 跟随标签
 Source: apps/docs/src/content/switch/demos/02-labels.tsx
 ```tsx
-import { Field, FieldContent, FieldLabel } from "@qingye/ui/components/field";
-import { Switch } from "@qingye/ui/components/switch";
+import { Field, FieldContent, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Switch } from "@qingye_lab/ui/components/switch";
 
 export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 

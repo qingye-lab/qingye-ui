@@ -25,9 +25,10 @@ describe("Tree", () => {
 });
 const checkNodes: TreeNode[] = [{ id: "p", label: "父", children: [{ id: "p1", label: "子一" }, { id: "p2", label: "子二" }, { id: "p3", label: "禁用子", disabled: true }] }, { id: "q", label: "独立叶子" }];
 describe("Tree checkable", () => {
-  it("cascades a branch click onto enabled leaves, derives mixed/true and exposes aria-multiselectable", async () => {
+  it("cascades a branch click onto enabled leaves, derives mixed/true without aria-multiselectable", async () => {
     const user = userEvent.setup(); render(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} />);
-    expect(screen.getByRole("tree")).toHaveAttribute("aria-multiselectable", "true");
+    // 勾选模式的条目用 aria-checked，不用 aria-selected，因此树不声明 multiselectable。
+    expect(screen.getByRole("tree")).not.toHaveAttribute("aria-multiselectable");
     expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
     await user.click(screen.getByRole("treeitem", { name: "子一" }));
     expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");

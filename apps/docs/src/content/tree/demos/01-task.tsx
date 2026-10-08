@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Tree, type TreeNode } from "@qingye/ui/components/tree";
-import { Stack } from "@qingye/ui/components/layout";
+import { Tree, type TreeNode } from "@qingye_lab/ui/components/tree";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "展开与独立选择", titleEn: "Expansion and independent selection" } satisfies DemoMeta;

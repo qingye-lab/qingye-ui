@@ -1,5 +1,5 @@
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Textarea } from "@qingye/ui/components/textarea";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Textarea } from "@qingye_lab/ui/components/textarea";
 
 export const meta = { title: "状态", titleEn: "States" };
 

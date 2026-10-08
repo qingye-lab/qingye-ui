@@ -1,9 +1,9 @@
 # 两量关系 ScatterChart
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/scatter-chart
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: 71ae28bf00c3217f41070aa87f82556bb109f8a83639e2369adb44d67b2c91ce
+Source SHA-256: d64bea740aa49000d24950caa73af8a7cf2d24bc6408672925d40bd2f577a024
 
 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 
@@ -40,7 +40,7 @@ x、y 都是数值轴——这是散点的任务定义，不是违反「永远�
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: recharts
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -59,7 +59,7 @@ figure 名称、命名的双轴、按系列着色的标记与同源可见 Table�
 ### 记录数与失败率的关系
 Source: apps/docs/src/content/scatter-chart/demos/01-relationship.tsx
 ```tsx
-import { ScatterChart } from "@qingye/ui/components/scatter-chart";
+import { ScatterChart } from "@qingye_lab/ui/components/scatter-chart";
 export const meta = { title: "记录数与失败率的关系", titleEn: "Records vs. failure rate" };
 const collections = [
   { id: "devices", label: "接入设备", records: 1284, rate: 0.012 },
@@ -80,7 +80,7 @@ export default function Demo() {
 ### 两个来源的记录数与失败率
 Source: apps/docs/src/content/scatter-chart/demos/02-two-series.tsx
 ```tsx
-import { ScatterChart } from "@qingye/ui/components/scatter-chart";
+import { ScatterChart } from "@qingye_lab/ui/components/scatter-chart";
 export const meta = { title: "两个来源的记录数与失败率", titleEn: "Two sources, records vs. failure rate" };
 export default function Demo() {
   return <ScatterChart className="w-full max-w-2xl" label="设备与审计来源的记录数与失败率" xLabel="记录数" yLabel="失败率"

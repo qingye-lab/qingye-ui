@@ -1,9 +1,9 @@
 # DateRangePicker
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/date-range-picker
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 00f85ac23ea34b74309d86c0f93e849fb5a49579d4a0b97075dc4add4d748a21
+Source SHA-256: cb4835ff4ca95237a1f9934f588b79a93a8edcc48bdf39ca5147d2cd6766245f
 
 Edit a calendar range draft and explicitly apply complete endpoints.
 
@@ -38,7 +38,7 @@ Only complete from/to endpoints form a confirmed value. Incomplete ranges stay i
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -62,8 +62,8 @@ A composition of range display, calendar draft, and explicit Apply.
 Source: apps/docs/src/content/date-range-picker/demos/01-range.tsx
 ```tsx
 import { useState } from "react";
-import { DateRangePicker, type DateRangeValue } from "@qingye/ui/components/date-range-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateRangePicker, type DateRangeValue } from "@qingye_lab/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "起止日期", titleEn: "Date endpoints" };
 export default function Demo() {
   const [value, setValue] = useState<DateRangeValue | undefined>();
@@ -74,8 +74,8 @@ export default function Demo() {
 ### 只读与禁用
 Source: apps/docs/src/content/date-range-picker/demos/02-states.tsx
 ```tsx
-import { DateRangePicker } from "@qingye/ui/components/date-range-picker";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { DateRangePicker } from "@qingye_lab/ui/components/date-range-picker";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "只读与禁用", titleEn: "Read-only and disabled" };
 const value = { from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) };
 export default function Demo() {

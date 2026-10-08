@@ -1,7 +1,7 @@
 import { useId } from "react";
-import { Label } from "@qingye/ui/components/label";
-import { Stack } from "@qingye/ui/components/layout";
-import { NativeSelect } from "@qingye/ui/components/native-select";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "多选与禁用", titleEn: "Multiple and disabled" };
 export default function Demo() {

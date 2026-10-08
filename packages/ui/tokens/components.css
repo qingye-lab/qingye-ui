@@ -85,6 +85,22 @@
     --qy-text-prose-tracking: 0em;
     --qy-text-prose-weight: var(--qy-weight-regular);
 
+    /* 长文的标题阶梯（用户评「字号失调」后设，2026-10-08）：界面的 title/chapter 只差 1.2 倍、heading 与正文同大，
+       借来做长文标题层级读不出来。长文自成一阶：从正文 16 起每级约 1.25 倍，取偶数像素，行高落在分格上。
+       篇 28/36、节 22/32、小节 18/28；再下一级（h4）是正文加字重。预设。 */
+    --qy-text-prose-h1-size: 1.75rem;
+    --qy-text-prose-h1-leading: calc(9 * var(--qy-fen));
+    --qy-text-prose-h1-tracking: -0.02em;
+    --qy-text-prose-h1-weight: var(--qy-weight-semibold);
+    --qy-text-prose-h2-size: 1.375rem;
+    --qy-text-prose-h2-leading: calc(8 * var(--qy-fen));
+    --qy-text-prose-h2-tracking: -0.016em;
+    --qy-text-prose-h2-weight: var(--qy-weight-semibold);
+    --qy-text-prose-h3-size: 1.125rem;
+    --qy-text-prose-h3-leading: calc(7 * var(--qy-fen));
+    --qy-text-prose-h3-tracking: -0.01em;
+    --qy-text-prose-h3-weight: var(--qy-weight-semibold);
+
     --qy-text-prose-strong-size: 1rem;
     --qy-text-prose-strong-leading: calc(7 * var(--qy-fen));
     --qy-text-prose-strong-tracking: -0.006em;
@@ -214,7 +230,6 @@
     --qy-text-control-xl-mobile-weight: var(--qy-weight-regular);
 
     /* ─── 间距阶梯（分的倍数）──────────────────────────────── */
-    --qy-space-0: 0;
     --qy-space-1: var(--qy-fen);
     --qy-space-2: calc(var(--qy-fen) * 2);
     --qy-space-3: calc(var(--qy-fen) * 3);
@@ -276,24 +291,23 @@
     --qy-touch-target: 2.75rem;
 
     /* ─── 圆角（应物象形；基础层 §4）──────────────────────────
-     * 方以载事：独立控件 r = min(外高 / 4, 2 分)。xs、sm 落在四分之一处（6、7px），
-     * md 以上取 2 分。浮层圆角 = 控件圆角 + 浮层内缩，使浮层里的行项与控件同角、且内外同心。
-     * 面板与浮层同为承载面，取同一圆角。标记 r = 标记边长 / 4 = 1 分。 */
-    --qy-radius: calc(2 * var(--qy-fen));
-    --qy-radius-xs: calc(var(--qy-control-xs) / 4);
-    --qy-radius-sm: calc(var(--qy-control-sm) / 4);
-    --qy-radius-md: var(--qy-radius);
-    --qy-radius-lg: var(--qy-radius);
-    --qy-radius-xl: calc(2.5 * var(--qy-fen));
-    --qy-radius-2xl: calc(3 * var(--qy-fen));
-    --qy-radius-full: 9999px;
-    --qy-radius-marker: var(--qy-fen);
+     * 圆角与外高成比例：r = round(外高 × 5/16)，不设上限（用户裁决 2026-10-07：公共圆角更圆滑）。
+     * 24/28/32/36/40 → 8/9/10/11/13px；标记 16 → 5px。比例而非常数，大小控件读来同一种圆。
+     * 浮层圆角 = 控件圆角 + 浮层内缩（14），浮层里的行项与控件同角、内外同心。
+     * 面板是大面，取 4 分（16）：同一比例落到面板会过方，面板单独取值（选择）。 */
+    --qy-radius-xs: round(calc(var(--qy-control-xs) * 5 / 16), 1px);
+    --qy-radius-sm: round(calc(var(--qy-control-sm) * 5 / 16), 1px);
+    --qy-radius-md: round(calc(var(--qy-control-md) * 5 / 16), 1px);
+    --qy-radius-lg: round(calc(var(--qy-control-lg) * 5 / 16), 1px);
+    --qy-radius-xl: round(calc(var(--qy-control-xl) * 5 / 16), 1px);
+    --qy-radius: var(--qy-radius-md);
+    --qy-radius-marker: round(calc(var(--qy-marker-size) * 5 / 16), 1px);
     --qy-radius-item: var(--qy-radius-xs);
-    --qy-radius-control: var(--qy-radius-lg);
+    --qy-radius-control: var(--qy-radius-md);
     --qy-overlay-inset: var(--qy-fen);
     --qy-radius-overlay: calc(var(--qy-radius-control) + var(--qy-overlay-inset));
     --qy-radius-overlay-item: max(0px, calc(var(--qy-radius-overlay) - var(--qy-overlay-inset)));
-    --qy-radius-panel: var(--qy-radius-overlay);
+    --qy-radius-panel: calc(4 * var(--qy-fen));
 
     /* 并列候选的轨道（基础层 §6）：整组占一个控件高度；候选高与圆角由外高与内缩倒推，
      * 按档位取值的部分在 src/track.ts。内缩半分：一分时 md 候选只剩 22px。

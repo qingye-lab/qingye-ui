@@ -1,9 +1,9 @@
 # Button
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/button
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 917075f0aba4a2e8a107f94beb71a3ab4cb1d6d59bd2e2190f2348b815942c7e
+Source SHA-256: 9e121639ab6e4373d7c5af0252493e222fdeac6a56db55de6b6aab448f981e2e
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -46,7 +46,7 @@ Waiting, in-progress, and unknown states retain focus and block repeated activat
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -82,7 +82,7 @@ The Base UI accessibility primitive. Prefer Button's state and protection contra
 ### 变体与色调
 Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
-import { Button, ButtonProtection } from "@qingye/ui/components/button";
+import { Button, ButtonProtection } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
 
@@ -107,7 +107,7 @@ export default function Demo() {
 ### 位置与尺寸
 Source: apps/docs/src/content/button/demos/02-sizes.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "位置与尺寸", titleEn: "Size by position" };
 
@@ -125,8 +125,8 @@ export default function Demo() {
 ### 图标形态
 Source: apps/docs/src/content/button/demos/03-icon-sizes.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { PlusIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { IconPlus } from "@tabler/icons-react";
 
 export const meta = { title: "图标形态", titleEn: "Icon shape" };
 
@@ -134,7 +134,7 @@ export default function Demo() {
   return <>
     {(["xs", "sm", "md", "lg", "xl"] as const).map((size) => (
       <Button aria-label="新建设备" key={size} shape="icon" size={size} variant="quiet">
-        <PlusIcon aria-hidden="true" />
+        <IconPlus aria-hidden="true" />
       </Button>
     ))}
   </>;
@@ -144,16 +144,16 @@ export default function Demo() {
 ### 动作与图标
 Source: apps/docs/src/content/button/demos/04-with-icon.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { ArrowRightIcon, ChevronDownIcon, DownloadIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { IconArrowRight, IconChevronDown, IconDownload } from "@tabler/icons-react";
 
 export const meta = { title: "动作与图标", titleEn: "Actions and icons" };
 
 export default function Demo() {
   return <>
-    <Button variant="quiet"><DownloadIcon aria-hidden="true" />导出十月报表</Button>
-    <Button>查看核对结果<ArrowRightIcon aria-hidden="true" /></Button>
-    <Button variant="quiet">设备操作<ChevronDownIcon aria-hidden="true" /></Button>
+    <Button variant="quiet"><IconDownload aria-hidden="true" />导出十月报表</Button>
+    <Button>查看核对结果<IconArrowRight aria-hidden="true" /></Button>
+    <Button variant="quiet">设备操作<IconChevronDown aria-hidden="true" /></Button>
   </>;
 }
 ```
@@ -161,8 +161,8 @@ export default function Demo() {
 ### 链接
 Source: apps/docs/src/content/button/demos/05-link.tsx
 ```tsx
-import { buttonVariants } from "@qingye/ui/components/button";
-import { ExternalLinkIcon } from "lucide-react";
+import { buttonVariants } from "@qingye_lab/ui/components/button";
+import { IconExternalLink } from "@tabler/icons-react";
 
 export const meta = { title: "链接", titleEn: "Links" };
 
@@ -171,7 +171,7 @@ export default function Demo() {
     <div className="flex flex-wrap gap-(--qy-action-gap)">
       <a className={buttonVariants({ variant: "quiet" })} href="/docs/button">按钮文档</a>
       <a className={buttonVariants({ variant: "bordered" })} href="/design.md" rel="noreferrer" target="_blank">
-        设计指南<ExternalLinkIcon aria-hidden="true" />
+        设计指南<IconExternalLink aria-hidden="true" />
       </a>
     </div>
   );
@@ -181,8 +181,8 @@ export default function Demo() {
 ### 状态
 Source: apps/docs/src/content/button/demos/06-states.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { SaveIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 export const meta = { title: "状态", titleEn: "States" };
 
@@ -197,9 +197,9 @@ export default function Demo() {
       </div>
       <div className="flex flex-wrap gap-(--qy-action-gap)">
         {(["waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
-          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><SaveIcon aria-hidden="true" /></Button>
+          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
         ))}
-        <Button aria-label="保存" disabled shape="icon" variant="quiet"><SaveIcon aria-hidden="true" /></Button>
+        <Button aria-label="保存" disabled shape="icon" variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
       </div>
     </div>
   );
@@ -209,7 +209,7 @@ export default function Demo() {
 ### 组合：同底色的边界
 Source: apps/docs/src/content/button/demos/07-boundary.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "组合：同底色的边界", titleEn: "Composition: boundary on the same surface" };
 

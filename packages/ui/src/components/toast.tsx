@@ -1,7 +1,7 @@
 "use client";
 
 import { Toast } from "@base-ui/react/toast";
-import { CheckIcon, CircleHelpIcon, CircleXIcon, HourglassIcon, InfoIcon, LoaderCircleIcon, TriangleAlertIcon, XIcon } from "lucide-react";
+import { IconCheck, IconHelpCircle, IconCircleX, IconHourglass, IconInfoCircle, IconLoader2, IconAlertTriangle, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -75,12 +75,12 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
     : type === "unknown" ? messages.buttonUnknown
     : type === "error" || type === "failed" ? messages.buttonFailed
     : type === "success" ? messages.toastSuccess : undefined;
-  const Icon = type === "waiting" ? HourglassIcon
-    : type === "loading" || type === "in-progress" ? LoaderCircleIcon
-    : type === "unknown" ? CircleHelpIcon
-    : type === "error" || type === "failed" ? CircleXIcon
-    : type === "success" ? CheckIcon
-    : type === "warning" ? TriangleAlertIcon : InfoIcon;
+  const Icon = type === "waiting" ? IconHourglass
+    : type === "loading" || type === "in-progress" ? IconLoader2
+    : type === "unknown" ? IconHelpCircle
+    : type === "error" || type === "failed" ? IconCircleX
+    : type === "success" ? IconCheck
+    : type === "warning" ? IconAlertTriangle : IconInfoCircle;
   const title = overdue ? messages.toastResultUnknown : notice.title;
   const high = notice.priority === "high";
   const [focused, setFocused] = React.useState(false);
@@ -125,7 +125,7 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
           ) : null}
         </div>
         <Toast.Close data-slot="toast-close" aria-label={messages.closeNotification} render={<Button size="sm" shape="icon" variant="quiet" />}>
-          <XIcon />
+          <IconX />
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>

@@ -1,4 +1,4 @@
-import { buttonVariants } from "@qingye/ui/components/button";
+import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { languageSwitchTarget, languageTag } from "@/lib/paths";

@@ -1,9 +1,9 @@
 # 角标 CornerMark
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/corner-mark
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 1b3e7ed26f60a1d3f080aa7dd085840faab55758801b5f776a85cdca66f354b6
+Source SHA-256: 9bb91f1a33b8c8ef1903005e66689aebb65074d7de1b4a6f5b3946b0a4fa7308
 
 钉在宿主一角的未读数或在线点，不是宿主内容本身。
 
@@ -55,16 +55,16 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 未读数与在线点
 Source: apps/docs/src/content/corner-mark/demos/01-task.tsx
 ```tsx
-import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
-import { CornerMark } from "@qingye/ui/components/corner-mark";
-import { Inline } from "@qingye/ui/components/layout";
-import { BellIcon } from "lucide-react";
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { CornerMark } from "@qingye_lab/ui/components/corner-mark";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { IconBell } from "@tabler/icons-react";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "未读数与在线点", titleEn: "Unread count and an online dot" } satisfies DemoMeta;
 export default function Demo() {
   return <Inline gap="panel">
-    <CornerMark count={3} label="3 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><BellIcon aria-hidden="true" /></span></CornerMark>
-    <CornerMark count={142} max={99} label="142 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><BellIcon aria-hidden="true" /></span></CornerMark>
+    <CornerMark count={3} label="3 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
+    <CornerMark count={142} max={99} label="142 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
     <CornerMark dot tone="success" label="在线"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>
   </Inline>;
 }

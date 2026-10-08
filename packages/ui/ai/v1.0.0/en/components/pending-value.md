@@ -1,7 +1,7 @@
 # PendingValue
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/pending-value
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
 
@@ -50,8 +50,8 @@ Put the original value in children and verification/recovery entries in actions;
 ### 保留原值
 Source: apps/docs/src/content/pending-value/demos/01-states.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { PendingValue } from "@qingye/ui/components/pending-value";
+import { Button } from "@qingye_lab/ui/components/button";
+import { PendingValue } from "@qingye_lab/ui/components/pending-value";
 export const meta = { title: "保留原值", titleEn: "Original value retained" };
 export default function Demo() { return <PendingValue label="值" actions={<Button variant="bordered">核实</Button>}>{0}</PendingValue>; }
 ```

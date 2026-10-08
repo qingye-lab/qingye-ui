@@ -1,7 +1,7 @@
 # Label
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/label
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 2b221cc2db3bc0b20d3fe8b168a04d26a003697fa3a3cb7ea29eb0a4622d6e6a
 
@@ -52,9 +52,9 @@ A native label by default.
 Source: apps/docs/src/content/label/demos/01-association.tsx
 ```tsx
 import { useId } from "react";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
-import { Stack } from "@qingye/ui/components/layout";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "名称关联", titleEn: "Label association" };
 export default function Demo() {
@@ -67,9 +67,9 @@ export default function Demo() {
 Source: apps/docs/src/content/label/demos/02-disabled.tsx
 ```tsx
 import { useId } from "react";
-import { Input } from "@qingye/ui/components/input";
-import { Label } from "@qingye/ui/components/label";
-import { Stack } from "@qingye/ui/components/layout";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "禁用控件", titleEn: "Disabled control" };
 export default function Demo() {

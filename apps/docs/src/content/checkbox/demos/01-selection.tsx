@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
 
 export const meta = { title: "部分选中", titleEn: "Partial selection" };
 

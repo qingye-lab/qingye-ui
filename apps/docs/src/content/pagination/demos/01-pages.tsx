@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Stack } from "@qingye/ui/components/layout";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye/ui/components/pagination";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "已知与未知总页数", titleEn: "Known and unknown totals" } satisfies DemoMeta;

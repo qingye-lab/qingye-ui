@@ -1,7 +1,7 @@
 # Scroll area
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/scroll-area
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00
 
@@ -53,7 +53,7 @@ An actual scrollable div; native scrollbars respect platform settings.
 ### 有限视口
 Source: apps/docs/src/content/scroll-area/demos/01-vertical.tsx
 ```tsx
-import { ScrollArea } from "@qingye/ui/components/scroll-area";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "有限视口", titleEn: "Bounded viewport" };
 export default function Demo() {
   return <ScrollArea aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
@@ -63,7 +63,7 @@ export default function Demo() {
 ### 水平内容
 Source: apps/docs/src/content/scroll-area/demos/02-horizontal.tsx
 ```tsx
-import { ScrollArea } from "@qingye/ui/components/scroll-area";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "水平内容", titleEn: "Horizontal content" };
 export default function Demo() {
   return <ScrollArea aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;

@@ -1,4 +1,4 @@
-import { ScatterChart } from "@qingye/ui/components/scatter-chart";
+import { ScatterChart } from "@qingye_lab/ui/components/scatter-chart";
 export const meta = { title: "记录数与失败率的关系", titleEn: "Records vs. failure rate" };
 const collections = [
   { id: "devices", label: "接入设备", records: 1284, rate: 0.012 },

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { ToastProvider, ToastPrimitive } from "@qingye/ui/components/toast";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ToastProvider, ToastPrimitive } from "@qingye_lab/ui/components/toast";
 
 const states = [
   ["waiting", "等待"],

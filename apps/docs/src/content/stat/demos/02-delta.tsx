@@ -1,6 +1,6 @@
-import { Inline } from "@qingye/ui/components/layout";
-import { Sparkline } from "@qingye/ui/components/sparkline";
-import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
+import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "变化量与趋势", titleEn: "Change and trend" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,20 +1,20 @@
 import * as React from "react";
-import { Autocomplete, AutocompleteClear, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
-import { Button } from "@qingye/ui/components/button";
-import { Calendar, formatLocalDate } from "@qingye/ui/components/calendar";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye/ui/components/combobox";
-import { DatePicker } from "@qingye/ui/components/date-picker";
-import { DateRangePicker, type DateRangeValue } from "@qingye/ui/components/date-range-picker";
-import { DateTimePicker } from "@qingye/ui/components/date-time-picker";
-import { Field, FieldDescription, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Fieldset, FieldsetLegend } from "@qingye/ui/components/fieldset";
-import { FileUpload } from "@qingye/ui/components/file-upload";
-import { FilterBar, FilterBarActions, FilterBarApplied, FilterBarApply, FilterBarCancel, FilterBarClear, FilterBarFields, FilterBarStatus } from "@qingye/ui/components/filter-bar";
-import { Form } from "@qingye/ui/components/form";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
-import { NativeSelect } from "@qingye/ui/components/native-select";
-import { Separator } from "@qingye/ui/components/separator";
+import { Autocomplete, AutocompleteClear, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye_lab/ui/components/autocomplete";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Calendar, formatLocalDate } from "@qingye_lab/ui/components/calendar";
+import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { DatePicker } from "@qingye_lab/ui/components/date-picker";
+import { DateRangePicker, type DateRangeValue } from "@qingye_lab/ui/components/date-range-picker";
+import { DateTimePicker } from "@qingye_lab/ui/components/date-time-picker";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Fieldset, FieldsetLegend } from "@qingye_lab/ui/components/fieldset";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
+import { FilterBar, FilterBarActions, FilterBarApplied, FilterBarApply, FilterBarCancel, FilterBarClear, FilterBarFields, FilterBarStatus } from "@qingye_lab/ui/components/filter-bar";
+import { Form } from "@qingye_lab/ui/components/form";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+import { Separator } from "@qingye_lab/ui/components/separator";
 import { COLLECTIONS, fieldGrid, GalleryPage, Row, Section } from "./gallery";
 
 /* 进阶输入：带候选的输入、日期与时间、文件、成组字段与表单、筛选条。

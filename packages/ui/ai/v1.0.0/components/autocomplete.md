@@ -1,9 +1,9 @@
 # 建议输入 Autocomplete
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/autocomplete
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: fab9c47240bce473770ae04af39d5afb0a3d8a6fd7c698bfce1b9d3ab47eaa63
+Source SHA-256: e075ba4b147005f24c83b8ff89149f57ca1d815082f1eea296f50110c81117ab
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -47,7 +47,7 @@ Source SHA-256: fab9c47240bce473770ae04af39d5afb0a3d8a6fd7c698bfce1b9d3ab47eaa63
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -81,8 +81,8 @@ Base UI 文本建议上下文，固定 list 模式。
 Source: apps/docs/src/content/autocomplete/demos/01-text.tsx
 ```tsx
 import { useState } from "react";
-import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye_lab/ui/components/autocomplete";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "自由文本", titleEn: "Free text" };
 const items = ["青叶", "青山", "白云"];
 export default function Demo() {
@@ -94,8 +94,8 @@ export default function Demo() {
 ### 密度与只读
 Source: apps/docs/src/content/autocomplete/demos/02-density.tsx
 ```tsx
-import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye/ui/components/autocomplete";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
+import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from "@qingye_lab/ui/components/autocomplete";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
 

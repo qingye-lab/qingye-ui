@@ -1,7 +1,7 @@
 # InputGroup
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/input-group
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: b51acf251a0804792370d6cad9330c80faa37a60a64d93842eab229e62334551
 
@@ -40,7 +40,7 @@ InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focu
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -63,9 +63,9 @@ A static span by default, with no tabIndex, focus redirection or automatic name.
 ### 单位与动作
 Source: apps/docs/src/content/input-group/demos/01-addon.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
 
 export const meta = { title: "单位与动作", titleEn: "Unit and action" };
 export default function Demo() {
@@ -76,9 +76,9 @@ export default function Demo() {
 ### 状态
 Source: apps/docs/src/content/input-group/demos/02-states.tsx
 ```tsx
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye/ui/components/input-group";
-import { Stack } from "@qingye/ui/components/layout";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "状态", titleEn: "States" };
 export default function Demo() {

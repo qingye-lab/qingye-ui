@@ -1,0 +1,68 @@
+/*
+ * 基础判断页与两页共用的标本。页题、节题与正文用文档统一的版式（见 index.css 与 prose.tsx），
+ * 本文件只管这两页自己的出处行与标本。
+ * - 疏密（疏密有致）：节题与出处 2 分；出处、判断、标本、链接之间一个组间距；节与节 3 材
+ *   （预设，与设计理念页同值）。分组只靠间距，不画线、不铺底。
+ * - 墨（墨分五色）：判断焦墨；出处、读数与链接行浓墨；没有彩色（墨与彩一节的状态色是标本本身）。
+ * - 标本按原尺寸呈现（屋有大小，人无大小）：组件不缩放，读数从渲染出的元素上量。
+ */
+/* ─── 基础判断页 ─────────────────────────────────────────── */
+.fd-section + .fd-section { margin-top: calc(3 * var(--qy-cai)); }
+.fd-origin,
+.ledger-origin {
+  margin: calc(2 * var(--qy-fen)) 0 0;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+}
+.fd-text {
+  margin: var(--qy-field-group-gap) 0 0;
+  max-inline-size: var(--docs-measure);
+  font-size: var(--qy-text-reading-size);
+  line-height: var(--qy-text-reading-leading);
+  color: var(--qy-foreground);
+  text-wrap: pretty;
+}
+.fd-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  margin: var(--qy-field-group-gap) 0 0;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+.fd-footer { margin-top: calc(3 * var(--qy-cai)); }
+
+/* ─── 标本 ───────────────────────────────────────────────── */
+.spec {
+  display: grid;
+  justify-items: start;
+  gap: var(--qy-field-gap);
+  margin-top: var(--qy-field-group-gap);
+}
+.spec-readout {
+  margin: 0;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+  font-variant-numeric: tabular-nums;
+}
+.spec-form { justify-items: stretch; max-inline-size: calc(16 * var(--qy-cai)); }
+.spec-input { inline-size: calc(8 * var(--qy-cai)); }
+.spec-inks { display: flex; flex-wrap: wrap; gap: var(--qy-field-group-gap); margin-bottom: var(--qy-field-gap); }
+.spec-inks figure { display: grid; gap: var(--qy-field-gap); margin: 0; }
+.spec-inks span { inline-size: calc(2 * var(--qy-cai)); block-size: calc(2 * var(--qy-cai)); border-radius: var(--qy-radius-item); }
+.spec-inks figcaption {
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+}
+.spec-type { gap: var(--qy-field-gap); }
+.spec-type p { margin: 0; color: var(--qy-foreground); }
+.spec-density {
+  grid-template-columns: repeat(2, minmax(0, calc(12 * var(--qy-cai))));
+  align-items: start;
+  justify-items: stretch;
+  gap: var(--qy-section-gap);
+}
+.spec-density-column { display: grid; gap: var(--qy-field-group-gap); }

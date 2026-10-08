@@ -1,7 +1,7 @@
 # Layout
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/layout
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: 362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd
 
@@ -64,9 +64,9 @@ Adjacent actions or content with wrapping.
 ### 纵向排列
 Source: apps/docs/src/content/layout/demos/01-stack.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "纵向排列", titleEn: "Vertical layout" };
 
@@ -83,9 +83,9 @@ export default function Demo() {
 ### 横向排列与对齐
 Source: apps/docs/src/content/layout/demos/02-inline.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Text } from "@qingye/ui/components/typography";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "横向排列与对齐", titleEn: "Inline layout and alignment" };
 

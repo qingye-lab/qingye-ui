@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldLabel } from "@qingye/ui/components/field";
-import { Form } from "@qingye/ui/components/form";
-import { Input } from "@qingye/ui/components/input";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Form } from "@qingye_lab/ui/components/form";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Stack } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "提交值", titleEn: "Submitted value" };
 export default function Demo() {

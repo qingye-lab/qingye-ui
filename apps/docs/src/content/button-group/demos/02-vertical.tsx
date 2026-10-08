@@ -1,5 +1,5 @@
-import { Button } from "@qingye/ui/components/button";
-import { ButtonGroup } from "@qingye/ui/components/button-group";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
 
 export const meta = { title: "纵向", titleEn: "Vertical" };
 export default function Demo() {

@@ -1,9 +1,9 @@
 # 复制按钮 CopyButton
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/copy-button
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: 7949c5addb94935ccc1ea2362eea5269d2d00e6e1a166d454c9eb3352977da9a
+Source SHA-256: c9f80b1c2f08d432eab752eb56b99f3cdd9648a5686095b61259b67079b70c2b
 
 复制给定文本，并呈现剪贴板实际写入结果。
 
@@ -36,7 +36,7 @@ CopyButton 复用 useCopyToClipboard，成功从写入 Promise resolve 建立。
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -56,7 +56,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 复制文本
 Source: apps/docs/src/content/copy-button/demos/01-copy.tsx
 ```tsx
-import { CopyButton } from "@qingye/ui/components/copy-button";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
 export const meta = { title: "复制文本", titleEn: "Copy text" };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><code className="text-body">Qingye</code><CopyButton value="Qingye" /><CopyButton value="Qingye" shape="icon" /><CopyButton value="Qingye" disabled /></div>;
@@ -66,7 +66,7 @@ export default function Demo() {
 ### 五档
 Source: apps/docs/src/content/copy-button/demos/02-sizes.tsx
 ```tsx
-import { CopyButton } from "@qingye/ui/components/copy-button";
+import { CopyButton } from "@qingye_lab/ui/components/copy-button";
 export const meta = { title: "五档", titleEn: "Sizes" };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">{(["xs", "sm", "md", "lg", "xl"] as const).map(size => <CopyButton key={size} value={size} size={size} variant="bordered">{size}</CopyButton>)}</div>;

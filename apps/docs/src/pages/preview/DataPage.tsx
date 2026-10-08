@@ -1,31 +1,31 @@
 import * as React from "react";
 import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { Avatar, AvatarFallback } from "@qingye/ui/components/avatar";
-import { Badge } from "@qingye/ui/components/badge";
-import { Button } from "@qingye/ui/components/button";
-import { Chart, type ChartSeries } from "@qingye/ui/components/chart";
-import { Heatmap } from "@qingye/ui/components/heatmap";
-import { ScatterChart } from "@qingye/ui/components/scatter-chart";
-import { CodeBlock } from "@qingye/ui/components/code-block";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye/ui/components/data-table";
-import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye/ui/components/description-list";
-import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye/ui/components/empty";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemLink, ItemTitle } from "@qingye/ui/components/item";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye/ui/components/meter";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye/ui/components/pagination";
-import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye/ui/components/progress";
-import { ScrollArea } from "@qingye/ui/components/scroll-area";
-import { Separator } from "@qingye/ui/components/separator";
-import { Proportion } from "@qingye/ui/components/proportion";
-import { Sparkline } from "@qingye/ui/components/sparkline";
-import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
-import { StatusDot } from "@qingye/ui/components/status-dot";
-import { Step, StepDescription, Steps, StepTitle } from "@qingye/ui/components/steps";
-import { Table, TableBody, TableCaption, TableCell, TableContainer, TableFooter, TableHead, TableHeader, TableRow } from "@qingye/ui/components/table";
-import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye/ui/components/timeline";
-import { Tree, type TreeNode } from "@qingye/ui/components/tree";
-import { VirtualList } from "@qingye/ui/components/virtual-list";
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { Badge } from "@qingye_lab/ui/components/badge";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Chart, type ChartSeries } from "@qingye_lab/ui/components/chart";
+import { Heatmap } from "@qingye_lab/ui/components/heatmap";
+import { ScatterChart } from "@qingye_lab/ui/components/scatter-chart";
+import { CodeBlock } from "@qingye_lab/ui/components/code-block";
+import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
+import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemLink, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye_lab/ui/components/meter";
+import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye_lab/ui/components/progress";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { Separator } from "@qingye_lab/ui/components/separator";
+import { Proportion } from "@qingye_lab/ui/components/proportion";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
+import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
+import { StatusDot } from "@qingye_lab/ui/components/status-dot";
+import { Step, StepDescription, Steps, StepTitle } from "@qingye_lab/ui/components/steps";
+import { Table, TableBody, TableCaption, TableCell, TableContainer, TableFooter, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
+import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
+import { Tree, type TreeNode } from "@qingye_lab/ui/components/tree";
+import { VirtualList } from "@qingye_lab/ui/components/virtual-list";
 import { COLLECTIONS, type Collection, GalleryPage, Row, Section } from "./gallery";
 
 /* 数据展示：表格、可排序可选择的数据表、分页、列表、名称与值、度量、时间线、
@@ -314,7 +314,7 @@ export default function DataPage() {
 
     <Section title="内容">
       <Row label="代码" block lead="control-sm">
-        <CodeBlock language="TypeScript" code={'import { Button } from "@qingye/ui/components/button";\n\nexport function Save() {\n  return <Button>保存</Button>;\n}\n'} />
+        <CodeBlock language="TypeScript" code={'import { Button } from "@qingye_lab/ui/components/button";\n\nexport function Save() {\n  return <Button>保存</Button>;\n}\n'} />
       </Row>
     </Section>
   </GalleryPage>;

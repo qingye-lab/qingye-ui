@@ -1,8 +1,8 @@
 import { renderToPipeableStream, renderToStaticMarkup } from "react-dom/server";
 import { Writable } from "node:stream";
 import { MemoryRouter, Route, Routes, createRoutesFromElements, matchRoutes } from "react-router-dom";
-import { UILocaleProvider, zhCN, type UILocale } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { UILocaleProvider, zhCN, type UILocale } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 import { components } from "../../src/lib/registry";
 import { GUIDES, NAV_LABELS, navSections, neighbours, breadcrumbs, componentLabel } from "../../src/lib/nav";
 import { searchEntries, score } from "../../src/lib/search";

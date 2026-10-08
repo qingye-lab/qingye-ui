@@ -1,9 +1,9 @@
-import { MotionProvider } from "@qingye/ui/components/motion-provider";
-import { ThemeProvider } from "@qingye/ui/components/theme-provider";
-import { ToastProvider } from "@qingye/ui/components/toast";
-import { TooltipProvider } from "@qingye/ui/components/tooltip";
-import { UILocaleProvider, zhCN } from "@qingye/ui/locale";
-import { enUS } from "@qingye/ui/locales/en-US";
+import { MotionProvider } from "@qingye_lab/ui/components/motion-provider";
+import { ThemeProvider } from "@qingye_lab/ui/components/theme-provider";
+import { ToastProvider } from "@qingye_lab/ui/components/toast";
+import { TooltipProvider } from "@qingye_lab/ui/components/tooltip";
+import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
+import { enUS } from "@qingye_lab/ui/locales/en-US";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";

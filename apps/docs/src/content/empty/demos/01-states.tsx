@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye/ui/components/empty";
-import { Item, ItemTitle } from "@qingye/ui/components/item";
-import { Stack } from "@qingye/ui/components/layout";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Item, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "零、未知与不适用", titleEn: "Zero, unknown and not applicable" } satisfies DemoMeta;
 export default function Demo() {

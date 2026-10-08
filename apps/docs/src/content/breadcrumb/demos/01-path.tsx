@@ -1,4 +1,4 @@
-import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye/ui/components/breadcrumb";
+import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "父级与当前页", titleEn: "Ancestors and current page" } satisfies DemoMeta;
 export default function Demo() {

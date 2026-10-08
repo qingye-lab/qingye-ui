@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye/ui/components/number-field";
-import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye/ui/components/slider";
-import { Inline } from "@qingye/ui/components/layout";
+import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
+import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
 

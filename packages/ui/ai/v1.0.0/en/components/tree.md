@@ -1,9 +1,9 @@
 # Tree
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/tree
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: bd23bffd8974db13d786cf734a2833676eaf1f2934e9c2b027956855dc174857
+Source SHA-256: 38c0504d872a020cf747b8dd04eddc2042f137944353984b40b82e789cba965c
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
@@ -39,7 +39,7 @@ Expanded IDs and selected ID are separate; focus never selects, and hidden nodes
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -64,8 +64,8 @@ A complete hierarchical collection.
 Source: apps/docs/src/content/tree/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { Tree, type TreeNode } from "@qingye/ui/components/tree";
-import { Stack } from "@qingye/ui/components/layout";
+import { Tree, type TreeNode } from "@qingye_lab/ui/components/tree";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "展开与独立选择", titleEn: "Expansion and independent selection" } satisfies DemoMeta;
@@ -94,8 +94,8 @@ export default function Demo() {
 Source: apps/docs/src/content/tree/demos/02-checkable.tsx
 ```tsx
 import * as React from "react";
-import { Tree, type TreeNode } from "@qingye/ui/components/tree";
-import { Stack } from "@qingye/ui/components/layout";
+import { Tree, type TreeNode } from "@qingye_lab/ui/components/tree";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "级联勾选：成员权限", titleEn: "Cascading check: member permissions" } satisfies DemoMeta;

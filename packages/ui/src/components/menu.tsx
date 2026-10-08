@@ -1,6 +1,6 @@
 "use client";
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
-import { CheckIcon, ChevronRightIcon } from "lucide-react";
+import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import * as React from "react";
 import { useFloatingLayer } from "../floating-layer";
 import { Button, buttonVariants, type ButtonProps } from "./button";
@@ -50,16 +50,16 @@ export type MenuSeparatorProps = React.ComponentProps<typeof MenuPrimitive.Separ
 export function MenuSeparator({ className, ...props }: MenuSeparatorProps) { return <MenuPrimitive.Separator data-slot="menu-separator" {...props} className={state => cn("-mx-(--qy-overlay-inset) my-(--qy-overlay-inset) h-0 border-b border-border", typeof className === "function" ? className(state) : className)} />; }
 export type MenuCheckboxItemProps = MenuPrimitive.CheckboxItem.Props & MenuSizing;
 export function MenuCheckboxItem({ size = "md", className, children, ...props }: MenuCheckboxItemProps) {
-  return <MenuPrimitive.CheckboxItem data-slot="menu-checkbox-item" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><span data-slot="menu-checkbox-marker" aria-hidden="true" className="inline-flex shrink-0 items-center justify-center" style={{ width: `var(--qy-control-${size}-icon)` }}><MenuPrimitive.CheckboxItemIndicator data-slot="menu-checkbox-indicator"><CheckIcon /></MenuPrimitive.CheckboxItemIndicator></span></MenuPrimitive.CheckboxItem>;
+  return <MenuPrimitive.CheckboxItem data-slot="menu-checkbox-item" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><span data-slot="menu-checkbox-marker" aria-hidden="true" className="inline-flex shrink-0 items-center justify-center" style={{ width: `var(--qy-control-${size}-icon)` }}><MenuPrimitive.CheckboxItemIndicator data-slot="menu-checkbox-indicator"><IconCheck /></MenuPrimitive.CheckboxItemIndicator></span></MenuPrimitive.CheckboxItem>;
 }
 export type MenuRadioGroupProps = MenuPrimitive.RadioGroup.Props;
 export function MenuRadioGroup(props: MenuRadioGroupProps) { return <MenuPrimitive.RadioGroup data-slot="menu-radio-group" {...props} />; }
 export type MenuRadioItemProps = MenuPrimitive.RadioItem.Props & MenuSizing;
 export function MenuRadioItem({ size = "md", className, children, ...props }: MenuRadioItemProps) {
-  return <MenuPrimitive.RadioItem data-slot="menu-radio-item" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><span data-slot="menu-radio-marker" aria-hidden="true" className="inline-flex shrink-0 items-center justify-center" style={{ width: `var(--qy-control-${size}-icon)` }}><MenuPrimitive.RadioItemIndicator data-slot="menu-radio-indicator"><CheckIcon /></MenuPrimitive.RadioItemIndicator></span></MenuPrimitive.RadioItem>;
+  return <MenuPrimitive.RadioItem data-slot="menu-radio-item" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><span data-slot="menu-radio-marker" aria-hidden="true" className="inline-flex shrink-0 items-center justify-center" style={{ width: `var(--qy-control-${size}-icon)` }}><MenuPrimitive.RadioItemIndicator data-slot="menu-radio-indicator"><IconCheck /></MenuPrimitive.RadioItemIndicator></span></MenuPrimitive.RadioItem>;
 }
 export type MenuSubmenuTriggerProps = MenuPrimitive.SubmenuTrigger.Props & MenuSizing;
 export function MenuSubmenuTrigger({ size = "md", className, children, ...props }: MenuSubmenuTriggerProps) {
-  return <MenuPrimitive.SubmenuTrigger data-slot="menu-submenu-trigger" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><ChevronRightIcon aria-hidden="true" className="rtl:rotate-180" /></MenuPrimitive.SubmenuTrigger>;
+  return <MenuPrimitive.SubmenuTrigger data-slot="menu-submenu-trigger" {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><IconChevronRight aria-hidden="true" className="rtl:rotate-180" /></MenuPrimitive.SubmenuTrigger>;
 }
 export { MenuPrimitive };

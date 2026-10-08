@@ -1,5 +1,5 @@
-import { Button } from "@qingye/ui/components/button";
-import { SaveIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 export const meta = { title: "状态", titleEn: "States" };
 
@@ -14,9 +14,9 @@ export default function Demo() {
       </div>
       <div className="flex flex-wrap gap-(--qy-action-gap)">
         {(["waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
-          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><SaveIcon aria-hidden="true" /></Button>
+          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
         ))}
-        <Button aria-label="保存" disabled shape="icon" variant="quiet"><SaveIcon aria-hidden="true" /></Button>
+        <Button aria-label="保存" disabled shape="icon" variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
       </div>
     </div>
   );

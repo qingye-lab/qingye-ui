@@ -1,7 +1,7 @@
 # ThemeProvider
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/theme-provider
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: fab084ee0f1c2dddefd45b37d32227712e78a4ad970aeb03921a46ce2e469153
 
@@ -71,14 +71,14 @@ Creates inline pre-paint script source with the same storageKey, attribute, and 
 ### 按需选择外观
 Source: apps/docs/src/content/theme-provider/demos/01-menu.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
-import { useTheme, type Theme } from "@qingye/ui/components/theme-provider";
-import { Text } from "@qingye/ui/components/typography";
-import { NativeSelect } from "@qingye/ui/components/native-select";
-import { useUILocale } from "@qingye/ui/locale";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { useTheme, type Theme } from "@qingye_lab/ui/components/theme-provider";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { useId } from "react";
 
 export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
@@ -87,7 +87,7 @@ export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
   const id = useId();
-  const Current = resolvedTheme === "dark" ? MoonIcon : SunIcon;
+  const Current = resolvedTheme === "dark" ? IconMoon : IconSun;
   return <Popover>
     <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
     <PopoverPopup>
@@ -108,13 +108,13 @@ export default function Demo() {
 ### 外观设置
 Source: apps/docs/src/content/theme-provider/demos/02-segmented.tsx
 ```tsx
-import { Label } from "@qingye/ui/components/label";
-import { Inline, Stack } from "@qingye/ui/components/layout";
-import { useTheme } from "@qingye/ui/components/theme-provider";
-import { Text } from "@qingye/ui/components/typography";
-import { Radio, RadioGroup } from "@qingye/ui/components/radio-group";
-import { useUILocale } from "@qingye/ui/locale";
-import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { useTheme } from "@qingye_lab/ui/components/theme-provider";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { Radio, RadioGroup } from "@qingye_lab/ui/components/radio-group";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 
 export const meta = { title: "外观设置", titleEn: "Appearance settings" };
 
@@ -122,9 +122,9 @@ export default function Demo() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
   const options = [
-    { value: "light", label: messages.lightTheme, icon: SunIcon },
-    { value: "dark", label: messages.darkTheme, icon: MoonIcon },
-    { value: "system", label: messages.systemTheme, icon: MonitorIcon },
+    { value: "light", label: messages.lightTheme, icon: IconSun },
+    { value: "dark", label: messages.darkTheme, icon: IconMoon },
+    { value: "system", label: messages.systemTheme, icon: IconDeviceDesktop },
   ] as const;
   return <Stack gap="field">
     <fieldset className="min-w-0">
@@ -147,7 +147,7 @@ export default function Demo() {
 ### 防闪烁脚本
 Source: apps/docs/src/content/theme-provider/demos/03-head-script.tsx
 ```tsx
-import { themeScript } from "@qingye/ui/components/theme-provider";
+import { themeScript } from "@qingye_lab/ui/components/theme-provider";
 
 export const meta = {
   title: "防闪烁脚本",

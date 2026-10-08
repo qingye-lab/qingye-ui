@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Field, FieldError, FieldLabel } from "@qingye/ui/components/field";
-import { Input } from "@qingye/ui/components/input";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
 
 export const meta = { title: "校验", titleEn: "Validation" };
 

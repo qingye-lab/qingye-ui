@@ -48,8 +48,9 @@ async function click(element) {
 test("sidebar entries are destinations and navigation focuses the surviving page heading", async () => {
   await mount(fixture.navScene());
   const destination = document.querySelector('nav a[href="/docs/installation"]');
-  assert.ok(destination?.closest("li"));
-  assert.equal(document.querySelectorAll("nav li button").length, 0);
+  assert.equal(destination?.dataset.slot, "sidebar-link");
+  // Entries are links; the only buttons are the folds of the component categories.
+  for (const fold of document.querySelectorAll("nav button")) assert.ok(fold.hasAttribute("aria-expanded"));
   await click(destination);
   assert.equal(document.activeElement.tagName, "H1");
   assert.equal(document.activeElement.textContent, "/docs/installation");

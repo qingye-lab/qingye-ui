@@ -1,9 +1,9 @@
 # SegmentedControl
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/segmented-control
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 5b53a97e3c9230aa849fa02f74fc90f5dfdc69e4ba5e9457268eddd8c1338095
+Source SHA-256: bd647ac5087770d6f70c087e24abd48f992b2c75389b4781608e250bb1d89c12
 
 Enter one value from a small set of visible segments.
 
@@ -39,7 +39,7 @@ SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup f
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -71,8 +71,8 @@ Public Base UI RadioGroup and Radio primitives.
 Source: apps/docs/src/content/segmented-control/demos/01-values.tsx
 ```tsx
 import { useId, useState } from "react";
-import { Field, FieldTitle } from "@qingye/ui/components/field";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
+import { Field, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 
 export const meta = { title: "单值", titleEn: "One value" };
 export default function Demo() {
@@ -85,8 +85,8 @@ export default function Demo() {
 Source: apps/docs/src/content/segmented-control/demos/02-states.tsx
 ```tsx
 import { useId } from "react";
-import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
+import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 
 export const meta = { title: "状态", titleEn: "States" };
 const items = <><SegmentedControlItem value="alpha">左</SegmentedControlItem><SegmentedControlItem value="beta">中</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>右</SegmentedControlItem></>;

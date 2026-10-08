@@ -1,5 +1,5 @@
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye/ui/components/select";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

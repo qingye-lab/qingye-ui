@@ -1,4 +1,4 @@
-import { ConfirmAction } from "@qingye/ui/components/confirm-action";
+import { ConfirmAction } from "@qingye_lab/ui/components/confirm-action";
 
 export const meta = { title: "结果未知", titleEn: "Unknown outcome" };
 

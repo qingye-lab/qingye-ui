@@ -1,7 +1,7 @@
 # 工具组 Toolbar
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/toolbar
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
 
@@ -48,7 +48,7 @@ Base UI Toolbar 接管 roving focus 与组禁用；按钮默认组合当前 Butt
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -80,9 +80,9 @@ Base UI Toolbar.Root。
 Source: apps/docs/src/content/toolbar/demos/01-format.tsx
 ```tsx
 import { useState } from "react";
-import { Stack } from "@qingye/ui/components/layout";
-import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye/ui/components/toolbar";
-import { Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator } from "@qingye_lab/ui/components/toolbar";
+import { Text } from "@qingye_lab/ui/components/typography";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "命令、分组与焦点", titleEn: "Commands, groups and focus" } satisfies DemoMeta;
 export default function Demo() {

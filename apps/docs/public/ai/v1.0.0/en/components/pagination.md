@@ -1,7 +1,7 @@
 # Pagination
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/pagination
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 13a7de3c9d8565af5a3f4f8f002216b561885ab68dd0d42a73d2af34bd7a54ae
 
@@ -52,7 +52,7 @@ Only current position is derived by comparing root and link page facts. null mea
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -86,9 +86,9 @@ An omitted-pages marker, not a final page.
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
 import { useState } from "react";
-import { Stack } from "@qingye/ui/components/layout";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye/ui/components/pagination";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "已知与未知总页数", titleEn: "Known and unknown totals" } satisfies DemoMeta;

@@ -1,6 +1,6 @@
 # Working in this repository
 
-`@qingye/ui` is a React component library (Base UI + Tailwind CSS 4) and its documentation site. Components are authored from the design basis in `design.md`; see 「重写进行中」 below for the current state.
+`@qingye_lab/ui` is a React component library (Base UI + Tailwind CSS 4) and its documentation site. Components are authored from the design basis in `design.md`; see 「重写进行中」 below for the current state.
 
 **建设纲领：** `/Volumes/SUNSANG 1/Codex/demo/qingye/docs/ui-component-system-plan.md`（v3.0 定稿）。本文件是它的库侧执行摘要；涉及方向、优先级、验收标准时以纲领为准。纲领只读，不在本仓库内。
 
@@ -42,14 +42,14 @@
 ## Rules
 
 - **器用为本，关系为法，合宜为度。** 界面变更依据 `design.md` 的相关方法作出任务、语义、结构和状态判断；六种方法不要求逐处贴标签，也不能用文化装饰代替可用性。
-- `apps/docs` 是第一方消费项目，交互控件复用 `@qingye/ui` 及其公共组合；原生页面结构、表单语义、链接和组件 `render` 组合合法。必要的共享缺口回到库中解决，不在官网另造基础控件。
+- `apps/docs` 是第一方消费项目，交互控件复用 `@qingye_lab/ui` 及其公共组合；原生页面结构、表单语义、链接和组件 `render` 组合合法。必要的共享缺口回到库中解决，不在官网另造基础控件。
 - 根 `design.md` 是公开设计指南唯一源；`packages/ui/scripts/gen-catalog.mjs` 生成包内 `design.md`、网站 `/design.md`，并将其项目接入段投影到 `ai/SKILL.md`。不手工维护生成副本。
 - 消费项目接入需在自家 `AGENTS.md` 与 `design.md` 留下包内指南、当前 API 和项目主题/组合入口的持久引用，使用根指南中的可复制片段合并既有规则；本仓库不自动改写其他仓库的指导文件或权限。
 - Follow `STANDARDS.md` for every component change.
 - 网站界面避免说明书式文案：用真实内容与可操作状态表达能力，删除重复标签、显然的操作说明和设计自述；仅保留识别、决策、错误恢复所需的文字。完整方法放在指南中。
 - Treat the upstream sources as a **closed reference**. They are no longer in this repository and must not be reintroduced. Rebuild each component from verified task, semantic, state and maintenance needs under `design.md` and `STANDARDS.md`. Evaluate accessibility primitives separately. Never relabel copied source as original.
 - New built-in strings go through `useUILocale()`; add keys to both `src/locale.tsx` and `src/locales/en-US.ts`.
-- Run `pnpm --filter @qingye/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
+- Run `pnpm --filter @qingye_lab/ui gen:index` after adding or removing a component file. Run `pnpm --filter @qingye_lab/ui gen:catalog` after changing component documentation metadata; library builds also refresh the published catalog.
 
 ### 主题三轴（不得混用）
 
@@ -109,7 +109,7 @@ html[data-brand="sentinel"] { --qy-primary: ...; }
 
 | 项 | 说明 |
 |---|---|
-| 包名迁移 | 已完成。`@yanqing/ui` → `@qingye/ui`。**命名统一用 Qingye** |
+| 包名迁移 | 已完成。`@yanqing/ui` → `@qingye_lab/ui`。**命名统一用 Qingye** |
 | catalog 重建 | 已完成。生成器 `packages/ui/scripts/gen-catalog.mjs` 已接入 `build` 链 |
 | `audit.mjs` 增强及门禁 | 首批几何/动画误报已修正；CI 与 Release 已接入构建后审计，见 `docs/browser-audit.md` |
 
@@ -120,7 +120,9 @@ html[data-brand="sentinel"] { --qy-primary: ...; }
 - `pnpm dev` — docs site at http://localhost:5180 (`/playground/<name>` shows one component's demos bare).
 - `node scripts/shot.mjs <name>` — light/dark × desktop/mobile screenshots of the playground into /tmp/yq-shots.
 - `node scripts/audit.mjs [slug…] [--only light-desktop,dark-mobile]` — 扫描 playground，报告页面错误、控制台错误、水平溢出、空 demo、子元素溢出。直接运行需 docs server；`scripts/run-browser-audit.mjs` 管理构建后的 preview。发现问题或执行/清理失败时退出码非 0。
-- `pnpm --filter @qingye/ui typecheck` / `test` / `build`; `pnpm --filter docs typecheck`.
+- `node scripts/shot-page.mjs <route…>` — 整页截图（浅/深）；`node scripts/shot-el.mjs <slug> <selectors.json>` — 按选择器截取元素，浅深并排。
+- `node scripts/align-audit.mjs [page,…]` — 对齐实测（基础层 §19），偏差时退出码 1；`node scripts/verify-review-regressions.mjs` — 加载、迟到结果与尺寸的浏览器回归。均需 docs dev server。
+- `pnpm --filter @qingye_lab/ui typecheck` / `test` / `build`; `pnpm --filter docs typecheck`.
 
 ## 开工前必查
 

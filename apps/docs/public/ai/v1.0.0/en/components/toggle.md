@@ -1,9 +1,9 @@
 # Toggle
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/toggle
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: ed2975eaef4efdd23d3aace19334e907b27581ae8700a49a0a09b8bbb50dff0f
+Source SHA-256: 7962fa0b50ac6a03463c8f68fa91bc18336ada7dd684b7f1651f6956c1014494
 
 A two-state toggle that holds its pressed fact until toggled again, with a stable name.
 
@@ -38,7 +38,7 @@ A two-state toggle that holds its pressed fact until toggled again, with a stabl
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -65,8 +65,8 @@ Public Base UI pressed-state primitive.
 Source: apps/docs/src/content/toggle/demos/01-pressed.tsx
 ```tsx
 import { useState } from "react";
-import { BoldIcon } from "lucide-react";
-import { Toggle } from "@qingye/ui/components/toggle";
+import { IconBold } from "@tabler/icons-react";
+import { Toggle } from "@qingye_lab/ui/components/toggle";
 
 export const meta = { title: "切换态", titleEn: "Toggled state" };
 export default function Demo() {
@@ -74,7 +74,7 @@ export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
     <Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle>
     <Toggle shape="icon" aria-label="斜体">I</Toggle>
-    <Toggle disabled defaultPressed><BoldIcon aria-hidden="true" />加粗</Toggle>
+    <Toggle disabled defaultPressed><IconBold aria-hidden="true" />加粗</Toggle>
     <span className={pressed ? "text-body-strong text-foreground" : "text-body text-foreground"}>Aa 字</span>
   </div>;
 }
@@ -83,7 +83,7 @@ export default function Demo() {
 ### 尺寸
 Source: apps/docs/src/content/toggle/demos/02-sizes.tsx
 ```tsx
-import { Toggle, type ToggleSize } from "@qingye/ui/components/toggle";
+import { Toggle, type ToggleSize } from "@qingye_lab/ui/components/toggle";
 
 export const meta = { title: "尺寸", titleEn: "Sizes" };
 const sizes: ToggleSize[] = ["xs", "sm", "md", "lg", "xl"];

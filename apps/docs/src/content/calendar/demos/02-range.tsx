@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, formatLocalDate, type CalendarDateRange } from "@qingye/ui/components/calendar";
+import { Calendar, formatLocalDate, type CalendarDateRange } from "@qingye_lab/ui/components/calendar";
 export const meta = { title: "范围与禁用日期", titleEn: "Range and disabled dates" };
 export default function Demo() {
   const [value, setValue] = useState<CalendarDateRange | undefined>({ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) });

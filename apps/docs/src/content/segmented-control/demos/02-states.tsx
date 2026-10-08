@@ -1,6 +1,6 @@
 import { useId } from "react";
-import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye/ui/components/field";
-import { SegmentedControl, SegmentedControlItem } from "@qingye/ui/components/segmented-control";
+import { Field, FieldError, FieldGroup, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 
 export const meta = { title: "状态", titleEn: "States" };
 const items = <><SegmentedControlItem value="alpha">左</SegmentedControlItem><SegmentedControlItem value="beta">中</SegmentedControlItem><SegmentedControlItem value="gamma" disabled>右</SegmentedControlItem></>;

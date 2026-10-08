@@ -208,8 +208,8 @@ test("overdue loading becomes persistent unknown, preserving recovery until a re
     const root = document.querySelector("[data-slot=toast-root]");
     expect(root).toHaveAttribute("data-type", "unknown");
     expect(root).not.toHaveClass("animate-toast-success-odd");
-    expect(document.querySelector("[data-slot=toast-icon] svg")).toHaveClass("lucide-circle-question-mark");
-    expect(document.querySelector("[data-slot=toast-icon] svg")).not.toHaveClass("lucide-loader-circle");
+    expect(document.querySelector("[data-slot=toast-icon] svg")).toHaveClass("tabler-icon-help-circle");
+    expect(document.querySelector("[data-slot=toast-icon] svg")).not.toHaveClass("tabler-icon-loader-2");
     expect(screen.getByText(/说明/)).toHaveTextContent("正在处理 说明 请核对结果。");
     fireEvent.click(screen.getByRole("button", { name: "核对" }));
     expect(onRetry).toHaveBeenCalledOnce();

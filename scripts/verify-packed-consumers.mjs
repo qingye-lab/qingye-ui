@@ -59,7 +59,7 @@ async function prepare(style, feature) {
   const pkg = {
     name: `packed-${name}`, private: true, type: 'module',
     scripts: { typecheck: 'tsc --noEmit', build: 'vite build' },
-    dependencies: { '@qingye/ui': `file:${tarball}`, react: docs.dependencies.react, 'react-dom': docs.dependencies['react-dom'] },
+    dependencies: { '@qingye_lab/ui': `file:${tarball}`, react: docs.dependencies.react, 'react-dom': docs.dependencies['react-dom'] },
     devDependencies: { vite: docs.devDependencies.vite, typescript: docs.devDependencies.typescript, '@types/react': docs.devDependencies['@types/react'], '@types/react-dom': docs.devDependencies['@types/react-dom'] },
   };
   // Peer auto-install is deliberately disabled. Recharts declares react-is as
@@ -68,15 +68,15 @@ async function prepare(style, feature) {
   if (style === 'tailwind') Object.assign(pkg.devDependencies, { tailwindcss: docs.devDependencies.tailwindcss, '@tailwindcss/vite': docs.devDependencies['@tailwindcss/vite'] });
   writeFileSync(join(directory, 'package.json'), JSON.stringify(pkg, null, 2) + '\n');
   writeFileSync(join(directory, '.npmrc'), 'auto-install-peers=false\n');
-  writeFileSync(join(directory, 'index.html'), '<!doctype html><html lang="zh-CN" data-brand="consumer-a"><head><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>包消费验收</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
+  writeFileSync(join(directory, 'index.html'), '<!doctype html><html lang="zh-CN" data-brand="consumer-a"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>包消费验收</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
   writeFileSync(join(directory, 'tsconfig.json'), JSON.stringify({ compilerOptions: { target: 'ES2022', lib: ['ES2022','DOM','DOM.Iterable'], module: 'ESNext', moduleResolution: 'Bundler', jsx: 'react-jsx', strict: true, skipLibCheck: true, noEmit: true }, include: ['main.tsx','registry/*.tsx'] }, null, 2));
   copyFileSync(resolve(root, `scripts/fixtures/package-consumer/${feature === 'full' ? 'full' : 'button'}.tsx`), join(directory, 'main.tsx'));
-  writeFileSync(join(directory, 'style.css'), (style === 'tailwind' ? '@import "tailwindcss";\n@import "@qingye/ui/styles.css";\n' : '@import "@qingye/ui/ui.css";\n') + sharedCSS);
+  writeFileSync(join(directory, 'style.css'), (style === 'tailwind' ? '@import "tailwindcss";\n@import "@qingye_lab/ui/styles.css";\n' : '@import "@qingye_lab/ui/ui.css";\n') + sharedCSS);
   writeFileSync(join(directory, 'vite.config.mjs'), (style === 'tailwind' ? 'import tailwindcss from "@tailwindcss/vite";\n' : '') + `export default { ${style === 'tailwind' ? 'plugins: [tailwindcss()],' : ''} server: {host:'127.0.0.1', strictPort:true} };\n`);
   const item = { name, style, feature, directory, assertions: [], status: 'NOT_RUN', commands: [] };
   evidence.cases.push(item);
   item.commands.push(await run('pnpm', ['install', '--ignore-workspace', '--no-frozen-lockfile', '--ignore-scripts'], directory, 'install'));
-  const installed = realpathSync(join(directory, 'node_modules/@qingye/ui'));
+  const installed = realpathSync(join(directory, 'node_modules/@qingye_lab/ui'));
   assert.ok(!installed.startsWith(resolve(root, 'packages/ui')), 'consumer must resolve installed package, not workspace source');
   const actual = JSON.parse(readFileSync(join(installed, 'package.json'), 'utf8'));
   assert.equal(actual.version, ui.version);
@@ -85,7 +85,7 @@ async function prepare(style, feature) {
     const registry=JSON.parse(readFileSync(join(installed,'registry/registry.json'),'utf8'));
     mkdirSync(join(directory,'registry'),{recursive:true});
     for(const entry of registry.items) for(const file of entry.files ?? []) if(file.path.endsWith('.tsx')) {
-      assert.ok(file.content.includes('@qingye/ui/'),'registry must reference shared package');
+      assert.ok(file.content.includes('@qingye_lab/ui/'),'registry must reference shared package');
       writeFileSync(join(directory,'registry',file.path.split('/').at(-1)),file.content);
     }
     item.assertions.push('Published Registry TSX templates typecheck against installed public package');
@@ -186,6 +186,9 @@ try {
             assert.equal(await dataTable.getAttribute('aria-busy'),'false');
             await page.locator('[data-slot="chart"] svg').first().waitFor();
             const chartTable = page.getByRole('table',{name:'输入数值',exact:true});
+            assert.equal(await chartTable.count(),0,'Chart equivalent data starts collapsed');
+            await page.locator('[data-slot="chart"]').getByRole('button',{name:'查看数据',exact:true}).click();
+            await chartTable.waitFor();
             assert.equal(await chartTable.getByRole('cell',{name:'0',exact:true}).count(),2);
             await page.getByRole('spinbutton',{name:'A 数值',exact:true}).fill('');
             await chartTable.getByRole('cell',{name:'数值未完整',exact:true}).waitFor();

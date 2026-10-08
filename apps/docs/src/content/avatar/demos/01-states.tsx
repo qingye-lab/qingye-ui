@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@qingye/ui/components/avatar";
-import { Inline } from "@qingye/ui/components/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@qingye_lab/ui/components/avatar";
+import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "图片与回退", titleEn: "Image and fallback" };
 

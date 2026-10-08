@@ -22,7 +22,7 @@ function pathIdentity(path: string) { const parts: string[]=[]; let parent=path;
 export function validateConfig(config: any): asserts config is ProjectConfig {
   const keys = ['schemaVersion','package','publicEntry','styleEntry','theme','scan','compositions','tokenSources','adapters','diagnostics','ledger','ledgerRoot'];
   if (!config || typeof config !== 'object' || Array.isArray(config) || Object.keys(config).some(k => !keys.includes(k))) throw new ToolError('Unknown or invalid config field', 'INVALID_CONFIG');
-  if (config.schemaVersion !== 1 || config.package !== '@qingye/ui' || typeof config.publicEntry !== 'string' || typeof config.styleEntry !== 'string') throw new ToolError('Config requires schemaVersion 1, @qingye/ui, publicEntry and styleEntry', 'INVALID_CONFIG');
+  if (config.schemaVersion !== 1 || config.package !== '@qingye_lab/ui' || typeof config.publicEntry !== 'string' || typeof config.styleEntry !== 'string') throw new ToolError('Config requires schemaVersion 1, @qingye_lab/ui, publicEntry and styleEntry', 'INVALID_CONFIG');
   for (const key of ['scan','compositions','tokenSources','adapters']) if (!Array.isArray(config[key]) || !config[key].every((v: unknown) => typeof v === 'string')) throw new ToolError(`Config requires ${key} paths`, 'INVALID_CONFIG');
   if (!config.scan.length) throw new ToolError('Explicit nonempty scan roots are required', 'INVALID_CONFIG');
   if (!config.theme || !['class','data-theme'].includes(config.theme.mode) || typeof config.theme.source !== 'string' || typeof config.theme.generated !== 'string' || Object.keys(config.theme).some(k => !['source','generated','mode','legacyCss'].includes(k))) throw new ToolError('Invalid theme paths or mode', 'INVALID_CONFIG');
@@ -45,7 +45,7 @@ export function loadProject(projectPath: string): Project {
 function installedPackage(root: string) {
   const req = createRequire(resolve(root, 'package.json'));
   let packagePath: string;
-  try { packagePath = req.resolve('@qingye/ui/package.json'); } catch { throw new ToolError('This project cannot resolve an installed @qingye/ui. Install its actual dependency first.', 'MISSING_DEPENDENCY'); }
+  try { packagePath = req.resolve('@qingye_lab/ui/package.json'); } catch { throw new ToolError('This project cannot resolve an installed @qingye_lab/ui. Install its actual dependency first.', 'MISSING_DEPENDENCY'); }
   const packageRoot = dirname(realpathSync(packagePath)), packageJson = json(packagePath);
   const catalog = json(resolve(packageRoot, 'catalog.json'));
   if (catalog.version !== packageJson.version) throw new ToolError(`Installed catalog ${catalog.version} does not match installed package ${packageJson.version}`, 'CATALOG_MISMATCH');

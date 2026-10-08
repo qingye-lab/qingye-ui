@@ -1,9 +1,9 @@
 # 度量 Stat
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/stat
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 7885ec5af69af08427069c47a31e9cb2a01dee3416d18289f3d995356e281b0d
+Source SHA-256: 6e812b09e8375b417af68edbacc5b10eda7b1747c44b6acb7b1bbf34172af163
 
 数值、单位与说明分别提供。
 
@@ -50,7 +50,7 @@ dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用�
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -81,8 +81,8 @@ StatValue 中的 span。
 ### 明确的数值状态
 Source: apps/docs/src/content/stat/demos/01-facts.tsx
 ```tsx
-import { Inline } from "@qingye/ui/components/layout";
-import { Stat, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Stat, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "明确的数值状态", titleEn: "Explicit metric states" } satisfies DemoMeta;
 export default function Demo() {
@@ -93,9 +93,9 @@ export default function Demo() {
 ### 变化量与趋势
 Source: apps/docs/src/content/stat/demos/02-delta.tsx
 ```tsx
-import { Inline } from "@qingye/ui/components/layout";
-import { Sparkline } from "@qingye/ui/components/sparkline";
-import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
+import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "变化量与趋势", titleEn: "Change and trend" } satisfies DemoMeta;
 export default function Demo() {

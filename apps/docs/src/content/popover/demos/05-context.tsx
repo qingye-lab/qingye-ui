@@ -1,9 +1,9 @@
-import { Button } from "@qingye/ui/components/button";
-import { Stack } from "@qingye/ui/components/layout";
-import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye/ui/components/popover";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useRef } from "react";
 
-import { Text } from "@qingye/ui/components/typography";
+import { Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "局部语言与密度", titleEn: "Local language and density" };
 

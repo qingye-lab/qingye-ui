@@ -1,4 +1,4 @@
-import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye/ui/components/timeline";
+import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "输入序列", titleEn: "Input sequence" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Stack } from "@qingye/ui/components/layout";
-import { Step, StepDescription, Steps, StepTitle, type StepState } from "@qingye/ui/components/steps";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Step, StepDescription, Steps, StepTitle, type StepState } from "@qingye_lab/ui/components/steps";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "明确的过程状态", titleEn: "Explicit process states" } satisfies DemoMeta;
 export default function Demo() {

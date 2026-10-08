@@ -50,8 +50,6 @@
     /* 遮罩与阴影是影，不是墨：它们表达「在上面」，按预设取值。 */
     --qy-overlay: oklch(0 0 0 / 0.32);
     --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px -8px oklch(0 0 0 / 0.12);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.06), 0 2px 4px -2px oklch(0 0 0 / 0.06);
-    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.045);
     --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
     --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
 
@@ -90,8 +88,6 @@
 
     --qy-overlay: oklch(0 0 0 / 0.56);
     --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
-    --qy-shadow-control: 0 1px 2px oklch(0 0 0 / 0.24);
-    --qy-shadow-inset: 0 1px 2px oklch(0 0 0 / 0.2);
     --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.5), 0 2px 6px oklch(0 0 0 / 0.28);
     --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.64), 0 4px 12px oklch(0 0 0 / 0.32);
 
@@ -126,11 +122,9 @@
     --qy-foreground-strong: var(--qy-foreground);
     --qy-foreground-muted: color-mix(in srgb, var(--qy-ink) var(--qy-ink-nong), var(--qy-paper));
     --qy-foreground-subtle: var(--qy-foreground-muted);
-    --qy-foreground-inverse: var(--qy-paper);
 
     /* 线：重与清，透明叠合。焦点线取焦墨。 */
     --qy-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
-    --qy-border-subtle: var(--qy-border);
     --qy-border-input: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
     --qy-border-strong: var(--qy-border-input);
     --qy-ring: var(--qy-foreground);
@@ -166,8 +160,6 @@
     --qy-success-soft: color-mix(in srgb, var(--qy-success) var(--qy-ink-qing), transparent);
     --qy-info-soft: color-mix(in srgb, var(--qy-info) var(--qy-ink-qing), transparent);
 
-    --qy-code: var(--qy-surface);
-    --qy-code-highlight: var(--qy-surface-inset);
 
     /* 侧栏：页面底纸上的一列，用同一套墨。 */
     --qy-sidebar: var(--qy-background);
@@ -175,8 +167,6 @@
     --qy-sidebar-border: var(--qy-border);
     --qy-sidebar-accent: var(--qy-surface-hover);
     --qy-sidebar-accent-foreground: var(--qy-foreground);
-    --qy-sidebar-primary: var(--qy-primary);
-    --qy-sidebar-primary-foreground: var(--qy-primary-foreground);
     --qy-sidebar-ring: var(--qy-ring);
   }
 }

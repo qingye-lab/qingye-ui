@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { Select, SelectGroup, SelectGroupLabel, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye/ui/components/select";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectGroup, SelectGroupLabel, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye_lab/ui/components/select";
 
 export const meta = { title: "状态与分组", titleEn: "States and groups" };
 

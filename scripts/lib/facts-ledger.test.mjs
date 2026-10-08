@@ -43,7 +43,9 @@ assert.equal(isExpectedTheme({ classes: [], dataTheme: 'light', colorScheme: 'li
 assert.equal(isExpectedTheme({ classes: ['light'], dataTheme: 'dark', colorScheme: 'light' }, 'light', 'class'), false);
 assert.equal(isExpectedTheme({ classes: ['light', 'dark'], dataTheme: null, colorScheme: 'light' }, 'light', 'class'), false);
 assert.equal(isExpectedTheme({ classes: [], dataTheme: 'dark', colorScheme: 'dark' }, 'dark', 'data-theme'), true);
-assert.ok(stat.fingerprint.inputs.some((input) => input.path.endsWith('apps/docs/src/content/select/demos/01-sizes.tsx')));
+const selectDemos = files('apps/docs/src/content/select/demos', /\.tsx$/);
+assert.ok(selectDemos.length > 0, 'Select has current demo inputs');
+for (const path of selectDemos) assert.ok(stat.fingerprint.inputs.some((input) => input.path === path), `${path} participates in the runtime fingerprint`);
 assert.ok(stat.fingerprint.inputs.some((input) => input.path.endsWith('scripts/lib/token-ledger-probes.mjs')));
 for (const path of ['pnpm-lock.yaml', 'apps/docs/index.html', 'apps/docs/vite.config.ts'].filter(exists)) assert.ok(stat.fingerprint.inputs.some((input) => input.path === path));
 const primary = PROBES.find((probe) => probe.id === 'field-relationship-gap');
@@ -84,6 +86,7 @@ try {
   const response = execFileSync(process.execPath, ['--input-type=module', '-e', `const {generateCapabilities}=await import(${JSON.stringify(moduleURL)});const c=generateCapabilities();console.log(JSON.stringify({count:c.counts.components,dist:c.counts.dist,status:c.buildArtifacts.status,allNotRun:c.components.every(x=>x.dist.status==='NOT_RUN')}));`], { env: { ...process.env, QY_UI_ROOT: fixture, QY_UI_FACTS_OUT: resolve(fixture, 'docs') }, encoding: 'utf8' });
   assert.deepEqual(JSON.parse(response), { count: cap.counts.components, dist: 0, status: 'NOT_RUN', allNotRun: true });
   const componentDir = resolve(fixture, 'packages/ui/src/components');
+  writeFileSync(resolve(componentDir, 'group.tsx'), 'export const Group = () => null;');
   const facades = {
     'forward-a.tsx': 'export * from "./forward-b";',
     'forward-b.tsx': 'export { Group } from "./group";',

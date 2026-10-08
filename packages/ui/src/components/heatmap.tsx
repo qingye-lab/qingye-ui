@@ -3,8 +3,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
-import { chartFrameClassName, readValue, SURFACE_GAP, type ChartRow, type ChartSeries, type ChartValue } from "./chart";
-import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "./collapsible";
+import { ChartHeader, chartFrameClassName, readValue, useChartData, SURFACE_GAP, type ChartRow, type ChartSeries, type ChartValue } from "./chart";
 import { Empty } from "./empty";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { useUILocale } from "../locale";
@@ -73,7 +72,7 @@ function HeatmapReadout({ active, rowLabel, columnLabel, format }: { active: Act
 /** 两个类别维度上的量：方格按墨阶顺序色阶着色，按需展开的等价数据表与悬停读数。 */
 export function Heatmap({ label, state = "ready", render, ref, className, ...props }: HeatmapProps) {
   if (!label.trim()) throw new Error("Heatmap requires a nonempty accessible label.");
-  const titleId = React.useId();
+  const titleId = React.useId(); const dataView = useChartData();
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   const [active, setActive] = React.useState<ActiveCell | null>(null);
@@ -117,19 +116,14 @@ export function Heatmap({ label, state = "ready", render, ref, className, ...pro
           <span>{messages.heatmapScaleTo}</span>
         </div>
       </div>}
-      <Collapsible data-slot="chart-data">
-        <CollapsibleTrigger className="text-support text-muted-foreground">{messages.chartData}</CollapsibleTrigger>
-        <CollapsiblePanel>
-          <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{rowLabel}</TableHead>{columns.map(column => <TableHead key={column.key}>{column.label}</TableHead>)}</TableRow></TableHeader><TableBody>
+      {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{rowLabel}</TableHead>{columns.map(column => <TableHead key={column.key}>{column.label}</TableHead>)}</TableRow></TableHeader><TableBody>
             {rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{columns.map((column, columnIndex) => { const value = grid[rowIndex]![columnIndex]!; return <TableCell key={column.key} className="numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? format(value, row, column) : value.label}</TableCell>; })}</TableRow>)}
-          </TableBody></Table></TableContainer>
-        </CollapsiblePanel>
-      </Collapsible>
+          </TableBody></Table></TableContainer></div>}
     </>;
   }
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
     "data-slot": "heatmap", "data-state": state, "aria-labelledby": titleId,
     className: cn(chartFrameClassName, className),
-    children: <><figcaption id={titleId} className="mb-(--qy-field-gap) min-w-0 text-heading wrap-anywhere">{label}</figcaption>{content}</>,
+    children: <><ChartHeader titleId={titleId} label={label} toggle={state === "ready" ? dataView.toggle : undefined} />{content}</>,
   }) });
 }

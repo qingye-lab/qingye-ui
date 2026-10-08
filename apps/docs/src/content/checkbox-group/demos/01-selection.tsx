@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
-import { Checkbox } from "@qingye/ui/components/checkbox";
-import { CheckboxGroup } from "@qingye/ui/components/checkbox-group";
-import { Field, FieldItem, FieldLabel, FieldTitle } from "@qingye/ui/components/field";
+import { Checkbox } from "@qingye_lab/ui/components/checkbox";
+import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
+import { Field, FieldItem, FieldLabel, FieldTitle } from "@qingye_lab/ui/components/field";
 
 export const meta = { title: "集合", titleEn: "Collection" };
 const options = [{ value: "alpha", label: "甲" }, { value: "beta", label: "乙" }, { value: "gamma", label: "丙" }];

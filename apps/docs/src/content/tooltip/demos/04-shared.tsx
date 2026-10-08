@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye/ui/components/tooltip";
-import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon } from "lucide-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
+import { IconAlignCenter, IconAlignLeft, IconAlignRight } from "@tabler/icons-react";
 
 export const meta = { title: "段落对齐" };
 
 const items = [
-  { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: AlignLeftIcon },
-  { value: "center", label: "居中对齐", detail: "段落沿中央排列", icon: AlignCenterIcon },
-  { value: "right", label: "右对齐", detail: "段落靠右边缘排列", icon: AlignRightIcon },
+  { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: IconAlignLeft },
+  { value: "center", label: "居中对齐", detail: "段落沿中央排列", icon: IconAlignCenter },
+  { value: "right", label: "右对齐", detail: "段落靠右边缘排列", icon: IconAlignRight },
 ] as const;
 
 export default function Demo() {

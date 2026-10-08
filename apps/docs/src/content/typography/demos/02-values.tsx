@@ -1,5 +1,5 @@
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "文字档与数字", titleEn: "Text steps and numbers" };
 export default function Demo() {

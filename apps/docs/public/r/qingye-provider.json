@@ -3,16 +3,16 @@
   "name": "qingye-provider",
   "type": "registry:block",
   "title": "Qingye shared package entry",
-  "description": "Project provider template referencing @qingye/ui@1.0.0; choose a CSS path separately.",
+  "description": "Project provider template referencing @qingye_lab/ui@1.0.0; choose a CSS path separately.",
   "files": [
     {
       "path": "registry/qingye-provider.tsx",
       "type": "registry:component",
       "target": "components/qingye-provider.tsx",
-      "content": "import type { ReactNode } from \"react\";\nimport { ThemeProvider } from \"@qingye/ui/components/theme-provider\";\nimport { UILocaleProvider } from \"@qingye/ui/locale\";\n\n/** Include one documented CSS path in the app entry. */\nexport function QingyeProvider({ children }: { children: ReactNode }) {\n  return <ThemeProvider><UILocaleProvider>{children}</UILocaleProvider></ThemeProvider>;\n}\n"
+      "content": "import type { ReactNode } from \"react\";\nimport { ThemeProvider } from \"@qingye_lab/ui/components/theme-provider\";\nimport { UILocaleProvider } from \"@qingye_lab/ui/locale\";\n\n/** Include one documented CSS path in the app entry. */\nexport function QingyeProvider({ children }: { children: ReactNode }) {\n  return <ThemeProvider><UILocaleProvider>{children}</UILocaleProvider></ThemeProvider>;\n}\n"
     }
   ],
   "dependencies": [
-    "@qingye/ui@1.0.0"
+    "@qingye_lab/ui@1.0.0"
   ]
 }

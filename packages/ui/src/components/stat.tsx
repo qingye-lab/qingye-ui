@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from "lucide-react";
+import { IconArrowDown, IconArrowUp, IconMinus } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 
@@ -38,7 +38,7 @@ export type StatDeltaProps = Omit<useRender.ComponentProps<"dd">, "children"> & 
   /** 变化量的绝对值怎样显示，例如百分比。 */
   format?: (absolute: number) => string;
   /** 这次变化是好是坏，只有应用知道（随类赋彩）：不声明时用墨色，方向由箭头与文字表达。 */
-  sentiment?: "good" | "bad";
+  sentiment?: "good" | "bad" | undefined;
 };
 /** 变化量：箭头与文字给出方向，颜色只在应用声明好坏时出现。 */
 export function StatDelta({ value, period, format, sentiment, render, className, ...props }: StatDeltaProps) {
@@ -48,7 +48,7 @@ export function StatDelta({ value, period, format, sentiment, render, className,
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   const direction = value > 0 ? "up" : value < 0 ? "down" : "flat";
   const amount = format?.(Math.abs(value)) ?? number.format(Math.abs(value));
-  const Icon = direction === "up" ? ArrowUpIcon : direction === "down" ? ArrowDownIcon : MinusIcon;
+  const Icon = direction === "up" ? IconArrowUp : direction === "down" ? IconArrowDown : IconMinus;
   return useRender({ defaultTagName: "dd", render, props: mergeProps({
     "data-slot": "stat-delta", "data-direction": direction, "data-sentiment": sentiment,
     "aria-label": messages.statDelta(direction, amount, period),

@@ -1,5 +1,5 @@
-import { buttonVariants } from "@qingye/ui/components/button";
-import { ExternalLinkIcon } from "lucide-react";
+import { buttonVariants } from "@qingye_lab/ui/components/button";
+import { IconExternalLink } from "@tabler/icons-react";
 
 export const meta = { title: "链接", titleEn: "Links" };
 
@@ -8,7 +8,7 @@ export default function Demo() {
     <div className="flex flex-wrap gap-(--qy-action-gap)">
       <a className={buttonVariants({ variant: "quiet" })} href="/docs/button">按钮文档</a>
       <a className={buttonVariants({ variant: "bordered" })} href="/design.md" rel="noreferrer" target="_blank">
-        设计指南<ExternalLinkIcon aria-hidden="true" />
+        设计指南<IconExternalLink aria-hidden="true" />
       </a>
     </div>
   );

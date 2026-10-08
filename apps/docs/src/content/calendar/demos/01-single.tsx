@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, formatLocalDate } from "@qingye/ui/components/calendar";
+import { Calendar, formatLocalDate } from "@qingye_lab/ui/components/calendar";
 export const meta = { title: "单日", titleEn: "Single day" };
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));

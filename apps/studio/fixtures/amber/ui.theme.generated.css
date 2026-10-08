@@ -1,9 +1,4 @@
 /* Qingye UI generated theme. READ ONLY; edit ui.theme.json. */
-html[data-brand="amber"] {
-  --qy-radius-control: 0.25rem;
-  --qy-radius-panel: 0.5rem;
-}
-
 html[data-brand="amber"][data-theme="light"] {
   --qy-primary: #774517;
   --qy-primary-foreground: #ffffff;
@@ -12,9 +7,4 @@ html[data-brand="amber"][data-theme="light"] {
 html[data-brand="amber"][data-theme="dark"] {
   --qy-primary: #f3c58b;
   --qy-primary-foreground: #261809;
-}
-
-html[data-brand="amber"][data-density="compact"] {
-  --qy-control-md: 1.75rem;
-  --qy-panel-padding: 1rem;
 }

@@ -10,12 +10,12 @@
  * No data-brand means the existing default. See docs/decisions/theme-axes.md.
  *
  * Customise the library by overriding `--qy-*` tokens after this file, for
- * example `:root { --qy-primary: …; --qy-radius: 0.5rem; }`.
+ * example `:root { --qy-primary: …; --qy-radius-control: 0.5rem; }`.
  *
  * The unprefixed shadcn-style variables below (`--background`, `--card`, …)
- * are a compatibility surface: components and third-party shadcn blocks read
- * them in arbitrary values. They always resolve to the `--qy-*` tokens; do not
- * override them directly.
+ * are an external compatibility alias layer for third-party shadcn blocks.
+ * Qingye components do not read them; they always resolve to the `--qy-*`
+ * tokens, so override the `--qy-*` token, not the alias.
  */
 @import "./tokens/primitives.css";
 @import "./tokens/semantic.css";
@@ -58,16 +58,12 @@
     --chart-3: var(--qy-chart-3);
     --chart-4: var(--qy-chart-4);
     --chart-5: var(--qy-chart-5);
-    --code: var(--qy-code);
     --code-foreground: var(--qy-foreground);
-    --code-highlight: var(--qy-code-highlight);
     --sidebar: var(--qy-sidebar);
     --sidebar-foreground: var(--qy-sidebar-foreground);
     --sidebar-border: var(--qy-sidebar-border);
     --sidebar-accent: var(--qy-sidebar-accent);
     --sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
-    --sidebar-primary: var(--qy-sidebar-primary);
-    --sidebar-primary-foreground: var(--qy-sidebar-primary-foreground);
     --sidebar-ring: var(--qy-sidebar-ring);
     --radius: var(--qy-radius);
   }
@@ -79,7 +75,6 @@
  */
 @theme inline {
   --font-sans: var(--qy-font-sans);
-  --font-heading: var(--qy-font-sans);
   --font-mono: var(--qy-font-mono);
   --font-weight-normal: var(--qy-weight-regular);
   --font-weight-medium: var(--qy-weight-medium);
@@ -95,8 +90,6 @@
   --color-primary-foreground: var(--qy-primary-foreground);
   --color-primary-hover: var(--qy-primary-hover);
   --color-destructive-fill-hover: var(--qy-danger-fill-hover);
-  --color-secondary: var(--qy-surface-inset);
-  --color-secondary-foreground: var(--qy-foreground);
   --color-muted: var(--qy-surface-inset);
   --color-muted-foreground: var(--qy-foreground-muted);
   --color-accent: var(--qy-accent);
@@ -120,16 +113,12 @@
   --color-chart-3: var(--qy-chart-3);
   --color-chart-4: var(--qy-chart-4);
   --color-chart-5: var(--qy-chart-5);
-  --color-code: var(--qy-code);
   --color-code-foreground: var(--qy-foreground);
-  --color-code-highlight: var(--qy-code-highlight);
   --color-sidebar: var(--qy-sidebar);
   --color-sidebar-foreground: var(--qy-sidebar-foreground);
   --color-sidebar-border: var(--qy-sidebar-border);
   --color-sidebar-accent: var(--qy-sidebar-accent);
   --color-sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
-  --color-sidebar-primary: var(--qy-sidebar-primary);
-  --color-sidebar-primary-foreground: var(--qy-sidebar-primary-foreground);
   --color-sidebar-ring: var(--qy-sidebar-ring);
 
   /* Extended roles beyond the shadcn set. */
@@ -137,11 +126,8 @@
   --color-surface-raised: var(--qy-surface-raised);
   --color-surface-subtle: var(--qy-surface-subtle);
   --color-surface-inset: var(--qy-surface-inset);
-  --color-surface-hover: var(--qy-surface-hover);
-  --color-surface-active: var(--qy-surface-active);
   --color-foreground-strong: var(--qy-foreground-strong);
   --color-foreground-subtle: var(--qy-foreground-subtle);
-  --color-border-subtle: var(--qy-border-subtle);
   --color-border-strong: var(--qy-border-strong);
   --color-neutral-soft: var(--qy-neutral-soft);
   --color-danger-soft: var(--qy-danger-soft);
@@ -159,7 +145,6 @@
   --radius-md: var(--qy-radius-md);
   --radius-lg: var(--qy-radius-lg);
   --radius-xl: var(--qy-radius-xl);
-  --radius-2xl: var(--qy-radius-2xl);
 
   /* Foundation §8: every semantic utility consumes its own complete quartet.
    * -mobile is the narrow-screen companion, paired with sm:text-ROLE. */
@@ -207,6 +192,21 @@
   --text-prose--line-height: var(--qy-text-prose-leading);
   --text-prose--letter-spacing: var(--qy-text-prose-tracking);
   --text-prose--font-weight: var(--qy-text-prose-weight);
+
+  --text-prose-h1: var(--qy-text-prose-h1-size);
+  --text-prose-h1--line-height: var(--qy-text-prose-h1-leading);
+  --text-prose-h1--letter-spacing: var(--qy-text-prose-h1-tracking);
+  --text-prose-h1--font-weight: var(--qy-text-prose-h1-weight);
+
+  --text-prose-h2: var(--qy-text-prose-h2-size);
+  --text-prose-h2--line-height: var(--qy-text-prose-h2-leading);
+  --text-prose-h2--letter-spacing: var(--qy-text-prose-h2-tracking);
+  --text-prose-h2--font-weight: var(--qy-text-prose-h2-weight);
+
+  --text-prose-h3: var(--qy-text-prose-h3-size);
+  --text-prose-h3--line-height: var(--qy-text-prose-h3-leading);
+  --text-prose-h3--letter-spacing: var(--qy-text-prose-h3-tracking);
+  --text-prose-h3--font-weight: var(--qy-text-prose-h3-weight);
 
   --text-prose-strong: var(--qy-text-prose-strong-size);
   --text-prose-strong--line-height: var(--qy-text-prose-strong-leading);
@@ -329,10 +329,8 @@
   --text-control-xl-mobile--font-weight: var(--qy-text-control-xl-mobile-weight);
 
   --shadow-panel: var(--qy-shadow-panel);
-  --shadow-control: var(--qy-shadow-control);
   --shadow-raised: var(--qy-shadow-raised);
   --shadow-overlay: var(--qy-shadow-overlay);
-  --inset-shadow-track: var(--qy-shadow-inset);
 
   --ease-out: var(--qy-ease-out);
   --ease-in-out: var(--qy-ease-in-out);

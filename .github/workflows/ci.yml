@@ -26,9 +26,9 @@ jobs:
           pnpm test
           node scripts/lib/facts-ledger.test.mjs
           node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs
-          pnpm --filter @qingye/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
+          pnpm --filter @qingye_lab/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
       - name: Build library
-        run: pnpm --filter @qingye/ui build
+        run: pnpm --filter @qingye_lab/ui build
       - name: Build Studio
         run: pnpm studio:build
       - name: Build docs
@@ -64,13 +64,13 @@ jobs:
           if-no-files-found: warn
       - name: Pack
         run: |
-          pnpm --filter @qingye/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
+          pnpm --filter @qingye_lab/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           pnpm --filter @qingye/tooling pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           ls dist-pack/*.tgz
       - name: Verify installed package consumers
-        run: node scripts/verify-packed-consumers.mjs --tgz "dist-pack/qingye-ui-$(node -p "require('./packages/ui/package.json').version").tgz"
+        run: node scripts/verify-packed-consumers.mjs --tgz "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")"
       - name: Verify installed tooling
-        run: node scripts/verify-packed-tooling.mjs "dist-pack/qingye-ui-$(node -p "require('./packages/ui/package.json').version").tgz" "dist-pack/qingye-tooling-$(node -p "require('./packages/tooling/package.json').version").tgz"
+        run: node scripts/verify-packed-tooling.mjs "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")" "dist-pack/qingye-tooling-$(node -p "require('./packages/tooling/package.json').version").tgz"
       - name: Upload installed consumer evidence
         if: always()
         uses: actions/upload-artifact@v4

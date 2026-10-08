@@ -1,5 +1,5 @@
-import { Field, FieldGroup, FieldLabel } from "@qingye/ui/components/field";
-import { OtpField } from "@qingye/ui/components/otp-field";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "密度", titleEn: "Density" } satisfies DemoMeta;

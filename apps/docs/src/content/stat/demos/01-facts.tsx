@@ -1,5 +1,5 @@
-import { Inline } from "@qingye/ui/components/layout";
-import { Stat, StatLabel, StatUnit, StatValue } from "@qingye/ui/components/stat";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Stat, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "明确的数值状态", titleEn: "Explicit metric states" } satisfies DemoMeta;
 export default function Demo() {

@@ -1,4 +1,4 @@
-import { CodeBlock } from "@qingye/ui/components/code-block";
+import { CodeBlock } from "@qingye_lab/ui/components/code-block";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "原样文本与复制", titleEn: "Literal text and copy" } satisfies DemoMeta;
 export default function Demo() {

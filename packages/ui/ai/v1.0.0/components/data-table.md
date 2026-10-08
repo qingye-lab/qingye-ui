@@ -1,7 +1,7 @@
 # 数据集合 DataTable
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/data-table
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
 Source SHA-256: 6c90102f2bc72cc10b6b9a886cc1a8f2f9e64f91aac5bf57befb245b63422055
 
@@ -46,7 +46,7 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, class-variance-authority, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: @tanstack/react-table
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -74,8 +74,8 @@ Source: apps/docs/src/content/data-table/demos/01-task.tsx
 ```tsx
 import * as React from "react";
 import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye/ui/components/data-table";
-import { Stack } from "@qingye/ui/components/layout";
+import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;

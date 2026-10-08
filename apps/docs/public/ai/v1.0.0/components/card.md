@@ -1,7 +1,7 @@
 # 卡片 Card
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/card
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
 
@@ -56,9 +56,9 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 内容
 Source: apps/docs/src/content/card/demos/01-basic.tsx
 ```tsx
-import { Card } from "@qingye/ui/components/card";
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "内容", titleEn: "Content" };
 
@@ -77,9 +77,9 @@ export default function Demo() {
 ### 整卡链接
 Source: apps/docs/src/content/card/demos/02-action.tsx
 ```tsx
-import { Card } from "@qingye/ui/components/card";
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "整卡链接", titleEn: "Linked card" };
 
@@ -98,10 +98,10 @@ export default function Demo() {
 ### 分节与动作
 Source: apps/docs/src/content/card/demos/03-divided.tsx
 ```tsx
-import { Button } from "@qingye/ui/components/button";
-import { Card } from "@qingye/ui/components/card";
-import { Inline } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "分节与动作", titleEn: "Sections and actions" };
 
@@ -121,9 +121,9 @@ export default function Demo() {
 ### 密度
 Source: apps/docs/src/content/card/demos/04-context.tsx
 ```tsx
-import { Card } from "@qingye/ui/components/card";
-import { Stack } from "@qingye/ui/components/layout";
-import { Heading, Text } from "@qingye/ui/components/typography";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "密度", titleEn: "Density" };
 

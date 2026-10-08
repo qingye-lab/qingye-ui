@@ -1,9 +1,9 @@
 # Steps
 
-Package: @qingye/ui@1.0.0
-Import: @qingye/ui/components/steps
+Package: @qingye_lab/ui@1.0.0
+Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
-Source SHA-256: 05e4da919c2cd7cbb9cc674aa24aaf72f4bb04f03427773105236184a55c6aa8
+Source SHA-256: 9620517d67de460eb5986d9eb8a445c6f41a7b4bad8d7316f6c38ab874df9495
 
 An ordered process with application-owned progress.
 
@@ -45,7 +45,7 @@ Order does not establish completion. Every state is explicit; only current recei
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, lucide-react, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -70,9 +70,9 @@ div / p content slots.
 Source: apps/docs/src/content/steps/demos/01-progress.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye/ui/components/button";
-import { Stack } from "@qingye/ui/components/layout";
-import { Step, StepDescription, Steps, StepTitle, type StepState } from "@qingye/ui/components/steps";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Step, StepDescription, Steps, StepTitle, type StepState } from "@qingye_lab/ui/components/steps";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "明确的过程状态", titleEn: "Explicit process states" } satisfies DemoMeta;
 export default function Demo() {
