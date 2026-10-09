@@ -175,3 +175,12 @@ html { scrollbar-gutter: stable; }
 /* Persistent page chrome remains below document popups and modal work surfaces. */
 .docs-site-header { z-index: 1; }
 .docs-skip-link { z-index: 2; }
+
+/* A fast route change should not flash a loader: the fallback fades in only if loading takes a while. */
+@keyframes route-fallback-in {
+  to { opacity: 1; }
+}
+.route-fallback {
+  opacity: 0;
+  animation: route-fallback-in var(--qy-duration-base) var(--qy-ease-out) 400ms forwards;
+}

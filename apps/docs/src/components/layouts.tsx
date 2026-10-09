@@ -1,4 +1,6 @@
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import { IconLoader2 } from "@tabler/icons-react";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";
@@ -29,10 +31,17 @@ function SkipLink() {
   );
 }
 
-/** Quiet placeholder while a route chunk loads for the first time. */
+/**
+ * While a route chunk loads for the first time. A load that finishes quickly shows nothing at all
+ * (the reveal waits 400ms, see `.route-fallback`); a slow one gets the same spinning mark a Button
+ * shows for work in progress, named for assistive technology.
+ */
 function RouteFallback() {
-  const en = useDocsLocale() === "en";
-  return <div aria-busy="true" className="site-frame min-h-[60dvh] pt-(--qy-section-gap) text-support text-muted-foreground" role="status">{en ? "Loading…" : "正在加载…"}</div>;
+  const { messages } = useUILocale();
+  return <div aria-busy="true" className="route-fallback site-frame min-h-[60dvh] pt-(--qy-section-gap)" role="status">
+    <IconLoader2 aria-hidden="true" className="size-(--qy-control-md-icon) animate-spin text-muted-foreground" />
+    <span className="sr-only">{messages.loading}</span>
+  </div>;
 }
 
 export function SiteShell() {
