@@ -33,6 +33,13 @@
      * 两档字号相差无几时，层级交给墨色与字重（墨分五色），不再加一档字号。
      * 每档自带 size / leading / tracking / weight 四项，可单独覆写。 */
 
+    /* 落地页单独成段的大字（如首页总纲）：64 / 20 分行高，行高正好 4 材。
+     * 字号是预设，与 display-lg 相差 1.6 倍；全站至多一处。 */
+    --qy-text-display-xl-size: 4rem;
+    --qy-text-display-xl-leading: calc(20 * var(--qy-fen));
+    --qy-text-display-xl-tracking: -0.032em;
+    --qy-text-display-xl-weight: var(--qy-weight-semibold);
+
     /* 页面标题：12 分 / 10 分行高。 */
     --qy-text-display-lg-size: 2.5rem;
     --qy-text-display-lg-leading: calc(12 * var(--qy-fen));

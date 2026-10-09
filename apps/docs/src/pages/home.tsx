@@ -80,9 +80,9 @@ export default function HomePage() {
   const fullText = t("原文", "Full text");
   return <main className="home site-frame" id="main" tabIndex={-1}>
     <section aria-labelledby="home-title" className="home-hero home-row">
-      <Heading id="home-title" level={1} step="display-lg">{MOTTO.map(line => <span key={line.zh}>{pick(line)}</span>)}</Heading>
+      <Heading id="home-title" level={1} step="display-xl">{MOTTO.map(line => <span key={line.zh}>{pick(line)}</span>)}</Heading>
       <div className="home-intro">
-        <Text className="home-intro-lede" step="reading">{t("Qingye UI 从中国的经典、造物、书画与园林中取法，安排界面的尺度、层次与操作关系。", "Qingye UI draws on Chinese classics, craft, painting, and gardens to arrange an interface's measure, hierarchy, and relations between actions.")}</Text>
+        <Text className="home-intro-lede" step="reading">{t("Qingye UI 从中国传统的经典与东方美学中取法。", "Qingye UI takes its methods from Chinese classics and Eastern aesthetics.")}</Text>
         <Text className="home-intro-fact text-muted-foreground">{en ? <>A React component library built on <span>Base UI</span> and <span>Tailwind CSS 4</span>.</> : <>基于 <span>Base UI</span> 与 <span>Tailwind CSS 4</span> 的 React 组件库。</>}</Text>
         <div className="home-actions">
           <Link className={buttonVariants({ size: "lg" })} to="/docs/design-philosophy">{t("阅读设计理念", "Read the design philosophy")}</Link>

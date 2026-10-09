@@ -39,6 +39,7 @@ const dens = (name: string): Measure => ({ kind: "len", exprs: [v(name)], densit
 const raw = (name: string): Measure => ({ kind: "raw", exprs: [v(name)] });
 
 export const STEPS: { step: string; use: Text }[] = [
+  { step: "display-xl", use: { zh: "落地页大字", en: "Landing statement" } },
   { step: "display-lg", use: { zh: "页面标题", en: "Page title" } },
   { step: "display", use: { zh: "页面标题", en: "Page title" } },
   { step: "title", use: { zh: "区块标题", en: "Block title" } },

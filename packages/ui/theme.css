@@ -148,6 +148,11 @@
 
   /* Foundation §8: every semantic utility consumes its own complete quartet.
    * -mobile is the narrow-screen companion, paired with sm:text-ROLE. */
+  --text-display-xl: var(--qy-text-display-xl-size);
+  --text-display-xl--line-height: var(--qy-text-display-xl-leading);
+  --text-display-xl--letter-spacing: var(--qy-text-display-xl-tracking);
+  --text-display-xl--font-weight: var(--qy-text-display-xl-weight);
+
   --text-display-lg: var(--qy-text-display-lg-size);
   --text-display-lg--line-height: var(--qy-text-display-lg-leading);
   --text-display-lg--letter-spacing: var(--qy-text-display-lg-tracking);

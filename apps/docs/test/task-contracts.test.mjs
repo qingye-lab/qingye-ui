@@ -37,6 +37,8 @@ test("homepage: shows the philosophy itself (motto, fifteen methods linked to th
       assert.equal(texts.length,15,className);
       for (const text of texts) assert.ok(guide.includes(locale === "en" ? text.replaceAll("“","\"").replaceAll("”","\"") : text),text);
     }
+    // 项目定位是 design.md 开篇第一句（取法来源），不另写。
+    const [lede] = cited("home-intro-lede"); assert.ok(lede && guide.includes(lede),`positioning must quote design.md: ${lede}`);
     for (const slot of ["checkbox","input","select-trigger","switch","card"]) assert.doesNotMatch(markup,new RegExp(`data-slot="${slot}"`),slot);
     assert.doesNotMatch(markup,/type="search"/);
     assert.match(markup,/pnpm add @qingye_lab\/ui</); assert.match(markup,/role="tab"[^>]*>(tgz 包|Tarball)</); assert.doesNotMatch(markup,/gh release download/);

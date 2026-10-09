@@ -25,14 +25,22 @@
 .home-row > :last-child { grid-column: 2 / -1; min-width: 0; }
 .home-row + .home-row { margin-top: var(--home-chapter); }
 
-/* 字号全用库的字阶（Heading / Text 的 step），与文档页同一套角色：页题 display-lg、章题 title、正文 reading、补充 body；
+/* 字号全用库的字阶（Heading / Text 的 step），与文档页同一套角色：总纲 display-xl、章题 title、正文 reading、补充 body；
    名录里法名是所选内容的标题，取 heading，详情（设计决定）取 body、出处取 support，选择项不小于它展开的内容。
    这里不另设字号、行高、字重与字距；语言差异由库的 utilities.css 处理。右栏陈述句的行长与文档正文同为 --docs-measure。 */
 .home-intro-lede, .home-substance-text p, .home-method-decision { max-width: var(--docs-measure); text-wrap: pretty; }
 
 /* ─── 总纲与项目定位 ───────────────────────────────────── */
 .home-hero { align-items: end; padding-top: calc(5 * var(--qy-cai)); }
-.home-hero h1 span { display: block; }
+.home-hero h1 span { display: block; white-space: nowrap; }
+/* 总纲用 display-xl：一句五字 × 64px = 320px，一栏放得下（版心 ≥ 54 材，即视口 ≥ 72.5rem）；
+   英文一句比一栏宽，占前两栏，定位落在第三栏。更窄时总纲与定位上下排。 */
+:lang(en) .home-hero h1 { grid-column: 1 / span 2; }
+:lang(en) .home-hero > .home-intro { grid-column: 3; }
+@media (max-width: 72.5rem) {
+  .home-hero, :lang(en) .home-hero { grid-template-columns: minmax(0, 1fr); row-gap: calc(2 * var(--qy-cai)); }
+  .home .home-hero.home-row > * { grid-column: 1; }
+}
 .home-intro { display: grid; justify-items: start; padding-bottom: var(--qy-fen); }
 .home-intro-fact { margin-top: var(--qy-field-gap); }
 .home-intro-fact span { white-space: nowrap; }

@@ -20,6 +20,7 @@
  */
 export const TEXT_STEPS = [
   // Content semantics from foundation §8, including derived companions.
+  "display-xl",
   "display-lg",
   "display",
   "title",

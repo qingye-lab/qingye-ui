@@ -1,17 +1,16 @@
 import { cn } from "@qingye_lab/ui/utils";
 
-/** The mark: a rounded tile carrying a single-stroke Q. */
+/**
+ * The mark (应物象形, design.md): a square carries the work, a dot marks the point.
+ * Stroke 2 on the 20-unit grid; the three closed corners ease at r3 outside and r1
+ * inside, concentric. The square opens toward its lower-right corner, where the dot
+ * sits 1 分 (4 units) clear of both arm ends.
+ */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg aria-hidden="true" className={cn("size-5", className)} fill="none" viewBox="0 0 20 20">
-      <rect fill="currentColor" height="20" rx="5.5" width="20" />
-      <path
-        d="M13.75 10a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM11.5 11.5l3 3"
-        stroke="var(--qy-background)"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.75"
-      />
+    <svg aria-hidden="true" className={cn("size-5", className)} fill="currentColor" viewBox="0 0 20 20">
+      <path d="M9 19H4A3 3 0 0 1 1 16V4A3 3 0 0 1 4 1H16A3 3 0 0 1 19 4V9H17V4A1 1 0 0 0 16 3H4A1 1 0 0 0 3 4V16A1 1 0 0 0 4 17H9Z" />
+      <circle cx="16" cy="16" r="3" />
     </svg>
   );
 }

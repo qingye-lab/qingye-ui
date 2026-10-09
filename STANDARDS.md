@@ -103,6 +103,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 | 内容档 | 字号 / 行高 | 字重 |
 |---|---|---|
+| `display-xl` | 64/80 | 600 |
 | `display-lg` / `display` | 40/48、32/40 | 600 |
 | `title` / `chapter` / `heading` | 24/32、20/28、16/24 | 600 |
 | `body` | 14/20 | 400 |
@@ -143,7 +144,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=5d77a1dd9ba876cd1cc8c6bca014cc45d77003fdc3190aa275c35def413364d9 -->
+<!-- qingye:translation:en:start source-sha256=12bcd8773074199a154d6a461684a1c9ee2ad175b250462ab2f020ea02472344 -->
 # Component Standards
 
 These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -249,6 +250,7 @@ Each semantic profile includes font size, line height, tracking, and weight; cur
 
 | Content profile | Size / line height | Weight |
 |---|---|---|
+| `display-xl` | 64/80 | 600 |
 | `display-lg` / `display` | 40/48, 32/40 | 600 |
 | `title` / `chapter` / `heading` | 24/32, 20/28, 16/24 | 600 |
 | `body` | 14/20 | 400 |

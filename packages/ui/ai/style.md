@@ -205,6 +205,7 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 | 内容档 | 字号 / 行高 | 字重 |
 |---|---|---|
+| `display-xl` | 64/80 | 600 |
 | `display-lg` / `display` | 40/48、32/40 | 600 |
 | `title` / `chapter` / `heading` | 24/32、20/28、16/24 | 600 |
 | `body` | 14/20 | 400 |

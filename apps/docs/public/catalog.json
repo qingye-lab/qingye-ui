@@ -34145,7 +34145,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/typography.tsx",
-        "sha256": "64ed7fbd3f048ea0688b218a0b216d0efba870c6c9700fa372413f52c54e46ab",
+        "sha256": "61bbfd143704d1218831b2427d0145f8635858803dfaa75170638ffe3155f261",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文依 lang 使用正常字距，numeric 不格式化值。",
@@ -34645,7 +34645,7 @@
       "section": "设计契约",
       "implementation": {
         "source": "STANDARDS.md",
-        "sha256": "d5a1b3c24c48417bffe0ee88b59547b2cf49604bce0a8e5179c6bbb64ecb3a32",
+        "sha256": "f922c86a587fb17fc4edd71326b8e8b6dcd6fe8c6c7fb1fccaaf60c76e305583",
         "section": "公共组件实现"
       }
     },

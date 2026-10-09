@@ -9,6 +9,7 @@ export type { TextStep } from "../text-steps";
 
 // Literal classes keep Tailwind extraction reliable; the canonical list checks completeness.
 const steps = {
+  "display-xl": "text-display-xl",
   "display-lg": "text-display-lg",
   display: "text-display",
   title: "text-title",
