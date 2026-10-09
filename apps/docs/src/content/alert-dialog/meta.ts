@@ -5,7 +5,7 @@ export default {
   description: "阻断整个工作面，要求对当前对象作出明确选择。", descriptionEn: "Block the work surface for an explicit decision about the current object.",
   category: "浮层", layer: "pattern", source: "local",
   exports: ["AlertDialog", "AlertDialogTrigger", "AlertDialogPopup", "AlertDialogHeader", "AlertDialogTitle", "AlertDialogDescription", "AlertDialogPanel", "AlertDialogFooter", "AlertDialogClose"],
-  keywords: ["alertdialog", "确认", "决定", "删除", "危险"],
+  keywords: ["alertdialog", "确认", "决定", "删除", "危险", "弹窗", "二次确认"],
   decisions: "点遮罩不关闭，默认聚焦面板。Esc 与返回按钮只关闭对话框；继续动作由调用方处理。",
   decisionsEn: "Backdrop presses do not dismiss it; focus starts on the panel. Escape and the return button only close the dialog. The caller handles the affirmative action.",
   api: [

@@ -36,7 +36,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey) && !event.altKey) {
         event.preventDefault();
         setMounted(true);
-        setOpen((value) => !value);
+        // Opening only: the key pressed again while typing must not drop the query; Esc closes.
+        setOpen(true);
       } else if (event.key === "/" && !event.metaKey && !event.ctrlKey && !isTyping(event.target)) {
         event.preventDefault();
         openSearch();

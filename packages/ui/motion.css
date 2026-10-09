@@ -233,10 +233,10 @@
 
 /* Disclosure keeps draft-bearing content mounted; state and visibility are
  * owned by the primitive, never by an animation-completion callback. */
-:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"]) {
+:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"], [data-slot="sidebar-sub-content"]) {
   transition: opacity var(--qy-duration-fast) var(--qy-ease-out);
 }
-:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"]):is([data-starting-style], [data-ending-style]) { opacity: 0; }
+:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"], [data-slot="sidebar-sub-content"]):is([data-starting-style], [data-ending-style]) { opacity: 0; }
 
 /* The check mark settles in rather than appearing. */
 [data-slot="checkbox-indicator"] {

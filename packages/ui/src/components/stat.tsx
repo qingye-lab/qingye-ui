@@ -19,7 +19,7 @@ export function StatLabel({ render, className, ...props }: StatLabelProps) {
 }
 export type StatValueProps = useRender.ComponentProps<"dd">;
 export function StatValue({ render, className, ...props }: StatValueProps) {
-  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) text-metric wrap-anywhere", className) }, props) });
+  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) text-metric numeric wrap-anywhere", className) }, props) });
 }
 export type StatUnitProps = useRender.ComponentProps<"span">;
 export function StatUnit({ render, className, ...props }: StatUnitProps) {

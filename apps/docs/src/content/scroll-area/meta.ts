@@ -3,6 +3,7 @@ export default {
   title: "滚动区域 ScrollArea", titleEn: "Scroll area",
   description: "在有限视口内保留真实原生滚动。", descriptionEn: "Native scrolling within a bounded viewport.",
   category: "工具", layer: "primitive", source: "local", exports: ["ScrollArea"],
+  keywords: ["scroll", "scrollbar", "overflow", "滚动", "滚动条", "滚动区域"],
   api: [{ name: "ScrollArea", description: "真实可滚动 div；原生滚动条尊重平台设置。", descriptionEn: "An actual scrollable div; native scrollbars respect platform settings.", props: [
     { name: "children", type: "ReactNode", description: "完整内容，不窗口化或隐藏集合项。", descriptionEn: "Complete content without windowing or hiding collection items." },
     { name: "style / className", type: "div props", description: "消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。", descriptionEn: "Consumer layout supplies height/maxHeight and width; overflow defaults to auto." },

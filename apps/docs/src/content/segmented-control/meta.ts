@@ -4,6 +4,7 @@ export default {
   title: "分段控件 SegmentedControl", titleEn: "SegmentedControl",
   description: "从并列的少量候选中输入一个值。", descriptionEn: "Enter one value from a small set of visible segments.",
   category: "表单", layer: "primitive", source: "local", exports: ["SegmentedControl", "SegmentedControlItem", "SegmentedControlPrimitive", "SegmentedControlItemPrimitive"],
+  keywords: ["segmented", "button group", "切换", "分段", "分段控制", "视图切换"],
   api: [
     { name: "SegmentedControl", description: "radio 值输入；不拥有面板或选项清单。", descriptionEn: "Radio value input without owning panels or an option inventory.", props: [
       { name: "value / defaultValue", type: "Value", description: "受控值或初始选择；不传初值保持未选择，0 与空字符串可以是真实选项。", descriptionEn: "Controlled or initial selection; omitted initial values stay unselected. Zero and empty string may be actual options." },

@@ -1,5 +1,5 @@
 import { CATEGORIES, type Category } from "./types";
-import { components, type ComponentEntry } from "./registry";
+import { components, type ComponentSummary } from "./registry";
 import { localizedMeta, type LocalizedMeta } from "./localized-meta";
 import { componentPath, guidePath, localePath, PATHS, routeIdentity, splitLocalePath, type DocsLocale } from "./paths";
 export { componentPath } from "./paths";
@@ -21,7 +21,7 @@ export const GUIDES: GuidePage[] = [
     description: "组件库的构成、职责边界与设计依据。",
     group: "开始",
     file: "introduction.tsx",
-    keywords: ["intro", "about", "原则", "design.md", "base ui", "许可"],
+    keywords: ["intro", "about", "原则", "design.md", "base ui", "许可", "react", "vue", "框架", "contribute", "贡献"],
   },
   {
     path: guidePath("installation"),
@@ -109,15 +109,15 @@ export function splitTitle(title: string): { zh: string; en: string | null } {
   return { zh: match[1]!.trim(), en: match[2]!.trim() };
 }
 
-export function componentLabel(entry: ComponentEntry, locale: DocsLocale): { title: string; hint?: string } {
+export function componentLabel(entry: ComponentSummary, locale: DocsLocale): { title: string; hint?: string } {
   if (locale === "en" && entry.titleEn?.trim()) return { title: entry.titleEn };
   const { zh, en } = splitTitle(entry.title);
   return { title: zh, ...(en ? { hint: en } : {}) };
 }
 
-export function componentsByCategory(locale: DocsLocale = "zh"): { category: Category | "其他"; items: ComponentEntry[] }[] {
+export function componentsByCategory(locale: DocsLocale = "zh"): { category: Category | "其他"; items: ComponentSummary[] }[] {
   const known = new Set<string>(CATEGORIES);
-  const groups: { category: Category | "其他"; items: ComponentEntry[] }[] = CATEGORIES.map((category) => ({
+  const groups: { category: Category | "其他"; items: ComponentSummary[] }[] = CATEGORIES.map((category) => ({
     category,
     items: components.filter((entry) => entry.category === category).map((entry) => localizedMeta(entry, locale)),
   }));
@@ -178,8 +178,7 @@ export function neighbours(path: string, locale: DocsLocale = splitLocalePath(pa
 
 export function breadcrumbs(path: string, locale: DocsLocale = splitLocalePath(path).locale): NavItem[] {
   const identity = routeIdentity(path);
-  const introduction = GUIDES.find((page) => page.path === PATHS.docs)!;
-  const root = { path: localePath(PATHS.docs, locale), title: localizedMeta(introduction, locale).title };
+  const root = { path: localePath(PATHS.docs, locale), title: navLabel("文档", locale) };
   if (identity === PATHS.docs) return [root];
   if (identity === PATHS.components) return [root, { path: localePath(OVERVIEW.path, locale), title: localizedMeta(OVERVIEW, locale).title }];
   const component = components.find((entry) => componentPath(entry.slug) === identity);

@@ -4,6 +4,7 @@ export default {
   category: "数据展示", layer: "pattern", source: "local", exports: ["Stat", "StatLabel", "StatValue", "StatUnit", "StatDescription", "StatDelta"],
   decisions: "dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用说明。变化量必须说明参照期，方向由箭头与文字表达；好坏只由应用声明，未声明时用墨色。", decisionsEn: "dl/dt/dd preserve metric relationships; zero remains visible and the application explains unknown and inapplicable values. A change names its reference period and shows direction with an arrow and text; only the application declares good or bad, otherwise it stays in ink.",
   design: { methods: ["名实相符", "布白有用"], whenToUse: ["需要识别一个度量的名称、值和单位。"], avoid: ["跨对象比较使用 Table；趋势图形由具备真实数据的应用组合。"], stateOwner: { library: ["度量名称、值、单位与说明的语义关系。"], application: ["统计口径、数值状态、更新时间与变化事实。"] }, responsive: ["数值与单位可换行，未知状态不缩为零。"] }, designEn: {"whenToUse":["Identify a metric's name, value, and unit."],"avoid":["Use Table for cross-object comparison; applications with actual data compose trend graphics."],"stateOwner":{"library":["Semantic relationships among metric names, values, units, and explanations."],"application":["Measurement definitions, numeric states, update times, and change facts."]},"responsive":["Values/units wrap; unknown never shrinks to zero."]},
+  keywords: ["metric", "kpi", "number", "度量", "指标", "统计", "数字"],
   api: [
     { name: "StatDelta", description: "与参照期相比的变化量（dd）。", descriptionEn: "Change against a reference period (dd).", props: [
       { name: "value", type: "number", description: "带符号的变化量。", descriptionEn: "The signed change." },

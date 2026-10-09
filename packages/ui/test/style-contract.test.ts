@@ -144,7 +144,10 @@ test("public prose projections keep criteria and resolve package links without s
   const packagePhilosophyEn = projectPackagePhilosophy(philosophyEn, "en");
   expect(links(packagePhilosophyEn)).toContain("../design.en.md");
   expect(links(packagePhilosophyEn)).toContain("https://ui.xflux.cc/en/docs/ai#project-rules");
-  expect(packagePhilosophyEn.replace("](../design.en.md)", "](/design.en.md)").replace("](https://ui.xflux.cc/en/docs/ai#project-rules)", "](/docs/ai#project-rules)"))
+  // Component links point at the site, never at a path that only exists on it.
+  expect(links(packagePhilosophyEn)).toContain("https://ui.xflux.cc/en/docs/components/button");
+  expect(links(packagePhilosophy)).toContain("https://ui.xflux.cc/docs/components/button");
+  expect(packagePhilosophyEn.replace("](../design.en.md)", "](/design.en.md)").replace("](https://ui.xflux.cc/en/docs/ai#project-rules)", "](/docs/ai#project-rules)").replaceAll("](https://ui.xflux.cc/en/docs/components/", "](/docs/components/"))
     .toBe(philosophyEn);
 });
 

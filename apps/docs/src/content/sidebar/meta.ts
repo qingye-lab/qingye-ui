@@ -20,6 +20,7 @@ export default {
   ],
   "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
   "decisionsEn": "Collapsing produces an icon rail, not a hidden panel: navigation and links stay mounted, names switch to visually hidden (accessible name unchanged) with a Tooltip restoring a visible name; a sub-level's inline panel becomes a Popover over the same content in the rail, and its open/closed memory survives collapsing. Active and routes are explicit application facts.",
+  "keywords": ["side nav", "drawer", "侧栏", "侧边栏", "边栏"],
   "api": [
     {
       "name": "Sidebar / SidebarToggle",

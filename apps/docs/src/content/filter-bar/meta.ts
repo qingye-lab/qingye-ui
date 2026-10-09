@@ -19,6 +19,7 @@ export default {
   ],
   "decisions": "dirty 和 appliedSummary 是必填事实；点击应用只发出意图，库不修改条件或请求结果。",
   "decisionsEn": "Dirty and appliedSummary are required facts; Apply emits intent without changing conditions or requesting results.",
+  "keywords": ["filter", "筛选", "过滤", "条件"],
   "api": [
     {
       "name": "FilterBar",

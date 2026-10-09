@@ -3,7 +3,7 @@ import { Button } from "@qingye_lab/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 import { IconBold } from "@tabler/icons-react";
 
-export const meta = { title: "快捷键" };
+export const meta = { title: "快捷键", titleEn: "Keyboard shortcut" };
 
 export default function Demo() {
   const [bold, setBold] = useState(false);

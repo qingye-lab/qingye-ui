@@ -26,6 +26,44 @@ function persist() {
 const instant = (top: number) => window.scrollTo({ top, behavior: "instant" });
 
 /**
+ * Where the reader is, in terms that survive a change of language: the section they are in and how
+ * far below the reading line it starts, plus how far through the page they are. Another language
+ * reflows the page, so pixels would keep the number and lose the object.
+ */
+export interface ReadingPosition {
+  anchor?: { id: string; offset: number };
+  ratio: number;
+}
+
+const readingLine = () => parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+
+export function captureReadingPosition(): ReadingPosition {
+  const line = readingLine();
+  const range = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = range > 0 ? window.scrollY / range : 0;
+  let anchor: ReadingPosition["anchor"];
+  for (const heading of document.querySelectorAll<HTMLElement>("main [data-toc][id]")) {
+    const top = heading.getBoundingClientRect().top;
+    if (top > line + 1) break;
+    anchor = { id: heading.id, offset: top - line };
+  }
+  return anchor ? { anchor, ratio } : { ratio };
+}
+
+/** One attempt to put the reader back; true once the page is tall enough to have done so. */
+function restoreReadingPosition({ anchor, ratio }: ReadingPosition): boolean {
+  const target = anchor ? document.getElementById(anchor.id) : null;
+  const room = document.documentElement.scrollHeight - window.innerHeight;
+  if (anchor && target) {
+    const top = target.getBoundingClientRect().top + window.scrollY - readingLine() - anchor.offset;
+    instant(top);
+    return room >= top - 1;
+  }
+  // The other language names this section differently: keep the place by proportion.
+  instant(ratio * room);
+  return Boolean(document.querySelector("main h1")) && !document.querySelector('main [aria-busy="true"]');
+}
+/**
  * Lazy pages and demos settle over a few frames, so a target may not exist (or
  * the page may not be tall enough) yet. Keep trying briefly, and give up the
  * moment the reader scrolls on their own.
@@ -161,13 +199,16 @@ export function useRouteEffects() {
     }
 
     let cancel: (() => void) | undefined;
-    const localeSwitch = navigationType === "PUSH" && typeof location.state?.localeSwitchScroll === "number";
+    const reading = navigationType === "PUSH" ? location.state?.localeSwitchReading as ReadingPosition | undefined : undefined;
+    const localeSwitch = Boolean(reading);
     // Fresh loads all share the "default" key, so only pushed entries are restored.
     const saved = location.key === "default" ? undefined : positions.get(currentKey.current);
     if (location.hash) {
       cancel = settle(() => scrollToHash(location.hash));
-    } else if ((navigationType === "POP" && saved !== undefined) || localeSwitch) {
-      const top = localeSwitch ? location.state.localeSwitchScroll as number : saved!;
+    } else if (reading) {
+      cancel = settle(() => restoreReadingPosition(reading));
+    } else if (navigationType === "POP" && saved !== undefined) {
+      const top = saved;
       cancel = settle(() => {
         const reachable = document.documentElement.scrollHeight - window.innerHeight >= top - 1;
         instant(top);

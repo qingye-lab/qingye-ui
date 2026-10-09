@@ -5,6 +5,7 @@ export default {
   description: "从可收起的候选列表中取一个值。", descriptionEn: "Choose one value from a collapsible set of options.",
   category: "表单", layer: "primitive", source: "local",
   exports: ["Select", "SelectTrigger", "SelectValue", "SelectPopup", "SelectItem", "SelectGroup", "SelectGroupLabel", "SelectPrimitive"],
+  keywords: ["dropdown", "combobox", "picker", "选择", "下拉", "下拉选择", "选项"],
   api: [
     { name: "Select", description: "单值状态与表单语义。", descriptionEn: "Single-value state and form semantics.", props: [
       { name: "value / defaultValue", type: "Value | null", description: "受控值或真实初值，null 是未选择。省略初值不会选第一项。", descriptionEn: "Controlled or actual initial value; null means no selection. Omitting an initial value does not choose the first item." },

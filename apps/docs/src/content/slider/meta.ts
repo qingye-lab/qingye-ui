@@ -4,6 +4,7 @@ export default {
   title: "滑块 Slider", titleEn: "Slider",
   description: "在明确区间内输入数值或有序范围。", descriptionEn: "Enter a number or an ordered range within explicit bounds.",
   category: "表单", layer: "primitive", source: "local", exports: ["Slider", "SliderControl", "SliderTrack", "SliderIndicator", "SliderThumb", "SliderLabel", "SliderValue", "SliderPrimitive"],
+  keywords: ["range", "track", "滑块", "滑动条", "范围"],
   api: [
     { name: "Slider", description: "数值与范围状态，公开各部位供组合。", descriptionEn: "Value and range state with public parts for composition.", props: [
       { name: "value / defaultValue", type: "number | readonly number[]", description: "受控值或非受控初值；未传时从 min 开始。数组每项对应一个带 index 的 Thumb。", descriptionEn: "Controlled or uncontrolled initial value; omission starts at min. Each array entry corresponds to an indexed Thumb." },

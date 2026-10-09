@@ -2,6 +2,7 @@ import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { languageSwitchTarget, languageTag } from "@/lib/paths";
+import { captureReadingPosition } from "@/lib/use-route-effects";
 
 export function LanguageSwitch() {
   const locale = useDocsLocale();
@@ -16,7 +17,7 @@ export function LanguageSwitch() {
     onClick={(event) => {
       if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
-      navigate(languageSwitchTarget(location, next), { state: { ...location.state, localeSwitchScroll: window.scrollY } });
+      navigate(languageSwitchTarget(location, next), { state: { ...location.state, localeSwitchReading: captureReadingPosition() } });
     }}
     to={languageSwitchTarget(location, next)}
   >{next === "en" ? "EN" : "中文"}</Link>;

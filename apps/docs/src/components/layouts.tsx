@@ -15,7 +15,7 @@ function SkipLink() {
   const en = useDocsLocale() === "en";
   return (
     <a
-      className="docs-skip-link sr-only focus-ring fixed start-3 top-3 rounded-item border border-border bg-surface-raised px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body-strong focus-visible:not-sr-only"
+      className="docs-skip-link focus-ring fixed start-3 top-3 -translate-y-[200%] rounded-item border border-border bg-surface-raised px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body-strong focus-visible:translate-y-0"
       href="#main"
       onClick={(event) => {
         event.preventDefault();
@@ -31,7 +31,8 @@ function SkipLink() {
 
 /** Quiet placeholder while a route chunk loads for the first time. */
 function RouteFallback() {
-  return <div aria-busy="true" className="min-h-[60dvh]" />;
+  const en = useDocsLocale() === "en";
+  return <div aria-busy="true" className="site-frame min-h-[60dvh] pt-(--qy-section-gap) text-support text-muted-foreground" role="status">{en ? "Loading…" : "正在加载…"}</div>;
 }
 
 export function SiteShell() {

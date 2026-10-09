@@ -12,6 +12,7 @@ export default {
   ],
   "decisions": "expandedIds 与 selectedId 分开；聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
   "decisionsEn": "Expanded IDs and selected ID are separate; focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
+  "keywords": ["tree view", "hierarchy", "树", "树形", "层级", "目录树"],
   "api": [
     {
       "name": "Tree",

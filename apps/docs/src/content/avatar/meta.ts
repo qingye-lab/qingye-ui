@@ -14,9 +14,7 @@ export default {
     "AvatarFallback",
     "AvatarPrimitive"
   ],
-  "keywords": [
-    "avatar"
-  ],
+  "keywords": ["avatar", "profile picture", "user image", "头像", "用户头像", "身份"],
   "decisions": "不要虚构姓名或让 initials 代替可访问名称。", decisionsEn: "Do not invent a name or let initials replace an accessible name.",
   "design": {
     "methods": [

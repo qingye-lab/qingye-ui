@@ -27,5 +27,6 @@ export function projectImplementationLinks(source, locale = "zh") {
 export function projectPackagePhilosophy(source, locale = "zh") {
   return source
     .replace(/\]\(\/(design(?:\.en)?\.md)\)/g, "](../$1)")
-    .replaceAll("](/docs/ai#project-rules)", `](https://ui.xflux.cc/${locale === "en" ? "en/" : ""}docs/ai#project-rules)`);
+    .replaceAll("](/docs/ai#project-rules)", `](https://ui.xflux.cc/${locale === "en" ? "en/" : ""}docs/ai#project-rules)`)
+    .replace(/\]\(\/(docs\/components\/[a-z0-9-]+)\)/g, (_match, path) => `](https://ui.xflux.cc/${locale === "en" ? "en/" : ""}${path})`);
 }

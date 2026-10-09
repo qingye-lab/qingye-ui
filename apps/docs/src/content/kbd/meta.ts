@@ -11,9 +11,7 @@ export default {
   "exports": [
     "Kbd"
   ],
-  "keywords": [
-    "kbd"
-  ],
+  "keywords": ["kbd", "keyboard", "shortcut", "key", "快捷键", "按键", "键盘"],
   "decisions": "Kbd 不注册键盘监听，不是可点击入口。", decisionsEn: "Kbd neither registers keyboard listeners nor provides a clickable entry.",
   "design": {
     "methods": [

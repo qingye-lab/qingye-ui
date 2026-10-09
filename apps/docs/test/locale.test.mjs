@@ -257,7 +257,7 @@ test("nav, search, breadcrumbs and neighbours share translated metadata and cont
   assert.ok(en.every((item) => item.value.startsWith("/en/")));
   assert.deepEqual(en.map((item) => item.id), zh.map((item) => item.id));
   const crumbs = breadcrumbs("/en/components/button");
-  assert.equal(crumbs[0].title, "[W4.2 fixture] Introduction");
+  assert.equal(crumbs[0].title, "Docs");
   assert.equal(crumbs.at(-1).title, "[W4.2 fixture] Button");
   const { prev, next } = neighbours("/en/components/input");
   assert.equal(prev.title, "[W4.2 fixture] Button");

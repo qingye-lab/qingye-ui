@@ -7,8 +7,8 @@ import { CodeBlock } from "@/components/code-block";
 import { DemoFrame } from "@/components/demo";
 import { A, Code, H2, H3, P, PageHeader, Ul } from "@/components/prose";
 import { importSnippet } from "@/lib/highlight";
-import { splitTitle } from "@/lib/nav";
-import { findComponent, loadDemos, type ComponentEntry, type LoadedDemo } from "@/lib/registry";
+import { componentPath, splitTitle } from "@/lib/nav";
+import { components, findComponent, loadComponent, loadDemos, type ComponentEntry, type LoadedDemo } from "@/lib/registry";
 import type { ApiPart, KeyboardRow } from "@/lib/types";
 import { NotFoundContent } from "../not-found";
 import { useDocsLocale } from "@/lib/docs-locale";
@@ -61,10 +61,16 @@ function demosFor(slug: string): Promise<LoadedDemo[]> {
 export default function ComponentPage() {
   const { slug = "" } = useParams();
   const locale = useDocsLocale();
-  const found = findComponent(slug);
-  const entry = found ? localizedMeta(found, locale) : undefined;
-  if (!entry) return <NotFoundContent detail={componentCopy[locale].notFound(slug)} />;
-  return <ComponentDoc entry={entry} />;
+  if (!findComponent(slug)) return <NotFoundContent detail={componentCopy[locale].notFound(slug)} />;
+  return <LoadedComponentDoc slug={slug} />;
+}
+
+/** Suspends on the component's full metadata; the route's Suspense shows its quiet fallback meanwhile. */
+function LoadedComponentDoc({ slug }: { slug: string }) {
+  const locale = useDocsLocale();
+  const found = use(loadComponent(slug));
+  if (!found) return <NotFoundContent detail={componentCopy[locale].notFound(slug)} />;
+  return <ComponentDoc entry={localizedMeta(found, locale)} />;
 }
 
 /**
@@ -109,14 +115,14 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
       {use.length || avoid.length ? (
         <>
           <H2 id="when">{text.when}</H2>
-          <Pairs columns={[[text.use, use], [text.avoid, avoid]]} />
+          <Pairs columns={[[text.use, use], [text.avoid, avoid]]} self={entry.slug} />
         </>
       ) : null}
 
       {library.length || application.length ? (
         <>
           <H2 id="state">{text.state}</H2>
-          <Pairs columns={[[text.library, library], [text.application, application]]} />
+          <Pairs columns={[[text.library, library], [text.application, application]]} self={entry.slug} />
         </>
       ) : null}
 
@@ -195,7 +201,7 @@ function Facts({ entry }: { entry: ComponentEntry }) {
 }
 
 /** Two authored lists read side by side; an empty side is left out rather than filled. */
-function Pairs({ columns }: { columns: [string, string[]][] }) {
+function Pairs({ columns, self }: { columns: [string, string[]][]; self: string }) {
   const shown = columns.filter(([, items]) => items.length);
   return (
     <div className="component-pairs">
@@ -204,7 +210,7 @@ function Pairs({ columns }: { columns: [string, string[]][] }) {
           <h3>{label}</h3>
           <ul>
             {items.map((item) => (
-              <li key={item}>{renderInline(item)}</li>
+              <li key={item}>{renderLinked(item, self)}</li>
             ))}
           </ul>
         </section>
@@ -241,6 +247,30 @@ function renderInline(text: string): ReactNode {
   );
 }
 
+/**
+ * Pascal-case slug → page path. A recommendation such as "改用 AlertDialog" names another
+ * component; the name is the way there, so it is a link rather than plain text.
+ */
+const componentNames = new Map(
+  components.map((entry) => [entry.slug.split("-").map((word) => word[0]!.toUpperCase() + word.slice(1)).join(""), entry.slug] as const),
+);
+const componentNamePattern = new RegExp(`\\b(${[...componentNames.keys()].sort((a, b) => b.length - a.length).join("|")})\\b`, "g");
+
+/** `renderInline`, with names of other components turned into links. `self` is never linked to itself. */
+function renderLinked(text: string, self: string): ReactNode {
+  const link = (name: string, key: string, content: ReactNode) => {
+    const slug = componentNames.get(name);
+    return slug && slug !== self ? <A href={componentPath(slug)} key={key}>{content}</A> : content;
+  };
+  return text.split(/(`[^`]+`)/g).map((part, index) => {
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      const name = part.slice(1, -1);
+      return link(name, `c${index}`, <Code key={`c${index}`}>{name}</Code>);
+    }
+    return part.split(componentNamePattern).map((piece, i) => (i % 2 ? link(piece, `${index}-${i}`, piece) : piece));
+  });
+}
+
 const partId = (name: string) => `api-${name.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase()}`;
 
 function ApiReference({ parts }: { parts: ApiPart[] }) {
@@ -254,7 +284,7 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
           <H3 className="mt-0 mb-(--qy-field-gap) font-mono text-reading" id={partId(part.name)}>
             {part.name}
           </H3>
-          <p className="mb-(--qy-space-3) max-w-(--docs-measure) text-pretty text-body text-muted-foreground">{renderInline(part.description)}</p>
+          <p className="mb-(--qy-space-3) max-w-(--docs-measure) text-pretty text-body text-foreground">{renderInline(part.description)}</p>
           {part.props?.length ? (
             <TableContainer className="rounded-panel border border-border">
               <Table className="min-w-[36rem] table-fixed" data-density="compact">
@@ -285,7 +315,7 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
                         {prop.default ? (
                           <code className="break-words font-mono text-caption text-muted-foreground">{prop.default}</code>
                         ) : (
-                          <span aria-label={text.noDefault} className="text-foreground-subtle">
+                          <span aria-label={text.noDefault} className="text-muted-foreground">
                             —
                           </span>
                         )}

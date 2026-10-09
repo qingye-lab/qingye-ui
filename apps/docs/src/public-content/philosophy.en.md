@@ -1,4 +1,4 @@
-<!-- qingye:translation-source:sha256=7eb72c1318326c04e3835a842087d1dfaf97b014661fac997d2291e57a43e065 -->
+<!-- qingye:translation-source:sha256=c0c73f557708b0253104e4f564aed1b853588df9a38c74cdfc692d59c123b299 -->
 # Qingye UI Design Philosophy
 
 ## Culture as a method of design
@@ -167,11 +167,11 @@ The screen has its own material: pixels, system fonts, input methods, and platfo
 
 ## In components
 
-Buttons name actions and consequences clearly, with prominence appropriate to the current task; their height derives from one line of body text and matches the inputs in the same row. Input areas leave room for expression, while labels, descriptions, and errors have distinct places; on focus the edge darkens without spreading or thickening.
+[Buttons](/docs/components/button) name actions and consequences clearly, with prominence appropriate to the current task; their height derives from one line of body text and matches the inputs in the same row. [Input areas](/docs/components/input) leave room for expression, while labels, descriptions, and errors have distinct places; on focus the edge darkens without spreading or thickening.
 
-Tables keep comparison content visible together, without manufacturing density by continually shrinking text. Grouping starts with spacing, and cards enclose content only when it represents an independent object. The ink ladder carries hierarchy; hue appears only where a state is real.
+[Tables](/docs/components/table) keep comparison content visible together, without manufacturing density by continually shrinking text. Grouping starts with spacing, and cards enclose content only when it represents an independent object. The ink ladder carries hierarchy; hue appears only where a state is real.
 
-Dialogs concern a specific matter and state its object, impact, and choices. A dialog lies over content and therefore casts a shadow. Necessary warnings should not disappear into a fleeting notification; a lightweight result need not become an interruption.
+[Dialogs](/docs/components/dialog) concern a specific matter and state its object, impact, and choices. A dialog lies over content and therefore casts a shadow. Necessary warnings should not disappear into a fleeting notification; a lightweight result need not become an interruption.
 
 ## Across a complete task
 

@@ -2,7 +2,9 @@ import { cn } from "@qingye_lab/ui";
 import { linkClassName } from "@qingye_lab/ui/components/link";
 import { IconLink } from "@tabler/icons-react";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from "./locale-link";
+import { syncDocumentHead } from "@/lib/document-head";
 import { pageTitle } from "@/lib/site";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { useHashLink } from "@/lib/use-route-effects";
@@ -21,11 +23,14 @@ const proseWrapClass = "[overflow-wrap:break-word]";
 const flow = "mt-0 mb-(--qy-space-module)";
 const measure = "max-w-(--docs-measure)";
 
-export function useDocumentTitle(title?: string) {
+export function useDocumentTitle(title?: string, description?: string) {
   const locale = useDocsLocale();
+  const { pathname } = useLocation();
   useEffect(() => {
-    document.title = pageTitle(title, locale);
-  }, [title, locale]);
+    const full = pageTitle(title, locale);
+    document.title = full;
+    syncDocumentHead({ title: full, description, pathname, locale });
+  }, [title, description, locale, pathname]);
 }
 
 export function PageHeader({
@@ -42,7 +47,7 @@ export function PageHeader({
   children?: ReactNode;
   className?: string;
 }) {
-  useDocumentTitle(documentTitle ?? (typeof title === "string" ? title : undefined));
+  useDocumentTitle(documentTitle ?? (typeof title === "string" ? title : undefined), typeof description === "string" ? description : undefined);
   return (
     <header className={cn("flex min-w-0 flex-col gap-(--qy-field-gap) pb-(--qy-section-gap)", className)}>
       <h1 className="docs-page-title text-balance text-display text-foreground" tabIndex={-1}>
@@ -149,7 +154,7 @@ export function A({ href, className, children, ...props }: ComponentProps<"a"> &
 /** A quiet two-column definition list for short reference facts. */
 export function Facts({ items, className }: { items: { term: ReactNode; detail: ReactNode }[]; className?: string }) {
   return (
-    <dl className={cn(flow, measure, "grid grid-cols-[max-content_minmax(0,1fr)] gap-x-(--qy-section-gap) gap-y-(--qy-field-gap)", className)}>
+    <dl className={cn(flow, measure, "grid grid-cols-1 sm:grid-cols-[max-content_minmax(0,1fr)] gap-x-(--qy-section-gap) gap-y-(--qy-field-gap)", className)}>
       {items.map((item, index) => (
         <div className="contents" key={index}>
           <dt className="text-reading text-muted-foreground">{item.term}</dt>

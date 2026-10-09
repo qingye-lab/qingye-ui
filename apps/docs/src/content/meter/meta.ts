@@ -16,9 +16,7 @@ export default {
     "MeterIndicator",
     "MeterPrimitive"
   ],
-  "keywords": [
-    "meter"
-  ],
+  "keywords": ["meter", "gauge", "measure", "level", "仪表", "度量", "用量", "容量"],
   "decisions": "任务完成比例使用 Progress；未知测量不要填0。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero.",
   "design": {
     "methods": [

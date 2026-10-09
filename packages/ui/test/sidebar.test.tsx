@@ -17,6 +17,14 @@ describe("Sidebar", () => {
     await user.click(screen.getByRole("button", { name: "展开" }));
     expect(screen.getAllByRole("link")).toHaveLength(2);
   });
+  it("lets the sub-trigger's arrow follow its open state: the trigger is the disclosure group the arrow reads", () => {
+    render(<Sidebar><SidebarContent><SidebarSub><SidebarSubTrigger icon={dot}>集合</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#a">A</SidebarLink></SidebarSubContent></SidebarSub></SidebarContent></Sidebar>);
+    const trigger = screen.getByRole("button", { name: "集合" });
+    // DisclosureIcon rotates through `group-data-[panel-open]/disclosure`; without the group on
+    // the trigger the class is inert and the arrow never turns.
+    expect(trigger.className).toContain("group/disclosure");
+    expect(trigger.querySelector("[data-slot=disclosure-icon]")?.getAttribute("class")).toContain("group-data-[panel-open]/disclosure:rotate-180");
+  });
   it("keeps focus on a rail item after a controlled collapse, since it is still reachable there", async () => {
     const { rerender } = render(<Sidebar><SidebarToggle /><SidebarContent><SidebarLink href="#a" icon={dot}>A</SidebarLink></SidebarContent></Sidebar>);
     screen.getByRole("link").focus();

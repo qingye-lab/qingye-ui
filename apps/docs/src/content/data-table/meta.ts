@@ -15,6 +15,7 @@ export default {
   ],
   "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
   "decisionsEn": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
+  "keywords": ["datagrid", "grid", "table", "sort", "表格", "数据表", "排序", "选择行"],
   "api": [
     {
       "name": "DataTable",
@@ -75,10 +76,12 @@ export default {
     }
   ],
   "notes": [
-    "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。"
+    "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
+    "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
   ],
   "notesEn": [
-    "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models."
+    "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
+    "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
   ],
   "design": {
     "methods": [

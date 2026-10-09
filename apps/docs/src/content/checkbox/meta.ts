@@ -3,6 +3,7 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "复选框 Checkbox", titleEn: "Checkbox", description: "选择独立的是/否或集合中的多个项。", descriptionEn: "Choose an independent yes/no value or multiple items in a set.",
   category: "表单", layer: "primitive", source: "local", exports: ["Checkbox", "CheckboxPrimitive"],
+  keywords: ["check", "tick", "复选框", "勾选", "多选框", "选中"],
   api: [{ name: "Checkbox", description: "Base UI 复选语义及混合状态。", descriptionEn: "Base UI checkbox semantics and mixed state.", props: [
     { name: "checked / defaultChecked", type: "boolean", description: "受控选中值或非受控初值。", descriptionEn: "Controlled checked value or uncontrolled initial value." },
     { name: "indeterminate", type: "boolean", default: "false", description: "集合部分选中的事实；aria-checked 为 mixed。", descriptionEn: "Actual partial collection selection; aria-checked is mixed." },

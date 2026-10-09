@@ -4,6 +4,7 @@ export default {
   title: "切换按钮 Toggle", titleEn: "Toggle",
   description: "保持名称的二态切换按钮：按下后保持，直到再次切换。", descriptionEn: "A two-state toggle that holds its pressed fact until toggled again, with a stable name.",
   category: "表单", layer: "primitive", source: "local", exports: ["Toggle", "TogglePrimitive"],
+  keywords: ["pressed", "toggle button", "切换按钮", "按下", "开关按钮"],
   api: [
     { name: "Toggle", description: "独立的 pressed 布尔事实。", descriptionEn: "An independent pressed boolean fact.", props: [
       { name: "pressed / defaultPressed", type: "boolean", description: "受控事实或非受控初值。默认未切换（未按下）。", descriptionEn: "Controlled state or uncontrolled initial value; un-toggled by default." },

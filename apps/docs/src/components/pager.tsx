@@ -64,7 +64,7 @@ function PagerLink({ to, title, direction }: { to: string; title: string; direct
       to={to}
     >
       {direction === "prev" ? <Icon aria-hidden="true" className="size-(--qy-control-sm-icon) shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" /> : null}
-      <span className="min-w-0 truncate decoration-border underline-offset-[0.25em] group-hover:underline">{title}</span>
+      <span className="min-w-0 truncate underline decoration-transparent underline-offset-[0.25em] transition-[text-decoration-color] group-hover:decoration-border">{title}</span>
       {direction === "next" ? <Icon aria-hidden="true" className="size-(--qy-control-sm-icon) shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" /> : null}
     </Link>
   );

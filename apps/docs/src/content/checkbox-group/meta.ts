@@ -5,6 +5,7 @@ export default {
   description: "把复选项接入同一个集合与共同范围。", descriptionEn: "Connect checkboxes to one collection and shared scope.",
   category: "表单", layer: "primitive", source: "local",
   exports: ["CheckboxGroup", "CheckboxGroupPrimitive"],
+  keywords: ["checkboxes", "多选", "复选", "多选组", "勾选"],
   api: [
     { name: "CheckboxGroup", description: "集合状态，不只是排列复选项。", descriptionEn: "Collection state beyond checkbox layout.", props: [
       { name: "value / defaultValue", type: "string[]", description: "受控集合或初始集合；空数组表示未选任何项。Checkbox.value 标识集合项。", descriptionEn: "Controlled or initial collection; an empty array means no selected items. Checkbox.value identifies members." },

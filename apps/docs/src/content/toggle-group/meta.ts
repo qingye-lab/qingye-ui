@@ -4,6 +4,7 @@ export default {
   title: "切换组 ToggleGroup", titleEn: "ToggleGroup",
   description: "关联一组单选或多选的切换按钮：选项保持切换状态。", descriptionEn: "A shared single or multiple set of toggles whose pressed fact persists.",
   category: "表单", layer: "primitive", source: "local", exports: ["ToggleGroup", "ToggleGroupItem", "ToggleGroupPrimitive"],
+  keywords: ["toolbar toggle", "button group", "切换组", "按钮组", "多选切换"],
   api: [
     { name: "ToggleGroup", description: "单选与多选都使用数组；单选允许取消成 []。", descriptionEn: "Both single/multiple modes use arrays; single permits clearing to [].", props: [
       { name: "multiple", type: "boolean", default: "false", description: "false 为 single，最多切换一项；true 为 multiple，可切换多项。", descriptionEn: "false is single with at most one pressed item; true permits multiple pressed items." },

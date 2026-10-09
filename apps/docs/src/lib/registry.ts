@@ -1,8 +1,9 @@
 import type { ComponentMeta, DemoModule } from "./types";
 
-const metaModules = import.meta.glob<{ default: ComponentMeta }>("../content/*/meta.ts", {
-  eager: true,
-});
+import summaries from "virtual:component-summaries";
+
+/** Full metadata, one chunk per component, fetched when that component's page opens. */
+const metaLoaders = import.meta.glob<{ default: ComponentMeta }>("../content/*/meta.ts");
 const demoLoaders = import.meta.glob<DemoModule>("../content/*/demos/*.tsx");
 const sourceLoaders = import.meta.glob<string>("../content/*/demos/*.tsx", {
   query: "?raw",
@@ -15,12 +16,30 @@ export interface ComponentEntry extends ComponentMeta {
   slug: string;
 }
 
-export const components: ComponentEntry[] = Object.entries(metaModules)
-  .map(([path, module]) => ({ ...module.default, slug: slugOf(path) }))
-  .sort((a, b) => a.slug.localeCompare(b.slug));
+/** What navigation, search and the index need; every component has this, loaded with the shell. */
+export type ComponentSummary = Pick<ComponentEntry, "slug" | "title" | "titleEn" | "description" | "descriptionEn" | "category" | "layer" | "source" | "exports" | "keywords">;
 
-export function findComponent(slug: string): ComponentEntry | undefined {
+export const components: ComponentSummary[] = [...(summaries as ComponentSummary[])].sort((a, b) => a.slug.localeCompare(b.slug));
+
+export function findComponent(slug: string): ComponentSummary | undefined {
   return components.find((entry) => entry.slug === slug);
+}
+
+const full = new Map<string, Promise<ComponentEntry | undefined>>();
+
+/** The complete metadata for one component (API, design guidance, notes). */
+export function loadComponent(slug: string): Promise<ComponentEntry | undefined> {
+  let promise = full.get(slug);
+  if (!promise) {
+    const summary = findComponent(slug);
+    const loader = metaLoaders[`../content/${slug}/meta.ts`];
+    // An entry that already carries its API is complete (and a missing file has nothing to add).
+    promise = !summary ? Promise.resolve(undefined)
+      : "api" in summary || !loader ? Promise.resolve(summary as ComponentEntry)
+      : loader().then((module) => ({ ...summary, ...module.default }));
+    full.set(slug, promise);
+  }
+  return promise;
 }
 
 export interface LoadedDemo extends DemoModule {

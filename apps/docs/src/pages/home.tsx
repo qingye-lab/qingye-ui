@@ -95,8 +95,8 @@ export default function HomePage() {
       <Heading id="home-substance" step="title">{t("文与质", "Substance and form")}</Heading>
       <figure>
         {en
-          ? <blockquote><Text step="reading">When substance exceeds form, the result is crude; when form exceeds substance, the result is clerical. Only when form and substance are in balance is one a person of quality.</Text></blockquote>
-          : <blockquote><Text step="reading">质胜文则野，文胜质则史。</Text><Text step="reading">文质彬彬，然后君子。</Text></blockquote>}
+          ? <blockquote><Text step="chapter">When substance exceeds form, the result is crude; when form exceeds substance, the result is clerical. Only when form and substance are in balance is one a person of quality.</Text></blockquote>
+          : <blockquote><Text step="chapter">质胜文则野，文胜质则史。</Text><Text step="chapter">文质彬彬，然后君子。</Text></blockquote>}
         <Text className="text-muted-foreground" render={<figcaption />}>{t("——《论语·雍也》", "— The Analects, Yong Ye")}</Text>
       </figure>
       <div className="home-substance-text">

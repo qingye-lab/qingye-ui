@@ -5,7 +5,7 @@ export default {
   description: "接管整个工作面，完成当前编辑或决定后返回。", descriptionEn: "Take over the work surface for an edit or decision, then return.",
   category: "浮层", layer: "primitive", source: "local",
   exports: ["Dialog", "DialogTrigger", "DialogPopup", "DialogHeader", "DialogTitle", "DialogDescription", "DialogPanel", "DialogFooter", "DialogClose"],
-  keywords: ["dialog", "modal", "对话框", "阻断", "编辑"],
+  keywords: ["dialog", "modal", "对话框", "阻断", "编辑", "弹窗", "弹出框", "模态"],
   decisions: "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
   decisionsEn: "Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.",
   api: [

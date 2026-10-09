@@ -11,9 +11,7 @@ export default {
   "exports": [
     "StatusDot"
   ],
-  "keywords": [
-    "status-dot"
-  ],
+  "keywords": ["status-dot", "status", "indicator", "online", "状态点", "在线", "指示灯", "圆点"],
   "decisions": "不把等待、进行中或结果未知混成同一事实。", decisionsEn: "Waiting, in-progress, and unknown results remain distinct facts.",
   "design": {
     "methods": [

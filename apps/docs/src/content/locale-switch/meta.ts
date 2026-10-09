@@ -3,6 +3,7 @@ export default {
   title: "语言切换 LocaleSwitch", titleEn: "Locale switch",
   description: "请求切换应用语言，并显示 Provider 当前事实。", descriptionEn: "Request an application locale change and show the current Provider value.",
   category: "工具", layer: "primitive", source: "local", exports: ["LocaleSwitch"],
+  keywords: ["language", "i18n", "locale", "语言", "切换语言", "国际化"],
   api: [{ name: "LocaleSwitch", description: "复用 NativeSelect；UILocaleProvider 是唯一当前值来源。", descriptionEn: "Uses NativeSelect; UILocaleProvider alone supplies the current value.", props: [
     { name: "options", type: "readonly { locale: UILocale; label: string; disabled?: boolean }[]", description: "消费项目提供可选语言与名称，code 必须非空且唯一。当前 code 未列入时显示其禁用事实选项。", descriptionEn: "The consumer supplies available languages and names. Codes must be nonblank and unique; an unlisted current code appears as a disabled factual option." },
     { name: "onLocaleChange", type: "(locale: UILocale, event: ChangeEvent<HTMLSelectElement>) => void", description: "请求新 locale；应用更新 Provider 后才改变选择事实，拒绝时保留原值。", descriptionEn: "Requests a locale; selection changes only after the application updates Provider. Refusal retains the previous value." },

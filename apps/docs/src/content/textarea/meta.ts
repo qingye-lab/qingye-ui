@@ -4,6 +4,7 @@ export default {
   title: "多行输入 Textarea", titleEn: "Textarea",
   description: "编辑备注、消息等多行文本。", descriptionEn: "Edit multiline notes and messages.",
   category: "表单", layer: "primitive", source: "local", exports: ["Textarea", "TextareaPrimitive"],
+  keywords: ["multiline", "text area", "多行", "多行输入", "文本域", "备注"],
   api: [{ name: "Textarea", description: "可与 Field 组合的原生 textarea。", descriptionEn: "A native textarea composable with Field.", props: [
     { name: "rows", type: "number", default: "3", description: "最小起始行数；内容可自动增高，仍可手工调整高度。", descriptionEn: "Minimum starting rows; content may grow automatically and still be resized manually." },
     { name: "value / defaultValue", type: "string", description: "受控值或非受控初值。", descriptionEn: "Controlled value or uncontrolled initial value." },

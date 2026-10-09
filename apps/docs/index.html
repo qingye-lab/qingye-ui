@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Qingye UI</title>
+    <meta name="description" content="青野 UI 是基于 Base UI 与 Tailwind CSS 的 React 组件库，附设计指南。" />
+    <meta property="og:site_name" content="Qingye UI" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Qingye UI" />
+    <meta property="og:description" content="青野 UI 是基于 Base UI 与 Tailwind CSS 的 React 组件库，附设计指南。" />
+    <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script>
       // Apply the stored theme before first paint to avoid a light flash.
@@ -11,6 +17,8 @@
         var t = localStorage.getItem("yq-theme");
         var dark = t === "dark" || ((!t || t === "system") && matchMedia("(prefers-color-scheme: dark)").matches);
         document.documentElement.classList.toggle("dark", dark);
+        // The English routes should not start as zh-CN before the app commits its own lang.
+        if (/^\/en(\/|$)/.test(location.pathname)) document.documentElement.lang = "en-US";
       } catch (e) {}
     </script>
   </head>

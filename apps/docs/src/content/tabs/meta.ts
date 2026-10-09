@@ -16,6 +16,7 @@ export default {
   ],
   "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
   "decisionsEn": "Manual activation and mounted panels are defaults; switching views does not approve or save a draft.",
+  "keywords": ["tab", "tablist", "标签页", "选项卡", "页签"],
   "api": [
     {
       "name": "Tabs / TabsList",

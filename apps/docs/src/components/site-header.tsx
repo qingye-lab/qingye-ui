@@ -20,7 +20,7 @@ const topLinks = [
   { to: PATHS.examples, label: "示例", match: (path: string) => path.startsWith(PATHS.examples) },
 ];
 export function Wordmark({ className }: { className?: string }) {
-  const locale = useDocsLocale(); return <Link aria-label={locale === "en" ? "Qingye UI home" : "Qingye UI 首页"} className={cn("focus-ring inline-flex items-center gap-(--qy-field-gap) rounded-item text-body-strong", className)} to="/"><LogoMark /><span>Qingye <span className="text-muted-foreground">UI</span></span></Link>;
+  const locale = useDocsLocale(); return <Link aria-label={locale === "en" ? "Qingye UI home" : "Qingye UI 首页"} className={cn("focus-ring inline-flex items-center gap-(--qy-field-gap) rounded-item text-body-strong", className)} to="/"><LogoMark /><span>Qingye UI</span></Link>;
 }
 export function SiteHeader() {
   const { pathname } = useLocation(); const locale = useDocsLocale(); const header = useRef<HTMLElement>(null);

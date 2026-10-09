@@ -27,6 +27,7 @@ export default {
   ],
   "decisions": "右键不是唯一入口；应用同时提供可见 Menu，并复用同一组真实命令。",
   "decisionsEn": "Right click is an enhancement; applications also provide a visible Menu using the same real commands.",
+  "keywords": ["right click", "contextmenu", "右键", "右键菜单", "上下文菜单"],
   "api": [
     {
       "name": "ContextMenu / ContextMenuTrigger",

@@ -34,7 +34,7 @@ const steps = {
   caption: "text-caption",
   "caption-strong": "text-caption-strong",
   label: "text-label",
-  metric: "text-metric",
+  metric: "text-metric numeric",
   micro: "text-micro",
   "control-xs": "text-control-xs-mobile sm:text-control-xs",
   "control-xs-mobile": "text-control-xs-mobile",

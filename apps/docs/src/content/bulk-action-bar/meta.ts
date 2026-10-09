@@ -15,6 +15,7 @@ export default {
   ],
   "decisions": "targets 与 scope 必填；执行传递当前对象版本快照，零选择禁止执行。",
   "decisionsEn": "Targets and scope are required; execution receives the current target/version snapshot, and zero selection prevents execution.",
+  "keywords": ["bulk", "batch", "批量", "批量操作", "多选操作", "已选"],
   "api": [
     {
       "name": "BulkActionBar",

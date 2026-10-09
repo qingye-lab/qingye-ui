@@ -77,7 +77,8 @@
 .home-install-tarball { display: grid; gap: var(--qy-field-gap); }
 .home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--qy-field-group-gap); }
 
-.home-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--home-chapter); padding-top: var(--qy-cai); border-top: 1px solid var(--qy-border); }
+/* 结尾不加新话：总纲之后以更大的布白收束，章距再加一倍。 */
+.home-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: calc(2 * var(--home-chapter)); padding-top: var(--qy-cai); border-top: 1px solid var(--qy-border); }
 .home-footer-version { margin-inline-start: var(--qy-field-gap); }
 .home-footer nav { display: flex; gap: var(--qy-panel-gap); }
 

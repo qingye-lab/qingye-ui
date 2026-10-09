@@ -27,6 +27,7 @@ export default {
   ],
   "decisions": "Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用项聚焦，但禁止执行。",
   "decisionsEn": "Menu items execute commands; LinkItem navigates. Disabled items remain discoverable and may receive focus, but cannot execute.",
+  "keywords": ["dropdown", "dropdown menu", "actions menu", "菜单", "下拉", "下拉菜单", "更多操作"],
   "api": [
     {
       "name": "Menu / MenuSubmenu",

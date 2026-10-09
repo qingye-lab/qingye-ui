@@ -11,9 +11,7 @@ export default {
   "exports": [
     "PendingValue"
   ],
-  "keywords": [
-    "pending-value"
-  ],
+  "keywords": ["pending-value", "loading value", "unknown", "placeholder", "待定", "未知", "加载中的值", "占位"],
   "decisions": "不把未知当失败，不默认重试危险写入。", decisionsEn: "Unknown is not failure; never retry a dangerous write by default.",
   "design": {
     "methods": [

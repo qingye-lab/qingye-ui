@@ -5,6 +5,7 @@
  * - 筛选（经营位置）：当前来源的说明由浓墨加深为焦墨，状态只加深已有的墨，不另加形状。
  */
 .ledger-sources { display: grid; justify-items: start; gap: var(--qy-field-group-gap); }
+.ledger-filter { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-gap); }
 .ledger-legend {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

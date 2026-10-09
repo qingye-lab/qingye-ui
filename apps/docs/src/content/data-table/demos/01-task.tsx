@@ -20,7 +20,7 @@ export default function Demo() {
     { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
     { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
   ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
   return <Stack>
     <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
     <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>

@@ -15,8 +15,14 @@ export interface SearchEntry {
   hint?: string;
   group: "文档" | "组件";
   meta: string;
+  /** Shown beneath the title so a match through description or keywords has a visible reason. */
+  description?: string;
   haystack: { strong: string[]; weak: string[] };
 }
+
+/** Both languages index every entry, so a Chinese concept finds it from /en and an English one from /zh. */
+const bothLocales = (entry: Parameters<typeof localizedMeta>[0]) => (["zh", "en"] as const).map((locale) => localizedMeta(entry, locale));
+const unique = (values: (string | undefined)[]) => [...new Set(values.filter((value): value is string => Boolean(value?.trim())))];
 
 export function searchEntries(locale: DocsLocale = "zh"): SearchEntry[] {
   const guides: SearchEntry[] = [...GUIDES, { ...OVERVIEW, keywords: ["components", "全部", "列表", "overview"] }].map((page) => ({
@@ -26,7 +32,8 @@ export function searchEntries(locale: DocsLocale = "zh"): SearchEntry[] {
     title: localizedMeta(page, locale).title,
     group: "文档",
     meta: "指南",
-    haystack: { strong: [localizedMeta(page, locale).title, ...(page.keywords ?? [])], weak: [localizedMeta(page, locale).description] },
+    description: localizedMeta(page, locale).description,
+    haystack: { strong: unique([...bothLocales(page).map((meta) => meta.title), ...(page.keywords ?? [])]), weak: unique(bothLocales(page).map((meta) => meta.description)) },
   }));
   const items: SearchEntry[] = components.map((entry) => {
     const meta = localizedMeta(entry, locale);
@@ -37,7 +44,8 @@ export function searchEntries(locale: DocsLocale = "zh"): SearchEntry[] {
       ...componentLabel(entry, locale),
       group: "组件",
       meta: entry.category,
-      haystack: { strong: [meta.title, entry.slug, entry.slug.replace(/-/g, " "), ...(entry.keywords ?? [])], weak: [meta.description, ...entry.exports] },
+      description: meta.description,
+      haystack: { strong: unique([...bothLocales(entry).map((item) => item.title), entry.slug, entry.slug.replace(/-/g, " "), ...(entry.keywords ?? [])]), weak: unique([...bothLocales(entry).map((item) => item.description), ...entry.exports]) },
     };
   });
   return [...guides, ...items];

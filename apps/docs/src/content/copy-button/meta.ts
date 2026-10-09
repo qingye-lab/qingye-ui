@@ -3,6 +3,7 @@ export default {
   title: "复制按钮 CopyButton", titleEn: "Copy button",
   description: "复制给定文本，并呈现剪贴板实际写入结果。", descriptionEn: "Copy supplied text and reflect the clipboard write result.",
   category: "工具", layer: "primitive", source: "local", exports: ["CopyButton"],
+  keywords: ["copy", "clipboard", "复制", "剪贴板"],
   api: [{ name: "CopyButton", description: "继承 Button 的五档、强调、原生/非原生 render 与 ref。", descriptionEn: "Inherits Button's five profiles, emphasis, native/non-native render, and refs.", props: [
     { name: "value", type: "string", description: "本次复制的真实文本；不从 DOM 或业务对象猜测。", descriptionEn: "The actual text to copy; never inferred from DOM or business objects." },
     { name: "timeout", type: "number", default: "2000", description: "清除成功反馈的毫秒预设，只清反馈，不建立成功。", descriptionEn: "A millisecond preset for clearing success feedback; it clears feedback without establishing success." },

@@ -3,6 +3,7 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "开关 Switch", titleEn: "Switch", description: "立即改变当前设置的开/关状态。", descriptionEn: "Immediately change the on/off state of a current setting.",
   category: "表单", layer: "primitive", source: "local", exports: ["Switch", "SwitchPrimitive"],
+  keywords: ["toggle", "on off", "开关", "切换开关", "启用"],
   api: [{ name: "Switch", description: "保持名称稳定，用 aria-checked 表达开与关。", descriptionEn: "Keep names stable and use aria-checked for on/off.", props: [
     { name: "checked / defaultChecked", type: "boolean", description: "受控设置值或非受控初值。", descriptionEn: "Controlled setting or uncontrolled initial value." },
     { name: "onCheckedChange", type: "(checked, eventDetails) => void", description: "立即设置的变化入口；请求与持久化由应用承担。", descriptionEn: "An immediate setting change; the application owns requests and persistence." },

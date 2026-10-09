@@ -16,9 +16,7 @@ export default {
     "ProgressIndicator",
     "ProgressPrimitive"
   ],
-  "keywords": [
-    "progress"
-  ],
+  "keywords": ["progress", "progress bar", "loading", "percent", "进度条", "加载", "百分比", "完成度"],
   "decisions": "动画和时间不能提供完成事实；0 与 null 不同。", decisionsEn: "Animation and time establish no completion fact. Zero differs from null.",
   "design": {
     "methods": [

@@ -3,7 +3,7 @@ import { Button } from "@qingye_lab/ui/components/button";
 import { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 import { IconAlignCenter, IconAlignLeft, IconAlignRight } from "@tabler/icons-react";
 
-export const meta = { title: "段落对齐" };
+export const meta = { title: "段落对齐", titleEn: "Aligning a paragraph" };
 
 const items = [
   { value: "left", label: "左对齐", detail: "段落靠左边缘排列", icon: IconAlignLeft },

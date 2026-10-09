@@ -2,7 +2,8 @@ import themeCss from "@qingye_lab/ui/theme.css?raw";
 import componentsCss from "@qingye_lab/ui/tokens/components.css?raw";
 import semanticCss from "@qingye_lab/ui/tokens/semantic.css?raw";
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/ui/components/collapsible";
-import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import { useLayoutEffect, useRef, useState } from "react";
 import { H2, PageHeader } from "@/components/prose";
@@ -100,7 +101,9 @@ function useRestValues() {
 
 export default function TokensPage() {
   const en = useDocsLocale() === "en";
-  const [filter, setFilter] = useState<Source | "all">("all");
+  // 空集合就是不筛选；可多选，这样「预设」能和它所指的锚点同屏对照。
+  const [filter, setFilter] = useState<Source[]>([]);
+  const all = filter.length === 0;
   const [host, values] = useMeasured(ROWS);
   const [restProbe, restValues] = useRestValues();
   const unit = (entry: string) => Number.parseFloat(values.get(ROWS.find((row) => row.entry === entry)!)?.text ?? "") || 0;
@@ -112,13 +115,15 @@ export default function TokensPage() {
     <article className="ledger">
       <PageHeader title={en ? "Design tokens" : "设计令牌"} />
       <div className="ledger-sources">
-        <SegmentedControl aria-label={en ? "Source" : "来源"} onValueChange={(value) => setFilter(value as Source | "all")} value={filter}>
-          <SegmentedControlItem value="all">{en ? "All" : "全部"} {ROWS.length}</SegmentedControlItem>
-          {SOURCES.map((source) => <SegmentedControlItem key={source.id} value={source.id}>{en ? source.en : source.zh} {count(source.id)}</SegmentedControlItem>)}
-        </SegmentedControl>
+        <div className="ledger-filter">
+          <ToggleGroup<Source> aria-label={en ? "Source" : "来源"} multiple onValueChange={(value) => setFilter(value)} value={filter}>
+            {SOURCES.map((source) => <ToggleGroupItem key={source.id} value={source.id}>{en ? source.en : source.zh} {count(source.id)}</ToggleGroupItem>)}
+          </ToggleGroup>
+          {all ? null : <Button onClick={() => setFilter([])} variant="quiet">{en ? `Show all ${ROWS.length}` : `显示全部 ${ROWS.length}`}</Button>}
+        </div>
         <dl className="ledger-legend">
           {SOURCES.map((source) => (
-            <div data-current={filter === source.id || undefined} key={source.id}>
+            <div data-current={filter.includes(source.id) || undefined} key={source.id}>
               <dt>{en ? source.en : source.zh}</dt>
               <dd>{en ? source.note.en : source.note.zh}</dd>
             </div>
@@ -128,7 +133,7 @@ export default function TokensPage() {
 
       {SECTIONS.map((section) => {
         const Specimen = SPECIMENS[section.id]!;
-        const rows = section.rows.filter((row) => filter === "all" || row.src.includes(filter));
+        const rows = section.rows.filter((row) => all || row.src.some((id) => filter.includes(id)));
         const headingId = section.id;
         // 筛选时只留有该来源的节，标本让位给台账：此时读者在查值，不在看形。
         if (!rows.length) return null;
@@ -136,7 +141,7 @@ export default function TokensPage() {
           <section className="ledger-section" key={section.id}>
             <H2 id={headingId}>{en ? section.title.en : section.title.zh}</H2>
             <p className="ledger-origin">{en ? section.origin.en : section.origin.zh}</p>
-            {filter === "all" ? <Specimen en={en} /> : null}
+            {all ? <Specimen en={en} /> : null}
             <TableContainer data-density="compact">
               <Table aria-labelledby={headingId} className="ledger-table">
                 <TableHeader><TableRow>{head.map((label) => <TableHead key={label}>{label}</TableHead>)}</TableRow></TableHeader>
@@ -156,7 +161,7 @@ export default function TokensPage() {
         );
       })}
 
-      {filter === "all" ? <section className="ledger-section">
+      {all ? <section className="ledger-section">
         <H2 id="others">{en ? "Other entries" : "其余入口"}</H2>
         <Collapsible>
           <CollapsibleTrigger>{en ? `${REST.length} entries` : `${REST.length} 个入口`}</CollapsibleTrigger>

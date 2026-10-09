@@ -3,6 +3,7 @@ export default {
   title: "虚拟列表 VirtualList", titleEn: "Virtual list",
   description: "以稳定项身份呈现等高长集合的可达窗口。", descriptionEn: "An accessible window over a fixed-height collection with stable item identity.",
   category: "工具", layer: "primitive", source: "local", exports: ["VirtualList"],
+  keywords: ["virtualized", "windowing", "long list", "虚拟列表", "长列表", "虚拟滚动"],
   api: [{ name: "VirtualList<Item>", description: "集合渲染边界，真实 list/listitem，不提供选择或业务列。", descriptionEn: "Collection rendering boundary with actual list/listitem semantics, without selection or business columns.", props: [
     { name: "items / getKey / renderItem", type: "readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode", description: "真实集合、稳定唯一 key 与内容；重复 key 显式报错。不得用不稳定位置冒充项身份。", descriptionEn: "Actual collection, stable unique keys, and content; duplicate keys throw. Unstable positions cannot impersonate identity." },
     { name: "itemSize / height", type: "number", description: "调用方提供等高项外高与视口高，CSS px；有限正数，0/无穷等显式报错。总高/偏移/窗口从关系计算。", descriptionEn: "Caller-supplied equal outer item height and viewport height in CSS px. Finite positive values; zero/infinity throw. Total height, offsets, and window derive from these relationships." },

@@ -35,6 +35,11 @@
  * 示例台：与组件页示例面同一排布（居中、可换行、四分间隔），示例按自身尺寸出现。
  * 高度随示例，下限 10 材；上限 18 材（预设：约半屏，保证一屏能比较两行条目）。
  * 超出上限的示例贴顶显示，裁去下方（safe 对齐），不缩放。
+ *
+ * 台面是一张纸（纸本色 + 清墨容器线，与 Card 同一画法）。此前用内嵌面（一层半透明墨叠在
+ * 已经带墨的页面上），页面、台面、控件三级只差 1.09–1.19:1，浅色下读成一块凹进去的脏灰；
+ * 且控件的重墨线（50%）没有可对照的容器线，层级全压在这一条线上。纸 + 清墨线让
+ * 容器线（8%）与控件线（50%）各占一级。悬停只加一级清染，不改线。
  */
 .components-specimen {
   isolation: isolate;
@@ -49,11 +54,12 @@
   margin-block-end: var(--qy-field-gap);
   padding: var(--qy-panel-padding);
   overflow: hidden;
+  border: 1px solid var(--qy-border);
   border-radius: var(--qy-radius-panel);
-  background: var(--qy-surface-inset);
+  background: var(--qy-surface);
   transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
 }
-.components-entry:hover .components-specimen { background: var(--qy-surface-hover); }
+.components-entry:hover .components-specimen { background: var(--qy-surface-inset); }
 .components-entry-link {
   display: flex;
   flex-wrap: wrap;
@@ -119,7 +125,7 @@
 
 .component-demo + .component-demo { margin-block-start: var(--qy-section-gap); }
 .component-demo-description {
-  max-inline-size: 42rem;
+  max-inline-size: var(--docs-measure);
   margin: 0 0 var(--qy-space-3);
   font-size: var(--qy-text-body-size);
   line-height: var(--qy-text-body-leading);
@@ -162,6 +168,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: calc(2 * var(--qy-cai));
+  /* 预设：两栏各约 23rem，窄于一栏正文的行长，对照项读起来仍是短句。 */
   max-inline-size: 48rem;
   margin-block: var(--qy-space-4);
 }
@@ -179,4 +186,10 @@
   color: var(--qy-foreground);
   overflow-wrap: break-word;
   text-wrap: pretty;
+}
+
+/* 标本在滚动到近处才挂载：与全站反馈同拍淡入，而不是一帧弹出。 */
+@keyframes components-specimen-settle { from { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .components-specimen > * { animation: components-specimen-settle var(--qy-duration-fast) var(--qy-ease-out) backwards; }
 }

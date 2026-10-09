@@ -13,9 +13,7 @@ export default {
     "AlertTitle",
     "AlertDescription"
   ],
-  "keywords": [
-    "alert"
-  ],
+  "keywords": ["alert", "notice", "callout", "banner", "提示", "警告", "横幅", "说明"],
   "decisions": "不要为每段静态说明自动添加 assertive 宣告。", decisionsEn: "Static explanations should not automatically make assertive announcements.",
   "design": {
     "methods": [

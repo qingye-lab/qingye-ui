@@ -5,6 +5,7 @@ export default {
   description: "从同时可见的少量候选中取一个值。", descriptionEn: "Choose one value from a small set of visible options.",
   category: "表单", layer: "primitive", source: "local",
   exports: ["RadioGroup", "Radio", "RadioGroupPrimitive", "RadioPrimitive"],
+  keywords: ["radio", "radios", "单选", "单选框", "互斥选择"],
   api: [
     { name: "RadioGroup", description: "可见互斥候选的共同状态与组语义。", descriptionEn: "Shared state and group semantics for visible mutually exclusive candidates.", props: [
       { name: "value / defaultValue", type: "Value", description: "受控值或真实初始选择。省略初值保持未选择；受控可用 null。", descriptionEn: "Controlled value or actual initial selection. Omitting the initial value retains no selection; controlled null is allowed." },

@@ -11,9 +11,7 @@ export default {
   "exports": [
     "Badge"
   ],
-  "keywords": [
-    "badge"
-  ],
+  "keywords": ["badge", "tag", "label", "count", "徽标", "标签", "角标", "计数"],
   "decisions": "状态事实使用 StatusDot，不让标记宣布成功。", decisionsEn: "Use StatusDot for actual states; a badge cannot establish success.",
   "design": {
     "methods": [

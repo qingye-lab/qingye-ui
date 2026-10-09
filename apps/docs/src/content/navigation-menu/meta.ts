@@ -24,6 +24,7 @@ export default {
   ],
   "decisions": "active 是应用提供的页面事实，库不读 URL 或把命令推断成导航。",
   "decisionsEn": "Active is an application-owned page fact; the library never infers it from URLs or turns commands into navigation.",
+  "keywords": ["navbar", "nav", "header menu", "导航菜单", "导航栏", "顶栏"],
   "api": [
     {
       "name": "NavigationMenu / NavigationMenuList / NavigationMenuItem",
