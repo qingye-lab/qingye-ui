@@ -238,6 +238,18 @@
 }
 :is([data-slot="accordion-panel"], [data-slot="collapsible-panel"], [data-slot="sidebar-sub-content"]):is([data-starting-style], [data-ending-style]) { opacity: 0; }
 
+/* Skeleton placeholders breathe while content is on its way. Opacity only, so the
+ * shapes never move; reduced motion keeps them still (the named status still says
+ * "loading"). Period is four slow steps: a preset. */
+@keyframes qy-skeleton-pulse {
+  50% { opacity: 0.5; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :is([data-slot="skeleton-line"], [data-slot="skeleton-block"]) {
+    animation: qy-skeleton-pulse calc(4 * var(--qy-duration-slow)) ease-in-out infinite;
+  }
+}
+
 /* The check mark settles in rather than appearing. */
 [data-slot="checkbox-indicator"] {
   transition:

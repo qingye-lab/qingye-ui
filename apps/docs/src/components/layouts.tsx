@@ -1,6 +1,5 @@
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
-import { useUILocale } from "@qingye_lab/ui/locale";
-import { IconLoader2 } from "@tabler/icons-react";
+import { Skeleton, SkeletonBlock, SkeletonLine } from "@qingye_lab/ui/components/skeleton";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";
@@ -32,16 +31,20 @@ function SkipLink() {
 }
 
 /**
- * While a route chunk loads for the first time. A load that finishes quickly shows nothing at all
- * (the reveal waits 400ms, see `.route-fallback`); a slow one gets the same spinning mark a Button
- * shows for work in progress, named for assistive technology.
+ * While a route chunk loads for the first time: the outline every page shares (a title, a few
+ * lines, a block). A load that finishes quickly shows nothing at all, because the reveal waits
+ * one base step (see `.route-fallback`); a slow one shows the outline instead of a blank page.
  */
 function RouteFallback() {
-  const { messages } = useUILocale();
-  return <div aria-busy="true" className="route-fallback site-frame min-h-[60dvh] pt-(--qy-section-gap)" role="status">
-    <IconLoader2 aria-hidden="true" className="size-(--qy-control-md-icon) animate-spin text-muted-foreground" />
-    <span className="sr-only">{messages.loading}</span>
-  </div>;
+  return <Skeleton className="route-fallback site-frame min-h-[60dvh] gap-(--qy-field-group-gap) pt-(--qy-section-gap)">
+    <SkeletonBlock className="h-[calc(2*var(--qy-cai))] w-1/3 rounded-item" />
+    <div className="flex max-w-(--docs-measure) flex-col gap-(--qy-field-gap)">
+      <SkeletonLine />
+      <SkeletonLine />
+      <SkeletonLine className="w-2/3" />
+    </div>
+    <SkeletonBlock className="h-[calc(8*var(--qy-cai))]" />
+  </Skeleton>;
 }
 
 export function SiteShell() {

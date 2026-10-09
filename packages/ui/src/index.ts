@@ -71,6 +71,7 @@ export * from "./components/segmented-control";
 export * from "./components/select";
 export * from "./components/separator";
 export * from "./components/sidebar";
+export * from "./components/skeleton";
 export * from "./components/slider";
 export * from "./components/sparkline";
 export * from "./components/stat";

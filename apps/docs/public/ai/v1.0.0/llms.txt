@@ -76,6 +76,7 @@
 - [选择器 Select](components/select.md): 从可收起的候选列表中取一个值。
 - [分隔线 Separator](components/separator.md): 在已有内容组之间表达分界，可选择语义分隔或装饰线。
 - [侧栏导航 Sidebar](components/sidebar.md): 长期导航、收起为图标 rail 与二级子级。
+- [骨架屏 Skeleton](components/skeleton.md): 内容到达之前，先摆出它将占的位置与行数。
 - [滑块 Slider](components/slider.md): 在明确区间内输入数值或有序范围。
 - [行内趋势 Sparkline](components/sparkline.md): 坐在文字行里的小型折线，说明一个读数最近怎样变化。
 - [度量 Stat](components/stat.md): 数值、单位与说明分别提供。

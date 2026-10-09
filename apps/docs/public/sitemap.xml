@@ -791,6 +791,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/sidebar"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/skeleton</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/skeleton"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/skeleton"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/skeleton</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/skeleton"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/skeleton"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/slider</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/slider"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/slider"/>

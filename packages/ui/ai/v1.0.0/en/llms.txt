@@ -76,6 +76,7 @@
 - [Select](components/select.md): Choose one value from a collapsible set of options.
 - [Separator](components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.
 - [Sidebar](components/sidebar.md): Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
+- [Skeleton](components/skeleton.md): Hold the place and row count content will take until it arrives.
 - [Slider](components/slider.md): Enter a number or an ordered range within explicit bounds.
 - [Sparkline](components/sparkline.md): A small line set in a line of text, showing how a reading has recently changed.
 - [Stat](components/stat.md): Values, units and explanations supplied independently.

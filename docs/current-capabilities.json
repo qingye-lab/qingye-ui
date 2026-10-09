@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-09T05:45:36.742Z",
-  "revision": "099654ef57ce063dc0c24c0fcfa8749f7e8672ce",
+  "generatedAt": "2026-10-09T06:28:40.834Z",
+  "revision": "93f0eb6fa0ae909f162d3e6ab20edcefe565c97d",
   "fingerprint": {
-    "sha256": "aa0f9d7df903aff8ec2edb3efdfccb13499e184eeb470df930703b5cad2dddb2",
+    "sha256": "bb1c1e6f303a7041dd53e58bb716783dbea6f221c38151f132b6c4a770285a7c",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -275,6 +275,10 @@
         "sha256": "dc96d200355b26c3391f4eaf043d9e7e809b51d20a1aac4e067c098d11b8abc7"
       },
       {
+        "path": "apps/docs/src/content/skeleton/meta.ts",
+        "sha256": "4988eafe9b1e2f75bbc68898fbe72cc4b9adad59107cc2ce76e9b1fb2e8092e8"
+      },
+      {
         "path": "apps/docs/src/content/slider/meta.ts",
         "sha256": "1798d2db89b3beca6e1e78da70c79442b5fa79393e35f8652c7f1900d6afed46"
       },
@@ -372,11 +376,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "ca74c89f510dc33b269f69f4d810a2d520441ec64b4a786a967a40fd99f240e4"
+        "sha256": "848ab539e4c0a03cf85e3b8cf66b826274001f5684778f8c45dba295c36dcf52"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "276c7a65c4ca887c544bf86020be9f01ffb1fc1d5f9c27ea2d4146e61bc020d6"
+        "sha256": "33a2356550dc75667334195282eb309981959daa99f7446f9b2b5ffa696eb79e"
       },
       {
         "path": "packages/ui/package.json",
@@ -647,6 +651,10 @@
         "sha256": "05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467"
       },
       {
+        "path": "packages/ui/src/components/skeleton.tsx",
+        "sha256": "2c13fbc07ca9839309d4b1c436ed9c298a79d33d3a8508cda814ab0ef225d482"
+      },
+      {
         "path": "packages/ui/src/components/slider.tsx",
         "sha256": "d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787"
       },
@@ -732,7 +740,7 @@
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "aad18759eda8fa4b820effa564e3f802494e7185bb7b9fa7143b9801790cefc7"
+        "sha256": "86b974df22683a42ca58d6050e9a10d59109f17e8848e4f2bc8a69b6a2f70870"
       },
       {
         "path": "packages/ui/styles.css",
@@ -847,10 +855,10 @@
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 87,
-    "catalog": 87,
+    "components": 88,
+    "catalog": 88,
     "dist": 87,
-    "local": 87
+    "local": 88
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -20003,6 +20011,260 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "skeleton",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/skeleton.tsx",
+      "exports": [
+        {
+          "name": "Skeleton",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 20
+          }
+        },
+        {
+          "name": "SkeletonBlock",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 37
+          }
+        },
+        {
+          "name": "SkeletonBlockProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 9
+          }
+        },
+        {
+          "name": "SkeletonLine",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 30
+          }
+        },
+        {
+          "name": "SkeletonLineProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 8
+          }
+        },
+        {
+          "name": "SkeletonProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 7
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/skeleton/meta.ts",
+        "title": "骨架屏 Skeleton",
+        "titleEn": "Skeleton",
+        "description": "内容到达之前，先摆出它将占的位置与行数。",
+        "descriptionEn": "Hold the place and row count content will take until it arrives.",
+        "category": "反馈",
+        "layer": "primitive",
+        "source": "local",
+        "exports": [
+          "Skeleton",
+          "SkeletonLine",
+          "SkeletonBlock"
+        ],
+        "keywords": [
+          "skeleton",
+          "loading",
+          "placeholder",
+          "shimmer",
+          "骨架",
+          "加载",
+          "占位",
+          "加载中"
+        ],
+        "decisions": "骨架只表达「正在加载」，不表达进度，也不替应用决定何时结束；到达、失败或为空时换成真内容或 Empty，不让占位一直留着。",
+        "decisionsEn": "A skeleton says only that content is loading; it carries no progress and does not decide when loading ends. On arrival, failure or an empty result it is replaced by the real content or Empty, never left in place.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "布白有用",
+            "进退相承"
+          ],
+          "whenToUse": [
+            "首次加载的内容区域，形状已知、几行几块可预期。"
+          ],
+          "avoid": [
+            "刷新时保留已有内容，不退回骨架。",
+            "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
+            "不确定形状或时间极短的等待，用按钮的 in-progress。"
+          ],
+          "composition": [
+            "Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。"
+          ],
+          "stateOwner": {
+            "library": [
+              "一句名称（跟随语言）、形状对辅助技术隐藏、脉动与减动。"
+            ],
+            "application": [
+              "何时开始与结束、内容的真实形状、失败与为空的处置。"
+            ]
+          },
+          "responsive": [
+            "宽度由所在容器决定，行宽用 className 表达；行高固定为一材。"
+          ],
+          "customization": [
+            "className 调整行宽与块高；label 写明对象，如「正在加载成员」。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "The first load of a region whose shape is known: how many rows and blocks to expect."
+          ],
+          "avoid": [
+            "Refreshing keeps existing content and does not fall back to a skeleton.",
+            "A failed or empty result uses Empty; a placeholder never stands in for content.",
+            "A wait of unknown shape or very short duration uses a Button's in-progress."
+          ],
+          "composition": [
+            "Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump."
+          ],
+          "stateOwner": {
+            "library": [
+              "One localized name, shapes hidden from assistive technology, the pulse and its reduced-motion form."
+            ],
+            "application": [
+              "When loading starts and ends, the real shape of the content, and how failure and emptiness are handled."
+            ]
+          },
+          "responsive": [
+            "Width follows the container; express row width with className. Row height is one module."
+          ],
+          "customization": [
+            "className adjusts row width and block height; label names the object, e.g. “Loading members”."
+          ]
+        },
+        "api": [
+          {
+            "name": "Skeleton",
+            "description": "外层 status，内含一句名称；形状放在其中。",
+            "descriptionEn": "The outer status, holding one name; shapes sit inside.",
+            "props": [
+              {
+                "name": "label",
+                "type": "string",
+                "description": "替代默认的「正在加载」，写明对象。",
+                "descriptionEn": "Replaces the default “Loading”, naming the object."
+              },
+              {
+                "name": "render / ref / 原生属性",
+                "nameEn": "render / ref / native props",
+                "type": "current public component props",
+                "description": "属性、事件与 ref 透传实际元素；样式由 className/style 调整。",
+                "descriptionEn": "Forward attributes, events and refs to the actual element; adjust presentation through className/style."
+              }
+            ]
+          },
+          {
+            "name": "SkeletonLine",
+            "description": "一行文字的位置，占一材；宽度由 className 给出。",
+            "descriptionEn": "The place of one text line, one module high; width comes from className.",
+            "props": [
+              {
+                "name": "className",
+                "type": "string",
+                "default": "w-full",
+                "description": "行宽，例如 w-2/3。",
+                "descriptionEn": "Row width, e.g. w-2/3."
+              }
+            ]
+          },
+          {
+            "name": "SkeletonBlock",
+            "description": "整块内容（图、图表、表格）的位置；高度由 className 给出。",
+            "descriptionEn": "The place of a whole block (image, chart, table); height comes from className.",
+            "props": [
+              {
+                "name": "className",
+                "type": "string",
+                "default": "h-[5 材]",
+                "description": "块高，例如 h-40。",
+                "descriptionEn": "Block height, e.g. h-40."
+              }
+            ]
+          }
+        ],
+        "usageResolution": [
+          {
+            "name": "Skeleton",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 20
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 20
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "SkeletonLine",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 30
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 30
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "SkeletonBlock",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 37
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 37
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/skeleton/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "1.0.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",
