@@ -46,7 +46,7 @@ function CollectionsDataTable() {
     { accessorKey: "records", meta: { numeric: true }, header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: true, cell: ({ row }) => <span className="numeric">{row.original.records.toLocaleString("zh-CN")}</span> },
     { accessorKey: "state", header: "状态", enableSorting: false, cell: ({ row }) => <StateBadge state={row.original.state} /> },
   ], []);
-  const table = useReactTable({ data: COLLECTIONS.slice(0, 6) as Collection[], columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });
+  const table = useReactTable({ data: COLLECTIONS.slice(0, 6) as Collection[], columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
   const selected = table.getSelectedRowModel().rows.map(row => row.original.name);
   return <Stack gap="field">
     <DataTable table={table} caption="本地集合" emptyContent="没有集合" />
@@ -313,7 +313,7 @@ export default function DataPage() {
     <Separator />
 
     <Section title="内容">
-      <Row label="代码" block lead="control-sm">
+      <Row label="代码" block>
         <CodeBlock language="TypeScript" code={'import { Button } from "@qingye_lab/ui/components/button";\n\nexport function Save() {\n  return <Button>保存</Button>;\n}\n'} />
       </Row>
     </Section>

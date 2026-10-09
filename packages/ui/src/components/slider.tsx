@@ -68,13 +68,13 @@ export function SliderControl({ className, ...props }: SliderControlProps) {
 
 export function SliderTrack({ className, ...props }: SliderTrackProps) {
   return <SliderPrimitive.Track data-slot="slider-track" {...props}
-    className={(state) => cn("relative rounded-marker bg-(--qy-groove-surface)", state.orientation === "vertical" ? "h-full w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size) w-full", typeof className === "function" ? className(state) : className)}
+    className={(state) => cn("relative rounded-(--qy-radius-slider-track) bg-(--qy-groove-surface)", state.orientation === "vertical" ? "h-full w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size) w-full", typeof className === "function" ? className(state) : className)}
   />;
 }
 
 export function SliderIndicator({ className, ...props }: SliderIndicatorProps) {
   return <SliderPrimitive.Indicator data-slot="slider-indicator" {...props}
-    className={(state) => cn("absolute rounded-marker bg-primary", state.orientation === "vertical" ? "w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size)", typeof className === "function" ? className(state) : className)}
+    className={(state) => cn("absolute rounded-(--qy-radius-slider-track) bg-primary", state.orientation === "vertical" ? "w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size)", typeof className === "function" ? className(state) : className)}
   />;
 }
 

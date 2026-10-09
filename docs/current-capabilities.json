@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-09T02:19:50.789Z",
-  "revision": "828e8d307f2d454eeadd867ae1281eee99115575",
+  "generatedAt": "2026-10-09T05:45:36.742Z",
+  "revision": "099654ef57ce063dc0c24c0fcfa8749f7e8672ce",
   "fingerprint": {
-    "sha256": "338c19d6f6ed4c5b7d85a059cde60e2c519f2b0eb934ead924bedde433b0929b",
+    "sha256": "aa0f9d7df903aff8ec2edb3efdfccb13499e184eeb470df930703b5cad2dddb2",
     "inputs": [
       {
         "path": "apps/docs/package.json",
-        "sha256": "dd1462b101cf05c75581d129c2e7b98dd15980e99afa92356209e8ff2b39a8e5"
+        "sha256": "4b6c17a9494562a0073b46df3a5ea2550a8d2bfaa208505119cbaf740521a7ea"
       },
       {
         "path": "apps/docs/src/content/accordion/meta.ts",
@@ -16,11 +16,11 @@
       },
       {
         "path": "apps/docs/src/content/alert-dialog/meta.ts",
-        "sha256": "0fcdc8d69c18b243ea2b07ff62776ac25c308e64d79d9dcdd00e81d1b5c722ef"
+        "sha256": "2420b23b10de8abe7a2f2c15357623c08074f7113e15b1cb7222f15ecaa5e1b5"
       },
       {
         "path": "apps/docs/src/content/alert/meta.ts",
-        "sha256": "aa3150ba11b82d652d33ab6558c07a8cd667b64d9614b94cc417c0e361490539"
+        "sha256": "80a78dd5a1deb9db8109e6e20687678ba8cc8423e354cb117a5cda763e74a3d3"
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
@@ -28,19 +28,19 @@
       },
       {
         "path": "apps/docs/src/content/avatar/meta.ts",
-        "sha256": "7cb38cda23bf9633fe8761b439dd491d1a8f77cc01406f8ec05941a7fad0480b"
+        "sha256": "2245faee13c1697897f27703165f705a47af66e5a7e54b35313ea897f651fbac"
       },
       {
         "path": "apps/docs/src/content/badge/meta.ts",
-        "sha256": "9ce374e86fa5025fe2b591a9cf241f9f321bcb95a59209aa95a9ceab8a907b48"
+        "sha256": "a60bab3f86fe7cd48fc2e00769bbd295f7ad9816bde66b6d4e812e75a423b02d"
       },
       {
         "path": "apps/docs/src/content/breadcrumb/meta.ts",
-        "sha256": "a8247326030e3f61acd3c630166f91df65de5eca77b3db2ea2d42c97fdcaa5c5"
+        "sha256": "63bb960e44b9fe00f54c529b0d5abaa7d868df541119686d6cdbd1c02091c367"
       },
       {
         "path": "apps/docs/src/content/bulk-action-bar/meta.ts",
-        "sha256": "2d9dcb4183883b5aceab36ea57c577355c5fc5228be8318453da436be33ca77a"
+        "sha256": "0db75751db2fb31b18524a8a392e5186bbc0cf70498f1be82e052ff5b8ddb1c9"
       },
       {
         "path": "apps/docs/src/content/button-group/meta.ts",
@@ -64,15 +64,15 @@
       },
       {
         "path": "apps/docs/src/content/checkbox-group/meta.ts",
-        "sha256": "186a1ab052834c01c049eedf97676494e6598fcacc10f83bbc75f46de87a60cc"
+        "sha256": "05596eb3d309ff8c643df9d13cfe13218395fba2ec7f2ee98bacb035a4c10b65"
       },
       {
         "path": "apps/docs/src/content/checkbox/meta.ts",
-        "sha256": "435952104c6392fa4621e7c43a1a684dba36d5cfbab5fe5e19c63b0a83fd82ce"
+        "sha256": "0a9c9b4b5f167b7a0e590a373bcd162d8c7240a57b38de02bd8aa484f955c446"
       },
       {
         "path": "apps/docs/src/content/code-block/meta.ts",
-        "sha256": "d2c4eaf84c33c3ebc11d1962d2216c91523bfa7475e6e45a572d4d286b2c4469"
+        "sha256": "27a999cea7335cad083a109f2949a63819b127ded05692649ea1deb175993587"
       },
       {
         "path": "apps/docs/src/content/collapsible/meta.ts",
@@ -88,11 +88,11 @@
       },
       {
         "path": "apps/docs/src/content/context-menu/meta.ts",
-        "sha256": "66e9ee65fde5bac2690a847031ff65b1082f3705434b2e4e75953a2c95c23952"
+        "sha256": "9b3054b15e1f7911d0fef55ca58e726b47f235fde834b6f94e537be704566974"
       },
       {
         "path": "apps/docs/src/content/copy-button/meta.ts",
-        "sha256": "283fdf6ac1a2c44528f8d214f1c0201c20e1e81e9db0dc15ed069a014645f1b3"
+        "sha256": "f15646a72621d1905ab264969f8d3e0123a428090da807f3a6433ed8d24d4e63"
       },
       {
         "path": "apps/docs/src/content/corner-mark/meta.ts",
@@ -100,7 +100,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "767065c3d4cc584361df9d984e0f08bc6d800d19fd219eff7fbd2a5ded0335b0"
+        "sha256": "c99393079de883a3177bbc1eab38565ef68af91c5161162cf8a0eaed69bc72dc"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -116,11 +116,11 @@
       },
       {
         "path": "apps/docs/src/content/description-list/meta.ts",
-        "sha256": "6565ab6ec5e8e2e7755f83be49ff9fb6a9904ae889538e24075c91eab80f5099"
+        "sha256": "01f87c9f19cb4f7c3b00425f2091b33c19f517ed9a2f61c44c9d60840b0a3174"
       },
       {
         "path": "apps/docs/src/content/dialog/meta.ts",
-        "sha256": "1efef902c9bcafba7f6f1c99c9b0ac362fa99ac9963363c7a9b7238b9ff75041"
+        "sha256": "bb6fce9f623531c0c20be08d6e9f9ef39a1ee92972516c1d44b7aad85364044e"
       },
       {
         "path": "apps/docs/src/content/drawer/meta.ts",
@@ -128,7 +128,7 @@
       },
       {
         "path": "apps/docs/src/content/empty/meta.ts",
-        "sha256": "c6fa63a9c568f945ee115534778a194985100531c2662d7c1dcf9261a1a9a8e3"
+        "sha256": "cd240eb951fac78370295b57f199842e1352f9a5acd3bf0d0ae287783f1590e4"
       },
       {
         "path": "apps/docs/src/content/field/meta.ts",
@@ -144,7 +144,7 @@
       },
       {
         "path": "apps/docs/src/content/filter-bar/meta.ts",
-        "sha256": "4bc46179718a23b3cc6f997c74ea430b74b18746eb2a08fc461e2fa2bd683690"
+        "sha256": "e33f2906af94a727814fcfaa4b0136ab6cf295848006291698216c52dd731e54"
       },
       {
         "path": "apps/docs/src/content/form/meta.ts",
@@ -168,11 +168,11 @@
       },
       {
         "path": "apps/docs/src/content/item/meta.ts",
-        "sha256": "7b5d4a7c0569ad6c3390eb2ed26fbc58467f5be182a2c38d869a1aca3b0f28b1"
+        "sha256": "6dfc301fd5f4206ec3af8bf36c833081e9601527a8d02ec318b1d518f9786a02"
       },
       {
         "path": "apps/docs/src/content/kbd/meta.ts",
-        "sha256": "25d17c158238afcb5c06fbde78b2e917e59f4d51626283c292fc3292693abea3"
+        "sha256": "83acb842d684e9b3e69b234aeb69609fd471d889dd4925db58291e7bff9b54ae"
       },
       {
         "path": "apps/docs/src/content/label/meta.ts",
@@ -188,15 +188,15 @@
       },
       {
         "path": "apps/docs/src/content/locale-switch/meta.ts",
-        "sha256": "70e0af4d78cd652c7a2d20defb9ae6edec0fd9c4b49db20e4aa85ed474c3ae10"
+        "sha256": "26f64586b957458a1ae1b3d3d2ec8487b662b7e6e0503f6a3b5ea5752f785abc"
       },
       {
         "path": "apps/docs/src/content/menu/meta.ts",
-        "sha256": "0cf2b740565ec325746a98d43bcf0e6e4ecae420ff76c7fa1a9046ce9be731fe"
+        "sha256": "fe74baeb1c3cebfb2a92e9423db74aa80f35f34d3fcc201f2583d49c9e968907"
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
-        "sha256": "741a1b4842d82df45f2a4d2bc6c479755842ce7db87f4f950c7a2819f097b22c"
+        "sha256": "ae5b051693b0ffd845e1670ba42356ae094fdc301dd0fde94906b8c754812c19"
       },
       {
         "path": "apps/docs/src/content/motion-provider/meta.ts",
@@ -208,7 +208,7 @@
       },
       {
         "path": "apps/docs/src/content/navigation-menu/meta.ts",
-        "sha256": "28c5e3187fa0d671ea5acc551a977abdecd6a72741ba7c6ebe31b6268a22dc83"
+        "sha256": "fac66a489781447cc5d459a902d56a0f22ad2d67862d4cee6d9825b1750faa6a"
       },
       {
         "path": "apps/docs/src/content/number-field/meta.ts",
@@ -220,15 +220,15 @@
       },
       {
         "path": "apps/docs/src/content/page-header/meta.ts",
-        "sha256": "5f5df617db37ef303635ba9be83a0315e565e02c9096a6ae7fb6ccb27593176b"
+        "sha256": "59a7deaed74a177546b764793dbbfc8a2280a76fb0a2e4aaf1543163c99a469c"
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "b2b53630ea4fb42387d8b98fe27a3212c54a4a635c7f1819cea5982da79352e5"
+        "sha256": "d0aa91be7b3525d7dcc6be6a00491395208636e5894a35e2b25f50ae27cc4bae"
       },
       {
         "path": "apps/docs/src/content/pending-value/meta.ts",
-        "sha256": "f0942e7e7597e23deddeea0b4626aa2774ac8451aa3cbec93792a07dce09c2d8"
+        "sha256": "8e34c44afc366e78effbf411a942058afce986ccaf4c159044bd00fc584f27ad"
       },
       {
         "path": "apps/docs/src/content/popover/meta.ts",
@@ -236,7 +236,7 @@
       },
       {
         "path": "apps/docs/src/content/progress/meta.ts",
-        "sha256": "732de31a4f86a2edd8142a20de850b91b0ce26d01f85277aa3c499486e80b1d2"
+        "sha256": "316205c4bb82daf2b654a81bfa3e7b6a8ebff4a2e807d897f976172441c77ed2"
       },
       {
         "path": "apps/docs/src/content/proportion/meta.ts",
@@ -248,7 +248,7 @@
       },
       {
         "path": "apps/docs/src/content/radio-group/meta.ts",
-        "sha256": "5f61a43751719bf965a74e52a1ddce4cd502bae4ddeb1f964045a2bdd25ccc37"
+        "sha256": "a2756f11c1e73ce2bd751ae7f46f668445922e008ef60b165d06559d6982e544"
       },
       {
         "path": "apps/docs/src/content/scatter-chart/meta.ts",
@@ -256,15 +256,15 @@
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
-        "sha256": "3ce33422daf842f3c4e95f4c57a33447bac2d17cbbfe7c15a9ef6a4e25326e40"
+        "sha256": "6f6f7b197a7288167a685eb6d1f0b1831979019a281f8908b79725d495ceac17"
       },
       {
         "path": "apps/docs/src/content/segmented-control/meta.ts",
-        "sha256": "02c0eaa5e02ae59576d04f3ee36ee75f2e7ba13cf4d94ae07aaa3ae679fcb646"
+        "sha256": "878e7d9cce3a9a91a63ec300a2c0257265a13dbe99e7343fefbf19b285e47aa0"
       },
       {
         "path": "apps/docs/src/content/select/meta.ts",
-        "sha256": "914291b21e90444804a694b945bf616cabffed84d68200808c65de94950d35cd"
+        "sha256": "e45ade90cf5559467e584561cdece37b4ecca2def8594f8bbbb0adb16aafea03"
       },
       {
         "path": "apps/docs/src/content/separator/meta.ts",
@@ -272,11 +272,11 @@
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
-        "sha256": "71c312ca32a7e907bdd0f0a5054a85450c7b15cde4d8a7e611016a201e66f4ce"
+        "sha256": "dc96d200355b26c3391f4eaf043d9e7e809b51d20a1aac4e067c098d11b8abc7"
       },
       {
         "path": "apps/docs/src/content/slider/meta.ts",
-        "sha256": "b74ac1565f65bd94347c7a55239f3acdc98a40aaf65fb6614dddcbeee89956d1"
+        "sha256": "1798d2db89b3beca6e1e78da70c79442b5fa79393e35f8652c7f1900d6afed46"
       },
       {
         "path": "apps/docs/src/content/sparkline/meta.ts",
@@ -284,27 +284,27 @@
       },
       {
         "path": "apps/docs/src/content/stat/meta.ts",
-        "sha256": "76b8cffad51c5a8a0713f1a3372145b41db691233723bfc9a52b47da1520ecfc"
+        "sha256": "b9eaadbb0744959e2da39529f5ab00070e7e169441f31c7dd6e201a95768f2bf"
       },
       {
         "path": "apps/docs/src/content/status-dot/meta.ts",
-        "sha256": "a193be02ee24eb04d287857ca3df366ca000102ccd3902ae11859911db3284e4"
+        "sha256": "516185c7a654bc97a7063314a00ed32a2336461e8de1349051438057277641ad"
       },
       {
         "path": "apps/docs/src/content/steps/meta.ts",
-        "sha256": "4a703131475d2287e4cc77215830ea4a0030f6b0bdc83ec3850e667da586bc3d"
+        "sha256": "4a7138b1f60edd2620f6307ba6d9b369f5a6804cb02d8f8fcae5b09448319ea6"
       },
       {
         "path": "apps/docs/src/content/switch/meta.ts",
-        "sha256": "25fa13353bccc381ee483bf975422f9bd4c29c9289776f64d0b736444139c88a"
+        "sha256": "27cadff2be5bb000f3687ff3be0b1a1846edfb93cccbf5f05b515e2511bbaa5c"
       },
       {
         "path": "apps/docs/src/content/table/meta.ts",
-        "sha256": "c3c81ccad7dd2ccd5fdfc4c5635724d886a3b4204544ee92fc167a222a18bc4a"
+        "sha256": "646ee9847f1e7152738010d0e49d40b30a75348f57d3fcc9878ad33ff9152f4f"
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "c34e5019dfc3e39721184ab2c4bf513f53261c0ae5d4cb072c857ad1edf94703"
+        "sha256": "cce473a8f5c9e9f7be7651208ffea662ac9320ec47d26c7ec3f09a424e9aff27"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
@@ -312,7 +312,7 @@
       },
       {
         "path": "apps/docs/src/content/textarea/meta.ts",
-        "sha256": "574fa03f1a27881312173b68568301e7317e1f72ca9028555aaa257c9c7e379d"
+        "sha256": "f9a7bae292db93d36ead359abb567c82562163587ed3862eea2e24601a2dfffa"
       },
       {
         "path": "apps/docs/src/content/theme-provider/meta.ts",
@@ -320,7 +320,7 @@
       },
       {
         "path": "apps/docs/src/content/timeline/meta.ts",
-        "sha256": "15957a4bcb5b9f3ca253d862d8076613693870b89cd42ccc5c6be05ec115a21d"
+        "sha256": "190fbb716606cfcdf67b69a6637c819300e28e3d0a43003b8775c822fc27d4e4"
       },
       {
         "path": "apps/docs/src/content/toast/meta.ts",
@@ -332,15 +332,15 @@
       },
       {
         "path": "apps/docs/src/content/toggle-group/meta.ts",
-        "sha256": "7d43cb3e12e8fec043e4a2d07e124db7ebd534a5f6b2ccd29bd940a20dbfebef"
+        "sha256": "ded4609053424650a1bbaaa9998ac4f2ff0ba9b8f69d839e1d5db2fa3f15d892"
       },
       {
         "path": "apps/docs/src/content/toggle/meta.ts",
-        "sha256": "0863664abf3d024a9c2cd27ff3eab459a9b9978bbc18008351c2b7fa422f6ab5"
+        "sha256": "24882a72ac9eba1f960eedc28104a5b18809d15700a7e1e6e916bf9d36c968ab"
       },
       {
         "path": "apps/docs/src/content/toolbar/meta.ts",
-        "sha256": "a978221e198a3d5ffe9a07e6561f1f836b4e3780cf44c660b5581fb320a2b27c"
+        "sha256": "93e05ecdacce2e1fdae5c1ea83acb1856cbfdd17e2bd980b7cbe2db7a3356889"
       },
       {
         "path": "apps/docs/src/content/tooltip/meta.ts",
@@ -348,7 +348,7 @@
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
-        "sha256": "336700d33cdbf423e627ec8d36cffc6300694e1fcb0461369fd49c6133e0f6aa"
+        "sha256": "858f30d2a6b5700ad3274f30997ecf6bc642571df2c483f1e8b0ba115ba23ba3"
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
@@ -356,7 +356,7 @@
       },
       {
         "path": "apps/docs/src/content/virtual-list/meta.ts",
-        "sha256": "6ed2398ffb70d983d8bd06b2fc97cd3069c2cccf196cbb7f4f275470692a56ce"
+        "sha256": "a7c92f7ec02cf67971d010ff9d7630f33505fc1e1a0a14507127017697b11a3d"
       },
       {
         "path": "apps/docs/src/lib/types.ts",
@@ -372,11 +372,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "4b582c516db40d3f628addc27bd9133e370dcd3036ff5efe252169001345e70f"
+        "sha256": "ca74c89f510dc33b269f69f4d810a2d520441ec64b4a786a967a40fd99f240e4"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "b154601784763030f2cd185f235c0e78dfd7d9da7aeda6c0ede67cb7cb01e701"
+        "sha256": "276c7a65c4ca887c544bf86020be9f01ffb1fc1d5f9c27ea2d4146e61bc020d6"
       },
       {
         "path": "packages/ui/package.json",
@@ -420,7 +420,7 @@
       },
       {
         "path": "packages/ui/src/components/button.tsx",
-        "sha256": "9e121639ab6e4373d7c5af0252493e222fdeac6a56db55de6b6aab448f981e2e"
+        "sha256": "9003deeef7d8f05980987cf1cbc05432997c947c45f2b20ae64f4c7fb4dd8e31"
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
@@ -524,7 +524,7 @@
       },
       {
         "path": "packages/ui/src/components/heatmap.tsx",
-        "sha256": "32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a"
+        "sha256": "3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196"
       },
       {
         "path": "packages/ui/src/components/hover-card.tsx",
@@ -568,7 +568,7 @@
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
-        "sha256": "de0a572e25222332f6ee27c73e0a933fb66a5344d9c63f541af9882849be3383"
+        "sha256": "c6a79f529838893b4d73ae0a7800f3d357114d95c2188628cf46d3da3566c8de"
       },
       {
         "path": "packages/ui/src/components/motion-provider.tsx",
@@ -588,7 +588,7 @@
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c"
+        "sha256": "17768395e25182532a892827852f4413c9f47ea670f719656f5ca78f35b0af39"
       },
       {
         "path": "packages/ui/src/components/page-header.tsx",
@@ -608,11 +608,11 @@
       },
       {
         "path": "packages/ui/src/components/progress.tsx",
-        "sha256": "99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2"
+        "sha256": "cff89a803b2105b54475d0238a526200110fc5c9a7ad26ebe38e60a296822f58"
       },
       {
         "path": "packages/ui/src/components/proportion.tsx",
-        "sha256": "a6ca2d97dabe3018be157df2cffedebdb00938e6f8b098267ddb16010fd2877c"
+        "sha256": "9ca09dbc301e445e298b8bd812665f5795f3f07819343b2ee2b7c276243cc2eb"
       },
       {
         "path": "packages/ui/src/components/prose.tsx",
@@ -644,11 +644,11 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "a02db68627ad2040187d6d11629fe57fca3dea50b217161484adc6611e5b7763"
+        "sha256": "05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467"
       },
       {
         "path": "packages/ui/src/components/slider.tsx",
-        "sha256": "06f82f20353a0b0d5c28462653c250eef347cd8d1a277812a3f7f49b4aec25d4"
+        "sha256": "d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787"
       },
       {
         "path": "packages/ui/src/components/sparkline.tsx",
@@ -656,7 +656,7 @@
       },
       {
         "path": "packages/ui/src/components/stat.tsx",
-        "sha256": "6e812b09e8375b417af68edbacc5b10eda7b1747c44b6acb7b1bbf34172af163"
+        "sha256": "1eb700305ca9e6aaf4d16597a4ad70c5abc2e5c094183c4788752e06b3f5d951"
       },
       {
         "path": "packages/ui/src/components/status-dot.tsx",
@@ -680,7 +680,7 @@
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "855ae9505fc6259647cc2243f33910b843e1a79568853115ce73eb0868b9f71d"
+        "sha256": "5f00a0f9d344ee255eb9e0998fd3f2498a37a213aff73b04cd355d1fd6bf6e68"
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
@@ -724,7 +724,7 @@
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
-        "sha256": "61bbfd143704d1218831b2427d0145f8635858803dfaa75170638ffe3155f261"
+        "sha256": "ef6d04ce956f807ca010b2348e7f99adc4bc1394a734dbfae53cef1c7beaf0b9"
       },
       {
         "path": "packages/ui/src/components/virtual-list.tsx",
@@ -744,7 +744,7 @@
       },
       {
         "path": "packages/ui/tokens/components.css",
-        "sha256": "5dbd5666018b4088a1c42b4f6f1c53e83f8f06c05b5ff1fc9f2c193cf4101e84"
+        "sha256": "41278e16c832eb8186a1f8532dc70c0135f6028fb870789eb668a68c0849df0d"
       },
       {
         "path": "packages/ui/tokens/primitives.css",
@@ -752,7 +752,7 @@
       },
       {
         "path": "packages/ui/tokens/semantic.css",
-        "sha256": "534de2583bd8e500d27415f86499c15865620e1194488107ea59a9199200bd93"
+        "sha256": "5a5e1a2010db8698db269af2f19c863bad4eda3bbca4fef3258ba904eb27fb7f"
       },
       {
         "path": "packages/ui/utilities.css",
@@ -1307,7 +1307,9 @@
           "确认",
           "决定",
           "删除",
-          "危险"
+          "危险",
+          "弹窗",
+          "二次确认"
         ],
         "decisions": "点遮罩不关闭，默认聚焦面板。Esc 与返回按钮只关闭对话框；继续动作由调用方处理。",
         "decisionsEn": "Backdrop presses do not dismiss it; focus starts on the panel. Escape and the return button only close the dialog. The caller handles the affirmative action.",
@@ -1660,7 +1662,14 @@
           "AlertDescription"
         ],
         "keywords": [
-          "alert"
+          "alert",
+          "notice",
+          "callout",
+          "banner",
+          "提示",
+          "警告",
+          "横幅",
+          "说明"
         ],
         "decisions": "不要为每段静态说明自动添加 assertive 宣告。",
         "decisionsEn": "Static explanations should not automatically make assertive announcements.",
@@ -2290,7 +2299,12 @@
           "AvatarPrimitive"
         ],
         "keywords": [
-          "avatar"
+          "avatar",
+          "profile picture",
+          "user image",
+          "头像",
+          "用户头像",
+          "身份"
         ],
         "decisions": "不要虚构姓名或让 initials 代替可访问名称。",
         "decisionsEn": "Do not invent a name or let initials replace an accessible name.",
@@ -2525,7 +2539,14 @@
           "Badge"
         ],
         "keywords": [
-          "badge"
+          "badge",
+          "tag",
+          "label",
+          "count",
+          "徽标",
+          "标签",
+          "角标",
+          "计数"
         ],
         "decisions": "状态事实使用 StatusDot，不让标记宣布成功。",
         "decisionsEn": "Use StatusDot for actual states; a badge cannot establish success.",
@@ -2814,6 +2835,14 @@
             "Long paths wrap while retaining full location names."
           ]
         },
+        "keywords": [
+          "breadcrumbs",
+          "面包屑",
+          "路径",
+          "层级",
+          "导航路径",
+          "位置"
+        ],
         "api": [
           {
             "name": "Breadcrumb",
@@ -3102,6 +3131,14 @@
         ],
         "decisions": "targets 与 scope 必填；执行传递当前对象版本快照，零选择禁止执行。",
         "decisionsEn": "Targets and scope are required; execution receives the current target/version snapshot, and zero selection prevents execution.",
+        "keywords": [
+          "bulk",
+          "batch",
+          "批量",
+          "批量操作",
+          "多选操作",
+          "已选"
+        ],
         "api": [
           {
             "name": "BulkActionBar",
@@ -3462,7 +3499,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 118
+            "line": 119
           }
         },
         {
@@ -3471,7 +3508,7 @@
           "target": "Button",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 266
+            "line": 267
           }
         },
         {
@@ -3479,7 +3516,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 107
+            "line": 108
           }
         },
         {
@@ -3487,7 +3524,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 89
+            "line": 90
           }
         },
         {
@@ -3495,7 +3532,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 84
+            "line": 85
           }
         },
         {
@@ -3731,11 +3768,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 118
+              "line": 119
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 118
+              "line": 119
             },
             "status": "PRESENT"
           },
@@ -3744,11 +3781,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 89
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 89
+              "line": 90
             },
             "status": "PRESENT"
           },
@@ -3757,11 +3794,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 266
+              "line": 267
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 266
+              "line": 267
             },
             "status": "PRESENT"
           },
@@ -4739,6 +4776,13 @@
           "CheckboxGroup",
           "CheckboxGroupPrimitive"
         ],
+        "keywords": [
+          "checkboxes",
+          "多选",
+          "复选",
+          "多选组",
+          "勾选"
+        ],
         "api": [
           {
             "name": "CheckboxGroup",
@@ -4970,6 +5014,14 @@
         "exports": [
           "Checkbox",
           "CheckboxPrimitive"
+        ],
+        "keywords": [
+          "check",
+          "tick",
+          "复选框",
+          "勾选",
+          "多选框",
+          "选中"
         ],
         "api": [
           {
@@ -5240,6 +5292,14 @@
             "Complete code scrolls horizontally without truncation or character changes."
           ]
         },
+        "keywords": [
+          "code",
+          "snippet",
+          "syntax",
+          "代码",
+          "代码块",
+          "高亮"
+        ],
         "api": [
           {
             "name": "CodeBlock",
@@ -6428,6 +6488,13 @@
         ],
         "decisions": "右键不是唯一入口；应用同时提供可见 Menu，并复用同一组真实命令。",
         "decisionsEn": "Right click is an enhancement; applications also provide a visible Menu using the same real commands.",
+        "keywords": [
+          "right click",
+          "contextmenu",
+          "右键",
+          "右键菜单",
+          "上下文菜单"
+        ],
         "api": [
           {
             "name": "ContextMenu / ContextMenuTrigger",
@@ -6816,6 +6883,12 @@
         "source": "local",
         "exports": [
           "CopyButton"
+        ],
+        "keywords": [
+          "copy",
+          "clipboard",
+          "复制",
+          "剪贴板"
         ],
         "api": [
           {
@@ -7256,6 +7329,16 @@
         ],
         "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
         "decisionsEn": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
+        "keywords": [
+          "datagrid",
+          "grid",
+          "table",
+          "sort",
+          "表格",
+          "数据表",
+          "排序",
+          "选择行"
+        ],
         "api": [
           {
             "name": "DataTable",
@@ -7316,10 +7399,12 @@
           }
         ],
         "notes": [
-          "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。"
+          "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
+          "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
         ],
         "notesEn": [
-          "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models."
+          "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
+          "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
         ],
         "design": {
           "methods": [
@@ -8176,6 +8261,15 @@
             "Vertical by default; wide containers may compose columns, and long values wrap fully."
           ]
         },
+        "keywords": [
+          "dl",
+          "key value",
+          "detail",
+          "详情",
+          "键值",
+          "属性列表",
+          "名称与值"
+        ],
         "api": [
           {
             "name": "DescriptionList",
@@ -8453,7 +8547,10 @@
           "modal",
           "对话框",
           "阻断",
-          "编辑"
+          "编辑",
+          "弹窗",
+          "弹出框",
+          "模态"
         ],
         "decisions": "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
         "decisionsEn": "Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.",
@@ -9334,6 +9431,15 @@
             "Names and recovery actions wrap fully."
           ]
         },
+        "keywords": [
+          "empty state",
+          "no data",
+          "blank",
+          "空状态",
+          "暂无数据",
+          "无内容",
+          "未知"
+        ],
         "api": [
           {
             "name": "Empty",
@@ -10638,6 +10744,12 @@
         ],
         "decisions": "dirty 和 appliedSummary 是必填事实；点击应用只发出意图，库不修改条件或请求结果。",
         "decisionsEn": "Dirty and appliedSummary are required facts; Apply emits intent without changing conditions or requesting results.",
+        "keywords": [
+          "filter",
+          "筛选",
+          "过滤",
+          "条件"
+        ],
         "api": [
           {
             "name": "FilterBar",
@@ -11062,7 +11174,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 73
+            "line": 66
           }
         },
         {
@@ -11238,11 +11350,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 73
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 73
+              "line": 66
             },
             "status": "PRESENT"
           }
@@ -12248,6 +12360,13 @@
             "Body text wraps while adjunct actions retain capacity."
           ]
         },
+        "keywords": [
+          "list item",
+          "row",
+          "条目",
+          "列表项",
+          "行"
+        ],
         "api": [
           {
             "name": "Item",
@@ -12441,7 +12560,13 @@
           "Kbd"
         ],
         "keywords": [
-          "kbd"
+          "kbd",
+          "keyboard",
+          "shortcut",
+          "key",
+          "快捷键",
+          "按键",
+          "键盘"
         ],
         "decisions": "Kbd 不注册键盘监听，不是可点击入口。",
         "decisionsEn": "Kbd neither registers keyboard listeners nor provides a clickable entry.",
@@ -13187,6 +13312,14 @@
         "exports": [
           "LocaleSwitch"
         ],
+        "keywords": [
+          "language",
+          "i18n",
+          "locale",
+          "语言",
+          "切换语言",
+          "国际化"
+        ],
         "api": [
           {
             "name": "LocaleSwitch",
@@ -13585,6 +13718,15 @@
         ],
         "decisions": "Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用项聚焦，但禁止执行。",
         "decisionsEn": "Menu items execute commands; LinkItem navigates. Disabled items remain discoverable and may receive focus, but cannot execute.",
+        "keywords": [
+          "dropdown",
+          "dropdown menu",
+          "actions menu",
+          "菜单",
+          "下拉",
+          "下拉菜单",
+          "更多操作"
+        ],
         "api": [
           {
             "name": "Menu / MenuSubmenu",
@@ -14040,7 +14182,14 @@
           "MeterPrimitive"
         ],
         "keywords": [
-          "meter"
+          "meter",
+          "gauge",
+          "measure",
+          "level",
+          "仪表",
+          "度量",
+          "用量",
+          "容量"
         ],
         "decisions": "任务完成比例使用 Progress；未知测量不要填0。",
         "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero.",
@@ -14816,6 +14965,14 @@
         ],
         "decisions": "active 是应用提供的页面事实，库不读 URL 或把命令推断成导航。",
         "decisionsEn": "Active is an application-owned page fact; the library never infers it from URLs or turns commands into navigation.",
+        "keywords": [
+          "navbar",
+          "nav",
+          "header menu",
+          "导航菜单",
+          "导航栏",
+          "顶栏"
+        ],
         "api": [
           {
             "name": "NavigationMenu / NavigationMenuList / NavigationMenuItem",
@@ -15860,6 +16017,13 @@
             "Titles and actions wrap while retaining native focus order."
           ]
         },
+        "keywords": [
+          "header",
+          "title",
+          "页头",
+          "页面标题",
+          "标题栏"
+        ],
         "api": [
           {
             "name": "PageHeader",
@@ -16179,6 +16343,13 @@
             "Actions wrap while retaining current-page and total states."
           ]
         },
+        "keywords": [
+          "pager",
+          "pages",
+          "分页",
+          "翻页",
+          "页码"
+        ],
         "api": [
           {
             "name": "Pagination",
@@ -16416,7 +16587,14 @@
           "PendingValue"
         ],
         "keywords": [
-          "pending-value"
+          "pending-value",
+          "loading value",
+          "unknown",
+          "placeholder",
+          "待定",
+          "未知",
+          "加载中的值",
+          "占位"
         ],
         "decisions": "不把未知当失败，不默认重试危险写入。",
         "decisionsEn": "Unknown is not failure; never retry a dangerous write by default.",
@@ -17029,7 +17207,14 @@
           "ProgressPrimitive"
         ],
         "keywords": [
-          "progress"
+          "progress",
+          "progress bar",
+          "loading",
+          "percent",
+          "进度条",
+          "加载",
+          "百分比",
+          "完成度"
         ],
         "decisions": "动画和时间不能提供完成事实；0 与 null 不同。",
         "decisionsEn": "Animation and time establish no completion fact. Zero differs from null.",
@@ -17666,6 +17851,13 @@
           "RadioGroupPrimitive",
           "RadioPrimitive"
         ],
+        "keywords": [
+          "radio",
+          "radios",
+          "单选",
+          "单选框",
+          "互斥选择"
+        ],
         "api": [
           {
             "name": "RadioGroup",
@@ -18157,6 +18349,14 @@
         "exports": [
           "ScrollArea"
         ],
+        "keywords": [
+          "scroll",
+          "scrollbar",
+          "overflow",
+          "滚动",
+          "滚动条",
+          "滚动区域"
+        ],
         "api": [
           {
             "name": "ScrollArea",
@@ -18377,6 +18577,14 @@
           "SegmentedControlItem",
           "SegmentedControlPrimitive",
           "SegmentedControlItemPrimitive"
+        ],
+        "keywords": [
+          "segmented",
+          "button group",
+          "切换",
+          "分段",
+          "分段控制",
+          "视图切换"
         ],
         "api": [
           {
@@ -18734,6 +18942,15 @@
           "SelectGroup",
           "SelectGroupLabel",
           "SelectPrimitive"
+        ],
+        "keywords": [
+          "dropdown",
+          "combobox",
+          "picker",
+          "选择",
+          "下拉",
+          "下拉选择",
+          "选项"
         ],
         "api": [
           {
@@ -19509,6 +19726,13 @@
         ],
         "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
         "decisionsEn": "Collapsing produces an icon rail, not a hidden panel: navigation and links stay mounted, names switch to visually hidden (accessible name unchanged) with a Tooltip restoring a visible name; a sub-level's inline panel becomes a Popover over the same content in the rail, and its open/closed memory survives collapsing. Active and routes are explicit application facts.",
+        "keywords": [
+          "side nav",
+          "drawer",
+          "侧栏",
+          "侧边栏",
+          "边栏"
+        ],
         "api": [
           {
             "name": "Sidebar / SidebarToggle",
@@ -19930,6 +20154,13 @@
           "SliderLabel",
           "SliderValue",
           "SliderPrimitive"
+        ],
+        "keywords": [
+          "range",
+          "track",
+          "滑块",
+          "滑动条",
+          "范围"
         ],
         "api": [
           {
@@ -20605,6 +20836,15 @@
             "Values/units wrap; unknown never shrinks to zero."
           ]
         },
+        "keywords": [
+          "metric",
+          "kpi",
+          "number",
+          "度量",
+          "指标",
+          "统计",
+          "数字"
+        ],
         "api": [
           {
             "name": "StatDelta",
@@ -20836,7 +21076,14 @@
           "StatusDot"
         ],
         "keywords": [
-          "status-dot"
+          "status-dot",
+          "status",
+          "indicator",
+          "online",
+          "状态点",
+          "在线",
+          "指示灯",
+          "圆点"
         ],
         "decisions": "不把等待、进行中或结果未知混成同一事实。",
         "decisionsEn": "Waiting, in-progress, and unknown results remain distinct facts.",
@@ -21098,6 +21345,15 @@
             "Content stacks and wraps without hiding states."
           ]
         },
+        "keywords": [
+          "stepper",
+          "wizard",
+          "progress steps",
+          "步骤",
+          "步骤条",
+          "流程",
+          "向导"
+        ],
         "api": [
           {
             "name": "Steps",
@@ -21272,6 +21528,13 @@
         "exports": [
           "Switch",
           "SwitchPrimitive"
+        ],
+        "keywords": [
+          "toggle",
+          "on off",
+          "开关",
+          "切换开关",
+          "启用"
         ],
         "api": [
           {
@@ -21672,6 +21935,14 @@
             "Horizontal scrolling retains complete comparison columns instead of cards losing dimensions."
           ]
         },
+        "keywords": [
+          "grid",
+          "comparison",
+          "比较",
+          "表格",
+          "比较表",
+          "对照"
+        ],
         "api": [
           {
             "name": "TableContainer",
@@ -21980,6 +22251,13 @@
         ],
         "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
         "decisionsEn": "Manual activation and mounted panels are defaults; switching views does not approve or save a draft.",
+        "keywords": [
+          "tab",
+          "tablist",
+          "标签页",
+          "选项卡",
+          "页签"
+        ],
         "api": [
           {
             "name": "Tabs / TabsList",
@@ -22215,7 +22493,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 48
+            "line": 49
           }
         },
         {
@@ -22407,11 +22685,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 48
+              "line": 49
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 48
+              "line": 49
             },
             "status": "PRESENT"
           }
@@ -22483,6 +22761,14 @@
         "exports": [
           "Textarea",
           "TextareaPrimitive"
+        ],
+        "keywords": [
+          "multiline",
+          "text area",
+          "多行",
+          "多行输入",
+          "文本域",
+          "备注"
         ],
         "api": [
           {
@@ -23092,6 +23378,14 @@
             "Content wraps fully and unknown times remain explicit text."
           ]
         },
+        "keywords": [
+          "history",
+          "events",
+          "时间线",
+          "时间序列",
+          "事件",
+          "历史"
+        ],
         "api": [
           {
             "name": "Timeline / TimelineItem",
@@ -23967,6 +24261,13 @@
           "ToggleGroupItem",
           "ToggleGroupPrimitive"
         ],
+        "keywords": [
+          "toolbar toggle",
+          "button group",
+          "切换组",
+          "按钮组",
+          "多选切换"
+        ],
         "api": [
           {
             "name": "ToggleGroup",
@@ -24238,6 +24539,13 @@
         "exports": [
           "Toggle",
           "TogglePrimitive"
+        ],
+        "keywords": [
+          "pressed",
+          "toggle button",
+          "切换按钮",
+          "按下",
+          "开关按钮"
         ],
         "api": [
           {
@@ -24586,6 +24894,13 @@
             "Horizontal actions may wrap; vertical layouts use corresponding arrows."
           ]
         },
+        "keywords": [
+          "tools",
+          "action bar",
+          "工具栏",
+          "工具组",
+          "操作栏"
+        ],
         "api": [
           {
             "name": "Toolbar",
@@ -25260,6 +25575,14 @@
         ],
         "decisions": "expandedIds 与 selectedId 分开；聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
         "decisionsEn": "Expanded IDs and selected ID are separate; focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
+        "keywords": [
+          "tree view",
+          "hierarchy",
+          "树",
+          "树形",
+          "层级",
+          "目录树"
+        ],
         "api": [
           {
             "name": "Tree",
@@ -25754,6 +26077,14 @@
         "exports": [
           "VirtualList"
         ],
+        "keywords": [
+          "virtualized",
+          "windowing",
+          "long list",
+          "虚拟列表",
+          "长列表",
+          "虚拟滚动"
+        ],
         "api": [
           {
             "name": "VirtualList<Item>",
@@ -25914,7 +26245,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 146
+            "line": 150
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -25932,7 +26263,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 147
+            "line": 151
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -25950,7 +26281,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 376
+            "line": 381
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26016,7 +26347,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 360
+            "line": 365
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26034,7 +26365,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 359
+            "line": 364
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26052,7 +26383,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 358
+            "line": 363
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26070,7 +26401,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 361
+            "line": 366
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26088,7 +26419,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 357
+            "line": 362
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -26122,7 +26453,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 84
+            "line": 88
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -26205,7 +26536,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 127
+            "line": 131
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26224,7 +26555,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 128
+            "line": 132
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26242,7 +26573,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 129
+            "line": 133
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26254,13 +26585,14 @@
       "definitions": [
         {
           "name": "--qy-button-bordered-border",
-          "value": "var(--qy-border-input)",
+          "value": "color-mix(in srgb, var(--qy-ink) var(--qy-ink-dan), transparent)",
           "references": [
-            "--qy-border-input"
+            "--qy-ink",
+            "--qy-ink-dan"
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 437
+            "line": 444
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26278,7 +26610,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 438
+            "line": 445
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26312,7 +26644,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 72
+            "line": 76
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -26325,7 +26657,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 106
+            "line": 110
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -26343,7 +26675,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 73
+            "line": 77
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -26356,7 +26688,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 107
+            "line": 111
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -26374,7 +26706,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 74
+            "line": 78
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -26387,7 +26719,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 108
+            "line": 112
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -26405,7 +26737,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 75
+            "line": 79
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -26418,7 +26750,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 109
+            "line": 113
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -26436,7 +26768,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 76
+            "line": 80
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -26449,7 +26781,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 110
+            "line": 114
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27032,13 +27364,14 @@
       "definitions": [
         {
           "name": "--qy-danger",
-          "value": "var(--qy-red-500)",
+          "value": "color-mix(in srgb, var(--qy-red-500) 75%, var(--qy-neutral-500))",
           "references": [
-            "--qy-red-500"
+            "--qy-red-500",
+            "--qy-neutral-500"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 57
+            "line": 61
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -27052,7 +27385,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 94
+            "line": 98
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27064,26 +27397,28 @@
       "definitions": [
         {
           "name": "--qy-danger-fill",
-          "value": "var(--qy-red-700)",
+          "value": "color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500))",
           "references": [
-            "--qy-red-700"
+            "--qy-red-700",
+            "--qy-neutral-500"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 59
+            "line": 63
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
         },
         {
           "name": "--qy-danger-fill",
-          "value": "var(--qy-red-700)",
+          "value": "color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500))",
           "references": [
-            "--qy-red-700"
+            "--qy-red-700",
+            "--qy-neutral-500"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 96
+            "line": 100
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27103,7 +27438,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 137
+            "line": 141
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27115,13 +27450,14 @@
       "definitions": [
         {
           "name": "--qy-danger-foreground",
-          "value": "var(--qy-red-700)",
+          "value": "color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500))",
           "references": [
-            "--qy-red-700"
+            "--qy-red-700",
+            "--qy-neutral-500"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 58
+            "line": 62
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -27135,7 +27471,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 95
+            "line": 99
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27153,7 +27489,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 60
+            "line": 64
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -27166,7 +27502,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 97
+            "line": 101
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27185,7 +27521,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 158
+            "line": 162
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27201,7 +27537,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 396
+            "line": 401
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27217,7 +27553,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 398
+            "line": 403
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27233,7 +27569,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 394
+            "line": 399
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27249,7 +27585,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 395
+            "line": 400
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27265,7 +27601,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 392
+            "line": 397
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27281,7 +27617,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 393
+            "line": 398
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27297,7 +27633,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 397
+            "line": 402
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27313,7 +27649,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 401
+            "line": 406
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27329,7 +27665,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 400
+            "line": 405
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27345,7 +27681,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 399
+            "line": 404
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27361,7 +27697,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 402
+            "line": 407
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27445,7 +27781,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 375
+            "line": 380
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27463,7 +27799,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 418
+            "line": 423
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -27494,7 +27830,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 448
+            "line": 455
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27525,7 +27861,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 449
+            "line": 456
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27556,7 +27892,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 451
+            "line": 458
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27587,7 +27923,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 452
+            "line": 459
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27618,7 +27954,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 450
+            "line": 457
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27649,7 +27985,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 453
+            "line": 460
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -27701,7 +28037,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 410
+            "line": 415
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27719,7 +28055,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 434
+            "line": 439
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27737,7 +28073,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 433
+            "line": 438
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27753,7 +28089,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 409
+            "line": 414
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27805,7 +28141,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 121
+            "line": 125
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27825,7 +28161,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 123
+            "line": 127
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27843,7 +28179,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 122
+            "line": 126
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27861,7 +28197,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 124
+            "line": 128
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27881,7 +28217,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 150
+            "line": 154
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27931,7 +28267,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 65
+            "line": 69
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -27944,7 +28280,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 102
+            "line": 106
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27962,7 +28298,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 66
+            "line": 70
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -27975,7 +28311,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 103
+            "line": 107
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -27994,7 +28330,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 161
+            "line": 165
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28025,7 +28361,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 82
+            "line": 86
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -28123,7 +28459,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 365
+            "line": 370
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28139,7 +28475,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 385
+            "line": 390
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28155,7 +28491,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 386
+            "line": 391
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28171,7 +28507,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 383
+            "line": 388
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28187,7 +28523,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 388
+            "line": 393
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28203,7 +28539,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 384
+            "line": 389
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28219,7 +28555,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 387
+            "line": 392
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28237,7 +28573,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 378
+            "line": 383
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28507,7 +28843,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 157
+            "line": 161
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28534,7 +28870,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 89
+            "line": 93
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -28568,7 +28904,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 379
+            "line": 384
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28581,7 +28917,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 458
+            "line": 465
           },
           "context": "@media (max-width: 767px) {\n    :root",
           "complete": true
@@ -28599,7 +28935,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 419
+            "line": 424
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -28618,7 +28954,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 422
+            "line": 427
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -28631,7 +28967,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 462
+            "line": 469
           },
           "context": ":root,\n    [data-density]",
           "complete": true
@@ -28650,7 +28986,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 424
+            "line": 429
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -28682,7 +29018,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 85
+            "line": 89
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -28700,7 +29036,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 134
+            "line": 138
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28718,7 +29054,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 135
+            "line": 139
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28738,7 +29074,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 136
+            "line": 140
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28910,6 +29246,24 @@
       ]
     },
     {
+      "name": "--qy-radius-slider-track",
+      "definitions": [
+        {
+          "name": "--qy-radius-slider-track",
+          "value": "round(calc(var(--qy-slider-track-size) * 5 / 16), 1px)",
+          "references": [
+            "--qy-slider-track-size"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 359
+          },
+          "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
       "name": "--qy-radius-sm",
       "definitions": [
         {
@@ -28921,6 +29275,24 @@
           "source": {
             "path": "packages/ui/tokens/components.css",
             "line": 306
+          },
+          "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
+      "name": "--qy-radius-track",
+      "definitions": [
+        {
+          "name": "--qy-radius-track",
+          "value": "round(calc(var(--qy-readout-track-size) * 5 / 16), 1px)",
+          "references": [
+            "--qy-readout-track-size"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 358
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -29040,7 +29412,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 130
+            "line": 134
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29059,7 +29431,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 426
+            "line": 431
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29077,7 +29449,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 420
+            "line": 425
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29104,7 +29476,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 92
+            "line": 96
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29131,7 +29503,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 90
+            "line": 94
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29158,7 +29530,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 91
+            "line": 95
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29208,7 +29580,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 165
+            "line": 169
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29226,7 +29598,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 168
+            "line": 172
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29244,7 +29616,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 169
+            "line": 173
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29262,7 +29634,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 167
+            "line": 171
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29280,7 +29652,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 166
+            "line": 170
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29298,7 +29670,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 170
+            "line": 174
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29532,7 +29904,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 374
+            "line": 379
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -29545,7 +29917,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 447
+            "line": 454
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -29561,7 +29933,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 403
+            "line": 408
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -29597,7 +29969,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 63
+            "line": 67
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -29610,7 +29982,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 100
+            "line": 104
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29629,7 +30001,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 64
+            "line": 68
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -29642,7 +30014,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 101
+            "line": 105
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29661,7 +30033,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 160
+            "line": 164
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29692,7 +30064,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 86
+            "line": 90
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29711,7 +30083,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 144
+            "line": 148
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29730,7 +30102,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 143
+            "line": 147
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29749,7 +30121,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 140
+            "line": 144
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29781,7 +30153,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 87
+            "line": 91
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -29801,7 +30173,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 145
+            "line": 149
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -32420,7 +32792,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 153
+            "line": 157
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -32456,7 +32828,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 152
+            "line": 156
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -32474,7 +32846,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 61
+            "line": 65
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -32487,7 +32859,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 98
+            "line": 102
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -32506,7 +32878,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 62
+            "line": 66
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -32519,7 +32891,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 99
+            "line": 103
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -32538,7 +32910,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 159
+            "line": 163
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33079,7 +33451,7 @@
       "source": "apps/docs/package.json",
       "scripts": {
         "dev": "vite",
-        "build": "node scripts/generate-fixtures.mjs && tsc --noEmit && vite build",
+        "build": "node scripts/generate-fixtures.mjs && node scripts/generate-sitemap.mjs && tsc --noEmit && vite build",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit",
         "check:components": "node scripts/check-library-controls.mjs",

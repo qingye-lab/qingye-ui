@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a
+Source SHA-256: 3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
 

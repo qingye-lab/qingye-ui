@@ -12,6 +12,7 @@ Applications supply the TanStack instance and getRowId; filtered/page selection 
 
 ## Notes
 - TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.
+- With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.
 
 ## Use and ownership
 - Compare an actual collection along shared dimensions with sorting or selection.
@@ -94,7 +95,7 @@ export default function Demo() {
     { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
     { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
   ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
   return <Stack>
     <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
     <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>

@@ -36,7 +36,7 @@ export const buttonVariants = cva(
     variants: {
       // 三档按「边界由谁承担」区分，焦点都加强该档已有的属性，不在控件外面画一圈：
       //   solid   填充承担边界 → 填充内侧一条反色线
-      //   bordered 底色与承载面一致，由线承担边界 → 这条线变黑（与输入框相同，不加厚）
+      //   bordered 底色与承载面一致，由线承担边界 → 这条线变黑（不加厚）
       //   quiet   无填充无边框 → 自身盒内一条细线
       variant: {
         solid: "focus-visible:ring-inset",
@@ -52,9 +52,10 @@ export const buttonVariants = cva(
       // 基础层 §5、§7、§10：填充表达强调，危险表达后果；无理由不补边框。
       { variant: "solid", tone: "neutral", class: "[--qy-focus-ring-color:var(--qy-focus-ring-on-solid)] bg-primary text-primary-foreground not-aria-disabled:hover:bg-primary-hover not-aria-disabled:active:bg-primary-hover" },
       { variant: "solid", tone: "danger", class: "[--qy-focus-ring-color:var(--qy-danger-on-fill)] bg-destructive-fill text-destructive-on-fill not-aria-disabled:hover:bg-destructive-fill-hover not-aria-disabled:active:bg-destructive-fill-hover" },
-      // 白底黑字，50% 边框（与输入框同强度）。底色与承载面一致，所以由线承担边界（用户规则）。
+      // 白底黑字，淡墨边框。底色与承载面一致，所以由线承担边界（用户规则）；线比输入框低一级，
+      // 因为按钮是命令不是可编辑的字段（2026-10-09，用户授权主 agent 定夺）。危险档同一浓度。
       { variant: "bordered", tone: "neutral", class: "border-(--qy-button-bordered-border) bg-card text-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-accent" },
-      { variant: "bordered", tone: "danger", class: "[--qy-button-bordered-border:color-mix(in_srgb,var(--color-destructive-foreground)_50%,transparent)] [--qy-button-bordered-border-focus:var(--color-destructive-foreground)] border-(--qy-button-bordered-border) bg-card text-destructive-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft" },
+      { variant: "bordered", tone: "danger", class: "[--qy-button-bordered-border:color-mix(in_srgb,var(--color-destructive-foreground)_var(--qy-ink-dan),transparent)] [--qy-button-bordered-border-focus:var(--color-destructive-foreground)] border-(--qy-button-bordered-border) bg-card text-destructive-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft" },
       { variant: "quiet", tone: "neutral", class: "text-foreground not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-accent" },
       { variant: "quiet", tone: "danger", class: "text-destructive-foreground not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft" },
       // 有边框的档扣掉 1px 边框，文字起点与无边框档对齐。

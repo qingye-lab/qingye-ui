@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a
+Source SHA-256: 3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足），可聚焦的格与按需展开的数据表。
 

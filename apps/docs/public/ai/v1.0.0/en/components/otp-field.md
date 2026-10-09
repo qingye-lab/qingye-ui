@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
+Source SHA-256: 17768395e25182532a892827852f4413c9f47ea670f719656f5ca78f35b0af39
 
 Present a fixed-length text value in segments.
 
@@ -71,7 +71,7 @@ export const meta = { title: "文本", titleEn: "Text" } satisfies DemoMeta;
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符</FieldDescription></Field>
+    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符</FieldDescription></Field>
     <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /><FieldDescription>4 个字符</FieldDescription></Field>
     <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue="0012" /><FieldError>编码尚未核对。</FieldError></Field>
     <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue="0012" readOnly /></Field>

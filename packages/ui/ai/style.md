@@ -149,7 +149,7 @@
 
 三档是当前选择，不固定对应三种重要性；tone 独立。用户规则「和背景色一致时才保留边框」解释 bordered 的来由，不给已有足够填充的入口重复补线。
 
-neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚焦 `--qy-button-bordered-border-focus` 读 `--qy-ring`。两色均为墨阶的「重」（50%）：浅色为黑、深色为白。danger bordered 局部用危险文字色 50% 合成，焦点读不透明危险文字色。
+neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%），聚焦 `--qy-button-bordered-border-focus` 读 `--qy-ring`：浅色为黑、深色为白。重墨线（50%）只留给可编辑的填值控件，按钮是命令，不与字段共用同一条线（2026-10-09，基础层沿革）；有字按钮的识别由文字承担。danger bordered 局部用危险文字色按同一淡墨浓度合成，焦点读不透明危险文字色。
 
 - 表面读语义角色，不写死灰色。surface/raised 当前浅色为白色，深色用不透明 color-mix 配色；surface-inset、线与反馈层为半透明，须按真实叠层测合成结果。
 - Input 当前外层为 1px 共同边界；内部 input 透明。深色外层读内嵌表面。Card / Popover 当前各有 1px 容器边界；这描述现状，不证明所有情境都必须保留线。
@@ -158,17 +158,18 @@ neutral bordered 的 `--qy-button-bordered-border` 读 `--qy-border-input`，聚
 
 ### 4. 圆角
 
-方以载事，圆以标点（基础层 §4）。独立控件 r = min(外高 / 4, 2 分)；只有点与身份（状态点、头像、单选标记、滑块抓手）用圆。
+方以载事，圆以标点（基础层 §4）。圆角与外高成比例：r = round(外高 × 5/16)，不设上限（用户裁决 2026-10-07：公共圆角更圆滑）；只有点与身份（状态点、头像、单选标记、滑块抓手）用圆。
 
 | 类 / 角色 | 值 | 关系 |
 |---|---|---|
-| `rounded-xs` / `rounded-sm` | 6 / 7px | 外高 / 4 |
-| `rounded-control` | 8px | 2 分 |
-| `rounded-overlay` | 12px | 控件圆角 + 浮层内缩 |
-| `--qy-radius-overlay-item` | 8px | 浮层圆角 − 内缩 |
-| `rounded-panel` | 12px | 与浮层同为承载面 |
-| `rounded-marker` | 4px | 标记边长 / 4 |
-| `rounded-item` | 6px | 与最小控件同角 |
+| `rounded-xs` … `rounded-xl` | 8 / 9 / 10 / 11 / 13px | round(外高 × 5/16) |
+| `rounded-control` | 10px | md 外高 32 × 5/16 |
+| `rounded-overlay` | 14px | 控件圆角 + 浮层内缩 |
+| `--qy-radius-overlay-item` | 10px | 浮层圆角 − 内缩 |
+| `rounded-panel` | 16px | 4 分（选择：同一比例落到面板会过方） |
+| `rounded-marker` | 5px | round(标记边长 16 × 5/16) |
+| `rounded-item` | 8px | 与最小控件同角 |
+| `--qy-radius-track` / `--qy-radius-slider-track` | 3 / 1px | round(轨道高 × 5/16)：读数轨道 8、滑块轨道 4 |
 
 只有同一轮廓等距内缩时才用 `r内 = max(0, r外 − inset)`，负值退化为直角。独立子对象（Card 里的按钮）保持自己的角色。
 

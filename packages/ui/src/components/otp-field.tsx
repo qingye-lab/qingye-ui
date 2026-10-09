@@ -53,7 +53,7 @@ export function OtpField({
   }, [defaultValue, valueProp, props.form]);
 
   return <div data-slot="otp-field" className={cn("flex min-w-0 flex-col gap-(--qy-field-gap)", controlClassName)}>
-    <div data-slot="otp-field-segments" className="group/otp relative grid w-fit max-w-full gap-(--qy-field-gap)"
+    <div data-slot="otp-field-segments" className="group/otp relative grid w-fit max-w-full items-start gap-(--qy-field-gap)"
       style={{
         gridTemplateColumns: `repeat(${Math.max(length, characters.length)}, minmax(0, 1fr))`,
         "--qy-otp-cell": "var(--qy-fill-height)",
@@ -72,12 +72,15 @@ export function OtpField({
         syncSelection(input);
       }}
     >
+      {/* 容器比格子总宽窄时格子等比缩小：圆角取 min(控件圆角, 边长 × 5/16)——基础层 §4「比例而非常数」
+          的同一条比例；固定 10px 在格宽缩到 14px 时会把格子压成圆（圆以标点，格子不是点）。
+          items-start 让 aspect-square 按缩小后的宽度取高，而不是被网格拉成胶囊。 */}
       {Array.from({ length: Math.max(length, characters.length) }, (_, index) => <span key={index}
         data-slot="otp-field-segment" data-otp-index={index} aria-hidden="true"
         data-active={index === active ? "" : undefined}
         data-selected={index >= countBefore(selection.start) && index < countBefore(selection.end) ? "" : undefined}
         className={cn(
-          "flex aspect-square min-w-0 rounded-(--qy-fill-radius) text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-card text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) dark:bg-surface-inset group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-accent",
+          "flex aspect-square min-w-0 rounded-[min(var(--qy-fill-radius),31.25%)] text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-card text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) dark:bg-surface-inset group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-accent",
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
         )}
       >{characters[index] ?? ""}</span>)}

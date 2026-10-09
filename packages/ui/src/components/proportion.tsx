@@ -44,7 +44,7 @@ export function Proportion({ label, items, total, format, className, render, ref
     "data-slot": "proportion", role: "group", "aria-label": label,
     className: cn("grid min-w-0 gap-(--qy-field-gap) text-foreground", className),
     children: <>
-      <div data-slot="proportion-track" aria-hidden="true" className="flex h-(--qy-readout-track-size) w-full min-w-0 gap-0.5 overflow-hidden rounded-marker bg-(--qy-groove-surface)">
+      <div data-slot="proportion-track" aria-hidden="true" className="flex h-(--qy-readout-track-size) w-full min-w-0 gap-0.5 overflow-hidden rounded-(--qy-radius-track) bg-(--qy-groove-surface)">
         {items.map((item, index) => item.value > 0 && <span key={item.key} data-slot="proportion-segment" className="h-full min-w-0.5 basis-0" style={{ flexGrow: item.value, background: `var(--qy-chart-${index + 1})` }} />)}
         {rest > 0 && <span className="h-full basis-0" style={{ flexGrow: rest }} />}
       </div>

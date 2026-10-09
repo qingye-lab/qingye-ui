@@ -389,6 +389,15 @@ test.each(["xs", "sm", "md", "lg", "xl"] as const)("bordered %s consumes a real 
   expect(screen.getByRole("button")).toHaveClass("border", "border-(--qy-button-bordered-border)", "focus-visible:border-(--qy-button-bordered-border-focus)", padding);
 });
 
+test("danger bordered tints its resting and focus lines with the danger text color, as two separate utilities", () => {
+  render(<><p id="bordered-consequence">删除后无法恢复。</p><Button variant="bordered" tone="danger" aria-describedby="bordered-consequence">删除</Button></>);
+  // 两条局部属性各是一个类；粘成一个类时两条都不生效，线退回中性墨。
+  expect(screen.getByRole("button")).toHaveClass(
+    "[--qy-button-bordered-border:color-mix(in_srgb,var(--color-destructive-foreground)_var(--qy-ink-dan),transparent)]",
+    "[--qy-button-bordered-border-focus:var(--color-destructive-foreground)]",
+  );
+});
+
 test("md follows the fill-control role so it stays the height of the inputs beside it; other sizes keep their own profile", () => {
   const { rerender } = render(<Button>保存</Button>);
   expect(screen.getByRole("button")).toHaveClass("min-h-(--qy-fill-height-narrow)", "sm:min-h-(--qy-fill-height)", "rounded-(--qy-fill-radius)");

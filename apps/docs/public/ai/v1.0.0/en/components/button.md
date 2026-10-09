@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 9e121639ab6e4373d7c5af0252493e222fdeac6a56db55de6b6aab448f981e2e
+Source SHA-256: 9003deeef7d8f05980987cf1cbc05432997c947c45f2b20ae64f4c7fb4dd8e31
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -216,7 +216,7 @@ export const meta = { title: "组合：同底色的边界", titleEn: "Compositio
 export default function Demo() {
   return <div className="w-full rounded-panel bg-(--device-carrier) [--device-carrier:var(--qy-primary)] [--device-boundary:var(--qy-primary-foreground)] p-(--qy-panel-padding) text-primary-foreground">
     {/* 基础层 §5：实心入口与父面同色，显式补必要边界，并消费 §1 的边框换算。 */}
-    <Button className="border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-boundary-inset)] focus-visible:inset-ring-(--device-boundary)">继续核对设备</Button>
+    <Button className="border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-quiet-width)] focus-visible:inset-ring-(--device-boundary)">继续核对设备</Button>
   </div>;
 }
 ```

@@ -352,6 +352,11 @@
     --qy-slider-vertical-length: calc(8 * var(--qy-cai));
     --qy-status-dot-size: calc(2 * var(--qy-fen));
     --qy-readout-track-size: calc(2 * var(--qy-fen));
+    /* 读数轨道是载事的槽（应物象形：方以载事），圆角取与控件同一条比例 round(高 × 5/16)：
+     * 读数轨道 8 → 3px，滑块轨道 4 → 1px，转角有缓而不成胶囊。此前借用标记圆角（5px），
+     * 超过轨道高的一半（4px），被裁成两端半圆。派生，非预设。 */
+    --qy-radius-track: round(calc(var(--qy-readout-track-size) * 5 / 16), 1px);
+    --qy-radius-slider-track: round(calc(var(--qy-slider-track-size) * 5 / 16), 1px);
 
     /* 头像按等取样：身份样本的大小由所在位置的控件等决定。 */
     --qy-avatar-xs: var(--qy-control-xs);
@@ -432,9 +437,11 @@
   [data-theme] {
     --qy-focus-ring-on-solid: var(--qy-primary-foreground);
     --qy-focus-ring-color: var(--qy-ring);
-    /* bordered 按钮：底色与承载面相同，由线划出范围（骨法用笔）；与输入框同一条「重」墨线。
+    /* bordered 按钮：底色与承载面相同，由线划出范围（骨法用笔）。重墨线说「这里可以编辑」，
+     * 按钮是命令不是字段，取低一级的淡墨（24%）：与输入框同一条线时，表单里的「取消」与
+     * 选择框读成同一种东西。识别由焦墨文字承担（WCAG 1.4.11 不要求有字按钮另画边界）。
      * 聚焦时线加深到焦墨，不加粗。 */
-    --qy-button-bordered-border: var(--qy-border-input);
+    --qy-button-bordered-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-dan), transparent);
     --qy-button-bordered-border-focus: var(--qy-ring);
   }
 

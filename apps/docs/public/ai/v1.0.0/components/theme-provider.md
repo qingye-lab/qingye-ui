@@ -151,6 +151,7 @@ import { themeScript } from "@qingye_lab/ui/components/theme-provider";
 
 export const meta = {
   title: "防闪烁脚本",
+  titleEn: "Anti-flash script",
   description:
     "防闪烁脚本放在 <head> 中的样式表之前，参数与 ThemeProvider 一致。",
 };

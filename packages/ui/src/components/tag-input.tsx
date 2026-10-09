@@ -33,7 +33,8 @@ export type TagInputProps = Omit<useRender.ComponentProps<"div">, "defaultValue"
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "name" | "size">;
 };
 
-// 标签文字比控件低一档：标签是边界内的从属对象，与 md 标签高度取 xs 控件外高同一关系。
+// 标签文字与填值控件同档（与 Input 的 textProfile 同一档）：标签是边界内的内容，随内容档走；
+// 低一档的是标签的外高（取 xs 控件外高），不是文字。
 const chipText = "text-control-md-mobile sm:text-control-md";
 
 // 默认值用稳定引用：每次渲染新建的空数组会让依赖它的 effect 反复重订阅。

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
-Source SHA-256: 06f82f20353a0b0d5c28462653c250eef347cd8d1a277812a3f7f49b4aec25d4
+Source SHA-256: d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787
 
 在明确区间内输入数值或有序范围。
 

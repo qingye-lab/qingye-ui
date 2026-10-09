@@ -53,10 +53,14 @@
     --qy-shadow-raised: 0 10px 32px -8px oklch(0 0 0 / 0.12), 0 2px 6px oklch(0 0 0 / 0.05);
     --qy-shadow-overlay: 0 24px 64px -16px oklch(0 0 0 / 0.2), 0 4px 12px oklch(0 0 0 / 0.06);
 
-    /* 状态色（随类赋彩）：标记色 / 纸上可读的文字色 / 实心填充与其前景。预设。 */
-    --qy-danger: var(--qy-red-500);
-    --qy-danger-foreground: var(--qy-red-700);
-    --qy-danger-fill: var(--qy-red-700);
+    /* 状态色（随类赋彩）：标记色 / 纸上可读的文字色 / 实心填充与其前景。预设。
+     * 危险色沉于墨：Tailwind 红 700 的彩度 0.213 已近 sRGB 在该色相的上限，放在一页中性墨里是唯一的高彩度，
+     * 读来刺眼；与中性灰调和（红 70–75% + 灰），色相不动、彩度降下来，对纸与白字的对比
+     * 仍 ≥ 4.5:1（由 contrast-check 按真实合成测）。与数据系列「沉于墨而不艳」同一气质。
+     * 用 srgb 插值：检查器只解析 srgb 的 color-mix，oklch 插值会被记为 UNVERIFIED。 */
+    --qy-danger: color-mix(in srgb, var(--qy-red-500) 75%, var(--qy-neutral-500));
+    --qy-danger-foreground: color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500));
+    --qy-danger-fill: color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500));
     --qy-danger-on-fill: var(--qy-white);
     --qy-warning: var(--qy-amber-700);
     --qy-warning-foreground: color-mix(in srgb, var(--qy-amber-700) 90%, var(--qy-black));
@@ -93,7 +97,7 @@
 
     --qy-danger: color-mix(in srgb, var(--qy-red-500) 90%, var(--qy-white));
     --qy-danger-foreground: color-mix(in srgb, var(--qy-red-400) 90%, var(--qy-white));
-    --qy-danger-fill: var(--qy-red-700);
+    --qy-danger-fill: color-mix(in srgb, var(--qy-red-700) 72%, var(--qy-neutral-500));
     --qy-danger-on-fill: var(--qy-white);
     --qy-warning: var(--qy-amber-500);
     --qy-warning-foreground: var(--qy-amber-400);

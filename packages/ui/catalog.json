@@ -397,7 +397,14 @@
       ],
       "docs": "/docs/components/alert",
       "keywords": [
-        "alert"
+        "alert",
+        "notice",
+        "callout",
+        "banner",
+        "提示",
+        "警告",
+        "横幅",
+        "说明"
       ],
       "api": [
         {
@@ -702,7 +709,9 @@
         "确认",
         "决定",
         "删除",
-        "危险"
+        "危险",
+        "弹窗",
+        "二次确认"
       ],
       "api": [
         {
@@ -1683,7 +1692,12 @@
       ],
       "docs": "/docs/components/avatar",
       "keywords": [
-        "avatar"
+        "avatar",
+        "profile picture",
+        "user image",
+        "头像",
+        "用户头像",
+        "身份"
       ],
       "api": [
         {
@@ -2017,7 +2031,14 @@
       ],
       "docs": "/docs/components/badge",
       "keywords": [
-        "badge"
+        "badge",
+        "tag",
+        "label",
+        "count",
+        "徽标",
+        "标签",
+        "角标",
+        "计数"
       ],
       "api": [
         {
@@ -2253,6 +2274,14 @@
       "docs": "/docs/components/breadcrumb",
       "notes": [
         "不读取 URL、历史或自动创建父级；ol 直接子项必须是 li。"
+      ],
+      "keywords": [
+        "breadcrumbs",
+        "面包屑",
+        "路径",
+        "层级",
+        "导航路径",
+        "位置"
       ],
       "api": [
         {
@@ -2731,6 +2760,14 @@
       "docs": "/docs/components/bulk-action-bar",
       "notes": [
         "库显示对象版本而不推断新旧；应用在执行边界复核实际版本。"
+      ],
+      "keywords": [
+        "bulk",
+        "batch",
+        "批量",
+        "批量操作",
+        "多选操作",
+        "已选"
       ],
       "api": [
         {
@@ -3448,8 +3485,8 @@
             "@qingye_lab/ui/components/button"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\n\nexport const meta = { title: \"组合：同底色的边界\", titleEn: \"Composition: boundary on the same surface\" };\n\nexport default function Demo() {\n  return <div className=\"w-full rounded-panel bg-(--device-carrier) [--device-carrier:var(--qy-primary)] [--device-boundary:var(--qy-primary-foreground)] p-(--qy-panel-padding) text-primary-foreground\">\n    {/* 基础层 §5：实心入口与父面同色，显式补必要边界，并消费 §1 的边框换算。 */}\n    <Button className=\"border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-boundary-inset)] focus-visible:inset-ring-(--device-boundary)\">继续核对设备</Button>\n  </div>;\n}\n",
-          "sha256": "8805611967e71fffefd9da397886a5032c1fc45d239e06b2ecc8b91d07ba66d2"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\n\nexport const meta = { title: \"组合：同底色的边界\", titleEn: \"Composition: boundary on the same surface\" };\n\nexport default function Demo() {\n  return <div className=\"w-full rounded-panel bg-(--device-carrier) [--device-carrier:var(--qy-primary)] [--device-boundary:var(--qy-primary-foreground)] p-(--qy-panel-padding) text-primary-foreground\">\n    {/* 基础层 §5：实心入口与父面同色，显式补必要边界，并消费 §1 的边框换算。 */}\n    <Button className=\"border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-quiet-width)] focus-visible:inset-ring-(--device-boundary)\">继续核对设备</Button>\n  </div>;\n}\n",
+          "sha256": "379f2f127a0c10438e5cec60bfc7a622860f59673caeef34b080a6cf9f95ffe4"
         }
       ],
       "design": {
@@ -3485,7 +3522,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button.tsx",
-        "sha256": "9e121639ab6e4373d7c5af0252493e222fdeac6a56db55de6b6aab448f981e2e",
+        "sha256": "9003deeef7d8f05980987cf1cbc05432997c947c45f2b20ae64f4c7fb4dd8e31",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "等待、进行中、结果未知期间保留焦点并阻止重复触发。结果未知需要调用方先核实；危险动作必须与可见后果共处，色调不代表授权。",
@@ -5265,6 +5302,14 @@
         "FieldLabel 或真实 label 关联名称，说明和错误留在 Field 中。",
         "选中与无效可以同时存在；错误不会清空选中值。"
       ],
+      "keywords": [
+        "check",
+        "tick",
+        "复选框",
+        "勾选",
+        "多选框",
+        "选中"
+      ],
       "api": [
         {
           "name": "Checkbox",
@@ -5614,6 +5659,13 @@
         "FieldItem/FieldLabel 必须放在 Field 内；组外也可使用原生 label。",
         "只读是项的限制，disabled 是组的限制；不从空集合推断 invalid。"
       ],
+      "keywords": [
+        "checkboxes",
+        "多选",
+        "复选",
+        "多选组",
+        "勾选"
+      ],
       "api": [
         {
           "name": "CheckboxGroup",
@@ -5939,6 +5991,14 @@
       "docs": "/docs/components/code-block",
       "notes": [
         "语言名称不是语法解析；没有额外依赖、请求或剪贴板 fallback 伪成功。"
+      ],
+      "keywords": [
+        "code",
+        "snippet",
+        "syntax",
+        "代码",
+        "代码块",
+        "高亮"
       ],
       "api": [
         {
@@ -7434,6 +7494,13 @@
       "notes": [
         "演示中的可见 Menu 与右键区域共用动作；不模拟业务服务。"
       ],
+      "keywords": [
+        "right click",
+        "contextmenu",
+        "右键",
+        "右键菜单",
+        "上下文菜单"
+      ],
       "api": [
         {
           "name": "ContextMenu / ContextMenuTrigger",
@@ -8004,6 +8071,12 @@
         "剪贴板需要运行环境支持与权限；失败保留手动复制提示。",
         "onCopySuccess 只确认传入文本写入当前剪贴板，不表示保存或业务完成。"
       ],
+      "keywords": [
+        "copy",
+        "clipboard",
+        "复制",
+        "剪贴板"
+      ],
       "api": [
         {
           "name": "CopyButton",
@@ -8536,7 +8609,18 @@
       ],
       "docs": "/docs/components/data-table",
       "notes": [
-        "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。"
+        "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
+        "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
+      ],
+      "keywords": [
+        "datagrid",
+        "grid",
+        "table",
+        "sort",
+        "表格",
+        "数据表",
+        "排序",
+        "选择行"
       ],
       "api": [
         {
@@ -8802,8 +8886,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"真实排序与范围选择\", titleEn: \"Real sorting and scoped selection\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", count: 0 },\n];\n\nexport default function Demo() {\n  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [\n    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。\n    { id: \"selection\", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope=\"filtered\" aria-label=\"选择当前本地集合\" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },\n    { accessorKey: \"label\", meta: { rowHeader: true }, header: \"名称\" },\n    { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },\n  ], []);\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });\n  return <Stack>\n    <DataTable table={table} caption=\"本地集合 · 3 项\" emptyContent=\"本地集合没有条目\" />\n    <output className=\"text-support text-muted-foreground\">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join(\"、\") || \"无\"}</output>\n  </Stack>;\n}\n",
-          "sha256": "8cab8f50f96394c1acb92ed00358c84e300a1d837d1eeeea565e9a3ab17ec474"
+          "code": "import * as React from \"react\";\nimport { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"真实排序与范围选择\", titleEn: \"Real sorting and scoped selection\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", count: 0 },\n];\n\nexport default function Demo() {\n  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [\n    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。\n    { id: \"selection\", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope=\"filtered\" aria-label=\"选择当前本地集合\" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },\n    { accessorKey: \"label\", meta: { rowHeader: true }, header: \"名称\" },\n    { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },\n  ], []);\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });\n  return <Stack>\n    <DataTable table={table} caption=\"本地集合 · 3 项\" emptyContent=\"本地集合没有条目\" />\n    <output className=\"text-support text-muted-foreground\">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join(\"、\") || \"无\"}</output>\n  </Stack>;\n}\n",
+          "sha256": "996f57d41c0f95652c9db454a6b5b06ca8d651d28f51f8060fb005b5f1efae84"
         }
       ],
       "design": {
@@ -8851,7 +8935,8 @@
           "category": "Data display",
           "decisions": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
           "notes": [
-            "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models."
+            "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
+            "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
           ],
           "api": [
             {
@@ -9921,6 +10006,15 @@
       "notes": [
         "需要跨多个对象比较同一维度时使用 Table。"
       ],
+      "keywords": [
+        "dl",
+        "key value",
+        "detail",
+        "详情",
+        "键值",
+        "属性列表",
+        "名称与值"
+      ],
       "api": [
         {
           "name": "DescriptionList",
@@ -10280,7 +10374,10 @@
         "modal",
         "对话框",
         "阻断",
-        "编辑"
+        "编辑",
+        "弹窗",
+        "弹出框",
+        "模态"
       ],
       "api": [
         {
@@ -11357,6 +11454,15 @@
       "docs": "/docs/components/empty",
       "notes": [
         "保留刷新前的有效内容，不把尚未加载或不适用标成 0 条。"
+      ],
+      "keywords": [
+        "empty state",
+        "no data",
+        "blank",
+        "空状态",
+        "暂无数据",
+        "无内容",
+        "未知"
       ],
       "api": [
         {
@@ -13197,6 +13303,12 @@
       "notes": [
         "Field/Input 放在 Fields 中；清除是应用策略，不伪造结果。"
       ],
+      "keywords": [
+        "filter",
+        "筛选",
+        "过滤",
+        "条件"
+      ],
       "api": [
         {
           "name": "FilterBar",
@@ -14159,7 +14271,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/heatmap.tsx",
-        "sha256": "32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a",
+        "sha256": "3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "行列都是类别轴，不是数据系列——没有身份要区分，只有量的大小，因此只用一种色相：数据是色，取第一色（花青）与纸调和的 12% 到足色。未知/不适用格用清墨斜线纹，不进色阶，避免与真实的小量值混淆。",
@@ -15454,6 +15566,13 @@
       "notes": [
         "不在 a 中嵌套按钮、链接或其他交互控件；无需动作时不生成假入口。"
       ],
+      "keywords": [
+        "list item",
+        "row",
+        "条目",
+        "列表项",
+        "行"
+      ],
       "api": [
         {
           "name": "Item",
@@ -15870,7 +15989,13 @@
       ],
       "docs": "/docs/components/kbd",
       "keywords": [
-        "kbd"
+        "kbd",
+        "keyboard",
+        "shortcut",
+        "key",
+        "快捷键",
+        "按键",
+        "键盘"
       ],
       "api": [
         {
@@ -16869,6 +16994,14 @@
         "不修改 document.lang、系统语言、存储或路由；这些属于应用。",
         "内置名 language 走 UI locale；选项可见名称由消费项目给出。"
       ],
+      "keywords": [
+        "language",
+        "i18n",
+        "locale",
+        "语言",
+        "切换语言",
+        "国际化"
+      ],
       "api": [
         {
           "name": "LocaleSwitch",
@@ -17147,6 +17280,15 @@
       "docs": "/docs/components/menu",
       "notes": [
         "危险操作需显式后果与独立保护；Root/Portal/Positioner/Popup 属于同一上下文。"
+      ],
+      "keywords": [
+        "dropdown",
+        "dropdown menu",
+        "actions menu",
+        "菜单",
+        "下拉",
+        "下拉菜单",
+        "更多操作"
       ],
       "api": [
         {
@@ -17921,7 +18063,14 @@
       ],
       "docs": "/docs/components/meter",
       "keywords": [
-        "meter"
+        "meter",
+        "gauge",
+        "measure",
+        "level",
+        "仪表",
+        "度量",
+        "用量",
+        "容量"
       ],
       "api": [
         {
@@ -18158,7 +18307,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/meter.tsx",
-        "sha256": "de0a572e25222332f6ee27c73e0a933fb66a5344d9c63f541af9882849be3383",
+        "sha256": "c6a79f529838893b4d73ae0a7800f3d357114d95c2188628cf46d3da3566c8de",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "任务完成比例使用 Progress；未知测量不要填0。",
@@ -18765,6 +18914,14 @@
       "docs": "/docs/components/navigation-menu",
       "notes": [
         "链接不因导航未展开而失去真实 href；不内置路由。"
+      ],
+      "keywords": [
+        "navbar",
+        "nav",
+        "header menu",
+        "导航菜单",
+        "导航栏",
+        "顶栏"
       ],
       "api": [
         {
@@ -20033,8 +20190,8 @@
             "@qingye_lab/ui/components/otp-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"文本\", titleEn: \"Text\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode=\"numeric\" defaultValue=\"0012\" name=\"code\" /><FieldDescription>6 个字符</FieldDescription></Field>\n    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue=\"A01\" /><FieldDescription>4 个字符</FieldDescription></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue=\"0012\" /><FieldError>编码尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue=\"0012\" readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue=\"0012\" /></Field>\n  </FieldGroup>;\n}\n",
-          "sha256": "aafee820d903828c7510fb069f6a2c8aaa75ccd0cc88f10e118864ebc4b52e43"
+          "code": "import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"文本\", titleEn: \"Text\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field className=\"sm:col-span-2\"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode=\"numeric\" defaultValue=\"0012\" name=\"code\" /><FieldDescription>6 个字符</FieldDescription></Field>\n    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue=\"A01\" /><FieldDescription>4 个字符</FieldDescription></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue=\"0012\" /><FieldError>编码尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue=\"0012\" readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue=\"0012\" /></Field>\n  </FieldGroup>;\n}\n",
+          "sha256": "6893c36d256bd1c969fc210e7ac6d209eb1949b340c9baaf4b414945744fa68f"
         },
         {
           "id": "density",
@@ -20082,7 +20239,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c",
+        "sha256": "17768395e25182532a892827852f4413c9f47ea670f719656f5ca78f35b0af39",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有一个真实文本输入，分段跟随它的光标与选择。前导零保留，长度填满只说明文本长度；核对、请求和结果归应用。",
@@ -20226,6 +20383,13 @@
       "docs": "/docs/components/page-header",
       "notes": [
         "无需动作时省略动作槽；不复制已经明确的路径或操作说明。"
+      ],
+      "keywords": [
+        "header",
+        "title",
+        "页头",
+        "页面标题",
+        "标题栏"
       ],
       "api": [
         {
@@ -20610,6 +20774,13 @@
       "docs": "/docs/components/pagination",
       "notes": [
         "不请求数据、保存路由或自动截取页码；未知总数不证明有无下一页。"
+      ],
+      "keywords": [
+        "pager",
+        "pages",
+        "分页",
+        "翻页",
+        "页码"
       ],
       "api": [
         {
@@ -21129,7 +21300,14 @@
       ],
       "docs": "/docs/components/pending-value",
       "keywords": [
-        "pending-value"
+        "pending-value",
+        "loading value",
+        "unknown",
+        "placeholder",
+        "待定",
+        "未知",
+        "加载中的值",
+        "占位"
       ],
       "api": [
         {
@@ -21942,7 +22120,14 @@
       ],
       "docs": "/docs/components/progress",
       "keywords": [
-        "progress"
+        "progress",
+        "progress bar",
+        "loading",
+        "percent",
+        "进度条",
+        "加载",
+        "百分比",
+        "完成度"
       ],
       "api": [
         {
@@ -22199,7 +22384,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/progress.tsx",
-        "sha256": "99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2",
+        "sha256": "cff89a803b2105b54475d0238a526200110fc5c9a7ad26ebe38e60a296822f58",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "动画和时间不能提供完成事实；0 与 null 不同。",
@@ -22467,7 +22652,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/proportion.tsx",
-        "sha256": "a6ca2d97dabe3018be157df2cffedebdb00938e6f8b098267ddb16010fd2877c",
+        "sha256": "9ca09dbc301e445e298b8bd812665f5795f3f07819343b2ee2b7c276243cc2eb",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物。",
@@ -22793,6 +22978,13 @@
         "FieldTitle 命名组，FieldItem + FieldLabel 命名单项，FieldError 关联错误。",
         "未选择、0 与空字符串是不同的值。",
         "禁用项退出 Tab 顺序；只读保留焦点与当前值。"
+      ],
+      "keywords": [
+        "radio",
+        "radios",
+        "单选",
+        "单选框",
+        "互斥选择"
       ],
       "api": [
         {
@@ -23536,6 +23728,14 @@
         "原生滚动条可见性由操作系统/浏览器/用户设置决定，组件不强制覆盖自动隐藏。",
         "尺寸由消费布局给出；内容需全量渲染时使用此组件，等高长集合可使用 VirtualList。"
       ],
+      "keywords": [
+        "scroll",
+        "scrollbar",
+        "overflow",
+        "滚动",
+        "滚动条",
+        "滚动区域"
+      ],
       "api": [
         {
           "name": "ScrollArea",
@@ -23797,6 +23997,14 @@
         "SegmentedControlItemPrimitive"
       ],
       "docs": "/docs/components/segmented-control",
+      "keywords": [
+        "segmented",
+        "button group",
+        "切换",
+        "分段",
+        "分段控制",
+        "视图切换"
+      ],
       "api": [
         {
           "name": "SegmentedControl",
@@ -24236,6 +24444,15 @@
         "null 是未选择，空字符串和 0 可作为候选；原生表单可能把 null 与空字符串都序列化为空。",
         "只读保留当前值，禁用项不能选取。",
         "自身 Positioner 消费共享 popup 层级，父工作面内候选高于该工作面；positionerProps 保留调用方 style/ref/render。"
+      ],
+      "keywords": [
+        "dropdown",
+        "combobox",
+        "picker",
+        "选择",
+        "下拉",
+        "下拉选择",
+        "选项"
       ],
       "api": [
         {
@@ -25273,6 +25490,13 @@
       "notes": [
         "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。"
       ],
+      "keywords": [
+        "side nav",
+        "drawer",
+        "侧栏",
+        "侧边栏",
+        "边栏"
+      ],
       "api": [
         {
           "name": "Sidebar / SidebarToggle",
@@ -25718,7 +25942,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "a02db68627ad2040187d6d11629fe57fca3dea50b217161484adc6611e5b7763",
+        "sha256": "05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
@@ -25870,6 +26094,13 @@
         "必须给 SliderLabel 或每个 Thumb 的名称，多滑块名称需要区分。",
         "原语交互按步进吸附；显式无效值会抛 RangeError。",
         "4px 轨道厚度和 10rem 纵向长度是集中预设，修改 tokens/components.css 或项目主题；浏览器对比与几何仍需验收。"
+      ],
+      "keywords": [
+        "range",
+        "track",
+        "滑块",
+        "滑动条",
+        "范围"
       ],
       "api": [
         {
@@ -26334,7 +26565,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/slider.tsx",
-        "sha256": "06f82f20353a0b0d5c28462653c250eef347cd8d1a277812a3f7f49b4aec25d4",
+        "sha256": "d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "Slider 输入真实数值。进度使用 Progress，测量结果使用 Meter；onValueCommitted 只表示当前交互提交。",
@@ -26767,6 +26998,15 @@
       "notes": [
         "统计口径、更新时间和变化判断属于应用事实；说明可省略。"
       ],
+      "keywords": [
+        "metric",
+        "kpi",
+        "number",
+        "度量",
+        "指标",
+        "统计",
+        "数字"
+      ],
       "api": [
         {
           "name": "StatDelta",
@@ -27133,7 +27373,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/stat.tsx",
-        "sha256": "6e812b09e8375b417af68edbacc5b10eda7b1747c44b6acb7b1bbf34172af163",
+        "sha256": "1eb700305ca9e6aaf4d16597a4ad70c5abc2e5c094183c4788752e06b3f5d951",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用说明。变化量必须说明参照期，方向由箭头与文字表达；好坏只由应用声明，未声明时用墨色。",
@@ -27275,7 +27515,14 @@
       ],
       "docs": "/docs/components/status-dot",
       "keywords": [
-        "status-dot"
+        "status-dot",
+        "status",
+        "indicator",
+        "online",
+        "状态点",
+        "在线",
+        "指示灯",
+        "圆点"
       ],
       "api": [
         {
@@ -27508,6 +27755,15 @@
       "docs": "/docs/components/steps",
       "notes": [
         "不能由当前索引把之前各项自动标记完成。"
+      ],
+      "keywords": [
+        "stepper",
+        "wizard",
+        "progress steps",
+        "步骤",
+        "步骤条",
+        "流程",
+        "向导"
       ],
       "api": [
         {
@@ -27884,6 +28140,13 @@
         "不支持部分选中；多选或待提交选择用 Checkbox。",
         "异步保存的等待、未知和失败属于应用，不能用滑块动画表示请求成功。"
       ],
+      "keywords": [
+        "toggle",
+        "on off",
+        "开关",
+        "切换开关",
+        "启用"
+      ],
       "api": [
         {
           "name": "Switch",
@@ -28210,6 +28473,14 @@
       "docs": "/docs/components/table",
       "notes": [
         "空结果可在完整表头下提供跨列单元格；数据与排序由应用提供。"
+      ],
+      "keywords": [
+        "grid",
+        "comparison",
+        "比较",
+        "表格",
+        "比较表",
+        "对照"
       ],
       "api": [
         {
@@ -28756,6 +29027,13 @@
       "docs": "/docs/components/tabs",
       "notes": [
         "隐藏面板仍挂载但退出可访问树；不要把切换当成保存成功。"
+      ],
+      "keywords": [
+        "tab",
+        "tablist",
+        "标签页",
+        "选项卡",
+        "页签"
       ],
       "api": [
         {
@@ -29406,7 +29684,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "855ae9505fc6259647cc2243f33910b843e1a79568853115ce73eb0868b9f71d",
+        "sha256": "5f00a0f9d344ee255eb9e0998fd3f2498a37a213aff73b04cd355d1fd6bf6e68",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "Enter 或添加按钮才确认；两端空白去除，精确字符串去重且区分大小写。空项、重复项及受控拒绝不会清空草稿。",
@@ -29553,6 +29831,14 @@
         "自动增高使用 CSS field-sizing:content；不支持时保留 rows 与原生手工调整。",
         "错误、提交与持久化事实由应用提供，失败后保留草稿。",
         "默认表面与尺寸是集中预设；聚焦只变边框颜色。"
+      ],
+      "keywords": [
+        "multiline",
+        "text area",
+        "多行",
+        "多行输入",
+        "文本域",
+        "备注"
       ],
       "api": [
         {
@@ -30147,8 +30433,8 @@
             "@qingye_lab/ui/components/theme-provider"
           ],
           "providers": [],
-          "code": "import { themeScript } from \"@qingye_lab/ui/components/theme-provider\";\n\nexport const meta = {\n  title: \"防闪烁脚本\",\n  description:\n    \"防闪烁脚本放在 <head> 中的样式表之前，参数与 ThemeProvider 一致。\",\n};\n\nexport default function Demo() {\n  return (\n    <pre className=\"w-full max-w-xl overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-muted p-4 font-mono text-muted-foreground text-caption leading-relaxed [font-variant-ligatures:none]\">\n      {`<script>${themeScript({ storageKey: \"yq-theme\" })}</script>`}\n    </pre>\n  );\n}\n",
-          "sha256": "f87ea6894df9d297766205a46b73c968472bcf4cc9fd83820225125be0d4a96c"
+          "code": "import { themeScript } from \"@qingye_lab/ui/components/theme-provider\";\n\nexport const meta = {\n  title: \"防闪烁脚本\",\n  titleEn: \"Anti-flash script\",\n  description:\n    \"防闪烁脚本放在 <head> 中的样式表之前，参数与 ThemeProvider 一致。\",\n};\n\nexport default function Demo() {\n  return (\n    <pre className=\"w-full max-w-xl overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-muted p-4 font-mono text-muted-foreground text-caption leading-relaxed [font-variant-ligatures:none]\">\n      {`<script>${themeScript({ storageKey: \"yq-theme\" })}</script>`}\n    </pre>\n  );\n}\n",
+          "sha256": "effcf2008fd9f31d2312606bc5f6733ab02fe82c350dbae2df5cee628ace67e0"
         }
       ],
       "design": {
@@ -30310,6 +30596,14 @@
       "docs": "/docs/components/timeline",
       "notes": [
         "正序、逆序和相同时间输入都原样保留；空序列不补占位事件。"
+      ],
+      "keywords": [
+        "history",
+        "events",
+        "时间线",
+        "时间序列",
+        "事件",
+        "历史"
       ],
       "api": [
         {
@@ -31687,6 +31981,13 @@
         "pressed 不表示保存、请求或持久化已完成。",
         "布尔表单值用 Checkbox，即时开关用 Switch。"
       ],
+      "keywords": [
+        "pressed",
+        "toggle button",
+        "切换按钮",
+        "按下",
+        "开关按钮"
+      ],
       "api": [
         {
           "name": "Toggle",
@@ -32037,6 +32338,13 @@
       "notes": [
         "没有 name 或隐藏表单值；需要提交的互斥值使用 SegmentedControl。",
         "single 允许全部松开；不能用它冒充必选 radio。"
+      ],
+      "keywords": [
+        "toolbar toggle",
+        "button group",
+        "切换组",
+        "按钮组",
+        "多选切换"
       ],
       "api": [
         {
@@ -32442,6 +32750,13 @@
       "docs": "/docs/components/toolbar",
       "notes": [
         "只为持续的相关操作使用 Toolbar；普通多个按钮可以用 ButtonGroup。"
+      ],
+      "keywords": [
+        "tools",
+        "action bar",
+        "工具栏",
+        "工具组",
+        "操作栏"
       ],
       "api": [
         {
@@ -33252,8 +33567,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Tooltip, TooltipPopup, TooltipTrigger } from \"@qingye_lab/ui/components/tooltip\";\nimport { IconBold } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"快捷键\" };\n\nexport default function Demo() {\n  const [bold, setBold] = useState(false);\n  return (\n    <div className=\"flex items-center gap-(--qy-field-group-gap)\" onKeyDown={(event) => {\n      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === \"b\") {\n        event.preventDefault();\n        setBold((value) => !value);\n      }\n    }}>\n      <Tooltip>\n        <TooltipTrigger render={<Button aria-label=\"粗体\" aria-pressed={bold} variant=\"quiet\" shape=\"icon\" onClick={() => setBold((value) => !value)} />}><IconBold aria-hidden=\"true\" /></TooltipTrigger>\n        <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>\n      </Tooltip>\n      <p className=\"text-body text-foreground\">{bold ? <strong>让器物服务于人</strong> : \"让器物服务于人\"}</p>\n    </div>\n  );\n}\n",
-          "sha256": "9f8be5ee822ca7f72b57f3be17ee4cb0765546c61225fef0d81cfa51f6a4b370"
+          "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Tooltip, TooltipPopup, TooltipTrigger } from \"@qingye_lab/ui/components/tooltip\";\nimport { IconBold } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"快捷键\", titleEn: \"Keyboard shortcut\" };\n\nexport default function Demo() {\n  const [bold, setBold] = useState(false);\n  return (\n    <div className=\"flex items-center gap-(--qy-field-group-gap)\" onKeyDown={(event) => {\n      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === \"b\") {\n        event.preventDefault();\n        setBold((value) => !value);\n      }\n    }}>\n      <Tooltip>\n        <TooltipTrigger render={<Button aria-label=\"粗体\" aria-pressed={bold} variant=\"quiet\" shape=\"icon\" onClick={() => setBold((value) => !value)} />}><IconBold aria-hidden=\"true\" /></TooltipTrigger>\n        <TooltipPopup><kbd>⌘B / Ctrl+B</kbd></TooltipPopup>\n      </Tooltip>\n      <p className=\"text-body text-foreground\">{bold ? <strong>让器物服务于人</strong> : \"让器物服务于人\"}</p>\n    </div>\n  );\n}\n",
+          "sha256": "f804a46c6294c772daf21e7bb30be6266f86732dbb06debd004f998914ce64b9"
         },
         {
           "id": "shared",
@@ -33266,8 +33581,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useMemo, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from \"@qingye_lab/ui/components/tooltip\";\nimport { IconAlignCenter, IconAlignLeft, IconAlignRight } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"段落对齐\" };\n\nconst items = [\n  { value: \"left\", label: \"左对齐\", detail: \"段落靠左边缘排列\", icon: IconAlignLeft },\n  { value: \"center\", label: \"居中对齐\", detail: \"段落沿中央排列\", icon: IconAlignCenter },\n  { value: \"right\", label: \"右对齐\", detail: \"段落靠右边缘排列\", icon: IconAlignRight },\n] as const;\n\nexport default function Demo() {\n  const handle = useMemo(() => TooltipCreateHandle<string>(), []);\n  const [align, setAlign] = useState<\"left\" | \"center\" | \"right\">(\"left\");\n  return <div className=\"flex flex-col gap-(--qy-field-group-gap)\"><div role=\"group\" aria-label=\"段落对齐\" className=\"flex gap-(--qy-action-gap)\">{items.map(({ value, label, detail, icon: Icon }) => <TooltipTrigger handle={handle} key={value} payload={detail} render={<Button variant=\"quiet\" shape=\"icon\" aria-label={label} aria-pressed={align === value} onClick={() => setAlign(value)} />}><Icon aria-hidden=\"true\" /></TooltipTrigger>)}</div><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip><p className=\"text-body text-foreground\" style={{ textAlign: align }}>青野组件库，器用为本。</p></div>;\n}\n",
-          "sha256": "f2e822be843de0149ad8bd0eab208358e0d1e5409b8f366114a9124f22056625"
+          "code": "import { useMemo, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Tooltip, TooltipCreateHandle, TooltipPopup, TooltipTrigger } from \"@qingye_lab/ui/components/tooltip\";\nimport { IconAlignCenter, IconAlignLeft, IconAlignRight } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"段落对齐\", titleEn: \"Aligning a paragraph\" };\n\nconst items = [\n  { value: \"left\", label: \"左对齐\", detail: \"段落靠左边缘排列\", icon: IconAlignLeft },\n  { value: \"center\", label: \"居中对齐\", detail: \"段落沿中央排列\", icon: IconAlignCenter },\n  { value: \"right\", label: \"右对齐\", detail: \"段落靠右边缘排列\", icon: IconAlignRight },\n] as const;\n\nexport default function Demo() {\n  const handle = useMemo(() => TooltipCreateHandle<string>(), []);\n  const [align, setAlign] = useState<\"left\" | \"center\" | \"right\">(\"left\");\n  return <div className=\"flex flex-col gap-(--qy-field-group-gap)\"><div role=\"group\" aria-label=\"段落对齐\" className=\"flex gap-(--qy-action-gap)\">{items.map(({ value, label, detail, icon: Icon }) => <TooltipTrigger handle={handle} key={value} payload={detail} render={<Button variant=\"quiet\" shape=\"icon\" aria-label={label} aria-pressed={align === value} onClick={() => setAlign(value)} />}><Icon aria-hidden=\"true\" /></TooltipTrigger>)}</div><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip><p className=\"text-body text-foreground\" style={{ textAlign: align }}>青野组件库，器用为本。</p></div>;\n}\n",
+          "sha256": "a8fb58010704a1dde44bfdcb8d0cfe29f95dc037bad936d3f2c14782440ea890"
         }
       ],
       "design": {
@@ -33512,6 +33827,14 @@
       "docs": "/docs/components/tree",
       "notes": [
         "移除焦点节点回到可用节点；清空回到拥有焦点的容器，不抢走外部焦点。"
+      ],
+      "keywords": [
+        "tree view",
+        "hierarchy",
+        "树",
+        "树形",
+        "层级",
+        "目录树"
       ],
       "api": [
         {
@@ -34145,7 +34468,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/typography.tsx",
-        "sha256": "61bbfd143704d1218831b2427d0145f8635858803dfaa75170638ffe3155f261",
+        "sha256": "ef6d04ce956f807ca010b2348e7f99adc4bc1394a734dbfae53cef1c7beaf0b9",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文依 lang 使用正常字距，numeric 不格式化值。",
@@ -34290,6 +34613,14 @@
         "只有等高项；动态高度、完整 DOM 搜索/打印使用普通集合或 ScrollArea。",
         "聚焦行即使离屏也保留挂载；真实移除后焦点回到视口，可继续导航。aria-posinset/setsize 表达完整集合位置。",
         "示例行高 48px 是消费示例选择，视口容纳四项；修改入口是示例 rowSize 与组件 itemSize/height，未新增库 token。"
+      ],
+      "keywords": [
+        "virtualized",
+        "windowing",
+        "long list",
+        "虚拟列表",
+        "长列表",
+        "虚拟滚动"
       ],
       "api": [
         {
@@ -34645,31 +34976,31 @@
       "section": "设计契约",
       "implementation": {
         "source": "STANDARDS.md",
-        "sha256": "f922c86a587fb17fc4edd71326b8e8b6dcd6fe8c6c7fb1fccaaf60c76e305583",
+        "sha256": "b82ee4933e584b7534719a3a17a84e7d30d844590db8da24642c4a8856441bc1",
         "section": "公共组件实现"
       }
     },
     "philosophy": {
       "file": "ai/design-philosophy.md",
-      "sha256": "9eff1c3f6ad13ad3ffc60ff4331a0b4b490cd3646aafce1605ed04f9d253759c",
+      "sha256": "6c282199fe816ec86368d50b104dc97fb2bd411d6f9aaf5d45fa6af1b4524035",
       "source": "apps/docs/src/public-content/philosophy.md",
-      "sourceSha256": "7eb72c1318326c04e3835a842087d1dfaf97b014661fac997d2291e57a43e065",
+      "sourceSha256": "c0c73f557708b0253104e4f564aed1b853588df9a38c74cdfc692d59c123b299",
       "projections": {
         "website": {
           "file": "ai/design-philosophy.md",
-          "sha256": "7eb72c1318326c04e3835a842087d1dfaf97b014661fac997d2291e57a43e065"
+          "sha256": "c0c73f557708b0253104e4f564aed1b853588df9a38c74cdfc692d59c123b299"
         }
       },
       "localized": {
         "en": {
           "file": "ai/design-philosophy.en.md",
-          "sha256": "227acaaca843c8b3a78a33980bfd2f8549d2bc6edcef027d39337a1e1e2b56df",
+          "sha256": "a9c77e7d59c5d3df7bb28701ac56059ea0ed4ddd926873d0bba88917b897135b",
           "source": "apps/docs/src/public-content/philosophy.en.md",
-          "sourceSha256": "9b1e06cff7311c38e6858d3c72525bb2ccc2085a5a2d305b33aa3555d46777ba",
+          "sourceSha256": "814be319ee1294ff3700a26628f05ef8d07193c27a0580b0e542bf9a6adf49cf",
           "projections": {
             "website": {
               "file": "ai/design-philosophy.en.md",
-              "sha256": "df1dddd8026d3215256461d89344ceb6209f81dc9cc83e46a59589d4808af7bd"
+              "sha256": "bf0f395e56b034529331aa0dcc9387c9b6e8743a6c7e1f181d90c6fa23ca7927"
             }
           }
         }

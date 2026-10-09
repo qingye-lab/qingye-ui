@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: 61bbfd143704d1218831b2427d0145f8635858803dfaa75170638ffe3155f261
+Source SHA-256: ef6d04ce956f807ca010b2348e7f99adc4bc1394a734dbfae53cef1c7beaf0b9
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 

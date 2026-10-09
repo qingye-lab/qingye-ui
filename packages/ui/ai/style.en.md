@@ -149,7 +149,7 @@ Task criteria come from [Space and surfaces](../design.en.md#space-and-surfaces)
 
 These three variants are current choices, not fixed importance levels; tone is independent. The user's rule to retain borders when a surface matches its background motivates bordered, without adding lines to entries already distinguished by fill.
 
-Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`, and `--qy-ring` through `--qy-button-bordered-border-focus`. Both appearances use the ink ladder's heavy step (50%): black in light mode and white in dark mode. Danger bordered locally mixes danger text at 50%, with opaque danger text for focus.
+Neutral bordered takes the ink ladder's light step (24%) through `--qy-button-bordered-border`, and `--qy-ring` through `--qy-button-bordered-border-focus`: black in light mode and white in dark mode. The heavy line (50%) is reserved for editable fill controls; a button is a command and does not share the field's line (2026-10-09, foundation history). A labelled button is identified by its text. Danger bordered locally mixes danger text at the same light-ink ratio, with opaque danger text for focus.
 
 - Use semantic surface roles rather than hard-coded gray. Surface/raised currently use white in light mode and opaque color mixes in dark mode. Surface-inset, lines, and feedback layers are translucent; measure their actual compositions.
 - Input currently has a 1px shared outer boundary and a transparent inner input; dark mode reads the inset surface. Current Card/Popover each have a 1px container boundary. This records implementation rather than requiring a line in every context.
@@ -158,17 +158,18 @@ Neutral bordered reads `--qy-border-input` through `--qy-button-bordered-border`
 
 ### 4. Radii
 
-Square for work, round for points (foundation §4). Independent controls use r = min(height / 4, 2 units); only points and identities (status dots, avatars, radio marks, slider thumbs) are round.
+Square for work, round for points (foundation §4). Radii are proportional to the outer height: r = round(height × 5/16), uncapped (user ruling 2026-10-07: rounder public radii); only points and identities (status dots, avatars, radio marks, slider thumbs) are round.
 
 | Class / role | Value | Relationship |
 |---|---|---|
-| `rounded-xs` / `rounded-sm` | 6 / 7px | height / 4 |
-| `rounded-control` | 8px | 2 units |
-| `rounded-overlay` | 12px | control radius + overlay inset |
-| `--qy-radius-overlay-item` | 8px | overlay radius − inset |
-| `rounded-panel` | 12px | same carrying surface as overlays |
-| `rounded-marker` | 4px | marker edge / 4 |
-| `rounded-item` | 6px | same as the smallest control |
+| `rounded-xs` … `rounded-xl` | 8 / 9 / 10 / 11 / 13px | round(height × 5/16) |
+| `rounded-control` | 10px | md height 32 × 5/16 |
+| `rounded-overlay` | 14px | control radius + overlay inset |
+| `--qy-radius-overlay-item` | 10px | overlay radius − inset |
+| `rounded-panel` | 16px | 4 units (a choice: the same ratio on a panel is too square) |
+| `rounded-marker` | 5px | round(marker edge 16 × 5/16) |
+| `rounded-item` | 8px | same as the smallest control |
+| `--qy-radius-track` / `--qy-radius-slider-track` | 3 / 1px | round(track height × 5/16): readout track 8, slider track 4 |
 
 Use `inner radius = max(0, outer radius − inset)` only for an equal inset of the same contour; negatives become square. Independent child objects such as a Button inside a Card keep their own role.
 
