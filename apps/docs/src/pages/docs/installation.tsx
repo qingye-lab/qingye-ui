@@ -1,9 +1,9 @@
 import pkg from "@qingye_lab/ui/package.json";
 import { CodeBlock } from "@/components/code-block";
 import { InstallTabs } from "@/components/install-tabs";
-import { A, Code, Facts, H2, P, PageHeader } from "@/components/prose";
+import { A, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
-import { installTarget, releaseFile, SITE } from "@/lib/site";
+import { installTarget, SITE, tarballTarget } from "@/lib/site";
 
 const peers = pkg.peerDependencies;
 const providers = `import { MotionProvider } from "${SITE.packageName}/components/motion-provider";
@@ -29,13 +29,13 @@ export default function InstallationPage() {
   const en = useDocsLocale() === "en";
   return <article><PageHeader title={en ? "Installation" : "安装"} description={en ? `Requires React and React DOM ${peers.react}. Tailwind CSS 4 is optional.` : `需要 React 与 React DOM ${peers.react}；Tailwind CSS 4 可选。`} />
     <H2 id="install">{en ? "Install the package" : "安装包"}</H2>
-    {SITE.npmPublished ? <InstallTabs pkg={installTarget} /> : <>
-      <P>{en ? `${SITE.packageName} is not on npm yet. Download ` : `${SITE.packageName} 尚未发布到 npm。从 `}{en ? <><Code>{releaseFile}</Code> from a <A href={`${SITE.repo}/releases`}>GitHub Release</A></> : <><A href={`${SITE.repo}/releases`}>GitHub Release</A> 下载 <Code>{releaseFile}</Code></>}{en ? " into your project root. If no release carries this version yet, build the same file from the Qingye UI repository root:" : "，放在项目根目录。Release 还没有这个版本时，在 Qingye UI 仓库根目录生成同名文件："}</P>
-      <CodeBlock code={`pnpm --filter ${SITE.packageName} pack --pack-destination ../my-app`} lang="shell" />
-      <P>{en ? "Then install it:" : "然后安装："}</P>
-      <InstallTabs pkg={installTarget} />
-      <P>{en ? "package.json refers to the file by path. Commit the file with the lockfile so teammates and CI install the same build." : "package.json 按路径引用这个文件。把它与 lock 文件一起提交，其他成员与 CI 才能装到同一份构建。"}</P>
-    </>}
+    <H3 id="npm">npm</H3>
+    <InstallTabs pkg={installTarget} />
+    <H3 id="tarball">{en ? "Tarball" : "tgz 包"}</H3>
+    <P>{en ? <>Without npm access, install the same version from a tarball. Download it from a <A href={`${SITE.repo}/releases`}>GitHub Release</A>; if no release carries this version yet, pack it from the Qingye UI repository root:</> : <>无法访问 npm 时，用 tgz 文件安装同一版本。文件从 <A href={`${SITE.repo}/releases`}>GitHub Release</A> 下载；Release 还没有这个版本时，在 Qingye UI 仓库根目录打包：</>}</P>
+    <CodeBlock code={`pnpm --filter ${SITE.packageName} pack --pack-destination ../my-app`} lang="shell" />
+    <InstallTabs pkg={tarballTarget} />
+    <P>{en ? "package.json refers to the file by path. Commit the file with the lockfile so teammates and CI install the same build." : "package.json 按路径引用这个文件。把它与 lock 文件一起提交，其他成员与 CI 才能装到同一份构建。"}</P>
     <H2 id="peers">{en ? "Optional peers" : "可选依赖"}</H2><P>{en ? "Install these only for the components that need them:" : "只在用到对应组件时安装："}</P>
     <Facts items={[
       { term: <Code>{`@tanstack/react-table ${peers["@tanstack/react-table"]}`}</Code>, detail: "DataTable" },

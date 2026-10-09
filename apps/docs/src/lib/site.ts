@@ -5,7 +5,7 @@ export const SITE = {
   name: "Qingye UI",
   packageName: pkg.name,
   version: pkg.version,
-  npmPublished: false,
+  npmPublished: true,
   repo: "https://github.com/qingye-lab/qingye-ui",
   branch: "main",
   base: "https://ui.xflux.cc",
@@ -17,6 +17,8 @@ export const repoFile = (path: string) => `${SITE.repo}/blob/${SITE.branch}/${pa
 
 export const releaseFile = `${pkg.name.slice(1).replace('/', '-')}-${pkg.version}.tgz`;
 export const installTarget = SITE.npmPublished ? SITE.packageName : `./${releaseFile}`;
+/** 不经 npm 时安装同一版本的本地包；npm 发布后仍保留这条途径。 */
+export const tarballTarget = `./${releaseFile}`;
 
 
 export const editComponentUrl = (slug: string) => repoFile(`apps/docs/src/content/${slug}/meta.ts`);

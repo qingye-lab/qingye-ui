@@ -11,17 +11,23 @@ Qingye UI is a React component library built from the design basis in [design.md
 | [packages/tooling](./packages/tooling/README.md) | `@qingye/tooling`, explicit project queries, AST diagnostics and theme tools | 0.5.0 |
 | [apps/studio](./apps/studio/README.md) | Local Theme Studio for explicitly registered projects | 0.4.0, private |
 
-The UI candidate introduces breaking API and visual changes. Read the [1.0.0 candidate notes](./docs/releases/v1.0.0.md) before migrating an existing consumer. Tooling and private Studio have their own version and API boundaries.
+UI 1.0.0 introduces breaking API and visual changes. Read the [1.0.0 notes](./docs/releases/v1.0.0.md) before migrating an existing consumer. Tooling and private Studio have their own version and API boundaries.
 
-## Install the candidate
+## Install
 
-**1.0.0 is prepared for npm publication as `@qingye_lab/ui`; publication is still awaiting npm authentication.** The verified local package is `dist-pack/npm/qingye_lab-ui-1.0.0.tgz`. Install that file from the consuming project:
+`@qingye_lab/ui` 1.0.0 is published on npm:
 
 ```sh
-npm install /path/to/qingye_lab-ui-1.0.0.tgz
+pnpm add @qingye_lab/ui
 ```
 
-Keep the tarball and lockfile when using this route. Historical GitHub releases use `@qingye/ui`; their package name and API differ from this candidate.
+Without npm access, install the same version from its tarball. Download `qingye_lab-ui-1.0.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
+
+```sh
+pnpm add ./qingye_lab-ui-1.0.0.tgz
+```
+
+Historical GitHub releases use `@qingye/ui`; their package name and API differ from 1.0.0.
 
 For a Tailwind CSS 4 project:
 

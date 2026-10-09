@@ -77,6 +77,31 @@ export function focusPageHeading() {
   return document.activeElement === target;
 }
 
+/** Arriving at #id moves focus to that section too, so keyboard reading continues where the eye lands. */
+export function focusHashTarget(hash: string) {
+  let id: string;
+  try {
+    id = decodeURIComponent(hash.replace(/^#/, ""));
+  } catch {
+    return false;
+  }
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return false;
+  if (!target.matches("a[href], button, input, select, textarea, [tabindex]")) target.setAttribute("tabindex", "-1");
+  target.focus({ preventScroll: true });
+  return document.activeElement === target;
+}
+
+/** The link or control focused on each history entry, as a selector, so going back returns to it. */
+const focusMarks = new Map<string, string>();
+
+function focusMark(selector: string) {
+  const target = document.querySelector<HTMLElement>(selector);
+  if (!target) return false;
+  target.focus({ preventScroll: true });
+  return document.activeElement === target;
+}
+
 /**
  * Scroll restoration and focus management for BrowserRouter:
  * new pages start at the top (or at their #hash), back/forward restores the
@@ -102,6 +127,17 @@ export function useRouteEffects() {
     const onScroll = () => positions.set(currentKey.current, window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Remember which link the reader left from, so back/forward can return focus to it.
+  useEffect(() => {
+    const onFocus = (event: FocusEvent) => {
+      const link = (event.target as Element | null)?.closest?.("a[href]");
+      const href = link?.getAttribute("href");
+      if (href) focusMarks.set(currentKey.current, `a[href="${CSS.escape(href)}"]`);
+    };
+    document.addEventListener("focusin", onFocus);
+    return () => document.removeEventListener("focusin", onFocus);
   }, []);
 
   useLayoutEffect(() => {
@@ -140,8 +176,14 @@ export function useRouteEffects() {
     } else {
       instant(0);
     }
-    // The route may still be showing its Suspense fallback during this commit.
-    const cancelFocus = !first || localeSwitch ? settle(focusPageHeading) : undefined;
+    // The route may still be showing its Suspense fallback during this commit. Back/forward returns
+    // focus to the link the reader left from, a #hash focuses its section, otherwise the page heading.
+    const mark = navigationType === "POP" ? focusMarks.get(currentKey.current) : undefined;
+    let frames = 0;
+    const focusTarget = () => (mark && focusMark(mark))
+      || (location.hash && focusHashTarget(location.hash))
+      || ((!mark && !location.hash) || ++frames > 30 ? focusPageHeading() : false);
+    const cancelFocus = !first || localeSwitch ? settle(focusTarget) : undefined;
     return () => {
       cancel?.();
       cancelFocus?.();

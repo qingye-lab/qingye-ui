@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-08T15:42:37.442Z",
-  "revision": "c555f0a9e60c181614d823852a523d121a3601d7",
+  "generatedAt": "2026-10-09T01:07:44.596Z",
+  "revision": "a7ac09a17084c6f3454011f32d7fdbd6bf482ab4",
   "fingerprint": {
     "sha256": "56af8d5a314087940bf4e40dd2e185c9528d33d8f8d1b8e5b2ee729677cab3ea",
     "inputs": [

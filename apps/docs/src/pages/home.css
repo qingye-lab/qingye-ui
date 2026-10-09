@@ -1,83 +1,80 @@
 /*
- * 首页与文档同一套版式：宽度是站点共用的 --site-width，字体是库的系统黑体，层级靠字号、字重与墨色；
- * 章节标题、正文、间距取文档的字阶（见 index.css 与 prose.tsx）。这里只管首页自己的三样：
- * 总纲与出处、章里的真实组件、墨阶。
+ * 首页展示理念本身，版面按理念自己的方法排。
  *
- * 两条竖轴：左栏是 34 字的正文（--docs-measure），右栏从同一条线起——总纲的出处、各章的组件都落在这条线上。
- * 疏密：章与章之间 5 材（预设，与文档的「部」同值）；章内标题与正文 2 分，正文与链接一个组间距。
+ * 一张三栏网格贯穿全页（.home-row）：第一栏放总纲、章题与引文；二、三栏放定位、说明、名录与接入，左缘是同一条竖轴。
+ * - 展开有据：十五法先是名录，选一条才展开它的设计决定与出处；原文在理念页。
+ * - 疏密有致：名录与详情之间 2 材，章与章 5 材；全页只靠空白分组。
+ * - 墨分五色：总纲、章题、当前法名与正文用前景色，未选的法名、出处与补充事实用辅助色。
+ * - 骨法用笔：名录是库里 Tabs 的导航线，当前项只把自己下面那段线加深。
+ * - 材有美：行首开标点（「《）只占半格；引文落款在右，与引文右缘齐。
+ * 取值：栏距 3 材、章距 5 材为首页预设；字号全部来自库的字阶，不在此处另设。
  */
 .home {
-  --home-column: var(--docs-measure);
-  --home-gap: calc(4 * var(--qy-cai));
-  --home-chapter-space: calc(5 * var(--qy-cai));
-  --home-line: var(--qy-text-display-lg-leading);
+  --home-gap: calc(3 * var(--qy-cai));
+  --home-chapter: calc(5 * var(--qy-cai));
   color: var(--qy-foreground);
   outline: none;
   padding-bottom: var(--qy-section-gap);
+  text-spacing-trim: trim-start;
 }
-:where(.home) :where(h1, h2, p, dl, dd, ol, ul) { margin: 0; }
+:where(.home) :where(h1, h2, p, figure, blockquote) { margin: 0; padding: 0; }
 .home ::selection { background: var(--qy-primary); color: var(--qy-primary-foreground); }
 
-/* ─── 总纲 ─────────────────────────────────────────── */
-.home-hero { display: grid; grid-template-columns: var(--home-column) minmax(0, 1fr); column-gap: var(--home-gap); align-items: start; padding-top: calc(4 * var(--qy-cai)); }
-/* 总纲三行是页面唯一大于文档字阶的文字：display-lg（40/48）；每行 48px，出处与它同行。 */
-.home-hero h1 { font-size: var(--qy-text-display-lg-size); line-height: var(--home-line); font-weight: var(--qy-text-display-lg-weight); }
-:lang(en) .home-hero h1 { letter-spacing: var(--qy-text-display-lg-tracking); }
+.home-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--home-gap); }
+/* 每行最后一块（定位、说明、名录、接入）落在二、三栏。 */
+.home-row > :last-child { grid-column: 2 / -1; min-width: 0; }
+.home-row + .home-row { margin-top: var(--home-chapter); }
+
+/* 字号全用库的字阶（Heading / Text 的 step），与文档页同一套角色：页题 display-lg、章题 title、正文 reading、补充 body；
+   名录里法名是所选内容的标题，取 heading，详情（设计决定）取 body、出处取 support，选择项不小于它展开的内容。
+   这里不另设字号、行高、字重与字距；语言差异由库的 utilities.css 处理。右栏陈述句的行长与文档正文同为 --docs-measure。 */
+.home-intro-lede, .home-substance-text p, .home-method-decision { max-width: var(--docs-measure); text-wrap: pretty; }
+
+/* ─── 总纲与项目定位 ───────────────────────────────────── */
+.home-hero { align-items: end; padding-top: calc(5 * var(--qy-cai)); }
 .home-hero h1 span { display: block; }
-.home-sources { padding: 0; list-style: none; font-size: var(--qy-text-reading-size); color: var(--qy-foreground-muted); }
-.home-sources li { display: flex; align-items: center; flex-wrap: wrap; column-gap: var(--qy-field-gap); min-height: var(--home-line); line-height: var(--qy-text-reading-leading); }
-.home-sources cite { font-style: normal; }
-.home-lede { max-width: var(--docs-measure); margin-top: var(--qy-field-group-gap); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); color: var(--qy-foreground-muted); text-wrap: pretty; }
-:lang(zh) .home-lede { text-align: justify; line-break: strict; }
-.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-action-gap); margin-top: var(--qy-field-group-gap); }
+.home-intro { display: grid; justify-items: start; padding-bottom: var(--qy-fen); }
+.home-intro-fact { margin-top: var(--qy-field-gap); }
+.home-intro-fact span { white-space: nowrap; }
+.home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-panel-gap); margin-top: calc(2 * var(--qy-cai)); }
 
-/* ─── 章：左栏正文，右栏一个 1:1 的真实组件 ──────────────── */
-.home-chapter { display: grid; grid-template-columns: var(--home-column) minmax(0, 1fr); column-gap: var(--home-gap); align-items: start; margin-top: var(--home-chapter-space); }
-.home-chapter-copy h2 { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); font-weight: var(--qy-text-title-weight); text-wrap: balance; }
-:lang(en) .home-chapter-copy h2 { letter-spacing: var(--qy-text-title-tracking); }
-.home-chapter-copy p { max-width: var(--docs-measure); margin-top: var(--qy-field-gap); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); color: var(--qy-foreground-muted); text-wrap: pretty; }
-:lang(zh) .home-chapter-copy p { text-align: justify; line-break: strict; }
-.home-link { display: inline-flex; align-items: center; gap: var(--qy-field-gap); width: fit-content; margin-top: var(--qy-field-group-gap); border-radius: var(--qy-radius-item); font-size: var(--qy-text-body-size); line-height: var(--qy-text-body-leading); color: var(--qy-foreground); text-decoration: underline; text-decoration-color: var(--qy-border-input); text-underline-offset: 0.25em; }
-.home-link svg { width: 1rem; height: 1rem; flex-shrink: 0; transition: transform var(--qy-duration-fast) var(--qy-ease-out); }
-.home-link:hover { text-decoration-color: currentColor; }
-.home-link:hover svg { transform: translateX(2px); }
-.home-specimen { min-width: 0; padding-top: var(--qy-field-group-gap); }
+/* ─── 文与质：章题与引文在第一栏，说明在右，与引文首行同一基线 ── */
+.home-substance { grid-template-rows: auto auto; align-items: baseline; }
+.home-substance > h2 { grid-row: 1; grid-column: 1; }
+.home-substance figure { grid-row: 2; grid-column: 1; justify-self: start; width: fit-content; max-width: 100%; margin-top: var(--qy-field-group-gap); }
+.home-substance > .home-substance-text { grid-row: 2; }
+.home-substance blockquote { text-wrap: pretty; }
+/* 落款在右：出处与引文右缘对齐。 */
+.home-substance figcaption { margin-top: var(--qy-field-gap); text-align: end; }
+.home-substance-text { display: grid; gap: var(--qy-field-gap); }
 
-/* 一、同一个按钮的五个状态：按钮宽度不随状态变，结果文字因此落在同一条竖线上。 */
-.home-states { display: grid; justify-items: start; gap: var(--qy-field-group-gap); }
-.home-state { display: flex; align-items: center; min-height: var(--qy-control-md); }
+/* ─── 器用六法 · 表达九法：章题在第一栏，名录与详情在右 ── */
+.home-methods { align-items: start; }
+.home-methods-head p { margin-top: var(--qy-field-gap); }
+.home-index { gap: calc(2 * var(--qy-cai)); }
+/* 名录是三列的导航线：每个法名自带一段底线，当前项把它加深；不画贯穿整排的基线。 */
+.home-index-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; column-gap: var(--home-gap); row-gap: var(--qy-field-gap); border: 0; overflow: visible; }
+.home-index-tab { justify-self: start; text-align: start; }
+.home-index-panels { display: grid; }
+.home-index-panel { grid-area: 1 / 1; }
+/* 未选的详情占位而不可见，详情区高度按最长一条，切换时下文不跳动；visibility 已让它离开焦点与读屏。
+   Tailwind 预检在 base 层以 !important 隐藏 [hidden]，层内 !important 胜过层外，所以覆盖也写在 base 层，靠更高的特指度取胜。 */
+@layer base { .home-index-panel[hidden] { display: block !important; visibility: hidden; } }
+.home-index-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--qy-panel-gap); margin-top: var(--qy-field-gap); }
+.home-method-source { color: var(--qy-foreground-muted); }
 
-/* 二、三，墨阶与尺度共用一套五列：两章的列上下对齐，名称与读数都在标本之外。 */
-.home-ink, .home-scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--qy-panel-gap); padding: 0; list-style: none; }
-.home-ink-swatch { height: calc(4 * var(--qy-cai)); border-radius: var(--qy-radius-item); background: color-mix(in srgb, var(--qy-ink) var(--home-ink-step), var(--qy-paper)); box-shadow: inset 0 0 0 1px var(--qy-border); }
-.home-ink-name { display: flex; justify-content: space-between; align-items: baseline; gap: var(--qy-field-gap); margin-top: var(--qy-field-gap); }
-.home-ink-name > span { font-size: var(--qy-text-chapter-size); line-height: var(--qy-text-chapter-leading); font-weight: var(--qy-text-chapter-weight); }
-.home-ink-name code { font-family: var(--qy-font-mono); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); font-variant-numeric: tabular-nums; }
-:is(.home-ink, .home-scale) li > p { min-height: var(--qy-text-support-leading); margin-top: calc(var(--qy-fen) / 2); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
-/* 舞台高等于最大一档（XL），五个按钮立在同一条地线上，逐档增高一分一眼可见。 */
-.home-scale-stage { display: flex; align-items: flex-end; height: var(--qy-control-xl); }
+/* ─── 开始使用 ─────────────────────────────────────────── */
+.home-start { align-items: start; }
+.home-start h2 + p { margin-top: var(--qy-field-gap); }
+.home-install-tarball { display: grid; gap: var(--qy-field-gap); }
+.home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--qy-field-group-gap); }
 
-/* 开始使用 */
-.home-install { min-height: calc(7 * var(--qy-cai)); }
-.home-ai { display: grid; gap: var(--qy-field-group-gap); padding-block: var(--qy-field-group-gap) 0; }
-.home-ai p { max-width: var(--docs-measure); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); color: var(--qy-foreground-muted); }
-.home-ai-actions { display: flex; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); font-size: var(--qy-text-body-size); }
-.home-ai-copy-ready, .home-ai-copy-done { align-items: center; gap: var(--qy-control-content-gap); }
-.home-ai-copy-ready { display: inline-flex; }
-.home-ai-copy-done { display: none; }
-[data-copied] .home-ai-copy-ready { display: none; }
-[data-copied] .home-ai-copy-done { display: inline-flex; }
-
-.home-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--home-chapter-space); color: var(--qy-foreground-muted); font-size: var(--qy-text-body-size); }
+.home-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--home-chapter); padding-top: var(--qy-cai); border-top: 1px solid var(--qy-border); }
 .home-footer-version { margin-inline-start: var(--qy-field-gap); }
 .home-footer nav { display: flex; gap: var(--qy-panel-gap); }
 
-/* 窄桌面：两栏改为上下，宽度仍是站点共用的 --site-width。 */
-@media (max-width: 66rem) {
-  .home { --home-column: minmax(0, 1fr); }
-  .home-hero, .home-chapter { grid-template-columns: minmax(0, 1fr); row-gap: calc(2 * var(--qy-cai)); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .home-link svg { transition: none; }
-  .home-link:hover svg { transform: none; }
+/* 窄桌面：三栏改为上下。 */
+@media (max-width: 52rem) {
+  .home-row { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-field-group-gap); }
+  .home-row > * { grid-column: 1 !important; grid-row: auto !important; }
 }

@@ -51,6 +51,16 @@ test("route focus enters a heading when available and the main landmark otherwis
   assert.equal(fixture.focusPageHeading(), false);
 });
 
+test("arriving at a #hash moves focus to that section without scrolling again",() => {
+  const host = document.getElementById("mount");
+  host.innerHTML = '<main><h1>设计理念</h1><h3 id="method-7">07 以材为祖</h3></main>';
+  assert.equal(fixture.focusHashTarget("#method-7"), true);
+  assert.equal(document.activeElement.id, "method-7");
+  assert.equal(document.activeElement.getAttribute("tabindex"), "-1");
+  assert.equal(fixture.focusHashTarget("#method-99"), false);
+  assert.equal(fixture.focusHashTarget("#%E0%A4%A"), false);
+});
+
 test("demo headings are reachable from the TOC, including after a text-only update", async () => {
   root = createRoot(document.getElementById("mount"));
   await act(() => root.render(fixture.articleScene("旧标题")));

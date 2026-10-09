@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { DemoFrame } from "../../src/components/demo";
 import { H2, H3 } from "../../src/components/prose";
 import { TableOfContents } from "../../src/components/toc";
-export { focusPageHeading, scrollToHash } from "../../src/lib/use-route-effects";
+export { focusHashTarget, focusPageHeading, scrollToHash } from "../../src/lib/use-route-effects";
 
 function Article({ title }: { title: string }) {
   const article = useRef<HTMLDivElement>(null);

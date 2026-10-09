@@ -21,18 +21,28 @@ test("search uses actual content identities, ranks component names, and requires
   assert.equal(ranked[0].entry.id,"/docs/components/input-group");
   assert.equal(fixture.score(ranked[0].entry,"input qqzznonexistent"),0);
 });
-test("homepage: motto and sources, three chapters from the philosophy text with real components, and release installation",() => {
+test("homepage: shows the philosophy itself (motto, fifteen methods linked to their anchors, source and design decision quoted exactly from design.md), no component specimens, then npm and tarball installation",async () => {
+  const { readFileSync } = await import("node:fs");
   for (const locale of ["en","zh"]) {
     const markup = fixture.homeMarkup(locale); const prefix = locale === "en" ? "/en" : "";
+    const guide = readFileSync(new URL("../../../design.md",import.meta.url),"utf8").replaceAll("*","");
     assert.equal([...markup.matchAll(/<h1[ >]/g)].length,1);
-    for (const path of ["/docs/installation","/docs/components","/docs/design-philosophy#method-1","/docs/design-philosophy#method-9","/docs/tokens"]) assert.ok(markup.includes(`href="${prefix}${path}"`),path);
-    assert.equal([...markup.matchAll(/class="home-chapter"/g)].length,4);
-    assert.match(markup,/home-sources/); assert.match(markup,/data-slot="button"/); for (const state of ["idle","waiting","in-progress","unknown","failed"]) assert.match(markup,new RegExp(`data-slot="button" data-state="${state}"`),state); for (const size of ["xs","sm","md","lg","xl"]) assert.match(markup,new RegExp(`data-size="${size}" data-slot="button"`),size); assert.match(markup,/data-slot="code-block"/);
-    assert.doesNotMatch(markup,/type="search"|data-slot="checkbox"/);
-    assert.match(markup,/pnpm add \.\/qingye_lab-ui-1\.0\.0\.tgz/); assert.doesNotMatch(markup,/gh release download/);
+    for (const path of ["/docs/installation","/docs/design-philosophy","/docs/components"]) assert.ok(markup.includes(`href="${prefix}${path}"`),path);
+    const anchors = [...markup.matchAll(/href="[^"]*\/docs\/design-philosophy#method-(\d+)"/g)].map(match => Number(match[1]));
+    assert.deepEqual(anchors,Array.from({ length:15 },(_,index) => index + 1));
+    // 出处与设计决定都逐字来自 design.md 的方法表，首页不另写摘要。
+    const cited = className => [...markup.matchAll(new RegExp(`class="[^"]*\\b${className}\\b[^"]*">([^<]+)<`,"g"))].map(match => match[1].replaceAll("&quot;","\"").replaceAll("&#x27;","'").replace(/[。.]$/,""));
+    for (const className of ["home-method-source","home-method-decision"]) {
+      const texts = cited(className);
+      assert.equal(texts.length,15,className);
+      for (const text of texts) assert.ok(guide.includes(locale === "en" ? text.replaceAll("“","\"").replaceAll("”","\"") : text),text);
+    }
+    for (const slot of ["checkbox","input","select-trigger","switch","card"]) assert.doesNotMatch(markup,new RegExp(`data-slot="${slot}"`),slot);
+    assert.doesNotMatch(markup,/type="search"/);
+    assert.match(markup,/pnpm add @qingye_lab\/ui</); assert.match(markup,/role="tab"[^>]*>(tgz 包|Tarball)</); assert.doesNotMatch(markup,/gh release download/);
   }
-  assert.match(fixture.homeMarkup("zh"),/器用为本[\s\S]*怎样让数字界面更清楚地承载人的目的/);
-  assert.match(fixture.homeMarkup("en"),/Purpose first\.[\s\S]*Begin with use/);
+  assert.match(fixture.homeMarkup("zh"),/<h1[^>]*>[\s\S]*器用为本[\s\S]*关系为法[\s\S]*合宜为度[\s\S]*<\/h1>/);
+  assert.match(fixture.homeMarkup("en"),/<h1[^>]*>[\s\S]*Purpose first\.[\s\S]*Fitness as measure\.[\s\S]*<\/h1>/);
 });
 test("philosophy keeps fifteen stable method anchors, links every citation to its note in the source list, and shows no provenance metadata",() => {
   const markup = fixture.methodsMarkup("en");
