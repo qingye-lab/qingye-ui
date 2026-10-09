@@ -11,7 +11,7 @@ export default function Demo() {
       <SkeletonLine />
       <SkeletonLine />
       <SkeletonLine className="w-3/4" />
-      <SkeletonBlock />
+      <SkeletonBlock className="mt-(--qy-field-gap)" />
     </Skeleton>
   </Card>;
 }

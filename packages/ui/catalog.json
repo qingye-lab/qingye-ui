@@ -26272,8 +26272,8 @@
             "@qingye_lab/ui/components/skeleton"
           ],
           "providers": [],
-          "code": "import { Card } from \"@qingye_lab/ui/components/card\";\nimport { Skeleton, SkeletonBlock, SkeletonLine } from \"@qingye_lab/ui/components/skeleton\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"摆出内容的版式\", titleEn: \"Laid out like the content\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n    <Skeleton label=\"正在加载项目\">\n      <SkeletonLine className=\"w-1/2\" />\n      <SkeletonLine />\n      <SkeletonLine />\n      <SkeletonLine className=\"w-3/4\" />\n      <SkeletonBlock />\n    </Skeleton>\n  </Card>;\n}\n",
-          "sha256": "f8f9c391057e64655144dad05eb466866ffe9ae5b2a33ce158c2b07dfe6d3b1d"
+          "code": "import { Card } from \"@qingye_lab/ui/components/card\";\nimport { Skeleton, SkeletonBlock, SkeletonLine } from \"@qingye_lab/ui/components/skeleton\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"摆出内容的版式\", titleEn: \"Laid out like the content\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n    <Skeleton label=\"正在加载项目\">\n      <SkeletonLine className=\"w-1/2\" />\n      <SkeletonLine />\n      <SkeletonLine />\n      <SkeletonLine className=\"w-3/4\" />\n      <SkeletonBlock className=\"mt-(--qy-field-gap)\" />\n    </Skeleton>\n  </Card>;\n}\n",
+          "sha256": "2954a7543c3865633e967333ea04468062c16ced49ad74c061432f6c0d9b1157"
         },
         {
           "id": "arrival",
@@ -26288,8 +26288,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useEffect, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Card } from \"@qingye_lab/ui/components/card\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Skeleton, SkeletonLine } from \"@qingye_lab/ui/components/skeleton\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"到达后原位替换\", titleEn: \"Replaced in place on arrival\" } satisfies DemoMeta;\n\nconst ROWS = [\"接入设备 · 12 项\", \"权限与角色 · 8 项\", \"同步与导出 · 0 项\"];\n\n/** 应用拥有「是否已到达」这个事实；骨架与真内容占同样的行，替换时版面不动。 */\nexport default function Demo() {\n  const [loading, setLoading] = useState(true);\n  useEffect(() => {\n    if (!loading) return;\n    const timer = setTimeout(() => setLoading(false), 1600);\n    return () => clearTimeout(timer);\n  }, [loading]);\n  return <Stack>\n    <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n      {loading\n        ? <Skeleton label=\"正在加载集合\">{ROWS.map(row => <SkeletonLine key={row} />)}</Skeleton>\n        : <ul className=\"m-0 flex list-none flex-col gap-(--qy-field-gap) p-0\">{ROWS.map(row => <li className=\"flex h-(--qy-cai) items-center text-body\" key={row}>{row}</li>)}</ul>}\n    </Card>\n    <Button disabled={loading} onClick={() => setLoading(true)} variant=\"bordered\">重播</Button>\n  </Stack>;\n}\n",
-          "sha256": "e2b9713652440a131466957fb50bdd462b9bd3cf304489db158e2b3c797090f6"
+          "code": "import { useEffect, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Card } from \"@qingye_lab/ui/components/card\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Skeleton, SkeletonLine } from \"@qingye_lab/ui/components/skeleton\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"到达后原位替换\", titleEn: \"Replaced in place on arrival\" } satisfies DemoMeta;\n\nconst ROWS = [\"接入设备 · 12 项\", \"权限与角色 · 8 项\", \"同步与导出 · 0 项\"];\n\n/** 应用拥有「是否已到达」这个事实；骨架一行占一材，与真内容的一行等高、行间都不留缝，替换时版面不动。 */\nexport default function Demo() {\n  const [loading, setLoading] = useState(true);\n  useEffect(() => {\n    if (!loading) return;\n    const timer = setTimeout(() => setLoading(false), 1600);\n    return () => clearTimeout(timer);\n  }, [loading]);\n  return <Stack>\n    <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n      {loading\n        ? <Skeleton label=\"正在加载集合\">{ROWS.map(row => <SkeletonLine key={row} />)}</Skeleton>\n        : <ul className=\"m-0 flex list-none flex-col p-0\">{ROWS.map(row => <li className=\"flex h-(--qy-cai) items-center text-body\" key={row}>{row}</li>)}</ul>}\n    </Card>\n    <Button disabled={loading} onClick={() => setLoading(true)} variant=\"bordered\">重播</Button>\n  </Stack>;\n}\n",
+          "sha256": "78c2bb10ab82c899cdd83170bb99265580bceccb1122ba3ee5103523b57d9efa"
         }
       ],
       "design": {
@@ -26302,7 +26302,7 @@
           "首次加载的内容区域，形状已知、几行几块可预期。"
         ],
         "avoid": [
-          "刷新时保留已有内容，不退回骨架。",
+          "刷新时保留仍然有效的工作面，不退回骨架。",
           "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
           "不确定形状或时间极短的等待，用按钮的 in-progress。"
         ],
@@ -26311,10 +26311,10 @@
         ],
         "stateOwner": {
           "library": [
-            "一句名称（跟随语言）、形状对辅助技术隐藏、脉动与减动。"
+            "一句名称（跟随语言）、形状对辅助技术隐藏、以材为度的行高与墨色。"
           ],
           "application": [
-            "何时开始与结束、内容的真实形状、失败与为空的处置。"
+            "何时开始与结束、久等的处置、内容的真实形状、失败与为空的处置。"
           ]
         },
         "responsive": [
@@ -26326,16 +26326,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/skeleton.tsx",
-        "sha256": "2c13fbc07ca9839309d4b1c436ed9c298a79d33d3a8508cda814ab0ef225d482",
+        "sha256": "301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
-      "decisions": "骨架只表达「正在加载」，不表达进度，也不替应用决定何时结束；到达、失败或为空时换成真内容或 Empty，不让占位一直留着。",
+      "decisions": "骨架只表达「正在加载」，不表达进度，也不替应用决定何时结束，更不自行超时；到达、失败或为空时换成真内容或 Empty，不让占位一直留着。正文行高是一材，一行骨架占一材、行间不留缝，所以 N 行骨架恰是 N 行正文，内容到达版面不动。填充是清染（大面）与清墨（小条）的透明墨，不脉动：等待没有「变化」可说，循环明灭只是装饰。",
       "localized": {
         "en": {
           "title": "Skeleton",
           "description": "Hold the place and row count content will take until it arrives.",
           "category": "Feedback",
-          "decisions": "A skeleton says only that content is loading; it carries no progress and does not decide when loading ends. On arrival, failure or an empty result it is replaced by the real content or Empty, never left in place.",
+          "decisions": "A skeleton says only that content is loading; it carries no progress, does not decide when loading ends, and never times out by itself. On arrival, failure or an empty result it is replaced by the real content or Empty, never left in place. Body leading is one module, so a skeleton row takes one module with no gap between rows: N rows are exactly N lines of text and the page does not move on arrival. Fills are transparent ink (a faint wash for large areas, a faint ink for small bars) and do not pulse: waiting has no change to report, and a looping fade is decoration.",
           "notes": [],
           "api": [
             {
@@ -26407,10 +26407,10 @@
             ],
             "stateOwner": {
               "library": [
-                "One localized name, shapes hidden from assistive technology, the pulse and its reduced-motion form."
+                "One localized name, shapes hidden from assistive technology, row height and ink derived from the module."
               ],
               "application": [
-                "When loading starts and ends, the real shape of the content, and how failure and emptiness are handled."
+                "When loading starts and ends, how a long wait is handled, the real shape of the content, and how failure and emptiness are handled."
               ]
             },
             "responsive": [

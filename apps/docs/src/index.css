@@ -176,7 +176,7 @@ html { scrollbar-gutter: stable; }
 .docs-site-header { z-index: 1; }
 .docs-skip-link { z-index: 2; }
 
-/* A fast route change should not flash a skeleton: the fallback fades in only if loading takes a while. */
+/* A wait shorter than one base step is not yet a wait: the skeleton appears only after it, then fades in over the same step (both the base step, a preset). Nothing loops. */
 @keyframes route-fallback-in {
   to { opacity: 1; }
 }

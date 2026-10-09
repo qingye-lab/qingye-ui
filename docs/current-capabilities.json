@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-09T06:28:40.834Z",
-  "revision": "93f0eb6fa0ae909f162d3e6ab20edcefe565c97d",
+  "generatedAt": "2026-10-09T06:36:20.557Z",
+  "revision": "e03ee6eb5887b157aa3ddda89ddb0341de833d2f",
   "fingerprint": {
-    "sha256": "bb1c1e6f303a7041dd53e58bb716783dbea6f221c38151f132b6c4a770285a7c",
+    "sha256": "49fad3abcabb649ae55bc38c108d994b8347b75bdf6a14686a840240f856dfb1",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -276,7 +276,7 @@
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
-        "sha256": "4988eafe9b1e2f75bbc68898fbe72cc4b9adad59107cc2ce76e9b1fb2e8092e8"
+        "sha256": "c1e4d24b33f8752ce0819413da979d80c9e046eaceabb80f2c5109ace61f2eae"
       },
       {
         "path": "apps/docs/src/content/slider/meta.ts",
@@ -376,11 +376,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "848ab539e4c0a03cf85e3b8cf66b826274001f5684778f8c45dba295c36dcf52"
+        "sha256": "6cac8f5bd18805e700c2ea6b21739ac440a3bb074b79d097562627277b64781c"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "33a2356550dc75667334195282eb309981959daa99f7446f9b2b5ffa696eb79e"
+        "sha256": "276c7a65c4ca887c544bf86020be9f01ffb1fc1d5f9c27ea2d4146e61bc020d6"
       },
       {
         "path": "packages/ui/package.json",
@@ -652,7 +652,7 @@
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
-        "sha256": "2c13fbc07ca9839309d4b1c436ed9c298a79d33d3a8508cda814ab0ef225d482"
+        "sha256": "301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e"
       },
       {
         "path": "packages/ui/src/components/slider.tsx",
@@ -20027,7 +20027,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 20
+            "line": 29
           }
         },
         {
@@ -20035,7 +20035,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 37
+            "line": 46
           }
         },
         {
@@ -20051,7 +20051,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 30
+            "line": 39
           }
         },
         {
@@ -20095,8 +20095,8 @@
           "占位",
           "加载中"
         ],
-        "decisions": "骨架只表达「正在加载」，不表达进度，也不替应用决定何时结束；到达、失败或为空时换成真内容或 Empty，不让占位一直留着。",
-        "decisionsEn": "A skeleton says only that content is loading; it carries no progress and does not decide when loading ends. On arrival, failure or an empty result it is replaced by the real content or Empty, never left in place.",
+        "decisions": "骨架只表达「正在加载」，不表达进度，也不替应用决定何时结束，更不自行超时；到达、失败或为空时换成真内容或 Empty，不让占位一直留着。正文行高是一材，一行骨架占一材、行间不留缝，所以 N 行骨架恰是 N 行正文，内容到达版面不动。填充是清染（大面）与清墨（小条）的透明墨，不脉动：等待没有「变化」可说，循环明灭只是装饰。",
+        "decisionsEn": "A skeleton says only that content is loading; it carries no progress, does not decide when loading ends, and never times out by itself. On arrival, failure or an empty result it is replaced by the real content or Empty, never left in place. Body leading is one module, so a skeleton row takes one module with no gap between rows: N rows are exactly N lines of text and the page does not move on arrival. Fills are transparent ink (a faint wash for large areas, a faint ink for small bars) and do not pulse: waiting has no change to report, and a looping fade is decoration.",
         "design": {
           "methods": [
             "名实相符",
@@ -20107,7 +20107,7 @@
             "首次加载的内容区域，形状已知、几行几块可预期。"
           ],
           "avoid": [
-            "刷新时保留已有内容，不退回骨架。",
+            "刷新时保留仍然有效的工作面，不退回骨架。",
             "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
             "不确定形状或时间极短的等待，用按钮的 in-progress。"
           ],
@@ -20116,10 +20116,10 @@
           ],
           "stateOwner": {
             "library": [
-              "一句名称（跟随语言）、形状对辅助技术隐藏、脉动与减动。"
+              "一句名称（跟随语言）、形状对辅助技术隐藏、以材为度的行高与墨色。"
             ],
             "application": [
-              "何时开始与结束、内容的真实形状、失败与为空的处置。"
+              "何时开始与结束、久等的处置、内容的真实形状、失败与为空的处置。"
             ]
           },
           "responsive": [
@@ -20143,10 +20143,10 @@
           ],
           "stateOwner": {
             "library": [
-              "One localized name, shapes hidden from assistive technology, the pulse and its reduced-motion form."
+              "One localized name, shapes hidden from assistive technology, row height and ink derived from the module."
             ],
             "application": [
-              "When loading starts and ends, the real shape of the content, and how failure and emptiness are handled."
+              "When loading starts and ends, how a long wait is handled, the real shape of the content, and how failure and emptiness are handled."
             ]
           },
           "responsive": [
@@ -20212,11 +20212,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 20
+              "line": 29
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 20
+              "line": 29
             },
             "status": "PRESENT"
           },
@@ -20225,11 +20225,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 30
+              "line": 39
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 30
+              "line": 39
             },
             "status": "PRESENT"
           },
@@ -20238,11 +20238,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 37
+              "line": 46
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 37
+              "line": 46
             },
             "status": "PRESENT"
           }

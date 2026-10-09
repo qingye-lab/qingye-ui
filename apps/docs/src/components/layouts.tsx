@@ -38,7 +38,7 @@ function SkipLink() {
 function RouteFallback() {
   return <Skeleton className="route-fallback site-frame min-h-[60dvh] gap-(--qy-field-group-gap) pt-(--qy-section-gap)">
     <SkeletonBlock className="h-[calc(2*var(--qy-cai))] w-1/3 rounded-item" />
-    <div className="flex max-w-(--docs-measure) flex-col gap-(--qy-field-gap)">
+    <div className="max-w-(--docs-measure)">
       <SkeletonLine />
       <SkeletonLine />
       <SkeletonLine className="w-2/3" />

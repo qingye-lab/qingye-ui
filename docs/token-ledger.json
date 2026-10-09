@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-09T05:45:37.570Z",
-  "revision": "099654ef57ce063dc0c24c0fcfa8749f7e8672ce",
+  "generatedAt": "2026-10-09T06:36:21.149Z",
+  "revision": "e03ee6eb5887b157aa3ddda89ddb0341de833d2f",
   "static": {
     "fingerprint": {
-      "sha256": "37cc94e7799992581d90fdd4e820d4cf66e988e2d126f03d16afd8839403b320",
+      "sha256": "2aef130a1cee143066e123e21a71d7c6082203270524ea6f8760b897b873c3c0",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -57,7 +57,7 @@
         },
         {
           "path": "apps/docs/src/components/layouts.tsx",
-          "sha256": "1e27c94a3b29afa3c1dc78f18e8aaaab107d9a3a57aafd5975bd59742c5508ed"
+          "sha256": "1309a4076bb3e1c4e679f61d3379c76a77b59052fda08947ef79c8af4c17c04e"
         },
         {
           "path": "apps/docs/src/components/locale-link.tsx",
@@ -896,6 +896,18 @@
           "sha256": "dc96d200355b26c3391f4eaf043d9e7e809b51d20a1aac4e067c098d11b8abc7"
         },
         {
+          "path": "apps/docs/src/content/skeleton/demos/01-layout.tsx",
+          "sha256": "2954a7543c3865633e967333ea04468062c16ced49ad74c061432f6c0d9b1157"
+        },
+        {
+          "path": "apps/docs/src/content/skeleton/demos/02-arrival.tsx",
+          "sha256": "78c2bb10ab82c899cdd83170bb99265580bceccb1122ba3ee5103523b57d9efa"
+        },
+        {
+          "path": "apps/docs/src/content/skeleton/meta.ts",
+          "sha256": "c1e4d24b33f8752ce0819413da979d80c9e046eaceabb80f2c5109ace61f2eae"
+        },
+        {
           "path": "apps/docs/src/content/slider/demos/01-values.tsx",
           "sha256": "50a0e4aea44ee6937c472e7ceec8ad5c7ebe85ea9bf011eb43f8a0de72332992"
         },
@@ -1197,7 +1209,7 @@
         },
         {
           "path": "apps/docs/src/index.css",
-          "sha256": "e233e178b1e52925707e387aa268f7fc661df6aa0555339cd34721ecce2bc12e"
+          "sha256": "fc1351f9327e5f0cb0297e4577b006ebd7453b33bdeb511aa0bd9129de3f9f3b"
         },
         {
           "path": "apps/docs/src/lib/design-entry.ts",
@@ -1748,6 +1760,10 @@
           "sha256": "05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467"
         },
         {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "sha256": "301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e"
+        },
+        {
           "path": "packages/ui/src/components/slider.tsx",
           "sha256": "d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787"
         },
@@ -1853,7 +1869,7 @@
         },
         {
           "path": "packages/ui/src/index.ts",
-          "sha256": "aad18759eda8fa4b820effa564e3f802494e7185bb7b9fa7143b9801790cefc7"
+          "sha256": "86b974df22683a42ca58d6050e9a10d59109f17e8848e4f2bc8a69b6a2f70870"
         },
         {
           "path": "packages/ui/src/input-adjunct.ts",
@@ -2470,6 +2486,14 @@
           "Sidebar"
         ],
         "route": "/playground/sidebar"
+      },
+      {
+        "component": "skeleton",
+        "sourceComponent": "skeleton",
+        "publicName": [
+          "Skeleton"
+        ],
+        "route": "/playground/skeleton"
       },
       {
         "component": "slider",
@@ -401887,6 +401911,69 @@
         "source": {
           "path": "packages/ui/src/components/sidebar.tsx",
           "line": 206
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "h-(--qy-cai)",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 41
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "before:h-[calc(var(--qy-cai)-2*var(--qy-fen))]",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 41
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "before:rounded-[round(calc((var(--qy-cai)-2*var(--qy-fen))*5/16),1px)]",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 41
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "before:bg-(--qy-surface-hover)",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 41
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "h-[calc(5*var(--qy-cai))]",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 48
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "rounded-panel",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 48
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "skeleton",
+        "className": "bg-surface-inset",
+        "source": {
+          "path": "packages/ui/src/components/skeleton.tsx",
+          "line": 48
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
