@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-09T06:36:20.557Z",
-  "revision": "e03ee6eb5887b157aa3ddda89ddb0341de833d2f",
+  "generatedAt": "2026-10-09T06:40:25.919Z",
+  "revision": "743c94be4f918094e45908b0e15978de0f41cd75",
   "fingerprint": {
-    "sha256": "49fad3abcabb649ae55bc38c108d994b8347b75bdf6a14686a840240f856dfb1",
+    "sha256": "e6ee94a0528162543bd53bc4b75b713db5dcdbe151f89c97c986178f80c677e6",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -276,7 +276,7 @@
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
-        "sha256": "c1e4d24b33f8752ce0819413da979d80c9e046eaceabb80f2c5109ace61f2eae"
+        "sha256": "d2ec379ed5501b3140596c34927e0fce58487f800731f3521b90f1b6ae2b6988"
       },
       {
         "path": "apps/docs/src/content/slider/meta.ts",
@@ -376,11 +376,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "6cac8f5bd18805e700c2ea6b21739ac440a3bb074b79d097562627277b64781c"
+        "sha256": "83caa939c184a68ddcfb6c84e13b88eb87b36be095296e25b34bf658787e4fe6"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "276c7a65c4ca887c544bf86020be9f01ffb1fc1d5f9c27ea2d4146e61bc020d6"
+        "sha256": "5387230d396a056cb2bb6c20970b2e1375e29b3f03f08b30b8576e49af818817"
       },
       {
         "path": "packages/ui/package.json",
@@ -424,7 +424,7 @@
       },
       {
         "path": "packages/ui/src/components/button.tsx",
-        "sha256": "9003deeef7d8f05980987cf1cbc05432997c947c45f2b20ae64f4c7fb4dd8e31"
+        "sha256": "49eff7d39eed62f0656fe66e56f9a2fcc263ec8ed2d81e5faa8c4865c3d7abfa"
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
@@ -704,7 +704,7 @@
       },
       {
         "path": "packages/ui/src/components/toast.tsx",
-        "sha256": "c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6"
+        "sha256": "7efbb7e072a3276bc8c65200345745063518a75b95302703ac23ff9683dd51a9"
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
@@ -752,7 +752,7 @@
       },
       {
         "path": "packages/ui/tokens/components.css",
-        "sha256": "41278e16c832eb8186a1f8532dc70c0135f6028fb870789eb668a68c0849df0d"
+        "sha256": "610d55ca4c8fc61228dfd5e998436f7e76ddefea5da1ec3b762b2f219e7d5eed"
       },
       {
         "path": "packages/ui/tokens/primitives.css",
@@ -20107,7 +20107,7 @@
             "首次加载的内容区域，形状已知、几行几块可预期。"
           ],
           "avoid": [
-            "刷新时保留仍然有效的工作面，不退回骨架。",
+            "刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。",
             "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
             "不确定形状或时间极短的等待，用按钮的 in-progress。"
           ],
@@ -20134,7 +20134,7 @@
             "The first load of a region whose shape is known: how many rows and blocks to expect."
           ],
           "avoid": [
-            "Refreshing keeps existing content and does not fall back to a skeleton.",
+            "Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.",
             "A failed or empty result uses Empty; a placeholder never stands in for content.",
             "A wait of unknown shape or very short duration uses a Button's in-progress."
           ],
@@ -23804,7 +23804,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 190
+            "line": 191
           }
         },
         {
@@ -23837,7 +23837,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 199
+            "line": 200
           }
         },
         {
@@ -23845,7 +23845,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 181
+            "line": 182
           }
         },
         {
@@ -24089,11 +24089,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 181
+              "line": 182
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 181
+              "line": 182
             },
             "status": "PRESENT"
           },
@@ -24115,11 +24115,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 190
+              "line": 191
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 190
+              "line": 191
             },
             "status": "PRESENT"
           },
@@ -24141,11 +24141,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 199
+              "line": 200
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 199
+              "line": 200
             },
             "status": "PRESENT"
           }
@@ -26854,7 +26854,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 444
+            "line": 447
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -26872,7 +26872,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 445
+            "line": 448
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -27903,6 +27903,22 @@
       ]
     },
     {
+      "name": "--qy-duration-wait",
+      "definitions": [
+        {
+          "name": "--qy-duration-wait",
+          "value": "1500ms",
+          "references": [],
+          "source": {
+            "path": "packages/ui/tokens/components.css",
+            "line": 406
+          },
+          "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
       "name": "--qy-ease-drawer",
       "definitions": [
         {
@@ -27911,7 +27927,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 406
+            "line": 409
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27927,7 +27943,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 405
+            "line": 408
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27943,7 +27959,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 404
+            "line": 407
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -27959,7 +27975,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 407
+            "line": 410
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28061,7 +28077,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 423
+            "line": 426
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -28092,7 +28108,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 455
+            "line": 458
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28123,7 +28139,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 456
+            "line": 459
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28154,7 +28170,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 458
+            "line": 461
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28185,7 +28201,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 459
+            "line": 462
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28216,7 +28232,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 457
+            "line": 460
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28247,7 +28263,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 460
+            "line": 463
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -28299,7 +28315,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 415
+            "line": 418
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -28317,7 +28333,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 439
+            "line": 442
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28335,7 +28351,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 438
+            "line": 441
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -28351,7 +28367,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 414
+            "line": 417
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -29179,7 +29195,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 465
+            "line": 468
           },
           "context": "@media (max-width: 767px) {\n    :root",
           "complete": true
@@ -29197,7 +29213,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 424
+            "line": 427
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29216,7 +29232,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 427
+            "line": 430
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29229,7 +29245,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 469
+            "line": 472
           },
           "context": ":root,\n    [data-density]",
           "complete": true
@@ -29248,7 +29264,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 429
+            "line": 432
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29693,7 +29709,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 431
+            "line": 434
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -29711,7 +29727,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 425
+            "line": 428
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -30179,7 +30195,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 454
+            "line": 457
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -30195,7 +30211,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 408
+            "line": 411
           },
           "context": "@layer base {\n  :root",
           "complete": true

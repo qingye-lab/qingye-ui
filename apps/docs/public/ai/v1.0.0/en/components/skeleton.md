@@ -12,7 +12,7 @@ A skeleton says only that content is loading; it carries no progress, does not d
 
 ## Use and ownership
 - The first load of a region whose shape is known: how many rows and blocks to expect.
-- Avoid: Refreshing keeps existing content and does not fall back to a skeleton.
+- Avoid: Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.
 - Avoid: A failed or empty result uses Empty; a placeholder never stands in for content.
 - Avoid: A wait of unknown shape or very short duration uses a Button's in-progress.
 - Library: One localized name, shapes hidden from assistive technology, row height and ink derived from the module.
@@ -111,5 +111,39 @@ export default function Demo() {
     </Card>
     <Button disabled={loading} onClick={() => setLoading(true)} variant="bordered">重播</Button>
   </Stack>;
+}
+```
+
+### 刷新时保留内容
+Source: apps/docs/src/content/skeleton/demos/03-refresh.tsx
+```tsx
+import { useEffect, useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Progress, ProgressIndicator, ProgressTrack } from "@qingye_lab/ui/components/progress";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "刷新时保留内容", titleEn: "Refresh keeps the content" } satisfies DemoMeta;
+
+const ROWS = ["接入设备 · 12 项", "权限与角色 · 8 项", "同步与导出 · 0 项"];
+
+/** 已有内容的刷新不退回骨架：旧内容仍可读，等待由发起它的按钮与一条进度表达。 */
+export default function Demo() {
+  const [refreshing, setRefreshing] = useState(false);
+  useEffect(() => {
+    if (!refreshing) return;
+    const timer = setTimeout(() => setRefreshing(false), 1600);
+    return () => clearTimeout(timer);
+  }, [refreshing]);
+  return <Card className="w-full max-w-md p-(--qy-panel-padding)">
+    <Stack aria-busy={refreshing}>
+      <Progress aria-label="正在刷新" value={refreshing ? null : 0}>
+        <ProgressTrack><ProgressIndicator /></ProgressTrack>
+      </Progress>
+      <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
+      <Button onClick={() => setRefreshing(true)} state={refreshing ? "in-progress" : "idle"} variant="bordered">刷新</Button>
+    </Stack>
+  </Card>;
 }
 ```

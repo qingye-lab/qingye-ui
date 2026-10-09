@@ -401,6 +401,9 @@
     --qy-duration-base: 220ms;
     --qy-duration-slow: 320ms;
     --qy-duration-drawer: 450ms;
+    /* 不定长等待的一个周期（进度条的一程、进行中标记的一圈）。两处都在说「进行中，比例未知」，
+     * 是同一类变化，所以共用一个节拍；原先一处 1.5s、一处 Tailwind 的 1s，彼此无关。预设。 */
+    --qy-duration-wait: 1500ms;
     --qy-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --qy-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --qy-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);

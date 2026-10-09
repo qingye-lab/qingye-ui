@@ -75,7 +75,8 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
     : type === "unknown" ? messages.buttonUnknown
     : type === "error" || type === "failed" ? messages.buttonFailed
     : type === "success" ? messages.toastSuccess : undefined;
-  const Icon = type === "waiting" ? IconHourglass
+  const Icon = overdue ? IconHelpCircle
+    : type === "waiting" ? IconHourglass
     : type === "loading" || type === "in-progress" ? IconLoader2
     : type === "unknown" ? IconHelpCircle
     : type === "error" || type === "failed" ? IconCircleX
@@ -104,7 +105,7 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
     >
       <Toast.Content data-slot="toast-content" className="flex items-start gap-(--qy-action-gap)">
         <span data-slot="toast-icon" aria-hidden="true" className="flex min-h-(--qy-control-sm-narrow) shrink-0 items-center sm:min-h-(--qy-control-sm)">
-          <Icon className="size-(--qy-control-md-icon-narrow) sm:size-(--qy-control-md-icon)" />
+          <Icon className={cn("size-(--qy-control-md-icon-narrow) sm:size-(--qy-control-md-icon)", (type === "loading" || type === "in-progress") && !overdue && "qy-spin")} />
         </span>
         <div className="min-w-0 flex-1">
           <div data-slot="toast-message" role={messageRole} aria-live={messageRole === "alert" ? "assertive" : messageRole ? "polite" : "off"} aria-atomic="true">

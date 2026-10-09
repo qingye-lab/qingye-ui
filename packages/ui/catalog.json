@@ -3522,7 +3522,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button.tsx",
-        "sha256": "9003deeef7d8f05980987cf1cbc05432997c947c45f2b20ae64f4c7fb4dd8e31",
+        "sha256": "49eff7d39eed62f0656fe66e56f9a2fcc263ec8ed2d81e5faa8c4865c3d7abfa",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "等待、进行中、结果未知期间保留焦点并阻止重复触发。结果未知需要调用方先核实；危险动作必须与可见后果共处，色调不代表授权。",
@@ -26290,6 +26290,22 @@
           "providers": [],
           "code": "import { useEffect, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Card } from \"@qingye_lab/ui/components/card\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Skeleton, SkeletonLine } from \"@qingye_lab/ui/components/skeleton\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"到达后原位替换\", titleEn: \"Replaced in place on arrival\" } satisfies DemoMeta;\n\nconst ROWS = [\"接入设备 · 12 项\", \"权限与角色 · 8 项\", \"同步与导出 · 0 项\"];\n\n/** 应用拥有「是否已到达」这个事实；骨架一行占一材，与真内容的一行等高、行间都不留缝，替换时版面不动。 */\nexport default function Demo() {\n  const [loading, setLoading] = useState(true);\n  useEffect(() => {\n    if (!loading) return;\n    const timer = setTimeout(() => setLoading(false), 1600);\n    return () => clearTimeout(timer);\n  }, [loading]);\n  return <Stack>\n    <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n      {loading\n        ? <Skeleton label=\"正在加载集合\">{ROWS.map(row => <SkeletonLine key={row} />)}</Skeleton>\n        : <ul className=\"m-0 flex list-none flex-col p-0\">{ROWS.map(row => <li className=\"flex h-(--qy-cai) items-center text-body\" key={row}>{row}</li>)}</ul>}\n    </Card>\n    <Button disabled={loading} onClick={() => setLoading(true)} variant=\"bordered\">重播</Button>\n  </Stack>;\n}\n",
           "sha256": "78c2bb10ab82c899cdd83170bb99265580bceccb1122ba3ee5103523b57d9efa"
+        },
+        {
+          "id": "refresh",
+          "title": "刷新时保留内容",
+          "source": "apps/docs/src/content/skeleton/demos/03-refresh.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/card",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/progress",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useEffect, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Card } from \"@qingye_lab/ui/components/card\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Progress, ProgressIndicator, ProgressTrack } from \"@qingye_lab/ui/components/progress\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"刷新时保留内容\", titleEn: \"Refresh keeps the content\" } satisfies DemoMeta;\n\nconst ROWS = [\"接入设备 · 12 项\", \"权限与角色 · 8 项\", \"同步与导出 · 0 项\"];\n\n/** 已有内容的刷新不退回骨架：旧内容仍可读，等待由发起它的按钮与一条进度表达。 */\nexport default function Demo() {\n  const [refreshing, setRefreshing] = useState(false);\n  useEffect(() => {\n    if (!refreshing) return;\n    const timer = setTimeout(() => setRefreshing(false), 1600);\n    return () => clearTimeout(timer);\n  }, [refreshing]);\n  return <Card className=\"w-full max-w-md p-(--qy-panel-padding)\">\n    <Stack aria-busy={refreshing}>\n      <Progress aria-label=\"正在刷新\" value={refreshing ? null : 0}>\n        <ProgressTrack><ProgressIndicator /></ProgressTrack>\n      </Progress>\n      <ul className=\"m-0 flex list-none flex-col p-0\">{ROWS.map(row => <li className=\"flex h-(--qy-cai) items-center text-body\" key={row}>{row}</li>)}</ul>\n      <Button onClick={() => setRefreshing(true)} state={refreshing ? \"in-progress\" : \"idle\"} variant=\"bordered\">刷新</Button>\n    </Stack>\n  </Card>;\n}\n",
+          "sha256": "9e17f6059c32e5f8ba9a182c65dbdc8b7bf6e6bf88736e613c77a86dcd28e150"
         }
       ],
       "design": {
@@ -26302,7 +26318,7 @@
           "首次加载的内容区域，形状已知、几行几块可预期。"
         ],
         "avoid": [
-          "刷新时保留仍然有效的工作面，不退回骨架。",
+          "刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。",
           "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
           "不确定形状或时间极短的等待，用按钮的 in-progress。"
         ],
@@ -26398,7 +26414,7 @@
               "The first load of a region whose shape is known: how many rows and blocks to expect."
             ],
             "avoid": [
-              "Refreshing keeps existing content and does not fall back to a skeleton.",
+              "Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.",
               "A failed or empty result uses Empty; a placeholder never stands in for content.",
               "A wait of unknown shape or very short duration uses a Button's in-progress."
             ],
@@ -31743,7 +31759,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/toast.tsx",
-        "sha256": "c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6",
+        "sha256": "7efbb7e072a3276bc8c65200345745063518a75b95302703ac23ff9683dd51a9",
         "extraction": "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED."
       },
       "decisions": "通知不抢焦点。未知表示结果未确认，失败表示已有失败事实；关闭只关闭通知。字段错误、不可逆后果和需决策的失败留在工作面或确认结构，不能只用 Toast。",

@@ -231,7 +231,7 @@ export function Button({
           </span>
           {presented && StatusIcon && (
             <span aria-hidden="true" className={cn("inline-flex shrink-0 items-center", shape === "icon" && "pointer-events-none absolute")} data-slot="button-state">
-              <StatusIcon className={cn("size-[1em]", state === "in-progress" && "animate-spin")} data-slot="button-state-indicator" />
+              <StatusIcon className={cn("size-[1em]", state === "in-progress" && "qy-spin")} data-slot="button-state-indicator" />
             </span>
           )}
         </ButtonPrimitive>
@@ -255,7 +255,7 @@ export function Button({
             id={statusId}
             role="status"
           >
-            {shape === "label" && StatusIcon && <StatusIcon aria-hidden="true" className={cn("size-[1em] shrink-0", state === "in-progress" && "animate-spin")} />}
+            {shape === "label" && StatusIcon && <StatusIcon aria-hidden="true" className={cn("size-[1em] shrink-0", state === "in-progress" && "qy-spin")} />}
             {presented.label}
           </span>
         )}

@@ -32,3 +32,12 @@ test("rows stack with no gap so N skeleton rows are N text lines, and nothing lo
   const motion = readFileSync("motion.css", "utf8");
   expect(motion).not.toContain("skeleton");
 });
+
+test("the wait period is one token shared by the progress band and the in-progress mark, and reduced motion stops the turning", async () => {
+  const { readFileSync } = await import("node:fs");
+  const motion = readFileSync("motion.css", "utf8");
+  expect(motion).toMatch(/\.qy-spin\s*{[^}]*var\(--qy-duration-wait\)/);
+  expect(motion).toMatch(/qy-progress-slide var\(--qy-duration-wait\)/);
+  expect(motion).toMatch(/prefers-reduced-motion: reduce[\s\S]*\.qy-spin\s*{\s*animation: none/);
+  expect(readFileSync("src/components/button.tsx", "utf8")).not.toContain("animate-spin");
+});

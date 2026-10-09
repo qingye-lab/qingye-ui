@@ -320,9 +320,10 @@ Badge 是正文里的一段字（用户裁决 2026-10-07：不要底色，直接
 | `--qy-duration-slow` | 320ms | 较大范围变化；当前无消费 |
 | `--qy-duration-drawer` | 450ms | 抽屉 |
 | `--qy-ease-out` / `-in-out` / `-drawer` / `-spring` | 见 `components.css` | `-spring` 当前无消费 |
+| `--qy-duration-wait` | 1500ms | 不定长等待的一个周期：进度条一程、进行中标记（Button、Toast）一圈。同一类变化共用一个节拍（2026-10-09 之前分别是 1.5s 与 Tailwind 的 1s）。**预设** |
 | `--qy-stagger` | 40ms | 内容错峰 |
 
-Popover、Tooltip、HoverCard 的入退由 `motion.css` 拥有，起止 `scale(0.98)` 与 `opacity(0)` 为**预设**。MotionProvider 记录键盘与指针方式：键盘下即时切换；减少动态效果时删除位移与缩放，直接手势仍反映实际移动。Toast 与 FieldError 仍有局部动效，数值为**预设**。
+Popover、Tooltip、HoverCard 的入退由 `motion.css` 拥有，起止 `scale(0.98)` 与 `opacity(0)` 为**预设**。MotionProvider 记录键盘与指针方式：键盘下即时切换；减少动态效果时删除位移与缩放，直接手势仍反映实际移动。循环动效只有两处，都说「进行中、比例未知」：进度条的移动条与进行中标记的旋转（`.qy-spin`，无公开组件：等待必须有对象）；减少动态效果时两者都停下，条与弧仍在。骨架屏不循环（等待没有变化可说）。Toast 与 FieldError 仍有局部动效，数值为**预设**。
 
 ## 13. 密度与三轴
 

@@ -12,7 +12,7 @@ Source SHA-256: 301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e
 
 ## Use and ownership
 - 首次加载的内容区域，形状已知、几行几块可预期。
-- Avoid: 刷新时保留仍然有效的工作面，不退回骨架。
+- Avoid: 刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。
 - Avoid: 加载失败或结果为空时改用 Empty，不让占位冒充内容。
 - Avoid: 不确定形状或时间极短的等待，用按钮的 in-progress。
 - Library: 一句名称（跟随语言）、形状对辅助技术隐藏、以材为度的行高与墨色。
@@ -111,5 +111,39 @@ export default function Demo() {
     </Card>
     <Button disabled={loading} onClick={() => setLoading(true)} variant="bordered">重播</Button>
   </Stack>;
+}
+```
+
+### 刷新时保留内容
+Source: apps/docs/src/content/skeleton/demos/03-refresh.tsx
+```tsx
+import { useEffect, useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Progress, ProgressIndicator, ProgressTrack } from "@qingye_lab/ui/components/progress";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "刷新时保留内容", titleEn: "Refresh keeps the content" } satisfies DemoMeta;
+
+const ROWS = ["接入设备 · 12 项", "权限与角色 · 8 项", "同步与导出 · 0 项"];
+
+/** 已有内容的刷新不退回骨架：旧内容仍可读，等待由发起它的按钮与一条进度表达。 */
+export default function Demo() {
+  const [refreshing, setRefreshing] = useState(false);
+  useEffect(() => {
+    if (!refreshing) return;
+    const timer = setTimeout(() => setRefreshing(false), 1600);
+    return () => clearTimeout(timer);
+  }, [refreshing]);
+  return <Card className="w-full max-w-md p-(--qy-panel-padding)">
+    <Stack aria-busy={refreshing}>
+      <Progress aria-label="正在刷新" value={refreshing ? null : 0}>
+        <ProgressTrack><ProgressIndicator /></ProgressTrack>
+      </Progress>
+      <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
+      <Button onClick={() => setRefreshing(true)} state={refreshing ? "in-progress" : "idle"} variant="bordered">刷新</Button>
+    </Stack>
+  </Card>;
 }
 ```

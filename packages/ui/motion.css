@@ -276,7 +276,7 @@
 
 [data-slot="progress-indicator"].qy-progress-indeterminate {
   width: 20%;
-  animation: qy-progress-slide 1.5s var(--qy-ease-in-out) infinite;
+  animation: qy-progress-slide var(--qy-duration-wait) var(--qy-ease-in-out) infinite;
 }
 
 /* RTL: the band travels the other way, matching reading direction. */
@@ -291,6 +291,16 @@
   to {
     translate: -500% 0;
   }
+}
+
+/* The in-progress mark (Button, Toast): one turn per wait period, linear because the
+ * mark has no start or end to ease between. It is the only looping rotation in the
+ * library and has no public component: a wait must belong to an object. */
+@keyframes qy-spin {
+  to { rotate: 360deg; }
+}
+.qy-spin {
+  animation: qy-spin var(--qy-duration-wait) linear infinite;
 }
 
 @keyframes qy-rise-in {
@@ -386,6 +396,12 @@
   [data-slot="progress-indicator"].qy-progress-indeterminate {
     animation: none !important;
     translate: 100% 0;
+  }
+
+  /* The turning is what reduced motion removes; the open arc stays and still reads
+   * as "in flight", the same way the settled band does. */
+  .qy-spin {
+    animation: none;
   }
 
   [data-motion] {

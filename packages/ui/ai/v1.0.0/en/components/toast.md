@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6
+Source SHA-256: 7efbb7e072a3276bc8c65200345745063518a75b95302703ac23ff9683dd51a9
 
 Report recoverable, non-critical facts while the current work continues.
 
