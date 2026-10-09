@@ -493,4 +493,5 @@ test("the registry editor template compiles against current source props and rej
   const invalid = editor!.replace('state={saving ? "in-progress" : "idle"}', "loading={saving}");
   expect(invalid).not.toBe(editor);
   expect(check(invalid).some((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n").includes("Property 'loading' does not exist"))).toBe(true);
-});
+  // Two cold ts.createProgram runs; the default 5s budget is exceeded on a loaded CI worker.
+}, 60_000);
