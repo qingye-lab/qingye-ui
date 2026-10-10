@@ -5,7 +5,7 @@ description: Build complete React tasks using the installed Qingye UI version, p
 
 # Qingye UI
 
-This file accompanies @qingye_lab/ui 1.0.0. Read the installed version first; a website or upstream namesake may describe another API.
+This file accompanies @qingye_lab/ui 2.0.0. Read the installed version first; a website or upstream namesake may describe another API.
 
 ## Continued use in a project
 
@@ -62,6 +62,6 @@ Preserve grouping, hierarchy, and action reachability when text grows. Density m
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
-Read [design-philosophy.en.md](design-philosophy.en.md) for methods and their sources; [the public guide](../design.en.md) for project adoption; [installation](v1.0.0/installation.md) for styles and dependencies; [the resource index](v1.0.0/en/llms.txt) for component constraints. Examples retain their authored language and local component state; they do not prove backend permissions, persistence, idempotency or cancellation.
+Read [design-philosophy.en.md](design-philosophy.en.md) for methods and their sources; [the public guide](../design.en.md) for project adoption; [installation](v2.0.0/installation.md) for styles and dependencies; [the resource index](v2.0.0/en/llms.txt) for component constraints. Examples retain their authored language and local component state; they do not prove backend permissions, persistence, idempotency or cancellation.
 
 Registry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.

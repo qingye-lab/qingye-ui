@@ -2,7 +2,7 @@
 
 Generated from the English source blocks in root design.md and STANDARDS.md. The Chinese criteria remain canonical; source hashes prevent silent translation drift.
 
-Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v1.0.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
+Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v2.0.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
 
 ## Use
 

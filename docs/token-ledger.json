@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-10T06:37:03.934Z",
-  "revision": "26e496fe0e504520ca071a799d21c242b3caa40e",
+  "generatedAt": "2026-10-10T07:17:57.929Z",
+  "revision": "e6a75c716e801a2fbbb7a90ce4bf689966fd3d8e",
   "static": {
     "fingerprint": {
-      "sha256": "13def770d43c7a005a1c211c85adceab88303bddaae686e6043d997ef8b0d812",
+      "sha256": "b11355cf3c83d1002fd3a1684a343ccdd3dd86feed4d99945cabf576a4c36e66",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -1393,7 +1393,7 @@
         },
         {
           "path": "apps/docs/src/pages/home.tsx",
-          "sha256": "c7606f2bb835ab7e80ee315316467b99f34056e2dbec34fdd691b2646d41e9ce"
+          "sha256": "2816c6eb1ae3e9d9ea78f9b4ddca439d5edd93b10e2f3129959444c4357406ba"
         },
         {
           "path": "apps/docs/src/pages/not-found.tsx",
@@ -1541,7 +1541,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "2601d50177b0a63e18b442fd697a25b896498b476d45e4ce1caec7a6684c7e71"
+          "sha256": "2ab538a4d8c477e7103785eb80e7b1c86e780b1a2f6d1fd80846678557d80c12"
         },
         {
           "path": "packages/ui/src/chip.ts",

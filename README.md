@@ -2,32 +2,32 @@
 
 器用为本，关系为法，合宜为度。
 
-Qingye UI is a React component library built from the design basis in [design.md](./design.md), using accessible [Base UI](https://base-ui.com) primitives. The current source contains **87 component modules**. Applications own their data, validation, requests, permissions and results; the library provides controls and reusable structural relationships.
+Qingye UI is a React component library built from the design basis in [design.md](./design.md), using accessible [Base UI](https://base-ui.com) primitives. The current source contains **90 component modules**. Applications own their data, validation, requests, permissions and results; the library provides controls and reusable structural relationships.
 
 | Workspace | Purpose | Current version |
 | --- | --- | --- |
-| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **1.0.0 — local, unreleased candidate** |
+| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **2.0.0** |
 | [apps/docs](./apps/docs) | Chinese and English component documentation, playgrounds and six simple compositions | Private documentation app |
 | [packages/tooling](./packages/tooling/README.md) | `@qingye/tooling`, explicit project queries, AST diagnostics and theme tools | 0.5.0 |
 | [apps/studio](./apps/studio/README.md) | Local Theme Studio for explicitly registered projects | 0.4.0, private |
 
-UI 1.0.0 introduces breaking API and visual changes. Read the [1.0.0 notes](./docs/releases/v1.0.0.md) before migrating an existing consumer. Tooling and private Studio have their own version and API boundaries.
+UI 2.0.0 changes the Button, Input, Toast, chart, Tooltip and Tabs contracts. Read the [2.0.0 notes](./docs/releases/v2.0.0.md) before upgrading from 1.0.0, and the [1.0.0 notes](./docs/releases/v1.0.0.md) when migrating from 0.4.x. Tooling and private Studio have their own version and API boundaries.
 
 ## Install
 
-`@qingye_lab/ui` 1.0.0 is published on npm:
+`@qingye_lab/ui` is published on npm:
 
 ```sh
 pnpm add @qingye_lab/ui
 ```
 
-Without npm access, install the same version from its tarball. Download `qingye_lab-ui-1.0.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
+Without npm access, install the same version from its tarball. Download `qingye_lab-ui-2.0.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
 
 ```sh
-pnpm add ./qingye_lab-ui-1.0.0.tgz
+pnpm add ./qingye_lab-ui-2.0.0.tgz
 ```
 
-Historical GitHub releases use `@qingye/ui`; their package name and API differ from 1.0.0.
+Historical GitHub releases use `@qingye/ui`; their package name and API differ from 1.0.0 and later.
 
 For a Tailwind CSS 4 project:
 
@@ -73,7 +73,7 @@ These demonstrations use local data and state. The former dashboard, mail, media
 
 The root [design.md](./design.md) is the sole authored source for the public design guide. Its methods retain their Chinese names: 名实相符、相成相制、布白有用、随境取度、展开有据、进退相承. [STANDARDS.md](./STANDARDS.md) specifies the component implementation contracts, and [component-layering.md](./docs/decisions/component-layering.md) records the library boundary.
 
-The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v1.0.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
+The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v2.0.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
 
 ## Development
 
@@ -93,7 +93,7 @@ Follow [AGENTS.md](./AGENTS.md) and the [current rewrite roadmap](./docs/plans/2
 
 The Release workflow checks that an explicitly approved `v<version>` tag matches `packages/ui/package.json`. It runs its validation gates, packs UI and tooling at **their own manifest versions**, verifies installed consumers, and attaches both tarballs to a GitHub Release. A UI major release does not require an unrelated tooling bump or a matching private Studio version. See [release.yml](./.github/workflows/release.yml) for the executable process.
 
-**1.0.0 is a local unreleased candidate.** A workspace version, generated catalog or local build is not a published release. Candidate status and breaking changes are recorded in [v1.0.0.md](./docs/releases/v1.0.0.md); [v0.4.0.md](./docs/releases/v0.4.0.md) remains a historical release note.
+A workspace version, generated catalog or local build is not a published release: the GitHub Release exists once the workflow succeeds for the tag, and npm publication is a separate manual step. Breaking changes are recorded per version in [v2.0.0.md](./docs/releases/v2.0.0.md) and [v1.0.0.md](./docs/releases/v1.0.0.md); [v0.4.0.md](./docs/releases/v0.4.0.md) remains a historical release note.
 
 ## License
 

@@ -2,7 +2,7 @@
 
 本文件由根 `design.md` 的设计契约与交付检查、`STANDARDS.md` 的组件实现规则生成。改规则时修改对应源文件。
 
-方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v1.0.0/llms.txt)。项目接入见[公开指南](../design.md)。
+方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v2.0.0/llms.txt)。项目接入见[公开指南](../design.md)。
 
 ## 使用方式
 

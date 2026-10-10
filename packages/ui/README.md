@@ -2,9 +2,9 @@
 
 器用为本，关系为法，合宜为度。
 
-`@qingye_lab/ui` provides **87 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
+`@qingye_lab/ui` provides **90 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
 
-Version **1.0.0** introduces breaking API and visual changes from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
+Version **2.0.0** changes the Button, Input, Toast, chart, Tooltip and Tabs contracts from 1.0.0, which itself broke from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Install from npm:
 npm install @qingye_lab/ui
 ```
 
-Or use `pnpm add @qingye_lab/ui` / `yarn add @qingye_lab/ui`. To select this version explicitly, install `@qingye_lab/ui@1.0.0`.
+Or use `pnpm add @qingye_lab/ui` / `yarn add @qingye_lab/ui`. To select this version explicitly, install `@qingye_lab/ui@2.0.0`.
 
 Chart requires the optional `recharts` peer (`^3.10.1`); DataTable requires the optional `@tanstack/react-table` peer (`^8.21.3`). Install the peer for the component you use. If automatic peer installation is disabled, also satisfy Recharts' `react-is` requirement with a version compatible with your React version.
 
@@ -96,7 +96,7 @@ Use the resources for your installed version:
 
 - [catalog.json](./catalog.json): current entries, API guidance and documentation metadata. Unknown inherited requirements remain unknown rather than runtime guarantees.
 - [ai/SKILL.md](./ai/SKILL.md) and [ai/SKILL.en.md](./ai/SKILL.en.md): Chinese and English AI adoption guidance.
-- [ai/v1.0.0/llms.txt](./ai/v1.0.0/llms.txt) and [ai/v1.0.0/en/llms.txt](./ai/v1.0.0/en/llms.txt): versioned component indexes.
+- [ai/v2.0.0/llms.txt](./ai/v2.0.0/llms.txt) and [ai/v2.0.0/en/llms.txt](./ai/v2.0.0/en/llms.txt): versioned component indexes.
 - `registry/`: project provider/theme templates that reference the shared package.
 
 Merge the guide's adoption snippets into the consumer's existing `AGENTS.md` and `design.md`, preserving its project constraints. Generated package resources are projections of the authored sources. `@qingye/tooling` is a separate package; the UI runtime does not require it.
