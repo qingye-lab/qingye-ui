@@ -25,7 +25,7 @@ test("keyboard focus shows supplementary text immediately, associates it, and Es
 
 test("Tab leaves the tooltip for the next control without a focus trap", async () => {
   const user = userEvent.setup();
-  render(<><Tooltip><TooltipTrigger>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip><button>下一条</button></>);
+  render(<><Tooltip><TooltipTrigger render={<Button variant="quiet" />}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip><button>下一条</button></>);
   await user.tab();
   await screen.findByRole("tooltip");
   await user.tab();
@@ -36,7 +36,7 @@ test("Tab leaves the tooltip for the next control without a focus trap", async (
 test.each(["root", "trigger"])("%s disabled stops the hint while the named action remains usable", async (part) => {
   const user = userEvent.setup();
   const clicked = vi.fn();
-  render(<Tooltip disabled={part === "root"}><TooltipTrigger disabled={part === "trigger"} onClick={clicked}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
+  render(<Tooltip disabled={part === "root"}><TooltipTrigger render={<Button variant="quiet" />} disabled={part === "trigger"} onClick={clicked}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
   const trigger = screen.getByRole("button", { name: "复制地址" });
   await user.tab();
   expect(trigger).toHaveFocus();
@@ -71,7 +71,7 @@ test("a directly rendered native disabled control does not open a pointer-only h
 
 test("Provider delays first pointer hover and shares instant opening with adjacent triggers", async () => {
   vi.useFakeTimers();
-  render(<TooltipProvider delay={600} timeout={400}><Tooltip><TooltipTrigger>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip><Tooltip><TooltipTrigger>复制编号</TooltipTrigger><TooltipPopup>编号</TooltipPopup></Tooltip></TooltipProvider>);
+  render(<TooltipProvider delay={600} timeout={400}><Tooltip><TooltipTrigger render={<Button variant="quiet" />}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip><Tooltip><TooltipTrigger render={<Button variant="quiet" />}>复制编号</TooltipTrigger><TooltipPopup>编号</TooltipPopup></Tooltip></TooltipProvider>);
   fireEvent.mouseEnter(screen.getByRole("button", { name: "复制地址" }));
   fireEvent.mouseMove(screen.getByRole("button", { name: "复制地址" }));
   await act(async () => { await vi.advanceTimersByTimeAsync(599); });
@@ -87,7 +87,7 @@ test("Provider delays first pointer hover and shares instant opening with adjace
 
 test("Trigger can explicitly override Provider pointer delay", async () => {
   vi.useFakeTimers();
-  render(<TooltipProvider delay={600}><Tooltip><TooltipTrigger delay={20}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip></TooltipProvider>);
+  render(<TooltipProvider delay={600}><Tooltip><TooltipTrigger render={<Button variant="quiet" />} delay={20}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip></TooltipProvider>);
   fireEvent.mouseEnter(screen.getByRole("button", { name: "复制地址" }));
   fireEvent.mouseMove(screen.getByRole("button", { name: "复制地址" }));
   await act(async () => { await vi.advanceTimersByTimeAsync(19); });
@@ -99,19 +99,19 @@ test("Trigger can explicitly override Provider pointer delay", async () => {
 test("controlled open reports an Escape request without inventing application state", async () => {
   const user = userEvent.setup();
   const change = vi.fn();
-  const { rerender } = render(<Tooltip open onOpenChange={change}><TooltipTrigger>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
+  const { rerender } = render(<Tooltip open onOpenChange={change}><TooltipTrigger render={<Button variant="quiet" />}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
   await screen.findByRole("tooltip");
   await user.keyboard("{Escape}");
   expect(change).toHaveBeenCalledWith(false, expect.objectContaining({ reason: "escape-key" }));
   expect(screen.getByRole("tooltip")).toBeInTheDocument();
-  rerender(<Tooltip open={false}><TooltipTrigger>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
+  rerender(<Tooltip open={false}><TooltipTrigger render={<Button variant="quiet" />}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 地址</TooltipPopup></Tooltip>);
   await waitFor(() => expect(screen.queryByRole("tooltip")).not.toBeInTheDocument());
 });
 
 test("shared handle presents the payload of the focused trigger", async () => {
   const user = userEvent.setup();
   const handle = TooltipCreateHandle<string>();
-  render(<><TooltipTrigger handle={handle} payload="HTTPS 地址">复制地址</TooltipTrigger><TooltipTrigger handle={handle} payload="编号内容">复制编号</TooltipTrigger><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip></>);
+  render(<><TooltipTrigger render={<Button variant="quiet" />} handle={handle} payload="HTTPS 地址">复制地址</TooltipTrigger><TooltipTrigger render={<Button variant="quiet" />} handle={handle} payload="编号内容">复制编号</TooltipTrigger><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip></>);
   await user.tab();
   expect(await screen.findByRole("tooltip")).toHaveTextContent("HTTPS 地址");
   await user.tab();
@@ -122,7 +122,7 @@ test("Popup preserves native attributes, render, ref, style and state-based clas
   const user = userEvent.setup();
   const popupRef = createRef<HTMLDivElement>();
   const triggerRef = createRef<HTMLButtonElement>();
-  render(<Tooltip><TooltipTrigger ref={triggerRef} data-object="address">复制地址</TooltipTrigger><TooltipPopup id="address-hint" ref={popupRef} render={<section />} data-object="address" style={{ maxWidth: "100%" }} className={({ open }) => open ? "rounded-none shadow-none" : ""}>HTTPS 地址</TooltipPopup></Tooltip>);
+  render(<Tooltip><TooltipTrigger render={<Button variant="quiet" />} ref={triggerRef} data-object="address">复制地址</TooltipTrigger><TooltipPopup id="address-hint" ref={popupRef} render={<section />} data-object="address" style={{ maxWidth: "100%" }} className={({ open }) => open ? "rounded-none shadow-none" : ""}>HTTPS 地址</TooltipPopup></Tooltip>);
   await user.tab();
   const popup = await screen.findByRole("tooltip");
   expect(popupRef.current).toBe(popup);
@@ -138,7 +138,7 @@ test("Popup preserves native attributes, render, ref, style and state-based clas
 test("a portal container preserves local language, direction and density", async () => {
   const user = userEvent.setup();
   const container = createRef<HTMLDivElement>();
-  render(<div ref={container} lang="ar" dir="rtl" data-density="compact"><Tooltip><TooltipTrigger>نسخ</TooltipTrigger><TooltipPopup portalProps={{ container }}>الوصف</TooltipPopup></Tooltip></div>);
+  render(<div ref={container} lang="ar" dir="rtl" data-density="compact"><Tooltip><TooltipTrigger render={<Button variant="quiet" />}>نسخ</TooltipTrigger><TooltipPopup portalProps={{ container }}>الوصف</TooltipPopup></Tooltip></div>);
   await user.tab();
   const popup = await screen.findByRole("tooltip");
   expect(container.current).toContainElement(popup);
@@ -152,7 +152,7 @@ test("TooltipContent retains its public Popup alias", () => expect(TooltipConten
 test("open hints preserve existing descriptions through a caller rerender and remove only their own id", async () => {
   const user = userEvent.setup();
   function Example({ description }: { description: string }) {
-    return <><p id="format">纯文本地址</p><p id="scope">当前说明</p><Tooltip><TooltipTrigger aria-describedby={description}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 格式</TooltipPopup></Tooltip></>;
+    return <><p id="format">纯文本地址</p><p id="scope">当前说明</p><Tooltip><TooltipTrigger render={<Button variant="quiet" />} aria-describedby={description}>复制地址</TooltipTrigger><TooltipPopup>HTTPS 格式</TooltipPopup></Tooltip></>;
   }
   const { rerender } = render(<Example description="format" />);
   await user.tab();
@@ -168,7 +168,7 @@ test("open hints preserve existing descriptions through a caller rerender and re
 test("shared payload descriptions move to the active trigger only", async () => {
   const user = userEvent.setup();
   const handle = TooltipCreateHandle<string>();
-  render(<><TooltipTrigger handle={handle} payload="HTTPS 格式">复制地址</TooltipTrigger><TooltipTrigger handle={handle} payload="编号说明">复制编号</TooltipTrigger><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip></>);
+  render(<><TooltipTrigger render={<Button variant="quiet" />} handle={handle} payload="HTTPS 格式">复制地址</TooltipTrigger><TooltipTrigger render={<Button variant="quiet" />} handle={handle} payload="编号说明">复制编号</TooltipTrigger><Tooltip handle={handle}>{({ payload }) => <TooltipPopup>{payload}</TooltipPopup>}</Tooltip></>);
   await user.tab();
   const popup = await screen.findByRole("tooltip");
   const first = screen.getByRole("button", { name: "复制地址" });
@@ -184,10 +184,21 @@ test("React callback ref cleanup is retained for the trigger and popup", async (
   const user = userEvent.setup();
   const triggerCleanup = vi.fn();
   const popupCleanup = vi.fn();
-  const { unmount } = render(<Tooltip><TooltipTrigger ref={() => triggerCleanup}>复制地址</TooltipTrigger><TooltipPopup ref={() => popupCleanup}>HTTPS 格式</TooltipPopup></Tooltip>);
+  const { unmount } = render(<Tooltip><TooltipTrigger render={<Button variant="quiet" />} ref={() => triggerCleanup}>复制地址</TooltipTrigger><TooltipPopup ref={() => popupCleanup}>HTTPS 格式</TooltipPopup></Tooltip>);
   await user.tab();
   await screen.findByRole("tooltip");
   unmount();
   expect(triggerCleanup).toHaveBeenCalledOnce();
   expect(popupCleanup).toHaveBeenCalledOnce();
+});
+
+test("the trigger is the caller's own control: a link stays a link and gains the hint", async () => {
+  const user = userEvent.setup();
+  render(<Tooltip><TooltipTrigger render={<a href="/devices" />}>设备</TooltipTrigger><TooltipPopup>全部设备</TooltipPopup></Tooltip>);
+  const link = screen.getByRole("link", { name: "设备" });
+  expect(link.closest("button")).toBeNull();
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  await user.tab();
+  expect(link).toHaveFocus();
+  expect(await screen.findByRole("tooltip")).toHaveTextContent("全部设备");
 });

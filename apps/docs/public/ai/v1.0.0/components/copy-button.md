@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: c9f80b1c2f08d432eab752eb56b99f3cdd9648a5686095b61259b67079b70c2b
+Source SHA-256: e32b98103aa3bf15b34d2ad66fd8d36798420497234dca30484c8f09838cb9c7
 
 复制给定文本，并呈现剪贴板实际写入结果。
 

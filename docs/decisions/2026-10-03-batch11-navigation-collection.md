@@ -7,7 +7,7 @@
 | Menu | Base UI 命令选择，真实 menuitem、组、勾选/单选与子菜单。 | 原语管理打开、键盘、取消与返回；应用提供动作、禁用、选择事实和后果。 |
 | ContextMenu | Base UI 上下文命令；右键只是增强入口。 | 与可见 Menu 入口共享应用命令，不把右键变成唯一方式。 |
 | NavigationMenu | Base UI nav/list/link 与可返回的展开内容。 | 应用显式 active 与真实 href；不读 URL，不把命令放进导航项。 |
-| Tabs | Base UI 同对象视角切换；手动激活，面板默认 keepMounted。 | 当前值可受控或非受控；保留输入，应用决定是否批准切换。 |
+| Tabs | Base UI 同对象视角切换；手动激活，面板到达后保留。 | 当前值可受控或非受控；保留输入，应用决定是否批准切换。 |
 | Tree | 稳定 id 的真实层级；roving focus、上下/Home/End/左右、字首导航与独立选择。 | expandedIds 与 selectedId 分开，可受控/默认值；取消不提交。应用提供节点、禁用与数据变化。 |
 | Sidebar | aside 中长期导航，nav 与真实链接；本地收起可逆。 | collapsed 可受控或非受控，链接 active 属于应用；不推断路由，不删除导航能力。 |
 | FilterBar | 原生 form、Field/Input 组合、草稿待应用标记与已应用摘要。 | dirty、appliedSummary、条件草稿与结果都由应用持有；提交/取消/清除只发出意图，不自行改条件或请求。 |
@@ -20,7 +20,7 @@
 - **约束**：事件、ref、ARIA、render 与消费者样式传到实际部位；取消沿原语事件或自有明确 cancel 协议保留状态。数据 key 不使用位置或标签，Tree 重复 id / DataTable 缺少 getRowId 明确拒绝。加载不替换有效 rows。
 - **选择**：组内 action-gap、内容 field-gap、群组/层级 panel-gap、章节 section-gap；Tree 行占位使用 row-default。筛选不是自动提交的搜索输入；应用可明确选择自动应用策略。批量版本必填并可为 0。
 - **预设**：菜单行复用 Button 的五档公开 variants，默认 md/quiet 并左对齐；浮层 rounded-overlay、surface-raised、border、shadow-raised、panel-padding-sm 都是既有选择/预设，不作必要性证明。没有新增全局 token、局部动效或字面 z 值。
-- **预设**：Tabs 默认手动激活与 keepMounted=true 是连续性选择；Sidebar 默认展开。Tree 单选不跟随焦点，字首导航以真实标签为依据，缩进复用 panel-gap。DataTable 不自动提供分页或列删除。
+- **预设**：Tabs 默认手动激活是连续性选择；面板默认「到达后保留」（keepMounted="visited"，2026-10-10）——保留是为了不丢已经做过的事，没到过的面板没有可丢的东西，提前挂载只会让它的请求先发生；此前默认 keepMounted=true。Sidebar 默认展开。Tree 单选不跟随焦点，字首导航以真实标签为依据，缩进复用 panel-gap。DataTable 不自动提供分页或列删除。
 - **层级约束**：各自 Positioner 消费 useFloatingLayer('popup')，调用方 style/state callback 最后合并。按 floating-layer owner 的确认，Menu/ContextMenu/NavigationMenu 不新建 Scope；它们属于父工作面，真正 modal 工作面的 Scope 由其 owner 管理。
 - **预设/命中**：焦点落在自身盒内；Menu/Tabs/命令复用 Button，独立导航链接复用 touch-target。Tree 焦点标记只落在节点行，不围住后代。
 - **文案**：现有 locale 覆盖命令、展开、取消、应用与选择；filterUnapplied/bulkVersion/treeEmpty 由 locale owner 合并。本批不写共享 locale。

@@ -24,10 +24,11 @@ test("the equivalent data table retains the real grid including the unavailable 
   expect(within(table).getByRole("cell", { name: "30" })).toBeVisible();
 });
 
-test("explicit non-data states render caller facts without a fabricated grid or table", () => {
-  render(<Heatmap label="同步热度" state="empty">没有记录</Heatmap>);
-  expect(screen.getByText("没有记录")).toBeVisible();
-  expect(screen.queryByRole("table")).toBeNull();
+test("a heatmap only draws data: a chart-wide non-data state is not one of its props", () => {
+  // 用户裁决 2026-10-10：功能要纯粹。没有网格可画时由调用方在原位放 Empty。
+  // @ts-expect-error 整图的非数据状态不是图的属性。
+  void (<Heatmap label="同步热度" state="empty">没有记录</Heatmap>);
+  expect(() => render(<Heatmap label="同步热度" rowLabel="时段" columnLabel="星期" valueLabel="同步次数" columns={[]} rows={[]} />)).toThrow(/two or more/);
 });
 
 test("fewer than two rows or columns, and a cell missing a column's fact, are rejected", () => {

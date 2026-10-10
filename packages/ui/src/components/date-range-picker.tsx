@@ -67,7 +67,7 @@ export function DateRangePicker({ value, onValueChange, name, form, disabled = f
           controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={typeof inputRest.className === "function" ? (state => cn(displayClass, editable && "cursor-pointer", (inputRest.className as (s: typeof state) => string | undefined)(state))) : cn(displayClass, editable && "cursor-pointer", inputRest.className)}
           onClick={event => { inputRest.onClick?.(event); if (editable && !event.defaultPrevented) { setDraft(value); setOpen(true); } }}
           render={(elementProps, state) => <DisplaySurface elementProps={elementProps} state={state} render={inputRender} onName={setFieldName} />} />
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={cn(inputAdjunctClassName, "aspect-square")} aria-label={messages.selectDateRange} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateRange} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)"><Calendar {...(draft?.from ? { defaultMonth: draft.from } : {})} {...calendarProps} mode="range" selected={draft} disabled={editable ? calendarProps.disabled : true} autoFocus onSelect={setDraft} />
         <div className="flex flex-wrap gap-(--qy-action-gap)">

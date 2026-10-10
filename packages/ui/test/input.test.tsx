@@ -98,19 +98,9 @@ test("empty and numeric zero are different native values; Input adds no unknown 
   expect(screen.queryByText("不适用")).not.toBeInTheDocument();
 });
 
-test.each([false, true])("native reset restores an uncontrolled value and its clear adjunct (native=%s)", async (nativeInput) => {
-  const { container } = render(<form><Input nativeInput={nativeInput} aria-label="查询" clearable defaultValue="initial" /></form>);
-  await userEvent.click(screen.getByRole("button", { name: "清空输入" }));
-  expect(screen.getByRole("textbox")).toHaveValue("");
-  fireEvent.reset(container.querySelector("form")!);
-  container.querySelector("form")!.reset();
-  await vi.waitFor(() => expect(screen.getByRole("button", { name: "清空输入" })).toBeInTheDocument());
-  expect(screen.getByRole("textbox")).toHaveValue("initial");
-});
-
 test.each(["", "initial"])("native form reset synchronizes render, class and style state (default=%s)", async (defaultValue) => {
   const onValueChange = vi.fn();
-  const { container } = render(<form><Input nativeInput aria-label="查询" clearable defaultValue={defaultValue} onValueChange={onValueChange}
+  const { container } = render(<form><Input nativeInput aria-label="查询" defaultValue={defaultValue} onValueChange={onValueChange}
     className={(state) => state.dirty ? "dirty-value" : "clean-value"}
     style={(state) => ({ opacity: state.filled ? 1 : 0.5 })}
     render={(props, state) => <input {...props} data-render-dirty={String(state.dirty)} data-render-filled={String(state.filled)} data-render-touched={String(state.touched)} />}
@@ -130,12 +120,11 @@ test.each(["", "initial"])("native form reset synchronizes render, class and sty
   expect(input).toHaveAttribute("data-render-touched", "false");
   expect(input).toHaveClass("clean-value");
   expect(input).toHaveStyle({ opacity: defaultValue ? 1 : 0.5 });
-  expect(Boolean(screen.queryByRole("button", { name: "清空输入" }))).toBe(Boolean(defaultValue));
   expect(onValueChange).not.toHaveBeenCalled();
 });
 
 test("a canceled native reset retains the value and render state", async () => {
-  const { container } = render(<form onReset={(event) => event.preventDefault()}><Input nativeInput aria-label="查询" clearable
+  const { container } = render(<form onReset={(event) => event.preventDefault()}><Input nativeInput aria-label="查询"
     render={(props, state) => <input {...props} data-render-dirty={String(state.dirty)} data-render-filled={String(state.filled)} data-render-touched={String(state.touched)} />}
   /></form>);
   const input = screen.getByRole("textbox");
@@ -146,7 +135,6 @@ test("a canceled native reset retains the value and render state", async () => {
   expect(input).toHaveAttribute("data-render-dirty", "true");
   expect(input).toHaveAttribute("data-render-filled", "true");
   expect(input).toHaveAttribute("data-render-touched", "true");
-  expect(screen.getByRole("button", { name: "清空输入" })).toBeInTheDocument();
 });
 
 test("native reset preserves a caller-owned controlled value and emits no change", async () => {
@@ -193,14 +181,21 @@ test("numeric size keeps its native character-width meaning", () => {
 
 
 test("render-supplied readonly is a real attribute and visible fact", async () => {
-  render(<Input aria-label="名称" defaultValue="value" clearable render={<input readOnly />} />);
+  render(<Input aria-label="名称" defaultValue="value" render={<input readOnly />} />);
   expect(screen.getByRole("textbox")).toHaveAttribute("readonly");
   expect(screen.getByText("只读")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: "清空输入" })).not.toBeInTheDocument();
 });
 
-test("a clearable plain input uses its own locale action name", async () => {
-  render(<UILocaleProvider locale={enUS}><Input aria-label="Title" clearable defaultValue="Draft" /></UILocaleProvider>);
-  await userEvent.click(screen.getByRole("button", { name: "Clear input" }));
-  expect(screen.getByRole("textbox", { name: "Title" })).toHaveValue("");
+test("the input carries a value and nothing else: no built-in action for search or password types", () => {
+  // 用户裁决 2026-10-10：功能要纯粹。清空与显示密码由 SearchInput、PasswordInput 或 InputGroup 组合。
+  const { container } = render(<><Input type="search" aria-label="搜索" defaultValue="青野" /><Input type="password" aria-label="密码" defaultValue="qingye" /></>);
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  expect(container.querySelector("svg")).not.toBeInTheDocument();
+  expect(screen.getByRole("searchbox", { name: "搜索" })).toHaveAttribute("type", "search");
+  expect(screen.getByLabelText("密码")).toHaveAttribute("type", "password");
+  // @ts-expect-error 清空不是输入框的属性。
+  void (<Input clearable />);
+  // @ts-expect-error 显示密码不是输入框的属性。
+  void (<Input visibilityToggle />);
 });

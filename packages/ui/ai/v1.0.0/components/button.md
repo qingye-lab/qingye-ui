@@ -3,30 +3,31 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 49eff7d39eed62f0656fe66e56f9a2fcc263ec8ed2d81e5faa8c4865c3d7abfa
+Source SHA-256: aa02056a504dad182e167cd505d244a5cbcde34058ea1cd04c0a6e23daf1f350
 
 触发有明确对象与后果的动作；状态由调用方持有。
 
 ## Decision
-等待、进行中、结果未知期间保留焦点并阻止重复触发。结果未知需要调用方先核实；危险动作必须与可见后果共处，色调不代表授权。
+按钮只触发动作，忙碌是它唯一的状态：忙碌时保留焦点并阻止重复触发。成功、失败与结果未知是另一件事实，由提示组件表达（就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError）；后果与确认属于 AlertDialog。色调不代表授权。
 
 ## Notes
-- 动作可访问名称保持不变；状态通过独立 description 与 live region 表达。文字形态同时显示状态文字，图标形态使用不同状态图形。
-- 危险色调不代表授权。后果必须真实说明当前对象；确认条件与核实结果由调用方负责。
-- danger 的 DOM 关联在挂载后的 effect 校验：同次挂载的相邻说明可被找到；SSR 不校验，开发环境提交 DOM 后才报错。后续异步才出现的说明应先挂载再启用 danger。生产环境不抛错；文本存在不等于后果正确或可见，调用方仍需核对。
-- 结果未知默认阻止重复执行；调用方应提供独立核实入口，收到可靠事实后再更新 state。
+- 危险色调只是色调，不代表授权，也不替代确认；需要用户知道后果再决定时用 AlertDialog。
+- 忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。文字形态在名称后加转动的记号，图标形态由记号暂时替下自己的图形。
+- state（waiting / in-progress / unknown / failed）已移除，改为 loading。原来写在按钮旁的失败与结果未知，改由 Alert、Toast、FieldError 或 StatusDot 表达。
 - 导航使用原生 a / Link + buttonVariants；nativeButton=false 的 Button 仍是命令语义。
 - 小控件通过 touch-target 扩大命中区到本库 44px 目标，密度与外观尺寸不改变这一目标。
 - 实心入口与父表面对比不足时，消费组合通过 className 添加可辨认边界，并使用同档 padding-bordered；同底色边界示例展示这一入口，组件不读取 DOM 推断承载面。
 
 ## Use and ownership
 - 执行有对象与后果的命令、提交表单或停止当前任务。
-- Avoid: 导航用原生链接；不把等待结束当作成功，不把未知当作失败或可立即重试。
-- Library: 原生与非原生命令语义、焦点、激活保护、动作名称及 locale 状态表达。
+- Avoid: 导航用原生链接。
+- Avoid: 把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。
+- Library: 原生与非原生命令语义、焦点、忙碌时的激活保护与读屏说法。
 - Application: 对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。
 
 ## Composition
-- 危险动作使用 ButtonProtection，或由自身 aria-describedby 关联已有的非空后果说明；确认条件、权限与远端核实属于应用。
+- 有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。
+- 按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。
 
 ## Responsive behavior
 - 尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。
@@ -38,9 +39,6 @@ Source SHA-256: 49eff7d39eed62f0656fe66e56f9a2fcc263ec8ed2d81e5faa8c4865c3d7abfa
 - Button: function; owner button; PASS; props: ButtonProps
 - ButtonPrimitive: reexport; owner button; UNVERIFIED
 - ButtonProps: interface; owner button; PASS
-- ButtonProtection: function; owner button; PASS; props: ButtonProtectionProps
-- ButtonProtectionProps: interface; owner button; PASS
-- ButtonState: type; owner button; PASS
 - buttonVariants: const; owner button; UNVERIFIED
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
@@ -54,35 +52,30 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Button
 默认渲染 type=button 的原生按钮，透传原生属性、ref、事件和派生 data-slot。状态不会自行推进。
 - variant: "solid" | "bordered" | "quiet"; default "solid". 填充、边框或无边框的表达，不表示权限。
-- tone: "neutral" | "danger"; default "neutral". 动作后果；danger 使用 ButtonProtection，或 aria-describedby 关联文档中已有的非空说明。开发环境挂载后校验；生产环境不抛错。
+- tone: "neutral" | "danger"; default "neutral". 色调。danger 表示动作有不可逆的后果，只改变颜色；后果说明与确认不由按钮承载，用 AlertDialog 或 ConfirmAction。
 - size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 按所在位置选尺寸，与强调独立。
 - shape: "label" | "icon"; default "label". 图标是形态；icon 必须有 aria-label 或 aria-labelledby。
-- state: "idle" | "waiting" | "in-progress" | "unknown" | "failed"; default "idle". 调用方持有的事实。等待与进行中设置 aria-busy；结果未知单独呈现。前三种未完成状态阻止重复触发，failed 可由调用方提供恢复操作。
-- disabled: boolean; default false. 动作不可用，退出 Tab 顺序；与未完成事实可以共存。
+- loading: boolean; default false. 调用方持有的事实：这个动作正在执行。显示转动的记号、设置 aria-busy、保留焦点并阻止重复触发；按钮不启动请求，也不推断何时结束。
+- disabled: boolean; default false. 动作不可用，退出 Tab 顺序；可以与 loading 共存。
 - render: ReactElement | (props, state) => ReactElement. Base UI 组合入口，可渲染其他命令载体或触发器；保留真实语义。
 - nativeButton: boolean; default true. 非 button 命令载体设为 false，仍使用按钮语义；导航使用原生 a + buttonVariants。
-
-### ButtonProtection
-可见后果与动作成组，并关联 aria-describedby；已有说明可由 Button 直接关联。容器的 consequence 必须非空，不替应用确认、判断权限或执行请求。
-- consequence: string. 必填非空文字，说明当前对象、版本与变更的后果。
-- children: ReactNode. 相关动作与必要退出入口。
 
 ### buttonVariants
 与 Button 同一套尺寸、形态、强调和色调，用于保留原生链接等元素语义的组合。
 
 ### ButtonPrimitive
-Base UI 无障碍原语；应用优先使用 Button 的状态与保护契约。
+Base UI 无障碍原语；应用优先使用 Button。
 
 ## Keyboard
-- Enter / Space: 触发可用动作；等待、进行中或结果未知时不触发。
-- Tab / Shift+Tab: 移入或移出焦点；未完成状态保留位置，disabled 退出 Tab 顺序。
-- ArrowUp / ArrowDown: 组合菜单或列表触发器按原语操作；未完成状态阻止展开。
+- Enter / Space: 触发可用动作；忙碌时不触发。
+- Tab / Shift+Tab: 移入或移出焦点；忙碌时保留位置，disabled 退出 Tab 顺序。
+- ArrowUp / ArrowDown: 组合菜单或列表触发器按原语操作；忙碌时阻止展开。
 
 ## Source examples
 ### 变体与色调
 Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
-import { Button, ButtonProtection } from "@qingye_lab/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 
 export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
 
@@ -94,11 +87,11 @@ export default function Demo() {
         <Button variant="bordered">取消</Button>
         <Button variant="quiet">编辑</Button>
       </div>
-      <ButtonProtection consequence="删除后，内容无法恢复。">
+      <div className="flex flex-wrap gap-(--qy-action-gap)">
         <Button tone="danger">删除</Button>
         <Button tone="danger" variant="bordered">删除</Button>
         <Button tone="danger" variant="quiet">删除</Button>
-      </ButtonProtection>
+      </div>
     </div>
   );
 }
@@ -178,27 +171,25 @@ export default function Demo() {
 }
 ```
 
-### 状态
+### 忙碌与禁用
 Source: apps/docs/src/content/button/demos/06-states.tsx
 ```tsx
 import { Button } from "@qingye_lab/ui/components/button";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 
-export const meta = { title: "状态", titleEn: "States" };
+export const meta = { title: "忙碌与禁用", titleEn: "Busy and disabled" };
 
 export default function Demo() {
   return (
     <div className="grid w-full gap-(--qy-section-gap)">
       <div className="flex flex-wrap gap-(--qy-action-gap)">
-        {(["idle", "waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
-          <Button key={state} state={state}>保存</Button>
-        ))}
+        <Button>保存</Button>
+        <Button loading>保存</Button>
         <Button disabled>保存</Button>
       </div>
       <div className="flex flex-wrap gap-(--qy-action-gap)">
-        {(["waiting", "in-progress", "unknown", "failed"] as const).map((state) => (
-          <Button aria-label="保存" key={state} shape="icon" state={state} variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
-        ))}
+        <Button aria-label="保存" shape="icon" variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
+        <Button aria-label="保存" loading shape="icon" variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
         <Button aria-label="保存" disabled shape="icon" variant="quiet"><IconDeviceFloppy aria-hidden="true" /></Button>
       </div>
     </div>
@@ -218,5 +209,36 @@ export default function Demo() {
     {/* 基础层 §5：实心入口与父面同色，显式补必要边界，并消费 §1 的边框换算。 */}
     <Button className="border border-(--device-boundary) px-(--qy-control-md-padding-bordered) focus-visible:ring-0 focus-visible:border-(--device-boundary) focus-visible:inset-ring-[length:var(--qy-focus-quiet-width)] focus-visible:inset-ring-(--device-boundary)">继续核对设备</Button>
   </div>;
+}
+```
+
+### 结果由提示组件表达
+Source: apps/docs/src/content/button/demos/08-result.tsx
+```tsx
+import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { IconAlertCircle } from "@tabler/icons-react";
+import * as React from "react";
+
+export const meta = { title: "结果由提示组件表达", titleEn: "Results belong to feedback components" };
+
+// 按钮只有忙碌一种状态；失败是另一件事实，写在就地说明里，按钮回到可用。
+export default function Demo() {
+  const [phase, setPhase] = React.useState<"idle" | "saving" | "failed">("idle");
+  const timer = React.useRef<number | undefined>(undefined);
+  React.useEffect(() => () => window.clearTimeout(timer.current), []);
+  const save = () => { setPhase("saving"); timer.current = window.setTimeout(() => setPhase("failed"), 900); };
+  return (
+    <Stack gap="fields" className="w-full max-w-md">
+      {phase === "failed" && (
+        <Alert tone="danger">
+          <IconAlertCircle aria-hidden="true" />
+          <div className="grid gap-1"><AlertTitle>保存未完成</AlertTitle><AlertDescription>连接中断，填写的内容仍在。</AlertDescription></div>
+        </Alert>
+      )}
+      <div><Button loading={phase === "saving"} onClick={save}>保存</Button></div>
+    </Stack>
+  );
 }
 ```

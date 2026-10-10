@@ -27,7 +27,7 @@ export default function TooltipReview() {
         <div className="mt-(--qy-field-group-gap) flex items-center gap-(--qy-action-gap)">
           <code className="select-all text-body text-foreground">青野 UI</code>
           <Tooltip>
-            <TooltipTrigger render={<Button variant="quiet" state={copyState === "copying" ? "in-progress" : "idle"} onClick={copy} />}>复制</TooltipTrigger>
+            <TooltipTrigger render={<Button variant="quiet" loading={copyState === "copying"} onClick={copy} />}>复制</TooltipTrigger>
             <TooltipPopup>复制「青野 UI」</TooltipPopup>
           </Tooltip>
           <p role="status" className="text-support text-foreground">{copyState === "copying" ? "正在复制" : copyState === "copied" ? "已复制" : copyState === "failed" ? "未复制，请手动复制。" : ""}</p>

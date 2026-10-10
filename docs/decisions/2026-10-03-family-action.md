@@ -29,6 +29,8 @@ Button 不掌握请求结果，也不启动请求。应用传入 boolean loading
 
 当前 Button **选择** `state: idle | waiting | in-progress | unknown | failed`。联合便于区分不同事实，未被理念强制；unknown 是缺少可靠结果，与等待或已确认失败不同。当前 busy 与 unknown 阻止再次触发，failed 不自行重试；成功由应用在对象处表达。
 
+> **2026-10-10 修订（用户裁决「功能要纯粹」）**：Button 的状态联合已收敛为布尔 `loading`，只表示忙碌；等待/失败/结果未知不再由按钮呈现，改由 Alert、Toast、FieldError、StatusDot 表达。ConfirmAction 的 `state` 同步改为 `loading`。本文中关于状态联合与按钮旁状态文字的叙述是历史记录，现行契约见基础层「2026-10-10 功能纯粹：本次梳理的处置」。
+
 ### 决定 2：尺寸、强调和危险语义独立
 
 size、variant、tone 分轴，表达不同决定。危险是应用声明的后果语义；填充更强不获得权限。尺寸可参与强调，例如便于到达的保护入口，但须有任务理由，不能一律禁止。
@@ -90,6 +92,8 @@ StatusDot 归展示族：它表达对象状态，动作族可以消费它，不�
 Button 的 xs/sm/md/lg/xl 分别使用同名 text-control 档；桌面外高 24/28/32/36/40px，行高 16/18/20/24/26px，每侧垂直视觉余量 4/5/6/6/7px。窄屏外高各 +4px，行高 20/20/22/24/28px。外高与文字值是**预设**，余量由二者换算；lg/xl 不再借低一档文字造成 8px 余量，详见基础层 §2、§8。
 
 shape 为 label / icon，独立于 size；图标居中按档案换算。小入口的 touch-target 自建定位上下文，粗指针扩大命中层，不能覆盖邻居或视口。
+
+> **2026-10-10 用户裁决：本文决定 3 与下面第六节已撤销。**「功能需要纯粹，比如 button 不应该承载警告等作用，这种场景应该使用弹框。」Button 不再校验或承载后果，`ButtonProtection` 移除；后果写在 AlertDialog / ConfirmAction 的对话框说明里。现行契约见基础层「危险后果：归对话框，不归按钮」。以下原文保留为历史记录。
 
 ## 六、ButtonProtection 的新契约
 

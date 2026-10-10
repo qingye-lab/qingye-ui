@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
-Source SHA-256: 6003731bc618e0b8fc86e80a9f526e4acc7bfb3bd045095cfa395f32d8822283
+Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
 
 Confirm a specific object, version, and change; review again when content changes.
 
@@ -22,7 +22,7 @@ Confirmation targets the reviewed opening snapshot. Changed identity, version, c
 - Application: Objects, versions, changes, permissions, action states, and outcomes.
 
 ## Composition
-- ConfirmAction + explicit snapshot/text + application state/onConfirm.
+- ConfirmAction + explicit snapshot/text + application loading/onConfirm; express the result with Alert or Toast.
 
 ## Responsive behavior
 - Five matching control/text profiles; the modal consumes shared space and focus mechanisms.
@@ -45,15 +45,15 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### ConfirmAction
-A confirmation composition of AlertDialog, ButtonProtection, and optional Field/Input.
+A confirmation composition of AlertDialog and optional Field/Input; the consequence is the dialog's description.
 - snapshot: { objectId: string; objectLabel: string; version: string | number; change: string; consequence: string }. All fields are required and meaningful; comparisons include every field. Opening captures an immutable copy. Confirmation receives only a reviewed copy that still matches current facts.
 - title / triggerLabel / actionLabel: ReactNode. The caller names the real object and action. Consequences remain visible and linked to confirmation.
-- onConfirm: (snapshot, event) => void. Request only: no network, result ownership, or automatic closing. The application expresses permissions, waiting, failure, and unknown results through state and content.
-- state / disabled: ButtonState / boolean; default 'idle' / false. waiting, in-progress, and unknown block requests. Busy/unknown retain Button's focusable ARIA-disabled behavior; explicit disabled is native. Back only closes this UI.
+- onConfirm: (snapshot, event) => void. Request only: no network, result ownership, or automatic closing. The application expresses a pending request through loading, and permissions, failure and unknown results through feedback components in children.
+- loading / disabled: boolean / boolean; default false / false. loading means the request is sent and its result has not arrived: both the entry and the confirm action show busy and block another request, keeping Button's focusable ARIA-disabled behavior; explicit disabled is native. Back only closes this UI.
 - confirmationText / confirmationLabel: string / ReactNode. Optional exact text match with a required visible label. FieldDescription shows the expected text. Reviewing or reopening clears prior input.
 - open / defaultOpen / onOpenChange: AlertDialog public props. Controlled or uncontrolled opening. onOpenChange details.cancel() can reject it; the controlled caller decides opening and closing.
 - tone: ButtonTone; default 'danger'. The confirmation input follows the one fill-control geometry (density axis); action buttons keep Button size steps because size expresses position. Tone expresses consequences without granting permission.
-- triggerProps / confirmProps / inputProps / popupProps: Current public component props. Customize real outlets' render, refs, ARIA, and events. Canceling confirmProps.onClick blocks a request. A danger trigger still requires visible consequence association on its page.
+- triggerProps / confirmProps / inputProps / popupProps: Current public component props. Customize real outlets' render, refs, ARIA, and events. Canceling confirmProps.onClick blocks a request. The entry only opens the confirmation; the dialog states the consequence.
 - children: ReactNode. Additional real review content or application-provided state and recovery outlets in the panel.
 
 ### ConfirmActionPrimitive
@@ -83,22 +83,17 @@ export default function Demo() {
 }
 ```
 
-### 结果未知
+### 请求中
 Source: apps/docs/src/content/confirm-action/demos/02-outcome.tsx
 ```tsx
 import { ConfirmAction } from "@qingye_lab/ui/components/confirm-action";
 
-export const meta = { title: "结果未知", titleEn: "Unknown outcome" };
+export const meta = { title: "请求中", titleEn: "Requesting" };
 
 const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
 
-// 结果未知阻止默认再次触发，控件不以超时或动画宣布成功。
+// 请求发出后两枚按钮都表示忙碌并挡住再次请求；控件不以超时或动画宣布结果。
 export default function Demo() {
-  return (
-    <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
-      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" state="unknown" onConfirm={() => {}} />
-      <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="等待中的核对" actionLabel="请求 A → B" state="waiting" onConfirm={() => {}} />
-    </div>
-  );
+  return <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" loading onConfirm={() => {}} />;
 }
 ```

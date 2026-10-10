@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467
+Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -12,6 +12,8 @@ Source SHA-256: 05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467
 
 ## Notes
 - 应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。
+- 当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。
+- 当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。
 
 ## Use and ownership
 - 工作面旁的长期导航。
@@ -92,5 +94,36 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "可逆导航与二级", titleEn: "Reversible navigation with a sub-level" } satisfies DemoMeta;
 export default function Demo() {
   return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink><SidebarSub defaultOpen><SidebarSubTrigger icon={<IconStack2 aria-hidden="true" />}>视角标签</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/components/tabs">标签页</SidebarLink><SidebarLink href="/components/segmented-control">分段控件</SidebarLink></SidebarSubContent></SidebarSub><SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
+}
+```
+
+### 当前位置
+Source: apps/docs/src/content/sidebar/demos/02-current.tsx
+```tsx
+import { IconLayoutSidebar, IconListTree, IconStack2 } from "@tabler/icons-react";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "当前位置", titleEn: "Current location" } satisfies DemoMeta;
+
+function Links({ current }: { current: "sidebar" | "tabs" }) {
+  return <SidebarGroup>
+    <SidebarLink href="/components/sidebar" active={current === "sidebar"} icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
+    <SidebarSub defaultOpen>
+      <SidebarSubTrigger icon={<IconStack2 aria-hidden="true" />}>视角标签</SidebarSubTrigger>
+      <SidebarSubContent>
+        <SidebarLink href="/components/tabs" active={current === "tabs"}>标签页</SidebarLink>
+        <SidebarLink href="/components/segmented-control">分段控件</SidebarLink>
+      </SidebarSubContent>
+    </SidebarSub>
+    <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
+  </SidebarGroup>;
+}
+
+export default function Demo() {
+  return <Inline gap="section" align="start" className="w-full">
+    <Sidebar className="w-full max-w-xs"><SidebarToggle /><SidebarContent aria-label="当前位置在二级"><Links current="tabs" /></SidebarContent></Sidebar>
+    <Sidebar defaultCollapsed><SidebarToggle /><SidebarContent aria-label="收起时的当前位置"><Links current="sidebar" /></SidebarContent></Sidebar>
+  </Inline>;
 }
 ```

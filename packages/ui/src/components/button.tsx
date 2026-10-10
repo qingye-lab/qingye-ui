@@ -2,15 +2,11 @@
 
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
-import { IconHelpCircle, IconCircleX, IconHourglass, IconLoader2 } from "@tabler/icons-react";
+import { IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
-// Keep Node's ambient types out of the browser library; process may be absent.
-declare const process: { env: { NODE_ENV?: string } };
-
-export type ButtonState = "idle" | "waiting" | "in-progress" | "unknown" | "failed";
 
 // 基础层 §1、§2、§8：位置选择尺寸与文字档，图标只是形态；留白由基础层换算。
 // 每档使用同名的文字档，高度与字号同步增长 —— 只涨高度不涨字号会让多出的
@@ -43,6 +39,8 @@ export const buttonVariants = cva(
         bordered: "border focus-visible:ring-0",
         quiet: "bg-transparent focus-visible:ring-inset [--qy-focus-ring-width:var(--qy-focus-quiet-width)]",
       },
+      // 色调只是色调（用户裁决 2026-10-10：功能要纯粹）。danger 说明这个动作有不可逆的后果，
+      // 后果本身与确认不由按钮承载——用 AlertDialog / ConfirmAction，按钮只负责触发。
       tone: { neutral: "", danger: "" },
       size: sizes,
       // 图标形 = 边长等于外高的正方形，内容居中；不用留白去凑，放图标或放字都是同一个大小。
@@ -80,31 +78,6 @@ export const buttonVariants = cva(
   },
 );
 
-const ProtectionContext = React.createContext<string | undefined>(undefined);
-
-export interface ButtonProtectionProps extends React.ComponentPropsWithRef<"div"> {
-  /** 基础层 §18：后果针对当前对象、版本与变更，由调用方给出可见文字。 */
-  consequence: string;
-}
-
-export function ButtonProtection({ consequence, children, className, ...props }: ButtonProtectionProps) {
-  const descriptionId = React.useId();
-  // 基础层 §18、动作族决定 3：后果必须在场；这不是授权，也不自行决定二次确认。
-  if (typeof consequence !== "string" || !consequence.trim()) throw new Error("ButtonProtection requires a visible, non-empty consequence.");
-  return (
-    <ProtectionContext.Provider value={descriptionId}>
-      <div {...props} className={cn("flex min-w-0 flex-col gap-(--qy-field-gap)", className)} data-slot="button-protection">
-        <p className="text-support text-muted-foreground" data-slot="button-consequence" id={descriptionId}>
-          {consequence}
-        </p>
-        <div className="flex flex-wrap items-center gap-(--qy-action-gap)" data-slot="button-protected-actions">
-          {children}
-        </div>
-      </div>
-    </ProtectionContext.Provider>
-  );
-}
-
 export interface ButtonProps extends Omit<ButtonPrimitive.Props, "className" | "focusableWhenDisabled"> {
   className?: string;
   "data-slot"?: string;
@@ -112,51 +85,22 @@ export interface ButtonProps extends Omit<ButtonPrimitive.Props, "className" | "
   tone?: NonNullable<VariantProps<typeof buttonVariants>["tone"]>;
   size?: NonNullable<VariantProps<typeof buttonVariants>["size"]>;
   shape?: NonNullable<VariantProps<typeof buttonVariants>["shape"]>;
-  /** 基础层 §9：事实由调用方持有；控件不启动请求、重试或推断完成。 */
-  state?: ButtonState;
+  /** 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。
+   *  成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。 */
+  loading?: boolean;
 }
 
 export function Button({
-  variant = "solid", tone = "neutral", size = "md", shape = "label", state = "idle",
+  variant = "solid", tone = "neutral", size = "md", shape = "label", loading = false,
   className, children, disabled = false, tabIndex, render, ref,
   onClickCapture, onAuxClickCapture, onPointerDownCapture, onMouseDownCapture,
   onKeyDownCapture, onKeyUpCapture, "aria-describedby": description,
   "aria-disabled": disabledFact, "aria-busy": busyFact, "data-slot": slot = "button", ...props
 }: ButtonProps): React.ReactElement {
   const { messages } = useUILocale();
-  const protection = React.useContext(ProtectionContext);
   const statusId = React.useId();
-  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
-  const mergedRef = React.useCallback((node: HTMLButtonElement | null) => {
-    buttonRef.current = node;
-    if (typeof ref === "function") {
-      const cleanup = ref(node);
-      if (typeof cleanup === "function") return () => { buttonRef.current = null; cleanup(); };
-    } else if (ref) ref.current = node;
-  }, [ref]);
-  // 后果可以由现有说明承担；挂载后检查真实 DOM，包含 render 提供的关联。
-  // SSR 不做此校验；开发环境在 commit 后报错，生产或缺少环境信息时不中断渲染。
-  React.useEffect(() => {
-    if (typeof process === "undefined" || process.env.NODE_ENV === "production" || tone !== "danger" || protection) return;
-    const button = buttonRef.current;
-    const hasConsequence = button?.getAttribute("aria-describedby")?.split(/\s+/).some((id) =>
-      // 未完成状态说明不是动作后果，不能用自动生成的 status 蒙混通过。
-      id !== statusId && Boolean(button.ownerDocument.getElementById(id)?.textContent?.trim()),
-    );
-    if (!hasConsequence) {
-      throw new Error("A danger Button requires ButtonProtection or a non-empty DOM consequence linked by aria-describedby.");
-    }
-  });
-  const status = {
-    waiting: { label: messages.buttonWaiting, icon: IconHourglass },
-    "in-progress": { label: messages.buttonInProgress, icon: IconLoader2 },
-    unknown: { label: messages.buttonUnknown, icon: IconHelpCircle },
-    failed: { label: messages.buttonFailed, icon: IconCircleX },
-  };
-  const presented = state === "idle" ? undefined : status[state];
-  const busy = state === "waiting" || state === "in-progress" || busyFact === true || busyFact === "true";
-  // 基础层 §9、§15、§18：未知不等于失败；先保留位置与核实依据，不能默认重复写入。
-  const blocked = disabled || disabledFact === true || disabledFact === "true" || busy || state === "unknown";
+  const busy = loading || busyFact === true || busyFact === "true";
+  const blocked = disabled || disabledFact === true || disabledFact === "true" || busy;
   const preventActivation = (event: React.SyntheticEvent) => {
     if (!blocked) return false;
     event.preventDefault();
@@ -184,82 +128,45 @@ export function Button({
   const protectedRender: ButtonPrimitive.Props["render"] = typeof render === "function"
     ? (renderProps, primitiveState) => protectRenderTarget(render(renderProps, primitiveState))
     : render && protectRenderTarget(render);
-  const StatusIcon = presented?.icon;
   return (
     <>
-      {/* 基础层 §9、§18（2026-10-05 打磨）：**动作与结果分属两个元素**。
-       *
-       * 打磨前状态词追加在按钮内部（「保存 ⌛ 等待中」），于是：
-       *   1. 读取结果的文字与触发动作的控件共用一个点击区——点「操作失败」这四个字
-       *      等于再点一次保存，而用户想做的多半是查看错误；
-       *   2. 按钮宽度随状态变化，同一个动作在不同状态下会跳。
-       *
-       * 现在按钮只承载**动作**（名称 + 一个状态图标），宽度不再随状态改变；
-       * 结果由按钮旁边的状态文字表达，它不是控件，点它不会触发任何东西。
-       * 两者的可访问关联仍在（aria-describedby → 该状态元素），读屏听到的与看到的一致。 */}
-      {/* 外层只在有结果文字时才成为一个盒；平时不参与布局（contents），按钮本身就是布局项——
-       *  调用方写在按钮上的外边距、对齐、不收缩因此直接生效，不被一层看不见的包裹吞掉。 */}
-      <span className={presented ? "inline-flex min-w-0 max-w-full items-center gap-(--qy-action-gap)" : "contents"} data-slot="button-with-status">
-        <ButtonPrimitive
-          {...props}
-          aria-busy={busy || busyFact}
-          aria-describedby={[description, tone === "danger" ? protection : undefined, presented ? statusId : undefined].filter(Boolean).join(" ") || undefined}
-          aria-disabled={blocked || disabledFact}
-          className={cn(buttonVariants({ variant, tone, size, shape }), className)}
-          data-shape={shape}
-          data-size={size}
-          data-slot={slot}
-          data-state={state}
-          data-tone={tone}
-          data-variant={variant}
-          disabled={disabled}
-          ref={mergedRef}
-          render={protectedRender}
-          tabIndex={disabled ? (props.nativeButton === false ? -1 : undefined) : tabIndex ?? 0}
-          onAuxClickCapture={(event) => { if (!preventActivation(event)) onAuxClickCapture?.(event); }}
-          onClickCapture={(event) => { if (!preventActivation(event)) onClickCapture?.(event); }}
-          onKeyDownCapture={(event) => { if (!activationKey(event) || !preventActivation(event)) onKeyDownCapture?.(event); }}
-          onKeyUpCapture={(event) => { if (!activationKey(event) || !preventActivation(event)) onKeyUpCapture?.(event); }}
-          onMouseDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onMouseDownCapture?.(event); }}
-          onPointerDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onPointerDownCapture?.(event); }}
-        >
-          {/* 动作名称与状态图标。图标形态在**有状态时**才隐藏自己的图形（让位给状态
-           *  图标），没有状态时照常显示——图标按钮没有可见图形就等于没有名称，
-           *  那是可识别性缺陷，不是「更简洁」。 */}
-          <span className={cn("inline-flex min-w-0 items-center justify-center gap-(--qy-control-content-gap) whitespace-normal", shape === "icon" && presented && "opacity-0")} data-slot="button-content">
-            {children}
-          </span>
-          {presented && StatusIcon && (
-            <span aria-hidden="true" className={cn("inline-flex shrink-0 items-center", shape === "icon" && "pointer-events-none absolute")} data-slot="button-state">
-              <StatusIcon className={cn("size-[1em]", state === "in-progress" && "qy-spin")} data-slot="button-state-indicator" />
-            </span>
-          )}
-        </ButtonPrimitive>
-        {/* 结果文字：不是控件。等待与进行中的按钮已被 aria-disabled 挡住重复触发；
-         *  失败与结果未知同样只表达事实，是否重试由调用方另给明确动作。
-         *  图标形态没有放文字的地方，状态改为仅读屏可见（仍与按钮关联）。 */}
-        {presented && (
-          <span
-            aria-atomic="true"
-            aria-live="polite"
-            className={cn(
-              "inline-flex min-w-0 items-center gap-(--qy-control-content-gap) text-support-mobile sm:text-support",
-              // 基础层 §7、§9（2026-10-05 打磨）：**中和不等于所有状态同一强度**。
-              // 失败是需要用户处理的事实，比等待／进行高一级；结果未知不是失败，
-              // 不能染成危险色——那会把「还没核实」说成「已经错了」。
-              tone === "danger" || state === "failed" ? "text-destructive-foreground" : state === "unknown" ? "text-warning-foreground" : "text-muted-foreground",
-              shape === "icon" && "sr-only",
-            )}
-            data-slot="button-status"
-            data-state={state}
-            id={statusId}
-            role="status"
-          >
-            {shape === "label" && StatusIcon && <StatusIcon aria-hidden="true" className={cn("size-[1em] shrink-0", state === "in-progress" && "qy-spin")} />}
-            {presented.label}
+      {/* 按钮只承载动作，忙碌是它唯一的状态（用户裁决 2026-10-10：功能要纯粹）。
+       *  忙碌时名称留在原位，后面多一个转动的记号；图标形态没有放第二个图形的地方，记号暂时替下自己的图形。
+       *  焦点留在按钮上，重复触发被挡住（aria-disabled，不是原生 disabled）。 */}
+      <ButtonPrimitive
+        {...props}
+        aria-busy={busy || busyFact}
+        aria-describedby={[description, loading ? statusId : undefined].filter(Boolean).join(" ") || undefined}
+        aria-disabled={blocked || disabledFact}
+        className={cn(buttonVariants({ variant, tone, size, shape }), className)}
+        data-loading={loading ? "" : undefined}
+        data-shape={shape}
+        data-size={size}
+        data-slot={slot}
+        data-tone={tone}
+        data-variant={variant}
+        disabled={disabled}
+        ref={ref}
+        render={protectedRender}
+        tabIndex={disabled ? (props.nativeButton === false ? -1 : undefined) : tabIndex ?? 0}
+        onAuxClickCapture={(event) => { if (!preventActivation(event)) onAuxClickCapture?.(event); }}
+        onClickCapture={(event) => { if (!preventActivation(event)) onClickCapture?.(event); }}
+        onKeyDownCapture={(event) => { if (!activationKey(event) || !preventActivation(event)) onKeyDownCapture?.(event); }}
+        onKeyUpCapture={(event) => { if (!activationKey(event) || !preventActivation(event)) onKeyUpCapture?.(event); }}
+        onMouseDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onMouseDownCapture?.(event); }}
+        onPointerDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onPointerDownCapture?.(event); }}
+      >
+        <span className={cn("inline-flex min-w-0 items-center justify-center gap-(--qy-control-content-gap) whitespace-normal", shape === "icon" && loading && "opacity-0")} data-slot="button-content">
+          {children}
+        </span>
+        {loading && (
+          <span aria-hidden="true" className={cn("inline-flex shrink-0 items-center", shape === "icon" && "pointer-events-none absolute")} data-slot="button-loading">
+            <IconLoader2 className="qy-spin size-[1em]" />
           </span>
         )}
-      </span>
+      </ButtonPrimitive>
+      {/* 忙碌对读屏的说法：不可见、不占位（绝对定位，不进入调用方的 flex 间距），由 aria-describedby 关联到按钮。 */}
+      {loading && <span aria-atomic="true" aria-live="polite" className="sr-only" data-slot="button-loading-status" id={statusId} role="status">{messages.buttonInProgress}</span>}
     </>
   );
 }

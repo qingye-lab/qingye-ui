@@ -1,8 +1,7 @@
-import { Button } from "@qingye_lab/ui/components/button";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@qingye_lab/ui/components/input-group";
 
 export const meta = { title: "单位与动作", titleEn: "Unit and action" };
 export default function Demo() {
-  return <Field className="w-full max-w-sm"><FieldLabel>数值</FieldLabel><InputGroup><InputGroupInput inputMode="decimal" /><InputGroupAddon>px</InputGroupAddon><InputGroupAddon className="p-0"><Button variant="quiet" className="min-h-0 self-stretch sm:min-h-0">应用</Button></InputGroupAddon></InputGroup></Field>;
+  return <Field className="w-full max-w-sm"><FieldLabel>数值</FieldLabel><InputGroup><InputGroupInput inputMode="decimal" /><InputGroupAddon>px</InputGroupAddon><InputGroupButton>应用</InputGroupButton></InputGroup></Field>;
 }

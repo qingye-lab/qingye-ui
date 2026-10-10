@@ -26,10 +26,11 @@ test("the equivalent data table carries every point's name and both axes", () =>
   expect(within(table).getByRole("cell", { name: "90,512" })).toBeVisible();
 });
 
-test("explicit non-data states render caller facts without a fabricated plot or table", () => {
-  render(<ScatterChart label="记录数与失败率" state="empty">没有记录</ScatterChart>);
-  expect(screen.getByText("没有记录")).toBeVisible();
-  expect(screen.queryByRole("table")).toBeNull();
+test("a scatter chart only draws data: nothing to plot is rejected instead of drawing an empty frame", () => {
+  // 用户裁决 2026-10-10：功能要纯粹。没有点可画时由调用方在原位放 Empty。
+  // @ts-expect-error 整图的非数据状态不是图的属性。
+  void (<ScatterChart label="记录数与失败率" state="empty">没有记录</ScatterChart>);
+  expect(() => render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "a", label: "甲", points: [] }]} />)).toThrow(/render Empty in its place/);
 });
 
 test("more than three series, nonfinite coordinates and unnamed points are rejected", () => {

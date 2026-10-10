@@ -171,6 +171,10 @@
     --qy-sidebar-border: var(--qy-border);
     --qy-sidebar-accent: var(--qy-surface-hover);
     --qy-sidebar-accent-foreground: var(--qy-foreground);
+    /* 侧栏当前项的面。当前项的画法随承载面（基础层 §10）：侧栏铺在比纸深一级的底上，当前项回到纸色；
+     * 项目把侧栏铺在纸色或接近纸色的面上时，纸色的当前项与四周同色，改为淡染：
+     * --qy-sidebar-current: var(--qy-surface-active)。作用范围只有 SidebarLink 的当前项。 */
+    --qy-sidebar-current: var(--qy-surface);
     --qy-sidebar-ring: var(--qy-ring);
   }
 }

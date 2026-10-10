@@ -13,7 +13,7 @@ Closing ends the presentation and returns to the trigger; it does not imply savi
 ## Notes
 - Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.
 - The application owns drafts. Name closing, discarding, saving and undo separately.
-- Associate danger actions with visible nonempty consequences using aria-describedby or ButtonProtection.
+- Use AlertDialog for consequential decisions and state the consequence in its description; buttons carry none.
 - Programmatic opening without a trigger needs a meaningful finalFocus target.
 - Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.
 - ARIA evidence narrows the contract: Portal forces keepMounted=false, even for JavaScript callers passing true. The application holds drafts explicitly. Direct Primitive composition still has the upstream retained-portal isolation defect.

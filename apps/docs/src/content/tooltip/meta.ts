@@ -41,6 +41,7 @@ export default {
       description: "支持 render、ref、事件、ARIA 和按状态求值的 className。",
       descriptionEn: "Supports render, refs, events, ARIA and state-based classes.",
       props: [
+        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "必填：被提示的那个控件本身（Button、链接、菜单触发器）。提示只附在它上面，children 成为它的内容。", descriptionEn: "Required: the control being hinted (a Button, link, or menu trigger). The hint attaches to it and children become its content." },
         { name: "delay / closeDelay", type: "number", description: "覆盖当前触发者的指针延迟。", descriptionEn: "Override pointer delays for this trigger." },
         { name: "disabled", type: "boolean", default: "false", description: "仅停用提示。原生禁用动作通过 render 的控件声明。", descriptionEn: "Disable hints only. Set native action disabling on the rendered control." },
       ],
@@ -66,11 +67,13 @@ export default {
     "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
     "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
     "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+    "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。",
   ],
   notesEn: [
     "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
     "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
     "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+    "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.",
   ],
   design: {
     methods: ["展开有据", "相成相制", "名实相符"],

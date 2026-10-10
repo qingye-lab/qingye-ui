@@ -41,6 +41,8 @@ useCopyToClipboard 报告本次浏览器写入事件：调用前与等待中 isC
 
 裸 TooltipTrigger 默认组合现有 quiet Button，复用其内侧 1px 焦点和尺寸/触摸命中策略；显式 render 使用调用方控件。此处不复制第二套按钮样式，尺寸与强调由 render 的真实控件拥有。
 
+> 2026-10-10 用户裁决（功能要纯粹）后撤销上一段：TooltipTrigger 不再自带按钮，`render` 必填，提示附在调用方给出的控件上。起因是使用方把链接放进裸触发器，得到按钮里套链接。
+
 render 直接提供 disabled 原生控件/ Button 时同时停用提示，避免只剩鼠标入口；render 函数或自定义控件内部的禁用状态由调用方同时传 Trigger.disabled。Trigger.disabled 本身仍只停用提示，不改变动作语义。
 
 当前安装的 Base UI 1.7 Tooltip 原语只呈现视觉提示，不提供 role/aria-describedby。包装补上 role=tooltip，并根据原语公开的 data-open/data-popup-open 关联当前触发者，保留调用方说明；关闭即移除关联与可访问树内容，不等视觉退出完成。共享内容直接切换当前 payload，不使用保留上一个 payload 的 Viewport：首次测试发现后者把旧、新说明同时加入当前触发者的可访问描述，违反名实相符。MutationObserver 只同步关联，不拥有展开、延迟、位置或动效，并随 ref 卸载清理。

@@ -14,12 +14,8 @@ import { cn } from "../utils";
 
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
 type SidebarState = {
-  collapsed: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
+  collapsed: boolean; /** 条目位于内嵌的二级面板里：左侧已有一条引导线。 */ nested?: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
   toggle: React.RefObject<HTMLButtonElement | null>; content: React.RefObject<HTMLElement | null>; contentFocused: React.RefObject<boolean>;
-  // 子级在浮层里重渲染一份时打开（见 SidebarSubContent）：浮层的承载面是 surface-raised，
-  // 当前位置不能再用「纸面比四周更亮」的不透明处理——那是为 bg-sidebar 这张底纸算的，
-  // 换一张底纸就可能与底纸同色而不可见。浮层里改用半透明的 surface-active（基础层 §6）。
-  onOverlaySurface: boolean;
   change(event: React.MouseEvent): void;
 };
 const SidebarContext = React.createContext<SidebarState | null>(null);
@@ -29,6 +25,16 @@ export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boo
  * 侧栏铺底纸色，当前项是一张纸（纸本色）：当前位置比四周更亮，读来是「这一页摊开在这里」；
  * 悬停是清墨。底纸写在侧栏自身，当前项的关系不依赖调用方放在哪里。收起是右上角的图标按钮。
  *
+ * 「比四周更亮」只在侧栏的底比纸深时成立。当前项的面因此是一个角色（--qy-sidebar-current，
+ * 默认纸本色），不写死在组件里：项目把 --qy-sidebar 调到接近纸色时，把它改为淡染
+ * （--qy-surface-active）；库自己的浮层子级也是同一个入口（见 SidebarSubContent）。
+ *
+ * 当前项还有第二个线索：一段焦墨线（2026-10-10，使用方反馈「当前项只靠底色区分」）。
+ * 纸本色与侧栏底的明度差很小，只靠面，低视力与强光下的读者认不出「我在哪」；
+ * 做法取库里已有的导航线画法（nav-line.ts）：当前项把自己那一段线加深为焦墨，不加粗、不改字重。
+ * 二级条目左侧本来就有引导线，当前项加深的就是那一段；一级条目没有线，线画在条目自己的起始边内侧。
+ * 线宽 1px 与导航线相同；上下各让出一个条目圆角，不压到圆角上（这两个取值是预设）。
+ *
  * 收起不是消失，是变成一列图标（rail）：宽度 = 一个填值控件高 + 两侧内缩（基础层 §2、§4），
  * 恰好等于收起按钮本身的宽度——rail 的列宽由已有的「图标形按钮」几何给出，不另造一套尺寸。
  * 宽度变化本身是真实几何变化，不是装饰动效，因此随 --qy-duration-base / --qy-ease-out 过渡；
@@ -37,7 +43,7 @@ export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boo
  */
 export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange, render, className, ...props }: SidebarProps) {
   const [local, setLocal] = React.useState(defaultCollapsed); const current = collapsed ?? local; const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
-  const context: SidebarState = { collapsed: current, contentId, defaultContentId, setContentId, toggle, content, contentFocused, onOverlaySurface: false, change(event) { let canceled = false; onCollapsedChange?.(!current, { event, cancel() { canceled = true; } }); if (!canceled && collapsed === undefined) setLocal(!current); } };
+  const context: SidebarState = { collapsed: current, contentId, defaultContentId, setContentId, toggle, content, contentFocused, change(event) { let canceled = false; onCollapsedChange?.(!current, { event, cancel() { canceled = true; } }); if (!canceled && collapsed === undefined) setLocal(!current); } };
   const element = useRender({ defaultTagName: "aside", render, props: mergeProps({ "data-slot": "sidebar", "data-collapsed": current, className: cn("flex min-w-0 max-w-full flex-col gap-(--qy-field-gap) overflow-x-hidden bg-sidebar text-body transition-[width,padding] duration-(--qy-duration-base) ease-(--qy-ease-out) motion-reduce:transition-none data-[collapsed=true]:w-[calc(var(--qy-fill-height)+2*var(--qy-overlay-inset))] data-[collapsed=true]:px-(--qy-overlay-inset)", className) }, props) });
   return <SidebarContext.Provider value={context}>{element}</SidebarContext.Provider>;
 }
@@ -103,14 +109,16 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   const context = useSidebar();
   const { messages } = useUILocale();
   const frame = cn(
-    "touch-target flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
+    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
     context.collapsed ? "justify-center px-0" : "px-(--qy-control-sm-padding)",
-    active && (context.onOverlaySurface ? "bg-(--qy-surface-active) text-sidebar-accent-foreground" : "bg-surface text-sidebar-accent-foreground"),
+    active && "bg-sidebar-current text-sidebar-accent-foreground before:pointer-events-none before:absolute before:inset-y-(--qy-radius-item) before:w-px before:bg-foreground",
+    // 二级条目加深的是面板引导线上自己那一段（位置与 SidebarSubContent 的引导线同一算式，换到条目自己的坐标）。
+    active && (context.nested ? "before:inset-y-0 before:start-[calc(var(--qy-control-sm-padding)-var(--qy-control-md-icon)/2-var(--qy-control-content-gap))]" : "before:start-0"),
     className,
   );
   const hasCount = count !== undefined && count > 0;
   // rail 下底纸是 --qy-sidebar，不是 --qy-surface：角标贴着图标的纸色圈要换成实际承载面
-  // （基础层 G9，库不猜父背景）；当前项另有 bg-surface，圈色在那一种状态下会偏差，
+  // （基础层 G9，库不猜父背景）；当前项另有自己的面（--qy-sidebar-current），圈色在那一种状态下会偏差，
   // 属于已知、可接受的边缘状态（当前项同时带未读数本身就是少见组合）。
   const hostedIcon = icon && hasCount && context.collapsed
     ? <CornerMark count={count!} {...(max !== undefined ? { max } : {})} label={messages.unreadCount(count!)} className="ring-(--qy-sidebar)">{icon}</CornerMark>
@@ -178,7 +186,8 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
   const label = React.useContext(SidebarSubLabelContext);
   // 浮层本身就是「有空间显示文字」的地方：子级在这里不再是 rail 条目，名称要正常可见，
   // 不能继承外层 collapsed=true 继续把文字切成 sr-only——那会让弹出的子级看起来空白一片。
-  const overlayContext = React.useMemo(() => ({ ...context, collapsed: false, onOverlaySurface: true }), [context]);
+  const overlayContext = React.useMemo(() => ({ ...context, collapsed: false, nested: false }), [context]);
+  const nestedContext = React.useMemo(() => ({ ...context, nested: true }), [context]);
   return <>
     {/* 面板始终挂载（keepMounted）：:has([aria-current=page]) 要在 rail 下也能读到子级是否
      *  选中，而 :has() 只认 DOM 是否存在、不认是否可见。这里用的是外面另包的一层 div 的
@@ -192,14 +201,15 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
          *  （骨法用笔：线只在面无法划出范围时出现）。线的位置是父项图标的几何中心，
          *  从子级看是正上方那枚图标的延伸。 */}
         <span aria-hidden="true" className="absolute inset-y-0 start-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2)] w-px bg-border" />
-        <SidebarContext.Provider value={context}>{children}</SidebarContext.Provider>
+        <SidebarContext.Provider value={nestedContext}>{children}</SidebarContext.Provider>
       </CollapsiblePrimitive.Panel>
     </div>
     {context.collapsed && (
       <PopoverPopup
         side="right" align="start" sideOffset={4}
         viewportProps={{ className: "grid min-w-0 gap-0.5 p-(--qy-overlay-inset)" }}
-        className="min-w-[calc(8*var(--qy-cai))]"
+        // 浮层的承载面是 surface-raised（纸色）：纸色的当前项在这里与底同色，换成淡染（基础层 §6、§10）。
+        className="min-w-[calc(8*var(--qy-cai))] [--qy-sidebar-current:var(--qy-surface-active)]"
       >
         {/* 浮层里没有行气之外的空间重复父项名称，但图标本身不认字——保留一行浓墨小标题，
          *  删去检验：去掉它，读者分不清这组链接属于哪一个父项。 */}

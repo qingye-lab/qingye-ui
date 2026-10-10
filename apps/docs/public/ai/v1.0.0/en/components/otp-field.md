@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: 17768395e25182532a892827852f4413c9f47ea670f719656f5ca78f35b0af39
+Source SHA-256: d4de306957582e7b75b11f09768154041a87df04cbb91a9857013cdd6c12f844
 
 Present a fixed-length text value in segments.
 
@@ -38,7 +38,7 @@ One real text input owns the caret and selection. Leading zeros remain intact. F
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 

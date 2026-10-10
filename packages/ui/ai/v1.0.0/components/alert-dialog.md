@@ -12,7 +12,7 @@ Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
 
 ## Notes
 - 普通编辑使用 Dialog；不需要中断时用就地确认或面板。
-- 后果必须可见并与危险按钮关联。
+- 后果必须在对话框里可见（Description）。
 - 关闭与继续动作分别处理。
 - 必须提供明确的返回选择，不能只依赖 Esc。
 - 共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。
@@ -67,7 +67,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - portalProps / backdropProps / viewportProps: DialogPopupProps. 透传承载层的容器、样式、render、ref 与原生属性。
 
 ### AlertDialogTitle / AlertDialogDescription
-说明当前选择与必要后果，建立可访问关联。
+说明当前选择与必要后果，建立可访问关联。后果写在 Description 里，按钮不承载。
 
 ### AlertDialogTrigger / AlertDialogClose
 默认组合 Button。Close 由调用方明确命名，如“返回”；不执行继续动作。
@@ -87,7 +87,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 确认与返回
 Source: apps/docs/src/content/alert-dialog/demos/01-confirmation.tsx
 ```tsx
-import { useId, useState } from "react";
+import { useState } from "react";
 import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye_lab/ui/components/alert-dialog";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
@@ -98,22 +98,20 @@ export const meta = { title: "确认与返回", titleEn: "Confirmation and retur
 export default function Demo() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("青野");
-  const consequenceId = useId();
 
   return (
     <div className="grid w-full max-w-sm gap-(--qy-panel-gap)">
       <Field><FieldLabel>备注</FieldLabel><Input value={value} onValueChange={setValue} /></Field>
-      <p id={consequenceId} className="text-support text-muted-foreground">清空后，输入内容无法恢复。</p>
       <AlertDialog open={open} onOpenChange={setOpen}>
-        <AlertDialogTrigger render={<Button variant="bordered" tone="danger" aria-describedby={consequenceId} />} className="justify-self-start">清空输入</AlertDialogTrigger>
+        <AlertDialogTrigger render={<Button variant="bordered" tone="danger" />} className="justify-self-start">清空输入</AlertDialogTrigger>
         <AlertDialogPopup>
           <AlertDialogHeader>
             <AlertDialogTitle>清空输入？</AlertDialogTitle>
-            <AlertDialogDescription id={`${consequenceId}-popup`}>当前备注将被清空。</AlertDialogDescription>
+            <AlertDialogDescription>当前备注将被清空，无法恢复。</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogClose render={<Button variant="bordered" />}>返回</AlertDialogClose>
-            <Button tone="danger" aria-describedby={`${consequenceId}-popup`} onClick={() => { setValue(""); setOpen(false); }}>清空输入</Button>
+            <Button tone="danger" onClick={() => { setValue(""); setOpen(false); }}>清空输入</Button>
           </AlertDialogFooter>
         </AlertDialogPopup>
       </AlertDialog>

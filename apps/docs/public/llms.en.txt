@@ -27,7 +27,7 @@
 - [CheckboxGroup](/ai/v1.0.0/en/components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
 - [CodeBlock](/ai/v1.0.0/en/components/code-block.md): Literal text with actual copy results.
 - [Collapsible](/ai/v1.0.0/en/components/collapsible.md): Reveal additional content for the same object.
-- [Combobox](/ai/v1.0.0/en/components/combobox.md): Filter candidates and confirm one value, with query text separate from selection.
+- [Combobox](/ai/v1.0.0/en/components/combobox.md): Filter candidates and confirm one value or a set, with query text separate from selection.
 - [ConfirmAction](/ai/v1.0.0/en/components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
 - [ContextMenu](/ai/v1.0.0/en/components/context-menu.md): A context-menu enhancement for commands on the current object.
 - [Copy button](/ai/v1.0.0/en/components/copy-button.md): Copy supplied text and reflect the clipboard write result.
@@ -47,7 +47,7 @@
 - [Form](/ai/v1.0.0/en/components/form.md): A native field submission scope and reset context.
 - [Heatmap](/ai/v1.0.0/en/components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
 - [HoverCard](/ai/v1.0.0/en/components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
-- [Input](/ai/v1.0.0/en/components/input.md): Enter one text value. Search, password visibility, and clearing use the same input.
+- [Input](/ai/v1.0.0/en/components/input.md): Enter one text value.
 - [InputGroup](/ai/v1.0.0/en/components/input-group.md): Give an input and its markers, units or actions one editing boundary.
 - [Item](/ai/v1.0.0/en/components/item.md): Content, navigation and related actions.
 - [Kbd](/ai/v1.0.0/en/components/kbd.md): A native keyboard key display.
@@ -64,6 +64,7 @@
 - [OtpField](/ai/v1.0.0/en/components/otp-field.md): Present a fixed-length text value in segments.
 - [PageHeader](/ai/v1.0.0/en/components/page-header.md): Co-locate a page name, context and related actions.
 - [Pagination](/ai/v1.0.0/en/components/pagination.md): Page position, real actions and explicit unknown totals.
+- [PasswordInput](/ai/v1.0.0/en/components/password-input.md): Enter a password and switch to plain text to check it.
 - [PendingValue](/ai/v1.0.0/en/components/pending-value.md): An unresolved write result with its original value.
 - [Popover](/ai/v1.0.0/en/components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
 - [Progress](/ai/v1.0.0/en/components/progress.md): Confirmed task completion or an explicit indeterminate state.
@@ -72,6 +73,7 @@
 - [RadioGroup](/ai/v1.0.0/en/components/radio-group.md): Choose one value from a small set of visible options.
 - [ScatterChart](/ai/v1.0.0/en/components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](/ai/v1.0.0/en/components/scroll-area.md): Native scrolling within a bounded viewport.
+- [SearchInput](/ai/v1.0.0/en/components/search-input.md): Enter a search term and clear it in one step.
 - [SegmentedControl](/ai/v1.0.0/en/components/segmented-control.md): Enter one value from a small set of visible segments.
 - [Select](/ai/v1.0.0/en/components/select.md): Choose one value from a collapsible set of options.
 - [Separator](/ai/v1.0.0/en/components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.

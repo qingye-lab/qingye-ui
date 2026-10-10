@@ -59,7 +59,7 @@ function Methods({ id, title, role, methods, pick, fullText }: MethodsProps) {
       </TabsList>
       {/* 各条详情叠在同一格里，高度取最长的一条，切换时下文不跳。 */}
       <div className="home-index-panels">
-        {methods.map(method => <TabsPanel className="home-index-panel" key={method.n} value={method.n}>
+        {methods.map(method => <TabsPanel className="home-index-panel" keepMounted key={method.n} value={method.n}>
           <Text className="home-method-decision">{pick(method.decision)}{pick({ zh: "。", en: "." })}</Text>
           <Text className="home-index-meta" step="support">
             <span className="home-method-source">{pick(method.source)}</span>

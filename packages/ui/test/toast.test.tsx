@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import {
@@ -192,176 +192,11 @@ test("the toast region is a labelled landmark", async () => {
   expect(screen.getByRole("region", { name: "操作提示" })).toBeInTheDocument();
 });
 
-test("overdue loading becomes persistent unknown, preserving recovery until a real result arrives", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    const onRetry = vi.fn();
-    let id = "";
-    act(() => {
-      id = toastManager.add({ title: "正在处理", type: "loading", description: "说明", timeout: 1, actionProps: { children: "核对", onClick: onRetry } });
-    });
-    act(() => vi.advanceTimersByTime(999));
-    expect(screen.getByText("正在处理")).toBeInTheDocument();
-    act(() => vi.advanceTimersByTime(1));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    const root = document.querySelector("[data-slot=toast-root]");
-    expect(root).toHaveAttribute("data-type", "unknown");
-    expect(root).not.toHaveClass("animate-toast-success-odd");
-    expect(document.querySelector("[data-slot=toast-icon] svg")).toHaveClass("tabler-icon-help-circle");
-    expect(document.querySelector("[data-slot=toast-icon] svg")).not.toHaveClass("tabler-icon-loader-2");
-    expect(screen.getByText(/说明/)).toHaveTextContent("正在处理 说明 请核对结果。");
-    fireEvent.click(screen.getByRole("button", { name: "核对" }));
-    expect(onRetry).toHaveBeenCalledOnce();
-    act(() => vi.advanceTimersByTime(60_000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    act(() => toastManager.update(id, { title: "处理完成", type: "success", timeout: 4000 }));
-    expect(screen.getByText("处理完成")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^说明$/);
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
-});
-
-test("a completed loading toast is not overwritten by its expired deadline", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let id = "";
-    act(() => { id = toastManager.add({ title: "正在处理", type: "loading" }); });
-    act(() => vi.advanceTimersByTime(500));
-    act(() => toastManager.update(id, { title: "处理完成", type: "success", timeout: 0 }));
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByText("处理完成")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
-});
-
-test("an overdue promise can later settle from unknown to its real result", async () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let resolve!: (value: string) => void;
-    const pending = new Promise<string>((done) => { resolve = done; });
-    act(() => { void toastManager.promise(pending, { loading: "正在处理", success: "处理完成", error: "处理失败" }); });
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    await act(async () => { resolve("confirmed"); await pending; });
-    expect(screen.getByText("处理完成")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-title]")).not.toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-root]")).not.toHaveAttribute("aria-labelledby");
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
-});
-
-test.each(["success", "error"] as const)("a late %s title preserves application context without the unknown description", async (outcome) => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let resolve!: () => void;
-    let reject!: (reason: Error) => void;
-    const pending = new Promise<void>((done, fail) => { resolve = done; reject = fail; });
-    act(() => {
-      void toastManager.promise(pending, {
-        loading: { title: "正在处理", description: "原说明" },
-        success: { title: "处理完成" },
-        error: () => ({ title: "处理失败" }),
-      }).catch(() => {});
-    });
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    await act(async () => {
-      if (outcome === "success") resolve();
-      else reject(new Error("offline"));
-      await pending.catch(() => {});
-    });
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", outcome);
-    expect(screen.getByText(outcome === "success" ? "处理完成" : "处理失败")).toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^原说明$/);
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
-});
-
-test.each(["success", "error"] as const)("a late %s string preserves the application's original title", async (outcome) => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let resolve!: () => void;
-    let reject!: (reason: Error) => void;
-    const pending = new Promise<void>((done, fail) => { resolve = done; reject = fail; });
-    act(() => {
-      void toastManager.promise(pending, {
-        loading: { title: "原名称", description: "正在处理" },
-        success: () => "处理完成",
-        error: "处理失败",
-      }).catch(() => {});
-    });
-    act(() => vi.advanceTimersByTime(1000));
-    await act(async () => {
-      if (outcome === "success") resolve();
-      else reject(new Error("offline"));
-      await pending.catch(() => {});
-    });
-    expect(document.querySelector("[data-slot=toast-title]")).toHaveTextContent(/^原名称$/);
-    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(outcome === "success" ? /^处理完成$/ : /^处理失败$/);
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
-});
-
-test.each([false, true])("anchored late results clear unknown copy with tooltipStyle=%s", async (tooltipStyle) => {
-  vi.useFakeTimers();
+test.each(["success", "error"] as const)("tooltip promise shows its %s string result", async (outcome) => {
   const anchor = document.createElement("button");
   document.body.append(anchor);
   try {
-    render(<AnchoredToastProvider loadingTimeout={1000} />);
-    let resolve!: () => void;
-    const pending = new Promise<void>((done) => { resolve = done; });
-    act(() => {
-      void anchoredToastManager.promise(pending, {
-        loading: { title: "正在处理", description: "原说明", positionerProps: { anchor }, data: { tooltipStyle } },
-        success: { title: "处理完成" },
-        error: "处理失败",
-      });
-    });
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    expect(screen.getByText(/原说明/)).toHaveTextContent("正在处理 原说明 请核对结果。");
-    await act(async () => { resolve(); await pending; });
-    expect(screen.getByText("处理完成")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^原说明$/);
-  } finally {
-    act(() => anchoredToastManager.close());
-    anchor.remove();
-    vi.useRealTimers();
-  }
-});
-
-test.each([
-  ["success", false],
-  ["error", false],
-  ["success", true],
-  ["error", true],
-] as const)("tooltip promise shows its %s string result after deadline=%s", async (outcome, overdue) => {
-  vi.useFakeTimers();
-  const anchor = document.createElement("button");
-  document.body.append(anchor);
-  try {
-    render(<AnchoredToastProvider loadingTimeout={1000} />);
+    render(<AnchoredToastProvider />);
     let resolve!: () => void;
     let reject!: (reason: Error) => void;
     const pending = new Promise<void>((done, fail) => { resolve = done; reject = fail; });
@@ -373,25 +208,20 @@ test.each([
       }).catch(() => {});
     });
     expect(screen.getByText("正在处理")).toBeInTheDocument();
-    if (overdue) {
-      act(() => vi.advanceTimersByTime(1000));
-      expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    }
     await act(async () => {
       if (outcome === "success") resolve();
       else reject(new Error("offline"));
       await pending.catch(() => {});
     });
     expect(screen.getByText(outcome === "success" ? "处理完成" : "处理失败")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
   } finally {
     act(() => anchoredToastManager.close());
     anchor.remove();
-    vi.useRealTimers();
   }
 });
 
-test("deadline presentation leaves application fields in the store untouched", () => {
+// 通知不做推测（用户裁决 2026-10-10）：等多久都还是应用给的那个状态，只有应用的更新能改它。
+test.each(["loading", "waiting", "in-progress"])("a %s toast never turns into another state on its own", (type) => {
   vi.useFakeTimers();
   let toasts: ReturnType<typeof ToastPrimitive.useToastManager>["toasts"] = [];
   function StoreProbe() {
@@ -399,14 +229,17 @@ test("deadline presentation leaves application fields in the store untouched", (
     return null;
   }
   try {
-    render(<ToastProvider loadingTimeout={1000}><StoreProbe /></ToastProvider>);
+    render(<ToastProvider><StoreProbe /></ToastProvider>);
     let id = "";
-    act(() => { id = toastManager.add({ title: "操作结果尚未确认", description: "请核对结果。", type: "loading" }); });
-    act(() => vi.advanceTimersByTime(1000));
-    expect(toasts[0]).toMatchObject({ type: "unknown", title: "操作结果尚未确认", description: "请核对结果。", timeout: 0 });
-    act(() => toastManager.update(id, { type: "success", timeout: 4000 }));
-    expect(document.querySelector("[data-slot=toast-title]")).toHaveTextContent(/^操作结果尚未确认$/);
-    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^请核对结果。$/);
+    act(() => { id = toastManager.add({ type, title: "正在处理", description: "说明", timeout: 1 }); });
+    act(() => vi.advanceTimersByTime(600_000));
+    expect(toasts[0]).toMatchObject({ type, title: "正在处理", description: "说明" });
+    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", type);
+    expect(document.querySelector("[data-slot=toast-title]")).toHaveTextContent(/^正在处理$/);
+    expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^说明$/);
+    act(() => toastManager.update(id, { type: "unknown", title: "结果待核对" }));
+    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", "unknown");
+    expect(screen.getByText("结果待核对")).toBeInTheDocument();
   } finally {
     act(() => toastManager.close());
     vi.useRealTimers();
@@ -418,45 +251,6 @@ test("application-owned unknown messages keep their own presentation", () => {
   act(() => toastManager.add({ type: "unknown", title: "结果待核对", description: "调用方说明。", timeout: 0 }));
   expect(document.querySelector("[data-slot=toast-title]")).toHaveTextContent(/^结果待核对$/);
   expect(document.querySelector("[data-slot=toast-description]")).toHaveTextContent(/^调用方说明。$/);
-});
-
-test("anchored loading follows the same unknown deadline", () => {
-  vi.useFakeTimers();
-  const anchor = document.createElement("button");
-  document.body.append(anchor);
-  try {
-    render(<AnchoredToastProvider loadingTimeout={1000} />);
-    act(() => anchoredToastManager.add({ title: "正在处理", type: "loading", positionerProps: { anchor } }));
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-    expect(document.querySelector("[data-slot=toast-popup]")).toHaveAttribute("data-type", "unknown");
-  } finally {
-    act(() => anchoredToastManager.close());
-    anchor.remove();
-    vi.useRealTimers();
-  }
-});
-
-test.each([0, Number.NaN, Infinity, 2_147_483_648])("loading deadline rejects unsupported timer value %s", (loadingTimeout) => {
-  expect(() => mount({ loadingTimeout })).toThrow(RangeError);
-});
-
-test("a real result in the same batch as its deadline wins over unknown", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let id = "";
-    act(() => { id = toastManager.add({ title: "正在处理", type: "loading" }); });
-    act(() => {
-      toastManager.update(id, { title: "处理完成", type: "success", timeout: 0 });
-      vi.advanceTimersByTime(1000);
-    });
-    expect(screen.getByText("处理完成")).toBeInTheDocument();
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-  } finally {
-    act(() => toastManager.close());
-    vi.useRealTimers();
-  }
 });
 
 // Public state facts are independent of colour and of automatic dismissal.
@@ -488,7 +282,7 @@ test("urgency is explicitly selected, not inferred from failure", () => {
 test.each(["failed", "error", "unknown", "waiting", "in-progress"])("%s remains until dismissed even with timeout=1", async (type) => {
   vi.useFakeTimers();
   try {
-    mount({ loadingTimeout: 120_000 });
+    mount();
     act(() => toastManager.add({ type, title: "名称", timeout: 1 }));
     act(() => vi.advanceTimersByTime(60_000));
     expect(screen.getByText("名称")).toBeInTheDocument();
@@ -518,21 +312,6 @@ test("hover pauses dismissal and leaving resumes the remaining time", async () =
   } finally { vi.useRealTimers(); }
 });
 
-test("focus does not pause the result deadline", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    act(() => toastManager.add({ type: "loading", title: "名称", timeout: 10 }));
-    act(() => (document.querySelector("[data-slot=toast-root]") as HTMLElement).focus());
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveFocus();
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByRole("status")).toHaveTextContent("操作结果尚未确认");
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveFocus();
-    act(() => vi.advanceTimersByTime(60_000));
-    expect(screen.getByText("操作结果尚未确认")).toBeInTheDocument();
-  } finally { vi.useRealTimers(); }
-});
-
 test("an arriving toast and its updates do not steal the current input focus", () => {
   render(<ToastProvider><input aria-label="备注" /></ToastProvider>);
   const input = screen.getByRole("textbox", { name: "备注" });
@@ -554,15 +333,14 @@ test("an arriving toast and its updates do not steal the current input focus", (
 test.each(["success", "error"] as const)("promise %s is a real transition on the same notification", async (result) => {
   vi.useFakeTimers();
   try {
-    mount({ loadingTimeout: 1000 });
+    mount();
     let resolve!: () => void; let reject!: (error: Error) => void;
     const pending = new Promise<void>((done, fail) => { resolve = done; reject = fail; });
     act(() => { void toastManager.promise(pending, { loading: { title: "名称" }, success: { title: "处理完成" }, error: { title: "处理失败" } }).catch(() => {}); });
     const root = document.querySelector("[data-slot=toast-root]");
     expect(screen.getByRole("status")).toHaveTextContent("进行中");
-    act(() => vi.advanceTimersByTime(1000));
-    expect(root).toHaveAttribute("data-type", "unknown");
-    expect(root).not.toHaveAttribute("data-type", "error");
+    act(() => vi.advanceTimersByTime(600_000));
+    expect(root).toHaveAttribute("data-type", "loading");
     await act(async () => { if (result === "success") resolve(); else reject(new Error("invalid value")); await pending.catch(() => {}); });
     expect(document.querySelector("[data-slot=toast-root]")).toBe(root);
     expect(root).toHaveAttribute("data-type", result);
@@ -613,32 +391,18 @@ test("urgent text stays accessible when the user enters the notification", () =>
   expect(root).not.toHaveAttribute("aria-hidden", "true");
 });
 
-test("an urgent loading deadline announces uncertainty without mutating application copy", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    act(() => toastManager.add({ type: "loading", priority: "high", title: "名称" }));
-    act(() => vi.advanceTimersByTime(1000));
-    expect(screen.getByRole("status")).toHaveTextContent("操作结果尚未确认 名称");
-    expect(screen.getByRole("alert")).toHaveTextContent("名称");
-  } finally { vi.useRealTimers(); }
+test("an urgent toast exists twice in the DOM: the visible notification and the primitive's hidden alert copy", () => {
+  mount();
+  act(() => toastManager.add({ type: "failed", priority: "high", title: "处理失败" }));
+  // 第二份是原语为读屏立即播报而放在通知区域之外的视觉隐藏副本；按文字查找时限定在通知区域内。
+  expect(screen.getAllByText("处理失败")).toHaveLength(2);
+  const region = screen.getByRole("region", { name: "操作提示" });
+  expect(within(region).getByText("处理失败")).toHaveAttribute("data-slot", "toast-title");
+  expect(region).not.toContainElement(screen.getByRole("alert"));
 });
 
-test("an application-confirmed new pending episode gets a fresh deadline", () => {
-  vi.useFakeTimers();
-  try {
-    mount({ loadingTimeout: 1000 });
-    let id = "";
-    act(() => { id = toastManager.add({ type: "loading", title: "第一次处理" }); });
-    act(() => vi.advanceTimersByTime(1000));
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", "unknown");
-    act(() => toastManager.update(id, { type: "loading", title: "第二次处理" }));
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", "loading");
-    expect(screen.queryByText("操作结果尚未确认")).not.toBeInTheDocument();
-    act(() => vi.advanceTimersByTime(999));
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", "loading");
-    act(() => vi.advanceTimersByTime(1));
-    expect(document.querySelector("[data-slot=toast-root]")).toHaveAttribute("data-type", "unknown");
-    expect(screen.getByText(/第二次处理/)).toBeInTheDocument();
-  } finally { vi.useRealTimers(); }
+test("a default-priority toast has a single copy of its title", () => {
+  mount();
+  act(() => toastManager.add({ type: "failed", title: "处理失败" }));
+  expect(screen.getAllByText("处理失败")).toHaveLength(1);
 });

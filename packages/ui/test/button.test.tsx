@@ -12,7 +12,7 @@ import ts from "typescript";
 import { expect, expectTypeOf, test, vi } from "vitest";
 import { cva } from "class-variance-authority";
 import * as icons from "@tabler/icons-react";
-import { Button, ButtonPrimitive, ButtonProtection, type ButtonProps, type ButtonState } from "../src/components/button";
+import { Button, ButtonPrimitive, type ButtonProps } from "../src/components/button";
 import { UILocaleProvider, useUILocale } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
 import { cn } from "../src/utils";
@@ -32,21 +32,20 @@ test("the public action contract separates emphasis, consequence, geometry, and 
   expectTypeOf<ButtonProps["tone"]>().toEqualTypeOf<"neutral" | "danger" | undefined>();
   expectTypeOf<ButtonProps["size"]>().toEqualTypeOf<"xs" | "sm" | "md" | "lg" | "xl" | undefined>();
   expectTypeOf<ButtonProps["shape"]>().toEqualTypeOf<"label" | "icon" | undefined>();
-  expectTypeOf<ButtonState>().toEqualTypeOf<"idle" | "waiting" | "in-progress" | "unknown" | "failed">();
-  // @ts-expect-error 当前 API 采用 state；这是接口选择，不是理念禁止布尔值。
-  expectTypeOf<ButtonProps["loading"]>();
+  expectTypeOf<ButtonProps["loading"]>().toEqualTypeOf<boolean | undefined>();
+  // @ts-expect-error 按钮只有忙碌一种状态；结果（失败、未知）由提示组件表达。
+  expectTypeOf<ButtonProps["state"]>();
 });
 
-test.each(["waiting", "in-progress", "unknown"] as const)("a %s button stays reachable without duplicate activation", async (state) => {
+test("a loading button stays reachable without duplicate activation", async () => {
   const onClick = vi.fn();
   const { rerender } = render(<Button onClick={onClick}>保存</Button>);
   await userEvent.click(screen.getByRole("button", { name: "保存" }));
   expect(onClick).toHaveBeenCalledOnce();
 
-  rerender(<Button state={state} onClick={onClick}>保存</Button>);
+  rerender(<Button loading onClick={onClick}>保存</Button>);
   const button = screen.getByRole("button", { name: "保存" });
-  if (state === "unknown") expect(button).not.toHaveAttribute("aria-busy");
-  else expect(button).toHaveAttribute("aria-busy", "true");
+  expect(button).toHaveAttribute("aria-busy", "true");
   // Waiting is not forbidden: the control keeps its place in the tab order so a
   // keyboard user can still find it. `disabled` would remove it from focus and
   // lose their position when the wait ends.
@@ -65,7 +64,7 @@ test("a waiting Menu trigger blocks the mousedown that opens its composed popup 
   const user = userEvent.setup();
   const menu = (waiting: boolean) => (
     <Menu>
-      <MenuTrigger render={<Button state={waiting ? "waiting" : "idle"}>菜单</Button>} />
+      <MenuTrigger render={<Button loading={waiting}>菜单</Button>} />
       <MenuPopup><MenuItem>编辑</MenuItem></MenuPopup>
     </Menu>
   );
@@ -101,7 +100,7 @@ test.each(["{ArrowDown}", "{ArrowUp}", "{Enter}", " "])(
     const user = userEvent.setup();
     const menu = (waiting: boolean) => (
       <Menu>
-        <MenuTrigger render={<Button state={waiting ? "waiting" : "idle"}>菜单</Button>} />
+        <MenuTrigger render={<Button loading={waiting}>菜单</Button>} />
         <MenuPopup><MenuItem>编辑</MenuItem></MenuPopup>
       </Menu>
     );
@@ -126,7 +125,7 @@ test("waiting also protects popup activation when Button renders the MenuTrigger
   const user = userEvent.setup();
   const menu = (waiting: boolean) => (
     <Menu>
-      <Button state={waiting ? "waiting" : "idle"} render={<MenuTrigger />}>菜单</Button>
+      <Button loading={waiting} render={<MenuTrigger />}>菜单</Button>
       <MenuPopup><MenuItem>编辑</MenuItem></MenuPopup>
     </Menu>
   );
@@ -156,7 +155,7 @@ test("waiting blocks primary press handlers and forwards them again after waitin
     onClickCapture: vi.fn(),
     onClick: vi.fn(),
   };
-  const { rerender } = render(<Button state="waiting" {...handlers}>保存</Button>);
+  const { rerender } = render(<Button loading {...handlers}>保存</Button>);
   const button = screen.getByRole("button", { name: "保存" });
   await user.click(button);
   fireEvent.mouseDown(button, { button: 0 });
@@ -179,7 +178,7 @@ test("waiting forwards non-activation keys and secondary presses while keeping T
     onMouseDownCapture: vi.fn(),
     onMouseDown: vi.fn(),
   };
-  render(<><Button state="waiting" {...handlers}>保存</Button><Button>下一项</Button></>);
+  render(<><Button loading {...handlers}>保存</Button><Button>下一项</Button></>);
   const button = screen.getByRole("button", { name: "保存" });
   await user.tab();
   expect(button).toHaveFocus();
@@ -199,7 +198,7 @@ test("waiting forwards non-activation keys and secondary presses while keeping T
 
 test.each([false, true])("a disabled button leaves the tab order with waiting=%s", async (waiting) => {
   const onClick = vi.fn();
-  render(<><Button disabled state={waiting ? "waiting" : "idle"} onClick={onClick}>删除</Button><Button>下一项</Button></>);
+  render(<><Button disabled loading={waiting} onClick={onClick}>删除</Button><Button>下一项</Button></>);
   const button = screen.getByRole("button", { name: "删除" });
   expect(button).toBeDisabled();
   button.focus();
@@ -210,11 +209,11 @@ test.each([false, true])("a disabled button leaves the tab order with waiting=%s
   expect(onClick).not.toHaveBeenCalled();
 });
 
-test.each(["waiting", "in-progress", "unknown"] as const)("a %s non-native anchor preserves focus and blocks activation until recovery", async (state) => {
+test("a loading non-native anchor preserves focus and blocks activation until recovery", async () => {
   const user = userEvent.setup();
   const onClick = vi.fn();
   const link = (waiting: boolean) => (
-    <Button state={waiting ? state : "idle"} nativeButton={false} render={<a href="#docs" onClick={onClick} />}>
+    <Button loading={waiting} nativeButton={false} render={<a href="#docs" onClick={onClick} />}>
       文档
     </Button>
   );
@@ -232,49 +231,64 @@ test.each(["waiting", "in-progress", "unknown"] as const)("a %s non-native ancho
   expect(onClick).toHaveBeenCalledOnce();
 });
 
-test("the caller owns every result transition and confirmed failure permits its recovery action", async () => {
+test("the caller owns the busy fact; the button never starts or ends it and shows nothing else", async () => {
   const user = userEvent.setup();
   const onClick = vi.fn();
-  const view = (state: ButtonState) => <Button onClick={onClick} state={state}>保存</Button>;
-  const { rerender } = render(view("idle"));
+  const view = (loading: boolean) => <Button onClick={onClick} loading={loading}>保存</Button>;
+  const { rerender } = render(view(false));
   await user.click(screen.getByRole("button", { name: "保存" }));
   expect(onClick).toHaveBeenCalledOnce();
   // 发起事件本身不推进状态，更不宣称保存成功。
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "保存" })).not.toHaveAttribute("data-loading");
 
-  for (const [state, label] of [["waiting", "等待中"], ["in-progress", "进行中"], ["unknown", "结果未知"], ["failed", "操作失败"]] as const) {
-    rerender(view(state));
-    const button = screen.getByRole("button", { name: "保存" });
-    expect(button).toHaveFocus();
-    expect(button).toHaveAccessibleDescription(label);
-    expect(button.querySelector('[data-slot="button-state"]')).toBeVisible();
-    expect(screen.getByRole("status")).toHaveTextContent(label);
-    await user.keyboard("{Enter}");
-  }
-  expect(onClick).toHaveBeenCalledTimes(2);
+  rerender(view(true));
+  const button = screen.getByRole("button", { name: "保存" });
+  expect(button).toHaveFocus();
+  expect(button).toHaveAttribute("aria-busy", "true");
+  expect(button).toHaveAttribute("data-loading");
+  expect(button).toHaveAccessibleDescription("进行中");
+  expect(button.querySelector('[data-slot="button-loading"]')).toBeVisible();
+  // 忙碌的说法只给读屏：不可见、不占位，按钮旁没有任何可见的状态文字。
+  expect(screen.getByRole("status")).toHaveTextContent("进行中");
+  expect(screen.getByRole("status")).toHaveClass("sr-only");
+  await user.keyboard("{Enter}");
+  expect(onClick).toHaveBeenCalledOnce();
+
+  rerender(view(false));
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
   expect(screen.getByRole("button", { name: "保存" })).not.toHaveAttribute("aria-busy");
+  await user.keyboard("{Enter}");
+  expect(onClick).toHaveBeenCalledTimes(2);
 });
 
-test.each(["waiting", "in-progress", "unknown", "failed"] as const)("an icon action presents %s without losing its name or icon shape", (state) => {
-  render(<Button aria-label="保存" shape="icon" state={state}><svg aria-hidden="true" /></Button>);
+test("the button is its own layout item: no wrapper stands between it and the caller's container", () => {
+  const { container } = render(<div><Button>保存</Button><Button loading>保存</Button></div>);
+  const row = container.firstElementChild!;
+  expect([...row.children].filter(child => child.matches("button"))).toHaveLength(2);
+  expect(row.querySelector("[data-slot=button-with-status]")).not.toBeInTheDocument();
+});
+
+test("an icon action shows busy without losing its name or icon shape", () => {
+  render(<Button aria-label="保存" shape="icon" loading><svg aria-hidden="true" /></Button>);
   const button = screen.getByRole("button", { name: "保存" });
   expect(button).toHaveAttribute("data-shape", "icon");
-  expect(button.querySelector('[data-slot="button-state-indicator"]')).toBeVisible();
+  expect(button.querySelector('[data-slot="button-loading"]')).toBeVisible();
   expect(button.querySelector('[data-slot="button-content"]')).toHaveClass("opacity-0");
   expect(button).toHaveAccessibleDescription(screen.getByRole("status").textContent ?? "");
 });
 
-test("status descriptions use the active locale and preserve caller descriptions", () => {
-  render(<UILocaleProvider locale={enUS}><p id="scope">Description</p><Button aria-describedby="scope" state="unknown">Save</Button></UILocaleProvider>);
+test("the busy description uses the active locale and preserves caller descriptions", () => {
+  render(<UILocaleProvider locale={enUS}><p id="scope">Description</p><Button aria-describedby="scope" loading>Save</Button></UILocaleProvider>);
   const button = screen.getByRole("button", { name: "Save" });
-  expect(button).toHaveAccessibleDescription("Description Result unknown");
-  expect(screen.getByRole("status")).toHaveTextContent("Result unknown");
+  expect(button).toHaveAccessibleDescription(`Description ${enUS.messages.buttonInProgress}`);
+  expect(screen.getByRole("status")).toHaveTextContent(enUS.messages.buttonInProgress);
 });
 
-test("unknown also protects composed popup triggers and has an explicit caller-controlled recovery", async () => {
+test("loading also protects composed popup triggers until the caller ends it", async () => {
   const user = userEvent.setup();
-  const view = (state: ButtonState) => <Menu><MenuTrigger render={<Button state={state}>菜单</Button>} /><MenuPopup><MenuItem>编辑</MenuItem></MenuPopup></Menu>;
-  const { rerender } = render(view("unknown"));
+  const view = (loading: boolean) => <Menu><MenuTrigger render={<Button loading={loading}>菜单</Button>} /><MenuPopup><MenuItem>编辑</MenuItem></MenuPopup></Menu>;
+  const { rerender } = render(view(true));
   const trigger = screen.getByRole("button", { name: "菜单" });
   await user.tab();
   fireEvent.mouseDown(trigger, { button: 0 });
@@ -283,15 +297,15 @@ test("unknown also protects composed popup triggers and has an explicit caller-c
   expect(trigger).toHaveFocus();
   expect(trigger).toHaveAttribute("aria-expanded", "false");
   expect(screen.queryByRole("menu")).not.toBeInTheDocument();
-  rerender(view("idle"));
+  rerender(view(false));
   await user.keyboard("{ArrowDown}");
   await frame();
   expect(screen.getByRole("menu")).toBeInTheDocument();
 });
 
-test("unknown blocks auxiliary anchor activation while secondary pointer inspection remains possible", () => {
+test("loading blocks auxiliary anchor activation while secondary pointer inspection remains possible", () => {
   const onAuxClick = vi.fn();
-  render(<Button nativeButton={false} render={<a href="#example" onAuxClick={onAuxClick} />} state="unknown">保存</Button>);
+  render(<Button nativeButton={false} render={<a href="#example" onAuxClick={onAuxClick} />} loading>保存</Button>);
   const button = screen.getByRole("button", { name: "保存" });
   const event = new MouseEvent("auxclick", { bubbles: true, cancelable: true, button: 1 });
   fireEvent(button, event);
@@ -299,14 +313,14 @@ test("unknown blocks auxiliary anchor activation while secondary pointer inspect
   expect(onAuxClick).not.toHaveBeenCalled();
 });
 
-test.each([false, true])("unknown guards render-target capture handlers before they can activate (callback=%s)", async (callback) => {
+test.each([false, true])("loading guards render-target capture handlers before they can activate (callback=%s)", async (callback) => {
   const user = userEvent.setup();
   const onClickCapture = vi.fn();
   const onKeyDownCapture = vi.fn();
   const onPointerDownCapture = vi.fn();
   const target = <a href="#example" onClickCapture={onClickCapture} onKeyDownCapture={onKeyDownCapture} onPointerDownCapture={onPointerDownCapture} />;
-  const view = (state: ButtonState) => <Button nativeButton={false} render={callback ? (props) => <a {...props} href="#example" onClickCapture={onClickCapture} onKeyDownCapture={onKeyDownCapture} onPointerDownCapture={onPointerDownCapture} /> : target} state={state}>保存</Button>;
-  const { rerender } = render(view("unknown"));
+  const view = (loading: boolean) => <Button nativeButton={false} render={callback ? (props) => <a {...props} href="#example" onClickCapture={onClickCapture} onKeyDownCapture={onKeyDownCapture} onPointerDownCapture={onPointerDownCapture} /> : target} loading={loading}>保存</Button>;
+  const { rerender } = render(view(true));
   const button = screen.getByRole("button", { name: "保存" });
   await user.tab();
   onKeyDownCapture.mockClear();
@@ -315,35 +329,24 @@ test.each([false, true])("unknown guards render-target capture handlers before t
   expect(onClickCapture).not.toHaveBeenCalled();
   expect(onKeyDownCapture).not.toHaveBeenCalled();
   expect(onPointerDownCapture).not.toHaveBeenCalled();
-  rerender(view("idle"));
+  rerender(view(false));
   await user.click(button);
   expect(onClickCapture).toHaveBeenCalledOnce();
   expect(onPointerDownCapture).toHaveBeenCalledOnce();
 });
 
-test("a danger action fails explicitly when the visible consequence is absent or blank", () => {
-  expect(() => render(<Button tone="danger">删除</Button>)).toThrow(/ButtonProtection/);
-  expect(() => render(<ButtonProtection consequence="  "><Button tone="danger">删除</Button></ButtonProtection>)).toThrow(/non-empty consequence/);
-});
-
-test("danger tone and action emphasis are independent within the same visible protection", async () => {
-  const user = userEvent.setup();
-  const onClick = vi.fn();
-  render(<ButtonProtection consequence="删除后无法恢复。"><Button onClick={onClick} tone="danger">删除</Button><Button tone="danger" variant="quiet">移除</Button><Button variant="quiet">保留</Button></ButtonProtection>);
+test("danger is a tone, independent of emphasis; the button carries no consequence or warning of its own", () => {
+  // 用户裁决 2026-10-10：功能要纯粹。后果与确认属于 AlertDialog / ConfirmAction，按钮只触发。
+  expect(() => render(<><Button tone="danger">删除</Button><Button tone="danger" variant="quiet">移除</Button><Button variant="quiet">保留</Button></>)).not.toThrow();
   const solid = screen.getByRole("button", { name: "删除" });
   const quiet = screen.getByRole("button", { name: "移除" });
-  const neutral = screen.getByRole("button", { name: "保留" });
   expect(solid).toHaveAttribute("data-variant", "solid");
   expect(quiet).toHaveAttribute("data-variant", "quiet");
   for (const button of [solid, quiet]) {
     expect(button).toHaveAttribute("data-tone", "danger");
-    expect(button).toHaveAccessibleDescription("删除后无法恢复。");
+    expect(button).not.toHaveAttribute("aria-describedby");
   }
-  expect(neutral).toHaveAttribute("data-tone", "neutral");
-  expect(neutral).not.toHaveAttribute("aria-describedby");
-  // 保护结构没有自行推断权限或确认条件；事实来自调用方。
-  await user.click(solid);
-  expect(onClick).toHaveBeenCalledOnce();
+  expect(screen.getByRole("button", { name: "保留" })).toHaveAttribute("data-tone", "neutral");
 });
 
 test("native attributes, refs, caller aria facts, and derived slots reach the actual control", async () => {
@@ -406,36 +409,9 @@ test("md follows the fill-control role so it stays the height of the inputs besi
   expect(screen.getByRole("button")).not.toHaveClass("sm:min-h-(--qy-fill-height)");
 });
 
-test("a danger action accepts a nonempty DOM description mounted after the button", () => {
-  render(<><Button tone="danger" aria-describedby="missing consequence">删除</Button><p id="consequence">删除后无法恢复。</p></>);
+test("a caller-supplied description still reaches a danger button like any other", () => {
+  render(<><Button tone="danger" aria-describedby="consequence">删除</Button><p id="consequence">删除后无法恢复。</p></>);
   expect(screen.getByRole("button")).toHaveAccessibleDescription("删除后无法恢复。");
-});
-
-test("a danger action accepts the description on its actual render target", () => {
-  render(<><Button tone="danger" render={<button aria-describedby="consequence" />}>删除</Button><p id="consequence">删除后无法恢复。</p></>);
-  expect(screen.getByRole("button")).toHaveAccessibleDescription("删除后无法恢复。");
-});
-
-test.each(["missing", "blank"])("a danger action rejects a %s DOM description in development", (description) => {
-  expect(() => render(<><Button tone="danger" aria-describedby={description}>删除</Button><p id="blank">{ " \n " }</p></>)).toThrow(/non-empty.*aria-describedby/);
-});
-
-test("a status description alone does not explain a danger action's consequence", () => {
-  expect(() => render(<Button tone="danger" state="waiting">删除</Button>)).toThrow(/ButtonProtection/);
-});
-
-test("danger validation runs after mounting, not during server rendering", () => {
-  expect(() => renderToString(<Button tone="danger">删除</Button>)).not.toThrow();
-});
-
-test("an unprotected danger action does not throw in production", () => {
-  vi.stubEnv("NODE_ENV", "production");
-  try {
-    render(<Button tone="danger">删除</Button>);
-    expect(screen.getByRole("button")).toBeEnabled();
-  } finally {
-    vi.unstubAllEnvs();
-  }
 });
 
 test.each(["neutral", "danger"] as const)("a %s button mounts when the runtime process global is absent", (tone) => {
@@ -477,7 +453,7 @@ test("mount-time validation preserves a caller's ref and its React cleanup", () 
   expect(cleanup).toHaveBeenCalledOnce();
 });
 
-test("the registry editor template compiles against current source props and rejects the removed loading prop", () => {
+test("the registry editor template compiles against current source props and rejects the removed state prop", () => {
   const script = ts.createSourceFile("gen-catalog.mjs", readFileSync(resolve("scripts/gen-catalog.mjs"), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
   let editor: string | undefined;
   const visit = (node: ts.Node) => {
@@ -499,8 +475,8 @@ test("the registry editor template compiles against current source props and rej
     return ts.getPreEmitDiagnostics(ts.createProgram([fileName], options, host));
   };
   expect(check(editor!).map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"))).toEqual([]);
-  const invalid = editor!.replace('state={saving ? "in-progress" : "idle"}', "loading={saving}");
+  const invalid = editor!.replace("loading={saving}", 'state={saving ? "in-progress" : "idle"}');
   expect(invalid).not.toBe(editor);
-  expect(check(invalid).some((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n").includes("Property 'loading' does not exist"))).toBe(true);
+  expect(check(invalid).some((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n").includes("Property 'state' does not exist"))).toBe(true);
   // Two cold ts.createProgram runs; the default 5s budget is exceeded on a loaded CI worker.
 }, 60_000);

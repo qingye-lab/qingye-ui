@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: cb4835ff4ca95237a1f9934f588b79a93a8edcc48bdf39ca5147d2cd6766245f
+Source SHA-256: 5997d49fa9ea2233e17520612389ccaedfd2adb61f761234d60570e5bfd85f61
 
 Edit a calendar range draft and explicitly apply complete endpoints.
 

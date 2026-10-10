@@ -26,7 +26,7 @@ export function CopyButton({ value, timeout = 2000, onCopySuccess, onCopyError, 
   const copied = isCopied && confirmedValue === value;
   const Icon = copied ? IconCheck : IconCopy;
   return <>
-    <Button {...props} data-slot="copy-button" variant={variant} shape={shape} state={isCopying ? "in-progress" : "idle"}
+    <Button {...props} data-slot="copy-button" variant={variant} shape={shape} loading={isCopying}
       aria-label={props["aria-label"] ?? messages.copy}
       aria-describedby={[props["aria-describedby"], failed ? statusId : undefined].filter(Boolean).join(" ") || undefined}
       data-copied={copied ? "" : undefined} data-copy-error={failed ? "" : undefined}

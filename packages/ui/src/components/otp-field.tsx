@@ -5,7 +5,7 @@ import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Input, type InputProps } from "./input";
 
-export type OtpFieldProps = Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "size" | "maxLength" | "clearable" | "visibilityToggle"> & {
+export type OtpFieldProps = Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "size" | "maxLength"> & {
   /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */
   length: number;
   value?: string;
@@ -84,7 +84,7 @@ export function OtpField({
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
         )}
       >{characters[index] ?? ""}</span>)}
-      <Input {...props} ref={setRef} type="text" value={value} unstyled clearable={false} visibilityToggle={false}
+      <Input {...props} ref={setRef} type="text" value={value} unstyled
         data-slot="otp-field-input" autoComplete={props.autoComplete ?? "one-time-code"}
         aria-describedby={[describedBy, feedback ? feedbackId : undefined].filter(Boolean).join(" ") || undefined}
         controlClassName="absolute inset-0 pointer-events-none" className={state => cn("opacity-0", typeof className === "function" ? className(state) : className)}

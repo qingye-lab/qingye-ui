@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-09T06:40:25.919Z",
-  "revision": "743c94be4f918094e45908b0e15978de0f41cd75",
+  "generatedAt": "2026-10-10T06:37:02.538Z",
+  "revision": "26e496fe0e504520ca071a799d21c242b3caa40e",
   "fingerprint": {
-    "sha256": "e6ee94a0528162543bd53bc4b75b713db5dcdbe151f89c97c986178f80c677e6",
+    "sha256": "e87e3b76a4fd24210cfcd2f6a11094dbb402bec0a1de9ea195d5ef30ee8a0095",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -16,7 +16,7 @@
       },
       {
         "path": "apps/docs/src/content/alert-dialog/meta.ts",
-        "sha256": "2420b23b10de8abe7a2f2c15357623c08074f7113e15b1cb7222f15ecaa5e1b5"
+        "sha256": "fa3d136bbd3c366d765c21fc7aca534f2be8bfcf892f18b9bf47305337c06df5"
       },
       {
         "path": "apps/docs/src/content/alert/meta.ts",
@@ -48,7 +48,7 @@
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
-        "sha256": "499f67d248413cadb0f35f8bf3b4535a07b445fa18533753d5832d1210c50749"
+        "sha256": "745cf4d6d9ae45652e2f2d94025bf9cf650651fee48a0c2a8408df03868623a3"
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
@@ -60,7 +60,7 @@
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
-        "sha256": "1e3d264e886c5803d7fa997ea9328c6a4819d931fb3e1b47ccc18a2a5ae66868"
+        "sha256": "3b70096756215e54a40ddf4b7411d2f4302131bb02e1a1d8c61d1cef05b64716"
       },
       {
         "path": "apps/docs/src/content/checkbox-group/meta.ts",
@@ -80,11 +80,11 @@
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
-        "sha256": "2d1815bf3ae182732e5ed6baf5c88974a45c41cfeb15a9302d68ba09db5faf00"
+        "sha256": "9ad72d2c69fc6c7ad02cb8fda4602243347249ee448fe380ff2448253afad56c"
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
-        "sha256": "be8f5a89285b89acade75ed30ba5c76979a6b6fdefc5aa603a669d12b59fd57e"
+        "sha256": "e68ec7341e84134457f6caa6ca9ddf46e7f608319ae760d1c66187ba10bd72c6"
       },
       {
         "path": "apps/docs/src/content/context-menu/meta.ts",
@@ -120,7 +120,7 @@
       },
       {
         "path": "apps/docs/src/content/dialog/meta.ts",
-        "sha256": "bb6fce9f623531c0c20be08d6e9f9ef39a1ee92972516c1d44b7aad85364044e"
+        "sha256": "cb0bfc239b5f5e1a7c0ff3da9a8eeb0d1a44f3fe6df6f6d786dc6dc9733a9d37"
       },
       {
         "path": "apps/docs/src/content/drawer/meta.ts",
@@ -152,7 +152,7 @@
       },
       {
         "path": "apps/docs/src/content/heatmap/meta.ts",
-        "sha256": "b3b09f7da013d40f9194b3a22209614efa297e064e96572eb7e15868cc18c331"
+        "sha256": "31841b6b7228053ffd21a8881fe1a13de7c2e1c3877b5017e160c7aedb7edd57"
       },
       {
         "path": "apps/docs/src/content/hover-card/meta.ts",
@@ -160,11 +160,11 @@
       },
       {
         "path": "apps/docs/src/content/input-group/meta.ts",
-        "sha256": "45d50cc6c57af630a0e350986b3ded01d2790838c25c592b372743092b83f490"
+        "sha256": "6bac56c809b323cbb62605837774b642346f415bda9b99fbe7fa6259f8470756"
       },
       {
         "path": "apps/docs/src/content/input/meta.ts",
-        "sha256": "8b7089355b0b3c608baf8436422b3e849c131897149b151b395c1296e5ecc123"
+        "sha256": "464125c1e3930c3a3c47e7513bc5db163bca27f07a0fd1c9af2f9506a3a3f6ea"
       },
       {
         "path": "apps/docs/src/content/item/meta.ts",
@@ -227,6 +227,10 @@
         "sha256": "d0aa91be7b3525d7dcc6be6a00491395208636e5894a35e2b25f50ae27cc4bae"
       },
       {
+        "path": "apps/docs/src/content/password-input/meta.ts",
+        "sha256": "ee7b62ace0a7468ae882b921dcd5a14066d78d197c3dd68880c966198e622147"
+      },
+      {
         "path": "apps/docs/src/content/pending-value/meta.ts",
         "sha256": "8e34c44afc366e78effbf411a942058afce986ccaf4c159044bd00fc584f27ad"
       },
@@ -252,11 +256,15 @@
       },
       {
         "path": "apps/docs/src/content/scatter-chart/meta.ts",
-        "sha256": "b7d5f8176f5effc86e1f7a3edcc7f9a8ae57786aabb208e56f65edf85665ce04"
+        "sha256": "686721d82af7a2e1391dba27ef4b5062f1fa7246c22184d9e3ce1ce3799955a4"
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
         "sha256": "6f6f7b197a7288167a685eb6d1f0b1831979019a281f8908b79725d495ceac17"
+      },
+      {
+        "path": "apps/docs/src/content/search-input/meta.ts",
+        "sha256": "b68fe30bccbf3c8fb3828cd9800b126aa9e63059072063e63152c15dd4f7b832"
       },
       {
         "path": "apps/docs/src/content/segmented-control/meta.ts",
@@ -272,11 +280,11 @@
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
-        "sha256": "dc96d200355b26c3391f4eaf043d9e7e809b51d20a1aac4e067c098d11b8abc7"
+        "sha256": "c88b7847eb1293818a43808877b11e70e8fbbfde1e1d4cbcb0c9a58e57594610"
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
-        "sha256": "d2ec379ed5501b3140596c34927e0fce58487f800731f3521b90f1b6ae2b6988"
+        "sha256": "0ed995f03e84e04168cb27093b0094c96b9dfcee6eb7f9591f2a2287e572274f"
       },
       {
         "path": "apps/docs/src/content/slider/meta.ts",
@@ -304,11 +312,11 @@
       },
       {
         "path": "apps/docs/src/content/table/meta.ts",
-        "sha256": "646ee9847f1e7152738010d0e49d40b30a75348f57d3fcc9878ad33ff9152f4f"
+        "sha256": "dbd51e8b6a07117e7a366543efc0ab0e4681e68ed6eb2090920298a2aaa11bb7"
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "cce473a8f5c9e9f7be7651208ffea662ac9320ec47d26c7ec3f09a424e9aff27"
+        "sha256": "8fe494b705ad928527acb69fbfb7dbe2f46a4939268cc4ba52c712092951dfea"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
@@ -328,7 +336,7 @@
       },
       {
         "path": "apps/docs/src/content/toast/meta.ts",
-        "sha256": "ece159b5b8c1953297b77b8d3f893ab27c44f09bc1939bdc26ddd4c61dbbe0c4"
+        "sha256": "5b8c0c5375a78467b9cecabf202407851cc83da86565285a39bf7c7cf2cd671a"
       },
       {
         "path": "apps/docs/src/content/toc/meta.ts",
@@ -348,7 +356,7 @@
       },
       {
         "path": "apps/docs/src/content/tooltip/meta.ts",
-        "sha256": "cd5de5102e66ec090872ff3df3bad69f1d2a1ae85efdaf1f9447bfb56e361aa8"
+        "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
@@ -376,7 +384,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "83caa939c184a68ddcfb6c84e13b88eb87b36be095296e25b34bf658787e4fe6"
+        "sha256": "a15449cfa47e90824e01a2d98d22ec6125bf36f5b20dca6425bac018f229e7aa"
       },
       {
         "path": "packages/ui/motion.css",
@@ -400,7 +408,7 @@
       },
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "e075ba4b147005f24c83b8ff89149f57ca1d815082f1eea296f50110c81117ab"
+        "sha256": "9d10ef770a43ece6feae1b8c32c9a4ad06f34fb8228913d2ed721c9b3625ffe5"
       },
       {
         "path": "packages/ui/src/components/avatar.tsx",
@@ -424,7 +432,7 @@
       },
       {
         "path": "packages/ui/src/components/button.tsx",
-        "sha256": "49eff7d39eed62f0656fe66e56f9a2fcc263ec8ed2d81e5faa8c4865c3d7abfa"
+        "sha256": "aa02056a504dad182e167cd505d244a5cbcde34058ea1cd04c0a6e23daf1f350"
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
@@ -436,7 +444,7 @@
       },
       {
         "path": "packages/ui/src/components/chart.tsx",
-        "sha256": "81a078d00a598526e2bbcb5996702a0d94dc030bfaf7fed0ff06de8af39c901e"
+        "sha256": "9f2190ff95c1558b7da2f0f842c5472c1550eeaf2bf912a5a55cd4af600354e5"
       },
       {
         "path": "packages/ui/src/components/checkbox-group.tsx",
@@ -448,7 +456,7 @@
       },
       {
         "path": "packages/ui/src/components/code-block.tsx",
-        "sha256": "64c687b312485e84b125bdcc8b61db12ba06eb6cd4e4198840f46533dffac097"
+        "sha256": "348cf21a2208d634c4a1eeb9a6f06dfe230fc8c487d99b447c8fc2de8c179c45"
       },
       {
         "path": "packages/ui/src/components/collapsible.tsx",
@@ -456,11 +464,11 @@
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
-        "sha256": "83deba918ea963676d4053fa9c97c0a14a39dc0f2f23edf5a2b0c79ad422d590"
+        "sha256": "4a2917abca4cdc889d9f5560ff3055338a567df84e10d9bba06382542c3aff10"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
-        "sha256": "6003731bc618e0b8fc86e80a9f526e4acc7bfb3bd045095cfa395f32d8822283"
+        "sha256": "0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656"
       },
       {
         "path": "packages/ui/src/components/context-menu.tsx",
@@ -468,7 +476,7 @@
       },
       {
         "path": "packages/ui/src/components/copy-button.tsx",
-        "sha256": "c9f80b1c2f08d432eab752eb56b99f3cdd9648a5686095b61259b67079b70c2b"
+        "sha256": "e32b98103aa3bf15b34d2ad66fd8d36798420497234dca30484c8f09838cb9c7"
       },
       {
         "path": "packages/ui/src/components/corner-mark.tsx",
@@ -480,15 +488,15 @@
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "25433dbde65ece2b891604c011dfadb154689a8e98ad07dbdbbb9d7639d8c8e5"
+        "sha256": "41d4bb16330e614a264d70deb764e05115fe80837462547f5cbfe7cf7298864b"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "cb4835ff4ca95237a1f9934f588b79a93a8edcc48bdf39ca5147d2cd6766245f"
+        "sha256": "5997d49fa9ea2233e17520612389ccaedfd2adb61f761234d60570e5bfd85f61"
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "0dc3f2a052df85796a0828e48914bb6b211f419c91f8b36ef6d3d29b7ad679f9"
+        "sha256": "374970c5b8d6d511b706ef6906c84d8df4c22406917923630bba401e2580b10f"
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
@@ -528,7 +536,7 @@
       },
       {
         "path": "packages/ui/src/components/heatmap.tsx",
-        "sha256": "3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196"
+        "sha256": "ae4809ea85c1b1d0c6081f65e6ef79d1ffc66b4f93ece3a98d5a240d125e3d87"
       },
       {
         "path": "packages/ui/src/components/hover-card.tsx",
@@ -536,11 +544,11 @@
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
-        "sha256": "b51acf251a0804792370d6cad9330c80faa37a60a64d93842eab229e62334551"
+        "sha256": "3fdb8d45af25f9092b797792b1bd1130460c3bf2c9b7dab34f3ad2b74ebccd0d"
       },
       {
         "path": "packages/ui/src/components/input.tsx",
-        "sha256": "c9f579088e74b98cdb50e18cb34aadd8a64cb51a3569961faea4b93aabf9e3f5"
+        "sha256": "a05c8fdaddbcad8ff68d0e5813051cb7a079aa36c590657de0268905a65ab1db"
       },
       {
         "path": "packages/ui/src/components/item.tsx",
@@ -592,7 +600,7 @@
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "17768395e25182532a892827852f4413c9f47ea670f719656f5ca78f35b0af39"
+        "sha256": "d4de306957582e7b75b11f09768154041a87df04cbb91a9857013cdd6c12f844"
       },
       {
         "path": "packages/ui/src/components/page-header.tsx",
@@ -601,6 +609,10 @@
       {
         "path": "packages/ui/src/components/pagination.tsx",
         "sha256": "13a7de3c9d8565af5a3f4f8f002216b561885ab68dd0d42a73d2af34bd7a54ae"
+      },
+      {
+        "path": "packages/ui/src/components/password-input.tsx",
+        "sha256": "10b14447ae950e093dc1382c2cb053cabfe4241a0f479fd02923f3da393bb7b5"
       },
       {
         "path": "packages/ui/src/components/pending-value.tsx",
@@ -628,11 +640,15 @@
       },
       {
         "path": "packages/ui/src/components/scatter-chart.tsx",
-        "sha256": "d64bea740aa49000d24950caa73af8a7cf2d24bc6408672925d40bd2f577a024"
+        "sha256": "21d3648a2701ede7c48c181a2c7525f3c3eaf1131008e09ae2dba12e80e2fd26"
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
         "sha256": "b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00"
+      },
+      {
+        "path": "packages/ui/src/components/search-input.tsx",
+        "sha256": "e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0"
       },
       {
         "path": "packages/ui/src/components/segmented-control.tsx",
@@ -648,7 +664,7 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467"
+        "sha256": "6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
@@ -680,15 +696,15 @@
       },
       {
         "path": "packages/ui/src/components/table.tsx",
-        "sha256": "d6deb800c9b45381c226153c0ba491a2a63f34a53a04f233a97cc3a203310c7f"
+        "sha256": "f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff"
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
-        "sha256": "f75c8f55e055fe78f9216d9a940cf521c9f60ef03d7c3af4b4fd6b0234073427"
+        "sha256": "6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6"
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "5f00a0f9d344ee255eb9e0998fd3f2498a37a213aff73b04cd355d1fd6bf6e68"
+        "sha256": "7a6fdadbf8dd3ccdbe03222ab79607d43201aef7ff7b0d65cc60c1c3d3ed5381"
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
@@ -704,7 +720,7 @@
       },
       {
         "path": "packages/ui/src/components/toast.tsx",
-        "sha256": "7efbb7e072a3276bc8c65200345745063518a75b95302703ac23ff9683dd51a9"
+        "sha256": "4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0"
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
@@ -724,7 +740,7 @@
       },
       {
         "path": "packages/ui/src/components/tooltip.tsx",
-        "sha256": "b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312"
+        "sha256": "b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f"
       },
       {
         "path": "packages/ui/src/components/tree.tsx",
@@ -740,7 +756,7 @@
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "86b974df22683a42ca58d6050e9a10d59109f17e8848e4f2bc8a69b6a2f70870"
+        "sha256": "37b26de06156e4c9bb9c54b84eadb126cd10221aaa87aa84b580ea9c8adec291"
       },
       {
         "path": "packages/ui/styles.css",
@@ -748,7 +764,7 @@
       },
       {
         "path": "packages/ui/theme.css",
-        "sha256": "6a974a9d0dac58975814cd55858b653709120e7094de65ca1bba9fd821abbad2"
+        "sha256": "e2d306865f8b9bd477cdbabe87702ab1bfef5d1234a86c6db6b3e7eddc611999"
       },
       {
         "path": "packages/ui/tokens/components.css",
@@ -760,7 +776,7 @@
       },
       {
         "path": "packages/ui/tokens/semantic.css",
-        "sha256": "5a5e1a2010db8698db269af2f19c863bad4eda3bbca4fef3258ba904eb27fb7f"
+        "sha256": "26eb7e258c150f7d51975d3cb97edbdb76ad529dbb4391fc5293807b74ea0d5c"
       },
       {
         "path": "packages/ui/utilities.css",
@@ -855,10 +871,10 @@
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 88,
-    "catalog": 88,
+    "components": 90,
+    "catalog": 90,
     "dist": 87,
-    "local": 88
+    "local": 90
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -1356,8 +1372,8 @@
           },
           {
             "name": "AlertDialogTitle / AlertDialogDescription",
-            "description": "说明当前选择与必要后果，建立可访问关联。",
-            "descriptionEn": "Name the decision and its consequences with accessible associations."
+            "description": "说明当前选择与必要后果，建立可访问关联。后果写在 Description 里，按钮不承载。",
+            "descriptionEn": "Name the decision and its consequences with accessible associations. The consequence belongs in Description; buttons carry none."
           },
           {
             "name": "AlertDialogTrigger / AlertDialogClose",
@@ -1394,7 +1410,7 @@
         ],
         "notes": [
           "普通编辑使用 Dialog；不需要中断时用就地确认或面板。",
-          "后果必须可见并与危险按钮关联。",
+          "后果必须在对话框里可见（Description）。",
           "关闭与继续动作分别处理。",
           "必须提供明确的返回选择，不能只依赖 Esc。",
           "共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。",
@@ -1402,7 +1418,7 @@
         ],
         "notesEn": [
           "Use Dialog for ordinary edits, or inline confirmation when interruption is unnecessary.",
-          "Keep consequences visible and associated with the danger action.",
+          "Keep the consequence visible in the dialog (Description).",
           "Handle closing and the affirmative action separately.",
           "Provide an explicit return choice; Escape alone is insufficient.",
           "Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.",
@@ -3507,7 +3523,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 119
+            "line": 93
           }
         },
         {
@@ -3516,7 +3532,7 @@
           "target": "Button",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 267
+            "line": 174
           }
         },
         {
@@ -3524,31 +3540,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 108
-          }
-        },
-        {
-          "name": "ButtonProtection",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/button.tsx",
-            "line": 90
-          }
-        },
-        {
-          "name": "ButtonProtectionProps",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/button.tsx",
-            "line": 85
-          }
-        },
-        {
-          "name": "ButtonState",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/button.tsx",
-            "line": 13
+            "line": 81
           }
         },
         {
@@ -3556,7 +3548,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 33
+            "line": 29
           }
         }
       ],
@@ -3566,8 +3558,8 @@
         "titleEn": "Button",
         "description": "触发有明确对象与后果的动作；状态由调用方持有。",
         "descriptionEn": "Trigger a named action with a clear object and consequence. The caller owns its state.",
-        "decisions": "等待、进行中、结果未知期间保留焦点并阻止重复触发。结果未知需要调用方先核实；危险动作必须与可见后果共处，色调不代表授权。",
-        "decisionsEn": "Waiting, in-progress, and unknown states retain focus and block repeated activation. The caller must verify an unknown result. Danger actions require a visible consequence; tone never grants permission.",
+        "decisions": "按钮只触发动作，忙碌是它唯一的状态：忙碌时保留焦点并阻止重复触发。成功、失败与结果未知是另一件事实，由提示组件表达（就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError）；后果与确认属于 AlertDialog。色调不代表授权。",
+        "decisionsEn": "A button only triggers an action, and busy is its only state: while busy it retains focus and blocks repeated activation. Success, failure and an unknown result are separate facts expressed by feedback components (Alert in place, Toast for brief feedback, FieldError for a field); consequences and confirmation belong to AlertDialog. Tone never grants permission.",
         "design": {
           "methods": [
             "名实相符",
@@ -3579,14 +3571,16 @@
             "执行有对象与后果的命令、提交表单或停止当前任务。"
           ],
           "avoid": [
-            "导航用原生链接；不把等待结束当作成功，不把未知当作失败或可立即重试。"
+            "导航用原生链接。",
+            "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。"
           ],
           "composition": [
-            "危险动作使用 ButtonProtection，或由自身 aria-describedby 关联已有的非空后果说明；确认条件、权限与远端核实属于应用。"
+            "有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。",
+            "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。"
           ],
           "stateOwner": {
             "library": [
-              "原生与非原生命令语义、焦点、激活保护、动作名称及 locale 状态表达。"
+              "原生与非原生命令语义、焦点、忙碌时的激活保护与读屏说法。"
             ],
             "application": [
               "对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。"
@@ -3604,14 +3598,16 @@
             "Run a command with an object and consequence, submit a form, or stop the current task."
           ],
           "avoid": [
-            "Use native links for navigation. Finished waiting does not establish success, and unknown is neither failure nor permission to retry immediately."
+            "Use native links for navigation.",
+            "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError."
           ],
           "composition": [
-            "Danger actions use ButtonProtection or aria-describedby associated with existing nonblank consequence text. Applications own confirmation criteria, permissions, and remote verification."
+            "For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.",
+            "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection."
           ],
           "stateOwner": {
             "library": [
-              "Native and non-native command semantics, focus, activation guards, action names, and localized states."
+              "Native and non-native command semantics, focus, and the activation guard and screen-reader wording while busy."
             ],
             "application": [
               "Objects, scope, consequences, permissions, request facts, verification, recovery, and background cancellation."
@@ -3629,7 +3625,6 @@
         "source": "local",
         "exports": [
           "Button",
-          "ButtonProtection",
           "ButtonPrimitive",
           "buttonVariants"
         ],
@@ -3638,8 +3633,9 @@
           "按钮",
           "操作",
           "提交",
-          "waiting",
-          "unknown",
+          "loading",
+          "忙碌",
+          "加载中",
           "危险动作"
         ],
         "api": [
@@ -3659,8 +3655,8 @@
                 "name": "tone",
                 "type": "\"neutral\" | \"danger\"",
                 "default": "\"neutral\"",
-                "description": "动作后果；danger 使用 ButtonProtection，或 aria-describedby 关联文档中已有的非空说明。开发环境挂载后校验；生产环境不抛错。",
-                "descriptionEn": "The action's consequence. Use ButtonProtection or aria-describedby linked to existing nonblank text. Development validation runs after mounting; production does not throw."
+                "description": "色调。danger 表示动作有不可逆的后果，只改变颜色；后果说明与确认不由按钮承载，用 AlertDialog 或 ConfirmAction。",
+                "descriptionEn": "Tone. danger marks an action with an irreversible consequence and changes color only; the consequence text and confirmation are not carried by the button. Use AlertDialog or ConfirmAction."
               },
               {
                 "name": "size",
@@ -3677,18 +3673,18 @@
                 "descriptionEn": "Icon is a shape, not another size. Supply aria-label or aria-labelledby for it."
               },
               {
-                "name": "state",
-                "type": "\"idle\" | \"waiting\" | \"in-progress\" | \"unknown\" | \"failed\"",
-                "default": "\"idle\"",
-                "description": "调用方持有的事实。等待与进行中设置 aria-busy；结果未知单独呈现。前三种未完成状态阻止重复触发，failed 可由调用方提供恢复操作。",
-                "descriptionEn": "Caller-owned facts. Waiting and in-progress set aria-busy; unknown remains distinct. Those three states block repeat activation. The caller may provide recovery after confirmed failure."
+                "name": "loading",
+                "type": "boolean",
+                "default": "false",
+                "description": "调用方持有的事实：这个动作正在执行。显示转动的记号、设置 aria-busy、保留焦点并阻止重复触发；按钮不启动请求，也不推断何时结束。",
+                "descriptionEn": "A caller-owned fact: this action is running. Shows a spinning mark, sets aria-busy, retains focus and blocks repeat activation; the button starts no request and never infers when it ends."
               },
               {
                 "name": "disabled",
                 "type": "boolean",
                 "default": "false",
-                "description": "动作不可用，退出 Tab 顺序；与未完成事实可以共存。",
-                "descriptionEn": "Makes the action unavailable and removes it from the tab order. It may coexist with an unfinished state."
+                "description": "动作不可用，退出 Tab 顺序；可以与 loading 共存。",
+                "descriptionEn": "Makes the action unavailable and removes it from the tab order. It may coexist with loading."
               },
               {
                 "name": "render",
@@ -3706,66 +3702,45 @@
             ]
           },
           {
-            "name": "ButtonProtection",
-            "description": "可见后果与动作成组，并关联 aria-describedby；已有说明可由 Button 直接关联。容器的 consequence 必须非空，不替应用确认、判断权限或执行请求。",
-            "descriptionEn": "Groups a visible consequence with actions and links aria-describedby. A Button can directly reference an existing description instead. The container requires nonblank consequence text; it does not confirm, authorize, or run a request.",
-            "props": [
-              {
-                "name": "consequence",
-                "type": "string",
-                "description": "必填非空文字，说明当前对象、版本与变更的后果。",
-                "descriptionEn": "Required nonblank text describing the consequence for the current object, version, and change."
-              },
-              {
-                "name": "children",
-                "type": "ReactNode",
-                "description": "相关动作与必要退出入口。",
-                "descriptionEn": "Related actions and any required exit."
-              }
-            ]
-          },
-          {
             "name": "buttonVariants",
             "description": "与 Button 同一套尺寸、形态、强调和色调，用于保留原生链接等元素语义的组合。",
             "descriptionEn": "The same size, shape, emphasis, and tone styles for compositions that retain native element semantics, such as links."
           },
           {
             "name": "ButtonPrimitive",
-            "description": "Base UI 无障碍原语；应用优先使用 Button 的状态与保护契约。",
-            "descriptionEn": "The Base UI accessibility primitive. Prefer Button's state and protection contract in applications."
+            "description": "Base UI 无障碍原语；应用优先使用 Button。",
+            "descriptionEn": "The Base UI accessibility primitive. Prefer Button in applications."
           }
         ],
         "keyboard": [
           {
             "keys": "Enter / Space",
-            "description": "触发可用动作；等待、进行中或结果未知时不触发。",
-            "descriptionEn": "Activate an available action. Waiting, in-progress, and unknown actions do not activate."
+            "description": "触发可用动作；忙碌时不触发。",
+            "descriptionEn": "Activate an available action. A busy action does not activate."
           },
           {
             "keys": "Tab / Shift+Tab",
-            "description": "移入或移出焦点；未完成状态保留位置，disabled 退出 Tab 顺序。",
-            "descriptionEn": "Move focus. Unfinished states retain their position; disabled actions leave the tab order."
+            "description": "移入或移出焦点；忙碌时保留位置，disabled 退出 Tab 顺序。",
+            "descriptionEn": "Move focus. A busy action retains its position; disabled actions leave the tab order."
           },
           {
             "keys": "ArrowUp / ArrowDown",
-            "description": "组合菜单或列表触发器按原语操作；未完成状态阻止展开。",
-            "descriptionEn": "Follow the primitive's menu or list trigger behavior. Unfinished states block opening."
+            "description": "组合菜单或列表触发器按原语操作；忙碌时阻止展开。",
+            "descriptionEn": "Follow the primitive's menu or list trigger behavior. A busy trigger does not open."
           }
         ],
         "notes": [
-          "动作可访问名称保持不变；状态通过独立 description 与 live region 表达。文字形态同时显示状态文字，图标形态使用不同状态图形。",
-          "危险色调不代表授权。后果必须真实说明当前对象；确认条件与核实结果由调用方负责。",
-          "danger 的 DOM 关联在挂载后的 effect 校验：同次挂载的相邻说明可被找到；SSR 不校验，开发环境提交 DOM 后才报错。后续异步才出现的说明应先挂载再启用 danger。生产环境不抛错；文本存在不等于后果正确或可见，调用方仍需核对。",
-          "结果未知默认阻止重复执行；调用方应提供独立核实入口，收到可靠事实后再更新 state。",
+          "危险色调只是色调，不代表授权，也不替代确认；需要用户知道后果再决定时用 AlertDialog。",
+          "忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。文字形态在名称后加转动的记号，图标形态由记号暂时替下自己的图形。",
+          "state（waiting / in-progress / unknown / failed）已移除，改为 loading。原来写在按钮旁的失败与结果未知，改由 Alert、Toast、FieldError 或 StatusDot 表达。",
           "导航使用原生 a / Link + buttonVariants；nativeButton=false 的 Button 仍是命令语义。",
           "小控件通过 touch-target 扩大命中区到本库 44px 目标，密度与外观尺寸不改变这一目标。",
           "实心入口与父表面对比不足时，消费组合通过 className 添加可辨认边界，并使用同档 padding-bordered；同底色边界示例展示这一入口，组件不读取 DOM 推断承载面。"
         ],
         "notesEn": [
-          "The action's accessible name stays unchanged. Status uses a separate description and live region. Label buttons also display status text; icon buttons use distinct status glyphs.",
-          "Danger tone grants no permission. Describe the consequence for the actual object; the caller owns confirmation conditions and verification.",
-          "The danger association is checked in an effect after mounting. Adjacent text mounted in the same commit is available. SSR skips validation; development throws after DOM commit. Mount asynchronous descriptions before enabling danger. Production does not throw. Text presence alone does not prove a correct or visible consequence; the caller must verify it.",
-          "Unknown results block repeated execution by default. Provide a separate verification action and update state only after reliable facts arrive.",
+          "Danger is only a tone: it grants no permission and replaces no confirmation. Use AlertDialog when the user must know the consequence before deciding.",
+          "While busy the action's accessible name stays unchanged; “In progress” reaches screen readers through a description and an invisible live region, and no visible status text sits beside the button. A label button adds a spinning mark after its name; on an icon button the mark temporarily stands in for its glyph.",
+          "state (waiting / in-progress / unknown / failed) is removed in favour of loading. Failure and unknown results formerly written beside the button are expressed by Alert, Toast, FieldError or StatusDot.",
           "Use a native anchor or router Link with buttonVariants for navigation. A nativeButton=false Button remains a command.",
           "touch-target expands small controls to the library's 44px touch target without changing visual dimensions or shrinking it with density.",
           "When a solid action lacks contrast with its parent, the consumer adds a visible boundary through className and uses the matching padding-bordered profile. The same-surface example demonstrates this entry; the component does not inspect the DOM to infer its surface."
@@ -3776,24 +3751,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 119
+              "line": 93
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 119
-            },
-            "status": "PRESENT"
-          },
-          {
-            "name": "ButtonProtection",
-            "kind": "value",
-            "componentEntry": {
-              "path": "packages/ui/src/components/button.tsx",
-              "line": 90
-            },
-            "rootEntry": {
-              "path": "packages/ui/src/components/button.tsx",
-              "line": 90
+              "line": 93
             },
             "status": "PRESENT"
           },
@@ -3802,11 +3764,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 267
+              "line": 174
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 267
+              "line": 174
             },
             "status": "PRESENT"
           },
@@ -3815,11 +3777,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 33
+              "line": 29
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 33
+              "line": 29
             },
             "status": "PRESENT"
           }
@@ -4329,7 +4291,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 92
+            "line": 90
           }
         },
         {
@@ -4337,7 +4299,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 269
+            "line": 268
           }
         },
         {
@@ -4345,7 +4307,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 25
+            "line": 24
           }
         },
         {
@@ -4353,7 +4315,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 258
+            "line": 256
           }
         },
         {
@@ -4361,7 +4323,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 35
+            "line": 34
           }
         },
         {
@@ -4369,7 +4331,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 37
+            "line": 36
           }
         },
         {
@@ -4377,7 +4339,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 36
+            "line": 35
           }
         },
         {
@@ -4385,7 +4347,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 42
+            "line": 41
           }
         },
         {
@@ -4393,7 +4355,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 15
+            "line": 14
           }
         },
         {
@@ -4401,7 +4363,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 16
+            "line": 15
           }
         },
         {
@@ -4409,7 +4371,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 38
+            "line": 37
           }
         },
         {
@@ -4417,7 +4379,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 34
+            "line": 33
           }
         },
         {
@@ -4425,7 +4387,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 13
+            "line": 12
           }
         },
         {
@@ -4433,7 +4395,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 14
+            "line": 13
           }
         },
         {
@@ -4441,7 +4403,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 267
+            "line": 265
           }
         },
         {
@@ -4449,7 +4411,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 88
+            "line": 86
           }
         },
         {
@@ -4457,7 +4419,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 69
+            "line": 67
           }
         },
         {
@@ -4465,7 +4427,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 83
+            "line": 81
           }
         },
         {
@@ -4473,7 +4435,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 68
+            "line": 66
           }
         },
         {
@@ -4481,7 +4443,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 75
+            "line": 73
           }
         },
         {
@@ -4489,7 +4451,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 67
+            "line": 65
           }
         },
         {
@@ -4497,7 +4459,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 130
+            "line": 128
           }
         },
         {
@@ -4505,7 +4467,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 242
+            "line": 240
           }
         },
         {
@@ -4513,7 +4475,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 73
+            "line": 71
           }
         },
         {
@@ -4521,7 +4483,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 251
+            "line": 249
           }
         }
       ],
@@ -4555,8 +4517,8 @@
           "占比",
           "等价表格"
         ],
-        "decisions": "已知0、无记录、未知和不适用分别成立；未知值形成gap，表格保留其真实名称。图形不替代可达数值。",
-        "decisionsEn": "Known zero, empty data, unknown and not-applicable values remain distinct. Unavailable values form gaps and retain their actual names in the table. Plots do not replace reachable numbers.",
+        "decisions": "图只画数据。已知0、未知和不适用的单个值分别成立：未知值形成gap，表格保留其真实名称。整张图没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。图形不替代可达数值。",
+        "decisionsEn": "A chart only draws data. A known zero, an unknown value and a not-applicable value remain distinct: unavailable values form gaps and retain their actual names in the table. When the whole chart has no records, an unknown result or does not apply, the chart is not rendered and the caller puts Empty in its place. Plots do not replace reachable numbers.",
         "api": [
           {
             "name": "Chart",
@@ -4568,13 +4530,6 @@
                 "type": "string",
                 "description": "非空真实语义名称。",
                 "descriptionEn": "A nonempty semantic name for the actual data."
-              },
-              {
-                "name": "state",
-                "type": "\"ready\" | \"empty\" | \"unknown\" | \"not-applicable\"",
-                "default": "\"ready\"",
-                "description": "真实整图事实；非ready由children表达，不造数字或坐标轴。",
-                "descriptionEn": "The actual chart-wide state. children describe non-data states without invented numbers or axes."
               },
               {
                 "name": "type",
@@ -4597,7 +4552,7 @@
               {
                 "name": "rows",
                 "type": "readonly ChartRow[]",
-                "description": "稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。ready必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。",
+                "description": "稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。",
                 "descriptionEn": "Stable ids, category names and values: finite numbers or explicitly named unknown/not-applicable values. ready requires actual records; donut requires exactly one row, with every part a known non-negative number."
               },
               {
@@ -4653,7 +4608,7 @@
             "A donut with more than five parts, or where share must be compared precisely rather than glanced at."
           ],
           "composition": [
-            "Public Recharts primitives with current Table and Empty; one rows/series projection."
+            "Public Recharts primitives with the current Table; one rows/series projection. With nothing to plot, the caller renders Empty in place of the chart."
           ],
           "stateOwner": {
             "library": [
@@ -4684,7 +4639,7 @@
             "环形超过5个部分，或占比需要精确比较而不是一眼大小。"
           ],
           "composition": [
-            "Recharts公开原语 + 当前Table/Empty；同一rows/series投影。"
+            "Recharts公开原语 + 当前Table；同一rows/series投影。没有可画的数据时，调用方在原位改放 Empty。"
           ],
           "stateOwner": {
             "library": [
@@ -4707,11 +4662,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 269
+              "line": 268
             },
             "rootEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 269
+              "line": 268
             },
             "status": "PRESENT"
           }
@@ -5670,27 +5625,27 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 19
+            "line": 24
           }
         },
         {
-          "name": "ComboboxClear",
+          "name": "ComboboxChip",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 43
+            "line": 75
           }
         },
         {
-          "name": "ComboboxControl",
-          "kind": "value",
+          "name": "ComboboxChipProps",
+          "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 29
+            "line": 70
           }
         },
         {
-          "name": "ComboboxEmpty",
+          "name": "ComboboxChips",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
@@ -5698,23 +5653,7 @@
           }
         },
         {
-          "name": "ComboboxInput",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/combobox.tsx",
-            "line": 33
-          }
-        },
-        {
-          "name": "ComboboxItem",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/combobox.tsx",
-            "line": 61
-          }
-        },
-        {
-          "name": "ComboboxList",
+          "name": "ComboboxClear",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
@@ -5722,11 +5661,51 @@
           }
         },
         {
+          "name": "ComboboxControl",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 36
+          }
+        },
+        {
+          "name": "ComboboxEmpty",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 102
+          }
+        },
+        {
+          "name": "ComboboxInput",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 41
+          }
+        },
+        {
+          "name": "ComboboxItem",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 96
+          }
+        },
+        {
+          "name": "ComboboxList",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 92
+          }
+        },
+        {
           "name": "ComboboxPopup",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 50
+            "line": 85
           }
         },
         {
@@ -5734,7 +5713,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 49
+            "line": 84
           }
         },
         {
@@ -5743,7 +5722,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 70
+            "line": 105
           }
         },
         {
@@ -5751,7 +5730,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 17
+            "line": 19
           }
         },
         {
@@ -5759,7 +5738,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 37
+            "line": 50
+          }
+        },
+        {
+          "name": "ComboboxValue",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 65
           }
         }
       ],
@@ -5767,16 +5754,20 @@
         "path": "apps/docs/src/content/combobox/meta.ts",
         "title": "候选输入 Combobox",
         "titleEn": "Combobox",
-        "description": "筛选候选并确认一个值，查询文字与选择事实分别持有。",
-        "descriptionEn": "Filter candidates and confirm one value, with query text separate from selection.",
+        "description": "筛选候选并确认一个或一组值，查询文字与选择事实分别持有。",
+        "descriptionEn": "Filter candidates and confirm one value or a set, with query text separate from selection.",
         "category": "表单",
         "source": "local",
         "layer": "pattern",
         "exports": [
           "Combobox",
+          "ComboboxControl",
           "ComboboxInput",
           "ComboboxTrigger",
           "ComboboxClear",
+          "ComboboxValue",
+          "ComboboxChips",
+          "ComboboxChip",
           "ComboboxPopup",
           "ComboboxList",
           "ComboboxItem",
@@ -5789,14 +5780,21 @@
           "filter",
           "搜索选择"
         ],
-        "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。",
-        "decisionsEn": "value is the confirmed candidate; inputValue is the filter draft. Emptying the query preserves selection. Explicit Clear requests an empty selection. Use Autocomplete for free text.",
+        "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
+        "decisionsEn": "value is the confirmed candidate; inputValue is the filter draft. Emptying the query preserves selection. Explicit Clear requests an empty selection. Use Autocomplete for free text. Use multiple to pick several from many candidates; use CheckboxGroup when few options should all stay visible, and TagInput when values do not come from candidates.",
         "api": [
           {
             "name": "Combobox",
-            "description": "公开 Base UI 单值候选上下文；不强加业务选项。",
-            "descriptionEn": "A public Base UI single-value candidate context with caller-provided options.",
+            "description": "公开 Base UI 候选上下文，默认单值；不强加业务选项。",
+            "descriptionEn": "A public Base UI candidate context, single-value by default, with caller-provided options.",
             "props": [
+              {
+                "name": "multiple",
+                "type": "boolean",
+                "default": "false",
+                "description": "确认一组值：value 为数组，FormData 每个值一条；已选值在编辑边界内成为可单独移除的项。",
+                "descriptionEn": "Confirm a set: value is an array with one FormData entry per value; each selected value becomes an individually removable chip inside the edit boundary."
+              },
               {
                 "name": "value / defaultValue / onValueChange",
                 "type": "Value | null / Value | null / (value, details) => void",
@@ -5824,8 +5822,8 @@
               {
                 "name": "open / defaultOpen / onOpenChange",
                 "type": "Base UI open props",
-                "description": "展开可控；输入、动作、候选项共用一套几何，跟随密度轴。multiple 固定 false。",
-                "descriptionEn": "Opening is controllable. Input, actions, and items share one geometry following the density axis. multiple is false."
+                "description": "展开可控；输入、动作、候选项共用一套几何，跟随密度轴。",
+                "descriptionEn": "Opening is controllable. Input, actions, and items share one geometry following the density axis."
               }
             ]
           },
@@ -5833,6 +5831,24 @@
             "name": "ComboboxInput / ComboboxTrigger / ComboboxClear",
             "description": "公开原语复用 Input 原生出口与 Button；事件、ARIA、render 状态与 ref 透传，Field 注册一次。",
             "descriptionEn": "Public primitives compose the native Input outlet and Button. Events, ARIA, render state, and refs forward with one Field registration."
+          },
+          {
+            "name": "ComboboxControl",
+            "description": "输入、清除与展开共用的一条编辑边界，候选面以它为锚点；多选时可换行，装下已选项。",
+            "descriptionEn": "One edit boundary shared by input, clear, and trigger, anchoring the popup; with multiple it wraps to hold the chips."
+          },
+          {
+            "name": "ComboboxChips / ComboboxChip / ComboboxValue",
+            "description": "多选的已选项。Chips 放在 Control 内，包住各项与 Input；Value 以函数子级给出已选数组；Chip 自带移除动作，只读时只显示值。几何与 TagInput 的标签相同。",
+            "descriptionEn": "Selected values for multiple. Chips sits inside Control around the chips and Input; Value provides the selected array to a function child; Chip carries its own remove action and shows only the value when read-only. Geometry matches TagInput tags.",
+            "props": [
+              {
+                "name": "label (ComboboxChip)",
+                "type": "string",
+                "description": "移除动作的对象名；children 是纯文字时取 children。",
+                "descriptionEn": "The object name for the remove action; defaults to children when they are plain text."
+              }
+            ]
           },
           {
             "name": "ComboboxPopup",
@@ -5851,6 +5867,11 @@
           }
         ],
         "keyboard": [
+          {
+            "keys": "ArrowLeft / ArrowRight / Backspace",
+            "description": "多选：草稿为空时在已选项与输入之间移动；Backspace 或 Delete 移除聚焦的项。",
+            "descriptionEn": "Multiple: with an empty draft, move between chips and the input; Backspace or Delete removes the focused chip."
+          },
           {
             "keys": "ArrowDown / ArrowUp",
             "description": "展开并移动候选高亮，尚未确认时不改变提交值。",
@@ -5926,11 +5947,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 19
+              "line": 24
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 19
+              "line": 24
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ComboboxControl",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 36
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 36
             },
             "status": "PRESENT"
           },
@@ -5939,11 +5973,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 33
+              "line": 41
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 33
+              "line": 41
             },
             "status": "PRESENT"
           },
@@ -5952,11 +5986,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 37
+              "line": 50
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 37
+              "line": 50
             },
             "status": "PRESENT"
           },
@@ -5965,11 +5999,50 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 57
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 57
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ComboboxValue",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 65
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 65
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ComboboxChips",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 67
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 67
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ComboboxChip",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 75
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -5978,11 +6051,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 50
+              "line": 85
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 50
+              "line": 85
             },
             "status": "PRESENT"
           },
@@ -5991,11 +6064,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 57
+              "line": 92
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 57
+              "line": 92
             },
             "status": "PRESENT"
           },
@@ -6004,11 +6077,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 61
+              "line": 96
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 61
+              "line": 96
             },
             "status": "PRESENT"
           },
@@ -6017,11 +6090,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 102
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 102
             },
             "status": "PRESENT"
           },
@@ -6030,11 +6103,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 70
+              "line": 105
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 70
+              "line": 105
             },
             "status": "PRESENT"
           }
@@ -6073,7 +6146,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/confirm-action.tsx",
-            "line": 36
+            "line": 37
           }
         },
         {
@@ -6082,7 +6155,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/confirm-action.tsx",
-            "line": 92
+            "line": 90
           }
         },
         {
@@ -6126,8 +6199,8 @@
         "api": [
           {
             "name": "ConfirmAction",
-            "description": "AlertDialog、ButtonProtection 与可选 Field/Input 的确认组合。",
-            "descriptionEn": "A confirmation composition of AlertDialog, ButtonProtection, and optional Field/Input.",
+            "description": "AlertDialog 与可选 Field/Input 的确认组合；后果是对话框的说明。",
+            "descriptionEn": "A confirmation composition of AlertDialog and optional Field/Input; the consequence is the dialog's description.",
             "props": [
               {
                 "name": "snapshot",
@@ -6144,15 +6217,15 @@
               {
                 "name": "onConfirm",
                 "type": "(snapshot, event) => void",
-                "description": "仅请求动作，不发网络、不拥有结果、不自动关窗。应用通过 state/内容表达权限、等待、失败或结果未知。",
-                "descriptionEn": "Request only: no network, result ownership, or automatic closing. The application expresses permissions, waiting, failure, and unknown results through state and content."
+                "description": "仅请求动作，不发网络、不拥有结果、不自动关窗。应用通过 loading 表达请求中，通过 children 里的提示组件表达权限、失败或结果未知。",
+                "descriptionEn": "Request only: no network, result ownership, or automatic closing. The application expresses a pending request through loading, and permissions, failure and unknown results through feedback components in children."
               },
               {
-                "name": "state / disabled",
-                "type": "ButtonState / boolean",
-                "default": "'idle' / false",
-                "description": "waiting/in-progress/unknown 阻止再次请求；busy/unknown 保留原 Button 的可聚焦 ARIA 禁用，明确 disabled 用原生禁用。返回只关闭界面。",
-                "descriptionEn": "waiting, in-progress, and unknown block requests. Busy/unknown retain Button's focusable ARIA-disabled behavior; explicit disabled is native. Back only closes this UI."
+                "name": "loading / disabled",
+                "type": "boolean / boolean",
+                "default": "false / false",
+                "description": "loading 表示请求已发出、结果未到：入口与确认动作都显示忙碌并阻止再次请求，保留 Button 的可聚焦 ARIA 禁用；明确 disabled 用原生禁用。返回只关闭界面。",
+                "descriptionEn": "loading means the request is sent and its result has not arrived: both the entry and the confirm action show busy and block another request, keeping Button's focusable ARIA-disabled behavior; explicit disabled is native. Back only closes this UI."
               },
               {
                 "name": "confirmationText / confirmationLabel",
@@ -6176,8 +6249,8 @@
               {
                 "name": "triggerProps / confirmProps / inputProps / popupProps",
                 "type": "Current public component props",
-                "description": "定制真实出口的 render/ref/ARIA/events；confirmProps.onClick 的事件取消阻止请求。危险 trigger 仍需其所在页面的可见后果关联。",
-                "descriptionEn": "Customize real outlets' render, refs, ARIA, and events. Canceling confirmProps.onClick blocks a request. A danger trigger still requires visible consequence association on its page."
+                "description": "定制真实出口的 render/ref/ARIA/events；confirmProps.onClick 的事件取消阻止请求。入口只打开确认，后果在对话框里给出。",
+                "descriptionEn": "Customize real outlets' render, refs, ARIA, and events. Canceling confirmProps.onClick blocks a request. The entry only opens the confirmation; the dialog states the consequence."
               },
               {
                 "name": "children",
@@ -6228,7 +6301,7 @@
             "相成相制"
           ],
           "composition": [
-            "ConfirmAction + 明确 snapshot/文字 + 应用 state/onConfirm"
+            "ConfirmAction + 明确 snapshot/文字 + 应用 loading/onConfirm；结果用 Alert 或 Toast 表达"
           ],
           "stateOwner": {
             "library": [
@@ -6247,7 +6320,7 @@
         },
         "designEn": {
           "composition": [
-            "ConfirmAction + explicit snapshot/text + application state/onConfirm."
+            "ConfirmAction + explicit snapshot/text + application loading/onConfirm; express the result with Alert or Toast."
           ],
           "stateOwner": {
             "library": [
@@ -6270,11 +6343,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/confirm-action.tsx",
-              "line": 36
+              "line": 37
             },
             "rootEntry": {
               "path": "packages/ui/src/components/confirm-action.tsx",
-              "line": 36
+              "line": 37
             },
             "status": "PRESENT"
           },
@@ -6283,11 +6356,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/confirm-action.tsx",
-              "line": 92
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/confirm-action.tsx",
-              "line": 92
+              "line": 90
             },
             "status": "PRESENT"
           }
@@ -8670,7 +8743,7 @@
         "notes": [
           "不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。",
           "草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。",
-          "危险动作复用可见非空后果的 aria-describedby 或 ButtonProtection。",
+          "危险决定用 AlertDialog，后果写在它的说明里；按钮不承载后果。",
           "无触发者的程序打开也须指定有意义的 finalFocus。",
           "共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。",
           "ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语keepMounted隔离缺陷。"
@@ -8678,7 +8751,7 @@
         "notesEn": [
           "Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.",
           "The application owns drafts. Name closing, discarding, saving and undo separately.",
-          "Associate danger actions with visible nonempty consequences using aria-describedby or ButtonProtection.",
+          "Use AlertDialog for consequential decisions and state the consequence in its description; buttons carry none.",
           "Programmatic opening without a trigger needs a meaningful finalFocus target.",
           "Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.",
           "ARIA evidence narrows the contract: Portal forces keepMounted=false, even for JavaScript callers passing true. The application holds drafts explicitly. Direct Primitive composition still has the upstream retained-portal isolation defect."
@@ -11182,7 +11255,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 66
+            "line": 65
           }
         },
         {
@@ -11190,7 +11263,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 13
+            "line": 12
           }
         },
         {
@@ -11198,7 +11271,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 15
+            "line": 14
           }
         },
         {
@@ -11206,7 +11279,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 19
+            "line": 18
           }
         },
         {
@@ -11214,7 +11287,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 17
+            "line": 16
           }
         }
       ],
@@ -11251,13 +11324,6 @@
                 "type": "string",
                 "description": "非空真实语义名称。",
                 "descriptionEn": "A nonempty semantic name for the actual data."
-              },
-              {
-                "name": "state",
-                "type": "\"ready\" | \"empty\" | \"unknown\" | \"not-applicable\"",
-                "default": "\"ready\"",
-                "description": "真实整图事实；非ready由children表达。",
-                "descriptionEn": "The actual chart-wide state. children describe non-data states."
               },
               {
                 "name": "rowLabel / columnLabel / valueLabel",
@@ -11310,7 +11376,7 @@
             "只有一个类别维度（用 Chart bar）；需要精确读出每个数值而不是找热点（用数据表或 Chart）。"
           ],
           "composition": [
-            "手写 CSS 网格 + 当前 Table/Empty；复用 Chart 的 readValue 取值契约。"
+            "手写 CSS 网格 + 当前 Table；复用 Chart 的 readValue 取值契约。没有可画的数据时，调用方在原位改放 Empty。"
           ],
           "stateOwner": {
             "library": [
@@ -11335,7 +11401,7 @@
             "Only one categorical dimension (use Chart bar); reading every exact value rather than spotting hot spots (use a data table or Chart)."
           ],
           "composition": [
-            "A hand-built CSS grid with current Table and Empty; reuses Chart's readValue contract."
+            "A hand-built CSS grid with the current Table; reuses Chart's readValue contract. With nothing to plot, the caller renders Empty in place of the heatmap."
           ],
           "stateOwner": {
             "library": [
@@ -11358,11 +11424,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 66
+              "line": 65
             },
             "rootEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 66
+              "line": 65
             },
             "status": "PRESENT"
           }
@@ -11706,7 +11772,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 25
+            "line": 27
           }
         },
         {
@@ -11714,7 +11780,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 39
+            "line": 41
           }
         },
         {
@@ -11722,7 +11788,23 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 10
+            "line": 12
+          }
+        },
+        {
+          "name": "InputGroupButton",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 61
+          }
+        },
+        {
+          "name": "InputGroupButtonProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 56
           }
         },
         {
@@ -11730,7 +11812,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 48
+            "line": 50
           }
         },
         {
@@ -11738,7 +11820,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 11
+            "line": 13
           }
         },
         {
@@ -11746,7 +11828,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 9
+            "line": 11
           }
         }
       ],
@@ -11762,7 +11844,8 @@
         "exports": [
           "InputGroup",
           "InputGroupAddon",
-          "InputGroupInput"
+          "InputGroupInput",
+          "InputGroupButton"
         ],
         "keywords": [
           "input-group",
@@ -11770,8 +11853,8 @@
           "单位",
           "附件"
         ],
-        "decisions": "InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时组合 Button，并保留动作自己的名称与状态。",
-        "decisionsEn": "InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focus; compose Button for actions and keep their own names and states.",
+        "decisions": "InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时用 InputGroupButton，它与输入共用同一条外边界、自己不画框，并保留动作自己的名称与状态。清空、显示密码这类动作不内置在输入框里，都由这里组合；SearchInput 与 PasswordInput 就是这样搭出来的。",
+        "decisionsEn": "InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focus; use InputGroupButton for actions: it shares the outer boundary, draws no frame of its own, and keeps its own name and state. Clearing and password visibility are not built into Input; they are composed here, which is how SearchInput and PasswordInput are built.",
         "design": {
           "methods": [
             "名实相符",
@@ -11785,7 +11868,7 @@
             "把无关动作附在输入上；只靠附件或 Placeholder 命名输入。"
           ],
           "composition": [
-            "FieldLabel 命名输入；附件的必要说明由 aria-describedby 显式关联。已有搜索和密码形态直接用 Input。"
+            "FieldLabel 命名输入；附件的必要说明由 aria-describedby 显式关联。搜索与密码已有现成组合 SearchInput、PasswordInput。"
           ],
           "stateOwner": {
             "library": [
@@ -11810,7 +11893,7 @@
             "Unrelated actions attached to an input; naming the input through an adjunct or placeholder alone."
           ],
           "composition": [
-            "FieldLabel names the input; aria-describedby explicitly associates necessary adjunct explanations. Existing search/password forms use Input directly."
+            "FieldLabel names the input; aria-describedby explicitly associates necessary adjunct explanations. SearchInput and PasswordInput are ready-made compositions for search and passwords."
           ],
           "stateOwner": {
             "library": [
@@ -11851,8 +11934,8 @@
                 "name": "InputProps（除 size / unstyled）",
                 "nameEn": "InputProps (except size / unstyled)",
                 "type": "InputGroupInputProps",
-                "description": "保留原生输入、受控值、搜索/密码、nativeInput 与实际输入 ref。",
-                "descriptionEn": "Retains native input props, controlled values, search/password, nativeInput and the actual input ref."
+                "description": "保留原生输入、受控值、nativeInput 与实际输入 ref。",
+                "descriptionEn": "Retains native input props, controlled values, nativeInput and the actual input ref."
               }
             ]
           },
@@ -11865,8 +11948,36 @@
                 "name": "render / ref / 原生属性",
                 "nameEn": "render / ref / native props",
                 "type": "useRender.ComponentProps<span>",
-                "description": "单位、标记或显式 Button 的承载位。",
-                "descriptionEn": "A position for units, markers or an explicit Button."
+                "description": "单位、前缀、图标等静态内容的承载位。",
+                "descriptionEn": "A position for static content: units, prefixes, icons."
+              }
+            ]
+          },
+          {
+            "name": "InputGroupButton",
+            "description": "编辑边界内的动作：不画自己的框，铺满边界内高；图标形为内高见方。",
+            "descriptionEn": "An action inside the editing boundary: no frame of its own, filling the inner height; the icon shape is an inner-height square.",
+            "props": [
+              {
+                "name": "shape",
+                "type": "\"label\" | \"icon\"",
+                "default": "\"label\"",
+                "description": "图标形需要 aria-label。",
+                "descriptionEn": "The icon shape requires aria-label."
+              },
+              {
+                "name": "variant",
+                "type": "ButtonProps[\"variant\"]",
+                "default": "\"quiet\"",
+                "description": "边界内默认无框。",
+                "descriptionEn": "Frameless inside the boundary by default."
+              },
+              {
+                "name": "其余 ButtonProps",
+                "nameEn": "Other ButtonProps",
+                "type": "ButtonProps",
+                "description": "loading、disabled、onClick、render 等与 Button 相同。",
+                "descriptionEn": "loading, disabled, onClick, render and the rest behave as on Button."
               }
             ]
           }
@@ -11885,11 +11996,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 25
+              "line": 27
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 25
+              "line": 27
             },
             "status": "PRESENT"
           },
@@ -11898,11 +12009,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 39
+              "line": 41
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 39
+              "line": 41
             },
             "status": "PRESENT"
           },
@@ -11911,11 +12022,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 48
+              "line": 50
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 48
+              "line": 50
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "InputGroupButton",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 61
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 61
             },
             "status": "PRESENT"
           }
@@ -11954,7 +12078,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 100
+            "line": 94
           }
         },
         {
@@ -11963,7 +12087,7 @@
           "target": "Input",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 245
+            "line": 152
           }
         },
         {
@@ -11979,8 +12103,8 @@
         "path": "apps/docs/src/content/input/meta.ts",
         "title": "输入框 Input",
         "titleEn": "Input",
-        "description": "输入一个文本值。搜索、密码与清空动作使用同一个输入入口。",
-        "descriptionEn": "Enter one text value. Search, password visibility, and clearing use the same input.",
+        "description": "输入一个文本值。",
+        "descriptionEn": "Enter one text value.",
         "category": "表单",
         "source": "local",
         "layer": "primitive",
@@ -11991,14 +12115,11 @@
           "input",
           "输入框",
           "文本框",
-          "search",
-          "搜索",
-          "password",
-          "密码",
-          "clear"
+          "text",
+          "file"
         ],
-        "decisions": "输入框只持有输入值；搜索结果与提交由调用方处理。Placeholder 不能代替持续可见的名称。",
-        "decisionsEn": "Input holds the entered value; the caller handles search results and submission. A placeholder does not replace a persistent visible name.",
+        "decisions": "输入框只做一件事：承载一个值的输入。清空、搜索图标与显示密码是附在编辑边界上的另一件事，由 SearchInput、PasswordInput 或 InputGroup 组合出来，输入框不内置。Placeholder 不能代替持续可见的名称。",
+        "decisionsEn": "Input does one thing: it carries the entry of one value. Clearing, a search icon and password visibility are a separate matter on the editing boundary, composed by SearchInput, PasswordInput or InputGroup rather than built into Input. A placeholder does not replace a persistent visible name.",
         "design": {
           "methods": [
             "名实相符",
@@ -12006,17 +12127,18 @@
             "进退相承"
           ],
           "whenToUse": [
-            "输入一个文本值，原生 type 与内容匹配；搜索结果和提交行为由组合负责。"
+            "输入一个文本值，原生 type 与内容匹配。"
           ],
           "avoid": [
+            "搜索用 SearchInput，密码用 PasswordInput。",
             "用 placeholder 代替名称；把超时变成无效；把未知转成空串或 0；校验失败清空草稿。"
           ],
           "composition": [
-            "与 FieldLabel、FieldDescription、FieldError 共处；额外单位、标记和动作交给 InputGroup。"
+            "与 FieldLabel、FieldDescription、FieldError 共处；单位、标记与附属动作（清空、应用）交给 InputGroup + InputGroupButton。"
           ],
           "stateOwner": {
             "library": [
-              "原生输入、Field 关联、焦点、清空与密码可见性。"
+              "原生输入、Field 关联、焦点与只读标记。"
             ],
             "application": [
               "值的含义、校验事实、候选范围、未知/不适用及送达结果。"
@@ -12031,17 +12153,18 @@
         },
         "designEn": {
           "whenToUse": [
-            "Enter one text value with a matching native type; composition owns search results and submission."
+            "Enter one text value with a matching native type."
           ],
           "avoid": [
+            "Use SearchInput for search and PasswordInput for passwords.",
             "Placeholders replacing names; timeouts treated as invalid; unknown converted to empty or zero; drafts cleared after validation failure."
           ],
           "composition": [
-            "Keep FieldLabel, FieldDescription, and FieldError together; InputGroup supplies extra units, markers, and actions."
+            "Keep FieldLabel, FieldDescription, and FieldError together; InputGroup + InputGroupButton supply units, markers, and adjunct actions such as clearing or applying."
           ],
           "stateOwner": {
             "library": [
-              "Native input, Field associations, focus, clearing, and password visibility."
+              "Native input, Field associations, focus, and the read-only marker."
             ],
             "application": [
               "Value meaning, validation facts, candidate scope, unknown/not-applicable values, and delivery outcomes."
@@ -12064,49 +12187,22 @@
                 "name": "type",
                 "type": "React.HTMLInputTypeAttribute",
                 "default": "\"text\"",
-                "description": "search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。",
-                "descriptionEn": "search adds a search marker and clearing; password adds visibility. Neither supplies a field name or placeholder."
+                "description": "原生类型原样生效，不附带任何额外动作。搜索与密码用 SearchInput / PasswordInput。",
+                "descriptionEn": "The native type applies as is, with no extra action attached. Use SearchInput / PasswordInput for search and passwords."
               },
               {
                 "name": "value / defaultValue / onValueChange",
                 "type": "原生值 / 初始值 / (value, details) => void",
                 "typeEn": "Native value / initial value / (value, details) => void",
-                "description": "支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。",
-                "descriptionEn": "Controlled and uncontrolled values; onChange is also forwarded. Clearing follows the same native change path."
-              },
-              {
-                "name": "clearable / clearLabel / onClear",
-                "type": "boolean / string / () => void",
-                "default": "type === search",
-                "description": "非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。",
-                "descriptionEn": "Clear a nonempty editable value and return focus to the input. Hidden when disabled or read only."
-              },
-              {
-                "name": "visibilityToggle",
-                "type": "boolean",
-                "default": "type === password",
-                "description": "password 的可选附属动作，不更改内容或提交表单。",
-                "descriptionEn": "Optional password adjunct that preserves the value and does not submit a form."
-              },
-              {
-                "name": "visible / defaultVisible / onVisibleChange",
-                "type": "boolean / boolean / (visible) => void",
-                "default": "defaultVisible: false",
-                "description": "独立支持受控与非受控可见性。",
-                "descriptionEn": "Controlled or uncontrolled password visibility."
-              },
-              {
-                "name": "showLabel",
-                "type": "string",
-                "description": "可见性开关的稳定名称，默认从 locale 读取；aria-pressed 表达当前可见性。",
-                "descriptionEn": "Stable toggle name from the locale by default. aria-pressed reports visibility."
+                "description": "支持受控与非受控值；onChange 同样透传。",
+                "descriptionEn": "Controlled and uncontrolled values; onChange is also forwarded."
               },
               {
                 "name": "readOnly",
                 "type": "boolean",
                 "default": "false",
-                "description": "保留焦点、复制与表单提交，阻止编辑与清空；默认显示只读标记。",
-                "descriptionEn": "Retains focus, copying, and form submission while blocking edits and clearing. Shows a read-only marker."
+                "description": "保留焦点、复制与表单提交，阻止编辑；默认显示只读标记。",
+                "descriptionEn": "Retains focus, copying, and form submission while blocking edits. Shows a read-only marker."
               },
               {
                 "name": "className / style / render / ref",
@@ -12140,30 +12236,20 @@
         "keyboard": [
           {
             "keys": "Tab / Shift+Tab",
-            "description": "在输入与可用附属动作之间移动；禁用动作不进入顺序。",
-            "descriptionEn": "Move between the input and available adjuncts. Disabled actions leave the tab order."
-          },
-          {
-            "keys": "Escape",
-            "description": "可清空且非空时清空，后续 Escape 返回外层；输入法组字及调用方取消时保留草稿。",
-            "descriptionEn": "Clear an eligible nonempty value; a later Escape reaches the parent. Composition and caller cancellation preserve the draft."
-          },
-          {
-            "keys": "Enter / Space",
-            "description": "焦点在附属按钮上时立即执行，不提交表单。",
-            "descriptionEn": "Activate a focused adjunct immediately without submitting the form."
+            "description": "进入与离开输入。",
+            "descriptionEn": "Enter and leave the input."
           }
         ],
         "notes": [
           "aria-invalid 来自应用或浏览器校验；值的真伪与是否送达分开表达。",
           "提供 FieldLabel、原生 label 或 aria-label。Placeholder 是输入提示，不是名称。",
-          "原 SearchInput / PasswordInput 改为 Input type=\"search\" / type=\"password\"；loading 与 shortcut 改为明确的状态或 InputGroup 组合。size=\"default\" 改为 \"md\"；旧外框 className 改为 controlClassName。",
+          "clearable / clearLabel / onClear 与 visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel 已移除：搜索用 SearchInput，密码用 PasswordInput，其他附属动作用 InputGroup + InputGroupButton 组合。",
           "type=\"file\" 保留浏览器文件选择行为与语言；文件列表和业务校验由调用方提供。"
         ],
         "notesEn": [
           "aria-invalid comes from application or browser validation. Value validity and delivery are separate facts.",
           "Provide FieldLabel, a native label, or aria-label. A placeholder is a hint rather than a name.",
-          "Replace SearchInput / PasswordInput with Input type=\"search\" / type=\"password\". Express loading and shortcuts through explicit state or InputGroup composition. Replace size=\"default\" with \"md\" and outer className with controlClassName.",
+          "clearable / clearLabel / onClear and visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel are removed: use SearchInput for search, PasswordInput for passwords, and compose InputGroup + InputGroupButton for other adjunct actions.",
           "type=\"file\" retains browser behavior and language. The caller owns file lists and business validation."
         ],
         "usageResolution": [
@@ -12172,11 +12258,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 100
+              "line": 94
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 100
+              "line": 94
             },
             "status": "PRESENT"
           }
@@ -16561,6 +16647,218 @@
       }
     },
     {
+      "name": "password-input",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/password-input.tsx",
+      "exports": [
+        {
+          "name": "PasswordInput",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/password-input.tsx",
+            "line": 26
+          }
+        },
+        {
+          "name": "PasswordInputProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/password-input.tsx",
+            "line": 12
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/password-input/meta.ts",
+        "title": "密码输入 PasswordInput",
+        "titleEn": "PasswordInput",
+        "description": "输入密码，并可切换为明文核对。",
+        "descriptionEn": "Enter a password and switch to plain text to check it.",
+        "category": "表单",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "PasswordInput"
+        ],
+        "keywords": [
+          "password",
+          "password-input",
+          "密码",
+          "显示密码",
+          "reveal",
+          "visibility"
+        ],
+        "decisions": "密码输入是组合，不是 Input 的一个模式：编辑边界（InputGroup）里放输入与一个显示密码的开关，都是公开部件。输入框只承载值；开关是附在边界上的另一个动作，名称固定为「显示密码」，按下与否由 aria-pressed 表达。开关不改内容、不提交表单；强度、规则与校验由应用给出。",
+        "decisionsEn": "PasswordInput is a composition, not a mode of Input: the input and a show-password toggle sit inside one editing boundary (InputGroup), both public parts. The input only holds the value; the toggle is a separate action on the boundary with the stable name “Show password”, its state expressed by aria-pressed. The toggle changes no content and submits no form; strength, rules and validation come from the application.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "相成相制",
+            "进退相承"
+          ],
+          "whenToUse": [
+            "登录、设置或修改密码。"
+          ],
+          "avoid": [
+            "一次性验证码用 OtpField。",
+            "用 placeholder 写密码规则：规则写在 FieldDescription。"
+          ],
+          "composition": [
+            "与 FieldLabel、FieldDescription、FieldError 共处；autoComplete 写 current-password 或 new-password。"
+          ],
+          "stateOwner": {
+            "library": [
+              "共同边界、开关的名称与按下状态、受控或非受控的可见性。"
+            ],
+            "application": [
+              "密码值、规则说明、校验事实与提交结果。"
+            ]
+          },
+          "responsive": [
+            "宽度由所在容器决定；几何与 Input 相同，跟随密度轴。"
+          ],
+          "customization": [
+            "className、style、render 与 ref 属于真实 input；controlClassName 属于编辑边界；showLabel 改写开关的名称。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Signing in, or setting or changing a password."
+          ],
+          "avoid": [
+            "Use OtpField for one-time codes.",
+            "Password rules in a placeholder: write them in FieldDescription."
+          ],
+          "composition": [
+            "Pair with FieldLabel, FieldDescription and FieldError; set autoComplete to current-password or new-password."
+          ],
+          "stateOwner": {
+            "library": [
+              "The shared boundary, the toggle's name and pressed state, and controlled or uncontrolled visibility."
+            ],
+            "application": [
+              "The password value, rule text, validation facts and the submission outcome."
+            ]
+          },
+          "responsive": [
+            "Width follows the container; geometry matches Input and follows the density axis."
+          ],
+          "customization": [
+            "className, style, render and ref belong to the real input; controlClassName belongs to the editing boundary; showLabel renames the toggle."
+          ]
+        },
+        "api": [
+          {
+            "name": "PasswordInput",
+            "description": "InputGroup + Input（type=password）+ 显示密码的开关。",
+            "descriptionEn": "InputGroup + Input (type=password) + a show-password toggle.",
+            "props": [
+              {
+                "name": "visible / defaultVisible / onVisibleChange",
+                "type": "boolean / boolean / (visible) => void",
+                "default": "defaultVisible: false",
+                "description": "密码是否以明文显示；支持受控与非受控。",
+                "descriptionEn": "Whether the password is shown as plain text; controlled or uncontrolled."
+              },
+              {
+                "name": "showLabel",
+                "type": "string",
+                "description": "开关的稳定名称，默认从 locale 读取；aria-pressed 表达当前是否可见。",
+                "descriptionEn": "Stable toggle name, read from the locale by default; aria-pressed reports visibility."
+              },
+              {
+                "name": "value / defaultValue / onChange / onValueChange",
+                "type": "InputProps",
+                "description": "受控与非受控值；切换可见性不改变值。",
+                "descriptionEn": "Controlled and uncontrolled values; switching visibility never changes the value."
+              },
+              {
+                "name": "disabled",
+                "type": "boolean",
+                "default": "false",
+                "description": "输入禁用时开关一并禁用，同样服从 Field 与原生 fieldset。",
+                "descriptionEn": "The toggle is disabled with the input, also following Field and a native fieldset."
+              },
+              {
+                "name": "className / style / render / ref",
+                "type": "InputProps",
+                "description": "全部作用于真实 input。",
+                "descriptionEn": "Applied to the real input."
+              },
+              {
+                "name": "controlClassName",
+                "type": "string",
+                "description": "作用于编辑边界，例如宽度。",
+                "descriptionEn": "Applied to the editing boundary, e.g. its width."
+              },
+              {
+                "name": "其余 InputProps（除 type / unstyled）",
+                "nameEn": "Other InputProps (except type / unstyled)",
+                "type": "InputProps",
+                "description": "autoComplete、name、form、aria-* 等原样透传；默认关闭自动大写、自动更正与拼写检查。",
+                "descriptionEn": "autoComplete, name, form, aria-* and the rest are forwarded; auto-capitalisation, auto-correction and spell checking are off by default."
+              }
+            ]
+          }
+        ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在输入与开关之间移动；禁用的开关不进入顺序。",
+            "descriptionEn": "Move between the input and the toggle; a disabled toggle leaves the tab order."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "焦点在开关上时切换可见性，不提交表单。",
+            "descriptionEn": "On the toggle: switch visibility without submitting the form."
+          }
+        ],
+        "notes": [
+          "此前写作 Input type=\"password\" 的用法改为 PasswordInput；Input 的 visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel 已移除。"
+        ],
+        "notesEn": [
+          "Replace Input type=\"password\" with PasswordInput; Input's visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel are removed."
+        ],
+        "usageResolution": [
+          {
+            "name": "PasswordInput",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/password-input.tsx",
+              "line": 26
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/password-input.tsx",
+              "line": 26
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/password-input/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "1.0.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
       "name": "pending-value",
       "status": "PRESENT",
       "source": "packages/ui/src/components/pending-value.tsx",
@@ -18126,7 +18424,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 85
+            "line": 84
           }
         },
         {
@@ -18134,7 +18432,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 16
+            "line": 15
           }
         },
         {
@@ -18142,7 +18440,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 13
+            "line": 12
           }
         },
         {
@@ -18150,7 +18448,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 14
+            "line": 13
           }
         }
       ],
@@ -18189,13 +18487,6 @@
                 "type": "string",
                 "description": "非空真实语义名称。",
                 "descriptionEn": "A nonempty semantic name for the actual data."
-              },
-              {
-                "name": "state",
-                "type": "\"ready\" | \"empty\" | \"unknown\" | \"not-applicable\"",
-                "default": "\"ready\"",
-                "description": "真实整图事实；非ready由children表达。",
-                "descriptionEn": "The actual chart-wide state. children describe non-data states."
               },
               {
                 "name": "xLabel / yLabel",
@@ -18242,7 +18533,7 @@
             "只有一个数值要展示（用 Stat）；随时间的单一趋势（用 Chart line/area）；类别之间的比较（用 Chart bar）。"
           ],
           "composition": [
-            "Recharts 公开原语 + 当前 Table/Empty；复用 Chart 的 Marker 标记与悬停外壳。"
+            "Recharts 公开原语 + 当前 Table；复用 Chart 的 Marker 标记与悬停外壳。没有可画的点时，调用方在原位改放 Empty。"
           ],
           "stateOwner": {
             "library": [
@@ -18267,7 +18558,7 @@
             "A single number to show (use Stat); a single trend over time (use Chart line/area); comparison between categories (use Chart bar)."
           ],
           "composition": [
-            "Public Recharts primitives with current Table and Empty; reuses Chart's Marker shapes and hover shell."
+            "Public Recharts primitives with the current Table; reuses Chart's Marker shapes and hover shell. With no point to plot, the caller renders Empty in place of the chart."
           ],
           "stateOwner": {
             "library": [
@@ -18290,11 +18581,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scatter-chart.tsx",
-              "line": 85
+              "line": 84
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scatter-chart.tsx",
-              "line": 85
+              "line": 84
             },
             "status": "PRESENT"
           }
@@ -18501,6 +18792,224 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "search-input",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/search-input.tsx",
+      "exports": [
+        {
+          "name": "SearchInput",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/search-input.tsx",
+            "line": 24
+          }
+        },
+        {
+          "name": "SearchInputProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/search-input.tsx",
+            "line": 12
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/search-input/meta.ts",
+        "title": "搜索输入 SearchInput",
+        "titleEn": "SearchInput",
+        "description": "输入一个搜索词，并能一步清空。",
+        "descriptionEn": "Enter a search term and clear it in one step.",
+        "category": "表单",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "SearchInput"
+        ],
+        "keywords": [
+          "search",
+          "search-input",
+          "搜索",
+          "搜索框",
+          "清空",
+          "clear",
+          "filter",
+          "筛选"
+        ],
+        "decisions": "搜索输入是组合，不是 Input 的一个模式：编辑边界（InputGroup）里依次放搜索图标、输入、清空动作，三者都是公开部件。输入框只承载值；清空是附在边界上的另一个动作，有自己的名称与焦点。它只持有搜索词，不发请求、不决定何时搜索，也不显示结果。",
+        "decisionsEn": "SearchInput is a composition, not a mode of Input: a search icon, the input, and a clear action sit inside one editing boundary (InputGroup), all public parts. The input only holds the value; clearing is a separate action on the boundary with its own name and focus. It holds the search term only: it sends no request, does not decide when to search, and shows no results.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "相成相制",
+            "进退相承"
+          ],
+          "whenToUse": [
+            "输入搜索词或就地筛选一个列表。"
+          ],
+          "avoid": [
+            "普通文本字段用 Input；需要候选项时用 Autocomplete 或 Combobox。",
+            "只靠 placeholder 命名：提供 FieldLabel 或 aria-label。"
+          ],
+          "composition": [
+            "与 FieldLabel 共处，或在工具条里以 aria-label 命名。需要别的附属动作时，用 InputGroup + InputGroupInput + InputGroupButton 自行组合。"
+          ],
+          "stateOwner": {
+            "library": [
+              "共同边界、搜索图标、清空动作的出现与焦点返回、首个 Escape 清空本字段。"
+            ],
+            "application": [
+              "搜索词的含义、何时查询、结果、无结果与失败的表达。"
+            ]
+          },
+          "responsive": [
+            "宽度由所在容器决定；几何与 Input 相同，跟随密度轴。"
+          ],
+          "customization": [
+            "className、style、render 与 ref 属于真实 input；controlClassName 属于编辑边界；clearLabel 改写清空动作的名称。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Entering a search term or filtering a list in place."
+          ],
+          "avoid": [
+            "Use Input for an ordinary text field; use Autocomplete or Combobox when candidates are offered.",
+            "Naming it by placeholder alone: provide FieldLabel or aria-label."
+          ],
+          "composition": [
+            "Pair with FieldLabel, or name it with aria-label in a toolbar. For other adjunct actions, compose InputGroup + InputGroupInput + InputGroupButton yourself."
+          ],
+          "stateOwner": {
+            "library": [
+              "The shared boundary, the search icon, when the clear action appears and where focus returns, and the first Escape clearing this field."
+            ],
+            "application": [
+              "What the term means, when to query, and how results, no results and failure are expressed."
+            ]
+          },
+          "responsive": [
+            "Width follows the container; geometry matches Input and follows the density axis."
+          ],
+          "customization": [
+            "className, style, render and ref belong to the real input; controlClassName belongs to the editing boundary; clearLabel renames the clear action."
+          ]
+        },
+        "api": [
+          {
+            "name": "SearchInput",
+            "description": "InputGroup + 搜索图标 + Input（type=search）+ 清空动作。",
+            "descriptionEn": "InputGroup + search icon + Input (type=search) + a clear action.",
+            "props": [
+              {
+                "name": "value / defaultValue / onChange / onValueChange",
+                "type": "InputProps",
+                "description": "受控与非受控值；清空沿同一条原生事件链更新值。",
+                "descriptionEn": "Controlled and uncontrolled values; clearing updates the value through the same native event path."
+              },
+              {
+                "name": "onClear",
+                "type": "() => void",
+                "description": "清空之后调用；值的变化已由 onChange / onValueChange 送出。清空不提交表单。",
+                "descriptionEn": "Called after clearing; the value change has already been sent through onChange / onValueChange. Clearing does not submit a form."
+              },
+              {
+                "name": "clearLabel",
+                "type": "string",
+                "description": "清空动作的名称，默认从 locale 读取。",
+                "descriptionEn": "Name of the clear action, read from the locale by default."
+              },
+              {
+                "name": "readOnly / disabled",
+                "type": "boolean",
+                "default": "false",
+                "description": "只读与禁用时不出现清空动作；禁用同样服从 Field 与原生 fieldset。",
+                "descriptionEn": "No clear action when read only or disabled; disabling also follows Field and a native fieldset."
+              },
+              {
+                "name": "className / style / render / ref",
+                "type": "InputProps",
+                "description": "全部作用于真实 input。",
+                "descriptionEn": "Applied to the real input."
+              },
+              {
+                "name": "controlClassName",
+                "type": "string",
+                "description": "作用于编辑边界，例如宽度。",
+                "descriptionEn": "Applied to the editing boundary, e.g. its width."
+              },
+              {
+                "name": "其余 InputProps（除 type / unstyled）",
+                "nameEn": "Other InputProps (except type / unstyled)",
+                "type": "InputProps",
+                "description": "placeholder、name、form、aria-* 等原样透传给输入。",
+                "descriptionEn": "placeholder, name, form, aria-* and the rest are forwarded to the input."
+              }
+            ]
+          }
+        ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在输入与清空动作之间移动。",
+            "descriptionEn": "Move between the input and the clear action."
+          },
+          {
+            "keys": "Escape",
+            "description": "非空且可编辑时清空本字段，之后的 Escape 交给外层；输入法组字与调用方取消时保留草稿。",
+            "descriptionEn": "Clear this field when it is nonempty and editable; a later Escape reaches the parent. Composition and caller cancellation preserve the draft."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "焦点在清空动作上时清空并把焦点还给输入，不提交表单。",
+            "descriptionEn": "On the clear action: clear, return focus to the input, and do not submit the form."
+          }
+        ],
+        "notes": [
+          "此前写作 Input type=\"search\" 的用法改为 SearchInput；Input 的 clearable / clearLabel / onClear 已移除。普通字段需要清空时用 InputGroup + InputGroupButton 组合。"
+        ],
+        "notesEn": [
+          "Replace Input type=\"search\" with SearchInput; Input's clearable / clearLabel / onClear are removed. For a clear action on an ordinary field, compose InputGroup + InputGroupButton."
+        ],
+        "usageResolution": [
+          {
+            "name": "SearchInput",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/search-input.tsx",
+              "line": 24
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/search-input.tsx",
+              "line": 24
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/search-input/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "1.0.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",
@@ -19564,7 +20073,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 38
+            "line": 44
           }
         },
         {
@@ -19580,7 +20089,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 50
+            "line": 56
           }
         },
         {
@@ -19588,7 +20097,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 49
+            "line": 55
           }
         },
         {
@@ -19596,7 +20105,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 79
+            "line": 85
           }
         },
         {
@@ -19604,7 +20113,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 86
+            "line": 92
           }
         },
         {
@@ -19612,7 +20121,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 80
+            "line": 86
           }
         },
         {
@@ -19620,7 +20129,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 78
+            "line": 84
           }
         },
         {
@@ -19628,7 +20137,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 102
+            "line": 108
           }
         },
         {
@@ -19636,7 +20145,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 90
+            "line": 96
           }
         },
         {
@@ -19644,7 +20153,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 27
+            "line": 23
           }
         },
         {
@@ -19652,7 +20161,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 142
+            "line": 150
           }
         },
         {
@@ -19660,7 +20169,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 176
+            "line": 184
           }
         },
         {
@@ -19668,7 +20177,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 172
+            "line": 180
           }
         },
         {
@@ -19676,7 +20185,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 134
+            "line": 142
           }
         },
         {
@@ -19684,7 +20193,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 161
+            "line": 169
           }
         },
         {
@@ -19692,7 +20201,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 133
+            "line": 141
           }
         },
         {
@@ -19700,7 +20209,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 45
+            "line": 51
           }
         },
         {
@@ -19708,7 +20217,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 44
+            "line": 50
           }
         }
       ],
@@ -19820,10 +20329,14 @@
           }
         ],
         "notes": [
-          "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。"
+          "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。",
+          "当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。",
+          "当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。"
         ],
         "notesEn": [
-          "Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available."
+          "Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.",
+          "The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.",
+          "The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash."
         ],
         "design": {
           "methods": [
@@ -19880,11 +20393,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 38
+              "line": 44
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 38
+              "line": 44
             },
             "status": "PRESENT"
           },
@@ -19893,11 +20406,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 45
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 45
+              "line": 51
             },
             "status": "PRESENT"
           },
@@ -19906,11 +20419,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 50
+              "line": 56
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 50
+              "line": 56
             },
             "status": "PRESENT"
           },
@@ -19919,11 +20432,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 79
+              "line": 85
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 79
+              "line": 85
             },
             "status": "PRESENT"
           },
@@ -19932,11 +20445,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 86
+              "line": 92
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 86
+              "line": 92
             },
             "status": "PRESENT"
           },
@@ -19945,11 +20458,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 102
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 102
+              "line": 108
             },
             "status": "PRESENT"
           },
@@ -19958,11 +20471,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 142
+              "line": 150
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 142
+              "line": 150
             },
             "status": "PRESENT"
           },
@@ -19971,11 +20484,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 161
+              "line": 169
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 161
+              "line": 169
             },
             "status": "PRESENT"
           },
@@ -19984,11 +20497,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 176
+              "line": 184
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 176
+              "line": 184
             },
             "status": "PRESENT"
           }
@@ -20107,9 +20620,9 @@
             "首次加载的内容区域，形状已知、几行几块可预期。"
           ],
           "avoid": [
-            "刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。",
+            "刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（loading）与一条 Progress 表达，二者共用一个等待周期。",
             "加载失败或结果为空时改用 Empty，不让占位冒充内容。",
-            "不确定形状或时间极短的等待，用按钮的 in-progress。"
+            "不确定形状或时间极短的等待，用按钮的 loading。"
           ],
           "composition": [
             "Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。"
@@ -20134,9 +20647,9 @@
             "The first load of a region whose shape is known: how many rows and blocks to expect."
           ],
           "avoid": [
-            "Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.",
+            "Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (loading) and on a Progress band, both of which share one wait period.",
             "A failed or empty result uses Empty; a placeholder never stands in for content.",
-            "A wait of unknown shape or very short duration uses a Button's in-progress."
+            "A wait of unknown shape or very short duration uses a Button's loading."
           ],
           "composition": [
             "Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump."
@@ -21993,7 +22506,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 28
+            "line": 35
           }
         },
         {
@@ -22001,7 +22514,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 41
+            "line": 48
           }
         },
         {
@@ -22009,7 +22522,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 40
+            "line": 47
           }
         },
         {
@@ -22017,7 +22530,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 33
+            "line": 40
           }
         },
         {
@@ -22025,7 +22538,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 31
+            "line": 38
           }
         },
         {
@@ -22033,7 +22546,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 62
+            "line": 69
           }
         },
         {
@@ -22041,7 +22554,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 61
+            "line": 68
           }
         },
         {
@@ -22049,7 +22562,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 24
+            "line": 31
           }
         },
         {
@@ -22065,7 +22578,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 45
+            "line": 52
           }
         },
         {
@@ -22073,7 +22586,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 44
+            "line": 51
           }
         },
         {
@@ -22081,7 +22594,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 58
+            "line": 65
           }
         },
         {
@@ -22089,7 +22602,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 37
+            "line": 44
           }
         },
         {
@@ -22097,7 +22610,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 36
+            "line": 43
           }
         },
         {
@@ -22105,7 +22618,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 52
+            "line": 59
           }
         },
         {
@@ -22113,7 +22626,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 27
+            "line": 34
           }
         },
         {
@@ -22121,7 +22634,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 49
+            "line": 56
           }
         },
         {
@@ -22129,7 +22642,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 48
+            "line": 55
           }
         }
       ],
@@ -22208,9 +22721,16 @@
         "api": [
           {
             "name": "TableContainer",
-            "description": "横向滚动容器。",
-            "descriptionEn": "A horizontal scroll container.",
+            "description": "表格的纸与横向滚动容器。",
+            "descriptionEn": "The table's surface and horizontal scroll container.",
             "props": [
+              {
+                "name": "framed",
+                "type": "boolean",
+                "default": "true",
+                "description": "false：表格放在已有的一张纸上（Card、面板），不再铺线、底与圆角；贴着承载面的边放置，由承载面裁切圆角。",
+                "descriptionEn": "false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners."
+              },
               {
                 "name": "tabIndex / aria-label / render / ref / native props",
                 "type": "useRender.ComponentProps<div>",
@@ -22268,10 +22788,12 @@
           }
         ],
         "notes": [
-          "空结果可在完整表头下提供跨列单元格；数据与排序由应用提供。"
+          "空结果可在完整表头下提供跨列单元格；数据与排序由应用提供。",
+          "一个范围只铺一张纸：表格进 Card 时用 framed={false}，不要在卡片里再套一层边框。"
         ],
         "notesEn": [
-          "Empty results may use a spanning cell below complete headers; data and sorting belong to the application."
+          "Empty results may use a spanning cell below complete headers; data and sorting belong to the application.",
+          "One region, one surface: inside a Card use framed={false} rather than nesting a second border."
         ],
         "usageResolution": [
           {
@@ -22279,11 +22801,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 24
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 24
+              "line": 31
             },
             "status": "PRESENT"
           },
@@ -22292,11 +22814,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 28
+              "line": 35
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 28
+              "line": 35
             },
             "status": "PRESENT"
           },
@@ -22305,11 +22827,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 33
+              "line": 40
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 33
+              "line": 40
             },
             "status": "PRESENT"
           },
@@ -22318,11 +22840,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 37
+              "line": 44
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 37
+              "line": 44
             },
             "status": "PRESENT"
           },
@@ -22331,11 +22853,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 41
+              "line": 48
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 41
+              "line": 48
             },
             "status": "PRESENT"
           },
@@ -22344,11 +22866,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 45
+              "line": 52
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 45
+              "line": 52
             },
             "status": "PRESENT"
           },
@@ -22357,11 +22879,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 49
+              "line": 56
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 49
+              "line": 56
             },
             "status": "PRESENT"
           },
@@ -22370,11 +22892,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 58
+              "line": 65
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 58
+              "line": 65
             },
             "status": "PRESENT"
           },
@@ -22383,11 +22905,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 62
+              "line": 69
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 62
+              "line": 69
             },
             "status": "PRESENT"
           }
@@ -22426,7 +22948,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 6
+            "line": 7
           }
         },
         {
@@ -22434,7 +22956,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 9
+            "line": 10
           }
         },
         {
@@ -22442,7 +22964,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 7
+            "line": 8
           }
         },
         {
@@ -22450,7 +22972,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 13
+            "line": 26
           }
         },
         {
@@ -22458,7 +22980,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -22467,7 +22989,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 14
+            "line": 31
           }
         },
         {
@@ -22475,7 +22997,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 5
+            "line": 6
           }
         },
         {
@@ -22483,7 +23005,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 11
+            "line": 12
           }
         },
         {
@@ -22491,7 +23013,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 10
+            "line": 11
           }
         }
       ],
@@ -22573,10 +23095,10 @@
             "props": [
               {
                 "name": "value / keepMounted",
-                "type": "Base UI Panel props",
-                "description": "默认保留挂载与输入；false 由应用承担卸载后果。",
-                "descriptionEn": "Mounted panels retain input by default; applications own the effects of false.",
-                "default": "keepMounted=true"
+                "type": "Value / boolean | \"visited\"",
+                "description": "visited：第一次到达才挂载，之后保留输入与已取回的内容，没到过的面板不发请求。true：一开始全部挂载，跨标签页一起提交的原生表单字段用它。false：离开即卸载，由应用承担后果。",
+                "descriptionEn": "visited mounts a panel on first arrival and keeps its input and loaded content afterwards, so unvisited panels make no requests. true mounts every panel up front; use it for native form fields submitted together across tabs. false unmounts on leaving, and the application owns the effects.",
+                "default": "keepMounted=\"visited\""
               },
               {
                 "name": "render / ref / native props",
@@ -22588,10 +23110,10 @@
           }
         ],
         "notes": [
-          "隐藏面板仍挂载但退出可访问树；不要把切换当成保存成功。"
+          "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
         ],
         "notesEn": [
-          "Hidden panels remain mounted but leave the accessibility tree; switching is never reported as saving."
+          "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
         ],
         "design": {
           "methods": [
@@ -22660,11 +23182,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 6
+              "line": 7
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 6
+              "line": 7
             },
             "status": "PRESENT"
           },
@@ -22673,11 +23195,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 9
+              "line": 10
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 9
+              "line": 10
             },
             "status": "PRESENT"
           },
@@ -22686,11 +23208,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 11
+              "line": 12
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 11
+              "line": 12
             },
             "status": "PRESENT"
           },
@@ -22699,11 +23221,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 13
+              "line": 26
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 13
+              "line": 26
             },
             "status": "PRESENT"
           },
@@ -22712,11 +23234,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 14
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 14
+              "line": 31
             },
             "status": "PRESENT"
           }
@@ -22755,7 +23277,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 49
+            "line": 46
           }
         },
         {
@@ -22763,7 +23285,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 14
+            "line": 15
           }
         },
         {
@@ -22771,7 +23293,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 21
+            "line": 22
           }
         }
       ],
@@ -22947,11 +23469,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 49
+              "line": 46
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 49
+              "line": 46
             },
             "status": "PRESENT"
           }
@@ -23796,7 +24318,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 30
+            "line": 27
           }
         },
         {
@@ -23804,7 +24326,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 191
+            "line": 159
           }
         },
         {
@@ -23812,7 +24334,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 18
+            "line": 16
           }
         },
         {
@@ -23820,7 +24342,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 29
+            "line": 26
           }
         },
         {
@@ -23837,7 +24359,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 200
+            "line": 167
           }
         },
         {
@@ -23845,7 +24367,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 182
+            "line": 151
           }
         },
         {
@@ -23900,13 +24422,6 @@
                 "descriptionEn": "Reading duration for ordinary/success notices; zero keeps them visible."
               },
               {
-                "name": "loadingTimeout",
-                "type": "number",
-                "default": "30000",
-                "description": "1—2147483647 的整数毫秒。等待/进行中到期仅转为持续 unknown，不推断后台结果；悬停不延长结果期限。",
-                "descriptionEn": "Integer milliseconds from 1 to 2147483647. Waiting/in-progress expiry becomes persistent unknown without inferring background outcomes. Hover never extends the outcome deadline."
-              },
-              {
                 "name": "limit",
                 "type": "number",
                 "default": "3",
@@ -23955,8 +24470,8 @@
                 "name": "priority",
                 "type": "\"low\" | \"high\"",
                 "default": "\"low\"",
-                "description": "low 使用礼貌 status；high 使用原语 alert。失败不自动打断播报。",
-                "descriptionEn": "low uses polite status; high uses primitive alert. Failure never automatically interrupts announcements."
+                "description": "low 使用礼貌 status；high 使用原语 alert。失败不自动打断播报。high 时原语在通知区域之外另放一份视觉隐藏的 alert 副本供读屏立即播报，标题与说明因此在 DOM 里各有两份。",
+                "descriptionEn": "low uses polite status; high uses primitive alert. Failure never automatically interrupts announcements. For high the primitive adds a visually hidden alert copy outside the notification region for immediate announcement, so the title and description each exist twice in the DOM."
               },
               {
                 "name": "actionProps",
@@ -23980,8 +24495,8 @@
           },
           {
             "name": "toastManager.promise(promise, { loading, success, error })",
-            "description": "进行中→真实成功/失败；超期先转未知，迟到结果继续更新同一条。响应丢失须由应用保留未知，不能将网络拒绝当业务失败。",
-            "descriptionEn": "In-progress becomes actual success/failure; expiry first becomes unknown, and late outcomes update the same notice. Applications retain unknown when a response is lost; network rejection is not a business failure."
+            "description": "进行中→真实成功/失败，更新同一条。通知不设期限、不推断结果：等多久都保持进行中，直到 Promise 落定或应用更新。响应丢失时由应用把这一条改为 unknown，不能将网络拒绝当业务失败。",
+            "descriptionEn": "In-progress becomes actual success/failure on the same notice. The notice sets no deadline and infers no outcome: it stays in progress however long it takes, until the promise settles or the application updates it. When a response is lost the application changes the notice to unknown; network rejection is not a business failure."
           },
           {
             "name": "toastManager.close(id?)",
@@ -24017,12 +24532,16 @@
           }
         ],
         "notes": [
-          "悬停、聚焦与窗口失焦暂停自动消失；结果未知期限继续计时。",
+          "悬停、聚焦与窗口失焦暂停自动消失。",
+          "通知只呈现应用给出的类型，不做推测：没有超时转未知，等待、进行中、未知与失败一直留到应用更新或用户关闭。loadingTimeout 已移除；需要期限时由应用计时并调用 toastManager.update(id, { type: \"unknown\" })。",
+          "测试里按文字查找通知时限定在通知区域内（role=region）或用 data-slot=toast-title：priority=high 的通知另有一份视觉隐藏的播报副本，焦点进入通知区域后副本移除。",
           "普通成功默认短暂；失败/未知持续但仍可关闭。重要事实和恢复入口必须留在对象页面。",
           "Viewport 与锚定通知消费共享 notification 层级，低于文档候选与 modal 关键动作。"
         ],
         "notesEn": [
-          "Hover, focus, and window blur pause automatic disappearance; the unknown-outcome deadline keeps running.",
+          "Hover, focus, and window blur pause automatic disappearance.",
+          "A notice only presents the type the application gives it and infers nothing: no timeout turns it into unknown, and waiting, in-progress, unknown and failed notices stay until the application updates them or the user closes them. loadingTimeout is removed; when a deadline is needed the application times it and calls toastManager.update(id, { type: \"unknown\" }).",
+          "In tests, scope text queries to the notification region (role=region) or use data-slot=toast-title: a priority=high notice also has a visually hidden announcement copy, removed once focus enters the region.",
           "Ordinary success is brief by default; failure/unknown stay but can close. Important facts and recovery entries remain on the object's page.",
           "Viewport and anchored notices consume shared notification layers, below document candidates and critical modal actions."
         ],
@@ -24045,10 +24564,10 @@
           ],
           "stateOwner": {
             "library": [
-              "可访问原语、呈现、关闭、暂停、等待期限与长期状态。"
+              "可访问原语、呈现、关闭、暂停与长期状态的持续显示。"
             ],
             "application": [
-              "对象、真实结果、优先级、业务取消、核对和重试。"
+              "对象、真实结果、等待期限与何时算未知、优先级、业务取消、核对和重试。"
             ]
           },
           "responsive": [
@@ -24070,10 +24589,10 @@
           ],
           "stateOwner": {
             "library": [
-              "Accessible primitives, presentation, closing, pauses, waiting deadlines, and persistent states."
+              "Accessible primitives, presentation, closing, pauses, and keeping persistent states on screen."
             ],
             "application": [
-              "Objects, actual outcomes, priority, business cancellation, verification, and retry."
+              "Objects, actual outcomes, any waiting deadline and when a result counts as unknown, priority, business cancellation, verification, and retry."
             ]
           },
           "responsive": [
@@ -24089,11 +24608,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 182
+              "line": 151
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 182
+              "line": 151
             },
             "status": "PRESENT"
           },
@@ -24102,11 +24621,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 29
+              "line": 26
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 29
+              "line": 26
             },
             "status": "PRESENT"
           },
@@ -24115,11 +24634,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 191
+              "line": 159
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 191
+              "line": 159
             },
             "status": "PRESENT"
           },
@@ -24128,11 +24647,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 30
+              "line": 27
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 30
+              "line": 27
             },
             "status": "PRESENT"
           },
@@ -24141,11 +24660,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 200
+              "line": 167
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 200
+              "line": 167
             },
             "status": "PRESENT"
           }
@@ -25364,7 +25883,7 @@
           "target": "Tooltip",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 158
+            "line": 166
           }
         },
         {
@@ -25373,7 +25892,7 @@
           "target": "TooltipPopup",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 161
+            "line": 169
           }
         },
         {
@@ -25382,7 +25901,7 @@
           "target": "TooltipCreateHandle",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 163
+            "line": 171
           }
         },
         {
@@ -25391,7 +25910,7 @@
           "target": "TooltipPopup",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 160
+            "line": 168
           }
         },
         {
@@ -25400,7 +25919,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.7.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 164
+            "line": 172
           }
         },
         {
@@ -25409,7 +25928,7 @@
           "target": "TooltipProvider",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 162
+            "line": 170
           }
         },
         {
@@ -25418,7 +25937,15 @@
           "target": "TooltipTrigger",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
-            "line": 159
+            "line": 167
+          }
+        },
+        {
+          "name": "TooltipTriggerProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tooltip.tsx",
+            "line": 46
           }
         }
       ],
@@ -25530,6 +26057,12 @@
             "descriptionEn": "Supports render, refs, events, ARIA and state-based classes.",
             "props": [
               {
+                "name": "render",
+                "type": "ReactElement | (props, state) => ReactElement",
+                "description": "必填：被提示的那个控件本身（Button、链接、菜单触发器）。提示只附在它上面，children 成为它的内容。",
+                "descriptionEn": "Required: the control being hinted (a Button, link, or menu trigger). The hint attaches to it and children become its content."
+              },
+              {
                 "name": "delay / closeDelay",
                 "type": "number",
                 "description": "覆盖当前触发者的指针延迟。",
@@ -25598,12 +26131,14 @@
         "notes": [
           "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
           "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
-          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。"
+          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+          "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。"
         ],
         "notesEn": [
           "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
           "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
-          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible."
+          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+          "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span."
         ],
         "design": {
           "methods": [
@@ -25666,11 +26201,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 158
+              "line": 166
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 158
+              "line": 166
             },
             "status": "PRESENT"
           },
@@ -25679,11 +26214,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 159
+              "line": 167
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 159
+              "line": 167
             },
             "status": "PRESENT"
           },
@@ -25692,11 +26227,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 160
+              "line": 168
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 160
+              "line": 168
             },
             "status": "PRESENT"
           },
@@ -25705,11 +26240,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 161
+              "line": 169
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 161
+              "line": 169
             },
             "status": "PRESENT"
           },
@@ -25718,11 +26253,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 162
+              "line": 170
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 162
+              "line": 170
             },
             "status": "PRESENT"
           },
@@ -25731,11 +26266,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 163
+              "line": 171
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 163
+              "line": 171
             },
             "status": "PRESENT"
           },
@@ -25744,11 +26279,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 164
+              "line": 172
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tooltip.tsx",
-              "line": 164
+              "line": 172
             },
             "status": "PRESENT"
           }
@@ -29920,6 +30455,24 @@
       ]
     },
     {
+      "name": "--qy-sidebar-current",
+      "definitions": [
+        {
+          "name": "--qy-sidebar-current",
+          "value": "var(--qy-surface)",
+          "references": [
+            "--qy-surface"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/semantic.css",
+            "line": 177
+          },
+          "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
+          "complete": true
+        }
+      ]
+    },
+    {
       "name": "--qy-sidebar-foreground",
       "definitions": [
         {
@@ -29948,7 +30501,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 174
+            "line": 178
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33363,7 +33916,7 @@
   "controlReferences": [
     {
       "name": "--qy-control-content-gap",
-      "componentSourceOccurrences": 16,
+      "componentSourceOccurrences": 15,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -33411,7 +33964,7 @@
     },
     {
       "name": "--qy-control-md-icon",
-      "componentSourceOccurrences": 7,
+      "componentSourceOccurrences": 8,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -33471,7 +34024,7 @@
     },
     {
       "name": "--qy-control-sm-padding",
-      "componentSourceOccurrences": 9,
+      "componentSourceOccurrences": 10,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -33519,7 +34072,7 @@
     },
     {
       "name": "--qy-control-xs",
-      "componentSourceOccurrences": 5,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },

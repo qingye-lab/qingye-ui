@@ -56,8 +56,8 @@ export function DatePicker({ value, onValueChange, name, form, disabled = false,
         <Input {...inputRest} type="date" name={name} form={form} disabled={disabled} readOnly={readOnly} ref={setInputRef} value={text} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)}
           className={withHiddenIndicator(inputRest.className)}
           onChange={event => { onChange?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented && editable) onValueChange(parseLocalDate(event.currentTarget.value), event); }} />
-        {value && editable && <Button variant="quiet" shape="icon" className={cn(inputAdjunctClassName, "aspect-square")} aria-label={messages.clearDate} onClick={event => onValueChange(undefined, event)}><IconX aria-hidden="true" /></Button>}
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={cn(inputAdjunctClassName, "aspect-square")} aria-label={messages.selectDate} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDate} onClick={event => onValueChange(undefined, event)}><IconX aria-hidden="true" /></Button>}
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDate} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><Calendar {...(value ? { defaultMonth: value } : {})} {...calendarProps} mode="single" selected={value} disabled={editable ? calendarProps.disabled : true} autoFocus
         onSelect={(next, _day, _modifiers, event) => { if (!editable) return; onValueChange(next, event); setOpen(false); }} /></PopoverPopup>

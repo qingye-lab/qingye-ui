@@ -38,12 +38,13 @@ test("a single series takes the first series color (data is color, text is ink) 
   expect(screen.getByRole("list")).toHaveTextContent("成功失败");
 });
 
-test("explicit empty, unknown and not-applicable states render caller facts without a fabricated table or plot", () => {
-  const { rerender } = render(<Chart label="数值图" state="empty">没有记录</Chart>);
-  expect(screen.getByText("没有记录")).toBeVisible(); expect(screen.queryByRole("table")).toBeNull();
-  rerender(<Chart label="数值图" state="unknown">结果尚未核实</Chart>); expect(screen.getByText("结果尚未核实")).toBeVisible();
-  rerender(<Chart label="数值图" state="not-applicable">不适用</Chart>); expect(screen.getByText("不适用")).toBeVisible();
+test("a chart only draws data: nothing to plot is rejected, and rows without any number draw no plot but keep the table", () => {
+  // 用户裁决 2026-10-10：功能要纯粹。没有记录、未知或不适用由调用方在原位放 Empty，图不兼任。
+  expect(() => render(<Chart type="line" label="数值图" categoryLabel="项" valueLabel="数值" series={series} rows={[]} />)).toThrow(/render Empty in its place/);
+  // @ts-expect-error 整图的非数据状态不是图的属性。
+  void (<Chart label="数值图" state="empty">没有记录</Chart>);
   const plot = vi.fn(() => <div>图</div>);
+  const { rerender } = render(<div />);
   rerender(<Chart type="line" label="数值图" categoryLabel="项" valueLabel="数值" series={series} rows={rows.slice(1)} renderPlot={plot} />);
   expect(plot).not.toHaveBeenCalled(); openTable(); expect(screen.getByRole("table", { name: "数值图" })).toBeVisible();
 });
@@ -84,7 +85,7 @@ test("donut requires exactly one row, two to five known non-negative parts, and 
   expect(() => render(<Chart type="donut" label="环形图" categoryLabel="项" valueLabel="次数" series={parts} rows={rows} />)).toThrow(/exactly one row/);
   // 少于两个部分没有「一眼占比」的意义；超过五个超出色觉校验顺序，应改用 Proportion 或条形图。
   expect(() => render(<Chart type="donut" label="环形图" categoryLabel="项" valueLabel="次数" series={[parts[0]!]} rows={oneRow} />)).toThrow(/two to five parts/);
-  // 未知/负值没有扇形几何，donut 要求整体层面的 state，而不是逐部分的未知。
+  // 未知/负值没有扇形几何：整体不可得时由调用方改放 Empty，而不是逐部分的未知。
   expect(() => render(<Chart type="donut" label="环形图" categoryLabel="项" valueLabel="次数" series={parts} rows={[{ id: "r", label: "本周", values: { a: 3, b: { state: "unknown", label: "尚未统计" } } }]} />)).toThrow(/non-negative number/);
   const plot = vi.fn((projection: ChartPlotData) => <div>{projection.total}</div>);
   render(<Chart type="donut" label="环形图" categoryLabel="项" valueLabel="次数" series={parts} rows={oneRow} total={10} renderPlot={plot} />);

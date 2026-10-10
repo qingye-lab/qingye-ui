@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312
+Source SHA-256: b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f
 
 悬停或聚焦时阅读快捷键、格式与短解释。
 
@@ -14,6 +14,7 @@ Source SHA-256: b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312
 - 纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。
 - 提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。
 - 直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。
+- 触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。
 
 ## Use and ownership
 - 在已可辨认的对象或动作旁补充快捷键、格式或简短上下文。
@@ -37,12 +38,13 @@ Source SHA-256: b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312
 - TooltipPopup: function; owner tooltip; PASS; props: TooltipPopupProps
 - TooltipPrimitive: reexport; owner tooltip; UNVERIFIED
 - TooltipProvider: const; owner tooltip; UNVERIFIED
-- TooltipTrigger: function; owner tooltip; PASS; props: TooltipPrimitive.Trigger.Props
+- TooltipTrigger: function; owner tooltip; PASS; props: TooltipTriggerProps
+- TooltipTriggerProps: type; owner tooltip; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -64,6 +66,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### TooltipTrigger
 支持 render、ref、事件、ARIA 和按状态求值的 className。
+- render: ReactElement | (props, state) => ReactElement. 必填：被提示的那个控件本身（Button、链接、菜单触发器）。提示只附在它上面，children 成为它的内容。
 - delay / closeDelay: number. 覆盖当前触发者的指针延迟。
 - disabled: boolean; default false. 仅停用提示。原生禁用动作通过 render 的控件声明。
 

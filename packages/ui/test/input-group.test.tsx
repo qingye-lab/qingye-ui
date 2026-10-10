@@ -4,7 +4,7 @@ import { createRef } from "react";
 import { expect, test, vi } from "vitest";
 import { Button } from "../src/components/button";
 import { Field, FieldControl, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "../src/components/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../src/components/input-group";
 
 test("long static addons retain the real input name, description and form value without becoming submitted fields", async () => {
   const attachment = "VeryLongContinuousAttachmentNameWithoutBreaks";
@@ -33,11 +33,10 @@ test("static addons do not enter the tab order or redirect focus, explicit actio
 });
 
 test("Field disabled and readonly values remain real native states", async () => {
-  const { container } = render(<form><Field disabled name="disabled"><FieldLabel>禁用</FieldLabel><InputGroup><InputGroupInput defaultValue="omit" clearable /><InputGroupAddon>px</InputGroupAddon></InputGroup></Field><Field name="readonly"><FieldLabel>只读值</FieldLabel><InputGroup><InputGroupInput readOnly defaultValue="keep" /></InputGroup></Field></form>);
+  const { container } = render(<form><Field disabled name="disabled"><FieldLabel>禁用</FieldLabel><InputGroup><InputGroupInput defaultValue="omit" /><InputGroupAddon>px</InputGroupAddon></InputGroup></Field><Field name="readonly"><FieldLabel>只读值</FieldLabel><InputGroup><InputGroupInput readOnly defaultValue="keep" /></InputGroup></Field></form>);
   expect(screen.getByRole("textbox", { name: "禁用" })).toBeDisabled();
   await userEvent.type(screen.getByRole("textbox", { name: "只读值" }), "edit");
   expect(screen.getByRole("textbox", { name: "只读值" })).toHaveValue("keep");
-  expect(screen.queryByRole("button", { name: "清空输入" })).toBeNull();
   const data = new FormData(container.querySelector("form")!);
   expect(data.has("disabled")).toBe(false);
   expect(data.get("readonly")).toBe("keep");
@@ -68,4 +67,24 @@ test("root and addon render, refs, native props and caller classes compose indep
   expect(addon.current).toHaveClass("px-0");
   await userEvent.type(input.current!, "1");
   expect(changed).toHaveBeenCalledOnce();
+});
+
+test("InputGroupButton is a named action inside the boundary: frameless, inner-height square for icons, label padding kept for text", async () => {
+  const user = userEvent.setup();
+  const clear = vi.fn();
+  render(<InputGroup><InputGroupInput aria-label="标题" defaultValue="季度复盘" /><InputGroupButton shape="icon" aria-label="清空标题" onClick={clear}><svg aria-hidden="true" /></InputGroupButton><InputGroupButton>应用</InputGroupButton></InputGroup>);
+  const icon = screen.getByRole("button", { name: "清空标题" });
+  const label = screen.getByRole("button", { name: "应用" });
+  for (const button of [icon, label]) {
+    expect(button).toHaveAttribute("data-slot", "input-group-button");
+    expect(button).toHaveAttribute("data-variant", "quiet");
+    expect(button).toHaveClass("self-stretch", "min-h-0");
+  }
+  // 图标形的宽取边界内高（外高 − 2px 边框），不取按钮自己的外高，否则把边界撑高 2px。
+  expect(icon).toHaveClass("w-[calc(var(--qy-fill-height-narrow)-2px)]", "sm:w-[calc(var(--qy-fill-height)-2px)]");
+  expect(icon.className).not.toMatch(/(^|\s)(sm:)?w-\(--qy-control-md/);
+  expect(label.className).not.toContain("w-[calc(");
+  await user.click(icon);
+  expect(clear).toHaveBeenCalledOnce();
+  expect(icon).toHaveFocus();
 });

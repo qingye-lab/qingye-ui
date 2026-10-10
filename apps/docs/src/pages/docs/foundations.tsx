@@ -73,8 +73,8 @@ const JUDGMENTS: Judgment[] = [
     title: ["真实状态", "Truthful states"],
     origin: ["《论语·子路》「名不正，则言不顺」", "Analects: “If names are not correct, language will not accord”"],
     text: [
-      "草稿与已应用、进行中与已确认、未知与空分别表达。动作与结果分属两个元素：按钮宽度不随状态变，结果写在按钮旁；结果未知时先核实，不当作失败。失败后保留恢复所需的已有工作。",
-      "Express a draft and an applied condition, work in progress and a confirmed result, unknown and empty as different facts. Action and result are separate elements: the button keeps its width and the result is written beside it; an unknown result is checked before it is treated as failure. After a failure, keep the work needed to recover.",
+      "草稿与已应用、进行中与已确认、未知与空分别表达。动作与结果分属两个元素：按钮只表示忙碌，结果由旁边的状态或提示表达；结果未知时先核实，不当作失败。失败后保留恢复所需的已有工作。",
+      "Express a draft and an applied condition, work in progress and a confirmed result, unknown and empty as different facts. Action and result are separate elements: the button only shows that it is busy, and a status or notice beside it states the result; an unknown result is checked before it is treated as failure. After a failure, keep the work needed to recover.",
     ],
     specimen: StateSpecimen,
     links: [component("filter-bar", "FilterBar"), component("button", "Button")],

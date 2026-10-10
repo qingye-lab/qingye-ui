@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { useUILocale } from "../locale";
-import { AlertDialog, AlertDialogClose, AlertDialogFooter, AlertDialogHeader, AlertDialogPanel, AlertDialogPopup, AlertDialogPrimitive, AlertDialogTitle, AlertDialogTrigger, type AlertDialogProps, type AlertDialogPopupProps } from "./alert-dialog";
-import { Button, ButtonProtection, type ButtonProps, type ButtonState } from "./button";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPanel, AlertDialogPopup, AlertDialogPrimitive, AlertDialogTitle, AlertDialogTrigger, type AlertDialogProps, type AlertDialogPopupProps } from "./alert-dialog";
+import { Button, type ButtonProps } from "./button";
 import { Field, FieldDescription, FieldLabel } from "./field";
 import { Input, type InputProps } from "./input";
 
@@ -14,13 +14,14 @@ export type ConfirmActionProps = Omit<AlertDialogProps, "children"> & {
   triggerLabel: React.ReactNode;
   actionLabel: React.ReactNode;
   onConfirm: (snapshot: ConfirmActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void;
-  state?: ButtonState;
+  /** 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求。结果由应用用提示组件表达。 */
+  loading?: boolean;
   disabled?: boolean;
   tone?: ButtonProps["tone"];
   confirmationText?: string;
   confirmationLabel?: React.ReactNode;
-  triggerProps?: Omit<ButtonProps, "children" | "state" | "disabled">;
-  confirmProps?: Omit<ButtonProps, "children" | "state" | "disabled" | "tone">;
+  triggerProps?: Omit<ButtonProps, "children" | "loading" | "disabled">;
+  confirmProps?: Omit<ButtonProps, "children" | "loading" | "disabled" | "tone">;
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "type" | "name" | "form" | "disabled" | "readOnly" | "size" | "onValueChange">;
   popupProps?: AlertDialogPopupProps;
   children?: React.ReactNode;
@@ -33,9 +34,8 @@ function snapshotKey(snapshot: ConfirmActionSnapshot, confirmationText: string |
 function capture(snapshot: ConfirmActionSnapshot) { return Object.freeze({ ...snapshot }); }
 
 /** Confirmation binds to a reviewed snapshot; requesting an action never announces its result. */
-export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onConfirm, state = "idle", disabled = false, tone = "danger", confirmationText, confirmationLabel, triggerProps = {}, confirmProps = {}, inputProps = {}, popupProps, children, open: openProp, defaultOpen = false, onOpenChange, ...props }: ConfirmActionProps) {
+export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onConfirm, loading = false, disabled = false, tone = "danger", confirmationText, confirmationLabel, triggerProps = {}, confirmProps = {}, inputProps = {}, popupProps, children, open: openProp, defaultOpen = false, onOpenChange, ...props }: ConfirmActionProps) {
   const { messages } = useUILocale();
-  const consequenceId = React.useId();
   const currentKey = snapshotKey(snapshot, confirmationText);
   const hasConfirmationLabel = React.Children.toArray(confirmationLabel).some(child => typeof child !== "string" || child.trim() !== "");
   if (confirmationText !== undefined && (!confirmationText || !hasConfirmationLabel)) throw new TypeError("ConfirmAction confirmationText requires non-empty text and a visible confirmationLabel.");
@@ -47,7 +47,6 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
   const wasOpen = React.useRef(false);
   const changed = reviewed.key !== currentKey;
   const invalidated = stale || changed;
-  const busy = state === "waiting" || state === "in-progress" || state === "unknown";
   const reread = () => { setReviewed({ snapshot: capture(snapshot), key: currentKey }); setStale(false); setAcknowledgment(""); };
   React.useLayoutEffect(() => {
     if (open && !wasOpen.current) { setReviewed({ snapshot: capture(snapshot), key: currentKey }); setStale(false); setAcknowledgment(""); }
@@ -63,11 +62,10 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
     if (openProp === undefined) setLocalOpen(next);
   }}>
     {/* 触发只是开始一个有后果的流程：描边加同一色调；实心的危险色留给对话框里最后确认的那一下（君位：一个流程一个最重点）。 */}
-    {/* 后果在按下之前就可读到：触发按钮关联快照里的后果（只给读屏，界面上由调用方的说明承担）。 */}
-    <span id={consequenceId} className="sr-only">{snapshot.consequence}</span>
-    <AlertDialogTrigger render={<Button variant="bordered" tone={tone} {...triggerProps} aria-describedby={[triggerProps["aria-describedby"], consequenceId].filter(Boolean).join(" ")} state={state} disabled={disabled} />}>{triggerLabel}</AlertDialogTrigger>
+    <AlertDialogTrigger render={<Button variant="bordered" tone={tone} {...triggerProps} loading={loading} disabled={disabled} />}>{triggerLabel}</AlertDialogTrigger>
     <AlertDialogPopup {...popupProps}>
-      <AlertDialogHeader><AlertDialogTitle>{title}</AlertDialogTitle></AlertDialogHeader>
+      {/* 后果是这次确认的说明：写在对话框里、最后那一下之前，读屏随对话框一起读到。按钮只触发，不承载后果。 */}
+      <AlertDialogHeader><AlertDialogTitle>{title}</AlertDialogTitle><AlertDialogDescription>{reviewed.snapshot.consequence}</AlertDialogDescription></AlertDialogHeader>
       <AlertDialogPanel><div data-slot="confirm-action-snapshot" className="grid min-w-0 gap-(--qy-field-gap)">
         <p className="text-label wrap-anywhere">{reviewed.snapshot.objectLabel}</p>
         <p className="text-support text-muted-foreground wrap-anywhere">{messages.bulkVersion}: {reviewed.snapshot.version}</p>
@@ -75,16 +73,16 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
       </div>
         {invalidated && <div data-slot="confirm-action-changed" className="grid gap-(--qy-field-gap)"><p role="status" className="text-support text-warning-foreground">{messages.confirmContentChanged}</p><Button variant="bordered" onClick={reread}>{messages.confirmReviewLatest}</Button></div>}
         {children}
-        {confirmationText !== undefined && <Field><FieldLabel>{confirmationLabel}</FieldLabel><Input {...inputRest} type="text" value={acknowledgment} disabled={disabled || busy || invalidated} onChange={event => { onInputChange?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) setAcknowledgment(event.currentTarget.value); }} /><FieldDescription>{confirmationText}</FieldDescription></Field>}
+        {confirmationText !== undefined && <Field><FieldLabel>{confirmationLabel}</FieldLabel><Input {...inputRest} type="text" value={acknowledgment} disabled={disabled || loading || invalidated} onChange={event => { onInputChange?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) setAcknowledgment(event.currentTarget.value); }} /><FieldDescription>{confirmationText}</FieldDescription></Field>}
       </AlertDialogPanel>
-      <AlertDialogFooter><ButtonProtection consequence={reviewed.snapshot.consequence}>
-        <Button {...confirmRest} tone={tone} state={state} disabled={disabled || invalidated || (confirmationText !== undefined && acknowledgment !== confirmationText)} onClick={event => {
+      <AlertDialogFooter>
+        <Button {...confirmRest} tone={tone} loading={loading} disabled={disabled || invalidated || (confirmationText !== undefined && acknowledgment !== confirmationText)} onClick={event => {
           onConfirmClick?.(event);
-          if (event.defaultPrevented || event.baseUIHandlerPrevented || disabled || busy || stale || reviewed.key !== snapshotKey(snapshot, confirmationText) || (confirmationText !== undefined && acknowledgment !== confirmationText)) return;
+          if (event.defaultPrevented || event.baseUIHandlerPrevented || disabled || loading || stale || reviewed.key !== snapshotKey(snapshot, confirmationText) || (confirmationText !== undefined && acknowledgment !== confirmationText)) return;
           onConfirm(reviewed.snapshot, event);
         }}>{actionLabel}</Button>
         <AlertDialogClose render={<Button variant="quiet" />}>{messages.back}</AlertDialogClose>
-      </ButtonProtection></AlertDialogFooter>
+      </AlertDialogFooter>
     </AlertDialogPopup>
   </AlertDialog>;
 }

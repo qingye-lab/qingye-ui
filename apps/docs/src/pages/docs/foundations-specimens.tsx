@@ -218,8 +218,8 @@ export function StateSpecimen({ en }: Locale) {
   return (
     <div className="spec">
       <Inline gap="section">
-        <Button state="in-progress" variant="bordered">{t(en, "同步", "Sync")}</Button>
-        <Button state="unknown" variant="bordered">{t(en, "同步", "Sync")}</Button>
+        <Button loading variant="bordered">{t(en, "同步", "Sync")}</Button>
+        <Inline><Button variant="bordered">{t(en, "同步", "Sync")}</Button><StatusDot status="unknown" /></Inline>
       </Inline>
     </div>
   );

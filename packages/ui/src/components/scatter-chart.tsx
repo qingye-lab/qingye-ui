@@ -5,7 +5,6 @@ import { useRender } from "@base-ui/react/use-render";
 import { CartesianGrid, Scatter, ScatterChart as RechartsScatterChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import * as React from "react";
 import { AxisTick, ChartHeader, chartFrameClassName, legendClassName, useChartData, MARK, MARKERS, Marker, PLOT_PRESETS, type ChartMarker, type ChartStyle } from "./chart";
-import { Empty } from "./empty";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -13,8 +12,7 @@ import { cn } from "../utils";
 export type ScatterPoint = { id: string; label: string; x: number; y: number };
 export type ScatterSeriesInput = { key: string; label: string; points: readonly ScatterPoint[] };
 type ScatterBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & { label: string; style?: ChartStyle };
-export type ScatterChartProps = ScatterBaseProps & ({
-  state?: "ready";
+export type ScatterChartProps = ScatterBaseProps & {
   /** 横轴量的是什么，例如「记录数」。 */
   xLabel: string;
   /** 纵轴量的是什么，例如「失败率」。 */
@@ -23,7 +21,7 @@ export type ScatterChartProps = ScatterBaseProps & ({
   series: readonly ScatterSeriesInput[];
   formatX?: (value: number) => React.ReactNode;
   formatY?: (value: number) => React.ReactNode;
-} | { state: "empty" | "unknown" | "not-applicable"; children: React.ReactNode });
+};
 
 type ProjectedPoint = ScatterPoint & { color: string; marker: ChartMarker; seriesLabel: string };
 
@@ -82,55 +80,52 @@ function niceScale(values: readonly number[], count = 5) {
   return { min: ticks[0]!, max: ticks[ticks.length - 1]!, ticks };
 }
 
-export function ScatterChart({ label, state = "ready", render, ref, className, style, ...props }: ScatterChartProps) {
+/** 图只画数据（用户裁决 2026-10-10：功能要纯粹）。没有点可画时不渲染图，由调用方在原位放 Empty。 */
+export function ScatterChart({ label, render, ref, className, style, xLabel, yLabel, series, formatX, formatY, ...native }: ScatterChartProps) {
   if (!label.trim()) throw new Error("ScatterChart requires a nonempty accessible label.");
   const titleId = React.useId(); const dataView = useChartData();
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   let content: React.ReactNode; let legend: React.ReactNode = null;
-  const { xLabel, yLabel, series, formatX, formatY, children, ...native } = props as Omit<ScatterBaseProps, "label"> & Partial<Extract<ScatterChartProps, { state?: "ready" }>> & { children?: React.ReactNode };
-  if (state !== "ready") content = <Empty state={state}>{children}</Empty>;
-  else {
-    if (!xLabel?.trim() || !yLabel?.trim() || !series?.length) throw new Error("ScatterChart ready state requires named axes and at least one series; use an explicit non-data state otherwise.");
-    if (series.length > 3) throw new RangeError("ScatterChart compares every point against every other (an all-pairs form); it accepts at most three series. Fold the rest into \"Other\" or facet into separate charts.");
-    if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim())) throw new Error("ScatterChart series require unique stable keys and nonempty names.");
-    const allPoints = series.flatMap(item => item.points);
-    if (!allPoints.length) throw new Error("ScatterChart ready state requires at least one real point; use state=\"empty\" otherwise.");
-    const ids = series.flatMap(item => item.points.map(point => `${item.key}:${point.id}`));
-    if (new Set(ids).size !== ids.length || allPoints.some(point => !point.id.trim() || !point.label.trim())) throw new Error("ScatterChart points require unique stable ids (per series) and nonempty names.");
-    if (allPoints.some(point => !Number.isFinite(point.x) || !Number.isFinite(point.y))) throw new TypeError("ScatterChart point x/y must be finite numbers.");
-    const single = series.length === 1;
-    const projected = series.map((item, index) => ({ ...item, color: `var(--qy-chart-${index + 1})`, marker: MARKERS[index]! }));
-    const showX = formatX ?? ((value: number) => number.format(value));
-    const showY = formatY ?? ((value: number) => number.format(value));
-    const xs = allPoints.map(point => point.x), ys = allPoints.map(point => point.y);
-    const x = niceScale(xs), y = niceScale(ys);
-    const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + 8;
-    legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
-    content = <>
-      <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
-      <div data-slot="chart-plot" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
-        <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: MARK, right: MARK, bottom: 0, left: 0 }}>
-          <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={1} />
-          <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: 1 }} />
-          <YAxis type="number" dataKey="y" name={yLabel} domain={[y.min, y.max]} ticks={y.ticks} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => typeof value === "number" ? String(showY(value)) : value} />} tickLine={false} axisLine={false} width={yWidth} />
-          <Tooltip isAnimationActive={false} cursor={false} content={(tooltipProps) => <ScatterReadout {...tooltipProps as { active?: boolean; payload?: readonly ScatterTooltipPayload[] }} xLabel={xLabel} yLabel={yLabel} formatX={showX} formatY={showY} />} />
-          {projected.map(item => <Scatter key={item.key} name={item.label} data={item.points.map(point => ({ ...point, color: item.color, marker: item.marker, seriesLabel: item.label }))} isAnimationActive={false} shape={(shapeProps: unknown) => <PointShape {...shapeProps as React.ComponentProps<typeof PointShape>} />} />)}
-        </RechartsScatterChart></ResponsiveContainer>
-      </div>
-      <div data-slot="chart-category-axis" className="min-w-0 text-end text-dense text-muted-foreground wrap-anywhere">{xLabel}</div>
-      {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead>{xLabel}</TableHead><TableHead>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
-            {projected.flatMap(item => item.points.map(point => <TableRow key={`${item.key}:${point.id}`}>
-              <TableHead scope="row">{single ? point.label : `${item.label} · ${point.label}`}</TableHead>
-              <TableCell className="numeric">{showX(point.x)}</TableCell>
-              <TableCell className="numeric">{showY(point.y)}</TableCell>
-            </TableRow>))}
-          </TableBody></Table></TableContainer></div>}
-    </>;
-  }
+  if (!xLabel?.trim() || !yLabel?.trim() || !series?.length) throw new Error("ScatterChart requires named axes and at least one series; when there is nothing to plot, render Empty in its place.");
+  if (series.length > 3) throw new RangeError("ScatterChart compares every point against every other (an all-pairs form); it accepts at most three series. Fold the rest into \"Other\" or facet into separate charts.");
+  if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim())) throw new Error("ScatterChart series require unique stable keys and nonempty names.");
+  const allPoints = series.flatMap(item => item.points);
+  if (!allPoints.length) throw new Error("ScatterChart requires at least one real point; when there is none, render Empty in its place.");
+  const ids = series.flatMap(item => item.points.map(point => `${item.key}:${point.id}`));
+  if (new Set(ids).size !== ids.length || allPoints.some(point => !point.id.trim() || !point.label.trim())) throw new Error("ScatterChart points require unique stable ids (per series) and nonempty names.");
+  if (allPoints.some(point => !Number.isFinite(point.x) || !Number.isFinite(point.y))) throw new TypeError("ScatterChart point x/y must be finite numbers.");
+  const single = series.length === 1;
+  const projected = series.map((item, index) => ({ ...item, color: `var(--qy-chart-${index + 1})`, marker: MARKERS[index]! }));
+  const showX = formatX ?? ((value: number) => number.format(value));
+  const showY = formatY ?? ((value: number) => number.format(value));
+  const xs = allPoints.map(point => point.x), ys = allPoints.map(point => point.y);
+  const x = niceScale(xs), y = niceScale(ys);
+  const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + 8;
+  legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
+  content = <>
+    <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
+    <div data-slot="chart-plot" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
+      <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: MARK, right: MARK, bottom: 0, left: 0 }}>
+        <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={1} />
+        <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: 1 }} />
+        <YAxis type="number" dataKey="y" name={yLabel} domain={[y.min, y.max]} ticks={y.ticks} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => typeof value === "number" ? String(showY(value)) : value} />} tickLine={false} axisLine={false} width={yWidth} />
+        <Tooltip isAnimationActive={false} cursor={false} content={(tooltipProps) => <ScatterReadout {...tooltipProps as { active?: boolean; payload?: readonly ScatterTooltipPayload[] }} xLabel={xLabel} yLabel={yLabel} formatX={showX} formatY={showY} />} />
+        {projected.map(item => <Scatter key={item.key} name={item.label} data={item.points.map(point => ({ ...point, color: item.color, marker: item.marker, seriesLabel: item.label }))} isAnimationActive={false} shape={(shapeProps: unknown) => <PointShape {...shapeProps as React.ComponentProps<typeof PointShape>} />} />)}
+      </RechartsScatterChart></ResponsiveContainer>
+    </div>
+    <div data-slot="chart-category-axis" className="min-w-0 text-end text-dense text-muted-foreground wrap-anywhere">{xLabel}</div>
+    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead>{xLabel}</TableHead><TableHead>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
+          {projected.flatMap(item => item.points.map(point => <TableRow key={`${item.key}:${point.id}`}>
+            <TableHead scope="row">{single ? point.label : `${item.label} · ${point.label}`}</TableHead>
+            <TableCell className="numeric">{showX(point.x)}</TableCell>
+            <TableCell className="numeric">{showY(point.y)}</TableCell>
+          </TableRow>))}
+        </TableBody></Table></TableContainer></div>}
+  </>;
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
-    "data-slot": "scatter-chart", "data-state": state, "aria-labelledby": titleId,
+    "data-slot": "scatter-chart", "aria-labelledby": titleId,
     className: cn(chartFrameClassName, className),
-    style: { ...PLOT_PRESETS, ...style }, children: <><ChartHeader titleId={titleId} label={label} legend={legend} toggle={state === "ready" ? dataView.toggle : undefined} />{content}</>,
+    style: { ...PLOT_PRESETS, ...style }, children: <><ChartHeader titleId={titleId} label={label} legend={legend} toggle={dataView.toggle} />{content}</>,
   }) });
 }

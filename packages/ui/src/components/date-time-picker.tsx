@@ -58,7 +58,7 @@ export function DateTimePicker({ value, onValueChange, name, form, disabled = fa
       {/* 基础层 §6：日期时间与日历入口共用一条编辑边界；格式长度固定，宽度随内容。 */}
       <InputGroup ref={boundaryRef} data-slot="date-time-picker-control" className="w-fit max-w-full flex-nowrap">
         <Input {...inputRest} ref={setInputRef} type="datetime-local" name={name} form={form} disabled={disabled} readOnly={readOnly} value={value ?? ""} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={withHiddenIndicator(inputRest.className)} onChange={event => { onChange?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented && editable) onValueChange(event.currentTarget.value || undefined, event); }} />
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={cn(inputAdjunctClassName, "aspect-square")} aria-label={messages.selectDateTime} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateTime} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)"><Calendar {...(dateDraft ? { defaultMonth: dateDraft } : {})} {...calendarProps} mode="single" selected={dateDraft} disabled={editable ? calendarProps.disabled : true} autoFocus onSelect={setDateDraft} />
         <div className="grid gap-(--qy-field-gap)"><Label htmlFor={timeId}>{messages.time}</Label><Input nativeInput id={timeId} type="time" value={timeDraft} disabled={!editable} step={inputProps.step} onChange={event => setTimeDraft(event.currentTarget.value)} /></div>

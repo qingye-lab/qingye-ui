@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: b8710b9868d43639430cfd8da3e0d5c1d5d97dade974cde0747fad565faf5312
+Source SHA-256: b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f
 
 Read shortcuts, formats and brief context on hover or focus.
 
@@ -14,6 +14,7 @@ Controls supply their own text or aria-label. Hints supplement it. Keep conseque
 - Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.
 - Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.
 - Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.
+- The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.
 
 ## Use and ownership
 - Add shortcuts, format information, or brief context beside an identifiable object/action.
@@ -37,12 +38,13 @@ Controls supply their own text or aria-label. Hints supplement it. Keep conseque
 - TooltipPopup: function; owner tooltip; PASS; props: TooltipPopupProps
 - TooltipPrimitive: reexport; owner tooltip; UNVERIFIED
 - TooltipProvider: const; owner tooltip; UNVERIFIED
-- TooltipTrigger: function; owner tooltip; PASS; props: TooltipPrimitive.Trigger.Props
+- TooltipTrigger: function; owner tooltip; PASS; props: TooltipTriggerProps
+- TooltipTriggerProps: type; owner tooltip; PASS
 
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -64,6 +66,7 @@ Non-modal open state. Hints remain hoverable and contain no interactive controls
 
 ### TooltipTrigger
 Supports render, refs, events, ARIA and state-based classes.
+- render: ReactElement | (props, state) => ReactElement. Required: the control being hinted (a Button, link, or menu trigger). The hint attaches to it and children become its content.
 - delay / closeDelay: number. Override pointer delays for this trigger.
 - disabled: boolean; default false. Disable hints only. Set native action disabling on the rendered control.
 

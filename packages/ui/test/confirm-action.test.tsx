@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vitest";
@@ -71,13 +71,25 @@ test("confirmation is only a request; event cancellation and controlled open ref
   expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument();
 });
 
-test.each(["waiting", "in-progress", "unknown", "disabled"])("%s blocks a repeated confirmation without inferring a result", async state => {
+test.each(["loading", "disabled"])("%s blocks a repeated confirmation without inferring a result", async state => {
   const confirm = vi.fn();
-  render(<ConfirmAction snapshot={snapshot} title="核对变更" triggerLabel="核对 A" actionLabel="应用 B" onConfirm={confirm} defaultOpen state={state === "disabled" ? "idle" : state as "waiting" | "in-progress" | "unknown"} disabled={state === "disabled"} />);
+  render(<ConfirmAction snapshot={snapshot} title="核对变更" triggerLabel="核对 A" actionLabel="应用 B" onConfirm={confirm} defaultOpen loading={state === "loading"} disabled={state === "disabled"} />);
   const action = screen.getByRole("button", { name: "应用 B" });
   if (state === "disabled") expect(action).toBeDisabled();
   else expect(action).toHaveAttribute("aria-disabled", "true");
   fireEvent.click(action);
   expect(confirm).not.toHaveBeenCalled();
   expect(screen.getByRole("alertdialog")).toBeInTheDocument();
+});
+
+test("the consequence is the dialog's description; the entry is a plain button that only opens it", async () => {
+  const user = userEvent.setup();
+  render(<ConfirmAction snapshot={snapshot} title="替换" triggerLabel="替换" actionLabel="确认替换" onConfirm={() => {}} />);
+  const entry = screen.getByRole("button", { name: "替换" });
+  expect(entry).not.toHaveAttribute("aria-describedby");
+  expect(screen.queryByText(snapshot.consequence)).not.toBeInTheDocument();
+  await user.click(entry);
+  const dialog = await screen.findByRole("alertdialog");
+  await waitFor(() => expect(dialog).toHaveAccessibleDescription(snapshot.consequence));
+  expect(within(dialog).getByText(snapshot.consequence)).toHaveAttribute("data-slot", "alert-dialog-description");
 });

@@ -4,7 +4,8 @@ import { ButtonGroup } from "@qingye_lab/ui/components/button-group";
 import { Checkbox } from "@qingye_lab/ui/components/checkbox";
 import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
@@ -12,7 +13,7 @@ import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/c
 import { Prose } from "@qingye_lab/ui/components/prose";
 import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
 import { Text } from "@qingye_lab/ui/components/typography";
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown, IconX } from "@tabler/icons-react";
 import { GalleryPage, Row, Section } from "./gallery";
 
 /* 组合：评审 2026-10-05 第二包——「分开摆着都协调，不代表放在同一行里仍协调」。
@@ -27,7 +28,7 @@ export default function CompositionPage() {
   const [onlyMine, setOnlyMine] = React.useState(false);
   const [applied, setApplied] = React.useState({ query: "", scope: "all", onlyMine: false });
   const [quota, setQuota] = React.useState("1200");
-  const [saveState, setSaveState] = React.useState<"idle" | "in-progress">("idle");
+  const [saving, setSaving] = React.useState(false);
 
   const dirty = query !== applied.query || scope !== applied.scope || onlyMine !== applied.onlyMine;
   const hasApplied = Boolean(applied.query) || applied.scope !== "all" || applied.onlyMine;
@@ -60,7 +61,7 @@ export default function CompositionPage() {
     <Section title="保存与更多操作">
       <Row label="主动作 + 菜单">
         <ButtonGroup aria-label="集合动作">
-          <Button state={saveState} onClick={() => { setSaveState("in-progress"); window.setTimeout(() => setSaveState("idle"), 900); }}>保存</Button>
+          <Button loading={saving} onClick={() => { setSaving(true); window.setTimeout(() => setSaving(false), 900); }}>保存</Button>
           <Menu>
             <MenuTrigger render={<Button variant="bordered" />}>更多<IconChevronDown aria-hidden="true" /></MenuTrigger>
             <MenuPortal><MenuPositioner><MenuPopup>
@@ -80,7 +81,7 @@ export default function CompositionPage() {
           <Inline gap="panel" align="end" className="flex-wrap">
             <Field className="min-w-[14rem] flex-1">
               <FieldLabel>名称包含</FieldLabel>
-              <Input type="search" value={query} onChange={event => setQuery(event.target.value)} onClear={() => setQuery("")} />
+              <SearchInput value={query} onChange={event => setQuery(event.target.value)} />
             </Field>
             <Stack gap="field" align="start">
               <span className="text-label text-foreground" id="scope-label">状态</span>
@@ -106,8 +107,9 @@ export default function CompositionPage() {
         <Field invalid={quotaInvalid} className="w-72">
           <FieldLabel>每日同步上限</FieldLabel>
           <InputGroup>
-            <InputGroupInput inputMode="numeric" value={quota} onChange={event => setQuota(event.target.value)} clearable onClear={() => setQuota("")} aria-invalid={quotaInvalid} />
+            <InputGroupInput inputMode="numeric" value={quota} onChange={event => setQuota(event.target.value)} aria-invalid={quotaInvalid} />
             <InputGroupAddon>条 / 天</InputGroupAddon>
+            {quota !== "" && <InputGroupButton shape="icon" aria-label="清空上限" onClick={() => setQuota("")}><IconX aria-hidden="true" /></InputGroupButton>}
           </InputGroup>
           {quotaInvalid ? <FieldError>上限需要是 1–1000 之间的整数。</FieldError> : <FieldDescription>超过上限的记录留到第二天同步。</FieldDescription>}
         </Field>

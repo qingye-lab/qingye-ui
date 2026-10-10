@@ -137,3 +137,18 @@ test("safe default focus preserves forwarded callback-ref cleanup and the caller
   await user.keyboard("{Escape}");
   await waitFor(() => expect(cleanup).toHaveBeenCalled());
 });
+
+test("the consequence lives in the dialog: a danger entry and a danger confirmation need nothing attached to the buttons", async () => {
+  const user = userEvent.setup();
+  const confirm = vi.fn();
+  render(<AlertDialog>
+    <AlertDialogTrigger render={<Button variant="bordered" tone="danger" size="sm" />}>删除</AlertDialogTrigger>
+    <AlertDialogPopup><AlertDialogHeader><AlertDialogTitle>删除设备？</AlertDialogTitle><AlertDialogDescription>删除后，其历史记录无法恢复。</AlertDialogDescription></AlertDialogHeader>
+      <AlertDialogFooter><AlertDialogClose>返回</AlertDialogClose><Button tone="danger" onClick={confirm}>删除</Button></AlertDialogFooter></AlertDialogPopup>
+  </AlertDialog>);
+  await user.click(screen.getByRole("button", { name: "删除" }));
+  const dialog = await screen.findByRole("alertdialog");
+  await waitFor(() => expect(dialog).toHaveAccessibleDescription("删除后，其历史记录无法恢复。"));
+  await user.click(screen.getAllByRole("button", { name: "删除" }).find(button => dialog.contains(button))!);
+  expect(confirm).toHaveBeenCalledOnce();
+});

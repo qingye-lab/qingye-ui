@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 05cfaf5c05be976f470a2fd7c45559048c1d93155de72970eb68fe27d58dd467
+Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -12,6 +12,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 
 ## Notes
 - Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.
+- The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.
+- The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash.
 
 ## Use and ownership
 - Persistent navigation beside a workspace.
@@ -92,5 +94,36 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "可逆导航与二级", titleEn: "Reversible navigation with a sub-level" } satisfies DemoMeta;
 export default function Demo() {
   return <Sidebar className="w-full max-w-sm"><SidebarToggle /><SidebarContent aria-label="组件侧栏"><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink><SidebarSub defaultOpen><SidebarSubTrigger icon={<IconStack2 aria-hidden="true" />}>视角标签</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/components/tabs">标签页</SidebarLink><SidebarLink href="/components/segmented-control">分段控件</SidebarLink></SidebarSubContent></SidebarSub><SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
+}
+```
+
+### 当前位置
+Source: apps/docs/src/content/sidebar/demos/02-current.tsx
+```tsx
+import { IconLayoutSidebar, IconListTree, IconStack2 } from "@tabler/icons-react";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "当前位置", titleEn: "Current location" } satisfies DemoMeta;
+
+function Links({ current }: { current: "sidebar" | "tabs" }) {
+  return <SidebarGroup>
+    <SidebarLink href="/components/sidebar" active={current === "sidebar"} icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
+    <SidebarSub defaultOpen>
+      <SidebarSubTrigger icon={<IconStack2 aria-hidden="true" />}>视角标签</SidebarSubTrigger>
+      <SidebarSubContent>
+        <SidebarLink href="/components/tabs" active={current === "tabs"}>标签页</SidebarLink>
+        <SidebarLink href="/components/segmented-control">分段控件</SidebarLink>
+      </SidebarSubContent>
+    </SidebarSub>
+    <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
+  </SidebarGroup>;
+}
+
+export default function Demo() {
+  return <Inline gap="section" align="start" className="w-full">
+    <Sidebar className="w-full max-w-xs"><SidebarToggle /><SidebarContent aria-label="当前位置在二级"><Links current="tabs" /></SidebarContent></Sidebar>
+    <Sidebar defaultCollapsed><SidebarToggle /><SidebarContent aria-label="收起时的当前位置"><Links current="sidebar" /></SidebarContent></Sidebar>
+  </Inline>;
 }
 ```

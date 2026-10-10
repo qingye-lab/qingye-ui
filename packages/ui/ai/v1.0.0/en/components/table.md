@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: d6deb800c9b45381c226153c0ba491a2a63f34a53a04f233a97cc3a203310c7f
+Source SHA-256: f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -12,6 +12,7 @@ Native table structure preserves comparison; the container handles horizontal ca
 
 ## Notes
 - Empty results may use a spanning cell below complete headers; data and sorting belong to the application.
+- One region, one surface: inside a Card use framed={false} rather than nesting a second border.
 
 ## Use and ownership
 - Compare multiple objects along shared dimensions.
@@ -20,7 +21,7 @@ Native table structure preserves comparison; the container handles horizontal ca
 - Application: Data, table names, sorting, errors, unknown, and empty results.
 
 ## Composition
-- TableContainer: A horizontal scroll container.
+- TableContainer: The table's surface and horizontal scroll container.
 - Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow: Native table / caption / thead / tbody / tfoot / tr.
 - TableHead: A th with application-owned sort state.
 - TableCell: A td that preserves zero.
@@ -61,7 +62,8 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ## Curated API
 ### TableContainer
-A horizontal scroll container.
+The table's surface and horizontal scroll container.
+- framed: boolean; default true. false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners.
 - tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default tabIndex=0. Ref targets the container; keyboard scrolling remains available.
 
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
@@ -99,5 +101,27 @@ export default function Demo() {
   const sorted = [...rows].sort((a, b) => descending ? b.count - a.count : a.count - b.count);
   // 数字列右对齐；排序箭头放在列名前，列名仍落在列的右缘上。正在排序的列名是当前状态，用焦墨。
   return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead><TableHead className="text-end" aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}><span aria-hidden="true">{descending ? "↓" : "↑"}</span>数量</Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell><TableCell className="text-end numeric">{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
+}
+```
+
+### 放在已有的纸上
+Source: apps/docs/src/content/table/demos/02-on-paper.tsx
+```tsx
+import { Card } from "@qingye_lab/ui/components/card";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
+import { Heading } from "@qingye_lab/ui/components/typography";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "放在已有的纸上", titleEn: "On an existing surface" } satisfies DemoMeta;
+const rows = [
+  { name: "紧凑工具条", width: 24, height: 24 },
+  { name: "列表行操作", width: 28, height: 28 },
+  { name: "面板主入口", width: 36, height: 36 },
+];
+export default function Demo() {
+  // 卡片已经是一张纸：表格不再铺第二张，贴着卡片的边放，首列文字与卡片标题同一条竖线。
+  return <Card className="w-full max-w-md overflow-hidden" render={<section aria-labelledby="table-on-paper-title" />}>
+    <Heading id="table-on-paper-title" level={3} className="px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap)">控件占位</Heading>
+    <TableContainer framed={false}><Table aria-labelledby="table-on-paper-title"><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead></TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
+  </Card>;
 }
 ```

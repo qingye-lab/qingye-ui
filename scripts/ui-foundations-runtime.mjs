@@ -147,7 +147,7 @@ export async function probeFixedReserves(page, baseURL, { width = 1280 } = {}) {
   const rows = [];
   try {
     for (const [component, controlSelector, iconSelector] of [
-      ['input', '[data-demo="search"] [data-slot="input-control"]', '[data-demo="search"] [data-slot="input-clear"] svg'],
+      ['search-input', '[data-demo="search"] [data-slot="search-input"]', '[data-demo="search"] [data-slot="search-input-clear"] svg'],
       ['select', '[data-demo="density"] [data-slot="select-trigger"]', '[data-demo="density"] [data-slot="select-trigger"] [data-slot="select-icon"] svg'],
     ]) {
       await visit(page, baseURL, component);

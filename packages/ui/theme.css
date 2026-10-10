@@ -64,6 +64,7 @@
     --sidebar-border: var(--qy-sidebar-border);
     --sidebar-accent: var(--qy-sidebar-accent);
     --sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
+    --sidebar-current: var(--qy-sidebar-current);
     --sidebar-ring: var(--qy-sidebar-ring);
     --radius: var(--qy-radius);
   }
@@ -119,6 +120,7 @@
   --color-sidebar-border: var(--qy-sidebar-border);
   --color-sidebar-accent: var(--qy-sidebar-accent);
   --color-sidebar-accent-foreground: var(--qy-sidebar-accent-foreground);
+  --color-sidebar-current: var(--qy-sidebar-current);
   --color-sidebar-ring: var(--qy-sidebar-ring);
 
   /* Extended roles beyond the shadcn set. */

@@ -3,8 +3,8 @@
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { IconEye, IconEyeOff, IconSearch, IconX } from "@tabler/icons-react";
 import * as React from "react";
+import { useInputFacts, useInputRef } from "../input-facts";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -17,17 +17,6 @@ export type InputProps = Omit<InputPrimitive.Props, "size"> & React.RefAttribute
   unstyled?: boolean;
   /** 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。 */
   nativeInput?: boolean;
-  /** 默认仅在 type="search" 时启用；清空不提交表单。 */
-  clearable?: boolean;
-  clearLabel?: string;
-  onClear?: () => void;
-  /** 默认仅在 type="password" 时启用。 */
-  visibilityToggle?: boolean;
-  visible?: boolean;
-  defaultVisible?: boolean;
-  onVisibleChange?: (visible: boolean) => void;
-  /** 稳定的开关名称；aria-pressed 表达密码当前是否可见。 */
-  showLabel?: string;
 };
 
 /**
@@ -97,6 +86,11 @@ function NativeInput({ ref, className, style, render, onValueChange, ...props }:
   });
 }
 
+/**
+ * 输入框只做一件事：承载一个值的输入（用户裁决 2026-10-10：功能要纯粹）。
+ * 清空、搜索图标、显示密码是附加在编辑边界上的另一件事，由 SearchInput、PasswordInput
+ * 或 InputGroup + InputGroupButton 组合出来，这里不内置。
+ */
 export function Input({
   size,
   className,
@@ -104,107 +98,29 @@ export function Input({
   unstyled = false,
   nativeInput = false,
   type = "text",
-  clearable = type === "search",
-  clearLabel,
-  onClear,
-  visibilityToggle = type === "password",
-  visible: visibleProp,
-  defaultVisible = false,
-  onVisibleChange,
-  showLabel,
   ref,
-  id,
-  onChange,
-  onKeyDown,
   ...props
 }: InputProps): React.ReactElement {
   const { messages } = useUILocale();
-  const generatedId = React.useId();
-  const inputId = id ?? generatedId;
-  const inputRef = React.useRef<HTMLInputElement | null>(null);
-  const [observedValue, setObservedValue] = React.useState(String(props.defaultValue ?? ""));
-  const [uncontrolledVisible, setUncontrolledVisible] = React.useState(defaultVisible);
-  const [blocked, setBlocked] = React.useState({ disabled: Boolean(props.disabled), readOnly: Boolean(props.readOnly) });
-  const visible = visibleProp ?? uncontrolledVisible;
-  const value = props.value === undefined ? observedValue : String(props.value);
-  const password = type === "password";
-
-  const setInputRef = React.useCallback((node: HTMLInputElement | null) => {
-    inputRef.current = node;
-    if (typeof ref === "function") {
-      const cleanup = ref(node);
-      if (typeof cleanup === "function") return () => { inputRef.current = null; cleanup(); };
-    } else if (ref) ref.current = node;
-  }, [ref]);
-
-  const syncInputState = React.useCallback(() => {
-    const input = inputRef.current;
-    if (!input) return;
-    // 表单族 §九/基础层 §15：附属动作服从真实输入，含 Field 与原生 fieldset 的禁用。
-    const next = { disabled: input.disabled || input.matches(":disabled"), readOnly: input.readOnly };
-    setBlocked((previous) => previous.disabled === next.disabled && previous.readOnly === next.readOnly ? previous : next);
-    setObservedValue(input.value);
-  }, []);
-  React.useLayoutEffect(syncInputState);
-  React.useLayoutEffect(() => {
-    const input = inputRef.current;
-    if (!input) return;
-    const observer = new MutationObserver(syncInputState);
-    const container = input.closest("fieldset") ?? input.parentElement;
-    if (container) observer.observe(container, { attributes: true, subtree: true, attributeFilter: ["disabled", "readonly"] });
-    const form = input.form;
-    // 原生 reset 的默认动作发生在事件后；随后读真实值，不把非受控输入改成受控输入。
-    const reset = () => queueMicrotask(syncInputState);
-    form?.addEventListener("reset", reset);
-    return () => { observer.disconnect(); form?.removeEventListener("reset", reset); };
-  }, [nativeInput, syncInputState]);
-
-  const canClear = clearable && value !== "" && !blocked.disabled && !blocked.readOnly;
-  const showVisibility = password && visibilityToggle;
-  const clear = () => {
-    const input = inputRef.current;
-    if (!input || input.disabled || input.matches(":disabled") || input.readOnly) return;
-    // 进退相承（表单族决定 3）：使用真实 input 事件走原生、Field 和调用方同一条值变化链。
-    const setter = Object.getOwnPropertyDescriptor(input.ownerDocument.defaultView!.HTMLInputElement.prototype, "value")?.set;
-    setter?.call(input, "");
-    input.dispatchEvent(new input.ownerDocument.defaultView!.Event("input", { bubbles: true }));
-    onClear?.();
-    input.focus();
-  };
+  const [inputRef, setInputRef] = useInputRef(ref);
+  // 只读标记服从真实输入，含 Field 与原生 fieldset 带来的状态。
+  const blocked = useInputFacts(inputRef, { disabled: Boolean(props.disabled), readOnly: Boolean(props.readOnly) }, { value: false, key: nativeInput });
 
   const inputProps: InputPrimitive.Props & React.RefAttributes<HTMLInputElement> & { "data-slot": string } = {
-    ...(password ? { autoCapitalize: "none", autoCorrect: "off", spellCheck: false } : {}),
     ...props,
-    id: inputId,
     ref: setInputRef,
-    type: password && visible ? "text" : type,
+    type,
     // 原生字符宽度属性原样透传；它不参与呈现，几何来自填值控件角色层。
     size,
     "data-slot": (props as InputPrimitive.Props & { "data-slot"?: string })["data-slot"] ?? "input",
-    onChange: (event) => { onChange?.(event); setObservedValue(event.currentTarget.value); },
-    onKeyDown: (event) => {
-      onKeyDown?.(event);
-      // 基础层 §11/§15：首个 Escape 只清本字段；取消、空值和输入法事件留给原有焦点链。
-      if (event.defaultPrevented || event.key !== "Escape" || !canClear || event.nativeEvent.isComposing || event.keyCode === 229) return;
-      event.preventDefault();
-      event.stopPropagation();
-      clear();
-    },
     className: (state) => cn(
-      "col-start-2 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
+      "col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
       textProfile,
-      type === "search" && "[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none",
-      password && "[&::-ms-reveal]:hidden",
-      // 基础层 §1、§8：带前置图标时，图标与文字的关系同按钮内图标与文字，用控件内间隔。
-      type === "search" && "ps-(--qy-control-content-gap)",
       // 平台文件选择没有可设置的垂直对齐；行高取边框内高度让两段文字居中。按钮名称是动作，文件名是结果。
       type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2px)] sm:leading-[calc(var(--qy-fill-height)-2px)] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",
       typeof className === "function" ? className(state) : className,
     ),
   };
-  // 基础层 §15：这些动作按钮与输入框共用同一条外边界，外描边会越过它 —
-  // 用户的明确要求是「控件外面不出现任何一圈」。信号因此落在按钮自己的盒内。
-  const actionClassName = "relative qy-pressable touch-target row-start-1 flex shrink-0 items-center justify-center self-stretch rounded-[max(0px,calc(var(--qy-fill-radius)-1px))] bg-transparent text-muted-foreground outline-none hover:bg-accent hover:text-foreground active:bg-accent focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-64 [&_svg]:size-(--qy-fill-icon-narrow) sm:[&_svg]:size-(--qy-fill-icon)";
 
   return (
     <div
@@ -212,7 +128,7 @@ export function Input({
       data-readonly={blocked.readOnly ? "" : undefined}
       className={cn(
         // 基础层 §5/§15：真实边框标出编辑范围；仅已声明 aria-invalid=true 才进入错误色。
-        "relative grid w-full min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center",
+        "relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center",
         unstyled
           ? "min-h-[calc(var(--qy-fill-height-narrow)-2px)] sm:min-h-[calc(var(--qy-fill-height)-2px)] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]"
           : "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height) pointer-coarse:min-h-(--qy-touch-target)",
@@ -227,17 +143,8 @@ export function Input({
         controlClassName,
       )}
     >
-      {type === "search" ? <span className="col-start-1 row-start-1 ps-(--qy-fill-padding) text-muted-foreground" data-slot="input-search-icon"><IconSearch aria-hidden="true" className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" /></span> : null}
       {nativeInput ? <NativeInput {...inputProps} /> : <InputPrimitive {...inputProps} />}
-      {(canClear || showVisibility || (blocked.readOnly && !unstyled)) ? (
-        <span data-slot="input-adjuncts" className="col-start-3 row-start-1 flex self-stretch items-center">
-          {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="pe-(--qy-fill-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
-          {canClear ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-clear" aria-label={clearLabel ?? (type === "search" ? messages.clearSearch : messages.inputClear)} onClick={clear}><IconX aria-hidden="true" /></button> : null}
-          {showVisibility ? <button type="button" className={cn(actionClassName, "aspect-square")} data-slot="input-visibility" aria-controls={inputId} aria-label={showLabel ?? messages.showPassword} aria-pressed={visible} disabled={blocked.disabled} onClick={() => { if (inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return; const next = !visible; if (visibleProp === undefined) setUncontrolledVisible(next); onVisibleChange?.(next); }}>
-            {visible ? <IconEyeOff aria-hidden="true" /> : <IconEye aria-hidden="true" />}
-          </button> : null}
-        </span>
-      ) : null}
+      {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="col-start-2 row-start-1 pe-(--qy-fill-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
     </div>
   );
 }

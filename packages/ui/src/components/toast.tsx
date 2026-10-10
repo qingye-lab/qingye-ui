@@ -12,12 +12,9 @@ export type ToastPosition = "top-left" | "top-center" | "top-right" | "bottom-le
 export interface ToastProviderProps extends Toast.Provider.Props {
   position?: ToastPosition;
   portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined;
-  /** A pending episode becomes persistent unknown after this deadline; default 30000 ms. */
-  loadingTimeout?: number;
 }
 export interface AnchoredToastProviderProps extends Toast.Provider.Props {
   portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined;
-  loadingTimeout?: number;
 }
 type ToastData = {
   rootProps?: Omit<React.ComponentProps<typeof Toast.Root>, "children" | "className" | "swipeDirection" | "toast">;
@@ -35,57 +32,36 @@ function isPending(type?: string) {
 function isPersistent(type?: string) {
   return isPending(type) || type === "unknown" || type === "error" || type === "failed";
 }
-function validateDeadline(value: number) {
-  if (!Number.isInteger(value) || value < 1 || value > 2_147_483_647) {
-    throw new RangeError("loadingTimeout must be an integer from 1 to 2147483647 ms");
-  }
-}
 
-// A deadline changes confidence, not the application's title, description or result.
-// Commit the expiry from an effect so a real result in the same batch wins.
-function useNoticeDeadline(notice: Notice, manager: Manager, loadingTimeout: number) {
-  const pending = isPending(notice.type);
-  const [overdue, setOverdue] = React.useState(false);
-  const wasPending = React.useRef(pending);
-  React.useEffect(() => {
-    if (!pending) return;
-    setOverdue(false);
-    const timer = setTimeout(() => setOverdue(true), loadingTimeout);
-    return () => clearTimeout(timer);
-  }, [notice.id, pending, loadingTimeout]);
+// 通知只呈现应用给出的事实，不替应用推断结果（用户裁决 2026-10-10：toast 不做推测）。
+// 这里唯一的规则是呈现上的：未完成、失败与应用声明的未知不自动消失，等用户看到或应用更新。
+function usePersistence(notice: Notice, manager: Manager) {
   React.useLayoutEffect(() => {
-    if (notice.transitionStatus === "ending") return;
-    const freshEpisode = pending && !wasPending.current;
-    wasPending.current = pending;
-    if (freshEpisode && overdue) setOverdue(false);
-    if (overdue && pending && !freshEpisode) manager.update(notice.id, { type: "unknown", timeout: 0 });
-    else if (isPersistent(notice.type) && notice.timeout !== 0) manager.update(notice.id, { timeout: 0 });
-  }, [notice.id, notice.type, notice.timeout, notice.transitionStatus, overdue, pending, manager]);
-  return overdue && notice.type === "unknown";
+    if (notice.transitionStatus !== "ending" && isPersistent(notice.type) && notice.timeout !== 0) manager.update(notice.id, { timeout: 0 });
+  }, [notice.id, notice.type, notice.timeout, notice.transitionStatus, manager]);
 }
 
-function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
-  notice: Notice; manager: Manager; loadingTimeout: number; anchored?: boolean;
+function NoticeBody({ notice, manager, anchored = false }: {
+  notice: Notice; manager: Manager; anchored?: boolean;
 }) {
   const { messages } = useUILocale();
-  const overdue = useNoticeDeadline(notice, manager, loadingTimeout);
+  usePersistence(notice, manager);
   const type = notice.type;
   const state = type === "waiting" ? messages.buttonWaiting
     : type === "loading" || type === "in-progress" ? messages.buttonInProgress
     : type === "unknown" ? messages.buttonUnknown
     : type === "error" || type === "failed" ? messages.buttonFailed
     : type === "success" ? messages.toastSuccess : undefined;
-  const Icon = overdue ? IconHelpCircle
-    : type === "waiting" ? IconHourglass
+  const Icon = type === "waiting" ? IconHourglass
     : type === "loading" || type === "in-progress" ? IconLoader2
     : type === "unknown" ? IconHelpCircle
     : type === "error" || type === "failed" ? IconCircleX
     : type === "success" ? IconCheck
     : type === "warning" ? IconAlertTriangle : IconInfoCircle;
-  const title = overdue ? messages.toastResultUnknown : notice.title;
+  const title = notice.title;
   const high = notice.priority === "high";
   const [focused, setFocused] = React.useState(false);
-  const messageRole = !high || overdue ? "status" : focused ? "alert" : undefined;
+  const messageRole = !high ? "status" : focused ? "alert" : undefined;
   const { onFocusCapture, onBlurCapture, ...rootProps } = notice.data?.rootProps ?? {};
   return (
     <>
@@ -105,19 +81,13 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
     >
       <Toast.Content data-slot="toast-content" className="flex items-start gap-(--qy-action-gap)">
         <span data-slot="toast-icon" aria-hidden="true" className="flex min-h-(--qy-control-sm-narrow) shrink-0 items-center sm:min-h-(--qy-control-sm)">
-          <Icon className={cn("size-(--qy-control-md-icon-narrow) sm:size-(--qy-control-md-icon)", (type === "loading" || type === "in-progress") && !overdue && "qy-spin")} />
+          <Icon className={cn("size-(--qy-control-md-icon-narrow) sm:size-(--qy-control-md-icon)", (type === "loading" || type === "in-progress") && "qy-spin")} />
         </span>
         <div className="min-w-0 flex-1">
           <div data-slot="toast-message" role={messageRole} aria-live={messageRole === "alert" ? "assertive" : messageRole ? "polite" : "off"} aria-atomic="true">
-            {state && !overdue ? <p data-slot="toast-state" className="text-support text-muted-foreground">{state}</p> : null}
+            {state ? <p data-slot="toast-state" className="text-support text-muted-foreground">{state}</p> : null}
             {title != null ? <Toast.Title data-slot="toast-title" className="text-body-strong wrap-anywhere">{title}</Toast.Title> : null}
-            {overdue ? (
-              <Toast.Description data-slot="toast-description" className="text-body wrap-anywhere">
-                {notice.title}{notice.title != null ? " " : null}{notice.description}{" "}{messages.toastResultUnknownDescription}
-              </Toast.Description>
-            ) : notice.description != null ? (
-              <Toast.Description data-slot="toast-description" className="text-body wrap-anywhere" />
-            ) : null}
+            {notice.description != null ? <Toast.Description data-slot="toast-description" className="text-body wrap-anywhere" /> : null}
           </div>
           {notice.actionProps ? (
             <div data-slot="toast-actions" className="mt-(--qy-action-gap)">
@@ -130,7 +100,6 @@ function NoticeBody({ notice, manager, loadingTimeout, anchored = false }: {
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>
-    {high && overdue && !focused ? <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{messages.toastResultUnknown} {notice.title} {notice.description}</div> : null}
     </>
   );
 }
@@ -144,8 +113,8 @@ const positions: Record<ToastPosition, string> = {
   "bottom-center": "bottom-(--qy-space-6) left-1/2 -translate-x-1/2",
   "bottom-right": "bottom-(--qy-space-6) right-(--qy-space-6)",
 };
-function Notices({ position = "bottom-right", portalProps, loadingTimeout, anchored = false }: {
-  position?: ToastPosition; portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined; loadingTimeout: number; anchored?: boolean;
+function Notices({ position = "bottom-right", portalProps, anchored = false }: {
+  position?: ToastPosition; portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined; anchored?: boolean;
 }) {
   const manager = Toast.useToastManager<ToastData>();
   const { messages } = useUILocale();
@@ -171,29 +140,27 @@ function Notices({ position = "bottom-right", portalProps, loadingTimeout, ancho
             {...notice.positionerProps}
             style={state => ({ ...layer, ...(typeof notice.positionerProps?.style === "function" ? notice.positionerProps.style(state) : notice.positionerProps?.style) })}
           >
-            <NoticeBody notice={notice} manager={manager} loadingTimeout={loadingTimeout} anchored />
+            <NoticeBody notice={notice} manager={manager} anchored />
           </Toast.Positioner>
-        ) : <NoticeBody key={notice.id} notice={notice} manager={manager} loadingTimeout={loadingTimeout} />)}
+        ) : <NoticeBody key={notice.id} notice={notice} manager={manager} />)}
       </Toast.Viewport>
     </Toast.Portal>
   );
 }
 
-export function ToastProvider({ children, position = "bottom-right", portalProps, loadingTimeout = 30000, ...props }: ToastProviderProps): React.ReactElement {
-  validateDeadline(loadingTimeout);
+export function ToastProvider({ children, position = "bottom-right", portalProps, ...props }: ToastProviderProps): React.ReactElement {
   return (
     <Toast.Provider toastManager={toastManager} {...props}>
       {children}
-      <Notices position={position} portalProps={portalProps} loadingTimeout={loadingTimeout} />
+      <Notices position={position} portalProps={portalProps} />
     </Toast.Provider>
   );
 }
-export function AnchoredToastProvider({ children, portalProps, loadingTimeout = 30000, ...props }: AnchoredToastProviderProps): React.ReactElement {
-  validateDeadline(loadingTimeout);
+export function AnchoredToastProvider({ children, portalProps, ...props }: AnchoredToastProviderProps): React.ReactElement {
   return (
     <Toast.Provider toastManager={anchoredToastManager} {...props}>
       {children}
-      <Notices portalProps={portalProps} loadingTimeout={loadingTimeout} anchored />
+      <Notices portalProps={portalProps} anchored />
     </Toast.Provider>
   );
 }

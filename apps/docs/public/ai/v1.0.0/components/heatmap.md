@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196
+Source SHA-256: ae4809ea85c1b1d0c6081f65e6ef79d1ffc66b4f93ece3a98d5a240d125e3d87
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足），可聚焦的格与按需展开的数据表。
 
@@ -23,7 +23,7 @@ Source SHA-256: 3eaf7f83a8d950ad3f1dff29e388761496aeafa3fd0432d774b9c051ed99d196
 - Application: 数据、量纲与真实性。
 
 ## Composition
-- 手写 CSS 网格 + 当前 Table/Empty；复用 Chart 的 readValue 取值契约。
+- 手写 CSS 网格 + 当前 Table；复用 Chart 的 readValue 取值契约。没有可画的数据时，调用方在原位改放 Empty。
 
 ## Responsive behavior
 - 网格随可用宽度收缩，超宽时横向滚动；表格原生滚动/换行。
@@ -49,7 +49,6 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Heatmap
 figure 名称、两个命名的类别轴、单色顺序色阶的网格与同源可见 Table。
 - label: string. 非空真实语义名称。
-- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". 真实整图事实；非ready由children表达。
 - rowLabel / columnLabel / valueLabel: string. 行维度、列维度与量各自的名字，例如「时段」「星期」「同步次数」。
 - columns: readonly { key: string; label: string }[]. 列维度的取值，2 个以上——与数据系列不同，没有身份色上限。
 - rows: readonly ChartRow[]. 行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。

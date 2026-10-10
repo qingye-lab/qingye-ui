@@ -11,7 +11,7 @@ export default {
   design: {
     methods: ["名实相符", "布白有用", "进退相承"],
     whenToUse: ["首次加载的内容区域，形状已知、几行几块可预期。"],
-    avoid: ["刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。", "加载失败或结果为空时改用 Empty，不让占位冒充内容。", "不确定形状或时间极短的等待，用按钮的 in-progress。"],
+    avoid: ["刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（loading）与一条 Progress 表达，二者共用一个等待周期。", "加载失败或结果为空时改用 Empty，不让占位冒充内容。", "不确定形状或时间极短的等待，用按钮的 loading。"],
     composition: ["Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。"],
     stateOwner: {
       library: ["一句名称（跟随语言）、形状对辅助技术隐藏、以材为度的行高与墨色。"],
@@ -22,7 +22,7 @@ export default {
   },
   designEn: {
     whenToUse: ["The first load of a region whose shape is known: how many rows and blocks to expect."],
-    avoid: ["Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.", "A failed or empty result uses Empty; a placeholder never stands in for content.", "A wait of unknown shape or very short duration uses a Button's in-progress."],
+    avoid: ["Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (loading) and on a Progress band, both of which share one wait period.", "A failed or empty result uses Empty; a placeholder never stands in for content.", "A wait of unknown shape or very short duration uses a Button's loading."],
     composition: ["Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump."],
     stateOwner: {
       library: ["One localized name, shapes hidden from assistive technology, row height and ink derived from the module."],

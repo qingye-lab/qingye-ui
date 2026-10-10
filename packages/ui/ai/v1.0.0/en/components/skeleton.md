@@ -12,9 +12,9 @@ A skeleton says only that content is loading; it carries no progress, does not d
 
 ## Use and ownership
 - The first load of a region whose shape is known: how many rows and blocks to expect.
-- Avoid: Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (in-progress) and on a Progress band, both of which share one wait period.
+- Avoid: Refreshing keeps the content that is still valid and does not fall back to a skeleton; the wait is shown on the Button that started it (loading) and on a Progress band, both of which share one wait period.
 - Avoid: A failed or empty result uses Empty; a placeholder never stands in for content.
-- Avoid: A wait of unknown shape or very short duration uses a Button's in-progress.
+- Avoid: A wait of unknown shape or very short duration uses a Button's loading.
 - Library: One localized name, shapes hidden from assistive technology, row height and ink derived from the module.
 - Application: When loading starts and ends, how a long wait is handled, the real shape of the content, and how failure and emptiness are handled.
 
@@ -142,7 +142,7 @@ export default function Demo() {
         <ProgressTrack><ProgressIndicator /></ProgressTrack>
       </Progress>
       <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
-      <Button onClick={() => setRefreshing(true)} state={refreshing ? "in-progress" : "idle"} variant="bordered">刷新</Button>
+      <Button onClick={() => setRefreshing(true)} loading={refreshing} variant="bordered">刷新</Button>
     </Stack>
   </Card>;
 }

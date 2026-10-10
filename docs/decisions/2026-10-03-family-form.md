@@ -125,6 +125,8 @@ Decided for Input（2026-10-03，按逐值裁决修订）；其余重写目标�
 
 **当前已实现**：Input 使用 `type="search"` 与 `type="password"`。搜索形态带清空入口，密码形态可切换可见性；clearable、visibilityToggle 等入口可调整默认行为，render 与原生 input 语义保留。过滤/搜索请求仍由应用或 Pattern 承担。
 
+> **2026-10-10 修订（用户裁决「功能要纯粹」）**：上面两段已不是现状。Input 只承载值，不再内置清空、搜索图标与显示密码；`search-input`、`password-input` 重新成为独立组件，但不是另写一套输入，而是由 InputGroup + Input + InputGroupButton 组合。普通字段需要附属动作时直接用 InputGroupButton。见基础层「2026-10-10 功能纯粹：本次梳理的处置」。
+
 ### Input 的当前几何与焦点
 
 五档 xs/sm/md/lg/xl 使用同名 text-control 档，桌面每侧垂直视觉余量为 4/5/6/6/7px。外高与文字值为**预设**，余量由所选外高与行高换算；lg/xl 曾借低一档文字只增加空白，当前已接入同名档，见基础层 §1、§2、§8。

@@ -117,8 +117,8 @@
 - `cn()` 只在变体与选择器字符串完全相同时把两条类当作同一属性的冲突去重；作用于同一元素的不同选择器会同时留下，谁生效由样式表顺序决定。同一元素同一属性分量只留一个来源。
 - 改渲染元素使用 Base UI `render`、`useRender` 与 `mergeProps`；不新增无任务依据的别名或 `as` API。当前 Card 是组合入口，不自动提供标题槽或 padding。
 - 基于 Base UI 的组件导出所用原语命名空间。可控状态同时保留适用的受控与非受控入口；职责按 [design.md「明确修改归属」](../design.md#明确修改归属) 判断。
-- 请求事实与结果推断按 [design.md「名称与状态」](../design.md#名称与状态)。Button 当前选择状态联合 `idle / waiting / in-progress / unknown / failed`；boolean loading 也能符合状态归属，联合不是理念强制。
-- 危险后果必须可见且可关联。danger Button 位于 ButtonProtection 内，或其 `aria-describedby` 指向页面中存在且文本非空的元素，满足任一即可；两者都无时开发环境抛错，生产不抛。运行时缺少 `process` 时按生产处理，跳过开发诊断。ButtonProtection 的 consequence 为非空可见文字，说明当前对象与后果；已有可靠说明不重复包装。后果关联见基础层 §18，缺少运行时环境的验证见批次 3 D 报告。
+- 请求事实与结果推断按 [design.md「名称与状态」](../design.md#名称与状态)。Button 只有忙碌一种状态（`loading`，用户裁决 2026-10-10）：事实由调用方持有，按钮不启动请求、不推断结束。成功、失败与结果未知不写在按钮上，由 Alert、Toast、FieldError、StatusDot 等提示组件表达。Toast 只呈现应用给出的类型，不设期限、不把久等推断为未知。
+- 功能纯粹（用户裁决 2026-10-10）：一个组件只做自己的事。Button 只触发动作，`tone="danger"` 只是色调；后果说明与确认属于 AlertDialog / ConfirmAction，后果写在对话框的说明里。Button 不再校验、包装或关联后果，`ButtonProtection` 已移除。按下后保持的二态用 Toggle；提示附在调用方给出的控件上（TooltipTrigger 的 `render` 必填），不自带按钮。Input 只承载值：清空、搜索图标与显示密码由 SearchInput、PasswordInput 或 InputGroup + InputGroupButton 组合。Chart / ScatterChart / Heatmap 只画数据（等价数据表是无障碍替代，保留）：整图没有记录、未知或不适用时由调用方在原位放 Empty。
 
 ### 2. 尺寸
 
@@ -183,10 +183,10 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 | focus-visible | 控件外不新增一圈；Input、可聚焦 Card、Popover 面板、bordered Button 的边框只变色不加粗。solid 内线 2px，quiet 自盒内线 1px |
 | disabled | 真实原生/ARIA 与事件约束另行成立；当前 opacity-64 是继承预设，不能代替真实禁用 |
 | invalid | 事实由调用方声明。Input 保留 aria-invalid 和错误边框，聚焦改危险文字色，宽度仍 1px，不增加内描边 |
-| waiting / in-progress / unknown / failed | Button 呈现传入事实，保留动作名称；忙碌与 unknown 防止再次触发，不自行推断成功或重试 |
+| loading | Button 呈现调用方传入的忙碌事实，保留动作名称与焦点，防止再次触发；不自行推断成功、失败或重试，结果由提示组件表达 |
 | selected / open | 使用原语实际提供的 data 状态；事实与名称对应，换外观不换语义 |
 
-焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。Input 清空/密码原生附属按钮与裸 Popover 入口目前用 2px 内线，不能把它们误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
+焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。SearchInput / PasswordInput 的附属动作是 InputGroupButton（quiet Button，1px 内线）；裸 Popover 入口目前用 2px 内线，不能把它误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
 
 强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：宽度和内缩位置均读取局部 `--qy-focus-ring-width`，默认 2px，quiet 为 1px；系统色接管。`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
 

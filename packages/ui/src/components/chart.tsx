@@ -5,7 +5,6 @@ import { useRender } from "@base-ui/react/use-render";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Text as RechartsText, Tooltip, XAxis, YAxis } from "recharts";
 import * as React from "react";
 import { Button } from "./button";
-import { Empty } from "./empty";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -39,8 +38,7 @@ export type ChartStyle = React.CSSProperties & {
   "--qy-chart-plot-height"?: string;
 };
 type ChartBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & { label: string; style?: ChartStyle };
-export type ChartProps = ChartBaseProps & ({
-  state?: "ready";
+export type ChartProps = ChartBaseProps & {
   type: ChartType;
   categoryLabel: string;
   valueLabel: string;
@@ -50,7 +48,7 @@ export type ChartProps = ChartBaseProps & ({
   total?: number;
   formatValue?: (value: number, series: ChartSeries, row: ChartRow) => React.ReactNode;
   renderPlot?: (projection: ChartPlotData) => React.ReactNode;
-} | { state: "empty" | "unknown" | "not-applicable"; children: React.ReactNode });
+};
 
 /*
  * 图的法度（基础层 §7「数据系列」；表达九法）：
@@ -266,61 +264,58 @@ export function ChartHeader({ titleId, label, legend, toggle }: { titleId: strin
 /** 图例：一行色块与名称，浓墨小字。 */
 export const legendClassName = "m-0 flex min-w-0 list-none flex-wrap gap-x-(--qy-field-group-gap) gap-y-(--qy-field-gap) p-0 text-support text-muted-foreground";
 
-export function Chart({ label, state = "ready", render, ref, className, style, ...props }: ChartProps) {
+/** 图只画数据（用户裁决 2026-10-10：功能要纯粹）。没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。 */
+export function Chart({ label, render, ref, className, style, type, categoryLabel, valueLabel, series, rows, total, formatValue, renderPlot, ...native }: ChartProps) {
   if (!label.trim()) throw new Error("Chart requires a nonempty accessible label.");
   const titleId = React.useId(); const dataView = useChartData();
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   let content: React.ReactNode; let legend: React.ReactNode = null;
-  const { type, categoryLabel, valueLabel, series, rows, total, formatValue, renderPlot, children, ...native } = props as Omit<ChartBaseProps, "label"> & Partial<Extract<ChartProps, { state?: "ready" }>> & { children?: React.ReactNode };
-  if (state !== "ready") content = <Empty state={state}>{children}</Empty>;
-  else {
-    if (!type || !CHART_TYPES.has(type)) throw new Error(`Chart ready state requires an explicit type from ${[...CHART_TYPES].join(", ")}; the form is chosen by the task, not left to default.`);
-    if (!categoryLabel?.trim() || !valueLabel?.trim() || !series?.length || series.length > MARKERS.length || !rows?.length) throw new Error("Chart ready state requires named axes, one to five series and real rows; use an explicit non-data state otherwise.");
-    if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim()) || new Set(rows.map(row => row.id)).size !== rows.length || rows.some(row => !row.id.trim() || !row.label.trim())) throw new Error("Chart series and rows require unique stable ids and nonempty names.");
-    if ((type === "bar-stacked" || type === "area-stacked") && series.length < 2) throw new RangeError(`Chart type "${type}" stacks two or more series into a composition; a single series is a plain ${type === "bar-stacked" ? "bar" : "area"}.`);
-    if (type === "donut" && rows.length !== 1) throw new RangeError("Chart type \"donut\" shows one whole's composition, not category comparison; it requires exactly one row. Compare many categories' compositions with \"bar-stacked\" instead.");
-    if (type === "donut" && (series.length < 2 || series.length > 5)) throw new RangeError("Chart type \"donut\" requires two to five parts for at-a-glance share; more parts or precise comparison should use Proportion or a bar chart.");
-    const single = series.length === 1;
-    const projected = series.map((item, index) => ({ ...item, dataKey: `series${index}`, color: `var(--qy-chart-${index + 1})`, marker: MARKERS[index]! }));
-    let numeric = false;
-    const data = rows.map(row => {
-      const record: Record<string, string | number | null> = { id: row.id, category: row.label };
-      projected.forEach(item => {
-        const value = readValue(row, item.key);
-        if (type === "donut" && (typeof value !== "number" || value < 0)) throw new RangeError("Chart type \"donut\" requires every part's value to be a known, non-negative number; an unavailable or negative share has no wedge to draw. Use the chart-wide state for an unavailable whole.");
-        if (typeof value === "number") numeric = true;
-        record[item.dataKey] = typeof value === "number" ? value : null;
-      });
-      return record;
+  if (!type || !CHART_TYPES.has(type)) throw new Error(`Chart requires an explicit type from ${[...CHART_TYPES].join(", ")}; the form is chosen by the task, not left to default.`);
+  if (!categoryLabel?.trim() || !valueLabel?.trim() || !series?.length || series.length > MARKERS.length || !rows?.length) throw new Error("Chart requires named axes, one to five series and real rows; when there is nothing to plot, render Empty in its place.");
+  if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim()) || new Set(rows.map(row => row.id)).size !== rows.length || rows.some(row => !row.id.trim() || !row.label.trim())) throw new Error("Chart series and rows require unique stable ids and nonempty names.");
+  if ((type === "bar-stacked" || type === "area-stacked") && series.length < 2) throw new RangeError(`Chart type "${type}" stacks two or more series into a composition; a single series is a plain ${type === "bar-stacked" ? "bar" : "area"}.`);
+  if (type === "donut" && rows.length !== 1) throw new RangeError("Chart type \"donut\" shows one whole's composition, not category comparison; it requires exactly one row. Compare many categories' compositions with \"bar-stacked\" instead.");
+  if (type === "donut" && (series.length < 2 || series.length > 5)) throw new RangeError("Chart type \"donut\" requires two to five parts for at-a-glance share; more parts or precise comparison should use Proportion or a bar chart.");
+  const single = series.length === 1;
+  const projected = series.map((item, index) => ({ ...item, dataKey: `series${index}`, color: `var(--qy-chart-${index + 1})`, marker: MARKERS[index]! }));
+  let numeric = false;
+  const data = rows.map(row => {
+    const record: Record<string, string | number | null> = { id: row.id, category: row.label };
+    projected.forEach(item => {
+      const value = readValue(row, item.key);
+      if (type === "donut" && (typeof value !== "number" || value < 0)) throw new RangeError("Chart type \"donut\" requires every part's value to be a known, non-negative number; an unavailable or negative share has no wedge to draw. When the whole is unavailable, render Empty in place of the chart.");
+      if (typeof value === "number") numeric = true;
+      record[item.dataKey] = typeof value === "number" ? value : null;
     });
-    if (type === "donut") {
-      const sum = projected.reduce((acc, item) => acc + (data[0]![item.dataKey] as number), 0);
-      if (total !== undefined && (!Number.isFinite(total) || total < sum)) throw new RangeError("Chart type \"donut\" total must be a finite number at least the sum of its parts.");
-    }
-    const format = (value: number, key: string, category: string) => {
-      const item = series.find(s => s.key === key); const row = rows.find(r => r.label === category);
-      return item && row && formatValue ? formatValue(value, item, row) : number.format(value);
-    };
-    const projection: ChartPlotData = { type, data, series: projected, categoryLabel, valueLabel, ...(type === "donut" && total !== undefined ? { total } : {}) };
-    const isDonut = type === "donut";
-    legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><LegendKey series={item} type={type} /><span>{item.label}</span></li>)}</ul>;
-    content = <>
-      {/* 看得见的只有量的名字（单位）：刻度上的类别（周一…、各来源）已经自说自话，再标「日期」是重复。
-          类别轴名留给读屏与数据表的表头。 */}
-      {!isDonut && <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{valueLabel}</div>}
-      {numeric && <div data-slot="chart-plot" aria-hidden={renderPlot ? undefined : true} style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">{renderPlot ? renderPlot(projection) : <DefaultPlot {...projection} number={number} format={format} />}</div>}
-      {isDonut && <div className="flex justify-center [&_[data-slot=chart-legend]]:justify-center">{legend}</div>}
-      {!isDonut && <div data-slot="chart-category-axis" className="sr-only">{categoryLabel}</div>}
-      {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} className="text-end">{item.label}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map(item => { const value = readValue(row, item.key); return <TableCell key={item.key} className="text-end numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? formatValue?.(value, item, row) ?? number.format(value) : value.label}</TableCell>; })}</TableRow>)}</TableBody></Table></TableContainer></div>}
-    </>;
+    return record;
+  });
+  if (type === "donut") {
+    const sum = projected.reduce((acc, item) => acc + (data[0]![item.dataKey] as number), 0);
+    if (total !== undefined && (!Number.isFinite(total) || total < sum)) throw new RangeError("Chart type \"donut\" total must be a finite number at least the sum of its parts.");
   }
+  const format = (value: number, key: string, category: string) => {
+    const item = series.find(s => s.key === key); const row = rows.find(r => r.label === category);
+    return item && row && formatValue ? formatValue(value, item, row) : number.format(value);
+  };
+  const projection: ChartPlotData = { type, data, series: projected, categoryLabel, valueLabel, ...(type === "donut" && total !== undefined ? { total } : {}) };
+  const isDonut = type === "donut";
+  legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><LegendKey series={item} type={type} /><span>{item.label}</span></li>)}</ul>;
+  content = <>
+    {/* 看得见的只有量的名字（单位）：刻度上的类别（周一…、各来源）已经自说自话，再标「日期」是重复。
+        类别轴名留给读屏与数据表的表头。 */}
+    {!isDonut && <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{valueLabel}</div>}
+    {numeric && <div data-slot="chart-plot" aria-hidden={renderPlot ? undefined : true} style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">{renderPlot ? renderPlot(projection) : <DefaultPlot {...projection} number={number} format={format} />}</div>}
+    {isDonut && <div className="flex justify-center [&_[data-slot=chart-legend]]:justify-center">{legend}</div>}
+    {!isDonut && <div data-slot="chart-category-axis" className="sr-only">{categoryLabel}</div>}
+    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} className="text-end">{item.label}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map(item => { const value = readValue(row, item.key); return <TableCell key={item.key} className="text-end numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? formatValue?.(value, item, row) ?? number.format(value) : value.label}</TableCell>; })}</TableRow>)}</TableBody></Table></TableContainer></div>}
+  </>;
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
-    "data-slot": "chart", "data-state": state, "data-type": state === "ready" ? type : undefined, "aria-labelledby": titleId,
+    "data-slot": "chart", "data-type": type, "aria-labelledby": titleId,
     className: cn(chartFrameClassName, className),
     style: { ...PLOT_PRESETS, ...style }, children: <>
       {/* 环形图的图例在环下：它是一个整体的几部分，名称挨着环读；标题栏只留图名与「查看数据」。 */}
-      <ChartHeader titleId={titleId} label={label} legend={type === "donut" ? null : legend} toggle={state === "ready" ? dataView.toggle : undefined} />
+      <ChartHeader titleId={titleId} label={label} legend={type === "donut" ? null : legend} toggle={dataView.toggle} />
       {content}
     </>,
   }) });

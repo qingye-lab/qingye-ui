@@ -11,3 +11,5 @@
 日期展开消费Popover；候选Popup消费其专属公开BasePortal/Positioner/Popup，不接入另一个Popover Root。Positioner实际读取foundation owner提供的useFloatingLayer('popup')；caller style最后合并。未新增z字面值/token。色彩/圆角/焦点/控制几何是既有选择/预设；本批关系只算local日期、范围完整性、时间完整性及同一控件的内部可用空间。示例是控件与简单Field，不虚构流程/服务。
 
 原生date/datetime-local的min/max/step与Calendar的disabled/startMonth/endMonth是不同公开约束入口，调用方须同步并在onValueChange中做需要的应用校验；本批不从某个入口静默推断另一个入口。Range不使用原生date输入校验，只提交确认的两个hidden端点；当前展示只读，键盘编辑通过日历，不宣称已提供分别键入起止端点的路径。其他日期语言可显式传DayPicker locale；周起始日/RTL/跨午夜更新仍需对应真实运行验收。
+
+> 2026-10-10：Combobox 增加 `multiple`（使用方反馈：写死单选后没有「从很多候选里选几个」的官方做法）。已选值在编辑边界内成为可单独移除的项，画法与 TagInput 的标签相同（`src/chip.ts`，NG3）；候选少用 CheckboxGroup，值不来自候选用 TagInput。

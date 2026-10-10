@@ -7,7 +7,6 @@ export type UILocaleMessages = {
   close: string; loading: string; readOnly: string; breadcrumb: string; more: string;
   dismissFileRejection: (name: string) => string;
   toastSuccess: string;
-  toastResultUnknown: string; toastResultUnknownDescription: string;
   pagination: string; previousPage: string; nextPage: string; morePages: string;
   sidebar: string;
   showOptions: string; clearSelection: string; remove: string;
@@ -51,7 +50,6 @@ export const zhCN: UILocale = {
     close: "关闭", loading: "正在加载", readOnly: "只读", breadcrumb: "面包屑导航", more: "更多",
     dismissFileRejection: (name) => `忽略 ${name} 的拒绝提示`,
     toastSuccess: "成功",
-    toastResultUnknown: "操作结果尚未确认", toastResultUnknownDescription: "请核对结果。",
     pagination: "分页", previousPage: "上一页", nextPage: "下一页", morePages: "更多页",
     sidebar: "工作区导航",
     showOptions: "展开选项", clearSelection: "清除选择", remove: "移除",

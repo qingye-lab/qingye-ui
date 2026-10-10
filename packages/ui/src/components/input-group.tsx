@@ -4,6 +4,8 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../utils";
 import { fillStateByInput } from "../fill-state";
+import { inputAdjunctClassName, inputAdjunctFrameClassName } from "../input-adjunct";
+import { Button, type ButtonProps } from "./button";
 import { Input, type InputProps } from "./input";
 
 export type InputGroupProps = useRender.ComponentProps<"div">;
@@ -35,7 +37,7 @@ export function InputGroup({ className, render, ref, ...props }: InputGroupProps
   return element;
 }
 
-/** 附件是静态内容；需要动作时显式组合 Button，不代替输入获得焦点。 */
+/** 附件是静态内容（单位、前缀、图标）；需要动作时用 InputGroupButton。 */
 export function InputGroupAddon({ className, render, ref, ...props }: InputGroupAddonProps) {
   return useRender({
     defaultTagName: "span", render, ref,
@@ -49,4 +51,13 @@ export function InputGroupInput({ controlClassName, ...props }: InputGroupInputP
   // 保留普通文本可编辑窗口，附件共享剩余容量；过窄时整体按 DOM 顺序换行。
   // 4em 是至少四个全宽字符的局部容量选择，不是理念公式或新的全局 token。
   return <Input {...props} unstyled controlClassName={cn("flex-1 min-w-[min(100%,calc(var(--qy-input-group-padding)*2+4em))]", controlClassName)} />;
+}
+
+export type InputGroupButtonProps = ButtonProps;
+/**
+ * 编辑边界内的动作（清空、显示密码、应用）：与输入共用同一条外边界，自己不画框，铺满边界内高。
+ * 图标形是内高见方、辅助色；文字形保持按钮自己的留白与前景色。
+ */
+export function InputGroupButton({ variant = "quiet", shape = "label", className, ...props }: InputGroupButtonProps) {
+  return <Button data-slot="input-group-button" variant={variant} shape={shape} {...props} className={cn(shape === "icon" ? inputAdjunctClassName : inputAdjunctFrameClassName, "shrink-0", className)} />;
 }

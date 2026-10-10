@@ -19,10 +19,17 @@ import { cn } from "../utils";
  */
 const cellX = "px-[calc(var(--qy-panel-gap)/2)] first:ps-(--qy-panel-padding) last:pe-(--qy-panel-padding)";
 
-export type TableContainerProps = useRender.ComponentProps<"div">;
-/** 表格的纸。可横向滚动，所以可以获得焦点；焦点让已有的清墨线加深为焦墨，不另画一圈。 */
-export function TableContainer({ render, className, ...props }: TableContainerProps) {
-  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "table-container", tabIndex: 0, className: cn("min-w-0 max-w-full overflow-x-auto rounded-panel border border-border bg-surface outline-none focus-visible:border-ring", className) }, props) });
+export type TableContainerProps = useRender.ComponentProps<"div"> & {
+  /** false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。 */
+  framed?: boolean;
+};
+/**
+ * 表格的纸。可横向滚动，所以可以获得焦点；焦点让已有的清墨线加深为焦墨，不另画一圈。
+ * framed={false} 时没有自己的线可以加深，焦点改为盒内一条细线（与 TabsPanel 同一画法）。
+ * 单元格首尾仍留面板内缘：贴着承载面的边放置时，首列文字与那张纸的其它内容同一条竖线。
+ */
+export function TableContainer({ framed = true, render, className, ...props }: TableContainerProps) {
+  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: 0, className: cn("min-w-0 max-w-full overflow-x-auto outline-none", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
 }
 export type TableProps = useRender.ComponentProps<"table">;
 export function Table({ render, className, ...props }: TableProps) {
@@ -56,7 +63,7 @@ export type TableHeadProps = useRender.ComponentProps<"th">;
  * 一列一条边（§19）；悬停底向外伸出，不把列名推进去。
  */
 export function TableHead({ render, className, scope = "col", ...props }: TableHeadProps) {
-  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-slot=button-with-status]>:first-child]:-mx-(--qy-control-sm-padding)", className) }, props) });
+  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)", className) }, props) });
 }
 export type TableCellProps = useRender.ComponentProps<"td">;
 export function TableCell({ render, className, ...props }: TableCellProps) {

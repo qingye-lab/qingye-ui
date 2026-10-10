@@ -1,6 +1,8 @@
 import { Fragment, type ReactNode } from "react";
-import { Button, ButtonProtection } from "@qingye_lab/ui/components/button";
+import { Button } from "@qingye_lab/ui/components/button";
 import { Input } from "@qingye_lab/ui/components/input";
+import { PasswordInput } from "@qingye_lab/ui/components/password-input";
+import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Card } from "@qingye_lab/ui/components/card";
 import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
@@ -21,7 +23,6 @@ const sizes = ["xs", "sm", "md", "lg", "xl"] as const;
 // Button 仍保留五档（命令类的尺寸表达位置），两者的审查方式因此不同。
 const densities = ["default", "compact"] as const;
 const variants = ["solid", "bordered", "quiet"] as const;
-const states = ["idle", "waiting", "in-progress", "unknown", "failed"] as const;
 
 function Section({ id, title, fact, children }: {
   id: string; title: string; fact?: string; children: ReactNode;
@@ -66,14 +67,14 @@ export default function DesignReview() {
           </div>
         </Section>
 
-        <Section id="button-states-review" title="Button · 状态" fact="等待、进行中和结果未知会阻止再次触发。">
+        <Section id="button-states-review" title="Button · 状态" fact="忙碌时保留焦点并挡住再次触发。">
           <div className="grid grid-cols-[auto_repeat(3,minmax(0,1fr))] items-center gap-(--qy-panel-gap)">
             <span />
             {variants.map((variant) => <span key={variant} className="text-caption text-muted-foreground">{variant}</span>)}
-            {states.map((state, index) => (
-              <Fragment key={state}>
-                <span className="text-caption text-muted-foreground">{["静态", "等待", "进行中", "结果未知", "失败"][index]}</span>
-                {variants.map((variant) => <Button key={variant} variant={variant} state={state} className="justify-self-start">保存</Button>)}
+            {[false, true].map((loading) => (
+              <Fragment key={String(loading)}>
+                <span className="text-caption text-muted-foreground">{loading ? "忙碌" : "静态"}</span>
+                {variants.map((variant) => <Button key={variant} variant={variant} loading={loading} className="justify-self-start">保存</Button>)}
               </Fragment>
             ))}
             <span className="text-caption text-muted-foreground">禁用</span>
@@ -83,11 +84,9 @@ export default function DesignReview() {
             <div className="flex items-start gap-(--qy-action-gap)">
               <Button>保存</Button><Button variant="bordered">预览</Button><Button variant="quiet">取消</Button>
             </div>
-            <ButtonProtection consequence="删除后无法恢复。">
-              <div className="flex gap-(--qy-action-gap)">
-                {variants.map((variant) => <Button key={variant} variant={variant} tone="danger">删除</Button>)}
-              </div>
-            </ButtonProtection>
+            <div className="flex gap-(--qy-action-gap)">
+              {variants.map((variant) => <Button key={variant} variant={variant} tone="danger">删除</Button>)}
+            </div>
           </div>
         </Section>
 
@@ -102,8 +101,8 @@ export default function DesignReview() {
             <Field><FieldLabel>只读</FieldLabel><Input readOnly defaultValue="青野" /></Field>
           </div>
           <div className="mt-(--qy-field-group-gap) grid grid-cols-2 gap-(--qy-panel-gap)">
-            <Field><FieldLabel>搜索</FieldLabel><Input type="search" defaultValue="青野" /></Field>
-            <Field><FieldLabel>密码</FieldLabel><Input type="password" defaultValue="qingye" /></Field>
+            <Field><FieldLabel>搜索</FieldLabel><SearchInput defaultValue="青野" /></Field>
+            <Field><FieldLabel>密码</FieldLabel><PasswordInput defaultValue="qingye" /></Field>
           </div>
         </Section>
 

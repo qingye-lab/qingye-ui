@@ -138,7 +138,7 @@ test("the site's copy adapter uses the library's pending, success and rejected-w
   await mount(fixture.copyScene());
   const button = document.querySelector('[data-slot="copy-button"]');
   await click(button);
-  assert.equal(button.dataset.state, "in-progress");
+  assert.equal(button.hasAttribute("data-loading"), true);
   assert.equal(button.getAttribute("aria-busy"), "true");
   await act(async () => { finish(); await Promise.resolve(); });
   assert.equal(button.hasAttribute("data-copied"), true);

@@ -42,12 +42,13 @@ test("component Markdown carries the catalog's composition, responsive and custo
 });
 
 
-test("current component resources match the live public catalog after a removal", () => {
+test("current component resources match the live public catalog after removals and additions", () => {
   const catalog = JSON.parse(read("packages/ui/catalog.json"));
   const names = catalog.components.map((component: { name: string }) => `${component.name}.md`).sort();
   for (const base of ["packages/ui/ai", "apps/docs/public/ai"]) {
     expect(readdirSync(resolve(root, base, `v${catalog.version}/components`)).filter((name) => name.endsWith(".md")).sort()).toEqual(names);
   }
-  expect(names).not.toContain("search-input.md");
-  expect(names).not.toContain("password-input.md");
+  // 2026-10-10（功能要纯粹）：搜索与密码输入重新成为独立组件（由 InputGroup 组合），资源随目录一并回来。
+  expect(names).toContain("search-input.md");
+  expect(names).toContain("password-input.md");
 });

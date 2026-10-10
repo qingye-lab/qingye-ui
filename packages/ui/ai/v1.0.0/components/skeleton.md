@@ -12,9 +12,9 @@ Source SHA-256: 301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e
 
 ## Use and ownership
 - 首次加载的内容区域，形状已知、几行几块可预期。
-- Avoid: 刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（in-progress）与一条 Progress 表达，二者共用一个等待周期。
+- Avoid: 刷新时保留仍然有效的工作面，不退回骨架；等待由发起它的 Button（loading）与一条 Progress 表达，二者共用一个等待周期。
 - Avoid: 加载失败或结果为空时改用 Empty，不让占位冒充内容。
-- Avoid: 不确定形状或时间极短的等待，用按钮的 in-progress。
+- Avoid: 不确定形状或时间极短的等待，用按钮的 loading。
 - Library: 一句名称（跟随语言）、形状对辅助技术隐藏、以材为度的行高与墨色。
 - Application: 何时开始与结束、久等的处置、内容的真实形状、失败与为空的处置。
 
@@ -142,7 +142,7 @@ export default function Demo() {
         <ProgressTrack><ProgressIndicator /></ProgressTrack>
       </Progress>
       <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
-      <Button onClick={() => setRefreshing(true)} state={refreshing ? "in-progress" : "idle"} variant="bordered">刷新</Button>
+      <Button onClick={() => setRefreshing(true)} loading={refreshing} variant="bordered">刷新</Button>
     </Stack>
   </Card>;
 }

@@ -15,8 +15,8 @@
 - `cn()` 只在变体与选择器字符串完全相同时把两条类当作同一属性的冲突去重；作用于同一元素的不同选择器会同时留下，谁生效由样式表顺序决定。同一元素同一属性分量只留一个来源。
 - 改渲染元素使用 Base UI `render`、`useRender` 与 `mergeProps`；不新增无任务依据的别名或 `as` API。当前 Card 是组合入口，不自动提供标题槽或 padding。
 - 基于 Base UI 的组件导出所用原语命名空间。可控状态同时保留适用的受控与非受控入口；职责按 [design.md「明确修改归属」](design.md#明确修改归属) 判断。
-- 请求事实与结果推断按 [design.md「名称与状态」](design.md#名称与状态)。Button 当前选择状态联合 `idle / waiting / in-progress / unknown / failed`；boolean loading 也能符合状态归属，联合不是理念强制。
-- 危险后果必须可见且可关联。danger Button 位于 ButtonProtection 内，或其 `aria-describedby` 指向页面中存在且文本非空的元素，满足任一即可；两者都无时开发环境抛错，生产不抛。运行时缺少 `process` 时按生产处理，跳过开发诊断。ButtonProtection 的 consequence 为非空可见文字，说明当前对象与后果；已有可靠说明不重复包装。后果关联见基础层 §18，缺少运行时环境的验证见批次 3 D 报告。
+- 请求事实与结果推断按 [design.md「名称与状态」](design.md#名称与状态)。Button 只有忙碌一种状态（`loading`，用户裁决 2026-10-10）：事实由调用方持有，按钮不启动请求、不推断结束。成功、失败与结果未知不写在按钮上，由 Alert、Toast、FieldError、StatusDot 等提示组件表达。Toast 只呈现应用给出的类型，不设期限、不把久等推断为未知。
+- 功能纯粹（用户裁决 2026-10-10）：一个组件只做自己的事。Button 只触发动作，`tone="danger"` 只是色调；后果说明与确认属于 AlertDialog / ConfirmAction，后果写在对话框的说明里。Button 不再校验、包装或关联后果，`ButtonProtection` 已移除。按下后保持的二态用 Toggle；提示附在调用方给出的控件上（TooltipTrigger 的 `render` 必填），不自带按钮。Input 只承载值：清空、搜索图标与显示密码由 SearchInput、PasswordInput 或 InputGroup + InputGroupButton 组合。Chart / ScatterChart / Heatmap 只画数据（等价数据表是无障碍替代，保留）：整图没有记录、未知或不适用时由调用方在原位放 Empty。
 
 ## 2. 尺寸
 
@@ -81,10 +81,10 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 | focus-visible | 控件外不新增一圈；Input、可聚焦 Card、Popover 面板、bordered Button 的边框只变色不加粗。solid 内线 2px，quiet 自盒内线 1px |
 | disabled | 真实原生/ARIA 与事件约束另行成立；当前 opacity-64 是继承预设，不能代替真实禁用 |
 | invalid | 事实由调用方声明。Input 保留 aria-invalid 和错误边框，聚焦改危险文字色，宽度仍 1px，不增加内描边 |
-| waiting / in-progress / unknown / failed | Button 呈现传入事实，保留动作名称；忙碌与 unknown 防止再次触发，不自行推断成功或重试 |
+| loading | Button 呈现调用方传入的忙碌事实，保留动作名称与焦点，防止再次触发；不自行推断成功、失败或重试，结果由提示组件表达 |
 | selected / open | 使用原语实际提供的 data 状态；事实与名称对应，换外观不换语义 |
 
-焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。Input 清空/密码原生附属按钮与裸 Popover 入口目前用 2px 内线，不能把它们误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
+焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。SearchInput / PasswordInput 的附属动作是 InputGroupButton（quiet Button，1px 内线）；裸 Popover 入口目前用 2px 内线，不能把它误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
 
 强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：宽度和内缩位置均读取局部 `--qy-focus-ring-width`，默认 2px，quiet 为 1px；系统色接管。`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
 
@@ -145,7 +145,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=20eef36db14c077a4edf28348e6b8a932056cf6cc9f0a8d1a2578d554fca65d6 -->
+<!-- qingye:translation:en:start source-sha256=b80409de423e08a371ac687517736ace8f6d5434d25e80e5cfa56855bb7f4745 -->
 # Component Standards
 
 These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -163,8 +163,8 @@ Components are rewritten by current layers and roadmap batches. Read completed f
 - `cn()` deduplicates two classes only when their variant and selector strings are identical; different selectors reaching the same element both remain, and stylesheet order decides. Give each property component of an element one source.
 - Use Base UI `render`, `useRender`, and `mergeProps` to replace rendered elements. Avoid aliases or an `as` API without a task basis. Current Card is a composition entry without automatic title slots or padding.
 - Components based on Base UI export their primitive namespace. Controlled state retains applicable controlled and uncontrolled entries. Assign responsibilities using [Assigning changes](design.en.md#assigning-changes).
-- Request facts and outcome inference follow [Names and states](design.en.md#names-and-states). Button currently chooses `idle / waiting / in-progress / unknown / failed`. A boolean loading prop could also respect ownership; the union is a choice rather than a design requirement.
-- Danger consequences must be visible and associated. Place a danger Button inside ButtonProtection or reference existing nonblank text through `aria-describedby`. Development throws when neither exists; production does not. Missing runtime `process` is treated as production. ButtonProtection requires visible nonblank consequence text about the current object. Do not duplicate a reliable existing explanation. See foundation §18 and batch 3 D for the missing-runtime check.
+- Request facts and outcome inference follow [Names and states](design.en.md#names-and-states). Button has one state, busy (`loading`; user ruling, 2026-10-10): the caller owns the fact, and the button starts no request and infers no ending. Success, failure and unknown results are not written on the button; feedback components such as Alert, Toast, FieldError and StatusDot express them. Toast presents only the type the application gives it: it sets no deadline and never infers unknown from a long wait.
+- One job per component (user ruling, 2026-10-10). Button only triggers an action and `tone="danger"` is only a tone. Consequence text and confirmation belong to AlertDialog / ConfirmAction, stated in the dialog description. Button no longer validates, wraps, or associates consequences; `ButtonProtection` is removed. A two-state fact that persists after pressing is a Toggle. A hint attaches to the caller's control (TooltipTrigger requires `render`) and brings no button of its own. Input only carries a value: clearing, a search icon and password visibility are composed by SearchInput, PasswordInput or InputGroup + InputGroupButton. Chart / ScatterChart / Heatmap only draw data (the equivalent data table is an accessibility alternative and stays): when the whole chart has no records, is unknown or does not apply, the caller puts Empty in its place.
 
 ## 2. Dimensions
 
@@ -229,10 +229,10 @@ Ownership and simultaneous states follow [Names and states](design.en.md#names-a
 | focus-visible | No additional outer ring. Input, focusable Card, Popover panel, and bordered Button change existing border color without thickness changes. solid uses an internal 2px line; quiet an internal 1px line |
 | disabled | Native/ARIA semantics and event guards apply independently. Current opacity-64 is an inherited preset rather than a substitute for actual disabled behavior |
 | invalid | Caller-declared facts. Input retains aria-invalid and an error border, changing to danger text color on focus at the same 1px width without an added inner ring |
-| waiting / in-progress / unknown / failed | Button expresses supplied facts and retains the action name. Busy and unknown block repeated activation without inferring success or retry |
+| loading | Button expresses the caller-supplied busy fact, retains the action name and focus, and blocks repeated activation. It infers no success, failure or retry; feedback components express results |
 | selected / open | Consume actual primitive data states; preserve semantics when changing appearance |
 
-Foundation §15 records focus values: `--qy-focus-ring-width` currently chooses 2px and `--qy-focus-quiet-width` 1px. Input's clear/password adjunct buttons and bare Popover entries currently use 2px internal lines, rather than quiet Button's 1px. Popover panel actually receives focus; review observed focus-visible after opening with Enter, and its border only changes color.
+Foundation §15 records focus values: `--qy-focus-ring-width` currently chooses 2px and `--qy-focus-quiet-width` 1px. The adjunct actions of SearchInput / PasswordInput are InputGroupButton (a quiet Button with a 1px internal line); bare Popover entries currently use a 2px internal line rather than quiet Button's 1px. Popover panel actually receives focus; review observed focus-visible after opening with Enter, and its border only changes color.
 
 In forced colors, systems remove box shadows. `styles.css` restores CSS outline with width and inward offset reading local `--qy-focus-ring-width`: 2px by default and 1px for quiet. System colors take over; `!important` overrides utilities-layer outline-none. Widths are choices rather than AA minimums. The full forced-color composition matrix remains UNVERIFIED.
 

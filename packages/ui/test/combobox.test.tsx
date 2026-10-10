@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Combobox, ComboboxClear, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "../src/components/combobox";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["甲", "乙", "丙"];
@@ -53,4 +53,36 @@ test.each(["readOnly", "disabled", "fieldDisabled"])("%s prevents candidate chan
   expect(change).not.toHaveBeenCalled();
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(state === "readOnly" ? ["甲"] : []);
   await waitFor(() => expect(screen.queryByRole("option")).not.toBeInTheDocument());
+});
+
+test("multiple confirms a set: each value is a removable chip and its own form entry", async () => {
+  function Example() {
+    const [value, setValue] = useState<string[]>(["甲"]);
+    return <form><Field name="choices"><FieldLabel>候选</FieldLabel><Combobox multiple items={items} value={value} onValueChange={setValue}>
+      <ComboboxControl><ComboboxChips><ComboboxValue>{(selected: string[]) => selected.map(item => <ComboboxChip key={item}>{item}</ComboboxChip>)}</ComboboxValue><ComboboxInput /></ComboboxChips><ComboboxTrigger /></ComboboxControl>
+      <ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup>
+    </Combobox></Field></form>;
+  }
+  const { container } = render(<Example />);
+  const form = () => new FormData(container.querySelector("form")!).getAll("choices");
+  const input = screen.getByRole("combobox", { name: "候选" });
+  expect(form()).toEqual(["甲"]);
+  await userEvent.type(input, "乙");
+  // 过滤草稿不是候选值。
+  expect(form()).toEqual(["甲"]);
+  await userEvent.keyboard("{ArrowDown}{Enter}");
+  expect(form()).toEqual(["甲", "乙"]);
+  expect(input).toHaveValue("");
+  expect(container.querySelectorAll("[data-slot=combobox-chip]")).toHaveLength(2);
+  await userEvent.click(screen.getByRole("button", { name: "移除 甲" }));
+  expect(form()).toEqual(["乙"]);
+});
+
+test("read-only multiple shows its values without remove actions", () => {
+  render(<Combobox multiple readOnly items={items} defaultValue={["甲", "丙"]}>
+    <ComboboxControl><ComboboxChips><ComboboxValue>{(selected: string[]) => selected.map(item => <ComboboxChip key={item}>{item}</ComboboxChip>)}</ComboboxValue><ComboboxInput aria-label="候选" /></ComboboxChips></ComboboxControl>
+  </Combobox>);
+  expect(screen.getByText("甲")).toBeInTheDocument();
+  expect(screen.getByText("丙")).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: /移除/ })).not.toBeInTheDocument();
 });

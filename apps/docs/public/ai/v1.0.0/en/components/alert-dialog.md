@@ -12,7 +12,7 @@ Backdrop presses do not dismiss it; focus starts on the panel. Escape and the re
 
 ## Notes
 - Use Dialog for ordinary edits, or inline confirmation when interruption is unnecessary.
-- Keep consequences visible and associated with the danger action.
+- Keep the consequence visible in the dialog (Description).
 - Handle closing and the affirmative action separately.
 - Provide an explicit return choice; Escape alone is insufficient.
 - Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.
@@ -67,7 +67,7 @@ Use the same structure and content-driven sizing as Dialog, defaulting focus to 
 - portalProps / backdropProps / viewportProps: DialogPopupProps. Forward containers, styles, render, refs and native attributes to structural layers.
 
 ### AlertDialogTitle / AlertDialogDescription
-Name the decision and its consequences with accessible associations.
+Name the decision and its consequences with accessible associations. The consequence belongs in Description; buttons carry none.
 
 ### AlertDialogTrigger / AlertDialogClose
 Compose Button by default. Name Close explicitly, such as Return; it does not run the affirmative action.
@@ -87,7 +87,7 @@ Shared-trigger handle and the Base UI primitive namespace.
 ### 确认与返回
 Source: apps/docs/src/content/alert-dialog/demos/01-confirmation.tsx
 ```tsx
-import { useId, useState } from "react";
+import { useState } from "react";
 import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle, AlertDialogTrigger } from "@qingye_lab/ui/components/alert-dialog";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
@@ -98,22 +98,20 @@ export const meta = { title: "确认与返回", titleEn: "Confirmation and retur
 export default function Demo() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("青野");
-  const consequenceId = useId();
 
   return (
     <div className="grid w-full max-w-sm gap-(--qy-panel-gap)">
       <Field><FieldLabel>备注</FieldLabel><Input value={value} onValueChange={setValue} /></Field>
-      <p id={consequenceId} className="text-support text-muted-foreground">清空后，输入内容无法恢复。</p>
       <AlertDialog open={open} onOpenChange={setOpen}>
-        <AlertDialogTrigger render={<Button variant="bordered" tone="danger" aria-describedby={consequenceId} />} className="justify-self-start">清空输入</AlertDialogTrigger>
+        <AlertDialogTrigger render={<Button variant="bordered" tone="danger" />} className="justify-self-start">清空输入</AlertDialogTrigger>
         <AlertDialogPopup>
           <AlertDialogHeader>
             <AlertDialogTitle>清空输入？</AlertDialogTitle>
-            <AlertDialogDescription id={`${consequenceId}-popup`}>当前备注将被清空。</AlertDialogDescription>
+            <AlertDialogDescription>当前备注将被清空，无法恢复。</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogClose render={<Button variant="bordered" />}>返回</AlertDialogClose>
-            <Button tone="danger" aria-describedby={`${consequenceId}-popup`} onClick={() => { setValue(""); setOpen(false); }}>清空输入</Button>
+            <Button tone="danger" onClick={() => { setValue(""); setOpen(false); }}>清空输入</Button>
           </AlertDialogFooter>
         </AlertDialogPopup>
       </AlertDialog>

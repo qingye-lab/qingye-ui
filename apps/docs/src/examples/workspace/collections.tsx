@@ -8,7 +8,7 @@ import { Button, buttonVariants } from "@qingye_lab/ui/components/button";
 import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
 import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle } from "@qingye_lab/ui/components/drawer";
-import { Input } from "@qingye_lab/ui/components/input";
+import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Inline } from "@qingye_lab/ui/components/layout";
 import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
@@ -72,7 +72,7 @@ export default function Collections() {
           </BulkActionBarActions>
         </BulkActionBar>
         : <Inline gap="actions" className="w-full flex-nowrap">
-          <div className="w-[16rem] min-w-0"><Input type="search" value={query} onChange={event => filter(() => setQuery(event.target.value))} onClear={() => filter(() => setQuery(""))} placeholder="搜索集合" aria-label="搜索集合" /></div>
+          <div className="w-[16rem] min-w-0"><SearchInput value={query} onChange={event => filter(() => setQuery(event.target.value))} placeholder="搜索集合" aria-label="搜索集合" /></div>
           <div className="min-w-0">
             <Select<(typeof SOURCES)[number]> items={SOURCES.map(item => ({ value: item, label: item }))} value={source} onValueChange={value => value && filter(() => setSource(value))}>
               <SelectTrigger aria-label="来源"><SelectValue /></SelectTrigger>

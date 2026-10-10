@@ -70,10 +70,10 @@ export default {
       "props": [
         {
           "name": "value / keepMounted",
-          "type": "Base UI Panel props",
-          "description": "默认保留挂载与输入；false 由应用承担卸载后果。",
-          "descriptionEn": "Mounted panels retain input by default; applications own the effects of false.",
-          "default": "keepMounted=true"
+          "type": "Value / boolean | \"visited\"",
+          "description": "visited：第一次到达才挂载，之后保留输入与已取回的内容，没到过的面板不发请求。true：一开始全部挂载，跨标签页一起提交的原生表单字段用它。false：离开即卸载，由应用承担后果。",
+          "descriptionEn": "visited mounts a panel on first arrival and keeps its input and loaded content afterwards, so unvisited panels make no requests. true mounts every panel up front; use it for native form fields submitted together across tabs. false unmounts on leaving, and the application owns the effects.",
+          "default": "keepMounted=\"visited\""
         },
         {
           "name": "render / ref / native props",
@@ -85,10 +85,10 @@ export default {
     }
   ],
   "notes": [
-    "隐藏面板仍挂载但退出可访问树；不要把切换当成保存成功。"
+    "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
   ],
   "notesEn": [
-    "Hidden panels remain mounted but leave the accessibility tree; switching is never reported as saving."
+    "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
   ],
   "design": {
     "methods": [

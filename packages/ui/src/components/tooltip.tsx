@@ -3,7 +3,6 @@
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import * as React from "react";
 import { cn } from "../utils";
-import { Button } from "./button";
 import { useFloatingLayer } from "../floating-layer";
 
 const TooltipProvider = TooltipPrimitive.Provider;
@@ -44,7 +43,16 @@ function Tooltip<Payload>(props: TooltipPrimitive.Root.Props<Payload>) {
   return <TooltipAssociation.Provider value={association}><TooltipPrimitive.Root {...props} disableHoverablePopup={false} trackCursorAxis={props.trackCursorAxis === "both" ? "none" : props.trackCursorAxis} /></TooltipAssociation.Provider>;
 }
 
-function TooltipTrigger(props: TooltipPrimitive.Trigger.Props): React.ReactElement {
+export type TooltipTriggerProps = Omit<TooltipPrimitive.Trigger.Props, "render"> & {
+  /** 被提示的那个控件本身（按钮、链接、菜单项）。提示只是附在它上面，不替它决定是什么控件。 */
+  render: NonNullable<TooltipPrimitive.Trigger.Props["render"]>;
+};
+/**
+ * 提示附在一个已有的控件上（用户裁决 2026-10-10：功能要纯粹）。触发器不自带按钮——
+ * 此前省略 render 时默认渲染无框按钮，把链接放进 children 就成了按钮里套链接。
+ * 控件必须能获得键盘焦点，所以也没有 span 默认值。
+ */
+function TooltipTrigger(props: TooltipTriggerProps): React.ReactElement {
   const context = React.useContext(TooltipAssociation);
   const association = React.useMemo(() => props.handle ? associationFor(props.handle) : context, [props.handle, context]);
   const attach = React.useCallback((element: HTMLElement) => {
@@ -77,7 +85,7 @@ function TooltipTrigger(props: TooltipPrimitive.Trigger.Props): React.ReactEleme
   }, [association]);
   const ref = usePartRef(props.ref, attach);
   const nativeDisabled = React.isValidElement<{ disabled?: boolean }>(props.render) && props.render.props.disabled === true;
-  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} disabled={nativeDisabled || props.disabled} render={props.render ?? <Button variant="quiet" />} ref={ref} />;
+  return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} disabled={nativeDisabled || props.disabled} ref={ref} />;
 }
 
 type TooltipPopupProps = TooltipPrimitive.Popup.Props & {

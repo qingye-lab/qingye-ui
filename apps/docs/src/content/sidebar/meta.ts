@@ -100,10 +100,14 @@ export default {
     }
   ],
   "notes": [
-    "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。"
+    "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。",
+    "当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。",
+    "当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。"
   ],
   "notesEn": [
-    "Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available."
+    "Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.",
+    "The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.",
+    "The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash."
   ],
   "design": {
     "methods": [

@@ -23,7 +23,7 @@ export default function Demo() {
         <ProgressTrack><ProgressIndicator /></ProgressTrack>
       </Progress>
       <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
-      <Button onClick={() => setRefreshing(true)} state={refreshing ? "in-progress" : "idle"} variant="bordered">刷新</Button>
+      <Button onClick={() => setRefreshing(true)} loading={refreshing} variant="bordered">刷新</Button>
     </Stack>
   </Card>;
 }

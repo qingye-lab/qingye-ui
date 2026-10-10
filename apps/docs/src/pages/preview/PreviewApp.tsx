@@ -7,6 +7,8 @@ import { CheckboxGroup } from "@qingye_lab/ui/components/checkbox-group";
 import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@qingye_lab/ui/components/input-group";
+import { PasswordInput } from "@qingye_lab/ui/components/password-input";
+import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
@@ -72,7 +74,7 @@ export default function PreviewApp() {
           <Row label="变体"><Button>保存</Button><Button variant="bordered">预览</Button><Button variant="quiet">取消</Button><Button tone="danger">删除</Button><Button variant="bordered" tone="danger">删除</Button><Button variant="quiet" tone="danger">删除</Button></Row>
           <Row label="尺寸"><Button size="xs">保存</Button><Button size="sm">保存</Button><Button size="md">保存</Button><Button size="lg">保存</Button><Button size="xl">保存</Button></Row>
           <Row label="图标形"><Button shape="icon" aria-label="新建集合"><IconPlus aria-hidden="true" /></Button><Button shape="icon" variant="bordered" aria-label="导出"><IconDownload aria-hidden="true" /></Button><Button shape="icon" variant="quiet" aria-label="更多操作"><IconDots aria-hidden="true" /></Button></Row>
-          <Row label="状态"><Button state="waiting">保存</Button><Button state="in-progress">保存</Button><Button state="unknown">保存</Button><Button state="failed">保存</Button><Button disabled>保存</Button></Row>
+          <Row label="状态"><Button loading>保存</Button><Button disabled>保存</Button></Row>
           <Row label="动作组"><ButtonGroup aria-label="页面动作"><Button variant="bordered">导出</Button><Button>保存</Button></ButtonGroup><ButtonGroup aria-label="行内动作"><Button variant="quiet">复制</Button><Button variant="quiet">重命名</Button></ButtonGroup></Row>
           <Row label="切换"><Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle><Toggle shape="icon" aria-label="斜体">I</Toggle><ToggleGroup value={[view]} onValueChange={next => setView(next[0] ?? view)} aria-label="显示列"><ToggleGroupItem value="名称">名称</ToggleGroupItem><ToggleGroupItem value="记录数">记录数</ToggleGroupItem><ToggleGroupItem value="最近同步">最近同步</ToggleGroupItem></ToggleGroup></Row>
           <Row label="分段"><SegmentedControl value="center" aria-label="对齐"><SegmentedControlItem value="left">左</SegmentedControlItem><SegmentedControlItem value="center">中</SegmentedControlItem><SegmentedControlItem value="right">右</SegmentedControlItem></SegmentedControl></Row>
@@ -101,8 +103,8 @@ export default function PreviewApp() {
           </Row>
           <Row label="搜索与密码">
             <div className={fieldGrid}>
-              <Field><FieldLabel>搜索</FieldLabel><Input type="search" defaultValue="设备" onClear={() => {}} /></Field>
-              <Field><FieldLabel>密码</FieldLabel><Input type="password" defaultValue="qingye-ui" /></Field>
+              <Field><FieldLabel>搜索</FieldLabel><SearchInput defaultValue="设备" /></Field>
+              <Field><FieldLabel>密码</FieldLabel><PasswordInput defaultValue="qingye-ui" /></Field>
             </div>
           </Row>
           <Row label="选择与数值">

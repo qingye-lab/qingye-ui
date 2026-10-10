@@ -8,7 +8,6 @@ export const enUS: UILocale = {
     close: "Close", loading: "Loading", readOnly: "Read only", breadcrumb: "Breadcrumb", more: "More",
     dismissFileRejection: (name) => `Dismiss rejection for ${name}`,
     toastSuccess: "Succeeded",
-    toastResultUnknown: "The operation result is unconfirmed", toastResultUnknownDescription: "Check the result.",
     pagination: "Pagination", previousPage: "Previous", nextPage: "Next", morePages: "More pages",
     sidebar: "Workspace navigation",
     showOptions: "Show options", clearSelection: "Clear selection", remove: "Remove",
