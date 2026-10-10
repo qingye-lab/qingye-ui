@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
+Source SHA-256: f75c8f55e055fe78f9216d9a940cf521c9f60ef03d7c3af4b4fd6b0234073427
 
 同一对象的不同视角，保留面板草稿。
 
@@ -11,7 +11,7 @@ Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
 默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。
 
 ## Notes
-- 到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。
+- 隐藏面板仍挂载但退出可访问树；不要把切换当成保存成功。
 
 ## Use and ownership
 - 同一对象多种视角需要保留编辑连续性。
@@ -44,7 +44,7 @@ Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -62,7 +62,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### TabsPanel / TabsPrimitive
 原生 tabpanel 与公开原语。
-- value / keepMounted: Value / boolean | "visited"; default keepMounted="visited". visited：第一次到达才挂载，之后保留输入与已取回的内容，没到过的面板不发请求。true：一开始全部挂载，跨标签页一起提交的原生表单字段用它。false：离开即卸载，由应用承担后果。
+- value / keepMounted: Base UI Panel props; default keepMounted=true. 默认保留挂载与输入；false 由应用承担卸载后果。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard

@@ -3,28 +3,27 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: a05c8fdaddbcad8ff68d0e5813051cb7a079aa36c590657de0268905a65ab1db
+Source SHA-256: c9f579088e74b98cdb50e18cb34aadd8a64cb51a3569961faea4b93aabf9e3f5
 
-输入一个文本值。
+输入一个文本值。搜索、密码与清空动作使用同一个输入入口。
 
 ## Decision
-输入框只做一件事：承载一个值的输入。清空、搜索图标与显示密码是附在编辑边界上的另一件事，由 SearchInput、PasswordInput 或 InputGroup 组合出来，输入框不内置。Placeholder 不能代替持续可见的名称。
+输入框只持有输入值；搜索结果与提交由调用方处理。Placeholder 不能代替持续可见的名称。
 
 ## Notes
 - aria-invalid 来自应用或浏览器校验；值的真伪与是否送达分开表达。
 - 提供 FieldLabel、原生 label 或 aria-label。Placeholder 是输入提示，不是名称。
-- clearable / clearLabel / onClear 与 visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel 已移除：搜索用 SearchInput，密码用 PasswordInput，其他附属动作用 InputGroup + InputGroupButton 组合。
+- 原 SearchInput / PasswordInput 改为 Input type="search" / type="password"；loading 与 shortcut 改为明确的状态或 InputGroup 组合。size="default" 改为 "md"；旧外框 className 改为 controlClassName。
 - type="file" 保留浏览器文件选择行为与语言；文件列表和业务校验由调用方提供。
 
 ## Use and ownership
-- 输入一个文本值，原生 type 与内容匹配。
-- Avoid: 搜索用 SearchInput，密码用 PasswordInput。
+- 输入一个文本值，原生 type 与内容匹配；搜索结果和提交行为由组合负责。
 - Avoid: 用 placeholder 代替名称；把超时变成无效；把未知转成空串或 0；校验失败清空草稿。
-- Library: 原生输入、Field 关联、焦点与只读标记。
+- Library: 原生输入、Field 关联、焦点、清空与密码可见性。
 - Application: 值的含义、校验事实、候选范围、未知/不适用及送达结果。
 
 ## Composition
-- 与 FieldLabel、FieldDescription、FieldError 共处；单位、标记与附属动作（清空、应用）交给 InputGroup + InputGroupButton。
+- 与 FieldLabel、FieldDescription、FieldError 共处；额外单位、标记和动作交给 InputGroup。
 
 ## Responsive behavior
 - xs/sm/md/lg/xl 消费基础层档案；窄屏增加 4px，粗指针编辑区至少 44px。
@@ -40,23 +39,29 @@ Source SHA-256: a05c8fdaddbcad8ff68d0e5813051cb7a079aa36c590657de0268905a65ab1db
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
 ## Curated API
 ### Input
 真实边框界定编辑区；Base UI Input 保留 Field 注册和原生属性。
-- type: React.HTMLInputTypeAttribute; default "text". 原生类型原样生效，不附带任何额外动作。搜索与密码用 SearchInput / PasswordInput。
-- value / defaultValue / onValueChange: 原生值 / 初始值 / (value, details) => void. 支持受控与非受控值；onChange 同样透传。
-- readOnly: boolean; default false. 保留焦点、复制与表单提交，阻止编辑；默认显示只读标记。
+- type: React.HTMLInputTypeAttribute; default "text". search 加搜索标记与可清空动作；password 加可见性开关。不会自动补名称或 placeholder。
+- value / defaultValue / onValueChange: 原生值 / 初始值 / (value, details) => void. 支持受控与非受控值；onChange 同样透传。清空沿同一事件链更新值。
+- clearable / clearLabel / onClear: boolean / string / () => void; default type === search. 非空可编辑值可清空；按钮返回输入焦点。禁用与只读时隐藏。
+- visibilityToggle: boolean; default type === password. password 的可选附属动作，不更改内容或提交表单。
+- visible / defaultVisible / onVisibleChange: boolean / boolean / (visible) => void; default defaultVisible: false. 独立支持受控与非受控可见性。
+- showLabel: string. 可见性开关的稳定名称，默认从 locale 读取；aria-pressed 表达当前可见性。
+- readOnly: boolean; default false. 保留焦点、复制与表单提交，阻止编辑与清空；默认显示只读标记。
 - className / style / render / ref: Base UI Input props. 全部作用于真实 input；className/style 支持状态函数。
 - controlClassName: string. 调整共同编辑边界，例如宽度与所在布局；不替代原生属性。
 - unstyled: boolean; default false. 由 InputGroup 等公共组合承担边界；保留内高、档案与原生状态。
 - nativeInput: boolean; default false. 已由 FieldControl 或其他原语注册时使用原生出口；保留 render/ref/事件，避免重复注册。
 
 ## Keyboard
-- Tab / Shift+Tab: 进入与离开输入。
+- Tab / Shift+Tab: 在输入与可用附属动作之间移动；禁用动作不进入顺序。
+- Escape: 可清空且非空时清空，后续 Escape 返回外层；输入法组字及调用方取消时保留草稿。
+- Enter / Space: 焦点在附属按钮上时立即执行，不提交表单。
 
 ## Source examples
 ### 设备名称
@@ -144,5 +149,33 @@ export default function Demo() {
       </FieldDescription>
     </Field>
   );
+}
+```
+
+### 搜索与清空
+Source: apps/docs/src/content/input/demos/06-search.tsx
+```tsx
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "搜索与清空", titleEn: "Search and clearing" };
+
+export default function Demo() {
+  return <Field className="w-full max-w-sm"><FieldLabel>搜索</FieldLabel><Input type="search" defaultValue="青野" /></Field>;
+}
+```
+
+### 密码
+Source: apps/docs/src/content/input/demos/07-password.tsx
+```tsx
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { useState } from "react";
+
+export const meta = { title: "密码", titleEn: "Password" };
+
+export default function Demo() {
+  const [visible, setVisible] = useState(false);
+  return <Field className="w-full max-w-sm"><FieldLabel>新密码</FieldLabel><Input type="password" autoComplete="new-password" defaultValue="qingye-2026" visible={visible} onVisibleChange={setVisible} /></Field>;
 }
 ```

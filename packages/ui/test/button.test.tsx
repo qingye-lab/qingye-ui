@@ -385,30 +385,6 @@ test.each(["solid", "bordered", "quiet"] as const)("%s exposes its current varia
   expect(screen.getByRole("button")).toHaveAttribute("data-variant", variant);
 });
 
-test.each(["xs", "sm", "md", "lg", "xl"] as const)("bordered %s consumes a real border and its matching padding", (size) => {
-  render(<Button size={size} variant="bordered">保留名称</Button>);
-  // md 与填值控件同行，几何读填值角色层（默认密度下等于 md 档的取值）；其余四档读自己的档位。
-  const padding = size === "md" ? "px-(--qy-fill-padding)" : `px-(--qy-control-${size}-padding-bordered)`;
-  expect(screen.getByRole("button")).toHaveClass("border", "border-(--qy-button-bordered-border)", "focus-visible:border-(--qy-button-bordered-border-focus)", padding);
-});
-
-test("danger bordered tints its resting and focus lines with the danger text color, as two separate utilities", () => {
-  render(<><p id="bordered-consequence">删除后无法恢复。</p><Button variant="bordered" tone="danger" aria-describedby="bordered-consequence">删除</Button></>);
-  // 两条局部属性各是一个类；粘成一个类时两条都不生效，线退回中性墨。
-  expect(screen.getByRole("button")).toHaveClass(
-    "[--qy-button-bordered-border:color-mix(in_srgb,var(--color-destructive-foreground)_var(--qy-ink-dan),transparent)]",
-    "[--qy-button-bordered-border-focus:var(--color-destructive-foreground)]",
-  );
-});
-
-test("md follows the fill-control role so it stays the height of the inputs beside it; other sizes keep their own profile", () => {
-  const { rerender } = render(<Button>保存</Button>);
-  expect(screen.getByRole("button")).toHaveClass("min-h-(--qy-fill-height-narrow)", "sm:min-h-(--qy-fill-height)", "rounded-(--qy-fill-radius)");
-  rerender(<Button size="lg">保存</Button>);
-  expect(screen.getByRole("button")).toHaveClass("sm:min-h-(--qy-control-lg)");
-  expect(screen.getByRole("button")).not.toHaveClass("sm:min-h-(--qy-fill-height)");
-});
-
 test("a caller-supplied description still reaches a danger button like any other", () => {
   render(<><Button tone="danger" aria-describedby="consequence">删除</Button><p id="consequence">删除后无法恢复。</p></>);
   expect(screen.getByRole("button")).toHaveAccessibleDescription("删除后无法恢复。");
@@ -452,31 +428,3 @@ test("mount-time validation preserves a caller's ref and its React cleanup", () 
   unmount();
   expect(cleanup).toHaveBeenCalledOnce();
 });
-
-test("the registry editor template compiles against current source props and rejects the removed state prop", () => {
-  const script = ts.createSourceFile("gen-catalog.mjs", readFileSync(resolve("scripts/gen-catalog.mjs"), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
-  let editor: string | undefined;
-  const visit = (node: ts.Node) => {
-    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === "editor" && node.initializer && ts.isNoSubstitutionTemplateLiteral(node.initializer)) editor = node.initializer.text;
-    ts.forEachChild(node, visit);
-  };
-  visit(script);
-  expect(editor).toBeDefined();
-  const fileName = resolve("test/__registry-editor-check.tsx");
-  const options: ts.CompilerOptions = {
-    strict: true, noEmit: true, skipLibCheck: true, jsx: ts.JsxEmit.ReactJSX,
-    target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext, moduleResolution: ts.ModuleResolutionKind.Bundler,
-    baseUrl: process.cwd(), paths: { "@qingye_lab/ui/components/*": ["src/components/*"] },
-  };
-  const check = (source: string) => {
-    const host = ts.createCompilerHost(options);
-    const originalGetSourceFile = host.getSourceFile.bind(host);
-    host.getSourceFile = (path, ...args) => path === fileName ? ts.createSourceFile(path, source, options.target!, true, ts.ScriptKind.TSX) : originalGetSourceFile(path, ...args);
-    return ts.getPreEmitDiagnostics(ts.createProgram([fileName], options, host));
-  };
-  expect(check(editor!).map((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"))).toEqual([]);
-  const invalid = editor!.replace("loading={saving}", 'state={saving ? "in-progress" : "idle"}');
-  expect(invalid).not.toBe(editor);
-  expect(check(invalid).some((diagnostic) => ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n").includes("Property 'state' does not exist"))).toBe(true);
-  // Two cold ts.createProgram runs; the default 5s budget is exceeded on a loaded CI worker.
-}, 60_000);

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: 9ca09dbc301e445e298b8bd812665f5795f3f07819343b2ee2b7c276243cc2eb
+Source SHA-256: a6ca2d97dabe3018be157df2cffedebdb00938e6f8b098267ddb16010fd2877c
 
 Which parts make up a whole and how much each takes.
 

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0
+Source SHA-256: c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6
 
 补充可恢复、非关键的操作事实，保持当前工作不中断。
 
@@ -11,17 +11,15 @@ Source SHA-256: 4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0
 通知不抢焦点。未知表示结果未确认，失败表示已有失败事实；关闭只关闭通知。字段错误、不可逆后果和需决策的失败留在工作面或确认结构，不能只用 Toast。
 
 ## Notes
-- 悬停、聚焦与窗口失焦暂停自动消失。
-- 通知只呈现应用给出的类型，不做推测：没有超时转未知，等待、进行中、未知与失败一直留到应用更新或用户关闭。loadingTimeout 已移除；需要期限时由应用计时并调用 toastManager.update(id, { type: "unknown" })。
-- 测试里按文字查找通知时限定在通知区域内（role=region）或用 data-slot=toast-title：priority=high 的通知另有一份视觉隐藏的播报副本，焦点进入通知区域后副本移除。
+- 悬停、聚焦与窗口失焦暂停自动消失；结果未知期限继续计时。
 - 普通成功默认短暂；失败/未知持续但仍可关闭。重要事实和恢复入口必须留在对象页面。
 - Viewport 与锚定通知消费共享 notification 层级，低于文档候选与 modal 关键动作。
 
 ## Use and ownership
 - 非关键、可恢复、无需打断当前工作的补充事实。
 - Avoid: 所有错误都用通知；关键后果只留在可关闭消息里；请求发出就宣布完成。
-- Library: 可访问原语、呈现、关闭、暂停与长期状态的持续显示。
-- Application: 对象、真实结果、等待期限与何时算未知、优先级、业务取消、核对和重试。
+- Library: 可访问原语、呈现、关闭、暂停、等待期限与长期状态。
+- Application: 对象、真实结果、优先级、业务取消、核对和重试。
 
 ## Composition
 - 同一 id 连接等待和结果；对象页面保留失败、未知与核对入口。
@@ -54,6 +52,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 同一通知通道挂载一次。
 - position: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"; default "bottom-right". 通知区域的位置。
 - timeout: number; default 5000. 普通通知与成功的阅读时限，0 为持续显示。
+- loadingTimeout: number; default 30000. 1—2147483647 的整数毫秒。等待/进行中到期仅转为持续 unknown，不推断后台结果；悬停不延长结果期限。
 - limit: number; default 3. 原语限制可见条数，超额根隐藏且 inert；不能作为关键结果的唯一承载。
 - toastManager: ToastPrimitive.createToastManager() 的返回值. 可选的独立通知通道；省略时用导出的全局 manager。
 - portalProps: ToastPrimitive.Portal.Props. 自定义 Portal 容器、方向和语言等属性。
@@ -63,7 +62,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 - title / description: ReactNode. 对象、结果与必要恢复依据。
 - type: string. waiting / in-progress / unknown / failed / success；保留 loading（进行中）、error（失败）、info 与 warning。
 - timeout: number. 失败/未知/等待/进行中强制持续显示，其他类型按指定时限关闭。
-- priority: "low" | "high"; default "low". low 使用礼貌 status；high 使用原语 alert。失败不自动打断播报。high 时原语在通知区域之外另放一份视觉隐藏的 alert 副本供读屏立即播报，标题与说明因此在 DOM 里各有两份。
+- priority: "low" | "high"; default "low". low 使用礼貌 status；high 使用原语 alert。失败不自动打断播报。
 - actionProps: React.ComponentPropsWithoutRef<'button'>. 应用提供操作与真实处理器，只执行一次；恢复落点仍留在页面。
 - data.rootProps: ToastPrimitive.Root.Props 的可透传部分. 透传 id、ARIA、事件、style、render 与 ref，不接管 children/className/toast/swipeDirection。
 
@@ -71,7 +70,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 用真实结果更新同一对象。离开持续状态时显式指定 timeout；Promise 成功自动恢复 Provider 时限。
 
 ### toastManager.promise(promise, { loading, success, error })
-进行中→真实成功/失败，更新同一条。通知不设期限、不推断结果：等多久都保持进行中，直到 Promise 落定或应用更新。响应丢失时由应用把这一条改为 unknown，不能将网络拒绝当业务失败。
+进行中→真实成功/失败；超期先转未知，迟到结果继续更新同一条。响应丢失须由应用保留未知，不能将网络拒绝当业务失败。
 
 ### toastManager.close(id?)
 关闭指定/全部通知，不取消或撤销业务任务。

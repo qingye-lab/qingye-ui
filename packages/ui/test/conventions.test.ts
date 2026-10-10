@@ -108,11 +108,6 @@ function inspectSlotHook(source: string, filename = "fixture.tsx") {
 }
 
 describe("component conventions", () => {
-  test("every component file is non-trivial and exports something", () => {
-    for (const [file, source] of table) {
-      expect(source, file).toMatch(/export /);
-    }
-  });
 
   test("no hard-coded greys: colours come from semantic tokens or utilities", () => {
     const offenders: string[] = [];

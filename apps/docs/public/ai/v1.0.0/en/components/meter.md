@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
-Source SHA-256: c6a79f529838893b4d73ae0a7800f3d357114d95c2188628cf46d3da3566c8de
+Source SHA-256: de0a572e25222332f6ee27c73e0a933fb66a5344d9c63f541af9882849be3383
 
 A real measurement over a valid range.
 

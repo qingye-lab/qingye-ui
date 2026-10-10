@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 9d10ef770a43ece6feae1b8c32c9a4ad06f34fb8228913d2ed721c9b3625ffe5
+Source SHA-256: e075ba4b147005f24c83b8ff89149f57ca1d815082f1eea296f50110c81117ab
 
 编辑自由文本，候选作为可接受的建议。
 

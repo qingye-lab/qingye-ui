@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 9f2190ff95c1558b7da2f0f842c5472c1550eeaf2bf912a5a55cd4af600354e5
+Source SHA-256: 81a078d00a598526e2bbcb5996702a0d94dc030bfaf7fed0ff06de8af39c901e
 
 七种由任务选定的形式——折线、柱状、面积、堆叠面积、横向柱、堆叠柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
 ## Decision
-图只画数据。已知0、未知和不适用的单个值分别成立：未知值形成gap，表格保留其真实名称。整张图没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。图形不替代可达数值。
+已知0、无记录、未知和不适用分别成立；未知值形成gap，表格保留其真实名称。图形不替代可达数值。
 
 ## Notes
 - null、NaN、Infinity、缺失键不能表示0；用显式unknown或not-applicable表达。
@@ -26,7 +26,7 @@ Source SHA-256: 9f2190ff95c1558b7da2f0f842c5472c1550eeaf2bf912a5a55cd4af600354e5
 - Application: 数据、量纲、真实性、状态文字与自定义图形。
 
 ## Composition
-- Recharts公开原语 + 当前Table；同一rows/series投影。没有可画的数据时，调用方在原位改放 Empty。
+- Recharts公开原语 + 当前Table/Empty；同一rows/series投影。
 
 ## Responsive behavior
 - 图高集中12em可覆写，表格原生滚动/换行；不裁掉实际值。
@@ -72,10 +72,11 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Chart
 figure名称、共同轴量纲、不同系列形态与同源可见Table。
 - label: string. 非空真实语义名称。
+- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". 真实整图事实；非ready由children表达，不造数字或坐标轴。
 - type: "line" | "bar" | "area" | "area-stacked" | "bar-horizontal" | "bar-stacked" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
 - categoryLabel / valueLabel: string. 非空分类轴名与共享量纲/单位；donut 不画轴线，但两个名字仍用于等价数据表与中心读数的说明文字。
 - series: readonly { key: string; label: string }[]. 1至5个同量纲系列（donut 要求2至5个）。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
-- rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。
+- rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。ready必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。
 - total: number. 只用于 donut：整体的总量。省略时等于各部分之和；大于之和时，剩余部分并入「其余」（groove-surface，不是第六种色相）。
 - formatValue: (value, series, row) => ReactNode. 格式化已知数值；默认按UILocale数值Intl，不改数据。
 - renderPlot: (projection: ChartPlotData) => ReactNode. 替换同源图形；gap为null，默认LineChart不连接gap且不动画。名称、图例与可见Table始终保留。自定义图形承担自身交互/ARIA。
@@ -116,19 +117,13 @@ export default function Demo() {
 Source: apps/docs/src/content/chart/demos/03-unknown.tsx
 ```tsx
 import { Chart } from "@qingye_lab/ui/components/chart";
-import { Empty, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
 import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "未知与空", titleEn: "Unknown and empty" };
-
-const failures: { id: string; label: string; count: number }[] = [];
-
 export default function Demo() {
   return <Stack gap="section" className="w-full max-w-2xl">
     <Chart type="line" label="近五天延迟" categoryLabel="日期" valueLabel="毫秒" series={[{ key: "ms", label: "延迟" }]}
       rows={[{ id: "1", label: "10/01", values: { ms: 120 } }, { id: "2", label: "10/02", values: { ms: 140 } }, { id: "3", label: "10/03", values: { ms: { state: "unknown", label: "采集中断" } } }, { id: "4", label: "10/04", values: { ms: 110 } }, { id: "5", label: "10/05", values: { ms: 98 } }]} />
-    {failures.length > 0
-      ? <Chart type="bar" label="本月失败原因" categoryLabel="原因" valueLabel="次数" series={[{ key: "count", label: "次数" }]} rows={failures.map(item => ({ id: item.id, label: item.label, values: { count: item.count } }))} />
-      : <Empty state="empty"><EmptyTitle level={3}>本月失败原因</EmptyTitle><EmptyDescription>本月没有失败记录。</EmptyDescription></Empty>}
+    <Chart label="本月失败原因" state="empty">本月没有失败记录。</Chart>
   </Stack>;
 }
 ```

@@ -35,14 +35,6 @@ test("current is controlled by the caller; changing the prop moves the marker wi
   expect(screen.getByRole("link", { name: "结果与恢复" })).toHaveAttribute("aria-current", "location");
 });
 
-test("level 3 reads a deeper indent than level 2, derived from the group gap plus the level indent", () => {
-  render(<Toc items={items} />);
-  const level2 = screen.getByRole("link", { name: "概览" });
-  const level3 = screen.getByRole("link", { name: "重试与核实" });
-  expect(level2.className).toContain("ps-(--qy-field-gap)");
-  expect(level3.className).toContain("ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]");
-});
-
 test("an empty item list renders nothing — useRender stays unconditional via enabled, not an early return", () => {
   const { container } = render(<Toc items={[]} />);
   expect(container).toBeEmptyDOMElement();

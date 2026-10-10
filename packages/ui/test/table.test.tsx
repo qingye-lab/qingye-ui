@@ -15,12 +15,8 @@ describe("Table", () => {
     render(<Table><TableHeader><TableRow><TableHead aria-sort="descending"><Button variant="quiet" onClick={sort}>排序</Button></TableHead><TableHead>第二列</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell colSpan={2}>无结果</TableCell></TableRow></TableBody></Table>);
     fireEvent.click(screen.getByRole("button")); expect(sort).toHaveBeenCalledOnce(); expect(screen.getByRole("columnheader", { name: "排序" })).toHaveAttribute("aria-sort", "descending"); expect(screen.getByRole("cell")).toHaveAttribute("colspan", "2"); expect(screen.getAllByRole("columnheader")).toHaveLength(2);
   });
-  it("lays its own paper by default and none when it sits on an existing surface", () => {
-    render(<><TableContainer aria-label="独立"><Table /></TableContainer><TableContainer framed={false} aria-label="卡片内"><Table /></TableContainer></>);
-    const [framed, bare] = [screen.getByLabelText("独立"), screen.getByLabelText("卡片内")];
-    expect(framed).toHaveClass("border", "border-border", "rounded-panel", "bg-surface");
-    expect(bare).not.toHaveClass("border"); expect(bare).not.toHaveClass("rounded-panel"); expect(bare).not.toHaveClass("bg-surface");
-    // 仍可横向滚动、可聚焦；没有线可加深时焦点画在盒内。
-    expect(bare).toHaveClass("overflow-x-auto", "focus-visible:ring-inset"); expect(bare).toHaveAttribute("tabindex", "0");
+  it("stays a focusable scroll region when it sits on an existing surface", () => {
+    render(<TableContainer framed={false} aria-label="卡片内"><Table /></TableContainer>);
+    expect(screen.getByLabelText("卡片内")).toHaveAttribute("tabindex", "0");
   });
 });

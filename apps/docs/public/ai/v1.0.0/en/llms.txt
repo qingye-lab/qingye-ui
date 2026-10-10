@@ -27,7 +27,7 @@
 - [CheckboxGroup](components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
 - [CodeBlock](components/code-block.md): Literal text with actual copy results.
 - [Collapsible](components/collapsible.md): Reveal additional content for the same object.
-- [Combobox](components/combobox.md): Filter candidates and confirm one value or a set, with query text separate from selection.
+- [Combobox](components/combobox.md): Filter candidates and confirm one value, with query text separate from selection.
 - [ConfirmAction](components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
 - [ContextMenu](components/context-menu.md): A context-menu enhancement for commands on the current object.
 - [Copy button](components/copy-button.md): Copy supplied text and reflect the clipboard write result.
@@ -47,7 +47,7 @@
 - [Form](components/form.md): A native field submission scope and reset context.
 - [Heatmap](components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
 - [HoverCard](components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
-- [Input](components/input.md): Enter one text value.
+- [Input](components/input.md): Enter one text value. Search, password visibility, and clearing use the same input.
 - [InputGroup](components/input-group.md): Give an input and its markers, units or actions one editing boundary.
 - [Item](components/item.md): Content, navigation and related actions.
 - [Kbd](components/kbd.md): A native keyboard key display.
@@ -64,7 +64,6 @@
 - [OtpField](components/otp-field.md): Present a fixed-length text value in segments.
 - [PageHeader](components/page-header.md): Co-locate a page name, context and related actions.
 - [Pagination](components/pagination.md): Page position, real actions and explicit unknown totals.
-- [PasswordInput](components/password-input.md): Enter a password and switch to plain text to check it.
 - [PendingValue](components/pending-value.md): An unresolved write result with its original value.
 - [Popover](components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
 - [Progress](components/progress.md): Confirmed task completion or an explicit indeterminate state.
@@ -73,12 +72,10 @@
 - [RadioGroup](components/radio-group.md): Choose one value from a small set of visible options.
 - [ScatterChart](components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](components/scroll-area.md): Native scrolling within a bounded viewport.
-- [SearchInput](components/search-input.md): Enter a search term and clear it in one step.
 - [SegmentedControl](components/segmented-control.md): Enter one value from a small set of visible segments.
 - [Select](components/select.md): Choose one value from a collapsible set of options.
 - [Separator](components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.
 - [Sidebar](components/sidebar.md): Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
-- [Skeleton](components/skeleton.md): Hold the place and row count content will take until it arrives.
 - [Slider](components/slider.md): Enter a number or an ordered range within explicit bounds.
 - [Sparkline](components/sparkline.md): A small line set in a line of text, showing how a reading has recently changed.
 - [Stat](components/stat.md): Values, units and explanations supplied independently.

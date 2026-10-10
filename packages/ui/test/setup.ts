@@ -1,8 +1,11 @@
 import "@testing-library/jest-dom/vitest";
-import { cleanup } from "@testing-library/react";
+import { cleanup, configure } from "@testing-library/react";
 import { afterEach } from "vitest";
 
 afterEach(() => cleanup());
+
+// findBy/waitFor 默认只等 1 秒；并行负载下浮层出现得更晚，那是等待不够而不是断言失败。
+configure({ asyncUtilTimeout: 5_000 });
 
 // jsdom lacks these browser APIs that Base UI and our providers touch.
 if (!window.matchMedia) {

@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 9f2190ff95c1558b7da2f0f842c5472c1550eeaf2bf912a5a55cd4af600354e5
+Source SHA-256: 81a078d00a598526e2bbcb5996702a0d94dc030bfaf7fed0ff06de8af39c901e
 
 Seven task-chosen forms—line, bar, area, area-stacked, bar-horizontal, bar-stacked and donut—with a same-source plot, named axes and an on-demand data table.
 
 ## Decision
-A chart only draws data. A known zero, an unknown value and a not-applicable value remain distinct: unavailable values form gaps and retain their actual names in the table. When the whole chart has no records, an unknown result or does not apply, the chart is not rendered and the caller puts Empty in its place. Plots do not replace reachable numbers.
+Known zero, empty data, unknown and not-applicable values remain distinct. Unavailable values form gaps and retain their actual names in the table. Plots do not replace reachable numbers.
 
 ## Notes
 - null, NaN, Infinity and missing keys cannot stand for zero. Use explicit unknown or not-applicable values.
@@ -26,7 +26,7 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 - Application: Data, units, truth, state content and custom plotting.
 
 ## Composition
-- Public Recharts primitives with the current Table; one rows/series projection. With nothing to plot, the caller renders Empty in place of the chart.
+- Public Recharts primitives with current Table and Empty; one rows/series projection.
 
 ## Responsive behavior
 - A centralized 12em plot height can be overridden. The table scrolls and wraps without cutting actual values.
@@ -72,6 +72,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Chart
 A named figure, shared axis units, distinct series shapes and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". The actual chart-wide state. children describe non-data states without invented numbers or axes.
 - type: "line" | "bar" | "area" | "area-stacked" | "bar-horizontal" | "bar-stacked" | "donut". The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required.
 - categoryLabel / valueLabel: string. Nonempty category axis name and shared value units; donut draws no axis lines, but both names still label the equivalent table and the center readout.
 - series: readonly { key: string; label: string }[]. One to five series in shared units (donut requires two to five). A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
@@ -116,19 +117,13 @@ export default function Demo() {
 Source: apps/docs/src/content/chart/demos/03-unknown.tsx
 ```tsx
 import { Chart } from "@qingye_lab/ui/components/chart";
-import { Empty, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
 import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "未知与空", titleEn: "Unknown and empty" };
-
-const failures: { id: string; label: string; count: number }[] = [];
-
 export default function Demo() {
   return <Stack gap="section" className="w-full max-w-2xl">
     <Chart type="line" label="近五天延迟" categoryLabel="日期" valueLabel="毫秒" series={[{ key: "ms", label: "延迟" }]}
       rows={[{ id: "1", label: "10/01", values: { ms: 120 } }, { id: "2", label: "10/02", values: { ms: 140 } }, { id: "3", label: "10/03", values: { ms: { state: "unknown", label: "采集中断" } } }, { id: "4", label: "10/04", values: { ms: 110 } }, { id: "5", label: "10/05", values: { ms: 98 } }]} />
-    {failures.length > 0
-      ? <Chart type="bar" label="本月失败原因" categoryLabel="原因" valueLabel="次数" series={[{ key: "count", label: "次数" }]} rows={failures.map(item => ({ id: item.id, label: item.label, values: { count: item.count } }))} />
-      : <Empty state="empty"><EmptyTitle level={3}>本月失败原因</EmptyTitle><EmptyDescription>本月没有失败记录。</EmptyDescription></Empty>}
+    <Chart label="本月失败原因" state="empty">本月没有失败记录。</Chart>
   </Stack>;
 }
 ```

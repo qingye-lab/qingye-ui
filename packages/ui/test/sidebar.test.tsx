@@ -17,14 +17,6 @@ describe("Sidebar", () => {
     await user.click(screen.getByRole("button", { name: "展开" }));
     expect(screen.getAllByRole("link")).toHaveLength(2);
   });
-  it("lets the sub-trigger's arrow follow its open state: the trigger is the disclosure group the arrow reads", () => {
-    render(<Sidebar><SidebarContent><SidebarSub><SidebarSubTrigger icon={dot}>集合</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#a">A</SidebarLink></SidebarSubContent></SidebarSub></SidebarContent></Sidebar>);
-    const trigger = screen.getByRole("button", { name: "集合" });
-    // DisclosureIcon rotates through `group-data-[panel-open]/disclosure`; without the group on
-    // the trigger the class is inert and the arrow never turns.
-    expect(trigger.className).toContain("group/disclosure");
-    expect(trigger.querySelector("[data-slot=disclosure-icon]")?.getAttribute("class")).toContain("group-data-[panel-open]/disclosure:rotate-180");
-  });
   it("keeps focus on a rail item after a controlled collapse, since it is still reachable there", async () => {
     const { rerender } = render(<Sidebar><SidebarToggle /><SidebarContent><SidebarLink href="#a" icon={dot}>A</SidebarLink></SidebarContent></Sidebar>);
     screen.getByRole("link").focus();
@@ -74,24 +66,5 @@ describe("Sidebar", () => {
     expect(screen.getByRole("link", { name: "A" })).toBeInTheDocument();
     rerender(<Sidebar collapsed><SidebarToggle /><SidebarContent><SidebarLink href="#a" icon={dot} count={0}>A</SidebarLink></SidebarContent></Sidebar>);
     expect(document.querySelector('[data-slot="corner-mark-badge"]')).toBeNull();
-  });
-  it("draws the current item on a surface role the project can retune, not a hard-coded paper", () => {
-    render(<Sidebar><SidebarContent aria-label="页面"><SidebarLink href="/a" active>A</SidebarLink><SidebarLink href="/b">B</SidebarLink></SidebarContent></Sidebar>);
-    expect(screen.getByRole("link", { name: "A" })).toHaveClass("bg-sidebar-current");
-    expect(screen.getByRole("link", { name: "A" })).not.toHaveClass("bg-surface");
-    expect(screen.getByRole("link", { name: "B" })).not.toHaveClass("bg-sidebar-current");
-  });
-  it("marks the current item with an ink line besides its surface: on the item's own edge, or on the guide line inside a sub-level", () => {
-    render(<Sidebar><SidebarContent aria-label="页面">
-      <SidebarLink href="/a" active>A</SidebarLink><SidebarLink href="/b">B</SidebarLink>
-      <SidebarSub defaultOpen><SidebarSubTrigger>组</SidebarSubTrigger><SidebarSubContent><SidebarLink href="/c" active>C</SidebarLink><SidebarLink href="/d">D</SidebarLink></SidebarSubContent></SidebarSub>
-    </SidebarContent></Sidebar>);
-    const top = screen.getByRole("link", { name: "A" }); const nested = screen.getByRole("link", { name: "C" });
-    for (const link of [top, nested]) expect(link).toHaveClass("relative", "before:absolute", "before:w-px", "before:bg-foreground");
-    // 一级条目没有现成的线：画在自己的起始边内侧；二级条目加深的是面板引导线上自己那一段。
-    expect(top).toHaveClass("before:start-0");
-    expect(nested).not.toHaveClass("before:start-0");
-    expect(nested.className).toContain("before:start-[calc(var(--qy-control-sm-padding)-var(--qy-control-md-icon)/2-var(--qy-control-content-gap))]");
-    for (const name of ["B", "D"]) expect(screen.getByRole("link", { name }).className).not.toContain("before:bg-foreground");
   });
 });

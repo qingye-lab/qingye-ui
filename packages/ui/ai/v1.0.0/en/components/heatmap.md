@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: ae4809ea85c1b1d0c6081f65e6ef79d1ffc66b4f93ece3a98d5a240d125e3d87
+Source SHA-256: 32e1ab49ad700dd26456e3eef5764c324abb0bb784bd5da51cc68dd4a5801a1a
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
 
@@ -23,7 +23,7 @@ Rows and columns are both categorical axes, not data series — there is no iden
 - Application: Data, units and truth.
 
 ## Composition
-- A hand-built CSS grid with the current Table; reuses Chart's readValue contract. With nothing to plot, the caller renders Empty in place of the heatmap.
+- A hand-built CSS grid with current Table and Empty; reuses Chart's readValue contract.
 
 ## Responsive behavior
 - The grid shrinks with available width and scrolls horizontally when it would overflow; the table scrolls and wraps natively.
@@ -49,6 +49,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### Heatmap
 A named figure, two named categorical axes, a single-hue sequential grid and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". The actual chart-wide state. children describe non-data states.
 - rowLabel / columnLabel / valueLabel: string. Names for the row dimension, column dimension and the measured quantity, e.g. "hour", "weekday", "syncs".
 - columns: readonly { key: string; label: string }[]. The column dimension's values, two or more — unlike a data series, there is no identity-color cap.
 - rows: readonly ChartRow[]. The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key.

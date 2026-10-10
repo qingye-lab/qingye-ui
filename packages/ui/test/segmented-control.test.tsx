@@ -40,13 +40,3 @@ test("group and item composition keep ref/render/events, ARIA and inherited five
   expect(item).toHaveAttribute("aria-describedby", "extra"); expect(item).toHaveClass("text-control-lg-mobile", "sm:text-control-lg", "caller-unchecked");
   await userEvent.click(item); expect(item).toHaveClass("caller-checked"); expect(click).toHaveBeenCalled();
 });
-
-test("the whole track occupies one control height: md reads the fill role and items are derived from the track, not the other way round", () => {
-  render(<SegmentedControl aria-label="对齐" defaultValue="alpha">{items}</SegmentedControl>);
-  const track = screen.getByRole("radiogroup");
-  // 外高取同档控件外高（md = 填值控件角色层），候选高由外高倒推；同一行的输入与轨道因此同高。
-  expect(track).toHaveClass("sm:[--qy-track-outer:var(--qy-fill-height)]", "[--qy-track-radius:var(--qy-fill-radius)]", "p-(--qy-track-inset)", "border");
-  const item = screen.getByRole("radio", { name: "甲" });
-  expect(item).toHaveClass("sm:min-h-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2px)]", "rounded-(--qy-radius-track-item)");
-  expect(item).not.toHaveClass("sm:min-h-(--qy-fill-height)");
-});

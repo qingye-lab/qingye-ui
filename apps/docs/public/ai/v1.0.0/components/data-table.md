@@ -12,7 +12,6 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 
 ## Notes
 - TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。
-- 只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。
 
 ## Use and ownership
 - 真实集合按共同维度比较并需要排序或选择。
@@ -95,7 +94,7 @@ export default function Demo() {
     { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
     { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
   ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel() });
   return <Stack>
     <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
     <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>

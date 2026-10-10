@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
+Source SHA-256: f75c8f55e055fe78f9216d9a940cf521c9f60ef03d7c3af4b4fd6b0234073427
 
 Different views of one object with panel drafts retained.
 
@@ -11,7 +11,7 @@ Different views of one object with panel drafts retained.
 Manual activation and mounted panels are defaults; switching views does not approve or save a draft.
 
 ## Notes
-- Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving.
+- Hidden panels remain mounted but leave the accessibility tree; switching is never reported as saving.
 
 ## Use and ownership
 - Multiple views of one object need editing continuity.
@@ -44,7 +44,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -62,7 +62,7 @@ A tab associated with a panel.
 
 ### TabsPanel / TabsPrimitive
 A tabpanel and public primitives.
-- value / keepMounted: Value / boolean | "visited"; default keepMounted="visited". visited mounts a panel on first arrival and keeps its input and loaded content afterwards, so unvisited panels make no requests. true mounts every panel up front; use it for native form fields submitted together across tabs. false unmounts on leaving, and the application owns the effects.
+- value / keepMounted: Base UI Panel props; default keepMounted=true. Mounted panels retain input by default; applications own the effects of false.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ## Keyboard

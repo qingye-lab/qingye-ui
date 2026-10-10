@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: d4de306957582e7b75b11f09768154041a87df04cbb91a9857013cdd6c12f844
+Source SHA-256: e56dfbdafac9f89d1e1f468c52e4b20694f3ba4cd20a2715a36a75769e13cb7c
 
 分段呈现一个固定长度文本值。
 
@@ -38,7 +38,7 @@ Source SHA-256: d4de306957582e7b75b11f09768154041a87df04cbb91a9857013cdd6c12f844
 Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
 
@@ -71,7 +71,7 @@ export const meta = { title: "文本", titleEn: "Text" } satisfies DemoMeta;
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符</FieldDescription></Field>
+    <Field><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符</FieldDescription></Field>
     <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /><FieldDescription>4 个字符</FieldDescription></Field>
     <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue="0012" /><FieldError>编码尚未核对。</FieldError></Field>
     <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue="0012" readOnly /></Field>

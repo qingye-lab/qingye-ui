@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 1eb700305ca9e6aaf4d16597a4ad70c5abc2e5c094183c4788752e06b3f5d951
+Source SHA-256: 6e812b09e8375b417af68edbacc5b10eda7b1747c44b6acb7b1bbf34172af163
 
 数值、单位与说明分别提供。
 

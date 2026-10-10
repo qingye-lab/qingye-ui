@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: 21d3648a2701ede7c48c181a2c7525f3c3eaf1131008e09ae2dba12e80e2fd26
+Source SHA-256: d64bea740aa49000d24950caa73af8a7cf2d24bc6408672925d40bd2f577a024
 
 The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 
@@ -23,7 +23,7 @@ Both x and y are value axes by the task's own definition, not a violation of "al
 - Application: Data, units, truth and state content.
 
 ## Composition
-- Public Recharts primitives with the current Table; reuses Chart's Marker shapes and hover shell. With no point to plot, the caller renders Empty in place of the chart.
+- Public Recharts primitives with current Table and Empty; reuses Chart's Marker shapes and hover shell.
 
 ## Responsive behavior
 - The centralized plot-height preset can be overridden; the table scrolls and wraps natively.
@@ -48,6 +48,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### ScatterChart
 A named figure, named x/y axes, series-colored markers and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". The actual chart-wide state. children describe non-data states.
 - xLabel / yLabel: string. What the x and y axes measure, e.g. "records" and "failure rate".
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. One to three series. A single series takes the first color without a legend; two or more take the chart1..3 order with distinct marker shapes. Every point needs a stable id and a nonempty name.
 - formatX / formatY: (value: number) => ReactNode. Format known values; defaults to Intl number formatting for UILocale.

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: 21d3648a2701ede7c48c181a2c7525f3c3eaf1131008e09ae2dba12e80e2fd26
+Source SHA-256: d64bea740aa49000d24950caa73af8a7cf2d24bc6408672925d40bd2f577a024
 
 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 
@@ -23,7 +23,7 @@ x、y 都是数值轴——这是散点的任务定义，不是违反「永远�
 - Application: 数据、量纲、真实性与状态文字。
 
 ## Composition
-- Recharts 公开原语 + 当前 Table；复用 Chart 的 Marker 标记与悬停外壳。没有可画的点时，调用方在原位改放 Empty。
+- Recharts 公开原语 + 当前 Table/Empty；复用 Chart 的 Marker 标记与悬停外壳。
 
 ## Responsive behavior
 - 图高集中预设可覆写，表格原生滚动/换行。
@@ -48,6 +48,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### ScatterChart
 figure 名称、命名的双轴、按系列着色的标记与同源可见 Table。
 - label: string. 非空真实语义名称。
+- state: "ready" | "empty" | "unknown" | "not-applicable"; default "ready". 真实整图事实；非ready由children表达。
 - xLabel / yLabel: string. 横轴与纵轴量的是什么，例如「记录数」「失败率」。
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. 1 至 3 个系列。只有一个系列时取第一色、不显示图例；两个以上按 chart1..3 取色并配不同标记形状。每个点需要稳定 id 与非空名称。
 - formatX / formatY: (value: number) => ReactNode. 格式化已知数值；默认按 UILocale 数值 Intl。

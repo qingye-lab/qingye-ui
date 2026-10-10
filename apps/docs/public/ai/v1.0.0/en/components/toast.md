@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0
+Source SHA-256: c8e634b985e9524f1a05918c33a26683ff9b005102a6971cc5e0ca80eed582a6
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -11,17 +11,15 @@ Report recoverable, non-critical facts while the current work continues.
 A notification does not take focus. Unknown means no reliable result; failed means a confirmed failure. Dismissal only closes the notification. Keep field errors, irreversible consequences and decisions on the task surface or in a confirmation structure.
 
 ## Notes
-- Hover, focus, and window blur pause automatic disappearance.
-- A notice only presents the type the application gives it and infers nothing: no timeout turns it into unknown, and waiting, in-progress, unknown and failed notices stay until the application updates them or the user closes them. loadingTimeout is removed; when a deadline is needed the application times it and calls toastManager.update(id, { type: "unknown" }).
-- In tests, scope text queries to the notification region (role=region) or use data-slot=toast-title: a priority=high notice also has a visually hidden announcement copy, removed once focus enters the region.
+- Hover, focus, and window blur pause automatic disappearance; the unknown-outcome deadline keeps running.
 - Ordinary success is brief by default; failure/unknown stay but can close. Important facts and recovery entries remain on the object's page.
 - Viewport and anchored notices consume shared notification layers, below document candidates and critical modal actions.
 
 ## Use and ownership
 - Supplementary noncritical, recoverable facts without interrupting current work.
 - Avoid: Notifications for every error, critical consequences only in closable messages, or completion declared when a request is merely sent.
-- Library: Accessible primitives, presentation, closing, pauses, and keeping persistent states on screen.
-- Application: Objects, actual outcomes, any waiting deadline and when a result counts as unknown, priority, business cancellation, verification, and retry.
+- Library: Accessible primitives, presentation, closing, pauses, waiting deadlines, and persistent states.
+- Application: Objects, actual outcomes, priority, business cancellation, verification, and retry.
 
 ## Composition
 - One id connects waiting and outcomes; object pages retain failure, unknown, and verification entries.
@@ -54,6 +52,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 Mount once per notification channel.
 - position: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"; default "bottom-right". Notification region placement.
 - timeout: number; default 5000. Reading duration for ordinary/success notices; zero keeps them visible.
+- loadingTimeout: number; default 30000. Integer milliseconds from 1 to 2147483647. Waiting/in-progress expiry becomes persistent unknown without inferring background outcomes. Hover never extends the outcome deadline.
 - limit: number; default 3. The primitive limits visible entries; overflow roots are hidden/inert. They cannot carry the only critical outcome.
 - toastManager: Return value of ToastPrimitive.createToastManager(). Optional independent notification channel; omission uses the exported global manager.
 - portalProps: ToastPrimitive.Portal.Props. Custom Portal containers, direction, language, and other attributes.
@@ -63,7 +62,7 @@ Returns an id. Reusing an id updates in place.
 - title / description: ReactNode. Objects, outcomes, and necessary recovery context.
 - type: string. waiting/in-progress/unknown/failed/success; retains loading as in-progress, error as failed, info, and warning.
 - timeout: number. Failure/unknown/waiting/in-progress remain persistent; other types close after their specified duration.
-- priority: "low" | "high"; default "low". low uses polite status; high uses primitive alert. Failure never automatically interrupts announcements. For high the primitive adds a visually hidden alert copy outside the notification region for immediate announcement, so the title and description each exist twice in the DOM.
+- priority: "low" | "high"; default "low". low uses polite status; high uses primitive alert. Failure never automatically interrupts announcements.
 - actionProps: React.ComponentPropsWithoutRef<'button'>. Applications supply actions and actual handlers, invoked once; recovery entries remain on the page.
 - data.rootProps: Forwardable ToastPrimitive.Root.Props. Forward id, ARIA, events, style, render, and refs, excluding children/className/toast/swipeDirection.
 
@@ -71,7 +70,7 @@ Returns an id. Reusing an id updates in place.
 Update the same object with actual outcomes. Specify timeout when leaving a persistent state; Promise success automatically restores Provider duration.
 
 ### toastManager.promise(promise, { loading, success, error })
-In-progress becomes actual success/failure on the same notice. The notice sets no deadline and infers no outcome: it stays in progress however long it takes, until the promise settles or the application updates it. When a response is lost the application changes the notice to unknown; network rejection is not a business failure.
+In-progress becomes actual success/failure; expiry first becomes unknown, and late outcomes update the same notice. Applications retain unknown when a response is lost; network rejection is not a business failure.
 
 ### toastManager.close(id?)
 Close a specified notice or all notices without canceling or undoing business tasks.

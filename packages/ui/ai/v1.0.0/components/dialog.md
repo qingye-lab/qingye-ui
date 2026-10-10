@@ -13,7 +13,7 @@ Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
 ## Notes
 - 不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。
 - 草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。
-- 危险决定用 AlertDialog，后果写在它的说明里；按钮不承载后果。
+- 危险动作复用可见非空后果的 aria-describedby 或 ButtonProtection。
 - 无触发者的程序打开也须指定有意义的 finalFocus。
 - 共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。
 - ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语keepMounted隔离缺陷。

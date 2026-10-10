@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@1.0.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
-Source SHA-256: cff89a803b2105b54475d0238a526200110fc5c9a7ad26ebe38e60a296822f58
+Source SHA-256: 99f49aaaa91ae20d9c89758c574ca8a93d0ca08e17deeae3727c34e74fe370f2
 
 表达可靠分母的任务进度或明确不定状态。
 
