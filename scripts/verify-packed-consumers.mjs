@@ -228,7 +228,7 @@ try {
             await page.locator('#remove-tree-child').click();
             await page.getByRole('treeitem',{name:'子项',exact:true}).focus();
             await page.getByRole('treeitem',{name:'子项',exact:true}).waitFor({state:'detached'});
-            await page.waitForFunction(()=>document.activeElement?.getAttribute('aria-label')==='父项');
+            await page.waitForFunction(()=>{const el=document.activeElement;const ref=el?.getAttribute('aria-labelledby');return el?.getAttribute('role')==='treeitem'&&(ref?ref.split(/\s+/).map(id=>document.getElementById(id)?.textContent??'').join(' ').trim():el.getAttribute('aria-label'))==='父项';});
             item.assertions.push('Static InputGroup attachment leaves focus to platform; child action never submits; explicit invalid owns single border; actual native FormData and canceled submit preserve input');
             item.assertions.push('Manual Tabs separate focus/selection and retain panel input; focused tree removal restores parent');
             item.assertions.push('Field relationship token changes computed gap and preserves draft; named Portal inherits brand and returns focus; explicit busy retains rows; Table and Chart share actual entered zero/unknown/value data');
