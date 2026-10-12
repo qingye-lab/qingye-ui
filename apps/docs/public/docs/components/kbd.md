@@ -1,6 +1,6 @@
 # 键位 Kbd
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: 9bd05176bc2643148c87c549a69cddb63fb6ffe48a2a15f4f1e00567f4491703

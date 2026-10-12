@@ -1,6 +1,6 @@
 # 多行输入 Textarea
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13

@@ -1,6 +1,6 @@
 # Toast
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: 2f78a4dba01cb2ef1ac005af6672417903764f3bdb51fe2dd4dbd23228a31eaf

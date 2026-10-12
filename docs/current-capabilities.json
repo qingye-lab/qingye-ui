@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-12T09:01:01.066Z",
-  "revision": "a0753dbdd53361835fef14a5060e9c1ca5f6dfce",
+  "generatedAt": "2026-10-12T09:10:51.237Z",
+  "revision": "5ae886862d79244c8215c89b4c6520a7028e4419",
   "fingerprint": {
-    "sha256": "ad61da9fa0c3075dce24bf86544cd178a0ac600d92186b512e4e578c302e9c70",
+    "sha256": "c49d06b4da616195d351582f294122dc970efcf052a09516d744b27de7b9ca20",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -388,7 +388,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "1189955d9884a8c6b7175eaff807f671a82369ea1cd2060384b2387a2c85668c"
+        "sha256": "0bbe72179732239f00b47701916cb3c49b50a3fa8f816e135d14e55dcea5ff8d"
       },
       {
         "path": "packages/ui/motion.css",
@@ -396,7 +396,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "ebd2a995b7abceb406adbfbd8cba4d772d5515715860879ae30f05be074da6e9"
+        "sha256": "5f7b4195a466e304704efc07aa3ac3d8e48c510b51c207b245fcb1eb162eff5c"
       },
       {
         "path": "packages/ui/src/components/accordion.tsx",
@@ -799,7 +799,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -886,6 +886,7 @@
       "ai",
       "!ai/v0.4.0",
       "!ai/v1.0.0",
+      "!ai/v2.0.0",
       "registry"
     ],
     "source": "packages/ui/package.json"
@@ -1209,7 +1210,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1639,7 +1640,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1869,7 +1870,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2426,7 +2427,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2694,7 +2695,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2870,7 +2871,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3238,7 +3239,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3528,7 +3529,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3699,7 +3700,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3996,7 +3997,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4305,7 +4306,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4483,7 +4484,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4998,7 +4999,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5237,7 +5238,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5479,7 +5480,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5658,7 +5659,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5925,7 +5926,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6584,7 +6585,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6837,7 +6838,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7379,7 +7380,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7564,7 +7565,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7747,7 +7748,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8062,7 +8063,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8267,7 +8268,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8515,7 +8516,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8718,7 +8719,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8981,7 +8982,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9468,7 +9469,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9880,7 +9881,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10157,7 +10158,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10672,7 +10673,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10909,7 +10910,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11187,7 +11188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11586,7 +11587,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11792,7 +11793,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12076,7 +12077,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12381,7 +12382,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12687,7 +12688,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12910,7 +12911,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13266,7 +13267,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13419,7 +13420,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13582,7 +13583,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13831,7 +13832,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14011,7 +14012,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14191,7 +14192,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14848,7 +14849,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15165,7 +15166,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15322,7 +15323,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15501,7 +15502,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16056,7 +16057,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16408,7 +16409,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16640,7 +16641,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16932,7 +16933,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17321,7 +17322,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17535,7 +17536,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17709,7 +17710,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18103,7 +18104,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18428,7 +18429,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18613,7 +18614,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18781,7 +18782,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19111,7 +19112,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19311,7 +19312,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19495,7 +19496,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19713,7 +19714,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20018,7 +20019,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20340,7 +20341,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20879,7 +20880,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21073,7 +21074,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21542,7 +21543,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21796,7 +21797,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22285,7 +22286,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22484,7 +22485,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22871,7 +22872,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23046,7 +23047,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23323,7 +23324,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23559,7 +23560,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24004,7 +24005,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24333,7 +24334,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24602,7 +24603,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24847,7 +24848,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25124,7 +25125,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25416,7 +25417,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25801,7 +25802,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26089,7 +26090,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26379,7 +26380,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26631,7 +26632,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26984,7 +26985,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27424,7 +27425,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27665,7 +27666,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27962,7 +27963,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28153,7 +28154,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "2.0.0",
+        "version": "3.0.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {

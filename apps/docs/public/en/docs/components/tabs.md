@@ -1,6 +1,6 @@
 # Tabs
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6

@@ -1,6 +1,6 @@
 # 身份图像 Avatar
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: 62091f6ab8f49a63451d9d99467147b81e5ca7d169c0492174c5c2aceb24ded7

@@ -1,12 +1,12 @@
-# Qingye UI 2.0.0
+# Qingye UI 3.0.0
 
-> Facts for @qingye_lab/ui@2.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@3.0.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.md)
 - [Style contract](/ai/style.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.md): method sources
-- [Installation](/ai/v2.0.0/installation.md)
+- [Installation](/ai/v3.0.0/installation.md)
 - [Main skill](/ai/SKILL.md)
 - [Full text](/llms-full.txt): the guide, installation and every component in one file
 

@@ -1,6 +1,6 @@
 # 分段文本 OtpField
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: c094055377d5ee9d3617c473dd7e39cf54d61e08b90405bc9efe9da79acab757

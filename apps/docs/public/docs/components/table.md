@@ -1,6 +1,6 @@
 # 比较表 Table
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 1a093806a890aa00d4673b1ffc8e9d1fc8d16088c1a29e4a2c632525b5a23fe7

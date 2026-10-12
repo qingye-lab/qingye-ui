@@ -1,6 +1,6 @@
 # 单选组 RadioGroup
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: 7f4c46cbf875c449b91ead3fe1190fb577ad525fd90a21f0166b17d364021d00

@@ -1,6 +1,6 @@
 # 步骤 Steps
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 9620517d67de460eb5986d9eb8a445c6f41a7b4bad8d7316f6c38ab874df9495

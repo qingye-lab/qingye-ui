@@ -1,6 +1,6 @@
 # 层级集合 Tree
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 60a130ac69db0f25fab1f7286026182d946fe7c7c51d55d5646226af463d8e06

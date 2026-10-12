@@ -1,6 +1,6 @@
 # 侧栏导航 Sidebar
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b

@@ -1,6 +1,6 @@
 # 按钮 Button
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: aa02056a504dad182e167cd505d244a5cbcde34058ea1cd04c0a6e23daf1f350

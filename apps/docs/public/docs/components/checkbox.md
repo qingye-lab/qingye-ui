@@ -1,6 +1,6 @@
 # 复选框 Checkbox
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: 0afaa4d2c5e82b58a6a1f892af37bc9b08c50cccb8081adbabb3c5abab4209fb

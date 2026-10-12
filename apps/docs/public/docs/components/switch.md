@@ -1,6 +1,6 @@
 # 开关 Switch
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91

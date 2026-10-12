@@ -1,6 +1,6 @@
 # 长文 Prose
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: 1bedf9965e31b679df997fb01a3a9a41cb4464f76634276731cc374c402f080c

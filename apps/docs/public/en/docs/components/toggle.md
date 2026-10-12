@@ -1,6 +1,6 @@
 # Toggle
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 4e26d8bdc3dc7cc7bd85a5d04bb27d0362e12e8d3fa896f7c43ce2d607fe5289

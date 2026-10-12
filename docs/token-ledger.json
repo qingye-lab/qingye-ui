@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-12T07:03:41.735Z",
-  "revision": "a0753dbdd53361835fef14a5060e9c1ca5f6dfce",
+  "generatedAt": "2026-10-12T09:10:51.919Z",
+  "revision": "5ae886862d79244c8215c89b4c6520a7028e4419",
   "static": {
     "fingerprint": {
-      "sha256": "cf0f5423ecf3b1ecc829036161443bf41378f178dbb603ef82ef8e8f7e3c3ca5",
+      "sha256": "5c3a25a8066f446a7f1ef0ca93bd09644cebd36f3d4f6ae43710eee19f45f2c3",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -145,7 +145,7 @@
         },
         {
           "path": "apps/docs/src/content/autocomplete/meta.ts",
-          "sha256": "b2dac350eeff45f77acfcf3aca6e45eb56a4a5c9c5d20764105a058963ff2784"
+          "sha256": "c5f9b269b7d14cd2790dacea2673703f33b9bb0ce0e7023525e563607200aa8b"
         },
         {
           "path": "apps/docs/src/content/avatar/demos/01-states.tsx",
@@ -361,7 +361,7 @@
         },
         {
           "path": "apps/docs/src/content/checkbox/demos/02-states.tsx",
-          "sha256": "bf0f0f410daab1f791b473e70cd2847c9262d350b2293dc5d8838f55c008fe0a"
+          "sha256": "a4cd256078f476bba530b4a44dc7662c51282f98e9df0e975f469e6a2424fa30"
         },
         {
           "path": "apps/docs/src/content/checkbox/demos/03-labels.tsx",
@@ -493,7 +493,7 @@
         },
         {
           "path": "apps/docs/src/content/date-range-picker/meta.ts",
-          "sha256": "5010d37e3021b8d01ab343aaf1b393c133d622e416b682642bea55a0b23c65f4"
+          "sha256": "ea93ab9ab98c0b467d959c03040cdf4fc963894a5333819fea29be2b710dde9e"
         },
         {
           "path": "apps/docs/src/content/date-time-picker/demos/01-datetime.tsx",
@@ -1685,7 +1685,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "ebd2a995b7abceb406adbfbd8cba4d772d5515715860879ae30f05be074da6e9"
+          "sha256": "5f7b4195a466e304704efc07aa3ac3d8e48c510b51c207b245fcb1eb162eff5c"
         },
         {
           "path": "packages/ui/src/candidate-status.tsx",
@@ -1737,7 +1737,7 @@
         },
         {
           "path": "packages/ui/src/components/calendar.tsx",
-          "sha256": "279008eee813a580b0beb39501f012cd47b3239160187e194506ffb7c9e33c03"
+          "sha256": "a23151be7b5688148ff78c388df1241cc2c263662cf03562e0804b14ba37e05e"
         },
         {
           "path": "packages/ui/src/components/card.tsx",
@@ -1793,7 +1793,7 @@
         },
         {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "sha256": "db4b80f068f5c60e08ee22d96a32d0dcc4f1e15657f48aa12b35da4723063602"
+          "sha256": "dc1f80dbada2d5941577d5922cadc9167e87e212525f36c2ca1a7d440db72aca"
         },
         {
           "path": "packages/ui/src/components/date-time-picker.tsx",
@@ -1901,7 +1901,7 @@
         },
         {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "sha256": "0bddb502f6551a66ad9a05510819480057e849bab44e02418dec211f0d223302"
+          "sha256": "c094055377d5ee9d3617c473dd7e39cf54d61e08b90405bc9efe9da79acab757"
         },
         {
           "path": "packages/ui/src/components/page-header.tsx",
@@ -1953,7 +1953,7 @@
         },
         {
           "path": "packages/ui/src/components/section.tsx",
-          "sha256": "4776d1a300aca49f25fd4c63bfa9795dc73fec0119ba0e91618bd869395ac078"
+          "sha256": "4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab"
         },
         {
           "path": "packages/ui/src/components/segmented-control.tsx",
@@ -2001,7 +2001,7 @@
         },
         {
           "path": "packages/ui/src/components/table.tsx",
-          "sha256": "56c0eadd8b801a18ba318973c9b6ebdc396f697ef2fb2b982f4451ad4c2148ba"
+          "sha256": "1a093806a890aa00d4673b1ffc8e9d1fc8d16088c1a29e4a2c632525b5a23fe7"
         },
         {
           "path": "packages/ui/src/components/tabs.tsx",
@@ -2009,7 +2009,7 @@
         },
         {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "sha256": "3eab14ff1a1c25b806eb1a5fdbaff8cf2e0871a77b2515bb2b338fe2d484387a"
+          "sha256": "a0d2bdcd810595687a989f8f74992df54b1849c4f01cec019261f64821a831cb"
         },
         {
           "path": "packages/ui/src/components/textarea.tsx",
@@ -2073,7 +2073,7 @@
         },
         {
           "path": "packages/ui/src/focus-first-invalid.ts",
-          "sha256": "4e512a0c25bce751dcd8cdd2ca223a4e2b34008a333cf085baee62319775f420"
+          "sha256": "03c983eb0b91e03823eb913c37b933af1155e8ead74fcff559c33b6ceb292621"
         },
         {
           "path": "packages/ui/src/hooks/use-copy-to-clipboard.ts",
@@ -2145,7 +2145,7 @@
         },
         {
           "path": "packages/ui/styles.css",
-          "sha256": "d408d3be29c010cab72a0b2f8e344db1c1d3060391d83c2b698c99457e75256c"
+          "sha256": "813bb214a08a160d159f13ca3f05b3546f1f1847998f8a5cee90808b2e0bde37"
         },
         {
           "path": "packages/ui/theme.css",
@@ -77294,7 +77294,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 219
+          "line": 227
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -77327,7 +77327,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 219
+          "line": 227
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -77368,7 +77368,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 219
+          "line": 227
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182333,7 +182333,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182366,7 +182366,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182407,7 +182407,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182440,7 +182440,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182473,7 +182473,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182514,7 +182514,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182547,7 +182547,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182588,7 +182588,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182637,7 +182637,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182686,7 +182686,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182727,7 +182727,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182768,7 +182768,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182817,7 +182817,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182866,7 +182866,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182923,7 +182923,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -182988,7 +182988,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183053,7 +183053,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183110,7 +183110,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183175,7 +183175,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183232,7 +183232,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183289,7 +183289,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183338,7 +183338,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 191
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183371,7 +183371,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183404,7 +183404,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183445,7 +183445,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183494,7 +183494,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183527,7 +183527,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183560,7 +183560,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183601,7 +183601,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183634,7 +183634,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183675,7 +183675,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183724,7 +183724,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183773,7 +183773,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183814,7 +183814,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183855,7 +183855,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183904,7 +183904,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -183953,7 +183953,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184010,7 +184010,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184075,7 +184075,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184140,7 +184140,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184197,7 +184197,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184262,7 +184262,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184319,7 +184319,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184376,7 +184376,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184425,7 +184425,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184459,7 +184459,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184493,7 +184493,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184535,7 +184535,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184569,7 +184569,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184603,7 +184603,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -184645,7 +184645,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/otp-field.tsx",
-          "line": 192
+          "line": 194
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245290,7 +245290,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245321,7 +245321,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245352,7 +245352,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245391,7 +245391,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245414,7 +245414,7 @@
         "className": "gap-x-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245445,7 +245445,7 @@
         "className": "gap-x-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245484,7 +245484,7 @@
         "className": "gap-x-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245523,7 +245523,7 @@
         "className": "gap-x-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245570,7 +245570,7 @@
         "className": "gap-x-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245593,7 +245593,7 @@
         "className": "gap-y-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245624,7 +245624,7 @@
         "className": "gap-y-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245663,7 +245663,7 @@
         "className": "gap-y-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245686,7 +245686,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 42
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245717,7 +245717,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 42
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245748,7 +245748,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 42
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245787,7 +245787,7 @@
         "className": "min-h-(--qy-control-sm)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 42
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245810,7 +245810,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 51
+          "line": 59
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245841,7 +245841,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 51
+          "line": 59
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -245880,7 +245880,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 51
+          "line": 59
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343757,7 +343757,7 @@
         "className": "h-(--qy-tag-chip)",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343782,7 +343782,7 @@
         "className": "rounded-(--qy-tag-radius)",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343807,7 +343807,7 @@
         "className": "px-(--qy-tag-padding)",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343840,7 +343840,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343881,7 +343881,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343930,7 +343930,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -343979,7 +343979,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344020,7 +344020,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344061,7 +344061,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344110,7 +344110,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344159,7 +344159,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344216,7 +344216,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344281,7 +344281,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344346,7 +344346,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344403,7 +344403,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344468,7 +344468,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344525,7 +344525,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344582,7 +344582,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344631,7 +344631,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344665,7 +344665,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344707,7 +344707,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344757,7 +344757,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344807,7 +344807,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344849,7 +344849,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344891,7 +344891,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344941,7 +344941,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -344991,7 +344991,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345049,7 +345049,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345115,7 +345115,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345181,7 +345181,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345239,7 +345239,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345305,7 +345305,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345363,7 +345363,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345421,7 +345421,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345471,7 +345471,7 @@
         "className": "hover:text-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 350
+          "line": 351
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345504,7 +345504,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345537,7 +345537,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345578,7 +345578,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345627,7 +345627,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345660,7 +345660,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345693,7 +345693,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345734,7 +345734,7 @@
         "className": "text-support-mobile",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345767,7 +345767,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345808,7 +345808,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345857,7 +345857,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345906,7 +345906,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345947,7 +345947,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -345988,7 +345988,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346037,7 +346037,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346086,7 +346086,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346143,7 +346143,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346208,7 +346208,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346273,7 +346273,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346330,7 +346330,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346395,7 +346395,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346452,7 +346452,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346509,7 +346509,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346558,7 +346558,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346592,7 +346592,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346626,7 +346626,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346668,7 +346668,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346702,7 +346702,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346736,7 +346736,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -346778,7 +346778,7 @@
         "className": "sm:text-support",
         "source": {
           "path": "packages/ui/src/components/tag-input.tsx",
-          "line": 353
+          "line": 354
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -399907,7 +399907,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 218
+          "line": 226
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399916,7 +399916,7 @@
         "className": "bg-(--qy-surface-active)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 224
+          "line": 232
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399925,7 +399925,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 224
+          "line": 232
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399934,7 +399934,7 @@
         "className": "not-aria-disabled:hover:bg-(--qy-surface-active)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 224
+          "line": 232
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399943,7 +399943,7 @@
         "className": "not-aria-disabled:active:bg-(--qy-surface-active)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 224
+          "line": 232
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399952,7 +399952,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 228
+          "line": 236
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -399961,7 +399961,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 230
+          "line": 238
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -402067,7 +402067,7 @@
         "className": "mb-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 32
+          "line": 40
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -402076,7 +402076,7 @@
         "className": "[&:has(>[data-slot=button][data-variant=quiet][data-size=sm]:last-child)]:-me-(--qy-control-sm-padding)",
         "source": {
           "path": "packages/ui/src/components/section.tsx",
-          "line": 51
+          "line": 59
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -403205,8 +403205,8 @@
     ]
   },
   "runtime": {
-    "fingerprint": "92bea84c7984aed7aa91f62352d801c4ad0e2c9e3c97b6dad11651a1923c03d4",
-    "measuredAt": "2026-10-09T02:14:26.581Z",
+    "fingerprint": "5c3a25a8066f446a7f1ef0ca93bd09644cebd36f3d4f6ae43710eee19f45f2c3",
+    "measuredAt": "2026-10-12T09:31:24.142Z",
     "browser": {
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
@@ -403230,7 +403230,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-09T02:13:19.864Z",
+        "measuredAt": "2026-10-12T09:30:08.437Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403301,7 +403301,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-09T02:13:21.256Z",
+        "measuredAt": "2026-10-12T09:30:09.906Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403368,7 +403368,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:22.661Z",
+        "measuredAt": "2026-10-12T09:30:11.323Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403383,8 +403383,8 @@
           "properties": {
             "background-color": "color(srgb 0.119984 0.120006 0.120008)"
           },
-          "token": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
           "rect": {
             "width": 56,
             "height": 32
@@ -403395,7 +403395,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403417,7 +403416,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403445,7 +403443,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-09T02:13:24.078Z",
+        "measuredAt": "2026-10-12T09:30:12.788Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403472,7 +403470,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403494,7 +403491,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403522,7 +403518,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:25.482Z",
+        "measuredAt": "2026-10-12T09:30:14.310Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403549,7 +403545,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403571,7 +403566,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -403599,7 +403593,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:26.885Z",
+        "measuredAt": "2026-10-12T09:30:15.849Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403614,8 +403608,8 @@
           "properties": {
             "background-color": "oklch(1 0 0)"
           },
-          "token": "oklch(100% 0 0)",
-          "rootToken": "oklch(100% 0 0)",
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
           "rect": {
             "width": 320,
             "height": 32
@@ -403666,7 +403660,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:28.304Z",
+        "measuredAt": "2026-10-12T09:30:17.443Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403736,7 +403730,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:29.722Z",
+        "measuredAt": "2026-10-12T09:30:19.012Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403749,10 +403743,10 @@
         },
         "before": {
           "properties": {
-            "border-top-color": "oklch(0.637 0.237 25.331)"
+            "border-top-color": "color(srgb 0.849824 0.241791 0.272733)"
           },
-          "token": "oklch(63.7% .237 25.331)",
-          "rootToken": "oklch(63.7% .237 25.331)",
+          "token": "color-mix(in srgb, oklch(0.637 0.237 25.331) 75%, oklch(0.556 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0.637 0.237 25.331) 75%, oklch(0.556 0 0))",
           "rect": {
             "width": 320,
             "height": 32
@@ -403803,7 +403797,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:31.124Z",
+        "measuredAt": "2026-10-12T09:30:20.558Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403818,8 +403812,8 @@
           "properties": {
             "background-color": "oklch(1 0 0)"
           },
-          "token": "oklch(100% 0 0)",
-          "rootToken": "oklch(100% 0 0)",
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
           "rect": {
             "width": 232,
             "height": 234
@@ -403880,7 +403874,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:13:32.551Z",
+        "measuredAt": "2026-10-12T09:30:22.097Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403957,7 +403951,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:33.970Z",
+        "measuredAt": "2026-10-12T09:30:23.614Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -403972,8 +403966,8 @@
           "properties": {
             "background-color": "oklch(0 0 0 / 0.32)"
           },
-          "token": "oklch(0% 0 0/.32)",
-          "rootToken": "oklch(0% 0 0/.32)",
+          "token": "oklch(0 0 0 / 0.32)",
+          "rootToken": "oklch(0 0 0 / 0.32)",
           "rect": {
             "width": 1100,
             "height": 900
@@ -404030,7 +404024,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:35.430Z",
+        "measuredAt": "2026-10-12T09:30:25.089Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404045,8 +404039,8 @@
           "properties": {
             "background-color": "oklch(1 0 0)"
           },
-          "token": "oklch(100% 0 0)",
-          "rootToken": "oklch(100% 0 0)",
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
           "rect": {
             "width": 106,
             "height": 106
@@ -404105,7 +404099,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:36.906Z",
+        "measuredAt": "2026-10-12T09:30:26.579Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404120,8 +404114,8 @@
           "properties": {
             "background-color": "color(srgb 0 0 0 / 0.08)"
           },
-          "token": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
-          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "token": "color-mix(in srgb, oklch(0 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) 8%, transparent)",
           "rect": {
             "width": 96,
             "height": 32
@@ -404176,7 +404170,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:38.400Z",
+        "measuredAt": "2026-10-12T09:30:28.283Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404252,7 +404246,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:13:39.817Z",
+        "measuredAt": "2026-10-12T09:30:29.776Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404321,7 +404315,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-09T02:13:41.228Z",
+        "measuredAt": "2026-10-12T09:30:31.272Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404393,7 +404387,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-09T02:13:42.651Z",
+        "measuredAt": "2026-10-12T09:30:32.791Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404460,7 +404454,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:44.061Z",
+        "measuredAt": "2026-10-12T09:30:34.375Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404485,7 +404479,9 @@
           "tag": "SELECT",
           "slot": "native-select",
           "attributes": {
-            "data-slot": "native-select"
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
           },
           "pointer": "fine"
         },
@@ -404503,7 +404499,9 @@
           "tag": "SELECT",
           "slot": "native-select",
           "attributes": {
-            "data-slot": "native-select"
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
           },
           "pointer": "fine"
         },
@@ -404530,7 +404528,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:45.477Z",
+        "measuredAt": "2026-10-12T09:30:35.858Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404600,7 +404598,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:13:46.881Z",
+        "measuredAt": "2026-10-12T09:30:37.362Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404673,7 +404671,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:13:48.296Z",
+        "measuredAt": "2026-10-12T09:30:38.902Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404748,7 +404746,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:49.702Z",
+        "measuredAt": "2026-10-12T09:30:40.346Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404763,8 +404761,8 @@
           "properties": {
             "background-color": "oklch(1 0 0)"
           },
-          "token": "oklch(100% 0 0)",
-          "rootToken": "oklch(100% 0 0)",
+          "token": "oklch(1 0 0)",
+          "rootToken": "oklch(1 0 0)",
           "rect": {
             "width": 670,
             "height": 32
@@ -404821,7 +404819,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:51.118Z",
+        "measuredAt": "2026-10-12T09:30:41.815Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404836,8 +404834,8 @@
           "properties": {
             "border-top-color": "color(srgb 0 0 0 / 0.08)"
           },
-          "token": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
-          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "token": "color-mix(in srgb, oklch(0 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) 8%, transparent)",
           "rect": {
             "width": 670,
             "height": 32
@@ -404877,6 +404875,160 @@
         ]
       },
       {
+        "id": "track-selected:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-12T09:30:43.244Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0 0 0 / 0.12)"
+          },
+          "token": "color-mix(in srgb, oklch(0 0 0) calc(24% / 2), transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) calc(24% / 2), transparent)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-selected-foreground:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-12T09:30:44.678Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "color": "color(srgb 0.119984 0.120006 0.120008)"
+          },
+          "token": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "color"
+        ]
+      },
+      {
         "id": "groove-surface:light:desktop:1100x900:fine",
         "pointer": "fine",
         "probeId": "groove-surface",
@@ -404894,7 +405046,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:52.544Z",
+        "measuredAt": "2026-10-12T09:30:46.108Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -404909,8 +405061,8 @@
           "properties": {
             "background-color": "color(srgb 0.759902 0.76004 0.760053)"
           },
-          "token": "color-mix(in srgb, oklch(0% 0 0) 24%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 24%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, oklch(0 0 0) 24%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0 0 0) 24%, oklch(1 0 0))",
           "rect": {
             "width": 384,
             "height": 8
@@ -404963,7 +405115,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-09T02:13:53.963Z",
+        "measuredAt": "2026-10-12T09:30:47.563Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405034,7 +405186,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-09T02:13:55.370Z",
+        "measuredAt": "2026-10-12T09:30:49.027Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405101,7 +405253,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:13:56.781Z",
+        "measuredAt": "2026-10-12T09:30:50.492Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405116,8 +405268,8 @@
           "properties": {
             "background-color": "color(srgb 0.892564 0.892728 0.892743)"
           },
-          "token": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
-          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "token": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
           "rect": {
             "width": 56,
             "height": 32
@@ -405128,7 +405280,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405150,7 +405301,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405178,7 +405328,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-09T02:13:58.195Z",
+        "measuredAt": "2026-10-12T09:30:51.946Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405205,7 +405355,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405227,7 +405376,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405255,7 +405403,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:13:59.623Z",
+        "measuredAt": "2026-10-12T09:30:53.390Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405282,7 +405430,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405304,7 +405451,6 @@
             "data-shape": "label",
             "data-size": "md",
             "data-slot": "button",
-            "data-state": "idle",
             "data-tone": "neutral",
             "data-variant": "solid"
           },
@@ -405332,7 +405478,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:14:01.032Z",
+        "measuredAt": "2026-10-12T09:30:54.804Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405402,7 +405548,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:02.455Z",
+        "measuredAt": "2026-10-12T09:30:56.241Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405417,8 +405563,8 @@
           "properties": {
             "border-top-color": "color(srgb 0.984339 0.254691 0.291821)"
           },
-          "token": "color-mix(in srgb, oklch(63.7% .237 25.331) 90%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, oklch(63.7% .237 25.331) 90%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, oklch(0.637 0.237 25.331) 90%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0.637 0.237 25.331) 90%, oklch(1 0 0))",
           "rect": {
             "width": 320,
             "height": 32
@@ -405469,7 +405615,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:03.859Z",
+        "measuredAt": "2026-10-12T09:30:57.675Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405484,8 +405630,8 @@
           "properties": {
             "background-color": "color(srgb 0.142149 0.142184 0.142187)"
           },
-          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
           "rect": {
             "width": 232,
             "height": 234
@@ -405546,7 +405692,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:14:05.295Z",
+        "measuredAt": "2026-10-12T09:30:59.161Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405623,7 +405769,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:06.711Z",
+        "measuredAt": "2026-10-12T09:31:00.630Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405638,8 +405784,8 @@
           "properties": {
             "background-color": "oklch(0 0 0 / 0.56)"
           },
-          "token": "oklch(0% 0 0/.56)",
-          "rootToken": "oklch(0% 0 0/.56)",
+          "token": "oklch(0 0 0 / 0.56)",
+          "rootToken": "oklch(0 0 0 / 0.56)",
           "rect": {
             "width": 1100,
             "height": 900
@@ -405696,7 +405842,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:08.131Z",
+        "measuredAt": "2026-10-12T09:31:02.098Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405711,8 +405857,8 @@
           "properties": {
             "background-color": "color(srgb 0.142149 0.142184 0.142187)"
           },
-          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 94%, oklch(1 0 0))",
           "rect": {
             "width": 106,
             "height": 106
@@ -405771,7 +405917,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:09.585Z",
+        "measuredAt": "2026-10-12T09:31:03.615Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405786,8 +405932,8 @@
           "properties": {
             "background-color": "color(srgb 0.999871 1.00005 1.00007 / 0.08)"
           },
-          "token": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
-          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "token": "color-mix(in srgb, oklch(1 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) 8%, transparent)",
           "rect": {
             "width": 96,
             "height": 32
@@ -405842,7 +405988,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:14:11.061Z",
+        "measuredAt": "2026-10-12T09:31:05.402Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405918,7 +406064,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:14:12.474Z",
+        "measuredAt": "2026-10-12T09:31:06.889Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -405987,7 +406133,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-09T02:14:13.885Z",
+        "measuredAt": "2026-10-12T09:31:08.312Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406059,7 +406205,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-09T02:14:15.288Z",
+        "measuredAt": "2026-10-12T09:31:09.727Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406126,7 +406272,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:14:16.702Z",
+        "measuredAt": "2026-10-12T09:31:11.162Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406151,7 +406297,9 @@
           "tag": "SELECT",
           "slot": "native-select",
           "attributes": {
-            "data-slot": "native-select"
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
           },
           "pointer": "fine"
         },
@@ -406169,7 +406317,9 @@
           "tag": "SELECT",
           "slot": "native-select",
           "attributes": {
-            "data-slot": "native-select"
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
           },
           "pointer": "fine"
         },
@@ -406196,7 +406346,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-09T02:14:18.101Z",
+        "measuredAt": "2026-10-12T09:31:12.576Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406266,7 +406416,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:14:19.506Z",
+        "measuredAt": "2026-10-12T09:31:13.989Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406339,7 +406489,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-09T02:14:20.918Z",
+        "measuredAt": "2026-10-12T09:31:15.416Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406414,7 +406564,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:22.319Z",
+        "measuredAt": "2026-10-12T09:31:16.849Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406429,8 +406579,8 @@
           "properties": {
             "background-color": "color(srgb 0.105651 0.105679 0.105681)"
           },
-          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0))",
-          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0))",
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0))",
           "rect": {
             "width": 670,
             "height": 32
@@ -406487,7 +406637,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:23.730Z",
+        "measuredAt": "2026-10-12T09:31:18.311Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406502,8 +406652,8 @@
           "properties": {
             "border-top-color": "color(srgb 0.999871 1.00005 1.00007 / 0.08)"
           },
-          "token": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
-          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "token": "color-mix(in srgb, oklch(1 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) 8%, transparent)",
           "rect": {
             "width": 670,
             "height": 32
@@ -406543,6 +406693,160 @@
         ]
       },
       {
+        "id": "track-selected:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-12T09:31:19.850Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.999871 1.00005 1.00007 / 0.12)"
+          },
+          "token": "color-mix(in srgb, oklch(1 0 0) calc(24% / 2), transparent)",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) calc(24% / 2), transparent)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-selected-foreground:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-12T09:31:21.267Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "color": "color(srgb 0.892564 0.892728 0.892743)"
+          },
+          "token": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "color"
+        ]
+      },
+      {
         "id": "groove-surface:dark:desktop:1100x900:fine",
         "pointer": "fine",
         "probeId": "groove-surface",
@@ -406560,7 +406864,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-09T02:14:25.139Z",
+        "measuredAt": "2026-10-12T09:31:22.666Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -406575,8 +406879,8 @@
           "properties": {
             "background-color": "color(srgb 0.320263 0.320328 0.320334)"
           },
-          "token": "color-mix(in srgb, oklch(100% 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
-          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "token": "color-mix(in srgb, oklch(1 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(1 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
           "rect": {
             "width": 384,
             "height": 8
@@ -406616,7 +406920,7 @@
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": true,
+    "staleRuntime": false,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -406626,9 +406930,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406650,9 +406954,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406674,9 +406978,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
       },
@@ -406687,9 +406991,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
@@ -406700,9 +407004,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:light:desktop:1100x900:fine"
       },
@@ -406713,9 +407017,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
@@ -406726,9 +407030,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:light:desktop:1100x900:fine"
       },
@@ -406739,9 +407043,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
@@ -406752,9 +407056,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:light:desktop:1100x900:fine"
       },
@@ -406765,9 +407069,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
@@ -406778,9 +407082,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406810,9 +407114,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406844,9 +407148,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406878,9 +407182,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406910,9 +407214,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406942,9 +407246,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -406974,9 +407278,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407006,9 +407310,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407038,9 +407342,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407070,9 +407374,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407102,9 +407406,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407134,9 +407438,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407166,9 +407470,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407198,9 +407502,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:light:desktop:1100x900:fine"
       },
@@ -407211,9 +407515,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
@@ -407224,9 +407528,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:light:desktop:1100x900:fine"
       },
@@ -407237,9 +407541,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
@@ -407250,9 +407554,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407282,9 +407586,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407314,9 +407618,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:light:desktop:1100x900:fine"
       },
@@ -407327,9 +407631,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
@@ -407340,9 +407644,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407364,9 +407668,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407388,9 +407692,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:light:desktop:1100x900:fine"
       },
@@ -407401,9 +407705,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
@@ -407414,9 +407718,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:light:desktop:1100x900:fine"
       },
@@ -407427,9 +407731,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
@@ -407440,9 +407744,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:light:desktop:1100x900:fine"
       },
@@ -407453,9 +407757,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
@@ -407466,9 +407770,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
       },
@@ -407479,9 +407783,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
@@ -407492,9 +407796,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:light:desktop:1100x900:fine"
       },
@@ -407505,9 +407809,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
@@ -407518,9 +407822,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:light:desktop:1100x900:fine"
       },
@@ -407531,9 +407835,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
@@ -407541,17 +407845,165 @@
         "probeId": "track-selected",
         "token": "--qy-track-selected",
         "part": "segmented-control-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 137
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "not-aria-disabled:active:bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 137
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "part": "segmented-control-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 137
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "not-aria-disabled:active:bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 137
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-selected-foreground",
         "token": "--qy-track-selected-foreground",
         "part": "segmented-control-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "text-track-selected-foreground",
+            "chain": [
+              {
+                "variable": "--color-track-selected-foreground",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 138
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected-foreground"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected-foreground:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "part": "segmented-control-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "text-track-selected-foreground",
+            "chain": [
+              {
+                "variable": "--color-track-selected-foreground",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 138
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected-foreground"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected-foreground:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "groove-surface",
@@ -407560,9 +408012,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407584,9 +408036,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -407603,10 +408055,10 @@
       }
     ],
     "counts": {
-      "PASS": 0,
+      "PASS": 25,
       "FAIL": 0,
-      "UNVERIFIED": 0,
-      "NOT_RUN": 49
+      "UNVERIFIED": 26,
+      "NOT_RUN": 0
     }
   },
   "probePlan": [

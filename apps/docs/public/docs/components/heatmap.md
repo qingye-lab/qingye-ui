@@ -1,6 +1,6 @@
 # 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@2.0.0
+Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
 Source SHA-256: 8ce5eff281afd8d52d687059faf2fc1c89095fb8a5ac7e24ec14510c1807dd7e
