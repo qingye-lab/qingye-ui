@@ -111,7 +111,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 | `reading` / `prose` | 16/28 | 400 |
 | `support` / `label` | 13/20 | 400 / 500 |
 | `caption` / `dense` | 12/20、12/16 | 400 |
-| `metric` | 24/28 | 600 |
+| `metric` / `metric-lg` | 24/28、32/40 | 600 |
 | `micro` | 11/16 | 500 |
 
 - 行高一律是分的整数倍；字号为预设，相邻内容档至少差约 1.2 倍。字号相差无几时用墨色与字重分层。
@@ -145,7 +145,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=b80409de423e08a371ac687517736ace8f6d5434d25e80e5cfa56855bb7f4745 -->
+<!-- qingye:translation:en:start source-sha256=cee3b9e2a73fde5a5ca25859b45bbbacd15c0ea14d452946305f0a3d483b48c3 -->
 # Component Standards
 
 These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -259,7 +259,7 @@ Each semantic profile includes font size, line height, tracking, and weight; cur
 | `reading` / `prose` | 16/28 | 400 |
 | `support` / `label` | 13/20 | 400 / 500 |
 | `caption` / `dense` | 12/20, 12/16 | 400 |
-| `metric` | 24/28 | 600 |
+| `metric` / `metric-lg` | 24/28, 32/40 | 600 |
 | `micro` | 11/16 | 500 |
 
 - Every line height is a whole number of units; sizes are presets, with adjacent content profiles at least about 1.2× apart. When sizes are close, ink tone and weight carry the hierarchy.

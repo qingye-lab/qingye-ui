@@ -1,9 +1,11 @@
 "use client";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import type { Tone } from "../tone";
 import { cn } from "../utils";
 
-export type BadgeTone = "info" | "success" | "warning" | "danger";
+/** 与读数、图形共用的状态类别同一组值（src/tone.ts）。 */
+export type BadgeTone = Tone;
 export type BadgeProps = useRender.ComponentProps<"span"> & {
   /** neutral 只把这段文字分出来；emphasis 要读者注意到它，但不归入任何状态类别。 */
   variant?: "neutral" | "emphasis";

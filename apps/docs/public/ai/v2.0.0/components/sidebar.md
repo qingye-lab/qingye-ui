@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
+Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -14,6 +14,7 @@ Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
 - 应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。
 - 当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。
 - 当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。
+- 收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。
 
 ## Use and ownership
 - 工作面旁的长期导航。
@@ -54,14 +55,67 @@ Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Sidebar
+- `collapsed?`: `boolean`.
+- `defaultCollapsed?`: `boolean`.
+- `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarLink
+- `active?`: `boolean`.
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarSub
+- `children`: `React.ReactNode`.
+- plus 281 inherited (@types/react 274, @base-ui/react 7); not expanded, see the installed declarations
+
+### SidebarSubContent
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### SidebarSubTrigger
+- `icon?`: `React.ReactNode`.
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### SidebarToggle
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context SidebarContext: without a provider throws; provided by Sidebar, SidebarSubContent
+- Context SidebarSubLabelContext: without a provider nullable; provided by SidebarSub
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Sidebar / SidebarToggle
 aside 与可逆开关。
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. 默认展开；details.cancel() 拒绝变化。

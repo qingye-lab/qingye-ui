@@ -66,6 +66,17 @@ test("paste replaces a selection, but over-capacity paste is rejected whole and 
   expect(input).toHaveAccessibleDescription("Use at most 4 characters; this insertion was not added");
 });
 
+test("a separator that normalizes away is not a change", async () => {
+  const change = vi.fn();
+  render(<OtpField aria-label="编码" length={4} defaultValue="012" onValueChange={change} />);
+  const input = screen.getByRole("textbox");
+  fireEvent.change(input, { target: { value: "01-2" } });
+  expect(change).not.toHaveBeenCalled();
+  expect(input).toHaveValue("012");
+  fireEvent.change(input, { target: { value: "0123" } });
+  expect(change).toHaveBeenLastCalledWith("0123", expect.anything());
+});
+
 test("controlled rejection preserves caller value and external values are not truncated", async () => {
   const change = vi.fn();
   const { rerender, container } = render(<OtpField aria-label="编码" length={4} value="01" onValueChange={change} />);
@@ -114,4 +125,48 @@ test("caller cancellation stops a change without replacing text or reporting acc
   fireEvent.change(screen.getByRole("textbox"), { target: { value: "92" } });
   expect(screen.getByRole("textbox")).toHaveValue("01");
   expect(change).not.toHaveBeenCalled();
+});
+
+test.each([["123 456"], ["123-456"], ["  123 456\n"]])("a grouped code %j pastes as one code instead of being refused", async text => {
+  const user = userEvent.setup();
+  render(<OtpField aria-label="编码" length={6} />);
+  await user.click(screen.getByRole("textbox"));
+  await user.paste(text);
+  expect(screen.getByRole("textbox")).toHaveValue("123456");
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+});
+
+test("normalizeValue replaces the default for typing and pasting, and its result is what is length-checked", async () => {
+  const user = userEvent.setup();
+  render(<OtpField aria-label="编码" length={4} normalizeValue={text => text.replace(/\D/g, "")} />);
+  await user.click(screen.getByRole("textbox"));
+  await user.paste("A1-2b3 4");
+  expect(screen.getByRole("textbox")).toHaveValue("1234");
+  await user.keyboard("x");
+  expect(screen.getByRole("textbox")).toHaveValue("1234");
+});
+
+test("while composing nothing is truncated or written back; the length rule applies once composition ends", () => {
+  const change = vi.fn();
+  render(<OtpField aria-label="编码" length={4} defaultValue="0123" onValueChange={change} />);
+  const input = screen.getByRole("textbox") as HTMLInputElement;
+  fireEvent.compositionStart(input);
+  fireEvent.change(input, { target: { value: "0123青" } });
+  fireEvent.change(input, { target: { value: "0123青叶" } });
+  expect(input).toHaveValue("0123青叶");
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  fireEvent.compositionEnd(input);
+  expect(input).toHaveValue("0123");
+  expect(screen.getByRole("status")).toHaveTextContent("最多输入 4 个字符");
+  expect(change).toHaveBeenLastCalledWith("0123", expect.anything());
+});
+
+test("a composition that fits is kept", () => {
+  render(<OtpField aria-label="编码" length={4} defaultValue="01" />);
+  const input = screen.getByRole("textbox") as HTMLInputElement;
+  fireEvent.compositionStart(input);
+  fireEvent.change(input, { target: { value: "01青叶" } });
+  fireEvent.compositionEnd(input);
+  expect(input).toHaveValue("01青叶");
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
 });

@@ -35,14 +35,30 @@ Source SHA-256: 301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e
 - SkeletonLineProps: type; owner skeleton; PASS
 - SkeletonProps: type; owner skeleton; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Skeleton
+- `label?`: `string`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SkeletonBlock
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SkeletonLine
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Skeleton
 外层 status，内含一句名称；形状放在其中。
 - label: string. 替代默认的「正在加载」，写明对象。

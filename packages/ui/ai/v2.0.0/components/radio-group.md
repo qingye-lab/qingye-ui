@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
+Source SHA-256: 7f4c46cbf875c449b91ead3fe1190fb577ad525fd90a21f0166b17d364021d00
 
 从同时可见的少量候选中取一个值。
 
@@ -12,6 +12,7 @@ Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
 
 ## Notes
 - FieldTitle 命名组，FieldItem + FieldLabel 命名单项，FieldError 关联错误。
+- Radio 放在 Field 内不经 FieldItem 时自建标签作用域：每项有自己的 id，名称来自项自己；Field 的标签与描述仍落在整组。
 - 未选择、0 与空字符串是不同的值。
 - 禁用项退出 Tab 顺序；只读保留焦点与当前值。
 
@@ -41,14 +42,32 @@ Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
 - RadioPrimitive: reexport; owner radio-group; UNVERIFIED
 - RadioProps: type; owner radio-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Radio
+- no props declared by this library
+- plus 284 inherited (@types/react 275, @base-ui/react 9); not expanded, see the installed declarations
+
+### RadioGroup
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### RadioGroupPrimitive
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### RadioGroup
 可见互斥候选的共同状态与组语义。
 - value / defaultValue: Value. 受控值或真实初始选择。省略初值保持未选择；受控可用 null。

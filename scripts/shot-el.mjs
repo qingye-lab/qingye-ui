@@ -13,7 +13,7 @@ mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1100, height: 900 }, deviceScaleFactor: 2 });
-await page.goto(`http://localhost:5180/playground/${slug}`, { waitUntil: "networkidle" });
+await page.goto(`${process.env.DOCS_URL ?? "http://localhost:5180"}/playground/${slug}`, { waitUntil: "networkidle" });
 await page.waitForTimeout(500);
 if (clickSel) {
   await page.click(clickSel).catch(() => {});

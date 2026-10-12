@@ -12,7 +12,7 @@ const dist = join(root, "dist");
 const liveComponents = new Set(readdirSync(join(root, "src/components"))
   .filter((name) => /\.tsx?$/.test(name)).map((name) => name.replace(/\.tsx?$/, "")));
 for (const name of readdirSync(join(dist, "components"))) {
-  const match = name.match(/^(.*)(?:\.d\.ts|\.js)$/);
+  const match = name.match(/^(.*?)(?:\.d\.ts\.map|\.d\.ts|\.js)$/);
   if (match && !liveComponents.has(match[1])) unlinkSync(join(dist, "components", name));
 }
 

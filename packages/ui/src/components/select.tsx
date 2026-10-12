@@ -5,6 +5,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
+import { overlayGroupLabelClassName } from "../overlay-group";
 import { candidateItemClassName, overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
 import { fillStateByData } from "../fill-state";
@@ -56,7 +57,11 @@ export function Select<Value>({ modal = false, ...props }: SelectProps<Value>) {
     if (typeof process === "undefined" || process.env.NODE_ENV === "production") return;
     if (hasValue && items === undefined) console.warn("Select: a value is set but `items` is missing, so the trigger shows the raw value instead of its label. Pass `items` (value → label).");
   }, [hasValue, items]);
-  return <EmptyValueLabel.Provider value={emptyLabel}><SelectPrimitive.Root {...props} multiple={false} modal={modal} /></EmptyValueLabel.Provider>;
+  // 只读保留当前值，不打开候选（基础层 §9「只读与禁用」）。Base UI 1.8 起只读的 Select 可以打开浏览；
+  // 本库只读的含义是「值在、可聚焦、可读出」，候选面是改值的入口，所以在打开请求处取消，关闭照常。
+  const { readOnly, onOpenChange } = props;
+  return <EmptyValueLabel.Provider value={emptyLabel}><SelectPrimitive.Root {...props} multiple={false} modal={modal}
+    onOpenChange={(open, details) => { if (open && readOnly) { details.cancel(); return; } onOpenChange?.(open, details); }} /></EmptyValueLabel.Provider>;
 }
 
 export function SelectTrigger({ children, className, style, render, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...props }: SelectTriggerProps) {
@@ -144,7 +149,7 @@ export function SelectGroup({ className, ...props }: React.ComponentProps<typeof
 }
 
 export function SelectGroupLabel({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.GroupLabel>) {
-  return <SelectPrimitive.GroupLabel data-slot="select-group-label" {...props} className={(state) => cn("min-w-0 px-[calc(var(--qy-control-md-padding-bordered)-var(--qy-overlay-inset))] pt-(--qy-space-2) pb-(--qy-space-1) text-caption text-muted-foreground wrap-break-word", typeof className === "function" ? className(state) : className)} />;
+  return <SelectPrimitive.GroupLabel data-slot="select-group-label" {...props} className={(state) => cn(overlayGroupLabelClassName, typeof className === "function" ? className(state) : className)} />;
 }
 
 export { SelectPrimitive };

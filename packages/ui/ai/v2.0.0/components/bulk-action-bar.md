@@ -41,14 +41,51 @@ targets 与 scope 必填；执行传递当前对象版本快照，零选择禁�
 - BulkActionSnapshot: interface; owner bulk-action-bar; PASS
 - BulkActionTarget: interface; owner bulk-action-bar; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### BulkActionBar
+- `disabled?`: `boolean`.
+- `onClear?`: `(snapshot: BulkActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
+- `scope`: `string`.
+- `targets`: `readonly BulkActionTarget[]`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### BulkActionBarAction
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `onExecute`: `(snapshot: BulkActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
+
+### BulkActionBarActions
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### BulkActionBarClear
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context BulkContext: without a provider throws; provided by BulkActionBar
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### BulkActionBar
 可识别的作用对象与范围。
 - targets / scope: readonly BulkActionTarget[] / string. 每项 id/label/version 必填，id 唯一；version=0 合法；scope 非空。

@@ -29,14 +29,24 @@ Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
 - ButtonGroup: function; owner button-group; PASS; props: ButtonGroupProps
 - ButtonGroupProps: type; owner button-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ButtonGroup
+- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`.
+- `orientation?`: `"horizontal" | "vertical"`.
+- `wrap?`: `boolean`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ButtonGroup
 默认 role=group 的开放动作关系。
 - aria-label / aria-labelledby: string. 动作范围的共同名称，不替代按钮名称。

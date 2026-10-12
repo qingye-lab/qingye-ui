@@ -20,6 +20,7 @@ export default {
         { name: "storageKey", type: "string | null", default: '"yq-theme"', description: "保存到 localStorage 的键；传 null 不保存。其他标签页修改后会自动同步。", descriptionEn: "The localStorage key; null disables persistence. Other tabs' changes synchronize automatically." },
         { name: "attribute", type: '"class" | "data-theme"', default: '"class"', description: "写入方式：.dark 类，或 data-theme=\"dark\"。两者样式都已支持。", descriptionEn: "Write .dark classes or data-theme=dark; styles support both." },
         { name: "disableTransitionOnChange", type: "boolean", default: "true", description: "切换瞬间暂停过渡，所有表面同时变色，而不是以不同速度渐变。", descriptionEn: "Pause transitions during switching so surfaces change together rather than fading at different speeds." },
+        { name: "nonce", type: "string", description: "严格 CSP（style-src 无 'unsafe-inline'）下，给切换时临时注入的 <style> 带上这个 nonce。首屏 <script> 由你自己渲染，同样要带 nonce。", descriptionEn: "Under a strict CSP (style-src without 'unsafe-inline'), the nonce applied to the temporary <style> injected while the theme flips. You render the first-paint <script> yourself; give it the same nonce." },
       ],
     },
     {
@@ -33,12 +34,13 @@ export default {
   ],
   notes: [
     "防止首屏闪烁：React 挂载前页面已经绘制，需要在 <head> 里、样式表之前放一段内联脚本先应用主题。单页应用把 themeScript() 的输出粘贴进 index.html 的 <script>；服务端渲染用 <script dangerouslySetInnerHTML={{ __html: themeScript() }} />。脚本参数必须与 ThemeProvider 一致。",
+    "严格 CSP：把请求的 nonce 同时传给 <ThemeProvider nonce={nonce}> 与首屏 <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />；themeScript() 只返回脚本正文。没有 nonce 时切换用的临时样式被浏览器丢弃，各表面渐变而不是同时变色。",
     "主题选择的文案用语言包中的 theme、lightTheme、darkTheme、systemTheme。",
     "选择“跟随系统”后，操作系统切换深浅色时页面立即跟随，无需刷新。",
     "只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。",
     "服务端与客户端首渲染保持 defaultTheme，挂载后读取真实选择。存储不可用仍可改变外观；卸载清理媒体/存储监听和临时过渡样式。",
     "默认 yq-theme 保留已有真实偏好；跨标签页删除或 clear 恢复 defaultTheme。",
-  ], notesEn: ["Prevent first-paint flashing with an inline head script before stylesheets, since painting precedes React mounting. In SPAs paste themeScript() into index.html script; SSR uses script dangerouslySetInnerHTML={{__html:themeScript()}}. Options must match ThemeProvider.","Theme choice labels use locale theme/lightTheme/darkTheme/systemTheme.","System choice follows OS light/dark changes immediately without reloading.","Mount one root ThemeProvider. Local forced-dark content may add a .dark container class.","Server/client first renders retain defaultTheme, then read actual choices after mount. Appearance can change without storage; unmount cleans media/storage listeners and temporary transition styles.","The default yq-theme key retains actual existing preferences. Cross-tab deletion/clear restores defaultTheme."],
+  ], notesEn: ["Prevent first-paint flashing with an inline head script before stylesheets, since painting precedes React mounting. In SPAs paste themeScript() into index.html script; SSR uses script dangerouslySetInnerHTML={{__html:themeScript()}}. Options must match ThemeProvider.","Strict CSP: pass the request nonce to both <ThemeProvider nonce={nonce}> and the first-paint <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />; themeScript() returns only the script body. Without a nonce the browser drops the temporary transition style and surfaces fade instead of changing together.","Theme choice labels use locale theme/lightTheme/darkTheme/systemTheme.","System choice follows OS light/dark changes immediately without reloading.","Mount one root ThemeProvider. Local forced-dark content may add a .dark container class.","Server/client first renders retain defaultTheme, then read actual choices after mount. Appearance can change without storage; unmount cleans media/storage listeners and temporary transition styles.","The default yq-theme key retains actual existing preferences. Cross-tab deletion/clear restores defaultTheme."],
   decisions: "ThemeProvider 把 data-theme 留给 light 和 dark；项目的品牌标记写在 data-brand，写进 data-theme 的品牌会在切换明暗时被覆盖。",
   decisionsEn: "ThemeProvider reserves data-theme for light and dark. Store the project's brand identifier in data-brand; if ThemeProvider uses data-theme, it overwrites any brand identifier in that attribute when the mode changes.",
   design: {

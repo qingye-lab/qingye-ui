@@ -37,14 +37,29 @@ Stack 纵向排列，Inline 横向排列并默认换行。gap 选择字段、动
 - Stack: function; owner layout; PASS; props: StackProps
 - StackProps: type; owner layout; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Inline
+- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`.
+- `gap?`: `"section" | "field" | "fields" | "actions" | "panel"`.
+- `wrap?`: `boolean`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Stack
+- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`.
+- `gap?`: `"section" | "field" | "fields" | "actions" | "panel"`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Stack
 按内容顺序纵向排列。
 - gap: "field" | "fields" | "actions" | "panel" | "section"; default "panel". 分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。

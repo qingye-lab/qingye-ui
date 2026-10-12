@@ -11,8 +11,8 @@
 /** 原语在根上写 data-disabled / data-readonly（Select、NumberField 等）。 */
 export const fillStateByData = "data-disabled:cursor-not-allowed data-disabled:bg-surface-inset data-disabled:text-muted-foreground data-disabled:border-border data-readonly:border-border";
 
-/** 外框包着一个原生 input（Input、InputGroup）。日期等以只读 input 展示值的控件标 data-picker-display，不算只读。 */
-export const fillStateByInput = "has-[input:disabled]:cursor-not-allowed has-[input:disabled]:bg-surface-inset has-[input:disabled]:text-muted-foreground has-[input:disabled]:border-border has-[input:read-only:not(:disabled):not([data-picker-display])]:border-border";
+/** 外框包着一个原生 input（Input、InputGroup）。 */
+export const fillStateByInput = "has-[input:disabled]:cursor-not-allowed has-[input:disabled]:bg-surface-inset has-[input:disabled]:text-muted-foreground has-[input:disabled]:border-border has-[input:read-only:not(:disabled)]:border-border";
 
 /** 原生元素本身就是编辑边界（Textarea、NativeSelect）。 */
 export const fillStateNative = "disabled:cursor-not-allowed disabled:bg-surface-inset disabled:text-muted-foreground disabled:border-border [&[readonly]]:border-border";

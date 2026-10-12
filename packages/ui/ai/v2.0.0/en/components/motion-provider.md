@@ -34,15 +34,22 @@ Keyboard and reduced-motion policies skip some transitions. Update state directl
 ## Current exports
 - MotionProvider: function; owner motion-provider; PASS; props: { children: ReactNode }
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### MotionProvider
+- `children`: `ReactNode`.
 
 ## Dependencies and providers
 - Runtime: react
 - Optional peers: none recorded
 - Mount once at the application root. These demos reuse the site's root MotionProvider.
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### MotionProvider
 No visible UI. Mount sets data-ui-input to pointer; captured keydown switches to keyboard, pointerdown/pointermove to pointer. Unmount restores the previous value. The html attribute also covers body Portals.
 - children: ReactNode. Application content.

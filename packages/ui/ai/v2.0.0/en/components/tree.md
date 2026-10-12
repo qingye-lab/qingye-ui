@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 38c0504d872a020cf747b8dd04eddc2042f137944353984b40b82e789cba965c
+Source SHA-256: 60a130ac69db0f25fab1f7286026182d946fe7c7c51d55d5646226af463d8e06
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
@@ -31,19 +31,41 @@ Expanded IDs and selected ID are separate; focus never selects, and hidden nodes
 
 ## Current exports
 - Tree: function; owner tree; PASS; props: TreeProps
+- TREE_TYPEAHEAD_MS: const; owner tree; UNVERIFIED
 - TreeChangeDetails: interface; owner tree; PASS
 - TreeCheckedState: type; owner tree; PASS
 - TreeNode: interface; owner tree; PASS
 - TreeProps: type; owner tree; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Tree
+- `checkable?`: `boolean`. 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。
+- `checkedIds?`: `readonly string[]`. 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。
+- `defaultCheckedIds?`: `readonly string[]`.
+- `defaultExpandedIds?`: `readonly string[]`.
+- `defaultSelectedId?`: `string | null`.
+- `disabled?`: `boolean`.
+- `emptyContent?`: `React.ReactNode`.
+- `expandedIds?`: `readonly string[]`.
+- `nodes`: `readonly TreeNode[]`.
+- `onCheckedChange?`: `(ids: string[], details: TreeChangeDetails) => void`.
+- `onExpandedChange?`: `(ids: string[], details: TreeChangeDetails) => void`.
+- `onSelectionChange?`: `(id: string | null, details: TreeChangeDetails) => void`.
+- `selectable?`: `boolean`.
+- `selectedId?`: `string | null`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Tree
 A complete hierarchical collection.
 - nodes: readonly TreeNode[]. IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit.
@@ -56,8 +78,8 @@ A complete hierarchical collection.
 
 ## Keyboard
 - ↑ / ↓ / Home / End: Move between visible enabled nodes.
-- ← / →: Collapse/expand or move to parent/child; reversed in RTL.
-- Enter / Space / Typeahead: Select the current node, or navigate by a label's first character. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select.
+- ← / →: Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree.
+- Enter / Space / Typeahead: Select the current node, or type the start of a label to move: characters typed in quick succession (within 500ms, a preset) accumulate into a prefix, and repeating one character cycles through nodes starting with it. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select.
 
 ## Source examples
 ### 展开与独立选择

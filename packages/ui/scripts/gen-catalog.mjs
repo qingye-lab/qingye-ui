@@ -7,6 +7,9 @@ import { runInNewContext } from "node:vm";
 import ts from "typescript";
 import { generateResourceFixtures } from "../../../apps/docs/scripts/generate-fixtures.mjs";
 import { renderPatternGuidance } from "./pattern-guidance.mjs";
+import { analyzeComponent, buildDriftReport, createApiProgram } from "./api-resolver.mjs";
+import { localizedComponent, renderComponent } from "./component-markdown.mjs";
+import { renderLlmsFull } from "./llms-full.mjs";
 import { embeddedTranslation, standaloneTranslation, projectImplementationLinks, projectPackagePhilosophy } from "./resource-translations.mjs";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -193,6 +196,9 @@ function demoTitle(path) {
 const packageOf = (value) => value.startsWith("@") ? value.split("/").slice(0, 2).join("/") : value.split("/")[0];
 const categoryLabelsEn = { "通用": "General", "表单": "Forms", "日期与时间": "Date and time", "数据展示": "Data display", "反馈": "Feedback", "浮层": "Overlays", "导航": "Navigation", "布局": "Layout", "排版": "Typography", "工具": "Utilities" };
 const publicExports = exportsOf(join(root, "src/index.ts"));
+// One Program for every component: props are resolved by the TypeScript checker, never by text.
+const apiPrograms = createApiProgram();
+const analyses = [];
 const components = names.map((name) => {
   const metaPath = join(content, name, "meta.ts");
   const meta = loadData(metaPath).default;
@@ -215,16 +221,19 @@ const components = names.map((name) => {
   }) : [];
   const types = sourceFile(path).statements.filter((node) => exported(node) && (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node))).map((node) => ({ name: node.name.text, definition: node.getText(sourceFile(path)) }));
   const englishMeta = localizedMeta(meta, "en");
+  const analysis = analyzeComponent(apiPrograms, name, meta, publicPath(relative(repo, metaPath)));
+  analyses.push({ name, ...analysis });
+  const resolvedProviders = analysis.providers;
   const providerNoteIndices = (meta.notes ?? []).map((note, index) => /Provider|上下文/.test(note) ? index : -1).filter(index => index >= 0);
   return {
     name, title: meta.title, description: meta.description, category: meta.category, source: meta.source,
     ...(meta.layer ? { layer: meta.layer } : {}),
     import: `${pkg.name}/components/${name}`, exports: meta.exports, docs: `/docs/components/${name}`,
     ...(meta.notes?.length ? { notes: meta.notes } : {}), ...(meta.keywords?.length ? { keywords: meta.keywords } : {}),
-    api: meta.api, apiStatus: "curated-not-type-resolved", keyboard: meta.keyboard ?? [], actualExports, types, usageImports,
+    api: meta.api, apiStatus: analysis.apiStatus, typeApi: analysis.typeApi, keyboard: meta.keyboard ?? [], actualExports, types, usageImports,
     dependencies: { runtime: imports.filter((item) => pkg.dependencies?.[item] || (pkg.peerDependencies?.[item] && !pkg.peerDependenciesMeta?.[item]?.optional)), optionalPeers: imports.filter((item) => pkg.peerDependenciesMeta?.[item]?.optional) },
-    providers: { exports: actualExports.filter((item) => /Provider$/.test(item.name)).map((item) => item.name), guidance: (meta.notes ?? []).filter((note) => /Provider|上下文/.test(note)).map((text) => ({ text, source: publicPath(relative(repo, metaPath)), certainty: "documented" })), required: [], status: "UNVERIFIED" },
-    examples, design: designFor(meta, name), sourceFacts: { file: publicPath(relative(repo, path)), sha256: hash(read(path)), extraction: "TypeScript AST; signatures are source declarations, not a full resolved type graph. Missing signatures remain UNVERIFIED." },
+    providers: { exports: actualExports.filter((item) => /Provider$/.test(item.name)).map((item) => item.name), guidance: (meta.notes ?? []).filter((note) => /Provider|上下文/.test(note)).map((text) => ({ text, source: publicPath(relative(repo, metaPath)), certainty: "documented" })), ...(resolvedProviders ? resolvedProviders : { required: [], status: "UNVERIFIED", ...(analysis.providersError ? { unverified: `provider analysis failed: ${analysis.providersError}` } : {}) }) },
+    examples, design: designFor(meta, name), sourceFacts: { file: publicPath(relative(repo, path)), sha256: hash(read(path)), extraction: "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED." },
     ...(meta.decisions ? { decisions: meta.decisions } : {}),
     localized: { en: {
       title: englishMeta.title, description: englishMeta.description, category: categoryLabelsEn[meta.category] ?? meta.category,
@@ -299,7 +308,7 @@ steps, never a one-off value.
 
 1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Check the project's persistent references described above when completing onboarding. Preserve unrelated work.
 2. State the object, action, scope, current status and work to retain. Use relevant methods; cultural terms are not HTML roles or API names.
-3. Load related resources from ai/v<installed-version>/components${patterns.length ? " and patterns" : ""}. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.
+3. Load related resources from ai/v<installed-version>/components${patterns.length ? " and patterns" : ""}. actualExports and local declarations are authority. api is curated guidance; typeApi lists the props this library declares, resolved from its types, and providers lists what each component needs from the app. Anything marked UNVERIFIED stays unverified. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
@@ -375,27 +384,47 @@ for (const base of [aiRoot, join(docs, "public/ai")]) {
   }
 }
 
-function resourceIndex(target, locale = "zh") {
+// `site` is set for the website roots (llms.txt, llms.en.txt): components link to the Markdown twin of
+// their page and the full text is offered. Both are emitted by the docs build (vite-plugins/ai-entry.mjs).
+for (const [directory, kept] of [[join(docs, "public/docs/components"), names], [join(docs, "public/en/docs/components"), names]]) {
+  if (!existsSync(directory)) continue;
+  for (const file of readdirSync(directory)) if (file.endsWith(".md") && !kept.includes(file.slice(0, -3))) unlinkSync(join(directory, file));
+}
+
+function resourceIndex(target, locale = "zh", site = false) {
   const en = locale === "en";
   const language = en ? ".en" : "";
   const componentDirectory = en ? "en/components" : "components";
-  return [`# Qingye UI ${pkg.version}`, "", `> Facts for ${pkg.name}@${pkg.version}. Runtime acceptance is separate.`, "", "## Start", `- [Design guide](${target(`design${language}.md`)})`, `- [Style contract](${target(`ai/style${language}.md`)}): bans, observable criteria and component implementation rules`, `- [Design philosophy](${target(`ai/design-philosophy${language}.md`)}): method sources`, `- [Installation](${target(`ai/${versionPath}/installation.md`)})`, `- [Main skill](${target(`ai/SKILL${language}.md`)})`, "", "## Components", ...components.map(component => {
+  return [`# Qingye UI ${pkg.version}`, "", `> Facts for ${pkg.name}@${pkg.version}. Runtime acceptance is separate.`, "", "## Start", `- [Design guide](${target(`design${language}.md`)})`, `- [Style contract](${target(`ai/style${language}.md`)}): bans, observable criteria and component implementation rules`, `- [Design philosophy](${target(`ai/design-philosophy${language}.md`)}): method sources`, `- [Installation](${target(`ai/${versionPath}/installation.md`)})`, `- [Main skill](${target(`ai/SKILL${language}.md`)})`, ...(site ? [`- [Full text](${target(`llms-full${language}.txt`)}): the guide, installation and every component in one file`] : []), "", "## Components", ...components.map(component => {
     const entry = en ? component.localized.en : component;
-    return `- [${entry.title}](${target(`ai/${versionPath}/${componentDirectory}/${component.name}.md`)}): ${entry.description}`;
+    const href = site ? target(`${en ? "en/" : ""}docs/components/${component.name}.md`) : target(`ai/${versionPath}/${componentDirectory}/${component.name}.md`);
+    return `- [${entry.title}](${href}): ${entry.description}`;
   }), ...(patterns.length && !en ? ["", "## Patterns", ...patterns.map(pattern => `- [${pattern.title}](${target(`ai/${versionPath}/patterns/${pattern.slug}.md`)}): ${pattern.description}`)] : []), ""].join("\n");
 }
 // Relative links work in an unpacked package and at the versioned website URL.
 bothAi(`${versionPath}/llms.txt`, resourceIndex((path) => publicPath(relative(join(aiRoot, versionPath), join(root, path)))));
-const index = resourceIndex((path) => `/${path}`);
-write(join(docs, "public/llms.txt"), index);
+write(join(docs, "public/llms.txt"), resourceIndex((path) => `/${path}`, "zh", true));
 bothAi(`${versionPath}/en/llms.txt`, resourceIndex(path => publicPath(relative(join(aiRoot, versionPath, "en"), join(root, path))), "en"));
-write(join(docs, "public/llms.en.txt"), resourceIndex(path => `/${path}`, "en"));
-bothAi(`${versionPath}/installation.md`, `# Install ${pkg.name} ${pkg.version}\n\nUse this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.\n\nRequired peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => !pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}.\n\nOptional peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}; install only for relevant components.\n\nTailwind CSS 4: import @qingye_lab/ui/styles.css after tailwindcss and scan the package source as documented in /docs/installation. Precompiled path: import @qingye_lab/ui/ui.css once. Choose one path.\n\nThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.dark by default or explicit data-theme mode; density: data-density. Check provider guidance and current types.\n\nExamples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.\n`);
+write(join(docs, "public/llms.en.txt"), resourceIndex(path => `/${path}`, "en", true));
+const installationText = `# Install ${pkg.name} ${pkg.version}\n\nUse this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.\n\nRequired peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => !pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}.\n\nOptional peers: ${Object.entries(pkg.peerDependencies).filter(([name]) => pkg.peerDependenciesMeta?.[name]?.optional).map(([name, range]) => `${name} ${range}`).join(", ")}; install only for relevant components.\n\nTailwind CSS 4: import @qingye_lab/ui/styles.css after tailwindcss and scan the package source as documented in /docs/installation. Precompiled path: import @qingye_lab/ui/ui.css once. Choose one path.\n\nThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.dark by default or explicit data-theme mode; density: data-density. Check provider guidance and current types.\n\nExamples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.\n`;
+bothAi(`${versionPath}/installation.md`, installationText);
 for (const baseComponent of components) for (const locale of ["zh", "en"]) {
-  const component = locale === "en" ? { ...baseComponent, ...baseComponent.localized.en, providers: { ...baseComponent.providers, guidance: baseComponent.localized.en.providerGuidance } } : baseComponent;
-  const markdown = [`# ${component.title}`, "", `Package: ${pkg.name}@${pkg.version}`, `Import: ${component.import}`, `Source: ${component.sourceFacts.file}`, `Source SHA-256: ${component.sourceFacts.sha256}`, "", component.description, "", ...(component.decisions ? ["## Decision", component.decisions, ""] : []), ...(component.notes?.length ? ["## Notes", ...component.notes.map(note => `- ${note}`), ""] : []), "## Use and ownership", ...component.design.whenToUse.map((item) => `- ${item}`), ...component.design.avoid.map((item) => `- Avoid: ${item}`), ...component.design.stateOwner.library.map((item) => `- Library: ${item}`), ...component.design.stateOwner.application.map((item) => `- Application: ${item}`), "", "## Composition", ...component.design.composition.map((item) => `- ${item}`), "", "## Responsive behavior", ...component.design.responsive.map((item) => `- ${item}`), "", "## Customization", ...component.design.customization.map((item) => `- ${item}`), "", "## Current exports", ...component.actualExports.map((item) => `- ${item.name}: ${item.kind}; owner ${item.owner ?? "external"}${item.aliasOf ? `; alias of ${item.aliasOf}` : ""}; ${item.status}${item.propsType ? `; props: ${item.propsType}` : ""}`), "", "Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.", "", "## Dependencies and providers", `- Runtime: ${component.dependencies.runtime.join(", ") || "none recorded"}`, `- Optional peers: ${component.dependencies.optionalPeers.join(", ") || "none recorded"}`, ...component.providers.guidance.map((item) => `- ${item.text}`), "- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.", "", "## Curated API", ...component.api.flatMap((part) => [`### ${part.name}`, part.description, ...(part.props ?? []).map((prop) => `- ${prop.name}: ${prop.type}${prop.default ? `; default ${prop.default}` : ""}. ${prop.description}`), ""]), "## Keyboard", ...component.keyboard.map((row) => `- ${row.keys}: ${row.description}`), "", "## Source examples", ...component.examples.flatMap((example) => [`### ${example.title}`, `Source: ${example.source}`, "```tsx", example.code.trim(), "```", ""]), ""].join("\n").trimEnd() + "\n";
+  const component = localizedComponent(baseComponent, locale);
+  const markdown = renderComponent(component, { pkgName: pkg.name, pkgVersion: pkg.version, examples: "all" });
   bothAi(`${versionPath}/${locale === "en" ? "en/" : ""}components/${component.name}.md`, markdown);
+  // The Markdown twin of the component page: the page URL with .md, as llms.txt tools expect.
+  write(join(docs, "public", locale === "en" ? "en" : "", "docs/components", `${component.name}.md`), markdown);
 }
+// llms-full.txt is for the website only: the package already ships every component file, and the
+// full text would repeat them.
+for (const locale of ["zh", "en"]) {
+  write(join(docs, "public", locale === "en" ? "llms-full.en.txt" : "llms-full.txt"), renderLlmsFull({
+    catalog, locale, guide: locale === "en" ? designGuideEn : designGuide, installation: installationText,
+  }));
+}
+// The report of hand-written tables against resolved types; gen-catalog only refreshes it. The gate
+// that fails on new drift is scripts/check-api-drift.mjs.
+json(join(repo, "docs/api-drift.json"), buildDriftReport(analyses));
 for (const pattern of patterns) {
   const files = [pattern.source, ...(pattern.slug === "read" ? ["apps/docs/src/patterns/metadata.ts"] : []), "apps/docs/src/patterns/shared.tsx", "apps/docs/src/patterns/state.ts", "apps/docs/src/patterns/patterns.css", "apps/docs/src/patterns/authorized-resources.json"].filter((path) => existsSync(join(repo, path)));
   bothAi(`${versionPath}/patterns/${pattern.slug}.md`, [`# ${pattern.title}`, "", `Package: ${pkg.name}@${pkg.version}`, pattern.description, "", `Components: ${pattern.components.join(", ")}`, `Methods: ${pattern.methods.join(", ")}`, `States: ${pattern.states.join(", ")}`, "", "Synthetic local application fixture. The application owns objects, drafts, selection, versions and outcomes. This does not verify backend protocols.", "", ...renderPatternGuidance(pattern), ...files.flatMap((path) => [`## ${path}`, "```" + (path.endsWith(".css") ? "css" : "tsx"), read(join(repo, path)).trim(), "```", ""]), ""].join("\n"));

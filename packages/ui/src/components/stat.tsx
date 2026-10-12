@@ -9,9 +9,17 @@ import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../utils";
 
 export type StatState = "known" | "unknown" | "not-applicable";
-export type StatProps = useRender.ComponentProps<"dl"> & { state: StatState };
-export function Stat({ state, render, className, ...props }: StatProps) {
-  return useRender({ defaultTagName: "dl", render, props: mergeProps({ "data-slot": "stat", "data-state": state, className: cn("m-0 flex min-w-0 flex-col gap-(--qy-field-gap) text-body", className) }, props) });
+export type StatSize = "md" | "lg";
+/** 读数的尺寸只有 StatValue 需要知道；用上下文传递，不靠后代选择器去猜祖先的 data-size。 */
+const StatSizeContext = React.createContext<StatSize>("md");
+export type StatProps = useRender.ComponentProps<"dl"> & {
+  state: StatState;
+  /** 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg）；标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。 */
+  size?: StatSize;
+};
+export function Stat({ state, size = "md", render, className, ...props }: StatProps) {
+  const element = useRender({ defaultTagName: "dl", render, props: mergeProps({ "data-slot": "stat", "data-state": state, "data-size": size, className: cn("m-0 flex min-w-0 flex-col gap-(--qy-field-gap) text-body", className) }, props) });
+  return <StatSizeContext.Provider value={size}>{element}</StatSizeContext.Provider>;
 }
 export type StatLabelProps = useRender.ComponentProps<"dt">;
 export function StatLabel({ render, className, ...props }: StatLabelProps) {
@@ -19,7 +27,8 @@ export function StatLabel({ render, className, ...props }: StatLabelProps) {
 }
 export type StatValueProps = useRender.ComponentProps<"dd">;
 export function StatValue({ render, className, ...props }: StatValueProps) {
-  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) text-metric numeric wrap-anywhere", className) }, props) });
+  const size = React.useContext(StatSizeContext);
+  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) numeric wrap-anywhere", size === "lg" ? "text-metric-lg" : "text-metric", className) }, props) });
 }
 export type StatUnitProps = useRender.ComponentProps<"span">;
 export function StatUnit({ render, className, ...props }: StatUnitProps) {
@@ -51,9 +60,8 @@ export function StatDelta({ value, period, format, sentiment, render, className,
   const Icon = direction === "up" ? IconArrowUp : direction === "down" ? IconArrowDown : IconMinus;
   return useRender({ defaultTagName: "dd", render, props: mergeProps({
     "data-slot": "stat-delta", "data-direction": direction, "data-sentiment": sentiment,
-    "aria-label": messages.statDelta(direction, amount, period),
     className: cn("m-0 inline-flex min-w-0 flex-wrap items-center gap-(--qy-control-content-gap) text-support numeric wrap-anywhere",
       sentiment === "good" ? "text-success-foreground" : sentiment === "bad" ? "text-destructive-foreground" : "text-muted-foreground", className),
-    children: <><Icon aria-hidden="true" className="size-(--qy-control-sm-icon) shrink-0" /><span aria-hidden="true">{direction === "flat" ? messages.statDeltaFlat : amount}</span><span aria-hidden="true">{period}</span></>,
+    children: <><Icon aria-hidden="true" className="size-(--qy-control-sm-icon) shrink-0" /><span aria-hidden="true">{direction === "flat" ? messages.statDeltaFlat : amount}</span><span aria-hidden="true">{period}</span><span className="sr-only">{messages.statDelta(direction, amount, period)}</span></>,
   }, props) });
 }

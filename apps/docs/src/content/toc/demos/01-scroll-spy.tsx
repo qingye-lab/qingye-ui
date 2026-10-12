@@ -1,5 +1,6 @@
 import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
 import { Inline } from "@qingye_lab/ui/components/layout";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;
@@ -17,7 +18,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc items={headings} current={current} className="w-40 shrink-0" />
-    <div ref={containerRef} className="h-56 w-80 overflow-y-auto rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} role="region" aria-label="同步说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -25,6 +26,6 @@ export default function Demo() {
           <p className="m-0 text-body text-foreground">{section.body}</p>
         </section>;
       })}
-    </div>
+    </ScrollArea>
   </Inline>;
 }

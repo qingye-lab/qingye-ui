@@ -41,13 +41,13 @@ export default {
       { name: "disabled", type: "boolean", default: "false", description: "输入禁用时开关一并禁用，同样服从 Field 与原生 fieldset。", descriptionEn: "The toggle is disabled with the input, also following Field and a native fieldset." },
       { name: "className / style / render / ref", type: "InputProps", description: "全部作用于真实 input。", descriptionEn: "Applied to the real input." },
       { name: "controlClassName", type: "string", description: "作用于编辑边界，例如宽度。", descriptionEn: "Applied to the editing boundary, e.g. its width." },
-      { name: "其余 InputProps（除 type / unstyled）", nameEn: "Other InputProps (except type / unstyled)", type: "InputProps", description: "autoComplete、name、form、aria-* 等原样透传；默认关闭自动大写、自动更正与拼写检查。", descriptionEn: "autoComplete, name, form, aria-* and the rest are forwarded; auto-capitalisation, auto-correction and spell checking are off by default." },
+      { name: "其余 InputProps（除 type / unstyled）", nameEn: "Other InputProps (except type / unstyled)", type: "InputProps", description: "autoComplete、name、form、aria-* 等原样透传；默认关闭自动大写、自动更正与拼写检查。autoComplete 应写 current-password（登录）或 new-password（设置）；未传时开发环境在控制台警告，生产环境不提示。", descriptionEn: "autoComplete, name, form, aria-* and the rest are forwarded; auto-capitalisation, auto-correction and spell checking are off by default. Set autoComplete to current-password (sign in) or new-password (set); when missing, development logs a console warning and production stays silent." },
     ],
   }],
   keyboard: [
     { keys: "Tab / Shift+Tab", description: "在输入与开关之间移动；禁用的开关不进入顺序。", descriptionEn: "Move between the input and the toggle; a disabled toggle leaves the tab order." },
     { keys: "Enter / Space", description: "焦点在开关上时切换可见性，不提交表单。", descriptionEn: "On the toggle: switch visibility without submitting the form." },
   ],
-  notes: ["此前写作 Input type=\"password\" 的用法改为 PasswordInput；Input 的 visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel 已移除。"],
-  notesEn: ["Replace Input type=\"password\" with PasswordInput; Input's visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel are removed."],
+  notes: ["不得阻止粘贴，也不得阻止密码管理器自动填充（WCAG 3.3.8 可访问认证）：组件没有任何 paste、drop 或关闭自动填充的处理；调用方不要通过 onPaste 的 preventDefault、autoComplete=\"off\" 或把输入拆成多个字段来拦截。", "此前写作 Input type=\"password\" 的用法改为 PasswordInput；Input 的 visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel 已移除。"],
+  notesEn: ["Never block pasting or password-manager autofill (WCAG 3.3.8, Accessible Authentication): the component has no paste, drop or autofill-disabling handling, and callers should not add one through onPaste preventDefault, autoComplete=\"off\", or by splitting the input into several fields.", "Replace Input type=\"password\" with PasswordInput; Input's visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel are removed."],
 } satisfies ComponentMeta;

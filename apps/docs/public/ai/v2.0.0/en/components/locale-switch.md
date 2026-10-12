@@ -8,7 +8,7 @@ Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 Request an application locale change and show the current Provider value.
 
 ## Notes
-- No changes to document.lang, system language, storage, or routes; applications own these.
+- No changes to document.lang, <html dir>, system language, storage, or routes; applications own these. After a switch, Provider derives dir again from the new locale code; the application must keep <html dir> consistent with it.
 - The built-in language name uses UI locale; consumers supply visible option names.
 
 ## Use and ownership
@@ -31,14 +31,25 @@ Request an application locale change and show the current Provider value.
 - LocaleSwitchOption: type; owner locale-switch; PASS
 - LocaleSwitchProps: type; owner locale-switch; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### LocaleSwitch
+- `onChange?`: `NativeSelectProps["onChange"]`.
+- `onLocaleChange`: `(locale: UILocale, event: React.ChangeEvent<HTMLSelectElement>) => void`.
+- `options`: `readonly LocaleSwitchOption[]`.
+- plus 283 inherited (@types/react 282, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- No changes to document.lang, <html dir>, system language, storage, or routes; applications own these. After a switch, Provider derives dir again from the new locale code; the application must keep <html dir> consistent with it.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### LocaleSwitch
 Uses NativeSelect; UILocaleProvider alone supplies the current value.
 - options: readonly { locale: UILocale; label: string; disabled?: boolean }[]. The consumer supplies available languages and names. Codes must be nonblank and unique; an unlisted current code appears as a disabled factual option.

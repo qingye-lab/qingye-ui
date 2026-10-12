@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
-Source SHA-256: b242907ef4830b800cce0154c41b225bee52164ba08e8d5ee2671c3e5f115c9f
+Source SHA-256: 46f9b4df33cb90e9ca5fbf84ca2a25010b644e7aaddea5fe4884a568c5ea2ecb
 
 短标记，保留内容名称而不推断状态。
 
@@ -30,14 +30,23 @@ Source SHA-256: b242907ef4830b800cce0154c41b225bee52164ba08e8d5ee2671c3e5f115c9f
 - BadgeProps: type; owner badge; PASS
 - BadgeTone: type; owner badge; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Badge
+- `tone?`: `"info" | "warning" | "danger" | "success"`. 状态类别（随类赋彩）：只有标记确实表达这一类事实时才给。给出时自带强调。
+- `variant?`: `"neutral" | "emphasis"`. neutral 只把这段文字分出来；emphasis 要读者注意到它，但不归入任何状态类别。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Badge
 className、style 与 render 属于标记；标记没有尺寸档，与它标注的那段文字同大。
 - variant: "neutral" | "emphasis"; default "neutral". neutral 是浓墨的字；emphasis 是焦墨加中等字重，要读者注意但不归入状态类别，所以不用色相。

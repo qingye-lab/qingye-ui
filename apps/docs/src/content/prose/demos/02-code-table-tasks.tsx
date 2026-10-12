@@ -5,9 +5,9 @@ export default function Demo() {
   return <Prose>
     <h3>排查步骤</h3>
     <ul className="contains-task-list">
-      <li className="task-list-item"><input type="checkbox" checked disabled readOnly /> 在操作记录里确认失败条目数量</li>
-      <li className="task-list-item"><input type="checkbox" disabled readOnly /> 核对 Webhook 回调是否已经收到</li>
-      <li className="task-list-item"><input type="checkbox" disabled readOnly /> 决定重新触发还是放弃这一条</li>
+      <li className="task-list-item"><input type="checkbox" checked disabled readOnly aria-labelledby="prose-task-1" /> <span id="prose-task-1">在操作记录里确认失败条目数量</span></li>
+      <li className="task-list-item"><input type="checkbox" disabled readOnly aria-labelledby="prose-task-2" /> <span id="prose-task-2">核对 Webhook 回调是否已经收到</span></li>
+      <li className="task-list-item"><input type="checkbox" disabled readOnly aria-labelledby="prose-task-3" /> <span id="prose-task-3">决定重新触发还是放弃这一条</span></li>
     </ul>
     <p>按失败原因统计，最近一次同步的结果如下：</p>
     <table>

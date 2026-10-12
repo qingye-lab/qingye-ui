@@ -146,3 +146,16 @@ test("render, refs, state classes, local style and explicit ARIA survive composi
   expect(radio).toHaveClass("caller-checked");
   expect(radio).toHaveStyle({ color: "var(--qy-foreground)" });
 });
+
+test("radios placed directly in a Field keep unique ids, their own names, and the group's label, help and error", () => {
+  const { container } = render(<Field invalid><FieldLabel>选项</FieldLabel><RadioGroup><Radio value="a" aria-describedby="own" /><Radio value="b" /></RadioGroup><FieldDescription>说明</FieldDescription><FieldError>无效</FieldError></Field>);
+  const ids = [...container.querySelectorAll("[id]")].map(node => node.id);
+  expect(new Set(ids).size).toBe(ids.length);
+  const [first, second] = screen.getAllByRole("radio");
+  // 项没有被整组的标签接管：名称来自项自己，整组的名称来自 Field 的标签。
+  expect(first).not.toHaveAttribute("aria-labelledby"); expect(second).not.toHaveAttribute("aria-labelledby");
+  expect(screen.getByRole("radiogroup", { name: "选项" })).toBeInTheDocument();
+  // 整组的描述与错误仍描述每一项，调用方自己的 aria-describedby 保留。
+  expect(second).toHaveAccessibleDescription("说明 无效");
+  expect(first.getAttribute("aria-describedby")?.split(/\s+/)).toContain("own");
+});

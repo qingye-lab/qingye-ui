@@ -37,14 +37,22 @@ Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91
 - SwitchPrimitive: reexport; owner switch; UNVERIFIED
 - SwitchProps: type; owner switch; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Switch
+- no props declared by this library
+- plus 289 inherited (@types/react 273, @base-ui/react 16); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Switch
 保持名称稳定，用 aria-checked 表达开与关。
 - checked / defaultChecked: boolean. 受控设置值或非受控初值。
@@ -107,6 +115,7 @@ export default function Demo() {
 ### 跟随标签
 Source: apps/docs/src/content/switch/demos/02-labels.tsx
 ```tsx
+import { useId } from "react";
 import { Field, FieldContent, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Switch } from "@qingye_lab/ui/components/switch";
 
@@ -114,11 +123,13 @@ export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 
 // 开关的轨道高度跟随相邻标签的文字档；密度与容器高度都不改它。
 export default function Demo() {
+  // 第三行的文字不是 FieldLabel，仍须给开关一个名称：用 aria-labelledby 指向这行字本身。
+  const id = useId();
   return (
     <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
       <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><FieldLabel>显示网格</FieldLabel></FieldContent></Field>
       <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><FieldLabel className="text-support">跟随紧凑标签</FieldLabel></FieldContent></Field>
-      <Field orientation="horizontal"><Switch defaultChecked /><FieldContent><span className="text-reading">说明性文字，轨道与它同高</span></FieldContent></Field>
+      <Field orientation="horizontal"><Switch defaultChecked aria-labelledby={`${id}-reading`} /><FieldContent><span id={`${id}-reading`} className="text-reading">说明性文字，轨道与它同高</span></FieldContent></Field>
     </div>
   );
 }

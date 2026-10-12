@@ -54,3 +54,22 @@
 :is(:lang(zh), :lang(ja), :lang(ko)) {
   letter-spacing: normal;
 }
+
+/*
+ * 读数轨道分格（基础层 §9）：Progress / Meter 的 `segments={n}` 把轨道按 n 个等宽格分开，
+ * 根上带 `data-segments` 与 `--qy-segments`（n）。
+ *
+ * 空隙是遮罩切开的透明缝，不是画上去的底色：库不知道承载面是什么颜色（G9），任何「纸色」缝
+ * 在别的底上都会露馅。遮罩同时切开凹槽与填充，所以填充的宽度仍由值决定，不必逐格计算。
+ *
+ * 几何：缝宽 g = 半分（2px，与 Proportion 相邻部分之间的空隙同一取值）。每格周期 p = (W + g) / n，
+ * 格宽 p − g，n 格正好铺满 W，末尾那条缝落在轨道之外被裁掉。这样格数、缝宽与总宽三者只有一个自由度。
+ * 方向：格与缝对称（第 k 格与第 n−1−k 格镜像重合），所以从左铺或从右铺得到同一张图，RTL 无需另写。
+ * 填充 k 格时宽度 k·W/n，落在第 k−1 格终点与第 k 格起点之间的缝里，不会漏进下一格。
+ */
+:is([data-slot="progress"], [data-slot="meter"])[data-segments] :is([data-slot="progress-track"], [data-slot="meter-track"]) {
+  --qy-segment-gap: calc(var(--qy-fen) / 2);
+  mask-image: linear-gradient(to right, currentcolor calc(100% - var(--qy-segment-gap)), transparent 0);
+  mask-size: calc((100% + var(--qy-segment-gap)) / var(--qy-segments)) 100%;
+  mask-repeat: repeat-x;
+}

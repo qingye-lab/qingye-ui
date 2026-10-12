@@ -17,7 +17,7 @@ export default {
     "MeterPrimitive"
   ],
   "keywords": ["meter", "gauge", "measure", "level", "仪表", "度量", "用量", "容量"],
-  "decisions": "任务完成比例使用 Progress；未知测量不要填0。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero.",
+  "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue.",
   "design": {
     "methods": [
       "名实相符",
@@ -30,7 +30,8 @@ export default {
       "任务完成比例使用 Progress；未知测量不要填0。"
     ],
     "composition": [
-      "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。"
+      "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
+      "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
     ],
     "stateOwner": {
       "library": [
@@ -46,7 +47,7 @@ export default {
     "customization": [
       "使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"
     ]
-  }, designEn: {"whenToUse":["Present measured values and units."],"avoid":["Use Progress for task completion. Unknown measurements must not become zero."],"composition":["Label associates the name, Value presents the actual reading, and track/indicator infer no judgment."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Measurement names and formatted readings wrap; an independent measurement role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
+  }, designEn: {"whenToUse":["Present measured values and units."],"avoid":["Use Progress for task completion. Unknown measurements must not become zero."],"composition":["Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.","A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Measurement names and formatted readings wrap; an independent measurement role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
   "api": [
     {
       "name": "Meter",
@@ -56,6 +57,16 @@ export default {
           "name": "value / min / max",
           "type": "number",
           "description": "已知有限值及递增范围；越界、非有限或倒置范围抛 RangeError。", descriptionEn: "A known finite value in an increasing range; out-of-range, nonfinite, or reversed inputs throw RangeError."
+        },
+        {
+          "name": "segments",
+          "type": "number",
+          "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。", descriptionEn: "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+        },
+        {
+          "name": "tone",
+          "type": "\"danger\" | \"warning\" | \"success\" | \"info\"",
+          "description": "指示的状态类别，由调用方声明，组件不从数值猜好坏；根上带 data-tone。不给时用主色。非法值抛 RangeError。", descriptionEn: "The indicator's status category, declared by the caller; the component does not guess good or bad from the value. The root carries data-tone. Omitted, the primary color is used. An invalid value throws RangeError."
         },
         {
           "name": "format / locale / getAriaValueText",

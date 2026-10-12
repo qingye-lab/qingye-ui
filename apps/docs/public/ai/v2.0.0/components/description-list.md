@@ -41,14 +41,34 @@ dl 中以 div 组织 dt/dd，值作为 children 原样呈现，不用真假判�
 - DescriptionListTerm: function; owner description-list; PASS; props: DescriptionListTermProps
 - DescriptionListTermProps: type; owner description-list; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### DescriptionList
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DescriptionListDetail
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DescriptionListItem
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DescriptionListTerm
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### DescriptionList
 原生 dl。
 - children / render / ref / native props: useRender.ComponentProps<dl>. 属性与 ref 属于实际名称值列表。

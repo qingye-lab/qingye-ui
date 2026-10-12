@@ -39,14 +39,41 @@ InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focu
 - InputGroupInputProps: type; owner input-group; PASS
 - InputGroupProps: type; owner input-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### InputGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### InputGroupAddon
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### InputGroupButton
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
+
+### InputGroupInput
+- `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
+- plus 309 inherited (@types/react 303, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### InputGroup
 A shared editing boundary with no extra field role.
 - render / ref / native props: useRender.ComponentProps<div>. Composition props for the common boundary.

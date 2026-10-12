@@ -43,14 +43,38 @@ ol/li 表达传入序列，time 保存可解析时间；不排序、不补事件
 - TimelineTitle: function; owner timeline; PASS; props: TimelineTitleProps
 - TimelineTitleProps: type; owner timeline; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Timeline
+- no props declared by this library
+- plus 284 inherited (@types/react 283, @base-ui/react 1); not expanded, see the installed declarations
+
+### TimelineDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TimelineItem
+- no props declared by this library
+- plus 282 inherited (@types/react 281, @base-ui/react 1); not expanded, see the installed declarations
+
+### TimelineTime
+- no props declared by this library
+- plus 282 inherited (@types/react 281, @base-ui/react 1); not expanded, see the installed declarations
+
+### TimelineTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Timeline / TimelineItem
 ol / li 按 children 顺序呈现。
 - children / aria-label / render / ref / native props: useRender.ComponentProps<ol | li>. 名称和事件由应用提供，未知时间可用文字。

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: e32b98103aa3bf15b34d2ad66fd8d36798420497234dca30484c8f09838cb9c7
+Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
 
 复制给定文本，并呈现剪贴板实际写入结果。
 
@@ -33,14 +33,32 @@ CopyButton 复用 useCopyToClipboard，成功从写入 Promise resolve 建立。
 - CopyButton: function; owner copy-button; PASS; props: CopyButtonProps
 - CopyButtonProps: type; owner copy-button; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### CopyButton
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `onCopyError?`: `(error: unknown) => void`.
+- `onCopySuccess?`: `() => void`.
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `timeout?`: `number`. Clears feedback only; success comes from writeText resolving.
+- `tone?`: `"neutral" | "danger"`.
+- `value`: `string`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 287 inherited (@types/react 284, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### CopyButton
 继承 Button 的五档、强调、原生/非原生 render 与 ref。
 - value: string. 本次复制的真实文本；不从 DOM 或业务对象猜测。

@@ -34,14 +34,26 @@ Omit a line when headings and spacing already express the relation. Separator ha
 - SeparatorPrimitive: reexport; owner separator; UNVERIFIED
 - SeparatorProps: type; owner separator; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Separator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### SeparatorPrimitive
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Separator
 Based on Base UI Separator; role=separator by default.
 - orientation: "horizontal" | "vertical"; default "horizontal". Horizontal spans the container; vertical stretches in a flex row.

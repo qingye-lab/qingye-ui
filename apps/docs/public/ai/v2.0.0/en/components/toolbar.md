@@ -45,14 +45,40 @@ Base UI Toolbar owns roving focus and group disabling. Buttons compose current B
 - ToolbarSeparator: function; owner toolbar; PASS; props: ToolbarSeparatorProps
 - ToolbarSeparatorProps: type; owner toolbar; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Toolbar
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
+
+### ToolbarButton
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 290 inherited (@types/react 284, @base-ui/react 6); not expanded, see the installed declarations
+
+### ToolbarGroup
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### ToolbarLink
+- no props declared by this library
+- plus 286 inherited (@types/react 283, @base-ui/react 3); not expanded, see the installed declarations
+
+### ToolbarSeparator
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Toolbar
 Base UI Toolbar.Root.
 - orientation / loopFocus / disabled / aria-label / render / ref: ToolbarPrimitive.Root.Props; default orientation="horizontal", loopFocus=true. The application names the toolbar; orientation sets the arrow-key axis.

@@ -42,14 +42,34 @@ Order does not establish completion. Every state is explicit; only current recei
 - StepTitle: function; owner steps; PASS; props: StepTitleProps
 - StepTitleProps: type; owner steps; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Step
+- `state`: `"error" | "upcoming" | "current" | "complete"`.
+- plus 282 inherited (@types/react 281, @base-ui/react 1); not expanded, see the installed declarations
+
+### StepDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Steps
+- no props declared by this library
+- plus 284 inherited (@types/react 283, @base-ui/react 1); not expanded, see the installed declarations
+
+### StepTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Steps
 A named ordered list.
 - aria-label / render / ref / native props: useRender.ComponentProps<ol>. The default name comes from locale.

@@ -178,6 +178,14 @@
     --qy-text-metric-tracking: -0.024em;
     --qy-text-metric-weight: var(--qy-weight-semibold);
 
+    /* 大号读数：32/40，只给 Stat size="lg" 的 StatValue 读（修改入口：此处四项）。
+     * 与 metric 相差 1.33 倍，满足相邻内容档至少 1.2 倍；32 是 display 已有的字号，不新造；
+     * 行高 10 分 = 2 材。字号为预设，行高为派生。字距、字重与同字号的 display 同值。 */
+    --qy-text-metric-lg-size: 2rem;
+    --qy-text-metric-lg-leading: calc(10 * var(--qy-fen));
+    --qy-text-metric-lg-tracking: -0.032em;
+    --qy-text-metric-lg-weight: var(--qy-weight-semibold);
+
     /* 标记框内的拉丁缩写；中文不用此档。 */
     --qy-text-micro-size: 0.6875rem;
     --qy-text-micro-leading: calc(4 * var(--qy-fen));

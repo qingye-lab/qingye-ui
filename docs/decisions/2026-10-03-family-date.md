@@ -9,15 +9,17 @@ Current capability recorded（2026-10-04，第十批）；以下族级判据仍�
 | 当前组件 | 真实值与编辑入口 | 提交与退出 |
 |---|---|---|
 | Calendar | 当地 Date；single/multiple/range 由安装版 DayPicker 提供；完整网格键盘与年月导航 | 无原生表单值；调用方持有选中值，formatLocalDate/parseLocalDate 不经 UTC 移日 |
-| DatePicker | 受控 Date/undefined；原生 date Input 可直接键入，Calendar 提供辅助选择 | Field name 对应真实 YYYY-MM-DD；选择后关闭，清除请求 undefined，拒绝变更保留原值 |
-| DateRangePicker | 受控完整 from/to；独立范围草稿，当前展示 Input 只读，编辑经日历键盘 | Apply 才请求完整值；不完整不提交；确认端点为 name.from/name.to，Cancel/Escape 保留原值 |
+| DatePicker | Date/undefined，受控（传 `value`）或非受控（`defaultValue`，2026-10-12）；原生 date Input 可直接键入，Calendar 提供辅助选择 | Field name 对应真实 YYYY-MM-DD；选择后关闭，清除请求 undefined，拒绝变更保留原值 |
+| DateRangePicker | 受控或非受控（`defaultValue`）的完整 from/to；起止两个原生 date Input 与弹层日历共用一份草稿（2026-10-12 起可分别键入），`presets` 只写草稿 | 键入得出完整有序范围即请求，或日历 Apply 请求；不完整、反向、越界不提交，离开字段后标 `aria-invalid` 并经 `onInvalid` 交给应用；确认端点为 name.from/name.to，Cancel/Escape 保留原值 |
 | DateTimePicker | 受控无时区 YYYY-MM-DDTHH:mm[:ss] wall-clock 文本；原生 datetime-local，或日期/time 草稿 | 仅确认 Input 提交；草稿无 name，空时间不补 now，完整后 Apply 仍须调用方接受 |
 
 四者复用当前 Field/Input/Button/Popover 与 DayPicker10 公共 API。readOnly 保留提交、disabled/Field disabled 排除并阻止附属动作；根与真实输入通过公开 render/ref/ARIA/events 定制。五档控制与文字共用已有角色；本批无新增几何/色彩 token。
 
-原生 min/max/step 与 Calendar disabled/startMonth/endMonth 是独立约束入口，**调用方同步两者并做所需的应用校验**；DateRange 不声称有原生日期边界/required 校验。日历禁用有原语的非颜色语义，业务理由由调用方可见内容给出，库不猜不可用原因。默认中文/英文日期语言跟随 UILocale，其它 locale、周起始日、RTL 与历法通过 DayPicker 公共 props 明确提供。
+**2026-10-12：** 三个 Picker 的顶层 `min` / `max` 一处声明，同时写入原生输入（DateRange 的两个输入）与日历的禁用范围、可翻到的月份；与旧写法（`inputProps.min/max` 加 `calendarProps.disabled/startMonth/endMonth`）并存，同时给出时取交集，交集为空时开发环境警告。DateTimePicker 另把边界当天的时刻带进时间输入，超出范围的草稿不能应用。原生 `step` 仍在 `inputProps`，Calendar 的其它 matcher 仍由调用方声明；业务可用性与时区规则归应用。日历禁用有原语的非颜色语义，业务理由由调用方可见内容给出，库不猜不可用原因。默认中文/英文日期语言跟随 UILocale，其它 locale、周起始日、RTL 与历法通过 DayPicker 公共 props 明确提供。
 
-**仍未覆盖/验收**：Range 分别键入两个端点；跨午夜自动刷新 today；其它历法/RTL、辅助技术、窄屏和200%文字。默认 today 是原语运行时事实，不是提交值；本批没有新增时钟订阅，不承诺挂载不重渲染时午夜自动更新。旧族级“直接键入区间”仍是缺口，不能改写为已经满足。真实浅深桌面值路径 PASS 见执行记录；它不代替这些未验证项。
+**2026-10-12 已处理：** Range 分别键入两个端点（缺口关闭）；Calendar 的月名、星期名、周起始日随语言代码（zh-CN 与 en-US 保持原样，其余由 `Intl` 与 `Intl.Locale` 周信息推出，显式 `locale` 优先）；RTL 下翻页箭头镜像（Chrome 实测 ar：周六起始、右起排列、箭头方向正确）；键入中间态（年份 5–6 位、分段只填一半）不再清空已有值；外层 fieldset 运行时禁用沿祖先链同步；年月下拉用 NativeSelect 画法。
+
+**仍未覆盖/验收**：跨午夜自动刷新 today（预设的函数形式在每次打开时求值，不等于 Calendar 的 today 标记会自更新）；其它历法、辅助技术、窄屏和200%文字。默认 today 是原语运行时事实，不是提交值；本批没有新增时钟订阅，不承诺挂载不重渲染时午夜自动更新。旧族级“直接键入区间”缺口已由两个原生输入关闭（2026-10-12）；键入时每个有效中间态（如年份 0002、0020、0202）都会请求变更，与 DatePicker 一致，应用若不想接收可在 `onValueChange` 拒绝。真实浅深桌面值路径 PASS 见执行记录；它不代替这些未验证项。
 
 ## 一、这一族处理什么真实问题
 
@@ -150,6 +152,6 @@ Current capability recorded（2026-10-04，第十批）；以下族级判据仍�
 ## Consequences
 
 - 四个组件都涉及本地化与历法，重写时必须按 §14 单独验证周起始日、格式与 RTL。
-- 当前 Range 的分别键入入口仍未提供；此族级目标保留，不以日历键盘检查冒充直接键入通过。
+- Range 的分别键入入口已提供（2026-10-12）；只读（readOnly）时两个输入可聚焦可读出但不开弹层，与 Select 一致。
 - 部分输入不得产生伪造完整值；当前 date/datetime-local 的部分编辑由浏览器承接，Range 的部分值只作为草稿。
 - 原生范围/步长与日历规则、时区/DST 策略由应用明确声明；公开 metadata 已记录同步责任与无时区 wall-clock 定义。

@@ -30,6 +30,21 @@ type Entry = { node: TreeNode; parent: string | null; level: number };
 function collectLeaves(node: TreeNode): TreeNode[] {
   return node.children?.length ? node.children.flatMap(collectLeaves) : [node];
 }
+/** 键入搜索的累积窗口：两次按键相隔超过它就从头开始。**预设**——APG 的 Tree View 只要求「快速连续键入多个字符」，
+ * 没有给出时长；500ms 是常见组件库（MUI、React Aria 同一量级）的惯例，不由本库的任何关系推出。 */
+export const TREE_TYPEAHEAD_MS = 500;
+/** 键入搜索的目标：缓冲区只由同一个字符组成（「aaa」）时循环：每次跳到下一个以该字符开头的节点，从当前之后起算；
+ * 单个字符也是这种情形（跳到下一个，不停在自己身上）；否则按整个前缀匹配，从当前节点（含）起算，因此继续键入时焦点停在仍然匹配的当前节点上。 */
+function typeaheadTarget(labels: readonly string[], current: number, buffer: string): number {
+  if (labels.length === 0) return -1;
+  const cycle = [...buffer].every(char => char === buffer[0]);
+  const needle = cycle ? buffer[0]! : buffer; const from = cycle ? current + 1 : current;
+  for (let step = 0; step < labels.length; step++) {
+    const index = (from + step) % labels.length;
+    if (labels[index]!.startsWith(needle)) return index;
+  }
+  return -1;
+}
 /** 装饰性标记：不是 Base UI Checkbox，不单独可聚焦——treeitem 自己承担交互，Space 与行点击触发 changeChecked。
  * 几何与墨色读与 Checkbox 相同的角色 token（--qy-marker-size[-narrow]、--qy-marker-inset、--qy-radius-marker），
  * 但状态来自 state 参数而不是 Base UI 的 state 回调，因此不复用 Checkbox 的 (state)=>cn(...) 写法，直接照搬取值。
@@ -52,10 +67,12 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
   const expanded = expandedIds ?? localExpanded; const selected = selectedId === undefined ? localSelected : selectedId;
   const checked = checkedIds ?? localChecked; const checkedSet = new Set(checked);
   const all = new Map<string, Entry>(); const visible: Entry[] = [];
+  // 名称指向行内自己的标签，而不是 aria-label：treeitem 含下一级，aria-label 会与可见文字（含子项）不符（WCAG 2.5.3）。
+  const idBase = React.useId(); const order = new Map<string, number>();
   function index(list: readonly TreeNode[], parent: string | null, level: number, shown: boolean) {
     for (const node of list) {
       if (!node.id.trim() || !node.label.trim() || all.has(node.id)) throw new Error("Tree requires unique, nonempty ids and labels.");
-      const entry = { node, parent, level }; all.set(node.id, entry); if (shown) visible.push(entry);
+      const entry = { node, parent, level }; order.set(node.id, all.size); all.set(node.id, entry); if (shown) visible.push(entry);
       if (node.children) index(node.children, node.id, level + 1, shown && expanded.includes(node.id));
     }
   }
@@ -71,6 +88,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     return count === 0 ? false : count === pool.length ? true : "mixed";
   }
   const [focused, setFocused] = React.useState<string | null>(null);
+  const typed = React.useRef({ text: "", time: 0 });
   const root = React.useRef<HTMLDivElement | null>(null); const refs = React.useRef(new Map<string, HTMLLIElement>()); const ownsFocus = React.useRef(false);
   let active = enabled.find(entry => entry.node.id === focused)?.node.id ?? null;
   if (active === null && focused !== null) {
@@ -119,7 +137,10 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     else if (event.key === openKey) { if (!expanded.includes(entry.node.id)) changeExpanded(entry.node.id, event, "keyboard"); else target = enabled.find(item => item.parent === entry.node.id)?.node.id; }
     else if (event.key === closeKey) { if (expanded.includes(entry.node.id)) changeExpanded(entry.node.id, event, "keyboard"); else if (entry.parent && enabled.some(item => item.node.id === entry.parent)) target = entry.parent; }
     else if (event.key === "Enter" || event.key === " ") { if (checkable) { if (event.key === " ") changeChecked(entry.node, event, "keyboard"); } else select(entry.node.id, event, "keyboard"); }
-    else if (event.key.length === 1 && !event.altKey && !event.ctrlKey && !event.metaKey) { const candidates = [...enabled.slice(position + 1), ...enabled.slice(0, position + 1)]; target = candidates.find(item => item.node.label.toLocaleLowerCase().startsWith(event.key.toLocaleLowerCase()))?.node.id; }
+    else if (event.key.length === 1 && !event.altKey && !event.ctrlKey && !event.metaKey && !event.nativeEvent.isComposing) {
+      const now = Date.now(); const buffer = (now - typed.current.time > TREE_TYPEAHEAD_MS ? "" : typed.current.text) + event.key.toLocaleLowerCase(); typed.current = { text: buffer, time: now };
+      const found = typeaheadTarget(enabled.map(item => item.node.label.toLocaleLowerCase()), position, buffer); target = enabled[found]?.node.id;
+    }
     else return;
     event.preventDefault(); event.stopPropagation(); if (target) focus(target);
   }
@@ -128,11 +149,11 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       const isDisabled = disabled || Boolean(node.disabled); const branch = Boolean(node.children?.length); const open = branch && expanded.includes(node.id);
       const checkState = checkable ? deriveChecked(node) : false;
       const checkDim = checkable && (isDisabled || (branch && collectLeaves(node).every(leaf => leaf.disabled)));
-      return <li key={node.id} data-slot="tree-item" role="treeitem" aria-label={node.label} aria-level={level} aria-expanded={branch ? open : undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
+      return <li key={node.id} data-slot="tree-item" role="treeitem" aria-labelledby={`${idBase}-${order.get(node.id)}`} aria-level={level} aria-expanded={branch ? open : undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
         <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selected === node.id && selectable && "bg-(--qy-surface-active)", isDisabled && "opacity-64")}>
-          {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-label={`${open ? messages.collapse : messages.expand} ${node.label}`} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><IconChevronRight aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
+          {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-hidden="true" onMouseDown={event => event.preventDefault()} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><IconChevronRight aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
           {checkable && <CheckMarker state={checkState} dim={Boolean(checkDim)} />}
-          <span data-slot="tree-label" className="min-w-0 text-body wrap-anywhere">{node.label}</span>
+          <span id={`${idBase}-${order.get(node.id)}`} data-slot="tree-label" className="min-w-0 text-body wrap-anywhere">{node.label}</span>
         </div>
         {/* 下一级从上一级内容列的起点开始：缩进 = 展开列 + 动作间隔。每一级的展开钮、勾选标记各成一列（§19）。 */}
         {open && <ul data-slot="tree-group" role="group" className="m-0 min-w-0 list-none ps-[calc(var(--qy-control-xs)+var(--qy-action-gap))]">{renderNodes(node.children!, level + 1)}</ul>}

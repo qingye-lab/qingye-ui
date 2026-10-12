@@ -5,8 +5,10 @@ import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { chipActionClassName, chipClassName, chipDraftControlClassName, chipFrameStyle, chipTextClassName } from "../chip";
+import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
 import { useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
+import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
 import { Button } from "./button";
@@ -101,5 +103,32 @@ export function ComboboxItem({ className, children, ...props }: ComboboxPrimitiv
 }
 export function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {
   return <ComboboxPrimitive.Empty data-slot="combobox-empty" {...props} className={state => cn(candidateEmptyClassName, typeof className === "function" ? className(state) : className)} />;
+}
+/**
+ * 一组候选与它的组名。数据用 Base UI 的分组形态（`items={[{ value: "页面", items: [...] }]}`），
+ * 列表以函数子级逐组渲染；组内用 ComboboxCollection。画法与 SelectGroup / SelectGroupLabel 同一来源（NG3）。
+ * 多选时分组同样成立：组只决定候选如何摆放，不改变已确认值的形态。
+ */
+export function ComboboxGroup({ className, ...props }: ComboboxPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>) {
+  return <ComboboxPrimitive.Group data-slot="combobox-group" {...props} className={state => cn("min-w-0", typeof className === "function" ? className(state) : className)} />;
+}
+/** 组名只对读屏用 aria-labelledby 关联到所在的组；自身不可选、不入键盘序列。 */
+export function ComboboxGroupLabel({ className, ...props }: ComboboxPrimitive.GroupLabel.Props & React.RefAttributes<HTMLDivElement>) {
+  return <ComboboxPrimitive.GroupLabel data-slot="combobox-group-label" {...props} className={state => cn(overlayGroupLabelClassName, typeof className === "function" ? className(state) : className)} />;
+}
+/** 组与组之间比间距更强的分界；与 MenuSeparator 同一画法。分组靠间距已读得出时不必用。 */
+export function ComboboxSeparator({ className, ...props }: ComboboxPrimitive.Separator.Props & React.RefAttributes<HTMLDivElement>) {
+  return <ComboboxPrimitive.Separator data-slot="combobox-separator" {...props} className={state => cn(overlaySeparatorClassName, typeof className === "function" ? className(state) : className)} />;
+}
+/** 在分组数据的函数子级里，渲染一组之内的候选。 */
+export const ComboboxCollection = ComboboxPrimitive.Collection;
+export type ComboboxStatusProps = ComboboxPrimitive.Status.Props & React.RefAttributes<HTMLDivElement> & Omit<CandidateStatusOptions, "children">;
+/**
+ * 列表自身状态的读屏播报：加载中、结果数、应用自己的提示。放在 ComboboxPopup 里，始终保持挂载，
+ * 变的是它的内容。「没有结果」归 ComboboxEmpty，这里 `count={0}` 不出声。
+ */
+export function ComboboxStatus({ loading, count, visible, className, children, ...props }: ComboboxStatusProps) {
+  const status = useCandidateStatus({ children, loading, count, visible });
+  return <ComboboxPrimitive.Status data-slot="combobox-status" {...props} className={state => cn(status.className, typeof className === "function" ? className(state) : className)}>{status.content}</ComboboxPrimitive.Status>;
 }
 export { ComboboxPrimitive };

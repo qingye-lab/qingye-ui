@@ -31,14 +31,22 @@ A link goes somewhere; a button performs an action. The underline is always pres
 - linkClassName: const; owner link; UNVERIFIED
 - LinkProps: type; owner link; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Link
+- no props declared by this library
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Link
 A native a element; native attributes such as href, target, and rel plus render/ref are forwarded.
 - render / ref / native props: useRender.ComponentProps<"a">. Connect a router's link component through render.

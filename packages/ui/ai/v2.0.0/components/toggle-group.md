@@ -3,9 +3,12 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: e6d0a41d40a88d1ab06acaef373625825365b9c0a7215e0b982508522a5285a9
+Source SHA-256: 0ffafe3b0b80fe93491f983ae5885460f2e0ef0b3aebf612d275b23165bbdb4e
 
 关联一组单选或多选的切换按钮：选项保持切换状态。
+
+## Decision
+按下项是淡染的面加焦墨字，未按下项字为浓墨，字重不变；它不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它。要调整，改 --qy-track-selected 与 --qy-track-selected-foreground。
 
 ## Notes
 - 没有 name 或隐藏表单值；需要提交的互斥值使用 SegmentedControl。
@@ -26,7 +29,7 @@ Source SHA-256: e6d0a41d40a88d1ab06acaef373625825365b9c0a7215e0b982508522a5285a9
 - 水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证
 
 ## Customization
-- 既有 action-gap、同名五档及 Toggle 表达
+- 按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认淡染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档
 
 ## Current exports
 - ToggleGroup: function; owner toggle-group; PASS; props: ToggleGroupProps<Value>
@@ -35,14 +38,33 @@ Source SHA-256: e6d0a41d40a88d1ab06acaef373625825365b9c0a7215e0b982508522a5285a9
 - ToggleGroupPrimitive: reexport; owner toggle-group; UNVERIFIED
 - ToggleGroupProps: type; owner toggle-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ToggleGroup
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 275, @base-ui/react 10); not expanded, see the installed declarations
+
+### ToggleGroupItem
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `value`: `Value`.
+- plus 291 inherited (@types/react 283, @base-ui/react 8); not expanded, see the installed declarations
+
+### ToggleGroupPrimitive
+- no props declared by this library
+- plus 285 inherited (@types/react 275, @base-ui/react 10); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context GroupSize: without a provider default-value; provided by ToggleGroup
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ToggleGroup
 单选与多选都使用数组；单选允许取消成 []。
 - multiple: boolean; default false. false 为 single，最多切换一项；true 为 multiple，可切换多项。

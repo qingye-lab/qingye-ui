@@ -38,20 +38,45 @@ Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
 - AccordionPrimitive: reexport; owner accordion; UNVERIFIED
 - AccordionTrigger: function; owner accordion; PASS; props: AccordionPrimitive.Trigger.Props
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Accordion
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### AccordionHeader
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AccordionItem
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
+
+### AccordionPanel
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### AccordionTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Accordion
 同组展开的状态与保留策略。
 - value / defaultValue / onValueChange: AccordionPrimitive.Root.Props. 应用控制或原语持有展开项；事件可取消。
 - multiple: boolean; default false. 允许多项共同展开。
 - keepMounted: boolean; default true. 保留关闭内容和原生字段；需要移除时显式关闭。
 - disabled: boolean. 禁用整组。
+- hiddenUntilFound: boolean; default false. 收起的内容用 hidden="until-found" 留在文档里：浏览器的页内查找（Ctrl/Cmd+F）命中其中的文字，或地址栏片段指向其中的元素时，自动展开该项。Chrome 102+、Firefox 148+ 支持，Safari 不支持；不支持的浏览器上与默认相同（命中不到，需手动展开）。开启后 keepMounted 无效（必须保留挂载）。收起内容的高度过渡与 opacity 过渡由 motion.css 照常处理，命中时由原语直接展开、不播放过渡。
 
 ### AccordionItem
 一项的身份与禁用。
@@ -77,6 +102,20 @@ export default function AccordionDemo() {
     <AccordionItem value="first"><AccordionHeader render={<h4 />}><AccordionTrigger>第一项</AccordionTrigger></AccordionHeader><AccordionPanel><Label htmlFor="accordion-value">输入</Label><Input id="accordion-value" defaultValue="" /></AccordionPanel></AccordionItem>
     <AccordionItem value="second"><AccordionHeader render={<h4 />}><AccordionTrigger>第二项</AccordionTrigger></AccordionHeader><AccordionPanel>第二项内容</AccordionPanel></AccordionItem>
     <AccordionItem value="disabled" disabled><AccordionHeader render={<h4 />}><AccordionTrigger>禁用项</AccordionTrigger></AccordionHeader><AccordionPanel>禁用项内容</AccordionPanel></AccordionItem>
+  </Accordion>;
+}
+```
+
+### 页内查找
+Source: apps/docs/src/content/accordion/demos/02-until-found.tsx
+```tsx
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye_lab/ui/components/accordion";
+export const meta = { title: "页内查找", titleEn: "Find in page" };
+export default function AccordionDemo() {
+  return <Accordion hiddenUntilFound className="w-full max-w-sm">
+    <AccordionItem value="shipping"><AccordionHeader render={<h4 />}><AccordionTrigger>配送</AccordionTrigger></AccordionHeader><AccordionPanel>下单后三个工作日内发出，偏远地区另加两天。</AccordionPanel></AccordionItem>
+    <AccordionItem value="returns"><AccordionHeader render={<h4 />}><AccordionTrigger>退换</AccordionTrigger></AccordionHeader><AccordionPanel>签收后七日内可退换，商品需保持原包装。</AccordionPanel></AccordionItem>
+    <AccordionItem value="invoice"><AccordionHeader render={<h4 />}><AccordionTrigger>发票</AccordionTrigger></AccordionHeader><AccordionPanel>电子发票在发货后写入订单详情。</AccordionPanel></AccordionItem>
   </Accordion>;
 }
 ```

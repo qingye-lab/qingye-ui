@@ -34,15 +34,22 @@ Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
 ## Current exports
 - MotionProvider: function; owner motion-provider; PASS; props: { children: ReactNode }
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### MotionProvider
+- `children`: `ReactNode`.
 
 ## Dependencies and providers
 - Runtime: react
 - Optional peers: none recorded
 - 只在应用根部挂载一次；示例复用本站根部的 MotionProvider。
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### MotionProvider
 无界面组件。挂载时把 data-ui-input 设为 pointer；捕获到 keydown 改为 keyboard，pointerdown 或 pointermove 改回 pointer；卸载时还原。属性写在 <html> 上，因此也覆盖传送到 body 的浮层。
 - children: ReactNode. 应用内容。

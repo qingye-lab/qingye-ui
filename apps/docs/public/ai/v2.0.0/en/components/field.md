@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 4f3e1980271449013140a6fefb8c901af3205262a643cbce344ed7df67e1676e
+Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
 
 Connect one value's name, control, description, and caller-supplied errors.
 
@@ -16,6 +16,7 @@ Supply invalid and error content separately. Field connects names and errors wit
 - Unregistered self-named controls need explicit aria-labelledby and aria-describedby. FieldTitle does not supply those connections.
 - Import Fieldset / FieldsetLegend from components/fieldset. FieldSet / FieldLegend aliases have been removed.
 - Styles consume field-gap, field-group-gap, and text profiles. Their numerical values are centralized presets.
+- A Field builds one labelable scope: every control in it receives the same id and the same label. Radio and SegmentedControlItem open their own scope inside a Field, so they need no FieldItem; an item already wrapped in FieldItem is not wrapped again, so the FieldLabel beside it still works. Compositions that use FieldPrimitive.Item directly are not detected; do not nest another scope.
 
 ## Use and ownership
 - A value needs a persistent name, necessary explanation, or in-place error.
@@ -49,14 +50,64 @@ Supply invalid and error content separately. Field connects names and errors wit
 - FieldTitle: function; owner field; PASS; props: useRender.ComponentProps<"div">
 - FieldValidity: const; owner field; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Field
+- `orientation?`: `"horizontal" | "vertical"`.
+- plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
+
+### FieldContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldControl
+- no props declared by this library
+- plus 310 inherited (@types/react 305, @base-ui/react 5); not expanded, see the installed declarations
+
+### FieldDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### FieldError
+- `errors?`: `ReadonlyArray<{ message?: string | undefined } | undefined>`.
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldItem
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 277, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldSeparator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldValidity
+- no props declared by this library
+- plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context InField: without a provider default-value; provided by Field
+- Context InFieldItem: without a provider default-value; provided by Field, FieldItem, OptionScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Field
 Shared Base UI Field.Root context. Full automatic-validation APIs remain on FieldPrimitive.
 - orientation: "vertical" | "horizontal"; default "vertical". Vertical editing or a horizontal option; associations stay intact.
@@ -90,7 +141,7 @@ Spacing between fields, without group semantics.
 A boundary between field groups; flanking lines are decorative when text is supplied.
 
 ### FieldItem
-Scopes a particular control and label within one Field.
+Scopes a particular control and label within one Field. A Field carries one control; give each additional control (for example an exact-entry NumberField beside a Slider) its own FieldItem.
 
 ### FieldControl / FieldValidity / FieldPrimitive
 Direct primitive outlets for registration, state reading, and the full API.

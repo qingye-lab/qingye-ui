@@ -29,6 +29,8 @@ jobs:
           pnpm --filter @qingye_lab/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
       - name: Build library
         run: pnpm --filter @qingye_lab/ui build
+      - name: API tables match the types
+        run: pnpm --filter @qingye_lab/ui check:api
       - name: Build Studio
         run: pnpm studio:build
       - name: Build docs
@@ -62,6 +64,8 @@ jobs:
           name: browser-audit-evidence
           path: test-results/ci-audit/
           if-no-files-found: warn
+      - name: Check package contents and types
+        run: pnpm --filter @qingye_lab/ui check:pack
       - name: Pack
         run: |
           pnpm --filter @qingye_lab/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"

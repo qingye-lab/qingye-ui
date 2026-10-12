@@ -1,16 +1,17 @@
 // 对齐审计（基础层 §19）。需要 docs 开发服务器（pnpm dev）。不截图，只报告实测数值。
-//   node scripts/align-audit.mjs [page,page…]
+//   [DOCS_URL=http://localhost:5180] node scripts/align-audit.mjs [page,page…]
 // 页面为 preview.html 的标签：components,inputs,data,navigation,overlay,composition。
 // 有任何偏差时退出码为 1。
 import { chromium } from "playwright-core";
 import { fileURLToPath } from "node:url";
 const script = fileURLToPath(new URL("./lib/align-audit.browser.js", import.meta.url));
+const base = process.env.DOCS_URL ?? "http://localhost:5180";
 const pages = (process.argv[2] ?? "components,inputs,data,navigation,overlay,composition").split(",");
 const browser = await chromium.launch();
 let failed = false;
 for (const name of pages) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-  await page.goto(`http://localhost:5180/preview.html#${name}`, { waitUntil: "load" });
+  await page.goto(`${base}/preview.html#${name}`, { waitUntil: "load" });
   await page.waitForTimeout(1800);
   await page.addScriptTag({ path: script });
   const result = await page.evaluate(() => window.__align());

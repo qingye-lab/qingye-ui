@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vitest";
 import { SegmentedControl, SegmentedControlItem } from "../src/components/segmented-control";
-import { Field, FieldDescription, FieldError, FieldTitle } from "../src/components/field";
+import { Field, FieldDescription, FieldError, FieldLabel, FieldTitle } from "../src/components/field";
 
 const items = <><SegmentedControlItem value="">空值</SegmentedControlItem><SegmentedControlItem value="disabled" disabled>禁用</SegmentedControlItem><SegmentedControlItem value="alpha">甲</SegmentedControlItem></>;
 
@@ -39,4 +39,12 @@ test("group and item composition keep ref/render/events, ARIA and inherited five
   expect(ref.current).toBe(screen.getByRole("radiogroup")); const item = screen.getByRole("radio"); expect(itemRef.current).toBe(item);
   expect(item).toHaveAttribute("aria-describedby", "extra"); expect(item).toHaveClass("text-control-lg-mobile", "sm:text-control-lg", "caller-unchecked");
   await userEvent.click(item); expect(item).toHaveClass("caller-checked"); expect(click).toHaveBeenCalled();
+});
+
+test("segments inside a Field keep unique ids and their own text names; the group takes the Field label", () => {
+  const { container } = render(<Field><FieldLabel>对齐</FieldLabel><SegmentedControl>{items}</SegmentedControl><FieldDescription>一个值</FieldDescription></Field>);
+  const ids = [...container.querySelectorAll("[id]")].map(node => node.id);
+  expect(new Set(ids).size).toBe(ids.length);
+  expect(screen.getByRole("radiogroup", { name: "对齐" })).toBeInTheDocument();
+  for (const name of ["空值", "甲"]) expect(screen.getByRole("radio", { name })).toHaveAccessibleDescription("一个值");
 });

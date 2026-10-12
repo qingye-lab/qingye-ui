@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
-Source SHA-256: e13727a9c1c89fe005b40eccaa7a01c30d57027b66a9c511e897c3e54b56a850
+Source SHA-256: a4840f5d596664b75f0955993cfe79a0e4b49c8de13c50f8a511baf32d7762fe
 
 内容、入口与附属动作的关系。
 
@@ -16,12 +16,14 @@ Source SHA-256: e13727a9c1c89fe005b40eccaa7a01c30d57027b66a9c511e897c3e54b56a850
 ## Use and ownership
 - 一个通用条目需要名称、补充内容与相关动作。
 - Avoid: 多维比较使用 Table；不为没有目的的条目生成链接。
+- Avoid: 一行的主要动作不能藏进 reveal="hover"；触摸为主的界面不要用。
 - Library: 条目关系、render 转发与焦点。
 - Application: 条目内容、真实导航目标与操作状态。
 
 ## Composition
 - Item：默认 div，可 render 为 li 或独立 a。
-- ItemContent / ItemTitle / ItemDescription / ItemActions：div / div / p / div 关系槽。
+- ItemContent / ItemTitle / ItemDescription：div / div / p 关系槽。
+- ItemActions：行内的附属动作，默认一直可见。
 - ItemLink：真实导航链接。
 
 ## Responsive behavior
@@ -45,28 +47,63 @@ Source SHA-256: e13727a9c1c89fe005b40eccaa7a01c30d57027b66a9c511e897c3e54b56a850
 - ItemTitle: function; owner item; PASS; props: ItemTitleProps
 - ItemTitleProps: type; owner item; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Item
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemActions
+- `resting?`: `React.ReactNode`. 平时显示的内容，例如一个时间。`reveal="hover"` 时与操作叠在同一格，格宽取两者中较宽者，显隐切换时这一行不发生位移。
+- `reveal?`: `"always" | "hover"`. `always`（默认）：操作一直可见。`hover`：操作平时淡出，行悬停、行内有焦点、行内有打开的菜单或浮层时显现； 没有悬停能力的设备上恒显示。隐藏只改不透明度，按钮始终在 Tab 顺序与可访问树里。 一行的主要动作不要藏；触摸为主的界面不要用。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemLink
+- no props declared by this library
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Item
 默认 div，可 render 为 li 或独立 a。
 - render / ref / children / native props: useRender.ComponentProps<div>. 实际元素接收事件与 ref；列表中显式 render 为 li。
 
-### ItemContent / ItemTitle / ItemDescription / ItemActions
-div / div / p / div 关系槽。
-- children / render / ref / native props: useRender.ComponentProps<div | p>. 标题不是默认章节标题；动作组合公共 Button。
+### ItemContent / ItemTitle / ItemDescription
+div / div / p 关系槽。
+- children / render / ref / native props: useRender.ComponentProps<div | p>. 标题不是默认章节标题。
+
+### ItemActions
+行内的附属动作，默认一直可见。
+- reveal: "always" | "hover"; default "always". hover：操作平时淡出，行悬停、行内有焦点、行内有打开的菜单或浮层时显现；没有悬停能力的设备上恒显示。只改不透明度，按钮始终在 Tab 顺序与可访问树里。
+- resting: React.ReactNode. 平时显示的内容，例如一个时间。与操作叠在同一格，格宽取两者中较宽者，显隐切换时这一行不发生位移；没有悬停能力的设备上与操作并排显示。
+- children / render / ref / native props: useRender.ComponentProps<div>. 动作组合公共 Button。
 
 ### ItemLink
 真实导航链接。
 - href / render / ref / native props: useRender.ComponentProps<a>. 保留目标、ARIA 和消费者事件。
 
 ## Keyboard
-- Tab / Enter: 实际链接与按钮沿用原生顺序。
+- Tab / Enter: 实际链接与按钮沿用原生顺序；reveal="hover" 的操作聚焦时随之显现。
 
 ## Source examples
 ### 入口与独立动作
@@ -93,6 +130,36 @@ export default function Demo() {
     <Item render={<li />}>
       <ItemContent><ItemTitle><ItemLink href="/components/table">比较表</ItemLink></ItemTitle></ItemContent>
     </Item>
+  </Stack>;
+}
+```
+
+### 悬停显现的次要动作
+Source: apps/docs/src/content/item/demos/02-reveal.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "悬停显现的次要动作", titleEn: "Secondary actions on hover" } satisfies DemoMeta;
+
+const rows = [
+  { name: "春季蚕室记录", note: "温度 24℃，湿度 72%", time: "08:30" },
+  { name: "夏季蚕室记录", note: "温度 27℃，湿度 68%", time: "昨天" },
+  { name: "秋季蚕室记录", note: "温度 22℃，湿度 75%", time: "周一" },
+  { name: "冬季蚕室记录", note: "温度 18℃，湿度 70%", time: "10 月 6 日" },
+];
+
+export default function Demo() {
+  return <Stack gap="field" render={<ul />} className="m-0 w-full max-w-lg list-none p-0">
+    {rows.map(row => <Item render={<li />} key={row.name}>
+      <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
+      <ItemActions reveal="hover" resting={<time>{row.time}</time>}>
+        <Button variant="quiet" size="sm">重命名</Button>
+        <Button variant="quiet" size="sm">归档</Button>
+      </ItemActions>
+    </Item>)}
   </Stack>;
 }
 ```

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 3543991a92bb175ae6d33351e09983ca82ef9282223fb68199844b3a037d009b
+Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98
 
 An accessible window over a fixed-height collection with stable item identity.
 
@@ -12,6 +12,7 @@ VirtualList expresses no selection, loading, or business result. Stable keys, eq
 
 ## Notes
 - Equal-height items only. Use ordinary collections or ScrollArea for dynamic height, complete DOM search, or printing.
+- Scrolling recomputes only the visible range: with a fixed row height, row i sits at i × itemSize and the range is divided straight from scrollTop. Keys are derived once when items or getKey change, never again per scroll.
 - Focused rows remain mounted offscreen; actual removal returns focus to the viewport so navigation can continue. aria-posinset/setsize identify positions in the complete collection.
 - The example's 48px row height is a consumer choice with four visible rows. Adjust example rowSize or component itemSize/height; no library token was added.
 
@@ -34,14 +35,27 @@ VirtualList expresses no selection, loading, or business result. Stable keys, eq
 - VirtualList: function; owner virtual-list; PASS; props: VirtualListProps<Item>
 - VirtualListProps: type; owner virtual-list; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### VirtualList
+- `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
+- `height`: `number`.
+- `items`: `readonly Item[]`.
+- `itemSize`: `number`. Fixed outer row extent and viewport extent, in CSS px, supplied by the consumer.
+- `overscan?`: `number`. Render budget on either side of the visible window; not a visual dimension.
+- `renderItem`: `(item: Item, index: number) => React.ReactNode`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### VirtualList<Item>
 Collection rendering boundary with actual list/listitem semantics, without selection or business columns.
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. Actual collection, stable unique keys, and content; duplicate keys throw. Unstable positions cannot impersonate identity.

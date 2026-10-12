@@ -33,14 +33,26 @@ SearchInput is a composition, not a mode of Input: a search icon, the input, and
 - SearchInput: function; owner search-input; PASS; props: SearchInputProps
 - SearchInputProps: type; owner search-input; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SearchInput
+- `clearLabel?`: `string`. 清空按钮的名称，默认从 locale 读取。
+- `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
+- `onClear?`: `() => void`. 清空之后调用；值的变化仍走 onChange / onValueChange。清空不提交表单。
+- `size?`: `number | undefined`. 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。
+- plus 308 inherited (@types/react 302, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### SearchInput
 InputGroup + search icon + Input (type=search) + a clear action.
 - value / defaultValue / onChange / onValueChange: InputProps. Controlled and uncontrolled values; clearing updates the value through the same native event path.

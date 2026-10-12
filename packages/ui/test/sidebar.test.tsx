@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { UILocaleProvider } from "../src/locale";
 import { Sidebar, SidebarContent, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "../src/components/sidebar";
 const dot = <span aria-hidden="true">●</span>;
 describe("Sidebar", () => {
@@ -66,5 +67,18 @@ describe("Sidebar", () => {
     expect(screen.getByRole("link", { name: "A" })).toBeInTheDocument();
     rerender(<Sidebar collapsed><SidebarToggle /><SidebarContent><SidebarLink href="#a" icon={dot} count={0}>A</SidebarLink></SidebarContent></Sidebar>);
     expect(document.querySelector('[data-slot="corner-mark-badge"]')).toBeNull();
+  });
+  it("forwards the caller's props to the rail's sub-trigger, as it does when expanded", async () => {
+    const user = userEvent.setup(); const focus = vi.fn();
+    render(<Sidebar collapsed><SidebarToggle /><SidebarContent><SidebarSub><SidebarSubTrigger icon={dot} data-testid="rail-trigger" aria-describedby="hint" onFocus={focus}>集合</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#a">A</SidebarLink></SidebarSubContent></SidebarSub></SidebarContent></Sidebar>);
+    const trigger = screen.getByTestId("rail-trigger");
+    expect(trigger).toHaveAttribute("aria-describedby", "hint");
+    await user.tab(); await user.tab(); expect(trigger).toHaveFocus(); expect(focus).toHaveBeenCalled();
+  });
+  it("under rtl the rail's sub-links still open on the logical side: data-side is inline-end", async () => {
+    const user = userEvent.setup();
+    render(<UILocaleProvider dir="rtl"><Sidebar collapsed><SidebarContent><SidebarSub><SidebarSubTrigger icon={dot}>集合</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#a">A</SidebarLink></SidebarSubContent></SidebarSub></SidebarContent></Sidebar></UILocaleProvider>);
+    await user.click(screen.getByRole("button", { name: "集合" }));
+    expect((await screen.findByRole("link", { name: "A" })).closest("[data-side]")).toHaveAttribute("data-side", "inline-end");
   });
 });

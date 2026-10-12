@@ -24,10 +24,14 @@ export function PaginationItem({ render, className, ...props }: PaginationItemPr
 }
 export type PaginationLinkProps = useRender.ComponentProps<"a"> & { page: number };
 /**
- * 基础层 §6（2026-10-05 打磨）：当前页原来是「加粗 + 下划线」同其余链接一样，
- * 在 1 2 3 4 里看不出现在停在哪一页。当前位置是**事实**，不是强调——它与勾选、
- * 开关、分段控件选中同一角色，因此同样用填充表达：当前页是一枚实心控件，
- * 其余页是安静的链接。下划线留给「这里可以离开」，不在当前页上出现。
+ * 当前页是**当前位置**：持续的事实，不是命令，也不是强调。
+ * 画法取基础层 §11「当前位置用淡染」：淡染的面（12%）加焦墨字；其余页是安静的入口，字为浓墨，
+ * 悬停时字回到焦墨并出现清墨底。当前与否由面的深浅和字的墨色共同承担，字重不变，一排数字不跳动。
+ * 当前页悬停不变（§19：悬停是当前状态自己的悬停）。
+ *
+ * 沿革：2026-10-05 当前页由「加粗 + 下划线」改成实心（`--qy-primary`），因为在 1 2 3 4 里看不出停在哪一页；
+ * 2026-10-12 用户裁决改为淡染，与轨道内的选中段同一理由——品牌覆写主操作的填充时，页码不随之变色、
+ * 不与主按钮同重（§10）。下划线留给「这里可以离开」，不在当前页上出现。
  */
 export function PaginationLink({ page, render, className, ...props }: PaginationLinkProps) {
   const current = React.useContext(PageContext) === page;
@@ -40,8 +44,11 @@ export function PaginationLink({ page, render, className, ...props }: Pagination
       {
         className: cn(
           // 成排的同等入口（基础层 §19）：复用按钮画法；最小宽度等于外高，单个数字时是正方形。
-          buttonVariants({ variant: current ? "solid" : "quiet" }),
+          buttonVariants({ variant: "quiet" }),
           "min-w-(--qy-fill-height-narrow) font-normal numeric sm:min-w-(--qy-fill-height)",
+          current
+            ? "bg-(--qy-surface-active) text-foreground not-aria-disabled:hover:bg-(--qy-surface-active) not-aria-disabled:active:bg-(--qy-surface-active)"
+            : "text-muted-foreground not-aria-disabled:hover:text-foreground",
           className,
         ),
       },

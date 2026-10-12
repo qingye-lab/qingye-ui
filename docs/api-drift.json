@@ -1,0 +1,1918 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "packages/ui/scripts/gen-catalog.mjs (api-resolver.mjs)",
+  "checker": "typescript@5.9.3",
+  "scope": "Hand-written api tables in apps/docs/src/content/*/meta.ts against props types resolved by the TypeScript checker. Names only: types and defaults written in the tables are not compared.",
+  "rules": {
+    "own": "A property is own when at least one declaration is inside packages/ui/src; others are only counted.",
+    "mergedNames": "\"a / b / c\" names several properties; a merged part entry \"A / B\" is one table for a group of exports, so a property is documented if any table of the group names it and exists if any part of the group has it.",
+    "generic": "native props, ARIA, events, 原生属性, XProps and similar phrases stand for the inherited remainder and are not claims about a property.",
+    "union": "Props that are a union (Calendar mode) contribute the properties of every member."
+  },
+  "summary": {
+    "components": 91,
+    "byStatus": {
+      "type-resolved": 91
+    },
+    "documentedButMissing": 0,
+    "undocumented": 95,
+    "undocumentedDeclaredInThisComponentsFile": 11,
+    "unresolved": 0,
+    "uncheckedWrittenNames": 157,
+    "uncheckedByReason": {
+      "generic": 117,
+      "part-not-applicable": 32,
+      "dotted-path-into-another-type": 2,
+      "no-resolved-part-in-group": 6
+    }
+  },
+  "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
+  "documentedButMissing": [],
+  "unresolved": [],
+  "undocumented": [
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarAction",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarClear",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "button",
+      "part": "Button",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82"
+    },
+    {
+      "component": "button",
+      "part": "Button",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83"
+    },
+    {
+      "component": "chart",
+      "part": "Chart",
+      "prop": "events",
+      "declaredAt": "packages/ui/src/components/chart.tsx:76"
+    },
+    {
+      "component": "copy-button",
+      "part": "CopyButton",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "copy-button",
+      "part": "CopyButton",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "copy-button",
+      "part": "CopyButton",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "copy-button",
+      "part": "CopyButton",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "corner-mark",
+      "part": "CornerMark",
+      "prop": "children",
+      "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "empty",
+      "part": "EmptyTitle",
+      "prop": "numeric",
+      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "viaComponent": "typography"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarApply",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarCancel",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarClear",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "input",
+      "part": "Input",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/input.tsx:13"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupInput",
+      "prop": "controlClassName",
+      "declaredAt": "packages/ui/src/components/input.tsx:15",
+      "viaComponent": "input"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupInput",
+      "prop": "nativeInput",
+      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "viaComponent": "input"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "otp-field",
+      "part": "OtpField",
+      "prop": "nativeInput",
+      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "viaComponent": "input"
+    },
+    {
+      "component": "otp-field",
+      "part": "OtpField",
+      "prop": "unstyled",
+      "declaredAt": "packages/ui/src/components/input.tsx:17",
+      "viaComponent": "input"
+    },
+    {
+      "component": "page-header",
+      "part": "PageHeaderTitle",
+      "prop": "numeric",
+      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "viaComponent": "typography"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationNext",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "password-input",
+      "part": "PasswordInput",
+      "prop": "nativeInput",
+      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "viaComponent": "input"
+    },
+    {
+      "component": "password-input",
+      "part": "PasswordInput",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/input.tsx:13",
+      "viaComponent": "input"
+    },
+    {
+      "component": "scatter-chart",
+      "part": "ScatterChart",
+      "prop": "style",
+      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:14"
+    },
+    {
+      "component": "search-input",
+      "part": "SearchInput",
+      "prop": "nativeInput",
+      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "viaComponent": "input"
+    },
+    {
+      "component": "search-input",
+      "part": "SearchInput",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/input.tsx:13",
+      "viaComponent": "input"
+    },
+    {
+      "component": "section",
+      "part": "SectionTitle",
+      "prop": "numeric",
+      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "viaComponent": "typography"
+    },
+    {
+      "component": "section",
+      "part": "SectionTitle",
+      "prop": "step",
+      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "viaComponent": "typography"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarToggle",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarLink",
+      "prop": "count",
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:96"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarLink",
+      "prop": "max",
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:96"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarSub",
+      "prop": "children",
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:142"
+    },
+    {
+      "component": "theme-provider",
+      "part": "ThemeProvider",
+      "prop": "children",
+      "declaredAt": "packages/ui/src/components/theme-provider.tsx:20"
+    },
+    {
+      "component": "toolbar",
+      "part": "ToolbarButton",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/toolbar.tsx:17"
+    }
+  ],
+  "undocumentedParts": [
+    {
+      "component": "chart",
+      "part": "AxisTick",
+      "ownProps": [
+        "formatter",
+        "payload",
+        "textAnchor",
+        "verticalAnchor",
+        "x",
+        "y"
+      ]
+    },
+    {
+      "component": "chart",
+      "part": "ChartHeader",
+      "ownProps": [
+        "label",
+        "legend",
+        "titleId",
+        "toggle"
+      ]
+    },
+    {
+      "component": "chart",
+      "part": "LegendKey",
+      "ownProps": [
+        "series",
+        "type"
+      ]
+    },
+    {
+      "component": "chart",
+      "part": "Marker",
+      "ownProps": [
+        "color",
+        "cx",
+        "cy",
+        "marker"
+      ]
+    },
+    {
+      "component": "chart",
+      "part": "MarkerShape",
+      "ownProps": [
+        "marker"
+      ]
+    },
+    {
+      "component": "chart",
+      "part": "ReadoutTooltip",
+      "ownProps": [
+        "active",
+        "band",
+        "eventsOf",
+        "format",
+        "label",
+        "payload",
+        "series",
+        "share",
+        "total"
+      ]
+    },
+    {
+      "component": "popover",
+      "part": "PopoverContent",
+      "ownProps": [
+        "align",
+        "alignOffset",
+        "anchor",
+        "portalProps",
+        "positionerProps",
+        "side",
+        "sideOffset",
+        "viewportProps"
+      ]
+    }
+  ],
+  "noPropsTable": [
+    {
+      "component": "autocomplete",
+      "part": "AutocompletePopup",
+      "ownProps": [
+        "container",
+        "positionerProps"
+      ]
+    },
+    {
+      "component": "button",
+      "part": "buttonVariants",
+      "ownProps": [
+        "shape",
+        "size",
+        "tone",
+        "variant"
+      ]
+    },
+    {
+      "component": "combobox",
+      "part": "ComboboxPopup",
+      "ownProps": [
+        "container",
+        "positionerProps"
+      ]
+    },
+    {
+      "component": "field",
+      "part": "FieldSeparator",
+      "ownProps": [
+        "decorative"
+      ]
+    },
+    {
+      "component": "theme-provider",
+      "part": "themeScript",
+      "ownProps": [
+        "attribute",
+        "defaultTheme",
+        "storageKey"
+      ]
+    },
+    {
+      "component": "toast",
+      "part": "AnchoredToastProvider",
+      "ownProps": [
+        "portalProps"
+      ]
+    }
+  ],
+  "unchecked": [
+    {
+      "component": "alert",
+      "part": "Alert",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "alert-dialog",
+      "part": "AlertDialogPrimitive",
+      "written": "AlertDialogCreateHandle / AlertDialogPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "autocomplete",
+      "part": "AutocompletePrimitive",
+      "written": "AutocompletePrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "avatar",
+      "part": "Avatar",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "avatar",
+      "part": "AvatarPrimitive",
+      "written": "AvatarPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "badge",
+      "part": "Badge",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "breadcrumb",
+      "part": "Breadcrumb",
+      "written": "aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "breadcrumb",
+      "part": "BreadcrumbList / BreadcrumbItem",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "breadcrumb",
+      "part": "BreadcrumbLink",
+      "written": "href / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "breadcrumb",
+      "part": "BreadcrumbCurrent",
+      "written": "children / render / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "breadcrumb",
+      "part": "BreadcrumbSeparator",
+      "written": "children / render / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBar",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarActions / BulkActionBarAction / BulkActionBarClear",
+      "written": "Button props",
+      "token": "Button props",
+      "reason": "generic"
+    },
+    {
+      "component": "button-group",
+      "part": "ButtonGroup",
+      "written": "align / wrap / render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "calendar",
+      "part": "CalendarPrimitive",
+      "written": "CalendarPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "card",
+      "part": "Card",
+      "written": "原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "chart",
+      "part": "Chart",
+      "written": "events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "checkbox",
+      "part": "CheckboxPrimitive",
+      "written": "CheckboxPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "code-block",
+      "part": "CodeBlock",
+      "written": "render / ref / ARIA / className / style / native props",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "code-block",
+      "part": "CodeBlock",
+      "written": "render / ref / ARIA / className / style / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "combobox",
+      "part": "ComboboxPrimitive",
+      "written": "ComboboxPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "confirm-action",
+      "part": "ConfirmActionPrimitive",
+      "written": "ConfirmActionPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenu / ContextMenuTrigger",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger",
+      "written": "size / disabled / choice props",
+      "token": "choice props",
+      "reason": "generic"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuPrimitive",
+      "written": "ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "copy-button",
+      "part": "CopyButton",
+      "written": "disabled / onClick / render / ref / ARIA",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.rowHeader",
+      "token": "columnDef.meta.rowHeader",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTableSortButton",
+      "written": "column / Button props",
+      "token": "Button props",
+      "reason": "generic"
+    },
+    {
+      "component": "date-picker",
+      "part": "DatePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "date-picker",
+      "part": "DatePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "date-range-picker",
+      "part": "DateRangePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "date-range-picker",
+      "part": "DateRangePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "date-time-picker",
+      "part": "DateTimePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "date-time-picker",
+      "part": "DateTimePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "description-list",
+      "part": "DescriptionList",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "description-list",
+      "part": "DescriptionListItem",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "description-list",
+      "part": "DescriptionListTerm / DescriptionListDetail",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "dialog",
+      "part": "DialogPrimitive",
+      "written": "DialogCreateHandle / DialogPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "empty",
+      "part": "Empty",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "empty",
+      "part": "EmptyTitle",
+      "written": "level / step / render / ref / Heading props",
+      "token": "Heading props",
+      "reason": "generic"
+    },
+    {
+      "component": "empty",
+      "part": "EmptyDescription / EmptyActions",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "field",
+      "part": "FieldPrimitive",
+      "written": "FieldControl / FieldValidity / FieldPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "fieldset",
+      "part": "FieldsetPrimitive",
+      "written": "FieldsetPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "file-upload",
+      "part": "FileUpload",
+      "written": "inputProps / render / ref / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "file-upload",
+      "part": "FileUpload",
+      "written": "inputProps / render / ref / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBar",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "filter-bar",
+      "part": "FilterBarFields / FilterBarApplied / FilterBarStatus / FilterBarActions",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "form",
+      "part": "Form",
+      "written": "render / ref / ARIA / className / style",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroup",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupInput",
+      "written": "InputProps（除 size / unstyled）",
+      "token": "InputProps（除 size / unstyled）",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupAddon",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupButton",
+      "written": "其余 ButtonProps",
+      "token": "其余 ButtonProps",
+      "reason": "generic"
+    },
+    {
+      "component": "item",
+      "part": "Item",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "item",
+      "part": "ItemContent / ItemTitle / ItemDescription",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "item",
+      "part": "ItemActions",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "item",
+      "part": "ItemLink",
+      "written": "href / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "kbd",
+      "part": "Kbd",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "label",
+      "part": "Label",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "layout",
+      "part": "Stack",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "layout",
+      "part": "Inline",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "link",
+      "part": "Link",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "link",
+      "part": "linkClassName",
+      "written": "linkClassName",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "locale-switch",
+      "part": "LocaleSwitch",
+      "written": "name / form / disabled / render / ref / onChange / ARIA",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "menu",
+      "part": "MenuTrigger / MenuPositioner / MenuPopup / MenuPortal",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "menu",
+      "part": "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "menu",
+      "part": "MenuPrimitive",
+      "written": "MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "menu",
+      "part": "MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "meter",
+      "part": "Meter",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "meter",
+      "part": "MeterPrimitive",
+      "written": "MeterPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "native-select",
+      "part": "NativeSelect",
+      "written": "render / ref / ARIA / className / style",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "navigation-menu",
+      "part": "NavigationMenu / NavigationMenuList / NavigationMenuItem",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "navigation-menu",
+      "part": "NavigationMenuTrigger / NavigationMenuLink",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "navigation-menu",
+      "part": "NavigationMenuGroup / NavigationMenuGroupLabel",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "navigation-menu",
+      "part": "NavigationMenuPrimitive",
+      "written": "NavigationMenuContent / NavigationMenuPortal / NavigationMenuPositioner / NavigationMenuPopup / NavigationMenuViewport / NavigationMenuPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "navigation-menu",
+      "part": "NavigationMenuContent / NavigationMenuPortal / NavigationMenuPositioner / NavigationMenuPopup / NavigationMenuViewport / NavigationMenuPrimitive",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "number-field",
+      "part": "NumberFieldInput",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "number-field",
+      "part": "NumberFieldInput",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "number-field",
+      "part": "NumberFieldPrimitive",
+      "written": "NumberFieldPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "otp-field",
+      "part": "OtpField",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "otp-field",
+      "part": "OtpField",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "page-header",
+      "part": "PageHeader",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "page-header",
+      "part": "PageHeaderContent / PageHeaderDescription / PageHeaderActions",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "page-header",
+      "part": "PageHeaderTitle",
+      "written": "level / step / render / ref / Heading props",
+      "token": "Heading props",
+      "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "Pagination",
+      "written": "aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationList / PaginationItem",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationLink",
+      "written": "page / href / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPrevious / PaginationNext",
+      "written": "disabled / onClick / render / nativeButton / Button props",
+      "token": "Button props",
+      "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationEllipsis",
+      "written": "children / render / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "password-input",
+      "part": "PasswordInput",
+      "written": "其余 InputProps（除 type / unstyled）",
+      "token": "其余 InputProps（除 type / unstyled）",
+      "reason": "generic"
+    },
+    {
+      "component": "pending-value",
+      "part": "PendingValue",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "popover",
+      "part": "PopoverPrimitive",
+      "written": "PopoverCreateHandle / PopoverPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "progress",
+      "part": "Progress",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "progress",
+      "part": "ProgressPrimitive",
+      "written": "ProgressPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "prose",
+      "part": "Prose",
+      "written": "render / ref / className / style / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "radio-group",
+      "part": "RadioPrimitive",
+      "written": "RadioGroupPrimitive / RadioPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "scroll-area",
+      "part": "ScrollArea",
+      "written": "render / ref / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "scroll-area",
+      "part": "ScrollArea",
+      "written": "render / ref / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "search-input",
+      "part": "SearchInput",
+      "written": "其余 InputProps（除 type / unstyled）",
+      "token": "其余 InputProps（除 type / unstyled）",
+      "reason": "generic"
+    },
+    {
+      "component": "section",
+      "part": "Section",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "section",
+      "part": "SectionHeader",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "section",
+      "part": "SectionTitle",
+      "written": "id / render / ref / Heading props",
+      "token": "Heading props",
+      "reason": "generic"
+    },
+    {
+      "component": "section",
+      "part": "SectionActions",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "segmented-control",
+      "part": "SegmentedControlItemPrimitive",
+      "written": "SegmentedControlPrimitive / SegmentedControlItemPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "select",
+      "part": "SelectTrigger",
+      "written": "render / ref / className / style / ARIA",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "select",
+      "part": "SelectPrimitive",
+      "written": "SelectPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "sidebar",
+      "part": "Sidebar / SidebarToggle",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarContent / SidebarGroup / SidebarGroupLabel",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarLink",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "skeleton",
+      "part": "Skeleton",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "slider",
+      "part": "SliderPrimitive",
+      "written": "SliderPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "stat",
+      "part": "Stat",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "stat",
+      "part": "StatLabel / StatValue / StatDescription",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "stat",
+      "part": "StatUnit",
+      "written": "children / render / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "status-dot",
+      "part": "StatusDot",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "steps",
+      "part": "Steps",
+      "written": "aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "steps",
+      "part": "Step",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "steps",
+      "part": "StepTitle / StepDescription",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "switch",
+      "part": "SwitchPrimitive",
+      "written": "SwitchPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "table",
+      "part": "TableContainer",
+      "written": "tabIndex / aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "table",
+      "part": "Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "table",
+      "part": "TableHead",
+      "written": "aria-sort / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "table",
+      "part": "TableCell",
+      "written": "colSpan / rowSpan / headers / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "tabs",
+      "part": "Tabs / TabsList",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "tabs",
+      "part": "TabsTab",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "tabs",
+      "part": "TabsPrimitive",
+      "written": "TabsPanel / TabsPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "tabs",
+      "part": "TabsPanel / TabsPrimitive",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "tag-input",
+      "part": "TagInput",
+      "written": "render / ref / className / style / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "textarea",
+      "part": "TextareaPrimitive",
+      "written": "TextareaPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "timeline",
+      "part": "Timeline / TimelineItem",
+      "written": "children / aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "timeline",
+      "part": "TimelineTitle / TimelineDescription",
+      "written": "children / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager",
+      "written": "toastManager.add(options)",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "title / description",
+      "token": "title",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "title / description",
+      "token": "description",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "type",
+      "token": "type",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "timeout",
+      "token": "timeout",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "priority",
+      "token": "priority",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "actionProps",
+      "token": "actionProps",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager.add(options)",
+      "written": "data.rootProps",
+      "token": "data.rootProps",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager",
+      "written": "toastManager.update(id, options)",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager",
+      "written": "toastManager.promise(promise, { loading, success, error })",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toast",
+      "part": "toastManager",
+      "written": "toastManager.close(id?)",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toast",
+      "part": "anchoredToastManager",
+      "written": "AnchoredToastProvider / anchoredToastManager",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toast",
+      "part": "ToastPrimitive",
+      "written": "ToastPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "toc",
+      "part": "Toc",
+      "written": "render / ref / className / style / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "toolbar",
+      "part": "ToolbarGroup",
+      "written": "disabled / aria-label / render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "toolbar",
+      "part": "ToolbarLink / ToolbarSeparator",
+      "written": "href / orientation / render / ref / primitive props",
+      "token": "primitive props",
+      "reason": "generic"
+    },
+    {
+      "component": "tooltip",
+      "part": "TooltipPrimitive",
+      "written": "TooltipCreateHandle / TooltipPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
+    },
+    {
+      "component": "tree",
+      "part": "Tree",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "typography",
+      "part": "Code",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "typography",
+      "part": "Heading",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "typography",
+      "part": "Text",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "virtual-list",
+      "part": "VirtualList<Item>",
+      "written": "render / ref / style / className / events / ARIA",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "virtual-list",
+      "part": "VirtualList<Item>",
+      "written": "render / ref / style / className / events / ARIA",
+      "token": "ARIA",
+      "reason": "generic"
+    }
+  ]
+}

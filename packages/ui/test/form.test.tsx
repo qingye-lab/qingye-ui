@@ -2,10 +2,13 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vitest";
-import { Field, FieldError, FieldLabel } from "../src/components/field";
-import { Form } from "../src/components/form";
+import { Checkbox } from "../src/components/checkbox";
+import { Field, FieldError, FieldItem, FieldLabel, FieldTitle } from "../src/components/field";
+import { Form, focusFirstInvalid } from "../src/components/form";
 import { Input } from "../src/components/input";
 import { NativeSelect } from "../src/components/native-select";
+import { Radio, RadioGroup } from "../src/components/radio-group";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "../src/components/select";
 
 test("native submission provides actual field and native select values without declaring an outcome", async () => {
   const submitted = vi.fn();
@@ -86,4 +89,48 @@ test("native attributes, render events, ref and caller class reach the actual fo
   await userEvent.click(screen.getByRole("button", { name: "提交" }));
   expect(rendered).toHaveBeenCalledOnce();
   expect(caller).toHaveBeenCalledOnce();
+});
+
+test("focusFirstInvalid lands on the visible, keyboard-reachable part of the first invalid field, in document order", () => {
+  const scroll = vi.fn();
+  Element.prototype.scrollIntoView = scroll;
+  const { container } = render(<Form>
+    <Field name="ok"><FieldLabel>正常</FieldLabel><Input /></Field>
+    <Field name="agree" invalid orientation="horizontal"><Checkbox /><FieldLabel>同意</FieldLabel></Field>
+    <Field name="role" invalid><FieldLabel>角色</FieldLabel><Select items={[{ value: "a", label: "甲" }]}><SelectTrigger><SelectValue /></SelectTrigger><SelectPopup><SelectItem value="a">甲</SelectItem></SelectPopup></Select></Field>
+    <Field name="later" invalid><FieldLabel>之后</FieldLabel><Input /></Field>
+  </Form>);
+  const form = container.querySelector("form")!;
+  expect(focusFirstInvalid(form)).toBe(true);
+  // Checkbox 的原生副本是 aria-hidden + tabindex=-1；落点是它的 role=checkbox 部件，而不是更后面的 Input。
+  expect(screen.getByRole("checkbox")).toHaveFocus();
+  expect(scroll).toHaveBeenCalledWith({ block: "nearest" });
+});
+
+test("focusFirstInvalid skips disabled and hidden fields, resolves a RadioGroup to its tabbable radio, and reports false when nothing qualifies", () => {
+  const { container, rerender } = render(<Form>
+    <Field name="off" invalid disabled><FieldLabel>停用</FieldLabel><Input /></Field>
+    <Field name="gone" invalid><FieldLabel>隐藏</FieldLabel><div hidden><Input /></div></Field>
+    <Field name="pick" invalid><FieldTitle id="pick-title">选择</FieldTitle><RadioGroup aria-labelledby="pick-title" defaultValue="b"><FieldItem><Radio value="a" /><FieldLabel>甲</FieldLabel></FieldItem><FieldItem><Radio value="b" /><FieldLabel>乙</FieldLabel></FieldItem></RadioGroup></Field>
+  </Form>);
+  const form = container.querySelector("form")!;
+  expect(focusFirstInvalid(form)).toBe(true);
+  expect(screen.getByRole("radio", { name: "乙" })).toHaveFocus();
+  rerender(<Form><Field name="off" invalid disabled><FieldLabel>停用</FieldLabel><Input /></Field><Field name="fine"><FieldLabel>正常</FieldLabel><Input /></Field></Form>);
+  expect(focusFirstInvalid(container.querySelector("form")!)).toBe(false);
+});
+
+test("focusFirstInvalid includes controls attached with the form attribute, in document order", () => {
+  const { container } = render(<>
+    <Input form="signup" aria-label="之前" aria-invalid="true" />
+    <Form id="signup"><Field name="inside" invalid><FieldLabel>里面</FieldLabel><Input /></Field></Form>
+  </>);
+  expect(focusFirstInvalid(container.querySelector("form")!)).toBe(true);
+  expect(screen.getByRole("textbox", { name: "之前" })).toHaveFocus();
+});
+
+test("focusFirstInvalid also finds a native :invalid control whose visible part carries no aria-invalid", () => {
+  const { container } = render(<Form><Field name="agree" orientation="horizontal"><Checkbox required /><FieldLabel>同意</FieldLabel></Field></Form>);
+  expect(focusFirstInvalid(container.querySelector("form")!)).toBe(true);
+  expect(screen.getByRole("checkbox")).toHaveFocus();
 });

@@ -67,3 +67,23 @@ test("empty collections remain reachable, and invalid dimensions/duplicate keys 
   expect(() => render(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={0} height={60} />)).toThrow("finite positive");
   expect(() => render(<VirtualList items={items} getKey={() => "same"} renderItem={renderItem} itemSize={20} height={60} />)).toThrow("unique stable");
 });
+
+test("scrolling a large collection renders only the window and does not walk the data again", async () => {
+  const many = Array.from({ length: 50_000 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
+  const keyOf = vi.fn((item: typeof many[number]) => item.id);
+  render(<VirtualList items={many} getKey={keyOf} renderItem={renderItem} itemSize={20} height={100} overscan={2} />);
+  const viewport = screen.getByRole("list");
+  const initial = keyOf.mock.calls.length;
+  for (const top of [0, 20, 400_000, 999_000, 999_900]) fireEvent.scroll(viewport, { target: { scrollTop: top } });
+  // Scrolling re-renders only the viewport state; it must not re-derive keys for all 50 000 items.
+  expect(keyOf.mock.calls.length).toBe(initial);
+  const rows = screen.getAllByRole("listitem");
+  expect(rows.length).toBeLessThanOrEqual(5 + 2 * 2 + 1);
+  expect(screen.getByText("条目 50000")).toHaveAttribute("aria-posinset", "50000");
+  expect(screen.queryByText("条目 1")).not.toBeInTheDocument();
+  fireEvent.scroll(viewport, { target: { scrollTop: 400_000 } });
+  expect(screen.getByText("条目 20001")).toHaveAttribute("aria-posinset", "20001");
+  viewport.focus();
+  await userEvent.keyboard("{End}");
+  expect(screen.getByText("条目 50000")).toHaveFocus();
+});

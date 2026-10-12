@@ -23,10 +23,11 @@ export function Popover<Payload = unknown>(
 
 // 基础层 §15：焦点不新增外围一圈，所以信号落在控件自身的盒内。
 // 裸触发者没有填充也没有边框，内描边不可见；它必须建立自己的边界再承载信号。
-// 组合成 Button 等已有边界的控件时（`render={<Button />}`），由那个控件负责焦点，
-// 这里只提供命中区，避免两条环叠加。
+// 已有边界的控件（`render={<Button />}`，带 data-variant）由它自己负责焦点与边框，
+// 这里只留命中区：2026-10-12 实测，无条件附加时 bordered 的静止边框被 border-transparent 盖掉，
+// 获得焦点时边框加深之外又多一圈 2px 内描边（两套焦点表达，NG11），solid/quiet 则多出 1px 透明边而变宽 2px。
 const controlFocus =
-  "touch-target outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) rounded-control border border-transparent";
+  "touch-target not-data-[variant]:outline-none not-data-[variant]:focus-visible:ring-inset not-data-[variant]:focus-visible:ring-[length:var(--qy-focus-ring-width)] not-data-[variant]:focus-visible:ring-(--qy-focus-ring-color) not-data-[variant]:rounded-control not-data-[variant]:border not-data-[variant]:border-transparent";
 
 export function PopoverTrigger({
   className,

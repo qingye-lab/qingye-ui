@@ -213,7 +213,7 @@ Each semantic profile includes font size, line height, tracking, and weight; cur
 | `reading` / `prose` | 16/28 | 400 |
 | `support` / `label` | 13/20 | 400 / 500 |
 | `caption` / `dense` | 12/20, 12/16 | 400 |
-| `metric` | 24/28 | 600 |
+| `metric` / `metric-lg` | 24/28, 32/40 | 600 |
 | `micro` | 11/16 | 500 |
 
 - Every line height is a whole number of units; sizes are presets, with adjacent content profiles at least about 1.2× apart. When sizes are close, ink tone and weight carry the hierarchy.

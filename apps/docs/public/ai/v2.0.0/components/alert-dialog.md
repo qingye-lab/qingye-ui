@@ -49,14 +49,62 @@ Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
 - AlertDialogTitle: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Title.Props
 - AlertDialogTrigger: function; owner alert-dialog; PASS; props: AlertDialogPrimitive.Trigger.Props<Payload>
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AlertDialog
+- no props declared by this library
+- plus 9 inherited (@base-ui/react 9); not expanded, see the installed declarations
+
+### AlertDialogClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### AlertDialogCreateHandle
+- takes no props
+
+### AlertDialogDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AlertDialogFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### AlertDialogHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### AlertDialogPanel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### AlertDialogPopup
+- `backdropProps?`: `DialogPrimitive.Backdrop.Props`.
+- `finalFocus?`: `DialogFocusTarget`.
+- `initialFocus?`: `DialogFocusTarget`.
+- `portalProps?`: `Omit<DialogPrimitive.Portal.Props, "keepMounted">`. Retained closed portals fail sibling-modal ARIA isolation in Base UI 1.7.
+- `viewportProps?`: `DialogPrimitive.Viewport.Props`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AlertDialogTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AlertDialogTrigger
+- no props declared by this library
+- plus 291 inherited (@types/react 284, @base-ui/react 7); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### AlertDialog
 保留 open/defaultOpen/onOpenChange/handle；原语固定阻断并禁止外部指针关闭。
 

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
-Source SHA-256: fab084ee0f1c2dddefd45b37d32227712e78a4ad970aeb03921a46ce2e469153
+Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
 
 Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.
 
@@ -12,6 +12,7 @@ ThemeProvider reserves data-theme for light and dark. Store the project's brand 
 
 ## Notes
 - Prevent first-paint flashing with an inline head script before stylesheets, since painting precedes React mounting. In SPAs paste themeScript() into index.html script; SSR uses script dangerouslySetInnerHTML={{__html:themeScript()}}. Options must match ThemeProvider.
+- Strict CSP: pass the request nonce to both <ThemeProvider nonce={nonce}> and the first-paint <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />; themeScript() returns only the script body. Without a nonce the browser drops the temporary transition style and surfaces fade instead of changing together.
 - Theme choice labels use locale theme/lightTheme/darkTheme/systemTheme.
 - System choice follows OS light/dark changes immediately without reloading.
 - Mount one root ThemeProvider. Local forced-dark content may add a .dark container class.
@@ -42,22 +43,45 @@ ThemeProvider reserves data-theme for light and dark. Store the project's brand 
 - ThemeScriptOptions: type; owner theme-provider; PASS
 - useTheme: function; owner theme-provider; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ThemeProvider
+- `attribute?`: `"class" | "data-theme"`. How the theme is written to `<html>`: a `.dark` class or `data-theme`.
+- `children`: `React.ReactNode`.
+- `defaultTheme?`: `"light" | "dark" | "system"`. Used when nothing is stored yet.
+- `disableTransitionOnChange?`: `boolean`. Suppress CSS transitions for one frame while the theme flips, so every surface changes together instead of fading at different speeds.
+- `nonce?`: `string`. CSP nonce for the one `<style>` this provider injects while the theme flips. Needed when `style-src` has no `'unsafe-inline'`; without it the browser drops that style and surfaces fade instead of changing together. The first-paint `<script>` is rendered by you: give that tag the same nonce.
+- `storageKey?`: `string | null`. localStorage key. Set to `null` to skip persistence.
+
+### themeScript
+- `attribute?`: `"class" | "data-theme"`. How the theme is written to `<html>`: a `.dark` class or `data-theme`.
+- `defaultTheme?`: `"light" | "dark" | "system"`. Used when nothing is stored yet.
+- `storageKey?`: `string | null`. localStorage key. Set to `null` to skip persistence.
+
+### useTheme
+- takes no props
 
 ## Dependencies and providers
 - Runtime: react
 - Optional peers: none recorded
 - Prevent first-paint flashing with an inline head script before stylesheets, since painting precedes React mounting. In SPAs paste themeScript() into index.html script; SSR uses script dangerouslySetInnerHTML={{__html:themeScript()}}. Options must match ThemeProvider.
+- Strict CSP: pass the request nonce to both <ThemeProvider nonce={nonce}> and the first-paint <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />; themeScript() returns only the script body. Without a nonce the browser drops the temporary transition style and surfaces fade instead of changing together.
 - Mount one root ThemeProvider. Local forced-dark content may add a .dark container class.
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: ThemeProvider
+- Locale: does not read UILocale
+- Context ThemeContext: without a provider throws; provided by ThemeProvider
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ThemeProvider
 Theme context switches html .dark/.light classes or data-theme and synchronizes color-scheme.
 - defaultTheme: "light" | "dark" | "system"; default "system". Used when no choice was saved.
 - storageKey: string | null; default "yq-theme". The localStorage key; null disables persistence. Other tabs' changes synchronize automatically.
 - attribute: "class" | "data-theme"; default "class". Write .dark classes or data-theme=dark; styles support both.
 - disableTransitionOnChange: boolean; default true. Pause transitions during switching so surfaces change together rather than fading at different speeds.
+- nonce: string. Under a strict CSP (style-src without 'unsafe-inline'), the nonce applied to the temporary <style> injected while the theme flips. You render the first-paint <script> yourself; give it the same nonce.
 
 ### useTheme
 Returns {theme,resolvedTheme,setTheme}. theme is the user's choice, possibly system; resolvedTheme is the actual light/dark mode. Requires ThemeProvider.

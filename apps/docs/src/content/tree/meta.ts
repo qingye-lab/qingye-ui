@@ -106,13 +106,13 @@ export default {
     },
     {
       "keys": "← / →",
-      "description": "关闭/展开或移动到父/子节点；RTL 相反。",
-      "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL."
+      "description": "关闭/展开或移动到父/子节点；RTL 相反。展开与收起由方向键承担；行首的展开图标只供指针使用，不进 Tab 序列，也不进可访问树。",
+      "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
     },
     {
       "keys": "Enter / Space / 字首", keysEn: "Enter / Space / Typeahead",
-      "description": "单选当前节点，或按标签字首定位。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。",
-      "descriptionEn": "Select the current node, or navigate by a label's first character. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select."
+      "description": "单选当前节点，或键入标签开头定位：连续键入的字符（间隔 500ms 内，预设）累积成前缀；重复键入同一个字符则在以它开头的节点间循环。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。",
+      "descriptionEn": "Select the current node, or type the start of a label to move: characters typed in quick succession (within 500ms, a preset) accumulate into a prefix, and repeating one character cycles through nodes starting with it. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select."
     }
   ]
 } satisfies ComponentMeta;

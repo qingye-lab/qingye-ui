@@ -2,11 +2,11 @@
  * styles.css — entry point for projects that run Tailwind CSS 4.
  *
  *   @import "tailwindcss";
- *   @import "@qingye/ui/styles.css";
+ *   @import "@qingye_lab/ui/styles.css";
  *
  * Tailwind scans the library source through the @source rule below, so only
  * the classes the components use are generated. Projects without Tailwind use
- * the precompiled `@qingye/ui/ui.css` instead; never import both.
+ * the precompiled `@qingye_lab/ui/ui.css` instead; never import both.
  */
 @source "./src";
 
@@ -33,7 +33,8 @@
    * 与背景同色，焦点就完全消失 —— 键盘用户看不到位置。
    *
    * box-shadow 在此不可用，outline 是仍然可绘制的通道，且系统会强制它的
-   * 颜色，因此不必也不应该自行声明颜色。组件已经声明 `outline-none`，
+   * 颜色（实测画成 Highlight），因此一般不自行声明颜色；唯一的例外是落在
+   * Highlight 填充上的选中项，见下方第二条。组件已经声明 `outline-none`，
    * 那条工具类位于 utilities 层，层序胜过选择器特异性，所以这里必须用
    * !important 才能恢复焦点：这是唯一为了满足可访问底线而越过常规层序的地方。
    */
@@ -41,6 +42,54 @@
     :focus-visible {
       outline: var(--qy-focus-ring-width) solid !important;
       outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important;
+    }
+
+    /* 焦点线的颜色：强制颜色把没有指定颜色的 outline 画成 Highlight。选中项自己的底也是 Highlight
+     * （见下面无层块），「Highlight 线压 Highlight 底」就看不见了，实测勾选框、分段选中段焦点前后零像素变化。
+     * 这些项的焦点线改成 HighlightText（系统保证与 Highlight 成对）。必须 !important：上面的简写
+     * 已经把颜色一并 !important 重置了。选中项的清单与无层块里的填充清单一一对应。 */
+    :is(
+      [data-slot="segmented-control-item"][aria-checked="true"],
+      [data-slot="toggle"][aria-pressed="true"],
+      [data-slot="toggle-group-item"][aria-pressed="true"],
+      [data-slot="pagination-link"][aria-current="page"],
+      [data-slot="sidebar-link"][aria-current="page"],
+      [data-slot="navigation-menu-link"][aria-current="page"],
+      [data-slot="tabs-tab"][aria-selected="true"],
+      [data-slot="calendar"] td[data-selected="true"] > button,
+      [role="checkbox"]:is([aria-checked="true"], [aria-checked="mixed"]),
+      [role="switch"][aria-checked="true"]
+    ):focus-visible {
+      outline-color: HighlightText !important;
+    }
+
+    /* Tree：焦点在 <li role="treeitem"> 上，而展开的 li 还包着整个子组（Canvas 底），线画在 li 上
+     * 会围住整棵子树，选中行的 HighlightText 线在行以下落到 Canvas 上消失。与常规模式的内描边一样，
+     * 把线画到自身那一行（tree-row），选中行用 HighlightText（该行的底是 Highlight）。 */
+    [data-slot="tree-item"]:focus-visible {
+      outline: none !important;
+    }
+    [data-slot="tree-item"]:focus-visible > [data-slot="tree-row"] {
+      outline: var(--qy-focus-ring-width) solid !important;
+      outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important;
+    }
+    [data-slot="tree-item"][aria-selected="true"]:not([aria-disabled="true"]):focus-visible > [data-slot="tree-row"] {
+      outline-color: HighlightText !important;
+    }
+
+    /* Slider 抓手：焦点在藏起来的 input 上，上面那条 :focus-visible 画的 outline 落在不可见的
+     * input 身上；抓手自己的反色内圈是 box-shadow，会被移除。把同一条 outline 画到抓手。
+     * 工具类里的 outline-none 在 utilities 层，所以与上面一样需要 !important。 */
+    [data-slot="slider-thumb"]:has(:focus-visible) {
+      outline: var(--qy-focus-ring-width) solid !important;
+      outline-offset: calc(-1 * var(--qy-focus-ring-width)) !important;
+    }
+
+    /* Calendar 区间中段：组件用 `[&>button]:text-foreground!`（utilities 层的 !important）把日期字
+     * 写死，强制颜色把它压成 CanvasText；中段的底我们改成 Highlight，字必须随之变成 HighlightText。
+     * !important 对 !important：先声明的层胜出，所以这条必须在比 utilities 更靠前的 base 层。 */
+    [data-slot="calendar"][data-mode="range"] td[data-selected="true"] > button {
+      color: HighlightText !important;
     }
   }
 
@@ -79,5 +128,238 @@
    * 组件侧已用 stroke={2.5} 传值，这里同步声明，使两处不致漂移。 */
   [data-slot="step-marker"] svg.tabler-icon {
     stroke-width: 2.5;
+  }
+}
+
+/*
+ * 基础层 §15 强制颜色（Windows 高对比度，`forced-colors: active`）。
+ *
+ * 浏览器在此模式下把 background-color / color / border-color 换成系统色、移除 box-shadow，
+ * 作者写的 `color-mix()`、`bg-primary`、`inset-ring` 一律失效。本库「范围靠填充、不靠线」的部位
+ * 因此会消失：选中、进度、开关、勾选、读数、热力图的格。下面逐类补回——能用线的用线（outline），
+ * 选中统一用 Highlight / HighlightText 一对，数据编码（热力图、占比、图例）保留原色。
+ *
+ * 写在 @layer 之外：无层规则在层序上胜过 utilities 层，不必 !important 就能压过
+ * `bg-primary` 之类的工具类。唯一例外在上面 base 层里（Slider 焦点、Calendar 区间字色，
+ * 那里要压的是 utilities 层自己的 !important）。
+ *
+ * 只写强制颜色下才需要的东西；不改变任何尺寸：加线一律用 outline 且 offset 为负（落在自身盒内），
+ * 不用 border，避免盒模型改变（NG9）。系统色关键字由用户的对比主题决定，这里不声明任何具体颜色。
+ * 取证与矩阵见 docs/baseline/2026-10-12-forced-colors/README.md。
+ */
+@media (forced-colors: active) {
+  /* 禁用（所有声明了 data-disabled / aria-disabled 的部位）：强制颜色会抹掉 opacity 之外的
+   * 全部区别，丢了「灰」。用 GrayText 角色补回字与线。 */
+  [data-disabled],
+  [aria-disabled="true"] {
+    color: GrayText;
+    border-color: GrayText;
+  }
+
+  /* 当前 / 选中：分段控件选中段、Toggle 与 ToggleGroup 按下、页码当前页、侧栏与导航菜单当前项、
+   * 标签页当前项、候选列表的高亮项（Combobox / Autocomplete 用虚拟焦点，没有 DOM 焦点可借 outline）、
+   * Tree 选中行、Calendar 单选日。这些都是淡染的面或一道加深的线，强制颜色下面没了、线与相邻项同色。
+   * 用 Highlight / HighlightText 这一对：系统保证它们互为对比色。
+   *
+   * forced-color-adjust: none 在这里是必要的，不是偷懒：Chromium 在强制颜色下会给「自动调整」的文字
+   * 垫一块 Canvas 色的底板，实测（Chromium 153，bp 对照页）作者写 `background: Highlight; color:
+   * HighlightText` 时，文字下仍垫一块白板，白字落在白板上读不出，选中项只剩上下两条填充。只有
+   * forced-color-adjust: none 的元素不垫底板。它会继承给子元素，所以同一条规则也让项内的图标与计数
+   * 不被垫板；此处所有颜色都写成系统色关键字，不会因关闭调整而漏出主题色。 */
+  [data-slot="segmented-control-item"][aria-checked="true"],
+  [data-slot="toggle"][aria-pressed="true"],
+  [data-slot="toggle-group-item"][aria-pressed="true"],
+  [data-slot="pagination-link"][aria-current="page"],
+  [data-slot="sidebar-link"][aria-current="page"],
+  [data-slot="navigation-menu-link"][aria-current="page"],
+  [data-slot="tabs-tab"][aria-selected="true"],
+  [data-slot="combobox-item"][data-highlighted],
+  [data-slot="autocomplete-item"][data-highlighted],
+  [data-slot="tree-item"][aria-selected="true"] > [data-slot="tree-row"],
+  [data-slot="calendar"][data-mode="single"] td[data-selected="true"] > button {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
+
+  /* 上面那些项里的子元素（计数、图标、描述）各自写了 text-muted-foreground，会被强制成
+   * CanvasText，落在 Highlight 底上读不出。让它们回到所在项的 HighlightText。 */
+  :is(
+    [data-slot="segmented-control-item"][aria-checked="true"],
+    [data-slot="toggle"][aria-pressed="true"],
+    [data-slot="toggle-group-item"][aria-pressed="true"],
+    [data-slot="pagination-link"][aria-current="page"],
+    [data-slot="sidebar-link"][aria-current="page"],
+    [data-slot="navigation-menu-link"][aria-current="page"],
+    [data-slot="tabs-tab"][aria-selected="true"],
+    [data-slot="combobox-item"][data-highlighted],
+    [data-slot="autocomplete-item"][data-highlighted],
+    [data-slot="tree-item"][aria-selected="true"] > [data-slot="tree-row"]
+  ) * {
+    color: inherit;
+  }
+
+  /* 侧栏当前项左侧那条 1px 竖线用 bg-foreground 画，强制颜色下变 Canvas，落在 Highlight 上不可见。 */
+  [data-slot="sidebar-link"][aria-current="page"]::before {
+    background-color: HighlightText;
+  }
+
+  /* Calendar 区间：起止日是半格渐变、中段是 bg-accent 的整格，强制颜色下渐变保留而底色丢失。
+   * 区间整段统一铺 Highlight（去掉渐变），日期按钮的字在上面 base 层里改成 HighlightText。 */
+  [data-slot="calendar"][data-mode="range"] td[data-selected="true"] {
+    forced-color-adjust: none;
+    background-color: Highlight;
+    background-image: none;
+    color: HighlightText;
+  }
+
+  /* DataTable 选中行：整行 bg-accent 丢失。行内有勾选框，整行铺 Highlight 会让已勾的框（也是
+   * Highlight）消失在行里，所以选中行只用 Highlight 的 2px 内线圈住，不填。 */
+  tr[data-selected] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  /* 复选框、半选与勾选：bg-primary 的实心丢失，只剩一个 ButtonBorder 空框里的细勾，与未选相差几个像素。
+   * 勾选 / 半选改成 Highlight 实心加 HighlightText 的勾（勾是 currentColor，随字色）。 */
+  [role="checkbox"]:is([aria-checked="true"], [aria-checked="mixed"]) {
+    background-color: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
+  }
+
+  /* 单选框：中心的点用 bg-primary 画，强制颜色下变 Canvas，选中与未选完全相同。 */
+  [data-slot="radio-group-indicator"] {
+    background-color: Highlight;
+  }
+
+  /* 开关：关闭时的轨道边界是 inset-ring（box-shadow），抓手是 bg-current（背景色），两者都丢，
+   * 整个开关在页面上是一块空白。轨道补一圈 outline；开启时轨道填 Highlight、抓手用 HighlightText，
+   * 关闭时抓手用 ButtonText，抓手的位置（左 / 右）本身也承担状态。 */
+  [role="switch"] {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+  [role="switch"][aria-checked="true"] {
+    background-color: Highlight;
+  }
+  [data-slot="switch-thumb"] {
+    background-color: ButtonText;
+  }
+  [role="switch"][aria-checked="true"] > [data-slot="switch-thumb"] {
+    background-color: HighlightText;
+  }
+
+  /* 禁用压过选中：上面的选中 / 勾选 / 开启规则特异性都高于开头的禁用规则，禁用且已选的项会铺满
+   * Highlight，和可用的已选项无从区分。这里在它们之后、以不低于它们的特异性把面收回 Canvas、
+   * 字与线改成 GrayText；项内子元素的 `color: inherit` 随之继承 GrayText。「已选」本身不能丢：
+   * 勾与开关抓手是 currentColor / 位置，仍在；只靠填充表达的选中项改用一圈 GrayText 内线。 */
+  :is(
+    [data-slot="segmented-control-item"],
+    [data-slot="toggle"],
+    [data-slot="toggle-group-item"],
+    [data-slot="pagination-link"],
+    [data-slot="sidebar-link"],
+    [data-slot="navigation-menu-link"],
+    [data-slot="tabs-tab"],
+    [data-slot="combobox-item"],
+    [data-slot="autocomplete-item"],
+    [role="checkbox"],
+    [role="switch"]
+  ):is([data-disabled], [aria-disabled="true"], :disabled),
+  [data-slot="tree-item"][aria-disabled="true"] > [data-slot="tree-row"] {
+    background-color: Canvas;
+    color: GrayText;
+    border-color: GrayText;
+  }
+  :is(
+    [data-slot="segmented-control-item"][aria-checked="true"],
+    [data-slot="toggle"][aria-pressed="true"],
+    [data-slot="toggle-group-item"][aria-pressed="true"],
+    [data-slot="pagination-link"][aria-current="page"],
+    [data-slot="sidebar-link"][aria-current="page"],
+    [data-slot="navigation-menu-link"][aria-current="page"],
+    [data-slot="tabs-tab"][aria-selected="true"]
+  ):is([data-disabled], [aria-disabled="true"], :disabled),
+  [data-slot="tree-item"][aria-disabled="true"][aria-selected="true"] > [data-slot="tree-row"] {
+    outline: 2px solid GrayText;
+    outline-offset: -2px;
+  }
+  [data-slot="sidebar-link"][aria-current="page"]:is([data-disabled], [aria-disabled="true"])::before {
+    background-color: GrayText;
+  }
+  [role="switch"]:is([data-disabled], [aria-disabled="true"], :disabled) {
+    outline-color: GrayText;
+  }
+  [role="switch"]:is([data-disabled], [aria-disabled="true"], :disabled) > [data-slot="switch-thumb"] {
+    background-color: GrayText;
+  }
+  [data-slot="radio-group-indicator"][data-disabled],
+  :is([data-disabled], [aria-disabled="true"], :disabled) > [data-slot="radio-group-indicator"] {
+    background-color: GrayText;
+  }
+
+  /* 滑块：轨道与抓手都是纯填充（bg-groove / bg-primary），强制颜色下全部消失。轨道画一圈线，
+   * 已填段用 Highlight，抓手用 ButtonFace 加一圈线（落在已填段与空轨道上都读得出）。 */
+  [data-slot="slider-track"] {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+  [data-slot="slider-indicator"] {
+    background-color: Highlight;
+  }
+  [data-slot="slider-thumb"] {
+    background-color: ButtonFace;
+    color: ButtonText;
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+
+  /* 进度与计量：轨道（bg-groove）与填充（bg-primary / tone 色）都是背景色，强制颜色下两样都没了。
+   * 轨道用 outline 画出范围（`segments` 的遮罩会把这圈线一并切成格），填充用 Highlight。
+   * Meter 的 tone 是色相，强制颜色下收成同一色；级别由 segments 的格数与读数文字承担
+   * （基础层 §9 的灰度检验早已要求这一点）。 */
+  [data-slot="progress-track"],
+  [data-slot="meter-track"] {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+  [data-slot="progress-indicator"],
+  [data-slot="meter-indicator"] {
+    background-color: Highlight;
+  }
+
+  /* 占比、热力图、图例色块、状态点：这些颜色是数据编码（第几类、浓淡与分档、哪一种状态），收成系统色
+   * 就等于丢了数据，所以保留原色（forced-color-adjust: none）。名称与数值仍由图例文字、格的可访问名称、
+   * 状态名与数据表承担。图例的色块（占比、图、环形、热力图分档）统一是 `legend-key`，热力图连续色阶的
+   * 图例条是 `heatmap-scale-key`：色块自带 slot，不再靠「li 里第一个 aria-hidden 的 span」与 inline 渐变定位。 */
+  [data-slot="proportion-segment"],
+  [role="gridcell"][data-state],
+  [data-slot="legend-key"],
+  [data-slot="heatmap-scale-key"],
+  [data-slot="status-dot-indicator"] {
+    forced-color-adjust: none;
+  }
+
+  /* 实心按钮：靠 bg-primary 的填充立住，没有边框，强制颜色下与页面同色，整个按钮只剩字。补一圈内线。 */
+  [data-slot="button"][data-variant="solid"] {
+    outline: 1px solid ButtonBorder;
+    outline-offset: -1px;
+  }
+
+  /* 提示与警示条：靠表面色（tooltip 还有 shadow-raised）与页面分开，强制颜色下两样都丢，边界没有了。 */
+  [data-slot="tooltip-popup"],
+  [data-slot="alert"] {
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+
+  /* 骨架：占位条（SkeletonLine 的 ::before）与块（SkeletonBlock）是 bg-surface-hover / bg-surface-inset，
+   * 强制颜色下完全消失，加载中的页面会变成一片空白。用 GrayText 的线框出占位。 */
+  [data-slot="skeleton-line"]::before,
+  [data-slot="skeleton-block"] {
+    outline: 1px solid GrayText;
+    outline-offset: -1px;
   }
 }

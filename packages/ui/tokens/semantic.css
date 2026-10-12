@@ -68,6 +68,24 @@
     --qy-success-foreground: color-mix(in srgb, var(--qy-emerald-700) 90%, var(--qy-black));
     --qy-info: var(--qy-blue-500);
     --qy-info-foreground: var(--qy-blue-700);
+    /* 图形里的状态类别色（随类赋彩）：线与填充，不是文字——Sparkline 的线与点、Meter 的指示、Proportion 与 Chart 的段、
+     * 事件点、Heatmap 的分档；经 tone.ts 的 toneColor / toneFillClassName 读取（theme.css 里是 bg-*-graphic）。
+     * Badge、StatusDot、Alert 的字与点仍读 -foreground。同一类别同一色相，按承担的角色取不同明度，
+     * 与 --qy-danger-foreground / --qy-danger-fill 的分法一致（NG3：色相不变，不是另一种颜色）。
+     * 修改入口就是这里和深色那四行，成对改；改完重跑 contrast-check 与基础层 §7 的色觉实测。
+     * 约束（按浏览器 computed 值实测，浅色承载面 255、底纸 245、读数凹槽 194）：
+     *   对纸、底纸、凹槽均 ≥ 3:1——Meter 的指示压在凹槽上，凹槽是墨 24%，把图形色的明度压在 Y ≤ 0.146，
+     *   所以浅色里不能靠「提亮警示」去拉开四色；
+     *   四色两两：正常视觉 ΔE00 ≥ 16，protan / deutan / tritan 模拟（Machado 2009）ΔE00 ≥ 9（数据系列的门槛，§7）；
+     *   彩度不超过数据五色（OKLCH C ≤ 0.150）。-foreground 的危险（0.181）与信息（0.243）比数据色艳，放到大面上刺眼。
+     * 灰度检验：由深到浅 危险 < 信息 < 成功 < 警示（CSS 灰度 44 / 68 / 82 / 94，两两 ≥ 12）。最近的两对
+     * （成功与警示、信息与成功）靠 2px 空隙、图例次序与名称兜底。
+     * 预设：各色的百分比与调和对象。做法是在「原色阶 + 墨 / 中性」里枚举，取满足上列约束、离 -foreground 最近的一组，
+     * 不是推导；色相带取 -foreground 的 ±10° 上下，警示 +9°（琥珀 600 比 -foreground 的 700 偏黄）。 */
+    --qy-danger-graphic: color-mix(in srgb, var(--qy-red-500) 50%, var(--qy-black));
+    --qy-warning-graphic: color-mix(in srgb, var(--qy-amber-600) 73%, var(--qy-black));
+    --qy-success-graphic: color-mix(in srgb, var(--qy-emerald-600) 71%, var(--qy-black));
+    --qy-info-graphic: color-mix(in srgb, var(--qy-blue-700) 56%, var(--qy-neutral-700));
 
     /* 数据系列（随类赋彩）：两个以上系列才取色，单一系列用焦墨。
      * 顺序本身是色觉安全的机制：按 dataviz 校验器，相邻两色在三类色觉缺陷下 ΔE ≥ 15、
@@ -105,6 +123,15 @@
     --qy-success-foreground: var(--qy-emerald-400);
     --qy-info: var(--qy-blue-500);
     --qy-info-foreground: var(--qy-blue-400);
+    /* 深色的图形色：同上约束，凹槽在深色里是墨（白）24% 叠在深纸上，约 82——比纸亮得多，
+     * 要求图形色 Y ≥ 0.35，所以比 -foreground 提亮、彩度收到 ≤ 0.150（-foreground 为 0.16–0.17）。
+     * 由暗到亮 危险 < 信息 < 成功 < 警示（CSS 灰度 152 / 173 / 188 / 202，两两 ≥ 14），次序与浅色相同。
+     * 警示用琥珀 300 掺一点红 300：琥珀 300 本身偏黄（91°），-foreground 是 81°，掺红拉回 84°。
+     * 实测余量最小处：成功 / 信息的 tritan ΔE00 9.5、危险 / 成功的 deutan 10.2，危险对凹槽 3.06:1。预设同浅色。 */
+    --qy-danger-graphic: color-mix(in srgb, var(--qy-red-400) 77%, var(--qy-neutral-300));
+    --qy-warning-graphic: color-mix(in srgb, var(--qy-amber-300) 76%, var(--qy-red-300));
+    --qy-success-graphic: color-mix(in srgb, var(--qy-emerald-300) 94%, var(--qy-black));
+    --qy-info-graphic: color-mix(in srgb, var(--qy-blue-400) 78%, var(--qy-neutral-50));
 
     /* 深色另行选定并校验（对深纸均 ≥ 3:1）：紫 600 在深纸上只有 2.99:1，改用紫 500。 */
     --qy-chart-1: var(--qy-huaqing-400);
@@ -155,6 +182,14 @@
     /* 并列候选的轨道：纸本色加一道清墨线（正常状态不铺灰底）。 */
     --qy-track-surface: var(--qy-surface);
     --qy-track-border: var(--qy-border);
+    /* 轨道内选中段 / 按下项的面与其上的字与图标。选中是持续的当前位置，用淡染（12%，基础层 §11）
+     * + 焦墨字；它不是命令，不借用 --qy-primary——筛选不是一个视图里的君（§10），品牌覆写主操作的
+     * 填充时，一页里的筛选控件不随之变色、不与主按钮同重。
+     * 作用范围只有 SegmentedControlItem 选中、ToggleGroupItem 按下、独立 Toggle 按下（线内的填充）。
+     * 修改入口就在这两行：想要更强的选中，把面改成实心墨时字须同改成纸色（成对改）。
+     * 深色主题不另取值：淡染是墨（深色为白）12% 的透明叠合，字是焦墨，墨阶规则两边相同。 */
+    --qy-track-selected: var(--qy-surface-active);
+    --qy-track-selected-foreground: var(--qy-foreground);
 
     /* 柔底：透明叠合，放在任何纸上都比所在的纸深一级。彩色取该色的清墨浓度（8%）；
      * 墨取清染（4%）——同为 8% 时黑墨比明亮的色相暗得多，取染的浓度两者才读来同重。 */

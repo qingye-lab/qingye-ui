@@ -46,7 +46,7 @@ test("already-rendered markdown output passes through unmodified — Prose does 
       <img src="/a.png" alt="示意图" />
       <hr />
       <ul className="contains-task-list">
-        <li className="task-list-item"><input type="checkbox" checked disabled readOnly /> 已完成</li>
+        <li className="task-list-item"><label><input type="checkbox" checked disabled readOnly /> 已完成</label></li>
       </ul>
       <details>
         <summary>更多</summary>
@@ -66,7 +66,7 @@ test("already-rendered markdown output passes through unmodified — Prose does 
   expect(screen.getByRole("columnheader", { name: "列" })).toBeInTheDocument();
   expect(screen.getByRole("cell", { name: "1,284" })).toBeInTheDocument();
   expect(screen.getByAltText("示意图")).toHaveAttribute("src", "/a.png");
-  expect(screen.getByRole("checkbox")).toBeChecked();
+  expect(screen.getByRole("checkbox", { name: "已完成" })).toBeChecked();
   expect(screen.getByRole("checkbox")).toBeDisabled();
   expect(screen.getByText("更多").tagName).toBe("SUMMARY");
   expect(screen.getByText("展开后的内容。")).toBeInTheDocument();

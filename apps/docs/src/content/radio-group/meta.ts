@@ -28,7 +28,7 @@ export default {
     { keys: "↑ / ↓ / ← / →", description: "移动并选择候选，跳过禁用项，在组内循环。", descriptionEn: "Move and select candidates, skip disabled items, and wrap within the group." },
     { keys: "Space", description: "选择当前候选。Home/End、类型搜索不属于此 Radio 原语契约。", descriptionEn: "Select the current candidate. Home/End and typeahead are outside this Radio primitive contract." },
   ],
-  notes: ["FieldTitle 命名组，FieldItem + FieldLabel 命名单项，FieldError 关联错误。", "未选择、0 与空字符串是不同的值。", "禁用项退出 Tab 顺序；只读保留焦点与当前值。"], notesEn: ["FieldTitle names the group, FieldItem + FieldLabel name each item, and FieldError associates errors.","No selection, zero, and empty string are different values.","Disabled items leave tab order; read-only retains focus and current values."],
+  notes: ["FieldTitle 命名组，FieldItem + FieldLabel 命名单项，FieldError 关联错误。", "Radio 放在 Field 内不经 FieldItem 时自建标签作用域：每项有自己的 id，名称来自项自己；Field 的标签与描述仍落在整组。", "未选择、0 与空字符串是不同的值。", "禁用项退出 Tab 顺序；只读保留焦点与当前值。"], notesEn: ["FieldTitle names the group, FieldItem + FieldLabel name each item, and FieldError associates errors.", "A Radio placed in a Field without FieldItem opens its own label scope: each item has its own id and takes its name from itself, while the Field label and description stay on the group.","No selection, zero, and empty string are different values.","Disabled items leave tab order; read-only retains focus and current values."],
   decisions: "候选需要同时比较时用 RadioGroup；可以收起时用 Select。未选择不会自动变为第一项。", decisionsEn: "Use RadioGroup when candidates must be compared together, and Select when they can collapse. No selection does not automatically choose the first item.",
   design: {
     methods: ["名实相符", "相成相制", "随境取度"],

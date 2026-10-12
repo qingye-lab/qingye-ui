@@ -2,12 +2,20 @@
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress";
 import type * as React from "react";
 import { useUILocale } from "../locale";
+import { assertSegments } from "../segments";
 import { cn } from "../utils";
-export type ProgressProps = React.ComponentProps<typeof ProgressPrimitive.Root>;
-export function Progress({ value, min = 0, max = 100, locale, getAriaValueText, className, ...props }: ProgressProps) {
+export type ProgressProps = React.ComponentProps<typeof ProgressPrimitive.Root> & {
+  /**
+   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上，
+   * 且不能为 null（不定进度没有格可填）。格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
+   */
+  segments?: number;
+};
+export function Progress({ value, min = 0, max = 100, locale, getAriaValueText, segments, className, style, ...props }: ProgressProps) {
   const { code, messages } = useUILocale();
   if (![min, max, max - min].every(Number.isFinite) || max <= min || (value !== null && (!Number.isFinite(value) || value < min || value > max))) throw new RangeError("Progress requires null or a finite value within a finite increasing range.");
-  return <ProgressPrimitive.Root data-slot="progress" {...props} value={value} min={min} max={max} locale={locale ?? code} getAriaValueText={getAriaValueText ?? ((formatted, actualValue) => actualValue === null ? messages.buttonInProgress : formatted)} className={state => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-foreground", typeof className === "function" ? className(state) : className)} />;
+  assertSegments("Progress", segments, value, min, max);
+  return <ProgressPrimitive.Root data-slot="progress" data-segments={segments} {...props} value={value} min={min} max={max} locale={locale ?? code} getAriaValueText={getAriaValueText ?? ((formatted, actualValue) => actualValue === null ? messages.buttonInProgress : formatted)} style={segments === undefined ? style : state => ({ "--qy-segments": segments, ...(typeof style === "function" ? style(state) : style) } as React.CSSProperties)} className={state => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-foreground", typeof className === "function" ? className(state) : className)} />;
 }
 export function ProgressTrack({ className, ...props }: React.ComponentProps<typeof ProgressPrimitive.Track>) {
   return <ProgressPrimitive.Track data-slot="progress-track" {...props} className={state => cn("h-(--qy-readout-track-size) w-full min-w-0 overflow-hidden rounded-(--qy-radius-track) bg-(--qy-groove-surface)", typeof className === "function" ? className(state) : className)} />;

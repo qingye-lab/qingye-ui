@@ -38,20 +38,45 @@ Keep heading, trigger and content related to the same item; closing neither remo
 - AccordionPrimitive: reexport; owner accordion; UNVERIFIED
 - AccordionTrigger: function; owner accordion; PASS; props: AccordionPrimitive.Trigger.Props
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Accordion
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### AccordionHeader
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AccordionItem
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
+
+### AccordionPanel
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### AccordionTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Accordion
 Expansion state and retention policy for one group.
 - value / defaultValue / onValueChange: AccordionPrimitive.Root.Props. Application-controlled or primitive-owned expanded items; the event can be canceled.
 - multiple: boolean; default false. Allow several items to remain expanded together.
 - keepMounted: boolean; default true. Retain closed content and native fields; explicitly opt out when removal is required.
 - disabled: boolean. Disable the whole group.
+- hiddenUntilFound: boolean; default false. Closed content stays in the document as hidden="until-found": the browser's find-in-page (Ctrl/Cmd+F) matching text inside it, or a URL fragment pointing at an element inside it, opens the item automatically. Supported in Chrome 102+ and Firefox 148+, not Safari; where unsupported it behaves as the default (no match, open manually). keepMounted is ignored while it is on, since the panel must stay mounted. motion.css handles the opacity transition as usual; a find match opens the item immediately without the transition.
 
 ### AccordionItem
 One item's identity and disabled state.
@@ -77,6 +102,20 @@ export default function AccordionDemo() {
     <AccordionItem value="first"><AccordionHeader render={<h4 />}><AccordionTrigger>第一项</AccordionTrigger></AccordionHeader><AccordionPanel><Label htmlFor="accordion-value">输入</Label><Input id="accordion-value" defaultValue="" /></AccordionPanel></AccordionItem>
     <AccordionItem value="second"><AccordionHeader render={<h4 />}><AccordionTrigger>第二项</AccordionTrigger></AccordionHeader><AccordionPanel>第二项内容</AccordionPanel></AccordionItem>
     <AccordionItem value="disabled" disabled><AccordionHeader render={<h4 />}><AccordionTrigger>禁用项</AccordionTrigger></AccordionHeader><AccordionPanel>禁用项内容</AccordionPanel></AccordionItem>
+  </Accordion>;
+}
+```
+
+### 页内查找
+Source: apps/docs/src/content/accordion/demos/02-until-found.tsx
+```tsx
+import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "@qingye_lab/ui/components/accordion";
+export const meta = { title: "页内查找", titleEn: "Find in page" };
+export default function AccordionDemo() {
+  return <Accordion hiddenUntilFound className="w-full max-w-sm">
+    <AccordionItem value="shipping"><AccordionHeader render={<h4 />}><AccordionTrigger>配送</AccordionTrigger></AccordionHeader><AccordionPanel>下单后三个工作日内发出，偏远地区另加两天。</AccordionPanel></AccordionItem>
+    <AccordionItem value="returns"><AccordionHeader render={<h4 />}><AccordionTrigger>退换</AccordionTrigger></AccordionHeader><AccordionPanel>签收后七日内可退换，商品需保持原包装。</AccordionPanel></AccordionItem>
+    <AccordionItem value="invoice"><AccordionHeader render={<h4 />}><AccordionTrigger>发票</AccordionTrigger></AccordionHeader><AccordionPanel>电子发票在发货后写入订单详情。</AccordionPanel></AccordionItem>
   </Accordion>;
 }
 ```

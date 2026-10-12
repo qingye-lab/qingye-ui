@@ -9,6 +9,8 @@ import { cn } from "../utils";
 import { Input, type InputProps } from "./input";
 import { InputGroup, InputGroupButton } from "./input-group";
 
+declare const process: { env: { NODE_ENV?: string } };
+
 export type PasswordInputProps = Omit<InputProps, "type" | "unstyled"> & {
   /** 密码当前是否以明文显示；与 defaultVisible 分别支持受控与非受控。 */
   visible?: boolean;
@@ -21,6 +23,9 @@ export type PasswordInputProps = Omit<InputProps, "type" | "unstyled"> & {
 /**
  * 密码输入 = 编辑边界（InputGroup）+ 输入 + 显示密码的开关，全部由公开部件组合。
  * 输入框本身不内置开关（用户裁决 2026-10-10：功能要纯粹）。开关不改内容、不提交表单。
+ * 不阻止粘贴也不阻止自动填充（WCAG 3.3.8 可访问认证）：组件没有任何 paste / drop / 关闭自动填充的处理，
+ * 调用方也不应通过 onPaste、autoComplete="off" 之类拦住密码管理器；`autoComplete` 应写明
+ * `current-password`（登录）或 `new-password`（设置），开发环境缺失时给出警告。
  * className / style / render / ref 仍属于真实输入，controlClassName 属于编辑边界。
  */
 export function PasswordInput({ visible: visibleProp, defaultVisible = false, onVisibleChange, showLabel, controlClassName, className, id, ref, ...props }: PasswordInputProps): React.ReactElement {
@@ -29,6 +34,10 @@ export function PasswordInput({ visible: visibleProp, defaultVisible = false, on
   const inputId = id ?? generatedId;
   const [inputRef, setInputRef] = useInputRef(ref);
   const facts = useInputFacts(inputRef, { disabled: Boolean(props.disabled), readOnly: Boolean(props.readOnly) }, { value: false, key: props.nativeInput });
+  const missingAutoComplete = props.autoComplete === undefined;
+  React.useEffect(() => {
+    if (missingAutoComplete && typeof process !== "undefined" && process.env.NODE_ENV !== "production") console.warn("PasswordInput: `autoComplete` is missing, so password managers cannot tell a sign-in field from a new password. Pass \"current-password\" or \"new-password\" (WCAG 3.3.8).");
+  }, [missingAutoComplete]);
   const [uncontrolledVisible, setUncontrolledVisible] = React.useState(defaultVisible);
   const visible = visibleProp ?? uncontrolledVisible;
   return (

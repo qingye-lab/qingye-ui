@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: f3eedd535ff725a4488564bf2ab329a9a14c8791ab17e1580a8e674af87f9abc
+Source SHA-256: e1fb3656cc4a25c57efdf795712d0996f38afb2cf4a46eff70864abb32ec03ec
 
 从可收起的候选列表中取一个值。
 
@@ -49,14 +49,48 @@ Source SHA-256: f3eedd535ff725a4488564bf2ab329a9a14c8791ab17e1580a8e674af87f9abc
 - SelectValue: function; owner select; PASS; props: SelectValueProps
 - SelectValueProps: type; owner select; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Select
+- no props declared by this library
+- plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
+
+### SelectGroup
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### SelectGroupLabel
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### SelectItem
+- no props declared by this library
+- plus 281 inherited (@types/react 273, @base-ui/react 8); not expanded, see the installed declarations
+
+### SelectPopup
+- `positionerProps?`: `SelectPrimitive.Positioner.Props`.
+- plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
+
+### SelectTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
+
+### SelectValue
+- no props declared by this library
+- plus 279 inherited (@types/react 274, @base-ui/react 5); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context EmptyValueLabel: without a provider nullable; provided by Select
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Select
 单值状态与表单语义。
 - value / defaultValue: Value | null. 受控值或真实初值，null 是未选择。省略初值不会选第一项。
@@ -92,7 +126,7 @@ Portal、定位、面板与可滚动 List 的共同组合。
 - children / render / ref / className / style: Base UI Item props. 名称内容自动进入 ItemText，选中勾标单独呈现。
 
 ### SelectGroup / SelectGroupLabel
-语义分组与组名称。
+语义分组与组名称；组名画法与 ComboboxGroupLabel、AutocompleteGroupLabel 同一来源。
 
 ### SelectPrimitive
 完整 Base UI Select 原语出口；公共 Select 接口始终为单值。

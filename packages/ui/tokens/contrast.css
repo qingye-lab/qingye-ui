@@ -1,0 +1,81 @@
+/*
+ * 高对比偏好：`prefers-contrast: more`（基础层 §7 墨阶、§16 对比底线）。
+ *
+ * 只用媒体查询，不是第四个主题轴：没有属性开关，品牌、明暗、密度三轴照旧写在各自的位置，
+ * 这里只在偏好开启时把墨阶整体上移一档。尺寸、圆角、线宽、间距、形状一概不动（NG9）。
+ *
+ * 为什么改原子墨阶，不改语义角色：线、字、染都是从五个墨阶百分数与两个染（= 清、淡的一半）
+ * 推出来的（semantic.css），改这五行，所有读它们的角色与组件（含组件里直接写
+ * `var(--qy-ink-dan)` 的 danger bordered 按钮、Sparkline 的目标带）一并跟随，一处声明；
+ * 逐个角色改要重写约二十条且追不上组件里的直接引用。声明写在与 semantic.css 同一组选择器上，
+ * 局部切换明暗的根也按各自的墨与纸重算；品牌写在 html[data-brand] 上（更高的特异性），
+ * 只覆写 --qy-primary 一类，与这里不相交。
+ *
+ * 上移一档（五个百分数各取其上一级；顶端没有上一级，取墨的满值）：
+ *
+ *   阶   原    高对比   承担
+ *   焦   88    100      正文、实心、焦点线（顶端：墨的满值，无更深可取）
+ *   浓   66     88      辅助文字（占位字也读它）
+ *   重   50     66      可编辑的线：填值控件、未选标记
+ *   淡   24     50      命令的线（bordered 按钮）
+ *   清    8     24      容器线、禁用与只读的线、彩色的柔底、悬停（见下）
+ *   清染  4      4      纸上的地：页面底纸、内嵌面、中性柔底；留在原值（见下）
+ *   淡染 12     25      = 淡 / 2，按原关系派生，不另声明：按下与当前位置
+ *
+ * 与「重 → 焦墨」直觉不同的两处，都是实测出来的约束，不是口味：
+ *   重只升到浓（66），不升到焦：填值控件获焦时，线从「重」加深为焦墨（--qy-ring）是该控件唯一的焦点信号
+ *   （基础层 §15，宽度不加）。重升到与焦同值，Input 获焦前后的线同色，信号消失。66 对纸约 7.2:1，焦 21:1。
+ *   焦升到满值而不停在 88：浓升到 88 之后若焦仍是 88，辅助文字与正文同色，占位字与输入的值无法区分
+ *   （占位字读 --qy-foreground-muted）。满值是墨阶的顶，不是新增一级；占位与值的差缩小为 88 对 100，
+ *   这是「辅助文字上移一档」的代价，如实记录。
+ *
+ * 保持不动的几处：画在地上的东西（字、线、按下与当前）上移，地与数据不动。
+ *   0. 清染（--qy-wash-qing）。页面底纸与 --qy-surface-subtle 由它调出。图系列色与状态色要在这两张纸上读到 ≥ 3:1
+ *      （contrast-check 的 `chart-n on background`、`info on surface-subtle`）；升到 12%，浅色底纸变深，
+ *      花青以外的系列色与信息色掉到 2.8:1 以下；深色里 12% 的底纸再叠 25% 的淡染，辅助文字只剩 4.3:1。
+ *      内嵌面与中性柔底（--qy-neutral-soft、--qy-surface-inset）同读这一值，一并不动。写成字面 4%，即原清染。
+ *   1. 读数凹槽（--qy-groove-surface）。Meter 的指示压在凹槽上，状态色 graphic 与凹槽须 ≥ 3:1（semantic.css
+ *      的约束：浅色凹槽不能比 194 灰更深，深色不能更亮）。凹槽上移一档，Meter 的状态色落到 1.4:1，
+ *      状态色是数据编码，有自己的色差门禁，不随偏好移动，所以凹槽留在原来的 24%（= 上移后的清）。
+ *      Progress 的焦墨填充对凹槽仍 ≥ 3:1。占比的「其余」段、Chart 的背景系列与轴线也读这一色，一并不动。
+ *   2. 状态色的柔底（--qy-{danger,warning,success,info}-soft）。柔底是大面积的色，不是线与字：升到 24% 后
+ *      Alert 成了一块厚重的色块（实测截图），字压在上面更难读，也没有让状态更易辨认——状态由图标与文字承担。
+ *      留在原清 8%（字面写出）。
+ *   3. 悬停面（--qy-surface-hover）。它同时是 Chart 参照带（chart.tsx 的 BAND_FILL）的填色；数据线压在带上，
+ *      带加深后花青以外的系列色对带只剩约 2.5:1。悬停是短暂的反馈，不承担识别，所以留在原清 8%（字面写出）。
+ *      三级仍逐级加深：清染 4% < 悬停 8% < 淡染 25%。
+ *   4. 数据编码色：--qy-chart-*、--qy-*-graphic、热力图与占比的段不读墨阶，本文件不碰。
+ *
+ * 强制颜色优先：条件写成 `(prefers-contrast: more) and (forced-colors: none)`，强制颜色开启时这一块整体不成立。
+ * 浏览器在强制颜色下把 color、background-color、border-color 换成系统色，墨阶本来就不参与；但 SVG 的 stroke / fill
+ * 与 `forced-color-adjust: none` 的数据编码保留作者色（图的网格与轴线、迷你趋势线、骨架），它们读墨阶，
+ * 不加这一句，两个媒体同时成立时它们会随偏好变深（实测：深色下 scatter-chart、sparkline、skeleton 等 7 页
+ * 与不带偏好的强制颜色截图有差异）。加上之后两者逐像素一致，见 scripts/contrast-more-audit.mjs --forced-compare。
+ *
+ * 默认主题以外的项目：覆写墨阶原子的项目，要在自己的覆写里同样包一层 prefers-contrast: more，否则会
+ * 被这里的声明（同层、同特异性、靠后）盖掉或盖不住，行为取决于引入顺序。
+ * 取证与前后对比度见 scripts/contrast-more-audit.mjs。
+ */
+@layer base {
+  @media (prefers-contrast: more) and (forced-colors: none) {
+    :root,
+    .light,
+    .dark,
+    [data-theme] {
+      --qy-ink-jiao: 100%;
+      --qy-ink-nong: 88%;
+      --qy-ink-zhong: 66%;
+      --qy-ink-dan: 50%;
+      --qy-ink-qing: 24%;
+      --qy-wash-qing: 4%;
+
+      /* 以下是「不动」的几处，见上；值是原来的清（8%）、淡（24%）。 */
+      --qy-surface-hover: color-mix(in srgb, var(--qy-ink) 8%, transparent);
+      --qy-groove-surface: color-mix(in srgb, var(--qy-ink) 24%, var(--qy-paper));
+      --qy-danger-soft: color-mix(in srgb, var(--qy-danger) 8%, transparent);
+      --qy-warning-soft: color-mix(in srgb, var(--qy-warning) 8%, transparent);
+      --qy-success-soft: color-mix(in srgb, var(--qy-success) 8%, transparent);
+      --qy-info-soft: color-mix(in srgb, var(--qy-info) 8%, transparent);
+    }
+  }
+}

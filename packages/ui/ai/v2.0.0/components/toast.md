@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0
+Source SHA-256: 2f78a4dba01cb2ef1ac005af6672417903764f3bdb51fe2dd4dbd23228a31eaf
 
 补充可恢复、非关键的操作事实，保持当前工作不中断。
 
@@ -42,14 +42,29 @@ Source SHA-256: 4ffcd912864b23305f72a8274032a58450e4a3bb40cd7ecb181e0c74432568e0
 - ToastProvider: function; owner toast; PASS; props: ToastProviderProps
 - ToastProviderProps: interface; owner toast; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AnchoredToastProvider
+- `portalProps?`: `React.ComponentProps<typeof Toast.Portal> | undefined`.
+- plus 4 inherited (@base-ui/react 4); not expanded, see the installed declarations
+
+### ToastProvider
+- `portalProps?`: `React.ComponentProps<typeof Toast.Portal> | undefined`.
+- `position?`: `"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"`.
+- plus 4 inherited (@base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- UNVERIFIED: toast.tsx exports ToastProvider, AnchoredToastProvider next to other exports; whether those work without the provider is run-time behaviour that context reads cannot show.
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ToastProvider
 同一通知通道挂载一次。
 - position: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"; default "bottom-right". 通知区域的位置。

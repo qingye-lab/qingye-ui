@@ -31,14 +31,22 @@ Source SHA-256: df69ad19901d776578f8dcb288ae1a4907a55645774cf3b5d2976389349c820d
 - linkClassName: const; owner link; UNVERIFIED
 - LinkProps: type; owner link; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Link
+- no props declared by this library
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Link
 原生 a 元素；href、target、rel 等原生属性与 render/ref 透传。
 - render / ref / 原生属性: useRender.ComponentProps<"a">. 路由库的链接组件通过 render 接入。

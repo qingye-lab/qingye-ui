@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 9f9eb4f052d7aa7179e2ef48069533993ff88efba27d291f79d3a9e1bc362879
+Source SHA-256: 14031b4212f01c1e0305c190d61ce1f16d5f6a0046313f5b524c13328d82c5bd
 
 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 
@@ -15,6 +15,7 @@ Source SHA-256: 9f9eb4f052d7aa7179e2ef48069533993ff88efba27d291f79d3a9e1bc362879
 - 点击外部入口后保留该入口的焦点，键盘关闭则返回触发者。
 - 默认 Portal 挂到 body，无法继承触发者局部 DOM 上下文；container 必须在打开前挂载。
 - 开关、焦点与定位由 Base UI 管理；入退动效仅由 motion.css 管理。
+- 触发器用 render={<Button />} 等已有边界的控件时，焦点与边框由那个控件负责，PopoverTrigger 只补命中区；裸触发器才自建边框与盒内焦点线。
 
 ## Use and ownership
 - 在触发对象旁展开局部操作或补充信息，主工作面仍可使用。
@@ -44,15 +45,65 @@ Source SHA-256: 9f9eb4f052d7aa7179e2ef48069533993ff88efba27d291f79d3a9e1bc362879
 - PopoverTitle: function; owner popover; PASS; props: PopoverPrimitive.Title.Props
 - PopoverTrigger: function; owner popover; PASS; props: PopoverPrimitive.Trigger.Props
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Popover
+- no props declared by this library
+- plus 9 inherited (@base-ui/react 9); not expanded, see the installed declarations
+
+### PopoverClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### PopoverContent
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `PopoverPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `PopoverPrimitive.Portal.Props`.
+- `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
+- `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### PopoverCreateHandle
+- takes no props
+
+### PopoverDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### PopoverPopup
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `PopoverPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `PopoverPrimitive.Portal.Props`.
+- `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
+- `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### PopoverTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### PopoverTrigger
+- no props declared by this library
+- plus 294 inherited (@types/react 285, @base-ui/react 9); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - 默认 Portal 挂到 body，无法继承触发者局部 DOM 上下文；container 必须在打开前挂载。
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Popover
 管理非阻断打开状态，完整继承 Base UI Root 的控制契约。modal 已移除。
 - open / defaultOpen: boolean; default false. 受控 / 非受控打开状态。

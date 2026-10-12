@@ -51,14 +51,78 @@ Right click is an enhancement; applications also provide a visible Menu using th
 - ContextMenuTrigger: function; owner context-menu; PASS; props: ContextMenuTriggerProps
 - ContextMenuTriggerProps: type; owner context-menu; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ContextMenu
+- no props declared by this library
+- plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
+
+### ContextMenuCheckboxItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
+### ContextMenuGroup
+- no props declared by this library
+- plus 278 inherited (@types/react 274, @base-ui/react 4); not expanded, see the installed declarations
+
+### ContextMenuGroupLabel
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### ContextMenuItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 282 inherited (@types/react 273, @base-ui/react 9); not expanded, see the installed declarations
+
+### ContextMenuLinkItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 288 inherited (@types/react 282, @base-ui/react 6); not expanded, see the installed declarations
+
+### ContextMenuPopup
+- no props declared by this library
+- plus 279 inherited (@types/react 273, @base-ui/react 6); not expanded, see the installed declarations
+
+### ContextMenuPortal
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### ContextMenuPositioner
+- no props declared by this library
+- plus 290 inherited (@types/react 275, @base-ui/react 15); not expanded, see the installed declarations
+
+### ContextMenuRadioGroup
+- no props declared by this library
+- plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
+
+### ContextMenuRadioItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 283 inherited (@types/react 273, @base-ui/react 10); not expanded, see the installed declarations
+
+### ContextMenuSeparator
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### ContextMenuSubmenu
+- no props declared by this library
+- plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
+
+### ContextMenuSubmenuTrigger
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
+
+### ContextMenuTrigger
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ContextMenu / ContextMenuTrigger
 Root and focusable trigger region for the same object.
 - disabled / onOpenChange: Base UI Root props. A disabled root never opens; details.cancel() may reject a change.

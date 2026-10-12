@@ -53,12 +53,14 @@ export default {
     "点击外部入口后保留该入口的焦点，键盘关闭则返回触发者。",
     "默认 Portal 挂到 body，无法继承触发者局部 DOM 上下文；container 必须在打开前挂载。",
     "开关、焦点与定位由 Base UI 管理；入退动效仅由 motion.css 管理。",
+    "触发器用 render={<Button />} 等已有边界的控件时，焦点与边框由那个控件负责，PopoverTrigger 只补命中区；裸触发器才自建边框与盒内焦点线。",
   ],
   notesEn: [
     "Popover is always non-modal. Use Dialog or AlertDialog for a blocking decision.",
     "Outside clicks retain focus on the clicked control; keyboard dismissal returns to the trigger.",
     "The default body portal cannot inherit the trigger's local DOM context. Mount container before opening.",
     "Base UI owns open state, focus and positioning; motion.css owns entry and exit motion.",
+    "When the trigger renders an existing bounded control such as render={<Button />}, that control owns focus and border; PopoverTrigger only adds the hit area. Only a bare trigger draws its own border and inset focus line.",
   ],
   design: {
     methods: ["展开有据", "进退相承", "相成相制"],

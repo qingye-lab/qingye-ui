@@ -34,14 +34,26 @@ Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
 - SeparatorPrimitive: reexport; owner separator; UNVERIFIED
 - SeparatorProps: type; owner separator; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Separator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### SeparatorPrimitive
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Separator
 基于 Base UI Separator；默认 role=separator。
 - orientation: "horizontal" | "vertical"; default "horizontal". 横向跨容器；纵向在 flex 行里拉伸。

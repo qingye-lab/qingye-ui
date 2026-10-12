@@ -30,14 +30,23 @@ Waiting, in-progress, and unknown results remain distinct facts.
 - StatusDotProps: type; owner status-dot; PASS
 - StatusDotStatus: type; owner status-dot; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### StatusDot
+- `label?`: `string`.
+- `status`: `"neutral" | "info" | "warning" | "unknown" | "online" | "offline" | "error" | "pending" | "in-progress"`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### StatusDot
 Default names use locale; label may identify a specific object. The glyph is not a standalone Spinner.
 - status: "online" | "offline" | "warning" | "error" | "info" | "neutral" | "pending" | "in-progress" | "unknown". Required actual application state.

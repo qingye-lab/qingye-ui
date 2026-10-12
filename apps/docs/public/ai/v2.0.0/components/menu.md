@@ -62,15 +62,80 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - MenuTrigger: function; owner menu; PASS; props: MenuTriggerProps
 - MenuTriggerProps: type; owner menu; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Menu
+- no props declared by this library
+- plus 16 inherited (@base-ui/react 16); not expanded, see the installed declarations
+
+### MenuCheckboxItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
+### MenuGroup
+- no props declared by this library
+- plus 278 inherited (@types/react 274, @base-ui/react 4); not expanded, see the installed declarations
+
+### MenuGroupLabel
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### MenuItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 282 inherited (@types/react 273, @base-ui/react 9); not expanded, see the installed declarations
+
+### MenuLinkItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 288 inherited (@types/react 282, @base-ui/react 6); not expanded, see the installed declarations
+
+### MenuPopup
+- no props declared by this library
+- plus 279 inherited (@types/react 273, @base-ui/react 6); not expanded, see the installed declarations
+
+### MenuPortal
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### MenuPositioner
+- no props declared by this library
+- plus 290 inherited (@types/react 275, @base-ui/react 15); not expanded, see the installed declarations
+
+### MenuRadioGroup
+- no props declared by this library
+- plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
+
+### MenuRadioItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 283 inherited (@types/react 273, @base-ui/react 10); not expanded, see the installed declarations
+
+### MenuSeparator
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### MenuSubmenu
+- no props declared by this library
+- plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
+
+### MenuSubmenuTrigger
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
+
+### MenuTrigger
+- no props declared by this library
+- plus 294 inherited (@types/react 283, @base-ui/react 11); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - 危险操作需显式后果与独立保护；Root/Portal/Positioner/Popup 属于同一上下文。
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Menu / MenuSubmenu
 公开 Base UI 命令根与子菜单。
 - open / defaultOpen / onOpenChange: Base UI Root props. 应用可控制打开；details.cancel() 保留原状态。
@@ -83,11 +148,12 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
 动作、真实导航、勾选、单选与下级命令。
 - size: xs | sm | md | lg | xl; default md. 复用 Button 五档；禁用项可聚焦但不能执行。
-- checked / value / onCheckedChange / onValueChange: Base UI choice props. 选择由调用方事实与原语取消协议确认。
+- checked / value / onCheckedChange: Base UI choice props. 勾选项读 checked，单选项读 value；选择由调用方事实与原语取消协议确认。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 组语义与底层公开原语。
+- value / defaultValue / onValueChange: Base UI MenuRadioGroup props. 单选组的当前值在 MenuRadioGroup 上。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard

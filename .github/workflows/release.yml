@@ -64,6 +64,8 @@ jobs:
           name: release-browser-audit-evidence
           path: test-results/release-audit/
           if-no-files-found: warn
+      - name: Check package contents and types
+        run: pnpm --filter @qingye_lab/ui check:pack
       - name: Pack
         run: |
           mkdir -p dist-pack

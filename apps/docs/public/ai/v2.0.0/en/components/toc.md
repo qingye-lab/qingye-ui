@@ -41,14 +41,23 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 - useTocHeadings: function; owner toc; PASS; props: React.RefObject<Element | null>
 - useTocScrollSpy: function; owner toc; PASS; props: TocItem[]
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Toc
+- `current?`: `string | undefined`. 当前所在目的地的 id；缺省时没有条目带 aria-current，纯展示一份目录。类型显式带 `| undefined`：useTocScrollSpy 在没有命中任何目的地时返回 undefined，这个值需要能 直接传入（exactOptionalPropertyTypes 下，`current?: string` 只允许省略整个属性， 不允许显式传 undefined）。
+- `items`: `TocItem[]`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Toc
 The table of contents container; renders as nav, and renders nothing when there are no items.
 - items: { id: string; label: string; level: 2 | 3 }[]. The destination list; id must match an anchor that actually exists on the page.
@@ -74,6 +83,7 @@ Source: apps/docs/src/content/toc/demos/01-scroll-spy.tsx
 ```tsx
 import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
 import { Inline } from "@qingye_lab/ui/components/layout";
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;
@@ -91,7 +101,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc items={headings} current={current} className="w-40 shrink-0" />
-    <div ref={containerRef} className="h-56 w-80 overflow-y-auto rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} role="region" aria-label="同步说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -99,7 +109,7 @@ export default function Demo() {
           <p className="m-0 text-body text-foreground">{section.body}</p>
         </section>;
       })}
-    </div>
+    </ScrollArea>
   </Inline>;
 }
 ```

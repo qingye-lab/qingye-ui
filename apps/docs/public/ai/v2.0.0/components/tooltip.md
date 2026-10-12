@@ -41,14 +41,56 @@ Source SHA-256: b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f
 - TooltipTrigger: function; owner tooltip; PASS; props: TooltipTriggerProps
 - TooltipTriggerProps: type; owner tooltip; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Tooltip
+- no props declared by this library
+- plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
+
+### TooltipContent
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `TooltipPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `TooltipPrimitive.Portal.Props`.
+- `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### TooltipCreateHandle
+- takes no props
+
+### TooltipPopup
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `TooltipPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `TooltipPrimitive.Portal.Props`.
+- `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### TooltipProvider
+- no props declared by this library
+- plus 4 inherited (@base-ui/react 4); not expanded, see the installed declarations
+
+### TooltipTrigger
+- `render`: `NonNullable<TooltipPrimitive.Trigger.Props["render"]>`. 被提示的那个控件本身（按钮、链接、菜单项）。提示只是附在它上面，不替它决定是什么控件。
+- plus 292 inherited (@types/react 284, @base-ui/react 8); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- Context TooltipAssociation: without a provider nullable; provided by Tooltip
+- UNVERIFIED: tooltip.tsx exports TooltipProvider next to other exports; whether those work without the provider is run-time behaviour that context reads cannot show.
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### TooltipProvider
 共享指针延迟。键盘聚焦立即展开。
 - delay: number; default 600. 首次悬停等待毫秒数，原语预设，可由应用覆盖。

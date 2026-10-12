@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldDescription, FieldGroup, FieldItem, FieldLabel } from "@qingye_lab/ui/components/field";
 import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
 import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
-import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
 
@@ -27,8 +26,10 @@ export default function Demo() {
       {/* 范围两端：让「偏左」有一个可读的参照。 */}
       <div className="flex justify-between text-caption text-muted-foreground"><span>0%（每次同步都告警）</span><span>100%（从不告警）</span></div>
       {/* 非拖拽路径：需要精确值时不必拖到难以确定的位置。
-       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。 */}
-      <Inline gap="field"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5} aria-label="告警阈值，精确输入"><NumberFieldGroup><NumberFieldInput /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></Inline>
+       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。
+       *  Field 的标签名的是滑块，精确输入是同一个设置的第二个控件：用 FieldItem 给它自己的标签作用域，
+       *  否则两个控件共用 Field 的 controlId（同一个 id 出现两次）；它的名称写在 NumberFieldInput 上。 */}
+      <FieldItem className="items-center"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5}><NumberFieldGroup><NumberFieldInput aria-label="告警阈值，精确输入" /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></FieldItem>
       <FieldDescription>拖拽、方向键或上面的输入都能改到同一个值。</FieldDescription>
     </Field>
 

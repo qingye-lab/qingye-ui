@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
-Source SHA-256: 8401f44ad4592a64c2fcb9d8bb6399a8409aa2c439f04c08783aefa8fcd5741e
+Source SHA-256: e2db390d8cace757dcb272c8ced3afca616f1537d0d49f79110ae34361955fc6
 
 Choose or drop local files, retaining accepted files and real rejection reasons.
 
@@ -11,6 +11,8 @@ Choose or drop local files, retaining accepted files and real rejection reasons.
 The component manages local selection only. The application supplies upload states, progress denominators, failure, unknown results, and recovery. It sends no requests, invents no progress, and infers no result from a Promise.
 
 ## Notes
+- Pasted files: while focus is inside the component (chooser, remove buttons, ...) files on the clipboard follow the same rules as dropped ones; text inputs inside it, plain-text paste, read-only and disabled are unaffected. No listener is placed on the document.
+- A drop that misses opens the file in the browser and leaves the page. A document-level drop guard is a global side effect and stays out of the component: the application calls preventDefault on dragover and drop at page level (events landing in a FileUpload are handled by the component).
 - Object identity determines membership; equal names/sizes do not imply equal content. Removed files can be reselected. Removing a focused row returns to a neighboring action or chooser; controlled refusal preserves focus.
 - Field retains label/error/disabled links. The actual chooser isolates name, value, and required to avoid draft submission or permanent invalidity.
 - Requires browser formdata support. A jsdom event bridge does not verify native FormData construction.
@@ -40,20 +42,48 @@ The component manages local selection only. The application supplies upload stat
 - FileUploadRejection: type; owner file-upload; PASS
 - FileUploadStatus: type; owner file-upload; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### FileUpload
+- `accept?`: `string`.
+- `defaultValue?`: `readonly File[]`.
+- `disabled?`: `boolean`.
+- `form?`: `string | undefined`.
+- `getStatus?`: `(file: File) => FileUploadStatus | undefined`.
+- `inputProps?`: `Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "name" | "form" | "accept" | "multiple" | "required" | "disabled" | "readOnly" | "size">`.
+- `maxFiles?`: `number`.
+- `maxSize?`: `number`.
+- `multiple?`: `boolean`.
+- `name?`: `string | undefined`.
+- `onReject?`: `(rejections: readonly FileUploadRejection[], event: React.SyntheticEvent) => void`.
+- `onValueChange?`: `(value: readonly File[], details: FileUploadChangeDetails) => void`.
+- `readOnly?`: `boolean`.
+- `renderFileActions?`: `(file: File, status: FileUploadStatus | undefined) => React.ReactNode`.
+- `validate?`: `(file: File) => string | undefined`. 自定义拒绝：返回文案即拒绝该文件，与类型、大小、数量走同一条通道（`onReject`、就地列出）；返回 undefined 即接受。 在类型与大小之后、数量之前判断。只看 File 本身；内容校验、查重、上传前检查属于应用。
+- `value?`: `readonly File[]`.
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
+
+### FileUploadPrimitive
+- no props declared by this library
+- plus 310 inherited (@types/react 304, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### FileUpload
 A native file input composed with dropping, accepted files, and real rule validation.
-- value / defaultValue / onValueChange: readonly File[] / readonly File[] / (files, details) => void; default defaultValue: []. Controlled or uncontrolled accepted files, retaining File references. details includes select/drop/remove, added, removed, event, and cancel(). Refusal or cancellation preserves submitted files.
+- value / defaultValue / onValueChange: readonly File[] / readonly File[] / (files, details) => void; default defaultValue: []. Controlled or uncontrolled accepted files, retaining File references. details includes select/drop/paste/remove, added, removed, event, and cancel(). Refusal or cancellation preserves submitted files.
 - accept / maxSize / maxFiles: string / number / number. Extension/MIME rules, bytes per file, and collection count. Size and count are nonnegative safe integers; omitted means unlimited. Reject with the first actual type/size/count failure; external sets are not silently repaired.
 - multiple: boolean; default true. Defaults to collection selection. false limits capacity to one; remove an existing file before adding another, with no implicit replacement.
-- onReject: (rejections: {file, reason}[], event) => void. Actual type/size/count rejections. Dismissing feedback does not make rejected files accepted.
+- validate: (file: File) => string | undefined. Return a message to reject, through the same channel as type, size and count (onReject, listed in place, reason "custom" with a message). Evaluated after type and size and before count; it sees only the File, and content checks and de-duplication belong to the application.
+- onReject: (rejections: {file, reason}[], event) => void. Actual type/size/count/directory rejections and validate's custom ones. Dismissing feedback does not make rejected files accepted. A dropped folder is rejected as directory (browsers put it in files as a size-0, type-less pseudo file; only webkitGetAsEntry can recognise it).
 - name / form: string. The chooser has no final name. Field may supply it; the public formdata event appends accepted Files without replacing other same-name fields. form supports external forms.
 - disabled / readOnly: boolean; default false. Block selecting, dropping, and removing, including Field/native fieldset disabled. Read-only submits; disabled is excluded. Uncanceled native reset restores initial uncontrolled defaultValue and retains controlled values.
 - getStatus: (file) => {state, label, progress?} | undefined. Caller-provided waiting/in-progress/failed/unknown/success and a visible label. Only in-progress accepts {value,min?,max}; max is a known denominator and null is indeterminate.
@@ -106,5 +136,23 @@ export default function Demo() {
       <Field><FieldLabel>只读文件</FieldLabel><FileUpload defaultValue={[stored]} readOnly /></Field>
     </div>
   );
+}
+```
+
+### 自定义规则与粘贴
+Source: apps/docs/src/content/file-upload/demos/03-rules.tsx
+```tsx
+import { useState } from "react";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { FileUpload } from "@qingye_lab/ui/components/file-upload";
+
+export const meta = { title: "自定义规则与粘贴", titleEn: "Custom rule and paste" };
+
+export default function Demo() {
+  const [files, setFiles] = useState<readonly File[]>([]);
+  return <Field name="photos" className="w-full max-w-md"><FieldLabel>现场照片</FieldLabel>
+    <FileUpload value={files} onValueChange={setFiles} accept="image/*" validate={file => /^IMG_\d+/.test(file.name) ? "请先改成有意义的文件名" : undefined} />
+    <FieldDescription>图片；也可以在这里粘贴截图。</FieldDescription>
+  </Field>;
 }
 ```

@@ -3,9 +3,12 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: 7962fa0b50ac6a03463c8f68fa91bc18336ada7dd684b7f1651f6956c1014494
+Source SHA-256: 4e26d8bdc3dc7cc7bd85a5d04bb27d0362e12e8d3fa896f7c43ce2d607fe5289
 
 保持名称的二态切换按钮：按下后保持，直到再次切换。
+
+## Decision
+按下的 Toggle 在线内填淡染、字为焦墨，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整按下的样子，改 --qy-track-selected 与 --qy-track-selected-foreground。
 
 ## Notes
 - 名称不随 pressed 改写，aria-pressed 表达状态。
@@ -27,7 +30,7 @@ Source SHA-256: 7962fa0b50ac6a03463c8f68fa91bc18336ada7dd684b7f1651f6956c1014494
 - 既有 control 五档和 touch-target；实际命中未在本批浏览器验证
 
 ## Customization
-- 未切换 bordered，已切换 solid；复用 Button 的几何与焦点角色
+- 未切换与已切换都是 bordered（线不变）；已切换在线内填 --qy-track-selected、字为 --qy-track-selected-foreground（默认淡染 + 焦墨），不借用 --qy-primary；复用 Button 的几何与焦点角色
 
 ## Current exports
 - Toggle: function; owner toggle; PASS; props: ToggleProps<Value>
@@ -35,14 +38,27 @@ Source SHA-256: 7962fa0b50ac6a03463c8f68fa91bc18336ada7dd684b7f1651f6956c1014494
 - ToggleProps: type; owner toggle; PASS
 - ToggleSize: type; owner toggle; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Toggle
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
+
+### TogglePrimitive
+- no props declared by this library
+- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Toggle
 独立的 pressed 布尔事实。
 - pressed / defaultPressed: boolean. 受控事实或非受控初值。默认未切换（未按下）。
@@ -65,15 +81,15 @@ Base UI 切换原语公共出口。
 Source: apps/docs/src/content/toggle/demos/01-pressed.tsx
 ```tsx
 import { useState } from "react";
-import { IconBold } from "@tabler/icons-react";
+import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
 export const meta = { title: "切换态", titleEn: "Toggled state" };
 export default function Demo() {
-  const [pressed, setPressed] = useState(false);
+  const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
     <Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle>
-    <Toggle shape="icon" aria-label="斜体">I</Toggle>
+    <Toggle shape="icon" aria-label="斜体"><IconItalic aria-hidden="true" /></Toggle>
     <Toggle disabled defaultPressed><IconBold aria-hidden="true" />加粗</Toggle>
     <span className={pressed ? "text-body-strong text-foreground" : "text-body text-foreground"}>Aa 字</span>
   </div>;

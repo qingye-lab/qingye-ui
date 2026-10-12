@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 13a7de3c9d8565af5a3f4f8f002216b561885ab68dd0d42a73d2af34bd7a54ae
+Source SHA-256: 91739438bfcb4fd1559027083c341c0dab143ea076703bf453203fecbfb9b53a
 
 Page position, real actions and explicit unknown totals.
 
@@ -49,14 +49,60 @@ Only current position is derived by comparing root and link page facts. null mea
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Pagination
+- `page?`: `number`.
+- `totalPages`: `number | null`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### PaginationEllipsis
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### PaginationItem
+- no props declared by this library
+- plus 282 inherited (@types/react 281, @base-ui/react 1); not expanded, see the installed declarations
+
+### PaginationLink
+- `page`: `number`.
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### PaginationList
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### PaginationNext
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
+
+### PaginationPrevious
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context PageContext: without a provider nullable; provided by Pagination
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Pagination
 A named nav without generated pages.
 - page: number. A confirmed positive page index; omit for zero results.

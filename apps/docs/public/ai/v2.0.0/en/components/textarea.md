@@ -37,14 +37,22 @@ Character counts describe the current value only. maxLength or application rules
 - TextareaPrimitive: reexport; owner textarea; UNVERIFIED
 - TextareaProps: type; owner textarea; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Textarea
+- no props declared by this library
+- plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Textarea
 A native textarea composable with Field.
 - rows: number; default 3. Minimum starting rows; content may grow automatically and still be resized manually.

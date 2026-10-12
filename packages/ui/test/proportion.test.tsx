@@ -1,6 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { Proportion } from "../src/components/proportion";
+import { toneColor } from "../src/tone";
 
 const parts = [{ key: "doc", label: "文档", value: 30 }, { key: "img", label: "图片", value: 50 }];
 
@@ -22,4 +23,21 @@ test("a single part is a Meter and an impossible whole is rejected", () => {
   expect(() => render(<Proportion label="x" items={[parts[0]!]} />)).toThrow(/Meter/);
   expect(() => render(<Proportion label="x" items={parts} total={10} />)).toThrow(RangeError);
   expect(() => render(<Proportion label="x" items={[...parts, { key: "n", label: "负", value: -1 }]} />)).toThrow(RangeError);
+});
+
+test("a hidden legend stays in the document as the full text equivalent", () => {
+  render(<Proportion label="存储用量" items={parts} total={100} legend="hidden" />);
+  const group = screen.getByRole("group", { name: "存储用量" });
+  expect(within(group).getAllByRole("listitem").map(item => item.textContent)).toEqual(["文档30（30%）", "图片50（50%）", "其余20（20%）"]);
+  expect(screen.getByText("文档")).toBeInTheDocument();
+  expect(() => render(<Proportion label="x" items={parts} legend={"gone" as never} />)).toThrow(RangeError);
+});
+
+test("tones are all-or-none, unique and valid", () => {
+  const toned = [{ ...parts[0]!, tone: "success" as const }, { ...parts[1]!, tone: "danger" as const }];
+  const { container } = render(<Proportion label="结果" items={toned} />);
+  expect([...container.querySelectorAll<HTMLElement>("[data-slot=proportion-segment]")].map(s => s.style.background)).toEqual([toneColor.success, toneColor.danger]);
+  expect(() => render(<Proportion label="x" items={[toned[0]!, parts[1]!]} />)).toThrow(/all declare a tone or none/);
+  expect(() => render(<Proportion label="x" items={[toned[0]!, { ...parts[1]!, tone: "success" }]} />)).toThrow(/unique/);
+  expect(() => render(<Proportion label="x" items={[toned[0]!, { ...parts[1]!, tone: "primary" as never }]} />)).toThrow(RangeError);
 });

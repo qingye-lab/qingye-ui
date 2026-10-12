@@ -35,6 +35,7 @@ const steps = {
   "caption-strong": "text-caption-strong",
   label: "text-label",
   metric: "text-metric numeric",
+  "metric-lg": "text-metric-lg numeric",
   micro: "text-micro",
   "control-xs": "text-control-xs-mobile sm:text-control-xs",
   "control-xs-mobile": "text-control-xs-mobile",
@@ -47,6 +48,14 @@ const steps = {
   "control-xl": "text-control-xl-mobile sm:text-control-xl",
   "control-xl-mobile": "text-control-xl-mobile",
 } satisfies Record<TextStep, string>;
+
+/**
+ * 标题档换行均衡（`text-wrap: balance`，Baseline 2024-05）：标题折行时各行长度相近，不留孤字一行。
+ * 只加在标题档，正文与说明不加——`pretty` 仍未被各浏览器普遍支持，留作观察；浏览器不支持时回落为普通换行。
+ * 浏览器对均衡的行数设有上限（Chromium 6 行、Firefox 10 行），超出时同样回落，所以长标题不受影响。
+ * 单一来源：Heading、Text 与基于 Heading 的 PageHeaderTitle / EmptyTitle 都经此判断，不在各处另写。
+ */
+const balancedSteps: ReadonlySet<TextStep> = new Set(["display-xl", "display-lg", "display", "title", "chapter", "heading"]);
 
 type TypeProps = { step?: TextStep; numeric?: boolean };
 export type HeadingProps = useRender.ComponentProps<"h2"> & TypeProps & {
@@ -61,7 +70,7 @@ export function Heading({ level = 2, step = "heading", numeric = false, classNam
   const defaultProps = {
     "data-slot": "heading",
     "data-step": step,
-    className: cn(capacity, steps[step], numeric && "numeric", className),
+    className: cn(capacity, steps[step], balancedSteps.has(step) && "text-balance", numeric && "numeric", className),
   };
   return useRender({
     defaultTagName: `h${level}`,
@@ -75,7 +84,7 @@ export function Text({ step = "body", numeric = false, className, render, ...pro
   const defaultProps = {
     "data-slot": "text",
     "data-step": step,
-    className: cn(capacity, steps[step], numeric && "numeric", className),
+    className: cn(capacity, steps[step], balancedSteps.has(step) && "text-balance", numeric && "numeric", className),
   };
   return useRender({
     defaultTagName: "p",

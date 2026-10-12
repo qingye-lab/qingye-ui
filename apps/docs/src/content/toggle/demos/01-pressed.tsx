@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { IconBold } from "@tabler/icons-react";
+import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
 export const meta = { title: "切换态", titleEn: "Toggled state" };
 export default function Demo() {
-  const [pressed, setPressed] = useState(false);
+  const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
     <Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle>
-    <Toggle shape="icon" aria-label="斜体">I</Toggle>
+    <Toggle shape="icon" aria-label="斜体"><IconItalic aria-hidden="true" /></Toggle>
     <Toggle disabled defaultPressed><IconBold aria-hidden="true" />加粗</Toggle>
     <span className={pressed ? "text-body-strong text-foreground" : "text-body text-foreground"}>Aa 字</span>
   </div>;

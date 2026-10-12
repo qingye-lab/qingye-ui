@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test } from "vitest";
 import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "../src/components/collapsible";
@@ -21,4 +21,13 @@ test("disabled and explicitly canceled disclosure never claims an opened section
   const { rerender } = render(fixture(true));
   await user.click(screen.getByRole("button")); expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "false");
   rerender(fixture(false)); await user.click(screen.getByRole("button")); expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "false");
+});
+
+test("hiddenUntilFound lets the browser's find-in-page open a closed section", async () => {
+  render(<Collapsible><CollapsibleTrigger>更新记录</CollapsibleTrigger><CollapsiblePanel hiddenUntilFound>修正了导出</CollapsiblePanel></Collapsible>);
+  const panel = document.querySelector("[data-slot=collapsible-panel]")!;
+  expect(panel).toHaveAttribute("hidden", "until-found");
+  panel.dispatchEvent(new Event("beforematch", { bubbles: true }));
+  await waitFor(() => expect(screen.getByRole("button", { name: "更新记录" })).toHaveAttribute("aria-expanded", "true"));
+  expect(panel).not.toHaveAttribute("hidden");
 });

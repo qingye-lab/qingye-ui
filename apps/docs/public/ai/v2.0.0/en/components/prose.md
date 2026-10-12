@@ -36,14 +36,22 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 - Prose: function; owner prose; PASS; props: ProseProps
 - ProseProps: type; owner prose; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Prose
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Prose
 The reading-pane container; renders as article by default.
 - render / ref / className / style / native props: useRender.ComponentProps<"article">. Forward attributes, events and refs to the actual element; children are content the caller has already rendered.
@@ -86,9 +94,9 @@ export default function Demo() {
   return <Prose>
     <h3>排查步骤</h3>
     <ul className="contains-task-list">
-      <li className="task-list-item"><input type="checkbox" checked disabled readOnly /> 在操作记录里确认失败条目数量</li>
-      <li className="task-list-item"><input type="checkbox" disabled readOnly /> 核对 Webhook 回调是否已经收到</li>
-      <li className="task-list-item"><input type="checkbox" disabled readOnly /> 决定重新触发还是放弃这一条</li>
+      <li className="task-list-item"><input type="checkbox" checked disabled readOnly aria-labelledby="prose-task-1" /> <span id="prose-task-1">在操作记录里确认失败条目数量</span></li>
+      <li className="task-list-item"><input type="checkbox" disabled readOnly aria-labelledby="prose-task-2" /> <span id="prose-task-2">核对 Webhook 回调是否已经收到</span></li>
+      <li className="task-list-item"><input type="checkbox" disabled readOnly aria-labelledby="prose-task-3" /> <span id="prose-task-3">决定重新触发还是放弃这一条</span></li>
     </ul>
     <p>按失败原因统计，最近一次同步的结果如下：</p>
     <table>

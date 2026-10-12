@@ -22,7 +22,7 @@
 - [ButtonGroup](components/button-group.md): Give actions in one scope a shared name and spacing.
 - [Calendar](components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
 - [Card](components/card.md): Bound an independently identifiable object.
-- [Chart](components/chart.md): Seven task-chosen forms—line, bar, area, area-stacked, bar-horizontal, bar-stacked and donut—with a same-source plot, named axes and an on-demand data table.
+- [Chart](components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
 - [CodeBlock](components/code-block.md): Literal text with actual copy results.
@@ -34,7 +34,7 @@
 - [CornerMark](components/corner-mark.md): A count or presence dot anchored to a host's corner, never part of the host's own content.
 - [DataTable](components/data-table.md): Comparison, sorting and scoped selection for a real caller-owned collection.
 - [DatePicker](components/date-picker.md): Edit one local date or choose it from a calendar.
-- [DateRangePicker](components/date-range-picker.md): Edit a calendar range draft and explicitly apply complete endpoints.
+- [DateRangePicker](components/date-range-picker.md): Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 - [DateTimePicker](components/date-time-picker.md): Edit complete local wall-clock date/time, or apply calendar and time drafts.
 - [DescriptionList](components/description-list.md): Native relationships between names and values.
 - [Dialog](components/dialog.md): Take over the work surface for an edit or decision, then return.
@@ -45,7 +45,7 @@
 - [FileUpload](components/file-upload.md): Choose or drop local files, retaining accepted files and real rejection reasons.
 - [FilterBar](components/filter-bar.md): Shows draft conditions separately from applied facts.
 - [Form](components/form.md): A native field submission scope and reset context.
-- [Heatmap](components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full), focusable cells and an on-demand data table.
+- [Heatmap](components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 - [HoverCard](components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
 - [Input](components/input.md): Enter one text value.
 - [InputGroup](components/input-group.md): Give an input and its markers, units or actions one editing boundary.
@@ -74,6 +74,7 @@
 - [ScatterChart](components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](components/scroll-area.md): Native scrolling within a bounded viewport.
 - [SearchInput](components/search-input.md): Enter a search term and clear it in one step.
+- [Section](components/section.md): A page block without a border, named by its title; the title and its actions share one row.
 - [SegmentedControl](components/segmented-control.md): Enter one value from a small set of visible segments.
 - [Select](components/select.md): Choose one value from a collapsible set of options.
 - [Separator](components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.

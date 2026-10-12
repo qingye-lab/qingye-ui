@@ -51,6 +51,7 @@ export const STEPS: { step: string; use: Text }[] = [
   { step: "caption", use: { zh: "最小的说明，仍占一材", en: "The smallest note, still one module high" } },
   { step: "dense", use: { zh: "表格、标记与工具条里的密集文字", en: "Dense text in tables, markers and toolbars" } },
   { step: "metric", use: { zh: "单独的读数 1,284", en: "A standalone reading 1,284" } },
+  { step: "metric-lg", use: { zh: "概览里居首的读数 1,284", en: "The leading reading of an overview 1,284" } },
 ];
 
 export const SECTIONS: Section[] = [

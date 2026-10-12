@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 3543991a92bb175ae6d33351e09983ca82ef9282223fb68199844b3a037d009b
+Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98
 
 以稳定项身份呈现等高长集合的可达窗口。
 
@@ -12,6 +12,7 @@ VirtualList 不代表选择、加载或业务结果。稳定 key、等高项和�
 
 ## Notes
 - 只有等高项；动态高度、完整 DOM 搜索/打印使用普通集合或 ScrollArea。
+- 滚动只重算可见区间：行高固定，第 i 行偏移是 i × itemSize，区间由 scrollTop 直接除出；键只在 items 或 getKey 变化时重算一次，滚动期间不再遍历全部数据。
 - 聚焦行即使离屏也保留挂载；真实移除后焦点回到视口，可继续导航。aria-posinset/setsize 表达完整集合位置。
 - 示例行高 48px 是消费示例选择，视口容纳四项；修改入口是示例 rowSize 与组件 itemSize/height，未新增库 token。
 
@@ -34,14 +35,27 @@ VirtualList 不代表选择、加载或业务结果。稳定 key、等高项和�
 - VirtualList: function; owner virtual-list; PASS; props: VirtualListProps<Item>
 - VirtualListProps: type; owner virtual-list; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### VirtualList
+- `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
+- `height`: `number`.
+- `items`: `readonly Item[]`.
+- `itemSize`: `number`. Fixed outer row extent and viewport extent, in CSS px, supplied by the consumer.
+- `overscan?`: `number`. Render budget on either side of the visible window; not a visual dimension.
+- `renderItem`: `(item: Item, index: number) => React.ReactNode`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### VirtualList<Item>
 集合渲染边界，真实 list/listitem，不提供选择或业务列。
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. 真实集合、稳定唯一 key 与内容；重复 key 显式报错。不得用不稳定位置冒充项身份。

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
-Source SHA-256: e13727a9c1c89fe005b40eccaa7a01c30d57027b66a9c511e897c3e54b56a850
+Source SHA-256: a4840f5d596664b75f0955993cfe79a0e4b49c8de13c50f8a511baf32d7762fe
 
 Content, navigation and related actions.
 
@@ -16,12 +16,14 @@ Items contain no built-in business objects. A whole-item link cannot contain int
 ## Use and ownership
 - A general item needs a name, supplementary content, and related actions.
 - Avoid: Use Table for multidimensional comparison; do not create links without an actual destination.
+- Avoid: Never hide a row's primary action behind reveal="hover"; do not use it in touch-first interfaces.
 - Library: Item relationships, render forwarding, and focus.
 - Application: Item content, actual navigation targets, and action states.
 
 ## Composition
 - Item: A div that may render a li or standalone anchor.
-- ItemContent / ItemTitle / ItemDescription / ItemActions: div / div / p / div relationship slots.
+- ItemContent / ItemTitle / ItemDescription: div / div / p relationship slots.
+- ItemActions: Secondary actions on the row, always visible by default.
 - ItemLink: A real navigation link.
 
 ## Responsive behavior
@@ -45,28 +47,63 @@ Items contain no built-in business objects. A whole-item link cannot contain int
 - ItemTitle: function; owner item; PASS; props: ItemTitleProps
 - ItemTitleProps: type; owner item; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Item
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemActions
+- `resting?`: `React.ReactNode`. 平时显示的内容，例如一个时间。`reveal="hover"` 时与操作叠在同一格，格宽取两者中较宽者，显隐切换时这一行不发生位移。
+- `reveal?`: `"always" | "hover"`. `always`（默认）：操作一直可见。`hover`：操作平时淡出，行悬停、行内有焦点、行内有打开的菜单或浮层时显现； 没有悬停能力的设备上恒显示。隐藏只改不透明度，按钮始终在 Tab 顺序与可访问树里。 一行的主要动作不要藏；触摸为主的界面不要用。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemLink
+- no props declared by this library
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### ItemTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Item
 A div that may render a li or standalone anchor.
 - render / ref / children / native props: useRender.ComponentProps<div>. Events and ref reach the actual element; explicitly render li inside a list.
 
-### ItemContent / ItemTitle / ItemDescription / ItemActions
-div / div / p / div relationship slots.
-- children / render / ref / native props: useRender.ComponentProps<div | p>. The title is not automatically a document heading; compose public Button actions.
+### ItemContent / ItemTitle / ItemDescription
+div / div / p relationship slots.
+- children / render / ref / native props: useRender.ComponentProps<div | p>. The title is not automatically a document heading.
+
+### ItemActions
+Secondary actions on the row, always visible by default.
+- reveal: "always" | "hover"; default "always". hover: the actions fade out at rest and appear while the row is hovered, holds focus, or holds an open menu or popup; on devices without hover they are always shown. Only opacity changes, so the buttons stay in tab order and the accessibility tree.
+- resting: React.ReactNode. Content shown at rest, such as a time. It shares one cell with the actions, sized to the wider of the two, so the row does not shift when they swap; on devices without hover it sits beside the actions.
+- children / render / ref / native props: useRender.ComponentProps<div>. Compose public Button actions.
 
 ### ItemLink
 A real navigation link.
 - href / render / ref / native props: useRender.ComponentProps<a>. Preserve destinations, ARIA and caller events.
 
 ## Keyboard
-- Tab / Enter: Actual links and buttons use native focus order.
+- Tab / Enter: Actual links and buttons use native focus order; actions under reveal="hover" appear when focused.
 
 ## Source examples
 ### 入口与独立动作
@@ -93,6 +130,36 @@ export default function Demo() {
     <Item render={<li />}>
       <ItemContent><ItemTitle><ItemLink href="/components/table">比较表</ItemLink></ItemTitle></ItemContent>
     </Item>
+  </Stack>;
+}
+```
+
+### 悬停显现的次要动作
+Source: apps/docs/src/content/item/demos/02-reveal.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "悬停显现的次要动作", titleEn: "Secondary actions on hover" } satisfies DemoMeta;
+
+const rows = [
+  { name: "春季蚕室记录", note: "温度 24℃，湿度 72%", time: "08:30" },
+  { name: "夏季蚕室记录", note: "温度 27℃，湿度 68%", time: "昨天" },
+  { name: "秋季蚕室记录", note: "温度 22℃，湿度 75%", time: "周一" },
+  { name: "冬季蚕室记录", note: "温度 18℃，湿度 70%", time: "10 月 6 日" },
+];
+
+export default function Demo() {
+  return <Stack gap="field" render={<ul />} className="m-0 w-full max-w-lg list-none p-0">
+    {rows.map(row => <Item render={<li />} key={row.name}>
+      <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
+      <ItemActions reveal="hover" resting={<time>{row.time}</time>}>
+        <Button variant="quiet" size="sm">重命名</Button>
+        <Button variant="quiet" size="sm">归档</Button>
+      </ItemActions>
+    </Item>)}
   </Stack>;
 }
 ```

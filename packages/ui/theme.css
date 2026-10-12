@@ -4,6 +4,7 @@
  *   Layer 1  tokens/primitives.css   raw palette, no meaning
  *   Layer 2  tokens/semantic.css     roles, light + dark
  *   Layer 3  tokens/components.css   type, space, radius, size, density, motion
+ *   Preference tokens/contrast.css   prefers-contrast: more moves the ink ladder up one step
  *
  * Theme axes: html[data-brand] is project-owned; data-theme/.dark belong to
  * ThemeProvider; data-density is independently set by the project/container.
@@ -20,6 +21,7 @@
 @import "./tokens/primitives.css";
 @import "./tokens/semantic.css";
 @import "./tokens/components.css";
+@import "./tokens/contrast.css";
 
 @layer base {
   :root,
@@ -105,6 +107,10 @@
   --color-success-foreground: var(--qy-success-foreground);
   --color-warning: var(--qy-warning);
   --color-warning-foreground: var(--qy-warning-foreground);
+  --color-danger-graphic: var(--qy-danger-graphic);
+  --color-warning-graphic: var(--qy-warning-graphic);
+  --color-success-graphic: var(--qy-success-graphic);
+  --color-info-graphic: var(--qy-info-graphic);
   --color-border: var(--qy-border);
   --color-input: var(--qy-border-input);
   --color-ring: var(--qy-ring);
@@ -128,6 +134,8 @@
   --color-surface-raised: var(--qy-surface-raised);
   --color-surface-subtle: var(--qy-surface-subtle);
   --color-surface-inset: var(--qy-surface-inset);
+  --color-track-selected: var(--qy-track-selected);
+  --color-track-selected-foreground: var(--qy-track-selected-foreground);
   --color-foreground-strong: var(--qy-foreground-strong);
   --color-foreground-subtle: var(--qy-foreground-subtle);
   --color-border-strong: var(--qy-border-strong);
@@ -279,6 +287,11 @@
   --text-metric--line-height: var(--qy-text-metric-leading);
   --text-metric--letter-spacing: var(--qy-text-metric-tracking);
   --text-metric--font-weight: var(--qy-text-metric-weight);
+
+  --text-metric-lg: var(--qy-text-metric-lg-size);
+  --text-metric-lg--line-height: var(--qy-text-metric-lg-leading);
+  --text-metric-lg--letter-spacing: var(--qy-text-metric-lg-tracking);
+  --text-metric-lg--font-weight: var(--qy-text-metric-lg-weight);
 
   --text-micro: var(--qy-text-micro-size);
   --text-micro--line-height: var(--qy-text-micro-leading);

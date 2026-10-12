@@ -37,14 +37,22 @@ Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13
 - TextareaPrimitive: reexport; owner textarea; UNVERIFIED
 - TextareaProps: type; owner textarea; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Textarea
+- no props declared by this library
+- plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Textarea
 可与 Field 组合的原生 textarea。
 - rows: number; default 3. 最小起始行数；内容可自动增高，仍可手工调整高度。

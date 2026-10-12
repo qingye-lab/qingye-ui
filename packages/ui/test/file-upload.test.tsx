@@ -105,9 +105,80 @@ test.each(["readOnly", "disabled", "fieldDisabled"])("%s uses the external form 
   expect((input as HTMLInputElement).form).toBe(container.querySelector("form"));
   fireEvent.change(input, { target: { files: [file("B.txt")] } });
   fireEvent.drop(container.querySelector('[data-slot="file-upload"]')!, { dataTransfer: { files: [file("C.txt")], types: ["Files"] } });
-  fireEvent.click(screen.getByRole("button", { name: "移除 A.txt" }));
+  const remove = screen.queryByRole("button", { name: "移除 A.txt" });
+  // Read-only has nothing to remove; disabled keeps the control but it does nothing.
+  expect(remove === null).toBe(state === "readOnly");
+  if (remove) fireEvent.click(remove);
   expect(change).not.toHaveBeenCalled();
   expect(recover).not.toHaveBeenCalled();
   expect(screen.getByRole("status")).toHaveTextContent("结果未知");
   expect(bridgeData(container.querySelector("form")!).getAll("files")).toEqual(state === "readOnly" ? [a] : []);
+});
+
+/** A dropped folder is a size-0, type-less pseudo File; only `items[].webkitGetAsEntry()` can say it is a directory. */
+const dropOf = (entries: Array<{ file: File; directory?: boolean }>) => ({
+  files: entries.map(entry => entry.file),
+  types: ["Files"],
+  items: entries.map(entry => ({ kind: "file", getAsFile: () => entry.file, webkitGetAsEntry: () => ({ isDirectory: Boolean(entry.directory), isFile: !entry.directory }) })),
+});
+
+test("a dropped folder is rejected as a folder even though nothing else (no accept, size 0) would refuse it", () => {
+  const folder = file("资料", "", "");
+  const real = file("A.txt");
+  const rejected = vi.fn();
+  const change = vi.fn();
+  const { container } = render(<FileUpload onReject={rejected} onValueChange={change} inputProps={{ "aria-label": "文件" }} />);
+  fireEvent.drop(container.querySelector('[data-slot="file-upload"]')!, { dataTransfer: dropOf([{ file: folder, directory: true }, { file: real }]) });
+  expect(rejected.mock.calls[0]![0]).toEqual([{ file: folder, reason: "directory" }]);
+  expect(change.mock.calls[0]![0]).toEqual([real]);
+  expect(screen.getByRole("alert")).toHaveTextContent("资料：不支持文件夹");
+});
+
+test("validate rejects through the same channel, after type and size and before the count limit", () => {
+  const ok = file("A.txt");
+  const named = file("草稿.txt");
+  const wrongType = file("B.pdf", "B", "application/pdf");
+  const extra = file("C.txt");
+  const rejected = vi.fn();
+  const validate = vi.fn((candidate: File) => candidate.name.startsWith("草稿") ? "草稿不能上传" : undefined);
+  const { container } = render(<FileUpload accept=".txt" maxFiles={1} validate={validate} onReject={rejected} inputProps={{ "aria-label": "文件" }} />);
+  fireEvent.drop(container.querySelector('[data-slot="file-upload"]')!, { dataTransfer: { files: [wrongType, named, ok, extra], types: ["Files"] } });
+  expect(rejected.mock.calls[0]![0]).toEqual([
+    { file: wrongType, reason: "type" },
+    { file: named, reason: "custom", message: "草稿不能上传" },
+    { file: extra, reason: "count" },
+  ]);
+  expect(validate.mock.calls.some(([candidate]) => candidate === wrongType)).toBe(false);
+  expect(screen.getAllByRole("alert").map(item => item.textContent)).toEqual(["B.pdf：文件类型不支持", "草稿.txt：草稿不能上传", "C.txt：超出文件数量限制"]);
+  expect(screen.getByRole("button", { name: "移除 A.txt" })).toBeInTheDocument();
+});
+
+test("pasted files enter like dropped ones while focus is inside the component, and only then", async () => {
+  const pasted = file("截图.png", "P", "image/png");
+  const change = vi.fn();
+  render(<><FileUpload accept="image/*" onValueChange={change} inputProps={{ "aria-label": "文件" }} /><input aria-label="别处" /></>);
+  const chooser = screen.getByLabelText("文件");
+  await userEvent.tab();
+  expect(chooser).toHaveFocus();
+  fireEvent.paste(chooser, { clipboardData: { files: [pasted], types: ["Files"] } });
+  expect(change).toHaveBeenCalledOnce();
+  expect(change.mock.calls[0]![1]).toMatchObject({ reason: "paste", added: [pasted] });
+  expect(screen.getByRole("button", { name: "移除 截图.png" })).toBeInTheDocument();
+  fireEvent.paste(screen.getByLabelText("别处"), { clipboardData: { files: [file("外面.png", "X", "image/png")], types: ["Files"] } });
+  expect(change).toHaveBeenCalledOnce();
+});
+
+test("pasted files follow the same rules; pasted text, a text control inside, and read-only are left alone", () => {
+  const rejected = vi.fn();
+  const { container, rerender } = render(<FileUpload accept=".txt" validate={() => "不行"} onReject={rejected} inputProps={{ "aria-label": "文件" }} renderFileActions={() => <textarea aria-label="备注" />} defaultValue={[file("A.txt")]} />);
+  const chooser = screen.getByLabelText("文件");
+  fireEvent.paste(chooser, { clipboardData: { files: [file("B.txt")], types: ["Files"] } });
+  expect(rejected.mock.calls[0]![0]).toEqual([{ file: expect.any(File), reason: "custom", message: "不行" }]);
+  fireEvent.paste(chooser, { clipboardData: { files: [], types: ["text/plain"], getData: () => "文字" } });
+  expect(rejected).toHaveBeenCalledOnce();
+  fireEvent.paste(screen.getByLabelText("备注"), { clipboardData: { files: [file("C.txt")], types: ["Files"] } });
+  expect(rejected).toHaveBeenCalledOnce();
+  rerender(<FileUpload readOnly onReject={rejected} inputProps={{ "aria-label": "文件" }} />);
+  fireEvent.paste(container.querySelector("input[type=file]")!, { clipboardData: { files: [file("D.txt")], types: ["Files"] } });
+  expect(rejected).toHaveBeenCalledOnce();
 });

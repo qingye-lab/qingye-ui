@@ -38,14 +38,35 @@ Use a reachable link by default. Supplemental content cannot carry the only cons
 - HoverCardPrimitive: reexport; owner hover-card; UNVERIFIED
 - HoverCardTrigger: function; owner hover-card; PASS; props: HoverCardPrimitive.Trigger.Props<Payload>
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### HoverCard
+- no props declared by this library
+- plus 9 inherited (@base-ui/react 9); not expanded, see the installed declarations
+
+### HoverCardCreateHandle
+- takes no props
+
+### HoverCardPopup
+- `portalProps?`: `HoverCardPrimitive.Portal.Props`.
+- `positionerProps?`: `HoverCardPrimitive.Positioner.Props`.
+- plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
+
+### HoverCardTrigger
+- no props declared by this library
+- plus 290 inherited (@types/react 283, @base-ui/react 7); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### HoverCard
 Public Base UI PreviewCard Root, retaining open/defaultOpen/onOpenChange, payload, handle, and closeDelay.
 

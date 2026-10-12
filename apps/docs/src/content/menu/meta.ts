@@ -74,10 +74,10 @@ export default {
           "default": "md"
         },
         {
-          "name": "checked / value / onCheckedChange / onValueChange",
+          "name": "checked / value / onCheckedChange",
           "type": "Base UI choice props",
-          "description": "选择由调用方事实与原语取消协议确认。",
-          "descriptionEn": "Choices follow caller facts and primitive cancellation."
+          "description": "勾选项读 checked，单选项读 value；选择由调用方事实与原语取消协议确认。",
+          "descriptionEn": "Checkbox items read checked, radio items read value; choices follow caller facts and primitive cancellation."
         },
         {
           "name": "render / ref / native props",
@@ -92,6 +92,12 @@ export default {
       "description": "组语义与底层公开原语。",
       "descriptionEn": "Group semantics and the public primitive namespace.",
       "props": [
+        {
+          "name": "value / defaultValue / onValueChange",
+          "type": "Base UI MenuRadioGroup props",
+          "description": "单选组的当前值在 MenuRadioGroup 上。",
+          "descriptionEn": "The radio group's current value lives on MenuRadioGroup."
+        },
         {
           "name": "render / ref / native props",
           "type": "Base UI part props",

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
-Source SHA-256: fab084ee0f1c2dddefd45b37d32227712e78a4ad970aeb03921a46ce2e469153
+Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
 
 管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。
 
@@ -12,6 +12,7 @@ ThemeProvider 把 data-theme 留给 light 和 dark；项目的品牌标记写在
 
 ## Notes
 - 防止首屏闪烁：React 挂载前页面已经绘制，需要在 <head> 里、样式表之前放一段内联脚本先应用主题。单页应用把 themeScript() 的输出粘贴进 index.html 的 <script>；服务端渲染用 <script dangerouslySetInnerHTML={{ __html: themeScript() }} />。脚本参数必须与 ThemeProvider 一致。
+- 严格 CSP：把请求的 nonce 同时传给 <ThemeProvider nonce={nonce}> 与首屏 <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />；themeScript() 只返回脚本正文。没有 nonce 时切换用的临时样式被浏览器丢弃，各表面渐变而不是同时变色。
 - 主题选择的文案用语言包中的 theme、lightTheme、darkTheme、systemTheme。
 - 选择“跟随系统”后，操作系统切换深浅色时页面立即跟随，无需刷新。
 - 只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。
@@ -42,22 +43,45 @@ ThemeProvider 把 data-theme 留给 light 和 dark；项目的品牌标记写在
 - ThemeScriptOptions: type; owner theme-provider; PASS
 - useTheme: function; owner theme-provider; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ThemeProvider
+- `attribute?`: `"class" | "data-theme"`. How the theme is written to `<html>`: a `.dark` class or `data-theme`.
+- `children`: `React.ReactNode`.
+- `defaultTheme?`: `"light" | "dark" | "system"`. Used when nothing is stored yet.
+- `disableTransitionOnChange?`: `boolean`. Suppress CSS transitions for one frame while the theme flips, so every surface changes together instead of fading at different speeds.
+- `nonce?`: `string`. CSP nonce for the one `<style>` this provider injects while the theme flips. Needed when `style-src` has no `'unsafe-inline'`; without it the browser drops that style and surfaces fade instead of changing together. The first-paint `<script>` is rendered by you: give that tag the same nonce.
+- `storageKey?`: `string | null`. localStorage key. Set to `null` to skip persistence.
+
+### themeScript
+- `attribute?`: `"class" | "data-theme"`. How the theme is written to `<html>`: a `.dark` class or `data-theme`.
+- `defaultTheme?`: `"light" | "dark" | "system"`. Used when nothing is stored yet.
+- `storageKey?`: `string | null`. localStorage key. Set to `null` to skip persistence.
+
+### useTheme
+- takes no props
 
 ## Dependencies and providers
 - Runtime: react
 - Optional peers: none recorded
 - 防止首屏闪烁：React 挂载前页面已经绘制，需要在 <head> 里、样式表之前放一段内联脚本先应用主题。单页应用把 themeScript() 的输出粘贴进 index.html 的 <script>；服务端渲染用 <script dangerouslySetInnerHTML={{ __html: themeScript() }} />。脚本参数必须与 ThemeProvider 一致。
+- 严格 CSP：把请求的 nonce 同时传给 <ThemeProvider nonce={nonce}> 与首屏 <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript() }} />；themeScript() 只返回脚本正文。没有 nonce 时切换用的临时样式被浏览器丢弃，各表面渐变而不是同时变色。
 - 只在根部挂载一个 ThemeProvider；局部强制深色可在容器上加 .dark 类。
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: ThemeProvider
+- Locale: does not read UILocale
+- Context ThemeContext: without a provider throws; provided by ThemeProvider
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ThemeProvider
 主题上下文。在 <html> 上切换 .dark / .light 类（或 data-theme 属性），并同步 color-scheme。
 - defaultTheme: "light" | "dark" | "system"; default "system". 没有保存过选择时使用。
 - storageKey: string | null; default "yq-theme". 保存到 localStorage 的键；传 null 不保存。其他标签页修改后会自动同步。
 - attribute: "class" | "data-theme"; default "class". 写入方式：.dark 类，或 data-theme="dark"。两者样式都已支持。
 - disableTransitionOnChange: boolean; default true. 切换瞬间暂停过渡，所有表面同时变色，而不是以不同速度渐变。
+- nonce: string. 严格 CSP（style-src 无 'unsafe-inline'）下，给切换时临时注入的 <style> 带上这个 nonce。首屏 <script> 由你自己渲染，同样要带 nonce。
 
 ### useTheme
 返回 { theme, resolvedTheme, setTheme }。theme 是用户的选择（可能为 system），resolvedTheme 是实际生效的 light 或 dark。必须在 ThemeProvider 内使用。

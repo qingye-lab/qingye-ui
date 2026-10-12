@@ -46,6 +46,7 @@ export const TEXT_STEPS = [
   "caption-strong",
   "label",
   "metric",
+  "metric-lg",
   "micro",
   // Control geometry is independent of content hierarchy (§8 control table).
   "control-xs",

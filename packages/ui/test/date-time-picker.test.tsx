@@ -37,3 +37,36 @@ test("controlled rejection/readonly preserve local wall-clock text, invalid zone
   expect(screen.getByLabelText("When")).toHaveValue("2026-10-03T12:30");
   expect(() => render(<DateTimePicker value="2026-10-03T12:30Z" onValueChange={change} />)).toThrow("without a zone");
 });
+
+test("defaultValue makes it uncontrolled; an over-long year is not handed to the caller and does not throw", () => {
+  const { container } = render(<form><DateTimePicker name="when" defaultValue="2026-10-03T12:30" inputProps={{ "aria-label": "When" }} /></form>);
+  const input = screen.getByLabelText("When") as HTMLInputElement;
+  fireEvent.change(input, { target: { value: "2026-10-04T08:00" } });
+  expect(new FormData(container.querySelector("form")!).get("when")).toBe("2026-10-04T08:00");
+  Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: true }) });
+  fireEvent.change(input, { target: { value: "" } });
+  fireEvent.blur(input);
+  expect(new FormData(container.querySelector("form")!).get("when")).toBe("2026-10-04T08:00");
+});
+
+test("a five-digit year the platform accepts as text is held as typing, never handed to the caller", () => {
+  const change = vi.fn();
+  render(<DateTimePicker value="2026-10-03T12:30" onValueChange={change} inputProps={{ "aria-label": "When" }} />);
+  const input = screen.getByLabelText("When") as HTMLInputElement;
+  expect(() => fireEvent.change(input, { target: { value: "20261-10-03T12:30" } })).not.toThrow();
+  expect(input.value).toBe("20261-10-03T12:30");
+  expect(change).not.toHaveBeenCalled();
+});
+
+test("min and max bound the native input and the calendar, and a draft outside them cannot be applied", async () => {
+  render(<UILocaleProvider locale={enUS}><DateTimePicker min="2026-10-05T09:00" max="2026-10-20T18:00" inputProps={{ "aria-label": "When" }} calendarProps={{ defaultMonth: new Date(2026, 9) }} /></UILocaleProvider>);
+  expect(screen.getByLabelText("When")).toHaveAttribute("min", "2026-10-05T09:00");
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  expect(await screen.findByRole("button", { name: /October 4, 2026/ })).toBeDisabled();
+  await userEvent.click(screen.getByRole("button", { name: /October 5, 2026/ }));
+  fireEvent.change(screen.getByLabelText("Time"), { target: { value: "08:00" } });
+  expect(screen.getByLabelText("Time")).toHaveAttribute("min", "09:00");
+  expect(screen.getByRole("button", { name: "Apply" })).toBeDisabled();
+  fireEvent.change(screen.getByLabelText("Time"), { target: { value: "09:30" } });
+  expect(screen.getByRole("button", { name: "Apply" })).toBeEnabled();
+});

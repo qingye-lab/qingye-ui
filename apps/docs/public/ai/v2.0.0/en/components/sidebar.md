@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 6234a924255160dee235e14ba93a1ec4c506d04b83ecc9cd498ac315e2114f55
+Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -14,6 +14,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.
 - The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.
 - The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash.
+- In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.
 
 ## Use and ownership
 - Persistent navigation beside a workspace.
@@ -54,14 +55,67 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Sidebar
+- `collapsed?`: `boolean`.
+- `defaultCollapsed?`: `boolean`.
+- `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarLink
+- `active?`: `boolean`.
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarSub
+- `children`: `React.ReactNode`.
+- plus 281 inherited (@types/react 274, @base-ui/react 7); not expanded, see the installed declarations
+
+### SidebarSubContent
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### SidebarSubTrigger
+- `icon?`: `React.ReactNode`.
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### SidebarToggle
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context SidebarContext: without a provider throws; provided by Sidebar, SidebarSubContent
+- Context SidebarSubLabelContext: without a provider nullable; provided by SidebarSub
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Sidebar / SidebarToggle
 An aside and reversible toggle.
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. Expanded by default; details.cancel() rejects a change.

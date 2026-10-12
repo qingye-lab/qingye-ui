@@ -8,7 +8,7 @@ Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 请求切换应用语言，并显示 Provider 当前事实。
 
 ## Notes
-- 不修改 document.lang、系统语言、存储或路由；这些属于应用。
+- 不修改 document.lang、<html dir>、系统语言、存储或路由；这些属于应用。切换后 Provider 按新 locale 的代码重新推出 dir，应用须让 <html dir> 与它一致。
 - 内置名 language 走 UI locale；选项可见名称由消费项目给出。
 
 ## Use and ownership
@@ -31,14 +31,25 @@ Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
 - LocaleSwitchOption: type; owner locale-switch; PASS
 - LocaleSwitchProps: type; owner locale-switch; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### LocaleSwitch
+- `onChange?`: `NativeSelectProps["onChange"]`.
+- `onLocaleChange`: `(locale: UILocale, event: React.ChangeEvent<HTMLSelectElement>) => void`.
+- `options`: `readonly LocaleSwitchOption[]`.
+- plus 283 inherited (@types/react 282, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- 不修改 document.lang、<html dir>、系统语言、存储或路由；这些属于应用。切换后 Provider 按新 locale 的代码重新推出 dir，应用须让 <html dir> 与它一致。
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### LocaleSwitch
 复用 NativeSelect；UILocaleProvider 是唯一当前值来源。
 - options: readonly { locale: UILocale; label: string; disabled?: boolean }[]. 消费项目提供可选语言与名称，code 必须非空且唯一。当前 code 未列入时显示其禁用事实选项。

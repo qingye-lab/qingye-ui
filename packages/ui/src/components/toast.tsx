@@ -104,6 +104,8 @@ function NoticeBody({ notice, manager, anchored = false }: {
   );
 }
 
+// 上限用动态视口单位（dvh/dvw，Baseline 2025-06）：移动浏览器的地址栏伸缩时，vh 取最大视口，通知区会比眼前可见的区域更高；
+// dvh 随地址栏变化，dvw 与 vw 在块轴伸缩的情形下同值，仅为与高度成对。固定定位的视口层可用百分比，但 anchored 的 Positioner 不一定固定于视口，所以统一用视口单位。
 // Complete messages in a normal flow; no collapsed stack or second motion policy.
 const positions: Record<ToastPosition, string> = {
   "top-left": "top-(--qy-space-6) left-(--qy-space-6)",
@@ -127,7 +129,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
         aria-live="off"
         style={layer}
         className={anchored ? "outline-none" : cn(
-          "pointer-events-none fixed flex w-max max-w-[calc(100vw-var(--qy-space-6)*2)] max-h-[calc(100vh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
+          "pointer-events-none fixed flex w-max max-w-[calc(100dvw-var(--qy-space-6)*2)] max-h-[calc(100dvh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
           positions[position],
         )}
       >
@@ -136,7 +138,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
             key={notice.id}
             toast={notice}
             data-slot="toast-positioner"
-            className="w-max max-w-[calc(100vw-var(--qy-space-6)*2)]"
+            className="w-max max-w-[calc(100dvw-var(--qy-space-6)*2)]"
             {...notice.positionerProps}
             style={state => ({ ...layer, ...(typeof notice.positionerProps?.style === "function" ? notice.positionerProps.style(state) : notice.positionerProps?.style) })}
           >

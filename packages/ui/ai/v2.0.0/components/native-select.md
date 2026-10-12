@@ -33,14 +33,22 @@ Source SHA-256: b96a77f4cb67f667c5d1510c085a96c06681bfb2fd12a7cb509910f1a417ea04
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
 - NativeSelectProps: type; owner native-select; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### NativeSelect
+- no props declared by this library
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### NativeSelect
 真实 select，children 使用原生 option / optgroup。
 - size / multiple / disabled / required / name: native select props. 原生显示行数、多值、禁用、约束与表单名。
@@ -54,25 +62,25 @@ Signatures may reference inherited types. Consult installed declarations; props 
 ### 密度
 Source: apps/docs/src/content/native-select/demos/01-density.tsx
 ```tsx
-import { useId } from "react";
-import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldControl, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 
 export const meta = { title: "密度", titleEn: "Density" };
 
 // 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。
 export default function Demo() {
-  const id = useId();
   return (
     <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>
             <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
-            <NativeSelect id={`${id}-${density}`} defaultValue="one">
-              <option value="one">按名称排序</option>
-              <option value="two">按时间排序</option>
-            </NativeSelect>
+            <FieldControl defaultValue="one" render={
+              <NativeSelect>
+                <option value="one">按名称排序</option>
+                <option value="two">按时间排序</option>
+              </NativeSelect>
+            } />
           </Field>
         </div>
       ))}

@@ -38,14 +38,26 @@ CheckboxGroup 持有集合值。allValues 是父项操作的范围，改变它�
 - CheckboxGroupPrimitive: reexport; owner checkbox-group; UNVERIFIED
 - CheckboxGroupProps: type; owner checkbox-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### CheckboxGroup
+- no props declared by this library
+- plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
+
+### CheckboxGroupPrimitive
+- no props declared by this library
+- plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### CheckboxGroup
 集合状态，不只是排列复选项。
 - value / defaultValue: string[]. 受控集合或初始集合；空数组表示未选任何项。Checkbox.value 标识集合项。

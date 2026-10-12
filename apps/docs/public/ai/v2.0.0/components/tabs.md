@@ -41,14 +41,34 @@ Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
 - TabsTab: function; owner tabs; PASS; props: TabsTabProps
 - TabsTabProps: type; owner tabs; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Tabs
+- no props declared by this library
+- plus 282 inherited (@types/react 275, @base-ui/react 7); not expanded, see the installed declarations
+
+### TabsList
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### TabsPanel
+- `keepMounted?`: `"visited" | boolean`. "visited"（默认）：第一次到达时才挂载，之后保留；true：一开始就全部挂载；false：离开即卸载。
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### TabsTab
+- no props declared by this library
+- plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Tabs / TabsList
 当前视角与手动激活列表。
 - value / defaultValue / onValueChange / orientation: Base UI Root props. 值由应用或原语持有；取消不切换。

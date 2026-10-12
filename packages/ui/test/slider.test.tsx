@@ -3,7 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderLabel, SliderValue } from "../src/components/slider";
-import { Field, FieldDescription, FieldError } from "../src/components/field";
+import { Field, FieldDescription, FieldError, FieldItem, FieldLabel } from "../src/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput } from "../src/components/number-field";
 
 const single = <><SliderLabel>数值</SliderLabel><SliderValue /><SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl></>;
 const range = <><SliderLabel>区间</SliderLabel><SliderControl><SliderTrack><SliderIndicator /><SliderThumb index={0} aria-label="下限" /><SliderThumb index={1} aria-label="上限" /></SliderTrack></SliderControl></>;
@@ -86,4 +87,12 @@ test("root and thumb render/ref/ARIA/events/styles preserve composition", async 
   const input = await screen.findByRole("slider"); expect(ref.current).toHaveAttribute("data-rendered", "yes"); expect(ref.current).toHaveClass("caller-enabled", "text-control-md-mobile", "sm:text-control-md");
   expect(thumbRef.current).toHaveAttribute("data-slot", "slider-thumb"); expect(thumbRef.current).toHaveAttribute("data-thumb-rendered", "yes"); expect(inputRef.current).toBe(input); expect(input).toHaveAttribute("aria-describedby", "details"); expect(input).toHaveAttribute("aria-valuetext", "当前数值");
   await userEvent.tab(); await userEvent.keyboard("{ArrowRight}"); expect(key).toHaveBeenCalled();
+});
+
+test("a NumberField for exact entry beside a Slider takes its own scope, so the Field label names the Slider only", async () => {
+  const { container } = render(<Field><FieldLabel>阈值</FieldLabel><Slider defaultValue={20}><SliderControl><SliderTrack><SliderThumb /></SliderTrack></SliderControl></Slider><FieldItem><NumberField defaultValue={20}><NumberFieldGroup><NumberFieldInput aria-label="精确输入" /></NumberFieldGroup></NumberField></FieldItem></Field>);
+  const ids = [...container.querySelectorAll("[id]")].map(node => node.id);
+  expect(new Set(ids).size).toBe(ids.length);
+  expect(await screen.findByRole("slider", { name: "阈值" })).toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: "精确输入" })).toBeInTheDocument();
 });

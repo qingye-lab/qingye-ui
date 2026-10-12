@@ -42,14 +42,34 @@ Source SHA-256: 9620517d67de460eb5986d9eb8a445c6f41a7b4bad8d7316f6c38ab874df9495
 - StepTitle: function; owner steps; PASS; props: StepTitleProps
 - StepTitleProps: type; owner steps; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Step
+- `state`: `"error" | "upcoming" | "current" | "complete"`.
+- plus 282 inherited (@types/react 281, @base-ui/react 1); not expanded, see the installed declarations
+
+### StepDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Steps
+- no props declared by this library
+- plus 284 inherited (@types/react 283, @base-ui/react 1); not expanded, see the installed declarations
+
+### StepTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Steps
 有名称的 ol。
 - aria-label / render / ref / native props: useRender.ComponentProps<ol>. 默认名称来自 locale。

@@ -50,7 +50,7 @@ export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange
 export type SidebarToggleProps = ButtonProps;
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
-  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" />)}</Button></div>;
+  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
 }
 export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
@@ -134,7 +134,7 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   // collapsed 切换成「有 Tooltip / 没有 Tooltip」两种不同的元素树，React 会在收起的瞬间
   // 把这个链接当成新节点重新挂载，焦点随之丢失——这正是「随境取度」要避免的布局跳动。
   // 收起时名称只在这里出现，它不是辅助说明，而是被收起的名字本身：立即出现，与二级导航的浮层同样不等待。
-  return <Tooltip><TooltipTrigger disabled={!context.collapsed} delay={0} closeDelay={0} render={element} /><TooltipPopup side="right">{children}</TooltipPopup></Tooltip>;
+  return <Tooltip><TooltipTrigger disabled={!context.collapsed} delay={0} closeDelay={0} render={element} /><TooltipPopup side="inline-end">{children}</TooltipPopup></Tooltip>;
 }
 
 const SidebarSubLabelContext = React.createContext<React.ReactNode>(null);
@@ -174,7 +174,8 @@ export function SidebarSubTrigger({ icon, className, children, ...props }: Sideb
     className,
   );
   const label = <span data-slot="sidebar-sub-trigger-label" className={cn("min-w-0 flex-1 text-start wrap-anywhere", context.collapsed && "sr-only")}>{children}</span>;
-  if (context.collapsed) return <PopoverTrigger data-slot="sidebar-sub-trigger" openOnHover delay={0} closeDelay={0} render={<button type="button" />} className={frame}>{icon}{label}</PopoverTrigger>;
+  // rail 态与展开态一样把调用方的属性（aria-*、data-*、事件、render）交给触发元素；入口行为与外观由本组件定。
+  if (context.collapsed) return <PopoverTrigger data-slot="sidebar-sub-trigger" render={<button type="button" />} {...props as React.ComponentProps<typeof PopoverTrigger>} openOnHover delay={0} closeDelay={0} className={frame}>{icon}{label}</PopoverTrigger>;
   return <CollapsiblePrimitive.Trigger data-slot="sidebar-sub-trigger" {...props} className={frame}>{icon}{label}<DisclosureIcon /></CollapsiblePrimitive.Trigger>;
 }
 export type SidebarSubContentProps = CollapsiblePrimitive.Panel.Props;
@@ -206,7 +207,7 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
     </div>
     {context.collapsed && (
       <PopoverPopup
-        side="right" align="start" sideOffset={4}
+        side="inline-end" align="start" sideOffset={4}
         viewportProps={{ className: "grid min-w-0 gap-0.5 p-(--qy-overlay-inset)" }}
         // 浮层的承载面是 surface-raised（纸色）：纸色的当前项在这里与底同色，换成淡染（基础层 §6、§10）。
         className="min-w-[calc(8*var(--qy-cai))] [--qy-sidebar-current:var(--qy-surface-active)]"

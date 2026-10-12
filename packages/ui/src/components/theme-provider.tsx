@@ -29,6 +29,14 @@ export type ThemeProviderProps = {
    * surface changes together instead of fading at different speeds.
    */
   disableTransitionOnChange?: boolean;
+  /**
+   * CSP nonce for the one `<style>` this provider injects while the theme
+   * flips. Needed when `style-src` has no `'unsafe-inline'`; without it the
+   * browser drops that style and surfaces fade instead of changing together.
+   * The first-paint `<script>` is rendered by you: give that tag the same
+   * nonce.
+   */
+  nonce?: string;
 };
 
 const DARK_QUERY = "(prefers-color-scheme: dark)";
@@ -48,12 +56,18 @@ function readStored(key: string | null): Theme | null {
   }
 }
 
-function apply(resolved: ResolvedTheme, attribute: "class" | "data-theme", quiet: boolean) {
+function apply(
+  resolved: ResolvedTheme,
+  attribute: "class" | "data-theme",
+  quiet: boolean,
+  nonce: string | undefined,
+) {
   const root = document.documentElement;
   let style: HTMLStyleElement | undefined;
   let frame: number | undefined;
   if (quiet) {
     style = document.createElement("style");
+    if (nonce) style.setAttribute("nonce", nonce);
     style.textContent = "*,*::before,*::after{transition:none!important}";
     document.head.appendChild(style);
   }
@@ -86,6 +100,7 @@ export function ThemeProvider({
   storageKey = "yq-theme",
   attribute = "class",
   disableTransitionOnChange = true,
+  nonce,
 }: ThemeProviderProps): React.ReactElement {
   // Server and hydration start from the same choice; effects resolve client
   // storage/system facts without overwriting the first-paint script meanwhile.
@@ -94,6 +109,9 @@ export function ThemeProvider({
   const [ready, setReady] = React.useState(false);
   const resolvedTheme: ResolvedTheme = theme === "system" ? system : theme;
   const firstRun = React.useRef(true);
+  // Read at flip time; a changed nonce must not replay the theme write.
+  const nonceRef = React.useRef(nonce);
+  nonceRef.current = nonce;
 
   React.useEffect(() => {
     setThemeState(readStored(storageKey) ?? defaultTheme);
@@ -120,7 +138,12 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     if (!ready) return;
-    const cleanup = apply(resolvedTheme, attribute, disableTransitionOnChange && !firstRun.current);
+    const cleanup = apply(
+      resolvedTheme,
+      attribute,
+      disableTransitionOnChange && !firstRun.current,
+      nonceRef.current,
+    );
     firstRun.current = false;
     return cleanup;
   }, [ready, resolvedTheme, attribute, disableTransitionOnChange]);
@@ -156,7 +179,8 @@ export type ThemeScriptOptions = Pick<
  * paint. Put it in `<head>`, ahead of any stylesheet, with the same options
  * as the provider: paste the string into `index.html`, or render
  * `<script dangerouslySetInnerHTML={{ __html: themeScript() }} />` from a
- * server-rendered layout.
+ * server-rendered layout. Under a strict CSP the `<script>` tag itself needs
+ * the request's `nonce`; this function only returns its body.
  */
 export function themeScript({
   defaultTheme = "system",

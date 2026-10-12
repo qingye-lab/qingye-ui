@@ -36,14 +36,22 @@ Use headings and spacing when content has no independent identity, ordering or a
 - Card: function; owner card; PASS; props: CardProps
 - CardProps: type; owner card; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Card
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Card
 Panel surface, boundary and radius. It supplies no title, content slots, padding or layout.
 - render: ReactElement | (props, state) => ReactElement. Compose an article, section or native link while retaining handlers and refs.

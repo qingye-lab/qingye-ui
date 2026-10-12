@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Autocomplete, AutocompleteClear, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup } from "../src/components/autocomplete";
+import { Autocomplete, AutocompleteClear, AutocompleteCollection, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["青叶", "青山", "白云"];
@@ -48,4 +48,13 @@ test.each(["readOnly", "disabled"])("%s preserves free text and correct native s
   fireEvent.change(screen.getByRole("combobox"), { target: { value: "青叶" } });
   expect(change).not.toHaveBeenCalled();
   expect(new FormData(container.querySelector("form")!).getAll("text")).toEqual(state === "readOnly" ? ["自由文本"] : []);
+});
+
+test("grouped suggestions are named groups; Status speaks through a polite region", async () => {
+  const groups = [{ value: "页面", items: ["概览", "设备"] }, { value: "操作", items: ["新建设备"] }];
+  render(<Autocomplete items={groups} open><AutocompleteInput aria-label="命令" /><AutocompletePopup><AutocompleteStatus count={3} /><AutocompleteList>{(group: (typeof groups)[number]) => <AutocompleteGroup key={group.value} items={group.items}><AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel><AutocompleteCollection>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteCollection></AutocompleteGroup>}</AutocompleteList></AutocompletePopup></Autocomplete>);
+  expect(await screen.findByRole("group", { name: "页面" })).toContainElement(screen.getByRole("option", { name: "设备" }));
+  expect(screen.getByRole("group", { name: "操作" })).toContainElement(screen.getByRole("option", { name: "新建设备" }));
+  const status = await screen.findByText(/找到 3 项/);
+  expect(status).toHaveAttribute("aria-live", "polite");
 });

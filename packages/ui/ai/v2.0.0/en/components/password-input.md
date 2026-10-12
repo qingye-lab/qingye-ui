@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: 10b14447ae950e093dc1382c2cb053cabfe4241a0f479fd02923f3da393bb7b5
+Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
 
 Enter a password and switch to plain text to check it.
 
@@ -11,6 +11,7 @@ Enter a password and switch to plain text to check it.
 PasswordInput is a composition, not a mode of Input: the input and a show-password toggle sit inside one editing boundary (InputGroup), both public parts. The input only holds the value; the toggle is a separate action on the boundary with the stable name “Show password”, its state expressed by aria-pressed. The toggle changes no content and submits no form; strength, rules and validation come from the application.
 
 ## Notes
+- Never block pasting or password-manager autofill (WCAG 3.3.8, Accessible Authentication): the component has no paste, drop or autofill-disabling handling, and callers should not add one through onPaste preventDefault, autoComplete="off", or by splitting the input into several fields.
 - Replace Input type="password" with PasswordInput; Input's visibilityToggle / visible / defaultVisible / onVisibleChange / showLabel are removed.
 
 ## Use and ownership
@@ -33,14 +34,28 @@ PasswordInput is a composition, not a mode of Input: the input and a show-passwo
 - PasswordInput: function; owner password-input; PASS; props: PasswordInputProps
 - PasswordInputProps: type; owner password-input; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### PasswordInput
+- `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `defaultVisible?`: `boolean`.
+- `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
+- `onVisibleChange?`: `(visible: boolean) => void`.
+- `showLabel?`: `string`. 开关的稳定名称，默认从 locale 读取；aria-pressed 表达密码当前是否可见。
+- `size?`: `number | undefined`. 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。
+- `visible?`: `boolean`. 密码当前是否以明文显示；与 defaultVisible 分别支持受控与非受控。
+- plus 308 inherited (@types/react 302, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### PasswordInput
 InputGroup + Input (type=password) + a show-password toggle.
 - visible / defaultVisible / onVisibleChange: boolean / boolean / (visible) => void; default defaultVisible: false. Whether the password is shown as plain text; controlled or uncontrolled.
@@ -49,7 +64,7 @@ InputGroup + Input (type=password) + a show-password toggle.
 - disabled: boolean; default false. The toggle is disabled with the input, also following Field and a native fieldset.
 - className / style / render / ref: InputProps. Applied to the real input.
 - controlClassName: string. Applied to the editing boundary, e.g. its width.
-- Other InputProps (except type / unstyled): InputProps. autoComplete, name, form, aria-* and the rest are forwarded; auto-capitalisation, auto-correction and spell checking are off by default.
+- Other InputProps (except type / unstyled): InputProps. autoComplete, name, form, aria-* and the rest are forwarded; auto-capitalisation, auto-correction and spell checking are off by default. Set autoComplete to current-password (sign in) or new-password (set); when missing, development logs a console warning and production stays silent.
 
 ## Keyboard
 - Tab / Shift+Tab: Move between the input and the toggle; a disabled toggle leaves the tab order.
@@ -102,7 +117,7 @@ export const meta = { title: "状态", titleEn: "States" };
 export default function Demo() {
   return (
     <Stack gap="fields" className="w-full max-w-sm">
-      <Field disabled><FieldLabel>禁用</FieldLabel><PasswordInput defaultValue="qingye-2026" /></Field>
+      <Field disabled><FieldLabel>禁用</FieldLabel><PasswordInput autoComplete="current-password" defaultValue="qingye-2026" /></Field>
       <Field invalid><FieldLabel>当前密码</FieldLabel><PasswordInput autoComplete="current-password" defaultValue="qingye" /><FieldError>密码不正确</FieldError></Field>
     </Stack>
   );

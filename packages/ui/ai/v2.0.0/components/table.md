@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff
+Source SHA-256: 1a093806a890aa00d4673b1ffc8e9d1fc8d16088c1a29e4a2c632525b5a23fe7
 
 原生二维关系与完整比较列。
 
@@ -13,6 +13,7 @@ Source SHA-256: f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff
 ## Notes
 - 空结果可在完整表头下提供跨列单元格；数据与排序由应用提供。
 - 一个范围只铺一张纸：表格进 Card 时用 framed={false}，不要在卡片里再套一层边框。
+- 可滚动由 ResizeObserver 实测决定；服务端与首帧按「不可滚动」输出（服务端没有布局可测，猜可滚动会让多数放得下的表带一个假停靠点），客户端在首次绘制前即更新。
 
 ## Use and ownership
 - 多个对象需要按共同维度比较。
@@ -53,18 +54,58 @@ Source SHA-256: f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff
 - TableRow: function; owner table; PASS; props: TableRowProps
 - TableRowProps: type; owner table; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Table
+- no props declared by this library
+- plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableBody
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableCaption
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableCell
+- no props declared by this library
+- plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableContainer
+- `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableHead
+- no props declared by this library
+- plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableRow
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### TableContainer
 表格的纸与横向滚动容器。
 - framed: boolean; default true. false：表格放在已有的一张纸上（Card、面板），不再铺线、底与圆角；贴着承载面的边放置，由承载面裁切圆角。
-- tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default tabIndex=0. ref 属于容器；允许键盘滚动。
+- tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default 按实测滚动与否. 内容真的超出（横向或纵向）时才可聚焦（tabIndex=0），用于键盘滚动，并成为具名区域：取 aria-label / aria-labelledby，否则沿用表的 caption 或 aria-label；放得下时不进 Tab 序列。ref 属于容器；显式传入的 tabIndex 优先。
 
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
 table / caption / thead / tbody / tfoot / tr。

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 import { Accordion, AccordionHeader, AccordionItem, AccordionPanel, AccordionTrigger } from "../src/components/accordion";
@@ -34,4 +34,13 @@ test("keyboard disclosure, disabled items and canceled requests preserve actual 
   await user.click(screen.getByRole("button", { name: "第一段" }));
   expect(change).toHaveBeenCalledOnce();
   expect(screen.getByRole("button", { name: "第一段" })).toHaveAttribute("aria-expanded", "true");
+});
+test("hiddenUntilFound keeps closed panels in the document as until-found, and opens one when the browser finds text in it", async () => {
+  render(<Accordion hiddenUntilFound>{item("第一段")}{item("第二段")}</Accordion>);
+  const panels = document.querySelectorAll("[data-slot=accordion-panel]");
+  expect([...panels].map(panel => panel.getAttribute("hidden"))).toEqual(["until-found", "until-found"]);
+  panels[1]!.dispatchEvent(new Event("beforematch", { bubbles: true }));
+  await waitFor(() => expect(screen.getByRole("button", { name: "第二段" })).toHaveAttribute("aria-expanded", "true"));
+  expect(panels[1]).not.toHaveAttribute("hidden");
+  expect(screen.getByRole("button", { name: "第一段" })).toHaveAttribute("aria-expanded", "false");
 });

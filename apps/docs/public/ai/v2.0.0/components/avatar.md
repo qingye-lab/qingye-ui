@@ -33,14 +33,31 @@ Source SHA-256: 62091f6ab8f49a63451d9d99467147b81e5ca7d169c0492174c5c2aceb24ded7
 - AvatarProps: type; owner avatar; PASS
 - AvatarSize: type; owner avatar; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Avatar
+- `label`: `string`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### AvatarFallback
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### AvatarImage
+- no props declared by this library
+- plus 292 inherited (@types/react 287, @base-ui/react 5); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Avatar
 Image / Fallback 使用 Base UI 加载事实；label 命名同一对象。
 - label: string. 必填非空身份名称，图片和回退共用。

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 9f9eb4f052d7aa7179e2ef48069533993ff88efba27d291f79d3a9e1bc362879
+Source SHA-256: 14031b4212f01c1e0305c190d61ce1f16d5f6a0046313f5b524c13328d82c5bd
 
 A trigger-bound non-modal popup for local actions and supplementary information.
 
@@ -15,6 +15,7 @@ Closing hides the popup; it does not complete submission or undo. The applicatio
 - Outside clicks retain focus on the clicked control; keyboard dismissal returns to the trigger.
 - The default body portal cannot inherit the trigger's local DOM context. Mount container before opening.
 - Base UI owns open state, focus and positioning; motion.css owns entry and exit motion.
+- When the trigger renders an existing bounded control such as render={<Button />}, that control owns focus and border; PopoverTrigger only adds the hit area. Only a bare trigger draws its own border and inset focus line.
 
 ## Use and ownership
 - Disclose local actions or supplementary information beside an object while the main workspace remains usable.
@@ -44,15 +45,65 @@ Closing hides the popup; it does not complete submission or undo. The applicatio
 - PopoverTitle: function; owner popover; PASS; props: PopoverPrimitive.Title.Props
 - PopoverTrigger: function; owner popover; PASS; props: PopoverPrimitive.Trigger.Props
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Popover
+- no props declared by this library
+- plus 9 inherited (@base-ui/react 9); not expanded, see the installed declarations
+
+### PopoverClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### PopoverContent
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `PopoverPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `PopoverPrimitive.Portal.Props`.
+- `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
+- `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### PopoverCreateHandle
+- takes no props
+
+### PopoverDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### PopoverPopup
+- `align?`: `"center" | "start" | "end"`.
+- `alignOffset?`: `PopoverPrimitive.Positioner.Props["alignOffset"]`.
+- `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
+- `portalProps?`: `PopoverPrimitive.Portal.Props`.
+- `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
+- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
+- `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### PopoverTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### PopoverTrigger
+- no props declared by this library
+- plus 294 inherited (@types/react 285, @base-ui/react 9); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - The default body portal cannot inherit the trigger's local DOM context. Mount container before opening.
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Popover
 Manage non-modal open state with the Base UI Root contract. modal has been removed.
 - open / defaultOpen: boolean; default false. Controlled / uncontrolled open state.

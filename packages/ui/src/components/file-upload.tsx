@@ -10,9 +10,10 @@ import { Button, buttonVariants } from "./button";
 import { Input, type InputProps } from "./input";
 import { Progress, ProgressIndicator, ProgressTrack } from "./progress";
 
-export type FileUploadRejection = { file: File; reason: "type" | "size" | "count" };
+/** 拒绝理由：内置规则给出原因类别，`validate` 给出的是调用方自己的文案。 */
+export type FileUploadRejection = { file: File; reason: "type" | "size" | "count" | "directory" } | { file: File; reason: "custom"; message: string };
 export type FileUploadChangeDetails = {
-  reason: "select" | "drop" | "remove";
+  reason: "select" | "drop" | "paste" | "remove";
   added: readonly File[];
   removed: readonly File[];
   event: React.SyntheticEvent;
@@ -38,6 +39,11 @@ export type FileUploadProps = Omit<useRender.ComponentProps<"div">, "children" |
   multiple?: boolean;
   maxFiles?: number;
   maxSize?: number;
+  /**
+   * 自定义拒绝：返回文案即拒绝该文件，与类型、大小、数量走同一条通道（`onReject`、就地列出）；返回 undefined 即接受。
+   * 在类型与大小之后、数量之前判断。只看 File 本身；内容校验、查重、上传前检查属于应用。
+   */
+  validate?: (file: File) => string | undefined;
   disabled?: boolean;
   readOnly?: boolean;
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "name" | "form" | "accept" | "multiple" | "required" | "disabled" | "readOnly" | "size">;
@@ -49,6 +55,24 @@ function accepts(file: File, accept: string | undefined) {
   const rules = accept?.split(",").map(rule => rule.trim().toLowerCase()).filter(Boolean) ?? [];
   if (!rules.length) return true;
   return rules.some(rule => rule.startsWith(".") ? file.name.toLowerCase().endsWith(rule) : rule.endsWith("/*") ? file.type.toLowerCase().startsWith(rule.slice(0, -1)) : file.type.toLowerCase() === rule);
+}
+/**
+ * 拖放的文件夹在 `dataTransfer.files` 里是一枚大小为 0、类型为空的伪 File，与空文件无从分辨。
+ * 只有 `items[i].webkitGetAsEntry()` 能说出它是目录；该接口不在时（或测试里只给了 files）按普通文件处理。
+ * `items` 只在事件处理期间有效，所以必须同步读完。
+ */
+function readDrop(data: DataTransfer): { files: File[]; directories: ReadonlySet<File> } {
+  const files: File[] = [];
+  const directories = new Set<File>();
+  for (const item of Array.from(data.items ?? [])) {
+    if (item.kind !== "file") continue;
+    const entry = typeof item.webkitGetAsEntry === "function" ? item.webkitGetAsEntry() : null;
+    const file = item.getAsFile();
+    if (!file) continue;
+    files.push(file);
+    if (entry?.isDirectory) directories.add(file);
+  }
+  return files.length ? { files, directories } : { files: Array.from(data.files ?? []), directories };
 }
 function validateRules(accept: string | undefined, maxFiles: number | undefined, maxSize: number | undefined) {
   if (maxFiles !== undefined && (!Number.isSafeInteger(maxFiles) || maxFiles < 0)) throw new RangeError("FileUpload maxFiles must be a non-negative safe integer.");
@@ -66,11 +90,12 @@ function ChooserSurface({ elementProps, state, render, onMeta, label }: { elemen
   // 不用 `contain: strict`——它的 size 包含会让这个撑满父级的点击目标塌掉。
   // 视觉本就为 0（透明度 0），所以这些声明不改变任何可见像素，只让溢出不再存在。
   const input = useRender({ defaultTagName: "input", render, ref: elementProps.ref, state: { ...state }, props: { ...nativeProps, className: cn("absolute inset-0 h-full w-full cursor-pointer overflow-hidden border-0 p-0 opacity-0 [clip-path:inset(50%)]", nativeProps.className) } });
-  return <>{input}<span aria-hidden="true" data-slot="file-upload-chooser-label" className={cn(buttonVariants({ variant: "quiet" }), "pointer-events-none col-start-2 row-start-1 min-h-0 px-(--qy-fill-padding) sm:min-h-0")}>{label}</span></>;
+  // 名称落在第一列：原生输入已绝对定位、不占格，第二列留给 Input 的「只读」说明，两者不叠。
+  return <>{input}<span aria-hidden="true" data-slot="file-upload-chooser-label" className={cn(buttonVariants({ variant: "quiet" }), "pointer-events-none col-start-1 row-start-1 justify-self-start min-h-0 px-(--qy-fill-padding) sm:min-h-0")}>{label}</span></>;
 }
 
 /** Local accepted Files only. Upload facts and recovery remain with the application. */
-export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, disabled = false, readOnly = false, inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, ...props }: FileUploadProps) {
+export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, validate, disabled = false, readOnly = false, inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, onPaste, ...props }: FileUploadProps) {
   validateRules(accept, maxFiles, maxSize);
   const { messages } = useUILocale();
   const initial = React.useRef([...defaultValue]);
@@ -140,7 +165,7 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
     onValueChange?.(next, { reason, added, removed, event, cancel: () => { canceled = true; }, get isCanceled() { return canceled; } });
     if (!canceled && valueProp === undefined) setLocalValue(next);
   };
-  const add = (incoming: readonly File[], reason: "select" | "drop", event: React.SyntheticEvent) => {
+  const add = (incoming: readonly File[], reason: "select" | "drop" | "paste", event: React.SyntheticEvent, directories: ReadonlySet<File> = new Set()) => {
     if (blocked || inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return;
     const next = [...value];
     const added: File[] = [];
@@ -148,8 +173,10 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
     const capacity = multiple ? maxFiles : Math.min(maxFiles ?? 1, 1);
     for (const file of incoming) {
       if (next.includes(file)) continue;
-      const rejection = !accepts(file, accept) ? "type" : maxSize !== undefined && file.size > maxSize ? "size" : capacity !== undefined && next.length >= capacity ? "count" : undefined;
-      if (rejection) rejected.push({ file, reason: rejection });
+      const reasonOf = directories.has(file) ? "directory" : !accepts(file, accept) ? "type" : maxSize !== undefined && file.size > maxSize ? "size" : undefined;
+      const message = reasonOf ? undefined : validate?.(file) || undefined;
+      const rejection: FileUploadRejection | undefined = reasonOf ? { file, reason: reasonOf } : message ? { file, reason: "custom", message } : capacity !== undefined && next.length >= capacity ? { file, reason: "count" } : undefined;
+      if (rejection) rejected.push(rejection);
       else { next.push(file); added.push(file); }
     }
     setRejections(rejected);
@@ -170,23 +197,36 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
     className: cn("grid min-w-0 gap-(--qy-field-group-gap) data-dragging:bg-accent", className),
     onDragOver: (event: React.DragEvent<HTMLDivElement>) => { onDragOver?.(event); if (event.defaultPrevented || blocked) return; event.preventDefault(); if (event.dataTransfer.types.includes("Files")) { event.dataTransfer.dropEffect = "copy"; setDragging(true); } },
     onDragLeave: (event: React.DragEvent<HTMLDivElement>) => { onDragLeave?.(event); if (!event.defaultPrevented && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) setDragging(false); },
-    onDrop: (event: React.DragEvent<HTMLDivElement>) => { onDrop?.(event); const canceled = event.defaultPrevented; event.preventDefault(); setDragging(false); if (!canceled) add(Array.from(event.dataTransfer.files), "drop", event); },
+    onDrop: (event: React.DragEvent<HTMLDivElement>) => { onDrop?.(event); const canceled = event.defaultPrevented; event.preventDefault(); setDragging(false); if (!canceled) { const { files, directories } = readDrop(event.dataTransfer); add(files, "drop", event, directories); } },
+    // 粘贴只在焦点位于本组件内时生效（选择入口、移除按钮等），不在 document 上全局监听；
+    // 在组件内的文本框（如 renderFileActions 放进来的）里粘贴文字不受影响。
+    onPaste: (event: React.ClipboardEvent<HTMLDivElement>) => {
+      onPaste?.(event);
+      if (event.defaultPrevented || blocked) return;
+      const target = event.target as Element;
+      if (target.closest("textarea, [contenteditable=''], [contenteditable='true'], input:not([type='file'])")) return;
+      const files = Array.from(event.clipboardData.files);
+      if (!files.length) return;
+      event.preventDefault();
+      add(files, "paste", event);
+    },
     children: <>
       <Input {...inputRest} ref={setInputRef} type="file" name={name} form={form} accept={accept} multiple={multiple} disabled={disabled} readOnly={readOnly} controlClassName={cn("w-fit", inputRest.controlClassName)} value={value.map(file => file.name).join(", ")} render={(elementProps, state) => <ChooserSurface elementProps={elementProps} state={state} render={inputRender} onMeta={onMeta} label={messages.chooseFiles} />}
         onClick={event => { onClick?.(event); if (blocked) event.preventDefault(); }}
         onChange={event => { onChange?.(event); const canceled = event.defaultPrevented || event.baseUIHandlerPrevented; event.preventBaseUIHandler(); if (!canceled) add(Array.from(event.currentTarget.files ?? []), "select", event); event.currentTarget.value = ""; }} />
       {!blocked && <p className="text-support text-muted-foreground">{messages.dropFiles}</p>}
+      {/* 基础层 §9：只读是「不能在这里编辑」，不是「此刻不可用」，所以不摆一枚禁用的「移除」；禁用时保留它。 */}
       {value.length > 0 && <ul data-slot="file-upload-files" className="grid min-w-0 gap-(--qy-field-group-gap)">{value.map(file => {
         const status = getStatus?.(file);
         if (status && !status.label.trim()) throw new TypeError("FileUpload status requires a visible factual label.");
         return <li key={fileKey(file)} data-slot="file-upload-file" className="grid min-w-0 gap-(--qy-field-gap)" onFocusCapture={event => { focusedFile.current = { file, index: value.indexOf(file), element: event.target }; }} onBlurCapture={event => { if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) focusedFile.current = undefined; }}>
-          <div className="flex min-w-0 items-start gap-(--qy-action-gap)"><span className="min-w-0 flex-1 text-body wrap-anywhere">{file.name}</span><Button ref={node => { if (node) removeButtons.current.set(file, node); else removeButtons.current.delete(file); }} variant="quiet" disabled={blocked} aria-label={messages.removeFile(file.name)} onClick={event => request(value.filter(item => item !== file), "remove", [], [file], event)}>{messages.remove}</Button></div>
+          <div className="flex min-w-0 items-start gap-(--qy-action-gap)"><span className="min-w-0 flex-1 text-body wrap-anywhere">{file.name}</span>{!readOnly && <Button ref={node => { if (node) removeButtons.current.set(file, node); else removeButtons.current.delete(file); }} variant="quiet" disabled={blocked} aria-label={messages.removeFile(file.name)} onClick={event => request(value.filter(item => item !== file), "remove", [], [file], event)}>{messages.remove}</Button>}</div>
           {status && <p role="status" className={cn("text-support wrap-anywhere", status.state === "failed" ? "text-destructive-foreground" : "text-muted-foreground")}>{status.label}</p>}
           {status?.state === "in-progress" && status.progress && <Progress {...status.progress} aria-label={messages.fileProgress(file.name)}><ProgressTrack><ProgressIndicator /></ProgressTrack></Progress>}
           {renderFileActions?.(file, status)}
         </li>;
       })}</ul>}
-      {rejections.length > 0 && <ul data-slot="file-upload-rejections" className="grid min-w-0 gap-(--qy-field-gap)">{rejections.map((rejection, index) => <li key={index} className="flex min-w-0 items-start gap-(--qy-action-gap)"><span role="alert" className="min-w-0 flex-1 text-support text-destructive-foreground wrap-anywhere">{messages.fileError(rejection.file.name, rejection.reason)}</span><Button variant="quiet" aria-label={messages.dismissFileRejection(rejection.file.name)} onClick={() => setRejections(current => current.filter(item => item !== rejection))}>{messages.close}</Button></li>)}</ul>}
+      {rejections.length > 0 && <ul data-slot="file-upload-rejections" className="grid min-w-0 gap-(--qy-field-gap)">{rejections.map((rejection, index) => <li key={index} className="flex min-w-0 items-start gap-(--qy-action-gap)"><span role="alert" className="min-w-0 flex-1 text-support text-destructive-foreground wrap-anywhere">{rejection.reason === "custom" ? messages.fileRejectedWith(rejection.file.name, rejection.message) : messages.fileError(rejection.file.name, rejection.reason)}</span><Button variant="quiet" aria-label={messages.dismissFileRejection(rejection.file.name)} onClick={() => setRejections(current => current.filter(item => item !== rejection))}>{messages.close}</Button></li>)}</ul>}
     </>,
   }) });
 }

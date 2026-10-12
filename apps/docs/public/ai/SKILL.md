@@ -60,7 +60,7 @@ steps, never a one-off value.
 
 1. Read project instructions, the UI entry point, installed package.json, catalog.json and design.md. Check the project's persistent references described above when completing onboarding. Preserve unrelated work.
 2. State the object, action, scope, current status and work to retain. Use relevant methods; cultural terms are not HTML roles or API names.
-3. Load related resources from ai/v<installed-version>/components. actualExports and local declarations are authority. api is curated guidance. Missing signatures and provider requirements remain UNVERIFIED. Inspect example imports and optionalPeers.
+3. Load related resources from ai/v<installed-version>/components. actualExports and local declarations are authority. api is curated guidance; typeApi lists the props this library declares, resolved from its types, and providers lists what each component needs from the app. Anything marked UNVERIFIED stays unverified. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.

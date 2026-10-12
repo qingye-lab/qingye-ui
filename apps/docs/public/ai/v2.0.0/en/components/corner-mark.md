@@ -33,14 +33,28 @@ The mark is decorative on its own: a count only reaches assistive tech through t
 - CornerMarkProps: type; owner corner-mark; PASS
 - CornerMarkTone: type; owner corner-mark; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### CornerMark
+- `children`: `React.ReactNode`.
+- `className?`: `string`.
+- `count`: `number`.
+- `dot?`: `never`.
+- `label`: `string`.
+- `max?`: `number`.
+- `tone?`: `"neutral" | "danger" | "success"`.
+- `wrapperClassName?`: `string`.
 
 ## Dependencies and providers
 - Runtime: clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### CornerMark
 Wraps the host content; the mark is pinned to the host's top-right corner.
 - count / max: number / number. The count variant; past max (default 99) it reads "max+" while the real number stays in label; a count of 0 hides the mark and its label together.

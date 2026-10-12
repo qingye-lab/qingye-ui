@@ -178,6 +178,8 @@ export function libraryPairs(appearance: Appearance): ContrastPair[] {
       for (const line of ["border-input", "border-strong"]) add(`${line} on ${label}`, token(line), background, 3);
     }
     for (const mark of ["chart-1", "chart-2", "chart-3", "chart-4", "chart-5", "warning", "success", "info", "danger"]) add(`${mark} on ${surface}`, token(mark), [token(surface)], 3);
+    // 图形里的状态类别色（Sparkline、Meter、Proportion、Chart、Heatmap）：线与填充，对承载面 3:1。
+    for (const state of ["danger", "warning", "success", "info"]) add(`${state} graphic on ${surface}`, token(`${state}-graphic`), [token(surface)], 3);
     for (const state of ["danger", "warning", "success", "info"]) {
       add(`${state} Alert icon on its soft fill over ${surface}`, token(`${state}-foreground`), [token(surface), token(`${state}-soft`)], 3);
       // 标记是正文里的一段字：状态文字色直接压在纸上。
@@ -186,11 +188,15 @@ export function libraryPairs(appearance: Appearance): ContrastPair[] {
     add(`Alert description on neutral-soft over ${surface}`, token("foreground-muted"), [token(surface), token("neutral-soft")], 4.5);
     for (const state of ["danger", "warning", "success", "info"]) add(`Alert description on ${state} soft fill over ${surface}`, token("foreground-muted"), [token(surface), token(`${state}-soft`)], 4.5);
 
+    // 轨道内选中段 / 按下项：焦墨字压在淡染上（纸 -> 淡染）；未选段的浓墨字已由上面的 foreground-muted on 纸 覆盖。
+    add(`track selected text on ${surface}`, token("track-selected-foreground"), [token(surface), token("track-selected")], 4.5);
     add(`StatusDot muted indicator on ${surface}`, token("foreground-muted"), [token(surface)], 3);
     add(`Calendar disabled/outside date on ${surface}`, token("foreground-muted"), [token(surface)], 4.5);
     add(`Calendar selected range-middle date on ${surface}`, token("foreground"), [token(surface), token("accent")], 4.5);
     add(`ring/50 on ${surface}`, alpha("ring", 50), [token(surface)], 3);
   }
+  // Meter 的指示压在读数凹槽上；凹槽是不透明的淡墨，与所在承载面无关。
+  for (const state of ["danger", "warning", "success", "info"]) add(`${state} graphic on groove`, token(`${state}-graphic`), [token("groove-surface")], 3);
   add("sidebar focus on sidebar", token("sidebar-ring"), [token("sidebar")], 3);
   add("sidebar focus on active row", token("sidebar-ring"), [token("sidebar"), token("sidebar-accent")], 3);
   add("sidebar text", token("sidebar-foreground"), [token("sidebar")], 4.5);

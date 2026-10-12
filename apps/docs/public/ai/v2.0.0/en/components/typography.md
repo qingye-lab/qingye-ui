@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: ef6d04ce956f807ca010b2348e7f99adc4bc1394a734dbfae53cef1c7beaf0b9
+Source SHA-256: e2e61cada80a1236c2e598d96696bef50c76e9e2714b2b63a91aaa4b3cce3faf
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -12,6 +12,7 @@ level determines h1–h6 and step selects appearance. render changes actual sema
 
 ## Notes
 - Font size, leading, weight and tracking are theme presets, not unique deductions.
+- Heading steps (display-xl, display-lg, display, title, chapter, heading) use text-wrap: balance so wrapped lines are of similar length without a lone last word; body and supporting copy do not (pretty is not yet broadly supported and stays under observation), and unsupported browsers fall back to ordinary wrapping. PageHeaderTitle and EmptyTitle balance too.
 - Mark Chinese containers with lang=zh-CN; mixed content and long words wrap without losing text.
 - Supporting copy still needs normal text contrast; numeric never replaces unknown with zero.
 
@@ -39,14 +40,33 @@ level determines h1–h6 and step selects appearance. render changes actual sema
 - TextProps: type; owner typography; PASS
 - TextStep: type; owner external; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Code
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Heading
+- `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Text
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Code
 Code within running text: monospace at 0.875 of the surrounding size rounded to whole pixels, on the ink soft fill, following its line.
 - render / ref / native props: useRender.ComponentProps<"code">. Forward attributes and refs to the native code element.

@@ -36,7 +36,7 @@ export default {
       { name: "value / label / disabled", type: "any / string / boolean", description: "值、类型搜索名称、禁用事实。禁用项可高亮供辨认，但不能选取。", descriptionEn: "Value, typeahead name, and disabled facts. Disabled items can be highlighted for identification without being selected." },
       { name: "children / render / ref / className / style", type: "Base UI Item props", description: "名称内容自动进入 ItemText，选中勾标单独呈现。", descriptionEn: "Name content enters ItemText automatically; the selection check is separate." },
     ] },
-    { name: "SelectGroup / SelectGroupLabel", description: "语义分组与组名称。", descriptionEn: "Semantic grouping and group names." },
+    { name: "SelectGroup / SelectGroupLabel", description: "语义分组与组名称；组名画法与 ComboboxGroupLabel、AutocompleteGroupLabel 同一来源。", descriptionEn: "Semantic grouping and group names; the label is drawn from the same source as ComboboxGroupLabel and AutocompleteGroupLabel." },
     { name: "SelectPrimitive", description: "完整 Base UI Select 原语出口；公共 Select 接口始终为单值。", descriptionEn: "The complete public Base UI Select primitive; public Select remains single-value." },
   ],
   keyboard: [

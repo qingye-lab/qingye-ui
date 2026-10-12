@@ -23,6 +23,33 @@ describe("Tree", () => {
     const { unmount } = render(<Tree nodes={[]} />); expect(screen.getByText("没有条目")).toBeInTheDocument(); unmount(); expect(() => render(<Tree nodes={[{ id: "same", label: "一" }, { id: "same", label: "二" }]} />)).toThrow("unique");
   });
 });
+describe("Tree typeahead and toggle", () => {
+  const files: TreeNode[] = [{ id: "ap", label: "Apple" }, { id: "av", label: "Avocado" }, { id: "al", label: "Alto" }, { id: "ba", label: "Banana" }];
+  it("accumulates characters typed in quick succession and cycles on a repeated one", async () => {
+    const user = userEvent.setup(); render(<Tree aria-label="水果" nodes={files} />); await user.tab(); expect(screen.getByRole("treeitem", { name: "Apple" })).toHaveFocus();
+    await user.keyboard("al"); expect(screen.getByRole("treeitem", { name: "Alto" })).toHaveFocus();
+    await user.keyboard("t"); expect(screen.getByRole("treeitem", { name: "Alto" })).toHaveFocus();
+  });
+  it("starts over once the window has passed, and cycles through one leading letter", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] }); vi.setSystemTime(1000);
+    try {
+      const user = userEvent.setup({ advanceTimers: ms => vi.setSystemTime(Date.now() + ms) }); render(<Tree aria-label="水果" nodes={files} />); await user.tab();
+      await user.keyboard("a"); expect(screen.getByRole("treeitem", { name: "Avocado" })).toHaveFocus();
+      await user.keyboard("a"); expect(screen.getByRole("treeitem", { name: "Alto" })).toHaveFocus();
+      await user.keyboard("a"); expect(screen.getByRole("treeitem", { name: "Apple" })).toHaveFocus();
+      vi.setSystemTime(Date.now() + 600);
+      await user.keyboard("b"); expect(screen.getByRole("treeitem", { name: "Banana" })).toHaveFocus();
+      vi.setSystemTime(Date.now() + 600);
+      await user.keyboard("a"); expect(screen.getByRole("treeitem", { name: "Apple" })).toHaveFocus();
+    } finally { vi.useRealTimers(); }
+  });
+  it("keeps the expand affordance out of the focus order and accessibility tree; arrows still expand", async () => {
+    const user = userEvent.setup(); const { container } = render(<Tree aria-label="层级" nodes={nodes} />);
+    const toggle = container.querySelector("[data-slot=tree-toggle]") as HTMLElement;
+    expect(toggle).toHaveAttribute("aria-hidden", "true"); expect(toggle).toHaveAttribute("tabindex", "-1"); expect(screen.queryByRole("button")).toBeNull();
+    await user.click(toggle); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-expanded", "true"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus();
+  });
+});
 const checkNodes: TreeNode[] = [{ id: "p", label: "父", children: [{ id: "p1", label: "子一" }, { id: "p2", label: "子二" }, { id: "p3", label: "禁用子", disabled: true }] }, { id: "q", label: "独立叶子" }];
 describe("Tree checkable", () => {
   it("cascades a branch click onto enabled leaves, derives mixed/true without aria-multiselectable", async () => {

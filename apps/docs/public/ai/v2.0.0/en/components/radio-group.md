@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: e79b546522e0069cfafeac5a0769ac26a3240f9f6c2f1f3b1d47702c605ef80a
+Source SHA-256: 7f4c46cbf875c449b91ead3fe1190fb577ad525fd90a21f0166b17d364021d00
 
 Choose one value from a small set of visible options.
 
@@ -12,6 +12,7 @@ Use RadioGroup when candidates must be compared together, and Select when they c
 
 ## Notes
 - FieldTitle names the group, FieldItem + FieldLabel name each item, and FieldError associates errors.
+- A Radio placed in a Field without FieldItem opens its own label scope: each item has its own id and takes its name from itself, while the Field label and description stay on the group.
 - No selection, zero, and empty string are different values.
 - Disabled items leave tab order; read-only retains focus and current values.
 
@@ -41,14 +42,32 @@ Use RadioGroup when candidates must be compared together, and Select when they c
 - RadioPrimitive: reexport; owner radio-group; UNVERIFIED
 - RadioProps: type; owner radio-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Radio
+- no props declared by this library
+- plus 284 inherited (@types/react 275, @base-ui/react 9); not expanded, see the installed declarations
+
+### RadioGroup
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### RadioGroupPrimitive
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### RadioGroup
 Shared state and group semantics for visible mutually exclusive candidates.
 - value / defaultValue: Value. Controlled value or actual initial selection. Omitting the initial value retains no selection; controlled null is allowed.

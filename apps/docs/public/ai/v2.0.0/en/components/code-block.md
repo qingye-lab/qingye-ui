@@ -33,14 +33,26 @@ pre/code retain whitespace, characters and full width without simulated highligh
 - CodeBlock: function; owner code-block; PASS; props: CodeBlockProps
 - CodeBlockProps: type; owner code-block; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### CodeBlock
+- `code`: `string`.
+- `copyable?`: `boolean`.
+- `language?`: `string`.
+- `onCopyError?`: `(error: unknown) => void`.
+- `onCopySuccess?`: `() => void`.
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### CodeBlock
 Code presentation with an optional copy action.
 - code: string. Required literal text, rendered and copied without trimming or formatting.

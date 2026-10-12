@@ -54,14 +54,62 @@ Closing ends the presentation and returns to the trigger; it does not imply savi
 - DialogTitle: function; owner dialog; PASS; props: DialogPrimitive.Title.Props
 - DialogTrigger: function; owner dialog; PASS; props: DialogPrimitive.Trigger.Props<Payload>
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Dialog
+- no props declared by this library
+- plus 10 inherited (@base-ui/react 10); not expanded, see the installed declarations
+
+### DialogClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### DialogCreateHandle
+- takes no props
+
+### DialogDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogPanel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogPopup
+- `backdropProps?`: `DialogPrimitive.Backdrop.Props`.
+- `finalFocus?`: `DialogFocusTarget`.
+- `initialFocus?`: `DialogFocusTarget`.
+- `portalProps?`: `Omit<DialogPrimitive.Portal.Props, "keepMounted">`. Retained closed portals fail sibling-modal ARIA isolation in Base UI 1.7.
+- `viewportProps?`: `DialogPrimitive.Viewport.Props`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogTrigger
+- no props declared by this library
+- plus 291 inherited (@types/react 284, @base-ui/react 7); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Dialog
 Always fully modal, retaining controlled, uncontrolled and shared-trigger state.
 - open / defaultOpen: boolean; default false. Controlled state / initial uncontrolled state.

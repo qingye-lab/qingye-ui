@@ -36,14 +36,26 @@ Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
 - FieldsetPrimitive: reexport; owner fieldset; UNVERIFIED
 - FieldsetProps: type; owner fieldset; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Fieldset
+- no props declared by this library
+- plus 281 inherited (@types/react 278, @base-ui/react 3); not expanded, see the installed declarations
+
+### FieldsetLegend
+- `variant?`: `"label" | "legend"`. 分节名称与共同问题分别消费已有的标题档/名称档。
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Fieldset
 Base UI Root，默认 fieldset；使用字段组间隔。
 - disabled: boolean; default false. 禁用整组控件。

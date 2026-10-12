@@ -45,14 +45,55 @@ Source SHA-256: 155fc699f13ffd26579fd21761a48300c4a83ba8ecb1112db6146e443eccb83c
 - DrawerTitle: function; owner drawer; PASS; props: DrawerPrimitive.Title.Props
 - DrawerTrigger: function; owner drawer; PASS; props: DrawerPrimitive.Trigger.Props<Payload>
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Drawer
+- no props declared by this library
+- plus 17 inherited (@base-ui/react 17); not expanded, see the installed declarations
+
+### DrawerClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### DrawerContent
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DrawerCreateHandle
+- takes no props
+
+### DrawerDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DrawerPopup
+- `backdropProps?`: `DrawerPrimitive.Backdrop.Props`.
+- `finalFocus?`: `DialogFocusTarget`.
+- `initialFocus?`: `DialogFocusTarget`.
+- `portalProps?`: `Omit<DrawerPrimitive.Portal.Props, "keepMounted">`.
+- `viewportProps?`: `DrawerPrimitive.Viewport.Props`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DrawerTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DrawerTrigger
+- no props declared by this library
+- plus 291 inherited (@types/react 284, @base-ui/react 7); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context DrawerModality: without a provider default-value; provided by Drawer
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Drawer
 真实开关、方向与阻断方式。
 - open / defaultOpen / onOpenChange: DrawerPrimitive.Root.Props. 实际开关与可取消请求；调用方事件先执行，受控拒绝不提升层级。

@@ -11,7 +11,7 @@ export function Empty({ state, render, className, ...props }: EmptyProps) {
   return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "empty", "data-state": state, className: cn("flex min-w-0 flex-col items-start gap-(--qy-panel-gap) text-body", className) }, props) });
 }
 export type EmptyTitleProps = HeadingProps;
-export function EmptyTitle(props: EmptyTitleProps) { return <Heading data-slot="empty-title" {...props} />; }
+export function EmptyTitle({ className, ...props }: EmptyTitleProps) { return <Heading data-slot="empty-title" className={cn("text-balance", className)} {...props} />; }
 export type EmptyDescriptionProps = useRender.ComponentProps<"p">;
 export function EmptyDescription({ render, className, ...props }: EmptyDescriptionProps) {
   return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "empty-description", className: cn("m-0 min-w-0 text-support text-muted-foreground wrap-anywhere", className) }, props) });

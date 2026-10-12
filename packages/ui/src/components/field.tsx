@@ -5,6 +5,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { cn } from "../utils";
+import { InField, InFieldItem } from "../labelable-scope";
 import { Separator, type SeparatorProps } from "./separator";
 
 export type FieldOrientation = "vertical" | "horizontal";
@@ -15,15 +16,13 @@ export type FieldErrorProps = React.ComponentProps<typeof FieldPrimitive.Error> 
   errors?: ReadonlyArray<{ message?: string | undefined } | undefined>;
 };
 
-const InField = React.createContext(false);
-
 function hasSuppliedContent(children: React.ReactNode) {
   return React.Children.toArray(children).some(child => typeof child !== "string" || child.trim() !== "");
 }
 
 export function Field({ orientation = "vertical", invalid = false, className, onInvalidCapture, ...props }: FieldProps) {
   return (
-    <InField.Provider value={true}>
+    <InField.Provider value={true}><InFieldItem.Provider value={false}>
       <FieldPrimitive.Root
         data-slot="field"
         data-orientation={orientation}
@@ -40,7 +39,7 @@ export function Field({ orientation = "vertical", invalid = false, className, on
           typeof className === "function" ? className(state) : className,
         )}
       />
-    </InField.Provider>
+    </InFieldItem.Provider></InField.Provider>
   );
 }
 
@@ -79,10 +78,11 @@ export function FieldDescription({ className, ...props }: React.ComponentProps<t
 
 /** Item 为同一字段中的具体控件提供局部标签关联。 */
 export function FieldItem({ className, ...props }: React.ComponentProps<typeof FieldPrimitive.Item>) {
-  return <FieldPrimitive.Item data-slot="field-item" {...props} className={(state) => cn(
+  // 写入 InFieldItem：单选项、分段项见到它就不再自建作用域（labelable-scope.tsx），项旁的 FieldLabel 才读得到。
+  return <InFieldItem.Provider value={true}><FieldPrimitive.Item data-slot="field-item" {...props} className={(state) => cn(
     "flex min-w-0 items-start gap-(--qy-field-gap)",
     typeof className === "function" ? className(state) : className,
-  )} />;
+  )} /></InFieldItem.Provider>;
 }
 
 export function FieldSeparator({ children, className, render, ref, ...props }: useRender.ComponentProps<"div"> & Pick<SeparatorProps, "decorative">) {

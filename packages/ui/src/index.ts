@@ -3,6 +3,7 @@
 export { cn } from "./utils";
 export * from "./locale";
 export * from "./floating-layer";
+export type { Tone } from "./tone";
 export * from "./hooks/use-copy-to-clipboard";
 export * from "./hooks/use-media-query";
 export * from "./components/accordion";
@@ -69,6 +70,7 @@ export * from "./components/radio-group";
 export * from "./components/scatter-chart";
 export * from "./components/scroll-area";
 export * from "./components/search-input";
+export * from "./components/section";
 export * from "./components/segmented-control";
 export * from "./components/select";
 export * from "./components/separator";

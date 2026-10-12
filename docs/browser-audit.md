@@ -38,3 +38,40 @@ Preview/browser ownership and cleanup are unchanged. The default 83×2 scan supp
 The following paragraph preserves the 2026-10-01 pre-release checkpoint. Later tag executions are recorded by the [Release workflow](https://github.com/qingye-lab/qingye-ui/actions/workflows/release.yml); its historical NOT_RUN status is not a claim about subsequent releases.
 
 The Ubuntu run [36879986837](https://github.com/qingye-lab/qingye-ui/actions/runs/36879986837) executed the injected overflow audit after successful typecheck/tests/build/install. The report contains page overflow1106px and internal overflow1312px; audit returned1, Pack was skipped, and browser/preview both closed. The audit measured2000ms; runner3658ms; full job589s, including419s installing system/browser dependencies. See `docs/baseline/2026-10-01-ci-gate-failure/receipt.json`. The final workflow removes injection and restores88×4; its observed result is attached to the current verify check on [PR1](https://github.com/qingye-lab/qingye-ui/pull/1). The tag-triggered Release execution remains NOT_RUN.
+
+## axe-core 扫描（2026-10-12，尚未接入 CI）
+
+`scripts/axe-audit.mjs` 对每个 playground 页在浅色、深色各注入一次 `axe-core`（根 `package.json` 的 devDependency，4.14.0），页集、浏览器启动与主题切换与 `scripts/audit.mjs` 相同（`browser-runtime.mjs`）。只扫 `[data-playground]` 范围，demo 处于静置态：未打开的弹层、菜单、对话框内部不在覆盖范围内。axe 自动发现的问题只是 WCAG 的一部分，它是补充，不替代人工与键盘检查。
+
+```sh
+DOCS_URL=http://localhost:5193 node scripts/axe-audit.mjs [slug…] [--only light-desktop,dark-desktop] [--report file.json] [--contrast]
+```
+
+- 规则标签：`wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa`。在 4.14.0 里 `wcag22aa` 标签存在，只含 `target-size` 一条规则。
+- 退出码：有违例或页面未能扫描时为 1。状态沿用 `PASS` / `FAIL` / `UNVERIFIED` / `NOT_RUN`：违例为 FAIL，axe 的 `incomplete`（无法判定）计入 UNVERIFIED 且不算通过，加载失败记为 NOT_RUN。`DOCS_URL` 缺省与 `audit.mjs` 一致（`http://localhost:5180`）。
+- 输出按规则 → 页面 → 节点选择器归并；`--report` 写出全部违例与未判定节点的 JSON。
+- **`color-contrast` 默认关闭，`--contrast` 打开。** 先全量跑过一遍：打开后 182 次页面×主题扫描里 0 个违例，257 个节点（9 个页面：chart、scatter-chart、otp-field、scroll-area、virtual-list、toc、table、kbd、file-upload）全部是「无法判定」，原因是 axe 读不出 `color-mix()`、半透明面叠加和 SVG 文字的底色。它没有发现任何本库对比度门禁（`scripts/lib/browser-contrast.mjs`，量合成后的真实颜色）没发现的东西，却让每次运行都停在 UNVERIFIED，所以默认不开；对比度只认本库自己的门禁。
+
+### 首轮结果与处置（`axe-core 4.14.0`，182/182 次扫描）
+
+首轮（2026-10-12）46 个违例节点、7 条规则，浅深两侧相同。同日全部处置：
+
+| 规则 | 页面 | 根因 | 处置 |
+|---|---|---|---|
+| `aria-toggle-field-name` | checkbox、switch「labels」 | 演示的行文字不是 FieldLabel，控件无名称 | 演示用 `aria-labelledby` 指向行文字 |
+| `aria-hidden-focus` | chart「donut」「donut-total」 | Recharts 3 的 Pie 根层默认 `tabindex=0`，落在 `aria-hidden` 绘图区 | `accessibilityLayer={false}` + `rootTabIndex={-1}` |
+| `aria-prohibited-attr` | stat「delta」、kbd「states」 | `dd` / `kbd` 上的 `aria-label` | 改为视觉隐藏文字，读出内容不变 |
+| `label-content-name-mismatch` | copy-button「sizes」、toggle「pressed」 | 固定名称覆盖可见文字；字母当图标 | 有可见文字时名称跟随文字、动作进描述；换真图标 |
+| `select-name` | native-select「density」 | 演示自定 `id` 未进 FieldControl | 演示改用 `FieldControl render` |
+| `label` | prose「code-table-tasks」 | 任务项 checkbox 无名称 | 演示用 `aria-labelledby` 指向任务文字 |
+| `scrollable-region-focusable` | toc「scroll-spy」 | 演示自建滚动容器不可聚焦 | 改用库内 ScrollArea（具名 region） |
+
+处置后全量：**0 违例**。
+
+### 豁免与未定
+
+- **豁免（脚本内，逐次计数输出 `EXEMPT`）**：tree 中展开的 treeitem 触发 `label-content-name-mismatch`。treeitem 含下一级，axe 把子项文字算作它的可见文字；WCAG 2.5.3 关心的是项自己的可见标签。条件收得很窄：treeitem 已展开、名称由 `aria-labelledby` 指向自己行内（`tree-row` 的直接子标签）、该行文字与名称相同。名称来源改为 `aria-labelledby` 后 axe 仍报，确认是规则对嵌套树的启发式。读屏实机 UNVERIFIED。
+- **UNVERIFIED：heatmap `target-size`（2.5.8）**，69 个格。实测格 34.25 × 20px，行距 22px（< 24px，间距例外不成立）。指针在格上只显示读数、不激活任何操作，同样的数值在「数据表」视图里可达，倾向适用「等效」例外；这是判断，未当作通过。
+- `color-contrast` 默认关闭：`--contrast` 打开后 0 违例、257 个节点无法判定（`color-mix()`、半透明面、SVG 文字），对比度由本库自己的门禁承担。
+
+接入 CI 的建议：扫描现已零违例，可把 `node scripts/axe-audit.mjs` 放到 `ci.yml` 的 Browser audit 之后（需要 docs 服务；可复用 `run-browser-audit.mjs` 的 preview 管理，当前脚本只读 `DOCS_URL`，尚未与 preview 运行器整合）。

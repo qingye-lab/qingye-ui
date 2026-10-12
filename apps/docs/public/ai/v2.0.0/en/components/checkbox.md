@@ -36,14 +36,22 @@ Use Checkbox for independent options and Switch for an immediate setting change.
 - CheckboxPrimitive: reexport; owner checkbox; UNVERIFIED
 - CheckboxProps: type; owner checkbox; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Checkbox
+- no props declared by this library
+- plus 291 inherited (@types/react 273, @base-ui/react 18); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Checkbox
 Base UI checkbox semantics and mixed state.
 - checked / defaultChecked: boolean. Controlled checked value or uncontrolled initial value.
@@ -104,6 +112,7 @@ export default function Demo() {
       <Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel>选项二</FieldLabel></Field>
       <Field orientation="horizontal"><Checkbox readOnly defaultChecked /><FieldLabel>只读</FieldLabel></Field>
       <Field orientation="horizontal"><Checkbox disabled /><FieldLabel>禁用</FieldLabel></Field>
+      <Field orientation="horizontal"><Checkbox disabled defaultChecked /><FieldLabel>禁用（已选）</FieldLabel></Field>
       <Field orientation="horizontal" invalid><Checkbox /><FieldContent><FieldLabel>必选项</FieldLabel><FieldError>请选择此项。</FieldError></FieldContent></Field>
     </div>
   );
@@ -113,6 +122,7 @@ export default function Demo() {
 ### 跟随标签
 Source: apps/docs/src/content/checkbox/demos/03-labels.tsx
 ```tsx
+import { useId } from "react";
 import { Checkbox } from "@qingye_lab/ui/components/checkbox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Heading } from "@qingye_lab/ui/components/typography";
@@ -122,12 +132,14 @@ export const meta = { title: "跟随标签", titleEn: "Follows its label" };
 // 标记只有一种几何，跟随相邻标签的文字档（用户裁决 2026-10-05）：
 // 勾选框与它旁边那行字同高，因此列表项里的标记和标题旁的标记由文字本身决定。
 export default function Demo() {
+  // 后两行的文字不是 FieldLabel（版式是说明与标题），仍须给标记一个名称：用 aria-labelledby 指向这行字本身。
+  const id = useId();
   return (
     <div className="grid w-full max-w-lg gap-(--qy-field-group-gap)">
       <Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel>正文标签</FieldLabel></Field>
       <Field orientation="horizontal"><Checkbox defaultChecked /><FieldLabel className="text-support">紧凑标签</FieldLabel></Field>
-      <Field orientation="horizontal"><Checkbox defaultChecked /><span className="text-reading">说明性文字，标记与它同高</span></Field>
-      <Field orientation="horizontal"><Checkbox defaultChecked /><Heading level={4} className="text-heading">分区标题</Heading></Field>
+      <Field orientation="horizontal"><Checkbox defaultChecked aria-labelledby={`${id}-reading`} /><span id={`${id}-reading`} className="text-reading">说明性文字，标记与它同高</span></Field>
+      <Field orientation="horizontal"><Checkbox defaultChecked aria-labelledby={`${id}-heading`} /><Heading id={`${id}-heading`} level={4} className="text-heading">分区标题</Heading></Field>
     </div>
   );
 }

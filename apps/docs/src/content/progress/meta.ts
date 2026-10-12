@@ -17,7 +17,7 @@ export default {
     "ProgressPrimitive"
   ],
   "keywords": ["progress", "progress bar", "loading", "percent", "进度条", "加载", "百分比", "完成度"],
-  "decisions": "动画和时间不能提供完成事实；0 与 null 不同。", decisionsEn: "Animation and time establish no completion fact. Zero differs from null.",
+  "decisions": "动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。", decisionsEn: "Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.",
   "design": {
     "methods": [
       "名实相符",
@@ -30,7 +30,8 @@ export default {
       "动画和时间不能提供完成事实；0 与 null 不同。"
     ],
     "composition": [
-      "Label 关联任务；Value 默认按真实 null 显示已有 locale 的进行中，调用方格式化内容优先。"
+      "Label 关联任务；Value 默认按真实 null 显示已有 locale 的进行中，调用方格式化内容优先。",
+      "总共 n 级的阶段条用 segments={n}；阶段名由 getAriaValueText 或 aria-valuetext 给出，例如「四龄，第 4 / 7 阶段」。"
     ],
     "stateOwner": {
       "library": [
@@ -46,7 +47,7 @@ export default {
     "customization": [
       "使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"
     ]
-  }, designEn: {"whenToUse":["A reliable completion ratio exists, or work is known to be underway without a ratio."],"avoid":["Animation and time establish no completion fact. Zero differs from null."],"composition":["Label names the task; Value defaults to localized in-progress for actual null, with caller formatting taking precedence."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Task names and formatted readings wrap; an independent progress role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
+  }, designEn: {"whenToUse":["A reliable completion ratio exists, or work is known to be underway without a ratio."],"avoid":["Animation and time establish no completion fact. Zero differs from null."],"composition":["Label names the task; Value defaults to localized in-progress for actual null, with caller formatting taking precedence.","A stage bar of n levels uses segments={n}; stage names come from getAriaValueText or aria-valuetext, for example \"Fourth instar, stage 4 of 7\"."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Task names and formatted readings wrap; an independent progress role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
   "api": [
     {
       "name": "Progress",
@@ -61,6 +62,11 @@ export default {
           "name": "min / max",
           "type": "number",
           "description": "有限递增范围且分母有限；越界或不合法输入抛 RangeError。", descriptionEn: "A finite increasing range with a finite denominator; invalid or out-of-range values throw RangeError."
+        },
+        {
+          "name": "segments",
+          "type": "number",
+          "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；value 不能为 null，且 (value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。阶段名用 getAriaValueText 给出。", descriptionEn: "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; value cannot be null and (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name stages with getAriaValueText."
         },
         {
           "name": "format / locale / getAriaValueText",

@@ -14,7 +14,8 @@ export function PageHeaderContent({ render, className, ...props }: PageHeaderCon
   return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "page-header-content", className: cn("flex min-w-0 flex-1 flex-col gap-(--qy-field-gap) wrap-anywhere", className) }, props) });
 }
 export type PageHeaderTitleProps = HeadingProps;
-export function PageHeaderTitle(props: PageHeaderTitleProps) { return <Heading level={1} step="chapter" data-slot="page-header-title" {...props} />; }
+/** 页面标题始终是标题：即便调用方换了文字档，也保持换行均衡（见 typography.tsx 的 balancedSteps）。 */
+export function PageHeaderTitle({ className, ...props }: PageHeaderTitleProps) { return <Heading level={1} step="chapter" data-slot="page-header-title" className={cn("text-balance", className)} {...props} />; }
 export type PageHeaderDescriptionProps = useRender.ComponentProps<"p">;
 export function PageHeaderDescription({ render, className, ...props }: PageHeaderDescriptionProps) {
   return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "page-header-description", className: cn("m-0 min-w-0 text-support text-muted-foreground wrap-anywhere", className) }, props) });

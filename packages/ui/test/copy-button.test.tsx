@@ -11,7 +11,7 @@ test("native copy/error events remain separate from the clipboard result callbac
   const success = vi.fn();
   const failure = vi.fn();
   const { container } = render(<CopyButton value="青叶" onCopy={nativeCopy} onError={nativeError} onCopySuccess={success} onCopyError={failure}><img alt="" /></CopyButton>);
-  const button = screen.getByRole("button", { name: "复制" });
+  const button = screen.getByRole("button", { name: /复制/ });
   fireEvent.copy(button);
   fireEvent.error(container.querySelector("img")!);
   expect(nativeCopy).toHaveBeenCalledOnce();
@@ -27,7 +27,7 @@ test("success follows the real clipboard promise, with pending activation blocke
   const onCopy = vi.fn();
   const ref = createRef<HTMLButtonElement>();
   const { rerender } = render(<CopyButton value="青叶" onCopySuccess={onCopy} ref={ref} render={<button data-custom="yes" />} />);
-  const button = screen.getByRole("button", { name: "复制" });
+  const button = screen.getByRole("button", { name: /复制/ });
   expect(ref.current).toBe(button);
   expect(button).toHaveAttribute("data-custom", "yes");
   fireEvent.click(button);
@@ -40,7 +40,7 @@ test("success follows the real clipboard promise, with pending activation blocke
   expect(button).toHaveAttribute("data-copied");
   expect(onCopy).toHaveBeenCalledOnce();
   rerender(<CopyButton value="新文本" />);
-  expect(screen.getByRole("button", { name: "复制" })).not.toHaveAttribute("data-copied");
+  expect(screen.getByRole("button", { name: /复制/ })).not.toHaveAttribute("data-copied");
 });
 
 test.each(["reject", "unavailable"])("%s clipboard path reports failure and permits a later retry", async mode => {
@@ -50,23 +50,35 @@ test.each(["reject", "unavailable"])("%s clipboard path reports failure and perm
   const onCopy = vi.fn();
   const onError = vi.fn();
   render(<CopyButton value="青叶" onCopySuccess={onCopy} onCopyError={onError} />);
-  fireEvent.click(screen.getByRole("button", { name: "复制" }));
+  fireEvent.click(screen.getByRole("button", { name: /复制/ }));
   await waitFor(() => expect(onError).toHaveBeenCalledOnce());
   expect(screen.getByRole("status")).toHaveTextContent("复制失败，请手动复制");
   expect(onCopy).not.toHaveBeenCalled();
-  expect(screen.getByRole("button", { name: "复制" })).not.toHaveAttribute("data-copied");
+  expect(screen.getByRole("button", { name: /复制/ })).not.toHaveAttribute("data-copied");
   vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } });
-  fireEvent.click(screen.getByRole("button", { name: "复制" }));
+  fireEvent.click(screen.getByRole("button", { name: /复制/ }));
   await waitFor(() => expect(onCopy).toHaveBeenCalledOnce());
-  expect(screen.getByRole("button", { name: "复制" })).toHaveAttribute("data-copied");
+  expect(screen.getByRole("button", { name: /复制/ })).toHaveAttribute("data-copied");
 });
 
 test("disabled and caller cancellation do not request a write", () => {
   const writeText = vi.fn();
   vi.stubGlobal("navigator", { clipboard: { writeText } });
   const { rerender } = render(<CopyButton value="青叶" disabled />);
-  fireEvent.click(screen.getByRole("button", { name: "复制" }));
+  fireEvent.click(screen.getByRole("button", { name: /复制/ }));
   rerender(<CopyButton value="青叶" onClick={event => event.preventBaseUIHandler()} />);
-  fireEvent.click(screen.getByRole("button", { name: "复制" }));
+  fireEvent.click(screen.getByRole("button", { name: /复制/ }));
   expect(writeText).not.toHaveBeenCalled();
+});
+
+test("the accessible name is the visible text; the fixed label is only for icon-only content", () => {
+  const { rerender } = render(<CopyButton value="x">密钥</CopyButton>);
+  const named = screen.getByRole("button", { name: "密钥" });
+  expect(named).not.toHaveAttribute("aria-label");
+  // 动作「复制」作为描述补上，名称不被覆盖（WCAG 2.5.3）。
+  expect(named).toHaveAccessibleDescription("复制");
+  rerender(<CopyButton value="x" shape="icon" />);
+  expect(screen.getByRole("button", { name: "复制" })).toHaveAttribute("aria-label", "复制");
+  rerender(<CopyButton value="x" aria-label="复制密钥">密钥</CopyButton>);
+  expect(screen.getByRole("button", { name: "复制密钥" })).toBeInTheDocument();
 });

@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "note": "Drift already present when the gate landed. The gate fails on any documented-but-missing or unresolved entry not listed here. Entries are removed when fixed; nothing is added to get a green run.",
+  "documentedButMissing": [],
+  "unresolved": []
+}

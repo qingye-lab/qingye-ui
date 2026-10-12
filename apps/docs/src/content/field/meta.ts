@@ -37,7 +37,7 @@ export default {
     {name: "FieldContent", description: "横向字段的名称、说明内容列。", descriptionEn: "The name and description column of a horizontal field."},
     {name: "FieldGroup", description: "字段之间的关系间隔，没有 group 语义。", descriptionEn: "Spacing between fields, without group semantics."},
     {name: "FieldSeparator", description: "字段组分界；有文字时两侧线为装饰。", descriptionEn: "A boundary between field groups; flanking lines are decorative when text is supplied."},
-    {name: "FieldItem", description: "同一 Field 内某个控件与标签的局部关联。", descriptionEn: "Scopes a particular control and label within one Field."},
+    {name: "FieldItem", description: "同一 Field 内某个控件与标签的局部关联。一个 Field 只带一个控件；第二个控件（如滑块旁的精确输入）各用一个 FieldItem，否则它们共用同一个 id。", descriptionEn: "Scopes a particular control and label within one Field. A Field carries one control; give each additional control (for example an exact-entry NumberField beside a Slider) its own FieldItem."},
     {name: "FieldControl / FieldValidity / FieldPrimitive", description: "直接的原语注册、状态读取与完整 API 出口。", descriptionEn: "Direct primitive outlets for registration, state reading, and the full API."},
   ],
   keyboard: [{keys: "Tab / Shift+Tab", description: "按文档顺序进入控件；点击关联标签聚焦或切换控件。", descriptionEn: "Follow document order; activating an associated label focuses or toggles the control."}],
@@ -47,6 +47,7 @@ export default {
     "未注册的自命名控件需要显式 aria-labelledby 和 aria-describedby；FieldTitle 不代替这一连接。",
     "共同范围从 components/fieldset 导入 Fieldset / FieldsetLegend；FieldSet / FieldLegend 别名已删除。",
     "样式消费 field-gap、field-group-gap 和文字档；具体数值是集中预设。",
+    "Field 只建立一个标签作用域：作用域里的每个控件拿到同一个 id 与同一个标签。单选项（Radio）与分段项（SegmentedControlItem）放在 Field 内会自己开作用域，不需要 FieldItem；已用 FieldItem 包住的项不再叠加，项旁的 FieldLabel 因此仍然有效。直接使用 FieldPrimitive.Item 的组合不被识别，不要再套一层。",
   ],
   notesEn: [
     "Field excludes validate, validationMode, validationDebounceTime, and actionsRef. Pass results from application validation; use the full FieldPrimitive composition for primitive-managed validation.",
@@ -54,5 +55,6 @@ export default {
     "Unregistered self-named controls need explicit aria-labelledby and aria-describedby. FieldTitle does not supply those connections.",
     "Import Fieldset / FieldsetLegend from components/fieldset. FieldSet / FieldLegend aliases have been removed.",
     "Styles consume field-gap, field-group-gap, and text profiles. Their numerical values are centralized presets.",
+    "A Field builds one labelable scope: every control in it receives the same id and the same label. Radio and SegmentedControlItem open their own scope inside a Field, so they need no FieldItem; an item already wrapped in FieldItem is not wrapped again, so the FieldLabel beside it still works. Compositions that use FieldPrimitive.Item directly are not detected; do not nest another scope.",
   ],
 } satisfies ComponentMeta;

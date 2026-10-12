@@ -44,14 +44,49 @@ Applications supply the TanStack instance and getRowId; filtered/page selection 
 - DataTableSortButton: function; owner data-table; PASS; props: DataTableSortButtonProps<TData>
 - DataTableSortButtonProps: type; owner data-table; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### DataTable
+- `busy?`: `boolean`.
+- `caption?`: `React.ReactNode`.
+- `containerProps?`: `TableContainerProps`.
+- `emptyContent`: `React.ReactNode`.
+- `table`: `TableInstance<TData>`.
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### DataTableSelectAll
+- `aria-label`: `string`. Defines a string value that labels the current element.
+- `onCheckedChange?`: `CheckboxProps["onCheckedChange"]`.
+- `scope`: `"page" | "filtered"`.
+- `table`: `TableInstance<TData>`.
+- plus 286 inherited (@types/react 272, @base-ui/react 14); not expanded, see the installed declarations
+
+### DataTableSelectionCell
+- `onCheckedChange?`: `CheckboxProps["onCheckedChange"]`.
+- `row`: `Row<TData>`.
+- plus 287 inherited (@types/react 273, @base-ui/react 14); not expanded, see the installed declarations
+
+### DataTableSortButton
+- `className?`: `string`.
+- `column`: `Column<TData, unknown>`.
+- `data-slot?`: `string`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: @tanstack/react-table
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### DataTable
 A native two-dimensional collection.
 - table / emptyContent / caption / busy / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows.

@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxCollection, ComboboxControl, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSeparator, ComboboxStatus, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["甲", "乙", "丙"];
@@ -85,4 +85,33 @@ test("read-only multiple shows its values without remove actions", () => {
   expect(screen.getByText("甲")).toBeInTheDocument();
   expect(screen.getByText("丙")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: /移除/ })).not.toBeInTheDocument();
+});
+
+test("grouped candidates expose each group with its label, in single and multiple mode", async () => {
+  const teams = [{ value: "设计", items: ["甲", "乙"] }, { value: "工程", items: ["丙"] }];
+  const list = <ComboboxList>{(group: (typeof teams)[number]) => <ComboboxGroup key={group.value} items={group.items}><ComboboxGroupLabel>{group.value}</ComboboxGroupLabel><ComboboxSeparator /><ComboboxCollection>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxCollection></ComboboxGroup>}</ComboboxList>;
+  for (const multiple of [false, true]) {
+    const { unmount } = render(<Combobox items={teams} multiple={multiple as never}><ComboboxInput aria-label="成员" /><ComboboxPopup>{list}</ComboboxPopup></Combobox>);
+    await userEvent.click(screen.getByRole("combobox"));
+    await userEvent.keyboard("{ArrowDown}");
+    expect(await screen.findByRole("group", { name: "设计" })).toContainElement(screen.getByRole("option", { name: "乙" }));
+    expect(screen.getByRole("group", { name: "工程" })).toContainElement(screen.getByRole("option", { name: "丙" }));
+    // 组名与分隔线不是选项，不入键盘序列。
+    expect(screen.getAllByRole("option")).toHaveLength(3);
+    unmount();
+  }
+});
+
+test("status announces loading and result count through one polite region, and at zero goes quiet while staying mounted", async () => {
+  function Example({ loading, count }: { loading: boolean; count: number }) {
+    return <Combobox items={items} open><ComboboxInput aria-label="位置" /><ComboboxPopup><ComboboxStatus loading={loading} count={count} /><ComboboxEmpty>没有匹配项</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox>;
+  }
+  const { rerender } = render(<Example loading count={0} />);
+  const status = await screen.findByText("正在加载");
+  expect(status).toHaveAttribute("aria-live", "polite");
+  rerender(<Example loading={false} count={3} />);
+  expect(status).toHaveTextContent("找到 3 项");
+  rerender(<Example loading={false} count={0} />);
+  expect(status).toBeEmptyDOMElement();
+  expect(status.isConnected).toBe(true);
 });

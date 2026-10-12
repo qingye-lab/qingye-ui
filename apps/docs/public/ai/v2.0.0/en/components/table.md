@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: f5d25d5956f81e18456bbe2e4a25b83c17eca0573f55640ec9cb87f4882f6eff
+Source SHA-256: 1a093806a890aa00d4673b1ffc8e9d1fc8d16088c1a29e4a2c632525b5a23fe7
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -13,6 +13,7 @@ Native table structure preserves comparison; the container handles horizontal ca
 ## Notes
 - Empty results may use a spanning cell below complete headers; data and sorting belong to the application.
 - One region, one surface: inside a Card use framed={false} rather than nesting a second border.
+- Scrollability is measured with a ResizeObserver. The server and first frame render as not scrollable (the server has no layout to measure, and guessing would give most fitting tables a false Tab stop); the client updates before first paint.
 
 ## Use and ownership
 - Compare multiple objects along shared dimensions.
@@ -53,18 +54,58 @@ Native table structure preserves comparison; the container handles horizontal ca
 - TableRow: function; owner table; PASS; props: TableRowProps
 - TableRowProps: type; owner table; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Table
+- no props declared by this library
+- plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableBody
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableCaption
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableCell
+- no props declared by this library
+- plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableContainer
+- `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableHead
+- no props declared by this library
+- plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### TableRow
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### TableContainer
 The table's surface and horizontal scroll container.
 - framed: boolean; default true. false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners.
-- tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default tabIndex=0. Ref targets the container; keyboard scrolling remains available.
+- tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default by measured overflow. Focusable (tabIndex=0) only while the content actually overflows horizontally or vertically, so the keyboard can scroll it; it then becomes a named region from aria-label / aria-labelledby, else the table's caption or aria-label. A container whose content fits stays out of the Tab sequence. Ref targets the container; an explicit tabIndex wins.
 
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
 Native table / caption / thead / tbody / tfoot / tr.

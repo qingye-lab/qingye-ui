@@ -29,14 +29,22 @@ Kbd 不注册键盘监听，不是可点击入口。
 - Kbd: function; owner kbd; PASS; props: KbdProps
 - KbdProps: type; owner kbd; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Kbd
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Kbd
 组合原生 kbd 内容；平台键位由应用确定。
 - render / ref / 原生属性: current public component props. 属性、事件与ref透传实际元素；样式由className/style调整。
@@ -50,5 +58,5 @@ Source: apps/docs/src/content/kbd/demos/01-states.tsx
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "键位", titleEn: "Keys" };
-export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd aria-label="Command">⌘</Kbd><Kbd>Enter</Kbd></Inline>; }
+export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd><span aria-hidden="true">⌘</span><span className="sr-only">Command</span></Kbd><Kbd>Enter</Kbd></Inline>; }
 ```

@@ -3,12 +3,16 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: bd647ac5087770d6f70c087e24abd48f992b2c75389b4781608e250bb1d89c12
+Source SHA-256: 30ef318b5f0b9d44c662d02cc91d8c74f002c2e049606c547160fc9c1962f6bf
 
 Enter one value from a small set of visible segments.
 
 ## Decision
-SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released.
+SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change --qy-track-selected and --qy-track-selected-foreground.
+
+## Notes
+- Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.
+- Arrow keys follow writing direction: with UILocaleProvider dir="rtl", → moves to the previous segment.
 
 ## Use and ownership
 - A few mutually exclusive values benefit from side-by-side comparison.
@@ -25,7 +29,7 @@ SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup f
 - Retain all candidates and permit wrapping; five narrow-screen profiles preserve semantics.
 
 ## Customization
-- Candidates reuse bordered/solid presentation and matching text without adding an outer focus ring.
+- The selected segment reads --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default); unselected segments use muted ink; matching text, no outer focus ring.
 
 ## Current exports
 - SegmentedControl: function; owner segmented-control; PASS; props: SegmentedControlProps<Value>
@@ -36,14 +40,34 @@ SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup f
 - SegmentedControlProps: type; owner segmented-control; PASS
 - SegmentedControlSize: type; owner segmented-control; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SegmentedControl
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### SegmentedControlItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 284 inherited (@types/react 275, @base-ui/react 9); not expanded, see the installed declarations
+
+### SegmentedControlPrimitive
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Arrow keys follow writing direction: with UILocaleProvider dir="rtl", → moves to the previous segment.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
+- Context SegmentSize: without a provider default-value; provided by SegmentedControl
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### SegmentedControl
 Radio value input without owning panels or an option inventory.
 - value / defaultValue: Value. Controlled or initial selection; omitted initial values stay unselected. Zero and empty string may be actual options.

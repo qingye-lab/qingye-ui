@@ -29,14 +29,24 @@ The shared name identifies the scope; each button still names its action. Button
 - ButtonGroup: function; owner button-group; PASS; props: ButtonGroupProps
 - ButtonGroupProps: type; owner button-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ButtonGroup
+- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`.
+- `orientation?`: `"horizontal" | "vertical"`.
+- `wrap?`: `boolean`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ButtonGroup
 An open action relationship with role=group by default.
 - aria-label / aria-labelledby: string. The shared scope name, separate from action names.

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 4f3e1980271449013140a6fefb8c901af3205262a643cbce344ed7df67e1676e
+Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
 
 关联一个值的名称、控件、说明与调用方提供的错误。
 
@@ -16,6 +16,7 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - 未注册的自命名控件需要显式 aria-labelledby 和 aria-describedby；FieldTitle 不代替这一连接。
 - 共同范围从 components/fieldset 导入 Fieldset / FieldsetLegend；FieldSet / FieldLegend 别名已删除。
 - 样式消费 field-gap、field-group-gap 和文字档；具体数值是集中预设。
+- Field 只建立一个标签作用域：作用域里的每个控件拿到同一个 id 与同一个标签。单选项（Radio）与分段项（SegmentedControlItem）放在 Field 内会自己开作用域，不需要 FieldItem；已用 FieldItem 包住的项不再叠加，项旁的 FieldLabel 因此仍然有效。直接使用 FieldPrimitive.Item 的组合不被识别，不要再套一层。
 
 ## Use and ownership
 - 一个值需要持续名称、必要说明或就地错误。
@@ -49,14 +50,64 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - FieldTitle: function; owner field; PASS; props: useRender.ComponentProps<"div">
 - FieldValidity: const; owner field; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Field
+- `orientation?`: `"horizontal" | "vertical"`.
+- plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
+
+### FieldContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldControl
+- no props declared by this library
+- plus 310 inherited (@types/react 305, @base-ui/react 5); not expanded, see the installed declarations
+
+### FieldDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### FieldError
+- `errors?`: `ReadonlyArray<{ message?: string | undefined } | undefined>`.
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldItem
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 277, @base-ui/react 4); not expanded, see the installed declarations
+
+### FieldSeparator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### FieldValidity
+- no props declared by this library
+- plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context InField: without a provider default-value; provided by Field
+- Context InFieldItem: without a provider default-value; provided by Field, FieldItem, OptionScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Field
 Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldPrimitive。
 - orientation: "vertical" | "horizontal"; default "vertical". 纵向编辑或横向选项，不改变关联。
@@ -90,7 +141,7 @@ Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldP
 字段组分界；有文字时两侧线为装饰。
 
 ### FieldItem
-同一 Field 内某个控件与标签的局部关联。
+同一 Field 内某个控件与标签的局部关联。一个 Field 只带一个控件；第二个控件（如滑块旁的精确输入）各用一个 FieldItem，否则它们共用同一个 id。
 
 ### FieldControl / FieldValidity / FieldPrimitive
 直接的原语注册、状态读取与完整 API 出口。

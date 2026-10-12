@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: ef6d04ce956f807ca010b2348e7f99adc4bc1394a734dbfae53cef1c7beaf0b9
+Source SHA-256: e2e61cada80a1236c2e598d96696bef50c76e9e2714b2b63a91aaa4b3cce3faf
 
 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
 
@@ -12,6 +12,7 @@ level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文
 
 ## Notes
 - 字号、行高、字重和字距是当前主题预设，不是由理念唯一推导。
+- 标题档（display-xl、display-lg、display、title、chapter、heading）带 text-wrap: balance，折行时各行长度相近、不留孤字；正文与说明不加（pretty 尚未被各浏览器普遍支持，留作观察），不支持的浏览器回落为普通换行。PageHeaderTitle、EmptyTitle 同样均衡。
 - 中文容器标记 lang=zh-CN；混排与长词保留内容并换行。
 - 辅助文字仍按普通文字验证对比；numeric 不把待核实变成 0。
 
@@ -39,14 +40,33 @@ level 决定 h1–h6，step 决定视觉档。render 改变实际语义；中文
 - TextProps: type; owner typography; PASS
 - TextStep: type; owner external; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Code
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Heading
+- `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Text
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Code
 正文里的一段代码：等宽字，字号为所在文字的 0.875 倍并取整像素，墨的柔底，跟随所在那一行。
 - render / ref / 原生属性: useRender.ComponentProps<"code">. 属性与 ref 透传原生 code 元素。

@@ -36,14 +36,36 @@ Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
 - ConfirmActionProps: type; owner confirm-action; PASS
 - ConfirmActionSnapshot: type; owner confirm-action; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ConfirmAction
+- `actionLabel`: `React.ReactNode`.
+- `children?`: `React.ReactNode`.
+- `confirmationLabel?`: `React.ReactNode`.
+- `confirmationText?`: `string`.
+- `confirmProps?`: `Omit<ButtonProps, "children" | "loading" | "disabled" | "tone">`.
+- `disabled?`: `boolean`.
+- `inputProps?`: `Omit<InputProps, "value" | "defaultValue" | "type" | "name" | "form" | "disabled" | "readOnly" | "size" | "onValueChange">`.
+- `loading?`: `boolean`. 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求。结果由应用用提示组件表达。
+- `onConfirm`: `(snapshot: ConfirmActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
+- `popupProps?`: `AlertDialogPopupProps`.
+- `snapshot`: `ConfirmActionSnapshot`.
+- `title`: `React.ReactNode`.
+- `tone?`: `"neutral" | "danger"`.
+- `triggerLabel`: `React.ReactNode`.
+- `triggerProps?`: `Omit<ButtonProps, "children" | "loading" | "disabled">`.
+- plus 8 inherited (@base-ui/react 8); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ConfirmAction
 AlertDialog 与可选 Field/Input 的确认组合；后果是对话框的说明。
 - snapshot: { objectId: string; objectLabel: string; version: string | number; change: string; consequence: string }. 所有字段必需且有意义；比较包含全部字段。打开捕获不可变副本，确认回调只收到仍对应当前事实的已读副本。

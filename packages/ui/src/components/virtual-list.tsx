@@ -21,8 +21,14 @@ export type VirtualListProps<Item> = Omit<useRender.ComponentProps<"div">, "chil
 export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height, overscan = 2, render, ref, className, style, ...props }: VirtualListProps<Item>) {
   if (!Number.isFinite(itemSize) || itemSize <= 0 || !Number.isFinite(height) || height <= 0) throw new RangeError("VirtualList itemSize and height must be finite positive numbers.");
   if (!Number.isInteger(overscan) || overscan < 0) throw new RangeError("VirtualList overscan must be a nonnegative integer.");
-  const keys = items.map(getKey);
-  if (new Set(keys.map(String)).size !== keys.length) throw new Error("VirtualList requires unique stable item keys.");
+  // 键只在 items / getKey 变化时重算：滚动只改 scrollTop，每次滚动再走一遍全部数据是 O(n)。
+  // 行高固定，第 i 行的偏移就是 i * itemSize，可见区间由 scrollTop 直接除出（O(1)），所以不需要累计偏移数组与二分；
+  // 只有「键 → 位置」的反查需要表。
+  const { keys, indexByKey } = React.useMemo(() => {
+    const keys = items.map(getKey);
+    if (new Set(keys.map(String)).size !== keys.length) throw new Error("VirtualList requires unique stable item keys.");
+    return { keys, indexByKey: new Map(keys.map((key, index) => [key, index] as const)) };
+  }, [items, getKey]);
   const viewportRef = React.useRef<HTMLDivElement | null>(null);
   const rowRefs = React.useRef(new Map<React.Key, HTMLDivElement>());
   const [scrollTop, setScrollTop] = React.useState(0);
@@ -43,7 +49,7 @@ export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height,
   const last = Math.min(items.length - 1, Math.ceil((scrollTop + viewportHeight) / itemSize) - 1 + overscan);
   const indexes = new Set<number>();
   for (let index = first; index <= last; index++) indexes.add(index);
-  const focusedIndex = focusedKey === null ? -1 : keys.indexOf(focusedKey);
+  const focusedIndex = focusedKey === null ? -1 : indexByKey.get(focusedKey) ?? -1;
   if (focusedIndex >= 0) indexes.add(focusedIndex);
   React.useLayoutEffect(() => {
     if (focusedKey !== null && focusedIndex < 0) {
@@ -51,7 +57,7 @@ export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height,
       setFocusedKey(null);
     }
   }, [focusedKey, focusedIndex]);
-  const pendingIndex = pendingFocus === null ? -1 : keys.indexOf(pendingFocus);
+  const pendingIndex = pendingFocus === null ? -1 : indexByKey.get(pendingFocus) ?? -1;
   if (pendingIndex >= 0) indexes.add(pendingIndex);
   React.useLayoutEffect(() => {
     if (pendingFocus === null) return;

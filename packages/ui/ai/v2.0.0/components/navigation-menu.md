@@ -57,14 +57,67 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 - NavigationMenuViewport: function; owner navigation-menu; PASS; props: NavigationMenuViewportProps
 - NavigationMenuViewportProps: type; owner navigation-menu; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### NavigationMenu
+- no props declared by this library
+- plus 286 inherited (@types/react 275, @base-ui/react 11); not expanded, see the installed declarations
+
+### NavigationMenuContent
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### NavigationMenuGroup
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### NavigationMenuGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### NavigationMenuItem
+- no props declared by this library
+- plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
+
+### NavigationMenuLink
+- `description?`: `React.ReactNode`.
+- plus 288 inherited (@types/react 283, @base-ui/react 5); not expanded, see the installed declarations
+
+### NavigationMenuList
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### NavigationMenuPopup
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### NavigationMenuPortal
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### NavigationMenuPositioner
+- no props declared by this library
+- plus 290 inherited (@types/react 275, @base-ui/react 15); not expanded, see the installed declarations
+
+### NavigationMenuTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 284, @base-ui/react 5); not expanded, see the installed declarations
+
+### NavigationMenuViewport
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### NavigationMenu / NavigationMenuList / NavigationMenuItem
 nav、ul 与稳定 value 的导航项。
 - value / defaultValue / onValueChange: Base UI Root props. 展开分组受控或非受控；取消保留当前值。

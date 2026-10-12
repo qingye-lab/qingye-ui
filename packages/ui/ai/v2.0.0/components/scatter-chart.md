@@ -37,14 +37,28 @@ x、y 都是数值轴——这是散点的任务定义，不是违反「永远�
 - ScatterPoint: type; owner scatter-chart; PASS
 - ScatterSeriesInput: type; owner scatter-chart; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ScatterChart
+- `formatX?`: `(value: number) => React.ReactNode`.
+- `formatY?`: `(value: number) => React.ReactNode`.
+- `label`: `string`.
+- `series`: `readonly ScatterSeriesInput[]`. 1 至 3 个系列：两个量的关系是全比较形式（任意两点都可能相邻），色觉校验按全比较口径最多 3 色。
+- `style?`: `ChartStyle`.
+- `xLabel`: `string`. 横轴量的是什么，例如「记录数」。
+- `yLabel`: `string`. 纵轴量的是什么，例如「失败率」。
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: recharts
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ScatterChart
 figure 名称、命名的双轴、按系列着色的标记与同源可见 Table。
 - label: string. 非空真实语义名称。

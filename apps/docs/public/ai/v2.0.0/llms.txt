@@ -22,7 +22,7 @@
 - [动作组 ButtonGroup](components/button-group.md): 为同一范围的动作提供共同名称与间隔。
 - [日历 Calendar](components/calendar.md): 在当地日历中导航年月，选择单日、多个日期或日期范围。
 - [卡片 Card](components/card.md): 为可独立识别的对象建立内容边界。
-- [图表 Chart](components/chart.md): 七种由任务选定的形式——折线、柱状、面积、堆叠面积、横向柱、堆叠柱、环形；同源的图形、命名的轴与按需展开的数据表。
+- [图表 Chart](components/chart.md): 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 - [复选框 Checkbox](components/checkbox.md): 选择独立的是/否或集合中的多个项。
 - [复选组 CheckboxGroup](components/checkbox-group.md): 把复选项接入同一个集合与共同范围。
 - [代码 CodeBlock](components/code-block.md): 文本原样展示与真实复制结果。
@@ -34,7 +34,7 @@
 - [角标 CornerMark](components/corner-mark.md): 钉在宿主一角的未读数或在线点，不是宿主内容本身。
 - [数据集合 DataTable](components/data-table.md): 调用方真实集合的比较、排序与范围选择。
 - [日期输入 DatePicker](components/date-picker.md): 编辑一个当地日期，或展开日历选择。
-- [日期范围 DateRangePicker](components/date-range-picker.md): 在日历中编辑范围草稿，明确应用完整的起止日期。
+- [日期范围 DateRangePicker](components/date-range-picker.md): 键入或在日历中选择起止日期，完整且有序时才是确认值。
 - [日期时间 DateTimePicker](components/date-time-picker.md): 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 - [名称与值 DescriptionList](components/description-list.md): 名称和值的原生关系。
 - [对话框 Dialog](components/dialog.md): 接管整个工作面，完成当前编辑或决定后返回。
@@ -45,7 +45,7 @@
 - [文件输入 FileUpload](components/file-upload.md): 选择或拖入本地文件，保留已接受集合与真实拒绝原因。
 - [筛选条件 FilterBar](components/filter-bar.md): 分开显示草稿条件与已应用事实。
 - [表单 Form](components/form.md): 原生字段提交范围与重置上下文。
-- [两维度的量 Heatmap](components/heatmap.md): 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足），可聚焦的格与按需展开的数据表。
+- [两维度的量 Heatmap](components/heatmap.md): 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 - [链接预览 HoverCard](components/hover-card.md): 悬停与键盘焦点展开相同补充内容。
 - [输入框 Input](components/input.md): 输入一个文本值。
 - [输入组合 InputGroup](components/input-group.md): 让输入与标记、单位或附属动作共用编辑边界。
@@ -74,6 +74,7 @@
 - [两量关系 ScatterChart](components/scatter-chart.md): 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 - [滚动区域 ScrollArea](components/scroll-area.md): 在有限视口内保留真实原生滚动。
 - [搜索输入 SearchInput](components/search-input.md): 输入一个搜索词，并能一步清空。
+- [区块 Section](components/section.md): 不带边框的页面区块，由标题命名；标题与操作同一行。
 - [分段控件 SegmentedControl](components/segmented-control.md): 从并列的少量候选中输入一个值。
 - [选择器 Select](components/select.md): 从可收起的候选列表中取一个值。
 - [分隔线 Separator](components/separator.md): 在已有内容组之间表达分界，可选择语义分隔或装饰线。

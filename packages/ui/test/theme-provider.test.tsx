@@ -215,3 +215,15 @@ test("B8 clearing preferences follows the fallback and the first-paint script to
   vi.stubGlobal("matchMedia", undefined);
   try { new Function(themeScript())(); expect(root).toHaveClass("light"); } finally { vi.unstubAllGlobals(); }
 });
+
+test("the transition-suppression style carries the CSP nonce", async () => {
+  mockSystemTheme(false);
+  vi.spyOn(window, "requestAnimationFrame").mockImplementation(() => 7);
+  const { rerender } = render(<ThemeProvider defaultTheme="light" nonce="n0nce-123"><Probe /></ThemeProvider>);
+  await userEvent.click(screen.getByRole("button", { name: "深色" }));
+  const suppression = [...document.head.querySelectorAll("style")].find(style => style.textContent?.includes("transition:none!important"));
+  expect(suppression).toHaveAttribute("nonce", "n0nce-123");
+  // A new nonce is read on the next flip and does not replay the theme write.
+  rerender(<ThemeProvider defaultTheme="light" nonce="other"><Probe /></ThemeProvider>);
+  expect(root).toHaveClass("dark");
+});

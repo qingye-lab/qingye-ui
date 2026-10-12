@@ -37,14 +37,29 @@ Input does one thing: it carries the entry of one value. Clearing, a search icon
 - InputPrimitive: reexport; owner input; UNVERIFIED
 - InputProps: type; owner input; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Input
+- `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
+- `size?`: `number | undefined`. 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用，不移除输入几何和原生语义。
+- plus 309 inherited (@types/react 303, @base-ui/react 6); not expanded, see the installed declarations
+
+### InputPrimitive
+- no props declared by this library
+- plus 310 inherited (@types/react 304, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Input
 A real border identifies the editable area. Base UI Input retains Field registration and native attributes.
 - type: React.HTMLInputTypeAttribute; default "text". The native type applies as is, with no extra action attached. Use SearchInput / PasswordInput for search and passwords.
@@ -126,22 +141,35 @@ export default function Demo() {
 ### 字数提示
 Source: apps/docs/src/content/input/demos/05-character-count.tsx
 ```tsx
-import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export const meta = { title: "字数提示", titleEn: "Character limit" };
 
+const max = 20;
+const near = 10;
+
+/** 用户所见的字数：一个字形一个字，emoji 与生僻字不按 UTF-16 码元拆成两个。 */
+function useCount() {
+  const segmenter = useMemo(() => new Intl.Segmenter(undefined, { granularity: "grapheme" }), []);
+  return (text: string) => { let count = 0; for (const _ of segmenter.segment(text)) count++; return count; };
+}
+
 export default function Demo() {
-  const max = 20;
-  const [value, setValue] = useState("杭州滨江仓");
+  const count = useCount();
+  const [value, setValue] = useState("杭州滨江仓 🏭");
+  const left = max - count(value);
+  // 播报只在跨档时发生：每一档的文字固定、不含数字，同一档内按键不改变它，读屏不会逐字重读。
+  const band = left < 0 ? "over" : left === 0 ? "full" : left <= near ? "near" : "far";
+  const spoken = { over: "已超出字数上限", full: "已达字数上限", near: "接近字数上限", far: "" }[band];
   return (
-    <Field className="w-full max-w-xs">
+    <Field className="w-full max-w-xs" invalid={left < 0}>
       <FieldLabel>仓库简称</FieldLabel>
-      <Input maxLength={max} onValueChange={setValue} value={value} />
-      <FieldDescription aria-live="polite" className="numeric">
-        还可输入 {max - value.length} 个字
-      </FieldDescription>
+      {/* 不设 maxLength：它按 UTF-16 码元计，与按字形的计数对不上，粘贴超长还会被悄悄截断。超出只标出，不拦。 */}
+      <Input onValueChange={setValue} value={value} />
+      {left >= 0 ? <FieldDescription className="numeric">还可输入 {left} 个字</FieldDescription> : <FieldError match>已超出 {-left} 个字</FieldError>}
+      <span role="status" className="sr-only">{spoken}</span>
     </Field>
   );
 }

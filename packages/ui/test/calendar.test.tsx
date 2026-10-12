@@ -43,3 +43,31 @@ test("disabled dates cannot become the selected value", async () => {
   await userEvent.click(day);
   expect(selected).not.toHaveBeenCalled();
 });
+
+const weekdays = () => Array.from(document.querySelectorAll("th")).map(cell => cell.textContent);
+const caption = (code: string) => render(<UILocaleProvider locale={{ code, messages: enUS.messages }}><Calendar mode="single" defaultMonth={new Date(2026, 9)} /></UILocaleProvider>);
+
+test("months and weekdays follow the locale code, with the week starting where the locale says", () => {
+  caption("de-DE");
+  expect(screen.getByRole("status")).toHaveTextContent("Oktober 2026");
+  expect(weekdays()).toEqual(["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]);
+});
+
+test("ja-JP names the month in Japanese and keeps the locale's Sunday start", () => {
+  caption("ja-JP");
+  expect(screen.getByRole("status")).toHaveTextContent("2026年10月");
+  expect(weekdays()[0]).toBe("日");
+});
+
+test("zh-CN and en-US keep their DayPicker locales (en-US starts on Sunday, zh-CN on Monday)", () => {
+  const { unmount } = caption("en-US");
+  expect(weekdays()[0]).toBe("Su");
+  unmount();
+  caption("zh-CN");
+  expect(weekdays()[0]).toBe("一");
+});
+
+test("a caller-provided locale wins over the one derived from the UI locale", () => {
+  render(<UILocaleProvider locale={{ code: "de-DE", messages: enUS.messages }}><Calendar mode="single" defaultMonth={new Date(2026, 9)} locale={{ code: "en-US" }} weekStartsOn={0} /></UILocaleProvider>);
+  expect(weekdays()[0]).toBe("Su");
+});

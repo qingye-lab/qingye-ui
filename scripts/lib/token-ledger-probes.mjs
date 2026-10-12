@@ -29,5 +29,8 @@ export const PROBES = [
   // 标记列是 tbody 每行的第一个单元格；用位置而不是转义类名选，类名里的括号无法被 CSS 选择器解析。
   // 轨道与凹槽是两个角色（基础层 §6，2026-10-05）：选择组用白底 + 线，凹槽用混合面。
   { id: 'track-border', sourceComponent: 'segmented-control', demo: 'values', part: 'segmented-control', selector: '[data-demo="values"] [data-slot="segmented-control"]', token: '--qy-track-border', override: 'rgb(12, 130, 210)', properties: ['border-top-color'], state: 'default' },
+  // 轨道内选中段的面与字（基础层 §10、§11，2026-10-12）：自有角色，不读 --qy-primary。
+  { id: 'track-selected', sourceComponent: 'segmented-control', demo: 'values', part: 'segmented-control-item', selector: '[data-demo="values"] [data-slot="segmented-control-item"][aria-checked="true"]', token: '--qy-track-selected', override: 'rgb(12, 130, 210)', properties: ['background-color'], state: 'checked' },
+  { id: 'track-selected-foreground', sourceComponent: 'segmented-control', demo: 'values', part: 'segmented-control-item', selector: '[data-demo="values"] [data-slot="segmented-control-item"][aria-checked="true"]', token: '--qy-track-selected-foreground', override: 'rgb(12, 130, 210)', properties: ['color'], state: 'checked' },
   { id: 'groove-surface', sourceComponent: 'progress', demo: 'states', part: 'progress-track', selector: '[data-slot="progress-track"]', token: '--qy-groove-surface', override: 'rgb(12, 130, 210)', properties: ['background-color'], state: 'default' },
 ];

@@ -27,17 +27,19 @@ export function ToggleGroup<Value extends string>({ size = "md", className, ...p
 
 export function ToggleGroupItem<Value extends string>({ size, className, ...props }: ToggleGroupItemProps<Value>) {
   const groupSize = React.useContext(GroupSize);
-  // 未按压：无边框无填充，只有文字——轨道的容器线已经承担整组的边界。
-  // 按压：用 solid 填充，不加阴影（填充已划出范围，NG11）。这与勾选、开关、分段控件的选中同一角色
-  // （「取值与默认不同」），并且与禁用态（降不透明度）在明度与色彩两处区分。
+  // 按压项的面：淡染 + 焦墨字（--qy-track-selected / -foreground，由 Toggle 的按下态给出，基础层 §11「当前位置用淡染」）。
+  // 按压是持续的当前位置，不是命令，不借用 --qy-primary 的实心：筛选不是一个视图里的君（§10），
+  // 品牌覆写主操作的填充时，一页里的切换组不随之变色。填充已划出范围，不加阴影（NG11）。
+  // 按压与否靠面的深浅和字的墨色（焦墨 / 浓墨）共同承担，字重不变，整排不跳动。
+  // 未按压：无边框无底，字为浓墨；悬停时字回到焦墨并出现清墨底。按压项悬停不变（§19：悬停是当前状态自己的悬停；
+  // 未按压的悬停样式只在未按压时出现）。
   return <Toggle data-slot="toggle-group-item" size={size ?? groupSize} {...props}
     className={(state) => cn(
-      // 轨道的边界由轨道的线承担，所以项内不再画 50% 边框；焦点仍是项内一条线。
-      "border-transparent bg-transparent text-foreground [--qy-button-bordered-border:transparent]",
-      "not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-(--qy-surface-active)",
+      // 轨道的边界由轨道的线承担，所以项内不再画 bordered 的淡墨线；焦点是项内一条 1px 线（边框变焦墨）。
+      "border-transparent [--qy-button-bordered-border:transparent]",
+      !state.pressed && "bg-transparent text-muted-foreground not-aria-disabled:hover:text-foreground not-aria-disabled:active:bg-(--qy-surface-active)",
       // 候选高与圆角由轨道倒推（src/track.ts），覆盖按钮自己的几何。
       trackItemClassName,
-      state.pressed && "border-transparent bg-primary text-primary-foreground [--qy-focus-ring-color:var(--qy-focus-ring-on-solid)] not-aria-disabled:hover:bg-primary-hover not-aria-disabled:active:bg-primary-hover",
       state.disabled && "cursor-not-allowed opacity-64",
       typeof className === "function" ? className(state) : className,
     )}

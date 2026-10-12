@@ -14,6 +14,7 @@ Slider 输入真实数值。进度使用 Progress，测量结果使用 Meter；o
 - 必须给 SliderLabel 或每个 Thumb 的名称，多滑块名称需要区分。
 - 原语交互按步进吸附；显式无效值会抛 RangeError。
 - 4px 轨道厚度和 10rem 纵向长度是集中预设，修改 tokens/components.css 或项目主题；浏览器对比与几何仍需验收。
+- Field 内滑块旁放精确输入（NumberField）时，给它一个 FieldItem 并把名称写在 NumberFieldInput 上；Field 的标签名的是滑块，两个控件不能共用一个 id。
 
 ## Use and ownership
 - 有明确有限范围与步进的数值
@@ -49,14 +50,47 @@ Slider 输入真实数值。进度使用 Progress，测量结果使用 Meter；o
 - SliderValue: function; owner slider; PASS; props: SliderValueProps
 - SliderValueProps: type; owner slider; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Slider
+- `readOnly?`: `boolean`. 保留焦点与表单值，取消所有原语值变化。
+- plus 295 inherited (@types/react 275, @base-ui/react 20); not expanded, see the installed declarations
+
+### SliderControl
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### SliderIndicator
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### SliderLabel
+- no props declared by this library
+- plus 277 inherited (@types/react 274, @base-ui/react 3); not expanded, see the installed declarations
+
+### SliderThumb
+- no props declared by this library
+- plus 283 inherited (@types/react 270, @base-ui/react 13); not expanded, see the installed declarations
+
+### SliderTrack
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### SliderValue
+- no props declared by this library
+- plus 281 inherited (@types/react 277, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
+- Context ReadOnly: without a provider default-value; provided by Slider
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Slider
 数值与范围状态，公开各部位供组合。
 - value / defaultValue: number | readonly number[]. 受控值或非受控初值；未传时从 min 开始。数组每项对应一个带 index 的 Thumb。
@@ -95,10 +129,9 @@ Base UI Slider 原语命名空间。
 Source: apps/docs/src/content/slider/demos/01-values.tsx
 ```tsx
 import { useState } from "react";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldDescription, FieldGroup, FieldItem, FieldLabel } from "@qingye_lab/ui/components/field";
 import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
 import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
-import { Inline } from "@qingye_lab/ui/components/layout";
 
 export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
 
@@ -123,8 +156,10 @@ export default function Demo() {
       {/* 范围两端：让「偏左」有一个可读的参照。 */}
       <div className="flex justify-between text-caption text-muted-foreground"><span>0%（每次同步都告警）</span><span>100%（从不告警）</span></div>
       {/* 非拖拽路径：需要精确值时不必拖到难以确定的位置。
-       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。 */}
-      <Inline gap="field"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5} aria-label="告警阈值，精确输入"><NumberFieldGroup><NumberFieldInput /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></Inline>
+       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。
+       *  Field 的标签名的是滑块，精确输入是同一个设置的第二个控件：用 FieldItem 给它自己的标签作用域，
+       *  否则两个控件共用 Field 的 controlId（同一个 id 出现两次）；它的名称写在 NumberFieldInput 上。 */}
+      <FieldItem className="items-center"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5}><NumberFieldGroup><NumberFieldInput aria-label="告警阈值，精确输入" /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></FieldItem>
       <FieldDescription>拖拽、方向键或上面的输入都能改到同一个值。</FieldDescription>
     </Field>
 

@@ -33,14 +33,28 @@ Source SHA-256: 9bb91f1a33b8c8ef1903005e66689aebb65074d7de1b4a6f5b3946b0a4fa7308
 - CornerMarkProps: type; owner corner-mark; PASS
 - CornerMarkTone: type; owner corner-mark; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### CornerMark
+- `children`: `React.ReactNode`.
+- `className?`: `string`.
+- `count`: `number`.
+- `dot?`: `never`.
+- `label`: `string`.
+- `max?`: `number`.
+- `tone?`: `"neutral" | "danger" | "success"`.
+- `wrapperClassName?`: `string`.
 
 ## Dependencies and providers
 - Runtime: clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### CornerMark
 包裹宿主内容，角标钉在宿主的右上角。
 - count / max: number / number. 计数档；超过 max（默认 99）显示「max+」，真实数字仍在 label 里；count 为 0 时角标与 label 一起消失。

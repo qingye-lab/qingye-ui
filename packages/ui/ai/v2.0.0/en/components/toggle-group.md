@@ -3,9 +3,12 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: e6d0a41d40a88d1ab06acaef373625825365b9c0a7215e0b982508522a5285a9
+Source SHA-256: 0ffafe3b0b80fe93491f983ae5885460f2e0ef0b3aebf612d275b23165bbdb4e
 
 A shared single or multiple set of toggles whose pressed fact persists.
+
+## Decision
+A pressed item is a light ink wash with ink text and unpressed items use muted ink, with the same weight. It does not use the primary action fill, so overriding --qy-primary does not change it. To adjust it, change --qy-track-selected and --qy-track-selected-foreground.
 
 ## Notes
 - No name or hidden form value. Use SegmentedControl for submitted mutually exclusive values.
@@ -26,7 +29,7 @@ A shared single or multiple set of toggles whose pressed fact persists.
 - Horizontal layouts may wrap; vertical navigation follows up/down. Browser layout was not verified in this batch.
 
 ## Customization
-- Existing action-gap, five matching profiles, and Toggle presentation.
+- Pressed items read --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default), not --qy-primary; unpressed items use muted ink; existing five matching profiles.
 
 ## Current exports
 - ToggleGroup: function; owner toggle-group; PASS; props: ToggleGroupProps<Value>
@@ -35,14 +38,33 @@ A shared single or multiple set of toggles whose pressed fact persists.
 - ToggleGroupPrimitive: reexport; owner toggle-group; UNVERIFIED
 - ToggleGroupProps: type; owner toggle-group; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ToggleGroup
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 275, @base-ui/react 10); not expanded, see the installed declarations
+
+### ToggleGroupItem
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `value`: `Value`.
+- plus 291 inherited (@types/react 283, @base-ui/react 8); not expanded, see the installed declarations
+
+### ToggleGroupPrimitive
+- no props declared by this library
+- plus 285 inherited (@types/react 275, @base-ui/react 10); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context GroupSize: without a provider default-value; provided by ToggleGroup
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### ToggleGroup
 Both single/multiple modes use arrays; single permits clearing to [].
 - multiple: boolean; default false. false is single with at most one pressed item; true permits multiple pressed items.

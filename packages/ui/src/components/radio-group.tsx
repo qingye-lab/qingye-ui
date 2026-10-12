@@ -3,6 +3,7 @@
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { RadioGroup as RadioGroupPrimitive } from "@base-ui/react/radio-group";
 import * as React from "react";
+import { OptionScope } from "../labelable-scope";
 import { cn } from "../utils";
 
 export type RadioGroupProps<Value = unknown> = RadioGroupPrimitive.Props<Value>;
@@ -25,7 +26,7 @@ export function Radio<Value>({ className, style, children, render = <button type
     "--qy-radio-edge": "var(--qy-marker-size)",
     "--qy-radio-edge-narrow": "var(--qy-marker-size-narrow)",
   } as React.CSSProperties;
-  return <RadioPrimitive.Root
+  return <OptionScope><RadioPrimitive.Root
     data-slot="radio-group-item" {...props} render={render} nativeButton={nativeButton}
     className={(state) => cn(
       "touch-target inline-flex shrink-0 items-center justify-center align-top my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) size-(--qy-radio-edge-narrow) sm:size-(--qy-radio-edge) rounded-full border border-input bg-card text-primary outline-none dark:bg-surface-inset transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
@@ -34,7 +35,7 @@ export function Radio<Value>({ className, style, children, render = <button type
       typeof className === "function" ? className(state) : className,
     )}
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
-  >{children ?? <RadioPrimitive.Indicator data-slot="radio-group-indicator" className="pointer-events-none size-[calc(var(--qy-radio-edge-narrow)/2-2px)] rounded-full bg-primary sm:size-[calc(var(--qy-radio-edge)/2-2px)]" />}</RadioPrimitive.Root>;
+  >{children ?? <RadioPrimitive.Indicator data-slot="radio-group-indicator" className="pointer-events-none size-[calc(var(--qy-radio-edge-narrow)/2-2px)] rounded-full bg-primary sm:size-[calc(var(--qy-radio-edge)/2-2px)]" />}</RadioPrimitive.Root></OptionScope>;
 }
 
 export { RadioGroupPrimitive, RadioPrimitive };

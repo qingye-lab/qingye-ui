@@ -35,14 +35,30 @@ Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a
 - CollapsiblePrimitive: reexport; owner collapsible; UNVERIFIED
 - CollapsibleTrigger: function; owner collapsible; PASS; props: CollapsiblePrimitive.Trigger.Props
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Collapsible
+- no props declared by this library
+- plus 282 inherited (@types/react 275, @base-ui/react 7); not expanded, see the installed declarations
+
+### CollapsiblePanel
+- no props declared by this library
+- plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
+
+### CollapsibleTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: does not read UILocale
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### Collapsible
 单段内容的展开状态。
 - open / defaultOpen / onOpenChange: CollapsiblePrimitive.Root.Props. 真实展开状态与可取消变更请求。
@@ -53,6 +69,7 @@ Signatures may reference inherited types. Consult installed declarations; props 
 
 ### CollapsiblePanel
 关联内容与保持策略。
+- hiddenUntilFound: boolean; default false. 收起时用 hidden="until-found" 留在文档里：页内查找（Ctrl/Cmd+F）命中其中的文字，或地址栏片段指向其中的元素时自动展开。Chrome 102+、Firefox 148+ 支持，Safari 不支持；不支持的浏览器上与默认相同。开启后 keepMounted 无效。命中时由原语直接展开，不播放过渡。
 - keepMounted: boolean; default true. 保留关闭内容和原生字段；应用决定隐藏字段是否禁用。
 - render / ref / className / style: CollapsiblePrimitive.Panel.Props. 透传呈现及原语状态。
 
@@ -71,5 +88,15 @@ import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "展开与保留输入", titleEn: "Reveal and retain input" };
 export default function CollapsibleDemo() {
   return <Stack gap="fields" className="w-full max-w-sm"><Collapsible><CollapsibleTrigger>补充内容</CollapsibleTrigger><CollapsiblePanel><Label htmlFor="collapsible-value">输入</Label><Input id="collapsible-value" /></CollapsiblePanel></Collapsible><Collapsible disabled><CollapsibleTrigger>禁用展开</CollapsibleTrigger><CollapsiblePanel>内容</CollapsiblePanel></Collapsible></Stack>;
+}
+```
+
+### 页内查找
+Source: apps/docs/src/content/collapsible/demos/02-until-found.tsx
+```tsx
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/ui/components/collapsible";
+export const meta = { title: "页内查找", titleEn: "Find in page" };
+export default function CollapsibleDemo() {
+  return <Collapsible className="w-full max-w-sm"><CollapsibleTrigger>更新记录</CollapsibleTrigger><CollapsiblePanel hiddenUntilFound>修正了导出时丢失表头的问题，并让大文件的进度可以取消。</CollapsiblePanel></Collapsible>;
 }
 ```

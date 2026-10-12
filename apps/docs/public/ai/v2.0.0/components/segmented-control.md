@@ -3,12 +3,16 @@
 Package: @qingye_lab/ui@2.0.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: bd647ac5087770d6f70c087e24abd48f992b2c75389b4781608e250bb1d89c12
+Source SHA-256: 30ef318b5f0b9d44c662d02cc91d8c74f002c2e049606c547160fc9c1962f6bf
 
 从并列的少量候选中输入一个值。
 
 ## Decision
-SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。
+SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。选中段是淡染的面加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改 --qy-track-selected 与 --qy-track-selected-foreground。
+
+## Notes
+- 放在 Field 内时，整组的名称、描述与错误落在 radiogroup；每一段自己开标签作用域，id 各不相同，名称仍是段内文字，不会被 Field 的标签接管。
+- 方向键遵循书写方向：UILocaleProvider 的 dir 为 rtl 时，→ 移向前一段。
 
 ## Use and ownership
 - 少量可并列比较的互斥值
@@ -25,7 +29,7 @@ SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部�
 - 保留全部候选并允许换行；五档窄屏尺寸不改变语义
 
 ## Customization
-- 候选复用 bordered/solid 与同档文字；不新增外围焦点圈
+- 选中段读 --qy-track-selected 与 --qy-track-selected-foreground（默认淡染 + 焦墨），未选段字为浓墨；与同档文字；不新增外围焦点圈
 
 ## Current exports
 - SegmentedControl: function; owner segmented-control; PASS; props: SegmentedControlProps<Value>
@@ -36,14 +40,34 @@ SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部�
 - SegmentedControlProps: type; owner segmented-control; PASS
 - SegmentedControlSize: type; owner segmented-control; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SegmentedControl
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
+
+### SegmentedControlItem
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 284 inherited (@types/react 275, @base-ui/react 9); not expanded, see the installed declarations
+
+### SegmentedControlPrimitive
+- no props declared by this library
+- plus 287 inherited (@types/react 275, @base-ui/react 12); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- 方向键遵循书写方向：UILocaleProvider 的 dir 为 rtl 时，→ 移向前一段。
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
+- Context SegmentSize: without a provider default-value; provided by SegmentedControl
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### SegmentedControl
 radio 值输入；不拥有面板或选项清单。
 - value / defaultValue: Value. 受控值或初始选择；不传初值保持未选择，0 与空字符串可以是真实选项。

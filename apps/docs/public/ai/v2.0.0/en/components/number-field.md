@@ -40,14 +40,38 @@ Direct edits outside the range remain intact for native range validation. Steppi
 - NumberFieldPrimitive: reexport; owner number-field; UNVERIFIED
 - NumberFieldProps: type; owner number-field; PASS
 
-Signatures may reference inherited types. Consult installed declarations; props are not fully resolved here.
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### NumberField
+- no props declared by this library
+- plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
+
+### NumberFieldDecrement
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldGroup
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### NumberFieldIncrement
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldInput
+- no props declared by this library
+- plus 308 inherited (@types/react 304, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- Required providers are not inferred from exports. Unresolved requirements: UNVERIFIED.
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 
 ## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
 ### NumberField
 Primitive context for the numeric value and its editable text.
 - value / defaultValue / onValueChange: number | null / number / (value, details) => void. null means empty. The caller accepts controlled changes; details supports cancel().
