@@ -182,7 +182,8 @@ try {
         await page.goto(`${base}/playground/${slug}?theme=${theme}`, { waitUntil: 'networkidle' });
         const region = page.locator(`[data-playground] [data-demo="${demo}"]`); await region.waitFor(); return region;
       };
-      let region = await open('filter-bar');
+      // 草稿与已应用结果的分离在 results 示例里（task 示例只有条件，没有结果列表）。
+      let region = await open('filter-bar', 'results');
       const draft = region.getByRole('textbox', { name: '名称包含', exact: true });
       const filterTarget = await region.locator('ul > li').first().innerText();
       await draft.fill(filterTarget);
@@ -234,7 +235,8 @@ try {
       await page.keyboard.press('ArrowRight'); await region.getByRole('treeitem', { name: '通知', exact: true }).waitFor();
       check('Tree expansion, selection and disabled item', 'Keyboard selection names stable id; collapse hides children');
 
-      region = await open('bulk-action-bar');
+      // 勾选对象与当前版本在 versions 示例里（task 示例没有勾选项与版本）。
+      region = await open('bulk-action-bar', 'versions');
       await region.getByRole('checkbox').nth(1).check();
       await region.getByRole('button', { name: '标记', exact: true }).click();
       await region.getByText('已标记 2 项', { exact: true }).waitFor();
@@ -282,7 +284,8 @@ try {
 
       report.typography = [];
       for (const theme of ['light', 'dark']) for (const slug of ['input-group', 'tabs', 'filter-bar', 'bulk-action-bar', 'data-table', 'toolbar']) {
-        region = await open(slug, slug === 'input-group' ? 'addon' : slug === 'toolbar' ? 'format' : 'task', theme);
+        // bulk-action-bar 用 versions 示例（与拆分前的单目标初始状态一致；task 示例预选两个对象，2 倍字号下目标列表按设计截断）。
+        region = await open(slug, slug === 'input-group' ? 'addon' : slug === 'toolbar' ? 'format' : slug === 'bulk-action-bar' ? 'versions' : 'task', theme);
         const before = await region.evaluate(snapshotTask);
         for (const mode of [{ scale: 2, spacing: false }, { scale: 1, spacing: true }]) {
           try {

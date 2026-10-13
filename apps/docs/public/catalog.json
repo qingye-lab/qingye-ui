@@ -13478,7 +13478,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "742eaf5ab4bb9f05b659c9b66d3cfcd962cd4f3977aba4008d284a7ddfcb8ebd",
+        "sha256": "8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
@@ -29257,7 +29257,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "571d900cc06f84175ae184468e4ed4829d23c4684721fffa463d9b84ef04ac12",
+        "sha256": "e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有一个真实文本输入，分段跟随它的光标与选择。前导零保留，长度填满只说明文本长度；核对、请求和结果归应用。",
@@ -46812,7 +46812,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/toast.tsx",
-        "sha256": "00bc356c67f1de366080dbad79d2a5d491442ee61a9aafe06d01527345ec7d06",
+        "sha256": "b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "通知不抢焦点。未知表示结果未确认，失败表示已有失败事实；关闭只关闭通知。字段错误、不可逆后果和需决策的失败留在工作面或确认结构，不能只用 Toast。",

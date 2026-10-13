@@ -508,13 +508,6 @@
     --qy-hint-padding-inline: var(--qy-control-sm-padding);
     --qy-hint-padding-block: calc(2 * var(--qy-fen));
 
-    /* 浮动通知离视口边缘的距离（**预设** = 6 分 = 24px）。
-     * 角色：通知（Toast）停靠在视口六个位置时与视口边的间距，也是它最大宽高里扣去的两侧之和的一半。
-     * 与页面边距 --qy-page-gutter 不是同一个角色：通知悬浮在内容之上，不属于版心。
-     * 作用范围：Toast 的六个位置、max-w、max-h。当前只有这一个消费者，因为它在同一文件里出现 8 次、且是视口级的尺寸，所以保留为系统角色。
-     * 修改入口：只改这一行。 */
-    --qy-notice-inset: var(--qy-space-6);
-
     /* 禁用的不透明度（**预设** = 64%；STANDARDS §5「当前 opacity-64 是继承预设」，没有关系推出 64）。
      * 角色：命令类与标记类控件「当前不可操作」的整体淡化量——Button、Toggle、ToggleGroup、SegmentedControl、Checkbox、
      *   Radio、Switch、Slider、Calendar 的禁用日、Tree 的禁用项、Disclosure、导航线、浮层条目。
@@ -545,13 +538,9 @@
      *   navigation-menu 的弹出面，以及 ≥40rem 时的 dialog / alert-dialog。
      * --qy-scale-press 0.97：按下时 .qy-pressable 的缩放（当前只有 Button 带这个类）。
      *   它与浮层缩放是不同的关系（按下是对手指的回应，浮层是出现），所以是两个 token，不合并。
-     * --qy-travel-nav 1.5rem：导航菜单内容在相邻项之间切换时水平滑动的距离。
-     * --qy-travel-dialog 1rem：窄屏底部贴靠的对话框入退时的竖向位移。
      * --qy-travel-rise 4px：data-motion="rise-in" 与 stagger 的上升距离。字面 4px（= 1 分，在根字号 16px 下），保持 px，不随根字号缩放，与此前一致。 */
     --qy-scale-popup: 0.98;
     --qy-scale-press: 0.97;
-    --qy-travel-nav: 1.5rem;
-    --qy-travel-dialog: 1rem;
     --qy-travel-rise: 4px;
 
     /* ─── 焦点（骨法用笔；基础层 §15）─────────────────────────

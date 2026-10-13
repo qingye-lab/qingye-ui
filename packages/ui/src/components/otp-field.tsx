@@ -127,7 +127,7 @@ export function OtpField({
         data-active={index === active ? "" : undefined}
         data-selected={index >= countBefore(selection.start) && index < countBefore(selection.end) ? "" : undefined}
         className={cn(
-          "flex aspect-square min-w-0 rounded-[min(var(--qy-fill-radius),calc(var(--qy-radius-ratio)*100%))] text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-surface-field text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-(--qy-surface-active)",
+          "flex aspect-square min-w-0 rounded-[min(var(--qy-fill-radius),calc(var(--qy-radius-ratio)*100%))] text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-surface-field text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-surface-selected",
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
         )}
       >{characters[index] ?? ""}</span>)}

@@ -33,7 +33,7 @@
  * durations, and the reduced-motion fallback. Components supply structure,
  * the trigger's transform origin, and their `data-slot`; they must not declare
  * a second set of entry values. The magnitudes are named in tokens/components.css
- * (--qy-scale-popup 0.98, --qy-scale-press 0.97, --qy-travel-*); all are presets.
+ * (--qy-scale-popup 0.98, --qy-scale-press 0.97, --qy-travel-rise); all are presets.
  * Press feedback describes a different relationship from popup entry, so it keeps
  * its own token. */
 :is(
@@ -143,7 +143,8 @@
   :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"])[data-bottom-stick-on-mobile]:is(
     [data-starting-style], [data-ending-style]
   ) {
-    translate: 0 var(--qy-travel-dialog);
+    /* 1rem 是预设：窄屏底部贴靠的对话框入退的竖向位移，只此一处，不设令牌。 */
+    translate: 0 1rem;
   }
 }
 
@@ -198,11 +199,12 @@
 }
 [data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="left"],
 [data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="right"] {
-  translate: calc(-1 * var(--qy-travel-nav)) 0;
+  /* 1.5rem 是预设：导航内容在相邻项之间切换时的横向位移，只用于这两条规则，不设令牌。 */
+  translate: -1.5rem 0;
 }
 [data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="right"],
 [data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="left"] {
-  translate: var(--qy-travel-nav) 0;
+  translate: 1.5rem 0;
 }
 
 /* Drawer consumes public swipe/snap facts. Offscreen travel equals its own

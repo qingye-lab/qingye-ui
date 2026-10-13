@@ -109,13 +109,14 @@ function NoticeBody({ notice, manager, anchored = false }: {
 // 上限用动态视口单位（dvh/dvw，Baseline 2025-06）：移动浏览器的地址栏伸缩时，vh 取最大视口，通知区会比眼前可见的区域更高；
 // dvh 随地址栏变化，dvw 与 vw 在块轴伸缩的情形下同值，仅为与高度成对。固定定位的视口层可用百分比，但 anchored 的 Positioner 不一定固定于视口，所以统一用视口单位。
 // Complete messages in a normal flow; no collapsed stack or second motion policy.
+// 离视口边 6 分（--qy-space-6，**预设**：通知悬浮在内容之上，不属于版心，没有更基本的关系推出它）；上限扣去两侧的同一距离。
 const positions: Record<ToastPosition, string> = {
-  "top-left": "top-(--qy-notice-inset) left-(--qy-notice-inset)",
-  "top-center": "top-(--qy-notice-inset) left-1/2 -translate-x-1/2",
-  "top-right": "top-(--qy-notice-inset) right-(--qy-notice-inset)",
-  "bottom-left": "bottom-(--qy-notice-inset) left-(--qy-notice-inset)",
-  "bottom-center": "bottom-(--qy-notice-inset) left-1/2 -translate-x-1/2",
-  "bottom-right": "bottom-(--qy-notice-inset) right-(--qy-notice-inset)",
+  "top-left": "top-(--qy-space-6) left-(--qy-space-6)",
+  "top-center": "top-(--qy-space-6) left-1/2 -translate-x-1/2",
+  "top-right": "top-(--qy-space-6) right-(--qy-space-6)",
+  "bottom-left": "bottom-(--qy-space-6) left-(--qy-space-6)",
+  "bottom-center": "bottom-(--qy-space-6) left-1/2 -translate-x-1/2",
+  "bottom-right": "bottom-(--qy-space-6) right-(--qy-space-6)",
 };
 function Notices({ position = "bottom-right", portalProps, anchored = false }: {
   position?: ToastPosition; portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined; anchored?: boolean;
@@ -131,7 +132,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
         aria-live="off"
         style={layer}
         className={anchored ? "outline-none" : cn(
-          "pointer-events-none fixed flex w-max max-w-[calc(100dvw-var(--qy-notice-inset)*2)] max-h-[calc(100dvh-var(--qy-notice-inset)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
+          "pointer-events-none fixed flex w-max max-w-[calc(100dvw-var(--qy-space-6)*2)] max-h-[calc(100dvh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
           positions[position],
         )}
       >
@@ -140,7 +141,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
             key={notice.id}
             toast={notice}
             data-slot="toast-positioner"
-            className="w-max max-w-[calc(100dvw-var(--qy-notice-inset)*2)]"
+            className="w-max max-w-[calc(100dvw-var(--qy-space-6)*2)]"
             {...notice.positionerProps}
             style={state => ({ ...layer, ...(typeof notice.positionerProps?.style === "function" ? notice.positionerProps.style(state) : notice.positionerProps?.style) })}
           >

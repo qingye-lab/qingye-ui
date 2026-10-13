@@ -1,7 +1,7 @@
-import { render, screen, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import * as React from "react";
 import { renderToString } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Button } from "../src/components/button";
 import { Sidebar, SidebarContent, SidebarLink } from "../src/components/sidebar";
 import { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceHeaderPortal, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from "../src/components/workspace";
@@ -53,6 +53,63 @@ describe("Workspace", () => {
     expect(main).toHaveAttribute("tabindex", "-1");
     main.focus();
     expect(main).toHaveFocus();
+  });
+
+  it("updates keyboard access when content is inserted or changes inside a fixed-size wrapper", async () => {
+    const content = React.createRef<HTMLElement>();
+    render(<WorkspaceContent ref={content}><div style={{ height: "100%" }}><div data-testid="nested-content" /></div></WorkspaceContent>);
+    const main = content.current!;
+    const nested = screen.getByTestId("nested-content");
+    Object.defineProperties(main, {
+      clientHeight: { get: () => 200 },
+      scrollHeight: { get: () => Number.parseFloat((nested.firstElementChild as HTMLElement | null)?.style.height || "0") },
+    });
+    const child = document.createElement("div");
+    child.style.height = "600px";
+    nested.appendChild(child);
+    await waitFor(() => expect(main).toHaveAttribute("tabindex", "0"));
+    child.style.height = "100px";
+    await waitFor(() => expect(main).toHaveAttribute("tabindex", "-1"));
+    child.style.height = "600px";
+    await waitFor(() => expect(main).toHaveAttribute("tabindex", "0"));
+    child.remove();
+    await waitFor(() => expect(main).toHaveAttribute("tabindex", "-1"));
+  });
+
+  it("remeasures a nested element's resize, preserves an explicit tabIndex, and releases its observers", () => {
+    const observers: MockResizeObserver[] = [];
+    class MockResizeObserver {
+      targets = new Set<Element>();
+      constructor(private callback: ResizeObserverCallback) { observers.push(this); }
+      observe(target: Element) { this.targets.add(target); }
+      unobserve(target: Element) { this.targets.delete(target); }
+      disconnect() { this.targets.clear(); }
+      resize(target: Element) { if (this.targets.has(target)) this.callback([], this as unknown as ResizeObserver); }
+    }
+    vi.stubGlobal("ResizeObserver", MockResizeObserver);
+    let height = 100;
+    const content = React.createRef<HTMLElement>();
+    const view = render(<WorkspaceContent ref={content}><div style={{ height: "100%" }}><img alt="记录" /></div></WorkspaceContent>);
+    try {
+      const main = content.current!;
+      const image = screen.getByRole("img");
+      Object.defineProperties(main, { clientHeight: { get: () => 200 }, scrollHeight: { get: () => height } });
+      const resize = () => act(() => { for (const observer of observers) observer.resize(image); });
+      height = 600;
+      resize();
+      expect(main).toHaveAttribute("tabindex", "0");
+      height = 100;
+      resize();
+      expect(main).toHaveAttribute("tabindex", "-1");
+      view.rerender(<WorkspaceContent ref={content} tabIndex={3}><div style={{ height: "100%" }}><img alt="记录" /></div></WorkspaceContent>);
+      height = 600;
+      resize();
+      expect(main).toHaveAttribute("tabindex", "3");
+    } finally {
+      view.unmount();
+      vi.unstubAllGlobals();
+    }
+    expect(observers.every(observer => observer.targets.size === 0)).toBe(true);
   });
 
   it("sends a page's title and actions up into the header, and takes them away when the page unmounts", () => {

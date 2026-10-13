@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-13T03:44:57.368Z",
-  "revision": "1b49b7f0bb8dc84a064d16ee1145e7fa686cfd8e",
+  "generatedAt": "2026-10-13T04:14:17.463Z",
+  "revision": "d3ee06e776839ed45190d90fea6589b4bc304642",
   "fingerprint": {
-    "sha256": "53ddd69cd333f132601f2a24bf4ded5b081377b380a2bca5bd02178247f607aa",
+    "sha256": "7cac9c7812ce4946302ce659d6b53e795c0683ea6adfe901f7405e2a86c7a312",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -396,11 +396,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "103f3e81ea0d9b5922146eece0380898c25a581738b78f133d35ff0f3e8b7192"
+        "sha256": "e99eb24a4f442fdeef2c26dbc512dc47b8c7a5ad430a6e2534a97b7a03e56e59"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "b8023946ea8eea3131efcc605a954a6d631b01a9a3bc70374b7d679186a5cab4"
+        "sha256": "883de441dda8205a9c2ca7bc6d7e916951ad51bc5a70694e48dd124598e568e8"
       },
       {
         "path": "packages/ui/package.json",
@@ -500,7 +500,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "742eaf5ab4bb9f05b659c9b66d3cfcd962cd4f3977aba4008d284a7ddfcb8ebd"
+        "sha256": "8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -616,7 +616,7 @@
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "571d900cc06f84175ae184468e4ed4829d23c4684721fffa463d9b84ef04ac12"
+        "sha256": "e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e"
       },
       {
         "path": "packages/ui/src/components/page-header.tsx",
@@ -744,7 +744,7 @@
       },
       {
         "path": "packages/ui/src/components/toast.tsx",
-        "sha256": "00bc356c67f1de366080dbad79d2a5d491442ee61a9aafe06d01527345ec7d06"
+        "sha256": "b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d"
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
@@ -796,7 +796,7 @@
       },
       {
         "path": "packages/ui/tokens/components.css",
-        "sha256": "9f5f89e5e9e896f43db237817f351538a12acfe7f73b349a37955b8e65dc33f7"
+        "sha256": "337cf9feb6770e3afa2bb29c40ff17192739d02c3cd3c52725a98de9c55918cc"
       },
       {
         "path": "packages/ui/tokens/contrast.css",
@@ -25910,7 +25910,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 163
+            "line": 164
           }
         },
         {
@@ -25943,7 +25943,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 171
+            "line": 172
           }
         },
         {
@@ -25951,7 +25951,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 155
+            "line": 156
           }
         },
         {
@@ -26192,11 +26192,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 155
+              "line": 156
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 155
+              "line": 156
             },
             "status": "PRESENT"
           },
@@ -26218,11 +26218,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 163
+              "line": 164
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 163
+              "line": 164
             },
             "status": "PRESENT"
           },
@@ -26244,11 +26244,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 171
+              "line": 172
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 171
+              "line": 172
             },
             "status": "PRESENT"
           }
@@ -29512,7 +29512,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 592
+            "line": 581
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29531,7 +29531,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 598
+            "line": 587
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29549,7 +29549,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 593
+            "line": 582
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29567,7 +29567,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 599
+            "line": 588
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -29756,7 +29756,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 608
+            "line": 597
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -30643,7 +30643,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 532
+            "line": 525
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30659,7 +30659,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 533
+            "line": 526
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30675,7 +30675,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 530
+            "line": 523
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30691,7 +30691,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 531
+            "line": 524
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30707,7 +30707,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 528
+            "line": 521
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30723,7 +30723,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 529
+            "line": 522
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30739,7 +30739,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 536
+            "line": 529
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30755,7 +30755,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 539
+            "line": 532
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30771,7 +30771,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 538
+            "line": 531
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30787,7 +30787,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 537
+            "line": 530
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -30939,7 +30939,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 571
+            "line": 560
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -30986,7 +30986,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 618
+            "line": 607
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31017,7 +31017,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 619
+            "line": 608
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31048,7 +31048,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 621
+            "line": 610
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31079,7 +31079,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 622
+            "line": 611
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31110,7 +31110,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 620
+            "line": 609
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31141,7 +31141,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 623
+            "line": 612
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -31195,7 +31195,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 563
+            "line": 552
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -31213,7 +31213,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 587
+            "line": 576
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -31231,7 +31231,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 586
+            "line": 575
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -31247,7 +31247,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 561
+            "line": 550
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -32267,24 +32267,6 @@
       ]
     },
     {
-      "name": "--qy-notice-inset",
-      "definitions": [
-        {
-          "name": "--qy-notice-inset",
-          "value": "var(--qy-space-6)",
-          "references": [
-            "--qy-space-6"
-          ],
-          "source": {
-            "path": "packages/ui/tokens/components.css",
-            "line": 516
-          },
-          "context": "@layer base {\n  :root",
-          "complete": true
-        }
-      ]
-    },
-    {
       "name": "--qy-opacity-disabled",
       "definitions": [
         {
@@ -32293,7 +32275,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 524
+            "line": 517
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -32367,7 +32349,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 631
+            "line": 620
           },
           "context": "@media (width < 40rem) {\n    :root",
           "complete": true
@@ -32385,7 +32367,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 572
+            "line": 561
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -32404,7 +32386,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 575
+            "line": 564
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -32417,7 +32399,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 635
+            "line": 624
           },
           "context": ":root,\n    [data-density]",
           "complete": true
@@ -32436,7 +32418,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 577
+            "line": 566
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -33057,7 +33039,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 579
+            "line": 568
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -33073,7 +33055,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 551
+            "line": 542
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33089,7 +33071,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 552
+            "line": 543
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33107,7 +33089,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 573
+            "line": 562
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -33611,7 +33593,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 617
+            "line": 606
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -33627,7 +33609,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 540
+            "line": 533
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36821,38 +36803,6 @@
       ]
     },
     {
-      "name": "--qy-travel-dialog",
-      "definitions": [
-        {
-          "name": "--qy-travel-dialog",
-          "value": "1rem",
-          "references": [],
-          "source": {
-            "path": "packages/ui/tokens/components.css",
-            "line": 554
-          },
-          "context": "@layer base {\n  :root",
-          "complete": true
-        }
-      ]
-    },
-    {
-      "name": "--qy-travel-nav",
-      "definitions": [
-        {
-          "name": "--qy-travel-nav",
-          "value": "1.5rem",
-          "references": [],
-          "source": {
-            "path": "packages/ui/tokens/components.css",
-            "line": 553
-          },
-          "context": "@layer base {\n  :root",
-          "complete": true
-        }
-      ]
-    },
-    {
       "name": "--qy-travel-rise",
       "definitions": [
         {
@@ -36861,7 +36811,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 555
+            "line": 544
           },
           "context": "@layer base {\n  :root",
           "complete": true

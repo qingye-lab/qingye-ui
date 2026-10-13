@@ -23,7 +23,7 @@ const cellPadding = (meta: DataTableColumnMeta | undefined) => cn(meta?.numeric 
  * 压到最小的标准写法，实际宽度仍由其中的复选框决定）。列宽比例由表头与单元格
  * 共同决定，所以两处都写。
  */
-const cellWidth = (meta: DataTableColumnMeta | undefined) => meta?.marker ? "w-line" : undefined;
+const cellWidth = (meta: DataTableColumnMeta | undefined) => meta?.marker ? "w-px" : undefined;
 export type DataTableProps<TData> = Omit<TableProps, "children"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; containerProps?: TableContainerProps };
 export function DataTable<TData>({ table, caption, emptyContent, busy = false, containerProps, className, ...props }: DataTableProps<TData>) {
   if (!table.options.getRowId) throw new Error("DataTable requires an explicit stable getRowId.");

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: 571d900cc06f84175ae184468e4ed4829d23c4684721fffa463d9b84ef04ac12
+Source SHA-256: e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e
 
 分段呈现一个固定长度文本值。
 

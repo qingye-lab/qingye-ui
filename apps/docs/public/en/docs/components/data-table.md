@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 742eaf5ab4bb9f05b659c9b66d3cfcd962cd4f3977aba4008d284a7ddfcb8ebd
+Source SHA-256: 8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa
 
 Comparison, sorting and scoped selection for a real caller-owned collection.
 

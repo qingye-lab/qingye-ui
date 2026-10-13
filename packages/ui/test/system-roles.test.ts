@@ -125,7 +125,6 @@ describe("契约里的工具类：编出规则、读 token", () => {
     ["text-(length:--qy-inline-code-size)", ".text-\\(length\\:--qy-inline-code-size\\)", "font-size: var(--qy-inline-code-size)"],
     ["underline-offset-(--qy-underline-offset)", ".underline-offset-\\(--qy-underline-offset\\)", "text-underline-offset: var(--qy-underline-offset)"],
     ["min-w-[min(100%,var(--qy-field-min-text))]", ".min-w-\\[min\\(100\\%\\,var\\(--qy-field-min-text\\)\\)\\]", "min-width: min(100%,var(--qy-field-min-text))"],
-    ["top-(--qy-notice-inset)", ".top-\\(--qy-notice-inset\\)", "top: var(--qy-notice-inset)"],
     ["mt-(--qy-popup-offset)", ".mt-\\(--qy-popup-offset\\)", "margin-top: var(--qy-popup-offset)"],
     ["border-(--qy-button-bordered-border-danger)", ".border-\\(--qy-button-bordered-border-danger\\)", "border-color: var(--qy-button-bordered-border-danger)"],
   ];
@@ -237,10 +236,8 @@ describe("行内文字与浮层", () => {
     expect(declaration("--qy-underline-offset")).toBe("round(0.25em, 1px)");
     expect(declaration("--qy-field-min-text")).toBe("4em");
   });
-  test("浮层间距 = 1 分 = 4px，与 sideOffset={4} 一致；通知边距 = 6 分 = 24px，与 --qy-space-6 一致", () => {
+  test("浮层间距 = 1 分 = 4px，与 sideOffset={4} 一致", () => {
     expect(px("var(--qy-popup-offset)")).toBe(4);
-    expect(declaration("--qy-notice-inset")).toBe("var(--qy-space-6)");
-    expect(px("var(--qy-notice-inset)")).toBe(24);
   });
   test("提示面内缘：行向 = 小控件外缘到字（12px），块向 = 行间 + 1 分（8px），都不随密度变", () => {
     expect(px("var(--qy-hint-padding-inline)")).toBe(px("var(--qy-control-sm-padding)"));
@@ -250,20 +247,16 @@ describe("行内文字与浮层", () => {
   });
 });
 
-describe("动效幅度（motion.css 读 token，数值与此前字面量相同）", () => {
+describe("动效幅度（多处共用的读 token；导航 1.5rem 与窄屏对话框 1rem 各只一处，留作字面量）", () => {
   const motion = read("motion.css");
   test("token 的值", () => {
     expect(declaration("--qy-scale-popup")).toBe("0.98");
     expect(declaration("--qy-scale-press")).toBe("0.97");
-    expect(declaration("--qy-travel-nav")).toBe("1.5rem");
-    expect(declaration("--qy-travel-dialog")).toBe("1rem");
     expect(declaration("--qy-travel-rise")).toBe("4px");
   });
   test("motion.css 里不再有这些字面量（注释除外）", () => {
     const code = motion.replace(/\/\*[\s\S]*?\*\//g, "");
     expect(code).not.toMatch(/scale:\s*0\.9[78]/);
-    expect(code).not.toMatch(/translate:\s*-?1\.5rem/);
-    expect(code).not.toMatch(/translate:\s*0\s+1rem/);
     expect(code).not.toMatch(/translate:\s*0\s+4px/);
     expect(code.match(/var\(--qy-scale-popup\)/g)?.length).toBe(2);
     expect(code.match(/var\(--qy-scale-press\)/g)?.length).toBe(1);

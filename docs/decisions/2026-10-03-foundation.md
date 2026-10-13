@@ -582,8 +582,7 @@ Popover、Tooltip、HoverCard 的入退由 `motion.css` 拥有，起止 `scale(0
 | `--qy-inline-code-size`、`--qy-underline-offset` | `round(0.875em, 1px)`、`round(0.25em, 1px)` | **预设** | 取此前各处字面量的共同值；em 在使用处求值。下划线粗细就是 `--qy-line-width` |
 | `--qy-field-min-text` | 4em | **预设** | 可输入字段里文字区的下限（Select 触发器、Combobox、InputGroup） |
 | `--qy-popup-offset` | 1 分 = 4px | **派生** | 浮层与触发器的间距。CSS 能读，Base UI 的 `sideOffset` 只收数字或 `(data) => number`，读不到 DOM；JS 侧须先量一个读取该令牌的元素（见契约文件）。各浮层今天的偏移 0 与 4 并存，**本轮不统一** |
-| `--qy-notice-inset` | `--qy-space-6` = 24px | **选择** | 通知离视口边缘的距离（目前只有 Toast 读它） |
-| `--qy-scale-popup` 0.98、`--qy-scale-press` 0.97、`--qy-travel-nav` 1.5rem、`--qy-travel-dialog` 1rem、`--qy-travel-rise` 4px | 同左 | **预设** | `motion.css` 的动势量；此前是该文件内的字面量 |
+| `--qy-scale-popup` 0.98、`--qy-scale-press` 0.97、`--qy-travel-rise` 4px | 同左 | **预设** | `motion.css` 的动势量；此前是该文件内的字面量。导航内容切换的 1.5rem 与窄屏对话框的 1rem 各只一处使用，留在 `motion.css` 的规则里作字面量（**预设**），不设令牌 |
 | `--qy-focus-quiet-width` | `--qy-line-width` | **派生** | 强制色模式下安静焦点轮廓的宽度 |
 | `--qy-button-bordered-border-danger`、`--qy-button-bordered-border-focus-danger` | 危险色按 `--qy-ink-dan` 混合；危险色本身 | **派生** | bordered 危险按钮的边与焦点边；此前写在 `button.tsx` 的任意值里 |
 | `--qy-control-{xs,sm,md,lg,xl}-padding-bordered` | 内边距 − `--qy-line-width` | **派生** | 此前是字面 `- 1px`，现读线宽，值不变 |

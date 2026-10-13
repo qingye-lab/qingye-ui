@@ -671,6 +671,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/pagination"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/password-input</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/password-input"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/password-input"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/password-input</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/password-input"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/password-input"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/pending-value</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/pending-value"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/pending-value"/>
@@ -751,6 +761,26 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/scroll-area"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/search-input</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/search-input"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/search-input"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/search-input</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/search-input"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/search-input"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/section</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/section"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/section"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/section</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/section"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/section"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/segmented-control</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/segmented-control"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/segmented-control"/>
@@ -779,6 +809,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/separator</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/separator"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/separator"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/severity-mark</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/severity-mark"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/severity-mark"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/severity-mark</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/severity-mark"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/severity-mark"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/sidebar</loc>
@@ -1009,5 +1049,15 @@
     <loc>https://ui.xflux.cc/en/docs/components/virtual-list</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/virtual-list"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/virtual-list"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/workspace</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/workspace"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/workspace"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/workspace</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/workspace"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/workspace"/>
   </url>
 </urlset>

@@ -1,58 +1,66 @@
 /*
- * 组件总览：每个组件一格——一个清墨线框托着活的示例，框下是名称与一句用途，整格是一个链接。
- * 框是这页唯一的框：示例是一件独立的物，须与邻格分开；页上其余处都不画框。
- * - 框高 7 材（预设：一屏能放下约四行，且容得下 md 字段加说明）；内缘 = 面板内缘（--qy-panel-padding）。
- * - 列间 = 字段组间隔（1 材），行间 = 段间隔（2 材）；框到名称 = 字段间隔。章与章之间沿用 H2 的章距，这里不再加。
- * - 栏宽 760 时为三列：每格不少于 11 材（220px），放得下一个 176px 的控件加两侧内缘。
+ * 组件总览：每个组件一格——活的示例直接放在纸上，下面是名称与一句用途，整格是一个链接。
+ * 不套框（疏密有致：不靠线和卡片补救本该由间距表达的分组；用户裁决 2026-10-12「标本直接放在纸上」）：
+ * 文档正文已经是一张有线的纸，纸里再画框就是框中框。格与格靠间距分开。
+ * - 示例区的高随所在那一行：取同一行里最高的示例，不超过 7 材（预设：容得下 md 字段加说明）。
+ *   固定高会在小示例上方留出无用的空白（布白有用：空白要有用处）。示例、名称、用途各成一行（subgrid），
+ *   同一行的名称跨格对齐；用途紧跟名称，不再隔开。块向内缘 = 小面板内缘，只给悬停面留位置。
+ * - 示例与名称同一条左缘（经营位置：边缘落在少数对齐线上），不居中悬空。
+ * - 悬停时示例区铺一层悬停面，向两侧溢出一个小面板内缘，字仍压在栏线上——与整行入口（Item）同一条规则（基础层 §19）。
+ * - 列间 = 行间 = 段间隔（2 材）：格是同一级的并列物，两向同一个关系；示例到名称 = 字段间隔。
+ * - 栏宽 760 时为三列：每格不少于 11 材（220px）。
  */
 .components-index-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(calc(11 * var(--qy-cai)), 1fr));
-  gap: var(--qy-section-gap) var(--qy-field-group-gap);
-  margin: 0;
+  /* 行距写在每格的最后一行（用途）下方：subgrid 的子行共用父网格的行距，父网格若设行距，名称与用途之间也会被拉开。 */
+  gap: 0 var(--qy-section-gap);
+  /* 最后一行用途下方的行距与下一章的章距重复，整网格收回一个行距。 */
+  margin: 0 0 calc(-1 * var(--qy-section-gap));
   padding: 0;
   list-style: none;
 }
 .components-index-tile {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
   min-inline-size: 0;
 }
 .components-index-frame {
   isolation: isolate;
-  block-size: calc(7 * var(--qy-cai));
+  max-block-size: calc(7 * var(--qy-cai));
   min-inline-size: 0;
   margin-block-end: var(--qy-field-gap);
+  margin-inline: calc(-1 * var(--qy-panel-padding-sm));
   overflow: hidden;
-  border: 1px solid var(--qy-border);
   border-radius: var(--qy-radius-panel);
   transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
 }
 .components-index-tile:hover .components-index-frame { background: var(--qy-surface-hover); }
 /*
- * 台：样张放在框的内缘之内，放得下的居中。放不下的大件（日历、表格、图表）从起始角排起，
- * 越出内缘的部分在内缘这一段里淡出——读来是「下面还有」，不是被框切断。淡出只发生在结束侧与底侧的内缘带内，
- * 放得下的样张碰不到它。遮罩画在台上而不是框上，框线与框的悬停底不受影响。
+ * 台：样张放在示例区的内缘之内，从起始侧排起，压在下沿——贴着自己的名称，与上一格之间留出疏处（疏密有致：组内紧、组间松）。放不下的大件（日历、表格、图表）越出内缘的部分
+ * 在内缘这一段里淡出——读来是「下面还有」，不是被切断。淡出只发生在结束侧与底侧的内缘带内，
+ * 放得下的样张碰不到它。遮罩画在台上，不影响示例区的悬停面。
  */
 .components-index-stage {
   display: flex;
-  align-items: safe center;
-  justify-content: safe center;
+  align-items: safe end;
+  justify-content: safe start;
   block-size: 100%;
-  padding: var(--qy-panel-padding);
+  padding: var(--qy-panel-padding-sm);
   overflow: hidden;
   mask-image:
-    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding)), transparent),
-    linear-gradient(to right, #000 calc(100% - var(--qy-panel-padding)), transparent);
+    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding-sm)), transparent),
+    linear-gradient(to right, #000 calc(100% - var(--qy-panel-padding-sm)), transparent);
   mask-composite: intersect;
 }
 .components-index-stage:dir(rtl) {
   mask-image:
-    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding)), transparent),
-    linear-gradient(to left, #000 calc(100% - var(--qy-panel-padding)), transparent);
+    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding-sm)), transparent),
+    linear-gradient(to left, #000 calc(100% - var(--qy-panel-padding-sm)), transparent);
 }
-/* 示例载入失败时，框里只留名称：框不空，整格仍是链接。 */
+/* 示例载入失败时，示例区只留名称：不空着，整格仍是链接。 */
 .components-index-stage[data-state="failed"] { align-items: center; justify-content: center; color: var(--qy-foreground-muted); text-align: center; }
 .components-index-name {
   display: flex;
@@ -66,7 +74,7 @@
   color: var(--qy-foreground);
   outline: none;
 }
-/* 整格是一个去处：名称链接的伪元素铺满格子，示例框在其下（框 inert，不接收指针）。 */
+/* 整格是一个去处：名称链接的伪元素铺满格子，示例区在其下（inert，不接收指针）。 */
 .components-index-name::after {
   content: "";
   position: absolute;
@@ -82,7 +90,8 @@
   color: var(--qy-foreground-muted);
 }
 .components-index-use {
-  margin: 0;
+  margin: 0 0 var(--qy-section-gap);
+  align-self: start;
   font-size: var(--qy-text-support-size);
   line-height: var(--qy-text-support-leading);
   color: var(--qy-foreground-muted);

@@ -88,6 +88,16 @@ function classStrings(source) {
   });
   return found;
 }
+// Families seen only in stylesheet @apply rules (prose.css). Kept out of the TSX table so TSX records stay unchanged.
+const STYLESHEET_FAMILIES = [['max-w-', ['max-width']], ['min-w-', ['min-width']], ['size-', ['width', 'height']], ['mt-', ['margin-top']], ['mb-', ['margin-bottom']], ['my-', ['margin-block']], ['me-', ['margin-inline-end']], ['underline-offset-', ['text-underline-offset']], ['decoration-(color:', ['text-decoration-color']]];
+function stylesheetUtilityInfo(utility) {
+  const raw = utility.replace(/!$/, '');
+  const match = STYLESHEET_FAMILIES.find(([prefix]) => raw.startsWith(prefix));
+  const references = [...new Set(raw.match(/--[a-zA-Z0-9_-]+/g) || [])];
+  if (!match || !references.length) return null;
+  const mappings = match[1].map((property) => ({ property, references, supported: true }));
+  return { ...mappings[0], extraMappings: mappings.slice(1) };
+}
 function utilityInfo(utility, themeNames) {
   const raw = utility.replace(/!$/, '');
   if (raw.startsWith('text-')) {
@@ -107,6 +117,31 @@ function utilityInfo(utility, themeNames) {
   const named = alias && `${alias}${suffix}`;
   if (named && themeNames.has(named)) references.push(named);
   return { property, references, supported: references.length > 0 };
+}
+// Stylesheet @apply rules (packages/ui/prose.css). Comments are blanked (newlines kept for line numbers),
+// then nested rules are walked with a selector stack; each @apply statement is reported with its nearest rule selector.
+export function applyRules(css) {
+  const text = css.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
+  const rules = [], stack = []; let statement = '', statementLine = 1, line = 1, quote = '', depth = 0;
+  for (let index = 0; index < text.length; index++) {
+    const char = text[index];
+    if (char === '\n') line++;
+    if (quote) { statement += char; if (char === quote) quote = ''; continue; }
+    if (char === '"' || char === "'") { quote = char; statement += char; continue; }
+    if ('[('.includes(char)) depth++;
+    if ('])'.includes(char)) depth--;
+    if (!statement.trim()) statementLine = line;
+    if (char === '{' && depth === 0) { stack.push(statement.trim().replace(/\s+/g, ' ')); statement = ''; continue; }
+    if ((char === ';' || char === '}') && depth === 0) {
+      const apply = /^@apply\s+([\s\S]*)$/.exec(statement.trim());
+      if (apply) rules.push({ selector: stack[stack.length - 1] || null, parents: stack.slice(0, -1), utilities: apply[1], line: statementLine });
+      statement = '';
+      if (char === '}') stack.pop();
+      continue;
+    }
+    statement += char;
+  }
+  return rules;
 }
 export function generateStaticLedger() {
   const styles = declarations();
@@ -137,11 +172,12 @@ export function generateStaticLedger() {
       for (const declaration of localGraph.get(name) || []) for (const reference of declaration.references) output.push(...resolveReference(reference, [...chain, { variable: name, source: declaration.source, condition: declaration.context }], next));
       return output;
     }
-    for (const entry of strings) for (const className of splitOutside(entry.text, ' ')) {
+    const styleEntries = component === 'prose' ? applyRules(read('packages/ui/prose.css')).map((rule) => ({ text: rule.utilities, bindings: [{ part: 'prose', selector: rule.selector, precision: 'EXACT_DESCENDANT' }], slots: ['prose'], conditions: [], source: { path: 'packages/ui/prose.css', line: rule.line }, owner: null, stylesheet: true, mapping: `@apply rule in a stylesheet under [data-slot="prose"] (nested selector); cascade and nesting specificity not established` })) : [];
+    for (const entry of [...strings, ...styleEntries]) for (const className of splitOutside(entry.text, ' ')) {
       const segments = splitOutside(className, ':');
       const utility = segments.pop();
       if (/^\[--/.test(utility)) continue;
-      const info = utilityInfo(utility, themeNames);
+      const info = utilityInfo(utility, themeNames) || (entry.stylesheet ? stylesheetUtilityInfo(utility) : null);
       if (!info || !info.supported) {
         if (/--qy-|--card-spacing|--table-row/.test(utility)) unresolved.push({ sourceComponent: component, className, source: entry.source, reason: 'Unsupported class/property mapping; no runtime claim' });
         continue;
@@ -153,7 +189,7 @@ export function generateStaticLedger() {
         const childSlot = segments.join(':').match(/\*:?data-\[slot=([\w-]+)\]/)?.[1];
         const part = childSlot || binding.part;
         const pseudo = segments.includes('before') ? '::before' : segments.includes('after') ? '::after' : null;
-        records.push({ ...path, component: component === 'card' ? 'panel' : component, sourceComponent: component, publicNames: entry.owner ? [entry.owner] : publicBySlot.get(part) || [], part, selector: childSlot ? `[data-slot="${childSlot}"]` : binding.selector, precision: childSlot ? 'EXACT_SLOT' : binding.precision, pseudo, property: mapped.property, conditions: [...entry.conditions, ...segments], className, source: entry.source, mapping: 'AST class literal + bounded utility and custom-property forwarding; cascade not established' });
+        records.push({ ...path, component: component === 'card' ? 'panel' : component, sourceComponent: component, publicNames: entry.owner ? [entry.owner] : publicBySlot.get(part) || [], part, selector: childSlot ? `[data-slot="${childSlot}"]` : binding.selector, precision: childSlot ? 'EXACT_SLOT' : binding.precision, pseudo, property: mapped.property, conditions: [...entry.conditions, ...segments], className, source: entry.source, mapping: entry.mapping || 'AST class literal + bounded utility and custom-property forwarding; cascade not established' });
       }
       }
     }
@@ -172,5 +208,5 @@ export function generateStaticLedger() {
   const paths = [...recursiveFiles('packages/ui/src', /\.[cm]?[jt]sx?$/), ...recursiveFiles('apps/docs/src', /\.(tsx?|css)$/), ...stylePaths(), 'packages/ui/package.json', 'apps/docs/package.json', ...runtimeConfigPaths];
   const toolPaths = ['scripts/lib/ui-facts.mjs', 'scripts/lib/token-ledger-static.mjs', 'scripts/lib/token-ledger-probes.mjs', 'scripts/token-ledger.mjs', 'scripts/token-ledger-runtime.mjs'];
   const tools = toolPaths.map((path) => ({ path, sha256: hash(readFileSync(new URL(path.replace(/^scripts\//, '../'), import.meta.url), 'utf8')) }));
-  return { fingerprint: fingerprint(paths, tools), coveredComponents: COMPONENTS.map((name) => ({ component: name === 'card' ? 'panel' : name, sourceComponent: name, publicName: name === 'card' ? ['Card', 'CardPanel'] : [name[0].toUpperCase() + name.slice(1)], route: `/playground/${name}` })), tokens: tokenDefinitions(), records: [...unique.values()], unresolved, limitations: ['Only statically readable class literals and known utility families are mapped.', 'Conditions and forwarding branches are retained; CSS cascade and actual state applicability require runtime evidence.', 'Unknown utilities/dynamic expressions are not treated as unsupported runtime behavior.', 'Computed inheritance through Portal must be probed in the actual document.', 'packages/ui/prose.css is a stylesheet of @apply rules: its utilities are not mapped to consumer records, so Prose typesetting tokens (--qy-prose-measure, --qy-text-prose-*) show no static consumer here; only the paper classes in prose.tsx are mapped.'] };
+  return { fingerprint: fingerprint(paths, tools), coveredComponents: COMPONENTS.map((name) => ({ component: name === 'card' ? 'panel' : name, sourceComponent: name, publicName: name === 'card' ? ['Card', 'CardPanel'] : [name[0].toUpperCase() + name.slice(1)], route: `/playground/${name}` })), tokens: tokenDefinitions(), records: [...unique.values()], unresolved, limitations: ['Only statically readable class literals and known utility families are mapped.', 'Conditions and forwarding branches are retained; CSS cascade and actual state applicability require runtime evidence.', 'Unknown utilities/dynamic expressions are not treated as unsupported runtime behavior.', 'Computed inheritance through Portal must be probed in the actual document.', 'packages/ui/prose.css @apply rules are mapped through the same utility table as TSX class literals (sourceComponent prose, selector = the nearest nested rule selector, EXACT_DESCENDANT); the enclosing scope :where() chain, nesting specificity, :is()/:not() applicability and layer order are not established statically, and utilities outside the table (including raw CSS declarations next to @apply) are unresolved or unmapped.'] };
 }
