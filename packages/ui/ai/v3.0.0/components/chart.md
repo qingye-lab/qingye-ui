@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
+Source SHA-256: a6b762945ea344a7fa9f738a45260db3cce3b4af51a2f452e3a01f39da6db71b
 
 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
@@ -54,16 +54,11 @@ Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
 ## Current exports
 - AxisTick: function; owner chart; PASS; props: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }
 - Chart: function; owner chart; PASS; props: ChartProps
-- chartBaseClassName: const; owner chart; UNVERIFIED
 - ChartEvent: type; owner chart; PASS
-- ChartFigureProps: type; owner chart; PASS
 - chartFrameClassName: const; owner chart; UNVERIFIED
-- ChartGeometry: reexport; owner chart; UNVERIFIED
-- ChartHeader: function; owner chart; PASS; props: { titleId?: string | undefined; label?: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
+- ChartHeader: function; owner chart; PASS; props: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
 - ChartInterpolation: type; owner chart; PASS
 - ChartMarker: type; owner chart; PASS
-- chartName: function; owner chart; PASS; props: { "aria-labelledby"?: string | undefined; "aria-label"?: string | undefined }
-- chartPaperClassName: const; owner chart; UNVERIFIED
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
@@ -77,14 +72,15 @@ Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
 - ChartValue: type; owner chart; PASS
 - legendClassName: const; owner chart; UNVERIFIED
 - LegendKey: function; owner chart; PASS; props: { series: ChartProjectedSeries; type: ChartType }
+- MARK: const; owner chart; UNVERIFIED
 - Marker: function; owner chart; PASS; props: { color: string; marker: ChartMarker; cx?: number; cy?: number }
 - MARKERS: const; owner chart; PASS
 - MarkerShape: function; owner chart; PASS; props: { marker: ChartMarker }
 - PLOT_PRESETS: const; owner chart; PASS
 - ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }
 - readValue: function; owner chart; PASS; props: ChartRow
+- SURFACE_GAP: const; owner chart; UNVERIFIED
 - useChartData: function; owner chart; PASS
-- useChartGeometry: reexport; owner chart; UNVERIFIED
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -102,8 +98,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `contextLabel?`: `string`. 有背景系列（series[].context）时必填：图例里合成一项的名字，例如「其余蚕室」。
 - `events?`: `readonly ChartEvent[]`. 落在类别轴某一行上的事件：基线处一个圆点，名称进悬停读数与数据表的一列。donut 不接受。
 - `formatValue?`: `(value: number, series: ChartSeries, row: ChartRow) => React.ReactNode`.
-- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
-- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
+- `label`: `string`.
 - `references?`: `readonly ChartReference[]`. 量轴上的参照：目标带或参照线。画成墨，名称进图例与数据表；量轴范围自动算入。donut 不接受。
 - `renderPlot?`: `(projection: ChartPlotData) => React.ReactNode`.
 - `rows`: `readonly ChartRow[]`.
@@ -117,9 +112,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ChartHeader
-- `label?`: `React.ReactNode`.
+- `label`: `React.ReactNode`.
 - `legend?`: `React.ReactNode`.
-- `titleId?`: `string | undefined`.
+- `titleId`: `string`.
 - `toggle?`: `React.ReactNode`.
 
 ### LegendKey
@@ -151,7 +146,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context ChartGeometryContext: without a provider default-value; provided by Chart
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -159,8 +153,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### Chart
 figure名称、共同轴量纲、不同系列形态与同源可见Table。
 - label: string. 非空真实语义名称。
-- framed: boolean; default true. false：图放在已有的面上（无边框的 Section、Card、面板），不铺自己的纸——没有线、底、圆角与内缘，图的左右缘就是承载面的内容缘。与 TableContainer 的 framed 同义。是否显示图内标题与它无关。
-- aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
 - categoryLabel / valueLabel: string. 非空分类轴名与共享量纲/单位；donut 不画轴线，但两个名字仍用于等价数据表与中心读数的说明文字。
 - series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
@@ -457,28 +449,5 @@ export default function Demo() {
       series={[{ key: "count", label: "同步次数" }]}
       rows={shown.map(day => ({ id: day.id, label: day.label, values: { count: day.count } }))} />
   </div>;
-}
-```
-
-### 放在区块里
-Source: apps/docs/src/content/chart/demos/19-in-section.tsx
-```tsx
-import { Chart } from "@qingye_lab/ui/components/chart";
-import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "放在区块里", titleEn: "Inside a section" } satisfies DemoMeta;
-
-const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
-const ok = [42, 48, 45, 51, 58, 31, 28];
-const failed = [3, 2, 6, 1, 4, 0, 2];
-
-export default function Demo() {
-  return <Section className="w-full max-w-2xl">
-    <SectionHeader><SectionTitle level={4} id="chart-section-sync">本周同步</SectionTitle></SectionHeader>
-    <Chart framed={false} aria-labelledby="chart-section-sync" type="line" label="本周同步次数" categoryLabel="日期" valueLabel="次数"
-      series={[{ key: "ok", label: "成功" }, { key: "failed", label: "失败" }]}
-      rows={days.map((day, index) => ({ id: day, label: day, values: { ok: ok[index]!, failed: failed[index]! } }))} />
-  </Section>;
 }
 ```

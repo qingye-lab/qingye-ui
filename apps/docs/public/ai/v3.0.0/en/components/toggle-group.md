@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 0ffafe3b0b80fe93491f983ae5885460f2e0ef0b3aebf612d275b23165bbdb4e
 
 A shared single or multiple set of toggles whose pressed fact persists.
 
 ## Decision
-A pressed item is a light ink wash with ink text and unpressed items use muted ink, with the same weight. It does not use the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
+A pressed item is a light ink wash with ink text and unpressed items use muted ink, with the same weight. It does not use the primary action fill, so overriding --qy-primary does not change it. To adjust it, change --qy-track-selected and --qy-track-selected-foreground.
 
 ## Notes
 - No name or hidden form value. Use SegmentedControl for submitted mutually exclusive values.

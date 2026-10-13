@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
+Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91
 
 Immediately change the on/off state of a current setting.
 

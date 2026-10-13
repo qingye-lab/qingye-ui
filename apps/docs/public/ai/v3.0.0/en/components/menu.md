@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
+Source SHA-256: 215f8f86d55ac9671b12dc0dcab497b2236acc6ac6847926d0b617ea5544795c
 
 Temporary commands and choices related to the current task.
 
@@ -161,25 +161,8 @@ Group semantics and the public primitive namespace.
 - Enter / Space / Escape: Execute an enabled command or close and return to the trigger.
 
 ## Source examples
-### 命令菜单
-Source: apps/docs/src/content/menu/demos/01-task.tsx
-```tsx
-import * as React from "react";
-import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye_lab/ui/components/menu";
-import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "命令菜单", titleEn: "Command menu" } satisfies DemoMeta;
-export default function Demo() {
-  const [marked, setMarked] = React.useState(false);
-  return <Menu><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
-    <MenuItem>重命名</MenuItem><MenuItem>复制</MenuItem>
-    <MenuSeparator />
-    <MenuCheckboxItem checked={marked} onCheckedChange={setMarked}>标记</MenuCheckboxItem>
-  </MenuPopup></MenuPositioner></MenuPortal></Menu>;
-}
-```
-
 ### 当前条目的命令
-Source: apps/docs/src/content/menu/demos/02-commands.tsx
+Source: apps/docs/src/content/menu/demos/01-task.tsx
 ```tsx
 import * as React from "react";
 import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye_lab/ui/components/menu";

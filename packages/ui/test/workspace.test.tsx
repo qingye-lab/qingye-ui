@@ -76,7 +76,7 @@ describe("Workspace", () => {
     await waitFor(() => expect(main).toHaveAttribute("tabindex", "-1"));
   });
 
-  it("remeasures a nested element's resize, preserves an explicit tabIndex, and releases its observers", () => {
+  it("remeasures when a nested image loads inside a fixed-height wrapper, preserves an explicit tabIndex, and releases its observers", () => {
     const observers: MockResizeObserver[] = [];
     class MockResizeObserver {
       targets = new Set<Element>();
@@ -89,12 +89,13 @@ describe("Workspace", () => {
     vi.stubGlobal("ResizeObserver", MockResizeObserver);
     let height = 100;
     const content = React.createRef<HTMLElement>();
-    const view = render(<WorkspaceContent ref={content}><div style={{ height: "100%" }}><img alt="记录" /></div></WorkspaceContent>);
+    const view = render(<WorkspaceContent ref={content} tabIndex={undefined}><div style={{ height: "100%" }}><img alt="记录" /></div></WorkspaceContent>);
     try {
       const main = content.current!;
       const image = screen.getByRole("img");
+      expect(main).toHaveAttribute("tabindex", "-1");
       Object.defineProperties(main, { clientHeight: { get: () => 200 }, scrollHeight: { get: () => height } });
-      const resize = () => act(() => { for (const observer of observers) observer.resize(image); });
+      const resize = () => act(() => { image.dispatchEvent(new Event("load")); });
       height = 600;
       resize();
       expect(main).toHaveAttribute("tabindex", "0");

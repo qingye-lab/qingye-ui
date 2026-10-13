@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
+Source SHA-256: b96a77f4cb67f667c5d1510c085a96c06681bfb2fd12a7cb509910f1a417ea04
 
 保留平台选择器、原生选项与表单值。
 

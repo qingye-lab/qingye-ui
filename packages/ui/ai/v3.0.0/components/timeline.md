@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
-Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
+Source SHA-256: cb38f1cd0e5ba64470cb11efec7700e026a5e152bec8eef0eb018e22c13e17a6
 
 保留输入顺序与真实时间。
 

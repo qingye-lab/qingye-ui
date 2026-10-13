@@ -1,6 +1,6 @@
 # 复选组 CheckboxGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0

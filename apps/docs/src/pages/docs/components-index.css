@@ -8,11 +8,11 @@
  * - 示例与名称同一条左缘（经营位置：边缘落在少数对齐线上），不居中悬空。
  * - 悬停时示例区铺一层悬停面，向两侧溢出一个小面板内缘，字仍压在栏线上——与整行入口（Item）同一条规则（基础层 §19）。
  * - 列间 = 行间 = 段间隔（2 材）：格是同一级的并列物，两向同一个关系；示例到名称 = 字段间隔。
- * - 栏宽 760 时为三列：每格不少于 11 材（220px）。
+ * - 栏宽 760 时为三列：每格以 11 材（220px）为下限；单栏更窄时服从实际可用宽度。
  */
 .components-index-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(calc(11 * var(--qy-cai)), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(11 * var(--qy-cai))), 1fr));
   /* 行距写在每格的最后一行（用途）下方：subgrid 的子行共用父网格的行距，父网格若设行距，名称与用途之间也会被拉开。 */
   gap: 0 var(--qy-section-gap);
   /* 最后一行用途下方的行距与下一章的章距重复，整网格收回一个行距。 */

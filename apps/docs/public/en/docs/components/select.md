@@ -1,6 +1,6 @@
 # Select
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd

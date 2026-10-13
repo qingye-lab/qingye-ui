@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: 866dfa2114174d3e7fcbc088e23ef9bc7a2c6812132ac872d1a3942cce273389
+Source SHA-256: a05c8fdaddbcad8ff68d0e5813051cb7a079aa36c590657de0268905a65ab1db
 
 Enter one text value.
 

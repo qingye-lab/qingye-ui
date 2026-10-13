@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
-Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
+Source SHA-256: df69ad19901d776578f8dcb288ae1a4907a55645774cf3b5d2976389349c820d
 
 A text entry that goes to an address; every text link in the library shares this one treatment.
 

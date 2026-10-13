@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 0ffafe3b0b80fe93491f983ae5885460f2e0ef0b3aebf612d275b23165bbdb4e
 
 关联一组单选或多选的切换按钮：选项保持切换状态。
 
 ## Decision
-按下项是选中面（清染）加焦墨字，未按下项字为浓墨，字重不变；它不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它。要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
+按下项是淡染的面加焦墨字，未按下项字为浓墨，字重不变；它不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它。要调整，改 --qy-track-selected 与 --qy-track-selected-foreground。
 
 ## Notes
 - 没有 name 或隐藏表单值；需要提交的互斥值使用 SegmentedControl。
@@ -29,7 +29,7 @@ Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
 - 水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证
 
 ## Customization
-- 按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档
+- 按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认淡染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档
 
 ## Current exports
 - ToggleGroup: function; owner toggle-group; PASS; props: ToggleGroupProps<Value>

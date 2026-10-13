@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
+Source SHA-256: 4e26d8bdc3dc7cc7bd85a5d04bb27d0362e12e8d3fa896f7c43ce2d607fe5289
 
 A two-state toggle that holds its pressed fact until toggled again, with a stable name.
 
 ## Decision
-A pressed Toggle fills light ink inside its line with ink text and does not use the primary action fill, so overriding --qy-primary does not change it. To adjust how pressed looks, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
+A pressed Toggle fills light ink inside its line with ink text and does not use the primary action fill, so overriding --qy-primary does not change it. To adjust how pressed looks, change --qy-track-selected and --qy-track-selected-foreground.
 
 ## Notes
 - Names stay stable; aria-pressed expresses state.

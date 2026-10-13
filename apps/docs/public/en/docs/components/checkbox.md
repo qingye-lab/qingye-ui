@@ -1,6 +1,6 @@
 # Checkbox
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a

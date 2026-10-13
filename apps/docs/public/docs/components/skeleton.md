@@ -1,6 +1,6 @@
 # 骨架屏 Skeleton
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871

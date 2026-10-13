@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
+Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13
 
 Edit multiline notes and messages.
 

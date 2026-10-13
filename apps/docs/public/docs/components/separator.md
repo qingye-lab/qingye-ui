@@ -1,6 +1,6 @@
 # 分隔线 Separator
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e

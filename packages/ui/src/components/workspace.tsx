@@ -161,10 +161,10 @@ export type WorkspaceContentProps = useRender.ComponentProps<"main">;
  * 焦点与 TableContainer 的可滚动容器同一条规则（基础层 §15，**约束**：WCAG 2.1.1 键盘可滚动）：
  * 内容放得下时 `tabIndex={-1}`——不在 Tab 顺序里，只作跳转链接与换页后焦点的落点；内容真的溢出时 `tabIndex={0}`，
  * 键盘能停在这里用方向键滚动，没有可聚焦子项的长页面也读得完。可滚动由实测决定（scrollHeight 对 clientHeight），
- * 容器与子节点尺寸变化时重测；服务端与首帧按「放得下」。在 Tab 顺序里就要看得见焦点：盒内一道 1px 焦墨线
+ * 容器与子节点尺寸变化、子树变化（下一帧）与资源载入时重测；服务端与首帧按「放得下」。在 Tab 顺序里就要看得见焦点：盒内一道 1px 焦墨线
  * （`--qy-focus-quiet-width`，与 framed={false} 的表格容器同一画法），外缘不变（NG9）。调用方显式传入的 tabIndex 优先。
  */
-export function WorkspaceContent({ render, className, ref, ...props }: WorkspaceContentProps) {
+export function WorkspaceContent({ render, className, ref, tabIndex, ...props }: WorkspaceContentProps) {
   const element = React.useRef<HTMLElement | null>(null);
   const [scrollable, setScrollable] = React.useState(false);
   React.useLayoutEffect(() => {
@@ -172,14 +172,24 @@ export function WorkspaceContent({ render, className, ref, ...props }: Workspace
     const measure = () => setScrollable(node.scrollHeight > node.clientHeight);
     measure();
     if (typeof ResizeObserver === "undefined") return;
+    // 尺寸：容器与直接子节点。不观察每个后代——内容区往往包着整页（上千个单元格），逐个观察代价太大。
     const observer = new ResizeObserver(measure);
     const watch = () => { observer.disconnect(); for (const child of [node, ...node.children]) observer.observe(child); };
     watch();
-    const mutations = new MutationObserver(() => { watch(); measure(); }); mutations.observe(node, { childList: true });
-    return () => { observer.disconnect(); mutations.disconnect(); };
+    // 固定高度的包装层不随内部内容变高：子树的增删、属性与文字变化合并到下一帧测一次；
+    // 图片等资源载入完成不产生 DOM 变化，在捕获阶段听 load（它不冒泡）。
+    let frame = 0;
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; measure(); }); };
+    const mutations = new MutationObserver(records => {
+      if (records.some(record => record.type === "childList" && record.target === node)) watch();
+      if (records.some(record => record.target !== node || record.attributeName !== "tabindex")) schedule();
+    });
+    mutations.observe(node, { childList: true, subtree: true, attributes: true, characterData: true });
+    node.addEventListener("load", measure, true);
+    return () => { observer.disconnect(); mutations.disconnect(); node.removeEventListener("load", measure, true); cancelAnimationFrame(frame); };
   }, []);
   return useRender({
     defaultTagName: "main", render, ref: [element, ref ?? null],
-    props: mergeProps({ "data-slot": "workspace-content", tabIndex: scrollable ? 0 : -1, className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
+    props: mergeProps({ "data-slot": "workspace-content", tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
   });
 }

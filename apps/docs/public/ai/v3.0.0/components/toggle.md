@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
+Source SHA-256: 4e26d8bdc3dc7cc7bd85a5d04bb27d0362e12e8d3fa896f7c43ce2d607fe5289
 
 保持名称的二态切换按钮：按下后保持，直到再次切换。
 
 ## Decision
-按下的 Toggle 在线内填选中面（清染）、字为焦墨，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整按下的样子，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
+按下的 Toggle 在线内填淡染、字为焦墨，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整按下的样子，改 --qy-track-selected 与 --qy-track-selected-foreground。
 
 ## Notes
 - 名称不随 pressed 改写，aria-pressed 表达状态。
@@ -30,7 +30,7 @@ Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
 - 既有 control 五档和 touch-target；实际命中未在本批浏览器验证
 
 ## Customization
-- 未切换与已切换都是 bordered（线不变）；已切换在线内填 --qy-track-selected、字为 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；复用 Button 的几何与焦点角色
+- 未切换与已切换都是 bordered（线不变）；已切换在线内填 --qy-track-selected、字为 --qy-track-selected-foreground（默认淡染 + 焦墨），不借用 --qy-primary；复用 Button 的几何与焦点角色
 
 ## Current exports
 - Toggle: function; owner toggle; PASS; props: ToggleProps<Value>

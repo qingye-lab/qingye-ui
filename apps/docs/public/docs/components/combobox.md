@@ -1,6 +1,6 @@
 # 候选输入 Combobox
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
 Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7

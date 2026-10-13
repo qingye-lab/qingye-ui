@@ -3,19 +3,16 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
-Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
+Source SHA-256: 1bedf9965e31b679df997fb01a3a9a41cb4464f76634276731cc374c402f080c
 
-Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.
+Typesets already-rendered Markdown or rich text as an independent reading paper; headings, lists, quotes, code and tables read existing text tiers and ink roles.
 
 ## Decision
-Prose neither parses Markdown nor bundles a renderer: callers use any tool (react-markdown, MDX, server-rendered HTML) to produce native elements, and Prose typesets only the native text blocks among its direct children (header, h1–h4, p, ul/ol including task lists, blockquote, pre, table, figure, details, hr, img) and the native elements inside them (strong/em, a, inline code, kbd, figcaption, summary and so on), without rewriting their structure or attributes. An element carrying data-slot, and everything inside it, is left alone, so components and live examples can sit directly in an article. The three heading ranks read the page's existing text tiers (h1 display, h2 title, h3 chapter), the same scale as the documentation site (ruling of 2026-10-12).
+Prose neither parses Markdown nor bundles a renderer: callers use any tool (react-markdown, MDX, server-rendered HTML) to produce native elements, and Prose only typesets h1–h4, p, strong/em, a, ul/ol (including task lists), blockquote, inline code, pre > code, table, hr, img/figure/figcaption, kbd and details/summary through descendant selectors, without rewriting their structure or attributes.
 
 ## Notes
 - Ships no built-in copy strings; does not go through useUILocale.
 - Ink roles and the paper swap automatically between light and dark; callers do not handle this.
-- The typesetting rules sit in the stylesheet's components layer: any utility class on an element in the article overrides them, with no !important.
-- Chinese paragraphs are justified and break lines under the strict rule; this follows the element's lang, so the page must declare its language correctly.
-- Known limit: a second Prose nested through a component inside a native text block of an outer Prose (a Prose in a Card in a figure, for example) does not get its inline elements typeset; place it in a div or section instead.
 
 ## Use and ownership
 - Present an already-rendered long-form or Markdown result: a help article, a changelog entry, an AI reply, or documentation body copy.
@@ -26,14 +23,10 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 
 ## Composition
 - Children are the renderer's native element tree, or reviewed dangerouslySetInnerHTML; Prose only adds one className.
-- Place library components directly in an article: an element carrying data-slot, and everything inside it, is not typeset. Put data-slot on a block you draw yourself to declare that it is not running text.
-- Container children such as div and section are not entered. To typeset the headings and paragraphs inside one, make that container itself a Prose with framed={false} through render.
-- Where the page already has a surface (a Card, the documentation paper) use framed={false}: it only typesets and draws no second paper; the column and inset come from --qy-prose-column and --qy-prose-inset, so the surface can read the same values.
-- Put the h1 and the lead paragraph that follows it in a header: they sit one field gap apart and the lead reads in muted ink.
 - Tables read the same visual rules as the Table component (washed header/footer bands, row height, tabular numeric cells); inline code reads Typography's Code rule; links read Link's linkClassName — none of these get a second drawing.
 
 ## Responsive behavior
-- The column is 38 材 (760px) and does not widen with the viewport; paragraphs, lists and quotes stop at a measure of 40 reading characters (640px), while code blocks and tables may use the whole column. The paper's inset is 2 材 and tightens to the panel padding on narrow screens. All three are presets, set through --qy-prose-column, --qy-prose-measure and --qy-prose-inset.
+- The measure is a fixed 38em and does not widen with the viewport; the inset tightens to the existing panel padding's narrow value.
 - A very wide table does not yet scroll independently inside Prose (the paper's rounded corners need overflow-hidden rather than overflow-x-auto), so cells simply wrap — a known gap, not a missing default treatment.
 
 ## Customization
@@ -47,7 +40,7 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Prose
-- `framed?`: `boolean`. 是否自带一张纸（线、圆角、底、内缘）。文章已经放在一张纸上时（页面的主栏、Card、面板）设为 false， 只留排版，不再铺第二张；与 TableContainer 的 framed 同义。
+- no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -60,8 +53,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Prose
-The long-form container; renders as article by default.
-- framed: boolean; default true. Whether it brings its own reading paper (surface, hairline, radius, inset and column limit). When false it only typesets and the surrounding surface is the paper.
+The reading-pane container; renders as article by default.
 - render / ref / className / style / native props: useRender.ComponentProps<"article">. Forward attributes, events and refs to the actual element; children are content the caller has already rendered.
 
 ## Keyboard
@@ -122,34 +114,5 @@ export default function Demo() {
       <p>只重新发送上面统计里「网络中断」这一类失败记录，不触碰已经成功写入的数据，也不会改变「字段校验失败」队列。</p>
     </details>
   </Prose>;
-}
-```
-
-### 已有承载面与文中的组件
-Source: apps/docs/src/content/prose/demos/03-unframed.tsx
-```tsx
-import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
-import { Card } from "@qingye_lab/ui/components/card";
-import { Prose } from "@qingye_lab/ui/components/prose";
-import type { DemoMeta } from "@/lib/types";
-export const meta = {
-  title: "已有承载面与文中的组件",
-  titleEn: "An existing surface, and a component in the text",
-} satisfies DemoMeta;
-export default function Demo() {
-  return <Card className="w-full p-(--qy-panel-padding)">
-    <Prose framed={false}>
-      <header>
-        <h1>重新同步</h1>
-        <p>把上一次没有写入的记录再发送一遍，已经写入的不会重复。</p>
-      </header>
-      <p>重新同步只处理失败与未知两种结果。开始之前，先在操作记录里确认失败原因已经排除，否则同一批记录会再失败一次。</p>
-      <Alert tone="warning">
-        <AlertTitle>结果未知的记录需要先核实</AlertTitle>
-        <AlertDescription>请求已经发出但没有收到确认，直接重试可能写入两次。</AlertDescription>
-      </Alert>
-      <p>核实完成后，在集合的「同步记录」页选择这一批，再点「重新同步」。</p>
-    </Prose>
-  </Card>;
 }
 ```

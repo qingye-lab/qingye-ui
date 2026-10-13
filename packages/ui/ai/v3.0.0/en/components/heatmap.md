@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
+Source SHA-256: 8ce5eff281afd8d52d687059faf2fc1c89095fb8a5ac7e24ec14510c1807dd7e
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 
@@ -49,8 +49,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `columnLabel`: `string`. 列维度叫什么，例如「时段」。
 - `columns`: `readonly HeatmapColumn[]`.
 - `formatValue?`: `(value: number, row: HeatmapRow, column: HeatmapColumn) => React.ReactNode`. 可以返回节点；可访问名称只取字符串或数字的结果，其余退回默认的数值格式。
-- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
-- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
+- `label`: `string`.
 - `levels?`: `readonly HeatmapLevel[]`. 分档，2 到 5 档，浓淡随档次递增；给出后格子按所在的档上色，图例列出各档。
 - `renderReadout?`: `(cell: HeatmapReadoutCell) => React.ReactNode`. 替换悬停/聚焦读数里值的那一行。读数只是增强，名称与数据表仍是完整信息。
 - `rowLabel`: `string`. 行维度叫什么，例如「星期」。
@@ -64,7 +63,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context ChartGeometryContext: without a provider default-value
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -72,8 +70,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### Heatmap
 A named figure, two named categorical axes, a single-hue sequential grid and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
-- framed: boolean; default true. false: the chart sits on an existing surface (a borderless Section, Card or panel) and lays no paper of its own — no line, fill, radius or inner padding, so its edges are the host's content edges. Same meaning as TableContainer's framed. Whether the in-chart title shows is independent of it.
-- aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - rowLabel / columnLabel / valueLabel: string. Names for the row dimension, column dimension and the measured quantity, e.g. "hour", "weekday", "syncs".
 - columns: readonly { key: string; label: string }[]. The column dimension's values, two or more — unlike a data series, there is no identity-color cap.
 - rows: readonly ChartRow[]. The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key.
@@ -158,34 +154,5 @@ export default function Demo() {
     renderReadout={({ value, level }) => typeof value === "number"
       ? <div className="grid gap-(--qy-space-1)"><div className="flex items-baseline gap-(--qy-field-gap)"><span className="text-body-strong numeric">{value.toFixed(1)} ℃</span>{level && <span className="text-muted-foreground">{level.label}</span>}</div><div className="text-muted-foreground numeric">湿度 {humidity(value)}%</div></div>
       : <div>{value.label}</div>} />;
-}
-```
-
-### 放在区块里
-Source: apps/docs/src/content/heatmap/demos/04-in-section.tsx
-```tsx
-import { Heatmap } from "@qingye_lab/ui/components/heatmap";
-import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "放在区块里", titleEn: "Inside a section" } satisfies DemoMeta;
-
-const days = [
-  { key: "mon", label: "周一" }, { key: "tue", label: "周二" }, { key: "wed", label: "周三" },
-  { key: "thu", label: "周四" }, { key: "fri", label: "周五" }, { key: "sat", label: "周六" }, { key: "sun", label: "周日" },
-];
-const hours = ["00 时", "06 时", "12 时", "18 时"];
-const counts: Record<string, number[]> = {
-  mon: [2, 18, 42, 30], tue: [1, 20, 46, 28], wed: [3, 16, 38, 25],
-  thu: [2, 22, 50, 33], fri: [4, 19, 44, 29], sat: [0, 6, 14, 10], sun: [0, 4, 9, 7],
-};
-
-export default function Demo() {
-  return <Section className="w-full max-w-2xl">
-    <SectionHeader><SectionTitle level={4} id="heatmap-section-sync">同步热度</SectionTitle></SectionHeader>
-    <Heatmap framed={false} aria-labelledby="heatmap-section-sync" label="每周时段的同步次数" rowLabel="时段" columnLabel="星期" valueLabel="同步次数"
-      columns={days}
-      rows={hours.map((hour, index) => ({ id: hour, label: hour, values: Object.fromEntries(days.map(day => [day.key, counts[day.key]![index]!])) }))} />
-  </Section>;
 }
 ```

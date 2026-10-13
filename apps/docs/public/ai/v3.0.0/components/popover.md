@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
+Source SHA-256: 14031b4212f01c1e0305c190d61ce1f16d5f6a0046313f5b524c13328d82c5bd
 
 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 
@@ -141,19 +141,21 @@ import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Stack } from "@qingye_lab/ui/components/layout";
 import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { Textarea } from "@qingye_lab/ui/components/textarea";
+import { useState } from "react";
 
 export const meta = { title: "多行输入", titleEn: "Multiline input" };
 
 export default function Demo() {
+  const [draft, setDraft] = useState("");
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="bordered" />}>编辑备注</PopoverTrigger>
+      <PopoverTrigger render={<Button variant="quiet" />}>编辑备注</PopoverTrigger>
       <PopoverPopup className="w-80">
         <Stack gap="panel">
           <PopoverTitle>编辑备注</PopoverTitle>
           <Field>
             <FieldLabel>备注</FieldLabel>
-            <Textarea />
+            <Textarea onChange={(event) => setDraft(event.target.value)} value={draft} />
           </Field>
           <PopoverClose render={<Button variant="quiet" />}>关闭</PopoverClose>
         </Stack>

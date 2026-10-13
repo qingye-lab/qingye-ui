@@ -1,6 +1,6 @@
 # Pagination
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469

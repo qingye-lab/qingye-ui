@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
+Source SHA-256: a6b762945ea344a7fa9f738a45260db3cce3b4af51a2f452e3a01f39da6db71b
 
 Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -54,16 +54,11 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 ## Current exports
 - AxisTick: function; owner chart; PASS; props: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }
 - Chart: function; owner chart; PASS; props: ChartProps
-- chartBaseClassName: const; owner chart; UNVERIFIED
 - ChartEvent: type; owner chart; PASS
-- ChartFigureProps: type; owner chart; PASS
 - chartFrameClassName: const; owner chart; UNVERIFIED
-- ChartGeometry: reexport; owner chart; UNVERIFIED
-- ChartHeader: function; owner chart; PASS; props: { titleId?: string | undefined; label?: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
+- ChartHeader: function; owner chart; PASS; props: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
 - ChartInterpolation: type; owner chart; PASS
 - ChartMarker: type; owner chart; PASS
-- chartName: function; owner chart; PASS; props: { "aria-labelledby"?: string | undefined; "aria-label"?: string | undefined }
-- chartPaperClassName: const; owner chart; UNVERIFIED
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
@@ -77,14 +72,15 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 - ChartValue: type; owner chart; PASS
 - legendClassName: const; owner chart; UNVERIFIED
 - LegendKey: function; owner chart; PASS; props: { series: ChartProjectedSeries; type: ChartType }
+- MARK: const; owner chart; UNVERIFIED
 - Marker: function; owner chart; PASS; props: { color: string; marker: ChartMarker; cx?: number; cy?: number }
 - MARKERS: const; owner chart; PASS
 - MarkerShape: function; owner chart; PASS; props: { marker: ChartMarker }
 - PLOT_PRESETS: const; owner chart; PASS
 - ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }
 - readValue: function; owner chart; PASS; props: ChartRow
+- SURFACE_GAP: const; owner chart; UNVERIFIED
 - useChartData: function; owner chart; PASS
-- useChartGeometry: reexport; owner chart; UNVERIFIED
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -102,8 +98,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `contextLabel?`: `string`. 有背景系列（series[].context）时必填：图例里合成一项的名字，例如「其余蚕室」。
 - `events?`: `readonly ChartEvent[]`. 落在类别轴某一行上的事件：基线处一个圆点，名称进悬停读数与数据表的一列。donut 不接受。
 - `formatValue?`: `(value: number, series: ChartSeries, row: ChartRow) => React.ReactNode`.
-- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
-- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
+- `label`: `string`.
 - `references?`: `readonly ChartReference[]`. 量轴上的参照：目标带或参照线。画成墨，名称进图例与数据表；量轴范围自动算入。donut 不接受。
 - `renderPlot?`: `(projection: ChartPlotData) => React.ReactNode`.
 - `rows`: `readonly ChartRow[]`.
@@ -117,9 +112,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ChartHeader
-- `label?`: `React.ReactNode`.
+- `label`: `React.ReactNode`.
 - `legend?`: `React.ReactNode`.
-- `titleId?`: `string | undefined`.
+- `titleId`: `string`.
 - `toggle?`: `React.ReactNode`.
 
 ### LegendKey
@@ -151,7 +146,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context ChartGeometryContext: without a provider default-value; provided by Chart
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -159,8 +153,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### Chart
 A named figure, shared axis units, distinct series shapes and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
-- framed: boolean; default true. false: the chart sits on an existing surface (a borderless Section, Card or panel) and lays no paper of its own — no line, fill, radius or inner padding, so its edges are the host's content edges. Same meaning as TableContainer's framed. Whether the in-chart title shows is independent of it.
-- aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required.
 - categoryLabel / valueLabel: string. Nonempty category axis name and shared value units; donut draws no axis lines, but both names still label the equivalent table and the center readout.
 - series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
@@ -457,28 +449,5 @@ export default function Demo() {
       series={[{ key: "count", label: "同步次数" }]}
       rows={shown.map(day => ({ id: day.id, label: day.label, values: { count: day.count } }))} />
   </div>;
-}
-```
-
-### 放在区块里
-Source: apps/docs/src/content/chart/demos/19-in-section.tsx
-```tsx
-import { Chart } from "@qingye_lab/ui/components/chart";
-import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "放在区块里", titleEn: "Inside a section" } satisfies DemoMeta;
-
-const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
-const ok = [42, 48, 45, 51, 58, 31, 28];
-const failed = [3, 2, 6, 1, 4, 0, 2];
-
-export default function Demo() {
-  return <Section className="w-full max-w-2xl">
-    <SectionHeader><SectionTitle level={4} id="chart-section-sync">本周同步</SectionTitle></SectionHeader>
-    <Chart framed={false} aria-labelledby="chart-section-sync" type="line" label="本周同步次数" categoryLabel="日期" valueLabel="次数"
-      series={[{ key: "ok", label: "成功" }, { key: "failed", label: "失败" }]}
-      rows={days.map((day, index) => ({ id: day, label: day, values: { ok: ok[index]!, failed: failed[index]! } }))} />
-  </Section>;
 }
 ```

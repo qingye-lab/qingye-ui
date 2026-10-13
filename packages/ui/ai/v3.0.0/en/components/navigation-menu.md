@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
+Source SHA-256: 556a511e65cc132455dc7682ff20bbc397bcce73ba677a2806b9b7e360067781
 
 Real links, expandable navigation groups, and in-panel group names with descriptions.
 

@@ -1,6 +1,6 @@
 # ConfirmAction
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656

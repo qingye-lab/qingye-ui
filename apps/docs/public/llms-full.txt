@@ -1,6 +1,6 @@
-# Qingye UI 3.0.0: full text
+# Qingye UI 4.0.0: full text
 
-> @qingye_lab/ui@3.0.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
+> @qingye_lab/ui@4.0.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
 
 # 第一部分 设计指南
 
@@ -692,7 +692,7 @@ Implement and verify within the authorized scope, and report ownership, actual e
 
 # 第二部分 安装
 
-## Install @qingye_lab/ui 3.0.0
+## Install @qingye_lab/ui 4.0.0
 
 Use this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.
 
@@ -710,7 +710,7 @@ Examples retain state locally. Reload persistence, permissions, backend writes a
 
 ## 分组展开 Accordion
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
@@ -820,7 +820,7 @@ export default function AccordionDemo() {
 
 ## 就地说明 Alert
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/alert
 Source: packages/ui/src/components/alert.tsx
 Source SHA-256: bff3bfb8e4d04d941b8f839f3a8e741a3ba46c92a9011143453a4bcff9e064c6
@@ -925,7 +925,7 @@ export default function Demo() {
 
 ## 决定对话框 AlertDialog
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
@@ -1095,7 +1095,7 @@ export default function Demo() {
 
 ## 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
@@ -1271,7 +1271,7 @@ export default function Demo() {
 
 ## 身份图像 Avatar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
@@ -1373,7 +1373,7 @@ export default function Demo() {
 
 ## 标记 Badge
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 46f9b4df33cb90e9ca5fbf84ca2a25010b644e7aaddea5fe4884a568c5ea2ecb
@@ -1450,7 +1450,7 @@ export default function Demo() {
 
 ## 路径 Breadcrumb
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
@@ -1574,7 +1574,7 @@ export default function Demo() {
 
 ## 批量操作 BulkActionBar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: c8f48a1a7981e1ff7c53d581e28d26e19a61e2cefe8ff78b049d7fd50c78ae35
@@ -1695,7 +1695,7 @@ export default function Demo() {
 
 ## 按钮 Button
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
@@ -1821,7 +1821,7 @@ export default function Demo() {
 
 ## 动作组 ButtonGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
@@ -1894,7 +1894,7 @@ export default function Demo() {
 
 ## 日历 Calendar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
@@ -1990,7 +1990,7 @@ export default function Demo() {
 
 ## 卡片 Card
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
@@ -2076,7 +2076,7 @@ export default function Demo() {
 
 ## 图表 Chart
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
@@ -2273,7 +2273,7 @@ export default function Demo() {
 
 ## 复选框 Checkbox
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
@@ -2374,7 +2374,7 @@ export default function Demo() {
 
 ## 复选组 CheckboxGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
@@ -2476,7 +2476,7 @@ export default function Demo() {
 
 ## 代码 CodeBlock
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
 Source SHA-256: e0e34388389dc6b87dd13b6e8f94a92e8ccf7c45b3d1a49a3fe97913a7ce36d1
@@ -2563,7 +2563,7 @@ export default function Demo() {
 
 ## 单段展开 Collapsible
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a
@@ -2658,7 +2658,7 @@ export default function CollapsibleDemo() {
 
 ## 候选输入 Combobox
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
 Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7
@@ -2860,7 +2860,7 @@ export default function Demo() {
 
 ## 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
@@ -2966,7 +2966,7 @@ export default function Demo() {
 
 ## 上下文菜单 ContextMenu
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
@@ -3127,7 +3127,7 @@ export default function Demo() {
 
 ## 复制按钮 CopyButton
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
@@ -3212,7 +3212,7 @@ export default function Demo() {
 
 ## 角标 CornerMark
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
@@ -3298,7 +3298,7 @@ export default function Demo() {
 
 ## 数据集合 DataTable
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
 Source SHA-256: 8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa
@@ -3438,7 +3438,7 @@ export default function Demo() {
 
 ## 日期输入 DatePicker
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 9a3ed256b922f4189e88f7275eb8b317b84c8ef31ad6afbc84cdd2db279c66e0
@@ -3532,7 +3532,7 @@ export default function Demo() {
 
 ## 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
 Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
@@ -3634,7 +3634,7 @@ export default function Demo() {
 
 ## 日期时间 DateTimePicker
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: 290763ec85ab114335ed974e59dfcdfbb6d857d1de258127dfe5da72f343a81e
@@ -3727,7 +3727,7 @@ export default function Demo() {
 
 ## 名称与值 DescriptionList
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 642be77029202e1a51b8583d9d89ca5048613a7fcace731d7af08b3db529529e
@@ -3833,7 +3833,7 @@ export default function Demo() {
 
 ## 对话框 Dialog
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
@@ -4005,7 +4005,7 @@ export default function Demo() {
 
 ## 边缘工作面 Drawer
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
 Source SHA-256: 155fc699f13ffd26579fd21761a48300c4a83ba8ecb1112db6146e443eccb83c
@@ -4147,7 +4147,7 @@ export default function DrawerDemo() {
 
 ## 空与未知 Empty
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58
@@ -4251,7 +4251,7 @@ export default function Demo() {
 
 ## 字段 Field
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
@@ -4418,7 +4418,7 @@ export default function Demo() {
 
 ## 字段组 Fieldset
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
@@ -4509,7 +4509,7 @@ export default function Demo() {
 
 ## 文件输入 FileUpload
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: e2db390d8cace757dcb272c8ced3afca616f1537d0d49f79110ae34361955fc6
@@ -4625,7 +4625,7 @@ export default function Demo() {
 
 ## 筛选条件 FilterBar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: b38f125404d71978bc70615a66d849c3a72958058c1a86177d918b00b2d6c811
@@ -4782,7 +4782,7 @@ export default function Demo() {
 
 ## 表单 Form
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 694187e034dce87a7c83e9e39b7976299568ecbefde556432eb49619dd98468b
@@ -4866,7 +4866,7 @@ export default function Demo() {
 
 ## 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
 Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
@@ -4981,7 +4981,7 @@ export default function Demo() {
 
 ## 链接预览 HoverCard
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 0b0ed72c7e1ab6b15fec0f88ef9c3098ec28f695433ec369a810473649f4bfb7
@@ -5082,7 +5082,7 @@ export default function HoverCardDemo() {
 
 ## 输入框 Input
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 866dfa2114174d3e7fcbc088e23ef9bc7a2c6812132ac872d1a3942cce273389
@@ -5173,7 +5173,7 @@ export default function Demo() {
 
 ## 输入组合 InputGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
@@ -5284,7 +5284,7 @@ export default function Demo() {
 
 ## 条目 Item
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -5422,7 +5422,7 @@ export default function Demo() {
 
 ## 键位 Kbd
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
@@ -5485,7 +5485,7 @@ export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd>
 
 ## 标签 Label
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 2b221cc2db3bc0b20d3fe8b168a04d26a003697fa3a3cb7ea29eb0a4622d6e6a
@@ -5560,7 +5560,7 @@ export default function Demo() {
 
 ## 布局 Layout
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: 362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd
@@ -5659,7 +5659,7 @@ export default function Demo() {
 
 ## 链接 Link
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
@@ -5728,7 +5728,7 @@ export default function Demo() {
 
 ## 语言切换 LocaleSwitch
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
@@ -5807,7 +5807,7 @@ export default function Demo() {
 
 ## 命令菜单 Menu
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
@@ -5989,7 +5989,7 @@ export default function Demo() {
 
 ## 测量 Meter
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: 4cb7fb3ca4891305dc01cfdccfd1488d4274e6e33dad77a542e5864facd9f09c
@@ -6097,7 +6097,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 动效策略 MotionProvider
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
@@ -6188,7 +6188,7 @@ export default function Demo() {
 
 ## 原生选择 NativeSelect
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
@@ -6281,7 +6281,7 @@ export default function Demo() {
 
 ## 导航菜单 NavigationMenu
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
@@ -6444,7 +6444,7 @@ export default function Demo() {
 
 ## 数值输入 NumberField
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
 Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
@@ -6569,7 +6569,7 @@ export default function Demo() {
 
 ## 分段文本 OtpField
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e
@@ -6669,7 +6669,7 @@ export default function Demo() {
 
 ## 页面标题 PageHeader
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 534d0136bde2d51dd17682d9aa311fb79fd5667825007d59dc9e35496e8e79de
@@ -6779,7 +6779,7 @@ export default function Demo() {
 
 ## 分页 Pagination
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
@@ -6936,7 +6936,7 @@ export default function Demo() {
 
 ## 密码输入 PasswordInput
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
 Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
@@ -7024,7 +7024,7 @@ export default function Demo() {
 
 ## 结果未知 PendingValue
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
@@ -7091,7 +7091,7 @@ export default function Demo() { return <PendingValue label="值" actions={<Butt
 
 ## 浮起面板 Popover
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
@@ -7258,7 +7258,7 @@ export default function Demo() {
 
 ## 进度 Progress
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 632077f82a2a7f9fe11612bf274705097566fb24e322e8d2a0c6e5155960a7cd
@@ -7365,7 +7365,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 构成 Proportion
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
@@ -7444,7 +7444,7 @@ export default function Demo() {
 
 ## 长文 Prose
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
@@ -7540,7 +7540,7 @@ export default function Demo() {
 
 ## 单选组 RadioGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
@@ -7674,7 +7674,7 @@ export default function Demo() {
 
 ## 两量关系 ScatterChart
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
@@ -7772,7 +7772,7 @@ export default function Demo() {
 
 ## 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00
@@ -7844,7 +7844,7 @@ export default function Demo() {
 
 ## 搜索输入 SearchInput
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
 Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0
@@ -7930,7 +7930,7 @@ export default function Demo() {
 
 ## 区块 Section
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
@@ -8051,7 +8051,7 @@ export default function Demo() {
 
 ## 分段控件 SegmentedControl
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
@@ -8160,7 +8160,7 @@ export default function Demo() {
 
 ## 选择器 Select
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
@@ -8338,7 +8338,7 @@ export default function Demo() {
 
 ## 分隔线 Separator
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
@@ -8419,7 +8419,7 @@ export default function Demo() {
 
 ## 级别 SeverityMark
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -8511,7 +8511,7 @@ export default function Demo() {
 
 ## 侧栏导航 Sidebar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
@@ -8695,7 +8695,7 @@ export default function Demo() {
 
 ## 骨架屏 Skeleton
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
@@ -8796,7 +8796,7 @@ export default function Demo() {
 
 ## 滑块 Slider
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
@@ -8943,7 +8943,7 @@ export default function Demo() {
 
 ## 行内趋势 Sparkline
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202
@@ -9028,7 +9028,7 @@ export default function Demo() {
 
 ## 度量 Stat
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 070c2a8b77a2a0a4f07303b3a7b14aa9885b83c5d0737fb44c9475edee23f921
@@ -9159,7 +9159,7 @@ export default function Demo() {
 
 ## 状态 StatusDot
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
@@ -9226,7 +9226,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 
 ## 步骤 Steps
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -9329,7 +9329,7 @@ export default function Demo() {
 
 ## 开关 Switch
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
@@ -9445,7 +9445,7 @@ export default function Demo() {
 
 ## 比较表 Table
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
@@ -9594,7 +9594,7 @@ export default function Demo() {
 
 ## 视角标签 Tabs
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
@@ -9697,7 +9697,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 
 ## 标签集合 TagInput
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
 Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
@@ -9810,7 +9810,7 @@ export default function Demo() {
 
 ## 多行输入 Textarea
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
@@ -9906,7 +9906,7 @@ export default function Demo() {
 
 ## 主题 ThemeProvider
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
@@ -10029,7 +10029,7 @@ export default function Demo() {
 
 ## 时间序列 Timeline
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
@@ -10132,7 +10132,7 @@ export default function Demo() {
 
 ## 通知 Toast
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
@@ -10255,7 +10255,7 @@ export default function Demo() {
 
 ## 阅读目录 Toc
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
@@ -10373,7 +10373,7 @@ export default function Demo() {
 
 ## 切换按钮 Toggle
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -10473,7 +10473,7 @@ export default function Demo() {
 
 ## 切换组 ToggleGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
@@ -10582,7 +10582,7 @@ export default function Demo() {
 
 ## 工具组 Toolbar
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -10701,7 +10701,7 @@ export default function Demo() {
 
 ## 文字提示 Tooltip
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 645246aacae85bd1b03d598d0514c39ada5e0c0a7bb1aec070bb3441cc6e11f6
@@ -10851,7 +10851,7 @@ export default function Demo() {
 
 ## 层级集合 Tree
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
@@ -10967,7 +10967,7 @@ export default function Demo() {
 
 ## 排版 Typography
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656
@@ -11075,7 +11075,7 @@ export default function Demo() {
 
 ## 虚拟列表 VirtualList
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98
@@ -11159,10 +11159,10 @@ export default function Demo() {
 
 ## 工作面 Workspace
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: a88bca35228482d5df54cdb17482fcaf3ea78e0599acdaed212d8e69f2b368d1
+Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -11299,6 +11299,7 @@ Written descriptions; the list above is the type-resolved fact.
 Source: apps/docs/src/content/workspace/demos/01-shell.tsx
 ```tsx
 import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
+import { useMediaQuery } from "@qingye_lab/ui";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Stack } from "@qingye_lab/ui/components/layout";
@@ -11314,13 +11315,14 @@ const SYNCED = [{ name: "蚕室温湿度", time: "今天 08:30" }, { name: "桑�
 const PENDING = [{ name: "饲料入库单", time: "10 月 11 日" }, { name: "消毒记录", time: "10 月 10 日" }];
 
 export default function Demo() {
+  const narrow = useMediaQuery("max-sm");
   // 演示框的高度只为让外壳在示例里可见；应用里 Workspace 填满它所在容器的高度。
   return <div className="h-[calc(24*var(--qy-cai))]">
-    <Workspace>
-      <Sidebar aria-label="工作区" className="w-[calc(10*var(--qy-cai))] shrink-0">
-        <SidebarHeader><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
-        <SidebarContent className="mt-(--qy-field-group-gap)">
-          <SidebarGroup>
+    <Workspace className="max-sm:flex-col">
+      <Sidebar aria-label="工作区" collapsed={narrow} className="w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full">
+        <SidebarHeader className="max-sm:hidden"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
+        <SidebarContent className="mt-(--qy-field-group-gap) max-sm:mt-0">
+          <SidebarGroup className="max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]">
             <SidebarLink href="#overview" icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
             <SidebarLink href="#collections" active icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>
             <SidebarLink href="#tasks" icon={<IconChecklist aria-hidden="true" />}>任务</SidebarLink>
@@ -11329,10 +11331,10 @@ export default function Demo() {
         </SidebarContent>
       </Sidebar>
       <WorkspaceSurface>
-        <WorkspaceHeader>
+        <WorkspaceHeader className="max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)">
           <WorkspaceTitle level={4}>集合</WorkspaceTitle>
-          <WorkspaceSummary>6 个，2 个未同步</WorkspaceSummary>
-          <WorkspaceActions><Button variant="bordered">导入</Button><Button>新建集合</Button></WorkspaceActions>
+          <WorkspaceSummary className="max-sm:hidden">6 个，2 个未同步</WorkspaceSummary>
+          <WorkspaceActions className="max-sm:basis-full max-sm:flex-wrap"><Button variant="bordered">导入</Button><Button>新建集合</Button></WorkspaceActions>
         </WorkspaceHeader>
         <WorkspaceContent render={<div />}>
           <Stack gap="section" className="p-(--qy-page-gutter)">

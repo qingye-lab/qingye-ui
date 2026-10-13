@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
+Source SHA-256: a0d2bdcd810595687a989f8f74992df54b1849c4f01cec019261f64821a831cb
 
 确认字符串集合，保留尚未确认的编辑草稿。
 

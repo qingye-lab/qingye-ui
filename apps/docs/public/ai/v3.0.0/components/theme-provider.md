@@ -92,30 +92,40 @@ Written descriptions; the list above is the type-resolved fact.
 ## Keyboard
 
 ## Source examples
-### 外观选择
+### 按需选择外观
 Source: apps/docs/src/content/theme-provider/demos/01-menu.tsx
 ```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useTheme, type Theme } from "@qingye_lab/ui/components/theme-provider";
-import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
-import { Inline } from "@qingye_lab/ui/components/layout";
+import { Text } from "@qingye_lab/ui/components/typography";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
 import { useUILocale } from "@qingye_lab/ui/locale";
-import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
+import { useId } from "react";
 
-export const meta = { title: "外观选择", titleEn: "Appearance choice" };
+export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
 
 export default function Demo() {
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const { messages } = useUILocale();
-  const options = [
-    { value: "light", label: messages.lightTheme, icon: IconSun },
-    { value: "dark", label: messages.darkTheme, icon: IconMoon },
-    { value: "system", label: messages.systemTheme, icon: IconDeviceDesktop },
-  ] as const;
-  return <SegmentedControl aria-label={messages.theme} value={theme} onValueChange={next => setTheme(next as Theme)}>
-    {options.map(({ value, label, icon: Icon }) => <SegmentedControlItem key={value} value={value}>
-      <Inline gap="field" render={<span />}><Icon aria-hidden="true" />{label}</Inline>
-    </SegmentedControlItem>)}
-  </SegmentedControl>;
+  const id = useId();
+  const Current = resolvedTheme === "dark" ? IconMoon : IconSun;
+  return <Popover>
+    <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
+    <PopoverPopup>
+      <Stack gap="field">
+        <PopoverTitle>{messages.theme}</PopoverTitle>
+        <NativeSelect id={id} aria-label={messages.theme} value={theme} onChange={event => setTheme(event.target.value as Theme)}>
+          <option value="light">{messages.lightTheme}</option>
+          <option value="dark">{messages.darkTheme}</option>
+          <option value="system">{messages.systemTheme}</option>
+        </NativeSelect>
+        <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
+      </Stack>
+    </PopoverPopup>
+  </Popover>;
 }
 ```
 
@@ -176,42 +186,5 @@ export default function Demo() {
       {`<script>${themeScript({ storageKey: "yq-theme" })}</script>`}
     </pre>
   );
-}
-```
-
-### 按需选择外观
-Source: apps/docs/src/content/theme-provider/demos/04-popover.tsx
-```tsx
-import { Button } from "@qingye_lab/ui/components/button";
-import { Stack } from "@qingye_lab/ui/components/layout";
-import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
-import { useTheme, type Theme } from "@qingye_lab/ui/components/theme-provider";
-import { Text } from "@qingye_lab/ui/components/typography";
-import { NativeSelect } from "@qingye_lab/ui/components/native-select";
-import { useUILocale } from "@qingye_lab/ui/locale";
-import { IconMoon, IconSun } from "@tabler/icons-react";
-import { useId } from "react";
-
-export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
-
-export default function Demo() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  const { messages } = useUILocale();
-  const id = useId();
-  const Current = resolvedTheme === "dark" ? IconMoon : IconSun;
-  return <Popover>
-    <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
-    <PopoverPopup>
-      <Stack gap="field">
-        <PopoverTitle>{messages.theme}</PopoverTitle>
-        <NativeSelect id={id} aria-label={messages.theme} value={theme} onChange={event => setTheme(event.target.value as Theme)}>
-          <option value="light">{messages.lightTheme}</option>
-          <option value="dark">{messages.darkTheme}</option>
-          <option value="system">{messages.systemTheme}</option>
-        </NativeSelect>
-        <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
-      </Stack>
-    </PopoverPopup>
-  </Popover>;
 }
 ```

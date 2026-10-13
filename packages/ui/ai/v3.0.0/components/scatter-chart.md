@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
+Source SHA-256: 21d3648a2701ede7c48c181a2c7525f3c3eaf1131008e09ae2dba12e80e2fd26
 
 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 
@@ -43,8 +43,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### ScatterChart
 - `formatX?`: `(value: number) => React.ReactNode`.
 - `formatY?`: `(value: number) => React.ReactNode`.
-- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
-- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
+- `label`: `string`.
 - `series`: `readonly ScatterSeriesInput[]`. 1 至 3 个系列：两个量的关系是全比较形式（任意两点都可能相邻），色觉校验按全比较口径最多 3 色。
 - `style?`: `ChartStyle`.
 - `xLabel`: `string`. 横轴量的是什么，例如「记录数」。
@@ -56,7 +55,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context ChartGeometryContext: without a provider default-value; provided by ScatterChart
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -64,8 +62,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### ScatterChart
 figure 名称、命名的双轴、按系列着色的标记与同源可见 Table。
 - label: string. 非空真实语义名称。
-- framed: boolean; default true. false：图放在已有的面上（无边框的 Section、Card、面板），不铺自己的纸——没有线、底、圆角与内缘，图的左右缘就是承载面的内容缘。与 TableContainer 的 framed 同义。是否显示图内标题与它无关。
-- aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - xLabel / yLabel: string. 横轴与纵轴量的是什么，例如「记录数」「失败率」。
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. 1 至 3 个系列。只有一个系列时取第一色、不显示图例；两个以上按 chart1..3 取色并配不同标记形状。每个点需要稳定 id 与非空名称。
 - formatX / formatY: (value: number) => ReactNode. 格式化已知数值；默认按 UILocale 数值 Intl。

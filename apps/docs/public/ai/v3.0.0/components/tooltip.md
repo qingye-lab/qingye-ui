@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: 645246aacae85bd1b03d598d0514c39ada5e0c0a7bb1aec070bb3441cc6e11f6
+Source SHA-256: b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f
 
 悬停或聚焦时阅读快捷键、格式与短解释。
 
@@ -127,21 +127,33 @@ Written descriptions; the list above is the type-resolved fact.
 - Esc: 收起提示，焦点保持当前触发者。
 
 ## Source examples
-### 图标按钮
+### 文字格式
 Source: apps/docs/src/content/tooltip/demos/01-icon-buttons.tsx
 ```tsx
+import { useState } from "react";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
-import { IconBold } from "@tabler/icons-react";
+import { IconBold, IconItalic } from "@tabler/icons-react";
 
-export const meta = { title: "图标按钮", titleEn: "Icon button" };
+export const meta = { title: "文字格式" };
 
 export default function Demo() {
+  const [bold, setBold] = useState(false);
+  const [italic, setItalic] = useState(false);
   return (
-    <Tooltip>
-      <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" />}><IconBold aria-hidden="true" /></TooltipTrigger>
-      <TooltipPopup>粗体</TooltipPopup>
-    </Tooltip>
+    <div className="flex flex-col gap-(--qy-field-group-gap)">
+      <div className="flex gap-(--qy-action-gap)">
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><IconBold aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>强调项目名称</TooltipPopup>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><IconItalic aria-hidden="true" /></TooltipTrigger>
+          <TooltipPopup>标记作品名称或引用</TooltipPopup>
+        </Tooltip>
+      </div>
+      <p className="text-body text-foreground" aria-live="polite">{bold ? <strong>{italic ? <em>青野组件库</em> : "青野组件库"}</strong> : italic ? <em>青野组件库</em> : "青野组件库"}</p>
+    </div>
   );
 }
 ```

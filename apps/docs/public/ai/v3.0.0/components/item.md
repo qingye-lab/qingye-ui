@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
-Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
+Source SHA-256: a4840f5d596664b75f0955993cfe79a0e4b49c8de13c50f8a511baf32d7762fe
 
 内容、入口与附属动作的关系。
 
@@ -21,10 +21,10 @@ Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
 - Application: 条目内容、真实导航目标与操作状态。
 
 ## Composition
-- Item：默认 div，可 render 为 li 或独立 a。整行只通向一个去处且行内没有别的交互元素时 render 为 a：渲染为 a[href] 或 button 时整行有悬停与按下反馈，两侧伸出一个留白，文字仍与列缘对齐；div 与 li 没有反馈。
+- Item：默认 div，可 render 为 li 或独立 a。
 - ItemContent / ItemTitle / ItemDescription：div / div / p 关系槽。
 - ItemActions：行内的附属动作，默认一直可见。
-- ItemLink：名称就是入口的真实导航链接，用在行内另有操作的条目上，操作放 ItemActions；整行只有一个去处时改用 Item render={<a />}。
+- ItemLink：真实导航链接。
 
 ## Responsive behavior
 - 正文可换行，附属动作保留容量。
@@ -85,7 +85,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Item
-默认 div，可 render 为 li 或独立 a。整行只通向一个去处且行内没有别的交互元素时 render 为 a：渲染为 a[href] 或 button 时整行有悬停与按下反馈，两侧伸出一个留白，文字仍与列缘对齐；div 与 li 没有反馈。
+默认 div，可 render 为 li 或独立 a。
 - render / ref / children / native props: useRender.ComponentProps<div>. 实际元素接收事件与 ref；列表中显式 render 为 li。
 
 ### ItemContent / ItemTitle / ItemDescription
@@ -99,7 +99,7 @@ div / div / p 关系槽。
 - children / render / ref / native props: useRender.ComponentProps<div>. 动作组合公共 Button。
 
 ### ItemLink
-名称就是入口的真实导航链接，用在行内另有操作的条目上，操作放 ItemActions；整行只有一个去处时改用 Item render={<a />}。
+真实导航链接。
 - href / render / ref / native props: useRender.ComponentProps<a>. 保留目标、ARIA 和消费者事件。
 
 ## Keyboard
@@ -160,34 +160,6 @@ export default function Demo() {
         <Button variant="quiet" size="sm">归档</Button>
       </ItemActions>
     </Item>)}
-  </Stack>;
-}
-```
-
-### 整行是一个链接
-Source: apps/docs/src/content/item/demos/03-row-link.tsx
-```tsx
-import { IconChevronRight } from "@tabler/icons-react";
-import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
-import { Stack } from "@qingye_lab/ui/components/layout";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "整行是一个链接", titleEn: "The whole row as one link" } satisfies DemoMeta;
-
-const queue = [
-  { id: "room-3", name: "蚕室 3", note: "待核对 2 条读数" },
-  { id: "room-5", name: "蚕室 5", note: "湿度偏高 3 次" },
-  { id: "room-8", name: "蚕室 8", note: "桑叶入库单待签收" },
-];
-
-export default function Demo() {
-  return <Stack render={<ul />} className="m-0 w-full max-w-lg list-none p-0">
-    {queue.map(row => <li key={row.id}>
-      <Item render={<a href={`#${row.id}`} />}>
-        <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
-        <IconChevronRight aria-hidden="true" className="size-(--qy-control-md-icon) shrink-0 text-muted-foreground rtl:-scale-x-100" />
-      </Item>
-    </li>)}
   </Stack>;
 }
 ```

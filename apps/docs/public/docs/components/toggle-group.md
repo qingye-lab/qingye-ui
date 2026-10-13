@@ -1,6 +1,6 @@
 # 切换组 ToggleGroup
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d

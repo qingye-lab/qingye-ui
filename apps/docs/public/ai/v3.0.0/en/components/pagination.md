@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
+Source SHA-256: 91739438bfcb4fd1559027083c341c0dab143ea076703bf453203fecbfb9b53a
 
 Page position, real actions and explicit unknown totals.
 
@@ -128,80 +128,56 @@ An omitted-pages marker, not a final page.
 ## Keyboard
 
 ## Source examples
-### 已知总页数
+### 已知与未知总页数
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
 import { useState } from "react";
-import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { Heading, Text } from "@qingye_lab/ui/components/typography";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "已知总页数", titleEn: "Known total" } satisfies DemoMeta;
+export const meta = { title: "已知与未知总页数", titleEn: "Known and unknown totals" } satisfies DemoMeta;
 
-const total = 5;
+// 演示只描述「结果分页」本身，不编造业务流程。
+const pages = [
+  { title: "接入与设备", summary: "12 条记录" },
+  { title: "权限与角色", summary: "8 条记录" },
+  { title: "同步与导出", summary: "5 条记录" },
+];
 
 export default function Demo() {
   const [page, setPage] = useState(2);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>
-        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
-}
-```
+  return <Stack gap="section">
+    <Stack>
+      <Heading level={6} step="heading">{pages[page - 1]!.title}</Heading>
+      <Text step="support" className="text-muted-foreground">{pages[page - 1]!.summary}</Text>
+      <Pagination page={page} totalPages={pages.length} aria-label="内容分页">
+        <PaginationList>
+          <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
+          {pages.map((entry, index) => <PaginationItem key={entry.title}>
+            <PaginationLink
+              page={index + 1}
+              href={`#page-${index + 1}`}
+              onClick={event => { event.preventDefault(); setPage(index + 1); }}
+            >{index + 1}</PaginationLink>
+          </PaginationItem>)}
+          <PaginationItem><PaginationEllipsis /></PaginationItem>
+          <PaginationItem><PaginationNext disabled={page === pages.length} onClick={() => setPage(page + 1)} /></PaginationItem>
+        </PaginationList>
+      </Pagination>
+    </Stack>
 
-### 页数较多
-Source: apps/docs/src/content/pagination/demos/02-ellipsis.tsx
-```tsx
-import { useState } from "react";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "页数较多", titleEn: "Many pages" } satisfies DemoMeta;
-
-const total = 12;
-
-// 首末页与当前页前后各一页；被省略的部分用省略号，不伪造页码。
-function visible(page: number) {
-  const numbers = [1, page - 1, page, page + 1, total].filter((number, index, all) => number >= 1 && number <= total && all.indexOf(number) === index).sort((a, b) => a - b);
-  return numbers.flatMap((number, index) => index > 0 && number - numbers[index - 1]! > 1 ? ["gap", number] as const : [number] as const);
-}
-
-export default function Demo() {
-  const [page, setPage] = useState(6);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {visible(page).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>
-        {entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} href={`#page-${entry}`} onClick={event => { event.preventDefault(); setPage(entry); }}>{entry}</PaginationLink>}
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
-}
-```
-
-### 总数未知
-Source: apps/docs/src/content/pagination/demos/03-unknown.tsx
-```tsx
-import { useState } from "react";
-import { Pagination, PaginationItem, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
-import { Text } from "@qingye_lab/ui/components/typography";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
-
-export default function Demo() {
-  const [page, setPage] = useState(1);
-  return <Pagination page={page} totalPages={null}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      <PaginationItem><Text step="support">第 {page} 页</Text></PaginationItem>
-      <PaginationItem><PaginationNext onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+    <Stack>
+      <Text step="support" className="text-muted-foreground">总数未知时只表达方向和已到达的位置，不伪造末页。</Text>
+      <Pagination page={page} totalPages={null} aria-label="未知总数的分页">
+        <PaginationList>
+          <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
+          <PaginationItem><Text step="support">第 {page} 页</Text></PaginationItem>
+          <PaginationItem><PaginationNext onClick={() => setPage(page + 1)} /></PaginationItem>
+        </PaginationList>
+      </Pagination>
+    </Stack>
+  </Stack>;
 }
 ```

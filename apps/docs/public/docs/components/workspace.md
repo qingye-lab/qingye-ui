@@ -1,9 +1,9 @@
 # 工作面 Workspace
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: a88bca35228482d5df54cdb17482fcaf3ea78e0599acdaed212d8e69f2b368d1
+Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -140,6 +140,7 @@ Written descriptions; the list above is the type-resolved fact.
 Source: apps/docs/src/content/workspace/demos/01-shell.tsx
 ```tsx
 import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
+import { useMediaQuery } from "@qingye_lab/ui";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Stack } from "@qingye_lab/ui/components/layout";
@@ -155,13 +156,14 @@ const SYNCED = [{ name: "蚕室温湿度", time: "今天 08:30" }, { name: "桑�
 const PENDING = [{ name: "饲料入库单", time: "10 月 11 日" }, { name: "消毒记录", time: "10 月 10 日" }];
 
 export default function Demo() {
+  const narrow = useMediaQuery("max-sm");
   // 演示框的高度只为让外壳在示例里可见；应用里 Workspace 填满它所在容器的高度。
   return <div className="h-[calc(24*var(--qy-cai))]">
-    <Workspace>
-      <Sidebar aria-label="工作区" className="w-[calc(10*var(--qy-cai))] shrink-0">
-        <SidebarHeader><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
-        <SidebarContent className="mt-(--qy-field-group-gap)">
-          <SidebarGroup>
+    <Workspace className="max-sm:flex-col">
+      <Sidebar aria-label="工作区" collapsed={narrow} className="w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full">
+        <SidebarHeader className="max-sm:hidden"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
+        <SidebarContent className="mt-(--qy-field-group-gap) max-sm:mt-0">
+          <SidebarGroup className="max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]">
             <SidebarLink href="#overview" icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
             <SidebarLink href="#collections" active icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>
             <SidebarLink href="#tasks" icon={<IconChecklist aria-hidden="true" />}>任务</SidebarLink>
@@ -170,10 +172,10 @@ export default function Demo() {
         </SidebarContent>
       </Sidebar>
       <WorkspaceSurface>
-        <WorkspaceHeader>
+        <WorkspaceHeader className="max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)">
           <WorkspaceTitle level={4}>集合</WorkspaceTitle>
-          <WorkspaceSummary>6 个，2 个未同步</WorkspaceSummary>
-          <WorkspaceActions><Button variant="bordered">导入</Button><Button>新建集合</Button></WorkspaceActions>
+          <WorkspaceSummary className="max-sm:hidden">6 个，2 个未同步</WorkspaceSummary>
+          <WorkspaceActions className="max-sm:basis-full max-sm:flex-wrap"><Button variant="bordered">导入</Button><Button>新建集合</Button></WorkspaceActions>
         </WorkspaceHeader>
         <WorkspaceContent render={<div />}>
           <Stack gap="section" className="p-(--qy-page-gutter)">
@@ -199,6 +201,7 @@ Source: apps/docs/src/content/workspace/demos/02-page-slot.tsx
 ```tsx
 import * as React from "react";
 import { IconDatabase, IconUsers } from "@tabler/icons-react";
+import { useMediaQuery } from "@qingye_lab/ui";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from "@qingye_lab/ui/components/sidebar";
@@ -211,8 +214,8 @@ function Collections() {
   return <>
     <WorkspaceHeaderPortal>
       <WorkspaceTitle level={4}>集合</WorkspaceTitle>
-      <WorkspaceSummary>6 个</WorkspaceSummary>
-      <WorkspaceActions><Button>新建集合</Button></WorkspaceActions>
+      <WorkspaceSummary className="max-sm:hidden">6 个</WorkspaceSummary>
+      <WorkspaceActions className="max-sm:basis-full max-sm:flex-wrap"><Button>新建集合</Button></WorkspaceActions>
     </WorkspaceHeaderPortal>
     <div className="p-(--qy-page-gutter)">
       <Item><ItemContent><ItemTitle>蚕室温湿度</ItemTitle><ItemDescription>今天 08:30</ItemDescription></ItemContent></Item>
@@ -225,8 +228,8 @@ function Members() {
   return <>
     <WorkspaceHeaderPortal>
       <WorkspaceTitle level={4}>成员</WorkspaceTitle>
-      <WorkspaceSummary>4 人</WorkspaceSummary>
-      <WorkspaceActions><Button variant="quiet">导出</Button><Button>邀请成员</Button></WorkspaceActions>
+      <WorkspaceSummary className="max-sm:hidden">4 人</WorkspaceSummary>
+      <WorkspaceActions className="max-sm:basis-full max-sm:flex-wrap"><Button variant="quiet">导出</Button><Button>邀请成员</Button></WorkspaceActions>
     </WorkspaceHeaderPortal>
     <div className="p-(--qy-page-gutter)">
       <Item><ItemContent><ItemTitle>陈致远</ItemTitle><ItemDescription>管理员</ItemDescription></ItemContent></Item>
@@ -237,18 +240,19 @@ function Members() {
 
 export default function Demo() {
   const [page, setPage] = React.useState<"collections" | "members">("collections");
+  const narrow = useMediaQuery("max-sm");
   return <div className="h-[calc(16*var(--qy-cai))]">
-    <Workspace>
-      <Sidebar aria-label="工作区" className="w-[calc(10*var(--qy-cai))] shrink-0">
+    <Workspace className="max-sm:flex-col">
+      <Sidebar aria-label="工作区" collapsed={narrow} className="w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full">
         <SidebarContent>
-          <SidebarGroup>
+          <SidebarGroup className="max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]">
             <SidebarLink render={<button type="button" onClick={() => setPage("collections")} />} active={page === "collections"} icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>
             <SidebarLink render={<button type="button" onClick={() => setPage("members")} />} active={page === "members"} icon={<IconUsers aria-hidden="true" />}>成员</SidebarLink>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
       <WorkspaceSurface>
-        <WorkspaceHeader />
+        <WorkspaceHeader className="max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)" />
         <WorkspaceContent render={<div />}>{page === "collections" ? <Collections /> : <Members />}</WorkspaceContent>
       </WorkspaceSurface>
     </Workspace>

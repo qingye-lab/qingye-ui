@@ -1,6 +1,6 @@
 # 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18

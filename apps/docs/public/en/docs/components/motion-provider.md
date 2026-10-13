@@ -1,6 +1,6 @@
 # MotionProvider
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2

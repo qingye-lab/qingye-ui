@@ -89,10 +89,10 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;
 
 const sections = [
-  { id: "demo-install", level: 2 as const, title: "安装", body: "用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。" },
-  { id: "demo-styles", level: 3 as const, title: "引入样式", body: "在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。" },
-  { id: "demo-theme", level: 3 as const, title: "明暗与品牌", body: "ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。" },
-  { id: "demo-density", level: 2 as const, title: "密度", body: "在容器上写 data-density=\"compact\"，其中的控件与间距一起收紧，字号不变。" },
+  { id: "demo-overview", level: 2 as const, title: "概览", body: "每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。" },
+  { id: "demo-retry", level: 3 as const, title: "重试与核实", body: "默认重试 3 次，间隔依次为 1、5、15 分钟；超过次数仍失败，转入人工核实队列。" },
+  { id: "demo-unknown", level: 3 as const, title: "结果未知时", body: "直接重试可能写入两次；先在 Webhook 回调或审计日志里核实，再决定下一步。" },
+  { id: "demo-recovery", level: 2 as const, title: "恢复与返回", body: "放弃一条记录不会影响其余记录；核实后可以随时手动重新触发。" },
 ];
 
 export default function Demo() {
@@ -101,7 +101,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc items={headings} current={current} className="w-40 shrink-0" />
-    <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} role="region" aria-label="同步说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -122,13 +122,13 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "手写目录与两级层级", titleEn: "A hand-written list with two levels" } satisfies DemoMeta;
 export default function Demo() {
   return <Toc
-    aria-label="《接入》目录"
+    aria-label="《同步失败时，数据会怎样》目录"
     items={[
-      { id: "install", label: "安装", level: 2 },
-      { id: "styles", label: "引入样式", level: 3 },
-      { id: "density", label: "密度", level: 2 },
+      { id: "overview", label: "同步失败时，数据会怎样", level: 2 },
+      { id: "retry", label: "重试与核实", level: 3 },
+      { id: "result", label: "按失败原因统计", level: 2 },
     ]}
-    current="styles"
+    current="retry"
     className="w-48"
   />;
 }

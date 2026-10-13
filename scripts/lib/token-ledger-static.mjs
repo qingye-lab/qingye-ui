@@ -101,6 +101,10 @@ function stylesheetUtilityInfo(utility) {
 function utilityInfo(utility, themeNames) {
   const raw = utility.replace(/!$/, '');
   if (raw.startsWith('text-')) {
+    if (raw.startsWith('text-(length:') || raw.startsWith('text-[length:')) {
+      const references = [...new Set(raw.match(/--[a-zA-Z0-9_-]+/g) || [])];
+      return { property: 'font-size', references, supported: references.length > 0 };
+    }
     const role = raw.slice(5).split('/')[0];
     if (themeNames.has(`--text-${role}`)) {
       const mappings = [['font-size', `--text-${role}`], ['line-height', `--text-${role}--line-height`], ['letter-spacing', `--text-${role}--letter-spacing`], ['font-weight', `--text-${role}--font-weight`]].filter(([, variable]) => themeNames.has(variable)).map(([property, variable]) => ({ property, references: [variable], supported: true }));

@@ -1,6 +1,6 @@
 # Empty
 
-Package: @qingye_lab/ui@3.0.0
+Package: @qingye_lab/ui@4.0.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58

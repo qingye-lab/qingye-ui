@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-13T04:15:34.637Z",
-  "revision": "d3ee06e776839ed45190d90fea6589b4bc304642",
+  "generatedAt": "2026-10-13T04:54:38.415Z",
+  "revision": "070b55a752cfa2b0e7d3f1e98b253fb5fb2fafa2",
   "static": {
     "fingerprint": {
-      "sha256": "e13234ef4ee981e4a6ee9c217674c69644624f761ce2eda02f08da37586e56c3",
+      "sha256": "2f3254ce5b4408271abe4d7d4e0f29c0f03cf5ea326d3f72b25ee3b00578ebcb",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -1801,11 +1801,11 @@
         },
         {
           "path": "apps/docs/src/content/workspace/demos/01-shell.tsx",
-          "sha256": "e5761457f1f08fc336dba26ffff740c6018a1fb74a869b0799024de1a977003c"
+          "sha256": "a9877d15495f1bf782fc90ae6ac779b20f003b500b24603b4188dd9fab15a877"
         },
         {
           "path": "apps/docs/src/content/workspace/demos/02-page-slot.tsx",
-          "sha256": "01ce264414064103d2b477df19723ef98305c56a407efa5116b9e530b718aad6"
+          "sha256": "0943e0cc6ddebe85a4b627dea23f09137bccbce1fc66dded7c41af4978d7c8b5"
         },
         {
           "path": "apps/docs/src/content/workspace/meta.ts",
@@ -1929,7 +1929,7 @@
         },
         {
           "path": "apps/docs/src/pages/docs/components-index.css",
-          "sha256": "d5ff84a09289f29b2ecab8b9c74c33d1b80fea7ef6fdcd974037109ea5bac95b"
+          "sha256": "26ea22506f817e3301e39ef619af6a98bd8adf7c79270c953f51f093e86a09c9"
         },
         {
           "path": "apps/docs/src/pages/docs/components-index.tsx",
@@ -2141,7 +2141,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "92d77b85931833bb605f8c679f74fc620189f68b8642de82f0064955e7abadd5"
+          "sha256": "cd1733c5d9a44043876ff5cf6c21ea2da038fd01abaf4ca18762a74735366197"
         },
         {
           "path": "packages/ui/prose.css",
@@ -2529,7 +2529,7 @@
         },
         {
           "path": "packages/ui/src/components/workspace.tsx",
-          "sha256": "a88bca35228482d5df54cdb17482fcaf3ea78e0599acdaed212d8e69f2b368d1"
+          "sha256": "ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0"
         },
         {
           "path": "packages/ui/src/disclosure.tsx",
@@ -2661,7 +2661,7 @@
         },
         {
           "path": "scripts/lib/token-ledger-static.mjs",
-          "sha256": "6a28294b1c801dae9cc9b3680375c9ee50e7db8297669a132ba4b089c9638634"
+          "sha256": "91faa804dbbf74249825fc6133de5df8afd4b089778ebbc2eb3a093f03252d78"
         },
         {
           "path": "scripts/lib/ui-facts.mjs",
@@ -234695,7 +234695,7 @@
         "selector": "&:is(code)",
         "precision": "EXACT_DESCENDANT",
         "pseudo": null,
-        "property": "color",
+        "property": "font-size",
         "conditions": [],
         "className": "text-(length:--qy-inline-code-size)",
         "source": {
@@ -246954,7 +246954,7 @@
         "selector": "&:is(kbd)",
         "precision": "EXACT_DESCENDANT",
         "pseudo": null,
-        "property": "color",
+        "property": "font-size",
         "conditions": [],
         "className": "text-(length:--qy-inline-code-size)",
         "source": {
@@ -413840,7 +413840,7 @@
         "selector": "[data-slot=\"code\"]",
         "precision": "EXACT_SLOT",
         "pseudo": null,
-        "property": "color",
+        "property": "font-size",
         "conditions": [],
         "className": "text-(length:--qy-inline-code-size)",
         "source": {
@@ -420780,7 +420780,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -420813,7 +420813,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -420846,7 +420846,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -420887,7 +420887,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -420936,7 +420936,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -420993,7 +420993,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421050,7 +421050,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421099,7 +421099,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421148,7 +421148,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421205,7 +421205,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421262,7 +421262,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421327,7 +421327,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421400,7 +421400,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421473,7 +421473,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421538,7 +421538,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421611,7 +421611,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421676,7 +421676,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421741,7 +421741,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -421798,7 +421798,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/workspace.tsx",
-          "line": 183
+          "line": 193
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       }
@@ -426575,8 +426575,8 @@
     ]
   },
   "runtime": {
-    "fingerprint": "e13234ef4ee981e4a6ee9c217674c69644624f761ce2eda02f08da37586e56c3",
-    "measuredAt": "2026-10-13T04:22:45.661Z",
+    "fingerprint": "2f3254ce5b4408271abe4d7d4e0f29c0f03cf5ea326d3f72b25ee3b00578ebcb",
+    "measuredAt": "2026-10-13T04:59:50.861Z",
     "browser": {
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
@@ -426600,7 +426600,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-13T04:21:33.964Z",
+        "measuredAt": "2026-10-13T04:58:39.344Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426671,7 +426671,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-13T04:21:35.350Z",
+        "measuredAt": "2026-10-13T04:58:40.720Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426738,7 +426738,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:36.750Z",
+        "measuredAt": "2026-10-13T04:58:42.097Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426813,7 +426813,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-13T04:21:38.121Z",
+        "measuredAt": "2026-10-13T04:58:43.463Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426888,7 +426888,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:21:39.499Z",
+        "measuredAt": "2026-10-13T04:58:44.829Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426963,7 +426963,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:40.872Z",
+        "measuredAt": "2026-10-13T04:58:46.192Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427030,7 +427030,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:21:42.395Z",
+        "measuredAt": "2026-10-13T04:58:47.552Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427100,7 +427100,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:43.815Z",
+        "measuredAt": "2026-10-13T04:58:48.914Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427167,7 +427167,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:45.201Z",
+        "measuredAt": "2026-10-13T04:58:50.281Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427244,7 +427244,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:21:46.630Z",
+        "measuredAt": "2026-10-13T04:58:51.659Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427321,7 +427321,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:48.037Z",
+        "measuredAt": "2026-10-13T04:58:53.036Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427394,7 +427394,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:49.485Z",
+        "measuredAt": "2026-10-13T04:58:54.419Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427469,7 +427469,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:21:50.914Z",
+        "measuredAt": "2026-10-13T04:58:55.842Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427540,7 +427540,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:21:52.378Z",
+        "measuredAt": "2026-10-13T04:58:57.301Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427616,7 +427616,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:21:53.751Z",
+        "measuredAt": "2026-10-13T04:58:58.673Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427685,7 +427685,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-13T04:21:55.148Z",
+        "measuredAt": "2026-10-13T04:59:00.053Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427757,7 +427757,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-13T04:21:56.520Z",
+        "measuredAt": "2026-10-13T04:59:01.429Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427824,7 +427824,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:21:57.904Z",
+        "measuredAt": "2026-10-13T04:59:02.789Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427898,7 +427898,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:21:59.317Z",
+        "measuredAt": "2026-10-13T04:59:04.165Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427968,7 +427968,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:00.684Z",
+        "measuredAt": "2026-10-13T04:59:05.542Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428041,7 +428041,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:02.060Z",
+        "measuredAt": "2026-10-13T04:59:06.920Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428116,7 +428116,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:03.470Z",
+        "measuredAt": "2026-10-13T04:59:08.278Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428189,7 +428189,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:04.883Z",
+        "measuredAt": "2026-10-13T04:59:09.641Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428262,7 +428262,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:06.312Z",
+        "measuredAt": "2026-10-13T04:59:11.004Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428339,7 +428339,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:07.731Z",
+        "measuredAt": "2026-10-13T04:59:12.401Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428416,7 +428416,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:09.133Z",
+        "measuredAt": "2026-10-13T04:59:13.803Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428485,7 +428485,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-13T04:22:10.532Z",
+        "measuredAt": "2026-10-13T04:59:15.220Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428556,7 +428556,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-13T04:22:11.947Z",
+        "measuredAt": "2026-10-13T04:59:16.641Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428623,7 +428623,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:13.334Z",
+        "measuredAt": "2026-10-13T04:59:18.088Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428698,7 +428698,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-13T04:22:14.753Z",
+        "measuredAt": "2026-10-13T04:59:19.576Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428773,7 +428773,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:22:16.190Z",
+        "measuredAt": "2026-10-13T04:59:21.008Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428848,7 +428848,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:22:17.618Z",
+        "measuredAt": "2026-10-13T04:59:22.401Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428918,7 +428918,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:19.008Z",
+        "measuredAt": "2026-10-13T04:59:23.808Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428985,7 +428985,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:20.395Z",
+        "measuredAt": "2026-10-13T04:59:25.208Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429062,7 +429062,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:21.856Z",
+        "measuredAt": "2026-10-13T04:59:26.728Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429139,7 +429139,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:23.257Z",
+        "measuredAt": "2026-10-13T04:59:28.136Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429212,7 +429212,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:24.660Z",
+        "measuredAt": "2026-10-13T04:59:29.543Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429287,7 +429287,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:26.102Z",
+        "measuredAt": "2026-10-13T04:59:30.990Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429358,7 +429358,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:22:27.563Z",
+        "measuredAt": "2026-10-13T04:59:32.514Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429434,7 +429434,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:28.979Z",
+        "measuredAt": "2026-10-13T04:59:33.941Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429503,7 +429503,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-13T04:22:30.421Z",
+        "measuredAt": "2026-10-13T04:59:35.383Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429575,7 +429575,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-13T04:22:31.796Z",
+        "measuredAt": "2026-10-13T04:59:36.798Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429642,7 +429642,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:22:33.197Z",
+        "measuredAt": "2026-10-13T04:59:38.192Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429716,7 +429716,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:22:34.582Z",
+        "measuredAt": "2026-10-13T04:59:39.604Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429786,7 +429786,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:35.956Z",
+        "measuredAt": "2026-10-13T04:59:41.009Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429859,7 +429859,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:22:37.331Z",
+        "measuredAt": "2026-10-13T04:59:42.430Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429934,7 +429934,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:38.701Z",
+        "measuredAt": "2026-10-13T04:59:43.870Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430007,7 +430007,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:40.097Z",
+        "measuredAt": "2026-10-13T04:59:45.251Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430080,7 +430080,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:41.472Z",
+        "measuredAt": "2026-10-13T04:59:46.650Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430157,7 +430157,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:42.886Z",
+        "measuredAt": "2026-10-13T04:59:48.022Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430234,7 +430234,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:22:44.262Z",
+        "measuredAt": "2026-10-13T04:59:49.387Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
