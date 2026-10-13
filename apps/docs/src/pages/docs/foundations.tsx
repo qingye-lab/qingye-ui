@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { A, H2, PageHeader } from "@/components/prose";
+import { A, Article, ArticleSection, H2, PageHeader } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { DensitySpecimen, StateSpecimen } from "./foundations-specimens";
 import "./foundations.css";
@@ -85,24 +85,24 @@ export default function FoundationsPage() {
   const en = useDocsLocale() === "en";
   const pick = ([zh, english]: [string, string]) => (en ? english : zh);
   return (
-    <article className="fd">
+    <Article className="fd">
       <PageHeader title={en ? "Foundations" : "基础判断"} />
       {JUDGMENTS.map(({ id, title, origin, text, links, specimen: Specimen }) => (
-        <section className="fd-section" key={id}>
+        <ArticleSection className="fd-section" key={id}>
           <H2 id={id}>{pick(title)}</H2>
-          <p className="fd-origin">{pick(origin)}</p>
-          <p className="fd-text docs-p">{pick(text)}</p>
+          <p className="fd-origin" data-slot="docs-origin">{pick(origin)}</p>
+          <p className="fd-text">{pick(text)}</p>
           {Specimen ? <Specimen en={en} /> : null}
-          <p className="fd-links">
+          <p className="fd-links" data-slot="docs-links">
             {links.map((link) => <A href={link.href} key={link.href}>{en ? link.en : link.zh}</A>)}
           </p>
-        </section>
+        </ArticleSection>
       ))}
-      <p className="fd-links fd-footer">
+      <p className="fd-links fd-footer" data-slot="docs-links">
         <A href="/docs/tokens">{en ? "Design tokens" : "设计令牌"}</A>
         <A href="/docs/theming">{en ? "Theme axes" : "主题三轴"}</A>
         <A href="/docs/accessibility">{en ? "Accessibility" : "无障碍"}</A>
       </p>
-    </article>
+    </Article>
   );
 }

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { createServer } from "vite";
-import { act } from "react";
+import { act, createElement } from "react";
 let createRoot;
 
 const requireUI = createRequire(new URL("../../../packages/ui/package.json", import.meta.url));
@@ -49,9 +49,11 @@ async function input(field,value) {
   await act(() => { Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value").set.call(field,value); field.dispatchEvent(new Event("input",{bubbles:true})); });
 }
 const button = label => [...document.querySelectorAll("button")].find(element => element.textContent.trim() === label);
+// 第一个示例只放组件本身；需要真实结果的断言挂载带结果的示例文件。
+async function previewDemo(slug, file) { const { default: Demo } = await server.ssrLoadModule(`/src/content/${slug}/demos/${file}.tsx`); await mount(createElement(Demo)); await act(() => Promise.resolve()); }
 async function preview(slug) { await fixture.loadPreview(slug); await mount(fixture.previewScene(slug)); await act(() => Promise.resolve()); }
 test("the actual preview keeps draft filters separate from applied results, including cancellation and empty recovery",async () => {
-  await preview("filter-bar"); const field = document.querySelector("input");
+  await previewDemo("filter-bar", "02-results"); const field = document.querySelector("input");
   await input(field,"设备"); assert.equal(document.querySelectorAll("ul li").length,3);
   await click(button("应用")); assert.equal(document.querySelectorAll("ul li").length,1); assert.equal(document.querySelector("ul li").textContent,"接入设备");
   await input(field,"no-such-item"); await click(button("取消")); assert.equal(field.value,"设备"); assert.equal(document.querySelectorAll("ul li").length,1);
@@ -69,13 +71,15 @@ test("an unknown example path in the live /examples route shows the site's not-f
   assert.match(document.body.textContent,/Page not found/); assert.equal(document.querySelector('[data-slot="empty"]').dataset.state,"not-applicable");
   assert.equal(document.querySelector("a").getAttribute("href"),"/en/docs"); assert.equal(document.querySelectorAll("input,table").length,0);
 });
-test("unknown workspace pages and settings sections keep the workspace frame and show not-found; navigation keeps the URL locale",async () => {
+test("unknown workspace pages and settings sections keep the workspace frame and show the workspace's own not-found with a way back to its overview; navigation keeps the URL locale",async () => {
   await mount(fixture.missingExampleScene("/en/examples/workspace/zzz")); await settle();
-  assert.match(document.body.textContent,/Page not found/); assert.ok(document.querySelector('[data-slot="empty"]'));
+  assert.match(document.body.textContent,/没有这个页面/); assert.equal(document.querySelector('[data-slot="empty"]').dataset.state,"not-applicable");
+  assert.equal(document.querySelector('[data-slot="empty"] a').getAttribute("href"),"/en/examples/workspace");
   assert.ok(document.querySelector('nav[aria-label="工作区"], [aria-label="工作区"]'));
   await act(() => root.unmount()); root = undefined;
   await mount(fixture.missingExampleScene("/en/examples/workspace/settings/zzz")); await settle();
-  assert.match(document.body.textContent,/Page not found/); assert.equal(document.querySelector('[data-slot="empty"]').dataset.state,"not-applicable");
+  assert.match(document.body.textContent,/没有这个页面/); assert.equal(document.querySelector('[data-slot="empty"]').dataset.state,"not-applicable");
+  assert.equal(document.querySelector('[data-slot="empty"] a').getAttribute("href"),"/en/examples/workspace");
   await act(() => root.unmount()); root = undefined;
   await mount(fixture.missingExampleScene("/en/examples/workspace/collections")); await settle();
   const hrefs = [...document.querySelectorAll("a[href*='/examples/workspace']")].map(a => a.getAttribute("href"));

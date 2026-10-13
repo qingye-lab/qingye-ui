@@ -6,10 +6,14 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, P
 import * as React from "react";
 import { Button } from "./button";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
+import { ChartGeometryContext, chartGeometry, useChartGeometry, type ChartGeometry, READOUT_SURFACE } from "../chart-geometry";
 import { useUILocale } from "../locale";
+import { isList, isName, received, requireNamedItems } from "../require-name";
+import { useSystemUnits } from "../system-units";
 import { assertTone, toneColor, type Tone } from "../tone";
 import { cn } from "../utils";
 
+export { useChartGeometry, type ChartGeometry };
 export type ChartUnavailableValue = { state: "unknown" | "not-applicable"; label: string };
 export type ChartValue = number | ChartUnavailableValue;
 export type ChartRow = { id: string; label: string; values: Readonly<Record<string, ChartValue>> };
@@ -39,15 +43,23 @@ export type ChartEvent = { rowId: string; label: string; tone?: Tone };
  * 读数与数据表同时给原值与占比）；donut 只用于 2–5 个部分、一眼占比的单个整体
  * （rows 必须正好一行——它不是多类别并排比较，而是一个整体的拆分；超过 5 部分改用 Proportion 或条形图）。
  */
-/** 图的纸（绘事后素）：数据集合是独立对象，与比较表同一画法——纸本色、清墨线、面板圆角与内缘。 */
-export const chartFrameClassName = "m-0 grid min-w-0 max-w-full gap-(--qy-field-gap) rounded-panel border border-border bg-surface p-(--qy-panel-padding) text-body text-foreground";
+/** 图的本体：排布与文字档，不含纸。Chart、ScatterChart、Heatmap 共用。 */
+export const chartBaseClassName = "m-0 grid min-w-0 max-w-full gap-(--qy-field-gap) text-body text-foreground";
+/**
+ * 图的纸（绘事后素）：数据集合是独立对象，与比较表同一画法——纸本色、清墨线、面板圆角与内缘。
+ * framed={false} 时不铺这张纸：图坐在已有的面上（无边框的 Section、Card、面板），线、底、圆角与内缘都由承载它的面给出，
+ * 图的左右缘就是那个面的内容缘（基础层 §19：一列只有一条左缘）。与 TableContainer 的 framed 同名同义。
+ */
+export const chartPaperClassName = "rounded-panel border border-border bg-surface p-(--qy-panel-padding)";
+/** 带纸的图（framed 的默认）。 */
+export const chartFrameClassName = `${chartBaseClassName} ${chartPaperClassName}`;
 
 /*
  * 文字是墨，数据是色：图里的字、轴、网格用墨阶；数据即使只有一个系列也取第一色（花青）。
  * 焦墨是正文最重的一级，一根焦墨实柱的面积远大于文字，会压过图名与读数（君位，染随面积）。
  * 堆叠面积是大面：填充取颜料与纸调和的淡色（不透明，带与带不互相混色），上沿一道足色线交代边界。
  */
-const AREA_WASH = 28;
+const AREA_WASH = 28; // 预设：堆叠面积的淡色带里颜料占 28%，其余是纸色
 
 export type ChartType = "line" | "bar" | "area" | "area-stacked" | "bar-horizontal" | "bar-stacked" | "bar-share" | "area-share" | "donut";
 export type ChartMarker = "circle" | "square" | "triangle" | "diamond" | "cross";
@@ -61,7 +73,17 @@ export type ChartPlotData = { type: ChartType; data: Record<string, string | num
 export type ChartStyle = React.CSSProperties & {
   "--qy-chart-plot-height"?: string;
 };
-type ChartBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & { label: string; style?: ChartStyle };
+/** 三种图共有的两项：纸与命名。 */
+export type ChartFigureProps = {
+  /**
+   * 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时，
+   * figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
+   */
+  label: string;
+  /** false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。 */
+  framed?: boolean;
+};
+type ChartBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & ChartFigureProps & { style?: ChartStyle };
 export type ChartProps = ChartBaseProps & {
   type: ChartType;
   categoryLabel: string;
@@ -94,32 +116,31 @@ export type ChartProps = ChartBaseProps & {
  * - 绘事后素：不加阴影、渐变与入场动画（气韵生动：动只交代真实变化）。
  * - 文字不用数据色：轴、图例与读数用墨阶，色相只在标记上。
  * 图高 10 材，预设，调用方可覆写 --qy-chart-plot-height。
+ * 几何的像素（线宽、标记、柱宽、圆角、空隙）不是写死的字面量：它们是 SVG 与 Recharts 属性上的数字，读不到 CSS 变量，
+ * 由图的根节点读出分与线宽，经 chartGeometry（../chart-geometry）换算，每个长度与分的关系写在那里；默认令牌下与此前的字面量逐个相同。
+ * 不是长度的值（占比、个数、层级）与不随模数走的值留在本文件，并标明预设。
  */
 const STEP_TYPES = new Set<ChartType>(["line", "area", "area-stacked", "area-share"]);
 const CHART_TYPES = new Set<ChartType>(["line", "bar", "area", "area-stacked", "bar-horizontal", "bar-stacked", "bar-share", "area-share", "donut"]);
 export const PLOT_PRESETS: ChartStyle = { "--qy-chart-plot-height": "calc(10 * var(--qy-cai))" };
 export const MARKERS: readonly ChartMarker[] = ["circle", "square", "triangle", "diamond", "cross"];
-export const MARK = 8;
-const STROKE = 2;
-const BAR_MAX = 24;
-const BAR_RADIUS = 4;
-export const SURFACE_GAP = 2;
+const BAR_CATEGORY_GAP = "24%"; // 预设：类别带里柱组之间的留白，占类别带的比例（比例不是长度，不随分走）
+const AREA_FILL_OPACITY = 0.1; // 预设：单系列与多系列半透叠放面积的淡面浓度
 /*
  * 参照、背景系列与事件（用户批准 2026-10-12）：它们帮读者定位数据，自己不是数据，所以用墨不用色（NG10）。
- * - 参照带：8% 墨的染（--qy-surface-hover，清）。画在网格之上、数据之下；带只是一块淡染，不描边（一个范围一种机制）。
- * - 参照线：1px 浓墨（66%）虚线。线宽统一 1px（§5）；与网格的清墨实线（8%）、基线的淡墨实线（24%）、悬停游标的重墨实线（50%）
- *   分得开靠两点：墨更深、是虚线。虚线读作“不是数据”，灰度下仍成立。取值（浓、4 3 的虚线）为预设。
- * - 背景系列：1px 淡墨（24%）实线，不画标记。比数据线（2px、足色）细一半、淡许多，一眼读成背景；取值为预设。
+ * - 参照带：8% 墨的染（--qy-surface-strong，清；静止的面，不借用悬停面）。画在网格之上、数据之下；带只是一块淡染，不描边（一个范围一种机制）。
+ * - 参照线：一线宽（hairline，默认 1px）的浓墨（66%）虚线。线宽统一为线宽（§5）；与网格的清墨实线（8%）、基线的淡墨实线（24%）、悬停游标的重墨实线（50%）
+ *   分得开靠两点：墨更深、是虚线。虚线读作“不是数据”，灰度下仍成立。取值（浓、4 3 的虚线）为预设；虚线的 4 与 3 是像素字面量，与分没有可名状的关系，不随模数走。
+ * - 背景系列：一线宽（hairline）的淡墨（24%）实线，不画标记。默认比数据线（2px、足色）细一半、淡许多，一眼读成背景；取值为预设。
  *   （试过重墨 50%：六七条叠在一起成一团深灰，与主线争位；淡墨 24% 退到背景，线与线仍分得开。）
  *   数量上限 CONTEXT_MAX 为预设（同一屏能分辨“其余”的条数；超过时它们已是一团灰，应改用别的形式）。
- * - 事件点：半径 3 的实心圆加一圈纸色，比数据标记（8px）小一圈，落在类别轴基线上；半径为预设。
- * 参照与背景线都在数据后面：zIndex 低于 Recharts 默认的面（100）、柱（300）、线（400）。
+ * - 事件点：半径 3 的实心圆加一圈纸色，比数据标记（默认 8px）小一圈，落在类别轴基线上；半径 3 为预设的像素字面量（与分没有可名状的关系，3 = ¾ 分，不取整成别的倍数）。
+ * 参照与背景线都在数据后面：zIndex 低于 Recharts 默认的面（100）、柱（300）、线（400）。层级不是长度，两个 z 值为预设。
  */
-const BAND_FILL = "var(--qy-surface-hover)";
+const BAND_FILL = "var(--qy-surface-strong)";
 const REF_LINE = "var(--qy-foreground-muted)";
 const REF_DASH = "4 3";
 const CONTEXT_COLOR = "var(--qy-groove-surface)";
-const CONTEXT_STROKE = 1;
 const CONTEXT_MAX = 12;
 const EVENT_RADIUS = 3;
 const Z_BAND = 50;
@@ -139,39 +160,49 @@ const SHARE_TICKS = [0, 0.25, 0.5, 0.75, 1] as const;
  * 柱上标值（valueLabels；用户批准 2026-10-12）：柱少而要读准确值时，把数直接标在柱的数据端外侧，省去在轴上找刻度；
  * 标了值就不再画量轴刻度与网格（NG1：同一事实不说两遍），基线保留。
  * - 字：dense 档（12/16）、等宽数字、焦墨（标出的值就是读数，坐在刻度原来的位置，但比刻度更重要，所以比刻度的浓墨再深一级；文字不用数据色）。
- * - 与柱端的间距 LABEL_GAP = 4px = 1 分（与柱的圆角同一尺）；纵柱的字落在柱顶上方，负值落在柱底下方；横柱的字落在柱末端之后。
+ * - 与柱端的间距 labelGap = 1 分（默认 4px，与柱的圆角同一尺）；纵柱的字落在柱顶上方，负值落在柱底下方；横柱的字落在柱末端之后。
  * - 余量：不让绘图区把标签裁掉。纵柱的顶部余量 = 间距 + 一行字高（4 + 16）；横柱的右侧余量 = 间距 + 最宽那个标签的字宽。
  *   字宽按字符估算：中日韩字符 12px，其余等宽数字约 7.5px（与量轴宽度同一估法）。
+ *   LABEL_LINE（16）与上面的字宽估值是文字的度量：它们跟 dense 档的字号与行高走（桌面 12/16，行高即 4 分），随字阶不随分，所以不由分换算。
  * - 柱数上限 LABEL_ROWS_MAX = 12（预设）：每根柱的类别带得放得下一个标签，超过时标签互相压住，应改用表或不标值。
  * - 只允许单系列：并排的多系列柱每根都标数会挤成一片，且颜色已经分不出主次；堆叠与占比的段太窄放不下，不给。
  */
-const LABEL_GAP = 4;
-const LABEL_LINE = 16;
+const LABEL_LINE = 16; // dense 档的行高（桌面）：文字度量，随字阶不随分
 const LABEL_ROWS_MAX = 12;
 const textAdvance = (text: string) => [...text].reduce((sum, char) => sum + (char.charCodeAt(0) >= 0x2e80 ? 12 : 7.5), 0);
 
+/**
+ * 标记的形：画在 mark × mark 的方框里（默认 8 × 8，圆角 1 = 边长的 1/8）。形状的比例是预设；方框的边长是 2 分，随分走。
+ * 交叉的笔画是数据线宽（geo.stroke），不随方框缩放。
+ */
 export function MarkerShape({ marker }: { marker: ChartMarker }) {
-  if (marker === "circle") return <circle cx="4" cy="4" r="4" />;
-  if (marker === "square") return <rect width="8" height="8" rx="1" />;
-  if (marker === "triangle") return <path d="M4 0 8 8H0Z" />;
-  if (marker === "diamond") return <path d="M4 0 8 4 4 8 0 4Z" />;
-  return <path d="M0 4H8M4 0V8" fill="none" stroke="currentColor" strokeWidth={STROKE} />;
+  const { mark: m, stroke } = useChartGeometry();
+  const h = m / 2;
+  if (marker === "circle") return <circle cx={h} cy={h} r={h} />;
+  if (marker === "square") return <rect width={m} height={m} rx={m / 8} />;
+  if (marker === "triangle") return <path d={`M${h} 0 ${m} ${m}H0Z`} />;
+  if (marker === "diamond") return <path d={`M${h} 0 ${m} ${h} ${h} ${m} 0 ${h}Z`} />;
+  return <path d={`M0 ${h}H${m}M${h} 0V${m}`} fill="none" stroke="currentColor" strokeWidth={stroke} />;
 }
 /** 标记：外加一圈纸色（paint-order: stroke），压在线上或彼此交叉时仍然分得开。Scatter 复用。 */
 export function Marker({ color, marker, cx, cy }: { color: string; marker: ChartMarker; cx?: number; cy?: number }) {
-  const ring = marker === "cross" ? undefined : { stroke: "var(--qy-surface)", strokeWidth: SURFACE_GAP * 2, paintOrder: "stroke" as const };
-  return <svg aria-hidden="true" viewBox="0 0 8 8" width={MARK} height={MARK} x={cx === undefined ? undefined : cx - MARK / 2} y={cy === undefined ? undefined : cy - MARK / 2} fill="currentColor" style={{ color, overflow: "visible" }}><g {...ring}><MarkerShape marker={marker} /></g></svg>;
+  const { mark, ring: ringWidth } = useChartGeometry();
+  const ring = marker === "cross" ? undefined : { stroke: "var(--qy-surface)", strokeWidth: ringWidth, paintOrder: "stroke" as const };
+  return <svg aria-hidden="true" viewBox={`0 0 ${mark} ${mark}`} width={mark} height={mark} x={cx === undefined ? undefined : cx - mark / 2} y={cy === undefined ? undefined : cy - mark / 2} fill="currentColor" style={{ color, overflow: "visible" }}><g {...ring}><MarkerShape marker={marker} /></g></svg>;
 }
 /** 图例的键与图形一致：折线是一段线加标记；填充类图形（柱、横向柱、堆叠柱、面积、环形）是一块方。 */
 export function LegendKey({ series, type }: { series: ChartProjectedSeries; type: ChartType }) {
-  if (type === "line" && series.context) return <svg aria-hidden="true" width={16} height={MARK} viewBox="0 0 16 8" className="shrink-0 overflow-visible" style={{ color: series.color }}><path d="M0 4H16" stroke="currentColor" strokeWidth={CONTEXT_STROKE} strokeLinecap="round" /></svg>;
-  if (type === "line") return <svg aria-hidden="true" width={16} height={MARK} viewBox="0 0 16 8" className="shrink-0 overflow-visible" style={{ color: series.color }}><path d="M0 4H16" stroke="currentColor" strokeWidth={STROKE} strokeLinecap="round" /><svg x={4} y={0} width={8} height={8} viewBox="0 0 8 8" fill="currentColor" overflow="visible"><MarkerShape marker={series.marker} /></svg></svg>;
-  return <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: series.color }} />;
+  const { mark, keyWidth, stroke, hairline } = useChartGeometry();
+  const mid = mark / 2;
+  if (type === "line" && series.context) return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible" style={{ color: series.color }}><path d={`M0 ${mid}H${keyWidth}`} stroke="currentColor" strokeWidth={hairline} strokeLinecap="round" /></svg>;
+  if (type === "line") return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible" style={{ color: series.color }}><path d={`M0 ${mid}H${keyWidth}`} stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" /><svg x={(keyWidth - mark) / 2} y={0} width={mark} height={mark} viewBox={`0 0 ${mark} ${mark}`} fill="currentColor" overflow="visible"><MarkerShape marker={series.marker} /></svg></svg>;
+  return <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: series.color }} />;
 }
-/** 参照的键：带是同色的一块染，线是同样的 1px 虚线。 */
+/** 参照的键：带是同色的一块染，线是同样的一线宽虚线。 */
 function ReferenceKey({ reference }: { reference: ChartReference }) {
-  if (reference.kind === "band") return <span data-slot="legend-key" aria-hidden="true" className="h-(--qy-status-dot-size) w-4 shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: BAND_FILL }} />;
-  return <svg aria-hidden="true" width={16} height={MARK} viewBox="0 0 16 8" className="shrink-0 overflow-visible"><path d="M0 4H16" stroke={REF_LINE} strokeWidth={1} strokeDasharray={REF_DASH} /></svg>;
+  const { mark, keyWidth, hairline } = useChartGeometry();
+  if (reference.kind === "band") return <span data-slot="legend-key" aria-hidden="true" className="h-(--qy-status-dot-size) w-4 shrink-0 rounded-(--qy-swatch-radius)" style={{ background: BAND_FILL }} />;
+  return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible"><path d={`M0 ${mark / 2}H${keyWidth}`} stroke={REF_LINE} strokeWidth={hairline} strokeDasharray={REF_DASH} /></svg>;
 }
 export function AxisTick({ x = 0, y = 0, textAnchor = "middle", verticalAnchor = "start", payload, formatter }: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }) {
   return <RechartsText x={x} y={y} textAnchor={textAnchor} verticalAnchor={verticalAnchor} className="text-dense numeric" fill="var(--qy-foreground-muted)">{payload ? formatter?.(payload.value) ?? payload.value : ""}</RechartsText>;
@@ -181,11 +212,12 @@ const valueLabelClassName = "text-dense numeric";
 const valueLabelFill = "var(--qy-foreground)";
 /** 柱：数据端圆角、基线端方角；负值时圆角在下。纵向柱与横向柱共用，按轴互换坐标传入。label 给出时在数据端外侧标值（值为 0 的柱没有高度，仍标在基线上）。 */
 function BarShape({ x = 0, y = 0, width = 0, height = 0, fill, value, label }: { x?: number; y?: number; width?: number; height?: number; fill?: string; value?: number | readonly number[]; label?: string | undefined }) {
+  const { barRadius, labelGap } = useChartGeometry();
   const top = y + Math.min(0, height), h = Math.abs(height);
   const numeric = Array.isArray(value) ? value[1]! - value[0]! : (value as number | undefined) ?? 0;
-  const text = label === undefined ? null : <text x={x + width / 2} y={numeric >= 0 ? top - LABEL_GAP : top + h + LABEL_GAP} textAnchor="middle" dominantBaseline={numeric >= 0 ? "auto" : "hanging"} className={valueLabelClassName} fill={valueLabelFill}>{label}</text>;
+  const text = label === undefined ? null : <text x={x + width / 2} y={numeric >= 0 ? top - labelGap : top + h + labelGap} textAnchor="middle" dominantBaseline={numeric >= 0 ? "auto" : "hanging"} className={valueLabelClassName} fill={valueLabelFill}>{label}</text>;
   if (!width || !height) return text ? <g>{text}</g> : <g />;
-  const r = Math.min(BAR_RADIUS, width / 2, h);
+  const r = Math.min(barRadius, width / 2, h);
   const d = numeric >= 0
     ? `M${x},${top + h}V${top + r}Q${x},${top} ${x + r},${top}H${x + width - r}Q${x + width},${top} ${x + width},${top + r}V${top + h}Z`
     : `M${x},${top}V${top + h - r}Q${x},${top + h} ${x + r},${top + h}H${x + width - r}Q${x + width},${top + h} ${x + width},${top + h - r}V${top}Z`;
@@ -193,9 +225,10 @@ function BarShape({ x = 0, y = 0, width = 0, height = 0, fill, value, label }: {
 }
 /** 横向柱：数据端（右端，假定非负）圆角，基线端（左端）方角——bar-horizontal 不支持负值。label 给出时标在末端之后。 */
 function BarShapeHorizontal({ x = 0, y = 0, width = 0, height = 0, fill, label }: { x?: number; y?: number; width?: number; height?: number; fill?: string; label?: string | undefined }) {
-  const text = label === undefined ? null : <text x={x + width + LABEL_GAP} y={y + height / 2} textAnchor="start" dominantBaseline="central" className={valueLabelClassName} fill={valueLabelFill}>{label}</text>;
+  const { barRadius, labelGap } = useChartGeometry();
+  const text = label === undefined ? null : <text x={x + width + labelGap} y={y + height / 2} textAnchor="start" dominantBaseline="central" className={valueLabelClassName} fill={valueLabelFill}>{label}</text>;
   if (!width || !height) return text ? <g>{text}</g> : <g />;
-  const r = Math.min(BAR_RADIUS, height / 2, width);
+  const r = Math.min(barRadius, height / 2, width);
   const d = `M${x},${y}H${x + width - r}Q${x + width},${y} ${x + width},${y + r}V${y + height - r}Q${x + width},${y + height} ${x + width - r},${y + height}H${x}Z`;
   return text ? <g><path d={d} fill={fill} />{text}</g> : <path d={d} fill={fill} />;
 }
@@ -209,15 +242,16 @@ function stackEdges(payload: Record<string, unknown> | undefined, keys: readonly
   return { isBase: !keys.slice(0, index).some(present), isTop: !keys.slice(index + 1).some(present) };
 }
 /**
- * 堆叠柱的一段：段与段之间留 2px 纸色空隙（骨法用笔，一个范围一种机制，不描边）；只有堆叠最外
+ * 堆叠柱的一段：段与段之间留一个空隙（surfaceGap，默认 2px）的纸色（骨法用笔，一个范围一种机制，不描边）；只有堆叠最外
  * 的数据端（isTop）才是圆角，基线端（isBase）方角，中间的段两端都方——假定非负值由基线向上叠加。
  */
 function StackedBarShape({ x = 0, y = 0, width = 0, height = 0, fill, isBase, isTop }: { x?: number; y?: number; width?: number; height?: number; fill?: string; isBase?: boolean; isTop?: boolean }) {
+  const { barRadius, surfaceGap } = useChartGeometry();
   if (!width || !height) return <g />;
-  const top = y + (isTop ? 0 : SURFACE_GAP / 2), bottom = y + height - (isBase ? 0 : SURFACE_GAP / 2);
+  const top = y + (isTop ? 0 : surfaceGap / 2), bottom = y + height - (isBase ? 0 : surfaceGap / 2);
   const h = bottom - top;
   if (h <= 0) return <g />;
-  const r = isTop ? Math.min(BAR_RADIUS, width / 2, h) : 0;
+  const r = isTop ? Math.min(barRadius, width / 2, h) : 0;
   const d = r > 0
     ? `M${x},${bottom}V${top + r}Q${x},${top} ${x + r},${top}H${x + width - r}Q${x + width},${top} ${x + width},${top + r}V${bottom}Z`
     : `M${x},${top}H${x + width}V${bottom}H${x}Z`;
@@ -245,7 +279,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
   if (!active || !payload?.length) return null;
   const rowId = payload[0]?.payload?.id ?? "";
   const rowEvents = eventsOf?.(rowId) ?? [];
-  return <div className="grid min-w-0 gap-(--qy-space-1) rounded-overlay border border-border bg-popover px-(--qy-fill-padding) py-(--qy-space-2) text-support text-popover-foreground shadow-(--qy-shadow-raised)">
+  return <div className={`grid min-w-0 gap-(--qy-space-1) ${READOUT_SURFACE}`}>
     <div className="text-muted-foreground">{label}</div>
     {payload.map(entry => {
       const item = series.find(s => s.dataKey === entry.dataKey);
@@ -256,7 +290,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
       const raw = share?.raw(rowId, item.key);
       const reading = share ? (known && raw !== null && raw !== undefined ? messages.proportionShare(raw, share.percent.format(entry.value as number)) : "—") : known ? format(entry.value as number, item.key, String(label)) : "—";
       return <div key={item.key} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-(--qy-field-gap)">
-        <span aria-hidden="true" className="h-0.5 w-3 shrink-0 rounded-full" style={{ background: item.color }} />
+        <span aria-hidden="true" className="h-fen-half w-3 shrink-0 rounded-full" style={{ background: item.color }} />
         <div className="flex min-w-0 items-center gap-(--qy-field-gap)">
           <span className="text-body-strong numeric">{reading}</span>
           <span className="min-w-0 text-muted-foreground wrap-anywhere">{item.label}</span>
@@ -296,14 +330,16 @@ function domainTicks([min, max]: readonly [number, number]) {
 /** 基线上的事件点（ReferenceDot 的 shape）：只借它的类别轴坐标，另一轴取绘图区的边——基线就是绘图区的底（横向柱是左缘）。 */
 function EventMark({ cx, cy, horizontal, tone }: { cx?: number; cy?: number; horizontal: boolean; tone?: Tone | undefined }) {
   const area = usePlotArea();
+  const { ring } = useChartGeometry();
   if (cx === undefined || cy === undefined || !area) return <g />;
   const x = horizontal ? area.x : cx, y = horizontal ? cy : area.y + area.height;
-  return <circle cx={x} cy={y} r={EVENT_RADIUS} fill={tone ? toneColor[tone] : "var(--qy-foreground)"} stroke="var(--qy-surface)" strokeWidth={SURFACE_GAP * 2} paintOrder="stroke" />;
+  return <circle cx={x} cy={y} r={EVENT_RADIUS} fill={tone ? toneColor[tone] : "var(--qy-foreground)"} stroke="var(--qy-surface)" strokeWidth={ring} paintOrder="stroke" />;
 }
-/** 环形图分段之间 2px 纸色空隙：按中半径换算成角度，两侧各收进一半；不描边（骨法用笔）。 */
+/** 环形图分段之间一个空隙（surfaceGap，默认 2px）的纸色：按中半径换算成角度，两侧各收进一半；不描边（骨法用笔）。 */
 function DonutShape({ cx = 0, cy = 0, innerRadius = 0, outerRadius = 0, startAngle = 0, endAngle = 0, fill }: { cx?: number; cy?: number; innerRadius?: number; outerRadius?: number; startAngle?: number; endAngle?: number; fill?: string }) {
+  const { surfaceGap } = useChartGeometry();
   const mid = (innerRadius + outerRadius) / 2 || 1;
-  const gapDeg = (SURFACE_GAP / mid) * (180 / Math.PI);
+  const gapDeg = (surfaceGap / mid) * (180 / Math.PI);
   // recharts 按整体 startAngle/endAngle 的符号决定每段角度是递增还是递减；先取小大再各收进半个空隙，
   // 与方向无关都能画出同一段弧，收窄后仍对称。
   const lo = Math.min(startAngle, endAngle), hi = Math.max(startAngle, endAngle);
@@ -321,9 +357,9 @@ type DonutPart = { key: string; label: string; value: number; color: string };
 function DonutTooltip({ active, payload, number }: { active?: boolean; payload?: readonly { payload?: DonutPart }[]; number: Intl.NumberFormat }) {
   const part = active ? payload?.[0]?.payload : undefined;
   if (!part) return null;
-  return <div className="grid min-w-0 gap-(--qy-space-1) rounded-overlay border border-border bg-popover px-(--qy-fill-padding) py-(--qy-space-2) text-support text-popover-foreground shadow-(--qy-shadow-raised)">
+  return <div className={`grid min-w-0 gap-(--qy-space-1) ${READOUT_SURFACE}`}>
     <div className="flex min-w-0 items-center gap-(--qy-field-gap)">
-      <span aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: part.color }} />
+      <span aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: part.color }} />
       <span className="text-body-strong numeric">{number.format(part.value)}</span>
       <span className="min-w-0 text-muted-foreground wrap-anywhere">{part.label}</span>
     </div>
@@ -339,13 +375,15 @@ type PlotExtras = {
   labelText?: (value: number, rowId: string, key: string) => string; donutParts?: readonly DonutPart[];
 };
 function DefaultPlot({ type, data, series, valueLabel, total, references = [], events = [], valueDomain, valueLabels, number, format, percent, percentTick, rawText, totalText, labelText, donutParts }: ChartPlotData & PlotExtras) {
+  const geo = useChartGeometry();
   if (type === "donut") {
     const cells = donutParts ?? [];
     const whole = total ?? cells.filter(cell => cell.key !== "__rest").reduce((acc, cell) => acc + cell.value, 0);
     return <div className="relative mx-auto aspect-square h-full max-h-full">
       <ResponsiveContainer width="100%" height="100%"><PieChart accessibilityLayer={false}>
         <Tooltip isAnimationActive={false} content={(props) => <DonutTooltip {...props as { active?: boolean; payload?: readonly { payload?: DonutPart }[] }} number={number} />} />
-        {/* 绘图区对读屏隐藏（aria-hidden），数据由图例与数据表承担：扇区层不进 Tab 序（Recharts 的 Pie 默认 tabindex=0）。 */}
+        {/* 绘图区对读屏隐藏（aria-hidden），数据由图例与数据表承担：扇区层不进 Tab 序（Recharts 的 Pie 默认 tabindex=0）。
+            环的内径 62%（外径的比例）是预设，决定环的粗细。 */}
         <Pie data={cells as DonutPart[]} rootTabIndex={-1} dataKey="value" nameKey="label" innerRadius="62%" outerRadius="100%" startAngle={90} endAngle={-270} isAnimationActive={false} stroke="none" shape={(props: unknown) => { const { key, ...rest } = props as React.ComponentProps<typeof DonutShape> & { key?: React.Key }; return <DonutShape key={key} {...rest} />; }}>
           {cells.map(cell => <Cell key={cell.key} fill={cell.color} />)}
         </Pie>
@@ -364,19 +402,19 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   const stackedAreas = type === "area-stacked" || type === "area-share";
   const labelled = valueLabels === true && (type === "bar" || horizontal);
   // 网格只画需要的方向：数值轴是纵轴时画横线，数值轴是横轴（横向柱）时画竖线。标了值的柱不再画网格（NG1）。
-  const grid = labelled ? null : <CartesianGrid vertical={horizontal} horizontal={!horizontal} stroke="var(--qy-border)" strokeWidth={1} />;
+  const grid = labelled ? null : <CartesianGrid vertical={horizontal} horizontal={!horizontal} stroke="var(--qy-border)" strokeWidth={geo.hairline} />;
   const values = data.flatMap(row => series.map(item => row[item.dataKey])).filter((value): value is number => typeof value === "number");
   const valueFormatter = (value: string | number) => typeof value === "number" ? (share && percentTick ? percentTick.format(value) : number.format(value)) : value;
   const band = references.find((reference): reference is ChartBand => reference.kind === "band");
   const eventsOf = (rowId: string) => events.filter(event => event.rowId === rowId);
-  const tooltip = <Tooltip isAnimationActive={false} cursor={type === "line" ? { stroke: "var(--qy-border-input)", strokeWidth: 1 } : { fill: "var(--qy-surface-inset)" }} content={(props) => <ReadoutTooltip {...props as { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number }} series={series} format={format} band={band} eventsOf={eventsOf} share={share && percent && rawText ? { raw: rawText, percent } : undefined} total={totalText} />} />;
+  const tooltip = <Tooltip isAnimationActive={false} cursor={type === "line" ? { stroke: "var(--qy-border-input)", strokeWidth: geo.hairline } : { fill: "var(--qy-surface-hover)" }} content={(props) => <ReadoutTooltip {...props as { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number }} series={series} format={format} band={band} eventsOf={eventsOf} share={share && percent && rawText ? { raw: rawText, percent } : undefined} total={totalText} />} />;
   // 参照与事件：量轴方向画参照（纵向图是横带 / 横线，横向柱是竖带 / 竖线），画在数据后面。
   // ifOverflow="extendDomain"：Recharts 的参照默认越界即丢弃，这里显式把参照并入量轴范围（再由 "auto" 取整刻度）。
   const referenceMarks = references.map((reference, index) => {
     const side = reference.kind === "band" ? (horizontal ? { x1: reference.from, x2: reference.to } : { y1: reference.from, y2: reference.to }) : (horizontal ? { x: reference.value } : { y: reference.value });
     return reference.kind === "band"
       ? <ReferenceArea key={`ref${index}`} {...side} fill={BAND_FILL} fillOpacity={1} stroke="none" ifOverflow="extendDomain" zIndex={Z_BAND} />
-      : <ReferenceLine key={`ref${index}`} {...side} stroke={REF_LINE} strokeWidth={1} strokeDasharray={REF_DASH} ifOverflow="extendDomain" zIndex={Z_REF_LINE} />;
+      : <ReferenceLine key={`ref${index}`} {...side} stroke={REF_LINE} strokeWidth={geo.hairline} strokeDasharray={REF_DASH} ifOverflow="extendDomain" zIndex={Z_REF_LINE} />;
   });
   const refValues = references.flatMap(reference => reference.kind === "band" ? [reference.from, reference.to] : [reference.value]);
   const eventMarks = events.map((event, index) => {
@@ -389,41 +427,41 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   // 量轴范围：默认从零起（柱与面积必须从零长出来）、上限取整；折线可由 valueDomain 指定，范围就是传入的两端；占比固定 0–100%。
   const lower = (min: number) => Math.min(0, min, ...refValues);
   const domain = share ? [0, 1] as [number, number] : valueDomain ? [valueDomain[0], valueDomain[1]] as [number, number] : [lower, "auto"] as [(min: number) => number, "auto"];
-  // 标了值的柱：余量见 LABEL_GAP 处的说明。图的默认边距是 5，只在需要的一侧加大。
+  // 标了值的柱：余量见 LABEL_LINE 上方的说明。图的默认边距 5 是 Recharts 的默认值（预设的像素字面量，与分没有可名状的关系），只在需要的一侧加大。
   const rowLabels = labelled && labelText ? data.flatMap(record => series.flatMap(item => typeof record[item.dataKey] === "number" ? [labelText(record[item.dataKey] as number, record.id as string, item.key)] : [])) : [];
   const labelMargin = { top: 5, right: 5, bottom: 5, left: 5 };
-  if (labelled) { if (horizontal) labelMargin.right = Math.ceil(Math.max(0, ...rowLabels.map(textAdvance))) + LABEL_GAP; else labelMargin.top = LABEL_GAP + LABEL_LINE; }
+  if (labelled) { if (horizontal) labelMargin.right = Math.ceil(Math.max(0, ...rowLabels.map(textAdvance))) + geo.labelGap; else labelMargin.top = geo.labelGap + LABEL_LINE; }
   const labelFor = (props: { value?: unknown; payload?: { id?: string } }, key: string) => labelled && labelText && typeof props.value === "number" ? labelText(props.value, props.payload?.id ?? "", key) : undefined;
   if (horizontal) {
     // 横向柱：类别换到纵轴，数值换到横轴；纵轴宽按最长类别名估算（dense 12px，约 1 字 12px）。
     const longestLabel = Math.max(1, ...data.map(row => String(row.category).length));
     const valueAxis = labelled ? <XAxis type="number" hide domain={domain} /> : <XAxis type="number" domain={domain} tick={<AxisTick formatter={valueFormatter} />} tickLine={false} axisLine={false} />;
-    const categoryAxis = <YAxis type="category" dataKey="category" tick={<AxisTick textAnchor="end" verticalAnchor="middle" />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: 1 }} width={Math.ceil(longestLabel * 12) + 8} />;
-    return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} layout="vertical" accessibilityLayer={false} barGap={SURFACE_GAP} barCategoryGap="24%" {...(labelled ? { margin: labelMargin } : {})}>
+    const categoryAxis = <YAxis type="category" dataKey="category" tick={<AxisTick textAnchor="end" verticalAnchor="middle" />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} width={Math.ceil(longestLabel * 12) + geo.axisGutter} />;
+    return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} layout="vertical" accessibilityLayer={false} barGap={geo.surfaceGap} barCategoryGap={BAR_CATEGORY_GAP} {...(labelled ? { margin: labelMargin } : {})}>
       {grid}{valueAxis}{categoryAxis}{tooltip}{referenceMarks}
-      {series.map(item => <Bar key={item.key} dataKey={item.dataKey} name={item.label} fill={item.color} maxBarSize={BAR_MAX} isAnimationActive={false} shape={(props: unknown) => <BarShapeHorizontal {...props as React.ComponentProps<typeof BarShapeHorizontal>} label={labelFor(props as { value?: unknown; payload?: { id?: string } }, item.key)} />} />)}
+      {series.map(item => <Bar key={item.key} dataKey={item.dataKey} name={item.label} fill={item.color} maxBarSize={geo.barMax} isAnimationActive={false} shape={(props: unknown) => <BarShapeHorizontal {...props as React.ComponentProps<typeof BarShapeHorizontal>} label={labelFor(props as { value?: unknown; payload?: { id?: string } }, item.key)} />} />)}
       {eventMarks}
     </BarChart></ResponsiveContainer>;
   }
   // 折线两端留出半个标记加一圈纸色，端点不被切开；柱状由类别带自带留白。
-  const categoryAxis = <XAxis dataKey="category" tick={<AxisTick />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: 1 }} interval="preserveStartEnd" minTickGap={8} {...(type === "line" || type === "area" || stackedAreas ? { padding: { left: MARK, right: MARK } } : {})} />;
+  const categoryAxis = <XAxis dataKey="category" tick={<AxisTick />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} interval="preserveStartEnd" minTickGap={geo.tickGap} {...(type === "line" || type === "area" || stackedAreas ? { padding: { left: geo.mark, right: geo.mark } } : {})} />;
   // 轴宽按最长刻度文字估算（12px 等宽数字约 7.5px 一字）。上限取整后约多 25%，参照与指定范围的两端也要算进去。
   // 堆叠时轴读的是各行加总，不是单个部分：按加总估宽，否则最长刻度被截。占比轴固定，刻度是百分数。
   const extent = [...(type === "area-stacked" || type === "bar-stacked" ? data.map(row => series.reduce((sum, item) => sum + (typeof row[item.dataKey] === "number" ? row[item.dataKey] as number : 0), 0)) : values), ...refValues, ...(valueDomain ?? [])];
   const ticks = share ? [...SHARE_TICKS] : valueDomain ? domainTicks(valueDomain) : undefined;
   // 指定了范围时刻度是已知的，直接量刻度的文字（可能带小数）；否则按数据估算。
   const longest = share ? Math.max(...SHARE_TICKS.map(tick => (percentTick ?? number).format(tick).length)) : ticks ? Math.max(1, ...ticks.map(tick => number.format(tick).length)) : Math.max(1, ...extent.map(value => number.format(Math.ceil(Math.abs(value) * 1.25)).length + (value < 0 ? 1 : 0)));
-  const valueAxis = labelled ? <YAxis hide domain={domain} /> : <YAxis domain={domain} {...(ticks ? { ticks } : {})} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={valueFormatter} />} tickLine={false} axisLine={false} width={Math.ceil(longest * 7.5) + 8} />;
-  if (type === "bar") return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} accessibilityLayer={false} barGap={SURFACE_GAP} barCategoryGap="24%" {...(labelled ? { margin: labelMargin } : {})}>
+  const valueAxis = labelled ? <YAxis hide domain={domain} /> : <YAxis domain={domain} {...(ticks ? { ticks } : {})} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={valueFormatter} />} tickLine={false} axisLine={false} width={Math.ceil(longest * 7.5) + geo.axisGutter} />;
+  if (type === "bar") return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} accessibilityLayer={false} barGap={geo.surfaceGap} barCategoryGap={BAR_CATEGORY_GAP} {...(labelled ? { margin: labelMargin } : {})}>
     {grid}{categoryAxis}{valueAxis}{tooltip}{referenceMarks}
-    {series.map(item => <Bar key={item.key} dataKey={item.dataKey} name={item.label} fill={item.color} maxBarSize={BAR_MAX} isAnimationActive={false} shape={(props: unknown) => <BarShape {...props as React.ComponentProps<typeof BarShape>} label={labelFor(props as { value?: unknown; payload?: { id?: string } }, item.key)} />} />)}
+    {series.map(item => <Bar key={item.key} dataKey={item.dataKey} name={item.label} fill={item.color} maxBarSize={geo.barMax} isAnimationActive={false} shape={(props: unknown) => <BarShape {...props as React.ComponentProps<typeof BarShape>} label={labelFor(props as { value?: unknown; payload?: { id?: string } }, item.key)} />} />)}
     {eventMarks}
   </BarChart></ResponsiveContainer>;
   if (stackedBars) {
     const keys = series.map(item => item.dataKey);
-    return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} accessibilityLayer={false} barCategoryGap="24%">
+    return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} accessibilityLayer={false} barCategoryGap={BAR_CATEGORY_GAP}>
       {grid}{categoryAxis}{valueAxis}{tooltip}{referenceMarks}
-      {series.map((item, index) => <Bar key={item.key} dataKey={item.dataKey} name={item.label} stackId="qy-stack" fill={item.color} maxBarSize={BAR_MAX} isAnimationActive={false}
+      {series.map((item, index) => <Bar key={item.key} dataKey={item.dataKey} name={item.label} stackId="qy-stack" fill={item.color} maxBarSize={geo.barMax} isAnimationActive={false}
         shape={(props: unknown) => { const { payload, ...rest } = props as React.ComponentProps<typeof StackedBarShape> & { payload?: Record<string, unknown> }; return <StackedBarShape {...rest} {...stackEdges(payload, keys, index)} />; }} />)}
       {eventMarks}
     </BarChart></ResponsiveContainer>;
@@ -432,7 +470,7 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
     return <ResponsiveContainer width="100%" height="100%"><AreaChart data={data} accessibilityLayer={false}>
       {grid}{categoryAxis}{valueAxis}{tooltip}{referenceMarks}
       {series.map(item => <Area key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} {...(stackedAreas ? { stackId: "qy-area-stack" } : {})}
-        stroke={item.color} strokeWidth={STROKE} strokeLinejoin="round" strokeLinecap="round" fill={stackedAreas ? `color-mix(in srgb, ${item.color} ${AREA_WASH}%, var(--qy-surface))` : item.color} fillOpacity={stackedAreas ? 1 : 0.1}
+        stroke={item.color} strokeWidth={geo.stroke} strokeLinejoin="round" strokeLinecap="round" fill={stackedAreas ? `color-mix(in srgb, ${item.color} ${AREA_WASH}%, var(--qy-surface))` : item.color} fillOpacity={stackedAreas ? 1 : AREA_FILL_OPACITY}
         connectNulls={false} isAnimationActive={false} dot={false} activeDot={false} />)}
       {eventMarks}
     </AreaChart></ResponsiveContainer>;
@@ -444,42 +482,61 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   </LineChart></ResponsiveContainer>;
 }
 /*
- * 折线的系列。标记的疏密：相邻两点的间距小于两个标记宽（2 × MARK = 16px，两个 8px 的标记并排连一圈纸色都放不下）时，
+ * 折线的系列。标记的疏密：相邻两点的间距小于两个标记宽（2 × mark，默认 16px，两个 8px 的标记并排连一圈纸色都放不下）时，
  * 每个标记已经叠在邻居上，不再增加信息，只剩一串糊；这时每个系列只画最后一个已知点的标记（读“现在”），形状照旧——
- * 身份的第二通道（形状）保留。间距按实际绘图宽度算：绘图区宽度（usePlotArea，已减去纵轴）减去横轴两端各一个 MARK 的 padding，
+ * 身份的第二通道（形状）保留。间距按实际绘图宽度算：绘图区宽度（usePlotArea，已减去纵轴）减去横轴两端各一个 mark 的 padding，
  * 再除以间隔数（类别轴是点刻度，N 个点有 N−1 个间隔）。宽度未知（首帧为 0）时按疏的画，等量出后自然收敛。
- * 背景系列先画（在下），1px 重墨线，不画标记，不参与疏密。
+ * 背景系列先画（在下），一线宽的淡墨线，不画标记，不参与疏密。
  */
 function LineSeries({ data, series }: { data: ChartPlotData["data"]; series: readonly ChartProjectedSeries[] }) {
   const area = usePlotArea();
-  const spacing = area && area.width > 0 && data.length > 1 ? (area.width - 2 * MARK) / (data.length - 1) : Infinity;
-  const dense = spacing < 2 * MARK;
+  const { mark, stroke, hairline } = useChartGeometry();
+  const spacing = area && area.width > 0 && data.length > 1 ? (area.width - 2 * mark) / (data.length - 1) : Infinity;
+  const dense = spacing < 2 * mark;
   const last = new Map(series.map(item => { let found = -1; data.forEach((record, index) => { if (typeof record[item.dataKey] === "number") found = index; }); return [item.dataKey, found] as const; }));
   const ordered = [...series.filter(item => item.context), ...series.filter(item => !item.context)];
   return <>{ordered.map(item => item.context
-    ? <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={CONTEXT_STROKE} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={false} />
-    : <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={STROKE} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={({ cx, cy, index }) => cx === undefined || cy === undefined || (dense && index !== last.get(item.dataKey)) ? <g key={index} /> : <Marker key={index} color={item.color} marker={item.marker} cx={cx} cy={cy} />} />)}</>;
+    ? <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={hairline} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={false} />
+    : <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={stroke} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={({ cx, cy, index }) => cx === undefined || cy === undefined || (dense && index !== last.get(item.dataKey)) ? <g key={index} /> : <Marker key={index} color={item.color} marker={item.marker} cx={cx} cy={cy} />} />)}</>;
 }
 export function readValue(row: ChartRow, key: string): ChartValue {
-  const value = row.values[key];
+  const value = row.values?.[key];
   if (typeof value === "number" && Number.isFinite(value)) return value;
-  if (value && typeof value === "object" && (value.state === "unknown" || value.state === "not-applicable") && value.label.trim()) return value;
-  throw new TypeError("Chart values must be finite numbers or explicitly named unknown/not-applicable values.");
+  if (value && typeof value === "object" && (value.state === "unknown" || value.state === "not-applicable") && isName(value.label)) return value;
+  throw new TypeError(`Chart values must be finite numbers or explicitly named unknown/not-applicable values; row "${row.id}" has ${received(value)} for "${key}".`);
 }
 
 /** 同源的图形、命名的轴、图例（两个以上系列）与按需展开的等价数据表。 */
 /** 「查看数据」：图的等价数据表按需展开在图下；按钮在标题栏右端，展开时像被按下。Chart、ScatterChart、Heatmap 共用。 */
 export function useChartData() {
   const id = React.useId(); const [open, setOpen] = React.useState(false); const { messages } = useUILocale();
-  const toggle = <Button data-slot="chart-data-toggle" variant="quiet" size="sm" aria-expanded={open} aria-controls={id} onClick={() => setOpen(value => !value)} className="-me-(--qy-control-sm-padding) shrink-0 whitespace-nowrap text-muted-foreground aria-expanded:bg-(--qy-surface-active) aria-expanded:text-foreground">{messages.chartData}</Button>;
+  const toggle = <Button data-slot="chart-data-toggle" variant="quiet" size="sm" aria-expanded={open} aria-controls={id} onClick={() => setOpen(value => !value)} className="-me-(--qy-control-sm-padding) shrink-0 whitespace-nowrap text-muted-foreground aria-expanded:bg-surface-selected aria-expanded:text-foreground">{messages.chartData}</Button>;
   return { id, open, toggle };
 }
 
-/** 图的标题栏一行（经营位置）：图名在左；图例与「查看数据」在右，同一条行中线。三种图一种画法（NG3）。 */
-export function ChartHeader({ titleId, label, legend, toggle }: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }) {
-  return <div data-slot="chart-header" className="mb-(--qy-field-gap) flex min-h-(--qy-control-sm) min-w-0 flex-wrap items-center gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) [&_[data-slot=button-content]]:whitespace-nowrap">
+/**
+ * 图由谁命名。调用方给了 aria-labelledby 或 aria-label（非空）时，名称在图外——通常是 SectionTitle：
+ * figure 与图内需要名字的部位（Heatmap 的 grid）都用那个外部名称，图内不再显示标题。否则由图内的 figcaption 命名。
+ * 返回 selfTitled（是否显示图内标题）与 name（放到被命名元素上的属性）。与 framed 无关：不铺纸而自带标题是合法的。
+ */
+export function chartName(native: { "aria-labelledby"?: string | undefined; "aria-label"?: string | undefined }, titleId: string): { selfTitled: boolean; name: { "aria-labelledby": string } | { "aria-label": string } } {
+  const labelledby = native["aria-labelledby"], ariaLabel = native["aria-label"];
+  if (isName(labelledby)) return { selfTitled: false, name: { "aria-labelledby": labelledby } };
+  if (isName(ariaLabel)) return { selfTitled: false, name: { "aria-label": ariaLabel } };
+  return { selfTitled: true, name: { "aria-labelledby": titleId } };
+}
+
+/**
+ * 图的标题栏一行（经营位置）：图名在左；图例与「查看数据」在右，同一条行中线。三种图一种画法（NG3）。
+ * 不给 titleId / label 时（图由外部名称命名）不画图名：图例与「查看数据」仍在图内、靠行尾、同一条行中线——
+ * 「查看数据」展开的是这张图的等价数据表，属于图，不搬到图外。图例与按钮都没有时整行不渲染，不留空行。
+ */
+export function ChartHeader({ titleId, label, legend, toggle }: { titleId?: string | undefined; label?: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }) {
+  const titled = titleId !== undefined && label != null;
+  if (!titled && !legend && !toggle) return null;
+  return <div data-slot="chart-header" data-titled={titled} className={cn("mb-(--qy-field-gap) flex min-h-(--qy-control-sm) min-w-0 flex-wrap items-center gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) [&_[data-slot=button-content]]:whitespace-nowrap", !titled && "justify-end")}>
     {/* 图名所在的行恒为一个小号控件高：标题栏折行时，第一行的中线也不动。 */}
-    <figcaption id={titleId} className="flex min-h-(--qy-control-sm) min-w-0 grow items-center text-heading wrap-anywhere">{label}</figcaption>
+    {titled && <figcaption id={titleId} className="flex min-h-(--qy-control-sm) min-w-0 grow items-center text-heading wrap-anywhere">{label}</figcaption>}
     {legend}{toggle}
   </div>;
 }
@@ -488,9 +545,14 @@ export function ChartHeader({ titleId, label, legend, toggle }: { titleId: strin
 export const legendClassName = "m-0 flex min-w-0 list-none flex-wrap gap-x-(--qy-field-group-gap) gap-y-(--qy-field-gap) p-0 text-support text-muted-foreground";
 
 /** 图只画数据（用户裁决 2026-10-10：功能要纯粹）。没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。 */
-export function Chart({ label, render, ref, className, style, type, categoryLabel, valueLabel, series, contextLabel, rows, references = [], events = [], valueDomain, valueLabels, total, formatValue, renderPlot, ...native }: ChartProps) {
-  if (!label.trim()) throw new Error("Chart requires a nonempty accessible label.");
+export function Chart({ label, framed = true, render, ref, className, style, type, categoryLabel, valueLabel, series, contextLabel, rows, references = [], events = [], valueDomain, valueLabels, total, formatValue, renderPlot, ...native }: ChartProps) {
+  if (!isName(label)) throw new Error(`Chart requires a nonempty accessible label; received ${received(label)}.`);
   const titleId = React.useId(); const dataView = useChartData();
+  const naming = chartName(native, titleId);
+  // 几何从图自己的根节点读：嵌套的主题 / 密度根各自生效；首次渲染与服务端用默认令牌，与读到的相同时不多渲染一轮。
+  const root = React.useRef<HTMLElement | null>(null);
+  const units = useSystemUnits(root);
+  const geometry = React.useMemo(() => chartGeometry(units), [units]);
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   // 占比与环形图例的百分数：与 Proportion 同一写法（最多一位小数）；占比轴的刻度是整数百分比（0 / 25 / 50 / 75 / 100）。
@@ -498,10 +560,15 @@ export function Chart({ label, render, ref, className, style, type, categoryLabe
   const percentTick = React.useMemo(() => new Intl.NumberFormat(code, { style: "percent", maximumFractionDigits: 0 }), [code]);
   let content: React.ReactNode; let legend: React.ReactNode = null;
   if (!type || !CHART_TYPES.has(type)) throw new Error(`Chart requires an explicit type from ${[...CHART_TYPES].join(", ")}; the form is chosen by the task, not left to default.`);
-  const contextCount = series?.filter(item => item.context).length ?? 0;
-  const identityCount = (series?.length ?? 0) - contextCount;
-  if (!categoryLabel?.trim() || !valueLabel?.trim() || identityCount < 1 || identityCount > MARKERS.length || !rows?.length) throw new Error("Chart requires named axes, one to five series and real rows; when there is nothing to plot, render Empty in its place.");
-  if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim()) || new Set(rows.map(row => row.id)).size !== rows.length || rows.some(row => !row.id.trim() || !row.label.trim())) throw new Error("Chart series and rows require unique stable ids and nonempty names.");
+  // 名称与标识：先判类型再去空白（require-name.ts），错误写明是哪一项、缺什么。不是数组的 series / rows 与空数组同样处理——没有可画的东西。
+  if (!isName(categoryLabel)) throw new Error(`Chart requires a nonempty categoryLabel naming the category axis; received ${received(categoryLabel)}.`);
+  if (!isName(valueLabel)) throw new Error(`Chart requires a nonempty valueLabel naming the shared unit of the values; received ${received(valueLabel)}.`);
+  if (isList(series)) requireNamedItems("Chart series", series, "key");
+  const contextCount = isList(series) ? series.filter(item => item.context).length : 0;
+  const identityCount = (isList(series) ? series.length : 0) - contextCount;
+  if (identityCount < 1 || identityCount > MARKERS.length) throw new Error(`Chart requires one to five series, not counting context series, and received ${identityCount}; when there is nothing to plot, render Empty in its place.`);
+  if (!isList(rows) || !rows.length) throw new Error(`Chart requires real rows and received ${isList(rows) ? "none" : received(rows)}; when there is nothing to plot, render Empty in its place.`);
+  requireNamedItems("Chart rows", rows, "id");
   const share = type === "bar-share" || type === "area-share";
   const stacks = type === "bar-stacked" || type === "area-stacked" || share;
   if (stacks && series.length < 2) throw new RangeError(share ? `Chart type "${type}" divides each row among two or more series; a single series is always 100%.` : `Chart type "${type}" stacks two or more series into a composition; a single series is a plain ${type === "bar-stacked" ? "bar" : "area"}.`);
@@ -511,7 +578,7 @@ export function Chart({ label, render, ref, className, style, type, categoryLabe
   if (contextCount) {
     if (type !== "line") throw new RangeError(`Chart series "context" is for type "line" only; "${type}" encodes by length, area or angle, which a faint background series cannot carry honestly.`);
     if (contextCount > CONTEXT_MAX) throw new RangeError(`Chart allows at most ${CONTEXT_MAX} context series; beyond that they blur into one gray mass and a different form should carry the comparison.`);
-    if (!contextLabel?.trim()) throw new Error("Chart with context series requires a nonempty contextLabel naming them together (e.g. the other rooms); the legend shows them as one entry.");
+    if (!isName(contextLabel)) throw new Error(`Chart with context series requires a nonempty contextLabel naming them together (e.g. the other rooms), which the legend shows as one entry; received ${received(contextLabel)}.`);
     if (series.some(item => item.context && item.tone !== undefined)) throw new RangeError("Chart context series cannot declare a tone; background is ink, not a category.");
   }
   // 状态色系列：要么全部非背景系列都声明，要么都不声明——半数有类别色、半数按次序取色，读者无从判断哪一种颜色在说类别；同一类别不重复。
@@ -538,14 +605,14 @@ export function Chart({ label, render, ref, className, style, type, categoryLabe
   // 参照：名实相符——名称必填，数值有限，带必须有宽度；donut 没有量轴，无处放参照；占比轴上没有数量，参照没有可信的读法。
   if (references.length && type === "donut") throw new RangeError("Chart type \"donut\" has no value axis to hold references.");
   if (references.length && share) throw new RangeError(`Chart type "${type}" has a fixed 0–100% axis; a reference value would have no unambiguous reading on it.`);
-  references.forEach(reference => {
-    if (!reference.label?.trim()) throw new Error("Chart references require a nonempty label naming what they mark.");
+  references.forEach((reference, index) => {
+    if (!isName(reference?.label)) throw new Error(`Chart references[${index}] requires a nonempty label naming what it marks; received ${received(reference?.label)}.`);
     if (reference.kind === "band" ? !Number.isFinite(reference.from) || !Number.isFinite(reference.to) || !(reference.from < reference.to) : reference.kind !== "line" || !Number.isFinite(reference.value)) throw new RangeError("Chart references need finite values; a band needs from < to.");
   });
   const rowIds = new Set(rows.map(row => row.id));
   if (events.length && type === "donut") throw new RangeError("Chart type \"donut\" has no category axis to hold events.");
-  events.forEach(event => {
-    if (!event.label?.trim()) throw new Error("Chart events require a nonempty label naming what happened.");
+  events.forEach((event, index) => {
+    if (!isName(event?.label)) throw new Error(`Chart events[${index}] requires a nonempty label naming what happened; received ${received(event?.label)}.`);
     if (!rowIds.has(event.rowId)) throw new RangeError(`Chart event "${event.label}" points at row "${event.rowId}", which does not exist.`);
     assertTone(event.tone, "Chart event");
   });
@@ -638,7 +705,7 @@ export function Chart({ label, render, ref, className, style, type, categoryLabe
         const item = seriesByKey.get(part.key);
         const text = item ? plain(part.value, item, rows[0]!) : nodeText(series[0] && formatValue?.(part.value, series[0], rows[0]!), number.format(part.value));
         return <li key={part.key} className="col-span-3 grid grid-cols-subgrid items-center">
-          <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: part.color }} />
+          <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: part.color }} />
           <span className="min-w-0 wrap-anywhere">{part.label}</span>
           <span className="ps-(--qy-field-group-gap) text-end numeric text-muted-foreground">{whole > 0 ? messages.proportionShare(text, percent.format(part.value / whole)) : text}</span>
         </li>;
@@ -666,13 +733,13 @@ export function Chart({ label, render, ref, className, style, type, categoryLabe
       {references.length > 0 && <ul data-slot="chart-references" aria-label={messages.chartReferences} className={legendClassName}>{references.map((reference, index) => <li key={index} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span>{reference.label}</span><span className="numeric">{referenceText(reference)}</span></li>)}</ul>}
     </div>}
   </>;
-  return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
-    "data-slot": "chart", "data-type": type, "aria-labelledby": titleId,
-    className: cn(chartFrameClassName, className),
-    style: { ...PLOT_PRESETS, ...style }, children: <>
+  return useRender({ defaultTagName: "figure", render, ref: [ref ?? null, root], props: mergeProps(native, {
+    "data-slot": "chart", "data-type": type, "data-framed": framed, ...naming.name,
+    className: cn(chartBaseClassName, framed && chartPaperClassName, className),
+    style: { ...PLOT_PRESETS, ...style }, children: <ChartGeometryContext.Provider value={geometry}>
       {/* 环形图的图例在环下：它是一个整体的几部分，名称挨着环读；标题栏只留图名与「查看数据」。 */}
-      <ChartHeader titleId={titleId} label={label} legend={type === "donut" ? null : legend} toggle={dataView.toggle} />
+      <ChartHeader titleId={naming.selfTitled ? titleId : undefined} label={label} legend={type === "donut" ? null : legend} toggle={dataView.toggle} />
       {content}
-    </>,
+    </ChartGeometryContext.Provider>,
   }) });
 }

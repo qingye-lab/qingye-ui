@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
-Source SHA-256: 62091f6ab8f49a63451d9d99467147b81e5ca7d169c0492174c5c2aceb24ded7
+Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
 
 同一身份视觉样本的图片与回退。
 

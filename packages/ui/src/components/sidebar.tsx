@@ -14,7 +14,7 @@ import { cn } from "../utils";
 
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
 type SidebarState = {
-  collapsed: boolean; /** 条目位于内嵌的二级面板里：左侧已有一条引导线。 */ nested?: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
+  collapsed: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
   toggle: React.RefObject<HTMLButtonElement | null>; content: React.RefObject<HTMLElement | null>; contentFocused: React.RefObject<boolean>;
   change(event: React.MouseEvent): void;
 };
@@ -22,18 +22,20 @@ const SidebarContext = React.createContext<SidebarState | null>(null);
 function useSidebar() { const context = React.useContext(SidebarContext); if (!context) throw new Error("Sidebar parts require Sidebar."); return context; }
 export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void };
 /**
- * 侧栏铺底纸色，当前项是一张纸（纸本色）：当前位置比四周更亮，读来是「这一页摊开在这里」；
- * 悬停是清墨。底纸写在侧栏自身，当前项的关系不依赖调用方放在哪里。收起是右上角的图标按钮。
+ * 侧栏铺底纸色，当前项是叠在这张底上的选中面（--qy-surface-selected，用户裁决 2026-10-12：选中色在全库
+ * 只有一种，且与底色有关系）：选中面是墨的透明叠合，叠在侧栏自己的底上总比底深一级，悬停是同一级（悬停不深于选中）。
+ * 底纸写在侧栏自身，当前项的关系不依赖调用方放在哪里。收起是右上角的图标按钮。
  *
- * 「比四周更亮」只在侧栏的底比纸深时成立。当前项的面因此是一个角色（--qy-sidebar-current，
- * 默认纸本色），不写死在组件里：项目把 --qy-sidebar 调到接近纸色时，把它改为淡染
- * （--qy-surface-active）；库自己的浮层子级也是同一个入口（见 SidebarSubContent）。
+ * 当前项的面因此是一个角色（--qy-sidebar-current，选中面的别名），不写死在组件里，也不随承载面改写：
+ * 项目把 --qy-sidebar 调到任何面上，叠合都成立；库自己的浮层子级也是同一个入口（见 SidebarSubContent），
+ * 不再局部改写。此前默认取纸本色（要「比四周更亮」）、近纸色时让项目改写，已被这条关系取代。
  *
- * 当前项还有第二个线索：一段焦墨线（2026-10-10，使用方反馈「当前项只靠底色区分」）。
- * 纸本色与侧栏底的明度差很小，只靠面，低视力与强光下的读者认不出「我在哪」；
- * 做法取库里已有的导航线画法（nav-line.ts）：当前项把自己那一段线加深为焦墨，不加粗、不改字重。
- * 二级条目左侧本来就有引导线，当前项加深的就是那一段；一级条目没有线，线画在条目自己的起始边内侧。
- * 线宽 1px 与导航线相同；上下各让出一个条目圆角，不压到圆角上（这两个取值是预设）。
+ * 当前项只由这张面标出，不再画线（用户裁决 2026-10-12，推翻 2026-10-10 加的那段焦墨线）。
+ * 骨法用笔：一个范围只用一种边界机制——当前项的范围已经由圆角的填充面划出，线与面叠加是
+ * 同一范围的重复表达。用户的规则是：直的墨线与圆角的填充面不在同一个条目上并用；只用线（Toc、Tabs）可以，
+ * 只用圆角填充面（侧栏当前项）也可以。
+ * 二级条目左侧本来就有 SidebarSubContent 的引导线，那条线表达「这几行属于哪个父项」，
+ * 当前项不再加深它；字重也不变。
  *
  * 收起不是消失，是变成一列图标（rail）：宽度 = 一个填值控件高 + 两侧内缩（基础层 §2、§4），
  * 恰好等于收起按钮本身的宽度——rail 的列宽由已有的「图标形按钮」几何给出，不另造一套尺寸。
@@ -51,6 +53,28 @@ export type SidebarToggleProps = ButtonProps;
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
   return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
+}
+export type SidebarHeaderProps = useRender.ComponentProps<"div">;
+/**
+ * 侧栏的第一行：这是谁的——身份在前，收起按钮在后。展开时一行：高度 = 一个填值控件高，
+ * 与下面的链接行同高，起始内缩 = 链接的起始内缩（--qy-control-sm-padding），于是身份落在
+ * 链接文字所在的同一条竖线上（基础层 §19）；身份与按钮的间隔取字段内间隔。收起成 rail 时一行
+ * 放不下两个东西（rail 宽度恰好是一个按钮），改为上下叠放并居中，间隔不变。
+ * SidebarToggle 自带一层 justify-end 的行容器：展开时用 ms-auto 把它推到末端，
+ * 不让它拉伸身份；SidebarToggle 单独使用时的行为不变。
+ */
+export function SidebarHeader({ render, className, ...props }: SidebarHeaderProps) {
+  const context = useSidebar();
+  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-header", className: cn(context.collapsed ? "grid justify-items-center gap-(--qy-field-gap)" : "flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-field-gap) ps-(--qy-control-sm-padding) [&>[data-slot=sidebar-toggle-row]]:ms-auto", className) }, props) });
+}
+export type SidebarTitleProps = useRender.ComponentProps<"span">;
+/**
+ * 页头里的名称：占满身份与按钮之间的余地，放不下时截断（名称在别处还会出现，截断不丢信息）。
+ * 收起时切到 sr-only——与 SidebarGroupLabel、链接名称同一机制：视觉隐藏，可访问名称仍在。
+ */
+export function SidebarTitle({ render, className, ...props }: SidebarTitleProps) {
+  const context = useSidebar();
+  return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "sidebar-title", className: cn(context.collapsed ? "sr-only" : "min-w-0 flex-1 truncate text-body-strong", className) }, props) });
 }
 export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
@@ -82,11 +106,18 @@ export function SidebarContent({ id, render, className, onFocusCapture, onBlurCa
   });
 }
 export type SidebarGroupProps = useRender.ComponentProps<"div">;
-export function SidebarGroup({ render, className, ...props }: SidebarGroupProps) { return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-group", className: cn("flex min-w-0 flex-col gap-0.5", className) }, props) }); }
+export function SidebarGroup({ render, className, ...props }: SidebarGroupProps) { return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-group", className: cn("flex min-w-0 flex-col gap-fen-half", className) }, props) }); }
+export type SidebarFooterProps = useRender.ComponentProps<"div">;
+/**
+ * 侧栏的末位：我是谁、我的命令。mt-auto 把它推到列底（内容多少都贴底，不靠调用方量高度）；
+ * 其中的条目与 SidebarGroup 同属一组，组内间隔相同（gap-fen-half）。条目用 SidebarLink 即可，
+ * 收起时同样只剩图标、名称切到 sr-only。
+ */
+export function SidebarFooter({ render, className, ...props }: SidebarFooterProps) { return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-footer", className: cn("mt-auto grid min-w-0 gap-fen-half", className) }, props) }); }
 export type SidebarGroupLabelProps = useRender.ComponentProps<"p">;
 /**
  * rail 里只隐藏文字，不画分隔线：组间距（--qy-field-group-gap，约一材）本来就比组内间距
- * （gap-0.5）松十倍，疏密本身已经分得出组——删去检验：加一道线不会让分组更清楚，
+ * （gap-fen-half）松十倍，疏密本身已经分得出组——删去检验：加一道线不会让分组更清楚，
  * 只是重复间距已经做到的事（NG12、疏密检验）。
  */
 export function SidebarGroupLabel({ render, className, ...props }: SidebarGroupLabelProps) {
@@ -109,16 +140,14 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   const context = useSidebar();
   const { messages } = useUILocale();
   const frame = cn(
-    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
+    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
     context.collapsed ? "justify-center px-0" : "px-(--qy-control-sm-padding)",
-    active && "bg-sidebar-current text-sidebar-accent-foreground before:pointer-events-none before:absolute before:inset-y-(--qy-radius-item) before:w-px before:bg-foreground",
-    // 二级条目加深的是面板引导线上自己那一段（位置与 SidebarSubContent 的引导线同一算式，换到条目自己的坐标）。
-    active && (context.nested ? "before:inset-y-0 before:start-[calc(var(--qy-control-sm-padding)-var(--qy-control-md-icon)/2-var(--qy-control-content-gap))]" : "before:start-0"),
+    active && "bg-sidebar-current text-sidebar-accent-foreground",
     className,
   );
   const hasCount = count !== undefined && count > 0;
   // rail 下底纸是 --qy-sidebar，不是 --qy-surface：角标贴着图标的纸色圈要换成实际承载面
-  // （基础层 G9，库不猜父背景）；当前项另有自己的面（--qy-sidebar-current），圈色在那一种状态下会偏差，
+  // （基础层 G9，库不猜父背景）；当前项另有自己的面（--qy-sidebar-current，叠在底上的选中面），圈色在那一种状态下会偏差，
   // 属于已知、可接受的边缘状态（当前项同时带未读数本身就是少见组合）。
   const hostedIcon = icon && hasCount && context.collapsed
     ? <CornerMark count={count!} {...(max !== undefined ? { max } : {})} label={messages.unreadCount(count!)} className="ring-(--qy-sidebar)">{icon}</CornerMark>
@@ -187,8 +216,7 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
   const label = React.useContext(SidebarSubLabelContext);
   // 浮层本身就是「有空间显示文字」的地方：子级在这里不再是 rail 条目，名称要正常可见，
   // 不能继承外层 collapsed=true 继续把文字切成 sr-only——那会让弹出的子级看起来空白一片。
-  const overlayContext = React.useMemo(() => ({ ...context, collapsed: false, nested: false }), [context]);
-  const nestedContext = React.useMemo(() => ({ ...context, nested: true }), [context]);
+  const overlayContext = React.useMemo(() => ({ ...context, collapsed: false }), [context]);
   return <>
     {/* 面板始终挂载（keepMounted）：:has([aria-current=page]) 要在 rail 下也能读到子级是否
      *  选中，而 :has() 只认 DOM 是否存在、不认是否可见。这里用的是外面另包的一层 div 的
@@ -196,21 +224,21 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
      *  表达「用户没展开」，这层 hidden 表达「rail 没有宽度摆它」；同一个焦点元素一旦落入
      *  原生 hidden 的子树，SidebarContent 的回退逻辑才需要把焦点交回 Toggle。 */}
     <div hidden={context.collapsed || undefined} className="min-w-0">
-      <CollapsiblePrimitive.Panel data-slot="sidebar-sub-content" keepMounted {...props} className={state => cn("relative grid min-w-0 gap-0.5 text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", subIndent, typeof className === "function" ? className(state) : className)}>
+      <CollapsiblePrimitive.Panel data-slot="sidebar-sub-content" keepMounted {...props} className={state => cn("relative grid min-w-0 gap-fen-half text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", subIndent, typeof className === "function" ? className(state) : className)}>
         {/* 引导竖线：同一 SidebarGroup 里可能有几个 SidebarSub 前后相邻，缩进本身对每一级都
          *  一样深，无法区分「这几行属于上面哪一个父项」；面划不出这层边界，补一条清墨线
          *  （骨法用笔：线只在面无法划出范围时出现）。线的位置是父项图标的几何中心，
          *  从子级看是正上方那枚图标的延伸。 */}
-        <span aria-hidden="true" className="absolute inset-y-0 start-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2)] w-px bg-border" />
-        <SidebarContext.Provider value={nestedContext}>{children}</SidebarContext.Provider>
+        <span aria-hidden="true" className="absolute inset-y-0 start-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2)] w-line bg-border" />
+        {children}
       </CollapsiblePrimitive.Panel>
     </div>
     {context.collapsed && (
       <PopoverPopup
-        side="inline-end" align="start" sideOffset={4}
-        viewportProps={{ className: "grid min-w-0 gap-0.5 p-(--qy-overlay-inset)" }}
-        // 浮层的承载面是 surface-raised（纸色）：纸色的当前项在这里与底同色，换成淡染（基础层 §6、§10）。
-        className="min-w-[calc(8*var(--qy-cai))] [--qy-sidebar-current:var(--qy-surface-active)]"
+        side="inline-end" align="start"
+        viewportProps={{ className: "grid min-w-0 gap-fen-half p-(--qy-overlay-inset)" }}
+        // 浮层的承载面是 surface-raised：当前项的面是叠合的选中面，在它上面同样比底深一级，不需要局部改写。
+        className="min-w-[calc(8*var(--qy-cai))]"
       >
         {/* 浮层里没有行气之外的空间重复父项名称，但图标本身不认字——保留一行浓墨小标题，
          *  删去检验：去掉它，读者分不清这组链接属于哪一个父项。 */}

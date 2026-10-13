@@ -25,12 +25,12 @@ export function PaginationItem({ render, className, ...props }: PaginationItemPr
 export type PaginationLinkProps = useRender.ComponentProps<"a"> & { page: number };
 /**
  * 当前页是**当前位置**：持续的事实，不是命令，也不是强调。
- * 画法取基础层 §11「当前位置用淡染」：淡染的面（12%）加焦墨字；其余页是安静的入口，字为浓墨，
- * 悬停时字回到焦墨并出现清墨底。当前与否由面的深浅和字的墨色共同承担，字重不变，一排数字不跳动。
+ * 画法取基础层 §11 反馈梯：选中面（--qy-surface-selected，全库唯一的「当前」面）加焦墨字；其余页是安静的入口，字为浓墨，
+ * 悬停时字回到焦墨并出现悬停面。当前与否由面的深浅和字的墨色共同承担，字重不变，一排数字不跳动。
  * 当前页悬停不变（§19：悬停是当前状态自己的悬停）。
  *
  * 沿革：2026-10-05 当前页由「加粗 + 下划线」改成实心（`--qy-primary`），因为在 1 2 3 4 里看不出停在哪一页；
- * 2026-10-12 用户裁决改为淡染，与轨道内的选中段同一理由——品牌覆写主操作的填充时，页码不随之变色、
+ * 2026-10-12 用户裁决改为选中面（先是淡染 12%，同日改为叠合的 4%），与轨道内的选中段同一理由——品牌覆写主操作的填充时，页码不随之变色、
  * 不与主按钮同重（§10）。下划线留给「这里可以离开」，不在当前页上出现。
  */
 export function PaginationLink({ page, render, className, ...props }: PaginationLinkProps) {
@@ -47,7 +47,7 @@ export function PaginationLink({ page, render, className, ...props }: Pagination
           buttonVariants({ variant: "quiet" }),
           "min-w-(--qy-fill-height-narrow) font-normal numeric sm:min-w-(--qy-fill-height)",
           current
-            ? "bg-(--qy-surface-active) text-foreground not-aria-disabled:hover:bg-(--qy-surface-active) not-aria-disabled:active:bg-(--qy-surface-active)"
+            ? "bg-surface-selected text-foreground not-aria-disabled:hover:bg-surface-selected not-aria-disabled:active:bg-surface-selected"
             : "text-muted-foreground not-aria-disabled:hover:text-foreground",
           className,
         ),

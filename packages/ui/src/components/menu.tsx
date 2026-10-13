@@ -2,7 +2,7 @@
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import * as React from "react";
-import { useFloatingLayer } from "../floating-layer";
+import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { Button, buttonVariants, type ButtonProps } from "./button";
 import { overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
@@ -16,7 +16,7 @@ export function MenuTrigger({ render, ...props }: MenuTriggerProps) { return <Me
 export type MenuPositionerProps = MenuPrimitive.Positioner.Props;
 export function MenuPositioner({ style, className, ...props }: MenuPositionerProps) {
   const layer = useFloatingLayer("popup");
-  return <MenuPrimitive.Positioner data-slot="menu-positioner" side="bottom" align="start" sideOffset={4} {...props} style={state => ({ ...layer, ...(typeof style === "function" ? style(state) : style) })} className={state => cn("max-h-(--available-height) max-w-(--available-width)", typeof className === "function" ? className(state) : className)} />;
+  return <MenuPrimitive.Positioner data-slot="menu-positioner" side="bottom" align="start" sideOffset={popupOffset} {...props} style={state => ({ ...layer, ...(typeof style === "function" ? style(state) : style) })} className={state => cn("max-h-(--available-height) max-w-(--available-width)", typeof className === "function" ? className(state) : className)} />;
 }
 export type MenuPopupProps = MenuPrimitive.Popup.Props;
 export function MenuPopup({ className, ...props }: MenuPopupProps) {

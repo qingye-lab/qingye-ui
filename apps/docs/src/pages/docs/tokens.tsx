@@ -6,7 +6,7 @@ import { Button } from "@qingye_lab/ui/components/button";
 import { ToggleGroup, ToggleGroupItem } from "@qingye_lab/ui/components/toggle-group";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import { useLayoutEffect, useRef, useState } from "react";
-import { H2, PageHeader } from "@/components/prose";
+import { Article, ArticleSection, H2, PageHeader } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { colorOf, Probe, SECTIONS, SOURCES, useAppearanceKey, useMeasured, type Row, type Source, type Value } from "./foundations-ledger";
 import { SPECIMENS } from "./foundations-specimens";
@@ -112,7 +112,7 @@ export default function TokensPage() {
   const head = en ? ["Entry", "Value", "Relation", "Source"] : ["入口", "值", "关系", "来源"];
 
   return (
-    <article className="ledger">
+    <Article className="ledger">
       <PageHeader title={en ? "Design tokens" : "设计令牌"} />
       <div className="ledger-sources">
         <div className="ledger-filter">
@@ -138,9 +138,9 @@ export default function TokensPage() {
         // 筛选时只留有该来源的节，标本让位给台账：此时读者在查值，不在看形。
         if (!rows.length) return null;
         return (
-          <section className="ledger-section" key={section.id}>
+          <ArticleSection className="ledger-section" key={section.id}>
             <H2 id={headingId}>{en ? section.title.en : section.title.zh}</H2>
-            <p className="ledger-origin">{en ? section.origin.en : section.origin.zh}</p>
+            <p className="ledger-origin" data-slot="docs-origin">{en ? section.origin.en : section.origin.zh}</p>
             {all ? <Specimen en={en} /> : null}
             <TableContainer data-density="compact">
               <Table aria-labelledby={headingId} className="ledger-table">
@@ -157,11 +157,11 @@ export default function TokensPage() {
                 </TableBody>
               </Table>
             </TableContainer>
-          </section>
+          </ArticleSection>
         );
       })}
 
-      {all ? <section className="ledger-section">
+      {all ? <ArticleSection className="ledger-section">
         <H2 id="others">{en ? "Other entries" : "其余入口"}</H2>
         <Collapsible>
           <CollapsibleTrigger>{en ? `${REST.length} entries` : `${REST.length} 个入口`}</CollapsibleTrigger>
@@ -182,9 +182,9 @@ export default function TokensPage() {
             </TableContainer>
           </CollapsiblePanel>
         </Collapsible>
-      </section> : null}
+      </ArticleSection> : null}
       <Probe host={host} />
       <div aria-hidden="true" className="ledger-probe" ref={restProbe} />
-    </article>
+    </Article>
   );
 }

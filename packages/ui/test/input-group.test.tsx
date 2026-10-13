@@ -80,8 +80,8 @@ test("InputGroupButton is a named action inside the boundary: frameless, inner-h
     expect(button).toHaveAttribute("data-variant", "quiet");
     expect(button).toHaveClass("self-stretch", "min-h-0");
   }
-  // 图标形的宽取边界内高（外高 − 2px 边框），不取按钮自己的外高，否则把边界撑高 2px。
-  expect(icon).toHaveClass("w-[calc(var(--qy-fill-height-narrow)-2px)]", "sm:w-[calc(var(--qy-fill-height)-2px)]");
+  // 图标形的宽取边界内高（外高 − 上下各一道线宽的边框），不取按钮自己的外高，否则把边界撑高两道线宽。
+  expect(icon).toHaveClass("w-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]", "sm:w-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]");
   expect(icon.className).not.toMatch(/(^|\s)(sm:)?w-\(--qy-control-md/);
   expect(label.className).not.toContain("w-[calc(");
   await user.click(icon);

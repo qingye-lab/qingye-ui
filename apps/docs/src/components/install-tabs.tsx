@@ -1,8 +1,7 @@
-import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye_lab/ui/components/tabs";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { useState } from "react";
-import { CodeView } from "./code-block";
-import { CopyCodeButton } from "./copy-code-button";
+import { CodeBlock } from "./code-block";
 
 const managers = [
   { id: "pnpm", command: (pkg: string) => `pnpm add ${pkg}` },
@@ -12,34 +11,26 @@ const managers = [
 
 type Manager = (typeof managers)[number]["id"];
 
-/** One install command, shown for each package manager. */
+/** One install command; the package manager is one value chosen in the block's title bar, and the block copies that command. */
 export function InstallTabs({ pkg, downloadCommand }: { pkg: string; downloadCommand?: string }) {
   const en = useDocsLocale() === "en";
   const [current, setCurrent] = useState<Manager>("pnpm");
-  const installCommand = (manager: (typeof managers)[number]) =>
-    downloadCommand ? `${downloadCommand} && ${manager.command(pkg)}` : manager.command(pkg);
-  const command = installCommand(managers.find((manager) => manager.id === current)!);
+  const manager = managers.find((item) => item.id === current)!;
+  const command = downloadCommand ? `${downloadCommand} && ${manager.command(pkg)}` : manager.command(pkg);
   return (
-    <Tabs
-      className="my-(--qy-space-module) gap-0 overflow-hidden rounded-panel bg-surface-inset"
-      onValueChange={(value) => setCurrent(value as Manager)}
-      value={current}
-    >
-      <div className="flex items-center justify-between gap-(--qy-field-gap) border-b py-(--qy-fen) ps-(--qy-fen) pe-(--qy-fen)">
-        <TabsList aria-label={en ? "Package manager" : "包管理器"}>
-          {managers.map((manager) => (
-            <TabsTab className="font-mono text-caption" key={manager.id} value={manager.id}>
-              {manager.id}
-            </TabsTab>
+    <CodeBlock
+      code={command}
+      lang="text"
+      title={
+        <SegmentedControl aria-label={en ? "Package manager" : "包管理器"} onValueChange={(value) => setCurrent(value as Manager)} size="sm" value={current}>
+          {managers.map((item) => (
+            <SegmentedControlItem key={item.id} value={item.id}>
+              {item.id}
+            </SegmentedControlItem>
           ))}
-        </TabsList>
-        <CopyCodeButton value={command} />
-      </div>
-      {managers.map((manager) => (
-        <TabsPanel key={manager.id} value={manager.id}>
-          <CodeView code={installCommand(manager)} lang="text" wrap />
-        </TabsPanel>
-      ))}
-    </Tabs>
+        </SegmentedControl>
+      }
+      wrap
+    />
   );
 }

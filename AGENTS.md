@@ -15,6 +15,7 @@
 
 - `packages/ui/src/components/<name>.tsx` — one component per file. **Only components rewritten under the current design basis live here**; see 「重写进行中」 below.
 - `packages/ui/tokens/*.css`, `theme.css`, `motion.css`, `utilities.css`, `styles.css` — tokens and global CSS.
+- `packages/ui/prose.css` — Prose 的排版规则（components 层）。库里唯一把组件画法放在样式文件里的组件，原因见该文件头与 `STANDARDS.md`；改 Prose 的排版改这里，不要搬回 `prose.tsx`。
 - `packages/ui/test/*.test.tsx` — Vitest + Testing Library.
 - `apps/docs/src/content/<name>/meta.ts` and `demos/NN-<id>.tsx` — documentation per component (see `apps/docs/src/lib/types.ts`).
 - `scripts/audit.mjs` — 跨主题跨断点的浏览器扫描；CI/Release 通过 `scripts/run-browser-audit.mjs` 使用构建后的 docs preview。

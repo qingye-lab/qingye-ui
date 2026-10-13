@@ -16,7 +16,7 @@ export function TimelineItem({ render, className, ...props }: TimelineItemProps)
   return useRender({ defaultTagName: "li", render, props: mergeProps({ "data-slot": "timeline-item", className: cn(
       // 已经发生的事彼此同重：每条一个重墨的点，坐在第一行（时间）里；点下一道清墨线连到下一条。
       "relative grid min-w-0 grid-cols-[var(--qy-cai)_minmax(0,1fr)] gap-x-(--qy-field-gap) pb-(--qy-field-group-gap) wrap-anywhere last:pb-0",
-      "before:col-start-1 before:row-start-1 before:mt-[calc((var(--qy-cai)-var(--qy-status-dot-size))/2)] before:size-(--qy-status-dot-size) before:justify-self-center before:rounded-full before:bg-input before:content-['']",
+      "before:col-start-1 before:row-start-1 before:mt-[calc((var(--qy-cai)-var(--qy-status-dot-size))/2)] before:size-(--qy-status-dot-size) before:justify-self-center before:rounded-full before:bg-ink-decor before:content-['']",
       threadClassName, "[--qy-thread-marker:var(--qy-status-dot-size)] after:bg-border",
       "[&>*]:col-start-2", className) }, props) });
 }

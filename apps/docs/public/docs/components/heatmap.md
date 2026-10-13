@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 8ce5eff281afd8d52d687059faf2fc1c89095fb8a5ac7e24ec14510c1807dd7e
+Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 
@@ -49,7 +49,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `columnLabel`: `string`. 列维度叫什么，例如「时段」。
 - `columns`: `readonly HeatmapColumn[]`.
 - `formatValue?`: `(value: number, row: HeatmapRow, column: HeatmapColumn) => React.ReactNode`. 可以返回节点；可访问名称只取字符串或数字的结果，其余退回默认的数值格式。
-- `label`: `string`.
+- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
+- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
 - `levels?`: `readonly HeatmapLevel[]`. 分档，2 到 5 档，浓淡随档次递增；给出后格子按所在的档上色，图例列出各档。
 - `renderReadout?`: `(cell: HeatmapReadoutCell) => React.ReactNode`. 替换悬停/聚焦读数里值的那一行。读数只是增强，名称与数据表仍是完整信息。
 - `rowLabel`: `string`. 行维度叫什么，例如「星期」。
@@ -63,6 +64,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ChartGeometryContext: without a provider default-value
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -70,6 +72,8 @@ Written descriptions; the list above is the type-resolved fact.
 ### Heatmap
 figure 名称、两个命名的类别轴、单色顺序色阶的网格与同源可见 Table。
 - label: string. 非空真实语义名称。
+- framed: boolean; default true. false：图放在已有的面上（无边框的 Section、Card、面板），不铺自己的纸——没有线、底、圆角与内缘，图的左右缘就是承载面的内容缘。与 TableContainer 的 framed 同义。是否显示图内标题与它无关。
+- aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - rowLabel / columnLabel / valueLabel: string. 行维度、列维度与量各自的名字，例如「时段」「星期」「同步次数」。
 - columns: readonly { key: string; label: string }[]. 列维度的取值，2 个以上——与数据系列不同，没有身份色上限。
 - rows: readonly ChartRow[]. 行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。
@@ -154,5 +158,34 @@ export default function Demo() {
     renderReadout={({ value, level }) => typeof value === "number"
       ? <div className="grid gap-(--qy-space-1)"><div className="flex items-baseline gap-(--qy-field-gap)"><span className="text-body-strong numeric">{value.toFixed(1)} ℃</span>{level && <span className="text-muted-foreground">{level.label}</span>}</div><div className="text-muted-foreground numeric">湿度 {humidity(value)}%</div></div>
       : <div>{value.label}</div>} />;
+}
+```
+
+### 放在区块里
+Source: apps/docs/src/content/heatmap/demos/04-in-section.tsx
+```tsx
+import { Heatmap } from "@qingye_lab/ui/components/heatmap";
+import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "放在区块里", titleEn: "Inside a section" } satisfies DemoMeta;
+
+const days = [
+  { key: "mon", label: "周一" }, { key: "tue", label: "周二" }, { key: "wed", label: "周三" },
+  { key: "thu", label: "周四" }, { key: "fri", label: "周五" }, { key: "sat", label: "周六" }, { key: "sun", label: "周日" },
+];
+const hours = ["00 时", "06 时", "12 时", "18 时"];
+const counts: Record<string, number[]> = {
+  mon: [2, 18, 42, 30], tue: [1, 20, 46, 28], wed: [3, 16, 38, 25],
+  thu: [2, 22, 50, 33], fri: [4, 19, 44, 29], sat: [0, 6, 14, 10], sun: [0, 4, 9, 7],
+};
+
+export default function Demo() {
+  return <Section className="w-full max-w-2xl">
+    <SectionHeader><SectionTitle level={4} id="heatmap-section-sync">同步热度</SectionTitle></SectionHeader>
+    <Heatmap framed={false} aria-labelledby="heatmap-section-sync" label="每周时段的同步次数" rowLabel="时段" columnLabel="星期" valueLabel="同步次数"
+      columns={days}
+      rows={hours.map((hour, index) => ({ id: hour, label: hour, values: Object.fromEntries(days.map(day => [day.key, counts[day.key]![index]!])) }))} />
+  </Section>;
 }
 ```

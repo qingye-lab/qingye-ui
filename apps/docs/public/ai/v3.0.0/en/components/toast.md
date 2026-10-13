@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 2f78a4dba01cb2ef1ac005af6672417903764f3bdb51fe2dd4dbd23228a31eaf
+Source SHA-256: 00bc356c67f1de366080dbad79d2a5d491442ee61a9aafe06d01527345ec7d06
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -103,37 +103,19 @@ Base UI Toast primitive namespace; useToastManager manages the owning Provider c
 - Esc: Close the focused notice and return to the original focus.
 
 ## Source examples
-### 类型
-Source: apps/docs/src/content/toast/demos/01-types.tsx
+### 通知
+Source: apps/docs/src/content/toast/demos/01-notice.tsx
 ```tsx
 import { useEffect, useId } from "react";
 import { Button } from "@qingye_lab/ui/components/button";
 import { toastManager } from "@qingye_lab/ui/components/toast";
 
-export const meta = { title: "类型", titleEn: "Types" };
-
-const types = [
-  ["info", "信息"],
-  ["warning", "提醒"],
-  ["waiting", "等待"],
-  ["in-progress", "进行中"],
-  ["unknown", "结果未知"],
-  ["failed", "失败"],
-  ["success", "成功"],
-] as const;
+export const meta = { title: "通知", titleEn: "Notice" };
 
 export default function Demo() {
   const id = useId();
   useEffect(() => () => toastManager.close(id), [id]);
-  return (
-    <div className="flex gap-(--qy-action-gap)">
-      {types.map(([type, label]) => (
-        <Button key={type} variant="bordered" onClick={() => toastManager.add({ id, type, title: label, timeout: 5000 })}>
-          {label}
-        </Button>
-      ))}
-    </div>
-  );
+  return <Button variant="bordered" onClick={() => toastManager.add({ id, title: "通知", description: "补充信息", timeout: 5000 })}>显示通知</Button>;
 }
 ```
 
@@ -276,5 +258,39 @@ function Notices() {
 
 export default function Demo() {
   return <AnchoredToastProvider><Notices /></AnchoredToastProvider>;
+}
+```
+
+### 类型
+Source: apps/docs/src/content/toast/demos/07-types.tsx
+```tsx
+import { useEffect, useId } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { toastManager } from "@qingye_lab/ui/components/toast";
+
+export const meta = { title: "类型", titleEn: "Types" };
+
+const types = [
+  ["info", "信息"],
+  ["warning", "提醒"],
+  ["waiting", "等待"],
+  ["in-progress", "进行中"],
+  ["unknown", "结果未知"],
+  ["failed", "失败"],
+  ["success", "成功"],
+] as const;
+
+export default function Demo() {
+  const id = useId();
+  useEffect(() => () => toastManager.close(id), [id]);
+  return (
+    <div className="flex gap-(--qy-action-gap)">
+      {types.map(([type, label]) => (
+        <Button key={type} variant="bordered" onClick={() => toastManager.add({ id, type, title: label, timeout: 5000 })}>
+          {label}
+        </Button>
+      ))}
+    </div>
+  );
 }
 ```

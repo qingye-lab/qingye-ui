@@ -29,8 +29,8 @@ export function Radio<Value>({ className, style, children, render = <button type
   return <OptionScope><RadioPrimitive.Root
     data-slot="radio-group-item" {...props} render={render} nativeButton={nativeButton}
     className={(state) => cn(
-      "touch-target inline-flex shrink-0 items-center justify-center align-top my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) size-(--qy-radio-edge-narrow) sm:size-(--qy-radio-edge) rounded-full border border-input bg-card text-primary outline-none dark:bg-surface-inset transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
-      state.disabled && "cursor-not-allowed opacity-64",
+      "touch-target inline-flex shrink-0 items-center justify-center align-top my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) size-(--qy-radio-edge-narrow) sm:size-(--qy-radio-edge) rounded-full border border-input bg-surface-field text-primary outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
+      state.disabled && "cursor-not-allowed opacity-disabled",
       state.readOnly && "border-border bg-surface-inset",
       typeof className === "function" ? className(state) : className,
     )}

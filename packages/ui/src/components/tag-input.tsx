@@ -271,7 +271,7 @@ export function TagInput({
       {/* 到顶只是「这里不能再添加」，不是「整个字段不可操作」：已确认的标签仍可移除、仍要读。
             草稿输入为此禁用，InputGroup 会按禁用画清染面；在这一状态下改回纸色与焦墨，线仍是清墨——与只读同一画法（基础层 §9）。 */}
       <InputGroup data-slot="tag-input-control" data-readonly={blocked.readOnly ? "" : undefined} data-limit={atMax && !blocked.disabled ? "" : undefined}
-        className="items-center gap-(--qy-tag-inset) p-(--qy-tag-inset) data-limit:has-[input:disabled]:cursor-auto data-limit:has-[input:disabled]:bg-card data-limit:has-[input:disabled]:text-foreground dark:data-limit:has-[input:disabled]:bg-surface-inset">
+        className="items-center gap-(--qy-tag-inset) p-(--qy-tag-inset) data-limit:has-[input:disabled]:cursor-auto data-limit:has-[input:disabled]:bg-surface-field data-limit:has-[input:disabled]:text-foreground">
         {value.length > 0 && <ul data-slot="tag-input-items" className="flex min-w-0 max-w-full flex-wrap gap-(--qy-tag-inset)">
           {value.map((tag, index) => <li key={`${index}:${tag}`} data-slot="tag-input-item" className={chipClassName} data-readonly={blocked.readOnly ? "" : undefined}>
             <span data-slot="tag-input-value" className={cn("min-w-0 truncate", chipTextClassName)}>{tag}</span>
@@ -287,7 +287,8 @@ export function TagInput({
             ><IconX aria-hidden="true" /></Button>}
           </li>)}
         </ul>}
-        {/* 草稿与添加动作成对换行：添加只作用于草稿，二者分到两行时动作失去对象。 */}
+        {/* 草稿与添加动作成对换行：添加只作用于草稿，二者分到两行时动作失去对象。
+            10em 是草稿编辑区的最小宽度，预设（约十个字符，容得下一个常见标签），与 --qy-field-min-text 是两回事。 */}
         <div data-slot="tag-input-editor" className="flex min-w-[min(100%,10em)] flex-1 items-center gap-(--qy-tag-inset)">
         <Input {...nativeInputProps} ref={setInputRef} value={draft} form={form} disabled={disabled || nativeInputProps.disabled} readOnly={readOnly || nativeInputProps.readOnly} unstyled
           // required 的意思是「至少一个标签」：有标签时草稿为空不算缺失。aria-required 始终跟随，不随原生属性的开关忽有忽无。

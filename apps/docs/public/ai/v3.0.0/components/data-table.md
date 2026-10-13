@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 6c90102f2bc72cc10b6b9a886cc1a8f2f9e64f91aac5bf57befb245b63422055
+Source SHA-256: 742eaf5ab4bb9f05b659c9b66d3cfcd962cd4f3977aba4008d284a7ddfcb8ebd
 
 调用方真实集合的比较、排序与范围选择。
 

@@ -117,7 +117,7 @@ export function Input({
       "col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
       textProfile,
       // 平台文件选择没有可设置的垂直对齐；行高取边框内高度让两段文字居中。按钮名称是动作，文件名是结果。
-      type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2px)] sm:leading-[calc(var(--qy-fill-height)-2px)] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",
+      type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))] sm:leading-[calc(var(--qy-fill-height)-2*var(--qy-line-width))] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",
       typeof className === "function" ? className(state) : className,
     ),
   };
@@ -130,9 +130,9 @@ export function Input({
         // 基础层 §5/§15：真实边框标出编辑范围；仅已声明 aria-invalid=true 才进入错误色。
         "relative grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center",
         unstyled
-          ? "min-h-[calc(var(--qy-fill-height-narrow)-2px)] sm:min-h-[calc(var(--qy-fill-height)-2px)] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2px)]"
+          ? "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))] sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2*var(--qy-line-width))]"
           : "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height) pointer-coarse:min-h-(--qy-touch-target)",
-        !unstyled && "rounded-(--qy-fill-radius) border border-input bg-card text-foreground transition-[border-color,box-shadow,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground dark:bg-surface-inset",
+        !unstyled && "rounded-(--qy-fill-radius) border border-input bg-surface-field text-foreground transition-[border-color,box-shadow,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         /* 基础层 §5、§9（2026-10-05 打磨）：**只读与禁用互换视觉职责**。
          *  只读 = 不能在这里编辑，但内容照常阅读、选取、复制 → 保留正常底与边界，
          *    只把编辑的暗示去掉（值仍是前景色），旁边给「只读」说明。

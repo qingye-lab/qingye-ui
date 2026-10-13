@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
+Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -12,8 +12,9 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 
 ## Notes
 - Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.
-- The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.
-- The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash.
+- The current item is marked by its rounded filled surface alone, with no line and no change of font weight (user ruling, 2026-10-12: one boundary mechanism per region). The guide line beside a sub-level only expresses membership; the current item does not deepen it.
+- The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.
+- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
 - In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.
 
 ## Use and ownership
@@ -24,6 +25,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 
 ## Composition
 - Sidebar / SidebarToggle: An aside and reversible toggle.
+- SidebarHeader / SidebarTitle: The first row: identity first, SidebarToggle last. In the rail they stack and centre, and the title stays for assistive technology.
+- SidebarFooter: The end slot, pinned to the bottom of the column; holds the account entry.
 - SidebarContent / SidebarGroup / SidebarGroupLabel: A native nav and navigation groups.
 - SidebarLink: A real page link.
 - SidebarSub / SidebarSubTrigger / SidebarSubContent: An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
@@ -39,10 +42,14 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
+- SidebarFooter: function; owner sidebar; PASS; props: SidebarFooterProps
+- SidebarFooterProps: type; owner sidebar; PASS
 - SidebarGroup: function; owner sidebar; PASS; props: SidebarGroupProps
 - SidebarGroupLabel: function; owner sidebar; PASS; props: SidebarGroupLabelProps
 - SidebarGroupLabelProps: type; owner sidebar; PASS
 - SidebarGroupProps: type; owner sidebar; PASS
+- SidebarHeader: function; owner sidebar; PASS; props: SidebarHeaderProps
+- SidebarHeaderProps: type; owner sidebar; PASS
 - SidebarLink: function; owner sidebar; PASS; props: SidebarLinkProps
 - SidebarLinkProps: type; owner sidebar; PASS
 - SidebarProps: type; owner sidebar; PASS
@@ -52,6 +59,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarSubProps: type; owner sidebar; PASS
 - SidebarSubTrigger: function; owner sidebar; PASS; props: SidebarSubTriggerProps
 - SidebarSubTriggerProps: type; owner sidebar; PASS
+- SidebarTitle: function; owner sidebar; PASS; props: SidebarTitleProps
+- SidebarTitleProps: type; owner sidebar; PASS
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
@@ -68,11 +77,19 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
+### SidebarFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
 ### SidebarGroup
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarHeader
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -94,6 +111,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### SidebarSubTrigger
 - `icon?`: `React.ReactNode`.
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### SidebarTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarToggle
 - `className?`: `string`.
@@ -119,6 +140,14 @@ Written descriptions; the list above is the type-resolved fact.
 ### Sidebar / SidebarToggle
 An aside and reversible toggle.
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. Expanded by default; details.cancel() rejects a change.
+- render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+### SidebarHeader / SidebarTitle
+The first row: identity first, SidebarToggle last. In the rail they stack and centre, and the title stays for assistive technology.
+- render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+### SidebarFooter
+The end slot, pinned to the bottom of the column; holds the account entry.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### SidebarContent / SidebarGroup / SidebarGroupLabel
@@ -179,5 +208,41 @@ export default function Demo() {
     <Sidebar className="w-full max-w-xs"><SidebarToggle /><SidebarContent aria-label="当前位置在二级"><Links current="tabs" /></SidebarContent></Sidebar>
     <Sidebar defaultCollapsed><SidebarToggle /><SidebarContent aria-label="收起时的当前位置"><Links current="sidebar" /></SidebarContent></Sidebar>
   </Inline>;
+}
+```
+
+### 标识与账户入口
+Source: apps/docs/src/content/sidebar/demos/03-identity.tsx
+```tsx
+import { IconLayoutSidebar, IconListTree } from "@tabler/icons-react";
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "标识与账户入口", titleEn: "Identity and account entry" } satisfies DemoMeta;
+export default function Demo() {
+  return <Sidebar aria-label="标识与账户" className="min-h-96 w-full max-w-xs">
+    <SidebarHeader>
+      <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
+      <SidebarTitle>青野工作区</SidebarTitle>
+      <SidebarToggle />
+    </SidebarHeader>
+    <SidebarContent aria-label="标识与账户导航" className="mt-(--qy-field-group-gap) flex-1">
+      <SidebarGroup>
+        <SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
+        <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <Menu>
+        <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+        <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
+          <MenuItem>账户</MenuItem>
+          <MenuSeparator />
+          <MenuItem>退出登录</MenuItem>
+        </MenuPopup></MenuPositioner></MenuPortal>
+      </Menu>
+    </SidebarFooter>
+  </Sidebar>;
 }
 ```

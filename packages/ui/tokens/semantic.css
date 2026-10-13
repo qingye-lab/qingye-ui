@@ -5,14 +5,14 @@
  * 界面的层级由一条有限的墨阶承担，文字、线与承载面都从这里取色，墨阶外不另造灰：
  *
  *   焦 88%   正文与标题、实心填充、焦点线
- *   浓 66%   辅助文字：在最深的叠层（清墨面上的淡染）上仍保持 4.5:1 的最淡一级（约束推导，下限约 65%）
+ *   浓 66%   辅助文字：在最深的叠层（按下的清墨面）上仍保持 4.5:1 的最淡一级（约束推导，下限约 65%）
  *   重 50%   必要的控件边界：输入框、bordered 按钮、未选中的标记
  *   淡 24%   读数的凹槽：进度、计量、滑块轨道
  *   清  8%   容器线；彩色的柔底
  *
  * 染：面的浓度取同级线的一半——同样的墨，薄薄一层面看上去与一道细线一样淡。
- *   清染 4%  内嵌承载面、悬停、页面底纸
- *   淡染 12% 按下
+ *   清染 4%  内嵌承载面、页面底纸；悬停与选中（叠在所坐的面上，用户裁决 2026-10-12，预设）
+ *   清   8%  按下（同一个墨原子再深一级）
  *
  * 字与实心与纸调和成不透明色：它们的对比不能随下面的叠层漂移。
  * 线与染保持透明：叠在任何纸上，读出来是同一级墨。
@@ -32,7 +32,6 @@
     --qy-ink-dan: 24%;
     --qy-ink-qing: 8%;
     --qy-wash-qing: calc(var(--qy-ink-qing) / 2);
-    --qy-wash-dan: calc(var(--qy-ink-dan) / 2);
   }
 
   :root,
@@ -46,6 +45,17 @@
     --qy-surface: var(--qy-paper);
     --qy-surface-raised: var(--qy-paper);
     --qy-background: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), var(--qy-paper));
+
+    /* 填值控件的静止面（**选择**；STANDARDS §3「深色外层读内嵌表面」）：浅色读纸本色（线承担范围），深色读内嵌面（清染，透明叠合）。
+     * 角色：「一个可输入 / 可勾选的东西，没有被禁用也没有只读时，它的底」。此前每个组件各写一遍 `bg-card dark:bg-surface-inset`，
+     *   明暗两侧各自选面；现在由这里的一行决定，改它一处，全部填值控件的底一起变。
+     * 与 dark: 变体的区别：它按最近的明暗根求值（局部 .light 嵌在 .dark 里时取浅色那一侧），而 `dark:` 变体匹配任何 .dark 后代。
+     *   默认的整页主题下两者逐值相同。
+     * 作用范围：Input、InputGroup、Textarea、NumberField、OtpField、Select、NativeSelect、TagInput（含 Combobox / Autocomplete 经由 InputGroup）、
+     *   Checkbox、Radio、Switch、Tree 的勾选标记的未选面。
+     * 不属于它的：禁用面（--qy-surface-inset，名实相符）、只读面（纸色）、bordered Button（浅深两色都读纸本色 bg-card：它是命令不是字段，深色不换内嵌面）。
+     * 修改入口：本行与下面深色块里的同名一行（成对改）。theme.css 把它暴露为 bg-surface-field。 */
+    --qy-surface-field: var(--qy-surface);
 
     /* 遮罩与阴影是影，不是墨：它们表达「在上面」，按预设取值。 */
     --qy-overlay: oklch(0 0 0 / 0.32);
@@ -107,6 +117,8 @@
     --qy-paper: color-mix(in srgb, var(--qy-background) 98%, var(--qy-white));
     --qy-surface: var(--qy-paper);
     --qy-surface-raised: color-mix(in srgb, var(--qy-background) 94%, var(--qy-white));
+    /* 填值控件的静止面：深色读内嵌面，见浅色块里的说明。成对改。 */
+    --qy-surface-field: var(--qy-surface-inset);
 
     --qy-overlay: oklch(0 0 0 / 0.56);
     --qy-shadow-panel: 0 1px 2px oklch(0 0 0 / 0.2), 0 4px 12px -8px oklch(0 0 0 / 0.24);
@@ -158,6 +170,13 @@
     --qy-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
     --qy-border-input: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
     --qy-border-strong: var(--qy-border-input);
+    /* 重墨（50%）作为装饰的字或点的颜色：与 --qy-border-input 同一个表达式（墨阶的「重」，透明叠合），但名字说的是它的用途。
+     * 起因：Breadcrumb 的分隔箭头读 text-input、Timeline 的点读 bg-input——边界 token 被拿来当字色与填色，名实不符。
+     * 检索结果：库里没有别的角色取「墨 × 重」这个颜色（--qy-foreground-muted 是浓墨且与纸调和成不透明色，--qy-groove-surface 是淡墨）。
+     * 作用范围：Breadcrumb 分隔箭头、Timeline 的点（装饰，aria-hidden / 不独立承载信息）。边界仍读 --qy-border-input。
+     * 修改入口：它与 --qy-border-input 都由 --qy-ink-zhong 决定，调墨阶一处；二者在高对比偏好下同步上移。
+     * test/system-roles.test.ts 断言两者今天逐值相同。 */
+    --qy-ink-decor: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
     --qy-ring: var(--qy-foreground);
 
     /* 实心：焦墨，配纸色前景。悬停 = 填充色与纸调和、纸占一级清墨：淡一级，仍在墨阶上，
@@ -166,14 +185,34 @@
     --qy-primary-foreground: var(--qy-paper);
     --qy-primary-hover: color-mix(in srgb, var(--qy-primary) calc(100% - var(--qy-ink-qing)), var(--qy-paper));
     --qy-danger-fill-hover: color-mix(in srgb, var(--qy-danger-fill) calc(100% - var(--qy-ink-qing)), var(--qy-paper));
+    /* 实心填充的按下（用户裁决 2026-10-13；此前按下与悬停同一个值，按下只剩 0.97 的缩放，减少动效与键盘操作时没有反馈）。
+     * 关系与中性的反馈梯相同：按下 = 悬停的两倍。悬停让出一级清墨给纸，按下让出两级；仍从 --qy-ink-qing 推出，不另写浓度。
+     * 作用范围：solid 按钮的中性与危险两档。修改入口：这两行（或 --qy-ink-qing，全梯一起动）。 */
+    --qy-primary-active: color-mix(in srgb, var(--qy-primary) calc(100% - 2 * var(--qy-ink-qing)), var(--qy-paper));
+    --qy-danger-fill-active: color-mix(in srgb, var(--qy-danger-fill) calc(100% - 2 * var(--qy-ink-qing)), var(--qy-paper));
 
-    /* 面：清染与淡染，透明叠合。 */
+    /* 面：清染，透明叠合。 */
     --qy-surface-inset: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
-    /* 反馈三级：静止的内嵌面清染（4%）→ 悬停清墨（8%）→ 按下淡染（12%），每级深一级。
-     * 悬停是要被看见的反馈，不能与静止的面同一浓度。 */
-    --qy-surface-hover: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
-    --qy-surface-active: color-mix(in srgb, var(--qy-ink) var(--qy-wash-dan), transparent);
+    /* 反馈梯（用户裁决 2026-10-12，**预设**；取代此前的 4% / 8% / 12% 三级与基础层 §11「当前位置用淡染」）：
+     *   静止 → 悬停 = 选中（在所坐的面上各加一级清染，4%）→ 按下（再深一级，清墨 8%）。
+     * 三者都是同一种墨的透明叠合，所以各自总是相对「它所坐的那张面」深一级——与底色的关系由叠合给出，
+     * 不是一个写死的色值；它们全部从同一个墨原子 --qy-ink-qing 推出（清染 = 清 / 2，按下 = 清），
+     * 调整这个原子，线、页面底纸、悬停、选中与按下一并移动。
+     * 悬停决不能比选中深：悬停是瞬时的预告，选中是持续的事实，预告不能压过事实。
+     * 选中（--qy-surface-selected）是持续的当前位置（导航当前页、分页当前页、树的选中行、表格选中行、
+     * 轨道内的选中段、日期区间……）：状态会留下，悬停会离开，按下只是一瞬。「当前」在库里只有这一种面。
+     * 作用范围：只有「持续的选中 / 当前 / 展开」读选中面；悬停与键盘高亮读 --qy-surface-hover；
+     * 按下读 --qy-surface-active。静止的面（内嵌面、占位、头像回退）读 --qy-surface-inset / --qy-neutral-soft，
+     * 不借用状态面。修改入口就是这三行。 */
+    --qy-surface-hover: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
+    --qy-surface-selected: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
+    --qy-surface-active: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
+    /* 静止的深一级的墨面：清墨（8%）。小面积按「染随面积」比清染深一级（骨架的占位条），
+     * 数据图的参照带也需要比内嵌面看得见的一块淡染。它是静止的，不是状态——此前这两处借用悬停面（也是 8%），
+     * 悬停改为 4% 后名实不再相符，改读这一角色，视觉不变。作用范围只有 SkeletonLine 与 Chart 的参照带。 */
+    --qy-surface-strong: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
     --qy-surface-subtle: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), var(--qy-paper));
+    /* shadcn 兼容别名：accent 即悬停与键盘高亮的面（不是选中面）。 */
     --qy-accent: var(--qy-surface-hover);
     --qy-accent-foreground: var(--qy-foreground);
 
@@ -182,13 +221,13 @@
     /* 并列候选的轨道：纸本色加一道清墨线（正常状态不铺灰底）。 */
     --qy-track-surface: var(--qy-surface);
     --qy-track-border: var(--qy-border);
-    /* 轨道内选中段 / 按下项的面与其上的字与图标。选中是持续的当前位置，用淡染（12%，基础层 §11）
-     * + 焦墨字；它不是命令，不借用 --qy-primary——筛选不是一个视图里的君（§10），品牌覆写主操作的
-     * 填充时，一页里的筛选控件不随之变色、不与主按钮同重。
+    /* 轨道内选中段 / 按下项的面与其上的字：只是选中面（--qy-surface-selected）在这个部位的别名，
+     * 让组件的角色仍有一个名字；它不再带自己的取值。选中是持续的当前位置，不是命令，不借用 --qy-primary——
+     * 筛选不是一个视图里的君（§10），品牌覆写主操作的填充时，一页里的筛选控件不随之变色、不与主按钮同重。
      * 作用范围只有 SegmentedControlItem 选中、ToggleGroupItem 按下、独立 Toggle 按下（线内的填充）。
-     * 修改入口就在这两行：想要更强的选中，把面改成实心墨时字须同改成纸色（成对改）。
-     * 深色主题不另取值：淡染是墨（深色为白）12% 的透明叠合，字是焦墨，墨阶规则两边相同。 */
-    --qy-track-selected: var(--qy-surface-active);
+     * 想要更强的选中：改 --qy-surface-selected（全库一起变），不在这里另写浓度；面改成实心墨时字须同改成纸色（成对改）。
+     * 深色主题不另取值：选中面是墨（深色为白）的透明叠合，字是焦墨，墨阶规则两边相同。 */
+    --qy-track-selected: var(--qy-surface-selected);
     --qy-track-selected-foreground: var(--qy-foreground);
 
     /* 柔底：透明叠合，放在任何纸上都比所在的纸深一级。彩色取该色的清墨浓度（8%）；
@@ -198,6 +237,9 @@
     --qy-warning-soft: color-mix(in srgb, var(--qy-warning) var(--qy-ink-qing), transparent);
     --qy-success-soft: color-mix(in srgb, var(--qy-success) var(--qy-ink-qing), transparent);
     --qy-info-soft: color-mix(in srgb, var(--qy-info) var(--qy-ink-qing), transparent);
+    /* 危险柔底的按下：bordered / quiet 危险按钮悬停读柔底（一级清墨），按下取两级——与实心填充、中性反馈梯同一关系
+     * （按下 = 悬停的两倍，用户裁决 2026-10-13）。作用范围只有这两档按钮的按下；静止的柔底（Alert、Badge）不读它。 */
+    --qy-danger-soft-active: color-mix(in srgb, var(--qy-danger) calc(2 * var(--qy-ink-qing)), transparent);
 
 
     /* 侧栏：页面底纸上的一列，用同一套墨。 */
@@ -206,10 +248,10 @@
     --qy-sidebar-border: var(--qy-border);
     --qy-sidebar-accent: var(--qy-surface-hover);
     --qy-sidebar-accent-foreground: var(--qy-foreground);
-    /* 侧栏当前项的面。当前项的画法随承载面（基础层 §10）：侧栏铺在比纸深一级的底上，当前项回到纸色；
-     * 项目把侧栏铺在纸色或接近纸色的面上时，纸色的当前项与四周同色，改为淡染：
-     * --qy-sidebar-current: var(--qy-surface-active)。作用范围只有 SidebarLink 的当前项。 */
-    --qy-sidebar-current: var(--qy-surface);
+    /* 侧栏当前项的面：选中面的别名（用户裁决 2026-10-12：选中色在全库只有一种，且与底色有关系）。
+     * 选中面是墨的透明叠合，叠在侧栏自己的底上总比底深一级，所以不再区分「侧栏深于纸」或「侧栏近纸色」——
+     * 此前默认取纸本色、近纸色时要项目改写的那一段指引已不需要。作用范围只有 SidebarLink 的当前项。 */
+    --qy-sidebar-current: var(--qy-surface-selected);
     --qy-sidebar-ring: var(--qy-ring);
   }
 }

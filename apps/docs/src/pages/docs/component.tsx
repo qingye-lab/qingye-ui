@@ -1,12 +1,13 @@
 import { METHODS, methodsFor } from "@/lib/design-guidance";
 import { Kbd } from "@qingye_lab/ui/components/kbd";
+import { Prose } from "@qingye_lab/ui/components/prose";
 import { Table, TableContainer, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import { use, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { CodeBlock } from "@/components/code-block";
-import { DemoFrame } from "@/components/demo";
-import { A, Code, H2, H3, P, PageHeader, Ul } from "@/components/prose";
 import { importSnippet } from "@/lib/highlight";
+import { DemoFrame } from "@/components/demo";
+import { A, Article, Code, H2, H3, P, PageHeader, Ul } from "@/components/prose";
 import { componentPath, splitTitle } from "@/lib/nav";
 import { components, findComponent, loadComponent, loadDemos, type ComponentEntry, type LoadedDemo } from "@/lib/registry";
 import type { ApiPart, KeyboardRow } from "@/lib/types";
@@ -22,22 +23,20 @@ const componentCopy = {
     layer: "层", methods: "方法", exports: "导出", separator: "、",
     examples: "示例", when: "何时使用", use: "适用", avoid: "不适用",
     state: "状态归属", library: "组件负责", application: "应用负责",
-    decisions: "设计决定", import: "导入", api: "API", keyboard: "键盘交互", notes: "使用建议",
+    decisions: "设计决定", api: "API", keyboard: "键盘交互", notes: "使用建议",
     prop: "属性", type: "类型", default: "默认值", description: "说明",
     key: "按键", action: "行为", or: "或", noDefault: "无",
     noDemos: "暂无示例", demosFailed: "示例暂时无法加载", browse: "浏览其他组件",
-    importBefore: "按组件入口导入只打包这一个文件：", importAfter: "。两种入口的取舍见 ", installation: "安装", importEnd: "。",
     notFound: (slug: string) => `没有名为 “${slug}” 的组件文档。`,
   },
   en: {
     layer: "Layer", methods: "Methods", exports: "Exports", separator: ", ",
     examples: "Examples", when: "When to use", use: "Use for", avoid: "Not for",
     state: "State ownership", library: "Handled by the component", application: "Handled by your application",
-    decisions: "Decisions", import: "Import", api: "API", keyboard: "Keyboard interactions", notes: "Usage notes",
+    decisions: "Decisions", api: "API", keyboard: "Keyboard interactions", notes: "Usage notes",
     prop: "Prop", type: "Type", default: "Default", description: "Description",
     key: "Key", action: "Action", or: "or", noDefault: "None",
     noDemos: "No examples yet", demosFailed: "Examples could not be loaded", browse: "Browse other components",
-    importBefore: "Import from the component entry to bundle just this file: ", importAfter: ". Compare the two entry points in ", installation: "Installation", importEnd: ".",
     notFound: (slug: string) => `No component documentation found for “${slug}”.`,
   },
 };
@@ -93,7 +92,7 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
   const application = clean(design.stateOwner?.application);
   const decisions = entry.decisions?.trim() ?? "";
   return (
-    <article>
+    <Article>
       <PageHeader
         description={entry.description}
         documentTitle={en ? `${zh} ${en}` : zh}
@@ -105,6 +104,10 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
         }
       >
         <Facts entry={entry} />
+        <CodeBlock
+          className="mt-[calc(var(--qy-field-group-gap)-var(--qy-field-gap))] mb-0"
+          code={importSnippet(entry.exports, `@qingye_lab/ui/components/${entry.slug}`)}
+        />
       </PageHeader>
 
       <H2 id="examples">{text.examples}</H2>
@@ -133,14 +136,6 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
         </>
       ) : null}
 
-      <H2 id="import">{text.import}</H2>
-      <CodeBlock code={importSnippet(entry.exports)} />
-      <P className="mt-(--qy-field-gap) text-body text-muted-foreground">
-        {text.importBefore}<Code>@qingye_lab/ui/components/{entry.slug}</Code>{text.importAfter}
-        <A href="/docs/installation#per-component">{text.installation}</A>
-        {text.importEnd}
-      </P>
-
       {entry.api.length ? <ApiReference parts={entry.api} /> : null}
       {entry.keyboard?.length ? <KeyboardTable rows={entry.keyboard} /> : null}
       {entry.notes?.length ? (
@@ -153,7 +148,7 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
           </Ul>
         </>
       ) : null}
-    </article>
+    </Article>
   );
 }
 
@@ -280,11 +275,11 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
     <>
       <H2 id="api">{text.api}</H2>
       {parts.map((part) => (
-        <section className="mt-(--qy-section-gap) [h2+&]:mt-(--qy-space-4)" key={part.name}>
-          <H3 className="mt-0 mb-(--qy-field-gap) font-mono text-reading" id={partId(part.name)}>
+        <Prose className="mt-(--qy-section-gap) [h2+&]:mt-(--qy-space-4)" framed={false} key={part.name} render={<section />}>
+          <H3 className="font-mono text-reading" id={partId(part.name)}>
             {part.name}
           </H3>
-          <p className="mb-(--qy-space-3) max-w-(--docs-measure) text-pretty text-body text-foreground">{renderInline(part.description)}</p>
+          <p className="mb-(--qy-space-3) max-w-(--docs-measure) text-pretty text-body text-foreground" data-slot="docs-api-description">{renderInline(part.description)}</p>
           {part.props?.length ? (
             <TableContainer className="rounded-panel border border-border">
               <Table className="min-w-[36rem] table-fixed" data-density="compact">
@@ -329,7 +324,7 @@ function ApiReference({ parts }: { parts: ApiPart[] }) {
               </Table>
             </TableContainer>
           ) : null}
-        </section>
+        </Prose>
       ))}
     </>
   );

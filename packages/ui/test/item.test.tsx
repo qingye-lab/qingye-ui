@@ -42,3 +42,10 @@ describe("ItemActions reveal", () => {
     expect(actions).toContainElement(screen.getByRole("button", { name: "归档" }));
   });
 });
+
+describe("Item as a whole-row link", () => {
+it("an Item rendered as a link is one link named by the row's text", () => {
+  render(<ul><li><Item render={<a href="/queue/3" />}><ItemContent><ItemTitle>蚕室 3</ItemTitle><ItemDescription>待核对 2 条</ItemDescription></ItemContent></Item></li></ul>);
+  expect(screen.getByRole("link", { name: "蚕室 3 待核对 2 条" })).toHaveAttribute("href", "/queue/3");
+});
+});

@@ -116,6 +116,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 - 行高一律是分的整数倍；字号为预设，相邻内容档至少差约 1.2 倍。字号相差无几时用墨色与字重分层。
 - 字距不由字号唯一决定，默认规律不作为硬禁令。当前字重 400/500/600；改主题值须检查真实层级与对比，不能把当前偏好变成普遍要求。
+- Prose 的排版规则写在 `packages/ui/prose.css`（components 层），不写成 `prose.tsx` 里的工具类：每条规则都要带同一段范围选择器，写成工具类会随每个类重复一遍（用户裁决 2026-10-13）。这是库里唯一把组件画法放进样式文件的组件；根元素自己的类仍在 TSX。取值照旧写库的工具类（`@apply`），元素自己的工具类总能覆盖它。
 - utilities.css 用 :lang 将中日韩字距设为 normal；当前无 typography 组件负责这件事。排版验收引用 [design.md「强调与内容」](design.md#强调与内容)和[交付检查](design.md#人和-ai-的交付检查)。
 - numeric（等宽数字）只用于需要纵向对齐的数：表格列、坐标轴、计数器；单独的大号读数（text-metric）用比例数字。
 - 截断、换行、text-balance、text-pretty 按任务选择，不规定单行必截断。Button 当前允许标签换行；后果与空值的判据引用 [design.md「名称与状态」](design.md#名称与状态)及[禁止 NG7](design.md#禁止)，具体容量见基础层 §14、§17。
@@ -145,7 +146,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
-<!-- qingye:translation:en:start source-sha256=cee3b9e2a73fde5a5ca25859b45bbbacd15c0ea14d452946305f0a3d483b48c3 -->
+<!-- qingye:translation:en:start source-sha256=d3a85e7b2c9457821d3eacc1857c97810b1c74dad1a7051120dc99991d2098cd -->
 # Component Standards
 
 These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -264,6 +265,7 @@ Each semantic profile includes font size, line height, tracking, and weight; cur
 
 - Every line height is a whole number of units; sizes are presets, with adjacent content profiles at least about 1.2× apart. When sizes are close, ink tone and weight carry the hierarchy.
 - Font size does not uniquely determine tracking; the default pattern is not a hard ban. Current weights are 400/500/600. Theme changes require actual hierarchy and contrast checks rather than making a preference universal.
+- Prose's typesetting rules live in `packages/ui/prose.css` (the components layer), not as utilities in `prose.tsx`: every rule carries the same scope selector, and as utilities it would be repeated once per class (ruling of 2026-10-13). It is the only component whose drawing sits in a stylesheet; the root element's own classes stay in TSX. Values still use the library's utilities through `@apply`, and an element's own utility always overrides them.
 - utilities.css uses :lang to set Chinese/Japanese/Korean tracking to normal. The source records no typography-component ownership of this rule. Check typography with Emphasis and content and Delivery checks.
 - numeric (tabular figures) serves numbers that align vertically: table columns, axes, counters. Standalone large readouts (text-metric) use proportional figures.
 - Choose truncation, wrapping, text-balance, and text-pretty for the task. Single-line truncation is not mandatory. Button currently permits wrapping. Consequences and empty values follow Names and states and NG7; see foundation §14 and §17 for capacity.

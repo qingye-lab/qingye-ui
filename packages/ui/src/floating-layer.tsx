@@ -47,3 +47,16 @@ export function useFloatingLayer(role: FloatingLayerRole): FloatingLayerStyle {
   else zIndex = `calc(var(--qy-layer-modal) + (var(--qy-floating-modal-order) - 1) * var(--qy-layer-modal-step) + var(--qy-layer-${role === "surface" ? "surface" : "owned-popup"}-offset))`;
   return { "--qy-floating-modal-order": order || 1, zIndex };
 }
+
+// 样式表没有加载（单测、服务端）时的取值：与 --qy-popup-offset 的预设相同。
+const POPUP_OFFSET_FALLBACK = 4;
+/**
+ * 浮层离触发器的距离，读系统令牌 --qy-popup-offset（1 分）。直接交给 Base UI 定位器的 sideOffset：
+ * 它在每次定位时调用，所以令牌改了，下一次打开就跟上；不存状态，也不在挂载时量。
+ * 令牌在 tokens/components.css 登记为 <length>，computed 值已是像素。浮层经 Portal 落在 body 下，按文档根取值。
+ */
+export function popupOffset(): number {
+  if (typeof document === "undefined") return POPUP_OFFSET_FALLBACK;
+  const value = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--qy-popup-offset"));
+  return Number.isFinite(value) ? value : POPUP_OFFSET_FALLBACK;
+}

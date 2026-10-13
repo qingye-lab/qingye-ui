@@ -10,9 +10,12 @@ export default {
   "exports": [
     "Sidebar",
     "SidebarToggle",
+    "SidebarHeader",
+    "SidebarTitle",
     "SidebarContent",
     "SidebarGroup",
     "SidebarGroupLabel",
+    "SidebarFooter",
     "SidebarLink",
     "SidebarSub",
     "SidebarSubTrigger",
@@ -33,6 +36,32 @@ export default {
           "description": "默认展开；details.cancel() 拒绝变化。",
           "descriptionEn": "Expanded by default; details.cancel() rejects a change."
         },
+        {
+          "name": "render / ref / native props",
+          "type": "Base UI part props",
+          "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
+          "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "SidebarHeader / SidebarTitle",
+      "description": "第一行：身份在前，SidebarToggle 在后。收起为 rail 时上下叠放并居中，名称留给辅助技术。",
+      "descriptionEn": "The first row: identity first, SidebarToggle last. In the rail they stack and centre, and the title stays for assistive technology.",
+      "props": [
+        {
+          "name": "render / ref / native props",
+          "type": "Base UI part props",
+          "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
+          "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "SidebarFooter",
+      "description": "末位槽，贴列底；放本人或账户入口。",
+      "descriptionEn": "The end slot, pinned to the bottom of the column; holds the account entry.",
+      "props": [
         {
           "name": "render / ref / native props",
           "type": "Base UI part props",
@@ -101,14 +130,16 @@ export default {
   ],
   "notes": [
     "应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。",
-    "当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。",
-    "当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。",
+    "当前项只由圆角的填充面标出，不画线也不改字重（用户裁决 2026-10-12：一个范围只用一种边界机制）；二级条目左侧的引导线只表达归属，当前项不加深它。",
+    "当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。",
+    "末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。",
     "收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。"
   ],
   "notesEn": [
     "Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.",
-    "The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.",
-    "The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash.",
+    "The current item is marked by its rounded filled surface alone, with no line and no change of font weight (user ruling, 2026-10-12: one boundary mechanism per region). The guide line beside a sub-level only expresses membership; the current item does not deepen it.",
+    "The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.",
+    "The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.",
     "In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl."
   ],
   "design": {

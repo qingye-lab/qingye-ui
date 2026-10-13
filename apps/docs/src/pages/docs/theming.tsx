@@ -15,7 +15,7 @@ import { Stack } from "@qingye_lab/ui/components/layout";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties } from "react";
 import { CodeBlock } from "@/components/code-block";
-import { A, Code, Facts, H2, P, PageHeader } from "@/components/prose";
+import { A, Article, Code, Facts, H2, P, PageHeader } from "@/components/prose";
 
 interface Brand {
   id: string;
@@ -220,7 +220,7 @@ export function ThemeSwitch() {
 
 export default function ThemingPage() {
   const en = useDocsLocale() === "en";
-  return <article><PageHeader title={en ? "Theming" : "主题"} description={en ? "Brand, light/dark and density each live on their own attribute and never override one another." : "品牌、明暗与密度各写在自己的属性上，互不覆盖。"} />
+  return <Article><PageHeader title={en ? "Theming" : "主题"} description={en ? "Brand, light/dark and density each live on their own attribute and never override one another." : "品牌、明暗与密度各写在自己的属性上，互不覆盖。"} />
     <H2 id="axes">{en ? "Three settings" : "三个设置"}</H2>
     <Facts items={[
       { term: en ? "Brand" : "品牌", detail: <><Code>{'html[data-brand="…"]'}</Code>{en ? ", written statically by the project." : "，由项目静态写入。"}</> },
@@ -232,5 +232,5 @@ export default function ThemingPage() {
     <H2 id="preview">{en ? "Workbench" : "试验台"}</H2><P>{en ? "The palettes and radius ranges here are presets for trying things out. Before adopting one, check text, boundaries and focus against the backgrounds they actually sit on." : "这里的配色与圆角范围是试用的预设。采用前，在实际背景上检查文字、边界与焦点的对比度。"}</P><ThemeBench />
     <H2 id="dark-mode">{en ? "Light and dark" : "浅色与深色"}</H2><P>{en ? "ThemeProvider stores the choice under the localStorage key yq-theme (change it with storageKey). Read the same key in <head> so the first paint already carries the right class:" : "ThemeProvider 把选择存在 localStorage 的 yq-theme 键（可用 storageKey 改名）。在 <head> 里先读同一个键，首帧就带上正确的 class，页面不会先亮后暗："}</P><CodeBlock code={headScript} lang="html" /><P>{en ? "Read and change the mode with useTheme:" : "在界面里读写当前模式用 useTheme："}</P><CodeBlock code={useThemeSnippet(en)} />
     <H2 id="tokens">{en ? "Override roles" : "覆盖角色"}</H2><P>{en ? "Override the roles components read, in the project's one theme entry: --qy-radius-control for controls, --qy-radius-panel for panels. --qy-radius is an alias no component reads. Afterwards, inspect the computed values of the affected controls; current values are listed under " : "在项目唯一的主题入口里覆盖组件实际读取的角色：控件写 --qy-radius-control，面板写 --qy-radius-panel；--qy-radius 是别名，没有组件读取它。改完检查受影响控件的计算值，当前取值见"}<A href="/docs/tokens">{en ? "Design tokens" : "设计令牌"}</A>{en ? "." : "。"}</P>
-  </article>;
+  </Article>;
 }

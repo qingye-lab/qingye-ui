@@ -16,9 +16,9 @@ export type SkeletonBlockProps = useRender.ComponentProps<"div">;
  *   不自行超时：久等不等于失败，超过应用能容忍的时间由应用改交 Empty（unknown）或错误，不由这里宣布。
  * - 以材为祖：正文行高 = 一材（`--qy-text-body-leading`），所以一行骨架占一材、行与行之间不留缝，
  *   N 行骨架正好占 N 行正文的高度，真内容到达时版面不动。条本身高 材 − 2 分（上下各留一分，
- *   即字面在行内的留白）；条的转角沿用全库的 round(高 × 5/16)（12px → 4px，应物象形）。
+ *   即字面在行内的留白）；条的转角沿用全库的 round(高 × --qy-radius-ratio)（12px → 4px，应物象形）。
  * - 墨分五色：占位是「还没有内容的内嵌面」，取清染（`--qy-surface-inset`，4%）；
- *   小面积的条按「染随面积」深一级，取清墨 8%（`--qy-surface-hover` 的值）。只用透明的墨，
+ *   小面积的条按「染随面积」深一级，取清墨 8%（`--qy-surface-strong`，静止的面；不借用悬停面）。只用透明的墨，
  *   放在纸上、面板上、清染面上都比所在的面深一级。
  * - 气韵生动：不脉动、不闪。等待本身没有「变化」可说，循环的明灭只是装饰（NG6）；
  *   唯一的动是内容到达时的原位淡入，由调用方挂载真内容时承担。
@@ -38,7 +38,7 @@ export function Skeleton({ label, className, children, render, ref, ...props }: 
 /** 一行文字的位置；宽度由调用方的 className 给出（默认占满）。 */
 export function SkeletonLine({ className, render, ref, ...props }: SkeletonLineProps) {
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({ "aria-hidden": true, "data-slot": "skeleton-line" }, props, {
-    className: cn("flex h-(--qy-cai) w-full items-center before:block before:h-[calc(var(--qy-cai)-2*var(--qy-fen))] before:w-full before:rounded-[round(calc((var(--qy-cai)-2*var(--qy-fen))*5/16),1px)] before:bg-(--qy-surface-hover)", className),
+    className: cn("flex h-(--qy-cai) w-full items-center before:block before:h-[calc(var(--qy-cai)-2*var(--qy-fen))] before:w-full before:rounded-[round(calc((var(--qy-cai)-2*var(--qy-fen))*var(--qy-radius-ratio)),1px)] before:bg-(--qy-surface-strong)", className),
   }) });
 }
 

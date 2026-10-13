@@ -19,11 +19,11 @@ export function Checkbox({ children, className, style, ...props }: CheckboxProps
   return <CheckboxPrimitive.Root
     data-slot="checkbox" {...props}
     className={(state) => cn(
-      "touch-target inline-flex shrink-0 items-center justify-center align-top my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) outline-none size-(--qy-checkbox-edge-narrow) sm:size-(--qy-checkbox-edge) rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge-narrow)/4))] sm:rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge)/4))] border transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
+      "touch-target inline-flex shrink-0 items-center justify-center align-top my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) outline-none size-(--qy-checkbox-edge-narrow) sm:size-(--qy-checkbox-edge) rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge-narrow)*var(--qy-radius-cap-ratio)))] sm:rounded-[min(var(--qy-radius-marker),calc(var(--qy-checkbox-edge)*var(--qy-radius-cap-ratio)))] border transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
       state.checked || state.indeterminate
         ? "border-transparent bg-primary text-primary-foreground focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-primary-foreground"
-        : "border-input bg-card text-foreground dark:bg-surface-inset focus-visible:border-ring not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground",
-      state.disabled && "cursor-not-allowed opacity-64",
+        : "border-input bg-surface-field text-foreground focus-visible:border-ring not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground",
+      state.disabled && "cursor-not-allowed opacity-disabled",
       state.readOnly && !(state.checked || state.indeterminate) && "border-border bg-surface-inset",
       typeof className === "function" ? className(state) : className,
     )}

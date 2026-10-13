@@ -53,9 +53,9 @@ function CheckMarker({ state, dim }: { state: TreeCheckedState; dim: boolean }) 
   const isChecked = state === true || state === "mixed";
   return <span aria-hidden="true" style={{ "--qy-tree-check-edge": "var(--qy-marker-size)", "--qy-tree-check-edge-narrow": "var(--qy-marker-size-narrow)" } as React.CSSProperties}
     className={cn(
-      "inline-flex shrink-0 items-center justify-center size-(--qy-tree-check-edge-narrow) sm:size-(--qy-tree-check-edge) rounded-[min(var(--qy-radius-marker),calc(var(--qy-tree-check-edge-narrow)/4))] sm:rounded-[min(var(--qy-radius-marker),calc(var(--qy-tree-check-edge)/4))] border transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
-      isChecked ? "border-transparent bg-primary text-primary-foreground" : "border-input bg-card dark:bg-surface-inset",
-      dim && "opacity-64",
+      "inline-flex shrink-0 items-center justify-center size-(--qy-tree-check-edge-narrow) sm:size-(--qy-tree-check-edge) rounded-[min(var(--qy-radius-marker),calc(var(--qy-tree-check-edge-narrow)*var(--qy-radius-cap-ratio)))] sm:rounded-[min(var(--qy-radius-marker),calc(var(--qy-tree-check-edge)*var(--qy-radius-cap-ratio)))] border transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
+      isChecked ? "border-transparent bg-primary text-primary-foreground" : "border-input bg-surface-field",
+      dim && "opacity-disabled",
     )}
   >{state === "mixed" ? <IconMinus aria-hidden="true" className="size-3/4" /> : state === true ? <IconCheck aria-hidden="true" className="size-3/4" /> : null}</span>;
 }
@@ -150,7 +150,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       const checkState = checkable ? deriveChecked(node) : false;
       const checkDim = checkable && (isDisabled || (branch && collectLeaves(node).every(leaf => leaf.disabled)));
       return <li key={node.id} data-slot="tree-item" role="treeitem" aria-labelledby={`${idBase}-${order.get(node.id)}`} aria-level={level} aria-expanded={branch ? open : undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
-        <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selected === node.id && selectable && "bg-(--qy-surface-active)", isDisabled && "opacity-64")}>
+        <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selected === node.id && selectable && "bg-surface-selected", isDisabled && "opacity-disabled")}>
           {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-hidden="true" onMouseDown={event => event.preventDefault()} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><IconChevronRight aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
           {checkable && <CheckMarker state={checkState} dim={Boolean(checkDim)} />}
           <span id={`${idBase}-${order.get(node.id)}`} data-slot="tree-label" className="min-w-0 text-body wrap-anywhere">{node.label}</span>

@@ -6,7 +6,7 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { chipActionClassName, chipClassName, chipDraftControlClassName, chipFrameStyle, chipTextClassName } from "../chip";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
-import { useFloatingLayer } from "../floating-layer";
+import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
@@ -43,7 +43,7 @@ export function ComboboxControl({ className, style, ...props }: InputGroupProps)
 export function ComboboxInput({ render, onChange, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
   const inControl = React.useContext(InControl);
   const chips = React.useContext(Multiple) && inControl;
-  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,4em)]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
+  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,var(--qy-field-min-text))]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
 }
 // 多选的编辑边界里，附属动作与已选项同高（一枚项高的正方形），停在第一行；单选时铺满边界内高。
 function adjunctClassName(inControl: boolean, chips: boolean, className: string | undefined) {
@@ -87,7 +87,7 @@ export type ComboboxPopupProps = ComboboxPrimitive.Popup.Props & React.RefAttrib
 export function ComboboxPopup({ container, positionerProps, className, ...props }: ComboboxPopupProps) {
   const layerStyle = useFloatingLayer("popup");
   const { style: positionerStyle, ...positionerRest } = positionerProps ?? {};
-  return <ComboboxPrimitive.Portal container={container}><ComboboxPrimitive.Positioner side="bottom" align="start" sideOffset={4} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
+  return <ComboboxPrimitive.Portal container={container}><ComboboxPrimitive.Positioner side="bottom" align="start" sideOffset={popupOffset} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
     <ComboboxPrimitive.Popup data-slot="combobox-popup" {...props} className={state => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
   </ComboboxPrimitive.Positioner></ComboboxPrimitive.Portal>;
 }

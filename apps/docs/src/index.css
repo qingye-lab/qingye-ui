@@ -3,6 +3,22 @@
 
 @source "./";
 
+/*
+ * 站点预设（2026-10-12 主人裁定）：文档站的页面底纸比库默认更近于白。
+ *   角色   本站的页面底纸（--qy-background），以及因此要跟着改的侧栏当前项的面。
+ *   范围   只在本站、只在浅色（深色不覆写）。库的 --qy-background 不变，使用方照旧是 4% 墨。
+ *   入口   这一段；品牌写在 html[data-brand]，见 docs/decisions/theme-axes.md，index.html 里声明。
+ *   取值   2% 墨 = 库最淡的一层清染（--qy-wash-qing，4%）的一半，写法与库同为 color-mix。
+ *          2% 是裁定给出的预设，不由别的关系推出。
+ *
+ * 本站只改这一个系统层的值，不逐个设置组件（同日裁定：组件库须由系统 token 调整全部生效）。
+ * 侧栏当前项、分段选中段、悬停与按下都读库的状态面（--qy-surface-selected / -hover / -active），
+ * 它们是叠在所在面上的墨，底纸变浅后自动跟着成立；代码面（--qy-code-surface）取的就是这张底纸。
+ */
+html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
+  --qy-background: color-mix(in srgb, var(--qy-ink) calc(var(--qy-wash-qing) / 2), var(--qy-paper));
+}
+
 :root {
   /* Site chrome. */
   /* Initial value only: the header writes its measured height back (site-header.tsx), and
@@ -13,25 +29,29 @@
   /*
    * Documentation frame (以材为祖). Every width is a count of 材 or of reading
    * characters; the counts are presets, the units are the library's.
-   *   rail     12 材  the sidebar
-   *   column   40 材  article column, wide enough for code and demos
-   *   toc      10 材  the on-page contents
-   *   measure  34 reading characters, the running-text line length (same as
-   *            the design-methods page)
-   * Regions are separated by the library's section gap (2 材).
+   *   rail     11 材  the sidebar
+   *   gap       1 材  between regions (--docs-gap)
+   *   column   42 材  the paper: one surface holding header, body and pager
+   *   toc      11 材  the on-page contents
+   *   measure  40 characters of the reading size, the running-text line length
+   * The paper, its inset and the measure are the library's Prose layout
+   * (--qy-prose-column 38 材 + 2 × --qy-prose-inset 2 材 = 42 材; --qy-prose-measure):
+   * the article is a Prose without its own frame, and this paper is that frame.
+   * Code blocks and tables may use the whole 38 材; running text stops at the measure.
    */
   /*
    * Site frame: the header, the home page, the documentation and the examples
    * share one centred width, so switching pages never moves an edge.
-   * 66 材 = rail 12 + gap 2 + column 40 + gap 2 + contents 10 (the documentation
+   * 66 材 = rail 11 + gap 1 + paper 42 + gap 1 + contents 11 (the documentation
    * frame exactly); the gutter is the smallest margin a narrower window keeps.
    */
   --site-width: calc(66 * var(--qy-cai));
   --site-gutter: calc(2 * var(--qy-cai));
-  --docs-rail: calc(12 * var(--qy-cai));
-  --docs-column: calc(40 * var(--qy-cai));
-  --docs-toc: calc(10 * var(--qy-cai));
-  --docs-measure: calc(34 * var(--qy-text-reading-size));
+  --docs-rail: calc(11 * var(--qy-cai));
+  --docs-gap: var(--qy-cai);
+  --docs-column: calc(var(--qy-prose-column) + 2 * var(--qy-prose-inset));
+  --docs-toc: calc(11 * var(--qy-cai));
+  --docs-measure: var(--qy-prose-measure);
 
   /*
    * Syntax colours for sugar-high. Three quiet hues (keyword, entity, string)
@@ -97,10 +117,10 @@
   }
 }
 
-/* Page-level composition for DocsLayout: rail | column | toc. The column keeps
-   one start edge; the TOC appears only when all three fit, so the article never
+/* Page-level composition for DocsLayout: rail | paper | toc. The paper keeps one
+   start edge; the TOC appears only when all three fit, so the article never
    shifts sideways. The container budget follows enlarged text as well as the
-   viewport. */
+   viewport. Regions are one gap (1 材, --docs-gap) apart. */
 :where([data-docs-frame]) > [data-docs-body] {
   container: docs-reading-layout / inline-size;
 }
@@ -109,7 +129,7 @@
 }
 @media (min-width: 1024px) {
   :where([data-docs-frame]) > [data-docs-body] {
-    padding-inline-start: var(--qy-section-gap);
+    padding-inline-start: var(--docs-gap);
   }
   :where([data-docs-frame]) > [data-docs-body] > main {
     flex: 0 1 var(--docs-column);
@@ -117,11 +137,18 @@
     max-inline-size: var(--docs-column);
   }
 }
-/* column 40 材 + section gap 2 材 + toc 10 材 = 52 材 = 1040px = 65rem.
-   Container conditions cannot read custom properties, so the sum is spelled out. */
-@container docs-reading-layout (min-width: 65rem) {
+/* paper 42 材 + gap 1 材 + toc 11 材 = 54 材 = 1080px = 67.5rem (the container's content box,
+   which excludes the gap on its start side). Container conditions cannot read custom
+   properties, so the sum is spelled out. */
+@container docs-reading-layout (min-width: 67.5rem) {
   :where([data-docs-frame]) > [data-docs-body] > [data-docs-toc] {
     display: block;
+  }
+}
+/* Where that column is hidden (the same condition, inverted) the edit link stays in the article. */
+@container docs-reading-layout (min-width: 67.5rem) {
+  :where([data-docs-frame]) [data-docs-edit-inline] {
+    display: none;
   }
 }
 
@@ -135,8 +162,6 @@ html { scrollbar-gutter: stable; }
    Page-specific utilities may adjust spacing, but not a heading's rank. */
 .docs-page-title,
 .docs-section-heading { min-inline-size: 0; overflow-wrap: anywhere; }
-/* Chinese running text justifies with strict line breaking. */
-:lang(zh) .docs-p { text-align: justify; line-break: strict; }
 /* Source markers are superscript numbers that link to the note list at the end of a page. */
 .docs-ref { position: relative; inset-block-start: -0.5em; margin-inline-start: 1px; font-size: var(--qy-text-caption-size); line-height: 0; font-variant-numeric: tabular-nums; }
 

@@ -5,4 +5,4 @@
  *   上端 = t + m + 分 = (材 + m) / 2 + 分；下端 = 分 − t（t 大于一分时，线伸进下一项的行盒）。
  * - 最后一项没有线。线的颜色由组件按状态给出。
  */
-export const threadClassName = "after:absolute after:start-[calc(var(--qy-cai)/2)] after:w-px after:content-[''] after:top-[calc((var(--qy-cai)+var(--qy-thread-marker))/2+var(--qy-fen))] after:bottom-[calc(var(--qy-fen)-(var(--qy-cai)-var(--qy-thread-marker))/2)] last:after:hidden";
+export const threadClassName = "after:absolute after:start-[calc(var(--qy-cai)/2)] after:w-line after:content-[''] after:top-[calc((var(--qy-cai)+var(--qy-thread-marker))/2+var(--qy-fen))] after:bottom-[calc(var(--qy-fen)-(var(--qy-cai)-var(--qy-thread-marker))/2)] last:after:hidden";

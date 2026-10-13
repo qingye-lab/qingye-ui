@@ -1,89 +1,66 @@
 /*
- * 首页展示理念本身，版面按理念自己的方法排。
+ * 首页只有三件事：总纲与定位、十五法的名录、开始使用。版面按理念自己的方法排。
  *
- * 一张三栏网格贯穿全页（.home-row）：第一栏放总纲、章题与引文；二、三栏放定位、说明、名录与接入，左缘是同一条竖轴。
- * - 展开有据：十五法先是名录，选一条才展开它的设计决定与出处；原文在理念页。
- * - 疏密有致：名录与详情之间 2 材，章与章 5 材；全页只靠空白分组。
- * - 墨分五色：总纲、章题、当前法名与正文用前景色，未选的法名、出处与补充事实用辅助色。
- * - 骨法用笔：名录是库里 Tabs 的导航线，当前项只把自己下面那段线加深。
- * - 材有美：行首开标点（「《）只占半格；引文落款在右，与引文右缘齐。
- * 取值：栏距 3 材、章距 5 材为首页预设；字号全部来自库的字阶，不在此处另设。
+ * 一张四栏网格贯穿全页，每栏 16 材（320px）：总纲每句五个全角字，在 64px 的字阶一字 64px，正好一栏，
+ * 所以总纲三句各占一栏，其下每一行都落在总纲自己的句界上（以材为祖：几何出自一个基本量，不另立栏线）。
+ * - 经营位置：总纲在最上，行首对齐版心左缘；定位在左，动作从第三栏（「合宜为度」之下）起，全页没有居中的东西。
+ * - 疏密有致：间距只取基础层的几级，级差一眼可辨：
+ *     组内 8（--qy-field-gap：组名与角色说明、名录各行之间）
+ *     并列项之间 20（--qy-field-group-gap）
+ *     章内收束 40（--qy-section-gap：总纲与定位之间）
+ *     页面级 80、160（章间距的 2 倍、4 倍：两组之间 80，大段之间 160）。
+ *   80 与 160 是首页的预设，不由别的关系推出。
+ * - 布白有用：不画卡片、盒子、章节线、图标；段与段只靠空白分开。
+ * - 材有美：字阶全部取自库的命名字阶（总纲 display-xl、组名与法名 display、定位与链接 reading、角色说明 support）。
+ *   法名与组名同阶，靠字重分层：组名取字阶自带的粗，法名取常规（墨分五色的另一用法：不加字号，层级交给字重与墨色）。
+ * - 同一行里字号不同的内容，按首行的行中线对齐，不按拉丁基线（本库的对齐规则）。
  */
 .home {
-  --home-gap: calc(3 * var(--qy-cai));
-  --home-chapter: calc(5 * var(--qy-cai));
+  --home-col: calc(16 * var(--qy-cai));
   color: var(--qy-foreground);
   outline: none;
-  padding-bottom: var(--qy-section-gap);
+  padding-top: calc(4 * var(--qy-section-gap));
+  padding-bottom: calc(4 * var(--qy-section-gap));
   text-spacing-trim: trim-start;
 }
-:where(.home) :where(h1, h2, p, figure, blockquote) { margin: 0; padding: 0; }
+:where(.home) :where(h1, h2, p, ul, li) { margin: 0; padding: 0; }
 .home ::selection { background: var(--qy-primary); color: var(--qy-primary-foreground); }
 
-.home-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--home-gap); }
-/* 每行最后一块（定位、说明、名录、接入）落在二、三栏。 */
-.home-row > :last-child { grid-column: 2 / -1; min-width: 0; }
-.home-row + .home-row { margin-top: var(--home-chapter); }
+/* 四栏，每栏最宽 16 材；版心不足 64 材（视口窄于 85rem）时各栏同比收窄，不撑出横向滚动。 */
+.home-row { display: grid; grid-template-columns: repeat(4, minmax(0, var(--home-col))); }
+/* 各栏之间没有栏距：栏就是一句总纲的宽。较长的内容（英文长名）右侧留 20，不贴到下一栏。 */
+.home-methods > div, .home-names > li { padding-inline-end: var(--qy-field-group-gap); }
 
-/* 字号全用库的字阶（Heading / Text 的 step），与文档页同一套角色：总纲 display-xl、章题 title、正文 reading、补充 body；
-   名录里法名是所选内容的标题，取 heading，详情（设计决定）取 body、出处取 support，选择项不小于它展开的内容。
-   这里不另设字号、行高、字重与字距；语言差异由库的 utilities.css 处理。右栏陈述句的行长与文档正文同为 --docs-measure。 */
-.home-intro-lede, .home-substance-text p, .home-method-decision { max-width: var(--docs-measure); text-wrap: pretty; }
-
-/* ─── 总纲与项目定位 ───────────────────────────────────── */
-.home-hero { align-items: end; padding-top: calc(5 * var(--qy-cai)); }
-.home-hero h1 span { display: block; white-space: nowrap; }
-/* 总纲用 display-xl：一句五字 × 64px = 320px，一栏放得下（版心 ≥ 54 材，即视口 ≥ 72.5rem）；
-   英文一句比一栏宽，占前两栏，定位落在第三栏。更窄时总纲与定位上下排。 */
-:lang(en) .home-hero h1 { grid-column: 1 / span 2; }
-:lang(en) .home-hero > .home-intro { grid-column: 3; }
-@media (max-width: 72.5rem) {
-  .home-hero, :lang(en) .home-hero { grid-template-columns: minmax(0, 1fr); row-gap: calc(2 * var(--qy-cai)); }
-  .home .home-hero.home-row > * { grid-column: 1; }
+/* ─── 总纲与定位 ───────────────────────────────────────── */
+/* 总纲三句各占一栏，一行不折。英文一句比一栏宽，三句各占一行。 */
+.home-motto { display: grid; grid-template-columns: repeat(3, var(--home-col)); }
+.home-motto span { white-space: nowrap; }
+:lang(en) .home-motto { grid-template-columns: minmax(0, 1fr); }
+:lang(en) .home-motto span { white-space: normal; }
+/* 版心放不下三栏（视口窄于 65rem = 3 × 20rem + 版心两侧 80px）时三句各占一行，不撑出横向滚动。 */
+@media (width < 65rem) {
+  .home-motto { grid-template-columns: minmax(0, 1fr); }
+  .home-motto span { white-space: normal; }
 }
-.home-intro { display: grid; justify-items: start; padding-bottom: var(--qy-fen); }
-.home-intro-fact { margin-top: var(--qy-field-gap); }
-.home-intro-fact span { white-space: nowrap; }
-.home-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-panel-gap); margin-top: calc(2 * var(--qy-cai)); }
+/* 定位与动作在同一行，彼此按行中线对齐；定位两行占一二栏，动作从第三栏起。 */
+.home-intro { margin-top: var(--qy-section-gap); align-items: center; }
+.home-intro-text { grid-column: 1 / 3; }
+.home-actions { grid-column: 3 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }
 
-/* ─── 文与质：章题与引文在第一栏，说明在右，与引文首行同一基线 ── */
-.home-substance { grid-template-rows: auto auto; align-items: baseline; }
-.home-substance > h2 { grid-row: 1; grid-column: 1; }
-.home-substance figure { grid-row: 2; grid-column: 1; justify-self: start; width: fit-content; max-width: 100%; margin-top: var(--qy-field-group-gap); }
-.home-substance > .home-substance-text { grid-row: 2; }
-.home-substance blockquote { text-wrap: pretty; }
-/* 落款在右：出处与引文右缘对齐。 */
-.home-substance figcaption { margin-top: var(--qy-field-gap); text-align: end; }
-.home-substance-text { display: grid; gap: var(--qy-field-gap); }
-
-/* ─── 器用六法 · 表达九法：章题在第一栏，名录与详情在右 ── */
+/* ─── 器用六法 · 表达九法 ──────────────────────────────── */
+/* 组名在第一栏、角色说明在其下；法名在二至四栏，三个一排，各栏用同一条栏线（subgrid）。 */
 .home-methods { align-items: start; }
-.home-methods-head p { margin-top: var(--qy-field-gap); }
-.home-index { gap: calc(2 * var(--qy-cai)); }
-/* 名录是三列的导航线：每个法名自带一段底线，当前项把它加深；不画贯穿整排的基线。 */
-.home-index-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; column-gap: var(--home-gap); row-gap: var(--qy-field-gap); border: 0; overflow: visible; }
-.home-index-tab { justify-self: start; text-align: start; }
-.home-index-panels { display: grid; }
-.home-index-panel { grid-area: 1 / 1; }
-/* 未选的详情占位而不可见，详情区高度按最长一条，切换时下文不跳动；visibility 已让它离开焦点与读屏。
-   Tailwind 预检在 base 层以 !important 隐藏 [hidden]，层内 !important 胜过层外，所以覆盖也写在 base 层，靠更高的特指度取胜。 */
-@layer base { .home-index-panel[hidden] { display: block !important; visibility: hidden; } }
-.home-index-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--qy-panel-gap); margin-top: var(--qy-field-gap); }
-.home-method-source { color: var(--qy-foreground-muted); }
+.home-role { margin-top: var(--qy-field-gap); }
+.home-names { grid-column: 2 / -1; display: grid; grid-template-columns: subgrid; row-gap: var(--qy-field-gap); list-style: none; }
+.home-names > li { font-weight: var(--qy-weight-regular); }
+/* 法名是名录，不是行文里的链接：平时不画下划线，悬停与键盘聚焦时由库链接自己的规则显出（线随之而现，状态可见）。 */
+.home-names a { text-decoration-color: transparent; }
+.home-hero + .home-methods { margin-top: calc(4 * var(--qy-section-gap)); }
+.home-methods + .home-methods { margin-top: calc(2 * var(--qy-section-gap)); }
 
 /* ─── 开始使用 ─────────────────────────────────────────── */
-.home-start { align-items: start; }
-.home-start h2 + p { margin-top: var(--qy-field-gap); }
-.home-install-tarball { display: grid; gap: var(--qy-field-gap); }
-.home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: var(--qy-field-group-gap); }
-
-/* 结尾不加新话：总纲之后以更大的布白收束，章距再加一倍。 */
-.home-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--qy-panel-gap); margin-top: calc(2 * var(--home-chapter)); padding-top: var(--qy-cai); border-top: 1px solid var(--qy-border); }
-.home-footer-version { margin-inline-start: var(--qy-field-gap); }
-.home-footer nav { display: flex; gap: var(--qy-panel-gap); }
-
-/* 窄桌面：三栏改为上下。 */
-@media (max-width: 52rem) {
-  .home-row { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-field-group-gap); }
-  .home-row > * { grid-column: 1 !important; grid-row: auto !important; }
-}
+/* 标题、命令、链接三者行中线对齐。命令占二、三栏，右侧让出 40，与链接之间有一个章内的间隔。 */
+.home-methods + .home-start { margin-top: calc(4 * var(--qy-section-gap)); }
+.home-start { align-items: center; }
+.home-command { grid-column: 2 / 4; min-width: 0; padding-inline-end: var(--qy-section-gap); }
+.home-start-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }

@@ -57,7 +57,7 @@ export function CornerMark(props: CornerMarkProps) {
           data-slot="corner-mark-badge"
           className={cn(
             "absolute top-0 end-0 inline-flex shrink-0 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-dense numeric font-medium ring-2 ring-(--qy-surface)",
-            isDot ? "size-(--qy-status-dot-size)" : "h-[calc(4*var(--qy-fen))] min-w-[calc(4*var(--qy-fen))] px-(--qy-space-1)",
+            isDot ? "size-(--qy-status-dot-size)" : "h-(--qy-glyph-box) min-w-(--qy-glyph-box) px-(--qy-space-1)",
             tones[tone],
             className,
           )}

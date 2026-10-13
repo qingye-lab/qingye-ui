@@ -42,8 +42,8 @@ const LEAD = {
   "framed-panel-heading": "min-h-[calc(2*(1px+var(--qy-panel-padding))+var(--qy-control-sm))]",
   // 表格的纸：一道线、小面板内缘，第一行是表名（一材）。
   "framed-caption": "min-h-[calc(2*(1px+var(--qy-panel-padding-sm))+var(--qy-cai))]",
-  // 长文的纸：一道线、面板内缘，第一行是节标题（text-prose-h2 的行高）。
-  "framed-prose": "min-h-[calc(2*(1px+var(--qy-panel-padding))+var(--qy-text-prose-h2-leading))]",
+  // 长文的纸：内缘（含线）是 Prose 的 --qy-prose-inset，第一行是节标题（text-prose-h2 的行高）。
+  "framed-prose": "min-h-[calc(2*var(--qy-prose-inset)+var(--qy-text-prose-h2-leading))]",
   "control-sm": "min-h-(--qy-control-sm)",
   "padded-text": "min-h-[calc(2*var(--qy-field-gap)+var(--qy-cai))]",
   "framed-row": "min-h-[calc(2px+var(--qy-row-default))]",

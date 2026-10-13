@@ -273,13 +273,13 @@ const PROBES = [
     P("Checkbox 未选边（重）对纸", border(UNCHECKED), behind(UNCHECKED), { expect: "up", min: 3 }),
   ] },
   { id: "segmented-control", slug: "segmented-control", pairs: [
-    P("SegmentedControl 选中段面（淡染）对轨道", fill("[data-slot=segmented-control-item][aria-checked=true]"), fill("[data-slot=segmented-control]"), { expect: "up" }),
+    P("SegmentedControl 选中段面（选中面）对轨道", fill("[data-slot=segmented-control-item][aria-checked=true]"), fill("[data-slot=segmented-control]"), { expect: "up" }),
     P("选中段字对选中面", text("[data-slot=segmented-control-item][aria-checked=true]"), fill("[data-slot=segmented-control-item][aria-checked=true]"), { expect: "floor", min: 4.5 }),
     P("未选段字（辅助）对轨道", text("[data-slot=segmented-control-item][aria-checked=false]:not([data-disabled])"), fill("[data-slot=segmented-control]"), { expect: "up", min: 4.5 }),
     P("轨道线（清）对纸", border("[data-slot=segmented-control]"), behind("[data-slot=segmented-control]"), { expect: "up" }),
   ] },
   { id: "pagination", slug: "pagination", pairs: [
-    P("Pagination 当前页面（淡染）对相邻页", fill("[data-slot=pagination-link][aria-current=page]"), behind("[data-slot=pagination-link][aria-current=page]"), { expect: "up" }),
+    P("Pagination 当前页面（选中面）对相邻页", fill("[data-slot=pagination-link][aria-current=page]"), behind("[data-slot=pagination-link][aria-current=page]"), { expect: "up" }),
     P("当前页字对其面", text("[data-slot=pagination-link][aria-current=page]"), fill("[data-slot=pagination-link][aria-current=page]"), { expect: "floor", min: 4.5 }),
   ] },
   { id: "progress", slug: "progress", pairs: [

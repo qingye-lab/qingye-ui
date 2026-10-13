@@ -1,8 +1,11 @@
+import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { UILocaleProvider } from "../src/locale";
-import { Sidebar, SidebarContent, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "../src/components/sidebar";
+import { Avatar, AvatarFallback } from "../src/components/avatar";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from "../src/components/menu";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
 const dot = <span aria-hidden="true">●</span>;
 describe("Sidebar", () => {
   it("collapses into an icon rail, not a hidden panel: content and real links stay in the accessibility tree", async () => {
@@ -80,5 +83,36 @@ describe("Sidebar", () => {
     render(<UILocaleProvider dir="rtl"><Sidebar collapsed><SidebarContent><SidebarSub><SidebarSubTrigger icon={dot}>集合</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#a">A</SidebarLink></SidebarSubContent></SidebarSub></SidebarContent></Sidebar></UILocaleProvider>);
     await user.click(screen.getByRole("button", { name: "集合" }));
     expect((await screen.findByRole("link", { name: "A" })).closest("[data-side]")).toHaveAttribute("data-side", "inline-end");
+  });
+  it("header, title and footer carry their slots, forward ref and native attributes, and accept render", () => {
+    const header = React.createRef<HTMLDivElement>(); const title = React.createRef<HTMLSpanElement>(); const footer = React.createRef<HTMLDivElement>();
+    render(<Sidebar><SidebarHeader ref={header} data-testid="header" aria-label="标识"><SidebarTitle ref={title} id="title" render={<h2 />}>工作区</SidebarTitle><SidebarToggle /></SidebarHeader><SidebarFooter ref={footer} data-testid="footer" render={<section aria-label="本人" />}>末位</SidebarFooter></Sidebar>);
+    expect(screen.getByTestId("header")).toHaveAttribute("data-slot", "sidebar-header");
+    expect(header.current).toBe(screen.getByTestId("header"));
+    expect(screen.getByRole("heading", { name: "工作区" })).toHaveAttribute("data-slot", "sidebar-title");
+    expect(title.current).toBe(screen.getByRole("heading"));
+    expect(footer.current).toBe(screen.getByRole("region", { name: "本人" }));
+    expect(footer.current).toHaveAttribute("data-slot", "sidebar-footer");
+  });
+  it("keeps the title in the accessibility tree when the sidebar collapses to the rail", () => {
+    const { rerender } = render(<Sidebar><SidebarHeader><SidebarTitle>工作区</SidebarTitle><SidebarToggle /></SidebarHeader></Sidebar>);
+    expect(screen.getByText("工作区")).toBeInTheDocument();
+    rerender(<Sidebar collapsed><SidebarHeader><SidebarTitle>工作区</SidebarTitle><SidebarToggle /></SidebarHeader></Sidebar>);
+    // 名称切到视觉隐藏，节点与文字仍在，辅助技术照常读到。
+    expect(screen.getByText("工作区")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "展开" })).toBeInTheDocument();
+  });
+  it("lets a SidebarLink rendered as a button open a Menu: role button, accessible name from the label, in both states", async () => {
+    const user = userEvent.setup();
+    const tree = (collapsed: boolean) => <Sidebar collapsed={collapsed}><SidebarFooter><Menu><MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem>退出登录</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu></SidebarFooter></Sidebar>;
+    const { rerender } = render(tree(false));
+    const trigger = screen.getByRole("button", { name: "陈致远" });
+    expect(trigger.tagName).toBe("BUTTON");
+    expect(trigger).toHaveAttribute("aria-haspopup", "menu");
+    expect(trigger.querySelector('[data-slot="sidebar-link-label"]')).toHaveTextContent("陈致远");
+    rerender(tree(true));
+    expect(screen.getByRole("button", { name: "陈致远" })).toBe(trigger);
+    await user.click(screen.getByRole("button", { name: "陈致远" }));
+    expect(await screen.findByRole("menuitem", { name: "退出登录" })).toBeInTheDocument();
   });
 });

@@ -38,3 +38,21 @@ test("more than three series, nonfinite coordinates and unnamed points are rejec
   expect(() => render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={many} />)).toThrow(/at most three/);
   expect(() => render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "a", label: "全部", points: [{ id: "p", label: "点", x: NaN, y: 1 }] }]} />)).toThrow(/finite numbers/);
 });
+
+test("a missing series or point name throws a readable Error naming the item, not a TypeError", () => {
+  const error = (fn: () => unknown) => { try { fn(); } catch (caught) { return caught as Error; } throw new Error("expected a throw"); };
+  const seriesError = error(() => render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "a", label: undefined as unknown as string, points }]} />));
+  expect(seriesError).not.toBeInstanceOf(TypeError);
+  expect(seriesError.message).toBe('ScatterChart series[0] (key "a") requires a nonempty label; received undefined.');
+  const pointError = error(() => render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "a", label: "全部", points: [points[0]!, { ...points[1]!, label: undefined as unknown as string }] }]} />));
+  expect(pointError).not.toBeInstanceOf(TypeError);
+  expect(pointError.message).toMatch(/ScatterChart series\[0\] \(key "a"\) points\[1\] \(id "b"\) requires a nonempty label/);
+});
+
+test("framed={false} with an aria-label drops the figcaption and keeps the data toggle", () => {
+  render(<ScatterChart framed={false} aria-label="规模与失败" label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "a", label: "全部", points }]} />);
+  const figure = screen.getByRole("figure", { name: "规模与失败" });
+  expect(figure.querySelector("figcaption")).toBeNull();
+  openTable();
+  expect(within(figure).getByRole("table", { name: "记录数与失败率" })).toBeInTheDocument();
+});

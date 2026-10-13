@@ -119,8 +119,8 @@ export function Calendar({ className, classNames, components, style, locale, for
       months: "flex flex-wrap gap-(--qy-space-6)", month: "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-y-(--qy-space-2)", month_caption: "flex min-w-0 items-center ps-(--qy-space-2) has-data-[slot=native-select]:ps-0", caption_label: "text-body-strong", dropdowns: "flex items-center gap-(--qy-space-2)", nav: "flex items-center justify-end",
       button_previous: dayButton, button_next: dayButton, chevron: "shrink-0",
       month_grid: "col-span-2 border-collapse", weekday: "text-support text-muted-foreground text-center", day: "p-0 text-center w-(--qy-calendar-cell-narrow) sm:w-(--qy-calendar-cell) pointer-coarse:w-(--qy-touch-target)", day_button: dayButton,
-      outside: "text-muted-foreground", disabled: "opacity-64", hidden: "invisible", // 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
-      range_middle: "bg-accent [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-active)!", range_start: "bg-linear-to-r from-transparent from-50% to-accent to-50% rtl:bg-linear-to-l", range_end: "bg-linear-to-l from-transparent from-50% to-accent to-50% rtl:bg-linear-to-r", footer: "text-support text-muted-foreground", ...classNames,
+      outside: "text-muted-foreground", disabled: "opacity-disabled", hidden: "invisible", // 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
+      range_middle: "bg-surface-selected [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-hover)!", range_start: "bg-linear-to-r from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-l", range_end: "bg-linear-to-l from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-r", footer: "text-support text-muted-foreground", ...classNames,
     }}
     components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, ...components }}
     labels={{

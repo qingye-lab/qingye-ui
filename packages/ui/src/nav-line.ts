@@ -11,7 +11,7 @@ export const navLineListClassName =
   "flex min-w-0 items-stretch gap-(--qy-field-group-gap) border-b border-border";
 
 export const navLineItemClassName =
-  "relative -mb-px inline-flex min-h-(--qy-fill-height) min-w-0 shrink-0 cursor-pointer items-center gap-(--qy-control-content-gap) border-b border-transparent text-body text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring data-disabled:cursor-not-allowed data-disabled:opacity-64 [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0";
+  "relative -mb-line inline-flex min-h-(--qy-fill-height) min-w-0 shrink-0 cursor-pointer items-center gap-(--qy-control-content-gap) border-b border-transparent text-body text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring data-disabled:cursor-not-allowed data-disabled:opacity-disabled [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0";
 
 export const navLineCurrentClassName = "border-foreground text-foreground";
 
@@ -24,4 +24,4 @@ export const navLineCurrentClassName = "border-foreground text-foreground";
 export const navLineListClassNameVertical = "flex min-w-0 flex-col border-s border-border";
 
 export const navLineItemClassNameVertical =
-  "relative -ms-px block min-w-0 cursor-pointer border-s border-transparent text-support text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring wrap-anywhere";
+  "relative -ms-line block min-w-0 cursor-pointer border-s border-transparent text-support text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring wrap-anywhere";

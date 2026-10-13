@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
-Source SHA-256: e6061dfe3068d7c1fece1a1d0ac4c854d51a576d22fbbf9c8ed38bb2483e4bd2
+Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202
 
 坐在文字行里的小型折线，说明一个读数最近怎样变化。
 

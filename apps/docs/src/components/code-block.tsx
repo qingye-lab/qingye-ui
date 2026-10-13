@@ -1,9 +1,20 @@
+import { CodeBlock as LibraryCodeBlock } from "@qingye_lab/ui/components/code-block";
 import { cn } from "@qingye_lab/ui/utils";
 import { useMemo, type ReactNode } from "react";
 import { highlight, type CodeLang } from "@/lib/highlight";
-import { CopyCodeButton } from "./copy-code-button";
 
-/** Highlighted, horizontally scrollable source. Keyboard users can scroll it too. */
+/** Highlighted markup for the library's `children` slot; the highlighter escapes its input. */
+function Highlighted({ code, lang }: { code: string; lang: CodeLang }) {
+  const html = useMemo(() => highlight(code, lang), [code, lang]);
+  // biome-ignore lint: the highlighter escapes its input.
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+/**
+ * Highlighted source without a frame of its own, for places that already sit inside one (the demo
+ * frame's code area). It uses the code surface and the library block's text and padding, and
+ * scrolls horizontally; keyboard users can scroll it too.
+ */
 export function CodeView({
   code,
   lang = "tsx",
@@ -16,46 +27,46 @@ export function CodeView({
   wrap?: boolean;
   className?: string | undefined;
 }) {
-  const html = useMemo(() => highlight(code.replace(/\n$/, ""), lang), [code, lang]);
+  const text = code.replace(/\n$/, "");
   return (
     <pre
       className={cn(
-        "docs-code focus-ring overflow-x-auto px-(--qy-space-4) py-(--qy-space-3) [scrollbar-width:thin]",
-        wrap && "whitespace-pre-wrap [overflow-wrap:anywhere]",
+        "m-0 max-w-full overflow-x-auto bg-(--qy-code-surface) p-(--qy-panel-padding-sm) text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
+        wrap && "whitespace-pre-wrap wrap-anywhere",
         className,
       )}
-      // biome-ignore lint: the highlighter escapes its input.
-      dangerouslySetInnerHTML={{ __html: `<code>${html}</code>` }}
       tabIndex={0}
-    />
+    >
+      <code className="font-mono">
+        <Highlighted code={text} lang={lang} />
+      </code>
+    </pre>
   );
 }
 
+/** The library CodeBlock with the site's highlighter; `title` may be a file name or a control such as a SegmentedControl. */
 export function CodeBlock({
   code,
   lang = "tsx",
   title,
+  wrap,
   className,
 }: {
   code: string;
   lang?: CodeLang;
-  /** File name or short label shown in the header bar. */
   title?: ReactNode;
+  wrap?: boolean;
   className?: string;
 }) {
+  const text = code.replace(/\n$/, "");
   return (
-    <figure className={cn("group/code relative my-(--qy-space-module) min-w-0 overflow-hidden rounded-panel bg-surface-inset", className)}>
-      {title ? (
-        <figcaption className="flex items-center justify-between gap-(--qy-field-gap) border-b py-(--qy-fen) ps-(--qy-space-4) pe-(--qy-fen) text-muted-foreground text-caption">
-          <span className="truncate font-mono">{title}</span>
-          <CopyCodeButton value={code} />
-        </figcaption>
-      ) : (
-        <div className="absolute end-(--qy-fen) top-(--qy-fen)">
-          <CopyCodeButton value={code} />
-        </div>
-      )}
-      <CodeView className={title ? undefined : "pe-[calc(2*var(--qy-cai))]"} code={code} lang={lang} />
-    </figure>
+    <LibraryCodeBlock
+      className={cn("my-(--qy-field-group-gap) [h3+&]:mt-0", className)}
+      code={text}
+      title={title}
+      {...(wrap !== undefined ? { wrap } : {})}
+    >
+      <Highlighted code={text} lang={lang} />
+    </LibraryCodeBlock>
   );
 }

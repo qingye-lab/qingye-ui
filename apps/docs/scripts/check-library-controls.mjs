@@ -52,7 +52,8 @@ export function inspectLibraryControls(source, file = "source.tsx") {
         if (exported === "NativeSelect") nativeSelectNames.add(binding.name.text);
         if (exported === "Prose") proseNames.add(binding.name.text);
       }
-      if ((module === "react-router-dom" || module === "react-router") && exported === "Link") routeLinks.add(binding.name.text);
+      // 网站自己的 Link 只给路由 Link 补上语言前缀，渲染的仍是 <a href>。
+      if ((module === "react-router-dom" || module === "react-router" || /(^|\/)locale-link$/.test(module)) && exported === "Link") routeLinks.add(binding.name.text);
     }
   }
   const isLibraryTag = (name) => libraryNames.has(name) || libraryNamespaces.has(name.split(".")[0]);

@@ -51,7 +51,7 @@ export function NumberField({ className, style, value: valueProp, defaultValue, 
 
 export function NumberFieldGroup({ className, ...props }: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>) {
   return <NumberFieldPrimitive.Group data-slot="number-field-group" {...props} className={state => cn(
-    "flex w-[min(100%,var(--qy-number-width))] min-w-0 items-stretch rounded-(--qy-fill-radius) border border-input bg-card text-foreground min-h-(--qy-number-height-narrow) sm:min-h-(--qy-number-height) pointer-coarse:min-h-(--qy-touch-target) dark:bg-surface-inset has-[input:focus-visible]:border-ring data-invalid:border-destructive data-invalid:has-[input:focus-visible]:border-destructive-foreground", fillStateByData,
+    "flex w-[min(100%,var(--qy-number-width))] min-w-0 items-stretch rounded-(--qy-fill-radius) border border-input bg-surface-field text-foreground min-h-(--qy-number-height-narrow) sm:min-h-(--qy-number-height) pointer-coarse:min-h-(--qy-touch-target) has-[input:focus-visible]:border-ring data-invalid:border-destructive data-invalid:has-[input:focus-visible]:border-destructive-foreground", fillStateByData,
     typeof className === "function" ? className(state) : className,
   )} />;
 }
@@ -69,8 +69,8 @@ export function NumberFieldInput({ className, render, ...props }: NumberFieldPri
 
 // 步进是附属于值的动作：与其他编辑边界内的附属动作同色同形（基础层 §6）；只读时不可步进，隐藏但保留位置，值不移位。
 // 几何跟随填值控件角色层（用户裁决 2026-10-05）：步进按钮不再选自己的档位，密度变化时与数值同高。
-// 步进按钮是方的：边长 = 控件内高（外高 − 上下两道 1px 边线），与数值同一行盒，不撑高控件。
-const stepClass = "self-stretch min-h-0 sm:min-h-0 p-0 w-[calc(var(--qy-number-height-narrow)-2px)] sm:w-[calc(var(--qy-number-height)-2px)] pointer-coarse:w-(--qy-touch-target) rounded-[max(0px,calc(var(--qy-fill-radius)-1px))] text-muted-foreground hover:text-foreground [[data-readonly]_&]:invisible";
+// 步进按钮是方的：边长 = 控件内高（外高 − 上下两道线宽 --qy-line-width 的边线），与数值同一行盒，不撑高控件。
+const stepClass = "self-stretch min-h-0 sm:min-h-0 p-0 w-[calc(var(--qy-number-height-narrow)-2*var(--qy-line-width))] sm:w-[calc(var(--qy-number-height)-2*var(--qy-line-width))] pointer-coarse:w-(--qy-touch-target) rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] text-muted-foreground hover:text-foreground [[data-readonly]_&]:invisible";
 
 export function NumberFieldDecrement({ className, children, render, nativeButton = true, ...props }: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>) {
   const { messages } = useUILocale();

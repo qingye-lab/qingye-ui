@@ -4,14 +4,18 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { CartesianGrid, Scatter, ScatterChart as RechartsScatterChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import * as React from "react";
-import { AxisTick, ChartHeader, chartFrameClassName, legendClassName, useChartData, MARK, MARKERS, Marker, PLOT_PRESETS, type ChartMarker, type ChartStyle } from "./chart";
+import { AxisTick, ChartHeader, chartBaseClassName, chartName, chartPaperClassName, legendClassName, useChartData, MARKERS, Marker, PLOT_PRESETS, type ChartFigureProps, type ChartMarker, type ChartStyle } from "./chart";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
+import { ChartGeometryContext, chartGeometry, READOUT_SURFACE } from "../chart-geometry";
 import { useUILocale } from "../locale";
+import { isList, isName, received, requireNamedItems } from "../require-name";
+import { useSystemUnits } from "../system-units";
 import { cn } from "../utils";
 
 export type ScatterPoint = { id: string; label: string; x: number; y: number };
 export type ScatterSeriesInput = { key: string; label: string; points: readonly ScatterPoint[] };
-type ScatterBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & { label: string; style?: ChartStyle };
+/** label 与 framed 同 Chart（ChartFigureProps）：外部名称（aria-labelledby / aria-label）给出时，figure 由它命名，图内不显示标题。 */
+type ScatterBaseProps = Omit<useRender.ComponentProps<"figure">, "children" | "style"> & ChartFigureProps & { style?: ChartStyle };
 export type ScatterChartProps = ScatterBaseProps & {
   /** 横轴量的是什么，例如「记录数」。 */
   xLabel: string;
@@ -32,11 +36,12 @@ type ProjectedPoint = ScatterPoint & { color: string; marker: ChartMarker; serie
  *   本身就是被比较的两个量，二者同源同图，不存在第二条可拆的轴。
  * - 墨分五色：只有一个系列时用焦墨；两个以上按 chart-1..3 取色（全比较形式最多 3 个系列，
  *   数据可视化规范：全比较色觉校验比相邻校验更严，查看数据可视化规范中色阶校验方法），标记形状为第二通道。
- * - 标记 ≥ 8px、外加一圈纸色：与折线标记同一组件（Marker）。
+ * - 标记 2 分（默认 8px）、外加一圈纸色：与折线标记同一组件（Marker），几何由图的根节点读出的分换算（chartGeometry）。
  * - 命中区 ≥ 24px：标记外加一个透明命中圈，指针不必正中 8px 的点。
  * - 不画虚假零点：x/y 轴域按实际数据范围加少量留白，不强制从零起（散点不是从基线生长的柱）。
  */
-const HIT_RADIUS = 12; // 24px 命中直径的一半
+// 24px 命中直径的一半。这是指针目标的像素要求，与模块的分无关（分变小，手指不会变小），所以不由 chartGeometry 换算，也不随标记缩放。
+const HIT_RADIUS = 12;
 function PointShape({ cx, cy, payload }: { cx?: number; cy?: number; payload?: ProjectedPoint }) {
   if (cx === undefined || cy === undefined || !payload) return <g />;
   return <g>
@@ -51,7 +56,7 @@ type ScatterTooltipPayload = { payload?: ProjectedPoint };
 function ScatterReadout({ active, payload, xLabel, yLabel, formatX, formatY }: { active?: boolean; payload?: readonly ScatterTooltipPayload[]; xLabel: string; yLabel: string; formatX: (value: number) => React.ReactNode; formatY: (value: number) => React.ReactNode }) {
   const point = active ? payload?.[0]?.payload : undefined;
   if (!point) return null;
-  return <div className="grid min-w-0 gap-(--qy-space-1) rounded-overlay border border-border bg-popover px-(--qy-fill-padding) py-(--qy-space-2) text-support text-popover-foreground shadow-(--qy-shadow-raised)">
+  return <div className={`grid min-w-0 gap-(--qy-space-1) ${READOUT_SURFACE}`}>
     <div className="flex min-w-0 items-center gap-(--qy-field-gap)">
       <span aria-hidden="true" className="inline-flex shrink-0"><Marker color={point.color} marker={point.marker} /></span>
       <span className="min-w-0 text-body-strong wrap-anywhere">{point.label}</span>
@@ -81,34 +86,48 @@ function niceScale(values: readonly number[], count = 5) {
 }
 
 /** 图只画数据（用户裁决 2026-10-10：功能要纯粹）。没有点可画时不渲染图，由调用方在原位放 Empty。 */
-export function ScatterChart({ label, render, ref, className, style, xLabel, yLabel, series, formatX, formatY, ...native }: ScatterChartProps) {
-  if (!label.trim()) throw new Error("ScatterChart requires a nonempty accessible label.");
+export function ScatterChart({ label, framed = true, render, ref, className, style, xLabel, yLabel, series, formatX, formatY, ...native }: ScatterChartProps) {
+  if (!isName(label)) throw new Error(`ScatterChart requires a nonempty accessible label; received ${received(label)}.`);
   const titleId = React.useId(); const dataView = useChartData();
+  const naming = chartName(native, titleId);
+  // 几何从图自己的根节点读（见 Chart）。
+  const root = React.useRef<HTMLElement | null>(null);
+  const units = useSystemUnits(root);
+  const geometry = React.useMemo(() => chartGeometry(units), [units]);
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   let content: React.ReactNode; let legend: React.ReactNode = null;
-  if (!xLabel?.trim() || !yLabel?.trim() || !series?.length) throw new Error("ScatterChart requires named axes and at least one series; when there is nothing to plot, render Empty in its place.");
+  // 名称与标识：先判类型再去空白（require-name.ts），错误写明是哪一项、缺什么。不是数组的 series 与空数组同样处理。
+  if (!isName(xLabel)) throw new Error(`ScatterChart requires a nonempty xLabel naming what the x axis measures; received ${received(xLabel)}.`);
+  if (!isName(yLabel)) throw new Error(`ScatterChart requires a nonempty yLabel naming what the y axis measures; received ${received(yLabel)}.`);
+  if (!isList(series) || !series.length) throw new Error(`ScatterChart requires at least one series and received ${isList(series) ? "none" : received(series)}; when there is nothing to plot, render Empty in its place.`);
   if (series.length > 3) throw new RangeError("ScatterChart compares every point against every other (an all-pairs form); it accepts at most three series. Fold the rest into \"Other\" or facet into separate charts.");
-  if (new Set(series.map(item => item.key)).size !== series.length || series.some(item => !item.key.trim() || !item.label.trim())) throw new Error("ScatterChart series require unique stable keys and nonempty names.");
+  requireNamedItems("ScatterChart series", series, "key");
+  series.forEach((item, index) => { if (!isList(item.points)) throw new Error(`ScatterChart series[${index}] (key "${item.key}") requires a points array; received ${received(item.points)}.`); });
   const allPoints = series.flatMap(item => item.points);
   if (!allPoints.length) throw new Error("ScatterChart requires at least one real point; when there is none, render Empty in its place.");
+  series.forEach((item, index) => {
+    const owner = `ScatterChart series[${index}] (key "${item.key}") points`;
+    requireNamedItems(owner, item.points, "id");
+    item.points.forEach((point, at) => { if (!Number.isFinite(point.x) || !Number.isFinite(point.y)) throw new TypeError(`${owner}[${at}] (id "${point.id}") requires finite numbers for x and y; received x ${received(point.x)} and y ${received(point.y)}.`); });
+  });
+  // 数据表的行以 “系列 key:点 id” 为键，拼接后也不得相同（各系列内 id 已不重复，这里只拦 "a:b" + "c" 与 "a" + "b:c" 这类拼接相撞）。
   const ids = series.flatMap(item => item.points.map(point => `${item.key}:${point.id}`));
-  if (new Set(ids).size !== ids.length || allPoints.some(point => !point.id.trim() || !point.label.trim())) throw new Error("ScatterChart points require unique stable ids (per series) and nonempty names.");
-  if (allPoints.some(point => !Number.isFinite(point.x) || !Number.isFinite(point.y))) throw new TypeError("ScatterChart point x/y must be finite numbers.");
+  if (new Set(ids).size !== ids.length) throw new Error("ScatterChart series keys and point ids must stay distinct when joined as \"key:id\"; rename the series key or point id that contains the colon.");
   const single = series.length === 1;
   const projected = series.map((item, index) => ({ ...item, color: `var(--qy-chart-${index + 1})`, marker: MARKERS[index]! }));
   const showX = formatX ?? ((value: number) => number.format(value));
   const showY = formatY ?? ((value: number) => number.format(value));
   const xs = allPoints.map(point => point.x), ys = allPoints.map(point => point.y);
   const x = niceScale(xs), y = niceScale(ys);
-  const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + 8;
+  const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + geometry.axisGutter;
   legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
   content = <>
     <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
     <div data-slot="chart-plot" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
-      <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: MARK, right: MARK, bottom: 0, left: 0 }}>
-        <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={1} />
-        <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: 1 }} />
+      <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: geometry.mark, right: geometry.mark, bottom: 0, left: 0 }}>
+        <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={geometry.hairline} />
+        <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geometry.hairline }} />
         <YAxis type="number" dataKey="y" name={yLabel} domain={[y.min, y.max]} ticks={y.ticks} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => typeof value === "number" ? String(showY(value)) : value} />} tickLine={false} axisLine={false} width={yWidth} />
         <Tooltip isAnimationActive={false} cursor={false} content={(tooltipProps) => <ScatterReadout {...tooltipProps as { active?: boolean; payload?: readonly ScatterTooltipPayload[] }} xLabel={xLabel} yLabel={yLabel} formatX={showX} formatY={showY} />} />
         {projected.map(item => <Scatter key={item.key} name={item.label} data={item.points.map(point => ({ ...point, color: item.color, marker: item.marker, seriesLabel: item.label }))} isAnimationActive={false} shape={(shapeProps: unknown) => <PointShape {...shapeProps as React.ComponentProps<typeof PointShape>} />} />)}
@@ -123,9 +142,9 @@ export function ScatterChart({ label, render, ref, className, style, xLabel, yLa
           </TableRow>))}
         </TableBody></Table></TableContainer></div>}
   </>;
-  return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
-    "data-slot": "scatter-chart", "aria-labelledby": titleId,
-    className: cn(chartFrameClassName, className),
-    style: { ...PLOT_PRESETS, ...style }, children: <><ChartHeader titleId={titleId} label={label} legend={legend} toggle={dataView.toggle} />{content}</>,
+  return useRender({ defaultTagName: "figure", render, ref: [ref ?? null, root], props: mergeProps(native, {
+    "data-slot": "scatter-chart", "data-framed": framed, ...naming.name,
+    className: cn(chartBaseClassName, framed && chartPaperClassName, className),
+    style: { ...PLOT_PRESETS, ...style }, children: <ChartGeometryContext.Provider value={geometry}><ChartHeader titleId={naming.selfTitled ? titleId : undefined} label={label} legend={legend} toggle={dataView.toggle} />{content}</ChartGeometryContext.Provider>,
   }) });
 }

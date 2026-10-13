@@ -24,7 +24,7 @@
 @media (prefers-reduced-motion: no-preference) {
   :root:not([data-ui-input="keyboard"])
     .qy-pressable:not(:disabled, [aria-disabled="true"], [data-disabled], [data-loading]):active {
-    scale: 0.97;
+    scale: var(--qy-scale-press);
   }
 }
 
@@ -32,8 +32,10 @@
 /* `motion.css` owns popup entry and exit: start/end scale and opacity, the
  * durations, and the reduced-motion fallback. Components supply structure,
  * the trigger's transform origin, and their `data-slot`; they must not declare
- * a second set of entry values. Preserve the existing 0.98 popup preset;
- * press feedback describes a different relationship and retains 0.97. */
+ * a second set of entry values. The magnitudes are named in tokens/components.css
+ * (--qy-scale-popup 0.98, --qy-scale-press 0.97, --qy-travel-*); all are presets.
+ * Press feedback describes a different relationship from popup entry, so it keeps
+ * its own token. */
 :is(
   [data-slot="select-popup"],
   [data-slot="menu-popup"],
@@ -66,7 +68,7 @@
   [data-slot="navigation-menu-popup"]
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
-  scale: 0.98;
+  scale: var(--qy-scale-popup);
 }
 
 /* Exit is quicker than entry: dismissal should feel instant. */
@@ -133,7 +135,7 @@
   :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"]):is(
     [data-starting-style], [data-ending-style]
   ) {
-    scale: 0.98;
+    scale: var(--qy-scale-popup);
   }
 }
 
@@ -141,7 +143,7 @@
   :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"])[data-bottom-stick-on-mobile]:is(
     [data-starting-style], [data-ending-style]
   ) {
-    translate: 0 1rem;
+    translate: 0 var(--qy-travel-dialog);
   }
 }
 
@@ -196,11 +198,11 @@
 }
 [data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="left"],
 [data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="right"] {
-  translate: -1.5rem 0;
+  translate: calc(-1 * var(--qy-travel-nav)) 0;
 }
 [data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="right"],
 [data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="left"] {
-  translate: 1.5rem 0;
+  translate: var(--qy-travel-nav) 0;
 }
 
 /* Drawer consumes public swipe/snap facts. Offscreen travel equals its own
@@ -306,7 +308,7 @@
 @keyframes qy-rise-in {
   from {
     opacity: 0;
-    translate: 0 4px;
+    translate: 0 var(--qy-travel-rise);
   }
 }
 

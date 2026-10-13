@@ -27,7 +27,7 @@ const sizes = {
 };
 
 export const buttonVariants = cva(
-  "qy-pressable touch-target relative inline-flex max-w-full min-w-0 cursor-pointer items-center justify-center gap-(--qy-control-content-gap) text-center font-medium outline-none focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-64 aria-disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "qy-pressable touch-target relative inline-flex max-w-full min-w-0 cursor-pointer items-center justify-center gap-(--qy-control-content-gap) text-center font-medium outline-none focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-disabled aria-disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       // 三档按「边界由谁承担」区分，焦点都加强该档已有的属性，不在控件外面画一圈：
@@ -48,19 +48,19 @@ export const buttonVariants = cva(
     },
     compoundVariants: [
       // 基础层 §5、§7、§10：填充表达强调，危险表达后果；无理由不补边框。
-      { variant: "solid", tone: "neutral", class: "[--qy-focus-ring-color:var(--qy-focus-ring-on-solid)] bg-primary text-primary-foreground not-aria-disabled:hover:bg-primary-hover not-aria-disabled:active:bg-primary-hover" },
-      { variant: "solid", tone: "danger", class: "[--qy-focus-ring-color:var(--qy-danger-on-fill)] bg-destructive-fill text-destructive-on-fill not-aria-disabled:hover:bg-destructive-fill-hover not-aria-disabled:active:bg-destructive-fill-hover" },
+      { variant: "solid", tone: "neutral", class: "[--qy-focus-ring-color:var(--qy-focus-ring-on-solid)] bg-primary text-primary-foreground not-aria-disabled:hover:bg-primary-hover not-aria-disabled:active:bg-primary-active" },
+      { variant: "solid", tone: "danger", class: "[--qy-focus-ring-color:var(--qy-danger-on-fill)] bg-destructive-fill text-destructive-on-fill not-aria-disabled:hover:bg-destructive-fill-hover not-aria-disabled:active:bg-destructive-fill-active" },
       // 白底黑字，淡墨边框。底色与承载面一致，所以由线承担边界（用户规则）；线比输入框低一级，
       // 因为按钮是命令不是可编辑的字段（2026-10-09，用户授权主 agent 定夺）。危险档同一浓度。
-      { variant: "bordered", tone: "neutral", class: "border-(--qy-button-bordered-border) bg-card text-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-accent" },
-      { variant: "bordered", tone: "danger", class: "[--qy-button-bordered-border:color-mix(in_srgb,var(--color-destructive-foreground)_var(--qy-ink-dan),transparent)] [--qy-button-bordered-border-focus:var(--color-destructive-foreground)] border-(--qy-button-bordered-border) bg-card text-destructive-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft" },
-      { variant: "quiet", tone: "neutral", class: "text-foreground not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-accent" },
-      { variant: "quiet", tone: "danger", class: "text-destructive-foreground not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft" },
-      // 有边框的档扣掉 1px 边框，文字起点与无边框档对齐。
+      { variant: "bordered", tone: "neutral", class: "border-(--qy-button-bordered-border) bg-card text-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-(--qy-surface-active)" },
+      { variant: "bordered", tone: "danger", class: "[--qy-button-bordered-border:var(--qy-button-bordered-border-danger)] [--qy-button-bordered-border-focus:var(--qy-button-bordered-border-focus-danger)] border-(--qy-button-bordered-border) bg-card text-destructive-foreground focus-visible:border-(--qy-button-bordered-border-focus) not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft-active" },
+      { variant: "quiet", tone: "neutral", class: "text-foreground not-aria-disabled:hover:bg-accent not-aria-disabled:active:bg-(--qy-surface-active)" },
+      { variant: "quiet", tone: "danger", class: "text-destructive-foreground not-aria-disabled:hover:bg-danger-soft not-aria-disabled:active:bg-danger-soft-active" },
+      // 有边框的档扣掉一道线宽（--qy-line-width）的边框，文字起点与无边框档对齐。
       { shape: "label", variant: ["solid", "quiet"], size: "xs", class: "px-(--qy-control-xs-padding)" },
       { shape: "label", variant: ["solid", "quiet"], size: "sm", class: "px-(--qy-control-sm-padding)" },
-      // --qy-fill-padding 是带框留白；无框档加回 1px，使文字起点与带框档对齐（与其余各档同一规则）。
-      { shape: "label", variant: ["solid", "quiet"], size: "md", class: "px-[calc(var(--qy-fill-padding)+1px)]" },
+      // --qy-fill-padding 是带框留白；无框档加回一道线宽（--qy-line-width），使文字起点与带框档对齐（与其余各档同一规则）。
+      { shape: "label", variant: ["solid", "quiet"], size: "md", class: "px-[calc(var(--qy-fill-padding)+var(--qy-line-width))]" },
       { shape: "label", variant: ["solid", "quiet"], size: "lg", class: "px-(--qy-control-lg-padding)" },
       { shape: "label", variant: ["solid", "quiet"], size: "xl", class: "px-(--qy-control-xl-padding)" },
       { shape: "label", variant: "bordered", size: "xs", class: "px-(--qy-control-xs-padding-bordered)" },

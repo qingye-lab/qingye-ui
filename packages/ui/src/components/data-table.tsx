@@ -11,7 +11,7 @@ export type DataTableInstance<TData> = TableInstance<TData>;
 export type DataTableColumnDef<TData, TValue = unknown> = ColumnDef<TData, TValue>;
 export interface DataTableColumnMeta {
   rowHeader?: boolean;
-  /** 这一列只放一个标记（复选框、行操作）：由内容定宽（w-px），留白与文字列同一条规则。 */
+  /** 这一列只放一个标记（复选框、行操作）：由内容定宽（w-line），留白与文字列同一条规则。 */
   marker?: boolean;
   /** 数字列：表头与单元格右对齐、等宽数字——数位对齐才能比较大小（基础层 §19）。 */
   numeric?: boolean;
@@ -23,7 +23,7 @@ const cellPadding = (meta: DataTableColumnMeta | undefined) => cn(meta?.numeric 
  * 压到最小的标准写法，实际宽度仍由其中的复选框决定）。列宽比例由表头与单元格
  * 共同决定，所以两处都写。
  */
-const cellWidth = (meta: DataTableColumnMeta | undefined) => meta?.marker ? "w-px" : undefined;
+const cellWidth = (meta: DataTableColumnMeta | undefined) => meta?.marker ? "w-line" : undefined;
 export type DataTableProps<TData> = Omit<TableProps, "children"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; containerProps?: TableContainerProps };
 export function DataTable<TData>({ table, caption, emptyContent, busy = false, containerProps, className, ...props }: DataTableProps<TData>) {
   if (!table.options.getRowId) throw new Error("DataTable requires an explicit stable getRowId.");
@@ -35,7 +35,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, c
       const sort = header.column.getIsSorted(); const meta = header.column.columnDef.meta as DataTableColumnMeta | undefined;
       return <TableHead key={header.id} colSpan={header.colSpan} scope={header.subHeaders.length ? "colgroup" : "col"} aria-sort={header.column.id === primarySort && sort ? sort === "asc" ? "ascending" : "descending" : undefined} className={cn(cellPadding(meta), cellWidth(meta), meta?.numeric && "[&_[data-slot=button-content]]:flex-row-reverse")}>{header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}</TableHead>;
     })}</TableRow>)}</TableHeader>
-    <TableBody>{rows.length === 0 ? <TableRow><TableCell colSpan={columns.length}>{emptyContent}</TableCell></TableRow> : rows.map(row => <TableRow key={row.id} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} className={row.getIsSelected() ? "bg-accent" : undefined}>{row.getVisibleCells().map(cell => { const meta = cell.column.columnDef.meta as DataTableColumnMeta | undefined; return meta?.rowHeader ? <TableHead key={cell.id} scope="row" className={cn(cellPadding(meta), cellWidth(meta))}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableHead> : <TableCell key={cell.id} className={cn(cellPadding(meta), cellWidth(meta))}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>; })}</TableRow>)}</TableBody>
+    <TableBody>{rows.length === 0 ? <TableRow><TableCell colSpan={columns.length}>{emptyContent}</TableCell></TableRow> : rows.map(row => <TableRow key={row.id} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} className={row.getIsSelected() ? "bg-surface-selected" : undefined}>{row.getVisibleCells().map(cell => { const meta = cell.column.columnDef.meta as DataTableColumnMeta | undefined; return meta?.rowHeader ? <TableHead key={cell.id} scope="row" className={cn(cellPadding(meta), cellWidth(meta))}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableHead> : <TableCell key={cell.id} className={cn(cellPadding(meta), cellWidth(meta))}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>; })}</TableRow>)}</TableBody>
   </Table></TableContainer>;
 }
 /** 排序按钮放在表头里：由表头单元格给它加与留白等量的负外边距，表头文字与该列内容落在同一条边上（基础层 §19）。 */

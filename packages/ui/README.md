@@ -2,7 +2,7 @@
 
 器用为本，关系为法，合宜为度。
 
-`@qingye_lab/ui` provides **91 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
+`@qingye_lab/ui` provides **93 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
 
 Version **3.0.0** changes the locale, DateRangePicker and FileUpload contracts from 2.0.0; 2.0.0 changed Button, Input, Toast, chart, Tooltip and Tabs from 1.0.0, which itself broke from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
 

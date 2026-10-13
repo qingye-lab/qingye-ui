@@ -6,6 +6,6 @@ export type KbdProps = useRender.ComponentProps<"kbd">;
 /** 实际键位的原生展示，不注册快捷键。 */
 export function Kbd({ className, render, ref, ...props }: KbdProps) {
   return useRender({ defaultTagName: "kbd", render, ref, props: mergeProps({ "data-slot": "kbd" }, props, {
-    className: cn("inline-flex h-[calc(4*var(--qy-fen))] min-w-[calc(4*var(--qy-fen))] max-w-full items-center justify-center rounded-marker border border-border px-(--qy-kbd-padding-inline) align-top my-[calc((var(--qy-cai)-4*var(--qy-fen))/2)] text-[round(0.875em,1px)] leading-none font-mono text-foreground wrap-anywhere", className),
+    className: cn("inline-flex h-(--qy-glyph-box) min-w-(--qy-glyph-box) max-w-full items-center justify-center rounded-marker border border-border px-(--qy-kbd-padding-inline) align-top my-(--qy-glyph-box-inset) text-(length:--qy-inline-code-size) leading-none font-mono text-foreground wrap-anywhere", className),
   }) });
 }

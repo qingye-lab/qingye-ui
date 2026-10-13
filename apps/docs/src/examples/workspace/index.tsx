@@ -1,7 +1,9 @@
 import { lazy, Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { NotFoundContent } from "@/pages/not-found";
-import { WorkspaceShell } from "./shell";
+import { Link as RouterLink } from "@/components/locale-link";
+import { buttonVariants } from "@qingye_lab/ui/components/button";
+import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { BASE, WorkspaceShell } from "./shell";
 
 const Overview = lazy(() => import("./overview"));
 const Collections = lazy(() => import("./collections"));
@@ -9,9 +11,11 @@ const CollectionDetail = lazy(() => import("./collection-detail"));
 const Settings = lazy(() => import("./settings"));
 const Help = lazy(() => import("./help"));
 
-/** 工作区内未知的页面：外壳保持，正文换成站点统一的未找到状态。 */
+/** 工作区内未知的页面：外壳保持，正文只给出回到概览的去处——不借用站点自己的未找到页（那里的去处是文档）。 */
 function Missing() {
-  return <div className="mx-auto w-full max-w-[48rem] px-(--qy-page-gutter) py-(--qy-section-gap)"><NotFoundContent /></div>;
+  return <div className="mx-auto grid w-full max-w-[80rem] px-(--qy-page-gutter) py-(--qy-section-gap)">
+    <Empty state="not-applicable"><EmptyTitle level={1}>没有这个页面</EmptyTitle><EmptyActions><RouterLink to={BASE} className={buttonVariants({ variant: "bordered" })}>回到概览</RouterLink></EmptyActions></Empty>
+  </div>;
 }
 
 /** 示例应用：一个完整的工作区，只用 @qingye_lab/ui 组合。 */

@@ -77,6 +77,21 @@
  * property, so theme switches apply without recompiling.
  */
 @theme inline {
+  /* 系统角色（WP1，2026-10-12）。每一项的取值、来源与修改入口写在 tokens/components.css 与 tokens/semantic.css，这里只负责让 Tailwind 工具类读到它们。
+   *
+   * --spacing：Tailwind 的间距单位绑到分。两者都是 rem（0.25rem 与 calc(1.25rem / 5)），在任何根字号下逐值相同，
+   *   所以 p-4、gap-2、w-16、size-3 等数字工具类现在就是「n 个分」，改 --qy-fen（即改材）它们一起变。
+   * --default-border-width：裸写的 border、border-x/y/s/e/t/b/l/r 与 divide-x / divide-y 读线宽。
+   *   不跟随的写法：border-0、border-2、border-b-0（数字就是数字）、w-px / -mb-px / pb-px（Tailwind 的 px 是字面 1px）、
+   *   inset-ring（裸写固定 1px，主题没有入口）、text-decoration-thickness、calc() 里的 1px / 2px——这些要组件显式写
+   *   w-line / -mb-line / inset-ring-(length:--qy-line-width) / decoration-(length:--qy-line-width) / var(--qy-line-width)。
+   * --default-ring-width 不绑：本库里 ring 指焦点，焦点有自己的宽度 token（--qy-focus-*-width），裸 ring 不是线。 */
+  --spacing: var(--qy-fen);
+  --spacing-line: var(--qy-line-width);
+  --spacing-fen-half: var(--qy-fen-half);
+  --default-border-width: var(--qy-line-width);
+  --opacity-disabled: var(--qy-opacity-disabled);
+
   --font-sans: var(--qy-font-sans);
   --font-mono: var(--qy-font-mono);
   --font-weight-normal: var(--qy-weight-regular);
@@ -93,6 +108,8 @@
   --color-primary-foreground: var(--qy-primary-foreground);
   --color-primary-hover: var(--qy-primary-hover);
   --color-destructive-fill-hover: var(--qy-danger-fill-hover);
+  --color-primary-active: var(--qy-primary-active);
+  --color-destructive-fill-active: var(--qy-danger-fill-active);
   --color-muted: var(--qy-surface-inset);
   --color-muted-foreground: var(--qy-foreground-muted);
   --color-accent: var(--qy-accent);
@@ -134,6 +151,9 @@
   --color-surface-raised: var(--qy-surface-raised);
   --color-surface-subtle: var(--qy-surface-subtle);
   --color-surface-inset: var(--qy-surface-inset);
+  --color-surface-field: var(--qy-surface-field);
+  --color-ink-decor: var(--qy-ink-decor);
+  --color-surface-selected: var(--qy-surface-selected);
   --color-track-selected: var(--qy-track-selected);
   --color-track-selected-foreground: var(--qy-track-selected-foreground);
   --color-foreground-strong: var(--qy-foreground-strong);
@@ -141,6 +161,7 @@
   --color-border-strong: var(--qy-border-strong);
   --color-neutral-soft: var(--qy-neutral-soft);
   --color-danger-soft: var(--qy-danger-soft);
+  --color-danger-soft-active: var(--qy-danger-soft-active);
   --color-warning-soft: var(--qy-warning-soft);
   --color-success-soft: var(--qy-success-soft);
   --color-info-soft: var(--qy-info-soft);

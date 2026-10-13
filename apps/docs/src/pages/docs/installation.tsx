@@ -1,7 +1,7 @@
 import pkg from "@qingye_lab/ui/package.json";
 import { CodeBlock } from "@/components/code-block";
 import { InstallTabs } from "@/components/install-tabs";
-import { A, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
+import { A, Article, Code, Facts, H2, H3, P, PageHeader } from "@/components/prose";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { installTarget, SITE, tarballTarget } from "@/lib/site";
 
@@ -27,7 +27,7 @@ export function Root() {
 
 export default function InstallationPage() {
   const en = useDocsLocale() === "en";
-  return <article><PageHeader title={en ? "Installation" : "安装"} description={en ? `Requires React and React DOM ${peers.react}. Tailwind CSS 4 is optional.` : `需要 React 与 React DOM ${peers.react}；Tailwind CSS 4 可选。`} />
+  return <Article><PageHeader title={en ? "Installation" : "安装"} description={en ? `Requires React and React DOM ${peers.react}. Tailwind CSS 4 is optional.` : `需要 React 与 React DOM ${peers.react}；Tailwind CSS 4 可选。`} />
     <H2 id="install">{en ? "Install the package" : "安装包"}</H2>
     <H3 id="npm">npm</H3>
     <InstallTabs pkg={installTarget} />
@@ -53,5 +53,5 @@ export default function InstallationPage() {
     <P>{en ? <>For English built-in messages, add UILocaleProvider; see <A href="/docs/i18n">Internationalization</A>.</> : <>需要英文内置文案时，再加 UILocaleProvider，见<A href="/docs/i18n">国际化</A>。</>}</P>
     <H2 id="per-component">{en ? "Import per component" : "按组件导入"}</H2><CodeBlock code={`import { Button } from "${SITE.packageName}/components/button";\nimport { Field, FieldLabel } from "${SITE.packageName}/components/field";\nimport { Input } from "${SITE.packageName}/components/input";`} /><P>{en ? <>Before wrapping a component, check its <A href="/docs/components">API</A> and the installed type declarations: a similarly named component from another library may take different props.</> : <>封装组件前，先对照<A href="/docs/components">组件 API</A>与已安装版本的类型声明：其他库里同名的组件未必有相同的属性。</>}</P>
     <H2 id="project-rules">{en ? "Project guidance" : "项目指南"}</H2><P>{en ? <>Merge the snippets from <A href="/docs/ai#project-rules">Using AI</A> into your project's AGENTS.md and design.md, keeping its existing rules.</> : <>把<A href="/docs/ai#project-rules">AI 使用</A>页的片段合并进项目的 AGENTS.md 与 design.md，保留原有规则。</>}</P>
-  </article>;
+  </Article>;
 }

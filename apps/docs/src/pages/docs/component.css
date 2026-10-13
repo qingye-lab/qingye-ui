@@ -1,100 +1,10 @@
 /*
- * 组件总览与组件页。几何写成材（--qy-cai）与分（--qy-fen）及库内关系角色。
- * - 承载面：示例与代码各是一块清染面（--qy-surface-inset，透明叠合，比所在的纸深一级），
- *   只用这一种机制划出范围；面内再分段时只用一道清墨线（骨法用笔，NG11）。
- * - 疏密：条目内 = 字段间隔（field-gap），条目之间 = 组间间隔（panel-gap），类与类之间沿用文档 H2 的章距。
- * - 示例台最小 10 材：总览的台与组件页的示例面同一下限，同一个示例在两处以同样的尺寸出现（1 : 1）。
+ * 组件页。几何写成材（--qy-cai）与分（--qy-fen）及库内关系角色。
+ * - 一个示例是一个被框住的对象：一条容器线、面板角，台、工具行与代码都在这一个框里；
+ *   框内再分段只用一道清墨线（骨法用笔，NG11），代码区没有自己的框与圆角。
+ * - 疏密：示例标题到框 = 字段间隔（8），示例之间 = 章距（40），台内多行 = 组间距（20）。
+ * - 示例台最小 10 材（200px），上下 2 材、左右 1 材留白；工具行高 2 材。
  */
-
-/* ─── 总览 ─────────────────────────────────────────── */
-
-/*
- * 两列：正文栏里每格约 18 材宽，放得下一个 md 字段（16 材）加两侧面板内缘。
- * 每个条目占三行（台、名称、用途），用 subgrid 与同行的另一条目共享行高：
- * 台面等高，名称落在同一基线上（经营位置：同类对象对齐）。
- */
-.components-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--qy-panel-gap);
-  row-gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.components-entry {
-  position: relative;
-  display: grid;
-  grid-row: span 3;
-  grid-template-rows: subgrid;
-  row-gap: 0;
-  min-inline-size: 0;
-  margin-block-end: var(--qy-panel-gap);
-}
-/*
- * 示例台：与组件页示例面同一排布（居中、可换行、四分间隔），示例按自身尺寸出现。
- * 高度随示例，下限 10 材；上限 18 材（预设：约半屏，保证一屏能比较两行条目）。
- * 超出上限的示例贴顶显示，裁去下方（safe 对齐），不缩放。
- *
- * 台面是一张纸（纸本色 + 清墨容器线，与 Card 同一画法）。此前用内嵌面（一层半透明墨叠在
- * 已经带墨的页面上），页面、台面、控件三级只差 1.09–1.19:1，浅色下读成一块凹进去的脏灰；
- * 且控件的重墨线（50%）没有可对照的容器线，层级全压在这一条线上。纸 + 清墨线让
- * 容器线（8%）与控件线（50%）各占一级。悬停只加一级清染，不改线。
- */
-.components-specimen {
-  isolation: isolate;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  align-content: safe center;
-  justify-content: safe center;
-  gap: var(--qy-space-4);
-  min-block-size: calc(10 * var(--qy-cai));
-  max-block-size: calc(18 * var(--qy-cai));
-  margin-block-end: var(--qy-field-gap);
-  padding: var(--qy-panel-padding);
-  overflow: hidden;
-  border: 1px solid var(--qy-border);
-  border-radius: var(--qy-radius-panel);
-  background: var(--qy-surface);
-  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
-}
-.components-entry:hover .components-specimen { background: var(--qy-surface-inset); }
-.components-entry-link {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: var(--qy-field-gap);
-  min-inline-size: 0;
-  font-size: var(--qy-text-body-strong-size);
-  line-height: var(--qy-text-body-strong-leading);
-  font-weight: var(--qy-text-body-strong-weight);
-  color: var(--qy-foreground);
-  overflow-wrap: anywhere;
-  outline: none;
-}
-.components-entry-link > span {
-  font-size: var(--qy-text-support-size);
-  line-height: var(--qy-text-support-leading);
-  font-weight: var(--qy-weight-regular);
-  color: var(--qy-foreground-muted);
-}
-/* 整格是一个去处：链接的伪元素铺满条目，示例台在其下（台面 inert，不接收指针）。 */
-.components-entry-link::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: var(--qy-radius-panel);
-}
-.components-entry-link:focus-visible::after { box-shadow: 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring); }
-.components-entry-use {
-  margin: 0;
-  font-size: var(--qy-text-support-size);
-  line-height: var(--qy-text-support-leading);
-  color: var(--qy-foreground-muted);
-  overflow-wrap: anywhere;
-}
 
 /* ─── 组件页：页首元信息 ───────────────────────────── */
 
@@ -113,7 +23,8 @@
   align-items: baseline;
   column-gap: var(--qy-cai);
   row-gap: var(--qy-fen);
-  margin: 0;
+  /* 页首是 8 的字段间隔；事实行与导语之间是块间距 20，补上差额。 */
+  margin: calc(var(--qy-field-group-gap) - var(--qy-field-gap)) 0 0;
   font-size: var(--qy-text-support-size);
   line-height: var(--qy-text-support-leading);
 }
@@ -121,23 +32,24 @@
 .component-facts dt { color: var(--qy-foreground-muted); }
 .component-facts dd { margin: 0; color: var(--qy-foreground); }
 
-/* ─── 组件页：示例面 ──────────────────────────────── */
+/* ─── 组件页：示例框 ──────────────────────────────── */
 
 .component-demo + .component-demo { margin-block-start: var(--qy-section-gap); }
 .component-demo-description {
   max-inline-size: var(--docs-measure);
-  margin: 0 0 var(--qy-space-3);
+  margin: 0 0 var(--qy-field-gap);
   font-size: var(--qy-text-body-size);
   line-height: var(--qy-text-body-leading);
   color: var(--qy-foreground-muted);
   text-wrap: pretty;
 }
-/* 预览、代码开关与代码同在一块清染面上；开关一行以一道清墨线与预览分开。 */
-.component-demo-surface {
+/* 唯一的边界：一条清墨容器线加面板角；台是纸，不另铺底。 */
+.component-demo-frame {
+  gap: 0;
   min-inline-size: 0;
   overflow: hidden;
+  border: 1px solid var(--qy-border);
   border-radius: var(--qy-radius-panel);
-  background: var(--qy-surface-inset);
 }
 .component-demo-preview {
   display: flex;
@@ -145,21 +57,24 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  gap: var(--qy-space-4);
+  gap: var(--qy-field-group-gap);
   min-inline-size: 0;
   min-block-size: calc(10 * var(--qy-cai));
-  padding: calc(2 * var(--qy-cai));
+  padding-block: calc(2 * var(--qy-cai));
+  padding-inline: var(--qy-cai);
 }
 .component-demo-preview[data-flush] { display: block; min-block-size: 0; padding: 0; }
-.component-demo-source { gap: 0; border-block-start: 1px solid var(--qy-border); }
+/* 工具行高 2 材，控件在行内居中：上、下、两端的空隙相等，都是（2 材 − 一个 sm 控件）的一半。 */
 .component-demo-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--qy-field-gap);
-  padding-block: var(--qy-fen);
-  padding-inline: var(--qy-space-4) var(--qy-fen);
+  min-block-size: calc(2 * var(--qy-cai));
+  padding-inline: calc((2 * var(--qy-cai) - var(--qy-control-sm)) / 2);
+  border-block-start: 1px solid var(--qy-border);
 }
+/* 代码在工具行之下、框之内：与工具行之间一道清墨线，上限 24 材，超出时在代码区内滚动。 */
 .component-demo-code { max-block-size: calc(24 * var(--qy-cai)); border-block-start: 1px solid var(--qy-border); }
 
 /* ─── 组件页：对照两栏（何时使用、状态归属） ─────────── */
@@ -186,10 +101,4 @@
   color: var(--qy-foreground);
   overflow-wrap: break-word;
   text-wrap: pretty;
-}
-
-/* 标本在滚动到近处才挂载：与全站反馈同拍淡入，而不是一帧弹出。 */
-@keyframes components-specimen-settle { from { opacity: 0; } }
-@media (prefers-reduced-motion: no-preference) {
-  .components-specimen > * { animation: components-specimen-settle var(--qy-duration-fast) var(--qy-ease-out) backwards; }
 }

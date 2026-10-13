@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: e2e61cada80a1236c2e598d96696bef50c76e9e2714b2b63a91aaa4b3cce3faf
+Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656
 
 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
 

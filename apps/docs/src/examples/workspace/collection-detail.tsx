@@ -12,6 +12,7 @@ import { Field, FieldContent, FieldDescription, FieldLabel } from "@qingye_lab/u
 import { Input } from "@qingye_lab/ui/components/input";
 import { Inline } from "@qingye_lab/ui/components/layout";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
+import { PageHeader, PageHeaderActions, PageHeaderContent, PageHeaderTitle } from "@qingye_lab/ui/components/page-header";
 import { StatusDot } from "@qingye_lab/ui/components/status-dot";
 import { Switch } from "@qingye_lab/ui/components/switch";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
@@ -46,20 +47,20 @@ export default function CollectionDetail() {
   const dirty = name !== item.name || retention !== item.retention;
 
   return <div className="mx-auto grid w-full max-w-[80rem] gap-(--qy-panel-gap) px-(--qy-page-gutter) py-(--qy-section-gap)">
-    <div className="flex min-w-0 flex-wrap items-start justify-between gap-(--qy-panel-gap)">
-      <div className="grid min-w-0 gap-(--qy-field-gap)">
-        <Heading level={1} step="chapter">{item.name}</Heading>
+    <PageHeader>
+      <PageHeaderContent>
+        <PageHeaderTitle>{item.name}</PageHeaderTitle>
         <Inline gap="panel" className="text-support text-muted-foreground">
           <StatusDot status={syncDot[item.state]} label={`${item.state} · ${item.synced}`} />
           <span>{item.source}</span>
           <span className="numeric">{number.format(item.records)} 条</span>
         </Inline>
-      </div>
-      <Inline gap="actions">
+      </PageHeaderContent>
+      <PageHeaderActions>
         <Button variant="bordered">导出</Button>
         <Button onClick={() => toastManager.add({ title: `${item.name}已开始同步`, type: "loading" })}>立即同步</Button>
-      </Inline>
-    </div>
+      </PageHeaderActions>
+    </PageHeader>
 
     <Tabs defaultValue="overview">
       <TabsList>

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 0afaa4d2c5e82b58a6a1f892af37bc9b08c50cccb8081adbabb3c5abab4209fb
+Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
 
 选择独立的是/否或集合中的多个项。
 

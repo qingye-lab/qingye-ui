@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: 7dd45e6592f116b40b7a0794577d8492b47fb298b646a95397ed4f2680e51bda
+Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
 
 编辑可为空的数值，并按指定步长增减。
 

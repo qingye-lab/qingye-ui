@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
-Source SHA-256: a4840f5d596664b75f0955993cfe79a0e4b49c8de13c50f8a511baf32d7762fe
+Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
 
 Content, navigation and related actions.
 
@@ -21,10 +21,10 @@ Items contain no built-in business objects. A whole-item link cannot contain int
 - Application: Item content, actual navigation targets, and action states.
 
 ## Composition
-- Item: A div that may render a li or standalone anchor.
+- Item: A div that may render a li or standalone anchor. Render an a when the whole row leads to one destination and holds no other interactive element: rendered as a[href] or button the row gets hover and pressed feedback, and the fill bleeds one padding past each side while the text stays on the column edge; a div or li gets none.
 - ItemContent / ItemTitle / ItemDescription: div / div / p relationship slots.
 - ItemActions: Secondary actions on the row, always visible by default.
-- ItemLink: A real navigation link.
+- ItemLink: A real navigation link where the name is the entry, for rows that have their own actions in ItemActions; when the whole row is one destination use Item render={<a />} instead.
 
 ## Responsive behavior
 - Body text wraps while adjunct actions retain capacity.
@@ -85,7 +85,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Item
-A div that may render a li or standalone anchor.
+A div that may render a li or standalone anchor. Render an a when the whole row leads to one destination and holds no other interactive element: rendered as a[href] or button the row gets hover and pressed feedback, and the fill bleeds one padding past each side while the text stays on the column edge; a div or li gets none.
 - render / ref / children / native props: useRender.ComponentProps<div>. Events and ref reach the actual element; explicitly render li inside a list.
 
 ### ItemContent / ItemTitle / ItemDescription
@@ -99,7 +99,7 @@ Secondary actions on the row, always visible by default.
 - children / render / ref / native props: useRender.ComponentProps<div>. Compose public Button actions.
 
 ### ItemLink
-A real navigation link.
+A real navigation link where the name is the entry, for rows that have their own actions in ItemActions; when the whole row is one destination use Item render={<a />} instead.
 - href / render / ref / native props: useRender.ComponentProps<a>. Preserve destinations, ARIA and caller events.
 
 ## Keyboard
@@ -160,6 +160,34 @@ export default function Demo() {
         <Button variant="quiet" size="sm">归档</Button>
       </ItemActions>
     </Item>)}
+  </Stack>;
+}
+```
+
+### 整行是一个链接
+Source: apps/docs/src/content/item/demos/03-row-link.tsx
+```tsx
+import { IconChevronRight } from "@tabler/icons-react";
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "整行是一个链接", titleEn: "The whole row as one link" } satisfies DemoMeta;
+
+const queue = [
+  { id: "room-3", name: "蚕室 3", note: "待核对 2 条读数" },
+  { id: "room-5", name: "蚕室 5", note: "湿度偏高 3 次" },
+  { id: "room-8", name: "蚕室 8", note: "桑叶入库单待签收" },
+];
+
+export default function Demo() {
+  return <Stack render={<ul />} className="m-0 w-full max-w-lg list-none p-0">
+    {queue.map(row => <li key={row.id}>
+      <Item render={<a href={`#${row.id}`} />}>
+        <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
+        <IconChevronRight aria-hidden="true" className="size-(--qy-control-md-icon) shrink-0 text-muted-foreground rtl:-scale-x-100" />
+      </Item>
+    </li>)}
   </Stack>;
 }
 ```

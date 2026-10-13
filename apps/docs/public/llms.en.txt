@@ -26,7 +26,7 @@
 - [Chart](/en/docs/components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](/en/docs/components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](/en/docs/components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
-- [CodeBlock](/en/docs/components/code-block.md): Literal text with actual copy results.
+- [CodeBlock](/en/docs/components/code-block.md): Literal text with an optional title bar and actual copy results.
 - [Collapsible](/en/docs/components/collapsible.md): Reveal additional content for the same object.
 - [Combobox](/en/docs/components/combobox.md): Filter candidates and confirm one value or a set, with query text separate from selection.
 - [ConfirmAction](/en/docs/components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
@@ -70,7 +70,7 @@
 - [Popover](/en/docs/components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
 - [Progress](/en/docs/components/progress.md): Confirmed task completion or an explicit indeterminate state.
 - [Proportion](/en/docs/components/proportion.md): Which parts make up a whole and how much each takes.
-- [Prose](/en/docs/components/prose.md): Typesets already-rendered Markdown or rich text as an independent reading paper; headings, lists, quotes, code and tables read existing text tiers and ink roles.
+- [Prose](/en/docs/components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.
 - [RadioGroup](/en/docs/components/radio-group.md): Choose one value from a small set of visible options.
 - [ScatterChart](/en/docs/components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](/en/docs/components/scroll-area.md): Native scrolling within a bounded viewport.
@@ -79,6 +79,7 @@
 - [SegmentedControl](/en/docs/components/segmented-control.md): Enter one value from a small set of visible segments.
 - [Select](/en/docs/components/select.md): Choose one value from a collapsible set of options.
 - [Separator](/en/docs/components/separator.md): Express a boundary between content groups as a semantic separator or decorative line.
+- [SeverityMark](/en/docs/components/severity-mark.md): An ordered level shown as a number of filled cells, named by the application.
 - [Sidebar](/en/docs/components/sidebar.md): Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 - [Skeleton](/en/docs/components/skeleton.md): Hold the place and row count content will take until it arrives.
 - [Slider](/en/docs/components/slider.md): Enter a number or an ordered range within explicit bounds.
@@ -102,3 +103,4 @@
 - [Tree](/en/docs/components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [Typography](/en/docs/components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 - [Virtual list](/en/docs/components/virtual-list.md): An accessible window over a fixed-height collection with stable item identity.
+- [Workspace](/en/docs/components/workspace.md): An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.

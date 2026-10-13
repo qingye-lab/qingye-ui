@@ -91,17 +91,14 @@ The installed AlertDialog primitive namespace.
 Source: apps/docs/src/content/confirm-action/demos/01-snapshot.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye_lab/ui/components/button";
-import { Inline } from "@qingye_lab/ui/components/layout";
 import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
 export const meta = { title: "当前快照", titleEn: "Current snapshot" };
+const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
 export default function Demo() {
-  const [version, setVersion] = useState(1);
   const [requested, setRequested] = useState<ConfirmActionSnapshot>();
-  const snapshot = { objectId: "A", objectLabel: "A", version, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
-  return <Inline><ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
-    <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><Button variant="quiet" onClick={() => setVersion(value => value + 1)}>版本 +1</Button>{requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}</div>
-  </ConfirmAction></Inline>;
+  return <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
+    {requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}
+  </ConfirmAction>;
 }
 ```
 
@@ -117,5 +114,23 @@ const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B
 // 请求发出后两枚按钮都表示忙碌并挡住再次请求；控件不以超时或动画宣布结果。
 export default function Demo() {
   return <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" loading onConfirm={() => {}} />;
+}
+```
+
+### 版本变化后重新核对
+Source: apps/docs/src/content/confirm-action/demos/03-version.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
+export const meta = { title: "版本变化后重新核对", titleEn: "Re-review after a version change" };
+export default function Demo() {
+  const [version, setVersion] = useState(1);
+  const [requested, setRequested] = useState<ConfirmActionSnapshot>();
+  const snapshot = { objectId: "A", objectLabel: "A", version, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
+  return <Inline><ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
+    <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><Button variant="quiet" onClick={() => setVersion(value => value + 1)}>版本 +1</Button>{requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}</div>
+  </ConfirmAction></Inline>;
 }
 ```

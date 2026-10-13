@@ -14,7 +14,7 @@ import { Dialog, DialogPopup, DialogTitle } from "@qingye_lab/ui/components/dial
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
 import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import { ACTIVITY, COLLECTIONS, findCollection } from "./data";
 
@@ -43,6 +43,10 @@ function useCrumbs() {
   crumbs[crumbs.length - 1] = { label: crumbs[crumbs.length - 1]!.label };
   return { crumbs, section: first, sub: second };
 }
+
+/* 内容区是外壳里唯一的滚动容器。要跟随滚动的页面（帮助文章的目录）从这里取它，不去查 DOM。 */
+const Scroller = React.createContext<React.RefObject<HTMLElement | null>>({ current: null });
+export const useWorkspaceScroller = () => React.useContext(Scroller);
 
 /* 页面级的操作放进顶栏：正文里不再立一个重复面包屑的标题。页面用 <PageActions> 把操作送到这里。 */
 const ActionsSlot = React.createContext<HTMLElement | null>(null);
@@ -73,8 +77,8 @@ function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (op
 export function WorkspaceShell() {
   const { crumbs, section, sub } = useCrumbs();
   const [actions, setActions] = React.useState<HTMLElement | null>(null);
+  const scroller = React.useRef<HTMLElement | null>(null);
   const [searching, setSearching] = React.useState(false);
-  const [collapsed, setCollapsed] = React.useState(false);
   React.useEffect(() => {
     const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setSearching(true); } };
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
@@ -83,13 +87,13 @@ export function WorkspaceShell() {
   const link = (path: string) => <Link to={at(path)} />;
 
   return <div className="flex h-full min-h-0 bg-background text-foreground">
-    <Sidebar aria-label="工作区" collapsed={collapsed} onCollapsedChange={setCollapsed} className="h-full w-[calc(12*var(--qy-cai))] shrink-0 border-e border-border p-(--qy-overlay-inset)">
+    <Sidebar aria-label="工作区" className="h-full w-[calc(12*var(--qy-cai))] shrink-0 border-e border-border p-(--qy-overlay-inset)">
       {/* 顶：这是谁的工作区。印与名一行，与收起按钮同一条中线；收起时只留印，收起按钮落到印下。 */}
-      <div className={collapsed ? "grid justify-items-center gap-(--qy-field-gap)" : "flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-field-gap) ps-(--qy-control-sm-padding)"}>
+      <SidebarHeader>
         <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
-        {!collapsed && <span className="min-w-0 flex-1 truncate text-body-strong">青野工作区</span>}
+        <SidebarTitle>青野工作区</SidebarTitle>
         <SidebarToggle />
-      </div>
+      </SidebarHeader>
       <SidebarContent className="mt-(--qy-field-group-gap) flex-1">
         <SidebarGroup>
           <SidebarLink render={link("")} active={section === ""} icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
@@ -107,18 +111,17 @@ export function WorkspaceShell() {
         </SidebarGroup>
       </SidebarContent>
       {/* 底：我是谁。点开是本人的命令。 */}
-      <Menu>
-        <MenuTrigger render={<button type="button" aria-label="陈致远" className={`flex min-w-0 items-center gap-(--qy-field-gap) rounded-item p-(--qy-overlay-inset) text-start outline-none hover:bg-accent focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring ${collapsed ? "justify-center" : ""}`} />}>
-          <Avatar size="sm" label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar>
-          {!collapsed && <span className="min-w-0 flex-1 truncate text-body">陈致远</span>}
-        </MenuTrigger>
-        <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
-          <MenuItem render={link("/settings/members")}>成员与角色</MenuItem>
-          <MenuItem render={link("/help")}>帮助</MenuItem>
-          <MenuSeparator />
-          <MenuItem>退出登录</MenuItem>
-        </MenuPopup></MenuPositioner></MenuPortal>
-      </Menu>
+      <SidebarFooter>
+        <Menu>
+          <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+          <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
+            <MenuItem render={link("/settings/members")}>成员与角色</MenuItem>
+            <MenuItem render={link("/help")}>帮助</MenuItem>
+            <MenuSeparator />
+            <MenuItem>退出登录</MenuItem>
+          </MenuPopup></MenuPositioner></MenuPortal>
+        </Menu>
+      </SidebarFooter>
     </Sidebar>
 
     <div className="flex min-w-0 flex-1 flex-col">
@@ -148,8 +151,8 @@ export function WorkspaceShell() {
           </PopoverPopup>
         </Popover>
       </header>
-      <main id="main" tabIndex={-1} className="min-h-0 flex-1 overflow-y-auto outline-none">
-        <ActionsSlot.Provider value={actions}><Outlet /></ActionsSlot.Provider>
+      <main ref={scroller} id="main" tabIndex={-1} className="min-h-0 flex-1 overflow-y-auto outline-none">
+        <Scroller.Provider value={scroller}><ActionsSlot.Provider value={actions}><Outlet /></ActionsSlot.Provider></Scroller.Provider>
       </main>
     </div>
     <SearchDialog open={searching} onOpenChange={setSearching} />

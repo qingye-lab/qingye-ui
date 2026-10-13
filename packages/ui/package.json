@@ -10,6 +10,7 @@
     "./motion.css",
     "./utilities.css",
     "./tokens/*.css",
+    "./prose.css",
     "./dist/ui.css"
   ],
   "main": "./dist/index.js",
@@ -38,6 +39,7 @@
     "./theme.css": "./theme.css",
     "./styles.css": "./styles.css",
     "./motion.css": "./motion.css",
+    "./prose.css": "./prose.css",
     "./ui.css": "./dist/ui.css",
     "./catalog.json": "./catalog.json",
     "./package.json": "./package.json",
@@ -65,6 +67,7 @@
     "theme.css",
     "styles.css",
     "motion.css",
+    "prose.css",
     "utilities.css",
     "catalog.json",
     "README.md",

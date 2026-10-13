@@ -9,7 +9,7 @@ import { overlayGroupLabelClassName } from "../overlay-group";
 import { candidateItemClassName, overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
 import { fillStateByData } from "../fill-state";
-import { useFloatingLayer } from "../floating-layer";
+import { popupOffset, useFloatingLayer } from "../floating-layer";
 
 // Keep Node's ambient types out of the browser library; process may be absent.
 declare const process: { env: { NODE_ENV?: string } };
@@ -82,10 +82,10 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
       // 基础层 §2、§6（2026-10-05 打磨）：Select 是**选值**控件，默认宽度跟着值走，
       // 不默认拉满容器——一个「已选择：中」的触发器横跨 800px 时，文字与箭头之间会
       // 空出一大片，读不出「这里装的是一个值」。宽度由 w-fit 交给内容决定，
-      // 下限只保证占位文字与箭头放得下（留白×2 + 箭头 + 字段间隔 + 4em）。
+      // 下限只保证占位文字与箭头放得下（留白×2 + 箭头 + 字段间隔 + --qy-field-min-text）。
       // 要拉满时由调用方给 className（如 `w-full`），这属于版式决定，不是控件默认。
-      "inline-flex w-fit max-w-full items-center justify-between gap-(--qy-field-gap) min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-(--qy-fill-radius) border border-input bg-card px-(--qy-select-padding) text-foreground outline-none dark:bg-surface-inset transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
-      "min-w-[calc(var(--qy-select-padding)*2+var(--qy-select-icon)+var(--qy-field-gap)+4em)]",
+      "inline-flex w-fit max-w-full items-center justify-between gap-(--qy-field-gap) min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-(--qy-fill-radius) border border-input bg-surface-field px-(--qy-select-padding) text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
+      "min-w-[calc(var(--qy-select-padding)*2+var(--qy-select-icon)+var(--qy-field-gap)+var(--qy-field-min-text))]",
       textProfile,
       // 基础层 §5、§9（2026-10-05 打磨）：只读保留可读的底，禁用才用不活跃承载面。
       fillStateByData,
@@ -113,7 +113,7 @@ export function SelectValue({ placeholder, className, style, render, children, .
 }
 
 /** 入退交给 motion.css；候选继承实际所属工作面的层级。 */
-export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = 4, alignOffset, alignItemWithTrigger = false, positionerProps, className, children, ...props }: SelectPopupProps) {
+export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = popupOffset, alignOffset, alignItemWithTrigger = false, positionerProps, className, children, ...props }: SelectPopupProps) {
   const layer = useFloatingLayer("popup");
   return <SelectPrimitive.Portal container={container} data-slot="select-portal">
     <SelectPrimitive.Positioner

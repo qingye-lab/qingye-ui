@@ -75,7 +75,7 @@ export function TableCaption({ render, className, ...props }: TableCaptionProps)
 }
 export type TableHeaderProps = useRender.ComponentProps<"thead">;
 export function TableHeader({ render, className, ...props }: TableHeaderProps) {
-  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", className: cn("[&>tr]:h-[calc(var(--qy-cai)+2*var(--qy-field-gap))] [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
+  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", className: cn("[&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
 }
 export type TableBodyProps = useRender.ComponentProps<"tbody">;
 export function TableBody({ render, className, ...props }: TableBodyProps) {
@@ -83,7 +83,7 @@ export function TableBody({ render, className, ...props }: TableBodyProps) {
 }
 export type TableFooterProps = useRender.ComponentProps<"tfoot">;
 export function TableFooter({ render, className, ...props }: TableFooterProps) {
-  return useRender({ defaultTagName: "tfoot", render, props: mergeProps({ "data-slot": "table-footer", className: cn("font-medium [&>tr]:h-[calc(var(--qy-cai)+2*var(--qy-field-gap))] [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
+  return useRender({ defaultTagName: "tfoot", render, props: mergeProps({ "data-slot": "table-footer", className: cn("font-medium [&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
 }
 export type TableRowProps = useRender.ComponentProps<"tr">;
 export function TableRow({ render, className, ...props }: TableRowProps) {
@@ -96,9 +96,9 @@ export type TableHeadProps = useRender.ComponentProps<"th">;
  * 一列一条边（§19）；悬停底向外伸出，不把列名推进去。
  */
 export function TableHead({ render, className, scope = "col", ...props }: TableHeadProps) {
-  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)", className) }, props) });
+  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)", className) }, props) });
 }
 export type TableCellProps = useRender.ComponentProps<"td">;
 export function TableCell({ render, className, ...props }: TableCellProps) {
-  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-1px)] align-middle [&>[data-slot]]:align-top", className) }, props) });
+  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle [&>[data-slot]]:align-top", className) }, props) });
 }

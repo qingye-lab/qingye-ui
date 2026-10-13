@@ -132,7 +132,6 @@ export function MoSpecimen({ en }: Locale) {
       <div className="spec-inks">
         {INKS.map(([id, zh, english]) => <figure key={id}><span style={swatch(`var(--qy-ink-${id})`)} /><figcaption>{en ? english : zh}</figcaption></figure>)}
         <figure><span style={swatch("var(--qy-wash-qing)")} /><figcaption>{t(en, "清染", "Light wash")}</figcaption></figure>
-        <figure><span style={swatch("var(--qy-wash-dan)")} /><figcaption>{t(en, "淡染", "Pale wash")}</figcaption></figure>
       </div>
       <Inline gap="section">
         <Badge tone="danger">{t(en, "危险", "Danger")}</Badge>

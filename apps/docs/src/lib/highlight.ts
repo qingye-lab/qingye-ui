@@ -63,7 +63,7 @@ export function cleanDemoSource(source: string): string {
   return code.replace(/\n{3,}/g, "\n\n").trim() + "\n";
 }
 
-/** `import { A, B } from "@qingye_lab/ui";`, wrapped when it gets long. */
+/** `import { A, B } from "…";` on one line while it is short, one name per line once it is not. */
 export function importSnippet(names: readonly string[], from = "@qingye_lab/ui"): string {
   const one = `import { ${names.join(", ")} } from "${from}";`;
   if (one.length <= 72 || names.length < 2) return one;

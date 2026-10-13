@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
+Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -12,8 +12,9 @@ Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 
 ## Notes
 - 应用决定展开宽度；收起宽度由库按一个填值控件高加两侧内缩给出，始终保留可见 Toggle。
-- 当前项有两个线索：面，加一段焦墨线。一级条目的线在条目起始边内侧，二级条目加深的是引导线上自己那一段；线宽与字重都不变。
-- 当前项的面随承载面：默认侧栏比纸深一级，当前项是纸色。项目把 --qy-sidebar 调到纸色或接近纸色时，把 --qy-sidebar-current 设为 var(--qy-surface-active)，当前项改为淡染。
+- 当前项只由圆角的填充面标出，不画线也不改字重（用户裁决 2026-10-12：一个范围只用一种边界机制）；二级条目左侧的引导线只表达归属，当前项不加深它。
+- 当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。
+- 末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。
 - 收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。
 
 ## Use and ownership
@@ -24,6 +25,8 @@ Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 
 ## Composition
 - Sidebar / SidebarToggle：aside 与可逆开关。
+- SidebarHeader / SidebarTitle：第一行：身份在前，SidebarToggle 在后。收起为 rail 时上下叠放并居中，名称留给辅助技术。
+- SidebarFooter：末位槽，贴列底；放本人或账户入口。
 - SidebarContent / SidebarGroup / SidebarGroupLabel：原生 nav 与导航组。
 - SidebarLink：真实页面链接。
 - SidebarSub / SidebarSubTrigger / SidebarSubContent：可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
@@ -39,10 +42,14 @@ Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
+- SidebarFooter: function; owner sidebar; PASS; props: SidebarFooterProps
+- SidebarFooterProps: type; owner sidebar; PASS
 - SidebarGroup: function; owner sidebar; PASS; props: SidebarGroupProps
 - SidebarGroupLabel: function; owner sidebar; PASS; props: SidebarGroupLabelProps
 - SidebarGroupLabelProps: type; owner sidebar; PASS
 - SidebarGroupProps: type; owner sidebar; PASS
+- SidebarHeader: function; owner sidebar; PASS; props: SidebarHeaderProps
+- SidebarHeaderProps: type; owner sidebar; PASS
 - SidebarLink: function; owner sidebar; PASS; props: SidebarLinkProps
 - SidebarLinkProps: type; owner sidebar; PASS
 - SidebarProps: type; owner sidebar; PASS
@@ -52,6 +59,8 @@ Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
 - SidebarSubProps: type; owner sidebar; PASS
 - SidebarSubTrigger: function; owner sidebar; PASS; props: SidebarSubTriggerProps
 - SidebarSubTriggerProps: type; owner sidebar; PASS
+- SidebarTitle: function; owner sidebar; PASS; props: SidebarTitleProps
+- SidebarTitleProps: type; owner sidebar; PASS
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
@@ -68,11 +77,19 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
+### SidebarFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
 ### SidebarGroup
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarHeader
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -94,6 +111,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### SidebarSubTrigger
 - `icon?`: `React.ReactNode`.
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### SidebarTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarToggle
 - `className?`: `string`.
@@ -119,6 +140,14 @@ Written descriptions; the list above is the type-resolved fact.
 ### Sidebar / SidebarToggle
 aside 与可逆开关。
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. 默认展开；details.cancel() 拒绝变化。
+- render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+### SidebarHeader / SidebarTitle
+第一行：身份在前，SidebarToggle 在后。收起为 rail 时上下叠放并居中，名称留给辅助技术。
+- render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+### SidebarFooter
+末位槽，贴列底；放本人或账户入口。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### SidebarContent / SidebarGroup / SidebarGroupLabel
@@ -179,5 +208,41 @@ export default function Demo() {
     <Sidebar className="w-full max-w-xs"><SidebarToggle /><SidebarContent aria-label="当前位置在二级"><Links current="tabs" /></SidebarContent></Sidebar>
     <Sidebar defaultCollapsed><SidebarToggle /><SidebarContent aria-label="收起时的当前位置"><Links current="sidebar" /></SidebarContent></Sidebar>
   </Inline>;
+}
+```
+
+### 标识与账户入口
+Source: apps/docs/src/content/sidebar/demos/03-identity.tsx
+```tsx
+import { IconLayoutSidebar, IconListTree } from "@tabler/icons-react";
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "标识与账户入口", titleEn: "Identity and account entry" } satisfies DemoMeta;
+export default function Demo() {
+  return <Sidebar aria-label="标识与账户" className="min-h-96 w-full max-w-xs">
+    <SidebarHeader>
+      <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
+      <SidebarTitle>青野工作区</SidebarTitle>
+      <SidebarToggle />
+    </SidebarHeader>
+    <SidebarContent aria-label="标识与账户导航" className="mt-(--qy-field-group-gap) flex-1">
+      <SidebarGroup>
+        <SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
+        <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <Menu>
+        <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+        <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
+          <MenuItem>账户</MenuItem>
+          <MenuSeparator />
+          <MenuItem>退出登录</MenuItem>
+        </MenuPopup></MenuPositioner></MenuPortal>
+      </Menu>
+    </SidebarFooter>
+  </Sidebar>;
 }
 ```

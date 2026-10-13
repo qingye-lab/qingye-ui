@@ -117,8 +117,29 @@ Written descriptions; the list above is the type-resolved fact.
 - Esc: 关闭当前层，再返回该层入口。
 
 ## Source examples
-### 方向与嵌套返回
+### 边缘工作面
 Source: apps/docs/src/content/drawer/demos/01-states.tsx
+```tsx
+import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye_lab/ui/components/drawer";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+export const meta = { title: "边缘工作面", titleEn: "Edge workspace" };
+export default function DrawerDemo() {
+  return <Drawer swipeDirection="right">
+    <DrawerTrigger>编辑名称</DrawerTrigger>
+    <DrawerPopup className="w-80 content-start">
+      <DrawerTitle>编辑名称</DrawerTitle>
+      <DrawerContent className="content-start">
+        <Field><FieldLabel>名称</FieldLabel><Input /></Field>
+        <DrawerClose />
+      </DrawerContent>
+    </DrawerPopup>
+  </Drawer>;
+}
+```
+
+### 方向与嵌套返回
+Source: apps/docs/src/content/drawer/demos/02-edges.tsx
 ```tsx
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye_lab/ui/components/drawer";
 import { Dialog, DialogClose, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";

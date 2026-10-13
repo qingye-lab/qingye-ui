@@ -1,0 +1,239 @@
+/*
+ * prose.css — Prose（src/components/prose.tsx）的排版规则。由 styles.css 引入，随预编译样式一并发布。
+ *
+ * 长文的阅读面（design.md「表达九法」；基础层 §1、§3、§6、§7、§8、§19）。
+ * 库不解析 Markdown：调用方用任意渲染器（react-markdown、MDX、服务端 HTML）产出原生元素，
+ * Prose 给这些原生元素排版，不改变、也不读取它们的结构或内容。
+ *
+ * 以官网文档正文为准（用户裁决 2026-10-12）：此前库的 Prose 与官网文档各写一套正文，字号、间距、
+ * 版心都不同。现在只有这一套，官网文档与示例都消费它。下面的取值凡标「预设」的，都是那份正文
+ * 已经裁定的值，不由别的关系推出。
+ *
+ * 范围（本文件的范围选择器）：只排版直接子块里的原生文本元素，以及这些子块之内的原生元素。
+ * 直接子块若是别的容器（div、section……），或元素带 data-slot（库组件都带；自己画的一段也可以用它
+ * 声明「这里不是正文」），规则不进入它与它的内部——文章里可以直接放代码块组件、表格组件与演示，
+ * 它们自带画法；Prose 只给直接子块留出块间距。内容因此必须是 Prose 的直接子元素：渲染器若多包
+ * 一层 div，把 Prose 用 render 换成那一层，或让渲染器不包。
+ * 范围从本篇的直接子块往下数，不看更上层的祖先：Prose 放在 Card 里照常排版，嵌在演示里的另一篇
+ * Prose 只归它自己管。已知边界：「组件内部不进入」认的是「某篇 Prose 的原生子块里的 data-slot
+ * 元素」，选择器无法限定是哪一篇；所以另一篇 Prose 若隔着组件嵌在外层 Prose 的原生文本块里
+ * （如 figure > Card > Prose），内层的行内元素（链接、强调、列表项）不排，把它放进 div 或 section 即可。
+ *
+ * 为什么是样式文件、不是 prose.tsx 里的工具类（用户裁决 2026-10-13）：每条规则都要带上面那段范围
+ * 选择器。写成工具类时它随近两百个类各重复一遍，预编译样式多出约 100 KB；写在这里只随规则重复，
+ * 而且规则落在 components 层——层序在 utilities 之下，元素自己的任何工具类都能覆盖，不靠特异性取胜。
+ * 层内的先后仍由特异性决定：范围选择器整段在 :where() 里，每条规则的轻重只是它自己的元素选择器。
+ * 取值照旧写库的工具类（@apply），与组件源码同一套词汇；Prose 根元素自己的类（纸）仍在 prose.tsx。
+ *
+ * 纸：framed 时的面、线、圆角、内缘与纸宽是根元素自己的类，写在 prose.tsx；说明也在那里。
+ *
+ * 行宽（以材为祖）：段落、列表、引用止于 --qy-prose-measure（正文字号的 40 倍，中文一行 40 字）；
+ * 代码块、表格、图与文章里的组件可以占满版心。一篇文章因此有两条右缘：读的止于行宽，看的铺到版心。
+ *
+ * 中文排版（材有美）：首行不缩进——分段已经交给段间距，缩进是用第二种机制重复同一件事。
+ * 中文段落两端对齐并用严格断行（预设）；篇首的导语不对齐，它通常只有一两行。标点与中英混排
+ * 不另加字距规则：utilities.css 已对 :lang(zh/ja/ko) 设 letter-spacing: normal。
+ *
+ * 间距（疏密有致，基础层 §3），四级，都是已有的量：
+ *   组内（标题到它统领的正文、导语到篇名、小节标题到其下、引出表格或定义列表的那句话）  --qy-field-gap
+ *   块间（段落、列表、引用、代码块、表格之间；节标题到其下；紧跟节标题的小节标题）      --qy-field-group-gap（一材）
+ *   篇首到第一节、小节之前                                                              --qy-section-gap（二材）
+ *   节之前                                                                              四材（预设：比小节高一级）
+ * 块只带下外边距，标题上下都带；Prose 是普通块流，相邻的外边距取大者而不相加，标题下方的小间距
+ * 不会被后一块的大间距吞掉。第一个子元素不留上距、最后一个不留下距：纸的内缘已经是边界。
+ *
+ * 篇首：<header> 里放篇名（h1）与导语（p），两者隔一个组内间隔，导语读浓墨。没有 header 的
+ * 单独一个 h1（多数 Markdown 的写法）同样是篇名，其下留二材。
+ *
+ * 标题层级：篇、节、小节读 --qy-text-prose-h1 / h2 / h3（现为 display、title、chapter 的别名）；
+ * h4 是正文加字重——它与小节只差 4px，按基础层 §8 的例外交给字重，不再加一档字号。
+ *
+ * 强调（墨分五色）：strong 读字重 500，与 body-strong 同级，600 留给标题；颜色不变。
+ * em 只变字体姿态。
+ *
+ * 链接（骨法用笔）：与 link.tsx 的 linkClassName 同一组 token——下划线常在，颜色不是唯一的区分
+ * （WCAG 1.4.1）；平时读重墨，悬停与焦点加深为文字本色，不加粗。两处需要同步，是一条有记录的耦合。
+ *
+ * 列表（骨法用笔、疏密有致）：符号与序号读浓墨。缩进取一材（预设）：要盖住两位数序号的宽度，
+ * 又要落在一个已命名的量上。项与项之间是组内间隔。GFM 任务列表的 ul 带 `contains-task-list`
+ * 类（remark-gfm 的约定），据此去掉该列表自己的符号；不带这个类的渲染器会看到符号与勾选框并排，
+ * 是已知、无害的外观差异。
+ *
+ * 任务列表勾选框（GFM 渲染为 disabled 的静态事实）：标记几何，边长读 --qy-marker-size，与库内
+ * Checkbox 同一个值。禁用态不降不透明度：任务是否完成是要被读到的事实（基础层 §9「只读」）。
+ *
+ * 引用（骨法用笔）：左侧一道 1px 重墨线是唯一的边界机制，文字读浓墨；内缘是块间距。
+ *
+ * 行内代码、键位（材有美，「不另写一套」）：与 typography.tsx 的 Code、kbd.tsx 同一几何。
+ * pre 内的 code 不是行内代码，单独复位。
+ *
+ * 代码块：与 code-block.tsx 的代码面同一画法——面板圆角、清墨线、代码面（--qy-code-surface），
+ * 内缘 --qy-panel-padding-sm，横向滚动不换行。要标题栏、复制或语言标签时直接放 CodeBlock 组件。
+ *
+ * 表格（「与库里 Table 同一画法」）：渲染器只给出裸 <table>，拿不到 TableContainer 那层包装，
+ * 所以把纸画在 <table> 自己身上，用 overflow-hidden 让表头的清染底不越过圆角。代价：很宽的表格
+ * 不会独立横向滚动，只能按单元格换行——已知缺口；需要滚动时放 Table 组件。
+ *
+ * hr：清墨横线，前后对称留二材。img / figure：图不加框不加阴影（NG12），只给最小控件的圆角；
+ * figcaption 读 caption 档。details/summary：一个自带边界的可展开块，只用线一种机制。
+ * 脚注上标里的链接去掉下划线、读浓墨：抬高与缩小已经是非颜色的区分信号。
+ */
+
+@layer components {
+  /* 每个直接子块（原生的或组件）之后留块间距；最后一个不留。零特异性：下面每条元素规则都能盖过它。 */
+  :where([data-slot="prose"]) > * { margin-bottom: var(--qy-field-group-gap); }
+  :where([data-slot="prose"]) > :last-child { margin-bottom: 0; }
+
+  :where(
+    :is(
+      [data-slot="prose"] > :is(header, h1, h2, h3, h4, p, ul, ol, blockquote, pre, table, figure, details, hr, img),
+      [data-slot="prose"] > :is(header, h1, h2, h3, h4, p, ul, ol, blockquote, pre, table, figure, details, hr, img):not([data-slot]) *
+    ):not(
+      [data-slot],
+      [data-slot="prose"] > :is(header, h1, h2, h3, h4, p, ul, ol, blockquote, pre, table, figure, details, hr, img) [data-slot]:not([data-slot="prose"]) *
+    )
+  ) {
+    /* ── 节奏与行宽 ── */
+    /* 原生的块在嵌套里（列表项、引用、详情框内）也是同一节奏；首尾各清零一次。 */
+    &:is(p, ul, ol, blockquote, pre, table, figure, details) { @apply mt-0 mb-(--qy-field-group-gap); }
+    &:is(p, ul, ol, blockquote, pre, table, figure, details):last-child { @apply mb-0; }
+    &:is(blockquote > :first-child, li > :first-child, summary + *) { @apply mt-0; }
+    /* 引出表格或定义列表的那句话与它同组。 */
+    &:is(p):has(+:is(dl, table, [data-slot=table-container])) { @apply mb-(--qy-field-gap); }
+    /* 读的止于行宽；正文档与两端对齐只给段落一类。 */
+    &:is(p, ul, ol, blockquote) {
+      @apply max-w-(--qy-prose-measure);
+      overflow-wrap: break-word;
+    }
+    &:where(p, li, blockquote, dd, summary) { @apply text-prose; }
+    &:is(p) { @apply text-pretty; }
+    &:is(p:lang(zh):not(header > *)) {
+      @apply text-justify;
+      line-break: strict;
+    }
+
+    /* ── 标题与篇首 ── */
+    &:is(h1, h2, h3, h4) { @apply wrap-anywhere; }
+    &:is(h1) { @apply mt-(--qy-section-gap) mb-(--qy-section-gap) text-prose-h1 text-balance; }
+    &:is(h2) { @apply mt-[calc(4*var(--qy-cai))] mb-(--qy-field-group-gap) text-prose-h2; }
+    &:is(h3) { @apply mt-(--qy-section-gap) mb-(--qy-field-gap) text-prose-h3; }
+    &:is(h4) { @apply mt-(--qy-field-group-gap) mb-(--qy-field-gap) text-prose-strong; }
+    /* 开篇的标题不留上距；紧跟篇首的节、紧跟节标题的小节，间距由上一个标题的下距给出。 */
+    &:is(h1, h2, h3, h4):first-child { @apply mt-0; }
+    &:is(h1 + h2, header + h2, h2 + h3) { @apply mt-0; }
+    /* 篇首：篇名与导语一组，其后二材。 */
+    &:is(header) { @apply flex flex-col gap-(--qy-field-gap) mb-(--qy-section-gap); }
+    &:is(header > h1, header > p) { @apply mt-0 mb-0; }
+    &:is(header > p) { @apply text-muted-foreground; }
+
+    /* ── 强调与链接 ── */
+    /* 强调靠字重中段，不另造一级墨；斜体只变字体姿态。 */
+    &:is(strong) { @apply font-medium; }
+    &:is(em) { @apply italic; }
+    /* 与 link.tsx 的 linkClassName 同一组 token，两处需要同步。 */
+    &:is(a) {
+      @apply rounded-marker text-foreground underline decoration-(color:--qy-border-input) underline-offset-(--qy-underline-offset) transition-[text-decoration-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) outline-none;
+      text-decoration-thickness: var(--qy-line-width);
+    }
+    &:is(a:hover, a:focus-visible) { @apply decoration-current; }
+    &:is(a:focus-visible) { @apply ring-inset ring-(length:--qy-focus-quiet-width) ring-ring; }
+    /* 脚注上标：去掉下划线，读浓墨；抬高与缩小已经是非颜色的区分信号。 */
+    &:is(sup a) { @apply text-muted-foreground no-underline; }
+
+    /* ── 列表 ── */
+    /* 符号/序号用浓墨，不用浏览器默认黑点；缩进取一材（预设）。 */
+    &:is(ul, ol) { @apply ps-(--qy-cai) marker:text-muted-foreground; }
+    &:is(ul) { @apply list-disc; }
+    &:is(ol) { @apply list-decimal marker:numeric; }
+    &:is(li) { @apply mb-0 mt-(--qy-field-gap); }
+    &:is(li:first-child) { @apply mt-0; }
+    /* 嵌套列表紧跟它所属的那一点，不叠加整段的组间距。 */
+    &:is(li > ul, li > ol) { @apply mb-0 mt-(--qy-field-gap); }
+    /* GFM 任务列表：去掉该列表自己的符号，避免与勾选框并排重复。 */
+    &:is(.contains-task-list) { @apply list-none; }
+
+    /* ── 任务列表勾选框 ──
+     * 渲染后的 Markdown 里只有 GFM 任务列表会出现 <input>，且恒为 type="checkbox"，所以直接选 input，
+     * 不必再写 [type=checkbox] 这层属性选择器。
+     * 边长直接读 --qy-marker-size，与库内 Checkbox 同一个值；窄屏升一等到一材，
+     * 外加同它一样的 (材 − 标记) / 2 居中于所在文字行（基础层 §19「按行居中」）。
+     * 勾号字号 0.7em 是预设：取所在标记内一个勾的大小，无关系可推，仅此一处使用，不设 token。 */
+    &:is(input) {
+      @apply relative inline-block appearance-none shrink-0 align-top size-(--qy-marker-size-narrow) sm:size-(--qy-marker-size) my-(--qy-marker-inset-narrow) sm:my-(--qy-marker-inset) me-(--qy-control-content-gap) rounded-marker border border-input bg-surface-field;
+    }
+    &:is(input:checked) {
+      @apply border-transparent bg-primary before:absolute before:inset-0 before:flex before:items-center before:justify-center before:content-['✓'] before:text-[0.7em] before:leading-none before:text-primary-foreground;
+    }
+    /* 任务是否完成是需要被读到的事实（基础层 §9「只读」），禁用态不降不透明度。 */
+    &:is(input:disabled) { @apply cursor-default opacity-100; }
+
+    /* ── 引用 ── */
+    &:is(blockquote) { @apply border-s border-input ps-(--qy-field-group-gap) text-muted-foreground; }
+
+    /* ── 行内代码 ── */
+    /* 逐字复刻 typography.tsx 的 Code 规则（「不另写一套」）。 */
+    &:is(code) {
+      @apply rounded-marker bg-neutral-soft px-(--qy-fen) font-mono text-(length:--qy-inline-code-size) wrap-anywhere;
+      box-decoration-break: clone;
+    }
+    /* pre 内的 code 不是行内代码：复位字号、底色、留白与圆角，字与面由 pre 自己承担。 */
+    &:is(pre code) {
+      @apply text-[1em] rounded-none bg-transparent p-0 wrap-normal;
+      box-decoration-break: unset;
+    }
+
+    /* ── 代码块 ── */
+    /* 与 code-block.tsx 的代码面同一画法（「不另写一套」）：面板圆角、清墨线、代码面。 */
+    &:is(pre) {
+      @apply max-w-full overflow-x-auto whitespace-pre rounded-panel border border-border bg-(--qy-code-surface) p-(--qy-panel-padding-sm) text-body text-foreground outline-none;
+    }
+
+    /* ── 表格 ── */
+    /* 复刻 table.tsx 当前值：纸承载 + overflow-hidden 让清染底不越过圆角。 */
+    &:is(table) {
+      @apply w-full max-w-full border-separate border-spacing-0 overflow-hidden rounded-panel border border-border bg-surface text-body text-foreground;
+    }
+    &:is(caption) { @apply px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap) text-start text-body-strong; }
+    /* 表头/表尾：清染底，高度 = 一材 + 上下各一个组内间隔，不再画线。 */
+    &:is(thead > tr) { @apply h-(--qy-header-row) bg-surface-inset; }
+    &:is(thead > tr > *) { @apply border-b-0 py-0; }
+    &:is(tfoot) { @apply font-medium; }
+    &:is(tfoot > tr) { @apply h-(--qy-header-row) bg-surface-inset; }
+    &:is(tfoot > tr > *) { @apply border-b-0 py-0; }
+    /* 正文行：一个控件高 + 行间清墨线，最后一行没有线。 */
+    &:is(tbody > tr) { @apply h-(--qy-row-default); }
+    &:is(tbody > tr > *) { @apply border-b border-border; }
+    &:is(tbody > tr:last-child > *) { @apply border-b-0 pb-(--qy-field-gap); }
+    /* 单元格：左右各半个组间距，首尾留面板内缘；表头 13px 浓墨，正文焦墨；数字列等宽数字。 */
+    &:is(th, td) { @apply px-[calc(var(--qy-panel-gap)/2)]; }
+    &:is(th:first-child, td:first-child) { @apply ps-(--qy-panel-padding); }
+    &:is(th:last-child, td:last-child) { @apply pe-(--qy-panel-padding); }
+    &:is(th) {
+      @apply pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] text-start align-middle whitespace-nowrap text-label text-muted-foreground;
+    }
+    &:is(td) { @apply pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle; }
+    &:is(th, td) { @apply numeric; }
+    /* Markdown 的列对齐（`---:`）常以 align 属性落下；它说的是这一列是数，盖过表头的默认起始对齐。 */
+    &:is(th[align=right], td[align=right]) { @apply text-end; }
+    &:is(th[align=center], td[align=center]) { @apply text-center; }
+
+    /* ── 分隔号 ── */
+    /* 分隔号比段落更强的断点，前后对称留节间。 */
+    &:is(hr) { @apply my-(--qy-section-gap) border-border; }
+
+    /* ── 图 ── */
+    &:is(img) { @apply block max-w-full rounded-item; }
+    &:is(figure) { @apply grid gap-(--qy-field-gap); }
+    &:is(figcaption) { @apply text-caption text-muted-foreground; }
+
+    /* ── 键位 ── */
+    /* 逐字复刻 kbd.tsx 的几何（「不另写一套」）。 */
+    &:is(kbd) {
+      @apply inline-flex h-(--qy-glyph-box) min-w-(--qy-glyph-box) max-w-full items-center justify-center rounded-marker border border-border px-(--qy-kbd-padding-inline) align-top my-(--qy-glyph-box-inset) text-(length:--qy-inline-code-size) leading-none font-mono text-foreground wrap-anywhere;
+    }
+
+    /* ── 详情框 ── */
+    &:is(details) { @apply rounded-item border border-border p-(--qy-panel-padding-sm); }
+    &:is(summary) { @apply cursor-pointer font-medium mb-(--qy-field-gap) marker:text-muted-foreground; }
+  }
+}

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 60a130ac69db0f25fab1f7286026182d946fe7c7c51d55d5646226af463d8e06
+Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
 
 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 

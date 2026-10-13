@@ -3,16 +3,19 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
-Source SHA-256: 1bedf9965e31b679df997fb01a3a9a41cb4464f76634276731cc374c402f080c
+Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
 
-给已渲染的 Markdown / 富文本排版：一张独立的阅读纸，标题、列表、引用、代码、表格读已有的文字档与墨阶。
+给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认自带一张阅读纸；页面已经有纸时去掉。
 
 ## Decision
-Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react-markdown、MDX、服务端 HTML）产出原生元素，Prose 只用后代选择器给 h1–h4、p、strong/em、a、ul/ol（含任务列表）、blockquote、行内代码、pre > code、table、hr、img/figure/figcaption、kbd、details/summary 排版，不改写它们的结构或属性。
+Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react-markdown、MDX、服务端 HTML）产出原生元素，Prose 只给直接子块里的原生文本元素（header、h1–h4、p、ul/ol 含任务列表、blockquote、pre、table、figure、details、hr、img）以及这些子块之内的原生元素（strong/em、a、行内代码、kbd、figcaption、summary 等）排版，不改写它们的结构或属性。带 data-slot 的元素与它的内部不进入，所以文章里可以直接放组件与演示。标题三级取页面已有的文字档（h1 展示、h2 标题、h3 章节），与官网文档同一套（2026-10-12 裁决）。
 
 ## Notes
 - 不内置任何文案字符串，不需要经过 useUILocale。
 - 深浅主题下墨阶与纸自动互换，不需要调用方处理。
+- 排版规则在样式的 components 层：给文章里的元素加任何工具类都能覆盖它，不需要 !important。
+- 中文段落两端对齐并按严格规则断行；判断依据是元素的 lang，页面须正确声明语言。
+- 已知边界：另一篇 Prose 若隔着组件嵌在外层 Prose 的原生文本块里（如 figure 里的 Card 里再放 Prose），内层的行内元素不排版；把它放进 div 或 section。
 
 ## Use and ownership
 - 展示一段已经渲染好的长文或 Markdown 结果：帮助文章、更新日志、AI 回复、文档正文。
@@ -23,10 +26,14 @@ Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react
 
 ## Composition
 - children 是渲染器产出的原生元素树，或经审查的 dangerouslySetInnerHTML；Prose 只加一层 className。
+- 文章里直接放库组件：带 data-slot 的元素及其内部不排版。自己画的一段内容加上 data-slot，就声明了它不是正文。
+- div、section 这类容器子块不进入。要让容器里的标题与段落也成文，用 render 把这个容器本身做成一篇 framed={false} 的 Prose。
+- 页面已经有承载面（Card、文档站的纸）时用 framed={false}：只排版，不再画第二张纸；栏宽与内缘读 --qy-prose-column、--qy-prose-inset，承载面可以取同一组值。
+- h1 与紧随的一段导语放进 header：两者相隔一个字段间距，导语读淡墨。
 - 表格读与 Table 组件相同的视觉规则（清染表头/表尾、行高、数字列等宽），行内代码读 Typography 的 Code 规则，链接读 Link 的 linkClassName，不另起一套画法。
 
 ## Responsive behavior
-- 版心固定 38em，不随视口拉宽；内缘在窄屏收紧到既有面板内缘的窄屏取值。
+- 栏宽 38 材（760px），不随视口拉宽；段落、列表与引用的行长止于 40 个正文字（640px），代码块与表格可以用满栏。纸的内缘 2 材，窄屏收紧到面板内缘。三个值都是预设，入口是 --qy-prose-column、--qy-prose-measure、--qy-prose-inset。
 - 很宽的表格目前不会在 Prose 内独立横向滚动（纸的圆角需要 overflow-hidden 而非 overflow-x-auto），只能按单元格自然换行——已知缺口，非默认画法缺失。
 
 ## Customization
@@ -40,7 +47,7 @@ Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Prose
-- no props declared by this library
+- `framed?`: `boolean`. 是否自带一张纸（线、圆角、底、内缘）。文章已经放在一张纸上时（页面的主栏、Card、面板）设为 false， 只留排版，不再铺第二张；与 TableContainer 的 framed 同义。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -53,7 +60,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Prose
-阅读面容器；默认渲染为 article。
+长文容器；默认渲染为 article。
+- framed: boolean; default true. 是否自带阅读纸（面、清墨线、圆角、内缘与栏宽上限）。false 时只排版，纸由所在的承载面负责。
 - render / ref / className / style / 原生属性: useRender.ComponentProps<"article">. 属性、事件与 ref 透传实际元素；children 是调用方已渲染好的内容。
 
 ## Keyboard
@@ -114,5 +122,34 @@ export default function Demo() {
       <p>只重新发送上面统计里「网络中断」这一类失败记录，不触碰已经成功写入的数据，也不会改变「字段校验失败」队列。</p>
     </details>
   </Prose>;
+}
+```
+
+### 已有承载面与文中的组件
+Source: apps/docs/src/content/prose/demos/03-unframed.tsx
+```tsx
+import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
+import { Card } from "@qingye_lab/ui/components/card";
+import { Prose } from "@qingye_lab/ui/components/prose";
+import type { DemoMeta } from "@/lib/types";
+export const meta = {
+  title: "已有承载面与文中的组件",
+  titleEn: "An existing surface, and a component in the text",
+} satisfies DemoMeta;
+export default function Demo() {
+  return <Card className="w-full p-(--qy-panel-padding)">
+    <Prose framed={false}>
+      <header>
+        <h1>重新同步</h1>
+        <p>把上一次没有写入的记录再发送一遍，已经写入的不会重复。</p>
+      </header>
+      <p>重新同步只处理失败与未知两种结果。开始之前，先在操作记录里确认失败原因已经排除，否则同一批记录会再失败一次。</p>
+      <Alert tone="warning">
+        <AlertTitle>结果未知的记录需要先核实</AlertTitle>
+        <AlertDescription>请求已经发出但没有收到确认，直接重试可能写入两次。</AlertDescription>
+      </Alert>
+      <p>核实完成后，在集合的「同步记录」页选择这一批，再点「重新同步」。</p>
+    </Prose>
+  </Card>;
 }
 ```

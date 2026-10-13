@@ -64,13 +64,13 @@ export function Proportion({ label, items, total, format, legend: legendMode = "
     "data-slot": "proportion", role: "group", "aria-label": label,
     className: cn("grid min-w-0 gap-(--qy-field-gap) text-foreground", legendMode === "hidden" && "relative", className),
     children: <>
-      <div data-slot="proportion-track" aria-hidden="true" className="flex h-(--qy-readout-track-size) w-full min-w-0 gap-0.5 overflow-hidden rounded-(--qy-radius-track) bg-(--qy-groove-surface)">
-        {items.map((item, index) => item.value > 0 && <span key={item.key} data-slot="proportion-segment" className="h-full min-w-0.5 basis-0" style={{ flexGrow: item.value, background: colorOf(item, index) }} />)}
+      <div data-slot="proportion-track" aria-hidden="true" className="flex h-(--qy-readout-track-size) w-full min-w-0 gap-fen-half overflow-hidden rounded-(--qy-radius-track) bg-(--qy-groove-surface)">
+        {items.map((item, index) => item.value > 0 && <span key={item.key} data-slot="proportion-segment" className="h-full min-w-fen-half basis-0" style={{ flexGrow: item.value, background: colorOf(item, index) }} />)}
         {rest > 0 && <span className="h-full basis-0" style={{ flexGrow: rest }} />}
       </div>
       <ul data-slot="proportion-legend" data-legend={legendMode} className={cn("m-0 flex min-w-0 list-none flex-wrap gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) p-0 text-support", legendMode === "hidden" && "sr-only")}>
         {legend.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere">
-          <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: item.color }} />
+          <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: item.color }} />
           <span>{item.label}</span>
           <span className="numeric text-muted-foreground">{messages.proportionShare(show(item.value), percent.format(item.value / whole))}</span>
         </li>)}

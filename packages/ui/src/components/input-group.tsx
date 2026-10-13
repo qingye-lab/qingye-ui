@@ -29,7 +29,7 @@ export function InputGroup({ className, render, ref, ...props }: InputGroupProps
     defaultTagName: "div", render, ref,
     props: mergeProps({ "data-slot": "input-group" }, props, {
       className: cn(
-        "relative flex w-full min-w-0 flex-wrap items-stretch border border-input bg-card text-foreground transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) pointer-coarse:min-h-(--qy-touch-target) has-[input:focus-visible]:border-ring data-readonly:border-border not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground dark:bg-surface-inset", fillStateByInput,
+        "relative flex w-full min-w-0 flex-wrap items-stretch border border-input bg-surface-field text-foreground transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) pointer-coarse:min-h-(--qy-touch-target) has-[input:focus-visible]:border-ring data-readonly:border-border not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground", fillStateByInput,
         groupProfile, className,
       ),
     }),
@@ -49,8 +49,8 @@ export function InputGroupAddon({ className, render, ref, ...props }: InputGroup
 
 export function InputGroupInput({ controlClassName, ...props }: InputGroupInputProps) {
   // 保留普通文本可编辑窗口，附件共享剩余容量；过窄时整体按 DOM 顺序换行。
-  // 4em 是至少四个全宽字符的局部容量选择，不是理念公式或新的全局 token。
-  return <Input {...props} unstyled controlClassName={cn("flex-1 min-w-[min(100%,calc(var(--qy-input-group-padding)*2+4em))]", controlClassName)} />;
+  // 文字区的下限读 --qy-field-min-text（预设，4em：至少四个全宽字符），不是理念公式。
+  return <Input {...props} unstyled controlClassName={cn("flex-1 min-w-[min(100%,calc(var(--qy-input-group-padding)*2+var(--qy-field-min-text)))]", controlClassName)} />;
 }
 
 export type InputGroupButtonProps = ButtonProps;

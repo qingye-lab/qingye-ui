@@ -14,13 +14,22 @@ test("renders as a native article, forwarding data-slot, ref and native attribut
   expect(article).toHaveAttribute("lang", "zh-CN");
 });
 
-test("render swaps the element while keeping the reading treatment and caller class", () => {
+test("render swaps the element and keeps the slot and the caller's class", () => {
   render(<Prose render={<section data-testid="swapped" />} className="extra">内容</Prose>);
   const section = screen.getByTestId("swapped");
   expect(section.tagName).toBe("SECTION");
   expect(section).toHaveAttribute("data-slot", "prose");
-  expect(section.className).toContain("bg-surface");
-  expect(section.className).toContain("extra");
+  expect(section).toHaveClass("extra");
+});
+
+test("framed is on by default; turning it off is exposed on the element and never reaches the DOM as an attribute", () => {
+  const { rerender } = render(<Prose>内容</Prose>);
+  const article = screen.getByRole("article");
+  expect(article).toHaveAttribute("data-framed", "true");
+  expect(article).not.toHaveAttribute("framed");
+  rerender(<Prose framed={false}>内容</Prose>);
+  expect(article).toHaveAttribute("data-framed", "false");
+  expect(article).not.toHaveAttribute("framed");
 });
 
 test("already-rendered markdown output passes through unmodified — Prose does not parse or rewrite it", () => {

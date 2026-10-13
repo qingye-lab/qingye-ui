@@ -17,7 +17,7 @@ import { cn } from "../utils";
  *   独立成行的入口（面包屑、侧栏）由调用方加 `touch-target`。
  */
 export const linkClassName =
-  "rounded-marker text-foreground underline decoration-(color:--qy-border-input) [text-decoration-thickness:1px] underline-offset-[round(0.25em,1px)] outline-none transition-[text-decoration-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:decoration-current focus-visible:decoration-current focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring";
+  "rounded-marker text-foreground underline decoration-(color:--qy-border-input) [text-decoration-thickness:var(--qy-line-width)] underline-offset-(--qy-underline-offset) outline-none transition-[text-decoration-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:decoration-current focus-visible:decoration-current focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring";
 
 export type LinkProps = useRender.ComponentProps<"a">;
 

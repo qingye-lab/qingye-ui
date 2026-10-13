@@ -27,15 +27,15 @@ export function NativeSelect({ className, render, ref, multiple, size, ...props 
     props: mergeProps({ "data-slot": "native-select" }, props, {
       multiple, size,
       className: cn(
-        "box-border min-w-0 max-w-full border border-input bg-card py-0 text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring not-disabled:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground dark:bg-surface-inset", fillStateNative,
+        "box-border min-w-0 max-w-full border border-input bg-surface-field py-0 text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring not-disabled:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground", fillStateNative,
         profile,
         list
-          ? "w-full py-(--qy-space-1) [&_option]:rounded-[max(0px,calc(var(--qy-fill-radius)-1px-var(--qy-space-1)))] [&_option]:px-(--qy-space-2) [&_option]:py-(--qy-space-1) [&_option:checked]:bg-accent [&_optgroup]:text-muted-foreground"
+          ? "w-full py-(--qy-space-1) [&_option]:rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)-var(--qy-space-1)))] [&_option]:px-(--qy-space-2) [&_option]:py-(--qy-space-1) [&_option:checked]:bg-surface-selected [&_optgroup]:text-muted-foreground"
           : cn(
             "w-full appearance-none",
             // 渐进增强：支持可定制 select 的浏览器把选项面画在页面内，与 Select 浮层同一外观、
             // 宽度不小于控件且从控件下沿展开；不支持的浏览器忽略此声明，仍用平台选项面。
-            "supports-[appearance:base-select]:[appearance:base-select] supports-[appearance:base-select]:inline-flex supports-[appearance:base-select]:items-center [&::picker-icon]:hidden [&::picker(select)]:[appearance:base-select] [&::picker(select)]:mt-(--qy-space-1) [&::picker(select)]:rounded-(--qy-radius-overlay) [&::picker(select)]:border [&::picker(select)]:border-border [&::picker(select)]:bg-(--qy-surface-raised) [&::picker(select)]:p-(--qy-space-1) [&::picker(select)]:shadow-(--qy-shadow-raised) [&_option]:rounded-[max(0px,calc(var(--qy-fill-radius)-1px-var(--qy-space-1)))] [&_option]:px-(--qy-space-2) [&_option]:py-(--qy-space-1) [&_option:hover]:bg-accent [&_option:focus-visible]:bg-accent [&_option:focus-visible]:outline-none [&_option::checkmark]:order-last [&_option::checkmark]:ms-auto [&_option]:gap-(--qy-space-2)",
+            "supports-[appearance:base-select]:[appearance:base-select] supports-[appearance:base-select]:inline-flex supports-[appearance:base-select]:items-center [&::picker-icon]:hidden [&::picker(select)]:[appearance:base-select] [&::picker(select)]:mt-(--qy-popup-offset) [&::picker(select)]:rounded-(--qy-radius-overlay) [&::picker(select)]:border [&::picker(select)]:border-border [&::picker(select)]:bg-(--qy-surface-raised) [&::picker(select)]:p-(--qy-space-1) [&::picker(select)]:shadow-(--qy-shadow-raised) [&_option]:rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)-var(--qy-space-1)))] [&_option]:px-(--qy-space-2) [&_option]:py-(--qy-space-1) [&_option:hover]:bg-accent [&_option:focus-visible]:bg-accent [&_option:focus-visible]:outline-none [&_option::checkmark]:order-last [&_option::checkmark]:ms-auto [&_option]:gap-(--qy-space-2)",
             height, chevronSpace,
           ),
         "pointer-coarse:min-h-(--qy-touch-target)",

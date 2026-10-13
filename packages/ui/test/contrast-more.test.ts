@@ -35,7 +35,7 @@ describe("prefers-contrast: more", () => {
   test("只在 prefers-contrast: more 一个条件里，且不触碰尺寸、圆角、线宽、间距与数据编码色", () => {
     const touched = new Set<string>();
     postcss.parse(contrast).walkDecls((decl) => { touched.add(decl.prop); });
-    expect([...touched].sort()).toEqual(["--qy-danger-soft", "--qy-groove-surface", "--qy-info-soft", "--qy-ink-dan", "--qy-ink-jiao", "--qy-ink-nong", "--qy-ink-qing", "--qy-ink-zhong", "--qy-success-soft", "--qy-surface-hover", "--qy-warning-soft", "--qy-wash-qing"]);
+    expect([...touched].sort()).toEqual(["--qy-danger-fill-active", "--qy-danger-fill-hover", "--qy-danger-soft", "--qy-danger-soft-active", "--qy-groove-surface", "--qy-info-soft", "--qy-ink-dan", "--qy-ink-jiao", "--qy-ink-nong", "--qy-ink-qing", "--qy-ink-zhong", "--qy-primary-active", "--qy-primary-hover", "--qy-success-soft", "--qy-surface-hover", "--qy-surface-selected", "--qy-surface-strong", "--qy-warning-soft", "--qy-wash-qing"]);
     const media: string[] = [];
     postcss.parse(contrast).walkAtRules("media", (rule) => { media.push(rule.params.replace(/\s+/g, " ")); });
     expect(media).toEqual(["(prefers-contrast: more) and (forced-colors: none)"]);
@@ -45,22 +45,26 @@ describe("prefers-contrast: more", () => {
     expect([...selectors].sort()).toEqual([".dark", ".light", ":root", "[data-theme]"]);
   });
 
-  test.each(["light", "dark"] as const)("%s: 地与数据不动：凹槽、底纸、subtle 面、内嵌面、柔底、悬停面（图系列色与状态色压在它们上面，须 ≥ 3:1）", (appearance) => {
+  test.each(["light", "dark"] as const)("%s: 地与数据不动：凹槽、底纸、subtle 面、内嵌面、柔底、静止的深一级墨面（图系列色与状态色压在它们上面，须 ≥ 3:1）", (appearance) => {
     const original = tokenValues(base, appearance);
     const shifted = tokenValues(more, appearance);
-    for (const role of ["groove-surface", "background", "surface-subtle", "surface-inset", "neutral-soft", "danger-soft", "warning-soft", "success-soft", "info-soft", "surface-hover"]) {
+    for (const role of ["groove-surface", "background", "surface-subtle", "surface-inset", "neutral-soft", "danger-soft", "warning-soft", "success-soft", "info-soft", "surface-strong"]) {
       const a = resolveColor(`var(--qy-${role})`, original);
       const b = resolveColor(`var(--qy-${role})`, shifted);
       a.forEach((channel, i) => expect(b[i], role).toBeCloseTo(channel, 10));
     }
   });
 
-  test.each(["light", "dark"] as const)("%s: 反馈三级（清染 < 悬停 < 淡染）在两种偏好下都逐级加深", (appearance) => {
+  test.each(["light", "dark"] as const)("%s: 反馈梯在两种偏好下都不倒挂：内嵌面 ≤ 悬停 = 选中 < 按下（悬停不深于选中）", (appearance) => {
     const level = (tokens: Map<string, string>, name: string) => resolveColor(`var(--qy-${name})`, tokens)[3];
     for (const tokens of [tokenValues(base, appearance), tokenValues(more, appearance)]) {
-      expect(level(tokens, "surface-inset")).toBeLessThan(level(tokens, "surface-hover"));
-      expect(level(tokens, "surface-hover")).toBeLessThan(level(tokens, "surface-active"));
+      expect(level(tokens, "surface-inset")).toBeLessThanOrEqual(level(tokens, "surface-hover"));
+      expect(level(tokens, "surface-hover")).toBeCloseTo(level(tokens, "surface-selected"), 10);
+      expect(level(tokens, "surface-selected")).toBeLessThan(level(tokens, "surface-active"));
     }
+    // 偏好开启时悬停与选中随墨阶上移，仍在内嵌面（地，钉住）之上、按下之下。
+    const shifted = tokenValues(more, appearance);
+    expect(level(shifted, "surface-inset")).toBeLessThan(level(shifted, "surface-hover"));
   });
 
   test.each(["light", "dark"] as const)("%s: 全部库内角色组合在偏好开启时仍满足各自的底线", (appearance) => {

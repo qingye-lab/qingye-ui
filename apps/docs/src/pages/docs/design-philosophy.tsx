@@ -1,5 +1,5 @@
 import { buttonVariants } from "@qingye_lab/ui/components/button";
-import { PageHeader } from "@/components/prose";
+import { Article, PageHeader } from "@/components/prose";
 import { cn } from "@qingye_lab/ui/utils";
 import { parsePublicMarkdown, PublicMarkdown, type MethodGroup } from "@/components/public-markdown";
 import { useDocsLocale } from "@/lib/docs-locale";
@@ -21,11 +21,11 @@ export default function DesignPhilosophyPage() {
   const locale = useDocsLocale();
   const en = locale === "en";
   const doc = SOURCE[locale];
-  return <>
+  return <Article>
     <PageHeader description={doc.lead} title={doc.title ?? ""}>
       {/* The English guide is saved under the same file name projects refer to. */}
       <a className={cn(buttonVariants({ variant: "bordered" }), "mt-(--qy-field-gap) w-fit")} download={en ? "design.md" : true} href={en ? "/design.en.md" : "/design.md"}>{en ? "Download design.md" : "下载 design.md"}</a>
     </PageHeader>
     <PublicMarkdown document={doc} groups={GROUPS[locale]} notesTitle={en ? "Sources" : "来源简注"} />
-  </>;
+  </Article>;
 }

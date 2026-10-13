@@ -6,9 +6,26 @@ import type * as React from "react";
 import { cn } from "../utils";
 
 export type ItemProps = useRender.ComponentProps<"div">;
-/** 一行一个对象（基础层 §19）：与表格的一行同一几何——上下各一个组内间隔，内容在行内居中。 */
+/*
+ * 整行就是一个入口（Item 自己渲染为 a[href] 或 button）时的行反馈。普通的 div / li 不是入口，不带反馈；
+ * 由元素自身的选择器决定，不设属性——是不是入口是元素的事实，不是外观选项。
+ * - 悬停读悬停面（--qy-accent，即 --qy-surface-hover），按下读按下面（--qy-surface-active），与 quiet Button、SidebarLink 同一梯
+ *   （基础层 §11）；过渡读已有的时长与曲线角色。禁用（button:disabled、aria-disabled）时不出现。
+ * - 有了面就要有内缘，否则面贴着字；但一列只有一条左缘，没有形的入口以文字对齐（§19）。所以向两侧各让出一个留白、再补回同样的内缘：
+ *   文字仍落在列缘上，悬停面向外伸出——与 TableHead 里的排序按钮、SectionActions 行尾的小号 quiet 按钮同一规则。
+ *   留白取 --qy-control-sm-padding：同是 rounded-item 的行入口，与 SidebarLink 的内缘一致。承载它的容器两侧要留得出这一段，否则面被裁掉。
+ * - button 默认按内容取宽、文字居中：补成整行宽（含两侧伸出的留白），文字从行首起。
+ * 类名写成完整字面量（Tailwind 按源码字面扫描）。
+ */
+const rowEntry = "[&:is(a[href],button)]:-mx-(--qy-control-sm-padding) [&:is(a[href],button)]:px-(--qy-control-sm-padding) [button&]:w-[calc(100%+2*var(--qy-control-sm-padding))] [button&]:text-start";
+const rowFeedback = "[&:is(a[href],button)]:transition-colors [&:is(a[href],button)]:duration-(--qy-duration-fast) [&:is(a[href],button)]:ease-(--qy-ease-out) [&:is(a[href],button:enabled)]:not-aria-disabled:cursor-pointer [&:is(a[href],button:enabled)]:not-aria-disabled:hover:bg-accent [&:is(a[href],button:enabled)]:not-aria-disabled:active:bg-(--qy-surface-active)";
+/**
+ * 一行一个对象（基础层 §19）：与表格的一行同一几何——上下各一个组内间隔，内容在行内居中。
+ * 整行只通向一个去处、行内没有别的交互元素时，把 Item 自己渲染成链接（`render={<a href />}`）：整行可点，有悬停与按下反馈。
+ * 行内另有操作时不能这样做（链接里不能再放按钮）：名称用 ItemLink，操作放 ItemActions。
+ */
 export function Item({ render, className, ...props }: ItemProps) {
-  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "item", className: cn("flex min-h-(--qy-row-default) min-w-0 flex-wrap items-center gap-(--qy-field-gap) py-(--qy-field-gap) rounded-item text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
+  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "item", className: cn("flex min-h-(--qy-row-default) min-w-0 flex-wrap items-center gap-(--qy-field-gap) py-(--qy-field-gap) rounded-item text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", rowEntry, rowFeedback, className) }, props) });
 }
 export type ItemContentProps = useRender.ComponentProps<"div">;
 export function ItemContent({ render, className, ...props }: ItemContentProps) {
@@ -52,7 +69,11 @@ export function ItemActions({ reveal = "always", resting, render, className, chi
   }, props) });
 }
 export type ItemLinkProps = useRender.ComponentProps<"a">;
-/** 条目的名称就是入口：一列条目由位置表明可进入，平时不加下划线，悬停才出现（与面包屑同理）。 */
+/**
+ * 条目的名称就是入口：一列条目由位置表明可进入，平时不加下划线，悬停才出现（与面包屑同理）。
+ * 用在行内另有操作的条目上：名称是 ItemLink，操作放在 ItemActions，二者是兄弟。
+ * 整行只通向一个去处、没有别的交互元素时不用它，改把 Item 自己渲染成链接（`<Item render={<a href />}>`），整行可点并带行反馈。
+ */
 export function ItemLink({ render, className, ...props }: ItemLinkProps) {
-  return useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "item-link", className: cn("touch-target min-w-0 rounded-marker text-foreground underline-offset-[round(0.25em,1px)] outline-none hover:underline focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring", className) }, props) });
+  return useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "item-link", className: cn("touch-target min-w-0 rounded-marker text-foreground underline-offset-(--qy-underline-offset) outline-none hover:underline focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring", className) }, props) });
 }

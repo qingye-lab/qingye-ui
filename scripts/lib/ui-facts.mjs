@@ -78,7 +78,7 @@ export function cssDeclarations(text, path, { customOnly = true } = {}) {
   return result;
 }
 export const tokenPaths = () => files('packages/ui/tokens', /\.css$/);
-export const stylePaths = () => [...tokenPaths(), 'packages/ui/theme.css', 'packages/ui/motion.css', 'packages/ui/utilities.css', 'packages/ui/styles.css'];
+export const stylePaths = () => [...tokenPaths(), 'packages/ui/theme.css', 'packages/ui/motion.css', 'packages/ui/prose.css', 'packages/ui/utilities.css', 'packages/ui/styles.css'];
 export const declarations = () => stylePaths().flatMap((path) => cssDeclarations(read(path), path));
 export function tokenDefinitions() {
   const map = new Map();

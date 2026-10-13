@@ -17,12 +17,30 @@
     --qy-cai: 1.25rem;
     --qy-fen: calc(var(--qy-cai) / 5);
 
+    /* 半分（基础层 §1：2px，派生 = 分 / 2）：只用于贴身的细部。
+     * 角色：并列候选的轨道内缩、读数轨道分格的缝宽、相邻部分之间的缝与 0.5 倍分的间隙。
+     * 作用范围：--qy-track-inset、utilities.css 的 --qy-segment-gap（已读本 token），
+     *   以及组件里写 gap-0.5 / h-0.5 / min-w-0.5 的部位（theme.css 把它暴露为 gap-fen-half / h-fen-half / min-w-fen-half）。
+     * 修改入口：改分即改它，不单独改。 */
+    --qy-fen-half: calc(var(--qy-fen) / 2);
+
+    /* 线宽（基础层 §5：线宽统一 1px，强调靠墨色加深不加粗；用户裁决「不做加粗，只做加黑」）。来源：**裁决**，不是推导。
+     * 角色：全库一条线的宽度——容器线、编辑边界、分隔线、导航线、下划线的粗细，
+     *   以及「边框占掉的那一道」在尺寸换算里被扣除的量（-1px、-2px = 2 × 线宽、负外边距 -mb-px）。
+     * 作用范围：theme.css 把 Tailwind 的 --default-border-width 绑到它，所以裸写的 border / border-b / border-s / divide-y 随它；
+     *   本文件的 --qy-control-*-padding-bordered 与 --qy-focus-quiet-width 已读它；styles.css 强制颜色下的 1px 补线已读它。
+     *   w-px、-mb-px、-ms-px、pb-px 与 calc() 里的 1px / 2px 由组件显式写（w-line、-mb-line 或 var(--qy-line-width)）。
+     * 修改入口：只改这一行。焦点的 2px（--qy-focus-ring-width）是「唯一的例外宽度」（§15），不读它。 */
+    --qy-line-width: 1px;
+
     /* 字体（材有美）：全项目一套系统字体（用户裁决 2026-10-07），界面与长文同用。
      * 各平台先取系统界面字体（苹方、微软雅黑、思源黑体），中文与拉丁字面成对设计，
      * 同一行只有一套 x 高度与灰度。system-ui 是关键字，不能加引号。项目可在品牌层覆写。 */
     --qy-font-sans: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "PingFang SC", "Hiragino Sans GB",
       "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
     --qy-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    /* 字重三档：**预设**（STANDARDS §7：当前字重 400 / 500 / 600 均无唯一关系可推）。
+     * 角色：theme.css 的 --font-weight-* 与每个文字档的 -weight 项都读这里；改三档即改全库字重。 */
     --qy-weight-regular: 400;
     --qy-weight-medium: 500;
     --qy-weight-semibold: 600;
@@ -31,7 +49,11 @@
      * 行高一律是分的整数倍（分格）：上下堆叠的文字行落在同一张 4px 格上，
      * 并排的不同文字档基线可以对齐（行气）。字号是预设；相邻内容档至少差 1.2 倍，
      * 两档字号相差无几时，层级交给墨色与字重（墨分五色），不再加一档字号。
-     * 每档自带 size / leading / tracking / weight 四项，可单独覆写。 */
+     * 每档自带 size / leading / tracking / weight 四项，可单独覆写。
+     *
+     * 本节各档的 -tracking（字距，约 35 个 em 字面量）全部是**预设**：没有关系推出它们。
+     * 它们取自拉丁字体的习惯（字号越大、拉得越紧；汉字由 utilities.css 的 :lang 规则整体归零），
+     * 不能写成派生。-mobile 档的字号是**预设**（基础层 §8：窄屏各自放大 1–2px），行高仍在分格上（派生）。 */
 
     /* 落地页单独成段的大字（如首页总纲）：64 / 20 分行高，行高正好 4 材。
      * 字号是预设，与 display-lg 相差 1.6 倍；全站至多一处。 */
@@ -92,21 +114,31 @@
     --qy-text-prose-tracking: 0em;
     --qy-text-prose-weight: var(--qy-weight-regular);
 
-    /* 长文的标题阶梯（用户评「字号失调」后设，2026-10-08）：界面的 title/chapter 只差 1.2 倍、heading 与正文同大，
-       借来做长文标题层级读不出来。长文自成一阶：从正文 16 起每级约 1.25 倍，取偶数像素，行高落在分格上。
-       篇 28/36、节 22/32、小节 18/28；再下一级（h4）是正文加字重。预设。 */
-    --qy-text-prose-h1-size: 1.75rem;
-    --qy-text-prose-h1-leading: calc(9 * var(--qy-fen));
-    --qy-text-prose-h1-tracking: -0.02em;
-    --qy-text-prose-h1-weight: var(--qy-weight-semibold);
-    --qy-text-prose-h2-size: 1.375rem;
-    --qy-text-prose-h2-leading: calc(8 * var(--qy-fen));
-    --qy-text-prose-h2-tracking: -0.016em;
-    --qy-text-prose-h2-weight: var(--qy-weight-semibold);
-    --qy-text-prose-h3-size: 1.125rem;
-    --qy-text-prose-h3-leading: calc(7 * var(--qy-fen));
-    --qy-text-prose-h3-tracking: -0.01em;
-    --qy-text-prose-h3-weight: var(--qy-weight-semibold);
+    /* 长文的标题阶梯（用户裁决 2026-10-12：长文以官网文档正文为准）：篇、节、小节各读界面的
+       display（32/40）、title（24/32）、chapter（20/28），不再自成一阶；再下一级（h4）是正文加字重。
+       三档都是别名：改界面的那一档，长文跟着变；只想改长文，覆写这里的角色。
+       沿革：2026-10-08 曾自设 28/36、22/32、18/28，官网文档没有采用，两处正文因此不一致，本次收回。 */
+    --qy-text-prose-h1-size: var(--qy-text-display-size);
+    --qy-text-prose-h1-leading: var(--qy-text-display-leading);
+    --qy-text-prose-h1-tracking: var(--qy-text-display-tracking);
+    --qy-text-prose-h1-weight: var(--qy-text-display-weight);
+    --qy-text-prose-h2-size: var(--qy-text-title-size);
+    --qy-text-prose-h2-leading: var(--qy-text-title-leading);
+    --qy-text-prose-h2-tracking: var(--qy-text-title-tracking);
+    --qy-text-prose-h2-weight: var(--qy-text-title-weight);
+    --qy-text-prose-h3-size: var(--qy-text-chapter-size);
+    --qy-text-prose-h3-leading: var(--qy-text-chapter-leading);
+    --qy-text-prose-h3-tracking: var(--qy-text-chapter-tracking);
+    --qy-text-prose-h3-weight: var(--qy-text-chapter-weight);
+
+    /* 长文的版面（Prose；同一裁决）。三个都是预设，单位是库的材与正文字号：
+     *   measure  行宽：正文字号的 40 倍，中文一行 40 字。段落、列表、引用止于此。
+     *   column   版心：38 材。代码块、表格、图与文章里的组件可以占满。
+     *   inset    纸的内缘：2 材，从纸的外缘量起（含那 1px 线）。纸宽 = 版心 + 两侧内缘 = 42 材。
+     * 入口：项目在自己的主题入口覆写；官网文档的 --docs-measure / --docs-column 读的就是它们。 */
+    --qy-prose-measure: calc(40 * var(--qy-text-prose-size));
+    --qy-prose-column: calc(38 * var(--qy-cai));
+    --qy-prose-inset: calc(2 * var(--qy-cai));
 
     --qy-text-prose-strong-size: 1rem;
     --qy-text-prose-strong-leading: calc(7 * var(--qy-fen));
@@ -261,41 +293,45 @@
      * 横向留白 = (外高 − 分) / 2，即「纵向余量 + 2 分」：文字两侧总比上下多一个
      * 组内间隔，读来是一行而不是一块。有边框时扣 1px，使文字起点与无边框形态一致。
      * 图标 = 该等字号 + 2px，取偶数：与汉字字面等高，并能在偶数外高里整像素居中。
-     * 图标形按钮是边长等于外高的正方形，内容居中，不靠留白去凑。 */
+     * 图标形按钮是边长等于外高的正方形，内容居中，不靠留白去凑。
+     *
+     * 本节的 -icon 与 -icon-narrow（10 个 rem 字面量）是**派生**，不是预设：桌面档 = 该等 -size + 2px，窄屏档 = 该等 -mobile-size + 2px，
+     * 奇数和向下取偶（13 → 15 → 14，15 → 17 → 16）。关系由 test/system-roles.test.ts 逐档验算；改字号时它会提示图标须同改。
+     * -padding-bordered 的「扣掉的一道」就是线宽 --qy-line-width（此前字面 1px）。 */
     --qy-control-mobile-extra: var(--qy-fen);
 
     --qy-control-xs: calc(var(--qy-cai) + 1 * var(--qy-fen));
     --qy-control-xs-narrow: calc(var(--qy-control-xs) + var(--qy-control-mobile-extra));
     --qy-control-xs-padding: calc((var(--qy-control-xs) - var(--qy-fen)) / 2);
-    --qy-control-xs-padding-bordered: calc(var(--qy-control-xs-padding) - 1px);
+    --qy-control-xs-padding-bordered: calc(var(--qy-control-xs-padding) - var(--qy-line-width));
     --qy-control-xs-icon: 0.875rem;
     --qy-control-xs-icon-narrow: 1rem;
 
     --qy-control-sm: calc(var(--qy-cai) + 2 * var(--qy-fen));
     --qy-control-sm-narrow: calc(var(--qy-control-sm) + var(--qy-control-mobile-extra));
     --qy-control-sm-padding: calc((var(--qy-control-sm) - var(--qy-fen)) / 2);
-    --qy-control-sm-padding-bordered: calc(var(--qy-control-sm-padding) - 1px);
+    --qy-control-sm-padding-bordered: calc(var(--qy-control-sm-padding) - var(--qy-line-width));
     --qy-control-sm-icon: 0.875rem;
     --qy-control-sm-icon-narrow: 1rem;
 
     --qy-control-md: calc(var(--qy-cai) + 3 * var(--qy-fen));
     --qy-control-md-narrow: calc(var(--qy-control-md) + var(--qy-control-mobile-extra));
     --qy-control-md-padding: calc((var(--qy-control-md) - var(--qy-fen)) / 2);
-    --qy-control-md-padding-bordered: calc(var(--qy-control-md-padding) - 1px);
+    --qy-control-md-padding-bordered: calc(var(--qy-control-md-padding) - var(--qy-line-width));
     --qy-control-md-icon: 1rem;
     --qy-control-md-icon-narrow: 1rem;
 
     --qy-control-lg: calc(var(--qy-cai) + 4 * var(--qy-fen));
     --qy-control-lg-narrow: calc(var(--qy-control-lg) + var(--qy-control-mobile-extra));
     --qy-control-lg-padding: calc((var(--qy-control-lg) - var(--qy-fen)) / 2);
-    --qy-control-lg-padding-bordered: calc(var(--qy-control-lg-padding) - 1px);
+    --qy-control-lg-padding-bordered: calc(var(--qy-control-lg-padding) - var(--qy-line-width));
     --qy-control-lg-icon: 1.125rem;
     --qy-control-lg-icon-narrow: 1.125rem;
 
     --qy-control-xl: calc(var(--qy-cai) + 5 * var(--qy-fen));
     --qy-control-xl-narrow: calc(var(--qy-control-xl) + var(--qy-control-mobile-extra));
     --qy-control-xl-padding: calc((var(--qy-control-xl) - var(--qy-fen)) / 2);
-    --qy-control-xl-padding-bordered: calc(var(--qy-control-xl-padding) - 1px);
+    --qy-control-xl-padding-bordered: calc(var(--qy-control-xl-padding) - var(--qy-line-width));
     --qy-control-xl-icon: 1.25rem;
     --qy-control-xl-icon-narrow: 1.25rem;
 
@@ -309,14 +345,30 @@
      * 圆角与外高成比例：r = round(外高 × 5/16)，不设上限（用户裁决 2026-10-07：公共圆角更圆滑）。
      * 24/28/32/36/40 → 8/9/10/11/13px；标记 16 → 5px。比例而非常数，大小控件读来同一种圆。
      * 浮层圆角 = 控件圆角 + 浮层内缩（14），浮层里的行项与控件同角、内外同心。
-     * 面板是大面，取 4 分（16）：同一比例落到面板会过方，面板单独取值（选择）。 */
-    --qy-radius-xs: round(calc(var(--qy-control-xs) * 5 / 16), 1px);
-    --qy-radius-sm: round(calc(var(--qy-control-sm) * 5 / 16), 1px);
-    --qy-radius-md: round(calc(var(--qy-control-md) * 5 / 16), 1px);
-    --qy-radius-lg: round(calc(var(--qy-control-lg) * 5 / 16), 1px);
-    --qy-radius-xl: round(calc(var(--qy-control-xl) * 5 / 16), 1px);
+     * 面板是大面，取 4 分（16）：同一比例落到面板会过方，面板单独取值（选择）。
+     *
+     * 这一条比例只写在 --qy-radius-ratio 一处（此前字面 5 / 16 散落七处）：想让全库更方或更圆，改它，
+     * 控件、标记、读数轨道、骨架条、验证码格一并跟随（组件固定几何不依赖单个组件的圆角设置）。
+     * 5 / 16 是**预设**——没有更基本的关系推出它：它来自用户裁决 2026-10-07（「公共圆角更圆滑」，此前是
+     * min(外高 / 4, 2 分)），依据是取向与观感，不是量纲推导；「比例而非常数」才是由关系得来的部分。
+     * 作用范围：所有「圆角 = 外高 × 比例」的角色
+     * （--qy-radius-xs … -xl、-marker、-track、-slider-track），以及组件里按同一比例换算的骨架条与 OtpField 的格。
+     * 浮层、面板与由它们内缩得到的圆角不读这个比例（它们由 --qy-overlay-inset、4 分推出）。 */
+    --qy-radius-ratio: calc(5 / 16);
+    /* 小方块的圆角上限比：圆角 ≤ 边长 × 1/4，使边长很小的方块（勾选标记、开关槽、图例色块）仍是方的，不滑向胶囊。
+     * 与 --qy-radius-ratio 是第二个比例，不同角色：5/16 管「控件外高 → 圆角」，1/4 管「小方块边长 → 圆角上限」。
+     * **预设**：没有更基本的关系推出 1/4（边长 16 的标记得 4px，边长 20 的开关槽得 5px，边长 8 的色块得 2px，
+     * 并不对应同一个分的倍数），它只是此前散在 checkbox / tree / switch / 六处图例色块里的同一个字面 /4。
+     * 作用范围：Checkbox、Tree 勾选标记、Switch 槽与抓手的圆角 min(…, 边长 × 本比例)，以及 --qy-swatch-radius。
+     * 修改入口：只改这一行。 */
+    --qy-radius-cap-ratio: calc(1 / 4);
+    --qy-radius-xs: round(calc(var(--qy-control-xs) * var(--qy-radius-ratio)), 1px);
+    --qy-radius-sm: round(calc(var(--qy-control-sm) * var(--qy-radius-ratio)), 1px);
+    --qy-radius-md: round(calc(var(--qy-control-md) * var(--qy-radius-ratio)), 1px);
+    --qy-radius-lg: round(calc(var(--qy-control-lg) * var(--qy-radius-ratio)), 1px);
+    --qy-radius-xl: round(calc(var(--qy-control-xl) * var(--qy-radius-ratio)), 1px);
     --qy-radius: var(--qy-radius-md);
-    --qy-radius-marker: round(calc(var(--qy-marker-size) * 5 / 16), 1px);
+    --qy-radius-marker: round(calc(var(--qy-marker-size) * var(--qy-radius-ratio)), 1px);
     --qy-radius-item: var(--qy-radius-xs);
     --qy-radius-control: var(--qy-radius-md);
     --qy-overlay-inset: var(--qy-fen);
@@ -328,7 +380,7 @@
      * 按档位取值的部分在 src/track.ts。内缩半分：一分时 md 候选只剩 22px。
      * 轨道圆角 = 同档控件圆角、候选圆角按同心换算，都在轨道元素上就地推导，不设全局入口——
      * 要改它们，改控件圆角（2026-10-07 删去两条永远被覆盖的 :root 声明）。 */
-    --qy-track-inset: calc(var(--qy-fen) / 2);
+    --qy-track-inset: var(--qy-fen-half);
 
     /* ─── 填值控件与标记：只有一等（基础层 §2）──────────────────
      * 填值控件读这一层，不读档位；默认 md 等，紧凑密度降为 sm 等（见下方改绑）。
@@ -360,11 +412,17 @@
     --qy-slider-vertical-length: calc(8 * var(--qy-cai));
     --qy-status-dot-size: calc(2 * var(--qy-fen));
     --qy-readout-track-size: calc(2 * var(--qy-fen));
-    /* 读数轨道是载事的槽（应物象形：方以载事），圆角取与控件同一条比例 round(高 × 5/16)：
+    /* 读数轨道是载事的槽（应物象形：方以载事），圆角取与控件同一条比例 round(高 × --qy-radius-ratio)：
      * 读数轨道 8 → 3px，滑块轨道 4 → 1px，转角有缓而不成胶囊。此前借用标记圆角（5px），
      * 超过轨道高的一半（4px），被裁成两端半圆。派生，非预设。 */
-    --qy-radius-track: round(calc(var(--qy-readout-track-size) * 5 / 16), 1px);
-    --qy-radius-slider-track: round(calc(var(--qy-slider-track-size) * 5 / 16), 1px);
+    --qy-radius-track: round(calc(var(--qy-readout-track-size) * var(--qy-radius-ratio)), 1px);
+    --qy-radius-slider-track: round(calc(var(--qy-slider-track-size) * var(--qy-radius-ratio)), 1px);
+
+    /* 图例色块的圆角（派生 = 点的边长 × --qy-radius-cap-ratio = 8 × 1/4 = 2px）。
+     * 角色：数据图里「这一类是什么颜色」的小方块；比状态点（圆，身份）更方，因为它是类别的标记而不是对象的状态。
+     * 作用范围：Chart 的图例（线、色带、柱、环）、Heatmap 的分档色块、Proportion 的图例与段标记。
+     * 修改入口：点的边长（--qy-status-dot-size）或上限比（--qy-radius-cap-ratio）。 */
+    --qy-swatch-radius: calc(var(--qy-status-dot-size) * var(--qy-radius-cap-ratio));
 
     /* 头像按等取样：身份样本的大小由所在位置的控件等决定。 */
     --qy-avatar-xs: var(--qy-control-xs);
@@ -376,6 +434,34 @@
     /*
      * Kbd：键帽外高固定 4 分，字在其中居中，字号随所在文字取整；横向 1 分。只用清墨线一种机制。 */
     --qy-kbd-padding-inline: var(--qy-fen);
+
+    /* 字框（派生 = 4 分 = 16px）：装一个短标签的小方框的最小高与最小宽——
+     * 12px 字 + 上下各 1px 留白 + 1px 清墨线（基础层 §8「行内标记的几何」），所以是一个整数倍分，不是随手取的。
+     * 角色：键帽与角标的外框。作用范围：Kbd、Prose 里的 kbd、CornerMark 的数字角标。
+     * --qy-glyph-box-inset 是这个框坐在一行（一材）里的居中外边距 = (材 − 字框) / 2，使框连同空白正好占一行（行气）；
+     *   角标是绝对定位，不用它。
+     * 修改入口：改倍数（4）；两者随材与分重算。 */
+    --qy-glyph-box: calc(4 * var(--qy-fen));
+    --qy-glyph-box-inset: calc((var(--qy-cai) - var(--qy-glyph-box)) / 2);
+
+    /* 表头行与合计行的行高（派生 = 一材 + 上下各一个组内间隔 = 36px，基础层 §6「成对与成列的数据」）。
+     * 与正文行 --qy-row-default（一个填值控件 + 上下各一个组内间隔）并列，是同一条关系取另一个内容高度。
+     * 作用范围：Table 的 thead / tfoot、Prose 里的 thead / tfoot。DataTable 经由 Table。
+     * 它不随密度变（内容是一材的文字，不是填值控件），所以写在 :root，不进下面的 [data-density] 块。 */
+    --qy-header-row: calc(var(--qy-cai) + 2 * var(--qy-field-gap));
+
+    /* 行内文字的三个角色。
+     * --qy-inline-code-size（**预设**）：行内代码与键帽的字号 = 所在文字的 0.875 倍，取整像素。
+     *   没有关系推出 0.875（等宽字体在同字号下显得偏大，通行的补偿约 0.85–0.9），它是此前五处字面量的共同值。
+     *   em 在使用处求值（自定义属性按记号替换），所以随所在文字档变，这与此前直接写在 font-size 上等价。
+     *   作用范围：Typography 的 Code、Kbd、Prose 的 code 与 kbd。
+     * --qy-underline-offset（**预设**）：链接下划线与文字的距离 = 0.25em，取整像素（同样随使用处的字号）。
+     *   作用范围：Link、Item 的链接、Breadcrumb 的链接、Prose 的 a。下划线的粗细不另设：就是线宽 --qy-line-width。
+     * --qy-field-min-text（**预设**）：一个可输入的字段里，文字区至少容得下的宽度 = 4em（几个字符）。
+     *   作用范围：Select 的触发器下限、Combobox 与 InputGroup 的输入区下限。TagInput 的草稿编辑器取 10em，是另一个角色，不读它。 */
+    --qy-inline-code-size: round(0.875em, 1px);
+    --qy-underline-offset: round(0.25em, 1px);
+    --qy-field-min-text: 4em;
 
     /* ─── 疏密（疏密有致；基础层 §3）──────────────────────────
      * 间距是分组的第一手段，三级逐级拉开：
@@ -389,6 +475,8 @@
     --qy-action-gap: calc(2 * var(--qy-fen));
     /* 层级缩进：3 分，明显小于行高，又大到一眼数得出级数。预设；密度不改层级深度。 */
     --qy-level-indent: calc(3 * var(--qy-fen));
+    /* 页面左右边距：**预设**（页面级，没有关系推出 1rem / 1.4vw / 1.75rem 三个数）。
+     * 窄屏（< 40rem）改为 4 分，见文件末尾的媒体查询；与组件里 sm: 是同一个点。 */
     --qy-page-gutter: clamp(1rem, 1.4vw, 1.75rem);
 
     /* 浮起的层序（基础层 §6）。整数与步长是预设；新开 modal 高于旧面的候选、
@@ -400,6 +488,41 @@
     --qy-layer-surface-offset: 1;
     --qy-layer-owned-popup-offset: 2;
 
+    /* 浮层与触发器之间的间距（**预设** = 1 分 = 4px；基础层 §6「浮层与触发器间隔 1 分，避免两道边框贴成一条粗线」）。
+     * 角色：弹出面离开它的触发器多远。
+     * 作用范围：所有锚定在触发器上的浮层——Menu、ContextMenu 的子菜单、Select、Combobox、Autocomplete、Popover、Tooltip、
+     *   HoverCard、Sidebar 的收起子级浮层，以及 NativeSelect 的原生选择面（mt）。2026-10-12 前 Popover、Tooltip、HoverCard
+     *   取 Base UI 的默认 0，面板的边直接贴着触发器；用户裁决 2026-10-13 统一为这一个值。
+     * 机制：Base UI 定位器的 sideOffset 是 JS 数字，读不到 CSS 变量；本 token 因此在文件末尾登记为 <length>
+     *   （@property），computed 值是求好的像素，floating-layer.tsx 的 popupOffset() 在定位时读它。
+     * 修改入口：只改这一行，JS 一侧自动跟随。 */
+    --qy-popup-offset: var(--qy-fen);
+
+    /* 提示面的内缘：外缘到内容的距离（面有线时，使用处减去 --qy-line-width）。
+     * 角色：小字号的浮起提示——Tooltip、锚定通知的 tooltipStyle、数据图的读数（Chart、ScatterChart、Heatmap）。
+     * 关系：这些面的字与小控件同字号（13px / 一材行高），且不随密度变，所以行向取小控件外缘到字的距离
+     *   （--qy-control-sm-padding）；块向 = 读数的行间（1 分）+ 1 分，与面板内缘同一关系——内容先彼此成组，再与边成组。
+     *   只有一行字的 Tooltip 不读块向：它的高是小控件的高，字在其中居中（见 tooltip.tsx）。
+     * 2026-10-13 之前三处各写一套：Tooltip 12 / 居中，读数 14（跟密度）/ 9，锚定通知 9 / 9；统一后见基础层沿革。
+     * 修改入口：这两行。 */
+    --qy-hint-padding-inline: var(--qy-control-sm-padding);
+    --qy-hint-padding-block: calc(2 * var(--qy-fen));
+
+    /* 浮动通知离视口边缘的距离（**预设** = 6 分 = 24px）。
+     * 角色：通知（Toast）停靠在视口六个位置时与视口边的间距，也是它最大宽高里扣去的两侧之和的一半。
+     * 与页面边距 --qy-page-gutter 不是同一个角色：通知悬浮在内容之上，不属于版心。
+     * 作用范围：Toast 的六个位置、max-w、max-h。当前只有这一个消费者，因为它在同一文件里出现 8 次、且是视口级的尺寸，所以保留为系统角色。
+     * 修改入口：只改这一行。 */
+    --qy-notice-inset: var(--qy-space-6);
+
+    /* 禁用的不透明度（**预设** = 64%；STANDARDS §5「当前 opacity-64 是继承预设」，没有关系推出 64）。
+     * 角色：命令类与标记类控件「当前不可操作」的整体淡化量——Button、Toggle、ToggleGroup、SegmentedControl、Checkbox、
+     *   Radio、Switch、Slider、Calendar 的禁用日、Tree 的禁用项、Disclosure、导航线、浮层条目。
+     * 不属于它的：填值控件的禁用不降不透明度，而是清染面 + 浓墨字（基础层 §9，fill-state.ts）。
+     * 真实的禁用另由原生 / ARIA 与事件约束承担，不透明度只是外观。
+     * 修改入口：只改这一行；theme.css 把它暴露为 opacity-disabled。 */
+    --qy-opacity-disabled: 64%;
+
     /* ─── 动（气韵生动；基础层 §12）───────────────────────────
      * 同一类变化用同一节拍。时长与曲线为预设。 */
     --qy-duration-instant: 0ms;
@@ -407,7 +530,6 @@
     --qy-duration-fast: 140ms;
     --qy-duration-feedback: 180ms;
     --qy-duration-base: 220ms;
-    --qy-duration-slow: 320ms;
     --qy-duration-drawer: 450ms;
     /* 不定长等待的一个周期（进度条的一程、进行中标记的一圈）。两处都在说「进行中，比例未知」，
      * 是同一类变化，所以共用一个节拍；原先一处 1.5s、一处 Tailwind 的 1s，彼此无关。预设。 */
@@ -415,15 +537,30 @@
     --qy-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --qy-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --qy-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-    --qy-ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
     --qy-stagger: 40ms;
+
+    /* 动效的幅度（motion.css 读这里；全部**预设**，数值与此前写在 motion.css 里的字面量相同）。
+     * --qy-scale-popup 0.98：浮层与对话框入场、退场时的起止缩放（此前在 motion.css 里写了两遍）。
+     *   修改入口：这一行；作用范围：select / menu / context-menu / autocomplete / combobox / popover / tooltip / hover-card /
+     *   navigation-menu 的弹出面，以及 ≥40rem 时的 dialog / alert-dialog。
+     * --qy-scale-press 0.97：按下时 .qy-pressable 的缩放（当前只有 Button 带这个类）。
+     *   它与浮层缩放是不同的关系（按下是对手指的回应，浮层是出现），所以是两个 token，不合并。
+     * --qy-travel-nav 1.5rem：导航菜单内容在相邻项之间切换时水平滑动的距离。
+     * --qy-travel-dialog 1rem：窄屏底部贴靠的对话框入退时的竖向位移。
+     * --qy-travel-rise 4px：data-motion="rise-in" 与 stagger 的上升距离。字面 4px（= 1 分，在根字号 16px 下），保持 px，不随根字号缩放，与此前一致。 */
+    --qy-scale-popup: 0.98;
+    --qy-scale-press: 0.97;
+    --qy-travel-nav: 1.5rem;
+    --qy-travel-dialog: 1rem;
+    --qy-travel-rise: 4px;
 
     /* ─── 焦点（骨法用笔；基础层 §15）─────────────────────────
      * 焦点只让已有的线加深，不加粗，不外扩（用户裁决：「控件外面不出现任何一圈」）。
      * 实心填充没有线可加深，在填充内侧画一道反色线；它是全库唯一的 2px 线，
      * 因为焦点必须一瞥可见。无填充无边框的入口在自身盒内画 1px。 */
     --qy-focus-ring-width: 2px;
-    --qy-focus-quiet-width: 1px;
+    /* quiet 焦点画的是一道线，线宽统一（§5）：读 --qy-line-width（值仍是 1px）。这是判断，不是推导：若要让安静焦点独立于线宽，改回字面量即可。 */
+    --qy-focus-quiet-width: var(--qy-line-width);
   }
 
   /* 依赖疏密之材或填值高度的派生值：在每个密度容器上重算。
@@ -454,6 +591,21 @@
      * 聚焦时线加深到焦墨，不加粗。 */
     --qy-button-bordered-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-dan), transparent);
     --qy-button-bordered-border-focus: var(--qy-ring);
+    /* danger 的 bordered：同一条淡墨线，但墨换成危险文字色（与中性孪生同一浓度 --qy-ink-dan；聚焦时取不透明的危险文字色）。
+     * 此前这两条是 button.tsx 里的内联局部变量（color-mix(--color-destructive-foreground …)）；表达式不变，只是搬到这里并直接读
+     * --qy-danger-foreground：它与中性孪生在同一个明暗根上重算（不经 Tailwind 的 --color-* 别名再绕一层）。
+     * 作用范围：Button variant="bordered" tone="danger"。修改入口：这两行，或墨阶的 --qy-ink-dan。 */
+    --qy-button-bordered-border-danger: color-mix(in srgb, var(--qy-danger-foreground) var(--qy-ink-dan), transparent);
+    --qy-button-bordered-border-focus-danger: var(--qy-danger-foreground);
+    /* 代码面的底（CodeBlock 的容器面）：取页面底纸本身——纸上的代码块露出纸下的底，底纸变它跟着变；
+     * 不另写浓度（用户 2026-10-12：要比白纸深一点点，且取值须与背景有关系）。浓度的唯一来源因此是
+     * 底纸（--qy-background = 纸上一层清染），调 --qy-ink-qing 或底纸，代码面一起动。
+     * 后果：代码块坐在卡片或面板（纸本色，白）上时比所坐之处深一级；坐在页面底纸上时与页面没有底色差，
+     * 只由容器线（border-border）划出范围——这是这条关系的直接结果，不是漏画。
+     * 同一个后果的另一面：代码面与侧栏的底（--qy-sidebar = --qy-background）是同一张底，所以标题栏里选中的段
+     * 与侧栏当前项（都是选中面叠在底纸上）在两个主题里读出同一种颜色。
+     * 作用范围只有 CodeBlock；不透明（随局部明暗根重算纸与墨），要改它改这一行或改底纸。 */
+    --qy-code-surface: var(--qy-background);
   }
 
   /*
@@ -471,7 +623,10 @@
     --qy-fill-radius: var(--qy-radius-sm);
   }
 
-  @media (max-width: 767px) {
+  /* 窄屏点：全库只有一个，40rem（Tailwind 的 sm:；数值为**预设**）。控件高度与文字（sm:）、对话框的入场方式（motion.css）、
+   * 页边距与面板内缘（这里）在同一个宽度一起换档。2026-10-13 之前这里是 767px，640–767px 之间控件已是桌面尺寸而面板内缘
+   * 仍是窄屏值；统一后那一段的面板内缘回到桌面值（页边距在那一段两种写法同为 1rem，不变）。 */
+  @media (width < 40rem) {
     :root {
       --qy-page-gutter: var(--qy-space-4);
     }
@@ -480,4 +635,23 @@
       --qy-panel-padding: var(--qy-space-4);
     }
   }
+}
+
+/* 登记为长度：自定义属性的 computed 值默认是未求值的表达式（var(--qy-fen)），登记后是像素，JS 才读得到。
+ * 只登记 JS 一侧要读的三个：分、线宽（数据图的几何由它们推出，见 src/system-units.ts）与浮层间隔（floating-layer.tsx 的 popupOffset()）。
+ * initial-value 只在样式表缺这条声明时生效，取各自的预设。登记不改变任何取值与继承。 */
+@property --qy-fen {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 4px;
+}
+@property --qy-line-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 1px;
+}
+@property --qy-popup-offset {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 4px;
 }

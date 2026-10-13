@@ -12,6 +12,7 @@ import { DemoFrame } from "../../src/components/demo";
 import { DocsNav } from "../../src/components/docs-nav";
 import { DocsBreadcrumbs } from "../../src/components/docs-breadcrumbs";
 import { DocFooter } from "../../src/components/pager";
+import { EditLink } from "../../src/components/toc";
 import ComponentsIndex from "../../src/pages/docs/components-index";
 import { Link } from "../../src/components/locale-link";
 import type { ComponentEntry } from "../../src/lib/registry";
@@ -120,6 +121,7 @@ export function renderMixed(locale: DocsLocale, pathname = paths.componentPath("
       <DocsBreadcrumbs />
       <ComponentsIndex />
       <DocFooter path={pathname} />
+      <EditLink />
       <DemoFrame slug="button" demo={{ id: "translated", source: "const fixture = true;", default: () => <p>演示内容</p>, meta: { title: "演示中文标题", titleEn: "[W4.2 fixture] Demo", descriptionEn: "[W4.2 fixture] Demo description" } }} />
       <DemoFrame slug="input" demo={{ id: "fallback", source: "const fixture = false;", default: () => <p>回退内容</p>, meta: { title: "未翻译演示", description: "未翻译演示说明" } }} />
       <Link to="/docs/installation?mode=test#providers">路径夹具</Link>

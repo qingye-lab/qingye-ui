@@ -23,12 +23,16 @@ window.__align = () => {
       // 第一行 = 内容里位置最靠上的那一行：文字行，或没有文字的有形轨道（进度、构成）。
       const candidates = [];
       const w = document.createTreeWalker(content, NodeFilter.SHOW_TEXT); let n;
-      while ((n = w.nextNode())) { if (!n.textContent.trim() || !n.parentElement.getBoundingClientRect().height || n.parentElement.closest(".sr-only")) continue; /* 只给读屏的文字在视觉上不成行 */ const rg = document.createRange(); rg.selectNodeContents(n); const rr = rg.getClientRects()[0]; if (rr) { const ft = { rect: rr, el: n.parentElement }; candidates.push({ top: rr.top, center: lineCenter(ft), what: ft.el.dataset.slot || ft.el.tagName }); } }
+      while ((n = w.nextNode())) { if (!n.textContent.trim() || !n.parentElement.getBoundingClientRect().height || n.parentElement.closest(".sr-only")) continue; /* 只给读屏的文字在视觉上不成行 */
+        /* 图标里的字形（SVG 的 <text>、标题锚点里那个链环图标）是图形，不是一行正文：量到它会把标题行算成 ICON 的方框。 */ if (n.parentElement.closest("svg")) continue; const rg = document.createRange(); rg.selectNodeContents(n); const rr = rg.getClientRects()[0]; if (rr) { const ft = { rect: rr, el: n.parentElement }; candidates.push({ top: rr.top, center: lineCenter(ft), what: ft.el.dataset.slot || ft.el.tagName, el: ft.el }); } }
       // 没有文字的控件（图标按钮）也是一行。
-      for (const el of content.querySelectorAll("button, [data-slot$=track]")) { if (el.textContent.trim() && !el.querySelector(".sr-only")) continue; const r = el.getBoundingClientRect(); if (r.height) candidates.push({ top: r.top, center: (r.top + r.bottom) / 2, what: el.dataset.slot }); }
+      for (const el of content.querySelectorAll("button, [data-slot$=track]")) { if (el.textContent.trim() && !el.querySelector(".sr-only")) continue; const r = el.getBoundingClientRect(); if (r.height) candidates.push({ top: r.top, center: (r.top + r.bottom) / 2, what: el.dataset.slot, el }); }
       const box = content.getBoundingClientRect();
-      const inside = candidates.filter(c => c.top >= box.top - 0.5 && c.top <= box.bottom);
-      candidates.length = 0; candidates.push(...inside);
+      /* 内容列里并排放着两块时（如阅读面：文章在左、目录在右），旁边那块自己的首行与本行名称无关
+       * （量它会把目录的第一条当成正文首行，读出一个不存在的偏差）。并排时靠位置分不开，所以由页面
+       * 显式声明哪一块不参与取样：data-align-skip。没有声明的行取样不变。 */
+      const scoped = candidates.filter(c => c.top >= box.top - 0.5 && c.top <= box.bottom && !c.el?.closest("[data-align-skip]"));
+      candidates.length = 0; candidates.push(...scoped);
       if (!candidates.length) continue;
       const first = candidates.reduce((a, c) => c.top < a.top - 0.5 ? c : a);
       const d = +(first.center - nc).toFixed(2); if (Math.abs(d) > 1) out.rows.push([name.textContent, "block", d, first.what]);

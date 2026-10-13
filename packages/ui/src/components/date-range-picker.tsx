@@ -229,7 +229,7 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
             const range = resolved[index]!;
             const current = sameRange(draft, range);
             return <Button key={index} variant="quiet" aria-pressed={current} disabled={!editable || !inBounds(range.from) || !inBounds(range.to)}
-              className={cn("justify-start", current && "bg-(--qy-surface-active) text-foreground not-aria-disabled:hover:bg-(--qy-surface-active) not-aria-disabled:active:bg-(--qy-surface-active)")}
+              className={cn("justify-start", current && "bg-surface-selected text-foreground not-aria-disabled:hover:bg-surface-selected not-aria-disabled:active:bg-surface-selected")}
               onClick={() => { releaseTyping(); setDraft({ from: range.from, to: range.to }); setVisibleMonth(range.from); }}>{preset.label}</Button>;
           })}
         </div>}

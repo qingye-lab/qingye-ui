@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@qingye_lab/ui/components/button";
 import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
 import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle } from "@qingye_lab/ui/components/drawer";
+import { ItemLink } from "@qingye_lab/ui/components/item";
 import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Inline } from "@qingye_lab/ui/components/layout";
 import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
@@ -42,7 +43,7 @@ export default function Collections() {
     { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择全部集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.name}`} /> },
     { accessorKey: "name", meta: { rowHeader: true }, header: ({ column }) => <DataTableSortButton column={column}>名称</DataTableSortButton>,
       // 名称是去处：链到详情页，与其他行正文同一字重（行标题靠位置识别）。
-      cell: ({ row }) => <RouterLink to={`${BASE}/collections/${row.original.id}`} className="rounded-item text-foreground underline-offset-4 outline-none hover:underline focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring">{row.original.name}</RouterLink> },
+      cell: ({ row }) => <ItemLink render={<RouterLink to={`${BASE}/collections/${row.original.id}`} />}>{row.original.name}</ItemLink> },
     { accessorKey: "source", header: "来源", enableSorting: false, cell: ({ row }) => <span className="text-muted-foreground">{row.original.source}</span> },
     { accessorKey: "owner", header: "负责人", enableSorting: false, cell: ({ row }) => <Inline gap="field"><Avatar size="xs" label={row.original.owner}><AvatarFallback>{row.original.owner.slice(0, 1)}</AvatarFallback></Avatar><span>{row.original.owner}</span></Inline> },
     { accessorKey: "records", meta: { numeric: true }, sortDescFirst: true, header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, cell: ({ row }) => number.format(row.original.records) },
@@ -87,7 +88,7 @@ export default function Collections() {
         </Inline>}
     </div>
 
-    <DataTable table={table} caption="集合" className="[&_caption]:sr-only" emptyContent={<span className="text-muted-foreground">没有匹配的集合 <Button variant="quiet" size="sm" onClick={() => filter(() => { setQuery(""); setScope("all"); setSource("全部来源"); })}>清除条件</Button></span>} />
+    <DataTable table={table} aria-label="集合" emptyContent={<span className="text-muted-foreground">没有匹配的集合 <Button variant="quiet" size="sm" onClick={() => filter(() => { setQuery(""); setScope("all"); setSource("全部来源"); })}>清除条件</Button></span>} />
 
     {totalPages > 1 && <Pagination page={page} totalPages={totalPages} aria-label="集合分页" className="justify-self-end">
       <PaginationList>
@@ -98,7 +99,7 @@ export default function Collections() {
     </Pagination>}
 
     <Drawer swipeDirection="right" open={peek !== null} onOpenChange={open => { if (!open) setPeek(null); }}>
-      {peek && <DrawerPopup className="w-[min(26rem,100vw)] content-start p-(--qy-panel-padding)">
+      {peek && <DrawerPopup className="w-[min(26rem,100vw)] content-start">
         <div className="grid gap-(--qy-field-gap)">
           <DrawerTitle>{peek.name}</DrawerTitle>
           <StatusDot status={syncDot[peek.state]} label={`${peek.state} · ${peek.synced}`} />

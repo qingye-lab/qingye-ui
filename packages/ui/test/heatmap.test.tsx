@@ -137,3 +137,24 @@ test("renderReadout replaces the value line only; row and column stay", () => {
   focus(screen.getByRole("gridcell", { name: "上午 周三：尚未统计" }));
   expect(screen.getByRole("tooltip")).toHaveTextContent("上午/尚未统计/无档");
 });
+
+test("a missing row or column name throws a readable Error naming the item, not a TypeError", () => {
+  const error = (fn: () => unknown) => { try { fn(); } catch (caught) { return caught as Error; } throw new Error("expected a throw"); };
+  const column = error(() => render(<Heatmap label="同步热度" rowLabel="时段" columnLabel="星期" valueLabel="同步次数" columns={[columns[0]!, { key: "tue", label: undefined as unknown as string }]} rows={rows} />));
+  expect(column).not.toBeInstanceOf(TypeError);
+  expect(column.message).toBe('Heatmap columns[1] (key "tue") requires a nonempty label; received undefined.');
+  const row = error(() => render(<Heatmap label="同步热度" rowLabel="时段" columnLabel="星期" valueLabel="同步次数" columns={columns} rows={[rows[0]!, { ...rows[1]!, label: undefined as unknown as string }]} />));
+  expect(row).not.toBeInstanceOf(TypeError);
+  expect(row.message).toMatch(/Heatmap rows\[1\] \(id "pm"\) requires a nonempty label/);
+  expect(error(() => render(<Heatmap label="同步热度" rowLabel={undefined as unknown as string} columnLabel="星期" valueLabel="同步次数" columns={columns} rows={rows} />)).message).toMatch(/rowLabel/);
+});
+
+test("framed={false} with an external name names the figure and the grid from outside and drops the figcaption", () => {
+  render(<section><h2 id="heat-title">同步热度</h2><Heatmap framed={false} aria-labelledby="heat-title" label="每周时段的同步次数" rowLabel="时段" columnLabel="星期" valueLabel="同步次数" columns={columns} rows={rows} /></section>);
+  const figure = screen.getByRole("figure", { name: "同步热度" });
+  expect(figure).toHaveAttribute("data-framed", "false");
+  expect(figure.querySelector("figcaption")).toBeNull();
+  expect(screen.getByRole("grid", { name: "同步热度" })).toBeInTheDocument();
+  openTable();
+  expect(within(figure).getByRole("table", { name: "每周时段的同步次数" })).toBeInTheDocument();
+});

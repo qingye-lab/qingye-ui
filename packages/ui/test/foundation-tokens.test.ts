@@ -40,7 +40,9 @@ test.each([["xs", 1], ["sm", 2], ["md", 3], ["lg", 4], ["xl", 5]] as const)(
   // 横向留白 = (外高 − 分) / 2 = 纵向余量 + 2 分。
   expect(px(`var(--qy-control-${size}-padding)`)).toBe((height - 4) / 2);
   expect(px(`var(--qy-control-${size}-padding)`)).toBe((height - 20) / 2 + 8);
-  expect(declaration(`--qy-control-${size}-padding-bordered`)).toBe(`calc(var(--qy-control-${size}-padding) - 1px)`);
+  // 边框占掉的一道就是线宽（2026-10-12：此前字面 1px，现读 --qy-line-width；值仍是 padding − 1px，下一行验算）。
+  expect(declaration(`--qy-control-${size}-padding-bordered`)).toBe(`calc(var(--qy-control-${size}-padding) - var(--qy-line-width))`);
+  expect(px(`var(--qy-control-${size}-padding-bordered)`)).toBe(px(`var(--qy-control-${size}-padding)`) - 1);
   // 图标为偶数且整像素居中。
   const icon = px(`var(--qy-control-${size}-icon)`);
   expect(icon % 2).toBe(0);

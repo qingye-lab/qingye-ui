@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
-Source SHA-256: f8127bb393799cab3bb83d3e54f2fcddf479e38d000adce7e821eff75e01d54c
+Source SHA-256: 0b0ed72c7e1ab6b15fec0f88ef9c3098ec28f695433ec369a810473649f4bfb7
 
 Reveal the same supplemental content on hover and keyboard focus.
 

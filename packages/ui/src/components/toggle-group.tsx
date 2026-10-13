@@ -27,11 +27,11 @@ export function ToggleGroup<Value extends string>({ size = "md", className, ...p
 
 export function ToggleGroupItem<Value extends string>({ size, className, ...props }: ToggleGroupItemProps<Value>) {
   const groupSize = React.useContext(GroupSize);
-  // 按压项的面：淡染 + 焦墨字（--qy-track-selected / -foreground，由 Toggle 的按下态给出，基础层 §11「当前位置用淡染」）。
+  // 按压项的面：选中面 + 焦墨字（--qy-track-selected / -foreground，由 Toggle 的按下态给出，基础层 §11 反馈梯）。
   // 按压是持续的当前位置，不是命令，不借用 --qy-primary 的实心：筛选不是一个视图里的君（§10），
   // 品牌覆写主操作的填充时，一页里的切换组不随之变色。填充已划出范围，不加阴影（NG11）。
   // 按压与否靠面的深浅和字的墨色（焦墨 / 浓墨）共同承担，字重不变，整排不跳动。
-  // 未按压：无边框无底，字为浓墨；悬停时字回到焦墨并出现清墨底。按压项悬停不变（§19：悬停是当前状态自己的悬停；
+  // 未按压：无边框无底，字为浓墨；悬停时字回到焦墨并出现悬停面。按压项悬停不变（§19：悬停是当前状态自己的悬停；
   // 未按压的悬停样式只在未按压时出现）。
   return <Toggle data-slot="toggle-group-item" size={size ?? groupSize} {...props}
     className={(state) => cn(
@@ -40,7 +40,7 @@ export function ToggleGroupItem<Value extends string>({ size, className, ...prop
       !state.pressed && "bg-transparent text-muted-foreground not-aria-disabled:hover:text-foreground not-aria-disabled:active:bg-(--qy-surface-active)",
       // 候选高与圆角由轨道倒推（src/track.ts），覆盖按钮自己的几何。
       trackItemClassName,
-      state.disabled && "cursor-not-allowed opacity-64",
+      state.disabled && "cursor-not-allowed opacity-disabled",
       typeof className === "function" ? className(state) : className,
     )}
   />;

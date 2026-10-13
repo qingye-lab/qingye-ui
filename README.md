@@ -2,7 +2,7 @@
 
 器用为本，关系为法，合宜为度。
 
-Qingye UI is a React component library built from the design basis in [design.md](./design.md), using accessible [Base UI](https://base-ui.com) primitives. The current source contains **91 component modules**. Applications own their data, validation, requests, permissions and results; the library provides controls and reusable structural relationships.
+Qingye UI is a React component library built from the design basis in [design.md](./design.md), using accessible [Base UI](https://base-ui.com) primitives. The current source contains **93 component modules**. Applications own their data, validation, requests, permissions and results; the library provides controls and reusable structural relationships.
 
 | Workspace | Purpose | Current version |
 | --- | --- | --- |

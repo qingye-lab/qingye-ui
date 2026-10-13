@@ -46,16 +46,19 @@ test("Button navigation is distinct from commands and native styled links", () =
   const result = inspectLibraryControls(`
     import { Button as Action, buttonVariants } from "@qingye_lab/ui/components/button";
     import { Link as RouteLink } from "react-router-dom";
+    import { Link as SiteLink } from "@/components/locale-link";
+    import { Link as OtherLink } from "./other";
     export const View = () => <>
       <Action render={<a href="/docs" />} nativeButton={false}>Docs</Action>
       <Action render={<RouteLink to="/docs" />} nativeButton={false}>Docs</Action>
+      <Action render={<SiteLink to="/docs" />} nativeButton={false}>Docs</Action>
+      <Action render={<OtherLink to="/docs" />} nativeButton={false}>Not a route link</Action>
       <Action render={<span />} nativeButton={false}>Command</Action>
       <a href="/docs" className={buttonVariants()}>Docs</a>
       <RouteLink to="/docs" className={buttonVariants()}>Docs</RouteLink>
     </>;
   `);
-  assert.equal(result.violations.length, 2);
-  assert.ok(result.violations.every((violation) => violation.message.startsWith("Navigation")));
+  assert.equal(result.violations.filter((violation) => violation.message.startsWith("Navigation")).length, 3);
 });
 
 test("syntax errors cannot be reported as passing controls", () => {

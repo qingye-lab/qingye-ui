@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
 import { Chart, ReadoutTooltip, type ChartPlotData, type ChartProjectedSeries, type ChartRow } from "../src/components/chart";
@@ -301,4 +302,39 @@ test("a donut's legend gives each part its value and share, and the remainder wh
   unmount();
   render(<Chart {...props} total={8} formatValue={value => `${value} 次`} />);
   expect(items()).toEqual(["成功3 次（37.5%）", "失败1 次（12.5%）", "其余4 次（50%）"]);
+});
+
+test("a missing name throws a readable Error naming the item, not a TypeError from .trim()", () => {
+  const draw = (props: Partial<React.ComponentProps<typeof Chart>>) => () => render(<Chart type="line" label="数值图" categoryLabel="项" valueLabel="数值" series={series} rows={rows} {...props} />);
+  const error = (fn: () => unknown) => { try { fn(); } catch (caught) { return caught as Error; } throw new Error("expected a throw"); };
+  const missingSeries = error(draw({ series: [{ key: "value", label: "系列" }, { key: "humidity", label: undefined as unknown as string }] }));
+  expect(missingSeries).not.toBeInstanceOf(TypeError);
+  expect(missingSeries.message).toBe('Chart series[1] (key "humidity") requires a nonempty label; received undefined.');
+  const missingRow = error(draw({ rows: [{ id: "r", label: undefined as unknown as string, values: { value: 1 } }] }));
+  expect(missingRow).not.toBeInstanceOf(TypeError);
+  expect(missingRow.message).toMatch(/Chart rows\[0\] \(id "r"\) requires a nonempty label; received undefined/);
+  expect(error(draw({ rows: [{ id: undefined as unknown as string, label: "项", values: { value: 1 } }] })).message).toMatch(/Chart rows\[0\] requires a nonempty id/);
+  expect(error(draw({ series: [{ key: "value", label: "甲" }, { key: "value", label: "乙" }] })).message).toMatch(/series\[1\] repeats the key "value"/);
+  expect(error(draw({ label: undefined as unknown as string }))).not.toBeInstanceOf(TypeError);
+  expect(error(draw({ rows: undefined as unknown as ChartRow[] })).message).toMatch(/real rows/);
+});
+
+test("framed={false} with an external name: no figcaption, the figure takes the outside name, the data toggle stays", () => {
+  render(<section><h2 id="trend-title">本周趋势</h2><Chart framed={false} aria-labelledby="trend-title" type="line" label="本周同步次数" categoryLabel="项" valueLabel="数值" series={series} rows={rows} /></section>);
+  const figure = screen.getByRole("figure", { name: "本周趋势" });
+  expect(figure).toHaveAttribute("data-framed", "false");
+  expect(figure.querySelector("figcaption")).toBeNull();
+  openTable();
+  expect(within(figure).getByRole("table", { name: "本周同步次数" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "查看数据" })).toHaveAttribute("aria-expanded", "true");
+});
+
+test("the default stays framed and self-titled; unframed without an outside name keeps its own title", () => {
+  const { unmount } = render(<Chart type="line" label="本周同步次数" categoryLabel="项" valueLabel="数值" series={series} rows={rows} />);
+  expect(screen.getByRole("figure", { name: "本周同步次数" })).toHaveAttribute("data-framed", "true");
+  unmount();
+  render(<Chart framed={false} type="line" label="本周同步次数" categoryLabel="项" valueLabel="数值" series={series} rows={rows} />);
+  const figure = screen.getByRole("figure", { name: "本周同步次数" });
+  expect(figure).toHaveAttribute("data-framed", "false");
+  expect(figure.querySelector("figcaption")).toHaveTextContent("本周同步次数");
 });

@@ -10,17 +10,17 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 91,
+    "components": 93,
     "byStatus": {
-      "type-resolved": 91
+      "type-resolved": 93
     },
     "documentedButMissing": 0,
-    "undocumented": 95,
+    "undocumented": 96,
     "undocumentedDeclaredInThisComponentsFile": 11,
     "unresolved": 0,
-    "uncheckedWrittenNames": 157,
+    "uncheckedWrittenNames": 167,
     "uncheckedByReason": {
-      "generic": 117,
+      "generic": 127,
       "part-not-applicable": 32,
       "dotted-path-into-another-type": 2,
       "no-resolved-part-in-group": 6
@@ -144,7 +144,7 @@
       "component": "chart",
       "part": "Chart",
       "prop": "events",
-      "declaredAt": "packages/ui/src/components/chart.tsx:76"
+      "declaredAt": "packages/ui/src/components/chart.tsx:98"
     },
     {
       "component": "copy-button",
@@ -575,7 +575,7 @@
       "component": "scatter-chart",
       "part": "ScatterChart",
       "prop": "style",
-      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:14"
+      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:18"
     },
     {
       "component": "search-input",
@@ -658,19 +658,19 @@
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "count",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:96"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:127"
     },
     {
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "max",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:96"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:127"
     },
     {
       "component": "sidebar",
       "part": "SidebarSub",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:142"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:171"
     },
     {
       "component": "theme-provider",
@@ -683,6 +683,13 @@
       "part": "ToolbarButton",
       "prop": "shape",
       "declaredAt": "packages/ui/src/components/toolbar.tsx:17"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceTitle",
+      "prop": "numeric",
+      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "viaComponent": "typography"
     }
   ],
   "undocumentedParts": [
@@ -1579,8 +1586,29 @@
       "reason": "part-not-applicable"
     },
     {
+      "component": "severity-mark",
+      "part": "SeverityMark",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
       "component": "sidebar",
       "part": "Sidebar / SidebarToggle",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarHeader / SidebarTitle",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarFooter",
       "written": "render / ref / native props",
       "token": "native props",
       "reason": "generic"
@@ -1912,6 +1940,55 @@
       "part": "VirtualList<Item>",
       "written": "render / ref / style / className / events / ARIA",
       "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "Workspace",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceSurface",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceHeader",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceTitle",
+      "written": "level / step / render / ref / Heading props",
+      "token": "Heading props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceSummary",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceActions",
+      "written": "render / ref / children / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "workspace",
+      "part": "WorkspaceContent",
+      "written": "render / ref / children / native props",
+      "token": "native props",
       "reason": "generic"
     }
   ]

@@ -52,7 +52,7 @@ function BreadcrumbMore({ links }: { links: readonly React.ReactElement<Breadcru
     <MenuTrigger data-slot="breadcrumb-more" aria-label={messages.more} render={<Button variant="quiet" size="xs" shape="icon" />}><IconDots aria-hidden="true" /></MenuTrigger>
     <MenuPortal><MenuPositioner><MenuPopup>{links.map((link, index) => {
       const { className: _className, children, ...rest } = link.props;
-      return <MenuLinkItem key={link.key ?? index} {...(rest as object)}>{children}</MenuLinkItem>;
+      return <MenuLinkItem key={index} {...(rest as object)}>{children}</MenuLinkItem>;
     })}</MenuPopup></MenuPositioner></MenuPortal>
   </Menu>;
 }
@@ -65,7 +65,7 @@ export function BreadcrumbItem({ render, className, ...props }: BreadcrumbItemPr
 }
 export type BreadcrumbLinkProps = useRender.ComponentProps<"a">;
 export function BreadcrumbLink({ render, className, ...props }: BreadcrumbLinkProps) {
-  return useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "breadcrumb-link", className: cn("touch-target min-w-0 rounded-marker text-muted-foreground underline-offset-[round(0.25em,1px)] outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground hover:underline focus-visible:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring", className) }, props) });
+  return useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "breadcrumb-link", className: cn("touch-target min-w-0 rounded-marker text-muted-foreground underline-offset-(--qy-underline-offset) outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground hover:underline focus-visible:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring", className) }, props) });
 }
 export type BreadcrumbCurrentProps = useRender.ComponentProps<"span">;
 export function BreadcrumbCurrent({ render, className, ...props }: BreadcrumbCurrentProps) {
@@ -73,5 +73,5 @@ export function BreadcrumbCurrent({ render, className, ...props }: BreadcrumbCur
 }
 export type BreadcrumbSeparatorProps = useRender.ComponentProps<"span">;
 export function BreadcrumbSeparator({ render, className, children = <IconChevronRight className="size-(--qy-control-sm-icon)" />, ...props }: BreadcrumbSeparatorProps) {
-  return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-separator", "aria-hidden": true, children, className: cn("inline-flex shrink-0 text-input", className) }, props) });
+  return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-separator", "aria-hidden": true, children, className: cn("inline-flex shrink-0 text-ink-decor", className) }, props) });
 }

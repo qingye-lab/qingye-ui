@@ -1,0 +1,90 @@
+/*
+ * 组件总览：每个组件一格——一个清墨线框托着活的示例，框下是名称与一句用途，整格是一个链接。
+ * 框是这页唯一的框：示例是一件独立的物，须与邻格分开；页上其余处都不画框。
+ * - 框高 7 材（预设：一屏能放下约四行，且容得下 md 字段加说明）；内缘 = 面板内缘（--qy-panel-padding）。
+ * - 列间 = 字段组间隔（1 材），行间 = 段间隔（2 材）；框到名称 = 字段间隔。章与章之间沿用 H2 的章距，这里不再加。
+ * - 栏宽 760 时为三列：每格不少于 11 材（220px），放得下一个 176px 的控件加两侧内缘。
+ */
+.components-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(11 * var(--qy-cai)), 1fr));
+  gap: var(--qy-section-gap) var(--qy-field-group-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.components-index-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+.components-index-frame {
+  isolation: isolate;
+  block-size: calc(7 * var(--qy-cai));
+  min-inline-size: 0;
+  margin-block-end: var(--qy-field-gap);
+  overflow: hidden;
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-panel);
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.components-index-tile:hover .components-index-frame { background: var(--qy-surface-hover); }
+/*
+ * 台：样张放在框的内缘之内，放得下的居中。放不下的大件（日历、表格、图表）从起始角排起，
+ * 越出内缘的部分在内缘这一段里淡出——读来是「下面还有」，不是被框切断。淡出只发生在结束侧与底侧的内缘带内，
+ * 放得下的样张碰不到它。遮罩画在台上而不是框上，框线与框的悬停底不受影响。
+ */
+.components-index-stage {
+  display: flex;
+  align-items: safe center;
+  justify-content: safe center;
+  block-size: 100%;
+  padding: var(--qy-panel-padding);
+  overflow: hidden;
+  mask-image:
+    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding)), transparent),
+    linear-gradient(to right, #000 calc(100% - var(--qy-panel-padding)), transparent);
+  mask-composite: intersect;
+}
+.components-index-stage:dir(rtl) {
+  mask-image:
+    linear-gradient(to bottom, #000 calc(100% - var(--qy-panel-padding)), transparent),
+    linear-gradient(to left, #000 calc(100% - var(--qy-panel-padding)), transparent);
+}
+/* 示例载入失败时，框里只留名称：框不空，整格仍是链接。 */
+.components-index-stage[data-state="failed"] { align-items: center; justify-content: center; color: var(--qy-foreground-muted); text-align: center; }
+.components-index-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--qy-field-gap);
+  font-size: var(--qy-text-body-strong-size);
+  line-height: var(--qy-text-body-strong-leading);
+  font-weight: var(--qy-text-body-strong-weight);
+  overflow-wrap: anywhere;
+  color: var(--qy-foreground);
+  outline: none;
+}
+/* 整格是一个去处：名称链接的伪元素铺满格子，示例框在其下（框 inert，不接收指针）。 */
+.components-index-name::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--qy-radius-panel);
+}
+.components-index-name:focus-visible::after { box-shadow: 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring); }
+.components-index-name > span {
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  font-weight: var(--qy-weight-regular);
+  color: var(--qy-foreground-muted);
+}
+.components-index-use {
+  margin: 0;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+  overflow-wrap: anywhere;
+}

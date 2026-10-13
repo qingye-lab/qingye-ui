@@ -9,7 +9,9 @@ import { localePath, routeIdentity, routeVisitKey } from "@/lib/paths";
  * One index for the whole documentation area, built from the library's Sidebar:
  * the same entries in the same place on every page. Guides are listed by reading
  * order; the component categories fold under the 组件 group so the tree stays
- * short, and the category holding the current page is open.
+ * short, and the category holding the current page is open. The group names are ink
+ * (foreground) at the 12/16 medium step, the entries beneath stay muted: the names are
+ * told apart from the entries by tone and weight, not by a rule or a box.
  */
 function Entry({ item, current, onNavigate }: { item: NavItem; current: string; onNavigate: (() => void) | undefined }) {
   const locale = useDocsLocale();
@@ -68,7 +70,7 @@ export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; cl
       <SidebarContent aria-label={locale === "en" ? "Documentation navigation" : "文档导航"} ref={root}>
         {groupSections(sections).map((group) => (
           <SidebarGroup key={group.title}>
-            <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-dense-strong text-foreground">{group.title}</SidebarGroupLabel>
             {group.items.map((item) => <Entry current={current} item={item} key={routeIdentity(item.path)} onNavigate={onNavigate} />)}
             {group.subs.map((sub) => (
               <SidebarSub key={sub.title} onOpenChange={(open) => setOpened((state) => ({ ...state, [sub.title]: open }))} open={opened[sub.title] ?? sub.title === holder}>

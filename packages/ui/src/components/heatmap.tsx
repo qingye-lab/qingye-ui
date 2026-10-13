@@ -3,9 +3,11 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
-import { ChartHeader, chartFrameClassName, legendClassName, readValue, useChartData, SURFACE_GAP, type ChartRow, type ChartSeries, type ChartValue } from "./chart";
+import { ChartHeader, chartBaseClassName, chartName, chartPaperClassName, legendClassName, readValue, useChartData, type ChartFigureProps, type ChartRow, type ChartSeries, type ChartValue } from "./chart";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
+import { READOUT_SURFACE } from "../chart-geometry";
 import { useUILocale } from "../locale";
+import { isList, isName, received, requireNamedItems } from "../require-name";
 import { assertTone, toneColor, type Tone } from "../tone";
 import { cn } from "../utils";
 
@@ -24,9 +26,9 @@ export type HeatmapLevel = { label: string; from?: number; tone?: Tone };
 export type HeatmapRowSummary = { label: string; value: (row: HeatmapRow) => string };
 /** 读数面对的一格；value 可能是未知/不适用，level 只在给出 levels 且该格有数值时存在。 */
 export type HeatmapReadoutCell = { row: HeatmapRow; column: HeatmapColumn; value: HeatmapCellValue; level?: HeatmapLevel };
-type HeatmapBaseProps = Omit<useRender.ComponentProps<"figure">, "children">;
+/** label 与 framed 同 Chart（ChartFigureProps）：外部名称（aria-labelledby / aria-label）给出时，figure 与 grid 都由它命名，图内不显示标题。 */
+type HeatmapBaseProps = Omit<useRender.ComponentProps<"figure">, "children"> & ChartFigureProps;
 export type HeatmapProps = HeatmapBaseProps & {
-  label: string;
   /** 行维度叫什么，例如「星期」。 */
   rowLabel: string;
   /** 列维度叫什么，例如「时段」。 */
@@ -55,7 +57,8 @@ export type HeatmapProps = HeatmapBaseProps & {
  * - 未知/不适用不进色阶：进了色阶会被当成「很小的量」，与真实的零混淆（名实相符）；
  *   改用清墨斜线纹（45°，与数据可视化规范的纹理通道同一角度），纹理不是色阶的一级。
  * - 每个格都有可聚焦、可读的名称（行名+列名+值），不依赖悬停；悬停只增强。
- * - 相邻格之间 2px 纸色空隙，与柱状、堆叠柱同一机制（骨法用笔，一个范围一种机制，不描边）。
+ * - 相邻格之间半分（默认 2px）纸色空隙，与柱状、堆叠柱同一机制（骨法用笔，一个范围一种机制，不描边）。
+ *   这是 CSS 的 grid gap，直接读 --qy-fen-half（gap-fen-half），不经 JS，也就不必读系统尺度。
  *
  * 分档（levels）：
  * - 档由应用声明（随类赋彩：类别是事实，组件不从数值猜好坏）；给出时不再用连续色阶，
@@ -82,11 +85,13 @@ export type HeatmapProps = HeatmapBaseProps & {
  * 所以两色并用：任一深浅的填充，焦墨线或纸色线至少有一条 ≥ 3:1。「衬一道纸色」是为这张图的
  * 填充跨度而设的预设，不是全库的焦点画法。
  */
-const INK_FLOOR = 12;
+const INK_FLOOR = 12; // 预设：浓度的百分比，不是长度
 const INK_CEIL = 100; // 足色：数据是色，量最大处是颜料本色
-const LEVEL_INK_CEIL = 50; // 无 tone 的档止于重墨
+const LEVEL_INK_CEIL = 50; // 无 tone 的档止于重墨（浓度百分比，预设）
 const STEP = 1.35; // 预设：浓度的台阶随档次加大（r^1.35）。按「图形」状态色（--qy-*-graphic）实测：1.2 时浅色 n = 5 的「危险 → 警示」亮度失序（−0.001），1.35 使浅深两主题、n = 2…5、任意相邻类别组合的相对亮度都单调（n = 5 最小差 浅 0.012 / 深 0.009）；换状态色后须重测
 const CELL = "calc(var(--qy-cai))"; // 格高一材
+/* 未知 / 不适用的斜纹：纹线一线宽，纹距 1.5 分（默认 6px；格高一材，纹距随格走）。倍数 1.5 为预设；45° 是方向不是长度。 */
+const HATCH = "bg-[repeating-linear-gradient(45deg,var(--qy-border)_0,var(--qy-border)_var(--qy-line-width),transparent_var(--qy-line-width),transparent_calc(1.5*var(--qy-fen)))] bg-surface";
 
 type Paint = { background: string };
 const mix = (color: string, pct: number) => `color-mix(in srgb, ${color} ${pct}%, var(--qy-surface))`;
@@ -103,13 +108,15 @@ function levelPaint(index: number, count: number, tone?: Tone): Paint {
 function checkLevels(levels: readonly HeatmapLevel[]) {
   if (levels.length < 2 || levels.length > 5) throw new RangeError("Heatmap levels require two to five levels; more steps than that are no longer told apart at a glance.");
   levels.forEach((level, index) => {
-    if (typeof level.label !== "string" || !level.label.trim()) throw new Error("Heatmap levels require nonempty names.");
+    if (!isName(level?.label)) throw new Error(`Heatmap levels[${index}] requires a nonempty label; received ${received(level?.label)}.`);
     assertTone(level.tone, "Heatmap level");
     if (index > 0 && !level.tone && levels[index - 1]!.tone) throw new RangeError("A Heatmap level without tone cannot follow one with tone: depth must grow with the level, and ink is the lightest step.");
     if (index === 0) { if (level.from !== undefined) throw new RangeError("The first Heatmap level covers every smaller value and takes no `from`."); return; }
     if (typeof level.from !== "number" || !Number.isFinite(level.from) || (index > 1 && level.from <= levels[index - 1]!.from!)) throw new RangeError("Heatmap level `from` values must be finite numbers, strictly increasing after the first level.");
   });
-  if (new Set(levels.map(level => level.label.trim())).size !== levels.length) throw new Error("Heatmap level names must be unique.");
+  // 档名比较时去掉首尾空白：图例与读数里「偏高」与「偏高 」看不出区别。
+  const names = levels.map(level => level.label.trim());
+  names.forEach((name, index) => { const first = names.indexOf(name); if (first !== index) throw new Error(`Heatmap levels[${index}] repeats the label "${name}" of levels[${first}]; level names must be unique.`); });
 }
 function levelIndexOf(levels: readonly HeatmapLevel[], value: number) {
   let index = 0;
@@ -131,7 +138,7 @@ function HeatmapReadout({ active, rowLabel, columnLabel, format, renderReadout }
     const rect = el.getBoundingClientRect(), box = host.getBoundingClientRect();
     setDx(rect.left < box.left ? box.left - rect.left : rect.right > box.right ? box.right - rect.right : 0);
   }, [active.x, active.y]);
-  return <div ref={ref} role="tooltip" style={{ left: active.x, top: active.y, transform: `translate(calc(-50% + ${dx}px), calc(-100% - var(--qy-space-2)))` }} className="pointer-events-none absolute z-10 grid w-max max-w-full gap-(--qy-space-1) rounded-overlay border border-border bg-popover px-(--qy-fill-padding) py-(--qy-space-2) text-support text-popover-foreground shadow-(--qy-shadow-raised)">
+  return <div ref={ref} role="tooltip" style={{ left: active.x, top: active.y, transform: `translate(calc(-50% + ${dx}px), calc(-100% - var(--qy-space-2)))` }} className={`pointer-events-none absolute z-10 grid w-max max-w-full gap-(--qy-space-1) ${READOUT_SURFACE}`}>
     <div className="flex min-w-0 items-center gap-(--qy-field-gap)"><span className="text-muted-foreground">{rowLabel}</span><span className="wrap-anywhere">{row.label}</span></div>
     <div className="flex min-w-0 items-center gap-(--qy-field-gap)"><span className="text-muted-foreground">{columnLabel}</span><span className="wrap-anywhere">{column.label}</span></div>
     {renderReadout ? renderReadout({ row, column, value, ...(level ? { level } : {}) }) : <div className="flex min-w-0 items-center gap-(--qy-field-gap)">
@@ -145,20 +152,25 @@ const FOCUS_RING = "outline-none focus-visible:shadow-[inset_0_0_0_var(--qy-focu
 
 /** 两个类别维度上的量：方格按花青单色相的顺序色阶（或应用声明的分档）着色，按需展开的等价数据表与悬停读数。 */
 /** 图只画数据（用户裁决 2026-10-10：功能要纯粹）。没有网格可画时不渲染图，由调用方在原位放 Empty。 */
-export function Heatmap({ label, render, ref, className, rowLabel, columnLabel, valueLabel, columns, rows, formatValue, levels, rowSummary, renderReadout, ...native }: HeatmapProps) {
-  if (!label.trim()) throw new Error("Heatmap requires a nonempty accessible label.");
+export function Heatmap({ label, framed = true, render, ref, className, rowLabel, columnLabel, valueLabel, columns, rows, formatValue, levels, rowSummary, renderReadout, ...native }: HeatmapProps) {
+  if (!isName(label)) throw new Error(`Heatmap requires a nonempty accessible label; received ${received(label)}.`);
   const titleId = React.useId(); const dataView = useChartData();
+  const naming = chartName(native, titleId);
   const { code, messages } = useUILocale();
   const number = React.useMemo(() => new Intl.NumberFormat(code), [code]);
   const [active, setActive] = React.useState<ActiveCell | null>(null);
   const [stop, setStop] = React.useState({ row: 0, col: 0 });
   let content: React.ReactNode;
-  if (!rowLabel?.trim() || !columnLabel?.trim() || !valueLabel?.trim()) throw new Error("Heatmap requires named row, column and value axes.");
-  if (!columns?.length || !rows?.length || columns.length < 2 || rows.length < 2) throw new RangeError("Heatmap requires two or more values on both the row and column dimensions; a single row or column is a Chart bar, not a grid.");
-  if (new Set(columns.map(c => c.key)).size !== columns.length || columns.some(c => !c.key.trim() || !c.label.trim())) throw new Error("Heatmap columns require unique stable keys and nonempty names.");
-  if (new Set(rows.map(r => r.id)).size !== rows.length || rows.some(r => !r.id.trim() || !r.label.trim())) throw new Error("Heatmap rows require unique stable ids and nonempty names.");
+  // 名称与标识：先判类型再去空白（require-name.ts），错误写明是哪一项、缺什么。不是数组的 columns / rows 与不足两项同样处理。
+  if (!isName(rowLabel)) throw new Error(`Heatmap requires a nonempty rowLabel naming the row dimension; received ${received(rowLabel)}.`);
+  if (!isName(columnLabel)) throw new Error(`Heatmap requires a nonempty columnLabel naming the column dimension; received ${received(columnLabel)}.`);
+  if (!isName(valueLabel)) throw new Error(`Heatmap requires a nonempty valueLabel naming the measured quantity; received ${received(valueLabel)}.`);
+  if (!isList(columns) || !isList(rows) || columns.length < 2 || rows.length < 2) throw new RangeError("Heatmap requires two or more values on both the row and column dimensions; a single row or column is a Chart bar, not a grid.");
+  requireNamedItems("Heatmap columns", columns, "key");
+  requireNamedItems("Heatmap rows", rows, "id");
   if (levels) checkLevels(levels);
-  if (rowSummary && (typeof rowSummary.value !== "function" || !rowSummary.label?.trim())) throw new Error("Heatmap rowSummary requires a nonempty label and a value function.");
+  if (rowSummary && typeof rowSummary.value !== "function") throw new Error(`Heatmap rowSummary requires a value function; received ${received(rowSummary.value)}.`);
+  if (rowSummary && !isName(rowSummary.label)) throw new Error(`Heatmap rowSummary requires a nonempty label heading its column; received ${received(rowSummary.label)}.`);
   let max = 0, anyNumeric = false;
   const grid = rows.map(row => columns.map(column => { const value = readValue(row, column.key); if (typeof value === "number") { anyNumeric = true; max = Math.max(max, value); } return value; }));
   const format = (value: number, row: HeatmapRow, column: HeatmapColumn) => formatValue ? formatValue(value, row, column) : number.format(value);
@@ -195,7 +207,7 @@ export function Heatmap({ label, render, ref, className, rowLabel, columnLabel, 
   content = <>
     <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{valueLabel}</div>
     {anyNumeric && <div data-slot="chart-plot" className="relative min-w-0 w-full">
-      <div className="min-w-0 w-full overflow-x-auto"><div role="grid" aria-labelledby={titleId} aria-readonly="true" onKeyDown={onKeyDown} className="inline-grid min-w-full" style={{ gridTemplateColumns: `max-content repeat(${columns.length}, minmax(${CELL}, 1fr))${rowSummary ? " max-content" : ""}`, gap: SURFACE_GAP }}>
+      <div className="min-w-0 w-full overflow-x-auto"><div role="grid" {...naming.name} aria-readonly="true" onKeyDown={onKeyDown} className="inline-grid min-w-full gap-fen-half" style={{ gridTemplateColumns: `max-content repeat(${columns.length}, minmax(${CELL}, 1fr))${rowSummary ? " max-content" : ""}` }}>
         <div aria-hidden="true" className="col-span-full grid grid-cols-subgrid">
           <span />
           {columns.map(column => <span key={column.key} className="flex min-w-0 items-end justify-center px-(--qy-space-1) text-dense text-muted-foreground wrap-anywhere">{column.label}</span>)}
@@ -213,7 +225,7 @@ export function Heatmap({ label, render, ref, className, rowLabel, columnLabel, 
             const name = known ? messages.heatmapCell(row.label, column.label, level ? messages.heatmapLevelled(text, level.label) : text) : messages.heatmapUnavailable(row.label, column.label, value.label);
             const cell: HeatmapReadoutCell = { row, column, value, ...(level ? { level } : {}) };
             return <div key={column.key} role="gridcell" tabIndex={rowIndex === stopRow && columnIndex === stopCol ? 0 : -1} aria-label={name} data-row={rowIndex} data-col={columnIndex} data-state={known ? "known" : value.state} data-level={level ? levelIndex : undefined}
-              className={cn(FOCUS_RING, known ? undefined : "bg-[repeating-linear-gradient(45deg,var(--qy-border)_0,var(--qy-border)_1px,transparent_1px,transparent_6px)] bg-surface")}
+              className={cn(FOCUS_RING, known ? undefined : HATCH)}
               style={{ height: CELL, background: paint?.background }}
               onMouseEnter={(event) => show(event.currentTarget, cell)}
               onMouseLeave={() => setActive(null)}
@@ -229,7 +241,7 @@ export function Heatmap({ label, render, ref, className, rowLabel, columnLabel, 
       {active && <HeatmapReadout key={`${active.row.id}/${active.column.key}`} active={active} rowLabel={rowLabel} columnLabel={columnLabel} format={(value) => format(value, active.row, active.column)} renderReadout={renderReadout} />}
       <div aria-hidden="true" className="mt-(--qy-field-gap) flex items-center gap-(--qy-field-gap) text-dense text-muted-foreground">
         {levels
-          ? <ul data-slot="heatmap-legend" className={cn(legendClassName, "text-dense")}>{levels.map((level, index) => <li key={level.label} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span data-slot="legend-key" data-level={index} className="size-(--qy-status-dot-size) shrink-0 rounded-[calc(var(--qy-status-dot-size)/4)]" style={{ background: levelPaint(index, levels.length, level.tone).background }} /><span>{level.label}</span></li>)}</ul>
+          ? <ul data-slot="heatmap-legend" className={cn(legendClassName, "text-dense")}>{levels.map((level, index) => <li key={level.label} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span data-slot="legend-key" data-level={index} className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: levelPaint(index, levels.length, level.tone).background }} /><span>{level.label}</span></li>)}</ul>
           : <>
             <span>{messages.heatmapScaleFrom}</span>
             <span data-slot="heatmap-scale-key" className="h-(--qy-space-2) w-16 rounded-xs" style={{ background: `linear-gradient(to right, ${scalePaint(0, 1).background}, ${scalePaint(1, 1).background})` }} />
@@ -242,8 +254,8 @@ export function Heatmap({ label, render, ref, className, rowLabel, columnLabel, 
         </TableBody></Table></TableContainer></div>}
   </>;
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {
-    "data-slot": "heatmap", "aria-labelledby": titleId,
-    className: cn(chartFrameClassName, className),
-    children: <><ChartHeader titleId={titleId} label={label} toggle={dataView.toggle} />{content}</>,
+    "data-slot": "heatmap", "data-framed": framed, ...naming.name,
+    className: cn(chartBaseClassName, framed && chartPaperClassName, className),
+    children: <><ChartHeader titleId={naming.selfTitled ? titleId : undefined} label={label} toggle={dataView.toggle} />{content}</>,
   }) });
 }

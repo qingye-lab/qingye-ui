@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 9bb91f1a33b8c8ef1903005e66689aebb65074d7de1b4a6f5b3946b0a4fa7308
+Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
 
 A count or presence dot anchored to a host's corner, never part of the host's own content.
 

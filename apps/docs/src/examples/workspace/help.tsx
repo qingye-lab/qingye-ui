@@ -2,21 +2,22 @@ import * as React from "react";
 import { Link as RouterLink } from "@/components/locale-link";
 import { Prose } from "@qingye_lab/ui/components/prose";
 import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
-import { BASE } from "./shell";
+import { BASE, useWorkspaceScroller } from "./shell";
 
-/* 帮助文章：长文铺一张纸，目录在左侧随滚动标出当前一节；滚动容器是外壳的内容区，显式交给目录。 */
+/*
+ * 帮助文章：与官网文档同一种排法。长文是库的 Prose（纸、栏宽、行长与节奏都由它给），
+ * 目录在文章右侧、随滚动标出当前一节；两者相隔 1 材，一起居中。
+ * 滚动容器是外壳的内容区，由外壳交给目录。
+ */
 
 export default function Help() {
   const article = React.useRef<HTMLElement | null>(null);
-  const scroller = React.useRef<HTMLElement | null>(null);
-  React.useLayoutEffect(() => { scroller.current = document.getElementById("main"); }, []);
   const headings = useTocHeadings(article);
-  const current = useTocScrollSpy(headings, { container: scroller });
+  const current = useTocScrollSpy(headings, { container: useWorkspaceScroller() });
 
-  // 目录与文章是一个整体：一起居中，中间隔一个节间距；不把目录推到最左、文章悬在中间。
-  return <div className="mx-auto flex w-fit max-w-full items-start gap-(--qy-section-gap) px-(--qy-page-gutter) py-(--qy-section-gap)">
-    <Toc items={headings} current={current} className="sticky top-[calc(1px+var(--qy-panel-padding))] mt-[calc(1px+var(--qy-panel-padding))] hidden w-[calc(8*var(--qy-cai))] shrink-0 lg:block" />
-    <Prose ref={article} render={<article />}>
+  // 目录的起点比纸的上沿低 1 材，停靠位置与起点相同：滚动时目录不动。
+  return <div className="flex items-start justify-center gap-(--qy-cai) px-(--qy-page-gutter) py-(--qy-section-gap)">
+    <Prose ref={article}>
       <h1 id="sync-failure">同步失败时，数据会怎样</h1>
       <p>每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。如果在写入 1,284 条记录的过程中网络中断，已经写入的部分会保留，未写入的部分留到下一次同步——不会因为一次失败就清空整个集合。</p>
       <h2 id="retry">重试与核实</h2>
@@ -41,5 +42,6 @@ export default function Help() {
       <h2 id="contact">仍然没有解决</h2>
       <p>把集合标识与失败时间发给工作区管理员；管理员可以在审计日志里看到完整的请求与回应。</p>
     </Prose>
+    <Toc items={headings} current={current} className="sticky top-[calc(var(--qy-section-gap)+var(--qy-cai))] mt-(--qy-cai) hidden w-[calc(8*var(--qy-cai))] shrink-0 lg:block" />
   </div>;
 }

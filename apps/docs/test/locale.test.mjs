@@ -125,15 +125,18 @@ test("all blank English fields fall back and untranslated reference arrays retai
 test("English component reference renders translated content, labels, and the section order", async () => {
   const en = await fixture.renderDecisionPage("en", fixture.referenceMeta.slug);
   const headings = [...en.matchAll(/<h2\b[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g)];
-  assert.deepEqual(headings.map(match => match[1]), ["examples", "decisions", "import", "api", "keyboard", "notes"]);
-  ["Examples", "Decisions", "Import", "API", "Keyboard interactions", "Usage notes"].forEach((label, index) => assert.ok(headings[index][2].includes(`>${label}</span>`), label));
+  assert.deepEqual(headings.map(match => match[1]), ["examples", "decisions", "api", "keyboard", "notes"]);
+  ["Examples", "Decisions", "API", "Keyboard interactions", "Usage notes"].forEach((label, index) => assert.ok(headings[index][2].includes(`>${label}</span>`), label));
   // Synthesized category defaults stay in the catalog; the page shows authored sections and stated facts only.
   assert.doesNotMatch(en, /Do not substitute styling for semantics|id="when"|id="state"|<dt>Layer<\/dt>|<dt>Methods<\/dt>/);
   assert.match(en, /<dt>Exports<\/dt><dd[^>]*>1<\/dd>/);
   for (const header of ["Prop", "Type", "Default", "Description", "Key", "Action"]) assert.match(en, new RegExp(`<th\\b[^>]*>${header}</th>`));
   assert.match(en, /aria-label="None"[^>]*>—<\/span>/);
-  assert.match(en, /Import from the component entry to bundle just this file:/);
-  assert.match(en, /href="\/en\/docs\/installation#per-component"[^>]*>Installation<\/a>/);
+  // The import statement is a code block in the page header, before the first section heading.
+  const head = en.slice(0, en.indexOf('id="examples"'));
+  assert.match(head, /data-slot="code-block"/);
+  assert.match(head.replace(/<[^>]+>/g, "").replaceAll("&quot;", '"'), /import \{ ReferenceFixture \} from "@qingye_lab\/ui\/components\/reference-fixture";/);
+  assert.doesNotMatch(en, /id="import"/);
   for (const text of ["Trigger description", "根部件中文", "禁用中文", "First note", "中间中文", "第四条中文", "末条中文", "Activate the trigger", "前一个中文", "关闭中文"]) assert.ok(en.includes(text), text);
   assert.match(en, /Controlled <code\b[^>]*>value<\/code>/);
   assert.match(en, /Third <code\b[^>]*>note<\/code>/);

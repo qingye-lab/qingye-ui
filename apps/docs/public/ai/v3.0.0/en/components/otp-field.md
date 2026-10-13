@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: c094055377d5ee9d3617c473dd7e39cf54d61e08b90405bc9efe9da79acab757
+Source SHA-256: 571d900cc06f84175ae184468e4ed4829d23c4684721fffa463d9b84ef04ac12
 
 Present a fixed-length text value in segments.
 

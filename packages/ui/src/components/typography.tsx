@@ -103,6 +103,6 @@ export function Code({ className, render, ...props }: CodeProps) {
   return useRender({
     defaultTagName: "code",
     render,
-    props: mergeProps({ "data-slot": "code", className: cn("rounded-marker bg-neutral-soft px-(--qy-fen) font-mono text-[round(0.875em,1px)] [box-decoration-break:clone] wrap-anywhere", className) }, props),
+    props: mergeProps({ "data-slot": "code", className: cn("rounded-marker bg-neutral-soft px-(--qy-fen) font-mono text-(length:--qy-inline-code-size) [box-decoration-break:clone] wrap-anywhere", className) }, props),
   });
 }

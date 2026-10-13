@@ -31,17 +31,17 @@ export function NavigationMenuLink({ className, children, description, ...props 
   // 对齐，单行内容仍按行内居中（经营位置），不能用同一条规则覆盖两种形态。
   return <NavigationMenuPrimitive.Link data-slot="navigation-menu-link" data-has-description={description ? "" : undefined} {...props} className={state => cn(navLineItemClassName, state.active && navLineCurrentClassName, typeof className === "function" ? className(state) : className)}>
     {description
-      ? <span className="flex min-w-0 flex-col gap-0.5 py-(--qy-space-1)"><span className="min-w-0 wrap-anywhere">{children}</span><span className="min-w-0 text-support text-muted-foreground wrap-anywhere" data-slot="navigation-menu-link-description">{description}</span></span>
+      ? <span className="flex min-w-0 flex-col gap-fen-half py-(--qy-space-1)"><span className="min-w-0 wrap-anywhere">{children}</span><span className="min-w-0 text-support text-muted-foreground wrap-anywhere" data-slot="navigation-menu-link-description">{description}</span></span>
       : children}
   </NavigationMenuPrimitive.Link>;
 }
 export type NavigationMenuGroupProps = useRender.ComponentProps<"div">;
 /**
- * 组内 gap-0.5 与 Menu 的分组同一尺度；组间另加一个组间距（--qy-field-group-gap），只加在
+ * 组内 gap-fen-half 与 Menu 的分组同一尺度；组间另加一个组间距（--qy-field-group-gap），只加在
  * 非首组之前——没有分组或只有一组时，面板和此前一样是一份紧凑列表，不无端变疏（疏密检验）。
  */
 export function NavigationMenuGroup({ render, className, ...props }: NavigationMenuGroupProps) {
-  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "navigation-menu-group", className: cn("grid min-w-0 gap-0.5 [&:not(:first-child)]:mt-(--qy-field-group-gap)", className) }, props) });
+  return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "navigation-menu-group", className: cn("grid min-w-0 gap-fen-half [&:not(:first-child)]:mt-(--qy-field-group-gap)", className) }, props) });
 }
 export type NavigationMenuGroupLabelProps = useRender.ComponentProps<"p">;
 /** 组名，不可操作：留白与字号同 MenuGroupLabel，面板里的两类浮层读同一条分组画法（NG3）。 */
@@ -49,7 +49,7 @@ export function NavigationMenuGroupLabel({ render, className, ...props }: Naviga
   return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "navigation-menu-group-label", className: cn("m-0 min-w-0 px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] pt-(--qy-space-2) pb-(--qy-space-1) text-caption text-muted-foreground wrap-anywhere", className) }, props) });
 }
 export type NavigationMenuContentProps = NavigationMenuPrimitive.Content.Props;
-export function NavigationMenuContent({ className, ...props }: NavigationMenuContentProps) { return <NavigationMenuPrimitive.Content data-slot="navigation-menu-content" {...props} className={state => cn("flex min-w-0 flex-col gap-0.5 [&_[data-slot=navigation-menu-link]]:mb-0 [&_[data-slot=navigation-menu-link]]:rounded-(--qy-radius-overlay-item) [&_[data-slot=navigation-menu-link]]:border-0 [&_[data-slot=navigation-menu-link]]:px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] [&_[data-slot=navigation-menu-link]]:text-foreground [&_[data-slot=navigation-menu-link]:hover]:bg-accent [&_[data-slot=navigation-menu-link][aria-current=page]]:bg-(--qy-surface-active) [&_[data-slot=navigation-menu-link][data-has-description]]:items-start", typeof className === "function" ? className(state) : className)} />; }
+export function NavigationMenuContent({ className, ...props }: NavigationMenuContentProps) { return <NavigationMenuPrimitive.Content data-slot="navigation-menu-content" {...props} className={state => cn("flex min-w-0 flex-col gap-fen-half [&_[data-slot=navigation-menu-link]]:mb-0 [&_[data-slot=navigation-menu-link]]:rounded-(--qy-radius-overlay-item) [&_[data-slot=navigation-menu-link]]:border-0 [&_[data-slot=navigation-menu-link]]:px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] [&_[data-slot=navigation-menu-link]]:text-foreground [&_[data-slot=navigation-menu-link]:hover]:bg-accent [&_[data-slot=navigation-menu-link][aria-current=page]]:bg-surface-selected [&_[data-slot=navigation-menu-link][data-has-description]]:items-start", typeof className === "function" ? className(state) : className)} />; }
 export type NavigationMenuPositionerProps = NavigationMenuPrimitive.Positioner.Props;
 export function NavigationMenuPositioner({ style, className, ...props }: NavigationMenuPositionerProps) {
   const layer = useFloatingLayer("popup");

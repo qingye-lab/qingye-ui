@@ -18,9 +18,10 @@
  *   浓   66     88      辅助文字（占位字也读它）
  *   重   50     66      可编辑的线：填值控件、未选标记
  *   淡   24     50      命令的线（bordered 按钮）
- *   清    8     24      容器线、禁用与只读的线、彩色的柔底、悬停（见下）
+ *   清    8     24      容器线、禁用与只读的线、彩色的柔底（见下）、按下（--qy-surface-active 读它）
  *   清染  4      4      纸上的地：页面底纸、内嵌面、中性柔底；留在原值（见下）
- *   淡染 12     25      = 淡 / 2，按原关系派生，不另声明：按下与当前位置
+ *   悬停 = 选中 4  12   = 清 / 2，按它在默认里的关系（清染 = 清 / 2）重新派生，不另用数字：
+ *                       它们是画在地上的状态面，不是地，所以随墨阶上移（见下，2026-10-12 反馈梯）
  *
  * 与「重 → 焦墨」直觉不同的两处，都是实测出来的约束，不是口味：
  *   重只升到浓（66），不升到焦：填值控件获焦时，线从「重」加深为焦墨（--qy-ring）是该控件唯一的焦点信号
@@ -29,7 +30,7 @@
  *   （占位字读 --qy-foreground-muted）。满值是墨阶的顶，不是新增一级；占位与值的差缩小为 88 对 100，
  *   这是「辅助文字上移一档」的代价，如实记录。
  *
- * 保持不动的几处：画在地上的东西（字、线、按下与当前）上移，地与数据不动。
+ * 保持不动的几处：画在地上的东西（字、线、悬停、选中与按下）上移，地与数据不动。
  *   0. 清染（--qy-wash-qing）。页面底纸与 --qy-surface-subtle 由它调出。图系列色与状态色要在这两张纸上读到 ≥ 3:1
  *      （contrast-check 的 `chart-n on background`、`info on surface-subtle`）；升到 12%，浅色底纸变深，
  *      花青以外的系列色与信息色掉到 2.8:1 以下；深色里 12% 的底纸再叠 25% 的淡染，辅助文字只剩 4.3:1。
@@ -41,9 +42,13 @@
  *   2. 状态色的柔底（--qy-{danger,warning,success,info}-soft）。柔底是大面积的色，不是线与字：升到 24% 后
  *      Alert 成了一块厚重的色块（实测截图），字压在上面更难读，也没有让状态更易辨认——状态由图标与文字承担。
  *      留在原清 8%（字面写出）。
- *   3. 悬停面（--qy-surface-hover）。它同时是 Chart 参照带（chart.tsx 的 BAND_FILL）的填色；数据线压在带上，
- *      带加深后花青以外的系列色对带只剩约 2.5:1。悬停是短暂的反馈，不承担识别，所以留在原清 8%（字面写出）。
- *      三级仍逐级加深：清染 4% < 悬停 8% < 淡染 25%。
+ *   3. 静止的深一级的墨面（--qy-surface-strong）。它是 Chart 参照带（chart.tsx 的 BAND_FILL）与骨架占位条的填色；
+ *      数据线压在带上，带加深后花青以外的系列色对带只剩约 2.5:1。它们不承担识别，所以留在原清 8%（字面写出）。
+ *      2026-10-12 前这两处读悬停面、靠钉住悬停面保持 8%；悬停面改为 4% 并随偏好上移后，它们有了自己的角色名，
+ *      这里钉的是它。
+ *      反馈梯在偏好开启时仍逐级加深：清染 4% < 悬停 = 选中 12% < 按下 24%（默认是 4% = 4% < 8%）。悬停不深于选中。
+ *      悬停与选中不钉在 4%：它们是画在地上的状态，偏好要让它们更容易被看见（轨道、分页、侧栏、树、表格里的当前位置
+ *      只靠这张面表达，不另画线）；12% 是 24% / 2，即默认里「清染 = 清 / 2」的同一关系，不是新增数字。
  *   4. 数据编码色：--qy-chart-*、--qy-*-graphic、热力图与占比的段不读墨阶，本文件不碰。
  *
  * 强制颜色优先：条件写成 `(prefers-contrast: more) and (forced-colors: none)`，强制颜色开启时这一块整体不成立。
@@ -69,10 +74,23 @@
       --qy-ink-qing: 24%;
       --qy-wash-qing: 4%;
 
+      /* 悬停与选中随墨阶上移：= 清 / 2，与默认里 --qy-wash-qing 同一关系，但 --qy-wash-qing 在上面钉住了（它是地）。 */
+      --qy-surface-hover: color-mix(in srgb, var(--qy-ink) calc(var(--qy-ink-qing) / 2), transparent);
+      --qy-surface-selected: color-mix(in srgb, var(--qy-ink) calc(var(--qy-ink-qing) / 2), transparent);
+
       /* 以下是「不动」的几处，见上；值是原来的清（8%）、淡（24%）。 */
-      --qy-surface-hover: color-mix(in srgb, var(--qy-ink) 8%, transparent);
+      --qy-surface-strong: color-mix(in srgb, var(--qy-ink) 8%, transparent);
       --qy-groove-surface: color-mix(in srgb, var(--qy-ink) 24%, var(--qy-paper));
       --qy-danger-soft: color-mix(in srgb, var(--qy-danger) 8%, transparent);
+      /* 实心填充的悬停与按下：让给纸色的份额留在原值（8% / 16%，字面写出）。它们随墨阶到 24% / 48% 时，
+       * 压在填充上的字掉到 4.5:1 以下（浅色实测：危险填充悬停 4.48:1、按下 2.67:1，中性按下 4.27:1）。
+       * 悬停那一档在 2026-10-13 之前就是 4.48:1，只是没有被检查到。 */
+      --qy-primary-hover: color-mix(in srgb, var(--qy-primary) 92%, var(--qy-paper));
+      --qy-primary-active: color-mix(in srgb, var(--qy-primary) 84%, var(--qy-paper));
+      --qy-danger-fill-hover: color-mix(in srgb, var(--qy-danger-fill) 92%, var(--qy-paper));
+      --qy-danger-fill-active: color-mix(in srgb, var(--qy-danger-fill) 84%, var(--qy-paper));
+      /* 危险柔底的按下 = 柔底的两倍；柔底在这里钉在 8%，它跟着钉在 16%（随墨阶到 48% 时危险色的字只剩 3.3:1）。 */
+      --qy-danger-soft-active: color-mix(in srgb, var(--qy-danger) 16%, transparent);
       --qy-warning-soft: color-mix(in srgb, var(--qy-warning) 8%, transparent);
       --qy-success-soft: color-mix(in srgb, var(--qy-success) 8%, transparent);
       --qy-info-soft: color-mix(in srgb, var(--qy-info) 8%, transparent);

@@ -1,5 +1,6 @@
 import { cn } from "@qingye_lab/ui";
 import { linkClassName } from "@qingye_lab/ui/components/link";
+import { Prose, type ProseProps } from "@qingye_lab/ui/components/prose";
 import { IconLink } from "@tabler/icons-react";
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
@@ -9,19 +10,32 @@ import { pageTitle } from "@/lib/site";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { useHashLink } from "@/lib/use-route-effects";
 
-const proseWrapClass = "[overflow-wrap:break-word]";
-
 /*
- * Article rhythm (疏密有致), three steps that read apart at a glance:
- *   a heading to the text it introduces   2 分  (--qy-field-gap, within a group)
- *   paragraph to paragraph, block to block 1 材  (--qy-space-module, between groups)
- *   subsection (H3)                        2 材  (--qy-section-gap)
- *   section (H2)                           3 材  (preset, as on the design-methods page)
- * Blocks carry only a bottom margin, so a heading's small gap is never swallowed by
- * the larger top margin of what follows it. Running text keeps one measure.
+ * The article's typography is the library's Prose: sizes, rhythm, measure, lists, links and
+ * justification all come from it, so the documentation and any project using Prose read the same.
+ * This file only adds what a documentation site needs on top: the browser title, heading anchors
+ * and the contents markers, client-side links, and the two-column facts list.
+ *
+ * Prose typesets its direct children, so a page is one <Article> and its headings, paragraphs and
+ * lists sit directly inside it; a nested group of them (a section) is its own <Article render>.
+ * Components and demos placed in the article keep their own drawing.
  */
-const flow = "mt-0 mb-(--qy-space-module)";
+const flow = "mt-0 mb-(--qy-field-group-gap)";
 const measure = "max-w-(--docs-measure)";
+
+/** One documentation article, or with `render` a section of one. The page's paper is DocsLayout's. */
+export function Article(props: ProseProps) {
+  return <Prose framed={false} {...props} />;
+}
+
+/**
+ * A section that lays out its own parts (each spaced from the one above, in the page's stylesheet)
+ * and takes only its heading from the article: the article's block spacing is switched off for
+ * everything but the heading.
+ */
+export function ArticleSection({ className, ...props }: Omit<ProseProps, "render" | "framed">) {
+  return <Prose className={cn("[&>:not(h2)]:mb-0", className)} framed={false} render={<section />} {...props} />;
+}
 
 export function useDocumentTitle(title?: string, description?: string) {
   const locale = useDocsLocale();
@@ -49,12 +63,13 @@ export function PageHeader({
 }) {
   useDocumentTitle(documentTitle ?? (typeof title === "string" ? title : undefined), typeof description === "string" ? description : undefined);
   return (
-    <header className={cn("flex min-w-0 flex-col gap-(--qy-field-gap) pb-(--qy-section-gap)", className)}>
-      <h1 className="docs-page-title text-balance text-display text-foreground" tabIndex={-1}>
+    <header className={cn("min-w-0", className)}>
+      <h1 className="docs-page-title" tabIndex={-1}>
         {title}
       </h1>
-      {description ? <p className={cn(proseWrapClass, measure, "text-pretty text-reading text-muted-foreground")}>{description}</p> : null}
-      {children}
+      {description ? <p>{description}</p> : null}
+      {/* What a page adds under its lead (facts, an import line, a download) draws itself; it is not running text. */}
+      {children ? <div className="contents" data-slot="docs-header-extras">{children}</div> : null}
     </header>
   );
 }
@@ -62,7 +77,7 @@ export function PageHeader({
 function Anchor({ id, children }: { id: string; children: ReactNode }) {
   const onHashClick = useHashLink();
   return (
-    <a className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm" href={`#${id}`} onClick={(event) => onHashClick(event, id)}>
+    <a className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm" data-slot="docs-heading-anchor" href={`#${id}`} onClick={(event) => onHashClick(event, id)}>
       <span className="min-w-0 [overflow-wrap:anywhere]">{children}</span>
       <IconLink
         aria-hidden="true"
@@ -75,10 +90,7 @@ function Anchor({ id, children }: { id: string; children: ReactNode }) {
 export function H2({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h2
-      className={cn(
-        "docs-section-heading mt-[calc(3*var(--qy-cai))] mb-(--qy-field-gap) text-title text-foreground first:mt-0 [header+&]:mt-0",
-        className,
-      )}
+      className={cn("docs-section-heading", className)}
       data-toc="2"
       id={id}
     >
@@ -90,7 +102,7 @@ export function H2({ id, children, className }: { id: string; children: ReactNod
 export function H3({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h3
-      className={cn("docs-section-heading mt-(--qy-section-gap) mb-(--qy-field-gap) text-chapter text-foreground [h2+&]:mt-(--qy-space-module)", className)}
+      className={cn("docs-section-heading", className)}
       data-toc="3"
       id={id}
     >
@@ -100,37 +112,15 @@ export function H3({ id, children, className }: { id: string; children: ReactNod
 }
 
 export function P({ className, ...props }: ComponentProps<"p">) {
-  return <p className={cn(proseWrapClass, flow, measure, "docs-p text-pretty text-reading text-foreground", className)} {...props} />;
+  return <p className={className} {...props} />;
 }
 
 export function Ul({ className, ...props }: ComponentProps<"ul">) {
-  return (
-    <ul
-      className={cn(
-        proseWrapClass,
-        flow,
-        measure,
-        "flex flex-col gap-(--qy-field-gap) ps-(--qy-space-module) text-reading text-foreground marker:text-muted-foreground [list-style:disc]",
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <ul className={className} {...props} />;
 }
 
 export function Ol({ className, ...props }: ComponentProps<"ol">) {
-  return (
-    <ol
-      className={cn(
-        proseWrapClass,
-        flow,
-        measure,
-        "flex list-decimal flex-col gap-(--qy-field-gap) ps-(--qy-space-module) text-reading text-foreground marker:text-muted-foreground marker:numeric",
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <ol className={className} {...props} />;
 }
 
 export { Code } from "@qingye_lab/ui/components/typography";

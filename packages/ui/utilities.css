@@ -68,7 +68,7 @@
  * 填充 k 格时宽度 k·W/n，落在第 k−1 格终点与第 k 格起点之间的缝里，不会漏进下一格。
  */
 :is([data-slot="progress"], [data-slot="meter"])[data-segments] :is([data-slot="progress-track"], [data-slot="meter-track"]) {
-  --qy-segment-gap: calc(var(--qy-fen) / 2);
+  --qy-segment-gap: var(--qy-fen-half);
   mask-image: linear-gradient(to right, currentcolor calc(100% - var(--qy-segment-gap)), transparent 0);
   mask-size: calc((100% + var(--qy-segment-gap)) / var(--qy-segments)) 100%;
   mask-repeat: repeat-x;

@@ -72,8 +72,10 @@ function NoticeBody({ notice, manager, anchored = false }: {
       data-motion={notice.transitionStatus === "ending" ? undefined : "fade-in"}
       swipeDirection={anchored ? [] : ["left", "right"]}
       className={cn(
-        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border bg-surface-raised text-foreground outline-none focus-visible:border-ring data-limited:hidden",
-        notice.data?.tooltipStyle ? "p-(--qy-space-2)" : "p-(--qy-panel-padding-sm)",
+        // 通知盖在内容之上，是真实的浮起：与其他浮层同一级阴影（基础层 §6；用户裁决 2026-10-13，此前只有一道线）。
+        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none focus-visible:border-ring data-limited:hidden",
+        // tooltipStyle 是提示面：与 Tooltip、数据图读数同一内缘（外缘到内容，所以减去线宽）。
+        notice.data?.tooltipStyle ? "px-[calc(var(--qy-hint-padding-inline)-var(--qy-line-width))] py-[calc(var(--qy-hint-padding-block)-var(--qy-line-width))]" : "p-(--qy-panel-padding-sm)",
       )}
       {...rootProps}
       onFocusCapture={(event) => { setFocused(true); onFocusCapture?.(event); }}
@@ -108,12 +110,12 @@ function NoticeBody({ notice, manager, anchored = false }: {
 // dvh 随地址栏变化，dvw 与 vw 在块轴伸缩的情形下同值，仅为与高度成对。固定定位的视口层可用百分比，但 anchored 的 Positioner 不一定固定于视口，所以统一用视口单位。
 // Complete messages in a normal flow; no collapsed stack or second motion policy.
 const positions: Record<ToastPosition, string> = {
-  "top-left": "top-(--qy-space-6) left-(--qy-space-6)",
-  "top-center": "top-(--qy-space-6) left-1/2 -translate-x-1/2",
-  "top-right": "top-(--qy-space-6) right-(--qy-space-6)",
-  "bottom-left": "bottom-(--qy-space-6) left-(--qy-space-6)",
-  "bottom-center": "bottom-(--qy-space-6) left-1/2 -translate-x-1/2",
-  "bottom-right": "bottom-(--qy-space-6) right-(--qy-space-6)",
+  "top-left": "top-(--qy-notice-inset) left-(--qy-notice-inset)",
+  "top-center": "top-(--qy-notice-inset) left-1/2 -translate-x-1/2",
+  "top-right": "top-(--qy-notice-inset) right-(--qy-notice-inset)",
+  "bottom-left": "bottom-(--qy-notice-inset) left-(--qy-notice-inset)",
+  "bottom-center": "bottom-(--qy-notice-inset) left-1/2 -translate-x-1/2",
+  "bottom-right": "bottom-(--qy-notice-inset) right-(--qy-notice-inset)",
 };
 function Notices({ position = "bottom-right", portalProps, anchored = false }: {
   position?: ToastPosition; portalProps?: React.ComponentProps<typeof Toast.Portal> | undefined; anchored?: boolean;
@@ -129,7 +131,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
         aria-live="off"
         style={layer}
         className={anchored ? "outline-none" : cn(
-          "pointer-events-none fixed flex w-max max-w-[calc(100dvw-var(--qy-space-6)*2)] max-h-[calc(100dvh-var(--qy-space-6)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
+          "pointer-events-none fixed flex w-max max-w-[calc(100dvw-var(--qy-notice-inset)*2)] max-h-[calc(100dvh-var(--qy-notice-inset)*2)] flex-col gap-(--qy-action-gap) overflow-y-auto outline-none",
           positions[position],
         )}
       >
@@ -138,7 +140,7 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
             key={notice.id}
             toast={notice}
             data-slot="toast-positioner"
-            className="w-max max-w-[calc(100dvw-var(--qy-space-6)*2)]"
+            className="w-max max-w-[calc(100dvw-var(--qy-notice-inset)*2)]"
             {...notice.positionerProps}
             style={state => ({ ...layer, ...(typeof notice.positionerProps?.style === "function" ? notice.positionerProps.style(state) : notice.positionerProps?.style) })}
           >

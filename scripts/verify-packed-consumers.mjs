@@ -25,6 +25,7 @@ const evidence = { startedAt: new Date().toISOString(), tarball, sha256: sha(tar
 const archive = execFileSync('tar', ['-tzf', tarball], { encoding: 'utf8' }).trim().split('\n');
 assert.ok(archive.includes('package/dist/ui.css'));
 assert.ok(archive.includes('package/styles.css'));
+assert.ok(archive.includes('package/prose.css'));
 assert.ok(archive.includes('package/design.md'));
 assert.ok(archive.includes('package/design.en.md'));
 assert.ok(!archive.some((path) => /(?:^|\/)(?:plans|implementation|baseline|test-results)(?:\/|$)/.test(path)), 'private development artifacts in package');

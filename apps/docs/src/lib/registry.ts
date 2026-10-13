@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import type { ComponentMeta, DemoModule } from "./types";
 
 import summaries from "virtual:component-summaries";
@@ -71,4 +72,18 @@ export async function loadPreview(slug: string): Promise<DemoModule> {
   const path = Object.keys(demoLoaders).filter((path) => slugOf(path) === slug).sort()[0];
   if (!path) throw new Error(`No preview for ${slug}`);
   return demoLoaders[path]!();
+}
+
+/*
+ * 组件总览里的一格：框是固定的（见 components-index.css）。文档示例是为组件页写的，常带标题、说明与多组变体，
+ * 放进一格里认不出组件本身；content/<slug>/cover.tsx 是只为这一格写的样张——同一个组件、一个最典型的状态、
+ * 不带示例的脚手架。没有 cover 的组件退回它的第一个示例。cover 不是文档示例：组件页不显示它，目录生成器也不读它。
+ */
+type SpecimenModule = { default: ComponentType };
+const coverLoaders = import.meta.glob<SpecimenModule>("../content/*/cover.tsx");
+
+/** The specimen for the components overview: the component's cover when it has one, otherwise its first example. */
+export function loadCover(slug: string): Promise<SpecimenModule> {
+  const cover = coverLoaders[`../content/${slug}/cover.tsx`];
+  return cover ? cover() : loadPreview(slug);
 }

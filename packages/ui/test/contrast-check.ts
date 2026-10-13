@@ -171,7 +171,7 @@ export function libraryPairs(appearance: Appearance): ContrastPair[] {
   const token = (name: string) => `var(--qy-${name})`;
   const alpha = (name: string, percent: number) => `color-mix(in srgb, ${token(name)} ${percent}%, transparent)`;
   for (const surface of ["background", "surface", "surface-raised", "surface-subtle"]) {
-    const bases = [[token(surface)], ...["surface-inset", "surface-hover", "surface-active", "accent"].map((fill) => [token(surface), token(fill)])];
+    const bases = [[token(surface)], ...["surface-inset", "surface-hover", "surface-selected", "surface-active", "surface-strong", "accent"].map((fill) => [token(surface), token(fill)])];
     for (const background of bases) {
       const label = background.join(" -> ");
       for (const text of ["foreground", "foreground-muted", "foreground-subtle"]) add(`${text} on ${label}`, token(text), background, 4.5);
@@ -188,21 +188,32 @@ export function libraryPairs(appearance: Appearance): ContrastPair[] {
     add(`Alert description on neutral-soft over ${surface}`, token("foreground-muted"), [token(surface), token("neutral-soft")], 4.5);
     for (const state of ["danger", "warning", "success", "info"]) add(`Alert description on ${state} soft fill over ${surface}`, token("foreground-muted"), [token(surface), token(`${state}-soft`)], 4.5);
 
-    // 轨道内选中段 / 按下项：焦墨字压在淡染上（纸 -> 淡染）；未选段的浓墨字已由上面的 foreground-muted on 纸 覆盖。
+    // 轨道内选中段 / 按下项：焦墨字压在选中面上（纸 -> 选中面）；未选段的浓墨字已由上面的 foreground-muted on 纸 覆盖。
     add(`track selected text on ${surface}`, token("track-selected-foreground"), [token(surface), token("track-selected")], 4.5);
     add(`StatusDot muted indicator on ${surface}`, token("foreground-muted"), [token(surface)], 3);
     add(`Calendar disabled/outside date on ${surface}`, token("foreground-muted"), [token(surface)], 4.5);
-    add(`Calendar selected range-middle date on ${surface}`, token("foreground"), [token(surface), token("accent")], 4.5);
+    add(`Calendar selected range-middle date on ${surface}`, token("foreground"), [token(surface), token("surface-selected")], 4.5);
     add(`ring/50 on ${surface}`, alpha("ring", 50), [token(surface)], 3);
   }
   // Meter 的指示压在读数凹槽上；凹槽是不透明的淡墨，与所在承载面无关。
   for (const state of ["danger", "warning", "success", "info"]) add(`${state} graphic on groove`, token(`${state}-graphic`), [token("groove-surface")], 3);
   add("sidebar focus on sidebar", token("sidebar-ring"), [token("sidebar")], 3);
   add("sidebar focus on active row", token("sidebar-ring"), [token("sidebar"), token("sidebar-accent")], 3);
+  add("sidebar focus on current row", token("sidebar-ring"), [token("sidebar"), token("sidebar-current")], 3);
+  add("sidebar current item text", token("sidebar-accent-foreground"), [token("sidebar"), token("sidebar-current")], 4.5);
   add("sidebar text", token("sidebar-foreground"), [token("sidebar")], 4.5);
   add("primary button text", token("primary-foreground"), [token("primary")], 4.5);
   add("Calendar selected date, including disabled/outside", token("primary-foreground"), [token("primary")], 4.5);
   add("destructive button text", token("danger-on-fill"), [token("danger-fill")], 4.5);
+  // 悬停与按下让出纸色后，字仍须读得清（反馈梯，2026-10-13）。
+  for (const state of ["hover", "active"]) {
+    add(`primary button text, ${state}`, token("primary-foreground"), [token(`primary-${state}`)], 4.5);
+    add(`destructive button text, ${state}`, token("danger-on-fill"), [token(`danger-fill-${state}`)], 4.5);
+  }
+  for (const surface of ["surface", "background"]) {
+    add(`danger button text on hovered soft over ${surface}`, token("danger-foreground"), [token(surface), token("danger-soft")], 4.5);
+    add(`danger button text on pressed soft over ${surface}`, token("danger-foreground"), [token(surface), token("danger-soft-active")], 4.5);
+  }
   return pairs;
 }
 

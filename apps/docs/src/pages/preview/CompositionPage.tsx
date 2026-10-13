@@ -132,11 +132,9 @@ export default function CompositionPage() {
 
     <Section title="长文阅读">
       <Row label="阅读面" block lead="framed-prose">
-        {/* 目录在左、文章在右：两者是同一份标题数据的两种呈现，不是各自维护的列表
+        {/* 文章在左、目录在右，与官网文档同一种排法：两者是同一份标题数据的两种呈现，不是各自维护的列表
          * （经营位置：一屏只有一个版心，目录贴着它，不另起一张纸）。 */}
-        <Inline gap="panel" align="start" className="flex-wrap">
-          {/* 目录第一项与文章标题同一条行中线：标题在纸内，目录下移一道边线加面板内缘。 */}
-          <Toc items={headings} current={currentHeading} className="mt-[calc(1px+var(--qy-panel-padding))] w-44 shrink-0" />
+        <Inline gap="panel" align="start">
           <div ref={articleRef} className="min-w-0 flex-1">
             <Prose>
               <h2 id="demo-sync-overview">同步失败时，数据会怎样</h2>
@@ -160,6 +158,8 @@ export default function CompositionPage() {
               </table>
             </Prose>
           </div>
+          {/* 目录的起点比纸的上沿低 1 材，与文档站、示例里的帮助文章同一关系。 */}
+          <Toc items={headings} current={currentHeading} data-align-skip className="mt-(--qy-cai) w-44 shrink-0" />
         </Inline>
       </Row>
     </Section>

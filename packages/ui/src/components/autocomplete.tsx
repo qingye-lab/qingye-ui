@@ -5,7 +5,7 @@ import { IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
-import { useFloatingLayer } from "../floating-layer";
+import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
@@ -49,7 +49,7 @@ export type AutocompletePopupProps = AutocompletePrimitive.Popup.Props & React.R
 export function AutocompletePopup({ container, positionerProps, className, ...props }: AutocompletePopupProps) {
   const layerStyle = useFloatingLayer("popup");
   const { style: positionerStyle, ...positionerRest } = positionerProps ?? {};
-  return <AutocompletePrimitive.Portal container={container}><AutocompletePrimitive.Positioner side="bottom" align="start" sideOffset={4} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
+  return <AutocompletePrimitive.Portal container={container}><AutocompletePrimitive.Positioner side="bottom" align="start" sideOffset={popupOffset} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
     <AutocompletePrimitive.Popup data-slot="autocomplete-popup" {...props} className={state => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
   </AutocompletePrimitive.Positioner></AutocompletePrimitive.Portal>;
 }

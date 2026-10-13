@@ -362,7 +362,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# Part 3. Components (91)
+# Part 3. Components (93)
 
 ## Accordion
 
@@ -754,7 +754,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: b495f32abfff831f34d5c49aeb67c3a37a7f25219dcc73755f23e7f9f3c7dfe7
+Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
 
 Edit free text with optional suggestions.
 
@@ -930,7 +930,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
-Source SHA-256: 62091f6ab8f49a63451d9d99467147b81e5ca7d169c0492174c5c2aceb24ded7
+Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
 
 An image with one named identity and a fallback.
 
@@ -1109,7 +1109,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
-Source SHA-256: b6b1e7d4a314f5d3e4d097ee367b48b13847e8f64cee3d20f1ab6b92ec6dcd6b
+Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
 
 Parent links and an explicit current location.
 
@@ -1330,27 +1330,31 @@ Related actions and selection clearing.
 ### Keyboard
 
 ### Source example
-#### 对象与当前版本
+#### 已选对象与动作
 Source: apps/docs/src/content/bulk-action-bar/demos/01-task.tsx
 ```tsx
 import * as React from "react";
 import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye_lab/ui/components/bulk-action-bar";
-import { Checkbox } from "@qingye_lab/ui/components/checkbox";
-import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "对象与当前版本", titleEn: "Targets and current versions" } satisfies DemoMeta;
+export const meta = { title: "已选对象与动作", titleEn: "Selected targets and actions" } satisfies DemoMeta;
+const selection = [{ id: "a", label: "接入设备", version: 1 }, { id: "b", label: "权限与角色", version: 1 }];
 export default function Demo() {
-  const [items, setItems] = React.useState([{ id: "a", label: "接入设备", version: 0, marked: false }, { id: "b", label: "权限与角色", version: 1, marked: false }]); const [selected, setSelected] = React.useState<string[]>(["a"]); const [result, setResult] = React.useState("未执行");
-  return <Stack>{items.map(item => <Inline key={item.id}><Checkbox aria-label={`选择 ${item.label}`} checked={selected.includes(item.id)} onCheckedChange={checked => setSelected(value => checked ? [...value, item.id] : value.filter(id => id !== item.id))} /><span className="text-body">{item.label} · {item.marked ? "已标记" : "未标记"}</span></Inline>)}<BulkActionBar targets={items.filter(item => selected.includes(item.id))} scope="本地集合所选条目" onClear={() => setSelected([])}><BulkActionBarActions><BulkActionBarAction onExecute={snapshot => { const ids = new Set(snapshot.targets.map(item => item.id)); setItems(value => value.map(item => ids.has(item.id) ? { ...item, marked: true, version: item.version + 1 } : item)); setResult(`已标记 ${snapshot.targets.length} 项`); }}>标记</BulkActionBarAction><BulkActionBarClear /></BulkActionBarActions></BulkActionBar><output className="text-support">{result}</output></Stack>;
+  const [targets, setTargets] = React.useState(selection);
+  const clear = () => setTargets([]);
+  return <BulkActionBar className="w-full max-w-xl" targets={targets} scope="所选条目" onClear={clear}>
+    <BulkActionBarActions><BulkActionBarAction onExecute={clear}>标记</BulkActionBarAction><BulkActionBarClear /></BulkActionBarActions>
+  </BulkActionBar>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Button
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: aa02056a504dad182e167cd505d244a5cbcde34058ea1cd04c0a6e23daf1f350
+Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -1549,7 +1553,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: a23151be7b5688148ff78c388df1241cc2c263662cf03562e0804b14ba37e05e
+Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
@@ -1731,7 +1735,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: a6b762945ea344a7fa9f738a45260db3cce3b4af51a2f452e3a01f39da6db71b
+Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
 
 Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -1782,11 +1786,16 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 ### Current exports
 - AxisTick: function; owner chart; PASS; props: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }
 - Chart: function; owner chart; PASS; props: ChartProps
+- chartBaseClassName: const; owner chart; UNVERIFIED
 - ChartEvent: type; owner chart; PASS
+- ChartFigureProps: type; owner chart; PASS
 - chartFrameClassName: const; owner chart; UNVERIFIED
-- ChartHeader: function; owner chart; PASS; props: { titleId: string; label: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
+- ChartGeometry: reexport; owner chart; UNVERIFIED
+- ChartHeader: function; owner chart; PASS; props: { titleId?: string | undefined; label?: React.ReactNode; legend?: React.ReactNode; toggle?: React.ReactNode }
 - ChartInterpolation: type; owner chart; PASS
 - ChartMarker: type; owner chart; PASS
+- chartName: function; owner chart; PASS; props: { "aria-labelledby"?: string | undefined; "aria-label"?: string | undefined }
+- chartPaperClassName: const; owner chart; UNVERIFIED
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
@@ -1800,15 +1809,14 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 - ChartValue: type; owner chart; PASS
 - legendClassName: const; owner chart; UNVERIFIED
 - LegendKey: function; owner chart; PASS; props: { series: ChartProjectedSeries; type: ChartType }
-- MARK: const; owner chart; UNVERIFIED
 - Marker: function; owner chart; PASS; props: { color: string; marker: ChartMarker; cx?: number; cy?: number }
 - MARKERS: const; owner chart; PASS
 - MarkerShape: function; owner chart; PASS; props: { marker: ChartMarker }
 - PLOT_PRESETS: const; owner chart; PASS
 - ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }
 - readValue: function; owner chart; PASS; props: ChartRow
-- SURFACE_GAP: const; owner chart; UNVERIFIED
 - useChartData: function; owner chart; PASS
+- useChartGeometry: reexport; owner chart; UNVERIFIED
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -1826,7 +1834,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `contextLabel?`: `string`. 有背景系列（series[].context）时必填：图例里合成一项的名字，例如「其余蚕室」。
 - `events?`: `readonly ChartEvent[]`. 落在类别轴某一行上的事件：基线处一个圆点，名称进悬停读数与数据表的一列。donut 不接受。
 - `formatValue?`: `(value: number, series: ChartSeries, row: ChartRow) => React.ReactNode`.
-- `label`: `string`.
+- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
+- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
 - `references?`: `readonly ChartReference[]`. 量轴上的参照：目标带或参照线。画成墨，名称进图例与数据表；量轴范围自动算入。donut 不接受。
 - `renderPlot?`: `(projection: ChartPlotData) => React.ReactNode`.
 - `rows`: `readonly ChartRow[]`.
@@ -1840,9 +1849,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ChartHeader
-- `label`: `React.ReactNode`.
+- `label?`: `React.ReactNode`.
 - `legend?`: `React.ReactNode`.
-- `titleId`: `string`.
+- `titleId?`: `string | undefined`.
 - `toggle?`: `React.ReactNode`.
 
 ### LegendKey
@@ -1874,6 +1883,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ChartGeometryContext: without a provider default-value; provided by Chart
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -1881,6 +1891,8 @@ Written descriptions; the list above is the type-resolved fact.
 #### Chart
 A named figure, shared axis units, distinct series shapes and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- framed: boolean; default true. false: the chart sits on an existing surface (a borderless Section, Card or panel) and lays no paper of its own — no line, fill, radius or inner padding, so its edges are the host's content edges. Same meaning as TableContainer's framed. Whether the in-chart title shows is independent of it.
+- aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required.
 - categoryLabel / valueLabel: string. Nonempty category axis name and shared value units; donut draws no axis lines, but both names still label the equivalent table and the center readout.
 - series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
@@ -1913,14 +1925,14 @@ export default function Demo() {
 }
 ```
 
-17 more examples: see the component page and its Markdown file.
+18 more examples: see the component page and its Markdown file.
 
 ## Checkbox
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 0afaa4d2c5e82b58a6a1f892af37bc9b08c50cccb8081adbabb3c5abab4209fb
+Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
 
 Choose an independent yes/no value or multiple items in a set.
 
@@ -2123,15 +2135,16 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 348cf21a2208d634c4a1eeb9a6f06dfe230fc8c487d99b447c8fc2de8c179c45
+Source SHA-256: e0e34388389dc6b87dd13b6e8f94a92e8ccf7c45b3d1a49a3fe97913a7ce36d1
 
-Literal text with actual copy results.
+Literal text with an optional title bar and actual copy results.
 
 ### Decision
-pre/code retain whitespace, characters and full width without simulated highlighting. useCopyToClipboard reports success only after writing; failure keeps manual-copy content.
+pre/code retain whitespace, characters and full width; the library does no syntax highlighting itself: pre-highlighted markup comes from the caller through children, while code is still what is copied. The code surface is delimited by one ink container line and a ground only half a wash step deeper than what it sits on. useCopyToClipboard reports success only after writing; failure keeps manual-copy content.
 
 ### Notes
 - A language label is not parsing; no extra dependencies, fetching or false-success clipboard fallback.
+- When a SegmentedControl in the title bar switches the content, change code and children together so what is copied is what is shown.
 
 ### Use and ownership
 - Read and copy code or preformatted text unchanged.
@@ -2143,7 +2156,7 @@ pre/code retain whitespace, characters and full width without simulated highligh
 - CodeBlock: Code presentation with an optional copy action.
 
 ### Responsive behavior
-- Complete code scrolls horizontally without truncation or character changes.
+- Complete code scrolls horizontally by default without truncation or character changes; wrap switches to wrapping.
 
 ### Customization
 - Use the current props and composition first, then adjust the project's central theme; fix shared gaps in the public library.
@@ -2157,12 +2170,15 @@ pre/code retain whitespace, characters and full width without simulated highligh
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### CodeBlock
-- `code`: `string`.
+- `children?`: `React.ReactNode`. 已高亮的标记：给出时放进 code 元素，代替纯文本 code 的显示。
+- `code`: `string`. 被复制的文本；渲染内容由 children 替换时，复制的仍是它。
 - `copyable?`: `boolean`.
 - `language?`: `string`.
 - `onCopyError?`: `(error: unknown) => void`.
 - `onCopySuccess?`: `() => void`.
-- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
+- `title?`: `React.ReactNode`. 标题栏的起始内容。字符串或数字是文件名一类的标签；其他节点（如 SegmentedControl）原样放入。有 title 才有标题栏。
+- `wrap?`: `boolean`. 长行折行，而不是横向滚动。
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -2177,9 +2193,12 @@ Written descriptions; the list above is the type-resolved fact.
 Code presentation with an optional copy action.
 - code: string. Required literal text, rendered and copied without trimming or formatting.
 - language: string. Optional identifying label that never changes the text.
+- title: ReactNode. Content at the start of the title bar; the bar exists only when given (2 modules tall, with the copy button moved to its end). A string or number is shown in mono support text aligned with the code's start edge; any other node, such as a SegmentedControl, is placed as given, and tracks inside the bar are transparent so they show the code surface.
+- children: ReactNode. Pre-highlighted markup placed inside the code element in place of the plain text; code remains what is copied, and the two should carry the same text.
+- wrap: boolean; default false. Wrap long lines at any position instead of scrolling horizontally.
 - copyable: boolean; default true. Whether to provide the copy button and actual feedback.
 - onCopySuccess / onCopyError: () => void / (error: unknown) => void. Callbacks after actual write success or failure; the native onCopy event is forwarded independently.
-- render / ref / ARIA / className / style / native props: useRender.ComponentProps<div>. Props target the outer div; code is the single source of text.
+- render / ref / ARIA / className / style / native props: useRender.ComponentProps<div>. Props target the outer div (the native title attribute is replaced by the title slot); code is the single source of copied text.
 
 ### Keyboard
 - Tab / Enter / Space: Native text scrolling and Button activation.
@@ -2195,6 +2214,8 @@ export default function Demo() {
   return <CodeBlock language="JavaScript" code={'const values = [0, null];\n\nfunction getValue(index) {\n  return values[index];\n}\n'} />;
 }
 ```
+
+3 more examples: see the component page and its Markdown file.
 
 ## Collapsible
 
@@ -2296,7 +2317,7 @@ export default function CollapsibleDemo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 56767199222885f501fef7066b5f0c4f6eab1f7e8a7c22a4f3d8353573f4908b
+Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -2586,21 +2607,18 @@ The installed AlertDialog primitive namespace.
 Source: apps/docs/src/content/confirm-action/demos/01-snapshot.tsx
 ```tsx
 import { useState } from "react";
-import { Button } from "@qingye_lab/ui/components/button";
-import { Inline } from "@qingye_lab/ui/components/layout";
 import { ConfirmAction, type ConfirmActionSnapshot } from "@qingye_lab/ui/components/confirm-action";
 export const meta = { title: "当前快照", titleEn: "Current snapshot" };
+const snapshot = { objectId: "A", objectLabel: "A", version: 1, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
 export default function Demo() {
-  const [version, setVersion] = useState(1);
   const [requested, setRequested] = useState<ConfirmActionSnapshot>();
-  const snapshot = { objectId: "A", objectLabel: "A", version, change: "A → B", consequence: "应用此变更后，以 B 替换 A。" };
-  return <Inline><ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
-    <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><Button variant="quiet" onClick={() => setVersion(value => value + 1)}>版本 +1</Button>{requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}</div>
-  </ConfirmAction></Inline>;
+  return <ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
+    {requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}
+  </ConfirmAction>;
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## ContextMenu
 
@@ -2853,7 +2871,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 9bb91f1a33b8c8ef1903005e66689aebb65074d7de1b4a6f5b3946b0a4fa7308
+Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
 
 A count or presence dot anchored to a host's corner, never part of the host's own content.
 
@@ -2939,7 +2957,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 6c90102f2bc72cc10b6b9a886cc1a8f2f9e64f91aac5bf57befb245b63422055
+Source SHA-256: 742eaf5ab4bb9f05b659c9b66d3cfcd962cd4f3977aba4008d284a7ddfcb8ebd
 
 Comparison, sorting and scoped selection for a real caller-owned collection.
 
@@ -3173,7 +3191,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: dc1f80dbada2d5941577d5922cadc9167e87e212525f36c2ca1a7d440db72aca
+Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -3760,20 +3778,28 @@ Use Button; Close reads locale.close when children are omitted.
 - Esc: Close the current layer and return to its entry.
 
 ### Source example
-#### 方向与嵌套返回
+#### 边缘工作面
 Source: apps/docs/src/content/drawer/demos/01-states.tsx
 ```tsx
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle, DrawerTrigger } from "@qingye_lab/ui/components/drawer";
-import { Dialog, DialogClose, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
-import { Popover, PopoverPopup, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
-import { Label } from "@qingye_lab/ui/components/label";
-import { Inline } from "@qingye_lab/ui/components/layout";
-export const meta = { title: "方向与嵌套返回", titleEn: "Edges and nested return" };
+export const meta = { title: "边缘工作面", titleEn: "Edge workspace" };
 export default function DrawerDemo() {
-  return <Inline gap="fields">{(["left", "right", "up", "down"] as const).map(direction => <Drawer key={direction} swipeDirection={direction}><DrawerTrigger>{direction}</DrawerTrigger><DrawerPopup><DrawerTitle>{direction}</DrawerTitle><DrawerContent><Label htmlFor={`drawer-${direction}`}>输入</Label><Input id={`drawer-${direction}`} /><Popover><PopoverTrigger>补充</PopoverTrigger><PopoverPopup>补充内容</PopoverPopup></Popover><Dialog><DialogTrigger>内层</DialogTrigger><DialogPopup><DialogTitle>内层</DialogTitle><DialogClose /></DialogPopup></Dialog><DrawerClose /></DrawerContent></DrawerPopup></Drawer>)}</Inline>;
+  return <Drawer swipeDirection="right">
+    <DrawerTrigger>编辑名称</DrawerTrigger>
+    <DrawerPopup className="w-80 content-start">
+      <DrawerTitle>编辑名称</DrawerTitle>
+      <DrawerContent className="content-start">
+        <Field><FieldLabel>名称</FieldLabel><Input /></Field>
+        <DrawerClose />
+      </DrawerContent>
+    </DrawerPopup>
+  </Drawer>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Empty
 
@@ -3865,21 +3891,19 @@ p explanation and div action grouping.
 ### Keyboard
 
 ### Source example
-#### 零、未知与不适用
+#### 零结果
 Source: apps/docs/src/content/empty/demos/01-states.tsx
 ```tsx
-import { useState } from "react";
 import { Button } from "@qingye_lab/ui/components/button";
-import { Empty, EmptyActions, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
-import { Item, ItemTitle } from "@qingye_lab/ui/components/item";
-import { Stack } from "@qingye_lab/ui/components/layout";
+import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "零、未知与不适用", titleEn: "Zero, unknown and not applicable" } satisfies DemoMeta;
+export const meta = { title: "零结果", titleEn: "Zero results" } satisfies DemoMeta;
 export default function Demo() {
-  const [added, setAdded] = useState(false);
-  return <Stack gap="section">{added ? <Item><ItemTitle>条目 1</ItemTitle></Item> : <Empty state="empty"><EmptyTitle level={3}>0 条内容</EmptyTitle><EmptyActions><Button onClick={() => setAdded(true)}>添加一项</Button></EmptyActions></Empty>}<Empty state="unknown"><EmptyTitle level={3}>结果未知</EmptyTitle><EmptyDescription>尚未提供结果</EmptyDescription></Empty><Empty state="not-applicable"><EmptyTitle level={3}>不适用</EmptyTitle></Empty></Stack>;
+  return <Empty state="empty"><EmptyTitle level={3}>0 条内容</EmptyTitle><EmptyActions><Button>添加一项</Button></EmptyActions></Empty>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Field
 
@@ -4391,22 +4415,26 @@ Real intent controls composed from Button.
 ### Keyboard
 
 ### Source example
-#### 草稿与结果分开
+#### 草稿与已应用条件
 Source: apps/docs/src/content/filter-bar/demos/01-task.tsx
 ```tsx
 import * as React from "react";
 import { FilterBar, FilterBarFields, FilterBarApplied, FilterBarStatus, FilterBarActions, FilterBarApply, FilterBarCancel, FilterBarClear } from "@qingye_lab/ui/components/filter-bar";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
-import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "草稿与结果分开", titleEn: "Drafts separate from results" } satisfies DemoMeta;
-const items = ["接入设备", "权限与角色", "同步与导出"];
+export const meta = { title: "草稿与已应用条件", titleEn: "Draft and applied conditions" } satisfies DemoMeta;
 export default function Demo() {
-  const [draft, setDraft] = React.useState(""); const [applied, setApplied] = React.useState(""); const results = items.filter(item => item.includes(applied));
-  return <Stack><FilterBar dirty={draft !== applied} appliedSummary={applied ? `已应用名称：${applied}` : "已应用：全部本地条目"} canClear={Boolean(applied || draft)} onApply={() => setApplied(draft)} onCancel={() => setDraft(applied)} onClear={() => { setDraft(""); setApplied(""); }}><FilterBarFields><Field><FieldLabel>名称包含</FieldLabel><Input value={draft} onChange={event => setDraft(event.target.value)} /></Field></FilterBarFields><FilterBarApplied /><FilterBarStatus /><FilterBarActions><FilterBarApply /><FilterBarCancel /><FilterBarClear /></FilterBarActions></FilterBar><p className="m-0 text-support">{results.length} 项</p>{results.length ? <ul className="m-0 text-body">{results.map(item => <li key={item}>{item}</li>)}</ul> : <p className="m-0 text-body">没有符合已应用条件的条目</p>}</Stack>;
+  const [draft, setDraft] = React.useState(""); const [applied, setApplied] = React.useState("");
+  return <FilterBar className="w-full max-w-sm" dirty={draft !== applied} appliedSummary={applied ? `已应用名称：${applied}` : "已应用：全部本地条目"} canClear={Boolean(applied || draft)} onApply={() => setApplied(draft)} onCancel={() => setDraft(applied)} onClear={() => { setDraft(""); setApplied(""); }}>
+    <FilterBarFields><Field><FieldLabel>名称包含</FieldLabel><Input value={draft} onChange={event => setDraft(event.target.value)} /></Field></FilterBarFields>
+    <FilterBarApplied /><FilterBarStatus />
+    <FilterBarActions><FilterBarApply /><FilterBarCancel /><FilterBarClear /></FilterBarActions>
+  </FilterBar>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Form
 
@@ -4497,7 +4525,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 8ce5eff281afd8d52d687059faf2fc1c89095fb8a5ac7e24ec14510c1807dd7e
+Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 
@@ -4543,7 +4571,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `columnLabel`: `string`. 列维度叫什么，例如「时段」。
 - `columns`: `readonly HeatmapColumn[]`.
 - `formatValue?`: `(value: number, row: HeatmapRow, column: HeatmapColumn) => React.ReactNode`. 可以返回节点；可访问名称只取字符串或数字的结果，其余退回默认的数值格式。
-- `label`: `string`.
+- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
+- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
 - `levels?`: `readonly HeatmapLevel[]`. 分档，2 到 5 档，浓淡随档次递增；给出后格子按所在的档上色，图例列出各档。
 - `renderReadout?`: `(cell: HeatmapReadoutCell) => React.ReactNode`. 替换悬停/聚焦读数里值的那一行。读数只是增强，名称与数据表仍是完整信息。
 - `rowLabel`: `string`. 行维度叫什么，例如「星期」。
@@ -4557,6 +4586,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ChartGeometryContext: without a provider default-value
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -4564,6 +4594,8 @@ Written descriptions; the list above is the type-resolved fact.
 #### Heatmap
 A named figure, two named categorical axes, a single-hue sequential grid and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- framed: boolean; default true. false: the chart sits on an existing surface (a borderless Section, Card or panel) and lays no paper of its own — no line, fill, radius or inner padding, so its edges are the host's content edges. Same meaning as TableContainer's framed. Whether the in-chart title shows is independent of it.
+- aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - rowLabel / columnLabel / valueLabel: string. Names for the row dimension, column dimension and the measured quantity, e.g. "hour", "weekday", "syncs".
 - columns: readonly { key: string; label: string }[]. The column dimension's values, two or more — unlike a data series, there is no identity-color cap.
 - rows: readonly ChartRow[]. The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key.
@@ -4601,14 +4633,14 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## HoverCard
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
-Source SHA-256: f8127bb393799cab3bb83d3e54f2fcddf479e38d000adce7e821eff75e01d54c
+Source SHA-256: 0b0ed72c7e1ab6b15fec0f88ef9c3098ec28f695433ec369a810473649f4bfb7
 
 Reveal the same supplemental content on hover and keyboard focus.
 
@@ -4709,7 +4741,7 @@ export default function HoverCardDemo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: a05c8fdaddbcad8ff68d0e5813051cb7a079aa36c590657de0268905a65ab1db
+Source SHA-256: 866dfa2114174d3e7fcbc088e23ef9bc7a2c6812132ac872d1a3942cce273389
 
 Enter one text value.
 
@@ -4800,7 +4832,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: 3fdb8d45af25f9092b797792b1bd1130460c3bf2c9b7dab34f3ad2b74ebccd0d
+Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
 
 Give an input and its markers, units or actions one editing boundary.
 
@@ -4911,7 +4943,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
-Source SHA-256: a4840f5d596664b75f0955993cfe79a0e4b49c8de13c50f8a511baf32d7762fe
+Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
 
 Content, navigation and related actions.
 
@@ -4929,10 +4961,10 @@ Items contain no built-in business objects. A whole-item link cannot contain int
 - Application: Item content, actual navigation targets, and action states.
 
 ### Composition
-- Item: A div that may render a li or standalone anchor.
+- Item: A div that may render a li or standalone anchor. Render an a when the whole row leads to one destination and holds no other interactive element: rendered as a[href] or button the row gets hover and pressed feedback, and the fill bleeds one padding past each side while the text stays on the column edge; a div or li gets none.
 - ItemContent / ItemTitle / ItemDescription: div / div / p relationship slots.
 - ItemActions: Secondary actions on the row, always visible by default.
-- ItemLink: A real navigation link.
+- ItemLink: A real navigation link where the name is the entry, for rows that have their own actions in ItemActions; when the whole row is one destination use Item render={<a />} instead.
 
 ### Responsive behavior
 - Body text wraps while adjunct actions retain capacity.
@@ -4993,7 +5025,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### Item
-A div that may render a li or standalone anchor.
+A div that may render a li or standalone anchor. Render an a when the whole row leads to one destination and holds no other interactive element: rendered as a[href] or button the row gets hover and pressed feedback, and the fill bleeds one padding past each side while the text stays on the column edge; a div or li gets none.
 - render / ref / children / native props: useRender.ComponentProps<div>. Events and ref reach the actual element; explicitly render li inside a list.
 
 #### ItemContent / ItemTitle / ItemDescription
@@ -5007,7 +5039,7 @@ Secondary actions on the row, always visible by default.
 - children / render / ref / native props: useRender.ComponentProps<div>. Compose public Button actions.
 
 #### ItemLink
-A real navigation link.
+A real navigation link where the name is the entry, for rows that have their own actions in ItemActions; when the whole row is one destination use Item render={<a />} instead.
 - href / render / ref / native props: useRender.ComponentProps<a>. Preserve destinations, ARIA and caller events.
 
 ### Keyboard
@@ -5042,14 +5074,14 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## Kbd
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
-Source SHA-256: 9bd05176bc2643148c87c549a69cddb63fb6ffe48a2a15f4f1e00567f4491703
+Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
 
 A native keyboard key display.
 
@@ -5286,7 +5318,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
-Source SHA-256: df69ad19901d776578f8dcb288ae1a4907a55645774cf3b5d2976389349c820d
+Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
 
 A text entry that goes to an address; every text link in the library shares this one treatment.
 
@@ -5434,7 +5466,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 215f8f86d55ac9671b12dc0dcab497b2236acc6ac6847926d0b617ea5544795c
+Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
 
 Temporary commands and choices related to the current task.
 
@@ -5592,19 +5624,24 @@ Group semantics and the public primitive namespace.
 - Enter / Space / Escape: Execute an enabled command or close and return to the trigger.
 
 ### Source example
-#### 当前条目的命令
+#### 命令菜单
 Source: apps/docs/src/content/menu/demos/01-task.tsx
 ```tsx
 import * as React from "react";
 import { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem, MenuCheckboxItem, MenuSeparator } from "@qingye_lab/ui/components/menu";
-import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "当前条目的命令", titleEn: "Commands for the current item" } satisfies DemoMeta;
+export const meta = { title: "命令菜单", titleEn: "Command menu" } satisfies DemoMeta;
 export default function Demo() {
-  const [marked, setMarked] = React.useState(false); const [items, setItems] = React.useState(["权限与角色", "接入设备"]);
-  return <Stack><Inline><Menu><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem disabled={items[0] === "接入设备"} onClick={() => setItems(value => ["接入设备", ...value.filter(item => item !== "接入设备")])}>移到首位</MenuItem><MenuItem disabled>恢复</MenuItem><MenuSeparator /><MenuCheckboxItem checked={marked} onCheckedChange={setMarked}>标记接入设备</MenuCheckboxItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline><p className="m-0 text-body">接入设备 · {marked ? "已标记" : "未标记"}</p><ol className="m-0 text-body">{items.map(item => <li key={item}>{item}</li>)}</ol></Stack>;
+  const [marked, setMarked] = React.useState(false);
+  return <Menu><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+    <MenuItem>重命名</MenuItem><MenuItem>复制</MenuItem>
+    <MenuSeparator />
+    <MenuCheckboxItem checked={marked} onCheckedChange={setMarked}>标记</MenuCheckboxItem>
+  </MenuPopup></MenuPositioner></MenuPortal></Menu>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Meter
 
@@ -5810,7 +5847,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: b96a77f4cb67f667c5d1510c085a96c06681bfb2fd12a7cb509910f1a417ea04
+Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
 
 Keep the platform picker, native options and form values.
 
@@ -5903,7 +5940,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: 556a511e65cc132455dc7682ff20bbc397bcce73ba677a2806b9b7e360067781
+Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
 
 Real links, expandable navigation groups, and in-panel group names with descriptions.
 
@@ -6066,7 +6103,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: 7dd45e6592f116b40b7a0794577d8492b47fb298b646a95397ed4f2680e51bda
+Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
 
 Edit an optional number and adjust it by a declared step.
 
@@ -6191,7 +6228,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: c094055377d5ee9d3617c473dd7e39cf54d61e08b90405bc9efe9da79acab757
+Source SHA-256: 571d900cc06f84175ae184468e4ed4829d23c4684721fffa463d9b84ef04ac12
 
 Present a fixed-length text value in segments.
 
@@ -6401,7 +6438,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 91739438bfcb4fd1559027083c341c0dab143ea076703bf453203fecbfb9b53a
+Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
 
 Page position, real actions and explicit unknown totals.
 
@@ -6526,59 +6563,32 @@ An omitted-pages marker, not a final page.
 ### Keyboard
 
 ### Source example
-#### 已知与未知总页数
+#### 已知总页数
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
 import { useState } from "react";
-import { Stack } from "@qingye_lab/ui/components/layout";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
-import { Heading, Text } from "@qingye_lab/ui/components/typography";
+import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "已知与未知总页数", titleEn: "Known and unknown totals" } satisfies DemoMeta;
+export const meta = { title: "已知总页数", titleEn: "Known total" } satisfies DemoMeta;
 
-// 演示只描述「结果分页」本身，不编造业务流程。
-const pages = [
-  { title: "接入与设备", summary: "12 条记录" },
-  { title: "权限与角色", summary: "8 条记录" },
-  { title: "同步与导出", summary: "5 条记录" },
-];
+const total = 5;
 
 export default function Demo() {
   const [page, setPage] = useState(2);
-  return <Stack gap="section">
-    <Stack>
-      <Heading level={6} step="heading">{pages[page - 1]!.title}</Heading>
-      <Text step="support" className="text-muted-foreground">{pages[page - 1]!.summary}</Text>
-      <Pagination page={page} totalPages={pages.length} aria-label="内容分页">
-        <PaginationList>
-          <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-          {pages.map((entry, index) => <PaginationItem key={entry.title}>
-            <PaginationLink
-              page={index + 1}
-              href={`#page-${index + 1}`}
-              onClick={event => { event.preventDefault(); setPage(index + 1); }}
-            >{index + 1}</PaginationLink>
-          </PaginationItem>)}
-          <PaginationItem><PaginationEllipsis /></PaginationItem>
-          <PaginationItem><PaginationNext disabled={page === pages.length} onClick={() => setPage(page + 1)} /></PaginationItem>
-        </PaginationList>
-      </Pagination>
-    </Stack>
-
-    <Stack>
-      <Text step="support" className="text-muted-foreground">总数未知时只表达方向和已到达的位置，不伪造末页。</Text>
-      <Pagination page={page} totalPages={null} aria-label="未知总数的分页">
-        <PaginationList>
-          <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-          <PaginationItem><Text step="support">第 {page} 页</Text></PaginationItem>
-          <PaginationItem><PaginationNext onClick={() => setPage(page + 1)} /></PaginationItem>
-        </PaginationList>
-      </Pagination>
-    </Stack>
-  </Stack>;
+  return <Pagination page={page} totalPages={total}>
+    <PaginationList>
+      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
+      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>
+        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>
+      </PaginationItem>)}
+      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
+    </PaginationList>
+  </Pagination>;
 }
 ```
+
+2 more examples: see the component page and its Markdown file.
 
 ## PasswordInput
 
@@ -6740,7 +6750,7 @@ export default function Demo() { return <PendingValue label="值" actions={<Butt
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 14031b4212f01c1e0305c190d61ce1f16d5f6a0046313f5b524c13328d82c5bd
+Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
 
 A trigger-bound non-modal popup for local actions and supplementary information.
 
@@ -6878,21 +6888,19 @@ import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Stack } from "@qingye_lab/ui/components/layout";
 import { Popover, PopoverClose, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { Textarea } from "@qingye_lab/ui/components/textarea";
-import { useState } from "react";
 
 export const meta = { title: "多行输入", titleEn: "Multiline input" };
 
 export default function Demo() {
-  const [draft, setDraft] = useState("");
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="quiet" />}>编辑备注</PopoverTrigger>
+      <PopoverTrigger render={<Button variant="bordered" />}>编辑备注</PopoverTrigger>
       <PopoverPopup className="w-80">
         <Stack gap="panel">
           <PopoverTitle>编辑备注</PopoverTitle>
           <Field>
             <FieldLabel>备注</FieldLabel>
-            <Textarea onChange={(event) => setDraft(event.target.value)} value={draft} />
+            <Textarea />
           </Field>
           <PopoverClose render={<Button variant="quiet" />}>关闭</PopoverClose>
         </Stack>
@@ -7016,7 +7024,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: b1cf3aceac5d4eebf545a5f71103cb9a2bec25c9f016ffb1cd631153f7dd0593
+Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
 
 Which parts make up a whole and how much each takes.
 
@@ -7095,16 +7103,19 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
-Source SHA-256: 1bedf9965e31b679df997fb01a3a9a41cb4464f76634276731cc374c402f080c
+Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
 
-Typesets already-rendered Markdown or rich text as an independent reading paper; headings, lists, quotes, code and tables read existing text tiers and ink roles.
+Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.
 
 ### Decision
-Prose neither parses Markdown nor bundles a renderer: callers use any tool (react-markdown, MDX, server-rendered HTML) to produce native elements, and Prose only typesets h1–h4, p, strong/em, a, ul/ol (including task lists), blockquote, inline code, pre > code, table, hr, img/figure/figcaption, kbd and details/summary through descendant selectors, without rewriting their structure or attributes.
+Prose neither parses Markdown nor bundles a renderer: callers use any tool (react-markdown, MDX, server-rendered HTML) to produce native elements, and Prose typesets only the native text blocks among its direct children (header, h1–h4, p, ul/ol including task lists, blockquote, pre, table, figure, details, hr, img) and the native elements inside them (strong/em, a, inline code, kbd, figcaption, summary and so on), without rewriting their structure or attributes. An element carrying data-slot, and everything inside it, is left alone, so components and live examples can sit directly in an article. The three heading ranks read the page's existing text tiers (h1 display, h2 title, h3 chapter), the same scale as the documentation site (ruling of 2026-10-12).
 
 ### Notes
 - Ships no built-in copy strings; does not go through useUILocale.
 - Ink roles and the paper swap automatically between light and dark; callers do not handle this.
+- The typesetting rules sit in the stylesheet's components layer: any utility class on an element in the article overrides them, with no !important.
+- Chinese paragraphs are justified and break lines under the strict rule; this follows the element's lang, so the page must declare its language correctly.
+- Known limit: a second Prose nested through a component inside a native text block of an outer Prose (a Prose in a Card in a figure, for example) does not get its inline elements typeset; place it in a div or section instead.
 
 ### Use and ownership
 - Present an already-rendered long-form or Markdown result: a help article, a changelog entry, an AI reply, or documentation body copy.
@@ -7115,10 +7126,14 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 
 ### Composition
 - Children are the renderer's native element tree, or reviewed dangerouslySetInnerHTML; Prose only adds one className.
+- Place library components directly in an article: an element carrying data-slot, and everything inside it, is not typeset. Put data-slot on a block you draw yourself to declare that it is not running text.
+- Container children such as div and section are not entered. To typeset the headings and paragraphs inside one, make that container itself a Prose with framed={false} through render.
+- Where the page already has a surface (a Card, the documentation paper) use framed={false}: it only typesets and draws no second paper; the column and inset come from --qy-prose-column and --qy-prose-inset, so the surface can read the same values.
+- Put the h1 and the lead paragraph that follows it in a header: they sit one field gap apart and the lead reads in muted ink.
 - Tables read the same visual rules as the Table component (washed header/footer bands, row height, tabular numeric cells); inline code reads Typography's Code rule; links read Link's linkClassName — none of these get a second drawing.
 
 ### Responsive behavior
-- The measure is a fixed 38em and does not widen with the viewport; the inset tightens to the existing panel padding's narrow value.
+- The column is 38 材 (760px) and does not widen with the viewport; paragraphs, lists and quotes stop at a measure of 40 reading characters (640px), while code blocks and tables may use the whole column. The paper's inset is 2 材 and tightens to the panel padding on narrow screens. All three are presets, set through --qy-prose-column, --qy-prose-measure and --qy-prose-inset.
 - A very wide table does not yet scroll independently inside Prose (the paper's rounded corners need overflow-hidden rather than overflow-x-auto), so cells simply wrap — a known gap, not a missing default treatment.
 
 ### Customization
@@ -7132,7 +7147,7 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Prose
-- no props declared by this library
+- `framed?`: `boolean`. 是否自带一张纸（线、圆角、底、内缘）。文章已经放在一张纸上时（页面的主栏、Card、面板）设为 false， 只留排版，不再铺第二张；与 TableContainer 的 framed 同义。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -7145,7 +7160,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### Prose
-The reading-pane container; renders as article by default.
+The long-form container; renders as article by default.
+- framed: boolean; default true. Whether it brings its own reading paper (surface, hairline, radius, inset and column limit). When false it only typesets and the surrounding surface is the paper.
 - render / ref / className / style / native props: useRender.ComponentProps<"article">. Forward attributes, events and refs to the actual element; children are content the caller has already rendered.
 
 ### Keyboard
@@ -7176,14 +7192,14 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## RadioGroup
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: 7f4c46cbf875c449b91ead3fe1190fb577ad525fd90a21f0166b17d364021d00
+Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
 
 Choose one value from a small set of visible options.
 
@@ -7317,7 +7333,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: 21d3648a2701ede7c48c181a2c7525f3c3eaf1131008e09ae2dba12e80e2fd26
+Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
 
 The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 
@@ -7357,7 +7373,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### ScatterChart
 - `formatX?`: `(value: number) => React.ReactNode`.
 - `formatY?`: `(value: number) => React.ReactNode`.
-- `label`: `string`.
+- `framed?`: `boolean`. false：图放在已有的面上（无边框的 Section、Card、面板），不再铺自己的纸——没有线、底、圆角与内缘。是否显示图内标题与它无关，只看有没有外部名称。
+- `label`: `string`. 图的名字。默认显示为图内的标题（figcaption）并命名这个 figure。调用方传入 aria-labelledby 或 aria-label 时， figure 由那个外部名称命名，图内不再显示标题（同一个名字不说两遍，NG1）；label 仍必填，它是等价数据表的名字。
 - `series`: `readonly ScatterSeriesInput[]`. 1 至 3 个系列：两个量的关系是全比较形式（任意两点都可能相邻），色觉校验按全比较口径最多 3 色。
 - `style?`: `ChartStyle`.
 - `xLabel`: `string`. 横轴量的是什么，例如「记录数」。
@@ -7369,6 +7386,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: recharts
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ChartGeometryContext: without a provider default-value; provided by ScatterChart
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -7376,6 +7394,8 @@ Written descriptions; the list above is the type-resolved fact.
 #### ScatterChart
 A named figure, named x/y axes, series-colored markers and a visible same-source Table.
 - label: string. A nonempty semantic name for the actual data.
+- framed: boolean; default true. false: the chart sits on an existing surface (a borderless Section, Card or panel) and lays no paper of its own — no line, fill, radius or inner padding, so its edges are the host's content edges. Same meaning as TableContainer's framed. Whether the in-chart title shows is independent of it.
+- aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - xLabel / yLabel: string. What the x and y axes measure, e.g. "records" and "failure rate".
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. One to three series. A single series takes the first color without a legend; two or more take the chart1..3 order with distinct marker shapes. Every point needs a stable id and a nonempty name.
 - formatX / formatY: (value: number) => ReactNode. Format known values; defaults to Intl number formatting for UILocale.
@@ -7690,12 +7710,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 30ef318b5f0b9d44c662d02cc91d8c74f002c2e049606c547160fc9c1962f6bf
+Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
 
 Enter one value from a small set of visible segments.
 
 ### Decision
-SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change --qy-track-selected and --qy-track-selected-foreground.
+SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
 
 ### Notes
 - Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.
@@ -7799,7 +7819,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: e1fb3656cc4a25c57efdf795712d0996f38afb2cf4a46eff70864abb32ec03ec
+Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
 
 Choose one value from a collapsible set of options.
 
@@ -8053,12 +8073,104 @@ export default function Demo() {
 
 2 more examples: see the component page and its Markdown file.
 
+## SeverityMark
+
+Package: @qingye_lab/ui@3.0.0
+Import: @qingye_lab/ui/components/severity-mark
+Source: packages/ui/src/components/severity-mark.tsx
+Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
+
+An ordered level shown as a number of filled cells, named by the application.
+
+### Decision
+The level is carried by the number of filled cells and tone is only an accompanying category: two levels with the same cell count and different hues cannot be told apart once the name is hidden, so different levels take different level values. The library ships no level words and infers no name from the number; label is required. With no level, omit the mark: level has no 0.
+
+### Notes
+- A screen reader reads the name once: the cells and the visible name stay out of the accessibility tree.
+- The level does not rely on color: without hue, solid filled cells and outlined empty cells still give the level.
+- In forced colors filled cells are solid CanvasText and empty cells are an outline; tone hues collapse to one color.
+
+### Use and ownership
+- A row's object has an ordered level that must be comparable without spending a text column.
+- Avoid: Use StatusDot for which state an object is in: states have no order.
+- Avoid: Use Meter for a measurement with a unit and Progress for task completion.
+- Avoid: Do not tell two levels with the same cell count apart by hue.
+- Library: The mapping from level to filled cells, the image semantics and the accessible name.
+- Application: The level value, the number of levels, and each level's name and category.
+
+### Composition
+- Marks in one column share one max.
+- With name="hidden" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.
+- Beside a StatusDot both marks have the same height and share one row midline.
+
+### Responsive behavior
+- The name follows the text size of its row and wraps when long; cells do not shrink.
+
+### Customization
+- Public render/refs, ARIA, events, and styles; keep theme axes independent.
+
+### Current exports
+- SeverityMark: function; owner severity-mark; PASS; props: SeverityMarkProps
+- SeverityMarkProps: type; owner severity-mark; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SeverityMark
+- `label`: `string`. 这一级叫什么，必填。名称由应用声明：库不内置任何级别用词，也不从数字推断。
+- `level`: `number`. 第几级：填满的格数，1 到 max 的整数。没有级别就不放这个标记，所以没有 0。
+- `max?`: `number`. 一共几级：格的总数，2 到 5 的整数。同一列里的标记用同一个 max。
+- `name?`: `"hidden" | "visible"`. visible：格后面跟着名称。hidden：画面上只剩格，名称仍是这个标记的可访问名称—— 名称由同一行的别的文字或表头承担时用。
+- `tone?`: `"info" | "warning" | "danger" | "success"`. 状态类别：由调用方声明，组件不从级别猜好坏（随类赋彩）。不给时填充用焦墨。
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: does not read UILocale
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### SeverityMark
+A row of cells and a name; the root is role="img" and its accessible name is label.
+- level: number. Required level: the number of filled cells, an integer from 1 to max. Out-of-range or non-integer values throw RangeError and are never rounded. The root carries data-level.
+- max: number; default 3. The number of levels: total cells, an integer from 2 to 5; otherwise RangeError is thrown. Unfilled cells stay as empty cells.
+- tone: "danger" | "warning" | "success" | "info". The status category of the filled cells, declared by the caller; the component does not guess good or bad from the level. The root carries data-tone. Omitted, the ink color is used. An invalid value throws RangeError.
+- label: string. Required name of the level; a missing or blank value throws. It is the accessible name and the visible name.
+- name: "visible" | "hidden"; default "visible". With hidden only the cells remain on screen; label is still the accessible name.
+- render / ref / native props: current public component props. Forward attributes, events, and refs to the actual element; adjust presentation through className/style.
+
+### Keyboard
+
+### Source example
+#### 三级
+Source: apps/docs/src/content/severity-mark/demos/01-levels.tsx
+```tsx
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { SeverityMark } from "@qingye_lab/ui/components/severity-mark";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "三级", titleEn: "Three levels" } satisfies DemoMeta;
+
+export default function Demo() {
+  return <Inline gap="panel">
+    <SeverityMark level={3} tone="danger" label="高" />
+    <SeverityMark level={2} tone="warning" label="中" />
+    <SeverityMark level={1} tone="info" label="低" />
+  </Inline>;
+}
+```
+
+3 more examples: see the component page and its Markdown file.
+
 ## Sidebar
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: a40c4510db3466a9b3aba5ff51dd670eea034e558c41cd0e963ae10df61cf46b
+Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -8067,8 +8179,9 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 
 ### Notes
 - Applications choose the expanded width; the collapsed rail's width is given by the library as one fill control height plus insets on both sides, and a visible Toggle is always available.
-- The current item carries two cues: its surface and a segment of ink line. A top-level item draws the line inside its starting edge; a sub-level item deepens its own segment of the guide line. Neither line width nor font weight changes.
-- The current item's surface follows its host: by default the sidebar is one step darker than paper and the current item is paper. When a project moves --qy-sidebar to or near paper, set --qy-sidebar-current to var(--qy-surface-active) so the current item becomes a wash.
+- The current item is marked by its rounded filled surface alone, with no line and no change of font weight (user ruling, 2026-10-12: one boundary mechanism per region). The guide line beside a sub-level only expresses membership; the current item does not deepen it.
+- The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.
+- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
 - In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.
 
 ### Use and ownership
@@ -8079,6 +8192,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 
 ### Composition
 - Sidebar / SidebarToggle: An aside and reversible toggle.
+- SidebarHeader / SidebarTitle: The first row: identity first, SidebarToggle last. In the rail they stack and centre, and the title stays for assistive technology.
+- SidebarFooter: The end slot, pinned to the bottom of the column; holds the account entry.
 - SidebarContent / SidebarGroup / SidebarGroupLabel: A native nav and navigation groups.
 - SidebarLink: A real page link.
 - SidebarSub / SidebarSubTrigger / SidebarSubContent: An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
@@ -8094,10 +8209,14 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
+- SidebarFooter: function; owner sidebar; PASS; props: SidebarFooterProps
+- SidebarFooterProps: type; owner sidebar; PASS
 - SidebarGroup: function; owner sidebar; PASS; props: SidebarGroupProps
 - SidebarGroupLabel: function; owner sidebar; PASS; props: SidebarGroupLabelProps
 - SidebarGroupLabelProps: type; owner sidebar; PASS
 - SidebarGroupProps: type; owner sidebar; PASS
+- SidebarHeader: function; owner sidebar; PASS; props: SidebarHeaderProps
+- SidebarHeaderProps: type; owner sidebar; PASS
 - SidebarLink: function; owner sidebar; PASS; props: SidebarLinkProps
 - SidebarLinkProps: type; owner sidebar; PASS
 - SidebarProps: type; owner sidebar; PASS
@@ -8107,6 +8226,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarSubProps: type; owner sidebar; PASS
 - SidebarSubTrigger: function; owner sidebar; PASS; props: SidebarSubTriggerProps
 - SidebarSubTriggerProps: type; owner sidebar; PASS
+- SidebarTitle: function; owner sidebar; PASS; props: SidebarTitleProps
+- SidebarTitleProps: type; owner sidebar; PASS
 - SidebarToggle: function; owner sidebar; PASS; props: SidebarToggleProps
 - SidebarToggleProps: type; owner sidebar; PASS
 
@@ -8123,11 +8244,19 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
+### SidebarFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
 ### SidebarGroup
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarGroupLabel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarHeader
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -8149,6 +8278,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### SidebarSubTrigger
 - `icon?`: `React.ReactNode`.
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### SidebarTitle
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarToggle
 - `className?`: `string`.
@@ -8174,6 +8307,14 @@ Written descriptions; the list above is the type-resolved fact.
 #### Sidebar / SidebarToggle
 An aside and reversible toggle.
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. Expanded by default; details.cancel() rejects a change.
+- render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+#### SidebarHeader / SidebarTitle
+The first row: identity first, SidebarToggle last. In the rail they stack and centre, and the title stays for assistive technology.
+- render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+#### SidebarFooter
+The end slot, pinned to the bottom of the column; holds the account entry.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 #### SidebarContent / SidebarGroup / SidebarGroupLabel
@@ -8206,14 +8347,14 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## Skeleton
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
-Source SHA-256: 301df2afea5a642f2f2c8937e9e84da28ac15af75cde6baf5edbb540b9775f0e
+Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 
 Hold the place and row count content will take until it arrives.
 
@@ -8314,7 +8455,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
-Source SHA-256: d71125212974a2e050a26fa4f5e35f37b0a043651b58e0c80f5f4f1b842b2787
+Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
 
 Enter a number or an ordered range within explicit bounds.
 
@@ -8436,67 +8577,32 @@ Base UI Slider primitive namespace.
 - PageUp / PageDown / Shift+Arrow keys: Change by largeStep within range and neighboring-value constraints.
 
 ### Source example
-#### 数值、单位与精确输入
+#### 单个数值
 Source: apps/docs/src/content/slider/demos/01-values.tsx
 ```tsx
-import { useState } from "react";
-import { Field, FieldDescription, FieldGroup, FieldItem, FieldLabel } from "@qingye_lab/ui/components/field";
-import { NumberField, NumberFieldGroup, NumberFieldInput } from "@qingye_lab/ui/components/number-field";
-import { Slider, SliderControl, SliderIndicator, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
+import { Slider, SliderControl, SliderIndicator, SliderLabel, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
 
-export const meta = { title: "数值、单位与精确输入", titleEn: "Value, unit and exact entry" };
+export const meta = { title: "单个数值", titleEn: "One value" };
 
-/* 评审 2026-10-05：滑块的**位置不是可靠的数据表达**。只有一条轨道时，用户知道
- * 自己大致拖到了哪里，但不知道自己设置了什么。数值任务至少要给出：
- *   当前值 + 单位；范围的两端；需要精确设置时的非拖拽路径。
- * 拖拽不是唯一入口——键盘方向键、以及这里的数字输入都能到达同一个值。 */
 export default function Demo() {
-  const [threshold, setThreshold] = useState(60);
-  const [range, setRange] = useState<readonly number[]>([20, 80]);
-
-  return <FieldGroup className="grid gap-(--qy-field-group-gap) sm:grid-cols-2">
-    <Field>
-      {/* SliderValue 读 Slider 根的真实值，因此标签行必须在根之内。 */}
-      <Slider name="threshold" value={threshold} onValueChange={setThreshold} min={0} max={100} step={5}>
-        <div className="flex items-center justify-between gap-(--qy-field-gap)">
-          <FieldLabel>告警阈值</FieldLabel>
-          <SliderValue className="text-body-strong">{(formatted) => `${formatted}%`}</SliderValue>
-        </div>
-        <SliderControl><SliderTrack><SliderIndicator /><SliderThumb aria-label="告警阈值百分比" /></SliderTrack></SliderControl>
-      </Slider>
-      {/* 范围两端：让「偏左」有一个可读的参照。 */}
-      <div className="flex justify-between text-caption text-muted-foreground"><span>0%（每次同步都告警）</span><span>100%（从不告警）</span></div>
-      {/* 非拖拽路径：需要精确值时不必拖到难以确定的位置。
-       *  NumberField 的值可以是 null（空），因此只在有值时回写给滑块。
-       *  Field 的标签名的是滑块，精确输入是同一个设置的第二个控件：用 FieldItem 给它自己的标签作用域，
-       *  否则两个控件共用 Field 的 controlId（同一个 id 出现两次）；它的名称写在 NumberFieldInput 上。 */}
-      <FieldItem className="items-center"><NumberField className="w-28" value={threshold} onValueChange={(next) => { if (next !== null) setThreshold(next); }} min={0} max={100} step={5}><NumberFieldGroup><NumberFieldInput aria-label="告警阈值，精确输入" /></NumberFieldGroup></NumberField><span className="text-support text-muted-foreground">%</span></FieldItem>
-      <FieldDescription>拖拽、方向键或上面的输入都能改到同一个值。</FieldDescription>
-    </Field>
-
-    <Field>
-      <Slider name="retention" value={range} onValueChange={setRange} min={0} max={100} step={5} minStepsBetweenValues={2} thumbCollisionBehavior="none">
-        <div className="flex items-center justify-between gap-(--qy-field-gap)">
-          <FieldLabel>保留区间</FieldLabel>
-          <SliderValue className="text-body-strong">{(formatted: readonly string[]) => `${formatted[0]}–${formatted[1]} 天`}</SliderValue>
-        </div>
-        <SliderControl><SliderTrack><SliderIndicator /><SliderThumb index={0} aria-label="保留天数下限" /><SliderThumb index={1} aria-label="保留天数上限" /></SliderTrack></SliderControl>
-      </Slider>
-      <div className="flex justify-between text-caption text-muted-foreground"><span>0 天</span><span>100 天</span></div>
-      <FieldDescription>两个抓手之间有最小间隔，不会交叉。</FieldDescription>
-    </Field>
-  </FieldGroup>;
+  return <Slider defaultValue={60} min={0} max={100} step={5} className="w-full max-w-sm">
+    <div className="flex items-center justify-between gap-(--qy-field-gap)">
+      <SliderLabel>告警阈值</SliderLabel>
+      <SliderValue>{(formatted) => `${formatted}%`}</SliderValue>
+    </div>
+    <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>
+  </Slider>;
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## Sparkline
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
-Source SHA-256: e6061dfe3068d7c1fece1a1d0ac4c854d51a576d22fbbf9c8ed38bb2483e4bd2
+Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202
 
 A small line set in a line of text, showing how a reading has recently changed.
 
@@ -8779,7 +8885,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
-Source SHA-256: 9620517d67de460eb5986d9eb8a445c6f41a7b4bad8d7316f6c38ab874df9495
+Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
 
 An ordered process with application-owned progress.
 
@@ -8882,7 +8988,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: 3af2e776340c6071be375a6d0eee3a284808ae0ac783a8fcf908c0129447ba91
+Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
 
 Immediately change the on/off state of a current setting.
 
@@ -8998,7 +9104,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 1a093806a890aa00d4673b1ffc8e9d1fc8d16088c1a29e4a2c632525b5a23fe7
+Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -9147,7 +9253,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 6112046c4c49aa3c606529d00c2789769e6d5b5de5a920aa146d67fb9bdc6cd6
+Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
 
 Different views of one object with panel drafts retained.
 
@@ -9250,7 +9356,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: a0d2bdcd810595687a989f8f74992df54b1849c4f01cec019261f64821a831cb
+Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -9363,7 +9469,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: aa904e29f936d9929096b446977889807af4232257aebfdfa993660c4c248c13
+Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
 
 Edit multiline notes and messages.
 
@@ -9548,51 +9654,41 @@ Creates inline pre-paint script source with the same storageKey, attribute, and 
 ### Keyboard
 
 ### Source example
-#### 按需选择外观
+#### 外观选择
 Source: apps/docs/src/content/theme-provider/demos/01-menu.tsx
 ```tsx
-import { Button } from "@qingye_lab/ui/components/button";
-import { Stack } from "@qingye_lab/ui/components/layout";
-import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { useTheme, type Theme } from "@qingye_lab/ui/components/theme-provider";
-import { Text } from "@qingye_lab/ui/components/typography";
-import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+import { Inline } from "@qingye_lab/ui/components/layout";
 import { useUILocale } from "@qingye_lab/ui/locale";
-import { IconMoon, IconSun } from "@tabler/icons-react";
-import { useId } from "react";
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 
-export const meta = { title: "按需选择外观", titleEn: "Choose appearance on demand" };
+export const meta = { title: "外观选择", titleEn: "Appearance choice" };
 
 export default function Demo() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { messages } = useUILocale();
-  const id = useId();
-  const Current = resolvedTheme === "dark" ? IconMoon : IconSun;
-  return <Popover>
-    <PopoverTrigger render={<Button shape="icon" aria-label={messages.theme} variant="quiet" />}><Current aria-hidden="true" /></PopoverTrigger>
-    <PopoverPopup>
-      <Stack gap="field">
-        <PopoverTitle>{messages.theme}</PopoverTitle>
-        <NativeSelect id={id} aria-label={messages.theme} value={theme} onChange={event => setTheme(event.target.value as Theme)}>
-          <option value="light">{messages.lightTheme}</option>
-          <option value="dark">{messages.darkTheme}</option>
-          <option value="system">{messages.systemTheme}</option>
-        </NativeSelect>
-        <Text step="support" className="text-muted-foreground">当前：{resolvedTheme === "dark" ? messages.darkTheme : messages.lightTheme}</Text>
-      </Stack>
-    </PopoverPopup>
-  </Popover>;
+  const options = [
+    { value: "light", label: messages.lightTheme, icon: IconSun },
+    { value: "dark", label: messages.darkTheme, icon: IconMoon },
+    { value: "system", label: messages.systemTheme, icon: IconDeviceDesktop },
+  ] as const;
+  return <SegmentedControl aria-label={messages.theme} value={theme} onValueChange={next => setTheme(next as Theme)}>
+    {options.map(({ value, label, icon: Icon }) => <SegmentedControlItem key={value} value={value}>
+      <Inline gap="field" render={<span />}><Icon aria-hidden="true" />{label}</Inline>
+    </SegmentedControlItem>)}
+  </SegmentedControl>;
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## Timeline
 
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
-Source SHA-256: cb38f1cd0e5ba64470cb11efec7700e026a5e152bec8eef0eb018e22c13e17a6
+Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
 
 Preserve input order and actual times.
 
@@ -9695,7 +9791,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 2f78a4dba01cb2ef1ac005af6672417903764f3bdb51fe2dd4dbd23228a31eaf
+Source SHA-256: 00bc356c67f1de366080dbad79d2a5d491442ee61a9aafe06d01527345ec7d06
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -9795,41 +9891,23 @@ Base UI Toast primitive namespace; useToastManager manages the owning Provider c
 - Esc: Close the focused notice and return to the original focus.
 
 ### Source example
-#### 类型
-Source: apps/docs/src/content/toast/demos/01-types.tsx
+#### 通知
+Source: apps/docs/src/content/toast/demos/01-notice.tsx
 ```tsx
 import { useEffect, useId } from "react";
 import { Button } from "@qingye_lab/ui/components/button";
 import { toastManager } from "@qingye_lab/ui/components/toast";
 
-export const meta = { title: "类型", titleEn: "Types" };
-
-const types = [
-  ["info", "信息"],
-  ["warning", "提醒"],
-  ["waiting", "等待"],
-  ["in-progress", "进行中"],
-  ["unknown", "结果未知"],
-  ["failed", "失败"],
-  ["success", "成功"],
-] as const;
+export const meta = { title: "通知", titleEn: "Notice" };
 
 export default function Demo() {
   const id = useId();
   useEffect(() => () => toastManager.close(id), [id]);
-  return (
-    <div className="flex gap-(--qy-action-gap)">
-      {types.map(([type, label]) => (
-        <Button key={type} variant="bordered" onClick={() => toastManager.add({ id, type, title: label, timeout: 5000 })}>
-          {label}
-        </Button>
-      ))}
-    </div>
-  );
+  return <Button variant="bordered" onClick={() => toastManager.add({ id, title: "通知", description: "补充信息", timeout: 5000 })}>显示通知</Button>;
 }
 ```
 
-5 more examples: see the component page and its Markdown file.
+6 more examples: see the component page and its Markdown file.
 
 ## Toc
 
@@ -9922,10 +10000,10 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "随滚动更新当前项", titleEn: "Updates the current item as the reader scrolls" } satisfies DemoMeta;
 
 const sections = [
-  { id: "demo-overview", level: 2 as const, title: "概览", body: "每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。" },
-  { id: "demo-retry", level: 3 as const, title: "重试与核实", body: "默认重试 3 次，间隔依次为 1、5、15 分钟；超过次数仍失败，转入人工核实队列。" },
-  { id: "demo-unknown", level: 3 as const, title: "结果未知时", body: "直接重试可能写入两次；先在 Webhook 回调或审计日志里核实，再决定下一步。" },
-  { id: "demo-recovery", level: 2 as const, title: "恢复与返回", body: "放弃一条记录不会影响其余记录；核实后可以随时手动重新触发。" },
+  { id: "demo-install", level: 2 as const, title: "安装", body: "用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。" },
+  { id: "demo-styles", level: 3 as const, title: "引入样式", body: "在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。" },
+  { id: "demo-theme", level: 3 as const, title: "明暗与品牌", body: "ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。" },
+  { id: "demo-density", level: 2 as const, title: "密度", body: "在容器上写 data-density=\"compact\"，其中的控件与间距一起收紧，字号不变。" },
 ];
 
 export default function Demo() {
@@ -9934,7 +10012,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc items={headings} current={current} className="w-40 shrink-0" />
-    <ScrollArea ref={containerRef} role="region" aria-label="同步说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -9954,12 +10032,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
-Source SHA-256: 4e26d8bdc3dc7cc7bd85a5d04bb27d0362e12e8d3fa896f7c43ce2d607fe5289
+Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
 
 A two-state toggle that holds its pressed fact until toggled again, with a stable name.
 
 ### Decision
-A pressed Toggle fills light ink inside its line with ink text and does not use the primary action fill, so overriding --qy-primary does not change it. To adjust how pressed looks, change --qy-track-selected and --qy-track-selected-foreground.
+A pressed Toggle fills light ink inside its line with ink text and does not use the primary action fill, so overriding --qy-primary does not change it. To adjust how pressed looks, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
 
 ### Notes
 - Names stay stable; aria-pressed expresses state.
@@ -10054,12 +10132,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: 0ffafe3b0b80fe93491f983ae5885460f2e0ef0b3aebf612d275b23165bbdb4e
+Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
 
 A shared single or multiple set of toggles whose pressed fact persists.
 
 ### Decision
-A pressed item is a light ink wash with ink text and unpressed items use muted ink, with the same weight. It does not use the primary action fill, so overriding --qy-primary does not change it. To adjust it, change --qy-track-selected and --qy-track-selected-foreground.
+A pressed item is a light ink wash with ink text and unpressed items use muted ink, with the same weight. It does not use the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
 
 ### Notes
 - No name or hidden form value. Use SegmentedControl for submitted mutually exclusive values.
@@ -10282,7 +10360,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: b4646485ce8cde03848160b397cf2a7c9b52aab8971f669f26fd265e5214e97f
+Source SHA-256: 645246aacae85bd1b03d598d0514c39ada5e0c0a7bb1aec070bb3441cc6e11f6
 
 Read shortcuts, formats and brief context on hover or focus.
 
@@ -10406,33 +10484,21 @@ Typed shared-trigger handles and the public Base UI namespace.
 - Esc: Dismiss while retaining focus on the trigger.
 
 ### Source example
-#### 文字格式
+#### 图标按钮
 Source: apps/docs/src/content/tooltip/demos/01-icon-buttons.tsx
 ```tsx
-import { useState } from "react";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
-import { IconBold, IconItalic } from "@tabler/icons-react";
+import { IconBold } from "@tabler/icons-react";
 
-export const meta = { title: "文字格式" };
+export const meta = { title: "图标按钮", titleEn: "Icon button" };
 
 export default function Demo() {
-  const [bold, setBold] = useState(false);
-  const [italic, setItalic] = useState(false);
   return (
-    <div className="flex flex-col gap-(--qy-field-group-gap)">
-      <div className="flex gap-(--qy-action-gap)">
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" aria-pressed={bold} onClick={() => setBold(!bold)} />}><IconBold aria-hidden="true" /></TooltipTrigger>
-          <TooltipPopup>强调项目名称</TooltipPopup>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="斜体" aria-pressed={italic} onClick={() => setItalic(!italic)} />}><IconItalic aria-hidden="true" /></TooltipTrigger>
-          <TooltipPopup>标记作品名称或引用</TooltipPopup>
-        </Tooltip>
-      </div>
-      <p className="text-body text-foreground" aria-live="polite">{bold ? <strong>{italic ? <em>青野组件库</em> : "青野组件库"}</strong> : italic ? <em>青野组件库</em> : "青野组件库"}</p>
-    </div>
+    <Tooltip>
+      <TooltipTrigger render={<Button variant="quiet" shape="icon" aria-label="粗体" />}><IconBold aria-hidden="true" /></TooltipTrigger>
+      <TooltipPopup>粗体</TooltipPopup>
+    </Tooltip>
   );
 }
 ```
@@ -10444,7 +10510,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 60a130ac69db0f25fab1f7286026182d946fe7c7c51d55d5646226af463d8e06
+Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
@@ -10560,7 +10626,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: e2e61cada80a1236c2e598d96696bef50c76e9e2714b2b63a91aaa4b3cce3faf
+Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -10742,6 +10808,204 @@ const items = Array.from({ length: 100 }, (_, id) => ({ id, label: `条目 ${id 
 const rowSize = 48;
 export default function Demo() {
   return <VirtualList aria-label="等高条目" items={items} getKey={item => item.id} itemSize={rowSize} height={rowSize * 4} renderItem={item => <span className="flex h-full items-center px-(--qy-control-md-padding) text-body">{item.label}</span>} />;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
+## Workspace
+
+Package: @qingye_lab/ui@3.0.0
+Import: @qingye_lab/ui/components/workspace
+Source: packages/ui/src/components/workspace.tsx
+Source SHA-256: a88bca35228482d5df54cdb17482fcaf3ea78e0599acdaed212d8e69f2b368d1
+
+An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
+
+### Decision
+A page's name, summary and page-level actions live in the header, so the body has no second large title. The surface keeps a 2-unit margin all round except on the side facing the sidebar: that gap is the sidebar's own inset, so sidebar and surface read as one gap apart. At narrow width the surface fills the viewport, with no margin, radius, line or shadow. A routed page sends its title and actions to the header with WorkspaceHeaderPortal; the header precedes the content in the DOM, so those actions also precede the body in tab order.
+
+### Notes
+- The header is a header element; outside main, section and article it is the page's banner landmark. The content is main, so place one Workspace per page.
+- After navigation the application moves focus to WorkspaceContent, and a skip link targets its id; an explicit tabIndex from the caller wins.
+- Content sent to the header appears after the first commit (it is not in server HTML); write the title directly as WorkspaceHeader's children when it must be there on first paint.
+- In forced colors the shadow is removed and the container line carries the surface's boundary; no extra line is needed.
+
+### Use and ownership
+- The shell of an admin-style application: persistent navigation at the side, one work surface for the current page.
+- Avoid: Do not use it for reading-first pages that scroll as a whole, such as documentation or landing pages; use Section for a stretch of body content and Card for an independent object.
+- Avoid: The header holds only this page's title, summary and page-level actions; the application places global entries such as search or notifications without taking the title's width.
+- Avoid: Do not nest a second identical sheet inside the surface.
+- Library: The shell geometry, the header's row height and midline, the header's slot for the page, and the content's scrolling and focus target.
+- Application: Routing, the current item, the page title and summary, the real targets of actions, and moving focus to the content after navigation.
+
+### Composition
+- Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.
+- The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.
+- Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal.
+
+### Responsive behavior
+- At narrow width (the library's single sm: point) the surface fills the viewport; whether the sidebar collapses or becomes a drawer is the application's choice.
+
+### Customization
+- className, render and ref belong to each part; the shell reads only system roles (ground, paper, container line, panel radius, panel shadow, page gutter, row height) and adds no component tokens.
+
+### Current exports
+- Workspace: function; owner workspace; PASS; props: WorkspaceProps
+- WorkspaceActions: function; owner workspace; PASS; props: WorkspaceActionsProps
+- WorkspaceActionsProps: type; owner workspace; PASS
+- WorkspaceContent: function; owner workspace; PASS; props: WorkspaceContentProps
+- WorkspaceContentProps: type; owner workspace; PASS
+- WorkspaceHeader: function; owner workspace; PASS; props: WorkspaceHeaderProps
+- WorkspaceHeaderPortal: function; owner workspace; PASS; props: WorkspaceHeaderPortalProps
+- WorkspaceHeaderPortalProps: type; owner workspace; PASS
+- WorkspaceHeaderProps: type; owner workspace; PASS
+- WorkspaceProps: type; owner workspace; PASS
+- WorkspaceSummary: function; owner workspace; PASS; props: WorkspaceSummaryProps
+- WorkspaceSummaryProps: type; owner workspace; PASS
+- WorkspaceSurface: function; owner workspace; PASS; props: WorkspaceSurfaceProps
+- WorkspaceSurfaceProps: type; owner workspace; PASS
+- WorkspaceTitle: function; owner workspace; PASS; props: WorkspaceTitleProps
+- WorkspaceTitleProps: type; owner workspace; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Workspace
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceActions
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceContent
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceHeaderPortal
+- `children?`: `React.ReactNode`.
+
+### WorkspaceSummary
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceSurface
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### WorkspaceTitle
+- `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, react-dom, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: does not read UILocale
+- Context WorkspaceContext: without a provider nullable; provided by Workspace
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Workspace
+The shell root: the sidebar and the surface side by side on the page ground, filling its container's height.
+- render / ref / children / native props: useRender.ComponentProps<div>. Gives a direct Sidebar child a 2-unit inset (zero specificity, so padding on the Sidebar and its collapsed inset win); with a header, the sidebar's first row shares the header controls' midline.
+
+#### WorkspaceSurface
+The work surface: paper, a light container line, panel radius and panel shadow; it clips the header and scroller inside.
+- render / ref / children / native props: useRender.ComponentProps<div>. A 2-unit margin all round, 0 on the side next to the Sidebar; full-bleed at narrow width.
+
+#### WorkspaceHeader
+The header inside the surface, a native header; one row tall (--qy-row-default: 48 by default, 44 compact) with a container line below.
+- render / ref / children / native props: useRender.ComponentProps<header>. Its children come first; what a page sends through WorkspaceHeaderPortal follows. Render a div when the page already has a banner.
+
+#### WorkspaceTitle
+The page title, built on Heading, truncated to one line.
+- level / step / render / ref / Heading props: HeadingProps; default level=1, step="chapter". chapter (20/28) is the largest heading step that fits one fill-control height; level changes only the outline level.
+
+#### WorkspaceSummary
+A one-line summary beside the title in support size and muted ink; it truncates first.
+- render / ref / children / native props: useRender.ComponentProps<p>. Directly after the title, the gap tightens to the in-group gap.
+
+#### WorkspaceActions
+Page-level actions at the end of the row, under the same rule as SectionActions.
+- render / ref / children / native props: useRender.ComponentProps<div>. When a labelled quiet button (md or sm) ends the group, the group offsets its inline padding so the text meets the content's right edge.
+
+#### WorkspaceContent
+The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus.
+- render / ref / children / native props: useRender.ComponentProps<main>. The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it.
+
+#### WorkspaceHeaderPortal
+Renders its children into the header's slot for the page; they unmount with the page.
+- children: ReactNode. Renders no element of its own. Renders nothing without a header, on the server, or before the first commit.
+
+### Keyboard
+- Tab: Sidebar, header (including actions a page sent up), then content, in DOM order; when the content overflows, the content area itself is a stop.
+- ↑ ↓ / Page Up / Page Down / Space: Scroll the content area while it has focus.
+
+### Source example
+#### 侧栏、顶栏与内容
+Source: apps/docs/src/content/workspace/demos/01-shell.tsx
+```tsx
+import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
+import { Separator } from "@qingye_lab/ui/components/separator";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle } from "@qingye_lab/ui/components/sidebar";
+import { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from "@qingye_lab/ui/components/workspace";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "侧栏、顶栏与内容", titleEn: "Sidebar, header and content", flush: true } satisfies DemoMeta;
+
+const SYNCED = [{ name: "蚕室温湿度", time: "今天 08:30" }, { name: "桑园采叶记录", time: "今天 07:55" }, { name: "上簇批次", time: "昨天 17:12" }, { name: "茧质抽检", time: "昨天 15:40" }];
+const PENDING = [{ name: "饲料入库单", time: "10 月 11 日" }, { name: "消毒记录", time: "10 月 10 日" }];
+
+export default function Demo() {
+  // 演示框的高度只为让外壳在示例里可见；应用里 Workspace 填满它所在容器的高度。
+  return <div className="h-[calc(24*var(--qy-cai))]">
+    <Workspace>
+      <Sidebar aria-label="工作区" className="w-[calc(10*var(--qy-cai))] shrink-0">
+        <SidebarHeader><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
+        <SidebarContent className="mt-(--qy-field-group-gap)">
+          <SidebarGroup>
+            <SidebarLink href="#overview" icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
+            <SidebarLink href="#collections" active icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>
+            <SidebarLink href="#tasks" icon={<IconChecklist aria-hidden="true" />}>任务</SidebarLink>
+            <SidebarLink href="#settings" icon={<IconSettings aria-hidden="true" />}>设置</SidebarLink>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
+      <WorkspaceSurface>
+        <WorkspaceHeader>
+          <WorkspaceTitle level={4}>集合</WorkspaceTitle>
+          <WorkspaceSummary>6 个，2 个未同步</WorkspaceSummary>
+          <WorkspaceActions><Button variant="bordered">导入</Button><Button>新建集合</Button></WorkspaceActions>
+        </WorkspaceHeader>
+        <WorkspaceContent render={<div />}>
+          <Stack gap="section" className="p-(--qy-page-gutter)">
+            <Section>
+              <SectionHeader><SectionTitle>未同步 <span className="numeric text-muted-foreground">{PENDING.length}</span></SectionTitle></SectionHeader>
+              {PENDING.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}
+            </Section>
+            <Separator />
+            <Section>
+              <SectionHeader><SectionTitle>已同步 <span className="numeric text-muted-foreground">{SYNCED.length}</span></SectionTitle></SectionHeader>
+              {SYNCED.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}
+            </Section>
+          </Stack>
+        </WorkspaceContent>
+      </WorkspaceSurface>
+    </Workspace>
+  </div>;
 }
 ```
 

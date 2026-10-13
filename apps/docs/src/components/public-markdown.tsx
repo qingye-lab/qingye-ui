@@ -134,7 +134,7 @@ export function PublicMarkdown({ document, groups = [], notesTitle }: { document
   }
   if (notesTitle && document.notes.size) {
     out.push(<H2 id="sources" key="sources">{notesTitle}</H2>);
-    out.push(<ol className="m-0 mb-(--qy-space-module) flex max-w-(--docs-measure) list-none flex-col gap-(--qy-field-gap) p-0 text-support text-muted-foreground" key="notes">
+    out.push(<ol data-slot="docs-notes" className="m-0 mb-(--qy-space-module) flex max-w-(--docs-measure) list-none flex-col gap-(--qy-field-gap) p-0 text-support text-muted-foreground" key="notes">
       {[...document.notes].sort(([a], [b]) => a - b).map(([number, note]) => (
         <li className="grid grid-cols-[calc(2*var(--qy-cai))_minmax(0,1fr)]" id={`note-${number}`} key={number}>
           <a aria-label={`${number}`} className="focus-ring w-fit rounded-sm numeric hover:text-foreground" href={`#cite-${number}`}>{number}</a>
@@ -143,6 +143,6 @@ export function PublicMarkdown({ document, groups = [], notesTitle }: { document
       ))}
     </ol>);
   }
-  if (document.colophon) out.push(<p className="docs-p m-0 max-w-(--docs-measure) text-support text-muted-foreground" key="colophon">{document.colophon}</p>);
+  if (document.colophon) out.push(<p className="m-0 max-w-(--docs-measure) text-support text-muted-foreground" key="colophon">{document.colophon}</p>);
   return <>{out}</>;
 }

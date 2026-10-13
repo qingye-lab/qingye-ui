@@ -21,4 +21,19 @@ describe("CodeBlock", () => {
   it("does not carry success over to changed text and can omit the copy action", async () => {
     vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } }); const { rerender } = render(<CodeBlock code="first" />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument()); rerender(<CodeBlock code="second" />); expect(screen.getByRole("button", { name: "复制代码" })).toBeInTheDocument(); rerender(<CodeBlock code="second" copyable={false} />); expect(screen.queryByRole("button")).toBeNull();
   });
+  it("copies `code`, not the highlighted children, and names the copy button the same with or without a title bar", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined); vi.stubGlobal("navigator", { clipboard: { writeText } });
+    for (const title of [undefined, "a.ts"]) {
+      const { container, unmount } = render(<CodeBlock code="const a = 1;" {...(title ? { title } : {})}><span>const</span> a = 1;</CodeBlock>);
+      expect(container.querySelector("pre > code")).toHaveTextContent("const a = 1;"); fireEvent.click(screen.getByRole("button", { name: "复制代码" })); expect(writeText).toHaveBeenLastCalledWith("const a = 1;");
+      await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument()); unmount();
+    }
+  });
+  it("renders a string title in the header and a node title as given, ahead of the copy button", () => {
+    const { rerender, container } = render(<CodeBlock code="x" title="values.js" />);
+    expect(container.querySelector("[data-slot=code-block-header]")).toHaveTextContent("values.js");
+    rerender(<CodeBlock code="x" title={<button type="button">pnpm</button>} />);
+    expect([...container.querySelectorAll("[data-slot=code-block-header] button")].map(node => node.textContent || node.getAttribute("aria-label"))).toEqual(["pnpm", "复制代码"]);
+    rerender(<CodeBlock code="x" />); expect(container.querySelector("[data-slot=code-block-header]")).toBeNull();
+  });
 });

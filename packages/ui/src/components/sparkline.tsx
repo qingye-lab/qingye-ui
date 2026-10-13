@@ -4,6 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { useUILocale } from "../locale";
+import { useSystemUnits } from "../system-units";
 import { assertTone, toneColor, type Tone } from "../tone";
 import { cn } from "../utils";
 
@@ -37,12 +38,17 @@ export type SparklineProps = Omit<useRender.ComponentProps<"span">, "children"> 
 
 /*
  * 行内趋势（基础层 §7；表达九法）：
- * - 以材为祖：高一材，像一个字一样坐在文字行里；宽默认 5 材。
+ * - 以材为祖：高一材，像一个字一样坐在文字行里；宽默认 5 材。材 = 5 分：SVG 的坐标要数字（路径、viewBox、纵向映射），
+ *   不能写 calc()，所以默认的高与宽由根节点读出的分换算（useSystemUnits：高 5 分、area 高 10 分、宽 25 分），
+ *   默认令牌下是 20 / 40 / 100px；首次渲染与服务端用默认令牌。调用方给的 width / height 是像素，原样使用。
  * - 墨分五色：线用浓墨，当前（最后）一点用焦墨——它是读者要找的那个数。默认没有类别，不用色相。
  * - 名实相符：未知的点断开，不连成线，也不当作零；可访问名称给出起止与最高最低。
  * - 没有轴、网格与图例：它从属于旁边的读数，读数与名称由调用方给出。
  * - 目标带（band）：参照用墨不用色（文字是墨，数据是色），画在线后面；纵向范围取数据与带的并集。
  * - 随类赋彩（tone）：类别由调用方声明；类别色之外，摘要里的「高于 / 低于目标」另用文字承担同一事实（灰度检验）。
+ * - 预设：线宽 1.5px、孤立点半径 1.5、当前点半径 2.5、画面内缩 3px（均为行内尺度的像素字面量，与分没有可名状的关系：
+ *   1.5 = ⅜ 分、2.5 = ⅝ 分，不凑成别的倍数，不随模数走）；area 的淡面 12%（比例）。
+ *   当前点外加的纸色圈取半分（默认 2px 描边，露出 1px）：它是纸色的间隙，与图表标记外的纸色圈同一角色，倍数为预设。
  */
 /** 目标带的填色：清墨（8% 墨，透明，叠在任何纸上读出同一级墨）。预设：清染（4%）在浅色纸上过淡，清墨在浅深两主题、line 与 area 下都看得出，又不压过线（2026-10-12 截图选定）。 */
 const bandFill = "color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent)";
@@ -60,6 +66,7 @@ export function Sparkline({ label, values, format, width: widthProp, appearance 
   // area 且未给宽度：铺满所在的块，量自己的宽度（指标卡里趋势与卡同宽，不缩在一角）。
   const [measured, setMeasured] = React.useState<number | null>(null);
   const box = React.useRef<HTMLElement | null>(null);
+  const { fen } = useSystemUnits(box);
   const fluid = appearance === "area" && widthProp === undefined;
   React.useLayoutEffect(() => {
     if (!fluid || !box.current) return;
@@ -67,9 +74,10 @@ export function Sparkline({ label, values, format, width: widthProp, appearance 
     update(); const observer = new ResizeObserver(update); observer.observe(element); return () => observer.disconnect();
   }, [fluid]);
   const area = appearance === "area";
-  const height = area ? heightProp ?? 40 : 20;
-  const width = widthProp ?? (fluid ? measured ?? 100 : 100);
-  const inset = 3;
+  const cai = 5 * fen; // 材 = 5 分
+  const height = area ? heightProp ?? 2 * cai : cai;
+  const width = widthProp ?? (fluid ? measured ?? 5 * cai : 5 * cai);
+  const inset = 3; // 预设：像素字面量，见上
   let paths: string[] = [];
   const lone: { x: number; y: number }[] = [];
   let last: { x: number; y: number } | undefined;
@@ -117,7 +125,7 @@ export function Sparkline({ label, values, format, width: widthProp, appearance 
       {area && paths.map((d, index) => { const xs = [...d.matchAll(/[ML]([0-9.]+),/g)].map(m => m[1]); return <path key={`wash${index}`} d={`${d}L${xs.at(-1)},${height}L${xs[0]},${height}Z`} fill={`color-mix(in srgb, ${ink(true)} 12%, transparent)`} stroke="none" />; })}
       {paths.map((d, index) => <path key={index} d={d} fill="none" stroke={ink(true)} strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" />)}
       {lone.map((p, index) => <circle key={`lone${index}`} data-slot="sparkline-point" cx={p.x} cy={p.y} r={1.5} fill={ink(true)} />)}
-      {last && <circle cx={last.x} cy={last.y} r={2.5} fill={ink(false)} stroke="var(--qy-surface)" strokeWidth={2} paintOrder="stroke" />}
+      {last && <circle cx={last.x} cy={last.y} r={2.5} fill={ink(false)} stroke="var(--qy-surface)" strokeWidth={fen / 2} paintOrder="stroke" />}
     </svg>,
   }) });
 }

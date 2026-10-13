@@ -2,9 +2,9 @@
  * 浮层里的条目（基础层 §4、§6、§8）：候选项（Select、Combobox、Autocomplete）与菜单项是同一种关系——
  * 浮层纸上的一行可选之物。一种几何，一个来源（NG3）。
  * - 圆角按浮层同心换算（浮层圆角 − 内缩）；高亮是指针或键盘位置，用清墨底，与选中（尾部对勾）可同时出现。
- * - 禁用沿用命令类预设 opacity-64（基础层 §9「只读与禁用」）。
+ * - 禁用沿用命令类预设 opacity-disabled（--qy-opacity-disabled；基础层 §9「只读与禁用」）。
  */
-export const overlayItemClassName = "min-w-0 cursor-default gap-(--qy-field-gap) rounded-(--qy-radius-overlay-item) outline-none data-highlighted:bg-accent data-disabled:cursor-not-allowed data-disabled:opacity-64";
+export const overlayItemClassName = "min-w-0 cursor-default gap-(--qy-field-gap) rounded-(--qy-radius-overlay-item) outline-none data-highlighted:bg-accent data-disabled:cursor-not-allowed data-disabled:opacity-disabled";
 
 /*
  * 候选项：值是内容，字号与触发器相同，不因容器或密度改变（用户裁决 2026-10-05）；行高跟随填值控件的角色层，随密度降档。

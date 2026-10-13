@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@3.0.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
-Source SHA-256: 9bd05176bc2643148c87c549a69cddb63fb6ffe48a2a15f4f1e00567f4491703
+Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
 
 A native keyboard key display.
 

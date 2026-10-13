@@ -2,7 +2,7 @@
 
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import type React from "react";
-import { useFloatingLayer } from "../floating-layer";
+import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { cn } from "../utils";
 
 export const PopoverCreateHandle: typeof PopoverPrimitive.createHandle =
@@ -60,7 +60,7 @@ export function PopoverPopup({
   className,
   side = "bottom",
   align = "center",
-  sideOffset,
+  sideOffset = popupOffset,
   alignOffset,
   anchor,
   portalProps,
@@ -110,7 +110,7 @@ export function PopoverPopup({
             {...viewportProps}
             className={(state) =>
               cn(
-                "relative min-w-0 max-h-[max(0px,calc(var(--available-height)-2px))] overflow-y-auto p-(--qy-panel-padding-sm)",
+                "relative min-w-0 max-h-[max(0px,calc(var(--available-height)-2*var(--qy-line-width)))] overflow-y-auto p-(--qy-panel-padding-sm)",
                 typeof viewportProps?.className === "function"
                   ? viewportProps.className(state)
                   : viewportProps?.className,

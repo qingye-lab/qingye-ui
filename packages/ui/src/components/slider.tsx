@@ -49,7 +49,7 @@ export function Slider<Value extends number | readonly number[]>({ readOnly = fa
     min={min} max={max} step={step} largeStep={largeStep} minStepsBetweenValues={minStepsBetweenValues}
     value={value} defaultValue={defaultValue ?? (min as Value)} thumbAlignment={thumbAlignment}
     onValueChange={(next, details) => { if (readOnly) details.cancel(); else onValueChange?.(next, details); }}
-    className={(state) => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-control-md-mobile sm:text-control-md", state.disabled && "opacity-64", typeof className === "function" ? className(state) : className)}
+    className={(state) => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-control-md-mobile sm:text-control-md", state.disabled && "opacity-disabled", typeof className === "function" ? className(state) : className)}
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
   /></ReadOnly.Provider>;
 }
