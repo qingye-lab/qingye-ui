@@ -1,9 +1,9 @@
 import { cn } from "./utils";
 
 // 编辑边界内的附属动作（清除、展开、日历、显示密码等）：无独立边框，铺满边框内高度，
-// 圆角按同心换算（外圆角 − 一道线宽 --qy-line-width 的边框）。InputGroupButton 的文字形态只取这一段。
+// 圆角按同心换算（外框的 --qy-fill-radius − 一道线宽 --qy-line-width 的边框）；外框随密度换圆角，这里跟着换。InputGroupButton 的文字形态只取这一段。
 export const inputAdjunctFrameClassName =
-  "min-h-0 self-stretch rounded-[max(0px,calc(var(--qy-radius-control)-var(--qy-line-width)))] sm:min-h-0";
+  "min-h-0 self-stretch rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] sm:min-h-0";
 
 // 图标形附属动作：默认辅助色、悬停回到前景色。
 // InputGroupButton、ComboboxControl、AutocompleteControl 与三种日期选择的边界共用。
