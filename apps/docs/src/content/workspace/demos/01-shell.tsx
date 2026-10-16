@@ -1,5 +1,5 @@
 import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
-import { useMediaQuery } from "@qingye_lab/ui";
+import { useMediaQuery } from "@qingye_lab/ui/hooks/use-media-query";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Stack } from "@qingye_lab/ui/components/layout";

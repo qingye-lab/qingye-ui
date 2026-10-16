@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IconDatabase, IconUsers } from "@tabler/icons-react";
-import { useMediaQuery } from "@qingye_lab/ui";
+import { useMediaQuery } from "@qingye_lab/ui/hooks/use-media-query";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from "@qingye_lab/ui/components/sidebar";

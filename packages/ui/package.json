@@ -26,6 +26,11 @@
       "import": "./dist/components/*.js",
       "default": "./dist/components/*.js"
     },
+    "./hooks/*": {
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.js",
+      "default": "./dist/hooks/*.js"
+    },
     "./locale": {
       "types": "./dist/locale.d.ts",
       "import": "./dist/locale.js",

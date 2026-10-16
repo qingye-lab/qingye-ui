@@ -114,7 +114,11 @@ export function Input({
     size,
     "data-slot": (props as InputPrimitive.Props & { "data-slot"?: string })["data-slot"] ?? "input",
     className: (state) => cn(
-      "col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
+      "col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground",
+      /* 输入一旦有底色（自动填充），直角会盖住外框圆角处的边线：取外框的同心内圆角
+       * （外圆角 − 一道线宽）。自动填充的平台底色只铺在 input 上，停在附属按钮前，
+       * 改用外框同一个填值面，整个编辑边界只有一种底色；文字色同理回到前景色。 */
+      "rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] autofill:shadow-[inset_0_0_0_100vmax_var(--qy-surface-field)] autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
       textProfile,
       // 平台文件选择没有可设置的垂直对齐；行高取边框内高度让两段文字居中。按钮名称是动作，文件名是结果。
       type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))] sm:leading-[calc(var(--qy-fill-height)-2*var(--qy-line-width))] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",

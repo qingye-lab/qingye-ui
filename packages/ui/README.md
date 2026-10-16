@@ -47,7 +47,7 @@ import { Dialog, DialogPopup } from "@qingye_lab/ui/components/dialog";
 import { Tabs, TabsList, TabsTab, TabsPanel } from "@qingye_lab/ui/components/tabs";
 ```
 
-The `@qingye_lab/ui` aggregate entry exports current components and hooks, including `useMediaQuery`. Loading it without eliminating unused exports can require both optional Chart/DataTable peers. Locale, utilities and floating-layer helpers have public entries at `@qingye_lab/ui/locale`, `@qingye_lab/ui/locales/<name>`, `@qingye_lab/ui/utils` and `@qingye_lab/ui/floating-layer`.
+The `@qingye_lab/ui` aggregate entry exports current components and hooks, including `useMediaQuery`. Loading it without eliminating unused exports can require both optional Chart/DataTable peers, so each hook also has its own entry: `@qingye_lab/ui/hooks/use-media-query` and `@qingye_lab/ui/hooks/use-copy-to-clipboard`. Locale, utilities and floating-layer helpers have public entries at `@qingye_lab/ui/locale`, `@qingye_lab/ui/locales/<name>`, `@qingye_lab/ui/utils` and `@qingye_lab/ui/floating-layer`.
 
 There are no compatibility aliases for `DropdownMenu*`, `DialogContent`, `SheetContent` or `TabsTrigger`. `TooltipContent` remains an exported alias of `TooltipPopup`. Query the installed `catalog.json` and declarations for the actual part names. `useIsMobile` has been removed; `useMediaQuery("max-md")` queries the former width condition without classifying the physical device.
 

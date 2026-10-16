@@ -140,7 +140,7 @@ Renders its children into the header's slot for the page; they unmount with the 
 Source: apps/docs/src/content/workspace/demos/01-shell.tsx
 ```tsx
 import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from "@tabler/icons-react";
-import { useMediaQuery } from "@qingye_lab/ui";
+import { useMediaQuery } from "@qingye_lab/ui/hooks/use-media-query";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Stack } from "@qingye_lab/ui/components/layout";
@@ -201,7 +201,7 @@ Source: apps/docs/src/content/workspace/demos/02-page-slot.tsx
 ```tsx
 import * as React from "react";
 import { IconDatabase, IconUsers } from "@tabler/icons-react";
-import { useMediaQuery } from "@qingye_lab/ui";
+import { useMediaQuery } from "@qingye_lab/ui/hooks/use-media-query";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Item, ItemContent, ItemDescription, ItemTitle } from "@qingye_lab/ui/components/item";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from "@qingye_lab/ui/components/sidebar";
