@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-13T04:53:22.710Z",
-  "revision": "070b55a752cfa2b0e7d3f1e98b253fb5fb2fafa2",
+  "generatedAt": "2026-10-20T12:31:54.611Z",
+  "revision": "a8137c3a68a03ef452895c62fa3bc22025576b97",
   "fingerprint": {
-    "sha256": "0d51f730abe5e03d7daed27ac7afe4b6a0ab1af6c91d52023a5c00dbb669a785",
+    "sha256": "42b2b32a457ac3aaebe34ac9e3c13be89ad4bf8eea3e59b4fd469a1297257ee6",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -21,6 +21,10 @@
       {
         "path": "apps/docs/src/content/alert/meta.ts",
         "sha256": "80a78dd5a1deb9db8109e6e20687678ba8cc8423e354cb117a5cda763e74a3d3"
+      },
+      {
+        "path": "apps/docs/src/content/async-content/meta.ts",
+        "sha256": "f5e863d832aa6a8a1940a90831cddbe71d53c3e43b4cd65296129be193238f7b"
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
@@ -80,11 +84,15 @@
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
-        "sha256": "1ff1d3e02fdf4893606ce3ccedd53df0e15bc184063281e1cf8a2ad5b23049c3"
+        "sha256": "693b2c767bb3edf87395021906d6e2008d10d1630b087f46bf852ca3c06c9e96"
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
-        "sha256": "e68ec7341e84134457f6caa6ca9ddf46e7f608319ae760d1c66187ba10bd72c6"
+        "sha256": "039491cd5acd9e0423157f800690bf887cdb2e250903179ed578087c7cfcb7c3"
+      },
+      {
+        "path": "apps/docs/src/content/confirm/meta.ts",
+        "sha256": "463f312dc58ef9a31868048076729561b164021614799887a46ad536e0adeade"
       },
       {
         "path": "apps/docs/src/content/context-menu/meta.ts",
@@ -100,7 +108,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "c99393079de883a3177bbc1eab38565ef68af91c5161162cf8a0eaed69bc72dc"
+        "sha256": "3a0037c1c6eb2e7cb1a466574ee1f4f90d4d708af6011eeea7c8a38b427fb00c"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -224,7 +232,7 @@
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "d0aa91be7b3525d7dcc6be6a00491395208636e5894a35e2b25f50ae27cc4bae"
+        "sha256": "4abdea1472094af5319784dc9ec4b3bcecf20f7574cff0b988e2ca793d37d715"
       },
       {
         "path": "apps/docs/src/content/password-input/meta.ts",
@@ -380,7 +388,7 @@
       },
       {
         "path": "apps/docs/src/content/workspace/meta.ts",
-        "sha256": "390490618e90189270cdb3b1e7cb42ee975d8d6a517d5d2f60a34e2433c888bd"
+        "sha256": "29f972628b582f1bbabe778556fdd83c34c08b982ccc31d5af951616e9f46d6b"
       },
       {
         "path": "apps/docs/src/lib/types.ts",
@@ -396,7 +404,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "529eda8b520001fc602d7cd79bc8e2352d6db9143aee2334b0f84fa5262374b2"
+        "sha256": "c275fe687068d318047acad01d26e33593560289390d992cd97c0d4c7b33ddf4"
       },
       {
         "path": "packages/ui/motion.css",
@@ -404,7 +412,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "cd1733c5d9a44043876ff5cf6c21ea2da038fd01abaf4ca18762a74735366197"
+        "sha256": "ebc15d413409f55b7bb5cdc5ecd17a8a9c4748deec01c7d8ed028cf0f0f4516d"
       },
       {
         "path": "packages/ui/prose.css",
@@ -421,6 +429,10 @@
       {
         "path": "packages/ui/src/components/alert.tsx",
         "sha256": "bff3bfb8e4d04d941b8f839f3a8e741a3ba46c92a9011143453a4bcff9e064c6"
+      },
+      {
+        "path": "packages/ui/src/components/async-content.tsx",
+        "sha256": "8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2"
       },
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
@@ -480,11 +492,15 @@
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
-        "sha256": "e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7"
+        "sha256": "8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
         "sha256": "0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656"
+      },
+      {
+        "path": "packages/ui/src/components/confirm.tsx",
+        "sha256": "8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5"
       },
       {
         "path": "packages/ui/src/components/context-menu.tsx",
@@ -500,7 +516,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa"
+        "sha256": "0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -564,7 +580,7 @@
       },
       {
         "path": "packages/ui/src/components/input.tsx",
-        "sha256": "866dfa2114174d3e7fcbc088e23ef9bc7a2c6812132ac872d1a3942cce273389"
+        "sha256": "3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098"
       },
       {
         "path": "packages/ui/src/components/item.tsx",
@@ -624,7 +640,7 @@
       },
       {
         "path": "packages/ui/src/components/pagination.tsx",
-        "sha256": "b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469"
+        "sha256": "fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4"
       },
       {
         "path": "packages/ui/src/components/password-input.tsx",
@@ -784,7 +800,7 @@
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "7f648fa3e8798157aa512130d66989873377fa9727a30cad887a872d2535b7cd"
+        "sha256": "24a765ad8c7fc10596d57dfcb7ee3abbe648606d76a1f3dc0674641d7b701142"
       },
       {
         "path": "packages/ui/styles.css",
@@ -819,7 +835,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -830,6 +846,11 @@
         "types": "./dist/components/*.d.ts",
         "import": "./dist/components/*.js",
         "default": "./dist/components/*.js"
+      },
+      "./hooks/*": {
+        "types": "./dist/hooks/*.d.ts",
+        "import": "./dist/hooks/*.js",
+        "default": "./dist/hooks/*.js"
       },
       "./locale": {
         "types": "./dist/locale.d.ts",
@@ -910,15 +931,16 @@
       "!ai/v1.0.0",
       "!ai/v2.0.0",
       "!ai/v3.0.0",
-      "registry"
+      "registry",
+      "!ai/v4.0.0"
     ],
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 93,
-    "catalog": 93,
-    "dist": 93,
-    "local": 93
+    "components": 95,
+    "catalog": 95,
+    "dist": 95,
+    "local": 95
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -1233,7 +1255,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1663,7 +1685,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1893,7 +1915,183 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "async-content",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/async-content.tsx",
+      "exports": [
+        {
+          "name": "AsyncContent",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/async-content.tsx",
+            "line": 24
+          }
+        },
+        {
+          "name": "AsyncContentProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/async-content.tsx",
+            "line": 9
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/async-content/meta.ts",
+        "title": "异步内容 AsyncContent",
+        "titleEn": "AsyncContent",
+        "description": "分别呈现请求状态与仍然有效的内容。",
+        "descriptionEn": "Present request status separately from content that remains valid.",
+        "category": "反馈",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "AsyncContent"
+        ],
+        "keywords": [
+          "async",
+          "loading",
+          "refresh",
+          "error",
+          "异步",
+          "刷新",
+          "重试"
+        ],
+        "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。",
+        "decisionsEn": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.",
+        "api": [
+          {
+            "name": "AsyncContent",
+            "description": "不发请求的内容状态组合。",
+            "descriptionEn": "A content-state composition that makes no requests.",
+            "props": [
+              {
+                "name": "status",
+                "type": "\"pending\" | \"success\" | \"error\"",
+                "description": "应用声明请求事实，不用超时猜测失败。",
+                "descriptionEn": "Application-declared request fact; elapsed time never implies failure."
+              },
+              {
+                "name": "hasContent / children",
+                "type": "boolean / ReactNode",
+                "description": "有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。",
+                "descriptionEn": "Valid content stays mounted without automatic disabling, draft clearing or focus movement."
+              },
+              {
+                "name": "emptyContent / loadingContent / errorContent",
+                "type": "ReactNode",
+                "description": "emptyContent 必填；error 状态必须提供 errorContent。加载默认读 locale。重试动作由应用提供。",
+                "descriptionEn": "emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions."
+              },
+              {
+                "name": "render / ref / native props",
+                "type": "useRender.ComponentProps<div>",
+                "description": "实际根节点的语义与属性；默认不建立 live region。",
+                "descriptionEn": "Semantics and props for the actual root; no live region is added by default."
+              }
+            ]
+          }
+        ],
+        "design": {
+          "methods": [
+            "名实相符",
+            "进退相承",
+            "相成相制"
+          ],
+          "whenToUse": [
+            "首次加载、零结果、失败和保留有效内容的刷新。"
+          ],
+          "avoid": [
+            "把权限、只读或局部失败塞进互斥的整页请求状态。",
+            "用本组件管理请求、缓存或查询竞态。"
+          ],
+          "composition": [
+            "权限与只读说明放在 children 的相应部位；局部失败使用局部 AsyncContent 或 Alert。"
+          ],
+          "stateOwner": {
+            "library": [
+              "反馈与内容的稳定结构，pending 时保留内容区的 aria-busy；加载提示作为它的兄弟节点，避免播报被 busy 祖先延迟。"
+            ],
+            "application": [
+              "请求、取消、迟到结果隔离、数据有效性、权限、草稿与重试。"
+            ]
+          },
+          "responsive": [
+            "不创建滚动区；长反馈和恢复动作由所组合组件换行。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Initial loading, confirmed empty results, failure and refresh with retained valid content."
+          ],
+          "avoid": [
+            "Collapsing permission, read-only or partial failure into a mutually exclusive page request state.",
+            "Managing requests, caches or query races here."
+          ],
+          "composition": [
+            "Place permission and read-only notices next to relevant content; use a local AsyncContent or Alert for partial failures."
+          ],
+          "stateOwner": {
+            "library": [
+              "Stable feedback/content structure, aria-busy on retained content while pending; loading feedback is a sibling so a busy ancestor does not defer its announcement."
+            ],
+            "application": [
+              "Requests, cancellation, stale response isolation, validity, permissions, drafts and retries."
+            ]
+          },
+          "responsive": [
+            "Adds no scroll owner; composed feedback and recovery controls handle wrapping."
+          ]
+        },
+        "notes": [
+          "错误不会自动宣告。需要即时宣告时由应用在 errorContent 中提供 role=alert；避免把整块有效内容设为 live region。",
+          "hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。"
+        ],
+        "notesEn": [
+          "Errors are not announced automatically. Supply role=alert inside errorContent when appropriate, rather than making all retained content live.",
+          "hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes."
+        ],
+        "usageResolution": [
+          {
+            "name": "AsyncContent",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/async-content.tsx",
+              "line": 24
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/async-content.tsx",
+              "line": 24
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/async-content/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2450,7 +2648,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2718,7 +2916,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2894,7 +3092,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3262,7 +3460,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3552,7 +3750,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3723,7 +3921,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4020,7 +4218,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4329,7 +4527,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4507,7 +4705,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5069,7 +5267,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5308,7 +5506,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5550,7 +5748,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5751,7 +5949,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6018,7 +6216,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6162,7 +6360,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 134
+            "line": 170
           }
         },
         {
@@ -6171,6 +6369,22 @@
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
             "line": 21
+          }
+        },
+        {
+          "name": "ComboboxSelect",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 156
+          }
+        },
+        {
+          "name": "ComboboxSelectProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/combobox.tsx",
+            "line": 135
           }
         },
         {
@@ -6224,6 +6438,7 @@
         "source": "local",
         "layer": "pattern",
         "exports": [
+          "ComboboxSelect",
           "Combobox",
           "ComboboxControl",
           "ComboboxInput",
@@ -6252,6 +6467,32 @@
         "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
         "decisionsEn": "value is the confirmed candidate; inputValue is the filter draft. Emptying the query preserves selection. Explicit Clear requests an empty selection. Use Autocomplete for free text. Use multiple to pick several from many candidates; use CheckboxGroup when few options should all stay visible, and TagInput when values do not come from candidates.",
         "api": [
+          {
+            "name": "ComboboxSelect",
+            "description": "平铺单选的便捷组合：编辑边界、输入、清除、展开与候选面；确认值与查询仍独立，可受控或非受控。分组、多选或不同解剖继续用公开部件。",
+            "descriptionEn": "A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.",
+            "props": [
+              {
+                "name": "items / itemToStringLabel / renderItem",
+                "type": "readonly Value[] / (item: Value) => string / (item: Value) => ReactNode",
+                "description": "items 和 itemToStringLabel 必填，名称同时用于输入与过滤；renderItem 可丰富候选呈现。对象提交身份用既有 itemToStringValue，比较用 isItemEqualToValue。",
+                "descriptionEn": "items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality."
+              },
+              {
+                "name": "emptyContent / loading / clearable",
+                "type": "ReactNode / boolean / boolean",
+                "default": "— / false / true",
+                "description": "emptyContent 必填；loading 只显示调用方的加载事实，此时不声称无匹配。请求、取消、迟到回包与有效候选由应用持有。clearable 控制是否提供明确清除选择的动作。",
+                "descriptionEn": "emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action."
+              },
+              {
+                "name": "inputProps / controlProps / popupProps",
+                "type": "ComboboxInput props / InputGroupProps / ComboboxPopupProps",
+                "description": "分别透传输入命名、ARIA、事件、render、ref，编辑边界与浮层定制。确认值、查询、表单、禁用及只读沿用 Combobox Root 属性。",
+                "descriptionEn": "Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props."
+              }
+            ]
+          },
           {
             "name": "Combobox",
             "description": "公开 Base UI 候选上下文，默认单值；不强加业务选项。",
@@ -6431,6 +6672,19 @@
           ]
         },
         "usageResolution": [
+          {
+            "name": "ComboboxSelect",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 156
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/combobox.tsx",
+              "line": 156
+            },
+            "status": "PRESENT"
+          },
           {
             "name": "Combobox",
             "kind": "value",
@@ -6657,11 +6911,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 134
+              "line": 170
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 134
+              "line": 170
             },
             "status": "PRESENT"
           }
@@ -6677,7 +6931,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6841,12 +7095,14 @@
         "notes": [
           "内容恢复成旧值也不会自动复活旧认可；必须重新阅读。",
           "确认次数与结果事实归应用；没有自建超时、假成功或自动重试。",
-          "浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。"
+          "浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。",
+          "一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。"
         ],
         "notesEn": [
           "Restoring old content does not revive old approval; review again.",
           "The application owns action attempts and outcomes. There is no custom timeout, fake success, or automatic retry.",
-          "Layering, sizes, focus, and consequence association use current public components and centralized presets."
+          "Layering, sizes, focus, and consequence association use current public components and centralized presets.",
+          "Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection."
         ],
         "design": {
           "methods": [
@@ -6930,7 +7186,273 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "confirm",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/confirm.tsx",
+      "exports": [
+        {
+          "name": "ConfirmFunction",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/confirm.tsx",
+            "line": 21
+          }
+        },
+        {
+          "name": "ConfirmOptions",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/confirm.tsx",
+            "line": 8
+          }
+        },
+        {
+          "name": "ConfirmProvider",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/confirm.tsx",
+            "line": 48
+          }
+        },
+        {
+          "name": "ConfirmProviderProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/confirm.tsx",
+            "line": 22
+          }
+        },
+        {
+          "name": "useConfirm",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/confirm.tsx",
+            "line": 135
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/confirm/meta.ts",
+        "title": "异步确认 Confirm",
+        "titleEn": "Confirm",
+        "description": "等待一次明确决定，再由调用方继续执行。",
+        "descriptionEn": "Await one explicit decision, then let the caller continue.",
+        "category": "反馈",
+        "source": "local",
+        "layer": "pattern",
+        "exports": [
+          "ConfirmProvider",
+          "useConfirm"
+        ],
+        "keywords": [
+          "confirm",
+          "await",
+          "确认",
+          "异步",
+          "Promise"
+        ],
+        "decisions": "await confirm(options) 只返回是否同意；true 不表示提交成功。当前决定及退场结束前，后续调用立即返回 false，不替换内容也不排队。涉及对象、版本或变更失效时使用 ConfirmAction。",
+        "decisionsEn": "await confirm(options) returns approval only; true does not mean a submission succeeded. While a decision is active or closing, additional calls return false immediately without replacing content or queuing. Use ConfirmAction when changes to an object, version, or change must invalidate approval.",
+        "api": [
+          {
+            "name": "ConfirmProvider",
+            "description": "为后代 useConfirm 承载一个模态决定，不额外渲染包裹元素。放在应用的 UILocaleProvider 内。",
+            "descriptionEn": "Host one modal decision for descendant useConfirm calls without adding a wrapper element. Place it inside the application's UILocaleProvider.",
+            "props": [
+              {
+                "name": "children",
+                "type": "ReactNode",
+                "description": "调用 useConfirm 的应用内容；Provider 卸载时未决 Promise 返回 false。",
+                "descriptionEn": "Application content using useConfirm. Unmounting the provider resolves an outstanding decision to false."
+              }
+            ]
+          },
+          {
+            "name": "useConfirm",
+            "description": "返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。",
+            "descriptionEn": "Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.",
+            "props": [
+              {
+                "name": "title / description",
+                "type": "ReactNode / ReactNode",
+                "description": "必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。",
+                "descriptionEn": "Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content."
+              },
+              {
+                "name": "confirmLabel / cancelLabel",
+                "type": "ReactNode / ReactNode",
+                "default": "locale.confirm / locale.cancel",
+                "description": "明确继续与保留动作；显式文字优先。取消按钮和 Escape 都返回 false；点遮罩不关闭。",
+                "descriptionEn": "Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss."
+              },
+              {
+                "name": "tone",
+                "type": "ButtonTone",
+                "default": "'neutral'",
+                "description": "确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。",
+                "descriptionEn": "The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission."
+              },
+              {
+                "name": "popupProps",
+                "type": "Omit<AlertDialogPopupProps, 'children'>",
+                "description": "复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。",
+                "descriptionEn": "Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed."
+              },
+              {
+                "name": "signal",
+                "type": "AbortSignal",
+                "description": "已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。",
+                "descriptionEn": "An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started."
+              },
+              {
+                "name": "Promise<boolean>",
+                "type": "true | false",
+                "description": "确认立即返回 true 并关窗；取消、中止、hook 调用方或 Provider 卸载均返回 false。业务执行不等待退场动画；应用用 Button loading、try/finally 和就地错误承接执行与恢复。",
+                "descriptionEn": "Approval immediately resolves true and closes. Cancellation, abort, or unmounting the hook owner or provider resolves false. Business execution does not wait for an exit animation. The application owns execution and recovery through Button loading, try/finally, and inline errors."
+              }
+            ]
+          }
+        ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在当前模态决定内循环；默认进入面板，不自动聚焦确认按钮。",
+            "descriptionEn": "Cycle within the active modal. Focus starts on the panel, never automatically on the affirmative action."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "激活当前聚焦的明确选择。",
+            "descriptionEn": "Activate the focused explicit choice."
+          },
+          {
+            "keys": "Escape",
+            "description": "拒绝此次决定，返回调用入口或 finalFocus。",
+            "descriptionEn": "Decline this decision and return to the calling entry or finalFocus target."
+          }
+        ],
+        "notes": [
+          "同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。",
+          "调用 useConfirm 的组件卸载会取消它自己的未决决定；保留的旧函数在卸载后也只返回 false。",
+          "授权与执行分开：组件不接收 onConfirm 请求函数，不显示提交中，不推断成功、失败或结果未知。",
+          "需要文字核对、对象与版本变化后重新审阅时使用 ConfirmAction；一般组合控制使用 AlertDialog。"
+        ],
+        "notesEn": [
+          "One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.",
+          "Unmounting the useConfirm owner cancels its own pending decision. Retained functions also resolve false after the owner unmounts.",
+          "Approval and execution are separate: this component accepts no request callback, displays no submitting state, and infers no success, failure, or unknown outcome.",
+          "Use ConfirmAction for exact text checks and review after object or version changes; use AlertDialog for direct composition."
+        ],
+        "design": {
+          "methods": [
+            "名实相符",
+            "进退相承",
+            "相成相制"
+          ],
+          "whenToUse": [
+            "一般流程需要在继续前等待一个明确决定。"
+          ],
+          "avoid": [
+            "对象、版本或变更会改变而需要重新审阅；使用 ConfirmAction。",
+            "执行中进度、业务结果或通知；由应用和反馈组件承接。"
+          ],
+          "composition": [
+            "ConfirmProvider + useConfirm；确认后由应用 Button loading、try/finally 与错误恢复接续。"
+          ],
+          "stateOwner": {
+            "library": [
+              "单个未决决定、布尔结果、取消、中止、卸载清理与模态焦点。"
+            ],
+            "application": [
+              "决定内容、对象版本、权限、提交状态、请求结果与恢复内容。"
+            ]
+          },
+          "responsive": [
+            "直接消费 AlertDialog 的可用空间、几何与焦点机制。"
+          ],
+          "customization": [
+            "明确动作名称、tone、公共 popupProps 与现有主题。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "A general flow must await one explicit decision before proceeding."
+          ],
+          "avoid": [
+            "Objects, versions, or changes can invalidate approval; use ConfirmAction.",
+            "Execution progress, business outcomes, or notifications belong to the application and feedback components."
+          ],
+          "composition": [
+            "ConfirmProvider + useConfirm; the application continues with Button loading, try/finally, and error recovery."
+          ],
+          "stateOwner": {
+            "library": [
+              "One pending decision, its boolean result, cancel, abort, unmount cleanup, and modal focus."
+            ],
+            "application": [
+              "Decision content, object versions, permissions, submission state, request outcomes, and recovery content."
+            ]
+          },
+          "responsive": [
+            "Uses AlertDialog's available space, geometry, and focus mechanisms."
+          ],
+          "customization": [
+            "Explicit action names, tone, public popupProps, and existing themes."
+          ]
+        },
+        "usageResolution": [
+          {
+            "name": "ConfirmProvider",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/confirm.tsx",
+              "line": 48
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/confirm.tsx",
+              "line": 48
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "useConfirm",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/confirm.tsx",
+              "line": 135
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/confirm.tsx",
+              "line": 135
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/confirm/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7472,7 +7994,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7657,7 +8179,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7840,7 +8362,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7863,7 +8385,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 28
+            "line": 29
           }
         },
         {
@@ -7871,7 +8393,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 11
+            "line": 12
           }
         },
         {
@@ -7879,7 +8401,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -7887,7 +8409,55 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 10
+            "line": 11
+          }
+        },
+        {
+          "name": "DataTablePattern",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 140
+          }
+        },
+        {
+          "name": "DataTablePatternChangeDetails",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 82
+          }
+        },
+        {
+          "name": "DataTablePatternColumn",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 65
+          }
+        },
+        {
+          "name": "DataTablePatternPagination",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 83
+          }
+        },
+        {
+          "name": "DataTablePatternProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 91
+          }
+        },
+        {
+          "name": "DataTablePatternState",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 75
           }
         },
         {
@@ -7895,7 +8465,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 27
+            "line": 28
           }
         },
         {
@@ -7903,7 +8473,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 55
+            "line": 56
           }
         },
         {
@@ -7911,7 +8481,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 54
+            "line": 55
           }
         },
         {
@@ -7919,7 +8489,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 50
+            "line": 51
           }
         },
         {
@@ -7927,7 +8497,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 49
+            "line": 50
           }
         },
         {
@@ -7935,7 +8505,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 44
+            "line": 45
           }
         },
         {
@@ -7943,7 +8513,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 42
+            "line": 43
           }
         }
       ],
@@ -7957,13 +8527,14 @@
         "layer": "pattern",
         "source": "local",
         "exports": [
+          "DataTablePattern",
           "DataTable",
           "DataTableSortButton",
           "DataTableSelectionCell",
           "DataTableSelectAll"
         ],
-        "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
-        "decisionsEn": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
+        "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。",
+        "decisionsEn": "Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map.",
         "keywords": [
           "datagrid",
           "grid",
@@ -7976,12 +8547,55 @@
         ],
         "api": [
           {
+            "name": "DataTablePattern",
+            "description": "配置式排序、当页全选、活动行与分页组合，不发请求。",
+            "descriptionEn": "Configured sorting, page selection, active rows and pagination without issuing requests.",
+            "props": [
+              {
+                "name": "data / columns / getRowId / emptyContent",
+                "type": "T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode",
+                "description": "列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。",
+                "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required."
+              },
+              {
+                "name": "state / defaultState / onStateChange",
+                "type": "DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void",
+                "description": "sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。",
+                "descriptionEn": "A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1."
+              },
+              {
+                "name": "mode / pagination",
+                "type": "client | server / false | DataTablePatternPagination",
+                "description": "client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。",
+                "descriptionEn": "Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null."
+              },
+              {
+                "name": "selection",
+                "type": "{ label, rowLabel, canSelect? }",
+                "description": "启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。",
+                "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel."
+              },
+              {
+                "name": "activeRow",
+                "type": "{ columnId: string, onActivate?: (row: T) => void }",
+                "description": "该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。",
+                "descriptionEn": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent."
+              },
+              {
+                "name": "caption / busy / tableProps / native div props",
+                "type": "ReactNode / boolean / DataTableProps / HTML props",
+                "description": "刷新保留传入行；属性分别归属表格或组合外层，不推断请求成功或失败。",
+                "descriptionEn": "Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes."
+              }
+            ]
+          },
+          {
             "name": "DataTable",
             "description": "原生二维集合。",
             "descriptionEn": "A native two-dimensional collection.",
             "props": [
               {
-                "name": "table / emptyContent / caption / busy / containerProps",
+                "name": "table / emptyContent / caption / busy / activeRowId / containerProps",
                 "type": "TableInstance<T> / ReactNode / TableContainerProps",
                 "description": "getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。",
                 "descriptionEn": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows."
@@ -8034,10 +8648,12 @@
           }
         ],
         "notes": [
+          "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
           "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
           "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
         ],
         "notesEn": [
+          "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
           "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
           "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
         ],
@@ -8058,7 +8674,7 @@
               "表格语义、公共组合与范围选择。"
             ],
             "application": [
-              "TanStack 实例、数据、稳定标识、模型配置与状态。"
+              "数据、稳定标识、服务端结果与业务范围；高级模式另持有 TanStack 实例。"
             ]
           },
           "responsive": [
@@ -8092,15 +8708,28 @@
         },
         "usageResolution": [
           {
+            "name": "DataTablePattern",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/data-table.tsx",
+              "line": 140
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/data-table.tsx",
+              "line": 140
+            },
+            "status": "PRESENT"
+          },
+          {
             "name": "DataTable",
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 28
+              "line": 29
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 28
+              "line": 29
             },
             "status": "PRESENT"
           },
@@ -8109,11 +8738,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 44
+              "line": 45
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 44
+              "line": 45
             },
             "status": "PRESENT"
           },
@@ -8122,11 +8751,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 50
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 50
+              "line": 51
             },
             "status": "PRESENT"
           },
@@ -8135,11 +8764,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 55
+              "line": 56
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 55
+              "line": 56
             },
             "status": "PRESENT"
           }
@@ -8155,7 +8784,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8360,7 +8989,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8608,7 +9237,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8811,7 +9440,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9074,7 +9703,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9561,7 +10190,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9973,7 +10602,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10250,7 +10879,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10765,7 +11394,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11002,7 +11631,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11280,7 +11909,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11679,7 +12308,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11885,7 +12514,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12182,7 +12811,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12487,7 +13116,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12793,7 +13422,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12825,7 +13454,7 @@
           "target": "Input",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 152
+            "line": 156
           }
         },
         {
@@ -13016,7 +13645,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13372,7 +14001,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13525,7 +14154,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13688,7 +14317,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13937,7 +14566,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14117,7 +14746,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14297,7 +14926,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14954,7 +15583,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15271,7 +15900,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15428,7 +16057,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15607,7 +16236,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16162,7 +16791,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16514,7 +17143,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16746,7 +17375,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17038,7 +17667,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17057,11 +17686,27 @@
       "source": "packages/ui/src/components/pagination.tsx",
       "exports": [
         {
+          "name": "normalizePaginationValue",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 89
+          }
+        },
+        {
           "name": "Pagination",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 12
+            "line": 13
+          }
+        },
+        {
+          "name": "PaginationChangeDetails",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 77
           }
         },
         {
@@ -17069,7 +17714,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 69
+            "line": 70
           }
         },
         {
@@ -17077,7 +17722,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 68
+            "line": 69
           }
         },
         {
@@ -17085,7 +17730,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 22
+            "line": 23
           }
         },
         {
@@ -17093,7 +17738,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 21
+            "line": 22
           }
         },
         {
@@ -17101,7 +17746,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 36
+            "line": 37
           }
         },
         {
@@ -17109,7 +17754,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 25
+            "line": 26
           }
         },
         {
@@ -17117,7 +17762,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 18
+            "line": 19
           }
         },
         {
@@ -17125,7 +17770,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -17133,7 +17778,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 64
+            "line": 65
           }
         },
         {
@@ -17141,7 +17786,23 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 63
+            "line": 64
+          }
+        },
+        {
+          "name": "PaginationPattern",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 102
+          }
+        },
+        {
+          "name": "PaginationPatternProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 79
           }
         },
         {
@@ -17149,7 +17810,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 59
+            "line": 60
           }
         },
         {
@@ -17157,7 +17818,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 58
+            "line": 59
           }
         },
         {
@@ -17165,7 +17826,15 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 11
+            "line": 12
+          }
+        },
+        {
+          "name": "PaginationValue",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 76
           }
         }
       ],
@@ -17179,6 +17848,7 @@
         "layer": "pattern",
         "source": "local",
         "exports": [
+          "PaginationPattern",
           "Pagination",
           "PaginationList",
           "PaginationItem",
@@ -17187,8 +17857,8 @@
           "PaginationNext",
           "PaginationEllipsis"
         ],
-        "decisions": "只从 root page 与 link page 相等推导当前位置。总页数 null 表示未知；不创建末页或推断下一页存在。",
-        "decisionsEn": "Only current position is derived by comparing root and link page facts. null means an unknown total; no final page or next-page availability is inferred.",
+        "decisions": "PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 pageSize 一次通知。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。",
+        "decisionsEn": "PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.",
         "design": {
           "methods": [
             "名实相符",
@@ -17239,6 +17909,37 @@
           "页码"
         ],
         "api": [
+          {
+            "name": "PaginationPattern",
+            "description": "本地页动作的标准组合。",
+            "descriptionEn": "Standard composition for local page actions.",
+            "props": [
+              {
+                "name": "value / defaultValue / onValueChange",
+                "type": "PaginationValue / (value, { reason }) => void",
+                "description": "{ page, pageSize } 原子更新；page 从 1 开始。reason 为 page、page-size 或 total-change。条数改变同时回到第 1 页。",
+                "descriptionEn": "Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1."
+              },
+              {
+                "name": "totalCount / hasNextPage",
+                "type": "number | null / boolean",
+                "description": "非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。",
+                "descriptionEn": "A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page."
+              },
+              {
+                "name": "pageSizeOptions / disabled",
+                "type": "readonly number[] / boolean",
+                "description": "省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。",
+                "descriptionEn": "Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state."
+              },
+              {
+                "name": "aria-label / render / ref / native nav props",
+                "type": "PaginationProps",
+                "description": "转发到 nav；可访问页名、总数摘要与条数标签来自 locale。",
+                "descriptionEn": "Forwarded to nav; accessible page names, total summaries and page-size labels come from locale."
+              }
+            ]
+          },
           {
             "name": "Pagination",
             "description": "有名称的 nav，不生成页码。",
@@ -17318,22 +18019,35 @@
           }
         ],
         "notes": [
-          "不请求数据、保存路由或自动截取页码；未知总数不证明有无下一页。"
+          "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。"
         ],
         "notesEn": [
-          "No fetching, routing or automatic page window; unknown totals establish no next-page availability."
+          "The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability."
         ],
         "usageResolution": [
+          {
+            "name": "PaginationPattern",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/pagination.tsx",
+              "line": 102
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/pagination.tsx",
+              "line": 102
+            },
+            "status": "PRESENT"
+          },
           {
             "name": "Pagination",
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 12
+              "line": 13
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 12
+              "line": 13
             },
             "status": "PRESENT"
           },
@@ -17342,11 +18056,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 18
+              "line": 19
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 18
+              "line": 19
             },
             "status": "PRESENT"
           },
@@ -17355,11 +18069,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 22
+              "line": 23
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 22
+              "line": 23
             },
             "status": "PRESENT"
           },
@@ -17368,11 +18082,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 36
+              "line": 37
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 36
+              "line": 37
             },
             "status": "PRESENT"
           },
@@ -17381,11 +18095,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 59
+              "line": 60
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 59
+              "line": 60
             },
             "status": "PRESENT"
           },
@@ -17394,11 +18108,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 64
+              "line": 65
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 64
+              "line": 65
             },
             "status": "PRESENT"
           },
@@ -17407,11 +18121,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 69
+              "line": 70
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 69
+              "line": 70
             },
             "status": "PRESENT"
           }
@@ -17427,7 +18141,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17641,7 +18355,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17815,7 +18529,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18209,7 +18923,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18534,7 +19248,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18719,7 +19433,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18908,7 +19622,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19238,7 +19952,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19451,7 +20165,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19635,7 +20349,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19853,7 +20567,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20158,7 +20872,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20480,7 +21194,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21019,7 +21733,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21213,7 +21927,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21419,7 +22133,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22006,7 +22720,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22260,7 +22974,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22749,7 +23463,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22948,7 +23662,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23335,7 +24049,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23510,7 +24224,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23787,7 +24501,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24023,7 +24737,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24468,7 +25182,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24797,7 +25511,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25066,7 +25780,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25311,7 +26025,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25588,7 +26302,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25880,7 +26594,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26265,7 +26979,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26553,7 +27267,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26843,7 +27557,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27095,7 +27809,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27448,7 +28162,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27888,7 +28602,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28129,7 +28843,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28426,7 +29140,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28617,7 +29331,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28802,7 +29516,9 @@
           "composition": [
             "Workspace 的子级是 Sidebar 与 WorkspaceSurface；WorkspaceSurface 里依次是 WorkspaceHeader 与 WorkspaceContent。",
             "内容区的内缘由页面给：取 --qy-page-gutter 时与顶栏标题同一条左缘；整幅的表格可以贴边。",
-            "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。"
+            "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。",
+            "列表参考组合见 /examples/records：Stack 放筛选与 DataTablePattern，关闭详情即为列表；展开时用 minmax(0,…) 网格放列表与详情。WorkspaceContent 唯一拥有纵向滚动，TableContainer 只承接横向溢出。分页随列表滚动，顶栏固定。",
+            "活动记录与批量选择独立；筛选或翻页保留活动记录和以稳定 ID 保存的备注。示例详情在 xl 以上并排，以下堆叠；2:1 比例是此任务的容量选择。"
           ],
           "stateOwner": {
             "library": [
@@ -28831,7 +29547,9 @@
           "composition": [
             "Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.",
             "The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.",
-            "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal."
+            "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal.",
+            "See /examples/records: Stack holds filters and DataTablePattern; hide detail for a list, or use a minmax(0,…) grid for list and detail. WorkspaceContent owns vertical scrolling; TableContainer handles horizontal overflow. Pagination scrolls with the list; the header stays fixed.",
+            "The active record is independent from batch selection. Filtering and paging retain the active record and notes keyed by stable ID. Detail sits alongside the list at xl and stacks below it otherwise; 2:1 is a capacity choice for this task."
           ],
           "stateOwner": {
             "library": [
@@ -29108,7 +29826,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.0.0",
+        "version": "4.1.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37642,6 +38360,7 @@
     "scripts/token-ledger-runtime.mjs",
     "scripts/token-ledger.mjs",
     "scripts/ui-foundations-runtime.mjs",
+    "scripts/verify-consumer-compositions.mjs",
     "scripts/verify-index-specimens.mjs",
     "scripts/verify-packed-consumers.mjs",
     "scripts/verify-packed-tooling.mjs",

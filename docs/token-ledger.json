@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-13T04:54:38.415Z",
-  "revision": "070b55a752cfa2b0e7d3f1e98b253fb5fb2fafa2",
+  "generatedAt": "2026-10-20T12:31:55.304Z",
+  "revision": "a8137c3a68a03ef452895c62fa3bc22025576b97",
   "static": {
     "fingerprint": {
-      "sha256": "2f3254ce5b4408271abe4d7d4e0f29c0f03cf5ea326d3f72b25ee3b00578ebcb",
+      "sha256": "a670cd2aca172e7fe61db0bcd62fb6314042fc507a2b71893f670400826936f0",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -146,6 +146,18 @@
         {
           "path": "apps/docs/src/content/alert/meta.ts",
           "sha256": "80a78dd5a1deb9db8109e6e20687678ba8cc8423e354cb117a5cda763e74a3d3"
+        },
+        {
+          "path": "apps/docs/src/content/async-content/demos/01-retained.tsx",
+          "sha256": "2024bdd9fef7732fe575e7bbcd433eb141687fd12d8894e1f0c15a11698e96f2"
+        },
+        {
+          "path": "apps/docs/src/content/async-content/demos/02-first-load.tsx",
+          "sha256": "8f8c6598f20e1295ff8a2394209ff2f963db4fd5fffa74efcd06a3f45dd28fc5"
+        },
+        {
+          "path": "apps/docs/src/content/async-content/meta.ts",
+          "sha256": "f5e863d832aa6a8a1940a90831cddbe71d53c3e43b4cd65296129be193238f7b"
         },
         {
           "path": "apps/docs/src/content/autocomplete/cover.tsx",
@@ -481,11 +493,11 @@
         },
         {
           "path": "apps/docs/src/content/combobox/demos/01-choice.tsx",
-          "sha256": "fbaaf4b33f71740a899507e5458fad739e5e4608ca97dc431efc7bbe78954c33"
+          "sha256": "8ed5de7ad7d736f010172146657d5fae32466c73a0fe2e4dd95abea230b654a1"
         },
         {
           "path": "apps/docs/src/content/combobox/demos/02-density.tsx",
-          "sha256": "4387355677b6d54824e2da1afd3ce1b96eb62dc38d8dc34df9b3dc8063764fdd"
+          "sha256": "ec6ae5ca8b8c1f1dd6f66196e5db67ca24cec79fd30ab18eec7c8d0667c0c4df"
         },
         {
           "path": "apps/docs/src/content/combobox/demos/03-multiple.tsx",
@@ -497,11 +509,11 @@
         },
         {
           "path": "apps/docs/src/content/combobox/demos/05-async.tsx",
-          "sha256": "09d9014423c5e7b7bdb227af52c863a833922caaa468e4e3892464857a0c565a"
+          "sha256": "761dde7458f45634407e8d3ed3279c7cd4b86d610013aea4a476597ef263cb4c"
         },
         {
           "path": "apps/docs/src/content/combobox/meta.ts",
-          "sha256": "1ff1d3e02fdf4893606ce3ccedd53df0e15bc184063281e1cf8a2ad5b23049c3"
+          "sha256": "693b2c767bb3edf87395021906d6e2008d10d1630b087f46bf852ca3c06c9e96"
         },
         {
           "path": "apps/docs/src/content/confirm-action/cover.tsx",
@@ -521,7 +533,23 @@
         },
         {
           "path": "apps/docs/src/content/confirm-action/meta.ts",
-          "sha256": "e68ec7341e84134457f6caa6ca9ddf46e7f608319ae760d1c66187ba10bd72c6"
+          "sha256": "039491cd5acd9e0423157f800690bf887cdb2e250903179ed578087c7cfcb7c3"
+        },
+        {
+          "path": "apps/docs/src/content/confirm/cover.tsx",
+          "sha256": "1c200c11ce181b9650aa69e7c568ee6f46c30aa40b88f4efb9e944213e995454"
+        },
+        {
+          "path": "apps/docs/src/content/confirm/demos/01-decision.tsx",
+          "sha256": "611d0af4a19a3d7fdc3664df35fc2ea0982ab23033a05f8f8790c1d822ddd736"
+        },
+        {
+          "path": "apps/docs/src/content/confirm/demos/02-submission.tsx",
+          "sha256": "d4ea38dc5221321872c9c2f7d0db62ea351d42478051c418ffc5173a458b07e4"
+        },
+        {
+          "path": "apps/docs/src/content/confirm/meta.ts",
+          "sha256": "463f312dc58ef9a31868048076729561b164021614799887a46ad536e0adeade"
         },
         {
           "path": "apps/docs/src/content/context-menu/cover.tsx",
@@ -569,11 +597,15 @@
         },
         {
           "path": "apps/docs/src/content/data-table/demos/01-task.tsx",
-          "sha256": "996f57d41c0f95652c9db454a6b5b06ca8d651d28f51f8060fb005b5f1efae84"
+          "sha256": "1558321cdf245b76f9e70095df85ce39840409b4bb09507f3f4931c04266aad3"
+        },
+        {
+          "path": "apps/docs/src/content/data-table/demos/02-instance.tsx",
+          "sha256": "5235cbe355facbe14c783f8e478241aac01e3cfa888036093005f99fd50a18a3"
         },
         {
           "path": "apps/docs/src/content/data-table/meta.ts",
-          "sha256": "c99393079de883a3177bbc1eab38565ef68af91c5161162cf8a0eaed69bc72dc"
+          "sha256": "3a0037c1c6eb2e7cb1a466574ee1f4f90d4d708af6011eeea7c8a38b427fb00c"
         },
         {
           "path": "apps/docs/src/content/date-picker/cover.tsx",
@@ -1085,19 +1117,19 @@
         },
         {
           "path": "apps/docs/src/content/pagination/demos/01-pages.tsx",
-          "sha256": "137cea7aabb647aa4e42d37f5340e44b87f720a66f29b9c574d8f38a56de456a"
+          "sha256": "9ae49b516492532782080d7e8c00a9ad13ca26028cca2d22b8eac8865f6dd5c0"
         },
         {
           "path": "apps/docs/src/content/pagination/demos/02-ellipsis.tsx",
-          "sha256": "40fde4900576b8b71cdb25adff132ff15eb6b247c5b664bddf0b5b21eb14a798"
+          "sha256": "d0ef656a2e6078f5f5acaad5e9de9121d5556acf5e09dd8d9dff7ccaca6260e9"
         },
         {
           "path": "apps/docs/src/content/pagination/demos/03-unknown.tsx",
-          "sha256": "ce516d44b4d13bcf352a53c6152f5d8021387f9ec2e9ad58a1cbbeb5e31f6133"
+          "sha256": "7ba5d07208aeaf5d67854b4361849970a3541b6fdd4e8d61b045916c3fe6d25f"
         },
         {
           "path": "apps/docs/src/content/pagination/meta.ts",
-          "sha256": "d0aa91be7b3525d7dcc6be6a00491395208636e5894a35e2b25f50ae27cc4bae"
+          "sha256": "4abdea1472094af5319784dc9ec4b3bcecf20f7574cff0b988e2ca793d37d715"
         },
         {
           "path": "apps/docs/src/content/password-input/cover.tsx",
@@ -1801,19 +1833,27 @@
         },
         {
           "path": "apps/docs/src/content/workspace/demos/01-shell.tsx",
-          "sha256": "a9877d15495f1bf782fc90ae6ac779b20f003b500b24603b4188dd9fab15a877"
+          "sha256": "0cd09cfd7f05bc979cf55911f17e6a3fa8af6d6b8c0a4f808438b6a797117da3"
         },
         {
           "path": "apps/docs/src/content/workspace/demos/02-page-slot.tsx",
-          "sha256": "0943e0cc6ddebe85a4b627dea23f09137bccbce1fc66dded7c41af4978d7c8b5"
+          "sha256": "61c962bf61ffce8d4c7a1bbdb3b8d5c2aa40588495bea69d33bb9a14ae2c5e9a"
+        },
+        {
+          "path": "apps/docs/src/content/workspace/demos/03-records.tsx",
+          "sha256": "c7d7941a8abae65c705328909c24092c5ce65fdb114d15c9f887927ef1038b18"
         },
         {
           "path": "apps/docs/src/content/workspace/meta.ts",
-          "sha256": "390490618e90189270cdb3b1e7cb42ee975d8d6a517d5d2f60a34e2433c888bd"
+          "sha256": "29f972628b582f1bbabe778556fdd83c34c08b982ccc31d5af951616e9f46d6b"
         },
         {
           "path": "apps/docs/src/examples/gallery.tsx",
-          "sha256": "b2e0f951d9838cd73b6eb3d2867b6f187c2c206da940f760d9908b7382cd47e8"
+          "sha256": "cca6fa15e1beea183e23de50b233f4da4b68759653b5f3f796d286642c187174"
+        },
+        {
+          "path": "apps/docs/src/examples/records.tsx",
+          "sha256": "1e591a5c13ea5bc5bf6fb50847ec740b993f4888cac312a65ff85dabb793ab41"
         },
         {
           "path": "apps/docs/src/examples/workspace/collection-detail.tsx",
@@ -2141,7 +2181,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "cd1733c5d9a44043876ff5cf6c21ea2da038fd01abaf4ca18762a74735366197"
+          "sha256": "ebc15d413409f55b7bb5cdc5ecd17a8a9c4748deec01c7d8ed028cf0f0f4516d"
         },
         {
           "path": "packages/ui/prose.css",
@@ -2170,6 +2210,10 @@
         {
           "path": "packages/ui/src/components/alert.tsx",
           "sha256": "bff3bfb8e4d04d941b8f839f3a8e741a3ba46c92a9011143453a4bcff9e064c6"
+        },
+        {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "sha256": "8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2"
         },
         {
           "path": "packages/ui/src/components/autocomplete.tsx",
@@ -2229,11 +2273,15 @@
         },
         {
           "path": "packages/ui/src/components/combobox.tsx",
-          "sha256": "e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7"
+          "sha256": "8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0"
         },
         {
           "path": "packages/ui/src/components/confirm-action.tsx",
           "sha256": "0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656"
+        },
+        {
+          "path": "packages/ui/src/components/confirm.tsx",
+          "sha256": "8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5"
         },
         {
           "path": "packages/ui/src/components/context-menu.tsx",
@@ -2249,7 +2297,7 @@
         },
         {
           "path": "packages/ui/src/components/data-table.tsx",
-          "sha256": "8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa"
+          "sha256": "0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842"
         },
         {
           "path": "packages/ui/src/components/date-picker.tsx",
@@ -2313,7 +2361,7 @@
         },
         {
           "path": "packages/ui/src/components/input.tsx",
-          "sha256": "866dfa2114174d3e7fcbc088e23ef9bc7a2c6812132ac872d1a3942cce273389"
+          "sha256": "3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098"
         },
         {
           "path": "packages/ui/src/components/item.tsx",
@@ -2373,7 +2421,7 @@
         },
         {
           "path": "packages/ui/src/components/pagination.tsx",
-          "sha256": "b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469"
+          "sha256": "fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4"
         },
         {
           "path": "packages/ui/src/components/password-input.tsx",
@@ -2557,11 +2605,11 @@
         },
         {
           "path": "packages/ui/src/index.ts",
-          "sha256": "7f648fa3e8798157aa512130d66989873377fa9727a30cad887a872d2535b7cd"
+          "sha256": "24a765ad8c7fc10596d57dfcb7ee3abbe648606d76a1f3dc0674641d7b701142"
         },
         {
           "path": "packages/ui/src/input-adjunct.ts",
-          "sha256": "46e05a7625206db7e2ce8fbc92bd2de10209e0ef4356f56c432fccd0cdcda435"
+          "sha256": "a830624ad8866ba5a78da93b4f8e27216d08cec8fcdd3b386e3b74e6f9c6daf7"
         },
         {
           "path": "packages/ui/src/input-facts.ts",
@@ -2573,11 +2621,11 @@
         },
         {
           "path": "packages/ui/src/locale.tsx",
-          "sha256": "443153c8217f49ac10c721ea964f7a765cc2b93c5661f4a7c91b47c57f11f87d"
+          "sha256": "6e46db571aaec774b44822a200547537b9bb022cdcc015b69ea07e5446c59e6e"
         },
         {
           "path": "packages/ui/src/locales/en-US.ts",
-          "sha256": "af1241f303a427257f03d93e6547c320561346a06e98247961d3e35965cb7cfd"
+          "sha256": "f4796473d59c2354b6f0254fc4fd9f81659cae5235a14df8e653da27dbf06511"
         },
         {
           "path": "packages/ui/src/nav-line.ts",
@@ -2701,6 +2749,14 @@
           "Alert"
         ],
         "route": "/playground/alert"
+      },
+      {
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicName": [
+          "Async-content"
+        ],
+        "route": "/playground/async-content"
       },
       {
         "component": "autocomplete",
@@ -2830,6 +2886,14 @@
           "Confirm-action"
         ],
         "route": "/playground/confirm-action"
+      },
+      {
+        "component": "confirm",
+        "sourceComponent": "confirm",
+        "publicName": [
+          "Confirm"
+        ],
+        "route": "/playground/confirm"
       },
       {
         "component": "context-menu",
@@ -19009,6 +19073,185 @@
           "line": 172
         },
         "mapping": "Global CSS selector and source class/slot"
+      },
+      {
+        "token": "--qy-panel-gap",
+        "chain": [
+          "--qy-panel-gap"
+        ],
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicNames": [
+          "AsyncContent"
+        ],
+        "part": "async-content",
+        "selector": "[data-slot=\"async-content\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "line": 31
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-space-module",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          "--qy-space-module"
+        ],
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicNames": [
+          "AsyncContent"
+        ],
+        "part": "async-content",
+        "selector": "[data-slot=\"async-content\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "line": 31
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 473
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicNames": [
+          "AsyncContent"
+        ],
+        "part": "async-content",
+        "selector": "[data-slot=\"async-content\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "line": 31
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 606
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          "--qy-fen"
+        ],
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicNames": [
+          "AsyncContent"
+        ],
+        "part": "async-content",
+        "selector": "[data-slot=\"async-content\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "line": 31
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 606
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "async-content",
+        "sourceComponent": "async-content",
+        "publicNames": [
+          "AsyncContent"
+        ],
+        "part": "async-content",
+        "selector": "[data-slot=\"async-content\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/async-content.tsx",
+          "line": 31
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
       {
         "token": "--qy-radius-overlay",
@@ -81280,7 +81523,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81321,7 +81564,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81370,7 +81613,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81419,7 +81662,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81460,7 +81703,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81501,7 +81744,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81550,7 +81793,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81599,7 +81842,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81656,7 +81899,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81721,7 +81964,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81786,7 +82029,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81843,7 +82086,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81908,7 +82151,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81965,7 +82208,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82022,7 +82265,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82071,7 +82314,186 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 46
+          "line": 47
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-panel-gap",
+        "chain": [
+          "--qy-panel-gap"
+        ],
+        "component": "data-table",
+        "sourceComponent": "data-table",
+        "publicNames": [
+          "DataTablePattern"
+        ],
+        "part": "data-table-pattern",
+        "selector": "[data-slot=\"data-table-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-space-module",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          "--qy-space-module"
+        ],
+        "component": "data-table",
+        "sourceComponent": "data-table",
+        "publicNames": [
+          "DataTablePattern"
+        ],
+        "part": "data-table-pattern",
+        "selector": "[data-slot=\"data-table-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 473
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "data-table",
+        "sourceComponent": "data-table",
+        "publicNames": [
+          "DataTablePattern"
+        ],
+        "part": "data-table-pattern",
+        "selector": "[data-slot=\"data-table-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 606
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          "--qy-fen"
+        ],
+        "component": "data-table",
+        "sourceComponent": "data-table",
+        "publicNames": [
+          "DataTablePattern"
+        ],
+        "part": "data-table-pattern",
+        "selector": "[data-slot=\"data-table-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 561
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 606
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "data-table",
+        "sourceComponent": "data-table",
+        "publicNames": [
+          "DataTablePattern"
+        ],
+        "part": "data-table-pattern",
+        "selector": "[data-slot=\"data-table-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117394,7 +117816,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117425,7 +117847,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117464,7 +117886,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117511,7 +117933,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117558,7 +117980,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117613,7 +118035,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117652,7 +118074,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117699,7 +118121,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117754,7 +118176,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117785,7 +118207,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117824,7 +118246,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117871,7 +118293,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117918,7 +118340,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -117973,7 +118395,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118012,7 +118434,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118059,7 +118481,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118114,7 +118536,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118137,7 +118559,7 @@
         "className": "min-h-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118162,7 +118584,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118195,7 +118617,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118236,7 +118658,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118277,7 +118699,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118326,7 +118748,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118359,7 +118781,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118400,7 +118822,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118441,7 +118863,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118490,7 +118912,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118515,7 +118937,7 @@
         "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118540,7 +118962,7 @@
         "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118565,7 +118987,7 @@
         "className": "pointer-coarse:min-h-[calc(var(--qy-touch-target)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 133
+          "line": 137
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118588,7 +119010,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118619,7 +119041,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118658,7 +119080,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118705,7 +119127,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118752,7 +119174,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118807,7 +119229,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118846,7 +119268,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118893,7 +119315,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118948,7 +119370,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -118979,7 +119401,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119018,7 +119440,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119065,7 +119487,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119112,7 +119534,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119167,7 +119589,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119206,7 +119628,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119253,7 +119675,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119308,7 +119730,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119333,7 +119755,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119366,7 +119788,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119407,7 +119829,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119448,7 +119870,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119497,7 +119919,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119530,7 +119952,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119571,7 +119993,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119612,7 +120034,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119661,7 +120083,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119686,7 +120108,7 @@
         "className": "pointer-coarse:min-h-(--qy-touch-target)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 134
+          "line": 138
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119711,7 +120133,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119744,7 +120166,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119785,7 +120207,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119834,7 +120256,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119891,7 +120313,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -119948,7 +120370,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120013,7 +120435,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120062,7 +120484,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120095,7 +120517,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120136,7 +120558,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120185,7 +120607,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120234,7 +120656,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120291,7 +120713,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120332,7 +120754,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120365,7 +120787,7 @@
         "className": "border-input",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120406,7 +120828,7 @@
         "className": "border-input",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120455,7 +120877,7 @@
         "className": "border-input",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120504,7 +120926,7 @@
         "className": "border-input",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120545,7 +120967,7 @@
         "className": "border-input",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120578,7 +121000,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120619,7 +121041,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120668,7 +121090,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120725,7 +121147,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120782,7 +121204,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120847,7 +121269,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120920,7 +121342,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120993,7 +121415,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121058,7 +121480,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121131,7 +121553,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121196,7 +121618,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121261,7 +121683,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121318,7 +121740,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121367,7 +121789,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121424,7 +121846,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121481,7 +121903,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121546,7 +121968,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121619,7 +122041,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121692,7 +122114,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121757,7 +122179,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121830,7 +122252,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121895,7 +122317,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -121960,7 +122382,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122017,7 +122439,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122058,7 +122480,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122107,7 +122529,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122164,7 +122586,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122221,7 +122643,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122270,7 +122692,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122327,7 +122749,7 @@
         "className": "bg-surface-field",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122360,7 +122782,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122401,7 +122823,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122450,7 +122872,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122499,7 +122921,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122540,7 +122962,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122581,7 +123003,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122630,7 +123052,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122679,7 +123101,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122736,7 +123158,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122801,7 +123223,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122866,7 +123288,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122923,7 +123345,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -122988,7 +123410,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123045,7 +123467,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123102,7 +123524,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123151,7 +123573,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123176,7 +123598,7 @@
         "className": "duration-(--qy-duration-fast)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123201,7 +123623,7 @@
         "className": "ease-(--qy-ease-out)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123235,7 +123657,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123277,7 +123699,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123327,7 +123749,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123385,7 +123807,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123443,7 +123865,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123493,7 +123915,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123543,7 +123965,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123601,7 +124023,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123659,7 +124081,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123725,7 +124147,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123799,7 +124221,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123873,7 +124295,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -123939,7 +124361,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124013,7 +124435,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124079,7 +124501,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124145,7 +124567,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124203,7 +124625,7 @@
         "className": "has-[input:focus-visible]:border-ring",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124241,7 +124663,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124287,7 +124709,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124341,7 +124763,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124403,7 +124825,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124465,7 +124887,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124519,7 +124941,7 @@
         "className": "not-has-[input:disabled]:not-has-[input:read-only]:not-has-[input:focus-visible]:not-has-[input[aria-invalid=true]]:hover:border-border-strong",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124553,7 +124975,7 @@
         "className": "has-[input[aria-invalid=true]]:border-destructive",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124595,7 +125017,7 @@
         "className": "has-[input[aria-invalid=true]]:border-destructive",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124637,7 +125059,7 @@
         "className": "has-[input[aria-invalid=true]]:border-destructive",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124679,7 +125101,7 @@
         "className": "has-[input[aria-invalid=true]]:border-destructive",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124721,7 +125143,7 @@
         "className": "has-[input[aria-invalid=true]]:border-destructive",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124755,7 +125177,7 @@
         "className": "has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124797,7 +125219,7 @@
         "className": "has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124839,7 +125261,7 @@
         "className": "has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124881,7 +125303,7 @@
         "className": "has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124923,7 +125345,7 @@
         "className": "has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 135
+          "line": 139
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124957,7 +125379,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -124999,7 +125421,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125049,7 +125471,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125099,7 +125521,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125141,7 +125563,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125191,7 +125613,7 @@
         "className": "has-[input:disabled]:bg-surface-inset",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125225,7 +125647,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125267,7 +125689,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125317,7 +125739,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125367,7 +125789,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125409,7 +125831,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125451,7 +125873,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125501,7 +125923,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125551,7 +125973,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125609,7 +126031,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125675,7 +126097,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125741,7 +126163,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125799,7 +126221,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125865,7 +126287,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125923,7 +126345,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -125981,7 +126403,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126031,7 +126453,7 @@
         "className": "has-[input:disabled]:text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126065,7 +126487,7 @@
         "className": "has-[input:disabled]:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126107,7 +126529,7 @@
         "className": "has-[input:disabled]:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126157,7 +126579,7 @@
         "className": "has-[input:disabled]:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126207,7 +126629,7 @@
         "className": "has-[input:disabled]:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126249,7 +126671,7 @@
         "className": "has-[input:disabled]:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 141
+          "line": 145
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126282,7 +126704,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 142
+          "line": 146
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126323,7 +126745,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 142
+          "line": 146
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126372,7 +126794,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 142
+          "line": 146
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126421,7 +126843,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 142
+          "line": 146
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126462,7 +126884,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 142
+          "line": 146
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126485,7 +126907,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126516,7 +126938,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126555,7 +126977,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126602,7 +127024,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126657,7 +127079,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126712,7 +127134,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126775,7 +127197,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126822,7 +127244,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126877,7 +127299,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126916,7 +127338,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126947,7 +127369,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -126986,7 +127408,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127033,7 +127455,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127088,7 +127510,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127143,7 +127565,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127206,7 +127628,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127253,7 +127675,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127308,7 +127730,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127347,7 +127769,7 @@
         "className": "pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127378,7 +127800,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127409,7 +127831,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127448,7 +127870,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127479,7 +127901,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127510,7 +127932,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127549,7 +127971,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127580,7 +128002,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127619,7 +128041,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127666,7 +128088,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127713,7 +128135,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127752,7 +128174,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127791,7 +128213,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127838,7 +128260,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127885,7 +128307,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -127940,7 +128362,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128003,7 +128425,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128066,7 +128488,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128121,7 +128543,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128184,7 +128606,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128239,7 +128661,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128294,7 +128716,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -128341,7 +128763,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 147
+          "line": 151
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196000,7 +196422,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196031,7 +196453,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196070,7 +196492,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196101,7 +196523,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196132,7 +196554,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196171,7 +196593,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196202,7 +196624,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196233,7 +196655,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196272,7 +196694,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 14
+          "line": 15
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196295,7 +196717,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 19
+          "line": 20
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196326,7 +196748,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 19
+          "line": 20
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196365,7 +196787,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 19
+          "line": 20
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196396,7 +196818,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196427,7 +196849,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196466,7 +196888,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196497,7 +196919,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196528,7 +196950,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196567,7 +196989,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196598,7 +197020,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196637,7 +197059,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196684,7 +197106,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196731,7 +197153,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196770,7 +197192,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196809,7 +197231,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196856,7 +197278,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196903,7 +197325,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -196958,7 +197380,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197021,7 +197443,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197084,7 +197506,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197139,7 +197561,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197202,7 +197624,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197257,7 +197679,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197312,7 +197734,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -197359,7 +197781,1094 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 71
+          "line": 72
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-action-gap",
+        "chain": [
+          "--qy-action-gap"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-details",
+        "selector": "[data-slot=\"pagination-details\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 132
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 475
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-fen"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-details",
+        "selector": "[data-slot=\"pagination-details\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 132
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 475
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-details",
+        "selector": "[data-slot=\"pagination-details\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 132
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-support-size",
+        "chain": [
+          {
+            "variable": "--text-support",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 252
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-support-size"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-size",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-support-leading",
+        "chain": [
+          {
+            "variable": "--text-support--line-height",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 253
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-support-leading"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "line-height",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--text-support--line-height",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 253
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-text-support-leading",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 151
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "line-height",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-support-tracking",
+        "chain": [
+          {
+            "variable": "--text-support--letter-spacing",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 254
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-support-tracking"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "letter-spacing",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-support-weight",
+        "chain": [
+          {
+            "variable": "--text-support--font-weight",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 255
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-support-weight"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-weight",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-weight-regular",
+        "chain": [
+          {
+            "variable": "--text-support--font-weight",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 255
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-text-support-weight",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 153
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-weight-regular"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-weight",
+        "conditions": [],
+        "className": "text-support",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-foreground-muted",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-foreground-muted"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-black",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 41
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-black"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 114
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink-nong",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink-nong"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-paper",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-paper"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 42
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-background",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-background"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-ink"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-black",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 41
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-black"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 114
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-wash-qing",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-wash-qing"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink-qing",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-wash-qing",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 34
+            },
+            "condition": "@layer base {\n  :root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink-qing"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-neutral-950",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 116
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-neutral-950"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 116
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 114
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-summary",
+        "selector": "[data-slot=\"pagination-summary\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 133
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -424344,10 +425853,28 @@
       },
       {
         "sourceComponent": "input",
+        "className": "rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))]",
+        "source": {
+          "path": "packages/ui/src/components/input.tsx",
+          "line": 121
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "input",
+        "className": "autofill:shadow-[inset_0_0_0_100vmax_var(--qy-surface-field)]",
+        "source": {
+          "path": "packages/ui/src/components/input.tsx",
+          "line": 121
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "input",
         "className": "autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 117
+          "line": 121
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -424356,7 +425883,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424365,7 +425892,7 @@
         "className": "leading-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424374,7 +425901,7 @@
         "className": "sm:leading-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424383,7 +425910,7 @@
         "className": "file:me-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -424392,7 +425919,7 @@
         "className": "file:border-border",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424401,7 +425928,7 @@
         "className": "file:pe-(--qy-fill-padding)",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424410,7 +425937,7 @@
         "className": "file:font-medium",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -424419,7 +425946,7 @@
         "className": "file:text-foreground",
         "source": {
           "path": "packages/ui/src/components/input.tsx",
-          "line": 120
+          "line": 124
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -425112,7 +426639,7 @@
         "className": "min-w-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 48
+          "line": 49
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -425121,7 +426648,7 @@
         "className": "font-normal",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 48
+          "line": 49
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -425130,7 +426657,7 @@
         "className": "sm:min-w-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 48
+          "line": 49
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -426575,8 +428102,8 @@
     ]
   },
   "runtime": {
-    "fingerprint": "2f3254ce5b4408271abe4d7d4e0f29c0f03cf5ea326d3f72b25ee3b00578ebcb",
-    "measuredAt": "2026-10-13T04:59:50.861Z",
+    "fingerprint": "a670cd2aca172e7fe61db0bcd62fb6314042fc507a2b71893f670400826936f0",
+    "measuredAt": "2026-10-20T12:33:41.063Z",
     "browser": {
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
@@ -426600,7 +428127,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-13T04:58:39.344Z",
+        "measuredAt": "2026-10-20T12:32:29.221Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426671,7 +428198,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-13T04:58:40.720Z",
+        "measuredAt": "2026-10-20T12:32:30.615Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426738,7 +428265,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:42.097Z",
+        "measuredAt": "2026-10-20T12:32:32.024Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426813,7 +428340,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-13T04:58:43.463Z",
+        "measuredAt": "2026-10-20T12:32:33.441Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426888,7 +428415,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:58:44.829Z",
+        "measuredAt": "2026-10-20T12:32:34.848Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -426963,7 +428490,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:46.192Z",
+        "measuredAt": "2026-10-20T12:32:36.229Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427030,7 +428557,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:58:47.552Z",
+        "measuredAt": "2026-10-20T12:32:37.600Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427100,7 +428627,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:48.914Z",
+        "measuredAt": "2026-10-20T12:32:38.992Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427167,7 +428694,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:50.281Z",
+        "measuredAt": "2026-10-20T12:32:40.399Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427244,7 +428771,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:58:51.659Z",
+        "measuredAt": "2026-10-20T12:32:41.800Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427321,7 +428848,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:53.036Z",
+        "measuredAt": "2026-10-20T12:32:43.203Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427339,7 +428866,7 @@
           "token": "oklch(0% 0 0/.32)",
           "rootToken": "oklch(0% 0 0/.32)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -427359,7 +428886,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -427394,7 +428921,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:54.419Z",
+        "measuredAt": "2026-10-20T12:32:44.611Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427469,7 +428996,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:58:55.842Z",
+        "measuredAt": "2026-10-20T12:32:46.071Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427540,7 +429067,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:58:57.301Z",
+        "measuredAt": "2026-10-20T12:32:47.530Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427616,7 +429143,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:58:58.673Z",
+        "measuredAt": "2026-10-20T12:32:48.908Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427685,7 +429212,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-13T04:59:00.053Z",
+        "measuredAt": "2026-10-20T12:32:50.317Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427757,7 +429284,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-13T04:59:01.429Z",
+        "measuredAt": "2026-10-20T12:32:51.726Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427824,7 +429351,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:02.789Z",
+        "measuredAt": "2026-10-20T12:32:53.122Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427898,7 +429425,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:04.165Z",
+        "measuredAt": "2026-10-20T12:32:54.547Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -427968,7 +429495,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:05.542Z",
+        "measuredAt": "2026-10-20T12:32:55.950Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428041,7 +429568,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:06.920Z",
+        "measuredAt": "2026-10-20T12:32:57.352Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428116,7 +429643,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:08.278Z",
+        "measuredAt": "2026-10-20T12:32:58.762Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428189,7 +429716,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:09.641Z",
+        "measuredAt": "2026-10-20T12:33:00.154Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428262,7 +429789,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:11.004Z",
+        "measuredAt": "2026-10-20T12:33:01.557Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428339,7 +429866,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:12.401Z",
+        "measuredAt": "2026-10-20T12:33:02.923Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428416,7 +429943,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:13.803Z",
+        "measuredAt": "2026-10-20T12:33:04.293Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428485,7 +430012,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-13T04:59:15.220Z",
+        "measuredAt": "2026-10-20T12:33:05.700Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428556,7 +430083,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-13T04:59:16.641Z",
+        "measuredAt": "2026-10-20T12:33:07.107Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428623,7 +430150,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:18.088Z",
+        "measuredAt": "2026-10-20T12:33:08.526Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428698,7 +430225,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-13T04:59:19.576Z",
+        "measuredAt": "2026-10-20T12:33:09.923Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428773,7 +430300,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:21.008Z",
+        "measuredAt": "2026-10-20T12:33:11.346Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428848,7 +430375,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:22.401Z",
+        "measuredAt": "2026-10-20T12:33:12.724Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428918,7 +430445,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:23.808Z",
+        "measuredAt": "2026-10-20T12:33:14.116Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -428985,7 +430512,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:25.208Z",
+        "measuredAt": "2026-10-20T12:33:15.529Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429062,7 +430589,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:26.728Z",
+        "measuredAt": "2026-10-20T12:33:16.963Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429139,7 +430666,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:28.136Z",
+        "measuredAt": "2026-10-20T12:33:18.387Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429157,7 +430684,7 @@
           "token": "oklch(0% 0 0/.56)",
           "rootToken": "oklch(0% 0 0/.56)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -429177,7 +430704,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -429212,7 +430739,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:29.543Z",
+        "measuredAt": "2026-10-20T12:33:19.824Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429287,7 +430814,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:30.990Z",
+        "measuredAt": "2026-10-20T12:33:21.270Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429358,7 +430885,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:32.514Z",
+        "measuredAt": "2026-10-20T12:33:22.764Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429434,7 +430961,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:33.941Z",
+        "measuredAt": "2026-10-20T12:33:24.177Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429503,7 +431030,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-13T04:59:35.383Z",
+        "measuredAt": "2026-10-20T12:33:25.589Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429575,7 +431102,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-13T04:59:36.798Z",
+        "measuredAt": "2026-10-20T12:33:26.978Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429642,7 +431169,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:38.192Z",
+        "measuredAt": "2026-10-20T12:33:28.380Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429716,7 +431243,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-13T04:59:39.604Z",
+        "measuredAt": "2026-10-20T12:33:29.777Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429786,7 +431313,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:41.009Z",
+        "measuredAt": "2026-10-20T12:33:31.215Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429859,7 +431386,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-13T04:59:42.430Z",
+        "measuredAt": "2026-10-20T12:33:32.601Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -429934,7 +431461,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:43.870Z",
+        "measuredAt": "2026-10-20T12:33:33.997Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430007,7 +431534,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:45.251Z",
+        "measuredAt": "2026-10-20T12:33:35.402Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430080,7 +431607,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:46.650Z",
+        "measuredAt": "2026-10-20T12:33:36.823Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430157,7 +431684,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:48.022Z",
+        "measuredAt": "2026-10-20T12:33:38.222Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430234,7 +431761,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-13T04:59:49.387Z",
+        "measuredAt": "2026-10-20T12:33:39.633Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -430459,7 +431986,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 135
+              "line": 139
             },
             "className": "bg-surface-field",
             "chain": [
@@ -430499,7 +432026,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 133
+              "line": 137
             },
             "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
             "chain": [
@@ -430509,7 +432036,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 134
+              "line": 138
             },
             "className": "sm:min-h-(--qy-fill-height)",
             "chain": [
@@ -430533,7 +432060,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 133
+              "line": 137
             },
             "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
             "chain": [
@@ -430543,7 +432070,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 134
+              "line": 138
             },
             "className": "sm:min-h-(--qy-fill-height)",
             "chain": [
@@ -430567,7 +432094,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 135
+              "line": 139
             },
             "className": "has-[input[aria-invalid=true]]:border-destructive",
             "chain": [
@@ -430599,7 +432126,7 @@
           {
             "source": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 135
+              "line": 139
             },
             "className": "has-[input[aria-invalid=true]]:border-destructive",
             "chain": [
