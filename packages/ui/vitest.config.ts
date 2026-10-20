@@ -1,8 +1,14 @@
 import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
+  // Documentation examples use public entries; unit tests must resolve current
+  // source even in a fresh checkout, before dist has been built.
+  resolve: {
+    alias: [{ find: /^@qingye_lab\/ui\/components\/(.+)$/, replacement: fileURLToPath(new URL("./src/components/", import.meta.url)) + "$1" }],
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],

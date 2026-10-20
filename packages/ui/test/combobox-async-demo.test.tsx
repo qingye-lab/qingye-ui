@@ -2,9 +2,8 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 import { expect, test, vi } from "vitest";
 
-// Exercise the published composition used by the actual application example against current source.
-vi.mock("@qingye_lab/ui/components/combobox", () => import("../src/components/combobox"));
-vi.mock("@qingye_lab/ui/components/field", () => import("../src/components/field"));
+// Exercise the actual application example; Vitest maps public entries to source
+// so this also runs before the first package build in a clean checkout.
 import AsyncDemo from "../../../apps/docs/src/content/combobox/demos/05-async";
 
 function deferred() {

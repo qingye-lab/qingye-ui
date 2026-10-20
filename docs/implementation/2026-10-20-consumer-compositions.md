@@ -60,3 +60,5 @@
 回归先观测到 Activity Provider 与 StrictMode 两项失败，修复后确认测试 19 项及相关 25 项通过。4.1.0 的本地完整验证已通过：116 个 UI 测试文件／1040 项测试，docs 61 项、tooling 31 项、Studio 14 项，另有 Studio preview 3 项；workspace typecheck、facts-ledger、process/delivery tests、UI/Studio/docs build、API 漂移检查和实际 tarball 的 publint/attw 检查通过。
 
 版本化资源生成到 `ai/v4.1.0/`；既有 `ai/v4.0.0/` 恢复并保留原版本快照，且排除在新 tarball 外。发布说明为 [v4.1.0](../releases/v4.1.0.md)。GitHub 和 npm 的最终发布状态应以对应远端查询为准。
+
+首轮远端 CI 还发现异步 Combobox 示例测试隐式依赖已有 dist：Vite 在 mock 生效前先解析公共包入口，全新检出没有构建产物而失败。已在 Vitest 配置把公共组件入口映射到当前源码，移除该示例测试的包 mock。通过暂存并恢复本地产物复现构建前失败，再在无 dist 的同一条件运行完整 UI 测试，保持 CI 的先测后构建顺序。
