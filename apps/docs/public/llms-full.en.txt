@@ -1,6 +1,6 @@
-# Qingye UI 4.0.0: full text
+# Qingye UI 4.1.0: full text
 
-> @qingye_lab/ui@4.0.0. The design guide, installation notes and every component in one file, for tools that cannot follow links. Generated from the sources the site uses: design.md, the component metadata and the TypeScript types. Each component keeps its first source example here; the component's own Markdown file has them all.
+> @qingye_lab/ui@4.1.0. The design guide, installation notes and every component in one file, for tools that cannot follow links. Generated from the sources the site uses: design.md, the component metadata and the TypeScript types. Each component keeps its first source example here; the component's own Markdown file has them all.
 
 # Part 1. Design guide
 
@@ -348,7 +348,7 @@ Implement and verify within the authorized scope, and report ownership, actual e
 
 # Part 2. Installation
 
-## Install @qingye_lab/ui 4.0.0
+## Install @qingye_lab/ui 4.1.0
 
 Use this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.
 
@@ -362,11 +362,11 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# Part 3. Components (93)
+# Part 3. Components (95)
 
 ## Accordion
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
@@ -476,7 +476,7 @@ export default function AccordionDemo() {
 
 ## Alert
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert
 Source: packages/ui/src/components/alert.tsx
 Source SHA-256: bff3bfb8e4d04d941b8f839f3a8e741a3ba46c92a9011143453a4bcff9e064c6
@@ -581,7 +581,7 @@ export default function Demo() {
 
 ## AlertDialog
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
@@ -749,9 +749,110 @@ export default function Demo() {
 }
 ```
 
+## AsyncContent
+
+Package: @qingye_lab/ui@4.1.0
+Import: @qingye_lab/ui/components/async-content
+Source: packages/ui/src/components/async-content.tsx
+Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2
+
+Present request status separately from content that remains valid.
+
+### Decision
+status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.
+
+### Notes
+- Errors are not announced automatically. Supply role=alert inside errorContent when appropriate, rather than making all retained content live.
+- hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes.
+
+### Use and ownership
+- Initial loading, confirmed empty results, failure and refresh with retained valid content.
+- Avoid: Collapsing permission, read-only or partial failure into a mutually exclusive page request state.
+- Avoid: Managing requests, caches or query races here.
+- Library: Stable feedback/content structure, aria-busy on retained content while pending; loading feedback is a sibling so a busy ancestor does not defer its announcement.
+- Application: Requests, cancellation, stale response isolation, validity, permissions, drafts and retries.
+
+### Composition
+- Place permission and read-only notices next to relevant content; use a local AsyncContent or Alert for partial failures.
+
+### Responsive behavior
+- Adds no scroll owner; composed feedback and recovery controls handle wrapping.
+
+### Customization
+- Use the current props and composition first, then adjust the project's central theme; fix shared gaps in the public library.
+- Configure brand, light or dark mode, and density separately; themes do not change permissions or save policies.
+
+### Current exports
+- AsyncContent: function; owner async-content; PASS; props: AsyncContentProps
+- AsyncContentProps: type; owner async-content; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AsyncContent
+- `children?`: `ReactNode`.
+- `emptyContent`: `ReactNode`.
+- `errorContent`: `ReactNode`.
+- `hasContent`: `boolean`. 是否还有可用的内容。刷新与刷新失败时保持 true，避免卸载草稿与焦点。
+- `loadingContent?`: `ReactNode`.
+- `status`: `"pending" | "success" | "error"`. 应用声明的最近一次请求事实；组件不发请求，也不推断结果。
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### AsyncContent
+A content-state composition that makes no requests.
+- status: "pending" | "success" | "error". Application-declared request fact; elapsed time never implies failure.
+- hasContent / children: boolean / ReactNode. Valid content stays mounted without automatic disabling, draft clearing or focus movement.
+- emptyContent / loadingContent / errorContent: ReactNode. emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions.
+- render / ref / native props: useRender.ComponentProps<div>. Semantics and props for the actual root; no live region is added by default.
+
+### Keyboard
+
+### Source example
+#### 刷新失败保留备注
+Source: apps/docs/src/content/async-content/demos/01-retained.tsx
+```tsx
+import { useState } from "react";
+import { Alert, AlertDescription } from "@qingye_lab/ui/components/alert";
+import { AsyncContent } from "@qingye_lab/ui/components/async-content";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "刷新失败保留备注", titleEn: "Keep a note after refresh failure" } satisfies DemoMeta;
+
+export default function Demo() {
+  const [status, setStatus] = useState<"pending" | "success" | "error">("success");
+  // 用显式事件模拟请求完成；不会留下计时器，也不会把时间经过当作失败。
+  return <Stack>
+    <Inline>
+      <Button variant="bordered" disabled={status === "pending"} onClick={() => setStatus("pending")}>刷新记录</Button>
+      {status === "pending" && <><Button variant="quiet" onClick={() => setStatus("success")}>收到新结果</Button><Button variant="quiet" onClick={() => setStatus("error")}>连接中断</Button></>}
+    </Inline>
+    <AsyncContent status={status} hasContent emptyContent="没有记录"
+      loadingContent={<p role="status" className="m-0 text-support text-muted-foreground">正在刷新，上次结果仍可用</p>}
+      errorContent={<Alert tone="warning" role="alert"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
+      <Stack gap="fields"><p className="m-0 text-body">桑园采叶记录 · 今天 07:55</p><Field><FieldLabel>本地备注</FieldLabel><Input placeholder="记录待核对事项" /></Field></Stack>
+    </AsyncContent>
+  </Stack>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## Autocomplete
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
@@ -927,7 +1028,7 @@ export default function Demo() {
 
 ## Avatar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
@@ -1029,7 +1130,7 @@ export default function Demo() {
 
 ## Badge
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 46f9b4df33cb90e9ca5fbf84ca2a25010b644e7aaddea5fe4884a568c5ea2ecb
@@ -1106,7 +1207,7 @@ export default function Demo() {
 
 ## Breadcrumb
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
@@ -1230,7 +1331,7 @@ export default function Demo() {
 
 ## BulkActionBar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: c8f48a1a7981e1ff7c53d581e28d26e19a61e2cefe8ff78b049d7fd50c78ae35
@@ -1351,7 +1452,7 @@ export default function Demo() {
 
 ## Button
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
@@ -1477,7 +1578,7 @@ export default function Demo() {
 
 ## ButtonGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
@@ -1550,7 +1651,7 @@ export default function Demo() {
 
 ## Calendar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
@@ -1646,7 +1747,7 @@ export default function Demo() {
 
 ## Card
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
@@ -1732,7 +1833,7 @@ export default function Demo() {
 
 ## Chart
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
@@ -1929,7 +2030,7 @@ export default function Demo() {
 
 ## Checkbox
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
@@ -2030,7 +2131,7 @@ export default function Demo() {
 
 ## CheckboxGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
@@ -2132,7 +2233,7 @@ export default function Demo() {
 
 ## CodeBlock
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
 Source SHA-256: e0e34388389dc6b87dd13b6e8f94a92e8ccf7c45b3d1a49a3fe97913a7ce36d1
@@ -2219,7 +2320,7 @@ export default function Demo() {
 
 ## Collapsible
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a
@@ -2314,10 +2415,10 @@ export default function CollapsibleDemo() {
 
 ## Combobox
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7
+Source SHA-256: 8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -2363,6 +2464,8 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - ComboboxPopupProps: type; owner combobox; PASS
 - ComboboxPrimitive: reexport; owner combobox; UNVERIFIED
 - ComboboxProps: type; owner combobox; PASS
+- ComboboxSelect: function; owner combobox; PASS; props: ComboboxSelectProps<Value>
+- ComboboxSelectProps: type; owner combobox; PASS
 - ComboboxSeparator: function; owner combobox; PASS; props: ComboboxPrimitive.Separator.Props & React.RefAttributes<HTMLDivElement>
 - ComboboxStatus: function; owner combobox; PASS; props: ComboboxStatusProps
 - ComboboxStatusProps: type; owner combobox; PASS
@@ -2425,6 +2528,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `positionerProps?`: `ComboboxPrimitive.Positioner.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
+### ComboboxSelect
+- `clearable?`: `boolean`.
+- `controlProps?`: `InputGroupProps | undefined`.
+- `emptyContent`: `React.ReactNode`. 当前查询已完成且没有候选时的内容，由应用说明查询对象。
+- `inputProps?`: `React.ComponentProps<typeof ComboboxInput> | undefined`.
+- `items`: `readonly Value[]`. 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。
+- `itemToStringLabel`: `(item: Value) => string`. 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。
+- `loading?`: `boolean`. 只表达调用方的请求事实，不发请求、不推断失败。
+- `popupProps?`: `ComboboxPopupProps | undefined`.
+- `renderItem?`: `((item: Value) => React.ReactNode) | undefined`.
+- plus 34 inherited (@base-ui/react 34); not expanded, see the installed declarations
+
 ### ComboboxSeparator
 - no props declared by this library
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
@@ -2455,6 +2570,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+#### ComboboxSelect
+A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.
+- items / itemToStringLabel / renderItem: readonly Value[] / (item: Value) => string / (item: Value) => ReactNode. items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality.
+- emptyContent / loading / clearable: ReactNode / boolean / boolean; default — / false / true. emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action.
+- inputProps / controlProps / popupProps: ComboboxInput props / InputGroupProps / ComboboxPopupProps. Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props.
 
 #### Combobox
 A public Base UI candidate context, single-value by default, with caller-provided options.
@@ -2502,21 +2623,129 @@ The installed Base UI Combobox namespace.
 Source: apps/docs/src/content/combobox/demos/01-choice.tsx
 ```tsx
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { ComboboxSelect } from "@qingye_lab/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
 const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {
   const [value, setValue] = useState<string | null>("陈致远");
-  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel><Combobox items={members} value={value} onValueChange={setValue}><ComboboxControl><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field></form>;
+  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel>
+    <ComboboxSelect items={members} itemToStringLabel={member => member} value={value} onValueChange={setValue} emptyContent="没有匹配的成员" />
+  </Field></form>;
 }
 ```
 
 4 more examples: see the component page and its Markdown file.
 
+## Confirm
+
+Package: @qingye_lab/ui@4.1.0
+Import: @qingye_lab/ui/components/confirm
+Source: packages/ui/src/components/confirm.tsx
+Source SHA-256: 8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5
+
+Await one explicit decision, then let the caller continue.
+
+### Decision
+await confirm(options) returns approval only; true does not mean a submission succeeded. While a decision is active or closing, additional calls return false immediately without replacing content or queuing. Use ConfirmAction when changes to an object, version, or change must invalidate approval.
+
+### Notes
+- One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.
+- Unmounting the useConfirm owner cancels its own pending decision. Retained functions also resolve false after the owner unmounts.
+- Approval and execution are separate: this component accepts no request callback, displays no submitting state, and infers no success, failure, or unknown outcome.
+- Use ConfirmAction for exact text checks and review after object or version changes; use AlertDialog for direct composition.
+
+### Use and ownership
+- A general flow must await one explicit decision before proceeding.
+- Avoid: Objects, versions, or changes can invalidate approval; use ConfirmAction.
+- Avoid: Execution progress, business outcomes, or notifications belong to the application and feedback components.
+- Library: One pending decision, its boolean result, cancel, abort, unmount cleanup, and modal focus.
+- Application: Decision content, object versions, permissions, submission state, request outcomes, and recovery content.
+
+### Composition
+- ConfirmProvider + useConfirm; the application continues with Button loading, try/finally, and error recovery.
+
+### Responsive behavior
+- Uses AlertDialog's available space, geometry, and focus mechanisms.
+
+### Customization
+- Explicit action names, tone, public popupProps, and existing themes.
+
+### Current exports
+- ConfirmFunction: type; owner confirm; PASS
+- ConfirmOptions: type; owner confirm; PASS
+- ConfirmProvider: function; owner confirm; PASS; props: ConfirmProviderProps
+- ConfirmProviderProps: type; owner confirm; PASS
+- useConfirm: function; owner confirm; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ConfirmProvider
+- `children`: `React.ReactNode`.
+
+### useConfirm
+- takes no props
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.
+- Required providers: ConfirmProvider
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ConfirmContext: without a provider throws; provided by ConfirmProvider
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### ConfirmProvider
+Host one modal decision for descendant useConfirm calls without adding a wrapper element. Place it inside the application's UILocaleProvider.
+- children: ReactNode. Application content using useConfirm. Unmounting the provider resolves an outstanding decision to false.
+
+#### useConfirm
+Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.
+- title / description: ReactNode / ReactNode. Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content.
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default locale.confirm / locale.cancel. Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss.
+- tone: ButtonTone; default 'neutral'. The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission.
+- popupProps: Omit<AlertDialogPopupProps, 'children'>. Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed.
+- signal: AbortSignal. An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started.
+- Promise<boolean>: true | false. Approval immediately resolves true and closes. Cancellation, abort, or unmounting the hook owner or provider resolves false. Business execution does not wait for an exit animation. The application owns execution and recovery through Button loading, try/finally, and inline errors.
+
+### Keyboard
+- Tab / Shift+Tab: Cycle within the active modal. Focus starts on the panel, never automatically on the affirmative action.
+- Enter / Space: Activate the focused explicit choice.
+- Escape: Decline this decision and return to the calling entry or finalFocus target.
+
+### Source example
+#### 等待决定
+Source: apps/docs/src/content/confirm/demos/01-decision.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ConfirmProvider, useConfirm } from "@qingye_lab/ui/components/confirm";
+
+export const meta = { title: "等待决定", titleEn: "Await a decision" };
+
+function Decision() {
+  const confirm = useConfirm();
+  const [decision, setDecision] = useState<string>();
+  return <div className="grid justify-items-start gap-(--qy-field-gap)">
+    <Button variant="bordered" onClick={async () => {
+      const approved = await confirm({ title: "离开草稿？", description: "尚未提交的内容会留在本页，离开后需要重新打开。", confirmLabel: "离开", cancelLabel: "继续编辑" });
+      setDecision(approved ? "决定：离开草稿" : "决定：继续编辑");
+    }}>离开草稿</Button>
+    {decision && <output className="text-support text-muted-foreground">{decision}</output>}
+  </div>;
+}
+
+export default function Demo() { return <ConfirmProvider><Decision /></ConfirmProvider>; }
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## ConfirmAction
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
@@ -2530,6 +2759,7 @@ Confirmation targets the reviewed opening snapshot. Changed identity, version, c
 - Restoring old content does not revive old approval; review again.
 - The application owns action attempts and outcomes. There is no custom timeout, fake success, or automatic retry.
 - Layering, sizes, focus, and consequence association use current public components and centralized presets.
+- Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection.
 
 ### Use and ownership
 - Confirm a specific object, version, and change; review again when content changes.
@@ -2576,6 +2806,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
+- Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection.
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 
@@ -2622,7 +2853,7 @@ export default function Demo() {
 
 ## ContextMenu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
@@ -2783,7 +3014,7 @@ export default function Demo() {
 
 ## Copy button
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
@@ -2868,7 +3099,7 @@ export default function Demo() {
 
 ## CornerMark
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
@@ -2954,17 +3185,18 @@ export default function Demo() {
 
 ## DataTable
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa
+Source SHA-256: 0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842
 
 Comparison, sorting and scoped selection for a real caller-owned collection.
 
 ### Decision
-Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.
+Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map.
 
 ### Notes
+- Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.
 - TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.
 - With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.
 
@@ -2975,6 +3207,7 @@ Applications supply the TanStack instance and getRowId; filtered/page selection 
 - Application: TanStack instance, data, stable identifiers, model configuration, and state.
 
 ### Composition
+- DataTablePattern: Configured sorting, page selection, active rows and pagination without issuing requests.
 - DataTable: A native two-dimensional collection.
 - DataTableSortButton: A real sorting control for the caller instance.
 - DataTableSelectionCell / DataTableSelectAll: Row selection and explicit scope selection.
@@ -2990,6 +3223,12 @@ Applications supply the TanStack instance and getRowId; filtered/page selection 
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
+- DataTablePattern: function; owner data-table; PASS; props: DataTablePatternProps<TData>
+- DataTablePatternChangeDetails: type; owner data-table; PASS
+- DataTablePatternColumn: type; owner data-table; PASS
+- DataTablePatternPagination: type; owner data-table; PASS
+- DataTablePatternProps: type; owner data-table; PASS
+- DataTablePatternState: type; owner data-table; PASS
 - DataTableProps: type; owner data-table; PASS
 - DataTableSelectAll: function; owner data-table; PASS; props: DataTableSelectAllProps<TData>
 - DataTableSelectAllProps: type; owner data-table; PASS
@@ -3002,12 +3241,30 @@ Applications supply the TanStack instance and getRowId; filtered/page selection 
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DataTable
+- `activeRowId?`: `string | null`.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `table`: `TableInstance<TData>`.
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### DataTablePattern
+- `activeRow?`: `{ columnId: string; onActivate?: (row: TData) => void }`. The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent.
+- `busy?`: `boolean`.
+- `caption?`: `React.ReactNode`.
+- `columns`: `readonly DataTablePatternColumn<TData>[]`.
+- `data`: `TData[]`.
+- `defaultState?`: `Partial<DataTablePatternState>`.
+- `emptyContent`: `React.ReactNode`.
+- `getRowId`: `(row: TData) => string`.
+- `mode?`: `"client" | "server"`.
+- `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
+- `pagination?`: `false | DataTablePatternPagination`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `state?`: `DataTablePatternState`.
+- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "activeRowId">`.
+- plus 277 inherited (@types/react 277); not expanded, see the installed declarations
 
 ### DataTableSelectAll
 - `aria-label`: `string`. Defines a string value that labels the current element.
@@ -3041,9 +3298,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
 
+#### DataTablePattern
+Configured sorting, page selection, active rows and pagination without issuing requests.
+- data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required.
+- state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1.
+- mode / pagination: client | server / false | DataTablePatternPagination. Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null.
+- selection: { label, rowLabel, canSelect? }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel.
+- activeRow: { columnId: string, onActivate?: (row: T) => void }. The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent.
+- caption / busy / tableProps / native div props: ReactNode / boolean / DataTableProps / HTML props. Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes.
+
 #### DataTable
 A native two-dimensional collection.
-- table / emptyContent / caption / busy / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows.
+- table / emptyContent / caption / busy / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows.
 - columnDef.meta.rowHeader: boolean. Actual row headers use th scope=row; comparison columns are never automatically hidden.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -3059,16 +3325,15 @@ Row selection and explicit scope selection.
 ### Keyboard
 
 ### Source example
-#### 真实排序与范围选择
+#### 排序、选择与分页
 Source: apps/docs/src/content/data-table/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from "@qingye_lab/ui/components/data-table";
 import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;
+export const meta = { title: "排序、选择与分页", titleEn: "Sorting, selection and pagination" } satisfies DemoMeta;
 
 type Entry = { id: string; label: string; count: number };
 const data: Entry[] = [
@@ -3076,25 +3341,26 @@ const data: Entry[] = [
   { id: "roles", label: "权限与角色", count: 8 },
   { id: "sync", label: "同步与导出", count: 0 },
 ];
+const columns: DataTablePatternColumn<Entry>[] = [
+  { id: "label", header: "名称", accessor: row => row.label, rowHeader: true },
+  { id: "count", header: "记录数", accessor: row => row.count, sortable: true, sortDescFirst: false, numeric: true },
+];
 
 export default function Demo() {
-  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [
-    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。
-    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择当前本地集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },
-    { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
-    { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
-  ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
+  const [state, setState] = React.useState<DataTablePatternState>({ sorting: [], pagination: { page: 1, pageSize: 2 }, rowSelection: {}, activeRowId: null });
+  const selected = data.filter(row => state.rowSelection[row.id]);
   return <Stack>
-    <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
-    <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>
+    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" state={state} onStateChange={setState} pagination={{ pageSizeOptions: [2, 5] }} selection={{ label: "选择当页条目", rowLabel: row => `选择${row.label}` }} activeRow={{ columnId: "label" }} />
+    <output className="text-support text-muted-foreground">已选：{selected.map(row => row.label).join("、") || "无"}</output>
   </Stack>;
 }
 ```
 
+1 more examples: see the component page and its Markdown file.
+
 ## DatePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 9a3ed256b922f4189e88f7275eb8b317b84c8ef31ad6afbc84cdd2db279c66e0
@@ -3188,7 +3454,7 @@ export default function Demo() {
 
 ## DateRangePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
 Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
@@ -3290,7 +3556,7 @@ export default function Demo() {
 
 ## DateTimePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: 290763ec85ab114335ed974e59dfcdfbb6d857d1de258127dfe5da72f343a81e
@@ -3383,7 +3649,7 @@ export default function Demo() {
 
 ## DescriptionList
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 642be77029202e1a51b8583d9d89ca5048613a7fcace731d7af08b3db529529e
@@ -3489,7 +3755,7 @@ export default function Demo() {
 
 ## Dialog
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
@@ -3661,7 +3927,7 @@ export default function Demo() {
 
 ## Drawer
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
 Source SHA-256: 155fc699f13ffd26579fd21761a48300c4a83ba8ecb1112db6146e443eccb83c
@@ -3803,7 +4069,7 @@ export default function DrawerDemo() {
 
 ## Empty
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58
@@ -3907,7 +4173,7 @@ export default function Demo() {
 
 ## Field
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
@@ -4074,7 +4340,7 @@ export default function Demo() {
 
 ## Fieldset
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
@@ -4165,7 +4431,7 @@ export default function Demo() {
 
 ## FileUpload
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: e2db390d8cace757dcb272c8ced3afca616f1537d0d49f79110ae34361955fc6
@@ -4281,7 +4547,7 @@ export default function Demo() {
 
 ## FilterBar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: b38f125404d71978bc70615a66d849c3a72958058c1a86177d918b00b2d6c811
@@ -4438,7 +4704,7 @@ export default function Demo() {
 
 ## Form
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 694187e034dce87a7c83e9e39b7976299568ecbefde556432eb49619dd98468b
@@ -4522,7 +4788,7 @@ export default function Demo() {
 
 ## Heatmap
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
 Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
@@ -4637,7 +4903,7 @@ export default function Demo() {
 
 ## HoverCard
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 0b0ed72c7e1ab6b15fec0f88ef9c3098ec28f695433ec369a810473649f4bfb7
@@ -4738,7 +5004,7 @@ export default function HoverCardDemo() {
 
 ## Input
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098
@@ -4829,7 +5095,7 @@ export default function Demo() {
 
 ## InputGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
@@ -4940,7 +5206,7 @@ export default function Demo() {
 
 ## Item
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -5078,7 +5344,7 @@ export default function Demo() {
 
 ## Kbd
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
@@ -5141,7 +5407,7 @@ export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd>
 
 ## Label
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 2b221cc2db3bc0b20d3fe8b168a04d26a003697fa3a3cb7ea29eb0a4622d6e6a
@@ -5216,7 +5482,7 @@ export default function Demo() {
 
 ## Layout
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: 362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd
@@ -5315,7 +5581,7 @@ export default function Demo() {
 
 ## Link
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
@@ -5384,7 +5650,7 @@ export default function Demo() {
 
 ## Locale switch
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
@@ -5463,7 +5729,7 @@ export default function Demo() {
 
 ## Menu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
@@ -5645,7 +5911,7 @@ export default function Demo() {
 
 ## Meter
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: 4cb7fb3ca4891305dc01cfdccfd1488d4274e6e33dad77a542e5864facd9f09c
@@ -5753,7 +6019,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## MotionProvider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
@@ -5844,7 +6110,7 @@ export default function Demo() {
 
 ## NativeSelect
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
@@ -5937,7 +6203,7 @@ export default function Demo() {
 
 ## NavigationMenu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
@@ -6100,7 +6366,7 @@ export default function Demo() {
 
 ## NumberField
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
 Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
@@ -6225,7 +6491,7 @@ export default function Demo() {
 
 ## OtpField
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e
@@ -6325,7 +6591,7 @@ export default function Demo() {
 
 ## PageHeader
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 534d0136bde2d51dd17682d9aa311fb79fd5667825007d59dc9e35496e8e79de
@@ -6435,18 +6701,18 @@ export default function Demo() {
 
 ## Pagination
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
+Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
 
 Page position, real actions and explicit unknown totals.
 
 ### Decision
-Only current position is derived by comparing root and link page facts. null means an unknown total; no final page or next-page availability is inferred.
+PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.
 
 ### Notes
-- No fetching, routing or automatic page window; unknown totals establish no next-page availability.
+- The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.
 
 ### Use and ownership
 - Results are paged and positions/navigation availability are known.
@@ -6455,6 +6721,7 @@ Only current position is derived by comparing root and link page facts. null mea
 - Application: Page content, current page, known/unknown totals, previous/next availability, and request outcomes.
 
 ### Composition
+- PaginationPattern: Standard composition for local page actions.
 - Pagination: A named nav without generated pages.
 - PaginationList / PaginationItem: ul / li organize page actions.
 - PaginationLink: An anchor with aria-current=page for the current page.
@@ -6469,7 +6736,9 @@ Only current position is derived by comparing root and link page facts. null mea
 - Configure brand, light or dark mode, and density separately; themes do not change permissions or save policies.
 
 ### Current exports
+- normalizePaginationValue: function; owner pagination; PASS; props: PaginationValue
 - Pagination: function; owner pagination; PASS; props: PaginationProps
+- PaginationChangeDetails: type; owner pagination; PASS
 - PaginationEllipsis: function; owner pagination; PASS; props: PaginationEllipsisProps
 - PaginationEllipsisProps: type; owner pagination; PASS
 - PaginationItem: function; owner pagination; PASS; props: PaginationItemProps
@@ -6480,9 +6749,12 @@ Only current position is derived by comparing root and link page facts. null mea
 - PaginationListProps: type; owner pagination; PASS
 - PaginationNext: function; owner pagination; PASS; props: PaginationNextProps
 - PaginationNextProps: type; owner pagination; PASS
+- PaginationPattern: function; owner pagination; PASS; props: PaginationPatternProps
+- PaginationPatternProps: type; owner pagination; PASS
 - PaginationPrevious: function; owner pagination; PASS; props: PaginationPreviousProps
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
+- PaginationValue: type; owner pagination; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -6518,6 +6790,16 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `variant?`: `"solid" | "bordered" | "quiet"`.
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
+### PaginationPattern
+- `defaultValue?`: `PaginationValue`.
+- `disabled?`: `boolean`.
+- `hasNextPage?`: `boolean`.
+- `onValueChange?`: `(value: PaginationValue, details: PaginationChangeDetails) => void`.
+- `pageSizeOptions?`: `readonly number[]`. Omit to hide the page-size control. Values must be distinct positive integers.
+- `totalCount`: `number`.
+- `value?`: `PaginationValue`.
+- plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
+
 ### PaginationPrevious
 - `className?`: `string`.
 - `data-slot?`: `string`.
@@ -6537,6 +6819,13 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+#### PaginationPattern
+Standard composition for local page actions.
+- value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1.
+- totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page.
+- pageSizeOptions / disabled: readonly number[] / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state.
+- aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, total summaries and page-size labels come from locale.
 
 #### Pagination
 A named nav without generated pages.
@@ -6563,28 +6852,16 @@ An omitted-pages marker, not a final page.
 ### Keyboard
 
 ### Source example
-#### 已知总页数
+#### 页码与每页条数
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
-import { useState } from "react";
-import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "已知总页数", titleEn: "Known total" } satisfies DemoMeta;
-
-const total = 5;
+export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  const [page, setPage] = useState(2);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>
-        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
 }
 ```
 
@@ -6592,7 +6869,7 @@ export default function Demo() {
 
 ## PasswordInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
 Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
@@ -6680,7 +6957,7 @@ export default function Demo() {
 
 ## PendingValue
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
@@ -6747,7 +7024,7 @@ export default function Demo() { return <PendingValue label="值" actions={<Butt
 
 ## Popover
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
@@ -6914,7 +7191,7 @@ export default function Demo() {
 
 ## Progress
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 632077f82a2a7f9fe11612bf274705097566fb24e322e8d2a0c6e5155960a7cd
@@ -7021,7 +7298,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## Proportion
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
@@ -7100,7 +7377,7 @@ export default function Demo() {
 
 ## Prose
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
@@ -7196,7 +7473,7 @@ export default function Demo() {
 
 ## RadioGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
@@ -7330,7 +7607,7 @@ export default function Demo() {
 
 ## ScatterChart
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
@@ -7428,7 +7705,7 @@ export default function Demo() {
 
 ## Scroll area
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00
@@ -7500,7 +7777,7 @@ export default function Demo() {
 
 ## SearchInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
 Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0
@@ -7586,7 +7863,7 @@ export default function Demo() {
 
 ## Section
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
@@ -7707,7 +7984,7 @@ export default function Demo() {
 
 ## SegmentedControl
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
@@ -7816,7 +8093,7 @@ export default function Demo() {
 
 ## Select
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
@@ -7994,7 +8271,7 @@ export default function Demo() {
 
 ## Separator
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
@@ -8075,7 +8352,7 @@ export default function Demo() {
 
 ## SeverityMark
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -8167,7 +8444,7 @@ export default function Demo() {
 
 ## Sidebar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
@@ -8351,7 +8628,7 @@ export default function Demo() {
 
 ## Skeleton
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
@@ -8452,7 +8729,7 @@ export default function Demo() {
 
 ## Slider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
@@ -8599,7 +8876,7 @@ export default function Demo() {
 
 ## Sparkline
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202
@@ -8684,7 +8961,7 @@ export default function Demo() {
 
 ## Stat
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 070c2a8b77a2a0a4f07303b3a7b14aa9885b83c5d0737fb44c9475edee23f921
@@ -8815,7 +9092,7 @@ export default function Demo() {
 
 ## StatusDot
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
@@ -8850,7 +9127,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### StatusDot
 - `label?`: `string`.
-- `status`: `"neutral" | "info" | "warning" | "unknown" | "online" | "offline" | "error" | "pending" | "in-progress"`.
+- `status`: `"neutral" | "info" | "warning" | "pending" | "error" | "unknown" | "online" | "offline" | "in-progress"`.
 - plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -8882,7 +9159,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 
 ## Steps
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -8985,7 +9262,7 @@ export default function Demo() {
 
 ## Switch
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
@@ -9101,7 +9378,7 @@ export default function Demo() {
 
 ## Table
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
@@ -9250,7 +9527,7 @@ export default function Demo() {
 
 ## Tabs
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
@@ -9353,7 +9630,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 
 ## TagInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
 Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
@@ -9466,7 +9743,7 @@ export default function Demo() {
 
 ## Textarea
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
@@ -9562,7 +9839,7 @@ export default function Demo() {
 
 ## ThemeProvider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
@@ -9685,7 +9962,7 @@ export default function Demo() {
 
 ## Timeline
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
@@ -9788,7 +10065,7 @@ export default function Demo() {
 
 ## Toast
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
@@ -9911,7 +10188,7 @@ export default function Demo() {
 
 ## Toc
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
@@ -10029,7 +10306,7 @@ export default function Demo() {
 
 ## Toggle
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -10129,7 +10406,7 @@ export default function Demo() {
 
 ## ToggleGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
@@ -10238,7 +10515,7 @@ export default function Demo() {
 
 ## Toolbar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -10357,7 +10634,7 @@ export default function Demo() {
 
 ## Tooltip
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 645246aacae85bd1b03d598d0514c39ada5e0c0a7bb1aec070bb3441cc6e11f6
@@ -10507,7 +10784,7 @@ export default function Demo() {
 
 ## Tree
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
@@ -10623,7 +10900,7 @@ export default function Demo() {
 
 ## Typography
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656
@@ -10731,7 +11008,7 @@ export default function Demo() {
 
 ## Virtual list
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98
@@ -10815,7 +11092,7 @@ export default function Demo() {
 
 ## Workspace
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
 Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
@@ -10843,6 +11120,8 @@ A page's name, summary and page-level actions live in the header, so the body ha
 - Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.
 - The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.
 - Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal.
+- See /examples/records: Stack holds filters and DataTablePattern; hide detail for a list, or use a minmax(0,…) grid for list and detail. WorkspaceContent owns vertical scrolling; TableContainer handles horizontal overflow. Pagination scrolls with the list; the header stays fixed.
+- The active record is independent from batch selection. Filtering and paging retain the active record and notes keyed by stable ID. Detail sits alongside the list at xl and stacks below it otherwise; 2:1 is a capacity choice for this task.
 
 ### Responsive behavior
 - At narrow width (the library's single sm: point) the surface fills the viewport; whether the sidebar collapses or becomes a drawer is the application's choice.
@@ -11011,4 +11290,4 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.

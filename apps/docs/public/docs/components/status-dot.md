@@ -1,6 +1,6 @@
 # 状态 StatusDot
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
@@ -35,7 +35,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### StatusDot
 - `label?`: `string`.
-- `status`: `"neutral" | "info" | "warning" | "unknown" | "online" | "offline" | "error" | "pending" | "in-progress"`.
+- `status`: `"neutral" | "info" | "warning" | "pending" | "error" | "unknown" | "online" | "offline" | "in-progress"`.
 - plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers

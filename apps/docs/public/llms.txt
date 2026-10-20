@@ -1,12 +1,12 @@
-# Qingye UI 4.0.0
+# Qingye UI 4.1.0
 
-> Facts for @qingye_lab/ui@4.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@4.1.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.md)
 - [Style contract](/ai/style.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.md): method sources
-- [Installation](/ai/v4.0.0/installation.md)
+- [Installation](/ai/v4.1.0/installation.md)
 - [Main skill](/ai/SKILL.md)
 - [Full text](/llms-full.txt): the guide, installation and every component in one file
 
@@ -14,6 +14,7 @@
 - [分组展开 Accordion](/docs/components/accordion.md): 按各项名称主动展开内容。
 - [就地说明 Alert](/docs/components/alert.md): 静态就地说明，按实际需要显式宣告。
 - [决定对话框 AlertDialog](/docs/components/alert-dialog.md): 阻断整个工作面，要求对当前对象作出明确选择。
+- [异步内容 AsyncContent](/docs/components/async-content.md): 分别呈现请求状态与仍然有效的内容。
 - [建议输入 Autocomplete](/docs/components/autocomplete.md): 编辑自由文本，候选作为可接受的建议。
 - [身份图像 Avatar](/docs/components/avatar.md): 同一身份视觉样本的图片与回退。
 - [标记 Badge](/docs/components/badge.md): 短标记，保留内容名称而不推断状态。
@@ -29,6 +30,7 @@
 - [代码 CodeBlock](/docs/components/code-block.md): 文本原样展示、可选标题栏与真实复制结果。
 - [单段展开 Collapsible](/docs/components/collapsible.md): 主动展开同一对象的补充内容。
 - [候选输入 Combobox](/docs/components/combobox.md): 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
+- [异步确认 Confirm](/docs/components/confirm.md): 等待一次明确决定，再由调用方继续执行。
 - [确认动作 ConfirmAction](/docs/components/confirm-action.md): 确认具体对象、版本与变更，内容改变后重新阅读。
 - [上下文菜单 ContextMenu](/docs/components/context-menu.md): 当前对象的右键增强命令入口。
 - [复制按钮 CopyButton](/docs/components/copy-button.md): 复制给定文本，并呈现剪贴板实际写入结果。

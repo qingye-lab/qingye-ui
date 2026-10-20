@@ -1,6 +1,6 @@
 # 命令菜单 Menu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166

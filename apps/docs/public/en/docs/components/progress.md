@@ -1,6 +1,6 @@
 # Progress
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 632077f82a2a7f9fe11612bf274705097566fb24e322e8d2a0c6e5155960a7cd

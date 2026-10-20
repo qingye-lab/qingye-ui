@@ -1,6 +1,6 @@
 # ConfirmAction
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
@@ -14,6 +14,7 @@ Confirmation targets the reviewed opening snapshot. Changed identity, version, c
 - Restoring old content does not revive old approval; review again.
 - The application owns action attempts and outcomes. There is no custom timeout, fake success, or automatic retry.
 - Layering, sizes, focus, and consequence association use current public components and centralized presets.
+- Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection.
 
 ## Use and ownership
 - Confirm a specific object, version, and change; review again when content changes.
@@ -60,6 +61,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ## Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
+- Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection.
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 

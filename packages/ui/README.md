@@ -2,9 +2,9 @@
 
 器用为本，关系为法，合宜为度。
 
-`@qingye_lab/ui` provides **93 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
+`@qingye_lab/ui` provides **95 component modules** built from the Qingye design basis and accessible Base UI primitives. React and React DOM must satisfy `^19.2.0`. Applications own data, validation, permissions, requests and results; the library provides controls and reusable structural relationships.
 
-Version **4.0.0** removes three unused tokens and two chart constants from 3.0.0; 3.0.0 changed the locale, DateRangePicker and FileUpload contracts from 2.0.0; 2.0.0 changed Button, Input, Toast, chart, Tooltip and Tabs from 1.0.0, which itself broke from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
+Version **4.1.0** adds DataTablePattern, PaginationPattern, ConfirmProvider/useConfirm, AsyncContent and ComboboxSelect, including confirmation recovery after React Activity/StrictMode lifecycle reconnection. Existing advanced and snapshot APIs remain available. 4.0.0 removed three unused tokens and two chart constants from 3.0.0; 3.0.0 changed the locale, DateRangePicker and FileUpload contracts from 2.0.0; 2.0.0 changed Button, Input, Toast, chart, Tooltip and Tabs from 1.0.0, which itself broke from 0.4.x. Review the current public entries and migration boundaries below before upgrading.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Install from npm:
 npm install @qingye_lab/ui
 ```
 
-Or use `pnpm add @qingye_lab/ui` / `yarn add @qingye_lab/ui`. To select this version explicitly, install `@qingye_lab/ui@4.0.0`.
+Or use `pnpm add @qingye_lab/ui` / `yarn add @qingye_lab/ui`. To select this version explicitly, install `@qingye_lab/ui@4.1.0`.
 
 Chart requires the optional `recharts` peer (`^3.10.1`); DataTable requires the optional `@tanstack/react-table` peer (`^8.21.3`). Install the peer for the component you use. If automatic peer installation is disabled, also satisfy Recharts' `react-is` requirement with a version compatible with your React version.
 
@@ -88,7 +88,7 @@ Override the documented `--qy-*` roles after importing the stylesheet. The packa
 
 ## Documentation and AI guidance
 
-The documentation site is configured at [ui.xflux.cc](https://ui.xflux.cc), with English pages under [/en](https://ui.xflux.cc/en). It provides the current component pages, playgrounds and six simple compositions: InputGroup, Tabs, FilterBar, BulkActionBar, DataTable and Toolbar. These examples use local data and state.
+The documentation site is configured at [ui.xflux.cc](https://ui.xflux.cc), with English pages under [/en](https://ui.xflux.cc/en). It provides component pages, playgrounds, a workspace application at `/examples/workspace`, and a list/detail reference at `/examples/records`. These examples use local data and state.
 
 The repository's root `design.md` is the sole authored public design guide. The package includes generated [design.md](./design.md) and [design.en.md](./design.en.md), retaining the method names 名实相符、相成相制、布白有用、随境取度、展开有据、进退相承.
 
@@ -96,7 +96,7 @@ Use the resources for your installed version:
 
 - [catalog.json](./catalog.json): current entries, API guidance and documentation metadata. Unknown inherited requirements remain unknown rather than runtime guarantees.
 - [ai/SKILL.md](./ai/SKILL.md) and [ai/SKILL.en.md](./ai/SKILL.en.md): Chinese and English AI adoption guidance.
-- [ai/v4.0.0/llms.txt](./ai/v4.0.0/llms.txt) and [ai/v4.0.0/en/llms.txt](./ai/v4.0.0/en/llms.txt): versioned component indexes.
+- [ai/v4.1.0/llms.txt](./ai/v4.1.0/llms.txt) and [ai/v4.1.0/en/llms.txt](./ai/v4.1.0/en/llms.txt): versioned component indexes.
 - `registry/`: project provider/theme templates that reference the shared package.
 
 Merge the guide's adoption snippets into the consumer's existing `AGENTS.md` and `design.md`, preserving its project constraints. Generated package resources are projections of the authored sources. `@qingye/tooling` is a separate package; the UI runtime does not require it.

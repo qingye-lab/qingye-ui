@@ -1,6 +1,6 @@
 # 虚拟列表 VirtualList
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98

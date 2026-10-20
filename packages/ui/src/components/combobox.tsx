@@ -131,4 +131,40 @@ export function ComboboxStatus({ loading, count, visible, className, children, .
   const status = useCandidateStatus({ children, loading, count, visible });
   return <ComboboxPrimitive.Status data-slot="combobox-status" {...props} className={state => cn(status.className, typeof className === "function" ? className(state) : className)}>{status.content}</ComboboxPrimitive.Status>;
 }
+
+export type ComboboxSelectProps<Value = string> = Omit<ComboboxProps<Value>, "children" | "multiple" | "items" | "itemToStringLabel"> & {
+  /** 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。 */
+  items: readonly Value[];
+  /** 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。 */
+  itemToStringLabel: (item: Value) => string;
+  renderItem?: ((item: Value) => React.ReactNode) | undefined;
+  /** 当前查询已完成且没有候选时的内容，由应用说明查询对象。 */
+  emptyContent: React.ReactNode;
+  /** 只表达调用方的请求事实，不发请求、不推断失败。 */
+  loading?: boolean | undefined;
+  clearable?: boolean | undefined;
+  inputProps?: React.ComponentProps<typeof ComboboxInput> | undefined;
+  controlProps?: InputGroupProps | undefined;
+  popupProps?: ComboboxPopupProps | undefined;
+};
+
+/**
+ * 单选的常用组合：一条编辑边界、清除、展开、候选和真实的空/加载状态。
+ * value 是确认值，inputValue 是查询草稿；生命周期、竞态与候选是否仍有效由应用持有。
+ * 不另建状态机，全部选择、键盘、Field 与表单行为继续由 Combobox 原语承担。
+ */
+export function ComboboxSelect<Value>({ items, itemToStringLabel, renderItem, emptyContent, loading = false, clearable = true, inputProps, controlProps, popupProps, ...props }: ComboboxSelectProps<Value>) {
+  return <Combobox {...props} items={items} itemToStringLabel={itemToStringLabel}>
+    <ComboboxControl {...controlProps}>
+      <ComboboxInput aria-busy={loading || undefined} {...inputProps} />
+      {clearable && <ComboboxClear />}
+      <ComboboxTrigger />
+    </ComboboxControl>
+    <ComboboxPopup {...popupProps}>
+      <ComboboxStatus loading={loading} visible={loading} />
+      <ComboboxEmpty>{loading ? null : emptyContent}</ComboboxEmpty>
+      <ComboboxList aria-busy={loading || undefined}>{(item: Value, index: number) => <ComboboxItem key={props.itemToStringValue?.(item) ?? index} value={item}>{renderItem ? renderItem(item) : itemToStringLabel(item)}</ComboboxItem>}</ComboboxList>
+    </ComboboxPopup>
+  </Combobox>;
+}
 export { ComboboxPrimitive };

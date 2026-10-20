@@ -1,9 +1,9 @@
 # Combobox
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7
+Source SHA-256: 8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -49,6 +49,8 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - ComboboxPopupProps: type; owner combobox; PASS
 - ComboboxPrimitive: reexport; owner combobox; UNVERIFIED
 - ComboboxProps: type; owner combobox; PASS
+- ComboboxSelect: function; owner combobox; PASS; props: ComboboxSelectProps<Value>
+- ComboboxSelectProps: type; owner combobox; PASS
 - ComboboxSeparator: function; owner combobox; PASS; props: ComboboxPrimitive.Separator.Props & React.RefAttributes<HTMLDivElement>
 - ComboboxStatus: function; owner combobox; PASS; props: ComboboxStatusProps
 - ComboboxStatusProps: type; owner combobox; PASS
@@ -111,6 +113,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `positionerProps?`: `ComboboxPrimitive.Positioner.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
+### ComboboxSelect
+- `clearable?`: `boolean`.
+- `controlProps?`: `InputGroupProps | undefined`.
+- `emptyContent`: `React.ReactNode`. 当前查询已完成且没有候选时的内容，由应用说明查询对象。
+- `inputProps?`: `React.ComponentProps<typeof ComboboxInput> | undefined`.
+- `items`: `readonly Value[]`. 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。
+- `itemToStringLabel`: `(item: Value) => string`. 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。
+- `loading?`: `boolean`. 只表达调用方的请求事实，不发请求、不推断失败。
+- `popupProps?`: `ComboboxPopupProps | undefined`.
+- `renderItem?`: `((item: Value) => React.ReactNode) | undefined`.
+- plus 34 inherited (@base-ui/react 34); not expanded, see the installed declarations
+
 ### ComboboxSeparator
 - no props declared by this library
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
@@ -141,6 +155,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+### ComboboxSelect
+A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.
+- items / itemToStringLabel / renderItem: readonly Value[] / (item: Value) => string / (item: Value) => ReactNode. items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality.
+- emptyContent / loading / clearable: ReactNode / boolean / boolean; default — / false / true. emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action.
+- inputProps / controlProps / popupProps: ComboboxInput props / InputGroupProps / ComboboxPopupProps. Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props.
 
 ### Combobox
 A public Base UI candidate context, single-value by default, with caller-provided options.
@@ -188,41 +208,41 @@ The installed Base UI Combobox namespace.
 Source: apps/docs/src/content/combobox/demos/01-choice.tsx
 ```tsx
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { ComboboxSelect } from "@qingye_lab/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
 const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {
   const [value, setValue] = useState<string | null>("陈致远");
-  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel><Combobox items={members} value={value} onValueChange={setValue}><ComboboxControl><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field></form>;
+  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel>
+    <ComboboxSelect items={members} itemToStringLabel={member => member} value={value} onValueChange={setValue} emptyContent="没有匹配的成员" />
+  </Field></form>;
 }
 ```
 
-### 密度与只读
+### 密度、只读与禁用
 Source: apps/docs/src/content/combobox/demos/02-density.tsx
 ```tsx
-import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { ComboboxSelect } from "@qingye_lab/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 
-export const meta = { title: "密度与只读", titleEn: "Density and read-only" };
+export const meta = { title: "密度、只读与禁用", titleEn: "Density, read-only, and disabled" };
 
 const items = ["机柜 A", "机柜 B", "机柜 C"];
 
 export default function Demo() {
   return (
-    <div className="grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)">
+    <div className="grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>
             <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
-            <Combobox items={items} defaultValue="机柜 A">
-              <ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl>
-              <ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup>
-            </Combobox>
+            <ComboboxSelect items={items} itemToStringLabel={item => item} defaultValue="机柜 A" emptyContent="没有匹配的机柜" />
           </Field>
         </div>
       ))}
-      <Field><FieldLabel>只读候选</FieldLabel><Combobox readOnly items={items} defaultValue="机柜 A"><ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl></Combobox></Field>
+      <Field><FieldLabel>只读候选</FieldLabel><ComboboxSelect readOnly items={items} itemToStringLabel={item => item} defaultValue="机柜 A" emptyContent="没有匹配的机柜" /></Field>
+      <Field><FieldLabel>禁用候选</FieldLabel><ComboboxSelect disabled items={items} itemToStringLabel={item => item} defaultValue="机柜 A" emptyContent="没有匹配的机柜" /></Field>
     </div>
   );
 }
@@ -275,8 +295,8 @@ export default function Demo() {
 ### 异步候选
 Source: apps/docs/src/content/combobox/demos/05-async.tsx
 ```tsx
-import { useEffect, useState } from "react";
-import { Combobox, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxStatus, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { useEffect, useRef, useState } from "react";
+import { ComboboxSelect } from "@qingye_lab/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "异步候选", titleEn: "Asynchronous candidates" };
 const directory = ["3 号楼东侧", "3 号楼西侧", "4 号楼南门", "4 号楼北门", "5 号楼大堂", "东区车库", "西区车库"];
@@ -284,28 +304,35 @@ const directory = ["3 号楼东侧", "3 号楼西侧", "4 号楼南门", "4 号�
 function search(query: string, signal: AbortSignal) {
   return new Promise<string[]>((resolve, reject) => {
     const timer = setTimeout(() => resolve(directory.filter(place => place.includes(query.trim()))), 600);
-    signal.addEventListener("abort", () => { clearTimeout(timer); reject(signal.reason); });
+    signal.addEventListener("abort", () => { clearTimeout(timer); reject(signal.reason); }, { once: true });
   });
 }
-export default function Demo() {
+type SearchResult = { query: string; status: "ready"; items: string[] } | { query: string; status: "error" };
+export default function Demo({ searchPlaces = search }: { searchPlaces?: typeof search }) {
   const [value, setValue] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<SearchResult | null>(null);
+  const generation = useRef(0);
   useEffect(() => {
     const controller = new AbortController();
-    setLoading(true);
-    search(query, controller.signal).then(found => { setResults(found); setLoading(false); }, () => {});
+    const request = ++generation.current;
+    setResult(null);
+    // 取消是资源回收；代次检查另外阻止忽略 AbortSignal 的迟到回包覆盖新查询。
+    searchPlaces(query, controller.signal).then(items => {
+      if (!controller.signal.aborted && request === generation.current) setResult({ query, status: "ready", items });
+    }, () => {
+      if (!controller.signal.aborted && request === generation.current) setResult({ query, status: "error" });
+    });
     return () => controller.abort();
-  }, [query]);
+  }, [query, searchPlaces]);
+  // 查询改变后，同一帧就停止展示上一次查询的候选；确认值仍由 value 独立保留。
+  const current = result?.query === query ? result : null;
+  const loading = current === null;
+  const results = current?.status === "ready" ? current.items : [];
   return <form className="max-w-xs"><Field name="place"><FieldLabel>位置</FieldLabel>
-    <Combobox items={results} filter={null} value={value} onValueChange={setValue} inputValue={query} onInputValueChange={setQuery}>
-      <ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl>
-      <ComboboxPopup>
-        <ComboboxStatus loading={loading} count={loading ? undefined : results.length} visible={loading} />
-        <ComboboxEmpty>{loading ? null : "没有匹配的位置"}</ComboboxEmpty>
-        <ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList>
-      </ComboboxPopup>
-    </Combobox></Field></form>;
+    <ComboboxSelect items={results} itemToStringLabel={place => place} filter={null}
+      value={value} onValueChange={setValue} inputValue={query} onInputValueChange={next => { if (next !== query) { setResult(null); setQuery(next); } }}
+      loading={loading} emptyContent={current?.status === "error" ? "查询失败，请修改搜索后重试" : "没有匹配的位置"} />
+  </Field></form>;
 }
 ```

@@ -2,7 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxCollection, ComboboxControl, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSeparator, ComboboxStatus, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxCollection, ComboboxControl, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSelect, ComboboxSeparator, ComboboxStatus, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["甲", "乙", "丙"];
@@ -114,4 +114,87 @@ test("status announces loading and result count through one polite region, and a
   rerender(<Example loading={false} count={0} />);
   expect(status).toBeEmptyDOMElement();
   expect(status.isConnected).toBe(true);
+});
+
+test("the convenience composition keeps confirmed objects separate from query edits and explicit clear", async () => {
+  const members = [{ id: "1", name: "陈致远" }, { id: "2", name: "李一鸣" }];
+  const ref = createRef<HTMLInputElement>();
+  const onKeyDown = vi.fn();
+  function Example() {
+    const [value, setValue] = useState<(typeof members)[number] | null>(members[0]!);
+    return <form><Field name="owner"><FieldLabel>负责人</FieldLabel><ComboboxSelect items={members} itemToStringLabel={member => member.name} itemToStringValue={member => member.id}
+      value={value} onValueChange={setValue} emptyContent="没有匹配的成员" renderItem={member => <strong>{member.name}</strong>}
+      inputProps={{ ref, render: <input data-custom="yes" />, onKeyDown }} controlProps={{ className: "caller-control" }} popupProps={{ className: "caller-popup" }} /></Field></form>;
+  }
+  const { container } = render(<Example />);
+  const input = screen.getByRole("combobox", { name: "负责人" });
+  const formValue = () => new FormData(container.querySelector("form")!).get("owner");
+  expect(ref.current).toBe(input);
+  expect(input).toHaveAttribute("data-custom", "yes");
+  expect(input).toHaveValue("陈致远");
+  expect(container.querySelector(".caller-control")).toContainElement(input);
+  await userEvent.clear(input);
+  expect(formValue()).toBe("1");
+  await userEvent.type(input, "李");
+  expect(formValue()).toBe("1");
+  expect((await screen.findByRole("option", { name: "李一鸣" })).querySelector("strong")).toBeInTheDocument();
+  expect(screen.getByRole("listbox").closest(".caller-popup")).toBeInTheDocument();
+  await userEvent.keyboard("{ArrowDown}{Enter}");
+  expect(input).toHaveValue("李一鸣");
+  expect(formValue()).toBe("2");
+  expect(onKeyDown).toHaveBeenCalled();
+  await userEvent.click(screen.getByRole("button", { name: "清除选择" }));
+  expect(formValue()).toBe("");
+  expect(input).toHaveValue("");
+  expect(input).toHaveFocus();
+});
+
+test.each(["readOnly", "disabled", "fieldDisabled"])("the convenience composition respects %s through all public parts", async state => {
+  const change = vi.fn();
+  const queryChange = vi.fn();
+  const { container } = render(<form><Field name="choice" disabled={state === "fieldDisabled"}><FieldLabel>候选</FieldLabel>
+    <ComboboxSelect items={items} itemToStringLabel={item => item} defaultValue="甲" emptyContent="没有匹配项" onValueChange={change} onInputValueChange={queryChange} disabled={state === "disabled"} readOnly={state === "readOnly"} />
+  </Field></form>);
+  const input = screen.getByRole("combobox");
+  if (state === "readOnly") expect(input).toHaveAttribute("readonly");
+  else expect(input).toBeDisabled();
+  for (const button of screen.getAllByRole("button")) {
+    expect(button).toBeDisabled();
+    await userEvent.click(button);
+  }
+  fireEvent.change(input, { target: { value: "乙" } });
+  expect(change).not.toHaveBeenCalled();
+  expect(queryChange).not.toHaveBeenCalled();
+  expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(state === "readOnly" ? ["甲"] : []);
+  expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+});
+
+test("the convenience composition exposes no-match and loading as distinct facts, and can omit Clear", async () => {
+  const props = { items: [] as string[], itemToStringLabel: (item: string) => item, emptyContent: "没有匹配的成员", open: true, inputProps: { "aria-label": "成员" } };
+  const { rerender } = render(<ComboboxSelect {...props} loading clearable={false} />);
+  expect(await screen.findByText("正在加载")).toBeVisible();
+  expect(screen.getByRole("combobox")).toHaveAttribute("aria-busy", "true");
+  expect(screen.queryByText("没有匹配的成员")).not.toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除选择" })).not.toBeInTheDocument();
+  rerender(<ComboboxSelect {...props} loading={false} />);
+  expect(await screen.findByText("没有匹配的成员")).toBeVisible();
+  expect(screen.queryByText("正在加载")).not.toBeInTheDocument();
+  expect(screen.getByRole("combobox")).not.toHaveAttribute("aria-busy");
+});
+
+test("simulated IME confirmation does not select a highlighted candidate; normal Enter does", async () => {
+  const change = vi.fn();
+  render(<ComboboxSelect items={["青叶", "青野"]} itemToStringLabel={item => item} emptyContent="没有匹配项" onValueChange={change} inputProps={{ "aria-label": "候选" }} />);
+  const input = screen.getByRole("combobox");
+  await userEvent.click(input);
+  fireEvent.compositionStart(input);
+  fireEvent.change(input, { target: { value: "青" } });
+  await userEvent.keyboard("{ArrowDown}");
+  fireEvent.keyDown(input, { key: "Enter", code: "Enter", keyCode: 229, isComposing: true });
+  expect(change).not.toHaveBeenCalled();
+  expect(input).toHaveValue("青");
+  fireEvent.compositionEnd(input, { data: "青" });
+  await userEvent.keyboard("{Enter}");
+  expect(change).toHaveBeenCalledWith("青叶", expect.anything());
+  expect(input).toHaveValue("青叶");
 });

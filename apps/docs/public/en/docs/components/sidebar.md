@@ -1,6 +1,6 @@
 # Sidebar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781

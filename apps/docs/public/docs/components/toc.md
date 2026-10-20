@@ -1,6 +1,6 @@
 # 阅读目录 Toc
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067

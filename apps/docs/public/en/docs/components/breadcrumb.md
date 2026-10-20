@@ -1,6 +1,6 @@
 # Breadcrumb
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824

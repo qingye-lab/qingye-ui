@@ -8,22 +8,36 @@ export default {
   "layer": "pattern",
   "source": "local",
   "exports": [
+    "DataTablePattern",
     "DataTable",
     "DataTableSortButton",
     "DataTableSelectionCell",
     "DataTableSelectAll"
   ],
-  "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
-  "decisionsEn": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
+  "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。",
+  "decisionsEn": "Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map.",
   "keywords": ["datagrid", "grid", "table", "sort", "表格", "数据表", "排序", "选择行"],
   "api": [
+    {
+      "name": "DataTablePattern",
+      "description": "配置式排序、当页全选、活动行与分页组合，不发请求。",
+      "descriptionEn": "Configured sorting, page selection, active rows and pagination without issuing requests.",
+      "props": [
+        { "name": "data / columns / getRowId / emptyContent", "type": "T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode", "description": "列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。", "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required." },
+        { "name": "state / defaultState / onStateChange", "type": "DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void", "description": "sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。", "descriptionEn": "A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1." },
+        { "name": "mode / pagination", "type": "client | server / false | DataTablePatternPagination", "description": "client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。", "descriptionEn": "Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null." },
+        { "name": "selection", "type": "{ label, rowLabel, canSelect? }", "description": "启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。", "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel." },
+        { "name": "activeRow", "type": "{ columnId: string, onActivate?: (row: T) => void }", "description": "该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。", "descriptionEn": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent." },
+        { "name": "caption / busy / tableProps / native div props", "type": "ReactNode / boolean / DataTableProps / HTML props", "description": "刷新保留传入行；属性分别归属表格或组合外层，不推断请求成功或失败。", "descriptionEn": "Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes." }
+      ]
+    },
     {
       "name": "DataTable",
       "description": "原生二维集合。",
       "descriptionEn": "A native two-dimensional collection.",
       "props": [
         {
-          "name": "table / emptyContent / caption / busy / containerProps",
+          "name": "table / emptyContent / caption / busy / activeRowId / containerProps",
           "type": "TableInstance<T> / ReactNode / TableContainerProps",
           "description": "getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。",
           "descriptionEn": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows."
@@ -76,10 +90,12 @@ export default {
     }
   ],
   "notes": [
+    "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
     "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
     "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
   ],
   "notesEn": [
+    "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
     "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
     "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
   ],
@@ -100,7 +116,7 @@ export default {
         "表格语义、公共组合与范围选择。"
       ],
       "application": [
-        "TanStack 实例、数据、稳定标识、模型配置与状态。"
+        "数据、稳定标识、服务端结果与业务范围；高级模式另持有 TanStack 实例。"
       ]
     },
     "responsive": [

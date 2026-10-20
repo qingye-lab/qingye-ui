@@ -9,6 +9,8 @@ export type UILocaleMessages = {
   dismissFileRejection: (name: string) => string;
   toastSuccess: string;
   pagination: string; previousPage: string; nextPage: string; morePages: string;
+  paginationPage: (page: number) => string; paginationPageSize: string;
+  paginationSummary: (page: number, totalPages: number | null, totalCount: number | null) => string;
   sidebar: string;
   showOptions: string; clearSelection: string; remove: string;
   decrease: string; increase: string; numberInput: string;
@@ -58,6 +60,8 @@ export const zhCN: UILocale = {
     dismissFileRejection: (name) => `忽略 ${name} 的拒绝提示`,
     toastSuccess: "成功",
     pagination: "分页", previousPage: "上一页", nextPage: "下一页", morePages: "更多页",
+    paginationPage: page => `第 ${page} 页`, paginationPageSize: "每页条数",
+    paginationSummary: (page, totalPages, totalCount) => totalCount === 0 ? "0 条" : totalPages === null ? `第 ${page} 页，总数未知` : `第 ${page} 页，共 ${totalPages} 页 · ${totalCount} 条`,
     sidebar: "工作区导航",
     showOptions: "展开选项", clearSelection: "清除选择", remove: "移除",
     decrease: "减少", increase: "增加", numberInput: "数值输入",

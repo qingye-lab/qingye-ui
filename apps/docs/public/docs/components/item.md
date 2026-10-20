@@ -1,6 +1,6 @@
 # 条目 Item
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23

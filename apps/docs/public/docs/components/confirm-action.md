@@ -1,6 +1,6 @@
 # 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
@@ -14,6 +14,7 @@ Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
 - 内容恢复成旧值也不会自动复活旧认可；必须重新阅读。
 - 确认次数与结果事实归应用；没有自建超时、假成功或自动重试。
 - 浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。
+- 一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。
 
 ## Use and ownership
 - 确认具体对象、版本与变更，内容改变后重新阅读。
@@ -60,6 +61,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ## Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
+- 一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 

@@ -1,6 +1,6 @@
 # Input
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098

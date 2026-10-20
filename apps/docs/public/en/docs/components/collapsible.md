@@ -1,6 +1,6 @@
 # Collapsible
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a

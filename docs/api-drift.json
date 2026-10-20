@@ -10,20 +10,21 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 93,
+    "components": 95,
     "byStatus": {
-      "type-resolved": 93
+      "type-resolved": 95
     },
     "documentedButMissing": 0,
     "undocumented": 96,
     "undocumentedDeclaredInThisComponentsFile": 11,
     "unresolved": 0,
-    "uncheckedWrittenNames": 167,
+    "uncheckedWrittenNames": 178,
     "uncheckedByReason": {
-      "generic": 127,
+      "generic": 128,
       "part-not-applicable": 32,
-      "dotted-path-into-another-type": 2,
-      "no-resolved-part-in-group": 6
+      "no-resolved-part-in-group": 13,
+      "unparsed": 3,
+      "dotted-path-into-another-type": 2
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
@@ -837,6 +838,13 @@
       "reason": "part-not-applicable"
     },
     {
+      "component": "async-content",
+      "part": "AsyncContent",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
       "component": "autocomplete",
       "part": "AutocompletePrimitive",
       "written": "AutocompletePrimitive",
@@ -970,6 +978,62 @@
       "reason": "part-not-applicable"
     },
     {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "title / description",
+      "token": "title",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "title / description",
+      "token": "description",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "confirmLabel / cancelLabel",
+      "token": "confirmLabel",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "confirmLabel / cancelLabel",
+      "token": "cancelLabel",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "tone",
+      "token": "tone",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "popupProps",
+      "token": "popupProps",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "signal",
+      "token": "signal",
+      "reason": "no-resolved-part-in-group"
+    },
+    {
+      "component": "confirm",
+      "part": "useConfirm",
+      "written": "Promise<boolean>",
+      "token": "Promise<boolean>",
+      "reason": "unparsed"
+    },
+    {
       "component": "confirm-action",
       "part": "ConfirmActionPrimitive",
       "written": "ConfirmActionPrimitive",
@@ -1024,6 +1088,13 @@
       "written": "disabled / onClick / render / ref / ARIA",
       "token": "ARIA",
       "reason": "generic"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTablePattern",
+      "written": "caption / busy / tableProps / native div props",
+      "token": "native div props",
+      "reason": "unparsed"
     },
     {
       "component": "data-table",
@@ -1430,6 +1501,13 @@
       "written": "level / step / render / ref / Heading props",
       "token": "Heading props",
       "reason": "generic"
+    },
+    {
+      "component": "pagination",
+      "part": "PaginationPattern",
+      "written": "aria-label / render / ref / native nav props",
+      "token": "native nav props",
+      "reason": "unparsed"
     },
     {
       "component": "pagination",

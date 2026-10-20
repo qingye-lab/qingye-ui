@@ -1,6 +1,6 @@
-# Qingye UI 4.0.0: full text
+# Qingye UI 4.1.0: full text
 
-> @qingye_lab/ui@4.0.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
+> @qingye_lab/ui@4.1.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
 
 # 第一部分 设计指南
 
@@ -692,7 +692,7 @@ Implement and verify within the authorized scope, and report ownership, actual e
 
 # 第二部分 安装
 
-## Install @qingye_lab/ui 4.0.0
+## Install @qingye_lab/ui 4.1.0
 
 Use this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.
 
@@ -706,11 +706,11 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# 第三部分 组件 (93)
+# 第三部分 组件 (95)
 
 ## 分组展开 Accordion
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
@@ -820,7 +820,7 @@ export default function AccordionDemo() {
 
 ## 就地说明 Alert
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert
 Source: packages/ui/src/components/alert.tsx
 Source SHA-256: bff3bfb8e4d04d941b8f839f3a8e741a3ba46c92a9011143453a4bcff9e064c6
@@ -925,7 +925,7 @@ export default function Demo() {
 
 ## 决定对话框 AlertDialog
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
@@ -1093,9 +1093,110 @@ export default function Demo() {
 }
 ```
 
+## 异步内容 AsyncContent
+
+Package: @qingye_lab/ui@4.1.0
+Import: @qingye_lab/ui/components/async-content
+Source: packages/ui/src/components/async-content.tsx
+Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2
+
+分别呈现请求状态与仍然有效的内容。
+
+### Decision
+status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。
+
+### Notes
+- 错误不会自动宣告。需要即时宣告时由应用在 errorContent 中提供 role=alert；避免把整块有效内容设为 live region。
+- hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。
+
+### Use and ownership
+- 首次加载、零结果、失败和保留有效内容的刷新。
+- Avoid: 把权限、只读或局部失败塞进互斥的整页请求状态。
+- Avoid: 用本组件管理请求、缓存或查询竞态。
+- Library: 反馈与内容的稳定结构，pending 时保留内容区的 aria-busy；加载提示作为它的兄弟节点，避免播报被 busy 祖先延迟。
+- Application: 请求、取消、迟到结果隔离、数据有效性、权限、草稿与重试。
+
+### Composition
+- 权限与只读说明放在 children 的相应部位；局部失败使用局部 AsyncContent 或 Alert。
+
+### Responsive behavior
+- 不创建滚动区；长反馈和恢复动作由所组合组件换行。
+
+### Customization
+- 先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。
+- 品牌、明暗和密度分别配置，主题不改变权限或保存策略。
+
+### Current exports
+- AsyncContent: function; owner async-content; PASS; props: AsyncContentProps
+- AsyncContentProps: type; owner async-content; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AsyncContent
+- `children?`: `ReactNode`.
+- `emptyContent`: `ReactNode`.
+- `errorContent`: `ReactNode`.
+- `hasContent`: `boolean`. 是否还有可用的内容。刷新与刷新失败时保持 true，避免卸载草稿与焦点。
+- `loadingContent?`: `ReactNode`.
+- `status`: `"pending" | "success" | "error"`. 应用声明的最近一次请求事实；组件不发请求，也不推断结果。
+- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### AsyncContent
+不发请求的内容状态组合。
+- status: "pending" | "success" | "error". 应用声明请求事实，不用超时猜测失败。
+- hasContent / children: boolean / ReactNode. 有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。
+- emptyContent / loadingContent / errorContent: ReactNode. emptyContent 必填；error 状态必须提供 errorContent。加载默认读 locale。重试动作由应用提供。
+- render / ref / native props: useRender.ComponentProps<div>. 实际根节点的语义与属性；默认不建立 live region。
+
+### Keyboard
+
+### Source example
+#### 刷新失败保留备注
+Source: apps/docs/src/content/async-content/demos/01-retained.tsx
+```tsx
+import { useState } from "react";
+import { Alert, AlertDescription } from "@qingye_lab/ui/components/alert";
+import { AsyncContent } from "@qingye_lab/ui/components/async-content";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "刷新失败保留备注", titleEn: "Keep a note after refresh failure" } satisfies DemoMeta;
+
+export default function Demo() {
+  const [status, setStatus] = useState<"pending" | "success" | "error">("success");
+  // 用显式事件模拟请求完成；不会留下计时器，也不会把时间经过当作失败。
+  return <Stack>
+    <Inline>
+      <Button variant="bordered" disabled={status === "pending"} onClick={() => setStatus("pending")}>刷新记录</Button>
+      {status === "pending" && <><Button variant="quiet" onClick={() => setStatus("success")}>收到新结果</Button><Button variant="quiet" onClick={() => setStatus("error")}>连接中断</Button></>}
+    </Inline>
+    <AsyncContent status={status} hasContent emptyContent="没有记录"
+      loadingContent={<p role="status" className="m-0 text-support text-muted-foreground">正在刷新，上次结果仍可用</p>}
+      errorContent={<Alert tone="warning" role="alert"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
+      <Stack gap="fields"><p className="m-0 text-body">桑园采叶记录 · 今天 07:55</p><Field><FieldLabel>本地备注</FieldLabel><Input placeholder="记录待核对事项" /></Field></Stack>
+    </AsyncContent>
+  </Stack>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
@@ -1271,7 +1372,7 @@ export default function Demo() {
 
 ## 身份图像 Avatar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
@@ -1373,7 +1474,7 @@ export default function Demo() {
 
 ## 标记 Badge
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 46f9b4df33cb90e9ca5fbf84ca2a25010b644e7aaddea5fe4884a568c5ea2ecb
@@ -1450,7 +1551,7 @@ export default function Demo() {
 
 ## 路径 Breadcrumb
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
@@ -1574,7 +1675,7 @@ export default function Demo() {
 
 ## 批量操作 BulkActionBar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: c8f48a1a7981e1ff7c53d581e28d26e19a61e2cefe8ff78b049d7fd50c78ae35
@@ -1695,7 +1796,7 @@ export default function Demo() {
 
 ## 按钮 Button
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
@@ -1821,7 +1922,7 @@ export default function Demo() {
 
 ## 动作组 ButtonGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
@@ -1894,7 +1995,7 @@ export default function Demo() {
 
 ## 日历 Calendar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
@@ -1990,7 +2091,7 @@ export default function Demo() {
 
 ## 卡片 Card
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
@@ -2076,7 +2177,7 @@ export default function Demo() {
 
 ## 图表 Chart
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
@@ -2273,7 +2374,7 @@ export default function Demo() {
 
 ## 复选框 Checkbox
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
@@ -2374,7 +2475,7 @@ export default function Demo() {
 
 ## 复选组 CheckboxGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
@@ -2476,7 +2577,7 @@ export default function Demo() {
 
 ## 代码 CodeBlock
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
 Source SHA-256: e0e34388389dc6b87dd13b6e8f94a92e8ccf7c45b3d1a49a3fe97913a7ce36d1
@@ -2563,7 +2664,7 @@ export default function Demo() {
 
 ## 单段展开 Collapsible
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a
@@ -2658,10 +2759,10 @@ export default function CollapsibleDemo() {
 
 ## 候选输入 Combobox
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7
+Source SHA-256: 8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 
@@ -2707,6 +2808,8 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 - ComboboxPopupProps: type; owner combobox; PASS
 - ComboboxPrimitive: reexport; owner combobox; UNVERIFIED
 - ComboboxProps: type; owner combobox; PASS
+- ComboboxSelect: function; owner combobox; PASS; props: ComboboxSelectProps<Value>
+- ComboboxSelectProps: type; owner combobox; PASS
 - ComboboxSeparator: function; owner combobox; PASS; props: ComboboxPrimitive.Separator.Props & React.RefAttributes<HTMLDivElement>
 - ComboboxStatus: function; owner combobox; PASS; props: ComboboxStatusProps
 - ComboboxStatusProps: type; owner combobox; PASS
@@ -2769,6 +2872,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `positionerProps?`: `ComboboxPrimitive.Positioner.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
+### ComboboxSelect
+- `clearable?`: `boolean`.
+- `controlProps?`: `InputGroupProps | undefined`.
+- `emptyContent`: `React.ReactNode`. 当前查询已完成且没有候选时的内容，由应用说明查询对象。
+- `inputProps?`: `React.ComponentProps<typeof ComboboxInput> | undefined`.
+- `items`: `readonly Value[]`. 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。
+- `itemToStringLabel`: `(item: Value) => string`. 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。
+- `loading?`: `boolean`. 只表达调用方的请求事实，不发请求、不推断失败。
+- `popupProps?`: `ComboboxPopupProps | undefined`.
+- `renderItem?`: `((item: Value) => React.ReactNode) | undefined`.
+- plus 34 inherited (@base-ui/react 34); not expanded, see the installed declarations
+
 ### ComboboxSeparator
 - no props declared by this library
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
@@ -2799,6 +2914,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+#### ComboboxSelect
+平铺单选的便捷组合：编辑边界、输入、清除、展开与候选面；确认值与查询仍独立，可受控或非受控。分组、多选或不同解剖继续用公开部件。
+- items / itemToStringLabel / renderItem: readonly Value[] / (item: Value) => string / (item: Value) => ReactNode. items 和 itemToStringLabel 必填，名称同时用于输入与过滤；renderItem 可丰富候选呈现。对象提交身份用既有 itemToStringValue，比较用 isItemEqualToValue。
+- emptyContent / loading / clearable: ReactNode / boolean / boolean; default — / false / true. emptyContent 必填；loading 只显示调用方的加载事实，此时不声称无匹配。请求、取消、迟到回包与有效候选由应用持有。clearable 控制是否提供明确清除选择的动作。
+- inputProps / controlProps / popupProps: ComboboxInput props / InputGroupProps / ComboboxPopupProps. 分别透传输入命名、ARIA、事件、render、ref，编辑边界与浮层定制。确认值、查询、表单、禁用及只读沿用 Combobox Root 属性。
 
 #### Combobox
 公开 Base UI 候选上下文，默认单值；不强加业务选项。
@@ -2846,21 +2967,129 @@ Written descriptions; the list above is the type-resolved fact.
 Source: apps/docs/src/content/combobox/demos/01-choice.tsx
 ```tsx
 import { useState } from "react";
-import { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from "@qingye_lab/ui/components/combobox";
+import { ComboboxSelect } from "@qingye_lab/ui/components/combobox";
 import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
 export const meta = { title: "确认候选", titleEn: "Confirm a candidate" };
 const members = ["陈致远", "李一鸣", "王一帆", "赵子纯"];
 export default function Demo() {
   const [value, setValue] = useState<string | null>("陈致远");
-  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel><Combobox items={members} value={value} onValueChange={setValue}><ComboboxControl><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field></form>;
+  return <form className="max-w-xs"><Field name="owner"><FieldLabel>负责人</FieldLabel>
+    <ComboboxSelect items={members} itemToStringLabel={member => member} value={value} onValueChange={setValue} emptyContent="没有匹配的成员" />
+  </Field></form>;
 }
 ```
 
 4 more examples: see the component page and its Markdown file.
 
+## 异步确认 Confirm
+
+Package: @qingye_lab/ui@4.1.0
+Import: @qingye_lab/ui/components/confirm
+Source: packages/ui/src/components/confirm.tsx
+Source SHA-256: 8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5
+
+等待一次明确决定，再由调用方继续执行。
+
+### Decision
+await confirm(options) 只返回是否同意；true 不表示提交成功。当前决定及退场结束前，后续调用立即返回 false，不替换内容也不排队。涉及对象、版本或变更失效时使用 ConfirmAction。
+
+### Notes
+- 同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。
+- 调用 useConfirm 的组件卸载会取消它自己的未决决定；保留的旧函数在卸载后也只返回 false。
+- 授权与执行分开：组件不接收 onConfirm 请求函数，不显示提交中，不推断成功、失败或结果未知。
+- 需要文字核对、对象与版本变化后重新审阅时使用 ConfirmAction；一般组合控制使用 AlertDialog。
+
+### Use and ownership
+- 一般流程需要在继续前等待一个明确决定。
+- Avoid: 对象、版本或变更会改变而需要重新审阅；使用 ConfirmAction。
+- Avoid: 执行中进度、业务结果或通知；由应用和反馈组件承接。
+- Library: 单个未决决定、布尔结果、取消、中止、卸载清理与模态焦点。
+- Application: 决定内容、对象版本、权限、提交状态、请求结果与恢复内容。
+
+### Composition
+- ConfirmProvider + useConfirm；确认后由应用 Button loading、try/finally 与错误恢复接续。
+
+### Responsive behavior
+- 直接消费 AlertDialog 的可用空间、几何与焦点机制。
+
+### Customization
+- 明确动作名称、tone、公共 popupProps 与现有主题。
+
+### Current exports
+- ConfirmFunction: type; owner confirm; PASS
+- ConfirmOptions: type; owner confirm; PASS
+- ConfirmProvider: function; owner confirm; PASS; props: ConfirmProviderProps
+- ConfirmProviderProps: type; owner confirm; PASS
+- useConfirm: function; owner confirm; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ConfirmProvider
+- `children`: `React.ReactNode`.
+
+### useConfirm
+- takes no props
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- 同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。
+- Required providers: ConfirmProvider
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context ConfirmContext: without a provider throws; provided by ConfirmProvider
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### ConfirmProvider
+为后代 useConfirm 承载一个模态决定，不额外渲染包裹元素。放在应用的 UILocaleProvider 内。
+- children: ReactNode. 调用 useConfirm 的应用内容；Provider 卸载时未决 Promise 返回 false。
+
+#### useConfirm
+返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。
+- title / description: ReactNode / ReactNode. 必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default locale.confirm / locale.cancel. 明确继续与保留动作；显式文字优先。取消按钮和 Escape 都返回 false；点遮罩不关闭。
+- tone: ButtonTone; default 'neutral'. 确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。
+- popupProps: Omit<AlertDialogPopupProps, 'children'>. 复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。
+- signal: AbortSignal. 已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。
+- Promise<boolean>: true | false. 确认立即返回 true 并关窗；取消、中止、hook 调用方或 Provider 卸载均返回 false。业务执行不等待退场动画；应用用 Button loading、try/finally 和就地错误承接执行与恢复。
+
+### Keyboard
+- Tab / Shift+Tab: 在当前模态决定内循环；默认进入面板，不自动聚焦确认按钮。
+- Enter / Space: 激活当前聚焦的明确选择。
+- Escape: 拒绝此次决定，返回调用入口或 finalFocus。
+
+### Source example
+#### 等待决定
+Source: apps/docs/src/content/confirm/demos/01-decision.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ConfirmProvider, useConfirm } from "@qingye_lab/ui/components/confirm";
+
+export const meta = { title: "等待决定", titleEn: "Await a decision" };
+
+function Decision() {
+  const confirm = useConfirm();
+  const [decision, setDecision] = useState<string>();
+  return <div className="grid justify-items-start gap-(--qy-field-gap)">
+    <Button variant="bordered" onClick={async () => {
+      const approved = await confirm({ title: "离开草稿？", description: "尚未提交的内容会留在本页，离开后需要重新打开。", confirmLabel: "离开", cancelLabel: "继续编辑" });
+      setDecision(approved ? "决定：离开草稿" : "决定：继续编辑");
+    }}>离开草稿</Button>
+    {decision && <output className="text-support text-muted-foreground">{decision}</output>}
+  </div>;
+}
+
+export default function Demo() { return <ConfirmProvider><Decision /></ConfirmProvider>; }
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
@@ -2874,6 +3103,7 @@ Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
 - 内容恢复成旧值也不会自动复活旧认可；必须重新阅读。
 - 确认次数与结果事实归应用；没有自建超时、假成功或自动重试。
 - 浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。
+- 一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。
 
 ### Use and ownership
 - 确认具体对象、版本与变更，内容改变后重新阅读。
@@ -2920,6 +3150,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
+- 一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 
@@ -2966,7 +3197,7 @@ export default function Demo() {
 
 ## 上下文菜单 ContextMenu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
@@ -3127,7 +3358,7 @@ export default function Demo() {
 
 ## 复制按钮 CopyButton
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
@@ -3212,7 +3443,7 @@ export default function Demo() {
 
 ## 角标 CornerMark
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
@@ -3298,17 +3529,18 @@ export default function Demo() {
 
 ## 数据集合 DataTable
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa
+Source SHA-256: 0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842
 
 调用方真实集合的比较、排序与范围选择。
 
 ### Decision
-TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。
+常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。
 
 ### Notes
+- 标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。
 - TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。
 - 只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。
 
@@ -3316,9 +3548,10 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 - 真实集合按共同维度比较并需要排序或选择。
 - Avoid: 不请求服务、不猜总数、不把未知当空、不自动删列。
 - Library: 表格语义、公共组合与范围选择。
-- Application: TanStack 实例、数据、稳定标识、模型配置与状态。
+- Application: 数据、稳定标识、服务端结果与业务范围；高级模式另持有 TanStack 实例。
 
 ### Composition
+- DataTablePattern：配置式排序、当页全选、活动行与分页组合，不发请求。
 - DataTable：原生二维集合。
 - DataTableSortButton：应用实例的真实排序入口。
 - DataTableSelectionCell / DataTableSelectAll：行选择与显式范围选择。
@@ -3334,6 +3567,12 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
+- DataTablePattern: function; owner data-table; PASS; props: DataTablePatternProps<TData>
+- DataTablePatternChangeDetails: type; owner data-table; PASS
+- DataTablePatternColumn: type; owner data-table; PASS
+- DataTablePatternPagination: type; owner data-table; PASS
+- DataTablePatternProps: type; owner data-table; PASS
+- DataTablePatternState: type; owner data-table; PASS
 - DataTableProps: type; owner data-table; PASS
 - DataTableSelectAll: function; owner data-table; PASS; props: DataTableSelectAllProps<TData>
 - DataTableSelectAllProps: type; owner data-table; PASS
@@ -3346,12 +3585,30 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DataTable
+- `activeRowId?`: `string | null`.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `table`: `TableInstance<TData>`.
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### DataTablePattern
+- `activeRow?`: `{ columnId: string; onActivate?: (row: TData) => void }`. The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent.
+- `busy?`: `boolean`.
+- `caption?`: `React.ReactNode`.
+- `columns`: `readonly DataTablePatternColumn<TData>[]`.
+- `data`: `TData[]`.
+- `defaultState?`: `Partial<DataTablePatternState>`.
+- `emptyContent`: `React.ReactNode`.
+- `getRowId`: `(row: TData) => string`.
+- `mode?`: `"client" | "server"`.
+- `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
+- `pagination?`: `false | DataTablePatternPagination`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `state?`: `DataTablePatternState`.
+- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "activeRowId">`.
+- plus 277 inherited (@types/react 277); not expanded, see the installed declarations
 
 ### DataTableSelectAll
 - `aria-label`: `string`. Defines a string value that labels the current element.
@@ -3385,9 +3642,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
 
+#### DataTablePattern
+配置式排序、当页全选、活动行与分页组合，不发请求。
+- data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. 列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。
+- state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。
+- mode / pagination: client | server / false | DataTablePatternPagination. client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。
+- selection: { label, rowLabel, canSelect? }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。
+- activeRow: { columnId: string, onActivate?: (row: T) => void }. 该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。
+- caption / busy / tableProps / native div props: ReactNode / boolean / DataTableProps / HTML props. 刷新保留传入行；属性分别归属表格或组合外层，不推断请求成功或失败。
+
 #### DataTable
 原生二维集合。
-- table / emptyContent / caption / busy / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。
+- table / emptyContent / caption / busy / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -3403,16 +3669,15 @@ Written descriptions; the list above is the type-resolved fact.
 ### Keyboard
 
 ### Source example
-#### 真实排序与范围选择
+#### 排序、选择与分页
 Source: apps/docs/src/content/data-table/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from "@qingye_lab/ui/components/data-table";
 import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;
+export const meta = { title: "排序、选择与分页", titleEn: "Sorting, selection and pagination" } satisfies DemoMeta;
 
 type Entry = { id: string; label: string; count: number };
 const data: Entry[] = [
@@ -3420,25 +3685,26 @@ const data: Entry[] = [
   { id: "roles", label: "权限与角色", count: 8 },
   { id: "sync", label: "同步与导出", count: 0 },
 ];
+const columns: DataTablePatternColumn<Entry>[] = [
+  { id: "label", header: "名称", accessor: row => row.label, rowHeader: true },
+  { id: "count", header: "记录数", accessor: row => row.count, sortable: true, sortDescFirst: false, numeric: true },
+];
 
 export default function Demo() {
-  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [
-    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。
-    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择当前本地集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },
-    { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
-    { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
-  ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
+  const [state, setState] = React.useState<DataTablePatternState>({ sorting: [], pagination: { page: 1, pageSize: 2 }, rowSelection: {}, activeRowId: null });
+  const selected = data.filter(row => state.rowSelection[row.id]);
   return <Stack>
-    <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
-    <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>
+    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" state={state} onStateChange={setState} pagination={{ pageSizeOptions: [2, 5] }} selection={{ label: "选择当页条目", rowLabel: row => `选择${row.label}` }} activeRow={{ columnId: "label" }} />
+    <output className="text-support text-muted-foreground">已选：{selected.map(row => row.label).join("、") || "无"}</output>
   </Stack>;
 }
 ```
 
+1 more examples: see the component page and its Markdown file.
+
 ## 日期输入 DatePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 9a3ed256b922f4189e88f7275eb8b317b84c8ef31ad6afbc84cdd2db279c66e0
@@ -3532,7 +3798,7 @@ export default function Demo() {
 
 ## 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
 Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
@@ -3634,7 +3900,7 @@ export default function Demo() {
 
 ## 日期时间 DateTimePicker
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: 290763ec85ab114335ed974e59dfcdfbb6d857d1de258127dfe5da72f343a81e
@@ -3727,7 +3993,7 @@ export default function Demo() {
 
 ## 名称与值 DescriptionList
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 642be77029202e1a51b8583d9d89ca5048613a7fcace731d7af08b3db529529e
@@ -3833,7 +4099,7 @@ export default function Demo() {
 
 ## 对话框 Dialog
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
@@ -4005,7 +4271,7 @@ export default function Demo() {
 
 ## 边缘工作面 Drawer
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
 Source SHA-256: 155fc699f13ffd26579fd21761a48300c4a83ba8ecb1112db6146e443eccb83c
@@ -4147,7 +4413,7 @@ export default function DrawerDemo() {
 
 ## 空与未知 Empty
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58
@@ -4251,7 +4517,7 @@ export default function Demo() {
 
 ## 字段 Field
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
@@ -4418,7 +4684,7 @@ export default function Demo() {
 
 ## 字段组 Fieldset
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
@@ -4509,7 +4775,7 @@ export default function Demo() {
 
 ## 文件输入 FileUpload
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: e2db390d8cace757dcb272c8ced3afca616f1537d0d49f79110ae34361955fc6
@@ -4625,7 +4891,7 @@ export default function Demo() {
 
 ## 筛选条件 FilterBar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: b38f125404d71978bc70615a66d849c3a72958058c1a86177d918b00b2d6c811
@@ -4782,7 +5048,7 @@ export default function Demo() {
 
 ## 表单 Form
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 694187e034dce87a7c83e9e39b7976299568ecbefde556432eb49619dd98468b
@@ -4866,7 +5132,7 @@ export default function Demo() {
 
 ## 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
 Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
@@ -4981,7 +5247,7 @@ export default function Demo() {
 
 ## 链接预览 HoverCard
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 0b0ed72c7e1ab6b15fec0f88ef9c3098ec28f695433ec369a810473649f4bfb7
@@ -5082,7 +5348,7 @@ export default function HoverCardDemo() {
 
 ## 输入框 Input
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098
@@ -5173,7 +5439,7 @@ export default function Demo() {
 
 ## 输入组合 InputGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
@@ -5284,7 +5550,7 @@ export default function Demo() {
 
 ## 条目 Item
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -5422,7 +5688,7 @@ export default function Demo() {
 
 ## 键位 Kbd
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
@@ -5485,7 +5751,7 @@ export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd>
 
 ## 标签 Label
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 2b221cc2db3bc0b20d3fe8b168a04d26a003697fa3a3cb7ea29eb0a4622d6e6a
@@ -5560,7 +5826,7 @@ export default function Demo() {
 
 ## 布局 Layout
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: 362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd
@@ -5659,7 +5925,7 @@ export default function Demo() {
 
 ## 链接 Link
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
@@ -5728,7 +5994,7 @@ export default function Demo() {
 
 ## 语言切换 LocaleSwitch
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
@@ -5807,7 +6073,7 @@ export default function Demo() {
 
 ## 命令菜单 Menu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
@@ -5989,7 +6255,7 @@ export default function Demo() {
 
 ## 测量 Meter
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: 4cb7fb3ca4891305dc01cfdccfd1488d4274e6e33dad77a542e5864facd9f09c
@@ -6097,7 +6363,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 动效策略 MotionProvider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/motion-provider
 Source: packages/ui/src/components/motion-provider.tsx
 Source SHA-256: 8afcccdffccd39281b9211a5d474b7e4121f0e3895ba39e1c4d79777f664f8b2
@@ -6188,7 +6454,7 @@ export default function Demo() {
 
 ## 原生选择 NativeSelect
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
@@ -6281,7 +6547,7 @@ export default function Demo() {
 
 ## 导航菜单 NavigationMenu
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
@@ -6444,7 +6710,7 @@ export default function Demo() {
 
 ## 数值输入 NumberField
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
 Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
@@ -6569,7 +6835,7 @@ export default function Demo() {
 
 ## 分段文本 OtpField
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e
@@ -6669,7 +6935,7 @@ export default function Demo() {
 
 ## 页面标题 PageHeader
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 534d0136bde2d51dd17682d9aa311fb79fd5667825007d59dc9e35496e8e79de
@@ -6779,18 +7045,18 @@ export default function Demo() {
 
 ## 分页 Pagination
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
+Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
 
 页位置、真实入口与明确的未知总数。
 
 ### Decision
-只从 root page 与 link page 相等推导当前位置。总页数 null 表示未知；不创建末页或推断下一页存在。
+PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 pageSize 一次通知。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。
 
 ### Notes
-- 不请求数据、保存路由或自动截取页码；未知总数不证明有无下一页。
+- 标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。
 
 ### Use and ownership
 - 结果按页呈现，页位置和方向可用性已知。
@@ -6799,6 +7065,7 @@ Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
 - Application: 页内容、当前页、总数或未知、前后页可用性与请求结果。
 
 ### Composition
+- PaginationPattern：本地页动作的标准组合。
 - Pagination：有名称的 nav，不生成页码。
 - PaginationList / PaginationItem：ul / li 组织页面入口。
 - PaginationLink：a，匹配当前页时 aria-current=page。
@@ -6813,7 +7080,9 @@ Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
 - 品牌、明暗和密度分别配置，主题不改变权限或保存策略。
 
 ### Current exports
+- normalizePaginationValue: function; owner pagination; PASS; props: PaginationValue
 - Pagination: function; owner pagination; PASS; props: PaginationProps
+- PaginationChangeDetails: type; owner pagination; PASS
 - PaginationEllipsis: function; owner pagination; PASS; props: PaginationEllipsisProps
 - PaginationEllipsisProps: type; owner pagination; PASS
 - PaginationItem: function; owner pagination; PASS; props: PaginationItemProps
@@ -6824,9 +7093,12 @@ Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
 - PaginationListProps: type; owner pagination; PASS
 - PaginationNext: function; owner pagination; PASS; props: PaginationNextProps
 - PaginationNextProps: type; owner pagination; PASS
+- PaginationPattern: function; owner pagination; PASS; props: PaginationPatternProps
+- PaginationPatternProps: type; owner pagination; PASS
 - PaginationPrevious: function; owner pagination; PASS; props: PaginationPreviousProps
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
+- PaginationValue: type; owner pagination; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -6862,6 +7134,16 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `variant?`: `"solid" | "bordered" | "quiet"`.
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
+### PaginationPattern
+- `defaultValue?`: `PaginationValue`.
+- `disabled?`: `boolean`.
+- `hasNextPage?`: `boolean`.
+- `onValueChange?`: `(value: PaginationValue, details: PaginationChangeDetails) => void`.
+- `pageSizeOptions?`: `readonly number[]`. Omit to hide the page-size control. Values must be distinct positive integers.
+- `totalCount`: `number`.
+- `value?`: `PaginationValue`.
+- plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
+
 ### PaginationPrevious
 - `className?`: `string`.
 - `data-slot?`: `string`.
@@ -6881,6 +7163,13 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+#### PaginationPattern
+本地页动作的标准组合。
+- value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. { page, pageSize } 原子更新；page 从 1 开始。reason 为 page、page-size 或 total-change。条数改变同时回到第 1 页。
+- totalCount / hasNextPage: number | null / boolean. 非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。
+- pageSizeOptions / disabled: readonly number[] / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。
+- aria-label / render / ref / native nav props: PaginationProps. 转发到 nav；可访问页名、总数摘要与条数标签来自 locale。
 
 #### Pagination
 有名称的 nav，不生成页码。
@@ -6907,28 +7196,16 @@ a，匹配当前页时 aria-current=page。
 ### Keyboard
 
 ### Source example
-#### 已知总页数
+#### 页码与每页条数
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
-import { useState } from "react";
-import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "已知总页数", titleEn: "Known total" } satisfies DemoMeta;
-
-const total = 5;
+export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  const [page, setPage] = useState(2);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>
-        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
 }
 ```
 
@@ -6936,7 +7213,7 @@ export default function Demo() {
 
 ## 密码输入 PasswordInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
 Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
@@ -7024,7 +7301,7 @@ export default function Demo() {
 
 ## 结果未知 PendingValue
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
@@ -7091,7 +7368,7 @@ export default function Demo() { return <PendingValue label="值" actions={<Butt
 
 ## 浮起面板 Popover
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
@@ -7258,7 +7535,7 @@ export default function Demo() {
 
 ## 进度 Progress
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 632077f82a2a7f9fe11612bf274705097566fb24e322e8d2a0c6e5155960a7cd
@@ -7365,7 +7642,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 构成 Proportion
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
@@ -7444,7 +7721,7 @@ export default function Demo() {
 
 ## 长文 Prose
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
@@ -7540,7 +7817,7 @@ export default function Demo() {
 
 ## 单选组 RadioGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
@@ -7674,7 +7951,7 @@ export default function Demo() {
 
 ## 两量关系 ScatterChart
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
@@ -7772,7 +8049,7 @@ export default function Demo() {
 
 ## 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00
@@ -7844,7 +8121,7 @@ export default function Demo() {
 
 ## 搜索输入 SearchInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
 Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0
@@ -7930,7 +8207,7 @@ export default function Demo() {
 
 ## 区块 Section
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
@@ -8051,7 +8328,7 @@ export default function Demo() {
 
 ## 分段控件 SegmentedControl
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
@@ -8160,7 +8437,7 @@ export default function Demo() {
 
 ## 选择器 Select
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
@@ -8338,7 +8615,7 @@ export default function Demo() {
 
 ## 分隔线 Separator
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
@@ -8419,7 +8696,7 @@ export default function Demo() {
 
 ## 级别 SeverityMark
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -8511,7 +8788,7 @@ export default function Demo() {
 
 ## 侧栏导航 Sidebar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
@@ -8695,7 +8972,7 @@ export default function Demo() {
 
 ## 骨架屏 Skeleton
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
@@ -8796,7 +9073,7 @@ export default function Demo() {
 
 ## 滑块 Slider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
@@ -8943,7 +9220,7 @@ export default function Demo() {
 
 ## 行内趋势 Sparkline
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202
@@ -9028,7 +9305,7 @@ export default function Demo() {
 
 ## 度量 Stat
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 070c2a8b77a2a0a4f07303b3a7b14aa9885b83c5d0737fb44c9475edee23f921
@@ -9159,7 +9436,7 @@ export default function Demo() {
 
 ## 状态 StatusDot
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
@@ -9194,7 +9471,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### StatusDot
 - `label?`: `string`.
-- `status`: `"neutral" | "info" | "warning" | "unknown" | "online" | "offline" | "error" | "pending" | "in-progress"`.
+- `status`: `"neutral" | "info" | "warning" | "pending" | "error" | "unknown" | "online" | "offline" | "in-progress"`.
 - plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -9226,7 +9503,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 
 ## 步骤 Steps
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -9329,7 +9606,7 @@ export default function Demo() {
 
 ## 开关 Switch
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
@@ -9445,7 +9722,7 @@ export default function Demo() {
 
 ## 比较表 Table
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
@@ -9594,7 +9871,7 @@ export default function Demo() {
 
 ## 视角标签 Tabs
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
@@ -9697,7 +9974,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 
 ## 标签集合 TagInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
 Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
@@ -9810,7 +10087,7 @@ export default function Demo() {
 
 ## 多行输入 Textarea
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
@@ -9906,7 +10183,7 @@ export default function Demo() {
 
 ## 主题 ThemeProvider
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
@@ -10029,7 +10306,7 @@ export default function Demo() {
 
 ## 时间序列 Timeline
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
@@ -10132,7 +10409,7 @@ export default function Demo() {
 
 ## 通知 Toast
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
@@ -10255,7 +10532,7 @@ export default function Demo() {
 
 ## 阅读目录 Toc
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
@@ -10373,7 +10650,7 @@ export default function Demo() {
 
 ## 切换按钮 Toggle
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -10473,7 +10750,7 @@ export default function Demo() {
 
 ## 切换组 ToggleGroup
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
@@ -10582,7 +10859,7 @@ export default function Demo() {
 
 ## 工具组 Toolbar
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -10701,7 +10978,7 @@ export default function Demo() {
 
 ## 文字提示 Tooltip
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 645246aacae85bd1b03d598d0514c39ada5e0c0a7bb1aec070bb3441cc6e11f6
@@ -10851,7 +11128,7 @@ export default function Demo() {
 
 ## 层级集合 Tree
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
@@ -10967,7 +11244,7 @@ export default function Demo() {
 
 ## 排版 Typography
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656
@@ -11075,7 +11352,7 @@ export default function Demo() {
 
 ## 虚拟列表 VirtualList
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98
@@ -11159,7 +11436,7 @@ export default function Demo() {
 
 ## 工作面 Workspace
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
 Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
@@ -11187,6 +11464,8 @@ Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
 - Workspace 的子级是 Sidebar 与 WorkspaceSurface；WorkspaceSurface 里依次是 WorkspaceHeader 与 WorkspaceContent。
 - 内容区的内缘由页面给：取 --qy-page-gutter 时与顶栏标题同一条左缘；整幅的表格可以贴边。
 - 页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。
+- 列表参考组合见 /examples/records：Stack 放筛选与 DataTablePattern，关闭详情即为列表；展开时用 minmax(0,…) 网格放列表与详情。WorkspaceContent 唯一拥有纵向滚动，TableContainer 只承接横向溢出。分页随列表滚动，顶栏固定。
+- 活动记录与批量选择独立；筛选或翻页保留活动记录和以稳定 ID 保存的备注。示例详情在 xl 以上并排，以下堆叠；2:1 比例是此任务的容量选择。
 
 ### Responsive behavior
 - 窄屏（与全库同一个 sm: 点）工作面贴满视口；侧栏是否收起或换成抽屉由应用决定。
@@ -11355,4 +11634,4 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.

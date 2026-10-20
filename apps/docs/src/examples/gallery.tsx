@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { NotFoundContent } from "@/pages/not-found";
 
 const WorkspaceApp = lazy(() => import("./workspace"));
+const RecordsPage = lazy(() => import("./records"));
 
 /* 示例的承载：文档站外壳之内，一个固定的框装着正在运行的示例应用。
  * - 站点主导航始终可见，随时回到组件库；应用内的去处由应用自己的侧栏负责，不再另设一条切换条。
@@ -21,6 +22,7 @@ export default function ExamplesGallery() {
         <Routes>
           <Route index element={<Navigate to="workspace" replace />} />
           <Route path="workspace/*" element={<WorkspaceApp />} />
+          <Route path="records" element={<RecordsPage />} />
           <Route path="*" element={<Missing />} />
         </Routes>
       </Suspense>

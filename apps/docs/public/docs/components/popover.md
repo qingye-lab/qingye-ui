@@ -1,6 +1,6 @@
 # 浮起面板 Popover
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f

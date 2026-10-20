@@ -161,6 +161,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/alert-dialog"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/async-content</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/async-content"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/async-content"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/async-content</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/async-content"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/async-content"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/autocomplete</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/autocomplete"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/autocomplete"/>
@@ -309,6 +319,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/combobox</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/combobox"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/combobox"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/confirm</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/confirm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/confirm"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/confirm</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/confirm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/confirm"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/confirm-action</loc>

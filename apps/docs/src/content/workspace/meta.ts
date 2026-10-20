@@ -7,7 +7,7 @@ export default {
     methods: ["名实相符", "相成相制", "布白有用"],
     whenToUse: ["后台类应用的外壳：长期导航在侧，一张工作面承载当前页面。"],
     avoid: ["文档、落地页这类以阅读为主、整页滚动的页面不用；正文里的一段内容用 Section，独立对象用 Card。", "顶栏只放这一页的标题、摘要与页面级操作；全局搜索、通知等应用级入口由应用决定位置，不挤占标题的宽度。", "工作面里不再套第二张同样的纸。"],
-    composition: ["Workspace 的子级是 Sidebar 与 WorkspaceSurface；WorkspaceSurface 里依次是 WorkspaceHeader 与 WorkspaceContent。", "内容区的内缘由页面给：取 --qy-page-gutter 时与顶栏标题同一条左缘；整幅的表格可以贴边。", "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。"],
+    composition: ["Workspace 的子级是 Sidebar 与 WorkspaceSurface；WorkspaceSurface 里依次是 WorkspaceHeader 与 WorkspaceContent。", "内容区的内缘由页面给：取 --qy-page-gutter 时与顶栏标题同一条左缘；整幅的表格可以贴边。", "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。", "列表参考组合见 /examples/records：Stack 放筛选与 DataTablePattern，关闭详情即为列表；展开时用 minmax(0,…) 网格放列表与详情。WorkspaceContent 唯一拥有纵向滚动，TableContainer 只承接横向溢出。分页随列表滚动，顶栏固定。", "活动记录与批量选择独立；筛选或翻页保留活动记录和以稳定 ID 保存的备注。示例详情在 xl 以上并排，以下堆叠；2:1 比例是此任务的容量选择。"],
     stateOwner: {
       library: ["外壳的几何、顶栏的行高与中线、顶栏留给页面的位置、内容区的滚动与焦点落点。"],
       application: ["路由、当前项、页面标题与摘要的内容、操作的真实目标、换页后把焦点移到内容区。"],
@@ -18,7 +18,7 @@ export default {
   designEn: {
     whenToUse: ["The shell of an admin-style application: persistent navigation at the side, one work surface for the current page."],
     avoid: ["Do not use it for reading-first pages that scroll as a whole, such as documentation or landing pages; use Section for a stretch of body content and Card for an independent object.", "The header holds only this page's title, summary and page-level actions; the application places global entries such as search or notifications without taking the title's width.", "Do not nest a second identical sheet inside the surface."],
-    composition: ["Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.", "The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.", "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal."],
+    composition: ["Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.", "The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.", "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal.", "See /examples/records: Stack holds filters and DataTablePattern; hide detail for a list, or use a minmax(0,…) grid for list and detail. WorkspaceContent owns vertical scrolling; TableContainer handles horizontal overflow. Pagination scrolls with the list; the header stays fixed.", "The active record is independent from batch selection. Filtering and paging retain the active record and notes keyed by stable ID. Detail sits alongside the list at xl and stacks below it otherwise; 2:1 is a capacity choice for this task."],
     stateOwner: {
       library: ["The shell geometry, the header's row height and midline, the header's slot for the page, and the content's scrolling and focus target."],
       application: ["Routing, the current item, the page title and summary, the real targets of actions, and moving focus to the content after navigation."],

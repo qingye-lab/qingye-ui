@@ -1,16 +1,17 @@
 # 数据集合 DataTable
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa
+Source SHA-256: 0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842
 
 调用方真实集合的比较、排序与范围选择。
 
 ## Decision
-TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。
+常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。
 
 ## Notes
+- 标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。
 - TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。
 - 只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。
 
@@ -18,9 +19,10 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 - 真实集合按共同维度比较并需要排序或选择。
 - Avoid: 不请求服务、不猜总数、不把未知当空、不自动删列。
 - Library: 表格语义、公共组合与范围选择。
-- Application: TanStack 实例、数据、稳定标识、模型配置与状态。
+- Application: 数据、稳定标识、服务端结果与业务范围；高级模式另持有 TanStack 实例。
 
 ## Composition
+- DataTablePattern：配置式排序、当页全选、活动行与分页组合，不发请求。
 - DataTable：原生二维集合。
 - DataTableSortButton：应用实例的真实排序入口。
 - DataTableSelectionCell / DataTableSelectAll：行选择与显式范围选择。
@@ -36,6 +38,12 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
+- DataTablePattern: function; owner data-table; PASS; props: DataTablePatternProps<TData>
+- DataTablePatternChangeDetails: type; owner data-table; PASS
+- DataTablePatternColumn: type; owner data-table; PASS
+- DataTablePatternPagination: type; owner data-table; PASS
+- DataTablePatternProps: type; owner data-table; PASS
+- DataTablePatternState: type; owner data-table; PASS
 - DataTableProps: type; owner data-table; PASS
 - DataTableSelectAll: function; owner data-table; PASS; props: DataTableSelectAllProps<TData>
 - DataTableSelectAllProps: type; owner data-table; PASS
@@ -48,12 +56,30 @@ TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DataTable
+- `activeRowId?`: `string | null`.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `table`: `TableInstance<TData>`.
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+### DataTablePattern
+- `activeRow?`: `{ columnId: string; onActivate?: (row: TData) => void }`. The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent.
+- `busy?`: `boolean`.
+- `caption?`: `React.ReactNode`.
+- `columns`: `readonly DataTablePatternColumn<TData>[]`.
+- `data`: `TData[]`.
+- `defaultState?`: `Partial<DataTablePatternState>`.
+- `emptyContent`: `React.ReactNode`.
+- `getRowId`: `(row: TData) => string`.
+- `mode?`: `"client" | "server"`.
+- `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
+- `pagination?`: `false | DataTablePatternPagination`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `state?`: `DataTablePatternState`.
+- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "activeRowId">`.
+- plus 277 inherited (@types/react 277); not expanded, see the installed declarations
 
 ### DataTableSelectAll
 - `aria-label`: `string`. Defines a string value that labels the current element.
@@ -87,9 +113,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
 
+### DataTablePattern
+配置式排序、当页全选、活动行与分页组合，不发请求。
+- data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. 列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。
+- state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。
+- mode / pagination: client | server / false | DataTablePatternPagination. client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。
+- selection: { label, rowLabel, canSelect? }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。
+- activeRow: { columnId: string, onActivate?: (row: T) => void }. 该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。
+- caption / busy / tableProps / native div props: ReactNode / boolean / DataTableProps / HTML props. 刷新保留传入行；属性分别归属表格或组合外层，不推断请求成功或失败。
+
 ### DataTable
 原生二维集合。
-- table / emptyContent / caption / busy / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。
+- table / emptyContent / caption / busy / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -105,16 +140,15 @@ Written descriptions; the list above is the type-resolved fact.
 ## Keyboard
 
 ## Source examples
-### 真实排序与范围选择
+### 排序、选择与分页
 Source: apps/docs/src/content/data-table/demos/01-task.tsx
 ```tsx
 import * as React from "react";
-import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
-import { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from "@qingye_lab/ui/components/data-table";
 import { Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "真实排序与范围选择", titleEn: "Real sorting and scoped selection" } satisfies DemoMeta;
+export const meta = { title: "排序、选择与分页", titleEn: "Sorting, selection and pagination" } satisfies DemoMeta;
 
 type Entry = { id: string; label: string; count: number };
 const data: Entry[] = [
@@ -122,18 +156,39 @@ const data: Entry[] = [
   { id: "roles", label: "权限与角色", count: 8 },
   { id: "sync", label: "同步与导出", count: 0 },
 ];
+const columns: DataTablePatternColumn<Entry>[] = [
+  { id: "label", header: "名称", accessor: row => row.label, rowHeader: true },
+  { id: "count", header: "记录数", accessor: row => row.count, sortable: true, sortDescFirst: false, numeric: true },
+];
 
 export default function Demo() {
-  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [
-    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。
-    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择当前本地集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },
-    { accessorKey: "label", meta: { rowHeader: true }, header: "名称" },
-    { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
-  ], []);
-  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
+  const [state, setState] = React.useState<DataTablePatternState>({ sorting: [], pagination: { page: 1, pageSize: 2 }, rowSelection: {}, activeRowId: null });
+  const selected = data.filter(row => state.rowSelection[row.id]);
   return <Stack>
-    <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />
-    <output className="text-support text-muted-foreground">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join("、") || "无"}</output>
+    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" state={state} onStateChange={setState} pagination={{ pageSizeOptions: [2, 5] }} selection={{ label: "选择当页条目", rowLabel: row => `选择${row.label}` }} activeRow={{ columnId: "label" }} />
+    <output className="text-support text-muted-foreground">已选：{selected.map(row => row.label).join("、") || "无"}</output>
   </Stack>;
+}
+```
+
+### 自定实例
+Source: apps/docs/src/content/data-table/demos/02-instance.tsx
+```tsx
+import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { DataTable, DataTableSortButton } from "@qingye_lab/ui/components/data-table";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "自定实例", titleEn: "Custom instance" } satisfies DemoMeta;
+
+type Entry = { id: string; label: string; count: number };
+const data: Entry[] = [{ id: "sensors", label: "接入设备", count: 12 }, { id: "roles", label: "权限与角色", count: 8 }, { id: "sync", label: "同步与导出", count: 0 }];
+const columns: ColumnDef<Entry>[] = [
+  { accessorKey: "label", header: "名称", meta: { rowHeader: true } },
+  { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },
+];
+
+export default function Demo() {
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
+  return <DataTable table={table} caption="本地集合 · 3 项" emptyContent="本地集合没有条目" />;
 }
 ```

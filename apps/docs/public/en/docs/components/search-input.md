@@ -1,6 +1,6 @@
 # SearchInput
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
 Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0

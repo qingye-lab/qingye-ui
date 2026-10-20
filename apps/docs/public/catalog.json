@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -1602,6 +1602,358 @@
       }
     },
     {
+      "name": "async-content",
+      "title": "异步内容 AsyncContent",
+      "description": "分别呈现请求状态与仍然有效的内容。",
+      "category": "反馈",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/async-content",
+      "exports": [
+        "AsyncContent"
+      ],
+      "docs": "/docs/components/async-content",
+      "notes": [
+        "错误不会自动宣告。需要即时宣告时由应用在 errorContent 中提供 role=alert；避免把整块有效内容设为 live region。",
+        "hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。"
+      ],
+      "keywords": [
+        "async",
+        "loading",
+        "refresh",
+        "error",
+        "异步",
+        "刷新",
+        "重试"
+      ],
+      "api": [
+        {
+          "name": "AsyncContent",
+          "description": "不发请求的内容状态组合。",
+          "descriptionEn": "A content-state composition that makes no requests.",
+          "props": [
+            {
+              "name": "status",
+              "type": "\"pending\" | \"success\" | \"error\"",
+              "description": "应用声明请求事实，不用超时猜测失败。",
+              "descriptionEn": "Application-declared request fact; elapsed time never implies failure."
+            },
+            {
+              "name": "hasContent / children",
+              "type": "boolean / ReactNode",
+              "description": "有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。",
+              "descriptionEn": "Valid content stays mounted without automatic disabling, draft clearing or focus movement."
+            },
+            {
+              "name": "emptyContent / loadingContent / errorContent",
+              "type": "ReactNode",
+              "description": "emptyContent 必填；error 状态必须提供 errorContent。加载默认读 locale。重试动作由应用提供。",
+              "descriptionEn": "emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions."
+            },
+            {
+              "name": "render / ref / native props",
+              "type": "useRender.ComponentProps<div>",
+              "description": "实际根节点的语义与属性；默认不建立 live region。",
+              "descriptionEn": "Semantics and props for the actual root; no live region is added by default."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "AsyncContent",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "children",
+                "optional": true,
+                "type": "ReactNode",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:14"
+              },
+              {
+                "name": "emptyContent",
+                "optional": false,
+                "type": "ReactNode",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:15"
+              },
+              {
+                "name": "errorContent",
+                "optional": false,
+                "type": "ReactNode",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:17"
+              },
+              {
+                "name": "hasContent",
+                "optional": false,
+                "type": "boolean",
+                "doc": "是否还有可用的内容。刷新与刷新失败时保持 true，避免卸载草稿与焦点。",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:13"
+              },
+              {
+                "name": "loadingContent",
+                "optional": true,
+                "type": "ReactNode",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:16"
+              },
+              {
+                "name": "status",
+                "optional": false,
+                "type": "\"pending\" | \"success\" | \"error\"",
+                "doc": "应用声明的最近一次请求事实；组件不发请求，也不推断结果。",
+                "declaredAt": "packages/ui/src/components/async-content.tsx:11"
+              }
+            ],
+            "inheritedCount": 280,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 279
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [],
+      "actualExports": [
+        {
+          "name": "AsyncContent",
+          "kind": "function",
+          "owner": "async-content",
+          "module": "@qingye_lab/ui/components/async-content",
+          "propsType": "AsyncContentProps",
+          "signature": "AsyncContent({ status, hasContent, children, emptyContent, loadingContent, errorContent, className, render, ...props }: AsyncContentProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "AsyncContentProps",
+          "kind": "type",
+          "owner": "async-content",
+          "module": "@qingye_lab/ui/components/async-content",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  /** 应用声明的最近一次请求事实；组件不发请求，也不推断结果。 */\n  status: \"pending\" | \"success\" | \"error\";\n  /** 是否还有可用的内容。刷新与刷新失败时保持 true，避免卸载草稿与焦点。 */\n  hasContent: boolean;\n  children?: ReactNode;\n  emptyContent: ReactNode;\n  loadingContent?: ReactNode;\n} & ({ status: \"error\"; errorContent: ReactNode } | { status: \"pending\" | \"success\"; errorContent?: ReactNode })",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "AsyncContentProps",
+          "definition": "export type AsyncContentProps = Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  /** 应用声明的最近一次请求事实；组件不发请求，也不推断结果。 */\n  status: \"pending\" | \"success\" | \"error\";\n  /** 是否还有可用的内容。刷新与刷新失败时保持 true，避免卸载草稿与焦点。 */\n  hasContent: boolean;\n  children?: ReactNode;\n  emptyContent: ReactNode;\n  loadingContent?: ReactNode;\n} & ({ status: \"error\"; errorContent: ReactNode } | { status: \"pending\" | \"success\"; errorContent?: ReactNode });"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "AsyncContent",
+          "import": "@qingye_lab/ui/components/async-content",
+          "owner": "async-content",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "retained",
+          "title": "刷新失败保留备注",
+          "source": "apps/docs/src/content/async-content/demos/01-retained.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/alert",
+            "@qingye_lab/ui/components/async-content",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input",
+            "@qingye_lab/ui/components/layout",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { AsyncContent } from \"@qingye_lab/ui/components/async-content\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"刷新失败保留备注\", titleEn: \"Keep a note after refresh failure\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [status, setStatus] = useState<\"pending\" | \"success\" | \"error\">(\"success\");\n  // 用显式事件模拟请求完成；不会留下计时器，也不会把时间经过当作失败。\n  return <Stack>\n    <Inline>\n      <Button variant=\"bordered\" disabled={status === \"pending\"} onClick={() => setStatus(\"pending\")}>刷新记录</Button>\n      {status === \"pending\" && <><Button variant=\"quiet\" onClick={() => setStatus(\"success\")}>收到新结果</Button><Button variant=\"quiet\" onClick={() => setStatus(\"error\")}>连接中断</Button></>}\n    </Inline>\n    <AsyncContent status={status} hasContent emptyContent=\"没有记录\"\n      loadingContent={<p role=\"status\" className=\"m-0 text-support text-muted-foreground\">正在刷新，上次结果仍可用</p>}\n      errorContent={<Alert tone=\"warning\" role=\"alert\"><Stack gap=\"field\"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant=\"quiet\" onClick={() => setStatus(\"pending\")}>重试</Button></Stack></Alert>}>\n      <Stack gap=\"fields\"><p className=\"m-0 text-body\">桑园采叶记录 · 今天 07:55</p><Field><FieldLabel>本地备注</FieldLabel><Input placeholder=\"记录待核对事项\" /></Field></Stack>\n    </AsyncContent>\n  </Stack>;\n}\n",
+          "sha256": "2024bdd9fef7732fe575e7bbcd433eb141687fd12d8894e1f0c15a11698e96f2"
+        },
+        {
+          "id": "first-load",
+          "title": "首次加载与零结果",
+          "source": "apps/docs/src/content/async-content/demos/02-first-load.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/alert",
+            "@qingye_lab/ui/components/async-content",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/empty",
+            "@qingye_lab/ui/components/layout",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { AsyncContent } from \"@qingye_lab/ui/components/async-content\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Empty, EmptyTitle, EmptyDescription } from \"@qingye_lab/ui/components/empty\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"首次加载与零结果\", titleEn: \"Initial loading and confirmed empty results\" } satisfies DemoMeta;\nexport default function Demo() {\n  const [status, setStatus] = useState<\"pending\" | \"success\" | \"error\">(\"pending\");\n  return <Stack><Inline><Button variant=\"quiet\" onClick={() => setStatus(\"pending\")}>重新加载</Button><Button variant=\"quiet\" onClick={() => setStatus(\"success\")}>收到零条结果</Button><Button variant=\"quiet\" onClick={() => setStatus(\"error\")}>请求失败</Button></Inline>\n    <AsyncContent status={status} hasContent={false}\n      emptyContent={<Empty state=\"empty\"><EmptyTitle level={3}>没有待同步记录</EmptyTitle><EmptyDescription>所有记录均已同步。</EmptyDescription></Empty>}\n      errorContent={<Alert tone=\"danger\" role=\"alert\"><Stack gap=\"field\"><AlertDescription>记录暂时无法加载。</AlertDescription><Button variant=\"bordered\" onClick={() => setStatus(\"pending\")}>重试</Button></Stack></Alert>} />\n  </Stack>;\n}\n",
+          "sha256": "8f8c6598f20e1295ff8a2394209ff2f963db4fd5fffa74efcd06a3f45dd28fc5"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "进退相承",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "首次加载、零结果、失败和保留有效内容的刷新。"
+        ],
+        "avoid": [
+          "把权限、只读或局部失败塞进互斥的整页请求状态。",
+          "用本组件管理请求、缓存或查询竞态。"
+        ],
+        "composition": [
+          "权限与只读说明放在 children 的相应部位；局部失败使用局部 AsyncContent 或 Alert。"
+        ],
+        "stateOwner": {
+          "library": [
+            "反馈与内容的稳定结构，pending 时保留内容区的 aria-busy；加载提示作为它的兄弟节点，避免播报被 busy 祖先延迟。"
+          ],
+          "application": [
+            "请求、取消、迟到结果隔离、数据有效性、权限、草稿与重试。"
+          ]
+        },
+        "responsive": [
+          "不创建滚动区；长反馈和恢复动作由所组合组件换行。"
+        ],
+        "customization": [
+          "先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。",
+          "品牌、明暗和密度分别配置，主题不改变权限或保存策略。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/async-content.tsx",
+        "sha256": "8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。",
+      "localized": {
+        "en": {
+          "title": "AsyncContent",
+          "description": "Present request status separately from content that remains valid.",
+          "category": "Feedback",
+          "decisions": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.",
+          "notes": [
+            "Errors are not announced automatically. Supply role=alert inside errorContent when appropriate, rather than making all retained content live.",
+            "hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes."
+          ],
+          "api": [
+            {
+              "name": "AsyncContent",
+              "description": "A content-state composition that makes no requests.",
+              "descriptionEn": "A content-state composition that makes no requests.",
+              "props": [
+                {
+                  "name": "status",
+                  "type": "\"pending\" | \"success\" | \"error\"",
+                  "description": "Application-declared request fact; elapsed time never implies failure.",
+                  "descriptionEn": "Application-declared request fact; elapsed time never implies failure."
+                },
+                {
+                  "name": "hasContent / children",
+                  "type": "boolean / ReactNode",
+                  "description": "Valid content stays mounted without automatic disabling, draft clearing or focus movement.",
+                  "descriptionEn": "Valid content stays mounted without automatic disabling, draft clearing or focus movement."
+                },
+                {
+                  "name": "emptyContent / loadingContent / errorContent",
+                  "type": "ReactNode",
+                  "description": "emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions.",
+                  "descriptionEn": "emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions."
+                },
+                {
+                  "name": "render / ref / native props",
+                  "type": "useRender.ComponentProps<div>",
+                  "description": "Semantics and props for the actual root; no live region is added by default.",
+                  "descriptionEn": "Semantics and props for the actual root; no live region is added by default."
+                }
+              ]
+            }
+          ],
+          "keyboard": [],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Continuity through change （进退相承）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "Initial loading, confirmed empty results, failure and refresh with retained valid content."
+            ],
+            "avoid": [
+              "Collapsing permission, read-only or partial failure into a mutually exclusive page request state.",
+              "Managing requests, caches or query races here."
+            ],
+            "composition": [
+              "Place permission and read-only notices next to relevant content; use a local AsyncContent or Alert for partial failures."
+            ],
+            "stateOwner": {
+              "library": [
+                "Stable feedback/content structure, aria-busy on retained content while pending; loading feedback is a sibling so a busy ancestor does not defer its announcement."
+              ],
+              "application": [
+                "Requests, cancellation, stale response isolation, validity, permissions, drafts and retries."
+              ]
+            },
+            "responsive": [
+              "Adds no scroll owner; composed feedback and recovery controls handle wrapping."
+            ],
+            "customization": [
+              "Use the current props and composition first, then adjust the project's central theme; fix shared gaps in the public library.",
+              "Configure brand, light or dark mode, and density separately; themes do not change permissions or save policies."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
       "name": "autocomplete",
       "title": "建议输入 Autocomplete",
       "description": "编辑自由文本，候选作为可接受的建议。",
@@ -2354,7 +2706,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3750,7 +4102,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4506,7 +4858,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5026,7 +5378,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5921,7 +6273,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7397,7 +7749,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8866,7 +9218,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -9512,6 +9864,7 @@
       "layer": "pattern",
       "import": "@qingye_lab/ui/components/combobox",
       "exports": [
+        "ComboboxSelect",
         "Combobox",
         "ComboboxControl",
         "ComboboxInput",
@@ -9545,6 +9898,32 @@
         "搜索选择"
       ],
       "api": [
+        {
+          "name": "ComboboxSelect",
+          "description": "平铺单选的便捷组合：编辑边界、输入、清除、展开与候选面；确认值与查询仍独立，可受控或非受控。分组、多选或不同解剖继续用公开部件。",
+          "descriptionEn": "A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.",
+          "props": [
+            {
+              "name": "items / itemToStringLabel / renderItem",
+              "type": "readonly Value[] / (item: Value) => string / (item: Value) => ReactNode",
+              "description": "items 和 itemToStringLabel 必填，名称同时用于输入与过滤；renderItem 可丰富候选呈现。对象提交身份用既有 itemToStringValue，比较用 isItemEqualToValue。",
+              "descriptionEn": "items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality."
+            },
+            {
+              "name": "emptyContent / loading / clearable",
+              "type": "ReactNode / boolean / boolean",
+              "default": "— / false / true",
+              "description": "emptyContent 必填；loading 只显示调用方的加载事实，此时不声称无匹配。请求、取消、迟到回包与有效候选由应用持有。clearable 控制是否提供明确清除选择的动作。",
+              "descriptionEn": "emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action."
+            },
+            {
+              "name": "inputProps / controlProps / popupProps",
+              "type": "ComboboxInput props / InputGroupProps / ComboboxPopupProps",
+              "description": "分别透传输入命名、ARIA、事件、render、ref，编辑边界与浮层定制。确认值、查询、表单、禁用及只读沿用 Combobox Root 属性。",
+              "descriptionEn": "Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props."
+            }
+          ]
+        },
         {
           "name": "Combobox",
           "description": "公开 Base UI 候选上下文，默认单值；不强加业务选项。",
@@ -9879,6 +10258,77 @@
             "reason": "export is not a function (a Base UI / DayPicker namespace re-export or a plain value)"
           },
           {
+            "name": "ComboboxSelect",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "clearable",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:145"
+              },
+              {
+                "name": "controlProps",
+                "optional": true,
+                "type": "InputGroupProps | undefined",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:147"
+              },
+              {
+                "name": "emptyContent",
+                "optional": false,
+                "type": "React.ReactNode",
+                "doc": "当前查询已完成且没有候选时的内容，由应用说明查询对象。",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:142"
+              },
+              {
+                "name": "inputProps",
+                "optional": true,
+                "type": "React.ComponentProps<typeof ComboboxInput> | undefined",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:146"
+              },
+              {
+                "name": "items",
+                "optional": false,
+                "type": "readonly Value[]",
+                "doc": "平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:137"
+              },
+              {
+                "name": "itemToStringLabel",
+                "optional": false,
+                "type": "(item: Value) => string",
+                "doc": "输入框、过滤与候选共用的可读名称；富候选另用 renderItem。",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:139"
+              },
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "只表达调用方的请求事实，不发请求、不推断失败。",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:144"
+              },
+              {
+                "name": "popupProps",
+                "optional": true,
+                "type": "ComboboxPopupProps | undefined",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:148"
+              },
+              {
+                "name": "renderItem",
+                "optional": true,
+                "type": "((item: Value) => React.ReactNode) | undefined",
+                "declaredAt": "packages/ui/src/components/combobox.tsx:140"
+              }
+            ],
+            "inheritedCount": 34,
+            "inheritedFrom": [
+              {
+                "source": "@base-ui/react",
+                "count": 34
+              }
+            ]
+          },
+          {
             "name": "ComboboxSeparator",
             "status": "resolved",
             "ownProps": [],
@@ -10170,6 +10620,27 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "ComboboxSelect",
+          "kind": "function",
+          "owner": "combobox",
+          "module": "@qingye_lab/ui/components/combobox",
+          "propsType": "ComboboxSelectProps<Value>",
+          "signature": "ComboboxSelect({ items, itemToStringLabel, renderItem, emptyContent, loading = false, clearable = true, inputProps, controlProps, popupProps, ...props }: ComboboxSelectProps<Value>)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComboboxSelectProps",
+          "kind": "type",
+          "owner": "combobox",
+          "module": "@qingye_lab/ui/components/combobox",
+          "signature": "Omit<ComboboxProps<Value>, \"children\" | \"multiple\" | \"items\" | \"itemToStringLabel\"> & {\n  /** 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。 */\n  items: readonly Value[];\n  /** 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。 */\n  itemToStringLabel: (item: Value) => string;\n  renderItem?: ((item: Value) => React.ReactNode) | undefined;\n  /** 当前查询已完成且没有候选时的内容，由应用说明查询对象。 */\n  emptyContent: React.ReactNode;\n  /** 只表达调用方的请求事实，不发请求、不推断失败。 */\n  loading?: boolean | undefined;\n  clearable?: boolean | undefined;\n  inputProps?: React.ComponentProps<typeof ComboboxInput> | undefined;\n  controlProps?: InputGroupProps | undefined;\n  popupProps?: ComboboxPopupProps | undefined;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "ComboboxSeparator",
           "kind": "function",
           "owner": "combobox",
@@ -10238,9 +10709,19 @@
         {
           "name": "ComboboxStatusProps",
           "definition": "export type ComboboxStatusProps = ComboboxPrimitive.Status.Props & React.RefAttributes<HTMLDivElement> & Omit<CandidateStatusOptions, \"children\">;"
+        },
+        {
+          "name": "ComboboxSelectProps",
+          "definition": "export type ComboboxSelectProps<Value = string> = Omit<ComboboxProps<Value>, \"children\" | \"multiple\" | \"items\" | \"itemToStringLabel\"> & {\n  /** 平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。 */\n  items: readonly Value[];\n  /** 输入框、过滤与候选共用的可读名称；富候选另用 renderItem。 */\n  itemToStringLabel: (item: Value) => string;\n  renderItem?: ((item: Value) => React.ReactNode) | undefined;\n  /** 当前查询已完成且没有候选时的内容，由应用说明查询对象。 */\n  emptyContent: React.ReactNode;\n  /** 只表达调用方的请求事实，不发请求、不推断失败。 */\n  loading?: boolean | undefined;\n  clearable?: boolean | undefined;\n  inputProps?: React.ComponentProps<typeof ComboboxInput> | undefined;\n  controlProps?: InputGroupProps | undefined;\n  popupProps?: ComboboxPopupProps | undefined;\n};"
         }
       ],
       "usageImports": [
+        {
+          "name": "ComboboxSelect",
+          "import": "@qingye_lab/ui/components/combobox",
+          "owner": "combobox",
+          "status": "PASS"
+        },
         {
           "name": "Combobox",
           "import": "@qingye_lab/ui/components/combobox",
@@ -10389,7 +10870,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10437,20 +10918,20 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Combobox, ComboboxClear, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nexport const meta = { title: \"确认候选\", titleEn: \"Confirm a candidate\" };\nconst members = [\"陈致远\", \"李一鸣\", \"王一帆\", \"赵子纯\"];\nexport default function Demo() {\n  const [value, setValue] = useState<string | null>(\"陈致远\");\n  return <form className=\"max-w-xs\"><Field name=\"owner\"><FieldLabel>负责人</FieldLabel><Combobox items={members} value={value} onValueChange={setValue}><ComboboxControl><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></Combobox></Field></form>;\n}\n",
-          "sha256": "fbaaf4b33f71740a899507e5458fad739e5e4608ca97dc431efc7bbe78954c33"
+          "code": "import { useState } from \"react\";\nimport { ComboboxSelect } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nexport const meta = { title: \"确认候选\", titleEn: \"Confirm a candidate\" };\nconst members = [\"陈致远\", \"李一鸣\", \"王一帆\", \"赵子纯\"];\nexport default function Demo() {\n  const [value, setValue] = useState<string | null>(\"陈致远\");\n  return <form className=\"max-w-xs\"><Field name=\"owner\"><FieldLabel>负责人</FieldLabel>\n    <ComboboxSelect items={members} itemToStringLabel={member => member} value={value} onValueChange={setValue} emptyContent=\"没有匹配的成员\" />\n  </Field></form>;\n}\n",
+          "sha256": "8ed5de7ad7d736f010172146657d5fae32466c73a0fe2e4dd95abea230b654a1"
         },
         {
           "id": "density",
-          "title": "密度与只读",
+          "title": "密度、只读与禁用",
           "source": "apps/docs/src/content/combobox/demos/02-density.tsx",
           "imports": [
             "@qingye_lab/ui/components/combobox",
             "@qingye_lab/ui/components/field"
           ],
           "providers": [],
-          "code": "import { Combobox, ComboboxControl, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxTrigger } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"密度与只读\", titleEn: \"Density and read-only\" };\n\nconst items = [\"机柜 A\", \"机柜 B\", \"机柜 C\"];\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Combobox items={items} defaultValue=\"机柜 A\">\n              <ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl>\n              <ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup>\n            </Combobox>\n          </Field>\n        </div>\n      ))}\n      <Field><FieldLabel>只读候选</FieldLabel><Combobox readOnly items={items} defaultValue=\"机柜 A\"><ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl></Combobox></Field>\n    </div>\n  );\n}\n",
-          "sha256": "4387355677b6d54824e2da1afd3ce1b96eb62dc38d8dc34df9b3dc8063764fdd"
+          "code": "import { ComboboxSelect } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"密度、只读与禁用\", titleEn: \"Density, read-only, and disabled\" };\n\nconst items = [\"机柜 A\", \"机柜 B\", \"机柜 C\"];\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <ComboboxSelect items={items} itemToStringLabel={item => item} defaultValue=\"机柜 A\" emptyContent=\"没有匹配的机柜\" />\n          </Field>\n        </div>\n      ))}\n      <Field><FieldLabel>只读候选</FieldLabel><ComboboxSelect readOnly items={items} itemToStringLabel={item => item} defaultValue=\"机柜 A\" emptyContent=\"没有匹配的机柜\" /></Field>\n      <Field><FieldLabel>禁用候选</FieldLabel><ComboboxSelect disabled items={items} itemToStringLabel={item => item} defaultValue=\"机柜 A\" emptyContent=\"没有匹配的机柜\" /></Field>\n    </div>\n  );\n}\n",
+          "sha256": "ec6ae5ca8b8c1f1dd6f66196e5db67ca24cec79fd30ab18eec7c8d0667c0c4df"
         },
         {
           "id": "multiple",
@@ -10488,8 +10969,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useEffect, useState } from \"react\";\nimport { Combobox, ComboboxControl, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxStatus, ComboboxTrigger } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nexport const meta = { title: \"异步候选\", titleEn: \"Asynchronous candidates\" };\nconst directory = [\"3 号楼东侧\", \"3 号楼西侧\", \"4 号楼南门\", \"4 号楼北门\", \"5 号楼大堂\", \"东区车库\", \"西区车库\"];\n// 模拟一次查询；真实的请求、取消与失败由应用持有。\nfunction search(query: string, signal: AbortSignal) {\n  return new Promise<string[]>((resolve, reject) => {\n    const timer = setTimeout(() => resolve(directory.filter(place => place.includes(query.trim()))), 600);\n    signal.addEventListener(\"abort\", () => { clearTimeout(timer); reject(signal.reason); });\n  });\n}\nexport default function Demo() {\n  const [value, setValue] = useState<string | null>(null);\n  const [query, setQuery] = useState(\"\");\n  const [results, setResults] = useState<string[]>([]);\n  const [loading, setLoading] = useState(false);\n  useEffect(() => {\n    const controller = new AbortController();\n    setLoading(true);\n    search(query, controller.signal).then(found => { setResults(found); setLoading(false); }, () => {});\n    return () => controller.abort();\n  }, [query]);\n  return <form className=\"max-w-xs\"><Field name=\"place\"><FieldLabel>位置</FieldLabel>\n    <Combobox items={results} filter={null} value={value} onValueChange={setValue} inputValue={query} onInputValueChange={setQuery}>\n      <ComboboxControl><ComboboxInput /><ComboboxTrigger /></ComboboxControl>\n      <ComboboxPopup>\n        <ComboboxStatus loading={loading} count={loading ? undefined : results.length} visible={loading} />\n        <ComboboxEmpty>{loading ? null : \"没有匹配的位置\"}</ComboboxEmpty>\n        <ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList>\n      </ComboboxPopup>\n    </Combobox></Field></form>;\n}\n",
-          "sha256": "09d9014423c5e7b7bdb227af52c863a833922caaa468e4e3892464857a0c565a"
+          "code": "import { useEffect, useRef, useState } from \"react\";\nimport { ComboboxSelect } from \"@qingye_lab/ui/components/combobox\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nexport const meta = { title: \"异步候选\", titleEn: \"Asynchronous candidates\" };\nconst directory = [\"3 号楼东侧\", \"3 号楼西侧\", \"4 号楼南门\", \"4 号楼北门\", \"5 号楼大堂\", \"东区车库\", \"西区车库\"];\n// 模拟一次查询；真实的请求、取消与失败由应用持有。\nfunction search(query: string, signal: AbortSignal) {\n  return new Promise<string[]>((resolve, reject) => {\n    const timer = setTimeout(() => resolve(directory.filter(place => place.includes(query.trim()))), 600);\n    signal.addEventListener(\"abort\", () => { clearTimeout(timer); reject(signal.reason); }, { once: true });\n  });\n}\ntype SearchResult = { query: string; status: \"ready\"; items: string[] } | { query: string; status: \"error\" };\nexport default function Demo({ searchPlaces = search }: { searchPlaces?: typeof search }) {\n  const [value, setValue] = useState<string | null>(null);\n  const [query, setQuery] = useState(\"\");\n  const [result, setResult] = useState<SearchResult | null>(null);\n  const generation = useRef(0);\n  useEffect(() => {\n    const controller = new AbortController();\n    const request = ++generation.current;\n    setResult(null);\n    // 取消是资源回收；代次检查另外阻止忽略 AbortSignal 的迟到回包覆盖新查询。\n    searchPlaces(query, controller.signal).then(items => {\n      if (!controller.signal.aborted && request === generation.current) setResult({ query, status: \"ready\", items });\n    }, () => {\n      if (!controller.signal.aborted && request === generation.current) setResult({ query, status: \"error\" });\n    });\n    return () => controller.abort();\n  }, [query, searchPlaces]);\n  // 查询改变后，同一帧就停止展示上一次查询的候选；确认值仍由 value 独立保留。\n  const current = result?.query === query ? result : null;\n  const loading = current === null;\n  const results = current?.status === \"ready\" ? current.items : [];\n  return <form className=\"max-w-xs\"><Field name=\"place\"><FieldLabel>位置</FieldLabel>\n    <ComboboxSelect items={results} itemToStringLabel={place => place} filter={null}\n      value={value} onValueChange={setValue} inputValue={query} onInputValueChange={next => { if (next !== query) { setResult(null); setQuery(next); } }}\n      loading={loading} emptyContent={current?.status === \"error\" ? \"查询失败，请修改搜索后重试\" : \"没有匹配的位置\"} />\n  </Field></form>;\n}\n",
+          "sha256": "761dde7458f45634407e8d3ed3279c7cd4b86d610013aea4a476597ef263cb4c"
         }
       ],
       "design": {
@@ -10524,7 +11005,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/combobox.tsx",
-        "sha256": "e2990d76791d952fe0678658d0cededf675862af2ed73673b069e13b3add38c7",
+        "sha256": "8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
@@ -10541,6 +11022,32 @@
             "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading)."
           ],
           "api": [
+            {
+              "name": "ComboboxSelect",
+              "description": "A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.",
+              "descriptionEn": "A convenient composition for flat single selection: edit boundary, input, clear, trigger, and popup. Confirmation and query remain independent and can be controlled or uncontrolled. Use the public parts for groups, multiple selection, or a different anatomy.",
+              "props": [
+                {
+                  "name": "items / itemToStringLabel / renderItem",
+                  "type": "readonly Value[] / (item: Value) => string / (item: Value) => ReactNode",
+                  "description": "items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality.",
+                  "descriptionEn": "items and itemToStringLabel are required; labels serve both input and filtering. renderItem customizes candidate content. For objects, use the existing itemToStringValue for form identity and isItemEqualToValue for equality."
+                },
+                {
+                  "name": "emptyContent / loading / clearable",
+                  "type": "ReactNode / boolean / boolean",
+                  "default": "— / false / true",
+                  "description": "emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action.",
+                  "descriptionEn": "emptyContent is required. loading only presents caller-supplied loading and suppresses no-match text. The application owns requests, cancellation, late responses, and valid candidates. clearable controls the explicit clear-selection action."
+                },
+                {
+                  "name": "inputProps / controlProps / popupProps",
+                  "type": "ComboboxInput props / InputGroupProps / ComboboxPopupProps",
+                  "description": "Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props.",
+                  "descriptionEn": "Forward input naming, ARIA, events, render, and ref, plus control and popup customization. Confirmation, query, form, disabled, and read-only retain Combobox Root props."
+                }
+              ]
+            },
             {
               "name": "Combobox",
               "description": "A public Base UI candidate context, single-value by default, with caller-provided options.",
@@ -10699,6 +11206,482 @@
       }
     },
     {
+      "name": "confirm",
+      "title": "异步确认 Confirm",
+      "description": "等待一次明确决定，再由调用方继续执行。",
+      "category": "反馈",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/confirm",
+      "exports": [
+        "ConfirmProvider",
+        "useConfirm"
+      ],
+      "docs": "/docs/components/confirm",
+      "notes": [
+        "同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。",
+        "调用 useConfirm 的组件卸载会取消它自己的未决决定；保留的旧函数在卸载后也只返回 false。",
+        "授权与执行分开：组件不接收 onConfirm 请求函数，不显示提交中，不推断成功、失败或结果未知。",
+        "需要文字核对、对象与版本变化后重新审阅时使用 ConfirmAction；一般组合控制使用 AlertDialog。"
+      ],
+      "keywords": [
+        "confirm",
+        "await",
+        "确认",
+        "异步",
+        "Promise"
+      ],
+      "api": [
+        {
+          "name": "ConfirmProvider",
+          "description": "为后代 useConfirm 承载一个模态决定，不额外渲染包裹元素。放在应用的 UILocaleProvider 内。",
+          "descriptionEn": "Host one modal decision for descendant useConfirm calls without adding a wrapper element. Place it inside the application's UILocaleProvider.",
+          "props": [
+            {
+              "name": "children",
+              "type": "ReactNode",
+              "description": "调用 useConfirm 的应用内容；Provider 卸载时未决 Promise 返回 false。",
+              "descriptionEn": "Application content using useConfirm. Unmounting the provider resolves an outstanding decision to false."
+            }
+          ]
+        },
+        {
+          "name": "useConfirm",
+          "description": "返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。",
+          "descriptionEn": "Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.",
+          "props": [
+            {
+              "name": "title / description",
+              "type": "ReactNode / ReactNode",
+              "description": "必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。",
+              "descriptionEn": "Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content."
+            },
+            {
+              "name": "confirmLabel / cancelLabel",
+              "type": "ReactNode / ReactNode",
+              "default": "locale.confirm / locale.cancel",
+              "description": "明确继续与保留动作；显式文字优先。取消按钮和 Escape 都返回 false；点遮罩不关闭。",
+              "descriptionEn": "Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss."
+            },
+            {
+              "name": "tone",
+              "type": "ButtonTone",
+              "default": "'neutral'",
+              "description": "确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。",
+              "descriptionEn": "The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission."
+            },
+            {
+              "name": "popupProps",
+              "type": "Omit<AlertDialogPopupProps, 'children'>",
+              "description": "复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。",
+              "descriptionEn": "Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed."
+            },
+            {
+              "name": "signal",
+              "type": "AbortSignal",
+              "description": "已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。",
+              "descriptionEn": "An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started."
+            },
+            {
+              "name": "Promise<boolean>",
+              "type": "true | false",
+              "description": "确认立即返回 true 并关窗；取消、中止、hook 调用方或 Provider 卸载均返回 false。业务执行不等待退场动画；应用用 Button loading、try/finally 和就地错误承接执行与恢复。",
+              "descriptionEn": "Approval immediately resolves true and closes. Cancellation, abort, or unmounting the hook owner or provider resolves false. Business execution does not wait for an exit animation. The application owns execution and recovery through Button loading, try/finally, and inline errors."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "ConfirmProvider",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "children",
+                "optional": false,
+                "type": "React.ReactNode",
+                "declaredAt": "packages/ui/src/components/confirm.tsx:22"
+              }
+            ],
+            "inheritedCount": 0,
+            "inheritedFrom": []
+          },
+          {
+            "name": "useConfirm",
+            "status": "no-props",
+            "ownProps": [],
+            "inheritedCount": 0,
+            "inheritedFrom": []
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "在当前模态决定内循环；默认进入面板，不自动聚焦确认按钮。",
+          "descriptionEn": "Cycle within the active modal. Focus starts on the panel, never automatically on the affirmative action."
+        },
+        {
+          "keys": "Enter / Space",
+          "description": "激活当前聚焦的明确选择。",
+          "descriptionEn": "Activate the focused explicit choice."
+        },
+        {
+          "keys": "Escape",
+          "description": "拒绝此次决定，返回调用入口或 finalFocus。",
+          "descriptionEn": "Decline this decision and return to the calling entry or finalFocus target."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "ConfirmFunction",
+          "kind": "type",
+          "owner": "confirm",
+          "module": "@qingye_lab/ui/components/confirm",
+          "signature": "(options: ConfirmOptions) => Promise<boolean>",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ConfirmOptions",
+          "kind": "type",
+          "owner": "confirm",
+          "module": "@qingye_lab/ui/components/confirm",
+          "signature": "{\n  title: React.ReactNode;\n  /** 必要后果，作为对话框的可访问说明持续可见。 */\n  description: React.ReactNode;\n  confirmLabel?: React.ReactNode;\n  cancelLabel?: React.ReactNode;\n  tone?: ButtonProps[\"tone\"];\n  popupProps?: Omit<AlertDialogPopupProps, \"children\">;\n  /** 中止此次决定并返回 false；不会取消应用已经开始的请求。 */\n  signal?: AbortSignal;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ConfirmProvider",
+          "kind": "function",
+          "owner": "confirm",
+          "module": "@qingye_lab/ui/components/confirm",
+          "propsType": "ConfirmProviderProps",
+          "signature": "ConfirmProvider({ children }: ConfirmProviderProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ConfirmProviderProps",
+          "kind": "type",
+          "owner": "confirm",
+          "module": "@qingye_lab/ui/components/confirm",
+          "signature": "{ children: React.ReactNode }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "useConfirm",
+          "kind": "function",
+          "owner": "confirm",
+          "module": "@qingye_lab/ui/components/confirm",
+          "signature": "useConfirm(): ConfirmFunction",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ConfirmOptions",
+          "definition": "export type ConfirmOptions = {\n  title: React.ReactNode;\n  /** 必要后果，作为对话框的可访问说明持续可见。 */\n  description: React.ReactNode;\n  confirmLabel?: React.ReactNode;\n  cancelLabel?: React.ReactNode;\n  tone?: ButtonProps[\"tone\"];\n  popupProps?: Omit<AlertDialogPopupProps, \"children\">;\n  /** 中止此次决定并返回 false；不会取消应用已经开始的请求。 */\n  signal?: AbortSignal;\n};"
+        },
+        {
+          "name": "ConfirmFunction",
+          "definition": "export type ConfirmFunction = (options: ConfirmOptions) => Promise<boolean>;"
+        },
+        {
+          "name": "ConfirmProviderProps",
+          "definition": "export type ConfirmProviderProps = { children: React.ReactNode };"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "ConfirmProvider",
+          "import": "@qingye_lab/ui/components/confirm",
+          "owner": "confirm",
+          "status": "PASS"
+        },
+        {
+          "name": "useConfirm",
+          "import": "@qingye_lab/ui/components/confirm",
+          "owner": "confirm",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [
+          "ConfirmProvider"
+        ],
+        "guidance": [
+          {
+            "text": "同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。",
+            "source": "apps/docs/src/content/confirm/meta.ts",
+            "certainty": "documented"
+          }
+        ],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [
+          "ConfirmProvider"
+        ],
+        "contexts": [
+          {
+            "name": "ConfirmContext",
+            "declaredAt": "packages/ui/src/components/confirm.tsx:38",
+            "defaultValue": "null",
+            "withoutProvider": "throws",
+            "providedBy": [
+              "ConfirmProvider"
+            ]
+          },
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/alert-dialog",
+          "@base-ui/react/button",
+          "@base-ui/react/dialog",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "decision",
+          "title": "等待决定",
+          "source": "apps/docs/src/content/confirm/demos/01-decision.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/confirm",
+            "react"
+          ],
+          "providers": [
+            "ConfirmProvider"
+          ],
+          "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { ConfirmProvider, useConfirm } from \"@qingye_lab/ui/components/confirm\";\n\nexport const meta = { title: \"等待决定\", titleEn: \"Await a decision\" };\n\nfunction Decision() {\n  const confirm = useConfirm();\n  const [decision, setDecision] = useState<string>();\n  return <div className=\"grid justify-items-start gap-(--qy-field-gap)\">\n    <Button variant=\"bordered\" onClick={async () => {\n      const approved = await confirm({ title: \"离开草稿？\", description: \"尚未提交的内容会留在本页，离开后需要重新打开。\", confirmLabel: \"离开\", cancelLabel: \"继续编辑\" });\n      setDecision(approved ? \"决定：离开草稿\" : \"决定：继续编辑\");\n    }}>离开草稿</Button>\n    {decision && <output className=\"text-support text-muted-foreground\">{decision}</output>}\n  </div>;\n}\n\nexport default function Demo() { return <ConfirmProvider><Decision /></ConfirmProvider>; }\n",
+          "sha256": "611d0af4a19a3d7fdc3664df35fc2ea0982ab23033a05f8f8790c1d822ddd736"
+        },
+        {
+          "id": "submission",
+          "title": "提交与失败恢复",
+          "source": "apps/docs/src/content/confirm/demos/02-submission.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/alert",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/confirm",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/textarea",
+            "react"
+          ],
+          "providers": [
+            "ConfirmProvider"
+          ],
+          "code": "import { useEffect, useRef, useState } from \"react\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { ConfirmProvider, useConfirm } from \"@qingye_lab/ui/components/confirm\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\n\nexport const meta = { title: \"提交与失败恢复\", titleEn: \"Submission and recovery\", description: \"本地控制返回完成或失败，检查忙碌状态与保留的草稿。\", descriptionEn: \"Choose a local completion or failure to inspect busy state and retained drafts.\" };\n\nfunction Submission() {\n  const confirm = useConfirm();\n  const [draft, setDraft] = useState(\"保留现有记录，再加入补充说明。\");\n  const [busy, setBusy] = useState(false);\n  const [error, setError] = useState(\"\");\n  const [received, setReceived] = useState(\"\");\n  const response = useRef<{ resolve: () => void; reject: (error: Error) => void } | null>(null);\n  const mounted = useRef(true);\n  useEffect(() => {\n    mounted.current = true;\n    return () => { mounted.current = false; response.current?.reject(new Error(\"演示已关闭\")); };\n  }, []);\n  return <div className=\"grid min-w-0 gap-(--qy-panel-gap)\">\n    <Field><FieldLabel>草稿内容</FieldLabel><Textarea value={draft} disabled={busy} onChange={event => setDraft(event.currentTarget.value)} /></Field>\n    <div className=\"flex flex-wrap items-center gap-(--qy-action-gap)\">\n      <Button loading={busy} onClick={async () => {\n        if (!await confirm({ title: \"提交这份草稿？\", description: \"提交本页内容，失败时保留草稿以便重试。\", confirmLabel: \"提交\", cancelLabel: \"继续编辑\" })) return;\n        setBusy(true); setError(\"\"); setReceived(\"\");\n        try {\n          // 本地演示由下面的返回动作完成；真实应用在此 await 自己的请求。\n          await new Promise<void>((resolve, reject) => { response.current = { resolve, reject }; });\n          if (mounted.current) setReceived(draft);\n        } catch {\n          if (mounted.current) setError(\"提交失败，草稿已保留。可以修改后重试。\");\n        } finally {\n          response.current = null;\n          if (mounted.current) setBusy(false);\n        }\n      }}>提交草稿</Button>\n      <Button variant=\"quiet\" disabled={!busy} onClick={() => response.current?.reject(new Error(\"本地失败\"))}>返回失败</Button>\n      <Button variant=\"quiet\" disabled={!busy} onClick={() => response.current?.resolve()}>返回完成</Button>\n    </div>\n    {error && <Alert role=\"alert\" tone=\"danger\"><AlertDescription>{error}</AlertDescription></Alert>}\n    {received && <output className=\"text-support text-muted-foreground\">本地接收：{received}</output>}\n  </div>;\n}\n\nexport default function Demo() { return <ConfirmProvider><Submission /></ConfirmProvider>; }\n",
+          "sha256": "d4ea38dc5221321872c9c2f7d0db62ea351d42478051c418ffc5173a458b07e4"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "进退相承",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "一般流程需要在继续前等待一个明确决定。"
+        ],
+        "avoid": [
+          "对象、版本或变更会改变而需要重新审阅；使用 ConfirmAction。",
+          "执行中进度、业务结果或通知；由应用和反馈组件承接。"
+        ],
+        "composition": [
+          "ConfirmProvider + useConfirm；确认后由应用 Button loading、try/finally 与错误恢复接续。"
+        ],
+        "stateOwner": {
+          "library": [
+            "单个未决决定、布尔结果、取消、中止、卸载清理与模态焦点。"
+          ],
+          "application": [
+            "决定内容、对象版本、权限、提交状态、请求结果与恢复内容。"
+          ]
+        },
+        "responsive": [
+          "直接消费 AlertDialog 的可用空间、几何与焦点机制。"
+        ],
+        "customization": [
+          "明确动作名称、tone、公共 popupProps 与现有主题。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/confirm.tsx",
+        "sha256": "8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "await confirm(options) 只返回是否同意；true 不表示提交成功。当前决定及退场结束前，后续调用立即返回 false，不替换内容也不排队。涉及对象、版本或变更失效时使用 ConfirmAction。",
+      "localized": {
+        "en": {
+          "title": "Confirm",
+          "description": "Await one explicit decision, then let the caller continue.",
+          "category": "Feedback",
+          "decisions": "await confirm(options) returns approval only; true does not mean a submission succeeded. While a decision is active or closing, additional calls return false immediately without replacing content or queuing. Use ConfirmAction when changes to an object, version, or change must invalidate approval.",
+          "notes": [
+            "One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.",
+            "Unmounting the useConfirm owner cancels its own pending decision. Retained functions also resolve false after the owner unmounts.",
+            "Approval and execution are separate: this component accepts no request callback, displays no submitting state, and infers no success, failure, or unknown outcome.",
+            "Use ConfirmAction for exact text checks and review after object or version changes; use AlertDialog for direct composition."
+          ],
+          "api": [
+            {
+              "name": "ConfirmProvider",
+              "description": "Host one modal decision for descendant useConfirm calls without adding a wrapper element. Place it inside the application's UILocaleProvider.",
+              "descriptionEn": "Host one modal decision for descendant useConfirm calls without adding a wrapper element. Place it inside the application's UILocaleProvider.",
+              "props": [
+                {
+                  "name": "children",
+                  "type": "ReactNode",
+                  "description": "Application content using useConfirm. Unmounting the provider resolves an outstanding decision to false.",
+                  "descriptionEn": "Application content using useConfirm. Unmounting the provider resolves an outstanding decision to false."
+                }
+              ]
+            },
+            {
+              "name": "useConfirm",
+              "description": "Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.",
+              "descriptionEn": "Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.",
+              "props": [
+                {
+                  "name": "title / description",
+                  "type": "ReactNode / ReactNode",
+                  "description": "Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content.",
+                  "descriptionEn": "Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content."
+                },
+                {
+                  "name": "confirmLabel / cancelLabel",
+                  "type": "ReactNode / ReactNode",
+                  "default": "locale.confirm / locale.cancel",
+                  "description": "Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss.",
+                  "descriptionEn": "Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss."
+                },
+                {
+                  "name": "tone",
+                  "type": "ButtonTone",
+                  "default": "'neutral'",
+                  "description": "The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission.",
+                  "descriptionEn": "The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission."
+                },
+                {
+                  "name": "popupProps",
+                  "type": "Omit<AlertDialogPopupProps, 'children'>",
+                  "description": "Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed.",
+                  "descriptionEn": "Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed."
+                },
+                {
+                  "name": "signal",
+                  "type": "AbortSignal",
+                  "description": "An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started.",
+                  "descriptionEn": "An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started."
+                },
+                {
+                  "name": "Promise<boolean>",
+                  "type": "true | false",
+                  "description": "Approval immediately resolves true and closes. Cancellation, abort, or unmounting the hook owner or provider resolves false. Business execution does not wait for an exit animation. The application owns execution and recovery through Button loading, try/finally, and inline errors.",
+                  "descriptionEn": "Approval immediately resolves true and closes. Cancellation, abort, or unmounting the hook owner or provider resolves false. Business execution does not wait for an exit animation. The application owns execution and recovery through Button loading, try/finally, and inline errors."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Cycle within the active modal. Focus starts on the panel, never automatically on the affirmative action.",
+              "descriptionEn": "Cycle within the active modal. Focus starts on the panel, never automatically on the affirmative action."
+            },
+            {
+              "keys": "Enter / Space",
+              "description": "Activate the focused explicit choice.",
+              "descriptionEn": "Activate the focused explicit choice."
+            },
+            {
+              "keys": "Escape",
+              "description": "Decline this decision and return to the calling entry or finalFocus target.",
+              "descriptionEn": "Decline this decision and return to the calling entry or finalFocus target."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Continuity through change （进退相承）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "A general flow must await one explicit decision before proceeding."
+            ],
+            "avoid": [
+              "Objects, versions, or changes can invalidate approval; use ConfirmAction.",
+              "Execution progress, business outcomes, or notifications belong to the application and feedback components."
+            ],
+            "composition": [
+              "ConfirmProvider + useConfirm; the application continues with Button loading, try/finally, and error recovery."
+            ],
+            "stateOwner": {
+              "library": [
+                "One pending decision, its boolean result, cancel, abort, unmount cleanup, and modal focus."
+              ],
+              "application": [
+                "Decision content, object versions, permissions, submission state, request outcomes, and recovery content."
+              ]
+            },
+            "responsive": [
+              "Uses AlertDialog's available space, geometry, and focus mechanisms."
+            ],
+            "customization": [
+              "Explicit action names, tone, public popupProps, and existing themes."
+            ]
+          },
+          "providerGuidance": [
+            {
+              "text": "One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.",
+              "source": "apps/docs/src/content/confirm/meta.ts",
+              "certainty": "documented"
+            }
+          ]
+        }
+      }
+    },
+    {
       "name": "confirm-action",
       "title": "确认动作 ConfirmAction",
       "description": "确认具体对象、版本与变更，内容改变后重新阅读。",
@@ -10714,7 +11697,8 @@
       "notes": [
         "内容恢复成旧值也不会自动复活旧认可；必须重新阅读。",
         "确认次数与结果事实归应用；没有自建超时、假成功或自动重试。",
-        "浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。"
+        "浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。",
+        "一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。"
       ],
       "keywords": [
         "confirmation",
@@ -11012,14 +11996,20 @@
       },
       "providers": {
         "exports": [],
-        "guidance": [],
+        "guidance": [
+          {
+            "text": "一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。",
+            "source": "apps/docs/src/content/confirm-action/meta.ts",
+            "certainty": "documented"
+          }
+        ],
         "usesLocale": true,
         "usesTheme": false,
         "required": [],
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11125,7 +12115,8 @@
           "notes": [
             "Restoring old content does not revive old approval; review again.",
             "The application owns action attempts and outcomes. There is no custom timeout, fake success, or automatic retry.",
-            "Layering, sizes, focus, and consequence association use current public components and centralized presets."
+            "Layering, sizes, focus, and consequence association use current public components and centralized presets.",
+            "Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection."
           ],
           "api": [
             {
@@ -11245,7 +12236,13 @@
               "Public part props, children, and existing theme roles."
             ]
           },
-          "providerGuidance": []
+          "providerGuidance": [
+            {
+              "text": "Use ConfirmProvider + useConfirm for a general awaited boolean decision; retain this component for object, version, and change protection.",
+              "source": "apps/docs/src/content/confirm-action/meta.ts",
+              "certainty": "documented"
+            }
+          ]
         }
       }
     },
@@ -12382,7 +13379,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12897,6 +13894,7 @@
       "layer": "pattern",
       "import": "@qingye_lab/ui/components/data-table",
       "exports": [
+        "DataTablePattern",
         "DataTable",
         "DataTableSortButton",
         "DataTableSelectionCell",
@@ -12904,6 +13902,7 @@
       ],
       "docs": "/docs/components/data-table",
       "notes": [
+        "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
         "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
         "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
       ],
@@ -12919,12 +13918,55 @@
       ],
       "api": [
         {
+          "name": "DataTablePattern",
+          "description": "配置式排序、当页全选、活动行与分页组合，不发请求。",
+          "descriptionEn": "Configured sorting, page selection, active rows and pagination without issuing requests.",
+          "props": [
+            {
+              "name": "data / columns / getRowId / emptyContent",
+              "type": "T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode",
+              "description": "列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。",
+              "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required."
+            },
+            {
+              "name": "state / defaultState / onStateChange",
+              "type": "DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void",
+              "description": "sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。",
+              "descriptionEn": "A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1."
+            },
+            {
+              "name": "mode / pagination",
+              "type": "client | server / false | DataTablePatternPagination",
+              "description": "client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。",
+              "descriptionEn": "Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null."
+            },
+            {
+              "name": "selection",
+              "type": "{ label, rowLabel, canSelect? }",
+              "description": "启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。",
+              "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel."
+            },
+            {
+              "name": "activeRow",
+              "type": "{ columnId: string, onActivate?: (row: T) => void }",
+              "description": "该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。",
+              "descriptionEn": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent."
+            },
+            {
+              "name": "caption / busy / tableProps / native div props",
+              "type": "ReactNode / boolean / DataTableProps / HTML props",
+              "description": "刷新保留传入行；属性分别归属表格或组合外层，不推断请求成功或失败。",
+              "descriptionEn": "Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes."
+            }
+          ]
+        },
+        {
           "name": "DataTable",
           "description": "原生二维集合。",
           "descriptionEn": "A native two-dimensional collection.",
           "props": [
             {
-              "name": "table / emptyContent / caption / busy / containerProps",
+              "name": "table / emptyContent / caption / busy / activeRowId / containerProps",
               "type": "TableInstance<T> / ReactNode / TableContainerProps",
               "description": "getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。",
               "descriptionEn": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows."
@@ -12987,34 +14029,40 @@
             "status": "resolved",
             "ownProps": [
               {
+                "name": "activeRowId",
+                "optional": true,
+                "type": "string | null",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
+              },
+              {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:27"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:27"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
               },
               {
                 "name": "containerProps",
                 "optional": true,
                 "type": "TableContainerProps",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:27"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:27"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:27"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:28"
               }
             ],
             "inheritedCount": 289,
@@ -13030,6 +14078,104 @@
             ]
           },
           {
+            "name": "DataTablePattern",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "activeRow",
+                "optional": true,
+                "type": "{ columnId: string; onActivate?: (row: TData) => void }",
+                "doc": "The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent.",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:102"
+              },
+              {
+                "name": "busy",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:105"
+              },
+              {
+                "name": "caption",
+                "optional": true,
+                "type": "React.ReactNode",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:103"
+              },
+              {
+                "name": "columns",
+                "optional": false,
+                "type": "readonly DataTablePatternColumn<TData>[]",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:93"
+              },
+              {
+                "name": "data",
+                "optional": false,
+                "type": "TData[]",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:92"
+              },
+              {
+                "name": "defaultState",
+                "optional": true,
+                "type": "Partial<DataTablePatternState>",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:97"
+              },
+              {
+                "name": "emptyContent",
+                "optional": false,
+                "type": "React.ReactNode",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:104"
+              },
+              {
+                "name": "getRowId",
+                "optional": false,
+                "type": "(row: TData) => string",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:94"
+              },
+              {
+                "name": "mode",
+                "optional": true,
+                "type": "\"client\" | \"server\"",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:95"
+              },
+              {
+                "name": "onStateChange",
+                "optional": true,
+                "type": "(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:98"
+              },
+              {
+                "name": "pagination",
+                "optional": true,
+                "type": "false | DataTablePatternPagination",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:99"
+              },
+              {
+                "name": "selection",
+                "optional": true,
+                "type": "{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:100"
+              },
+              {
+                "name": "state",
+                "optional": true,
+                "type": "DataTablePatternState",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:96"
+              },
+              {
+                "name": "tableProps",
+                "optional": true,
+                "type": "Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"activeRowId\">",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:106"
+              }
+            ],
+            "inheritedCount": 277,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 277
+              }
+            ]
+          },
+          {
             "name": "DataTableSelectAll",
             "status": "resolved",
             "ownProps": [
@@ -13038,25 +14184,25 @@
                 "optional": false,
                 "type": "string",
                 "doc": "Defines a string value that labels the current element.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:54"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:55"
               },
               {
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:48"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:49"
               },
               {
                 "name": "scope",
                 "optional": false,
                 "type": "\"page\" | \"filtered\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:54"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:55"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:54"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:55"
               }
             ],
             "inheritedCount": 286,
@@ -13079,13 +14225,13 @@
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:48"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:49"
               },
               {
                 "name": "row",
                 "optional": false,
                 "type": "Row<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:49"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:50"
               }
             ],
             "inheritedCount": 287,
@@ -13114,7 +14260,7 @@
                 "name": "column",
                 "optional": false,
                 "type": "Column<TData, unknown>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:42"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:43"
               },
               {
                 "name": "data-slot",
@@ -13223,7 +14369,7 @@
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
           "propsType": "DataTableProps<TData>",
-          "signature": "DataTable({ table, caption, emptyContent, busy = false, containerProps, className, ...props }: DataTableProps<TData>)",
+          "signature": "DataTable({ table, caption, emptyContent, busy = false, activeRowId, containerProps, className, ...props }: DataTableProps<TData>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -13258,11 +14404,72 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "DataTablePattern",
+          "kind": "function",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "propsType": "DataTablePatternProps<TData>",
+          "signature": "DataTablePattern({ data, columns, getRowId, mode = \"client\", state, defaultState, onStateChange, pagination = false, selection, activeRow, caption, emptyContent, busy = false, tableProps, className, ...props }: DataTablePatternProps<TData>)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DataTablePatternChangeDetails",
+          "kind": "type",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "signature": "{ reason: \"sorting\" | \"pagination\" | \"selection\" | \"active-row\" }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DataTablePatternColumn",
+          "kind": "type",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "signature": "{\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DataTablePatternPagination",
+          "kind": "type",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "signature": "{\n  /** Client mode derives this from data; server mode requires the actual total or explicit null. */\n  totalCount?: number | null;\n  /** Required for a server result with unknown total. */\n  hasNextPage?: boolean;\n  pageSizeOptions?: readonly number[];\n  \"aria-label\"?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DataTablePatternProps",
+          "kind": "type",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "signature": "Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  /** The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent. */\n  activeRow?: { columnId: string; onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"activeRowId\">;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DataTablePatternState",
+          "kind": "type",
+          "owner": "data-table",
+          "module": "@qingye_lab/ui/components/data-table",
+          "signature": "{\n  sorting: SortingState;\n  pagination: PaginationValue;\n  /** The complete ID map, including selected rows outside the current server page. */\n  rowSelection: RowSelectionState;\n  activeRowId: string | null;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "DataTableProps",
           "kind": "type",
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
-          "signature": "Omit<TableProps, \"children\"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; containerProps?: TableContainerProps }",
+          "signature": "Omit<TableProps, \"children\"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; activeRowId?: string | null; containerProps?: TableContainerProps }",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -13346,7 +14553,7 @@
         },
         {
           "name": "DataTableProps",
-          "definition": "export type DataTableProps<TData> = Omit<TableProps, \"children\"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; containerProps?: TableContainerProps };"
+          "definition": "export type DataTableProps<TData> = Omit<TableProps, \"children\"> & { table: TableInstance<TData>; caption?: React.ReactNode; emptyContent: React.ReactNode; busy?: boolean; activeRowId?: string | null; containerProps?: TableContainerProps };"
         },
         {
           "name": "DataTableSortButtonProps",
@@ -13359,9 +14566,35 @@
         {
           "name": "DataTableSelectAllProps",
           "definition": "export type DataTableSelectAllProps<TData> = SelectionProps & { table: TableInstance<TData>; scope: \"page\" | \"filtered\"; \"aria-label\": string };"
+        },
+        {
+          "name": "DataTablePatternColumn",
+          "definition": "export type DataTablePatternColumn<TData> = {\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n};"
+        },
+        {
+          "name": "DataTablePatternState",
+          "definition": "export type DataTablePatternState = {\n  sorting: SortingState;\n  pagination: PaginationValue;\n  /** The complete ID map, including selected rows outside the current server page. */\n  rowSelection: RowSelectionState;\n  activeRowId: string | null;\n};"
+        },
+        {
+          "name": "DataTablePatternChangeDetails",
+          "definition": "export type DataTablePatternChangeDetails = { reason: \"sorting\" | \"pagination\" | \"selection\" | \"active-row\" };"
+        },
+        {
+          "name": "DataTablePatternPagination",
+          "definition": "export type DataTablePatternPagination = {\n  /** Client mode derives this from data; server mode requires the actual total or explicit null. */\n  totalCount?: number | null;\n  /** Required for a server result with unknown total. */\n  hasNextPage?: boolean;\n  pageSizeOptions?: readonly number[];\n  \"aria-label\"?: string;\n};"
+        },
+        {
+          "name": "DataTablePatternProps",
+          "definition": "export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  /** The named column contains a keyboard-accessible activation button. Its cell content must be noninteractive; row selection stays independent. */\n  activeRow?: { columnId: string; onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"activeRowId\">;\n};"
         }
       ],
       "usageImports": [
+        {
+          "name": "DataTablePattern",
+          "import": "@qingye_lab/ui/components/data-table",
+          "owner": "data-table",
+          "status": "PASS"
+        },
         {
           "name": "DataTable",
           "import": "@qingye_lab/ui/components/data-table",
@@ -13409,7 +14642,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13422,6 +14655,7 @@
           "@base-ui/react/checkbox",
           "@base-ui/react/direction-provider",
           "@base-ui/react/merge-props",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -13430,18 +14664,30 @@
       "examples": [
         {
           "id": "task",
-          "title": "真实排序与范围选择",
+          "title": "排序、选择与分页",
           "source": "apps/docs/src/content/data-table/demos/01-task.tsx",
           "imports": [
             "@/lib/types",
             "@qingye_lab/ui/components/data-table",
             "@qingye_lab/ui/components/layout",
-            "@tanstack/react-table",
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSelectAll, DataTableSelectionCell, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"真实排序与范围选择\", titleEn: \"Real sorting and scoped selection\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", count: 0 },\n];\n\nexport default function Demo() {\n  const columns = React.useMemo<ColumnDef<Entry>[]>(() => [\n    // marker 列只放一个复选框，不占文字列的留白（基础层 §6）。\n    { id: \"selection\", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope=\"filtered\" aria-label=\"选择当前本地集合\" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.label}`} /> },\n    { accessorKey: \"label\", meta: { rowHeader: true }, header: \"名称\" },\n    { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },\n  ], []);\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });\n  return <Stack>\n    <DataTable table={table} caption=\"本地集合 · 3 项\" emptyContent=\"本地集合没有条目\" />\n    <output className=\"text-support text-muted-foreground\">已选：{table.getSelectedRowModel().rows.map(row => row.original.label).join(\"、\") || \"无\"}</output>\n  </Stack>;\n}\n",
-          "sha256": "996f57d41c0f95652c9db454a6b5b06ca8d651d28f51f8060fb005b5f1efae84"
+          "code": "import * as React from \"react\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"排序、选择与分页\", titleEn: \"Sorting, selection and pagination\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", count: 0 },\n];\nconst columns: DataTablePatternColumn<Entry>[] = [\n  { id: \"label\", header: \"名称\", accessor: row => row.label, rowHeader: true },\n  { id: \"count\", header: \"记录数\", accessor: row => row.count, sortable: true, sortDescFirst: false, numeric: true },\n];\n\nexport default function Demo() {\n  const [state, setState] = React.useState<DataTablePatternState>({ sorting: [], pagination: { page: 1, pageSize: 2 }, rowSelection: {}, activeRowId: null });\n  const selected = data.filter(row => state.rowSelection[row.id]);\n  return <Stack>\n    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption=\"本地集合 · 3 项\" emptyContent=\"本地集合没有条目\" state={state} onStateChange={setState} pagination={{ pageSizeOptions: [2, 5] }} selection={{ label: \"选择当页条目\", rowLabel: row => `选择${row.label}` }} activeRow={{ columnId: \"label\" }} />\n    <output className=\"text-support text-muted-foreground\">已选：{selected.map(row => row.label).join(\"、\") || \"无\"}</output>\n  </Stack>;\n}\n",
+          "sha256": "1558321cdf245b76f9e70095df85ce39840409b4bb09507f3f4931c04266aad3"
+        },
+        {
+          "id": "instance",
+          "title": "自定实例",
+          "source": "apps/docs/src/content/data-table/demos/02-instance.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/data-table",
+            "@tanstack/react-table"
+          ],
+          "providers": [],
+          "code": "import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"自定实例\", titleEn: \"Custom instance\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nconst data: Entry[] = [{ id: \"sensors\", label: \"接入设备\", count: 12 }, { id: \"roles\", label: \"权限与角色\", count: 8 }, { id: \"sync\", label: \"同步与导出\", count: 0 }];\nconst columns: ColumnDef<Entry>[] = [\n  { accessorKey: \"label\", header: \"名称\", meta: { rowHeader: true } },\n  { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: false, meta: { numeric: true } },\n];\n\nexport default function Demo() {\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption=\"本地集合 · 3 项\" emptyContent=\"本地集合没有条目\" />;\n}\n",
+          "sha256": "5235cbe355facbe14c783f8e478241aac01e3cfa888036093005f99fd50a18a3"
         }
       ],
       "design": {
@@ -13457,6 +14703,7 @@
           "不请求服务、不猜总数、不把未知当空、不自动删列。"
         ],
         "composition": [
+          "DataTablePattern：配置式排序、当页全选、活动行与分页组合，不发请求。",
           "DataTable：原生二维集合。",
           "DataTableSortButton：应用实例的真实排序入口。",
           "DataTableSelectionCell / DataTableSelectAll：行选择与显式范围选择。"
@@ -13466,7 +14713,7 @@
             "表格语义、公共组合与范围选择。"
           ],
           "application": [
-            "TanStack 实例、数据、稳定标识、模型配置与状态。"
+            "数据、稳定标识、服务端结果与业务范围；高级模式另持有 TanStack 实例。"
           ]
         },
         "responsive": [
@@ -13478,28 +14725,72 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "8200e643ee3e02eb8bc515f1ee1c3f364f1609b5c4c1abdd17f37221b4aca0fa",
+        "sha256": "0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "TanStack 实例与 getRowId 由应用提供；筛选/当前页选择只改该范围，保留范围外选择。",
+      "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。",
       "localized": {
         "en": {
           "title": "DataTable",
           "description": "Comparison, sorting and scoped selection for a real caller-owned collection.",
           "category": "Data display",
-          "decisions": "Applications supply the TanStack instance and getRowId; filtered/page selection changes only its scope and preserves outside selections.",
+          "decisions": "Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map.",
           "notes": [
+            "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
             "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
             "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
           ],
           "api": [
+            {
+              "name": "DataTablePattern",
+              "description": "Configured sorting, page selection, active rows and pagination without issuing requests.",
+              "descriptionEn": "Configured sorting, page selection, active rows and pagination without issuing requests.",
+              "props": [
+                {
+                  "name": "data / columns / getRowId / emptyContent",
+                  "type": "T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode",
+                  "description": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required.",
+                  "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required."
+                },
+                {
+                  "name": "state / defaultState / onStateChange",
+                  "type": "DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void",
+                  "description": "A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1.",
+                  "descriptionEn": "A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1."
+                },
+                {
+                  "name": "mode / pagination",
+                  "type": "client | server / false | DataTablePatternPagination",
+                  "description": "Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null.",
+                  "descriptionEn": "Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null."
+                },
+                {
+                  "name": "selection",
+                  "type": "{ label, rowLabel, canSelect? }",
+                  "description": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel.",
+                  "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel."
+                },
+                {
+                  "name": "activeRow",
+                  "type": "{ columnId: string, onActivate?: (row: T) => void }",
+                  "description": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent.",
+                  "descriptionEn": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent."
+                },
+                {
+                  "name": "caption / busy / tableProps / native div props",
+                  "type": "ReactNode / boolean / DataTableProps / HTML props",
+                  "description": "Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes.",
+                  "descriptionEn": "Refreshes retain supplied rows; props target the table or composition root and never infer request outcomes."
+                }
+              ]
+            },
             {
               "name": "DataTable",
               "description": "A native two-dimensional collection.",
               "descriptionEn": "A native two-dimensional collection.",
               "props": [
                 {
-                  "name": "table / emptyContent / caption / busy / containerProps",
+                  "name": "table / emptyContent / caption / busy / activeRowId / containerProps",
                   "type": "TableInstance<T> / ReactNode / TableContainerProps",
                   "description": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows.",
                   "descriptionEn": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows."
@@ -13565,6 +14856,7 @@
               "Requesting services, guessing totals, treating unknown as empty, or automatically removing columns."
             ],
             "composition": [
+              "DataTablePattern: Configured sorting, page selection, active rows and pagination without issuing requests.",
               "DataTable: A native two-dimensional collection.",
               "DataTableSortButton: A real sorting control for the caller instance.",
               "DataTableSelectionCell / DataTableSelectAll: Row selection and explicit scope selection."
@@ -13837,7 +15129,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14387,7 +15679,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14856,7 +16148,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16100,7 +17392,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16825,7 +18117,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19271,7 +20563,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20312,7 +21604,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21226,7 +22518,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22181,7 +23473,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25059,7 +26351,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26691,7 +27983,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28699,7 +29991,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29180,7 +30472,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29916,6 +31208,7 @@
       "layer": "pattern",
       "import": "@qingye_lab/ui/components/pagination",
       "exports": [
+        "PaginationPattern",
         "Pagination",
         "PaginationList",
         "PaginationItem",
@@ -29926,7 +31219,7 @@
       ],
       "docs": "/docs/components/pagination",
       "notes": [
-        "不请求数据、保存路由或自动截取页码；未知总数不证明有无下一页。"
+        "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。"
       ],
       "keywords": [
         "pager",
@@ -29936,6 +31229,37 @@
         "页码"
       ],
       "api": [
+        {
+          "name": "PaginationPattern",
+          "description": "本地页动作的标准组合。",
+          "descriptionEn": "Standard composition for local page actions.",
+          "props": [
+            {
+              "name": "value / defaultValue / onValueChange",
+              "type": "PaginationValue / (value, { reason }) => void",
+              "description": "{ page, pageSize } 原子更新；page 从 1 开始。reason 为 page、page-size 或 total-change。条数改变同时回到第 1 页。",
+              "descriptionEn": "Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1."
+            },
+            {
+              "name": "totalCount / hasNextPage",
+              "type": "number | null / boolean",
+              "description": "非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。",
+              "descriptionEn": "A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page."
+            },
+            {
+              "name": "pageSizeOptions / disabled",
+              "type": "readonly number[] / boolean",
+              "description": "省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。",
+              "descriptionEn": "Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state."
+            },
+            {
+              "name": "aria-label / render / ref / native nav props",
+              "type": "PaginationProps",
+              "description": "转发到 nav；可访问页名、总数摘要与条数标签来自 locale。",
+              "descriptionEn": "Forwarded to nav; accessible page names, total summaries and page-size labels come from locale."
+            }
+          ]
+        },
         {
           "name": "Pagination",
           "description": "有名称的 nav，不生成页码。",
@@ -30028,13 +31352,13 @@
                 "name": "page",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/pagination.tsx:11"
+                "declaredAt": "packages/ui/src/components/pagination.tsx:12"
               },
               {
                 "name": "totalPages",
                 "optional": false,
                 "type": "number | null",
-                "declaredAt": "packages/ui/src/components/pagination.tsx:11"
+                "declaredAt": "packages/ui/src/components/pagination.tsx:12"
               }
             ],
             "inheritedCount": 281,
@@ -30089,7 +31413,7 @@
                 "name": "page",
                 "optional": false,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/pagination.tsx:25"
+                "declaredAt": "packages/ui/src/components/pagination.tsx:26"
               }
             ],
             "inheritedCount": 289,
@@ -30177,6 +31501,66 @@
               {
                 "source": "@base-ui/react",
                 "count": 3
+              }
+            ]
+          },
+          {
+            "name": "PaginationPattern",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "PaginationValue",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:81"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:85"
+              },
+              {
+                "name": "hasNextPage",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:78"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "(value: PaginationValue, details: PaginationChangeDetails) => void",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:82"
+              },
+              {
+                "name": "pageSizeOptions",
+                "optional": true,
+                "type": "readonly number[]",
+                "doc": "Omit to hide the page-size control. Values must be distinct positive integers.",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:84"
+              },
+              {
+                "name": "totalCount",
+                "optional": false,
+                "type": "number",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:78"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "PaginationValue",
+                "declaredAt": "packages/ui/src/components/pagination.tsx:80"
+              }
+            ],
+            "inheritedCount": 278,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 277
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
               }
             ]
           },
@@ -30334,12 +31718,33 @@
       "keyboard": [],
       "actualExports": [
         {
+          "name": "normalizePaginationValue",
+          "kind": "function",
+          "owner": "pagination",
+          "module": "@qingye_lab/ui/components/pagination",
+          "propsType": "PaginationValue",
+          "signature": "normalizePaginationValue(value: PaginationValue, totalCount: number | null): PaginationValue",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "Pagination",
           "kind": "function",
           "owner": "pagination",
           "module": "@qingye_lab/ui/components/pagination",
           "propsType": "PaginationProps",
           "signature": "Pagination({ page, totalPages, render, className, ...props }: PaginationProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "PaginationChangeDetails",
+          "kind": "type",
+          "owner": "pagination",
+          "module": "@qingye_lab/ui/components/pagination",
+          "signature": "{ reason: \"page\" | \"page-size\" | \"total-change\" }",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -30450,6 +31855,27 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "PaginationPattern",
+          "kind": "function",
+          "owner": "pagination",
+          "module": "@qingye_lab/ui/components/pagination",
+          "propsType": "PaginationPatternProps",
+          "signature": "PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, ...props }: PaginationPatternProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "PaginationPatternProps",
+          "kind": "type",
+          "owner": "pagination",
+          "module": "@qingye_lab/ui/components/pagination",
+          "signature": "Omit<PaginationProps, \"page\" | \"totalPages\" | \"children\" | \"defaultValue\" | \"onChange\"> & PaginationTotals & {\n  value?: PaginationValue;\n  defaultValue?: PaginationValue;\n  onValueChange?: (value: PaginationValue, details: PaginationChangeDetails) => void;\n  /** Omit to hide the page-size control. Values must be distinct positive integers. */\n  pageSizeOptions?: readonly number[];\n  disabled?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "PaginationPrevious",
           "kind": "function",
           "owner": "pagination",
@@ -30476,6 +31902,16 @@
           "owner": "pagination",
           "module": "@qingye_lab/ui/components/pagination",
           "signature": "useRender.ComponentProps<\"nav\"> & { page?: number; totalPages: number | null }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "PaginationValue",
+          "kind": "type",
+          "owner": "pagination",
+          "module": "@qingye_lab/ui/components/pagination",
+          "signature": "{ page: number; pageSize: number }",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -30509,9 +31945,27 @@
         {
           "name": "PaginationEllipsisProps",
           "definition": "export type PaginationEllipsisProps = useRender.ComponentProps<\"span\">;"
+        },
+        {
+          "name": "PaginationValue",
+          "definition": "export type PaginationValue = { page: number; pageSize: number };"
+        },
+        {
+          "name": "PaginationChangeDetails",
+          "definition": "export type PaginationChangeDetails = { reason: \"page\" | \"page-size\" | \"total-change\" };"
+        },
+        {
+          "name": "PaginationPatternProps",
+          "definition": "export type PaginationPatternProps = Omit<PaginationProps, \"page\" | \"totalPages\" | \"children\" | \"defaultValue\" | \"onChange\"> & PaginationTotals & {\n  value?: PaginationValue;\n  defaultValue?: PaginationValue;\n  onValueChange?: (value: PaginationValue, details: PaginationChangeDetails) => void;\n  /** Omit to hide the page-size control. Values must be distinct positive integers. */\n  pageSizeOptions?: readonly number[];\n  disabled?: boolean;\n};"
         }
       ],
       "usageImports": [
+        {
+          "name": "PaginationPattern",
+          "import": "@qingye_lab/ui/components/pagination",
+          "owner": "pagination",
+          "status": "PASS"
+        },
         {
           "name": "Pagination",
           "import": "@qingye_lab/ui/components/pagination",
@@ -30575,7 +32029,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -30584,7 +32038,7 @@
           },
           {
             "name": "PageContext",
-            "declaredAt": "packages/ui/src/components/pagination.tsx:10",
+            "declaredAt": "packages/ui/src/components/pagination.tsx:11",
             "defaultValue": "undefined",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -30596,6 +32050,7 @@
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
           "@base-ui/react/merge-props",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -30604,16 +32059,15 @@
       "examples": [
         {
           "id": "pages",
-          "title": "已知总页数",
+          "title": "页码与每页条数",
           "source": "apps/docs/src/content/pagination/demos/01-pages.tsx",
           "imports": [
             "@/lib/types",
-            "@qingye_lab/ui/components/pagination",
-            "react"
+            "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"已知总页数\", titleEn: \"Known total\" } satisfies DemoMeta;\n\nconst total = 5;\n\nexport default function Demo() {\n  const [page, setPage] = useState(2);\n  return <Pagination page={page} totalPages={total}>\n    <PaginationList>\n      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>\n      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>\n        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>\n      </PaginationItem>)}\n      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>\n    </PaginationList>\n  </Pagination>;\n}\n",
-          "sha256": "137cea7aabb647aa4e42d37f5340e44b87f720a66f29b9c574d8f38a56de456a"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页码与每页条数\", titleEn: \"Pages and page size\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;\n}\n",
+          "sha256": "9ae49b516492532782080d7e8c00a9ad13ca26028cca2d22b8eac8865f6dd5c0"
         },
         {
           "id": "ellipsis",
@@ -30621,12 +32075,11 @@
           "source": "apps/docs/src/content/pagination/demos/02-ellipsis.tsx",
           "imports": [
             "@/lib/types",
-            "@qingye_lab/ui/components/pagination",
-            "react"
+            "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页数较多\", titleEn: \"Many pages\" } satisfies DemoMeta;\n\nconst total = 12;\n\n// 首末页与当前页前后各一页；被省略的部分用省略号，不伪造页码。\nfunction visible(page: number) {\n  const numbers = [1, page - 1, page, page + 1, total].filter((number, index, all) => number >= 1 && number <= total && all.indexOf(number) === index).sort((a, b) => a - b);\n  return numbers.flatMap((number, index) => index > 0 && number - numbers[index - 1]! > 1 ? [\"gap\", number] as const : [number] as const);\n}\n\nexport default function Demo() {\n  const [page, setPage] = useState(6);\n  return <Pagination page={page} totalPages={total}>\n    <PaginationList>\n      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>\n      {visible(page).map((entry, index) => <PaginationItem key={entry === \"gap\" ? `gap-${index}` : entry}>\n        {entry === \"gap\" ? <PaginationEllipsis /> : <PaginationLink page={entry} href={`#page-${entry}`} onClick={event => { event.preventDefault(); setPage(entry); }}>{entry}</PaginationLink>}\n      </PaginationItem>)}\n      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>\n    </PaginationList>\n  </Pagination>;\n}\n",
-          "sha256": "40fde4900576b8b71cdb25adff132ff15eb6b247c5b664bddf0b5b21eb14a798"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页数较多\", titleEn: \"Many pages\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;\n}\n",
+          "sha256": "d0ef656a2e6078f5f5acaad5e9de9121d5556acf5e09dd8d9dff7ccaca6260e9"
         },
         {
           "id": "unknown",
@@ -30634,13 +32087,11 @@
           "source": "apps/docs/src/content/pagination/demos/03-unknown.tsx",
           "imports": [
             "@/lib/types",
-            "@qingye_lab/ui/components/pagination",
-            "@qingye_lab/ui/components/typography",
-            "react"
+            "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Pagination, PaginationItem, PaginationList, PaginationNext, PaginationPrevious } from \"@qingye_lab/ui/components/pagination\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"总数未知\", titleEn: \"Unknown total\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [page, setPage] = useState(1);\n  return <Pagination page={page} totalPages={null}>\n    <PaginationList>\n      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>\n      <PaginationItem><Text step=\"support\">第 {page} 页</Text></PaginationItem>\n      <PaginationItem><PaginationNext onClick={() => setPage(page + 1)} /></PaginationItem>\n    </PaginationList>\n  </Pagination>;\n}\n",
-          "sha256": "ce516d44b4d13bcf352a53c6152f5d8021387f9ec2e9ad58a1cbbeb5e31f6133"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"总数未知\", titleEn: \"Unknown total\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={null} hasNextPage />;\n}\n",
+          "sha256": "7ba5d07208aeaf5d67854b4361849970a3541b6fdd4e8d61b045916c3fe6d25f"
         }
       ],
       "design": {
@@ -30655,6 +32106,7 @@
           "过程进度用 Steps；不确定结果总数时不伪造末页。"
         ],
         "composition": [
+          "PaginationPattern：本地页动作的标准组合。",
           "Pagination：有名称的 nav，不生成页码。",
           "PaginationList / PaginationItem：ul / li 组织页面入口。",
           "PaginationLink：a，匹配当前页时 aria-current=page。",
@@ -30679,20 +32131,51 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/pagination.tsx",
-        "sha256": "b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469",
+        "sha256": "fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "只从 root page 与 link page 相等推导当前位置。总页数 null 表示未知；不创建末页或推断下一页存在。",
+      "decisions": "PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 pageSize 一次通知。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。",
       "localized": {
         "en": {
           "title": "Pagination",
           "description": "Page position, real actions and explicit unknown totals.",
           "category": "Navigation",
-          "decisions": "Only current position is derived by comparing root and link page facts. null means an unknown total; no final page or next-page availability is inferred.",
+          "decisions": "PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.",
           "notes": [
-            "No fetching, routing or automatic page window; unknown totals establish no next-page availability."
+            "The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability."
           ],
           "api": [
+            {
+              "name": "PaginationPattern",
+              "description": "Standard composition for local page actions.",
+              "descriptionEn": "Standard composition for local page actions.",
+              "props": [
+                {
+                  "name": "value / defaultValue / onValueChange",
+                  "type": "PaginationValue / (value, { reason }) => void",
+                  "description": "Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1.",
+                  "descriptionEn": "Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1."
+                },
+                {
+                  "name": "totalCount / hasNextPage",
+                  "type": "number | null / boolean",
+                  "description": "A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page.",
+                  "descriptionEn": "A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page."
+                },
+                {
+                  "name": "pageSizeOptions / disabled",
+                  "type": "readonly number[] / boolean",
+                  "description": "Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state.",
+                  "descriptionEn": "Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state."
+                },
+                {
+                  "name": "aria-label / render / ref / native nav props",
+                  "type": "PaginationProps",
+                  "description": "Forwarded to nav; accessible page names, total summaries and page-size labels come from locale.",
+                  "descriptionEn": "Forwarded to nav; accessible page names, total summaries and page-size labels come from locale."
+                }
+              ]
+            },
             {
               "name": "Pagination",
               "description": "A named nav without generated pages.",
@@ -30784,6 +32267,7 @@
               "Use Steps for process progression; never invent a last page when totals are unknown."
             ],
             "composition": [
+              "PaginationPattern: Standard composition for local page actions.",
               "Pagination: A named nav without generated pages.",
               "PaginationList / PaginationItem: ul / li organize page actions.",
               "PaginationLink: An anchor with aria-current=page for the current page.",
@@ -31047,7 +32531,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31407,7 +32891,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32725,7 +34209,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -33101,7 +34585,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34390,7 +35874,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35093,7 +36577,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37040,7 +38524,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39014,7 +40498,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39554,7 +41038,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40825,7 +42309,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41523,7 +43007,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41834,7 +43318,7 @@
               {
                 "name": "status",
                 "optional": false,
-                "type": "\"neutral\" | \"info\" | \"warning\" | \"unknown\" | \"online\" | \"offline\" | \"error\" | \"pending\" | \"in-progress\"",
+                "type": "\"neutral\" | \"info\" | \"warning\" | \"pending\" | \"error\" | \"unknown\" | \"online\" | \"offline\" | \"in-progress\"",
                 "declaredAt": "packages/ui/src/components/status-dot.tsx:7"
               }
             ],
@@ -41926,7 +43410,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42381,7 +43865,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44557,7 +46041,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45010,7 +46494,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46123,7 +47607,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46668,7 +48152,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47287,7 +48771,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50193,7 +51677,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:125",
+            "declaredAt": "packages/ui/src/locale.tsx:129",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51916,6 +53400,27 @@
           "providers": [],
           "code": "import * as React from \"react\";\nimport { IconDatabase, IconUsers } from \"@tabler/icons-react\";\nimport { useMediaQuery } from \"@qingye_lab/ui/hooks/use-media-query\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceHeaderPortal, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页面把标题与操作送进顶栏\", titleEn: \"A page sends its title and actions to the header\", flush: true } satisfies DemoMeta;\n\nfunction Collections() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>集合</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">6 个</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button>新建集合</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>蚕室温湿度</ItemTitle><ItemDescription>今天 08:30</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>桑园采叶记录</ItemTitle><ItemDescription>今天 07:55</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nfunction Members() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>成员</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">4 人</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button variant=\"quiet\">导出</Button><Button>邀请成员</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>陈致远</ItemTitle><ItemDescription>管理员</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>林晚</ItemTitle><ItemDescription>编辑</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nexport default function Demo() {\n  const [page, setPage] = React.useState<\"collections\" | \"members\">(\"collections\");\n  const narrow = useMediaQuery(\"max-sm\");\n  return <div className=\"h-[calc(16*var(--qy-cai))]\">\n    <Workspace className=\"max-sm:flex-col\">\n      <Sidebar aria-label=\"工作区\" collapsed={narrow} className=\"w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full\">\n        <SidebarContent>\n          <SidebarGroup className=\"max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]\">\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"collections\")} />} active={page === \"collections\"} icon={<IconDatabase aria-hidden=\"true\" />}>集合</SidebarLink>\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"members\")} />} active={page === \"members\"} icon={<IconUsers aria-hidden=\"true\" />}>成员</SidebarLink>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader className=\"max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)\" />\n        <WorkspaceContent render={<div />}>{page === \"collections\" ? <Collections /> : <Members />}</WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
           "sha256": "61c962bf61ffce8d4c7a1bbdb3b8d5c2aa40588495bea69d33bb9a14ae2c5e9a"
+        },
+        {
+          "id": "records",
+          "title": "列表与详情",
+          "source": "apps/docs/src/content/workspace/demos/03-records.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/alert",
+            "@qingye_lab/ui/components/data-table",
+            "@qingye_lab/ui/components/description-list",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/search-input",
+            "@qingye_lab/ui/components/textarea",
+            "@qingye_lab/ui/components/toggle",
+            "@qingye_lab/ui/components/workspace",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useMemo, useState } from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from \"@qingye_lab/ui/components/description-list\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\n\nexport const meta = { title: \"列表与详情\", titleEn: \"List and detail\", flush: true } satisfies DemoMeta;\n\ntype RecordItem = { id: string; name: string; owner: string; count: number; updated: string };\nconst records: RecordItem[] = Array.from({ length: 36 }, (_, index) => ({\n  id: `record-${index + 1}`,\n  name: index === 0 ? \"桑园采叶与跨区域运输交接记录（含东区、西区及临时库房的长名称核对）\" : `${[\"蚕室温湿度\", \"桑园采叶\", \"上簇批次\", \"茧质抽检\", \"饲料入库\", \"消毒巡检\"][index % 6]} · ${index + 1} 号`,\n  owner: [\"陈致远\", \"林晚\", \"周禾\"][index % 3]!, count: 120 + index * 17, updated: `今天 ${String(8 + index % 3).padStart(2, \"0\")}:${String(index % 60).padStart(2, \"0\")}`,\n}));\nconst columns: DataTablePatternColumn<RecordItem>[] = [\n  { id: \"name\", header: \"记录\", accessor: row => row.name, rowHeader: true, sortable: true, cell: row => <span className=\"text-start whitespace-normal wrap-anywhere\">{row.name}</span> },\n  { id: \"owner\", header: \"负责人\", accessor: row => row.owner },\n  { id: \"count\", header: \"条目\", accessor: row => row.count, numeric: true, sortable: true },\n  { id: \"updated\", header: \"更新时间\", accessor: row => row.updated, cell: row => <span className=\"whitespace-nowrap text-muted-foreground\">{row.updated}</span> },\n];\nconst initialState: DataTablePatternState = { sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: records[0]!.id };\n\n/**\n * 可复制的应用组合：Header 固定，WorkspaceContent 是唯一纵向滚动 owner；\n * 表格只拥有横向溢出。详情随页面滚动，不再建立一组嵌套的纵向滚动区。\n * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是\n * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。\n */\nexport function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {\n  const [query, setQuery] = useState(\"\");\n  const [state, setState] = useState(initialState);\n  const [details, setDetails] = useState(true);\n  const [compact, setCompact] = useState(false);\n  const [drafts, setDrafts] = useState<Record<string, string>>({});\n  const filtered = useMemo(() => records.filter(row => row.name.includes(query.trim()) || row.owner.includes(query.trim())), [query]);\n  const active = records.find(row => row.id === state.activeRowId);\n  const selectedCount = Object.values(state.rowSelection).filter(Boolean).length;\n  return <div className={embedded ? \"h-[calc(30*var(--qy-cai))]\" : \"h-full\"} data-density={compact ? \"compact\" : \"default\"}>\n    <Workspace>\n      <WorkspaceSurface>\n        <WorkspaceHeader render={embedded ? <div /> : <header />} className=\"h-auto min-h-(--qy-row-default) flex-wrap gap-y-(--qy-field-gap) py-(--qy-field-gap)\">\n          <WorkspaceTitle level={embedded ? 3 : 1}>采集记录</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>\n          <WorkspaceActions className=\"flex-wrap\"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={embedded ? <div /> : <main />} id={embedded ? undefined : \"main\"}>\n          <Stack gap=\"panel\" className=\"p-(--qy-page-gutter)\">\n            <Inline gap=\"panel\"><SearchInput aria-label=\"搜索采集记录\" placeholder=\"搜索记录或负责人\" value={query} onValueChange={next => {\n              setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));\n            }} controlClassName=\"w-full sm:max-w-[calc(16*var(--qy-cai))]\" /><span className=\"text-support text-muted-foreground\">已选 {selectedCount} 份（含其他页）</span></Inline>\n            <div className={details ? \"grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\" : \"min-w-0\"}>\n              <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}\n                pagination={{ pageSizeOptions: [10, 20, 50], \"aria-label\": \"采集记录分页\" }}\n                selection={{ label: \"选择本页记录\", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: \"name\" }}\n                tableProps={{ \"aria-label\": \"采集记录\", className: \"min-w-[calc(32*var(--qy-cai))]\", containerProps: { framed: false } }}\n                emptyContent={<span className=\"text-muted-foreground\">没有匹配的记录</span>} />\n              {details && active && <Stack render={<aside aria-label=\"记录详情\" />} gap=\"panel\">\n                <h2 className=\"m-0 text-heading wrap-anywhere\">{active.name}</h2>\n                {!filtered.some(row => row.id === active.id) && <Alert tone=\"info\"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}\n                <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className=\"numeric\">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>\n                <Field><FieldLabel>本地备注</FieldLabel><Textarea value={drafts[active.id] ?? \"\"} onValueChange={next => setDrafts(previous => ({ ...previous, [active.id]: next }))} placeholder=\"写下待核对事项\" /></Field>\n                <p className=\"m-0 text-support text-muted-foreground\">备注仅保留在当前页面，离开页面后清除。</p>\n              </Stack>}\n            </div>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n\nexport default function Demo() { return <><RecordsWorkspace embedded /><p className=\"m-0 p-(--qy-panel-padding-sm) text-support\"><a href=\"/examples/records\" className=\"text-foreground underline underline-offset-4\">打开完整工作台</a></p></>; }\n",
+          "sha256": "c7d7941a8abae65c705328909c24092c5ce65fdb114d15c9f887927ef1038b18"
         }
       ],
       "design": {
@@ -51935,7 +53440,9 @@
         "composition": [
           "Workspace 的子级是 Sidebar 与 WorkspaceSurface；WorkspaceSurface 里依次是 WorkspaceHeader 与 WorkspaceContent。",
           "内容区的内缘由页面给：取 --qy-page-gutter 时与顶栏标题同一条左缘；整幅的表格可以贴边。",
-          "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。"
+          "页面在 WorkspaceContent 里用 WorkspaceHeaderPortal 包住 WorkspaceTitle、WorkspaceSummary、WorkspaceActions。",
+          "列表参考组合见 /examples/records：Stack 放筛选与 DataTablePattern，关闭详情即为列表；展开时用 minmax(0,…) 网格放列表与详情。WorkspaceContent 唯一拥有纵向滚动，TableContainer 只承接横向溢出。分页随列表滚动，顶栏固定。",
+          "活动记录与批量选择独立；筛选或翻页保留活动记录和以稳定 ID 保存的备注。示例详情在 xl 以上并排，以下堆叠；2:1 比例是此任务的容量选择。"
         ],
         "stateOwner": {
           "library": [
@@ -52106,7 +53613,9 @@
             "composition": [
               "Workspace holds a Sidebar and a WorkspaceSurface; the surface holds WorkspaceHeader then WorkspaceContent.",
               "The page sets the content inset: --qy-page-gutter lines it up with the header title; a full-width table may run to the edge.",
-              "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal."
+              "Inside WorkspaceContent a page wraps WorkspaceTitle, WorkspaceSummary and WorkspaceActions in WorkspaceHeaderPortal.",
+              "See /examples/records: Stack holds filters and DataTablePattern; hide detail for a list, or use a minmax(0,…) grid for list and detail. WorkspaceContent owns vertical scrolling; TableContainer handles horizontal overflow. Pagination scrolls with the list; the header stays fixed.",
+              "The active record is independent from batch selection. Filtering and paging retain the active record and notes keyed by stable ID. Detail sits alongside the list at xl and stacks below it otherwise; 2:1 is a capacity choice for this task."
             ],
             "stateOwner": {
               "library": [
@@ -52132,6 +53641,7 @@
     "accordion",
     "alert",
     "alert-dialog",
+    "async-content",
     "autocomplete",
     "avatar",
     "badge",
@@ -52147,6 +53657,7 @@
     "code-block",
     "collapsible",
     "combobox",
+    "confirm",
     "confirm-action",
     "context-menu",
     "copy-button",
@@ -52265,8 +53776,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v4.0.0/llms.txt",
-    "components": "ai/v4.0.0/components"
+    "index": "ai/v4.1.0/llms.txt",
+    "components": "ai/v4.1.0/components"
   },
   "localized": {
     "en": {
@@ -52274,8 +53785,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v4.0.0/en/llms.txt",
-      "components": "ai/v4.0.0/en/components"
+      "index": "ai/v4.1.0/en/llms.txt",
+      "components": "ai/v4.1.0/en/components"
     }
   },
   "registry": {

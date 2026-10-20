@@ -1,6 +1,6 @@
 # 排版 Typography
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: b8f81aa5c4d95440a9db890542e3b52128a3aebb2829f0dc16c78616dbdb0656

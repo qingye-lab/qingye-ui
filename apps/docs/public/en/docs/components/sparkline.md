@@ -1,6 +1,6 @@
 # Sparkline
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202

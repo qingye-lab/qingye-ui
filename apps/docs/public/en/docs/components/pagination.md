@@ -1,17 +1,17 @@
 # Pagination
 
-Package: @qingye_lab/ui@4.0.0
+Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: b78e074d5c48db899068559434f3002b2eede27c7a4051e9c150011ec25f0469
+Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
 
 Page position, real actions and explicit unknown totals.
 
 ## Decision
-Only current position is derived by comparing root and link page facts. null means an unknown total; no final page or next-page availability is inferred.
+PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.
 
 ## Notes
-- No fetching, routing or automatic page window; unknown totals establish no next-page availability.
+- The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.
 
 ## Use and ownership
 - Results are paged and positions/navigation availability are known.
@@ -20,6 +20,7 @@ Only current position is derived by comparing root and link page facts. null mea
 - Application: Page content, current page, known/unknown totals, previous/next availability, and request outcomes.
 
 ## Composition
+- PaginationPattern: Standard composition for local page actions.
 - Pagination: A named nav without generated pages.
 - PaginationList / PaginationItem: ul / li organize page actions.
 - PaginationLink: An anchor with aria-current=page for the current page.
@@ -34,7 +35,9 @@ Only current position is derived by comparing root and link page facts. null mea
 - Configure brand, light or dark mode, and density separately; themes do not change permissions or save policies.
 
 ## Current exports
+- normalizePaginationValue: function; owner pagination; PASS; props: PaginationValue
 - Pagination: function; owner pagination; PASS; props: PaginationProps
+- PaginationChangeDetails: type; owner pagination; PASS
 - PaginationEllipsis: function; owner pagination; PASS; props: PaginationEllipsisProps
 - PaginationEllipsisProps: type; owner pagination; PASS
 - PaginationItem: function; owner pagination; PASS; props: PaginationItemProps
@@ -45,9 +48,12 @@ Only current position is derived by comparing root and link page facts. null mea
 - PaginationListProps: type; owner pagination; PASS
 - PaginationNext: function; owner pagination; PASS; props: PaginationNextProps
 - PaginationNextProps: type; owner pagination; PASS
+- PaginationPattern: function; owner pagination; PASS; props: PaginationPatternProps
+- PaginationPatternProps: type; owner pagination; PASS
 - PaginationPrevious: function; owner pagination; PASS; props: PaginationPreviousProps
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
+- PaginationValue: type; owner pagination; PASS
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -83,6 +89,16 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `variant?`: `"solid" | "bordered" | "quiet"`.
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
+### PaginationPattern
+- `defaultValue?`: `PaginationValue`.
+- `disabled?`: `boolean`.
+- `hasNextPage?`: `boolean`.
+- `onValueChange?`: `(value: PaginationValue, details: PaginationChangeDetails) => void`.
+- `pageSizeOptions?`: `readonly number[]`. Omit to hide the page-size control. Values must be distinct positive integers.
+- `totalCount`: `number`.
+- `value?`: `PaginationValue`.
+- plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
+
 ### PaginationPrevious
 - `className?`: `string`.
 - `data-slot?`: `string`.
@@ -102,6 +118,13 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
+
+### PaginationPattern
+Standard composition for local page actions.
+- value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1.
+- totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page.
+- pageSizeOptions / disabled: readonly number[] / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state.
+- aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, total summaries and page-size labels come from locale.
 
 ### Pagination
 A named nav without generated pages.
@@ -128,80 +151,41 @@ An omitted-pages marker, not a final page.
 ## Keyboard
 
 ## Source examples
-### 已知总页数
+### 页码与每页条数
 Source: apps/docs/src/content/pagination/demos/01-pages.tsx
 ```tsx
-import { useState } from "react";
-import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "已知总页数", titleEn: "Known total" } satisfies DemoMeta;
-
-const total = 5;
+export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  const [page, setPage] = useState(2);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {Array.from({ length: total }, (_, index) => index + 1).map(number => <PaginationItem key={number}>
-        <PaginationLink page={number} href={`#page-${number}`} onClick={event => { event.preventDefault(); setPage(number); }}>{number}</PaginationLink>
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
 }
 ```
 
 ### 页数较多
 Source: apps/docs/src/content/pagination/demos/02-ellipsis.tsx
 ```tsx
-import { useState } from "react";
-import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "页数较多", titleEn: "Many pages" } satisfies DemoMeta;
 
-const total = 12;
-
-// 首末页与当前页前后各一页；被省略的部分用省略号，不伪造页码。
-function visible(page: number) {
-  const numbers = [1, page - 1, page, page + 1, total].filter((number, index, all) => number >= 1 && number <= total && all.indexOf(number) === index).sort((a, b) => a - b);
-  return numbers.flatMap((number, index) => index > 0 && number - numbers[index - 1]! > 1 ? ["gap", number] as const : [number] as const);
-}
-
 export default function Demo() {
-  const [page, setPage] = useState(6);
-  return <Pagination page={page} totalPages={total}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      {visible(page).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>
-        {entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} href={`#page-${entry}`} onClick={event => { event.preventDefault(); setPage(entry); }}>{entry}</PaginationLink>}
-      </PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={page === total} onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+  return <PaginationPattern totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;
 }
 ```
 
 ### 总数未知
 Source: apps/docs/src/content/pagination/demos/03-unknown.tsx
 ```tsx
-import { useState } from "react";
-import { Pagination, PaginationItem, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
-import { Text } from "@qingye_lab/ui/components/typography";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
 
 export default function Demo() {
-  const [page, setPage] = useState(1);
-  return <Pagination page={page} totalPages={null}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-      <PaginationItem><Text step="support">第 {page} 页</Text></PaginationItem>
-      <PaginationItem><PaginationNext onClick={() => setPage(page + 1)} /></PaginationItem>
-    </PaginationList>
-  </Pagination>;
+  return <PaginationPattern totalCount={null} hasNextPage />;
 }
 ```

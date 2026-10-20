@@ -4,6 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { Button, type ButtonProps, buttonVariants } from "./button";
+import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "./select";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -69,4 +70,71 @@ export type PaginationEllipsisProps = useRender.ComponentProps<"span">;
 export function PaginationEllipsis({ render, className, ...props }: PaginationEllipsisProps) {
   const { messages } = useUILocale();
   return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "pagination-ellipsis", className: cn("text-support text-muted-foreground", className), children: <><span aria-hidden="true">…</span><span className="sr-only">{messages.morePages}</span></> }, props) });
+}
+
+/** Public page numbers are one-based. Zero results retain page 1 in state, without presenting a current page. */
+export type PaginationValue = { page: number; pageSize: number };
+export type PaginationChangeDetails = { reason: "page" | "page-size" | "total-change" };
+type PaginationTotals = { totalCount: number; hasNextPage?: boolean } | { totalCount: null; hasNextPage: boolean };
+export type PaginationPatternProps = Omit<PaginationProps, "page" | "totalPages" | "children" | "defaultValue" | "onChange"> & PaginationTotals & {
+  value?: PaginationValue;
+  defaultValue?: PaginationValue;
+  onValueChange?: (value: PaginationValue, details: PaginationChangeDetails) => void;
+  /** Omit to hide the page-size control. Values must be distinct positive integers. */
+  pageSizeOptions?: readonly number[];
+  disabled?: boolean;
+};
+
+/** Shared by standard table composition and standalone pagination; no requests or route changes occur here. */
+export function normalizePaginationValue(value: PaginationValue, totalCount: number | null): PaginationValue {
+  if (!Number.isInteger(value.page) || value.page < 1 || !Number.isInteger(value.pageSize) || value.pageSize < 1) throw new Error("Pagination requires positive integer page and pageSize.");
+  if (totalCount !== null && (!Number.isInteger(totalCount) || totalCount < 0)) throw new Error("Pagination requires a nonnegative integer totalCount or null.");
+  const lastPage = totalCount === null ? value.page : Math.max(1, Math.ceil(totalCount / value.pageSize));
+  return { page: Math.min(value.page, lastPage), pageSize: value.pageSize };
+}
+
+function pageWindow(page: number, total: number): (number | "gap")[] {
+  const pages = [...new Set([1, page - 1, page, page + 1, total])].filter(value => value >= 1 && value <= total).sort((a, b) => a - b);
+  return pages.flatMap((value, index) => index > 0 && value - pages[index - 1]! > 1 ? ["gap", value] : [value]);
+}
+
+/** A complete local-action pager. Link-based navigation remains available through the primitive parts above. */
+export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, ...props }: PaginationPatternProps) {
+  const { messages } = useUILocale();
+  const [internalValue, setInternalValue] = React.useState(defaultValue);
+  const source = value ?? internalValue;
+  const current = normalizePaginationValue(source, totalCount);
+  if (totalCount === null && typeof hasNextPage !== "boolean") throw new Error("Pagination with unknown totalCount requires explicit hasNextPage.");
+  if (pageSizeOptions?.some((option, index) => !Number.isInteger(option) || option < 1 || pageSizeOptions.indexOf(option) !== index)) throw new Error("Pagination pageSizeOptions must contain distinct positive integers.");
+  const totalPages = totalCount === null ? null : Math.ceil(totalCount / current.pageSize);
+  const correction = React.useRef<string | null>(null);
+  React.useEffect(() => {
+    if (source.page === current.page && source.pageSize === current.pageSize) { correction.current = null; return; }
+    const key = `${source.page}:${source.pageSize}:${current.page}:${current.pageSize}:${totalCount}`;
+    if (correction.current === key) return;
+    correction.current = key;
+    if (value === undefined) setInternalValue(current);
+    onValueChange?.(current, { reason: "total-change" });
+  }, [source.page, source.pageSize, current.page, current.pageSize, totalCount, value, onValueChange]);
+  const change = (next: PaginationValue, reason: "page" | "page-size") => {
+    const normalized = normalizePaginationValue(next, totalCount);
+    if (normalized.page === current.page && normalized.pageSize === current.pageSize) return;
+    if (value === undefined) setInternalValue(normalized);
+    onValueChange?.(normalized, { reason });
+  };
+  const options = pageSizeOptions && !pageSizeOptions.includes(current.pageSize) ? [...pageSizeOptions, current.pageSize].sort((a, b) => a - b) : pageSizeOptions;
+  return <Pagination data-slot="pagination-pattern" {...props} {...(totalPages === 0 ? {} : { page: current.page })} totalPages={totalPages}>
+    <PaginationList>
+      <PaginationItem><PaginationPrevious disabled={disabled || current.page === 1 || totalPages === 0} onClick={() => change({ ...current, page: current.page - 1 }, "page")} /></PaginationItem>
+      {totalPages !== null && pageWindow(current.page, totalPages).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>{entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} aria-label={messages.paginationPage(entry)} render={<Button variant="quiet" disabled={disabled} />} onClick={() => change({ ...current, page: entry }, "page")}>{entry}</PaginationLink>}</PaginationItem>)}
+      <PaginationItem><PaginationNext disabled={disabled || (totalPages === null ? !hasNextPage : totalPages === 0 || current.page >= totalPages)} onClick={() => change({ ...current, page: current.page + 1 }, "page")} /></PaginationItem>
+    </PaginationList>
+    <div data-slot="pagination-details" className="flex min-w-0 flex-wrap items-center gap-(--qy-action-gap)">
+      <span data-slot="pagination-summary" className="text-support text-muted-foreground">{messages.paginationSummary(current.page, totalPages, totalCount)}</span>
+      {options && options.length > 0 && <Select<number> value={current.pageSize} disabled={disabled} items={options.map(option => ({ value: option, label: String(option) }))} onValueChange={pageSize => { if (pageSize !== null) change({ page: 1, pageSize }, "page-size"); }}>
+        <SelectTrigger aria-label={messages.paginationPageSize}><span>{messages.paginationPageSize}</span><SelectValue /></SelectTrigger>
+        <SelectPopup>{options.map(option => <SelectItem key={option} value={option}>{option}</SelectItem>)}</SelectPopup>
+      </Select>}
+    </div>
+  </Pagination>;
 }

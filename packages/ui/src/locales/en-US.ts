@@ -9,6 +9,8 @@ export const enUS: UILocale = {
     dismissFileRejection: (name) => `Dismiss rejection for ${name}`,
     toastSuccess: "Succeeded",
     pagination: "Pagination", previousPage: "Previous", nextPage: "Next", morePages: "More pages",
+    paginationPage: page => `Page ${page}`, paginationPageSize: "Rows per page",
+    paginationSummary: (page, totalPages, totalCount) => totalCount === 0 ? "0 results" : totalPages === null ? `Page ${page}, total unknown` : `Page ${page} of ${totalPages} · ${totalCount} results`,
     sidebar: "Workspace navigation",
     showOptions: "Show options", clearSelection: "Clear selection", remove: "Remove",
     decrease: "Decrease", increase: "Increase", numberInput: "Number input",

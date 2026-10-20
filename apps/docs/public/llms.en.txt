@@ -1,12 +1,12 @@
-# Qingye UI 4.0.0
+# Qingye UI 4.1.0
 
-> Facts for @qingye_lab/ui@4.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@4.1.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.en.md)
 - [Style contract](/ai/style.en.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.en.md): method sources
-- [Installation](/ai/v4.0.0/installation.md)
+- [Installation](/ai/v4.1.0/installation.md)
 - [Main skill](/ai/SKILL.en.md)
 - [Full text](/llms-full.en.txt): the guide, installation and every component in one file
 
@@ -14,6 +14,7 @@
 - [Accordion](/en/docs/components/accordion.md): Reveal content from each item's named trigger.
 - [Alert](/en/docs/components/alert.md): Static local information, with announcements only when requested.
 - [AlertDialog](/en/docs/components/alert-dialog.md): Block the work surface for an explicit decision about the current object.
+- [AsyncContent](/en/docs/components/async-content.md): Present request status separately from content that remains valid.
 - [Autocomplete](/en/docs/components/autocomplete.md): Edit free text with optional suggestions.
 - [Avatar](/en/docs/components/avatar.md): An image with one named identity and a fallback.
 - [Badge](/en/docs/components/badge.md): A short marker that keeps its content name without inferring state.
@@ -29,6 +30,7 @@
 - [CodeBlock](/en/docs/components/code-block.md): Literal text with an optional title bar and actual copy results.
 - [Collapsible](/en/docs/components/collapsible.md): Reveal additional content for the same object.
 - [Combobox](/en/docs/components/combobox.md): Filter candidates and confirm one value or a set, with query text separate from selection.
+- [Confirm](/en/docs/components/confirm.md): Await one explicit decision, then let the caller continue.
 - [ConfirmAction](/en/docs/components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
 - [ContextMenu](/en/docs/components/context-menu.md): A context-menu enhancement for commands on the current object.
 - [Copy button](/en/docs/components/copy-button.md): Copy supplied text and reflect the clipboard write result.
