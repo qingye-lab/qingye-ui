@@ -132,7 +132,7 @@ export function OtpField({
         )}
       >{characters[index] ?? ""}</span>)}
       <Input {...props} ref={setRef} type="text" value={value} unstyled
-        data-slot="otp-field-input" autoComplete={props.autoComplete ?? "one-time-code"}
+        data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "otp-field-input"} autoComplete={props.autoComplete ?? "one-time-code"}
         aria-describedby={[describedBy, feedback ? feedbackId : undefined].filter(Boolean).join(" ") || undefined}
         controlClassName="absolute inset-0" className={state => cn("cursor-text opacity-0", typeof className === "function" ? className(state) : className)}
         onFocus={event => { onFocus?.(event); syncSelection(event.currentTarget); }}

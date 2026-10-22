@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
+Source SHA-256: 1c804a074f97e8985c163f559eeead6b4e8199ed3288ebeb5fab5953fc734f01
 
 Copy supplied text and reflect the clipboard write result.
 

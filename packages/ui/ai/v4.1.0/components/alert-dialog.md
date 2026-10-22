@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
+Source SHA-256: 0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec
 
 阻断整个工作面，要求对当前对象作出明确选择。
 

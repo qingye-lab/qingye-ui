@@ -19,7 +19,7 @@ export function LocaleSwitch({ options, onLocaleChange, onChange, ...props }: Lo
     if (!option.locale.code || codes.has(option.locale.code)) throw new Error("LocaleSwitch requires unique, nonempty locale codes.");
     codes.add(option.locale.code);
   }
-  return <NativeSelect {...props} data-slot="locale-switch" value={current.code} aria-label={props["aria-label"] ?? current.messages.language}
+  return <NativeSelect {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "locale-switch"} value={current.code} aria-label={props["aria-label"] ?? current.messages.language}
     onChange={event => {
       onChange?.(event);
       if (event.defaultPrevented || event.currentTarget.disabled) return;

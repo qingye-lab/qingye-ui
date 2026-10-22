@@ -48,7 +48,7 @@ export function CopyButton({ value, timeout = 2000, onCopySuccess, onCopyError, 
   const explicitName = props["aria-label"] !== undefined || props["aria-labelledby"] !== undefined;
   const describedBy = [props["aria-describedby"], customText && !explicitName ? actionId : undefined, failed ? statusId : undefined].filter(Boolean).join(" ") || undefined;
   return <>
-    <Button {...props} data-slot="copy-button" variant={variant} shape={shape} loading={isCopying}
+    <Button {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "copy-button"} variant={variant} shape={shape} loading={isCopying}
       aria-label={props["aria-label"] ?? (named ? undefined : messages.copy)}
       aria-describedby={describedBy}
       data-copied={copied ? "" : undefined} data-copy-error={failed ? "" : undefined}

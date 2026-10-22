@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
-Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
+Source SHA-256: a454a4019a594b5a5370612b01e440f4f3c847d1549bf8773ff10eb1f72b226d
 
 Request an application locale change and show the current Provider value.
 

@@ -140,9 +140,9 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   const context = useSidebar();
   const { messages } = useUILocale();
   const frame = cn(
-    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
+    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent not-aria-[current=page]:hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
     context.collapsed ? "justify-center px-0" : "px-(--qy-control-sm-padding)",
-    active && "bg-sidebar-current text-sidebar-accent-foreground",
+    active && "bg-sidebar-current text-sidebar-current-foreground",
     className,
   );
   const hasCount = count !== undefined && count > 0;

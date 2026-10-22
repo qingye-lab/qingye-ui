@@ -928,7 +928,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e
+Source SHA-256: 0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec
 
 阻断整个工作面，要求对当前对象作出明确选择。
 
@@ -3361,7 +3361,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
-Source SHA-256: 1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a
+Source SHA-256: 1c804a074f97e8985c163f559eeead6b4e8199ed3288ebeb5fab5953fc734f01
 
 复制给定文本，并呈现剪贴板实际写入结果。
 
@@ -4102,7 +4102,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369
+Source SHA-256: c636e8fa6231621f7fb0314ad1a2392d21fe43dee53b18719140b7242d05a221
 
 接管整个工作面，完成当前编辑或决定后返回。
 
@@ -5997,7 +5997,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
-Source SHA-256: fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4
+Source SHA-256: a454a4019a594b5a5370612b01e440f4f3c847d1549bf8773ff10eb1f72b226d
 
 请求切换应用语言，并显示 Provider 当前事实。
 
@@ -6838,7 +6838,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e
+Source SHA-256: 95ef294c2ff8445875e0b66d268f7be55d23bd8b5410630ffbc90e59743f6329
 
 分段呈现一个固定长度文本值。
 
@@ -7371,7 +7371,7 @@ export default function Demo() { return <PendingValue label="值" actions={<Butt
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
+Source SHA-256: 9f818d7dc872da06ff25ab1564d8e3f1837b7df10e434514db7f91d154c8ef38
 
 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 
@@ -8791,7 +8791,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
+Source SHA-256: 9925f959754e4462b4b2f9524f0847c72a00790f93db79811fc5ad1b74dc8ef3
 
 长期导航、收起为图标 rail 与二级子级。
 

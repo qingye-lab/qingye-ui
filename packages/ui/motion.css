@@ -1,3 +1,4 @@
+/* Internal motion classes remain stable when a consumer changes data-slot. */
 /*
  * motion.css — library-wide motion policy.
  *
@@ -44,7 +45,7 @@
   [data-slot="context-menu-sub-content"],
   [data-slot="autocomplete-popup"],
   [data-slot="combobox-popup"],
-  [data-slot="popover-popup"],
+  .qy-popover-popup,
   [data-slot="tooltip-popup"],
   [data-slot="hover-card-popup"],
   [data-slot="navigation-menu-popup"]
@@ -62,7 +63,7 @@
   [data-slot="context-menu-sub-content"],
   [data-slot="autocomplete-popup"],
   [data-slot="combobox-popup"],
-  [data-slot="popover-popup"],
+  .qy-popover-popup,
   [data-slot="tooltip-popup"],
   [data-slot="hover-card-popup"],
   [data-slot="navigation-menu-popup"]
@@ -80,7 +81,7 @@
   [data-slot="context-menu-sub-content"],
   [data-slot="autocomplete-popup"],
   [data-slot="combobox-popup"],
-  [data-slot="popover-popup"],
+  .qy-popover-popup,
   [data-slot="tooltip-popup"],
   [data-slot="hover-card-popup"]
 )[data-ending-style] {
@@ -97,15 +98,15 @@
 }
 
 /* 基础层 §12、STANDARDS §6：Popover 宽度立即换位，只有必要高度与入退继续过渡。 */
-[data-slot="popover-popup"] {
+.qy-popover-popup {
   transition-property: height, scale, opacity;
 }
 
 /* Modal windows and navigation's larger panel keep their existing slower
  * entry. Opacity used for dialog nesting is an ongoing state, not entry/exit. */
 :is(
-  [data-slot="dialog-popup"],
-  [data-slot="alert-dialog-popup"]
+  .qy-dialog-popup,
+  .qy-alert-dialog-popup
 ) {
   transition-property: scale, opacity, translate;
   transition-duration: var(--qy-duration-base);
@@ -117,22 +118,22 @@
 }
 
 :is(
-  [data-slot="dialog-popup"],
-  [data-slot="alert-dialog-popup"]
+  .qy-dialog-popup,
+  .qy-alert-dialog-popup
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
 }
 
 :is(
-  [data-slot="dialog-popup"],
-  [data-slot="alert-dialog-popup"],
+  .qy-dialog-popup,
+  .qy-alert-dialog-popup,
   [data-slot="navigation-menu-popup"]
 )[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }
 
 @media (width >= 40rem) {
-  :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"]):is(
+  :is(.qy-dialog-popup, .qy-alert-dialog-popup):is(
     [data-starting-style], [data-ending-style]
   ) {
     scale: var(--qy-scale-popup);
@@ -140,7 +141,7 @@
 }
 
 @media (width < 40rem) {
-  :is([data-slot="dialog-popup"], [data-slot="alert-dialog-popup"])[data-bottom-stick-on-mobile]:is(
+  :is(.qy-dialog-popup, .qy-alert-dialog-popup)[data-bottom-stick-on-mobile]:is(
     [data-starting-style], [data-ending-style]
   ) {
     /* 1rem 是预设：窄屏底部贴靠的对话框入退的竖向位移，只此一处，不设令牌。 */
@@ -149,8 +150,8 @@
 }
 
 :is(
-  [data-slot="dialog-backdrop"],
-  [data-slot="alert-dialog-backdrop"]
+  .qy-dialog-backdrop,
+  .qy-alert-dialog-backdrop
 ) {
   transition-property: opacity;
   transition-duration: var(--qy-duration-base);
@@ -158,29 +159,29 @@
 }
 
 :is(
-  [data-slot="dialog-backdrop"],
-  [data-slot="alert-dialog-backdrop"],
+  .qy-dialog-backdrop,
+  .qy-alert-dialog-backdrop,
   [data-slot="drawer-backdrop"]
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
 }
 
 :is(
-  [data-slot="dialog-backdrop"],
-  [data-slot="alert-dialog-backdrop"]
+  .qy-dialog-backdrop,
+  .qy-alert-dialog-backdrop
 )[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }
 
 /* Popup viewport content has its own crossfade when the trigger changes.
  * Keep that distinct from scaling the surrounding popup, with one owner. */
-:is([data-slot="popover-viewport"], [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]) {
+:is(.qy-popover-viewport, [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]) {
   opacity: 1;
   transition-property: opacity;
   transition-duration: var(--qy-duration-fast);
   transition-timing-function: var(--qy-ease-out);
 }
-:is([data-slot="popover-viewport"], [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]):is(
+:is(.qy-popover-viewport, [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]):is(
   [data-starting-style], [data-ending-style]
 ) {
   opacity: 0;
@@ -370,12 +371,12 @@
     [data-slot="context-menu-sub-content"],
     [data-slot="autocomplete-popup"],
     [data-slot="combobox-popup"],
-    [data-slot="popover-popup"],
+    .qy-popover-popup,
     [data-slot="tooltip-popup"],
     [data-slot="hover-card-popup"],
     [data-slot="navigation-menu-popup"],
-    [data-slot="dialog-popup"],
-    [data-slot="alert-dialog-popup"],
+    .qy-dialog-popup,
+    .qy-alert-dialog-popup,
     [data-slot="navigation-menu-content"]
   ):is([data-starting-style], [data-ending-style]) {
     scale: none !important;

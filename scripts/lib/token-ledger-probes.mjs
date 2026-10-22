@@ -1,6 +1,7 @@
 // Experiments on current public components. Values below are test overrides,
 // not design defaults; each probe records actual computed before/after values.
 export const PROBES = [
+  { id: 'sidebar-current-foreground', sourceComponent: 'sidebar', demo: 'current', part: 'sidebar-link', selector: '[data-demo="current"] [data-slot="sidebar-link"][aria-current="page"]', token: '--qy-sidebar-current-foreground', override: 'rgb(12, 130, 210)', properties: ['color'], state: 'current' },
   { id: 'field-relationship-gap', sourceComponent: 'field', demo: 'default', part: 'field', selector: '[data-demo="default"] [data-slot="field"]', token: '--qy-field-gap', override: '17px', properties: ['gap'], state: 'default' },
   { id: 'field-group-relationship-gap', sourceComponent: 'field', demo: 'group', part: 'field-group', selector: '[data-demo="group"] [data-slot="field-group"]', token: '--qy-field-group-gap', override: '37px', properties: ['gap'], state: 'default' },
   { id: 'button-primary', sourceComponent: 'button', demo: 'variants', part: 'button', selector: '[data-demo="variants"] [data-slot="button"][data-variant="solid"][data-tone="neutral"]', token: '--qy-primary', override: 'rgb(12, 130, 210)', properties: ['background-color'], state: 'default' },

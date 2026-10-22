@@ -39,7 +39,7 @@ export function PopoverTrigger({
       className={(state) =>
         cn(controlFocus, typeof className === "function" ? className(state) : className)
       }
-      data-slot="popover-trigger"
+      data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-trigger"}
     />
   );
 }
@@ -94,29 +94,29 @@ export function PopoverPopup({
               : positionerProps?.className,
           )
         }
-        data-slot="popover-positioner"
+        data-slot={(positionerProps as { "data-slot"?: string } | undefined)?.["data-slot"] ?? "popover-positioner"}
       >
         <PopoverPrimitive.Popup
           {...props}
           className={(state) =>
             cn(
-              "relative min-w-0 h-(--popup-height,auto) w-(--popup-width,auto) max-w-(--available-width) origin-(--transform-origin) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none focus-visible:border-ring",
+              "qy-popover-popup relative min-w-0 h-(--popup-height,auto) w-(--popup-width,auto) max-w-(--available-width) origin-(--transform-origin) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none focus-visible:border-ring",
               typeof className === "function" ? className(state) : className,
             )
           }
-          data-slot="popover-popup"
+          data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-popup"}
         >
           <PopoverPrimitive.Viewport
             {...viewportProps}
             className={(state) =>
               cn(
-                "relative min-w-0 max-h-[max(0px,calc(var(--available-height)-2*var(--qy-line-width)))] overflow-y-auto p-(--qy-panel-padding-sm)",
+                "qy-popover-viewport relative min-w-0 max-h-[max(0px,calc(var(--available-height)-2*var(--qy-line-width)))] overflow-y-auto p-(--qy-panel-padding-sm)",
                 typeof viewportProps?.className === "function"
                   ? viewportProps.className(state)
                   : viewportProps?.className,
               )
             }
-            data-slot="popover-viewport"
+            data-slot={(viewportProps as { "data-slot"?: string } | undefined)?.["data-slot"] ?? "popover-viewport"}
           >
             {children}
           </PopoverPrimitive.Viewport>
@@ -136,7 +136,7 @@ export function PopoverClose({
       className={(state) =>
         cn(controlFocus, typeof className === "function" ? className(state) : className)
       }
-      data-slot="popover-close"
+      data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-close"}
     />
   );
 }
@@ -151,7 +151,7 @@ export function PopoverTitle({
       className={(state) =>
         cn("text-heading", typeof className === "function" ? className(state) : className)
       }
-      data-slot="popover-title"
+      data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-title"}
     />
   );
 }
@@ -166,7 +166,7 @@ export function PopoverDescription({
       className={(state) =>
         cn("text-body text-muted-foreground", typeof className === "function" ? className(state) : className)
       }
-      data-slot="popover-description"
+      data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-description"}
     />
   );
 }

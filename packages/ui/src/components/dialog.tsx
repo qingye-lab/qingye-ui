@@ -23,7 +23,7 @@ export function Dialog<Payload = unknown>(props: DialogProps<Payload>): React.Re
 export const DialogCreateHandle = DialogPrimitive.createHandle;
 
 export function DialogTrigger<Payload = unknown>({ render, ...props }: DialogPrimitive.Trigger.Props<Payload>): React.ReactElement {
-  return <DialogPrimitive.Trigger {...props} render={render ?? <Button variant="bordered" />} data-slot="dialog-trigger" />;
+  return <DialogPrimitive.Trigger {...props} render={render ?? <Button variant="bordered" />} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-trigger"} />;
 }
 
 // 禁止 false/undefined 返回：阻断式工作面必须有进入和返回的焦点落点。
@@ -43,16 +43,16 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
   const backdropLayer = useFloatingLayer("backdrop");
   const surfaceLayer = useFloatingLayer("surface");
   return <DialogPrimitive.Portal {...portalProps} keepMounted={false}>
-    <DialogPrimitive.Backdrop {...backdropProps} data-slot="dialog-backdrop"
+    <DialogPrimitive.Backdrop {...backdropProps} data-slot={(backdropProps as { "data-slot"?: string } | undefined)?.["data-slot"] ?? "dialog-backdrop"}
       style={state => ({ ...backdropLayer, ...(typeof backdropProps?.style === "function" ? backdropProps.style(state) : backdropProps?.style) })}
-      className={(state) => cn("fixed inset-0 bg-overlay", typeof backdropProps?.className === "function" ? backdropProps.className(state) : backdropProps?.className)} />
-    <DialogPrimitive.Viewport {...viewportProps} data-slot="dialog-viewport"
+      className={(state) => cn("qy-dialog-backdrop fixed inset-0 bg-overlay", typeof backdropProps?.className === "function" ? backdropProps.className(state) : backdropProps?.className)} />
+    <DialogPrimitive.Viewport {...viewportProps} data-slot={(viewportProps as { "data-slot"?: string } | undefined)?.["data-slot"] ?? "dialog-viewport"}
       style={state => ({ ...surfaceLayer, ...(typeof viewportProps?.style === "function" ? viewportProps.style(state) : viewportProps?.style) })}
       className={(state) => cn("pointer-events-none fixed inset-0 flex min-w-0 items-center justify-center p-(--qy-panel-padding)", typeof viewportProps?.className === "function" ? viewportProps.className(state) : viewportProps?.className)}>
-      <DialogPrimitive.Popup {...props} aria-modal="true" data-slot="dialog-popup"
+      <DialogPrimitive.Popup {...props} aria-modal="true" data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-popup"}
         className={(state) => cn(
           // 内容固有宽度 + 视口上限；浮层身份读既有角色，入退只在 motion.css。
-          "pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
+          "qy-dialog-popup pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
           typeof className === "function" ? className(state) : className,
         )} />
     </DialogPrimitive.Viewport>
@@ -60,18 +60,18 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
 }
 
 export function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props): React.ReactElement {
-  return <DialogPrimitive.Title {...props} data-slot="dialog-title"
+  return <DialogPrimitive.Title {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-title"}
     className={(state) => cn("min-w-0 text-heading wrap-break-word", typeof className === "function" ? className(state) : className)} />;
 }
 
 export function DialogDescription({ className, ...props }: DialogPrimitive.Description.Props): React.ReactElement {
-  return <DialogPrimitive.Description {...props} data-slot="dialog-description"
+  return <DialogPrimitive.Description {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-description"}
     className={(state) => cn("min-w-0 text-body text-muted-foreground wrap-break-word", typeof className === "function" ? className(state) : className)} />;
 }
 
 export function DialogClose({ children, render, ...props }: DialogPrimitive.Close.Props): React.ReactElement {
   const { messages } = useUILocale();
-  return <DialogPrimitive.Close {...props} render={render ?? <Button variant="quiet" />} data-slot="dialog-close">{children ?? messages.close}</DialogPrimitive.Close>;
+  return <DialogPrimitive.Close {...props} render={render ?? <Button variant="quiet" />} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-close"}>{children ?? messages.close}</DialogPrimitive.Close>;
 }
 
 export type DialogGroupProps = useRender.ComponentProps<"div">;

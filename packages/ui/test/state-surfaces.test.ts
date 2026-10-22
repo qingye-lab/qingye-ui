@@ -26,6 +26,17 @@ describe.each(["light", "dark"] as const)("反馈梯与选中面（%s）", (appe
     expect(alpha(tokens, "surface-selected")).toBeLessThan(alpha(tokens, "surface-active"));
   });
 
+  test("侧栏当前项文字默认继承已有悬停文字，独立覆盖不改变悬停色", () => {
+    const current = "var(--qy-sidebar-current-foreground)";
+    const hover = "var(--qy-sidebar-accent-foreground)";
+    expect(resolveColor(current, tokens)).toEqual(resolveColor(hover, tokens));
+    const branded = new Map(tokens).set("--qy-sidebar-accent-foreground", "rgb(12, 80, 40)");
+    expect(resolveColor(current, branded)).toEqual(resolveColor(hover, branded));
+    const separate = new Map(branded).set("--qy-sidebar-current-foreground", "rgb(255, 255, 255)");
+    expect(resolveColor(current, separate)).not.toEqual(resolveColor(hover, separate));
+    expect(resolveColor(hover, separate)).toEqual(resolveColor(hover, branded));
+  });
+
   test("三者同源于墨原子 --qy-ink-qing：调整它，线、悬停、选中与按下一起移动", () => {
     const before = ["surface-hover", "surface-selected", "surface-active", "border"].map((name) => resolveColor(`var(--qy-${name})`, tokens));
     const moved = new Map(tokens).set("--qy-ink-qing", "16%");

@@ -1476,7 +1476,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/alert-dialog.tsx",
-        "sha256": "b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e",
+        "sha256": "0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "点遮罩不关闭，默认聚焦面板。Esc 与返回按钮只关闭对话框；继续动作由调用方处理。",
@@ -13449,7 +13449,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/copy-button.tsx",
-        "sha256": "1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a",
+        "sha256": "1c804a074f97e8985c163f559eeead6b4e8199ed3288ebeb5fab5953fc734f01",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "CopyButton 复用 useCopyToClipboard，成功从写入 Promise resolve 建立。反馈时间、quiet 默认和图标是选择/预设。",
@@ -17461,7 +17461,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/dialog.tsx",
-        "sha256": "b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369",
+        "sha256": "c636e8fa6231621f7fb0314ad1a2392d21fe43dee53b18719140b7242d05a221",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
@@ -26433,7 +26433,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/locale-switch.tsx",
-        "sha256": "fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4",
+        "sha256": "a454a4019a594b5a5370612b01e440f4f3c847d1549bf8773ff10eb1f72b226d",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "localized": {
@@ -30549,7 +30549,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e",
+        "sha256": "95ef294c2ff8445875e0b66d268f7be55d23bd8b5410630ffbc90e59743f6329",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有一个真实文本输入，分段跟随它的光标与选择。前导零保留，长度填满只说明文本长度；核对、请求和结果归应用。",
@@ -33702,7 +33702,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/popover.tsx",
-        "sha256": "5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f",
+        "sha256": "9f818d7dc872da06ff25ab1564d8e3f1837b7df10e434514db7f91d154c8ef38",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "关闭只收起浮层，不代表提交或撤销完成。草稿与结果由应用持有；唯一的关键后果须留在持续工作面。",
@@ -40618,7 +40618,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781",
+        "sha256": "9925f959754e4462b4b2f9524f0847c72a00790f93db79811fc5ad1b74dc8ef3",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",

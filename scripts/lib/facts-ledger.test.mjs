@@ -3,14 +3,28 @@ import { mkdtempSync, mkdirSync, writeFileSync, symlinkSync, readFileSync, rmSyn
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
-import { ROOT, OUT, cssDeclarations, recursiveFiles, exists, files } from './ui-facts.mjs';
+import { ROOT, OUT, cssDeclarations, recursiveFiles, exists, files, ts } from './ui-facts.mjs';
 import { generateCapabilities, writeCapabilities } from '../gen-capabilities.mjs';
-import { generateStaticLedger, applyRules } from './token-ledger-static.mjs';
+import { generateStaticLedger, applyRules, slotDefault } from './token-ledger-static.mjs';
 import { computeLedger, staticMatches } from '../token-ledger.mjs';
 import { PROBES } from './token-ledger-probes.mjs';
 import { isExpectedTheme } from '../token-ledger-runtime.mjs';
 
 const cap = generateCapabilities();
+function slotInitializer(expression) {
+  const source = ts.createSourceFile('slot.tsx', `const element = <div data-slot=${expression} />`, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  return source.statements[0].declarationList.declarations[0].initializer.attributes.properties[0].initializer;
+}
+for (const expression of [
+  '"popup"', '{"popup"}', '{props["data-slot"] ?? "popup"}',
+  '{(props as { "data-slot"?: string })["data-slot"] ?? "popup"}',
+  '{(viewportProps as { "data-slot"?: string } | undefined)?.["data-slot"] ?? "popup"}',
+]) assert.equal(slotDefault(slotInitializer(expression)), 'popup', expression);
+for (const expression of [
+  '{props["data-slot"]}', '{chooseSlot() ?? "popup"}', '{props["data-slot"] || "popup"}',
+  '{props[name] ?? "popup"}', '{`popup-${kind}`}', '{props["data-slot"] ?? anotherSlot}',
+  '{"always-other" ?? "popup"}', '{getProps()["data-slot"] ?? "popup"}',
+]) assert.equal(slotDefault(slotInitializer(expression)), null, expression);
 const card = cap.components.find((entry) => entry.name === 'card');
 assert.deepEqual(card.exports.filter(entry => entry.kind === 'value').map(entry => entry.name), ['Card']);
 assert.equal(card.exports.find((entry) => entry.name === 'CardProps').kind, 'type');
@@ -29,6 +43,11 @@ assert.deepEqual(cssDeclarations('/* --qy-fake: red; */ :root { --qy-real: color
 assert.deepEqual(cssDeclarations(':root { --qy-a: var(--qy-b); }', 'fixture.css')[0].references, ['--qy-b']);
 assert.equal(cssDeclarations(':root { --qy-a: calc(1px', 'fixture.css')[0].complete, false);
 const stat = generateStaticLedger();
+for (const [component, part] of [['popover', 'popover-popup'], ['dialog', 'dialog-popup'], ['alert-dialog', 'alert-dialog-popup']]) {
+  const records = stat.records.filter(record => record.sourceComponent === component && record.part === part);
+  assert.ok(records.some(record => record.property === 'background-color'), `${part} source styles`);
+  assert.ok(records.some(record => record.property === 'transition-duration' && record.source.path === 'packages/ui/motion.css'), `${part} stable motion class`);
+}
 assert.deepEqual(stat.coveredComponents.map((entry) => entry.sourceComponent), files('packages/ui/src/components', /\.tsx?$/).map((path) => path.split('/').pop().replace(/\.tsx?$/, '')));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'field' && record.part === 'field'));
 assert.ok(stat.records.some((record) => record.sourceComponent === 'card' && record.part === 'card' && record.token === '--qy-radius-panel' && record.property === 'border-radius'));

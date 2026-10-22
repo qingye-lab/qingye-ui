@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-20T12:31:54.611Z",
-  "revision": "a8137c3a68a03ef452895c62fa3bc22025576b97",
+  "generatedAt": "2026-10-22T02:33:36.515Z",
+  "revision": "4fb26905380499341196cf9d33969a0693b3edbc",
   "fingerprint": {
-    "sha256": "42b2b32a457ac3aaebe34ac9e3c13be89ad4bf8eea3e59b4fd469a1297257ee6",
+    "sha256": "b8e58884cb45851df53471768cd0cd3615f64fbf13b654565555e66a6a7d1e54",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -404,11 +404,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "c275fe687068d318047acad01d26e33593560289390d992cd97c0d4c7b33ddf4"
+        "sha256": "3571cd16da6ea0a79cc4a45737f0f4fb9e0f46f2a89615cf9101173d1862655e"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "883de441dda8205a9c2ca7bc6d7e916951ad51bc5a70694e48dd124598e568e8"
+        "sha256": "d94e22dbd03fa4ab77895ef549a1160c51c1ebe78b38ee315444ef77c2ed47d9"
       },
       {
         "path": "packages/ui/package.json",
@@ -424,7 +424,7 @@
       },
       {
         "path": "packages/ui/src/components/alert-dialog.tsx",
-        "sha256": "b615207fc39b258e0147256705bdbbe13a37477227a93ccc989c55a93b204f7e"
+        "sha256": "0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec"
       },
       {
         "path": "packages/ui/src/components/alert.tsx",
@@ -508,7 +508,7 @@
       },
       {
         "path": "packages/ui/src/components/copy-button.tsx",
-        "sha256": "1b36d576d462746bcd9b73b30bdee9cd9b36b30702feffc89f5d223a88db180a"
+        "sha256": "1c804a074f97e8985c163f559eeead6b4e8199ed3288ebeb5fab5953fc734f01"
       },
       {
         "path": "packages/ui/src/components/corner-mark.tsx",
@@ -536,7 +536,7 @@
       },
       {
         "path": "packages/ui/src/components/dialog.tsx",
-        "sha256": "b8d6d2969f3f89460d02a4d6a668b9eceb2c8eabb363feb592b038a855e11369"
+        "sha256": "c636e8fa6231621f7fb0314ad1a2392d21fe43dee53b18719140b7242d05a221"
       },
       {
         "path": "packages/ui/src/components/drawer.tsx",
@@ -604,7 +604,7 @@
       },
       {
         "path": "packages/ui/src/components/locale-switch.tsx",
-        "sha256": "fb5b15634796d8a87229cddea5fa12b1aef1e70e98d45d4e53c6d76ada8888a4"
+        "sha256": "a454a4019a594b5a5370612b01e440f4f3c847d1549bf8773ff10eb1f72b226d"
       },
       {
         "path": "packages/ui/src/components/menu.tsx",
@@ -632,7 +632,7 @@
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "e71f92c3e582bcf34ddc9da681f0ef2521b9149e16ee2ff76c214954818a206e"
+        "sha256": "95ef294c2ff8445875e0b66d268f7be55d23bd8b5410630ffbc90e59743f6329"
       },
       {
         "path": "packages/ui/src/components/page-header.tsx",
@@ -652,7 +652,7 @@
       },
       {
         "path": "packages/ui/src/components/popover.tsx",
-        "sha256": "5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f"
+        "sha256": "9f818d7dc872da06ff25ab1564d8e3f1837b7df10e434514db7f91d154c8ef38"
       },
       {
         "path": "packages/ui/src/components/progress.tsx",
@@ -704,7 +704,7 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781"
+        "sha256": "9925f959754e4462b4b2f9524f0847c72a00790f93db79811fc5ad1b74dc8ef3"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
@@ -808,7 +808,7 @@
       },
       {
         "path": "packages/ui/theme.css",
-        "sha256": "6bae4a1a12d08bc9a7a0c3821cf80d040238f21db2fb2b18c9b7770bb8d11081"
+        "sha256": "cd51c5090afcd26b2bfd88f46e9cf3c8e015a37f21ec17b0f24fc53df6164de0"
       },
       {
         "path": "packages/ui/tokens/components.css",
@@ -824,7 +824,7 @@
       },
       {
         "path": "packages/ui/tokens/semantic.css",
-        "sha256": "cf66fab7594acf58d073e64880fa15ea3049811f95055ea6470672e6987d1dd8"
+        "sha256": "0ce97b3b694e02c49cba513a0997949433a950a824c1824c77eaf2701d08b559"
       },
       {
         "path": "packages/ui/utilities.css",
@@ -34037,6 +34037,24 @@
       ]
     },
     {
+      "name": "--qy-sidebar-current-foreground",
+      "definitions": [
+        {
+          "name": "--qy-sidebar-current-foreground",
+          "value": "var(--qy-sidebar-accent-foreground)",
+          "references": [
+            "--qy-sidebar-accent-foreground"
+          ],
+          "source": {
+            "path": "packages/ui/tokens/semantic.css",
+            "line": 256
+          },
+          "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
+          "complete": true
+        }
+      ]
+    },
+    {
       "name": "--qy-sidebar-foreground",
       "definitions": [
         {
@@ -34065,7 +34083,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 255
+            "line": 257
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -38365,6 +38383,7 @@
     "scripts/verify-packed-consumers.mjs",
     "scripts/verify-packed-tooling.mjs",
     "scripts/verify-review-regressions.mjs",
+    "scripts/verify-slot-sidebar-regressions.mjs",
     "scripts/verify-studio.mjs",
     "scripts/verify-task-patterns.mjs",
     "scripts/verify-ui-foundations.mjs",

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: f7baea288fee6f109562316f820aee96a32cbea0c74669ff4fa86738991ff781
+Source SHA-256: 9925f959754e4462b4b2f9524f0847c72a00790f93db79811fc5ad1b74dc8ef3
 
 长期导航、收起为图标 rail 与二级子级。
 

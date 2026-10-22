@@ -252,6 +252,8 @@
      * 选中面是墨的透明叠合，叠在侧栏自己的底上总比底深一级，所以不再区分「侧栏深于纸」或「侧栏近纸色」——
      * 此前默认取纸本色、近纸色时要项目改写的那一段指引已不需要。作用范围只有 SidebarLink 的当前项。 */
     --qy-sidebar-current: var(--qy-surface-selected);
+    /* 当前项选中面上的文字：默认沿用悬停文字，允许项目独立配对当前面。 */
+    --qy-sidebar-current-foreground: var(--qy-sidebar-accent-foreground);
     --qy-sidebar-ring: var(--qy-ring);
   }
 }

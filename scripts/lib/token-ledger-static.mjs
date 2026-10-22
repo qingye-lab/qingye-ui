@@ -3,11 +3,31 @@ import { ts, files, recursiveFiles, hash, read, parseTS, visit, location, declar
 
 export const COMPONENTS = files('packages/ui/src/components', /\.tsx?$/).map((path) => path.split('/').pop().replace(/\.tsx?$/, ''));
 const nameOf = (node, source) => node?.name && (ts.isIdentifier(node.name) || ts.isStringLiteral(node.name)) ? node.name.text : node?.name?.getText(source);
+// Canonical names describe the default component; consumer overrides still need
+// runtime evidence. Do not infer a slot from arbitrary calls or dynamic strings.
+export function slotDefault(node) {
+  if (node && ts.isJsxExpression(node)) node = node.expression;
+  const unwrap = value => {
+    while (value && (ts.isParenthesizedExpression(value) || ts.isAsExpression(value) || ts.isTypeAssertionExpression(value))) value = value.expression;
+    return value;
+  };
+  node = unwrap(node);
+  if (!node) return null;
+  if (ts.isStringLiteral(node)) return node.text;
+  if (!ts.isBinaryExpression(node) || node.operatorToken.kind !== ts.SyntaxKind.QuestionQuestionToken) return null;
+  const access = unwrap(node.left);
+  const fallback = unwrap(node.right);
+  return ts.isElementAccessExpression(access) && ts.isIdentifier(unwrap(access.expression)) &&
+    access.argumentExpression && ts.isStringLiteral(access.argumentExpression) && access.argumentExpression.text === 'data-slot' && ts.isStringLiteral(fallback)
+    ? fallback.text : null;
+}
 function slotsIn(node) {
   const slots = new Set();
   visit(node, (child) => {
-    if (ts.isJsxAttribute(child) && child.name.getText() === 'data-slot' && child.initializer && ts.isStringLiteral(child.initializer)) slots.add(child.initializer.text);
-    if (ts.isPropertyAssignment(child) && nameOf(child) === 'data-slot' && ts.isStringLiteral(child.initializer)) slots.add(child.initializer.text);
+    if ((ts.isJsxAttribute(child) || ts.isPropertyAssignment(child)) && nameOf(child) === 'data-slot') {
+      const slot = slotDefault(child.initializer);
+      if (slot !== null) slots.add(slot);
+    }
   });
   return [...slots];
 }
@@ -15,8 +35,7 @@ function enclosing(node, predicate) { for (let parent = node.parent; parent; par
 function ownSlot(attributesOrObject) {
   const children = ts.isJsxAttributes(attributesOrObject) ? attributesOrObject.properties : attributesOrObject.properties || [];
   for (const child of children) {
-    if (ts.isJsxAttribute(child) && child.name.getText() === 'data-slot' && child.initializer && ts.isStringLiteral(child.initializer)) return child.initializer.text;
-    if (ts.isPropertyAssignment(child) && nameOf(child) === 'data-slot' && ts.isStringLiteral(child.initializer)) return child.initializer.text;
+    if ((ts.isJsxAttribute(child) || ts.isPropertyAssignment(child)) && nameOf(child) === 'data-slot') return slotDefault(child.initializer);
   }
   return null;
 }
@@ -199,7 +218,8 @@ export function generateStaticLedger() {
     }
     // Global motion rules use explicit slots or a class present in the component.
     for (const declaration of cssDeclarations(read('packages/ui/motion.css'), 'packages/ui/motion.css', { customOnly: false })) {
-      const classUseSlots = declaration.context.includes('.qy-pressable') ? strings.filter((entry) => splitOutside(entry.text, ' ').includes('qy-pressable')).flatMap((entry) => entry.bindings.map((binding) => binding.part)) : [];
+      const classes = new Set([...declaration.context.matchAll(/\.(qy-[\w-]+)/g)].map(match => match[1]));
+      const classUseSlots = strings.filter(entry => splitOutside(entry.text, ' ').some(name => classes.has(name))).flatMap(entry => entry.bindings.map(binding => binding.part));
       const mentioned = [...declaration.context.matchAll(/data-slot\s*=\s*"([\w-]+)"/g)].map((m) => m[1]);
       const slots = [...new Set(strings.flatMap((entry) => entry.slots))].filter((slot) => classUseSlots.includes(slot) || mentioned.includes(slot));
       const property = ['transition-timing-function', 'transition-duration'].includes(declaration.name) ? declaration.name : null;

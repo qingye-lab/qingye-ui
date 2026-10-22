@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@4.1.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 5ac4df4c9390052f7ae447dceb13b9237b4faf0b919893aa1730e04855f25a7f
+Source SHA-256: 9f818d7dc872da06ff25ab1564d8e3f1837b7df10e434514db7f91d154c8ef38
 
 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 
