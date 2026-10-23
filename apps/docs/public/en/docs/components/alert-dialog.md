@@ -1,9 +1,9 @@
 # AlertDialog
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: 0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec
+Source SHA-256: d40ee8bdb106690efe42f5b5d555c96d9119d7a1fa34e04a83f632101759e148
 
 Block the work surface for an explicit decision about the current object.
 

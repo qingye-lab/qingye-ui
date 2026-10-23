@@ -1,9 +1,9 @@
 # Menu
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166
+Source SHA-256: 917bc69f5bd14aaee1175e12782bb07e84c8a77a5790dfd805bcd43ae43f336e
 
 Temporary commands and choices related to the current task.
 
@@ -43,6 +43,7 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - MenuItemProps: type; owner menu; PASS
 - MenuLinkItem: function; owner menu; PASS; props: MenuLinkItemProps
 - MenuLinkItemProps: type; owner menu; PASS
+- MenuMarkerPosition: type; owner menu; PASS
 - MenuPopup: function; owner menu; PASS; props: MenuPopupProps
 - MenuPopupProps: type; owner menu; PASS
 - MenuPortal: const; owner menu; UNVERIFIED
@@ -70,6 +71,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 16 inherited (@base-ui/react 16); not expanded, see the installed declarations
 
 ### MenuCheckboxItem
+- `inset?`: `boolean`.
+- `markerPosition?`: `"start" | "end"`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
 
@@ -78,14 +81,17 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 274, @base-ui/react 4); not expanded, see the installed declarations
 
 ### MenuGroupLabel
-- no props declared by this library
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### MenuItem
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 282 inherited (@types/react 273, @base-ui/react 9); not expanded, see the installed declarations
 
 ### MenuLinkItem
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 288 inherited (@types/react 282, @base-ui/react 6); not expanded, see the installed declarations
 
@@ -106,6 +112,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
 
 ### MenuRadioItem
+- `inset?`: `boolean`.
+- `markerPosition?`: `"start" | "end"`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 283 inherited (@types/react 273, @base-ui/react 10); not expanded, see the installed declarations
 
@@ -118,6 +126,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
 
 ### MenuSubmenuTrigger
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
@@ -148,6 +157,8 @@ Trigger and floating parts owned by the same root.
 ### MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
 Commands, true navigation, checked choices, radio choices and submenus.
 - size: xs | sm | md | lg | xl; default md. Reuses all five Button sizes; disabled items may receive focus but cannot execute.
+- inset: boolean. Reserves a same-size icon and field gap at the logical start, aligning unmarked commands with leading markers. Defaults to false; MenuGroupLabel also supports size/inset.
+- markerPosition: start | end. Checkbox and radio items only: controls the logical marker position. Defaults to end, preserving existing appearance, state and keyboard semantics.
 - checked / value / onCheckedChange: Base UI choice props. Checkbox items read checked, radio items read value; choices follow caller facts and primitive cancellation.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -189,5 +200,25 @@ export const meta = { title: "当前条目的命令", titleEn: "Commands for the
 export default function Demo() {
   const [marked, setMarked] = React.useState(false); const [items, setItems] = React.useState(["权限与角色", "接入设备"]);
   return <Stack><Inline><Menu><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem disabled={items[0] === "接入设备"} onClick={() => setItems(value => ["接入设备", ...value.filter(item => item !== "接入设备")])}>移到首位</MenuItem><MenuItem disabled>恢复</MenuItem><MenuSeparator /><MenuCheckboxItem checked={marked} onCheckedChange={setMarked}>标记接入设备</MenuCheckboxItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline><p className="m-0 text-body">接入设备 · {marked ? "已标记" : "未标记"}</p><ol className="m-0 text-body">{items.map(item => <li key={item}>{item}</li>)}</ol></Stack>;
+}
+```
+
+### 前导标记与紧凑命令
+Source: apps/docs/src/content/menu/demos/03-leading-markers.tsx
+```tsx
+import { Menu, MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { IconListCheck } from "@tabler/icons-react";
+
+export const meta = { title: "前导标记与紧凑命令", titleEn: "Leading marks and compact commands" };
+export default function Demo() {
+  return <Menu><MenuTrigger>显示选项</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+    <MenuGroup><MenuGroupLabel size="sm" inset>内容</MenuGroupLabel>
+      <MenuItem size="sm"><IconListCheck aria-hidden="true" /><span>检查显示</span></MenuItem>
+      <MenuCheckboxItem size="sm" markerPosition="start" defaultChecked closeOnClick={false}>显示说明</MenuCheckboxItem>
+      <MenuCheckboxItem size="sm" markerPosition="start" closeOnClick={false}>显示编号</MenuCheckboxItem>
+      <MenuItem size="sm" inset>重置显示</MenuItem>
+    </MenuGroup><MenuSeparator />
+    <MenuRadioGroup defaultValue="current"><MenuRadioItem size="sm" value="current" markerPosition="start" closeOnClick={false}>当前范围</MenuRadioItem><MenuRadioItem size="sm" value="all" markerPosition="start" closeOnClick={false}>全部范围</MenuRadioItem></MenuRadioGroup>
+  </MenuPopup></MenuPositioner></MenuPortal></Menu>;
 }
 ```

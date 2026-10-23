@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-22T02:33:36.515Z",
-  "revision": "4fb26905380499341196cf9d33969a0693b3edbc",
+  "generatedAt": "2026-10-23T13:35:58.616Z",
+  "revision": "3d7f3d243912524790186d290c56682fd8ac6842",
   "fingerprint": {
-    "sha256": "b8e58884cb45851df53471768cd0cd3615f64fbf13b654565555e66a6a7d1e54",
+    "sha256": "b3c8e646ed0b2f7096b1e3eacdb2ee3518a5f9933edb05f9ae7dc414237df525",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -108,7 +108,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "3a0037c1c6eb2e7cb1a466574ee1f4f90d4d708af6011eeea7c8a38b427fb00c"
+        "sha256": "e05e94e5f268c7d6d66ca63c89eb7c0e188212c30291825dad650968ef6d4924"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -140,7 +140,7 @@
       },
       {
         "path": "apps/docs/src/content/field/meta.ts",
-        "sha256": "5f099807258997d67d6227845d1145a02abcd74f6eaeb89f9e1bb49e260db73c"
+        "sha256": "c5745d79dbae9805a820734547ab85474319bca60c246fe9e7eaf2c9adc3e2ad"
       },
       {
         "path": "apps/docs/src/content/fieldset/meta.ts",
@@ -200,7 +200,7 @@
       },
       {
         "path": "apps/docs/src/content/menu/meta.ts",
-        "sha256": "9aa7139baf9911614514b37f0fa07546cb564a08154fdb761749570bdaefcb14"
+        "sha256": "120ff6d07370579081bf7d6ff5591c9271751007b87d8aca2cf11cac3cfa7612"
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
@@ -232,7 +232,7 @@
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "4abdea1472094af5319784dc9ec4b3bcecf20f7574cff0b988e2ca793d37d715"
+        "sha256": "eda3949131a2458f3878fdc4e36afe236199d23c619440044571d1474af25778"
       },
       {
         "path": "apps/docs/src/content/password-input/meta.ts",
@@ -268,7 +268,7 @@
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
-        "sha256": "6f6f7b197a7288167a685eb6d1f0b1831979019a281f8908b79725d495ceac17"
+        "sha256": "8bf7a6b0791151e1573a266b12cc9e74a795042aac7500456dfccfbe49573b97"
       },
       {
         "path": "apps/docs/src/content/search-input/meta.ts",
@@ -308,7 +308,7 @@
       },
       {
         "path": "apps/docs/src/content/sparkline/meta.ts",
-        "sha256": "73556c1e01d0f289b6bfaa3993b6563e9d85e011855398391b307453c38224eb"
+        "sha256": "da14451f4168ece977622cab8a63c8752b75d30c6cfb66c53cd0e8a6eaadefff"
       },
       {
         "path": "apps/docs/src/content/stat/meta.ts",
@@ -384,7 +384,7 @@
       },
       {
         "path": "apps/docs/src/content/virtual-list/meta.ts",
-        "sha256": "b4da494dea4ba721df4f316c5506a5d9a44b98f540df8467b5dfcdcea8af2abd"
+        "sha256": "3533d2b49d0753427416ba7ca06ead828b7552fb9b6a91243b26d3715cd8df8f"
       },
       {
         "path": "apps/docs/src/content/workspace/meta.ts",
@@ -404,7 +404,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "3571cd16da6ea0a79cc4a45737f0f4fb9e0f46f2a89615cf9101173d1862655e"
+        "sha256": "93ace2955fc55af1229d4bec95da930097d5c5c68067af8e3adc29ea8129dbc6"
       },
       {
         "path": "packages/ui/motion.css",
@@ -412,7 +412,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "ebc15d413409f55b7bb5cdc5ecd17a8a9c4748deec01c7d8ed028cf0f0f4516d"
+        "sha256": "00a3a65458580d82c34c776e5875f01717a406c6468f87ca3e2da0f420782114"
       },
       {
         "path": "packages/ui/prose.css",
@@ -424,7 +424,7 @@
       },
       {
         "path": "packages/ui/src/components/alert-dialog.tsx",
-        "sha256": "0d44fe496c65f3b416d243205f696a25218063eb94124d84d0dcda81c016cbec"
+        "sha256": "d40ee8bdb106690efe42f5b5d555c96d9119d7a1fa34e04a83f632101759e148"
       },
       {
         "path": "packages/ui/src/components/alert.tsx",
@@ -516,7 +516,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "0b21dfecf3278e2a19393f39bf35b35bb362a90aa161d580ac1a4cc47a243842"
+        "sha256": "4ee6be6405131aadb5c4186fe2e261baf09de557de964e4a9e1ead508199c41b"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -536,7 +536,7 @@
       },
       {
         "path": "packages/ui/src/components/dialog.tsx",
-        "sha256": "c636e8fa6231621f7fb0314ad1a2392d21fe43dee53b18719140b7242d05a221"
+        "sha256": "7463bb8528bc0460688b3ba298b4e15a57f21032bbe47eab819d939f32e91295"
       },
       {
         "path": "packages/ui/src/components/drawer.tsx",
@@ -608,7 +608,7 @@
       },
       {
         "path": "packages/ui/src/components/menu.tsx",
-        "sha256": "7e809d20421035b742ce559db282b0d5281a5799551875652cfac3bdbbe75166"
+        "sha256": "917bc69f5bd14aaee1175e12782bb07e84c8a77a5790dfd805bcd43ae43f336e"
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
@@ -676,7 +676,7 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "b135ec600d8b8d2d1094c18a68cedba1d2c8d0a290356342a0526602d7daef00"
+        "sha256": "6289755c79e2dcce32f25f588a86ecc2f4a617675f4785379c78485ebad4b8e8"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
@@ -716,7 +716,7 @@
       },
       {
         "path": "packages/ui/src/components/sparkline.tsx",
-        "sha256": "af43415ec460d2703f9ce96e767c1ece0ee519ee74472577196482c44b1f8202"
+        "sha256": "856797e9c07fc4a1d7a230de40b6fabfea2d9b5a14a5958f43cdfae590ec0e58"
       },
       {
         "path": "packages/ui/src/components/stat.tsx",
@@ -792,7 +792,7 @@
       },
       {
         "path": "packages/ui/src/components/virtual-list.tsx",
-        "sha256": "47e66c372b3929744f553c5ba7b14b7f7c55eae33554e755ebf82295527e5a98"
+        "sha256": "d11464b0227174386462ede6f1c9bd096c4ea9498f38d9d43f09f967243e9141"
       },
       {
         "path": "packages/ui/src/components/workspace.tsx",
@@ -835,7 +835,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "4.1.0",
+    "version": "4.2.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -890,6 +890,7 @@
       "@base-ui/react": "1.9.0",
       "@daypicker/react": "10.0.2",
       "@tabler/icons-react": "^3.49.0",
+      "@tanstack/react-virtual": "3.14.22",
       "class-variance-authority": "0.7.1",
       "clsx": "2.1.1",
       "tailwind-merge": "3.6.0"
@@ -932,7 +933,8 @@
       "!ai/v2.0.0",
       "!ai/v3.0.0",
       "registry",
-      "!ai/v4.0.0"
+      "!ai/v4.0.0",
+      "!ai/v4.1.0"
     ],
     "source": "packages/ui/package.json"
   },
@@ -1255,7 +1257,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1685,7 +1687,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1915,7 +1917,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2091,7 +2093,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2648,7 +2650,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2916,7 +2918,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3092,7 +3094,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3460,7 +3462,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3750,7 +3752,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3921,7 +3923,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4218,7 +4220,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4527,7 +4529,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4705,7 +4707,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5267,7 +5269,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5506,7 +5508,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5748,7 +5750,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5949,7 +5951,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6216,7 +6218,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6931,7 +6933,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7186,7 +7188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7452,7 +7454,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7994,7 +7996,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8179,7 +8181,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8362,7 +8364,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8385,7 +8387,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 29
+            "line": 88
           }
         },
         {
@@ -8393,7 +8395,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -8401,7 +8403,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 13
+            "line": 14
           }
         },
         {
@@ -8409,7 +8411,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 11
+            "line": 12
           }
         },
         {
@@ -8417,7 +8419,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 140
+            "line": 319
           }
         },
         {
@@ -8425,7 +8427,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 82
+            "line": 259
           }
         },
         {
@@ -8433,7 +8435,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 65
+            "line": 237
           }
         },
         {
@@ -8441,7 +8443,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 83
+            "line": 260
           }
         },
         {
@@ -8449,7 +8451,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 91
+            "line": 268
           }
         },
         {
@@ -8457,7 +8459,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 75
+            "line": 252
           }
         },
         {
@@ -8465,7 +8467,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 28
+            "line": 37
           }
         },
         {
@@ -8473,7 +8475,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 56
+            "line": 228
           }
         },
         {
@@ -8481,7 +8483,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 55
+            "line": 227
           }
         },
         {
@@ -8489,7 +8491,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 51
+            "line": 223
           }
         },
         {
@@ -8497,7 +8499,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 50
+            "line": 222
           }
         },
         {
@@ -8505,7 +8507,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 45
+            "line": 217
           }
         },
         {
@@ -8513,7 +8515,15 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 43
+            "line": 215
+          }
+        },
+        {
+          "name": "DataTableVirtualization",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 31
           }
         }
       ],
@@ -8521,8 +8531,8 @@
         "path": "apps/docs/src/content/data-table/meta.ts",
         "title": "数据集合 DataTable",
         "titleEn": "DataTable",
-        "description": "调用方真实集合的比较、排序与范围选择。",
-        "descriptionEn": "Comparison, sorting and scoped selection for a real caller-owned collection.",
+        "description": "调用方真实集合的比较、排序、范围选择与可选虚拟化。",
+        "descriptionEn": "Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.",
         "category": "数据展示",
         "layer": "pattern",
         "source": "local",
@@ -8533,8 +8543,8 @@
           "DataTableSelectionCell",
           "DataTableSelectAll"
         ],
-        "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。",
-        "decisionsEn": "Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map.",
+        "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
+        "decisionsEn": "Configure data, columns and stable IDs with DataTablePattern; retain DataTable for advanced TanStack composition. Server mode does not sort or slice supplied pages; the complete cross-page selection lives in the rowSelection ID map. Virtualization changes only the rendered window of the current row model, preserving selection and pagination scope.",
         "keywords": [
           "datagrid",
           "grid",
@@ -8554,8 +8564,8 @@
               {
                 "name": "data / columns / getRowId / emptyContent",
                 "type": "T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode",
-                "description": "列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；稳定 getRowId 必填。",
-                "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric; stable getRowId is required."
+                "description": "列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；可选 size、minSize、maxSize（px）与 ellipsis。稳定 getRowId 必填。",
+                "descriptionEn": "Columns configure id, header, accessor, cell, sortable, rowHeader and numeric, with optional size/minSize/maxSize in pixels and ellipsis. Stable getRowId is required."
               },
               {
                 "name": "state / defaultState / onStateChange",
@@ -8577,9 +8587,22 @@
               },
               {
                 "name": "activeRow",
-                "type": "{ columnId: string, onActivate?: (row: T) => void }",
-                "description": "该列内容成为可键盘操作的按钮，cell 保持非交互内容；活动行与复选状态独立。",
-                "descriptionEn": "The named column gets a keyboard-accessible activation button and its cell must contain noninteractive content; activation and checkbox selection remain independent."
+                "type": "({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }",
+                "description": "默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。",
+                "descriptionEn": "By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent."
+              },
+              {
+                "name": "selectionAppearance",
+                "type": "row | checkbox",
+                "default": "row",
+                "description": "checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。",
+                "descriptionEn": "Checkbox mode removes only selected-row fill, retaining actual checkboxes and independent active-row emphasis."
+              },
+              {
+                "name": "virtualization",
+                "type": "{ height: number, estimateRowHeight: number, overscan?: number }",
+                "description": "显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。",
+                "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
               },
               {
                 "name": "caption / busy / tableProps / native div props",
@@ -8599,6 +8622,25 @@
                 "type": "TableInstance<T> / ReactNode / TableContainerProps",
                 "description": "getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows。",
                 "descriptionEn": "GetRowId and at least one visible column are required; zero and caption are retained, and busy preserves valid rows."
+              },
+              {
+                "name": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
+                "type": "number / number / number / TanStack state",
+                "description": "实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup，组合表头取可见叶列之和；未配置尺寸时保持原生自动布局。不内置拖拽调宽。",
+                "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; grouped headers sum visible leaf widths. Otherwise native auto layout remains. Drag resizing is not built in."
+              },
+              {
+                "name": "columnDef.meta.ellipsis",
+                "type": "boolean",
+                "default": "false",
+                "description": "对非交互的表头与单元格文字启用单行省略；完整渲染文字保留在 DOM、可访问名称与原生 title 中。含控件的内容不裁切。列宽决定容量，关键后果仍应直接可见。",
+                "descriptionEn": "Ellipsizes noninteractive header/cell text on one line while retaining full rendered text in the DOM, accessible name and native title. Interactive content is not clipped. Column widths determine capacity; keep critical consequences visible."
+              },
+              {
+                "name": "selectionAppearance / onRowActivate / virtualization",
+                "type": "row | checkbox / (row: Row<T>) => void / DataTableVirtualization",
+                "description": "选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row，调用方持有 activeRowId。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。",
+                "descriptionEn": "Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row; the caller owns activeRowId. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection."
               },
               {
                 "name": "columnDef.meta.rowHeader",
@@ -8647,15 +8689,35 @@
             ]
           }
         ],
+        "keyboard": [
+          {
+            "keys": "Enter / Space",
+            "description": "聚焦可激活行后执行行激活；内部控件保留自己的键盘行为。",
+            "descriptionEn": "Activate a focused actionable row; nested controls retain their own keyboard behavior."
+          },
+          {
+            "keys": "ArrowUp / ArrowDown / Home / End",
+            "description": "虚拟化时，在滚动容器或行本身移动焦点；不会接管内部输入框的编辑键位。",
+            "descriptionEn": "In virtual mode, move focus from the viewport or row itself without intercepting editing keys in nested inputs."
+          }
+        ],
         "notes": [
           "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
           "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
-          "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。"
+          "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。",
+          "固定布局中未配置尺寸的文字列使用 TanStack 的默认尺寸；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。",
+          "虚拟化保留 table/thead/tbody/tr/th/td。aria-rowcount 与 aria-rowindex 描述当前表格页（含表头），不把服务端全局总数冒充已加载行；全选仍覆盖当前模型的完整范围。",
+          "虚拟行按稳定 ID 测量，支持实际可变行高；estimateRowHeight 应接近真实行高，未测量的远端行仍是估计。建议显式列宽，避免自动布局因窗口内容变化而重排；纯客户端页面需要查看或打印所有行时关闭虚拟化。",
+          "焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。"
         ],
         "notesEn": [
           "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
           "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
-          "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component."
+          "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.",
+          "In fixed layout, unsized text columns use TanStack's default dimensions; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.",
+          "Virtualization retains table/thead/tbody/tr/th/td. Aria-rowcount and aria-rowindex describe the current table page including headers, without presenting server totals as loaded rows. Select-all still covers the complete current model scope.",
+          "Virtual rows are measured by stable ID and support variable actual heights. Choose an estimateRowHeight close to actual rows: distant unmeasured heights remain estimates. Explicit column widths prevent window content from changing natural layout. Disable virtualization to view or print all client rows.",
+          "One extra offscreen row retains focus and editor drafts while scrolling. When it leaves the current model, focus returns to the viewport only if that row still owned focus."
         ],
         "design": {
           "methods": [
@@ -8712,11 +8774,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 140
+              "line": 319
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 140
+              "line": 319
             },
             "status": "PRESENT"
           },
@@ -8725,11 +8787,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 29
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 29
+              "line": 88
             },
             "status": "PRESENT"
           },
@@ -8738,11 +8800,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 45
+              "line": 217
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 45
+              "line": 217
             },
             "status": "PRESENT"
           },
@@ -8751,11 +8813,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 51
+              "line": 223
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 51
+              "line": 223
             },
             "status": "PRESENT"
           },
@@ -8764,11 +8826,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 56
+              "line": 228
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 56
+              "line": 228
             },
             "status": "PRESENT"
           }
@@ -8784,7 +8846,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8989,7 +9051,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9237,7 +9299,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9440,7 +9502,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9703,7 +9765,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10190,7 +10252,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10602,7 +10664,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10879,7 +10941,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11150,13 +11212,13 @@
           },
           {
             "name": "FieldLabel",
-            "description": "自动命名注册控件，支持显式 htmlFor 与原语 nativeLabel/render。",
-            "descriptionEn": "Names a registered control; supports explicit htmlFor and primitive nativeLabel/render."
+            "description": "必须位于 Field 或 FieldPrimitive.Root 上下文内，自动命名注册控件；支持显式 htmlFor 与原语 nativeLabel/render。独立标签使用 components/label 的 Label。",
+            "descriptionEn": "Requires a Field or FieldPrimitive.Root context and names a registered control; supports explicit htmlFor and primitive nativeLabel/render. For a standalone label, use Label from components/label."
           },
           {
             "name": "FieldDescription",
-            "description": "必要辅助事实；注册到 aria-describedby。",
-            "descriptionEn": "Necessary supporting facts registered in aria-describedby."
+            "description": "必须位于 Field 或 FieldPrimitive.Root 上下文内，将辅助事实注册到 aria-describedby。独立说明使用带 id 的原生文本，并由控件显式引用。",
+            "descriptionEn": "Requires a Field or FieldPrimitive.Root context to register supporting facts in aria-describedby. For standalone help, give native text an id and reference it explicitly from the control."
           },
           {
             "name": "FieldError",
@@ -11394,7 +11456,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11631,7 +11693,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11909,7 +11971,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12308,7 +12370,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12514,7 +12576,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12811,7 +12873,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13116,7 +13178,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13422,7 +13484,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13645,7 +13707,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14001,7 +14063,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14154,7 +14216,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14317,7 +14379,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14566,7 +14628,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14746,7 +14808,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14926,7 +14988,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14957,7 +15019,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 52
+            "line": 68
           }
         },
         {
@@ -14965,7 +15027,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 51
+            "line": 67
           }
         },
         {
@@ -14973,7 +15035,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 46
+            "line": 62
           }
         },
         {
@@ -14981,7 +15043,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 48
+            "line": 64
           }
         },
         {
@@ -14989,7 +15051,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 47
+            "line": 63
           }
         },
         {
@@ -14997,7 +15059,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 45
+            "line": 61
           }
         },
         {
@@ -15005,7 +15067,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 38
+            "line": 54
           }
         },
         {
@@ -15013,7 +15075,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 37
+            "line": 53
           }
         },
         {
@@ -15021,7 +15083,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 42
+            "line": 58
           }
         },
         {
@@ -15029,7 +15091,15 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 41
+            "line": 57
+          }
+        },
+        {
+          "name": "MenuMarkerPosition",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/menu.tsx",
+            "line": 26
           }
         },
         {
@@ -15078,7 +15148,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 65
+            "line": 83
           }
         },
         {
@@ -15094,7 +15164,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 56
+            "line": 73
           }
         },
         {
@@ -15102,7 +15172,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 55
+            "line": 72
           }
         },
         {
@@ -15110,7 +15180,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 58
+            "line": 75
           }
         },
         {
@@ -15118,7 +15188,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 57
+            "line": 74
           }
         },
         {
@@ -15126,7 +15196,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 50
+            "line": 66
           }
         },
         {
@@ -15134,7 +15204,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 49
+            "line": 65
           }
         },
         {
@@ -15150,7 +15220,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 62
+            "line": 80
           }
         },
         {
@@ -15158,7 +15228,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 61
+            "line": 79
           }
         },
         {
@@ -15260,6 +15330,18 @@
                 "description": "复用 Button 五档；禁用项可聚焦但不能执行。",
                 "descriptionEn": "Reuses all five Button sizes; disabled items may receive focus but cannot execute.",
                 "default": "md"
+              },
+              {
+                "name": "inset",
+                "type": "boolean",
+                "description": "在逻辑起点为同档图标与字段间隔留位，使无图标命令与前导标记的文字列对齐；默认 false。MenuGroupLabel 也支持 size/inset。",
+                "descriptionEn": "Reserves a same-size icon and field gap at the logical start, aligning unmarked commands with leading markers. Defaults to false; MenuGroupLabel also supports size/inset."
+              },
+              {
+                "name": "markerPosition",
+                "type": "start | end",
+                "description": "仅勾选与单选项，控制实际标记的逻辑位置；默认 end 保持现有外观。状态与键盘语义不变。",
+                "descriptionEn": "Checkbox and radio items only: controls the logical marker position. Defaults to end, preserving existing appearance, state and keyboard semantics."
               },
               {
                 "name": "checked / value / onCheckedChange",
@@ -15446,11 +15528,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 38
+              "line": 54
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 38
+              "line": 54
             },
             "status": "PRESENT"
           },
@@ -15459,11 +15541,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 42
+              "line": 58
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 42
+              "line": 58
             },
             "status": "PRESENT"
           },
@@ -15472,11 +15554,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 46
+              "line": 62
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 46
+              "line": 62
             },
             "status": "PRESENT"
           },
@@ -15485,11 +15567,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 48
+              "line": 64
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 48
+              "line": 64
             },
             "status": "PRESENT"
           },
@@ -15498,11 +15580,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 50
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 50
+              "line": 66
             },
             "status": "PRESENT"
           },
@@ -15511,11 +15593,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 52
+              "line": 68
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 52
+              "line": 68
             },
             "status": "PRESENT"
           },
@@ -15524,11 +15606,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 56
+              "line": 73
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 56
+              "line": 73
             },
             "status": "PRESENT"
           },
@@ -15537,11 +15619,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 58
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 58
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -15550,11 +15632,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 62
+              "line": 80
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 62
+              "line": 80
             },
             "status": "PRESENT"
           },
@@ -15563,11 +15645,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 65
+              "line": 83
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 65
+              "line": 83
             },
             "status": "PRESENT"
           }
@@ -15583,7 +15665,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15900,7 +15982,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16057,7 +16139,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16236,7 +16318,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16791,7 +16873,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17143,7 +17225,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17375,7 +17457,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17667,7 +17749,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17993,8 +18075,8 @@
           },
           {
             "name": "PaginationPrevious / PaginationNext",
-            "description": "复用 Button 与本地化方向名称。",
-            "descriptionEn": "Button compositions with localized direction labels.",
+            "description": "复用 Button；省略 children 时显示本地化的上一页／下一页文字。仅用图标替换内容时，必须用 aria-label、aria-labelledby 或 sr-only 文字提供方向名称，并隐藏装饰图标。",
+            "descriptionEn": "Button compositions that display localized Previous page / Next page text when children are omitted. Icon-only replacements must provide a direction name through aria-label, aria-labelledby or sr-only text, and hide decorative icons.",
             "props": [
               {
                 "name": "disabled / onClick / render / nativeButton / Button props",
@@ -18141,7 +18223,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18355,7 +18437,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18529,7 +18611,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18923,7 +19005,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19248,7 +19330,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19433,7 +19515,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19622,7 +19704,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19952,7 +20034,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20165,7 +20247,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20188,7 +20270,48 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 10
+            "line": 11
+          }
+        },
+        {
+          "name": "ScrollAreaContent",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 30
+          }
+        },
+        {
+          "name": "ScrollAreaContentProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 29
+          }
+        },
+        {
+          "name": "ScrollAreaCorner",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 55
+          }
+        },
+        {
+          "name": "ScrollAreaCornerProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 54
+          }
+        },
+        {
+          "name": "ScrollAreaPrimitive",
+          "kind": "value",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 59
           }
         },
         {
@@ -20196,7 +20319,71 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 7
+            "line": 8
+          }
+        },
+        {
+          "name": "ScrollAreaRoot",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 20
+          }
+        },
+        {
+          "name": "ScrollAreaRootProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 19
+          }
+        },
+        {
+          "name": "ScrollAreaScrollbar",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 35
+          }
+        },
+        {
+          "name": "ScrollAreaScrollbarProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 34
+          }
+        },
+        {
+          "name": "ScrollAreaThumb",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 46
+          }
+        },
+        {
+          "name": "ScrollAreaThumbProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 45
+          }
+        },
+        {
+          "name": "ScrollAreaViewport",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 25
+          }
+        },
+        {
+          "name": "ScrollAreaViewportProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/scroll-area.tsx",
+            "line": 24
           }
         }
       ],
@@ -20204,13 +20391,20 @@
         "path": "apps/docs/src/content/scroll-area/meta.ts",
         "title": "滚动区域 ScrollArea",
         "titleEn": "Scroll area",
-        "description": "在有限视口内保留真实原生滚动。",
-        "descriptionEn": "Native scrolling within a bounded viewport.",
+        "description": "真实原生滚动，或显式组合可拖动滚动条。",
+        "descriptionEn": "Native scrolling with an optional composition of draggable scrollbars.",
         "category": "工具",
         "layer": "primitive",
         "source": "local",
         "exports": [
-          "ScrollArea"
+          "ScrollArea",
+          "ScrollAreaRoot",
+          "ScrollAreaViewport",
+          "ScrollAreaContent",
+          "ScrollAreaScrollbar",
+          "ScrollAreaThumb",
+          "ScrollAreaCorner",
+          "ScrollAreaPrimitive"
         ],
         "keywords": [
           "scroll",
@@ -20252,6 +20446,45 @@
                 "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area."
               }
             ]
+          },
+          {
+            "name": "ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent",
+            "description": "自定义滚动条的显式组合；Root 拥有布局与溢出事实，Viewport 才是真实滚动元素，Content 用于测量内容。",
+            "descriptionEn": "Explicit styled-scrollbar composition: Root owns layout/overflow facts, Viewport is the actual scroll element and Content supports measurement.",
+            "props": [
+              {
+                "name": "render / ref / className / style / native props",
+                "type": "ScrollAreaPrimitive part props",
+                "description": "各部位保留自身原语 props；滚动事件、scrollTop/scrollLeft 和聚焦均属于 Viewport，不能把旧视口 ref 直接接到 Root。",
+                "descriptionEn": "Each part retains its primitive props. Scroll events, scrollTop/scrollLeft and focus belong to Viewport; do not move a legacy viewport ref to Root."
+              }
+            ]
+          },
+          {
+            "name": "ScrollAreaScrollbar",
+            "description": "随实际溢出出现的可拖动轨道；未给 children 时内置真实 Thumb。",
+            "descriptionEn": "A draggable track shown for actual overflow; includes a real Thumb when children are omitted.",
+            "props": [
+              {
+                "name": "orientation",
+                "type": "vertical | horizontal",
+                "default": "vertical",
+                "description": "选择受控轴；双轴时组合两条轨道与 Corner。",
+                "descriptionEn": "Chooses the controlled axis; compose two tracks and Corner for both axes."
+              },
+              {
+                "name": "keepMounted",
+                "type": "boolean",
+                "default": "false",
+                "description": "无溢出时仍保留 DOM，但隐藏轨道，不制造不存在的滚动范围。",
+                "descriptionEn": "Retains hidden DOM without inventing a scroll range when content does not overflow."
+              }
+            ]
+          },
+          {
+            "name": "ScrollAreaThumb / ScrollAreaCorner / ScrollAreaPrimitive",
+            "description": "滑块长度/位置和轨道拖动由公开原语测量；Corner 留出双轴交会处，完整原语继续可用。",
+            "descriptionEn": "The public primitive measures thumb extent/position and handles dragging; Corner reserves the two-axis intersection and the full primitive remains available."
           }
         ],
         "keyboard": [
@@ -20268,12 +20501,16 @@
           }
         ],
         "notes": [
-          "原生滚动条可见性由操作系统/浏览器/用户设置决定，组件不强制覆盖自动隐藏。",
-          "尺寸由消费布局给出；内容需全量渲染时使用此组件，等高长集合可使用 VirtualList。"
+          "ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。",
+          "需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。",
+          "自定义轨道宽度为 3 分、内缩半分，是该组合的集中预设；滑块长度与移动范围共同由原语计算，不单独覆盖滑块最小长度。Content 默认为轨道留出末端空间。",
+          "尺寸由消费布局给出；内容需全量渲染时使用此组件，长集合可使用 VirtualList。"
         ],
         "notesEn": [
-          "OS/browser/user preferences determine native scrollbar visibility; automatic hiding is not forcibly overridden.",
-          "Consumer layout owns dimensions. Use ScrollArea for complete rendering and VirtualList for long equal-height collections."
+          "ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.",
+          "For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.",
+          "The 3-unit track width and half-unit inset are composition presets. The primitive jointly calculates thumb extent and travel; do not independently override its minimum extent. Content reserves ending space for the tracks.",
+          "Consumer layout owns dimensions. Use ScrollArea for complete rendering and VirtualList for long collections."
         ],
         "design": {
           "methods": [
@@ -20329,11 +20566,102 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 10
+              "line": 11
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 10
+              "line": 11
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaRoot",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 20
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 20
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaViewport",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 25
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 25
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaContent",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 30
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 30
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaScrollbar",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 35
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 35
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaThumb",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 46
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 46
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaCorner",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 55
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 55
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ScrollAreaPrimitive",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 59
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/scroll-area.tsx",
+              "line": 59
             },
             "status": "PRESENT"
           }
@@ -20349,7 +20677,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20567,7 +20895,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20872,7 +21200,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21194,7 +21522,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21733,7 +22061,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21927,7 +22255,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22133,7 +22461,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22720,7 +23048,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22974,7 +23302,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23463,7 +23791,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23486,7 +23814,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sparkline.tsx",
-            "line": 56
+            "line": 61
           }
         },
         {
@@ -23494,7 +23822,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sparkline.tsx",
-            "line": 11
+            "line": 12
           }
         }
       ],
@@ -23516,8 +23844,8 @@
           "迷你图",
           "趋势"
         ],
-        "decisions": "高一材，线用浓墨、当前一点用焦墨，默认不用色相；未知点断开而不当作零；可访问名称给出起止与最高最低。目标带是参照，用清墨画在线后面，纵向范围把它算进去，摘要补上当前值在目标之上、之下或之内。状态类别由调用方声明，组件不因越出目标带而自己变色。",
-        "decisionsEn": "One module tall, the line in medium ink and the current point in full ink, without hue by default. Unknown points break the line rather than becoming zero. The accessible name states the endpoints and the range. A target band is a reference: it is drawn behind the line in light ink, the vertical range includes it, and the summary adds whether the current value is above, below or within the target. The tone is declared by the caller; the component never recolors itself for leaving the band.",
+        "decisions": "高一材，线用浓墨、当前一点用焦墨，默认不用色相；未知点断开而不当作零；可访问名称给出起止与最高最低。目标带是参照，用清墨画在线后面，纵向范围把它算进去，摘要补上当前值在目标之上、之下或之内。状态类别由调用方声明，组件不因越出目标带而自己变色。逐点读数显式启用：悬停取最近点，单一焦点入口用左右方向键与 Home / End 遍历，轻点显示或关闭；Escape、失焦与外部按下可关闭。提示复用公共 Tooltip 的 Portal 和悬停保持，未知值仍显示未知。",
+        "decisionsEn": "One module tall, the line in medium ink and the current point in full ink, without hue by default. Unknown points break the line rather than becoming zero. The accessible name states the endpoints and the range. A target band is a reference: it is drawn behind the line in light ink, the vertical range includes it, and the summary adds whether the current value is above, below or within the target. The tone is declared by the caller; the component never recolors itself for leaving the band. Point readouts are opt-in: hover finds the nearest point; one focus target traverses with Left/Right and Home/End; a tap shows or dismisses the reading. Escape, blur and an outside press dismiss it. The public Tooltip provides a portal and hoverable content; unknown values remain unknown.",
         "api": [
           {
             "name": "Sparkline",
@@ -23539,8 +23867,21 @@
               {
                 "name": "format",
                 "type": "(value: number) => string",
-                "description": "可访问摘要里的读数格式。",
-                "descriptionEn": "Formatting for values in the accessible summary."
+                "description": "可访问摘要和逐点提示里的读数格式；未知值不调用它。",
+                "descriptionEn": "Formatting for values in the accessible summary and point readouts; never called for unknown values."
+              },
+              {
+                "name": "tooltip",
+                "type": "boolean",
+                "default": "false",
+                "description": "开启逐点读数。悬停显示最近点；焦点进入即显示，左右方向键、Home / End 遍历；Enter / 空格或轻点切换显示。Escape、失焦或外部按下关闭，不因仍在原位的焦点或悬停立即重开。提示显示类别、数值与点序号。默认保留静态图片摘要；空数组没有逐点入口。",
+                "descriptionEn": "Enable point readouts. Hover shows the nearest point; focus opens it; Left/Right and Home/End traverse; Enter/Space or a tap toggles it. Escape, blur or an outside press dismiss it without immediately reopening from retained focus or hover. The hint states the category, value and point index. The default remains a static image summary; an empty array has no point target."
+              },
+              {
+                "name": "getPointLabel",
+                "type": "(index: number) => string",
+                "description": "逐点提示的时间或类别名称，index 从 0 开始；省略或空白时使用本地化点序号。仅 tooltip 开启且有数据点时调用。",
+                "descriptionEn": "Time or category for a point, with a zero-based index. Omitted or blank labels fall back to a localized point number. Called only when tooltip is enabled and points exist."
               },
               {
                 "name": "appearance",
@@ -23581,29 +23922,34 @@
         "design": {
           "methods": [
             "名实相符",
-            "墨分五色"
+            "墨分五色",
+            "展开有据",
+            "进退相承"
           ],
           "whenToUse": [
             "读数旁需要「最近在变好还是变坏」的形状。",
             "有明确的目标区间时用 band：读者要看的是线在区间之内还是之外。没有区间就不画带。",
-            "tone 由应用决定：越出目标是好是坏只有应用知道（延迟高了是坏，产量高了未必）；组件不会自己变色。"
+            "tone 由应用决定：越出目标是好是坏只有应用知道（延迟高了是坏，产量高了未必）；组件不会自己变色。",
+            "卡片或表格中的短趋势需要偶尔核对某一点时显式开启 tooltip，并用 getPointLabel 命名时间或类别。"
           ],
           "avoid": [
-            "需要读出具体值或比较多个系列时用 Chart。"
+            "需要坐标轴、多个系列或持续可见的逐点明细时用 Chart 或数据表。"
           ],
           "composition": [
-            "放在 StatValue、表格单元格或正文旁；名称与读数由调用方给出。"
+            "放在 StatValue、表格单元格或正文旁；名称与读数由调用方给出。",
+            "逐点入口有一个 Tab 停靠点；可访问提示保留类别、真实数值或未知与点序号。调用方为触屏命中区留出空间，不将 Sparkline 嵌入另一个按钮或链接。"
           ],
           "stateOwner": {
             "library": [
-              "形状、未知点的断开、纵向范围对目标带的并集，以及含目标位置的可访问摘要。"
+              "形状、未知点的断开、纵向范围对目标带的并集、含目标位置的可访问摘要，以及启用后的当前点、提示和关闭行为。"
             ],
             "application": [
-              "数值、时间范围、格式、目标区间与状态类别。"
+              "数值、时间范围、类别名称、格式、目标区间与状态类别。"
             ]
           },
           "responsive": [
-            "宽度固定，随文字换行。"
+            "line 宽度固定，随文字换行；area 未给 width 时铺满容器。",
+            "逐点提示通过 Portal 脱离卡片和滚动容器裁切，靠近视口边缘时由公共浮层避让。"
           ],
           "customization": [
             "颜色读墨阶；色相只经 tone 表达状态类别，不开放任意颜色。"
@@ -23613,24 +23959,27 @@
           "whenToUse": [
             "A reading needs a shape showing whether it has recently improved or worsened.",
             "Use band when there is a real target range: the reader needs to see whether the line is inside or outside it. Without a range, draw no band.",
-            "The application decides tone: only it knows whether leaving the target is good or bad (higher latency is bad, higher output may not be); the component never recolors itself."
+            "The application decides tone: only it knows whether leaving the target is good or bad (higher latency is bad, higher output may not be); the component never recolors itself.",
+            "Enable tooltip when a short card or table trend needs occasional point inspection, and name its time or category with getPointLabel."
           ],
           "avoid": [
-            "Use Chart to read exact values or compare several series."
+            "Use Chart or a data table for axes, multiple series or persistently visible point details."
           ],
           "composition": [
-            "Place beside StatValue, in a table cell, or in text; the caller supplies the name and reading."
+            "Place beside StatValue, in a table cell, or in text; the caller supplies the name and reading.",
+            "Point inspection has one Tab stop. Accessible hints retain the category, real value or unknown state, and point index. Leave room for the touch target and avoid nesting Sparkline in another button or link."
           ],
           "stateOwner": {
             "library": [
-              "Shape, broken lines at unknown points, a vertical range that includes the band, and the accessible summary with the position against the target."
+              "Shape, gaps at unknown points, the data/band domain, the accessible summary, and opt-in active point, readout and dismissal behavior."
             ],
             "application": [
-              "Values, time range, formatting, the target range, and the tone."
+              "Values, time range, category names, formatting, target range and tone."
             ]
           },
           "responsive": [
-            "Fixed width that wraps with text."
+            "line has a fixed width and wraps with text; area fills its container when width is omitted.",
+            "Point hints use a portal to escape card and scroll-container clipping; the shared floating layer handles viewport collisions."
           ],
           "customization": [
             "Colors come from the ink ladder; hue appears only through tone as a status category, never as an arbitrary color."
@@ -23642,11 +23991,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sparkline.tsx",
-              "line": 56
+              "line": 61
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sparkline.tsx",
-              "line": 56
+              "line": 61
             },
             "status": "PRESENT"
           }
@@ -23662,7 +24011,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24049,7 +24398,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24224,7 +24573,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24501,7 +24850,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24737,7 +25086,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25182,7 +25531,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25511,7 +25860,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25780,7 +26129,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26025,7 +26374,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26302,7 +26651,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26594,7 +26943,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26979,7 +27328,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27267,7 +27616,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27557,7 +27906,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27809,7 +28158,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28162,7 +28511,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28602,7 +28951,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28843,7 +29192,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29140,7 +29489,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29163,7 +29512,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/virtual-list.tsx",
-            "line": 21
+            "line": 39
+          }
+        },
+        {
+          "name": "VirtualListActions",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/virtual-list.tsx",
+            "line": 10
           }
         },
         {
@@ -29171,7 +29528,15 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/virtual-list.tsx",
-            "line": 8
+            "line": 17
+          }
+        },
+        {
+          "name": "VirtualListScrollOptions",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/virtual-list.tsx",
+            "line": 9
           }
         }
       ],
@@ -29179,8 +29544,8 @@
         "path": "apps/docs/src/content/virtual-list/meta.ts",
         "title": "虚拟列表 VirtualList",
         "titleEn": "Virtual list",
-        "description": "以稳定项身份呈现等高长集合的可达窗口。",
-        "descriptionEn": "An accessible window over a fixed-height collection with stable item identity.",
+        "description": "以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。",
+        "descriptionEn": "Window fixed or measured-height collections while retaining the reading position and active editing.",
         "category": "工具",
         "layer": "primitive",
         "source": "local",
@@ -29190,28 +29555,51 @@
         "keywords": [
           "virtualized",
           "windowing",
-          "long list",
+          "dynamic height",
+          "chat",
           "虚拟列表",
           "长列表",
-          "虚拟滚动"
+          "虚拟滚动",
+          "动态高度",
+          "尾部跟随"
         ],
         "api": [
           {
             "name": "VirtualList<Item>",
-            "description": "集合渲染边界，真实 list/listitem，不提供选择或业务列。",
-            "descriptionEn": "Collection rendering boundary with actual list/listitem semantics, without selection or business columns.",
+            "description": "集合渲染边界，真实 list/listitem，不提供选择、请求或业务列。",
+            "descriptionEn": "Collection rendering boundary with actual list/listitem semantics, without selection, requests, or business columns.",
             "props": [
               {
                 "name": "items / getKey / renderItem",
                 "type": "readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode",
-                "description": "真实集合、稳定唯一 key 与内容；重复 key 显式报错。不得用不稳定位置冒充项身份。",
-                "descriptionEn": "Actual collection, stable unique keys, and content; duplicate keys throw. Unstable positions cannot impersonate identity."
+                "description": "真实集合、稳定唯一 key 与内容；重复 key 显式报错。插入、排序时用持久身份，不用位置。",
+                "descriptionEn": "Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions."
               },
               {
                 "name": "itemSize / height",
                 "type": "number",
-                "description": "调用方提供等高项外高与视口高，CSS px；有限正数，0/无穷等显式报错。总高/偏移/窗口从关系计算。",
-                "descriptionEn": "Caller-supplied equal outer item height and viewport height in CSS px. Finite positive values; zero/infinity throw. Total height, offsets, and window derive from these relationships."
+                "description": "项外高与视口高，CSS px，均为有限正数。默认固定高度；动态模式中 itemSize 是未测量行的估计值，不限制内容高度。",
+                "descriptionEn": "Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height."
+              },
+              {
+                "name": "measurement",
+                "type": "'fixed' | 'dynamic'",
+                "default": "'fixed'",
+                "description": "dynamic 用 ResizeObserver 测量已挂载行的实际 border-box 高度；整行高度应由正常内容流决定，外部 margin 不计入测量。",
+                "descriptionEn": "dynamic uses ResizeObserver to measure each mounted row's actual border-box height. Let normal content flow determine row height; external margins are excluded."
+              },
+              {
+                "name": "actionsRef",
+                "type": "React.Ref<VirtualListActions>",
+                "description": "独立动作出口：scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) 与 scrollToEnd()。立即滚动，不转移焦点。非法或越界 index 抛 RangeError；空集合 scrollToEnd 无操作。",
+                "descriptionEn": "Separate actions: scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) and scrollToEnd(). Scroll instantly without moving focus. Invalid or out-of-bounds indices throw RangeError; scrollToEnd is a no-op for empty collections."
+              },
+              {
+                "name": "followEnd",
+                "type": "boolean",
+                "default": "false",
+                "description": "显式尾部跟随。仅原先停在底部（1 CSS px 容差）时跟随追加项；向上阅读后保持阅读位置，不在初次挂载时跳到底部。",
+                "descriptionEn": "Explicit end following. Follow appended items only when previously at the bottom (within 1 CSS px). Reading history keeps its position, and initial mounting never jumps to the end."
               },
               {
                 "name": "overscan",
@@ -29223,8 +29611,8 @@
               {
                 "name": "render / ref / style / className / events / ARIA",
                 "type": "useRender.ComponentProps<'div'>",
-                "description": "真实滚动视口出口；height 由显式 height 参数承担，测量实际 clientHeight 适应视口变化。给集合可识别名称。",
-                "descriptionEn": "Actual viewport composition; explicit height owns its height, and measured clientHeight adapts to viewport changes. Give the collection an identifiable name."
+                "description": "ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。",
+                "descriptionEn": "ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
               }
             ]
           }
@@ -29239,23 +29627,25 @@
             "keys": "方向 / Home / End",
             "keysEn": "Arrow keys / Home / End",
             "description": "从视口或行本身到相邻/首末真实行，跨窗口滚动挂载；内嵌编辑/按钮键位不被接管。",
-            "descriptionEn": "From the viewport or row, reach adjacent/first/last actual rows, scrolling/mounting across windows. Embedded editing/button keys remain intact."
+            "descriptionEn": "From the viewport or row, reach adjacent/first/last actual rows across windows. Embedded editing/button keys remain intact."
           }
         ],
         "notes": [
-          "只有等高项；动态高度、完整 DOM 搜索/打印使用普通集合或 ScrollArea。",
-          "滚动只重算可见区间：行高固定，第 i 行偏移是 i × itemSize，区间由 scrollTop 直接除出；键只在 items 或 getKey 变化时重算一次，滚动期间不再遍历全部数据。",
-          "聚焦行即使离屏也保留挂载；真实移除后焦点回到视口，可继续导航。aria-posinset/setsize 表达完整集合位置。",
-          "示例行高 48px 是消费示例选择，视口容纳四项；修改入口是示例 rowSize 与组件 itemSize/height，未新增库 token。"
+          "固定模式保持 itemSize 契约；内容会换行、展开或流式增长时显式选 dynamic，并给未测量行合理估计。动态跳转可随实际测量修正位置，不承诺平滑滚动。",
+          "稳定 key 在前插和排序后保留同一可见项及项内像素偏移；视口上方整行高度变化会补偿滚动。尾部跟随不代替应用的未读计数或加载状态。",
+          "键只在 items 或 getKey 变化时派生。滚动时只处理窗口和最多一个保留焦点行，不重新遍历 50,000 项；数据变化或测量更新仍可能更新尺寸缓存。",
+          "聚焦行即使离屏也保留挂载；真实移除后焦点回到视口。aria-posinset/setsize 表达完整集合位置。搜索、打印或需要全量辅助技术遍历时改用普通集合或 ScrollArea。",
+          "窗口示例的 48px 等高、动态示例的 72px 估计及视口高度均是消费示例选择，修改入口为 itemSize/height；未新增库 token。"
         ],
         "notesEn": [
-          "Equal-height items only. Use ordinary collections or ScrollArea for dynamic height, complete DOM search, or printing.",
-          "Scrolling recomputes only the visible range: with a fixed row height, row i sits at i × itemSize and the range is divided straight from scrollTop. Keys are derived once when items or getKey change, never again per scroll.",
-          "Focused rows remain mounted offscreen; actual removal returns focus to the viewport so navigation can continue. aria-posinset/setsize identify positions in the complete collection.",
-          "The example's 48px row height is a consumer choice with four visible rows. Adjust example rowSize or component itemSize/height; no library token was added."
+          "Fixed mode retains the itemSize contract. Explicitly choose dynamic for wrapping, expanding, or streaming content and provide a reasonable estimate. Dynamic jumps may correct their position as measurements arrive; smooth scrolling is not promised.",
+          "Stable keys retain the visible item and within-item pixel offset across prepends and reorders. Height changes of rows entirely above the viewport compensate the scroll offset. Following does not own unread counts or loading state.",
+          "Keys are derived only when items or getKey change. Scrolling processes the window and at most one retained focused row, without rewalking 50,000 items. Data changes or measurements can still update the size cache.",
+          "Focused rows remain mounted offscreen; actual removal returns focus to the viewport. aria-posinset/setsize express complete collection positions. Use ordinary collections or ScrollArea for search, printing, or complete assistive-technology traversal.",
+          "The fixed demo's 48px rows, dynamic demo's 72px estimate, and viewport heights are consumer choices adjusted through itemSize/height. No library token was added."
         ],
-        "decisions": "VirtualList 不代表选择、加载或业务结果。稳定 key、等高项和可达窗口是当前契约；overscan=2 是渲染预算预设。",
-        "decisionsEn": "VirtualList expresses no selection, loading, or business result. Stable keys, equal-height items, and a reachable window are its current contract; overscan=2 is a rendering-budget preset.",
+        "decisions": "VirtualList 只拥有窗口、测量、阅读锚点与焦点连续性。集合、稳定 key、未读状态及是否跟随由消费项目决定；默认保持固定高度和手动滚动。",
+        "decisionsEn": "VirtualList owns windowing, measurement, reading anchors, and focus continuity. The consumer owns the collection, stable keys, unread state, and following policy; fixed heights and manual scrolling remain the defaults.",
         "design": {
           "methods": [
             "随境取度",
@@ -29263,46 +29653,46 @@
             "名实相符"
           ],
           "whenToUse": [
-            "明确等高与稳定身份的长集合"
+            "具有稳定身份的等高或动态高度长集合"
           ],
           "avoid": [
-            "可变高内容、需要全量 DOM 的内容、业务表格"
+            "需要完整 DOM 的内容、业务表格"
           ],
           "composition": [
-            "视口 + 总高空间 + 当前窗口/保留焦点项"
+            "视口 + 总高空间 + 当前窗口/保留焦点项 + 可选应用滚动入口"
           ],
           "stateOwner": {
             "library": [
-              "窗口、真实位置、焦点连续性"
+              "窗口、测量、真实位置、阅读与焦点连续性"
             ],
             "application": [
-              "集合、稳定 key、等高 extent、项内容"
+              "集合、稳定 key、内容、估计尺寸、尾部跟随策略"
             ]
           },
           "customization": [
-            "itemSize / height / overscan 与公开内容出口"
+            "itemSize / height / measurement / overscan / actionsRef / followEnd 与公开内容出口"
           ]
         },
         "designEn": {
           "whenToUse": [
-            "Long collections with explicit equal heights and stable identities."
+            "Long fixed or measured-height collections with stable identities."
           ],
           "avoid": [
-            "Variable heights, content requiring full DOM, or business tables."
+            "Content requiring complete DOM, or business tables."
           ],
           "composition": [
-            "Viewport + total-height space + current window/retained focused item."
+            "Viewport + total-height space + current window/retained focused item + optional consumer scroll controls."
           ],
           "stateOwner": {
             "library": [
-              "Windowing, actual positions, and focus continuity."
+              "Windowing, measurement, actual positions, and reading/focus continuity."
             ],
             "application": [
-              "Collections, stable keys, equal extents, and item content."
+              "Collections, stable keys, content, estimated sizes, and following policy."
             ]
           },
           "customization": [
-            "itemSize / height / overscan and public content composition."
+            "itemSize / height / measurement / overscan / actionsRef / followEnd and public content composition."
           ]
         },
         "usageResolution": [
@@ -29311,11 +29701,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/virtual-list.tsx",
-              "line": 21
+              "line": 39
             },
             "rootEntry": {
               "path": "packages/ui/src/components/virtual-list.tsx",
-              "line": 21
+              "line": 39
             },
             "status": "PRESENT"
           }
@@ -29331,7 +29721,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29826,7 +30216,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "4.1.0",
+        "version": "4.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37872,13 +38262,13 @@
     },
     {
       "name": "--qy-control-lg-icon",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-icon-narrow",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -37896,7 +38286,7 @@
     },
     {
       "name": "--qy-control-lg-padding-bordered",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -37932,7 +38322,7 @@
     },
     {
       "name": "--qy-control-md-padding-bordered",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 0,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -37950,13 +38340,13 @@
     },
     {
       "name": "--qy-control-sm-icon",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 5,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-icon-narrow",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -37974,7 +38364,7 @@
     },
     {
       "name": "--qy-control-sm-padding-bordered",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -37986,13 +38376,13 @@
     },
     {
       "name": "--qy-control-xl-icon",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-icon-narrow",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -38010,7 +38400,7 @@
     },
     {
       "name": "--qy-control-xl-padding-bordered",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -38022,13 +38412,13 @@
     },
     {
       "name": "--qy-control-xs-icon",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-icon-narrow",
-      "componentSourceOccurrences": 1,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -38046,7 +38436,7 @@
     },
     {
       "name": "--qy-control-xs-padding-bordered",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     }
@@ -38379,6 +38769,7 @@
     "scripts/token-ledger.mjs",
     "scripts/ui-foundations-runtime.mjs",
     "scripts/verify-consumer-compositions.mjs",
+    "scripts/verify-consumer-migration.mjs",
     "scripts/verify-index-specimens.mjs",
     "scripts/verify-packed-consumers.mjs",
     "scripts/verify-packed-tooling.mjs",

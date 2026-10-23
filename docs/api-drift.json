@@ -15,16 +15,16 @@
       "type-resolved": 95
     },
     "documentedButMissing": 0,
-    "undocumented": 96,
-    "undocumentedDeclaredInThisComponentsFile": 11,
+    "undocumented": 107,
+    "undocumentedDeclaredInThisComponentsFile": 13,
     "unresolved": 0,
-    "uncheckedWrittenNames": 178,
+    "uncheckedWrittenNames": 185,
     "uncheckedByReason": {
-      "generic": 128,
-      "part-not-applicable": 32,
+      "generic": 129,
+      "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
-      "unparsed": 3,
-      "dotted-path-into-another-type": 2
+      "unparsed": 6,
+      "dotted-path-into-another-type": 4
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
@@ -146,6 +146,69 @@
       "part": "Chart",
       "prop": "events",
       "declaredAt": "packages/ui/src/components/chart.tsx:98"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuItem",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuLinkItem",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuCheckboxItem",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuCheckboxItem",
+      "prop": "markerPosition",
+      "declaredAt": "packages/ui/src/components/menu.tsx:67",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuRadioItem",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuRadioItem",
+      "prop": "markerPosition",
+      "declaredAt": "packages/ui/src/components/menu.tsx:74",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuSubmenuTrigger",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuGroupLabel",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuGroupLabel",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "viaComponent": "menu"
     },
     {
       "component": "copy-button",
@@ -438,6 +501,18 @@
       "prop": "tone",
       "declaredAt": "packages/ui/src/components/button.tsx:85",
       "viaComponent": "button"
+    },
+    {
+      "component": "menu",
+      "part": "MenuGroupLabel",
+      "prop": "inset",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25"
+    },
+    {
+      "component": "menu",
+      "part": "MenuGroupLabel",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/menu.tsx:25"
     },
     {
       "component": "otp-field",
@@ -1099,6 +1174,41 @@
     {
       "component": "data-table",
       "part": "DataTable",
+      "written": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
+      "token": "table.options.columns[].size",
+      "reason": "unparsed"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
+      "token": "table.options.columns[].minSize",
+      "reason": "unparsed"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
+      "token": "table.options.columns[].maxSize",
+      "reason": "unparsed"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
+      "token": "table.options.state.columnSizing",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.ellipsis",
+      "token": "columnDef.meta.ellipsis",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
       "written": "columnDef.meta.rowHeader",
       "token": "columnDef.meta.rowHeader",
       "reason": "dotted-path-into-another-type"
@@ -1606,6 +1716,20 @@
       "written": "render / ref / ARIA / events",
       "token": "events",
       "reason": "generic"
+    },
+    {
+      "component": "scroll-area",
+      "part": "ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent",
+      "written": "render / ref / className / style / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "scroll-area",
+      "part": "ScrollAreaPrimitive",
+      "written": "ScrollAreaThumb / ScrollAreaCorner / ScrollAreaPrimitive",
+      "token": "(whole part)",
+      "reason": "part-not-applicable"
     },
     {
       "component": "search-input",

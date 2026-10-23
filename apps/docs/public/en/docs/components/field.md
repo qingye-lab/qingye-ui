@@ -1,6 +1,6 @@
 # Field
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
@@ -117,10 +117,10 @@ Shared Base UI Field.Root context. Full automatic-validation APIs remain on Fiel
 - className / style / render / ref: Base UI Field.Root props. Applied to the field root; styles support state functions.
 
 ### FieldLabel
-Names a registered control; supports explicit htmlFor and primitive nativeLabel/render.
+Requires a Field or FieldPrimitive.Root context and names a registered control; supports explicit htmlFor and primitive nativeLabel/render. For a standalone label, use Label from components/label.
 
 ### FieldDescription
-Necessary supporting facts registered in aria-describedby.
+Requires a Field or FieldPrimitive.Root context to register supporting facts in aria-describedby. For standalone help, give native text an id and reference it explicitly from the control.
 
 ### FieldError
 Shows caller-supplied errors and registers in aria-describedby when visible.

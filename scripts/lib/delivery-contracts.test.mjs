@@ -23,3 +23,12 @@ test('retired date proof fails before taking a preview port', () => {
   assert.match(result.stderr, /--date-range-proof is retired/);
   assert.doesNotMatch(result.stdout, /preview /);
 });
+
+test('consumer migration cannot share a browser entry with another audit mode', () => {
+  for (const conflicting of ['--patterns', '--foundations', '--fixture-overflow']) {
+    const result = spawnSync(process.execPath, ['scripts/run-browser-audit.mjs', '--consumer-migration', conflicting], { encoding: 'utf8' });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /select one browser entry|overflow fixture is only supported/);
+    assert.doesNotMatch(result.stdout, /preview /);
+  }
+});

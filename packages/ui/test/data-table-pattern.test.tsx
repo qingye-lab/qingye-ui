@@ -114,4 +114,71 @@ describe("DataTablePattern", () => {
     expect(screen.getByRole("rowheader", { name: "Alpha" })).toBeInTheDocument();
     expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
   });
+
+  it("forwards configured dimensions and text ellipsis without giving selection a text-column width", () => {
+    const full = "需要保留的完整名称 / Complete name";
+    render(<DataTablePattern data={[{ ...data[0]!, label: full }, data[1]!]} columns={[
+      { ...columns[0]!, size: 180, minSize: 160, maxSize: 200, ellipsis: true },
+      { ...columns[1]!, size: 80 },
+    ]} getRowId={getRowId} emptyContent="没有条目" selection={selection} selectionAppearance="checkbox" defaultState={{ rowSelection: { a: true }, activeRowId: "b" }} />);
+    expect(screen.getByRole("columnheader", { name: "名称" })).toHaveStyle({ width: "180px" });
+    const rowheader = screen.getByRole("rowheader", { name: full });
+    expect(rowheader).toHaveStyle({ width: "180px", minWidth: "160px", maxWidth: "200px" });
+    expect(rowheader.querySelector("[data-slot=data-table-cell-content]")).toHaveAttribute("title", full);
+    expect(rowheader.closest("tr")).not.toHaveClass("bg-surface-selected");
+    expect(screen.getByRole("rowheader", { name: "Beta" }).closest("tr")).toHaveClass("bg-surface-selected");
+    const marker = screen.getByRole("table").querySelector("col")!;
+    expect(marker.style.width).toContain("--qy-marker-size");
+    expect(marker.style.width).toContain("--qy-panel-padding");
+    expect(marker.style.width).not.toBe("150px");
+    expect(screen.getByRole("checkbox", { name: `选择 ${full}` })).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("offers row activation without wrapping cell controls or changing the selected ID map", async () => {
+    const user = userEvent.setup();
+    const activated = vi.fn();
+    const changed = vi.fn();
+    render(<DataTablePattern data={data} columns={[...columns, { id: "action", header: "操作", accessor: row => row.id, cell: row => <button>编辑 {row.label}</button> }]} getRowId={getRowId} emptyContent="没有条目" selection={selection} selectionAppearance="checkbox" activeRow={{ trigger: "row", onActivate: activated }} onStateChange={changed} />);
+    await user.click(screen.getByRole("button", { name: "编辑 Beta" }));
+    await user.click(screen.getByRole("checkbox", { name: "选择 Beta" }));
+    expect(activated).not.toHaveBeenCalled();
+    expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { b: true }, activeRowId: null }), { reason: "selection" });
+    await user.click(screen.getByRole("rowheader", { name: "Beta" }));
+    expect(activated).toHaveBeenCalledExactlyOnceWith(data[1]);
+    const row = screen.getByRole("rowheader", { name: "Beta" }).closest("tr")!;
+    expect(row).toHaveAttribute("aria-current", "true");
+    expect(row).toHaveClass("bg-surface-selected");
+    expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { b: true }, activeRowId: "b" }), { reason: "active-row" });
+    row.focus();
+    await user.keyboard("{Enter}");
+    expect(activated).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole("checkbox", { name: "选择 Beta" })).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("virtualizes the paginated model while select-all retains its complete page scope", async () => {
+    const user = userEvent.setup();
+    const many = Array.from({ length: 200 }, (_, index) => ({ id: `row-${index}`, label: `记录 ${index}`, count: index }));
+    const changed = vi.fn();
+    render(<DataTablePattern data={many} columns={columns} getRowId={getRowId} emptyContent="没有条目" selection={selection} pagination={{}} defaultState={{ pagination: { page: 1, pageSize: 20 } }} virtualization={{ height: 144, estimateRowHeight: 48, overscan: 0 }} onStateChange={changed} />);
+    const table = screen.getByRole("table");
+    expect(table).toHaveAttribute("aria-rowcount", "21");
+    expect(table.querySelectorAll("tbody tr[data-row-id]").length).toBeLessThanOrEqual(4);
+    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    expect(Object.keys(changed.mock.calls.at(-1)![0].rowSelection)).toHaveLength(20);
+    await user.click(screen.getByRole("button", { name: "下一页" }));
+    expect(screen.getByRole("rowheader", { name: "记录 20" })).toBeInTheDocument();
+    expect(screen.getByRole("checkbox", { name: "选择当页" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    expect(Object.keys(changed.mock.calls.at(-1)![0].rowSelection)).toHaveLength(40);
+  });
+
+  it("keeps virtual server rows caller-owned and describes the loaded page rather than guessing global row positions", async () => {
+    const user = userEvent.setup();
+    render(<DataTablePattern mode="server" data={data} columns={columns} getRowId={getRowId} emptyContent="结果未知" pagination={{ totalCount: 30 }} defaultState={{ pagination: { page: 3, pageSize: 1 } }} virtualization={{ height: 500, estimateRowHeight: 48 }} busy />);
+    await user.click(screen.getByRole("button", { name: /数量/ }));
+    expect(within(screen.getByRole("table")).getAllByRole("rowheader").map(row => row.textContent)).toEqual(["Alpha", "Beta", "Gamma"]);
+    expect(screen.getByRole("table")).toHaveAttribute("aria-rowcount", "4");
+    expect(screen.getByRole("rowheader", { name: "Alpha" }).closest("tr")).toHaveAttribute("aria-rowindex", "2");
+    expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
+  });
 });

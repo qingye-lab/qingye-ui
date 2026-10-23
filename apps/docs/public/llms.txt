@@ -1,12 +1,12 @@
-# Qingye UI 4.1.0
+# Qingye UI 4.2.0
 
-> Facts for @qingye_lab/ui@4.1.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@4.2.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.md)
 - [Style contract](/ai/style.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.md): method sources
-- [Installation](/ai/v4.1.0/installation.md)
+- [Installation](/ai/v4.2.0/installation.md)
 - [Main skill](/ai/SKILL.md)
 - [Full text](/llms-full.txt): the guide, installation and every component in one file
 
@@ -35,7 +35,7 @@
 - [上下文菜单 ContextMenu](/docs/components/context-menu.md): 当前对象的右键增强命令入口。
 - [复制按钮 CopyButton](/docs/components/copy-button.md): 复制给定文本，并呈现剪贴板实际写入结果。
 - [角标 CornerMark](/docs/components/corner-mark.md): 钉在宿主一角的未读数或在线点，不是宿主内容本身。
-- [数据集合 DataTable](/docs/components/data-table.md): 调用方真实集合的比较、排序与范围选择。
+- [数据集合 DataTable](/docs/components/data-table.md): 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 - [日期输入 DatePicker](/docs/components/date-picker.md): 编辑一个当地日期，或展开日历选择。
 - [日期范围 DateRangePicker](/docs/components/date-range-picker.md): 键入或在日历中选择起止日期，完整且有序时才是确认值。
 - [日期时间 DateTimePicker](/docs/components/date-time-picker.md): 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
@@ -75,7 +75,7 @@
 - [长文 Prose](/docs/components/prose.md): 给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认自带一张阅读纸；页面已经有纸时去掉。
 - [单选组 RadioGroup](/docs/components/radio-group.md): 从同时可见的少量候选中取一个值。
 - [两量关系 ScatterChart](/docs/components/scatter-chart.md): 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
-- [滚动区域 ScrollArea](/docs/components/scroll-area.md): 在有限视口内保留真实原生滚动。
+- [滚动区域 ScrollArea](/docs/components/scroll-area.md): 真实原生滚动，或显式组合可拖动滚动条。
 - [搜索输入 SearchInput](/docs/components/search-input.md): 输入一个搜索词，并能一步清空。
 - [区块 Section](/docs/components/section.md): 不带边框的页面区块，由标题命名；标题与操作同一行。
 - [分段控件 SegmentedControl](/docs/components/segmented-control.md): 从并列的少量候选中输入一个值。
@@ -104,5 +104,5 @@
 - [文字提示 Tooltip](/docs/components/tooltip.md): 悬停或聚焦时阅读快捷键、格式与短解释。
 - [层级集合 Tree](/docs/components/tree.md): 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 - [排版 Typography](/docs/components/typography.md): 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
-- [虚拟列表 VirtualList](/docs/components/virtual-list.md): 以稳定项身份呈现等高长集合的可达窗口。
+- [虚拟列表 VirtualList](/docs/components/virtual-list.md): 以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。
 - [工作面 Workspace](/docs/components/workspace.md): 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。

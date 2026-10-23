@@ -1,6 +1,6 @@
 # Locale switch
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: a454a4019a594b5a5370612b01e440f4f3c847d1549bf8773ff10eb1f72b226d

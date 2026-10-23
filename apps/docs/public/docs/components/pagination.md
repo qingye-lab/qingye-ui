@@ -1,6 +1,6 @@
 # 分页 Pagination
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
@@ -24,7 +24,7 @@ PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 p
 - Pagination：有名称的 nav，不生成页码。
 - PaginationList / PaginationItem：ul / li 组织页面入口。
 - PaginationLink：a，匹配当前页时 aria-current=page。
-- PaginationPrevious / PaginationNext：复用 Button 与本地化方向名称。
+- PaginationPrevious / PaginationNext：复用 Button；省略 children 时显示本地化的上一页／下一页文字。仅用图标替换内容时，必须用 aria-label、aria-labelledby 或 sr-only 文字提供方向名称，并隐藏装饰图标。
 - PaginationEllipsis：省略页名称，不代表末页。
 
 ## Responsive behavior
@@ -141,7 +141,7 @@ a，匹配当前页时 aria-current=page。
 - page / href / render / ref / native props: { page: number } & useRender.ComponentProps<a>. 应用提供正整数页码与真实目标。
 
 ### PaginationPrevious / PaginationNext
-复用 Button 与本地化方向名称。
+复用 Button；省略 children 时显示本地化的上一页／下一页文字。仅用图标替换内容时，必须用 aria-label、aria-labelledby 或 sr-only 文字提供方向名称，并隐藏装饰图标。
 - disabled / onClick / render / nativeButton / Button props: ButtonProps. 应用明确禁用；导航可 render 为 a 并设 nativeButton=false。
 
 ### PaginationEllipsis

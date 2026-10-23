@@ -1,12 +1,12 @@
-# Qingye UI 4.1.0
+# Qingye UI 4.2.0
 
-> Facts for @qingye_lab/ui@4.1.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@4.2.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.en.md)
 - [Style contract](/ai/style.en.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.en.md): method sources
-- [Installation](/ai/v4.1.0/installation.md)
+- [Installation](/ai/v4.2.0/installation.md)
 - [Main skill](/ai/SKILL.en.md)
 - [Full text](/llms-full.en.txt): the guide, installation and every component in one file
 
@@ -35,7 +35,7 @@
 - [ContextMenu](/en/docs/components/context-menu.md): A context-menu enhancement for commands on the current object.
 - [Copy button](/en/docs/components/copy-button.md): Copy supplied text and reflect the clipboard write result.
 - [CornerMark](/en/docs/components/corner-mark.md): A count or presence dot anchored to a host's corner, never part of the host's own content.
-- [DataTable](/en/docs/components/data-table.md): Comparison, sorting and scoped selection for a real caller-owned collection.
+- [DataTable](/en/docs/components/data-table.md): Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 - [DatePicker](/en/docs/components/date-picker.md): Edit one local date or choose it from a calendar.
 - [DateRangePicker](/en/docs/components/date-range-picker.md): Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 - [DateTimePicker](/en/docs/components/date-time-picker.md): Edit complete local wall-clock date/time, or apply calendar and time drafts.
@@ -75,7 +75,7 @@
 - [Prose](/en/docs/components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.
 - [RadioGroup](/en/docs/components/radio-group.md): Choose one value from a small set of visible options.
 - [ScatterChart](/en/docs/components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
-- [Scroll area](/en/docs/components/scroll-area.md): Native scrolling within a bounded viewport.
+- [Scroll area](/en/docs/components/scroll-area.md): Native scrolling with an optional composition of draggable scrollbars.
 - [SearchInput](/en/docs/components/search-input.md): Enter a search term and clear it in one step.
 - [Section](/en/docs/components/section.md): A page block without a border, named by its title; the title and its actions share one row.
 - [SegmentedControl](/en/docs/components/segmented-control.md): Enter one value from a small set of visible segments.
@@ -104,5 +104,5 @@
 - [Tooltip](/en/docs/components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
 - [Tree](/en/docs/components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [Typography](/en/docs/components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
-- [Virtual list](/en/docs/components/virtual-list.md): An accessible window over a fixed-height collection with stable item identity.
+- [Virtual list](/en/docs/components/virtual-list.md): Window fixed or measured-height collections while retaining the reading position and active editing.
 - [Workspace](/en/docs/components/workspace.md): An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.

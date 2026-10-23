@@ -28,6 +28,7 @@ assert.ok(archive.includes('package/styles.css'));
 assert.ok(archive.includes('package/prose.css'));
 assert.ok(archive.includes('package/design.md'));
 assert.ok(archive.includes('package/design.en.md'));
+for (const component of ['data-table', 'virtual-list', 'sparkline', 'menu', 'scroll-area']) for (const extension of ['js', 'd.ts']) assert.ok(archive.includes(`package/dist/components/${component}.${extension}`), `missing installed ${component} ${extension} entry`);
 assert.ok(!archive.some((path) => /(?:^|\/)(?:plans|implementation|baseline|test-results)(?:\/|$)/.test(path)), 'private development artifacts in package');
 evidence.archive = { files: archive.length, forbiddenInternalPaths: false };
 
@@ -139,6 +140,190 @@ async function preview(item, task) {
   }
 }
 
+async function verifyNewCapabilities(page, item) {
+  const sized = page.locator('#sized-table');
+  const nameColumn = sized.locator('tbody th[scope="row"]').first();
+  const width = () => nameColumn.evaluate(element => element.getBoundingClientRect().width);
+  assert.ok(Math.abs(await width() - 200) < 1, 'installed explicit column width reaches the cell');
+  const fullText = await nameColumn.innerText();
+  assert.equal(await nameColumn.locator('[data-slot="data-table-cell-content"]').getAttribute('title'), fullText);
+  assert.equal(await nameColumn.locator('[data-slot="data-table-cell-content"]').evaluate(element => getComputedStyle(element).textOverflow), 'ellipsis');
+  assert.equal(await sized.getByRole('columnheader', { name: '组合列', exact: true }).getAttribute('colspan'), '2');
+  await page.locator('#shrink-table-column').click();
+  assert.ok(Math.abs(await width() - 180) < 1, 'installed minSize clamps a smaller controlled size');
+  await page.locator('#resize-table-column').click();
+  assert.ok(Math.abs(await width() - 240) < 1, 'installed maxSize clamps a larger controlled size');
+  assert.ok(Math.abs(await sized.getByRole('columnheader', { name: '组合列', exact: true }).evaluate(element => element.getBoundingClientRect().width) - 340) < 1, 'grouped header sums actual leaf widths');
+  assert.equal(await page.locator('#entered-table').evaluate(element => getComputedStyle(element).tableLayout), 'auto', 'unsized legacy table keeps auto layout');
+
+  const table = page.locator('#window-table');
+  const viewport = page.locator('#window-table-viewport');
+  const first = table.locator('tbody tr[data-row-id="entry-0"]');
+  const second = table.locator('tbody tr[data-row-id="entry-1"]');
+  const selectedBackground = await first.evaluate(element => getComputedStyle(element).backgroundColor);
+  assert.equal(await table.getAttribute('aria-rowcount'), '201');
+  assert.equal(await table.locator('thead').evaluate(element => element.tagName), 'THEAD');
+  assert.equal(await table.locator('tbody').evaluate(element => element.tagName), 'TBODY');
+  assert.ok(await table.locator('tbody tr[data-row-id]').count() <= 12, 'installed table renders a bounded row window');
+  await first.getByRole('checkbox').click();
+  assert.equal(await page.locator('#table-selected').textContent(), '1');
+  assert.equal(await page.locator('#table-active').textContent(), 'none');
+  assert.equal(await first.evaluate(element => getComputedStyle(element).backgroundColor), selectedBackground, 'checkbox selection does not add selected-row fill');
+  await first.locator('th[scope="row"]').click();
+  assert.equal(await page.locator('#table-active').textContent(), 'entry-0');
+  assert.equal(await page.locator('#table-selected').textContent(), '1');
+  await second.getByRole('button', { name: '记录行操作 entry-1', exact: true }).click();
+  assert.equal(await page.locator('#table-row-actions').textContent(), '1');
+  assert.equal(await page.locator('#table-active').textContent(), 'entry-0', 'nested action does not activate a different row');
+  const editor = second.getByRole('textbox', { name: '表格草稿 entry-1', exact: true });
+  await editor.fill('安装后的编辑草稿');
+  await editor.press('End');
+  assert.equal(await editor.evaluate(element => element === document.activeElement), true, 'native editor keeps End');
+  assert.equal(await page.locator('#table-active').textContent(), 'entry-0');
+  await second.getByRole('checkbox').click();
+  const checkboxBackground = await second.evaluate(element => getComputedStyle(element).backgroundColor);
+  await page.locator('#table-selection-look').click();
+  assert.notEqual(await second.evaluate(element => getComputedStyle(element).backgroundColor), checkboxBackground, 'row selection appearance restores actual fill');
+  await table.getByRole('checkbox', { name: '选择完整当前集合', exact: true }).click();
+  assert.equal(await page.locator('#table-selected').textContent(), '200', 'select-all includes the complete model, not only mounted rows');
+  const sort = table.getByRole('button', { name: /记录计数/ });
+  await sort.click();
+  assert.equal(await table.getByRole('columnheader', { name: /记录计数/ }).getAttribute('aria-sort'), 'ascending');
+  assert.equal(await table.locator('tbody tr[data-row-id]').first().getAttribute('data-row-id'), 'entry-199', 'actual ascending model reaches rendered rows');
+  await sort.click();
+  await sort.click();
+  assert.equal(await table.getByRole('columnheader', { name: /记录计数/ }).getAttribute('aria-sort'), null);
+  await viewport.focus();
+  await page.keyboard.press('End');
+  await page.waitForFunction(() => document.activeElement?.getAttribute('data-row-id') === 'entry-199');
+  assert.equal(await table.locator('tr[data-row-id="entry-199"]').getAttribute('aria-rowindex'), '201');
+  assert.ok(await table.locator('tbody tr[data-row-id]').count() <= 12);
+  await page.keyboard.press('Home');
+  await page.waitForFunction(() => document.activeElement?.getAttribute('data-row-id') === 'entry-0');
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#table-active').textContent(), 'entry-0');
+  assert.equal(await page.locator('#table-selected').textContent(), '200');
+  await page.locator('#remove-window-row').click();
+  const removedEditor = first.getByRole('textbox', { name: '表格草稿 entry-0', exact: true });
+  await removedEditor.fill('离屏编辑仍保留');
+  await viewport.evaluate(element => element.scrollTo({ top: 6000 }));
+  await page.waitForFunction(() => [...document.querySelectorAll('#window-table tbody tr[data-row-id]')].some(element => Number(element.getAttribute('data-index')) > 100));
+  assert.equal(await removedEditor.evaluate(element => element === document.activeElement), true);
+  assert.equal(await removedEditor.inputValue(), '离屏编辑仍保留');
+  assert.ok(await table.locator('tbody tr[data-row-id]').count() <= 12);
+  await first.waitFor({ state: 'detached' });
+  await page.waitForFunction(() => document.activeElement?.id === 'window-table-viewport');
+  assert.equal(await table.getAttribute('aria-rowcount'), '200');
+  item.assertions.push('Installed DataTable widths/min/max and grouped headers affect actual cells; complete ellipsis text remains; default auto layout survives');
+  item.assertions.push('Installed virtual DataTable retains native structure and truthful model positions; bounded DOM, complete selection scope, independent activation/controls, sorting, editing and removal focus work');
+
+  const list = page.locator('#dynamic-list');
+  assert.equal(await page.locator('#list-native-ref').textContent(), 'native-scroll-element');
+  assert.equal(await list.evaluate(element => element.scrollTop), 0, 'followEnd does not initially jump to the end');
+  const measuredHeights = await list.getByRole('listitem').evaluateAll(elements => [...new Set(elements.map(element => Math.round(element.getBoundingClientRect().height)))]);
+  assert.ok(measuredHeights.length > 1, 'dynamic rows have actual different outer heights');
+  await page.locator('#list-middle').click();
+  await page.waitForFunction(() => {
+    const viewport = document.querySelector('#dynamic-list');
+    const row = viewport?.querySelector('[data-consumer-list-key="list-40"]')?.closest('[role="listitem"]');
+    return viewport && row && viewport.scrollTop > 0 && Math.abs(row.getBoundingClientRect().top - viewport.getBoundingClientRect().top) < 2;
+  });
+  const reading = await list.evaluate(element => {
+    const top = element.getBoundingClientRect().top;
+    const row = [...element.querySelectorAll('[role="listitem"]')].find(row => row.getBoundingClientRect().top <= top + 1 && row.getBoundingClientRect().bottom > top + 1);
+    return { key: row?.querySelector('[data-consumer-list-key]')?.getAttribute('data-consumer-list-key'), top: row?.getBoundingClientRect().top - top };
+  });
+  assert.equal(reading.key, 'list-40');
+  await page.locator('#prepend-list').click();
+  await page.waitForFunction(anchor => {
+    const viewport = document.querySelector('#dynamic-list');
+    const row = [...(viewport?.querySelectorAll('[role="listitem"]') ?? [])].find(row => row.querySelector('[data-consumer-list-key]')?.getAttribute('data-consumer-list-key') === anchor.key);
+    return viewport && row && Math.abs(row.getBoundingClientRect().top - viewport.getBoundingClientRect().top - anchor.top) < 2;
+  }, reading);
+  await page.locator('#append-list').click();
+  assert.equal(await page.locator('#list-count').textContent(), '82');
+  assert.ok(await list.evaluate(element => element.scrollTop + element.clientHeight < element.scrollHeight - 100), 'append does not pull a reader at the middle to the end');
+  await page.locator('#list-end').click();
+  await page.waitForFunction(() => { const viewport = document.querySelector('#dynamic-list'); return viewport && Math.abs(viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop) < 2; });
+  await page.locator('#append-list').click();
+  await page.waitForFunction(() => {
+    const viewport = document.querySelector('#dynamic-list');
+    const last = viewport?.querySelector('[role="listitem"][aria-posinset="83"]');
+    return viewport && last?.getAttribute('aria-setsize') === '83' && Math.abs(viewport.scrollHeight - viewport.clientHeight - viewport.scrollTop) < 2;
+  });
+  assert.ok(await list.getByRole('listitem').count() <= 8, 'dynamic list remains bounded after jumps, insertion and append');
+  item.assertions.push('Installed VirtualList keeps native ref separate from actions; measures varied heights, jumps accurately, preserves prepended reading anchor and follows append only at the tail');
+
+  assert.equal(await page.locator('#static-sparkline button').count(), 0, 'static Sparkline does not acquire an interactive entry');
+  const spark = page.locator('#interactive-sparkline').getByRole('button', { name: '包内逐点记录', exact: true });
+  const readout = page.locator('[data-slot="sparkline-tooltip"]');
+  await spark.focus();
+  await page.waitForFunction(() => document.querySelector('[data-slot="sparkline-tooltip"]')?.textContent.includes('观测 1：2次'));
+  await page.keyboard.press('ArrowRight');
+  await page.waitForFunction(() => document.querySelector('[data-slot="sparkline-tooltip"]')?.textContent.includes('观测 2：未知'));
+  await page.keyboard.press('ArrowRight');
+  await page.waitForFunction(() => document.querySelector('[data-slot="sparkline-tooltip"]')?.textContent.includes('观测 3：0次'));
+  await page.keyboard.press('End');
+  await page.waitForFunction(() => document.querySelector('[data-slot="sparkline-tooltip"]')?.textContent.includes('观测 4：7次'));
+  await page.keyboard.press('Escape');
+  await readout.waitFor({ state: 'hidden' });
+  assert.equal(await spark.evaluate(element => element === document.activeElement), true);
+  await page.locator('#counter').focus();
+  await spark.hover({ position: { x: 4, y: 10 } });
+  await page.waitForFunction(() => document.querySelector('[data-slot="sparkline-tooltip"]')?.textContent.includes('观测 1：2次'));
+  await page.locator('#counter').focus();
+  await page.mouse.move(1, 1);
+  await readout.waitFor({ state: 'hidden' });
+  item.assertions.push('Installed opt-in Sparkline exposes category/readout by keyboard and pointer, distinguishes null from zero, dismisses with Escape/blur and preserves static default');
+
+  const menuTrigger = page.locator('#capability-menu');
+  await menuTrigger.click();
+  const checkbox = page.getByRole('menuitemcheckbox', { name: '显示编号', exact: true });
+  await checkbox.waitFor();
+  assert.equal(await checkbox.getAttribute('data-marker-position'), 'start');
+  assert.equal(await checkbox.evaluate(element => element.firstElementChild?.getAttribute('data-slot')), 'menu-checkbox-marker');
+  assert.ok(await page.locator('#inset-menu-command').evaluate(element => Number.parseFloat(getComputedStyle(element).paddingInlineStart) > Number.parseFloat(getComputedStyle(element).paddingInlineEnd)), 'inset produces real logical leading space');
+  await checkbox.click();
+  assert.equal(await checkbox.getAttribute('aria-checked'), 'true');
+  await page.getByRole('menuitemradio', { name: '全部范围', exact: true }).click();
+  assert.equal(await page.locator('#menu-value').textContent(), 'checked:all:0');
+  await page.locator('#inset-menu-command').click();
+  await page.locator('[data-slot="menu-popup"]').waitFor({ state: 'hidden' });
+  assert.equal(await page.locator('#menu-value').textContent(), 'checked:all:1');
+  await menuTrigger.focus();
+  await page.keyboard.press('ArrowDown');
+  await checkbox.waitFor();
+  await page.keyboard.press('Escape');
+  await page.locator('[data-slot="menu-popup"]').waitFor({ state: 'hidden' });
+  assert.equal(await menuTrigger.evaluate(element => element === document.activeElement), true);
+  item.assertions.push('Installed Menu inset affects computed spacing; leading marks retain real checkbox/radio state, command behavior and keyboard return');
+
+  assert.equal(await page.locator('#scroll-native-ref').textContent(), 'native-scroll-element');
+  await page.locator('#native-scroll').evaluate(element => element.scrollTo({ top: 64 }));
+  assert.equal(await page.locator('#native-scroll').evaluate(element => element.scrollTop), 64);
+  const styled = page.locator('#styled-scroll-viewport');
+  await page.locator('#styled-scroll').hover();
+  await page.waitForFunction(() => { const viewport = document.querySelector('#styled-scroll-viewport'); return viewport && viewport.scrollHeight > viewport.clientHeight && viewport.scrollWidth > viewport.clientWidth; });
+  const beforeThumb = await page.locator('#vertical-thumb').boundingBox();
+  const beforeHorizontal = await page.locator('#horizontal-thumb').boundingBox();
+  assert.ok(beforeThumb?.height > 0 && beforeHorizontal?.width > 0);
+  assert.ok(beforeThumb.height < (await page.locator('#vertical-scrollbar').boundingBox()).height);
+  assert.ok(beforeHorizontal.width < (await page.locator('#horizontal-scrollbar').boundingBox()).width);
+  await styled.evaluate(element => element.scrollTo({ top: 180, left: 100 }));
+  await page.waitForFunction(() => { const viewport = document.querySelector('#styled-scroll-viewport'); return viewport?.scrollTop === 180 && viewport.scrollLeft === 100; });
+  await page.waitForFunction(before => document.querySelector('#vertical-thumb').getBoundingClientRect().y > before + 1, beforeThumb.y);
+  assert.ok((await page.locator('#horizontal-thumb').boundingBox()).x > beforeHorizontal.x + 1, 'horizontal thumb follows actual viewport');
+  const drag = await page.locator('#vertical-thumb').boundingBox();
+  const beforeDrag = await styled.evaluate(element => element.scrollTop);
+  await page.mouse.move(drag.x + drag.width / 2, drag.y + drag.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(drag.x + drag.width / 2, drag.y + drag.height / 2 + 20, { steps: 4 });
+  await page.mouse.up();
+  await page.waitForFunction(before => document.querySelector('#styled-scroll-viewport').scrollTop > before + 10, beforeDrag);
+  assert.ok((await page.locator('#scroll-corner').boundingBox()).width > 0);
+  item.assertions.push('Installed native ScrollArea retains its scrolling-element ref; advanced Root/Viewport/Content/Scrollbar/Thumb/Corner measure both axes, follow scroll and drag the real viewport');
+}
+
 try {
   for(const style of ['tailwind','precompiled']) for(const feature of ['button','full']) await prepare(style,feature);
   await withBrowser(async(browser,lifecycle)=>{
@@ -178,7 +363,7 @@ try {
             await page.locator('[data-slot="dialog-popup"]').waitFor({state:'hidden'});
             assert.equal(await page.locator('#draft').inputValue(),'浮层保留修改');
             assert.equal(await page.evaluate(()=>document.activeElement?.id),'open-dialog');
-            const dataTable = page.locator('[data-slot="data-table"]');
+            const dataTable = page.locator('#entered-table');
             await dataTable.getByRole('cell',{name:'A',exact:true}).evaluate(el=>el.setAttribute('data-persist-check','same-node'));
             await page.locator('#table-busy').click();
             assert.equal(await dataTable.getAttribute('aria-busy'),'true');
@@ -233,6 +418,7 @@ try {
             item.assertions.push('Static InputGroup attachment leaves focus to platform; child action never submits; explicit invalid owns single border; actual native FormData and canceled submit preserve input');
             item.assertions.push('Manual Tabs separate focus/selection and retain panel input; focused tree removal restores parent');
             item.assertions.push('Field relationship token changes computed gap and preserves draft; named Portal inherits brand and returns focus; explicit busy retains rows; Table and Chart share actual entered zero/unknown/value data');
+            await verifyNewCapabilities(page, item);
           }
           item.screenshots=[];
           for(const mode of [{theme:'light',width:1100},{theme:'dark',width:1100}]) {

@@ -1,9 +1,9 @@
 # 对话框 Dialog
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: c636e8fa6231621f7fb0314ad1a2392d21fe43dee53b18719140b7242d05a221
+Source SHA-256: 7463bb8528bc0460688b3ba298b4e15a57f21032bbe47eab819d939f32e91295
 
 接管整个工作面，完成当前编辑或决定后返回。
 

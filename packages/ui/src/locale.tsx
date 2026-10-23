@@ -25,6 +25,10 @@ export type UILocaleMessages = {
   tagLimit: (max: number) => string; addTagWithLimit: (max: number) => string; tagDraftPending: (tag: string) => string;
   fileProgress: (name: string) => string;
   table: string; chartData: string; sparklineSummary: (label: string, first: string, last: string, min: string, max: string) => string; sparklineEmpty: (label: string) => string; sparklineBand: (label: string, from: string, to: string, position?: "above" | "below" | "within") => string; proportionRest: string; statDelta: (direction: "up" | "down" | "flat", amount: string, period: string) => string; statDeltaFlat: string; proportionShare: (value: string, percent: string) => string;
+  sparklinePointLabel: (index: number) => string;
+  sparklineUnknown: string;
+  sparklinePointReadout: (category: string, value: string, index: number, total: number) => string;
+  sparklineNavigation: string;
   scatterPointColumn: string; heatmapCell: (rowLabel: string, columnLabel: string, value: string) => string; heatmapUnavailable: (rowLabel: string, columnLabel: string, stateLabel: string) => string; heatmapScaleFrom: string; heatmapScaleTo: string; heatmapLevelled: (value: string, level: string) => string;
   chartEvent: string; chartReferences: string; chartBandPosition: (position: "above" | "below" | "within", amount: string, label: string) => string;
   chartTotal: string; chartTotalPartial: string; chartShareAxis: (valueLabel: string) => string;
@@ -77,6 +81,10 @@ export const zhCN: UILocale = {
     fileProgress: (name) => `${name} 上传进度`,
     table: "数据表格", chartData: "查看数据", sparklineSummary: (label, first, last, min, max) => `${label}：从 ${first} 到 ${last}，最低 ${min}，最高 ${max}`, sparklineEmpty: label => `${label}：没有可用的数值`, sparklineBand: (label, from, to, position) => `；${label}：${from} 至 ${to}${position ? `，当前${{ above: "高于目标", below: "低于目标", within: "在目标内" }[position]}` : ""}`, proportionRest: "其余", statDelta: (direction, amount, period) => direction === "flat" ? `${period}持平` : `${period}${direction === "up" ? "增加" : "减少"} ${amount}`, statDeltaFlat: "持平", proportionShare: (value, percent) => `${value}（${percent}）`,
     scatterPointColumn: "数据点", heatmapCell: (rowLabel, columnLabel, value) => `${rowLabel} ${columnLabel}：${value}`, heatmapUnavailable: (rowLabel, columnLabel, stateLabel) => `${rowLabel} ${columnLabel}：${stateLabel}`, heatmapScaleFrom: "最低", heatmapScaleTo: "最高", heatmapLevelled: (value, level) => `${value}，${level}`,
+    sparklinePointLabel: index => `第 ${index} 点`,
+    sparklineUnknown: "未知",
+    sparklinePointReadout: (category, value, index, total) => `${category}：${value}，第 ${index} 点，共 ${total} 点`,
+    sparklineNavigation: "使用左右方向键逐点查看，Home / End 跳到首尾；按 Enter 或空格显示或关闭读数。",
     chartEvent: "事件", chartReferences: "参照", chartBandPosition: (position, amount, label) => position === "within" ? `在${label}内` : `${position === "above" ? "高于" : "低于"}${label} ${amount}`,
     chartTotal: "合计", chartTotalPartial: "缺项，未合计", chartShareAxis: valueLabel => `${valueLabel}占比`,
     steps: "步骤", stepComplete: "已完成", stepCurrent: "进行中", stepUpcoming: "未开始", stepError: "出错", timeline: "时间线",

@@ -1,6 +1,6 @@
 # ContextMenu
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
@@ -59,6 +59,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
 
 ### ContextMenuCheckboxItem
+- `inset?`: `boolean`.
+- `markerPosition?`: `"start" | "end"`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
 
@@ -67,14 +69,17 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 274, @base-ui/react 4); not expanded, see the installed declarations
 
 ### ContextMenuGroupLabel
-- no props declared by this library
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### ContextMenuItem
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 282 inherited (@types/react 273, @base-ui/react 9); not expanded, see the installed declarations
 
 ### ContextMenuLinkItem
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 288 inherited (@types/react 282, @base-ui/react 6); not expanded, see the installed declarations
 
@@ -95,6 +100,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
 
 ### ContextMenuRadioItem
+- `inset?`: `boolean`.
+- `markerPosition?`: `"start" | "end"`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 283 inherited (@types/react 273, @base-ui/react 10); not expanded, see the installed declarations
 
@@ -107,6 +114,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 12 inherited (@base-ui/react 12); not expanded, see the installed declarations
 
 ### ContextMenuSubmenuTrigger
+- `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 

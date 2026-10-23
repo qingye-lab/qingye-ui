@@ -26,8 +26,8 @@ export default {
       {name: "name / dirty / touched", type: "Base UI Field.Root props", description: "字段名及调用方管理的编辑事实。", descriptionEn: "Field name and caller-managed editing facts."},
       {name: "className / style / render / ref", type: "Base UI Field.Root props", description: "作用于字段根；样式支持状态函数。", descriptionEn: "Applied to the field root; styles support state functions."},
     ]},
-    {name: "FieldLabel", description: "自动命名注册控件，支持显式 htmlFor 与原语 nativeLabel/render。", descriptionEn: "Names a registered control; supports explicit htmlFor and primitive nativeLabel/render."},
-    {name: "FieldDescription", description: "必要辅助事实；注册到 aria-describedby。", descriptionEn: "Necessary supporting facts registered in aria-describedby."},
+    {name: "FieldLabel", description: "必须位于 Field 或 FieldPrimitive.Root 上下文内，自动命名注册控件；支持显式 htmlFor 与原语 nativeLabel/render。独立标签使用 components/label 的 Label。", descriptionEn: "Requires a Field or FieldPrimitive.Root context and names a registered control; supports explicit htmlFor and primitive nativeLabel/render. For a standalone label, use Label from components/label."},
+    {name: "FieldDescription", description: "必须位于 Field 或 FieldPrimitive.Root 上下文内，将辅助事实注册到 aria-describedby。独立说明使用带 id 的原生文本，并由控件显式引用。", descriptionEn: "Requires a Field or FieldPrimitive.Root context to register supporting facts in aria-describedby. For standalone help, give native text an id and reference it explicitly from the control."},
     {name: "FieldError", description: "只显示调用方错误，显示时加入 aria-describedby。", descriptionEn: "Shows caller-supplied errors and registers in aria-describedby when visible.", props: [
       {name: "children", type: "ReactNode", description: "显式内容优先；无内容不生成浏览器或 Form 错误。", descriptionEn: "Explicit content takes precedence; no content means no browser or Form error is generated."},
       {name: "errors", type: "ReadonlyArray<{ message?: string } | undefined>", description: "忽略空项、去重；多条用列表。", descriptionEn: "Skips empty entries, deduplicates, and lists multiple messages."},

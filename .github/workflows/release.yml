@@ -45,6 +45,7 @@ jobs:
         run: |
           node scripts/run-browser-audit.mjs --patterns
           node scripts/run-browser-audit.mjs --foundations
+          node scripts/run-browser-audit.mjs --consumer-migration
           node scripts/verify-studio.mjs
       - name: Upload composition and theme evidence
         if: always()
@@ -53,6 +54,7 @@ jobs:
           name: task-and-theme-evidence
           path: |
             test-results/task-patterns/
+            test-results/consumer-migration/
             test-results/ui-foundations-final/
             test-results/studio/**/report.json
             test-results/studio/**/*.png

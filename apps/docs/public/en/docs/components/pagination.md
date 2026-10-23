@@ -1,6 +1,6 @@
 # Pagination
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
@@ -24,7 +24,7 @@ PaginationPattern provides page windows, page-size selection and correction afte
 - Pagination: A named nav without generated pages.
 - PaginationList / PaginationItem: ul / li organize page actions.
 - PaginationLink: An anchor with aria-current=page for the current page.
-- PaginationPrevious / PaginationNext: Button compositions with localized direction labels.
+- PaginationPrevious / PaginationNext: Button compositions that display localized Previous page / Next page text when children are omitted. Icon-only replacements must provide a direction name through aria-label, aria-labelledby or sr-only text, and hide decorative icons.
 - PaginationEllipsis: An omitted-pages marker, not a final page.
 
 ## Responsive behavior
@@ -141,7 +141,7 @@ An anchor with aria-current=page for the current page.
 - page / href / render / ref / native props: { page: number } & useRender.ComponentProps<a>. The application supplies positive page indices and real destinations.
 
 ### PaginationPrevious / PaginationNext
-Button compositions with localized direction labels.
+Button compositions that display localized Previous page / Next page text when children are omitted. Icon-only replacements must provide a direction name through aria-label, aria-labelledby or sr-only text, and hide decorative icons.
 - disabled / onClick / render / nativeButton / Button props: ButtonProps. The caller supplies disabled facts; render an anchor with nativeButton=false for navigation.
 
 ### PaginationEllipsis

@@ -74,6 +74,18 @@ export default {
           "default": "md"
         },
         {
+          "name": "inset",
+          "type": "boolean",
+          "description": "在逻辑起点为同档图标与字段间隔留位，使无图标命令与前导标记的文字列对齐；默认 false。MenuGroupLabel 也支持 size/inset。",
+          "descriptionEn": "Reserves a same-size icon and field gap at the logical start, aligning unmarked commands with leading markers. Defaults to false; MenuGroupLabel also supports size/inset."
+        },
+        {
+          "name": "markerPosition",
+          "type": "start | end",
+          "description": "仅勾选与单选项，控制实际标记的逻辑位置；默认 end 保持现有外观。状态与键盘语义不变。",
+          "descriptionEn": "Checkbox and radio items only: controls the logical marker position. Defaults to end, preserving existing appearance, state and keyboard semantics."
+        },
+        {
           "name": "checked / value / onCheckedChange",
           "type": "Base UI choice props",
           "description": "勾选项读 checked，单选项读 value；选择由调用方事实与原语取消协议确认。",

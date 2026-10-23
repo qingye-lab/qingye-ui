@@ -1,6 +1,6 @@
 # AsyncContent
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/async-content
 Source: packages/ui/src/components/async-content.tsx
 Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2

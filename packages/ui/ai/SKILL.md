@@ -5,7 +5,7 @@ description: Build complete React tasks using the installed Qingye UI version, p
 
 # Qingye UI
 
-This file accompanies @qingye_lab/ui 4.1.0. Read the installed version first; a website or upstream namesake may describe another API.
+This file accompanies @qingye_lab/ui 4.2.0. Read the installed version first; a website or upstream namesake may describe another API.
 
 ## 在项目中持续使用
 
@@ -65,6 +65,6 @@ steps, never a one-off value.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
 6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
-Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](v4.1.0/installation.md) for styles and dependencies; [the resource index](v4.1.0/llms.txt) for component constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
+Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](v4.2.0/installation.md) for styles and dependencies; [the resource index](v4.2.0/llms.txt) for component constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
 
 Registry templates reference this exact package version. Check configured package access; never silently substitute latest. This skill grants no external-action authority and creates no runtime model service.

@@ -51,8 +51,8 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
       className={(state) => cn("pointer-events-none fixed inset-0 flex min-w-0 items-center justify-center p-(--qy-panel-padding)", typeof viewportProps?.className === "function" ? viewportProps.className(state) : viewportProps?.className)}>
       <DialogPrimitive.Popup {...props} aria-modal="true" data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-popup"}
         className={(state) => cn(
-          // 内容固有宽度 + 视口上限；浮层身份读既有角色，入退只在 motion.css。
-          "qy-dialog-popup pointer-events-auto grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
+          // 内容固有宽度 + 视口上限；绝对定位子元素始终锚定本面板，入退只在 motion.css。
+          "qy-dialog-popup pointer-events-auto relative grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
           typeof className === "function" ? className(state) : className,
         )} />
     </DialogPrimitive.Viewport>

@@ -1,6 +1,6 @@
 # 字段 Field
 
-Package: @qingye_lab/ui@4.1.0
+Package: @qingye_lab/ui@4.2.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
@@ -117,10 +117,10 @@ Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldP
 - className / style / render / ref: Base UI Field.Root props. 作用于字段根；样式支持状态函数。
 
 ### FieldLabel
-自动命名注册控件，支持显式 htmlFor 与原语 nativeLabel/render。
+必须位于 Field 或 FieldPrimitive.Root 上下文内，自动命名注册控件；支持显式 htmlFor 与原语 nativeLabel/render。独立标签使用 components/label 的 Label。
 
 ### FieldDescription
-必要辅助事实；注册到 aria-describedby。
+必须位于 Field 或 FieldPrimitive.Root 上下文内，将辅助事实注册到 aria-describedby。独立说明使用带 id 的原生文本，并由控件显式引用。
 
 ### FieldError
 只显示调用方错误，显示时加入 aria-describedby。
