@@ -22,8 +22,8 @@ async function visit(page, slug, demo, theme) {
   await page.goto(`${base}/playground/${slug}?theme=${theme}#demo-${demo}`, { waitUntil: "networkidle" });
   const section = page.locator(`[data-demo="${demo}"]`);
   await section.waitFor();
-  await section.scrollIntoViewIfNeeded();
   await page.evaluate(() => document.fonts.ready);
+  await section.scrollIntoViewIfNeeded();
   return section;
 }
 const position = list => list.evaluate(el => {
@@ -286,21 +286,42 @@ try {
     } finally { await closeWithTimeout(context, "desktop context"); }
     if (!only || only.includes("sparkline")) {
       const touch = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, reducedMotion: "reduce" });
+      let touchPage;
       try {
-        const page = await touch.newPage();
+        const page = touchPage = await touch.newPage();
+        page.setDefaultTimeout(10000);
+        page.on("pageerror", error => report.errors.push(error.message));
+        await page.exposeFunction("recordConsumerTouch", event => { (report.touchEvents ??= []).push(event); });
+        await page.addInitScript(() => {
+          for (const type of ["pointerdown", "pointerup", "pointercancel", "click"]) document.addEventListener(type, event => {
+            window.recordConsumerTouch({ type, slot: event.target instanceof Element ? event.target.closest("[data-slot]")?.getAttribute("data-slot") : null, x: event.clientX, y: event.clientY, pointer: event.pointerType, scrollY });
+          }, true);
+        });
         const section = await visit(page, "sparkline", "point-readout", "light");
         const trigger = section.locator('[data-slot="sparkline-trigger"]');
-        const r = await trigger.boundingBox();
+        const snapshot = () => trigger.evaluate(el => {
+          const r = el.getBoundingClientRect();
+          return { rect: { x: r.x, y: r.y, width: r.width, height: r.height }, scrollY, viewport: { width: innerWidth, height: innerHeight, scale: visualViewport?.scale }, hit: el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2)) };
+        });
+        report.touchBefore = await snapshot();
         const tooltip = page.locator('[data-slot="sparkline-tooltip"]');
-        await page.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2);
+        // Actionability checks track late hash scrolling/layout; raw stale viewport
+        // coordinates cannot establish that the intended control received the tap.
+        await trigger.tap();
         await tooltip.waitFor();
-        await page.touchscreen.tap(r.x + r.width / 2, r.y + r.height / 2);
+        report.touchOpen = await snapshot();
+        await page.screenshot({ path: `${out}/sparkline-touch-open.png` });
+        await trigger.tap();
         await until(async () => !(await tooltip.isVisible()), "same-point second tap dismisses");
         report.checks.push({ name: "sparkline touch toggle", status: "PASS" });
+      } catch (error) {
+        if (touchPage) await touchPage.screenshot({ path: `${out}/sparkline-touch-failure.png` }).catch(() => {});
+        throw error;
       } finally { await closeWithTimeout(touch, "touch context"); }
     }
   });
 } catch (error) { report.errors.push(error.stack); }
 report.finishedAt = new Date().toISOString();
 writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2) + "\n");
+for (const error of report.errors) console.error(error);
 if (report.errors.length || report.checks.some(check => check.status !== "PASS")) process.exitCode = 1;

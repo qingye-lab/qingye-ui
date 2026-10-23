@@ -1,6 +1,6 @@
 # 消费项目迁移能力收尾
 
-Status: verified locally / remote release in progress · 2026-10-23
+Status: verified / npm authentication blocked · 2026-10-23
 
 ## Direction and scope
 
@@ -41,7 +41,7 @@ Status: verified locally / remote release in progress · 2026-10-23
 
 - 最终源码：完整工作区类型检查 PASS；UI 117 文件 / 1104 用例、Tooling 31、Docs 61、Studio 14 均 PASS。另有 Studio preview 3 用例、facts-ledger 检查、process/delivery 8 用例 PASS。
 - UI / Tooling / Studio / Docs 最终构建 PASS；API 漂移检查为 95 个 type-resolved、0 missing / 0 unresolved，未增加 baseline。包内容、703 个打包文件、声明映射、publint strict、attw esm-only PASS。
-- `test-results/consumer-migration/report.json`：最终构建上 25 项 PASS，0 runtime errors。1200px / 390px × 浅深主题，覆盖五项新能力及 Dialog/AlertDialog 定位、反向校验、关闭焦点返回；另有触摸同点第二次点击关闭。浏览器进程退出已核对。
+- 首轮 `test-results/consumer-migration/report.json`：最终构建上 25 项 PASS，0 runtime errors。1200px / 390px × 浅深主题，覆盖五项新能力及 Dialog/AlertDialog 定位、反向校验、关闭焦点返回；另有触摸同点第二次点击关闭。浏览器进程退出已核对。
 - 独立审查修复 DataTable 换模型及用户滚动后的旧索引命令；缩短模型用例在修复前失败，修复后通过。Sparkline 修饰键与调用方取消协议通过回归。Menu/ScrollArea 复核未发现确定缺陷。
 - `dist-pack/qingye_lab-ui-4.2.0.tgz` 已生成，npm dry-run PASS。SHA-256 `ad6807e683ff631532b17042f998bbd38ade1a93d0821a01d399fd014c749993`；SHA-512 integrity `sha512-vZWtw5TSO/Eh8eGRypV8xnuaObdtsifRBi1M+/voCvOpsuJZKh/EkVI8PVcHiMmWvibeXUB9QyyzOoOvy5+Mbg==`。历史 AI 版本未混入新 tarball。
 - 外部边界：npm registry 最新仍为 4.1.0，whoami 返回 HTTP 401。未扫描其他凭证来源，未将 dry-run 记为已发布。外部消费项目尚缺报告对应提交/可访问地址；未修改本地 UI-AI，也不使用无迁移代码的远端默认分支冒充验收。
@@ -53,4 +53,11 @@ Status: verified locally / remote release in progress · 2026-10-23
 - 打包 Tooling 0.5.0 安装检查 PASS，报告 `test-results/packed-tooling/run-AOKfNj/report.json`。UI minor 不绑定 Tooling 或私有 Studio 版本。
 - 最初几何扫描因输出目录不存在未写出报告，已建目录后完整重跑；测试中的弹窗居中判断已改为真实 modal viewport（包含文档 scrollbar gutter 约束），关闭焦点等待实际退场结束。最终门禁均非沿用失败结果。
 
-远端发布结果在执行后补记。
+## Remote validation and remaining boundary
+
+- 组件及分发源码提交 `4421c7f`，已推送 main 与 `v4.2.0` tag；tag 不改写。对应 [CI 39964327710](https://github.com/qingye-lab/qingye-ui/actions/runs/39964327710) 全部 PASS，包括 Linux 的 25 项新能力检查、包消费与 Tooling。下载的完整检查位于 `test-results/ci-4421c7f/consumer-migration/report.json`。
+- [Release 39964333594](https://github.com/qingye-lab/qingye-ui/actions/runs/39964333594) 首次 attempt 在 24 项通过后，触摸首次点击的 tooltip 可见性等待超时；其余桌面/窄屏检查及主题检查通过。失败报告保存为 `test-results/release-remote-failure/consumer-migration/report.json`。没有点击目标、事件或触摸失败截图，不能据此证明库内缺陷或具体竞态。保留失败记录，进行一次完整重跑；最新 attempt 结果以 Actions 和 [v4.2.0 Release](https://github.com/qingye-lab/qingye-ui/releases/tag/v4.2.0) 的实际状态为准。
+- 测试加固：字体 ready 后再滚动；touch 使用 locator.tap 的稳定/命中检查，记录 viewport、bbox、hit target、pointer/click 事件及失败截图，向日志输出异常。它缩小 raw 旧坐标与异步 hash 滚动之间的未验证窗口，属于测试驱动的防护，未宣称确认原失败根因。新增诊断路径的浅深/桌面窄屏及触摸 5 项 PASS，报告 `test-results/consumer-migration/sparkline-hardened-report.json`；两次点击均命中实际 sparkline-trigger，浏览器与 preview 退出已核对。
+- 补做的本地 10 次触摸开关均 PASS；后续轮次复用了 document，不能当作 10 次独立冷启动，也不能将诊断监听器累积误判为组件重复点击。
+- 官方 npm registry 的生产依赖审计 PASS：79 个依赖，0 已知漏洞。镜像 registry 无 audit endpoint，已明确改用官方接口核实。
+- npm whoami 最后仍返回 HTTP 401；已请求用户完成 npm 登录，没有实际 npm publication，不以 GitHub 附件代替 registry 状态。外部消费项目仍缺迁移提交和可访问地址。
