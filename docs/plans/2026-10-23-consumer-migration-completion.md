@@ -1,6 +1,6 @@
 # 消费项目迁移能力收尾
 
-Status: GitHub released / npm publish authentication pending · 2026-10-23
+Status: GitHub and npm published / anonymous registry installation verified · 2026-10-24
 
 ## Direction and scope
 
@@ -30,7 +30,7 @@ Status: GitHub released / npm publish authentication pending · 2026-10-23
 - [x] 包内容和安装后的消费检查；新 minor 版本、发布说明与完整可审阅产物。
 - [x] 核实消费项目与账号边界；外部迁移版本未提供，npm 登录账号已确认 qingye_lab。
 - [ ] 外部消费项目验收：需报告对应的迁移提交与可访问地址。
-- [ ] 发布授权已由本次“完成”覆盖上一条列出的新版本发布；发布前核对 registry、包名、版本与打包内容，发布后读取实际 registry 状态。
+- [x] 发布授权由本次“完成”覆盖；GitHub 与 npm 4.2.0 已发布，official registry 的 latest、包摘要、匿名下载和隔离安装均已核实。
 
 ## Verification boundaries and recovery
 
@@ -61,7 +61,7 @@ Status: GitHub released / npm publish authentication pending · 2026-10-23
 - 测试加固：字体 ready 后再滚动；touch 使用 locator.tap 的稳定/命中检查，记录 viewport、bbox、hit target、pointer/click 事件及失败截图，向日志输出异常。它缩小 raw 旧坐标与异步 hash 滚动之间的未验证窗口，属于测试驱动的防护，未宣称确认原失败根因。新增诊断路径的浅深/桌面窄屏及触摸 5 项 PASS，报告 `test-results/consumer-migration/sparkline-hardened-report.json`；两次点击均命中实际 sparkline-trigger，浏览器与 preview 退出已核对。
 - 补做的本地 10 次触摸开关均 PASS；后续轮次复用了 document，不能当作 10 次独立冷启动，也不能将诊断监听器累积误判为组件重复点击。
 - 官方 npm registry 的生产依赖审计 PASS：79 个依赖，0 已知漏洞。镜像 registry 无 audit endpoint，已明确改用官方接口核实。
-- 用户完成登录后，npm whoami 确认为 qingye_lab；4.2.0 版本未被占用。正式 publish 又触发 npm 独立的网页发布认证，当前命令回调仍为 HTTP 202 等待认证，registry 仍无 4.2.0。认证链接不写入仓库，不将账号登录或 GitHub 附件记成 npm publication。
+- 用户完成登录后，npm whoami 确认为 qingye_lab；4.2.0 版本未被占用。最初两次正式 publish 触发 npm 独立的网页发布认证，回调持续 HTTP 202，最终以 404 结束；该阶段 registry 无 4.2.0。后续成功认证与实际发布见末尾记录。认证链接不写入仓库，不将账号登录或 GitHub 附件记成 npm publication。
 
 ## Published GitHub delivery
 
@@ -69,4 +69,10 @@ Status: GitHub released / npm publish authentication pending · 2026-10-23
 - [GitHub v4.2.0](https://github.com/qingye-lab/qingye-ui/releases/tag/v4.2.0) 已正式发布，非 draft / prerelease，附件来自该完整 CI 的实际产物；保留原自动 Release 的失败记录，发布说明如实说明分发来源。
 - UI CI tarball 含 703 个文件：702 个与本地 npm pack 逐字节相同；package.json 差异仅为 pnpm pack 移除 prepack 和键顺序，其余 JSON 属性相等。最终产物 SHA-256 为 3396e388d6ad9ded8d3b8eabd5b7f735c66dc47767703aa7cde2c7058902aa03，integrity 为 sha512-qWPCkm/+WwY6RKXpAlDt55tM57TnG6XTPEY1WIowv97umMVKwL5uVZEQZ0hzWEgXI3A0LclD5QP5/Notc/aCKg==。
 - GitHub asset digest 与该 SHA-256 一致；额外匿名 HTTP 下载成功，1537129 bytes，摘要一致。报告位于 test-results/release-preparation/package-comparison.json 和 github-download.json。Tooling 0.5.0 附件也已上传，不另行发布未变更的 npm Tooling 版本。
-- npm 使用上述同一份 UI CI 产物，仍在等待平台发布认证。完成后继续核验 registry 的版本、latest、integrity 和匿名安装；外部消费项目验收继续保持待提供版本/地址。
+- npm 使用上述同一份 UI CI 产物；最终公开版本与匿名消费验证见下。外部消费项目验收继续保持待提供版本/地址。
+
+## Published npm delivery
+
+- 2026-10-24 用户授权重新发起发布认证；账号仍为 qingye_lab。此次认证回调 HTTP 200，publish 请求 HTTP 202，命令退出 0。随后等待公开 registry 实际出现版本，没有把 CLI 接收结果当作公开可安装的证明，也没有重复提交已接收的发布请求。
+- 官方 registry 于 2026-10-24T01:15:14.873Z 公开 [@qingye_lab/ui@4.2.0](https://www.npmjs.com/package/@qingye_lab/ui/v/4.2.0)，latest=4.2.0。匿名 metadata / tarball 均 HTTP 200；1537129 bytes，SHA-256 3396e388d6ad9ded8d3b8eabd5b7f735c66dc47767703aa7cde2c7058902aa03，SHA-1 与 integrity 均匹配上述 CI 产物。npm、GitHub 下载与 CI tarball 逐字节一致，报告 test-results/release-preparation/npm-publication.json。
+- 清空独立 user/global npm 配置并移除认证环境变量后，从官方 registry 隔离安装 4.2.0 PASS；未使用 workspace source alias。12 个公共组件导出及动态 VirtualList、交互 Sparkline、定宽虚拟 DataTable 的 SSR 检查 PASS，报告 test-results/release-preparation/registry-consumer/report.json。此前完整 CI 和浏览器证据对应的产物未改变，本次只更新交付记录，不重跑无关组件测试。
