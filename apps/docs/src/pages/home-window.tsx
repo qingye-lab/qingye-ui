@@ -36,7 +36,7 @@ export function HomeWindow() {
   const current = EXAMPLES.find((item) => item.id === example)!;
 
   return (
-    <section aria-label={t("示例应用", "Example application")} className="home-window">
+    <section aria-label={t("示例应用", "Example application")} className="home-window" data-ui>
       <div className="home-window-bar">
         <SegmentedControl aria-label={t("示例", "Example")} onValueChange={(value) => choose(String(value))} size="sm" value={example}>
           {EXAMPLES.map((item) => <SegmentedControlItem key={item.id} value={item.id}>{en ? item.title.en : item.title.zh}</SegmentedControlItem>)}

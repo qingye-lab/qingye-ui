@@ -55,10 +55,11 @@
      * 它们取自拉丁字体的习惯（字号越大、拉得越紧；汉字由 utilities.css 的 :lang 规则整体归零），
      * 不能写成派生。-mobile 档的字号是**预设**（基础层 §8：窄屏各自放大 1–2px），行高仍在分格上（派生）。 */
 
-    /* 落地页单独成段的大字（如首页总纲）：64 / 20 分行高，行高正好 4 材。
-     * 字号是预设，与 display-lg 相差 1.6 倍；全站至多一处。 */
-    --qy-text-display-xl-size: 4rem;
-    --qy-text-display-xl-leading: calc(20 * var(--qy-fen));
+    /* 落地页单独成段的大字（如首页总纲）：80 / 22 分行高。字身 80 = 4 材，一句十五字落在 66 材的站框里正好一行（1200 < 1320）；
+     * 行高 22 分 = 字身的 1.1 倍，汉字大字折行时上下不相碰。字号与 1.1 都是预设（2026-10-30 由 64 调大：
+     * 首页第二稿审查，最大字号与正文之比由 4 提到 5，全页唯一的大字须一眼成为重点）。全站至多一处。 */
+    --qy-text-display-xl-size: 5rem;
+    --qy-text-display-xl-leading: calc(22 * var(--qy-fen));
     --qy-text-display-xl-tracking: -0.032em;
     --qy-text-display-xl-weight: var(--qy-weight-semibold);
 

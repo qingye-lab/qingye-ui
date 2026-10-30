@@ -39,6 +39,12 @@
 - 删去：组件查找台、色块、入口方块、`ComponentStage`。
 - 预设：首屏上留 5 材、首屏到窗口 2 × 章内间隔、章间 3 × 章内间隔、窗口框高 36 材、总纲正文 36 材 / 注 14 材 / 栏距 4 材、表的名列 10 材与出处列 18 材。
 
+**第二稿的审查与打磨**（同日，用户补充 design-taste-frontend 与 impeccable 两个技能）。两者不在本会话的技能目录里，取其公开原文（`Leonxlnx/taste-skill` 的 `skills/taste-skill/SKILL.md`；`pbakaus/impeccable` 4.8.0 的 `SKILL.md` 与 `reference/{craft-floor,audit,polish,typeset,layout,colorize,animate}.md`）逐条对照，没有运行它们的 lint / inspect / detect 脚本。
+- 采纳：删去总纲段的上标编号与注的编号（出处就在本段旁边，编号重复位置已表达的对应关系，NG1；taste 亦禁索引编号）；定位两句改为焦墨正文，先说「React 组件库」（taste 的五秒测试）；`display-xl` 由 64 调到 80（4 材，一句十五字在站框内一行；仍低于 impeccable 的 6rem 上限），这是库的公共档，全站只有首页使用；产品窗口标 `data-ui`（taste：真实界面片段可有边线）。
+- 不采纳并说明：taste 的动效层（加载与滚动时至少 8 个动的元素、每段错落入场）与 NG6、impeccable「一处有作者的时刻」及 Emil「营销页不做滚动动效」相冲突；taste 的「每页至少 4 张真实照片」——组件库的真实图像就是它运行中的界面，配图会成为无事实的装饰；taste 的「不画 1px 线」——骨法用笔允许面无法划出范围时用线，表格在 taste 自己的规则里也豁免。
+- 仍不满足 taste 的「标题至多两行」：窄于 48rem 时总纲三句各占一行（三句并列是内容结构，不拆句）。
+- Impeccable 式审查（0–4 分）：无障碍 3（axe-core 对 `main` 在浅 / 深 / 英文三种情况 0 违例；未做读屏实测，窗口内的示例未经 axe 扫描）；性能 3（首页的窗口在首屏内加载第二份应用实例）；主题 3（品牌预设在 `index.css` 与 `lib/axes.ts` 两处成对维护，P3）；响应 3（工作区与记录是桌面范围，窄屏窗口先开预约）；实现完整性 3（一套系统、无散落值）。合计 15 / 20。
+
 **本站品牌：青**（`index.css` 的 `html[data-brand="qingye"]`）。取自「青野」；只覆写 `--qy-primary` 与前景，实心按钮、选中标记与站标的点随之换色，其余仍是墨阶（墨分五色：品牌强调色如一方印）。浅色 oklch(0.48 0.085 200)，白字其上 6.2:1；深色 oklch(0.78 0.09 195)，深前景其上 9.1:1。色相与明度是预设，对比按 sRGB 换算核对，未经 contrast-check 工具实测。局部嵌套的 `.light/.dark` 根会重置为墨（库的语义块在每个明暗根上重算 `--qy-primary`）；首页窗口的品牌写在框内文档的根上。
 
 **示例**（`examples/gallery.tsx`、`list.ts`、`booking.tsx`、`examples.css`）。

@@ -85,7 +85,6 @@
 }
 .home-principle-text strong { font-weight: var(--qy-text-title-weight); color: var(--qy-foreground); }
 .home-principle-gap { display: inline-block; inline-size: 0.5em; }
-.home-ref { font-size: var(--qy-text-caption-size); line-height: 0; vertical-align: super; margin-inline-start: 2px; color: var(--qy-foreground-muted); font-variant-numeric: tabular-nums; }
 /* 页边注从正文首行的行中线开始：注的行高小于正文，下移二者行高之差的一半。 */
 .home-principle-note {
   padding-top: calc((var(--qy-text-title-leading) - var(--qy-text-support-leading)) / 2);

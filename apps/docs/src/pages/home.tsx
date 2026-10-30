@@ -70,9 +70,10 @@ export default function HomePage() {
       <section aria-labelledby="home-title" className="home-hero">
         <Heading className="home-motto" id="home-title" level={1} step="display-xl">{MOTTO.map((line) => <span key={line.zh}>{en ? line.en : line.zh}</span>)}</Heading>
         <div className="home-intro">
+          {/* 五秒内认出这是什么：先说是什么（React 组件库），再说取法；两句都是正文，焦墨。 */}
           <div>
+            <Text step="reading">{t("基于 Base UI 与 Tailwind CSS 4 的 React 组件库。", "A React component library built on Base UI and Tailwind CSS 4.")}</Text>
             <Text className="home-intro-lede" step="reading">{t("Qingye UI 从中国传统的经典与东方美学中取法。", "Qingye UI takes its methods from Chinese classics and Eastern aesthetics.")}</Text>
-            <Text className="text-muted-foreground" step="reading">{t("基于 Base UI 与 Tailwind CSS 4 的 React 组件库。", "A React component library built on Base UI and Tailwind CSS 4.")}</Text>
           </div>
           <div className="home-actions">
             <Link className={buttonVariants({ size: "lg" })} to="/docs/installation">{t("开始使用", "Get started")}</Link>
@@ -85,7 +86,8 @@ export default function HomePage() {
 
       <section aria-labelledby="home-principles" className="home-principles">
         <h2 className="sr-only" id="home-principles">{t("总纲", "Principles")}</h2>
-        {principles.map((principle, index) => (
+        {/* 出处就在本段旁边，不再用上标编号连接（位置已经说明了对应关系）。 */}
+        {principles.map((principle) => (
           <div className="home-principle" key={principle.name}>
             <p className="home-principle-text">
               <strong>{principle.name}</strong>
@@ -93,9 +95,8 @@ export default function HomePage() {
               <span className="home-principle-gap" aria-hidden="true"> </span>
               {principle.meaning}
               {/[。.]$/.test(principle.meaning) ? "" : en ? "." : "。"}
-              <sup className="home-ref" aria-hidden="true">{index + 1}</sup>
             </p>
-            <p className="home-principle-note"><span aria-hidden="true">{index + 1}　</span>{principle.source}</p>
+            <p className="home-principle-note">{principle.source}</p>
           </div>
         ))}
       </section>
