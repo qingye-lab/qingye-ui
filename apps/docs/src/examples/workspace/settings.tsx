@@ -19,7 +19,8 @@ import { Link as RouterLink } from "@/components/locale-link";
 import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
 import { MEMBERS, type Member } from "./data";
-import { BASE, PageActions, SETTINGS } from "./shell";
+import { WorkspaceHeaderPortal } from "@qingye_lab/ui/components/workspace";
+import { BASE, SETTINGS } from "./shell";
 
 /* 设置：左侧二级导航按任务分组；每组一张纸，改动在组内保存，不把无关设置绑在一个「保存」上。 */
 
@@ -74,7 +75,7 @@ export default function Settings() {
     </>}
     {section === "members" && <>
         {/* 邀请是这一页的主要动作，进顶栏；表的名字只留成员数。 */}
-        <PageActions><Button variant="bordered"><IconUserPlus aria-hidden="true" />邀请</Button></PageActions>
+        <WorkspaceHeaderPortal><Button variant="bordered"><IconUserPlus aria-hidden="true" />邀请</Button></WorkspaceHeaderPortal>
         <TableContainer>
           <Table>
             <TableCaption>{MEMBERS.length} 位成员</TableCaption>

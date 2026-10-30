@@ -11,7 +11,8 @@ import { Stat, StatDelta, StatDescription, StatLabel, StatUnit, StatValue } from
 import { StatusDot, type StatusDotStatus } from "@qingye_lab/ui/components/status-dot";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
 import { Heading } from "@qingye_lab/ui/components/typography";
-import { BASE, PageActions } from "./shell";
+import { WorkspaceHeaderPortal } from "@qingye_lab/ui/components/workspace";
+import { BASE } from "./shell";
 import { COLLECTIONS, DAILY_FAILED, DAILY_OK, DAYS, RUNS, number, totalRecords, totalSize, type Source, type SyncRun } from "./data";
 import { syncDot } from "./status";
 
@@ -52,12 +53,12 @@ export default function Overview() {
 
   return <div className="mx-auto grid w-full max-w-[80rem] gap-(--qy-panel-gap) px-(--qy-page-gutter) py-(--qy-section-gap)">
     <h1 className="sr-only">概览</h1>
-    <PageActions>
+    <WorkspaceHeaderPortal>
       <SegmentedControl value={range} onValueChange={value => setRange(Number(value))} aria-label="时间范围">
         <SegmentedControlItem value={7}>近 7 天</SegmentedControlItem>
         <SegmentedControlItem value={14}>近 14 天</SegmentedControlItem>
       </SegmentedControl>
-    </PageActions>
+    </WorkspaceHeaderPortal>
 
     <div className="grid gap-(--qy-panel-gap) sm:grid-cols-2 xl:grid-cols-4">
       <MetricCard label="记录总数" value={number.format(totalRecords)}

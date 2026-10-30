@@ -1,6 +1,6 @@
 # 官网作为组件库的第一方消费端
 
-当前裁决：2026-10-03 重写任务，执行收尾跨至 2026-10-04。取代本文件早期的 88 模块、业务任务模拟和移动外壳安排；历史裁决见对应日期的计划与执行记录。
+当前裁决：2026-10-03 重写任务，执行收尾跨至 2026-10-04；2026-10-30 随 5.0.0 补充新组件的采用（见文内同日一节）。取代本文件早期的 88 模块、业务任务模拟和移动外壳安排；历史裁决见对应日期的计划与执行记录。
 
 ## 任务与边界
 
@@ -12,15 +12,30 @@
 - `/examples` 是一个完整的多页工作区示例（概览、集合、集合详情、设置、帮助），只用本库公开组件组合，随 `src/examples/` 路由。用户 2026-10 裁决：`/examples` 不受“不模拟业务场景”约束，必须是真实页面；数据是本地假数据，没有真实请求或服务。未知路径、未知工作区页面与未知设置分组都进入站点统一的 not-found 状态；跳转保留 URL 语言前缀。
 - `/docs/patterns` 是当前 Pattern 公共结构目录。已删除业务模式的详情路由进入 not-found，不从归档恢复旧消费者。`generate-fixtures.mjs` 保持构建调用入口但不再生成无人消费的假业务资源。
 - 所有交互控件复用本库公开组合；页面结构、表单分组和原生链接保留 HTML 语义。链接外观可用 `buttonVariants`。NativeSelect 的原生 option/optgroup 是其必要结构，并非一套另造的基础控件。
-- 当前范围是桌面网站，Header 直接呈现导航；不为旧 Sheet 恢复移动菜单，也不恢复 Skeleton、Disclosure、Frame、Command 等禁用模块。
+- 当前范围是桌面网站，Header 直接呈现导航；不为旧 Sheet 恢复移动菜单，`/examples` 的侧栏也不启用窄屏抽屉（`Sidebar drawer`）。Disclosure、Frame 不是当前库的组件，不恢复（折叠用 Collapsible）。Skeleton 与 Command 是当前库的公共组件，官网按任务使用：Skeleton 用于路由首次加载与预览加载的轮廓，Command 用于搜索面板（见「语义与状态」）。
 
 ## 语义与状态
 
-搜索由当前公开的 inline Combobox 与 Dialog 组成。结果来自当前指南与组件，caller 排序并提供目的地；无匹配不能发明结果。选择结果后把页面标题/主区域返回给 Dialog 的 `finalFocus`，由原语实际聚焦，避免在关闭回调中提前 focus 造成重入；取消归还原触发位置。
+站点搜索由库的 `Command` 放进 `Dialog` 组成（`components/search-dialog.tsx`）。不用 `CommandDialog`，因为选择结果后要把页面标题/主区域交给 `DialogPopup` 的 `finalFocus`，`CommandDialog` 不暴露它。结果来自当前指南与组件，匹配与排序仍由 `lib/search.ts` 的 `score` 决定：`Command` 的过滤恒为真，条目按得分次序渲染，无匹配时 `CommandEmpty` 说明「没有匹配的内容」，不发明结果。`Command` 在列表变化时自动高亮首位，所以输入后直接 Enter 打开最佳匹配，方向键再向下移动。选择结果后焦点由原语实际聚焦到页面标题，避免在关闭回调中提前 focus 造成重入；取消归还原触发位置。
+
+`/examples/workspace` 的外壳是库的 `Workspace`：侧栏、`WorkspaceSurface`、`WorkspaceHeader` 与 `WorkspaceContent` 组成，外壳自带跳过链接与侧栏、工作面之间的间隔。侧栏导航的名称写在 `SidebarContent` 上（`Sidebar` 根不再是地标）；页面级操作经 `WorkspaceHeaderPortal` 进入顶栏，位于顶栏的搜索与动态之后。内容区保持 `id="main"`，站点的跳过链接与路由后的焦点仍落在它上面。工作区内的搜索是 `CommandDialog`（集合名称包含匹配）；应用内 ⌘K 在捕获阶段接下并止步，不与站点文档搜索同时打开。
 
 草稿和已应用条件分别保存；应用后才改变结果，取消回到已应用条件。Tabs 保留隐藏面板的草稿。复制成功由 Clipboard Promise 确认，拒绝后呈现公共 CopyButton 错误反馈。加载和渲染失败按对应局部说明，重试不丢弃文档邻接内容；未知、空与不适用分别使用当前 Empty 状态。
 
 侧栏选中项在当前原生 ScrollArea 容器内滚动到可见处，使用真实 `data-slot="scroll-area"`，不依赖已删除的 Viewport 部件。
+
+## 5.0.0 新能力的采用与不采用（2026-10-30）
+
+只在新组件确实对应原任务时采用，不为「用上」硬塞。已采用：Command（站点搜索、工作区搜索）、Workspace 系列（示例外壳）、`useCopyToClipboard`（Tooltip 评审页的复制，http 下可回退）。组件页自身的 demo 与 meta 已随库提交带有 Command、Resizable、ColorPicker、TimeField、FileTrigger、Cascader、TreeSelect 的文档。
+
+未采用及理由：
+
+| 能力 | 理由 |
+| --- | --- |
+| Resizable | 官网与示例没有手写的可调宽布局；集合详情用抽屉预览，是浮层动作，不是常驻的列表与详情并置，换成分栏会改变任务。 |
+| ColorPicker | 主题试验台选的是有名字的品牌预设（附浅深两套色与对比验证），不是一个自由取得的 #rrggbb 用户数据。 |
+| TimeField、FileTrigger、Cascader、TreeSelect | 站点与示例里没有对应的任务；设置页的默认权限是勾选的 Tree，不是选择值。示例里没有现成的时间或文件设置，不为展示新增。 |
+| DataTable 吸顶表头、固定列、busy、error | 集合表格分页、八行、不横向溢出，没有有界高度容器；数据是本地假数据，没有请求，不虚构「取数中」或「失败」。行名称（`meta.rowHeader`）与「选择范围」（`scope="filtered"`）已在使用。 |
 
 ## 表达取值
 

@@ -66,7 +66,7 @@ test("one public search trigger serves the directory; there is no second query f
   assert.equal(triggers[0].dataset.slot, "button");
 });
 
-test("search navigates from a keyboard-selected current result and focuses the new page", async () => {
+test("search navigates from the highlighted top result on Enter and focuses the new page", async () => {
   await mount(fixture.dialogScene("/en/docs"));
   await click(document.querySelector("button"));
   const field = document.querySelector('input[role="combobox"]');
@@ -76,7 +76,7 @@ test("search navigates from a keyboard-selected current result and focuses the n
     Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,"value").set.call(field,"input group");
     field.dispatchEvent(new Event("input",{ bubbles:true }));
   });
-  await act(() => field.dispatchEvent(new KeyboardEvent("keydown",{ key:"ArrowDown", bubbles:true, cancelable:true })));
+  // Command highlights the best match as soon as the list changes, so Enter alone opens it.
   await act(() => field.dispatchEvent(new KeyboardEvent("keydown",{ key:"Enter", bubbles:true, cancelable:true })));
   await act(() => new Promise(resolve => setTimeout(resolve,30)));
   assert.equal(document.querySelector("main h1").textContent,"/en/docs/components/input-group");

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { createPortal } from "react-dom";
 import { IconBell, IconBook2, IconDatabase, IconLayoutDashboard, IconSearch, IconSettings } from "@tabler/icons-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Link } from "@/components/locale-link";
@@ -8,18 +7,18 @@ import { localePath } from "@/lib/paths";
 import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
 import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import { Button } from "@qingye_lab/ui/components/button";
-import { Combobox, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@qingye_lab/ui/components/combobox";
+import { CommandDialog, CommandEmpty, CommandInput, CommandItem, CommandList, type CommandFilter } from "@qingye_lab/ui/components/command";
 import { CornerMark } from "@qingye_lab/ui/components/corner-mark";
-import { Dialog, DialogPopup, DialogTitle } from "@qingye_lab/ui/components/dialog";
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
 import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
+import { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface } from "@qingye_lab/ui/components/workspace";
 import { ACTIVITY, COLLECTIONS, findCollection } from "./data";
 
-/* 应用外壳：侧栏（可收起成图标栏）+ 顶栏（位置、搜索、动态、本人）+ 内容。
- * 侧栏的底比纸深一级，内容区是底纸，内容里的对象各铺一张纸——三层面，各有其所。 */
+/* 应用外壳：库的 Workspace——侧栏（可收起成图标栏）+ 一张工作面（顶栏：位置、搜索、动态；内容区）。
+ * 外壳自带跳过链接、侧栏与工作面之间的间隔和面的圆角线；这里只放内容。页面级操作经 WorkspaceHeaderPortal 进顶栏。 */
 
 export const BASE = "/examples/workspace";
 const at = (path = "") => `${BASE}${path}`;
@@ -48,53 +47,41 @@ function useCrumbs() {
 const Scroller = React.createContext<React.RefObject<HTMLElement | null>>({ current: null });
 export const useWorkspaceScroller = () => React.useContext(Scroller);
 
-/* 页面级的操作放进顶栏：正文里不再立一个重复面包屑的标题。页面用 <PageActions> 把操作送到这里。 */
-const ActionsSlot = React.createContext<HTMLElement | null>(null);
-export function PageActions({ children }: { children: React.ReactNode }) {
-  const slot = React.useContext(ActionsSlot);
-  return slot ? createPortal(children, slot) : null;
-}
+/** 搜集合：只按名称包含匹配（查询已去掉首尾空白）。 */
+const byName: CommandFilter = (entry, query) => entry.label.includes(query);
 
-type SearchItem = { id: string; label: string };
 function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
-  const go = useWorkspaceNavigate(); const [query, setQuery] = React.useState("");
-  const items: SearchItem[] = COLLECTIONS.map(item => ({ id: item.id, label: item.name }));
-  const filtered = query.trim() ? items.filter(item => item.label.includes(query.trim())) : items;
-  return <Combobox<SearchItem> items={items} filteredItems={filtered} filter={null} inline open={open} onOpenChange={onOpenChange} value={null} inputValue={query} onInputValueChange={setQuery}
-    itemToStringLabel={item => item.label} itemToStringValue={item => item.id} isItemEqualToValue={(a, b) => a.id === b.id} autoHighlight
-    onValueChange={item => { if (!item) return; onOpenChange(false); go(`/collections/${item.id}`); }}>
-    <Dialog open={open} onOpenChange={onOpenChange} onOpenChangeComplete={next => { if (!next) setQuery(""); }}>
-      <DialogPopup className="w-[min(32rem,100%)] gap-(--qy-field-gap)">
-        <DialogTitle className="sr-only">搜索集合</DialogTitle>
-        <ComboboxInput aria-label="搜索集合" placeholder="搜索集合" />
-        <ComboboxEmpty>没有匹配的集合</ComboboxEmpty>
-        <ComboboxList className="max-h-[min(24rem,60dvh)]">{(item: { id: string; label: string }) => <ComboboxItem key={item.id} value={item}>{item.label}</ComboboxItem>}</ComboboxList>
-      </DialogPopup>
-    </Dialog>
-  </Combobox>;
+  const go = useWorkspaceNavigate();
+  return <CommandDialog open={open} onOpenChange={onOpenChange} aria-label="搜索集合" filter={byName} onItemSelect={id => go(`/collections/${id}`)}>
+    <CommandInput aria-label="搜索集合" placeholder="搜索集合" />
+    <CommandList aria-label="集合">
+      {COLLECTIONS.map(item => <CommandItem key={item.id} value={item.id}>{item.name}</CommandItem>)}
+      <CommandEmpty>没有匹配的集合</CommandEmpty>
+    </CommandList>
+  </CommandDialog>;
 }
 
 export function WorkspaceShell() {
   const { crumbs, section, sub } = useCrumbs();
-  const [actions, setActions] = React.useState<HTMLElement | null>(null);
   const scroller = React.useRef<HTMLElement | null>(null);
   const [searching, setSearching] = React.useState(false);
   React.useEffect(() => {
-    const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setSearching(true); } };
-    window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
+    // 应用内的 ⌘K 是应用自己的搜索：在捕获阶段接下并止步，站点的文档搜索（挂在 document 上）不再同时打开。
+    const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); event.stopPropagation(); setSearching(true); } };
+    window.addEventListener("keydown", onKey, true); return () => window.removeEventListener("keydown", onKey, true);
   }, []);
   const failing = COLLECTIONS.filter(item => item.state === "失败" || item.state === "未同步").length;
   const link = (path: string) => <Link to={at(path)} />;
 
-  return <div className="flex h-full min-h-0 bg-background text-foreground">
-    <Sidebar aria-label="工作区" className="h-full w-[calc(12*var(--qy-cai))] shrink-0 border-e border-border p-(--qy-overlay-inset)">
+  return <Workspace>
+    <Sidebar className="shrink-0">
       {/* 顶：这是谁的工作区。印与名一行，与收起按钮同一条中线；收起时只留印，收起按钮落到印下。 */}
       <SidebarHeader>
         <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
         <SidebarTitle>青野工作区</SidebarTitle>
         <SidebarToggle />
       </SidebarHeader>
-      <SidebarContent className="mt-(--qy-field-group-gap) flex-1">
+      <SidebarContent aria-label="工作区" className="mt-(--qy-field-group-gap) flex-1">
         <SidebarGroup>
           <SidebarLink render={link("")} active={section === ""} icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
           <SidebarLink render={link("/collections")} active={section === "collections"} icon={<IconDatabase aria-hidden="true" />} count={failing}>集合</SidebarLink>
@@ -124,8 +111,8 @@ export function WorkspaceShell() {
       </SidebarFooter>
     </Sidebar>
 
-    <div className="flex min-w-0 flex-1 flex-col">
-      <header className="flex h-[calc(var(--qy-fill-height)+2*var(--qy-panel-padding-sm))] shrink-0 items-center gap-(--qy-panel-gap) border-b border-border px-(--qy-page-gutter)">
+    <WorkspaceSurface>
+      <WorkspaceHeader>
         <Breadcrumb className="min-w-0 flex-1">
           <BreadcrumbList>
             <BreadcrumbItem><BreadcrumbLink render={link("")}>青野工作区</BreadcrumbLink></BreadcrumbItem>
@@ -135,7 +122,6 @@ export function WorkspaceShell() {
             </React.Fragment>)}
           </BreadcrumbList>
         </Breadcrumb>
-        <div ref={setActions} data-slot="page-actions" className="flex items-center gap-(--qy-action-gap) empty:hidden" />
         <Button variant="bordered" size="sm" onClick={() => setSearching(true)} className="w-[calc(10*var(--qy-cai))] justify-start text-muted-foreground">
           <IconSearch aria-hidden="true" />搜索<Kbd className="ms-auto">⌘K</Kbd>
         </Button>
@@ -150,11 +136,11 @@ export function WorkspaceShell() {
             </Timeline>
           </PopoverPopup>
         </Popover>
-      </header>
-      <main ref={scroller} id="main" tabIndex={-1} className="min-h-0 flex-1 overflow-y-auto outline-none">
-        <Scroller.Provider value={scroller}><ActionsSlot.Provider value={actions}><Outlet /></ActionsSlot.Provider></Scroller.Provider>
-      </main>
-    </div>
+      </WorkspaceHeader>
+      <WorkspaceContent ref={scroller} id="main">
+        <Scroller.Provider value={scroller}><Outlet /></Scroller.Provider>
+      </WorkspaceContent>
+    </WorkspaceSurface>
     <SearchDialog open={searching} onOpenChange={setSearching} />
-  </div>;
+  </Workspace>;
 }
