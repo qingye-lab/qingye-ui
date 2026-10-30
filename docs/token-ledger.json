@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-30T12:02:41.966Z",
-  "revision": "dac21d562194245bdf2951503ae1fc3f3d97d810",
+  "generatedAt": "2026-10-30T16:27:57.903Z",
+  "revision": "a9aee1e10eced9d75fa6ec5fdb86a3e8588f61be",
   "static": {
     "fingerprint": {
-      "sha256": "68c56f66b19bf5fed07390be22e54a2380cb24f7b822f163d7341a470c54157d",
+      "sha256": "79473984ed9d9a939e80fc46a9557b03a96c1cc3c287b052da07fbcba8a9f5d7",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2093,7 +2093,7 @@
         },
         {
           "path": "apps/docs/src/examples/workspace/collection-detail.tsx",
-          "sha256": "3660287b9e73b3b8f72f05b6f456f74b85fc14105c10a4578cb6e1431b954917"
+          "sha256": "7a33f437f9d3c648bc74cf3b13a3a7efe657c9ada7fecead19e319072ca1547c"
         },
         {
           "path": "apps/docs/src/examples/workspace/collections.tsx",
@@ -2113,11 +2113,11 @@
         },
         {
           "path": "apps/docs/src/examples/workspace/overview.tsx",
-          "sha256": "c4a1463dbff061f8fa76b59aaff43e8243e41242d0ee4dea8aa6874990671686"
+          "sha256": "f32164615c03a33acfdcea805254f8e022425159ffc61dda25b342d16f0c6671"
         },
         {
           "path": "apps/docs/src/examples/workspace/settings.tsx",
-          "sha256": "cf727140ec7d9b69aa0dd48432e2871afc29448f2b34e3da8d97505e4d205e04"
+          "sha256": "00ebb20f8537f9f5d7b5e19c8046299ddbaf5af3d2b41ae30a83f48c0ce9418f"
         },
         {
           "path": "apps/docs/src/examples/workspace/shell.tsx",
@@ -2126,6 +2126,10 @@
         {
           "path": "apps/docs/src/examples/workspace/status.ts",
           "sha256": "242327ebf57546b48dfb27d8675fe03a7f3acadc8fd0e42d6536aaecb54a4231"
+        },
+        {
+          "path": "apps/docs/src/examples/workspace/workspace.css",
+          "sha256": "419fb039320e1be14521dbe1362251bb080671fd9546f1fc5de91705eaff2e04"
         },
         {
           "path": "apps/docs/src/index.css",
