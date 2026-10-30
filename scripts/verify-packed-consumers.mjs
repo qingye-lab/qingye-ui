@@ -174,6 +174,8 @@ async function verifyNewCapabilities(page, item) {
   await first.getByRole('checkbox').click();
   assert.equal(await page.locator('#table-selected').textContent(), '1');
   assert.equal(await page.locator('#table-active').textContent(), 'none');
+  // 指针留在行上会带出悬停面（5.0.0 起行有悬停反馈），移开后再比较选中填充。
+  await page.mouse.move(0, 0);
   assert.equal(await first.evaluate(element => getComputedStyle(element).backgroundColor), selectedBackground, 'checkbox selection does not add selected-row fill');
   await first.locator('th[scope="row"]').click();
   assert.equal(await page.locator('#table-active').textContent(), 'entry-0');
@@ -187,6 +189,7 @@ async function verifyNewCapabilities(page, item) {
   assert.equal(await editor.evaluate(element => element === document.activeElement), true, 'native editor keeps End');
   assert.equal(await page.locator('#table-active').textContent(), 'entry-0');
   await second.getByRole('checkbox').click();
+  await page.mouse.move(0, 0);
   const checkboxBackground = await second.evaluate(element => getComputedStyle(element).backgroundColor);
   await page.locator('#table-selection-look').click();
   assert.notEqual(await second.evaluate(element => getComputedStyle(element).backgroundColor), checkboxBackground, 'row selection appearance restores actual fill');
