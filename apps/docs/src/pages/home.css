@@ -1,66 +1,164 @@
 /*
- * 首页只有三件事：总纲与定位、十五法的名录、开始使用。版面按理念自己的方法排。
+ * 首页（2026-10-30 重做）。
  *
- * 一张四栏网格贯穿全页，每栏 16 材（320px）：总纲每句五个全角字，在 64px 的字阶一字 64px，正好一栏，
- * 所以总纲三句各占一栏，其下每一行都落在总纲自己的句界上（以材为祖：几何出自一个基本量，不另立栏线）。
- * - 经营位置：总纲在最上，行首对齐版心左缘；定位在左，动作从第三栏（「合宜为度」之下）起，全页没有居中的东西。
- * - 疏密有致：间距只取基础层的几级，级差一眼可辨：
- *     组内 8（--qy-field-gap：组名与角色说明、名录各行之间）
- *     并列项之间 20（--qy-field-group-gap）
- *     章内收束 40（--qy-section-gap：总纲与定位之间）
- *     页面级 80、160（章间距的 2 倍、4 倍：两组之间 80，大段之间 160）。
- *   80 与 160 是首页的预设，不由别的关系推出。
- * - 布白有用：不画卡片、盒子、章节线、图标；段与段只靠空白分开。
- * - 材有美：字阶全部取自库的命名字阶（总纲 display-xl、组名与法名 display、定位与链接 reading、角色说明 support）。
- *   法名与组名同阶，靠字重分层：组名取字阶自带的粗，法名取常规（墨分五色的另一用法：不加字号，层级交给字重与墨色）。
- * - 同一行里字号不同的内容，按首行的行中线对齐，不按拉丁基线（本库的对齐规则）。
+ * 一张两栏网格贯穿全页：起始栏 24 材（480px，总纲一句五个全角字 320px，留出 8 材让定位一行放得下），
+ * 栏距 4 材，其余是内容栏。总纲、各章题都在起始栏，各章内容都从内容栏的同一条竖线开始（经营位置）。
+ * 24 材、4 材与下面的台高 28 材、章间 6 材是首页的预设，不由别的关系推出。
+ *
+ * 疏密有致：组内 8（--qy-field-gap）、并列项 20（--qy-field-group-gap）、章内 40（--qy-section-gap）、
+ * 章间 120（3 × 章内）。不画章节线、不套卡片；台与色块是唯一有面的东西：台是一件独立的器物，色块就是要看的颜色。
+ * 绘事后素：台不加阴影（它与页面在同一平面）；字阶全部取自库的命名字阶。
  */
 .home {
-  --home-col: calc(16 * var(--qy-cai));
+  --home-start: calc(24 * var(--qy-cai));
+  --home-gap: calc(4 * var(--qy-cai));
+  --home-chapter-gap: calc(3 * var(--qy-section-gap));
   color: var(--qy-foreground);
   outline: none;
-  padding-top: calc(4 * var(--qy-section-gap));
-  padding-bottom: calc(4 * var(--qy-section-gap));
+  padding-block: calc(4 * var(--qy-cai)) var(--home-chapter-gap);
   text-spacing-trim: trim-start;
 }
-:where(.home) :where(h1, h2, p, ul, li) { margin: 0; padding: 0; }
-.home ::selection { background: var(--qy-primary); color: var(--qy-primary-foreground); }
+:where(.home) :where(h1, h2, h3, p, ul, li) { margin: 0; padding: 0; }
+:where(.home) :where(ul) { list-style: none; }
 
-/* 四栏，每栏最宽 16 材；版心不足 64 材（视口窄于 85rem）时各栏同比收窄，不撑出横向滚动。 */
-.home-row { display: grid; grid-template-columns: repeat(4, minmax(0, var(--home-col))); }
-/* 各栏之间没有栏距：栏就是一句总纲的宽。较长的内容（英文长名）右侧留 20，不贴到下一栏。 */
-.home-methods > div, .home-names > li { padding-inline-end: var(--qy-field-group-gap); }
+.home-hero,
+.home-chapter {
+  display: grid;
+  grid-template-columns: minmax(0, var(--home-start)) minmax(0, 1fr);
+  column-gap: var(--home-gap);
+  align-items: start;
+}
+.home-chapter { margin-top: var(--home-chapter-gap); }
 
 /* ─── 总纲与定位 ───────────────────────────────────────── */
-/* 总纲三句各占一栏，一行不折。英文一句比一栏宽，三句各占一行。 */
-.home-motto { display: grid; grid-template-columns: repeat(3, var(--home-col)); }
-.home-motto span { white-space: nowrap; }
-:lang(en) .home-motto { grid-template-columns: minmax(0, 1fr); }
-:lang(en) .home-motto span { white-space: normal; }
-/* 版心放不下三栏（视口窄于 65rem = 3 × 20rem + 版心两侧 80px）时三句各占一行，不撑出横向滚动。 */
-@media (width < 65rem) {
-  .home-motto { grid-template-columns: minmax(0, 1fr); }
-  .home-motto span { white-space: normal; }
+.home-motto span { display: block; white-space: nowrap; }
+/* 英文一句比一栏宽：退到下一档 display-lg，仍是全页唯一的大字。 */
+:lang(en) .home-motto {
+  font-size: var(--qy-text-display-lg-size);
+  line-height: var(--qy-text-display-lg-leading);
+  letter-spacing: var(--qy-text-display-lg-tracking);
 }
-/* 定位与动作在同一行，彼此按行中线对齐；定位两行占一二栏，动作从第三栏起。 */
-.home-intro { margin-top: var(--qy-section-gap); align-items: center; }
-.home-intro-text { grid-column: 1 / 3; }
-.home-actions { grid-column: 3 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }
+.home-intro-lede { margin-top: var(--qy-section-gap); }
+.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); margin-top: var(--qy-section-gap); }
+.home-install { margin-top: var(--qy-field-group-gap); }
 
-/* ─── 器用六法 · 表达九法 ──────────────────────────────── */
-/* 组名在第一栏、角色说明在其下；法名在二至四栏，三个一排，各栏用同一条栏线（subgrid）。 */
-.home-methods { align-items: start; }
-.home-role { margin-top: var(--qy-field-gap); }
-.home-names { grid-column: 2 / -1; display: grid; grid-template-columns: subgrid; row-gap: var(--qy-field-gap); list-style: none; }
-.home-names > li { font-weight: var(--qy-weight-regular); }
-/* 法名是名录，不是行文里的链接：平时不画下划线，悬停与键盘聚焦时由库链接自己的规则显出（线随之而现，状态可见）。 */
-.home-names a { text-decoration-color: transparent; }
-.home-hero + .home-methods { margin-top: calc(4 * var(--qy-section-gap)); }
-.home-methods + .home-methods { margin-top: calc(2 * var(--qy-section-gap)); }
+/* ─── 工作台 ───────────────────────────────────────────── */
+/* 台顶的三个轴与台同宽、贴着台（组内间隔）：它们只作用于这张台。 */
+.home-bench { display: grid; gap: var(--qy-field-gap); min-width: 0; }
+.home-axes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-gap) var(--qy-field-group-gap); }
+.home-axis { display: flex; align-items: center; gap: var(--qy-field-gap); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
+.home-swatch { display: inline-block; inline-size: calc(2 * var(--qy-fen)); block-size: calc(2 * var(--qy-fen)); border-radius: 50%; margin-inline-end: var(--qy-fen); }
 
-/* ─── 开始使用 ─────────────────────────────────────────── */
-/* 标题、命令、链接三者行中线对齐。命令占二、三栏，右侧让出 40，与链接之间有一个章内的间隔。 */
-.home-methods + .home-start { margin-top: calc(4 * var(--qy-section-gap)); }
-.home-start { align-items: center; }
-.home-command { grid-column: 2 / 4; min-width: 0; padding-inline-end: var(--qy-section-gap); }
-.home-start-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }
+.home-surface {
+  display: flex;
+  flex-direction: column;
+  block-size: calc(28 * var(--qy-cai));
+  overflow: hidden;
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-panel);
+  background: var(--qy-surface);
+  color: var(--qy-foreground);
+  transition: background-color var(--qy-duration-base) var(--qy-ease-out), color var(--qy-duration-base) var(--qy-ease-out);
+}
+.home-surface-tools { display: flex; gap: var(--qy-field-gap); padding: var(--qy-panel-padding) var(--qy-panel-padding) var(--qy-field-gap); }
+.home-category { inline-size: calc(8 * var(--qy-cai)); flex: none; }
+/* 台身：左列是结果（12 材，预设），右侧是样张台。台是内嵌承载面（清染）——用面划出范围，不另画分隔线。 */
+.home-surface-body { flex: 1; min-block-size: 0; display: grid; grid-template-columns: calc(12 * var(--qy-cai)) minmax(0, 1fr); }
+.home-surface-list { min-block-size: 0; padding: 0 var(--qy-panel-padding) var(--qy-field-gap); }
+/* 选中的一行读选中面（与侧栏当前项同一级），不加线、不加粗。 */
+.home-row[aria-pressed="true"] { background: var(--qy-surface-selected); }
+.home-hint { margin-inline-start: var(--qy-field-gap); font-weight: var(--qy-weight-regular); color: var(--qy-foreground-muted); }
+.home-stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--qy-field-group-gap);
+  min-inline-size: 0;
+  margin: 0 var(--qy-panel-padding) var(--qy-field-gap) 0;
+  padding: var(--qy-panel-padding);
+  border-radius: var(--qy-radius-panel);
+  background: var(--qy-surface-inset);
+}
+.home-surface-empty { flex: 1; min-block-size: 0; display: grid; place-content: center; justify-items: center; }
+.home-stage-head { display: flex; align-items: start; justify-content: space-between; gap: var(--qy-field-group-gap); }
+/* 样张在台的中央；放不下的大件在台内滚动，不撑高台。 */
+.home-stage-specimen { display: grid; place-items: center; min-block-size: 0; overflow: auto; }
+.home-stage-specimen > * { max-inline-size: 100%; }
+.home-stage-category { font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
+.home-surface-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-group-gap);
+  padding: var(--qy-field-gap) var(--qy-panel-padding);
+  border-top: 1px solid var(--qy-border);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+}
+
+/* ─── 章：章题在起始栏 ─────────────────────────────────── */
+.home-chapter-head { display: grid; gap: var(--qy-field-gap); align-content: start; justify-items: start; }
+
+/* 十五法：三列名录，方法名去往理念页里各自的锚点。名录不是行文里的链接，平时不画下划线，悬停与聚焦时显出。 */
+.home-methods { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--qy-section-gap); }
+.home-methods > li { display: grid; gap: var(--qy-field-gap); align-content: start; }
+.home-method-name {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: transparent;
+  border-radius: var(--qy-radius-xs);
+  outline: none;
+  transition: text-decoration-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.home-method-name:hover { text-decoration-color: currentColor; }
+.home-method-name:focus-visible { text-decoration-color: currentColor; box-shadow: inset 0 calc(-1 * var(--qy-focus-quiet-width)) 0 var(--qy-ring); }
+
+/* 墨：五级墨与一方印。色块就是要看的颜色，块高 6 材（预设）；名、比例与角色依次在下。 */
+.home-inks { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--qy-field-group-gap); }
+.home-inks > li { display: grid; gap: var(--qy-fen); align-content: start; }
+.home-ink-chip { display: block; block-size: calc(6 * var(--qy-cai)); margin-block-end: var(--qy-field-gap); border-radius: var(--qy-radius-panel); }
+.home-ink-seal { background: var(--qy-primary); }
+.home-ink-name { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); font-weight: var(--qy-text-title-weight); }
+.home-ink-name > .text-muted-foreground { font-size: var(--qy-text-body-size); font-weight: var(--qy-weight-regular); }
+.home-ink-value { font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); }
+
+/* 开始使用：三个去处，各是一整块链接；悬停铺悬停面，面向两侧伸出一个小面板内缘，字仍在栏线上（与 Item 同一规则）。 */
+.home-paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--qy-field-group-gap); }
+.home-path {
+  display: grid;
+  gap: var(--qy-field-gap);
+  align-content: start;
+  margin-inline: calc(-1 * var(--qy-panel-padding-sm));
+  padding: var(--qy-panel-padding-sm);
+  border-radius: var(--qy-radius-panel);
+  color: var(--qy-foreground);
+  outline: none;
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.home-path:hover { background: var(--qy-surface-hover); }
+.home-path:active { background: var(--qy-surface-active); }
+.home-path:focus-visible { box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring); }
+.home-path-title { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); font-weight: var(--qy-text-title-weight); }
+.home-path-text { font-size: var(--qy-text-body-size); line-height: var(--qy-text-body-leading); color: var(--qy-foreground-muted); }
+.home-download { grid-column: 2; justify-self: start; margin-top: var(--qy-section-gap); }
+
+/* ─── 窄桌面与窄屏 ─────────────────────────────────────── */
+/* 两栏放不下（起始栏 + 栏距 + 至少 38 材的台）时上下排，章题在内容之上。 */
+@media (width < 72rem) {
+  .home-hero, .home-chapter { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-section-gap); }
+  .home-download { grid-column: 1; }
+  .home-inks { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: var(--qy-section-gap); }
+}
+@media (width < 48rem) {
+  .home-methods, .home-paths { grid-template-columns: minmax(0, 1fr); }
+  .home-inks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-motto span { white-space: normal; }
+  .home-motto { font-size: var(--qy-text-display-lg-size); line-height: var(--qy-text-display-lg-leading); }
+  .home-category { inline-size: calc(6 * var(--qy-cai)); }
+  .home-surface { block-size: auto; }
+  .home-surface-body { grid-template-columns: minmax(0, 1fr); }
+  .home-surface-list { max-block-size: calc(10 * var(--qy-cai)); }
+  .home-stage { margin-inline-start: var(--qy-panel-padding); min-block-size: calc(16 * var(--qy-cai)); }
+}

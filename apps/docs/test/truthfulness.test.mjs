@@ -82,7 +82,7 @@ test("unknown workspace pages and settings sections keep the workspace frame and
   assert.equal(document.querySelector('[data-slot="empty"] a').getAttribute("href"),"/en/examples/workspace");
   await act(() => root.unmount()); root = undefined;
   await mount(fixture.missingExampleScene("/en/examples/workspace/collections")); await settle();
-  const hrefs = [...document.querySelectorAll("a[href*='/examples/workspace']")].map(a => a.getAttribute("href"));
+  const hrefs = [...document.querySelectorAll("a[href^='/'][href*='/examples/workspace']")].map(a => a.getAttribute("href"));
   assert.ok(hrefs.length > 5); assert.deepEqual(hrefs.filter(href => !href.startsWith("/en/examples/workspace")),[]);
   await act(() => root.unmount()); root = undefined;
   await mount(fixture.missingExampleScene("/examples/workspace/collections")); await settle();

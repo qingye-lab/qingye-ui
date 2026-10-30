@@ -19,6 +19,22 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
   --qy-background: color-mix(in srgb, var(--qy-ink) calc(var(--qy-wash-qing) / 2), var(--qy-paper));
 }
 
+/*
+ * 本站的品牌：青（2026-10-30，取自「青野」的青）。品牌强调色如一方印，少而明确（design.md「墨分五色」）：
+ * 只覆写 --qy-primary 与其前景，读它的部位（实心按钮、选中标记、站标的点）一起换色，其余仍是五级墨。
+ *   取值   浅色 oklch(0.48 0.085 200)，白字其上 6.2:1；深色 oklch(0.78 0.09 195)，深前景其上 9.1:1、对深色底纸 9.6:1。
+ *          色相与明度是预设；对比度按 sRGB 换算核对（首页台上的「青」与此同值）。
+ *   入口   这两段；悬停与按下由库从 --qy-primary 推出，不另写。
+ */
+html[data-brand="qingye"] {
+  --qy-primary: oklch(0.48 0.085 200);
+  --qy-primary-foreground: oklch(0.985 0 0);
+}
+html[data-brand="qingye"]:is(.dark, [data-theme="dark"]) {
+  --qy-primary: oklch(0.78 0.09 195);
+  --qy-primary-foreground: oklch(0.21 0.03 200);
+}
+
 :root {
   /* Site chrome. */
   /* Initial value only: the header writes its measured height back (site-header.tsx), and

@@ -77,3 +77,15 @@ export function ComponentSpecimen({ slug, name, className }: { slug: string; nam
       : <SpecimenPlaceholder />}
   </div>;
 }
+
+/**
+ * The same cover as ComponentSpecimen, mounted at once and live: its controls take focus and input.
+ * For a stage the reader is meant to operate (the home page's finder), not a directory tile.
+ */
+export function ComponentStage({ slug, name, className }: { slug: string; name: string; className?: string }) {
+  const [failed, setFailed] = useState(false);
+  const Preview = coverFor(slug);
+  return <div className={className} data-component-stage={slug} data-state={failed ? "failed" : "mounted"}>
+    <SpecimenBoundary key={slug} name={name} onFail={() => setFailed(true)} slug={slug}><Suspense fallback={<SpecimenPlaceholder />}><Preview /></Suspense></SpecimenBoundary>
+  </div>;
+}
