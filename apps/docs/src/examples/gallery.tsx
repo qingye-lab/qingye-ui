@@ -1,4 +1,5 @@
-import { lazy, Suspense, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, type ReactNode } from "react";
+import { AXES_MESSAGE, applyAxes, axesFromSearch, type Axes } from "@/lib/axes";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import { buttonVariants } from "@qingye_lab/ui/components/button";
@@ -111,8 +112,24 @@ export default function ExamplesGallery() {
   return <ExampleView example={findExample(id)!}><ExampleRoutes /></ExampleView>;
 }
 
-/** 裸框：只有示例本身，供总览的缩略与截图使用。 */
+/**
+ * 裸框：只有示例本身，供总览的缩略与首页的产品窗口使用。
+ * 地址里的 scheme / density / brand 是初值；同源的父页面可以用 postMessage 改三轴，不必重载。
+ * 写在下一帧：ThemeProvider 在挂载时按存储写一次明暗，三轴要在它之后。
+ */
 export function ExampleFrame() {
-  return <div className="h-dvh"><ExampleRoutes /></div>;
+  useEffect(() => {
+    const initial = axesFromSearch(window.location.search);
+    const root = document.documentElement;
+    const apply = (axes: Partial<Axes>) => applyAxes(root, { scheme: root.classList.contains("dark") ? "dark" : "light", density: "default", brand: "qing", ...axes });
+    const frame = Object.keys(initial).length ? requestAnimationFrame(() => apply(initial)) : 0;
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin || event.data?.type !== AXES_MESSAGE) return;
+      apply(event.data.axes as Partial<Axes>);
+    };
+    window.addEventListener("message", onMessage);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("message", onMessage); };
+  }, []);
+  return <div className="h-dvh" data-example-bare><ExampleRoutes /></div>;
 }
 

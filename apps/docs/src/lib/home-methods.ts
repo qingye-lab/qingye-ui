@@ -42,3 +42,30 @@ export function guideMethods(locale: DocsLocale): [GuideMethod[], GuideMethod[]]
   if (!use || !expression || use.length !== 6 || expression.length !== 9) throw new Error("design.md must keep the six and nine method tables.");
   return [use, expression];
 }
+
+/* 总纲三条：同样逐字取自 design.md 的总纲表（名、出处、含义）。英文名写作「Purpose first (器用为本)」。 */
+export type GuidePrinciple = { name: string; aside?: string; source: string; meaning: string };
+
+function principles(source: string, locale: DocsLocale): GuidePrinciple[] {
+  const header = locale === "en" ? "| Principle | Source | Meaning |" : "| 总纲 | 出处 | 含义 |";
+  const lines = source.split(/\r?\n/);
+  const start = lines.findIndex((line) => line.trim() === header);
+  const rows: GuidePrinciple[] = [];
+  for (let row = start + 2; start >= 0 && row < lines.length && lines[row]!.startsWith("|"); row++) {
+    const [name = "", origin = "", meaning = ""] = lines[row]!.split("|").slice(1, -1).map(plain);
+    const split = locale === "en" ? name.match(/^(.+?)\s*\((\p{Script=Han}+)\)$/u) : null;
+    rows.push(split ? { name: split[1]!, aside: split[2]!, source: origin, meaning } : { name, source: origin, meaning });
+  }
+  return rows;
+}
+
+const principlesByLocale: Record<DocsLocale, GuidePrinciple[]> = {
+  zh: principles(translation.canonical, "zh"),
+  en: principles(translation.english ?? translation.canonical, "en"),
+};
+
+export function guidePrinciples(locale: DocsLocale): GuidePrinciple[] {
+  const rows = principlesByLocale[locale];
+  if (rows.length !== 3) throw new Error("design.md must keep the three principles table.");
+  return rows;
+}

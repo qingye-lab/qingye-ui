@@ -170,6 +170,8 @@ html[data-brand="qingye"]:is(.dark, [data-theme="dark"]) {
 
 /* One scrollbar gutter on every page: a page that scrolls and one that does not keep the same width. */
 html { scrollbar-gutter: stable; }
+/* 裸框里的示例自己滚动（框高就是视口高），不留滚动条的空槽。 */
+html:has([data-example-bare]) { scrollbar-gutter: auto; overflow: hidden; }
 .site-frame { width: min(100% - 2 * var(--site-gutter), var(--site-width)); margin-inline: auto; }
 
 /* --- Code ------------------------------------------------------------------ */
