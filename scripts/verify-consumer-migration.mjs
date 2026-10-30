@@ -82,9 +82,15 @@ async function dataTable(page, theme) {
   assert.ok(Math.abs(widths[0] - 240) < 2 && Math.abs(widths[1] - 120) < 2, JSON.stringify(widths));
   const groupWidth = await section.locator('th[scope="colgroup"]').evaluate(el => el.getBoundingClientRect().width);
   assert.ok(Math.abs(groupWidth - 360) < 2);
-  const ellipsis = await section.locator('[data-slot="data-table-cell-content"]').first().evaluate(el => ({ title: el.title, text: el.textContent, overflow: getComputedStyle(el).textOverflow }));
-  assert.equal(ellipsis.title, ellipsis.text);
+  // 被截断的文字不靠 title：它是可聚焦的停靠点，全文由 Tooltip 给出（5.0.0）。
+  const clipped = section.locator('[data-slot="data-table-cell-content"][data-clipped]').first();
+  const ellipsis = await clipped.evaluate(el => ({ title: el.getAttribute("title"), tabIndex: el.getAttribute("tabindex"), text: el.textContent, overflow: getComputedStyle(el).textOverflow }));
+  assert.equal(ellipsis.title, null);
+  assert.equal(ellipsis.tabIndex, "0");
   assert.equal(ellipsis.overflow, "ellipsis");
+  await clipped.hover();
+  await page.locator('[data-slot="tooltip-popup"]').filter({ hasText: ellipsis.text }).waitFor({ timeout: 5000 });
+  await page.mouse.move(0, 0);
   section = await visit(page, "data-table", "window", theme);
   const table = section.locator('[data-slot="data-table"]');
   const viewport = section.locator('[data-slot="data-table-container"]');

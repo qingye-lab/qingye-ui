@@ -146,7 +146,13 @@ async function verifyNewCapabilities(page, item) {
   const width = () => nameColumn.evaluate(element => element.getBoundingClientRect().width);
   assert.ok(Math.abs(await width() - 200) < 1, 'installed explicit column width reaches the cell');
   const fullText = await nameColumn.innerText();
-  assert.equal(await nameColumn.locator('[data-slot="data-table-cell-content"]').getAttribute('title'), fullText);
+  // 被截断的文字不靠 title：它是可聚焦的停靠点，全文由 Tooltip 给出（5.0.0）。
+  const clippedContent = nameColumn.locator('[data-slot="data-table-cell-content"]');
+  assert.equal(await clippedContent.getAttribute('title'), null);
+  assert.equal(await clippedContent.getAttribute('tabindex'), '0', 'installed truncated cell is a keyboard stop');
+  await clippedContent.hover();
+  await page.locator('[data-slot="tooltip-popup"]').filter({ hasText: fullText }).waitFor({ timeout: 5000 });
+  await page.mouse.move(0, 0);
   assert.equal(await nameColumn.locator('[data-slot="data-table-cell-content"]').evaluate(element => getComputedStyle(element).textOverflow), 'ellipsis');
   assert.equal(await sized.getByRole('columnheader', { name: '组合列', exact: true }).getAttribute('colspan'), '2');
   await page.locator('#shrink-table-column').click();
