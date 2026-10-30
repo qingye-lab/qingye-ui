@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-30T11:09:36.132Z",
-  "revision": "079f034d4b8d7e396b2fbd315917e15feba696ec",
+  "generatedAt": "2026-10-30T11:19:31.910Z",
+  "revision": "cab8735b35e2bac04af9ad4d64225ca1cbf08956",
   "fingerprint": {
-    "sha256": "b0d754fbd26133b2ae64266d6face4da6399726d41c9cad1b17d18237c791729",
+    "sha256": "79902ca14b73ef7287e80c16dc2deff349e9c976649d3f3d73f55eacfef9faaa",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -868,7 +868,7 @@
       },
       {
         "path": "packages/ui/tokens/components.css",
-        "sha256": "a2ae97bb1c5dedd07409b3afc2287bf2066fb345f113006e80db2db79ad8c4b5"
+        "sha256": "f60ca2e910a8ce27cc14b90dc0af7bab363245e2083e56fbf8566b25dc0f0746"
       },
       {
         "path": "packages/ui/tokens/contrast.css",
@@ -32963,7 +32963,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 494
+            "line": 495
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33061,7 +33061,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 450
+            "line": 451
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33079,7 +33079,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 449
+            "line": 450
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33097,7 +33097,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 448
+            "line": 449
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33115,7 +33115,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 451
+            "line": 452
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33133,7 +33133,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 447
+            "line": 448
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33307,7 +33307,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 600
+            "line": 601
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33326,7 +33326,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 606
+            "line": 607
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33344,7 +33344,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 601
+            "line": 602
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33362,7 +33362,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 607
+            "line": 608
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33551,7 +33551,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 616
+            "line": 617
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -33569,7 +33569,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 350
+            "line": 351
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33588,7 +33588,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 334
+            "line": 335
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33604,7 +33604,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 338
+            "line": 339
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33620,7 +33620,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 339
+            "line": 340
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33639,7 +33639,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 335
+            "line": 336
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33658,7 +33658,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 336
+            "line": 337
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33677,7 +33677,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 337
+            "line": 338
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33696,7 +33696,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 327
+            "line": 328
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33712,7 +33712,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 331
+            "line": 332
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33728,7 +33728,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 332
+            "line": 333
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33747,7 +33747,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 328
+            "line": 329
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33766,7 +33766,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 329
+            "line": 330
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33785,7 +33785,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 330
+            "line": 331
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33803,7 +33803,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 311
+            "line": 312
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33822,7 +33822,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 320
+            "line": 321
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33838,7 +33838,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 324
+            "line": 325
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33854,7 +33854,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 325
+            "line": 326
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33873,7 +33873,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 321
+            "line": 322
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33892,7 +33892,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 322
+            "line": 323
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33911,7 +33911,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 323
+            "line": 324
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33930,7 +33930,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 341
+            "line": 342
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33946,7 +33946,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 345
+            "line": 346
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33962,7 +33962,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 346
+            "line": 347
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -33981,7 +33981,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 342
+            "line": 343
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34000,7 +34000,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 343
+            "line": 344
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34019,7 +34019,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 344
+            "line": 345
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34038,7 +34038,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 313
+            "line": 314
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34054,7 +34054,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 317
+            "line": 318
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34070,7 +34070,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 318
+            "line": 319
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34089,7 +34089,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 314
+            "line": 315
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34108,7 +34108,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 315
+            "line": 316
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34127,7 +34127,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 316
+            "line": 317
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34438,7 +34438,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 544
+            "line": 545
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34454,7 +34454,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 545
+            "line": 546
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34470,7 +34470,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 542
+            "line": 543
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34486,7 +34486,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 543
+            "line": 544
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34502,7 +34502,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 540
+            "line": 541
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34518,7 +34518,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 541
+            "line": 542
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34534,7 +34534,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 548
+            "line": 549
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34550,7 +34550,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 551
+            "line": 552
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34566,7 +34566,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 550
+            "line": 551
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34582,7 +34582,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 549
+            "line": 550
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34716,7 +34716,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 493
+            "line": 494
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34734,7 +34734,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 579
+            "line": 580
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -34750,7 +34750,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 483
+            "line": 484
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34768,7 +34768,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 407
+            "line": 408
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34781,7 +34781,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 626
+            "line": 627
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34799,7 +34799,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 408
+            "line": 409
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34812,7 +34812,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 627
+            "line": 628
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34830,7 +34830,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 410
+            "line": 411
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34843,7 +34843,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 629
+            "line": 630
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34861,7 +34861,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 411
+            "line": 412
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34874,7 +34874,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 630
+            "line": 631
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34892,7 +34892,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 409
+            "line": 410
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34905,7 +34905,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 628
+            "line": 629
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34923,7 +34923,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 414
+            "line": 415
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34936,7 +34936,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 631
+            "line": 632
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -34954,7 +34954,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 412
+            "line": 413
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34972,7 +34972,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 413
+            "line": 414
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -34990,7 +34990,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 571
+            "line": 572
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35008,7 +35008,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 595
+            "line": 596
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -35026,7 +35026,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 594
+            "line": 595
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -35042,7 +35042,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 569
+            "line": 570
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35168,7 +35168,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 463
+            "line": 464
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35187,7 +35187,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 464
+            "line": 465
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35240,7 +35240,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 470
+            "line": 471
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35258,7 +35258,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 528
+            "line": 529
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35276,7 +35276,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 527
+            "line": 528
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35636,7 +35636,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 481
+            "line": 482
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35654,7 +35654,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 455
+            "line": 456
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35670,7 +35670,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 505
+            "line": 506
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35686,7 +35686,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 506
+            "line": 507
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35702,7 +35702,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 503
+            "line": 504
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35718,7 +35718,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 508
+            "line": 509
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35734,7 +35734,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 504
+            "line": 505
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35750,7 +35750,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 507
+            "line": 508
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35768,7 +35768,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 496
+            "line": 497
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35803,7 +35803,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 422
+            "line": 423
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35822,7 +35822,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 423
+            "line": 424
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35841,7 +35841,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 418
+            "line": 419
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -35859,7 +35859,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 419
+            "line": 420
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36070,7 +36070,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 536
+            "line": 537
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36115,7 +36115,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 385
+            "line": 386
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36131,7 +36131,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 499
+            "line": 500
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36144,7 +36144,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 639
+            "line": 640
           },
           "context": "@media (width < 40rem) {\n    :root",
           "complete": true
@@ -36162,7 +36162,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 580
+            "line": 581
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -36181,7 +36181,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 583
+            "line": 584
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -36194,7 +36194,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 643
+            "line": 644
           },
           "context": ":root,\n    [data-density]",
           "complete": true
@@ -36213,7 +36213,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 585
+            "line": 586
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -36263,7 +36263,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 518
+            "line": 519
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36385,7 +36385,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 142
+            "line": 143
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36403,7 +36403,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 143
+            "line": 144
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36421,7 +36421,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 141
+            "line": 142
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36439,7 +36439,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 381
+            "line": 382
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36455,7 +36455,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 375
+            "line": 376
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36473,7 +36473,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 384
+            "line": 385
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36491,7 +36491,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 383
+            "line": 384
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36510,7 +36510,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 379
+            "line": 380
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36529,7 +36529,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 382
+            "line": 383
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36548,7 +36548,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 378
+            "line": 379
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36567,7 +36567,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 386
+            "line": 387
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36586,7 +36586,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 387
+            "line": 388
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36604,7 +36604,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 388
+            "line": 389
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36620,7 +36620,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 368
+            "line": 369
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36639,7 +36639,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 438
+            "line": 439
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36658,7 +36658,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 377
+            "line": 378
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36677,7 +36677,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 437
+            "line": 438
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36696,7 +36696,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 380
+            "line": 381
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36715,7 +36715,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 376
+            "line": 377
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36733,7 +36733,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 433
+            "line": 434
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36834,7 +36834,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 587
+            "line": 588
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -36850,7 +36850,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 561
+            "line": 562
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36866,7 +36866,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 562
+            "line": 563
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -36884,7 +36884,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 581
+            "line": 582
           },
           "context": ":root,\n  [data-density]",
           "complete": true
@@ -37181,7 +37181,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 396
+            "line": 397
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37199,7 +37199,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 430
+            "line": 431
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37217,7 +37217,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 431
+            "line": 432
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37235,7 +37235,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 294
+            "line": 295
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37253,7 +37253,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 295
+            "line": 296
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37271,7 +37271,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 296
+            "line": 297
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37289,7 +37289,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 297
+            "line": 298
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37307,7 +37307,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 298
+            "line": 299
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37325,7 +37325,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 299
+            "line": 300
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37343,7 +37343,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 492
+            "line": 493
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37356,7 +37356,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 625
+            "line": 626
           },
           "context": "[data-density=\"compact\"]",
           "complete": true
@@ -37372,7 +37372,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 552
+            "line": 553
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37390,7 +37390,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 432
+            "line": 433
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37787,7 +37787,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 444
+            "line": 445
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37805,7 +37805,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 425
+            "line": 426
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37824,7 +37824,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 426
+            "line": 427
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37874,7 +37874,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 95
+            "line": 96
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37890,7 +37890,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 94
+            "line": 95
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37908,7 +37908,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 100
+            "line": 101
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37924,7 +37924,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 99
+            "line": 100
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37940,7 +37940,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 101
+            "line": 102
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37958,7 +37958,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 102
+            "line": 103
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37974,7 +37974,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 96
+            "line": 97
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -37992,7 +37992,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 97
+            "line": 98
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38010,7 +38010,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 209
+            "line": 210
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38026,7 +38026,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 208
+            "line": 209
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38044,7 +38044,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 214
+            "line": 215
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38060,7 +38060,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 213
+            "line": 214
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38076,7 +38076,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 215
+            "line": 216
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38094,7 +38094,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 216
+            "line": 217
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38110,7 +38110,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 210
+            "line": 211
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38128,7 +38128,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 211
+            "line": 212
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38146,7 +38146,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 83
+            "line": 84
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38162,7 +38162,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 82
+            "line": 83
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38178,7 +38178,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 84
+            "line": 85
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38196,7 +38196,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 85
+            "line": 86
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38214,7 +38214,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 271
+            "line": 272
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38232,7 +38232,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 276
+            "line": 277
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38248,7 +38248,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 275
+            "line": 276
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38264,7 +38264,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 277
+            "line": 278
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38282,7 +38282,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 278
+            "line": 279
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38298,7 +38298,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 270
+            "line": 271
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38314,7 +38314,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 272
+            "line": 273
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38332,7 +38332,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 273
+            "line": 274
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38350,7 +38350,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 261
+            "line": 262
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38368,7 +38368,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 266
+            "line": 267
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38384,7 +38384,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 265
+            "line": 266
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38400,7 +38400,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 267
+            "line": 268
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38418,7 +38418,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 268
+            "line": 269
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38434,7 +38434,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 260
+            "line": 261
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38450,7 +38450,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 262
+            "line": 263
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38468,7 +38468,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 263
+            "line": 264
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38486,7 +38486,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 251
+            "line": 252
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38504,7 +38504,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 256
+            "line": 257
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38520,7 +38520,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 255
+            "line": 256
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38536,7 +38536,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 257
+            "line": 258
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38554,7 +38554,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 258
+            "line": 259
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38570,7 +38570,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 250
+            "line": 251
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38586,7 +38586,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 252
+            "line": 253
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38604,7 +38604,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 253
+            "line": 254
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38622,7 +38622,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 281
+            "line": 282
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38640,7 +38640,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 286
+            "line": 287
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38656,7 +38656,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 285
+            "line": 286
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38672,7 +38672,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 287
+            "line": 288
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38690,7 +38690,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 288
+            "line": 289
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38706,7 +38706,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 280
+            "line": 281
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38722,7 +38722,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 282
+            "line": 283
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38740,7 +38740,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 283
+            "line": 284
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38758,7 +38758,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 241
+            "line": 242
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38776,7 +38776,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 246
+            "line": 247
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38792,7 +38792,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 245
+            "line": 246
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38808,7 +38808,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 247
+            "line": 248
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38826,7 +38826,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 248
+            "line": 249
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38842,7 +38842,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 240
+            "line": 241
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38858,7 +38858,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 242
+            "line": 243
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38876,7 +38876,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 243
+            "line": 244
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38894,7 +38894,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 188
+            "line": 189
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38912,7 +38912,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 193
+            "line": 194
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38928,7 +38928,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 192
+            "line": 193
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38944,7 +38944,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 194
+            "line": 195
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38962,7 +38962,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 195
+            "line": 196
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38978,7 +38978,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 187
+            "line": 188
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -38996,7 +38996,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 198
+            "line": 199
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39014,7 +39014,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 203
+            "line": 204
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39030,7 +39030,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 202
+            "line": 203
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39046,7 +39046,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 204
+            "line": 205
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39064,7 +39064,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 205
+            "line": 206
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39080,7 +39080,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 197
+            "line": 198
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39096,7 +39096,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 199
+            "line": 200
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39114,7 +39114,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 200
+            "line": 201
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39130,7 +39130,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 189
+            "line": 190
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39148,7 +39148,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 190
+            "line": 191
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39166,7 +39166,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 72
+            "line": 73
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39184,7 +39184,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 67
+            "line": 68
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39200,7 +39200,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 66
+            "line": 67
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39216,7 +39216,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 68
+            "line": 69
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39234,7 +39234,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 69
+            "line": 70
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39250,7 +39250,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 71
+            "line": 72
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39266,7 +39266,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 73
+            "line": 74
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39284,7 +39284,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 74
+            "line": 75
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39296,13 +39296,13 @@
       "definitions": [
         {
           "name": "--qy-text-display-xl-leading",
-          "value": "calc(20 * var(--qy-fen))",
+          "value": "calc(22 * var(--qy-fen))",
           "references": [
             "--qy-fen"
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 61
+            "line": 62
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39314,11 +39314,11 @@
       "definitions": [
         {
           "name": "--qy-text-display-xl-size",
-          "value": "4rem",
+          "value": "5rem",
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 60
+            "line": 61
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39334,7 +39334,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 62
+            "line": 63
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39352,7 +39352,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 63
+            "line": 64
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39370,7 +39370,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 89
+            "line": 90
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39386,7 +39386,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 88
+            "line": 89
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39402,7 +39402,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 90
+            "line": 91
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39420,7 +39420,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 91
+            "line": 92
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39438,7 +39438,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 173
+            "line": 174
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39456,7 +39456,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 182
+            "line": 183
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39474,7 +39474,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 181
+            "line": 182
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39492,7 +39492,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 183
+            "line": 184
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39510,7 +39510,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 184
+            "line": 185
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39526,7 +39526,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 172
+            "line": 173
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39542,7 +39542,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 174
+            "line": 175
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39560,7 +39560,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 175
+            "line": 176
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39578,7 +39578,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 220
+            "line": 221
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39596,7 +39596,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 228
+            "line": 229
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39612,7 +39612,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 227
+            "line": 228
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39628,7 +39628,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 229
+            "line": 230
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39646,7 +39646,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 230
+            "line": 231
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39662,7 +39662,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 219
+            "line": 220
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39678,7 +39678,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 221
+            "line": 222
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39696,7 +39696,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 222
+            "line": 223
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39714,7 +39714,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 234
+            "line": 235
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39730,7 +39730,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 233
+            "line": 234
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39746,7 +39746,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 235
+            "line": 236
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39764,7 +39764,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 236
+            "line": 237
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39782,7 +39782,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 124
+            "line": 125
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39800,7 +39800,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 123
+            "line": 124
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39818,7 +39818,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 125
+            "line": 126
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39836,7 +39836,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 126
+            "line": 127
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39854,7 +39854,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 128
+            "line": 129
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39872,7 +39872,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 127
+            "line": 128
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39890,7 +39890,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 129
+            "line": 130
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39908,7 +39908,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 130
+            "line": 131
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39926,7 +39926,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 132
+            "line": 133
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39944,7 +39944,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 131
+            "line": 132
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39962,7 +39962,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 133
+            "line": 134
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39980,7 +39980,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 134
+            "line": 135
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -39998,7 +39998,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 115
+            "line": 116
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40014,7 +40014,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 114
+            "line": 115
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40032,7 +40032,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 146
+            "line": 147
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40048,7 +40048,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 145
+            "line": 146
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40064,7 +40064,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 147
+            "line": 148
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40082,7 +40082,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 148
+            "line": 149
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40098,7 +40098,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 116
+            "line": 117
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40116,7 +40116,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 117
+            "line": 118
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40134,7 +40134,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 108
+            "line": 109
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40150,7 +40150,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 107
+            "line": 108
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40166,7 +40166,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 109
+            "line": 110
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40184,7 +40184,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 110
+            "line": 111
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40202,7 +40202,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 153
+            "line": 154
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40220,7 +40220,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 158
+            "line": 159
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40236,7 +40236,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 157
+            "line": 158
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40252,7 +40252,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 159
+            "line": 160
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40270,7 +40270,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 160
+            "line": 161
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40286,7 +40286,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 152
+            "line": 153
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40304,7 +40304,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 163
+            "line": 164
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40322,7 +40322,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 168
+            "line": 169
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40338,7 +40338,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 167
+            "line": 168
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40354,7 +40354,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 169
+            "line": 170
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40372,7 +40372,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 170
+            "line": 171
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40388,7 +40388,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 162
+            "line": 163
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40404,7 +40404,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 164
+            "line": 165
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40422,7 +40422,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 165
+            "line": 166
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40438,7 +40438,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 154
+            "line": 155
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40456,7 +40456,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 155
+            "line": 156
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40474,7 +40474,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 78
+            "line": 79
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40490,7 +40490,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 77
+            "line": 78
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40506,7 +40506,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 79
+            "line": 80
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40524,7 +40524,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 80
+            "line": 81
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40540,7 +40540,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 353
+            "line": 354
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40576,7 +40576,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 402
+            "line": 403
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40646,7 +40646,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 563
+            "line": 564
           },
           "context": "@layer base {\n  :root",
           "complete": true
@@ -40662,7 +40662,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/components.css",
-            "line": 482
+            "line": 483
           },
           "context": "@layer base {\n  :root",
           "complete": true
