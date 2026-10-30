@@ -1,43 +1,68 @@
 /*
- * 首页（2026-10-30 第二稿）。
+ * 首页（2026-10-30 第三稿「墨阶」）。
  *
- * 一页四段，每段的形式随内容换（避免同一骨架重复四次）：
- *   首屏   总纲一行，全页唯一的大字；其下是定位，动作紧随其后。
- *   窗口   示例应用本身，全宽；全页唯一有面、有边界的东西。
- *   总纲   三段宣言式正文（title 档），出处是页边注：正文 36 材，注 14 材，栏距 4 材。
- *   十五法 两张表：design.md 原本就是表；名、决定、出处三列，名列 10 材、出处列 18 材。
- *   开始   一行：标题、命令、链接。
- * 疏密有致：首屏到窗口 2 材（窗口是首屏的延续），窗口之后各段 6 材（3 × 章内间隔），段内用库的关系间距。
- * 文字逐字取自 design.md；字阶全部是库的命名档。上列材数都是首页的预设。
- * 不用的东西：卡片网格、色块、入场动效、阴影、徽标式的引号与编号——它们不承载这一页的任何事实。
+ * 画面只靠尺度、墨与地：
+ *   海报   第一屏（视口高减页头，至多 40 材）。总纲三句细字重 128px，三行依次焦 88、浓 66、重 50；
+ *          说明与动作一小块，落在右下，与末行同一条下缘。大块与小块之比约 8:1。
+ *   翻转   示例一段换成相反明暗的整幅底（浅色页里是深地），上下各 8 材。
+ *   总纲   三条名与释义：名列 16 材，释义 36 材以内。
+ *   开始   大号安装命令。
+ * 段间 8 材（taste 的 120–240 之间），段内用库的关系间距。上列材数、海报占满一屏、深地与名列宽都是首页预设。
+ * 不用：卡片、色块、阴影、渐变、入场与滚动动效、编号、眉题。
  */
 .home {
-  --home-chapter-gap: calc(3 * var(--qy-section-gap));
+  --home-gap: calc(8 * var(--qy-cai));
   color: var(--qy-foreground);
   outline: none;
-  padding-block: calc(5 * var(--qy-cai)) var(--home-chapter-gap);
   text-spacing-trim: trim-start;
 }
-:where(.home) :where(h1, h2, h3, p, ul, li) { margin: 0; padding: 0; }
+:where(.home) :where(h1, h2, h3, p, dl, dt, dd, ul, li) { margin: 0; padding: 0; }
 .home p { text-wrap: pretty; }
+/* 章题与海报同一种声音：常规字重。粗字放在 40px 的汉字上显得笨重，层级已经由尺度给出。 */
+.home h2 { font-weight: var(--qy-weight-regular); }
 
-/* ─── 首屏 ─────────────────────────────────────────────── */
-/* 总纲一行；放不下时在逗号处整句折行，句子不从中间断开。 */
-.home-motto { display: flex; flex-wrap: wrap; column-gap: 0; }
-.home-motto span { white-space: nowrap; }
-:lang(en) .home-motto { column-gap: 0.28em; }
-/* 定位与动作是一组：动作紧跟定位之下，与总纲同一条左缘；右侧留白，让窗口接住视线。 */
-.home-intro { display: grid; justify-items: start; gap: var(--qy-field-group-gap); margin-top: var(--qy-section-gap); }
-.home-intro > div:first-child { max-inline-size: var(--qy-prose-measure); }
-.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); }
+/* ─── 海报 ─────────────────────────────────────────────── */
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: var(--home-gap);
+  row-gap: var(--qy-section-gap);
+  min-block-size: min(calc(100svh - var(--docs-header-height)), calc(40 * var(--qy-cai)));
+  padding-block: calc(5 * var(--qy-cai)) calc(4 * var(--qy-cai));
+}
+/* 大块压住左上，小块在右下应答：总纲靠上，说明靠下。 */
+.home-motto { align-self: start; }
+.home-motto span { display: block; white-space: nowrap; }
+/* 墨分五色：三句的先后用墨的浓淡表达。字是不透明的墨与纸调和（与库的文字色同一写法），任何底上读出来都是同一级。 */
+.home-motto span:nth-child(1) { color: var(--qy-foreground); }
+.home-motto span:nth-child(2) { color: var(--qy-foreground-muted); }
+.home-motto span:nth-child(3) { color: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), var(--qy-paper)); }
+/* 右下的一小块：下缘与总纲末行的字身下缘对齐（减去末行行高多出的半个行距）。 */
+.home-intro {
+  display: grid;
+  justify-items: start;
+  gap: var(--qy-fen);
+  max-inline-size: calc(20 * var(--qy-cai));
+  padding-block-end: calc((var(--qy-text-display-xl-leading) - var(--qy-text-display-xl-size)) / 2);
+}
+.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); margin-top: var(--qy-field-group-gap); }
+/* 英文一句是三到四个词，按汉字的字身排会折成五行：取 display-xl 的 0.6（约 77px），每句仍占一行。 */
+:lang(en) .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.6); line-height: calc(var(--qy-text-display-xl-leading) * 0.6); }
 
-/* ─── 产品窗口 ─────────────────────────────────────────── */
-/* 一道线围出窗口；顶栏与框之间是同一道线，不另加底色（骨法用笔：一个范围一种边界）。
- * 框内圆角由外框裁出：外框 overflow 隐藏，内外同心。 */
+/* ─── 翻转的地 ─────────────────────────────────────────── */
+/* 这一段是相反明暗的根（.light / .dark），底与字读这个根上的 token。整幅铺满，内容仍在站框里。 */
+.home-field {
+  padding-block: var(--home-gap);
+  background: var(--qy-background);
+  color: var(--qy-foreground);
+}
+.home-field-head { display: grid; gap: var(--qy-field-gap); max-inline-size: var(--qy-prose-measure); margin-bottom: var(--qy-section-gap); }
+
+/* 窗口：一道线围出，顶栏与框之间同一道线；框内圆角由外框裁出。 */
 .home-window {
   display: grid;
-  grid-template-rows: auto calc(36 * var(--qy-cai)) auto;
-  margin-top: calc(2 * var(--qy-section-gap));
+  grid-template-rows: auto calc(38 * var(--qy-cai)) auto;
   overflow: hidden;
   border: 1px solid var(--qy-border);
   border-radius: var(--qy-radius-panel);
@@ -49,7 +74,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--qy-field-gap) var(--qy-field-group-gap);
-  padding: var(--qy-field-gap) var(--qy-field-gap) var(--qy-field-gap) var(--qy-field-gap);
+  padding: var(--qy-field-gap);
   border-bottom: 1px solid var(--qy-border);
 }
 .home-window-axes { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); }
@@ -69,81 +94,46 @@
 }
 
 /* ─── 总纲 ─────────────────────────────────────────────── */
-/* 每条一行网格：正文 36 材在起始侧，页边注 14 材与正文首行同一条上缘。条与条之间一个章内间隔。 */
-.home-principles { display: grid; gap: var(--qy-section-gap); margin-top: var(--home-chapter-gap); }
+.home-principles { padding-block-start: var(--home-gap); }
+.home-principle-list { display: grid; gap: calc(3 * var(--qy-cai)); margin-top: var(--qy-section-gap); }
 .home-principle {
   display: grid;
-  grid-template-columns: minmax(0, calc(36 * var(--qy-cai))) minmax(0, calc(14 * var(--qy-cai)));
+  grid-template-columns: minmax(0, calc(16 * var(--qy-cai))) minmax(0, calc(36 * var(--qy-cai)));
   column-gap: calc(4 * var(--qy-cai));
-  align-items: start;
+  align-items: baseline;
 }
-.home-principle-text {
-  font-size: var(--qy-text-title-size);
-  line-height: var(--qy-text-title-leading);
+.home-principle dt {
+  font-size: var(--qy-text-display-size);
+  line-height: var(--qy-text-display-leading);
   font-weight: var(--qy-weight-regular);
-  color: var(--qy-foreground-muted);
 }
-.home-principle-text strong { font-weight: var(--qy-text-title-weight); color: var(--qy-foreground); }
-.home-principle-gap { display: inline-block; inline-size: 0.5em; }
-/* 页边注从正文首行的行中线开始：注的行高小于正文，下移二者行高之差的一半。 */
-.home-principle-note {
-  padding-top: calc((var(--qy-text-title-leading) - var(--qy-text-support-leading)) / 2);
-  font-size: var(--qy-text-support-size);
-  line-height: var(--qy-text-support-leading);
-  color: var(--qy-foreground-muted);
-}
-.home-aside { margin-inline-start: var(--qy-field-gap); font-size: var(--qy-text-support-size); font-weight: var(--qy-weight-regular); color: var(--qy-foreground-muted); }
-
-/* ─── 十五法 ───────────────────────────────────────────── */
-.home-methods { display: grid; gap: var(--qy-section-gap); margin-top: var(--home-chapter-gap); }
-.home-methods-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--qy-field-gap) var(--qy-field-group-gap); }
-/* 表不另成一条边：容器向两侧伸出一个面板内缘，首列文字与页面其余文字落在同一条左缘上，表头的底色向外伸出（与 Item 同一规则）。 */
-.home-table { margin-inline: calc(-1 * var(--qy-panel-padding)); }
-.home-table table { table-layout: fixed; inline-size: 100%; }
-.home-col-name { inline-size: calc(10 * var(--qy-cai)); }
-.home-col-source { inline-size: calc(18 * var(--qy-cai)); }
-/* 表题是这张表的名字与一句角色：名在起始侧，角色紧随，同一基线。 */
-.home-table-caption { caption-side: top; text-align: start; padding-block-end: var(--qy-field-gap); }
-.home-table-title { font-size: var(--qy-text-heading-size); line-height: var(--qy-text-heading-leading); font-weight: var(--qy-text-heading-weight); color: var(--qy-foreground); }
-.home-table-role { margin-inline-start: var(--qy-field-gap); font-size: var(--qy-text-support-size); color: var(--qy-foreground-muted); }
-.home-table th[scope="row"], .home-table td { vertical-align: top; }
-.home-method-decision { white-space: normal; }
-.home-method-source { white-space: normal; color: var(--qy-foreground-muted); }
-/* 方法名是名录，不是行文链接：平时无下划线，悬停（有悬停能力的指针）与键盘聚焦时显出。 */
-.home-method-name {
-  color: inherit;
-  text-decoration: underline 1px transparent;
-  text-underline-offset: 0.2em;
-  border-radius: var(--qy-radius-xs);
-  outline: none;
-  transition: text-decoration-color var(--qy-duration-fast) var(--qy-ease-out);
-}
-@media (hover: hover) { .home-method-name:hover { text-decoration-color: currentColor; } }
-.home-method-name:focus-visible { text-decoration-color: currentColor; box-shadow: inset 0 calc(-1 * var(--qy-focus-quiet-width)) 0 var(--qy-ring); }
+.home-principle dd { display: grid; gap: var(--qy-field-gap); }
+.home-principle-text { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
+.home-principle-source { font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
+.home-aside { display: block; font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); font-weight: var(--qy-weight-regular); color: var(--qy-foreground-muted); }
+.home-more { display: inline-block; margin-top: var(--qy-section-gap); font-size: var(--qy-text-reading-size); }
 
 /* ─── 开始使用 ─────────────────────────────────────────── */
-.home-start {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--qy-field-group-gap) var(--qy-section-gap);
-  margin-top: var(--home-chapter-gap);
-}
-.home-install { flex: 0 1 calc(20 * var(--qy-cai)); min-inline-size: 0; }
+.home-start { display: grid; justify-items: start; gap: var(--qy-section-gap); padding-block: var(--home-gap); }
+/* 命令是这一段的画面：代码字放大到 title 档；仍是库的 CodeBlock（复制、可访问名称不变）。 */
+.home-install { inline-size: min(100%, calc(32 * var(--qy-cai))); }
+.home-install pre, .home-install code { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); }
 .home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap) var(--qy-field-group-gap); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
 
 /* ─── 窄桌面与窄屏 ─────────────────────────────────────── */
-@media (width < 72rem) {
+/* 两栏要放得下：一句总纲 640 + 栏距 160 + 说明 400 + 两侧留白 80 = 1280px（80rem）。不足时上下排。 */
+@media (width < 80rem) {
+  .home-hero { grid-template-columns: minmax(0, 1fr); align-items: start; min-block-size: 0; padding-block: calc(5 * var(--qy-cai)) var(--home-gap); }
+  .home-intro { padding-block-end: 0; }
   .home-principle { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-field-gap); }
-  .home-principle-note { padding-top: 0; }
-  .home-col-source { inline-size: calc(12 * var(--qy-cai)); }
 }
 @media (width < 48rem) {
-  .home { padding-top: calc(3 * var(--qy-cai)); }
-  .home-motto { font-size: var(--qy-text-display-lg-size); line-height: var(--qy-text-display-lg-leading); }
+  .home { --home-gap: calc(5 * var(--qy-cai)); }
+  /* 一句五字要放进窄屏（390 宽的版心 310px）：字身取 display-xl 的 0.45（约 58px，五字 288px），行高同比。 */
+  .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.45); line-height: calc(var(--qy-text-display-xl-leading) * 0.45); }
+  :lang(en) .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.3); line-height: calc(var(--qy-text-display-xl-leading) * 0.3); }
+  :lang(en) .home-motto span { white-space: normal; }
+  .home-hero { padding-block-start: calc(3 * var(--qy-cai)); }
   .home-window { grid-template-rows: auto calc(30 * var(--qy-cai)) auto; }
-  /* 三列放不下：出处列收起，出处并入决定之下。 */
-  .home-col-source { inline-size: 0; }
-  .home-col-name { inline-size: calc(6 * var(--qy-cai)); }
-  .home-table thead th:last-child, .home-method-source { display: none; }
+  .home-install pre, .home-install code { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
 }

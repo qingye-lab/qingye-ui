@@ -95,6 +95,7 @@
 
   --font-sans: var(--qy-font-sans);
   --font-mono: var(--qy-font-mono);
+  --font-weight-light: var(--qy-weight-light);
   --font-weight-normal: var(--qy-weight-regular);
   --font-weight-medium: var(--qy-weight-medium);
   --font-weight-semibold: var(--qy-weight-semibold);

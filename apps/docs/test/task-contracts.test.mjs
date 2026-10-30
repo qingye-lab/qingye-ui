@@ -21,30 +21,22 @@ test("search uses actual content identities, ranks component names, and requires
   assert.equal(ranked[0].entry.id,"/docs/components/input-group");
   assert.equal(fixture.score(ranked[0].entry,"input qqzznonexistent"),0);
 });
-test("homepage: one-line motto, the live example window with the three theme axes, the principles and both method tables quoted from design.md, and the way to start",async () => {
+test("homepage: the motto poster, the live example window on an inverse field, the principles quoted from design.md, and the way to start",async () => {
   const { readFileSync } = await import("node:fs");
   const guide = readFileSync(new URL("../../../design.md",import.meta.url),"utf8").replaceAll("*","");
   for (const locale of ["en","zh"]) {
     const markup = fixture.homeMarkup(locale); const prefix = locale === "en" ? "/en" : "";
     const unescape = text => text.replaceAll("&quot;","\"").replaceAll("&#x27;","'").replaceAll("&amp;","&");
     assert.equal([...markup.matchAll(/<h1[ >]/g)].length,1);
-    // 首屏、产品窗口、总纲、十五法、开始使用，各是一个有名字的区块。
+    // 海报、翻转的地（示例窗口在其中）、总纲、开始使用，各是一个有名字的区块；窗口自身也是一块。
     assert.equal([...markup.matchAll(/<section[ >]/g)].length,5);
+    assert.match(markup,/class="home-field (dark|light)"/);
     for (const path of ["/docs/installation","/docs/design-philosophy","/docs/ai","/docs/components","/examples/workspace"]) assert.ok(markup.includes(`href="${prefix}${path}"`),path);
-    // 产品窗口是示例应用本身（裸框路由），三轴是三个分段控件。
     // 裸框路由不在页面根路径之列，与语言无关（示例应用只有中文）。
     assert.ok(markup.includes(`src="/frame/examples/workspace?scheme=`),"example window iframe");
     assert.equal([...markup.matchAll(/data-slot="segmented-control"/g)].length,4);
-    // 十五法：两张表依次 6 与 9 行，方法名链接到理念页里各自的锚点；决定与出处逐字取自 design.md。
-    const anchors = [...markup.matchAll(/href="[^"]*\/docs\/design-philosophy#method-(\d+)"/g)].map(match => Number(match[1]));
-    assert.deepEqual(anchors,Array.from({ length:15 },(_,index) => index + 1));
-    const tables = [...markup.matchAll(/<tbody[\s\S]*?<\/tbody>/g)].map(match => match[0]);
-    assert.deepEqual(tables.map(table => [...table.matchAll(/<tr[ >]/g)].length),[6,9]);
-    const decisions = [...markup.matchAll(/class="[^"]*\bhome-method-decision\b[^"]*">([^<]+)</g)].map(match => unescape(match[1]));
-    assert.equal(decisions.length,15);
-    for (const decision of decisions) assert.ok(guide.includes(decision),`decision must quote design.md: ${decision}`);
-    // 总纲三条的释义逐字取自 design.md 的总纲表。
-    const meanings = [...markup.matchAll(/class="home-principle-text">[\s\S]*?<\/strong>(?:<span[^>]*>[^<]*<\/span>)*<span[^>]*> <\/span>([^<]+)/g)].map(match => unescape(match[1]));
+    // 总纲三条：名与释义逐字取自 design.md 的总纲表。
+    const meanings = [...markup.matchAll(/class="home-principle-text">([^<]+)</g)].map(match => unescape(match[1]));
     assert.equal(meanings.length,3);
     for (const meaning of meanings) assert.ok(guide.includes(meaning.replace(/[。.]$/,"")),`principle must quote design.md: ${meaning}`);
     const lede = unescape(markup.match(/class="[^"]*\bhome-intro-lede\b[^"]*">([^<]+)</)?.[1] ?? ""); assert.ok(lede && guide.includes(lede.replace(/[。.]$/,"")),`positioning must quote design.md: ${lede}`);
