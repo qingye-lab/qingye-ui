@@ -4,7 +4,7 @@
  * 画面只靠尺度、墨与地：
  *   海报   第一屏（视口高减页头，至多 40 材）。总纲三句细字重 128px，三行依次焦 88、浓 66、重 50；
  *          说明与动作一小块，落在右下，与末行同一条下缘。大块与小块之比约 8:1。
- *   翻转   示例一段换成相反明暗的整幅底（浅色页里是深地），上下各 8 材。
+ *   示例   示例一段整幅铺一层清染（与站点同一种明暗，不翻转：窗口里的应用跟随站点明暗，翻转的底会让它像一张贴上去的截图），上下各 8 材。
  *   总纲   三条名与释义：名列 16 材，释义 36 材以内。
  *   开始   大号安装命令。
  * 段间 8 材（taste 的 120–240 之间），段内用库的关系间距。上列材数、海报占满一屏、深地与名列宽都是首页预设。
@@ -50,12 +50,11 @@
 /* 英文一句是三到四个词，按汉字的字身排会折成五行：取 display-xl 的 0.6（约 77px），每句仍占一行。 */
 :lang(en) .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.6); line-height: calc(var(--qy-text-display-xl-leading) * 0.6); }
 
-/* ─── 翻转的地 ─────────────────────────────────────────── */
-/* 这一段是相反明暗的根（.light / .dark），底与字读这个根上的 token。整幅铺满，内容仍在站框里。 */
+/* ─── 示例 ─────────────────────────────────────────────── */
+/* 整幅一层清染（内嵌承载面，透明叠在页面底上）：用面的一级分出这一段，不画线、不翻转明暗。内容仍在站框里。 */
 .home-field {
   padding-block: var(--home-gap);
-  background: var(--qy-background);
-  color: var(--qy-foreground);
+  background: var(--qy-surface-inset);
 }
 .home-field-head { display: grid; gap: var(--qy-field-gap); max-inline-size: var(--qy-prose-measure); margin-bottom: var(--qy-section-gap); }
 

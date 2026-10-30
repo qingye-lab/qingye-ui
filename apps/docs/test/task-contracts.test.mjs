@@ -21,7 +21,7 @@ test("search uses actual content identities, ranks component names, and requires
   assert.equal(ranked[0].entry.id,"/docs/components/input-group");
   assert.equal(fixture.score(ranked[0].entry,"input qqzznonexistent"),0);
 });
-test("homepage: the motto poster, the live example window on an inverse field, the principles quoted from design.md, and the way to start",async () => {
+test("homepage: the motto poster, the live example window following the site scheme, the principles quoted from design.md, and the way to start",async () => {
   const { readFileSync } = await import("node:fs");
   const guide = readFileSync(new URL("../../../design.md",import.meta.url),"utf8").replaceAll("*","");
   for (const locale of ["en","zh"]) {
@@ -30,11 +30,11 @@ test("homepage: the motto poster, the live example window on an inverse field, t
     assert.equal([...markup.matchAll(/<h1[ >]/g)].length,1);
     // 海报、翻转的地（示例窗口在其中）、总纲、开始使用，各是一个有名字的区块；窗口自身也是一块。
     assert.equal([...markup.matchAll(/<section[ >]/g)].length,5);
-    assert.match(markup,/class="home-field (dark|light)"/);
+    assert.match(markup,/class="home-field"/); assert.doesNotMatch(markup,/aria-label="(明暗|Scheme)"/);
     for (const path of ["/docs/installation","/docs/design-philosophy","/docs/ai","/docs/components","/examples/workspace"]) assert.ok(markup.includes(`href="${prefix}${path}"`),path);
     // 裸框路由不在页面根路径之列，与语言无关（示例应用只有中文）。
-    assert.ok(markup.includes(`src="/frame/examples/workspace?scheme=`),"example window iframe");
-    assert.equal([...markup.matchAll(/data-slot="segmented-control"/g)].length,4);
+    assert.ok(markup.includes(`src="/frame/examples/workspace?density=`),"example window iframe");
+    assert.equal([...markup.matchAll(/data-slot="segmented-control"/g)].length,3);
     // 总纲三条：名与释义逐字取自 design.md 的总纲表。
     const meanings = [...markup.matchAll(/class="home-principle-text">([^<]+)</g)].map(match => unescape(match[1]));
     assert.equal(meanings.length,3);

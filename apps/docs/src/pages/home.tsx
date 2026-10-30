@@ -1,7 +1,6 @@
 import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { CodeBlock } from "@qingye_lab/ui/components/code-block";
 import { linkClassName } from "@qingye_lab/ui/components/link";
-import { useTheme } from "@qingye_lab/ui/components/theme-provider";
 import { Heading, Text } from "@qingye_lab/ui/components/typography";
 import { Link } from "@/components/locale-link";
 import { useDocumentTitle } from "@/components/prose";
@@ -16,7 +15,7 @@ import "./home.css";
  * 首页（2026-10-30 第三稿「墨阶」）。画面只靠三样东西：尺度的反差、墨的浓淡、地的翻转；不加任何装饰。
  *   一  海报：总纲三句上下排，细字重、海报尺度，三行依次取焦、浓、重三级墨——次序就是「本、法、度」的先后（墨分五色）。
  *       说明与动作是一小块，落在右下、与末行同一条下缘：大块在左上，小块在右下，对角相应（经营位置）。
- *   二  翻转的地：示例窗口所在的一整段换成相反的明暗（浅色页里是深地），应用在自己的地上。
+ *   二  示例：正在运行的示例应用（不是截图），所在一整段铺一层清染，与站点同一种明暗。
  *   三  总纲：三条，名在左、释义在右，逐字取自 design.md 总纲表。
  *   四  开始：一行大号的安装命令。
  * 十五法的表不在首页：它们是文档，在理念页。
@@ -32,10 +31,7 @@ export default function HomePage() {
   const locale = useDocsLocale();
   const en = locale === "en";
   const t = (zh: string, english: string) => (en ? english : zh);
-  const { resolvedTheme } = useTheme();
   const principles = guidePrinciples(locale);
-  // 翻转的地：与页面相反的明暗根。库的语义 token 在每个明暗根上重算，这一段里的组件随之成立。
-  const inverse = resolvedTheme === "dark" ? "light" : "dark";
 
   return <>
     <main className="home" id="main" tabIndex={-1}>
@@ -53,11 +49,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section aria-labelledby="home-examples" className={`home-field ${inverse}`}>
+      <section aria-labelledby="home-examples" className="home-field">
         <div className="site-frame">
           <div className="home-field-head">
             <Heading id="home-examples" step="display-lg">{t("只用这套组件搭成", "Built only from these components")}</Heading>
-            <Text className="text-muted-foreground" step="reading">{t("换明暗、密度与品牌，整个应用一起改变；里面每个控件都可以操作。", "Change scheme, density and brand and the whole app follows; every control inside works.")}</Text>
+            <Text className="text-muted-foreground" step="reading">{t("这是正在运行的应用，不是截图：每个控件都可以操作，明暗跟随本站，密度与品牌可以在窗口上试。", "This is the running app, not a screenshot: every control works, it follows the site's light or dark mode, and you can try density and brand on the window.")}</Text>
           </div>
           <HomeWindow />
         </div>

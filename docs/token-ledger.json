@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-30T11:33:02.581Z",
-  "revision": "1f28d5f4b398923d4a3f396386196b6598796d71",
+  "generatedAt": "2026-10-30T11:45:28.206Z",
+  "revision": "51fdbfcb1312c1ee55e72dca22646b3679d1e2cb",
   "static": {
     "fingerprint": {
-      "sha256": "49548c51213cc154a6c4a4e49300fab8966f2b3f6ede71ea9c3ca77667fb8ac9",
+      "sha256": "20f4276360ebeaa67767024bcec1d977d9dc3f9997ada4069e870254170482b7",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2081,7 +2081,7 @@
         },
         {
           "path": "apps/docs/src/examples/gallery.tsx",
-          "sha256": "68eabef7965c803c0b8e2146707d4923138ac038f5d52d6be94616fd96a65647"
+          "sha256": "7a06cefd61011c2995b9838a74279b0903321e8ec606a2b74d7a56dc8525f213"
         },
         {
           "path": "apps/docs/src/examples/list.ts",
@@ -2129,11 +2129,11 @@
         },
         {
           "path": "apps/docs/src/index.css",
-          "sha256": "5e2d551b94a54b0327653841237b6fffdc3d7a2183120639be12dc21b62becca"
+          "sha256": "110c73719d86a786c47152921462cd04255e95e83e8951bf64fb9948f89bae73"
         },
         {
           "path": "apps/docs/src/lib/axes.ts",
-          "sha256": "0a26efcad58afc678fa2db73e787dcec7bd023f3ebca0cbdabf8ff0839514298"
+          "sha256": "08bb56c2bb3219f58974dda90e6d7fbb0fe0f7caa80aafa9e043a57e17089008"
         },
         {
           "path": "apps/docs/src/lib/design-entry.ts",
@@ -2273,15 +2273,15 @@
         },
         {
           "path": "apps/docs/src/pages/home-window.tsx",
-          "sha256": "6db4955c16a34e7f9baf63a123d008d3550d4dc6021312208aa7f1fb4af17c14"
+          "sha256": "7333b090b575cdb7045726ae9f5343ee0345738e5743ffedb28bae5466fc693d"
         },
         {
           "path": "apps/docs/src/pages/home.css",
-          "sha256": "81aae9a8d80a7ceedda4847ede8510419eaeb0e0332a706d28912544bdb37200"
+          "sha256": "4d7dc8b8f15179ed2fe6f32ccbfa1fc7161a44713dd6c4ff6f9120d16e7a6179"
         },
         {
           "path": "apps/docs/src/pages/home.tsx",
-          "sha256": "4184ba7ad66c729a5117e8e3291b53c671a287cbd711b6dc32b237b39f32b7d2"
+          "sha256": "a762f02ce13da85a98e5da2f88aed9f37a349d734c5183783d547b7ebd25d77d"
         },
         {
           "path": "apps/docs/src/pages/not-found.tsx",

@@ -20,20 +20,33 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
 }
 
 /*
- * 本站的品牌：青（2026-10-30，取自「青野」的青）。品牌强调色如一方印，少而明确（design.md「墨分五色」）：
- * 只覆写 --qy-primary 与其前景，读它的部位（实心按钮、选中标记、站标的点）一起换色，其余仍是五级墨。
- *   取值   浅色 oklch(0.48 0.085 200)，白字其上 6.2:1；深色 oklch(0.78 0.09 195)，深前景其上 9.1:1、对深色底纸 9.6:1。
- *          色相与明度是预设；对比度按 sRGB 换算核对（首页台上的「青」与此同值）。
- *   入口   这两段；悬停与按下由库从 --qy-primary 推出，不另写。
+ * 品牌预设（2026-10-30）。本站的品牌是青（取自「青野」）；赭、胭只在首页的示例窗口里试用。
+ * 品牌强调色如一方印，少而明确（design.md「墨分五色」）：只覆写 --qy-primary 与其前景，悬停与按下由库推出。
+ *   取值   每个预设成对给浅色与深色；浅色白字其上 ≥ 4.5:1，深色深前景其上 ≥ 4.5:1（青：6.2 / 9.1）。色相与明度是预设。
+ *   入口   这里是唯一来源：本站品牌、示例窗口的试用（html[data-try-brand]）与窗口顶栏的色点都读这些变量，
+ *          明暗切换时由 CSS 自己换到深色那一组，不靠脚本写值。
  */
-html[data-brand="qingye"] {
-  --qy-primary: oklch(0.48 0.085 200);
-  --qy-primary-foreground: oklch(0.985 0 0);
+:root {
+  --qy-try-qing: oklch(0.48 0.085 200);
+  --qy-try-qing-on: oklch(0.985 0 0);
+  --qy-try-ochre: oklch(0.52 0.13 50);
+  --qy-try-ochre-on: oklch(0.985 0 0);
+  --qy-try-rose: oklch(0.52 0.18 12);
+  --qy-try-rose-on: oklch(0.985 0 0);
 }
-html[data-brand="qingye"]:is(.dark, [data-theme="dark"]) {
-  --qy-primary: oklch(0.78 0.09 195);
-  --qy-primary-foreground: oklch(0.21 0.03 200);
+:root:is(.dark, [data-theme="dark"]) {
+  --qy-try-qing: oklch(0.78 0.09 195);
+  --qy-try-qing-on: oklch(0.21 0.03 200);
+  --qy-try-ochre: oklch(0.77 0.12 65);
+  --qy-try-ochre-on: oklch(0.23 0.04 55);
+  --qy-try-rose: oklch(0.74 0.14 12);
+  --qy-try-rose-on: oklch(0.22 0.05 12);
 }
+html[data-brand="qingye"] { --qy-primary: var(--qy-try-qing); --qy-primary-foreground: var(--qy-try-qing-on); }
+/* 示例里试用别的品牌：写在框内文档的根上（lib/axes.ts）。「墨」是库的默认：实心即焦墨。 */
+html[data-try-brand="ink"] { --qy-primary: var(--qy-foreground); --qy-primary-foreground: var(--qy-paper); }
+html[data-try-brand="ochre"] { --qy-primary: var(--qy-try-ochre); --qy-primary-foreground: var(--qy-try-ochre-on); }
+html[data-try-brand="rose"] { --qy-primary: var(--qy-try-rose); --qy-primary-foreground: var(--qy-try-rose-on); }
 
 :root {
   /* Site chrome. */

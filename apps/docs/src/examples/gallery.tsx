@@ -113,22 +113,19 @@ export default function ExamplesGallery() {
 }
 
 /**
- * 裸框：只有示例本身，供总览的缩略与首页的产品窗口使用。
- * 地址里的 scheme / density / brand 是初值；同源的父页面可以用 postMessage 改三轴，不必重载。
- * 写在下一帧：ThemeProvider 在挂载时按存储写一次明暗，三轴要在它之后。
+ * 裸框：只有示例本身，供总览的缩略与首页的示例窗口使用。明暗由框内的 ThemeProvider 跟随站点（同一份存储）；
+ * 地址里的 density / brand 是初值，同源的父页面可以用 postMessage 再改，不必重载。
  */
 export function ExampleFrame() {
   useEffect(() => {
-    const initial = axesFromSearch(window.location.search);
     const root = document.documentElement;
-    const apply = (axes: Partial<Axes>) => applyAxes(root, { scheme: root.classList.contains("dark") ? "dark" : "light", density: "default", brand: "qing", ...axes });
-    const frame = Object.keys(initial).length ? requestAnimationFrame(() => apply(initial)) : 0;
+    applyAxes(root, axesFromSearch(window.location.search));
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.data?.type !== AXES_MESSAGE) return;
-      apply(event.data.axes as Partial<Axes>);
+      applyAxes(root, event.data.axes as Partial<Axes>);
     };
     window.addEventListener("message", onMessage);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener("message", onMessage); };
+    return () => window.removeEventListener("message", onMessage);
   }, []);
   return <div className="h-dvh" data-example-bare><ExampleRoutes /></div>;
 }
