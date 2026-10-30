@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-30T08:41:15.844Z",
-  "revision": "0ee7029e577bed35dd8d438aabea5e529805889f",
+  "generatedAt": "2026-10-30T10:16:47.354Z",
+  "revision": "df67f24714b577a17c89a4fbed14cbb41ee48ddc",
   "fingerprint": {
     "sha256": "b0d754fbd26133b2ae64266d6face4da6399726d41c9cad1b17d18237c791729",
     "inputs": [
@@ -998,7 +998,7 @@
   "counts": {
     "components": 102,
     "catalog": 102,
-    "dist": 95,
+    "dist": 102,
     "local": 102
   },
   "buildArtifacts": {
@@ -5133,9 +5133,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -6980,9 +6980,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -8209,9 +8209,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -13325,9 +13325,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -15312,9 +15312,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -22097,9 +22097,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -29078,9 +29078,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -31620,9 +31620,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",

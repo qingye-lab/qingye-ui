@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-30T08:41:11.985Z",
-  "revision": "0ee7029e577bed35dd8d438aabea5e529805889f",
+  "generatedAt": "2026-10-30T10:16:44.977Z",
+  "revision": "df67f24714b577a17c89a4fbed14cbb41ee48ddc",
   "static": {
     "fingerprint": {
-      "sha256": "ca35f98ef4b1e6ca141b1a3c1e394591f15717ef2631c8c556dc0ecb1f43db74",
+      "sha256": "b0eacdf0314a9c040f4ab786735cc3c123899a3f396aeacb8bbe962b65880b86",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -85,7 +85,7 @@
         },
         {
           "path": "apps/docs/src/components/search-dialog.tsx",
-          "sha256": "935cdd269274e8fcde72beedf2696d69a425dc80ef81a958f416d17298c0e2bd"
+          "sha256": "338f9026fe307ea9e908dc8fbd75a621b86701d27809b4c6f9ac9e9a13da8864"
         },
         {
           "path": "apps/docs/src/components/search.tsx",
@@ -2101,15 +2101,15 @@
         },
         {
           "path": "apps/docs/src/examples/workspace/overview.tsx",
-          "sha256": "50ac2e1a7474c4faf515af1a675017431de4b23876e82831876110b16cf99666"
+          "sha256": "c4a1463dbff061f8fa76b59aaff43e8243e41242d0ee4dea8aa6874990671686"
         },
         {
           "path": "apps/docs/src/examples/workspace/settings.tsx",
-          "sha256": "0a53da39d25b726358e07967c2cd5e35ca8d7e7e206b8fc7385906d207d79a1c"
+          "sha256": "cf727140ec7d9b69aa0dd48432e2871afc29448f2b34e3da8d97505e4d205e04"
         },
         {
           "path": "apps/docs/src/examples/workspace/shell.tsx",
-          "sha256": "8d05c08e35bcf9d0ac84627c1009526a43a78a97423963378dad1a25cc03ef7c"
+          "sha256": "45dde612f80d3610351dc10ffbe37a936b27c6a172af34093182bd7659a549a3"
         },
         {
           "path": "apps/docs/src/examples/workspace/status.ts",
@@ -2321,7 +2321,7 @@
         },
         {
           "path": "apps/docs/src/pages/review/sections/20-tooltip.tsx",
-          "sha256": "4c13a61d1c21b48bb57c245d3b753cd3c5e0611586588280beb4526808e38efe"
+          "sha256": "76f8e9fd6a49efb04e6e3cee32604f39c35e93fb3df643ca11a77c6990128986"
         },
         {
           "path": "apps/docs/src/pages/review/sections/30-toast.tsx",
@@ -539568,10 +539568,10 @@
     ]
   },
   "runtime": {
-    "fingerprint": "9980ddb0dc267b02d099a20bde83f4b94bf56dbc9b31d4a0c349390310ed2de1",
-    "measuredAt": "2026-10-30T04:37:41.797Z",
+    "fingerprint": "b0eacdf0314a9c040f4ab786735cc3c123899a3f396aeacb8bbe962b65880b86",
+    "measuredAt": "2026-10-30T10:19:31.450Z",
     "browser": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
     },
     "observations": [
@@ -539593,7 +539593,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T04:37:38.803Z",
+        "measuredAt": "2026-10-30T10:18:15.950Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -539608,8 +539608,8 @@
           "properties": {
             "color": "color(srgb 0.119984 0.120006 0.120008)"
           },
-          "token": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
-          "rootToken": "color-mix(in srgb, oklch(0 0 0) 88%, oklch(1 0 0))",
+          "token": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
           "rect": {
             "width": 293,
             "height": 32
@@ -539645,6 +539645,1891 @@
         ]
       },
       {
+        "id": "field-relationship-gap:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "field-relationship-gap",
+        "token": "--qy-field-gap",
+        "sourceComponent": "field",
+        "publicName": "Field",
+        "part": "field",
+        "selector": "[data-demo=\"default\"] [data-slot=\"field\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/field",
+        "override": "17px",
+        "measuredAt": "2026-10-30T10:18:17.392Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "gap": "8px"
+          },
+          "token": "calc(2 * 4px)",
+          "rootToken": "calc(2 * 4px)",
+          "rect": {
+            "width": 320,
+            "height": 88
+          },
+          "tag": "DIV",
+          "slot": "field",
+          "attributes": {
+            "data-slot": "field",
+            "data-orientation": "vertical",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "gap": "17px"
+          },
+          "token": "17px",
+          "rootToken": "17px",
+          "rect": {
+            "width": 320,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "field",
+          "attributes": {
+            "data-slot": "field",
+            "data-orientation": "vertical",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "gap"
+        ]
+      },
+      {
+        "id": "field-group-relationship-gap:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "field-group-relationship-gap",
+        "token": "--qy-field-group-gap",
+        "sourceComponent": "field",
+        "publicName": "Field",
+        "part": "field-group",
+        "selector": "[data-demo=\"group\"] [data-slot=\"field-group\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/field",
+        "override": "37px",
+        "measuredAt": "2026-10-30T10:18:18.805Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "gap": "20px"
+          },
+          "token": "1.25rem",
+          "rootToken": "1.25rem",
+          "rect": {
+            "width": 384,
+            "height": 304
+          },
+          "tag": "DIV",
+          "slot": "field-group",
+          "attributes": {
+            "data-slot": "field-group"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "gap": "37px"
+          },
+          "token": "37px",
+          "rootToken": "37px",
+          "rect": {
+            "width": 384,
+            "height": 372
+          },
+          "tag": "DIV",
+          "slot": "field-group",
+          "attributes": {
+            "data-slot": "field-group"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "gap"
+        ]
+      },
+      {
+        "id": "button-primary:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-variant=\"solid\"][data-tone=\"neutral\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:20.209Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.119984 0.120006 0.120008)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "button-radius:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-radius",
+        "token": "--qy-radius-control",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-size=\"md\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "19px",
+        "measuredAt": "2026-10-30T10:18:21.600Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "10px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "19px"
+          },
+          "token": "19px",
+          "rootToken": "19px",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "button-control:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-control",
+        "token": "--qy-control-md",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-size=\"md\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:18:23.016Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 75,
+            "height": 51
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "input-surface:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-surface",
+        "token": "--qy-surface",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input-control",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input-control\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:24.442Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(100% 0 0)",
+          "rootToken": "oklch(100% 0 0)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "input-control-inner:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-fill-height",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input-control",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input-control\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:18:25.846Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 320,
+            "height": 51
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "input-invalid-border:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-invalid-border",
+        "token": "--qy-danger",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input-control",
+        "selector": "[data-demo=\"states\"] [data-slot=\"field\"][data-invalid] [data-slot=\"input-control\"]",
+        "state": "invalid",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:27.259Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-top-color": "color(srgb 0.849824 0.241791 0.272733)"
+          },
+          "token": "color-mix(in srgb, oklch(63.7% .237 25.331) 75%, oklch(55.6% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(63.7% .237 25.331) 75%, oklch(55.6% 0 0))",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-top-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-top-color"
+        ]
+      },
+      {
+        "id": "dialog-surface:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:28.642Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(100% 0 0)",
+          "rootToken": "oklch(100% 0 0)",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "dialog-radius:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-radius",
+        "token": "--qy-radius-overlay",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:18:30.058Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "14px"
+          },
+          "token": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
+          "rootToken": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "dialog-overlay:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-overlay",
+        "token": "--qy-overlay",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-backdrop",
+        "selector": "[data-slot=\"dialog-backdrop\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:31.466Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0 0 0 / 0.32)"
+          },
+          "token": "oklch(0% 0 0/.32)",
+          "rootToken": "oklch(0% 0 0/.32)",
+          "rect": {
+            "width": 1100,
+            "height": 900
+          },
+          "tag": "DIV",
+          "slot": "dialog-backdrop",
+          "attributes": {
+            "data-open": "",
+            "data-slot": "dialog-backdrop",
+            "aria-hidden": "true",
+            "data-base-ui-inert": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 1100,
+            "height": 900
+          },
+          "tag": "DIV",
+          "slot": "dialog-backdrop",
+          "attributes": {
+            "data-open": "",
+            "data-slot": "dialog-backdrop",
+            "aria-hidden": "true",
+            "data-base-ui-inert": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"]",
+        "state": "open",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:32.874Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(100% 0 0)",
+          "rootToken": "oklch(100% 0 0)",
+          "rect": {
+            "width": 106,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "select-popup",
+          "attributes": {
+            "data-open": "",
+            "data-side": "bottom",
+            "data-align": "start",
+            "data-base-ui-focusable": "",
+            "data-slot": "select-popup"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 106,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "select-popup",
+          "attributes": {
+            "data-open": "",
+            "data-side": "bottom",
+            "data-align": "start",
+            "data-base-ui-focusable": "",
+            "data-slot": "select-popup"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-highlight:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-highlight",
+        "token": "--qy-accent",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-item",
+        "selector": "[data-slot=\"select-item\"][data-highlighted]",
+        "state": "highlighted",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:34.320Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0 0 0 / 0.04)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) calc(8% / 2), transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) calc(8% / 2), transparent)",
+          "rect": {
+            "width": 96,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "select-item",
+          "attributes": {
+            "aria-selected": "false",
+            "data-slot": "select-item",
+            "data-highlighted": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 96,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "select-item",
+          "attributes": {
+            "aria-selected": "false",
+            "data-slot": "select-item",
+            "data-highlighted": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-control:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-trigger",
+        "selector": "[data-demo=\"density\"] [data-slot=\"select-trigger\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:18:35.824Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "min-height": "32px",
+            "height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 106,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "select-trigger",
+          "attributes": {
+            "aria-expanded": "false",
+            "aria-haspopup": "listbox",
+            "data-slot": "select-trigger",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "min-height": "51px",
+            "height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 106,
+            "height": 51
+          },
+          "tag": "BUTTON",
+          "slot": "select-trigger",
+          "attributes": {
+            "aria-expanded": "false",
+            "aria-haspopup": "listbox",
+            "data-slot": "select-trigger",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      },
+      {
+        "id": "card-role-radius:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "card-role-radius",
+        "token": "--qy-radius-panel",
+        "sourceComponent": "card",
+        "publicName": "Card",
+        "part": "card",
+        "selector": "[data-demo=\"basic\"] article[data-slot=\"card\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:18:37.256Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "16px"
+          },
+          "token": "calc(4 * 4px)",
+          "rootToken": "calc(4 * 4px)",
+          "rect": {
+            "width": 384,
+            "height": 114
+          },
+          "tag": "ARTICLE",
+          "slot": "card",
+          "attributes": {
+            "aria-labelledby": "card-note-title",
+            "data-slot": "card"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 384,
+            "height": 114
+          },
+          "tag": "ARTICLE",
+          "slot": "card",
+          "attributes": {
+            "aria-labelledby": "card-note-title",
+            "data-slot": "card"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "panel-padding:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card",
+        "part": "caller-stack",
+        "selector": "[data-demo=\"basic\"] article[data-slot=\"card\"] > [data-slot=\"stack\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-30T10:18:38.648Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "24px",
+            "padding-right": "24px"
+          },
+          "token": "calc(1.25rem + 4px)",
+          "rootToken": "calc(1.25rem + 4px)",
+          "rect": {
+            "width": 382,
+            "height": 112
+          },
+          "tag": "DIV",
+          "slot": "stack",
+          "attributes": {
+            "data-slot": "stack",
+            "data-gap": "panel"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 382,
+            "height": 146
+          },
+          "tag": "DIV",
+          "slot": "stack",
+          "attributes": {
+            "data-slot": "stack",
+            "data-gap": "panel"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-row",
+        "selector": "[data-demo=\"comparison\"] tbody [data-slot=\"table-row\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-30T10:18:40.028Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "calc(calc(1.25rem + 3 * 4px) + 2 * calc(2 * 4px))",
+          "rootToken": "calc(calc(1.25rem + 3 * 4px) + 2 * calc(2 * 4px))",
+          "rect": {
+            "width": 668,
+            "height": 48
+          },
+          "tag": "TR",
+          "slot": "table-row",
+          "attributes": {
+            "data-slot": "table-row"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 668,
+            "height": 67
+          },
+          "tag": "TR",
+          "slot": "table-row",
+          "attributes": {
+            "data-slot": "table-row"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "native-select-control:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "native-select-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "native-select",
+        "publicName": "Native-select",
+        "part": "native-select",
+        "selector": "[data-demo=\"density\"] [data-slot=\"native-select\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/native-select",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:18:41.400Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 127,
+            "height": 32
+          },
+          "tag": "SELECT",
+          "slot": "native-select",
+          "attributes": {
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 127,
+            "height": 51
+          },
+          "tag": "SELECT",
+          "slot": "native-select",
+          "attributes": {
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "input-group-control:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-group-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "input-group",
+        "publicName": "Input-group",
+        "part": "input-group",
+        "selector": "[data-demo=\"addon\"] [data-slot=\"input-group\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input-group",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:18:42.880Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 384,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-group",
+          "attributes": {
+            "data-slot": "input-group"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 384,
+            "height": 51
+          },
+          "tag": "DIV",
+          "slot": "input-group",
+          "attributes": {
+            "data-slot": "input-group"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "track-radius:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-radius",
+        "token": "--qy-fill-radius",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:18:44.327Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "10px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "track-item-radius:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-item-radius",
+        "token": "--qy-fill-radius",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:18:45.717Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "7px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-unchecked": "",
+            "aria-checked": "false",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "18px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-unchecked": "",
+            "aria-checked": "false",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "track-surface:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-surface",
+        "token": "--qy-track-surface",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:47.139Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(1 0 0)"
+          },
+          "token": "oklch(100% 0 0)",
+          "rootToken": "oklch(100% 0 0)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-border:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-border",
+        "token": "--qy-track-border",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:48.522Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "border-top-color": "color(srgb 0 0 0 / 0.08)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-top-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-top-color"
+        ]
+      },
+      {
+        "id": "track-selected:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:49.914Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0 0 0 / 0.08)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 8%, transparent)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-selected-foreground:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:51.342Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "color": "color(srgb 0.119984 0.120006 0.120008)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 88%, oklch(100% 0 0))",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "color"
+        ]
+      },
+      {
+        "id": "groove-surface:light:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "groove-surface",
+        "token": "--qy-groove-surface",
+        "sourceComponent": "progress",
+        "publicName": "Progress",
+        "part": "progress-track",
+        "selector": "[data-slot=\"progress-track\"]",
+        "state": "default",
+        "theme": "light",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/progress",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:52.783Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "light"
+          ],
+          "dataTheme": null,
+          "colorScheme": "light"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.759902 0.76004 0.760053)"
+          },
+          "token": "color-mix(in srgb, oklch(0% 0 0) 24%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(0% 0 0) 24%, oklch(100% 0 0))",
+          "rect": {
+            "width": 384,
+            "height": 8
+          },
+          "tag": "DIV",
+          "slot": "progress-track",
+          "attributes": {
+            "data-progressing": "",
+            "data-slot": "progress-track"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 384,
+            "height": 8
+          },
+          "tag": "DIV",
+          "slot": "progress-track",
+          "attributes": {
+            "data-progressing": "",
+            "data-slot": "progress-track"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
         "id": "sidebar-current-foreground:dark:desktop:1100x900:fine",
         "pointer": "fine",
         "probeId": "sidebar-current-foreground",
@@ -539662,7 +541547,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T04:37:40.271Z",
+        "measuredAt": "2026-10-30T10:18:54.184Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -539677,8 +541562,8 @@
           "properties": {
             "color": "color(srgb 0.892564 0.892728 0.892743)"
           },
-          "token": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
-          "rootToken": "color-mix(in srgb, oklch(1 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(0.145 0 0) 95%, oklch(1 0 0)) 98%, oklch(1 0 0)))",
+          "token": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
           "rect": {
             "width": 293,
             "height": 32
@@ -539712,13 +541597,1831 @@
         "changedProperties": [
           "color"
         ]
+      },
+      {
+        "id": "field-relationship-gap:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "field-relationship-gap",
+        "token": "--qy-field-gap",
+        "sourceComponent": "field",
+        "publicName": "Field",
+        "part": "field",
+        "selector": "[data-demo=\"default\"] [data-slot=\"field\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/field",
+        "override": "17px",
+        "measuredAt": "2026-10-30T10:18:55.772Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "gap": "8px"
+          },
+          "token": "calc(2 * 4px)",
+          "rootToken": "calc(2 * 4px)",
+          "rect": {
+            "width": 320,
+            "height": 88
+          },
+          "tag": "DIV",
+          "slot": "field",
+          "attributes": {
+            "data-slot": "field",
+            "data-orientation": "vertical",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "gap": "17px"
+          },
+          "token": "17px",
+          "rootToken": "17px",
+          "rect": {
+            "width": 320,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "field",
+          "attributes": {
+            "data-slot": "field",
+            "data-orientation": "vertical",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "gap"
+        ]
+      },
+      {
+        "id": "field-group-relationship-gap:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "field-group-relationship-gap",
+        "token": "--qy-field-group-gap",
+        "sourceComponent": "field",
+        "publicName": "Field",
+        "part": "field-group",
+        "selector": "[data-demo=\"group\"] [data-slot=\"field-group\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/field",
+        "override": "37px",
+        "measuredAt": "2026-10-30T10:18:57.192Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "gap": "20px"
+          },
+          "token": "1.25rem",
+          "rootToken": "1.25rem",
+          "rect": {
+            "width": 384,
+            "height": 304
+          },
+          "tag": "DIV",
+          "slot": "field-group",
+          "attributes": {
+            "data-slot": "field-group"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "gap": "37px"
+          },
+          "token": "37px",
+          "rootToken": "37px",
+          "rect": {
+            "width": 384,
+            "height": 372
+          },
+          "tag": "DIV",
+          "slot": "field-group",
+          "attributes": {
+            "data-slot": "field-group"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "gap"
+        ]
+      },
+      {
+        "id": "button-primary:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-variant=\"solid\"][data-tone=\"neutral\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:18:58.613Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.892564 0.892728 0.892743)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "button-radius:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-radius",
+        "token": "--qy-radius-control",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-size=\"md\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "19px",
+        "measuredAt": "2026-10-30T10:19:00.045Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "10px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "19px"
+          },
+          "token": "19px",
+          "rootToken": "19px",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "button-control:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "button-control",
+        "token": "--qy-control-md",
+        "sourceComponent": "button",
+        "publicName": "Button",
+        "part": "button",
+        "selector": "[data-demo=\"variants\"] [data-slot=\"button\"][data-size=\"md\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/button",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:19:01.495Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 56,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 75,
+            "height": 51
+          },
+          "tag": "BUTTON",
+          "slot": "button",
+          "attributes": {
+            "data-shape": "label",
+            "data-size": "md",
+            "data-slot": "button",
+            "data-tone": "neutral",
+            "data-variant": "solid"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "input-control-inner:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-control-inner",
+        "token": "--qy-fill-height",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input-control",
+        "selector": "[data-demo=\"default\"] [data-slot=\"input-control\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:19:03.050Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 320,
+            "height": 51
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "input-invalid-border:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-invalid-border",
+        "token": "--qy-danger",
+        "sourceComponent": "input",
+        "publicName": "Input",
+        "part": "input-control",
+        "selector": "[data-demo=\"states\"] [data-slot=\"field\"][data-invalid] [data-slot=\"input-control\"]",
+        "state": "invalid",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:04.456Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-top-color": "color(srgb 0.984339 0.254691 0.291821)"
+          },
+          "token": "color-mix(in srgb, oklch(63.7% .237 25.331) 90%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, oklch(63.7% .237 25.331) 90%, oklch(100% 0 0))",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-top-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 320,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-control",
+          "attributes": {
+            "data-slot": "input-control"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-top-color"
+        ]
+      },
+      {
+        "id": "dialog-surface:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:05.831Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "dialog-radius:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-radius",
+        "token": "--qy-radius-overlay",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-popup",
+        "selector": "[data-slot=\"dialog-popup\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:19:07.219Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "14px"
+          },
+          "token": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
+          "rootToken": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 232,
+            "height": 234
+          },
+          "tag": "DIV",
+          "slot": "dialog-popup",
+          "attributes": {
+            "data-open": "",
+            "data-base-ui-focusable": "",
+            "aria-modal": "true",
+            "data-slot": "dialog-popup",
+            "aria-labelledby": "base-ui-_r_8_",
+            "aria-describedby": "base-ui-_r_9_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "dialog-overlay:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "dialog-overlay",
+        "token": "--qy-overlay",
+        "sourceComponent": "dialog",
+        "publicName": "Dialog",
+        "part": "dialog-backdrop",
+        "selector": "[data-slot=\"dialog-backdrop\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/dialog",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:08.656Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "oklch(0 0 0 / 0.56)"
+          },
+          "token": "oklch(0% 0 0/.56)",
+          "rootToken": "oklch(0% 0 0/.56)",
+          "rect": {
+            "width": 1100,
+            "height": 900
+          },
+          "tag": "DIV",
+          "slot": "dialog-backdrop",
+          "attributes": {
+            "data-open": "",
+            "data-slot": "dialog-backdrop",
+            "aria-hidden": "true",
+            "data-base-ui-inert": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 1100,
+            "height": 900
+          },
+          "tag": "DIV",
+          "slot": "dialog-backdrop",
+          "attributes": {
+            "data-open": "",
+            "data-slot": "dialog-backdrop",
+            "aria-hidden": "true",
+            "data-base-ui-inert": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-surface:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-popup",
+        "selector": "[data-slot=\"select-popup\"]",
+        "state": "open",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:10.107Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.142149 0.142184 0.142187)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
+          "rect": {
+            "width": 106,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "select-popup",
+          "attributes": {
+            "data-open": "",
+            "data-side": "bottom",
+            "data-align": "start",
+            "data-base-ui-focusable": "",
+            "data-slot": "select-popup"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 106,
+            "height": 106
+          },
+          "tag": "DIV",
+          "slot": "select-popup",
+          "attributes": {
+            "data-open": "",
+            "data-side": "bottom",
+            "data-align": "start",
+            "data-base-ui-focusable": "",
+            "data-slot": "select-popup"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-highlight:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-highlight",
+        "token": "--qy-accent",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-item",
+        "selector": "[data-slot=\"select-item\"][data-highlighted]",
+        "state": "highlighted",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:11.554Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.999871 1.00005 1.00007 / 0.04)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) calc(8% / 2), transparent)",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) calc(8% / 2), transparent)",
+          "rect": {
+            "width": 96,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "select-item",
+          "attributes": {
+            "aria-selected": "false",
+            "data-slot": "select-item",
+            "data-highlighted": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 96,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "select-item",
+          "attributes": {
+            "aria-selected": "false",
+            "data-slot": "select-item",
+            "data-highlighted": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "select-control:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "select-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "select",
+        "publicName": "Select",
+        "part": "select-trigger",
+        "selector": "[data-demo=\"density\"] [data-slot=\"select-trigger\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/select",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:19:13.182Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "min-height": "32px",
+            "height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 106,
+            "height": 32
+          },
+          "tag": "BUTTON",
+          "slot": "select-trigger",
+          "attributes": {
+            "aria-expanded": "false",
+            "aria-haspopup": "listbox",
+            "data-slot": "select-trigger",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "min-height": "51px",
+            "height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 106,
+            "height": 51
+          },
+          "tag": "BUTTON",
+          "slot": "select-trigger",
+          "attributes": {
+            "aria-expanded": "false",
+            "aria-haspopup": "listbox",
+            "data-slot": "select-trigger",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "min-height",
+          "height"
+        ]
+      },
+      {
+        "id": "card-role-radius:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "card-role-radius",
+        "token": "--qy-radius-panel",
+        "sourceComponent": "card",
+        "publicName": "Card",
+        "part": "card",
+        "selector": "[data-demo=\"basic\"] article[data-slot=\"card\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:19:14.638Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "16px"
+          },
+          "token": "calc(4 * 4px)",
+          "rootToken": "calc(4 * 4px)",
+          "rect": {
+            "width": 384,
+            "height": 114
+          },
+          "tag": "ARTICLE",
+          "slot": "card",
+          "attributes": {
+            "aria-labelledby": "card-note-title",
+            "data-slot": "card"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 384,
+            "height": 114
+          },
+          "tag": "ARTICLE",
+          "slot": "card",
+          "attributes": {
+            "aria-labelledby": "card-note-title",
+            "data-slot": "card"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "panel-padding:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "sourceComponent": "card",
+        "publicName": "Card",
+        "part": "caller-stack",
+        "selector": "[data-demo=\"basic\"] article[data-slot=\"card\"] > [data-slot=\"stack\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/card",
+        "override": "41px",
+        "measuredAt": "2026-10-30T10:19:16.031Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "padding-left": "24px",
+            "padding-right": "24px"
+          },
+          "token": "calc(1.25rem + 4px)",
+          "rootToken": "calc(1.25rem + 4px)",
+          "rect": {
+            "width": 382,
+            "height": 112
+          },
+          "tag": "DIV",
+          "slot": "stack",
+          "attributes": {
+            "data-slot": "stack",
+            "data-gap": "panel"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "padding-left": "41px",
+            "padding-right": "41px"
+          },
+          "token": "41px",
+          "rootToken": "41px",
+          "rect": {
+            "width": 382,
+            "height": 146
+          },
+          "tag": "DIV",
+          "slot": "stack",
+          "attributes": {
+            "data-slot": "stack",
+            "data-gap": "panel"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "padding-left",
+          "padding-right"
+        ]
+      },
+      {
+        "id": "table-default-height:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "sourceComponent": "table",
+        "publicName": "Table",
+        "part": "table-row",
+        "selector": "[data-demo=\"comparison\"] tbody [data-slot=\"table-row\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/table",
+        "override": "67px",
+        "measuredAt": "2026-10-30T10:19:17.443Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "48px"
+          },
+          "token": "calc(calc(1.25rem + 3 * 4px) + 2 * calc(2 * 4px))",
+          "rootToken": "calc(calc(1.25rem + 3 * 4px) + 2 * calc(2 * 4px))",
+          "rect": {
+            "width": 668,
+            "height": 48
+          },
+          "tag": "TR",
+          "slot": "table-row",
+          "attributes": {
+            "data-slot": "table-row"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "67px"
+          },
+          "token": "67px",
+          "rootToken": "67px",
+          "rect": {
+            "width": 668,
+            "height": 67
+          },
+          "tag": "TR",
+          "slot": "table-row",
+          "attributes": {
+            "data-slot": "table-row"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height"
+        ]
+      },
+      {
+        "id": "native-select-control:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "native-select-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "native-select",
+        "publicName": "Native-select",
+        "part": "native-select",
+        "selector": "[data-demo=\"density\"] [data-slot=\"native-select\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/native-select",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:19:18.852Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 127,
+            "height": 32
+          },
+          "tag": "SELECT",
+          "slot": "native-select",
+          "attributes": {
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 127,
+            "height": 51
+          },
+          "tag": "SELECT",
+          "slot": "native-select",
+          "attributes": {
+            "data-slot": "native-select",
+            "data-filled": "",
+            "aria-labelledby": "base-ui-_r_2_"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "input-group-control:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "input-group-control",
+        "token": "--qy-fill-height",
+        "sourceComponent": "input-group",
+        "publicName": "Input-group",
+        "part": "input-group",
+        "selector": "[data-demo=\"addon\"] [data-slot=\"input-group\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/input-group",
+        "override": "51px",
+        "measuredAt": "2026-10-30T10:19:20.273Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "height": "32px",
+            "min-height": "32px"
+          },
+          "token": "calc(1.25rem + 3 * 4px)",
+          "rootToken": "calc(1.25rem + 3 * 4px)",
+          "rect": {
+            "width": 384,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "input-group",
+          "attributes": {
+            "data-slot": "input-group"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "height": "51px",
+            "min-height": "51px"
+          },
+          "token": "51px",
+          "rootToken": "51px",
+          "rect": {
+            "width": 384,
+            "height": 51
+          },
+          "tag": "DIV",
+          "slot": "input-group",
+          "attributes": {
+            "data-slot": "input-group"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "height",
+          "min-height"
+        ]
+      },
+      {
+        "id": "track-radius:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-radius",
+        "token": "--qy-fill-radius",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:19:21.695Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "10px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "21px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "track-item-radius:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-item-radius",
+        "token": "--qy-fill-radius",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "21px",
+        "measuredAt": "2026-10-30T10:19:23.089Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-radius": "7px"
+          },
+          "token": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rootToken": "round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-unchecked": "",
+            "aria-checked": "false",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-radius": "18px"
+          },
+          "token": "21px",
+          "rootToken": "21px",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-unchecked": "",
+            "aria-checked": "false",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-radius"
+        ]
+      },
+      {
+        "id": "track-surface:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-surface",
+        "token": "--qy-track-surface",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:24.492Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.105651 0.105679 0.105681)"
+          },
+          "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0))",
+          "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0))",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-border:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-border",
+        "token": "--qy-track-border",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:25.875Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "border-top-color": "color(srgb 0.999871 1.00005 1.00007 / 0.08)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "border-top-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 670,
+            "height": 32
+          },
+          "tag": "DIV",
+          "slot": "segmented-control",
+          "attributes": {
+            "aria-labelledby": "_r_1_",
+            "data-slot": "segmented-control",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "border-top-color"
+        ]
+      },
+      {
+        "id": "track-selected:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:27.280Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.999871 1.00005 1.00007 / 0.08)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 8%, transparent)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
+      },
+      {
+        "id": "track-selected-foreground:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "sourceComponent": "segmented-control",
+        "publicName": "Segmented-control",
+        "part": "segmented-control-item",
+        "selector": "[data-demo=\"values\"] [data-slot=\"segmented-control-item\"][aria-checked=\"true\"]",
+        "state": "checked",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/segmented-control",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:28.655Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "color": "color(srgb 0.892564 0.892728 0.892743)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 88%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 42,
+            "height": 26
+          },
+          "tag": "BUTTON",
+          "slot": "segmented-control-item",
+          "attributes": {
+            "data-checked": "",
+            "aria-checked": "true",
+            "data-composite-item-active": "",
+            "data-slot": "segmented-control-item",
+            "data-size": "md",
+            "data-filled": ""
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "color"
+        ]
+      },
+      {
+        "id": "groove-surface:dark:desktop:1100x900:fine",
+        "pointer": "fine",
+        "probeId": "groove-surface",
+        "token": "--qy-groove-surface",
+        "sourceComponent": "progress",
+        "publicName": "Progress",
+        "part": "progress-track",
+        "selector": "[data-slot=\"progress-track\"]",
+        "state": "default",
+        "theme": "dark",
+        "viewport": "desktop",
+        "size": {
+          "width": 1100,
+          "height": 900
+        },
+        "route": "/playground/progress",
+        "override": "rgb(12, 130, 210)",
+        "measuredAt": "2026-10-30T10:19:30.036Z",
+        "observation": "OBSERVED_CHANGE",
+        "validOverride": true,
+        "themeEvidence": {
+          "attribute": "class",
+          "classes": [
+            "dark"
+          ],
+          "dataTheme": null,
+          "colorScheme": "dark"
+        },
+        "before": {
+          "properties": {
+            "background-color": "color(srgb 0.320263 0.320328 0.320334)"
+          },
+          "token": "color-mix(in srgb, oklch(100% 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rootToken": "color-mix(in srgb, oklch(100% 0 0) 24%, color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 98%, oklch(100% 0 0)))",
+          "rect": {
+            "width": 384,
+            "height": 8
+          },
+          "tag": "DIV",
+          "slot": "progress-track",
+          "attributes": {
+            "data-progressing": "",
+            "data-slot": "progress-track"
+          },
+          "pointer": "fine"
+        },
+        "after": {
+          "properties": {
+            "background-color": "rgb(12, 130, 210)"
+          },
+          "token": "rgb(12, 130, 210)",
+          "rootToken": "rgb(12, 130, 210)",
+          "rect": {
+            "width": 384,
+            "height": 8
+          },
+          "tag": "DIV",
+          "slot": "progress-track",
+          "attributes": {
+            "data-progressing": "",
+            "data-slot": "progress-track"
+          },
+          "pointer": "fine"
+        },
+        "changedProperties": [
+          "background-color"
+        ]
       }
     ],
     "status": "OBSERVED",
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": true,
+    "staleRuntime": false,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -539728,9 +543431,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -539760,9 +543463,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -539789,216 +543492,1146 @@
         "probeId": "field-relationship-gap",
         "token": "--qy-field-gap",
         "part": "field",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/field.tsx",
+              "line": 49
+            },
+            "className": "gap-(--qy-field-gap)",
+            "chain": [
+              "--qy-field-gap"
+            ]
+          }
+        ],
+        "evidenceId": "field-relationship-gap:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "field-relationship-gap",
+        "token": "--qy-field-gap",
+        "part": "field",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/field.tsx",
+              "line": 49
+            },
+            "className": "gap-(--qy-field-gap)",
+            "chain": [
+              "--qy-field-gap"
+            ]
+          }
+        ],
+        "evidenceId": "field-relationship-gap:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "field-group-relationship-gap",
         "token": "--qy-field-group-gap",
         "part": "field-group",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "field-group-relationship-gap",
+        "token": "--qy-field-group-gap",
+        "part": "field-group",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "button-primary",
         "token": "--qy-primary",
         "part": "button",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-primary:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "button-primary",
+        "token": "--qy-primary",
+        "part": "button",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "button-radius",
         "token": "--qy-radius-control",
         "part": "button",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-radius:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "button-radius",
+        "token": "--qy-radius-control",
+        "part": "button",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "button-control",
         "token": "--qy-control-md",
         "part": "button",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-control:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "button-control",
+        "token": "--qy-control-md",
+        "part": "button",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "input-surface",
         "token": "--qy-surface",
         "part": "input-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 139
+            },
+            "className": "bg-surface-field",
+            "chain": [
+              {
+                "variable": "--color-surface-field",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 156
+                },
+                "condition": "@theme inline"
+              },
+              {
+                "variable": "--qy-surface-field",
+                "source": {
+                  "path": "packages/ui/tokens/semantic.css",
+                  "line": 58
+                },
+                "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+              },
+              "--qy-surface"
+            ]
+          }
+        ],
+        "evidenceId": "input-surface:light:desktop:1100x900:fine"
       },
       {
         "probeId": "input-control-inner",
         "token": "--qy-fill-height",
         "part": "input-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 137
+            },
+            "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
+            "chain": [
+              "--qy-fill-height"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 138
+            },
+            "className": "sm:min-h-(--qy-fill-height)",
+            "chain": [
+              "--qy-fill-height"
+            ]
+          }
+        ],
+        "evidenceId": "input-control-inner:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "input-control-inner",
+        "token": "--qy-fill-height",
+        "part": "input-control",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 137
+            },
+            "className": "sm:min-h-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]",
+            "chain": [
+              "--qy-fill-height"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 138
+            },
+            "className": "sm:min-h-(--qy-fill-height)",
+            "chain": [
+              "--qy-fill-height"
+            ]
+          }
+        ],
+        "evidenceId": "input-control-inner:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "input-invalid-border",
         "token": "--qy-danger",
         "part": "input-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 139
+            },
+            "className": "has-[input[aria-invalid=true]]:border-destructive",
+            "chain": [
+              {
+                "variable": "--color-destructive",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 118
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-danger"
+            ]
+          }
+        ],
+        "evidenceId": "input-invalid-border:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "input-invalid-border",
+        "token": "--qy-danger",
+        "part": "input-control",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/input.tsx",
+              "line": 139
+            },
+            "className": "has-[input[aria-invalid=true]]:border-destructive",
+            "chain": [
+              {
+                "variable": "--color-destructive",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 118
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-danger"
+            ]
+          }
+        ],
+        "evidenceId": "input-invalid-border:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "dialog-surface",
         "token": "--qy-surface-raised",
         "part": "dialog-popup",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 59
+            },
+            "className": "bg-surface-raised",
+            "chain": [
+              {
+                "variable": "--color-surface-raised",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 153
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "dialog-surface",
+        "token": "--qy-surface-raised",
+        "part": "dialog-popup",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 59
+            },
+            "className": "bg-surface-raised",
+            "chain": [
+              {
+                "variable": "--color-surface-raised",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 153
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-surface:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "dialog-radius",
         "token": "--qy-radius-overlay",
         "part": "dialog-popup",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 59
+            },
+            "className": "rounded-overlay",
+            "chain": [
+              {
+                "variable": "--radius-overlay",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 173
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-radius-overlay"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-radius:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "dialog-radius",
+        "token": "--qy-radius-overlay",
+        "part": "dialog-popup",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 59
+            },
+            "className": "rounded-overlay",
+            "chain": [
+              {
+                "variable": "--radius-overlay",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 173
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-radius-overlay"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-radius:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "dialog-overlay",
         "token": "--qy-overlay",
         "part": "dialog-backdrop",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 48
+            },
+            "className": "bg-overlay",
+            "chain": [
+              {
+                "variable": "--color-overlay",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 135
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-overlay"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-overlay:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "dialog-overlay",
+        "token": "--qy-overlay",
+        "part": "dialog-backdrop",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/dialog.tsx",
+              "line": 48
+            },
+            "className": "bg-overlay",
+            "chain": [
+              {
+                "variable": "--color-overlay",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 135
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-overlay"
+            ]
+          }
+        ],
+        "evidenceId": "dialog-overlay:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "select-surface",
         "token": "--qy-surface-raised",
         "part": "select-popup",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 192
+            },
+            "className": "bg-surface-raised",
+            "chain": [
+              {
+                "variable": "--color-surface-raised",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 153
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "select-surface",
+        "token": "--qy-surface-raised",
+        "part": "select-popup",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/select.tsx",
+              "line": 192
+            },
+            "className": "bg-surface-raised",
+            "chain": [
+              {
+                "variable": "--color-surface-raised",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 153
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-surface-raised"
+            ]
+          }
+        ],
+        "evidenceId": "select-surface:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "select-highlight",
         "token": "--qy-accent",
         "part": "select-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "select-highlight:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "select-highlight",
+        "token": "--qy-accent",
+        "part": "select-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "select-control",
         "token": "--qy-fill-height",
         "part": "select-trigger",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "select-control:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "select-control",
+        "token": "--qy-fill-height",
+        "part": "select-trigger",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "card-role-radius",
         "token": "--qy-radius-panel",
         "part": "card",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 21
+            },
+            "className": "rounded-panel",
+            "chain": [
+              {
+                "variable": "--radius-panel",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 172
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-radius-panel"
+            ]
+          }
+        ],
+        "evidenceId": "card-role-radius:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "card-role-radius",
+        "token": "--qy-radius-panel",
+        "part": "card",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/card.tsx",
+              "line": 21
+            },
+            "className": "rounded-panel",
+            "chain": [
+              {
+                "variable": "--radius-panel",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 172
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-radius-panel"
+            ]
+          }
+        ],
+        "evidenceId": "card-role-radius:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "panel-padding",
         "token": "--qy-panel-padding",
         "part": "caller-stack",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "panel-padding:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "panel-padding",
+        "token": "--qy-panel-padding",
+        "part": "caller-stack",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "table-default-height",
         "token": "--qy-row-default",
         "part": "table-row",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 102
+            },
+            "className": "h-(--qy-row-default)",
+            "chain": [
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "table-default-height",
+        "token": "--qy-row-default",
+        "part": "table-row",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/table.tsx",
+              "line": 102
+            },
+            "className": "h-(--qy-row-default)",
+            "chain": [
+              "--qy-row-default"
+            ]
+          }
+        ],
+        "evidenceId": "table-default-height:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "native-select-control",
         "token": "--qy-fill-height",
         "part": "native-select",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "native-select-control:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "native-select-control",
+        "token": "--qy-fill-height",
+        "part": "native-select",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "input-group-control",
         "token": "--qy-fill-height",
         "part": "input-group",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "input-group-control:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "input-group-control",
+        "token": "--qy-fill-height",
+        "part": "input-group",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-radius",
         "token": "--qy-fill-radius",
         "part": "segmented-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-radius:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-radius",
+        "token": "--qy-fill-radius",
+        "part": "segmented-control",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-item-radius",
         "token": "--qy-fill-radius",
         "part": "segmented-control-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-item-radius",
+        "token": "--qy-fill-radius",
+        "part": "segmented-control-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-surface",
         "token": "--qy-track-surface",
         "part": "segmented-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-surface:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-surface",
+        "token": "--qy-track-surface",
+        "part": "segmented-control",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-border",
         "token": "--qy-track-border",
         "part": "segmented-control",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-border:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-border",
+        "token": "--qy-track-border",
+        "part": "segmented-control",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
+        "staticRecordSources": [],
+        "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-selected",
         "token": "--qy-track-selected",
         "part": "segmented-control-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 159
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "not-aria-disabled:active:bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 159
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-selected",
+        "token": "--qy-track-selected",
+        "part": "segmented-control-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 159
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          },
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "not-aria-disabled:active:bg-track-selected",
+            "chain": [
+              {
+                "variable": "--color-track-selected",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 159
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "track-selected-foreground",
         "token": "--qy-track-selected-foreground",
         "part": "segmented-control-item",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "text-track-selected-foreground",
+            "chain": [
+              {
+                "variable": "--color-track-selected-foreground",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 160
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected-foreground"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected-foreground:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "track-selected-foreground",
+        "token": "--qy-track-selected-foreground",
+        "part": "segmented-control-item",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/segmented-control.tsx",
+              "line": 47
+            },
+            "className": "text-track-selected-foreground",
+            "chain": [
+              {
+                "variable": "--color-track-selected-foreground",
+                "source": {
+                  "path": "packages/ui/theme.css",
+                  "line": 160
+                },
+                "condition": "@theme inline"
+              },
+              "--qy-track-selected-foreground"
+            ]
+          }
+        ],
+        "evidenceId": "track-selected-foreground:dark:desktop:1100x900:fine"
       },
       {
         "probeId": "groove-surface",
         "token": "--qy-groove-surface",
         "part": "progress-track",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "No runtime observation for this selected probe"
+        "theme": "light",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/progress.tsx",
+              "line": 21
+            },
+            "className": "bg-(--qy-groove-surface)",
+            "chain": [
+              "--qy-groove-surface"
+            ]
+          }
+        ],
+        "evidenceId": "groove-surface:light:desktop:1100x900:fine"
+      },
+      {
+        "probeId": "groove-surface",
+        "token": "--qy-groove-surface",
+        "part": "progress-track",
+        "theme": "dark",
+        "viewport": "desktop",
+        "pointer": "fine",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
+        "staticRecordSources": [
+          {
+            "source": {
+              "path": "packages/ui/src/components/progress.tsx",
+              "line": 21
+            },
+            "className": "bg-(--qy-groove-surface)",
+            "chain": [
+              "--qy-groove-surface"
+            ]
+          }
+        ],
+        "evidenceId": "groove-surface:dark:desktop:1100x900:fine"
       }
     ],
     "counts": {
-      "PASS": 0,
+      "PASS": 27,
       "FAIL": 0,
-      "UNVERIFIED": 0,
-      "NOT_RUN": 28
+      "UNVERIFIED": 26,
+      "NOT_RUN": 0
     }
   },
   "probePlan": [
