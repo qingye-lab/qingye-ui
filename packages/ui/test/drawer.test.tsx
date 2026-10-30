@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test } from "vitest";
-import { Drawer, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger } from "../src/components/drawer";
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from "../src/components/drawer";
 import { Dialog, DialogPopup, DialogTitle, DialogTrigger } from "../src/components/dialog";
 import { Input } from "../src/components/input";
 
@@ -35,4 +35,18 @@ test("a canceled request remains closed and nonmodal drawer does not declare a b
   rerender(<Drawer modal={false} defaultOpen><DrawerTrigger>打开</DrawerTrigger><DrawerPopup><DrawerTitle>面板</DrawerTitle><DrawerClose /></DrawerPopup></Drawer>);
   await user.click(screen.getByRole("button", { name: "打开" }));
   const panel = await screen.findByRole("dialog", { name: "面板" }); expect(panel).not.toHaveAttribute("aria-modal", "true");
+});
+
+test("drawer header and footer sit beside the scrolling content, not inside it", async () => {
+  render(<Drawer defaultOpen swipeDirection="right"><DrawerPopup>
+    <DrawerHeader><DrawerTitle>筛选</DrawerTitle></DrawerHeader>
+    <DrawerContent>{Array.from({ length: 40 }, (_, index) => <p key={index}>条件 {index + 1}</p>)}</DrawerContent>
+    <DrawerFooter><DrawerClose>完成</DrawerClose></DrawerFooter>
+  </DrawerPopup></Drawer>);
+  const surface = await screen.findByRole("dialog", { name: "筛选" });
+  const content = surface.querySelector("[data-slot=drawer-content]")!;
+  expect(content).toContainElement(screen.getByText("条件 40"));
+  expect(content).not.toContainElement(screen.getByRole("button", { name: "完成" }));
+  expect(screen.getByRole("button", { name: "完成" }).closest("[data-slot=drawer-footer]")?.parentElement).toBe(surface);
+  expect(screen.getByText("筛选").closest("[data-slot=drawer-header]")?.parentElement).toBe(surface);
 });

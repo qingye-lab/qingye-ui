@@ -45,6 +45,16 @@ const INDENT: Record<TocItem["level"], string> = {
   3: "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
 };
 
+/*
+ * 强制颜色（Windows 高对比度）：当前项靠「自己那一段线加深」区分，而强制颜色把每个条目的边线都换成同一个系统色
+ * （透明边也会显出来），当前项的线与相邻项、与基线完全同色，当前项就消失了。
+ * 改用不依赖颜色的通道：当前项加一道下划线（线宽 2px、离字 4px）——文字装饰在强制颜色下仍然绘制，
+ * 颜色随系统文字色。只在强制颜色下出现，平时的画法（线加深）不变；不改变盒子尺寸，不会让整列跳动（NG9）。
+ * 预设：2px 与 4px 是下划线的宽度和间距，不由某条关系推出。styles.css 的强制颜色块里其他导航当前项用
+ * Highlight 底，Toc 没有底，所以不并入那份清单。真实 Windows 高对比度未实测（UNVERIFIED）。
+ */
+const FORCED_COLORS_CURRENT = "forced-colors:underline forced-colors:decoration-2 forced-colors:underline-offset-4";
+
 export type TocProps = Omit<useRender.ComponentProps<"nav">, "children"> & {
   items: TocItem[];
   /**
@@ -77,7 +87,7 @@ export function Toc({ items, current, render, className, ...props }: TocProps) {
                 <a
                   href={`#${item.id}`}
                   aria-current={isCurrent ? "location" : undefined}
-                  className={cn(navLineItemClassNameVertical, "py-(--qy-fen)", INDENT[item.level], isCurrent && navLineCurrentClassName)}
+                  className={cn(navLineItemClassNameVertical, "py-(--qy-fen)", INDENT[item.level], isCurrent && [navLineCurrentClassName, FORCED_COLORS_CURRENT])}
                 >
                   {item.label}
                 </a>

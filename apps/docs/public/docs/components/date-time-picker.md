@@ -1,9 +1,9 @@
 # 日期时间 DateTimePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 290763ec85ab114335ed974e59dfcdfbb6d857d1de258127dfe5da72f343a81e
+Source SHA-256: b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41
 
 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 
@@ -65,7 +65,7 @@ Written descriptions; the list above is the type-resolved fact.
 - value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. 传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒。带时区或不完整外部字符串拒绝；清除请求 undefined。
 - min / max: string. 同样的无时区文本。一处声明同时写入原生输入的 min / max、日历的禁用日期与可翻到的月份、边界当天时间输入的 min / max，并使超出范围的草稿不能应用。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告（2026-10-12）。
 - name / form: string. 仅确认的 datetime-local input 参与 FormData；日历与时间草稿不具提交 name。Field 可提供 name。
-- disabled / readOnly: boolean; default false. 阻止原生编辑与展开修改；Field disabled 同样约束动作。只读值提交，禁用值不提交。
+- disabled / readOnly: boolean; default false. 阻止原生编辑、清除与展开修改；Field disabled 同样约束动作。只读值提交，禁用值不提交；只读时边界内给出「只读」说明。非空且可编辑时，边界内有清除动作，清除后焦点回到输入。
 - inputProps: Input props except owned value/type/name/form/state. 真实输入的 min/max/step/required/ARIA/events/ref/render；step 同时交给草稿 time Input。onChange 可取消原生编辑请求。
 - calendarProps: CalendarProps except owned selection props. 声明日期禁用与导航边界。日期边界优先用顶层 min / max 一处声明；单独给 inputProps.min/max 时库不从中猜禁用日期。
 - render / ref / className / style / ARIA / events: div composition props. 组合根出口；实际输入出口通过 inputProps 定制。

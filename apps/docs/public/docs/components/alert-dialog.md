@@ -1,9 +1,9 @@
 # 决定对话框 AlertDialog
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: d40ee8bdb106690efe42f5b5d555c96d9119d7a1fa34e04a83f632101759e148
+Source SHA-256: 55f86b3e9bc7314a11a247382ac0691a92efc0d7d50b2c47500b16efe013e2ab
 
 阻断整个工作面，要求对当前对象作出明确选择。
 
@@ -12,7 +12,7 @@ Source SHA-256: d40ee8bdb106690efe42f5b5d555c96d9119d7a1fa34e04a83f632101759e148
 
 ## Notes
 - 普通编辑使用 Dialog；不需要中断时用就地确认或面板。
-- 后果必须在对话框里可见（Description）。
+- 后果必须在对话框里可见（Description）；说明较长时放进 AlertDialogPanel，页眉与页脚固定，只有它滚动。
 - 关闭与继续动作分别处理。
 - 必须提供明确的返回选择，不能只依赖 Esc。
 - 共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。
@@ -118,7 +118,7 @@ Written descriptions; the list above is the type-resolved fact.
 说明当前选择与必要后果，建立可访问关联。后果写在 Description 里，按钮不承载。
 
 ### AlertDialogTrigger / AlertDialogClose
-默认组合 Button。Close 由调用方明确命名，如“返回”；不执行继续动作。
+默认组合 Button。Close 离开提示、不执行继续动作；不给 children 时名称是「返回」（不叫「取消」：它不撤销已发生的事），给了就用调用方的，如“保留”。
 
 ### AlertDialogHeader / AlertDialogPanel / AlertDialogFooter
 复用 Dialog 的名称、工作内容与动作分组，具有各自 data-slot。

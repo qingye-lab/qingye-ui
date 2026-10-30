@@ -43,6 +43,26 @@ export default {
       ]
     },
     {
+      "name": "MenuItem",
+      "description": "一条命令；与 ContextMenuItem 共用。",
+      "descriptionEn": "One command; shared with ContextMenuItem.",
+      "props": [
+        {
+          "name": "tone",
+          "type": "\"neutral\" | \"danger\"",
+          "default": "\"neutral\"",
+          "description": "与 Button 的 tone 同义：danger 只标出这是一条危险类动作（字与图标用危险前景，悬停与高亮用危险柔底）。后果说明与确认不在菜单项里，激活后应打开 AlertDialog 或 ConfirmAction。",
+          "descriptionEn": "Same meaning as Button's tone: danger only marks a dangerous class of action (danger foreground for text and icon, danger soft fill on hover and highlight). Consequences and confirmation do not live in the item; activating it should open AlertDialog or ConfirmAction."
+        },
+        {
+          "name": "size / inset / disabled / onClick",
+          "type": "Base UI Item props",
+          "description": "尺寸档、与带前导标记的项对齐的缩进、禁用与命令。",
+          "descriptionEn": "Size step, indent aligning with items that have leading markers, disabled state, and the command."
+        }
+      ]
+    },
+    {
       "name": "MenuTrigger / MenuPositioner / MenuPopup / MenuPortal",
       "description": "触发器与同一 Root 所属的浮层。",
       "descriptionEn": "Trigger and floating parts owned by the same root.",
@@ -120,10 +140,12 @@ export default {
     }
   ],
   "notes": [
-    "危险操作需显式后果与独立保护；Root/Portal/Positioner/Popup 属于同一上下文。"
+    "危险操作需显式后果与独立保护；Root/Portal/Positioner/Popup 属于同一上下文。",
+    "tone=\"danger\" 的项被激活后应打开确认对话框，由对话框写明后果；颜色只表示动作类别，不替代文字名称。"
   ],
   "notesEn": [
-    "Dangerous actions require explicit consequences and separate protection; Root, Portal, Positioner and Popup share one context."
+    "Dangerous actions require explicit consequences and separate protection; Root, Portal, Positioner and Popup share one context.",
+    "Activating a tone=\"danger\" item should open a confirmation dialog that states the consequence; color marks the action class and never replaces the text name."
   ],
   "design": {
     "methods": [

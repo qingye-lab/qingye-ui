@@ -133,3 +133,13 @@ test("a legal nonnative stepper render retains role and keyboard stepping", asyn
   await userEvent.keyboard("{ArrowUp}");
   expect(screen.getByRole("textbox")).toHaveValue("5");
 });
+
+test("readonly shows an aria-hidden note while the input stays readonly", () => {
+  const { rerender } = render(<NumberField readOnly defaultValue={2}>{parts}</NumberField>);
+  expect(screen.getByRole("textbox")).toHaveAttribute("readonly");
+  const note = document.querySelector("[data-slot=number-field-readonly]");
+  expect(note).toHaveTextContent("只读");
+  expect(note).toHaveAttribute("aria-hidden", "true");
+  rerender(<NumberField defaultValue={2}>{parts}</NumberField>);
+  expect(document.querySelector("[data-slot=number-field-readonly]")).toBeNull();
+});

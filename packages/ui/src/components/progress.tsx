@@ -32,7 +32,7 @@ export type ProgressIndicatorProps = React.ComponentProps<typeof ProgressPrimiti
  * 数据由应用持有；这里不推断进度，也不把移动当成完成。
  */
 export function ProgressIndicator({ className, ...props }: ProgressIndicatorProps) {
-  return <ProgressPrimitive.Indicator data-slot="progress-indicator" {...props} className={state => cn("h-full rounded-(--qy-radius-track) bg-primary", state.status === "indeterminate" && "qy-progress-indeterminate", typeof className === "function" ? className(state) : className)} />;
+  return <ProgressPrimitive.Indicator data-slot="progress-indicator" {...props} className={state => cn("qy-progress-indicator h-full rounded-(--qy-radius-track) bg-primary", state.status === "indeterminate" && "qy-progress-indeterminate", typeof className === "function" ? className(state) : className)} />;
 }
 export function ProgressLabel({ className, ...props }: React.ComponentProps<typeof ProgressPrimitive.Label>) {
   return <ProgressPrimitive.Label data-slot="progress-label" {...props} className={state => cn("min-w-0 text-label wrap-anywhere", typeof className === "function" ? className(state) : className)} />;

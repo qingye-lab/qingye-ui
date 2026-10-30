@@ -55,14 +55,15 @@ describe("prefers-contrast: more", () => {
     }
   });
 
-  test.each(["light", "dark"] as const)("%s: 反馈梯在两种偏好下都不倒挂：内嵌面 ≤ 悬停 = 选中 < 按下（悬停不深于选中）", (appearance) => {
+  test.each(["light", "dark"] as const)("%s: 反馈梯在两种偏好下都不倒挂：内嵌面 ≤ 悬停 < 选中 = 按下（悬停浅于选中）", (appearance) => {
     const level = (tokens: Map<string, string>, name: string) => resolveColor(`var(--qy-${name})`, tokens)[3];
     for (const tokens of [tokenValues(base, appearance), tokenValues(more, appearance)]) {
       expect(level(tokens, "surface-inset")).toBeLessThanOrEqual(level(tokens, "surface-hover"));
-      expect(level(tokens, "surface-hover")).toBeCloseTo(level(tokens, "surface-selected"), 10);
-      expect(level(tokens, "surface-selected")).toBeLessThan(level(tokens, "surface-active"));
+      // 2026-10-30：选中 = 悬停的两倍（与按下同一关系），悬停不能被读成当前项。
+      expect(level(tokens, "surface-selected")).toBeCloseTo(2 * level(tokens, "surface-hover"), 10);
+      expect(level(tokens, "surface-selected")).toBeCloseTo(level(tokens, "surface-active"), 10);
     }
-    // 偏好开启时悬停与选中随墨阶上移，仍在内嵌面（地，钉住）之上、按下之下。
+    // 偏好开启时悬停与选中随墨阶上移，仍在内嵌面（地，钉住）之上。
     const shifted = tokenValues(more, appearance);
     expect(level(shifted, "surface-inset")).toBeLessThan(level(shifted, "surface-hover"));
   });

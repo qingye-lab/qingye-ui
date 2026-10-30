@@ -1,9 +1,9 @@
 # ButtonGroup
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
+Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
 
 Give actions in one scope a shared name and spacing.
 
@@ -49,7 +49,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### ButtonGroup
 An open action relationship with role=group by default.
-- aria-label / aria-labelledby: string. The shared scope name, separate from action names.
+- aria-label / aria-labelledby: string. One is required: the shared scope name, separate from action names. A missing or blank name throws.
 - orientation: "horizontal" | "vertical"; default "horizontal". Layout direction.
 - align / wrap / render / ref / native props: ButtonGroupProps. Uses Group composition props with action spacing.
 

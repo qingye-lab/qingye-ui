@@ -1,9 +1,9 @@
 # 通知 Toast
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
+Source SHA-256: 7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab
 
 补充可恢复、非关键的操作事实，保持当前工作不中断。
 
@@ -14,6 +14,7 @@ Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
 - 悬停、聚焦与窗口失焦暂停自动消失。
 - 通知只呈现应用给出的类型，不做推测：没有超时转未知，等待、进行中、未知与失败一直留到应用更新或用户关闭。loadingTimeout 已移除；需要期限时由应用计时并调用 toastManager.update(id, { type: "unknown" })。
 - 测试里按文字查找通知时限定在通知区域内（role=region）或用 data-slot=toast-title：priority=high 的通知另有一份视觉隐藏的播报副本，焦点进入通知区域后副本移除。
+- 带动作（如「撤销」）的通知同样不自动消失，动作需要时间；它们和失败、未知、进行中的通知一样不会被数量上限收起。锚定通知没有统一的通知区，超限的一般通知只收起、不显示数量。
 - 普通成功默认短暂；失败/未知持续但仍可关闭。重要事实和恢复入口必须留在对象页面。
 - Viewport 与锚定通知消费共享 notification 层级，低于文档候选与 modal 关键动作。
 
@@ -69,7 +70,7 @@ Written descriptions; the list above is the type-resolved fact.
 同一通知通道挂载一次。
 - position: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"; default "bottom-right". 通知区域的位置。
 - timeout: number; default 5000. 普通通知与成功的阅读时限，0 为持续显示。
-- limit: number; default 3. 原语限制可见条数，超额根隐藏且 inert；不能作为关键结果的唯一承载。
+- limit: number; default 3. 限制同时显示的条数。超额的一般通知收起并 inert，视口里给出「另有 N 条通知」，点开后全部显示；失败、未知、进行中、带动作或 timeout 为 0 的通知不会被收起，也不计入这个数。
 - toastManager: ToastPrimitive.createToastManager() 的返回值. 可选的独立通知通道；省略时用导出的全局 manager。
 - portalProps: ToastPrimitive.Portal.Props. 自定义 Portal 容器、方向和语言等属性。
 

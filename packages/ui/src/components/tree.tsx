@@ -5,6 +5,7 @@ import { IconCheck, IconChevronRight, IconMinus } from "@tabler/icons-react";
 import * as React from "react";
 import { Button } from "./button";
 import { useUILocale } from "../locale";
+import { isName, received } from "../require-name";
 import { cn } from "../utils";
 
 export interface TreeNode { id: string; label: string; disabled?: boolean; children?: readonly TreeNode[] }
@@ -24,6 +25,10 @@ export type TreeProps = Omit<useRender.ComponentProps<"div">, "children"> & {
   checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];
   onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;
   disabled?: boolean; emptyContent?: React.ReactNode;
+  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。
+   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。
+   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */
+  defaultFocusedId?: string | null;
 };
 type Entry = { node: TreeNode; parent: string | null; level: number };
 /** 叶子后代：分支递归到底，叶子返回自身一项。空 children 数组已经等同叶子（与 renderNodes 的 branch 判断一致）。 */
@@ -59,7 +64,9 @@ function CheckMarker({ state, dim }: { state: TreeCheckedState; dim: boolean }) 
     )}
   >{state === "mixed" ? <IconMinus aria-hidden="true" className="size-3/4" /> : state === true ? <IconCheck aria-hidden="true" className="size-3/4" /> : null}</span>;
 }
-export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedChange, selectedId, defaultSelectedId = null, onSelectionChange, selectable = true, checkable = false, checkedIds, defaultCheckedIds = [], onCheckedChange, disabled = false, emptyContent, render, ref, className, onFocusCapture, onBlurCapture, ...props }: TreeProps) {
+export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedChange, selectedId, defaultSelectedId = null, onSelectionChange, selectable = true, checkable = false, checkedIds, defaultCheckedIds = [], onCheckedChange, disabled = false, emptyContent, defaultFocusedId = null, render, ref, className, onFocusCapture, onBlurCapture, ...props }: TreeProps) {
+  // 名称在 role="tree" 的根上；treeitem 的名称另由各行自己的标签提供。
+  if (!isName(props["aria-label"]) && !isName(props["aria-labelledby"])) throw new Error(`Tree requires a nonempty aria-label or aria-labelledby naming the tree; received aria-label ${received(props["aria-label"])} and aria-labelledby ${received(props["aria-labelledby"])}.`);
   const { messages } = useUILocale();
   const [localExpanded, setLocalExpanded] = React.useState<readonly string[]>(defaultExpandedIds);
   const [localSelected, setLocalSelected] = React.useState<string | null>(defaultSelectedId);
@@ -87,7 +94,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     const count = pool.filter(leaf => checkedSet.has(leaf.id)).length;
     return count === 0 ? false : count === pool.length ? true : "mixed";
   }
-  const [focused, setFocused] = React.useState<string | null>(null);
+  const [focused, setFocused] = React.useState<string | null>(defaultFocusedId);
   const typed = React.useRef({ text: "", time: 0 });
   const root = React.useRef<HTMLDivElement | null>(null); const refs = React.useRef(new Map<string, HTMLLIElement>()); const ownsFocus = React.useRef(false);
   let active = enabled.find(entry => entry.node.id === focused)?.node.id ?? null;
@@ -150,15 +157,16 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       const checkState = checkable ? deriveChecked(node) : false;
       const checkDim = checkable && (isDisabled || (branch && collectLeaves(node).every(leaf => leaf.disabled)));
       return <li key={node.id} data-slot="tree-item" role="treeitem" aria-labelledby={`${idBase}-${order.get(node.id)}`} aria-level={level} aria-expanded={branch ? open : undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
-        <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selected === node.id && selectable && "bg-surface-selected", isDisabled && "opacity-disabled")}>
+        <div data-slot="tree-row" className={cn("flex min-h-(--qy-row-default) min-w-0 items-center gap-(--qy-action-gap) rounded-item", !checkable && selectable && (selected === node.id ? "bg-surface-selected" : !isDisabled && "hover:bg-accent"), isDisabled && "opacity-disabled")}>
           {branch ? <Button data-slot="tree-toggle" variant="quiet" size="xs" shape="icon" disabled={isDisabled} tabIndex={-1} aria-hidden="true" onMouseDown={event => event.preventDefault()} onClick={event => { event.stopPropagation(); changeExpanded(node.id, event, "pointer"); if (!isDisabled) focus(node.id); }}><IconChevronRight aria-hidden="true" className={cn("rtl:rotate-180", open && "rotate-90 rtl:rotate-90")} /></Button> : <span aria-hidden="true" className="w-(--qy-control-xs) shrink-0" />}
           {checkable && <CheckMarker state={checkState} dim={Boolean(checkDim)} />}
-          <span id={`${idBase}-${order.get(node.id)}`} data-slot="tree-label" className="min-w-0 text-body wrap-anywhere">{node.label}</span>
+          {/* 选中行除选中面外再加字重：不靠颜色的第二信号（WCAG 1.4.1，semantic.css 反馈梯）。 */}
+          <span id={`${idBase}-${order.get(node.id)}`} data-slot="tree-label" className={cn("min-w-0 text-body wrap-anywhere", !checkable && selectable && selected === node.id && "font-medium")}>{node.label}</span>
         </div>
         {/* 下一级从上一级内容列的起点开始：缩进 = 展开列 + 动作间隔。每一级的展开钮、勾选标记各成一列（§19）。 */}
         {open && <ul data-slot="tree-group" role="group" className="m-0 min-w-0 list-none ps-[calc(var(--qy-control-xs)+var(--qy-action-gap))]">{renderNodes(node.children!, level + 1)}</ul>}
       </li>;
     });
   }
-  return useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-disabled": disabled || undefined, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) ownsFocus.current = false; onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: nodes.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? messages.treeEmpty}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
+  return useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-multiselectable": checkable || undefined, "aria-disabled": disabled || undefined, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) ownsFocus.current = false; onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: nodes.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? messages.treeEmpty}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
 }

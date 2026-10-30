@@ -32,3 +32,13 @@ test("the root records its size, defaulting to md; size is a plain attribute on 
   rerender(<Stat state="known" size="lg"><StatLabel>在线</StatLabel><StatValue>12</StatValue></Stat>);
   expect(container.firstChild).toHaveAttribute("data-size", "lg");
 });
+
+test("the value carries the metric state of its Stat, so unknown and inapplicable stay distinct from a measured number", () => {
+  const { container, rerender } = render(<Stat state="known"><StatLabel>数量</StatLabel><StatValue>0</StatValue></Stat>);
+  const value = () => container.querySelector("[data-slot=stat-value]")!;
+  expect(value()).toHaveAttribute("data-state", "known");
+  for (const state of ["unknown", "not-applicable"] as const) {
+    rerender(<Stat state={state}><StatLabel>数量</StatLabel><StatValue>—</StatValue></Stat>);
+    expect(value()).toHaveAttribute("data-state", state);
+  }
+});

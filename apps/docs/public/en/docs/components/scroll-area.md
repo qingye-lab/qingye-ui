@@ -1,13 +1,14 @@
 # Scroll area
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 6289755c79e2dcce32f25f588a86ecc2f4a617675f4785379c78485ebad4b8e8
+Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
 
 Native scrolling with an optional composition of draggable scrollbars.
 
 ## Notes
+- Division of labor: use ScrollArea by default (one element, native scrollbars that follow platform settings); reach for ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner only when the design requires drawn scrollbars. Do not nest one inside the other; ScrollArea does not accept Scrollbar parts.
 - ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.
 - For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.
 - The 3-unit track width and half-unit inset are composition presets. The primitive jointly calculates thumb extent and travel; do not independently override its minimum extent. Content reserves ending space for the tracks.
@@ -77,7 +78,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: does not read UILocale
@@ -89,7 +90,7 @@ Written descriptions; the list above is the type-resolved fact.
 An actual scrollable div; native scrollbars respect platform settings.
 - children: ReactNode. Complete content without windowing or hiding collection items.
 - style / className: div props. Consumer layout supplies height/maxHeight and width; overflow defaults to auto.
-- tabIndex: number; default 0. Keyboard-reachable by default; retains native arrows/Page/Home/End scrolling.
+- tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
@@ -105,7 +106,7 @@ A draggable track shown for actual overflow; includes a real Thumb when children
 The public primitive measures thumb extent/position and handles dragging; Corner reserves the two-axis intersection and the full primitive remains available.
 
 ## Keyboard
-- Tab: Reach the actual viewport or entries within its content.
+- Tab: Reach a viewport whose content overflows, or entries within its content.
 - Arrow keys / PageUp / PageDown / Home / End: Use native browser scrolling; nested controls retain their own keys.
 
 ## Source examples

@@ -1,9 +1,9 @@
 # Workspace
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
+Source SHA-256: 781c419aa6afcd278877ca1ec21c076cb4d75b5ec015b727234fb14030f6c432
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 
@@ -12,9 +12,10 @@ A page's name, summary and page-level actions live in the header, so the body ha
 
 ## Notes
 - The header is a header element; outside main, section and article it is the page's banner landmark. The content is main, so place one Workspace per page.
-- After navigation the application moves focus to WorkspaceContent, and a skip link targets its id; an explicit tabIndex from the caller wins.
+- Workspace carries its own skip link ('Skip to main content'): it appears on the first Tab and Enter moves focus to WorkspaceContent; the shell generates the content's id, and an id you pass wins. After navigation the application moves focus to WorkspaceContent; an explicit tabIndex from the caller wins.
 - Content sent to the header appears after the first commit (it is not in server HTML); write the title directly as WorkspaceHeader's children when it must be there on first paint.
 - In forced colors the shadow is removed and the container line carries the surface's boundary; no extra line is needed.
+- WorkspaceTitle is the page's only h1; do not add a PageHeader title inside the content, and start sections at level 2.
 
 ## Use and ownership
 - The shell of an admin-style application: persistent navigation at the side, one work surface for the current page.
@@ -88,14 +89,15 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### WorkspaceTitle
 - `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
 - `numeric?`: `boolean`.
-- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, react-dom, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, react-dom, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context SidebarHandleContext: without a provider nullable; provided by Workspace
 - Context WorkspaceContext: without a provider nullable; provided by Workspace
 
 ## Curated API
@@ -327,7 +329,7 @@ export function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {
                 selection={{ label: "选择本页记录", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: "name" }}
                 tableProps={{ "aria-label": "采集记录", className: "min-w-[calc(32*var(--qy-cai))]", containerProps: { framed: false } }}
                 emptyContent={<span className="text-muted-foreground">没有匹配的记录</span>} />
-              {details && active && <Stack render={<aside aria-label="记录详情" />} gap="panel">
+              {details && active && <Stack render={<aside aria-label="记录详情" lang="zh-CN" />} gap="panel">
                 <h2 className="m-0 text-heading wrap-anywhere">{active.name}</h2>
                 {!filtered.some(row => row.id === active.id) && <Alert tone="info"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}
                 <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className="numeric">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>

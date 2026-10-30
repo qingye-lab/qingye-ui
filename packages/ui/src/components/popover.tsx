@@ -69,6 +69,13 @@ export function PopoverPopup({
   ...props
 }: PopoverPopupProps): React.ReactElement {
   const layer = useFloatingLayer("popup");
+  // 浮层族的边界与阴影（M21，NG3；这里是全族的集中说明，其余文件只引用）：
+  // 一道 border-border 线 + 一档阴影，两者表达两件事，不是 NG11 的重复划界——
+  //   线划出范围（面纸色相同的浮层压在纸上，只靠色差读不出边；深色主题里阴影几乎不可见，只有线给出边缘）；
+  //   阴影只表达真实的浮起（绘事后素「阴影只表达真实的浮起」）。去掉线范围不清，去掉阴影「在上面」不见，故各留一样。
+  // 阴影档按浮起的高度分，档值本身是预设（semantic.css）：
+  //   shadow-raised —— 贴着触发物、非阻断的临时浮层：Popover、Tooltip、HoverCard、Menu / ContextMenu、Select、Combobox、Autocomplete；
+  //   shadow-overlay —— 阻断（或占据整边）的工作面，离页面更远：Dialog、AlertDialog、Drawer。
   // 基础层 §4、§6：临时浮起有自己的圆角与表面身份，不因子内容是日历而改变。
   // 基础层 §12：这里只提供定位、origin 与 slot；入退参数完全归 motion.css。
   // 基础层 §15、§18：外层不裁切焦点；滚动层内缘用面板角色留出焦点空间。
@@ -149,7 +156,7 @@ export function PopoverTitle({
     <PopoverPrimitive.Title
       {...props}
       className={(state) =>
-        cn("text-heading", typeof className === "function" ? className(state) : className)
+        cn("min-w-0 text-heading wrap-anywhere", typeof className === "function" ? className(state) : className)
       }
       data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-title"}
     />
@@ -164,7 +171,7 @@ export function PopoverDescription({
     <PopoverPrimitive.Description
       {...props}
       className={(state) =>
-        cn("text-body text-muted-foreground", typeof className === "function" ? className(state) : className)
+        cn("min-w-0 text-body text-muted-foreground wrap-anywhere", typeof className === "function" ? className(state) : className)
       }
       data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "popover-description"}
     />

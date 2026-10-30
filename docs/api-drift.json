@@ -10,27 +10,82 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 95,
+    "components": 102,
     "byStatus": {
-      "type-resolved": 95
+      "type-resolved": 102
     },
     "documentedButMissing": 0,
-    "undocumented": 107,
-    "undocumentedDeclaredInThisComponentsFile": 13,
+    "undocumented": 137,
+    "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 185,
+    "uncheckedWrittenNames": 193,
     "uncheckedByReason": {
-      "generic": 129,
+      "generic": 132,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
-      "unparsed": 6,
-      "dotted-path-into-another-type": 4
+      "unparsed": 10,
+      "dotted-path-into-another-type": 5
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
   "documentedButMissing": [],
   "unresolved": [],
   "undocumented": [
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "onClick",
+      "declaredAt": "packages/ui/src/components/bulk-action-bar.tsx:40"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
@@ -142,72 +197,133 @@
       "declaredAt": "packages/ui/src/components/button.tsx:83"
     },
     {
+      "component": "cascader",
+      "part": "Cascader",
+      "prop": "aria-describedby",
+      "declaredAt": "packages/ui/src/components/cascader.tsx:48"
+    },
+    {
+      "component": "cascader",
+      "part": "Cascader",
+      "prop": "aria-invalid",
+      "declaredAt": "packages/ui/src/components/cascader.tsx:49"
+    },
+    {
       "component": "chart",
       "part": "Chart",
       "prop": "events",
       "declaredAt": "packages/ui/src/components/chart.tsx:98"
     },
     {
+      "component": "command",
+      "part": "CommandGroup",
+      "prop": "children",
+      "declaredAt": "packages/ui/src/components/command.tsx:112"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "defaultQuery",
+      "declaredAt": "packages/ui/src/components/command.tsx:64"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "filter",
+      "declaredAt": "packages/ui/src/components/command.tsx:61"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "onItemSelect",
+      "declaredAt": "packages/ui/src/components/command.tsx:67"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "onQueryChange",
+      "declaredAt": "packages/ui/src/components/command.tsx:65"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "popupClassName",
+      "declaredAt": "packages/ui/src/components/command.tsx:208"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "query",
+      "declaredAt": "packages/ui/src/components/command.tsx:63"
+    },
+    {
       "component": "context-menu",
       "part": "ContextMenuItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "viaComponent": "menu"
+    },
+    {
+      "component": "context-menu",
+      "part": "ContextMenuItem",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/menu.tsx:57",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuLinkItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuCheckboxItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuCheckboxItem",
       "prop": "markerPosition",
-      "declaredAt": "packages/ui/src/components/menu.tsx:67",
+      "declaredAt": "packages/ui/src/components/menu.tsx:71",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuRadioItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuRadioItem",
       "prop": "markerPosition",
-      "declaredAt": "packages/ui/src/components/menu.tsx:74",
+      "declaredAt": "packages/ui/src/components/menu.tsx:78",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuSubmenuTrigger",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuGroupLabel",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuGroupLabel",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25",
+      "declaredAt": "packages/ui/src/components/menu.tsx:26",
       "viaComponent": "menu"
     },
     {
@@ -243,6 +359,12 @@
       "part": "CornerMark",
       "prop": "children",
       "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "prop": "stickyHeader",
+      "declaredAt": "packages/ui/src/components/data-table.tsx:87"
     },
     {
       "component": "data-table",
@@ -297,8 +419,57 @@
       "component": "empty",
       "part": "EmptyTitle",
       "prop": "numeric",
-      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "declaredAt": "packages/ui/src/components/typography.tsx:61",
       "viaComponent": "typography"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
     },
     {
       "component": "filter-bar",
@@ -504,15 +675,21 @@
     },
     {
       "component": "menu",
+      "part": "MenuItem",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/menu.tsx:57"
+    },
+    {
+      "component": "menu",
       "part": "MenuGroupLabel",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25"
+      "declaredAt": "packages/ui/src/components/menu.tsx:26"
     },
     {
       "component": "menu",
       "part": "MenuGroupLabel",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/menu.tsx:25"
+      "declaredAt": "packages/ui/src/components/menu.tsx:26"
     },
     {
       "component": "otp-field",
@@ -532,7 +709,7 @@
       "component": "page-header",
       "part": "PageHeaderTitle",
       "prop": "numeric",
-      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "declaredAt": "packages/ui/src/components/typography.tsx:61",
       "viaComponent": "typography"
     },
     {
@@ -671,14 +848,14 @@
       "component": "section",
       "part": "SectionTitle",
       "prop": "numeric",
-      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "declaredAt": "packages/ui/src/components/typography.tsx:61",
       "viaComponent": "typography"
     },
     {
       "component": "section",
       "part": "SectionTitle",
       "prop": "step",
-      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "declaredAt": "packages/ui/src/components/typography.tsx:61",
       "viaComponent": "typography"
     },
     {
@@ -734,19 +911,25 @@
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "count",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:127"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
     },
     {
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "max",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:127"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
     },
     {
       "component": "sidebar",
       "part": "SidebarSub",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:171"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:255"
+    },
+    {
+      "component": "table",
+      "part": "TableHeader",
+      "prop": "sticky",
+      "declaredAt": "packages/ui/src/components/table.tsx:87"
     },
     {
       "component": "theme-provider",
@@ -761,10 +944,22 @@
       "declaredAt": "packages/ui/src/components/toolbar.tsx:17"
     },
     {
+      "component": "tree-select",
+      "part": "TreeSelect",
+      "prop": "aria-describedby",
+      "declaredAt": "packages/ui/src/components/tree-select.tsx:26"
+    },
+    {
+      "component": "tree-select",
+      "part": "TreeSelect",
+      "prop": "aria-invalid",
+      "declaredAt": "packages/ui/src/components/tree-select.tsx:27"
+    },
+    {
       "component": "workspace",
       "part": "WorkspaceTitle",
       "prop": "numeric",
-      "declaredAt": "packages/ui/src/components/typography.tsx:60",
+      "declaredAt": "packages/ui/src/components/typography.tsx:61",
       "viaComponent": "typography"
     }
   ],
@@ -829,6 +1024,13 @@
         "series",
         "share",
         "total"
+      ]
+    },
+    {
+      "component": "input-modality-provider",
+      "part": "MotionProvider",
+      "ownProps": [
+        "children"
       ]
     },
     {
@@ -1046,6 +1248,13 @@
       "reason": "generic"
     },
     {
+      "component": "color-picker",
+      "part": "ColorPicker",
+      "written": "className / style / 其余 button 属性",
+      "token": "其余 button 属性",
+      "reason": "generic"
+    },
+    {
       "component": "combobox",
       "part": "ComboboxPrimitive",
       "written": "ComboboxPrimitive",
@@ -1167,7 +1376,21 @@
     {
       "component": "data-table",
       "part": "DataTablePattern",
-      "written": "caption / busy / tableProps / native div props",
+      "written": "columns[].pinned / columns[].empty",
+      "token": "columns[].pinned",
+      "reason": "unparsed"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTablePattern",
+      "written": "columns[].pinned / columns[].empty",
+      "token": "columns[].empty",
+      "reason": "unparsed"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTablePattern",
+      "written": "caption / busy / error / tableProps / native div props",
       "token": "native div props",
       "reason": "unparsed"
     },
@@ -1204,6 +1427,13 @@
       "part": "DataTable",
       "written": "columnDef.meta.ellipsis",
       "token": "columnDef.meta.ellipsis",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.numeric",
+      "token": "columnDef.meta.numeric",
       "reason": "dotted-path-into-another-type"
     },
     {
@@ -1331,6 +1561,13 @@
       "written": "FieldsetPrimitive",
       "token": "(whole part)",
       "reason": "part-not-applicable"
+    },
+    {
+      "component": "file-trigger",
+      "part": "FileTrigger",
+      "written": "disabled / ref / render / Button props",
+      "token": "Button props",
+      "reason": "generic"
     },
     {
       "component": "file-upload",
@@ -1704,6 +1941,20 @@
       "reason": "part-not-applicable"
     },
     {
+      "component": "resizable",
+      "part": "ResizablePanelGroup",
+      "written": "className / ref / div props",
+      "token": "div props",
+      "reason": "unparsed"
+    },
+    {
+      "component": "resizable",
+      "part": "ResizableHandle",
+      "written": "className / ref / div props",
+      "token": "div props",
+      "reason": "unparsed"
+    },
+    {
       "component": "scroll-area",
       "part": "ScrollArea",
       "written": "render / ref / ARIA / events",
@@ -1798,6 +2049,13 @@
       "component": "sidebar",
       "part": "Sidebar / SidebarToggle",
       "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "written": "render / native props",
       "token": "native props",
       "reason": "generic"
     },

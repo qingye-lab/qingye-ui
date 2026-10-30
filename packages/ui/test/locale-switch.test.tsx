@@ -41,3 +41,9 @@ test("current locale remains visible if omitted, and disabled/canceled changes p
   expect(request).not.toHaveBeenCalled();
   expect(screen.getByRole("combobox")).toHaveValue("zh-CN");
 });
+
+test("each option is written in its own language and says so with lang", () => {
+  render(<UILocaleProvider locale={zhCN}><LocaleSwitch options={options} onLocaleChange={() => {}} /></UILocaleProvider>);
+  expect(screen.getByRole("option", { name: "English" })).toHaveAttribute("lang", "en-US");
+  expect(screen.getByRole("option", { name: "中文" })).toHaveAttribute("lang", "zh-CN");
+});

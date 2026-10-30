@@ -1,9 +1,9 @@
 # SearchInput
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
-Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0
+Source SHA-256: 0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7
 
 Enter a search term and clear it in one step.
 
@@ -39,6 +39,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### SearchInput
 - `clearLabel?`: `string`. 清空按钮的名称，默认从 locale 读取。
 - `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `loading?`: `boolean`. 搜索正在进行。事实由调用方持有：组件只表示忙碌（搜索图标换成转动的记号、输入标 `aria-busy`、读屏播报「正在搜索」）， 不发请求、不推断完成，也**不阻止继续输入与清空**——查询随键入更换是常态，被挡住反而打断输入。
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - `onClear?`: `() => void`. 清空之后调用；值的变化仍走 onChange / onValueChange。清空不提交表单。
 - `size?`: `number | undefined`. 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。
@@ -58,7 +59,8 @@ InputGroup + search icon + Input (type=search) + a clear action.
 - value / defaultValue / onChange / onValueChange: InputProps. Controlled and uncontrolled values; clearing updates the value through the same native event path.
 - onClear: () => void. Called after clearing; the value change has already been sent through onChange / onValueChange. Clearing does not submit a form.
 - clearLabel: string. Name of the clear action, read from the locale by default.
-- readOnly / disabled: boolean; default false. No clear action when read only or disabled; disabling also follows Field and a native fieldset.
+- loading: boolean; default false. A search is in progress; the application owns that fact. The search icon becomes a spinning mark in the same slot (the boundary does not change size), the input is marked aria-busy, and screen readers hear Searching. Typing and clearing stay available.
+- readOnly / disabled: boolean; default false. No clear action when read only or disabled; read-only shows a Read only note in the boundary; disabling also follows Field and a native fieldset.
 - className / style / render / ref: InputProps. Applied to the real input.
 - controlClassName: string. Applied to the editing boundary, e.g. its width.
 - Other InputProps (except type / unstyled): InputProps. placeholder, name, form, aria-* and the rest are forwarded to the input.
@@ -121,6 +123,7 @@ export default function Demo() {
     <Stack gap="fields" className="w-full max-w-sm">
       <Field disabled><FieldLabel>禁用</FieldLabel><SearchInput defaultValue="青野" /></Field>
       <Field><FieldLabel>只读</FieldLabel><SearchInput readOnly defaultValue="青野" /></Field>
+      <Field><FieldLabel>搜索中</FieldLabel><SearchInput loading defaultValue="青野" /></Field>
     </Stack>
   );
 }

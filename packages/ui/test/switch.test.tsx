@@ -105,3 +105,21 @@ test("Field disabled is honored without changing the active setting", async () =
   expect(change).not.toHaveBeenCalled();
   expect(control).toBeChecked();
 });
+
+test("pending blocks toggling and exposes busy", async () => {
+  const change = vi.fn();
+  render(<Switch aria-label="同步" checked pending onCheckedChange={change} />);
+  const control = screen.getByRole("switch");
+  expect(control).toHaveAttribute("aria-busy", "true");
+  expect(control).toBeChecked();
+  await userEvent.click(control);
+  expect(change).not.toHaveBeenCalled();
+});
+
+test("a declared invalid fact stays exposed once the switch is on", async () => {
+  render(<Switch aria-label="启用" aria-invalid="true" />);
+  const control = screen.getByRole("switch", { name: "启用" });
+  await userEvent.click(control);
+  expect(control).toBeChecked();
+  expect(control).toHaveAttribute("aria-invalid", "true");
+});

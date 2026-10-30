@@ -11,7 +11,8 @@ export default {
     "BulkActionBar",
     "BulkActionBarActions",
     "BulkActionBarAction",
-    "BulkActionBarClear"
+    "BulkActionBarClear",
+    "BulkActionBarExtend"
   ],
   "decisions": "targets 与 scope 必填；执行传递当前对象版本快照，零选择禁止执行。",
   "decisionsEn": "Targets and scope are required; execution receives the current target/version snapshot, and zero selection prevents execution.",
@@ -29,6 +30,18 @@ export default {
           "descriptionEn": "Each target requires id, label and version; IDs are unique, version=0 is valid and scope is nonempty."
         },
         {
+          "name": "extent",
+          "type": "{ count: number; label: string }",
+          "description": "应用定义的整个集合（count 为正整数、label 非空）；显示计数与 label 而不列对象，targets 可为空，快照带 extent，由应用按自己持有的查询执行。",
+          "descriptionEn": "An application-defined whole set (positive integer count, nonempty label); shows count and label instead of listing targets, targets may be empty, and the snapshot carries extent for the application to execute against its own query."
+        },
+        {
+          "name": "sticky",
+          "type": "boolean",
+          "description": "吸附在最近的滚动容器顶端（Workspace 中为 WorkspaceContent），不能放进带 overflow 的中间容器；吸住且有内容滚过时才出现分界线（data-stuck）。",
+          "descriptionEn": "Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck)."
+        },
+        {
           "name": "disabled / onClear",
           "type": "boolean / callback",
           "description": "清除收到当前快照，不取消服务或自行清空应用状态。",
@@ -39,6 +52,19 @@ export default {
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
           "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "BulkActionBarExtend",
+      "description": "把本页选择扩展为整个集合的入口；仅在调用方渲染时出现，不推断是否还有更多。",
+      "descriptionEn": "Entry that extends the page selection to the whole set; it appears only when rendered and never infers whether more exist.",
+      "props": [
+        {
+          "name": "count / onExtend",
+          "type": "number / (event) => void",
+          "description": "默认文字「选择全部 N 项」，数字按界面语言分组；onClick.preventDefault() 取消。",
+          "descriptionEn": "Default text is Select all N items with locale-grouped digits; onClick.preventDefault() cancels."
         }
       ]
     },

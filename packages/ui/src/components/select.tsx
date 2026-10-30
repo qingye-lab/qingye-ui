@@ -2,11 +2,11 @@
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import { useRender } from "@base-ui/react/use-render";
-import { IconCheck, IconChevronDown } from "@tabler/icons-react";
+import { IconCheck, IconChevronDown, IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { overlayGroupLabelClassName } from "../overlay-group";
-import { candidateItemClassName, overlayItemClassName } from "../overlay-item";
+import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
 import { fillStateByData } from "../fill-state";
 import { popupOffset, useFloatingLayer } from "../floating-layer";
@@ -14,19 +14,55 @@ import { popupOffset, useFloatingLayer } from "../floating-layer";
 // Keep Node's ambient types out of the browser library; process may be absent.
 declare const process: { env: { NODE_ENV?: string } };
 
-export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, "multiple">;
+export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, "multiple"> & {
+  /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */
+  loading?: boolean | undefined;
+  /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。 */
+  error?: React.ReactNode;
+};
 export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger>;
 export type SelectValueProps = React.ComponentProps<typeof SelectPrimitive.Value>;
 export type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>;
 export type SelectPopupProps = React.ComponentProps<typeof SelectPrimitive.Popup> &
   Pick<SelectPrimitive.Positioner.Props, "side" | "align" | "sideOffset" | "alignOffset" | "alignItemWithTrigger"> &
-  Pick<SelectPrimitive.Portal.Props, "container"> & { positionerProps?: SelectPrimitive.Positioner.Props };
+  Pick<SelectPrimitive.Portal.Props, "container"> & {
+    positionerProps?: SelectPrimitive.Positioner.Props;
+    /** 没有子项时的说法；省略时用内置的「没有可选项」。应用若要说明查询对象，在这里给出。 */
+    emptyContent?: React.ReactNode;
+  };
 
 // 基础层 §2/§8、用户裁决 2026-10-05：Select 是填值控件，只有一套几何，
 // 跟随密度轴；已选择的值是内容，字号不随容器高度变化。
 const textProfile = "text-control-md-mobile sm:text-control-md";
 
 const EmptyValueLabel = React.createContext<React.ReactNode>(undefined);
+// 全部候选的名称（来自 Select 的 `items`）。触发器的宽度由它们中最长的一个决定，而不是由当前所选的那一个（见 SelectValue）。
+const ItemLabels = React.createContext<readonly React.ReactNode[]>([]);
+function itemLabels(items: unknown): React.ReactNode[] {
+  if (items === undefined || items === null) return [];
+  const flat = Array.isArray(items)
+    ? (items as Array<{ label?: React.ReactNode; items?: Array<{ label?: React.ReactNode }> }>).flatMap(item => "items" in item && item.items ? item.items : [item])
+    : Object.values(items as Record<string, React.ReactNode>).map(label => ({ label }));
+  // 同名只留一个：字符串名称按字面去重，其余节点原样保留。
+  const seen = new Set<string>();
+  const labels: React.ReactNode[] = [];
+  for (const { label } of flat) {
+    if (label === undefined || label === null || label === false || label === "") continue;
+    if (typeof label === "string" || typeof label === "number") { if (seen.has(String(label))) continue; seen.add(String(label)); }
+    labels.push(label);
+  }
+  return labels;
+}
+// 候选来源的三种非常态（M2）：加载、失败、空。前两者是应用告知的事实，经 Select 根传到触发器与候选面；
+// 空则是候选面自己看得见的事实（没有可渲染的子项）。三者互斥地占「第一项的位置」，不并存。
+const SourceState = React.createContext<{ loading: boolean; error: React.ReactNode; readOnly: boolean }>({ loading: false, error: undefined, readOnly: false });
+const hasError = (error: React.ReactNode) => error !== undefined && error !== null && error !== false && error !== "";
+function hasContent(node: React.ReactNode): boolean {
+  if (node === null || node === undefined || typeof node === "boolean" || node === "") return false;
+  if (Array.isArray(node)) return node.some(hasContent);
+  if (React.isValidElement<{ children?: React.ReactNode }>(node) && node.type === React.Fragment) return hasContent(node.props.children);
+  return true;
+}
 function triggerState(state: SelectPrimitive.Trigger.State): SelectPrimitive.Trigger.State {
   return state.value === "" ? { ...state, placeholder: false } : state;
 }
@@ -42,7 +78,7 @@ function ValueElement({ elementProps, state, render }: { elementProps: React.Com
 }
 
 /** 单值选择，null 是未选择。展开列表默认不阻断其余字段。 */
-export function Select<Value>({ modal = false, ...props }: SelectProps<Value>) {
+export function Select<Value>({ modal = false, loading = false, error, ...props }: SelectProps<Value>) {
   // Base UI 1.7 把序列化为 "" 的值视为占位。这里只修正空字符串的名称与占位表达，
   // 值、隐藏 input、键盘及校验仍由原语拥有，不伪造另一套选择状态。
   const items = props.items;
@@ -60,8 +96,10 @@ export function Select<Value>({ modal = false, ...props }: SelectProps<Value>) {
   // 只读保留当前值，不打开候选（基础层 §9「只读与禁用」）。Base UI 1.8 起只读的 Select 可以打开浏览；
   // 本库只读的含义是「值在、可聚焦、可读出」，候选面是改值的入口，所以在打开请求处取消，关闭照常。
   const { readOnly, onOpenChange } = props;
-  return <EmptyValueLabel.Provider value={emptyLabel}><SelectPrimitive.Root {...props} multiple={false} modal={modal}
-    onOpenChange={(open, details) => { if (open && readOnly) { details.cancel(); return; } onOpenChange?.(open, details); }} /></EmptyValueLabel.Provider>;
+  const source = React.useMemo(() => ({ loading, error, readOnly: Boolean(readOnly) }), [loading, error, readOnly]);
+  const labels = React.useMemo(() => itemLabels(items), [items]);
+  return <EmptyValueLabel.Provider value={emptyLabel}><ItemLabels.Provider value={labels}><SourceState.Provider value={source}><SelectPrimitive.Root {...props} multiple={false} modal={modal}
+    onOpenChange={(open, details) => { if (open && readOnly) { details.cancel(); return; } onOpenChange?.(open, details); }} /></SourceState.Provider></ItemLabels.Provider></EmptyValueLabel.Provider>;
 }
 
 export function SelectTrigger({ children, className, style, render, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...props }: SelectTriggerProps) {
@@ -72,8 +110,10 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
     "--qy-select-icon": "var(--qy-fill-icon)",
     "--qy-select-icon-narrow": "var(--qy-fill-icon-narrow)",
   } as React.CSSProperties;
+  const { loading, readOnly } = React.useContext(SourceState);
+  const { messages } = useUILocale();
   return <SelectPrimitive.Trigger
-    data-slot="select-trigger" {...props}
+    data-slot="select-trigger" aria-busy={loading || undefined} {...props}
     aria-label={ariaLabel}
     // Base UI adds FieldLabel automatically; an explicit name must override it.
     aria-labelledby={ariaLabelledBy ?? (ariaLabel ? "" : undefined)}
@@ -83,6 +123,8 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
       // 不默认拉满容器——一个「已选择：中」的触发器横跨 800px 时，文字与箭头之间会
       // 空出一大片，读不出「这里装的是一个值」。宽度由 w-fit 交给内容决定，
       // 下限只保证占位文字与箭头放得下（留白×2 + 箭头 + 字段间隔 + --qy-field-min-text）。
+      // 「跟着值走」指跟着这一组候选，不是跟着当前所选的那一个：选另一项时触发器不应伸缩，
+      // 把周围的版面推来推去。宽度因此由最长的候选名称撑出（SelectValue 里的隐形占位，名称来自 `items`）。
       // 要拉满时由调用方给 className（如 `w-full`），这属于版式决定，不是控件默认。
       "inline-flex w-fit max-w-full items-center justify-between gap-(--qy-field-gap) min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-(--qy-fill-radius) border border-input bg-surface-field px-(--qy-select-padding) text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
       "min-w-[calc(var(--qy-select-padding)*2+var(--qy-select-icon)+var(--qy-field-gap)+var(--qy-field-min-text))]",
@@ -94,6 +136,8 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
     )}
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(triggerState(state)) : style) })}
   >{children ?? <SelectValue />}
+    {/* 只读说明与 Input 同一件事、同一档字；只读本身由触发器的 aria-readonly 向读屏表达，故 aria-hidden。ms-auto 让它贴着箭头，而不是被两端对齐拉到中间。 */}
+    {readOnly ? <span data-slot="select-readonly" aria-hidden="true" className="ms-auto shrink-0 text-caption text-muted-foreground">{messages.readOnly}</span> : null}
     <SelectPrimitive.Icon data-slot="select-icon" className="pointer-events-none flex shrink-0 items-center text-muted-foreground">
       <IconChevronDown aria-hidden="true" className="size-(--qy-select-icon-narrow) sm:size-(--qy-select-icon)" />
     </SelectPrimitive.Icon>
@@ -103,18 +147,39 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
 export function SelectValue({ placeholder, className, style, render, children, ...props }: SelectValueProps) {
   const { messages } = useUILocale();
   const emptyLabel = React.useContext(EmptyValueLabel);
+  const labels = React.useContext(ItemLabels);
+  const shownPlaceholder = placeholder ?? messages.selectPlaceholder;
   const valueState = (state: SelectPrimitive.Value.State) => state.value === "" ? { ...state, placeholder: false } : state;
-  return <SelectPrimitive.Value
-    data-slot="select-value" {...props} placeholder={placeholder ?? messages.selectPlaceholder}
-    className={(state) => cn("min-w-0 text-start whitespace-normal wrap-break-word data-placeholder:text-muted-foreground", typeof className === "function" ? className(valueState(state)) : className)}
+  // 稳定宽度：当前值与全部候选（及占位文字）叠在同一个网格格子里，格子宽 = 其中最长者；隐形的那些不占高度、不进读屏。
+  // 字符串名称用 `content: attr()` 画，不在 DOM 里留第二份文字（文本查询与复制都只见真实的那一份）；
+  // 其余节点（带图标的名称等）原样放入。调用方自带 children 时，显示什么由它负责，不做占位。
+  const sizers = children == null ? [...labels, ...(typeof shownPlaceholder === "string" || typeof shownPlaceholder === "number" ? [shownPlaceholder] : [])] : [];
+  const value = <SelectPrimitive.Value
+    data-slot="select-value" {...props} placeholder={shownPlaceholder}
+    className={(state) => cn("col-start-1 row-start-1 min-w-0 text-start whitespace-normal wrap-break-word data-placeholder:text-muted-foreground", typeof className === "function" ? className(valueState(state)) : className)}
     style={typeof style === "function" ? (state) => style(valueState(state)) : style}
     render={(elementProps, state) => <ValueElement elementProps={state.value === "" && children == null ? { ...elementProps, children: emptyLabel ?? "" } : elementProps} state={valueState(state)} render={render} />}
   >{children}</SelectPrimitive.Value>;
+  if (!sizers.length) return value;
+  return <span data-slot="select-value-box" className="inline-grid min-w-0">
+    {value}
+    {sizers.map((label, index) => typeof label === "string" || typeof label === "number"
+      ? <span key={index} aria-hidden="true" data-slot="select-value-sizer" data-label={label} className="pointer-events-none invisible col-start-1 row-start-1 h-0 overflow-hidden whitespace-nowrap before:content-[attr(data-label)]" />
+      : <span key={index} aria-hidden="true" data-slot="select-value-sizer" className="pointer-events-none invisible col-start-1 row-start-1 h-0 overflow-hidden whitespace-nowrap">{label}</span>)}
+  </span>;
 }
 
-/** 入退交给 motion.css；候选继承实际所属工作面的层级。 */
-export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = popupOffset, alignOffset, alignItemWithTrigger = false, positionerProps, className, children, ...props }: SelectPopupProps) {
+/** 入退交给 motion.css；候选继承实际所属工作面的层级。边界与阴影档同 Popover（见 popover.tsx 的 PopoverPopup）。 */
+export function SelectPopup({ container, side = "bottom", align = "start", sideOffset = popupOffset, alignOffset, alignItemWithTrigger = false, positionerProps, className, children, emptyContent, ...props }: SelectPopupProps) {
   const layer = useFloatingLayer("popup");
+  const { messages } = useUILocale();
+  const { loading, error } = React.useContext(SourceState);
+  const failed = hasError(error);
+  // 加载不是「没有」（§9：等待与结果是两件事），失败更不是；只有两者都不是、且确实没有子项时才说没有可选项。
+  const empty = !loading && !failed && !hasContent(children);
+  // 三种说法坐在第一项的位置上：同一起点、同一行高、同一字号（candidateEmptyClassName）；
+  // 等待记号的尺寸读填值图标角色（与候选项尾部对勾同一尺寸），不新增取值。
+  const marker = "size-(--qy-fill-icon-narrow) shrink-0 sm:size-(--qy-fill-icon)";
   return <SelectPrimitive.Portal container={container} data-slot="select-portal">
     <SelectPrimitive.Positioner
       data-slot="select-positioner" side={side} align={align} alignOffset={alignOffset} alignItemWithTrigger={alignItemWithTrigger}
@@ -124,9 +189,12 @@ export function SelectPopup({ container, side = "bottom", align = "start", sideO
     >
       <SelectPrimitive.Popup
         data-slot="select-popup" {...props}
-        className={(state) => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)}
+        className={(state) => cn("qy-select-popup min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)}
       >
-        <SelectPrimitive.List data-slot="select-list" className="max-h-(--available-height) overflow-y-auto overscroll-contain p-(--qy-overlay-inset)">{children}</SelectPrimitive.List>
+        {failed && <div role="alert" data-slot="select-error" className={cn(candidateEmptyClassName, "flex flex-wrap items-center gap-(--qy-field-gap) text-foreground")}>{error}</div>}
+        {loading && !failed && <div role="status" data-slot="select-loading" className={cn(candidateEmptyClassName, "flex items-center gap-(--qy-field-gap)")}><IconLoader2 aria-hidden="true" className={cn("qy-spin", marker)} />{messages.loading}</div>}
+        {empty && <div data-slot="select-empty" className={candidateEmptyClassName}>{emptyContent ?? messages.selectEmpty}</div>}
+        <SelectPrimitive.List data-slot="select-list" aria-busy={loading || undefined} className="max-h-(--available-height) overflow-y-auto overscroll-contain p-(--qy-overlay-inset) empty:p-0">{children}</SelectPrimitive.List>
       </SelectPrimitive.Popup>
     </SelectPrimitive.Positioner>
   </SelectPrimitive.Portal>;

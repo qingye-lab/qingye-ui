@@ -2,7 +2,8 @@
 
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
 import { useRender } from "@base-ui/react/use-render";
-import { useRef, useState, type ReactElement } from "react";
+import { isValidElement, useRef, useState, type ReactElement } from "react";
+import { useUILocale } from "../locale";
 import { FloatingLayerScope, useFloatingLayer } from "../floating-layer";
 import { Button } from "./button";
 import { DialogHeader, DialogPanel, DialogFooter, type DialogGroupProps, type DialogPopupProps } from "./dialog";
@@ -35,7 +36,8 @@ export function AlertDialogPopup({ portalProps, backdropProps, viewportProps, in
   const popup = useRender({ ref: [panel, ref ?? null], render: <AlertDialogPrimitive.Popup {...props}
     initialFocus={initialFocus ?? (() => panel.current)} aria-modal="true" data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "alert-dialog-popup"}
     className={(state) => cn(
-      "qy-alert-dialog-popup pointer-events-auto relative grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
+      // 与 DialogPopup 同一结构（M22）：有 AlertDialogPanel 时页眉页脚固定、面板内部滚动；边界与阴影档同 Dialog。
+      "qy-alert-dialog-popup pointer-events-auto relative grid has-[>[data-slot=alert-dialog-panel]]:flex has-[>[data-slot=alert-dialog-panel]]:flex-col min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto has-[>[data-slot=alert-dialog-panel]]:overflow-hidden rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
       typeof className === "function" ? className(state) : className,
     )} /> });
   return <AlertDialogPrimitive.Portal {...portalProps} keepMounted={false}>
@@ -52,17 +54,21 @@ export function AlertDialogPopup({ portalProps, backdropProps, viewportProps, in
 
 export function AlertDialogTitle({ className, ...props }: AlertDialogPrimitive.Title.Props): ReactElement {
   return <AlertDialogPrimitive.Title {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "alert-dialog-title"}
-    className={(state) => cn("min-w-0 text-heading wrap-break-word", typeof className === "function" ? className(state) : className)} />;
+    className={(state) => cn("min-w-0 text-heading wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 
 export function AlertDialogDescription({ className, ...props }: AlertDialogPrimitive.Description.Props): ReactElement {
   return <AlertDialogPrimitive.Description {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "alert-dialog-description"}
-    className={(state) => cn("min-w-0 text-body text-muted-foreground wrap-break-word", typeof className === "function" ? className(state) : className)} />;
+    className={(state) => cn("min-w-0 text-body text-muted-foreground wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 
-// 不替应用命名“取消”或宣称“撤销”；调用方提供明确的保留/返回选择。
-export function AlertDialogClose({ render, ...props }: AlertDialogPrimitive.Close.Props): ReactElement {
-  return <AlertDialogPrimitive.Close {...props} render={render ?? <Button variant="quiet" />} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "alert-dialog-close"} />;
+/** 离开这个提示而不做它所问的那件事，页面保持原样——这是 Close 实际做的事，所以默认名称是「返回」（messages.back），
+ * 与 ConfirmAction 的同一位置一致；不叫「取消」，因为它不撤销任何已发生的事，也不替应用宣称撤销（见 Confirm 对 cancelLabel 的显式覆盖）。
+ * 调用方给了 children（或 render 元素自带内容）时用调用方的，如「保留」。 */
+export function AlertDialogClose({ render, children, ...props }: AlertDialogPrimitive.Close.Props): ReactElement {
+  const { messages } = useUILocale();
+  const named = children != null || (isValidElement<{ children?: unknown }>(render) && render.props.children != null);
+  return <AlertDialogPrimitive.Close {...props} {...(children != null ? { children } : named ? {} : { children: messages.back })} render={render ?? <Button variant="quiet" />} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "alert-dialog-close"} />;
 }
 
 export function AlertDialogHeader(props: DialogGroupProps): ReactElement {

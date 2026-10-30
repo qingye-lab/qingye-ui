@@ -1,9 +1,9 @@
 # Autocomplete
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
+Source SHA-256: c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968
 
 Edit free text with optional suggestions.
 
@@ -12,9 +12,9 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 
 ## Notes
 - Use Combobox when a value must be confirmed from candidates.
-- An empty set does not imply an error or service failure. Supply empty content from real facts.
+- An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in "No options".
 - Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.
-- A command palette is not a separate component: place an open + inline Autocomplete in a Dialog; groups, keyboard access, and close-on-pick come from these parts. The application binds the shortcut; the library listens to no global keys. Autocomplete rather than Combobox because a command is an action, not a value to confirm and keep.
+- Use Command for a command palette.
 
 ## Use and ownership
 - Edit free text with optional suggestions.
@@ -199,48 +199,5 @@ export default function Demo() {
       <Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue="3 号楼东侧"><AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl></Autocomplete></Field>
     </div>
   );
-}
-```
-
-### 命令面板
-Source: apps/docs/src/content/autocomplete/demos/03-command-palette.tsx
-```tsx
-import { useEffect, useState } from "react";
-import { Autocomplete, AutocompleteCollection, AutocompleteControl, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList } from "@qingye_lab/ui/components/autocomplete";
-import { Dialog, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
-import { Inline } from "@qingye_lab/ui/components/layout";
-import { Kbd } from "@qingye_lab/ui/components/kbd";
-export const meta = { title: "命令面板", titleEn: "Command palette" };
-const commands = [
-  { value: "页面", items: ["概览", "设备", "告警", "设置"] },
-  { value: "操作", items: ["新建设备", "导出告警", "切换主题"] },
-];
-export default function Demo() {
-  const [open, setOpen] = useState(false);
-  const [last, setLast] = useState("");
-  // 快捷键是应用的事：库不监听全局按键，避免与站点已有的快捷键冲突。
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setOpen(value => !value); }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-  return <Inline gap="actions">
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>搜索 <Kbd>⌘K</Kbd></DialogTrigger>
-      <DialogPopup className="w-[min(32rem,100%)]">
-        <DialogTitle className="sr-only">命令面板</DialogTitle>
-        <Autocomplete open inline items={commands} autoHighlight="always" keepHighlight>
-          <div className="min-w-0">
-          <AutocompleteControl><AutocompleteInput aria-label="搜索页面与操作" placeholder="搜索页面与操作" /></AutocompleteControl>
-          <AutocompleteEmpty>没有匹配项</AutocompleteEmpty>
-          <AutocompleteList className="mt-(--qy-field-gap) max-h-72">{(group: (typeof commands)[number]) => <AutocompleteGroup key={group.value} items={group.items}><AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel><AutocompleteCollection>{(item: string) => <AutocompleteItem key={item} value={item} onClick={() => { setLast(item); setOpen(false); }}>{item}</AutocompleteItem>}</AutocompleteCollection></AutocompleteGroup>}</AutocompleteList>
-          </div>
-        </Autocomplete>
-      </DialogPopup>
-    </Dialog>
-    <output className="text-support text-muted-foreground">{last || "—"}</output>
-  </Inline>;
 }
 ```

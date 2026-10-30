@@ -29,10 +29,10 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
   /*
    * Documentation frame (以材为祖). Every width is a count of 材 or of reading
    * characters; the counts are presets, the units are the library's.
-   *   rail     11 材  the sidebar
+   *   rail     12 材  the sidebar: every bilingual entry fits on one row except 分段控件 SegmentedControl, whose English aid truncates
    *   gap       1 材  between regions (--docs-gap)
    *   column   42 材  the paper: one surface holding header, body and pager
-   *   toc      11 材  the on-page contents
+   *   toc      10 材  the on-page contents (gave the rail its 材; the frame stays 66)
    *   measure  40 characters of the reading size, the running-text line length
    * The paper, its inset and the measure are the library's Prose layout
    * (--qy-prose-column 38 材 + 2 × --qy-prose-inset 2 材 = 42 材; --qy-prose-measure):
@@ -42,15 +42,15 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
   /*
    * Site frame: the header, the home page, the documentation and the examples
    * share one centred width, so switching pages never moves an edge.
-   * 66 材 = rail 11 + gap 1 + paper 42 + gap 1 + contents 11 (the documentation
+   * 66 材 = rail 12 + gap 1 + paper 42 + gap 1 + contents 10 (the documentation
    * frame exactly); the gutter is the smallest margin a narrower window keeps.
    */
   --site-width: calc(66 * var(--qy-cai));
   --site-gutter: calc(2 * var(--qy-cai));
-  --docs-rail: calc(11 * var(--qy-cai));
+  --docs-rail: calc(12 * var(--qy-cai));
   --docs-gap: var(--qy-cai);
   --docs-column: calc(var(--qy-prose-column) + 2 * var(--qy-prose-inset));
-  --docs-toc: calc(11 * var(--qy-cai));
+  --docs-toc: calc(10 * var(--qy-cai));
   --docs-measure: var(--qy-prose-measure);
 
   /*
@@ -137,16 +137,16 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
     max-inline-size: var(--docs-column);
   }
 }
-/* paper 42 材 + gap 1 材 + toc 11 材 = 54 材 = 1080px = 67.5rem (the container's content box,
+/* paper 42 材 + gap 1 材 + toc 10 材 = 53 材 = 1060px = 66.25rem (the container's content box,
    which excludes the gap on its start side). Container conditions cannot read custom
    properties, so the sum is spelled out. */
-@container docs-reading-layout (min-width: 67.5rem) {
+@container docs-reading-layout (min-width: 66.25rem) {
   :where([data-docs-frame]) > [data-docs-body] > [data-docs-toc] {
     display: block;
   }
 }
 /* Where that column is hidden (the same condition, inverted) the edit link stays in the article. */
-@container docs-reading-layout (min-width: 67.5rem) {
+@container docs-reading-layout (min-width: 66.25rem) {
   :where([data-docs-frame]) [data-docs-edit-inline] {
     display: none;
   }

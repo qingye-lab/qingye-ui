@@ -1,9 +1,37 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { createRef } from "react";
-import { expect, test, vi } from "vitest";
+import { afterEach, expect, test, vi } from "vitest";
 import { ScrollArea, ScrollAreaContent, ScrollAreaCorner, ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from "../src/components/scroll-area";
 
+/* jsdom 不做布局：用可改的尺寸桩表示「内容是否溢出」，并捕获 ResizeObserver 的回调来模拟尺寸变化。 */
+const metrics = { scrollHeight: 0, clientHeight: 0, scrollWidth: 0, clientWidth: 0 };
+let notify: (() => void) | undefined;
+function stubLayout(next: Partial<typeof metrics>) {
+  Object.assign(metrics, { scrollHeight: 0, clientHeight: 0, scrollWidth: 0, clientWidth: 0 }, next);
+  for (const key of Object.keys(metrics) as (keyof typeof metrics)[]) vi.spyOn(HTMLElement.prototype, key, "get").mockImplementation(() => metrics[key]);
+  vi.stubGlobal("ResizeObserver", class { constructor(callback: () => void) { notify = callback; } observe() {} unobserve() {} disconnect() {} });
+}
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); notify = undefined; });
+
+test("an overflowing area is reachable by keyboard; one that fits is not a tab stop", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
+  render(<ScrollArea aria-label="条目">很长</ScrollArea>);
+  const viewport = screen.getByLabelText("条目");
+  expect(viewport).toHaveAttribute("tabindex", "0");
+  act(() => { metrics.scrollHeight = 100; notify?.(); });
+  expect(viewport).not.toHaveAttribute("tabindex");
+  act(() => { metrics.scrollWidth = 500; metrics.clientWidth = 200; notify?.(); });
+  expect(viewport).toHaveAttribute("tabindex", "0");
+});
+
+test("an explicit tabIndex from the caller is kept whether or not the content overflows", () => {
+  stubLayout({});
+  render(<ScrollArea aria-label="条目" tabIndex={-1}>短</ScrollArea>);
+  expect(screen.getByLabelText("条目")).toHaveAttribute("tabindex", "-1");
+});
+
 test("the real scroll viewport is keyboard reachable and forwards ref/render/native events", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
   const ref = createRef<HTMLDivElement>();
   const onScroll = vi.fn();
   const onKeyDown = vi.fn();

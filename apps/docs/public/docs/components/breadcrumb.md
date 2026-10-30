@@ -1,9 +1,9 @@
 # 路径 Breadcrumb
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
-Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
+Source SHA-256: fc48d9be8459b644e0133c7c3388e304dcc384b2d7052f80ea68e29057d6a7c0
 
 父级链接与明确的当前位置。
 
@@ -12,6 +12,7 @@ Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
 
 ## Notes
 - 不读取 URL、历史或自动创建父级；ol 直接子项必须是 li。
+- dir="rtl" 下分隔箭头随阅读方向翻转。
 
 ## Use and ownership
 - 对象有明确父级路径，直达后仍需识别位置。

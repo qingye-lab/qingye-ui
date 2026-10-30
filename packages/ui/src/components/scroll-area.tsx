@@ -1,16 +1,23 @@
 "use client";
 
+import * as React from "react";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
+import { useScrollable } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 
 export type ScrollAreaProps = useRender.ComponentProps<"div">;
 
-/** Real native scrolling; scrollbar visibility follows the user's platform settings. */
-export function ScrollArea({ render, ref, className, tabIndex = 0, ...props }: ScrollAreaProps) {
-  return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
-    "data-slot": "scroll-area", tabIndex,
+/**
+ * Real native scrolling; scrollbar visibility follows the user's platform settings.
+ * 键盘要能滚动它，所以内容溢出时可聚焦（tabIndex 0，须由调用方给出可访问名称）；不溢出就不进入 Tab 序列。
+ * 调用方显式给出 tabIndex 时以调用方为准。
+ */
+export function ScrollArea({ render, ref, className, tabIndex, ...props }: ScrollAreaProps) {
+  const [scrollRef, scrollable] = useScrollable<HTMLElement>(ref as React.Ref<HTMLElement> | undefined);
+  return useRender({ defaultTagName: "div", render, ref: scrollRef, props: mergeProps({
+    "data-slot": "scroll-area", ...(tabIndex !== undefined ? { tabIndex } : scrollable ? { tabIndex: 0 } : {}),
     className: "min-w-0 max-w-full overflow-auto outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring",
   }, props, { className: cn(className) }) });
 }

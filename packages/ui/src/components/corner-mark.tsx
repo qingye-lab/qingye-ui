@@ -1,20 +1,24 @@
 "use client";
 import * as React from "react";
 import { cn } from "../utils";
+import { assertTone, type Tone } from "../tone";
 
-// Keep Node's ambient types out of the browser library; process may be absent (button.tsx 同一做法)。
-declare const process: { env: { NODE_ENV?: string } };
-
-export type CornerMarkTone = "neutral" | "success" | "danger";
+/** 与 Badge、StatusDot、Alert 同一组状态类别（tone.ts），另加不施彩的 neutral。 */
+export type CornerMarkTone = "neutral" | Tone;
+/** `label` 是读屏听到的全部：计数写进去，并写真实数（「142 条未读」），不写截断后的「99+」——可见的数字只是它的缩写。 */
 type CornerMarkCommon = { children: React.ReactNode; tone?: CornerMarkTone; className?: string; wrapperClassName?: string };
 export type CornerMarkProps = CornerMarkCommon & (
   | { count: number; max?: number; dot?: never; label: string }
   | { dot: true; count?: never; max?: never; label: string }
 );
 
+/* 填充取各类别的文字色（-foreground），数字用纸色：-foreground 按「纸上 4.5:1」定明度，反过来纸色字压在它上面是同一对比。
+ * danger 例外，用实底危险填充与它配对的 on-fill 字（Button solid danger 的同一对 token）。 */
 const tones: Record<CornerMarkTone, string> = {
   neutral: "bg-foreground text-surface",
+  info: "bg-info-foreground text-surface",
   success: "bg-success-foreground text-surface",
+  warning: "bg-warning-foreground text-surface",
   danger: "bg-destructive-fill text-destructive-on-fill",
 };
 
@@ -33,17 +37,17 @@ const tones: Record<CornerMarkTone, string> = {
  * - 纸色圈：角标与宿主贴近时用一圈纸色隔开（ring-(--qy-surface)，2px，和图表标记点的纸色
  *   外圈同一机制）；宿主底色不是纸面时（例如铺 --qy-sidebar 的侧栏行），调用方用 className
  *   覆盖 ring 颜色——库不替调用方猜实际承载面（基础层 G9）。
- * - 墨与彩：默认焦墨；success 用于在线一类有语义的状态点；danger 用于需要立即处理的计数。
- *   三者都是已有的语义类别，没有脱离类别的彩色（NG10）。
+ * - 墨与彩：默认焦墨；彩色只取共用的四个状态类别（如 success 标在线、danger 标需要立即处理的计数），
+ *   没有脱离类别的彩色（NG10）。
  */
 export function CornerMark(props: CornerMarkProps) {
   const { children, tone = "neutral", className, wrapperClassName, label } = props;
   const isDot = "dot" in props && props.dot === true;
   const count = "count" in props ? props.count : undefined;
   const max = "max" in props && props.max ? props.max : 99;
-  if (typeof process !== "undefined" && process.env.NODE_ENV !== "production" && !label?.trim()) {
-    throw new Error("CornerMark requires a non-empty label so its mark reaches assistive technology.");
-  }
+  // 缺名称抛错，与 Tree、VirtualList 同一契约：不只在开发期——生产里一个读不出的角标同样是缺陷。
+  if (typeof label !== "string" || !label.trim()) throw new Error("CornerMark requires a non-empty label so its mark reaches assistive technology.");
+  if (tone !== "neutral") assertTone(tone, "CornerMark");
   // 零计数不是「0」这个数字需要被看到，而是当前没有要提醒的事——角标连带 label 一起消失，
   // 不留一个空壳（基础层 §9：未知、不适用、零不得为了版面整齐混成一种显示；这里零是「无」）。
   const hidden = count !== undefined && count <= 0;

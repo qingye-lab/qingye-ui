@@ -74,9 +74,10 @@
       --qy-ink-qing: 24%;
       --qy-wash-qing: 4%;
 
-      /* 悬停与选中随墨阶上移：= 清 / 2，与默认里 --qy-wash-qing 同一关系，但 --qy-wash-qing 在上面钉住了（它是地）。 */
+      /* 悬停与选中随墨阶上移：悬停 = 清 / 2，选中 = 清，与默认反馈梯同一关系；
+       * 但 --qy-wash-qing 在上面钉住了（它是地），所以悬停在这里按原子重写一遍。 */
       --qy-surface-hover: color-mix(in srgb, var(--qy-ink) calc(var(--qy-ink-qing) / 2), transparent);
-      --qy-surface-selected: color-mix(in srgb, var(--qy-ink) calc(var(--qy-ink-qing) / 2), transparent);
+      --qy-surface-selected: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
 
       /* 以下是「不动」的几处，见上；值是原来的清（8%）、淡（24%）。 */
       --qy-surface-strong: color-mix(in srgb, var(--qy-ink) 8%, transparent);

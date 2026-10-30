@@ -1,6 +1,7 @@
 "use client";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { toneTextClassName } from "../status-tone";
 import type { Tone } from "../tone";
 import { cn } from "../utils";
 
@@ -11,13 +12,6 @@ export type BadgeProps = useRender.ComponentProps<"span"> & {
   variant?: "neutral" | "emphasis";
   /** 状态类别（随类赋彩）：只有标记确实表达这一类事实时才给。给出时自带强调。 */
   tone?: BadgeTone;
-};
-
-const tones: Record<BadgeTone, string> = {
-  info: "text-info-foreground",
-  success: "text-success-foreground",
-  warning: "text-warning-foreground",
-  danger: "text-destructive-foreground",
 };
 
 /**
@@ -39,7 +33,7 @@ export function Badge({ variant = "neutral", tone, className, render, ref, ...pr
       {
         className: cn(
           "min-w-0 rounded-marker wrap-anywhere outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring",
-          tone ? tones[tone] : variant === "emphasis" ? "text-foreground" : "text-muted-foreground",
+          tone ? toneTextClassName[tone] : variant === "emphasis" ? "text-foreground" : "text-muted-foreground",
           (tone || variant === "emphasis") && "font-medium",
           className,
         ),

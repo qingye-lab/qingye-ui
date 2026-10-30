@@ -96,3 +96,18 @@ test("a NumberField for exact entry beside a Slider takes its own scope, so the 
   expect(await screen.findByRole("slider", { name: "阈值" })).toBeInTheDocument();
   expect(screen.getByRole("textbox", { name: "精确输入" })).toBeInTheDocument();
 });
+
+test("an invalid Field marks the range input and a valid one does not", async () => {
+  const { rerender } = render(<Field><Slider defaultValue={30}>{single}</Slider></Field>);
+  expect(await screen.findByRole("slider")).not.toHaveAttribute("aria-invalid", "true");
+  rerender(<Field invalid><Slider defaultValue={30}>{single}</Slider></Field>);
+  expect(await screen.findByRole("slider")).toHaveAttribute("aria-invalid", "true");
+});
+
+test("readonly shows an aria-hidden note while the thumb carries the readonly fact", async () => {
+  render(<Slider readOnly defaultValue={25}>{single}</Slider>);
+  expect(await screen.findByRole("slider")).toHaveAttribute("aria-readonly", "true");
+  const note = document.querySelector("[data-slot=slider-readonly]");
+  expect(note).toHaveTextContent("只读");
+  expect(note).toHaveAttribute("aria-hidden", "true");
+});

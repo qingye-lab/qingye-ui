@@ -1,14 +1,18 @@
 # 状态 StatusDot
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
-Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
+Source SHA-256: 460a2c7c93aa7bbf779ca0c9ad7e6f47f2d7fc13190afd17b95f4717319e3c74
 
 让状态色与可见名称同时表达事实。
 
 ## Decision
 不把等待、进行中或结果未知混成同一事实。
+
+## Notes
+- 状态名对应固定的类别：在线是成功，异常是危险，警告和结果未知是警示，提示、等待中、进行中是信息；离线和 neutral 不施彩。同一类别在 Badge 里是同一色相。
+- 结果未知要读者去核实，归警示：它既不是失败，也不是成功。neutral 是没有归类的状态，用 label 写出它到底是什么。
 
 ## Use and ownership
 - 表达对象的真实状态。

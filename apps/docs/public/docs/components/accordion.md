@@ -1,9 +1,9 @@
 # 分组展开 Accordion
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
-Source SHA-256: aa24243efe72e90fae36646c29fea4fa06b1094a13b3f7e6762bb3cb0e37c1ec
+Source SHA-256: f26d950ad70f423b6c93d4deeef25da02fd927f85623521eaff44f13ca4ac328
 
 按各项名称主动展开内容。
 

@@ -8,19 +8,19 @@ describe("Tree", () => {
     const user = userEvent.setup(); render(<Tree aria-label="层级" nodes={nodes} />); await user.tab(); expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus(); await user.keyboard("{ArrowRight}"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-expanded", "true"); await user.keyboard("{ArrowRight}"); expect(screen.getByRole("treeitem", { name: "Child" })).toHaveFocus(); expect(screen.getByRole("treeitem", { name: "Child" })).toHaveAttribute("aria-selected", "false"); await user.keyboard("{Enter}"); expect(screen.getByRole("treeitem", { name: "Child" })).toHaveAttribute("aria-selected", "true"); await user.keyboard("{ArrowLeft}{ArrowLeft}"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus(); expect(screen.queryByRole("treeitem", { name: "Child" })).toBeNull();
   });
   it("honors cancellation and skips disabled nodes during letter navigation", async () => {
-    const user = userEvent.setup(); const select = vi.fn((_, details) => details.cancel()); render(<Tree nodes={nodes} onExpandedChange={(_, details) => details.cancel()} onSelectionChange={select} />); await user.tab(); await user.keyboard("{ArrowRight}{Enter}"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-expanded", "false"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-selected", "false"); await user.keyboard("b"); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus();
+    const user = userEvent.setup(); const select = vi.fn((_, details) => details.cancel()); render(<Tree aria-label="层级" nodes={nodes} onExpandedChange={(_, details) => details.cancel()} onSelectionChange={select} />); await user.tab(); await user.keyboard("{ArrowRight}{Enter}"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-expanded", "false"); expect(screen.getByRole("treeitem", { name: "A" })).toHaveAttribute("aria-selected", "false"); await user.keyboard("b"); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus();
   });
   it("keeps stable focus through reorder and repairs a removed focused node", async () => {
-    const user = userEvent.setup(); const { rerender } = render(<Tree nodes={nodes} />); await user.tab(); await user.keyboard("{End}"); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus(); rerender(<Tree nodes={[nodes[1]!, nodes[0]!]} />); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus(); rerender(<Tree nodes={[nodes[0]!]} />); await waitFor(() => expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus());
+    const user = userEvent.setup(); const { rerender } = render(<Tree aria-label="层级" nodes={nodes} />); await user.tab(); await user.keyboard("{End}"); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus(); rerender(<Tree aria-label="层级" nodes={[nodes[1]!, nodes[0]!]} />); expect(screen.getByRole("treeitem", { name: "B" })).toHaveFocus(); rerender(<Tree aria-label="层级" nodes={[nodes[0]!]} />); await waitFor(() => expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus());
   });
   it("returns owned focus to the empty container without taking outside focus", async () => {
-    const user = userEvent.setup(); const ref = { current: null as HTMLDivElement | null }; const { rerender } = render(<><Tree nodes={nodes} ref={ref} /><button>外部</button></>);
-    await user.tab(); expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus(); rerender(<><Tree nodes={[]} ref={ref} /><button>外部</button></>);
+    const user = userEvent.setup(); const ref = { current: null as HTMLDivElement | null }; const { rerender } = render(<><Tree aria-label="层级" nodes={nodes} ref={ref} /><button>外部</button></>);
+    await user.tab(); expect(screen.getByRole("treeitem", { name: "A" })).toHaveFocus(); rerender(<><Tree aria-label="层级" nodes={[]} ref={ref} /><button>外部</button></>);
     expect(screen.getByRole("tree")).toHaveFocus(); expect(ref.current).toBe(screen.getByRole("tree"));
-    await user.click(screen.getByRole("button", { name: "外部" })); rerender(<><Tree nodes={nodes} ref={ref} /><button>外部</button></>); expect(screen.getByRole("button", { name: "外部" })).toHaveFocus();
+    await user.click(screen.getByRole("button", { name: "外部" })); rerender(<><Tree aria-label="层级" nodes={nodes} ref={ref} /><button>外部</button></>); expect(screen.getByRole("button", { name: "外部" })).toHaveFocus();
   });
   it("shows a known empty sequence and rejects ambiguous duplicate identities", () => {
-    const { unmount } = render(<Tree nodes={[]} />); expect(screen.getByText("没有条目")).toBeInTheDocument(); unmount(); expect(() => render(<Tree nodes={[{ id: "same", label: "一" }, { id: "same", label: "二" }]} />)).toThrow("unique");
+    const { unmount } = render(<Tree aria-label="层级" nodes={[]} />); expect(screen.getByText("没有条目")).toBeInTheDocument(); unmount(); expect(() => render(<Tree aria-label="层级" nodes={[{ id: "same", label: "一" }, { id: "same", label: "二" }]} />)).toThrow("unique");
   });
 });
 describe("Tree typeahead and toggle", () => {
@@ -52,10 +52,10 @@ describe("Tree typeahead and toggle", () => {
 });
 const checkNodes: TreeNode[] = [{ id: "p", label: "父", children: [{ id: "p1", label: "子一" }, { id: "p2", label: "子二" }, { id: "p3", label: "禁用子", disabled: true }] }, { id: "q", label: "独立叶子" }];
 describe("Tree checkable", () => {
-  it("cascades a branch click onto enabled leaves, derives mixed/true without aria-multiselectable", async () => {
+  it("cascades a branch click onto enabled leaves, derives mixed/true and declares multiselectable", async () => {
     const user = userEvent.setup(); render(<Tree aria-label="权限" nodes={checkNodes} checkable defaultExpandedIds={["p"]} />);
-    // 勾选模式的条目用 aria-checked，不用 aria-selected，因此树不声明 multiselectable。
-    expect(screen.getByRole("tree")).not.toHaveAttribute("aria-multiselectable");
+    // 勾选模式的条目用 aria-checked 表达多个并存的勾选，树因此声明 multiselectable（APG：多选树）。
+    expect(screen.getByRole("tree")).toHaveAttribute("aria-multiselectable", "true");
     expect(screen.getByRole("treeitem", { name: "父" })).toHaveAttribute("aria-checked", "false");
     await user.click(screen.getByRole("treeitem", { name: "子一" }));
     expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
@@ -103,5 +103,15 @@ describe("Tree checkable", () => {
     await user.keyboard(" "); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
     await user.keyboard("{Enter}"); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "true");
     await user.keyboard(" "); expect(screen.getByRole("treeitem", { name: "子一" })).toHaveAttribute("aria-checked", "false");
+  });
+});
+
+describe("Tree accessible name", () => {
+  it("fails explicitly without a nonempty aria-label or aria-labelledby, and names the tree root otherwise", () => {
+    const nodes: TreeNode[] = [{ id: "a", label: "A" }];
+    expect(() => render(<Tree nodes={nodes} />)).toThrow(/Tree requires a nonempty aria-label or aria-labelledby/);
+    expect(() => render(<Tree aria-label=" " nodes={nodes} />)).toThrow(/aria-label/);
+    render(<><h2 id="tree-title">结构</h2><Tree aria-labelledby="tree-title" nodes={nodes} /></>);
+    expect(screen.getByRole("tree", { name: "结构" })).toBeInTheDocument();
   });
 });

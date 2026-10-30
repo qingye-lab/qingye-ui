@@ -45,12 +45,12 @@ describe("DataTablePattern", () => {
       return <><DataTablePattern mode="server" data={[data[state.pagination.page - 1]!]} columns={columns} getRowId={getRowId} emptyContent="没有条目" state={state} onStateChange={setState} selection={selection} pagination={{ totalCount: 3 }} /><output data-testid="selection">{Object.keys(state.rowSelection).filter(id => state.rowSelection[id]).join(",")}</output></>;
     }
     render(<Fixture />);
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     await user.click(screen.getByRole("button", { name: "下一页" }));
-    expect(screen.getByRole("checkbox", { name: "选择当页" })).toHaveAttribute("aria-checked", "false");
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    expect(screen.getByRole("checkbox", { name: "选择当页（仅本页）" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     expect(screen.getByTestId("selection")).toHaveTextContent(/^a,b$/);
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     expect(screen.getByTestId("selection")).toHaveTextContent(/^a$/);
     await user.click(screen.getByRole("button", { name: "上一页" }));
     expect(screen.getByRole("checkbox", { name: "选择 Alpha" })).toHaveAttribute("aria-checked", "true");
@@ -90,12 +90,12 @@ describe("DataTablePattern", () => {
     const user = userEvent.setup();
     const changed = vi.fn();
     const { rerender } = render(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="结果未知" busy selection={{ ...selection, canSelect: row => row.id !== "b" }} onStateChange={changed} />);
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     expect(changed.mock.calls[0]![0].rowSelection).toEqual({ a: true, c: true });
     expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
     rerender(<DataTablePattern data={[]} columns={columns} getRowId={getRowId} emptyContent="结果未知" selection={selection} />);
     expect(screen.getByRole("cell", { name: "结果未知" })).toHaveAttribute("colspan", "3");
-    expect(screen.getByRole("checkbox", { name: "选择当页" })).toHaveAttribute("aria-disabled", "true");
+    expect(screen.getByRole("checkbox", { name: "选择当页（仅本页）" })).toHaveAttribute("aria-disabled", "true");
   });
 
   it("requires server paging facts instead of inferring a next page from loaded rows", () => {
@@ -124,7 +124,7 @@ describe("DataTablePattern", () => {
     expect(screen.getByRole("columnheader", { name: "名称" })).toHaveStyle({ width: "180px" });
     const rowheader = screen.getByRole("rowheader", { name: full });
     expect(rowheader).toHaveStyle({ width: "180px", minWidth: "160px", maxWidth: "200px" });
-    expect(rowheader.querySelector("[data-slot=data-table-cell-content]")).toHaveAttribute("title", full);
+    expect(rowheader.querySelector("[data-slot=data-table-cell-content]")).toHaveTextContent(full);
     expect(rowheader.closest("tr")).not.toHaveClass("bg-surface-selected");
     expect(screen.getByRole("rowheader", { name: "Beta" }).closest("tr")).toHaveClass("bg-surface-selected");
     const marker = screen.getByRole("table").querySelector("col")!;
@@ -163,12 +163,12 @@ describe("DataTablePattern", () => {
     const table = screen.getByRole("table");
     expect(table).toHaveAttribute("aria-rowcount", "21");
     expect(table.querySelectorAll("tbody tr[data-row-id]").length).toBeLessThanOrEqual(4);
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     expect(Object.keys(changed.mock.calls.at(-1)![0].rowSelection)).toHaveLength(20);
     await user.click(screen.getByRole("button", { name: "下一页" }));
     expect(screen.getByRole("rowheader", { name: "记录 20" })).toBeInTheDocument();
-    expect(screen.getByRole("checkbox", { name: "选择当页" })).toHaveAttribute("aria-checked", "false");
-    await user.click(screen.getByRole("checkbox", { name: "选择当页" }));
+    expect(screen.getByRole("checkbox", { name: "选择当页（仅本页）" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("checkbox", { name: "选择当页（仅本页）" }));
     expect(Object.keys(changed.mock.calls.at(-1)![0].rowSelection)).toHaveLength(40);
   });
 
@@ -180,5 +180,46 @@ describe("DataTablePattern", () => {
     expect(screen.getByRole("table")).toHaveAttribute("aria-rowcount", "4");
     expect(screen.getByRole("rowheader", { name: "Alpha" }).closest("tr")).toHaveAttribute("aria-rowindex", "2");
     expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
+  });
+  it("shows missing values truthfully: default dash with accessible text, custom empty, zero kept", () => {
+    type Row = { id: string; a: string | null | undefined; n: number };
+    const rows: Row[] = [{ id: "1", a: null, n: 0 }, { id: "2", a: "", n: 0 }, { id: "3", a: undefined, n: 0 }, { id: "4", a: "有", n: 0 }];
+    render(<DataTablePattern data={rows} getRowId={row => row.id} emptyContent="空" columns={[
+      { id: "a", header: "甲", accessor: row => row.a },
+      { id: "b", header: "乙", accessor: row => (row.id === "4" ? "x" : row.a), empty: "不适用" },
+      { id: "n", header: "数", accessor: row => row.n },
+    ]} />);
+    expect(screen.getAllByText("无值")).toHaveLength(3);
+    for (const dash of screen.getAllByText("—")) expect(dash).toHaveAttribute("aria-hidden", "true");
+    expect(screen.getAllByText("不适用")).toHaveLength(3);
+    expect(screen.getAllByText("0")).toHaveLength(4);
+  });
+
+  it("pins leading columns including the selection column and rejects non-leading pins", () => {
+    const { container } = render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" selection={selection} stickyHeader columns={[{ ...columns[0]!, pinned: true }, columns[1]!]} />);
+    const head = container.querySelectorAll("thead th");
+    expect(head[0]).toHaveAttribute("data-pinned"); expect(head[1]).toHaveAttribute("data-pinned"); expect(head[2]).not.toHaveAttribute("data-pinned");
+    expect(container.querySelector("thead")).toHaveAttribute("data-sticky", "true");
+    expect(container.querySelectorAll("tbody tr:first-child > *")[0]).toHaveAttribute("data-pinned");
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    expect(() => render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" columns={[columns[0]!, { ...columns[1]!, pinned: true }]} />)).toThrow(/contiguous/);
+    error.mockRestore();
+  });
+
+  it("lets unsized columns share the remaining width and names activatable rows by the row header", () => {
+    const { container } = render(<DataTablePattern data={data} columns={[columns[0]!, { ...columns[1]!, size: 90 }]} getRowId={getRowId} emptyContent="没有条目" activeRow={{ trigger: "row" }} />);
+    const table = screen.getByRole("table");
+    expect(table.style.width).toBe("100%");
+    expect(table.style.minWidth).toBe("240px");
+    expect(Array.from(table.querySelectorAll<HTMLElement>("col")).map(col => col.style.width)).toEqual(["", "90px"]);
+    expect(screen.getByRole("row", { name: "Alpha" })).toHaveAttribute("data-row-id", "a");
+    expect(container.querySelectorAll("tbody tr[aria-labelledby]")).toHaveLength(3);
+  });
+
+  it("rejects row activation without a row-header column", () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      expect(() => render(<DataTablePattern data={data} columns={[{ ...columns[1]! }]} getRowId={getRowId} emptyContent="没有条目" activeRow={{ trigger: "row" }} />)).toThrow("rowHeader");
+    } finally { error.mockRestore(); }
   });
 });

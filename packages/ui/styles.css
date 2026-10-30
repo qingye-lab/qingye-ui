@@ -354,8 +354,7 @@
     outline-offset: calc(-1 * var(--qy-line-width));
   }
 
-  /* 提示与警示条：靠表面色（tooltip 还有 shadow-raised）与页面分开，强制颜色下两样都丢，边界没有了。 */
-  [data-slot="tooltip-popup"],
+  /* 警示条：靠表面色与页面分开，强制颜色下表面色丢失，边界没有了。Tooltip 已有自己的线，不在此列。 */
   [data-slot="alert"] {
     outline: var(--qy-line-width) solid CanvasText;
     outline-offset: calc(-1 * var(--qy-line-width));

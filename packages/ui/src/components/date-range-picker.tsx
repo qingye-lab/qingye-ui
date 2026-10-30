@@ -4,12 +4,13 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { InputGroup, InputGroupAddon } from "./input-group";
-import { IconCalendar } from "@tabler/icons-react";
+import { IconCalendar, IconX } from "@tabler/icons-react";
 import { dateMatchModifiers, rangeContainsModifiers } from "@daypicker/react";
 import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Calendar, formatLocalDate, parseLocalDate, type CalendarProps, type CalendarDateRange } from "./calendar";
@@ -78,8 +79,9 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const { ref: externalEndRef, onChange: onEndChange, onBlur: onEndBlur, ...endRest } = endInputProps;
   const [startRef, setStartRef] = useInputRef(externalInputRef);
   const [, setEndRef] = useInputRef(externalEndRef);
-  const facts = useInputFacts(startRef, { disabled }, { value: false });
-  const editable = !disabled && !facts.disabled && !readOnly;
+  const facts = useInputFacts(startRef, { disabled, readOnly }, { value: false });
+  const readOnlyNow = readOnly || facts.readOnly;
+  const editable = !disabled && !facts.disabled && !readOnlyNow;
 
   // 草稿 = 两个输入与弹层日历共用的一份当前内容。确认值变化（外部改值、应用、清除、reset）后，草稿回到确认值。
   const valueKey = `${dayText(value?.from)}|${dayText(value?.to)}`;
@@ -205,7 +207,7 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
     children: <Popover open={editable && open} onOpenChange={onOpenChange}>
       {/* 起止各一个原生日期输入，共用同一份草稿（基础层 §6「编辑边界内的附属动作」；键入是等价路径）。
           平台日历图标隐藏，只保留一个打开日历的入口。真正的 readOnly 由边界 data-readonly 表达。 */}
-      <InputGroup ref={boundaryRef} data-slot="date-range-picker-control" data-readonly={readOnly ? "" : undefined} className="w-fit max-w-full flex-nowrap"
+      <InputGroup ref={boundaryRef} data-slot="date-range-picker-control" data-readonly={readOnlyNow ? "" : undefined} className="w-fit max-w-full flex-nowrap"
         onFocus={() => setFocusWithin(true)}
         onBlur={event => {
           if (event.currentTarget.contains(event.relatedTarget as Node | null)) return;
@@ -221,6 +223,9 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
           {...named(endId, messages.endDate)} aria-describedby={endRest["aria-describedby"] ?? wiring.described} {...(endRest["aria-label"] ? { "aria-label": endRest["aria-label"] } : {})} {...(endRest["aria-labelledby"] ? { "aria-labelledby": endRest["aria-labelledby"] } : {})} aria-invalid={invalid ? true : endRest["aria-invalid"]}
           controlClassName={cn("min-w-0 flex-1", endRest.controlClassName)} className={withHiddenIndicator(endRest.className)}
           onChange={handleEntry("to")} onBlur={handleBlur("to")} />
+        {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
+        {/* 与 DatePicker 同一套清除：确认值非空且可编辑时出现；清除也放弃未采纳的键入与草稿，焦点回到起点输入。 */}
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDateRange} onClick={event => { releaseTyping(); change(undefined, event); setDraftState(undefined); startRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
         <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateRange} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="flex flex-wrap items-start gap-(--qy-field-group-gap)">

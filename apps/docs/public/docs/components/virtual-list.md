@@ -1,9 +1,9 @@
 # 虚拟列表 VirtualList
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: d11464b0227174386462ede6f1c9bd096c4ea9498f38d9d43f09f967243e9141
+Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
 
 以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。
 
@@ -70,6 +70,7 @@ Written descriptions; the list above is the type-resolved fact.
 - actionsRef: React.Ref<VirtualListActions>. 独立动作出口：scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) 与 scrollToEnd()。立即滚动，不转移焦点。非法或越界 index 抛 RangeError；空集合 scrollToEnd 无操作。
 - followEnd: boolean; default false. 显式尾部跟随。仅原先停在底部（1 CSS px 容差）时跟随追加项；向上阅读后保持阅读位置，不在初次挂载时跳到底部。
 - overscan: number; default 2. 窗口两侧的渲染预算预设，非负整数；不是视觉尺寸。
+- aria-label / aria-labelledby: string. 必填其一：集合的可识别名称，落在 role=list 的滚动视口上；缺失或为空时抛错。
 - render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。
 
 ## Keyboard

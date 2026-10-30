@@ -1,9 +1,9 @@
 # 字段 Field
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
+Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
 
 关联一个值的名称、控件、说明与调用方提供的错误。
 
@@ -42,7 +42,8 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - FieldErrorProps: type; owner field; PASS
 - FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
-- FieldLabel: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Label>
+- FieldLabel: function; owner field; PASS; props: FieldLabelProps
+- FieldLabelProps: type; owner field; PASS
 - FieldOrientation: type; owner field; PASS
 - FieldPrimitive: reexport; owner field; UNVERIFIED
 - FieldProps: type; owner field; PASS
@@ -55,6 +56,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Field
 - `orientation?`: `"horizontal" | "vertical"`.
+- `validating?`: `boolean`. 应用持有的异步校验正在进行。为 true 时：根部 `data-validating` 与 `aria-busy`，错误位置显示「正在校验」， 本字段内的 FieldError 不显示、控件不标无效——校验进行中，上一次的结果已不可信。结束与结论仍由应用传入（invalid、错误内容）。
 - plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
 
 ### FieldContent
@@ -82,7 +84,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldLabel
-- no props declared by this library
+- `requirement?`: `"required" | "optional"`. 必填 / 选填标记。`"required"` 只画 `*`（aria-hidden）；必填语义由控件自己的 `required` 向读屏表达， 所以调用方必须同时给控件 `required`，否则标记只是视觉。`"optional"` 的「选填」是可见文字，计入可访问名称。
 - plus 281 inherited (@types/react 277, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldSeparator
@@ -98,10 +100,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FieldValidating: without a provider default-value; provided by Field
 - Context InField: without a provider default-value; provided by Field
 - Context InFieldItem: without a provider default-value; provided by Field, FieldItem, OptionScope
 
@@ -112,12 +115,14 @@ Written descriptions; the list above is the type-resolved fact.
 Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldPrimitive。
 - orientation: "vertical" | "horizontal"; default "vertical". 纵向编辑或横向选项，不改变关联。
 - invalid: boolean; default false. 由调用方声明。原生约束、失焦、错误内容不推断此状态。
+- validating: boolean; default false. 应用持有的异步校验进行中：根部 data-validating 与 aria-busy，错误位置显示「正在校验」，本字段内 FieldError 不显示、控件不标无效（invalid 暂不生效）。
 - disabled: boolean; default false. 禁用关联控件，禁用值不参加原生提交。
 - name / dirty / touched: Base UI Field.Root props. 字段名及调用方管理的编辑事实。
 - className / style / render / ref: Base UI Field.Root props. 作用于字段根；样式支持状态函数。
 
 ### FieldLabel
 必须位于 Field 或 FieldPrimitive.Root 上下文内，自动命名注册控件；支持显式 htmlFor 与原语 nativeLabel/render。独立标签使用 components/label 的 Label。
+- requirement: "required" | "optional". required 在名称后画 aria-hidden 的 *，调用方须同时给控件 required；optional 显示「（选填）」，计入可访问名称。
 
 ### FieldDescription
 必须位于 Field 或 FieldPrimitive.Root 上下文内，将辅助事实注册到 aria-describedby。独立说明使用带 id 的原生文本，并由控件显式引用。
@@ -266,5 +271,37 @@ export const meta = { title: "禁用", titleEn: "Disabled" };
 
 export default function Demo() {
   return <Field className="w-full max-w-xs" disabled><FieldLabel>设备名称</FieldLabel><Input defaultValue="青野" /></Field>;
+}
+```
+
+### 必填与选填
+Source: apps/docs/src/content/field/demos/08-requirement.tsx
+```tsx
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "必填与选填", titleEn: "Required and optional" };
+
+export default function Demo() {
+  return (
+    <FieldGroup className="w-full max-w-xs">
+      <Field><FieldLabel requirement="required">设备名称</FieldLabel><Input required /></Field>
+      <Field><FieldLabel requirement="optional">备注</FieldLabel><Input /></Field>
+    </FieldGroup>
+  );
+}
+```
+
+### 校验中
+Source: apps/docs/src/content/field/demos/09-validating.tsx
+```tsx
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "校验中", titleEn: "Validating" };
+
+// 校验进行中旧的错误不显示；结论由应用在结束后传入。
+export default function Demo() {
+  return <Field className="w-full max-w-xs" validating invalid><FieldLabel>用户名</FieldLabel><Input defaultValue="qingye" /><FieldError>用户名已被占用</FieldError></Field>;
 }
 ```

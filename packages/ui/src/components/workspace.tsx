@@ -4,14 +4,21 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { createPortal } from "react-dom";
+import { useUILocale } from "../locale";
+import { SidebarHandleContext } from "../sidebar-handle";
 import { cn } from "../utils";
+import { DrawerCreateHandle } from "./drawer";
 import { Heading, type HeadingProps } from "./typography";
 
 /**
  * 顶栏里留给页面的那个位置。顶栏挂上来时把它登记在这里，页面经 WorkspaceHeaderPortal 把内容送进去。
  * 登记的是 DOM 元素，所以只在提交之后才有值：服务端与首次渲染时为 null，渲染期间不读 document。
  */
-type WorkspaceState = { outlet: HTMLElement | null; setOutlet: (node: HTMLElement | null) => void };
+type WorkspaceState = {
+  outlet: HTMLElement | null; setOutlet: (node: HTMLElement | null) => void;
+  /** 内容区的 id：跳过链接指向它。内容区没有自己的 id 时用 defaultContentId；有时登记到 contentId（同 Sidebar 的 contentId 机制）。 */
+  contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
+};
 const WorkspaceContext = React.createContext<WorkspaceState | null>(null);
 
 export type WorkspaceProps = useRender.ComponentProps<"div">;
@@ -25,10 +32,22 @@ export type WorkspaceProps = useRender.ComponentProps<"div">;
  *
  * 有顶栏时，侧栏第一行（SidebarHeader，一个填值控件高）与顶栏里的控件同一条行中线（基础层 §19）：
  * 侧栏的上内缘 = 工作面的外边距 + 容器线 + 顶栏里控件上方的组内间隔。窄屏工作面贴边，前两项为零。
+ *
+ * 外壳自带跳过链接（不另立部件，名称与目标都由外壳已知）：它是外壳的第一个可聚焦项，键盘第一次 Tab 落在这里，
+ * 回车把焦点交给内容区（WorkspaceContent），绕过侧栏里的全部链接（WCAG 2.4.1，**约束**）。平时视觉隐藏、仍在 Tab 顺序与
+ * 辅助技术里；获焦时现身，画成浮层（`--qy-surface-raised` 的纸、浮层圆角、一道容器线、浮层阴影）——它盖在内容之上，
+ * 与 Popover、Toast 同一类东西，不是外壳的一部分，所以不进文档流、不推动任何布局（fixed），离视口的边取外壳的组内间隔
+ * `--qy-space-2`（与侧栏、工作面离视口的边相同）。行高取一个填值控件高，内缘取控件的起始内缩，焦点取控件的焦点环（§15）。
+ * 层级 z-10 是**预设**：只需高过工作面里的吸顶部件；模态浮层有自己的层序，盖在它之上。
+ * 点击不改地址：preventDefault 后直接聚焦目标，hash 路由的应用不会因此换页。
  */
-export function Workspace({ render, className, ...props }: WorkspaceProps) {
+export function Workspace({ render, className, children, ...props }: WorkspaceProps) {
+  const { messages } = useUILocale();
   const [outlet, setOutlet] = React.useState<HTMLElement | null>(null);
-  const context = React.useMemo(() => ({ outlet, setOutlet }), [outlet]);
+  const defaultContentId = React.useId();
+  const [contentId, setContentId] = React.useState(defaultContentId);
+  const [sidebarHandle] = React.useState(() => DrawerCreateHandle<unknown>());
+  const context = React.useMemo(() => ({ outlet, setOutlet, contentId, defaultContentId, setContentId }), [outlet, contentId, defaultContentId]);
   const element = useRender({
     defaultTagName: "div", render,
     props: mergeProps({
@@ -41,9 +60,18 @@ export function Workspace({ render, className, ...props }: WorkspaceProps) {
         "sm:[:where(&:has([data-slot=workspace-header])>[data-slot=sidebar])]:pt-[calc(var(--qy-space-2)+var(--qy-line-width)+var(--qy-field-gap))]",
         className,
       ),
+      children: <>
+        <a
+          data-slot="workspace-skip-link" href={`#${contentId}`}
+          onClick={event => { event.preventDefault(); event.currentTarget.ownerDocument.getElementById(contentId)?.focus(); }}
+          className="pointer-events-none fixed start-(--qy-space-2) top-(--qy-space-2) z-10 inline-flex min-h-(--qy-fill-height) items-center rounded-overlay border border-border bg-surface-raised px-(--qy-control-sm-padding) text-body text-foreground opacity-0 shadow-raised outline-none focus:pointer-events-auto focus:opacity-100 focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)"
+        >{messages.skipToContent}</a>
+        {children}
+      </>,
     }, props),
   });
-  return <WorkspaceContext.Provider value={context}>{element}</WorkspaceContext.Provider>;
+  // 窄屏侧栏抽屉的关联（Sidebar 的 drawer 与 SidebarDrawerTrigger 共用，见 sidebar-handle.ts）。
+  return <WorkspaceContext.Provider value={context}><SidebarHandleContext.Provider value={sidebarHandle}>{element}</SidebarHandleContext.Provider></WorkspaceContext.Provider>;
 }
 
 export type WorkspaceSurfaceProps = useRender.ComponentProps<"div">;
@@ -164,7 +192,11 @@ export type WorkspaceContentProps = useRender.ComponentProps<"main">;
  * 容器与子节点尺寸变化、子树变化（下一帧）与资源载入时重测；服务端与首帧按「放得下」。在 Tab 顺序里就要看得见焦点：盒内一道 1px 焦墨线
  * （`--qy-focus-quiet-width`，与 framed={false} 的表格容器同一画法），外缘不变（NG9）。调用方显式传入的 tabIndex 优先。
  */
-export function WorkspaceContent({ render, className, ref, tabIndex, ...props }: WorkspaceContentProps) {
+export function WorkspaceContent({ id, render, className, ref, tabIndex, ...props }: WorkspaceContentProps) {
+  const workspace = React.useContext(WorkspaceContext);
+  const actualId = id ?? workspace?.defaultContentId;
+  const setContentId = workspace?.setContentId;
+  React.useLayoutEffect(() => { if (actualId && setContentId) setContentId(actualId); }, [actualId, setContentId]);
   const element = React.useRef<HTMLElement | null>(null);
   const [scrollable, setScrollable] = React.useState(false);
   React.useLayoutEffect(() => {
@@ -190,6 +222,6 @@ export function WorkspaceContent({ render, className, ref, tabIndex, ...props }:
   }, []);
   return useRender({
     defaultTagName: "main", render, ref: [element, ref ?? null],
-    props: mergeProps({ "data-slot": "workspace-content", tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
+    props: mergeProps({ "data-slot": "workspace-content", id: actualId, tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
   });
 }

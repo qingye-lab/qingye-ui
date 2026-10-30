@@ -1,13 +1,14 @@
 # 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 6289755c79e2dcce32f25f588a86ecc2f4a617675f4785379c78485ebad4b8e8
+Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
 
 真实原生滚动，或显式组合可拖动滚动条。
 
 ## Notes
+- 分工：默认用 ScrollArea（一个元素，原生滚动条，尊重平台设置）；只有设计要求自绘滚动条时才用 ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner 组合。两者互不嵌套，ScrollArea 不接受 Scrollbar 子部件。
 - ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。
 - 需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。
 - 自定义轨道宽度为 3 分、内缩半分，是该组合的集中预设；滑块长度与移动范围共同由原语计算，不单独覆盖滑块最小长度。Content 默认为轨道留出末端空间。
@@ -77,7 +78,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: does not read UILocale
@@ -89,7 +90,7 @@ Written descriptions; the list above is the type-resolved fact.
 真实可滚动 div；原生滚动条尊重平台设置。
 - children: ReactNode. 完整内容，不窗口化或隐藏集合项。
 - style / className: div props. 消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。
-- tabIndex: number; default 0. 默认能从键盘到达；原生方向/Page/Home/End 滚动保留。
+- tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
@@ -105,7 +106,7 @@ Written descriptions; the list above is the type-resolved fact.
 滑块长度/位置和轨道拖动由公开原语测量；Corner 留出双轴交会处，完整原语继续可用。
 
 ## Keyboard
-- Tab: 进入真实滚动视口或内容内入口。
+- Tab: 进入内容溢出的滚动视口，或内容内入口。
 - 方向 / PageUp / PageDown / Home / End: 按浏览器原生规则滚动，嵌套控件保留自己的键位。
 
 ## Source examples

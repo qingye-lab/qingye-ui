@@ -34,7 +34,7 @@ type ProjectedPoint = ScatterPoint & { color: string; marker: ChartMarker; serie
  * - 两个量的关系，x、y 都是数值轴——这是散点的任务定义，不是违反「永远一个数值轴」：
  *   该禁令禁止的是同一类别/时间轴上叠两条不同量纲的 Y 轴（制造虚假相关），散点的 x/y
  *   本身就是被比较的两个量，二者同源同图，不存在第二条可拆的轴。
- * - 墨分五色：只有一个系列时用焦墨；两个以上按 chart-1..3 取色（全比较形式最多 3 个系列，
+ * - 文字是墨，数据是色：只有一个系列也取第一色（与 Chart 同一裁决），不出图例；两个以上按 chart-1..3 取色（全比较形式最多 3 个系列，
  *   数据可视化规范：全比较色觉校验比相邻校验更严，查看数据可视化规范中色阶校验方法），标记形状为第二通道。
  * - 标记 2 分（默认 8px）、外加一圈纸色：与折线标记同一组件（Marker），几何由图的根节点读出的分换算（chartGeometry）。
  * - 命中区 ≥ 24px：标记外加一个透明命中圈，指针不必正中 8px 的点。
@@ -124,7 +124,8 @@ export function ScatterChart({ label, framed = true, render, ref, className, sty
   legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
   content = <>
     <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
-    <div data-slot="chart-plot" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
+    {/* 绘图区对读屏隐藏：每个点只是标记，没有可读的名称与值；数据由「查看数据」展开的等价表承担（与 Chart 同）。 */}
+    <div data-slot="chart-plot" aria-hidden="true" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
       <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: geometry.mark, right: geometry.mark, bottom: 0, left: 0 }}>
         <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={geometry.hairline} />
         <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geometry.hairline }} />
@@ -134,11 +135,11 @@ export function ScatterChart({ label, framed = true, render, ref, className, sty
       </RechartsScatterChart></ResponsiveContainer>
     </div>
     <div data-slot="chart-category-axis" className="min-w-0 text-end text-dense text-muted-foreground wrap-anywhere">{xLabel}</div>
-    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead>{xLabel}</TableHead><TableHead>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
+    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{messages.scatterPointColumn}</TableHead><TableHead numeric>{xLabel}</TableHead><TableHead numeric>{yLabel}</TableHead></TableRow></TableHeader><TableBody>
           {projected.flatMap(item => item.points.map(point => <TableRow key={`${item.key}:${point.id}`}>
             <TableHead scope="row">{single ? point.label : `${item.label} · ${point.label}`}</TableHead>
-            <TableCell className="numeric">{showX(point.x)}</TableCell>
-            <TableCell className="numeric">{showY(point.y)}</TableCell>
+            <TableCell numeric>{showX(point.x)}</TableCell>
+            <TableCell numeric>{showY(point.y)}</TableCell>
           </TableRow>))}
         </TableBody></Table></TableContainer></div>}
   </>;

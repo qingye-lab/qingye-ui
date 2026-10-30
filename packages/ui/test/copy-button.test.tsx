@@ -82,3 +82,49 @@ test("the accessible name is the visible text; the fixed label is only for icon-
   rerender(<CopyButton value="x" aria-label="复制密钥">密钥</CopyButton>);
   expect(screen.getByRole("button", { name: "复制密钥" })).toBeInTheDocument();
 });
+
+test("without the Clipboard API the selection fallback copies, and focus returns to the button", async () => {
+  vi.stubGlobal("navigator", {});
+  const execCommand = vi.fn(() => true);
+  Object.defineProperty(document, "execCommand", { configurable: true, value: execCommand });
+  try {
+    const onCopy = vi.fn();
+    const onError = vi.fn();
+    render(<CopyButton value="青叶" onCopySuccess={onCopy} onCopyError={onError} />);
+    const button = screen.getByRole("button", { name: /复制/ });
+    button.focus();
+    fireEvent.click(button);
+    await waitFor(() => expect(onCopy).toHaveBeenCalledOnce());
+    expect(execCommand).toHaveBeenCalledWith("copy");
+    expect(onError).not.toHaveBeenCalled();
+    expect(button).toHaveAttribute("data-copied");
+    expect(button).toHaveFocus();
+    expect(document.querySelector("textarea")).toBeNull();
+  } finally {
+    Reflect.deleteProperty(document, "execCommand");
+  }
+});
+
+test("when the fallback is rejected too the failure is shown, never silent", async () => {
+  vi.stubGlobal("navigator", {});
+  Object.defineProperty(document, "execCommand", { configurable: true, value: vi.fn(() => false) });
+  try {
+    const onError = vi.fn();
+    render(<CopyButton value="青叶" onCopyError={onError} />);
+    fireEvent.click(screen.getByRole("button", { name: /复制/ }));
+    await waitFor(() => expect(onError).toHaveBeenCalledOnce());
+    expect(screen.getByRole("status")).toHaveTextContent("复制失败，请手动复制");
+    expect(document.querySelector("textarea")).toBeNull();
+  } finally {
+    Reflect.deleteProperty(document, "execCommand");
+  }
+});
+
+test("only the current label belongs to the accessible name; the other is held for width alone", async () => {
+  vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } });
+  render(<CopyButton value="青叶" />);
+  const button = screen.getByRole("button", { name: "复制" });
+  fireEvent.click(button);
+  await waitFor(() => expect(button).toHaveAttribute("data-copied"));
+  expect(screen.getByRole("button", { name: "已复制" })).toBe(button);
+});

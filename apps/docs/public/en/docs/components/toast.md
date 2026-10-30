@@ -1,9 +1,9 @@
 # Toast
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: b54f7278c5185a898cf827085b8e9eee3201dfe33b8eca227262194e05f8e03d
+Source SHA-256: 7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -14,6 +14,7 @@ A notification does not take focus. Unknown means no reliable result; failed mea
 - Hover, focus, and window blur pause automatic disappearance.
 - A notice only presents the type the application gives it and infers nothing: no timeout turns it into unknown, and waiting, in-progress, unknown and failed notices stay until the application updates them or the user closes them. loadingTimeout is removed; when a deadline is needed the application times it and calls toastManager.update(id, { type: "unknown" }).
 - In tests, scope text queries to the notification region (role=region) or use data-slot=toast-title: a priority=high notice also has a visually hidden announcement copy, removed once focus enters the region.
+- Action-bearing notices (for example Undo) do not auto-dismiss either, because acting takes time; like failed, unknown and in-progress notices they are never collapsed by the limit. Anchored notices have no shared region, so surplus ordinary ones are collapsed without a count.
 - Ordinary success is brief by default; failure/unknown stay but can close. Important facts and recovery entries remain on the object's page.
 - Viewport and anchored notices consume shared notification layers, below document candidates and critical modal actions.
 
@@ -69,7 +70,7 @@ Written descriptions; the list above is the type-resolved fact.
 Mount once per notification channel.
 - position: "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"; default "bottom-right". Notification region placement.
 - timeout: number; default 5000. Reading duration for ordinary/success notices; zero keeps them visible.
-- limit: number; default 3. The primitive limits visible entries; overflow roots are hidden/inert. They cannot carry the only critical outcome.
+- limit: number; default 3. Limits how many notices show at once. Surplus ordinary notices are collapsed and inert behind a visible “N more notifications” control that reveals them all; failed, unknown, in-progress, action-bearing or timeout-0 notices are never collapsed or counted.
 - toastManager: Return value of ToastPrimitive.createToastManager(). Optional independent notification channel; omission uses the exported global manager.
 - portalProps: ToastPrimitive.Portal.Props. Custom Portal containers, direction, language, and other attributes.
 

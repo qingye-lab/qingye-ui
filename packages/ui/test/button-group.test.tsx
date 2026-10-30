@@ -39,3 +39,10 @@ test("orientation, render, events, ref and custom classes reach the group", asyn
   await userEvent.click(screen.getByRole("button", { name: "应用" }));
   expect(click).toHaveBeenCalledOnce();
 });
+
+test("a missing or blank group name fails explicitly, an aria-labelledby name is accepted", () => {
+  expect(() => render(<ButtonGroup><Button>应用</Button></ButtonGroup>)).toThrow(/ButtonGroup requires a nonempty aria-label or aria-labelledby/);
+  expect(() => render(<ButtonGroup aria-label=" "><Button>应用</Button></ButtonGroup>)).toThrow(/aria-label/);
+  render(<><span id="scope">编辑</span><ButtonGroup aria-labelledby="scope"><Button>应用</Button></ButtonGroup></>);
+  expect(screen.getByRole("group", { name: "编辑" })).toBeInTheDocument();
+});

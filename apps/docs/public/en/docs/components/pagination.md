@@ -1,9 +1,9 @@
 # Pagination
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
+Source SHA-256: 0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2
 
 Page position, real actions and explicit unknown totals.
 
@@ -90,6 +90,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ### PaginationPattern
+- `busy?`: `boolean`. 正在取数（例如 DataTablePattern busy）。与 disabled 的区别：翻页被挡住，但按钮保持可聚焦—— 原生 disabled 会让刚按下的那个按钮立刻丢掉焦点，键盘用户被甩到页面顶部。页大小选择改为只读（同样留住焦点）。
 - `defaultValue?`: `PaginationValue`.
 - `disabled?`: `boolean`.
 - `hasNextPage?`: `boolean`.
@@ -123,7 +124,7 @@ Written descriptions; the list above is the type-resolved fact.
 Standard composition for local page actions.
 - value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1.
 - totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page.
-- pageSizeOptions / disabled: readonly number[] / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state.
+- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it.
 - aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, total summaries and page-size labels come from locale.
 
 ### Pagination

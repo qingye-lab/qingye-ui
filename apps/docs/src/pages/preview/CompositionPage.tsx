@@ -136,7 +136,7 @@ export default function CompositionPage() {
          * （经营位置：一屏只有一个版心，目录贴着它，不另起一张纸）。 */}
         <Inline gap="panel" align="start">
           <div ref={articleRef} className="min-w-0 flex-1">
-            <Prose>
+            <Prose framed>
               <h2 id="demo-sync-overview">同步失败时，数据会怎样</h2>
               <p>每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。如果在写入 <strong>1,284</strong> 条记录的过程中网络中断，已经写入的部分会保留，未写入的部分留到下一次同步——不会因为一次失败就清空整个集合。</p>
               <h3 id="demo-sync-retry">重试与核实</h3>

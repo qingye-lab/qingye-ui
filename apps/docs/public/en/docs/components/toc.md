@@ -1,9 +1,9 @@
 # Toc
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
+Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
 
 A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
 
@@ -12,6 +12,7 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 
 ## Notes
 - The current item does not change font weight; only the line segment and text ink deepen, so the row never shifts width.
+- In forced colors (high contrast) the current item also gets an underline: once the system recolors every border, the line no longer tells the current item apart.
 - Level 2 sits one relationship gap from the baseline; level 3 adds the existing level indent on top — two existing relationships added together, not a new value.
 
 ## Use and ownership

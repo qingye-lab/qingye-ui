@@ -152,3 +152,14 @@ test("the consequence lives in the dialog: a danger entry and a danger confirmat
   await user.click(screen.getAllByRole("button", { name: "删除" }).find(button => dialog.contains(button))!);
   expect(confirm).toHaveBeenCalledOnce();
 });
+
+test("AlertDialogClose is named Back by default, and the caller's own name wins", async () => {
+  const user = userEvent.setup();
+  render(<AlertDialog defaultOpen><AlertDialogPopup><AlertDialogTitle>删除</AlertDialogTitle><AlertDialogFooter><AlertDialogClose /><AlertDialogClose render={<Button tone="danger" />}>删除</AlertDialogClose><AlertDialogClose render={<Button />}>保留</AlertDialogClose><AlertDialogClose render={<Button>自带</Button>} /></AlertDialogFooter></AlertDialogPopup></AlertDialog>);
+  expect(await screen.findByRole("button", { name: "返回" })).toHaveAttribute("data-slot", "alert-dialog-close");
+  expect(screen.getByRole("button", { name: "保留" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "自带" })).toBeInTheDocument();
+  expect(screen.getAllByRole("button", { name: "返回" })).toHaveLength(1);
+  await user.click(screen.getByRole("button", { name: "返回" }));
+  await waitFor(() => expect(screen.queryByRole("alertdialog")).toBeNull());
+});

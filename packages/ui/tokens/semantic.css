@@ -169,11 +169,14 @@
     /* 线：重与清，透明叠合。焦点线取焦墨。 */
     --qy-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
     --qy-border-input: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
-    --qy-border-strong: var(--qy-border-input);
+    /* 强调边界：浓墨，比输入边界（重）深一级。用途是可编辑控件的悬停边（input、select、checkbox……）：
+     * 此前它等于 --qy-border-input，`hover:border-border-strong` 在 7 个组件里是一条不产生任何变化的死规则。
+     * 关系：输入边界在墨阶上取「重」，悬停预告往深走一级取「浓」，与面的反馈梯同一方向；高对比偏好下随墨阶上移。 */
+    --qy-border-strong: color-mix(in srgb, var(--qy-ink) var(--qy-ink-nong), transparent);
     /* 重墨（50%）作为装饰的字或点的颜色：与 --qy-border-input 同一个表达式（墨阶的「重」，透明叠合），但名字说的是它的用途。
      * 起因：Breadcrumb 的分隔箭头读 text-input、Timeline 的点读 bg-input——边界 token 被拿来当字色与填色，名实不符。
      * 检索结果：库里没有别的角色取「墨 × 重」这个颜色（--qy-foreground-muted 是浓墨且与纸调和成不透明色，--qy-groove-surface 是淡墨）。
-     * 作用范围：Breadcrumb 分隔箭头、Timeline 的点（装饰，aria-hidden / 不独立承载信息）。边界仍读 --qy-border-input。
+     * 作用范围：Breadcrumb 分隔箭头、Timeline 的点、Sidebar 二级入口的展开记号（装饰，aria-hidden / 不独立承载信息）。边界仍读 --qy-border-input。
      * 修改入口：它与 --qy-border-input 都由 --qy-ink-zhong 决定，调墨阶一处；二者在高对比偏好下同步上移。
      * test/system-roles.test.ts 断言两者今天逐值相同。 */
     --qy-ink-decor: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
@@ -193,19 +196,25 @@
 
     /* 面：清染，透明叠合。 */
     --qy-surface-inset: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
-    /* 反馈梯（用户裁决 2026-10-12，**预设**；取代此前的 4% / 8% / 12% 三级与基础层 §11「当前位置用淡染」）：
-     *   静止 → 悬停 = 选中（在所坐的面上各加一级清染，4%）→ 按下（再深一级，清墨 8%）。
-     * 三者都是同一种墨的透明叠合，所以各自总是相对「它所坐的那张面」深一级——与底色的关系由叠合给出，
-     * 不是一个写死的色值；它们全部从同一个墨原子 --qy-ink-qing 推出（清染 = 清 / 2，按下 = 清），
-     * 调整这个原子，线、页面底纸、悬停、选中与按下一并移动。
+    /* 反馈梯（用户裁决 2026-10-30，推翻 2026-10-12「悬停 = 选中」；此前又取代过 4% / 8% / 12% 三级与基础层 §11「当前位置用淡染」）：
+     *   静止 → 悬停（一级清染，4%）→ 选中 / 当前（一级清墨，8%）；按下也是一级清墨，按下只是一瞬。
+     * 起因：悬停 = 选中时，指针停在哪一项，那一项就和当前项一模一样——读者分不清「我在哪」与「我要去哪」；
+     * 列表、分页、树、表格里悬停与当前常在同一列里被比较。悬停浅、当前深是主流做法（Primer、Fluent、Material 3、Linear）。
+     * 关系：选中 = 悬停的两倍，与「按下 = 悬停的两倍」、实心填充「悬停让一级、按下让两级」同一比例；
+     * 三者都是同一种墨的透明叠合，各自总是相对「它所坐的那张面」深一级——与底色的关系由叠合给出，不是写死的色值；
+     * 全部从同一个墨原子 --qy-ink-qing 推出（清染 = 清 / 2），调整这个原子，线、底纸、悬停、选中与按下一并移动。
      * 悬停决不能比选中深：悬停是瞬时的预告，选中是持续的事实，预告不能压过事实。
+     * 颜色不是唯一信号（WCAG 1.4.1）：当前项另有不靠颜色的线索——列表类（导航、分页、树）加字重；
+     * 分段控件与切换按钮的选中由位置与轨道给出；表格行由选择框给出。
      * 选中（--qy-surface-selected）是持续的当前位置（导航当前页、分页当前页、树的选中行、表格选中行、
-     * 轨道内的选中段、日期区间……）：状态会留下，悬停会离开，按下只是一瞬。「当前」在库里只有这一种面。
+     * 轨道内的选中段、日期区间……）：状态会留下，悬停会离开。「当前」在库里只有这一种面。
+     * 何时用面、何时用线（基础层 §11）：在一列同类对象或去处中选出一个，用面（侧栏、分页、树、表格行）；
+     * 在同一区域内切换内容、或指向页内位置，用线（Tabs、Toc）。
      * 作用范围：只有「持续的选中 / 当前 / 展开」读选中面；悬停与键盘高亮读 --qy-surface-hover；
      * 按下读 --qy-surface-active。静止的面（内嵌面、占位、头像回退）读 --qy-surface-inset / --qy-neutral-soft，
      * 不借用状态面。修改入口就是这三行。 */
     --qy-surface-hover: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
-    --qy-surface-selected: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), transparent);
+    --qy-surface-selected: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
     --qy-surface-active: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
     /* 静止的深一级的墨面：清墨（8%）。小面积按「染随面积」比清染深一级（骨架的占位条），
      * 数据图的参照带也需要比内嵌面看得见的一块淡染。它是静止的，不是状态——此前这两处借用悬停面（也是 8%），
@@ -246,11 +255,12 @@
     --qy-sidebar: var(--qy-background);
     --qy-sidebar-foreground: var(--qy-foreground-muted);
     --qy-sidebar-border: var(--qy-border);
+    /* 侧栏的悬停面：全库悬停面的别名（清染，一级）。作用范围：SidebarLink 非当前项、SidebarSubTrigger 的悬停。 */
     --qy-sidebar-accent: var(--qy-surface-hover);
     --qy-sidebar-accent-foreground: var(--qy-foreground);
-    /* 侧栏当前项的面：选中面的别名（用户裁决 2026-10-12：选中色在全库只有一种，且与底色有关系）。
-     * 选中面是墨的透明叠合，叠在侧栏自己的底上总比底深一级，所以不再区分「侧栏深于纸」或「侧栏近纸色」——
-     * 此前默认取纸本色、近纸色时要项目改写的那一段指引已不需要。作用范围只有 SidebarLink 的当前项。 */
+    /* 侧栏当前项的面：全库选中面的别名（清墨，比悬停深一级）。2026-10-30 先在侧栏单独改成清墨，随后反馈梯整体改为
+     * 「悬停浅、选中深」，侧栏不再需要自己的取值。当前项另加字重（sidebar.tsx），作为不靠颜色的第二信号。
+     * 作用范围只有 SidebarLink 的当前项；项目可单独覆写它。 */
     --qy-sidebar-current: var(--qy-surface-selected);
     /* 当前项选中面上的文字：默认沿用悬停文字，允许项目独立配对当前面。 */
     --qy-sidebar-current-foreground: var(--qy-sidebar-accent-foreground);

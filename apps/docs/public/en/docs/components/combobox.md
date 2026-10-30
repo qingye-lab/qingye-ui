@@ -1,9 +1,9 @@
 # Combobox
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0
+Source SHA-256: 7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -14,7 +14,7 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - Filtering and empty content must reflect the real candidate data.
 - Popup caller style merges last; layer overrides can change the default order.
 - Popup surfaces and highlights use existing theme presets with internal focus signals.
-- For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading).
+- For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in "No options", worded and drawn like Select.
 
 ## Use and ownership
 - Filter candidates and confirm one value or a set, with query text separate from selection.

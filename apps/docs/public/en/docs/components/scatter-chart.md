@@ -1,9 +1,9 @@
 # ScatterChart
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
+Source SHA-256: c3975485a92833bf61f7ac1cac2587189f280468401f0fcc7f472f120ba5e129
 
 The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 
@@ -11,6 +11,7 @@ The relationship between two numeric quantities; an all-pairs form with one to t
 Both x and y are value axes by the task's own definition, not a violation of "always one value axis" — that ban targets stacking two different-unit Y-axes on one shared category axis, which fabricates correlation. As an all-pairs form it accepts at most three series; more should fold into "Other" or split into separate charts.
 
 ## Notes
+- The plot is hidden from assistive technology (aria-hidden): markers are only shapes with no readable name or value; the equivalent table opened by "View data" carries the data, and series are told apart by legend text and marker shape, not hue alone.
 - More than three series throws: as an all-pairs form any two points may sit adjacent, so its color-vision check is stricter than an adjacent check; fold extra series into "Other" or split into small multiples.
 - Each point's hit area is at least 24px, larger than its visible 8px marker; the pointer need not land dead-center.
 - The x and y domains pad slightly around the actual data range rather than forcing a zero baseline — a scatter point does not grow from a baseline like a bar.

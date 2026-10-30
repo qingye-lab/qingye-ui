@@ -13,7 +13,7 @@ export default {
     responsive: ["横向默认换行，也可纵向；不合并成员轮廓。"], customization: ["className 与 render 属于组；不统一改写子按钮。"],
   }, designEn: {"whenToUse":["Several actions share a named scope."],"avoid":["Replacing single/multiple selection or a toolbar with an action group."],"composition":["Use Group and action-gap; Button members retain their own actual states."],"stateOwner":{"library":["Native group semantics and action spacing."],"application":["Scope, name, and each action's state."]},"responsive":["Horizontal groups wrap by default; vertical groups are available. Member contours stay independent."],"customization":["className and render belong to the group; do not rewrite every child Button."]},
   api: [{ name: "ButtonGroup", description: "默认 role=group 的开放动作关系。", descriptionEn: "An open action relationship with role=group by default.", props: [
-    { name: "aria-label / aria-labelledby", type: "string", description: "动作范围的共同名称，不替代按钮名称。", descriptionEn: "The shared scope name, separate from action names." },
+    { name: "aria-label / aria-labelledby", type: "string", description: "必填其一：动作范围的共同名称，不替代按钮名称；缺失或为空时抛错。", descriptionEn: "One is required: the shared scope name, separate from action names. A missing or blank name throws." },
     { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "布局方向。", descriptionEn: "Layout direction." },
     { name: "align / wrap / render / ref / 原生属性", nameEn: "align / wrap / render / ref / native props", type: "ButtonGroupProps", description: "沿用 Group 的组合入口，间隔默认 action-gap。", descriptionEn: "Uses Group composition props with action spacing." },
   ] }],

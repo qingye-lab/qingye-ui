@@ -17,7 +17,7 @@ export default function Help() {
 
   // 目录的起点比纸的上沿低 1 材，停靠位置与起点相同：滚动时目录不动。
   return <div className="flex items-start justify-center gap-(--qy-cai) px-(--qy-page-gutter) py-(--qy-section-gap)">
-    <Prose ref={article}>
+    <Prose framed ref={article}>
       <h1 id="sync-failure">同步失败时，数据会怎样</h1>
       <p>每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。如果在写入 1,284 条记录的过程中网络中断，已经写入的部分会保留，未写入的部分留到下一次同步——不会因为一次失败就清空整个集合。</p>
       <h2 id="retry">重试与核实</h2>

@@ -1,14 +1,18 @@
 # StatusDot
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
-Source SHA-256: c5b530fc9dc8cfd05cc82eff59807dd3d2d9f1be1bbc76ec103e3517b8b169ce
+Source SHA-256: 460a2c7c93aa7bbf779ca0c9ad7e6f47f2d7fc13190afd17b95f4717319e3c74
 
 A state graphic and its visible name.
 
 ## Decision
 Waiting, in-progress, and unknown results remain distinct facts.
+
+## Notes
+- Each state belongs to one fixed category: online is success, error is danger, warning and unknown are warning, and info, pending and in-progress are info; offline and neutral carry no hue. The same category has the same hue in Badge.
+- An unknown outcome needs the reader to verify it, so it is a warning: neither a failure nor a success. neutral is a state with no category; use label to say what it is.
 
 ## Use and ownership
 - Present an object's actual state.

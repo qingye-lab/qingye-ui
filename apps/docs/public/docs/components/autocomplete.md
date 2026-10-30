@@ -1,9 +1,9 @@
 # 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
+Source SHA-256: c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -12,9 +12,9 @@ Source SHA-256: 3e76b123ade49969db6f359fd879fb1412ed20dcf05c98323b8be0a8238e9c18
 
 ## Notes
 - 需要只能确认候选中的一个值时用 Combobox。
-- 空集合不代表错误或服务失败；空提示由调用方根据真实情况提供。
+- 空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。
 - caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。
-- 命令面板不是独立组件：Dialog 里放 open + inline 的 Autocomplete，分组、键盘直达、选中后关闭都由这里的部件组合；快捷键由应用绑定，库不监听全局按键。选 Autocomplete 而不是 Combobox，因为命令是动作而不是要确认保存的值，输入文字没有「已确认候选」要保留。
+- 命令面板用 Command。
 
 ## Use and ownership
 - 编辑自由文本，候选作为可接受的建议。
@@ -199,48 +199,5 @@ export default function Demo() {
       <Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue="3 号楼东侧"><AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl></Autocomplete></Field>
     </div>
   );
-}
-```
-
-### 命令面板
-Source: apps/docs/src/content/autocomplete/demos/03-command-palette.tsx
-```tsx
-import { useEffect, useState } from "react";
-import { Autocomplete, AutocompleteCollection, AutocompleteControl, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList } from "@qingye_lab/ui/components/autocomplete";
-import { Dialog, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
-import { Inline } from "@qingye_lab/ui/components/layout";
-import { Kbd } from "@qingye_lab/ui/components/kbd";
-export const meta = { title: "命令面板", titleEn: "Command palette" };
-const commands = [
-  { value: "页面", items: ["概览", "设备", "告警", "设置"] },
-  { value: "操作", items: ["新建设备", "导出告警", "切换主题"] },
-];
-export default function Demo() {
-  const [open, setOpen] = useState(false);
-  const [last, setLast] = useState("");
-  // 快捷键是应用的事：库不监听全局按键，避免与站点已有的快捷键冲突。
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setOpen(value => !value); }
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
-  return <Inline gap="actions">
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>搜索 <Kbd>⌘K</Kbd></DialogTrigger>
-      <DialogPopup className="w-[min(32rem,100%)]">
-        <DialogTitle className="sr-only">命令面板</DialogTitle>
-        <Autocomplete open inline items={commands} autoHighlight="always" keepHighlight>
-          <div className="min-w-0">
-          <AutocompleteControl><AutocompleteInput aria-label="搜索页面与操作" placeholder="搜索页面与操作" /></AutocompleteControl>
-          <AutocompleteEmpty>没有匹配项</AutocompleteEmpty>
-          <AutocompleteList className="mt-(--qy-field-gap) max-h-72">{(group: (typeof commands)[number]) => <AutocompleteGroup key={group.value} items={group.items}><AutocompleteGroupLabel>{group.value}</AutocompleteGroupLabel><AutocompleteCollection>{(item: string) => <AutocompleteItem key={item} value={item} onClick={() => { setLast(item); setOpen(false); }}>{item}</AutocompleteItem>}</AutocompleteCollection></AutocompleteGroup>}</AutocompleteList>
-          </div>
-        </Autocomplete>
-      </DialogPopup>
-    </Dialog>
-    <output className="text-support text-muted-foreground">{last || "—"}</output>
-  </Inline>;
 }
 ```

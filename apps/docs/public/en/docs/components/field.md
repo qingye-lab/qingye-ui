@@ -1,9 +1,9 @@
 # Field
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: b54488ef53ff2383918f224725e11c8b584eaf4088a449c48f999054e8b11fe4
+Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
 
 Connect one value's name, control, description, and caller-supplied errors.
 
@@ -42,7 +42,8 @@ Supply invalid and error content separately. Field connects names and errors wit
 - FieldErrorProps: type; owner field; PASS
 - FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
-- FieldLabel: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Label>
+- FieldLabel: function; owner field; PASS; props: FieldLabelProps
+- FieldLabelProps: type; owner field; PASS
 - FieldOrientation: type; owner field; PASS
 - FieldPrimitive: reexport; owner field; UNVERIFIED
 - FieldProps: type; owner field; PASS
@@ -55,6 +56,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Field
 - `orientation?`: `"horizontal" | "vertical"`.
+- `validating?`: `boolean`. 应用持有的异步校验正在进行。为 true 时：根部 `data-validating` 与 `aria-busy`，错误位置显示「正在校验」， 本字段内的 FieldError 不显示、控件不标无效——校验进行中，上一次的结果已不可信。结束与结论仍由应用传入（invalid、错误内容）。
 - plus 283 inherited (@types/react 275, @base-ui/react 8); not expanded, see the installed declarations
 
 ### FieldContent
@@ -82,7 +84,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldLabel
-- no props declared by this library
+- `requirement?`: `"required" | "optional"`. 必填 / 选填标记。`"required"` 只画 `*`（aria-hidden）；必填语义由控件自己的 `required` 向读屏表达， 所以调用方必须同时给控件 `required`，否则标记只是视觉。`"optional"` 的「选填」是可见文字，计入可访问名称。
 - plus 281 inherited (@types/react 277, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldSeparator
@@ -98,10 +100,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FieldValidating: without a provider default-value; provided by Field
 - Context InField: without a provider default-value; provided by Field
 - Context InFieldItem: without a provider default-value; provided by Field, FieldItem, OptionScope
 
@@ -112,12 +115,14 @@ Written descriptions; the list above is the type-resolved fact.
 Shared Base UI Field.Root context. Full automatic-validation APIs remain on FieldPrimitive.
 - orientation: "vertical" | "horizontal"; default "vertical". Vertical editing or a horizontal option; associations stay intact.
 - invalid: boolean; default false. Declared by the caller. Native constraints, blur, and error content do not infer it.
+- validating: boolean; default false. An application-owned async validation is running: root data-validating and aria-busy, a validating status in the error position, FieldError in this field is hidden, and the control is not marked invalid (invalid is held until it ends).
 - disabled: boolean; default false. Disables registered controls; disabled values are omitted from native submission.
 - name / dirty / touched: Base UI Field.Root props. Field name and caller-managed editing facts.
 - className / style / render / ref: Base UI Field.Root props. Applied to the field root; styles support state functions.
 
 ### FieldLabel
 Requires a Field or FieldPrimitive.Root context and names a registered control; supports explicit htmlFor and primitive nativeLabel/render. For a standalone label, use Label from components/label.
+- requirement: "required" | "optional". required adds an aria-hidden * after the name and the caller must also set required on the control; optional shows a visible optional note that is part of the accessible name.
 
 ### FieldDescription
 Requires a Field or FieldPrimitive.Root context to register supporting facts in aria-describedby. For standalone help, give native text an id and reference it explicitly from the control.
@@ -266,5 +271,37 @@ export const meta = { title: "禁用", titleEn: "Disabled" };
 
 export default function Demo() {
   return <Field className="w-full max-w-xs" disabled><FieldLabel>设备名称</FieldLabel><Input defaultValue="青野" /></Field>;
+}
+```
+
+### 必填与选填
+Source: apps/docs/src/content/field/demos/08-requirement.tsx
+```tsx
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "必填与选填", titleEn: "Required and optional" };
+
+export default function Demo() {
+  return (
+    <FieldGroup className="w-full max-w-xs">
+      <Field><FieldLabel requirement="required">设备名称</FieldLabel><Input required /></Field>
+      <Field><FieldLabel requirement="optional">备注</FieldLabel><Input /></Field>
+    </FieldGroup>
+  );
+}
+```
+
+### 校验中
+Source: apps/docs/src/content/field/demos/09-validating.tsx
+```tsx
+import { Field, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "校验中", titleEn: "Validating" };
+
+// 校验进行中旧的错误不显示；结论由应用在结束后传入。
+export default function Demo() {
+  return <Field className="w-full max-w-xs" validating invalid><FieldLabel>用户名</FieldLabel><Input defaultValue="qingye" /><FieldError>用户名已被占用</FieldError></Field>;
 }
 ```

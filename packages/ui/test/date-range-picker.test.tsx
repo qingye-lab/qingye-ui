@@ -202,3 +202,18 @@ test("read-only keeps both endpoints focusable and readable but does not open th
   expect(screen.queryByRole("dialog")).toBeNull();
   expect(screen.getByRole("button", { name: "选择日期范围" })).toBeDisabled();
 });
+
+test("the clear action removes the confirmed range and returns focus to the start input; read-only says so and has no clear", async () => {
+  const change = vi.fn();
+  const range = { from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) };
+  const { container, rerender } = render(<DateRangePicker defaultValue={range} onValueChange={change} />);
+  await userEvent.click(screen.getByRole("button", { name: "清除日期范围" }));
+  expect(change).toHaveBeenCalledWith(undefined, expect.anything());
+  const [start] = endpoints(container) as [HTMLInputElement];
+  expect(start).toHaveValue("");
+  expect(start).toHaveFocus();
+  expect(screen.queryByRole("button", { name: "清除日期范围" })).not.toBeInTheDocument();
+  rerender(<DateRangePicker readOnly value={range} onValueChange={change} />);
+  expect(screen.getByText("只读")).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除日期范围" })).not.toBeInTheDocument();
+});

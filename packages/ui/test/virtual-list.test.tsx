@@ -26,7 +26,7 @@ test("windowing renders a bounded range with truthful positions and forwards act
 });
 
 test("keyboard reaches the last/first row across windows, with caller cancellation honored", async () => {
-  const { rerender } = render(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={0} />);
+  const { rerender } = render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={0} />);
   const viewport = screen.getByRole("list");
   viewport.focus();
   await userEvent.keyboard("{End}");
@@ -35,14 +35,14 @@ test("keyboard reaches the last/first row across windows, with caller cancellati
   expect(screen.getByText("条目 99")).toHaveFocus();
   await userEvent.keyboard("{Home}");
   expect(screen.getByText("条目 1")).toHaveFocus();
-  rerender(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} onKeyDown={event => event.preventDefault()} />);
+  rerender(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} onKeyDown={event => event.preventDefault()} />);
   await userEvent.keyboard("{End}");
   expect(screen.getByText("条目 1")).toHaveFocus();
 });
 
 test("focused descendant survives scrolling/reordering and keeps its native editing keys", async () => {
   const renderInput = (item: typeof items[number]) => <input aria-label={item.label} defaultValue="初始" />;
-  const { rerender } = render(<VirtualList items={items} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
+  const { rerender } = render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
   const input = screen.getByRole("textbox", { name: "条目 1" });
   input.focus();
   await userEvent.type(input, "改");
@@ -51,10 +51,10 @@ test("focused descendant survives scrolling/reordering and keeps its native edit
   fireEvent.scroll(screen.getByRole("list"), { target: { scrollTop: 1000 } });
   expect(input).toHaveFocus();
   expect(input).toHaveValue("初始改");
-  rerender(<VirtualList items={[...items].reverse()} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
+  rerender(<VirtualList aria-label="条目" items={[...items].reverse()} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
   expect(screen.getByRole("textbox", { name: "条目 1" })).toBe(input);
   expect(input).toHaveFocus();
-  rerender(<VirtualList items={items.slice(1)} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
+  rerender(<VirtualList aria-label="条目" items={items.slice(1)} getKey={getKey} renderItem={renderInput} itemSize={20} height={60} overscan={0} />);
   expect(screen.queryByRole("textbox", { name: "条目 1" })).not.toBeInTheDocument();
   expect(screen.getByRole("list")).toHaveFocus();
   await userEvent.keyboard("{Home}");
@@ -62,17 +62,17 @@ test("focused descendant survives scrolling/reordering and keeps its native edit
 });
 
 test("empty collections remain reachable, and invalid dimensions/duplicate keys fail explicitly", () => {
-  render(<VirtualList items={[]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  render(<VirtualList aria-label="条目" items={[]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   expect(screen.getByRole("list")).toHaveAttribute("tabindex", "0");
   expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
-  expect(() => render(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={0} height={60} />)).toThrow("finite positive");
-  expect(() => render(<VirtualList items={items} getKey={() => "same"} renderItem={renderItem} itemSize={20} height={60} />)).toThrow("unique stable");
+  expect(() => render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={0} height={60} />)).toThrow("finite positive");
+  expect(() => render(<VirtualList aria-label="条目" items={items} getKey={() => "same"} renderItem={renderItem} itemSize={20} height={60} />)).toThrow("unique stable");
 });
 
 test("scrolling a large collection renders only the window and does not walk the data again", async () => {
   const many = Array.from({ length: 50_000 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
   const keyOf = vi.fn((item: typeof many[number]) => item.id);
-  render(<VirtualList items={many} getKey={keyOf} renderItem={renderItem} itemSize={20} height={100} overscan={2} />);
+  render(<VirtualList aria-label="条目" items={many} getKey={keyOf} renderItem={renderItem} itemSize={20} height={100} overscan={2} />);
   const viewport = screen.getByRole("list");
   const initial = keyOf.mock.calls.length;
   for (const top of [0, 20, 400_000, 999_000, 999_900]) fireEvent.scroll(viewport, { target: { scrollTop: top } });
@@ -143,7 +143,7 @@ afterEach(() => {
 });
 
 test("SSR renders an initial bounded window before a scroll element exists", () => {
-  const html = renderToString(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
+  const html = renderToString(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
   expect((html.match(/role="listitem"/g) ?? [])).toHaveLength(4);
   expect(html).toContain('aria-setsize="100"');
   expect(html).not.toContain("条目 100");
@@ -153,7 +153,7 @@ test("actions keep the native ref, honor alignment, reject invalid indices, and 
   const { scrollTo } = installLayout();
   const ref = createRef<HTMLDivElement>();
   const actionsRef = createRef<VirtualListActions>();
-  render(<VirtualList ref={ref} actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={0} />);
+  render(<VirtualList aria-label="条目" ref={ref} actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={0} />);
   const viewport = screen.getByRole("list");
   viewport.focus();
   await act(async () => actionsRef.current!.scrollToIndex(10, { align: "center" }));
@@ -175,7 +175,7 @@ test("actions keep the native ref, honor alignment, reject invalid indices, and 
 test("dynamic rows measure their content, remeasure above the viewport, and release observers", () => {
   const layout = installLayout();
   const varied = items.map(item => ({ ...item, size: item.id === 0 ? 40 : 20 }));
-  const { unmount } = render(<StrictMode><VirtualList items={varied} getKey={getKey} renderItem={item => <div data-size={item.size}>{item.label}</div>} measurement="dynamic" itemSize={20} height={60} overscan={2} /></StrictMode>);
+  const { unmount } = render(<StrictMode><VirtualList aria-label="条目" items={varied} getKey={getKey} renderItem={item => <div data-size={item.size}>{item.label}</div>} measurement="dynamic" itemSize={20} height={60} overscan={2} /></StrictMode>);
   const viewport = screen.getByRole("list");
   expect(screen.getByText("条目 2").parentElement).toHaveStyle({ top: "40px" });
   expect(viewport.firstElementChild).toHaveStyle({ height: "2020px" });
@@ -194,17 +194,17 @@ test("dynamic rows measure their content, remeasure above the viewport, and rele
 
 test("stable identity anchors prepends and same-edge reorders at the same pixel offset", async () => {
   installLayout();
-  const { rerender } = render(<VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
+  const { rerender } = render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
   const viewport = screen.getByRole("list");
   fireEvent.scroll(viewport, { target: { scrollTop: 205 } });
   const prepended = [{ id: -1, label: "更早" }, ...items];
-  rerender(<VirtualList items={prepended} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
+  rerender(<VirtualList aria-label="条目" items={prepended} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
   await act(async () => {});
   expect(viewport.scrollTop).toBe(225);
   expect(screen.getByText("条目 11")).toHaveStyle({ top: "220px" });
   const reordered = [...prepended];
   [reordered[1], reordered[11]] = [reordered[11]!, reordered[1]!];
-  rerender(<VirtualList items={reordered} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
+  rerender(<VirtualList aria-label="条目" items={reordered} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} overscan={1} />);
   await act(async () => {});
   expect(viewport.scrollTop).toBe(25);
   expect(screen.getByText("条目 11")).toHaveStyle({ top: "20px" });
@@ -213,32 +213,32 @@ test("stable identity anchors prepends and same-edge reorders at the same pixel 
 test("followEnd is opt-in, follows only a previously pinned append, and respects reading history", async () => {
   installLayout();
   const actionsRef = createRef<VirtualListActions>();
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   const viewport = screen.getByRole("list");
   expect(viewport.scrollTop).toBe(0);
   await act(async () => actionsRef.current!.scrollToEnd());
   const appended = [...items, { id: 100, label: "最新" }];
-  rerender(<VirtualList actionsRef={actionsRef} items={appended} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={appended} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   await act(async () => {});
   expect(viewport.scrollTop).toBe(1960);
   // A user scroll cancels any still-correcting jump before new output arrives.
   fireEvent.wheel(viewport, { deltaY: -100 });
   fireEvent.scroll(viewport, { target: { scrollTop: 200 } });
   const more = [...appended, { id: 101, label: "后来" }];
-  rerender(<VirtualList actionsRef={actionsRef} items={more} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={more} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   expect(viewport.scrollTop).toBe(200);
   await act(async () => actionsRef.current!.scrollToEnd());
-  rerender(<VirtualList actionsRef={actionsRef} items={[...more, { id: 102, label: "末项" }]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={[...more, { id: 102, label: "末项" }]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   expect(viewport.scrollTop).toBe(1980);
 });
 
 test("removing a pending command's item never restores its old numeric target", async () => {
   installLayout();
   const actionsRef = createRef<VirtualListActions>();
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   await act(async () => actionsRef.current!.scrollToIndex(50));
   const replacement = items.map(item => item.id === 50 ? { id: 1000, label: "替换" } : item);
-  rerender(<VirtualList actionsRef={actionsRef} items={replacement} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={replacement} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   fireEvent.wheel(screen.getByRole("list"));
   fireEvent.scroll(screen.getByRole("list"), { target: { scrollTop: 0 } });
   await act(() => new Promise(resolve => setTimeout(resolve, 40)));
@@ -251,11 +251,11 @@ test("dynamic initial estimates never jump to the last row and empty actions rem
   installLayout();
   const actionsRef = createRef<VirtualListActions>();
   const short = items.slice(0, 3);
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={short} getKey={getKey} renderItem={item => <div data-size="80">{item.label}</div>} measurement="dynamic" itemSize={20} height={60} followEnd />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={short} getKey={getKey} renderItem={item => <div data-size="80">{item.label}</div>} measurement="dynamic" itemSize={20} height={60} followEnd />);
   await act(async () => {});
   expect(screen.getByRole("list").scrollTop).toBe(0);
   expect(screen.getByText("条目 1")).toBeInTheDocument();
-  rerender(<VirtualList actionsRef={actionsRef} items={[]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={[]} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   expect(() => actionsRef.current!.scrollToEnd()).not.toThrow();
   expect(() => actionsRef.current!.scrollToIndex(0)).toThrow("within the collection");
 });
@@ -265,19 +265,19 @@ test("dynamic end jumps include newly measured tail content and stop following a
   const actionsRef = createRef<VirtualListActions>();
   const measured = items.map(item => ({ ...item, size: item.id === 0 ? 40 : 20 }));
   const renderMeasured = (item: typeof measured[number]) => <div data-size={item.size}>{item.label}</div>;
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={measured} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={measured} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
   const viewport = screen.getByRole("list");
   await act(async () => actionsRef.current!.scrollToEnd());
   expect(viewport.scrollTop).toBe(1960);
   const appended = [...measured, { id: 100, label: "较长的新记录", size: 80 }];
-  rerender(<VirtualList actionsRef={actionsRef} items={appended} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={appended} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
   await act(async () => {});
   await waitFor(() => expect(viewport.scrollTop).toBe(2040));
   expect(screen.getByText("较长的新记录").parentElement).toHaveStyle({ top: "2020px" });
   fireEvent.wheel(viewport, { deltaY: -1 });
   fireEvent.scroll(viewport, { target: { scrollTop: 50 } });
   const prepended = [{ id: -1, label: "更早的记录", size: 20 }, ...appended];
-  rerender(<VirtualList actionsRef={actionsRef} items={prepended} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={prepended} getKey={getKey} renderItem={renderMeasured} measurement="dynamic" itemSize={20} height={60} followEnd />);
   await act(async () => {});
   expect(viewport.scrollTop).toBe(70);
   expect(screen.getByText("条目 2").parentElement).toHaveStyle({ top: "60px" });
@@ -287,15 +287,15 @@ test("dynamic end jumps include newly measured tail content and stop following a
 test("followEnd accepts simultaneous history and output, but not replacing the last identity", async () => {
   installLayout();
   const actionsRef = createRef<VirtualListActions>();
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   const viewport = screen.getByRole("list");
   await act(async () => actionsRef.current!.scrollToEnd());
   const simultaneous = [{ id: -1, label: "更早" }, ...items, { id: 100, label: "新增" }];
-  rerender(<VirtualList actionsRef={actionsRef} items={simultaneous} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={simultaneous} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   await act(async () => {});
   expect(viewport.scrollTop).toBe(1980);
   const replacement = [...simultaneous.slice(0, -1), { id: 101, label: "替换末项" }];
-  rerender(<VirtualList actionsRef={actionsRef} items={replacement} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={replacement} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} followEnd />);
   fireEvent.scroll(viewport, { target: { scrollTop: 100 } });
   await act(() => new Promise(resolve => setTimeout(resolve, 40)));
   expect(viewport.scrollTop).toBe(100);
@@ -304,9 +304,9 @@ test("followEnd accepts simultaneous history and output, but not replacing the l
 test("shrinking the collection cancels an outstanding target outside its new bounds", async () => {
   const { scrollTo } = installLayout();
   const actionsRef = createRef<VirtualListActions>();
-  const { rerender } = render(<VirtualList actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  const { rerender } = render(<VirtualList aria-label="条目" actionsRef={actionsRef} items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   await act(async () => actionsRef.current!.scrollToIndex(90));
-  rerender(<VirtualList actionsRef={actionsRef} items={items.slice(0, 20)} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
+  rerender(<VirtualList aria-label="条目" actionsRef={actionsRef} items={items.slice(0, 20)} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} />);
   const viewport = screen.getByRole("list");
   // A real element clamps itself when its content shrinks; deliver that event.
   fireEvent.scroll(viewport, { target: { scrollTop: 340 } });
@@ -315,4 +315,12 @@ test("shrinking the collection cancels an outstanding target outside its new bou
   expect(scrollTo).toHaveBeenCalledTimes(writesAfterShrink);
   expect(screen.getByText("条目 20")).toHaveAttribute("aria-setsize", "20");
   expect(() => actionsRef.current!.scrollToIndex(90)).toThrow("within the collection");
+});
+
+test("a missing or blank accessible name fails explicitly, an aria-labelledby name is accepted", () => {
+  const list = (props: Record<string, unknown>) => <VirtualList items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={60} {...props} />;
+  expect(() => render(list({}))).toThrow(/VirtualList requires a nonempty aria-label or aria-labelledby/);
+  expect(() => render(list({ "aria-label": "  " }))).toThrow(/aria-label/);
+  render(<><h2 id="log-title">日志</h2>{list({ "aria-labelledby": "log-title" })}</>);
+  expect(screen.getByRole("list", { name: "日志" })).toBeInTheDocument();
 });

@@ -2,7 +2,7 @@ import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "代码块、表格与任务清单", titleEn: "Code blocks, tables and task lists" } satisfies DemoMeta;
 export default function Demo() {
-  return <Prose>
+  return <Prose framed>
     <h3>排查步骤</h3>
     <ul className="contains-task-list">
       <li className="task-list-item"><input type="checkbox" checked disabled readOnly aria-labelledby="prose-task-1" /> <span id="prose-task-1">在操作记录里确认失败条目数量</span></li>

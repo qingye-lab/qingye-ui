@@ -1,9 +1,9 @@
 # 日期输入 DatePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 9a3ed256b922f4189e88f7275eb8b317b84c8ef31ad6afbc84cdd2db279c66e0
+Source SHA-256: 4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5
 
 编辑一个当地日期，或展开日历选择。
 
@@ -66,7 +66,7 @@ Written descriptions; the list above is the type-resolved fact.
 - value / defaultValue / onValueChange: Date | undefined / Date | undefined / (value, event) => void. 传了 value 属性（含 value={undefined}，表示空）即受控：调用方接受回调才改变事实。不传 value 则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。有效年份为 1–9999。
 - min / max: Date. 一处声明最早 / 最晚日期，同时写入原生输入的 min / max 与日历的禁用范围和可翻到的月份。与 inputProps.min/max、calendarProps.disabled/startMonth/endMonth 并存，同时给出时取交集；交集为空时开发环境警告（2026-10-12）。
 - name / form: string. 真实 date input 参与原生 FormData；Field name 可提供共同命名。序列化为当地 YYYY-MM-DD。
-- disabled / readOnly: boolean; default false. 阻止输入与附属选择/清除；Field 禁用同样约束动作。只读值提交，禁用值不提交。
+- disabled / readOnly: boolean; default false. 阻止输入与附属选择/清除；Field 禁用同样约束动作。只读值提交，禁用值不提交；只读时边界内给出「只读」说明（与 Input 同一机制）。
 - inputProps: Input props except owned value/type/name/form/state. ref/render/ARIA/events/min/max/step/required 属于真实 date input。onChange 的 preventDefault 或 preventBaseUIHandler 可取消请求。
 - calendarProps: CalendarProps except mode/selected/onSelect/required. 控制日期禁用、导航边界、locale 等；mode 与确认值由组合持有。原生 step 仍在 inputProps；日期边界优先用顶层 min / max 一处声明。
 - render / ref / className / style / ARIA / events: div composition props. 属于组合根；实际输入出口放在 inputProps。

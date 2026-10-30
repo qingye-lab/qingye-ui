@@ -1,9 +1,9 @@
 # 比较表 Table
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
+Source SHA-256: 6d4986a22c788958edc8574a63618019df7eb6d313a2f2c4d631107706b11acf
 
 原生二维关系与完整比较列。
 
@@ -13,6 +13,7 @@ Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
 ## Notes
 - 空结果可在完整表头下提供跨列单元格；数据与排序由应用提供。
 - 一个范围只铺一张纸：表格进 Card 时用 framed={false}，不要在卡片里再套一层边框。
+- 数据格与行标题允许在任意位置折行，长标识符不会把列撑出纸外；列标题保持单行。
 - 可滚动由 ResizeObserver 实测决定；服务端与首帧按「不可滚动」输出（服务端没有布局可测，猜可滚动会让多数放得下的表带一个假停靠点），客户端在首次绘制前即更新。
 
 ## Use and ownership
@@ -70,7 +71,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableCell
-- no props declared by this library
+- `numeric?`: `boolean`.
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
@@ -82,11 +83,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableHead
-- no props declared by this library
+- `numeric?`: `boolean`.
 - plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableHeader
-- no props declared by this library
+- `sticky?`: `boolean`. 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器： 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height， 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableRow
@@ -114,10 +115,12 @@ table / caption / thead / tbody / tfoot / tr。
 ### TableHead
 th；应用提供排序状态。
 - scope: "col" | "row" | "colgroup" | "rowgroup"; default "col". 行标题用 row；复杂表格可用 id/headers。
+- numeric: boolean; default false. 数值列由调用方声明，不由内容猜：表头与该列单元格同时声明，行内末端对齐（RTL 下在左）并用等宽数字；排序按钮内容反向排列，列名紧贴末端。读 data-numeric。
 - aria-sort / children / native props: native th props. 排序交应用 Button 组合，库不重排 rows。
 
 ### TableCell
 td，零值原样呈现。
+- numeric: boolean; default false. 数值列的单元格，与同列表头的 numeric 配对。
 - colSpan / rowSpan / headers / render / ref / native props: useRender.ComponentProps<td>. 显式提供跨列和关联表头，不隐藏比较列。
 
 ## Keyboard
@@ -141,7 +144,7 @@ export default function Demo() {
   const [descending, setDescending] = useState(false);
   const sorted = [...rows].sort((a, b) => descending ? b.count - a.count : a.count - b.count);
   // 数字列右对齐；排序箭头放在列名前，列名仍落在列的右缘上。正在排序的列名是当前状态，用焦墨。
-  return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead><TableHead className="text-end" aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}><span aria-hidden="true">{descending ? "↓" : "↑"}</span>数量</Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell><TableCell className="text-end numeric">{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
+  return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead numeric>宽度</TableHead><TableHead numeric>高度</TableHead><TableHead numeric aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}>数量<span aria-hidden="true">{descending ? "↓" : "↑"}</span></Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell numeric>{row.width}</TableCell><TableCell numeric>{row.height}</TableCell><TableCell numeric>{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
 }
 ```
 
@@ -162,7 +165,7 @@ export default function Demo() {
   // 卡片已经是一张纸：表格不再铺第二张，贴着卡片的边放，首列文字与卡片标题同一条竖线。
   return <Card className="w-full max-w-md overflow-hidden" render={<section aria-labelledby="table-on-paper-title" />}>
     <Heading id="table-on-paper-title" level={3} className="px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap)">控件占位</Heading>
-    <TableContainer framed={false}><Table aria-labelledby="table-on-paper-title"><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead></TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
+    <TableContainer framed={false}><Table aria-labelledby="table-on-paper-title"><TableHeader><TableRow><TableHead>控件</TableHead><TableHead numeric>宽度</TableHead><TableHead numeric>高度</TableHead></TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell numeric>{row.width}</TableCell><TableCell numeric>{row.height}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
   </Card>;
 }
 ```

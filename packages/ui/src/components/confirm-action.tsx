@@ -14,7 +14,7 @@ export type ConfirmActionProps = Omit<AlertDialogProps, "children"> & {
   triggerLabel: React.ReactNode;
   actionLabel: React.ReactNode;
   onConfirm: (snapshot: ConfirmActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void;
-  /** 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求。结果由应用用提示组件表达。 */
+  /** 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求，对话框也不能被关闭（Esc、点外部、返回都不行）——关闭会让读者以为请求已取消。结果由应用用提示组件表达。 */
   loading?: boolean;
   disabled?: boolean;
   tone?: ButtonProps["tone"];
@@ -56,7 +56,9 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
   const { onClick: onConfirmClick, ...confirmRest } = confirmProps;
   const { onChange: onInputChange, ...inputRest } = inputProps;
   return <AlertDialog {...props} open={open} onOpenChange={(next, details) => {
+    // 调用方先收到变化（可自行 cancel）；请求在途时再补一次 cancel，关闭请求不改变任何状态（受控与非受控一致）。
     onOpenChange?.(next, details);
+    if (!next && loading && !details.isCanceled) details.cancel();
     if (details.isCanceled) return;
     if (next) reread();
     if (openProp === undefined) setLocalOpen(next);
@@ -81,7 +83,7 @@ export function ConfirmAction({ snapshot, title, triggerLabel, actionLabel, onCo
           if (event.defaultPrevented || event.baseUIHandlerPrevented || disabled || loading || stale || reviewed.key !== snapshotKey(snapshot, confirmationText) || (confirmationText !== undefined && acknowledgment !== confirmationText)) return;
           onConfirm(reviewed.snapshot, event);
         }}>{actionLabel}</Button>
-        <AlertDialogClose render={<Button variant="quiet" />}>{messages.back}</AlertDialogClose>
+        <AlertDialogClose render={<Button variant="quiet" disabled={loading} />}>{messages.back}</AlertDialogClose>
       </AlertDialogFooter>
     </AlertDialogPopup>
   </AlertDialog>;

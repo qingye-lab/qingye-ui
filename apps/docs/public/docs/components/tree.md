@@ -1,9 +1,9 @@
 # 层级集合 Tree
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 1b9365479f41077e88e097116e6d9026e8df002b3c77447a4c9eeeba28b9b068
+Source SHA-256: beaccb8054cd33b7cb3b00282400c92e6e2a491c0c0821da4a0155dccb0a9e0b
 
 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 
@@ -15,7 +15,7 @@ expandedIds 与 selectedId 分开；聚焦不选择，隐藏节点不强行清�
 
 ## Use and ownership
 - 真实层级需要键盘定位和独立选择。
-- Avoid: 平面比较用 DataTable；不内置懒加载、多选或请求。
+- Avoid: 平面比较用 DataTable；不内置懒加载或请求。收进触发器的选择用 TreeSelect。
 - Avoid: 同一棵树里混用 checkable 与 selectable 的点击语义：一次点击只承担一种意图。
 - Library: roving focus、稳定 key 与焦点恢复。
 - Application: 节点、展开、选择、禁用与空/未知语义。
@@ -45,6 +45,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `checkedIds?`: `readonly string[]`. 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。
 - `defaultCheckedIds?`: `readonly string[]`.
 - `defaultExpandedIds?`: `readonly string[]`.
+- `defaultFocusedId?`: `string | null`. 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。
 - `defaultSelectedId?`: `string | null`.
 - `disabled?`: `boolean`.
 - `emptyContent?`: `React.ReactNode`.
@@ -74,6 +75,8 @@ Written descriptions; the list above is the type-resolved fact.
 - selectable / disabled / emptyContent: boolean / ReactNode. 默认 selectable=true；空树可聚焦，内容由调用方或 locale 提供。
 - checkable: boolean. 开启级联多选勾选模式；默认 false。为 true 时行点击与 Space 勾选当前节点，selectable 的单选点击不再生效。
 - checkedIds / defaultCheckedIds / onCheckedChange: readonly string[] / callback. 只含叶子节点 id；details.cancel() 不提交。勾选一个分支会把它启用的叶子后代一并加入或移出集合；禁用的叶子保留给定事实，不被级联改变。
+- defaultFocusedId: string | null. 首次渲染时 roving 入口所在的节点，默认是第一个可用节点；节点不可见或不可用时退回最近的可见可用祖先。展开其祖先由调用方通过 expandedIds 负责。TreeSelect 用它让弹层打开时焦点落在已选节点上。
+- aria-label / aria-labelledby: string. 必填其一：树的名称，落在 role=tree 的根上；缺失或为空时抛错。各节点的名称来自节点自己的 label。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard

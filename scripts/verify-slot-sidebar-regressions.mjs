@@ -72,7 +72,7 @@ try {
         assert.equal((await snapshot(branch)).color, colors.hover);
         record(`${theme} independent normal/hover/current/current-hover and parent`, { current: await snapshot(current), branch: await snapshot(branch) });
         await page.screenshot({ path: `${out}/${theme}.png` });
-        await page.getByTestId('subject-sidebar').getByRole('button', { name: '收起' }).click();
+        await page.getByTestId('subject-sidebar').getByRole('button', { name: '工作区导航', expanded: true }).click();
         assert.equal(await branch.getAttribute('data-slot'), 'sidebar-sub-trigger');
         record(`${theme} rail preserves sidebar slot`, await snapshot(branch));
         await page.waitForTimeout(500);

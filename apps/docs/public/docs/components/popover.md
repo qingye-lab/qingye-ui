@@ -1,9 +1,9 @@
 # 浮起面板 Popover
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
-Source SHA-256: 9f818d7dc872da06ff25ab1564d8e3f1837b7df10e434514db7f91d154c8ef38
+Source SHA-256: 50a0f9ad172921a100aa5958dc826f501b0eb504a7571a286038c1a9e902d12d
 
 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 

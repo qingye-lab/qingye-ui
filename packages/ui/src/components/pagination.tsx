@@ -27,29 +27,35 @@ export type PaginationLinkProps = useRender.ComponentProps<"a"> & { page: number
 /**
  * 当前页是**当前位置**：持续的事实，不是命令，也不是强调。
  * 画法取基础层 §11 反馈梯：选中面（--qy-surface-selected，全库唯一的「当前」面）加焦墨字；其余页是安静的入口，字为浓墨，
- * 悬停时字回到焦墨并出现悬停面。当前与否由面的深浅和字的墨色共同承担，字重不变，一排数字不跳动。
- * 当前页悬停不变（§19：悬停是当前状态自己的悬停）。
+ * 悬停时字回到焦墨并出现悬停面。当前页另有一条不靠颜色的线索：font-medium（WCAG 1.4.1，选中面与悬停面只差一档墨，
+ * 不能是唯一的区别；全库「当前」的列表类都加字重）。当前页悬停不变（§19：悬停是当前状态自己的悬停）。
+ * 字重不能让按钮变宽（NG9：状态改变尺寸）：数字用等宽数字（numeric），并且每个页码的宽度一律按 medium 字重预留——
+ * 标签里叠一份不可见的 medium 副本（data-reserve，伪元素，同一格栅格），宽度取两者较大者，所以当前页进出任何一页，外缘都不动。
+ * 实测系统字体 14px 下，tabular 数字 400 → 500 每位宽 8.67 → 8.86px，两位数就差 0.4px，只靠最小宽度压不住。
  *
  * 沿革：2026-10-05 当前页由「加粗 + 下划线」改成实心（`--qy-primary`），因为在 1 2 3 4 里看不出停在哪一页；
  * 2026-10-12 用户裁决改为选中面（先是淡染 12%，同日改为叠合的 4%），与轨道内的选中段同一理由——品牌覆写主操作的填充时，页码不随之变色、
  * 不与主按钮同重（§10）。下划线留给「这里可以离开」，不在当前页上出现。
  */
-export function PaginationLink({ page, render, className, ...props }: PaginationLinkProps) {
+export function PaginationLink({ page, render, className, children, ...props }: PaginationLinkProps) {
   const current = React.useContext(PageContext) === page;
+  const label = typeof children === "string" || typeof children === "number"
+    ? <span data-slot="pagination-link-label" data-reserve={children} className="inline-grid justify-items-center after:invisible after:col-start-1 after:row-start-1 after:h-0 after:overflow-hidden after:font-medium after:content-[attr(data-reserve)]"><span className="col-start-1 row-start-1">{children}</span></span>
+    : children;
   return useRender({
     defaultTagName: "a",
     render,
     props: mergeProps(
-      { "data-slot": "pagination-link", "data-page": page, "aria-current": current ? "page" : undefined },
+      { "data-slot": "pagination-link", "data-page": page, "aria-current": current ? "page" : undefined, children: label },
       props,
       {
         className: cn(
           // 成排的同等入口（基础层 §19）：复用按钮画法；最小宽度等于外高，单个数字时是正方形。
           buttonVariants({ variant: "quiet" }),
-          "min-w-(--qy-fill-height-narrow) font-normal numeric sm:min-w-(--qy-fill-height)",
+          "min-w-(--qy-fill-height-narrow) numeric sm:min-w-(--qy-fill-height)",
           current
-            ? "bg-surface-selected text-foreground not-aria-disabled:hover:bg-surface-selected not-aria-disabled:active:bg-surface-selected"
-            : "text-muted-foreground not-aria-disabled:hover:text-foreground",
+            ? "bg-surface-selected font-medium text-foreground not-aria-disabled:hover:bg-surface-selected not-aria-disabled:active:bg-surface-selected"
+            : "font-normal text-muted-foreground not-aria-disabled:hover:text-foreground",
           className,
         ),
       },
@@ -83,6 +89,11 @@ export type PaginationPatternProps = Omit<PaginationProps, "page" | "totalPages"
   /** Omit to hide the page-size control. Values must be distinct positive integers. */
   pageSizeOptions?: readonly number[];
   disabled?: boolean;
+  /**
+   * 正在取数（例如 DataTablePattern busy）。与 disabled 的区别：翻页被挡住，但按钮保持可聚焦——
+   * 原生 disabled 会让刚按下的那个按钮立刻丢掉焦点，键盘用户被甩到页面顶部。页大小选择改为只读（同样留住焦点）。
+   */
+  busy?: boolean;
 };
 
 /** Shared by standard table composition and standalone pagination; no requests or route changes occur here. */
@@ -99,7 +110,7 @@ function pageWindow(page: number, total: number): (number | "gap")[] {
 }
 
 /** A complete local-action pager. Link-based navigation remains available through the primitive parts above. */
-export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, ...props }: PaginationPatternProps) {
+export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, busy = false, ...props }: PaginationPatternProps) {
   const { messages } = useUILocale();
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const source = value ?? internalValue;
@@ -117,6 +128,7 @@ export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 1
     onValueChange?.(current, { reason: "total-change" });
   }, [source.page, source.pageSize, current.page, current.pageSize, totalCount, value, onValueChange]);
   const change = (next: PaginationValue, reason: "page" | "page-size") => {
+    if (busy) return;
     const normalized = normalizePaginationValue(next, totalCount);
     if (normalized.page === current.page && normalized.pageSize === current.pageSize) return;
     if (value === undefined) setInternalValue(normalized);
@@ -125,15 +137,17 @@ export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 1
   const options = pageSizeOptions && !pageSizeOptions.includes(current.pageSize) ? [...pageSizeOptions, current.pageSize].sort((a, b) => a - b) : pageSizeOptions;
   return <Pagination data-slot="pagination-pattern" {...props} {...(totalPages === 0 ? {} : { page: current.page })} totalPages={totalPages}>
     <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={disabled || current.page === 1 || totalPages === 0} onClick={() => change({ ...current, page: current.page - 1 }, "page")} /></PaginationItem>
-      {totalPages !== null && pageWindow(current.page, totalPages).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>{entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} aria-label={messages.paginationPage(entry)} render={<Button variant="quiet" disabled={disabled} />} onClick={() => change({ ...current, page: entry }, "page")}>{entry}</PaginationLink>}</PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={disabled || (totalPages === null ? !hasNextPage : totalPages === 0 || current.page >= totalPages)} onClick={() => change({ ...current, page: current.page + 1 }, "page")} /></PaginationItem>
+      <PaginationItem><PaginationPrevious disabled={disabled || current.page === 1 || totalPages === 0} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page - 1 }, "page")} /></PaginationItem>
+      {totalPages !== null && pageWindow(current.page, totalPages).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>{entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} aria-label={messages.paginationPage(entry)} render={<Button variant="quiet" disabled={disabled} />} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: entry }, "page")}>{entry}</PaginationLink>}</PaginationItem>)}
+      <PaginationItem><PaginationNext disabled={disabled || (totalPages === null ? !hasNextPage : totalPages === 0 || current.page >= totalPages)} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page + 1 }, "page")} /></PaginationItem>
     </PaginationList>
     <div data-slot="pagination-details" className="flex min-w-0 flex-wrap items-center gap-(--qy-action-gap)">
       <span data-slot="pagination-summary" className="text-support text-muted-foreground">{messages.paginationSummary(current.page, totalPages, totalCount)}</span>
-      {options && options.length > 0 && <Select<number> value={current.pageSize} disabled={disabled} items={options.map(option => ({ value: option, label: String(option) }))} onValueChange={pageSize => { if (pageSize !== null) change({ page: 1, pageSize }, "page-size"); }}>
-        <SelectTrigger aria-label={messages.paginationPageSize}><span>{messages.paginationPageSize}</span><SelectValue /></SelectTrigger>
-        <SelectPopup>{options.map(option => <SelectItem key={option} value={option}>{option}</SelectItem>)}</SelectPopup>
+      {options && options.length > 0 && <Select<number> value={current.pageSize} disabled={disabled} readOnly={busy} items={options.map(option => ({ value: option, label: messages.paginationPageSizeOption(option) }))} onValueChange={pageSize => { if (pageSize !== null) change({ page: 1, pageSize }, "page-size"); }}>
+        {/* 可见文字只写「10 条/页」：单位随值写出，读者一眼知道这是什么，不再挂一个与值并列的字段名；
+         *  可访问名称仍是「每页条数」，读屏先读名称再读当前值。 */}
+        <SelectTrigger aria-label={messages.paginationPageSize}><SelectValue /></SelectTrigger>
+        <SelectPopup>{options.map(option => <SelectItem key={option} value={option}>{messages.paginationPageSizeOption(option)}</SelectItem>)}</SelectPopup>
       </Select>}
     </div>
   </Pagination>;

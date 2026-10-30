@@ -1,9 +1,9 @@
 # Input
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: 3e38744e31beb0be87aff84d3126442f2bc2cf31931e00cfbe20a495ee60c098
+Source SHA-256: 0e11564ab354356c394ea528a2c250a6bea9ce2b4894506a9e727c0c5e98391c
 
 Enter one text value.
 

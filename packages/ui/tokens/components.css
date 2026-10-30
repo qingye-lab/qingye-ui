@@ -101,7 +101,9 @@
     --qy-text-body-strong-tracking: -0.006em;
     --qy-text-body-strong-weight: var(--qy-weight-medium);
 
-    /* 长文阅读与富文本：16/28，行高 1.75，适合中文长段。两档同值，分别可调。 */
+    /* 长文阅读与富文本：16/28，行高 1.75，适合中文长段。
+       reading（Text 的 variant，界面里的一段长说明）与下面的 prose（Prose 正文）同值是有意的：两个角色、两个修改入口——
+       只想放宽文章正文时改 prose，不连带界面里的说明段；反之亦然。prose 不收紧字距，reading 同。 */
     --qy-text-reading-size: 1rem;
     --qy-text-reading-leading: calc(7 * var(--qy-fen));
     --qy-text-reading-tracking: 0em;
@@ -172,6 +174,15 @@
     --qy-text-label-tracking: -0.006em;
     --qy-text-label-weight: var(--qy-weight-medium);
 
+    /* 窄屏的字段名：与 support-mobile 同一档（16/24），字重保留 medium。
+     * 起因：窄屏下说明（support-mobile）升到 16px，字段名若仍是 13px，说明就大过名称，违反本节「说明不得大于 label」。
+     * 关系：字段名 ≥ 说明，取相等的最小值；字重差（medium 对 regular）仍把名称排在说明之上。
+     * 作用范围：Label、FieldLabel、Fieldset 的 label 型图例、Typography 的 label——与 support-mobile 成对出现的地方。 */
+    --qy-text-label-mobile-size: var(--qy-text-support-mobile-size);
+    --qy-text-label-mobile-leading: var(--qy-text-support-mobile-leading);
+    --qy-text-label-mobile-tracking: var(--qy-text-support-mobile-tracking);
+    --qy-text-label-mobile-weight: var(--qy-weight-medium);
+
     /* 密集区内容（表格、标记、工具条）：12/16，四分一行。 */
     --qy-text-dense-size: 0.75rem;
     --qy-text-dense-leading: calc(4 * var(--qy-fen));
@@ -204,7 +215,7 @@
     --qy-text-caption-strong-tracking: 0em;
     --qy-text-caption-strong-weight: var(--qy-weight-medium);
 
-    /* 读数：24/28，自带等宽数字。 */
+    /* 读数：24/28。单独一个读数用比例数字（字距随字形）；需要竖向对齐的列由调用方加 numeric。 */
     --qy-text-metric-size: 1.5rem;
     --qy-text-metric-leading: calc(7 * var(--qy-fen));
     --qy-text-metric-tracking: -0.024em;
@@ -276,17 +287,16 @@
     --qy-text-control-xl-mobile-tracking: -0.018em;
     --qy-text-control-xl-mobile-weight: var(--qy-weight-regular);
 
-    /* ─── 间距阶梯（分的倍数）──────────────────────────────── */
+    /* ─── 间距阶梯（分的倍数）────────────────────────────────
+     * 只保留有人消费的级别；5、10、12、16 级曾零引用（5 级只有 studio 预览页把它当页边距，已改读 --qy-page-gutter），
+     * 没有哪条关系需要它们，已删（2026-10-30）。
+     * 需要新级别时，先说出它由哪条关系决定，再追加。 */
     --qy-space-1: var(--qy-fen);
     --qy-space-2: calc(var(--qy-fen) * 2);
     --qy-space-3: calc(var(--qy-fen) * 3);
     --qy-space-4: calc(var(--qy-fen) * 4);
-    --qy-space-5: calc(var(--qy-fen) * 5);
     --qy-space-6: calc(var(--qy-fen) * 6);
     --qy-space-8: calc(var(--qy-fen) * 8);
-    --qy-space-10: calc(var(--qy-fen) * 10);
-    --qy-space-12: calc(var(--qy-fen) * 12);
-    --qy-space-16: calc(var(--qy-fen) * 16);
 
     /* ─── 等：控件外部尺寸（基础层 §2）─────────────────────────
      * 外高 = 材 + n 分。窄屏升一等（+1 分），所以窄屏的 xs 与桌面的 sm 同高。
@@ -335,7 +345,8 @@
     --qy-control-xl-icon: 1.25rem;
     --qy-control-xl-icon-narrow: 1.25rem;
 
-    /* 同一控件内图标与文字、名称与状态的间隔：一分半。比组内间隔小一级，图标与名称读作一体。 */
+    /* 同一控件内图标与文字、名称与状态的间隔：一分半（**预设**）。关系只给出方向——比组内间隔小一级，图标与名称读作一体；
+     * 「一分半」这个具体倍数不是由哪条关系推出的，是选定值。 */
     --qy-control-content-gap: calc(1.5 * var(--qy-fen));
 
     /* 粗指针命中区：库内选择，不随等与密度变化，也不是 WCAG AA 的统一下限。 */
@@ -375,6 +386,14 @@
     --qy-radius-overlay: calc(var(--qy-radius-control) + var(--qy-overlay-inset));
     --qy-radius-overlay-item: max(0px, calc(var(--qy-radius-overlay) - var(--qy-overlay-inset)));
     --qy-radius-panel: calc(4 * var(--qy-fen));
+
+    /* 侧栏展开时的宽度（Sidebar 的默认宽度，抽屉里的侧栏同值；调用方的 w-* 仍可覆盖）。
+     * 由一行条目的构成决定：两侧内缘（Workspace 给侧栏的 2 分）+ 条目两侧内缩 + 一枚图标 + 图标与文字的间隔
+     * + 一个标签的容量。标签容量取 12 个汉字（12 × 正文字号）——这一个数是**预设**：导航标签是名词短语，
+     * 12 字放得下「集合」「接入设备」一类名称，更长的由条目自己换行（wrap-anywhere）。其余各项都是已有角色，
+     * 不另写像素。收起宽度不在这里：rail 的宽度由一个填值控件高加内缩给出（sidebar.tsx）。
+     * 入口：项目在自己的主题入口覆写这一个量；不要在每个 Sidebar 上各写一个 w-*。 */
+    --qy-sidebar-width: calc(2 * var(--qy-space-2) + 2 * var(--qy-control-sm-padding) + var(--qy-control-md-icon) + var(--qy-control-content-gap) + 12 * var(--qy-text-body-size));
 
     /* 并列候选的轨道（基础层 §6）：整组占一个控件高度；候选高与圆角由外高与内缩倒推，
      * 按档位取值的部分在 src/track.ts。内缩半分：一分时 md 候选只剩 22px。

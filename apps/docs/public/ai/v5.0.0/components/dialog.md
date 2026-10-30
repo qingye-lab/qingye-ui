@@ -1,0 +1,202 @@
+# 对话框 Dialog
+
+Package: @qingye_lab/ui@5.0.0
+Import: @qingye_lab/ui/components/dialog
+Source: packages/ui/src/components/dialog.tsx
+Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
+
+接管整个工作面，完成当前编辑或决定后返回。
+
+## Decision
+关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。
+
+## Notes
+- 长内容放进 DialogPanel：主操作在页脚始终可见；不用 DialogPanel 的写法仍是整面板滚动。
+- 不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。
+- 草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。
+- 危险决定用 AlertDialog，后果写在它的说明里；按钮不承载后果。
+- 无触发者的程序打开也须指定有意义的 finalFocus。
+- 共享层级按真实开启顺序使新工作面高于旧面候选；调用方覆盖 zIndex 可破坏默认关系。
+- ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语keepMounted隔离缺陷。
+
+## Use and ownership
+- 需要停下主线才能完成的编辑或决定。
+- Avoid: 可就地完成的高频编辑。
+- Avoid: 必须明确回应的决定改用 AlertDialog。
+- Library: open、焦点困住、滚动锁、背景阻断与返回。
+- Application: 草稿、版本、保存、失败、放弃与持久化。
+
+## Composition
+- Title/Description 关联名称与必要说明。
+- Header/Panel/Footer 组织输入与动作，不提供业务状态。
+
+## Responsive behavior
+- 内容固有宽度受视口限制；长内容在面板内滚动。
+- 既有控件窄屏 token 与触摸目标仍由控件消费；本批演示只验桌面。
+
+## Customization
+- 表面、圆角、遮罩、阴影读取既有角色。
+- 入退唯一归 motion.css；不在调用点另写动画。
+
+## Current exports
+- Dialog: function; owner dialog; PASS; props: DialogProps<Payload>
+- DialogClose: function; owner dialog; PASS; props: DialogPrimitive.Close.Props
+- DialogCreateHandle: const; owner dialog; UNVERIFIED
+- DialogDescription: function; owner dialog; PASS; props: DialogPrimitive.Description.Props
+- DialogFocusTarget: type; owner dialog; PASS
+- DialogFooter: function; owner dialog; PASS; props: DialogGroupProps
+- DialogGroupProps: type; owner dialog; PASS
+- DialogHeader: function; owner dialog; PASS; props: DialogGroupProps
+- DialogPanel: function; owner dialog; PASS; props: DialogGroupProps
+- DialogPopup: function; owner dialog; PASS; props: DialogPopupProps
+- DialogPopupProps: interface; owner dialog; PASS
+- DialogPrimitive: reexport; owner dialog; UNVERIFIED
+- DialogProps: type; owner dialog; PASS
+- DialogTitle: function; owner dialog; PASS; props: DialogPrimitive.Title.Props
+- DialogTrigger: function; owner dialog; PASS; props: DialogPrimitive.Trigger.Props<Payload>
+
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Dialog
+- no props declared by this library
+- plus 10 inherited (@base-ui/react 10); not expanded, see the installed declarations
+
+### DialogClose
+- no props declared by this library
+- plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
+
+### DialogCreateHandle
+- takes no props
+
+### DialogDescription
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogFooter
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogHeader
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogPanel
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### DialogPopup
+- `backdropProps?`: `DialogPrimitive.Backdrop.Props`.
+- `finalFocus?`: `DialogFocusTarget`.
+- `initialFocus?`: `DialogFocusTarget`.
+- `portalProps?`: `Omit<DialogPrimitive.Portal.Props, "keepMounted">`. Retained closed portals fail sibling-modal ARIA isolation in Base UI 1.7.
+- `viewportProps?`: `DialogPrimitive.Viewport.Props`.
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogTitle
+- no props declared by this library
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### DialogTrigger
+- no props declared by this library
+- plus 291 inherited (@types/react 284, @base-ui/react 7); not expanded, see the installed declarations
+
+## Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+
+## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+### Dialog
+固定完整阻断模式，保留原语的受控、非受控与共享触发入口。
+- open / defaultOpen: boolean; default false. 应用控制状态 / 初始展开状态。
+- onOpenChange: (open, details) => void. 收到打开/关闭请求及原因；不表示提交或取消业务。
+- handle / triggerId / defaultTriggerId: DialogPrimitive.Root.Props. 关联共享、受控或初始展开的触发者。
+- disablePointerDismissal: boolean; default false. 应用确需阻止点遮罩关闭时启用，仍须保留明确退出。
+
+### DialogPopup
+组合 Portal、遮罩与视口，内容固有宽度受视口约束；不提供尺寸变体。
+- initialFocus: true | RefObject<HTMLElement | null> | (interaction) => HTMLElement | true | null; default true. 默认首个控件；触摸进入面板。可指定字段、标题或面板；不支持 false。
+- finalFocus: true | RefObject<HTMLElement | null> | (interaction) => HTMLElement | true | null; default true. 默认触发者；触发者会被移除时指定可聚焦上级，不能返回 false。
+- portalProps / backdropProps / viewportProps: Omit<Portal.Props, 'keepMounted'> / Backdrop.Props / Viewport.Props. 容器、ref、样式、事件与 render 透传；Portal 不支持保留关闭DOM，局部语言、密度、方向需明确容器。
+- render / ref / className / style: DialogPrimitive.Popup.Props. 覆盖呈现与组合，className 支持原语状态函数。
+
+### DialogTitle / DialogDescription
+原语建立可访问名称与说明的关联；说明不是重复标题。
+
+### DialogTrigger / DialogClose
+默认复用 Button，支持 render/ref/事件；Close 缺少 children 时读取 locale.close。
+
+### DialogHeader / DialogPanel / DialogFooter
+名称、工作内容、动作的分组关系。长内容时页眉与页脚固定，只有 DialogPanel 滚动。支持 useRender 组合；不产生另一层围合。
+
+### DialogCreateHandle / DialogPrimitive
+类型化共享触发 handle 与所用 Base UI 原语命名空间。
+
+## Keyboard
+- Enter / Space: 从触发者进入对话框。
+- Tab / Shift+Tab: 在当前最上层对话框内循环。
+- Esc: 关闭当前层并返回触发者或 finalFocus。
+
+## Source examples
+### 对话框与字段
+Source: apps/docs/src/content/dialog/demos/01-field.tsx
+```tsx
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "对话框与字段", titleEn: "Dialog with a field" };
+
+export default function Demo() {
+  return (
+    <Dialog>
+      <DialogTrigger>编辑名称</DialogTrigger>
+      <DialogPopup>
+        <DialogHeader>
+          <DialogTitle>编辑名称</DialogTitle>
+          <DialogDescription>最多 20 个字。</DialogDescription>
+        </DialogHeader>
+        <DialogPanel>
+          <Field><FieldLabel>设备名称</FieldLabel><Input defaultValue="青野" maxLength={20} /></Field>
+        </DialogPanel>
+        <DialogFooter><DialogClose>关闭</DialogClose></DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  );
+}
+```
+
+### 长内容
+Source: apps/docs/src/content/dialog/demos/02-long.tsx
+```tsx
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "长内容", titleEn: "Long content" };
+
+const fields = Array.from({ length: 14 }, (_, index) => `设备 ${index + 1}`);
+
+export default function Demo() {
+  return (
+    <Dialog>
+      <DialogTrigger>重命名设备</DialogTrigger>
+      <DialogPopup className="max-h-[min(32rem,100%)] w-96">
+        <DialogHeader>
+          <DialogTitle>重命名设备</DialogTitle>
+          <DialogDescription>名称最多 20 个字。</DialogDescription>
+        </DialogHeader>
+        <DialogPanel>
+          {fields.map(name => <Field key={name}><FieldLabel>{name}</FieldLabel><Input defaultValue={name} maxLength={20} /></Field>)}
+        </DialogPanel>
+        <DialogFooter><DialogClose>完成</DialogClose></DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  );
+}
+```

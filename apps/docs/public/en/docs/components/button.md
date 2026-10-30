@@ -1,9 +1,9 @@
 # Button
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
+Source SHA-256: efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -12,7 +12,7 @@ A button only triggers an action, and busy is its only state: while busy it reta
 
 ## Notes
 - Danger is only a tone: it grants no permission and replaces no confirmation. Use AlertDialog when the user must know the consequence before deciding.
-- While busy the action's accessible name stays unchanged; “In progress” reaches screen readers through a description and an invisible live region, and no visible status text sits beside the button. A label button adds a spinning mark after its name; on an icon button the mark temporarily stands in for its glyph.
+- While busy the action's accessible name stays unchanged; “In progress” reaches screen readers through a description and an invisible live region, and no visible status text sits beside the button. Busy never changes the button's outer size: the name or glyph keeps its place, unseen but still in the accessibility tree, and the spinning mark is centered over it.
 - state (waiting / in-progress / unknown / failed) is removed in favour of loading. Failure and unknown results formerly written beside the button are expressed by Alert, Toast, FieldError or StatusDot.
 - Use a native anchor or router Link with buttonVariants for navigation. A nativeButton=false Button remains a command.
 - touch-target expands small controls to the library's 44px touch target without changing visual dimensions or shrinking it with density.
@@ -243,7 +243,6 @@ Source: apps/docs/src/content/button/demos/08-result.tsx
 import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Stack } from "@qingye_lab/ui/components/layout";
-import { IconAlertCircle } from "@tabler/icons-react";
 import * as React from "react";
 
 export const meta = { title: "结果由提示组件表达", titleEn: "Results belong to feedback components" };
@@ -258,7 +257,6 @@ export default function Demo() {
     <Stack gap="fields" className="w-full max-w-md">
       {phase === "failed" && (
         <Alert tone="danger">
-          <IconAlertCircle aria-hidden="true" />
           <div className="grid gap-1"><AlertTitle>保存未完成</AlertTitle><AlertDescription>连接中断，填写的内容仍在。</AlertDescription></div>
         </Alert>
       )}

@@ -94,7 +94,7 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
   return (
     <Article>
       <PageHeader
-        description={entry.description}
+        metaDescription={entry.description}
         documentTitle={en ? `${zh} ${en}` : zh}
         title={
           <>

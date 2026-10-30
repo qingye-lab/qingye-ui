@@ -3,6 +3,7 @@
 import { Slider as SliderPrimitive } from "@base-ui/react/slider";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
+import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
 export type SliderProps<Value extends number | readonly number[] = number | readonly number[]> = SliderPrimitive.Root.Props<Value> & {
@@ -36,7 +37,8 @@ function assertRange(min: number, max: number, step: number, largeStep: number, 
 }
 
 /** 区间输入，不替 Progress；显式无效值拒绝进入原语，不静默改写。 */
-export function Slider<Value extends number | readonly number[]>({ readOnly = false, min = 0, max = 100, step = 1, largeStep = 10, minStepsBetweenValues = 0, value, defaultValue, thumbAlignment = "edge", onValueChange, className, style, ...props }: SliderProps<Value>) {
+export function Slider<Value extends number | readonly number[]>({ readOnly = false, min = 0, max = 100, step = 1, largeStep = 10, minStepsBetweenValues = 0, value, defaultValue, thumbAlignment = "edge", onValueChange, className, style, children, ...props }: SliderProps<Value>) {
+  const { messages } = useUILocale();
   assertRange(min, max, step, largeStep, minStepsBetweenValues, value, defaultValue);
   const variables = {
     // 滑块是填值控件：工作高度读角色层（用户裁决 2026-10-05），抓手跟随标签文字。
@@ -49,9 +51,12 @@ export function Slider<Value extends number | readonly number[]>({ readOnly = fa
     min={min} max={max} step={step} largeStep={largeStep} minStepsBetweenValues={minStepsBetweenValues}
     value={value} defaultValue={defaultValue ?? (min as Value)} thumbAlignment={thumbAlignment}
     onValueChange={(next, details) => { if (readOnly) details.cancel(); else onValueChange?.(next, details); }}
-    className={(state) => cn("flex min-w-0 flex-col gap-(--qy-field-gap) text-control-md-mobile sm:text-control-md", state.disabled && "opacity-disabled", typeof className === "function" ? className(state) : className)}
+    className={(state) => cn("group/slider flex min-w-0 flex-col gap-(--qy-field-gap) text-control-md-mobile sm:text-control-md", state.disabled && "opacity-disabled", typeof className === "function" ? className(state) : className)}
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(state) : style) })}
-  /></ReadOnly.Provider>;
+  >{children}
+    {/* 只读说明与 Input、Textarea 同一件事、同一档字；只读本身由抓手 input 的 aria-readonly 向读屏表达，故 aria-hidden。 */}
+    {readOnly ? <span data-slot="slider-readonly" aria-hidden="true" className="text-caption text-muted-foreground">{messages.readOnly}</span> : null}
+  </SliderPrimitive.Root></ReadOnly.Provider>;
 }
 
 export function SliderControl({ className, ...props }: SliderControlProps) {
@@ -74,7 +79,9 @@ export function SliderTrack({ className, ...props }: SliderTrackProps) {
 
 export function SliderIndicator({ className, ...props }: SliderIndicatorProps) {
   return <SliderPrimitive.Indicator data-slot="slider-indicator" {...props}
-    className={(state) => cn("absolute rounded-(--qy-radius-slider-track) bg-primary", state.orientation === "vertical" ? "w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size)", typeof className === "function" ? className(state) : className)}
+    className={(state) => cn(// 无效：已填充段与抓手同为实心，一起改成危险填充（Button solid danger 的同一个 token）。事实来源只有一处——
+      // 抓手里 range input 的 aria-invalid（所在 Field 判无效，或调用方在 SliderThumb 上声明）。
+      "absolute rounded-(--qy-radius-slider-track) bg-primary group-has-[input[aria-invalid=true]]/slider:bg-destructive-fill", state.orientation === "vertical" ? "w-(--qy-slider-track-size)" : "h-(--qy-slider-track-size)", typeof className === "function" ? className(state) : className)}
   />;
 }
 
@@ -88,7 +95,9 @@ export function SliderThumb({ className, ...props }: SliderThumbProps) {
     className={(state) => cn(// 抓手是当前值在轨道上的一个点（应物象形：圆以标点），与已填充段同为实心；
       // 它与轨道在同一平面上，不加阴影（绘事后素）。
       // 焦点按实心控件规则画在填充内侧的反色线。只读不可拖动：抓手改为空心，值与已填充段保留。
-      "touch-target block size-(--qy-slider-thumb-size-narrow) rounded-full bg-primary outline-none sm:size-(--qy-slider-thumb-size) has-[input:focus-visible]:ring-[length:var(--qy-focus-ring-width)] has-[input:focus-visible]:ring-inset has-[input:focus-visible]:ring-primary-foreground [&_input]:outline-none", readOnly && "border border-border-strong bg-card", typeof className === "function" ? className(state) : className)}
+      "touch-target block size-(--qy-slider-thumb-size-narrow) rounded-full bg-primary outline-none sm:size-(--qy-slider-thumb-size) has-[input:focus-visible]:ring-[length:var(--qy-focus-ring-width)] has-[input:focus-visible]:ring-inset has-[input:focus-visible]:ring-primary-foreground [&_input]:outline-none",
+      // 无效：可拖动时填充改危险色、焦点内线取 on-fill；只读时抓手是空心的，无效落在它的边线上。
+      readOnly ? "border border-border-strong bg-card has-[input[aria-invalid=true]]:border-destructive" : "has-[input[aria-invalid=true]]:bg-destructive-fill has-[input[aria-invalid=true]:focus-visible]:ring-destructive-on-fill", typeof className === "function" ? className(state) : className)}
   />;
 }
 

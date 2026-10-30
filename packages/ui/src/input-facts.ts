@@ -96,6 +96,17 @@ export function useTypingText(accepted: string) {
   return { shown: active ? typing.text : accepted, active, hold, release };
 }
 
+/**
+ * 把未被采纳的键入如实标为无效（进退相承）：原生输入的 customValidity 让表单提交被浏览器拦下并说明原因，
+ * 而不是悄悄提交旧值。`message` 为空串即清除。
+ */
+export function useCustomValidity(inputRef: React.RefObject<HTMLInputElement | null>, message: string) {
+  React.useLayoutEffect(() => {
+    inputRef.current?.setCustomValidity(message);
+    return () => inputRef.current?.setCustomValidity("");
+  }, [inputRef, message]);
+}
+
 // ---- 日期边界：同源的 min / max（2026-10-12） ----------------------------------------------------
 // 日期三件套的 `min` / `max` 一处声明，同时约束原生输入（min / max 属性）与日历（禁用范围、可翻到的月份）。
 // 与旧写法并存：调用方仍可分别给 `inputProps.min` 与 `calendarProps.disabled`，两处同时给出取交集。

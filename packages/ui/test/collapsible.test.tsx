@@ -31,3 +31,15 @@ test("hiddenUntilFound lets the browser's find-in-page open a closed section", a
   await waitFor(() => expect(screen.getByRole("button", { name: "更新记录" })).toHaveAttribute("aria-expanded", "true"));
   expect(panel).not.toHaveAttribute("hidden");
 });
+
+test("indicator={false} removes the trailing arrow without changing the trigger's behavior", async () => {
+  const user = userEvent.setup();
+  const { rerender } = render(<Collapsible><CollapsibleTrigger>更多</CollapsibleTrigger><CollapsiblePanel>内容</CollapsiblePanel></Collapsible>);
+  expect(document.querySelector("[data-slot=disclosure-icon]")).not.toBeNull();
+  rerender(<Collapsible><CollapsibleTrigger indicator={false}>更多</CollapsibleTrigger><CollapsiblePanel>内容</CollapsiblePanel></Collapsible>);
+  expect(document.querySelector("[data-slot=disclosure-icon]")).toBeNull();
+  const trigger = screen.getByRole("button", { name: "更多" });
+  expect(trigger).not.toHaveAttribute("indicator");
+  await user.click(trigger);
+  expect(trigger).toHaveAttribute("aria-expanded", "true");
+});

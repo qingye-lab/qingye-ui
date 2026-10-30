@@ -1,9 +1,9 @@
 # CornerMark
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 4b48381e53cb372b29671a47eb776c81a9eb9bec1879f8991c8b5de22b685cb9
+Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6
 
 A count or presence dot anchored to a host's corner, never part of the host's own content.
 
@@ -43,7 +43,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `dot?`: `never`.
 - `label`: `string`.
 - `max?`: `number`.
-- `tone?`: `"neutral" | "danger" | "success"`.
+- `tone?`: `"neutral" | "info" | "warning" | "danger" | "success"`.
 - `wrapperClassName?`: `string`.
 
 ## Dependencies and providers

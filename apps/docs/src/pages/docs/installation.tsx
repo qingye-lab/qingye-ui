@@ -6,7 +6,7 @@ import { useDocsLocale } from "@/lib/docs-locale";
 import { installTarget, SITE, tarballTarget } from "@/lib/site";
 
 const peers = pkg.peerDependencies;
-const providers = `import { MotionProvider } from "${SITE.packageName}/components/motion-provider";
+const providers = `import { InputModalityProvider } from "${SITE.packageName}/components/input-modality-provider";
 import { ThemeProvider } from "${SITE.packageName}/components/theme-provider";
 import { ToastProvider } from "${SITE.packageName}/components/toast";
 import { TooltipProvider } from "${SITE.packageName}/components/tooltip";
@@ -14,13 +14,13 @@ import { TooltipProvider } from "${SITE.packageName}/components/tooltip";
 export function Root() {
   return (
     <ThemeProvider>
-      <MotionProvider>
+      <InputModalityProvider>
         <TooltipProvider>
           <ToastProvider>
             <App />
           </ToastProvider>
         </TooltipProvider>
-      </MotionProvider>
+      </InputModalityProvider>
     </ThemeProvider>
   );
 }`;
@@ -45,7 +45,7 @@ export default function InstallationPage() {
     <H2 id="providers">{en ? "Providers" : "Provider"}</H2><P>{en ? "Mount at the application root:" : "挂载在应用根部："}</P>
     <Facts items={[
       { term: <Code>ThemeProvider</Code>, detail: en ? "Light and dark, stored in localStorage." : "浅色与深色，选择存进 localStorage。" },
-      { term: <Code>MotionProvider</Code>, detail: en ? "Records keyboard or pointer input; transitions finish at once during keyboard use." : "记录键盘或指针输入；键盘操作时过渡立即完成。" },
+      { term: <Code>InputModalityProvider</Code>, detail: en ? "Records keyboard or pointer input; transitions finish at once during keyboard use." : "记录键盘或指针输入；键盘操作时过渡立即完成。" },
       { term: <Code>TooltipProvider</Code>, detail: en ? "Shared open delay for Tooltip." : "Tooltip 共用的打开延迟。" },
       { term: <Code>ToastProvider</Code>, detail: en ? "Queue and placement for Toast." : "Toast 的队列与位置。" },
     ]} />

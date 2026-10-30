@@ -1,9 +1,9 @@
 # 分页 Pagination
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: fccd85311f94413442c87843b53a939f262f9aa0b8d9147e90f16bf5511ecdb4
+Source SHA-256: 0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2
 
 页位置、真实入口与明确的未知总数。
 
@@ -23,7 +23,7 @@ PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 p
 - PaginationPattern：本地页动作的标准组合。
 - Pagination：有名称的 nav，不生成页码。
 - PaginationList / PaginationItem：ul / li 组织页面入口。
-- PaginationLink：a，匹配当前页时 aria-current=page。
+- PaginationLink：a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现；每个页码按中等字重预留宽度，当前页进出时按钮不变宽。
 - PaginationPrevious / PaginationNext：复用 Button；省略 children 时显示本地化的上一页／下一页文字。仅用图标替换内容时，必须用 aria-label、aria-labelledby 或 sr-only 文字提供方向名称，并隐藏装饰图标。
 - PaginationEllipsis：省略页名称，不代表末页。
 
@@ -90,6 +90,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ### PaginationPattern
+- `busy?`: `boolean`. 正在取数（例如 DataTablePattern busy）。与 disabled 的区别：翻页被挡住，但按钮保持可聚焦—— 原生 disabled 会让刚按下的那个按钮立刻丢掉焦点，键盘用户被甩到页面顶部。页大小选择改为只读（同样留住焦点）。
 - `defaultValue?`: `PaginationValue`.
 - `disabled?`: `boolean`.
 - `hasNextPage?`: `boolean`.
@@ -123,7 +124,7 @@ Written descriptions; the list above is the type-resolved fact.
 本地页动作的标准组合。
 - value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. { page, pageSize } 原子更新；page 从 1 开始。reason 为 page、page-size 或 total-change。条数改变同时回到第 1 页。
 - totalCount / hasNextPage: number | null / boolean. 非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。
-- pageSizeOptions / disabled: readonly number[] / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。
+- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。
 - aria-label / render / ref / native nav props: PaginationProps. 转发到 nav；可访问页名、总数摘要与条数标签来自 locale。
 
 ### Pagination
@@ -137,7 +138,7 @@ ul / li 组织页面入口。
 - render / ref / native props: useRender.ComponentProps<ul | li>. 保留原生列表结构。
 
 ### PaginationLink
-a，匹配当前页时 aria-current=page。
+a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现；每个页码按中等字重预留宽度，当前页进出时按钮不变宽。
 - page / href / render / ref / native props: { page: number } & useRender.ComponentProps<a>. 应用提供正整数页码与真实目标。
 
 ### PaginationPrevious / PaginationNext

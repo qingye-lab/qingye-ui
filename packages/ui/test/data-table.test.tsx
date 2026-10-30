@@ -42,13 +42,13 @@ describe("DataTable", () => {
     const user = userEvent.setup(); render(<Fixture scope="filtered" />); const table = screen.getByRole("table", { name: "本地条目" }); expect(within(table).getByRole("rowheader", { name: "B" })).toBeInTheDocument(); expect(within(table).getByRole("cell", { name: "0" })).toBeInTheDocument(); await user.click(screen.getByRole("button", { name: /数量/ })); expect(screen.getByRole("columnheader", { name: /数量/ })).toHaveAttribute("aria-sort", "ascending"); expect(table.querySelector("tbody tr")).toHaveAttribute("data-row-id", "b");
   });
   it("selects only the current page and retains that fact on page change", async () => {
-    const user = userEvent.setup(); render(<Fixture />); await user.click(screen.getByRole("checkbox", { name: "选择范围" })); expect(screen.getByTestId("selected")).toHaveTextContent(/^a$/); await user.click(screen.getByRole("button", { name: "下一页" })); expect(screen.getByRole("checkbox", { name: "选择范围" })).toHaveAttribute("aria-checked", "false"); expect(screen.getByRole("rowheader", { name: "B" })).toBeInTheDocument();
+    const user = userEvent.setup(); render(<Fixture />); await user.click(screen.getByRole("checkbox", { name: "选择范围（仅本页）" })); expect(screen.getByTestId("selected")).toHaveTextContent(/^a$/); await user.click(screen.getByRole("button", { name: "下一页" })); expect(screen.getByRole("checkbox", { name: "选择范围（仅本页）" })).toHaveAttribute("aria-checked", "false"); expect(screen.getByRole("rowheader", { name: "B" })).toBeInTheDocument();
   });
   it("derives filtered selection from eligible rows and preserves outside selections", async () => {
-    const user = userEvent.setup(); const { unmount } = render(<Fixture scope="filtered" filtered selection={{ a: true }} />); const selectAll = screen.getByRole("checkbox", { name: "选择范围" }); expect(selectAll).toHaveAttribute("aria-checked", "false"); expect(screen.getByRole("checkbox", { name: "选择 C" })).toHaveAttribute("aria-disabled", "true"); await user.click(selectAll); expect(selectAll).toHaveAttribute("aria-checked", "true"); expect(screen.getByTestId("selected")).toHaveTextContent(/^a,b$/); await user.click(selectAll); expect(selectAll).toHaveAttribute("aria-checked", "false"); expect(screen.getByTestId("selected")).toHaveTextContent(/^a$/); unmount(); render(<Fixture scope="filtered" filtered selection={{ a: false }} />); expect(screen.getByRole("checkbox", { name: "选择范围" })).toHaveAttribute("aria-checked", "false");
+    const user = userEvent.setup(); const { unmount } = render(<Fixture scope="filtered" filtered selection={{ a: true }} />); const selectAll = screen.getByRole("checkbox", { name: "选择范围（全部筛选结果）" }); expect(selectAll).toHaveAttribute("aria-checked", "false"); expect(screen.getByRole("checkbox", { name: "选择 C" })).toHaveAttribute("aria-disabled", "true"); await user.click(selectAll); expect(selectAll).toHaveAttribute("aria-checked", "true"); expect(screen.getByTestId("selected")).toHaveTextContent(/^a,b$/); await user.click(selectAll); expect(selectAll).toHaveAttribute("aria-checked", "false"); expect(screen.getByTestId("selected")).toHaveTextContent(/^a$/); unmount(); render(<Fixture scope="filtered" filtered selection={{ a: false }} />); expect(screen.getByRole("checkbox", { name: "选择范围（全部筛选结果）" })).toHaveAttribute("aria-checked", "false");
   });
   it("honors canceled selection, preserves busy rows and caller unknown content", async () => {
-    const user = userEvent.setup(); const { rerender } = render(<Fixture scope="filtered" cancel busy />); await user.click(screen.getByRole("checkbox", { name: "选择 A" })); expect(screen.getByTestId("selected")).toBeEmptyDOMElement(); expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true"); expect(screen.getByRole("rowheader", { name: "A" })).toBeInTheDocument(); rerender(<Fixture data={[]} scope="filtered" />); expect(screen.getByRole("cell", { name: "结果尚未知" })).toHaveAttribute("colspan", "3"); expect(screen.getByRole("checkbox", { name: "选择范围" })).toHaveAttribute("aria-disabled", "true");
+    const user = userEvent.setup(); const { rerender } = render(<Fixture scope="filtered" cancel busy />); await user.click(screen.getByRole("checkbox", { name: "选择 A" })); expect(screen.getByTestId("selected")).toBeEmptyDOMElement(); expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true"); expect(screen.getByRole("rowheader", { name: "A" })).toBeInTheDocument(); rerender(<Fixture data={[]} scope="filtered" />); expect(screen.getByRole("cell", { name: "结果尚未知" })).toHaveAttribute("colspan", "3"); expect(screen.getByRole("checkbox", { name: "选择范围（全部筛选结果）" })).toHaveAttribute("aria-disabled", "true");
   });
   it("rejects positional identity", () => { expect(() => render(<Fixture stable={false} />)).toThrow("stable getRowId"); });
 
@@ -78,20 +78,56 @@ describe("DataTable", () => {
     expect(screen.getByRole("rowheader", { name: "A" })).toHaveStyle({ width: "240px" });
   });
 
-  it("ellipsizes complete rendered text while leaving interactive content unclipped", () => {
+  describe("ellipsis", () => {
     const text = "完整的中文名称 / Complete rendered name";
-    render(<AdvancedFixture definitions={[
+    const definitions: ColumnDef<RecordItem>[] = [
       { accessorKey: "label", header: "名称", size: 160, meta: { rowHeader: true, ellipsis: true }, cell: () => <span>{text}</span> },
       { accessorKey: "count", header: "操作", size: 120, meta: { ellipsis: true }, cell: () => <button>完整操作名称</button> },
-    ]} />);
-    const heading = screen.getAllByRole("rowheader", { name: text })[0]!;
-    const content = heading.querySelector("[data-slot=data-table-cell-content]");
-    expect(content).toHaveClass("truncate");
-    expect(content).toHaveAttribute("title", text);
-    expect(heading).toHaveAccessibleName(text);
-    const action = screen.getAllByRole("button", { name: "完整操作名称" })[0]!;
-    expect(action.parentElement).not.toHaveClass("truncate");
-    expect(action.parentElement).not.toHaveAttribute("title");
+    ];
+    // jsdom has no layout: the test supplies the measurements the browser would.
+    function overflow(scroll: number, client: number) {
+      const a = vi.spyOn(HTMLElement.prototype, "scrollWidth", "get").mockReturnValue(scroll);
+      const b = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(client);
+      return () => { a.mockRestore(); b.mockRestore(); };
+    }
+    it("keeps the complete text readable and out of the Tab sequence while it fits; interactive content is never clipped", () => {
+      render(<AdvancedFixture definitions={definitions} />);
+      const heading = screen.getAllByRole("rowheader", { name: text })[0]!;
+      const content = heading.querySelector("[data-slot=data-table-cell-content]")!;
+      expect(heading).toHaveAccessibleName(text);
+      expect(content).not.toHaveAttribute("tabindex");
+      expect(content).not.toHaveAttribute("title");
+      const action = screen.getAllByRole("button", { name: "完整操作名称" })[0]!;
+      expect(action.parentElement).not.toHaveAttribute("tabindex");
+    });
+    it("makes truncated text a keyboard stop that shows the full text in a tooltip, with the text still in the DOM for readers", async () => {
+      const user = userEvent.setup();
+      const restore = overflow(300, 100);
+      try {
+        render(<AdvancedFixture definitions={definitions} />);
+        const heading = screen.getAllByRole("rowheader", { name: text })[0]!;
+        const content = heading.querySelector("[data-slot=data-table-cell-content]")!;
+        expect(content).toHaveAttribute("tabindex", "0");
+        expect(content).toHaveTextContent(text);
+        expect(heading).toHaveAccessibleName(text);
+        // 滚动容器与表头里被截断的文字（测量对整页一视同仁）也是停靠点，Tab 到这一格为止。
+        for (let step = 0; step < 12 && document.activeElement !== content; step++) await user.tab();
+        expect(content).toHaveFocus();
+        expect(await screen.findByRole("tooltip")).toHaveTextContent(text);
+        // 控件不是被裁切的文字：不成为停靠点。
+        expect(screen.getAllByRole("button", { name: "完整操作名称" })[0]!.parentElement).not.toHaveAttribute("tabindex");
+      } finally { restore(); }
+    });
+    it("still activates the row when the truncated text is clicked", async () => {
+      const user = userEvent.setup();
+      const onRowActivate = vi.fn();
+      const restore = overflow(300, 100);
+      try {
+        render(<AdvancedFixture definitions={definitions} onRowActivate={onRowActivate} />);
+        await user.click(screen.getAllByRole("rowheader", { name: text })[0]!.querySelector("[data-slot=data-table-cell-content]")!);
+        expect(onRowActivate).toHaveBeenCalledOnce();
+      } finally { restore(); }
+    });
   });
 
   it("checkbox-only selection keeps real controls and active-row emphasis independent", async () => {
@@ -272,5 +308,174 @@ describe("DataTable", () => {
     for (const height of [0, -1, NaN, Infinity]) expect(() => render(<AdvancedFixture virtualization={{ height, estimateRowHeight: 48 }} />)).toThrow("finite positive");
     for (const estimateRowHeight of [0, -1, NaN, Infinity]) expect(() => render(<AdvancedFixture virtualization={{ height: 144, estimateRowHeight }} />)).toThrow("finite positive");
     for (const overscan of [-1, 0.5, NaN, Infinity]) expect(() => render(<AdvancedFixture virtualization={{ height: 144, estimateRowHeight: 48, overscan }} />)).toThrow("nonnegative integer");
+  });
+
+  it("names each selection checkbox after its row, falling back to the generic name without a row header", () => {
+    const withSelection: ColumnDef<RecordItem>[] = [{ id: "pick", header: "选择", cell: ({ row }) => <DataTableSelectionCell row={row} />, enableSorting: false }];
+    const { unmount } = render(<AdvancedFixture definitions={[...withSelection, ...comparison]} />);
+    expect(screen.getByRole("checkbox", { name: "选择“A”" })).toBeInTheDocument(); expect(screen.getByRole("checkbox", { name: "选择“B”" })).toBeInTheDocument(); expect(screen.queryByRole("checkbox", { name: "选择此行" })).toBeNull();
+    unmount();
+    render(<AdvancedFixture definitions={[...withSelection, { accessorKey: "label", header: "名称" }]} />);
+    expect(screen.getAllByRole("checkbox", { name: "选择此行" })).toHaveLength(3);
+  });
+  it("reads the shown row-header text when the cell renders something other than the raw value", () => {
+    render(<AdvancedFixture definitions={[{ id: "pick", header: "选择", cell: ({ row }) => <DataTableSelectionCell row={row} /> }, { accessorKey: "label", header: "名称", meta: { rowHeader: true }, cell: ({ row }) => <>条目 {row.original.label}</> }]} />);
+    expect(screen.getByRole("checkbox", { name: "选择“条目 A”" })).toBeInTheDocument();
+  });
+  it("keeps old rows during busy, shows a labelled wait mark, and exposes the error slot as an alert", () => {
+    const { rerender } = render(<AdvancedFixture busy error={<span>刷新失败 <button>重试</button></span>} />);
+    expect(screen.getByRole("progressbar", { name: "正在加载" })).toBeInTheDocument(); expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "true");
+    expect(screen.getByRole("alert")).toHaveTextContent("刷新失败"); expect(screen.getByRole("button", { name: "重试" })).toBeInTheDocument(); expect(screen.getByRole("rowheader", { name: "A" })).toBeInTheDocument();
+    rerender(<AdvancedFixture />);
+    expect(screen.queryByRole("progressbar")).toBeNull(); expect(screen.queryByRole("alert")).toBeNull(); expect(screen.getByRole("table")).toHaveAttribute("aria-busy", "false");
+  });
+  it("keeps one row in the Tab sequence and moves it with arrows, Home and End", async () => {
+    const user = userEvent.setup(); const activated = vi.fn();
+    const { rerender } = render(<AdvancedFixture onRowActivate={activated} />);
+    const rows = () => Array.from(screen.getByRole("table").querySelectorAll<HTMLTableRowElement>("tbody tr"));
+    expect(rows().map(row => row.getAttribute("tabindex"))).toEqual(["0", "-1", "-1"]);
+    await user.tab(); expect(rows()[0]).toHaveFocus();
+    await user.keyboard("{ArrowDown}"); expect(rows()[1]).toHaveFocus(); expect(rows().map(row => row.getAttribute("tabindex"))).toEqual(["-1", "0", "-1"]);
+    await user.keyboard("{End}"); expect(rows()[2]).toHaveFocus(); await user.keyboard("{ArrowDown}"); expect(rows()[2]).toHaveFocus();
+    await user.keyboard("{Home}"); expect(rows()[0]).toHaveFocus(); await user.keyboard("{ArrowUp}"); expect(rows()[0]).toHaveFocus();
+    await user.keyboard("{ArrowDown}{Enter}"); expect(activated).toHaveBeenLastCalledWith(expect.objectContaining({ id: "b" }));
+    await user.tab(); expect(rows().some(row => row === document.activeElement)).toBe(false);
+    await user.tab({ shift: true }); expect(rows()[1]).toHaveFocus();
+    rerender(<AdvancedFixture onRowActivate={activated} activeRowId="c" data={[items[2]!, items[0]!]} />);
+    expect(rows().map(row => row.getAttribute("tabindex"))).toEqual(["0", "-1"]);
+  });
+  it("starts the single Tab stop on the active row when focus has not entered the table", () => {
+    render(<AdvancedFixture onRowActivate={() => {}} activeRowId="b" />);
+    expect(Array.from(screen.getByRole("table").querySelectorAll("tbody tr")).map(row => row.getAttribute("tabindex"))).toEqual(["-1", "0", "-1"]);
+  });
+
+  describe("mixed column widths", () => {
+    const mixed: ColumnDef<RecordItem>[] = [
+      { accessorKey: "label", header: "名称", minSize: 300, meta: { rowHeader: true } },
+      { accessorKey: "count", header: "数量", size: 90 },
+      { id: "note", header: "说明", accessorFn: row => row.id },
+    ];
+    const cols = () => Array.from(screen.getByRole("table").querySelectorAll<HTMLElement>("colgroup > col"));
+
+    it("shares the remaining width between flexible columns and floors the table at the largest flexible minimum", () => {
+      render(<AdvancedFixture definitions={mixed} />);
+      const table = screen.getByRole("table");
+      // 定宽 90 + 2 个弹性列 × max(300 声明的 minSize, 150 默认 size)
+      expect(table.style.tableLayout).toBe("fixed");
+      expect(table.style.width).toBe("100%");
+      expect(table.style.minWidth).toBe("690px");
+      expect(cols().map(col => col.style.width)).toEqual(["", "90px", ""]);
+      expect(screen.getByRole("columnheader", { name: "名称" }).style.width).toBe("");
+      expect(screen.getByRole("columnheader", { name: "数量" })).toHaveStyle({ width: "90px" });
+      expect(screen.getByRole("rowheader", { name: "A" }).style.width).toBe("");
+      expect(screen.getByRole("cell", { name: "2" })).toHaveStyle({ width: "90px" });
+    });
+
+    it("uses TanStack's default size as the floor of a flexible column without minSize", () => {
+      render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", size: 80 }]} />);
+      expect(screen.getByRole("table").style.minWidth).toBe("230px");
+    });
+
+    it("treats a user-resized column as fixed width and keeps maxSize from constraining a flexible column", () => {
+      const { rerender } = render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", maxSize: 200, meta: { rowHeader: true } }, { accessorKey: "count", header: "数量" }]} />);
+      expect(cols().map(col => col.style.width)).toEqual(["", ""]);
+      expect(screen.getByRole("table").style.width).toBe("100%");
+      rerender(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", maxSize: 200, meta: { rowHeader: true } }, { accessorKey: "count", header: "数量" }]} columnSizing={{ count: 220 }} />);
+      expect(cols().map(col => col.style.width)).toEqual(["", "220px"]);
+      expect(screen.getByRole("table").style.minWidth).toBe("370px");
+    });
+
+    it("counts only size as a fixed width and keeps marker columns on their content width", () => {
+      render(<AdvancedFixture definitions={[
+        { id: "pick", header: "选择", cell: ({ row }) => <DataTableSelectionCell row={row} />, meta: { marker: true } },
+        { accessorKey: "label", header: "名称", meta: { rowHeader: true } },
+        { accessorKey: "count", header: "数量", size: 100 },
+      ]} />);
+      const table = screen.getByRole("table");
+      expect(table.style.width).toBe("100%");
+      expect(table.style.minWidth).toContain("--qy-marker-size");
+      expect(table.style.minWidth).toContain("100px");
+      expect(table.style.minWidth).toContain("150px");
+      expect(cols()[0]!.style.width).toContain("--qy-marker-size");
+      expect(cols()[1]!.style.width).toBe("");
+    });
+
+    it("keeps the sum-of-columns table when every column is fixed or a marker, and natural layout when nothing is sized", () => {
+      render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", size: 200, meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", size: 100 }]} />);
+      const table = screen.getByRole("table");
+      expect(table.style.tableLayout).toBe("fixed");
+      expect(table.style.width).toBe("300px");
+      expect(table.style.minWidth).toBe("");
+      expect(cols().map(col => col.style.width)).toEqual(["200px", "100px"]);
+    });
+  });
+
+  describe("row accessible names", () => {
+    it("labels each row by its row-header cell", () => {
+      render(<AdvancedFixture />);
+      for (const item of items) {
+        const row = screen.getByRole("rowheader", { name: item.label }).closest("tr")!;
+        const ids = row.getAttribute("aria-labelledby")!.split(" ");
+        expect(ids).toHaveLength(1);
+        expect(document.getElementById(ids[0]!)).toBe(screen.getByRole("rowheader", { name: item.label }));
+        expect(row).toHaveAccessibleName(item.label);
+      }
+      expect(screen.getByRole("row", { name: "B" })).toHaveAttribute("data-row-id", "b");
+    });
+
+    it("joins several row-header columns in column order and uses unique ids", () => {
+      render(<AdvancedFixture definitions={[
+        { accessorKey: "label", header: "名称", meta: { rowHeader: true } },
+        { accessorKey: "count", header: "数量" },
+        { id: "code", header: "编号", accessorFn: row => `#${row.id}`, meta: { rowHeader: true } },
+      ]} />);
+      const row = screen.getByRole("row", { name: "A #a" });
+      const ids = row.getAttribute("aria-labelledby")!.split(" ");
+      expect(ids).toHaveLength(2);
+      expect(ids.map(id => document.getElementById(id)?.textContent)).toEqual(["A", "#a"]);
+      const all = Array.from(document.querySelectorAll("tbody th[id]")).map(node => node.id);
+      expect(new Set(all).size).toBe(all.length);
+      for (const id of all) expect(/\s/.test(id)).toBe(false);
+    });
+
+    it("does not name rows when no row-header column exists", () => {
+      render(<AdvancedFixture definitions={[{ accessorKey: "count", header: "数量" }]} />);
+      expect(screen.getByRole("table").querySelector("tbody tr")).not.toHaveAttribute("aria-labelledby");
+    });
+
+    it("keeps names tied to the model index when virtualized", () => {
+      const many = Array.from({ length: 200 }, (_, index) => ({ id: `row id ${index}`, label: `条目 ${index}`, count: index }));
+      render(<AdvancedFixture data={many} virtualization={{ height: 144, estimateRowHeight: 48 }} />);
+      fireEvent.scroll(screen.getByRole("table").parentElement!, { target: { scrollTop: 4000 } });
+      const row = screen.getAllByRole("row").find(node => node.getAttribute("data-row-id")?.startsWith("row id 8"))!;
+      const name = row.querySelector("th")!.textContent!;
+      expect(row).toHaveAccessibleName(name);
+      expect(document.getElementById(row.getAttribute("aria-labelledby")!)).toBe(row.querySelector("th"));
+    });
+
+    it("requires a visible row-header column when rows are activatable", () => {
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+      try {
+        expect(() => render(<AdvancedFixture onRowActivate={() => {}} definitions={[{ accessorKey: "count", header: "数量" }]} />)).toThrow("meta.rowHeader");
+        expect(() => render(<AdvancedFixture onRowActivate={() => {}} definitions={[{ accessorKey: "label", header: "名称", meta: { rowHeader: true } }, { accessorKey: "count", header: "数量" }]} />)).not.toThrow();
+      } finally { error.mockRestore(); }
+    });
+  });
+
+  it("names the select-all checkbox after the range it selects", () => {
+    const { unmount } = render(<Fixture />);
+    expect(screen.getByRole("checkbox", { name: "选择范围（仅本页）" })).toHaveAttribute("data-scope", "page");
+    unmount();
+    render(<Fixture scope="filtered" />);
+    expect(screen.getByRole("checkbox", { name: "选择范围（全部筛选结果）" })).toHaveAttribute("data-scope", "filtered");
+  });
+  it("aligns a numeric column by its meta declaration, header and cells together, whatever the content", () => {
+    render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", meta: { numeric: true } }, { id: "note", header: "备注", cell: ({ row }) => String(row.original.count) }]} />);
+    expect(screen.getByRole("columnheader", { name: "数量" })).toHaveAttribute("data-numeric");
+    const counts = screen.getAllByRole("cell").filter(cell => cell.hasAttribute("data-numeric"));
+    expect(counts.map(cell => cell.textContent)).toEqual(["2", "0", "1"]);
+    // 不是数值列声明的列，即便内容是数字也不对齐成数值列。
+    expect(screen.getByRole("columnheader", { name: "备注" })).not.toHaveAttribute("data-numeric");
+    expect(screen.getByRole("rowheader", { name: "A" })).not.toHaveAttribute("data-numeric");
   });
 });

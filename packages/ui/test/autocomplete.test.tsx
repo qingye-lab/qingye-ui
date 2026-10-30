@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Autocomplete, AutocompleteClear, AutocompleteCollection, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
+import { Autocomplete, AutocompleteClear, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["青叶", "青山", "白云"];
@@ -57,4 +57,12 @@ test("grouped suggestions are named groups; Status speaks through a polite regio
   expect(screen.getByRole("group", { name: "操作" })).toContainElement(screen.getByRole("option", { name: "新建设备" }));
   const status = await screen.findByText(/找到 3 项/);
   expect(status).toHaveAttribute("aria-live", "polite");
+});
+
+test("an empty suggestion list without application wording falls back to the shared default, and explicit wording wins", async () => {
+  const { rerender } = render(<Autocomplete items={[]} open><AutocompleteInput aria-label="位置" /><AutocompletePopup><AutocompleteEmpty /><AutocompleteList>{() => null}</AutocompleteList></AutocompletePopup></Autocomplete>);
+  expect(await screen.findByText("没有可选项")).toBeInTheDocument();
+  rerender(<Autocomplete items={[]} open><AutocompleteInput aria-label="位置" /><AutocompletePopup><AutocompleteEmpty>没有匹配项</AutocompleteEmpty><AutocompleteList>{() => null}</AutocompleteList></AutocompletePopup></Autocomplete>);
+  expect(await screen.findByText("没有匹配项")).toBeInTheDocument();
+  expect(screen.queryByText("没有可选项")).toBeNull();
 });

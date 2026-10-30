@@ -52,7 +52,11 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
       <DialogPrimitive.Popup {...props} aria-modal="true" data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-popup"}
         className={(state) => cn(
           // 内容固有宽度 + 视口上限；绝对定位子元素始终锚定本面板，入退只在 motion.css。
-          "qy-dialog-popup pointer-events-auto relative grid min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
+          // 页脚不随内容滚走（M22）：直接子级里有 DialogPanel 时，面板改为纵向 flex、自身不滚，
+          // 头部与页脚各占本身高度，中间的 DialogPanel 吃掉剩余并在内部滚动；没有 DialogPanel 的旧写法仍是整面板滚动。
+          // 间距读同一个 --qy-panel-gap / --qy-panel-padding，没有新取值。边界与阴影档：border-border + shadow-overlay
+          // （阻断式工作面，比贴着触发物的 shadow-raised 离页面更远；理由见 popover.tsx 的 PopoverPopup）。
+          "qy-dialog-popup pointer-events-auto relative grid has-[>[data-slot=dialog-panel]]:flex has-[>[data-slot=dialog-panel]]:flex-col min-w-0 w-fit max-w-full max-h-full gap-(--qy-panel-gap) overflow-y-auto has-[>[data-slot=dialog-panel]]:overflow-hidden rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring",
           typeof className === "function" ? className(state) : className,
         )} />
     </DialogPrimitive.Viewport>
@@ -61,12 +65,12 @@ export function DialogPopup({ portalProps, backdropProps, viewportProps, classNa
 
 export function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props): React.ReactElement {
   return <DialogPrimitive.Title {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-title"}
-    className={(state) => cn("min-w-0 text-heading wrap-break-word", typeof className === "function" ? className(state) : className)} />;
+    className={(state) => cn("min-w-0 text-heading wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 
 export function DialogDescription({ className, ...props }: DialogPrimitive.Description.Props): React.ReactElement {
   return <DialogPrimitive.Description {...props} data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "dialog-description"}
-    className={(state) => cn("min-w-0 text-body text-muted-foreground wrap-break-word", typeof className === "function" ? className(state) : className)} />;
+    className={(state) => cn("min-w-0 text-body text-muted-foreground wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 
 export function DialogClose({ children, render, ...props }: DialogPrimitive.Close.Props): React.ReactElement {
@@ -77,15 +81,20 @@ export function DialogClose({ children, render, ...props }: DialogPrimitive.Clos
 export type DialogGroupProps = useRender.ComponentProps<"div">;
 
 export function DialogHeader({ className, render, ref, ...props }: DialogGroupProps): React.ReactElement {
-  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-header", ...props, className: cn("grid min-w-0 gap-(--qy-field-gap)", className) } });
+  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-header", ...props, className: cn("grid min-w-0 shrink-0 gap-(--qy-field-gap)", className) } });
 }
 
+/**
+ * 工作内容区，也是长内容时唯一滚动的部分（页眉与页脚固定）。
+ * 横向与面板内缘等宽出血（负外距 + 同值内距）：滚动条贴着面板边，内容与表头页脚仍在同一条竖线上；
+ * overflow 会裁切横向，内距同时给控件的内描边留出位置。出血量读 --qy-panel-padding，没有新取值。
+ */
 export function DialogPanel({ className, render, ref, ...props }: DialogGroupProps): React.ReactElement {
-  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-panel", ...props, className: cn("grid min-w-0 gap-(--qy-panel-gap)", className) } });
+  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-panel", ...props, className: cn("-mx-(--qy-panel-padding) grid min-h-0 min-w-0 flex-auto content-start gap-(--qy-panel-gap) overflow-y-auto px-(--qy-panel-padding)", className) } });
 }
 
 export function DialogFooter({ className, render, ref, ...props }: DialogGroupProps): React.ReactElement {
-  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-footer", ...props, className: cn("flex min-w-0 flex-wrap items-center justify-end gap-(--qy-action-gap)", className) } });
+  return useRender({ render, ref, defaultTagName: "div", props: { "data-slot": "dialog-footer", ...props, className: cn("flex min-w-0 shrink-0 flex-wrap items-center justify-end gap-(--qy-action-gap)", className) } });
 }
 
 export { DialogPrimitive };

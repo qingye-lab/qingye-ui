@@ -164,3 +164,23 @@ test("FieldControl can register an explicitly native Input without a second regi
   fireEvent.change(screen.getByLabelText("备注"), { target: { value: "内容" } });
   expect(screen.getByLabelText("备注")).toHaveValue("内容");
 });
+
+test("required marker is hidden from the name; optional note is part of it", () => {
+  render(<><Field><FieldLabel requirement="required">邮箱</FieldLabel><Input required /></Field><Field><FieldLabel requirement="optional">备注</FieldLabel><Input /></Field></>);
+  expect(screen.getByRole("textbox", { name: "邮箱" })).toBeRequired();
+  expect(screen.getByText("*")).toHaveAttribute("aria-hidden", "true");
+  expect(screen.getByRole("textbox", { name: "备注（选填）" })).toBeInTheDocument();
+});
+
+test("validating shows status, hides the stale FieldError and invalid state, and restores it afterwards", () => {
+  const fixture = (validating: boolean) => <Field invalid validating={validating}><FieldLabel>用户名</FieldLabel><Input /><FieldError>已被占用</FieldError></Field>;
+  const { rerender, container } = render(fixture(true));
+  expect(screen.getByRole("status")).toHaveTextContent("正在校验");
+  expect(container.querySelector("[data-slot=field]")).toHaveAttribute("aria-busy", "true");
+  expect(screen.queryByText("已被占用")).not.toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: "用户名" })).not.toHaveAttribute("aria-invalid");
+  rerender(fixture(false));
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  expect(screen.getByText("已被占用")).toBeInTheDocument();
+  expect(screen.getByRole("textbox", { name: "用户名" })).toHaveAttribute("aria-invalid", "true");
+});

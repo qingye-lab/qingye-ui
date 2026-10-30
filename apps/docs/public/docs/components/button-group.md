@@ -1,9 +1,9 @@
 # 动作组 ButtonGroup
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 9f0a747d831063539d4d418ab221b3a0c356fb710148c1c0e83f514905a39914
+Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
 
 为同一范围的动作提供共同名称与间隔。
 
@@ -49,7 +49,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### ButtonGroup
 默认 role=group 的开放动作关系。
-- aria-label / aria-labelledby: string. 动作范围的共同名称，不替代按钮名称。
+- aria-label / aria-labelledby: string. 必填其一：动作范围的共同名称，不替代按钮名称；缺失或为空时抛错。
 - orientation: "horizontal" | "vertical"; default "horizontal". 布局方向。
 - align / wrap / render / ref / 原生属性: ButtonGroupProps. 沿用 Group 的组合入口，间隔默认 action-gap。
 

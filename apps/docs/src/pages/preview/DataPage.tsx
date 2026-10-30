@@ -40,7 +40,7 @@ function StateBadge({ state }: { state: Collection["state"] }) {
 /* 可排序、可选择的数据表：排序与选择由 TanStack 持有，组件只表达。 */
 function CollectionsDataTable() {
   const columns = React.useMemo<ColumnDef<Collection>[]>(() => [
-    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择全部集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.name}`} /> },
+    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.name}`} /> },
     { accessorKey: "name", meta: { rowHeader: true }, header: ({ column }) => <DataTableSortButton column={column}>名称</DataTableSortButton> },
     { accessorKey: "owner", header: "负责人", enableSorting: false, cell: ({ row }) => <Inline gap="field"><Avatar size="xs" label={row.original.owner}><AvatarFallback>{row.original.owner.slice(0, 1)}</AvatarFallback></Avatar><span>{row.original.owner}</span></Inline> },
     { accessorKey: "records", meta: { numeric: true }, header: ({ column }) => <DataTableSortButton column={column}>记录数</DataTableSortButton>, sortDescFirst: true, cell: ({ row }) => <span className="numeric">{row.original.records.toLocaleString("zh-CN")}</span> },
@@ -94,7 +94,7 @@ export default function DataPage() {
               <TableRow>
                 <TableHead>名称</TableHead>
                 <TableHead>负责人</TableHead>
-                <TableHead className="text-end">记录数</TableHead>
+                <TableHead numeric>记录数</TableHead>
                 <TableHead>最近同步</TableHead>
                 <TableHead>状态</TableHead>
               </TableRow>
@@ -103,7 +103,7 @@ export default function DataPage() {
               {visible.map(row => <TableRow key={row.id}>
                 <TableHead scope="row">{row.name}</TableHead>
                 <TableCell>{row.owner}</TableCell>
-                <TableCell className="numeric text-end">{row.records.toLocaleString("zh-CN")}</TableCell>
+                <TableCell numeric>{row.records.toLocaleString("zh-CN")}</TableCell>
                 <TableCell className="text-muted-foreground">{row.synced}</TableCell>
                 <TableCell><StateBadge state={row.state} /></TableCell>
               </TableRow>)}
@@ -112,7 +112,7 @@ export default function DataPage() {
               <TableRow>
                 <TableHead scope="row">本页合计</TableHead>
                 <TableCell />
-                <TableCell className="numeric text-end">{visible.reduce((sum, row) => sum + row.records, 0).toLocaleString("zh-CN")}</TableCell>
+                <TableCell numeric>{visible.reduce((sum, row) => sum + row.records, 0).toLocaleString("zh-CN")}</TableCell>
                 <TableCell />
                 <TableCell />
               </TableRow>

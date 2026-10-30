@@ -1,12 +1,12 @@
-# Qingye UI 4.2.0
+# Qingye UI 5.0.0
 
-> Facts for @qingye_lab/ui@4.2.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@5.0.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.md)
 - [Style contract](/ai/style.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.md): method sources
-- [Installation](/ai/v4.2.0/installation.md)
+- [Installation](/ai/v5.0.0/installation.md)
 - [Main skill](/ai/SKILL.md)
 - [Full text](/llms-full.txt): the guide, installation and every component in one file
 
@@ -24,12 +24,15 @@
 - [动作组 ButtonGroup](/docs/components/button-group.md): 为同一范围的动作提供共同名称与间隔。
 - [日历 Calendar](/docs/components/calendar.md): 在当地日历中导航年月，选择单日、多个日期或日期范围。
 - [卡片 Card](/docs/components/card.md): 为可独立识别的对象建立内容边界。
+- [级联选择 Cascader](/docs/components/cascader.md): 沿「根到叶」的路径选一个值，每一级的候选各占一列。
 - [图表 Chart](/docs/components/chart.md): 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 - [复选框 Checkbox](/docs/components/checkbox.md): 选择独立的是/否或集合中的多个项。
 - [复选组 CheckboxGroup](/docs/components/checkbox-group.md): 把复选项接入同一个集合与共同范围。
 - [代码 CodeBlock](/docs/components/code-block.md): 文本原样展示、可选标题栏与真实复制结果。
 - [单段展开 Collapsible](/docs/components/collapsible.md): 主动展开同一对象的补充内容。
+- [颜色选择 ColorPicker](/docs/components/color-picker.md): 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 - [候选输入 Combobox](/docs/components/combobox.md): 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
+- [命令面板 Command](/docs/components/command.md): 输入框加一张常开的命令列表，用来跳到某处或执行某事。
 - [异步确认 Confirm](/docs/components/confirm.md): 等待一次明确决定，再由调用方继续执行。
 - [确认动作 ConfirmAction](/docs/components/confirm-action.md): 确认具体对象、版本与变更，内容改变后重新阅读。
 - [上下文菜单 ContextMenu](/docs/components/context-menu.md): 当前对象的右键增强命令入口。
@@ -45,6 +48,7 @@
 - [空与未知 Empty](/docs/components/empty.md): 区分零结果、未知与不适用。
 - [字段 Field](/docs/components/field.md): 关联一个值的名称、控件、说明与调用方提供的错误。
 - [字段组 Fieldset](/docs/components/fieldset.md): 为一组相关字段提供共同名称与禁用范围。
+- [文件触发 FileTrigger](/docs/components/file-trigger.md): 点按钮选文件，选完立即交给应用，不保留选择。
 - [文件输入 FileUpload](/docs/components/file-upload.md): 选择或拖入本地文件，保留已接受集合与真实拒绝原因。
 - [筛选条件 FilterBar](/docs/components/filter-bar.md): 分开显示草稿条件与已应用事实。
 - [表单 Form](/docs/components/form.md): 原生字段提交范围与重置上下文。
@@ -52,6 +56,7 @@
 - [链接预览 HoverCard](/docs/components/hover-card.md): 悬停与键盘焦点展开相同补充内容。
 - [输入框 Input](/docs/components/input.md): 输入一个文本值。
 - [输入组合 InputGroup](/docs/components/input-group.md): 让输入与标记、单位或附属动作共用编辑边界。
+- [输入方式 InputModalityProvider](/docs/components/input-modality-provider.md): 在应用根部记录输入方式，键盘操作跳过过渡。
 - [条目 Item](/docs/components/item.md): 内容、入口与附属动作的关系。
 - [键位 Kbd](/docs/components/kbd.md): 用原生键位元素显示真实快捷键。
 - [标签 Label](/docs/components/label.md): 用原生标签为一个控件命名。
@@ -60,7 +65,6 @@
 - [语言切换 LocaleSwitch](/docs/components/locale-switch.md): 请求切换应用语言，并显示 Provider 当前事实。
 - [命令菜单 Menu](/docs/components/menu.md): 与当前任务相关的临时命令和选择。
 - [测量 Meter](/docs/components/meter.md): 表达真实范围内的测量值。
-- [动效策略 MotionProvider](/docs/components/motion-provider.md): 在应用根部记录输入方式，键盘操作跳过过渡。
 - [原生选择 NativeSelect](/docs/components/native-select.md): 保留平台选择器、原生选项与表单值。
 - [导航菜单 NavigationMenu](/docs/components/navigation-menu.md): 真实链接、可展开的导航分组与面板内的组名、说明。
 - [数值输入 NumberField](/docs/components/number-field.md): 编辑可为空的数值，并按指定步长增减。
@@ -72,8 +76,9 @@
 - [浮起面板 Popover](/docs/components/popover.md): 与触发对象绑定的非阻断浮层，承载局部操作与补充信息。
 - [进度 Progress](/docs/components/progress.md): 表达可靠分母的任务进度或明确不定状态。
 - [构成 Proportion](/docs/components/proportion.md): 一个整体由哪几部分组成，各占多少。
-- [长文 Prose](/docs/components/prose.md): 给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认自带一张阅读纸；页面已经有纸时去掉。
+- [长文 Prose](/docs/components/prose.md): 给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认只排版、不带框；文章独自成篇、没有承载面时用 framed 给它一张阅读纸。
 - [单选组 RadioGroup](/docs/components/radio-group.md): 从同时可见的少量候选中取一个值。
+- [分栏 Resizable](/docs/components/resizable.md): 两个或多个面板之间放可拖动的分隔条，调整各自占比。
 - [两量关系 ScatterChart](/docs/components/scatter-chart.md): 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 - [滚动区域 ScrollArea](/docs/components/scroll-area.md): 真实原生滚动，或显式组合可拖动滚动条。
 - [搜索输入 SearchInput](/docs/components/search-input.md): 输入一个搜索词，并能一步清空。
@@ -95,6 +100,7 @@
 - [标签集合 TagInput](/docs/components/tag-input.md): 确认字符串集合，保留尚未确认的编辑草稿。
 - [多行输入 Textarea](/docs/components/textarea.md): 编辑备注、消息等多行文本。
 - [主题 ThemeProvider](/docs/components/theme-provider.md): 管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。
+- [时间输入 TimeField](/docs/components/time-field.md): 只填一个时刻，按时、分、秒分段输入。
 - [时间序列 Timeline](/docs/components/timeline.md): 保留输入顺序与真实时间。
 - [通知 Toast](/docs/components/toast.md): 补充可恢复、非关键的操作事实，保持当前工作不中断。
 - [阅读目录 Toc](/docs/components/toc.md): 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
@@ -103,6 +109,7 @@
 - [工具组 Toolbar](/docs/components/toolbar.md): 真实分组、方向键焦点与可执行操作。
 - [文字提示 Tooltip](/docs/components/tooltip.md): 悬停或聚焦时阅读快捷键、格式与短解释。
 - [层级集合 Tree](/docs/components/tree.md): 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
+- [树形选择 TreeSelect](/docs/components/tree-select.md): 在弹层里的树上选一个节点，或勾选若干叶子。
 - [排版 Typography](/docs/components/typography.md): 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
 - [虚拟列表 VirtualList](/docs/components/virtual-list.md): 以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。
 - [工作面 Workspace](/docs/components/workspace.md): 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。

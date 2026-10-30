@@ -4,7 +4,7 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import * as React from "react";
 import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { Button, buttonVariants, type ButtonProps } from "./button";
-import { overlayItemClassName } from "../overlay-item";
+import { commandItemFrame, overlayItemClassName } from "../overlay-item";
 import { cn } from "../utils";
 
 export type MenuProps<Payload = unknown> = MenuPrimitive.Root.Props<Payload>;
@@ -19,8 +19,9 @@ export function MenuPositioner({ style, className, ...props }: MenuPositionerPro
   return <MenuPrimitive.Positioner data-slot="menu-positioner" side="bottom" align="start" sideOffset={popupOffset} {...props} style={state => ({ ...layer, ...(typeof style === "function" ? style(state) : style) })} className={state => cn("max-h-(--available-height) max-w-(--available-width)", typeof className === "function" ? className(state) : className)} />;
 }
 export type MenuPopupProps = MenuPrimitive.Popup.Props;
+// 浮层边界与阴影档的分工见 popover.tsx 的 PopoverPopup：线 border-border 划出范围，shadow-raised 表达贴着触发物的浮起。
 export function MenuPopup({ className, ...props }: MenuPopupProps) {
-  return <MenuPrimitive.Popup data-slot="menu-popup" {...props} className={state => cn("min-w-0 max-h-(--available-height) max-w-(--available-width) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-overlay-inset) text-foreground shadow-raised outline-none focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />;
+  return <MenuPrimitive.Popup data-slot="menu-popup" {...props} className={state => cn("qy-menu-popup min-w-0 max-h-(--available-height) max-w-(--available-width) overflow-y-auto rounded-overlay border border-border bg-surface-raised p-(--qy-overlay-inset) text-foreground shadow-raised outline-none focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />;
 }
 type MenuSizing = { size?: ButtonProps["size"]; inset?: boolean };
 export type MenuMarkerPosition = "start" | "end";
@@ -28,13 +29,6 @@ export type MenuMarkerPosition = "start" | "end";
 // 圆角、高亮、禁用同一来源；文字起点与带框控件的文字起点相同；同一菜单内各项等权，不用命令字重区分。
 // 菜单项是命令，高度跟随按钮尺寸档；候选项是值，高度跟随填值角色层——这是两者唯一的不同。
 // 勾选与单选的标记默认在尾部，可按任务放到逻辑起点；文字列与图标空位保持对齐。
-const itemFrame: Record<NonNullable<ButtonProps["size"]>, string> = {
-  xs: "w-full justify-start px-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  sm: "w-full justify-start px-[calc(var(--qy-control-sm-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  md: "w-full justify-start px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  lg: "w-full justify-start px-[calc(var(--qy-control-lg-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  xl: "w-full justify-start px-[calc(var(--qy-control-xl-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-};
 // 无前导标记的文字为同档图标与既有字段间隔让位；随尺寸档与逻辑方向一起变化。
 const itemInset: Record<NonNullable<ButtonProps["size"]>, string> = {
   xs: "ps-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset)+var(--qy-control-xs-icon-narrow)+var(--qy-field-gap))] sm:ps-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset)+var(--qy-control-xs-icon)+var(--qy-field-gap))]",
@@ -50,34 +44,44 @@ const itemMarker: Record<NonNullable<ButtonProps["size"]>, string> = {
   lg: "w-(--qy-control-lg-icon-narrow) sm:w-(--qy-control-lg-icon)",
   xl: "w-(--qy-control-xl-icon-narrow) sm:w-(--qy-control-xl-icon)",
 };
-export type MenuItemProps = MenuPrimitive.Item.Props & MenuSizing;
-export function MenuItem({ size = "md", inset = false, className, ...props }: MenuItemProps) {
-  return <MenuPrimitive.Item data-slot="menu-item" data-inset={inset || undefined} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />;
+/*
+ * 危险项（M15）：tone 与 Button 同名同义——只标出「这个动作属于危险一类」（NG10 允许的类别色），
+ * 字与图标读 text-destructive-foreground（quiet + danger 的既有取值，对纸的对比由 contrast-check 测），
+ * 悬停 / 高亮 / 按下读 --qy-danger-soft / --qy-danger-soft-active（与 Button quiet danger 同一对 token，不新增取值）。
+ * 高亮（键盘位置）要显式写：overlayItemClassName 的 data-highlighted:bg-accent 与 hover 是两个变体，不会互相覆盖，
+ * 所以危险项在 overlayItemClassName 之后用同一变体改写底色，键盘与指针看到同一种面。
+ * 后果说明与确认不归菜单项：危险项被激活后应打开 AlertDialog / ConfirmAction（组件职能单一）。
+ */
+export type MenuItemTone = "neutral" | "danger";
+const dangerItemClassName = "data-highlighted:bg-danger-soft";
+export type MenuItemProps = MenuPrimitive.Item.Props & MenuSizing & { tone?: MenuItemTone };
+export function MenuItem({ size = "md", inset = false, tone = "neutral", className, ...props }: MenuItemProps) {
+  return <MenuPrimitive.Item data-slot="menu-item" data-inset={inset || undefined} data-tone={tone} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone }), overlayItemClassName, tone === "danger" && dangerItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />;
 }
 export type MenuLinkItemProps = MenuPrimitive.LinkItem.Props & MenuSizing;
 export function MenuLinkItem({ size = "md", inset = false, className, ...props }: MenuLinkItemProps) {
-  return <MenuPrimitive.LinkItem data-slot="menu-link-item" data-inset={inset || undefined} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />;
+  return <MenuPrimitive.LinkItem data-slot="menu-link-item" data-inset={inset || undefined} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />;
 }
 export type MenuGroupProps = MenuPrimitive.Group.Props;
 export function MenuGroup({ className, ...props }: MenuGroupProps) { return <MenuPrimitive.Group data-slot="menu-group" {...props} className={state => cn("min-w-0", typeof className === "function" ? className(state) : className)} />; }
 export type MenuGroupLabelProps = MenuPrimitive.GroupLabel.Props & MenuSizing;
-export function MenuGroupLabel({ size = "md", inset = false, className, ...props }: MenuGroupLabelProps) { return <MenuPrimitive.GroupLabel data-slot="menu-group-label" data-inset={inset || undefined} {...props} className={state => cn("min-w-0 pt-(--qy-space-2) pb-(--qy-space-1) text-caption text-muted-foreground wrap-anywhere", itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />; }
+export function MenuGroupLabel({ size = "md", inset = false, className, ...props }: MenuGroupLabelProps) { return <MenuPrimitive.GroupLabel data-slot="menu-group-label" data-inset={inset || undefined} {...props} className={state => cn("min-w-0 pt-(--qy-space-2) pb-(--qy-space-1) text-caption text-muted-foreground wrap-anywhere", commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)} />; }
 export type MenuSeparatorProps = React.ComponentProps<typeof MenuPrimitive.Separator>;
 export function MenuSeparator({ className, ...props }: MenuSeparatorProps) { return <MenuPrimitive.Separator data-slot="menu-separator" {...props} className={state => cn("-mx-(--qy-overlay-inset) my-(--qy-overlay-inset) h-0 border-b border-border", typeof className === "function" ? className(state) : className)} />; }
 export type MenuCheckboxItemProps = MenuPrimitive.CheckboxItem.Props & MenuSizing & { markerPosition?: MenuMarkerPosition };
 export function MenuCheckboxItem({ size = "md", inset = false, markerPosition = "end", className, children, ...props }: MenuCheckboxItemProps) {
   const marker = <span data-slot="menu-checkbox-marker" aria-hidden="true" className={cn("inline-flex shrink-0 items-center justify-center", itemMarker[size])}><MenuPrimitive.CheckboxItemIndicator data-slot="menu-checkbox-indicator"><IconCheck /></MenuPrimitive.CheckboxItemIndicator></span>;
-  return <MenuPrimitive.CheckboxItem data-slot="menu-checkbox-item" data-inset={inset || undefined} data-marker-position={markerPosition} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}>{markerPosition === "start" && marker}<span className="min-w-0 flex-1">{children}</span>{markerPosition === "end" && marker}</MenuPrimitive.CheckboxItem>;
+  return <MenuPrimitive.CheckboxItem data-slot="menu-checkbox-item" data-inset={inset || undefined} data-marker-position={markerPosition} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}>{markerPosition === "start" && marker}<span className="min-w-0 flex-1">{children}</span>{markerPosition === "end" && marker}</MenuPrimitive.CheckboxItem>;
 }
 export type MenuRadioGroupProps = MenuPrimitive.RadioGroup.Props;
 export function MenuRadioGroup(props: MenuRadioGroupProps) { return <MenuPrimitive.RadioGroup data-slot="menu-radio-group" {...props} />; }
 export type MenuRadioItemProps = MenuPrimitive.RadioItem.Props & MenuSizing & { markerPosition?: MenuMarkerPosition };
 export function MenuRadioItem({ size = "md", inset = false, markerPosition = "end", className, children, ...props }: MenuRadioItemProps) {
   const marker = <span data-slot="menu-radio-marker" aria-hidden="true" className={cn("inline-flex shrink-0 items-center justify-center", itemMarker[size])}><MenuPrimitive.RadioItemIndicator data-slot="menu-radio-indicator"><IconCheck /></MenuPrimitive.RadioItemIndicator></span>;
-  return <MenuPrimitive.RadioItem data-slot="menu-radio-item" data-inset={inset || undefined} data-marker-position={markerPosition} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}>{markerPosition === "start" && marker}<span className="min-w-0 flex-1">{children}</span>{markerPosition === "end" && marker}</MenuPrimitive.RadioItem>;
+  return <MenuPrimitive.RadioItem data-slot="menu-radio-item" data-inset={inset || undefined} data-marker-position={markerPosition} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}>{markerPosition === "start" && marker}<span className="min-w-0 flex-1">{children}</span>{markerPosition === "end" && marker}</MenuPrimitive.RadioItem>;
 }
 export type MenuSubmenuTriggerProps = MenuPrimitive.SubmenuTrigger.Props & MenuSizing;
 export function MenuSubmenuTrigger({ size = "md", inset = false, className, children, ...props }: MenuSubmenuTriggerProps) {
-  return <MenuPrimitive.SubmenuTrigger data-slot="menu-submenu-trigger" data-inset={inset || undefined} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, itemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><IconChevronRight aria-hidden="true" className="rtl:rotate-180" /></MenuPrimitive.SubmenuTrigger>;
+  return <MenuPrimitive.SubmenuTrigger data-slot="menu-submenu-trigger" data-inset={inset || undefined} {...props} className={state => cn(buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}><span className="min-w-0 flex-1">{children}</span><IconChevronRight aria-hidden="true" className="rtl:rotate-180" /></MenuPrimitive.SubmenuTrigger>;
 }
 export { MenuPrimitive };

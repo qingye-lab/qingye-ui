@@ -4,9 +4,10 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { IconCalendar, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
+import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useCustomValidity, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Calendar, formatLocalDate, parseLocalDate, type CalendarProps } from "./calendar";
@@ -31,6 +32,9 @@ export type DatePickerProps = Omit<useRender.ComponentProps<"div">, "children" |
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required">;
 };
 
+// 固定宽度的 ISO 文本可直接按字典序比较（与 intersectNativeBounds 同理）。
+const outOfRange = (entry: string, min: string | undefined, max: string | undefined) => Boolean(min && entry < min || max && entry > max);
+
 export function DatePicker(allProps: DatePickerProps) {
   const { value: valueProp, defaultValue, onValueChange, min, max, name, form, disabled = false, readOnly = false, inputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
   const { messages } = useUILocale();
@@ -43,10 +47,15 @@ export function DatePicker(allProps: DatePickerProps) {
   const boundaryRef = React.useRef<HTMLDivElement | null>(null);
   const { ref: externalInputRef, onChange, onBlur, ...inputRest } = inputProps;
   const [inputRef, setInputRef] = useInputRef(externalInputRef);
-  const facts = useInputFacts(inputRef, { disabled }, { value: false });
-  const editable = !disabled && !facts.disabled && !readOnly;
+  const facts = useInputFacts(inputRef, { disabled, readOnly }, { value: false });
+  const readOnlyNow = readOnly || facts.readOnly;
+  const editable = !disabled && !facts.disabled && !readOnlyNow;
   const text = value ? formatLocalDate(value) : "";
   const typing = useTypingText(text);
+  // 未被采纳的键入（不完整或越界）在失焦时标为无效；只在键入仍未被采纳时有效，外部改值、清除、选日历、reset 后自然失效。
+  const [rejection, setRejection] = React.useState<"dateIncomplete" | "dateOutOfRange" | undefined>();
+  const invalidKind = typing.active ? rejection : undefined;
+  useCustomValidity(inputRef, invalidKind ? messages[invalidKind] : "");
   const change = (next: Date | undefined, event: React.SyntheticEvent) => {
     if (!controlled) setUncontrolled(next);
     onValueChange?.(next, event);
@@ -73,33 +82,42 @@ export function DatePicker(allProps: DatePickerProps) {
     // 日期、清除与日历共用一条编辑边界（基础层 §6「编辑边界内的附属动作」）；平台日历图标隐藏，
     // 只保留一个打开日历的入口。日期格式长度固定，边界宽度随内容，不拉满容器。
     children: <Popover open={editable && open} onOpenChange={setOpen}>
-      <InputGroup ref={boundaryRef} data-slot="date-picker-control" className="w-fit max-w-full flex-nowrap">
-        <Input {...inputRest} min={native.min} max={native.max} type="date" name={name} form={form} disabled={disabled} readOnly={readOnly} ref={setInputRef} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)}
+      <InputGroup ref={boundaryRef} data-slot="date-picker-control" data-readonly={readOnlyNow ? "" : undefined} className="w-fit max-w-full flex-nowrap">
+        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={native.min} max={native.max} type="date" name={name} form={form} disabled={disabled} readOnly={readOnly} ref={setInputRef} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)}
           className={withHiddenIndicator(inputRest.className)}
           onBlur={event => {
             onBlur?.(event);
-            // 逐段删完时值一直是空串，浏览器不再发 input 事件：离开输入时若所有分段都空，这才是清除；其余未采纳的键入放弃。
+            // 逐段删完时值一直是空串，浏览器不再发 input 事件：离开输入时若所有分段都空，这才是清除；其余未采纳的键入保留并标为无效（见下）。
             if (editable && typing.active && value && readNativeEntry(event.currentTarget) === "empty") change(undefined, event);
-            typing.release();
+            if (!typing.active) return;
+            const entry = readNativeEntry(event.currentTarget);
+            if (entry === "empty") return typing.release();
+            // 读者键入的内容不替他丢掉：保留文字并标为无效，让提交被拦下。
+            setRejection(entry !== "partial" && parseLocalDate(entry) && outOfRange(entry, native.min, native.max) ? "dateOutOfRange" : "dateIncomplete");
           }}
           onChange={event => {
             onChange?.(event);
             if (event.defaultPrevented || event.baseUIHandlerPrevented || !editable) return;
             // 键入中间态不是值：年份可键到 5–6 位、分段可以只填一半（2026-10-12，D7）。
             // 只有「所有分段都被清空」才是清除；其余无法解释为 1–9999 年有效日期的内容留在输入里，不上报也不清空已有值。
+            setRejection(undefined);
             const entry = readNativeEntry(event.currentTarget);
             if (entry === "partial") return typing.hold("");
             if (entry === "empty") { typing.release(); return change(undefined, event); }
             const next = parseLocalDate(entry);
             if (!next) return typing.hold(entry);
+            // 超出 min / max 的完整日期不是可采纳的值：不上报、不改已有值，文字留在输入里。
+            if (outOfRange(entry, native.min, native.max)) return typing.hold(entry);
             typing.release();
             change(next, event);
           }} />
-        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDate} onClick={event => { typing.release(); change(undefined, event); }}><IconX aria-hidden="true" /></Button>}
+        {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
+        {/* 清除后按钮随值消失，焦点回到输入（同 SearchInput 的清空），不落到 body。 */}
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDate} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
         <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDate} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><Calendar {...(value ? { defaultMonth: value } : {})} {...calendarProps} {...bounds} mode="single" selected={value} disabled={editable ? bounds.disabled : true} autoFocus
-        onSelect={(next, _day, _modifiers, event) => { if (!editable) return; change(next, event); setOpen(false); }} /></PopoverPopup>
+        onSelect={(next, _day, _modifiers, event) => { if (!editable) return; typing.release(); change(next, event); setOpen(false); }} /></PopoverPopup>
     </Popover>,
   }) });
 }

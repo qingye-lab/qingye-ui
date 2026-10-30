@@ -1,9 +1,9 @@
 # 代码 CodeBlock
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: e0e34388389dc6b87dd13b6e8f94a92e8ccf7c45b3d1a49a3fe97913a7ce36d1
+Source SHA-256: b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b
 
 文本原样展示、可选标题栏与真实复制结果。
 
@@ -13,6 +13,7 @@ pre/code 保留空白、字符与完整宽度，库自己不做语法高亮：�
 ## Notes
 - 语言名称不是语法解析；没有额外依赖、请求或剪贴板 fallback 伪成功。
 - 标题栏里放 SegmentedControl 切换内容时，code 与 children 要随所选值一起换，复制的才是眼前这一条。
+- 代码没有溢出时，代码面不进入 Tab 序列；溢出时它是一个有名称的 region，Tab 停在上面就能用方向键滚动。
 
 ## Use and ownership
 - 原样阅读和复制一段代码或预格式文本。
@@ -42,6 +43,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `code`: `string`. 被复制的文本；渲染内容由 children 替换时，复制的仍是它。
 - `copyable?`: `boolean`.
 - `language?`: `string`.
+- `maxLines?`: `number`. 代码面最多显示的行数，超出后代码面纵向滚动（可聚焦、有名称）。折行后按视觉行计。 选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材）， 给长度的话字号或密度一变，能看到的行数就悄悄变了。
 - `onCopyError?`: `(error: unknown) => void`.
 - `onCopySuccess?`: `() => void`.
 - `title?`: `React.ReactNode`. 标题栏的起始内容。字符串或数字是文件名一类的标签；其他节点（如 SegmentedControl）原样放入。有 title 才有标题栏。
@@ -64,12 +66,13 @@ Written descriptions; the list above is the type-resolved fact.
 - title: ReactNode. 标题栏的起始内容；给出才有标题栏（高 2 材，复制按钮移到栏尾）。字符串或数字按等宽辅助字显示，起始边与代码文字对齐；其他节点（如 SegmentedControl）原样放入，栏内的轨道面透明，显示代码面。
 - children: ReactNode. 已高亮的标记，放进 code 元素代替纯文本显示；复制与可访问内容以 code 为准，两者文字应一致。
 - wrap: boolean; default false. 长行折行（在任意位置断开），而不是横向滚动。
+- maxLines: number. 代码面最多显示的行数（正整数），超出后纵向滚动。折行后按视觉行计。选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材），字号或密度变了，行数不会悄悄变。滚动时代码面可聚焦、有名称（取标题，其次语言，再退到「代码」），复制按钮不随代码滚动。
 - copyable: boolean; default true. 是否提供复制按钮与真实反馈。
 - onCopySuccess / onCopyError: () => void / (error: unknown) => void. 实际写入成功或失败后的回调；原生 onCopy 事件另行透传。
 - render / ref / ARIA / className / style / native props: useRender.ComponentProps<div>. 属性属于外部 div（原生 title 属性被 title 槽取代）；复制的文本由 code 参数唯一提供。
 
 ## Keyboard
-- Tab / Enter / Space: 原生文本滚动与 Button 激活。
+- Tab / Enter / Space: 代码溢出时可聚焦并用原生方向键滚动；Button 激活。
 
 ## Source examples
 ### 原样文本与复制
@@ -130,5 +133,17 @@ export default function Demo() {
     <span className="text-info-foreground">return</span> values[index];{"\n"}
     {"}"}{"\n"}
   </CodeBlock>;
+}
+```
+
+### 限定行数
+Source: apps/docs/src/content/code-block/demos/05-max-lines.tsx
+```tsx
+import { CodeBlock } from "@qingye_lab/ui/components/code-block";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "限定行数", titleEn: "Limited lines" } satisfies DemoMeta;
+const code = Array.from({ length: 30 }, (_, i) => `const value${i + 1} = ${i + 1};`).join("\n") + "\n";
+export default function Demo() {
+  return <CodeBlock title="values.js" maxLines={8} code={code} />;
 }
 ```

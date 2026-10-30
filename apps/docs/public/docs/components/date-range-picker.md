@@ -1,9 +1,9 @@
 # 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
+Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -74,7 +74,7 @@ Written descriptions; the list above is the type-resolved fact.
 - min / max: Date. 一处声明最早 / 最晚日期，同时写入两个原生输入与日历的禁用范围、可翻到的月份，并使超出范围的预设不可点。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。
 - presets: readonly { label: string; value: DateRangeValue | (() => DateRangeValue) }[]. 常用范围，显示在日历旁。函数形式在每次打开弹层时求值（「近 7 日」不会因页面跨过午夜而陈旧）；点击只写入草稿并翻到该月，仍须应用。草稿恰等于某一项时该项为当前（aria-pressed）。库只接收应用算好的绝对区间，不自己算相对日期。
 - name / form: string. 确认端点序列化为 name.from 与 name.to 的当地 YYYY-MM-DD。Field 可提供 name；两个日期输入本身不提交，草稿不入表单。
-- disabled / readOnly: boolean; default false. 禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，日历入口也不开（与 Select 一致）。Field 禁用同样约束附属动作。只读确认端点仍提交，禁用排除。
+- disabled / readOnly: boolean; default false. 禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，日历入口也不开（与 Select 一致）。Field 禁用同样约束附属动作。只读确认端点仍提交，禁用排除。只读时边界内给出「只读」说明。确认范围非空且可编辑时，边界内有清除动作，清除后焦点回到起点输入。
 - calendarProps: CalendarProps except owned selection props. min/max 指日期间隔规则（天数，与顶层的日期 min / max 不同），excludeDisabled 约束跨禁用日期。默认同日范围合法；要跨日明确传 min。mode 固定 range。
 - inputProps / endInputProps: Input props. 起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等。两个输入默认名称是「Field 标签 + 开始日期 / 结束日期」。
 - render / ref / className / style / ARIA / events: div composition props. 属于组合根；输入命名与错误由 Field 公共组合提供。

@@ -2,6 +2,7 @@ import * as React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogPopup, AlertDialogTitle } from "../src/components/alert-dialog";
 import { Menu, MenuCheckboxItem, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "../src/components/menu";
 describe("Menu", () => {
   it("opens by keyboard, keeps disabled commands inert and returns focus on Escape", async () => {
@@ -36,5 +37,36 @@ describe("Menu", () => {
     await user.keyboard("{Enter}");
     expect(radio).toHaveAttribute("aria-checked", "true");
     expect(command).not.toHaveBeenCalled();
+  });
+});
+describe("Menu danger commands", () => {
+  it("a danger item stays a named, keyboard-reachable command and declares its tone", async () => {
+    const user = userEvent.setup(); const remove = vi.fn();
+    render(<Menu defaultOpen><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+      <MenuItem>重命名</MenuItem>
+      <MenuItem tone="danger" onClick={remove}>删除</MenuItem>
+    </MenuPopup></MenuPositioner></MenuPortal></Menu>);
+    expect(screen.getByRole("menuitem", { name: "删除" })).toHaveAttribute("data-tone", "danger");
+    expect(screen.getByRole("menuitem", { name: "重命名" })).toHaveAttribute("data-tone", "neutral");
+    screen.getByRole("menuitem", { name: "重命名" }).focus();
+    await user.keyboard("{ArrowDown}");
+    await waitFor(() => expect(screen.getByRole("menuitem", { name: "删除" })).toHaveFocus());
+    await user.keyboard("{Enter}");
+    expect(remove).toHaveBeenCalledTimes(1);
+  });
+  it("a danger item hands the decision to a confirmation dialog rather than carrying the consequence itself", async () => {
+    const user = userEvent.setup();
+    function Example() {
+      const [open, setOpen] = React.useState(false);
+      return <>
+        <Menu defaultOpen><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+          <MenuItem tone="danger" onClick={() => setOpen(true)}>删除</MenuItem>
+        </MenuPopup></MenuPositioner></MenuPortal></Menu>
+        <AlertDialog open={open} onOpenChange={setOpen}><AlertDialogPopup><AlertDialogTitle>删除这个项目？</AlertDialogTitle><AlertDialogDescription>删除后无法恢复。</AlertDialogDescription><AlertDialogClose>保留</AlertDialogClose></AlertDialogPopup></AlertDialog>
+      </>;
+    }
+    render(<Example />);
+    await user.click(screen.getByRole("menuitem", { name: "删除" }));
+    expect(await screen.findByRole("alertdialog", { name: "删除这个项目？" })).toHaveAccessibleDescription("删除后无法恢复。");
   });
 });

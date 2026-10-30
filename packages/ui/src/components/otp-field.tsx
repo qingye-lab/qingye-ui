@@ -127,7 +127,9 @@ export function OtpField({
         data-active={index === active ? "" : undefined}
         data-selected={index >= countBefore(selection.start) && index < countBefore(selection.end) ? "" : undefined}
         className={cn(
-          "flex aspect-square min-w-0 rounded-[min(var(--qy-fill-radius),calc(var(--qy-radius-ratio)*100%))] text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-surface-field text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-surface-selected",
+          "flex aspect-square min-w-0 rounded-[min(var(--qy-fill-radius),calc(var(--qy-radius-ratio)*100%))] text-control-md-mobile sm:text-control-md w-(--qy-otp-cell-narrow) max-w-full items-center justify-center border border-input bg-surface-field text-foreground sm:w-(--qy-otp-cell) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) group-has-[input:read-only:not(:disabled)]/otp:border-border group-has-[input:disabled]/otp:bg-surface-inset group-has-[input:disabled]/otp:text-muted-foreground group-has-[input[aria-invalid=true]]/otp:border-destructive data-selected:bg-surface-selected transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out)",
+          // 悬停与 Input 同一规则（边线升到 border-strong）：可编辑、未聚焦、未声明无效时才有；悬停落在整个输入面（覆盖在分段上的真实输入）上。
+          "group-not-has-[input:disabled]/otp:group-not-has-[input:read-only]/otp:group-not-has-[input:focus-visible]/otp:group-not-has-[input[aria-invalid=true]]/otp:group-hover/otp:border-border-strong",
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
         )}
       >{characters[index] ?? ""}</span>)}
@@ -190,7 +192,8 @@ export function OtpField({
         }}
       />
     </div>
-    {props.readOnly && <span data-slot="otp-field-readonly" className="text-support text-muted-foreground">{messages.readOnly}</span>}
+    {/* 只读说明与 Textarea、NumberField 同一件事、同一档字（caption），在格子外下方；只读本身由 input 的 readonly 向读屏表达，故 aria-hidden。 */}
+    {props.readOnly && <span data-slot="otp-field-readonly" aria-hidden="true" className="text-caption text-muted-foreground">{messages.readOnly}</span>}
     {feedback && <div id={feedbackId} data-slot="otp-field-feedback" role="status" className="text-support-mobile text-muted-foreground sm:text-support">{messages.otpLengthExceeded(length)}</div>}
   </div>;
 }

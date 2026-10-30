@@ -1,9 +1,9 @@
 # Collapsible
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
-Source SHA-256: 464332e8cb94b91e8854df37c5d5d3c696dee2af73bd1c3695a6beaa19f5e66a
+Source SHA-256: 12c54767186d874e7c90f740a8b425bbaaaebbfdf1bb31ea2123aeb2b8f77b7e
 
 Reveal additional content for the same object.
 
@@ -12,7 +12,9 @@ Relate the named trigger to one content region. Retain input by default; closing
 
 ## Notes
 - Use Accordion for a group of expandable sections.
+- CollapsiblePanel defaults to keepMounted: closed content stays in the DOM, so typed values and native fields are not lost; the cost is that closed content remains in the document tree. Set keepMounted={false} when the content need not retain values, and hiddenUntilFound when find-in-page should match it.
 - Closing establishes no cancellation, undo, or save result.
+- With a coarse pointer the hit area grows to the touch target; the visible size does not change.
 
 ## Use and ownership
 - One object has supplementary content to disclose deliberately.
@@ -33,7 +35,8 @@ Relate the named trigger to one content region. Retain input by default; closing
 - Collapsible: function; owner collapsible; PASS; props: CollapsiblePrimitive.Root.Props
 - CollapsiblePanel: function; owner collapsible; PASS; props: CollapsiblePrimitive.Panel.Props
 - CollapsiblePrimitive: reexport; owner collapsible; UNVERIFIED
-- CollapsibleTrigger: function; owner collapsible; PASS; props: CollapsiblePrimitive.Trigger.Props
+- CollapsibleTrigger: function; owner collapsible; PASS; props: CollapsibleTriggerProps
+- CollapsibleTriggerProps: type; owner collapsible; PASS
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -47,7 +50,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
 ### CollapsibleTrigger
-- no props declared by this library
+- `indicator?`: `boolean`. 是否显示尾部展开箭头，默认显示。设为 false 时触发器只剩文字（预设：二值，不接受自定义图标，因为箭头的旋转由 DisclosureIcon 与展开态绑定）。
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -65,7 +68,8 @@ Expansion state for one section.
 - disabled: boolean. Disable toggling.
 
 ### CollapsibleTrigger
-Defaults to quiet Button; supports primitive render, refs, and events.
+An inline expand entry of text plus a trailing arrow; supports primitive render, refs, and events.
+- indicator: boolean; default true. Whether the trailing arrow shows. With false only the text remains; the trigger's name, keyboard behavior and aria-expanded are unchanged. Use render for a fully custom form.
 
 ### CollapsiblePanel
 Associated content and retention policy.
@@ -98,5 +102,18 @@ import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/u
 export const meta = { title: "页内查找", titleEn: "Find in page" };
 export default function CollapsibleDemo() {
   return <Collapsible className="w-full max-w-sm"><CollapsibleTrigger>更新记录</CollapsibleTrigger><CollapsiblePanel hiddenUntilFound>修正了导出时丢失表头的问题，并让大文件的进度可以取消。</CollapsiblePanel></Collapsible>;
+}
+```
+
+### 无箭头
+Source: apps/docs/src/content/collapsible/demos/03-no-indicator.tsx
+```tsx
+import { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "@qingye_lab/ui/components/collapsible";
+import { useUILocale } from "@qingye_lab/ui/locale";
+export const meta = { title: "无箭头", titleEn: "Without arrow" };
+export default function CollapsibleNoIndicatorDemo() {
+  const { code } = useUILocale();
+  const en = code.startsWith("en");
+  return <Collapsible className="w-full max-w-sm"><CollapsibleTrigger indicator={false}>{en ? "Show more" : "查看更多"}</CollapsibleTrigger><CollapsiblePanel>{en ? "Additional content for the same object." : "同一对象的补充内容。"}</CollapsiblePanel></Collapsible>;
 }
 ```

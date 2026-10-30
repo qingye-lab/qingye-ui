@@ -19,3 +19,15 @@ export const candidateItemClassName = "min-h-(--qy-fill-height-narrow) sm:min-h-
  * 有候选时元素为空，不占任何空间（不改 display，保留原语的播报）。
  */
 export const candidateEmptyClassName = "text-control-md-mobile sm:text-control-md text-muted-foreground wrap-break-word not-empty:m-(--qy-overlay-inset) not-empty:px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] not-empty:py-[calc((var(--qy-fill-height-narrow)-var(--qy-text-control-md-mobile-leading))/2)] sm:not-empty:py-[calc((var(--qy-fill-height)-var(--qy-text-control-md-leading))/2)]";
+
+/*
+ * 命令项（Menu、Command）的帧：整行宽、文字起点与同档带框控件的文字起点同一条竖线（内缘 − 浮层内缩）。
+ * 命令项高度跟随按钮尺寸档，所以按档给内缘；候选项见 candidateItemClassName。
+ */
+export const commandItemFrame = {
+  xs: "w-full justify-start px-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+  sm: "w-full justify-start px-[calc(var(--qy-control-sm-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+  md: "w-full justify-start px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+  lg: "w-full justify-start px-[calc(var(--qy-control-lg-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+  xl: "w-full justify-start px-[calc(var(--qy-control-xl-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+} as const;

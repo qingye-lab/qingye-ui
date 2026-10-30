@@ -2,7 +2,7 @@ import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标题、段落、列表与引用", titleEn: "Headings, paragraphs, lists and quotes" } satisfies DemoMeta;
 export default function Demo() {
-  return <Prose>
+  return <Prose framed>
     <h2>同步失败时，数据会怎样</h2>
     <p>每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。如果在写入 <strong>1,284</strong> 条记录的过程中网络中断，已经写入的部分会保留，未写入的部分留到下一次同步——不会因为一次失败就清空整个集合。</p>
     <h3>重试与核实</h3>

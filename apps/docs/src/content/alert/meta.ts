@@ -53,7 +53,12 @@ export default {
           "name": "tone",
           "type": "\"neutral\" | \"info\" | \"warning\" | \"danger\" | \"success\"",
           "default": "\"neutral\"",
-          "description": "已声明事实的语义颜色，不推断结果。", descriptionEn: "Semantic colors for declared facts, without inferring outcomes."
+          "description": "已声明事实的类别。色相之外还有形状不同的默认图标，与只给读屏的类别前缀（「警告：」等，随语言）；neutral 无类别，两者都没有。去掉图标不去掉前缀。", descriptionEn: "The declared kind of fact. Besides hue there is a default icon of a distinct shape and a screen-reader-only category prefix (\"Warning: \" and so on, per locale); neutral has no category and neither. Removing the icon does not remove the prefix."
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode | false",
+          "description": "类别图标。省略时 info、warning、danger、success 各有形状不同的默认图标（圆、三角、八角、圆加勾），neutral 没有；传节点则替换；false 不放图标。", descriptionEn: "Category icon. Omitted: info, warning, danger and success each get a default icon of a different shape (circle, triangle, octagon, circle with check); neutral has none. A node replaces it; false places no icon."
         },
         {
           "name": "role",

@@ -182,3 +182,34 @@ test("pasted files follow the same rules; pasted text, a text control inside, an
   fireEvent.paste(container.querySelector("input[type=file]")!, { clipboardData: { files: [file("D.txt")], types: ["Files"] } });
   expect(rejected).toHaveBeenCalledOnce();
 });
+
+test("required blocks submission until a File is accepted, reaches Field validity, and does not apply while read-only", async () => {
+  const selected = file("A.txt");
+  render(<form><Field name="files"><FieldLabel>文件</FieldLabel><FileUpload required /><FieldError match="customError" /></Field><button>提交</button></form>);
+  const input = screen.getByLabelText("文件") as HTMLInputElement;
+  expect(input).toHaveAttribute("aria-required", "true");
+  expect(input.checkValidity()).toBe(false);
+  expect(input.validationMessage).toBe("请选择文件");
+  await userEvent.upload(input, selected);
+  await waitFor(() => expect(input.checkValidity()).toBe(true));
+  await userEvent.click(screen.getByRole("button", { name: "移除 A.txt" }));
+  await waitFor(() => expect(input.checkValidity()).toBe(false));
+});
+
+test("an empty required FileUpload is not validated while read-only or disabled", () => {
+  const { rerender } = render(<FileUpload required readOnly inputProps={{ "aria-label": "文件" }} />);
+  expect((screen.getByLabelText("文件") as HTMLInputElement).checkValidity()).toBe(true);
+  rerender(<FileUpload required disabled inputProps={{ "aria-label": "文件" }} />);
+  expect((screen.getByLabelText("文件") as HTMLInputElement).checkValidity()).toBe(true);
+});
+
+test("an empty required FileUpload stops the browser's submit; a declared Field invalid state still reaches the input", async () => {
+  const submit = vi.fn((event: React.FormEvent) => event.preventDefault());
+  render(<form onSubmit={submit}><Field name="files" invalid><FieldLabel>文件</FieldLabel><FileUpload required /><FieldError>请选择文件</FieldError></Field><button>提交</button></form>);
+  await userEvent.click(screen.getByRole("button", { name: "提交" }));
+  expect(submit).not.toHaveBeenCalled();
+  expect(screen.getByLabelText("文件")).toHaveAttribute("aria-invalid", "true");
+  await userEvent.upload(screen.getByLabelText("文件"), file("A.txt"));
+  await userEvent.click(screen.getByRole("button", { name: "提交" }));
+  expect(submit).toHaveBeenCalledOnce();
+});

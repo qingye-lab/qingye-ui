@@ -230,6 +230,7 @@ These practices have no acceptable presentation rationale. Lack of a better solu
 | NG10 | Use hue without a semantic category | Removing the hue loses none of danger, warning, success, information, a data series, or brand |
 | NG11 | Mark one region with more than one mechanism | Removing one of line, fill, or shadow leaves the region equally clear |
 | NG12 | Decorative surfaces: gradients, textures, shadows within one plane | Removing them leaves understanding, layering, and operation unchanged |
+| NG13 | Sidebar navigation deeper than two levels, or a separate navigation for narrow screens | A second-level sidebar entry still has expandable entries; the third level belongs in the content area as tabs or in-page navigation, and narrow screens carry the same tree in a drawer |
 
 ### Copy
 

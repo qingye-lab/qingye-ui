@@ -93,3 +93,16 @@ test("the consequence is the dialog's description; the entry is a plain button t
   await waitFor(() => expect(dialog).toHaveAccessibleDescription(snapshot.consequence));
   expect(within(dialog).getByText(snapshot.consequence)).toHaveAttribute("data-slot", "alert-dialog-description");
 });
+
+test("while loading, Esc and the back button cannot close the dialog; once loading ends they can", async () => {
+  const user = userEvent.setup();
+  const onOpenChange = vi.fn();
+  const props = { snapshot, title: "核对变更", triggerLabel: "核对 A", actionLabel: "应用 B", onConfirm: () => {}, onOpenChange };
+  const { rerender } = render(<ConfirmAction {...props} defaultOpen loading />);
+  expect(screen.getByRole("button", { name: "返回" })).toBeDisabled();
+  await user.keyboard("{Escape}");
+  expect(screen.getByRole("alertdialog")).toBeInTheDocument();
+  rerender(<ConfirmAction {...props} defaultOpen loading={false} />);
+  await user.keyboard("{Escape}");
+  await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument());
+});

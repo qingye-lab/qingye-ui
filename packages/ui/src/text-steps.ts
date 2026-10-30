@@ -45,6 +45,7 @@ export const TEXT_STEPS = [
   "caption",
   "caption-strong",
   "label",
+  "label-mobile",
   "metric",
   "metric-lg",
   "micro",

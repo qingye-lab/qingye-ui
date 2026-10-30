@@ -3,8 +3,8 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   "title": "长文 Prose",
   "titleEn": "Prose",
-  "description": "给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认自带一张阅读纸；页面已经有纸时去掉。",
-  "descriptionEn": "Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.",
+  "description": "给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认只排版、不带框；文章独自成篇、没有承载面时用 framed 给它一张阅读纸。",
+  "descriptionEn": "Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It only typesets by default, with no frame; give it a reading paper with framed when the article stands alone with no surface of its own.",
   "category": "排版",
   "layer": "foundation",
   "source": "local",
@@ -30,8 +30,8 @@ export default {
     "composition": [
       "children 是渲染器产出的原生元素树，或经审查的 dangerouslySetInnerHTML；Prose 只加一层 className。",
       "文章里直接放库组件：带 data-slot 的元素及其内部不排版。自己画的一段内容加上 data-slot，就声明了它不是正文。",
-      "div、section 这类容器子块不进入。要让容器里的标题与段落也成文，用 render 把这个容器本身做成一篇 framed={false} 的 Prose。",
-      "页面已经有承载面（Card、文档站的纸）时用 framed={false}：只排版，不再画第二张纸；栏宽与内缘读 --qy-prose-column、--qy-prose-inset，承载面可以取同一组值。",
+      "div、section 这类容器子块不进入。要让容器里的标题与段落也成文，用 render 把这个容器本身做成一篇 Prose。",
+      "页面已经有承载面（Card、文档站的纸）时保持默认（不带框）：只排版，不再画第二张纸；栏宽与内缘读 --qy-prose-column、--qy-prose-inset，承载面可以取同一组值。文章独自成篇、没有承载面时才设 framed。",
       "h1 与紧随的一段导语放进 header：两者相隔一个字段间距，导语读淡墨。",
       "表格读与 Table 组件相同的视觉规则（清染表头/表尾、行高、数字列等宽），行内代码读 Typography 的 Code 规则，链接读 Link 的 linkClassName，不另起一套画法。"
     ],
@@ -62,8 +62,8 @@ export default {
     "composition": [
       "Children are the renderer's native element tree, or reviewed dangerouslySetInnerHTML; Prose only adds one className.",
       "Place library components directly in an article: an element carrying data-slot, and everything inside it, is not typeset. Put data-slot on a block you draw yourself to declare that it is not running text.",
-      "Container children such as div and section are not entered. To typeset the headings and paragraphs inside one, make that container itself a Prose with framed={false} through render.",
-      "Where the page already has a surface (a Card, the documentation paper) use framed={false}: it only typesets and draws no second paper; the column and inset come from --qy-prose-column and --qy-prose-inset, so the surface can read the same values.",
+      "Container children such as div and section are not entered. To typeset the headings and paragraphs inside one, make that container itself a Prose through render.",
+      "Where the page already has a surface (a Card, the documentation paper) keep the default (no frame): it only typesets and draws no second paper; the column and inset come from --qy-prose-column and --qy-prose-inset, so the surface can read the same values. Set framed only when the article stands alone with no surface of its own.",
       "Put the h1 and the lead paragraph that follows it in a header: they sit one field gap apart and the lead reads in muted ink.",
       "Tables read the same visual rules as the Table component (washed header/footer bands, row height, tabular numeric cells); inline code reads Typography's Code rule; links read Link's linkClassName — none of these get a second drawing."
     ],
@@ -89,9 +89,9 @@ export default {
         {
           "name": "framed",
           "type": "boolean",
-          "default": "true",
-          "description": "是否自带阅读纸（面、清墨线、圆角、内缘与栏宽上限）。false 时只排版，纸由所在的承载面负责。",
-          "descriptionEn": "Whether it brings its own reading paper (surface, hairline, radius, inset and column limit). When false it only typesets and the surrounding surface is the paper."
+          "default": "false",
+          "description": "是否自带阅读纸（面、清墨线、圆角、内缘与栏宽上限）。默认 false，只排版，纸由所在的承载面负责（不要盒装样本、不要多余的框）；独自成篇时设为 true。",
+          "descriptionEn": "Whether it brings its own reading paper (surface, hairline, radius, inset and column limit). False by default: it only typesets and the surrounding surface is the paper (no boxed specimens, no redundant frames); set true when the article stands alone."
         },
         {
           "name": "render / ref / className / style / 原生属性",

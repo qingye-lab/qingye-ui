@@ -1,9 +1,9 @@
 # 选择器 Select
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
+Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
 
 从可收起的候选列表中取一个值。
 
@@ -12,8 +12,10 @@ Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
 
 ## Notes
 - FieldLabel 命名触发器，FieldError 关联错误；SelectGroupLabel 命名候选分组。
-- null 是未选择，空字符串和 0 可作为候选；原生表单可能把 null 与空字符串都序列化为空。
-- 只读保留当前值，禁用项不能选取。
+- null 是未选择，空字符串（""）和 0 都是合法的候选值。选了值为 "" 的候选，触发器显示它的 label，不显示占位，data-placeholder 也不出现；null 才显示占位。用 "" 表示「不限」「无」这类真实选项时，要在 items 里给它可读的 label。注意原生表单会把 null 与 "" 都序列化为空字符串，服务端需要区分时用别的值，或在应用侧另存选择与否。
+- 只读保留当前值并在触发器上给出「只读」说明，禁用项不能选取。
+- 触发器默认不拉满容器；要拉满时给 SelectTrigger className="w-full"。没有 items 时无法预知候选名称，宽度只随当前显示的内容。
+- 候选来自请求时：用 loading 表示请求中，用 error 放入失败说明与重试动作；没有子项且二者皆无才显示「没有可选项」。
 - 自身 Positioner 消费共享 popup 层级，父工作面内候选高于该工作面；positionerProps 保留调用方 style/ref/render。
 
 ## Use and ownership
@@ -53,7 +55,8 @@ Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Select
-- no props declared by this library
+- `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
+- `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
 - plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
 
 ### SelectGroup
@@ -69,6 +72,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 273, @base-ui/react 8); not expanded, see the installed declarations
 
 ### SelectPopup
+- `emptyContent?`: `React.ReactNode`. 没有子项时的说法；省略时用内置的「没有可选项」。应用若要说明查询对象，在这里给出。
 - `positionerProps?`: `SelectPrimitive.Positioner.Props`.
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
@@ -87,6 +91,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- Context ItemLabels: without a provider default-value; provided by Select
+- Context SourceState: without a provider default-value; provided by Select
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -94,11 +100,13 @@ Written descriptions; the list above is the type-resolved fact.
 ### Select
 单值状态与表单语义。
 - value / defaultValue: Value | null. 受控值或真实初值，null 是未选择。省略初值不会选第一项。
-- items: Record<string, ReactNode> | {value, label}[] | Group[]. 当前值的名称映射；显式空字符串候选也要提供可读 label。
+- items: Record<string, ReactNode> | {value, label}[] | Group[]. 值到名称的映射；显式空字符串候选也要提供可读 label。触发器宽度由其中最长的名称决定，选另一项时不会伸缩。
 - onValueChange: (value, eventDetails) => void. 选择变化，可取消；不因高亮移动而改变值。
 - name / form / inputRef / autoComplete: Base UI Root props. 保留原语隐藏输入、表单与自动填充入口。
 - disabled / readOnly / required: boolean; default false. 交互限制与原生约束；invalid 由 Field 或触发器显式 ARIA 声明。
 - open / defaultOpen / onOpenChange: Base UI Root props. 受控或非受控展开，取消返回与选择值分开。
+- loading: boolean; default false. 应用正在取候选的事实：触发器与列表标 aria-busy，候选面显示等待记号与「正在加载」，不显示「没有可选项」。组件不发请求。
+- error: ReactNode. 取候选失败时由应用给出的内容，可含说明与重试动作；候选面以 role="alert" 摆放。组件不推断失败，也不写原因。
 - modal: boolean; default false. 默认允许其余字段交互；可按承载任务显式改变。
 - itemToStringLabel / itemToStringValue / isItemEqualToValue: Base UI Root props. 对象候选的名称、序列化与相等关系。
 
@@ -115,6 +123,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### SelectPopup
 Portal、定位、面板与可滚动 List 的共同组合。
 - side / align / sideOffset / alignOffset: Base UI positioning props; default "bottom" / "start" / 0. 默认贴锚点，不覆盖触发器；由原语处理空间碰撞。
+- emptyContent: ReactNode; default locale.selectEmpty. 没有子项时的说法；候选来自查询时，说明查询对象。加载与失败时不显示。
 - alignItemWithTrigger: boolean; default false. 显式选择是否以选中项对齐并覆盖触发器。
 - container: HTMLElement | ShadowRoot | RefObject | null. Portal 容器；局部主题、语言或密度需由调用方提供正确继承环境。
 - positionerProps: SelectPrimitive.Positioner.Props. 自身公开定位层的 ref/render/事件/样式透传；调用方 style 最后合并。
@@ -260,6 +269,49 @@ export default function Demo() {
         </Select>
       </Field>
     </FieldGroup>
+  );
+}
+```
+
+### 候选的来源
+Source: apps/docs/src/content/select/demos/03-source.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+
+export const meta = { title: "候选的来源", titleEn: "Where candidates come from" };
+
+type Source = "ready" | "loading" | "failed" | "none";
+const sources: { id: Source; label: string }[] = [
+  { id: "ready", label: "有候选" },
+  { id: "loading", label: "加载中" },
+  { id: "failed", label: "取得失败" },
+  { id: "none", label: "没有候选" },
+];
+const regions = [{ value: "cn", label: "中国大陆" }, { value: "hk", label: "中国香港" }, { value: "sg", label: "新加坡" }];
+
+export default function Demo() {
+  const [retried, setRetried] = useState(0);
+  return (
+    <div className="grid w-full grid-cols-4 items-start gap-(--qy-space-4)">
+      {sources.map(source => (
+        <Field key={source.id}>
+          <FieldLabel>{source.label}</FieldLabel>
+          <Select
+            items={source.id === "ready" ? regions : []}
+            loading={source.id === "loading"}
+            error={source.id === "failed" ? <><span>区域列表没有取到。</span><Button size="sm" variant="quiet" onClick={() => setRetried(count => count + 1)}>重试{retried > 0 ? `（${retried}）` : ""}</Button></> : undefined}
+          >
+            <SelectTrigger />
+            <SelectPopup>
+              {source.id === "ready" && regions.map(region => <SelectItem key={region.value} value={region.value}>{region.label}</SelectItem>)}
+            </SelectPopup>
+          </Select>
+        </Field>
+      ))}
+    </div>
   );
 }
 ```

@@ -34,7 +34,7 @@ describe("AsyncContent", () => {
     expect(screen.getByRole("checkbox")).toBeChecked();
     expect(input.closest("[data-slot=async-content-body]")).toHaveAttribute("aria-busy", "true");
     expect(screen.getByRole("status").closest('[aria-busy="true"]')).toBeNull();
-    view.rerender(<AsyncContent status="error" hasContent emptyContent="没有记录" errorContent={<div role="alert">刷新失败，保留上次结果</div>}>{content}</AsyncContent>);
+    view.rerender(<AsyncContent status="error" hasContent emptyContent="没有记录" errorContent={<div>刷新失败，保留上次结果</div>}>{content}</AsyncContent>);
     expect(input).toHaveFocus();
     expect(input).toHaveValue("未保存的草稿");
     expect(screen.getByRole("checkbox")).toBeChecked();
@@ -47,6 +47,21 @@ describe("AsyncContent", () => {
     expect(screen.getByRole("textbox")).toHaveAttribute("readonly");
     expect(screen.getByRole("textbox")).toHaveValue("可用数据");
     expect(screen.getByRole("alert")).toHaveTextContent("附件加载失败");
+  });
+
+  it("announces failure as an alert and keeps feedback behind the content so the content is not pushed", () => {
+    const content = <p>可用数据</p>;
+    const view = render(<AsyncContent status="success" hasContent emptyContent="没有记录" errorContent="失败">{content}</AsyncContent>);
+    const body = screen.getByText("可用数据").closest("[data-slot=async-content-body]")!;
+    view.rerender(<AsyncContent status="pending" hasContent emptyContent="没有记录">{content}</AsyncContent>);
+    expect(screen.getByRole("status")).toHaveTextContent("正在加载");
+    expect(body.compareDocumentPosition(screen.getByRole("status")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    view.rerender(<AsyncContent status="error" hasContent emptyContent="没有记录" errorContent="刷新失败">{content}</AsyncContent>);
+    expect(screen.getByRole("alert")).toHaveTextContent("刷新失败");
+    expect(body.compareDocumentPosition(screen.getByRole("alert")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // 同一个节点，没有因为反馈出现而重排或重挂。
+    expect(screen.getByText("可用数据").closest("[data-slot=async-content-body]")).toBe(body);
   });
 
   it("localizes default loading and forwards the actual element props", () => {

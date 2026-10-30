@@ -17,6 +17,8 @@ import { cn } from "../utils";
  *   单元格垂直居中；单元格里的控件贴行盒顶部（vertical-align:middle 按 x 高度定位会落在小数上）。
  * - 分离边框（材有美）：border-collapse 让相邻单元格共用一条 1px 线，浏览器把它劈成两个半像素。
  * - 墨分五色：表头是列的名字，13px 浓墨；数据是焦墨。行标题靠位置识别，不加字重（强调是稀缺资源）。
+ * - 长内容在数据格（含行标题）里允许任意位置折行（wrap-anywhere）：一串没有空格的长标识符不能把列撑出纸外，
+ *   读者宁可读到折开的整串，也不要被裁掉或要横向滚动才见全貌。列标题仍单行；截断（ellipsis）是列的显式选择，不受影响。
  */
 const cellX = "px-[calc(var(--qy-panel-gap)/2)] first:ps-(--qy-panel-padding) last:pe-(--qy-panel-padding)";
 
@@ -62,7 +64,8 @@ export function TableContainer({ framed = true, render, className, ref, ...props
   const named = props["aria-label"] != null || props["aria-labelledby"] != null;
   const borrowed = scrollable && !named ? tableName : {};
   const region = scrollable && (named || borrowed.labelledby !== undefined || borrowed.label !== undefined);
-  return useRender({ defaultTagName: "div", render, ref: [element, ref ?? null], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined, className: cn("min-w-0 max-w-full overflow-x-auto outline-none", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
+  // relative：容器是单元格里绝对定位内容（sr-only 等）的定位参照。否则它们以容器外的祖先为参照，逃出横向滚动的裁剪，把整页撑宽。
+  return useRender({ defaultTagName: "div", render, ref: [element, ref ?? null], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined, className: cn("relative min-w-0 max-w-full overflow-x-auto outline-none", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
 }
 export type TableProps = useRender.ComponentProps<"table">;
 export function Table({ render, className, ...props }: TableProps) {
@@ -73,9 +76,18 @@ export type TableCaptionProps = useRender.ComponentProps<"caption">;
 export function TableCaption({ render, className, ...props }: TableCaptionProps) {
   return useRender({ defaultTagName: "caption", render, props: mergeProps({ "data-slot": "table-caption", className: cn("px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap) text-start text-body-strong text-foreground wrap-anywhere", className) }, props) });
 }
-export type TableHeaderProps = useRender.ComponentProps<"thead">;
-export function TableHeader({ render, className, ...props }: TableHeaderProps) {
-  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", className: cn("[&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
+export type TableHeaderProps = useRender.ComponentProps<"thead"> & {
+  /**
+   * 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器：
+   * 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height，
+   * 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。
+   * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。
+   * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
+   */
+  sticky?: boolean;
+};
+export function TableHeader({ render, className, sticky = false, ...props }: TableHeaderProps) {
+  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", "data-sticky": sticky || undefined, className: cn(sticky && "sticky top-0 z-[1] bg-surface", "[&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
 }
 export type TableBodyProps = useRender.ComponentProps<"tbody">;
 export function TableBody({ render, className, ...props }: TableBodyProps) {
@@ -89,16 +101,23 @@ export type TableRowProps = useRender.ComponentProps<"tr">;
 export function TableRow({ render, className, ...props }: TableRowProps) {
   return useRender({ defaultTagName: "tr", render, props: mergeProps({ "data-slot": "table-row", className: cn("h-(--qy-row-default) [&>*]:border-b [&>*]:border-border", className) }, props) });
 }
-export type TableHeadProps = useRender.ComponentProps<"th">;
+/**
+ * 数值列由列的调用方声明，不由内容猜：`numeric` 同时让这一列的表头与单元格在行内末端对齐（text-end，RTL 下在左）并用等宽数字——
+ * 数位对齐才能比较大小（基础层 §19）。表头与单元格必须同时声明，否则列名与数字各靠一边。
+ * 表头里的排序按钮内容反向排列（写成「列名、箭头」，显示为「箭头、列名」）：列名紧贴末端，与单元格数字的末端边是同一条线。
+ * 声明写在 data-numeric 上，供样式之外的消费者（测试、审计）读取。
+ */
+type NumericColumn = { numeric?: boolean | undefined };
+export type TableHeadProps = useRender.ComponentProps<"th"> & NumericColumn;
 /**
  * 列标题是列的名字（13px 浓墨中等字重）；行标题（scope="row"）是正文里的一格，靠位置识别。
  * 列标题里放排序用的小号无框按钮时，按钮向两侧让出自己的内缘，文字仍落在列缘上——
  * 一列一条边（§19）；悬停底向外伸出，不把列名推进去。
  */
-export function TableHead({ render, className, scope = "col", ...props }: TableHeadProps) {
-  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground" : "whitespace-nowrap text-label text-muted-foreground [&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)", className) }, props) });
+export function TableHead({ render, className, scope = "col", numeric = false, ...props }: TableHeadProps) {
+  return useRender({ defaultTagName: "th", render, props: mergeProps({ "data-slot": "table-head", scope, "data-numeric": numeric || undefined, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] text-start align-middle [&>[data-slot]]:align-top", scope === "row" ? "text-body font-normal text-foreground wrap-anywhere" : "whitespace-nowrap text-label text-muted-foreground [&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)", numeric && "text-end numeric [&_[data-slot=button-content]]:flex-row-reverse", className) }, props) });
 }
-export type TableCellProps = useRender.ComponentProps<"td">;
-export function TableCell({ render, className, ...props }: TableCellProps) {
-  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle [&>[data-slot]]:align-top", className) }, props) });
+export type TableCellProps = useRender.ComponentProps<"td"> & NumericColumn;
+export function TableCell({ render, className, numeric = false, ...props }: TableCellProps) {
+  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", "data-numeric": numeric || undefined, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle wrap-anywhere [&>[data-slot]]:align-top", numeric && "text-end numeric", className) }, props) });
 }

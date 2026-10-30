@@ -3,27 +3,57 @@ import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
+import { useDirection } from "@base-ui/react/direction-provider";
+import { useMediaQuery } from "../hooks/use-media-query";
 import { Button, type ButtonProps } from "./button";
 import { CornerMark } from "./corner-mark";
+import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerPrimitive, DrawerTrigger } from "./drawer";
 import { Popover, PopoverTrigger, PopoverPopup } from "./popover";
 import { Tooltip, TooltipTrigger, TooltipPopup } from "./tooltip";
-import { DisclosureIcon } from "../disclosure";
 import { useUILocale } from "../locale";
-import { IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand } from "@tabler/icons-react";
+import { IconChevronRight, IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand, IconMenu2, IconX } from "@tabler/icons-react";
 import { cn } from "../utils";
+import { useWorkspaceSidebarHandle } from "../sidebar-handle";
 
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
 type SidebarState = {
   collapsed: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
   toggle: React.RefObject<HTMLButtonElement | null>; content: React.RefObject<HTMLElement | null>; contentFocused: React.RefObject<boolean>;
   change(event: React.MouseEvent): void;
+  /** 侧栏正承载在窄屏抽屉里（见 Sidebar 的 drawer）：永远展开，收起按钮换成关闭，点去往新页面的条目后关闭抽屉。 */
+  inDrawer: boolean; closeDrawer: (() => void) | null;
 };
 const SidebarContext = React.createContext<SidebarState | null>(null);
+/** 是否位于展开态二级面板的引导线之内；条目据此让出与引导线的间隔（见 SidebarSubContent）。 */
+const InSubPanel = React.createContext(false);
+/** 面板之上的父项是否带图标：引导线从图标中心垂下，没有图标时从父项文字的起笔垂下（见 SidebarSubContent）。 */
+const SubTriggerHasIcon = React.createContext(true);
+/** 引导线之内的条目：左内缩 = 半个图标 − 线宽，文字仍落在父项文字之下（推导见 SidebarSubContent）。 */
+const subItemPadding = "ps-[calc(var(--qy-control-md-icon)/2-var(--qy-line-width))] pe-(--qy-control-sm-padding)";
+/** 已在某个 SidebarSub 之内：侧栏最多两级，再出现 SidebarSub 即第三级（见 SidebarSub）。 */
+const InSubTree = React.createContext(false);
 function useSidebar() { const context = React.useContext(SidebarContext); if (!context) throw new Error("Sidebar parts require Sidebar."); return context; }
-export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void };
+export type SidebarProps = useRender.ComponentProps<"div"> & {
+  collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;
+  /**
+   * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。
+   * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
+   */
+  drawer?: boolean;
+  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。 */
+  drawerHandle?: DrawerPrimitive.Handle<unknown>;
+};
 /**
- * 侧栏铺底纸色，当前项是叠在这张底上的选中面（--qy-surface-selected，用户裁决 2026-10-12：选中色在全库
- * 只有一种，且与底色有关系）：选中面是墨的透明叠合，叠在侧栏自己的底上总比底深一级，悬停是同一级（悬停不深于选中）。
+ * 侧栏铺底纸色，悬停与当前项是叠在这张底上的两级墨面（用户裁决 2026-10-30，推翻 2026-10-12 的
+ * 「悬停 = 选中同一级」与「当前项不改字重」）：
+ * - 悬停：--qy-sidebar-accent（全库悬停面，一级清染），字加深到焦墨；
+ * - 当前：--qy-sidebar-current（一级清墨，比悬停深一级），字为焦墨并加到中等字重。
+ * 此前两者同为一级清染、字同为焦墨：指针停在哪一行，那一行就和当前项一模一样，读者分不清「我在哪」和
+ * 「我要去哪」。导航列表的首要任务是回答「我在哪」，所以当前项要同时在两个通道上胜过悬停：面更深一级，
+ * 字更重一档。字重是不靠颜色的第二信号——一级清墨的面与底的对比远不到非文字对比的 3:1，
+ * 只靠面，弱视或低质量屏幕上的读者可能认不出当前项（WCAG 1.4.1 / 1.4.11 的用意）。
+ * 这与 GitHub Primer NavList、Fluent 导航、Linear 等主流导航的做法一致：悬停浅、当前深，当前另有非颜色信号。
+ * 字重变化只发生在导航跳转时（当前项换了一行），不在悬停时，所以不会出现指针扫过时文字宽度跳动。
  * 底纸写在侧栏自身，当前项的关系不依赖调用方放在哪里。收起是右上角的图标按钮。
  *
  * 当前项的面因此是一个角色（--qy-sidebar-current，选中面的别名），不写死在组件里，也不随承载面改写：
@@ -35,7 +65,7 @@ export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boo
  * 同一范围的重复表达。用户的规则是：直的墨线与圆角的填充面不在同一个条目上并用；只用线（Toc、Tabs）可以，
  * 只用圆角填充面（侧栏当前项）也可以。
  * 二级条目左侧本来就有 SidebarSubContent 的引导线，那条线表达「这几行属于哪个父项」，
- * 当前项不再加深它；字重也不变。
+ * 当前项不再加深它。
  *
  * 收起不是消失，是变成一列图标（rail）：宽度 = 一个填值控件高 + 两侧内缩（基础层 §2、§4），
  * 恰好等于收起按钮本身的宽度——rail 的列宽由已有的「图标形按钮」几何给出，不另造一套尺寸。
@@ -43,16 +73,49 @@ export type SidebarProps = useRender.ComponentProps<"aside"> & { collapsed?: boo
  * 文字在同一次渲染里切到 sr-only（视觉隐藏、可访问名称仍在），不随宽度一起渐变，
  * 避免过渡途中出现换行或文字被压缩的跳动。
  */
-export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange, render, className, ...props }: SidebarProps) {
-  const [local, setLocal] = React.useState(defaultCollapsed); const current = collapsed ?? local; const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
-  const context: SidebarState = { collapsed: current, contentId, defaultContentId, setContentId, toggle, content, contentFocused, change(event) { let canceled = false; onCollapsedChange?.(!current, { event, cancel() { canceled = true; } }); if (!canceled && collapsed === undefined) setLocal(!current); } };
-  const element = useRender({ defaultTagName: "aside", render, props: mergeProps({ "data-slot": "sidebar", "data-collapsed": current, className: cn("flex min-w-0 max-w-full flex-col gap-(--qy-field-gap) overflow-x-hidden bg-sidebar text-body transition-[width,padding] duration-(--qy-duration-base) ease-(--qy-ease-out) motion-reduce:transition-none data-[collapsed=true]:w-[calc(var(--qy-fill-height)+2*var(--qy-overlay-inset))] data-[collapsed=true]:px-(--qy-overlay-inset)", className) }, props) });
-  return <SidebarContext.Provider value={context}>{element}</SidebarContext.Provider>;
+export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange, drawer = false, drawerHandle, render, className, ...props }: SidebarProps) {
+  const { messages } = useUILocale();
+  const [local, setLocal] = React.useState(defaultCollapsed); const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
+  const narrow = useMediaQuery("max-sm"); const direction = useDirection(); const workspaceHandle = useWorkspaceSidebarHandle(); const handle = drawerHandle ?? workspaceHandle;
+  const inDrawer = drawer && narrow; const [drawerOpen, setDrawerOpen] = React.useState(false);
+  // 变宽回到原位后抽屉卸下；下次再变窄时不能带着旧的「开」状态自己弹出来。
+  React.useEffect(() => { if (!inDrawer) setDrawerOpen(false); }, [inDrawer]);
+  if (drawer && !handle) throw new Error("Sidebar drawer requires a Workspace ancestor or a drawerHandle shared with SidebarDrawerTrigger.");
+  // 抽屉里没有「收起成 rail」这回事：宽度由抽屉给，永远展开。
+  const current = inDrawer ? false : collapsed ?? local;
+  const context: SidebarState = {
+    collapsed: current, contentId, defaultContentId, setContentId, toggle, content, contentFocused,
+    inDrawer, closeDrawer: inDrawer ? () => setDrawerOpen(false) : null,
+    change(event) { let canceled = false; onCollapsedChange?.(!current, { event, cancel() { canceled = true; } }); if (!canceled && collapsed === undefined) setLocal(!current); },
+  };
+  // 外层是不产生地标的 div：侧栏里的导航由 SidebarNav 的 <nav>（带名称）作地标；再包一层 <aside> 会让读屏的地标表多出
+  // 一个无名的「补充内容」，而主导航不是页面的补充内容（ARIA complementary 的定义）。确是附属内容时用 render={<aside aria-label=… />}。
+  const element = useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar", "data-collapsed": current, className: cn("flex w-(--qy-sidebar-width) min-w-0 max-w-full flex-col gap-(--qy-field-gap) overflow-x-hidden bg-sidebar text-body transition-[width,padding] duration-(--qy-duration-base) ease-(--qy-ease-out) motion-reduce:transition-none data-[collapsed=true]:w-[calc(var(--qy-fill-height)+2*var(--qy-overlay-inset))] data-[collapsed=true]:px-(--qy-overlay-inset)", inDrawer && "bg-transparent", className) }, props) });
+  const sidebar = <SidebarContext.Provider value={context}>{element}</SidebarContext.Provider>;
+  if (!inDrawer) return sidebar;
+  // 抽屉从起始侧滑出：swipeDirection 说的是收回的方向，ltr 向左、rtl 向右。名称与侧栏的导航名称同一个。
+  return <Drawer handle={handle ?? undefined} open={drawerOpen} onOpenChange={setDrawerOpen} swipeDirection={direction === "rtl" ? "right" : "left"}>
+    <DrawerPopup aria-label={messages.sidebar}><DrawerContent>{sidebar}</DrawerContent></DrawerPopup>
+  </Drawer>;
+}
+/**
+ * 窄屏打开侧栏抽屉的按钮：一枚有名称的图标按钮（名称 messages.sidebarOpen，aria-expanded 由抽屉触发器给出）。
+ * 放在 Workspace 里任何位置（通常是 WorkspaceHeader 的第一项）即可找到外壳持有的抽屉；不在 Workspace 里时传入与 Sidebar 相同的 handle。
+ * 宽屏侧栏就在原位，按钮用 sm:hidden 隐去（与 Sidebar 的窄屏断点同一个点），不占位也不进 Tab 顺序。
+ */
+export type SidebarDrawerTriggerProps = Omit<DrawerPrimitive.Trigger.Props<unknown>, "handle"> & { handle?: DrawerPrimitive.Handle<unknown> };
+export function SidebarDrawerTrigger({ handle, render, className, children, ...props }: SidebarDrawerTriggerProps) {
+  const { messages } = useUILocale(); const workspaceHandle = useWorkspaceSidebarHandle(); const actual = handle ?? workspaceHandle;
+  if (!actual) throw new Error("SidebarDrawerTrigger requires a Workspace ancestor or a handle shared with Sidebar.");
+  return <DrawerTrigger data-slot="sidebar-drawer-trigger" aria-label={messages.sidebarOpen} {...props} handle={actual} render={render ?? <Button variant="quiet" shape="icon" />} className={state => cn("sm:hidden", typeof className === "function" ? className(state) : className)}>{children ?? <IconMenu2 aria-hidden="true" className="rtl:-scale-x-100" />}</DrawerTrigger>;
 }
 export type SidebarToggleProps = ButtonProps;
+// 无 children 时名称固定为 messages.sidebar，展开/收起只由 aria-expanded 表达（ARIA disclosure）：状态不读两遍。
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
-  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? (context.collapsed ? messages.expand : messages.collapse) : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
+  // 抽屉里没有可收起的 rail：这一格换成关闭，位置与名称（messages.close）都是关闭抽屉的通行写法。
+  if (context.inDrawer) return <div data-slot="sidebar-toggle-row" className="flex justify-end"><DrawerClose data-slot="sidebar-toggle" aria-label={messages.close} render={<Button variant="quiet" shape="icon" />} className={cn("text-muted-foreground hover:text-foreground", className)}>{children ?? <IconX aria-hidden="true" />}</DrawerClose></div>;
+  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? messages.sidebar : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
 }
 export type SidebarHeaderProps = useRender.ComponentProps<"div">;
 /**
@@ -78,7 +141,7 @@ export function SidebarTitle({ render, className, ...props }: SidebarTitleProps)
 }
 export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
-  const context = useSidebar(); const actualId = id ?? context.defaultContentId;
+  const context = useSidebar(); const { messages } = useUILocale(); const actualId = id ?? context.defaultContentId;
   React.useLayoutEffect(() => { context.setContentId(actualId); }, [actualId, context.setContentId]);
   // 回退到 Toggle 的条件是「焦点所在之处收起后不可达」，不是「侧栏收起」本身——
   // rail 仍渲染同一个条目（只是换成图标），焦点留在原地才是进退相承：改变布局不打断正在
@@ -99,14 +162,30 @@ export function SidebarContent({ id, render, className, onFocusCapture, onBlurCa
     ref: [context.content, ref ?? null],
     props: mergeProps({
       "data-slot": "sidebar-content", id: actualId,
+      // 调用方没给名称（aria-label / aria-labelledby 都没有）时用默认名称，否则多个 nav 无从区分。
+      ...(props["aria-label"] === undefined && props["aria-labelledby"] === undefined ? { "aria-label": messages.sidebar } : {}),
       className: cn("grid min-w-0 content-start gap-(--qy-field-group-gap)", className),
       onFocusCapture(event: React.FocusEvent<HTMLElement>) { context.contentFocused.current = true; onFocusCapture?.(event); },
       onBlurCapture(event: React.FocusEvent<HTMLElement>) { if (event.relatedTarget && !event.currentTarget.contains(event.relatedTarget as Node)) context.contentFocused.current = false; onBlurCapture?.(event); },
     }, props),
   });
 }
+/** 组把自己的标签 id 交给 SidebarGroupLabel 登记；有标签才有分组语义（见 SidebarGroup）。 */
+const GroupLabelContext = React.createContext<React.Dispatch<React.SetStateAction<string | null>> | null>(null);
 export type SidebarGroupProps = useRender.ComponentProps<"div">;
-export function SidebarGroup({ render, className, ...props }: SidebarGroupProps) { return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-group", className: cn("flex min-w-0 flex-col gap-fen-half", className) }, props) }); }
+/**
+ * 带标签的分组是一个 `role="group"`，名称由 `aria-labelledby` 指向 SidebarGroupLabel：读屏进入这组链接时听到
+ * 「导航 分组」，而不是一串没有归属的链接（名实相符：视觉上由标签与疏密成组，结构上也要成组）。
+ * 没有标签的分组只是排布，不加角色——一个没有名称的 group 对辅助技术没有信息。标签登记发生在提交之后，
+ * 服务端 HTML 里先没有角色。调用方自己给了 aria-label 或 aria-labelledby 时名称以调用方为准（角色仍是 group）；
+ * render 成 ul 一类自带角色的元素时，group 会盖过原生语义，需要保留列表时由调用方自己传 role。
+ */
+export function SidebarGroup({ render, className, ...props }: SidebarGroupProps) {
+  const [labelId, setLabelId] = React.useState<string | null>(null);
+  const named = props["aria-label"] !== undefined || props["aria-labelledby"] !== undefined;
+  const element = useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar-group", ...(labelId || named ? { role: "group" } : {}), ...(labelId && !named ? { "aria-labelledby": labelId } : {}), className: cn("flex min-w-0 flex-col gap-fen-half", className) }, props) });
+  return <GroupLabelContext.Provider value={setLabelId}>{element}</GroupLabelContext.Provider>;
+}
 export type SidebarFooterProps = useRender.ComponentProps<"div">;
 /**
  * 侧栏的末位：我是谁、我的命令。mt-auto 把它推到列底（内容多少都贴底，不靠调用方量高度）；
@@ -120,9 +199,11 @@ export type SidebarGroupLabelProps = useRender.ComponentProps<"p">;
  * （gap-fen-half）松十倍，疏密本身已经分得出组——删去检验：加一道线不会让分组更清楚，
  * 只是重复间距已经做到的事（NG12、疏密检验）。
  */
-export function SidebarGroupLabel({ render, className, ...props }: SidebarGroupLabelProps) {
+export function SidebarGroupLabel({ id, render, className, ...props }: SidebarGroupLabelProps) {
   const context = useSidebar();
-  return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "sidebar-group-label", className: cn("m-0 flex min-w-0 items-center gap-(--qy-control-content-gap) px-(--qy-control-sm-padding) text-support text-muted-foreground wrap-anywhere", context.collapsed ? "sr-only" : "min-h-(--qy-fill-height)", className) }, props) });
+  const generatedId = React.useId(); const actualId = id ?? generatedId; const setLabelId = React.useContext(GroupLabelContext);
+  React.useLayoutEffect(() => { setLabelId?.(actualId); return () => setLabelId?.(current => current === actualId ? null : current); }, [actualId, setLabelId]);
+  return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "sidebar-group-label", id: actualId, className: cn("m-0 flex min-w-0 items-center gap-(--qy-control-content-gap) px-(--qy-control-sm-padding) text-support text-muted-foreground wrap-anywhere", context.collapsed ? "sr-only" : "min-h-(--qy-fill-height)", className) }, props) });
 }
 export type SidebarLinkProps = useRender.ComponentProps<"a"> & { active?: boolean; icon?: React.ReactNode; count?: number; max?: number };
 /**
@@ -138,11 +219,12 @@ export type SidebarLinkProps = useRender.ComponentProps<"a"> & { active?: boolea
  */
 export function SidebarLink({ active = false, icon, count, max, render, className, children, ...props }: SidebarLinkProps) {
   const context = useSidebar();
+  const inSub = React.useContext(InSubPanel);
   const { messages } = useUILocale();
   const frame = cn(
     "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent not-aria-[current=page]:hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
-    context.collapsed ? "justify-center px-0" : "px-(--qy-control-sm-padding)",
-    active && "bg-sidebar-current text-sidebar-current-foreground",
+    context.collapsed ? "justify-center px-0" : inSub ? subItemPadding : "px-(--qy-control-sm-padding)",
+    active && "bg-sidebar-current font-medium text-sidebar-current-foreground",
     className,
   );
   const hasCount = count !== undefined && count > 0;
@@ -156,7 +238,9 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
     ? <span data-slot="sidebar-link-count" className="ms-auto shrink-0 ps-(--qy-control-content-gap) text-dense numeric text-muted-foreground">{count > (max ?? 99) ? `${max ?? 99}+` : count}</span>
     : null;
   const label = <span data-slot="sidebar-link-label" className={cn("min-w-0 flex-1 wrap-anywhere", context.collapsed && "sr-only")}>{children}</span>;
-  const element = useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "sidebar-link", "aria-current": active ? "page" : undefined, className: frame, children: <>{hostedIcon}{label}{trailingCount}</> }, props) });
+  // 抽屉里点了去往新页面的条目就关闭抽屉（客户端路由的链接常会 preventDefault 再自行跳转，所以不看 defaultPrevented；调用方要留着抽屉，用 preventBaseUIHandler）；条目若是浮层的触发器（如账户菜单，带 aria-haspopup），点它是为了打开浮层，不关。
+  const closeDrawer = context.closeDrawer && props["aria-haspopup"] === undefined ? context.closeDrawer : null;
+  const element = useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "sidebar-link", "aria-current": active ? "page" : undefined, className: frame, children: <>{hostedIcon}{label}{trailingCount}</>, onClick(event: React.MouseEvent<HTMLElement> & { baseUIHandlerPrevented?: boolean }) { if (!event.baseUIHandlerPrevented) closeDrawer?.(); } }, props) });
   if (!icon) return element;
   // Tooltip 包装始终挂载，只用 disabled 切换是否可开，不随 collapsed 整段换 DOM 结构——
   // 展开态文字已经可见，提示没有新信息（NG1），所以只在收起时允许打开；但如果直接按
@@ -177,43 +261,60 @@ export type SidebarSubProps = Omit<CollapsiblePrimitive.Root.Props, "children"> 
  * 持有；rail 下即使视觉上换成了 Popover，用户对「这组展没展开」的记忆不因收起/展开侧栏而改变。
  */
 export function SidebarSub({ className, children, ...props }: SidebarSubProps) {
-  let label: React.ReactNode = null;
-  React.Children.forEach(children, child => { if (React.isValidElement(child) && child.type === SidebarSubTrigger) label = (child.props as SidebarSubTriggerProps).children; });
-  return <SidebarSubLabelContext.Provider value={label}>
+  // 侧栏到二级为止（见上）：SidebarSub 里再放 SidebarSub 就是第三级。与本库其他结构契约一致（缺名称、缺祖先、折叠项不是链接都抛错），开发期就抛，而不是悄悄多缩进一层。
+  if (React.useContext(InSubTree)) throw new Error("Sidebar has at most two levels: SidebarSub cannot be nested inside another SidebarSub. Put the third level in the page (Tabs or a secondary nav).");
+  let label: React.ReactNode = null; let hasIcon = false;
+  React.Children.forEach(children, child => { if (React.isValidElement(child) && child.type === SidebarSubTrigger) { const props = child.props as SidebarSubTriggerProps; label = props.children; hasIcon = props.icon != null; } });
+  return <SidebarSubLabelContext.Provider value={label}><SubTriggerHasIcon.Provider value={hasIcon}><InSubTree.Provider value={true}>
     <Popover>
       <CollapsiblePrimitive.Root data-slot="sidebar-sub" {...props} className={state => cn("group/sub min-w-0", typeof className === "function" ? className(state) : className)}>
         {children}
       </CollapsiblePrimitive.Root>
     </Popover>
-  </SidebarSubLabelContext.Provider>;
+  </InSubTree.Provider></SubTriggerHasIcon.Provider></SidebarSubLabelContext.Provider>;
 }
 /**
- * 展开态复用骨法用笔的箭头画法（DisclosureIcon），不复用 disclosureTriggerClassName——那是
- * 贴着内容左缘的行内文字触发器，没有图标位、没有整行悬停；侧栏的二级入口要和 SidebarLink
- * 同一行高、同一命中区、同一悬停面，所以外框另写，只借展开箭头这一处共同画法。
+ * 外框与 SidebarLink 同一行高、同一命中区、同一悬停面（不复用 disclosureTriggerClassName——那是
+ * 贴着内容左缘的行内文字触发器，没有图标位）。
+ *
+ * 展开记号用层级的画法，不用 DisclosureIcon（用户裁决 2026-10-30）：二级是「这个地方之下还有地方」，
+ * 与 Tree 的分支同一件事，所以同一个记号——收起时朝内联结束侧（›），展开时朝下（⌄），旋转四分之一周
+ * （Apple HIG 的展开三角也是这条规则）。DisclosureIcon 的「朝下、展开后朝上」说的是内容在下方铺开
+ * （Accordion、Collapsible），用在地点层级上名实不符。
+ * 尺寸取控件图标的下一档（--qy-control-sm-icon）：它是条目图标的从属记号，与条目图标同大就会争位；
+ * 墨取装饰墨（--qy-ink-decor）：展开与否已由 aria-expanded 与露出的子项表达，记号只是提示，悬停时随字色加深。
  * rail 态完全换一套：按钮不再承担内嵌展开（否则收起侧栏会悄悄改变用户没点开过的展开记忆），
  * 只作为 Popover 的入口，悬停或聚焦都能打开；子级是否已经选中由 group-has 读取面板里的
  * aria-current，不需要再查一次 open 状态。
  */
 export function SidebarSubTrigger({ icon, className, children, ...props }: SidebarSubTriggerProps) {
   const context = useSidebar();
+  const inSub = React.useContext(InSubPanel);
   const frame = cn(
-    "group/disclosure touch-target flex w-full min-h-(--qy-fill-height) min-w-0 cursor-pointer items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset group-has-[[aria-current=page]]/sub:text-sidebar-accent-foreground",
-    context.collapsed ? "justify-center px-0" : "px-(--qy-control-sm-padding)",
+    "group/disclosure touch-target flex w-full min-h-(--qy-fill-height) min-w-0 cursor-pointer items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg:not([data-slot=sidebar-sub-icon])]:size-(--qy-control-md-icon) [&_svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset group-has-[[aria-current=page]]/sub:text-sidebar-accent-foreground",
+    context.collapsed ? "justify-center px-0" : inSub ? subItemPadding : "px-(--qy-control-sm-padding)",
     className,
   );
   const label = <span data-slot="sidebar-sub-trigger-label" className={cn("min-w-0 flex-1 text-start wrap-anywhere", context.collapsed && "sr-only")}>{children}</span>;
   // rail 态与展开态一样把调用方的属性（aria-*、data-*、事件、render）交给触发元素；入口行为与外观由本组件定。
   if (context.collapsed) return <PopoverTrigger data-slot="sidebar-sub-trigger" render={<button type="button" />} {...props as React.ComponentProps<typeof PopoverTrigger>} openOnHover delay={0} closeDelay={0} className={frame}>{icon}{label}</PopoverTrigger>;
-  return <CollapsiblePrimitive.Trigger data-slot="sidebar-sub-trigger" {...props} className={frame}>{icon}{label}<DisclosureIcon /></CollapsiblePrimitive.Trigger>;
+  return <CollapsiblePrimitive.Trigger data-slot="sidebar-sub-trigger" {...props} className={frame}>{icon}{label}<IconChevronRight aria-hidden="true" data-slot="sidebar-sub-icon" className="size-(--qy-control-sm-icon) text-ink-decor transition-[rotate,color] duration-(--qy-duration-base) ease-(--qy-ease-out) group-hover/disclosure:text-sidebar-accent-foreground group-data-[panel-open]/disclosure:rotate-90 rtl:rotate-180 rtl:group-data-[panel-open]/disclosure:rotate-90 motion-reduce:transition-none" /></CollapsiblePrimitive.Trigger>;
 }
 export type SidebarSubContentProps = CollapsiblePrimitive.Panel.Props;
-// 子项文字与父项文字同一条竖线（§19）：父项文字起点 = 左内缩 + 图标 + 控件内间隔；子项自己也带左内缩，
-// 所以面板只缩进「图标 + 控件内间隔」，子项的框从父项图标之后开始，文字落在父项文字之下。
-const subIndent = "ps-[calc(var(--qy-control-md-icon)+var(--qy-control-content-gap))]";
+// 两条关系同时成立（§19）：
+// 1. 子项文字与父项文字同一条竖线：父项文字起点 = 左内缩 + 图标 + 控件内间隔。
+// 2. 子项的面不碰引导线：线在父项图标中心（左内缩 + 半个图标），线外再隔一个控件内间隔，子项的面才开始。
+// 面板缩进 = 左内缩 + 半个图标 + 线宽 + 控件内间隔；子项自己的左内缩取两者之差 = 半个图标 − 线宽（subItemPadding）。
+// 此前子项沿用整份左内缩、面板只缩进「图标 + 控件内间隔」，面的左缘离线只剩 1px，看上去压在线上。
+// 父项没有图标时没有「图标中心」可言：线改从父项文字的起笔垂下（左内缩处），面板缩进相应去掉半个图标；
+// 关系 2 不变，子项文字比父项文字缩进「线宽 + 控件内间隔 + 子项左内缩」，读作下一级。
+// 此前无图标时线仍按半个图标算，落进父项第一个字的字身里。
+const subIndent = "ps-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2+var(--qy-line-width)+var(--qy-control-content-gap))]";
+const subIndentTextOnly = "ps-[calc(var(--qy-control-sm-padding)+var(--qy-line-width)+var(--qy-control-content-gap))]";
 export function SidebarSubContent({ className, children, ...props }: SidebarSubContentProps) {
   const context = useSidebar();
   const label = React.useContext(SidebarSubLabelContext);
+  const hasIcon = React.useContext(SubTriggerHasIcon);
   // 浮层本身就是「有空间显示文字」的地方：子级在这里不再是 rail 条目，名称要正常可见，
   // 不能继承外层 collapsed=true 继续把文字切成 sr-only——那会让弹出的子级看起来空白一片。
   const overlayContext = React.useMemo(() => ({ ...context, collapsed: false }), [context]);
@@ -224,13 +325,13 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
      *  表达「用户没展开」，这层 hidden 表达「rail 没有宽度摆它」；同一个焦点元素一旦落入
      *  原生 hidden 的子树，SidebarContent 的回退逻辑才需要把焦点交回 Toggle。 */}
     <div hidden={context.collapsed || undefined} className="min-w-0">
-      <CollapsiblePrimitive.Panel data-slot="sidebar-sub-content" keepMounted {...props} className={state => cn("relative grid min-w-0 gap-fen-half text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", subIndent, typeof className === "function" ? className(state) : className)}>
+      <CollapsiblePrimitive.Panel data-slot="sidebar-sub-content" keepMounted {...props} className={state => cn("qy-sidebar-sub-content relative grid min-w-0 gap-fen-half text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", hasIcon ? subIndent : subIndentTextOnly, typeof className === "function" ? className(state) : className)}>
         {/* 引导竖线：同一 SidebarGroup 里可能有几个 SidebarSub 前后相邻，缩进本身对每一级都
          *  一样深，无法区分「这几行属于上面哪一个父项」；面划不出这层边界，补一条清墨线
          *  （骨法用笔：线只在面无法划出范围时出现）。线的位置是父项图标的几何中心，
-         *  从子级看是正上方那枚图标的延伸。 */}
-        <span aria-hidden="true" className="absolute inset-y-0 start-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2)] w-line bg-border" />
-        {children}
+         *  从子级看是正上方那枚图标的延伸；父项没有图标时是父项文字起笔的延伸。 */}
+        <span aria-hidden="true" className={cn("absolute inset-y-0 w-line bg-border", hasIcon ? "start-[calc(var(--qy-control-sm-padding)+var(--qy-control-md-icon)/2)]" : "start-(--qy-control-sm-padding)")} />
+        <InSubPanel.Provider value={true}>{children}</InSubPanel.Provider>
       </CollapsiblePrimitive.Panel>
     </div>
     {context.collapsed && (

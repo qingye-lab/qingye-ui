@@ -1,9 +1,9 @@
 # Stat
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 070c2a8b77a2a0a4f07303b3a7b14aa9885b83c5d0737fb44c9475edee23f921
+Source SHA-256: 18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab
 
 Values, units and explanations supplied independently.
 
@@ -12,6 +12,7 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 
 ## Notes
 - Definitions, update times and changes are application facts; descriptions are optional.
+- An unknown or not-applicable reading steps back to medium ink with no hue and keeps its size; the application supplies the words, and it is never drawn as 0. Without a number to compare there is no change to show.
 
 ## Use and ownership
 - Identify a metric's name, value, and unit.
@@ -86,7 +87,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context StatSizeContext: without a provider default-value; provided by Stat
+- Context StatContext: without a provider default-value; provided by Stat
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -100,7 +101,7 @@ Change against a reference period (dd).
 
 ### Stat
 A dl with required state.
-- state: "known" | "unknown" | "not-applicable". An application-owned metric state that generates no replacement value.
+- state: "known" | "unknown" | "not-applicable". An application-owned metric state that generates no replacement value. An unknown or not-applicable reading steps back to medium ink and is recorded as data-state on StatValue.
 - size: "md" | "lg"; default "md". The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; the label, unit, description and change keep their size.
 - render / ref / native props: useRender.ComponentProps<dl>. Supply labels and values; props reach the actual dl.
 

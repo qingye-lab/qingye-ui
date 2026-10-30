@@ -1,9 +1,9 @@
 # 对话框 Dialog
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: 7463bb8528bc0460688b3ba298b4e15a57f21032bbe47eab819d939f32e91295
+Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
 
 接管整个工作面，完成当前编辑或决定后返回。
 
@@ -11,6 +11,7 @@ Source SHA-256: 7463bb8528bc0460688b3ba298b4e15a57f21032bbe47eab819d939f32e91295
 关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。
 
 ## Notes
+- 长内容放进 DialogPanel：主操作在页脚始终可见；不用 DialogPanel 的写法仍是整面板滚动。
 - 不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。
 - 草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。
 - 危险决定用 AlertDialog，后果写在它的说明里；按钮不承载后果。
@@ -131,7 +132,7 @@ Written descriptions; the list above is the type-resolved fact.
 默认复用 Button，支持 render/ref/事件；Close 缺少 children 时读取 locale.close。
 
 ### DialogHeader / DialogPanel / DialogFooter
-名称、工作内容、动作的分组关系。支持 useRender 组合；不产生另一层围合。
+名称、工作内容、动作的分组关系。长内容时页眉与页脚固定，只有 DialogPanel 滚动。支持 useRender 组合；不产生另一层围合。
 
 ### DialogCreateHandle / DialogPrimitive
 类型化共享触发 handle 与所用 Base UI 原语命名空间。
@@ -164,6 +165,36 @@ export default function Demo() {
           <Field><FieldLabel>设备名称</FieldLabel><Input defaultValue="青野" maxLength={20} /></Field>
         </DialogPanel>
         <DialogFooter><DialogClose>关闭</DialogClose></DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  );
+}
+```
+
+### 长内容
+Source: apps/docs/src/content/dialog/demos/02-long.tsx
+```tsx
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "长内容", titleEn: "Long content" };
+
+const fields = Array.from({ length: 14 }, (_, index) => `设备 ${index + 1}`);
+
+export default function Demo() {
+  return (
+    <Dialog>
+      <DialogTrigger>重命名设备</DialogTrigger>
+      <DialogPopup className="max-h-[min(32rem,100%)] w-96">
+        <DialogHeader>
+          <DialogTitle>重命名设备</DialogTitle>
+          <DialogDescription>名称最多 20 个字。</DialogDescription>
+        </DialogHeader>
+        <DialogPanel>
+          {fields.map(name => <Field key={name}><FieldLabel>{name}</FieldLabel><Input defaultValue={name} maxLength={20} /></Field>)}
+        </DialogPanel>
+        <DialogFooter><DialogClose>完成</DialogClose></DialogFooter>
       </DialogPopup>
     </Dialog>
   );

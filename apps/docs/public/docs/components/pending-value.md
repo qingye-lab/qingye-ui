@@ -1,9 +1,9 @@
 # 结果未知 PendingValue
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
-Source SHA-256: d2594e95624d000ff805d6ab74bee01479420f7cbcfa48f75033e0feac7ad458
+Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85
 
 保留对象与原值，表达写入结果未知。
 
@@ -35,6 +35,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### PendingValue
 - `actions?`: `React.ReactNode`.
 - `label`: `string`.
+- `numeric?`: `boolean`. 原值是数字（金额、数量、计数）时设为 true，用等宽数字对齐；文本、日期等非数字值保持 false。预设 false：等宽数字只对数字成立，不能替每个值声称。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -50,6 +51,7 @@ Written descriptions; the list above is the type-resolved fact.
 原值放 children，核实或恢复入口放 actions；都由应用提供。
 - label: string. 必填非空对象名称。
 - children: ReactNode. 原值；0 保持0，缺席不代填0。
+- numeric: boolean; default false. 原值是数字（金额、数量、计数）时设为 true，以等宽数字对齐；文本、日期等保持 false。
 - actions: ReactNode. 应用已有的核实/恢复入口，组件不发请求。
 - render / ref / 原生属性: current public component props. 属性、事件与ref透传实际元素；样式由className/style调整。
 
@@ -62,5 +64,5 @@ Source: apps/docs/src/content/pending-value/demos/01-states.tsx
 import { Button } from "@qingye_lab/ui/components/button";
 import { PendingValue } from "@qingye_lab/ui/components/pending-value";
 export const meta = { title: "保留原值", titleEn: "Original value retained" };
-export default function Demo() { return <PendingValue label="值" actions={<Button variant="bordered">核实</Button>}>{0}</PendingValue>; }
+export default function Demo() { return <PendingValue label="值" numeric actions={<Button variant="bordered">核实</Button>}>{0}</PendingValue>; }
 ```

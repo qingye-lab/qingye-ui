@@ -63,9 +63,9 @@ test("a half-typed or over-long entry is not a clear: the accepted date stays, a
   const input = screen.getByLabelText("Date") as HTMLInputElement;
   typePartial(input);
   expect(change).not.toHaveBeenCalled();
-  fireEvent.blur(input);
+  // 逐段删完时值一直是空串、不再有 input 事件：离开输入时所有分段都空才是清除。
   Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: false }) });
-  fireEvent.change(input, { target: { value: "" } });
+  fireEvent.blur(input);
   expect(change).toHaveBeenCalledWith(undefined, expect.anything());
 });
 
@@ -78,11 +78,46 @@ test("a five-digit year is held as typing, not handed to the caller", () => {
   expect(change).not.toHaveBeenCalled();
 });
 
-test("a typed entry the caller never accepted is dropped when focus leaves", () => {
-  render(<DatePicker value={new Date(2026, 9, 3)} onValueChange={() => {}} inputProps={{ "aria-label": "Date" }} />);
+test("a half-typed entry survives blur and is marked invalid with a reason, until the reader corrects it", () => {
+  const change = vi.fn();
+  const { container } = render(<form><DatePicker name="d" value={new Date(2026, 9, 3)} onValueChange={change} inputProps={{ "aria-label": "Date" }} /></form>);
   const input = screen.getByLabelText("Date") as HTMLInputElement;
   typePartial(input);
   fireEvent.blur(input);
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  expect(input.validationMessage).toBe("日期未填完整");
+  expect(container.querySelector("form")!.checkValidity()).toBe(false);
+  Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: false }) });
+  fireEvent.change(input, { target: { value: "2026-10-09" } });
+  expect(change).toHaveBeenCalledWith(expect.any(Date), expect.anything());
+  expect(input).not.toHaveAttribute("aria-invalid");
+  expect(input.validationMessage).toBe("");
+});
+
+test("a complete date outside min/max is not reported, stays in the input, and is marked out of range on blur", () => {
+  const change = vi.fn();
+  render(<DatePicker value={new Date(2026, 9, 3)} min={new Date(2026, 9, 1)} max={new Date(2026, 9, 20)} onValueChange={change} inputProps={{ "aria-label": "Date", max: "2026-10-10" }} />);
+  const input = screen.getByLabelText("Date") as HTMLInputElement;
+  fireEvent.change(input, { target: { value: "2026-10-15" } });
+  expect(change).not.toHaveBeenCalled();
+  expect(input).toHaveValue("2026-10-15");
+  fireEvent.blur(input);
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  expect(input.validationMessage).toBe("日期超出可选范围");
+  fireEvent.change(input, { target: { value: "2026-10-05" } });
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(input).not.toHaveAttribute("aria-invalid");
+});
+
+test("the caller's own aria-invalid wins, and form reset clears the rejection", async () => {
+  const { container } = render(<form><DatePicker name="d" defaultValue={new Date(2026, 9, 3)} inputProps={{ "aria-label": "Date", "aria-invalid": false }} /></form>);
+  const input = screen.getByLabelText("Date") as HTMLInputElement;
+  typePartial(input);
+  fireEvent.blur(input);
+  expect(input).toHaveAttribute("aria-invalid", "false");
+  expect(input.validationMessage).toBe("日期未填完整");
+  fireEvent.reset(container.querySelector("form")!);
+  await waitFor(() => expect(input.validationMessage).toBe(""));
   expect(input).toHaveValue("2026-10-03");
 });
 
@@ -124,4 +159,16 @@ test("an outer fieldset disabled at runtime disables the calendar entry too", as
   expect(screen.getByRole("button", { name: "选择日期" })).toBeEnabled();
   container.querySelector("#outer")!.setAttribute("disabled", "");
   await waitFor(() => expect(screen.getByRole("button", { name: "选择日期" })).toBeDisabled());
+});
+
+test("the clear action returns focus to the input; read-only says so beside the value and offers no clear", async () => {
+  const change = vi.fn();
+  const { rerender } = render(<DatePicker defaultValue={new Date(2026, 9, 3)} onValueChange={change} inputProps={{ "aria-label": "日期" }} />);
+  await userEvent.click(screen.getByRole("button", { name: "清除日期" }));
+  expect(change).toHaveBeenCalledWith(undefined, expect.anything());
+  expect(screen.getByLabelText("日期")).toHaveFocus();
+  expect(screen.queryByText("只读")).not.toBeInTheDocument();
+  rerender(<DatePicker value={new Date(2026, 9, 3)} onValueChange={change} readOnly inputProps={{ "aria-label": "日期" }} />);
+  expect(screen.getByText("只读")).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除日期" })).not.toBeInTheDocument();
 });

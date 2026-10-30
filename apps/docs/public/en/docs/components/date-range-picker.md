@@ -1,9 +1,9 @@
 # DateRangePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: a369fb3e3344fa245d92080ff15123e12ce64317cc72dd040f7a9cd9a20a6fd6
+Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -74,7 +74,7 @@ A composition of two native date inputs, a calendar draft, presets, and an expli
 - min / max: Date. Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development.
 - presets: readonly { label: string; value: DateRangeValue | (() => DateRangeValue) }[]. Common ranges beside the calendar. A function value is evaluated every time the popup opens, so Last 7 days never goes stale across midnight. Clicking only writes the draft and moves to that month; Apply is still required. The preset equal to the draft is current (aria-pressed). The library receives absolute ranges computed by the application and never computes relative dates itself.
 - name / form: string. Confirmed endpoints submit local YYYY-MM-DD under name.from and name.to. Field may provide the name; the two date inputs do not submit and the draft never reaches the form.
-- disabled / readOnly: boolean; default false. Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the calendar entry does not open (as in Select). Field disabled blocks the same actions. Read-only endpoints submit; disabled endpoints are excluded.
+- disabled / readOnly: boolean; default false. Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the calendar entry does not open (as in Select). Field disabled blocks the same actions. Read-only endpoints submit; disabled endpoints are excluded. Read-only shows a Read only note in the boundary. With a confirmed range and while editable, the boundary has a clear action; focus returns to the start input after clearing.
 - calendarProps: CalendarProps except owned selection props. min/max here are day-interval rules (a count of days, unlike the top-level date min / max); excludeDisabled constrains disabled days. Same-day ranges are valid by default; require a cross-day range with min. Mode is range.
 - inputProps / endInputProps: Input props. ref, render, ARIA, events, step, and so on for the start input (the one a Field label points to) and the end input. By default the two names are the Field label plus Start date / End date.
 - render / ref / className / style / ARIA / events: div composition props. Applied to the composition root; Field provides input naming and errors.

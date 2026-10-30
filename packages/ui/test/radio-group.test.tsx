@@ -159,3 +159,12 @@ test("radios placed directly in a Field keep unique ids, their own names, and th
   expect(second).toHaveAccessibleDescription("说明 无效");
   expect(first.getAttribute("aria-describedby")?.split(/\s+/)).toContain("own");
 });
+
+test("readonly shows an aria-hidden note and only then", () => {
+  const { rerender } = render(<RadioGroup readOnly defaultValue="alpha"><Options /></RadioGroup>);
+  const note = document.querySelector("[data-slot=radio-group-readonly]");
+  expect(note).toHaveTextContent("只读");
+  expect(note).toHaveAttribute("aria-hidden", "true");
+  rerender(<RadioGroup defaultValue="alpha"><Options /></RadioGroup>);
+  expect(document.querySelector("[data-slot=radio-group-readonly]")).toBeNull();
+});

@@ -1,9 +1,9 @@
 # 度量 Stat
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 070c2a8b77a2a0a4f07303b3a7b14aa9885b83c5d0737fb44c9475edee23f921
+Source SHA-256: 18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab
 
 数值、单位与说明分别提供。
 
@@ -12,6 +12,7 @@ dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用�
 
 ## Notes
 - 统计口径、更新时间和变化判断属于应用事实；说明可省略。
+- 未知和不适用的读数退为浓墨，不施彩，字号不变；文字由应用给出，不画成 0。没有可比较的数时不放变化量。
 
 ## Use and ownership
 - 需要识别一个度量的名称、值和单位。
@@ -86,7 +87,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
-- Context StatSizeContext: without a provider default-value; provided by Stat
+- Context StatContext: without a provider default-value; provided by Stat
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -100,7 +101,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Stat
 dl，状态必填。
-- state: "known" | "unknown" | "not-applicable". 应用确认的度量状态，不产生替代数值。
+- state: "known" | "unknown" | "not-applicable". 应用确认的度量状态，不产生替代数值。unknown 和 not-applicable 的读数退为浓墨，记在 StatValue 的 data-state 上。
 - size: "md" | "lg"; default "md". 读数的尺寸档，记在根的 data-size 上。lg 把 StatValue 放大到 32/40（md 是 24/28），用于页面顶部的概览读数；标签、单位、说明与变化量的字号不随它变。
 - render / ref / native props: useRender.ComponentProps<dl>. 传入标题和值；属性属于实际 dl。
 

@@ -1,9 +1,9 @@
 # RadioGroup
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
+Source SHA-256: f64be68df1c293fdbe85e23a2fe1beabaa6fb4dc93d4920d78d5c3234a97e0b2
 
 Choose one value from a small set of visible options.
 
@@ -11,6 +11,7 @@ Choose one value from a small set of visible options.
 Use RadioGroup when candidates must be compared together, and Select when they can collapse. No selection does not automatically choose the first item.
 
 ## Notes
+- A read-only RadioGroup shows a read-only note after the candidates.
 - FieldTitle names the group, FieldItem + FieldLabel name each item, and FieldError associates errors.
 - A Radio placed in a Field without FieldItem opens its own label scope: each item has its own id and takes its name from itself, while the Field label and description stay on the group.
 - No selection, zero, and empty string are different values.
@@ -61,7 +62,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context InField: without a provider default-value
 - Context InFieldItem: without a provider default-value; provided by OptionScope
 

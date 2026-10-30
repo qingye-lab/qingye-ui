@@ -1,9 +1,9 @@
 # 阅读目录 Toc
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 485737ff549778b5948f166d735a24bf93ea8b17598c9517a0b6a40383231067
+Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
 
 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
 
@@ -12,6 +12,7 @@ Toc 不读路由、不做平滑滚动：<a href="#id"> 是原生锚点跳转，�
 
 ## Notes
 - 当前项不改字重，只加深线段与文字墨色，避免整排因变宽而跳动。
+- 强制颜色（高对比度）下当前项另加一道下划线：边线被系统统一着色后不再区分当前项。
 - 二级目录到基线 = 组内间隔；三级在此基础上再加层级缩进（--qy-level-indent），两个既有关系相加，不是新值。
 
 ## Use and ownership

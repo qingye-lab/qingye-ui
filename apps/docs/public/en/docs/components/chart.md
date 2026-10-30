@@ -1,9 +1,9 @@
 # Chart
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
+Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 
 Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -11,6 +11,8 @@ Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizont
 A chart only draws data. A known zero, an unknown value and a not-applicable value remain distinct: unavailable values form gaps and retain their actual names in the table. When the whole chart has no records, an unknown result or does not apply, the chart is not rendered and the caller puts Empty in its place. Plots do not replace reachable numbers. References (target bands and lines), context series and events help locate the data without being data: they are ink, not color, and their names are required and appear in the legend and the data table. Only a line may leave zero on the value axis; bars and areas encode by length or area, so truncating them misstates proportions. Status colors (series[].tone) are declared by the application; the component never guesses good from bad by value. A step (series[].interpolation: "step") says the value is held between two changes and is step-after: a record means "from this moment the value is this", and step-before would draw the change before it was observed; there are no smooth curves, which draw values the data does not contain. Share composition (bar-share / area-share) reads how a composition changes rather than how much: each row is normalised to its own sum, the value axis is fixed at 0–100% with ticks 0/25/50/75/100; a row with an unknown or not-applicable value, or a sum of zero, is not drawn at all (the whole is unavailable, so every share would be false) while its known original values stay in the data table; negative values throw. Value labels (valueLabels) are for single-series bar and bar-horizontal only, and once values are labelled the value-axis ticks and grid are no longer drawn (one fact is not said twice). Readouts and tables of stacked and share forms give a total; a row with a missing part is not totaled and the table says so.
 
 ## Notes
+- Series are told apart by more than hue: each line series has its own marker shape (circle, square, triangle, diamond, cross, assigned in series order), the legend key matches the line, and the series name appears in the legend text, the hover readout and the data table. Bars, stacks and areas are filled forms and rely on a fixed series order: the legend, the left-to-right order of bars, the bottom-to-top order of stacks, the readout and the data table all share one order, with a 2px paper gap between segments; no texture is added to them.
+- With no rows Chart throws instead of drawing an empty frame. For a chart behind a request, compose it with AsyncContent and test emptiness first: `<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` holds only the Chart, an empty result is carried by Empty in its place, and loading or failure feedback follows the content; see "Request states and empty results".
 - null, NaN, Infinity and missing keys cannot stand for zero. Use explicit unknown or not-applicable values.
 - When every value is unavailable, no fabricated numeric axis is drawn; names, legend and table remain.
 - The default plot supplements the data table, which provides assistive access once expanded; hover readouts enhance but never replace it.
@@ -480,5 +482,38 @@ export default function Demo() {
       series={[{ key: "ok", label: "成功" }, { key: "failed", label: "失败" }]}
       rows={days.map((day, index) => ({ id: day, label: day, values: { ok: ok[index]!, failed: failed[index]! } }))} />
   </Section>;
+}
+```
+
+### 请求状态与空结果
+Source: apps/docs/src/content/chart/demos/20-async.tsx
+```tsx
+import { useState } from "react";
+import { AsyncContent } from "@qingye_lab/ui/components/async-content";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Chart } from "@qingye_lab/ui/components/chart";
+import { Empty, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "请求状态与空结果", titleEn: "Request states and empty results" };
+
+const days = ["10/01", "10/02", "10/03", "10/04", "10/05"];
+const counts = [12, 18, 9, 21, 15];
+
+export default function Demo() {
+  const { code } = useUILocale();
+  const en = code.startsWith("en");
+  const [rows, setRows] = useState(() => days.map((day, index) => ({ id: day, label: day, values: { count: counts[index]! } })));
+  return <Stack className="w-full max-w-2xl">
+    <Inline>
+      <Button variant="bordered" onClick={() => setRows(days.map((day, index) => ({ id: day, label: day, values: { count: counts[index]! } })))}>{en ? "Has records" : "有记录"}</Button>
+      <Button variant="bordered" onClick={() => setRows([])}>{en ? "No records" : "没有记录"}</Button>
+    </Inline>
+    <AsyncContent status="success" hasContent={rows.length > 0}
+      emptyContent={<Empty state="empty"><EmptyTitle level={3}>{en ? "Sync runs" : "同步次数"}</EmptyTitle><EmptyDescription>{en ? "No runs in this period." : "这段时间没有同步记录。"}</EmptyDescription></Empty>}>
+      <Chart type="bar" label={en ? "Sync runs" : "同步次数"} categoryLabel={en ? "Date" : "日期"} valueLabel={en ? "Runs" : "次数"} series={[{ key: "count", label: en ? "Runs" : "次数" }]} rows={rows} />
+    </AsyncContent>
+  </Stack>;
 }
 ```

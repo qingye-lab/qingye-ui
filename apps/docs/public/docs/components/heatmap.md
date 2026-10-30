@@ -1,9 +1,9 @@
 # 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: fa059bc65cfb545ca115006f0668f3a7ed04749104ed4503bb9f779c9a041b1f
+Source SHA-256: 5391179dc66b84007b34083c21d0987deff96fd286fed3d8c0216f3cf54a6801
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 

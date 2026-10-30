@@ -49,23 +49,69 @@ test.each(["cancel", "Escape"])("%s declines the decision without running an aff
   await waitFor(() => expect(trigger).toHaveFocus());
 });
 
-test("only one request is active, including synchronous calls; a later decision can open after closing", async () => {
+test("a request made while another is active waits its turn and settles on its own", async () => {
   const user = userEvent.setup();
   let confirm!: ConfirmFunction;
   render(<ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider>);
-  let first!: Promise<boolean>, second!: Promise<boolean>;
-  act(() => { first = confirm(options); second = confirm({ title: "替换？", description: "替换当前值。" }); });
-  await expect(second).resolves.toBe(false);
+  let first!: Promise<boolean>, second!: Promise<boolean>, third!: Promise<boolean>;
+  const settled = vi.fn();
+  act(() => {
+    first = confirm(options);
+    second = confirm({ title: "替换？", description: "替换当前值。", confirmLabel: "替换" });
+    third = confirm({ title: "第三个？", description: "排在最后。", confirmLabel: "继续" });
+    void second.then(settled); void third.then(settled);
+  });
   expect(screen.getAllByRole("alertdialog")).toHaveLength(1);
   expect(screen.getByRole("alertdialog")).toHaveAccessibleName(options.title);
+  expect(settled).not.toHaveBeenCalled();
   await user.click(screen.getByRole("button", { name: "保留" }));
   await expect(first).resolves.toBe(false);
+  // 前一个结束并退场之后才轮到下一个；排队不等于被拒绝。
+  expect(await screen.findByRole("alertdialog", { name: "替换？" })).toBeInTheDocument();
+  expect(settled).not.toHaveBeenCalled();
+  await user.click(screen.getByRole("button", { name: "替换" }));
+  await expect(second).resolves.toBe(true);
+  expect(await screen.findByRole("alertdialog", { name: "第三个？" })).toBeInTheDocument();
+  await user.keyboard("{Escape}");
+  await expect(third).resolves.toBe(false);
   await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument());
   let next!: Promise<boolean>;
-  act(() => { next = confirm({ title: "替换？", description: "替换当前值。" }); });
-  await screen.findByRole("alertdialog", { name: "替换？" });
-  await user.click(screen.getByRole("button", { name: "确认" }));
+  act(() => { next = confirm({ title: "再来一个？", description: "队列已空。", confirmLabel: "好" }); });
+  await screen.findByRole("alertdialog", { name: "再来一个？" });
+  await user.click(screen.getByRole("button", { name: "好" }));
   await expect(next).resolves.toBe(true);
+});
+
+test("a waiting request can be aborted or its owner unmounted without opening or disturbing the others", async () => {
+  let confirm!: ConfirmFunction;
+  render(<ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider>);
+  const controller = new AbortController();
+  let first!: Promise<boolean>, waiting!: Promise<boolean>, last!: Promise<boolean>;
+  act(() => {
+    first = confirm(options);
+    waiting = confirm({ ...options, title: "等待中", signal: controller.signal });
+    last = confirm({ ...options, title: "最后" });
+  });
+  await screen.findByRole("alertdialog", { name: options.title });
+  act(() => controller.abort());
+  await expect(waiting).resolves.toBe(false);
+  await userEvent.click(screen.getByRole("button", { name: "移出" }));
+  await expect(first).resolves.toBe(true);
+  expect(await screen.findByRole("alertdialog", { name: "最后" })).toBeInTheDocument();
+  expect(screen.queryByRole("alertdialog", { name: "等待中" })).not.toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button", { name: "移出" }));
+  await expect(last).resolves.toBe(true);
+});
+
+test("unmounting the provider settles every waiting request with false", async () => {
+  let confirm!: ConfirmFunction;
+  const { unmount } = render(<ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider>);
+  let first!: Promise<boolean>, second!: Promise<boolean>;
+  act(() => { first = confirm(options); second = confirm({ ...options, title: "排队中" }); });
+  await screen.findByRole("alertdialog");
+  unmount();
+  await expect(first).resolves.toBe(false);
+  await expect(second).resolves.toBe(false);
 });
 
 test("backdrop presses preserve the current decision and caller-provided popup props", async () => {
@@ -328,7 +374,10 @@ test("missing provider and empty accessible content fail explicitly", () => {
   try { expect(() => render(<Consumer />)).toThrow("ConfirmProvider"); } finally { error.mockRestore(); }
   let confirm!: ConfirmFunction;
   render(<ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider>);
-  expect(() => confirm({ title: " ", description: "后果" })).toThrow(TypeError);
-  expect(() => confirm({ title: "决定", description: null })).toThrow(TypeError);
+  expect(() => confirm({ title: " ", description: "后果", confirmLabel: "继续" })).toThrow(TypeError);
+  expect(() => confirm({ title: "决定", description: null, confirmLabel: "继续" })).toThrow(TypeError);
+  // confirmLabel 必填：确认钮必须说出具体动作，类型之外运行时也拒绝缺省与空白。
+  expect(() => confirm({ title: "决定", description: "后果" } as ConfirmOptions)).toThrow(TypeError);
+  expect(() => confirm({ title: "决定", description: "后果", confirmLabel: " " })).toThrow(TypeError);
   expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument();
 });

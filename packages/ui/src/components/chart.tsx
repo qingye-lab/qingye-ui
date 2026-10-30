@@ -108,8 +108,8 @@ export type ChartProps = ChartBaseProps & {
 
 /*
  * 图的法度（基础层 §7「数据系列」；表达九法）：
- * - 墨分五色：只有一个系列时用焦墨，不用色相——没有类别要区分（NG10）。两个以上才按
- *   --qy-chart-1…5 取色，顺序经过色觉校验；标记形状是第二通道，转成灰度仍可区分。
+ * - 文字是墨，数据是色：只有一个系列也取第一色（见上文；焦墨实柱会压过图名与读数），单系列不出图例——
+ *   没有类别要区分（NG10）。两个以上按 --qy-chart-1…5 取色，顺序经过色觉校验；标记形状是第二通道，转成灰度仍可区分。
  * - 骨法用笔：线 2px；网格是清墨的一道细线，只画横线；基线用淡墨；不画刻度线与纵轴线。
  * - 应物象形：柱子细（≤ 6 分），数据端圆角 1 分，基线端方角——柱从基线长出来。
  *   相邻的柱之间留半分纸色空隙，不描边。标记 2 分，外加一圈纸色，交叉时仍可读。
@@ -142,6 +142,7 @@ const REF_LINE = "var(--qy-foreground-muted)";
 const REF_DASH = "4 3";
 const CONTEXT_COLOR = "var(--qy-groove-surface)";
 const CONTEXT_MAX = 12;
+// 事件点半径 3px（直径 6，介于半分空隙与 2 分标记之间：比标记小，读作「基线上的记号」而不是数据点）。预设；随字阶不随分，同 LABEL_LINE。
 const EVENT_RADIUS = 3;
 const Z_BAND = 50;
 const Z_REF_LINE = 60;
@@ -162,7 +163,7 @@ const SHARE_TICKS = [0, 0.25, 0.5, 0.75, 1] as const;
  * - 字：dense 档（12/16）、等宽数字、焦墨（标出的值就是读数，坐在刻度原来的位置，但比刻度更重要，所以比刻度的浓墨再深一级；文字不用数据色）。
  * - 与柱端的间距 labelGap = 1 分（默认 4px，与柱的圆角同一尺）；纵柱的字落在柱顶上方，负值落在柱底下方；横柱的字落在柱末端之后。
  * - 余量：不让绘图区把标签裁掉。纵柱的顶部余量 = 间距 + 一行字高（4 + 16）；横柱的右侧余量 = 间距 + 最宽那个标签的字宽。
- *   字宽按字符估算：中日韩字符 12px，其余等宽数字约 7.5px（与量轴宽度同一估法）。
+ *   字宽按字符估算：中日韩字符占满一个字号（dense 档 12px，全角字宽 = 字号）；其余按等宽数字约 0.625 字号 = 7.5px，这个系数是预设（与量轴宽度同一估法）。
  *   LABEL_LINE（16）与上面的字宽估值是文字的度量：它们跟 dense 档的字号与行高走（桌面 12/16，行高即 4 分），随字阶不随分，所以不由分换算。
  * - 柱数上限 LABEL_ROWS_MAX = 12（预设）：每根柱的类别带得放得下一个标签，超过时标签互相压住，应改用表或不标值。
  * - 只允许单系列：并排的多系列柱每根都标数会挤成一片，且颜色已经分不出主次；堆叠与占比的段太窄放不下，不给。
@@ -201,7 +202,7 @@ export function LegendKey({ series, type }: { series: ChartProjectedSeries; type
 /** 参照的键：带是同色的一块染，线是同样的一线宽虚线。 */
 function ReferenceKey({ reference }: { reference: ChartReference }) {
   const { mark, keyWidth, hairline } = useChartGeometry();
-  if (reference.kind === "band") return <span data-slot="legend-key" aria-hidden="true" className="h-(--qy-status-dot-size) w-4 shrink-0 rounded-(--qy-swatch-radius)" style={{ background: BAND_FILL }} />;
+  if (reference.kind === "band") return <span data-slot="legend-key" aria-hidden="true" className="h-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ width: keyWidth, background: BAND_FILL }} />;
   return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible"><path d={`M0 ${mark / 2}H${keyWidth}`} stroke={REF_LINE} strokeWidth={hairline} strokeDasharray={REF_DASH} /></svg>;
 }
 export function AxisTick({ x = 0, y = 0, textAnchor = "middle", verticalAnchor = "start", payload, formatter }: { x?: number; y?: number; textAnchor?: "start" | "middle" | "end"; verticalAnchor?: "start" | "middle" | "end"; payload?: { value: string | number }; formatter?: (value: string | number) => string }) {
@@ -244,6 +245,8 @@ function stackEdges(payload: Record<string, unknown> | undefined, keys: readonly
 /**
  * 堆叠柱的一段：段与段之间留一个空隙（surfaceGap，默认 2px）的纸色（骨法用笔，一个范围一种机制，不描边）；只有堆叠最外
  * 的数据端（isTop）才是圆角，基线端（isBase）方角，中间的段两端都方——假定非负值由基线向上叠加。
+ * 填充类图（柱、堆叠、面积、环形）不加纹理（用户裁决 2026-10-30，看过红绿色弱模拟对比后定）：系列靠明度差、固定次序、
+ * 这道纸色空隙和读数/数据表里的名称区分；纹理在大面积与细段上是噪点，盖过数据本身。
  */
 function StackedBarShape({ x = 0, y = 0, width = 0, height = 0, fill, isBase, isTop }: { x?: number; y?: number; width?: number; height?: number; fill?: string; isBase?: boolean; isTop?: boolean }) {
   const { barRadius, surfaceGap } = useChartGeometry();
@@ -290,6 +293,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
       const raw = share?.raw(rowId, item.key);
       const reading = share ? (known && raw !== null && raw !== undefined ? messages.proportionShare(raw, share.percent.format(entry.value as number)) : "—") : known ? format(entry.value as number, item.key, String(label)) : "—";
       return <div key={item.key} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-(--qy-field-gap)">
+        {/* 读数键是一段数据线：高 = 数据线宽（半分），宽 3 分是预设（短于图例键的 4 分，读数里只需认色）。合计行的空位与它同宽，数字列才对齐。 */}
         <span aria-hidden="true" className="h-fen-half w-3 shrink-0 rounded-full" style={{ background: item.color }} />
         <div className="flex min-w-0 items-center gap-(--qy-field-gap)">
           <span className="text-body-strong numeric">{reading}</span>
@@ -313,7 +317,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
 }
 /** 事件点：读数里的小圆，与图中基线上的点同色（给 tone 时类别色，否则墨）。 */
 function EventDot({ tone }: { tone?: Tone | undefined }) {
-  return <svg aria-hidden="true" width={EVENT_RADIUS * 2} height={EVENT_RADIUS * 2} viewBox="0 0 6 6" className="shrink-0" style={{ color: tone ? toneColor[tone] : "var(--qy-foreground)" }}><circle cx="3" cy="3" r="3" fill="currentColor" /></svg>;
+  return <svg aria-hidden="true" width={EVENT_RADIUS * 2} height={EVENT_RADIUS * 2} viewBox={`0 0 ${EVENT_RADIUS * 2} ${EVENT_RADIUS * 2}`} className="shrink-0" style={{ color: tone ? toneColor[tone] : "var(--qy-foreground)" }}><circle cx={EVENT_RADIUS} cy={EVENT_RADIUS} r={EVENT_RADIUS} fill="currentColor" /></svg>;
 }
 /**
  * 指定量轴范围时的刻度：Recharts 在 [20, 30] 上会取 23.3、26.7 这类不整的刻度再四舍五入成“23”“26”，读数与线对不上。
@@ -390,7 +394,7 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
       </PieChart></ResponsiveContainer>
       <div className="pointer-events-none absolute inset-0 grid place-items-center text-center">
         <div className="grid gap-(--qy-space-1)">
-          <span className="text-metric numeric text-foreground">{number.format(whole)}</span>
+          <span className="text-metric text-foreground">{number.format(whole)}</span>
           <span className="text-support text-muted-foreground">{valueLabel}</span>
         </div>
       </div>
@@ -723,13 +727,13 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
     {isDonut && <div className="flex justify-center">{donutLegend}</div>}
     {!isDonut && <div data-slot="chart-category-axis" className="sr-only">{categoryLabel}</div>}
     {dataView.open && <div id={dataView.id} data-slot="chart-data" className="grid min-w-0 gap-(--qy-field-gap)">
-      <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} className="text-end">{item.label}</TableHead>)}{stacks && <TableHead className="text-end">{messages.chartTotal}</TableHead>}{events.length > 0 && <TableHead>{messages.chartEvent}</TableHead>}</TableRow></TableHeader><TableBody>{rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map((item, seriesIndex) => {
+      <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} numeric>{item.label}</TableHead>)}{stacks && <TableHead numeric>{messages.chartTotal}</TableHead>}{events.length > 0 && <TableHead>{messages.chartEvent}</TableHead>}</TableRow></TableHeader><TableBody>{rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map((item, seriesIndex) => {
         const value = readValue(row, item.key);
         // 占比类：已知值写“原值（占比）”；该行没有算出占比（含不可得的值或和为 0）时只写原值。
         const fraction = share ? data[rowIndex]![projected[seriesIndex]!.dataKey] : null;
         const cell = typeof value !== "number" ? value.label : typeof fraction === "number" ? messages.proportionShare(plain(value, item, row), percent.format(fraction)) : formatValue?.(value, item, row) ?? number.format(value);
-        return <TableCell key={item.key} className="text-end numeric whitespace-nowrap" data-state={typeof value === "number" ? "known" : value.state}>{cell}</TableCell>;
-      })}{stacks && (() => { const sum = totalOf(row); return <TableCell data-slot="chart-total-cell" className="text-end numeric whitespace-nowrap" data-state={sum === null ? "unknown" : "known"}>{sum === null ? messages.chartTotalPartial : sum}</TableCell>; })()}{events.length > 0 && <TableCell data-slot="chart-event-cell" className="whitespace-nowrap">{eventsByRow(row.id).map((event, index) => <span key={index} className="block">{event.label}</span>)}</TableCell>}</TableRow>)}</TableBody></Table></TableContainer>
+        return <TableCell key={item.key} numeric className="whitespace-nowrap" data-state={typeof value === "number" ? "known" : value.state}>{cell}</TableCell>;
+      })}{stacks && (() => { const sum = totalOf(row); return <TableCell data-slot="chart-total-cell" numeric className="whitespace-nowrap" data-state={sum === null ? "unknown" : "known"}>{sum === null ? messages.chartTotalPartial : sum}</TableCell>; })()}{events.length > 0 && <TableCell data-slot="chart-event-cell" className="whitespace-nowrap">{eventsByRow(row.id).map((event, index) => <span key={index} className="block">{event.label}</span>)}</TableCell>}</TableRow>)}</TableBody></Table></TableContainer>
       {references.length > 0 && <ul data-slot="chart-references" aria-label={messages.chartReferences} className={legendClassName}>{references.map((reference, index) => <li key={index} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span>{reference.label}</span><span className="numeric">{referenceText(reference)}</span></li>)}</ul>}
     </div>}
   </>;

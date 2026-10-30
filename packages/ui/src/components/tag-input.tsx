@@ -349,7 +349,7 @@ export function TagInput({
           // 点添加不让草稿失焦：失焦收下（addOnBlur）与这一次点击会重复处理同一份草稿；Safari 的按钮点击不给焦点，relatedTarget 也认不出。
           onMouseDown={event => event.preventDefault()}
           aria-label={max !== undefined ? messages.addTagWithLimit(max) : undefined}
-          className={cn("h-(--qy-tag-chip) min-h-0 shrink-0 whitespace-nowrap rounded-(--qy-tag-radius) px-(--qy-tag-padding) text-muted-foreground hover:text-foreground sm:min-h-0 [&_[data-slot=button-content]]:whitespace-nowrap", chipTextClassName)}>{messages.addTag}</Button>}
+          className={cn("h-(--qy-tag-chip-narrow) sm:h-(--qy-tag-chip) min-h-0 shrink-0 whitespace-nowrap rounded-(--qy-tag-radius) px-(--qy-tag-padding) text-muted-foreground hover:text-foreground sm:min-h-0 [&_[data-slot=button-content]]:whitespace-nowrap", chipTextClassName)}>{messages.addTag}</Button>}
         </div>
       </InputGroup>
       {shownFeedback && <div id={feedbackId} data-slot="tag-input-feedback" role="status" className="text-support-mobile text-muted-foreground sm:text-support">{shownFeedback}</div>}

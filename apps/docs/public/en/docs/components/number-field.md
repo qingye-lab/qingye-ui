@@ -1,9 +1,9 @@
 # NumberField
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
+Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
 
 Edit an optional number and adjust it by a declared step.
 
@@ -11,6 +11,8 @@ Edit an optional number and adjust it by a declared step.
 Direct edits outside the range remain intact for native range validation. Stepping still respects min/max. Empty, minus, and partial decimal drafts are not replaced with zero.
 
 ## Notes
+- The default width holds two steppers and about eight digits (--qy-number-width). Pass className="w-full" to NumberField to fill the container, the same way as Select. Stepper buttons are as wide as the control's inner height, following the touch-target height under coarse pointers.
+- Read-only shows a read-only note below the control; steppers are hidden but keep their place.
 - FieldLabel names the real input; FieldDescription states range and step.
 - The wrapper fixes allowOutOfRange=true and does not silently correct direct edits.
 - An out-of-range value is not a save failure. The caller provides invalid.

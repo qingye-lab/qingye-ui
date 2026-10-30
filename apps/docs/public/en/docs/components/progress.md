@@ -1,14 +1,17 @@
 # Progress
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
-Source SHA-256: 632077f82a2a7f9fe11612bf274705097566fb24e322e8d2a0c6e5155960a7cd
+Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
 
 Confirmed task completion or an explicit indeterminate state.
 
 ## Decision
 Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.
+
+## Notes
+- Stage a long task by what is known: submitted but uncountable uses value={null}, processing counts confirmed items, and afterwards an Alert states completion or partial failure, lists the failed items and offers a retry. The bar does not carry the outcome.
 
 ## Use and ownership
 - A reliable completion ratio exists, or work is known to be underway without a ratio.
@@ -114,5 +117,58 @@ const stages = ["一龄", "二龄", "三龄", "四龄", "五龄", "上蔟", "结
 const text = (value: number | null) => value === null ? "" : `${stages[value - 1]}，第 ${value} / 7 阶段`;
 export default function Demo() {
   return <Stack gap="fields" className="w-full max-w-sm">{[1, 4, 7].map(value => <Progress key={value} value={value} min={0} max={7} segments={7} getAriaValueText={(_, actual) => text(actual)}><ProgressLabel>蚕龄</ProgressLabel><ProgressValue>{(_, actual) => text(actual)}</ProgressValue><ProgressTrack><ProgressIndicator /></ProgressTrack></Progress>)}</Stack>;
+}
+```
+
+### 批量任务：提交、处理、完成或部分失败
+Source: apps/docs/src/content/progress/demos/03-batch-task.tsx
+```tsx
+import { useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye_lab/ui/components/progress";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "批量任务：提交、处理、完成或部分失败", titleEn: "Batch task: submitted, processing, done or partly failed", description: "用已有组件组合长任务的各阶段；下方按钮代替服务端返回。", descriptionEn: "Stages of a long task composed from existing components; the buttons below stand in for server replies." } satisfies DemoMeta;
+
+type Item = "waiting" | "done" | "failed";
+const total = 6;
+
+export default function Demo() {
+  // 任务事实由应用持有：已提交与否、每一项的结果。进度读数只数已确认的项，不用时间推断。
+  const [items, setItems] = useState<Item[] | null>(null);
+  const settled = items?.filter(item => item !== "waiting").length ?? 0;
+  const failed = items?.flatMap((item, index) => item === "failed" ? [index + 1] : []) ?? [];
+  const finished = items !== null && settled === total;
+  const running = items !== null && !finished;
+  const reply = (result: Item) => setItems(current => {
+    if (!current) return current;
+    const next = [...current];
+    const index = next.indexOf("waiting");
+    if (index >= 0) next[index] = result;
+    return next;
+  });
+  return <Stack className="w-full max-w-sm">
+    <Inline>
+      <Button loading={running} disabled={items !== null && !running} onClick={() => setItems(Array<Item>(total).fill("waiting"))}>开始导入</Button>
+      <Button variant="quiet" disabled={!running} onClick={() => reply("done")}>返回一项成功</Button>
+      <Button variant="quiet" disabled={!running} onClick={() => reply("failed")}>返回一项失败</Button>
+    </Inline>
+    {items && <Progress value={settled === 0 ? null : settled} max={total} getAriaValueText={(_, actual) => actual === null ? "已提交，等待处理" : `已处理 ${actual} / ${total} 项`}>
+      <ProgressLabel>导入</ProgressLabel>
+      <ProgressValue>{(_, actual) => actual === null ? "已提交，等待处理" : `${actual} / ${total}`}</ProgressValue>
+      <ProgressTrack><ProgressIndicator /></ProgressTrack>
+    </Progress>}
+    {finished && failed.length === 0 && <Alert tone="success" role="status"><AlertDescription>{total} 项已全部处理。</AlertDescription></Alert>}
+    {finished && failed.length > 0 && <Alert tone="warning" role="alert">
+      <Stack gap="field">
+        <AlertTitle>{total - failed.length} 项已处理，{failed.length} 项失败</AlertTitle>
+        <AlertDescription>已处理的项不会重复提交。</AlertDescription>
+        <ul className="m-0 grid list-none gap-(--qy-field-gap) p-0 text-body">{failed.map(position => <li key={position}>第 {position} 项</li>)}</ul>
+        <Inline><Button variant="bordered" onClick={() => setItems(current => current && current.map(item => item === "failed" ? "waiting" : item))}>重试失败项</Button></Inline>
+      </Stack>
+    </Alert>}
+  </Stack>;
 }
 ```

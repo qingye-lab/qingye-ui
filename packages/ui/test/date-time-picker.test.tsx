@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, test, vi } from "vitest";
@@ -46,7 +46,9 @@ test("defaultValue makes it uncontrolled; an over-long year is not handed to the
   Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: true }) });
   fireEvent.change(input, { target: { value: "" } });
   fireEvent.blur(input);
-  expect(new FormData(container.querySelector("form")!).get("when")).toBe("2026-10-04T08:00");
+  // 半截键入不再被悄悄换回旧值：保留在输入里，并让表单提交被拦下。
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  expect(container.querySelector("form")!.checkValidity()).toBe(false);
 });
 
 test("a five-digit year the platform accepts as text is held as typing, never handed to the caller", () => {
@@ -69,4 +71,39 @@ test("min and max bound the native input and the calendar, and a draft outside t
   expect(screen.getByRole("button", { name: "Apply" })).toBeDisabled();
   fireEvent.change(screen.getByLabelText("Time"), { target: { value: "09:30" } });
   expect(screen.getByRole("button", { name: "Apply" })).toBeEnabled();
+});
+
+test("a half-typed or out-of-range entry is kept on blur, marked invalid with a reason, and never reported", async () => {
+  const change = vi.fn();
+  const { container } = render(<form><DateTimePicker name="when" defaultValue="2026-10-03T12:30" min="2026-10-01T00:00" max="2026-10-20T00:00" onValueChange={change} inputProps={{ "aria-label": "When" }} /></form>);
+  const input = screen.getByLabelText("When") as HTMLInputElement;
+  Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: true }) });
+  fireEvent.change(input, { target: { value: "" } });
+  fireEvent.blur(input);
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  expect(input.validationMessage).toBe("日期未填完整");
+  Object.defineProperty(input, "validity", { configurable: true, get: () => ({ badInput: false }) });
+  fireEvent.change(input, { target: { value: "2026-11-01T08:00" } });
+  expect(change).not.toHaveBeenCalled();
+  expect(input).toHaveValue("2026-11-01T08:00");
+  fireEvent.blur(input);
+  expect(input.validationMessage).toBe("日期超出可选范围");
+  fireEvent.reset(container.querySelector("form")!);
+  await waitFor(() => expect(input).toHaveValue("2026-10-03T12:30"));
+  expect(input).not.toHaveAttribute("aria-invalid");
+  expect(input.validationMessage).toBe("");
+  fireEvent.change(input, { target: { value: "2026-10-05T08:00" } });
+  expect(change).toHaveBeenCalledTimes(1);
+});
+
+test("the clear action empties the value, returns focus to the input and is absent when read-only, which says so", async () => {
+  const change = vi.fn();
+  const { rerender } = render(<DateTimePicker defaultValue="2026-10-03T12:30" onValueChange={change} inputProps={{ "aria-label": "时刻" }} />);
+  await userEvent.click(screen.getByRole("button", { name: "清除日期和时间" }));
+  expect(change).toHaveBeenCalledWith(undefined, expect.anything());
+  expect(screen.getByLabelText("时刻")).toHaveFocus();
+  expect(screen.queryByRole("button", { name: "清除日期和时间" })).not.toBeInTheDocument();
+  rerender(<DateTimePicker value="2026-10-03T12:30" onValueChange={change} readOnly inputProps={{ "aria-label": "时刻" }} />);
+  expect(screen.getByText("只读")).toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除日期和时间" })).not.toBeInTheDocument();
 });

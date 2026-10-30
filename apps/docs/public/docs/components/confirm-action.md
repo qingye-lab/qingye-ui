@@ -1,9 +1,9 @@
 # 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
-Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
+Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
 
 确认具体对象、版本与变更，内容改变后重新阅读。
 
@@ -15,6 +15,7 @@ Source SHA-256: 0cbbb6dff519b6d05e4c0a9b69fc71ca33715b2a5a4d3f2f2e9983419b51e656
 - 确认次数与结果事实归应用；没有自建超时、假成功或自动重试。
 - 浮层、尺寸、焦点与后果关联直接消费当前公共组件及集中预设。
 - 一般 await 布尔决定使用 ConfirmProvider + useConfirm；对象、版本与变更保护继续使用本组件。
+- 请求进行中确认框不可关闭（Esc、点外部、返回都不行）；结果一到，应用自己决定关闭。失败的对象与原因不由本组件保存，确认框关闭后也不会再出现：应用应在关闭前把它们写进页面（Alert 里列出哪些对象失败、原因，并提供重试或知道了），留到用户处理为止。见「失败结果留在页面上」。
 
 ## Use and ownership
 - 确认具体对象、版本与变更，内容改变后重新阅读。
@@ -48,7 +49,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `confirmProps?`: `Omit<ButtonProps, "children" | "loading" | "disabled" | "tone">`.
 - `disabled?`: `boolean`.
 - `inputProps?`: `Omit<InputProps, "value" | "defaultValue" | "type" | "name" | "form" | "disabled" | "readOnly" | "size" | "onValueChange">`.
-- `loading?`: `boolean`. 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求。结果由应用用提示组件表达。
+- `loading?`: `boolean`. 请求已发出、结果未到：两枚按钮都表示忙碌并挡住再次请求，对话框也不能被关闭（Esc、点外部、返回都不行）——关闭会让读者以为请求已取消。结果由应用用提示组件表达。
 - `onConfirm`: `(snapshot: ConfirmActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
 - `popupProps?`: `AlertDialogPopupProps`.
 - `snapshot`: `ConfirmActionSnapshot`.
@@ -134,5 +135,46 @@ export default function Demo() {
   return <Inline><ConfirmAction snapshot={snapshot} title="核对 A → B" triggerLabel="核对 A" actionLabel="请求 A → B" confirmationText="A" confirmationLabel="输入 A" onConfirm={setRequested}>
     <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><Button variant="quiet" onClick={() => setVersion(value => value + 1)}>版本 +1</Button>{requested && <output className="text-support text-muted-foreground">请求：{requested.objectLabel} · {requested.version}</output>}</div>
   </ConfirmAction></Inline>;
+}
+```
+
+### 失败结果留在页面上
+Source: apps/docs/src/content/confirm-action/demos/04-failure.tsx
+```tsx
+import { useEffect, useRef, useState } from "react";
+import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
+import { Button } from "@qingye_lab/ui/components/button";
+import { ConfirmAction } from "@qingye_lab/ui/components/confirm-action";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { useUILocale } from "@qingye_lab/ui/locale";
+export const meta = { title: "失败结果留在页面上", titleEn: "Failures stay on the page" };
+
+// 失败的对象与原因由应用持有：确认框随请求结束关闭，但结果不能跟着一起消失——它写进页面上的 Alert，留到应用自己清除。
+type Failure = { name: string; reason: string };
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const t = (zh: string, enText: string) => en ? enText : zh;
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [failures, setFailures] = useState<Failure[]>([]);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(timer.current), []);
+  const snapshot = { objectId: "batch-3", objectLabel: t("3 份记录", "3 records"), version: 1, change: t("同步到归档", "Sync to archive"), consequence: t("同步后，这 3 份记录在归档里以当前内容为准。", "After syncing, the archive holds the current content of these 3 records.") };
+  return <Stack gap="field">
+    <ConfirmAction snapshot={snapshot} open={open} onOpenChange={next => setOpen(next)} loading={loading} title={t("同步 3 份记录", "Sync 3 records")} triggerLabel={t("同步", "Sync")} actionLabel={t("同步到归档", "Sync to archive")} tone="neutral"
+      onConfirm={() => {
+        setLoading(true); setFailures([]);
+        timer.current = setTimeout(() => {
+          // 请求的结果到了：先把失败交给页面，再结束进行中、关闭确认框。
+          setFailures([{ name: t("桑园采叶记录", "Mulberry log"), reason: t("归档中已有更新的版本", "A newer version exists in the archive") }, { name: t("茧质抽检", "Cocoon inspection"), reason: t("网络中断，结果未知", "Network lost, outcome unknown") }]);
+          setLoading(false); setOpen(false);
+        }, 800);
+      }} />
+    {failures.length > 0 && <Alert tone="danger">
+      <AlertTitle>{t(`${failures.length} 份记录没有同步`, `${failures.length} records were not synced`)}</AlertTitle>
+      <AlertDescription><ul className="m-0 grid list-none gap-(--qy-field-gap) p-0">{failures.map(item => <li key={item.name}>{item.name} · {item.reason}</li>)}</ul></AlertDescription>
+      <Button variant="bordered" onClick={() => setFailures([])}>{t("知道了", "Dismiss")}</Button>
+    </Alert>}
+  </Stack>;
 }
 ```

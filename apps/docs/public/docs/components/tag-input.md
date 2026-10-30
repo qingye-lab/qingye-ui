@@ -1,9 +1,9 @@
 # 标签集合 TagInput
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: c3952a3df3ebb04604e0ce01be2a98acc836a76c0dbf80282e93316000fb9e98
+Source SHA-256: 2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217
 
 确认字符串集合，保留尚未确认的编辑草稿。
 

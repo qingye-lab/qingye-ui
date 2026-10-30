@@ -4,14 +4,15 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { Input as FileUploadPrimitive } from "@base-ui/react/input";
 import * as React from "react";
+import { useCustomValidity } from "../input-facts";
 import { useUILocale } from "../locale";
+import { fileCapacity, judgeFiles, validateRules, type FileUploadRejection } from "../file-rules";
 import { cn } from "../utils";
 import { Button, buttonVariants } from "./button";
 import { Input, type InputProps } from "./input";
 import { Progress, ProgressIndicator, ProgressTrack } from "./progress";
 
-/** 拒绝理由：内置规则给出原因类别，`validate` 给出的是调用方自己的文案。 */
-export type FileUploadRejection = { file: File; reason: "type" | "size" | "count" | "directory" } | { file: File; reason: "custom"; message: string };
+export type { FileUploadRejection };
 export type FileUploadChangeDetails = {
   reason: "select" | "drop" | "paste" | "remove";
   added: readonly File[];
@@ -46,16 +47,17 @@ export type FileUploadProps = Omit<useRender.ComponentProps<"div">, "children" |
   validate?: (file: File) => string | undefined;
   disabled?: boolean;
   readOnly?: boolean;
+  /**
+   * 必须至少有一个已接受的文件才能提交表单。原生文件输入的 `files` 在每次选择后即被清空（已接受集合由本组件持有），
+   * 所以不能用原生 `required`（它永远判为未填）；改由已接受集合是否为空决定原生输入的 customValidity：
+   * 空则浏览器拦下提交并给出说明，Field 的校验与 FieldError 照常读到；选中文件后即满足。只读时与原生 readonly 输入一样不参与校验。
+   */
+  required?: boolean;
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "onValueChange" | "type" | "name" | "form" | "accept" | "multiple" | "required" | "disabled" | "readOnly" | "size">;
   getStatus?: (file: File) => FileUploadStatus | undefined;
   renderFileActions?: (file: File, status: FileUploadStatus | undefined) => React.ReactNode;
 };
 
-function accepts(file: File, accept: string | undefined) {
-  const rules = accept?.split(",").map(rule => rule.trim().toLowerCase()).filter(Boolean) ?? [];
-  if (!rules.length) return true;
-  return rules.some(rule => rule.startsWith(".") ? file.name.toLowerCase().endsWith(rule) : rule.endsWith("/*") ? file.type.toLowerCase().startsWith(rule.slice(0, -1)) : file.type.toLowerCase() === rule);
-}
 /**
  * 拖放的文件夹在 `dataTransfer.files` 里是一枚大小为 0、类型为空的伪 File，与空文件无从分辨。
  * 只有 `items[i].webkitGetAsEntry()` 能说出它是目录；该接口不在时（或测试里只给了 files）按普通文件处理。
@@ -74,11 +76,6 @@ function readDrop(data: DataTransfer): { files: File[]; directories: ReadonlySet
   }
   return files.length ? { files, directories } : { files: Array.from(data.files ?? []), directories };
 }
-function validateRules(accept: string | undefined, maxFiles: number | undefined, maxSize: number | undefined) {
-  if (maxFiles !== undefined && (!Number.isSafeInteger(maxFiles) || maxFiles < 0)) throw new RangeError("FileUpload maxFiles must be a non-negative safe integer.");
-  if (maxSize !== undefined && (!Number.isSafeInteger(maxSize) || maxSize < 0)) throw new RangeError("FileUpload maxSize must be a non-negative byte count.");
-  if (accept?.split(",").map(rule => rule.trim()).filter(Boolean).some(rule => !/^\.[\w.-]+$|^[\w!#$&^.+-]+\/(?:[\w!#$&^.+-]+|\*)$/.test(rule))) throw new TypeError("FileUpload accept requires comma-separated extensions or MIME types.");
-}
 type InputMeta = { name: string | undefined; disabled: boolean };
 function ChooserSurface({ elementProps, state, render, onMeta, label }: { elementProps: React.ComponentPropsWithRef<"input">; state: FileUploadPrimitive.State; render: InputProps["render"]; onMeta: (meta: InputMeta) => void; label: string }) {
   React.useLayoutEffect(() => onMeta({ name: elementProps.name, disabled: Boolean(elementProps.disabled) }), [elementProps.name, elementProps.disabled, onMeta]);
@@ -95,8 +92,8 @@ function ChooserSurface({ elementProps, state, render, onMeta, label }: { elemen
 }
 
 /** Local accepted Files only. Upload facts and recovery remain with the application. */
-export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, validate, disabled = false, readOnly = false, inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, onPaste, ...props }: FileUploadProps) {
-  validateRules(accept, maxFiles, maxSize);
+export function FileUpload({ value: valueProp, defaultValue = [], onValueChange, onReject, name, form, accept, multiple = true, maxFiles, maxSize, validate, disabled = false, readOnly = false, required = false, inputProps = {}, getStatus, renderFileActions, className, render, ref, onDrop, onDragOver, onDragLeave, onPaste, ...props }: FileUploadProps) {
+  validateRules("FileUpload", accept, maxFiles, maxSize);
   const { messages } = useUILocale();
   const initial = React.useRef([...defaultValue]);
   const [localValue, setLocalValue] = React.useState<readonly File[]>(initial.current);
@@ -167,22 +164,14 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
   };
   const add = (incoming: readonly File[], reason: "select" | "drop" | "paste", event: React.SyntheticEvent, directories: ReadonlySet<File> = new Set()) => {
     if (blocked || inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return;
-    const next = [...value];
-    const added: File[] = [];
-    const rejected: FileUploadRejection[] = [];
-    const capacity = multiple ? maxFiles : Math.min(maxFiles ?? 1, 1);
-    for (const file of incoming) {
-      if (next.includes(file)) continue;
-      const reasonOf = directories.has(file) ? "directory" : !accepts(file, accept) ? "type" : maxSize !== undefined && file.size > maxSize ? "size" : undefined;
-      const message = reasonOf ? undefined : validate?.(file) || undefined;
-      const rejection: FileUploadRejection | undefined = reasonOf ? { file, reason: reasonOf } : message ? { file, reason: "custom", message } : capacity !== undefined && next.length >= capacity ? { file, reason: "count" } : undefined;
-      if (rejection) rejected.push(rejection);
-      else { next.push(file); added.push(file); }
-    }
+    const capacity = fileCapacity(multiple, maxFiles);
+    const { accepted: added, rejected } = judgeFiles(incoming, { accept, maxSize, validate, capacity, existing: value, directories });
+    const next = [...value, ...added];
     setRejections(rejected);
     if (rejected.length) onReject?.(rejected, event);
     if (added.length) request(next, reason, added, [], event);
   };
+  useCustomValidity(inputRef, required && !readOnly && value.length === 0 ? messages.fileRequired : "");
   const { ref: externalRef, render: inputRender, onChange, onClick, ...inputRest } = inputProps;
   const setInputRef = React.useCallback((node: HTMLInputElement | null) => {
     inputRef.current = node;
@@ -194,7 +183,14 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({ "data-slot": "file-upload" }, props, {
     "data-dragging": dragging ? "" : undefined,
     "data-readonly": readOnly ? "" : undefined,
-    className: cn("grid min-w-0 gap-(--qy-field-group-gap) data-dragging:bg-accent", className),
+    className: cn(
+      // 拖放区 = 整个组件：它是放下文件的地方，所以要有常驻的边界，而不是只在拖入时才出现。
+      // 边界读 Input 的同一组 token（border-input、线宽、--qy-fill-radius），对比度要求同 Input（≥3:1）；
+      // 内缘取小浮层同一档（--qy-panel-padding-sm：内容先成组，再与边成组）——**预设**，没有哪条关系单独决定这个档位。
+      // 状态与 Input 同一套：无效 → destructive，只读/禁用 → 退为 border-border；拖入时换成焦点同色的 border-ring 并铺 accent 底。
+      "grid min-w-0 gap-(--qy-field-group-gap) rounded-(--qy-fill-radius) border border-input p-(--qy-panel-padding-sm) transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input[aria-invalid=true]]:border-destructive data-readonly:border-border has-[input:disabled]:border-border data-dragging:border-ring data-dragging:bg-accent",
+      className,
+    ),
     onDragOver: (event: React.DragEvent<HTMLDivElement>) => { onDragOver?.(event); if (event.defaultPrevented || blocked) return; event.preventDefault(); if (event.dataTransfer.types.includes("Files")) { event.dataTransfer.dropEffect = "copy"; setDragging(true); } },
     onDragLeave: (event: React.DragEvent<HTMLDivElement>) => { onDragLeave?.(event); if (!event.defaultPrevented && (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget))) setDragging(false); },
     onDrop: (event: React.DragEvent<HTMLDivElement>) => { onDrop?.(event); const canceled = event.defaultPrevented; event.preventDefault(); setDragging(false); if (!canceled) { const { files, directories } = readDrop(event.dataTransfer); add(files, "drop", event, directories); } },
@@ -211,7 +207,7 @@ export function FileUpload({ value: valueProp, defaultValue = [], onValueChange,
       add(files, "paste", event);
     },
     children: <>
-      <Input {...inputRest} ref={setInputRef} type="file" name={name} form={form} accept={accept} multiple={multiple} disabled={disabled} readOnly={readOnly} controlClassName={cn("w-fit", inputRest.controlClassName)} value={value.map(file => file.name).join(", ")} render={(elementProps, state) => <ChooserSurface elementProps={elementProps} state={state} render={inputRender} onMeta={onMeta} label={messages.chooseFiles} />}
+      <Input {...inputRest} {...(required ? { "aria-required": true } : {})} ref={setInputRef} type="file" name={name} form={form} accept={accept} multiple={multiple} disabled={disabled} readOnly={readOnly} controlClassName={cn("w-fit", inputRest.controlClassName)} value={value.map(file => file.name).join(", ")} render={(elementProps, state) => <ChooserSurface elementProps={elementProps} state={state} render={inputRender} onMeta={onMeta} label={messages.chooseFiles} />}
         onClick={event => { onClick?.(event); if (blocked) event.preventDefault(); }}
         onChange={event => { onChange?.(event); const canceled = event.defaultPrevented || event.baseUIHandlerPrevented; event.preventBaseUIHandler(); if (!canceled) add(Array.from(event.currentTarget.files ?? []), "select", event); event.currentTarget.value = ""; }} />
       {!blocked && <p className="text-support text-muted-foreground">{messages.dropFiles}</p>}

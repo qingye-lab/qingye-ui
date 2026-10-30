@@ -1,9 +1,9 @@
 # 数值输入 NumberField
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
+Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
 
 编辑可为空的数值，并按指定步长增减。
 
@@ -11,6 +11,8 @@ Source SHA-256: a39d22f364a9fb278bc89fb384bc2983843509b126faa3b9054b8947620c5858
 直接编辑超出范围时保留原值，提交由浏览器范围约束检查；步进仍限制在 min/max。空、负号和未完成小数不会被替换为 0。
 
 ## Notes
+- 默认宽度容纳两个步进与约 8 位数字（--qy-number-width）；要满宽给 NumberField className="w-full"，与 Select 同一写法。步进按钮边长等于控件内高，粗指针下随触摸目标高度同步。
+- 只读时在控件下方给出「只读」说明，步进按钮隐藏但保留位置。
 - FieldLabel 命名真实输入，FieldDescription 明示范围与步长。
 - 封装固定 allowOutOfRange=true；没有静默纠正直接编辑的入口。
 - 不从范围外值自动判断保存失败；invalid 由应用提供。

@@ -1,9 +1,9 @@
 # AsyncContent
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/async-content
 Source: packages/ui/src/components/async-content.tsx
-Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2
+Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
 
 Present request status separately from content that remains valid.
 
@@ -11,7 +11,8 @@ Present request status separately from content that remains valid.
 status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.
 
 ## Notes
-- Errors are not announced automatically. Supply role=alert inside errorContent when appropriate, rather than making all retained content live.
+- Error feedback is wrapped in role=alert by the component, so errorContent need not add its own (nesting announces twice); retained content is never made live.
+- Feedback always follows the content: refresh and failure do not push the content being read, only elements after it move with the feedback.
 - hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes.
 
 ## Use and ownership
@@ -61,7 +62,7 @@ A content-state composition that makes no requests.
 - status: "pending" | "success" | "error". Application-declared request fact; elapsed time never implies failure.
 - hasContent / children: boolean / ReactNode. Valid content stays mounted without automatic disabling, draft clearing or focus movement.
 - emptyContent / loadingContent / errorContent: ReactNode. emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions.
-- render / ref / native props: useRender.ComponentProps<div>. Semantics and props for the actual root; no live region is added by default.
+- render / ref / native props: useRender.ComponentProps<div>. Semantics and props for the actual root; the root is not a live region, only error feedback carries role=alert.
 
 ## Keyboard
 
@@ -90,7 +91,7 @@ export default function Demo() {
     </Inline>
     <AsyncContent status={status} hasContent emptyContent="没有记录"
       loadingContent={<p role="status" className="m-0 text-support text-muted-foreground">正在刷新，上次结果仍可用</p>}
-      errorContent={<Alert tone="warning" role="alert"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
+      errorContent={<Alert tone="warning"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
       <Stack gap="fields"><p className="m-0 text-body">桑园采叶记录 · 今天 07:55</p><Field><FieldLabel>本地备注</FieldLabel><Input placeholder="记录待核对事项" /></Field></Stack>
     </AsyncContent>
   </Stack>;
@@ -113,7 +114,7 @@ export default function Demo() {
   return <Stack><Inline><Button variant="quiet" onClick={() => setStatus("pending")}>重新加载</Button><Button variant="quiet" onClick={() => setStatus("success")}>收到零条结果</Button><Button variant="quiet" onClick={() => setStatus("error")}>请求失败</Button></Inline>
     <AsyncContent status={status} hasContent={false}
       emptyContent={<Empty state="empty"><EmptyTitle level={3}>没有待同步记录</EmptyTitle><EmptyDescription>所有记录均已同步。</EmptyDescription></Empty>}
-      errorContent={<Alert tone="danger" role="alert"><Stack gap="field"><AlertDescription>记录暂时无法加载。</AlertDescription><Button variant="bordered" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>} />
+      errorContent={<Alert tone="danger"><Stack gap="field"><AlertDescription>记录暂时无法加载。</AlertDescription><Button variant="bordered" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>} />
   </Stack>;
 }
 ```

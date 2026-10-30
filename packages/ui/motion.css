@@ -32,23 +32,20 @@
 /* --- 2. Popup entry and exit --------------------------------------------- */
 /* `motion.css` owns popup entry and exit: start/end scale and opacity, the
  * durations, and the reduced-motion fallback. Components supply structure,
- * the trigger's transform origin, and their `data-slot`; they must not declare
+ * the trigger's transform origin, and their stable `.qy-*` class (never data-slot); they must not declare
  * a second set of entry values. The magnitudes are named in tokens/components.css
  * (--qy-scale-popup 0.98, --qy-scale-press 0.97, --qy-travel-rise); all are presets.
  * Press feedback describes a different relationship from popup entry, so it keeps
  * its own token. */
 :is(
-  [data-slot="select-popup"],
-  [data-slot="menu-popup"],
-  [data-slot="menu-sub-content"],
-  [data-slot="context-menu-popup"],
-  [data-slot="context-menu-sub-content"],
-  [data-slot="autocomplete-popup"],
-  [data-slot="combobox-popup"],
+  .qy-select-popup,
+  .qy-menu-popup,
+  .qy-autocomplete-popup,
+  .qy-combobox-popup,
   .qy-popover-popup,
-  [data-slot="tooltip-popup"],
-  [data-slot="hover-card-popup"],
-  [data-slot="navigation-menu-popup"]
+  .qy-tooltip-popup,
+  .qy-hover-card-popup,
+  .qy-navigation-menu-popup
 ) {
   transition-property: opacity, scale;
   transition-duration: var(--qy-duration-fast);
@@ -56,17 +53,14 @@
 }
 
 :is(
-  [data-slot="select-popup"],
-  [data-slot="menu-popup"],
-  [data-slot="menu-sub-content"],
-  [data-slot="context-menu-popup"],
-  [data-slot="context-menu-sub-content"],
-  [data-slot="autocomplete-popup"],
-  [data-slot="combobox-popup"],
+  .qy-select-popup,
+  .qy-menu-popup,
+  .qy-autocomplete-popup,
+  .qy-combobox-popup,
   .qy-popover-popup,
-  [data-slot="tooltip-popup"],
-  [data-slot="hover-card-popup"],
-  [data-slot="navigation-menu-popup"]
+  .qy-tooltip-popup,
+  .qy-hover-card-popup,
+  .qy-navigation-menu-popup
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
   scale: var(--qy-scale-popup);
@@ -74,25 +68,22 @@
 
 /* Exit is quicker than entry: dismissal should feel instant. */
 :is(
-  [data-slot="select-popup"],
-  [data-slot="menu-popup"],
-  [data-slot="menu-sub-content"],
-  [data-slot="context-menu-popup"],
-  [data-slot="context-menu-sub-content"],
-  [data-slot="autocomplete-popup"],
-  [data-slot="combobox-popup"],
+  .qy-select-popup,
+  .qy-menu-popup,
+  .qy-autocomplete-popup,
+  .qy-combobox-popup,
   .qy-popover-popup,
-  [data-slot="tooltip-popup"],
-  [data-slot="hover-card-popup"]
+  .qy-tooltip-popup,
+  .qy-hover-card-popup
 )[data-ending-style] {
   transition-duration: var(--qy-duration-press);
 }
 
 /* 共享内容切换不是第二套入场参数；尚未重写的浮层保持原有尺寸过渡。 */
 :is(
-  [data-slot="tooltip-popup"],
-  [data-slot="hover-card-popup"],
-  [data-slot="navigation-menu-popup"]
+  .qy-tooltip-popup,
+  .qy-hover-card-popup,
+  .qy-navigation-menu-popup
 ) {
   transition-property: width, height, scale, opacity;
 }
@@ -113,7 +104,7 @@
   transition-timing-function: var(--qy-ease-out);
 }
 
-[data-slot="navigation-menu-popup"] {
+.qy-navigation-menu-popup {
   transition-duration: var(--qy-duration-base);
 }
 
@@ -127,7 +118,7 @@
 :is(
   .qy-dialog-popup,
   .qy-alert-dialog-popup,
-  [data-slot="navigation-menu-popup"]
+  .qy-navigation-menu-popup
 )[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }
@@ -161,7 +152,7 @@
 :is(
   .qy-dialog-backdrop,
   .qy-alert-dialog-backdrop,
-  [data-slot="drawer-backdrop"]
+  .qy-drawer-backdrop
 ):is([data-starting-style], [data-ending-style]) {
   opacity: 0;
 }
@@ -175,76 +166,76 @@
 
 /* Popup viewport content has its own crossfade when the trigger changes.
  * Keep that distinct from scaling the surrounding popup, with one owner. */
-:is(.qy-popover-viewport, [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]) {
+.qy-popover-viewport :is([data-current], [data-previous]) {
   opacity: 1;
   transition-property: opacity;
   transition-duration: var(--qy-duration-fast);
   transition-timing-function: var(--qy-ease-out);
 }
-:is(.qy-popover-viewport, [data-slot="tooltip-viewport"]) :is([data-current], [data-previous]):is(
+.qy-popover-viewport :is([data-current], [data-previous]):is(
   [data-starting-style], [data-ending-style]
 ) {
   opacity: 0;
 }
 
-[data-slot="navigation-menu-content"] {
+.qy-navigation-menu-content {
   transition-property: opacity, translate;
   transition-duration: var(--qy-duration-base);
   transition-timing-function: var(--qy-ease-out);
 }
-[data-slot="navigation-menu-content"]:is([data-starting-style], [data-ending-style]) {
+.qy-navigation-menu-content:is([data-starting-style], [data-ending-style]) {
   opacity: 0;
 }
-[data-slot="navigation-menu-content"][data-ending-style] {
+.qy-navigation-menu-content[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }
-[data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="left"],
-[data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="right"] {
+.qy-navigation-menu-content[data-starting-style][data-activation-direction="left"],
+.qy-navigation-menu-content[data-ending-style][data-activation-direction="right"] {
   /* 1.5rem 是预设：导航内容在相邻项之间切换时的横向位移，只用于这两条规则，不设令牌。 */
   translate: -1.5rem 0;
 }
-[data-slot="navigation-menu-content"][data-starting-style][data-activation-direction="right"],
-[data-slot="navigation-menu-content"][data-ending-style][data-activation-direction="left"] {
+.qy-navigation-menu-content[data-starting-style][data-activation-direction="right"],
+.qy-navigation-menu-content[data-ending-style][data-activation-direction="left"] {
   translate: 1.5rem 0;
 }
 
 /* Drawer consumes public swipe/snap facts. Offscreen travel equals its own
  * border-box extent; no inherited inset or velocity multiplier preset. */
-[data-slot="drawer-popup"] {
+.qy-drawer-popup {
   transform: translate(var(--drawer-swipe-movement-x, 0px), var(--drawer-swipe-movement-y, 0px));
   transition-property: transform, opacity;
   transition-duration: var(--qy-duration-drawer);
   transition-timing-function: var(--qy-ease-drawer);
 }
-[data-slot="drawer-popup"][data-swipe-direction="down"] {
+.qy-drawer-popup[data-swipe-direction="down"] {
   transform: translate(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-swipe-movement-y, 0px) + var(--drawer-snap-point-offset, 0px)));
 }
-[data-slot="drawer-popup"][data-swipe-direction="up"] {
+.qy-drawer-popup[data-swipe-direction="up"] {
   transform: translate(var(--drawer-swipe-movement-x, 0px), calc(var(--drawer-swipe-movement-y, 0px) - var(--drawer-snap-point-offset, 0px)));
 }
-[data-slot="drawer-backdrop"] {
+.qy-drawer-backdrop {
   transition: opacity var(--qy-duration-drawer) var(--qy-ease-drawer);
 }
-[data-slot="drawer-popup"][data-swipe-direction="down"]:is([data-starting-style], [data-ending-style]) { transform: translateY(100%); }
-[data-slot="drawer-popup"][data-swipe-direction="up"]:is([data-starting-style], [data-ending-style]) { transform: translateY(-100%); }
-[data-slot="drawer-popup"][data-swipe-direction="left"]:is([data-starting-style], [data-ending-style]) { transform: translateX(-100%); }
-[data-slot="drawer-popup"][data-swipe-direction="right"]:is([data-starting-style], [data-ending-style]) { transform: translateX(100%); }
-:is([data-slot="drawer-popup"], [data-slot="drawer-backdrop"])[data-ending-style] {
+.qy-drawer-popup[data-swipe-direction="down"]:is([data-starting-style], [data-ending-style]) { transform: translateY(100%); }
+.qy-drawer-popup[data-swipe-direction="up"]:is([data-starting-style], [data-ending-style]) { transform: translateY(-100%); }
+.qy-drawer-popup[data-swipe-direction="left"]:is([data-starting-style], [data-ending-style]) { transform: translateX(-100%); }
+.qy-drawer-popup[data-swipe-direction="right"]:is([data-starting-style], [data-ending-style]) { transform: translateX(100%); }
+:is(.qy-drawer-popup, .qy-drawer-backdrop)[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }
-:is([data-slot="drawer-popup"], [data-slot="drawer-backdrop"])[data-swiping] {
+:is(.qy-drawer-popup, .qy-drawer-backdrop)[data-swiping] {
   transition-duration: var(--qy-duration-instant);
 }
 
 /* Disclosure keeps draft-bearing content mounted; state and visibility are
  * owned by the primitive, never by an animation-completion callback. */
-:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"], [data-slot="sidebar-sub-content"]) {
+:is(.qy-accordion-panel, .qy-collapsible-panel, .qy-sidebar-sub-content) {
   transition: opacity var(--qy-duration-fast) var(--qy-ease-out);
 }
-:is([data-slot="accordion-panel"], [data-slot="collapsible-panel"], [data-slot="sidebar-sub-content"]):is([data-starting-style], [data-ending-style]) { opacity: 0; }
+:is(.qy-accordion-panel, .qy-collapsible-panel, .qy-sidebar-sub-content):is([data-starting-style], [data-ending-style]) { opacity: 0; }
 
 /* The check mark settles in rather than appearing. */
-[data-slot="checkbox-indicator"] {
+.qy-checkbox-indicator {
   transition:
     opacity var(--qy-duration-press) var(--qy-ease-out),
     scale var(--qy-duration-fast) var(--qy-ease-out),
@@ -279,13 +270,13 @@
   }
 }
 
-[data-slot="progress-indicator"].qy-progress-indeterminate {
+.qy-progress-indicator.qy-progress-indeterminate {
   width: 20%;
   animation: qy-progress-slide var(--qy-duration-wait) var(--qy-ease-in-out) infinite;
 }
 
 /* RTL: the band travels the other way, matching reading direction. */
-[dir="rtl"] [data-slot="progress-indicator"].qy-progress-indeterminate {
+[dir="rtl"] .qy-progress-indicator.qy-progress-indeterminate {
   animation-name: qy-progress-slide-rtl;
 }
 
@@ -352,7 +343,7 @@
 
   /* Input's long background transition prevents the browser's autofill paint.
    * Adding color to that transition would also freeze theme text changes. */
-  input[data-slot="input"] {
+  input.qy-input {
     transition-property: background-color !important;
   }
 
@@ -364,43 +355,47 @@
    * opacity, while removing the scale/translate portion of appearance. Live
    * dialog nesting and drawer swipe transforms remain their current state. */
   :is(
-    [data-slot="select-popup"],
-    [data-slot="menu-popup"],
-    [data-slot="menu-sub-content"],
-    [data-slot="context-menu-popup"],
-    [data-slot="context-menu-sub-content"],
-    [data-slot="autocomplete-popup"],
-    [data-slot="combobox-popup"],
+    .qy-select-popup,
+    .qy-menu-popup,
+    .qy-autocomplete-popup,
+    .qy-combobox-popup,
     .qy-popover-popup,
-    [data-slot="tooltip-popup"],
-    [data-slot="hover-card-popup"],
-    [data-slot="navigation-menu-popup"],
+    .qy-tooltip-popup,
+    .qy-hover-card-popup,
+    .qy-navigation-menu-popup,
     .qy-dialog-popup,
     .qy-alert-dialog-popup,
-    [data-slot="navigation-menu-content"]
+    .qy-navigation-menu-content
   ):is([data-starting-style], [data-ending-style]) {
     scale: none !important;
     translate: none !important;
   }
 
-  [data-slot="drawer-popup"]:is([data-starting-style], [data-ending-style]) {
+  .qy-drawer-popup:is([data-starting-style], [data-ending-style]) {
     transform: none !important;
     opacity: 0;
   }
 
-  /* Toast and the pending OTP caret opt out of decorative keyframes. */
-  [data-slot="toast-root"],
-  [data-slot="otp-field-caret"] {
+  /* Toast opts out of decorative keyframes. */
+  .qy-toast-root {
     animation: none !important;
   }
 
   /* Indeterminate progress settles into a fixed band. The movement is what
    * reduced motion removes; the band itself is information — it says "a track
    * exists and something is in flight" — so it stays, centred, like a determinate
-   * bar with an unknown fraction. */
-  [data-slot="progress-indicator"].qy-progress-indeterminate {
+   * bar with an unknown fraction. translate % is relative to the band's own width
+   * w (20% of the track, set above): centring needs a left offset of (1 - w) / 2
+   * of the track, which in band widths is (1 - w) / (2w) = 0.8 / 0.4 = 200%.
+   * translate is physical, so the RTL band (anchored at the right edge) moves
+   * the opposite way. */
+  .qy-progress-indicator.qy-progress-indeterminate {
     animation: none !important;
-    translate: 100% 0;
+    translate: 200% 0;
+  }
+
+  [dir="rtl"] .qy-progress-indicator.qy-progress-indeterminate {
+    translate: -200% 0;
   }
 
   /* The turning is what reduced motion removes; the open arc stays and still reads

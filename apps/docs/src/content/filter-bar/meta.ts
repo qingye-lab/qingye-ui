@@ -33,6 +33,12 @@ export default {
           "descriptionEn": "Applications supply draft differences, applied summary and clear availability; zero is retained."
         },
         {
+          "name": "sticky",
+          "type": "boolean",
+          "description": "吸附在最近的滚动容器顶端（Workspace 中为 WorkspaceContent），不能放进带 overflow 的中间容器；吸住且有内容滚过时才出现分界线（data-stuck）。",
+          "descriptionEn": "Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck)."
+        },
+        {
           "name": "onApply / onCancel / onClear / onSubmit",
           "type": "native event callbacks",
           "description": "onSubmit.preventDefault() 取消应用；Apply 阻止浏览器导航。",

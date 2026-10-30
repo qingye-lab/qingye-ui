@@ -6,12 +6,12 @@ Qingye UI is a React component library built from the design basis in [design.md
 
 | Workspace | Purpose | Current version |
 | --- | --- | --- |
-| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **4.2.0** |
+| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **5.0.0** |
 | [apps/docs](./apps/docs) | Chinese and English component documentation, playgrounds and workspace examples | Private documentation app |
 | [packages/tooling](./packages/tooling/README.md) | `@qingye/tooling`, explicit project queries, AST diagnostics and theme tools | 0.5.0 |
 | [apps/studio](./apps/studio/README.md) | Local Theme Studio for explicitly registered projects | 0.4.0, private |
 
-UI 4.2.0 adds measured VirtualList and DataTable windows, explicit column dimensions and row activation, opt-in Sparkline point inspection, leading menu marks and styled scrollbar parts. Read the [4.2.0 notes](./docs/releases/v4.2.0.md) for the new contracts and popup positioning repair. UI 4.1.0 added standard table, pagination, confirmation, asynchronous-content and search-selection compositions. Read the [4.1.0 notes](./docs/releases/v4.1.0.md) for their contracts and the confirmation lifecycle repair. Read the [4.0.0 notes](./docs/releases/v4.0.0.md) when upgrading from 3.0.0, the [3.0.0 notes](./docs/releases/v3.0.0.md) when coming from 2.0.0, the [2.0.0 notes](./docs/releases/v2.0.0.md) when coming from 1.0.0, and the [1.0.0 notes](./docs/releases/v1.0.0.md) when migrating from 0.4.x. Tooling and private Studio have their own version and API boundaries.
+UI 5.0.0 adds ColorPicker, Resizable, TimeField, Cascader, TreeSelect, Command and FileTrigger, completes table, sidebar and form states, and removes four unused spacing tokens and the motion-provider subpath. Read the [5.0.0 notes](./docs/releases/v5.0.0.md) for the breaking changes before upgrading. UI 4.2.0 added measured VirtualList and DataTable windows, explicit column dimensions and row activation, opt-in Sparkline point inspection, leading menu marks and styled scrollbar parts. Read the [4.2.0 notes](./docs/releases/v4.2.0.md) for the new contracts and popup positioning repair. UI 4.1.0 added standard table, pagination, confirmation, asynchronous-content and search-selection compositions. Read the [4.1.0 notes](./docs/releases/v4.1.0.md) for their contracts and the confirmation lifecycle repair. Read the [4.0.0 notes](./docs/releases/v4.0.0.md) when upgrading from 3.0.0, the [3.0.0 notes](./docs/releases/v3.0.0.md) when coming from 2.0.0, the [2.0.0 notes](./docs/releases/v2.0.0.md) when coming from 1.0.0, and the [1.0.0 notes](./docs/releases/v1.0.0.md) when migrating from 0.4.x. Tooling and private Studio have their own version and API boundaries.
 
 ## Install
 
@@ -21,10 +21,10 @@ UI 4.2.0 adds measured VirtualList and DataTable windows, explicit column dimens
 pnpm add @qingye_lab/ui
 ```
 
-Without npm access, install the same version from its tarball. Download `qingye_lab-ui-4.2.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
+Without npm access, install the same version from its tarball. Download `qingye_lab-ui-5.0.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
 
 ```sh
-pnpm add ./qingye_lab-ui-4.2.0.tgz
+pnpm add ./qingye_lab-ui-5.0.0.tgz
 ```
 
 Historical GitHub releases use `@qingye/ui`; their package name and API differ from 1.0.0 and later.
@@ -62,7 +62,7 @@ Component pages live at `/docs/components/<name>` and isolated demos at `/playgr
 
 The root [design.md](./design.md) is the sole authored source for the public design guide. Its methods retain their Chinese names: 名实相符、相成相制、布白有用、随境取度、展开有据、进退相承. [STANDARDS.md](./STANDARDS.md) specifies the component implementation contracts, and [component-layering.md](./docs/decisions/component-layering.md) records the library boundary.
 
-The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v4.2.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
+The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v5.0.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
 
 ## Development
 

@@ -1,11 +1,11 @@
 # 长文 Prose
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
-Source SHA-256: cf55a83cf51f2d5d392973cc6e7e9a1f1f33d281bc961ab8756996c95434ffb9
+Source SHA-256: a94bcf0559188c47580dade7e018f602f7340e267230ace89e0c7d16d0df415e
 
-给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认自带一张阅读纸；页面已经有纸时去掉。
+给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认只排版、不带框；文章独自成篇、没有承载面时用 framed 给它一张阅读纸。
 
 ## Decision
 Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react-markdown、MDX、服务端 HTML）产出原生元素，Prose 只给直接子块里的原生文本元素（header、h1–h4、p、ul/ol 含任务列表、blockquote、pre、table、figure、details、hr、img）以及这些子块之内的原生元素（strong/em、a、行内代码、kbd、figcaption、summary 等）排版，不改写它们的结构或属性。带 data-slot 的元素与它的内部不进入，所以文章里可以直接放组件与演示。标题三级取页面已有的文字档（h1 展示、h2 标题、h3 章节），与官网文档同一套（2026-10-12 裁决）。
@@ -27,8 +27,8 @@ Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react
 ## Composition
 - children 是渲染器产出的原生元素树，或经审查的 dangerouslySetInnerHTML；Prose 只加一层 className。
 - 文章里直接放库组件：带 data-slot 的元素及其内部不排版。自己画的一段内容加上 data-slot，就声明了它不是正文。
-- div、section 这类容器子块不进入。要让容器里的标题与段落也成文，用 render 把这个容器本身做成一篇 framed={false} 的 Prose。
-- 页面已经有承载面（Card、文档站的纸）时用 framed={false}：只排版，不再画第二张纸；栏宽与内缘读 --qy-prose-column、--qy-prose-inset，承载面可以取同一组值。
+- div、section 这类容器子块不进入。要让容器里的标题与段落也成文，用 render 把这个容器本身做成一篇 Prose。
+- 页面已经有承载面（Card、文档站的纸）时保持默认（不带框）：只排版，不再画第二张纸；栏宽与内缘读 --qy-prose-column、--qy-prose-inset，承载面可以取同一组值。文章独自成篇、没有承载面时才设 framed。
 - h1 与紧随的一段导语放进 header：两者相隔一个字段间距，导语读淡墨。
 - 表格读与 Table 组件相同的视觉规则（清染表头/表尾、行高、数字列等宽），行内代码读 Typography 的 Code 规则，链接读 Link 的 linkClassName，不另起一套画法。
 
@@ -47,7 +47,7 @@ Prose 不解析 Markdown、不内置渲染器：调用方用任意工具（react
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Prose
-- `framed?`: `boolean`. 是否自带一张纸（线、圆角、底、内缘）。文章已经放在一张纸上时（页面的主栏、Card、面板）设为 false， 只留排版，不再铺第二张；与 TableContainer 的 framed 同义。
+- `framed?`: `boolean`. 是否自带一张纸（线、圆角、底、内缘），默认不带。文章多半已经放在一张纸上（页面的主栏、Card、面板）， 再铺一张是多余的框（用户裁决：不要盒装样本、不要多余的框）；文章独自成篇、没有承载面时才设为 true。 与 TableContainer 的 framed 同义，只是默认相反：表格容器独立出现时需要线，长文通常有所依附。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -61,7 +61,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Prose
 长文容器；默认渲染为 article。
-- framed: boolean; default true. 是否自带阅读纸（面、清墨线、圆角、内缘与栏宽上限）。false 时只排版，纸由所在的承载面负责。
+- framed: boolean; default false. 是否自带阅读纸（面、清墨线、圆角、内缘与栏宽上限）。默认 false，只排版，纸由所在的承载面负责（不要盒装样本、不要多余的框）；独自成篇时设为 true。
 - render / ref / className / style / 原生属性: useRender.ComponentProps<"article">. 属性、事件与 ref 透传实际元素；children 是调用方已渲染好的内容。
 
 ## Keyboard
@@ -74,7 +74,7 @@ import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标题、段落、列表与引用", titleEn: "Headings, paragraphs, lists and quotes" } satisfies DemoMeta;
 export default function Demo() {
-  return <Prose>
+  return <Prose framed>
     <h2>同步失败时，数据会怎样</h2>
     <p>每次同步开始时，青野会先记录本次要处理的范围，再逐条写入。如果在写入 <strong>1,284</strong> 条记录的过程中网络中断，已经写入的部分会保留，未写入的部分留到下一次同步——不会因为一次失败就清空整个集合。</p>
     <h3>重试与核实</h3>
@@ -99,7 +99,7 @@ import { Prose } from "@qingye_lab/ui/components/prose";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "代码块、表格与任务清单", titleEn: "Code blocks, tables and task lists" } satisfies DemoMeta;
 export default function Demo() {
-  return <Prose>
+  return <Prose framed>
     <h3>排查步骤</h3>
     <ul className="contains-task-list">
       <li className="task-list-item"><input type="checkbox" checked disabled readOnly aria-labelledby="prose-task-1" /> <span id="prose-task-1">在操作记录里确认失败条目数量</span></li>

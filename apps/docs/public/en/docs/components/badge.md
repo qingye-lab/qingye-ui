@@ -1,14 +1,17 @@
 # Badge
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
-Source SHA-256: 46f9b4df33cb90e9ca5fbf84ca2a25010b644e7aaddea5fe4884a568c5ea2ecb
+Source SHA-256: 66ce5024d8e432327ddecdc8ae5c1d05c62b636f6af042a2a8c895793156a326
 
 A short marker that keeps its content name without inferring state.
 
 ## Decision
 Use StatusDot for actual states; a badge cannot establish success.
+
+## Notes
+- tone shares one set of values and one hue per category with StatusDot; see StatusDot for which state belongs to which category.
 
 ## Use and ownership
 - Short categories, annotations, or emphasis markers.

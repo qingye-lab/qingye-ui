@@ -12,7 +12,8 @@ import { Menu, MenuLinkItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger 
 export type BreadcrumbProps = useRender.ComponentProps<"nav">;
 /**
  * 面包屑是一条路径（基础层 §6、§7）：成排的上级由位置表明可去，平时是浓墨、不加下划线，
- * 悬停才加深并出现下划线；当前页是焦墨。分隔是一枚重墨的小箭头，只作装饰，对读屏隐藏。
+ * 悬停才加深并出现下划线；当前页是焦墨。分隔是一枚重墨的小箭头，只作装饰，对读屏隐藏；
+ * 路径的走向随阅读方向，所以 dir="rtl" 下箭头翻转（与 Calendar 的翻页箭头同一写法）。
  */
 export function Breadcrumb({ render, className, ...props }: BreadcrumbProps) {
   const { messages } = useUILocale();
@@ -72,6 +73,6 @@ export function BreadcrumbCurrent({ render, className, ...props }: BreadcrumbCur
   return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-current", "aria-current": "page", className: cn("min-w-0 text-foreground", className) }, props) });
 }
 export type BreadcrumbSeparatorProps = useRender.ComponentProps<"span">;
-export function BreadcrumbSeparator({ render, className, children = <IconChevronRight className="size-(--qy-control-sm-icon)" />, ...props }: BreadcrumbSeparatorProps) {
+export function BreadcrumbSeparator({ render, className, children = <IconChevronRight className="size-(--qy-control-sm-icon) rtl:-scale-x-100" />, ...props }: BreadcrumbSeparatorProps) {
   return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "breadcrumb-separator", "aria-hidden": true, children, className: cn("inline-flex shrink-0 text-ink-decor", className) }, props) });
 }

@@ -2,7 +2,7 @@
 
 Generated from the English source blocks in root design.md and STANDARDS.md. The Chinese criteria remain canonical; source hashes prevent silent translation drift.
 
-Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v4.2.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
+Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v5.0.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
 
 ## Use
 
@@ -44,6 +44,7 @@ These practices have no acceptable presentation rationale. Lack of a better solu
 | NG10 | Use hue without a semantic category | Removing the hue loses none of danger, warning, success, information, a data series, or brand |
 | NG11 | Mark one region with more than one mechanism | Removing one of line, fill, or shadow leaves the region equally clear |
 | NG12 | Decorative surfaces: gradients, textures, shadows within one plane | Removing them leaves understanding, layering, and operation unchanged |
+| NG13 | Sidebar navigation deeper than two levels, or a separate navigation for narrow screens | A second-level sidebar entry still has expandable entries; the third level belongs in the content area as tabs or in-page navigation, and narrow screens carry the same tree in a drawer |
 
 ### Copy
 
@@ -126,11 +127,11 @@ Geometry derives from the module (20px, one line of body text) and the unit (4px
 
 | Grade | Height = module + n units | Narrow | Horizontal space = (height − unit) / 2 | Radius | Icon | Button text |
 |---|---|---|---|---|---|---|
-| `xs` | 24px | 28px | 10px | 6px | 14px | 12/16 |
-| `sm` | 28px | 32px | 12px | 7px | 14px | 13/20 |
-| `md` | 32px | 36px | 14px | 8px | 16px | 14/20 |
-| `lg` | 36px | 40px | 16px | 8px | 18px | 16/24 |
-| `xl` | 40px | 44px | 18px | 8px | 20px | 18/28 |
+| `xs` | 24px | 28px | 10px | 8px | 14px | 12/16 |
+| `sm` | 28px | 32px | 12px | 9px | 14px | 13/20 |
+| `md` | 32px | 36px | 14px | 10px | 16px | 14/20 |
+| `lg` | 36px | 40px | 16px | 11px | 18px | 16/24 |
+| `xl` | 40px | 44px | 18px | 13px | 20px | 18/28 |
 
 - Only commands (Button and its derivatives) offer five grades; names follow the grade. Fill controls and markers read role layers (`--qy-fill-*`, `--qy-marker-size`) without a `size` prop; compact density uses `data-density`. Value text always uses the md text profile.
 - Distinguish occupied dimensions, usable space inside borders, and touch hit dimensions. A 1px border subtracts 1px from padding to keep the text origin.
@@ -179,7 +180,7 @@ Ownership and simultaneous states follow [Names and states](../design.en.md#name
 
 | State | Current expression and classification |
 |---|---|
-| hover / pressed | solid fill `/90` is an inherited preset; bordered/quiet use accent or danger-soft without layout changes. qy-pressable's 0.97 scale is a preset |
+| hover / pressed | solid hover gives one light ink step to paper (`--qy-primary-hover`) and pressed gives two (`--qy-primary-active`), both derived from `--qy-ink-qing`; bordered/quiet hover with accent or danger-soft and press with `--qy-surface-active` or danger-soft-active, without layout changes. The 0.97 scale of `.qy-pressable` (`--qy-scale-press`) is a preset |
 | focus-visible | No additional outer ring. Input, focusable Card, Popover panel, and bordered Button change existing border color without thickness changes. solid uses an internal 2px line; quiet an internal 1px line |
 | disabled | Native/ARIA semantics and event guards apply independently. Current opacity-64 is an inherited preset rather than a substitute for actual disabled behavior |
 | invalid | Caller-declared facts. Input retains aria-invalid and an error border, changing to danger text color on focus at the same 1px width without an added inner ring |
@@ -195,10 +196,10 @@ Test focus-visible through actual `keyboard.press("Tab")`, wait at least 500ms f
 ### 6. Motion
 
 - Actual changes, interruption, and continuity follow [Change and recovery](../design.en.md#change-and-recovery) and ban NG6.
-- Durations and curves are presets. Current press is 100ms, fast 140ms, feedback 180ms, base 220ms, slow 320ms, drawer 450ms. Consume roles instead of another inline value for the same purpose; see foundation §12.
+- Durations and curves are presets. Current press is 100ms, fast 140ms, feedback 180ms, base 220ms, drawer 450ms, and wait 1500ms for one cycle of an open-ended wait. Consume roles instead of another inline value for the same purpose; see foundation §12.
 - motion.css owns Popover/Tooltip entry and exit. Components provide structure, trigger position, and slots. Initial scale 0.98 and opacity 0 are inherited presets whose migration into a shared file does not change provenance. Entry at 140ms and exit at 100ms are policy choices.
-- Toast retains local entry/exit and stacking; theme.css also contains success/error animations. These values are presets. This source does not claim complete motion consolidation across retained components.
-- MotionProvider records input method and switches instantly for keyboard. Reduced motion removes translation and scale while retaining readable color, opacity, and loading indications. Runtime acceptance follows [Delivery checks](../design.en.md#delivery-checks-for-people-and-ai).
+- Toast retains local stacking, and its entry uses motion.css's `data-motion="fade-in"`. These values are presets. This source does not claim complete motion consolidation across retained components.
+- InputModalityProvider records input method and switches instantly for keyboard. Reduced motion removes translation and scale while retaining readable color, opacity, and loading indications. Runtime acceptance follows [Delivery checks](../design.en.md#delivery-checks-for-people-and-ai).
 
 ### 7. Typography and capacity
 
@@ -222,6 +223,7 @@ Each semantic profile includes font size, line height, tracking, and weight; cur
 - utilities.css uses :lang to set Chinese/Japanese/Korean tracking to normal. The source records no typography-component ownership of this rule. Check typography with Emphasis and content and Delivery checks.
 - numeric (tabular figures) serves numbers that align vertically: table columns, axes, counters. Standalone large readouts (text-metric) use proportional figures.
 - Choose truncation, wrapping, text-balance, and text-pretty for the task. Single-line truncation is not mandatory. Button currently permits wrapping. Consequences and empty values follow Names and states and NG7; see foundation §14 and §17 for capacity.
+- Long unbroken strings: titles, descriptions and cells in content and overlays use `wrap-anywhere`, which also lowers min-content width so content-sized overlays and flex/grid children can contain the string; form labels, descriptions and errors (Field, Label, Fieldset, Select value and options) use `wrap-break-word`, because layout gives them their width. One family, one rule.
 
 ### 8. Accessibility
 
@@ -245,7 +247,5 @@ Accept actual combinations through Delivery checks; composition and light/dark s
 Component documentation follows [Executable protocols](../design.en.md#executable-protocols); interface copy follows [Copy](../design.en.md#copy). These standards record implementation rules only.
 
 Select checks and combinations by current task impact and user decisions, using Delivery checks for evidence statuses and §5 above for focus sampling. Screenshots reveal changes; do not update them in bulk to pass. Explain every changed assertion.
-
-Generating AI style resources and the unified build follows completion of parallel tasks; it is outside an individual component batch.
 
 Generated by packages/ui/scripts/gen-catalog.mjs. Edit canonical source translation blocks; manual edits to this file are overwritten.

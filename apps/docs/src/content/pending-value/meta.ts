@@ -59,6 +59,12 @@ export default {
           "description": "原值；0 保持0，缺席不代填0。", descriptionEn: "The original value; zero remains zero and missing never becomes zero."
         },
         {
+          "name": "numeric",
+          "type": "boolean",
+          "default": "false",
+          "description": "原值是数字（金额、数量、计数）时设为 true，以等宽数字对齐；文本、日期等保持 false。", descriptionEn: "Set to true when the original value is a number (amount, quantity, count) to align it with tabular figures; leave false for text, dates and other non-numeric values."
+        },
+        {
           "name": "actions",
           "type": "ReactNode",
           "description": "应用已有的核实/恢复入口，组件不发请求。", descriptionEn: "Actual application verification/recovery entries; the component sends no request."

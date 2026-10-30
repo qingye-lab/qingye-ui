@@ -230,6 +230,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 | NG10 | 使用没有语义类别的彩色 | 去掉该色相后，读者失去的不是危险、警示、成功、信息、数据系列或品牌中的任何一类 |
 | NG11 | 用两种以上机制重复划出同一个范围 | 去掉其中一种（线、底色或阴影）后，范围仍然清楚 |
 | NG12 | 装饰性表面：渐变、纹理、同一平面上的阴影 | 删去后理解、层次与操作都不变 |
+| NG13 | 侧栏导航超过两级，或窄屏另造一套导航 | 侧栏的二级条目下仍有可展开的条目；第三级应在内容区由标签页或页内导航承载，窄屏由抽屉承载同一棵树 |
 
 ### 文案
 
@@ -340,7 +341,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=bd8bed97b9f0af52e6ca8ce32a13d56b163d5005dc75219733c60c55c05a5c8b -->
+<!-- qingye:translation:en:start source-sha256=32d125972cb3a98626435ec9c3e81a50f154d896fdda0c5ffe87cee8caeb8a41 -->
 # Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
@@ -573,6 +574,7 @@ These practices have no acceptable presentation rationale. Lack of a better solu
 | NG10 | Use hue without a semantic category | Removing the hue loses none of danger, warning, success, information, a data series, or brand |
 | NG11 | Mark one region with more than one mechanism | Removing one of line, fill, or shadow leaves the region equally clear |
 | NG12 | Decorative surfaces: gradients, textures, shadows within one plane | Removing them leaves understanding, layering, and operation unchanged |
+| NG13 | Sidebar navigation deeper than two levels, or a separate navigation for narrow screens | A second-level sidebar entry still has expandable entries; the third level belongs in the content area as tabs or in-page navigation, and narrow screens carry the same tree in a drawer |
 
 ### Copy
 

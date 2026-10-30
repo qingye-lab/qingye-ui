@@ -1,17 +1,17 @@
 # Confirm
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
-Source SHA-256: 8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5
+Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
 
 Await one explicit decision, then let the caller continue.
 
 ## Decision
-await confirm(options) returns approval only; true does not mean a submission succeeded. While a decision is active or closing, additional calls return false immediately without replacing content or queuing. Use ConfirmAction when changes to an object, version, or change must invalidate approval.
+await confirm(options) returns approval only; true does not mean a submission succeeded. While a decision is active or closing, later calls wait in order and open after the previous one has closed; each Promise settles on its own, and false only means the decision-maker declined. Use ConfirmAction when changes to an object, version, or change must invalidate approval.
 
 ## Notes
-- One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.
+- One decision shows per provider; the rest wait in call order, including repeated calls in one event and during closing. A waiting call can be aborted by its signal and resolves false when its hook owner or the provider unmounts.
 - Unmounting the useConfirm owner cancels its own pending decision. Retained functions also resolve false after the owner unmounts.
 - Approval and execution are separate: this component accepts no request callback, displays no submitting state, and infers no success, failure, or unknown outcome.
 - Use ConfirmAction for exact text checks and review after object or version changes; use AlertDialog for direct composition.
@@ -51,7 +51,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- One decision per provider; additional calls immediately resolve false, including repeated calls in one event and during closing.
+- One decision shows per provider; the rest wait in call order, including repeated calls in one event and during closing. A waiting call can be aborted by its signal and resolves false when its hook owner or the provider unmounts.
 - Required providers: ConfirmProvider
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context ConfirmContext: without a provider throws; provided by ConfirmProvider
@@ -66,7 +66,7 @@ Host one modal decision for descendant useConfirm calls without adding a wrapper
 ### useConfirm
 Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.
 - title / description: ReactNode / ReactNode. Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content.
-- confirmLabel / cancelLabel: ReactNode / ReactNode; default locale.confirm / locale.cancel. Name affirmative and protective actions; explicit text wins. Cancel and Escape resolve false; backdrop presses do not dismiss.
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default required / locale.cancel. confirmLabel is required and names what this decision does (Remove, Leave); there is no generic Confirm default, and a missing or blank value throws TypeError. Cancel and Escape resolve false; backdrop presses do not dismiss.
 - tone: ButtonTone; default 'neutral'. The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission.
 - popupProps: Omit<AlertDialogPopupProps, 'children'>. Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed.
 - signal: AbortSignal. An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started.

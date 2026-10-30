@@ -56,3 +56,11 @@ test("framed={false} with an aria-label drops the figcaption and keeps the data 
   openTable();
   expect(within(figure).getByRole("table", { name: "记录数与失败率" })).toBeInTheDocument();
 });
+
+test("the plot is hidden from assistive technology; the data table carries the points", () => {
+  const { container } = render(<ScatterChart label="记录数与失败率" xLabel="记录数" yLabel="失败率" series={[{ key: "all", label: "全部", points }]} />);
+  expect(container.querySelector("[data-slot=chart-plot]")).toHaveAttribute("aria-hidden", "true");
+  openTable();
+  expect(container.querySelector("[data-slot=chart-data]")!.closest("[aria-hidden=true]")).toBeNull();
+  expect(screen.getByRole("table", { name: "记录数与失败率" })).toBeInTheDocument();
+});

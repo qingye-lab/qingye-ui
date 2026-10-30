@@ -11,7 +11,11 @@ export type LocaleSwitchProps = Omit<NativeSelectProps, "value" | "defaultValue"
   onChange?: NativeSelectProps["onChange"];
 };
 
-/** Requests a Provider change; the Provider remains the sole source of the selected value. */
+/**
+ * Requests a Provider change; the Provider remains the sole source of the selected value.
+ * 每个选项的文字用它自己的语言书写（「English」「中文」），所以选项带自己的 lang：读屏按该语言发音，
+ * 断行与字体也按该语言选择，不被外层页面的语言带偏。
+ */
 export function LocaleSwitch({ options, onLocaleChange, onChange, ...props }: LocaleSwitchProps) {
   const current = useUILocale();
   const codes = new Set<string>();
@@ -27,7 +31,7 @@ export function LocaleSwitch({ options, onLocaleChange, onChange, ...props }: Lo
       if (next && !next.disabled) onLocaleChange(next.locale, event);
     }}
   >
-    {!codes.has(current.code) && <option value={current.code} disabled>{current.code}</option>}
-    {options.map(option => <option key={option.locale.code} value={option.locale.code} disabled={option.disabled}>{option.label}</option>)}
+    {!codes.has(current.code) && <option value={current.code} lang={current.code} disabled>{current.code}</option>}
+    {options.map(option => <option key={option.locale.code} value={option.locale.code} lang={option.locale.code} disabled={option.disabled}>{option.label}</option>)}
   </NativeSelect>;
 }

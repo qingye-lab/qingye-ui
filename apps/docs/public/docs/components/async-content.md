@@ -1,9 +1,9 @@
 # 异步内容 AsyncContent
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/async-content
 Source: packages/ui/src/components/async-content.tsx
-Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2
+Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
 
 分别呈现请求状态与仍然有效的内容。
 
@@ -11,7 +11,8 @@ Source SHA-256: 8d333b4818591ef047eec800cb77940ec01a0312554782d9d786e89abe5589f2
 status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。
 
 ## Notes
-- 错误不会自动宣告。需要即时宣告时由应用在 errorContent 中提供 role=alert；避免把整块有效内容设为 live region。
+- error 状态的反馈由组件包在 role=alert 里宣告，errorContent 不必再自带 role=alert（嵌套会重复播报）；有效内容不设为 live region。
+- 反馈固定排在内容之后：刷新与失败时正在阅读的内容不被推动，只有其后的元素随反馈占位而移动。
 - hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。
 
 ## Use and ownership
@@ -61,7 +62,7 @@ Written descriptions; the list above is the type-resolved fact.
 - status: "pending" | "success" | "error". 应用声明请求事实，不用超时猜测失败。
 - hasContent / children: boolean / ReactNode. 有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。
 - emptyContent / loadingContent / errorContent: ReactNode. emptyContent 必填；error 状态必须提供 errorContent。加载默认读 locale。重试动作由应用提供。
-- render / ref / native props: useRender.ComponentProps<div>. 实际根节点的语义与属性；默认不建立 live region。
+- render / ref / native props: useRender.ComponentProps<div>. 实际根节点的语义与属性；根节点本身不是 live region，只有 error 反馈带 role=alert。
 
 ## Keyboard
 
@@ -90,7 +91,7 @@ export default function Demo() {
     </Inline>
     <AsyncContent status={status} hasContent emptyContent="没有记录"
       loadingContent={<p role="status" className="m-0 text-support text-muted-foreground">正在刷新，上次结果仍可用</p>}
-      errorContent={<Alert tone="warning" role="alert"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
+      errorContent={<Alert tone="warning"><Stack gap="field"><AlertDescription>刷新失败，显示上次同步的记录。</AlertDescription><Button variant="quiet" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>}>
       <Stack gap="fields"><p className="m-0 text-body">桑园采叶记录 · 今天 07:55</p><Field><FieldLabel>本地备注</FieldLabel><Input placeholder="记录待核对事项" /></Field></Stack>
     </AsyncContent>
   </Stack>;
@@ -113,7 +114,7 @@ export default function Demo() {
   return <Stack><Inline><Button variant="quiet" onClick={() => setStatus("pending")}>重新加载</Button><Button variant="quiet" onClick={() => setStatus("success")}>收到零条结果</Button><Button variant="quiet" onClick={() => setStatus("error")}>请求失败</Button></Inline>
     <AsyncContent status={status} hasContent={false}
       emptyContent={<Empty state="empty"><EmptyTitle level={3}>没有待同步记录</EmptyTitle><EmptyDescription>所有记录均已同步。</EmptyDescription></Empty>}
-      errorContent={<Alert tone="danger" role="alert"><Stack gap="field"><AlertDescription>记录暂时无法加载。</AlertDescription><Button variant="bordered" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>} />
+      errorContent={<Alert tone="danger"><Stack gap="field"><AlertDescription>记录暂时无法加载。</AlertDescription><Button variant="bordered" onClick={() => setStatus("pending")}>重试</Button></Stack></Alert>} />
   </Stack>;
 }
 ```

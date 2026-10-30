@@ -1,9 +1,9 @@
 # Table
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 659c6b93c7d065b51ce959d6ddb88ab959e8b06c51dd47338cfbd20910553db1
+Source SHA-256: 6d4986a22c788958edc8574a63618019df7eb6d313a2f2c4d631107706b11acf
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -13,6 +13,7 @@ Native table structure preserves comparison; the container handles horizontal ca
 ## Notes
 - Empty results may use a spanning cell below complete headers; data and sorting belong to the application.
 - One region, one surface: inside a Card use framed={false} rather than nesting a second border.
+- Data cells and row headers wrap anywhere, so a long identifier cannot push a column off the surface; column headers stay on one line.
 - Scrollability is measured with a ResizeObserver. The server and first frame render as not scrollable (the server has no layout to measure, and guessing would give most fitting tables a false Tab stop); the client updates before first paint.
 
 ## Use and ownership
@@ -70,7 +71,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableCell
-- no props declared by this library
+- `numeric?`: `boolean`.
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
@@ -82,11 +83,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableHead
-- no props declared by this library
+- `numeric?`: `boolean`.
 - plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableHeader
-- no props declared by this library
+- `sticky?`: `boolean`. 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器： 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height， 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableRow
@@ -114,10 +115,12 @@ Native table / caption / thead / tbody / tfoot / tr.
 ### TableHead
 A th with application-owned sort state.
 - scope: "col" | "row" | "colgroup" | "rowgroup"; default "col". Use row for row headers; complex tables may use id/headers.
+- numeric: boolean; default false. A numeric column is declared by the caller, never guessed from content: declare it on the header and its cells alike for inline-end alignment (left in RTL) and tabular figures; sort button content is reversed so the label meets the end edge. Readable as data-numeric.
 - aria-sort / children / native props: native th props. Compose an application Button to sort; the library never reorders rows.
 
 ### TableCell
 A td that preserves zero.
+- numeric: boolean; default false. A cell of a numeric column, paired with numeric on the column's header.
 - colSpan / rowSpan / headers / render / ref / native props: useRender.ComponentProps<td>. Supply spans and header associations explicitly; comparison columns are not hidden.
 
 ## Keyboard
@@ -141,7 +144,7 @@ export default function Demo() {
   const [descending, setDescending] = useState(false);
   const sorted = [...rows].sort((a, b) => descending ? b.count - a.count : a.count - b.count);
   // 数字列右对齐；排序箭头放在列名前，列名仍落在列的右缘上。正在排序的列名是当前状态，用焦墨。
-  return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead><TableHead className="text-end" aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}><span aria-hidden="true">{descending ? "↓" : "↑"}</span>数量</Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell><TableCell className="text-end numeric">{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
+  return <TableContainer><Table><TableCaption>同一组控件的占位与数量</TableCaption><TableHeader><TableRow><TableHead>控件</TableHead><TableHead numeric>宽度</TableHead><TableHead numeric>高度</TableHead><TableHead numeric aria-sort={descending ? "descending" : "ascending"}><Button variant="quiet" size="sm" onClick={() => setDescending(!descending)}>数量<span aria-hidden="true">{descending ? "↓" : "↑"}</span></Button></TableHead></TableRow></TableHeader><TableBody>{sorted.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell numeric>{row.width}</TableCell><TableCell numeric>{row.height}</TableCell><TableCell numeric>{row.count}</TableCell></TableRow>)}</TableBody></Table></TableContainer>;
 }
 ```
 
@@ -162,7 +165,7 @@ export default function Demo() {
   // 卡片已经是一张纸：表格不再铺第二张，贴着卡片的边放，首列文字与卡片标题同一条竖线。
   return <Card className="w-full max-w-md overflow-hidden" render={<section aria-labelledby="table-on-paper-title" />}>
     <Heading id="table-on-paper-title" level={3} className="px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap)">控件占位</Heading>
-    <TableContainer framed={false}><Table aria-labelledby="table-on-paper-title"><TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead></TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
+    <TableContainer framed={false}><Table aria-labelledby="table-on-paper-title"><TableHeader><TableRow><TableHead>控件</TableHead><TableHead numeric>宽度</TableHead><TableHead numeric>高度</TableHead></TableRow></TableHeader><TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell numeric>{row.width}</TableCell><TableCell numeric>{row.height}</TableCell></TableRow>)}</TableBody></Table></TableContainer>
   </Card>;
 }
 ```

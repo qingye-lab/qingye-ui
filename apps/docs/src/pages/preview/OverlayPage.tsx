@@ -24,7 +24,7 @@ import { toastManager } from "@qingye_lab/ui/components/toast";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "@qingye_lab/ui/components/tooltip";
 import { UILocaleProvider, zhCN } from "@qingye_lab/ui/locale";
 import { enUS } from "@qingye_lab/ui/locales/en-US";
-import { IconAlertCircle, IconCircleCheck, IconInfoCircle, IconPencil, IconAlertTriangle } from "@tabler/icons-react";
+import { IconPencil } from "@tabler/icons-react";
 import { COLLECTIONS, GalleryPage, Row, Section } from "./gallery";
 
 /* 浮层与反馈：对话框按「是否必须先回应」区分；轻量浮层不阻断工作面；
@@ -122,17 +122,17 @@ export default function OverlayPage() {
     <Section title="反馈">
       <Row label="就地说明" block lead="panel">
         <div className="grid gap-(--qy-field-group-gap) sm:grid-cols-2">
-          <Alert><IconInfoCircle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>草稿已保留</AlertTitle><AlertDescription>离开这一页不会丢失本次填写的内容。</AlertDescription></div></Alert>
-          <Alert tone="success"><IconCircleCheck aria-hidden="true" /><div className="grid gap-1"><AlertTitle>规则已启用</AlertTitle><AlertDescription>新的匹配条件对之后导入的记录生效。</AlertDescription></div></Alert>
-          <Alert tone="warning"><IconAlertTriangle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>同步时间较旧</AlertTitle><AlertDescription>最近一次同步在 3 天前，数字可能不是最新的。</AlertDescription></div></Alert>
-          <Alert tone="danger"><IconAlertCircle aria-hidden="true" /><div className="grid gap-1"><AlertTitle>导出未完成</AlertTitle><AlertDescription>连接中断，原数据仍在，可以重新导出。</AlertDescription></div></Alert>
+          <Alert><div className="grid gap-1"><AlertTitle>草稿已保留</AlertTitle><AlertDescription>离开这一页不会丢失本次填写的内容。</AlertDescription></div></Alert>
+          <Alert tone="success"><div className="grid gap-1"><AlertTitle>规则已启用</AlertTitle><AlertDescription>新的匹配条件对之后导入的记录生效。</AlertDescription></div></Alert>
+          <Alert tone="warning"><div className="grid gap-1"><AlertTitle>同步时间较旧</AlertTitle><AlertDescription>最近一次同步在 3 天前，数字可能不是最新的。</AlertDescription></div></Alert>
+          <Alert tone="danger"><div className="grid gap-1"><AlertTitle>导出未完成</AlertTitle><AlertDescription>连接中断，原数据仍在，可以重新导出。</AlertDescription></div></Alert>
         </div>
       </Row>
       <Row label="通知">
         {([["info", "已加入导出队列"], ["success", "同步已完成"], ["in-progress", "正在同步接入设备"], ["unknown", "保存结果尚未确认"], ["failed", "导出失败"]] as const).map(([type, title]) => <Button key={type} variant="bordered" size="sm" onClick={() => toastManager.add({ type, title, timeout: 5000 })}>{title}</Button>)}
       </Row>
       <Row label="结果未知" block>
-        <PendingValue label="保留天数" actions={<Button variant="bordered" size="sm">核实当前值</Button>}>90 天</PendingValue>
+        <PendingValue label="保留天数" numeric actions={<Button variant="bordered" size="sm">核实当前值</Button>}>90 天</PendingValue>
       </Row>
     </Section>
 

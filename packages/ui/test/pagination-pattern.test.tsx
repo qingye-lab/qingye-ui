@@ -19,7 +19,7 @@ describe("PaginationPattern", () => {
     const changed = vi.fn();
     render(<PaginationPattern defaultValue={{ page: 4, pageSize: 10 }} totalCount={100} pageSizeOptions={[10, 25]} onValueChange={changed} />);
     await user.click(screen.getByRole("combobox", { name: "每页条数" }));
-    await user.click(await screen.findByRole("option", { name: "25" }));
+    await user.click(await screen.findByRole("option", { name: "25 条/页" }));
     expect(changed).toHaveBeenCalledExactlyOnceWith({ page: 1, pageSize: 25 }, { reason: "page-size" });
     expect(screen.getByRole("button", { name: "第 1 页" })).toHaveAttribute("aria-current", "page");
   });
@@ -66,5 +66,18 @@ describe("PaginationPattern", () => {
     expect(() => render(<PaginationPattern totalCount={-1} />)).toThrow("nonnegative integer");
     // Runtime consumers may be plain JavaScript and still receive a useful contract error.
     expect(() => render(React.createElement(PaginationPattern, { totalCount: null } as never))).toThrow("explicit hasNextPage");
+  });
+  it("blocks paging while busy yet keeps the pressed button focusable", async () => {
+    const user = userEvent.setup(); const changed = vi.fn();
+    const { rerender } = render(<PaginationPattern value={{ page: 2, pageSize: 10 }} totalCount={100} onValueChange={changed} />);
+    await user.click(screen.getByRole("button", { name: "下一页" })); expect(changed).toHaveBeenCalledOnce();
+    rerender(<PaginationPattern busy value={{ page: 2, pageSize: 10 }} totalCount={100} onValueChange={changed} />);
+    const next = screen.getByRole("button", { name: "下一页" }); next.focus();
+    await user.click(next); await user.click(screen.getByRole("button", { name: "第 1 页" }));
+    expect(changed).toHaveBeenCalledOnce(); expect(next).toHaveAttribute("aria-disabled", "true"); expect(next).toHaveFocus();
+  });
+  it("disables every control with disabled", () => {
+    render(<PaginationPattern disabled value={{ page: 2, pageSize: 10 }} totalCount={100} pageSizeOptions={[10, 25]} />);
+    for (const button of screen.getAllByRole("button")) expect(button).toBeDisabled();
   });
 });

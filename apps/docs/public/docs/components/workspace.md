@@ -1,9 +1,9 @@
 # 工作面 Workspace
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
+Source SHA-256: 781c419aa6afcd278877ca1ec21c076cb4d75b5ec015b727234fb14030f6c432
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -12,9 +12,10 @@ Source SHA-256: ee8afe35a87b7c2482febea3328ed6d9a3dbb3e4cd5e697fc0e2064b91bb68b0
 
 ## Notes
 - 顶栏是一个 header；不在 main、section 或 article 里时，它是页面的 banner 地标。内容区是 main，一页只放一个 Workspace。
-- 换页后由应用把焦点移到 WorkspaceContent，跳转链接也指向它的 id；调用方显式传入的 tabIndex 优先。
+- Workspace 自带跳过链接（「跳到主要内容」）：键盘第一次 Tab 时出现，回车把焦点交给 WorkspaceContent；内容区的 id 由外壳生成，传入 id 时以传入的为准。换页后由应用把焦点移到 WorkspaceContent；调用方显式传入的 tabIndex 优先。
 - 送进顶栏的内容在首次提交后出现（服务端渲染时不在 HTML 里）；需要首屏就有标题时，直接写在 WorkspaceHeader 的 children 里。
 - 强制颜色下阴影被移除，工作面的范围由容器线承担，不需要额外补线。
+- WorkspaceTitle 是页面唯一的 h1；内容区里不要再放 PageHeader 的标题，需要分段时用 level 2 起的标题。
 
 ## Use and ownership
 - 后台类应用的外壳：长期导航在侧，一张工作面承载当前页面。
@@ -88,14 +89,15 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### WorkspaceTitle
 - `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
 - `numeric?`: `boolean`.
-- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm-mobile" | "contr…`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, react-dom, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, react-dom, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context SidebarHandleContext: without a provider nullable; provided by Workspace
 - Context WorkspaceContext: without a provider nullable; provided by Workspace
 
 ## Curated API
@@ -327,7 +329,7 @@ export function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {
                 selection={{ label: "选择本页记录", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: "name" }}
                 tableProps={{ "aria-label": "采集记录", className: "min-w-[calc(32*var(--qy-cai))]", containerProps: { framed: false } }}
                 emptyContent={<span className="text-muted-foreground">没有匹配的记录</span>} />
-              {details && active && <Stack render={<aside aria-label="记录详情" />} gap="panel">
+              {details && active && <Stack render={<aside aria-label="记录详情" lang="zh-CN" />} gap="panel">
                 <h2 className="m-0 text-heading wrap-anywhere">{active.name}</h2>
                 {!filtered.some(row => row.id === active.id) && <Alert tone="info"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}
                 <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className="numeric">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>

@@ -83,7 +83,8 @@ test("the converged registry contains exactly the semantic steps with no retired
   // 33 → 36（2026-10-08）：prose-h1 / -h2 / -h3。长文自有标题阶梯，界面的 title/chapter 读不出长文层级。
   // 36 → 37（2026-10-09）：display-xl。落地页总纲要比页题更大，且须是公共档而非页面自设字号。
   // 37 → 38（2026-10-12）：metric-lg。Stat size="lg" 的读数 32/40，与 metric 24/28 相差 1.33 倍。
-  expect(TEXT_STEPS).toHaveLength(38);
+  // 38 → 39（2026-10-30）：label-mobile。窄屏说明是 16px，字段名留在 13px 时说明大过名称（§8 约束）。
+  expect(TEXT_STEPS).toHaveLength(39);
   for (const role of ["lead", "subheading", "panel-title", "micro-tight", "button", "field-input", "field-label"]) expect(TEXT_STEPS).not.toContain(role);
   for (const role of TEXT_STEPS) for (const property of ["size", "leading", "tracking", "weight"]) expect(declaration(`--qy-text-${role}-${property}`)).toBeDefined();
   // Assistance and dense-region content are distinct semantic scopes (§8).

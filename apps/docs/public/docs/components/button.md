@@ -1,9 +1,9 @@
 # 按钮 Button
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
+Source SHA-256: efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa
 
 触发有明确对象与后果的动作；状态由调用方持有。
 
@@ -12,7 +12,7 @@ Source SHA-256: 1b238f26adf6e811d6ba60c2a9890bbcb0b78dd3232e6e905785e4a273ad5f5f
 
 ## Notes
 - 危险色调只是色调，不代表授权，也不替代确认；需要用户知道后果再决定时用 AlertDialog。
-- 忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。文字形态在名称后加转动的记号，图标形态由记号暂时替下自己的图形。
+- 忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。忙碌不改变按钮的外缘尺寸：名称与图形留在原处占位（不可见，仍在无障碍树里），转动的记号叠放在中央。
 - state（waiting / in-progress / unknown / failed）已移除，改为 loading。原来写在按钮旁的失败与结果未知，改由 Alert、Toast、FieldError 或 StatusDot 表达。
 - 导航使用原生 a / Link + buttonVariants；nativeButton=false 的 Button 仍是命令语义。
 - 小控件通过 touch-target 扩大命中区到本库 44px 目标，密度与外观尺寸不改变这一目标。
@@ -243,7 +243,6 @@ Source: apps/docs/src/content/button/demos/08-result.tsx
 import { Alert, AlertDescription, AlertTitle } from "@qingye_lab/ui/components/alert";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Stack } from "@qingye_lab/ui/components/layout";
-import { IconAlertCircle } from "@tabler/icons-react";
 import * as React from "react";
 
 export const meta = { title: "结果由提示组件表达", titleEn: "Results belong to feedback components" };
@@ -258,7 +257,6 @@ export default function Demo() {
     <Stack gap="fields" className="w-full max-w-md">
       {phase === "failed" && (
         <Alert tone="danger">
-          <IconAlertCircle aria-hidden="true" />
           <div className="grid gap-1"><AlertTitle>保存未完成</AlertTitle><AlertDescription>连接中断，填写的内容仍在。</AlertDescription></div>
         </Alert>
       )}

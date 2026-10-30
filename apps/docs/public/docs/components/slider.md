@@ -1,9 +1,9 @@
 # 滑块 Slider
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
-Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
+Source SHA-256: 836d2fa5c3b4ba8449b959f7b5f521c0ecaf427760c3edbd3a1c7309db591de5
 
 在明确区间内输入数值或有序范围。
 
@@ -11,6 +11,7 @@ Source SHA-256: 79b6c73e9ddbfe20c75f891d99a4621fbe49f7efa9a63652efd12669fe99570c
 Slider 输入真实数值。进度使用 Progress，测量结果使用 Meter；onValueCommitted 只表示当前交互提交。
 
 ## Notes
+- 无效由 Field 或 SliderThumb 的 aria-invalid 声明：已填充段与抓手改为危险填充色，值不变。只读时在滑块下方给出「只读」说明。
 - 必须给 SliderLabel 或每个 Thumb 的名称，多滑块名称需要区分。
 - 原语交互按步进吸附；显式无效值会抛 RangeError。
 - 4px 轨道厚度和 10rem 纵向长度是集中预设，修改 tokens/components.css 或项目主题；浏览器对比与几何仍需验收。
@@ -85,7 +86,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context ReadOnly: without a provider default-value; provided by Slider
 
 ## Curated API

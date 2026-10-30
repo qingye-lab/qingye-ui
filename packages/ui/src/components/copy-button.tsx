@@ -4,7 +4,11 @@ import { IconCheck, IconCopy } from "@tabler/icons-react";
 import * as React from "react";
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
 import { useUILocale } from "../locale";
+import { cn } from "../utils";
 import { Button, type ButtonProps } from "./button";
+
+// 同一个 hook 也从组件入口给出：CopyButton 的文档把它作为本组件的第二个部件，导入路径与组件一致。
+export { useCopyToClipboard };
 
 export type CopyButtonProps = Omit<ButtonProps, "state" | "value"> & {
   value: string;
@@ -58,7 +62,12 @@ export function CopyButton({ value, timeout = 2000, onCopySuccess, onCopyError, 
         setFailed(false);
         copyToClipboard(value);
       }}
-    >{children ?? <span className="inline-flex items-center gap-(--qy-action-gap)"><Icon aria-hidden="true" />{shape === "label" && <span>{copied ? messages.copied : messages.copy}</span>}</span>}</Button>
+    >{children ?? <span className="inline-flex items-center gap-(--qy-action-gap)"><Icon aria-hidden="true" />{shape === "label" && <span className="inline-grid">
+      {/* 「复制」与「已复制」叠在同一格里，格宽取两者较宽的一个：切换状态时按钮外缘不动（design.md「随状态改变尺寸」是反例）。
+       *  不在当前状态的那条文字不可见（invisible）并 aria-hidden，不进入名称。 */}
+      <span aria-hidden={copied ? "true" : undefined} className={cn("col-start-1 row-start-1", copied && "invisible")}>{messages.copy}</span>
+      <span aria-hidden={copied ? undefined : "true"} className={cn("col-start-1 row-start-1", !copied && "invisible")}>{messages.copied}</span>
+    </span>}</span>}</Button>
     <span id={statusId} data-slot="copy-button-feedback" role="status" className={failed ? "text-support text-destructive-foreground" : "sr-only"}>{failed ? messages.copyError : copied ? messages.copied : ""}</span>
     {customText && !explicitName && <span id={actionId} hidden>{messages.copy}</span>}
   </>;

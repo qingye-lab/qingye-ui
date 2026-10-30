@@ -8,7 +8,7 @@ const rows = [
 
 export default function Cover() {
   return <TableContainer className="w-full"><Table>
-    <TableHeader><TableRow><TableHead>控件</TableHead><TableHead className="text-end">宽度</TableHead><TableHead className="text-end">高度</TableHead></TableRow></TableHeader>
-    <TableBody>{rows.map(row => <TableRow key={row.name}><TableCell>{row.name}</TableCell><TableCell className="text-end numeric">{row.width}</TableCell><TableCell className="text-end numeric">{row.height}</TableCell></TableRow>)}</TableBody>
+    <TableHeader><TableRow><TableHead>控件</TableHead><TableHead numeric>宽度</TableHead><TableHead numeric>高度</TableHead></TableRow></TableHeader>
+    <TableBody>{rows.map(row => <TableRow key={row.name}><TableHead scope="row">{row.name}</TableHead><TableCell numeric>{row.width}</TableCell><TableCell numeric>{row.height}</TableCell></TableRow>)}</TableBody>
   </Table></TableContainer>;
 }

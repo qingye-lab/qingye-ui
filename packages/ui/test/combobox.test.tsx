@@ -198,3 +198,11 @@ test("simulated IME confirmation does not select a highlighted candidate; normal
   expect(change).toHaveBeenCalledWith("青叶", expect.anything());
   expect(input).toHaveValue("青叶");
 });
+
+test("an empty candidate list without application wording falls back to the shared default, and explicit wording wins", async () => {
+  const { rerender } = render(<Combobox items={[]} open><ComboboxInput aria-label="位置" /><ComboboxPopup><ComboboxEmpty /><ComboboxList>{() => null}</ComboboxList></ComboboxPopup></Combobox>);
+  expect(await screen.findByText("没有可选项")).toBeInTheDocument();
+  rerender(<Combobox items={[]} open><ComboboxInput aria-label="位置" /><ComboboxPopup><ComboboxEmpty>没有匹配的成员</ComboboxEmpty><ComboboxList>{() => null}</ComboboxList></ComboboxPopup></Combobox>);
+  expect(await screen.findByText("没有匹配的成员")).toBeInTheDocument();
+  expect(screen.queryByText("没有可选项")).toBeNull();
+});

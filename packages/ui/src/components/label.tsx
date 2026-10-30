@@ -11,7 +11,7 @@ export function Label({ className, render, ref, ...props }: LabelProps) {
   return useRender({
     defaultTagName: "label", render, ref,
     props: mergeProps({ "data-slot": "label" }, props, {
-      className: cn("min-w-0 max-w-full text-label text-foreground wrap-break-word", className),
+      className: cn("min-w-0 max-w-full text-label-mobile text-foreground wrap-break-word sm:text-label", className),
     }),
   });
 }

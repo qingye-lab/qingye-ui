@@ -56,6 +56,18 @@ export default {
           "descriptionEn": "Holds only leaf ids; details.cancel() prevents commit. Checking a branch adds or removes its enabled leaf descendants together; a disabled leaf keeps the fact it was given and cascade never changes it."
         },
         {
+          "name": "defaultFocusedId",
+          "type": "string | null",
+          "description": "首次渲染时 roving 入口所在的节点，默认是第一个可用节点；节点不可见或不可用时退回最近的可见可用祖先。展开其祖先由调用方通过 expandedIds 负责。TreeSelect 用它让弹层打开时焦点落在已选节点上。",
+          "descriptionEn": "The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens."
+        },
+        {
+          "name": "aria-label / aria-labelledby",
+          "type": "string",
+          "description": "必填其一：树的名称，落在 role=tree 的根上；缺失或为空时抛错。各节点的名称来自节点自己的 label。",
+          "descriptionEn": "One is required: the name of the tree, on the role=tree root. A missing or blank name throws. Each item is named by its own label."
+        },
+        {
           "name": "render / ref / native props",
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
@@ -80,7 +92,7 @@ export default {
       "真实层级需要键盘定位和独立选择。"
     ],
     "avoid": [
-      "平面比较用 DataTable；不内置懒加载、多选或请求。",
+      "平面比较用 DataTable；不内置懒加载或请求。收进触发器的选择用 TreeSelect。",
       "同一棵树里混用 checkable 与 selectable 的点击语义：一次点击只承担一种意图。"
     ],
     "stateOwner": {
@@ -97,7 +109,7 @@ export default {
     "customization": [
       "控件档案、间距和浮层表面消费现有角色；具体外观是预设。"
     ]
-  }, designEn: {"whenToUse":["An actual hierarchy needs keyboard positioning and independent selection."],"avoid":["Use DataTable for flat comparison; no built-in lazy loading, multiple selection, or requests.","Mixing checkable and selectable click semantics on the same tree; one click carries one intent."],"stateOwner":{"library":["Roving focus, stable keys, and focus recovery."],"application":["Nodes, expansion, selection, disabled, and empty/unknown semantics."]},"responsive":["Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."]},
+  }, designEn: {"whenToUse":["An actual hierarchy needs keyboard positioning and independent selection."],"avoid":["Use DataTable for flat comparison; no built-in lazy loading or requests. Use TreeSelect for a choice folded into a trigger.","Mixing checkable and selectable click semantics on the same tree; one click carries one intent."],"stateOwner":{"library":["Roving focus, stable keys, and focus recovery."],"application":["Nodes, expansion, selection, disabled, and empty/unknown semantics."]},"responsive":["Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."]},
   "keyboard": [
     {
       "keys": "↑ / ↓ / Home / End",

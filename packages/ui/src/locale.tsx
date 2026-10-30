@@ -9,17 +9,22 @@ export type UILocaleMessages = {
   dismissFileRejection: (name: string) => string;
   toastSuccess: string;
   pagination: string; previousPage: string; nextPage: string; morePages: string;
-  paginationPage: (page: number) => string; paginationPageSize: string;
+  paginationPage: (page: number) => string; paginationPageSize: string; paginationPageSizeOption: (size: number) => string;
   paginationSummary: (page: number, totalPages: number | null, totalCount: number | null) => string;
-  sidebar: string;
+  sidebar: string; sidebarOpen: string;
   showOptions: string; clearSelection: string; remove: string;
   decrease: string; increase: string; numberInput: string;
   otpLengthExceeded: (length: number) => string; tagEmpty: string; removeTag: (tag: string) => string;
   notifications: string; closeNotification: string;
-  selectDate: string; clearDate: string; selectDateTime: string; time: string;
-  showPassword: string; clearSearch: string;
+  selectDate: string; clearDate: string; clearDateTime: string; clearDateRange: string; selectDateTime: string; time: string;
+  dateIncomplete: string; dateOutOfRange: string;
+  timeHour: string; timeMinute: string; timeSecond: string; timeDayPeriod: string; timeAm: string; timePm: string; timeEmpty: string; timeOutOfRange: string; timeIncomplete: string;
+  fieldOptional: string; fieldValidating: string;
+  showPassword: string; clearSearch: string; searching: string;
+  colorArea: string; colorSaturation: string; colorBrightness: string; colorHue: string; colorHex: string; colorInvalid: string; colorChoose: string; colorPresets: string;
+  colorChannelValue: (channel: string, value: string, hex: string) => string;
   copy: string; copied: string; copyError: string; language: string;
-  dropFiles: string; chooseFiles: string; removeFile: (name: string) => string;
+  dropFiles: string; chooseFiles: string; fileRequired: string; removeFile: (name: string) => string;
   fileError: (name: string, reason: "type" | "size" | "count" | "directory") => string;
   fileRejectedWith: (name: string, message: string) => string;
   tagLimit: (max: number) => string; addTagWithLimit: (max: number) => string; tagDraftPending: (tag: string) => string;
@@ -45,13 +50,19 @@ export type UILocaleMessages = {
   // Tables
   selectedCount: (count: number) => string; sortAscending: string; sortDescending: string; selectRow: string;
   filterUnapplied: string; bulkVersion: string; treeEmpty: string;
+  tableNoValue: string; selectAllMatching: (count: number) => string; selectAllScoped: (label: string, scope: "page" | "filtered") => string;
   confirmContentChanged: string; confirmReviewLatest: string;
   // Data display
-  resize: string; copyCode: string;
+  resize: string; copyCode: string; codeRegion: string;
+  alertToneLabel: (tone: "info" | "warning" | "danger" | "success") => string;
   statusLabel: (status: "online" | "offline" | "warning" | "error" | "info" | "neutral" | "pending" | "in-progress" | "unknown") => string;
   toc: string;
   unreadCount: (count: number) => string;
   resultCount: (count: number) => string;
+  cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string;
+  commandEmpty: string;
+  skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
+  treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -60,21 +71,26 @@ export const zhCN: UILocale = {
   code: "zh-CN",
   messages: {
     buttonWaiting: "等待中", buttonInProgress: "进行中", buttonUnknown: "结果未知", buttonFailed: "操作失败", inputClear: "清空输入",
-    close: "关闭", loading: "正在加载", readOnly: "只读", breadcrumb: "面包屑导航", more: "更多",
+    close: "关闭", loading: "正在加载", selectEmpty: "没有可选项", moreNotifications: (count) => `另有 ${count.toLocaleString("zh-CN")} 条通知`, readOnly: "只读", breadcrumb: "面包屑导航", more: "更多",
     dismissFileRejection: (name) => `忽略 ${name} 的拒绝提示`,
     toastSuccess: "成功",
     pagination: "分页", previousPage: "上一页", nextPage: "下一页", morePages: "更多页",
-    paginationPage: page => `第 ${page} 页`, paginationPageSize: "每页条数",
+    paginationPage: page => `第 ${page} 页`, paginationPageSize: "每页条数", paginationPageSizeOption: size => `${size} 条/页`,
     paginationSummary: (page, totalPages, totalCount) => totalCount === 0 ? "0 条" : totalPages === null ? `第 ${page} 页，总数未知` : `第 ${page} 页，共 ${totalPages} 页 · ${totalCount} 条`,
-    sidebar: "工作区导航",
+    sidebar: "工作区导航", sidebarOpen: "打开工作区导航", skipToContent: "跳到主要内容",
     showOptions: "展开选项", clearSelection: "清除选择", remove: "移除",
     decrease: "减少", increase: "增加", numberInput: "数值输入",
     otpLengthExceeded: (length) => `最多输入 ${length} 个字符；本次输入未添加`, tagEmpty: "请输入非空标签", removeTag: (tag) => `移除 ${tag}`,
     notifications: "操作提示", closeNotification: "关闭提示",
-    selectDate: "选择日期", clearDate: "清除日期", selectDateTime: "选择日期和时间", time: "时间",
-    showPassword: "显示密码", clearSearch: "清除搜索",
+    selectDate: "选择日期", clearDate: "清除日期", clearDateTime: "清除日期和时间", clearDateRange: "清除日期范围", selectDateTime: "选择日期和时间", time: "时间",
+    dateIncomplete: "日期未填完整", dateOutOfRange: "日期超出可选范围",
+    timeHour: "时", timeMinute: "分", timeSecond: "秒", timeDayPeriod: "上午或下午", timeAm: "上午", timePm: "下午", timeEmpty: "未填", timeOutOfRange: "时间超出可选范围", timeIncomplete: "时间未填完整",
+    fieldOptional: "选填", fieldValidating: "正在校验",
+    showPassword: "显示密码", clearSearch: "清除搜索", searching: "正在搜索",
+    colorArea: "饱和度与明度", colorSaturation: "饱和度", colorBrightness: "明度", colorHue: "色相", colorHex: "十六进制色值", colorInvalid: "颜色格式应为 #rrggbb", colorChoose: "选择颜色", colorPresets: "预设颜色",
+    colorChannelValue: (channel, value, hex) => `${channel} ${value}，${hex}`,
     copy: "复制", copied: "已复制", copyError: "复制失败，请手动复制", language: "语言",
-    dropFiles: "拖入文件，或选择本地文件", chooseFiles: "选择文件", removeFile: (name) => `移除 ${name}`,
+    dropFiles: "拖入文件，或选择本地文件", chooseFiles: "选择文件", fileRequired: "请选择文件", removeFile: (name) => `移除 ${name}`,
     fileError: (name, reason) => `${name}：${reason === "type" ? "文件类型不支持" : reason === "size" ? "文件过大" : reason === "directory" ? "不支持文件夹" : "超出文件数量限制"}`,
     fileRejectedWith: (name, message) => `${name}：${message}`,
     tagLimit: max => `最多 ${max} 个标签`, addTagWithLimit: max => `添加标签（最多 ${max} 个）`, tagDraftPending: tag => `“${tag}”尚未添加，请先添加或清除再提交`,
@@ -93,14 +109,19 @@ export const zhCN: UILocale = {
     selectPlaceholder: "请选择", addTag: "添加标签", tagExists: (tag) => `“${tag}”已添加`,
     selectDateRange: "选择日期范围", today: "今天", previousMonth: "上个月", nextMonth: "下个月", month: "月份", year: "年份", selectedDate: "已选择",
     startDate: "开始日期", endDate: "结束日期", dateRangePresets: "常用范围",
-    selectedCount: (count) => `已选 ${count} 项`, sortAscending: "升序", sortDescending: "降序", selectRow: "选择此行",
+    selectedCount: (count) => `已选 ${count.toLocaleString("zh-CN")} 项`, sortAscending: "升序", sortDescending: "降序", selectRow: "选择此行", selectRowNamed: (name) => `选择“${name}”`,
     filterUnapplied: "条件尚未应用", bulkVersion: "版本", treeEmpty: "没有条目",
+    tableNoValue: "无值", selectAllMatching: (count) => `选择全部 ${count.toLocaleString("zh-CN")} 项`, selectAllScoped: (label, scope) => `${label}（${scope === "page" ? "仅本页" : "全部筛选结果"}）`,
     confirmContentChanged: "对象、版本或变更已改变，请重新阅读。", confirmReviewLatest: "重新阅读",
-    resize: "调整大小", copyCode: "复制代码",
-    statusLabel: (status) => ({ online: "在线", offline: "离线", warning: "警告", error: "异常", info: "提示", neutral: "未知", pending: "等待中", "in-progress": "进行中", unknown: "结果未知" })[status],
+    resize: "调整大小", copyCode: "复制代码", codeRegion: "代码",
+    alertToneLabel: (tone) => ({ info: "提示：", warning: "警告：", danger: "危险：", success: "成功：" })[tone],
+    statusLabel: (status) => ({ online: "在线", offline: "离线", warning: "警告", error: "异常", info: "提示", neutral: "未归类", pending: "等待中", "in-progress": "进行中", unknown: "结果未知" })[status],
     toc: "本页目录",
     unreadCount: (count) => `${count} 条未读`,
     resultCount: (count) => `找到 ${count} 项`,
+    cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
+    commandEmpty: "没有匹配项",
+    treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
   },
 };
 

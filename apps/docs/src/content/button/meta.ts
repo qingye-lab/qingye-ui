@@ -50,7 +50,7 @@ export default {
   ],
   notes: [
     "危险色调只是色调，不代表授权，也不替代确认；需要用户知道后果再决定时用 AlertDialog。",
-    "忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。文字形态在名称后加转动的记号，图标形态由记号暂时替下自己的图形。",
+    "忙碌时动作的可访问名称不变；「进行中」通过 description 与不可见的 live region 告诉读屏，按钮旁没有可见的状态文字。忙碌不改变按钮的外缘尺寸：名称与图形留在原处占位（不可见，仍在无障碍树里），转动的记号叠放在中央。",
     "state（waiting / in-progress / unknown / failed）已移除，改为 loading。原来写在按钮旁的失败与结果未知，改由 Alert、Toast、FieldError 或 StatusDot 表达。",
     "导航使用原生 a / Link + buttonVariants；nativeButton=false 的 Button 仍是命令语义。",
     "小控件通过 touch-target 扩大命中区到本库 44px 目标，密度与外观尺寸不改变这一目标。",
@@ -58,7 +58,7 @@ export default {
   ],
   notesEn: [
     "Danger is only a tone: it grants no permission and replaces no confirmation. Use AlertDialog when the user must know the consequence before deciding.",
-    "While busy the action's accessible name stays unchanged; “In progress” reaches screen readers through a description and an invisible live region, and no visible status text sits beside the button. A label button adds a spinning mark after its name; on an icon button the mark temporarily stands in for its glyph.",
+    "While busy the action's accessible name stays unchanged; “In progress” reaches screen readers through a description and an invisible live region, and no visible status text sits beside the button. Busy never changes the button's outer size: the name or glyph keeps its place, unseen but still in the accessibility tree, and the spinning mark is centered over it.",
     "state (waiting / in-progress / unknown / failed) is removed in favour of loading. Failure and unknown results formerly written beside the button are expressed by Alert, Toast, FieldError or StatusDot.",
     "Use a native anchor or router Link with buttonVariants for navigation. A nativeButton=false Button remains a command.",
     "touch-target expands small controls to the library's 44px touch target without changing visual dimensions or shrinking it with density.",

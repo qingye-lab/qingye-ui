@@ -1,9 +1,9 @@
 # Breadcrumb
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
-Source SHA-256: 64bd70dc1261271ea81435e07e192188a150143bdfef034d13d0a1fae4b81824
+Source SHA-256: fc48d9be8459b644e0133c7c3388e304dcc384b2d7052f80ea68e29057d6a7c0
 
 Parent links and an explicit current location.
 
@@ -12,6 +12,7 @@ An ordered list expresses the path; Current identifies the supplied location and
 
 ## Notes
 - Does not read URLs or history or create ancestors; direct ol children must be li.
+- Under dir="rtl" the separator arrow flips with the reading direction.
 
 ## Use and ownership
 - An object has an actual parent path and direct arrivals need to identify their location.

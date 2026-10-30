@@ -123,3 +123,12 @@ test("refs, native-button render, consumer styles and explicit ARIA survive comp
   expect(control).toHaveClass("caller-unchecked");
   expect(control).toHaveStyle({ color: "var(--qy-foreground)" });
 });
+
+test("a declared invalid fact stays exposed once the checkbox is checked", async () => {
+  render(<Checkbox aria-label="同意" aria-invalid="true" />);
+  const control = screen.getByRole("checkbox", { name: "同意" });
+  expect(control).toHaveAttribute("aria-invalid", "true");
+  await userEvent.click(control);
+  expect(control).toBeChecked();
+  expect(control).toHaveAttribute("aria-invalid", "true");
+});

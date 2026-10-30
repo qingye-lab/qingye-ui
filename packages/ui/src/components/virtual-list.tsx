@@ -4,6 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { defaultRangeExtractor, observeElementRect, useVirtualizer } from "@tanstack/react-virtual";
 import * as React from "react";
+import { isName, received } from "../require-name";
 import { cn } from "../utils";
 
 export type VirtualListScrollOptions = { align?: "auto" | "start" | "center" | "end" };
@@ -37,6 +38,7 @@ const useLayoutEffect = typeof document === "undefined" ? React.useEffect : Reac
 
 /** A measured or fixed collection window with reachable rows and retained descendant focus. */
 export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height, measurement = "fixed", actionsRef, followEnd = false, overscan = 2, render, ref, className, style, ...props }: VirtualListProps<Item>) {
+  if (!isName(props["aria-label"]) && !isName(props["aria-labelledby"])) throw new Error(`VirtualList requires a nonempty aria-label or aria-labelledby naming the list; received aria-label ${received(props["aria-label"])} and aria-labelledby ${received(props["aria-labelledby"])}.`);
   if (!Number.isFinite(itemSize) || itemSize <= 0 || !Number.isFinite(height) || height <= 0) throw new RangeError("VirtualList itemSize and height must be finite positive numbers.");
   if (!Number.isInteger(overscan) || overscan < 0) throw new RangeError("VirtualList overscan must be a nonnegative integer.");
   if (measurement !== "fixed" && measurement !== "dynamic") throw new RangeError("VirtualList measurement must be fixed or dynamic.");

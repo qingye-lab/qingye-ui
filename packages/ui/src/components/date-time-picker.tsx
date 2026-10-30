@@ -2,11 +2,12 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { IconCalendar } from "@tabler/icons-react";
+import { IconCalendar, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
+import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useCustomValidity, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Calendar, formatLocalDate, parseLocalDate, type CalendarProps } from "./calendar";
@@ -35,6 +36,8 @@ const validDateTime = (text: string) => { const parts = text.split("T"); return 
 // 带不带秒的两段文本放在一起比较时补齐到秒。
 const withSeconds = (text: string) => text.length === 16 ? `${text}:00` : text;
 
+const outOfRange = (entry: string, min: string | undefined, max: string | undefined) => Boolean(min && withSeconds(entry) < withSeconds(min) || max && withSeconds(entry) > withSeconds(max));
+
 export function DateTimePicker(allProps: DateTimePickerProps) {
   const { value: valueProp, defaultValue, onValueChange, min, max, name, form, disabled = false, readOnly = false, inputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
   // 受控与否看 `value` 属性在不在（同 DatePicker）：既有的受控用法，包括 `value={undefined}` 表示空，行为不变。
@@ -51,9 +54,14 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
   const boundaryRef = React.useRef<HTMLDivElement | null>(null);
   const { ref: externalInputRef, onChange, onBlur, ...inputRest } = inputProps;
   const [inputRef, setInputRef] = useInputRef(externalInputRef);
-  const facts = useInputFacts(inputRef, { disabled }, { value: false });
-  const editable = !disabled && !facts.disabled && !readOnly;
+  const facts = useInputFacts(inputRef, { disabled, readOnly }, { value: false });
+  const readOnlyNow = readOnly || facts.readOnly;
+  const editable = !disabled && !facts.disabled && !readOnlyNow;
   const typing = useTypingText(value ?? "");
+  // 同 DatePicker：未被采纳的键入在失焦时标为无效，键入不再未采纳时自然失效。
+  const [rejection, setRejection] = React.useState<"dateIncomplete" | "dateOutOfRange" | undefined>();
+  const invalidKind = typing.active ? rejection : undefined;
+  useCustomValidity(inputRef, invalidKind ? messages[invalidKind] : "");
   const change = (next: string | undefined, event: React.SyntheticEvent) => {
     if (!controlled) setUncontrolled(next);
     onValueChange?.(next, event);
@@ -84,30 +92,39 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
     className: cn("flex min-w-0", className),
     children: <Popover open={editable && open} onOpenChange={next => { if (next) { setDateDraft(parseLocalDate(value?.split("T")[0] ?? "")); setTimeDraft(value?.split("T")[1] ?? ""); } setOpen(next); }}>
       {/* 基础层 §6：日期时间与日历入口共用一条编辑边界；格式长度固定，宽度随内容。 */}
-      <InputGroup ref={boundaryRef} data-slot="date-time-picker-control" className="w-fit max-w-full flex-nowrap">
-        <Input {...inputRest} min={native.min} max={native.max} ref={setInputRef} type="datetime-local" name={name} form={form} disabled={disabled} readOnly={readOnly} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={withHiddenIndicator(inputRest.className)}
+      <InputGroup ref={boundaryRef} data-slot="date-time-picker-control" data-readonly={readOnlyNow ? "" : undefined} className="w-fit max-w-full flex-nowrap">
+        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={native.min} max={native.max} ref={setInputRef} type="datetime-local" name={name} form={form} disabled={disabled} readOnly={readOnly} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={withHiddenIndicator(inputRest.className)}
           onBlur={event => {
             onBlur?.(event);
             if (editable && typing.active && value && readNativeEntry(event.currentTarget) === "empty") change(undefined, event);
-            typing.release();
+            if (!typing.active) return;
+            const entry = readNativeEntry(event.currentTarget);
+            if (entry === "empty") return typing.release();
+            setRejection(entry !== "partial" && validDateTime(entry) && outOfRange(entry, native.min, native.max) ? "dateOutOfRange" : "dateIncomplete");
           }}
           onChange={event => {
             onChange?.(event);
             if (event.defaultPrevented || event.baseUIHandlerPrevented || !editable) return;
             // 与 DatePicker 同理（2026-10-12）：键入中间态与 5–6 位年份不是值，不上报、不清空；
             // 此前把 `20261-10-03T12:30` 原样交给调用方，下一次渲染就会因「不是完整的本地日期时间」而抛错。
+            setRejection(undefined);
             const entry = readNativeEntry(event.currentTarget);
             if (entry === "partial") return typing.hold("");
             if (entry === "empty") { typing.release(); return change(undefined, event); }
             if (!validDateTime(entry)) return typing.hold(entry);
+            // 越界的完整时刻不上报、不改已有值，文字留在输入里。
+            if (outOfRange(entry, native.min, native.max)) return typing.hold(entry);
             typing.release();
             change(entry, event);
           }} />
+        {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
+        {/* 与 DatePicker 同一套清除：值非空且可编辑时出现，清除后焦点回到输入。弹层里的「清除」是另一条路径，保留。 */}
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDateTime} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
         <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateTime} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)"><Calendar {...(dateDraft ? { defaultMonth: dateDraft } : {})} {...calendarProps} {...bounds} mode="single" selected={dateDraft} disabled={editable ? bounds.disabled : true} autoFocus onSelect={setDateDraft} />
         <div className="grid gap-(--qy-field-gap)"><Label htmlFor={timeId}>{messages.time}</Label><Input nativeInput id={timeId} type="time" value={timeDraft} disabled={!editable} step={inputProps.step} {...(timeMin ? { min: timeMin } : {})} {...(timeMax ? { max: timeMax } : {})} onChange={event => setTimeDraft(event.currentTarget.value)} /></div>
-        <div className="flex flex-wrap gap-(--qy-action-gap)"><Button disabled={!editable || !draftInRange} onClick={event => { if (draftText && draftInRange) { change(draftText, event); if (!event.defaultPrevented) setOpen(false); } }}>{messages.apply}</Button><Button variant="quiet" onClick={() => setOpen(false)}>{messages.cancel}</Button><Button variant="quiet" disabled={!editable || !value} onClick={event => { change(undefined, event); if (!event.defaultPrevented) setOpen(false); }}>{messages.clear}</Button></div>
+        <div className="flex flex-wrap gap-(--qy-action-gap)"><Button disabled={!editable || !draftInRange} onClick={event => { if (draftText && draftInRange) { typing.release(); change(draftText, event); if (!event.defaultPrevented) setOpen(false); } }}>{messages.apply}</Button><Button variant="quiet" onClick={() => setOpen(false)}>{messages.cancel}</Button><Button variant="quiet" disabled={!editable || !value} onClick={event => { typing.release(); change(undefined, event); if (!event.defaultPrevented) setOpen(false); }}>{messages.clear}</Button></div>
       </div></PopoverPopup>
     </Popover>,
   }) });

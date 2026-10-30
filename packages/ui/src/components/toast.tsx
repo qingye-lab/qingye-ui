@@ -33,16 +33,24 @@ function isPersistent(type?: string) {
   return isPending(type) || type === "unknown" || type === "error" || type === "failed";
 }
 
-// 通知只呈现应用给出的事实，不替应用推断结果（用户裁决 2026-10-10：toast 不做推测）。
-// 这里唯一的规则是呈现上的：未完成、失败与应用声明的未知不自动消失，等用户看到或应用更新。
-function usePersistence(notice: Notice, manager: Manager) {
-  React.useLayoutEffect(() => {
-    if (notice.transitionStatus !== "ending" && isPersistent(notice.type) && notice.timeout !== 0) manager.update(notice.id, { timeout: 0 });
-  }, [notice.id, notice.type, notice.timeout, notice.transitionStatus, manager]);
+// 不会自己消失的通知：未完成、失败、未知、带动作，或调用方明确给了 timeout 0。
+// 它们只能由读者或应用移走，所以不能因为数量上限被收起——收起等于让它消失（WCAG 2.2.1 的同一道理）。
+function isHeld(notice: Notice) {
+  return isPersistent(notice.type) || notice.actionProps != null || notice.timeout === 0;
 }
 
-function NoticeBody({ notice, manager, anchored = false }: {
-  notice: Notice; manager: Manager; anchored?: boolean;
+// 通知只呈现应用给出的事实，不替应用推断结果（用户裁决 2026-10-10：toast 不做推测）。
+// 这里唯一的规则是呈现上的：未完成、失败与应用声明的未知不自动消失，等用户看到或应用更新；
+// 带动作（如「撤销」）的通知同样常驻——动作需要时间，5 秒内来不及操作（WCAG 2.2.1）。
+// 调用方显式给了非零 timeout 也一样改为 0：这是呈现规则，不是默认值。
+function usePersistence(notice: Notice, manager: Manager) {
+  React.useLayoutEffect(() => {
+    if (notice.transitionStatus !== "ending" && (isPersistent(notice.type) || notice.actionProps != null) && notice.timeout !== 0) manager.update(notice.id, { timeout: 0 });
+  }, [notice.id, notice.type, notice.actionProps, notice.timeout, notice.transitionStatus, manager]);
+}
+
+function NoticeBody({ notice, manager, anchored = false, expanded = false }: {
+  notice: Notice; manager: Manager; anchored?: boolean; expanded?: boolean;
 }) {
   const { messages } = useUILocale();
   usePersistence(notice, manager);
@@ -63,6 +71,8 @@ function NoticeBody({ notice, manager, anchored = false }: {
   const [focused, setFocused] = React.useState(false);
   const messageRole = !high ? "status" : focused ? "alert" : undefined;
   const { onFocusCapture, onBlurCapture, ...rootProps } = notice.data?.rootProps ?? {};
+  // 超出上限的通知默认收起；常驻的、或读者展开了通知区的，照常显示（Base UI 对超限项设了 inert，显示时要解除）。
+  const shown = !notice.limited || expanded || isHeld(notice);
   return (
     <>
     <Toast.Root
@@ -72,11 +82,15 @@ function NoticeBody({ notice, manager, anchored = false }: {
       data-motion={notice.transitionStatus === "ending" ? undefined : "fade-in"}
       swipeDirection={anchored ? [] : ["left", "right"]}
       className={cn(
+        // 稳定动效类：调用方改 data-slot 也不丢失 motion.css 的规则；仅非锚定的通知（toast-root）有对应规则。
+        !anchored && "qy-toast-root",
         // 通知盖在内容之上，是真实的浮起：与其他浮层同一级阴影（基础层 §6；用户裁决 2026-10-13，此前只有一道线）。
-        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none focus-visible:border-ring data-limited:hidden",
+        "pointer-events-auto w-full min-w-0 rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none focus-visible:border-ring",
+        !shown && "hidden",
         // tooltipStyle 是提示面：与 Tooltip、数据图读数同一内缘（外缘到内容，所以减去线宽）。
         notice.data?.tooltipStyle ? "px-[calc(var(--qy-hint-padding-inline)-var(--qy-line-width))] py-[calc(var(--qy-hint-padding-block)-var(--qy-line-width))]" : "p-(--qy-panel-padding-sm)",
       )}
+      {...(notice.limited && shown ? { inert: false } : {})}
       {...rootProps}
       onFocusCapture={(event) => { setFocused(true); onFocusCapture?.(event); }}
       onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); onBlurCapture?.(event); }}
@@ -124,6 +138,11 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
   const manager = Toast.useToastManager<ToastData>();
   const { messages } = useUILocale();
   const layer = useFloatingLayer("notification");
+  // 收起的数量如实告诉读者，并给一个就地展开的入口：不新增组件，数量本身就是那个入口。
+  // 展开只作用于眼前这一批；收起的通知都离开后恢复，下一批超限时重新收起。
+  const [expanded, setExpanded] = React.useState(false);
+  const collapsed = manager.toasts.filter(notice => notice.limited && notice.transitionStatus !== "ending" && !isHeld(notice)).length;
+  React.useEffect(() => { if (collapsed === 0) setExpanded(false); }, [collapsed]);
   return (
     <Toast.Portal {...portalProps}>
       <Toast.Viewport
@@ -147,7 +166,10 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
           >
             <NoticeBody notice={notice} manager={manager} anchored />
           </Toast.Positioner>
-        ) : <NoticeBody key={notice.id} notice={notice} manager={manager} />)}
+        ) : <NoticeBody key={notice.id} notice={notice} manager={manager} expanded={expanded} />)}
+        {!anchored && !expanded && collapsed > 0 && (
+          <Button data-slot="toast-overflow" size="sm" variant="bordered" className="pointer-events-auto self-end" onClick={() => setExpanded(true)}>{messages.moreNotifications(collapsed)}</Button>
+        )}
       </Toast.Viewport>
     </Toast.Portal>
   );

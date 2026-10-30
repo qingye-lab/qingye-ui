@@ -11,7 +11,7 @@ export default {
     { name: "status", type: '"pending" | "success" | "error"', description: "应用声明请求事实，不用超时猜测失败。", descriptionEn: "Application-declared request fact; elapsed time never implies failure." },
     { name: "hasContent / children", type: "boolean / ReactNode", description: "有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。", descriptionEn: "Valid content stays mounted without automatic disabling, draft clearing or focus movement." },
     { name: "emptyContent / loadingContent / errorContent", type: "ReactNode", description: "emptyContent 必填；error 状态必须提供 errorContent。加载默认读 locale。重试动作由应用提供。", descriptionEn: "emptyContent is required; error requires errorContent. Loading defaults to the locale. The app supplies retry actions." },
-    { name: "render / ref / native props", type: "useRender.ComponentProps<div>", description: "实际根节点的语义与属性；默认不建立 live region。", descriptionEn: "Semantics and props for the actual root; no live region is added by default." },
+    { name: "render / ref / native props", type: "useRender.ComponentProps<div>", description: "实际根节点的语义与属性；根节点本身不是 live region，只有 error 反馈带 role=alert。", descriptionEn: "Semantics and props for the actual root; the root is not a live region, only error feedback carries role=alert." },
   ] }],
   design: {
     methods: ["名实相符", "进退相承", "相成相制"],
@@ -28,6 +28,6 @@ export default {
     stateOwner: { library: ["Stable feedback/content structure, aria-busy on retained content while pending; loading feedback is a sibling so a busy ancestor does not defer its announcement."], application: ["Requests, cancellation, stale response isolation, validity, permissions, drafts and retries."] },
     responsive: ["Adds no scroll owner; composed feedback and recovery controls handle wrapping."],
   },
-  notes: ["错误不会自动宣告。需要即时宣告时由应用在 errorContent 中提供 role=alert；避免把整块有效内容设为 live region。", "hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。"],
-  notesEn: ["Errors are not announced automatically. Supply role=alert inside errorContent when appropriate, rather than making all retained content live.", "hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes."],
+  notes: ["error 状态的反馈由组件包在 role=alert 里宣告，errorContent 不必再自带 role=alert（嵌套会重复播报）；有效内容不设为 live region。", "反馈固定排在内容之后：刷新与失败时正在阅读的内容不被推动，只有其后的元素随反馈占位而移动。", "hasContent 表示当前可呈现的内容，不等同于曾经成功过；筛选范围或权限变化后，由应用判断旧内容是否仍有效。"],
+  notesEn: ["Error feedback is wrapped in role=alert by the component, so errorContent need not add its own (nesting announces twice); retained content is never made live.", "Feedback always follows the content: refresh and failure do not push the content being read, only elements after it move with the feedback.", "hasContent means content is currently usable, not that a past request once succeeded. The app re-evaluates validity after scope or permission changes."],
 } satisfies ComponentMeta;

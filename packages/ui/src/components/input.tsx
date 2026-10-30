@@ -114,7 +114,7 @@ export function Input({
     size,
     "data-slot": (props as InputPrimitive.Props & { "data-slot"?: string })["data-slot"] ?? "input",
     className: (state) => cn(
-      "col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground",
+      "qy-input col-start-1 row-start-1 w-full min-w-0 self-stretch bg-transparent px-(--qy-fill-padding) py-0 text-foreground outline-none placeholder:text-muted-foreground",
       /* 输入一旦有底色（自动填充），直角会盖住外框圆角处的边线：取外框的同心内圆角
        * （外圆角 − 一道线宽）。自动填充的平台底色只铺在 input 上，停在附属按钮前，
        * 改用外框同一个填值面，整个编辑边界只有一种底色；文字色同理回到前景色。 */

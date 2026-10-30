@@ -18,3 +18,10 @@ test("absent original value stays absent and a disabled verification action stay
   await userEvent.click(screen.getByRole("button")); expect(verify).not.toHaveBeenCalled();
 });
 test("an empty object name is rejected", () => { expect(() => render(<PendingValue label="" />)).toThrow("object label"); });
+test("the original value is set in tabular figures only when it is declared numeric", () => {
+  const { container, rerender } = render(<PendingValue label="值">已归档</PendingValue>);
+  const original = () => container.querySelector("[data-slot=pending-value-original]");
+  expect(original()).not.toHaveClass("numeric");
+  rerender(<PendingValue label="值" numeric>{90}</PendingValue>);
+  expect(original()).toHaveClass("numeric");
+});

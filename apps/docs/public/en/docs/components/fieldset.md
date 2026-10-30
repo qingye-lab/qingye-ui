@@ -1,9 +1,9 @@
 # Fieldset
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
-Source SHA-256: 1dc3ff00ae8d76f9a5ff80c54074232c4e41d08f8c7d8cde196d2aed27e4f046
+Source SHA-256: a7cb5961235149cd60abe9b0291b81238c755469f313982fd9446a41f0138ad4
 
 Give related fields a shared name and disabled scope.
 

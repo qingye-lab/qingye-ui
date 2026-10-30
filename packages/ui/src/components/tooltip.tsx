@@ -111,8 +111,12 @@ function TooltipPopup({
   ...popupProps
 }: TooltipPopupProps): React.ReactElement {
   const layer = useFloatingLayer("popup");
-  // Foundation presets: raised surface/shadow and overlay radius. Motion owns entry/exit.
-  const surface = "max-w-(--available-width) origin-(--transform-origin) rounded-overlay bg-surface-raised text-foreground shadow-raised text-control-sm-mobile sm:text-control-sm min-h-(--qy-control-sm-narrow) sm:min-h-(--qy-control-sm) px-(--qy-hint-padding-inline) py-[calc((var(--qy-control-sm-narrow)-var(--qy-text-control-sm-mobile-leading))/2)] sm:py-[calc((var(--qy-control-sm)-var(--qy-text-control-sm-leading))/2)] [overflow-wrap:anywhere]";
+  // 浮层族的边界（M21，NG3）：与 Popover、Menu、Select 同一画法——一道 border-border 线加 shadow-raised，
+  // 理由与阴影分档写在 popover.tsx 的 PopoverPopup。此前 Tooltip 只有阴影：深色主题里阴影几乎不可见，边缘只剩面与页的色差。
+  // 提示面的内缘按 --qy-hint-padding-inline 的约定「面有线时减去 --qy-line-width」；
+  // 一行字的高仍是小控件的高（线计入其中），所以块向留白也扣掉上下两道线。
+  // 入退由 motion.css 拥有；圆角与表面是基础层预设。
+  const surface = "qy-tooltip-popup max-w-(--available-width) origin-(--transform-origin) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised text-control-sm-mobile sm:text-control-sm min-h-(--qy-control-sm-narrow) sm:min-h-(--qy-control-sm) px-[calc(var(--qy-hint-padding-inline)-var(--qy-line-width))] py-[calc((var(--qy-control-sm-narrow)-var(--qy-text-control-sm-mobile-leading)-2*var(--qy-line-width))/2)] sm:py-[calc((var(--qy-control-sm)-var(--qy-text-control-sm-leading)-2*var(--qy-line-width))/2)] [overflow-wrap:anywhere]";
   const association = React.useContext(TooltipAssociation);
   const generatedId = React.useId();
   const attach = React.useCallback((element: HTMLDivElement) => {

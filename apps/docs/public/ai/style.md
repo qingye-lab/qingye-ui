@@ -2,7 +2,7 @@
 
 本文件由根 `design.md` 的设计契约与交付检查、`STANDARDS.md` 的组件实现规则生成。改规则时修改对应源文件。
 
-方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v4.2.0/llms.txt)。项目接入见[公开指南](../design.md)。
+方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v5.0.0/llms.txt)。项目接入见[公开指南](../design.md)。
 
 ## 使用方式
 
@@ -44,6 +44,7 @@
 | NG10 | 使用没有语义类别的彩色 | 去掉该色相后，读者失去的不是危险、警示、成功、信息、数据系列或品牌中的任何一类 |
 | NG11 | 用两种以上机制重复划出同一个范围 | 去掉其中一种（线、底色或阴影）后，范围仍然清楚 |
 | NG12 | 装饰性表面：渐变、纹理、同一平面上的阴影 | 删去后理解、层次与操作都不变 |
+| NG13 | 侧栏导航超过两级，或窄屏另造一套导航 | 侧栏的二级条目下仍有可展开的条目；第三级应在内容区由标签页或页内导航承载，窄屏由抽屉承载同一棵树 |
 
 ### 文案
 
@@ -126,11 +127,11 @@
 
 | 等 | 外高 = 材 + n 分 | 窄屏 | 横向留白 = (外高 − 分) / 2 | 圆角 | 图标 | 按钮文字档 |
 |---|---|---|---|---|---|---|
-| `xs` | 24px | 28px | 10px | 6px | 14px | 12/16 |
-| `sm` | 28px | 32px | 12px | 7px | 14px | 13/20 |
-| `md` | 32px | 36px | 14px | 8px | 16px | 14/20 |
-| `lg` | 36px | 40px | 16px | 8px | 18px | 16/24 |
-| `xl` | 40px | 44px | 18px | 8px | 20px | 18/28 |
+| `xs` | 24px | 28px | 10px | 8px | 14px | 12/16 |
+| `sm` | 28px | 32px | 12px | 9px | 14px | 13/20 |
+| `md` | 32px | 36px | 14px | 10px | 16px | 14/20 |
+| `lg` | 36px | 40px | 16px | 11px | 18px | 16/24 |
+| `xl` | 40px | 44px | 18px | 13px | 20px | 18/28 |
 
 - 只有命令类（Button 及其派生）提供五等；名称随等变化。填值控件与标记只读角色层（`--qy-fill-*`、`--qy-marker-size`），不提供 `size`；紧凑密度由 `data-density` 表达。值的文字始终是 md 文字档。
 - 区分外部占位、边框内可用尺寸与触摸命中尺寸。有 1px 边框时留白扣 1px，保持文字起点。
@@ -179,7 +180,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 | 状态 | 当前表达与定位 |
 |---|---|
-| hover / pressed | solid 填充 `/90` 为继承预设；bordered/quiet 用 accent 或 danger-soft；不改变布局。qy-pressable 的 0.97 缩放也是预设 |
+| hover / pressed | solid 悬停让出一级清墨给纸（`--qy-primary-hover`），按下让出两级（`--qy-primary-active`），都由 `--qy-ink-qing` 推出；bordered/quiet 悬停用 accent 或 danger-soft，按下用 `--qy-surface-active` 或 danger-soft-active；不改变布局。`.qy-pressable` 的 0.97 缩放（`--qy-scale-press`）是预设 |
 | focus-visible | 控件外不新增一圈；Input、可聚焦 Card、Popover 面板、bordered Button 的边框只变色不加粗。solid 内线 2px，quiet 自盒内线 1px |
 | disabled | 真实原生/ARIA 与事件约束另行成立；当前 opacity-64 是继承预设，不能代替真实禁用 |
 | invalid | 事实由调用方声明。Input 保留 aria-invalid 和错误边框，聚焦改危险文字色，宽度仍 1px，不增加内描边 |
@@ -195,10 +196,10 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 ### 6. 动效
 
 - 动效的事实、可中断与任务连续性要求引用 [design.md「变化与恢复」](../design.md#变化与恢复)及[禁止 NG6](../design.md#禁止)。
-- 时长和曲线是预设。当前 press 100ms、fast 140ms、feedback 180ms、base 220ms、slow 320ms、drawer 450ms；使用对应角色而不内联另定同类值，见基础层 §12。
+- 时长和曲线是预设。当前 press 100ms、fast 140ms、feedback 180ms、base 220ms、drawer 450ms，不定长等待的一个周期 wait 1500ms；使用对应角色而不内联另定同类值，见基础层 §12。
 - Popover / Tooltip 的入退由 motion.css 接管；组件提供结构、触发位置与 slot。起止 scale 0.98 / opacity 0 是继承预设，迁入共享文件不改变来源。当前进入 140ms、退出 100ms，是策略选择。
-- Toast 仍保留局部入退与堆叠，theme.css 还有成功/错误动画；这些值均为预设，不能声称全部保留组件已完成动效收敛。
-- MotionProvider 记录输入方式，键盘即时切换；reduce 时删除位移与缩放，保留可读颜色/透明度和加载指示。其运行验收引用 [design.md「人和 AI 的交付检查」](../design.md#人和-ai-的交付检查)。
+- Toast 仍保留局部堆叠，入场读 motion.css 的 `data-motion="fade-in"`；这些值均为预设，不能声称全部保留组件已完成动效收敛。
+- InputModalityProvider 记录输入方式，键盘即时切换；reduce 时删除位移与缩放，保留可读颜色/透明度和加载指示。其运行验收引用 [design.md「人和 AI 的交付检查」](../design.md#人和-ai-的交付检查)。
 
 ### 7. 排版与容量
 
@@ -222,6 +223,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 - utilities.css 用 :lang 将中日韩字距设为 normal；当前无 typography 组件负责这件事。排版验收引用 [design.md「强调与内容」](../design.md#强调与内容)和[交付检查](../design.md#人和-ai-的交付检查)。
 - numeric（等宽数字）只用于需要纵向对齐的数：表格列、坐标轴、计数器；单独的大号读数（text-metric）用比例数字。
 - 截断、换行、text-balance、text-pretty 按任务选择，不规定单行必截断。Button 当前允许标签换行；后果与空值的判据引用 [design.md「名称与状态」](../design.md#名称与状态)及[禁止 NG7](../design.md#禁止)，具体容量见基础层 §14、§17。
+- 长串折行：内容区与浮层的标题、说明、单元格用 `wrap-anywhere`——它同时降低最小内容宽度，宽度随内容的浮层与 flex/grid 子项才收得住一串无空格的长文字；表单的字段名、说明与错误（Field、Label、Fieldset、Select 的值与选项）用 `wrap-break-word`，它们的宽度由版式给定，不该反过来被一个字的宽度定义最小宽。同族同写法。
 
 ### 8. 无障碍
 
@@ -245,8 +247,6 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 组件文档协议引用 [design.md「可执行的协议」](../design.md#可执行的协议)，界面文案引用[「文案」](../design.md#文案)；本文只记录组件实现规则。
 
 检查范围与证据状态引用 [design.md「人和 AI 的交付检查」](../design.md#人和-ai-的交付检查)，按当前任务影响与用户裁定选择组合；焦点采样方式见本规范 §5。截图只发现变化，不为通过而批量更新。改断言必须逐条说明理由。
-
-生成 ai/style.md 与统一构建由全部并行任务结束后执行，不在本批范围内。
 
 ---
 

@@ -261,6 +261,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/card"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/cascader</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/cascader"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/cascader"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/cascader</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/cascader"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/cascader"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/chart</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/chart"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/chart"/>
@@ -311,6 +321,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/collapsible"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/color-picker</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/color-picker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/color-picker"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/color-picker</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/color-picker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/color-picker"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/combobox</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/combobox"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/combobox"/>
@@ -319,6 +339,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/combobox</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/combobox"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/combobox"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/command</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/command"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/command"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/command</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/command"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/command"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/confirm</loc>
@@ -471,6 +501,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/fieldset"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/file-trigger</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/file-trigger"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/file-trigger"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/file-trigger</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/file-trigger"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/file-trigger"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/file-upload</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/file-upload"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/file-upload"/>
@@ -539,6 +579,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/input-group</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/input-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/input-group"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/input-modality-provider</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/input-modality-provider"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/input-modality-provider"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/input-modality-provider</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/input-modality-provider"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/input-modality-provider"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/item</loc>
@@ -619,16 +669,6 @@
     <loc>https://ui.xflux.cc/en/docs/components/meter</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/meter"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/meter"/>
-  </url>
-  <url>
-    <loc>https://ui.xflux.cc/docs/components/motion-provider</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/motion-provider"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/motion-provider"/>
-  </url>
-  <url>
-    <loc>https://ui.xflux.cc/en/docs/components/motion-provider</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/motion-provider"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/motion-provider"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/native-select</loc>
@@ -759,6 +799,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/radio-group</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/radio-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/radio-group"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/resizable</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/resizable"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/resizable"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/resizable</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/resizable"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/resizable"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/scatter-chart</loc>
@@ -971,6 +1021,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/theme-provider"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/time-field</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/time-field"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/time-field"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/time-field</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/time-field"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/time-field"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/timeline</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/timeline"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/timeline"/>
@@ -1049,6 +1109,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/tree</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tree"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tree"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/tree-select</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tree-select"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tree-select"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/tree-select</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tree-select"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tree-select"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/typography</loc>

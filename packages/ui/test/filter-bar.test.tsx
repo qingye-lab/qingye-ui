@@ -12,4 +12,8 @@ describe("FilterBar", () => {
   it("respects canceled native submit and real disabled fields", async () => {
     const user = userEvent.setup(); const apply = vi.fn(); const { rerender } = render(<FilterBar dirty appliedSummary="全部" onApply={apply} onSubmit={event => event.preventDefault()}><FilterBarApply /></FilterBar>); await user.click(screen.getByRole("button")); expect(apply).not.toHaveBeenCalled(); rerender(<FilterBar dirty disabled appliedSummary="全部" onApply={apply}><FilterBarFields><input aria-label="条件" defaultValue="原值" /></FilterBarFields><FilterBarApply /></FilterBar>); await user.type(screen.getByRole("textbox"), "新"); fireEvent.submit(screen.getByRole("button").closest("form")!); expect(screen.getByRole("textbox")).toHaveValue("原值"); expect(apply).not.toHaveBeenCalled();
   });
+  it("marks sticky filter bars and keeps non-sticky bars unmarked", () => {
+    const { rerender } = render(<FilterBar sticky dirty={false} appliedSummary="全部" onApply={() => {}}><FilterBarApplied /></FilterBar>); const form = screen.getByText("全部").closest("form")!; expect(form).toHaveAttribute("data-sticky"); expect(form).not.toHaveAttribute("data-stuck");
+    rerender(<FilterBar dirty={false} appliedSummary="全部" onApply={() => {}}><FilterBarApplied /></FilterBar>); expect(form).not.toHaveAttribute("data-sticky");
+  });
 });

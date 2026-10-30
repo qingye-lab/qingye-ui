@@ -1,9 +1,9 @@
 # 候选输入 Combobox
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 8059b34f845c6cf7503c2f98378cf80b515ab64f78b3bbcfc39bd6536745abd0
+Source SHA-256: 7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 
@@ -14,7 +14,7 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 - 从当前查询到候选的过滤与空内容必须对应实际数据。
 - Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。
 - 候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。
-- 异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。
+- 异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。
 
 ## Use and ownership
 - 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。

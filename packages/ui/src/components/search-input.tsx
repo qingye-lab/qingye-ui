@@ -1,9 +1,10 @@
 "use client";
 
-import { IconSearch, IconX } from "@tabler/icons-react";
+import { IconLoader2, IconSearch, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { withClassName } from "../input-adjunct";
 import { useInputFacts, useInputRef, writeInputValue } from "../input-facts";
+import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Input, type InputProps } from "./input";
@@ -14,6 +15,11 @@ export type SearchInputProps = Omit<InputProps, "type" | "unstyled"> & {
   clearLabel?: string;
   /** 清空之后调用；值的变化仍走 onChange / onValueChange。清空不提交表单。 */
   onClear?: () => void;
+  /**
+   * 搜索正在进行。事实由调用方持有：组件只表示忙碌（搜索图标换成转动的记号、输入标 `aria-busy`、读屏播报「正在搜索」），
+   * 不发请求、不推断完成，也**不阻止继续输入与清空**——查询随键入更换是常态，被挡住反而打断输入。
+   */
+  loading?: boolean;
 };
 
 /**
@@ -21,7 +27,7 @@ export type SearchInputProps = Omit<InputProps, "type" | "unstyled"> & {
  * 输入框本身不内置这些（用户裁决 2026-10-10：功能要纯粹）；需要别的组合时照此自行搭。
  * className / style / render / ref 仍属于真实输入，controlClassName 属于编辑边界。
  */
-export function SearchInput({ clearLabel, onClear, controlClassName, className, ref, onChange, onKeyDown, ...props }: SearchInputProps): React.ReactElement {
+export function SearchInput({ clearLabel, onClear, loading = false, controlClassName, className, ref, onChange, onKeyDown, ...props }: SearchInputProps): React.ReactElement {
   const { messages } = useUILocale();
   const [inputRef, setInputRef] = useInputRef(ref);
   const facts = useInputFacts(inputRef, { value: String(props.value ?? props.defaultValue ?? ""), disabled: Boolean(props.disabled), readOnly: Boolean(props.readOnly) }, { key: props.nativeInput });
@@ -34,12 +40,14 @@ export function SearchInput({ clearLabel, onClear, controlClassName, className, 
     input.focus();
   };
   return (
-    <InputGroup data-slot="search-input" data-readonly={facts.readOnly ? "" : undefined} className={cn("flex-nowrap", controlClassName)}>
+    <InputGroup data-slot="search-input" data-readonly={facts.readOnly ? "" : undefined} data-loading={loading ? "" : undefined} className={cn("flex-nowrap", controlClassName)}>
       {/* 保持 InputGroupAddon 自己的 data-slot：附件与输入之间的贴合间距由 InputGroup 按它识别。 */}
-      <InputGroupAddon aria-hidden="true"><IconSearch className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" /></InputGroupAddon>
+      {/* 忙碌时记号换在搜索图标的位置：同一图标尺寸、同一槽位，边界不因状态改变尺寸；qy-spin 与 Button 的忙碌记号是同一个转动。 */}
+      <InputGroupAddon aria-hidden="true">{loading ? <IconLoader2 className="qy-spin size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" data-slot="search-input-loading" /> : <IconSearch className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" />}</InputGroupAddon>
       <Input
         {...props}
         ref={setInputRef}
+        aria-busy={loading ? true : props["aria-busy"]}
         type="search"
         unstyled
         controlClassName="min-w-0 flex-1"
@@ -55,7 +63,10 @@ export function SearchInput({ clearLabel, onClear, controlClassName, className, 
           clear();
         }}
       />
+      {facts.readOnly && !facts.disabled ? <InputGroupReadOnlyNote /> : null}
       {canClear ? <InputGroupButton shape="icon" data-slot="search-input-clear" aria-label={clearLabel ?? messages.clearSearch} onClick={clear}><IconX aria-hidden="true" /></InputGroupButton> : null}
+      {/* 与 Button 的忙碌说法一致：不可见、不占位的 status，只在忙碌期间存在。 */}
+      {loading ? <span aria-atomic="true" aria-live="polite" className="sr-only" data-slot="search-input-loading-status" role="status">{messages.searching}</span> : null}
     </InputGroup>
   );
 }

@@ -1,9 +1,9 @@
 # Checkbox
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
+Source SHA-256: 7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de
 
 Choose an independent yes/no value or multiple items in a set.
 
@@ -13,7 +13,7 @@ Use Checkbox for independent options and Switch for an immediate setting change.
 ## Notes
 - Compute indeterminate from the actual collection rather than choosing a visual variant.
 - FieldLabel or an actual label supplies the name; keep descriptions and errors within Field.
-- Selected and invalid may coexist; errors do not clear selection.
+- Selected and invalid may coexist; errors do not clear selection, and the checked fill switches to the danger fill to show invalid.
 
 ## Use and ownership
 - Independent binary choices, multiple collection selection, or selections awaiting submission.

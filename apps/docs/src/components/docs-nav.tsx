@@ -1,4 +1,5 @@
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger } from "@qingye_lab/ui/components/sidebar";
+import { cn } from "@qingye_lab/ui/utils";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { navSections, type NavItem, type NavSection } from "@/lib/nav";
@@ -19,9 +20,13 @@ function Entry({ item, current, onNavigate }: { item: NavItem; current: string; 
   const active = routeIdentity(item.path) === current;
   return (
     <SidebarLink active={active} render={<Link onClick={onNavigate} to={active ? pathname : localePath(item.path, locale)} />}>
-      {/* The Chinese name is the label; the English API name is a recall aid that wraps under it when the rail is narrow. */}
-      <span>{item.title}</span>
-      {item.hint ? <span className="ms-(--qy-control-content-gap) text-caption text-muted-foreground">{item.hint}</span> : null}
+      {/* The Chinese name is the label; the English API name is a recall aid on the same line. Every entry keeps one
+       * row height: the rail fits nearly every pair, and where a name still does not fit, the aid is the part
+       * that gives way (it ends in an ellipsis) instead of wrapping and doubling that row's current fill. */}
+      <span className="flex min-w-0 items-baseline gap-(--qy-control-content-gap)">
+        <span className="shrink-0">{item.title}</span>
+        {item.hint ? <span className="min-w-0 truncate text-caption text-muted-foreground">{item.hint}</span> : null}
+      </span>
     </SidebarLink>
   );
 }
@@ -66,7 +71,7 @@ export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; cl
   }, [visit]);
 
   return (
-    <Sidebar className={className}>
+    <Sidebar className={cn("w-full", className)}>
       <SidebarContent aria-label={locale === "en" ? "Documentation navigation" : "文档导航"} ref={root}>
         {groupSections(sections).map((group) => (
           <SidebarGroup key={group.title}>

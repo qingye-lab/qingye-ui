@@ -60,7 +60,7 @@ export function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {
                 selection={{ label: "选择本页记录", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: "name" }}
                 tableProps={{ "aria-label": "采集记录", className: "min-w-[calc(32*var(--qy-cai))]", containerProps: { framed: false } }}
                 emptyContent={<span className="text-muted-foreground">没有匹配的记录</span>} />
-              {details && active && <Stack render={<aside aria-label="记录详情" />} gap="panel">
+              {details && active && <Stack render={<aside aria-label="记录详情" lang="zh-CN" />} gap="panel">
                 <h2 className="m-0 text-heading wrap-anywhere">{active.name}</h2>
                 {!filtered.some(row => row.id === active.id) && <Alert tone="info"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}
                 <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className="numeric">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>

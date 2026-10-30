@@ -268,3 +268,64 @@ test("a set value without items warns in development, because the trigger can on
   expect(warn).not.toHaveBeenCalled();
   warn.mockRestore();
 });
+
+test("a popup without candidates says there are none, and the wording follows the locale", async () => {
+  const user = userEvent.setup();
+  const { unmount } = render(<Select items={[]}><SelectTrigger aria-label="选项" /><SelectPopup>{[]}</SelectPopup></Select>);
+  await user.click(screen.getByRole("combobox", { name: "选项" }));
+  expect(await screen.findByText("没有可选项")).toBeInTheDocument();
+  unmount();
+  render(<UILocaleProvider locale={enUS}><Select items={[]}><SelectTrigger aria-label="Option" /><SelectPopup>{null}</SelectPopup></Select></UILocaleProvider>);
+  await user.click(screen.getByRole("combobox", { name: "Option" }));
+  expect(await screen.findByText("No options")).toBeInTheDocument();
+});
+
+test("the application's empty wording replaces the built-in one, and candidates remove the message", async () => {
+  // 主题是「打开期间候选到达」，不是如何打开：用 defaultOpen 起手，避免与前序测试的指针时序耦合。
+  const { rerender } = render(<Select items={items} defaultOpen><SelectTrigger aria-label="选项" /><SelectPopup emptyContent="没有符合条件的成员">{[]}</SelectPopup></Select>);
+  expect(await screen.findByText("没有符合条件的成员")).toBeInTheDocument();
+  rerender(<Select items={items} defaultOpen><SelectTrigger aria-label="选项" /><SelectPopup emptyContent="没有符合条件的成员"><Options /></SelectPopup></Select>);
+  expect(screen.queryByText("没有符合条件的成员")).toBeNull();
+  expect(screen.getByRole("option", { name: "Alpha" })).toBeInTheDocument();
+});
+
+test("loading marks the trigger and list busy and says so instead of claiming there are no options", async () => {
+  const user = userEvent.setup();
+  render(<Select items={items} loading><SelectTrigger aria-label="选项" /><SelectPopup>{[]}</SelectPopup></Select>);
+  const trigger = screen.getByRole("combobox", { name: "选项" });
+  expect(trigger).toHaveAttribute("aria-busy", "true");
+  await user.click(trigger);
+  expect(await screen.findByRole("status")).toHaveTextContent("正在加载");
+  expect(screen.queryByText("没有可选项")).toBeNull();
+  expect(screen.getByRole("listbox")).toHaveAttribute("aria-busy", "true");
+});
+
+test("a failure is placed as an alert with the application's own retry action; the component infers nothing", async () => {
+  const user = userEvent.setup(); const retry = vi.fn();
+  render(<Select items={items} error={<><span>候选没有取到</span><button type="button" onClick={retry}>重试</button></>}><SelectTrigger aria-label="选项" /><SelectPopup>{[]}</SelectPopup></Select>);
+  expect(screen.getByRole("combobox", { name: "选项" })).not.toHaveAttribute("aria-busy");
+  await user.click(screen.getByRole("combobox", { name: "选项" }));
+  const alert = await screen.findByRole("alert");
+  expect(alert).toHaveTextContent("候选没有取到");
+  expect(screen.queryByText("没有可选项")).toBeNull();
+  await user.click(screen.getByRole("button", { name: "重试" }));
+  expect(retry).toHaveBeenCalledTimes(1);
+});
+
+test("readonly shows an aria-hidden note beside the arrow", () => {
+  render(<Select readOnly items={items} defaultValue="alpha"><SelectTrigger aria-label="选项" /><SelectPopup><Options /></SelectPopup></Select>);
+  const note = document.querySelector("[data-slot=select-readonly]");
+  expect(note).toHaveTextContent("只读");
+  expect(note).toHaveAttribute("aria-hidden", "true");
+  expect(screen.getByRole("combobox")).toHaveAttribute("aria-readonly", "true");
+});
+
+test("the trigger reserves room for every candidate without duplicating text or exposing it", () => {
+  render(<Fixture />);
+  const sizers = Array.from(document.querySelectorAll("[data-slot=select-value-sizer]"));
+  // 四个候选名称加占位文字，全部隐形：不进读屏，也不留第二份文本。
+  expect(sizers.map(node => node.getAttribute("data-label"))).toEqual(["Alpha", "Beta", "Charlie", "Delta", "请选择"]);
+  sizers.forEach(node => expect(node).toHaveAttribute("aria-hidden", "true"));
+  expect(screen.getByRole("combobox", { name: "选项" })).toHaveTextContent("请选择");
+  expect(screen.getByRole("combobox", { name: "选项" }).textContent).toBe("请选择");
+});

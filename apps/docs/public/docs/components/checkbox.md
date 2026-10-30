@@ -1,9 +1,9 @@
 # 复选框 Checkbox
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
+Source SHA-256: 7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de
 
 选择独立的是/否或集合中的多个项。
 
@@ -13,7 +13,7 @@ Source SHA-256: d404fb7e475fdc5e85e124b8fa4bb7f838f31ca3d69b4ec8f3107530d36b660a
 ## Notes
 - indeterminate 由真实集合计算，不是独立视觉变体。
 - FieldLabel 或真实 label 关联名称，说明和错误留在 Field 中。
-- 选中与无效可以同时存在；错误不会清空选中值。
+- 选中与无效可以同时存在；错误不会清空选中值，选中态的填充改用危险填充色来表达无效。
 
 ## Use and ownership
 - 独立二值、集合多选、待提交选择

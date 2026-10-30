@@ -48,6 +48,8 @@ export default {
       "使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"
     ]
   }, designEn: {"whenToUse":["A reliable completion ratio exists, or work is known to be underway without a ratio."],"avoid":["Animation and time establish no completion fact. Zero differs from null."],"composition":["Label names the task; Value defaults to localized in-progress for actual null, with caller formatting taking precedence.","A stage bar of n levels uses segments={n}; stage names come from getAriaValueText or aria-valuetext, for example \"Fourth instar, stage 4 of 7\"."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Task names and formatted readings wrap; an independent progress role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
+  "notes": ["长任务按事实分阶段：已提交但无法计数用 value={null}，处理中数已确认的项，结束后用 Alert 说明完成或部分失败，列出失败项并给「重试失败项」。进度条不承担结果说明。"],
+  notesEn: ["Stage a long task by what is known: submitted but uncountable uses value={null}, processing counts confirmed items, and afterwards an Alert states completion or partial failure, lists the failed items and offers a retry. The bar does not carry the outcome."],
   "api": [
     {
       "name": "Progress",

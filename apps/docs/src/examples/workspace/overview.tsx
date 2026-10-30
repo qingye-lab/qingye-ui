@@ -85,13 +85,13 @@ export default function Overview() {
         <Heading id={recentId} level={2} step="heading" className="px-(--qy-panel-padding) pt-(--qy-panel-padding-sm) pb-(--qy-field-gap)">最近同步</Heading>
         <TableContainer framed={false}>
           <Table aria-labelledby={recentId}>
-            <TableHeader><TableRow><TableHead>集合</TableHead><TableHead>时间</TableHead><TableHead className="text-end">写入</TableHead><TableHead className="text-end">失败</TableHead><TableHead className="text-end">耗时</TableHead><TableHead>结果</TableHead></TableRow></TableHeader>
+            <TableHeader><TableRow><TableHead>集合</TableHead><TableHead>时间</TableHead><TableHead numeric>写入</TableHead><TableHead numeric>失败</TableHead><TableHead numeric>耗时</TableHead><TableHead>结果</TableHead></TableRow></TableHeader>
             <TableBody>{RUNS.map(run => <TableRow key={run.id}>
               <TableHead scope="row">{run.collection}</TableHead>
               <TableCell className="numeric text-muted-foreground"><time dateTime={run.at}>{run.time}</time></TableCell>
-              <TableCell className="text-end numeric">{number.format(run.written)}</TableCell>
-              <TableCell className="text-end numeric">{run.failed || "—"}</TableCell>
-              <TableCell className="text-end numeric text-muted-foreground">{run.duration}</TableCell>
+              <TableCell numeric>{number.format(run.written)}</TableCell>
+              <TableCell numeric>{run.failed || "—"}</TableCell>
+              <TableCell numeric className="text-muted-foreground">{run.duration}</TableCell>
               <TableCell><StatusDot status={runDot[run.state]} label={run.state} /></TableCell>
             </TableRow>)}</TableBody>
           </Table>

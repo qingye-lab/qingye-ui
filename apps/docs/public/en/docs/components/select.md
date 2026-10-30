@@ -1,9 +1,9 @@
 # Select
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 1e2019fb7907fe46eae297e461d673d53b787d23c7ff886e6c346f26083e14fd
+Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
 
 Choose one value from a collapsible set of options.
 
@@ -12,8 +12,10 @@ Highlight marks position; selection changes the value. No selection does not cho
 
 ## Notes
 - FieldLabel names the trigger, FieldError associates errors, and SelectGroupLabel names candidate groups.
-- null is no selection; empty string and zero can be candidates. Native forms may serialize null and empty string identically as empty.
-- Read-only retains the current value; disabled candidates cannot be selected.
+- null is no selection; the empty string ("") and zero are both valid candidate values. Selecting a candidate whose value is "" shows its label in the trigger, not the placeholder, and data-placeholder is absent; only null shows the placeholder. When "" stands for a real option such as "Any" or "None", give it a readable label in items. Native forms serialize both null and "" as an empty string; when the server must tell them apart, use another value or keep the has-chosen fact in the application.
+- Read-only retains the current value and shows a read-only note on the trigger; disabled candidates cannot be selected.
+- The trigger does not fill its container by default; pass className="w-full" to SelectTrigger to do so. Without items the candidate names are unknown, so the width follows only what is displayed.
+- For request-backed candidates, use loading while the request runs and error for the failure explanation and retry action; "No options" appears only with no children and neither state.
 - Its Positioner consumes shared popup layers; candidates inside a parent workspace sit above it. positionerProps retain caller styles/refs/render.
 
 ## Use and ownership
@@ -53,7 +55,8 @@ Highlight marks position; selection changes the value. No selection does not cho
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Select
-- no props declared by this library
+- `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
+- `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
 - plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
 
 ### SelectGroup
@@ -69,6 +72,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 273, @base-ui/react 8); not expanded, see the installed declarations
 
 ### SelectPopup
+- `emptyContent?`: `React.ReactNode`. 没有子项时的说法；省略时用内置的「没有可选项」。应用若要说明查询对象，在这里给出。
 - `positionerProps?`: `SelectPrimitive.Positioner.Props`.
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
@@ -87,6 +91,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- Context ItemLabels: without a provider default-value; provided by Select
+- Context SourceState: without a provider default-value; provided by Select
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -94,11 +100,13 @@ Written descriptions; the list above is the type-resolved fact.
 ### Select
 Single-value state and form semantics.
 - value / defaultValue: Value | null. Controlled or actual initial value; null means no selection. Omitting an initial value does not choose the first item.
-- items: Record<string, ReactNode> | {value, label}[] | Group[]. Name mapping for current values; an explicit empty-string candidate also needs a readable label.
+- items: Record<string, ReactNode> | {value, label}[] | Group[]. Value-to-name mapping; an explicit empty-string candidate also needs a readable label. The trigger is as wide as the longest name, so choosing another item does not resize it.
 - onValueChange: (value, eventDetails) => void. Cancelable selection change; moving the highlight does not change the value.
 - name / form / inputRef / autoComplete: Base UI Root props. Retain primitive hidden inputs, form ownership, and autofill.
 - disabled / readOnly / required: boolean; default false. Interaction limits and native constraints; Field or explicit trigger ARIA declares invalid.
 - open / defaultOpen / onOpenChange: Base UI Root props. Controlled or uncontrolled opening; canceled return is separate from value selection.
+- loading: boolean; default false. The fact that the application is fetching candidates: trigger and list get aria-busy, the popup shows a wait marker and "Loading", and never "No options". The component sends no request.
+- error: ReactNode. Application-supplied content when fetching failed, including an explanation and a retry action; the popup places it as role="alert". The component infers no failure and writes no reason.
 - modal: boolean; default false. Other fields remain interactive by default; change explicitly for the containing task.
 - itemToStringLabel / itemToStringValue / isItemEqualToValue: Base UI Root props. Names, serialization, and equality for object candidates.
 
@@ -115,6 +123,7 @@ The actual current value name and no-selection placeholder.
 ### SelectPopup
 Shared composition of Portal, positioning, panel, and scrollable List.
 - side / align / sideOffset / alignOffset: Base UI positioning props; default "bottom" / "start" / 0. Anchored by default without covering the trigger; the primitive handles space collisions.
+- emptyContent: ReactNode; default locale.selectEmpty. Wording when there are no children; for query-backed candidates, name the query. Not shown while loading or after failure.
 - alignItemWithTrigger: boolean; default false. Explicitly choose selected-item alignment that covers the trigger.
 - container: HTMLElement | ShadowRoot | RefObject | null. Portal container; callers supply an appropriate inheritance environment for local themes, language, or density.
 - positionerProps: SelectPrimitive.Positioner.Props. Forward its own public positioning refs/render/events/styles; caller style merges last.
@@ -260,6 +269,49 @@ export default function Demo() {
         </Select>
       </Field>
     </FieldGroup>
+  );
+}
+```
+
+### 候选的来源
+Source: apps/docs/src/content/select/demos/03-source.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+
+export const meta = { title: "候选的来源", titleEn: "Where candidates come from" };
+
+type Source = "ready" | "loading" | "failed" | "none";
+const sources: { id: Source; label: string }[] = [
+  { id: "ready", label: "有候选" },
+  { id: "loading", label: "加载中" },
+  { id: "failed", label: "取得失败" },
+  { id: "none", label: "没有候选" },
+];
+const regions = [{ value: "cn", label: "中国大陆" }, { value: "hk", label: "中国香港" }, { value: "sg", label: "新加坡" }];
+
+export default function Demo() {
+  const [retried, setRetried] = useState(0);
+  return (
+    <div className="grid w-full grid-cols-4 items-start gap-(--qy-space-4)">
+      {sources.map(source => (
+        <Field key={source.id}>
+          <FieldLabel>{source.label}</FieldLabel>
+          <Select
+            items={source.id === "ready" ? regions : []}
+            loading={source.id === "loading"}
+            error={source.id === "failed" ? <><span>区域列表没有取到。</span><Button size="sm" variant="quiet" onClick={() => setRetried(count => count + 1)}>重试{retried > 0 ? `（${retried}）` : ""}</Button></> : undefined}
+          >
+            <SelectTrigger />
+            <SelectPopup>
+              {source.id === "ready" && regions.map(region => <SelectItem key={region.value} value={region.value}>{region.label}</SelectItem>)}
+            </SelectPopup>
+          </Select>
+        </Field>
+      ))}
+    </div>
   );
 }
 ```

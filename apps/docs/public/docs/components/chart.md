@@ -1,9 +1,9 @@
 # 图表 Chart
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
+Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 
 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
@@ -11,6 +11,8 @@ Source SHA-256: 64c72499d5d4d77213cd679fbe2520d47cfae210c81ed255dd9227afc5c4a2c9
 图只画数据。已知0、未知和不适用的单个值分别成立：未知值形成gap，表格保留其真实名称。整张图没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。图形不替代可达数值。参照（目标带、参照线）、背景系列与事件只帮读者定位数据，自己不是数据：用墨不用色，名称必填并出现在图例与数据表。量轴只有折线可以不从零起，柱与面积的长度、面积编码一旦截断，比例就是假的。状态色（series[].tone）由应用声明，组件不从数值猜好坏。阶梯（series[].interpolation: "step"）表达值在两次变化之间保持不变，取 step-after：记录是「这一刻起变成了这个值」，step-before 会把变化画到观测之前；不提供平滑曲线，曲线在两点之间画出数据里没有的值。占比构成（bar-share / area-share）读的是构成怎样变而不是多少：各行内归一到该行之和，量轴固定 0–100%，刻度 0/25/50/75/100；含未知或不适用值、或和为 0 的行整行不画（整体不可得，每一部分的占比都会是假的），已知原值在数据表里如实列出；负值抛错。柱上标值（valueLabels）只给单系列的 bar 与 bar-horizontal，标了值就不再画量轴刻度与网格（同一事实不说两遍）。堆叠与占比的读数和数据表给出合计；含缺项的行不合计，数据表里写明缺项。
 
 ## Notes
+- 系列的区分不只靠色相：折线的每个系列有自己的标记形状（圆、方、三角、菱形、叉，按系列顺序分配），图例的键与折线一致，图例文字、悬停读数和数据表里都有系列名。柱、堆叠与面积是填充形式，靠固定的系列顺序区分——图例、柱的左右次序、堆叠的上下次序、读数与数据表同一个次序，段间有 2px 纸色空隙；这类图不另加纹理。
+- 没有记录时 Chart 抛错而不画空框。请求中的图用 AsyncContent 组合：先判空再渲染，`<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` 里只放 Chart，空结果由 Empty 在原位承担，加载与失败的反馈在内容之后；见「请求状态与空结果」。
 - null、NaN、Infinity、缺失键不能表示0；用显式unknown或not-applicable表达。
 - 所有值均未知时不画虚假数值轴，名称、图例与表格保留。
 - 默认图形为数据表的视觉补充，辅助技术使用展开后的数据表；悬停读数只增强，不替代数据表。
@@ -480,5 +482,38 @@ export default function Demo() {
       series={[{ key: "ok", label: "成功" }, { key: "failed", label: "失败" }]}
       rows={days.map((day, index) => ({ id: day, label: day, values: { ok: ok[index]!, failed: failed[index]! } }))} />
   </Section>;
+}
+```
+
+### 请求状态与空结果
+Source: apps/docs/src/content/chart/demos/20-async.tsx
+```tsx
+import { useState } from "react";
+import { AsyncContent } from "@qingye_lab/ui/components/async-content";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Chart } from "@qingye_lab/ui/components/chart";
+import { Empty, EmptyDescription, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "请求状态与空结果", titleEn: "Request states and empty results" };
+
+const days = ["10/01", "10/02", "10/03", "10/04", "10/05"];
+const counts = [12, 18, 9, 21, 15];
+
+export default function Demo() {
+  const { code } = useUILocale();
+  const en = code.startsWith("en");
+  const [rows, setRows] = useState(() => days.map((day, index) => ({ id: day, label: day, values: { count: counts[index]! } })));
+  return <Stack className="w-full max-w-2xl">
+    <Inline>
+      <Button variant="bordered" onClick={() => setRows(days.map((day, index) => ({ id: day, label: day, values: { count: counts[index]! } })))}>{en ? "Has records" : "有记录"}</Button>
+      <Button variant="bordered" onClick={() => setRows([])}>{en ? "No records" : "没有记录"}</Button>
+    </Inline>
+    <AsyncContent status="success" hasContent={rows.length > 0}
+      emptyContent={<Empty state="empty"><EmptyTitle level={3}>{en ? "Sync runs" : "同步次数"}</EmptyTitle><EmptyDescription>{en ? "No runs in this period." : "这段时间没有同步记录。"}</EmptyDescription></Empty>}>
+      <Chart type="bar" label={en ? "Sync runs" : "同步次数"} categoryLabel={en ? "Date" : "日期"} valueLabel={en ? "Runs" : "次数"} series={[{ key: "count", label: en ? "Runs" : "次数" }]} rows={rows} />
+    </AsyncContent>
+  </Stack>;
 }
 ```

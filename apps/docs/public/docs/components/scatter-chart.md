@@ -1,9 +1,9 @@
 # 两量关系 ScatterChart
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
+Source SHA-256: c3975485a92833bf61f7ac1cac2587189f280468401f0fcc7f472f120ba5e129
 
 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 
@@ -11,6 +11,7 @@ Source SHA-256: a8b47f28f630e117fbfc764e5a07781de3cd8abe67ae416428f326372f663fa2
 x、y 都是数值轴——这是散点的任务定义，不是违反「永远一个数值轴」；该禁令禁止的是同一类别轴上叠两条不同量纲的 Y 轴制造虚假相关。全比较形式最多 3 个系列，超过应合并为「其他」或拆成多图。
 
 ## Notes
+- 绘图区对读屏隐藏（aria-hidden）：标记只是形状，没有可读的名称与值；数据由「查看数据」展开的等价表承担，系列区分另有图例文字与标记形状，不只靠色相。
 - 超过 3 个系列会抛出错误：全比较形式任意两点都可能相邻，色觉校验比相邻校验更严，更多系列应合并为「其他」或改用小图版面拆分。
 - 点的命中区≥24px，大于 8px 的可见标记，指针不必正中标记。
 - x、y 轴域按实际数据范围加少量留白，不强制从零起——散点不是从基线生长的柱。

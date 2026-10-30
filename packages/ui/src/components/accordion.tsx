@@ -18,6 +18,6 @@ export function AccordionTrigger({ className, children, ...props }: AccordionPri
   return <AccordionPrimitive.Trigger data-slot="accordion-trigger" {...props} className={state => cn(disclosureTriggerClassName, "flex w-full min-h-(--qy-row-default) justify-between", typeof className === "function" ? className(state) : className)}>{children}<DisclosureIcon /></AccordionPrimitive.Trigger>;
 }
 export function AccordionPanel({ className, ...props }: AccordionPrimitive.Panel.Props) {
-  return <AccordionPrimitive.Panel data-slot="accordion-panel" {...props} className={state => cn("grid min-w-0 gap-(--qy-field-gap) pb-(--qy-field-group-gap) text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", typeof className === "function" ? className(state) : className)} />;
+  return <AccordionPrimitive.Panel data-slot="accordion-panel" {...props} className={state => cn("qy-accordion-panel grid min-w-0 gap-(--qy-field-gap) pb-(--qy-field-group-gap) text-body wrap-anywhere [&[hidden]:not([hidden=until-found])]:hidden", typeof className === "function" ? className(state) : className)} />;
 }
 export { AccordionPrimitive };

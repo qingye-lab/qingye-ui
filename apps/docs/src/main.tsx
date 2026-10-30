@@ -1,4 +1,4 @@
-import { MotionProvider } from "@qingye_lab/ui/components/motion-provider";
+import { InputModalityProvider } from "@qingye_lab/ui/components/input-modality-provider";
 import { ThemeProvider } from "@qingye_lab/ui/components/theme-provider";
 import { ToastProvider } from "@qingye_lab/ui/components/toast";
 import { TooltipProvider } from "@qingye_lab/ui/components/tooltip";
@@ -31,9 +31,9 @@ function LocalizedApp() {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider>
-      <MotionProvider>
+      <InputModalityProvider>
         <BrowserRouter><LocalizedApp /></BrowserRouter>
-      </MotionProvider>
+      </InputModalityProvider>
     </ThemeProvider>
   </StrictMode>,
 );

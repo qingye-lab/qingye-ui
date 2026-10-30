@@ -192,3 +192,18 @@ test("a local portal container retains density, language and direction", async (
   expect(popup.closest("[lang]")).toHaveAttribute("lang", "ar");
   expect(popup.closest("[dir]")).toHaveAttribute("dir", "rtl");
 });
+
+test("header and footer stay outside the working content so a long body scrolls without taking the actions with it", async () => {
+  render(<Dialog defaultOpen><DialogPopup>
+    <DialogHeader><DialogTitle>长内容</DialogTitle></DialogHeader>
+    <DialogPanel>{Array.from({ length: 40 }, (_, index) => <p key={index}>第 {index + 1} 行</p>)}</DialogPanel>
+    <DialogFooter><DialogClose>完成</DialogClose></DialogFooter>
+  </DialogPopup></Dialog>);
+  const popup = await screen.findByRole("dialog", { name: "长内容" });
+  const footerAction = screen.getByRole("button", { name: "完成" });
+  const panel = popup.querySelector("[data-slot=dialog-panel]")!;
+  expect(panel).toContainElement(screen.getByText("第 40 行"));
+  expect(panel).not.toContainElement(footerAction);
+  expect(footerAction.closest("[data-slot=dialog-footer]")?.parentElement).toBe(popup);
+  expect(screen.getByText("长内容").closest("[data-slot=dialog-header]")?.parentElement).toBe(popup);
+});

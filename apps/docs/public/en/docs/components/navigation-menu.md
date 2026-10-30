@@ -1,9 +1,9 @@
 # NavigationMenu
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: 044e2d0385a3ee0d9ce8223d1623614b60950cdf9b22e9f5bb73758e9ce75132
+Source SHA-256: 2ae9d87b98f18574a0018ec0dad93ab9a53c7ec73fbe75c9b68a6cd3d367ae5f
 
 Real links, expandable navigation groups, and in-panel group names with descriptions.
 

@@ -1,9 +1,9 @@
 # 搜索输入 SearchInput
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
-Source SHA-256: e05e7932ae400b861cb729fd5c535fbcb3822485a20e554741e89e291ed84fe0
+Source SHA-256: 0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7
 
 输入一个搜索词，并能一步清空。
 
@@ -39,6 +39,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### SearchInput
 - `clearLabel?`: `string`. 清空按钮的名称，默认从 locale 读取。
 - `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
+- `loading?`: `boolean`. 搜索正在进行。事实由调用方持有：组件只表示忙碌（搜索图标换成转动的记号、输入标 `aria-busy`、读屏播报「正在搜索」）， 不发请求、不推断完成，也**不阻止继续输入与清空**——查询随键入更换是常态，被挡住反而打断输入。
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - `onClear?`: `() => void`. 清空之后调用；值的变化仍走 onChange / onValueChange。清空不提交表单。
 - `size?`: `number | undefined`. 原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。
@@ -58,7 +59,8 @@ InputGroup + 搜索图标 + Input（type=search）+ 清空动作。
 - value / defaultValue / onChange / onValueChange: InputProps. 受控与非受控值；清空沿同一条原生事件链更新值。
 - onClear: () => void. 清空之后调用；值的变化已由 onChange / onValueChange 送出。清空不提交表单。
 - clearLabel: string. 清空动作的名称，默认从 locale 读取。
-- readOnly / disabled: boolean; default false. 只读与禁用时不出现清空动作；禁用同样服从 Field 与原生 fieldset。
+- loading: boolean; default false. 搜索正在进行，事实由应用持有。搜索图标换成转动的记号（同一槽位，边界尺寸不变），输入标 aria-busy，读屏播报「正在搜索」；不阻止继续输入与清空。
+- readOnly / disabled: boolean; default false. 只读与禁用时不出现清空动作；只读时边界内给出「只读」说明；禁用同样服从 Field 与原生 fieldset。
 - className / style / render / ref: InputProps. 全部作用于真实 input。
 - controlClassName: string. 作用于编辑边界，例如宽度。
 - 其余 InputProps（除 type / unstyled）: InputProps. placeholder、name、form、aria-* 等原样透传给输入。
@@ -121,6 +123,7 @@ export default function Demo() {
     <Stack gap="fields" className="w-full max-w-sm">
       <Field disabled><FieldLabel>禁用</FieldLabel><SearchInput defaultValue="青野" /></Field>
       <Field><FieldLabel>只读</FieldLabel><SearchInput readOnly defaultValue="青野" /></Field>
+      <Field><FieldLabel>搜索中</FieldLabel><SearchInput loading defaultValue="青野" /></Field>
     </Stack>
   );
 }

@@ -33,7 +33,7 @@ export function FieldsetLegend({ variant = "legend", className, render, ...props
       render={render ?? <legend />}
       className={(state) => cn(
         "min-w-0 max-w-full whitespace-normal p-0 text-foreground wrap-break-word",
-        variant === "legend" ? "text-heading" : "text-label",
+        variant === "legend" ? "text-heading" : "text-label-mobile sm:text-label",
         typeof className === "function" ? className(state) : className,
       )}
     />

@@ -3,7 +3,7 @@ import CollapsibleDemo from "@/content/collapsible/demos/01-states";
 import DrawerDemo from "@/content/drawer/demos/01-states";
 import HoverCardDemo from "@/content/hover-card/demos/01-states";
 import ThemeDemo from "@/content/theme-provider/demos/02-segmented";
-import MotionDemo from "@/content/motion-provider/demos/01-modality";
+import MotionDemo from "@/content/input-modality-provider/demos/01-modality";
 import { Card } from "@qingye_lab/ui/components/card";
 import { Stack } from "@qingye_lab/ui/components/layout";
 export default function Batch8FoundationOverlay() {

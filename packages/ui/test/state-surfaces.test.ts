@@ -4,8 +4,9 @@ import postcss from "postcss";
 import { describe, expect, test } from "vitest";
 import { composite, resolveColor, tokenValues } from "./contrast-check";
 
-// 2026-10-12 用户裁决：选中色由 token 生效，与底色有关系。这里读真实的 token 文件，不抄值：
-// 断言的是关系——悬停 = 选中 < 按下，三者同源于 --qy-ink-qing；所有「选中 / 当前」的角色都经 --qy-surface-selected。
+// 2026-10-12 用户裁决：选中色由 token 生效，与底色有关系；2026-10-30 反馈梯改为悬停浅、选中深。
+// 这里读真实的 token 文件，不抄值：断言的是关系——悬停 < 选中 = 按下，选中 = 悬停的两倍，三者同源于 --qy-ink-qing；
+// 所有「选中 / 当前」的角色都经 --qy-surface-selected。
 const root = join(__dirname, "..");
 const read = (path: string) => readFileSync(join(root, path), "utf8");
 const sources = ["tokens/primitives.css", "tokens/semantic.css", "tokens/components.css"].map(read);
@@ -20,10 +21,11 @@ function declarations(source: string, prop: string): string[] {
 describe.each(["light", "dark"] as const)("反馈梯与选中面（%s）", (appearance) => {
   const tokens = tokenValues(sources, appearance);
 
-  test("静止 ≤ 悬停 = 选中 < 按下，悬停不深于选中", () => {
+  test("静止 ≤ 悬停 < 选中 = 按下，选中是悬停的两倍", () => {
     expect(alpha(tokens, "surface-inset")).toBeLessThanOrEqual(alpha(tokens, "surface-hover"));
-    expect(alpha(tokens, "surface-hover")).toBeCloseTo(alpha(tokens, "surface-selected"), 12);
-    expect(alpha(tokens, "surface-selected")).toBeLessThan(alpha(tokens, "surface-active"));
+    expect(alpha(tokens, "surface-hover")).toBeLessThan(alpha(tokens, "surface-selected"));
+    expect(alpha(tokens, "surface-selected")).toBeCloseTo(2 * alpha(tokens, "surface-hover"), 12);
+    expect(alpha(tokens, "surface-active")).toBeCloseTo(alpha(tokens, "surface-selected"), 12);
   });
 
   test("侧栏当前项文字默认继承已有悬停文字，独立覆盖不改变悬停色", () => {
@@ -42,7 +44,7 @@ describe.each(["light", "dark"] as const)("反馈梯与选中面（%s）", (appe
     const moved = new Map(tokens).set("--qy-ink-qing", "16%");
     const after = ["surface-hover", "surface-selected", "surface-active", "border"].map((name) => resolveColor(`var(--qy-${name})`, moved));
     before.forEach((color, i) => expect(after[i], String(i)).not.toEqual(color));
-    expect(alpha(moved, "surface-active")).toBeCloseTo(2 * alpha(moved, "surface-selected"), 12);
+    expect(alpha(moved, "surface-selected")).toBeCloseTo(2 * alpha(moved, "surface-hover"), 12);
   });
 
   test("代码面取页面底纸；标题栏里选中的段与侧栏当前项是同一种颜色", () => {

@@ -1,6 +1,6 @@
 # 主题 ThemeProvider
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5

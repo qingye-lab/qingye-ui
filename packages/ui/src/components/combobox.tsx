@@ -84,11 +84,12 @@ export function ComboboxChip({ label, className, children, ...props }: ComboboxC
   </ComboboxPrimitive.Chip>;
 }
 export type ComboboxPopupProps = ComboboxPrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: ComboboxPrimitive.Portal.Props["container"]; positionerProps?: ComboboxPrimitive.Positioner.Props };
+// 边界与阴影档同 Popover（见 popover.tsx 的 PopoverPopup）：border-border 线 + shadow-raised。
 export function ComboboxPopup({ container, positionerProps, className, ...props }: ComboboxPopupProps) {
   const layerStyle = useFloatingLayer("popup");
   const { style: positionerStyle, ...positionerRest } = positionerProps ?? {};
   return <ComboboxPrimitive.Portal container={container}><ComboboxPrimitive.Positioner side="bottom" align="start" sideOffset={popupOffset} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
-    <ComboboxPrimitive.Popup data-slot="combobox-popup" {...props} className={state => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
+    <ComboboxPrimitive.Popup data-slot="combobox-popup" {...props} className={state => cn("qy-combobox-popup min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
   </ComboboxPrimitive.Positioner></ComboboxPrimitive.Portal>;
 }
 export function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props & React.RefAttributes<HTMLDivElement>) {
@@ -101,8 +102,11 @@ export function ComboboxItem({ className, children, ...props }: ComboboxPrimitiv
     <ComboboxPrimitive.ItemIndicator data-slot="combobox-item-indicator" className="flex shrink-0 items-center [&_svg]:size-(--qy-fill-icon)"><IconCheck aria-hidden="true" /></ComboboxPrimitive.ItemIndicator>
   </ComboboxPrimitive.Item>;
 }
-export function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {
-  return <ComboboxPrimitive.Empty data-slot="combobox-empty" {...props} className={state => cn(candidateEmptyClassName, typeof className === "function" ? className(state) : className)} />;
+// 空态与 Select 的 SelectPopup 同一画法（candidateEmptyClassName：第一项的位置）与同一默认用语。
+// 默认「没有可选项」是兜底；候选来自查询时，应用应传 children 说明查询对象（例如「没有匹配的成员」）。
+export function ComboboxEmpty({ className, children, ...props }: ComboboxPrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {
+  const { messages } = useUILocale();
+  return <ComboboxPrimitive.Empty data-slot="combobox-empty" {...props} className={state => cn(candidateEmptyClassName, typeof className === "function" ? className(state) : className)}>{children === undefined ? messages.selectEmpty : children}</ComboboxPrimitive.Empty>;
 }
 /**
  * 一组候选与它的组名。数据用 Base UI 的分组形态（`items={[{ value: "页面", items: [...] }]}`），

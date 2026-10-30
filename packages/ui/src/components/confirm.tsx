@@ -9,7 +9,8 @@ export type ConfirmOptions = {
   title: React.ReactNode;
   /** 必要后果，作为对话框的可访问说明持续可见。 */
   description: React.ReactNode;
-  confirmLabel?: React.ReactNode;
+  /** 确认钮必须说出这个决定具体做什么（「移出」「离开」），不提供「确认」式的通用默认。 */
+  confirmLabel: React.ReactNode;
   cancelLabel?: React.ReactNode;
   tone?: ButtonProps["tone"];
   popupProps?: Omit<AlertDialogPopupProps, "children">;
@@ -22,7 +23,9 @@ export type ConfirmFunction = (options: ConfirmOptions) => Promise<boolean>;
 export type ConfirmProviderProps = { children: React.ReactNode };
 
 type Owner = object;
+let nextRequestId = 0;
 type Request = {
+  id: number;
   owner: Owner;
   options: ConfirmOptions;
   returnFocus: HTMLElement | null;
@@ -42,50 +45,71 @@ function hasContent(value: React.ReactNode) {
 }
 
 /**
- * One active decision per provider, including its closing phase. Additional requests
- * return false immediately; they never replace reviewed content or form a queue.
+ * One decision is on screen at a time, including its closing phase. Later requests wait in order
+ * and open after the previous one has finished closing; each Promise settles on its own.
+ * 排队而不是返回 false：false 的含义是「决定者拒绝」，不能同时表示「被占用」（design.md「名实相符」）。
  */
 export function ConfirmProvider({ children }: ConfirmProviderProps) {
   const { messages } = useUILocale();
   const active = React.useRef<Request | null>(null);
+  const queue = React.useRef<Request[]>([]);
   const [view, setView] = React.useState<{ request: Request; open: boolean } | null>(null);
 
+  // The active slot is free: promote the oldest waiting request, or clear the view.
+  const advance = React.useCallback(() => {
+    const next = queue.current.shift() ?? null;
+    active.current = next;
+    setView(next ? { request: next, open: true } : null);
+  }, []);
+
   const finish = React.useCallback((request: Request, confirmed: boolean) => {
-    if (active.current !== request || request.decision !== undefined) return;
+    if (request.decision !== undefined) return;
+    if (active.current !== request) {
+      // Still waiting: leave the queue without ever having been shown.
+      const index = queue.current.indexOf(request);
+      if (index < 0) return;
+      queue.current.splice(index, 1);
+      request.decision = confirmed;
+      request.removeAbortListener();
+      request.resolve(confirmed);
+      return;
+    }
     request.decision = confirmed;
     request.removeAbortListener();
     // Resolve the decision now: business execution must not depend on an exit animation.
     request.resolve(confirmed);
     if (request.presented) setView(current => current?.request === request ? { request, open: false } : current);
-    else {
-      active.current = null;
-      setView(current => current?.request === request ? null : current);
-    }
-  }, []);
+    else advance();
+  }, [advance]);
 
   const request = React.useCallback((options: ConfirmOptions, owner: Owner): Promise<boolean> => {
-    if (active.current || options.signal?.aborted) return Promise.resolve(false);
+    if (options.signal?.aborted) return Promise.resolve(false);
     if (!hasContent(options.title) || !hasContent(options.description)) throw new TypeError("confirm requires a non-empty title and description.");
-    if ((options.confirmLabel !== undefined && !hasContent(options.confirmLabel)) || (options.cancelLabel !== undefined && !hasContent(options.cancelLabel))) throw new TypeError("confirm action labels must be non-empty.");
+    if (!hasContent(options.confirmLabel) || (options.cancelLabel !== undefined && !hasContent(options.cancelLabel))) throw new TypeError("confirm requires a non-empty confirmLabel; cancelLabel, when given, must be non-empty.");
     return new Promise(resolve => {
+      // A waiting request is called from wherever focus is now — possibly inside the dialog ahead of it,
+      // which will be gone by its turn. Return to what the request ahead would return to instead.
+      const focused = typeof document !== "undefined" && document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      const ahead = queue.current.at(-1) ?? active.current;
       // Capture the request, rather than retaining a mutable caller-owned options object.
       const pending: Request = {
-        owner, options: { ...options, ...(options.popupProps ? { popupProps: { ...options.popupProps } } : {}) },
-        returnFocus: typeof document !== "undefined" && document.activeElement instanceof HTMLElement ? document.activeElement : null,
+        id: ++nextRequestId, owner, options: { ...options, ...(options.popupProps ? { popupProps: { ...options.popupProps } } : {}) },
+        returnFocus: ahead && focused?.closest('[role="alertdialog"]') ? ahead.returnFocus : focused,
         resolve, removeAbortListener: () => {}, presented: false,
       };
-      active.current = pending;
       if (options.signal) {
         const abort = () => finish(pending, false);
         const signal = options.signal;
         signal.addEventListener("abort", abort, { once: true });
         pending.removeAbortListener = () => signal.removeEventListener("abort", abort);
       }
+      if (active.current) { queue.current.push(pending); return; }
+      active.current = pending;
       setView({ request: pending, open: true });
     });
   }, [finish]);
   const cancel = React.useCallback((owner: Owner) => {
-    if (active.current?.owner === owner) finish(active.current, false);
+    for (const waiting of [active.current, ...queue.current]) if (waiting?.owner === owner) finish(waiting, false);
   }, [finish]);
   const context = React.useMemo(() => ({ request, cancel }), [request, cancel]);
 
@@ -98,12 +122,14 @@ export function ConfirmProvider({ children }: ConfirmProviderProps) {
     // or on the old popup completing its closing animation.
     setView(current => current && active.current !== current.request ? null : current);
     return () => {
-      const pending = active.current;
+      const pending = [active.current, ...queue.current];
       active.current = null;
-      if (pending) {
-        pending.decision ??= false;
-        pending.removeAbortListener();
-        pending.resolve(pending.decision);
+      queue.current = [];
+      for (const request of pending) {
+        if (!request) continue;
+        request.decision ??= false;
+        request.removeAbortListener();
+        request.resolve(request.decision);
       }
     };
   }, []);
@@ -111,11 +137,8 @@ export function ConfirmProvider({ children }: ConfirmProviderProps) {
   const pending = view?.request;
   return <ConfirmContext.Provider value={context}>
     {children}
-    {pending && <AlertDialog open={view.open} onOpenChange={next => { if (!next) finish(pending, false); }} onOpenChangeComplete={open => {
-      if (!open && active.current === pending && pending.decision !== undefined) {
-        active.current = null;
-        setView(current => current?.request === pending ? null : current);
-      }
+    {pending && <AlertDialog key={pending.id} open={view.open} onOpenChange={next => { if (!next) finish(pending, false); }} onOpenChangeComplete={open => {
+      if (!open && active.current === pending && pending.decision !== undefined) advance();
     }}>
       <AlertDialogPopup {...pending.options.popupProps} finalFocus={pending.options.popupProps?.finalFocus ?? (() => pending.returnFocus?.isConnected ? pending.returnFocus : true)}>
         <AlertDialogHeader>
@@ -123,7 +146,7 @@ export function ConfirmProvider({ children }: ConfirmProviderProps) {
           <AlertDialogDescription>{pending.options.description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <Button tone={pending.options.tone ?? "neutral"} onClick={() => finish(pending, true)}>{pending.options.confirmLabel ?? messages.confirm}</Button>
+          <Button tone={pending.options.tone ?? "neutral"} onClick={() => finish(pending, true)}>{pending.options.confirmLabel}</Button>
           <AlertDialogClose render={<Button variant="quiet" />}>{pending.options.cancelLabel ?? messages.cancel}</AlertDialogClose>
         </AlertDialogFooter>
       </AlertDialogPopup>

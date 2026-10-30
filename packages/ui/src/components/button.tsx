@@ -131,14 +131,18 @@ export function Button({
   return (
     <>
       {/* 按钮只承载动作，忙碌是它唯一的状态（用户裁决 2026-10-10：功能要纯粹）。
-       *  忙碌时名称留在原位，后面多一个转动的记号；图标形态没有放第二个图形的地方，记号暂时替下自己的图形。
+       *  忙碌不改变外缘尺寸（design.md「随状态改变尺寸」是反例）：名称与图形仍在原处占位——
+       *  只是看不见（opacity-0，不用 invisible / display:none，那会把名称从无障碍树里拿走），
+       *  转动的记号叠放在按钮中央。文字形与图标形同一规则，决定它的关系是「同一动作的状态切换，外缘不动」。
        *  焦点留在按钮上，重复触发被挡住（aria-disabled，不是原生 disabled）。 */}
       <ButtonPrimitive
         {...props}
         aria-busy={busy || busyFact}
         aria-describedby={[description, loading ? statusId : undefined].filter(Boolean).join(" ") || undefined}
         aria-disabled={blocked || disabledFact}
-        className={cn(buttonVariants({ variant, tone, size, shape }), className)}
+        // 调用方声明的禁用事实（aria-disabled）与原生 disabled 同一外观，只是焦点仍留在按钮上（例如批量移动后按钮变为不可用）；
+        // 忙碌不在此列：忙碌由居中的转动记号表达，变暗会让它与「不可用」读成同一件事。
+        className={cn(buttonVariants({ variant, tone, size, shape }), (disabledFact === true || disabledFact === "true") && !busy && "cursor-not-allowed opacity-disabled", className)}
         data-loading={loading ? "" : undefined}
         data-shape={shape}
         data-size={size}
@@ -156,11 +160,11 @@ export function Button({
         onMouseDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onMouseDownCapture?.(event); }}
         onPointerDownCapture={(event) => { if (event.button !== 0 || !preventActivation(event)) onPointerDownCapture?.(event); }}
       >
-        <span className={cn("inline-flex min-w-0 items-center justify-center gap-(--qy-control-content-gap) whitespace-normal", shape === "icon" && loading && "opacity-0")} data-slot="button-content">
+        <span className={cn("inline-flex min-w-0 items-center justify-center gap-(--qy-control-content-gap) whitespace-normal", loading && "opacity-0")} data-slot="button-content">
           {children}
         </span>
         {loading && (
-          <span aria-hidden="true" className={cn("inline-flex shrink-0 items-center", shape === "icon" && "pointer-events-none absolute")} data-slot="button-loading">
+          <span aria-hidden="true" className="pointer-events-none absolute inline-flex shrink-0 items-center" data-slot="button-loading">
             <IconLoader2 className="qy-spin size-[1em]" />
           </span>
         )}

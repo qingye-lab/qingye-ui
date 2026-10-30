@@ -9,6 +9,7 @@ export default function Demo() {
     <Stack gap="fields" className="w-full max-w-sm">
       <Field disabled><FieldLabel>禁用</FieldLabel><SearchInput defaultValue="青野" /></Field>
       <Field><FieldLabel>只读</FieldLabel><SearchInput readOnly defaultValue="青野" /></Field>
+      <Field><FieldLabel>搜索中</FieldLabel><SearchInput loading defaultValue="青野" /></Field>
     </Stack>
   );
 }

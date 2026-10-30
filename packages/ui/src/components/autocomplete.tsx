@@ -46,11 +46,12 @@ export function AutocompleteClear({ render, children, ...props }: AutocompletePr
   return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
 }
 export type AutocompletePopupProps = AutocompletePrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: AutocompletePrimitive.Portal.Props["container"]; positionerProps?: AutocompletePrimitive.Positioner.Props };
+// 边界与阴影档同 Popover（见 popover.tsx 的 PopoverPopup）：border-border 线 + shadow-raised。
 export function AutocompletePopup({ container, positionerProps, className, ...props }: AutocompletePopupProps) {
   const layerStyle = useFloatingLayer("popup");
   const { style: positionerStyle, ...positionerRest } = positionerProps ?? {};
   return <AutocompletePrimitive.Portal container={container}><AutocompletePrimitive.Positioner side="bottom" align="start" sideOffset={popupOffset} {...positionerRest} style={state => ({ ...layerStyle, ...(typeof positionerStyle === "function" ? positionerStyle(state) : positionerStyle) })}>
-    <AutocompletePrimitive.Popup data-slot="autocomplete-popup" {...props} className={state => cn("min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
+    <AutocompletePrimitive.Popup data-slot="autocomplete-popup" {...props} className={state => cn("qy-autocomplete-popup min-w-(--anchor-width) max-w-(--available-width) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised outline-none origin-(--transform-origin) focus-visible:border-ring", typeof className === "function" ? className(state) : className)} />
   </AutocompletePrimitive.Positioner></AutocompletePrimitive.Portal>;
 }
 export function AutocompleteList({ className, ...props }: AutocompletePrimitive.List.Props & React.RefAttributes<HTMLDivElement>) {
@@ -59,8 +60,10 @@ export function AutocompleteList({ className, ...props }: AutocompletePrimitive.
 export function AutocompleteItem({ className, ...props }: AutocompletePrimitive.Item.Props & React.RefAttributes<HTMLDivElement>) {
   return <AutocompletePrimitive.Item data-slot="autocomplete-item" {...props} className={state => cn("flex items-center", overlayItemClassName, candidateItemClassName, typeof className === "function" ? className(state) : className)} />;
 }
-export function AutocompleteEmpty({ className, ...props }: AutocompletePrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {
-  return <AutocompletePrimitive.Empty data-slot="autocomplete-empty" {...props} className={state => cn(candidateEmptyClassName, typeof className === "function" ? className(state) : className)} />;
+// 空态与 Select、Combobox 同一画法与同一默认用语；候选来自查询时，应用应传 children 说明查询对象。
+export function AutocompleteEmpty({ className, children, ...props }: AutocompletePrimitive.Empty.Props & React.RefAttributes<HTMLDivElement>) {
+  const { messages } = useUILocale();
+  return <AutocompletePrimitive.Empty data-slot="autocomplete-empty" {...props} className={state => cn(candidateEmptyClassName, typeof className === "function" ? className(state) : className)}>{children === undefined ? messages.selectEmpty : children}</AutocompletePrimitive.Empty>;
 }
 /**
  * 一组候选与它的组名。数据用 Base UI 的分组形态（`items={[{ value: "页面", items: [...] }]}`），

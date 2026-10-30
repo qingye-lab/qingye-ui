@@ -305,6 +305,10 @@
   --text-label--line-height: var(--qy-text-label-leading);
   --text-label--letter-spacing: var(--qy-text-label-tracking);
   --text-label--font-weight: var(--qy-text-label-weight);
+  --text-label-mobile: var(--qy-text-label-mobile-size);
+  --text-label-mobile--line-height: var(--qy-text-label-mobile-leading);
+  --text-label-mobile--letter-spacing: var(--qy-text-label-mobile-tracking);
+  --text-label-mobile--font-weight: var(--qy-text-label-mobile-weight);
 
   --text-metric: var(--qy-text-metric-size);
   --text-metric--line-height: var(--qy-text-metric-leading);

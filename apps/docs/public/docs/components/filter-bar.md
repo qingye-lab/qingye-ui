@@ -1,9 +1,9 @@
 # 筛选条件 FilterBar
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
-Source SHA-256: b38f125404d71978bc70615a66d849c3a72958058c1a86177d918b00b2d6c811
+Source SHA-256: ded3c2eaf37f9dcb9852c5195cbdca5523d62233af35237c20026b61addc7431
 
 分开显示草稿条件与已应用事实。
 
@@ -59,6 +59,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onApply`: `React.FormEventHandler<HTMLFormElement>`.
 - `onCancel?`: `React.MouseEventHandler<HTMLButtonElement>`.
 - `onClear?`: `React.MouseEventHandler<HTMLButtonElement>`.
+- `sticky?`: `boolean`.
 - plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
 
 ### FilterBarActions
@@ -120,6 +121,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### FilterBar
 原生筛选 form 与事实上下文。
 - dirty / appliedSummary / disabled / canClear: boolean / ReactNode. 应用明确草稿差异、已应用摘要与是否可清除；零值保留。
+- sticky: boolean. 吸附在最近的滚动容器顶端（Workspace 中为 WorkspaceContent），不能放进带 overflow 的中间容器；吸住且有内容滚过时才出现分界线（data-stuck）。
 - onApply / onCancel / onClear / onSubmit: native event callbacks. onSubmit.preventDefault() 取消应用；Apply 阻止浏览器导航。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -167,5 +169,20 @@ const items = ["接入设备", "权限与角色", "同步与导出"];
 export default function Demo() {
   const [draft, setDraft] = React.useState(""); const [applied, setApplied] = React.useState(""); const results = items.filter(item => item.includes(applied));
   return <Stack><FilterBar dirty={draft !== applied} appliedSummary={applied ? `已应用名称：${applied}` : "已应用：全部本地条目"} canClear={Boolean(applied || draft)} onApply={() => setApplied(draft)} onCancel={() => setDraft(applied)} onClear={() => { setDraft(""); setApplied(""); }}><FilterBarFields><Field><FieldLabel>名称包含</FieldLabel><Input value={draft} onChange={event => setDraft(event.target.value)} /></Field></FilterBarFields><FilterBarApplied /><FilterBarStatus /><FilterBarActions><FilterBarApply /><FilterBarCancel /><FilterBarClear /></FilterBarActions></FilterBar><p className="m-0 text-support">{results.length} 项</p>{results.length ? <ul className="m-0 text-body">{results.map(item => <li key={item}>{item}</li>)}</ul> : <p className="m-0 text-body">没有符合已应用条件的条目</p>}</Stack>;
+}
+```
+
+### 吸顶
+Source: apps/docs/src/content/filter-bar/demos/03-sticky.tsx
+```tsx
+import * as React from "react";
+import { FilterBar, FilterBarFields, FilterBarActions, FilterBarApply } from "@qingye_lab/ui/components/filter-bar";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "吸顶", titleEn: "Sticky" } satisfies DemoMeta;
+export default function Demo() {
+  const [draft, setDraft] = React.useState(""); const [applied, setApplied] = React.useState("");
+  return <div className="h-64 overflow-y-auto bg-surface"><FilterBar sticky dirty={draft !== applied} appliedSummary={applied ? `已应用名称：${applied}` : "已应用：全部"} onApply={() => setApplied(draft)}><FilterBarFields><Field><FieldLabel>名称包含</FieldLabel><Input value={draft} onChange={event => setDraft(event.target.value)} /></Field></FilterBarFields><FilterBarActions><FilterBarApply /></FilterBarActions></FilterBar><ul className="m-0 text-body">{Array.from({ length: 30 }, (_, index) => <li key={index}>条目 {index + 1}</li>)}</ul></div>;
 }
 ```

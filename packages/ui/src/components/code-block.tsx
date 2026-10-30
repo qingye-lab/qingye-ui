@@ -6,6 +6,7 @@ import { IconCheck, IconCopy } from "@tabler/icons-react";
 import * as React from "react";
 import { Button } from "./button";
 import { useCopyToClipboard } from "../hooks/use-copy-to-clipboard";
+import { useScrollable } from "../hooks/use-scrollable";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -19,12 +20,21 @@ export type CodeBlockProps = Omit<useRender.ComponentProps<"div">, "children" | 
   children?: React.ReactNode;
   /** 长行折行，而不是横向滚动。 */
   wrap?: boolean;
+  /**
+   * 代码面最多显示的行数，超出后代码面纵向滚动（可聚焦、有名称）。折行后按视觉行计。
+   * 选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材），
+   * 给长度的话字号或密度一变，能看到的行数就悄悄变了。
+   */
+  maxLines?: number;
   copyable?: boolean;
   onCopySuccess?: () => void;
   onCopyError?: (error: unknown) => void;
 };
-export function CodeBlock({ code, language, title, children, wrap = false, copyable = true, onCopySuccess, onCopyError, render, className, ...props }: CodeBlockProps) {
+export function CodeBlock({ code, language, title, children, wrap = false, maxLines, copyable = true, onCopySuccess, onCopyError, render, className, ...props }: CodeBlockProps) {
   const { messages } = useUILocale();
+  if (maxLines !== undefined && (!Number.isInteger(maxLines) || maxLines < 1)) throw new RangeError(`CodeBlock maxLines must be a positive integer; received ${String(maxLines)}.`);
+  // 代码面只有横向（或设了高度时纵向）溢出时才需要键盘滚动；不溢出就不进入 Tab 序列。
+  const [preRef, scrollable] = useScrollable<HTMLPreElement>();
   const [requestText, setRequestText] = React.useState<string | undefined>();
   const [failed, setFailed] = React.useState(false);
   const { copyToClipboard, isCopied, isCopying } = useCopyToClipboard({
@@ -36,6 +46,8 @@ export function CodeBlock({ code, language, title, children, wrap = false, copya
   const Icon = copied ? IconCheck : IconCopy;
   const hasBar = title !== undefined && title !== null && title !== false;
   const labelTitle = typeof title === "string" || typeof title === "number";
+  // 可聚焦的滚动区必须有名称：读屏要知道 Tab 停在了什么上。名称取标题（字符串或数字），其次语言，再退到「代码」。
+  const regionName = labelTitle ? String(title) : language || messages.codeRegion;
   /*
    * 骨法用笔：代码面的范围只用一种边界机制——一条清墨容器线（border-border）。底（--qy-code-surface）
    * 取页面底纸本身（用户 2026-10-12），坐在卡片上比卡片深一级、说「这是另一种材料」；坐在页面底纸上与页面无底色差，
@@ -65,8 +77,9 @@ export function CodeBlock({ code, language, title, children, wrap = false, copya
           <div data-slot="code-block-title" className={cn("flex min-w-0 flex-1 items-center", labelTitle && "font-mono text-support text-muted-foreground wrap-anywhere")}>{title}</div>
           {copyButton}
         </div>}
+        {/* 最大高度 = N 行 × 1 材（正文一行）+ 上下内边距：border-box 下 padding 在高度之内，所以恰好露出 N 行。复制按钮在本滚动区之外（绝对定位在代码面上，或在标题栏里），代码怎么滚它都在原位。 */}
         {/* 圆角 = 面板角 − 容器线（同一轮廓等距内缩，STANDARDS §4）：聚焦的内线跟着容器角走，不在角上露出直角。有标题栏时上边是直的。 */}
-        <pre data-slot="code-block-pre" tabIndex={0} className={cn("m-0 max-w-full overflow-x-auto p-(--qy-panel-padding-sm) text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", hasBar ? "rounded-b-[calc(var(--qy-radius-panel)-var(--qy-line-width))]" : "rounded-[calc(var(--qy-radius-panel)-var(--qy-line-width))]", wrap && "whitespace-pre-wrap wrap-anywhere", copyable && !hasBar && "pe-[calc(var(--qy-control-sm)+2*var(--qy-code-copy-inset))]")}><code data-slot="code-block-code" className="font-mono">{children ?? code}</code></pre>
+        <pre data-slot="code-block-pre" ref={preRef} tabIndex={scrollable ? 0 : undefined} {...(scrollable ? { role: "region", "aria-label": regionName } : {})} style={maxLines ? { maxHeight: `calc(${maxLines} * var(--qy-cai) + 2 * var(--qy-panel-padding-sm))` } : undefined} className={cn("m-0 max-w-full overflow-auto p-(--qy-panel-padding-sm) text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", hasBar ? "rounded-b-[calc(var(--qy-radius-panel)-var(--qy-line-width))]" : "rounded-[calc(var(--qy-radius-panel)-var(--qy-line-width))]", wrap && "whitespace-pre-wrap wrap-anywhere", copyable && !hasBar && "pe-[calc(var(--qy-control-sm)+2*var(--qy-code-copy-inset))]")}><code data-slot="code-block-code" className="font-mono">{children ?? code}</code></pre>
         {!hasBar && copyButton}
       </div>
       {copyable && <p data-slot="code-block-status" role="status" className={feedbackCurrent && failed ? "m-0 min-w-0 text-support text-destructive-foreground wrap-anywhere" : "sr-only"}>{feedbackCurrent && failed ? messages.copyError : copied ? messages.copied : null}</p>}

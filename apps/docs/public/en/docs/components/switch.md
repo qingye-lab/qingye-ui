@@ -1,9 +1,9 @@
 # Switch
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: bcbdd6f0942adf4c9489bd1c401309b28b1339bd54797a4444bdced65c0f1e4c
+Source SHA-256: 9ae3686501e427f7139eb3d69d59eb31a0e6715add243ff1334b0fdfc6412e6a
 
 Immediately change the on/off state of a current setting.
 
@@ -41,11 +41,11 @@ Use Switch only when the current setting changes immediately. Consent, pending s
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Switch
-- no props declared by this library
+- `pending?`: `boolean`. 立即生效的设置已发出请求、结果未到。事实由调用方持有；开关只表示「尚未确认」并挡住再次切换，不启动请求、不推断结果。 抓手停在调用方给的 `checked`（通常是请求的目标值），抓手内出现与 Button loading 同一种等待记号。
 - plus 289 inherited (@types/react 273, @base-ui/react 16); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: does not read UILocale
@@ -58,7 +58,8 @@ Keep names stable and use aria-checked for on/off.
 - checked / defaultChecked: boolean. Controlled setting or uncontrolled initial value.
 - onCheckedChange: (checked, eventDetails) => void. An immediate setting change; the application owns requests and persistence.
 - disabled / readOnly: boolean; default false. Disabled excludes tabbing/submission; read-only retains focus/submission without changes.
-- aria-invalid: boolean | 'true' | 'false'. Caller or Field declares invalid while retaining the actual on/off state.
+- pending: boolean; default false. A request is out and the result has not arrived: no further toggling (readOnly), aria-busy, data-pending; the thumb stays at checked and carries the same waiting mark as Button loading.
+- aria-invalid: boolean | 'true' | 'false'. Caller or Field declares invalid while retaining the actual on/off state. When on, the track fill becomes the danger fill; when off, the track outline turns danger.
 - name / value / uncheckedValue / form: string. Primitive hidden input submission; this does not require waiting for form submission before taking effect.
 - render / ref / inputRef / className / style: Base UI composition. Root and hidden input composition; set nativeButton when rendering a button.
 
@@ -132,5 +133,19 @@ export default function Demo() {
       <Field orientation="horizontal"><Switch defaultChecked aria-labelledby={`${id}-reading`} /><FieldContent><span id={`${id}-reading`} className="text-reading">说明性文字，轨道与它同高</span></FieldContent></Field>
     </div>
   );
+}
+```
+
+### 等待确认
+Source: apps/docs/src/content/switch/demos/03-pending.tsx
+```tsx
+import { Field, FieldContent, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Switch } from "@qingye_lab/ui/components/switch";
+
+export const meta = { title: "等待确认", titleEn: "Pending" };
+
+// 抓手停在请求的目标值；结果由应用持有，到达后再去掉 pending。
+export default function Demo() {
+  return <Field orientation="horizontal"><Switch checked pending /><FieldContent><FieldLabel>自动同步</FieldLabel></FieldContent></Field>;
 }
 ```

@@ -1,9 +1,9 @@
 # Meter
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
-Source SHA-256: 4cb7fb3ca4891305dc01cfdccfd1488d4274e6e33dad77a542e5864facd9f09c
+Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
 
 A real measurement over a valid range.
 

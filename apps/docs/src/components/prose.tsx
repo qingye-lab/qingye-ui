@@ -50,18 +50,21 @@ export function useDocumentTitle(title?: string, description?: string) {
 export function PageHeader({
   title,
   description,
+  metaDescription,
   documentTitle,
   children,
   className,
 }: {
   title: ReactNode;
   description?: ReactNode;
+  /** 只写进文档头（搜索摘要、分享卡片），不在页面上显示。页面上的能力由示例本身表达。 */
+  metaDescription?: string;
   /** Plain-text title for the browser tab when `title` is not a string. */
   documentTitle?: string;
   children?: ReactNode;
   className?: string;
 }) {
-  useDocumentTitle(documentTitle ?? (typeof title === "string" ? title : undefined), typeof description === "string" ? description : undefined);
+  useDocumentTitle(documentTitle ?? (typeof title === "string" ? title : undefined), metaDescription ?? (typeof description === "string" ? description : undefined));
   return (
     <header className={cn("min-w-0", className)}>
       <h1 className="docs-page-title" tabIndex={-1}>

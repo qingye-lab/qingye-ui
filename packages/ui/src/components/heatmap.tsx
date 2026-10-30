@@ -244,13 +244,14 @@ export function Heatmap({ label, framed = true, render, ref, className, rowLabel
           ? <ul data-slot="heatmap-legend" className={cn(legendClassName, "text-dense")}>{levels.map((level, index) => <li key={level.label} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span data-slot="legend-key" data-level={index} className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: levelPaint(index, levels.length, level.tone).background }} /><span>{level.label}</span></li>)}</ul>
           : <>
             <span>{messages.heatmapScaleFrom}</span>
-            <span data-slot="heatmap-scale-key" className="h-(--qy-space-2) w-16 rounded-xs" style={{ background: `linear-gradient(to right, ${scalePaint(0, 1).background}, ${scalePaint(1, 1).background})` }} />
+            {/* 色阶键：高 2 分（与图例色块同高），宽 16 分是预设——够看出由浅到深的渐变，又不比两端文字更抢眼。 */}
+            <span data-slot="heatmap-scale-key" className="h-(--qy-status-dot-size) w-16 rounded-(--qy-swatch-radius)" style={{ background: `linear-gradient(to right, ${scalePaint(0, 1).background}, ${scalePaint(1, 1).background})` }} />
             <span>{messages.heatmapScaleTo}</span>
           </>}
       </div>
     </div>}
-    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{rowLabel}</TableHead>{columns.map(column => <TableHead key={column.key}>{column.label}</TableHead>)}{rowSummary && <TableHead className="text-end">{rowSummary.label}</TableHead>}</TableRow></TableHeader><TableBody>
-          {rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{columns.map((column, columnIndex) => { const value = grid[rowIndex]![columnIndex]!; const level = levels && typeof value === "number" ? levels[levelIndexOf(levels, value)] : undefined; return <TableCell key={column.key} className="numeric" data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? format(value, row, column) : value.label}{level && <span className="block whitespace-nowrap text-muted-foreground">{level.label}</span>}</TableCell>; })}{summaries && <TableCell className="text-end numeric" data-slot="heatmap-summary">{summaries[rowIndex]}</TableCell>}</TableRow>)}
+    {dataView.open && <div id={dataView.id} data-slot="chart-data"><TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{rowLabel}</TableHead>{columns.map(column => <TableHead key={column.key} numeric>{column.label}</TableHead>)}{rowSummary && <TableHead numeric>{rowSummary.label}</TableHead>}</TableRow></TableHeader><TableBody>
+          {rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{columns.map((column, columnIndex) => { const value = grid[rowIndex]![columnIndex]!; const level = levels && typeof value === "number" ? levels[levelIndexOf(levels, value)] : undefined; return <TableCell key={column.key} numeric data-state={typeof value === "number" ? "known" : value.state}>{typeof value === "number" ? format(value, row, column) : value.label}{level && <span className="block whitespace-nowrap text-muted-foreground">{level.label}</span>}</TableCell>; })}{summaries && <TableCell numeric data-slot="heatmap-summary">{summaries[rowIndex]}</TableCell>}</TableRow>)}
         </TableBody></Table></TableContainer></div>}
   </>;
   return useRender({ defaultTagName: "figure", render, ref, props: mergeProps(native, {

@@ -1,9 +1,9 @@
 # Label
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
-Source SHA-256: 2b221cc2db3bc0b20d3fe8b168a04d26a003697fa3a3cb7ea29eb0a4622d6e6a
+Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2
 
 Name one control with a native label.
 

@@ -4,7 +4,7 @@ import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { ThemeProvider, themeScript, useTheme } from "../src/components/theme-provider";
 import { hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
-import { MotionProvider } from "../src/components/motion-provider";
+import { InputModalityProvider } from "../src/components/input-modality-provider";
 
 type Listener = (event: MediaQueryListEvent) => void;
 
@@ -167,7 +167,7 @@ test("themeScript applies the stored theme before React mounts", () => {
 test("B8 SSR hydration preserves the server render before resolving actual stored and system choices", async () => {
   mockSystemTheme(true);
   localStorage.setItem("yq-theme", "dark");
-  const fixture = <ThemeProvider><MotionProvider><Probe /></MotionProvider></ThemeProvider>;
+  const fixture = <ThemeProvider><InputModalityProvider><Probe /></InputModalityProvider></ThemeProvider>;
   let html = "";
   vi.stubGlobal("window", undefined);
   try { html = renderToString(fixture); } finally { vi.unstubAllGlobals(); }

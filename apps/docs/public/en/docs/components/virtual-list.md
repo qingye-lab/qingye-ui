@@ -1,9 +1,9 @@
 # Virtual list
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: d11464b0227174386462ede6f1c9bd096c4ea9498f38d9d43f09f967243e9141
+Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
 
 Window fixed or measured-height collections while retaining the reading position and active editing.
 
@@ -70,6 +70,7 @@ Collection rendering boundary with actual list/listitem semantics, without selec
 - actionsRef: React.Ref<VirtualListActions>. Separate actions: scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) and scrollToEnd(). Scroll instantly without moving focus. Invalid or out-of-bounds indices throw RangeError; scrollToEnd is a no-op for empty collections.
 - followEnd: boolean; default false. Explicit end following. Follow appended items only when previously at the bottom (within 1 CSS px). Reading history keeps its position, and initial mounting never jumps to the end.
 - overscan: number; default 2. A nonnegative integer rendering-budget preset on both window edges, rather than a visual dimension.
+- aria-label / aria-labelledby: string. One is required: the identifiable name of the collection, on the role=list scroll viewport. A missing or blank name throws.
 - render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.
 
 ## Keyboard

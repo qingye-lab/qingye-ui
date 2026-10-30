@@ -105,3 +105,24 @@ test("a Field label names the search input and clearLabel renames the action", (
   expect(screen.getByRole("searchbox", { name: "目录" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "清空目录筛选" })).toBeInTheDocument();
 });
+
+test("loading marks the input busy and announces it without blocking typing or clearing", async () => {
+  const user = userEvent.setup();
+  const { container, rerender } = render(<SearchInput aria-label="搜索" loading defaultValue="青" />);
+  const input = screen.getByRole("searchbox");
+  expect(input).toHaveAttribute("aria-busy", "true");
+  expect(screen.getByRole("status")).toHaveTextContent("正在搜索");
+  expect(container.querySelector("[data-slot=search-input-loading]")).toBeInTheDocument();
+  await user.type(input, "野");
+  expect(input).toHaveValue("青野");
+  await user.click(screen.getByRole("button", { name: "清除搜索" }));
+  expect(input).toHaveValue("");
+  rerender(<SearchInput aria-label="搜索" defaultValue="" />);
+  expect(screen.getByRole("searchbox")).not.toHaveAttribute("aria-busy");
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+});
+
+test("read-only says so inside the boundary", () => {
+  render(<SearchInput aria-label="搜索" readOnly defaultValue="青野" />);
+  expect(screen.getByText("只读")).toBeInTheDocument();
+});

@@ -1,17 +1,17 @@
 # 异步确认 Confirm
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
-Source SHA-256: 8e43b4793db49eb00f83a8c0dd6f5d00ce9ecb1212afe1499a93a869cd4990d5
+Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
 
 等待一次明确决定，再由调用方继续执行。
 
 ## Decision
-await confirm(options) 只返回是否同意；true 不表示提交成功。当前决定及退场结束前，后续调用立即返回 false，不替换内容也不排队。涉及对象、版本或变更失效时使用 ConfirmAction。
+await confirm(options) 只返回是否同意；true 不表示提交成功。已有决定在进行时，后续调用排队，前一个结束并退场后再依次打开，各自的 Promise 各自结算；false 只表示决定者拒绝。涉及对象、版本或变更失效时使用 ConfirmAction。
 
 ## Notes
-- 同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。
+- 同一 Provider 同刻只显示一个决定；其余按调用顺序排队，包含同一事件中的重复调用与退场期间。排队中的调用可被 signal 中止，所属 hook 卸载或 Provider 卸载时返回 false。
 - 调用 useConfirm 的组件卸载会取消它自己的未决决定；保留的旧函数在卸载后也只返回 false。
 - 授权与执行分开：组件不接收 onConfirm 请求函数，不显示提交中，不推断成功、失败或结果未知。
 - 需要文字核对、对象与版本变化后重新审阅时使用 ConfirmAction；一般组合控制使用 AlertDialog。
@@ -51,7 +51,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ## Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
-- 同一 Provider 同刻只处理一个决定；后续调用立即 false，包含同一事件中的重复调用与退场期间。
+- 同一 Provider 同刻只显示一个决定；其余按调用顺序排队，包含同一事件中的重复调用与退场期间。排队中的调用可被 signal 中止，所属 hook 卸载或 Provider 卸载时返回 false。
 - Required providers: ConfirmProvider
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context ConfirmContext: without a provider throws; provided by ConfirmProvider
@@ -66,7 +66,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### useConfirm
 返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。
 - title / description: ReactNode / ReactNode. 必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。
-- confirmLabel / cancelLabel: ReactNode / ReactNode; default locale.confirm / locale.cancel. 明确继续与保留动作；显式文字优先。取消按钮和 Escape 都返回 false；点遮罩不关闭。
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default 必填 / locale.cancel. confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。
 - tone: ButtonTone; default 'neutral'. 确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。
 - popupProps: Omit<AlertDialogPopupProps, 'children'>. 复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。
 - signal: AbortSignal. 已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。

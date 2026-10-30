@@ -105,10 +105,12 @@ export default {
   ],
   "notes": [
     "当前项不改字重，只加深线段与文字墨色，避免整排因变宽而跳动。",
+    "强制颜色（高对比度）下当前项另加一道下划线：边线被系统统一着色后不再区分当前项。",
     "二级目录到基线 = 组内间隔；三级在此基础上再加层级缩进（--qy-level-indent），两个既有关系相加，不是新值。"
   ],
   "notesEn": [
     "The current item does not change font weight; only the line segment and text ink deepen, so the row never shifts width.",
+    "In forced colors (high contrast) the current item also gets an underline: once the system recolors every border, the line no longer tells the current item apart.",
     "Level 2 sits one relationship gap from the baseline; level 3 adds the existing level indent on top — two existing relationships added together, not a new value."
   ]
 } satisfies ComponentMeta;

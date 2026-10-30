@@ -1,4 +1,5 @@
 import { act, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import * as React from "react";
 import { renderToString } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
@@ -53,6 +54,27 @@ describe("Workspace", () => {
     expect(main).toHaveAttribute("tabindex", "-1");
     main.focus();
     expect(main).toHaveFocus();
+  });
+
+  it("starts the tab order with a skip link that moves focus into the content without changing the address", async () => {
+    const user = userEvent.setup();
+    render(<Shell><p>正文</p></Shell>);
+    await user.tab();
+    const skip = screen.getByRole("link", { name: "跳到主要内容" });
+    expect(skip).toHaveFocus();
+    const before = window.location.href;
+    await user.keyboard("{Enter}");
+    expect(screen.getByRole("main")).toHaveFocus();
+    expect(window.location.href).toBe(before);
+    expect(skip).toHaveAttribute("href", `#${screen.getByRole("main").id}`);
+  });
+
+  it("points the skip link at the content's own id when the caller gives one", async () => {
+    const user = userEvent.setup();
+    render(<Workspace><WorkspaceSurface><WorkspaceContent id="page-main"><p>正文</p></WorkspaceContent></WorkspaceSurface></Workspace>);
+    expect(screen.getByRole("link", { name: "跳到主要内容" })).toHaveAttribute("href", "#page-main");
+    await user.click(screen.getByRole("link", { name: "跳到主要内容" }));
+    expect(screen.getByRole("main")).toHaveFocus();
   });
 
   it("updates keyboard access when content is inserted or changes inside a fixed-size wrapper", async () => {

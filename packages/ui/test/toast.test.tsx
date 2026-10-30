@@ -406,3 +406,54 @@ test("a default-priority toast has a single copy of its title", () => {
   act(() => toastManager.add({ type: "failed", title: "处理失败" }));
   expect(screen.getAllByText("处理失败")).toHaveLength(1);
 });
+
+test("a toast with an action stays past its timeout so the reader has time to act", () => {
+  vi.useFakeTimers();
+  try {
+    mount();
+    act(() => { toastManager.add({ title: "已删除", timeout: 1000, actionProps: { children: "撤销" } }); });
+    act(() => vi.advanceTimersByTime(600_000));
+    expect(screen.getByText("已删除")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "撤销" })).toBeInTheDocument();
+  } finally {
+    act(() => toastManager.close());
+    vi.useRealTimers();
+  }
+});
+
+const root = (title: string) => screen.getByText(title).closest("[data-slot=toast-root]")!;
+
+test("notices past the limit are collapsed behind a visible count that expands them", async () => {
+  const user = userEvent.setup();
+  mount({ limit: 1 });
+  act(() => { toastManager.add({ title: "第一条", timeout: 600_000 }); toastManager.add({ title: "第二条", timeout: 600_000 }); toastManager.add({ title: "第三条", timeout: 600_000 }); });
+  expect(root("第三条")).not.toHaveAttribute("inert");
+  expect(root("第一条")).toHaveAttribute("inert");
+  expect(root("第二条")).toHaveAttribute("inert");
+  const more = screen.getByRole("button", { name: "另有 2 条通知" });
+  await user.click(more);
+  expect(root("第一条")).not.toHaveAttribute("inert");
+  expect(root("第二条")).not.toHaveAttribute("inert");
+  expect(screen.queryByRole("button", { name: /另有/ })).not.toBeInTheDocument();
+});
+
+test("a notice that cannot dismiss itself is never collapsed by the limit and is not counted", () => {
+  mount({ limit: 1 });
+  act(() => {
+    toastManager.add({ title: "可撤销", actionProps: { children: "撤销" } });
+    toastManager.add({ title: "同步失败", type: "failed" });
+    toastManager.add({ title: "进度", type: "loading" });
+    toastManager.add({ title: "一般提示", timeout: 600_000 });
+    toastManager.add({ title: "最新", timeout: 600_000 });
+  });
+  for (const title of ["可撤销", "同步失败", "进度", "最新"]) expect(root(title)).not.toHaveAttribute("inert");
+  expect(root("一般提示")).toHaveAttribute("inert");
+  expect(screen.getByRole("button", { name: "另有 1 条通知" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "撤销" })).toBeInTheDocument();
+});
+
+test("no count appears while every notice fits the limit", () => {
+  mount();
+  act(() => { toastManager.add({ title: "甲" }); toastManager.add({ title: "乙" }); });
+  expect(screen.queryByRole("button", { name: /另有/ })).not.toBeInTheDocument();
+});

@@ -22,13 +22,13 @@ test("render swaps the element and keeps the slot and the caller's class", () =>
   expect(section).toHaveClass("extra");
 });
 
-test("framed is on by default; turning it off is exposed on the element and never reaches the DOM as an attribute", () => {
+test("framed is off by default; turning it on is exposed on the element and never reaches the DOM as an attribute", () => {
   const { rerender } = render(<Prose>内容</Prose>);
   const article = screen.getByRole("article");
-  expect(article).toHaveAttribute("data-framed", "true");
-  expect(article).not.toHaveAttribute("framed");
-  rerender(<Prose framed={false}>内容</Prose>);
   expect(article).toHaveAttribute("data-framed", "false");
+  expect(article).not.toHaveAttribute("framed");
+  rerender(<Prose framed>内容</Prose>);
+  expect(article).toHaveAttribute("data-framed", "true");
   expect(article).not.toHaveAttribute("framed");
 });
 

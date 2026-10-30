@@ -1,6 +1,6 @@
 # 上下文菜单 ContextMenu
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
@@ -76,6 +76,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### ContextMenuItem
 - `inset?`: `boolean`.
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
 - plus 282 inherited (@types/react 273, @base-ui/react 9); not expanded, see the installed declarations
 
 ### ContextMenuLinkItem

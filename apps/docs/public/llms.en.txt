@@ -1,12 +1,12 @@
-# Qingye UI 4.2.0
+# Qingye UI 5.0.0
 
-> Facts for @qingye_lab/ui@4.2.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@5.0.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.en.md)
 - [Style contract](/ai/style.en.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.en.md): method sources
-- [Installation](/ai/v4.2.0/installation.md)
+- [Installation](/ai/v5.0.0/installation.md)
 - [Main skill](/ai/SKILL.en.md)
 - [Full text](/llms-full.en.txt): the guide, installation and every component in one file
 
@@ -24,12 +24,15 @@
 - [ButtonGroup](/en/docs/components/button-group.md): Give actions in one scope a shared name and spacing.
 - [Calendar](/en/docs/components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
 - [Card](/en/docs/components/card.md): Bound an independently identifiable object.
+- [Cascader](/en/docs/components/cascader.md): Choose one value along a root-to-leaf path, with each level's candidates in its own column.
 - [Chart](/en/docs/components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](/en/docs/components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](/en/docs/components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
 - [CodeBlock](/en/docs/components/code-block.md): Literal text with an optional title bar and actual copy results.
 - [Collapsible](/en/docs/components/collapsible.md): Reveal additional content for the same object.
+- [ColorPicker](/en/docs/components/color-picker.md): Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.
 - [Combobox](/en/docs/components/combobox.md): Filter candidates and confirm one value or a set, with query text separate from selection.
+- [Command](/en/docs/components/command.md): A search box over an always-open list of commands, for jumping somewhere or doing something.
 - [Confirm](/en/docs/components/confirm.md): Await one explicit decision, then let the caller continue.
 - [ConfirmAction](/en/docs/components/confirm-action.md): Confirm a specific object, version, and change; review again when content changes.
 - [ContextMenu](/en/docs/components/context-menu.md): A context-menu enhancement for commands on the current object.
@@ -45,6 +48,7 @@
 - [Empty](/en/docs/components/empty.md): Distinguish zero results, unknown and not applicable.
 - [Field](/en/docs/components/field.md): Connect one value's name, control, description, and caller-supplied errors.
 - [Fieldset](/en/docs/components/fieldset.md): Give related fields a shared name and disabled scope.
+- [FileTrigger](/en/docs/components/file-trigger.md): Press a button to choose files and hand them to the application at once, retaining no selection.
 - [FileUpload](/en/docs/components/file-upload.md): Choose or drop local files, retaining accepted files and real rejection reasons.
 - [FilterBar](/en/docs/components/filter-bar.md): Shows draft conditions separately from applied facts.
 - [Form](/en/docs/components/form.md): A native field submission scope and reset context.
@@ -52,6 +56,7 @@
 - [HoverCard](/en/docs/components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
 - [Input](/en/docs/components/input.md): Enter one text value.
 - [InputGroup](/en/docs/components/input-group.md): Give an input and its markers, units or actions one editing boundary.
+- [InputModalityProvider](/en/docs/components/input-modality-provider.md): Record input modality at the application root and skip transitions for keyboard input.
 - [Item](/en/docs/components/item.md): Content, navigation and related actions.
 - [Kbd](/en/docs/components/kbd.md): A native keyboard key display.
 - [Label](/en/docs/components/label.md): Name one control with a native label.
@@ -60,7 +65,6 @@
 - [Locale switch](/en/docs/components/locale-switch.md): Request an application locale change and show the current Provider value.
 - [Menu](/en/docs/components/menu.md): Temporary commands and choices related to the current task.
 - [Meter](/en/docs/components/meter.md): A real measurement over a valid range.
-- [MotionProvider](/en/docs/components/motion-provider.md): Record input modality at the application root and skip transitions for keyboard input.
 - [NativeSelect](/en/docs/components/native-select.md): Keep the platform picker, native options and form values.
 - [NavigationMenu](/en/docs/components/navigation-menu.md): Real links, expandable navigation groups, and in-panel group names with descriptions.
 - [NumberField](/en/docs/components/number-field.md): Edit an optional number and adjust it by a declared step.
@@ -72,8 +76,9 @@
 - [Popover](/en/docs/components/popover.md): A trigger-bound non-modal popup for local actions and supplementary information.
 - [Progress](/en/docs/components/progress.md): Confirmed task completion or an explicit indeterminate state.
 - [Proportion](/en/docs/components/proportion.md): Which parts make up a whole and how much each takes.
-- [Prose](/en/docs/components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It brings its own reading paper by default; drop it where the page already has one.
+- [Prose](/en/docs/components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It only typesets by default, with no frame; give it a reading paper with framed when the article stands alone with no surface of its own.
 - [RadioGroup](/en/docs/components/radio-group.md): Choose one value from a small set of visible options.
+- [Resizable](/en/docs/components/resizable.md): Draggable separators between two or more panels that change how the space is shared.
 - [ScatterChart](/en/docs/components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](/en/docs/components/scroll-area.md): Native scrolling with an optional composition of draggable scrollbars.
 - [SearchInput](/en/docs/components/search-input.md): Enter a search term and clear it in one step.
@@ -95,6 +100,7 @@
 - [TagInput](/en/docs/components/tag-input.md): Confirm a string collection while keeping its unconfirmed draft.
 - [Textarea](/en/docs/components/textarea.md): Edit multiline notes and messages.
 - [ThemeProvider](/en/docs/components/theme-provider.md): Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.
+- [TimeField](/en/docs/components/time-field.md): Fill in a time of day alone, segment by segment: hour, minute, second.
 - [Timeline](/en/docs/components/timeline.md): Preserve input order and actual times.
 - [Toast](/en/docs/components/toast.md): Report recoverable, non-critical facts while the current work continues.
 - [Toc](/en/docs/components/toc.md): A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
@@ -103,6 +109,7 @@
 - [Toolbar](/en/docs/components/toolbar.md): Actual groups, arrow-key focus and operable actions.
 - [Tooltip](/en/docs/components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
 - [Tree](/en/docs/components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
+- [TreeSelect](/en/docs/components/tree-select.md): Choose one node, or check several leaves, on a tree inside a popup.
 - [Typography](/en/docs/components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 - [Virtual list](/en/docs/components/virtual-list.md): Window fixed or measured-height collections while retaining the reading position and active editing.
 - [Workspace](/en/docs/components/workspace.md): An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.

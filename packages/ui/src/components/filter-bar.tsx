@@ -4,14 +4,16 @@ import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { Button, type ButtonProps } from "./button";
 import { useUILocale } from "../locale";
+import { useStuck, stickyBarClassName } from "../sticky-bar";
 import { cn } from "../utils";
 
 type FilterState = { dirty: boolean; disabled: boolean; canClear: boolean; appliedSummary: React.ReactNode; onCancel?: React.MouseEventHandler<HTMLButtonElement> | undefined; onClear?: React.MouseEventHandler<HTMLButtonElement> | undefined };
 const FilterContext = React.createContext<FilterState | null>(null);
 function useFilter() { const context = React.useContext(FilterContext); if (!context) throw new Error("FilterBar parts require FilterBar."); return context; }
-export type FilterBarProps = Omit<useRender.ComponentProps<"form">, "action" | "method"> & { dirty: boolean; appliedSummary: React.ReactNode; disabled?: boolean; canClear?: boolean; onApply: React.FormEventHandler<HTMLFormElement>; onCancel?: React.MouseEventHandler<HTMLButtonElement>; onClear?: React.MouseEventHandler<HTMLButtonElement> };
-export function FilterBar({ dirty, appliedSummary, disabled = false, canClear = false, onApply, onCancel, onClear, onSubmit, render, className, ...props }: FilterBarProps) {
-  const element = useRender({ defaultTagName: "form", render, props: mergeProps({ "data-slot": "filter-bar", "data-state": dirty ? "draft" : "applied", "data-disabled": disabled || undefined, className: cn("flex min-w-0 flex-col gap-(--qy-panel-gap) text-body", className), onSubmit(event: React.FormEvent<HTMLFormElement>) { onSubmit?.(event); if (event.defaultPrevented) return; event.preventDefault(); if (!disabled && dirty) onApply(event); } }, props) });
+export type FilterBarProps = Omit<useRender.ComponentProps<"form">, "action" | "method"> & { /** 吸附在最近的滚动容器顶端（Workspace 中即 `WorkspaceContent`）；不能放进带 overflow 的中间容器，否则吸在那个容器里。只在吸住且下面有内容滚过时才画分界线。 */ sticky?: boolean; dirty: boolean; appliedSummary: React.ReactNode; disabled?: boolean; canClear?: boolean; onApply: React.FormEventHandler<HTMLFormElement>; onCancel?: React.MouseEventHandler<HTMLButtonElement>; onClear?: React.MouseEventHandler<HTMLButtonElement> };
+export function FilterBar({ dirty, appliedSummary, disabled = false, canClear = false, sticky = false, onApply, onCancel, onClear, onSubmit, render, className, children, ...props }: FilterBarProps) {
+  const { target, stuck } = useStuck<HTMLFormElement>(sticky);
+  const element = useRender({ defaultTagName: "form", render, ref: target, props: mergeProps({ "data-slot": "filter-bar", "data-state": dirty ? "draft" : "applied", "data-disabled": disabled || undefined, "data-sticky": sticky ? "" : undefined, "data-stuck": stuck ? "" : undefined, className: cn("flex min-w-0 flex-col gap-(--qy-panel-gap) text-body", sticky && stickyBarClassName, className), children, onSubmit(event: React.FormEvent<HTMLFormElement>) { onSubmit?.(event); if (event.defaultPrevented) return; event.preventDefault(); if (!disabled && dirty) onApply(event); } }, props) });
   return <FilterContext.Provider value={{ dirty, appliedSummary, disabled, canClear, onCancel, onClear }}>{element}</FilterContext.Provider>;
 }
 export type FilterBarFieldsProps = useRender.ComponentProps<"fieldset">;

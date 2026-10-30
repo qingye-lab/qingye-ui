@@ -1,9 +1,9 @@
 # DateTimePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 290763ec85ab114335ed974e59dfcdfbb6d857d1de258127dfe5da72f343a81e
+Source SHA-256: b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -65,7 +65,7 @@ A real datetime-local input composed with calendar and time drafts.
 - value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined.
 - min / max: string. Unzoned text of the same form. Declare once: it sets the native min / max, the calendar's disabled days and reachable months, the time input's min / max on a boundary day, and blocks applying a draft outside the range. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development (2026-10-12).
 - name / form: string. Only the confirmed datetime-local input submits. Calendar and time drafts have no submission names. Field may provide the name.
-- disabled / readOnly: boolean; default false. Block native editing and popup changes, including Field disabled. Read-only values submit; disabled values do not.
+- disabled / readOnly: boolean; default false. Block native editing, clearing and popup changes, including Field disabled. Read-only values submit; disabled values do not; read-only shows a Read only note in the boundary. With a value and while editable, the boundary has a clear action and focus returns to the input after clearing.
 - inputProps: Input props except owned value/type/name/form/state. Native min, max, step, required, ARIA, events, refs, and render. step also reaches the time draft. onChange can cancel native edit requests.
 - calendarProps: CalendarProps except owned selection props. Declare disabled dates and navigation bounds. Prefer the top-level min / max to declare bounds once; inputProps.min/max alone does not imply disabled calendar days.
 - render / ref / className / style / ARIA / events: div composition props. Composition root outlet; customize the actual input through inputProps.

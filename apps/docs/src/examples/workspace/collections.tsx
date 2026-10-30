@@ -40,7 +40,7 @@ export default function Collections() {
     && (source === "全部来源" || item.source === source)) as Collection[], [query, scope, source]);
 
   const columns = React.useMemo<ColumnDef<Collection>[]>(() => [
-    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择全部集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.name}`} /> },
+    { id: "selection", enableSorting: false, meta: { marker: true }, header: ({ table }) => <DataTableSelectAll table={table} scope="filtered" aria-label="选择集合" />, cell: ({ row }) => <DataTableSelectionCell row={row} aria-label={`选择${row.original.name}`} /> },
     { accessorKey: "name", meta: { rowHeader: true }, header: ({ column }) => <DataTableSortButton column={column}>名称</DataTableSortButton>,
       // 名称是去处：链到详情页，与其他行正文同一字重（行标题靠位置识别）。
       cell: ({ row }) => <ItemLink render={<RouterLink to={`${BASE}/collections/${row.original.id}`} />}>{row.original.name}</ItemLink> },

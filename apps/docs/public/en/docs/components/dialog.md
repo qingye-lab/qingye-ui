@@ -1,9 +1,9 @@
 # Dialog
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
-Source SHA-256: 7463bb8528bc0460688b3ba298b4e15a57f21032bbe47eab819d939f32e91295
+Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
 
 Take over the work surface for an edit or decision, then return.
 
@@ -11,6 +11,7 @@ Take over the work surface for an edit or decision, then return.
 Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.
 
 ## Notes
+- Put long content in DialogPanel so the primary action stays visible in the footer; without DialogPanel the whole panel still scrolls.
 - Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.
 - The application owns drafts. Name closing, discarding, saving and undo separately.
 - Use AlertDialog for consequential decisions and state the consequence in its description; buttons carry none.
@@ -131,7 +132,7 @@ Primitive-managed accessible name and description; avoid repeating the title.
 Use Button by default, with render/ref/events. An empty Close reads locale.close.
 
 ### DialogHeader / DialogPanel / DialogFooter
-Group names, working content and actions, with useRender composition and no extra enclosure.
+Group names, working content and actions. With long content the header and footer stay fixed and only DialogPanel scrolls. Supports useRender composition and adds no extra enclosure.
 
 ### DialogCreateHandle / DialogPrimitive
 Typed shared-trigger handle and the Base UI primitive namespace.
@@ -164,6 +165,36 @@ export default function Demo() {
           <Field><FieldLabel>设备名称</FieldLabel><Input defaultValue="青野" maxLength={20} /></Field>
         </DialogPanel>
         <DialogFooter><DialogClose>关闭</DialogClose></DialogFooter>
+      </DialogPopup>
+    </Dialog>
+  );
+}
+```
+
+### 长内容
+Source: apps/docs/src/content/dialog/demos/02-long.tsx
+```tsx
+import { Dialog, DialogClose, DialogDescription, DialogFooter, DialogHeader, DialogPanel, DialogPopup, DialogTitle, DialogTrigger } from "@qingye_lab/ui/components/dialog";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "长内容", titleEn: "Long content" };
+
+const fields = Array.from({ length: 14 }, (_, index) => `设备 ${index + 1}`);
+
+export default function Demo() {
+  return (
+    <Dialog>
+      <DialogTrigger>重命名设备</DialogTrigger>
+      <DialogPopup className="max-h-[min(32rem,100%)] w-96">
+        <DialogHeader>
+          <DialogTitle>重命名设备</DialogTitle>
+          <DialogDescription>名称最多 20 个字。</DialogDescription>
+        </DialogHeader>
+        <DialogPanel>
+          {fields.map(name => <Field key={name}><FieldLabel>{name}</FieldLabel><Input defaultValue={name} maxLength={20} /></Field>)}
+        </DialogPanel>
+        <DialogFooter><DialogClose>完成</DialogClose></DialogFooter>
       </DialogPopup>
     </Dialog>
   );

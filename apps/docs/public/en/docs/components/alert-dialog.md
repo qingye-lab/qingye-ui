@@ -1,9 +1,9 @@
 # AlertDialog
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
-Source SHA-256: d40ee8bdb106690efe42f5b5d555c96d9119d7a1fa34e04a83f632101759e148
+Source SHA-256: 55f86b3e9bc7314a11a247382ac0691a92efc0d7d50b2c47500b16efe013e2ab
 
 Block the work surface for an explicit decision about the current object.
 
@@ -12,7 +12,7 @@ Backdrop presses do not dismiss it; focus starts on the panel. Escape and the re
 
 ## Notes
 - Use Dialog for ordinary edits, or inline confirmation when interruption is unnecessary.
-- Keep the consequence visible in the dialog (Description).
+- Keep the consequence visible in the dialog (Description); put long explanations in AlertDialogPanel so the header and footer stay fixed and only it scrolls.
 - Handle closing and the affirmative action separately.
 - Provide an explicit return choice; Escape alone is insufficient.
 - Shared layers put a newly opened surface above older owned popups. Caller zIndex overrides can break that relationship.
@@ -118,7 +118,7 @@ Use the same structure and content-driven sizing as Dialog, defaulting focus to 
 Name the decision and its consequences with accessible associations. The consequence belongs in Description; buttons carry none.
 
 ### AlertDialogTrigger / AlertDialogClose
-Compose Button by default. Name Close explicitly, such as Return; it does not run the affirmative action.
+Compose Button by default. Close leaves the prompt and does not run the affirmative action. Without children its name is Back (not Cancel: it undoes nothing); children override it, such as Keep.
 
 ### AlertDialogHeader / AlertDialogPanel / AlertDialogFooter
 Reuse Dialog's title, working-content and action groups with distinct data-slot hooks.

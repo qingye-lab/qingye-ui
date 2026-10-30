@@ -1,9 +1,9 @@
 # 单选组 RadioGroup
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
-Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
+Source SHA-256: f64be68df1c293fdbe85e23a2fe1beabaa6fb4dc93d4920d78d5c3234a97e0b2
 
 从同时可见的少量候选中取一个值。
 
@@ -11,6 +11,7 @@ Source SHA-256: 31b295bb11f9bcd2d049ccc39ae54ff0f342e18880d58cdef78d58046ba038ba
 候选需要同时比较时用 RadioGroup；可以收起时用 Select。未选择不会自动变为第一项。
 
 ## Notes
+- RadioGroup 只读时在候选之后给出「只读」说明。
 - FieldTitle 命名组，FieldItem + FieldLabel 命名单项，FieldError 关联错误。
 - Radio 放在 Field 内不经 FieldItem 时自建标签作用域：每项有自己的 id，名称来自项自己；Field 的标签与描述仍落在整组。
 - 未选择、0 与空字符串是不同的值。
@@ -61,7 +62,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Runtime: @base-ui/react, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context InField: without a provider default-value
 - Context InFieldItem: without a provider default-value; provided by OptionScope
 

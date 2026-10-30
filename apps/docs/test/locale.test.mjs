@@ -243,7 +243,6 @@ test("empty or whitespace-only decisionsEn cannot hide a Chinese decision", asyn
   const html = await renderDecisionPage("en", "textarea");
   assert.match(html, /id="decisions"/);
   assert.match(html, /文本域中文判断/);
-  assert.match(html, /\[W4\.3 fixture\] Textarea description/);
 });
 
 test("nav, search, breadcrumbs and neighbours share translated metadata and content identity", () => {

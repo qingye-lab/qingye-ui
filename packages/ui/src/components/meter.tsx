@@ -34,6 +34,6 @@ export function MeterLabel({ className, ...props }: React.ComponentProps<typeof 
   return <MeterPrimitive.Label data-slot="meter-label" {...props} className={state => cn("min-w-0 text-label wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 export function MeterValue({ className, ...props }: React.ComponentProps<typeof MeterPrimitive.Value>) {
-  return <MeterPrimitive.Value data-slot="meter-value" {...props} className={state => cn("min-w-0 text-body tabular-nums wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
+  return <MeterPrimitive.Value data-slot="meter-value" {...props} className={state => cn("min-w-0 text-body numeric wrap-anywhere", typeof className === "function" ? className(state) : className)} />;
 }
 export { MeterPrimitive };

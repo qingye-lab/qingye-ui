@@ -1,24 +1,38 @@
 import * as React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { UILocaleProvider } from "../src/locale";
 import { Avatar, AvatarFallback } from "../src/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from "../src/components/menu";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
+import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTrigger } from "../src/components/drawer";
+import { Workspace, WorkspaceHeader } from "../src/components/workspace";
+import { Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
 const dot = <span aria-hidden="true">●</span>;
 describe("Sidebar", () => {
+  it("names the nav by default, lets the caller override, and keeps the toggle name fixed while aria-expanded changes", async () => {
+    const user = userEvent.setup();
+    const { unmount } = render(<Sidebar><SidebarToggle /><SidebarContent><SidebarLink href="/a">A</SidebarLink></SidebarContent></Sidebar>);
+    expect(screen.getByRole("navigation", { name: "工作区导航" })).toBeInTheDocument();
+    const toggle = screen.getByRole("button", { name: "工作区导航" });
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await user.click(toggle);
+    expect(screen.getByRole("button", { name: "工作区导航" })).toHaveAttribute("aria-expanded", "false");
+    unmount();
+    render(<Sidebar><SidebarContent aria-label="页面"><SidebarLink href="/a">A</SidebarLink></SidebarContent></Sidebar>);
+    expect(screen.getByRole("navigation", { name: "页面" })).toBeInTheDocument();
+  });
   it("collapses into an icon rail, not a hidden panel: content and real links stay in the accessibility tree", async () => {
     const user = userEvent.setup(); render(<Sidebar><SidebarToggle /><SidebarContent id="actual-nav" aria-label="页面"><SidebarLink href="/a" active icon={dot}>A</SidebarLink><SidebarLink href="/b" icon={dot}>B</SidebarLink></SidebarContent></Sidebar>);
-    expect(screen.getByRole("button", { name: "收起" })).toHaveAttribute("aria-controls", "actual-nav");
+    expect(screen.getByRole("button", { name: "工作区导航" })).toHaveAttribute("aria-controls", "actual-nav");
     expect(screen.getByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
-    await user.click(screen.getByRole("button", { name: "收起" }));
+    await user.click(screen.getByRole("button", { name: "工作区导航" }));
     // 收起是 rail：导航与两个链接仍然挂载、仍然是真实链接，只是名称切到视觉隐藏（sr-only），
     // 不再像旧版那样整段 hidden——2026-10 的裁决要求收起态显示一列图标而不是消失。
     expect(screen.getByRole("navigation")).toBeInTheDocument();
     expect(screen.getAllByRole("link")).toHaveLength(2);
     expect(screen.getByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
-    await user.click(screen.getByRole("button", { name: "展开" }));
+    await user.click(screen.getByRole("button", { name: "工作区导航" }));
     expect(screen.getAllByRole("link")).toHaveLength(2);
   });
   it("keeps focus on a rail item after a controlled collapse, since it is still reachable there", async () => {
@@ -38,13 +52,13 @@ describe("Sidebar", () => {
     // 子级的内嵌面板在 rail 下用原生 hidden 清零占位（没有宽度展开它），焦点原本落在
     // 其中的链接因此真的不可达，这时才需要回退——保留了「焦点在收起时的回退逻辑」，
     // 只是把触发条件从「侧栏收起」收紧为「所在容器确实不可达」。
-    await waitFor(() => expect(screen.getByRole("button", { name: "展开" })).toHaveFocus());
+    await waitFor(() => expect(screen.getByRole("button", { name: "工作区导航" })).toHaveFocus());
   });
   it("honors cancellation on a controlled collapse", async () => {
     const user = userEvent.setup(); render(<Sidebar onCollapsedChange={(_, details) => details.cancel()}><SidebarToggle /><SidebarContent><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>);
     await user.click(screen.getByRole("button"));
     expect(screen.getByRole("link")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "收起" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "工作区导航" })).toBeInTheDocument();
   });
   it("exposes the sub-item's active state up to its SidebarSubTrigger via :has(), and reaches sub-links through the rail's Popover", async () => {
     const user = userEvent.setup();
@@ -100,7 +114,7 @@ describe("Sidebar", () => {
     rerender(<Sidebar collapsed><SidebarHeader><SidebarTitle>工作区</SidebarTitle><SidebarToggle /></SidebarHeader></Sidebar>);
     // 名称切到视觉隐藏，节点与文字仍在，辅助技术照常读到。
     expect(screen.getByText("工作区")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "展开" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "工作区导航" })).toBeInTheDocument();
   });
   it("lets a SidebarLink rendered as a button open a Menu: role button, accessible name from the label, in both states", async () => {
     const user = userEvent.setup();
@@ -114,5 +128,105 @@ describe("Sidebar", () => {
     expect(screen.getByRole("button", { name: "陈致远" })).toBe(trigger);
     await user.click(screen.getByRole("button", { name: "陈致远" }));
     expect(await screen.findByRole("menuitem", { name: "退出登录" })).toBeInTheDocument();
+  });
+  it("makes a labelled group a named group and leaves an unlabelled one as plain layout", () => {
+    render(<Sidebar><SidebarContent><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="#a">A</SidebarLink></SidebarGroup><SidebarGroup data-testid="plain"><SidebarLink href="#b">B</SidebarLink></SidebarGroup></SidebarContent></Sidebar>);
+    expect(within(screen.getByRole("group", { name: "导航" })).getByRole("link", { name: "A" })).toBeInTheDocument();
+    expect(screen.getAllByRole("group")).toHaveLength(1);
+    expect(screen.getByTestId("plain")).not.toHaveAttribute("role");
+  });
+  it("keeps the group name when the sidebar collapses, and lets the caller name the group itself", () => {
+    const tree = (collapsed: boolean) => <Sidebar collapsed={collapsed}><SidebarContent><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="#a">A</SidebarLink></SidebarGroup><SidebarGroup aria-label="自定"><SidebarGroupLabel>标签</SidebarGroupLabel><SidebarLink href="#b">B</SidebarLink></SidebarGroup></SidebarContent></Sidebar>;
+    const { rerender } = render(tree(false));
+    expect(screen.getByRole("group", { name: "自定" })).toBeInTheDocument();
+    rerender(tree(true));
+    expect(screen.getByRole("group", { name: "导航" })).toBeInTheDocument();
+  });
+  it("can be carried by a Drawer on narrow screens: opened by a named button, closed after navigating, focus back on the button", async () => {
+    const user = userEvent.setup(); const navigate = vi.fn();
+    function Narrow() {
+      const [open, setOpen] = React.useState(false);
+      return <Drawer swipeDirection="left" open={open} onOpenChange={setOpen}>
+        <DrawerTrigger aria-label="工作区导航">菜单</DrawerTrigger>
+        <DrawerPopup>
+          <DrawerContent>
+            <Sidebar><SidebarHeader><SidebarTitle render={<h2 />}>青野</SidebarTitle><DrawerClose /></SidebarHeader>
+              <SidebarContent><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="#a" onClick={event => { event.preventDefault(); navigate(); setOpen(false); }}>A</SidebarLink></SidebarGroup></SidebarContent></Sidebar>
+          </DrawerContent>
+        </DrawerPopup>
+      </Drawer>;
+    }
+    render(<Narrow />);
+    const trigger = screen.getByRole("button", { name: "工作区导航" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await user.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(await screen.findByRole("navigation", { name: "工作区导航" })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "导航" })).toBeInTheDocument();
+    await user.click(screen.getByRole("link", { name: "A" }));
+    expect(navigate).toHaveBeenCalledOnce();
+    await waitFor(() => expect(screen.queryByRole("navigation")).toBeNull());
+    await waitFor(() => expect(trigger).toHaveFocus());
+  });
+  describe("on narrow screens (drawer)", () => {
+    const narrow = (matches: boolean) => vi.spyOn(window, "matchMedia").mockImplementation(query => ({ matches, media: query, onchange: null, addEventListener: () => {}, removeEventListener: () => {}, addListener: () => {}, removeListener: () => {}, dispatchEvent: () => false }) as MediaQueryList);
+    const shell = (navigate: () => void) => <Workspace>
+      <WorkspaceHeader><SidebarDrawerTrigger /></WorkspaceHeader>
+      <Sidebar drawer><SidebarHeader><SidebarTitle render={<h2 />}>青野</SidebarTitle><SidebarToggle /></SidebarHeader>
+        <SidebarContent aria-label="页面"><SidebarGroup>
+          <SidebarLink href="#a" active onClick={event => { event.preventDefault(); navigate(); }}>A</SidebarLink>
+          <SidebarLink href="#b" onClick={event => { event.preventDefault(); navigate(); }}>B</SidebarLink>
+        </SidebarGroup></SidebarContent></Sidebar>
+    </Workspace>;
+    it("moves the sidebar into a drawer opened by a named button; the current page is marked there and navigating closes it", async () => {
+      const spy = narrow(true); const user = userEvent.setup(); const navigate = vi.fn();
+      render(shell(navigate));
+      expect(screen.queryByRole("navigation")).toBeNull();
+      const trigger = screen.getByRole("button", { name: "打开工作区导航" });
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      await user.click(trigger);
+      expect(trigger).toHaveAttribute("aria-expanded", "true");
+      expect(await screen.findByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
+      // 抽屉里没有收起成 rail 这回事：切换按钮换成关闭。
+      expect(screen.queryByRole("button", { name: "工作区导航" })).toBeNull();
+      await user.click(screen.getByRole("link", { name: "B" }));
+      expect(navigate).toHaveBeenCalledOnce();
+      await waitFor(() => expect(screen.queryByRole("link", { name: "B" })).toBeNull());
+      await waitFor(() => expect(trigger).toHaveFocus());
+      spy.mockRestore();
+    });
+    it("closes with the close button, and does not close for a link that only opens a popup", async () => {
+      const spy = narrow(true); const user = userEvent.setup();
+      render(<Workspace><WorkspaceHeader><SidebarDrawerTrigger /></WorkspaceHeader><Sidebar drawer><SidebarToggle /><SidebarContent><SidebarLink href="#a" aria-haspopup="menu">账户</SidebarLink></SidebarContent></Sidebar></Workspace>);
+      await user.click(screen.getByRole("button", { name: "打开工作区导航" }));
+      await user.click(await screen.findByRole("link", { name: "账户" }));
+      expect(screen.getByRole("link", { name: "账户" })).toBeInTheDocument();
+      await user.click(screen.getByRole("button", { name: "关闭" }));
+      await waitFor(() => expect(screen.queryByRole("navigation")).toBeNull());
+      spy.mockRestore();
+    });
+    it("stays in place on wide screens", () => {
+      const spy = narrow(false);
+      render(shell(() => {}));
+      expect(screen.getByRole("navigation", { name: "页面" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "工作区导航" })).toHaveAttribute("aria-expanded", "true");
+      spy.mockRestore();
+    });
+    it("needs a Workspace or a shared handle", () => {
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+      expect(() => render(<Sidebar drawer><SidebarContent>x</SidebarContent></Sidebar>)).toThrow(/drawer requires/);
+      expect(() => render(<SidebarDrawerTrigger />)).toThrow(/requires a Workspace/);
+      error.mockRestore();
+    });
+  });
+  it("has at most two levels: a SidebarSub inside another SidebarSub throws, in the expanded state and in the rail", () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const tree = (collapsed: boolean) => <Sidebar collapsed={collapsed}><SidebarContent>
+      <SidebarSub defaultOpen><SidebarSubTrigger>一级</SidebarSubTrigger><SidebarSubContent>
+        <SidebarSub defaultOpen><SidebarSubTrigger>二级</SidebarSubTrigger><SidebarSubContent><SidebarLink href="#c">三级</SidebarLink></SidebarSubContent></SidebarSub>
+      </SidebarSubContent></SidebarSub></SidebarContent></Sidebar>;
+    expect(() => render(tree(false))).toThrow(/at most two levels/);
+    expect(() => render(tree(true))).toThrow(/at most two levels/);
+    error.mockRestore();
   });
 });

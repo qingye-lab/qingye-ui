@@ -42,6 +42,12 @@ export default {
       "使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"
     ]
   }, designEn: {"whenToUse":["Short categories, annotations, or emphasis markers."],"avoid":["Use StatusDot for actual states; a badge cannot establish success."],"composition":["className, style, and render belong to the marker; a marker has no size scale and matches the text it annotates."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["The marker scales with the text it sits in; short markers may wrap without losing content."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
+  "notes": [
+    "tone 与 StatusDot 的状态类别是同一组值、同一色相；哪个状态属于哪一类，见 StatusDot。"
+  ],
+  "notesEn": [
+    "tone shares one set of values and one hue per category with StatusDot; see StatusDot for which state belongs to which category."
+  ],
   "api": [
     {
       "name": "Badge",

@@ -1,9 +1,9 @@
 # DatePicker
 
-Package: @qingye_lab/ui@4.2.0
+Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 9a3ed256b922f4189e88f7275eb8b317b84c8ef31ad6afbc84cdd2db279c66e0
+Source SHA-256: 4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5
 
 Edit one local date or choose it from a calendar.
 
@@ -66,7 +66,7 @@ A single-date composition of Input, Button, Popover, and Calendar.
 - value / defaultValue / onValueChange: Date | undefined / Date | undefined / (value, event) => void. Passing the value prop (including value={undefined} for empty) makes it controlled: only an accepted callback changes the value. Without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Valid years are 1–9999.
 - min / max: Date. Declare the earliest and latest date once; it sets the native min / max and the calendar's disabled range and reachable months. It coexists with inputProps.min/max and calendarProps.disabled/startMonth/endMonth, and the intersection applies when both are given. An empty intersection warns in development (2026-10-12).
 - name / form: string. The real date input submits local YYYY-MM-DD. Field can provide its name; form associates an external form.
-- disabled / readOnly: boolean; default false. Block input and auxiliary changes. Field disabled also blocks actions. Read-only values submit; disabled values do not.
+- disabled / readOnly: boolean; default false. Block input and auxiliary changes. Field disabled also blocks actions. Read-only values submit; disabled values do not. Read-only shows a Read only note inside the boundary, the same as Input.
 - inputProps: Input props except owned value/type/name/form/state. ref, render, ARIA, events, min, max, step, and required reach the real date input. onChange can cancel a request.
 - calendarProps: CalendarProps except mode/selected/onSelect/required. Configure disabled dates, navigation bounds, and locale. The composition owns mode and selection. Native step stays in inputProps; prefer the top-level min / max to declare date bounds once.
 - render / ref / className / style / ARIA / events: div composition props. Applied to the composition root. Use inputProps for the actual input outlet.
