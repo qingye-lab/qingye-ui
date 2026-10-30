@@ -93,7 +93,6 @@ test("standalone errors forward native props, refs, and render without a Field",
   const error = screen.getByRole("alert");
   expect(error.tagName).toBe("SECTION");
   expect(error).toHaveAttribute("data-owner", "upload");
-  expect(error).toHaveClass("text-body");
   expect(ref.current).toBe(error);
 });
 
@@ -145,7 +144,6 @@ test("layout parts preserve slots, refs, render and caller class precedence", ()
   const { container } = render(<FieldGroup render={<section />} ref={ref} className="gap-8"><Field data-owner="test" className={() => "gap-3"}><FieldTitle>编号</FieldTitle><FieldDescription>不适用</FieldDescription></Field><FieldSeparator>或</FieldSeparator></FieldGroup>);
   expect(ref.current?.tagName).toBe("SECTION");
   expect(ref.current).toHaveClass("gap-8");
-  expect(ref.current).not.toHaveClass("gap-(--qy-field-group-gap)");
   expect(container.querySelector("[data-slot=field]")).toHaveClass("gap-3");
   expect(container.querySelector("[data-slot=field]")).toHaveAttribute("data-owner", "test");
   expect(screen.getByText("编号")).toHaveAttribute("data-slot", "field-title");

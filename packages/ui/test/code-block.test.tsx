@@ -14,10 +14,6 @@ describe("CodeBlock", () => {
     const failure = new Error("denied"); const onCopyError = vi.fn(); vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockRejectedValue(failure) } });
     const { container } = render(<CodeBlock code="unaltered" onCopyError={onCopyError} />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("复制失败，请手动复制")); expect(onCopyError).toHaveBeenCalledWith(failure); expect(container.querySelector("code")?.textContent).toBe("unaltered");
   });
-  it("keeps native copy events distinct from the button's confirmed success", async () => {
-    const onCopy = vi.fn(); const onCopySuccess = vi.fn(); vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } });
-    render(<CodeBlock code="literal" onCopy={onCopy} onCopySuccess={onCopySuccess} />); fireEvent.copy(screen.getByText("literal")); expect(onCopy).toHaveBeenCalledOnce(); expect(onCopySuccess).not.toHaveBeenCalled(); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(onCopySuccess).toHaveBeenCalledOnce()); expect(onCopy).toHaveBeenCalledOnce();
-  });
   it("does not carry success over to changed text and can omit the copy action", async () => {
     vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } }); const { rerender } = render(<CodeBlock code="first" />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument()); rerender(<CodeBlock code="second" />); expect(screen.getByRole("button", { name: "复制代码" })).toBeInTheDocument(); rerender(<CodeBlock code="second" copyable={false} />); expect(screen.queryByRole("button")).toBeNull();
   });

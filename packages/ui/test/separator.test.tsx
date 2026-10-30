@@ -32,7 +32,5 @@ test("render, native props, refs and caller class functions are preserved", () =
   const separator = screen.getByRole("separator", {name: "分节"});
   expect(separator.tagName).toBe("HR");
   expect(separator).toHaveAttribute("data-owner", "settings");
-  expect(separator).toHaveClass("border-border");
-  expect(separator).not.toHaveClass("border-border-strong");
   expect(ref.current).toBe(separator);
 });

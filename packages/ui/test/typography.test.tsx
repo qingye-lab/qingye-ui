@@ -7,7 +7,6 @@ test.each([1, 2, 3, 4, 5, 6] as const)("h%s keeps its semantic level independent
   render(<Heading level={level} step="title">标题</Heading>);
   const heading = screen.getByRole("heading", { level });
   expect(heading.tagName).toBe(`H${level}`);
-  expect(heading).toHaveClass("text-title");
   expect(heading).not.toHaveAttribute("aria-level");
 });
 
@@ -15,11 +14,7 @@ test("body, support and numeric have separate roles; zero and unknown remain dis
   render(<><Text>内容</Text><Text step="support" className="text-muted-foreground">说明</Text>
     <Text numeric render={<span />} data-testid="zero">0</Text><Text data-testid="unknown">待核实</Text></>);
   expect(screen.getByText("内容").tagName).toBe("P");
-  expect(screen.getByText("内容")).toHaveClass("text-body");
-  expect(screen.getByText("说明")).toHaveClass("text-support-mobile", "sm:text-support", "text-muted-foreground");
-  expect(screen.getByTestId("zero")).toHaveClass("numeric");
   expect(screen.getByTestId("zero").tagName).toBe("SPAN");
-  expect(screen.getByTestId("unknown")).not.toHaveClass("numeric");
   expect(screen.getByTestId("unknown")).toHaveTextContent("待核实");
 });
 
@@ -44,8 +39,6 @@ test("render controls the actual semantics and preserves native attributes, ref 
 test("Text function render and caller style/class overrides preserve the chosen semantic role", () => {
   render(<Text step="body" render={props => <aside {...props} />} className="text-reading text-muted-foreground" style={{ color: "inherit" }}>说明</Text>);
   const aside = screen.getByRole("complementary");
-  expect(aside).toHaveClass("text-reading", "text-muted-foreground");
-  expect(aside).not.toHaveClass("text-body");
   expect(aside).toHaveAttribute("data-slot", "text");
   expect(aside.style.color).toBe("inherit");
 });

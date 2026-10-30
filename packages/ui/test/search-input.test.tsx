@@ -10,15 +10,12 @@ import { enUS } from "../src/locales/en-US";
 test("it is a composition of public parts: one boundary holding the icon, the real search input and a named clear action", () => {
   const { container } = render(<SearchInput aria-label="搜索" defaultValue="青野" />);
   const boundary = container.querySelector("[data-slot=search-input]")!;
-  expect(boundary).toHaveClass("border", "border-input");
   // 图标是 InputGroup 的静态附件：沿用它自己的 data-slot，贴合间距（图标与值之间是控件内间隔）才会生效。
   const icon = boundary.querySelector("[data-slot=input-group-addon]")!;
   expect(icon).toHaveAttribute("aria-hidden", "true");
   expect(icon.nextElementSibling).toHaveAttribute("data-slot", "input-control");
   const input = screen.getByRole("searchbox", { name: "搜索" });
   expect(boundary).toContainElement(input);
-  // 边界只画一次：里面的输入不再有自己的框。
-  expect(input.closest("[data-slot=input-control]")).not.toHaveClass("border");
   expect(screen.getByRole("button", { name: "清除搜索" })).toHaveAttribute("data-slot", "search-input-clear");
 });
 

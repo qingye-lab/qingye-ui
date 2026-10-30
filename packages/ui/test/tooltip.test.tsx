@@ -122,7 +122,7 @@ test("Popup preserves native attributes, render, ref, style and state-based clas
   const user = userEvent.setup();
   const popupRef = createRef<HTMLDivElement>();
   const triggerRef = createRef<HTMLButtonElement>();
-  render(<Tooltip><TooltipTrigger render={<Button variant="quiet" />} ref={triggerRef} data-object="address">复制地址</TooltipTrigger><TooltipPopup id="address-hint" ref={popupRef} render={<section />} data-object="address" style={{ maxWidth: "100%" }} className={({ open }) => open ? "rounded-none shadow-none" : ""}>HTTPS 地址</TooltipPopup></Tooltip>);
+  render(<Tooltip><TooltipTrigger render={<Button variant="quiet" />} ref={triggerRef} data-object="address">复制地址</TooltipTrigger><TooltipPopup id="address-hint" ref={popupRef} render={<section />} data-object="address" style={{ maxWidth: "100%" }} className={({ open }) => open ? "caller-open" : ""}>HTTPS 地址</TooltipPopup></Tooltip>);
   await user.tab();
   const popup = await screen.findByRole("tooltip");
   expect(popupRef.current).toBe(popup);
@@ -131,8 +131,7 @@ test("Popup preserves native attributes, render, ref, style and state-based clas
   expect(popup).toHaveAttribute("id", "address-hint");
   expect(popup).toHaveAttribute("data-object", "address");
   expect(popup.style.maxWidth).toBe("100%");
-  expect(popup).toHaveClass("rounded-none", "shadow-none");
-  expect(popup).not.toHaveClass("rounded-overlay", "shadow-raised");
+  expect(popup).toHaveClass("caller-open");
 });
 
 test("a portal container preserves local language, direction and density", async () => {

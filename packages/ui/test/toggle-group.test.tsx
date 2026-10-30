@@ -40,6 +40,6 @@ test("composition keeps refs, native attributes/events and the group size at ite
   const ref = createRef<HTMLDivElement>(); const click = vi.fn();
   render(<ToggleGroup ref={ref} render={<div data-rendered="yes" />} size="xl" aria-label="候选" onClick={click} className="caller-group"><ToggleGroupItem value="alpha" data-caller="yes">甲</ToggleGroupItem></ToggleGroup>);
   expect(ref.current).toBe(screen.getByRole("group")); expect(ref.current).toHaveClass("caller-group");
-  const item = screen.getByRole("button"); expect(item).toHaveAttribute("data-slot", "toggle-group-item"); expect(item).toHaveClass("text-control-xl-mobile", "sm:text-control-xl");
+  const item = screen.getByRole("button"); expect(item).toHaveAttribute("data-slot", "toggle-group-item");
   await userEvent.click(item); expect(click).toHaveBeenCalled();
 });

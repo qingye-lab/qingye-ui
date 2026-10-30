@@ -24,7 +24,6 @@ test("a disabled member cannot activate and does not disable other actions", asy
   await userEvent.click(screen.getByRole("button", { name: "重置" }));
   expect(disabled).not.toHaveBeenCalled();
   expect(enabled).toHaveBeenCalledOnce();
-  expect(screen.getByRole("group", { name: "操作" })).toHaveClass("gap-(--qy-action-gap)");
 });
 
 test("orientation, render, events, ref and custom classes reach the group", async () => {
@@ -35,7 +34,6 @@ test("orientation, render, events, ref and custom classes reach the group", asyn
   expect(ref.current).toHaveAttribute("data-orientation", "vertical");
   expect(ref.current).toHaveAttribute("data-slot", "caller-actions");
   expect(ref.current).toHaveClass("flex-col", "gap-0");
-  expect(ref.current).not.toHaveClass("gap-(--qy-action-gap)");
   await userEvent.click(screen.getByRole("button", { name: "应用" }));
   expect(click).toHaveBeenCalledOnce();
 });

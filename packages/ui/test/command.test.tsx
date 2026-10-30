@@ -157,6 +157,7 @@ test("CommandDialog is a named dialog, focuses the input, and closes after a sel
   await userEvent.click(screen.getByRole("button", { name: "打开" }));
   const dialog = await screen.findByRole("dialog", { name: "命令面板" });
   expect(within(dialog).getByRole("combobox")).toHaveFocus();
+  await waitFor(() => expect(within(dialog).getByRole("combobox")).toHaveAttribute("aria-activedescendant"));
   await userEvent.keyboard("{Enter}");
   expect(onSelect).toHaveBeenCalledWith("概览");
   await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());

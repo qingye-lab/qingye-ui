@@ -17,19 +17,25 @@ test("no initial selection displays the localized placeholder, never the first v
   expect(document.querySelector("[data-slot=select-value]")).toHaveAttribute("data-placeholder");
 });
 
-test("an explicit trigger name takes precedence over the enclosing FieldLabel", () => {
-  render(<Field><FieldLabel>选项</FieldLabel><Select items={items} defaultValue="alpha"><SelectTrigger aria-label="修改选项" /></Select></Field>);
-  expect(screen.getByRole("combobox", { name: "修改选项" })).toHaveTextContent("Alpha");
-});
-
-test("an explicit labelledby keeps priority even when an aria-label and FieldLabel exist", () => {
-  render(<><span id="select-name">外部名称</span><Field><FieldLabel>选项</FieldLabel><Select items={items}><SelectTrigger aria-label="修改选项" aria-labelledby="select-name" /></Select></Field></>);
-  expect(screen.getByRole("combobox", { name: "外部名称" })).toHaveAttribute("aria-labelledby", "select-name");
-});
-
-test("FieldLabel names the trigger when the caller supplies no accessible name", () => {
-  render(<Field><FieldLabel>选项</FieldLabel><Select items={items}><SelectTrigger /></Select></Field>);
-  expect(screen.getByRole("combobox", { name: "选项" })).toBeInTheDocument();
+test.each([
+  {
+    title: "an explicit trigger name takes precedence over the enclosing FieldLabel",
+    ui: <Field><FieldLabel>选项</FieldLabel><Select items={items} defaultValue="alpha"><SelectTrigger aria-label="修改选项" /></Select></Field>,
+    name: "修改选项",
+  },
+  {
+    title: "an explicit labelledby keeps priority even when an aria-label and FieldLabel exist",
+    ui: <><span id="select-name">外部名称</span><Field><FieldLabel>选项</FieldLabel><Select items={items}><SelectTrigger aria-label="修改选项" aria-labelledby="select-name" /></Select></Field></>,
+    name: "外部名称",
+  },
+  {
+    title: "FieldLabel names the trigger when the caller supplies no accessible name",
+    ui: <Field><FieldLabel>选项</FieldLabel><Select items={items}><SelectTrigger /></Select></Field>,
+    name: "选项",
+  },
+])("accessible name priority: $title", ({ ui, name }) => {
+  render(ui);
+  expect(screen.getByRole("combobox", { name })).toBeInTheDocument();
 });
 
 test("localization and the caller's explicit placeholder use the same Value part", () => {
@@ -125,9 +131,9 @@ test("selected and highlighted are separate simultaneous facts", async () => {
   render(<Select items={items} defaultValue="alpha"><SelectTrigger aria-label="选项" /><SelectPopup><Options /></SelectPopup></Select>);
   await userEvent.tab();
   await userEvent.keyboard("{Enter}{End}");
+  await waitFor(() => expect(screen.getByRole("option", { name: "Delta" })).toHaveAttribute("data-highlighted"));
   expect(screen.getByRole("option", { name: "Alpha" })).toHaveAttribute("aria-selected", "true");
   expect(screen.getByRole("option", { name: "Alpha" })).toHaveAttribute("data-selected");
-  expect(screen.getByRole("option", { name: "Delta" })).toHaveAttribute("data-highlighted");
   expect(screen.getByRole("option", { name: "Delta" })).toHaveAttribute("aria-selected", "false");
 });
 

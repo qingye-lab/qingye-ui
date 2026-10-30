@@ -8,8 +8,10 @@ on:
 permissions:
   contents: read
 
+# 四个作业并行，互不阻断：一次运行暴露全部失败。
+# 每个作业自己构建所需产物，不经 artifact 传递，作业之间没有先后。
 jobs:
-  verify:
+  unit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -27,12 +29,19 @@ jobs:
           node scripts/lib/facts-ledger.test.mjs
           node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs
           pnpm --filter @qingye_lab/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Build library
         run: pnpm --filter @qingye_lab/ui build
-      - name: API tables match the types
-        run: pnpm --filter @qingye_lab/ui check:api
-      - name: Build Studio
-        run: pnpm studio:build
       - name: Build docs
         run: pnpm --filter docs build
       - name: Install audit browser
@@ -41,12 +50,45 @@ jobs:
         run: |
           mkdir -p test-results/ci-audit
           node scripts/run-browser-audit.mjs --report test-results/ci-audit/report.json
-      - name: Current compositions, foundations and Studio
-        run: |
-          node scripts/run-browser-audit.mjs --patterns
-          node scripts/run-browser-audit.mjs --foundations
-          node scripts/run-browser-audit.mjs --consumer-migration
-          node scripts/verify-studio.mjs
+      - name: Upload browser audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-audit-evidence
+          path: test-results/ci-audit/
+          if-no-files-found: warn
+
+  compositions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build library
+        run: pnpm --filter @qingye_lab/ui build
+      - name: Build Studio
+        run: pnpm studio:build
+      - name: Build docs
+        run: pnpm --filter docs build
+      - name: Install audit browser
+        id: browser
+        run: pnpm exec playwright-core install --with-deps chromium
+      # 四项检查各自独立：前一项失败不跳过后一项。
+      - name: Task patterns
+        run: node scripts/run-browser-audit.mjs --patterns
+      - name: Foundations
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: node scripts/run-browser-audit.mjs --foundations
+      - name: Consumer migration
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: node scripts/run-browser-audit.mjs --consumer-migration
+      - name: Studio
+        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        run: node scripts/verify-studio.mjs
       - name: Upload composition and theme evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -59,23 +101,35 @@ jobs:
             test-results/studio/**/report.json
             test-results/studio/**/*.png
           if-no-files-found: warn
-      - name: Upload browser audit evidence
-        if: always()
-        uses: actions/upload-artifact@v4
+
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v6
         with:
-          name: browser-audit-evidence
-          path: test-results/ci-audit/
-          if-no-files-found: warn
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build library
+        run: pnpm --filter @qingye_lab/ui build
+      - name: API tables match the types
+        run: pnpm --filter @qingye_lab/ui check:api
       - name: Check package contents and types
         run: pnpm --filter @qingye_lab/ui check:pack
       - name: Pack
+        id: pack
         run: |
           pnpm --filter @qingye_lab/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           pnpm --filter @qingye/tooling pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           ls dist-pack/*.tgz
+      - name: Install audit browser
+        run: pnpm exec playwright-core install --with-deps chromium
       - name: Verify installed package consumers
         run: node scripts/verify-packed-consumers.mjs --tgz "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")"
       - name: Verify installed tooling
+        if: ${{ !cancelled() && steps.pack.outcome == 'success' }}
         run: node scripts/verify-packed-tooling.mjs "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")" "dist-pack/qingye-tooling-$(node -p "require('./packages/tooling/package.json').version").tgz"
       - name: Upload installed consumer evidence
         if: always()

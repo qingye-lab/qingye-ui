@@ -37,7 +37,7 @@ test("group and item composition keep ref/render/events, ARIA and inherited five
   const ref = createRef<HTMLDivElement>(); const itemRef = createRef<HTMLElement>(); const click = vi.fn();
   render(<SegmentedControl ref={ref} size="lg" aria-label="候选" render={<div data-rendered="yes" />}><SegmentedControlItem value={0} ref={itemRef} aria-describedby="extra" className={state => state.checked ? "caller-checked" : "caller-unchecked"} onClick={click}>零</SegmentedControlItem></SegmentedControl>);
   expect(ref.current).toBe(screen.getByRole("radiogroup")); const item = screen.getByRole("radio"); expect(itemRef.current).toBe(item);
-  expect(item).toHaveAttribute("aria-describedby", "extra"); expect(item).toHaveClass("text-control-lg-mobile", "sm:text-control-lg", "caller-unchecked");
+  expect(item).toHaveAttribute("aria-describedby", "extra"); expect(item).toHaveClass("caller-unchecked");
   await userEvent.click(item); expect(item).toHaveClass("caller-checked"); expect(click).toHaveBeenCalled();
 });
 

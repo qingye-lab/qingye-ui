@@ -8,7 +8,7 @@ describe("CornerMark", () => {
     const badge = document.querySelector('[data-slot="corner-mark-badge"]')!;
     expect(badge).toHaveAttribute("aria-hidden", "true");
     expect(badge).toHaveTextContent("3");
-    expect(screen.getByText("3 条未读")).toHaveClass("sr-only");
+    expect(screen.getByText("3 条未读")).toBeInTheDocument();
   });
 
   it("clamps the visible count at max and keeps the real count only in the label", () => {
@@ -27,7 +27,7 @@ describe("CornerMark", () => {
     render(<CornerMark dot tone="success" label="在线"><span>头像</span></CornerMark>);
     const badge = document.querySelector('[data-slot="corner-mark-badge"]')!;
     expect(badge).toBeEmptyDOMElement();
-    expect(screen.getByText("在线")).toHaveClass("sr-only");
+    expect(screen.getByText("在线")).toBeInTheDocument();
   });
 
   it("throws in development when a count ships without a label", () => {

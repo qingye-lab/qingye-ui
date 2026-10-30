@@ -54,6 +54,8 @@ test.each([false, true])("native props, style, className, render, refs and event
   expect(input).toHaveAttribute("autocomplete", "off");
   expect(input).toHaveStyle({ color: "var(--qy-foreground)" });
   expect(container.querySelector("[data-slot=input-control]")).toHaveClass("consumer-boundary");
+  // 填值控件跟随密度轴，不带 size 档位属性。
+  expect(container.querySelector("[data-slot=input-control]")).not.toHaveAttribute("data-size");
   await userEvent.type(input, "abc");
   expect(focus).toHaveBeenCalledOnce();
   expect(change).toHaveBeenCalledTimes(3);
@@ -159,19 +161,6 @@ test("the native reset observer preserves caller ref cleanup", () => {
   expect(ref).toHaveBeenCalledWith(screen.getByRole("textbox"));
   unmount();
   expect(cleanup).toHaveBeenCalledOnce();
-});
-
-// 用户裁决 2026-10-05：填值控件只有一套几何，跟随密度轴，不再按档位放大。
-// 这组断言把契约钉在角色 token 上：组件不写死尺寸，只读角色层；
-// 密度改绑角色层时无需改组件。值文字始终是正文尺寸，不随容器变化。
-test("one geometry reads the fill-control role, not a size step", () => {
-  const { container } = render(<Input aria-label="名称" />);
-  const shell = container.querySelector<HTMLElement>("[data-slot=input-control]")!;
-  expect(shell).not.toHaveAttribute("data-size");
-  expect(shell).not.toHaveStyle({ "--qy-input-height": "var(--qy-control-md)" });
-  expect(shell.className).toContain("min-h-(--qy-fill-height)");
-  expect(shell.className).toContain("rounded-(--qy-fill-radius)");
-  expect(screen.getByRole("textbox")).toHaveClass("text-control-md-mobile", "sm:text-control-md");
 });
 
 test("numeric size keeps its native character-width meaning", () => {

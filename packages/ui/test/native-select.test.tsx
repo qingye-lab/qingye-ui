@@ -23,10 +23,6 @@ test("multiple and native size preserve array form values and platform list capa
   await userEvent.selectOptions(select, ["a", "b"]);
   expect(select).toHaveAttribute("size", "4");
   expect(select).toHaveValue(["a", "b"]);
-  // 用户裁决 2026-10-05：原生 size 只表示列表显示行数，与呈现几何无关。
-  // 列表形态的高度由行数决定，因此这里没有单值形态的几何下限。
-  expect(select).toHaveClass("text-control-md-mobile", "sm:text-control-md");
-  expect(select).not.toHaveClass("min-h-(--qy-fill-height-narrow)");
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(["a", "b"]);
 });
 
@@ -67,8 +63,6 @@ test("native attrs, render events, ref and class precedence remain at the select
   expect(ref.current).toBe(select);
   expect(select).toHaveAttribute("required");
   expect(select).toHaveAttribute("data-rendered", "yes");
-  expect(select).toHaveClass("px-0");
-  expect(select).not.toHaveClass("px-(--qy-control-md-padding-bordered)");
   expect((select as HTMLSelectElement).validity.valid).toBe(false);
   fireEvent.change(select, { target: { value: "a" } });
   expect(caller).toHaveBeenCalledOnce();

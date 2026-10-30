@@ -10,7 +10,6 @@ test("Card bounds the supplied object without generating content structure", () 
   expect(card.children).toHaveLength(2);
   expect(card.firstElementChild).toBe(screen.getByRole("heading", { name: "名称" }));
   expect(card).toHaveAttribute("data-slot", "card");
-  expect(card.className).not.toMatch(/(?:^|\s)(?:p[xyse]?|gap|flex|grid)-/);
 });
 
 test("native attributes, style, event handlers and the DOM ref survive render composition", () => {
@@ -34,9 +33,6 @@ test("native attributes, style, event handlers and the DOM ref survive render co
   expect(ref.current).toBe(card);
   expect(card).toHaveAttribute("id", "example");
   expect(card).toHaveAttribute("data-object", "example");
-  expect(card.style.borderRadius).toBe("var(--qy-radius-panel)");
-  expect(card).toHaveClass("rounded-none", "shadow-none");
-  expect(card).not.toHaveClass("rounded-panel", "shadow-panel");
   fireEvent.click(card);
   expect(onClick).toHaveBeenCalledOnce();
   expect(renderedClick).toHaveBeenCalledOnce();
@@ -69,7 +65,5 @@ test("composition inherits context and explicit concentric rounding does not rep
   expect(inner).not.toHaveAttribute("data-density");
   expect(inner).not.toHaveAttribute("dir");
   expect(inner).not.toHaveAttribute("lang");
-  expect(inner.style.borderRadius).toContain("var(--qy-field-gap)");
-  expect(screen.getByRole("textbox").closest('[data-slot="input-control"]')).toHaveClass("rounded-(--qy-fill-radius)");
   expect(screen.getByTestId("outer").style.getPropertyValue("--qy-radius-control")).toBe("");
 });

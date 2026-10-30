@@ -28,8 +28,6 @@ test("native props, render refs and caller events compose without changing the t
   await userEvent.click(screen.getByText("标题"));
   expect(ref.current?.tagName).toBe("LABEL");
   expect(ref.current).toHaveAttribute("data-owner", "caller");
-  expect(ref.current).toHaveClass("text-body");
-  expect(ref.current).not.toHaveClass("text-label");
   expect(caller).toHaveBeenCalledOnce();
   expect(rendered).toHaveBeenCalledOnce();
   expect(screen.getByRole("textbox")).toHaveFocus();

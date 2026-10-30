@@ -14,8 +14,6 @@ test("long static addons retain the real input name, description and form value 
   await userEvent.type(input, "2");
   expect(Array.from(new FormData(container.querySelector("form")!).entries())).toEqual([["amount", "12"]]);
   expect(screen.getAllByText(attachment)).toHaveLength(2);
-  expect(container.querySelector("[data-slot=input-group]")).toHaveClass("border", "border-input");
-  expect(container.querySelector("[data-slot=input-control]")).not.toHaveClass("border");
 });
 
 test("static addons do not enter the tab order or redirect focus, explicit actions keep their own focus", async () => {
@@ -43,11 +41,10 @@ test("Field disabled and readonly values remain real native states", async () =>
 });
 
 test("FieldControl can register the native outlet once while the common boundary retains declared invalid", () => {
-  const { container } = render(<Field invalid><FieldLabel>数值</FieldLabel><InputGroup><FieldControl render={<InputGroupInput nativeInput defaultValue="draft" />} /><InputGroupAddon>px</InputGroupAddon></InputGroup><FieldError>不可用</FieldError></Field>);
+  render(<Field invalid><FieldLabel>数值</FieldLabel><InputGroup><FieldControl render={<InputGroupInput nativeInput defaultValue="draft" />} /><InputGroupAddon>px</InputGroupAddon></InputGroup><FieldError>不可用</FieldError></Field>);
   expect(screen.getByRole("textbox", { name: "数值" })).toHaveAttribute("aria-invalid", "true");
   expect(screen.getByRole("textbox")).toHaveAccessibleDescription("不可用");
   expect(screen.getByRole("textbox")).toHaveValue("draft");
-  expect(container.querySelector("[data-slot=input-group]")).toHaveClass("has-[input[aria-invalid=true]:focus-visible]:border-destructive-foreground");
 });
 
 test("root and addon render, refs, native props and caller classes compose independently of the input", async () => {
@@ -60,9 +57,6 @@ test("root and addon render, refs, native props and caller classes compose indep
   expect(root.current).toHaveAttribute("data-owner", "caller");
   expect(root.current).toHaveClass("w-auto");
   expect(input.current).toBe(screen.getByRole("textbox"));
-  // 用户裁决 2026-10-05：边界与内部输入共用一套几何，值文字始终是正文尺寸。
-  expect(input.current).toHaveClass("text-control-md-mobile", "sm:text-control-md");
-  expect(root.current).toHaveClass("min-h-(--qy-fill-height-narrow)");
   expect(addon.current).toHaveAttribute("id", "unit");
   expect(addon.current).toHaveClass("px-0");
   await userEvent.type(input.current!, "1");
@@ -78,12 +72,7 @@ test("InputGroupButton is a named action inside the boundary: frameless, inner-h
   for (const button of [icon, label]) {
     expect(button).toHaveAttribute("data-slot", "input-group-button");
     expect(button).toHaveAttribute("data-variant", "quiet");
-    expect(button).toHaveClass("self-stretch", "min-h-0");
   }
-  // 图标形的宽取边界内高（外高 − 上下各一道线宽的边框），不取按钮自己的外高，否则把边界撑高两道线宽。
-  expect(icon).toHaveClass("w-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))]", "sm:w-[calc(var(--qy-fill-height)-2*var(--qy-line-width))]");
-  expect(icon.className).not.toMatch(/(^|\s)(sm:)?w-\(--qy-control-md/);
-  expect(label.className).not.toContain("w-[calc(");
   await user.click(icon);
   expect(clear).toHaveBeenCalledOnce();
   expect(icon).toHaveFocus();

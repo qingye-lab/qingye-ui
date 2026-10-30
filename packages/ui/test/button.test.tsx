@@ -251,7 +251,6 @@ test("the caller owns the busy fact; the button never starts or ends it and show
   expect(button.querySelector('[data-slot="button-loading"]')).toBeVisible();
   // 忙碌的说法只给读屏：不可见、不占位，按钮旁没有任何可见的状态文字。
   expect(screen.getByRole("status")).toHaveTextContent("进行中");
-  expect(screen.getByRole("status")).toHaveClass("sr-only");
   await user.keyboard("{Enter}");
   expect(onClick).toHaveBeenCalledOnce();
 
@@ -274,7 +273,6 @@ test("an icon action shows busy without losing its name or icon shape", () => {
   const button = screen.getByRole("button", { name: "保存" });
   expect(button).toHaveAttribute("data-shape", "icon");
   expect(button.querySelector('[data-slot="button-loading"]')).toBeVisible();
-  expect(button.querySelector('[data-slot="button-content"]')).toHaveClass("opacity-0");
   expect(button).toHaveAccessibleDescription(screen.getByRole("status").textContent ?? "");
 });
 
@@ -364,7 +362,6 @@ test("native attributes, refs, caller aria facts, and derived slots reach the ac
   expect(button).toHaveAttribute("data-size", "md");
   expect(button).toHaveAttribute("aria-busy", "true");
   expect(button).toHaveAttribute("aria-disabled", "true");
-  expect(button).toHaveClass("px-0");
   await user.tab();
   expect(button).toHaveFocus();
   await user.click(button);

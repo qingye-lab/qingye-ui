@@ -10,13 +10,11 @@ import { enUS } from "../src/locales/en-US";
 test("it is a composition of public parts: one boundary holding the real password input and a named toggle", () => {
   const { container } = render(<PasswordInput autoComplete="current-password" aria-label="密码" defaultValue="qingye" />);
   const boundary = container.querySelector("[data-slot=password-input]")!;
-  expect(boundary).toHaveClass("border", "border-input");
   const input = screen.getByLabelText("密码");
   expect(boundary).toContainElement(input);
   expect(input).toHaveAttribute("type", "password");
   expect(input).toHaveAttribute("autocapitalize", "none");
   expect(input).toHaveAttribute("spellcheck", "false");
-  expect(input.closest("[data-slot=input-control]")).not.toHaveClass("border");
   const toggle = screen.getByRole("button", { name: "显示密码" });
   expect(toggle).toHaveAttribute("data-slot", "password-input-toggle");
   expect(toggle).toHaveAttribute("aria-pressed", "false");

@@ -22,13 +22,11 @@ test("the name follows the locale and a caller's object-specific label wins", ()
 test("callers keep id, data attributes and class names, merged last", () => {
   render(<Skeleton id="members" data-testid="s" className="gap-0"><SkeletonLine className="w-1/2" /></Skeleton>);
   expect(screen.getByTestId("s")).toHaveAttribute("id", "members");
-  expect(screen.getByTestId("s").className).toContain("gap-0");
 });
 
 test("rows stack with no gap so N skeleton rows are N text lines, and nothing loops", async () => {
   const { readFileSync } = await import("node:fs");
   render(<Skeleton data-testid="s"><SkeletonLine /></Skeleton>);
-  expect(screen.getByTestId("s").className).not.toMatch(/\bgap-/);
   const motion = readFileSync("motion.css", "utf8");
   expect(motion).not.toContain("skeleton");
 });

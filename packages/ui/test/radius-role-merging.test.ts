@@ -13,6 +13,8 @@ test.each(["control", "panel", "overlay", "marker", "item"])("rounded-%s respect
 test("named system spacing and the disabled opacity merge with their numeric siblings", () => {
   expect(cn("gap-fen-half", "gap-2")).toBe("gap-2");
   expect(cn("gap-2", "gap-fen-half")).toBe("gap-fen-half");
+  // gap-(--var) 形式的关系 token 也与数字档同组：调用方的 gap-0 盖得过组件的默认间距。
+  expect(cn("gap-(--qy-action-gap)", "gap-0")).toBe("gap-0");
   expect(cn("w-line", "w-4")).toBe("w-4");
   expect(cn("-mb-line", "mb-0")).toBe("mb-0");
   expect(cn("min-w-fen-half", "min-w-0")).toBe("min-w-0");

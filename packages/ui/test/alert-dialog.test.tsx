@@ -123,12 +123,12 @@ test("safe default focus preserves forwarded callback-ref cleanup and the caller
   const cleanup = vi.fn();
   const ref = vi.fn(() => cleanup);
   const user = userEvent.setup();
-  render(<AlertDialog><AlertDialogTrigger>删除入口</AlertDialogTrigger><AlertDialogPopup ref={ref} render={<section />} className={() => "rounded-none"} data-object="example"><Decision /></AlertDialogPopup></AlertDialog>);
+  render(<AlertDialog><AlertDialogTrigger>删除入口</AlertDialogTrigger><AlertDialogPopup ref={ref} render={<section />} className={() => "caller-popup"} data-object="example"><Decision /></AlertDialogPopup></AlertDialog>);
   await user.click(screen.getByRole("button", { name: "删除入口" }));
   const popup = await screen.findByRole("alertdialog");
   await waitFor(() => expect(popup).toHaveFocus());
   expect(popup.tagName).toBe("SECTION");
-  expect(popup).toHaveClass("rounded-none");
+  expect(popup).toHaveClass("caller-popup");
   expect(popup).toHaveAttribute("data-object", "example");
   expect(ref).toHaveBeenCalledWith(popup);
   expect(popup.querySelector('[data-slot="alert-dialog-header"]')).not.toBeNull();

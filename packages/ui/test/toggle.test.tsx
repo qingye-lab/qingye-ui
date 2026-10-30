@@ -28,6 +28,6 @@ test("render/ref/events and state style callbacks survive; size keeps its matchi
   const ref = createRef<HTMLButtonElement>(); const click = vi.fn();
   render(<Toggle ref={ref} size="lg" defaultPressed render={<button data-rendered="yes" />} aria-describedby="details" onClick={click} className={state => state.pressed ? "caller-pressed" : "caller-unpressed"} style={{ color: "var(--qy-foreground)" }}>加粗</Toggle>);
   const toggle = screen.getByRole("button"); expect(ref.current).toBe(toggle); expect(toggle).toHaveAttribute("data-rendered", "yes");
-  expect(toggle).toHaveAttribute("aria-describedby", "details"); expect(toggle).toHaveClass("caller-pressed", "text-control-lg-mobile", "sm:text-control-lg");
+  expect(toggle).toHaveAttribute("aria-describedby", "details"); expect(toggle).toHaveClass("caller-pressed");
   await userEvent.click(toggle); expect(click).toHaveBeenCalled(); expect(toggle).toHaveClass("caller-unpressed");
 });

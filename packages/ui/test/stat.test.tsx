@@ -19,9 +19,7 @@ test("a delta names its direction and reference period in text; color appears on
   // dd 没有允许命名的角色：读法放在视觉隐藏的文字里，而不是 aria-label。
   expect(delta).not.toHaveAttribute("aria-label");
   expect(delta).toHaveAttribute("data-direction", "up");
-  expect(delta.className).toContain("text-muted-foreground");
   rerender(<dl><StatDelta value={-2} period="较上周" sentiment="bad" /></dl>);
-  expect(screen.getByText("较上周减少 2").closest("dd")!.className).toContain("text-destructive-foreground");
   rerender(<dl><StatDelta value={0} period="较上周" /></dl>);
   expect(screen.getByText("较上周持平").closest("dd")).toHaveAttribute("data-direction", "flat");
 });

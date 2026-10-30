@@ -151,7 +151,7 @@ test("all styleable native parts preserve refs, state class functions, styles an
   const triggerRef = createRef<HTMLButtonElement>();
   const click = vi.fn();
   const user = userEvent.setup();
-  render(<Popover><PopoverTrigger className={({ open }) => open ? "text-primary" : "text-foreground"} onClick={click} ref={triggerRef}>备注</PopoverTrigger><PopoverPopup aria-label="备注面板" className={({ open }) => open ? "rounded-none shadow-none" : ""} data-object="note-1" id="note-popup" positionerProps={{ className: () => "z-40", "data-testid": "positioner", ref: positionerRef, style: { isolation: "isolate" } }} ref={popupRef} render={<section />} style={{ maxWidth: "100%" }} viewportProps={{ className: () => "p-0", "data-testid": "viewport", ref: viewportRef }}><PopoverClose>关闭</PopoverClose></PopoverPopup></Popover>);
+  render(<Popover><PopoverTrigger className={({ open }) => open ? "text-primary" : "text-foreground"} onClick={click} ref={triggerRef}>备注</PopoverTrigger><PopoverPopup aria-label="备注面板" className={({ open }) => open ? "caller-open" : ""} data-object="note-1" id="note-popup" positionerProps={{ className: () => "z-40", "data-testid": "positioner", ref: positionerRef, style: { isolation: "isolate" } }} ref={popupRef} render={<section />} style={{ maxWidth: "100%" }} viewportProps={{ className: () => "caller-viewport", "data-testid": "viewport", ref: viewportRef }}><PopoverClose>关闭</PopoverClose></PopoverPopup></Popover>);
   const trigger = screen.getByRole("button", { name: "备注" });
   await user.click(trigger);
   const popup = await screen.findByRole("dialog", { name: "备注面板" });
@@ -163,14 +163,12 @@ test("all styleable native parts preserve refs, state class functions, styles an
   expect(popup).toHaveAttribute("id", "note-popup");
   expect(popup).toHaveAttribute("data-object", "note-1");
   expect(popup.style.maxWidth).toBe("100%");
-  expect(popup).toHaveClass("rounded-none", "shadow-none");
-  expect(popup).not.toHaveClass("rounded-overlay", "shadow-raised");
+  expect(popup).toHaveClass("caller-open");
   expect(positionerRef.current).toBe(screen.getByTestId("positioner"));
   expect(positionerRef.current).toHaveClass("z-40");
   expect(positionerRef.current?.style.isolation).toBe("isolate");
   expect(viewportRef.current).toBe(screen.getByTestId("viewport"));
-  expect(viewportRef.current).toHaveClass("p-0");
-  expect(viewportRef.current).not.toHaveClass("p-(--qy-panel-padding-sm)");
+  expect(viewportRef.current).toHaveClass("caller-viewport");
 });
 
 test("an explicit portal container preserves a local density, direction and language context", async () => {

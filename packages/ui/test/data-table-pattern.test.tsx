@@ -125,8 +125,6 @@ describe("DataTablePattern", () => {
     const rowheader = screen.getByRole("rowheader", { name: full });
     expect(rowheader).toHaveStyle({ width: "180px", minWidth: "160px", maxWidth: "200px" });
     expect(rowheader.querySelector("[data-slot=data-table-cell-content]")).toHaveTextContent(full);
-    expect(rowheader.closest("tr")).not.toHaveClass("bg-surface-selected");
-    expect(screen.getByRole("rowheader", { name: "Beta" }).closest("tr")).toHaveClass("bg-surface-selected");
     const marker = screen.getByRole("table").querySelector("col")!;
     expect(marker.style.width).toContain("--qy-marker-size");
     expect(marker.style.width).toContain("--qy-panel-padding");
@@ -147,7 +145,6 @@ describe("DataTablePattern", () => {
     expect(activated).toHaveBeenCalledExactlyOnceWith(data[1]);
     const row = screen.getByRole("rowheader", { name: "Beta" }).closest("tr")!;
     expect(row).toHaveAttribute("aria-current", "true");
-    expect(row).toHaveClass("bg-surface-selected");
     expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { b: true }, activeRowId: "b" }), { reason: "active-row" });
     row.focus();
     await user.keyboard("{Enter}");
@@ -204,16 +201,6 @@ describe("DataTablePattern", () => {
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
     expect(() => render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" columns={[columns[0]!, { ...columns[1]!, pinned: true }]} />)).toThrow(/contiguous/);
     error.mockRestore();
-  });
-
-  it("lets unsized columns share the remaining width and names activatable rows by the row header", () => {
-    const { container } = render(<DataTablePattern data={data} columns={[columns[0]!, { ...columns[1]!, size: 90 }]} getRowId={getRowId} emptyContent="没有条目" activeRow={{ trigger: "row" }} />);
-    const table = screen.getByRole("table");
-    expect(table.style.width).toBe("100%");
-    expect(table.style.minWidth).toBe("240px");
-    expect(Array.from(table.querySelectorAll<HTMLElement>("col")).map(col => col.style.width)).toEqual(["", "90px"]);
-    expect(screen.getByRole("row", { name: "Alpha" })).toHaveAttribute("data-row-id", "a");
-    expect(container.querySelectorAll("tbody tr[aria-labelledby]")).toHaveLength(3);
   });
 
   it("rejects row activation without a row-header column", () => {

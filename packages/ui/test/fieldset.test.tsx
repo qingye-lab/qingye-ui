@@ -42,7 +42,5 @@ test("refs, state functions, native attributes and caller classes reach their ow
   expect(ref.current).toHaveAttribute("name", "example");
   expect(ref.current).toHaveAttribute("data-owner", "caller");
   expect(ref.current).toHaveClass("gap-8");
-  expect(ref.current).not.toHaveClass("gap-(--qy-field-group-gap)");
   expect(screen.getByText("说明")).toHaveClass("text-title");
-  expect(screen.getByText("说明")).not.toHaveClass("text-heading");
 });

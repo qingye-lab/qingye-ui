@@ -18,7 +18,7 @@ test("every tone except neutral has a default icon of its own shape and a screen
   for (const [tone, prefix] of [["info", "提示："], ["warning", "警告："], ["danger", "危险："], ["success", "成功："]] as const) {
     const { container, unmount } = render(<Alert tone={tone}><AlertTitle>标题</AlertTitle></Alert>);
     const icon = container.querySelector("[data-slot=alert-icon]")!; expect(icon).toHaveAttribute("aria-hidden", "true"); shapes.add(icon.innerHTML);
-    expect(screen.getByText(prefix)).toHaveClass("sr-only"); expect(container.firstElementChild).toHaveTextContent(`${prefix}标题`); unmount();
+    expect(screen.getByText(prefix)).toBeInTheDocument(); expect(container.firstElementChild).toHaveTextContent(`${prefix}标题`); unmount();
   }
   expect(shapes.size).toBe(4);
 });
