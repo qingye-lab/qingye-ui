@@ -251,7 +251,7 @@ try {
       // the real pager before comparing the complete three-row sort/zero facts.
       assert.equal(await region.locator('tbody tr').count(), 2);
       await region.locator('[data-slot="pagination-pattern"] [data-slot="select-trigger"]').click();
-      await page.getByRole('option', { name: '5', exact: true }).click();
+      await page.getByRole('option', { name: '5 条/页', exact: true }).click();
       assert.equal(await region.locator('tbody tr').count(), 3);
       const tableFacts = await region.locator('tbody tr').evaluateAll(rows => rows.map(row => ({ id: row.getAttribute('data-row-id'), value: Number(row.lastElementChild.textContent) })));
       assert.ok(tableFacts.every(row => row.id && Number.isFinite(row.value)), 'Sort uses named finite input facts');
