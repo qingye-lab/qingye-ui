@@ -206,8 +206,56 @@ export default function BookingApp() {
             </Form>
           )}
         </section>
+
+        <Schedule booked={booked} draft={draft} />
       </main>
     </div>
+  );
+}
+
+/*
+ * 当天占用：每间一行，横轴 09:00–18:00。已有预约是淡墨的段，你选的时段叠在所选房间那一行（未选房间时每一行都画出，方便比较）；
+ * 与已有预约相交时这一段取危险色，房间单选里那一项本来就不可选——两处说的是同一件事实（相成相制：先看见，再选择）。
+ * 读屏读每行的文字（房间、容量、占用时段与你的时段），图形本身 aria-hidden。
+ */
+function Schedule({ draft, booked }: { draft: Draft; booked: boolean }) {
+  const span = CLOSE - TIMES[0]!;
+  const at = (minutes: number) => `${((minutes - TIMES[0]!) / span) * 100}%`;
+  const hours = Array.from({ length: (CLOSE - TIMES[0]!) / 60 + 1 }, (_, index) => TIMES[0]! + index * 60);
+  const end = draft.start !== undefined ? draft.start + draft.duration : undefined;
+  return (
+    <section aria-labelledby="booking-schedule" className="booking-schedule">
+      <div className="booking-schedule-head">
+        <h2 className="text-heading" id="booking-schedule">当天占用</h2>
+        <span className="text-support text-muted-foreground">{draft.date ? dateText.format(draft.date) : "每天相同"}</span>
+      </div>
+      <div aria-hidden="true" className="booking-hours">
+        {hours.map((minutes) => <span key={minutes} style={{ insetInlineStart: at(minutes) }}>{clock(minutes).slice(0, 2)}</span>)}
+      </div>
+      <ul className="booking-rooms-track">
+        {ROOMS.map((room) => {
+          const mine = draft.start !== undefined && end !== undefined && (!draft.room || draft.room === room.id);
+          const clash = mine && conflict(room, draft.start, draft.duration);
+          const chosen = draft.room === room.id;
+          const facts = [`${room.name}，${room.capacity} 人`, room.busy ? `${clock(room.busy[0])}–${clock(room.busy[1])} 已被预约` : "全天空闲", mine ? `${booked ? "已预约" : "你选的时段"} ${clock(draft.start!)}–${clock(end!)}${clash ? "，与已有预约冲突" : ""}` : null].filter(Boolean).join("；");
+          return (
+            <li className="booking-room-row" data-chosen={chosen || undefined} key={room.id}>
+              <span className="booking-room-name">{room.name}<span className="numeric">{room.capacity} 人</span></span>
+              <span className="sr-only">{facts}</span>
+              <span aria-hidden="true" className="booking-track">
+                {room.busy ? <span className="booking-busy" style={{ insetInlineStart: at(room.busy[0]), inlineSize: `calc(${at(room.busy[1])} - ${at(room.busy[0])})` }} /> : null}
+                {mine ? <span className="booking-mine" data-clash={clash || undefined} data-faint={!draft.room || undefined} style={{ insetInlineStart: at(draft.start!), inlineSize: `calc(${at(end!)} - ${at(draft.start!)})` }} /> : null}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      <div aria-hidden="true" className="booking-legend">
+        <span><i className="booking-busy" />已有预约</span>
+        <span><i className="booking-mine" />你的时段</span>
+        <span><i className="booking-mine" data-clash />冲突</span>
+      </div>
+    </section>
   );
 }
 

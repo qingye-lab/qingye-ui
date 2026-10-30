@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-30T11:45:28.206Z",
-  "revision": "51fdbfcb1312c1ee55e72dca22646b3679d1e2cb",
+  "generatedAt": "2026-10-30T12:02:41.966Z",
+  "revision": "dac21d562194245bdf2951503ae1fc3f3d97d810",
   "static": {
     "fingerprint": {
-      "sha256": "20f4276360ebeaa67767024bcec1d977d9dc3f9997ada4069e870254170482b7",
+      "sha256": "68c56f66b19bf5fed07390be22e54a2380cb24f7b822f163d7341a470c54157d",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2073,15 +2073,15 @@
         },
         {
           "path": "apps/docs/src/examples/booking.tsx",
-          "sha256": "155936c12cd257d5e72d4c052bc4dddeb61db9a104db63153960e50244246736"
+          "sha256": "53b6dbb8c27becbe9a3dbdc2ce40029eb62990d604df77650ae94d6b87f57ed4"
         },
         {
           "path": "apps/docs/src/examples/examples.css",
-          "sha256": "3111ba40ae3f2a70f0cad61ad66429d717e591bee89da0354818765a3eae66f2"
+          "sha256": "3a6c2ee173983aeb09c29cb2ba32419bea916e9bd4abda1aa30ea778fd3b25df"
         },
         {
           "path": "apps/docs/src/examples/gallery.tsx",
-          "sha256": "7a06cefd61011c2995b9838a74279b0903321e8ec606a2b74d7a56dc8525f213"
+          "sha256": "dc84d5c31a522a7eb487589df6989ddee967ca509a4dae9f43184754c9d73597"
         },
         {
           "path": "apps/docs/src/examples/list.ts",
