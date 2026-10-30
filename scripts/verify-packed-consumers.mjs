@@ -193,7 +193,7 @@ async function verifyNewCapabilities(page, item) {
   const checkboxBackground = await second.evaluate(element => getComputedStyle(element).backgroundColor);
   await page.locator('#table-selection-look').click();
   assert.notEqual(await second.evaluate(element => getComputedStyle(element).backgroundColor), checkboxBackground, 'row selection appearance restores actual fill');
-  await table.getByRole('checkbox', { name: '选择完整当前集合', exact: true }).click();
+  await table.getByRole('checkbox', { name: '选择完整当前集合（仅本页）', exact: true }).click();
   assert.equal(await page.locator('#table-selected').textContent(), '200', 'select-all includes the complete model, not only mounted rows');
   const sort = table.getByRole('button', { name: /记录计数/ });
   await sort.click();
