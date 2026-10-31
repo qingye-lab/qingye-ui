@@ -25,8 +25,9 @@ interface Brand {
   dark?: { primary: string; foreground: string; ring: string };
 }
 
-// Brand presets: the same four the site uses everywhere (墨 · 青 · 赭 · 胭), with the same values as index.css
-// (--qy-try-*). The bench needs literal values because it writes copyable CSS for other projects; keep the two in step.
+// Brand presets for trying the brand axis: the same four as the home page's example window (墨 · 青 · 赭 · 胭), with
+// the same values as index.css (--qy-try-*). The site itself sets no brand colour, so 墨 is the library default.
+// The bench needs literal values because it writes copyable CSS for other projects; keep the two in step.
 // Each pair has white (light) or deep (dark) foreground text checked at >= 4.5:1; verify again on the surfaces a project uses.
 const BRANDS: Brand[] = [
   { id: "ink", label: "墨", labelEn: "Ink" }, {
@@ -116,7 +117,7 @@ function ThemeBench() {
   const [checked,setChecked] = useState(true);
   const { resolvedTheme } = useTheme();
   const defaults = useThemeRadii();
-  const [brandId, setBrandId] = useState("qing");
+  const [brandId, setBrandId] = useState("ink");
   const [chosen, setChosen] = useState<Partial<Radii>>({});
   const [compact, setCompact] = useState(false);
   const densityId = useId();
@@ -128,8 +129,7 @@ function ThemeBench() {
   const style = useMemo(
     () =>
       ({
-        // 墨是库的默认（实心即焦墨）：本站自己有品牌（青），所以预览里要明写回默认，否则会透出站点的青。
-        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : { "--qy-primary": "var(--qy-foreground)", "--qy-primary-foreground": "var(--qy-paper)" }), ...(radii ? previewVars(radii, compact) : {}), }) as CSSProperties, [palette, radii?.control, radii?.panel, compact], );
+        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}), ...(radii ? previewVars(radii, compact) : {}), }) as CSSProperties, [palette, radii?.control, radii?.panel, compact], );
 
   return (
     <Stack className="mb-(--qy-space-module)" gap="panel">

@@ -20,11 +20,11 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
 }
 
 /*
- * 品牌预设（2026-10-30）。本站的品牌是青（取自「青野」）；赭、胭只在首页的示例窗口里试用。
- * 品牌强调色如一方印，少而明确（design.md「墨分五色」）：只覆写 --qy-primary 与其前景，悬停与按下由库推出。
- *   取值   每个预设成对给浅色与深色；浅色白字其上 ≥ 4.5:1，深色深前景其上 ≥ 4.5:1（青：6.2 / 9.1）。色相与明度是预设。
- *   入口   这里是唯一来源：本站品牌、示例窗口的试用（html[data-try-brand]）与窗口顶栏的色点都读这些变量，
- *          明暗切换时由 CSS 自己换到深色那一组，不靠脚本写值。
+ * 品牌轴的试用预设（2026-10-31 改）。本站不设品牌色：实心按钮、选中标记都是库的默认焦墨。
+ * 「青野」是个人品牌，不参与设计理念，也就不决定站点的颜色（用户裁决 2026-10-31，撤回 10-30 加上的青）。
+ * 青、赭、胭只用来演示库的品牌轴：首页示例窗口与主题试验台里可以试，写在框内文档的根上（html[data-try-brand]，见 lib/axes.ts）。
+ *   取值   每个预设成对给浅色与深色；浅色白字其上 ≥ 4.5:1，深色深前景其上 ≥ 4.5:1。色相与明度是预设。
+ *   入口   这里是唯一来源：试用与窗口顶栏的色点都读这些变量，明暗切换时由 CSS 自己换到深色那一组。
  */
 :root {
   --qy-try-qing: oklch(0.48 0.085 200);
@@ -42,9 +42,8 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
   --qy-try-rose: oklch(0.74 0.14 12);
   --qy-try-rose-on: oklch(0.22 0.05 12);
 }
-html[data-brand="qingye"] { --qy-primary: var(--qy-try-qing); --qy-primary-foreground: var(--qy-try-qing-on); }
-/* 示例里试用别的品牌：写在框内文档的根上（lib/axes.ts）。「墨」是库的默认：实心即焦墨。 */
-html[data-try-brand="ink"] { --qy-primary: var(--qy-foreground); --qy-primary-foreground: var(--qy-paper); }
+/* 「墨」是库的默认（实心即焦墨），不需要属性；其余三种写在框内文档的根上。 */
+html[data-try-brand="qing"] { --qy-primary: var(--qy-try-qing); --qy-primary-foreground: var(--qy-try-qing-on); }
 html[data-try-brand="ochre"] { --qy-primary: var(--qy-try-ochre); --qy-primary-foreground: var(--qy-try-ochre-on); }
 html[data-try-brand="rose"] { --qy-primary: var(--qy-try-rose); --qy-primary-foreground: var(--qy-try-rose-on); }
 

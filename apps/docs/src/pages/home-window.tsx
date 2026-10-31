@@ -18,7 +18,7 @@ export function HomeWindow() {
   const t = (zh: string, english: string) => (en ? english : zh);
   const [example, setExample] = useState<string>(() => typeof window !== "undefined" && window.matchMedia?.("(width < 48rem)").matches ? "booking" : EXAMPLES[0]!.id);
   const [density, setDensity] = useState<Density>("default");
-  const [brand, setBrand] = useState("qing");
+  const [brand, setBrand] = useState("ink");
   const frame = useRef<HTMLIFrameElement>(null);
   const axes: Axes = { density, brand };
 
