@@ -14,7 +14,7 @@ export const EXAMPLES: ExampleEntry[] = [
     title: { zh: "青野工作区", en: "Qingye workspace" },
     kind: { zh: "专业工具", en: "Professional tool" },
     text: { zh: "一个数据同步工具的多页工作区：概览指标、集合表格、集合详情、设置与帮助。侧栏可收起，⌘K 搜索集合。", en: "A multi-page workspace for a data sync tool: overview metrics, a collection table, collection details, settings and help. The sidebar collapses; ⌘K searches collections." },
-    uses: ["workspace", "sidebar", "data-table", "chart", "command", "stat"],
+    uses: ["workspace", "sidebar", "stat", "sparkline", "chart", "proportion", "data-table", "table", "tabs", "command", "confirm-action", "toast"],
     source: "apps/docs/src/examples/workspace",
   },
   {
@@ -22,15 +22,15 @@ export const EXAMPLES: ExampleEntry[] = [
     title: { zh: "采集记录", en: "Field records" },
     kind: { zh: "列表与详情", en: "List and detail" },
     text: { zh: "表格与详情并置：搜索、排序、跨页选择、切换紧凑密度；备注只保留在本页。", en: "A table beside its detail: search, sorting, selection across pages and a compact density; notes stay on this page only." },
-    uses: ["data-table", "description-list", "search-input", "toggle", "textarea"],
+    uses: ["data-table", "description-list", "search-input", "toggle", "textarea", "pagination", "alert"],
     source: "apps/docs/src/content/workspace/demos/03-records.tsx",
   },
   {
     id: "booking",
     title: { zh: "会议室预约", en: "Room booking" },
     kind: { zh: "日常应用", en: "Everyday app" },
-    text: { zh: "分步填写：人数受房间容量制约，冲突的房间说明原因；错误原位出现，返回保留草稿，确认后可以撤销。", en: "A step-by-step form: headcount is bounded by room capacity, conflicting rooms say why, errors appear in place, going back keeps the draft, and a booking can be undone." },
-    uses: ["steps", "date-picker", "radio-group", "number-field", "field", "alert"],
+    text: { zh: "分步填写：当天占用是一张热力图，人数受房间容量制约，冲突的房间说明原因；错误原位出现，返回保留草稿，确认后可以撤销。", en: "A step-by-step form with a heatmap of the day's bookings: headcount is bounded by room capacity, conflicting rooms say why, errors appear in place, going back keeps the draft, and a booking can be undone." },
+    uses: ["steps", "date-picker", "select", "segmented-control", "radio-group", "number-field", "heatmap", "field", "description-list", "alert"],
     source: "apps/docs/src/examples/booking.tsx",
   },
 ];

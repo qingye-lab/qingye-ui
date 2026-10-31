@@ -125,7 +125,14 @@ function ExampleView({ example, children }: { example: ExampleEntry; children: R
           <BreadcrumbItem><BreadcrumbCurrent>{title}</BreadcrumbCurrent></BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <a className={`${linkClassName} text-support`} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "View source" : "查看源码"}</a>
+      {/* 示例是为了演示组件库：这一页用到的主要组件，各自去往组件页。 */}
+      <div className="example-uses">
+        <span className="text-muted-foreground">{en ? "Built with" : "用到"}</span>
+        <ul aria-label={en ? "Components used" : "用到的组件"}>
+          {example.uses.map((slug) => <li key={slug}><Link className={linkClassName} to={`/components/${slug}`}>{findComponentLabel(slug, locale)}</Link></li>)}
+        </ul>
+        <a className={linkClassName} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "Source" : "源码"}</a>
+      </div>
     </div>
     <div className="example-frame" data-slot="example-frame">{children}</div>
   </div>;

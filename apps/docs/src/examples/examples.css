@@ -74,6 +74,8 @@
   gap: var(--qy-field-gap) var(--qy-field-group-gap);
   padding-block: var(--qy-field-gap);
 }
+.example-uses { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); }
+.example-uses ul { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-gap); margin: 0; padding: 0; list-style: none; }
 .example-frame { min-block-size: 0; overflow: hidden; border-top: 1px solid var(--qy-border); background: var(--qy-background); }
 
 /* ─── 会议室预约 ─────────────────────────────────────── */
@@ -100,31 +102,8 @@
 .booking-capacity { margin-inline-start: var(--qy-field-gap); color: var(--qy-foreground-muted); font-weight: var(--qy-weight-regular); }
 .booking-narrow { max-inline-size: calc(10 * var(--qy-cai)); }
 .booking-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--qy-field-gap); padding-top: var(--qy-field-gap); }
-/* 当天占用：与表单同一张纸的气质，但它只陈述事实，不是一张卡——不加边框，靠位置与清染的轨道成组。 */
+/* 当天占用：库的 Heatmap，不铺纸（framed={false}），只陈述事实，不是一张卡。 */
 .booking-schedule { display: grid; gap: var(--qy-field-group-gap); align-content: start; padding-block-start: var(--qy-panel-padding); }
-.booking-schedule-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--qy-field-gap); }
-.booking-schedule h2 { margin: 0; }
-/* 名称列 6 材，轨道占其余；小时刻度与轨道同一条起止线。 */
-.booking-hours, .booking-room-row { --name: calc(5 * var(--qy-cai)); }
-.booking-hours { position: relative; block-size: var(--qy-text-caption-leading); margin-inline-start: var(--name); font-size: var(--qy-text-caption-size); line-height: var(--qy-text-caption-leading); color: var(--qy-foreground-muted); font-variant-numeric: tabular-nums; }
-.booking-hours span { position: absolute; translate: -50% 0; }
-.booking-hours span:first-child { translate: 0 0; }
-.booking-hours span:last-child { translate: -100% 0; }
-.booking-rooms-track { display: grid; gap: var(--qy-field-gap); margin: 0; padding: 0; list-style: none; }
-.booking-room-row { display: grid; grid-template-columns: var(--name) minmax(0, 1fr); align-items: center; }
-.booking-room-name { display: flex; align-items: baseline; gap: var(--qy-fen); font-size: var(--qy-text-body-size); line-height: var(--qy-text-body-leading); }
-.booking-room-name .numeric { font-size: var(--qy-text-caption-size); color: var(--qy-foreground-muted); }
-.booking-room-row[data-chosen] .booking-room-name { font-weight: var(--qy-weight-medium); }
-/* 轨道：清染一条（读数的凹槽同族），高一材的一半；段落在其上。 */
-.booking-track { position: relative; block-size: calc(var(--qy-cai) * 1.2); border-radius: var(--qy-radius-xs); background: var(--qy-surface-inset); overflow: hidden; }
-.booking-busy, .booking-mine { position: absolute; inset-block: 0; }
-.booking-busy { background: var(--qy-groove-surface); }
-.booking-mine { background: var(--qy-primary); }
-.booking-mine[data-faint] { background: color-mix(in srgb, var(--qy-primary) 40%, transparent); }
-.booking-mine[data-clash] { background: var(--qy-danger-fill); }
-.booking-legend { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-caption-size); line-height: var(--qy-text-caption-leading); color: var(--qy-foreground-muted); }
-.booking-legend span { display: inline-flex; align-items: center; gap: var(--qy-fen); }
-.booking-legend i { position: static; display: inline-block; inline-size: calc(2 * var(--qy-fen)); block-size: calc(2 * var(--qy-fen)); border-radius: var(--qy-radius-xs); }
 @media (width < 80rem) {
   .booking-main { grid-template-columns: calc(9 * var(--qy-cai)) minmax(0, calc(28 * var(--qy-cai))); }
   .booking-schedule { grid-column: 2; }
@@ -132,8 +111,6 @@
 @media (width < 48rem) {
   .booking-main { grid-template-columns: minmax(0, 1fr); }
   .booking-schedule { grid-column: auto; }
-  /* 窄屏的轨道放不下十个小时刻度：只标单数小时（09、11、13、15、17）。 */
-  .booking-hours span:nth-child(even) { display: none; }
   .booking-steps { position: static; }
   .booking-row, .booking-rooms { grid-template-columns: minmax(0, 1fr); }
 }

@@ -6,6 +6,7 @@ import { Item, ItemActions, ItemContent, ItemLink } from "@qingye_lab/ui/compone
 import { Meter, MeterIndicator, MeterTrack } from "@qingye_lab/ui/components/meter";
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { Proportion } from "@qingye_lab/ui/components/proportion";
+import { Sparkline } from "@qingye_lab/ui/components/sparkline";
 import { Section, SectionActions, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
 import { linkClassName } from "@qingye_lab/ui/components/link";
 import { Stat, StatDelta, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
@@ -24,7 +25,7 @@ const runDot: Record<SyncRun["state"], StatusDotStatus> = { "完成": "online", 
 /*
  * 概览（2026-10-30 重做）。按 design.md 的视觉基调：内容开放而操作有界，用间距成组而不靠万物卡片，以墨阶分层而彩色稀少。
  * - 一页只有一个君：每日成功同步的图，整幅宽，不另铺纸（framed={false}）。
- * - 指标是一条开放的读数带：四个读数并排，靠间距分开，不各自装进卡片，也不各配一条趋势线（四条小线是四处无事实的彩色）。
+ * - 指标是一条开放的读数带：四个读数并排，靠间距分开，不各自装进卡片；读数下是库的 Sparkline（趋势），存储是 Meter（计量）。
  * - 下方两栏是有名字的区块（Section），表与列表直接坐在内容面上；集合来源用一条比例条代替环图，四色收成一道细条。
  * - 彩色只剩：图的数据色、状态点、比例条的类别色；品牌青只在动作上。
  */
@@ -55,16 +56,19 @@ export default function Overview() {
         <StatLabel>记录总数</StatLabel>
         <StatValue>{number.format(totalRecords)}</StatValue>
         <StatDelta value={Number(recordDelta.toFixed(1))} period="较上周" format={percent} />
+        <dd className="ws-trend"><Sparkline label="近 8 周记录总数" values={weeklyTotals} /></dd>
       </Stat>
       <Stat state="known" size="lg">
         <StatLabel>同步成功率</StatLabel>
         <StatValue>{currentRate.toFixed(1)}<StatUnit>%</StatUnit></StatValue>
         <StatDelta value={Number((currentRate - previousRate).toFixed(1))} period={`较前 ${range} 天`} sentiment={currentRate > previousRate ? "good" : currentRate < previousRate ? "bad" : undefined} format={n => `${n.toFixed(1)} 点`} />
+        <dd className="ws-trend"><Sparkline label={`近 ${range} 天每日成功次数`} values={ok} /></dd>
       </Stat>
       <Stat state="known" size="lg">
         <StatLabel>失败的同步</StatLabel>
         <StatValue>{sum(failed)}<StatUnit>次</StatUnit></StatValue>
         <StatDelta value={Number(failedDelta.toFixed(0))} period={`较前 ${range} 天`} sentiment={failedDelta > 0 ? "bad" : failedDelta < 0 ? "good" : undefined} format={n => `${n}%`} />
+        <dd className="ws-trend"><Sparkline label={`近 ${range} 天每日失败次数`} values={failed} /></dd>
       </Stat>
       <Stat state="known" size="lg">
         <StatLabel>存储用量</StatLabel>

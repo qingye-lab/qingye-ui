@@ -14,6 +14,7 @@ import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qi
 import { Step, StepDescription, Steps, StepTitle, type StepState } from "@qingye_lab/ui/components/steps";
 import { Textarea } from "@qingye_lab/ui/components/textarea";
 import { Heading } from "@qingye_lab/ui/components/typography";
+import { Heatmap, type HeatmapLevel } from "@qingye_lab/ui/components/heatmap";
 import "./examples.css";
 
 /*
@@ -214,47 +215,40 @@ export default function BookingApp() {
 }
 
 /*
- * 当天占用：每间一行，横轴 09:00–18:00。已有预约是淡墨的段，你选的时段叠在所选房间那一行（未选房间时每一行都画出，方便比较）；
- * 与已有预约相交时这一段取危险色，房间单选里那一项本来就不可选——两处说的是同一件事实（相成相制：先看见，再选择）。
- * 读屏读每行的文字（房间、容量、占用时段与你的时段），图形本身 aria-hidden。
+ * 当天占用：库的 Heatmap（示例是为了演示组件库）。行是房间，列是 09–17 每个整点开始的一小时；
+ * 每格的值是这一小时里的事实，由应用声明分档（Heatmap 的 levels）：空闲、已有预约、你的时段、冲突。
+ * 你选的时段在未选房间时画在每一行（便于比较），选定后只画在所选那行；与已有预约相交即「冲突」，
+ * 房间单选里那一项本来就不可选并写明原因——两处陈述同一件事实（相成相制：先看见，再选择）。
+ * 格子的可访问名称、方向键移动与等价数据表都由 Heatmap 给出，示例不另写。
  */
+const HOURS = Array.from({ length: (CLOSE - TIMES[0]!) / 60 }, (_, index) => TIMES[0]! + index * 60);
+const STATES = ["空闲", "已有预约", "你的时段", "冲突"] as const;
+// 只有「空闲」用墨：两档墨的浓淡差太小（12% 与约 21%），读不出来；其余三档是类别色，浓度随档次递增，灰度下仍依次加深。
+// 已有预约是一条需要知道的事实（信息），你的时段是可用的选择（成功），冲突是危险。
+const LEVELS: readonly HeatmapLevel[] = [
+  { label: STATES[0] },
+  { label: STATES[1], from: 1, tone: "info" },
+  { label: STATES[2], from: 2, tone: "success" },
+  { label: STATES[3], from: 3, tone: "danger" },
+];
+const overlaps = (from: number, to: number, start: number, end: number) => from < end && to > start;
+
 function Schedule({ draft, booked }: { draft: Draft; booked: boolean }) {
-  const span = CLOSE - TIMES[0]!;
-  const at = (minutes: number) => `${((minutes - TIMES[0]!) / span) * 100}%`;
-  const hours = Array.from({ length: (CLOSE - TIMES[0]!) / 60 + 1 }, (_, index) => TIMES[0]! + index * 60);
   const end = draft.start !== undefined ? draft.start + draft.duration : undefined;
+  const rows = ROOMS.map((room) => ({
+    id: room.id,
+    label: `${room.name} ${room.capacity} 人`,
+    values: Object.fromEntries(HOURS.map((hour) => {
+      const busy = !!room.busy && overlaps(room.busy[0], room.busy[1], hour, hour + 60);
+      const mine = draft.start !== undefined && end !== undefined && (!draft.room || draft.room === room.id) && overlaps(draft.start, end, hour, hour + 60);
+      return [clock(hour), mine && busy ? 3 : mine ? 2 : busy ? 1 : 0];
+    })),
+  }));
+  // 热力图自带标题，标题与「查看数据」同一行；日期写进标题，未选日期时说明每天相同。
+  const title = booked ? "当天占用（已预约）" : draft.date ? `${dateText.format(draft.date)}占用` : "当天占用（每天相同）";
   return (
-    <section aria-labelledby="booking-schedule" className="booking-schedule">
-      <div className="booking-schedule-head">
-        <h2 className="text-heading" id="booking-schedule">当天占用</h2>
-        <span className="text-support text-muted-foreground">{draft.date ? dateText.format(draft.date) : "每天相同"}</span>
-      </div>
-      <div aria-hidden="true" className="booking-hours">
-        {hours.map((minutes) => <span key={minutes} style={{ insetInlineStart: at(minutes) }}>{clock(minutes).slice(0, 2)}</span>)}
-      </div>
-      <ul className="booking-rooms-track">
-        {ROOMS.map((room) => {
-          const mine = draft.start !== undefined && end !== undefined && (!draft.room || draft.room === room.id);
-          const clash = mine && conflict(room, draft.start, draft.duration);
-          const chosen = draft.room === room.id;
-          const facts = [`${room.name}，${room.capacity} 人`, room.busy ? `${clock(room.busy[0])}–${clock(room.busy[1])} 已被预约` : "全天空闲", mine ? `${booked ? "已预约" : "你选的时段"} ${clock(draft.start!)}–${clock(end!)}${clash ? "，与已有预约冲突" : ""}` : null].filter(Boolean).join("；");
-          return (
-            <li className="booking-room-row" data-chosen={chosen || undefined} key={room.id}>
-              <span className="booking-room-name">{room.name}<span className="numeric">{room.capacity} 人</span></span>
-              <span className="sr-only">{facts}</span>
-              <span aria-hidden="true" className="booking-track">
-                {room.busy ? <span className="booking-busy" style={{ insetInlineStart: at(room.busy[0]), inlineSize: `calc(${at(room.busy[1])} - ${at(room.busy[0])})` }} /> : null}
-                {mine ? <span className="booking-mine" data-clash={clash || undefined} data-faint={!draft.room || undefined} style={{ insetInlineStart: at(draft.start!), inlineSize: `calc(${at(end!)} - ${at(draft.start!)})` }} /> : null}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
-      <div aria-hidden="true" className="booking-legend">
-        <span><i className="booking-busy" />已有预约</span>
-        <span><i className="booking-mine" />你的时段</span>
-        <span><i className="booking-mine" data-clash />冲突</span>
-      </div>
+    <section className="booking-schedule">
+      <Heatmap columnLabel="开始时间" columns={HOURS.map((hour) => ({ key: clock(hour), label: clock(hour).slice(0, 2) }))} formatValue={(value) => STATES[value] ?? String(value)} framed={false} label={title} levels={LEVELS} rowLabel="房间" rows={rows} valueLabel="占用" />
     </section>
   );
 }
@@ -269,4 +263,3 @@ function Summary({ draft, room, when, withTopic = true }: { draft: Draft; room: 
     </DescriptionList>
   );
 }
-
