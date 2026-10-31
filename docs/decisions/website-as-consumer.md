@@ -103,6 +103,15 @@
 - 未找到页：这一页只有一件事，没有别的内容要对齐，标题、地址、动作与入口在站框里水平居中。
 - 验证：站点 `--qy-primary` 为库默认（按钮底约 #1f1f1f）；窗口默认无试用属性、选青 / 赭写入对应属性与值、回到墨清除；首页、未找到页（中英）、主题、示例总览、预约、按钮页浅 / 深 axe-core 0 违例；docs 测试 61 / 61。
 
+**合并前审查的修复**（2026-10-31，合入 5.1.0 后对 `origin/main...HEAD` 做代码审查，十项全部处理）。
+- 库的字阶回到 main：此前为首页把 display-xl 改成 8rem、细字重并新增 `--qy-weight-light`，这是把一个页面的海报尺度写进了全库公共档。现在库的 display-xl 仍是 4rem / 20 分；首页海报的尺度是首页自己的预设（`home.css` 的 `--home-motto-size` = display-xl × 2、`--home-motto-leading` = display-xl 行高 × 1.7，字重 300），不进库。
+- 首页总纲不再把 design.md 全文打进首页包：新增 Vite 虚拟模块 `virtual:design-principles`（`vite-plugins/design-principles.mjs`），构建时从根 design.md 的总纲表取三行，行数不是 3 即构建失败；契约测试仍对照 design.md。
+- 示例窗口：框懒加载时早于框挂监听的密度 / 品牌消息会丢；框挂上监听后回发 `qy-axes-ready`，窗口补发当前值。裸框里的工作区链接留在 `/frame/examples/workspace/…`，不在框里打开整站。
+- 示例未找到：`/examples/records/x` 一类地址只有一个 main，查看页里是 div，裸框里是 main 并以 `target="_top"` 回到总览。
+- 预约：改开始时间或时长使已选房间冲突时清除房间并在房间上报错；换房间清除人数上的容量错误。
+- Calendar 的月份切换是命名的 group（`labelNav`，可被使用方覆盖），不是导航地标；CommandEmpty 的状态区移到列表框之外，内容只渲染一次。两处各有新测试。
+- 验证：库测试 1352 / 1352，docs 测试 61 / 61，两边 `tsc`，`check-library-controls` 0 违例，docs 构建通过；Playwright 实测早点击的紧凑 / 赭到达框内、框内链接不出框、未找到只有一个 main、预约房间清除与容量错误清除，无页面错误。
+
 **本站品牌：青**（已于 2026-10-31 撤回，见上文；以下为当时的记录。`index.css` 的 `html[data-brand="qingye"]`）。取自「青野」；只覆写 `--qy-primary` 与前景，实心按钮、选中标记与站标的点随之换色，其余仍是墨阶（墨分五色：品牌强调色如一方印）。浅色 oklch(0.48 0.085 200)，白字其上 6.2:1；深色 oklch(0.78 0.09 195)，深前景其上 9.1:1。色相与明度是预设，对比按 sRGB 换算核对，未经 contrast-check 工具实测。局部嵌套的 `.light/.dark` 根会重置为墨（库的语义块在每个明暗根上重算 `--qy-primary`）；首页窗口的品牌写在框内文档的根上。
 
 **示例**（`examples/gallery.tsx`、`list.ts`、`booking.tsx`、`examples.css`）。

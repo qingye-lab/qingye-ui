@@ -55,6 +55,8 @@ function validate(step: number, draft: Draft): Errors {
   if (step === 1) {
     const room = ROOMS.find((item) => item.id === draft.room);
     if (!room) errors.room = "请选择一间房间";
+    // 回到上一步改了时间后，原先选的房间可能已被占用：单选里它已不可选，这里也不放行。
+    else if (conflict(room, draft.start, draft.duration) && room.busy) errors.room = `${room.name}在 ${clock(room.busy[0])}–${clock(room.busy[1])} 已被预约，请换一间或改时间`;
     if (!draft.people || draft.people < 1) errors.people = "请填写参会人数";
     else if (room && draft.people > room.capacity) errors.people = `${room.name}最多 ${room.capacity} 人。请减少人数，或换一间更大的房间`;
   }
@@ -79,7 +81,23 @@ export default function BookingApp() {
   const heading = useRef<HTMLHeadingElement>(null);
   const roomsLabel = useId();
   const durationLabel = useId();
-  const set = <K extends keyof Draft>(key: K, value: Draft[K]) => { setDraft((current) => ({ ...current, [key]: value })); setErrors((current) => ({ ...current, [key]: undefined })); setFailedStep(null); };
+  const set = <K extends keyof Draft>(key: K, value: Draft[K]) => {
+    setDraft((current) => {
+      const next = { ...current, [key]: value };
+      // 改了时间，原先选的房间若与已有预约相交就取消选择：不让一个已不可选的房间悄悄留在草稿里。
+      const chosen = ROOMS.find((item) => item.id === next.room);
+      if ((key === "start" || key === "duration") && chosen && conflict(chosen, next.start, next.duration)) delete next.room;
+      return next;
+    });
+    // 换房间时人数的错误也随之失效（容量变了），一并清掉；其余字段只清自己的错误。
+    setErrors((current) => {
+      const next = { ...current };
+      delete next[key as keyof Errors];
+      if (key === "room") delete next.people;
+      return next;
+    });
+    setFailedStep(null);
+  };
 
   // 校验结果先渲染成 aria-invalid，再落焦点到第一个无效字段；换步之后焦点落到这一步的标题。
   useEffect(() => { if (attempt > 0 && form.current) focusFirstInvalid(form.current); }, [attempt]);

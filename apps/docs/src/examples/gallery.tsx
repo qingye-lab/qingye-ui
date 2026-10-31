@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
-import { AXES_MESSAGE, applyAxes, axesFromSearch, type Axes } from "@/lib/axes";
+import { AXES_MESSAGE, AXES_READY, applyAxes, axesFromSearch, type Axes } from "@/lib/axes";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import { buttonVariants } from "@qingye_lab/ui/components/button";
@@ -12,9 +12,11 @@ import { useDocsLocale } from "@/lib/docs-locale";
 import { componentLabel } from "@/lib/nav";
 import { findComponent } from "@/lib/registry";
 import { repoFile } from "@/lib/site";
+import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { localePath } from "@/lib/paths";
 import { NotFoundContent } from "@/pages/not-found";
 import { EXAMPLES, findExample, type ExampleEntry } from "./list";
-import { ExampleEmbeddedProvider } from "./embedding";
+import { ExampleEmbeddedProvider, useExampleEmbedded } from "./embedding";
 import type { DocsLocale } from "@/lib/paths";
 
 const findComponentLabel = (slug: string, locale: DocsLocale) => { const entry = findComponent(slug); return entry ? componentLabel(entry, locale).title : slug; };
@@ -36,9 +38,23 @@ export function ExampleRoutes() {
   </Suspense>;
 }
 
-/** 未知的示例路径：与站点其余页面同一个未找到状态，留在示例框内。 */
+/**
+ * 已知示例下的未知路径（如 /examples/records/x）：留在示例框内，说清没有这一页，去处是示例总览。
+ * 查看页里外层已有 <main>，这里用 div；裸框里它自己是 main，链接在顶层窗口打开（target="_top"），不把站点载进框里。
+ */
 function Missing() {
-  return <main className="h-full overflow-y-auto p-(--qy-panel-padding) outline-none" id="main" tabIndex={-1}><NotFoundContent /></main>;
+  const embedded = useExampleEmbedded();
+  const en = useDocsLocale() === "en";
+  const body = <Empty state="not-applicable">
+    <EmptyTitle level={1}>{en ? "No such example page" : "没有这个示例页面"}</EmptyTitle>
+    <EmptyActions>{embedded
+      ? <Link className={buttonVariants({ variant: "bordered" })} to="/examples">{en ? "All examples" : "全部示例"}</Link>
+      : <a className={buttonVariants({ variant: "bordered" })} href={localePath("/examples", en ? "en" : "zh")} target="_top">{en ? "All examples" : "全部示例"}</a>}
+    </EmptyActions>
+  </Empty>;
+  return embedded
+    ? <div className="h-full overflow-y-auto p-(--qy-panel-padding)">{body}</div>
+    : <main className="h-full overflow-y-auto p-(--qy-panel-padding) outline-none" id="main" tabIndex={-1}>{body}</main>;
 }
 
 /*
@@ -146,7 +162,7 @@ export default function ExamplesGallery() {
   const id = pathname.replace(/^(\/en)?\/examples\/?/, "").split("/")[0];
   if (!id) return <ExamplesIndex />;
   // 未知的示例：站点统一的未找到状态，不套查看栏（没有可以回到的示例）。
-  if (!findExample(id)) return <div className="site-frame"><Missing /></div>;
+  if (!findExample(id)) return <main className="site-frame outline-none" id="main" tabIndex={-1}><NotFoundContent /></main>;
   return <ExampleView example={findExample(id)!}><ExampleRoutes /></ExampleView>;
 }
 
@@ -163,6 +179,8 @@ export function ExampleFrame() {
       applyAxes(root, event.data.axes as Partial<Axes>);
     };
     window.addEventListener("message", onMessage);
+    // 框是懒加载的：父页面在它挂上监听之前发来的消息会丢。挂上之后告诉父页面「已就绪」，父页面再发一次当前的两轴。
+    if (window.parent !== window) window.parent.postMessage({ type: AXES_READY }, window.location.origin);
     return () => window.removeEventListener("message", onMessage);
   }, []);
   return <div className="h-dvh" data-example-bare><ExampleRoutes /></div>;

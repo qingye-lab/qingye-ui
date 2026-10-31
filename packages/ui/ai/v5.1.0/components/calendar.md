@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
+Source SHA-256: 224bcf465e9b9ac6ef0d006f48db9272253ba1e4396cfe2d834af94fbe111612
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 

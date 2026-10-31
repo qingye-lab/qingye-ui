@@ -1328,7 +1328,7 @@ import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, Breadcru
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "父级与当前页", titleEn: "Ancestors and current page" } satisfies DemoMeta;
 export default function Demo() {
-  return <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="/">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href="/components">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;
+  return <Breadcrumb aria-label="面包屑：完整路径"><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="/">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href="/components">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;
 }
 ```
 
@@ -1685,7 +1685,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069
+Source SHA-256: 224bcf465e9b9ac6ef0d006f48db9272253ba1e4396cfe2d834af94fbe111612
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
@@ -2002,7 +2002,7 @@ export default function Demo() {
   const [leaf, setLeaf] = useState<string[] | null>(["zj", "hz", "xh"]);
   const [any, setAny] = useState<string[] | null>(null);
   return (
-    <div className="grid w-full grid-cols-2 items-start gap-(--qy-space-4)">
+    <div className="grid w-full sm:grid-cols-2 items-start gap-(--qy-space-4)">
       <Field>
         <FieldLabel>{english ? "Leaf only" : "只选到叶子"}</FieldLabel>
         <Cascader options={options} value={leaf} onValueChange={setLeaf} />
@@ -2425,7 +2425,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b
+Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
 
 Literal text with an optional title bar and actual copy results.
 
@@ -2968,7 +2968,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
-Source SHA-256: d1f5f5fb0d95dea7c5314b09fd04d8299d0b7e700d4acdabc7936087e899cb7d
+Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
 
 A search box over an always-open list of commands, for jumping somewhere or doing something.
 
@@ -3073,13 +3073,14 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 280 inherited (@types/react 280); not expanded, see the installed declarations
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, react-dom, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context CountContext: without a provider default-value; provided by Command
 - Context GroupReport: without a provider nullable; provided by CommandGroup
 - Context StateContext: without a provider throws; provided by Command
+- Context StatusSlotContext: without a provider nullable; provided by Command
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -6939,7 +6940,7 @@ export const meta = { title: "密度", titleEn: "Density" };
 // 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>
@@ -7623,7 +7624,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
+  return <PaginationPattern aria-label="分页：已知总数" totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
 }
 ```
 
@@ -9219,7 +9220,7 @@ const options = [
 
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>
@@ -11215,7 +11216,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab
+Source SHA-256: b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50
 
 Report recoverable, non-critical facts while the current work continues.
 
@@ -11437,7 +11438,7 @@ export default function Demo() {
   const headings = useTocHeadings(containerRef);
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
-    <Toc items={headings} current={current} className="w-40 shrink-0" />
+    <Toc aria-label="示例文章目录" items={headings} current={current} className="w-40 shrink-0" />
     <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
@@ -12548,7 +12549,7 @@ export default function Demo() {
     <Workspace className="max-sm:flex-col">
       <Sidebar aria-label="工作区" collapsed={narrow} className="w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full">
         <SidebarHeader className="max-sm:hidden"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
-        <SidebarContent className="mt-(--qy-field-group-gap) max-sm:mt-0">
+        <SidebarContent aria-label="外壳示例导航" className="mt-(--qy-field-group-gap) max-sm:mt-0">
           <SidebarGroup className="max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]">
             <SidebarLink href="#overview" icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
             <SidebarLink href="#collections" active icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>

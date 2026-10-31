@@ -16,6 +16,8 @@ export const BRANDS: BrandPreset[] = [
 ];
 
 export const AXES_MESSAGE = "qy-axes";
+/** The frame sends this once its listener is attached; the parent answers with the current axes (messages sent earlier are lost). */
+export const AXES_READY = "qy-axes-ready";
 
 /** Writes density and the trial brand on a document root. Ink is the library default, so it clears the trial. */
 export function applyAxes(root: HTMLElement, { density, brand }: Partial<Axes>) {

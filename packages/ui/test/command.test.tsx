@@ -176,3 +176,10 @@ test("closeOnSelect={false} keeps the dialog open; Escape closes it; reopening s
   await userEvent.click(screen.getByRole("button", { name: "打开" }));
   expect(await screen.findByRole("combobox")).toHaveValue("");
 });
+
+test("the empty state renders its children once, outside the listbox, so interactive content is not duplicated", async () => {
+  render(<Command defaultQuery="zzz"><CommandInput aria-label="搜索" /><CommandList aria-label="命令"><CommandItem value="a">a</CommandItem><CommandEmpty>没有结果 <button type="button">新建</button></CommandEmpty></CommandList></Command>);
+  expect(await screen.findByRole("status")).toHaveTextContent("没有结果");
+  expect(screen.getAllByRole("button", { name: "新建" })).toHaveLength(1);
+  expect(screen.getByRole("listbox").querySelector("[data-slot=command-empty], button")).toBeNull();
+});

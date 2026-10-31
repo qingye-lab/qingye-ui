@@ -21,7 +21,10 @@ import { useExampleEmbedded } from "../embedding";
 /* 应用外壳：库的 Workspace——侧栏（可收起成图标栏）+ 一张工作面（顶栏：位置、搜索、动态；内容区）。
  * 外壳自带跳过链接、侧栏与工作面之间的间隔和面的圆角线；这里只放内容。页面级操作经 WorkspaceHeaderPortal 进顶栏。 */
 
-export const BASE = "/examples/workspace";
+// 基址随这份文档所在的路由取：裸框（/frame/examples/…）是首页窗口与总览缩略里的 iframe，是独立的文档、各有一份模块，
+// 框里的链接与跳转要留在框里，不能跳到站点的 /examples/…（那会把整个站点连页头一起载进窗口）。服务端与测试里没有 window，取站点基址。
+const inFrame = typeof window !== "undefined" && /^(\/en)?\/frame\//.test(window.location.pathname);
+export const BASE = inFrame ? "/frame/examples/workspace" : "/examples/workspace";
 const at = (path = "") => `${BASE}${path}`;
 
 /** 站内跳转保留 URL 的语言前缀；<Link> 已自带，命令式跳转用这个。 */

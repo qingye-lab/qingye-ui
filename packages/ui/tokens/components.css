@@ -40,10 +40,7 @@
       "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
     --qy-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     /* 字重三档：**预设**（STANDARDS §7：当前字重 400 / 500 / 600 均无唯一关系可推）。
-     * 角色：theme.css 的 --font-weight-* 与每个文字档的 -weight 项都读这里；改三档即改全库字重。
-     * light 300 只给落地页的大字（display-xl）：字身到了海报尺度，常规字重的笔画在大面积上显得粗重，
-     * 细一档让字形本身成为画面（2026-10-30，预设）。界面与正文不用它。 */
-    --qy-weight-light: 300;
+     * 角色：theme.css 的 --font-weight-* 与每个文字档的 -weight 项都读这里；改三档即改全库字重。 */
     --qy-weight-regular: 400;
     --qy-weight-medium: 500;
     --qy-weight-semibold: 600;
@@ -58,13 +55,12 @@
      * 它们取自拉丁字体的习惯（字号越大、拉得越紧；汉字由 utilities.css 的 :lang 规则整体归零），
      * 不能写成派生。-mobile 档的字号是**预设**（基础层 §8：窄屏各自放大 1–2px），行高仍在分格上（派生）。 */
 
-    /* 落地页单独成段的大字（如首页总纲）：128 / 34 分行高，细字重。
-     * 首页总纲三句上下排成一张海报：一句五字 640px，约占站框一半；行高 34 分（136px）= 字身的 1.06 倍，三行叠成一块。
-     * 字号、行高与字重都是预设（2026-10-30 第三稿：最大字号与正文之比到 8，全页唯一的画面是字本身）。全站至多一处。 */
-    --qy-text-display-xl-size: 8rem;
-    --qy-text-display-xl-leading: calc(34 * var(--qy-fen));
+    /* 落地页单独成段的大字（如首页总纲）：64 / 20 分行高，行高正好 4 材。
+     * 字号是预设，与 display-lg 相差 1.6 倍；全站至多一处。 */
+    --qy-text-display-xl-size: 4rem;
+    --qy-text-display-xl-leading: calc(20 * var(--qy-fen));
     --qy-text-display-xl-tracking: -0.032em;
-    --qy-text-display-xl-weight: var(--qy-weight-light);
+    --qy-text-display-xl-weight: var(--qy-weight-semibold);
 
     /* 页面标题：12 分 / 10 分行高。 */
     --qy-text-display-lg-size: 2.5rem;

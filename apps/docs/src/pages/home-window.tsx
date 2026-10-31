@@ -2,7 +2,7 @@ import { linkClassName } from "@qingye_lab/ui/components/link";
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/components/locale-link";
-import { AXES_MESSAGE, BRANDS, type Axes, type Density } from "@/lib/axes";
+import { AXES_MESSAGE, AXES_READY, BRANDS, type Axes, type Density } from "@/lib/axes";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { EXAMPLES } from "@/examples/list";
 
@@ -24,8 +24,18 @@ export function HomeWindow() {
 
   // 地址只在换示例时变：两轴的当前值写进地址，此后的变化走消息。
   const [src, setSrc] = useState(() => frameSrc(example, axes));
-  const post = () => frame.current?.contentWindow?.postMessage({ type: AXES_MESSAGE, axes }, window.location.origin);
+  const latest = useRef(axes);
+  latest.current = axes;
+  const post = () => frame.current?.contentWindow?.postMessage({ type: AXES_MESSAGE, axes: latest.current }, window.location.origin);
   useEffect(post, [density, brand]);
+  // 框挂上监听后会发「已就绪」：此前发出的消息可能丢了（框是懒加载的），这里补发一次当前值。
+  useEffect(() => {
+    const onReady = (event: MessageEvent) => {
+      if (event.origin === window.location.origin && event.source === frame.current?.contentWindow && event.data?.type === AXES_READY) post();
+    };
+    window.addEventListener("message", onReady);
+    return () => window.removeEventListener("message", onReady);
+  }, []);
   const choose = (id: string) => { setExample(id); setSrc(frameSrc(id, axes)); };
   const current = EXAMPLES.find((item) => item.id === example)!;
 
@@ -51,7 +61,7 @@ export function HomeWindow() {
           </SegmentedControl>
         </div>
       </div>
-      <iframe className="home-window-frame" key={src} onLoad={post} ref={frame} src={src} title={en ? current.title.en : current.title.zh} />
+      <iframe className="home-window-frame" key={src} loading="lazy" onLoad={post} ref={frame} src={src} title={en ? current.title.en : current.title.zh} />
       <div className="home-window-foot">
         <span>{en ? current.text.en : current.text.zh}</span>
         <Link className={linkClassName} to={`/examples/${current.id}`}>{t("全屏打开", "Open full page")}</Link>

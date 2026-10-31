@@ -12,6 +12,10 @@
  */
 .home {
   --home-gap: calc(8 * var(--qy-cai));
+  /* 总纲的海报尺度是首页自己的预设，不改库的公共档：取 display-xl（64 / 20 分）的两倍字身（128px），
+   * 行高 1.7 倍（34 分 = 136px，字身的 1.06 倍，三行叠成一块），细字重 300（海报尺度下常规字重的笔画显得粗重）。 */
+  --home-motto-size: calc(var(--qy-text-display-xl-size) * 2);
+  --home-motto-leading: calc(var(--qy-text-display-xl-leading) * 1.7);
   color: var(--qy-foreground);
   outline: none;
   text-spacing-trim: trim-start;
@@ -33,6 +37,7 @@
 }
 /* 大块压住左上，小块在右下应答：总纲靠上，说明靠下。 */
 .home-motto { align-self: start; }
+.home-motto { font-size: var(--home-motto-size); line-height: var(--home-motto-leading); font-weight: 300; }
 .home-motto span { display: block; white-space: nowrap; }
 /* 墨分五色：三句的先后用墨的浓淡表达。字是不透明的墨与纸调和（与库的文字色同一写法），任何底上读出来都是同一级。 */
 .home-motto span:nth-child(1) { color: var(--qy-foreground); }
@@ -44,11 +49,11 @@
   justify-items: start;
   gap: var(--qy-fen);
   max-inline-size: calc(20 * var(--qy-cai));
-  padding-block-end: calc((var(--qy-text-display-xl-leading) - var(--qy-text-display-xl-size)) / 2);
+  padding-block-end: calc((var(--home-motto-leading) - var(--home-motto-size)) / 2);
 }
 .home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); margin-top: var(--qy-field-group-gap); }
-/* 英文一句是三到四个词，按汉字的字身排会折成五行：取 display-xl 的 0.6（约 77px），每句仍占一行。 */
-:lang(en) .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.6); line-height: calc(var(--qy-text-display-xl-leading) * 0.6); }
+/* 英文一句是三到四个词，按汉字的字身排会折成五行：取总纲字身的 0.6（约 77px），每句仍占一行。 */
+:lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.6); line-height: calc(var(--home-motto-leading) * 0.6); }
 
 /* ─── 示例 ─────────────────────────────────────────────── */
 /* 整幅一层清染（内嵌承载面，透明叠在页面底上）：用面的一级分出这一段，不画线、不翻转明暗。内容仍在站框里。 */
@@ -128,9 +133,9 @@
 }
 @media (width < 48rem) {
   .home { --home-gap: calc(5 * var(--qy-cai)); }
-  /* 一句五字要放进窄屏（390 宽的版心 310px）：字身取 display-xl 的 0.45（约 58px，五字 288px），行高同比。 */
-  .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.45); line-height: calc(var(--qy-text-display-xl-leading) * 0.45); }
-  :lang(en) .home-motto { font-size: calc(var(--qy-text-display-xl-size) * 0.3); line-height: calc(var(--qy-text-display-xl-leading) * 0.3); }
+  /* 一句五字要放进窄屏（390 宽的版心 310px）：字身取总纲字身的 0.45（约 58px，五字 288px），行高同比。 */
+  .home-motto { font-size: calc(var(--home-motto-size) * 0.45); line-height: calc(var(--home-motto-leading) * 0.45); }
+  :lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.3); line-height: calc(var(--home-motto-leading) * 0.3); }
   :lang(en) .home-motto span { white-space: normal; }
   .home-hero { padding-block-start: calc(3 * var(--qy-cai)); }
   .home-window { grid-template-rows: auto calc(30 * var(--qy-cai)) auto; }

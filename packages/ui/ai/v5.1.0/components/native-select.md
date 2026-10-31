@@ -70,7 +70,7 @@ export const meta = { title: "密度", titleEn: "Density" };
 // 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>

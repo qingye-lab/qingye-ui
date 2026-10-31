@@ -117,7 +117,7 @@ import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, Breadcru
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "父级与当前页", titleEn: "Ancestors and current page" } satisfies DemoMeta;
 export default function Demo() {
-  return <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="/">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href="/components">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;
+  return <Breadcrumb aria-label="面包屑：完整路径"><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href="/">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href="/components">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;
 }
 ```
 
@@ -129,7 +129,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "折叠中间层级", titleEn: "Fold the middle levels" } satisfies DemoMeta;
 const ancestors = [["/", "首页"], ["/files", "文件"], ["/files/2026", "2026"], ["/files/2026/q3", "第三季度"], ["/files/2026/q3/reports", "报表"]] as const;
 export default function Demo() {
-  return <Breadcrumb><BreadcrumbList maxItems={4}>
+  return <Breadcrumb aria-label="面包屑：折叠的长路径"><BreadcrumbList maxItems={4}>
     {ancestors.map(([href, name]) => <BreadcrumbItem key={href}><BreadcrumbLink href={href}>{name}</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem>)}
     <BreadcrumbItem><BreadcrumbCurrent>销售汇总</BreadcrumbCurrent></BreadcrumbItem>
   </BreadcrumbList></Breadcrumb>;
