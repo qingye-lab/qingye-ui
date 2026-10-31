@@ -19,6 +19,34 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
   --qy-background: color-mix(in srgb, var(--qy-ink) calc(var(--qy-wash-qing) / 2), var(--qy-paper));
 }
 
+/*
+ * 品牌轴的试用预设（2026-10-31 改）。本站不设品牌色：实心按钮、选中标记都是库的默认焦墨。
+ * 「青野」是个人品牌，不参与设计理念，也就不决定站点的颜色（用户裁决 2026-10-31，撤回 10-30 加上的青）。
+ * 青、赭、胭只用来演示库的品牌轴：首页示例窗口与主题试验台里可以试，写在框内文档的根上（html[data-try-brand]，见 lib/axes.ts）。
+ *   取值   每个预设成对给浅色与深色；浅色白字其上 ≥ 4.5:1，深色深前景其上 ≥ 4.5:1。色相与明度是预设。
+ *   入口   这里是唯一来源：试用与窗口顶栏的色点都读这些变量，明暗切换时由 CSS 自己换到深色那一组。
+ */
+:root {
+  --qy-try-qing: oklch(0.48 0.085 200);
+  --qy-try-qing-on: oklch(0.985 0 0);
+  --qy-try-ochre: oklch(0.52 0.13 50);
+  --qy-try-ochre-on: oklch(0.985 0 0);
+  --qy-try-rose: oklch(0.52 0.18 12);
+  --qy-try-rose-on: oklch(0.985 0 0);
+}
+:root:is(.dark, [data-theme="dark"]) {
+  --qy-try-qing: oklch(0.78 0.09 195);
+  --qy-try-qing-on: oklch(0.21 0.03 200);
+  --qy-try-ochre: oklch(0.77 0.12 65);
+  --qy-try-ochre-on: oklch(0.23 0.04 55);
+  --qy-try-rose: oklch(0.74 0.14 12);
+  --qy-try-rose-on: oklch(0.22 0.05 12);
+}
+/* 「墨」是库的默认（实心即焦墨），不需要属性；其余三种写在框内文档的根上。 */
+html[data-try-brand="qing"] { --qy-primary: var(--qy-try-qing); --qy-primary-foreground: var(--qy-try-qing-on); }
+html[data-try-brand="ochre"] { --qy-primary: var(--qy-try-ochre); --qy-primary-foreground: var(--qy-try-ochre-on); }
+html[data-try-brand="rose"] { --qy-primary: var(--qy-try-rose); --qy-primary-foreground: var(--qy-try-rose-on); }
+
 :root {
   /* Site chrome. */
   /* Initial value only: the header writes its measured height back (site-header.tsx), and
@@ -154,6 +182,8 @@ html[data-brand="qingye"]:not(.dark, [data-theme="dark"]) {
 
 /* One scrollbar gutter on every page: a page that scrolls and one that does not keep the same width. */
 html { scrollbar-gutter: stable; }
+/* 裸框里的示例自己滚动（框高就是视口高），不留滚动条的空槽。 */
+html:has([data-example-bare]) { scrollbar-gutter: auto; overflow: hidden; }
 .site-frame { width: min(100% - 2 * var(--site-gutter), var(--site-width)); margin-inline: auto; }
 
 /* --- Code ------------------------------------------------------------------ */

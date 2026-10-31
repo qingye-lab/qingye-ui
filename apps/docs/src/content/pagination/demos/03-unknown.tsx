@@ -4,5 +4,5 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={null} hasNextPage />;
+  return <PaginationPattern aria-label="分页：总数未知" totalCount={null} hasNextPage />;
 }

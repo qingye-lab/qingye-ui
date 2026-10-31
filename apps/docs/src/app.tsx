@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { DocsLayout, SiteShell } from "./components/layouts";
 import { PlaygroundPage } from "./pages/playground";
@@ -7,6 +7,7 @@ import { DOCS_LOCALES, PATHS, localePath } from "./lib/paths";
 // Every page is its own chunk; the shell (header, sidebar, search trigger) stays eager.
 const Home = lazy(() => import("./pages/home"));
 const ExamplesGallery = lazy(() => import("./examples/gallery"));
+const ExampleFrame = lazy(() => import("./examples/gallery").then((m) => ({ default: m.ExampleFrame })));
 const Introduction = lazy(() => import("./pages/docs/introduction"));
 const Installation = lazy(() => import("./pages/docs/installation"));
 const Theming = lazy(() => import("./pages/docs/theming"));
@@ -30,6 +31,8 @@ export function App() {
         <Route key={locale} path={localePath(PATHS.home, locale)}>
           {/* Bare demo harness for screenshots: no site chrome. */}
           <Route element={<PlaygroundPage />} path="playground/:slug" />
+          {/* Bare example apps: the examples overview shows them as live thumbnails. */}
+          <Route element={<Suspense><ExampleFrame /></Suspense>} path="frame/examples/*" />
           <Route element={<SiteShell />}>
             <Route element={<Home />} index />
             {/* 示例在站点外壳之内：切换条与固定的框，随时可换示例或回到组件库。 */}

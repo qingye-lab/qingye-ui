@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b
+Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
 
 文本原样展示、可选标题栏与真实复制结果。
 
@@ -144,6 +144,6 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "限定行数", titleEn: "Limited lines" } satisfies DemoMeta;
 const code = Array.from({ length: 30 }, (_, i) => `const value${i + 1} = ${i + 1};`).join("\n") + "\n";
 export default function Demo() {
-  return <CodeBlock title="values.js" maxLines={8} code={code} />;
+  return <CodeBlock title="values-long.js" maxLines={8} code={code} />;
 }
 ```

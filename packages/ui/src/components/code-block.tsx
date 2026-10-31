@@ -46,8 +46,10 @@ export function CodeBlock({ code, language, title, children, wrap = false, maxLi
   const Icon = copied ? IconCheck : IconCopy;
   const hasBar = title !== undefined && title !== null && title !== false;
   const labelTitle = typeof title === "string" || typeof title === "number";
-  // 可聚焦的滚动区必须有名称：读屏要知道 Tab 停在了什么上。名称取标题（字符串或数字），其次语言，再退到「代码」。
-  const regionName = labelTitle ? String(title) : language || messages.codeRegion;
+  // 可聚焦的滚动区必须有名称：读屏要知道 Tab 停在了什么上。名称取标题（字符串或数字）；没有标题时取「语言（或「代码」）+ 第一行」，
+  // 同一页的几段代码名称才各不相同（地标名称须可区分），读到名称也就知道是哪一段。第一行截到 40 个字符（预设）。
+  const firstLine = code.split("\n").map(line => line.trim()).find(Boolean) ?? "";
+  const regionName = labelTitle ? String(title) : firstLine ? messages.codeRegionNamed(language || messages.codeRegion, firstLine.length > 40 ? `${firstLine.slice(0, 40)}…` : firstLine) : language || messages.codeRegion;
   /*
    * 骨法用笔：代码面的范围只用一种边界机制——一条清墨容器线（border-border）。底（--qy-code-surface）
    * 取页面底纸本身（用户 2026-10-12），坐在卡片上比卡片深一级、说「这是另一种材料」；坐在页面底纸上与页面无底色差，

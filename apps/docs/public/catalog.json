@@ -4163,8 +4163,8 @@
             "@qingye_lab/ui/components/breadcrumb"
           ],
           "providers": [],
-          "code": "import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from \"@qingye_lab/ui/components/breadcrumb\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"父级与当前页\", titleEn: \"Ancestors and current page\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <Breadcrumb><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href=\"/\">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href=\"/components\">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;\n}\n",
-          "sha256": "672864b827f317629c0899d6269b0d7dfcf696e31da384834db05224f89d2f2f"
+          "code": "import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from \"@qingye_lab/ui/components/breadcrumb\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"父级与当前页\", titleEn: \"Ancestors and current page\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <Breadcrumb aria-label=\"面包屑：完整路径\"><BreadcrumbList><BreadcrumbItem><BreadcrumbLink href=\"/\">首页</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbLink href=\"/components\">组件</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem><BreadcrumbItem><BreadcrumbCurrent>路径</BreadcrumbCurrent></BreadcrumbItem></BreadcrumbList></Breadcrumb>;\n}\n",
+          "sha256": "bb5271105965922a7909094cf01ab2deefcd6f7112a5ecbf07376e35539737bf"
         },
         {
           "id": "folded",
@@ -4175,8 +4175,8 @@
             "@qingye_lab/ui/components/breadcrumb"
           ],
           "providers": [],
-          "code": "import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from \"@qingye_lab/ui/components/breadcrumb\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"折叠中间层级\", titleEn: \"Fold the middle levels\" } satisfies DemoMeta;\nconst ancestors = [[\"/\", \"首页\"], [\"/files\", \"文件\"], [\"/files/2026\", \"2026\"], [\"/files/2026/q3\", \"第三季度\"], [\"/files/2026/q3/reports\", \"报表\"]] as const;\nexport default function Demo() {\n  return <Breadcrumb><BreadcrumbList maxItems={4}>\n    {ancestors.map(([href, name]) => <BreadcrumbItem key={href}><BreadcrumbLink href={href}>{name}</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem>)}\n    <BreadcrumbItem><BreadcrumbCurrent>销售汇总</BreadcrumbCurrent></BreadcrumbItem>\n  </BreadcrumbList></Breadcrumb>;\n}\n",
-          "sha256": "30ad11d4daa37853ead1a4e7a8a208f744516994264538e6f2f6d4b48d8ecd6a"
+          "code": "import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from \"@qingye_lab/ui/components/breadcrumb\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"折叠中间层级\", titleEn: \"Fold the middle levels\" } satisfies DemoMeta;\nconst ancestors = [[\"/\", \"首页\"], [\"/files\", \"文件\"], [\"/files/2026\", \"2026\"], [\"/files/2026/q3\", \"第三季度\"], [\"/files/2026/q3/reports\", \"报表\"]] as const;\nexport default function Demo() {\n  return <Breadcrumb aria-label=\"面包屑：折叠的长路径\"><BreadcrumbList maxItems={4}>\n    {ancestors.map(([href, name]) => <BreadcrumbItem key={href}><BreadcrumbLink href={href}>{name}</BreadcrumbLink><BreadcrumbSeparator /></BreadcrumbItem>)}\n    <BreadcrumbItem><BreadcrumbCurrent>销售汇总</BreadcrumbCurrent></BreadcrumbItem>\n  </BreadcrumbList></Breadcrumb>;\n}\n",
+          "sha256": "b84849eb02ab945c2c395bc6cd991f5bfe2ddbfdba0cd14e1036a809eeb666d3"
         }
       ],
       "design": {
@@ -6665,7 +6665,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/calendar.tsx",
-        "sha256": "61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069",
+        "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。",
@@ -7523,8 +7523,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Cascader, type CascaderOption } from \"@qingye_lab/ui/components/cascader\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"地区\", titleEn: \"Regions\" };\n\nconst zh: CascaderOption[] = [\n  { value: \"zj\", label: \"浙江\", children: [\n    { value: \"hz\", label: \"杭州\", children: [{ value: \"xh\", label: \"西湖区\" }, { value: \"bj\", label: \"滨江区\", disabled: true }, { value: \"yh\", label: \"余杭区\" }] },\n    { value: \"nb\", label: \"宁波\", children: [{ value: \"hs\", label: \"海曙区\" }, { value: \"jb\", label: \"江北区\" }] },\n  ] },\n  { value: \"js\", label: \"江苏\", children: [\n    { value: \"nj\", label: \"南京\", children: [{ value: \"gl\", label: \"鼓楼区\" }, { value: \"xw\", label: \"玄武区\" }] },\n    { value: \"sz\", label: \"苏州\", children: [{ value: \"gs\", label: \"姑苏区\" }] },\n  ] },\n  { value: \"bj\", label: \"北京\", children: [{ value: \"bj-city\", label: \"北京市\", children: [{ value: \"dc\", label: \"东城区\" }, { value: \"xc\", label: \"西城区\" }] }] },\n];\nconst en: CascaderOption[] = [\n  { value: \"zj\", label: \"Zhejiang\", children: [\n    { value: \"hz\", label: \"Hangzhou\", children: [{ value: \"xh\", label: \"Xihu\" }, { value: \"bj\", label: \"Binjiang\", disabled: true }, { value: \"yh\", label: \"Yuhang\" }] },\n    { value: \"nb\", label: \"Ningbo\", children: [{ value: \"hs\", label: \"Haishu\" }, { value: \"jb\", label: \"Jiangbei\" }] },\n  ] },\n  { value: \"js\", label: \"Jiangsu\", children: [\n    { value: \"nj\", label: \"Nanjing\", children: [{ value: \"gl\", label: \"Gulou\" }, { value: \"xw\", label: \"Xuanwu\" }] },\n    { value: \"sz\", label: \"Suzhou\", children: [{ value: \"gs\", label: \"Gusu\" }] },\n  ] },\n  { value: \"bj\", label: \"Beijing\", children: [{ value: \"bj-city\", label: \"Beijing\", children: [{ value: \"dc\", label: \"Dongcheng\" }, { value: \"xc\", label: \"Xicheng\" }] }] },\n];\n\nexport default function Demo() {\n  const { code } = useUILocale();\n  const english = code.startsWith(\"en\");\n  const options = english ? en : zh;\n  const [leaf, setLeaf] = useState<string[] | null>([\"zj\", \"hz\", \"xh\"]);\n  const [any, setAny] = useState<string[] | null>(null);\n  return (\n    <div className=\"grid w-full grid-cols-2 items-start gap-(--qy-space-4)\">\n      <Field>\n        <FieldLabel>{english ? \"Leaf only\" : \"只选到叶子\"}</FieldLabel>\n        <Cascader options={options} value={leaf} onValueChange={setLeaf} />\n      </Field>\n      <Field>\n        <FieldLabel>{english ? \"Any level\" : \"任意一级\"}</FieldLabel>\n        <Cascader options={options} selectParent value={any} onValueChange={setAny} />\n      </Field>\n    </div>\n  );\n}\n",
-          "sha256": "91a0f1171919a118d38a35c3005c66048f17f0017f1c06b39d295d4f363c9923"
+          "code": "import { useState } from \"react\";\nimport { Cascader, type CascaderOption } from \"@qingye_lab/ui/components/cascader\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"地区\", titleEn: \"Regions\" };\n\nconst zh: CascaderOption[] = [\n  { value: \"zj\", label: \"浙江\", children: [\n    { value: \"hz\", label: \"杭州\", children: [{ value: \"xh\", label: \"西湖区\" }, { value: \"bj\", label: \"滨江区\", disabled: true }, { value: \"yh\", label: \"余杭区\" }] },\n    { value: \"nb\", label: \"宁波\", children: [{ value: \"hs\", label: \"海曙区\" }, { value: \"jb\", label: \"江北区\" }] },\n  ] },\n  { value: \"js\", label: \"江苏\", children: [\n    { value: \"nj\", label: \"南京\", children: [{ value: \"gl\", label: \"鼓楼区\" }, { value: \"xw\", label: \"玄武区\" }] },\n    { value: \"sz\", label: \"苏州\", children: [{ value: \"gs\", label: \"姑苏区\" }] },\n  ] },\n  { value: \"bj\", label: \"北京\", children: [{ value: \"bj-city\", label: \"北京市\", children: [{ value: \"dc\", label: \"东城区\" }, { value: \"xc\", label: \"西城区\" }] }] },\n];\nconst en: CascaderOption[] = [\n  { value: \"zj\", label: \"Zhejiang\", children: [\n    { value: \"hz\", label: \"Hangzhou\", children: [{ value: \"xh\", label: \"Xihu\" }, { value: \"bj\", label: \"Binjiang\", disabled: true }, { value: \"yh\", label: \"Yuhang\" }] },\n    { value: \"nb\", label: \"Ningbo\", children: [{ value: \"hs\", label: \"Haishu\" }, { value: \"jb\", label: \"Jiangbei\" }] },\n  ] },\n  { value: \"js\", label: \"Jiangsu\", children: [\n    { value: \"nj\", label: \"Nanjing\", children: [{ value: \"gl\", label: \"Gulou\" }, { value: \"xw\", label: \"Xuanwu\" }] },\n    { value: \"sz\", label: \"Suzhou\", children: [{ value: \"gs\", label: \"Gusu\" }] },\n  ] },\n  { value: \"bj\", label: \"Beijing\", children: [{ value: \"bj-city\", label: \"Beijing\", children: [{ value: \"dc\", label: \"Dongcheng\" }, { value: \"xc\", label: \"Xicheng\" }] }] },\n];\n\nexport default function Demo() {\n  const { code } = useUILocale();\n  const english = code.startsWith(\"en\");\n  const options = english ? en : zh;\n  const [leaf, setLeaf] = useState<string[] | null>([\"zj\", \"hz\", \"xh\"]);\n  const [any, setAny] = useState<string[] | null>(null);\n  return (\n    <div className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-space-4)\">\n      <Field>\n        <FieldLabel>{english ? \"Leaf only\" : \"只选到叶子\"}</FieldLabel>\n        <Cascader options={options} value={leaf} onValueChange={setLeaf} />\n      </Field>\n      <Field>\n        <FieldLabel>{english ? \"Any level\" : \"任意一级\"}</FieldLabel>\n        <Cascader options={options} selectParent value={any} onValueChange={setAny} />\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "0402f5fc4aad8a776baa4d8b5fecf66d18f6d1a043be0554b1fc0ea04074af76"
         },
         {
           "id": "async",
@@ -10303,8 +10303,8 @@
             "@qingye_lab/ui/components/code-block"
           ],
           "providers": [],
-          "code": "import { CodeBlock } from \"@qingye_lab/ui/components/code-block\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"限定行数\", titleEn: \"Limited lines\" } satisfies DemoMeta;\nconst code = Array.from({ length: 30 }, (_, i) => `const value${i + 1} = ${i + 1};`).join(\"\\n\") + \"\\n\";\nexport default function Demo() {\n  return <CodeBlock title=\"values.js\" maxLines={8} code={code} />;\n}\n",
-          "sha256": "86ab735475f53174409175009cff6aa706699ba86581fdb9be1353bf3b16d43a"
+          "code": "import { CodeBlock } from \"@qingye_lab/ui/components/code-block\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"限定行数\", titleEn: \"Limited lines\" } satisfies DemoMeta;\nconst code = Array.from({ length: 30 }, (_, i) => `const value${i + 1} = ${i + 1};`).join(\"\\n\") + \"\\n\";\nexport default function Demo() {\n  return <CodeBlock title=\"values-long.js\" maxLines={8} code={code} />;\n}\n",
+          "sha256": "e6fc23c8010f288d3cc8b7246c60750dd5bfd1b41122a4d26a143a0ba6b28a31"
         }
       ],
       "design": {
@@ -10341,7 +10341,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/code-block.tsx",
-        "sha256": "b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b",
+        "sha256": "1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "pre/code 保留空白、字符与完整宽度，库自己不做语法高亮：已高亮的标记由调用方经 children 给出，复制的仍是 code。代码面只用一条清墨容器线划出范围，底只比所坐之处深半个清染。复制复用 useCopyToClipboard；只有写入成功才显示已复制，失败保留手动复制内容。",
@@ -13077,34 +13077,34 @@
                 "name": "defaultQuery",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/command.tsx:64"
+                "declaredAt": "packages/ui/src/components/command.tsx:67"
               },
               {
                 "name": "filter",
                 "optional": true,
                 "type": "CommandFilter",
                 "doc": "覆盖默认过滤。",
-                "declaredAt": "packages/ui/src/components/command.tsx:61"
+                "declaredAt": "packages/ui/src/components/command.tsx:64"
               },
               {
                 "name": "onItemSelect",
                 "optional": true,
                 "type": "(value: string) => void",
                 "doc": "任一条目被选中后调用（在条目自己的 onSelect 之后）；CommandDialog 靠它关闭。",
-                "declaredAt": "packages/ui/src/components/command.tsx:67"
+                "declaredAt": "packages/ui/src/components/command.tsx:70"
               },
               {
                 "name": "onQueryChange",
                 "optional": true,
                 "type": "(query: string) => void",
-                "declaredAt": "packages/ui/src/components/command.tsx:65"
+                "declaredAt": "packages/ui/src/components/command.tsx:68"
               },
               {
                 "name": "query",
                 "optional": true,
                 "type": "string",
                 "doc": "查询文字；受控。",
-                "declaredAt": "packages/ui/src/components/command.tsx:63"
+                "declaredAt": "packages/ui/src/components/command.tsx:66"
               }
             ],
             "inheritedCount": 278,
@@ -13124,78 +13124,78 @@
                 "optional": true,
                 "type": "string",
                 "doc": "对话框的名字，二选一必填，缺失抛错。",
-                "declaredAt": "packages/ui/src/components/command.tsx:205"
+                "declaredAt": "packages/ui/src/components/command.tsx:216"
               },
               {
                 "name": "aria-labelledby",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/command.tsx:206"
+                "declaredAt": "packages/ui/src/components/command.tsx:217"
               },
               {
                 "name": "closeOnSelect",
                 "optional": true,
                 "type": "boolean",
                 "doc": "选中条目后关闭，默认 true。",
-                "declaredAt": "packages/ui/src/components/command.tsx:203"
+                "declaredAt": "packages/ui/src/components/command.tsx:214"
               },
               {
                 "name": "defaultOpen",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/command.tsx:200"
+                "declaredAt": "packages/ui/src/components/command.tsx:211"
               },
               {
                 "name": "defaultQuery",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/command.tsx:64"
+                "declaredAt": "packages/ui/src/components/command.tsx:67"
               },
               {
                 "name": "filter",
                 "optional": true,
                 "type": "CommandFilter",
                 "doc": "覆盖默认过滤。",
-                "declaredAt": "packages/ui/src/components/command.tsx:61"
+                "declaredAt": "packages/ui/src/components/command.tsx:64"
               },
               {
                 "name": "onItemSelect",
                 "optional": true,
                 "type": "(value: string) => void",
                 "doc": "任一条目被选中后调用（在条目自己的 onSelect 之后）；CommandDialog 靠它关闭。",
-                "declaredAt": "packages/ui/src/components/command.tsx:67"
+                "declaredAt": "packages/ui/src/components/command.tsx:70"
               },
               {
                 "name": "onOpenChange",
                 "optional": true,
                 "type": "(open: boolean) => void",
-                "declaredAt": "packages/ui/src/components/command.tsx:201"
+                "declaredAt": "packages/ui/src/components/command.tsx:212"
               },
               {
                 "name": "onQueryChange",
                 "optional": true,
                 "type": "(query: string) => void",
-                "declaredAt": "packages/ui/src/components/command.tsx:65"
+                "declaredAt": "packages/ui/src/components/command.tsx:68"
               },
               {
                 "name": "open",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/command.tsx:199"
+                "declaredAt": "packages/ui/src/components/command.tsx:210"
               },
               {
                 "name": "popupClassName",
                 "optional": true,
                 "type": "string",
                 "doc": "对话框面板的宽度等。",
-                "declaredAt": "packages/ui/src/components/command.tsx:208"
+                "declaredAt": "packages/ui/src/components/command.tsx:219"
               },
               {
                 "name": "query",
                 "optional": true,
                 "type": "string",
                 "doc": "查询文字；受控。",
-                "declaredAt": "packages/ui/src/components/command.tsx:63"
+                "declaredAt": "packages/ui/src/components/command.tsx:66"
               }
             ],
             "inheritedCount": 276,
@@ -13226,14 +13226,14 @@
                 "name": "children",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/command.tsx:112"
+                "declaredAt": "packages/ui/src/components/command.tsx:116"
               },
               {
                 "name": "heading",
                 "optional": false,
                 "type": "React.ReactNode",
                 "doc": "组名；也是读屏读到的组名称（group 的 aria-labelledby 指向它）。",
-                "declaredAt": "packages/ui/src/components/command.tsx:111"
+                "declaredAt": "packages/ui/src/components/command.tsx:115"
               }
             ],
             "inheritedCount": 279,
@@ -13269,35 +13269,35 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "禁用项显示为不可用，不参与高亮与键盘移动，不能被选中。",
-                "declaredAt": "packages/ui/src/components/command.tsx:160"
+                "declaredAt": "packages/ui/src/components/command.tsx:171"
               },
               {
                 "name": "keywords",
                 "optional": true,
                 "type": "readonly string[]",
                 "doc": "额外的匹配词（别名、英文名、拼音），不显示。",
-                "declaredAt": "packages/ui/src/components/command.tsx:156"
+                "declaredAt": "packages/ui/src/components/command.tsx:167"
               },
               {
                 "name": "onSelect",
                 "optional": true,
                 "type": "(value: string) => void",
                 "doc": "被选中（Enter 或点击）时调用。",
-                "declaredAt": "packages/ui/src/components/command.tsx:158"
+                "declaredAt": "packages/ui/src/components/command.tsx:169"
               },
               {
                 "name": "shortcut",
                 "optional": true,
                 "type": "string | readonly string[]",
                 "doc": "快捷键的显示，不注册快捷键。数组按键逐个显示。",
-                "declaredAt": "packages/ui/src/components/command.tsx:162"
+                "declaredAt": "packages/ui/src/components/command.tsx:173"
               },
               {
                 "name": "value",
                 "optional": false,
                 "type": "string",
                 "doc": "命令的标识，也是默认参与匹配的文字；onSelect 收到它。",
-                "declaredAt": "packages/ui/src/components/command.tsx:154"
+                "declaredAt": "packages/ui/src/components/command.tsx:165"
               }
             ],
             "inheritedCount": 279,
@@ -13344,37 +13344,37 @@
             {
               "part": "CommandGroup",
               "prop": "children",
-              "declaredAt": "packages/ui/src/components/command.tsx:112"
+              "declaredAt": "packages/ui/src/components/command.tsx:116"
             },
             {
               "part": "CommandDialog",
               "prop": "defaultQuery",
-              "declaredAt": "packages/ui/src/components/command.tsx:64"
-            },
-            {
-              "part": "CommandDialog",
-              "prop": "filter",
-              "declaredAt": "packages/ui/src/components/command.tsx:61"
-            },
-            {
-              "part": "CommandDialog",
-              "prop": "onItemSelect",
               "declaredAt": "packages/ui/src/components/command.tsx:67"
             },
             {
               "part": "CommandDialog",
+              "prop": "filter",
+              "declaredAt": "packages/ui/src/components/command.tsx:64"
+            },
+            {
+              "part": "CommandDialog",
+              "prop": "onItemSelect",
+              "declaredAt": "packages/ui/src/components/command.tsx:70"
+            },
+            {
+              "part": "CommandDialog",
               "prop": "onQueryChange",
-              "declaredAt": "packages/ui/src/components/command.tsx:65"
+              "declaredAt": "packages/ui/src/components/command.tsx:68"
             },
             {
               "part": "CommandDialog",
               "prop": "popupClassName",
-              "declaredAt": "packages/ui/src/components/command.tsx:208"
+              "declaredAt": "packages/ui/src/components/command.tsx:219"
             },
             {
               "part": "CommandDialog",
               "prop": "query",
-              "declaredAt": "packages/ui/src/components/command.tsx:63"
+              "declaredAt": "packages/ui/src/components/command.tsx:66"
             }
           ]
         }
@@ -13696,6 +13696,7 @@
           "class-variance-authority",
           "clsx",
           "react",
+          "react-dom",
           "tailwind-merge"
         ],
         "optionalPeers": []
@@ -13709,7 +13710,7 @@
         "contexts": [
           {
             "name": "CountContext",
-            "declaredAt": "packages/ui/src/components/command.tsx:51",
+            "declaredAt": "packages/ui/src/components/command.tsx:52",
             "defaultValue": "0",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13718,7 +13719,7 @@
           },
           {
             "name": "GroupReport",
-            "declaredAt": "packages/ui/src/components/command.tsx:52",
+            "declaredAt": "packages/ui/src/components/command.tsx:55",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -13736,9 +13737,18 @@
           },
           {
             "name": "StateContext",
-            "declaredAt": "packages/ui/src/components/command.tsx:50",
+            "declaredAt": "packages/ui/src/components/command.tsx:51",
             "defaultValue": "null",
             "withoutProvider": "throws",
+            "providedBy": [
+              "Command"
+            ]
+          },
+          {
+            "name": "StatusSlotContext",
+            "declaredAt": "packages/ui/src/components/command.tsx:54",
+            "defaultValue": "null",
+            "withoutProvider": "nullable",
             "providedBy": [
               "Command"
             ]
@@ -13819,7 +13829,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/command.tsx",
-        "sha256": "d1f5f5fb0d95dea7c5314b09fd04d8299d0b7e700d4acdabc7936087e899cb7d",
+        "sha256": "c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "条目是命令（动作），不是填进输入框的值：选中只触发 onSelect，查询文字原样保留。全局快捷键（⌘K）由应用注册，库不监听按键。禁用项显示为不可用，但不参与高亮与方向键移动。",
@@ -17923,8 +17933,8 @@
             "@tanstack/react-table"
           ],
           "providers": [],
-          "code": "import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"列宽与完整文字\", titleEn: \"Column widths and complete text\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = [\n    { id: \"sensors\", label: english ? \"Connected devices — workshop and remote locations\" : \"接入设备——车间与远端站点的完整列表\", count: 12 },\n    { id: \"roles\", label: english ? \"Permissions and roles\" : \"权限与角色\", count: 8 },\n    { id: \"sync\", label: english ? \"Sync and export\" : \"同步与导出\", count: 0 },\n  ];\n  const columns: ColumnDef<Entry>[] = [{ id: \"collection\", header: english ? \"Local collection\" : \"本地集合\", columns: [\n    { accessorKey: \"label\", header: english ? \"Name\" : \"名称\", size: 240, minSize: 160, maxSize: 320, meta: { rowHeader: true, ellipsis: true } },\n    { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>{english ? \"Records\" : \"记录数\"}</DataTableSortButton>, size: 120, minSize: 100, sortDescFirst: false, meta: { numeric: true } },\n  ] }];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
-          "sha256": "38c9792fda803786431bc6920a241ff071a3755d7b3a63427bb691d79e894aeb"
+          "code": "import { getCoreRowModel, getSortedRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable, DataTableSortButton } from \"@qingye_lab/ui/components/data-table\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"列宽与完整文字\", titleEn: \"Column widths and complete text\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; count: number };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = [\n    { id: \"sensors\", label: english ? \"Connected devices — workshop and remote locations\" : \"接入设备——车间与远端站点的完整列表\", count: 12 },\n    { id: \"roles\", label: english ? \"Permissions and roles\" : \"权限与角色\", count: 8 },\n    { id: \"sync\", label: english ? \"Sync and export\" : \"同步与导出\", count: 0 },\n  ];\n  const columns: ColumnDef<Entry>[] = [{ id: \"collection\", header: english ? \"Local collection\" : \"本地集合\", columns: [\n    { accessorKey: \"label\", header: english ? \"Name\" : \"名称\", size: 240, minSize: 160, maxSize: 320, meta: { rowHeader: true, ellipsis: true } },\n    { accessorKey: \"count\", header: ({ column }) => <DataTableSortButton column={column}>{english ? \"Records\" : \"记录数\"}</DataTableSortButton>, size: 120, minSize: 100, sortDescFirst: false, meta: { numeric: true } },\n  ] }];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection (instance) · 3 entries\" : \"本地集合（实例）· 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
+          "sha256": "87ac98dd7e52e4a6ef8299006b990b138a6b93ce4cceb4273b18902f526f5870"
         },
         {
           "id": "window",
@@ -17971,8 +17981,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { DataTablePattern, type DataTablePatternColumn } from \"@qingye_lab/ui/components/data-table\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"刷新与失败\", titleEn: \"Refreshing and failure\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; labelEn: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", labelEn: \"Connected devices\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", labelEn: \"Permissions and roles\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", labelEn: \"Sync and export\", count: 0 },\n];\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const columns: DataTablePatternColumn<Entry>[] = [\n    { id: \"label\", header: english ? \"Name\" : \"名称\", accessor: row => english ? row.labelEn : row.label, rowHeader: true },\n    { id: \"count\", header: english ? \"Records\" : \"记录数\", accessor: row => row.count, numeric: true },\n  ];\n  // 请求由应用持有：这里用定时器代替，第一次刷新失败，第二次成功。\n  const [busy, setBusy] = React.useState(false);\n  const [failed, setFailed] = React.useState(false);\n  const attempts = React.useRef(0);\n  const refresh = () => {\n    setBusy(true); setFailed(false);\n    window.setTimeout(() => { setBusy(false); setFailed(attempts.current++ === 0); }, 1600);\n  };\n  return <Stack>\n    <Inline><Button variant=\"bordered\" onClick={refresh} disabled={busy}>{english ? \"Refresh\" : \"刷新\"}</Button></Inline>\n    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} busy={busy}\n      error={failed ? <Alert tone=\"danger\"><AlertDescription>{english ? \"Refresh failed. The rows below are from the last load.\" : \"刷新失败，下面是上次加载的数据。\"}<Button variant=\"quiet\" size=\"sm\" onClick={refresh}>{english ? \"Retry\" : \"重试\"}</Button></AlertDescription></Alert> : undefined} />\n  </Stack>;\n}\n",
-          "sha256": "708b047f470c992a26de43598af99dedc1f8752aa4bd413319a91986faea9ddf"
+          "code": "import * as React from \"react\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { DataTablePattern, type DataTablePatternColumn } from \"@qingye_lab/ui/components/data-table\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"刷新与失败\", titleEn: \"Refreshing and failure\" } satisfies DemoMeta;\n\ntype Entry = { id: string; label: string; labelEn: string; count: number };\nconst data: Entry[] = [\n  { id: \"sensors\", label: \"接入设备\", labelEn: \"Connected devices\", count: 12 },\n  { id: \"roles\", label: \"权限与角色\", labelEn: \"Permissions and roles\", count: 8 },\n  { id: \"sync\", label: \"同步与导出\", labelEn: \"Sync and export\", count: 0 },\n];\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const columns: DataTablePatternColumn<Entry>[] = [\n    { id: \"label\", header: english ? \"Name\" : \"名称\", accessor: row => english ? row.labelEn : row.label, rowHeader: true },\n    { id: \"count\", header: english ? \"Records\" : \"记录数\", accessor: row => row.count, numeric: true },\n  ];\n  // 请求由应用持有：这里用定时器代替，第一次刷新失败，第二次成功。\n  const [busy, setBusy] = React.useState(false);\n  const [failed, setFailed] = React.useState(false);\n  const attempts = React.useRef(0);\n  const refresh = () => {\n    setBusy(true); setFailed(false);\n    window.setTimeout(() => { setBusy(false); setFailed(attempts.current++ === 0); }, 1600);\n  };\n  return <Stack>\n    <Inline><Button variant=\"bordered\" onClick={refresh} disabled={busy}>{english ? \"Refresh\" : \"刷新\"}</Button></Inline>\n    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? \"Local collection (refresh) · 3 entries\" : \"本地集合（刷新）· 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} busy={busy}\n      error={failed ? <Alert tone=\"danger\"><AlertDescription>{english ? \"Refresh failed. The rows below are from the last load.\" : \"刷新失败，下面是上次加载的数据。\"}<Button variant=\"quiet\" size=\"sm\" onClick={refresh}>{english ? \"Retry\" : \"重试\"}</Button></AlertDescription></Alert> : undefined} />\n  </Stack>;\n}\n",
+          "sha256": "e9bfb989d3dad5574f761c7efa779286605b1d61e4b72940eb8952f755d29795"
         },
         {
           "id": "mixed-width",
@@ -17986,8 +17996,8 @@
             "@tanstack/react-table"
           ],
           "providers": [],
-          "code": "import { getCoreRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable } from \"@qingye_lab/ui/components/data-table\";\nimport { StatusDot, type StatusDotStatus } from \"@qingye_lab/ui/components/status-dot\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"定宽列与弹性列\", titleEn: \"Fixed and flexible columns\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; status: string; dot: StatusDotStatus; count: number; note: string };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = english ? [\n    { id: \"sensors\", name: \"Connected devices\", status: \"Online\", dot: \"online\", count: 12, note: \"Workshop sensors and the remote sites that report through the gateway.\" },\n    { id: \"roles\", name: \"Permissions and roles\", status: \"Draft\", dot: \"neutral\", count: 8, note: \"Who may view, edit and export each collection.\" },\n    { id: \"sync\", name: \"Sync and export\", status: \"Paused\", dot: \"neutral\", count: 0, note: \"Nightly export to the shared archive.\" },\n  ] : [\n    { id: \"sensors\", name: \"接入设备\", status: \"在线\", dot: \"online\", count: 12, note: \"车间传感器，以及经网关上报的远端站点。\" },\n    { id: \"roles\", name: \"权限与角色\", status: \"草稿\", dot: \"neutral\", count: 8, note: \"谁可以查看、编辑和导出各个集合。\" },\n    { id: \"sync\", name: \"同步与导出\", status: \"暂停\", dot: \"neutral\", count: 0, note: \"每晚导出到共享归档。\" },\n  ];\n  const columns: ColumnDef<Entry>[] = [\n    { accessorKey: \"status\", header: english ? \"Status\" : \"状态\", size: 96, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },\n    { accessorKey: \"name\", header: english ? \"Name\" : \"名称\", minSize: 160, meta: { rowHeader: true } },\n    { accessorKey: \"note\", header: english ? \"Description\" : \"描述\" },\n    { accessorKey: \"count\", header: english ? \"Records\" : \"记录数\", size: 96, meta: { numeric: true } },\n  ];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
-          "sha256": "9da31bca44b84d48c23615cca947d51007c1e30414121866c63cbc34e1af0705"
+          "code": "import { getCoreRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { DataTable } from \"@qingye_lab/ui/components/data-table\";\nimport { StatusDot, type StatusDotStatus } from \"@qingye_lab/ui/components/status-dot\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"定宽列与弹性列\", titleEn: \"Fixed and flexible columns\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; status: string; dot: StatusDotStatus; count: number; note: string };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = english ? [\n    { id: \"sensors\", name: \"Connected devices\", status: \"Online\", dot: \"online\", count: 12, note: \"Workshop sensors and the remote sites that report through the gateway.\" },\n    { id: \"roles\", name: \"Permissions and roles\", status: \"Draft\", dot: \"neutral\", count: 8, note: \"Who may view, edit and export each collection.\" },\n    { id: \"sync\", name: \"Sync and export\", status: \"Paused\", dot: \"neutral\", count: 0, note: \"Nightly export to the shared archive.\" },\n  ] : [\n    { id: \"sensors\", name: \"接入设备\", status: \"在线\", dot: \"online\", count: 12, note: \"车间传感器，以及经网关上报的远端站点。\" },\n    { id: \"roles\", name: \"权限与角色\", status: \"草稿\", dot: \"neutral\", count: 8, note: \"谁可以查看、编辑和导出各个集合。\" },\n    { id: \"sync\", name: \"同步与导出\", status: \"暂停\", dot: \"neutral\", count: 0, note: \"每晚导出到共享归档。\" },\n  ];\n  const columns: ColumnDef<Entry>[] = [\n    { accessorKey: \"status\", header: english ? \"Status\" : \"状态\", size: 96, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },\n    { accessorKey: \"name\", header: english ? \"Name\" : \"名称\", minSize: 160, meta: { rowHeader: true } },\n    { accessorKey: \"note\", header: english ? \"Description\" : \"描述\" },\n    { accessorKey: \"count\", header: english ? \"Records\" : \"记录数\", size: 96, meta: { numeric: true } },\n  ];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection (mixed widths) · 3 entries\" : \"本地集合（混合列宽）· 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
+          "sha256": "ddaa276a63d237e5943ab0c51a64633abababe1ebd405bfd4d13f8db8f288933"
         }
       ],
       "design": {
@@ -18538,8 +18548,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { DatePicker } from \"@qingye_lab/ui/components/date-picker\";\nimport { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\nfunction Picker() {\n  const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));\n  return <DatePicker value={value} onValueChange={setValue} />;\n}\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Picker />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "426adff3fd154c98ebc3f52258156f7fa1031c82fb26ae436418823a394611b2"
+          "code": "import { useState } from \"react\";\nimport { DatePicker } from \"@qingye_lab/ui/components/date-picker\";\nimport { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\nfunction Picker() {\n  const [value, setValue] = useState<Date | undefined>(new Date(2026, 9, 3));\n  return <DatePicker value={value} onValueChange={setValue} />;\n}\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Picker />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "bcf0965ec7718f56903ef1bf652c21233b01ca19cb445b311674028586cd56ff"
         },
         {
           "id": "bounds",
@@ -27688,8 +27698,8 @@
             "@qingye_lab/ui/components/input"
           ],
           "providers": [],
-          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 填值控件只有一套几何，紧凑密度收紧容器，不改值文字（用户裁决 2026-10-05）。\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Input name={`device-${density}`} defaultValue=\"3 号楼东侧摄像头\" />\n          </Field>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
-          "sha256": "3ff7603d5a02be0744692b11f4baabc9f84298f7cb13ba7cb0208ef4f7091ae4"
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 填值控件只有一套几何，紧凑密度收紧容器，不改值文字（用户裁决 2026-10-05）。\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Input name={`device-${density}`} defaultValue=\"3 号楼东侧摄像头\" />\n          </Field>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+          "sha256": "f5ae81174c223491690be874206ca5bdce70922e272813c02d10bdf33bdd3fd4"
         },
         {
           "id": "states",
@@ -33201,8 +33211,8 @@
             "@qingye_lab/ui/components/native-select"
           ],
           "providers": [],
-          "code": "import { Field, FieldControl, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NativeSelect } from \"@qingye_lab/ui/components/native-select\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <FieldControl defaultValue=\"one\" render={\n              <NativeSelect>\n                <option value=\"one\">按名称排序</option>\n                <option value=\"two\">按时间排序</option>\n              </NativeSelect>\n            } />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "bf0a49ad0479f4b991f8831e5c4d39f6beb3a46dbf636488b5d35a5733f32e94"
+          "code": "import { Field, FieldControl, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NativeSelect } from \"@qingye_lab/ui/components/native-select\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <FieldControl defaultValue=\"one\" render={\n              <NativeSelect>\n                <option value=\"one\">按名称排序</option>\n                <option value=\"two\">按时间排序</option>\n              </NativeSelect>\n            } />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "94e2222173149a5b7701a73b701017a6bc853a1e46dd8102d7f878394e8dcf21"
         },
         {
           "id": "list-and-disabled",
@@ -34659,8 +34669,8 @@
             "@qingye_lab/ui/components/number-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"并发上限\" : \"重试次数\"}</FieldLabel>\n            <NumberField defaultValue={3}>\n              <NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup>\n            </NumberField>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "36fab9924211f07e3bb33ee099872b36cd94cfb357e637aac4cc1d5f81d7e9d8"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"并发上限\" : \"重试次数\"}</FieldLabel>\n            <NumberField defaultValue={3}>\n              <NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup>\n            </NumberField>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "3f9fcdf8327d95c8484751df3b869af8652319a4ee183c6259b1129b868a69d0"
         }
       ],
       "design": {
@@ -35140,8 +35150,8 @@
             "@qingye_lab/ui/components/otp-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <OtpField length={4} defaultValue=\"01\" />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "111ad7d2134a6733f0c78f1e6391a235bd83d8461944e04ca2441bde20ee29ab"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <OtpField length={4} defaultValue=\"01\" />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "05cc4e1b75d0e60451a5beef1820ec2bf04b61f529e63fcd1ef9f1a18b1f42ce"
         }
       ],
       "design": {
@@ -36700,8 +36710,8 @@
             "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页码与每页条数\", titleEn: \"Pages and page size\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;\n}\n",
-          "sha256": "9ae49b516492532782080d7e8c00a9ad13ca26028cca2d22b8eac8865f6dd5c0"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页码与每页条数\", titleEn: \"Pages and page size\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern aria-label=\"分页：已知总数\" totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;\n}\n",
+          "sha256": "65847266caa11067ccbfd3be3d5f33ef83e23e0bde8b60c1f0dca2fc4d5d8eea"
         },
         {
           "id": "ellipsis",
@@ -36712,8 +36722,8 @@
             "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页数较多\", titleEn: \"Many pages\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;\n}\n",
-          "sha256": "d0ef656a2e6078f5f5acaad5e9de9121d5556acf5e09dd8d9dff7ccaca6260e9"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页数较多\", titleEn: \"Many pages\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern aria-label=\"分页：折叠的页码\" totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;\n}\n",
+          "sha256": "566e625e19eded37125719cabeea0d37df432e2aedbb0af2e3413304055388b6"
         },
         {
           "id": "unknown",
@@ -36724,8 +36734,8 @@
             "@qingye_lab/ui/components/pagination"
           ],
           "providers": [],
-          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"总数未知\", titleEn: \"Unknown total\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern totalCount={null} hasNextPage />;\n}\n",
-          "sha256": "7ba5d07208aeaf5d67854b4361849970a3541b6fdd4e8d61b045916c3fe6d25f"
+          "code": "import { PaginationPattern } from \"@qingye_lab/ui/components/pagination\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"总数未知\", titleEn: \"Unknown total\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <PaginationPattern aria-label=\"分页：总数未知\" totalCount={null} hasNextPage />;\n}\n",
+          "sha256": "7a334fad9cec538ff9ea3b398b6eb4ec6319c53ab547fa2594841f341b07cd54"
         }
       ],
       "design": {
@@ -44381,8 +44391,8 @@
             "@qingye_lab/ui/components/select"
           ],
           "providers": [],
-          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Select, SelectItem, SelectPopup, SelectTrigger } from \"@qingye_lab/ui/components/select\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\nconst options = [\n  { value: \"left\", label: \"左对齐\" },\n  { value: \"center\", label: \"居中\" },\n  { value: \"right\", label: \"右对齐\" },\n];\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Select items={options} defaultValue=\"center\">\n              <SelectTrigger />\n              <SelectPopup>\n                {options.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}\n              </SelectPopup>\n            </Select>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "31f4f0743115edae90ba6d6252d09b9ee5e6aa9f66ff4db3455f57b5ffb5e4e7"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Select, SelectItem, SelectPopup, SelectTrigger } from \"@qingye_lab/ui/components/select\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\nconst options = [\n  { value: \"left\", label: \"左对齐\" },\n  { value: \"center\", label: \"居中\" },\n  { value: \"right\", label: \"右对齐\" },\n];\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Select items={options} defaultValue=\"center\">\n              <SelectTrigger />\n              <SelectPopup>\n                {options.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}\n              </SelectPopup>\n            </Select>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "b1812a59c3d105e85f1c94fe27af7089181b273835cafac9d31d7cdc973998f0"
         },
         {
           "id": "states",
@@ -46714,8 +46724,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { IconDatabase, IconLayoutDashboard, IconSettings } from \"@tabler/icons-react\";\nimport { Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"窄屏：抽屉承载侧栏\", titleEn: \"Narrow screens: a drawer carries the sidebar\", flush: true } satisfies DemoMeta;\n\n// 窄屏（< 40rem）时侧栏进入抽屉，WorkspaceHeader 里出现打开它的按钮；更宽时就是原位的侧栏。\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const pages = [\n    { id: \"overview\", name: en ? \"Overview\" : \"概览\", icon: <IconLayoutDashboard aria-hidden=\"true\" /> },\n    { id: \"collections\", name: en ? \"Collections\" : \"集合\", icon: <IconDatabase aria-hidden=\"true\" /> },\n    { id: \"settings\", name: en ? \"Settings\" : \"设置\", icon: <IconSettings aria-hidden=\"true\" /> },\n  ];\n  const [page, setPage] = React.useState(\"collections\");\n  return <div className=\"h-[calc(20*var(--qy-cai))]\">\n    <Workspace>\n      <Sidebar drawer>\n        <SidebarHeader><SidebarTitle render={<h2 />}>{en ? \"Qingye\" : \"青野工作区\"}</SidebarTitle><SidebarToggle /></SidebarHeader>\n        <SidebarContent className=\"mt-(--qy-field-group-gap)\">\n          <SidebarGroup>\n            <SidebarGroupLabel>{en ? \"Pages\" : \"页面\"}</SidebarGroupLabel>\n            {pages.map(item => <SidebarLink key={item.id} render={<button type=\"button\" onClick={() => setPage(item.id)} />} active={page === item.id} icon={item.icon}>{item.name}</SidebarLink>)}\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader><SidebarDrawerTrigger /><WorkspaceTitle level={4}>{pages.find(item => item.id === page)?.name}</WorkspaceTitle></WorkspaceHeader>\n        <WorkspaceContent render={<div />} />\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
-          "sha256": "0238f91e863065c3a6de086cef8bcc4d6b5cf918a1cd89d996c2607742e8313c"
+          "code": "import * as React from \"react\";\nimport { IconDatabase, IconLayoutDashboard, IconSettings } from \"@tabler/icons-react\";\nimport { Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"窄屏：抽屉承载侧栏\", titleEn: \"Narrow screens: a drawer carries the sidebar\", flush: true } satisfies DemoMeta;\n\n// 窄屏（< 40rem）时侧栏进入抽屉，WorkspaceHeader 里出现打开它的按钮；更宽时就是原位的侧栏。\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const pages = [\n    { id: \"overview\", name: en ? \"Overview\" : \"概览\", icon: <IconLayoutDashboard aria-hidden=\"true\" /> },\n    { id: \"collections\", name: en ? \"Collections\" : \"集合\", icon: <IconDatabase aria-hidden=\"true\" /> },\n    { id: \"settings\", name: en ? \"Settings\" : \"设置\", icon: <IconSettings aria-hidden=\"true\" /> },\n  ];\n  const [page, setPage] = React.useState(\"collections\");\n  return <div className=\"h-[calc(20*var(--qy-cai))]\">\n    <Workspace>\n      <Sidebar drawer>\n        <SidebarHeader><SidebarTitle render={<h2 />}>{en ? \"Qingye\" : \"青野工作区\"}</SidebarTitle><SidebarToggle /></SidebarHeader>\n        <SidebarContent aria-label=\"窄屏侧栏导航\" className=\"mt-(--qy-field-group-gap)\">\n          <SidebarGroup>\n            <SidebarGroupLabel>{en ? \"Pages\" : \"页面\"}</SidebarGroupLabel>\n            {pages.map(item => <SidebarLink key={item.id} render={<button type=\"button\" onClick={() => setPage(item.id)} />} active={page === item.id} icon={item.icon}>{item.name}</SidebarLink>)}\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader><SidebarDrawerTrigger /><WorkspaceTitle level={3}>{pages.find(item => item.id === page)?.name}</WorkspaceTitle></WorkspaceHeader>\n        <WorkspaceContent render={<div />} />\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
+          "sha256": "4c15a508722088338f32fb177c3f98d7b867ed43832973b482f95341404f1644"
         },
         {
           "id": "levels",
@@ -46731,8 +46741,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { IconDatabase, IconSettings } from \"@tabler/icons-react\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger } from \"@qingye_lab/ui/components/sidebar\";\nimport { Tabs, TabsList, TabsPanel, TabsTab } from \"@qingye_lab/ui/components/tabs\";\nimport { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"二级导航与内容区 Tabs\", titleEn: \"Sub-level navigation with Tabs in the content\", flush: true } satisfies DemoMeta;\n\n// 侧栏到二级为止：第三级是「通知」这一页里的并列视角，放在内容区的 Tabs，不再往侧栏里缩。\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const t = (zh: string, enText: string) => en ? enText : zh;\n  const [page, setPage] = React.useState(\"notifications\");\n  const link = (id: string, name: string) => <SidebarLink render={<button type=\"button\" onClick={() => setPage(id)} />} active={page === id}>{name}</SidebarLink>;\n  return <div className=\"h-[calc(20*var(--qy-cai))]\">\n    <Workspace>\n      <Sidebar>\n        <SidebarContent>\n          <SidebarGroup>\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"collections\")} />} active={page === \"collections\"} icon={<IconDatabase aria-hidden=\"true\" />}>{t(\"集合\", \"Collections\")}</SidebarLink>\n            <SidebarSub defaultOpen>\n              <SidebarSubTrigger icon={<IconSettings aria-hidden=\"true\" />}>{t(\"设置\", \"Settings\")}</SidebarSubTrigger>\n              <SidebarSubContent>{link(\"account\", t(\"账户\", \"Account\"))}{link(\"notifications\", t(\"通知\", \"Notifications\"))}</SidebarSubContent>\n            </SidebarSub>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader><WorkspaceTitle level={4}>{page === \"account\" ? t(\"账户\", \"Account\") : page === \"notifications\" ? t(\"通知\", \"Notifications\") : t(\"集合\", \"Collections\")}</WorkspaceTitle></WorkspaceHeader>\n        <WorkspaceContent render={<div />} className=\"p-(--qy-page-gutter)\">\n          {page === \"notifications\" && <Tabs defaultValue=\"mail\">\n            <TabsList aria-label={t(\"通知渠道\", \"Channel\")}><TabsTab value=\"mail\">{t(\"邮件\", \"Email\")}</TabsTab><TabsTab value=\"push\">{t(\"推送\", \"Push\")}</TabsTab><TabsTab value=\"digest\">{t(\"摘要\", \"Digest\")}</TabsTab></TabsList>\n            <TabsPanel value=\"mail\">{t(\"邮件\", \"Email\")}</TabsPanel><TabsPanel value=\"push\">{t(\"推送\", \"Push\")}</TabsPanel><TabsPanel value=\"digest\">{t(\"摘要\", \"Digest\")}</TabsPanel>\n          </Tabs>}\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
-          "sha256": "38e92681bfd8f99dc9d40208f6fd1760dd6c5e93c4bca626073775be0b2196b4"
+          "code": "import * as React from \"react\";\nimport { IconDatabase, IconSettings } from \"@tabler/icons-react\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger } from \"@qingye_lab/ui/components/sidebar\";\nimport { Tabs, TabsList, TabsPanel, TabsTab } from \"@qingye_lab/ui/components/tabs\";\nimport { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"二级导航与内容区 Tabs\", titleEn: \"Sub-level navigation with Tabs in the content\", flush: true } satisfies DemoMeta;\n\n// 侧栏到二级为止：第三级是「通知」这一页里的并列视角，放在内容区的 Tabs，不再往侧栏里缩。\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const t = (zh: string, enText: string) => en ? enText : zh;\n  const [page, setPage] = React.useState(\"notifications\");\n  const link = (id: string, name: string) => <SidebarLink render={<button type=\"button\" onClick={() => setPage(id)} />} active={page === id}>{name}</SidebarLink>;\n  return <div className=\"h-[calc(20*var(--qy-cai))]\">\n    <Workspace>\n      <Sidebar>\n        <SidebarContent aria-label=\"两级侧栏导航\">\n          <SidebarGroup>\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"collections\")} />} active={page === \"collections\"} icon={<IconDatabase aria-hidden=\"true\" />}>{t(\"集合\", \"Collections\")}</SidebarLink>\n            <SidebarSub defaultOpen>\n              <SidebarSubTrigger icon={<IconSettings aria-hidden=\"true\" />}>{t(\"设置\", \"Settings\")}</SidebarSubTrigger>\n              <SidebarSubContent>{link(\"account\", t(\"账户\", \"Account\"))}{link(\"notifications\", t(\"通知\", \"Notifications\"))}</SidebarSubContent>\n            </SidebarSub>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader><WorkspaceTitle level={4}>{page === \"account\" ? t(\"账户\", \"Account\") : page === \"notifications\" ? t(\"通知\", \"Notifications\") : t(\"集合\", \"Collections\")}</WorkspaceTitle></WorkspaceHeader>\n        <WorkspaceContent render={<div />} className=\"p-(--qy-page-gutter)\">\n          {page === \"notifications\" && <Tabs defaultValue=\"mail\">\n            <TabsList aria-label={t(\"通知渠道\", \"Channel\")}><TabsTab value=\"mail\">{t(\"邮件\", \"Email\")}</TabsTab><TabsTab value=\"push\">{t(\"推送\", \"Push\")}</TabsTab><TabsTab value=\"digest\">{t(\"摘要\", \"Digest\")}</TabsTab></TabsList>\n            <TabsPanel value=\"mail\">{t(\"邮件\", \"Email\")}</TabsPanel><TabsPanel value=\"push\">{t(\"推送\", \"Push\")}</TabsPanel><TabsPanel value=\"digest\">{t(\"摘要\", \"Digest\")}</TabsPanel>\n          </Tabs>}\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
+          "sha256": "823bcea1f31c7056f71872a1b18d4d54b73c46719d79373c68690d555db367fe"
         }
       ],
       "design": {
@@ -48037,8 +48047,8 @@
             "@qingye_lab/ui/components/slider"
           ],
           "providers": [],
-          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from \"@qingye_lab/ui/components/slider\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nconst control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>;\n\n// 滑块的工作高度跟随填值控件角色层；抓手跟随标签文字，密度不改它。\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-section-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Slider defaultValue={50}><div className=\"flex items-center justify-between gap-(--qy-field-gap)\"><SliderValue /></div>{control}</Slider>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "295517857e0147b833038979e3134ada0943461b89354aa033bd51dbda49be9e"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Slider, SliderControl, SliderTrack, SliderIndicator, SliderThumb, SliderValue } from \"@qingye_lab/ui/components/slider\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nconst control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></SliderTrack></SliderControl>;\n\n// 滑块的工作高度跟随填值控件角色层；抓手跟随标签文字，密度不改它。\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-section-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Slider defaultValue={50}><div className=\"flex items-center justify-between gap-(--qy-field-gap)\"><SliderValue /></div>{control}</Slider>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "7ca2926170f3a652d4bcfa4f8b716f8a3bb18a9db854e7ebf2dfd7a1915dbc2a"
         },
         {
           "id": "exact",
@@ -52462,8 +52472,8 @@
             "@qingye_lab/ui/components/tag-input"
           ],
           "providers": [],
-          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TagInput } from \"@qingye_lab/ui/components/tag-input\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <TagInput defaultValue={[\"前端\", \"设计\"]} />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
-          "sha256": "9efa6173fec3efddc017554a6a0dfdf4f0ec20cc149381f8779f172d580ebaf9"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TagInput } from \"@qingye_lab/ui/components/tag-input\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <TagInput defaultValue={[\"前端\", \"设计\"]} />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "94a304aff3928b553d7266b8180e8efa863cc89e8da1fba1b8e7afb02e51660c"
         },
         {
           "id": "rules",
@@ -52923,8 +52933,8 @@
             "@qingye_lab/ui/components/textarea"
           ],
           "providers": [],
-          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 多行编辑的高度由 rows 与内容决定，密度只收紧容器与内边距。\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Textarea rows={3} defaultValue={\"第一行文字。\\n第二行文字。\"} />\n          </Field>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
-          "sha256": "deb5d0a23e49504d34c7e30d4d49743e27596483be20b8ab1eeb337c0fa7f313"
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\n// 多行编辑的高度由 rows 与内容决定，密度只收紧容器与内边距。\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Textarea rows={3} defaultValue={\"第一行文字。\\n第二行文字。\"} />\n          </Field>\n        </div>\n      ))}\n    </div>\n  );\n}\n",
+          "sha256": "7ff0981e2108a096b39b76cabd0641f802c622f5ff05ca621b72e1409b3d85d8"
         }
       ],
       "design": {
@@ -55185,7 +55195,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/toast.tsx",
-        "sha256": "7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab",
+        "sha256": "b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "通知不抢焦点。未知表示结果未确认，失败表示已有失败事实；关闭只关闭通知。字段错误、不可逆后果和需决策的失败留在工作面或确认结构，不能只用 Toast。",
@@ -55691,8 +55701,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { Toc, useTocHeadings, useTocScrollSpy } from \"@qingye_lab/ui/components/toc\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport * as React from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"随滚动更新当前项\", titleEn: \"Updates the current item as the reader scrolls\" } satisfies DemoMeta;\n\nconst sections = [\n  { id: \"demo-install\", level: 2 as const, title: \"安装\", body: \"用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。\" },\n  { id: \"demo-styles\", level: 3 as const, title: \"引入样式\", body: \"在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。\" },\n  { id: \"demo-theme\", level: 3 as const, title: \"明暗与品牌\", body: \"ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。\" },\n  { id: \"demo-density\", level: 2 as const, title: \"密度\", body: \"在容器上写 data-density=\\\"compact\\\"，其中的控件与间距一起收紧，字号不变。\" },\n];\n\nexport default function Demo() {\n  const containerRef = React.useRef<HTMLDivElement>(null);\n  const headings = useTocHeadings(containerRef);\n  const current = useTocScrollSpy(headings, { container: containerRef });\n  return <Inline gap=\"panel\" align=\"start\">\n    <Toc items={headings} current={current} className=\"w-40 shrink-0\" />\n    <ScrollArea ref={containerRef} role=\"region\" aria-label=\"接入说明\" className=\"h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)\">\n      {sections.map((section) => {\n        const Heading = section.level === 2 ? \"h2\" : \"h3\";\n        return <section key={section.id} className=\"mb-(--qy-field-group-gap)\">\n          <Heading id={section.id} className=\"m-0 mb-(--qy-field-gap) text-heading text-foreground\">{section.title}</Heading>\n          <p className=\"m-0 text-body text-foreground\">{section.body}</p>\n        </section>;\n      })}\n    </ScrollArea>\n  </Inline>;\n}\n",
-          "sha256": "d4f1ff0db249e45771bd770caf3081d56f7a3a59bb0b0e81263ce0c97069d915"
+          "code": "import { Toc, useTocHeadings, useTocScrollSpy } from \"@qingye_lab/ui/components/toc\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport * as React from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"随滚动更新当前项\", titleEn: \"Updates the current item as the reader scrolls\" } satisfies DemoMeta;\n\nconst sections = [\n  { id: \"demo-install\", level: 2 as const, title: \"安装\", body: \"用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。\" },\n  { id: \"demo-styles\", level: 3 as const, title: \"引入样式\", body: \"在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。\" },\n  { id: \"demo-theme\", level: 3 as const, title: \"明暗与品牌\", body: \"ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。\" },\n  { id: \"demo-density\", level: 2 as const, title: \"密度\", body: \"在容器上写 data-density=\\\"compact\\\"，其中的控件与间距一起收紧，字号不变。\" },\n];\n\nexport default function Demo() {\n  const containerRef = React.useRef<HTMLDivElement>(null);\n  const headings = useTocHeadings(containerRef);\n  const current = useTocScrollSpy(headings, { container: containerRef });\n  return <Inline gap=\"panel\" align=\"start\">\n    <Toc aria-label=\"示例文章目录\" items={headings} current={current} className=\"w-40 shrink-0\" />\n    <ScrollArea ref={containerRef} role=\"region\" aria-label=\"接入说明\" className=\"h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)\">\n      {sections.map((section) => {\n        const Heading = section.level === 2 ? \"h2\" : \"h3\";\n        return <section key={section.id} className=\"mb-(--qy-field-group-gap)\">\n          <Heading id={section.id} className=\"m-0 mb-(--qy-field-gap) text-heading text-foreground\">{section.title}</Heading>\n          <p className=\"m-0 text-body text-foreground\">{section.body}</p>\n        </section>;\n      })}\n    </ScrollArea>\n  </Inline>;\n}\n",
+          "sha256": "c7c59d166aa9bf5e6cf3d00dccb4670de16f4842445c1ffe452afed22716b9d6"
         },
         {
           "id": "explicit-items",
@@ -60997,8 +61007,8 @@
             "@tabler/icons-react"
           ],
           "providers": [],
-          "code": "import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from \"@tabler/icons-react\";\nimport { useMediaQuery } from \"@qingye_lab/ui/hooks/use-media-query\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Section, SectionHeader, SectionTitle } from \"@qingye_lab/ui/components/section\";\nimport { Separator } from \"@qingye_lab/ui/components/separator\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"侧栏、顶栏与内容\", titleEn: \"Sidebar, header and content\", flush: true } satisfies DemoMeta;\n\nconst SYNCED = [{ name: \"蚕室温湿度\", time: \"今天 08:30\" }, { name: \"桑园采叶记录\", time: \"今天 07:55\" }, { name: \"上簇批次\", time: \"昨天 17:12\" }, { name: \"茧质抽检\", time: \"昨天 15:40\" }];\nconst PENDING = [{ name: \"饲料入库单\", time: \"10 月 11 日\" }, { name: \"消毒记录\", time: \"10 月 10 日\" }];\n\nexport default function Demo() {\n  const narrow = useMediaQuery(\"max-sm\");\n  // 演示框的高度只为让外壳在示例里可见；应用里 Workspace 填满它所在容器的高度。\n  return <div className=\"h-[calc(24*var(--qy-cai))]\">\n    <Workspace className=\"max-sm:flex-col\">\n      <Sidebar aria-label=\"工作区\" collapsed={narrow} className=\"w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full\">\n        <SidebarHeader className=\"max-sm:hidden\"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>\n        <SidebarContent className=\"mt-(--qy-field-group-gap) max-sm:mt-0\">\n          <SidebarGroup className=\"max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]\">\n            <SidebarLink href=\"#overview\" icon={<IconLayoutDashboard aria-hidden=\"true\" />}>概览</SidebarLink>\n            <SidebarLink href=\"#collections\" active icon={<IconDatabase aria-hidden=\"true\" />}>集合</SidebarLink>\n            <SidebarLink href=\"#tasks\" icon={<IconChecklist aria-hidden=\"true\" />}>任务</SidebarLink>\n            <SidebarLink href=\"#settings\" icon={<IconSettings aria-hidden=\"true\" />}>设置</SidebarLink>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader className=\"max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)\">\n          <WorkspaceTitle level={4}>集合</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">6 个，2 个未同步</WorkspaceSummary>\n          <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button variant=\"bordered\">导入</Button><Button>新建集合</Button></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={<div />}>\n          <Stack gap=\"section\" className=\"p-(--qy-page-gutter)\">\n            <Section>\n              <SectionHeader><SectionTitle>未同步 <span className=\"numeric text-muted-foreground\">{PENDING.length}</span></SectionTitle></SectionHeader>\n              {PENDING.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}\n            </Section>\n            <Separator />\n            <Section>\n              <SectionHeader><SectionTitle>已同步 <span className=\"numeric text-muted-foreground\">{SYNCED.length}</span></SectionTitle></SectionHeader>\n              {SYNCED.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}\n            </Section>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
-          "sha256": "0cd09cfd7f05bc979cf55911f17e6a3fa8af6d6b8c0a4f808438b6a797117da3"
+          "code": "import { IconChecklist, IconDatabase, IconLayoutDashboard, IconSettings } from \"@tabler/icons-react\";\nimport { useMediaQuery } from \"@qingye_lab/ui/hooks/use-media-query\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Section, SectionHeader, SectionTitle } from \"@qingye_lab/ui/components/section\";\nimport { Separator } from \"@qingye_lab/ui/components/separator\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"侧栏、顶栏与内容\", titleEn: \"Sidebar, header and content\", flush: true } satisfies DemoMeta;\n\nconst SYNCED = [{ name: \"蚕室温湿度\", time: \"今天 08:30\" }, { name: \"桑园采叶记录\", time: \"今天 07:55\" }, { name: \"上簇批次\", time: \"昨天 17:12\" }, { name: \"茧质抽检\", time: \"昨天 15:40\" }];\nconst PENDING = [{ name: \"饲料入库单\", time: \"10 月 11 日\" }, { name: \"消毒记录\", time: \"10 月 10 日\" }];\n\nexport default function Demo() {\n  const narrow = useMediaQuery(\"max-sm\");\n  // 演示框的高度只为让外壳在示例里可见；应用里 Workspace 填满它所在容器的高度。\n  return <div className=\"h-[calc(24*var(--qy-cai))]\">\n    <Workspace className=\"max-sm:flex-col\">\n      <Sidebar aria-label=\"工作区\" collapsed={narrow} className=\"w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full\">\n        <SidebarHeader className=\"max-sm:hidden\"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>\n        <SidebarContent aria-label=\"外壳示例导航\" className=\"mt-(--qy-field-group-gap) max-sm:mt-0\">\n          <SidebarGroup className=\"max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]\">\n            <SidebarLink href=\"#overview\" icon={<IconLayoutDashboard aria-hidden=\"true\" />}>概览</SidebarLink>\n            <SidebarLink href=\"#collections\" active icon={<IconDatabase aria-hidden=\"true\" />}>集合</SidebarLink>\n            <SidebarLink href=\"#tasks\" icon={<IconChecklist aria-hidden=\"true\" />}>任务</SidebarLink>\n            <SidebarLink href=\"#settings\" icon={<IconSettings aria-hidden=\"true\" />}>设置</SidebarLink>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader className=\"max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)\">\n          <WorkspaceTitle level={4}>集合</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">6 个，2 个未同步</WorkspaceSummary>\n          <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button variant=\"bordered\">导入</Button><Button>新建集合</Button></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={<div />}>\n          <Stack gap=\"section\" className=\"p-(--qy-page-gutter)\">\n            <Section>\n              <SectionHeader><SectionTitle>未同步 <span className=\"numeric text-muted-foreground\">{PENDING.length}</span></SectionTitle></SectionHeader>\n              {PENDING.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}\n            </Section>\n            <Separator />\n            <Section>\n              <SectionHeader><SectionTitle>已同步 <span className=\"numeric text-muted-foreground\">{SYNCED.length}</span></SectionTitle></SectionHeader>\n              {SYNCED.map(item => <Item key={item.name}><ItemContent><ItemTitle>{item.name}</ItemTitle><ItemDescription>{item.time}</ItemDescription></ItemContent></Item>)}\n            </Section>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
+          "sha256": "47f07d3e844d9fcc9059a7c49b101069dd3195398c8c7253ef9e4554f88403c7"
         },
         {
           "id": "page-slot",
@@ -61015,8 +61025,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import * as React from \"react\";\nimport { IconDatabase, IconUsers } from \"@tabler/icons-react\";\nimport { useMediaQuery } from \"@qingye_lab/ui/hooks/use-media-query\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceHeaderPortal, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页面把标题与操作送进顶栏\", titleEn: \"A page sends its title and actions to the header\", flush: true } satisfies DemoMeta;\n\nfunction Collections() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>集合</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">6 个</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button>新建集合</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>蚕室温湿度</ItemTitle><ItemDescription>今天 08:30</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>桑园采叶记录</ItemTitle><ItemDescription>今天 07:55</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nfunction Members() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>成员</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">4 人</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button variant=\"quiet\">导出</Button><Button>邀请成员</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>陈致远</ItemTitle><ItemDescription>管理员</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>林晚</ItemTitle><ItemDescription>编辑</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nexport default function Demo() {\n  const [page, setPage] = React.useState<\"collections\" | \"members\">(\"collections\");\n  const narrow = useMediaQuery(\"max-sm\");\n  return <div className=\"h-[calc(16*var(--qy-cai))]\">\n    <Workspace className=\"max-sm:flex-col\">\n      <Sidebar aria-label=\"工作区\" collapsed={narrow} className=\"w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full\">\n        <SidebarContent>\n          <SidebarGroup className=\"max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]\">\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"collections\")} />} active={page === \"collections\"} icon={<IconDatabase aria-hidden=\"true\" />}>集合</SidebarLink>\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"members\")} />} active={page === \"members\"} icon={<IconUsers aria-hidden=\"true\" />}>成员</SidebarLink>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader className=\"max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)\" />\n        <WorkspaceContent render={<div />}>{page === \"collections\" ? <Collections /> : <Members />}</WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
-          "sha256": "61c962bf61ffce8d4c7a1bbdb3b8d5c2aa40588495bea69d33bb9a14ae2c5e9a"
+          "code": "import * as React from \"react\";\nimport { IconDatabase, IconUsers } from \"@tabler/icons-react\";\nimport { useMediaQuery } from \"@qingye_lab/ui/hooks/use-media-query\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Sidebar, SidebarContent, SidebarGroup, SidebarLink } from \"@qingye_lab/ui/components/sidebar\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceHeaderPortal, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"页面把标题与操作送进顶栏\", titleEn: \"A page sends its title and actions to the header\", flush: true } satisfies DemoMeta;\n\nfunction Collections() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>集合</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">6 个</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button>新建集合</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>蚕室温湿度</ItemTitle><ItemDescription>今天 08:30</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>桑园采叶记录</ItemTitle><ItemDescription>今天 07:55</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nfunction Members() {\n  return <>\n    <WorkspaceHeaderPortal>\n      <WorkspaceTitle level={4}>成员</WorkspaceTitle>\n      <WorkspaceSummary className=\"max-sm:hidden\">4 人</WorkspaceSummary>\n      <WorkspaceActions className=\"max-sm:basis-full max-sm:flex-wrap\"><Button variant=\"quiet\">导出</Button><Button>邀请成员</Button></WorkspaceActions>\n    </WorkspaceHeaderPortal>\n    <div className=\"p-(--qy-page-gutter)\">\n      <Item><ItemContent><ItemTitle>陈致远</ItemTitle><ItemDescription>管理员</ItemDescription></ItemContent></Item>\n      <Item><ItemContent><ItemTitle>林晚</ItemTitle><ItemDescription>编辑</ItemDescription></ItemContent></Item>\n    </div>\n  </>;\n}\n\nexport default function Demo() {\n  const [page, setPage] = React.useState<\"collections\" | \"members\">(\"collections\");\n  const narrow = useMediaQuery(\"max-sm\");\n  return <div className=\"h-[calc(16*var(--qy-cai))]\">\n    <Workspace className=\"max-sm:flex-col\">\n      <Sidebar aria-label=\"工作区\" collapsed={narrow} className=\"w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full\">\n        <SidebarContent aria-label=\"页面插槽示例导航\">\n          <SidebarGroup className=\"max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]\">\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"collections\")} />} active={page === \"collections\"} icon={<IconDatabase aria-hidden=\"true\" />}>集合</SidebarLink>\n            <SidebarLink render={<button type=\"button\" onClick={() => setPage(\"members\")} />} active={page === \"members\"} icon={<IconUsers aria-hidden=\"true\" />}>成员</SidebarLink>\n          </SidebarGroup>\n        </SidebarContent>\n      </Sidebar>\n      <WorkspaceSurface>\n        <WorkspaceHeader className=\"max-sm:h-auto max-sm:flex-wrap max-sm:gap-y-(--qy-field-gap) max-sm:py-(--qy-field-gap)\" />\n        <WorkspaceContent render={<div />}>{page === \"collections\" ? <Collections /> : <Members />}</WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n",
+          "sha256": "d0bf6888d262c78c0f013ae8b9171a6f799b2a1bfacb7f272ea02037bf540dde"
         },
         {
           "id": "records",
@@ -61036,8 +61046,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useMemo, useState } from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from \"@qingye_lab/ui/components/description-list\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\n\nexport const meta = { title: \"列表与详情\", titleEn: \"List and detail\", flush: true } satisfies DemoMeta;\n\ntype RecordItem = { id: string; name: string; owner: string; count: number; updated: string };\nconst records: RecordItem[] = Array.from({ length: 36 }, (_, index) => ({\n  id: `record-${index + 1}`,\n  name: index === 0 ? \"桑园采叶与跨区域运输交接记录（含东区、西区及临时库房的长名称核对）\" : `${[\"蚕室温湿度\", \"桑园采叶\", \"上簇批次\", \"茧质抽检\", \"饲料入库\", \"消毒巡检\"][index % 6]} · ${index + 1} 号`,\n  owner: [\"陈致远\", \"林晚\", \"周禾\"][index % 3]!, count: 120 + index * 17, updated: `今天 ${String(8 + index % 3).padStart(2, \"0\")}:${String(index % 60).padStart(2, \"0\")}`,\n}));\nconst columns: DataTablePatternColumn<RecordItem>[] = [\n  { id: \"name\", header: \"记录\", accessor: row => row.name, rowHeader: true, sortable: true, cell: row => <span className=\"text-start whitespace-normal wrap-anywhere\">{row.name}</span> },\n  { id: \"owner\", header: \"负责人\", accessor: row => row.owner },\n  { id: \"count\", header: \"条目\", accessor: row => row.count, numeric: true, sortable: true },\n  { id: \"updated\", header: \"更新时间\", accessor: row => row.updated, cell: row => <span className=\"whitespace-nowrap text-muted-foreground\">{row.updated}</span> },\n];\nconst initialState: DataTablePatternState = { sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: records[0]!.id };\n\n/**\n * 可复制的应用组合：Header 固定，WorkspaceContent 是唯一纵向滚动 owner；\n * 表格只拥有横向溢出。详情随页面滚动，不再建立一组嵌套的纵向滚动区。\n * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是\n * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。\n */\nexport function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {\n  const [query, setQuery] = useState(\"\");\n  const [state, setState] = useState(initialState);\n  const [details, setDetails] = useState(true);\n  const [compact, setCompact] = useState(false);\n  const [drafts, setDrafts] = useState<Record<string, string>>({});\n  const filtered = useMemo(() => records.filter(row => row.name.includes(query.trim()) || row.owner.includes(query.trim())), [query]);\n  const active = records.find(row => row.id === state.activeRowId);\n  const selectedCount = Object.values(state.rowSelection).filter(Boolean).length;\n  return <div className={embedded ? \"h-[calc(30*var(--qy-cai))]\" : \"h-full\"} data-density={compact ? \"compact\" : \"default\"}>\n    <Workspace>\n      <WorkspaceSurface>\n        <WorkspaceHeader render={embedded ? <div /> : <header />} className=\"h-auto min-h-(--qy-row-default) flex-wrap gap-y-(--qy-field-gap) py-(--qy-field-gap)\">\n          <WorkspaceTitle level={embedded ? 3 : 1}>采集记录</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>\n          <WorkspaceActions className=\"flex-wrap\"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={embedded ? <div /> : <main />} id={embedded ? undefined : \"main\"}>\n          <Stack gap=\"panel\" className=\"p-(--qy-page-gutter)\">\n            <Inline gap=\"panel\"><SearchInput aria-label=\"搜索采集记录\" placeholder=\"搜索记录或负责人\" value={query} onValueChange={next => {\n              setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));\n            }} controlClassName=\"w-full sm:max-w-[calc(16*var(--qy-cai))]\" /><span className=\"text-support text-muted-foreground\">已选 {selectedCount} 份（含其他页）</span></Inline>\n            <div className={details ? \"grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\" : \"min-w-0\"}>\n              <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}\n                pagination={{ pageSizeOptions: [10, 20, 50], \"aria-label\": \"采集记录分页\" }}\n                selection={{ label: \"选择本页记录\", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: \"name\" }}\n                tableProps={{ \"aria-label\": \"采集记录\", className: \"min-w-[calc(32*var(--qy-cai))]\", containerProps: { framed: false } }}\n                emptyContent={<span className=\"text-muted-foreground\">没有匹配的记录</span>} />\n              {details && active && <Stack render={<aside aria-label=\"记录详情\" lang=\"zh-CN\" />} gap=\"panel\">\n                <h2 className=\"m-0 text-heading wrap-anywhere\">{active.name}</h2>\n                {!filtered.some(row => row.id === active.id) && <Alert tone=\"info\"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}\n                <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className=\"numeric\">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>\n                <Field><FieldLabel>本地备注</FieldLabel><Textarea value={drafts[active.id] ?? \"\"} onValueChange={next => setDrafts(previous => ({ ...previous, [active.id]: next }))} placeholder=\"写下待核对事项\" /></Field>\n                <p className=\"m-0 text-support text-muted-foreground\">备注仅保留在当前页面，离开页面后清除。</p>\n              </Stack>}\n            </div>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n\nexport default function Demo() { return <><RecordsWorkspace embedded /><p className=\"m-0 p-(--qy-panel-padding-sm) text-support\"><a href=\"/examples/records\" className=\"text-foreground underline underline-offset-4\">打开完整工作台</a></p></>; }\n",
-          "sha256": "fb6fa1c71be7220c2f19f57b31db3696eae620631158f97ac51ab6250355a1e4"
+          "code": "import { useMemo, useState } from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from \"@qingye_lab/ui/components/description-list\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\n\nexport const meta = { title: \"列表与详情\", titleEn: \"List and detail\", flush: true } satisfies DemoMeta;\n\ntype RecordItem = { id: string; name: string; owner: string; count: number; updated: string };\nconst records: RecordItem[] = Array.from({ length: 36 }, (_, index) => ({\n  id: `record-${index + 1}`,\n  name: index === 0 ? \"桑园采叶与跨区域运输交接记录（含东区、西区及临时库房的长名称核对）\" : `${[\"蚕室温湿度\", \"桑园采叶\", \"上簇批次\", \"茧质抽检\", \"饲料入库\", \"消毒巡检\"][index % 6]} · ${index + 1} 号`,\n  owner: [\"陈致远\", \"林晚\", \"周禾\"][index % 3]!, count: 120 + index * 17, updated: `今天 ${String(8 + index % 3).padStart(2, \"0\")}:${String(index % 60).padStart(2, \"0\")}`,\n}));\nconst columns: DataTablePatternColumn<RecordItem>[] = [\n  { id: \"name\", header: \"记录\", accessor: row => row.name, rowHeader: true, sortable: true, cell: row => <span className=\"text-start whitespace-normal wrap-anywhere\">{row.name}</span> },\n  { id: \"owner\", header: \"负责人\", accessor: row => row.owner },\n  { id: \"count\", header: \"条目\", accessor: row => row.count, numeric: true, sortable: true },\n  { id: \"updated\", header: \"更新时间\", accessor: row => row.updated, cell: row => <span className=\"whitespace-nowrap text-muted-foreground\">{row.updated}</span> },\n];\nconst initialState: DataTablePatternState = { sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: records[0]!.id };\n\n/**\n * 可复制的应用组合：Header 固定，WorkspaceContent 是唯一纵向滚动 owner；\n * 表格只拥有横向溢出。详情随页面滚动，不再建立一组嵌套的纵向滚动区。\n * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是\n * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。\n */\n/**\n * embedded：放在文档页的演示里（标题降为 h3、高度固定、不立地标）。\n * insideMain：放在站点的示例查看页里——外层已有 <main>，内容区改用 div，标题仍是 h1、高度铺满。\n */\nexport function RecordsWorkspace({ embedded = false, insideMain = false }: { embedded?: boolean; insideMain?: boolean }) {\n  const [query, setQuery] = useState(\"\");\n  const [state, setState] = useState(initialState);\n  const [details, setDetails] = useState(true);\n  const [compact, setCompact] = useState(false);\n  const [drafts, setDrafts] = useState<Record<string, string>>({});\n  const filtered = useMemo(() => records.filter(row => row.name.includes(query.trim()) || row.owner.includes(query.trim())), [query]);\n  const active = records.find(row => row.id === state.activeRowId);\n  const selectedCount = Object.values(state.rowSelection).filter(Boolean).length;\n  return <div className={embedded ? \"h-[calc(30*var(--qy-cai))]\" : \"h-full\"} data-density={compact ? \"compact\" : \"default\"}>\n    <Workspace>\n      <WorkspaceSurface>\n        <WorkspaceHeader render={embedded ? <div /> : <header />} className=\"h-auto min-h-(--qy-row-default) flex-wrap gap-y-(--qy-field-gap) py-(--qy-field-gap)\">\n          <WorkspaceTitle level={embedded ? 3 : 1}>采集记录</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>\n          <WorkspaceActions className=\"flex-wrap\"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={embedded || insideMain ? <div /> : <main />} id={embedded || insideMain ? undefined : \"main\"}>\n          <Stack gap=\"panel\" className=\"p-(--qy-page-gutter)\">\n            <Inline gap=\"panel\"><SearchInput aria-label=\"搜索采集记录\" placeholder=\"搜索记录或负责人\" value={query} onValueChange={next => {\n              setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));\n            }} controlClassName=\"w-full sm:max-w-[calc(16*var(--qy-cai))]\" /><span className=\"text-support text-muted-foreground\">已选 {selectedCount} 份（含其他页）</span></Inline>\n            <div className={details ? \"grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\" : \"min-w-0\"}>\n              <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}\n                pagination={{ pageSizeOptions: [10, 20, 50], \"aria-label\": \"采集记录分页\" }}\n                selection={{ label: \"选择本页记录\", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: \"name\" }}\n                tableProps={{ \"aria-label\": \"采集记录\", className: \"min-w-[calc(32*var(--qy-cai))]\", containerProps: { framed: false } }}\n                emptyContent={<span className=\"text-muted-foreground\">没有匹配的记录</span>} />\n              {details && active && <Stack render={<aside aria-label=\"记录详情\" lang=\"zh-CN\" />} gap=\"panel\">\n                <h2 className=\"m-0 text-heading wrap-anywhere\">{active.name}</h2>\n                {!filtered.some(row => row.id === active.id) && <Alert tone=\"info\"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}\n                <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className=\"numeric\">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>\n                <Field><FieldLabel>本地备注</FieldLabel><Textarea value={drafts[active.id] ?? \"\"} onValueChange={next => setDrafts(previous => ({ ...previous, [active.id]: next }))} placeholder=\"写下待核对事项\" /></Field>\n                <p className=\"m-0 text-support text-muted-foreground\">备注仅保留在当前页面，离开页面后清除。</p>\n              </Stack>}\n            </div>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n\nexport default function Demo() { return <><RecordsWorkspace embedded /><p className=\"m-0 p-(--qy-panel-padding-sm) text-support\"><a href=\"/examples/records\" className=\"text-foreground underline underline-offset-4\">打开完整工作台</a></p></>; }\n",
+          "sha256": "7491d51f66c62afc83cf271670d0b77f8d3fa3e22c7ee70964d5fec18f77fc66"
         }
       ],
       "design": {

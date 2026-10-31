@@ -161,7 +161,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
+  return <PaginationPattern aria-label="分页：已知总数" totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
 }
 ```
 
@@ -174,7 +174,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页数较多", titleEn: "Many pages" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;
+  return <PaginationPattern aria-label="分页：折叠的页码" totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;
 }
 ```
 
@@ -187,6 +187,6 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={null} hasNextPage />;
+  return <PaginationPattern aria-label="分页：总数未知" totalCount={null} hasNextPage />;
 }
 ```

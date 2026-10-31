@@ -83,6 +83,10 @@
   /* 每个直接子块（原生的或组件）之后留块间距；最后一个不留。零特异性：下面每条元素规则都能盖过它。 */
   :where([data-slot="prose"]) > * { margin-bottom: var(--qy-field-group-gap); }
   :where([data-slot="prose"]) > :last-child { margin-bottom: 0; }
+  /* 两端对齐的中文段落里，一段长代码（路径、属性）没有断行处，会整段掉到下一行，上一行的字被撑开成「命 名 、 间 距」。
+   * 汉字本来逐字可断，代码在这里也逐字可断，行尾填满，不再撑开字距。只在两端对齐的中文段落里这样做；西文段落照常按词断。
+   * 单独成条而不写进下面的元素规则：那里排除带 data-slot 的组件，而正文里的代码多是库的 Code（data-slot="code"）。 */
+  :where([data-slot="prose"] p:lang(zh):not(header > *)) code { word-break: break-all; }
 
   :where(
     :is(
@@ -111,6 +115,7 @@
       @apply text-justify;
       line-break: strict;
     }
+
 
     /* ── 标题与篇首 ── */
     &:is(h1, h2, h3, h4) { @apply wrap-anywhere; }
@@ -183,9 +188,11 @@
     }
 
     /* ── 代码块 ── */
-    /* 与 code-block.tsx 的代码面同一画法（「不另写一套」）：面板圆角、清墨线、代码面。 */
+    /* 与 code-block.tsx 的代码面同一画法（「不另写一套」）：面板圆角、清墨线、代码面。
+     * 长行折行而不横向滚动：Markdown 里的 pre 没有 tabindex，CSS 加不上，横向滚动的区域键盘够不到（scrollable-region-focusable）。
+     * 需要保留原样排版、可滚动的代码，用库的 CodeBlock（它的滚动区自带焦点与名称）。 */
     &:is(pre) {
-      @apply max-w-full overflow-x-auto whitespace-pre rounded-panel border border-border bg-(--qy-code-surface) p-(--qy-panel-padding-sm) text-body text-foreground outline-none;
+      @apply max-w-full whitespace-pre-wrap wrap-anywhere rounded-panel border border-border bg-(--qy-code-surface) p-(--qy-panel-padding-sm) text-body text-foreground outline-none;
     }
 
     /* ── 表格 ── */

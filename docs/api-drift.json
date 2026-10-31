@@ -225,43 +225,43 @@
       "component": "command",
       "part": "CommandGroup",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/command.tsx:112"
+      "declaredAt": "packages/ui/src/components/command.tsx:116"
     },
     {
       "component": "command",
       "part": "CommandDialog",
       "prop": "defaultQuery",
-      "declaredAt": "packages/ui/src/components/command.tsx:64"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "filter",
-      "declaredAt": "packages/ui/src/components/command.tsx:61"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "onItemSelect",
       "declaredAt": "packages/ui/src/components/command.tsx:67"
     },
     {
       "component": "command",
       "part": "CommandDialog",
+      "prop": "filter",
+      "declaredAt": "packages/ui/src/components/command.tsx:64"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
+      "prop": "onItemSelect",
+      "declaredAt": "packages/ui/src/components/command.tsx:70"
+    },
+    {
+      "component": "command",
+      "part": "CommandDialog",
       "prop": "onQueryChange",
-      "declaredAt": "packages/ui/src/components/command.tsx:65"
+      "declaredAt": "packages/ui/src/components/command.tsx:68"
     },
     {
       "component": "command",
       "part": "CommandDialog",
       "prop": "popupClassName",
-      "declaredAt": "packages/ui/src/components/command.tsx:208"
+      "declaredAt": "packages/ui/src/components/command.tsx:219"
     },
     {
       "component": "command",
       "part": "CommandDialog",
       "prop": "query",
-      "declaredAt": "packages/ui/src/components/command.tsx:63"
+      "declaredAt": "packages/ui/src/components/command.tsx:66"
     },
     {
       "component": "context-menu",

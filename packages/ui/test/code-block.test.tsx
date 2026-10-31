@@ -56,8 +56,11 @@ describe("CodeBlock maxLines and the scroll region", () => {
     overflow();
     const { container, rerender } = render(<CodeBlock code="x" title="values.js" language="JavaScript" maxLines={3} />);
     expect(screen.getByRole("region", { name: "values.js" })).toBe(container.querySelector("pre")); expect(container.querySelector("pre")).toHaveAttribute("tabindex", "0");
-    rerender(<CodeBlock code="x" language="JavaScript" maxLines={3} />); expect(screen.getByRole("region", { name: "JavaScript" })).toBeInTheDocument();
-    rerender(<CodeBlock code="x" maxLines={3} />); expect(screen.getByRole("region", { name: "代码" })).toBeInTheDocument();
+    rerender(<CodeBlock code="x" language="JavaScript" maxLines={3} />); expect(screen.getByRole("region", { name: "JavaScript：x" })).toBeInTheDocument();
+    rerender(<CodeBlock code="x" maxLines={3} />); expect(screen.getByRole("region", { name: "代码：x" })).toBeInTheDocument();
+    // 同一页的几段代码靠第一行区分名称；空白行跳过，过长截到 40 个字符。
+    rerender(<CodeBlock code={"\n  const answer = 42;\nmore"} maxLines={1} />); expect(screen.getByRole("region", { name: "代码：const answer = 42;" })).toBeInTheDocument();
+    rerender(<CodeBlock code={"x".repeat(60)} maxLines={1} />); expect(screen.getByRole("region", { name: `代码：${"x".repeat(40)}…` })).toBeInTheDocument();
   });
   it("does not add a region (or a tab stop) while the code fits", () => {
     render(<CodeBlock code="short" maxLines={10} />); expect(screen.queryByRole("region")).toBeNull();

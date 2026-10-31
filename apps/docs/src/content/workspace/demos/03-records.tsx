@@ -32,7 +32,11 @@ const initialState: DataTablePatternState = { sorting: [], pagination: { page: 1
  * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是
  * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。
  */
-export function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {
+/**
+ * embedded：放在文档页的演示里（标题降为 h3、高度固定、不立地标）。
+ * insideMain：放在站点的示例查看页里——外层已有 <main>，内容区改用 div，标题仍是 h1、高度铺满。
+ */
+export function RecordsWorkspace({ embedded = false, insideMain = false }: { embedded?: boolean; insideMain?: boolean }) {
   const [query, setQuery] = useState("");
   const [state, setState] = useState(initialState);
   const [details, setDetails] = useState(true);
@@ -49,7 +53,7 @@ export function RecordsWorkspace({ embedded = false }: { embedded?: boolean }) {
           <WorkspaceSummary className="max-sm:hidden">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>
           <WorkspaceActions className="flex-wrap"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>
         </WorkspaceHeader>
-        <WorkspaceContent render={embedded ? <div /> : <main />} id={embedded ? undefined : "main"}>
+        <WorkspaceContent render={embedded || insideMain ? <div /> : <main />} id={embedded || insideMain ? undefined : "main"}>
           <Stack gap="panel" className="p-(--qy-page-gutter)">
             <Inline gap="panel"><SearchInput aria-label="搜索采集记录" placeholder="搜索记录或负责人" value={query} onValueChange={next => {
               setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));
