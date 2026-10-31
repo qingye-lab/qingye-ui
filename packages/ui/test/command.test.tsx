@@ -49,6 +49,8 @@ test("a custom filter replaces the default", async () => {
   render(<Palette filter={(entry, query) => entry.value.startsWith(query)} />);
   await userEvent.type(screen.getByRole("combobox"), "出");
   expect(screen.getByRole("status")).toHaveTextContent("没有这个命令");
+  // 播报在 listbox 之外：listbox 只含 option 与 group（aria-required-children）。
+  expect(screen.getByRole("listbox").querySelector("[role=status]")).toBeNull();
   expect(screen.queryAllByRole("option")).toHaveLength(0);
 });
 

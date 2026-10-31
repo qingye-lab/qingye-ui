@@ -83,6 +83,25 @@ export function parseLocalDate(text: string): Date | undefined {
 }
 
 /** Mature date semantics with current control geometry and locally formatted names. */
+/**
+ * 切换月份的那一组按钮：DayPicker 默认渲染成 <nav> 地标，每个日历、每个日期弹层都会往页面的地标列表里加一项无从区分的「导航栏」；
+ * 它不是站点导航，是这个日历里的一组控件，所以渲染成有名称的 group（div）——nav 元素上不允许改写成 group。
+ * 按钮、禁用与点击的处理与 DayPicker 自带的 Nav 相同：读同一份 components、classNames、labels。
+ */
+function CalendarNav({ onPreviousClick, onNextClick, previousMonth, nextMonth, ...props }: React.ComponentProps<typeof CalendarPrimitive.Nav>) {
+  const { messages } = useUILocale();
+  const { components, classNames, styles, labels: { labelPrevious, labelNext } } = CalendarPrimitive.useDayPicker();
+  const { UI } = CalendarPrimitive;
+  return <div {...(props as React.ComponentProps<"div">)} role="group" aria-label={messages.monthNavigation}>
+    <components.PreviousMonthButton type="button" className={classNames[UI.PreviousMonthButton]} style={styles?.[UI.PreviousMonthButton]} tabIndex={previousMonth ? undefined : -1} aria-disabled={previousMonth ? undefined : true} aria-label={labelPrevious(previousMonth)} onClick={event => { if (previousMonth) onPreviousClick?.(event); }}>
+      <components.Chevron {...(previousMonth ? {} : { disabled: true })} className={classNames[UI.Chevron]} orientation="left" />
+    </components.PreviousMonthButton>
+    <components.NextMonthButton type="button" className={classNames[UI.NextMonthButton]} style={styles?.[UI.NextMonthButton]} tabIndex={nextMonth ? undefined : -1} aria-disabled={nextMonth ? undefined : true} aria-label={labelNext(nextMonth)} onClick={event => { if (nextMonth) onNextClick?.(event); }}>
+      <components.Chevron {...(nextMonth ? {} : { disabled: true })} className={classNames[UI.Chevron]} orientation="right" />
+    </components.NextMonthButton>
+  </div>;
+}
+
 export function Calendar({ className, classNames, components, style, locale, formatters, labels, render, ref, ...props }: CalendarProps) {
   const { code, messages, ...resolved } = useUILocale() as ReturnType<typeof useUILocale> & { dir?: string };
   // 调用方显式给出 locale 时，名称与周起始日都归它；否则按 UILocale 的区域代码推出。
@@ -122,7 +141,7 @@ export function Calendar({ className, classNames, components, style, locale, for
       outside: "text-muted-foreground", disabled: "opacity-disabled", hidden: "invisible", // 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
       range_middle: "bg-surface-selected [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-hover)!", range_start: "bg-linear-to-r from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-l", range_end: "bg-linear-to-l from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-r", footer: "text-support text-muted-foreground", ...classNames,
     }}
-    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, ...components }}
+    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, Nav: CalendarNav, ...components }}
     labels={{
       labelNext: () => messages.nextMonth, labelPrevious: () => messages.previousMonth,
       labelMonthDropdown: () => messages.month, labelYearDropdown: () => messages.year,
