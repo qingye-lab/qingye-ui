@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-31T02:05:53.793Z",
-  "revision": "66396746a165f679a6b863a63b342a7e9a8f9824",
+  "generatedAt": "2026-10-31T03:16:57.849Z",
+  "revision": "8ed8da9bacfa237903c36d8c2c3f8ca75489eff1",
   "static": {
     "fingerprint": {
-      "sha256": "cf1600d53756b46937e32d8194d902716411ad269439512b52ca4c85c6113a84",
+      "sha256": "a25aeb726e062aae34cea36ce738a629656c1e1d9856e3e63b7469c9f720214c",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2065,7 +2065,7 @@
         },
         {
           "path": "apps/docs/src/content/workspace/demos/03-records.tsx",
-          "sha256": "fb6fa1c71be7220c2f19f57b31db3696eae620631158f97ac51ab6250355a1e4"
+          "sha256": "7491d51f66c62afc83cf271670d0b77f8d3fa3e22c7ee70964d5fec18f77fc66"
         },
         {
           "path": "apps/docs/src/content/workspace/meta.ts",
@@ -2073,7 +2073,11 @@
         },
         {
           "path": "apps/docs/src/examples/booking.tsx",
-          "sha256": "da0d8580ee7ea409c8eb34ee7c7c3769e6ca11b759822f13d4f2cc9a9d5975ac"
+          "sha256": "42e1a0fc9482de95512c35b842bf33e8c4e2f90e54ea79c39cfa8f0309d91a18"
+        },
+        {
+          "path": "apps/docs/src/examples/embedding.ts",
+          "sha256": "3e63b385b4fd42ec485e39aa914b991cf340a92b22140b86fdab962a8f75ea8c"
         },
         {
           "path": "apps/docs/src/examples/examples.css",
@@ -2081,7 +2085,7 @@
         },
         {
           "path": "apps/docs/src/examples/gallery.tsx",
-          "sha256": "e8cfc6925e6693273fb0327968fdce00155bed903814a59984f453ebec43f8f0"
+          "sha256": "ebd97d28159f94505f91ad333caa5f68b7127b2fcd28108ed77eb05e7202a499"
         },
         {
           "path": "apps/docs/src/examples/list.ts",
@@ -2089,7 +2093,7 @@
         },
         {
           "path": "apps/docs/src/examples/records.tsx",
-          "sha256": "1e591a5c13ea5bc5bf6fb50847ec740b993f4888cac312a65ff85dabb793ab41"
+          "sha256": "674d14593e631729de7669380b3ff709c58e251cce1be86ac6059835fa2e44f2"
         },
         {
           "path": "apps/docs/src/examples/workspace/collection-detail.tsx",
@@ -2121,7 +2125,7 @@
         },
         {
           "path": "apps/docs/src/examples/workspace/shell.tsx",
-          "sha256": "45dde612f80d3610351dc10ffbe37a936b27c6a172af34093182bd7659a549a3"
+          "sha256": "7c95674040d1610c7e3c39c4fcf6ca64bf25e02ea2b247e100a599ebd34da366"
         },
         {
           "path": "apps/docs/src/examples/workspace/status.ts",

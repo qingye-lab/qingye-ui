@@ -16,6 +16,7 @@ import { Textarea } from "@qingye_lab/ui/components/textarea";
 import { Heading } from "@qingye_lab/ui/components/typography";
 import { Heatmap, type HeatmapLevel } from "@qingye_lab/ui/components/heatmap";
 import "./examples.css";
+import { useExampleEmbedded } from "./embedding";
 
 /*
  * 会议室预约：一个日常应用的分步填写。数据都在本页，没有请求；「确认预约」只改变本页的事实，撤销也是。
@@ -61,6 +62,11 @@ function validate(step: number, draft: Draft): Errors {
   return errors;
 }
 
+/** 裸框里应用自己是 <main>；在站点的查看页里，外层已有 main，这里换成 div（embedding.ts）。 */
+function Main({ className, children }: { className: string; children: React.ReactNode }) {
+  return useExampleEmbedded() ? <div className={className}>{children}</div> : <main className={className} id="main" tabIndex={-1}>{children}</main>;
+}
+
 export default function BookingApp() {
   const [draft, setDraft] = useState<Draft>({ duration: 60, people: 4, topic: "", note: "", video: false });
   const [step, setStep] = useState(0);
@@ -101,7 +107,7 @@ export default function BookingApp() {
         <span aria-hidden="true" className="booking-mark">青</span>
         <span className="text-body-strong">青野 · 会议室</span>
       </header>
-      <main className="booking-main" id="main" tabIndex={-1}>
+      <Main className="booking-main">
         <aside className="booking-steps">
           <Steps>
             {STEPS.map((title, index) => (
@@ -209,7 +215,7 @@ export default function BookingApp() {
         </section>
 
         <Schedule booked={booked} draft={draft} />
-      </main>
+      </Main>
     </div>
   );
 }

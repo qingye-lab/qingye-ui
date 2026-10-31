@@ -14,6 +14,7 @@ import { findComponent } from "@/lib/registry";
 import { repoFile } from "@/lib/site";
 import { NotFoundContent } from "@/pages/not-found";
 import { EXAMPLES, findExample, type ExampleEntry } from "./list";
+import { ExampleEmbeddedProvider } from "./embedding";
 import type { DocsLocale } from "@/lib/paths";
 
 const findComponentLabel = (slug: string, locale: DocsLocale) => { const entry = findComponent(slug); return entry ? componentLabel(entry, locale).title : slug; };
@@ -116,9 +117,11 @@ function ExampleView({ example, children }: { example: ExampleEntry; children: R
   const en = locale === "en";
   const title = en ? example.title.en : example.title.zh;
   useDocumentTitle(title);
-  return <div className="example-view">
+  // 查看页的主体是一个 <main>：查看栏与示例应用都在其中（见 embedding.ts）。
+  return <main className="example-view" id="main" tabIndex={-1}>
     <div className="example-bar site-frame">
-      <Breadcrumb>
+      {/* 示例应用自己也有面包屑；这一条命名为「示例位置」，两条在读屏的地标列表里分得开。 */}
+      <Breadcrumb aria-label={en ? "Example location" : "示例位置"}>
         <BreadcrumbList>
           <BreadcrumbItem><BreadcrumbLink render={<Link to="/examples" />}>{en ? "Examples" : "示例"}</BreadcrumbLink></BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -134,8 +137,8 @@ function ExampleView({ example, children }: { example: ExampleEntry; children: R
         <a className={linkClassName} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "Source" : "源码"}</a>
       </div>
     </div>
-    <div className="example-frame" data-slot="example-frame">{children}</div>
-  </div>;
+    <div className="example-frame" data-slot="example-frame"><ExampleEmbeddedProvider value>{children}</ExampleEmbeddedProvider></div>
+  </main>;
 }
 
 export default function ExamplesGallery() {
