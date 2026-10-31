@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -6013,7 +6013,15 @@
                 "name": "align",
                 "optional": true,
                 "type": "\"center\" | \"start\" | \"end\" | \"stretch\" | \"baseline\"",
-                "declaredAt": "packages/ui/src/components/layout.tsx:28"
+                "doc": "交叉轴对齐（Stack 为横向，Inline 为纵向）。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:42"
+              },
+              {
+                "name": "justify",
+                "optional": true,
+                "type": "\"center\" | \"start\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+                "doc": "主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:44"
               },
               {
                 "name": "orientation",
@@ -6025,7 +6033,7 @@
                 "name": "wrap",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/layout.tsx:31"
+                "declaredAt": "packages/ui/src/components/layout.tsx:47"
               }
             ],
             "inheritedCount": 281,
@@ -6043,7 +6051,14 @@
         ],
         "drift": {
           "documentedButMissing": [],
-          "undocumented": []
+          "undocumented": [
+            {
+              "part": "ButtonGroup",
+              "prop": "justify",
+              "declaredAt": "packages/ui/src/components/layout.tsx:44",
+              "viaComponent": "layout"
+            }
+          ]
         }
       },
       "keyboard": [
@@ -17023,10 +17038,10 @@
               "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
             },
             {
-              "name": "stickyHeader",
-              "type": "boolean",
-              "description": "表头吸顶。只在表格自己的有界高度容器里生效：虚拟化视口，或 tableProps.containerProps 设了 height / max-height；无高度限制的表格不会吸在页面顶部。",
-              "descriptionEn": "Sticks the header to the top of the table's own bounded-height container: the virtualization viewport, or a height / max-height set through tableProps.containerProps. An unbounded table does not stick to the page top."
+              "name": "stickyHeader / stickyHeaderOffset",
+              "type": "boolean / number | string",
+              "description": "表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。",
+              "descriptionEn": "Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px."
             },
             {
               "name": "columns[].pinned / columns[].empty",
@@ -17192,8 +17207,15 @@
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
-                "doc": "表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里——\n虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。\n没有高度限制时表格随页面流动，表头不会吸在页面顶部。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:87"
+                "doc": "表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，\n或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:86"
+              },
+              {
+                "name": "stickyHeaderOffset",
+                "optional": true,
+                "type": "number | string | undefined",
+                "doc": "见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:88"
               },
               {
                 "name": "table",
@@ -17229,111 +17251,117 @@
                 "optional": true,
                 "type": "({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { onActivate?: (row: TData) => void }",
                 "doc": "Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:457"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:459"
               },
               {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:460"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:462"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:458"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:460"
               },
               {
                 "name": "columns",
                 "optional": false,
                 "type": "readonly DataTablePatternColumn<TData>[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:444"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:445"
               },
               {
                 "name": "data",
                 "optional": false,
                 "type": "TData[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:443"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:444"
               },
               {
                 "name": "defaultState",
                 "optional": true,
                 "type": "Partial<DataTablePatternState>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:448"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:449"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:459"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:461"
               },
               {
                 "name": "error",
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:462"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:464"
               },
               {
                 "name": "getRowId",
                 "optional": false,
                 "type": "(row: TData) => string",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:445"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:446"
               },
               {
                 "name": "mode",
                 "optional": true,
                 "type": "\"client\" | \"server\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:446"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:447"
               },
               {
                 "name": "onStateChange",
                 "optional": true,
                 "type": "(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:449"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:450"
               },
               {
                 "name": "pagination",
                 "optional": true,
                 "type": "false | DataTablePatternPagination",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:450"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:451"
               },
               {
                 "name": "selection",
                 "optional": true,
                 "type": "{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:451"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:452"
               },
               {
                 "name": "selectionAppearance",
                 "optional": true,
                 "type": "\"row\" | \"checkbox\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:452"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:453"
               },
               {
                 "name": "state",
                 "optional": true,
                 "type": "DataTablePatternState",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:447"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:448"
               },
               {
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
-                "doc": "表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:455"
+                "doc": "表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:456"
+              },
+              {
+                "name": "stickyHeaderOffset",
+                "optional": true,
+                "type": "DataTableProps<TData>[\"stickyHeaderOffset\"]",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:457"
               },
               {
                 "name": "tableProps",
                 "optional": true,
-                "type": "Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\">",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:463"
+                "type": "Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\" | \"stickyHeaderOffset\">",
+                "declaredAt": "packages/ui/src/components/data-table.tsx:465"
               },
               {
                 "name": "virtualization",
                 "optional": true,
                 "type": "DataTableVirtualization",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:453"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:454"
               }
             ],
             "inheritedCount": 277,
@@ -17353,25 +17381,25 @@
                 "optional": false,
                 "type": "string",
                 "doc": "Defines a string value that labels the current element.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:384"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:385"
               },
               {
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:356"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:357"
               },
               {
                 "name": "scope",
                 "optional": false,
                 "type": "\"page\" | \"filtered\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:384"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:385"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:384"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:385"
               }
             ],
             "inheritedCount": 286,
@@ -17394,13 +17422,13 @@
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:356"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:357"
               },
               {
                 "name": "row",
                 "optional": false,
                 "type": "Row<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:357"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:358"
               }
             ],
             "inheritedCount": 287,
@@ -17429,7 +17457,7 @@
                 "name": "column",
                 "optional": false,
                 "type": "Column<TData, unknown>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:350"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:351"
               },
               {
                 "name": "data-slot",
@@ -17488,7 +17516,12 @@
             {
               "part": "DataTable",
               "prop": "stickyHeader",
-              "declaredAt": "packages/ui/src/components/data-table.tsx:87"
+              "declaredAt": "packages/ui/src/components/data-table.tsx:86"
+            },
+            {
+              "part": "DataTable",
+              "prop": "stickyHeaderOffset",
+              "declaredAt": "packages/ui/src/components/data-table.tsx:88"
             },
             {
               "part": "DataTableSortButton",
@@ -17554,7 +17587,7 @@
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
           "propsType": "DataTableProps<TData>",
-          "signature": "DataTable({ table, caption, emptyContent, busy = false, error, activeRowId, selectionAppearance = \"row\", onRowActivate, virtualization, containerProps, stickyHeader = false, className, style, onFocusCapture, onBlurCapture, ...props }: DataTableProps<TData>)",
+          "signature": "DataTable({ table, caption, emptyContent, busy = false, error, activeRowId, selectionAppearance = \"row\", onRowActivate, virtualization, containerProps, stickyHeader = false, stickyHeaderOffset, className, style, onFocusCapture, onBlurCapture, ...props }: DataTableProps<TData>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -17594,7 +17627,7 @@
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
           "propsType": "DataTablePatternProps<TData>",
-          "signature": "DataTablePattern({ data, columns, getRowId, mode = \"client\", state, defaultState, onStateChange, pagination = false, selection, selectionAppearance = \"row\", virtualization, stickyHeader = false, activeRow, caption, emptyContent, busy = false, error, tableProps, className, ...props }: DataTablePatternProps<TData>)",
+          "signature": "DataTablePattern({ data, columns, getRowId, mode = \"client\", state, defaultState, onStateChange, pagination = false, selection, selectionAppearance = \"row\", virtualization, stickyHeader = false, stickyHeaderOffset, activeRow, caption, emptyContent, busy = false, error, tableProps, className, ...props }: DataTablePatternProps<TData>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -17634,7 +17667,7 @@
           "kind": "type",
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
-          "signature": "Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  selectionAppearance?: DataTableProps<TData>[\"selectionAppearance\"];\n  virtualization?: DataTableVirtualization;\n  /** 表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。 */\n  stickyHeader?: boolean;\n  /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */\n  activeRow?: ({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  /** 见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。 */\n  error?: React.ReactNode;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\">;\n}",
+          "signature": "Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  selectionAppearance?: DataTableProps<TData>[\"selectionAppearance\"];\n  virtualization?: DataTableVirtualization;\n  /** 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。 */\n  stickyHeader?: boolean;\n  stickyHeaderOffset?: DataTableProps<TData>[\"stickyHeaderOffset\"];\n  /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */\n  activeRow?: ({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  /** 见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。 */\n  error?: React.ReactNode;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\" | \"stickyHeaderOffset\">;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -17654,7 +17687,7 @@
           "kind": "type",
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
-          "signature": "Omit<TableProps, \"children\"> & {\n  table: TableInstance<TData>;\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  /**\n   * 正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\n   * aria-busy 仍然设置。数据、请求与完成时机由应用持有。\n   */\n  busy?: boolean;\n  /**\n   * 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n   * 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。\n   */\n  error?: React.ReactNode;\n  activeRowId?: string | null;\n  /** Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain. */\n  selectionAppearance?: \"row\" | \"checkbox\";\n  /** Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 */\n  onRowActivate?: (row: Row<TData>) => void;\n  virtualization?: DataTableVirtualization;\n  containerProps?: TableContainerProps;\n  /**\n   * 表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里——\n   * 虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。\n   * 没有高度限制时表格随页面流动，表头不会吸在页面顶部。\n   */\n  stickyHeader?: boolean;\n}",
+          "signature": "Omit<TableProps, \"children\"> & {\n  table: TableInstance<TData>;\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  /**\n   * 正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\n   * aria-busy 仍然设置。数据、请求与完成时机由应用持有。\n   */\n  busy?: boolean;\n  /**\n   * 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n   * 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。\n   */\n  error?: React.ReactNode;\n  activeRowId?: string | null;\n  /** Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain. */\n  selectionAppearance?: \"row\" | \"checkbox\";\n  /** Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 */\n  onRowActivate?: (row: Row<TData>) => void;\n  virtualization?: DataTableVirtualization;\n  containerProps?: TableContainerProps;\n  /**\n   * 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，\n   * 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。\n   */\n  stickyHeader?: boolean;\n  /** 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。 */\n  stickyHeaderOffset?: number | string | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -17752,7 +17785,7 @@
         },
         {
           "name": "DataTableProps",
-          "definition": "export type DataTableProps<TData> = Omit<TableProps, \"children\"> & {\n  table: TableInstance<TData>;\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  /**\n   * 正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\n   * aria-busy 仍然设置。数据、请求与完成时机由应用持有。\n   */\n  busy?: boolean;\n  /**\n   * 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n   * 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。\n   */\n  error?: React.ReactNode;\n  activeRowId?: string | null;\n  /** Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain. */\n  selectionAppearance?: \"row\" | \"checkbox\";\n  /** Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 */\n  onRowActivate?: (row: Row<TData>) => void;\n  virtualization?: DataTableVirtualization;\n  containerProps?: TableContainerProps;\n  /**\n   * 表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里——\n   * 虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。\n   * 没有高度限制时表格随页面流动，表头不会吸在页面顶部。\n   */\n  stickyHeader?: boolean;\n};"
+          "definition": "export type DataTableProps<TData> = Omit<TableProps, \"children\"> & {\n  table: TableInstance<TData>;\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  /**\n   * 正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\n   * aria-busy 仍然设置。数据、请求与完成时机由应用持有。\n   */\n  busy?: boolean;\n  /**\n   * 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n   * 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。\n   */\n  error?: React.ReactNode;\n  activeRowId?: string | null;\n  /** Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain. */\n  selectionAppearance?: \"row\" | \"checkbox\";\n  /** Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 */\n  onRowActivate?: (row: Row<TData>) => void;\n  virtualization?: DataTableVirtualization;\n  containerProps?: TableContainerProps;\n  /**\n   * 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，\n   * 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。\n   */\n  stickyHeader?: boolean;\n  /** 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。 */\n  stickyHeaderOffset?: number | string | undefined;\n};"
         },
         {
           "name": "DataTableSortButtonProps",
@@ -17784,7 +17817,7 @@
         },
         {
           "name": "DataTablePatternProps",
-          "definition": "export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  selectionAppearance?: DataTableProps<TData>[\"selectionAppearance\"];\n  virtualization?: DataTableVirtualization;\n  /** 表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。 */\n  stickyHeader?: boolean;\n  /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */\n  activeRow?: ({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  /** 见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。 */\n  error?: React.ReactNode;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\">;\n};"
+          "definition": "export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  data: TData[];\n  columns: readonly DataTablePatternColumn<TData>[];\n  getRowId: (row: TData) => string;\n  mode?: \"client\" | \"server\";\n  state?: DataTablePatternState;\n  defaultState?: Partial<DataTablePatternState>;\n  onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;\n  pagination?: false | DataTablePatternPagination;\n  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };\n  selectionAppearance?: DataTableProps<TData>[\"selectionAppearance\"];\n  virtualization?: DataTableVirtualization;\n  /** 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。 */\n  stickyHeader?: boolean;\n  stickyHeaderOffset?: DataTableProps<TData>[\"stickyHeaderOffset\"];\n  /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */\n  activeRow?: ({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { onActivate?: (row: TData) => void };\n  caption?: React.ReactNode;\n  emptyContent: React.ReactNode;\n  busy?: boolean;\n  /** 见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。 */\n  error?: React.ReactNode;\n  tableProps?: Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\" | \"stickyHeaderOffset\">;\n};"
         }
       ],
       "usageImports": [
@@ -17992,7 +18025,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "cfdf9f32b1ff5756b784180248b461763ef5254eba022343cf2c30838a8d4ff3",
+        "sha256": "3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -18061,10 +18094,10 @@
                   "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
                 },
                 {
-                  "name": "stickyHeader",
-                  "type": "boolean",
-                  "description": "Sticks the header to the top of the table's own bounded-height container: the virtualization viewport, or a height / max-height set through tableProps.containerProps. An unbounded table does not stick to the page top.",
-                  "descriptionEn": "Sticks the header to the top of the table's own bounded-height container: the virtualization viewport, or a height / max-height set through tableProps.containerProps. An unbounded table does not stick to the page top."
+                  "name": "stickyHeader / stickyHeaderOffset",
+                  "type": "boolean / number | string",
+                  "description": "Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px.",
+                  "descriptionEn": "Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px."
                 },
                 {
                   "name": "columns[].pinned / columns[].empty",
@@ -19265,8 +19298,8 @@
             {
               "name": "value / defaultValue / onValueChange",
               "type": "string | undefined / string | undefined / (value, event) => void",
-              "description": "传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒。带时区或不完整外部字符串拒绝；清除请求 undefined。",
-              "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined."
+              "description": "传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒，秒后可带 1–3 位毫秒。值比 step 更细时原样保留（同原生输入，只在原生校验里报 stepMismatch），不截断也不报错。带时区或不完整外部字符串拒绝；清除请求 undefined。",
+              "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds, with 1–3 fractional digits after the seconds. A value finer than step is kept as given (like the native input, which only reports stepMismatch in validation), never truncated and never an error. Zoned or incomplete external strings are rejected; clearing requests undefined."
             },
             {
               "name": "min / max",
@@ -19322,70 +19355,70 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:33"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "非受控的初值（同样的无时区文本），原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:23"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:24"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:29"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:29"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: string | undefined, event: React.SyntheticEvent) => void) | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:24"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:25"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "string | undefined",
-                "doc": "Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:21"
+                "doc": "Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:22"
               }
             ],
             "inheritedCount": 278,
@@ -19440,7 +19473,7 @@
           "kind": "type",
           "owner": "date-time-picker",
           "module": "@qingye_lab/ui/components/date-time-picker",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: string | undefined;\n  /** 非受控的初值（同样的无时区文本），原生表单 reset 会回到它。 */\n  defaultValue?: string | undefined;\n  onValueChange?: ((value: string | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n   * 弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。\n   */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: string | undefined;\n  /** 非受控的初值（同样的无时区文本），原生表单 reset 会回到它。 */\n  defaultValue?: string | undefined;\n  onValueChange?: ((value: string | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n   * 弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。\n   */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -19449,7 +19482,7 @@
       "types": [
         {
           "name": "DateTimePickerProps",
-          "definition": "export type DateTimePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: string | undefined;\n  /** 非受控的初值（同样的无时区文本），原生表单 reset 会回到它。 */\n  defaultValue?: string | undefined;\n  onValueChange?: ((value: string | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n   * 弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。\n   */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n};"
+          "definition": "export type DateTimePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: string | undefined;\n  /** 非受控的初值（同样的无时区文本），原生表单 reset 会回到它。 */\n  defaultValue?: string | undefined;\n  onValueChange?: ((value: string | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n   * 弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。\n   */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n};"
         }
       ],
       "usageImports": [
@@ -19571,16 +19604,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41",
+        "sha256": "3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
+      "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
       "localized": {
         "en": {
           "title": "DateTimePicker",
           "description": "Edit complete local wall-clock date/time, or apply calendar and time drafts.",
           "category": "Date and time",
-          "decisions": "value is unzoned YYYY-MM-DDTHH:mm[:ss] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.",
+          "decisions": "value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.",
           "notes": [
             "Apply is available only with complete date and time; the caller still accepts the value.",
             "Native min/max/step validation and business availability are independent. A callback is not successful persistence.",
@@ -19595,8 +19628,8 @@
                 {
                   "name": "value / defaultValue / onValueChange",
                   "type": "string | undefined / string | undefined / (value, event) => void",
-                  "description": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined.",
-                  "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined."
+                  "description": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds, with 1–3 fractional digits after the seconds. A value finer than step is kept as given (like the native input, which only reports stepMismatch in validation), never truncated and never an error. Zoned or incomplete external strings are rejected; clearing requests undefined.",
+                  "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds, with 1–3 fractional digits after the seconds. A value finer than step is kept as given (like the native input, which only reports stepMismatch in validation), never truncated and never an error. Zoned or incomplete external strings are rejected; clearing requests undefined."
                 },
                 {
                   "name": "min / max",
@@ -29889,18 +29922,20 @@
     {
       "name": "layout",
       "title": "布局 Layout",
-      "description": "用纵向堆叠与横向排列组织内容，间隔按字段、动作、面板或分节关系选择。",
+      "description": "用纵向堆叠、横向排列与等宽多列组织内容，间隔按成对、字段、动作、面板或分节关系选择。",
       "category": "布局",
       "source": "local",
       "layer": "foundation",
       "import": "@qingye_lab/ui/components/layout",
       "exports": [
         "Stack",
-        "Inline"
+        "Inline",
+        "Grid"
       ],
       "docs": "/docs/components/layout",
       "notes": [
         "布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。",
+        "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。",
         "角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。",
         "方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。"
       ],
@@ -29909,6 +29944,9 @@
         "布局",
         "stack",
         "inline",
+        "grid",
+        "justify",
+        "多列",
         "spacing"
       ],
       "api": [
@@ -29919,10 +29957,10 @@
           "props": [
             {
               "name": "gap",
-              "type": "\"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
+              "type": "\"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
               "default": "\"panel\"",
-              "description": "分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。",
-              "descriptionEn": "Reads the corresponding relationship token."
+              "description": "pair 为一分（4px），用于成对读的名称与其说明、数值与单位；其余分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。",
+              "descriptionEn": "pair is one fen (4px) for things read as a pair: a name and its description, or a value and its unit; the others read field-gap, field-group-gap, action-gap, panel-gap and section-gap."
             },
             {
               "name": "align",
@@ -29930,6 +29968,12 @@
               "default": "\"stretch\"",
               "description": "横轴对齐。",
               "descriptionEn": "Cross-axis alignment."
+            },
+            {
+              "name": "justify",
+              "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+              "description": "主轴（纵向）分布。不设则保持默认；容器高于内容时才看得出。",
+              "descriptionEn": "Main-axis (vertical) distribution. Unset keeps the default; visible only when the container is taller than its content."
             },
             {
               "name": "render / ref / 原生属性",
@@ -29960,6 +30004,12 @@
               "descriptionEn": "Vertical alignment in a row."
             },
             {
+              "name": "justify",
+              "type": "StackProps[\"justify\"]",
+              "description": "横排的水平分布，如 between 把末项推到另一端。不设则保持默认。",
+              "descriptionEn": "Horizontal distribution in a row, e.g. between pushes the last item to the far end. Unset keeps the default."
+            },
+            {
               "name": "wrap",
               "type": "boolean",
               "default": "true",
@@ -29974,6 +30024,47 @@
               "descriptionEn": "Defaults to div with no automatic group or toolbar role."
             }
           ]
+        },
+        {
+          "name": "Grid",
+          "description": "等宽多列，纵横间隔取同一角色。",
+          "descriptionEn": "Equal-width columns with one spacing role for rows and columns.",
+          "props": [
+            {
+              "name": "gap",
+              "type": "LayoutGap",
+              "default": "\"panel\"",
+              "description": "与 Stack 相同的关系角色，行距与列距相等。",
+              "descriptionEn": "The same relationship roles as Stack; row and column gaps are equal."
+            },
+            {
+              "name": "columns",
+              "type": "number",
+              "default": "2",
+              "description": "固定列数，每列等宽。与 minItemWidth 同时给出时以 minItemWidth 为准。",
+              "descriptionEn": "Fixed number of equal columns. minItemWidth wins when both are given."
+            },
+            {
+              "name": "minItemWidth",
+              "type": "string",
+              "description": "每列最小宽度（CSS 长度，如 \"12rem\"）：按容器宽度自动决定列数，窄到放不下一列时收为单列。",
+              "descriptionEn": "Minimum column width as a CSS length such as \"12rem\": the column count follows the container, collapsing to one column when even one does not fit."
+            },
+            {
+              "name": "align",
+              "type": "StackProps[\"align\"]",
+              "default": "\"stretch\"",
+              "description": "每个格子内的纵向对齐。",
+              "descriptionEn": "Block-axis alignment of items within their cells."
+            },
+            {
+              "name": "render / ref / 原生属性",
+              "nameEn": "render / ref / native props",
+              "type": "useRender.ComponentProps<\"div\">",
+              "description": "默认 div；没有自动 list/grid 语义，需要列表语义时 render 成 ul。",
+              "descriptionEn": "Defaults to div with no automatic list or grid role; render as ul when list semantics are needed."
+            }
+          ]
         }
       ],
       "apiStatus": "type-resolved",
@@ -29983,6 +30074,50 @@
         "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
         "parts": [
           {
+            "name": "Grid",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "align",
+                "optional": true,
+                "type": "\"center\" | \"start\" | \"end\" | \"stretch\" | \"baseline\"",
+                "doc": "交叉轴对齐（Stack 为横向，Inline 为纵向）。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:42"
+              },
+              {
+                "name": "columns",
+                "optional": true,
+                "type": "number",
+                "doc": "固定列数，每列等宽。默认 2。与 minItemWidth 同时给出时以 minItemWidth 为准。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:50"
+              },
+              {
+                "name": "gap",
+                "optional": true,
+                "type": "\"section\" | \"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\"",
+                "declaredAt": "packages/ui/src/components/layout.tsx:40"
+              },
+              {
+                "name": "minItemWidth",
+                "optional": true,
+                "type": "string",
+                "doc": "每列的最小宽度（CSS 长度，如 \"12rem\"）：按容器宽度自动决定列数，窄到放不下一列时收为单列而不溢出。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:52"
+              }
+            ],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
             "name": "Inline",
             "status": "resolved",
             "ownProps": [
@@ -29990,19 +30125,27 @@
                 "name": "align",
                 "optional": true,
                 "type": "\"center\" | \"start\" | \"end\" | \"stretch\" | \"baseline\"",
-                "declaredAt": "packages/ui/src/components/layout.tsx:28"
+                "doc": "交叉轴对齐（Stack 为横向，Inline 为纵向）。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:42"
               },
               {
                 "name": "gap",
                 "optional": true,
-                "type": "\"section\" | \"field\" | \"fields\" | \"actions\" | \"panel\"",
-                "declaredAt": "packages/ui/src/components/layout.tsx:27"
+                "type": "\"section\" | \"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\"",
+                "declaredAt": "packages/ui/src/components/layout.tsx:40"
+              },
+              {
+                "name": "justify",
+                "optional": true,
+                "type": "\"center\" | \"start\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+                "doc": "主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:44"
               },
               {
                 "name": "wrap",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/layout.tsx:31"
+                "declaredAt": "packages/ui/src/components/layout.tsx:47"
               }
             ],
             "inheritedCount": 281,
@@ -30025,13 +30168,21 @@
                 "name": "align",
                 "optional": true,
                 "type": "\"center\" | \"start\" | \"end\" | \"stretch\" | \"baseline\"",
-                "declaredAt": "packages/ui/src/components/layout.tsx:28"
+                "doc": "交叉轴对齐（Stack 为横向，Inline 为纵向）。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:42"
               },
               {
                 "name": "gap",
                 "optional": true,
-                "type": "\"section\" | \"field\" | \"fields\" | \"actions\" | \"panel\"",
-                "declaredAt": "packages/ui/src/components/layout.tsx:27"
+                "type": "\"section\" | \"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\"",
+                "declaredAt": "packages/ui/src/components/layout.tsx:40"
+              },
+              {
+                "name": "justify",
+                "optional": true,
+                "type": "\"center\" | \"start\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+                "doc": "主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。",
+                "declaredAt": "packages/ui/src/components/layout.tsx:44"
               }
             ],
             "inheritedCount": 281,
@@ -30055,12 +30206,33 @@
       "keyboard": [],
       "actualExports": [
         {
+          "name": "Grid",
+          "kind": "function",
+          "owner": "layout",
+          "module": "@qingye_lab/ui/components/layout",
+          "propsType": "GridProps",
+          "signature": "Grid({ gap = \"panel\", align = \"stretch\", columns = 2, minItemWidth, className, render, style, ...props }: GridProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "GridProps",
+          "kind": "type",
+          "owner": "layout",
+          "module": "@qingye_lab/ui/components/layout",
+          "signature": "Omit<LayoutProps, \"justify\"> & {\n  /** 固定列数，每列等宽。默认 2。与 minItemWidth 同时给出时以 minItemWidth 为准。 */\n  columns?: number;\n  /** 每列的最小宽度（CSS 长度，如 \"12rem\"）：按容器宽度自动决定列数，窄到放不下一列时收为单列而不溢出。 */\n  minItemWidth?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "Inline",
           "kind": "function",
           "owner": "layout",
           "module": "@qingye_lab/ui/components/layout",
           "propsType": "InlineProps",
-          "signature": "Inline({ gap = \"actions\", align = \"center\", wrap = true, className, render, ...props }: InlineProps)",
+          "signature": "Inline({ gap = \"actions\", align = \"center\", justify, wrap = true, className, render, ...props }: InlineProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -30080,7 +30252,7 @@
           "kind": "type",
           "owner": "layout",
           "module": "@qingye_lab/ui/components/layout",
-          "signature": "\"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
+          "signature": "\"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -30091,7 +30263,7 @@
           "owner": "layout",
           "module": "@qingye_lab/ui/components/layout",
           "propsType": "StackProps",
-          "signature": "Stack({ gap = \"panel\", align = \"stretch\", className, render, ...props }: StackProps)",
+          "signature": "Stack({ gap = \"panel\", align = \"stretch\", justify, className, render, ...props }: StackProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -30110,7 +30282,7 @@
       "types": [
         {
           "name": "LayoutGap",
-          "definition": "export type LayoutGap = \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\";"
+          "definition": "export type LayoutGap = \"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\";"
         },
         {
           "name": "StackProps",
@@ -30119,6 +30291,10 @@
         {
           "name": "InlineProps",
           "definition": "export type InlineProps = LayoutProps & { wrap?: boolean };"
+        },
+        {
+          "name": "GridProps",
+          "definition": "export type GridProps = Omit<LayoutProps, \"justify\"> & {\n  /** 固定列数，每列等宽。默认 2。与 minItemWidth 同时给出时以 minItemWidth 为准。 */\n  columns?: number;\n  /** 每列的最小宽度（CSS 长度，如 \"12rem\"）：按容器宽度自动决定列数，窄到放不下一列时收为单列而不溢出。 */\n  minItemWidth?: string;\n};"
         }
       ],
       "usageImports": [
@@ -30130,6 +30306,12 @@
         },
         {
           "name": "Inline",
+          "import": "@qingye_lab/ui/components/layout",
+          "owner": "layout",
+          "status": "PASS"
+        },
+        {
+          "name": "Grid",
           "import": "@qingye_lab/ui/components/layout",
           "owner": "layout",
           "status": "PASS"
@@ -30181,8 +30363,20 @@
             "@qingye_lab/ui/components/typography"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"横向排列与对齐\", titleEn: \"Inline layout and alignment\" };\n\nexport default function Demo() {\n  return (\n    <Stack gap=\"section\" className=\"w-full\">\n      <Inline gap=\"actions\" align=\"center\"><Button size=\"sm\">保存</Button><Button size=\"lg\" variant=\"bordered\">取消</Button></Inline>\n      <Inline gap=\"panel\" align=\"baseline\" wrap={false}><Text step=\"heading\" render={<span />}>青野</Text><Text render={<span />}>Qingye</Text></Inline>\n    </Stack>\n  );\n}\n",
-          "sha256": "786e9bbf45596faa6ae4dbf781cb5330e6c284a0939206f1c590241384d348c5"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"横向排列与对齐\", titleEn: \"Inline layout and alignment\" };\n\nexport default function Demo() {\n  return (\n    <Stack gap=\"section\" className=\"w-full\">\n      <Inline gap=\"actions\" align=\"center\"><Button size=\"sm\">保存</Button><Button size=\"lg\" variant=\"bordered\">取消</Button></Inline>\n      <Inline gap=\"actions\" justify=\"between\"><Text render={<span />}>已选 3 项</Text><Button size=\"sm\" variant=\"bordered\">清除</Button></Inline>\n      <Inline gap=\"panel\" align=\"baseline\" wrap={false}><Text step=\"heading\" render={<span />}>青野</Text><Text render={<span />}>Qingye</Text></Inline>\n    </Stack>\n  );\n}\n",
+          "sha256": "e5eb325d6ca69dd8bcc064a1568d6ed4e8d2f7370f81344820b945486502506c"
+        },
+        {
+          "id": "grid",
+          "title": "多列与成对间隔",
+          "source": "apps/docs/src/content/layout/demos/03-grid.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/typography"
+          ],
+          "providers": [],
+          "code": "import { Grid, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"多列与成对间隔\", titleEn: \"Columns and paired spacing\" };\n\nconst facts = [[\"组件\", \"83\"], [\"主题轴\", \"3\"], [\"窄屏断点\", \"640px\"], [\"触屏目标\", \"44px\"], [\"版本\", \"5.1.0\"], [\"许可\", \"MIT\"]];\n\nexport default function Demo() {\n  return (\n    <Grid minItemWidth=\"9rem\" className=\"w-full\">\n      {facts.map(([label, value]) => (\n        <Stack key={label} gap=\"pair\">\n          <Text render={<span />}>{label}</Text>\n          <Text step=\"heading\" render={<span />}>{value}</Text>\n        </Stack>\n      ))}\n    </Grid>\n  );\n}\n",
+          "sha256": "7077524bc59408214fa499f642a85d71c98b9b483403eadb42af029106330e6b"
         }
       ],
       "design": {
@@ -30197,7 +30391,7 @@
           "把布局当围合或页面骨架；用数字 gap 代替关系判断。"
         ],
         "composition": [
-          "Stack render 成 section；Inline 组合现有动作；比较保留原生 table/grid。"
+          "Stack render 成 section；Inline 组合现有动作；比较保留原生 table/grid；等宽并排的同类对象用 Grid。"
         ],
         "stateOwner": {
           "library": [
@@ -30216,18 +30410,19 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/layout.tsx",
-        "sha256": "362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd",
+        "sha256": "a3eee1f77336d01017929f940f49949e11d348343948eff757e0cde9db884233",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "Stack 纵向排列，Inline 横向排列并默认换行。gap 选择字段、动作或分节关系；语义由 render 与内容提供。",
+      "decisions": "Stack 纵向排列，Inline 横向排列并默认换行，Grid 等宽多列。gap 选择成对、字段、动作或分节关系；语义由 render 与内容提供。",
       "localized": {
         "en": {
           "title": "Layout",
-          "description": "Arrange content vertically or side by side using field, action, panel and section spacing roles.",
+          "description": "Arrange content vertically, side by side or in equal columns using pair, field, action, panel and section spacing roles.",
           "category": "Layout",
-          "decisions": "Stack flows vertically; Inline flows horizontally and wraps by default. Choose field, action or section spacing with gap; render and content supply semantics.",
+          "decisions": "Stack flows vertically; Inline flows horizontally and wraps by default; Grid lays out equal-width columns. Choose pair, field, action or section spacing with gap; render and content supply semantics.",
           "notes": [
             "Layout adds no border, surface, padding or business state; use Card for independent object boundaries.",
+            "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.",
             "Role values are theme presets. Explain special className/style overrides in the project composition.",
             "Direction, language and density follow the DOM; wrapping does not reorder content."
           ],
@@ -30239,10 +30434,10 @@
               "props": [
                 {
                   "name": "gap",
-                  "type": "\"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
+                  "type": "\"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
                   "default": "\"panel\"",
-                  "description": "Reads the corresponding relationship token.",
-                  "descriptionEn": "Reads the corresponding relationship token."
+                  "description": "pair is one fen (4px) for things read as a pair: a name and its description, or a value and its unit; the others read field-gap, field-group-gap, action-gap, panel-gap and section-gap.",
+                  "descriptionEn": "pair is one fen (4px) for things read as a pair: a name and its description, or a value and its unit; the others read field-gap, field-group-gap, action-gap, panel-gap and section-gap."
                 },
                 {
                   "name": "align",
@@ -30250,6 +30445,12 @@
                   "default": "\"stretch\"",
                   "description": "Cross-axis alignment.",
                   "descriptionEn": "Cross-axis alignment."
+                },
+                {
+                  "name": "justify",
+                  "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+                  "description": "Main-axis (vertical) distribution. Unset keeps the default; visible only when the container is taller than its content.",
+                  "descriptionEn": "Main-axis (vertical) distribution. Unset keeps the default; visible only when the container is taller than its content."
                 },
                 {
                   "name": "render / ref / native props",
@@ -30280,6 +30481,12 @@
                   "descriptionEn": "Vertical alignment in a row."
                 },
                 {
+                  "name": "justify",
+                  "type": "StackProps[\"justify\"]",
+                  "description": "Horizontal distribution in a row, e.g. between pushes the last item to the far end. Unset keeps the default.",
+                  "descriptionEn": "Horizontal distribution in a row, e.g. between pushes the last item to the far end. Unset keeps the default."
+                },
+                {
                   "name": "wrap",
                   "type": "boolean",
                   "default": "true",
@@ -30292,6 +30499,47 @@
                   "type": "useRender.ComponentProps<\"div\">",
                   "description": "Defaults to div with no automatic group or toolbar role.",
                   "descriptionEn": "Defaults to div with no automatic group or toolbar role."
+                }
+              ]
+            },
+            {
+              "name": "Grid",
+              "description": "Equal-width columns with one spacing role for rows and columns.",
+              "descriptionEn": "Equal-width columns with one spacing role for rows and columns.",
+              "props": [
+                {
+                  "name": "gap",
+                  "type": "LayoutGap",
+                  "default": "\"panel\"",
+                  "description": "The same relationship roles as Stack; row and column gaps are equal.",
+                  "descriptionEn": "The same relationship roles as Stack; row and column gaps are equal."
+                },
+                {
+                  "name": "columns",
+                  "type": "number",
+                  "default": "2",
+                  "description": "Fixed number of equal columns. minItemWidth wins when both are given.",
+                  "descriptionEn": "Fixed number of equal columns. minItemWidth wins when both are given."
+                },
+                {
+                  "name": "minItemWidth",
+                  "type": "string",
+                  "description": "Minimum column width as a CSS length such as \"12rem\": the column count follows the container, collapsing to one column when even one does not fit.",
+                  "descriptionEn": "Minimum column width as a CSS length such as \"12rem\": the column count follows the container, collapsing to one column when even one does not fit."
+                },
+                {
+                  "name": "align",
+                  "type": "StackProps[\"align\"]",
+                  "default": "\"stretch\"",
+                  "description": "Block-axis alignment of items within their cells.",
+                  "descriptionEn": "Block-axis alignment of items within their cells."
+                },
+                {
+                  "name": "render / ref / native props",
+                  "nameEn": "render / ref / native props",
+                  "type": "useRender.ComponentProps<\"div\">",
+                  "description": "Defaults to div with no automatic list or grid role; render as ul when list semantics are needed.",
+                  "descriptionEn": "Defaults to div with no automatic list or grid role; render as ul when list semantics are needed."
                 }
               ]
             }
@@ -30309,7 +30557,7 @@
               "Treating layout as enclosure or a page skeleton; numeric gaps without judging relationships."
             ],
             "composition": [
-              "Render Stack as section; compose existing actions with Inline; retain native table/grid for comparison."
+              "Render Stack as section; compose existing actions with Inline; retain native table/grid for comparison; use Grid for equal-width peers."
             ],
             "stateOwner": {
               "library": [
@@ -33883,7 +34131,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/navigation-menu.tsx",
-        "sha256": "2ae9d87b98f18574a0018ec0dad93ab9a53c7ec73fbe75c9b68a6cd3d367ae5f",
+        "sha256": "abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "active 是应用提供的页面事实，库不读 URL 或把命令推断成导航。",
@@ -45221,7 +45469,8 @@
         "SidebarLink",
         "SidebarSub",
         "SidebarSubTrigger",
-        "SidebarSubContent"
+        "SidebarSubContent",
+        "createSidebarDrawerHandle"
       ],
       "docs": "/docs/components/sidebar",
       "notes": [
@@ -45256,10 +45505,10 @@
             },
             {
               "name": "drawer / drawerHandle",
-              "type": "boolean / DrawerPrimitive.Handle",
+              "type": "boolean / SidebarDrawerHandle",
               "default": "false",
-              "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 DrawerCreateHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。",
-              "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws."
+              "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位，不按宽度自动收起，中等宽度要收成 rail 由应用控制 collapsed。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 createSidebarDrawerHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。抽屉代码在第一次变窄时才加载，宽屏首屏不带它。",
+              "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it."
             },
             {
               "name": "render / ref / native props",
@@ -45276,7 +45525,7 @@
           "props": [
             {
               "name": "handle",
-              "type": "DrawerPrimitive.Handle",
+              "type": "SidebarDrawerHandle",
               "description": "不在 Workspace 里时，与 Sidebar 的 drawerHandle 相同。",
               "descriptionEn": "Outside a Workspace, the same handle as Sidebar's drawerHandle."
             },
@@ -45386,33 +45635,33 @@
                 "name": "collapsed",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:37"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
               },
               {
                 "name": "defaultCollapsed",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:37"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
               },
               {
                 "name": "drawer",
                 "optional": true,
                 "type": "boolean",
-                "doc": "窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:42"
+                "doc": "窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。\n40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。\n抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。",
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:54"
               },
               {
                 "name": "drawerHandle",
                 "optional": true,
-                "type": "DrawerPrimitive.Handle<unknown>",
-                "doc": "抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:44"
+                "type": "SidebarDrawerHandle",
+                "doc": "抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。",
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:56"
               },
               {
                 "name": "onCollapsedChange",
                 "optional": true,
                 "type": "(collapsed: boolean, details: SidebarChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:37"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
               }
             ],
             "inheritedCount": 281,
@@ -45448,21 +45697,64 @@
             "status": "resolved",
             "ownProps": [
               {
+                "name": "className",
+                "optional": true,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/button.tsx:82"
+              },
+              {
+                "name": "data-slot",
+                "optional": true,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/button.tsx:83"
+              },
+              {
                 "name": "handle",
                 "optional": true,
-                "type": "DrawerPrimitive.Handle<unknown>",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:106"
+                "type": "SidebarDrawerHandle",
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:124"
+              },
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
+                "declaredAt": "packages/ui/src/components/button.tsx:90"
+              },
+              {
+                "name": "shape",
+                "optional": true,
+                "type": "\"label\" | \"icon\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:87"
+              },
+              {
+                "name": "size",
+                "optional": true,
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:86"
+              },
+              {
+                "name": "tone",
+                "optional": true,
+                "type": "\"neutral\" | \"danger\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:85"
+              },
+              {
+                "name": "variant",
+                "optional": true,
+                "type": "\"solid\" | \"bordered\" | \"quiet\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:84"
               }
             ],
-            "inheritedCount": 290,
+            "inheritedCount": 288,
             "inheritedFrom": [
               {
                 "source": "@types/react",
-                "count": 284
+                "count": 285
               },
               {
                 "source": "@base-ui/react",
-                "count": 6
+                "count": 3
               }
             ]
           },
@@ -45538,25 +45830,25 @@
                 "name": "active",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
               },
               {
                 "name": "count",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
               },
               {
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
               }
             ],
             "inheritedCount": 289,
@@ -45579,7 +45871,7 @@
                 "name": "children",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:255"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:280"
               }
             ],
             "inheritedCount": 281,
@@ -45618,7 +45910,7 @@
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:254"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:279"
               }
             ],
             "inheritedCount": 289,
@@ -45756,25 +46048,77 @@
               "viaComponent": "button"
             },
             {
+              "part": "SidebarDrawerTrigger",
+              "prop": "className",
+              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "data-slot",
+              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "loading",
+              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "shape",
+              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "size",
+              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "tone",
+              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "viaComponent": "button"
+            },
+            {
+              "part": "SidebarDrawerTrigger",
+              "prop": "variant",
+              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "viaComponent": "button"
+            },
+            {
               "part": "SidebarLink",
               "prop": "count",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
             },
             {
               "part": "SidebarLink",
               "prop": "max",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
             },
             {
               "part": "SidebarSub",
               "prop": "children",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:255"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:280"
             }
           ]
         }
       },
       "keyboard": [],
       "actualExports": [
+        {
+          "name": "createSidebarDrawerHandle",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "createSidebarDrawerHandle(): SidebarDrawerHandle",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
         {
           "name": "Sidebar",
           "kind": "function",
@@ -45817,12 +46161,21 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "SidebarDrawerHandle",
+          "kind": "interface",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "SidebarDrawerTrigger",
           "kind": "function",
           "owner": "sidebar",
           "module": "@qingye_lab/ui/components/sidebar",
           "propsType": "SidebarDrawerTriggerProps",
-          "signature": "SidebarDrawerTrigger({ handle, render, className, children, ...props }: SidebarDrawerTriggerProps)",
+          "signature": "SidebarDrawerTrigger({ handle, className, children, onClick, ref, ...props }: SidebarDrawerTriggerProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -45832,7 +46185,7 @@
           "kind": "type",
           "owner": "sidebar",
           "module": "@qingye_lab/ui/components/sidebar",
-          "signature": "Omit<DrawerPrimitive.Trigger.Props<unknown>, \"handle\"> & { handle?: DrawerPrimitive.Handle<unknown> }",
+          "signature": "ButtonProps & { handle?: SidebarDrawerHandle }",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -45947,7 +46300,7 @@
           "kind": "type",
           "owner": "sidebar",
           "module": "@qingye_lab/ui/components/sidebar",
-          "signature": "useRender.ComponentProps<\"div\"> & {\n  collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;\n  /**\n   * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n   * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。\n   */\n  drawer?: boolean;\n  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。 */\n  drawerHandle?: DrawerPrimitive.Handle<unknown>;\n}",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;\n  /**\n   * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n   * 断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。\n   * 40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。\n   * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。\n   */\n  drawer?: boolean;\n  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。 */\n  drawerHandle?: SidebarDrawerHandle;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -46065,11 +46418,11 @@
         },
         {
           "name": "SidebarProps",
-          "definition": "export type SidebarProps = useRender.ComponentProps<\"div\"> & {\n  collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;\n  /**\n   * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n   * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。\n   */\n  drawer?: boolean;\n  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。 */\n  drawerHandle?: DrawerPrimitive.Handle<unknown>;\n};"
+          "definition": "export type SidebarProps = useRender.ComponentProps<\"div\"> & {\n  collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;\n  /**\n   * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n   * 断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。\n   * 40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。\n   * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。\n   */\n  drawer?: boolean;\n  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。 */\n  drawerHandle?: SidebarDrawerHandle;\n};"
         },
         {
           "name": "SidebarDrawerTriggerProps",
-          "definition": "export type SidebarDrawerTriggerProps = Omit<DrawerPrimitive.Trigger.Props<unknown>, \"handle\"> & { handle?: DrawerPrimitive.Handle<unknown> };"
+          "definition": "export type SidebarDrawerTriggerProps = ButtonProps & { handle?: SidebarDrawerHandle };"
         },
         {
           "name": "SidebarToggleProps",
@@ -46194,6 +46547,12 @@
           "import": "@qingye_lab/ui/components/sidebar",
           "owner": "sidebar",
           "status": "PASS"
+        },
+        {
+          "name": "createSidebarDrawerHandle",
+          "import": "@qingye_lab/ui/components/sidebar",
+          "owner": null,
+          "status": "PASS"
         }
       ],
       "dependencies": {
@@ -46216,7 +46575,7 @@
         "contexts": [
           {
             "name": "GroupLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:174",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:197",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -46225,7 +46584,7 @@
           },
           {
             "name": "InSubPanel",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:28",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:38",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46234,7 +46593,7 @@
           },
           {
             "name": "InSubTree",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:34",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:44",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46252,7 +46611,7 @@
           },
           {
             "name": "SidebarContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:26",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:36",
             "defaultValue": "null",
             "withoutProvider": "throws",
             "providedBy": [
@@ -46262,13 +46621,13 @@
           },
           {
             "name": "SidebarHandleContext",
-            "declaredAt": "packages/ui/src/sidebar-handle.ts:10",
+            "declaredAt": "packages/ui/src/sidebar-handle.ts:54",
             "defaultValue": "null",
             "withoutProvider": "nullable"
           },
           {
             "name": "SidebarSubLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:253",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:278",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -46277,7 +46636,7 @@
           },
           {
             "name": "SubTriggerHasIcon",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:30",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:40",
             "defaultValue": "true",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46414,7 +46773,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "63934ff03a5e0261276f6e24976495abf0f711491928e41839e41b25a6bcb366",
+        "sha256": "864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
@@ -46449,10 +46808,10 @@
                 },
                 {
                   "name": "drawer / drawerHandle",
-                  "type": "boolean / DrawerPrimitive.Handle",
+                  "type": "boolean / SidebarDrawerHandle",
                   "default": "false",
-                  "description": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws.",
-                  "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws."
+                  "description": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it.",
+                  "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it."
                 },
                 {
                   "name": "render / ref / native props",
@@ -46469,7 +46828,7 @@
               "props": [
                 {
                   "name": "handle",
-                  "type": "DrawerPrimitive.Handle",
+                  "type": "SidebarDrawerHandle",
                   "description": "Outside a Workspace, the same handle as Sidebar's drawerHandle.",
                   "descriptionEn": "Outside a Workspace, the same handle as Sidebar's drawerHandle."
                 },
@@ -50412,6 +50771,12 @@
               "type": "useRender.ComponentProps<native table part>",
               "description": "属性属于真实元素；caption 命名整张表。",
               "descriptionEn": "Props reach actual elements; caption names the table."
+            },
+            {
+              "name": "TableHeader sticky / stickyOffset",
+              "type": "boolean / number | string",
+              "description": "表头吸在最近的滚动区顶部：横向放得下时 TableContainer 不构成滚动容器，表头吸在页面或 Workspace 内容区；横向溢出时吸在 TableContainer 自己的有界高度里。stickyOffset 让开顶上的固定页眉，数字按 px。",
+              "descriptionEn": "Sticks the header to the top of the nearest scroll area: when the table fits horizontally TableContainer is not a scroll container, so the header sticks to the page or Workspace content; when it overflows sideways it sticks within TableContainer's own bounded height. stickyOffset clears a fixed bar above; numbers are px."
             }
           ]
         },
@@ -50525,7 +50890,7 @@
                 "name": "numeric",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/table.tsx:110"
+                "declaredAt": "packages/ui/src/components/table.tsx:117"
               }
             ],
             "inheritedCount": 290,
@@ -50588,7 +50953,7 @@
                 "name": "numeric",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/table.tsx:110"
+                "declaredAt": "packages/ui/src/components/table.tsx:117"
               }
             ],
             "inheritedCount": 287,
@@ -50611,8 +50976,15 @@
                 "name": "sticky",
                 "optional": true,
                 "type": "boolean",
-                "doc": "表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器：\n所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height，\n或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。\n吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。",
-                "declaredAt": "packages/ui/src/components/table.tsx:87"
+                "doc": "表头吸在最近的滚动区顶部。表格横向放得下时，TableContainer 不是滚动容器（见上），表头吸在页面或 Workspace 内容区；\n横向溢出、需要左右滚动的宽表，TableContainer 本身成了滚动容器，表头只在它自己的有界高度里吸住——\n给 TableContainer（DataTable 的 containerProps）设了 max-height / height，或 DataTable 的虚拟化视口。\n吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。",
+                "declaredAt": "packages/ui/src/components/table.tsx:92"
+              },
+              {
+                "name": "stickyOffset",
+                "optional": true,
+                "type": "number | string | undefined",
+                "doc": "吸住时离滚动区顶部的距离：滚动区顶上还有一条固定的页眉或工具栏时，让开它的高度。数字按 px，字符串是 CSS 长度（如 \"var(--app-header)\"）。",
+                "declaredAt": "packages/ui/src/components/table.tsx:94"
               }
             ],
             "inheritedCount": 281,
@@ -50646,13 +51018,7 @@
         ],
         "drift": {
           "documentedButMissing": [],
-          "undocumented": [
-            {
-              "part": "TableHeader",
-              "prop": "sticky",
-              "declaredAt": "packages/ui/src/components/table.tsx:87"
-            }
-          ]
+          "undocumented": []
         }
       },
       "keyboard": [],
@@ -50790,7 +51156,7 @@
           "owner": "table",
           "module": "@qingye_lab/ui/components/table",
           "propsType": "TableHeaderProps",
-          "signature": "TableHeader({ render, className, sticky = false, ...props }: TableHeaderProps)",
+          "signature": "TableHeader({ render, className, sticky = false, stickyOffset, ...props }: TableHeaderProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -50800,7 +51166,7 @@
           "kind": "type",
           "owner": "table",
           "module": "@qingye_lab/ui/components/table",
-          "signature": "useRender.ComponentProps<\"thead\"> & {\n  /**\n   * 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器：\n   * 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height，\n   * 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。\n   * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n   * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。\n   */\n  sticky?: boolean;\n}",
+          "signature": "useRender.ComponentProps<\"thead\"> & {\n  /**\n   * 表头吸在最近的滚动区顶部。表格横向放得下时，TableContainer 不是滚动容器（见上），表头吸在页面或 Workspace 内容区；\n   * 横向溢出、需要左右滚动的宽表，TableContainer 本身成了滚动容器，表头只在它自己的有界高度里吸住——\n   * 给 TableContainer（DataTable 的 containerProps）设了 max-height / height，或 DataTable 的虚拟化视口。\n   * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n   * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。\n   */\n  sticky?: boolean;\n  /** 吸住时离滚动区顶部的距离：滚动区顶上还有一条固定的页眉或工具栏时，让开它的高度。数字按 px，字符串是 CSS 长度（如 \"var(--app-header)\"）。 */\n  stickyOffset?: number | string | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -50862,7 +51228,7 @@
         },
         {
           "name": "TableHeaderProps",
-          "definition": "export type TableHeaderProps = useRender.ComponentProps<\"thead\"> & {\n  /**\n   * 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器：\n   * 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height，\n   * 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。\n   * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n   * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。\n   */\n  sticky?: boolean;\n};"
+          "definition": "export type TableHeaderProps = useRender.ComponentProps<\"thead\"> & {\n  /**\n   * 表头吸在最近的滚动区顶部。表格横向放得下时，TableContainer 不是滚动容器（见上），表头吸在页面或 Workspace 内容区；\n   * 横向溢出、需要左右滚动的宽表，TableContainer 本身成了滚动容器，表头只在它自己的有界高度里吸住——\n   * 给 TableContainer（DataTable 的 containerProps）设了 max-height / height，或 DataTable 的虚拟化视口。\n   * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。\n   * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。\n   */\n  sticky?: boolean;\n  /** 吸住时离滚动区顶部的距离：滚动区顶上还有一条固定的页眉或工具栏时，让开它的高度。数字按 px，字符串是 CSS 长度（如 \"var(--app-header)\"）。 */\n  stickyOffset?: number | string | undefined;\n};"
         },
         {
           "name": "TableBodyProps",
@@ -51029,7 +51395,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/table.tsx",
-        "sha256": "6d4986a22c788958edc8574a63618019df7eb6d313a2f2c4d631107706b11acf",
+        "sha256": "ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "原生表格保留比较关系，外部容器承接横向容量。行占位与单元格内距消费独立角色；疏密取值是预设。",
@@ -51078,6 +51444,12 @@
                   "type": "useRender.ComponentProps<native table part>",
                   "description": "Props reach actual elements; caption names the table.",
                   "descriptionEn": "Props reach actual elements; caption names the table."
+                },
+                {
+                  "name": "TableHeader sticky / stickyOffset",
+                  "type": "boolean / number | string",
+                  "description": "Sticks the header to the top of the nearest scroll area: when the table fits horizontally TableContainer is not a scroll container, so the header sticks to the page or Workspace content; when it overflows sideways it sticks within TableContainer's own bounded height. stickyOffset clears a fixed bar above; numbers are px.",
+                  "descriptionEn": "Sticks the header to the top of the nearest scroll area: when the table fits horizontally TableContainer is not a scroll container, so the header sticks to the page or Workspace content; when it overflows sideways it sticks within TableContainer's own bounded height. stickyOffset clears a fixed bar above; numbers are px."
                 }
               ]
             },
@@ -51184,6 +51556,7 @@
       ],
       "docs": "/docs/components/tabs",
       "notes": [
+        "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
         "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
       ],
       "keywords": [
@@ -51307,7 +51680,7 @@
                 "optional": true,
                 "type": "\"visited\" | boolean",
                 "doc": "\"visited\"（默认）：第一次到达时才挂载，之后保留；true：一开始就全部挂载；false：离开即卸载。",
-                "declaredAt": "packages/ui/src/components/tabs.tsx:17"
+                "declaredAt": "packages/ui/src/components/tabs.tsx:35"
               }
             ],
             "inheritedCount": 279,
@@ -51379,7 +51752,7 @@
           "owner": "tabs",
           "module": "@qingye_lab/ui/components/tabs",
           "propsType": "TabsListProps",
-          "signature": "TabsList({ className, ...props }: TabsListProps)",
+          "signature": "TabsList({ className, ref, ...props }: TabsListProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -51578,7 +51951,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tabs.tsx",
-        "sha256": "926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd",
+        "sha256": "cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
@@ -51589,6 +51962,7 @@
           "category": "Navigation",
           "decisions": "Manual activation and mounted panels are defaults; switching views does not approve or save a draft.",
           "notes": [
+            "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
             "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
           ],
           "api": [
@@ -53287,7 +53661,7 @@
       "notes": [
         "只填时刻用 TimeField；日期和时间一起用 DateTimePicker。",
         "分段是 div 而不是原生输入，所以没有软键盘唤起；触屏上的输入走键盘事件，尚未单独适配。",
-        "granularity 为 minute 时，已有值里的秒不显示，编辑后的值不再带秒。",
+        "值比分段更细时（minute 下的秒、任何粒度下的毫秒），那部分不显示，但改别的分段时照原样保留，与原生 input[type=time] 不改写 value 一致；全部清空后重新填写才是不带细部的新值。",
         "没有弹层：时刻的取值空间很小，直接分段填比从列表里选更快。"
       ],
       "keywords": [
@@ -53314,8 +53688,8 @@
               "name": "granularity",
               "type": "\"minute\" | \"second\"",
               "default": "\"minute\"",
-              "description": "分到哪一段为止。minute 的值是 HH:mm，second 的值是 HH:mm:ss。",
-              "descriptionEn": "The last segment. minute yields HH:mm; second yields HH:mm:ss."
+              "description": "分到哪一段为止。minute 新填出的值是 HH:mm，second 是 HH:mm:ss；不设毫秒分段。",
+              "descriptionEn": "The last segment. A newly entered minute value is HH:mm, a second value HH:mm:ss; there is no millisecond segment."
             },
             {
               "name": "hourCycle",
@@ -53368,78 +53742,78 @@
                 "optional": true,
                 "type": "string | null | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:19"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:20"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:29"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:34"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:28"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:33"
               },
               {
                 "name": "granularity",
                 "optional": true,
                 "type": "\"minute\" | \"second\"",
-                "doc": "填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:23"
+                "doc": "填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）；\n传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉，\n与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。",
+                "declaredAt": "packages/ui/src/components/time-field.tsx:28"
               },
               {
                 "name": "hourCycle",
                 "optional": true,
                 "type": "12 | 24",
                 "doc": "12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:25"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:30"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:27"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:32"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:27"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:32"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:28"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:33"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: string | null) => void) | undefined",
                 "doc": "填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:21"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:22"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:29"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:34"
               },
               {
                 "name": "required",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:29"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:34"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "string | null | undefined",
                 "doc": "受控的时间文本；`null` 表示空。**传了 `value` 这个属性**（含 `value={null}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/time-field.tsx:17"
+                "declaredAt": "packages/ui/src/components/time-field.tsx:18"
               }
             ],
             "inheritedCount": 276,
@@ -53510,7 +53884,7 @@
           "kind": "type",
           "owner": "time-field",
           "module": "@qingye_lab/ui/components/time-field",
-          "signature": "Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的时间文本；`null` 表示空。**传了 `value` 这个属性**（含 `value={null}`）就是受控，不传才是非受控。 */\n  value?: string | null | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: string | null | undefined;\n  /** 填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。 */\n  onValueChange?: ((value: string | null) => void) | undefined;\n  /** 填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。 */\n  granularity?: \"minute\" | \"second\";\n  /** 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。 */\n  hourCycle?: 12 | 24;\n  /** 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n}",
+          "signature": "Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的时间文本；`null` 表示空。**传了 `value` 这个属性**（含 `value={null}`）就是受控，不传才是非受控。 */\n  value?: string | null | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: string | null | undefined;\n  /** 填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。 */\n  onValueChange?: ((value: string | null) => void) | undefined;\n  /**\n   * 填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）；\n   * 传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉，\n   * 与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。\n   */\n  granularity?: \"minute\" | \"second\";\n  /** 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。 */\n  hourCycle?: 12 | 24;\n  /** 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -53519,7 +53893,7 @@
       "types": [
         {
           "name": "TimeFieldProps",
-          "definition": "export type TimeFieldProps = Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的时间文本；`null` 表示空。**传了 `value` 这个属性**（含 `value={null}`）就是受控，不传才是非受控。 */\n  value?: string | null | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: string | null | undefined;\n  /** 填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。 */\n  onValueChange?: ((value: string | null) => void) | undefined;\n  /** 填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。 */\n  granularity?: \"minute\" | \"second\";\n  /** 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。 */\n  hourCycle?: 12 | 24;\n  /** 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n};"
+          "definition": "export type TimeFieldProps = Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的时间文本；`null` 表示空。**传了 `value` 这个属性**（含 `value={null}`）就是受控，不传才是非受控。 */\n  value?: string | null | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: string | null | undefined;\n  /** 填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。 */\n  onValueChange?: ((value: string | null) => void) | undefined;\n  /**\n   * 填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）；\n   * 传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉，\n   * 与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。\n   */\n  granularity?: \"minute\" | \"second\";\n  /** 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。 */\n  hourCycle?: 12 | 24;\n  /** 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n};"
         }
       ],
       "usageImports": [
@@ -53640,20 +54014,20 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/time-field.tsx",
-        "sha256": "6bfa3ba89d45d563feac7bd12dcadb5366fb5d6afb51ce9c569f85401a004c14",
+        "sha256": "937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "value 是与原生 input[type=time] 同形的无时区文本（HH:mm 或 HH:mm:ss），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。",
+      "decisions": "value 是与原生 input[type=time] 同形的无时区文本（HH:mm、HH:mm:ss，秒后可带 1–3 位小数），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。",
       "localized": {
         "en": {
           "title": "TimeField",
           "description": "Fill in a time of day alone, segment by segment: hour, minute, second.",
           "category": "Date and time",
-          "decisions": "The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.",
+          "decisions": "The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss, optionally with a 1–3 digit fraction of a second); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.",
           "notes": [
             "Use TimeField for a time of day alone; use DateTimePicker for date and time together.",
             "Segments are divs, not native inputs, so no soft keyboard is raised; touch entry goes through key events and has not been adapted separately.",
-            "With granularity minute, seconds in an existing value are not shown and an edited value no longer carries them.",
+            "When a value is finer than the segments (seconds under minute, milliseconds under any granularity), that part is not shown but survives edits to other segments, as native input[type=time] never rewrites its value; only clearing every segment and entering again yields a new value without it.",
             "There is no popup: a time of day has a small value space, and filling segments is faster than choosing from a list."
           ],
           "api": [
@@ -53672,8 +54046,8 @@
                   "name": "granularity",
                   "type": "\"minute\" | \"second\"",
                   "default": "\"minute\"",
-                  "description": "The last segment. minute yields HH:mm; second yields HH:mm:ss.",
-                  "descriptionEn": "The last segment. minute yields HH:mm; second yields HH:mm:ss."
+                  "description": "The last segment. A newly entered minute value is HH:mm, a second value HH:mm:ss; there is no millisecond segment.",
+                  "descriptionEn": "The last segment. A newly entered minute value is HH:mm, a second value HH:mm:ss; there is no millisecond segment."
                 },
                 {
                   "name": "hourCycle",
@@ -60089,6 +60463,12 @@
               "type": "useRender.ComponentProps<main>",
               "description": "ref 指向滚动元素，跟随滚动的部件（目录、虚拟列表）从这里取容器。",
               "descriptionEn": "The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it."
+            },
+            {
+              "name": "transitionKey",
+              "type": "React.Key",
+              "description": "换页的标识，通常传路由路径。变化时滚动回到顶部，内容重放一次进场；首次挂载不动。地址带 #锚点 时不动滚动，交给路由滚到锚点。键盘操作时不播进场，减少动效时只淡入。",
+              "descriptionEn": "Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion."
             }
           ]
         },
@@ -60147,7 +60527,15 @@
           {
             "name": "WorkspaceContent",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "transitionKey",
+                "optional": true,
+                "type": "React.Key",
+                "doc": "换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion=\"rise-in\"`，调用方给了\n`data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。",
+                "declaredAt": "packages/ui/src/components/workspace.tsx:189"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -60184,7 +60572,7 @@
                 "name": "children",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/workspace.tsx:128"
+                "declaredAt": "packages/ui/src/components/workspace.tsx:127"
               }
             ],
             "inheritedCount": 0,
@@ -60323,7 +60711,7 @@
           "owner": "workspace",
           "module": "@qingye_lab/ui/components/workspace",
           "propsType": "WorkspaceContentProps",
-          "signature": "WorkspaceContent({ id, render, className, ref, tabIndex, ...props }: WorkspaceContentProps)",
+          "signature": "WorkspaceContent({ id, render, className, ref, tabIndex, transitionKey, ...props }: WorkspaceContentProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -60333,7 +60721,7 @@
           "kind": "type",
           "owner": "workspace",
           "module": "@qingye_lab/ui/components/workspace",
-          "signature": "useRender.ComponentProps<\"main\">",
+          "signature": "useRender.ComponentProps<\"main\"> & {\n  /**\n   * 换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion=\"rise-in\"`，调用方给了\n   * `data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。\n   */\n  transitionKey?: React.Key;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -60485,7 +60873,7 @@
         },
         {
           "name": "WorkspaceContentProps",
-          "definition": "export type WorkspaceContentProps = useRender.ComponentProps<\"main\">;"
+          "definition": "export type WorkspaceContentProps = useRender.ComponentProps<\"main\"> & {\n  /**\n   * 换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion=\"rise-in\"`，调用方给了\n   * `data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。\n   */\n  transitionKey?: React.Key;\n};"
         }
       ],
       "usageImports": [
@@ -60541,8 +60929,6 @@
       "dependencies": {
         "runtime": [
           "@base-ui/react",
-          "@tabler/icons-react",
-          "class-variance-authority",
           "clsx",
           "react",
           "react-dom",
@@ -60568,7 +60954,7 @@
           },
           {
             "name": "SidebarHandleContext",
-            "declaredAt": "packages/ui/src/sidebar-handle.ts:10",
+            "declaredAt": "packages/ui/src/sidebar-handle.ts:54",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -60577,7 +60963,7 @@
           },
           {
             "name": "WorkspaceContext",
-            "declaredAt": "packages/ui/src/components/workspace.tsx:22",
+            "declaredAt": "packages/ui/src/components/workspace.tsx:21",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -60586,10 +60972,7 @@
           }
         ],
         "baseUi": [
-          "@base-ui/react/button",
-          "@base-ui/react/dialog",
           "@base-ui/react/direction-provider",
-          "@base-ui/react/drawer",
           "@base-ui/react/merge-props",
           "@base-ui/react/use-render"
         ],
@@ -60695,7 +61078,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/workspace.tsx",
-        "sha256": "781c419aa6afcd278877ca1ec21c076cb4d75b5ec015b727234fb14030f6c432",
+        "sha256": "ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "页面的名称、摘要与页面级操作在顶栏里，正文不再立第二个大标题。工作面四周一个 2 分的外边距，紧挨侧栏的一侧不另加：那道间隔是侧栏的内缘，侧栏与工作面之间读来只有一个间隔。窄屏工作面贴满视口，去掉外边距、圆角、线与阴影。路由页面用 WorkspaceHeaderPortal 把自己的标题与操作送进顶栏；顶栏在 DOM 里先于内容区，送上去的操作在 Tab 顺序里也先于正文。",
@@ -60802,6 +61185,12 @@
                   "type": "useRender.ComponentProps<main>",
                   "description": "The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it.",
                   "descriptionEn": "The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it."
+                },
+                {
+                  "name": "transitionKey",
+                  "type": "React.Key",
+                  "description": "Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion.",
+                  "descriptionEn": "Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion."
                 }
               ]
             },
@@ -61018,8 +61407,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v5.0.0/llms.txt",
-    "components": "ai/v5.0.0/components"
+    "index": "ai/v5.1.0/llms.txt",
+    "components": "ai/v5.1.0/components"
   },
   "localized": {
     "en": {
@@ -61027,8 +61416,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v5.0.0/en/llms.txt",
-      "components": "ai/v5.0.0/en/components"
+      "index": "ai/v5.1.0/en/llms.txt",
+      "components": "ai/v5.1.0/en/components"
     }
   },
   "registry": {

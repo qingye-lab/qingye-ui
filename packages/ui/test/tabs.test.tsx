@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as React from "react";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { fireEvent } from "@testing-library/react";
 import { Tabs, TabsList, TabsPanel, TabsTab } from "../src/components/tabs";
 describe("Tabs", () => {
   it("uses manual keyboard activation, keeps disabled tabs inert and retains draft input", async () => {
@@ -30,5 +31,35 @@ describe("Tabs", () => {
     expect(screen.getByLabelText("b")).toHaveValue("草稿");
     expect(screen.getByLabelText("b").closest("[data-slot=tabs-panel]")).toHaveAttribute("hidden");
     expect(mounts).toEqual(["a", "c", "b", "d"]);
+  });
+  describe("overflow edges", () => {
+    afterEach(() => vi.restoreAllMocks());
+    function stubMetrics(scrollWidth: number, clientWidth: number) {
+      vi.spyOn(HTMLElement.prototype, "scrollWidth", "get").mockReturnValue(scrollWidth);
+      vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(clientWidth);
+    }
+    const setup = (dir?: "rtl") => render(<div dir={dir}><Tabs defaultValue="a"><TabsList aria-label="视角"><TabsTab value="a">A</TabsTab><TabsTab value="b">B</TabsTab></TabsList></Tabs></div>);
+    it("marks only the end that still has hidden tabs, and follows the scroll position", () => {
+      stubMetrics(500, 200); setup();
+      const list = screen.getByRole("tablist");
+      expect(list).not.toHaveAttribute("data-overflow-start"); expect(list).toHaveAttribute("data-overflow-end");
+      list.scrollLeft = 120; fireEvent.scroll(list);
+      expect(list).toHaveAttribute("data-overflow-start"); expect(list).toHaveAttribute("data-overflow-end");
+      list.scrollLeft = 300; fireEvent.scroll(list);
+      expect(list).toHaveAttribute("data-overflow-start"); expect(list).not.toHaveAttribute("data-overflow-end");
+    });
+    it("uses the distance from the inline start, so negative RTL offsets mean the same thing", () => {
+      stubMetrics(500, 200); setup("rtl");
+      const list = screen.getByRole("tablist");
+      list.scrollLeft = -120; fireEvent.scroll(list);
+      expect(list).toHaveAttribute("data-overflow-start"); expect(list).toHaveAttribute("data-overflow-end");
+      list.scrollLeft = -300; fireEvent.scroll(list);
+      expect(list).not.toHaveAttribute("data-overflow-end");
+    });
+    it("marks nothing when the tabs fit", () => {
+      stubMetrics(200, 200); setup();
+      const list = screen.getByRole("tablist");
+      expect(list).not.toHaveAttribute("data-overflow-start"); expect(list).not.toHaveAttribute("data-overflow-end");
+    });
   });
 });

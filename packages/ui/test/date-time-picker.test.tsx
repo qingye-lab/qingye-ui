@@ -107,3 +107,38 @@ test("the clear action empties the value, returns focus to the input and is abse
   expect(screen.getByText("只读")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: "清除日期和时间" })).not.toBeInTheDocument();
 });
+
+test("a value with milliseconds is accepted as-is, in any precision, and reaches the native input and form unchanged", () => {
+  const { container, rerender } = render(<form><DateTimePicker name="when" value="2026-10-03T09:12:34.567" onValueChange={() => undefined} inputProps={{ "aria-label": "When", step: 0.001 }} /></form>);
+  expect(screen.getByLabelText("When")).toHaveValue("2026-10-03T09:12:34.567");
+  expect(new FormData(container.querySelector("form")!).get("when")).toBe("2026-10-03T09:12:34.567");
+  // 值比 step 更细时不崩溃、不被改写（与原生输入一致：只在校验里报 stepMismatch）。
+  rerender(<form><DateTimePicker name="when" value="2026-10-03T09:12:34.567" onValueChange={() => undefined} inputProps={{ "aria-label": "When" }} /></form>);
+  expect(screen.getByLabelText("When")).toHaveValue("2026-10-03T09:12:34.567");
+  // 1–2 位小数同样是有效文本（浏览器自己如何规范化显示不是组件的事），不抛错。
+  expect(() => rerender(<form><DateTimePicker name="when" value="2026-10-03T09:12:34.5" onValueChange={() => undefined} inputProps={{ "aria-label": "When" }} /></form>)).not.toThrow();
+  // 秒后面不是 1–3 位小数的仍拒绝。
+  expect(() => render(<DateTimePicker value="2026-10-03T09:12:34.5678" onValueChange={() => undefined} />)).toThrow("without a zone");
+  expect(() => render(<DateTimePicker value="2026-10-03T09:12.567" onValueChange={() => undefined} />)).toThrow("without a zone");
+});
+
+test("a native entry with milliseconds is reported, and min/max compare on the fraction", () => {
+  const change = vi.fn();
+  render(<DateTimePicker defaultValue="2026-10-03T09:12:34" min="2026-10-03T09:00:00.250" max="2026-10-03T10:00" onValueChange={change} inputProps={{ "aria-label": "When", step: 0.001 }} />);
+  const input = screen.getByLabelText("When") as HTMLInputElement;
+  fireEvent.change(input, { target: { value: "2026-10-03T09:00:00.100" } });
+  expect(change).not.toHaveBeenCalled(); // 早于 min 的毫秒，越界不上报
+  fireEvent.change(input, { target: { value: "2026-10-03T09:12:34.567" } });
+  expect(change).toHaveBeenLastCalledWith("2026-10-03T09:12:34.567", expect.anything());
+});
+
+test("the time draft in the popover keeps milliseconds and Apply emits them", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateTimePicker defaultValue="2026-10-03T09:12:34.567" onValueChange={change} inputProps={{ "aria-label": "When", step: 0.001 }} /></UILocaleProvider>);
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  const time = await screen.findByLabelText("Time");
+  expect(time).toHaveValue("09:12:34.567");
+  fireEvent.change(time, { target: { value: "09:12:35.001" } });
+  await userEvent.click(screen.getByRole("button", { name: "Apply" }));
+  expect(change).toHaveBeenLastCalledWith("2026-10-03T09:12:35.001", expect.anything());
+});

@@ -1,9 +1,9 @@
 # Workspace
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: 781c419aa6afcd278877ca1ec21c076cb4d75b5ec015b727234fb14030f6c432
+Source SHA-256: ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 
@@ -68,7 +68,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### WorkspaceContent
-- no props declared by this library
+- `transitionKey?`: `React.Key`. 换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion="rise-in"`，调用方给了 `data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### WorkspaceHeader
@@ -93,7 +93,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, react-dom, tailwind-merge
+- Runtime: @base-ui/react, clsx, react, react-dom, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
@@ -130,6 +130,7 @@ Page-level actions at the end of the row, under the same rule as SectionActions.
 ### WorkspaceContent
 The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus.
 - render / ref / children / native props: useRender.ComponentProps<main>. The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it.
+- transitionKey: React.Key. Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion.
 
 ### WorkspaceHeaderPortal
 Renders its children into the header's slot for the page; they unmount with the page.

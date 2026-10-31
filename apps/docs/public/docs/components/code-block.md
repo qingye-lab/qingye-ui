@@ -1,6 +1,6 @@
 # 代码 CodeBlock
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
 Source SHA-256: b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b

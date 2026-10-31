@@ -5,9 +5,8 @@ import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { createPortal } from "react-dom";
 import { useUILocale } from "../locale";
-import { SidebarHandleContext } from "../sidebar-handle";
+import { createSidebarDrawerHandle, SidebarHandleContext } from "../sidebar-handle";
 import { cn } from "../utils";
-import { DrawerCreateHandle } from "./drawer";
 import { Heading, type HeadingProps } from "./typography";
 
 /**
@@ -46,7 +45,7 @@ export function Workspace({ render, className, children, ...props }: WorkspacePr
   const [outlet, setOutlet] = React.useState<HTMLElement | null>(null);
   const defaultContentId = React.useId();
   const [contentId, setContentId] = React.useState(defaultContentId);
-  const [sidebarHandle] = React.useState(() => DrawerCreateHandle<unknown>());
+  const [sidebarHandle] = React.useState(() => createSidebarDrawerHandle());
   const context = React.useMemo(() => ({ outlet, setOutlet, contentId, defaultContentId, setContentId }), [outlet, contentId, defaultContentId]);
   const element = useRender({
     defaultTagName: "div", render,
@@ -182,7 +181,13 @@ export function WorkspaceActions({ render, className, ...props }: WorkspaceActio
   });
 }
 
-export type WorkspaceContentProps = useRender.ComponentProps<"main">;
+export type WorkspaceContentProps = useRender.ComponentProps<"main"> & {
+  /**
+   * 换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion="rise-in"`，调用方给了
+   * `data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。
+   */
+  transitionKey?: React.Key;
+};
 /**
  * 内容区：外壳里唯一的滚动容器，默认 `<main>`。内缘由页面自己给（整幅的表格要贴边），取页边距 `--qy-page-gutter` 时与顶栏标题同一条左缘。
  *
@@ -192,7 +197,7 @@ export type WorkspaceContentProps = useRender.ComponentProps<"main">;
  * 容器与子节点尺寸变化、子树变化（下一帧）与资源载入时重测；服务端与首帧按「放得下」。在 Tab 顺序里就要看得见焦点：盒内一道 1px 焦墨线
  * （`--qy-focus-quiet-width`，与 framed={false} 的表格容器同一画法），外缘不变（NG9）。调用方显式传入的 tabIndex 优先。
  */
-export function WorkspaceContent({ id, render, className, ref, tabIndex, ...props }: WorkspaceContentProps) {
+export function WorkspaceContent({ id, render, className, ref, tabIndex, transitionKey, ...props }: WorkspaceContentProps) {
   const workspace = React.useContext(WorkspaceContext);
   const actualId = id ?? workspace?.defaultContentId;
   const setContentId = workspace?.setContentId;
@@ -220,6 +225,21 @@ export function WorkspaceContent({ id, render, className, ref, tabIndex, ...prop
     node.addEventListener("load", measure, true);
     return () => { observer.disconnect(); mutations.disconnect(); node.removeEventListener("load", measure, true); cancelAnimationFrame(frame); };
   }, []);
+  const shownKey = React.useRef(transitionKey);
+  React.useLayoutEffect(() => {
+    if (shownKey.current === transitionKey) return;
+    shownKey.current = transitionKey;
+    const node = element.current; if (!node) return;
+    // 先回到顶部；地址带锚点、且锚点就在这一页的内容里时再把它滚入视野。只看「新内容里有没有这个锚点」，
+    // 不只看地址有没有 #：路由可能晚于这一刻才改地址，残留的上一页锚点在新页面里找不到，照常回到顶部。
+    node.scrollTop = 0;
+    const anchor = window.location.hash ? document.getElementById(decodeURIComponent(window.location.hash.slice(1))) : null;
+    if (anchor && node.contains(anchor)) anchor.scrollIntoView?.();
+    // 重放进场：先摘掉再挂回，中间读一次布局，浏览器才把它当作一次新的动画。
+    // 调用方自己给了 data-motion 时重放的是它，不换成 rise-in。
+    const motion = node.getAttribute("data-motion") ?? "rise-in";
+    node.removeAttribute("data-motion"); void node.offsetWidth; node.setAttribute("data-motion", motion);
+  }, [transitionKey]);
   return useRender({
     defaultTagName: "main", render, ref: [element, ref ?? null],
     props: mergeProps({ "data-slot": "workspace-content", id: actualId, tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),

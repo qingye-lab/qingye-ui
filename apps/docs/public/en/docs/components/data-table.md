@@ -1,9 +1,9 @@
 # DataTable
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: cfdf9f32b1ff5756b784180248b461763ef5254eba022343cf2c30838a8d4ff3
+Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -69,7 +69,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
 - `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
-- `stickyHeader?`: `boolean`. 表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里—— 虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。 没有高度限制时表格随页面流动，表头不会吸在页面顶部。
+- `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
+- `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
 - `table`: `TableInstance<TData>`.
 - `virtualization?`: `DataTableVirtualization`.
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
@@ -90,8 +91,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
-- `stickyHeader?`: `boolean`. 表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。
-- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader">`.
+- `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
+- `stickyHeaderOffset?`: `DataTableProps<TData>["stickyHeaderOffset"]`.
+- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader" | "stickyHeaderOffset">`.
 - `virtualization?`: `DataTableVirtualization`.
 - plus 277 inherited (@types/react 277); not expanded, see the installed declarations
 
@@ -136,7 +138,7 @@ Configured sorting, page selection, active rows and pagination without issuing r
 - activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent.
 - selectionAppearance: row | checkbox; default row. Checkbox mode removes only selected-row fill, retaining actual checkboxes and independent active-row emphasis.
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.
-- stickyHeader: boolean. Sticks the header to the top of the table's own bounded-height container: the virtualization viewport, or a height / max-height set through tableProps.containerProps. An unbounded table does not stick to the page top.
+- stickyHeader / stickyHeaderOffset: boolean / number | string. Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px.
 - columns[].pinned / columns[].empty: boolean / ReactNode. pinned fixes a contiguous run of leading columns (the selection column is pinned with them; non-contiguous pins throw) and draws an edge line once scrolled sideways. empty replaces the default dash plus screen-reader 'No value' for null, undefined or empty strings in columns without cell; zero still renders. Callers distinguish unknown from not applicable through empty.
 - caption / busy / error / tableProps / native div props: ReactNode / boolean / ReactNode / DataTableProps / HTML props. While busy the old rows stay put, an indeterminate mark appears along the top edge and the pager blocks paging while keeping focus on the pressed button. error is application content with its own retry action, placed above the table as role=alert; old rows stay as well. Props target the table or composition root and never infer request outcomes.
 

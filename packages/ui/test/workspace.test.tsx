@@ -135,6 +135,34 @@ describe("Workspace", () => {
     expect(observers.every(observer => observer.targets.size === 0)).toBe(true);
   });
 
+  it("returns to the top and replays the entrance when the page changes, but not on first mount; an anchor in the new page wins over the top", () => {
+    const { rerender } = render(<WorkspaceContent transitionKey="/a"><p>甲</p></WorkspaceContent>);
+    const main = screen.getByRole("main");
+    let top = 240; Object.defineProperty(main, "scrollTop", { configurable: true, get: () => top, set: value => { top = value; } });
+    expect(main).not.toHaveAttribute("data-motion");
+    rerender(<WorkspaceContent transitionKey="/a"><p>甲</p></WorkspaceContent>);
+    expect(top).toBe(240);
+    rerender(<WorkspaceContent transitionKey="/b"><p>乙</p></WorkspaceContent>);
+    expect(top).toBe(0);
+    expect(main).toHaveAttribute("data-motion", "rise-in");
+    const scrolled: Element[] = [];
+    Element.prototype.scrollIntoView = function (this: Element) { scrolled.push(this); };
+    window.location.hash = "#members";
+    try {
+      // 地址里残留的上一页锚点在新内容里找不到：照常回到顶部。
+      top = 240; rerender(<WorkspaceContent transitionKey="/c"><p>丙</p></WorkspaceContent>);
+      expect(top).toBe(0); expect(scrolled).toEqual([]);
+      top = 240; rerender(<WorkspaceContent transitionKey="/d"><h2 id="members">成员</h2></WorkspaceContent>);
+      expect(scrolled).toEqual([screen.getByRole("heading", { name: "成员" })]);
+    } finally { window.location.hash = ""; delete (Element.prototype as Partial<Element>).scrollIntoView; }
+  });
+
+  it("replays the caller's own data-motion on a page change instead of replacing it", () => {
+    const { rerender } = render(<WorkspaceContent transitionKey="/a" data-motion="fade-in"><p>甲</p></WorkspaceContent>);
+    rerender(<WorkspaceContent transitionKey="/b" data-motion="fade-in"><p>乙</p></WorkspaceContent>);
+    expect(screen.getByRole("main")).toHaveAttribute("data-motion", "fade-in");
+  });
+
   it("sends a page's title and actions up into the header, and takes them away when the page unmounts", () => {
     const { rerender } = render(<Shell><Page title="成员" action="邀请成员" /></Shell>);
     const header = screen.getByRole("banner"); const main = screen.getByRole("main");

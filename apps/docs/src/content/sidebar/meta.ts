@@ -20,7 +20,8 @@ export default {
     "SidebarLink",
     "SidebarSub",
     "SidebarSubTrigger",
-    "SidebarSubContent"
+    "SidebarSubContent",
+    "createSidebarDrawerHandle"
   ],
   "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
   "decisionsEn": "Collapsing produces an icon rail, not a hidden panel: navigation and links stay mounted, names switch to visually hidden (accessible name unchanged) with a Tooltip restoring a visible name; a sub-level's inline panel becomes a Popover over the same content in the rail, and its open/closed memory survives collapsing. Active and routes are explicit application facts.",
@@ -39,10 +40,10 @@ export default {
         },
         {
           "name": "drawer / drawerHandle",
-          "type": "boolean / DrawerPrimitive.Handle",
+          "type": "boolean / SidebarDrawerHandle",
           "default": "false",
-          "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 DrawerCreateHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。",
-          "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws."
+          "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位，不按宽度自动收起，中等宽度要收成 rail 由应用控制 collapsed。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 createSidebarDrawerHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。抽屉代码在第一次变窄时才加载，宽屏首屏不带它。",
+          "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it."
         },
         {
           "name": "render / ref / native props",
@@ -59,7 +60,7 @@ export default {
       "props": [
         {
           "name": "handle",
-          "type": "DrawerPrimitive.Handle",
+          "type": "SidebarDrawerHandle",
           "description": "不在 Workspace 里时，与 Sidebar 的 drawerHandle 相同。",
           "descriptionEn": "Outside a Workspace, the same handle as Sidebar's drawerHandle."
         },

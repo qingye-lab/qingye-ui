@@ -38,6 +38,11 @@ export type TableContainerProps = useRender.ComponentProps<"div"> & {
  * 可聚焦时才成为一个具名区域（role=region）：优先用调用方给的 aria-label / aria-labelledby，
  * 否则沿用表自己的名字——caption，或 Table 上的 aria-labelledby / aria-label；都没有就不加 role，只保留焦点。
  * 调用方显式传入的 tabIndex 仍然优先。
+ *
+ * 放得下时用 overflow: clip 而不是 auto：clip 照样裁掉超出纸的内容（含圆角），但不构成滚动容器，
+ * 于是吸顶表头（TableHeader sticky）越过它，吸在外面最近的滚动区——页面，或 Workspace 的内容区。
+ * 真溢出时换回 overflow-x: auto，表头只能吸在这张表自己的滚动区里（横向滚动容器的 y 轴也算滚动）。
+ * 服务端与首帧按「放得下」输出 clip；客户端在首次绘制前测量，真溢出的宽表在可交互之前已换成可滚动。
  */
 export function TableContainer({ framed = true, render, className, ref, ...props }: TableContainerProps) {
   const element = React.useRef<HTMLDivElement | null>(null);
@@ -65,7 +70,7 @@ export function TableContainer({ framed = true, render, className, ref, ...props
   const borrowed = scrollable && !named ? tableName : {};
   const region = scrollable && (named || borrowed.labelledby !== undefined || borrowed.label !== undefined);
   // relative：容器是单元格里绝对定位内容（sr-only 等）的定位参照。否则它们以容器外的祖先为参照，逃出横向滚动的裁剪，把整页撑宽。
-  return useRender({ defaultTagName: "div", render, ref: [element, ref ?? null], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined, className: cn("relative min-w-0 max-w-full overflow-x-auto outline-none", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
+  return useRender({ defaultTagName: "div", render, ref: [element, ref ?? null], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined, className: cn("relative min-w-0 max-w-full outline-none", scrollable ? "overflow-x-auto" : "overflow-clip", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
 }
 export type TableProps = useRender.ComponentProps<"table">;
 export function Table({ render, className, ...props }: TableProps) {
@@ -78,16 +83,18 @@ export function TableCaption({ render, className, ...props }: TableCaptionProps)
 }
 export type TableHeaderProps = useRender.ComponentProps<"thead"> & {
   /**
-   * 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器：
-   * 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height，
-   * 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。
+   * 表头吸在最近的滚动区顶部。表格横向放得下时，TableContainer 不是滚动容器（见上），表头吸在页面或 Workspace 内容区；
+   * 横向溢出、需要左右滚动的宽表，TableContainer 本身成了滚动容器，表头只在它自己的有界高度里吸住——
+   * 给 TableContainer（DataTable 的 containerProps）设了 max-height / height，或 DataTable 的虚拟化视口。
    * 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。
    * 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
    */
   sticky?: boolean;
+  /** 吸住时离滚动区顶部的距离：滚动区顶上还有一条固定的页眉或工具栏时，让开它的高度。数字按 px，字符串是 CSS 长度（如 "var(--app-header)"）。 */
+  stickyOffset?: number | string | undefined;
 };
-export function TableHeader({ render, className, sticky = false, ...props }: TableHeaderProps) {
-  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", "data-sticky": sticky || undefined, className: cn(sticky && "sticky top-0 z-[1] bg-surface", "[&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
+export function TableHeader({ render, className, sticky = false, stickyOffset, ...props }: TableHeaderProps) {
+  return useRender({ defaultTagName: "thead", render, props: mergeProps({ "data-slot": "table-header", "data-sticky": sticky || undefined, style: sticky && stickyOffset !== undefined ? { top: stickyOffset } : undefined, className: cn(sticky && "sticky top-0 z-[1] bg-surface", "[&>tr]:h-(--qy-header-row) [&>tr]:bg-surface-inset [&>tr>*]:border-b-0 [&>tr>*]:py-0", className) }, props) });
 }
 export type TableBodyProps = useRender.ComponentProps<"tbody">;
 export function TableBody({ render, className, ...props }: TableBodyProps) {

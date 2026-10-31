@@ -7,6 +7,7 @@ import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useCustomValidity, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { comparableTime, validLocalTime } from "../local-time";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
@@ -17,7 +18,7 @@ import { Label } from "./label";
 import { Popover, PopoverPopup, PopoverTrigger } from "./popover";
 
 export type DateTimePickerProps = Omit<useRender.ComponentProps<"div">, "children" | "defaultValue" | "onChange"> & {
-  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */
+  /** Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */
   value?: string | undefined;
   /** 非受控的初值（同样的无时区文本），原生表单 reset 会回到它。 */
   defaultValue?: string | undefined;
@@ -31,12 +32,13 @@ export type DateTimePickerProps = Omit<useRender.ComponentProps<"div">, "childre
   inputProps?: Omit<InputProps, "value" | "defaultValue" | "type" | "size" | "name" | "form" | "disabled" | "readOnly" | "onValueChange">;
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required">;
 };
-const validTime = (text: string) => /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(text);
-const validDateTime = (text: string) => { const parts = text.split("T"); return parts.length === 2 && parseLocalDate(parts[0]!) !== undefined && validTime(parts[1]!); };
-// 带不带秒的两段文本放在一起比较时补齐到秒。
-const withSeconds = (text: string) => text.length === 16 ? `${text}:00` : text;
+const validDateTime = (text: string) => { const parts = text.split("T"); return parts.length === 2 && parseLocalDate(parts[0]!) !== undefined && validLocalTime(parts[1]!); };
+// 两段文本按日期、再按补齐到毫秒的时刻比较（见 local-time.ts）。
+// 值本身从不被补齐或截断：值比 `step` 更细时照原样保留，与原生 `input[type=datetime-local]` 一致——
+// 原生输入也不改写 value，只在校验里报 stepMismatch；让调用方按自己的 step 对齐，而不是组件悄悄改动数据。
+const comparable = (text: string) => { const [date = "", time = ""] = text.split("T"); return `${date}T${comparableTime(time)}`; };
 
-const outOfRange = (entry: string, min: string | undefined, max: string | undefined) => Boolean(min && withSeconds(entry) < withSeconds(min) || max && withSeconds(entry) > withSeconds(max));
+const outOfRange = (entry: string, min: string | undefined, max: string | undefined) => Boolean(min && comparable(entry) < comparable(min) || max && comparable(entry) > comparable(max));
 
 export function DateTimePicker(allProps: DateTimePickerProps) {
   const { value: valueProp, defaultValue, onValueChange, min, max, name, form, disabled = false, readOnly = false, inputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
@@ -82,8 +84,8 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
   const native = intersectNativeBounds(inputRest, min, max);
   warnEmptyBounds("DateTimePicker", native.min, native.max);
   const bounds = mergeCalendarBounds(calendarProps, min ? parseLocalDate(min.split("T")[0]!) : undefined, max ? parseLocalDate(max.split("T")[0]!) : undefined);
-  const draftText = dateDraft && validTime(timeDraft) ? `${formatLocalDate(dateDraft)}T${timeDraft}` : undefined;
-  const draftInRange = draftText !== undefined && (!min || withSeconds(draftText) >= withSeconds(min)) && (!max || withSeconds(draftText) <= withSeconds(max));
+  const draftText = dateDraft && validLocalTime(timeDraft) ? `${formatLocalDate(dateDraft)}T${timeDraft}` : undefined;
+  const draftInRange = draftText !== undefined && !outOfRange(draftText, min, max);
   // 边界那一天的时间也受约束：日期草稿落在 min / max 当天时，时间输入带上对应的时刻边界。
   const draftDay = dateDraft ? formatLocalDate(dateDraft) : undefined;
   const timeMin = min && draftDay === min.split("T")[0] ? min.split("T")[1] : undefined;

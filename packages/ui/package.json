@@ -1,6 +1,6 @@
 {
   "name": "@qingye_lab/ui",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "A React component library: accessible primitives, a layered design token system, and light/dark themes.",
   "license": "MIT",
   "type": "module",
@@ -87,7 +87,8 @@
     "registry",
     "!ai/v4.0.0",
     "!ai/v4.1.0",
-    "!ai/v4.2.0"
+    "!ai/v4.2.0",
+    "!ai/v5.0.0"
   ],
   "scripts": {
     "build": "pnpm gen:catalog && tsc -p tsconfig.json && node scripts/build.mjs",

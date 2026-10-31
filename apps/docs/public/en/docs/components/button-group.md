@@ -1,6 +1,6 @@
 # ButtonGroup
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
@@ -33,7 +33,8 @@ The shared name identifies the scope; each button still names its action. Button
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ButtonGroup
-- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`.
+- `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`. 交叉轴对齐（Stack 为横向，Inline 为纵向）。
+- `justify?`: `"center" | "start" | "end" | "between" | "around" | "evenly"`. 主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。
 - `orientation?`: `"horizontal" | "vertical"`.
 - `wrap?`: `boolean`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations

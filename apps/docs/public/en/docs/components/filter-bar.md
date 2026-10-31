@@ -1,6 +1,6 @@
 # FilterBar
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: ded3c2eaf37f9dcb9852c5195cbdca5523d62233af35237c20026b61addc7431

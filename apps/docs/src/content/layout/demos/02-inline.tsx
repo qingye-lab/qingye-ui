@@ -8,6 +8,7 @@ export default function Demo() {
   return (
     <Stack gap="section" className="w-full">
       <Inline gap="actions" align="center"><Button size="sm">保存</Button><Button size="lg" variant="bordered">取消</Button></Inline>
+      <Inline gap="actions" justify="between"><Text render={<span />}>已选 3 项</Text><Button size="sm" variant="bordered">清除</Button></Inline>
       <Inline gap="panel" align="baseline" wrap={false}><Text step="heading" render={<span />}>青野</Text><Text render={<span />}>Qingye</Text></Inline>
     </Stack>
   );

@@ -1,12 +1,12 @@
-# Qingye UI 5.0.0
+# Qingye UI 5.1.0
 
-> Facts for @qingye_lab/ui@5.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@5.1.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.en.md)
 - [Style contract](/ai/style.en.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.en.md): method sources
-- [Installation](/ai/v5.0.0/installation.md)
+- [Installation](/ai/v5.1.0/installation.md)
 - [Main skill](/ai/SKILL.en.md)
 - [Full text](/llms-full.en.txt): the guide, installation and every component in one file
 
@@ -60,7 +60,7 @@
 - [Item](/en/docs/components/item.md): Content, navigation and related actions.
 - [Kbd](/en/docs/components/kbd.md): A native keyboard key display.
 - [Label](/en/docs/components/label.md): Name one control with a native label.
-- [Layout](/en/docs/components/layout.md): Arrange content vertically or side by side using field, action, panel and section spacing roles.
+- [Layout](/en/docs/components/layout.md): Arrange content vertically, side by side or in equal columns using pair, field, action, panel and section spacing roles.
 - [Link](/en/docs/components/link.md): A text entry that goes to an address; every text link in the library shares this one treatment.
 - [Locale switch](/en/docs/components/locale-switch.md): Request an application locale change and show the current Provider value.
 - [Menu](/en/docs/components/menu.md): Temporary commands and choices related to the current task.

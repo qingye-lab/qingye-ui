@@ -1,6 +1,6 @@
 # Typography
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: 3f631d2cc01de8867c121b4787c811ab1207d12add9bf19d7c0b9525086f510f

@@ -1,12 +1,12 @@
-# Qingye UI 5.0.0
+# Qingye UI 5.1.0
 
-> Facts for @qingye_lab/ui@5.0.0. Runtime acceptance is separate.
+> Facts for @qingye_lab/ui@5.1.0. Runtime acceptance is separate.
 
 ## Start
 - [Design guide](/design.md)
 - [Style contract](/ai/style.md): bans, observable criteria and component implementation rules
 - [Design philosophy](/ai/design-philosophy.md): method sources
-- [Installation](/ai/v5.0.0/installation.md)
+- [Installation](/ai/v5.1.0/installation.md)
 - [Main skill](/ai/SKILL.md)
 - [Full text](/llms-full.txt): the guide, installation and every component in one file
 
@@ -60,7 +60,7 @@
 - [条目 Item](/docs/components/item.md): 内容、入口与附属动作的关系。
 - [键位 Kbd](/docs/components/kbd.md): 用原生键位元素显示真实快捷键。
 - [标签 Label](/docs/components/label.md): 用原生标签为一个控件命名。
-- [布局 Layout](/docs/components/layout.md): 用纵向堆叠与横向排列组织内容，间隔按字段、动作、面板或分节关系选择。
+- [布局 Layout](/docs/components/layout.md): 用纵向堆叠、横向排列与等宽多列组织内容，间隔按成对、字段、动作、面板或分节关系选择。
 - [链接 Link](/docs/components/link.md): 去往一个地址的文字入口；全库文字链接共用这一种画法。
 - [语言切换 LocaleSwitch](/docs/components/locale-switch.md): 请求切换应用语言，并显示 Provider 当前事实。
 - [命令菜单 Menu](/docs/components/menu.md): 与当前任务相关的临时命令和选择。

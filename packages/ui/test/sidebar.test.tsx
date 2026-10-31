@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback } from "../src/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from "../src/components/menu";
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTrigger } from "../src/components/drawer";
 import { Workspace, WorkspaceHeader } from "../src/components/workspace";
-import { Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
+import { createSidebarDrawerHandle, Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
 const dot = <span aria-hidden="true">●</span>;
 describe("Sidebar", () => {
   it("names the nav by default, lets the caller override, and keeps the toggle name fixed while aria-expanded changes", async () => {
@@ -184,8 +184,9 @@ describe("Sidebar", () => {
       expect(screen.queryByRole("navigation")).toBeNull();
       const trigger = screen.getByRole("button", { name: "打开工作区导航" });
       expect(trigger).toHaveAttribute("aria-expanded", "false");
+      // 抽屉宿主按需加载：这一下按在宿主到位之前，仍要打开，不能无声落空。
       await user.click(trigger);
-      expect(trigger).toHaveAttribute("aria-expanded", "true");
+      await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "true"));
       expect(await screen.findByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
       // 抽屉里没有收起成 rail 这回事：切换按钮换成关闭。
       expect(screen.queryByRole("button", { name: "工作区导航" })).toBeNull();
@@ -203,6 +204,39 @@ describe("Sidebar", () => {
       expect(screen.getByRole("link", { name: "账户" })).toBeInTheDocument();
       await user.click(screen.getByRole("button", { name: "关闭" }));
       await waitFor(() => expect(screen.queryByRole("navigation")).toBeNull());
+      spy.mockRestore();
+    });
+    it("ignores the button while no sidebar carries the drawer, and closes when the carrying sidebar leaves", async () => {
+      const spy = narrow(true); const user = userEvent.setup();
+      const page = (sidebar: boolean | "inline") => <Workspace><WorkspaceHeader><SidebarDrawerTrigger /></WorkspaceHeader>
+        {sidebar && <Sidebar drawer={sidebar === true}><SidebarContent><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>}</Workspace>;
+      const { rerender } = render(page("inline"));
+      const trigger = screen.getByRole("button", { name: "打开工作区导航" });
+      await user.click(trigger);
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      rerender(page(true));
+      await user.click(trigger);
+      await waitFor(() => expect(trigger).toHaveAttribute("aria-expanded", "true"));
+      // 侧栏换走（例如换了布局）时抽屉一并关上；再挂上来的侧栏不带着旧的「开」自己弹出。
+      rerender(page(false));
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      rerender(page(true));
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+      expect(screen.queryByRole("link", { name: "A" })).toBeNull();
+      spy.mockRestore();
+    });
+    it("works outside a Workspace with a shared handle, and returns focus to whichever button opened it", async () => {
+      const spy = narrow(true); const user = userEvent.setup(); const handle = createSidebarDrawerHandle();
+      render(<>
+        <SidebarDrawerTrigger handle={handle} aria-label="顶栏导航" />
+        <SidebarDrawerTrigger handle={handle} aria-label="工具栏导航" />
+        <Sidebar drawer drawerHandle={handle}><SidebarToggle /><SidebarContent><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>
+      </>);
+      const first = screen.getByRole("button", { name: "顶栏导航" });
+      await user.click(first);
+      await user.click(await screen.findByRole("button", { name: "关闭" }));
+      await waitFor(() => expect(screen.queryByRole("link", { name: "A" })).toBeNull());
+      await waitFor(() => expect(first).toHaveFocus());
       spy.mockRestore();
     });
     it("stays in place on wide screens", () => {

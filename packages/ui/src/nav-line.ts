@@ -6,12 +6,15 @@
  *   加深为焦墨——状态只加深已有的线，不新增形，也不加粗。
  * - 墨分五色：未到达的目的地是浓墨，悬停与当前是焦墨。当前项不改字重，避免文字变宽、整排跳动。
  * - 疏密有致：目的地彼此独立，相隔一个组间距；条目高一个控件，跟随密度。
+ * - 粗指针下条目至少 --qy-touch-target 见方。短名称在加宽的条目里居中只对横排成立（底线随条目加宽，名称偏在一侧
+ *   就与线错开），由横排的条目自己加 pointer-coarse:justify-center；纵排与面板里的条目是起始对齐的列表，不加。
+ *   不用 touch-target 伪元素，是因为条目紧挨基线与邻项，外扩的命中层会盖住邻项。
  */
 export const navLineListClassName =
   "flex min-w-0 items-stretch gap-(--qy-field-group-gap) border-b border-border";
 
 export const navLineItemClassName =
-  "relative -mb-line inline-flex min-h-(--qy-fill-height) min-w-0 shrink-0 cursor-pointer items-center gap-(--qy-control-content-gap) border-b border-transparent text-body text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring data-disabled:cursor-not-allowed data-disabled:opacity-disabled [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0";
+  "relative -mb-line inline-flex min-h-(--qy-fill-height) min-w-0 shrink-0 pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:min-w-(--qy-touch-target) cursor-pointer items-center gap-(--qy-control-content-gap) border-b border-transparent text-body text-muted-foreground outline-none transition-[color,border-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:text-foreground focus-visible:ring-inset focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring data-disabled:cursor-not-allowed data-disabled:opacity-disabled [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0";
 
 export const navLineCurrentClassName = "border-foreground text-foreground";
 
