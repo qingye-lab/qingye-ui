@@ -1,6 +1,6 @@
 # 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c

@@ -1,6 +1,6 @@
 # 分组展开 Accordion
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: f26d950ad70f423b6c93d4deeef25da02fd927f85623521eaff44f13ca4ac328

@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -30375,8 +30375,8 @@
             "@qingye_lab/ui/components/typography"
           ],
           "providers": [],
-          "code": "import { Grid, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"多列与成对间隔\", titleEn: \"Columns and paired spacing\" };\n\nconst facts = [[\"组件\", \"83\"], [\"主题轴\", \"3\"], [\"窄屏断点\", \"640px\"], [\"触屏目标\", \"44px\"], [\"版本\", \"5.0.0\"], [\"许可\", \"MIT\"]];\n\nexport default function Demo() {\n  return (\n    <Grid minItemWidth=\"9rem\" className=\"w-full\">\n      {facts.map(([label, value]) => (\n        <Stack key={label} gap=\"pair\">\n          <Text render={<span />}>{label}</Text>\n          <Text step=\"heading\" render={<span />}>{value}</Text>\n        </Stack>\n      ))}\n    </Grid>\n  );\n}\n",
-          "sha256": "4a23c18765c1be8a5367a22426bf5da2e7b2a6cfc1c19705e8a06e6a26cd386d"
+          "code": "import { Grid, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"多列与成对间隔\", titleEn: \"Columns and paired spacing\" };\n\nconst facts = [[\"组件\", \"83\"], [\"主题轴\", \"3\"], [\"窄屏断点\", \"640px\"], [\"触屏目标\", \"44px\"], [\"版本\", \"5.1.0\"], [\"许可\", \"MIT\"]];\n\nexport default function Demo() {\n  return (\n    <Grid minItemWidth=\"9rem\" className=\"w-full\">\n      {facts.map(([label, value]) => (\n        <Stack key={label} gap=\"pair\">\n          <Text render={<span />}>{label}</Text>\n          <Text step=\"heading\" render={<span />}>{value}</Text>\n        </Stack>\n      ))}\n    </Grid>\n  );\n}\n",
+          "sha256": "7077524bc59408214fa499f642a85d71c98b9b483403eadb42af029106330e6b"
         }
       ],
       "design": {
@@ -61407,8 +61407,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v5.0.0/llms.txt",
-    "components": "ai/v5.0.0/components"
+    "index": "ai/v5.1.0/llms.txt",
+    "components": "ai/v5.1.0/components"
   },
   "localized": {
     "en": {
@@ -61416,8 +61416,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v5.0.0/en/llms.txt",
-      "components": "ai/v5.0.0/en/components"
+      "index": "ai/v5.1.0/en/llms.txt",
+      "components": "ai/v5.1.0/en/components"
     }
   },
   "registry": {

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
+Source SHA-256: 63934ff03a5e0261276f6e24976495abf0f711491928e41839e41b25a6bcb366
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -43,12 +43,10 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.
 
 ## Current exports
-- createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
-- SidebarDrawerHandle: interface; owner external; PASS
 - SidebarDrawerTrigger: function; owner sidebar; PASS; props: SidebarDrawerTriggerProps
 - SidebarDrawerTriggerProps: type; owner sidebar; PASS
 - SidebarFooter: function; owner sidebar; PASS; props: SidebarFooterProps
@@ -79,8 +77,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Sidebar
 - `collapsed?`: `boolean`.
 - `defaultCollapsed?`: `boolean`.
-- `drawer?`: `boolean`. 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。 断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。 40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
-- `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
+- `drawer?`: `boolean`. 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
+- `drawerHandle?`: `DrawerPrimitive.Handle<unknown>`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -89,15 +87,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarDrawerTrigger
-- `className?`: `string`.
-- `data-slot?`: `string`.
-- `handle?`: `SidebarDrawerHandle`.
-- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
-- `shape?`: `"label" | "icon"`.
-- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
-- `tone?`: `"neutral" | "danger"`.
-- `variant?`: `"solid" | "bordered" | "quiet"`.
-- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
+- `handle?`: `DrawerPrimitive.Handle<unknown>`.
+- plus 290 inherited (@types/react 284, @base-ui/react 6); not expanded, see the installed declarations
 
 ### SidebarFooter
 - no props declared by this library
@@ -167,12 +158,12 @@ Written descriptions; the list above is the type-resolved fact.
 ### Sidebar / SidebarToggle
 The sidebar container (no landmark of its own; the inner nav is the landmark) and a reversible toggle.
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. Expanded by default; details.cancel() rejects a change.
-- drawer / drawerHandle: boolean / SidebarDrawerHandle; default false. Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it.
+- drawer / drawerHandle: boolean / DrawerPrimitive.Handle; default false. Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### SidebarDrawerTrigger
 The icon button that opens the sidebar drawer on narrow screens, named "Open workspace navigation". Place it anywhere inside a Workspace (usually first in WorkspaceHeader); it is hidden at wide widths and leaves neither space nor a Tab stop.
-- handle: SidebarDrawerHandle. Outside a Workspace, the same handle as Sidebar's drawerHandle.
+- handle: DrawerPrimitive.Handle. Outside a Workspace, the same handle as Sidebar's drawerHandle.
 - render / native props: Drawer trigger props. Renders as a quiet icon button by default; aria-expanded comes from the drawer.
 
 ### SidebarHeader / SidebarTitle

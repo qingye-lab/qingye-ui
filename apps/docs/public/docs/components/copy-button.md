@@ -1,6 +1,6 @@
 # 复制按钮 CopyButton
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 965565edbc2678a8309773c65d579ec3f47bd4dcea6736ea630fe959a6d25817

@@ -1,6 +1,6 @@
 # Resizable
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
 Source SHA-256: 475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74

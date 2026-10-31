@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
+Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
 
 同一对象的不同视角，保留面板草稿。
 
@@ -11,7 +11,6 @@ Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
 默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。
 
 ## Notes
-- 横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。
 - 到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。
 
 ## Use and ownership

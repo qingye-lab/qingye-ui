@@ -1,6 +1,6 @@
 # 分页 Pagination
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2

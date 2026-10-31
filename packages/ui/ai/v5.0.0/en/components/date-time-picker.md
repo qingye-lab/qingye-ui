@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1
+Source SHA-256: b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
 ## Decision
-value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.
+value is unzoned YYYY-MM-DDTHH:mm[:ss] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.
 
 ## Notes
 - Apply is available only with complete date and time; the caller still accepts the value.
@@ -48,7 +48,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `name?`: `string | undefined`.
 - `onValueChange?`: `((value: string | undefined, event: React.SyntheticEvent) => void) | undefined`.
 - `readOnly?`: `boolean`.
-- `value?`: `string | undefined`. Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。
+- `value?`: `string | undefined`. Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -62,7 +62,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### DateTimePicker
 A real datetime-local input composed with calendar and time drafts.
-- value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds, with 1–3 fractional digits after the seconds. A value finer than step is kept as given (like the native input, which only reports stepMismatch in validation), never truncated and never an error. Zoned or incomplete external strings are rejected; clearing requests undefined.
+- value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined.
 - min / max: string. Unzoned text of the same form. Declare once: it sets the native min / max, the calendar's disabled days and reachable months, the time input's min / max on a boundary day, and blocks applying a draft outside the range. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development (2026-10-12).
 - name / form: string. Only the confirmed datetime-local input submits. Calendar and time drafts have no submission names. Field may provide the name.
 - disabled / readOnly: boolean; default false. Block native editing, clearing and popup changes, including Field disabled. Read-only values submit; disabled values do not; read-only shows a Read only note in the boundary. With a value and while editable, the boundary has a clear action and focus returns to the input after clearing.

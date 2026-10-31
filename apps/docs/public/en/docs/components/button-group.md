@@ -1,6 +1,6 @@
 # ButtonGroup
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23

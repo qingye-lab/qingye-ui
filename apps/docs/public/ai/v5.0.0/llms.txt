@@ -59,7 +59,7 @@
 - [条目 Item](components/item.md): 内容、入口与附属动作的关系。
 - [键位 Kbd](components/kbd.md): 用原生键位元素显示真实快捷键。
 - [标签 Label](components/label.md): 用原生标签为一个控件命名。
-- [布局 Layout](components/layout.md): 用纵向堆叠、横向排列与等宽多列组织内容，间隔按成对、字段、动作、面板或分节关系选择。
+- [布局 Layout](components/layout.md): 用纵向堆叠与横向排列组织内容，间隔按字段、动作、面板或分节关系选择。
 - [链接 Link](components/link.md): 去往一个地址的文字入口；全库文字链接共用这一种画法。
 - [语言切换 LocaleSwitch](components/locale-switch.md): 请求切换应用语言，并显示 Provider 当前事实。
 - [命令菜单 Menu](components/menu.md): 与当前任务相关的临时命令和选择。

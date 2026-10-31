@@ -1,6 +1,6 @@
 # 决定对话框 AlertDialog
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: 55f86b3e9bc7314a11a247382ac0691a92efc0d7d50b2c47500b16efe013e2ab

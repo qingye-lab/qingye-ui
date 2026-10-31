@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1
+Source SHA-256: b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41
 
 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 
 ## Decision
-value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。
+value 是 YYYY-MM-DDTHH:mm[:ss] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。
 
 ## Notes
 - 应用仅在日期与时间完整时可用，点击后仍由调用方接受值。
@@ -48,7 +48,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `name?`: `string | undefined`.
 - `onValueChange?`: `((value: string | undefined, event: React.SyntheticEvent) => void) | undefined`.
 - `readOnly?`: `boolean`.
-- `value?`: `string | undefined`. Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。
+- `value?`: `string | undefined`. Local wall-clock text, YYYY-MM-DDTHH:mm[:ss]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -62,7 +62,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### DateTimePicker
 真实 datetime-local Input 与日期/时间草稿组合。
-- value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. 传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒，秒后可带 1–3 位毫秒。值比 step 更细时原样保留（同原生输入，只在原生校验里报 stepMismatch），不截断也不报错。带时区或不完整外部字符串拒绝；清除请求 undefined。
+- value / defaultValue / onValueChange: string | undefined / string | undefined / (value, event) => void. 传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒。带时区或不完整外部字符串拒绝；清除请求 undefined。
 - min / max: string. 同样的无时区文本。一处声明同时写入原生输入的 min / max、日历的禁用日期与可翻到的月份、边界当天时间输入的 min / max，并使超出范围的草稿不能应用。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告（2026-10-12）。
 - name / form: string. 仅确认的 datetime-local input 参与 FormData；日历与时间草稿不具提交 name。Field 可提供 name。
 - disabled / readOnly: boolean; default false. 阻止原生编辑、清除与展开修改；Field disabled 同样约束动作。只读值提交，禁用值不提交；只读时边界内给出「只读」说明。非空且可编辑时，边界内有清除动作，清除后焦点回到输入。

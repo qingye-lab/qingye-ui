@@ -1,6 +1,6 @@
 # InputModalityProvider
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/input-modality-provider
 Source: packages/ui/src/components/input-modality-provider.tsx
 Source SHA-256: 011d0f9673180acea6dd34d463e7cdf1436738881d96f8e20a7c7147c7940d46

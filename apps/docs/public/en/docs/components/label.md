@@ -1,6 +1,6 @@
 # Label
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2

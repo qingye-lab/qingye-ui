@@ -1,6 +1,6 @@
 # 结果未知 PendingValue
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85

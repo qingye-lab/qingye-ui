@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
+Source SHA-256: 926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd
 
 Different views of one object with panel drafts retained.
 
@@ -11,7 +11,6 @@ Different views of one object with panel drafts retained.
 Manual activation and mounted panels are defaults; switching views does not approve or save a draft.
 
 ## Notes
-- When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.
 - Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving.
 
 ## Use and ownership

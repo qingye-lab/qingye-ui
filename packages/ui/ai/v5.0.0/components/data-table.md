@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
+Source SHA-256: cfdf9f32b1ff5756b784180248b461763ef5254eba022343cf2c30838a8d4ff3
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -69,8 +69,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
 - `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
-- `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
-- `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
+- `stickyHeader?`: `boolean`. 表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里—— 虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。 没有高度限制时表格随页面流动，表头不会吸在页面顶部。
 - `table`: `TableInstance<TData>`.
 - `virtualization?`: `DataTableVirtualization`.
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
@@ -91,9 +90,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
-- `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
-- `stickyHeaderOffset?`: `DataTableProps<TData>["stickyHeaderOffset"]`.
-- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader" | "stickyHeaderOffset">`.
+- `stickyHeader?`: `boolean`. 表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。
+- `tableProps?`: `Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader">`.
 - `virtualization?`: `DataTableVirtualization`.
 - plus 277 inherited (@types/react 277); not expanded, see the installed declarations
 
@@ -138,7 +136,7 @@ Written descriptions; the list above is the type-resolved fact.
 - activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。
 - selectionAppearance: row | checkbox; default row. checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。
-- stickyHeader / stickyHeaderOffset: boolean / number | string. 表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。
+- stickyHeader: boolean. 表头吸顶。只在表格自己的有界高度容器里生效：虚拟化视口，或 tableProps.containerProps 设了 height / max-height；无高度限制的表格不会吸在页面顶部。
 - columns[].pinned / columns[].empty: boolean / ReactNode. pinned 固定从第一列起连续的前导列（选择列自动一并固定，不连续时抛错），横向滚动后末端出现一条线。empty 是无 cell 的列在 null、undefined、空串时显示的内容，默认「—」加读屏的「无值」；0 照常显示。未知与不适用由调用方用 empty 区分。
 - caption / busy / error / tableProps / native div props: ReactNode / boolean / ReactNode / DataTableProps / HTML props. busy 时旧数据行不动，表格顶缘出现不定进度记号，分页暂时挡住翻页但焦点留在原按钮。error 由应用给出内容和重试动作，摆在表格上方并声明 role=alert，旧数据行同样保留。属性分别归属表格或组合外层，不推断请求成功或失败。
 

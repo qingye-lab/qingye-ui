@@ -1,6 +1,6 @@
 # Layout
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: a3eee1f77336d01017929f940f49949e11d348343948eff757e0cde9db884233
@@ -145,7 +145,7 @@ import { Text } from "@qingye_lab/ui/components/typography";
 
 export const meta = { title: "多列与成对间隔", titleEn: "Columns and paired spacing" };
 
-const facts = [["组件", "83"], ["主题轴", "3"], ["窄屏断点", "640px"], ["触屏目标", "44px"], ["版本", "5.0.0"], ["许可", "MIT"]];
+const facts = [["组件", "83"], ["主题轴", "3"], ["窄屏断点", "640px"], ["触屏目标", "44px"], ["版本", "5.1.0"], ["许可", "MIT"]];
 
 export default function Demo() {
   return (

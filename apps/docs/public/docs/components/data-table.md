@@ -1,6 +1,6 @@
 # 数据集合 DataTable
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
 Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929

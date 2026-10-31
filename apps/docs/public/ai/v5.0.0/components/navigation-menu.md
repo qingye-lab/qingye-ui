@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10
+Source SHA-256: 2ae9d87b98f18574a0018ec0dad93ab9a53c7ec73fbe75c9b68a6cd3d367ae5f
 
 真实链接、可展开的导航分组与面板内的组名、说明。
 

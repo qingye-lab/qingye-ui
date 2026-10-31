@@ -1,6 +1,6 @@
 # 视角标签 Tabs
 
-Package: @qingye_lab/ui@5.0.0
+Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
