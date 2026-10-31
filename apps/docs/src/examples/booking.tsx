@@ -265,7 +265,9 @@ function Schedule({ draft, booked }: { draft: Draft; booked: boolean }) {
     values: Object.fromEntries(HOURS.map((hour) => {
       const busy = !!room.busy && overlaps(room.busy[0], room.busy[1], hour, hour + 60);
       const mine = draft.start !== undefined && end !== undefined && (!draft.room || draft.room === room.id) && overlaps(draft.start, end, hour, hour + 60);
-      return [clock(hour), mine && busy ? 3 : mine ? 2 : busy ? 1 : 0];
+      // 同一小时里两段都有、却首尾相接（如 10:00–11:30 与 11:30–12:00）不是冲突：只看两段在这一小时内是否真有交集，与选房的校验一致。
+      const clash = mine && busy && overlaps(room.busy![0], room.busy![1], Math.max(draft.start!, hour), Math.min(end!, hour + 60));
+      return [clock(hour), clash ? 3 : mine ? 2 : busy ? 1 : 0];
     })),
   }));
   // 热力图自带标题，标题与「查看数据」同一行；日期写进标题，未选日期时说明每天相同。
