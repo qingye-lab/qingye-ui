@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-30T10:16:47.354Z",
-  "revision": "df67f24714b577a17c89a4fbed14cbb41ee48ddc",
+  "generatedAt": "2026-10-31T04:06:17.463Z",
+  "revision": "3620b5fe4f97ea9595313c60ae3c875766099c4f",
   "fingerprint": {
-    "sha256": "b0d754fbd26133b2ae64266d6face4da6399726d41c9cad1b17d18237c791729",
+    "sha256": "06e101e165b6ef578c3833037e83fe7a8279dc48dc4030cd525ac72c5b58b125",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -120,7 +120,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "a6292cbe69ae217cc5ba34b8989e6d266ab1d6628e4f92a9f1211c74a6e1843a"
+        "sha256": "21e7db3103de0683df6f256e5fdac54560a4fb9cecda32390876cee2ef20666b"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -132,7 +132,7 @@
       },
       {
         "path": "apps/docs/src/content/date-time-picker/meta.ts",
-        "sha256": "e667af43751178e01ce9dcdcb564a429b7d9aaa37f1de8baef37ed73646e7a49"
+        "sha256": "4281acc2be682f6d3f0ace505405a1c71faa10ff5d6364a144d7084a1624b43d"
       },
       {
         "path": "apps/docs/src/content/description-list/meta.ts",
@@ -208,7 +208,7 @@
       },
       {
         "path": "apps/docs/src/content/layout/meta.ts",
-        "sha256": "87134f2b14aea07e431d090054a061017e8e1d95255429fafb86268a8d6316b1"
+        "sha256": "a8edbef76b09341714a26ec7b00daba147ece7a5ad2ce77af72994c701914cb7"
       },
       {
         "path": "apps/docs/src/content/link/meta.ts",
@@ -316,7 +316,7 @@
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
-        "sha256": "7c1a5d8a93fda88f84913aa40e79a0e8e0c89771fffb85b5e1685b3fe1dab3f4"
+        "sha256": "11d96482b3251478f55f8ef04dfc594c24fcb6fb226fbdb48212d7c327a0149a"
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
@@ -348,11 +348,11 @@
       },
       {
         "path": "apps/docs/src/content/table/meta.ts",
-        "sha256": "73711897fb73471e33c8641bd0dc2642746f32faa64e06b92cd8007ae04abcc6"
+        "sha256": "e3ca840869077c973b927772dd5618f21676ca34168a414f44e3d353d7eafa75"
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "8fe494b705ad928527acb69fbfb7dbe2f46a4939268cc4ba52c712092951dfea"
+        "sha256": "74040fb760391c3b4492b2088df0acbdf208b5ea4d37ab38def2ed92f6ec7892"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
@@ -368,7 +368,7 @@
       },
       {
         "path": "apps/docs/src/content/time-field/meta.ts",
-        "sha256": "5c99a9022f460446ded91eccd91745dcd2455ee58499da69d874c4823ddf59ea"
+        "sha256": "780b3d572a40322409c16e85f7eafb309b2b63cc48e9679279f66f0906846f20"
       },
       {
         "path": "apps/docs/src/content/timeline/meta.ts",
@@ -416,7 +416,7 @@
       },
       {
         "path": "apps/docs/src/content/workspace/meta.ts",
-        "sha256": "b37db29f9beac4e3e946285e2ee3f79516656e8ba986eabe72d2064b3335d333"
+        "sha256": "8623ff4749c9e191f15fc5989a1864dc28beeb032849338080bc3962e5ea99c9"
       },
       {
         "path": "apps/docs/src/lib/types.ts",
@@ -432,7 +432,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "552463ac45fc7432cdd8868059f39f29a9cce62418d0ea90b26c459bf068dadc"
+        "sha256": "99d636a6b385b539af9b638c039c4cb663033a2ee8bcd6b7ba6e73f4c3c0a7bb"
       },
       {
         "path": "packages/ui/motion.css",
@@ -556,7 +556,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "cfdf9f32b1ff5756b784180248b461763ef5254eba022343cf2c30838a8d4ff3"
+        "sha256": "3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -568,7 +568,7 @@
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "b523c19d4efae038ab1397ca2a9cc6145a98036333bc5148d8aff67fb561dd41"
+        "sha256": "3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1"
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
@@ -644,7 +644,7 @@
       },
       {
         "path": "packages/ui/src/components/layout.tsx",
-        "sha256": "362f6ace32d99b9d89d79ed72b89451ec561e35a8d9fd42e67328921bce643bd"
+        "sha256": "a3eee1f77336d01017929f940f49949e11d348343948eff757e0cde9db884233"
       },
       {
         "path": "packages/ui/src/components/link.tsx",
@@ -668,7 +668,7 @@
       },
       {
         "path": "packages/ui/src/components/navigation-menu.tsx",
-        "sha256": "2ae9d87b98f18574a0018ec0dad93ab9a53c7ec73fbe75c9b68a6cd3d367ae5f"
+        "sha256": "abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10"
       },
       {
         "path": "packages/ui/src/components/number-field.tsx",
@@ -752,7 +752,7 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "63934ff03a5e0261276f6e24976495abf0f711491928e41839e41b25a6bcb366"
+        "sha256": "864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
@@ -784,11 +784,11 @@
       },
       {
         "path": "packages/ui/src/components/table.tsx",
-        "sha256": "6d4986a22c788958edc8574a63618019df7eb6d313a2f2c4d631107706b11acf"
+        "sha256": "ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737"
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
-        "sha256": "926e1de3a73e320da21fe04978276cc822dd0c5020b2ec10d71befa351166ffd"
+        "sha256": "cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e"
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
@@ -804,7 +804,7 @@
       },
       {
         "path": "packages/ui/src/components/time-field.tsx",
-        "sha256": "6bfa3ba89d45d563feac7bd12dcadb5366fb5d6afb51ce9c569f85401a004c14"
+        "sha256": "937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf"
       },
       {
         "path": "packages/ui/src/components/timeline.tsx",
@@ -852,7 +852,7 @@
       },
       {
         "path": "packages/ui/src/components/workspace.tsx",
-        "sha256": "781c419aa6afcd278877ca1ec21c076cb4d75b5ec015b727234fb14030f6c432"
+        "sha256": "ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a"
       },
       {
         "path": "packages/ui/src/index.ts",
@@ -9713,7 +9713,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 147
+            "line": 148
           }
         },
         {
@@ -9745,7 +9745,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 498
+            "line": 500
           }
         },
         {
@@ -9753,7 +9753,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 433
+            "line": 434
           }
         },
         {
@@ -9761,7 +9761,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 400
+            "line": 401
           }
         },
         {
@@ -9769,7 +9769,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 434
+            "line": 435
           }
         },
         {
@@ -9777,7 +9777,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 442
+            "line": 443
           }
         },
         {
@@ -9785,7 +9785,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 426
+            "line": 427
           }
         },
         {
@@ -9801,7 +9801,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 390
+            "line": 391
           }
         },
         {
@@ -9809,7 +9809,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 384
+            "line": 385
           }
         },
         {
@@ -9817,7 +9817,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 377
+            "line": 378
           }
         },
         {
@@ -9825,7 +9825,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 357
+            "line": 358
           }
         },
         {
@@ -9833,7 +9833,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 352
+            "line": 353
           }
         },
         {
@@ -9841,7 +9841,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 350
+            "line": 351
           }
         },
         {
@@ -9931,10 +9931,10 @@
                 "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
               },
               {
-                "name": "stickyHeader",
-                "type": "boolean",
-                "description": "表头吸顶。只在表格自己的有界高度容器里生效：虚拟化视口，或 tableProps.containerProps 设了 height / max-height；无高度限制的表格不会吸在页面顶部。",
-                "descriptionEn": "Sticks the header to the top of the table's own bounded-height container: the virtualization viewport, or a height / max-height set through tableProps.containerProps. An unbounded table does not stick to the page top."
+                "name": "stickyHeader / stickyHeaderOffset",
+                "type": "boolean / number | string",
+                "description": "表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。",
+                "descriptionEn": "Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px."
               },
               {
                 "name": "columns[].pinned / columns[].empty",
@@ -10119,11 +10119,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 498
+              "line": 500
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 498
+              "line": 500
             },
             "status": "PRESENT"
           },
@@ -10132,11 +10132,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 147
+              "line": 148
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 147
+              "line": 148
             },
             "status": "PRESENT"
           },
@@ -10145,11 +10145,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 352
+              "line": 353
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 352
+              "line": 353
             },
             "status": "PRESENT"
           },
@@ -10158,11 +10158,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 377
+              "line": 378
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 377
+              "line": 378
             },
             "status": "PRESENT"
           },
@@ -10171,11 +10171,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 390
+              "line": 391
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 390
+              "line": 391
             },
             "status": "PRESENT"
           }
@@ -10667,7 +10667,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-time-picker.tsx",
-            "line": 41
+            "line": 43
           }
         },
         {
@@ -10675,7 +10675,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-picker.tsx",
-            "line": 19
+            "line": 20
           }
         }
       ],
@@ -10697,8 +10697,8 @@
           "wall-clock",
           "time"
         ],
-        "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
-        "decisionsEn": "value is unzoned YYYY-MM-DDTHH:mm[:ss] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.",
+        "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
+        "decisionsEn": "value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.",
         "api": [
           {
             "name": "DateTimePicker",
@@ -10708,8 +10708,8 @@
               {
                 "name": "value / defaultValue / onValueChange",
                 "type": "string | undefined / string | undefined / (value, event) => void",
-                "description": "传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒。带时区或不完整外部字符串拒绝；清除请求 undefined。",
-                "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds. Zoned or incomplete external strings are rejected; clearing requests undefined."
+                "description": "传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。完整本地日期时间：有效年份 1–9999、时间 00:00–23:59，可带秒，秒后可带 1–3 位毫秒。值比 step 更细时原样保留（同原生输入，只在原生校验里报 stepMismatch），不截断也不报错。带时区或不完整外部字符串拒绝；清除请求 undefined。",
+                "descriptionEn": "Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Complete local date/time: years 1–9999, time 00:00–23:59, optional seconds, with 1–3 fractional digits after the seconds. A value finer than step is kept as given (like the native input, which only reports stepMismatch in validation), never truncated and never an error. Zoned or incomplete external strings are rejected; clearing requests undefined."
               },
               {
                 "name": "min / max",
@@ -10827,11 +10827,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-time-picker.tsx",
-              "line": 41
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-time-picker.tsx",
-              "line": 41
+              "line": 43
             },
             "status": "PRESENT"
           }
@@ -16222,11 +16222,27 @@
       "source": "packages/ui/src/components/layout.tsx",
       "exports": [
         {
+          "name": "Grid",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/layout.tsx",
+            "line": 88
+          }
+        },
+        {
+          "name": "GridProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/layout.tsx",
+            "line": 48
+          }
+        },
+        {
           "name": "Inline",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/layout.tsx",
-            "line": 48
+            "line": 70
           }
         },
         {
@@ -16234,7 +16250,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/layout.tsx",
-            "line": 31
+            "line": 47
           }
         },
         {
@@ -16250,7 +16266,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/layout.tsx",
-            "line": 34
+            "line": 56
           }
         },
         {
@@ -16258,7 +16274,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/layout.tsx",
-            "line": 30
+            "line": 46
           }
         }
       ],
@@ -16269,21 +16285,25 @@
         "category": "布局",
         "layer": "foundation",
         "source": "local",
-        "description": "用纵向堆叠与横向排列组织内容，间隔按字段、动作、面板或分节关系选择。",
-        "descriptionEn": "Arrange content vertically or side by side using field, action, panel and section spacing roles.",
+        "description": "用纵向堆叠、横向排列与等宽多列组织内容，间隔按成对、字段、动作、面板或分节关系选择。",
+        "descriptionEn": "Arrange content vertically, side by side or in equal columns using pair, field, action, panel and section spacing roles.",
         "exports": [
           "Stack",
-          "Inline"
+          "Inline",
+          "Grid"
         ],
         "keywords": [
           "关系间隔",
           "布局",
           "stack",
           "inline",
+          "grid",
+          "justify",
+          "多列",
           "spacing"
         ],
-        "decisions": "Stack 纵向排列，Inline 横向排列并默认换行。gap 选择字段、动作或分节关系；语义由 render 与内容提供。",
-        "decisionsEn": "Stack flows vertically; Inline flows horizontally and wraps by default. Choose field, action or section spacing with gap; render and content supply semantics.",
+        "decisions": "Stack 纵向排列，Inline 横向排列并默认换行，Grid 等宽多列。gap 选择成对、字段、动作或分节关系；语义由 render 与内容提供。",
+        "decisionsEn": "Stack flows vertically; Inline flows horizontally and wraps by default; Grid lays out equal-width columns. Choose pair, field, action or section spacing with gap; render and content supply semantics.",
         "api": [
           {
             "name": "Stack",
@@ -16292,10 +16312,10 @@
             "props": [
               {
                 "name": "gap",
-                "type": "\"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
+                "type": "\"pair\" | \"field\" | \"fields\" | \"actions\" | \"panel\" | \"section\"",
                 "default": "\"panel\"",
-                "description": "分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。",
-                "descriptionEn": "Reads the corresponding relationship token."
+                "description": "pair 为一分（4px），用于成对读的名称与其说明、数值与单位；其余分别读取 field-gap、field-group-gap、action-gap、panel-gap、section-gap。",
+                "descriptionEn": "pair is one fen (4px) for things read as a pair: a name and its description, or a value and its unit; the others read field-gap, field-group-gap, action-gap, panel-gap and section-gap."
               },
               {
                 "name": "align",
@@ -16303,6 +16323,12 @@
                 "default": "\"stretch\"",
                 "description": "横轴对齐。",
                 "descriptionEn": "Cross-axis alignment."
+              },
+              {
+                "name": "justify",
+                "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+                "description": "主轴（纵向）分布。不设则保持默认；容器高于内容时才看得出。",
+                "descriptionEn": "Main-axis (vertical) distribution. Unset keeps the default; visible only when the container is taller than its content."
               },
               {
                 "name": "render / ref / 原生属性",
@@ -16333,6 +16359,12 @@
                 "descriptionEn": "Vertical alignment in a row."
               },
               {
+                "name": "justify",
+                "type": "StackProps[\"justify\"]",
+                "description": "横排的水平分布，如 between 把末项推到另一端。不设则保持默认。",
+                "descriptionEn": "Horizontal distribution in a row, e.g. between pushes the last item to the far end. Unset keeps the default."
+              },
+              {
                 "name": "wrap",
                 "type": "boolean",
                 "default": "true",
@@ -16347,15 +16379,58 @@
                 "descriptionEn": "Defaults to div with no automatic group or toolbar role."
               }
             ]
+          },
+          {
+            "name": "Grid",
+            "description": "等宽多列，纵横间隔取同一角色。",
+            "descriptionEn": "Equal-width columns with one spacing role for rows and columns.",
+            "props": [
+              {
+                "name": "gap",
+                "type": "LayoutGap",
+                "default": "\"panel\"",
+                "description": "与 Stack 相同的关系角色，行距与列距相等。",
+                "descriptionEn": "The same relationship roles as Stack; row and column gaps are equal."
+              },
+              {
+                "name": "columns",
+                "type": "number",
+                "default": "2",
+                "description": "固定列数，每列等宽。与 minItemWidth 同时给出时以 minItemWidth 为准。",
+                "descriptionEn": "Fixed number of equal columns. minItemWidth wins when both are given."
+              },
+              {
+                "name": "minItemWidth",
+                "type": "string",
+                "description": "每列最小宽度（CSS 长度，如 \"12rem\"）：按容器宽度自动决定列数，窄到放不下一列时收为单列。",
+                "descriptionEn": "Minimum column width as a CSS length such as \"12rem\": the column count follows the container, collapsing to one column when even one does not fit."
+              },
+              {
+                "name": "align",
+                "type": "StackProps[\"align\"]",
+                "default": "\"stretch\"",
+                "description": "每个格子内的纵向对齐。",
+                "descriptionEn": "Block-axis alignment of items within their cells."
+              },
+              {
+                "name": "render / ref / 原生属性",
+                "nameEn": "render / ref / native props",
+                "type": "useRender.ComponentProps<\"div\">",
+                "description": "默认 div；没有自动 list/grid 语义，需要列表语义时 render 成 ul。",
+                "descriptionEn": "Defaults to div with no automatic list or grid role; render as ul when list semantics are needed."
+              }
+            ]
           }
         ],
         "notes": [
           "布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。",
+          "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。",
           "角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。",
           "方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。"
         ],
         "notesEn": [
           "Layout adds no border, surface, padding or business state; use Card for independent object boundaries.",
+          "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.",
           "Role values are theme presets. Explain special className/style overrides in the project composition.",
           "Direction, language and density follow the DOM; wrapping does not reorder content."
         ],
@@ -16371,7 +16446,7 @@
             "把布局当围合或页面骨架；用数字 gap 代替关系判断。"
           ],
           "composition": [
-            "Stack render 成 section；Inline 组合现有动作；比较保留原生 table/grid。"
+            "Stack render 成 section；Inline 组合现有动作；比较保留原生 table/grid；等宽并排的同类对象用 Grid。"
           ],
           "stateOwner": {
             "library": [
@@ -16396,7 +16471,7 @@
             "Treating layout as enclosure or a page skeleton; numeric gaps without judging relationships."
           ],
           "composition": [
-            "Render Stack as section; compose existing actions with Inline; retain native table/grid for comparison."
+            "Render Stack as section; compose existing actions with Inline; retain native table/grid for comparison; use Grid for equal-width peers."
           ],
           "stateOwner": {
             "library": [
@@ -16419,11 +16494,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/layout.tsx",
-              "line": 34
+              "line": 56
             },
             "rootEntry": {
               "path": "packages/ui/src/components/layout.tsx",
-              "line": 34
+              "line": 56
             },
             "status": "PRESENT"
           },
@@ -16432,11 +16507,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/layout.tsx",
-              "line": 48
+              "line": 70
             },
             "rootEntry": {
               "path": "packages/ui/src/components/layout.tsx",
-              "line": 48
+              "line": 70
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "Grid",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/layout.tsx",
+              "line": 88
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/layout.tsx",
+              "line": 88
             },
             "status": "PRESENT"
           }
@@ -24575,11 +24663,20 @@
       "source": "packages/ui/src/components/sidebar.tsx",
       "exports": [
         {
+          "name": "createSidebarDrawerHandle",
+          "kind": "value",
+          "target": "createSidebarDrawerHandle",
+          "source": {
+            "path": "packages/ui/src/components/sidebar.tsx",
+            "line": 17
+          }
+        },
+        {
           "name": "Sidebar",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 76
+            "line": 88
           }
         },
         {
@@ -24587,7 +24684,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 18
+            "line": 28
           }
         },
         {
@@ -24595,7 +24692,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 143
+            "line": 166
           }
         },
         {
@@ -24603,7 +24700,16 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 142
+            "line": 165
+          }
+        },
+        {
+          "name": "SidebarDrawerHandle",
+          "kind": "type",
+          "target": "SidebarDrawerHandle",
+          "source": {
+            "path": "packages/ui/src/components/sidebar.tsx",
+            "line": 17
           }
         },
         {
@@ -24611,7 +24717,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 107
+            "line": 125
           }
         },
         {
@@ -24619,7 +24725,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 106
+            "line": 124
           }
         },
         {
@@ -24627,7 +24733,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 195
+            "line": 218
           }
         },
         {
@@ -24635,7 +24741,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 189
+            "line": 212
           }
         },
         {
@@ -24643,7 +24749,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 183
+            "line": 206
           }
         },
         {
@@ -24651,7 +24757,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 202
+            "line": 225
           }
         },
         {
@@ -24659,7 +24765,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 196
+            "line": 219
           }
         },
         {
@@ -24667,7 +24773,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 175
+            "line": 198
           }
         },
         {
@@ -24675,7 +24781,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 129
+            "line": 152
           }
         },
         {
@@ -24683,7 +24789,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 120
+            "line": 143
           }
         },
         {
@@ -24691,7 +24797,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 220
+            "line": 243
           }
         },
         {
@@ -24699,7 +24805,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 208
+            "line": 231
           }
         },
         {
@@ -24707,7 +24813,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 36
+            "line": 46
           }
         },
         {
@@ -24715,7 +24821,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 263
+            "line": 288
           }
         },
         {
@@ -24723,7 +24829,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 314
+            "line": 339
           }
         },
         {
@@ -24731,7 +24837,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 303
+            "line": 328
           }
         },
         {
@@ -24739,7 +24845,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 255
+            "line": 280
           }
         },
         {
@@ -24747,7 +24853,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 290
+            "line": 315
           }
         },
         {
@@ -24755,7 +24861,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 254
+            "line": 279
           }
         },
         {
@@ -24763,7 +24869,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 138
+            "line": 161
           }
         },
         {
@@ -24771,7 +24877,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 133
+            "line": 156
           }
         },
         {
@@ -24779,7 +24885,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 114
+            "line": 136
           }
         },
         {
@@ -24787,7 +24893,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 112
+            "line": 134
           }
         }
       ],
@@ -24813,7 +24919,8 @@
           "SidebarLink",
           "SidebarSub",
           "SidebarSubTrigger",
-          "SidebarSubContent"
+          "SidebarSubContent",
+          "createSidebarDrawerHandle"
         ],
         "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
         "decisionsEn": "Collapsing produces an icon rail, not a hidden panel: navigation and links stay mounted, names switch to visually hidden (accessible name unchanged) with a Tooltip restoring a visible name; a sub-level's inline panel becomes a Popover over the same content in the rail, and its open/closed memory survives collapsing. Active and routes are explicit application facts.",
@@ -24838,10 +24945,10 @@
               },
               {
                 "name": "drawer / drawerHandle",
-                "type": "boolean / DrawerPrimitive.Handle",
+                "type": "boolean / SidebarDrawerHandle",
                 "default": "false",
-                "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 DrawerCreateHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。",
-                "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with DrawerCreateHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws."
+                "description": "窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位，不按宽度自动收起，中等宽度要收成 rail 由应用控制 collapsed。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 createSidebarDrawerHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。抽屉代码在第一次变窄时才加载，宽屏首屏不带它。",
+                "descriptionEn": "Below 40rem the sidebar moves into a drawer that slides in from the inline start, opened by SidebarDrawerTrigger; at wider widths it stays in place and never collapses on its own: to show the rail at medium widths, the app controls collapsed. The drawer holds the same children: the current item is marked as usual, navigating closes it, and SidebarToggle becomes a close button. Inside a Workspace the shell holds the handle, so omit drawerHandle; outside one, create it with createSidebarDrawerHandle() and give it to both Sidebar and SidebarDrawerTrigger. Missing both throws. The drawer code loads the first time the layout narrows, so wide first screens do not carry it."
               },
               {
                 "name": "render / ref / native props",
@@ -24858,7 +24965,7 @@
             "props": [
               {
                 "name": "handle",
-                "type": "DrawerPrimitive.Handle",
+                "type": "SidebarDrawerHandle",
                 "description": "不在 Workspace 里时，与 Sidebar 的 drawerHandle 相同。",
                 "descriptionEn": "Outside a Workspace, the same handle as Sidebar's drawerHandle."
               },
@@ -25031,11 +25138,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 76
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 76
+              "line": 88
             },
             "status": "PRESENT"
           },
@@ -25044,11 +25151,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 114
+              "line": 136
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 114
+              "line": 136
             },
             "status": "PRESENT"
           },
@@ -25057,11 +25164,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 107
+              "line": 125
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 107
+              "line": 125
             },
             "status": "PRESENT"
           },
@@ -25070,11 +25177,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 129
+              "line": 152
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 129
+              "line": 152
             },
             "status": "PRESENT"
           },
@@ -25083,11 +25190,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 138
+              "line": 161
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 138
+              "line": 161
             },
             "status": "PRESENT"
           },
@@ -25096,11 +25203,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 143
+              "line": 166
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 143
+              "line": 166
             },
             "status": "PRESENT"
           },
@@ -25109,11 +25216,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 183
+              "line": 206
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 183
+              "line": 206
             },
             "status": "PRESENT"
           },
@@ -25122,11 +25229,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 202
+              "line": 225
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 202
+              "line": 225
             },
             "status": "PRESENT"
           },
@@ -25135,11 +25242,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 195
+              "line": 218
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 195
+              "line": 218
             },
             "status": "PRESENT"
           },
@@ -25148,11 +25255,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 220
+              "line": 243
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 220
+              "line": 243
             },
             "status": "PRESENT"
           },
@@ -25161,11 +25268,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 263
+              "line": 288
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 263
+              "line": 288
             },
             "status": "PRESENT"
           },
@@ -25174,11 +25281,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 290
+              "line": 315
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 290
+              "line": 315
             },
             "status": "PRESENT"
           },
@@ -25187,11 +25294,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 314
+              "line": 339
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 314
+              "line": 339
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "createSidebarDrawerHandle",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/sidebar.tsx",
+              "line": 17
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/sidebar.tsx",
+              "line": 17
             },
             "status": "PRESENT"
           }
@@ -27287,7 +27407,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 71
+            "line": 76
           }
         },
         {
@@ -27295,7 +27415,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 93
+            "line": 100
           }
         },
         {
@@ -27303,7 +27423,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 92
+            "line": 99
           }
         },
         {
@@ -27311,7 +27431,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 76
+            "line": 81
           }
         },
         {
@@ -27319,7 +27439,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 74
+            "line": 79
           }
         },
         {
@@ -27327,7 +27447,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 121
+            "line": 128
           }
         },
         {
@@ -27335,7 +27455,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 120
+            "line": 127
           }
         },
         {
@@ -27343,7 +27463,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 42
+            "line": 47
           }
         },
         {
@@ -27359,7 +27479,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 97
+            "line": 104
           }
         },
         {
@@ -27367,7 +27487,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 96
+            "line": 103
           }
         },
         {
@@ -27375,7 +27495,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 117
+            "line": 124
           }
         },
         {
@@ -27383,7 +27503,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 89
+            "line": 96
           }
         },
         {
@@ -27391,7 +27511,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 79
+            "line": 84
           }
         },
         {
@@ -27399,7 +27519,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 111
+            "line": 118
           }
         },
         {
@@ -27407,7 +27527,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 70
+            "line": 75
           }
         },
         {
@@ -27415,7 +27535,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 101
+            "line": 108
           }
         },
         {
@@ -27423,7 +27543,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 100
+            "line": 107
           }
         }
       ],
@@ -27532,6 +27652,12 @@
                 "type": "useRender.ComponentProps<native table part>",
                 "description": "属性属于真实元素；caption 命名整张表。",
                 "descriptionEn": "Props reach actual elements; caption names the table."
+              },
+              {
+                "name": "TableHeader sticky / stickyOffset",
+                "type": "boolean / number | string",
+                "description": "表头吸在最近的滚动区顶部：横向放得下时 TableContainer 不构成滚动容器，表头吸在页面或 Workspace 内容区；横向溢出时吸在 TableContainer 自己的有界高度里。stickyOffset 让开顶上的固定页眉，数字按 px。",
+                "descriptionEn": "Sticks the header to the top of the nearest scroll area: when the table fits horizontally TableContainer is not a scroll container, so the header sticks to the page or Workspace content; when it overflows sideways it sticks within TableContainer's own bounded height. stickyOffset clears a fixed bar above; numbers are px."
               }
             ]
           },
@@ -27601,11 +27727,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 42
+              "line": 47
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 42
+              "line": 47
             },
             "status": "PRESENT"
           },
@@ -27614,11 +27740,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 71
+              "line": 76
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 71
+              "line": 76
             },
             "status": "PRESENT"
           },
@@ -27627,11 +27753,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 76
+              "line": 81
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 76
+              "line": 81
             },
             "status": "PRESENT"
           },
@@ -27640,11 +27766,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 89
+              "line": 96
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 89
+              "line": 96
             },
             "status": "PRESENT"
           },
@@ -27653,11 +27779,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 93
+              "line": 100
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 93
+              "line": 100
             },
             "status": "PRESENT"
           },
@@ -27666,11 +27792,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 97
+              "line": 104
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 97
+              "line": 104
             },
             "status": "PRESENT"
           },
@@ -27679,11 +27805,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 101
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 101
+              "line": 108
             },
             "status": "PRESENT"
           },
@@ -27692,11 +27818,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 117
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 117
+              "line": 124
             },
             "status": "PRESENT"
           },
@@ -27705,11 +27831,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 121
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 121
+              "line": 128
             },
             "status": "PRESENT"
           }
@@ -27748,7 +27874,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 7
+            "line": 8
           }
         },
         {
@@ -27756,7 +27882,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 10
+            "line": 25
           }
         },
         {
@@ -27764,7 +27890,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 8
+            "line": 9
           }
         },
         {
@@ -27772,7 +27898,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 26
+            "line": 44
           }
         },
         {
@@ -27780,7 +27906,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 13
+            "line": 31
           }
         },
         {
@@ -27789,7 +27915,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 31
+            "line": 49
           }
         },
         {
@@ -27797,7 +27923,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 6
+            "line": 7
           }
         },
         {
@@ -27805,7 +27931,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 12
+            "line": 30
           }
         },
         {
@@ -27813,7 +27939,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 11
+            "line": 29
           }
         }
       ],
@@ -27910,9 +28036,11 @@
           }
         ],
         "notes": [
+          "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
           "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
         ],
         "notesEn": [
+          "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
           "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
         ],
         "design": {
@@ -27982,11 +28110,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 7
+              "line": 8
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 7
+              "line": 8
             },
             "status": "PRESENT"
           },
@@ -27995,11 +28123,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 10
+              "line": 25
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 10
+              "line": 25
             },
             "status": "PRESENT"
           },
@@ -28008,11 +28136,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 12
+              "line": 30
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 12
+              "line": 30
             },
             "status": "PRESENT"
           },
@@ -28021,11 +28149,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 26
+              "line": 44
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 26
+              "line": 44
             },
             "status": "PRESENT"
           },
@@ -28034,11 +28162,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 31
+              "line": 49
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 31
+              "line": 49
             },
             "status": "PRESENT"
           }
@@ -28868,7 +28996,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/time-field.tsx",
-            "line": 85
+            "line": 88
           }
         },
         {
@@ -28876,7 +29004,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/time-field.tsx",
-            "line": 15
+            "line": 16
           }
         }
       ],
@@ -28900,8 +29028,8 @@
           "hour",
           "分段"
         ],
-        "decisions": "value 是与原生 input[type=time] 同形的无时区文本（HH:mm 或 HH:mm:ss），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。",
-        "decisionsEn": "The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.",
+        "decisions": "value 是与原生 input[type=time] 同形的无时区文本（HH:mm、HH:mm:ss，秒后可带 1–3 位小数），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。",
+        "decisionsEn": "The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss, optionally with a 1–3 digit fraction of a second); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.",
         "api": [
           {
             "name": "TimeField",
@@ -28918,8 +29046,8 @@
                 "name": "granularity",
                 "type": "\"minute\" | \"second\"",
                 "default": "\"minute\"",
-                "description": "分到哪一段为止。minute 的值是 HH:mm，second 的值是 HH:mm:ss。",
-                "descriptionEn": "The last segment. minute yields HH:mm; second yields HH:mm:ss."
+                "description": "分到哪一段为止。minute 新填出的值是 HH:mm，second 是 HH:mm:ss；不设毫秒分段。",
+                "descriptionEn": "The last segment. A newly entered minute value is HH:mm, a second value HH:mm:ss; there is no millisecond segment."
               },
               {
                 "name": "hourCycle",
@@ -28997,13 +29125,13 @@
         "notes": [
           "只填时刻用 TimeField；日期和时间一起用 DateTimePicker。",
           "分段是 div 而不是原生输入，所以没有软键盘唤起；触屏上的输入走键盘事件，尚未单独适配。",
-          "granularity 为 minute 时，已有值里的秒不显示，编辑后的值不再带秒。",
+          "值比分段更细时（minute 下的秒、任何粒度下的毫秒），那部分不显示，但改别的分段时照原样保留，与原生 input[type=time] 不改写 value 一致；全部清空后重新填写才是不带细部的新值。",
           "没有弹层：时刻的取值空间很小，直接分段填比从列表里选更快。"
         ],
         "notesEn": [
           "Use TimeField for a time of day alone; use DateTimePicker for date and time together.",
           "Segments are divs, not native inputs, so no soft keyboard is raised; touch entry goes through key events and has not been adapted separately.",
-          "With granularity minute, seconds in an existing value are not shown and an edited value no longer carries them.",
+          "When a value is finer than the segments (seconds under minute, milliseconds under any granularity), that part is not shown but survives edits to other segments, as native input[type=time] never rewrites its value; only clearing every segment and entering again yields a new value without it.",
           "There is no popup: a time of day has a small value space, and filling segments is faster than choosing from a list."
         ],
         "design": {
@@ -29054,11 +29182,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/time-field.tsx",
-              "line": 85
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/time-field.tsx",
-              "line": 85
+              "line": 88
             },
             "status": "PRESENT"
           }
@@ -32427,7 +32555,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 44
+            "line": 43
           }
         },
         {
@@ -32435,7 +32563,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 170
+            "line": 169
           }
         },
         {
@@ -32443,7 +32571,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 164
+            "line": 163
           }
         },
         {
@@ -32451,7 +32579,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 195
+            "line": 200
           }
         },
         {
@@ -32459,7 +32587,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 185
+            "line": 184
           }
         },
         {
@@ -32467,7 +32595,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 116
+            "line": 115
           }
         },
         {
@@ -32475,7 +32603,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 134
+            "line": 133
           }
         },
         {
@@ -32483,7 +32611,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 128
+            "line": 127
           }
         },
         {
@@ -32491,7 +32619,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 104
+            "line": 103
           }
         },
         {
@@ -32499,7 +32627,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 24
+            "line": 23
           }
         },
         {
@@ -32507,7 +32635,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 154
+            "line": 153
           }
         },
         {
@@ -32515,7 +32643,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 149
+            "line": 148
           }
         },
         {
@@ -32523,7 +32651,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 89
+            "line": 88
           }
         },
         {
@@ -32531,7 +32659,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 77
+            "line": 76
           }
         },
         {
@@ -32539,7 +32667,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 145
+            "line": 144
           }
         },
         {
@@ -32547,7 +32675,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 139
+            "line": 138
           }
         }
       ],
@@ -32741,6 +32869,12 @@
                 "type": "useRender.ComponentProps<main>",
                 "description": "ref 指向滚动元素，跟随滚动的部件（目录、虚拟列表）从这里取容器。",
                 "descriptionEn": "The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it."
+              },
+              {
+                "name": "transitionKey",
+                "type": "React.Key",
+                "description": "换页的标识，通常传路由路径。变化时滚动回到顶部，内容重放一次进场；首次挂载不动。地址带 #锚点 时不动滚动，交给路由滚到锚点。键盘操作时不播进场，减少动效时只淡入。",
+                "descriptionEn": "Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion."
               }
             ]
           },
@@ -32790,11 +32924,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 44
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 44
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -32803,11 +32937,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 89
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 89
+              "line": 88
             },
             "status": "PRESENT"
           },
@@ -32816,11 +32950,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 116
+              "line": 115
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 116
+              "line": 115
             },
             "status": "PRESENT"
           },
@@ -32829,11 +32963,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 145
+              "line": 144
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 145
+              "line": 144
             },
             "status": "PRESENT"
           },
@@ -32842,11 +32976,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 154
+              "line": 153
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 154
+              "line": 153
             },
             "status": "PRESENT"
           },
@@ -32855,11 +32989,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 170
+              "line": 169
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 170
+              "line": 169
             },
             "status": "PRESENT"
           },
@@ -32868,11 +33002,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 195
+              "line": 200
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 195
+              "line": 200
             },
             "status": "PRESENT"
           },
@@ -32881,11 +33015,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 134
+              "line": 133
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 134
+              "line": 133
             },
             "status": "PRESENT"
           }

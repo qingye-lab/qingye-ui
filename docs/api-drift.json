@@ -15,12 +15,12 @@
       "type-resolved": 102
     },
     "documentedButMissing": 0,
-    "undocumented": 137,
+    "undocumented": 145,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 193,
+    "uncheckedWrittenNames": 194,
     "uncheckedByReason": {
-      "generic": 132,
+      "generic": 133,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -197,6 +197,13 @@
       "declaredAt": "packages/ui/src/components/button.tsx:83"
     },
     {
+      "component": "button-group",
+      "part": "ButtonGroup",
+      "prop": "justify",
+      "declaredAt": "packages/ui/src/components/layout.tsx:44",
+      "viaComponent": "layout"
+    },
+    {
       "component": "cascader",
       "part": "Cascader",
       "prop": "aria-describedby",
@@ -364,7 +371,13 @@
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeader",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:87"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:86"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "prop": "stickyHeaderOffset",
+      "declaredAt": "packages/ui/src/components/data-table.tsx:88"
     },
     {
       "component": "data-table",
@@ -909,27 +922,70 @@
     },
     {
       "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "shape",
+      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "size",
+      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarDrawerTrigger",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
+    },
+    {
+      "component": "sidebar",
       "part": "SidebarLink",
       "prop": "count",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
     },
     {
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "max",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:208"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
     },
     {
       "component": "sidebar",
       "part": "SidebarSub",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:255"
-    },
-    {
-      "component": "table",
-      "part": "TableHeader",
-      "prop": "sticky",
-      "declaredAt": "packages/ui/src/components/table.tsx:87"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:280"
     },
     {
       "component": "theme-provider",
@@ -1684,6 +1740,13 @@
     {
       "component": "layout",
       "part": "Inline",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "layout",
+      "part": "Grid",
       "written": "render / ref / 原生属性",
       "token": "原生属性",
       "reason": "generic"
