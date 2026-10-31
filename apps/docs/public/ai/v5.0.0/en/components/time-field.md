@@ -3,17 +3,17 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
-Source SHA-256: 6bfa3ba89d45d563feac7bd12dcadb5366fb5d6afb51ce9c569f85401a004c14
+Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
 
 Fill in a time of day alone, segment by segment: hour, minute, second.
 
 ## Decision
-The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.
+The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:ss, optionally with a 1–3 digit fraction of a second); empty is null. A value exists only when every segment is filled: in-between states are not reported, and clearing a complete time reports null. Out-of-range values are still reported; they only mark the segments invalid and block form submission, and the application states the reason with FieldError.
 
 ## Notes
 - Use TimeField for a time of day alone; use DateTimePicker for date and time together.
 - Segments are divs, not native inputs, so no soft keyboard is raised; touch entry goes through key events and has not been adapted separately.
-- With granularity minute, seconds in an existing value are not shown and an edited value no longer carries them.
+- When a value is finer than the segments (seconds under minute, milliseconds under any granularity), that part is not shown but survives edits to other segments, as native input[type=time] never rewrites its value; only clearing every segment and entering again yields a new value without it.
 - There is no popup: a time of day has a small value space, and filling segments is faster than choosing from a list.
 
 ## Use and ownership
@@ -42,7 +42,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `defaultValue?`: `string | null | undefined`. 非受控的初值，原生表单 reset 会回到它。
 - `disabled?`: `boolean`.
 - `form?`: `string | undefined`.
-- `granularity?`: `"minute" | "second"`. 填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。
+- `granularity?`: `"minute" | "second"`. 填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）； 传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉， 与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。
 - `hourCycle?`: `12 | 24`. 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。
 - `max?`: `string | undefined`.
 - `min?`: `string | undefined`. 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。
@@ -67,7 +67,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### TimeField
 A group of segmented spinbuttons plus a hidden input for submission; the Field label names the whole group.
 - value / defaultValue / onValueChange: string | null / string | null / (value: string | null) => void. Passing the value prop (including value={null} for empty) makes it controlled: only an accepted callback changes the value, and a rejected change snaps the segments back. Without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it.
-- granularity: "minute" | "second"; default "minute". The last segment. minute yields HH:mm; second yields HH:mm:ss.
+- granularity: "minute" | "second"; default "minute". The last segment. A newly entered minute value is HH:mm, a second value HH:mm:ss; there is no millisecond segment.
 - hourCycle: 12 | 24; default follows the locale. 12-hour adds an AM/PM segment and hours run 1–12; the value is always 24-hour text. When omitted, the current locale decides.
 - min / max: string. Earliest and latest time (same text shape). A value outside marks the segments aria-invalid and blocks submission of its form; typing is neither corrected nor refused. Ranges that cross midnight (min later than max) are not supported.
 - name / form: string. The hidden input joins native FormData and submits the ISO text; an incomplete time submits an empty string. A Field name can supply the name.

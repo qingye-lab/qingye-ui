@@ -68,4 +68,13 @@ describe("Table", () => {
     render(<Table><TableHeader sticky><TableRow><TableHead>名称</TableHead></TableRow></TableHeader></Table>);
     expect(screen.getByRole("columnheader").closest("thead")).toHaveAttribute("data-sticky", "true");
   });
+  it("offsets a sticky header below a fixed bar, and ignores the offset when not sticky", () => {
+    const { rerender } = render(<Table><TableHeader sticky stickyOffset={56}><TableRow><TableHead>名称</TableHead></TableRow></TableHeader></Table>);
+    const head = () => screen.getByRole("columnheader").closest("thead")!;
+    expect(head().style.top).toBe("56px");
+    rerender(<Table><TableHeader sticky stickyOffset="var(--app-bar)"><TableRow><TableHead>名称</TableHead></TableRow></TableHeader></Table>);
+    expect(head().style.top).toBe("var(--app-bar)");
+    rerender(<Table><TableHeader stickyOffset={56}><TableRow><TableHead>名称</TableHead></TableRow></TableHeader></Table>);
+    expect(head().style.top).toBe("");
+  });
 });

@@ -182,6 +182,35 @@ test("seconds granularity adds a segment and the value gains :ss", async () => {
   expect(change).toHaveBeenLastCalledWith("09:30:16");
 });
 
+test("parts finer than the segments survive edits and drop only when every segment is cleared", async () => {
+  const change = vi.fn();
+  render(<TimeField aria-label="t" granularity="second" defaultValue="09:30:15.250" onValueChange={change} />);
+  expect(second()).toHaveAttribute("aria-valuenow", "15");
+  await userEvent.click(minute());
+  await userEvent.keyboard("{ArrowUp}");
+  expect(change).toHaveBeenLastCalledWith("09:31:15.250");
+  await userEvent.keyboard("{Backspace}{ArrowLeft}{Backspace}{ArrowRight}{ArrowRight}{Backspace}");
+  expect(change).toHaveBeenLastCalledWith(null);
+  await userEvent.keyboard("{ArrowLeft}{ArrowLeft}0930{ArrowUp}");
+  expect(change).toHaveBeenLastCalledWith("09:30:00");
+});
+
+test("minute granularity keeps the seconds of a given value", async () => {
+  const change = vi.fn();
+  render(<TimeField aria-label="t" defaultValue="09:30:15.5" onValueChange={change} />);
+  await userEvent.click(hour());
+  await userEvent.keyboard("{ArrowUp}");
+  expect(change).toHaveBeenLastCalledWith("10:30:15.5");
+});
+
+test("bounds compare to the millisecond regardless of written precision", () => {
+  const { rerender } = render(<TimeField aria-label="t" granularity="second" value="09:00:00.5" max="09:00:00.500" />);
+  expect(hour()).not.toHaveAttribute("aria-invalid");
+  rerender(<TimeField aria-label="t" granularity="second" value="09:00:00.501" max="09:00:00.5" />);
+  expect(hour()).toHaveAttribute("aria-invalid", "true");
+  expect(() => rerender(<TimeField aria-label="t" value="09:00:00.1234" />)).toThrow(RangeError);
+});
+
 test("values outside min / max are reported but marked invalid and block form submission", () => {
   const { container, rerender } = render(<form><TimeField aria-label="t" name="open" value="08:00" min="09:00" max="18:00" /></form>);
   const form = container.querySelector("form")!;

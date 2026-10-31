@@ -3,17 +3,27 @@ import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
-import { useDirection } from "@base-ui/react/direction-provider";
 import { useMediaQuery } from "../hooks/use-media-query";
 import { Button, type ButtonProps } from "./button";
 import { CornerMark } from "./corner-mark";
-import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerPrimitive, DrawerTrigger } from "./drawer";
 import { Popover, PopoverTrigger, PopoverPopup } from "./popover";
 import { Tooltip, TooltipTrigger, TooltipPopup } from "./tooltip";
 import { useUILocale } from "../locale";
 import { IconChevronRight, IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand, IconMenu2, IconX } from "@tabler/icons-react";
 import { cn } from "../utils";
-import { useWorkspaceSidebarHandle } from "../sidebar-handle";
+import { hostSidebarDrawer, openSidebarDrawer, useSidebarDrawerOpen, useWorkspaceSidebarHandle, type SidebarDrawerHandle } from "../sidebar-handle";
+import type { SidebarDrawerHostProps } from "../sidebar-drawer";
+
+export { createSidebarDrawerHandle, type SidebarDrawerHandle } from "../sidebar-handle";
+
+// 抽屉宿主只在窄屏用得到，按需加载（见 sidebar-drawer.tsx）。取到后记在模块里，之后挂上来的侧栏直接用。
+// 取不到（离线、发版后旧页面引用的文件名已失效）时不能让外壳崩掉：这一次打开作罢、抽屉关上，下次按下再取。
+// 不用 React.lazy：它记住失败，取不到一次就再也取不到。
+type DrawerHost = React.ComponentType<SidebarDrawerHostProps>;
+let drawerHost: DrawerHost | null = null; let drawerHostLoading: Promise<DrawerHost> | null = null;
+function loadDrawerHost() {
+  return drawerHostLoading ??= import("../sidebar-drawer").then(module => drawerHost = module.default, error => { drawerHostLoading = null; throw error; });
+}
 
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
 type SidebarState = {
@@ -37,11 +47,13 @@ export type SidebarProps = useRender.ComponentProps<"div"> & {
   collapsed?: boolean; defaultCollapsed?: boolean; onCollapsedChange?: (collapsed: boolean, details: SidebarChangeDetails) => void;
   /**
    * 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。
+   * 断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。
+   * 40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。
    * 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
    */
   drawer?: boolean;
-  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。 */
-  drawerHandle?: DrawerPrimitive.Handle<unknown>;
+  /** 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。 */
+  drawerHandle?: SidebarDrawerHandle;
 };
 /**
  * 侧栏铺底纸色，悬停与当前项是叠在这张底上的两级墨面（用户裁决 2026-10-30，推翻 2026-10-12 的
@@ -74,12 +86,19 @@ export type SidebarProps = useRender.ComponentProps<"div"> & {
  * 避免过渡途中出现换行或文字被压缩的跳动。
  */
 export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange, drawer = false, drawerHandle, render, className, ...props }: SidebarProps) {
-  const { messages } = useUILocale();
   const [local, setLocal] = React.useState(defaultCollapsed); const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
-  const narrow = useMediaQuery("max-sm"); const direction = useDirection(); const workspaceHandle = useWorkspaceSidebarHandle(); const handle = drawerHandle ?? workspaceHandle;
-  const inDrawer = drawer && narrow; const [drawerOpen, setDrawerOpen] = React.useState(false);
-  // 变宽回到原位后抽屉卸下；下次再变窄时不能带着旧的「开」状态自己弹出来。
-  React.useEffect(() => { if (!inDrawer) setDrawerOpen(false); }, [inDrawer]);
+  const narrow = useMediaQuery("max-sm"); const workspaceHandle = useWorkspaceSidebarHandle(); const handle = drawerHandle ?? workspaceHandle;
+  const inDrawer = drawer && narrow; const [drawerOpen, setDrawerOpen] = useSidebarDrawerOpen(drawer ? handle : null);
+  const [Host, setHost] = React.useState(() => drawerHost);
+  // 变窄就开始取，不等按下；取不到就关上，开着（又按了一次）时再取。
+  React.useEffect(() => {
+    if (!inDrawer || Host) return; let live = true;
+    loadDrawerHost().then(host => { if (live) setHost(() => host); }, () => { if (live) setDrawerOpen(false); });
+    return () => { live = false; };
+  }, [inDrawer, Host, drawerOpen, setDrawerOpen]);
+  // 正在承接抽屉期间登记在 handle 上：没有承接者时按钮按下不算数；变宽或卸载即撤下登记，抽屉随之关上，
+  // 下次再变窄或换一个侧栏挂上来时不会带着旧的「开」自己弹出来（见 sidebar-handle.ts）。
+  React.useEffect(() => inDrawer && handle ? hostSidebarDrawer(handle) : undefined, [inDrawer, handle]);
   if (drawer && !handle) throw new Error("Sidebar drawer requires a Workspace ancestor or a drawerHandle shared with SidebarDrawerTrigger.");
   // 抽屉里没有「收起成 rail」这回事：宽度由抽屉给，永远展开。
   const current = inDrawer ? false : collapsed ?? local;
@@ -93,28 +112,32 @@ export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange
   const element = useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "sidebar", "data-collapsed": current, className: cn("flex w-(--qy-sidebar-width) min-w-0 max-w-full flex-col gap-(--qy-field-gap) overflow-x-hidden bg-sidebar text-body transition-[width,padding] duration-(--qy-duration-base) ease-(--qy-ease-out) motion-reduce:transition-none data-[collapsed=true]:w-[calc(var(--qy-fill-height)+2*var(--qy-overlay-inset))] data-[collapsed=true]:px-(--qy-overlay-inset)", inDrawer && "bg-transparent", className) }, props) });
   const sidebar = <SidebarContext.Provider value={context}>{element}</SidebarContext.Provider>;
   if (!inDrawer) return sidebar;
-  // 抽屉从起始侧滑出：swipeDirection 说的是收回的方向，ltr 向左、rtl 向右。名称与侧栏的导航名称同一个。
-  return <Drawer handle={handle ?? undefined} open={drawerOpen} onOpenChange={setDrawerOpen} swipeDirection={direction === "rtl" ? "right" : "left"}>
-    <DrawerPopup aria-label={messages.sidebar}><DrawerContent>{sidebar}</DrawerContent></DrawerPopup>
-  </Drawer>;
+  // 取到之前没有可见内容要占位：按下的「开」已记在 handle 上，宿主到位时直接以打开状态出现。
+  return Host && <Host handle={handle!} open={drawerOpen} onOpenChange={setDrawerOpen}>{sidebar}</Host>;
 }
 /**
- * 窄屏打开侧栏抽屉的按钮：一枚有名称的图标按钮（名称 messages.sidebarOpen，aria-expanded 由抽屉触发器给出）。
+ * 窄屏打开侧栏抽屉的按钮：一枚有名称的图标按钮（名称 messages.sidebarOpen），aria-haspopup="dialog"，aria-expanded 读抽屉的开合。
  * 放在 Workspace 里任何位置（通常是 WorkspaceHeader 的第一项）即可找到外壳持有的抽屉；不在 Workspace 里时传入与 Sidebar 相同的 handle。
  * 宽屏侧栏就在原位，按钮用 sm:hidden 隐去（与 Sidebar 的窄屏断点同一个点），不占位也不进 Tab 顺序。
+ * 它是普通按钮而不是 Base UI 的抽屉触发器：首屏不引入抽屉代码（见 sidebar-handle.ts）。
  */
-export type SidebarDrawerTriggerProps = Omit<DrawerPrimitive.Trigger.Props<unknown>, "handle"> & { handle?: DrawerPrimitive.Handle<unknown> };
-export function SidebarDrawerTrigger({ handle, render, className, children, ...props }: SidebarDrawerTriggerProps) {
+export type SidebarDrawerTriggerProps = ButtonProps & { handle?: SidebarDrawerHandle };
+export function SidebarDrawerTrigger({ handle, className, children, onClick, ref, ...props }: SidebarDrawerTriggerProps) {
   const { messages } = useUILocale(); const workspaceHandle = useWorkspaceSidebarHandle(); const actual = handle ?? workspaceHandle;
   if (!actual) throw new Error("SidebarDrawerTrigger requires a Workspace ancestor or a handle shared with Sidebar.");
-  return <DrawerTrigger data-slot="sidebar-drawer-trigger" aria-label={messages.sidebarOpen} {...props} handle={actual} render={render ?? <Button variant="quiet" shape="icon" />} className={state => cn("sm:hidden", typeof className === "function" ? className(state) : className)}>{children ?? <IconMenu2 aria-hidden="true" className="rtl:-scale-x-100" />}</DrawerTrigger>;
+  const [open] = useSidebarDrawerOpen(actual);
+  return <Button data-slot="sidebar-drawer-trigger" variant="quiet" shape="icon" aria-label={messages.sidebarOpen} aria-haspopup="dialog" aria-expanded={open} data-popup-open={open ? "" : undefined} {...props}
+    ref={ref}
+    onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) openSidebarDrawer(actual, event.currentTarget); }}
+    className={cn("sm:hidden", className)}>{children ?? <IconMenu2 aria-hidden="true" className="rtl:-scale-x-100" />}</Button>;
 }
 export type SidebarToggleProps = ButtonProps;
 // 无 children 时名称固定为 messages.sidebar，展开/收起只由 aria-expanded 表达（ARIA disclosure）：状态不读两遍。
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
   // 抽屉里没有可收起的 rail：这一格换成关闭，位置与名称（messages.close）都是关闭抽屉的通行写法。
-  if (context.inDrawer) return <div data-slot="sidebar-toggle-row" className="flex justify-end"><DrawerClose data-slot="sidebar-toggle" aria-label={messages.close} render={<Button variant="quiet" shape="icon" />} className={cn("text-muted-foreground hover:text-foreground", className)}>{children ?? <IconX aria-hidden="true" />}</DrawerClose></div>;
+  // 抽屉是受控的，关闭就是把 Sidebar 持有的开合状态置为关，不需要抽屉自己的 Close 部件。
+  if (context.inDrawer) return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape="icon" aria-label={messages.close} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={ref} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.closeDrawer?.(); }}>{children ?? <IconX aria-hidden="true" />}</Button></div>;
   return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? messages.sidebar : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
 }
 export type SidebarHeaderProps = useRender.ComponentProps<"div">;
@@ -221,8 +244,10 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   const context = useSidebar();
   const inSub = React.useContext(InSubPanel);
   const { messages } = useUILocale();
+  // 粗指针下行高升到 --qy-touch-target：纵排的行之间只隔 gap-fen-half，touch-target 的命中层若靠外扩补高会盖住上下邻行
+  // （STANDARDS §2）；行本身够高后它只剩横向外扩，补足 rail 态窄于 44 的图标。SidebarSubTrigger 同理。
   const frame = cn(
-    "touch-target relative flex min-h-(--qy-fill-height) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent not-aria-[current=page]:hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
+    "touch-target relative flex min-h-(--qy-fill-height) pointer-coarse:min-h-(--qy-touch-target) min-w-0 items-center gap-(--qy-control-content-gap) rounded-item text-start text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg]:size-(--qy-control-md-icon) [&_svg]:shrink-0 not-aria-[current=page]:hover:bg-sidebar-accent not-aria-[current=page]:hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
     context.collapsed ? "justify-center px-0" : inSub ? subItemPadding : "px-(--qy-control-sm-padding)",
     active && "bg-sidebar-current font-medium text-sidebar-current-foreground",
     className,
@@ -291,7 +316,7 @@ export function SidebarSubTrigger({ icon, className, children, ...props }: Sideb
   const context = useSidebar();
   const inSub = React.useContext(InSubPanel);
   const frame = cn(
-    "group/disclosure touch-target flex w-full min-h-(--qy-fill-height) min-w-0 cursor-pointer items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg:not([data-slot=sidebar-sub-icon])]:size-(--qy-control-md-icon) [&_svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset group-has-[[aria-current=page]]/sub:text-sidebar-accent-foreground",
+    "group/disclosure touch-target flex w-full min-h-(--qy-fill-height) pointer-coarse:min-h-(--qy-touch-target) min-w-0 cursor-pointer items-center gap-(--qy-control-content-gap) rounded-item text-body text-sidebar-foreground outline-none transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) [&_svg:not([data-slot=sidebar-sub-icon])]:size-(--qy-control-md-icon) [&_svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset group-has-[[aria-current=page]]/sub:text-sidebar-accent-foreground",
     context.collapsed ? "justify-center px-0" : inSub ? subItemPadding : "px-(--qy-control-sm-padding)",
     className,
   );

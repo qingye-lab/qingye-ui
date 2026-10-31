@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 63934ff03a5e0261276f6e24976495abf0f711491928e41839e41b25a6bcb366
+Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -43,10 +43,12 @@ Source SHA-256: 63934ff03a5e0261276f6e24976495abf0f711491928e41839e41b25a6bcb366
 - 控件档案、间距和浮层表面消费现有角色；具体外观是预设。
 
 ## Current exports
+- createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
+- SidebarDrawerHandle: interface; owner external; PASS
 - SidebarDrawerTrigger: function; owner sidebar; PASS; props: SidebarDrawerTriggerProps
 - SidebarDrawerTriggerProps: type; owner sidebar; PASS
 - SidebarFooter: function; owner sidebar; PASS; props: SidebarFooterProps
@@ -77,8 +79,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Sidebar
 - `collapsed?`: `boolean`.
 - `defaultCollapsed?`: `boolean`.
-- `drawer?`: `boolean`. 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
-- `drawerHandle?`: `DrawerPrimitive.Handle<unknown>`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 DrawerCreateHandle() 创建并同时交给 SidebarDrawerTrigger。
+- `drawer?`: `boolean`. 窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。 断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。 40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。 抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。
+- `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -87,8 +89,15 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarDrawerTrigger
-- `handle?`: `DrawerPrimitive.Handle<unknown>`.
-- plus 290 inherited (@types/react 284, @base-ui/react 6); not expanded, see the installed declarations
+- `className?`: `string`.
+- `data-slot?`: `string`.
+- `handle?`: `SidebarDrawerHandle`.
+- `loading?`: `boolean`. 这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。 成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。
+- `shape?`: `"label" | "icon"`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- `tone?`: `"neutral" | "danger"`.
+- `variant?`: `"solid" | "bordered" | "quiet"`.
+- plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
 ### SidebarFooter
 - no props declared by this library
@@ -158,12 +167,12 @@ Written descriptions; the list above is the type-resolved fact.
 ### Sidebar / SidebarToggle
 侧栏容器（不产生地标，导航地标由内部的 nav 给出）与可逆开关。
 - collapsed / defaultCollapsed / onCollapsedChange: boolean / callback. 默认展开；details.cancel() 拒绝变化。
-- drawer / drawerHandle: boolean / DrawerPrimitive.Handle; default false. 窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 DrawerCreateHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。
+- drawer / drawerHandle: boolean / SidebarDrawerHandle; default false. 窄屏（< 40rem）把侧栏收进从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍在原位，不按宽度自动收起，中等宽度要收成 rail 由应用控制 collapsed。抽屉里是同一份 children：当前项照常标出，点去往新页面的条目后关闭，SidebarToggle 换成关闭按钮。在 Workspace 里 handle 由外壳持有，省略 drawerHandle；不在 Workspace 里时用 createSidebarDrawerHandle() 创建并同时交给 Sidebar 与 SidebarDrawerTrigger。两者都没有会抛错。抽屉代码在第一次变窄时才加载，宽屏首屏不带它。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### SidebarDrawerTrigger
 窄屏打开侧栏抽屉的图标按钮，名称「打开工作区导航」。放在 Workspace 里任何位置（通常是 WorkspaceHeader 的第一项）；宽屏隐去，不占位也不进 Tab 顺序。
-- handle: DrawerPrimitive.Handle. 不在 Workspace 里时，与 Sidebar 的 drawerHandle 相同。
+- handle: SidebarDrawerHandle. 不在 Workspace 里时，与 Sidebar 的 drawerHandle 相同。
 - render / native props: Drawer trigger props. 默认渲染为 quiet 图标按钮；aria-expanded 由抽屉给出。
 
 ### SidebarHeader / SidebarTitle

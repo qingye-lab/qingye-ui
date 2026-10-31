@@ -3,17 +3,17 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
-Source SHA-256: 6bfa3ba89d45d563feac7bd12dcadb5366fb5d6afb51ce9c569f85401a004c14
+Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
 
 只填一个时刻，按时、分、秒分段输入。
 
 ## Decision
-value 是与原生 input[type=time] 同形的无时区文本（HH:mm 或 HH:mm:ss），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。
+value 是与原生 input[type=time] 同形的无时区文本（HH:mm、HH:mm:ss，秒后可带 1–3 位小数），空为 null。每一段都填了才有值：还差几段的中间态不上报，把已有的完整时间清掉时上报 null。越界的值照常上报，只把分段标为无效并让表单提交被拦下，说明文字由应用用 FieldError 给出。
 
 ## Notes
 - 只填时刻用 TimeField；日期和时间一起用 DateTimePicker。
 - 分段是 div 而不是原生输入，所以没有软键盘唤起；触屏上的输入走键盘事件，尚未单独适配。
-- granularity 为 minute 时，已有值里的秒不显示，编辑后的值不再带秒。
+- 值比分段更细时（minute 下的秒、任何粒度下的毫秒），那部分不显示，但改别的分段时照原样保留，与原生 input[type=time] 不改写 value 一致；全部清空后重新填写才是不带细部的新值。
 - 没有弹层：时刻的取值空间很小，直接分段填比从列表里选更快。
 
 ## Use and ownership
@@ -42,7 +42,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `defaultValue?`: `string | null | undefined`. 非受控的初值，原生表单 reset 会回到它。
 - `disabled?`: `boolean`.
 - `form?`: `string | undefined`.
-- `granularity?`: `"minute" | "second"`. 填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。
+- `granularity?`: `"minute" | "second"`. 填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）； 传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉， 与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。
 - `hourCycle?`: `12 | 24`. 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。
 - `max?`: `string | undefined`.
 - `min?`: `string | undefined`. 最早 / 最晚时刻（同形文本）。越界的值照常上报，但分段标为无效并让表单提交被拦下。
@@ -67,7 +67,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### TimeField
 一组分段的 spinbutton 加一个提交用的隐藏输入；整组由 Field 的标签命名。
 - value / defaultValue / onValueChange: string | null / string | null / (value: string | null) => void. 传了 value 属性（含 value={null}，表示空）即受控：调用方接受回调才改变事实；调用方不接受时，分段回到已接受的值。不传 value 则非受控，defaultValue 是初值，原生表单 reset 回到它。
-- granularity: "minute" | "second"; default "minute". 分到哪一段为止。minute 的值是 HH:mm，second 的值是 HH:mm:ss。
+- granularity: "minute" | "second"; default "minute". 分到哪一段为止。minute 新填出的值是 HH:mm，second 是 HH:mm:ss；不设毫秒分段。
 - hourCycle: 12 | 24; default 跟随 locale. 12 小时制多一个上午/下午分段，小时为 1–12；值始终是 24 小时文本。省略时取当前 locale 的习惯。
 - min / max: string. 最早 / 最晚时刻（同形文本）。越界的值分段标 aria-invalid，并让所在表单的提交被拦下；不修正、不拒绝键入。不支持跨午夜的区间（min 晚于 max）。
 - name / form: string. 隐藏输入参与原生 FormData，提交 ISO 文本；未填完整时提交空串。Field 的 name 可代为命名。

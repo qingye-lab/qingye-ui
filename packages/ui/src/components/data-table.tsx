@@ -80,11 +80,12 @@ export type DataTableProps<TData> = Omit<TableProps, "children"> & {
   virtualization?: DataTableVirtualization;
   containerProps?: TableContainerProps;
   /**
-   * 表头吸顶。sticky 只在最近的滚动容器里生效，而 TableContainer 本身是横向滚动容器：表头只会吸在「表格自己的有界高度容器」里——
-   * 虚拟化模式（固定 height 的视口），或调用方用 containerProps 给容器设了 height / max-height。
-   * 没有高度限制时表格随页面流动，表头不会吸在页面顶部。
+   * 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，
+   * 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
    */
   stickyHeader?: boolean;
+  /** 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。 */
+  stickyHeaderOffset?: number | string | undefined;
 };
 const interactiveContent = "a[href],area[href],button,input,select,textarea,label,summary,details,iframe,object,embed,audio[controls],video[controls],[contenteditable]:not([contenteditable=false]),[role=button],[role=link],[role=checkbox],[role=radio],[role=switch],[role=menuitem],[role=option],[tabindex],[data-row-activate-ignore]";
 function isRowInteraction(event: React.MouseEvent<HTMLTableRowElement> | React.KeyboardEvent<HTMLTableRowElement>) {
@@ -144,7 +145,7 @@ const sumWidths = (widths: readonly (number | string)[]): number | string => wid
 function VirtualSpacer({ height, columns }: { height: number; columns: number }) {
   return height > 0 ? <tr data-slot="data-table-spacer" aria-hidden="true" style={{ height }}><td colSpan={columns} style={{ height, padding: 0, border: 0, lineHeight: 0 }} /></tr> : null;
 }
-export function DataTable<TData>({ table, caption, emptyContent, busy = false, error, activeRowId, selectionAppearance = "row", onRowActivate, virtualization, containerProps, stickyHeader = false, className, style, onFocusCapture, onBlurCapture, ...props }: DataTableProps<TData>) {
+export function DataTable<TData>({ table, caption, emptyContent, busy = false, error, activeRowId, selectionAppearance = "row", onRowActivate, virtualization, containerProps, stickyHeader = false, stickyHeaderOffset, className, style, onFocusCapture, onBlurCapture, ...props }: DataTableProps<TData>) {
   if (!table.options.getRowId) throw new Error("DataTable requires an explicit stable getRowId.");
   const columns = table.getVisibleLeafColumns(); if (columns.length === 0) throw new Error("DataTable requires at least one visible comparison column.");
   if (virtualization && (!Number.isFinite(virtualization.height) || virtualization.height <= 0 || !Number.isFinite(virtualization.estimateRowHeight) || virtualization.estimateRowHeight <= 0)) throw new Error("DataTable virtualization requires finite positive height and estimateRowHeight.");
@@ -331,7 +332,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   }} onBlurCapture={event => { onBlurCapture?.(event); if (!event.currentTarget.contains(event.relatedTarget)) { focusedElement.current = null; setFocusedId(null); } }}>
     {caption !== undefined && <TableCaption>{caption}</TableCaption>}
     {sized && <colgroup>{columns.map(column => <col key={column.id} style={{ width: columnWidth(column), minWidth: column.columnDef.minSize, maxWidth: column.columnDef.maxSize }} />)}</colgroup>}
-    <TableHeader sticky={stickyHeader}>{headerGroups.map((group, index) => <TableRow key={group.id} aria-rowindex={virtualization ? index + 1 : undefined}>{group.headers.map(header => {
+    <TableHeader sticky={stickyHeader} stickyOffset={stickyHeaderOffset}>{headerGroups.map((group, index) => <TableRow key={group.id} aria-rowindex={virtualization ? index + 1 : undefined}>{group.headers.map(header => {
       const sort = header.column.getIsSorted(); const meta = header.column.columnDef.meta as DataTableColumnMeta | undefined;
       const content = header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext());
       const pinIndex = !header.subHeaders.length && meta?.pinned ? pinnedIds.indexOf(header.column.id) : -1;
@@ -451,8 +452,9 @@ export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<"div
   selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };
   selectionAppearance?: DataTableProps<TData>["selectionAppearance"];
   virtualization?: DataTableVirtualization;
-  /** 表头吸顶；仅在表格自己的有界高度容器里生效（虚拟化视口，或 tableProps.containerProps 设了 height / max-height），不会吸在页面顶部。 */
+  /** 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。 */
   stickyHeader?: boolean;
+  stickyHeaderOffset?: DataTableProps<TData>["stickyHeaderOffset"];
   /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */
   activeRow?: ({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void };
   caption?: React.ReactNode;
@@ -460,7 +462,7 @@ export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<"div
   busy?: boolean;
   /** 见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。 */
   error?: React.ReactNode;
-  tableProps?: Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader">;
+  tableProps?: Omit<DataTableProps<TData>, "table" | "caption" | "emptyContent" | "busy" | "error" | "activeRowId" | "onRowActivate" | "selectionAppearance" | "virtualization" | "stickyHeader" | "stickyHeaderOffset">;
 };
 
 type PatternUpdate = (next: DataTablePatternState | ((previous: DataTablePatternState) => DataTablePatternState), reason: DataTablePatternChangeDetails["reason"]) => void;
@@ -495,7 +497,7 @@ function PatternSelectionCell<TData>({ row, column }: CellContext<TData, unknown
 }
 
 /** Standard configuration-based table. Use DataTable with a caller-owned instance for advanced TanStack features. */
-export function DataTablePattern<TData>({ data, columns, getRowId, mode = "client", state, defaultState, onStateChange, pagination = false, selection, selectionAppearance = "row", virtualization, stickyHeader = false, activeRow, caption, emptyContent, busy = false, error, tableProps, className, ...props }: DataTablePatternProps<TData>) {
+export function DataTablePattern<TData>({ data, columns, getRowId, mode = "client", state, defaultState, onStateChange, pagination = false, selection, selectionAppearance = "row", virtualization, stickyHeader = false, stickyHeaderOffset, activeRow, caption, emptyContent, busy = false, error, tableProps, className, ...props }: DataTablePatternProps<TData>) {
   const [internalState, setInternalState] = React.useState<DataTablePatternState>(() => ({ sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: null, ...defaultState }));
   const source = state ?? internalState;
   if (pagination && mode === "server" && pagination.totalCount === undefined) throw new Error("Server DataTable pagination requires totalCount, or null with explicit hasNextPage.");
@@ -541,7 +543,7 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     }, "pagination"),
   });
   return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", className)}>
-    <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: row => {
+    <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: row => {
       update(previous => ({ ...previous, activeRowId: row.id }), "active-row");
       activeRow.onActivate?.(row.original);
     } } : {})} />

@@ -5,11 +5,12 @@ import * as React from "react";
 import { fillStateByData } from "../fill-state";
 import { useInputFacts } from "../input-facts";
 import { InField } from "../labelable-scope";
+import { comparableTime, validLocalTime } from "../local-time";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
 /**
- * 纯时间输入：值是与原生 `input[type=time]` 同形的无时区文本（`HH:mm` 或 `HH:mm:ss`），空为 `null`。
+ * 纯时间输入：值是与原生 `input[type=time]` 同形的无时区文本（`HH:mm`、`HH:mm:ss`，秒后可带 1–3 位小数），空为 `null`。
  * 日期与时间一起填用 DateTimePicker；只有时刻（营业时间、提醒时间）用这里。
  */
 export type TimeFieldProps = Omit<React.ComponentProps<"div">, "children" | "defaultValue" | "onChange" | "role" | "render"> & {
@@ -19,7 +20,11 @@ export type TimeFieldProps = Omit<React.ComponentProps<"div">, "children" | "def
   defaultValue?: string | null | undefined;
   /** 填完整得出时间，或把已有的完整时间清掉（`null`）时请求变更；还差几段的中间态不上报。 */
   onValueChange?: ((value: string | null) => void) | undefined;
-  /** 填到哪一段为止。`minute` 的值是 `HH:mm`，`second` 的值是 `HH:mm:ss`。 */
+  /**
+   * 填到哪一段为止。`minute` 新填出的值是 `HH:mm`，`second` 是 `HH:mm:ss`。不设毫秒分段（手填毫秒不是常见任务）；
+   * 传入的值比分段更细（`minute` 下的秒、任何粒度下的毫秒）时，那部分照原样保留，改别的分段不会把它截掉，
+   * 与原生 `input[type=time]` 不改写 value 一致。全部清空后重新填写，得到的是不带细部的新值。
+   */
   granularity?: "minute" | "second";
   /** 12 或 24 小时制。省略时跟随当前 locale 的习惯（`Intl.DateTimeFormat` 解析出的 hourCycle）。 */
   hourCycle?: 12 | 24;
@@ -31,13 +36,11 @@ export type TimeFieldProps = Omit<React.ComponentProps<"div">, "children" | "def
 
 type Segment = "hour" | "minute" | "second" | "period";
 type Period = "am" | "pm";
-type Parts = { hour: number | null; minute: number | null; second: number | null; period: Period | null };
+// finer：值里比分段更细、不显示也不编辑的那一截（如 `:56.789` 或 `.789`），合成值时原样接回。
+type Parts = { hour: number | null; minute: number | null; second: number | null; period: Period | null; finer: string };
 
-const emptyParts: Parts = { hour: null, minute: null, second: null, period: null };
-const validTime = (text: string) => /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(text);
-// 长度不同的两段文本放在一起比较时补齐到秒；定宽的 ISO 文本可直接按字典序比较。
-const withSeconds = (text: string) => text.length === 5 ? `${text}:00` : text;
-const outOfRange = (value: string, min: string | undefined, max: string | undefined) => Boolean(min && withSeconds(value) < withSeconds(min) || max && withSeconds(value) > withSeconds(max));
+const emptyParts: Parts = { hour: null, minute: null, second: null, period: null, finer: "" };
+const outOfRange = (value: string, min: string | undefined, max: string | undefined) => Boolean(min && comparableTime(value) < comparableTime(min) || max && comparableTime(value) > comparableTime(max));
 const pad = (n: number) => String(n).padStart(2, "0");
 
 /** 跟随 locale：`Intl` 解析出的 h11 / h12 都是 12 小时制，h23 / h24 是 24 小时制。显示一律用 1–12，不区分 h11 的 0–11。 */
@@ -50,16 +53,16 @@ function localeHourCycle(code: string): 12 | 24 {
 
 function partsFromValue(value: string | null, cycle: 12 | 24, seconds: boolean): Parts {
   if (!value) return emptyParts;
-  const [h = 0, m = 0, s = 0] = value.split(":").map(Number);
-  return { hour: cycle === 24 ? h : h % 12 || 12, minute: m, second: seconds ? s : null, period: cycle === 24 ? null : h < 12 ? "am" : "pm" };
+  const [h = 0, m = 0, s = 0] = value.split(":").map(text => Math.trunc(Number(text)));
+  return { hour: cycle === 24 ? h : h % 12 || 12, minute: m, second: seconds ? s : null, period: cycle === 24 ? null : h < 12 ? "am" : "pm", finer: value.slice(seconds ? 8 : 5) };
 }
 
 /** 每一段都填了才有值；缺任何一段都不是值。 */
 function valueFromParts(parts: Parts, cycle: 12 | 24, seconds: boolean): string | null {
-  const { hour, minute, second, period } = parts;
+  const { hour, minute, second, period, finer } = parts;
   if (hour === null || minute === null || (seconds && second === null) || (cycle === 12 && period === null)) return null;
   const hour24 = cycle === 24 ? hour : (hour % 12) + (period === "pm" ? 12 : 0);
-  return `${pad(hour24)}:${pad(minute)}${seconds ? `:${pad(second!)}` : ""}`;
+  return `${pad(hour24)}:${pad(minute)}${seconds ? `:${pad(second!)}` : ""}${finer}`;
 }
 
 const filledCount = (parts: Parts) => [parts.hour, parts.minute, parts.second, parts.period].filter(part => part !== null).length;
@@ -87,8 +90,8 @@ export function TimeField(allProps: TimeFieldProps) {
   const controlled = "value" in allProps;
   const [uncontrolled, setUncontrolled] = React.useState<string | null>(defaultValue);
   const value = controlled ? valueProp ?? null : uncontrolled;
-  if (value !== null && !validTime(value)) throw new RangeError("TimeField requires HH:mm or HH:mm:ss text without a zone.");
-  if (min && !validTime(min) || max && !validTime(max)) throw new RangeError("TimeField min and max require HH:mm or HH:mm:ss text.");
+  if (value !== null && !validLocalTime(value)) throw new RangeError("TimeField requires HH:mm, HH:mm:ss or HH:mm:ss.SSS text without a zone.");
+  if (min && !validLocalTime(min) || max && !validLocalTime(max)) throw new RangeError("TimeField min and max require HH:mm, HH:mm:ss or HH:mm:ss.SSS text.");
   const inField = React.useContext(InField);
   // 名称契约同 Chart / Avatar：有 Field 时名称来自 FieldLabel；字段外必须自带，否则读屏读不出这是什么时间。
   if (!inField && !props["aria-label"] && !props["aria-labelledby"]) throw new Error("TimeField requires an accessible name: place it in a Field with a FieldLabel, or pass aria-label / aria-labelledby.");
@@ -137,7 +140,9 @@ export function TimeField(allProps: TimeFieldProps) {
     return () => owner.removeEventListener("reset", reset);
   }, [form]);
 
-  const commit = (next: Parts) => {
+  const commit = (edited: Parts) => {
+    // 分段全空就是清掉了这个时间，细部随之放下；之后重新填写得到的是新值，不带回看不见的旧细部。
+    const next = filledCount(edited) === 0 ? { ...edited, finer: "" } : edited;
     const nextValue = valueFromParts(next, cycle, seconds);
     setTyping({ parts: next, base: nextValue });
     setLapsed(false);

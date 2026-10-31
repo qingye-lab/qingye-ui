@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.0.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 6d4986a22c788958edc8574a63618019df7eb6d313a2f2c4d631107706b11acf
+Source SHA-256: ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -87,7 +87,8 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 287 inherited (@types/react 286, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableHeader
-- `sticky?`: `boolean`. 表头吸在滚动容器的顶部。sticky 只相对最近的滚动容器生效，而 TableContainer 自身是横向滚动容器： 所以表头只在「表格自己的有界高度容器」里吸住——给 TableContainer（DataTable 的 containerProps）设了 max-height / height， 或 DataTable 的虚拟化视口；放在页面流里的无高度限制表格，表头不会吸在页面顶部。 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
+- `sticky?`: `boolean`. 表头吸在最近的滚动区顶部。表格横向放得下时，TableContainer 不是滚动容器（见上），表头吸在页面或 Workspace 内容区； 横向溢出、需要左右滚动的宽表，TableContainer 本身成了滚动容器，表头只在它自己的有界高度里吸住—— 给 TableContainer（DataTable 的 containerProps）设了 max-height / height，或 DataTable 的虚拟化视口。 吸住时要盖住从下面滚过的行，所以底是不透明的纸（bg-surface，与 framed 的承载面同一个底）；清染表头底叠在其上。 层级 z-[1] 是预设：只需盖过同一张表里同为定位元素的固定列单元格（它们在 DOM 里排在表头之后），不参与浮层栈。
+- `stickyOffset?`: `number | string | undefined`. 吸住时离滚动区顶部的距离：滚动区顶上还有一条固定的页眉或工具栏时，让开它的高度。数字按 px，字符串是 CSS 长度（如 "var(--app-header)"）。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableRow
@@ -111,6 +112,7 @@ The table's surface and horizontal scroll container.
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
 Native table / caption / thead / tbody / tfoot / tr.
 - children / render / ref / native props: useRender.ComponentProps<native table part>. Props reach actual elements; caption names the table.
+- TableHeader sticky / stickyOffset: boolean / number | string. Sticks the header to the top of the nearest scroll area: when the table fits horizontally TableContainer is not a scroll container, so the header sticks to the page or Workspace content; when it overflows sideways it sticks within TableContainer's own bounded height. stickyOffset clears a fixed bar above; numbers are px.
 
 ### TableHead
 A th with application-owned sort state.

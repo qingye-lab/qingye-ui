@@ -23,11 +23,13 @@ export const candidateEmptyClassName = "text-control-md-mobile sm:text-control-m
 /*
  * 命令项（Menu、Command）的帧：整行宽、文字起点与同档带框控件的文字起点同一条竖线（内缘 − 浮层内缩）。
  * 命令项高度跟随按钮尺寸档，所以按档给内缘；候选项见 candidateItemClassName。
+ * 粗指针下行高升到 --qy-touch-target：按钮自带的 touch-target 命中层在纵排的条目之间会盖住上下邻项
+ * （STANDARDS §2「无相邻覆盖」），让条目本身够高，命中层就不再越出自己的行。
  */
 export const commandItemFrame = {
-  xs: "w-full justify-start px-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  sm: "w-full justify-start px-[calc(var(--qy-control-sm-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  md: "w-full justify-start px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  lg: "w-full justify-start px-[calc(var(--qy-control-lg-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
-  xl: "w-full justify-start px-[calc(var(--qy-control-xl-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere",
+  xs: "w-full justify-start px-[calc(var(--qy-control-xs-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere pointer-coarse:min-h-(--qy-touch-target)",
+  sm: "w-full justify-start px-[calc(var(--qy-control-sm-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere pointer-coarse:min-h-(--qy-touch-target)",
+  md: "w-full justify-start px-[calc(var(--qy-fill-padding)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere pointer-coarse:min-h-(--qy-touch-target)",
+  lg: "w-full justify-start px-[calc(var(--qy-control-lg-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere pointer-coarse:min-h-(--qy-touch-target)",
+  xl: "w-full justify-start px-[calc(var(--qy-control-xl-padding-bordered)-var(--qy-overlay-inset))] font-normal text-start wrap-anywhere pointer-coarse:min-h-(--qy-touch-target)",
 } as const;

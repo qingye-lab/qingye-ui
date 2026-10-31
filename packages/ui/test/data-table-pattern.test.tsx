@@ -193,10 +193,11 @@ describe("DataTablePattern", () => {
   });
 
   it("pins leading columns including the selection column and rejects non-leading pins", () => {
-    const { container } = render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" selection={selection} stickyHeader columns={[{ ...columns[0]!, pinned: true }, columns[1]!]} />);
+    const { container } = render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" selection={selection} stickyHeader stickyHeaderOffset={48} columns={[{ ...columns[0]!, pinned: true }, columns[1]!]} />);
     const head = container.querySelectorAll("thead th");
     expect(head[0]).toHaveAttribute("data-pinned"); expect(head[1]).toHaveAttribute("data-pinned"); expect(head[2]).not.toHaveAttribute("data-pinned");
     expect(container.querySelector("thead")).toHaveAttribute("data-sticky", "true");
+    expect(container.querySelector("thead")!.style.top).toBe("48px");
     expect(container.querySelectorAll("tbody tr:first-child > *")[0]).toHaveAttribute("data-pinned");
     const error = vi.spyOn(console, "error").mockImplementation(() => {});
     expect(() => render(<DataTablePattern data={data} getRowId={getRowId} emptyContent="空" columns={[columns[0]!, { ...columns[1]!, pinned: true }]} />)).toThrow(/contiguous/);

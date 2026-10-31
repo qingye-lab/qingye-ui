@@ -60,7 +60,7 @@
 - [Item](/en/docs/components/item.md): Content, navigation and related actions.
 - [Kbd](/en/docs/components/kbd.md): A native keyboard key display.
 - [Label](/en/docs/components/label.md): Name one control with a native label.
-- [Layout](/en/docs/components/layout.md): Arrange content vertically or side by side using field, action, panel and section spacing roles.
+- [Layout](/en/docs/components/layout.md): Arrange content vertically, side by side or in equal columns using pair, field, action, panel and section spacing roles.
 - [Link](/en/docs/components/link.md): A text entry that goes to an address; every text link in the library shares this one treatment.
 - [Locale switch](/en/docs/components/locale-switch.md): Request an application locale change and show the current Provider value.
 - [Menu](/en/docs/components/menu.md): Temporary commands and choices related to the current task.

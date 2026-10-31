@@ -85,9 +85,11 @@ export default {
     }
   ],
   "notes": [
+    "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
     "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
   ],
   "notesEn": [
+    "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
     "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
   ],
   "design": {
