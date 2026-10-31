@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-31T01:01:08.547Z",
-  "revision": "570c88ece895f9efc38a55a16b8fc2845d76216a",
+  "generatedAt": "2026-10-31T02:05:52.086Z",
+  "revision": "66396746a165f679a6b863a63b342a7e9a8f9824",
   "fingerprint": {
-    "sha256": "538d44b53244d6c07cd20a6e0d050543e8694663c887d3ad9b4b7315d5fb2826",
+    "sha256": "0fa88edb0c9958ca62a397cfe889e28a5e8753ed671a6dd3581cd19ce58d3069",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -444,7 +444,7 @@
       },
       {
         "path": "packages/ui/prose.css",
-        "sha256": "e8ec5d81d6581953c6f51410079d09efc8401b19645f8ebae321fd35c63f63cf"
+        "sha256": "422d048285e6f5309948d00ad2da7475cf7f374f07bf852c0e6fb70d2ea270be"
       },
       {
         "path": "packages/ui/src/components/accordion.tsx",
@@ -492,7 +492,7 @@
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
-        "sha256": "61cdf4b9d2b2ba48921eb375ce9eaedc3cc5bf47e6f8a1c9c449dfb928d4d069"
+        "sha256": "f6d4531f26be2135795feb5c82b4255d0daf1ebe7e1e98dcff734d14828fd360"
       },
       {
         "path": "packages/ui/src/components/card.tsx",
@@ -516,7 +516,7 @@
       },
       {
         "path": "packages/ui/src/components/code-block.tsx",
-        "sha256": "b6847adda5f5b564c22f4e7174aa79a3a309ce1698f52f73ef2f49cec9e8336b"
+        "sha256": "1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae"
       },
       {
         "path": "packages/ui/src/components/collapsible.tsx",
@@ -532,7 +532,7 @@
       },
       {
         "path": "packages/ui/src/components/command.tsx",
-        "sha256": "d1f5f5fb0d95dea7c5314b09fd04d8299d0b7e700d4acdabc7936087e899cb7d"
+        "sha256": "68af7b366362be47b5834ecfa602d961bbff77526cf823cc5892b19fe8640da6"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
@@ -812,7 +812,7 @@
       },
       {
         "path": "packages/ui/src/components/toast.tsx",
-        "sha256": "7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab"
+        "sha256": "b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50"
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
@@ -4379,7 +4379,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 86
+            "line": 105
           }
         },
         {
@@ -4404,7 +4404,7 @@
           "target": "\"/home/user/qingye-ui/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 136
+            "line": 155
           }
         },
         {
@@ -4606,11 +4606,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 86
+              "line": 105
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 86
+              "line": 105
             },
             "status": "PRESENT"
           },
@@ -4619,11 +4619,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 136
+              "line": 155
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 136
+              "line": 155
             },
             "status": "PRESENT"
           },
@@ -7714,7 +7714,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 71
+            "line": 74
           }
         },
         {
@@ -7722,7 +7722,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 216
+            "line": 229
           }
         },
         {
@@ -7730,7 +7730,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 198
+            "line": 211
           }
         },
         {
@@ -7738,7 +7738,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 137
+            "line": 145
           }
         },
         {
@@ -7746,7 +7746,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 135
+            "line": 139
           }
         },
         {
@@ -7754,7 +7754,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 27
+            "line": 28
           }
         },
         {
@@ -7762,7 +7762,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 25
+            "line": 26
           }
         },
         {
@@ -7770,7 +7770,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 114
+            "line": 118
           }
         },
         {
@@ -7778,7 +7778,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 109
+            "line": 113
           }
         },
         {
@@ -7786,7 +7786,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 94
+            "line": 98
           }
         },
         {
@@ -7794,7 +7794,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 92
+            "line": 96
           }
         },
         {
@@ -7802,7 +7802,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 165
+            "line": 178
           }
         },
         {
@@ -7810,7 +7810,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 152
+            "line": 165
           }
         },
         {
@@ -7818,7 +7818,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 105
+            "line": 109
           }
         },
         {
@@ -7826,7 +7826,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 99
+            "line": 103
           }
         },
         {
@@ -7835,7 +7835,7 @@
           "target": "\"/home/user/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 227
+            "line": 240
           }
         },
         {
@@ -7843,7 +7843,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 59
+            "line": 62
           }
         },
         {
@@ -7851,7 +7851,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 129
+            "line": 133
           }
         },
         {
@@ -7859,7 +7859,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 127
+            "line": 131
           }
         }
       ],
@@ -8094,11 +8094,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 71
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 71
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -8107,11 +8107,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 94
+              "line": 98
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 94
+              "line": 98
             },
             "status": "PRESENT"
           },
@@ -8120,11 +8120,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 105
+              "line": 109
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 105
+              "line": 109
             },
             "status": "PRESENT"
           },
@@ -8133,11 +8133,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 114
+              "line": 118
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 114
+              "line": 118
             },
             "status": "PRESENT"
           },
@@ -8146,11 +8146,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 165
+              "line": 178
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 165
+              "line": 178
             },
             "status": "PRESENT"
           },
@@ -8159,11 +8159,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 137
+              "line": 145
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 137
+              "line": 145
             },
             "status": "PRESENT"
           },
@@ -8172,11 +8172,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 129
+              "line": 133
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 129
+              "line": 133
             },
             "status": "PRESENT"
           },
@@ -8185,11 +8185,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 216
+              "line": 229
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 216
+              "line": 229
             },
             "status": "PRESENT"
           }
@@ -29397,7 +29397,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 186
+            "line": 187
           }
         },
         {
@@ -29430,7 +29430,7 @@
           "target": "\"/home/user/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 194
+            "line": 195
           }
         },
         {
@@ -29438,7 +29438,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
-            "line": 178
+            "line": 179
           }
         },
         {
@@ -29681,11 +29681,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 178
+              "line": 179
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 178
+              "line": 179
             },
             "status": "PRESENT"
           },
@@ -29707,11 +29707,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 186
+              "line": 187
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 186
+              "line": 187
             },
             "status": "PRESENT"
           },
@@ -29733,11 +29733,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 194
+              "line": 195
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toast.tsx",
-              "line": 194
+              "line": 195
             },
             "status": "PRESENT"
           }

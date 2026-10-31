@@ -19,7 +19,7 @@ export default function Demo() {
     <Workspace>
       <Sidebar drawer>
         <SidebarHeader><SidebarTitle render={<h2 />}>{en ? "Qingye" : "青野工作区"}</SidebarTitle><SidebarToggle /></SidebarHeader>
-        <SidebarContent className="mt-(--qy-field-group-gap)">
+        <SidebarContent aria-label="窄屏侧栏导航" className="mt-(--qy-field-group-gap)">
           <SidebarGroup>
             <SidebarGroupLabel>{en ? "Pages" : "页面"}</SidebarGroupLabel>
             {pages.map(item => <SidebarLink key={item.id} render={<button type="button" onClick={() => setPage(item.id)} />} active={page === item.id} icon={item.icon}>{item.name}</SidebarLink>)}
@@ -27,7 +27,7 @@ export default function Demo() {
         </SidebarContent>
       </Sidebar>
       <WorkspaceSurface>
-        <WorkspaceHeader><SidebarDrawerTrigger /><WorkspaceTitle level={4}>{pages.find(item => item.id === page)?.name}</WorkspaceTitle></WorkspaceHeader>
+        <WorkspaceHeader><SidebarDrawerTrigger /><WorkspaceTitle level={3}>{pages.find(item => item.id === page)?.name}</WorkspaceTitle></WorkspaceHeader>
         <WorkspaceContent render={<div />} />
       </WorkspaceSurface>
     </Workspace>

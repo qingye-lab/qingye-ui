@@ -82,6 +82,7 @@ export function SiteShell() {
  */
 export function DocsLayout({ children }: { children?: ReactNode }) {
   const { pathname } = useLocation();
+  const en = useDocsLocale() === "en";
   const visit = routeVisitKey(pathname);
   const article = useRef<HTMLDivElement>(null);
   return (
@@ -107,12 +108,13 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
               <div data-docs-edit-inline><EditLink className="mt-(--qy-section-gap)" /></div>
             </div>
           </main>
-          <div className="w-(--docs-toc) shrink-0" data-docs-toc>
+          {/* 本页目录与「在 GitHub 上编辑」是正文的附属内容：一个有名字的 aside（complementary），编辑链接因此也在地标之内。 */}
+          <aside aria-label={en ? "About this page" : "本页"} className="w-(--docs-toc) shrink-0" data-docs-toc>
             <div className="sticky top-(--docs-header-height) max-h-[calc(100dvh-var(--docs-header-height))] overflow-y-auto pt-[calc(2*var(--qy-cai))] pb-(--qy-section-gap) [scrollbar-width:none]">
               {/* Keyed by visit: the article remounts per route, so the heading scan restarts on the new node. */}
               <TableOfContents container={article} key={visit} />
             </div>
-          </div>
+          </aside>
         </div>
       </div>
       <SiteFooter />

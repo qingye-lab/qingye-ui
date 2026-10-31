@@ -25,13 +25,14 @@ interface Brand {
   dark?: { primary: string; foreground: string; ring: string };
 }
 
-// These site preview palettes are presets; verify each real foreground/background combination.
+// Brand presets: the same four the site uses everywhere (墨 · 青 · 赭 · 胭), with the same values as index.css
+// (--qy-try-*). The bench needs literal values because it writes copyable CSS for other projects; keep the two in step.
+// Each pair has white (light) or deep (dark) foreground text checked at >= 4.5:1; verify again on the surfaces a project uses.
 const BRANDS: Brand[] = [
-  { id: "neutral", label: "中性", labelEn: "Neutral" }, {
-    id: "indigo", label: "靛蓝", labelEn: "Indigo", light: { primary: "oklch(0.51 0.18 268)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.62 0.14 268)" }, dark: { primary: "oklch(0.72 0.13 268)", foreground: "oklch(0.21 0.04 268)", ring: "oklch(0.6 0.12 268)" }, }, {
-    id: "teal", label: "青绿", labelEn: "Teal", light: { primary: "oklch(0.5 0.09 190)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.64 0.09 190)" }, dark: { primary: "oklch(0.76 0.1 185)", foreground: "oklch(0.22 0.03 190)", ring: "oklch(0.6 0.08 190)" }, }, {
-    id: "ochre", label: "赭石", labelEn: "Ochre", light: { primary: "oklch(0.52 0.13 50)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.12 55)" }, dark: { primary: "oklch(0.77 0.12 65)", foreground: "oklch(0.23 0.04 55)", ring: "oklch(0.62 0.1 60)" }, }, {
-    id: "rose", label: "胭脂", labelEn: "Rose", light: { primary: "oklch(0.52 0.18 12)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.14 12)" }, dark: { primary: "oklch(0.74 0.14 12)", foreground: "oklch(0.22 0.05 12)", ring: "oklch(0.6 0.12 12)" }, }, ];
+  { id: "ink", label: "墨", labelEn: "Ink" }, {
+    id: "qing", label: "青", labelEn: "Qing", light: { primary: "oklch(0.48 0.085 200)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.62 0.08 200)" }, dark: { primary: "oklch(0.78 0.09 195)", foreground: "oklch(0.21 0.03 200)", ring: "oklch(0.6 0.08 195)" }, }, {
+    id: "ochre", label: "赭", labelEn: "Ochre", light: { primary: "oklch(0.52 0.13 50)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.12 55)" }, dark: { primary: "oklch(0.77 0.12 65)", foreground: "oklch(0.23 0.04 55)", ring: "oklch(0.62 0.1 60)" }, }, {
+    id: "rose", label: "胭", labelEn: "Rose", light: { primary: "oklch(0.52 0.18 12)", foreground: "oklch(0.985 0 0)", ring: "oklch(0.66 0.14 12)" }, dark: { primary: "oklch(0.74 0.14 12)", foreground: "oklch(0.22 0.05 12)", ring: "oklch(0.6 0.12 12)" }, }, ];
 
 /*
  * Radius roles the components actually read: controls --qy-radius-control (overlays
@@ -115,7 +116,7 @@ function ThemeBench() {
   const [checked,setChecked] = useState(true);
   const { resolvedTheme } = useTheme();
   const defaults = useThemeRadii();
-  const [brandId, setBrandId] = useState("indigo");
+  const [brandId, setBrandId] = useState("qing");
   const [chosen, setChosen] = useState<Partial<Radii>>({});
   const [compact, setCompact] = useState(false);
   const densityId = useId();
@@ -127,7 +128,8 @@ function ThemeBench() {
   const style = useMemo(
     () =>
       ({
-        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : {}), ...(radii ? previewVars(radii, compact) : {}), }) as CSSProperties, [palette, radii?.control, radii?.panel, compact], );
+        // 墨是库的默认（实心即焦墨）：本站自己有品牌（青），所以预览里要明写回默认，否则会透出站点的青。
+        ...(palette ? { "--qy-primary": palette.primary, "--qy-primary-foreground": palette.foreground, "--qy-ring": palette.ring } : { "--qy-primary": "var(--qy-foreground)", "--qy-primary-foreground": "var(--qy-paper)" }), ...(radii ? previewVars(radii, compact) : {}), }) as CSSProperties, [palette, radii?.control, radii?.panel, compact], );
 
   return (
     <Stack className="mb-(--qy-space-module)" gap="panel">

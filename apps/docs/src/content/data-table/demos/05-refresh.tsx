@@ -31,7 +31,7 @@ export default function Demo() {
   };
   return <Stack>
     <Inline><Button variant="bordered" onClick={refresh} disabled={busy}>{english ? "Refresh" : "刷新"}</Button></Inline>
-    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} busy={busy}
+    <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? "Local collection (refresh) · 3 entries" : "本地集合（刷新）· 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} busy={busy}
       error={failed ? <Alert tone="danger"><AlertDescription>{english ? "Refresh failed. The rows below are from the last load." : "刷新失败，下面是上次加载的数据。"}<Button variant="quiet" size="sm" onClick={refresh}>{english ? "Retry" : "重试"}</Button></AlertDescription></Alert> : undefined} />
   </Stack>;
 }

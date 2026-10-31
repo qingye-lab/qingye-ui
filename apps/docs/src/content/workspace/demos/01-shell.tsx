@@ -21,7 +21,7 @@ export default function Demo() {
     <Workspace className="max-sm:flex-col">
       <Sidebar aria-label="工作区" collapsed={narrow} className="w-[calc(10*var(--qy-cai))] shrink-0 max-sm:data-[collapsed=true]:w-full">
         <SidebarHeader className="max-sm:hidden"><SidebarTitle>青野工作区</SidebarTitle></SidebarHeader>
-        <SidebarContent className="mt-(--qy-field-group-gap) max-sm:mt-0">
+        <SidebarContent aria-label="外壳示例导航" className="mt-(--qy-field-group-gap) max-sm:mt-0">
           <SidebarGroup className="max-sm:grid max-sm:grid-cols-[repeat(auto-fit,minmax(var(--qy-touch-target),1fr))]">
             <SidebarLink href="#overview" icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
             <SidebarLink href="#collections" active icon={<IconDatabase aria-hidden="true" />}>集合</SidebarLink>
