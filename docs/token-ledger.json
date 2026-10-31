@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-31T05:21:52.797Z",
-  "revision": "edd125ba9e26d67c44a1b64856d1a250c65f7df7",
+  "generatedAt": "2026-10-31T05:39:56.563Z",
+  "revision": "6cf0af5f139be7fe9aa912975d691b28ad86bbcc",
   "static": {
     "fingerprint": {
-      "sha256": "aaf31555a5dac1a1947c6cfb59c02f34b322e46983410d2055b710e69a906ed2",
+      "sha256": "027ed92ee5167431b0a73e108913ce1799deb706729b7090aaca7742ad3fba12",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2077,7 +2077,7 @@
         },
         {
           "path": "apps/docs/src/examples/booking.tsx",
-          "sha256": "6624d0709c708d41a07693abaaaf12af083f87b5c0d2a2d51719ab08d9b21ed9"
+          "sha256": "ffd0fe736a039363b6dcb1b997dbc3f9df9caf230d8e7c255181ffbf0780140d"
         },
         {
           "path": "apps/docs/src/examples/embedding.ts",
@@ -2509,7 +2509,7 @@
         },
         {
           "path": "packages/ui/src/components/calendar.tsx",
-          "sha256": "224bcf465e9b9ac6ef0d006f48db9272253ba1e4396cfe2d834af94fbe111612"
+          "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57"
         },
         {
           "path": "packages/ui/src/components/card.tsx",
@@ -540735,10 +540735,10 @@
     ]
   },
   "runtime": {
-    "fingerprint": "b0eacdf0314a9c040f4ab786735cc3c123899a3f396aeacb8bbe962b65880b86",
-    "measuredAt": "2026-10-30T10:19:31.450Z",
+    "fingerprint": "027ed92ee5167431b0a73e108913ce1799deb706729b7090aaca7742ad3fba12",
+    "measuredAt": "2026-10-31T05:41:43.550Z",
     "browser": {
-      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
     },
     "observations": [
@@ -540760,7 +540760,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:15.950Z",
+        "measuredAt": "2026-10-31T05:40:24.524Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540829,7 +540829,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-30T10:18:17.392Z",
+        "measuredAt": "2026-10-31T05:40:26.001Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540900,7 +540900,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-30T10:18:18.805Z",
+        "measuredAt": "2026-10-31T05:40:27.499Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540967,7 +540967,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:20.209Z",
+        "measuredAt": "2026-10-31T05:40:28.969Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541042,7 +541042,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-30T10:18:21.600Z",
+        "measuredAt": "2026-10-31T05:40:30.436Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541117,7 +541117,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:23.016Z",
+        "measuredAt": "2026-10-31T05:40:31.916Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541192,7 +541192,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:24.442Z",
+        "measuredAt": "2026-10-31T05:40:33.354Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541259,7 +541259,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:25.846Z",
+        "measuredAt": "2026-10-31T05:40:34.806Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541329,7 +541329,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:27.259Z",
+        "measuredAt": "2026-10-31T05:40:36.297Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541396,7 +541396,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:28.642Z",
+        "measuredAt": "2026-10-31T05:40:37.780Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541414,7 +541414,7 @@
           "token": "oklch(100% 0 0)",
           "rootToken": "oklch(100% 0 0)",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -541436,7 +541436,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -541473,7 +541473,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:30.058Z",
+        "measuredAt": "2026-10-31T05:40:39.323Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541491,7 +541491,7 @@
           "token": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
           "rootToken": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -541513,7 +541513,7 @@
           "token": "21px",
           "rootToken": "21px",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -541550,7 +541550,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:31.466Z",
+        "measuredAt": "2026-10-31T05:40:40.844Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541568,7 +541568,7 @@
           "token": "oklch(0% 0 0/.32)",
           "rootToken": "oklch(0% 0 0/.32)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -541588,7 +541588,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -541623,7 +541623,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:32.874Z",
+        "measuredAt": "2026-10-31T05:40:42.380Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541698,7 +541698,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:34.320Z",
+        "measuredAt": "2026-10-31T05:40:43.925Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541769,7 +541769,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:35.824Z",
+        "measuredAt": "2026-10-31T05:40:45.543Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541845,7 +541845,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:37.256Z",
+        "measuredAt": "2026-10-31T05:40:47.027Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541914,7 +541914,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-30T10:18:38.648Z",
+        "measuredAt": "2026-10-31T05:40:48.531Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541986,7 +541986,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-30T10:18:40.028Z",
+        "measuredAt": "2026-10-31T05:40:49.965Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542053,7 +542053,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:41.400Z",
+        "measuredAt": "2026-10-31T05:40:51.410Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542127,7 +542127,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:42.880Z",
+        "measuredAt": "2026-10-31T05:40:52.921Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542197,7 +542197,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:44.327Z",
+        "measuredAt": "2026-10-31T05:40:54.410Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542270,7 +542270,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:45.717Z",
+        "measuredAt": "2026-10-31T05:40:55.881Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542345,7 +542345,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:47.139Z",
+        "measuredAt": "2026-10-31T05:40:57.344Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542418,7 +542418,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:48.522Z",
+        "measuredAt": "2026-10-31T05:40:58.806Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542491,7 +542491,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:49.914Z",
+        "measuredAt": "2026-10-31T05:41:00.276Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542568,7 +542568,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:51.342Z",
+        "measuredAt": "2026-10-31T05:41:01.754Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542645,7 +542645,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:52.783Z",
+        "measuredAt": "2026-10-31T05:41:03.225Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542714,7 +542714,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:54.184Z",
+        "measuredAt": "2026-10-31T05:41:04.679Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542783,7 +542783,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-30T10:18:55.772Z",
+        "measuredAt": "2026-10-31T05:41:06.146Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542854,7 +542854,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-30T10:18:57.192Z",
+        "measuredAt": "2026-10-31T05:41:07.616Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542921,7 +542921,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:58.613Z",
+        "measuredAt": "2026-10-31T05:41:09.105Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542996,7 +542996,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-30T10:19:00.045Z",
+        "measuredAt": "2026-10-31T05:41:10.600Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543071,7 +543071,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:01.495Z",
+        "measuredAt": "2026-10-31T05:41:12.117Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543146,7 +543146,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:03.050Z",
+        "measuredAt": "2026-10-31T05:41:13.616Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543216,7 +543216,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:04.456Z",
+        "measuredAt": "2026-10-31T05:41:15.113Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543283,7 +543283,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:05.831Z",
+        "measuredAt": "2026-10-31T05:41:16.558Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543301,7 +543301,7 @@
           "token": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
           "rootToken": "color-mix(in srgb, color-mix(in srgb, oklch(14.5% 0 0) 95%, oklch(100% 0 0)) 94%, oklch(100% 0 0))",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -543323,7 +543323,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -543360,7 +543360,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:07.219Z",
+        "measuredAt": "2026-10-31T05:41:18.096Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543378,7 +543378,7 @@
           "token": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
           "rootToken": "calc(round(calc(calc(1.25rem + 3 * 4px) * .3125), 1px) + 4px)",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -543400,7 +543400,7 @@
           "token": "21px",
           "rootToken": "21px",
           "rect": {
-            "width": 232,
+            "width": 296,
             "height": 234
           },
           "tag": "DIV",
@@ -543437,7 +543437,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:08.656Z",
+        "measuredAt": "2026-10-31T05:41:19.636Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543455,7 +543455,7 @@
           "token": "oklch(0% 0 0/.56)",
           "rootToken": "oklch(0% 0 0/.56)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -543475,7 +543475,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -543510,7 +543510,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:10.107Z",
+        "measuredAt": "2026-10-31T05:41:21.155Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543585,7 +543585,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:11.554Z",
+        "measuredAt": "2026-10-31T05:41:22.696Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543656,7 +543656,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:13.182Z",
+        "measuredAt": "2026-10-31T05:41:24.366Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543732,7 +543732,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:14.638Z",
+        "measuredAt": "2026-10-31T05:41:25.842Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543801,7 +543801,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-30T10:19:16.031Z",
+        "measuredAt": "2026-10-31T05:41:27.317Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543873,7 +543873,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-30T10:19:17.443Z",
+        "measuredAt": "2026-10-31T05:41:28.797Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543940,7 +543940,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:18.852Z",
+        "measuredAt": "2026-10-31T05:41:30.268Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544014,7 +544014,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:20.273Z",
+        "measuredAt": "2026-10-31T05:41:31.759Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544084,7 +544084,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:21.695Z",
+        "measuredAt": "2026-10-31T05:41:33.230Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544157,7 +544157,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:23.089Z",
+        "measuredAt": "2026-10-31T05:41:34.687Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544232,7 +544232,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:24.492Z",
+        "measuredAt": "2026-10-31T05:41:36.182Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544305,7 +544305,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:25.875Z",
+        "measuredAt": "2026-10-31T05:41:37.650Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544378,7 +544378,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:27.280Z",
+        "measuredAt": "2026-10-31T05:41:39.120Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544455,7 +544455,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:28.655Z",
+        "measuredAt": "2026-10-31T05:41:40.565Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544532,7 +544532,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:30.036Z",
+        "measuredAt": "2026-10-31T05:41:42.011Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544588,7 +544588,7 @@
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": true,
+    "staleRuntime": false,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -544598,9 +544598,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544630,9 +544630,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544662,9 +544662,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544686,9 +544686,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544710,9 +544710,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
       },
@@ -544723,9 +544723,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
@@ -544736,9 +544736,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:light:desktop:1100x900:fine"
       },
@@ -544749,9 +544749,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
@@ -544762,9 +544762,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:light:desktop:1100x900:fine"
       },
@@ -544775,9 +544775,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
@@ -544788,9 +544788,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:light:desktop:1100x900:fine"
       },
@@ -544801,9 +544801,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
@@ -544814,9 +544814,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544854,9 +544854,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544888,9 +544888,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544922,9 +544922,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544954,9 +544954,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544986,9 +544986,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545018,9 +545018,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545050,9 +545050,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545082,9 +545082,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545114,9 +545114,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545146,9 +545146,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545178,9 +545178,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545210,9 +545210,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545242,9 +545242,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:light:desktop:1100x900:fine"
       },
@@ -545255,9 +545255,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
@@ -545268,9 +545268,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:light:desktop:1100x900:fine"
       },
@@ -545281,9 +545281,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
@@ -545294,9 +545294,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545326,9 +545326,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545358,9 +545358,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:light:desktop:1100x900:fine"
       },
@@ -545371,9 +545371,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
@@ -545384,9 +545384,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545408,9 +545408,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545432,9 +545432,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:light:desktop:1100x900:fine"
       },
@@ -545445,9 +545445,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
@@ -545458,9 +545458,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:light:desktop:1100x900:fine"
       },
@@ -545471,9 +545471,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
@@ -545484,9 +545484,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:light:desktop:1100x900:fine"
       },
@@ -545497,9 +545497,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
@@ -545510,9 +545510,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
       },
@@ -545523,9 +545523,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
@@ -545536,9 +545536,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:light:desktop:1100x900:fine"
       },
@@ -545549,9 +545549,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
@@ -545562,9 +545562,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:light:desktop:1100x900:fine"
       },
@@ -545575,9 +545575,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
@@ -545588,9 +545588,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545638,9 +545638,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545688,9 +545688,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545720,9 +545720,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545752,9 +545752,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545776,9 +545776,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545795,10 +545795,10 @@
       }
     ],
     "counts": {
-      "PASS": 0,
+      "PASS": 27,
       "FAIL": 0,
-      "UNVERIFIED": 0,
-      "NOT_RUN": 53
+      "UNVERIFIED": 26,
+      "NOT_RUN": 0
     }
   },
   "probePlan": [

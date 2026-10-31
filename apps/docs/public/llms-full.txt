@@ -2030,7 +2030,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 224bcf465e9b9ac6ef0d006f48db9272253ba1e4396cfe2d834af94fbe111612
+Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 

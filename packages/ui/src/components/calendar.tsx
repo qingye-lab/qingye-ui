@@ -90,7 +90,7 @@ export function parseLocalDate(text: string): Date | undefined {
 function CalendarNav({ onPreviousClick, onNextClick, previousMonth, nextMonth, ...props }: React.ComponentProps<typeof CalendarPrimitive.Nav>) {
   // 名称读 DayPicker 的 labelNav：Calendar 默认给它「切换月份」，调用方在 labels 里覆写时以调用方为准。
   const { components, classNames, styles, labels: { labelPrevious, labelNext, labelNav } } = CalendarPrimitive.useDayPicker();
-  const { UI } = CalendarPrimitive;
+  const UI = CalendarPrimitive.UI;
   const chevron = styles?.[UI.Chevron];
   const chevronStyle = chevron ? { style: chevron } : {};
   return <div {...(props as React.ComponentProps<"div">)} role="group" aria-label={labelNav()}>

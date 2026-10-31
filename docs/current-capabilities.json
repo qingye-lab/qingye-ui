@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-31T05:21:51.208Z",
-  "revision": "edd125ba9e26d67c44a1b64856d1a250c65f7df7",
+  "generatedAt": "2026-10-31T05:39:54.927Z",
+  "revision": "6cf0af5f139be7fe9aa912975d691b28ad86bbcc",
   "fingerprint": {
-    "sha256": "fd44d224204ddc48000b48b1783c33d1cc216a44cc99d3cf6f315820df1e0055",
+    "sha256": "c1e04646bf05439afd2b11a969da50e1331264ec7ed4bc1a56f80548c12ba9a0",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -432,7 +432,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "efcb4622b6cb8d8adf553e82f4cf66287f63cfcba04aeb708bf49b07aa3f1f61"
+        "sha256": "7c2d084ff275c6ba749e88c10e76d6ad163cb4f7157d06fc9c0a71d93879eaf6"
       },
       {
         "path": "packages/ui/motion.css",
@@ -492,7 +492,7 @@
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
-        "sha256": "224bcf465e9b9ac6ef0d006f48db9272253ba1e4396cfe2d834af94fbe111612"
+        "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57"
       },
       {
         "path": "packages/ui/src/components/card.tsx",
