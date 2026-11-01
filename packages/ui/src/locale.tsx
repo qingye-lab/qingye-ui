@@ -59,10 +59,12 @@ export type UILocaleMessages = {
   toc: string;
   unreadCount: (count: number) => string;
   resultCount: (count: number) => string;
-  cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string;
+  cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string; cascaderPartial: string;
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
+  treeLoadFailed: string; treeRetry: string;
+  treeMoveHint: string; treeMovePicked: (name: string) => string; treeMoved: (name: string, target: string, position: "before" | "after" | "inside") => string; treeMoveCancelled: string; treeMoveInvalid: string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -119,9 +121,14 @@ export const zhCN: UILocale = {
     toc: "本页目录",
     unreadCount: (count) => `${count} 条未读`,
     resultCount: (count) => `找到 ${count} 项`,
-    cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
+    cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级", cascaderPartial: "部分已选",
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
+    treeLoadFailed: "加载失败", treeRetry: "重试",
+    treeMoveHint: "可移动节点：按 Ctrl 或 ⌘ 加 X 取起，移到目标后按 Alt 加 ↑ 放在前面、Alt 加 ↓ 放在后面、Alt 加 Enter 放入其中，Esc 取消。",
+    treeMovePicked: name => `已取起「${name}」`,
+    treeMoved: (name, target, position) => position === "inside" ? `已将「${name}」移入「${target}」` : `已将「${name}」移到「${target}」${position === "before" ? "之前" : "之后"}`,
+    treeMoveCancelled: "已取消移动", treeMoveInvalid: "不能放在这里",
   },
 };
 

@@ -23,7 +23,7 @@
 - [ButtonGroup](components/button-group.md): Give actions in one scope a shared name and spacing.
 - [Calendar](components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
 - [Card](components/card.md): Bound an independently identifiable object.
-- [Cascader](components/cascader.md): Choose one value along a root-to-leaf path, with each level's candidates in its own column.
+- [Cascader](components/cascader.md): Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 - [Chart](components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](components/checkbox-group.md): Connect checkboxes to one collection and shared scope.

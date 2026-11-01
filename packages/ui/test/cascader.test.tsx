@@ -331,3 +331,86 @@ test("ArrowDown on the closed trigger opens the popup", async () => {
   await userEvent.keyboard("{ArrowDown}");
   expect(trigger()).toHaveAttribute("aria-expanded", "true");
 });
+
+test("multiple: every level shows its checked state, parents derive from leaves, toggling a parent sets all enabled leaves", async () => {
+  const onValueChange = vi.fn();
+  render(<Cascader aria-label="地区" multiple options={regions} defaultValue={[["zj", "hz", "xh"]]} onValueChange={onValueChange} />);
+  expect(trigger()).toHaveTextContent("浙江 / 杭州 / 西湖区");
+  await userEvent.click(trigger());
+  expect(screen.getByRole("listbox", { name: "地区" })).toHaveAttribute("aria-multiselectable", "true");
+  expect(option("浙江")).toHaveAttribute("aria-selected", "false");
+  expect(option("浙江")).toHaveAccessibleDescription(/部分已选/);
+  await userEvent.click(option("浙江"));
+  await userEvent.click(option("杭州"));
+  // 杭州下：西湖区已勾，滨江区禁用，余杭区未勾 → 杭州是部分
+  expect(option("杭州")).toHaveAccessibleDescription(/部分已选/);
+  expect(option("西湖区")).toHaveAttribute("aria-selected", "true");
+  await userEvent.click(option("杭州").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).toHaveBeenLastCalledWith([["zj", "hz", "xh"], ["zj", "hz", "yh"]], expect.any(Array));
+  expect(option("杭州")).toHaveAttribute("aria-selected", "true"); // 启用的叶子都勾了
+  expect(option("滨江区")).toHaveAttribute("aria-selected", "false"); // 禁用叶子不被带动
+  await userEvent.click(option("杭州").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+  expect(trigger()).toHaveAttribute("aria-expanded", "true"); // 多选不关闭弹层
+});
+
+test("multiple: a leaf toggles by row click and by Space/Enter; the value follows tree order and the trigger summarizes like TreeSelect", async () => {
+  const onValueChange = vi.fn();
+  render(<Cascader aria-label="地区" multiple options={regions} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.click(option("西藏"));
+  await userEvent.click(option("浙江"));
+  await userEvent.click(option("宁波"));
+  await userEvent.click(option("海曙区"));
+  expect(onValueChange).toHaveBeenLastCalledWith([["zj", "nb", "hs"], ["xz"]], expect.any(Array));
+  await userEvent.keyboard("{Enter}");
+  expect(onValueChange).toHaveBeenLastCalledWith([["xz"]], expect.any(Array));
+  await userEvent.keyboard("{ }");
+  expect(onValueChange).toHaveBeenLastCalledWith([["zj", "nb", "hs"], ["xz"]], expect.any(Array));
+  await userEvent.click(option("江苏"));
+  await userEvent.click(option("南京"));
+  await userEvent.click(option("鼓楼区"));
+  expect(trigger()).toHaveTextContent("浙江 / 宁波 / 海曙区 及其余 2 项");
+});
+
+test("multiple: controlled value, form submits one entry per path, disabled parents do not change", async () => {
+  const { container, rerender } = render(<form><Cascader aria-label="地区" name="area" multiple options={regions} value={[["xz"], ["zj", "nb", "hs"]]} /></form>);
+  const form = container.querySelector("form")!;
+  expect(new FormData(form).getAll("area")).toEqual(["zj/nb/hs", "xz"]);
+  rerender(<form><Cascader aria-label="地区" name="area" multiple options={regions} value={[]} /></form>);
+  expect(new FormData(form).has("area")).toBe(false);
+  const onValueChange = vi.fn();
+  rerender(<form><Cascader aria-label="地区" name="area" multiple options={regions} value={[]} onValueChange={onValueChange} /></form>);
+  await userEvent.click(trigger());
+  await userEvent.click(option("北京").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).not.toHaveBeenCalled();
+});
+
+test("multiple: lazily loaded branches check only after loading; checking the unloaded parent expands it", async () => {
+  const onValueChange = vi.fn();
+  render(<Cascader aria-label="地区" multiple options={[{ value: "a", label: "甲" }]} loadChildren={async () => [{ value: "x", label: "子一", isLeaf: true }, { value: "y", label: "子二", isLeaf: true }]} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.click(option("甲").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).not.toHaveBeenCalled();
+  await screen.findByRole("option", { name: "子一" });
+  await userEvent.click(option("甲").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).toHaveBeenLastCalledWith([["a", "x"], ["a", "y"]], expect.any(Array));
+  expect(option("甲")).toHaveAttribute("aria-selected", "true");
+});
+
+test("multiple search: lists leaf paths with markers, marks the match, toggles without closing and keeps focus in the input", async () => {
+  const onValueChange = vi.fn();
+  render(<Cascader aria-label="地区" multiple options={regions} searchable onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  const search = await screen.findByRole("combobox", { name: "搜索" });
+  await userEvent.type(search, "海曙");
+  const result = screen.getByRole("option", { name: "浙江 / 宁波 / 海曙区" });
+  expect(result.querySelector("mark")).toHaveTextContent("海曙");
+  await userEvent.keyboard("{Enter}");
+  expect(onValueChange).toHaveBeenLastCalledWith([["zj", "nb", "hs"]], expect.any(Array));
+  expect(result).toHaveAttribute("aria-selected", "true");
+  expect(search).toHaveFocus();
+  expect(trigger()).toHaveAttribute("aria-expanded", "true");
+  await userEvent.click(result);
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+});

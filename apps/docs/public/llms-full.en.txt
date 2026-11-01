@@ -1867,24 +1867,24 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 9ceda3ccbb6f291761c0eee3440aa2c4be159331c7e39243f22e02022a424915
+Source SHA-256: fbadc403734a54d4ba3c7e382f4f329bbec0310abdbcea3b388f5e84d043618b
 
-Choose one value along a root-to-leaf path, with each level's candidates in its own column.
+Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
 ### Decision
-What is chosen is a path, not the last node: leaves with the same name (a "city district" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for "no children".
+Multiple values hold leaf paths only and a branch's check is a derived display, the same convention as Tree and TreeSelect. What is chosen is a path, not the last node: leaves with the same name (a "city district" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for "no children".
 
 ### Notes
 - The trigger text is the complete path, truncated with an ellipsis when long; the full text stays in the DOM so assistive technology reads all of it.
 - A mouse click on a parent only expands it; with selectParent the parent also becomes the value and the popup stays open so you can continue downward. On the keyboard these are two keys: Enter submits and closes, → expands.
 - Focus is real DOM focus (roving tabindex). Each column is a listbox named by its parent; the first column takes the trigger's name. Search results are the exception: focus stays in the input and aria-activedescendant points at the result.
+- In multiple mode each column is an aria-multiselectable listbox, the check marker stays outside the accessibility tree and aria-selected carries the state; a branch's partial state is given to assistive technology as a description.
 - aria-haspopup and aria-expanded on an option mean "has a next column" and "the next column is open".
 - Candidates share Select's text size and height. Column width follows content with a lower bound derived from padding, trailing marker and minimum text area; the popup scrolls horizontally when columns are many.
 
 ### Use and ownership
 - Candidates that naturally nest and where a value at some level is wanted: regions, categories, organizations.
 - Avoid: Use Select for a single level and Combobox when many candidates need filtering.
-- Avoid: Use Tree's checkable form for choosing several paths.
 - Avoid: Use RadioGroup for a few candidates that need side-by-side comparison.
 - Library: Focus, open columns, the search draft, uncontrolled value, and the cache and retry of async results.
 - Application: Controlled values, candidate data, the actual loadChildren request, invalid and save facts.
@@ -1917,13 +1917,14 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `form?`: `string | undefined`.
 - `id?`: `string | undefined`.
 - `loadChildren?`: `((option: CascaderOption) => Promise<CascaderOption[]>) | undefined`. 展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。
-- `name?`: `string | undefined`. 隐藏 input 的名称；提交值是路径各段用 "/" 连接，未选择提交空字符串。
+- `multiple?`: `false | undefined`.
+- `name?`: `string | undefined`. 隐藏 input 的名称。单选提交路径各段用 "/" 连接（未选择提交空字符串）；多选每条已选路径一条同名值，未选择不提交。
 - `onValueChange?`: `((path: string[] | null, options: CascaderOption[]) => void) | undefined`. 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。
 - `options`: `readonly CascaderOption[]`. 第一列的候选；子项在 children 里，或由 loadChildren 按需取来。
 - `placeholder?`: `React.ReactNode`.
 - `readOnly?`: `boolean`.
 - `required?`: `boolean`.
-- `searchable?`: `boolean`. 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。
+- `searchable?`: `boolean`. 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径，命中的文字被标出（只搜已知的节点，未加载的分支不在其中）。
 - `selectParent?`: `boolean`. 默认只有叶子可提交；true 时任意层级都可以提交。
 - `value?`: `string[] | null | undefined`. 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。
 
@@ -1941,14 +1942,15 @@ Written descriptions; the list above is the type-resolved fact.
 #### Cascader
 Trigger, column-wise candidate popup and form value. The trigger shares Select's geometry; the popup uses Popover's panel.
 - options: CascaderOption[]. Candidates of the first column. A node is { value, label, disabled?, children?, isLeaf? }; values are unique under one parent. A node with children is a branch, otherwise a leaf (unless loadChildren is set).
-- value / defaultValue: string[] | null. The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger.
-- onValueChange: (path: string[] | null, options: CascaderOption[]) => void. Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it.
+- multiple: boolean; default false. With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a "Partly selected" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads "first and N more". Mutually exclusive with selectParent.
+- value / defaultValue: string[] | null  (multiple: readonly (readonly string[])[]). Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger.
+- onValueChange: (path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void). Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it.
 - selectParent: boolean; default false. Only leaves submit by default; with true any level can submit (Ant Design's changeOnSelect).
 - loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice.
-- searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included.
+- searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
-- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Values should therefore not contain "/".
+- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain "/".
 - aria-label / aria-labelledby / id / className: string. Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel.
 
 ### Keyboard
@@ -1956,7 +1958,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - ↓ / ↑ / Home / End: Move within the current column. Focus is the position: columns deeper than it close when focus leaves their item.
 - → (← in RTL): With children, expand and enter the first item of the next column; while loading, enter once loading finishes.
 - ← (→ in RTL): Return to the parent in the previous column and close this one.
-- Enter / Space: On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column.
+- Enter / Space: On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open.
 - Typing: Jump by first letter within the column; fast consecutive typing matches by prefix.
 - Esc: Close and return to the trigger, retaining the original value.
 - In search ↓ / ↑ / Enter: Focus stays in the input; arrows move the highlight over matching paths and Enter submits. With an empty query ↓ enters the columns.
@@ -2016,7 +2018,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## Chart
 
@@ -11937,19 +11939,20 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: beaccb8054cd33b7cb3b00282400c92e6e2a491c0c0821da4a0155dccb0a9e0b
+Source SHA-256: 39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
 ### Decision
-Expanded IDs and selected ID are separate; focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.
+Expanded IDs and selected ID are separate; loading and failure are facts the component sees for itself and are never taken for "no children"; filtering only hides and never changes the value or derived checks; dragging only reports and holds no data. focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.
 
 ### Notes
 - Removing a focused node finds an enabled fallback; clearing returns owned focus to the container without stealing outside focus.
+- Dragging reports intent and never changes data: whether a move holds and where the node lands is the caller's decision, so one set of rules and one onMove serve both the pointer and the keyboard. With draggable, Enter still selects; picking up uses Ctrl/Cmd+X so no existing key is taken.
 
 ### Use and ownership
 - An actual hierarchy needs keyboard positioning and independent selection.
-- Avoid: Use DataTable for flat comparison; no built-in lazy loading or requests. Use TreeSelect for a choice folded into a trigger.
+- Avoid: Use DataTable for flat comparison; the caller makes the request and Tree only manages the loading and failed states. Use TreeSelect for a choice folded into a trigger.
 - Avoid: Mixing checkable and selectable click semantics on the same tree; one click carries one intent.
 - Library: Roving focus, stable keys, and focus recovery.
 - Application: Nodes, expansion, selection, disabled, and empty/unknown semantics.
@@ -11968,6 +11971,8 @@ Expanded IDs and selected ID are separate; focus never selects, and hidden nodes
 - TREE_TYPEAHEAD_MS: const; owner tree; UNVERIFIED
 - TreeChangeDetails: interface; owner tree; PASS
 - TreeCheckedState: type; owner tree; PASS
+- TreeMove: interface; owner tree; PASS
+- TreeMoveDetails: interface; owner tree; PASS
 - TreeNode: interface; owner tree; PASS
 - TreeProps: type; owner tree; PASS
 
@@ -11975,6 +11980,7 @@ Expanded IDs and selected ID are separate; focus never selects, and hidden nodes
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Tree
+- `canDrop?`: `(move: TreeMove) => boolean`. 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。
 - `checkable?`: `boolean`. 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。
 - `checkedIds?`: `readonly string[]`. 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。
 - `defaultCheckedIds?`: `readonly string[]`.
@@ -11982,15 +11988,19 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `defaultFocusedId?`: `string | null`. 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。
 - `defaultSelectedId?`: `string | null`.
 - `disabled?`: `boolean`.
+- `draggable?`: `boolean`. 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。 Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。
 - `emptyContent?`: `React.ReactNode`.
 - `expandedIds?`: `readonly string[]`.
+- `loadChildren?`: `(node: TreeNode) => Promise<readonly TreeNode[]>`. 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。
 - `nodes`: `readonly TreeNode[]`.
 - `onCheckedChange?`: `(ids: string[], details: TreeChangeDetails) => void`.
 - `onExpandedChange?`: `(ids: string[], details: TreeChangeDetails) => void`.
+- `onMove?`: `(move: TreeMove, details: TreeMoveDetails) => void`.
 - `onSelectionChange?`: `(id: string | null, details: TreeChangeDetails) => void`.
+- `query?`: `string`. 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用， 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定， 筛选只是看不见一部分。空串等于不筛选。
 - `selectable?`: `boolean`.
 - `selectedId?`: `string | null`.
-- plus 280 inherited (@types/react 279, @base-ui/react 1); not expanded, see the installed declarations
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -12003,19 +12013,23 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### Tree
 A complete hierarchical collection.
-- nodes: readonly TreeNode[]. IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit.
+- nodes: readonly TreeNode[]. IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit. isLeaf declares no children, so a node is not loaded even when loadChildren is set.
 - expandedIds / defaultExpandedIds / onExpandedChange: readonly string[] / callback. Expansion is independent of selection; details.cancel() prevents commit.
 - selectedId / defaultSelectedId / onSelectionChange: string | null / callback. Single selection is independent of focus and cancellable; no business state is inferred.
 - selectable / disabled / emptyContent: boolean / ReactNode. Selectable defaults to true; empty trees remain focusable with caller or locale content.
 - checkable: boolean. Turns on cascading checkable mode; defaults to false. When true, row clicks and Space toggle the checked state instead of selectable's single-select click.
 - checkedIds / defaultCheckedIds / onCheckedChange: readonly string[] / callback. Holds only leaf ids; details.cancel() prevents commit. Checking a branch adds or removes its enabled leaf descendants together; a disabled leaf keeps the fact it was given and cascade never changes it.
 - defaultFocusedId: string | null. The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens.
+- loadChildren: (node: TreeNode) => Promise<readonly TreeNode[]>. Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's "Loading" under it; a rejection shows "Failed to load" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands.
+- query: string. Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace.
+- draggable / onMove / canDrop: boolean / (move: TreeMove, details: { event, reason: "keyboard" | "pointer" }) => void / (move: TreeMove) => boolean. draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region.
 - aria-label / aria-labelledby: string. One is required: the name of the tree, on the role=tree root. A missing or blank name throws. Each item is named by its own label.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### Keyboard
 - ↑ / ↓ / Home / End: Move between visible enabled nodes.
 - ← / →: Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree.
+- Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc: Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced.
 - Enter / Space / Typeahead: Select the current node, or type the start of a label to move: characters typed in quick succession (within 500ms, a preset) accumulate into a prefix, and repeating one character cycles through nodes starting with it. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select.
 
 ### Source example
@@ -12049,27 +12063,27 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## TreeSelect
 
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
-Source SHA-256: f2cb98548353bc2311412e049c1a47d3cd3d4053425ba1d996fdbabfe0ab9009
+Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d
 
 Choose one node, or check several leaves, on a tree inside a popup.
 
 ### Decision
-The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.
+Search only hides nodes and never changes the value: multiple mode derives its checks from the full tree. The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.
 
 ### Notes
-- No search and no async loading: typing the start of a label jumps to it, and the caller provides all nodes at once.
+- No async loading: the caller provides all nodes at once. Typing the start of a label jumps to it; turn on searchable to filter by label when candidates are many.
 - The trigger is a combobox and the popup a tree (aria-haspopup="tree"). In multiple mode the trigger lists the checked leaves; beyond two it reads "first and N more", and the rest stay visible in the tree.
 
 ### Use and ownership
 - Candidates that naturally nest and the value is one node or several leaves: departments, organizations, categories.
-- Avoid: Use Select for a single level and Combobox when many candidates need filtering.
+- Avoid: Use Select for a single level and Combobox when many flat candidates need filtering (use searchable when they nest).
 - Avoid: Use Cascader when choosing level by level and the whole path is the value.
 - Avoid: Use Tree directly when the tree is itself page content and need not fold into a trigger.
 - Library: Focus, expansion, and the uncontrolled value.
@@ -12109,10 +12123,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `placeholder?`: `React.ReactNode`.
 - `readOnly?`: `boolean`.
 - `required?`: `boolean`.
+- `searchable?`: `boolean`. 弹层顶部出现搜索输入：按名称筛选（不分大小写），保留命中节点的祖先并展开它们，命中的文字被标出。单选与多选都可用；只搜已知的节点。
 - `value?`: `string | null | undefined`. 所选节点的 id（分支也可以被选）；null 是未选择。省略初值不会选第一项。选中即提交并关闭弹层。
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
@@ -12127,6 +12142,7 @@ Trigger, the Tree inside the popup, and the form value. The trigger shares Selec
 - nodes: readonly TreeNode[]. Tree's own nodes: ids are unique across the tree and labels are nonempty; disabled nodes cannot be chosen.
 - value / defaultValue / onValueChange: string | null  (multiple: readonly string[]). Single holds the chosen node's id (a branch can be chosen) and null is no selection; choosing commits and closes, and choosing the same node only closes. Multiple holds the checked leaf ids; checking does not close, and the ids in the callback follow the tree's order. The callback's details have Tree's shape; after cancel() nothing is committed (and in single mode the popup stays open).
 - multiple: boolean; default false. With true the Tree is checkable: checking a branch checks its enabled leaves, a partial state shows mixed, and disabled leaves keep their state.
+- searchable: boolean; default false. A search input appears at the top of the popup and filters by label: matching nodes and their ancestors stay, matching branches open automatically and the matched text is marked in bold; with no match the locale's empty state shows. It applies to single and multiple mode; filtering only hides, so multiple mode's checks and cascade still follow the full tree. The match count is announced through role=status.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
 - name / form: string. Name and owning form of the hidden input. Single submits the chosen id, or an empty string when nothing is chosen; multiple submits one value per chosen id and nothing when empty (required blocks submission).
@@ -12136,6 +12152,7 @@ Trigger, the Tree inside the popup, and the form value. The trigger shares Selec
 - Enter / Space / ↓ / ↑: On the trigger, open the popup with focus on the chosen node (the first checked leaf in multiple mode, otherwise the first node) and its ancestors expanded.
 - ↑ ↓ ← → / Home / End / Typeahead: As in Tree: move between visible nodes, ← → collapse, expand or move to parent and child, and typing the start of a label jumps to it.
 - Enter / Space: Single: choose and close with focus back on the trigger. Multiple: Space checks or unchecks and the popup stays open.
+- In search ↓ / Esc: The input sits above the tree: ↓ enters the tree at its entry node; Esc closes and returns to the trigger.
 - Esc: Close and return to the trigger, retaining the value.
 
 ### Source example
@@ -12176,7 +12193,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## Typography
 

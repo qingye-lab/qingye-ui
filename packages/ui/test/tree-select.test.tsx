@@ -205,3 +205,51 @@ test("FieldLabel names the trigger and the tree; Field carries invalid", async (
   await userEvent.click(box);
   expect(screen.getByRole("tree", { name: "所属部门" })).toBeInTheDocument();
 });
+
+test("searchable: typing filters by name, keeps ancestors, opens branches and marks the match", async () => {
+  render(<TreeSelect aria-label="部门" nodes={nodes} searchable />);
+  await userEvent.click(trigger());
+  const search = screen.getByRole("textbox", { name: "搜索" });
+  await userEvent.type(search, "数据");
+  expect(item("研发")).toHaveAttribute("aria-expanded", "true");
+  expect(item("服务端")).toHaveAttribute("aria-expanded", "true");
+  expect(item("数据库").querySelector("mark")).toHaveTextContent("数据");
+  expect(screen.queryByRole("treeitem", { name: "运营" })).toBeNull();
+  expect(screen.queryByRole("treeitem", { name: "前端" })).toBeNull();
+  await userEvent.clear(search);
+  expect(screen.getByRole("treeitem", { name: "运营" })).toBeInTheDocument();
+});
+
+test("searchable: the empty state is the localized one, and the query is cleared when reopened", async () => {
+  render(<UILocaleProvider locale={enUS}><TreeSelect aria-label="Dept" nodes={nodes} searchable /></UILocaleProvider>);
+  await userEvent.click(screen.getByRole("combobox", { name: "Dept" }));
+  await userEvent.type(screen.getByRole("textbox", { name: "Search" }), "zzz");
+  expect(screen.getByText("No options")).toBeInTheDocument();
+  await userEvent.keyboard("{Escape}");
+  await waitFor(() => expect(screen.getByRole("combobox", { name: "Dept" })).toHaveAttribute("aria-expanded", "false"));
+  await userEvent.click(screen.getByRole("combobox", { name: "Dept" }));
+  expect(screen.getByRole("textbox", { name: "Search" })).toHaveValue("");
+});
+
+test("searchable single: ArrowDown enters the filtered tree and Enter picks a node", async () => {
+  const onValueChange = vi.fn();
+  render(<TreeSelect aria-label="部门" nodes={nodes} searchable onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.type(screen.getByRole("textbox", { name: "搜索" }), "客服");
+  await userEvent.keyboard("{ArrowDown}");
+  expect(item("运营")).toHaveFocus();
+  await userEvent.keyboard("{ArrowDown}{Enter}");
+  expect(onValueChange).toHaveBeenCalledWith("ops.support", expect.anything());
+  await waitFor(() => expect(trigger()).toHaveAttribute("aria-expanded", "false"));
+});
+
+test("searchable multiple: checking a filtered leaf adds it to the value and keeps the popup open", async () => {
+  const onValueChange = vi.fn();
+  render(<TreeSelect aria-label="部门" nodes={nodes} multiple searchable defaultValue={["hr"]} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.type(screen.getByRole("textbox", { name: "搜索" }), "增长");
+  await userEvent.click(item("增长"));
+  expect(onValueChange).toHaveBeenCalledWith(["ops.growth", "hr"], expect.anything());
+  expect(trigger()).toHaveAttribute("aria-expanded", "true");
+  expect(trigger()).toHaveTextContent("增长、人事");
+});

@@ -3,24 +3,24 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 9ceda3ccbb6f291761c0eee3440aa2c4be159331c7e39243f22e02022a424915
+Source SHA-256: fbadc403734a54d4ba3c7e382f4f329bbec0310abdbcea3b388f5e84d043618b
 
-Choose one value along a root-to-leaf path, with each level's candidates in its own column.
+Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
 ## Decision
-What is chosen is a path, not the last node: leaves with the same name (a "city district" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for "no children".
+Multiple values hold leaf paths only and a branch's check is a derived display, the same convention as Tree and TreeSelect. What is chosen is a path, not the last node: leaves with the same name (a "city district" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for "no children".
 
 ## Notes
 - The trigger text is the complete path, truncated with an ellipsis when long; the full text stays in the DOM so assistive technology reads all of it.
 - A mouse click on a parent only expands it; with selectParent the parent also becomes the value and the popup stays open so you can continue downward. On the keyboard these are two keys: Enter submits and closes, → expands.
 - Focus is real DOM focus (roving tabindex). Each column is a listbox named by its parent; the first column takes the trigger's name. Search results are the exception: focus stays in the input and aria-activedescendant points at the result.
+- In multiple mode each column is an aria-multiselectable listbox, the check marker stays outside the accessibility tree and aria-selected carries the state; a branch's partial state is given to assistive technology as a description.
 - aria-haspopup and aria-expanded on an option mean "has a next column" and "the next column is open".
 - Candidates share Select's text size and height. Column width follows content with a lower bound derived from padding, trailing marker and minimum text area; the popup scrolls horizontally when columns are many.
 
 ## Use and ownership
 - Candidates that naturally nest and where a value at some level is wanted: regions, categories, organizations.
 - Avoid: Use Select for a single level and Combobox when many candidates need filtering.
-- Avoid: Use Tree's checkable form for choosing several paths.
 - Avoid: Use RadioGroup for a few candidates that need side-by-side comparison.
 - Library: Focus, open columns, the search draft, uncontrolled value, and the cache and retry of async results.
 - Application: Controlled values, candidate data, the actual loadChildren request, invalid and save facts.
@@ -53,13 +53,14 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `form?`: `string | undefined`.
 - `id?`: `string | undefined`.
 - `loadChildren?`: `((option: CascaderOption) => Promise<CascaderOption[]>) | undefined`. 展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。
-- `name?`: `string | undefined`. 隐藏 input 的名称；提交值是路径各段用 "/" 连接，未选择提交空字符串。
+- `multiple?`: `false | undefined`.
+- `name?`: `string | undefined`. 隐藏 input 的名称。单选提交路径各段用 "/" 连接（未选择提交空字符串）；多选每条已选路径一条同名值，未选择不提交。
 - `onValueChange?`: `((path: string[] | null, options: CascaderOption[]) => void) | undefined`. 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。
 - `options`: `readonly CascaderOption[]`. 第一列的候选；子项在 children 里，或由 loadChildren 按需取来。
 - `placeholder?`: `React.ReactNode`.
 - `readOnly?`: `boolean`.
 - `required?`: `boolean`.
-- `searchable?`: `boolean`. 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。
+- `searchable?`: `boolean`. 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径，命中的文字被标出（只搜已知的节点，未加载的分支不在其中）。
 - `selectParent?`: `boolean`. 默认只有叶子可提交；true 时任意层级都可以提交。
 - `value?`: `string[] | null | undefined`. 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。
 
@@ -77,14 +78,15 @@ Written descriptions; the list above is the type-resolved fact.
 ### Cascader
 Trigger, column-wise candidate popup and form value. The trigger shares Select's geometry; the popup uses Popover's panel.
 - options: CascaderOption[]. Candidates of the first column. A node is { value, label, disabled?, children?, isLeaf? }; values are unique under one parent. A node with children is a branch, otherwise a leaf (unless loadChildren is set).
-- value / defaultValue: string[] | null. The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger.
-- onValueChange: (path: string[] | null, options: CascaderOption[]) => void. Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it.
+- multiple: boolean; default false. With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a "Partly selected" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads "first and N more". Mutually exclusive with selectParent.
+- value / defaultValue: string[] | null  (multiple: readonly (readonly string[])[]). Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger.
+- onValueChange: (path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void). Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it.
 - selectParent: boolean; default false. Only leaves submit by default; with true any level can submit (Ant Design's changeOnSelect).
 - loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice.
-- searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included.
+- searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
-- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Values should therefore not contain "/".
+- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain "/".
 - aria-label / aria-labelledby / id / className: string. Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel.
 
 ## Keyboard
@@ -92,7 +94,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - ↓ / ↑ / Home / End: Move within the current column. Focus is the position: columns deeper than it close when focus leaves their item.
 - → (← in RTL): With children, expand and enter the first item of the next column; while loading, enter once loading finishes.
 - ← (→ in RTL): Return to the parent in the previous column and close this one.
-- Enter / Space: On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column.
+- Enter / Space: On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open.
 - Typing: Jump by first letter within the column; fast consecutive typing matches by prefix.
 - Esc: Close and return to the trigger, retaining the original value.
 - In search ↓ / ↑ / Enter: Focus stays in the input; arrows move the highlight over matching paths and Enter submits. With an empty query ↓ enters the columns.
@@ -229,6 +231,49 @@ export default function Demo() {
     <Field>
       <FieldLabel>{english ? "Category" : "类目"}</FieldLabel>
       <Cascader options={english ? en : zh} searchable name="category" />
+    </Field>
+  );
+}
+```
+
+### 多选路径
+Source: apps/docs/src/content/cascader/demos/04-multiple.tsx
+```tsx
+import { useState } from "react";
+import { Cascader, type CascaderOption } from "@qingye_lab/ui/components/cascader";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "多选路径", titleEn: "Multiple paths" };
+
+const zh: CascaderOption[] = [
+  { value: "zj", label: "浙江", children: [
+    { value: "hz", label: "杭州", children: [{ value: "xh", label: "西湖区" }, { value: "yh", label: "余杭区" }, { value: "bj", label: "滨江区", disabled: true }] },
+    { value: "nb", label: "宁波", children: [{ value: "hs", label: "海曙区" }, { value: "jb", label: "江北区" }] },
+  ] },
+  { value: "js", label: "江苏", children: [
+    { value: "nj", label: "南京", children: [{ value: "gl", label: "鼓楼区" }, { value: "xw", label: "玄武区" }] },
+  ] },
+  { value: "xz", label: "西藏" },
+];
+const en: CascaderOption[] = [
+  { value: "zj", label: "Zhejiang", children: [
+    { value: "hz", label: "Hangzhou", children: [{ value: "xh", label: "Xihu" }, { value: "yh", label: "Yuhang" }, { value: "bj", label: "Binjiang", disabled: true }] },
+    { value: "nb", label: "Ningbo", children: [{ value: "hs", label: "Haishu" }, { value: "jb", label: "Jiangbei" }] },
+  ] },
+  { value: "js", label: "Jiangsu", children: [
+    { value: "nj", label: "Nanjing", children: [{ value: "gl", label: "Gulou" }, { value: "xw", label: "Xuanwu" }] },
+  ] },
+  { value: "xz", label: "Tibet" },
+];
+
+export default function Demo() {
+  const english = useUILocale().code.startsWith("en");
+  const [value, setValue] = useState<string[][]>([["zj", "hz", "xh"]]);
+  return (
+    <Field>
+      <FieldLabel>{english ? "Regions" : "覆盖地区"}</FieldLabel>
+      <Cascader multiple searchable options={english ? en : zh} value={value} onValueChange={setValue} name="regions" />
     </Field>
   );
 }
