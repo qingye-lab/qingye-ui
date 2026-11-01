@@ -217,3 +217,67 @@ test("the clear action removes the confirmed range and returns focus to the star
   expect(screen.getByText("只读")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: "清除日期范围" })).not.toBeInTheDocument();
 });
+
+test("month granularity: a range is picked on the month grid, committed from the first month start to the last day of the last month, and submitted as ISO dates", async () => {
+  const change = vi.fn();
+  const { container } = render(<UILocaleProvider locale={enUS}><form><Field name="range"><FieldLabel>范围</FieldLabel><DateRangePicker granularity="month" onValueChange={change} calendarProps={{ defaultMonth: new Date(2026, 0) }} /></Field></form></UILocaleProvider>);
+  const start = screen.getByRole("textbox", { name: /Start date/ }), end = screen.getByRole("textbox", { name: /End date/ });
+  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  await userEvent.click(await screen.findByRole("button", { name: "February 2026" }));
+  await userEvent.click(screen.getByRole("button", { name: "April 2026" }));
+  expect(start).toHaveValue("2/2026");
+  expect(end).toHaveValue("4/2026");
+  await userEvent.click(screen.getByRole("button", { name: "Apply" }));
+  const [range] = change.mock.calls[0]!;
+  expect(range).toEqual({ from: new Date(2026, 1, 1), to: new Date(2026, 3, 30) });
+  const form = container.querySelector("form")!;
+  expect(new FormData(form).get("range.from")).toBe("2026-02-01");
+  expect(new FormData(form).get("range.to")).toBe("2026-04-30");
+});
+
+test("period endpoints are typed as text, adopted on Enter, normalized to the period, and an unparsable text keeps the pair incomplete", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="quarter" defaultValue={{ from: new Date(2026, 0, 1), to: new Date(2026, 5, 30) }} onValueChange={change} /><button>after</button></UILocaleProvider>);
+  const start = screen.getByRole("textbox", { name: /Start date/ }), end = screen.getByRole("textbox", { name: /End date/ });
+  expect(start).toHaveValue("Q1 2026");
+  expect(end).toHaveValue("Q2 2026");
+  await userEvent.clear(end);
+  await userEvent.type(end, "Q4 2026");
+  expect(change).not.toHaveBeenCalled();
+  await userEvent.keyboard("{Enter}");
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(change.mock.calls[0]![0]).toEqual({ from: new Date(2026, 0, 1), to: new Date(2026, 11, 31) });
+  await userEvent.clear(start);
+  await userEvent.type(start, "soon");
+  await userEvent.click(screen.getByRole("button", { name: "after" }));
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(start).toHaveValue("soon");
+  expect(start).toHaveAttribute("aria-invalid", "true");
+});
+
+test("week granularity normalizes a controlled range to whole weeks and presets are normalized to the period", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="week" calendarProps={{ weekStartsOn: 1, firstWeekContainsDate: 4 }} value={{ from: new Date(2026, 10, 4), to: new Date(2026, 10, 12) }} onValueChange={change}
+    presets={[{ label: "Two weeks", value: { from: new Date(2026, 10, 3), to: new Date(2026, 10, 16) } }]} /></UILocaleProvider>);
+  expect(screen.getByRole("textbox", { name: /Start date/ })).toHaveValue("Week 45, 2026");
+  expect(screen.getByRole("textbox", { name: /End date/ })).toHaveValue("Week 46, 2026");
+  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  const preset = await screen.findByRole("button", { name: "Two weeks" });
+  await userEvent.click(preset);
+  expect(screen.getByRole("textbox", { name: /End date/ })).toHaveValue("Week 47, 2026");
+  await userEvent.click(screen.getByRole("button", { name: "Apply" }));
+  expect(change.mock.calls[0]![0]).toEqual({ from: new Date(2026, 10, 2), to: new Date(2026, 10, 22) });
+});
+
+test("min and max bound period endpoints by overlap, and an out-of-bounds period text is not adopted", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="month" min={new Date(2026, 2, 15)} max={new Date(2026, 8, 10)} onValueChange={change} /><button>after</button></UILocaleProvider>);
+  const start = screen.getByRole("textbox", { name: /Start date/ });
+  await userEvent.type(start, "1/2026");
+  await userEvent.click(screen.getByRole("button", { name: "after" }));
+  expect(start).toHaveAttribute("aria-invalid", "true");
+  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  expect(await screen.findByRole("button", { name: "March 2026" })).not.toHaveAttribute("aria-disabled");
+  expect(screen.getByRole("button", { name: "February 2026" })).toHaveAttribute("aria-disabled", "true");
+  expect(screen.getByRole("button", { name: "October 2026" })).toHaveAttribute("aria-disabled", "true");
+});

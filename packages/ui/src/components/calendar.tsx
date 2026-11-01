@@ -4,12 +4,21 @@ import * as CalendarPrimitive from "@daypicker/react";
 import { enUS, zhCN } from "@daypicker/react/locale";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
+import { defaultWeekRules, formatPeriod, periodEnd, periodStart, selectPeriod, type DateGranularity, type WeekRules } from "../date-granularity";
 import { useUILocale } from "../locale";
+import { PeriodGrid, periodCellClass } from "../period-grid";
 import { cn } from "../utils";
 import { buttonVariants } from "./button";
 import { NativeSelect } from "./native-select";
 
-export type CalendarProps = CalendarPrimitive.DayPickerProps & { render?: useRender.ComponentProps<"div">["render"]; ref?: React.Ref<HTMLDivElement> | undefined };
+export type CalendarProps = CalendarPrimitive.DayPickerProps & {
+  /**
+   * 选择的粒度，默认 `"day"`（按天，行为不变）。`"week"` 在按天的网格里整行选一周；`"month"` / `"quarter"` / `"year"` 换成对应的格子网格。
+   * 非 `"day"` 时只支持 `mode="single"` 与 `mode="range"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。
+   */
+  granularity?: DateGranularity;
+  render?: useRender.ComponentProps<"div">["render"]; ref?: React.Ref<HTMLDivElement> | undefined;
+};
 export type CalendarDateRange = CalendarPrimitive.DateRange;
 const RootComposition = React.createContext<Pick<CalendarProps, "render" | "ref">>({});
 function CalendarRoot({ rootRef, ...props }: CalendarPrimitive.RootProps) {
@@ -68,6 +77,23 @@ export function calendarLocaleFor(code: string): { locale: CalendarProps["locale
   }
 }
 
+/**
+ * 周的规则：每周第一天与新年第 1 周至少几天（编号规则见 date-granularity.ts）。
+ * 优先级：调用方显式给的 `weekStartsOn` / `firstWeekContainsDate`，其次是 `locale` 对象自带的周起始日，再次是区域代码的 `Intl.Locale` 周信息；
+ * 都没有时周一起始、第 1 周至少 4 天（ISO 8601，**预设**）。
+ */
+export function weekRulesFor(code: string, own: { weekStartsOn?: number | undefined; firstWeekContainsDate?: number | undefined; locale?: CalendarProps["locale"] | undefined } = {}): WeekRules {
+  let info: { firstDay?: number | undefined; minimalDays?: number | undefined } | undefined;
+  try {
+    const locale = new Intl.Locale(code) as WeekInfoLocale;
+    info = typeof locale.getWeekInfo === "function" ? locale.getWeekInfo() : locale.weekInfo;
+  } catch { info = undefined; }
+  return {
+    firstDay: own.weekStartsOn ?? own.locale?.options?.weekStartsOn ?? (info?.firstDay ? info.firstDay % 7 : defaultWeekRules.firstDay),
+    minimalDays: own.firstWeekContainsDate ?? info?.minimalDays ?? defaultWeekRules.minimalDays,
+  };
+}
+
 /** ISO date-only text from local date fields; never shifts through UTC. */
 export function formatLocalDate(date: Date): string {
   if (!Number.isFinite(date.getTime()) || date.getFullYear() < 1 || date.getFullYear() > 9999) throw new RangeError("A valid local calendar date in years 1–9999 is required.");
@@ -103,14 +129,30 @@ function CalendarNav({ onPreviousClick, onNextClick, previousMonth, nextMonth, .
   </div>;
 }
 
+// 日期格的按钮外观，分件写出是为了「选中为实心」（按天、月、季、年）与「选中为浅底」（整周）共用同一套几何。
+const cellGeometry = "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height) rounded-(--qy-fill-radius) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target)";
+const selectedSolid = "[td[data-selected=true]_&]:bg-primary [td[data-selected=true]_&]:hover:bg-primary-hover [td[data-selected=true]_&]:active:bg-primary-hover [td[data-selected=true]_&]:text-primary-foreground [td[data-selected=true]_&]:[--qy-focus-ring-color:var(--qy-focus-ring-on-solid)]";
+const todayMark = "[td[data-today=true]_&]:font-semibold";
+// 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
+const rangeMiddle = "bg-surface-selected [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-hover)!";
+const rangeStart = "bg-linear-to-r from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-l";
+const rangeEnd = "bg-linear-to-l from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-r";
+// 整周：选中的是一行而不是一格，所以整行一条浅底（选中面 + font-medium，同列表项的选中），不用实心；条的两头圆角（需要 border-separate）。
+const weekBand = "bg-surface-selected [&>button]:font-medium";
+
+type PickProps = { mode?: string; selected?: Date | { from?: Date | undefined; to?: Date | undefined } | undefined; onSelect?: ((value: unknown, trigger: Date, modifiers: Record<string, boolean>, event: React.SyntheticEvent) => void) | undefined; required?: boolean | undefined };
+
 /** Mature date semantics with current control geometry and locally formatted names. */
-export function Calendar({ className, classNames, components, style, locale, formatters, labels, render, ref, ...props }: CalendarProps) {
+export function Calendar({ className, classNames, components, style, locale, formatters, labels, granularity = "day", render, ref, ...props }: CalendarProps) {
   const { code, messages, ...resolved } = useUILocale() as ReturnType<typeof useUILocale> & { dir?: string };
   // 调用方显式给出 locale 时，名称与周起始日都归它；否则按 UILocale 的区域代码推出。
   const derived = React.useMemo(() => locale ? undefined : calendarLocaleFor(code), [locale, code]);
+  const rules = React.useMemo(() => weekRulesFor(code, { weekStartsOn: props.weekStartsOn, firstWeekContainsDate: props.firstWeekContainsDate, ...(locale ? { locale } : {}) }), [code, props.weekStartsOn, props.firstWeekContainsDate, locale]);
   // DayPicker 只认 `dir` 属性来翻转翻页箭头，不读 DOM：调用方显式给出的优先，其次 UILocale 的方向，
   // 最后是祖先元素实际生效的方向（页面上写了 dir="rtl" 就跟随）。
   const rootRef = React.useRef<HTMLDivElement | null>(null);
+  // 非按天时选择由这里按周期算，DayPicker 的非受控状态帮不上忙：没有传 `selected` 属性就自己记住最近一次的选择，传了（哪怕是 undefined）就完全听调用方的。
+  const [innerSelected, setInnerSelected] = React.useState<PickProps["selected"]>();
   const [inheritedDir, setInheritedDir] = React.useState<"rtl" | undefined>();
   React.useLayoutEffect(() => {
     const node = rootRef.current;
@@ -126,28 +168,72 @@ export function Calendar({ className, classNames, components, style, locale, for
   const dateName = (date: Date) => new Intl.DateTimeFormat(code, { year: "numeric", month: "long", day: "numeric", weekday: "long" }).format(date);
   // 日期格与翻页按钮都是「在网格里选一个日期」的位置：几何跟随填值控件角色层，
   // 大小不表达重要性（用户裁决 2026-10-05）。单元格宽度另由 --qy-calendar-cell 定。
-  const dayButton = cn(buttonVariants({ shape: "icon", variant: "quiet" }), "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height) rounded-(--qy-fill-radius) pointer-coarse:min-h-(--qy-touch-target) pointer-coarse:w-(--qy-touch-target) [td[data-selected=true]_&]:bg-primary [td[data-selected=true]_&]:hover:bg-primary-hover [td[data-selected=true]_&]:active:bg-primary-hover [td[data-selected=true]_&]:text-primary-foreground [td[data-selected=true]_&]:[--qy-focus-ring-color:var(--qy-focus-ring-on-solid)] [td[data-today=true]_&]:font-semibold");
-  return <RootComposition.Provider value={{ render, ref: setRootRef }}><CalendarPrimitive.DayPicker {...props}
+  const dayButton = cn(buttonVariants({ shape: "icon", variant: "quiet" }), cellGeometry, selectedSolid, todayMark);
+  const rootStyle = { "--qy-calendar-cell": "var(--qy-fill-height)", "--qy-calendar-cell-narrow": "var(--qy-fill-height-narrow)", ...style } as React.CSSProperties;
+
+  // 周以外的非按天粒度：不画日期网格，换成月 / 季 / 年的格子（见 period-grid.tsx）。
+  if (granularity === "month" || granularity === "quarter" || granularity === "year") {
+    const own = props as PickProps;
+    return <PeriodGrid granularity={granularity} mode={own.mode === "range" ? "range" : "single"} required={own.required} selected={"selected" in props ? own.selected : innerSelected} rules={rules}
+      onSelect={(value, trigger, event) => { if (!("selected" in props)) setInnerSelected(value); own.onSelect?.(value, trigger, {}, event); }}
+      disabled={props.disabled} startMonth={props.startMonth} endMonth={props.endMonth} month={props.month} defaultMonth={props.defaultMonth} onMonthChange={props.onMonthChange} autoFocus={props.autoFocus} dir={dir}
+      classes={{ nav: dayButton, cell: periodCellClass(selectedSolid, todayMark), solid: selectedSolid, today: todayMark, rangeMiddle, rangeStart, rangeEnd }}
+      className={cn("w-fit max-w-full text-foreground", className)} style={rootStyle} render={render} ref={setRootRef} />;
+  }
+
+  // 整周：仍是按天的网格，但选中、点击都以「一周」为单位。DayPicker 只负责画（以 range 模式把整周标成选中），选择由这里按周期规则算。
+  const week = granularity === "week";
+  const { mode: pickMode, selected: pickSelected, onSelect: pickSelect, required: pickRequired, min: _min, max: _max, ...rest } = props as typeof props & PickProps & { min?: number; max?: number };
+  const currentSelected = "selected" in props ? pickSelected : innerSelected;
+  const weekProps = !week ? props : {
+    ...rest,
+    weekStartsOn: rules.firstDay as 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    ...(rules.minimalDays === 1 || rules.minimalDays === 4 ? { firstWeekContainsDate: rules.minimalDays } : {}),
+    showOutsideDays: props.showOutsideDays ?? true,
+    ...(pickMode === "single" || pickMode === "range" ? {
+      mode: "range" as const,
+      selected: currentSelected instanceof Date ? { from: periodStart(currentSelected, "week", rules), to: periodEnd(currentSelected, "week", rules) }
+        : currentSelected?.from ? { from: periodStart(currentSelected.from, "week", rules), to: periodEnd(currentSelected.to ?? currentSelected.from, "week", rules) } : undefined,
+      // 给 DayPicker 一个空的 onSelect，它才把 `selected` 当作受控值（否则它保留自己的内部选择，忽略我们传入的整周）。
+      onSelect: () => {},
+      onDayClick: (day: Date, modifiers: Record<string, boolean>, event: React.MouseEvent) => {
+        (props.onDayClick as ((day: Date, modifiers: Record<string, boolean>, event: React.MouseEvent) => void) | undefined)?.(day, modifiers, event);
+        const value = pickMode === "single"
+          ? selectPeriod("single", day, "week", rules, currentSelected instanceof Date ? currentSelected : undefined, pickRequired ?? false)
+          : selectPeriod("range", day, "week", rules, currentSelected instanceof Date ? { from: currentSelected, to: currentSelected } : currentSelected, pickRequired ?? false);
+        if (!("selected" in props)) setInnerSelected(value);
+        pickSelect?.(value, periodStart(day, "week", rules), modifiers, event);
+      },
+    } : {}),
+  } as CalendarPrimitive.DayPickerProps;
+  return <RootComposition.Provider value={{ render, ref: setRootRef }}><CalendarPrimitive.DayPicker {...weekProps}
     locale={locale ?? derived!.locale} navLayout={props.navLayout ?? "after"}
-    {...(derived?.weekStartsOn !== undefined && props.weekStartsOn === undefined ? { weekStartsOn: derived.weekStartsOn } : {})}
-    {...(derived?.firstWeekContainsDate !== undefined && props.firstWeekContainsDate === undefined ? { firstWeekContainsDate: derived.firstWeekContainsDate } : {})}
+    {...(derived?.weekStartsOn !== undefined && weekProps.weekStartsOn === undefined ? { weekStartsOn: derived.weekStartsOn } : {})}
+    {...(derived?.firstWeekContainsDate !== undefined && weekProps.firstWeekContainsDate === undefined ? { firstWeekContainsDate: derived.firstWeekContainsDate } : {})}
     {...(dir ? { dir } : {})}
     formatters={{ ...derived?.formatters, ...formatters }}
     className={cn("w-fit max-w-full text-foreground", className)}
-    style={{ "--qy-calendar-cell": "var(--qy-fill-height)", "--qy-calendar-cell-narrow": "var(--qy-fill-height-narrow)", ...style } as React.CSSProperties}
+    style={rootStyle}
     classNames={{
       // 月份名与翻页同一行：翻页是对月份名的操作，二者分行时箭头像孤立的工具条。
       months: "flex flex-wrap gap-(--qy-space-6)", month: "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-y-(--qy-space-2)", month_caption: "flex min-w-0 items-center ps-(--qy-space-2) has-data-[slot=native-select]:ps-0", caption_label: "text-body-strong", dropdowns: "flex items-center gap-(--qy-space-2)", nav: "flex items-center justify-end",
       button_previous: dayButton, button_next: dayButton, chevron: "shrink-0",
-      month_grid: "col-span-2 border-collapse", weekday: "text-support text-muted-foreground text-center", day: "p-0 text-center w-(--qy-calendar-cell-narrow) sm:w-(--qy-calendar-cell) pointer-coarse:w-(--qy-touch-target)", day_button: dayButton,
-      outside: "text-muted-foreground", disabled: "opacity-disabled", hidden: "invisible", // 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
-      range_middle: "bg-surface-selected [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-hover)!", range_start: "bg-linear-to-r from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-l", range_end: "bg-linear-to-l from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-r", footer: "text-support text-muted-foreground", ...classNames,
+      month_grid: cn("col-span-2", week ? "border-separate border-spacing-0" : "border-collapse"), weekday: "text-support text-muted-foreground text-center", day: "p-0 text-center w-(--qy-calendar-cell-narrow) sm:w-(--qy-calendar-cell) pointer-coarse:w-(--qy-touch-target)",
+      day_button: week ? cn(buttonVariants({ shape: "icon", variant: "quiet" }), cellGeometry, todayMark) : dayButton,
+      outside: "text-muted-foreground", disabled: "opacity-disabled", hidden: "invisible",
+      ...(week
+        ? { range_middle: weekBand, range_start: cn(weekBand, "rounded-s-(--qy-fill-radius)"), range_end: cn(weekBand, "rounded-e-(--qy-fill-radius)") }
+        : { range_middle: rangeMiddle, range_start: rangeStart, range_end: rangeEnd }),
+      footer: "text-support text-muted-foreground", ...classNames,
     }}
-    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, Nav: CalendarNav, ...components }}
+    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, Nav: CalendarNav,
+      // 整周单选时 DayPicker 内部是 range 模式，网格会被标成多选；单选就不该有 aria-multiselectable。
+      ...(week && pickMode === "single" ? { MonthGrid: ({ children, ...tableProps }: React.TableHTMLAttributes<HTMLTableElement>) => <table {...tableProps} aria-multiselectable={undefined}>{children}</table> } : {}),
+      ...components }}
     labels={{
       labelNext: () => messages.nextMonth, labelPrevious: () => messages.previousMonth, labelNav: () => messages.monthNavigation,
       labelMonthDropdown: () => messages.month, labelYearDropdown: () => messages.year,
-      labelDayButton: (date, modifiers) => nameList.format([dateName(date), modifiers.today ? messages.today : "", modifiers.selected ? messages.selectedDate : ""].filter(Boolean)),
+      labelDayButton: (date, modifiers) => nameList.format([dateName(date), week ? formatPeriod(date, "week", rules, messages) : "", modifiers.today ? messages.today : "", modifiers.selected ? messages.selectedDate : ""].filter(Boolean)),
       labelGrid: date => new Intl.DateTimeFormat(code, { year: "numeric", month: "long" }).format(date),
       labelWeekday: date => new Intl.DateTimeFormat(code, { weekday: "long" }).format(date), ...labels,
     }}

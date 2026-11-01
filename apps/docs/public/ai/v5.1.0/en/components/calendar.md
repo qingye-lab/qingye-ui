@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
+Source SHA-256: 71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
@@ -11,6 +11,7 @@ Navigate a local calendar and select a day, multiple dates, or a range.
 Dates use local year, month, and day. The caller declares same-day rules and unavailable dates; the library adds no business duration rules.
 
 ## Notes
+- With a granularity other than day, a Calendar without a selected prop remembers the latest selection itself; passing selected (even undefined) leaves it entirely to the caller. A controlled value that is not on a period start still shows the whole week or cell as selected.
 - Calendar does not create native form fields. Use DatePicker or serialize selection in the application.
 - One month, label captions, and navigation after the caption are default layout choices exposed through public props.
 - Surfaces, colors, corners, and size roles use the current theme presets; selection and focus reflect real state.
@@ -39,11 +40,13 @@ Dates use local year, month, and day. The caller declares same-day rules and una
 - CalendarProps: type; owner calendar; PASS
 - formatLocalDate: function; owner calendar; PASS; props: Date
 - parseLocalDate: function; owner calendar; PASS; props: string
+- weekRulesFor: function; owner calendar; PASS; props: string
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Calendar
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`（按天，行为不变）。`"week"` 在按天的网格里整行选一周；`"month"` / `"quarter"` / `"year"` 换成对应的格子网格。 非 `"day"` 时只支持 `mode="single"` 与 `mode="range"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。
 - `ref?`: `React.Ref<HTMLDivElement> | undefined`.
 - `render?`: `useRender.ComponentProps<"div">["render"]`.
 - plus 68 inherited (react-day-picker 68); not expanded, see the installed declarations
@@ -61,6 +64,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### Calendar
 Uses the installed DayPicker date, month navigation, keyboard, and selection semantics.
 - mode / selected / onSelect / required: DayPickerProps discriminated union. Use the public single, multiple, or range union. The caller owns selection; required limits deselection.
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". What one selection covers. week stays on the day grid and selects a whole row; month / quarter / year replace it with a grid of cells (the year grid pages twelve years). Values stay Date: a single value is the period start; a range's from is the first period's start and to is the last day of the last period. Non-day granularities support single and range only. The week start and the week-one rule come from the locale (weekStartsOn / firstWeekContainsDate win), falling back to Monday-start with at least four days in week one (ISO 8601).
 - month / defaultMonth / onMonthChange: Date / Date / (month: Date) => void. Controlled or uncontrolled month navigation; the primitive defaults to the current month.
 - disabled / hidden / startMonth / endMonth: DayPicker public props. Declare unavailable days, hidden days, and navigation bounds. disabled does not repair an existing selection.
 - min / max / excludeDisabled: range mode: number / number / boolean. The caller declares range length and disabled-day rules. Same-day complete ranges are allowed by default.
@@ -75,6 +79,7 @@ Convert local date fields to and from YYYY-MM-DD. Reject invalid dates without U
 The installed @daypicker/react namespace.
 
 ## Keyboard
+- Arrow keys / Home / End / PageUp / PageDown（月、季、年格）: On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid).
 - Arrow keys / Home / End: The date primitive moves focus through the calendar grid.
 - PageUp / PageDown: Navigate months using the primitive's calendar rules.
 - Enter / Space: Select the focused day within the declared mode and disabled rules.
@@ -113,5 +118,39 @@ export const meta = { title: "年月下拉", titleEn: "Year and month dropdowns"
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(1994, 4, 18));
   return <div className="grid justify-items-start gap-(--qy-field-group-gap)"><Calendar mode="single" selected={value} onSelect={setValue} defaultMonth={new Date(1994, 4, 1)} captionLayout="dropdown" startMonth={new Date(1920, 0)} endMonth={new Date(2026, 11)} /><output className="text-support text-muted-foreground">{value ? formatLocalDate(value) : "—"}</output></div>;
+}
+```
+
+### 周、月、季、年
+Source: apps/docs/src/content/calendar/demos/04-granularity.tsx
+```tsx
+import { useId, useState } from "react";
+import { Calendar, formatLocalDate, type CalendarDateRange, type CalendarProps } from "@qingye_lab/ui/components/calendar";
+import { Field, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+
+export const meta = { title: "周、月、季、年", titleEn: "Week, month, quarter, year" };
+
+type Granularity = NonNullable<CalendarProps["granularity"]>;
+
+export default function Demo() {
+  const id = useId();
+  const [granularity, setGranularity] = useState<Granularity>("week");
+  const [value, setValue] = useState<CalendarDateRange | undefined>();
+  const change = (next: Granularity) => { setGranularity(next); setValue(undefined); };
+  return (
+    <div className="grid justify-items-start gap-(--qy-field-group-gap)">
+      <Field><FieldTitle id={id}>粒度</FieldTitle>
+        <SegmentedControl value={granularity} onValueChange={change} aria-labelledby={id}>
+          <SegmentedControlItem value="week">周</SegmentedControlItem>
+          <SegmentedControlItem value="month">月</SegmentedControlItem>
+          <SegmentedControlItem value="quarter">季</SegmentedControlItem>
+          <SegmentedControlItem value="year">年</SegmentedControlItem>
+        </SegmentedControl>
+      </Field>
+      <Calendar key={granularity} granularity={granularity} mode="range" selected={value} onSelect={setValue} defaultMonth={new Date(2026, 9, 1)} />
+      <output className="text-support text-muted-foreground">{value?.from ? formatLocalDate(value.from) : "—"} / {value?.to ? formatLocalDate(value.to) : "—"}</output>
+    </div>
+  );
 }
 ```

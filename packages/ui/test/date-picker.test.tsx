@@ -172,3 +172,84 @@ test("the clear action returns focus to the input; read-only says so beside the 
   expect(screen.getByText("只读")).toBeInTheDocument();
   expect(screen.queryByRole("button", { name: "清除日期" })).not.toBeInTheDocument();
 });
+
+test("month granularity: the value is normalized to the month start, shown as locale text, and submitted as an ISO date", async () => {
+  const onValueChange = vi.fn();
+  function Example() {
+    const [value, setValue] = useState<Date | undefined>(new Date(2026, 10, 18));
+    return <form><Field name="period"><FieldLabel>月份</FieldLabel><DatePicker granularity="month" value={value} onValueChange={next => { onValueChange(next); setValue(next); }} /></Field></form>;
+  }
+  const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
+  const input = screen.getByLabelText("月份") as HTMLInputElement;
+  expect(input).toHaveAttribute("type", "text");
+  expect(input).toHaveValue("11/2026");
+  expect(new FormData(container.querySelector("form")!).get("period")).toBe("2026-11-18");
+  const trigger = screen.getByRole("button", { name: "Select month" });
+  await userEvent.click(trigger);
+  expect(await screen.findByRole("grid")).toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button", { name: "Next year" }));
+  await userEvent.click(screen.getByRole("button", { name: "February 2027" }));
+  const picked = onValueChange.mock.calls.at(-1)![0] as Date;
+  expect([picked.getFullYear(), picked.getMonth(), picked.getDate()]).toEqual([2027, 1, 1]);
+  expect(input).toHaveValue("2/2027");
+  expect(new FormData(container.querySelector("form")!).get("period")).toBe("2027-02-01");
+  await waitFor(() => expect(trigger).toHaveFocus());
+});
+
+test("period text is held while typing, adopted on Enter or blur, and a blank text clears", async () => {
+  const onValueChange = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DatePicker granularity="quarter" inputProps={{ "aria-label": "季度" }} defaultValue={new Date(2026, 0, 1)} onValueChange={onValueChange} /></UILocaleProvider>);
+  const input = screen.getByLabelText("季度") as HTMLInputElement;
+  expect(input).toHaveValue("Q1 2026");
+  await userEvent.clear(input);
+  await userEvent.type(input, "Q3 2027");
+  expect(onValueChange).not.toHaveBeenCalled();
+  await userEvent.keyboard("{Enter}");
+  const picked = onValueChange.mock.calls[0]![0] as Date;
+  expect([picked.getFullYear(), picked.getMonth(), picked.getDate()]).toEqual([2027, 6, 1]);
+  expect(input).toHaveValue("Q3 2027");
+  await userEvent.clear(input);
+  await userEvent.tab();
+  expect(onValueChange.mock.calls.at(-1)![0]).toBeUndefined();
+  expect(input).toHaveValue("");
+});
+
+test("unparsable or out-of-bounds period text is rejected with the existing validity messages and the confirmed value stays", async () => {
+  const onValueChange = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DatePicker granularity="year" inputProps={{ "aria-label": "年份" }} defaultValue={new Date(2026, 0, 1)} min={new Date(2020, 5, 1)} max={new Date(2030, 5, 1)} onValueChange={onValueChange} /></UILocaleProvider>);
+  const input = screen.getByLabelText("年份") as HTMLInputElement;
+  await userEvent.clear(input);
+  await userEvent.type(input, "next year");
+  await userEvent.tab();
+  expect(onValueChange).not.toHaveBeenCalled();
+  expect(input).toHaveAttribute("aria-invalid", "true");
+  expect(input.validationMessage).toBe("Date is incomplete");
+  await userEvent.clear(input);
+  await userEvent.type(input, "2040");
+  await userEvent.tab();
+  expect(input.validationMessage).toBe("Date is outside the allowed range");
+  expect(onValueChange).not.toHaveBeenCalled();
+  // 与 min / max 有交集的周期可选：2020 年含 6 月 1 日之后的日子。
+  await userEvent.clear(input);
+  await userEvent.type(input, "2020");
+  await userEvent.tab();
+  expect(onValueChange).toHaveBeenCalledTimes(1);
+});
+
+test("week granularity shows the week number text and the calendar selects a whole week", async () => {
+  const onValueChange = vi.fn();
+  render(<UILocaleProvider locale={{ ...enUS, messages: { ...enUS.messages, periodWeek: "{year} 年第 {week} 周" } }}><DatePicker granularity="week" inputProps={{ "aria-label": "周" }} calendarProps={{ weekStartsOn: 1, firstWeekContainsDate: 4 }} defaultValue={new Date(2026, 10, 4)} onValueChange={onValueChange} /></UILocaleProvider>);
+  const input = screen.getByLabelText("周") as HTMLInputElement;
+  expect(input).toHaveValue("2026 年第 45 周");
+  await userEvent.click(screen.getByRole("button", { name: "Select week" }));
+  await userEvent.click(await screen.findByRole("button", { name: /November 12, 2026/ }));
+  const picked = onValueChange.mock.calls[0]![0] as Date;
+  expect([picked.getMonth(), picked.getDate()]).toEqual([10, 9]);
+  expect(input).toHaveValue("2026 年第 46 周");
+});
+
+test("a disabled granular picker cannot be opened", () => {
+  render(<UILocaleProvider locale={enUS}><DatePicker granularity="month" inputProps={{ "aria-label": "月" }} disabled defaultValue={new Date(2026, 10, 1)} /></UILocaleProvider>);
+  expect(screen.getByLabelText("月")).toBeDisabled();
+  expect(screen.getByRole("button", { name: "Select month" })).toBeDisabled();
+});

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
+Source SHA-256: 50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -11,6 +11,7 @@ Type or pick start and end dates; only a complete, ordered range is a confirmed 
 Only a complete, ordered from/to is a confirmed value. The two native date inputs and the popup calendar share one draft: typing a complete ordered range requests the change at once; one endpoint alone, a reversed range, or one out of bounds is not submitted, and after focus leaves both inputs are marked aria-invalid and onInvalid hands the explanation to the application. Endpoints are never swapped silently. Calendar picks and presets only write the draft; Cancel or Escape keeps the confirmed value and Apply requests the replacement.
 
 ## Notes
+- With a granularity other than day, text that cannot be read stays in the input and the field counts as incomplete once focus leaves; order is compared by period, so the same period at both ends is valid.
 - The two date inputs are native, so the display format follows the browser. Typing and the calendar share one draft and stay in step.
 - Each opening starts from what the inputs currently hold. There is no default business duration or automatic repair.
 - Read-only does not open the popup: the value is there, focusable and readable, but it cannot change.
@@ -42,11 +43,12 @@ Only a complete, ordered from/to is a confirmed value. The two native date input
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DateRangePicker
-- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required"> & { min?: number; max?: number; excludeDisabled?: boolean }`.
+- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required" | "granularity"> & { min?: number; max?: number; excludeDisabled?: boolean }`.
 - `defaultValue?`: `DateRangeValue | undefined`. 非受控的初值，原生表单 reset 会回到它。
 - `disabled?`: `boolean`.
 - `endInputProps?`: `NativeInputProps`. 终点日期输入。
 - `form?`: `string | undefined`.
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
 - `inputProps?`: `NativeInputProps`. 起点日期输入（也是 Field 标签指向的输入）。
 - `max?`: `Date | undefined`.
 - `min?`: `Date | undefined`. 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。
@@ -72,6 +74,7 @@ A composition of two native date inputs, a calendar draft, presets, and an expli
 - value / defaultValue / onValueChange: { from: Date; to: Date } | undefined / same / (value, event) => void. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, native form reset returns to it, and onValueChange is optional. Endpoints must be ordered; clearing requests undefined and a partial range never submits.
 - onInvalid: (draft: { from?: Date; to?: Date }, reason: "incomplete" | "order" | "bounds" | "length" | "disabled") => void. The draft cannot be submitted: one endpoint only (incomplete), start after end (order), outside min / max (bounds), an interval length outside calendarProps min / max (length), or an endpoint on a disabled day, or a disabled day inside the range with excludeDisabled (disabled) — the same rules the calendar applies. Reported only after focus has left the whole field and the popup is closed, with both inputs marked aria-invalid; typing is segment by segment, so transient states do not count. The library writes no copy; the application explains with FieldError.
 - min / max: Date. Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development.
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". What one selection covers. Beyond day, from is the first period's start and to is the last day of the last period (given values and presets are normalized to them); the two inputs become text shown and parsed by the locale format and adopted on blur or Enter; min / max need only overlap a period. calendarProps.min / max (day-count limits) and excludeDisabled no longer apply, and name.from / name.to submit ISO dates.
 - presets: readonly { label: string; value: DateRangeValue | (() => DateRangeValue) }[]. Common ranges beside the calendar. A function value is evaluated every time the popup opens, so Last 7 days never goes stale across midnight. Clicking only writes the draft and moves to that month; Apply is still required. The preset equal to the draft is current (aria-pressed). The library receives absolute ranges computed by the application and never computes relative dates itself.
 - name / form: string. Confirmed endpoints submit local YYYY-MM-DD under name.from and name.to. Field may provide the name; the two date inputs do not submit and the draft never reaches the form.
 - disabled / readOnly: boolean; default false. Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the calendar entry does not open (as in Select). Field disabled blocks the same actions. Read-only endpoints submit; disabled endpoints are excluded. Read-only shows a Read only note in the boundary. With a confirmed range and while editable, the boundary has a clear action; focus returns to the start input after clearing.
@@ -139,5 +142,36 @@ const presets: DateRangePreset[] = [
 export default function Demo() {
   const [value, setValue] = useState<DateRangeValue | undefined>();
   return <form><Field name="range"><FieldLabel>统计区间</FieldLabel><DateRangePicker value={value} onValueChange={setValue} presets={presets} /></Field></form>;
+}
+```
+
+### 周、月、季、年
+Source: apps/docs/src/content/date-range-picker/demos/04-granularity.tsx
+```tsx
+import { useState } from "react";
+import { DateRangePicker, type DateRangePreset, type DateRangeValue } from "@qingye_lab/ui/components/date-range-picker";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+
+export const meta = { title: "周、月、季、年", titleEn: "Week, month, quarter, year" };
+
+const thisQuarter = (): DateRangeValue => {
+  const now = new Date();
+  const first = Math.floor(now.getMonth() / 3) * 3;
+  return { from: new Date(now.getFullYear(), first, 1), to: new Date(now.getFullYear(), first + 3, 0) };
+};
+const quarters: DateRangePreset[] = [{ label: "本季度", value: thisQuarter }];
+
+export default function Demo() {
+  const [months, setMonths] = useState<DateRangeValue | undefined>({ from: new Date(2026, 1, 1), to: new Date(2026, 3, 30) });
+  return (
+    <form>
+      <FieldGroup className="grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2">
+        <Field name="weeks"><FieldLabel>周</FieldLabel><DateRangePicker granularity="week" defaultValue={{ from: new Date(2026, 9, 26), to: new Date(2026, 10, 8) }} /></Field>
+        <Field name="months"><FieldLabel>月</FieldLabel><DateRangePicker granularity="month" value={months} onValueChange={setMonths} /></Field>
+        <Field name="quarters"><FieldLabel>季度</FieldLabel><DateRangePicker granularity="quarter" presets={quarters} /></Field>
+        <Field name="years"><FieldLabel>年</FieldLabel><DateRangePicker granularity="year" defaultValue={{ from: new Date(2024, 0, 1), to: new Date(2026, 11, 31) }} /></Field>
+      </FieldGroup>
+    </form>
+  );
 }
 ```

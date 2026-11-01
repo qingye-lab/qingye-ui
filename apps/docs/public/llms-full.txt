@@ -2030,7 +2030,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
+Source SHA-256: 71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 
@@ -2038,6 +2038,7 @@ Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
 日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。
 
 ### Notes
+- granularity 不是 day 时，没有传 selected 的 Calendar 自己记住最近一次选择；传了 selected（哪怕是 undefined）就完全由调用方决定。受控值若不在周期起点上，仍整周或整格显示为选中。
 - 本组件不生成原生表单值；用 DatePicker 或在调用方序列化选中日期。
 - 一个月、caption label 与 nav after 是默认布局选择，可通过公共 props 改动。
 - 表面、颜色、圆角与尺寸角色沿用当前主题预设；选中与焦点信号来自真实状态。
@@ -2066,11 +2067,13 @@ Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
 - CalendarProps: type; owner calendar; PASS
 - formatLocalDate: function; owner calendar; PASS; props: Date
 - parseLocalDate: function; owner calendar; PASS; props: string
+- weekRulesFor: function; owner calendar; PASS; props: string
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Calendar
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`（按天，行为不变）。`"week"` 在按天的网格里整行选一周；`"month"` / `"quarter"` / `"year"` 换成对应的格子网格。 非 `"day"` 时只支持 `mode="single"` 与 `mode="range"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。
 - `ref?`: `React.Ref<HTMLDivElement> | undefined`.
 - `render?`: `useRender.ComponentProps<"div">["render"]`.
 - plus 68 inherited (react-day-picker 68); not expanded, see the installed declarations
@@ -2088,6 +2091,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Calendar
 复用安装版 DayPicker 的日期、年月、键盘与选择语义。
 - mode / selected / onSelect / required: DayPickerProps discriminated union. single、multiple、range 各按公开原语类型组合；选中值归调用方，required 限制原语取消选择。
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". 选择的粒度。week 仍是按天的网格，整行选一周；month / quarter / year 换成对应的格子网格（年格一页 12 年）。值仍是 Date：单选为该周期的起点，范围的 from 是首个周期的起点、to 是末个周期的最后一天。非 day 时只支持 single 与 range；周的起始日与第 1 周的规则取自区域（weekStartsOn / firstWeekContainsDate 优先），无区域信息时周一起始、第 1 周至少 4 天（ISO 8601）。
 - month / defaultMonth / onMonthChange: Date / Date / (month: Date) => void. 受控或非受控年月导航；未指定时采用 DayPicker 当前月份默认值。
 - disabled / hidden / startMonth / endMonth: DayPicker public props. 明确不可选日期、隐藏日期与导航范围。disabled 不替调用方纠正已有选中值。
 - min / max / excludeDisabled: range mode: number / number / boolean. 范围长度与跨禁用日期的规则由调用方显式声明。默认允许同日完整范围。
@@ -2102,6 +2106,7 @@ Written descriptions; the list above is the type-resolved fact.
 安装版 @daypicker/react 命名空间。
 
 ### Keyboard
+- Arrow keys / Home / End / PageUp / PageDown（月、季、年格）: 方向键按格移动；Home / End 到一行的头尾；PageUp / PageDown 翻一页（月、季为一年，年格为 12 年）。
 - Arrow keys / Home / End: 由日期原语在真实日历网格中移动焦点。
 - PageUp / PageDown: 按日期原语规则导航年月。
 - Enter / Space: 选择聚焦日期，遵守 disabled 与当前选择模式。
@@ -2119,7 +2124,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 卡片 Card
 
@@ -4287,7 +4292,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5
+Source SHA-256: 2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850
 
 编辑一个当地日期，或展开日历选择。
 
@@ -4295,6 +4300,7 @@ Source SHA-256: 4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5
 value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。
 
 ### Notes
+- granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。
 - 日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。
 - 日历选择完成后关闭；调用方拒绝变更时原日期仍保留。
 - 没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。
@@ -4323,10 +4329,11 @@ value 是调用方持有的当地 Date。输入和日历选择只请求变更；
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DatePicker
-- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required">`.
+- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required" | "granularity">`.
 - `defaultValue?`: `Date | undefined`. 非受控的初值，原生表单 reset 会回到它。
 - `disabled?`: `boolean`.
 - `form?`: `string | undefined`.
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`，规范为该周期的起点（周：区域的周起始日；月、季、年：当月 / 季 / 年的第一天）； 输入框改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 提交的 `name` 仍是周期起点的 ISO 日期。
 - `inputProps?`: `Omit<InputProps, "value" | "defaultValue" | "type" | "size" | "name" | "form" | "disabled" | "readOnly" | "onValueChange">`.
 - `max?`: `Date | undefined`.
 - `min?`: `Date | undefined`. 可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。 与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。
@@ -4349,6 +4356,7 @@ Written descriptions; the list above is the type-resolved fact.
 当前 Input、Button、Popover、Calendar 的单日期组合。
 - value / defaultValue / onValueChange: Date | undefined / Date | undefined / (value, event) => void. 传了 value 属性（含 value={undefined}，表示空）即受控：调用方接受回调才改变事实。不传 value 则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。有效年份为 1–9999。
 - min / max: Date. 一处声明最早 / 最晚日期，同时写入原生输入的 min / max 与日历的禁用范围和可翻到的月份。与 inputProps.min/max、calendarProps.disabled/startMonth/endMonth 并存，同时给出时取交集；交集为空时开发环境警告（2026-10-12）。
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". 选择的粒度。非 day 时输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」「2026 年第 4 季度」），键入在失焦或回车时采纳，空文本清除，解析不了的文字留在输入里并标为未填完整（复用 dateIncomplete / dateOutOfRange 提示）。value 是周期的起点（传入的非边界日期显示为所在周期）；min / max 与周期有交集即可选；name 提交的是 ISO 日期。
 - name / form: string. 真实 date input 参与原生 FormData；Field name 可提供共同命名。序列化为当地 YYYY-MM-DD。
 - disabled / readOnly: boolean; default false. 阻止输入与附属选择/清除；Field 禁用同样约束动作。只读值提交，禁用值不提交；只读时边界内给出「只读」说明（与 Input 同一机制）。
 - inputProps: Input props except owned value/type/name/form/state. ref/render/ARIA/events/min/max/step/required 属于真实 date input。onChange 的 preventDefault 或 preventBaseUIHandler 可取消请求。
@@ -4374,14 +4382,14 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 日期范围 DateRangePicker
 
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
+Source SHA-256: 50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -4389,6 +4397,7 @@ Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
 只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。
 
 ### Notes
+- granularity 不是 day 时，未能解析的文字留在输入里，整个字段在焦点离开后按未填完整处理；两端的顺序按周期比较，同一周期的起止是合法的。
 - 两个日期输入是原生输入，显示格式随浏览器；键入与日历共用一份草稿，互相同步。
 - 每次打开从当前输入内容建立草稿；没有默认业务长度或自动纠正。
 - 只读时不开弹层：值在、可聚焦、可读出，不能改。
@@ -4420,11 +4429,12 @@ Source SHA-256: bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### DateRangePicker
-- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required"> & { min?: number; max?: number; excludeDisabled?: boolean }`.
+- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required" | "granularity"> & { min?: number; max?: number; excludeDisabled?: boolean }`.
 - `defaultValue?`: `DateRangeValue | undefined`. 非受控的初值，原生表单 reset 会回到它。
 - `disabled?`: `boolean`.
 - `endInputProps?`: `NativeInputProps`. 终点日期输入。
 - `form?`: `string | undefined`.
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
 - `inputProps?`: `NativeInputProps`. 起点日期输入（也是 Field 标签指向的输入）。
 - `max?`: `Date | undefined`.
 - `min?`: `Date | undefined`. 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。
@@ -4450,6 +4460,7 @@ Written descriptions; the list above is the type-resolved fact.
 - value / defaultValue / onValueChange: { from: Date; to: Date } | undefined / same / (value, event) => void. 传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它，onValueChange 可省。起点须不晚于终点；清除请求 undefined，不生成缺端点提交值。
 - onInvalid: (draft: { from?: Date; to?: Date }, reason: "incomplete" | "order" | "bounds" | "length" | "disabled") => void. 草稿无法提交：只填一端（incomplete）、起点晚于终点（order）、超出 min / max（bounds）、天数不合 calendarProps 的 min / max（length）、端点落在禁用日或 excludeDisabled 时跨过禁用日（disabled）——与日历点选执行同一组规则。只在焦点离开整个字段且弹层关闭后通知，同时两个输入标 aria-invalid；键入是逐段进行的，过程中的暂时状态不算。库不写文案，应用用 FieldError 说明。
 - min / max: Date. 一处声明最早 / 最晚日期，同时写入两个原生输入与日历的禁用范围、可翻到的月份，并使超出范围的预设不可点。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". 选择的粒度。非 day 时 from 是首个周期的起点、to 是末个周期的最后一天（传入的值与 presets 都会被规范到这两个日子）；两个输入改为文本，按区域格式显示与解析，失焦或回车时采纳；min / max 与周期有交集即可选。此时 calendarProps.min / max（天数限制）与 excludeDisabled 不再适用，name.from / name.to 提交 ISO 日期。
 - presets: readonly { label: string; value: DateRangeValue | (() => DateRangeValue) }[]. 常用范围，显示在日历旁。函数形式在每次打开弹层时求值（「近 7 日」不会因页面跨过午夜而陈旧）；点击只写入草稿并翻到该月，仍须应用。草稿恰等于某一项时该项为当前（aria-pressed）。库只接收应用算好的绝对区间，不自己算相对日期。
 - name / form: string. 确认端点序列化为 name.from 与 name.to 的当地 YYYY-MM-DD。Field 可提供 name；两个日期输入本身不提交，草稿不入表单。
 - disabled / readOnly: boolean; default false. 禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，日历入口也不开（与 Select 一致）。Field 禁用同样约束附属动作。只读确认端点仍提交，禁用排除。只读时边界内给出「只读」说明。确认范围非空且可编辑时，边界内有清除动作，清除后焦点回到起点输入。
@@ -4476,7 +4487,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 日期时间 DateTimePicker
 
