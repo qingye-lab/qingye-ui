@@ -82,3 +82,10 @@ test("the swipe area is a real part that opens the drawer's side without being a
   expect(area).not.toHaveAttribute("tabindex");
   expect(screen.queryByRole("dialog")).toBeNull();
 });
+
+test("an explicit initialFocus ref overrides DOM control order", async () => {
+  const user = userEvent.setup(); const title = createRef<HTMLHeadingElement>();
+  render(<Drawer swipeDirection="right"><DrawerTrigger>查看</DrawerTrigger><DrawerPopup initialFocus={title}><DrawerClose>关闭</DrawerClose><DrawerTitle ref={title} tabIndex={-1}>任务</DrawerTitle><Input aria-label="备注" /></DrawerPopup></Drawer>);
+  await user.click(screen.getByRole("button", { name: "查看" }));
+  await waitFor(() => expect(title.current).toHaveFocus());
+});
