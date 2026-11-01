@@ -2,8 +2,8 @@
 
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
-import { IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
+import { BusyMark } from "../busy-mark";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -163,11 +163,7 @@ export function Button({
         <span className={cn("inline-flex min-w-0 items-center justify-center gap-(--qy-control-content-gap) whitespace-normal", loading && "opacity-0")} data-slot="button-content">
           {children}
         </span>
-        {loading && (
-          <span aria-hidden="true" className="pointer-events-none absolute inline-flex shrink-0 items-center" data-slot="button-loading">
-            <IconLoader2 className="qy-spin size-[1em]" />
-          </span>
-        )}
+        {loading && <BusyMark className="absolute" data-slot="button-loading" />}
       </ButtonPrimitive>
       {/* 忙碌对读屏的说法：不可见、不占位（绝对定位，不进入调用方的 flex 间距），由 aria-describedby 关联到按钮。 */}
       {loading && <span aria-atomic="true" aria-live="polite" className="sr-only" data-slot="button-loading-status" id={statusId} role="status">{messages.buttonInProgress}</span>}

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:27:37.863Z",
-  "revision": "bbb22a3609845781df6e5a6205024f86769365bb",
+  "generatedAt": "2026-11-01T05:30:39.971Z",
+  "revision": "44659e90cf91616b40dfe4b47422e39c0341c62a",
   "fingerprint": {
-    "sha256": "83296610d55b21b47d850437860bbf4cb3aec55bfe1fad1cbdba2727f0c1bf3a",
+    "sha256": "977dde558eaee039fe6ca489ca2c3b7268f0a411b45bccaf59ef19985035f2b9",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -28,7 +28,7 @@
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
-        "sha256": "edc3c18f4840baec99ba481baa4b0fc0041bea2b8dc0aa145862069d50d92227"
+        "sha256": "329214bdd9edf984fa4512764b275f5b68f85b3842175a6e0096f2d846803829"
       },
       {
         "path": "apps/docs/src/content/avatar-group/meta.ts",
@@ -204,7 +204,7 @@
       },
       {
         "path": "apps/docs/src/content/input-group/meta.ts",
-        "sha256": "6bac56c809b323cbb62605837774b642346f415bda9b99fbe7fa6259f8470756"
+        "sha256": "9e39e7fdb35a9c3992e16fb13fff3817edf586cac35d0cf506bc91b833d5abcf"
       },
       {
         "path": "apps/docs/src/content/input-modality-provider/meta.ts",
@@ -256,7 +256,7 @@
       },
       {
         "path": "apps/docs/src/content/number-field/meta.ts",
-        "sha256": "828b45803051645264aa347e586acb01920233d289c47b4659cacb7ce4762bc4"
+        "sha256": "4863a27b230771e056a593f52c6e43a7dacf181e4b7a3d7be55e0b886dd97dc2"
       },
       {
         "path": "apps/docs/src/content/otp-field/meta.ts",
@@ -332,7 +332,7 @@
       },
       {
         "path": "apps/docs/src/content/select/meta.ts",
-        "sha256": "263ccfe689d814a7940694769434794e078fed1304c187631cf392f20b9f9700"
+        "sha256": "7faf64cfd5dfa766dea85dc69446b222869bcae6db0e38b7e204aab322430ca8"
       },
       {
         "path": "apps/docs/src/content/separator/meta.ts",
@@ -392,7 +392,7 @@
       },
       {
         "path": "apps/docs/src/content/textarea/meta.ts",
-        "sha256": "f9a7bae292db93d36ead359abb567c82562163587ed3862eea2e24601a2dfffa"
+        "sha256": "2e05f6026aaab20095a1e804bab48bfdcc8c597814dd697c0e5958c8707c1d31"
       },
       {
         "path": "apps/docs/src/content/theme-provider/meta.ts",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "b20c15fb09ea205993986a2c20a01b4122f65efbcfc46127e29fe11bfd83c8a0"
+        "sha256": "a2a10ca6ba21fcc8fc8b5d9850aa3490551a9213ff69bc442ae05135d475b6b6"
       },
       {
         "path": "packages/ui/motion.css",
@@ -508,7 +508,7 @@
       },
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968"
+        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7"
       },
       {
         "path": "packages/ui/src/components/avatar-group.tsx",
@@ -536,7 +536,7 @@
       },
       {
         "path": "packages/ui/src/components/button.tsx",
-        "sha256": "efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa"
+        "sha256": "60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4"
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
@@ -684,7 +684,7 @@
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
-        "sha256": "d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02"
+        "sha256": "530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f"
       },
       {
         "path": "packages/ui/src/components/input-modality-provider.tsx",
@@ -736,7 +736,7 @@
       },
       {
         "path": "packages/ui/src/components/number-field.tsx",
-        "sha256": "d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660"
+        "sha256": "dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727"
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
@@ -796,7 +796,7 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005"
+        "sha256": "0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
@@ -812,7 +812,7 @@
       },
       {
         "path": "packages/ui/src/components/select.tsx",
-        "sha256": "b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b"
+        "sha256": "048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5"
       },
       {
         "path": "packages/ui/src/components/separator.tsx",
@@ -872,7 +872,7 @@
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
-        "sha256": "e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9"
+        "sha256": "25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa"
       },
       {
         "path": "packages/ui/src/components/theme-provider.tsx",
@@ -2271,7 +2271,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 23
+            "line": 34
           }
         },
         {
@@ -2279,7 +2279,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 42
+            "line": 59
           }
         },
         {
@@ -2287,7 +2287,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 84
+            "line": 103
           }
         },
         {
@@ -2295,7 +2295,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 29
+            "line": 40
           }
         },
         {
@@ -2303,7 +2303,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 64
+            "line": 82
           }
         },
         {
@@ -2311,7 +2311,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 72
+            "line": 91
           }
         },
         {
@@ -2319,7 +2319,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 76
+            "line": 95
           }
         },
         {
@@ -2327,7 +2327,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 32
+            "line": 48
           }
         },
         {
@@ -2335,7 +2335,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 60
+            "line": 78
           }
         },
         {
@@ -2343,7 +2343,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 20
+            "line": 22
           }
         },
         {
@@ -2351,7 +2351,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 57
+            "line": 74
           }
         },
         {
@@ -2359,7 +2359,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 50
+            "line": 67
           }
         },
         {
@@ -2367,7 +2367,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 48
+            "line": 65
           }
         },
         {
@@ -2376,7 +2376,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 94
+            "line": 116
           }
         },
         {
@@ -2384,7 +2384,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 21
+            "line": 23
           }
         },
         {
@@ -2392,7 +2392,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 80
+            "line": 99
           }
         },
         {
@@ -2400,7 +2400,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 90
+            "line": 110
           }
         },
         {
@@ -2408,7 +2408,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 85
+            "line": 104
           }
         },
         {
@@ -2416,7 +2416,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 36
+            "line": 53
           }
         }
       ],
@@ -2477,6 +2477,13 @@
                 "type": "Base UI Root props",
                 "description": "实际 Input 与 Field 注册一次，FormData 提交自由文本；只读提交、禁用排除。",
                 "descriptionEn": "The actual input registers Field once and submits free text. Read-only submits; disabled is excluded."
+              },
+              {
+                "name": "loading",
+                "type": "boolean",
+                "default": "false",
+                "description": "建议正在取回的事实，与 ComboboxSelect 同一套候选状态：输入框末端出现忙碌标记，输入与列表标 aria-busy，AutocompleteStatus 播报「正在加载」，AutocompleteEmpty 此时不出声（等待不是「没有结果」）。输入始终可用；组件不发请求。",
+                "descriptionEn": "The fact that suggestions are being fetched, using the same candidate status as ComboboxSelect: a busy mark appears at the end of the input, the input and list carry aria-busy, AutocompleteStatus announces the loading text, and AutocompleteEmpty stays silent meanwhile (waiting is not no results). Input stays usable; the component sends no request."
               },
               {
                 "name": "open / defaultOpen / onOpenChange",
@@ -2603,11 +2610,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 23
+              "line": 34
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 23
+              "line": 34
             },
             "status": "PRESENT"
           },
@@ -2616,11 +2623,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 29
+              "line": 40
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 29
+              "line": 40
             },
             "status": "PRESENT"
           },
@@ -2629,11 +2636,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 32
+              "line": 48
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 32
+              "line": 48
             },
             "status": "PRESENT"
           },
@@ -2642,11 +2649,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 36
+              "line": 53
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 36
+              "line": 53
             },
             "status": "PRESENT"
           },
@@ -2655,11 +2662,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 42
+              "line": 59
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 42
+              "line": 59
             },
             "status": "PRESENT"
           },
@@ -2668,11 +2675,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 50
+              "line": 67
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 50
+              "line": 67
             },
             "status": "PRESENT"
           },
@@ -2681,11 +2688,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 57
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 57
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -2694,11 +2701,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 60
+              "line": 78
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 60
+              "line": 78
             },
             "status": "PRESENT"
           },
@@ -2707,11 +2714,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 72
+              "line": 91
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 72
+              "line": 91
             },
             "status": "PRESENT"
           },
@@ -2720,11 +2727,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 76
+              "line": 95
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 76
+              "line": 95
             },
             "status": "PRESENT"
           },
@@ -2733,11 +2740,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 80
+              "line": 99
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 80
+              "line": 99
             },
             "status": "PRESENT"
           },
@@ -2746,11 +2753,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 84
+              "line": 103
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 84
+              "line": 103
             },
             "status": "PRESENT"
           },
@@ -2759,11 +2766,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 64
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 64
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -2772,11 +2779,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 90
+              "line": 110
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 90
+              "line": 110
             },
             "status": "PRESENT"
           },
@@ -2785,11 +2792,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 94
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 94
+              "line": 116
             },
             "status": "PRESENT"
           }
@@ -4479,7 +4486,7 @@
           "target": "Button",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 178
+            "line": 174
           }
         },
         {
@@ -4711,11 +4718,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 178
+              "line": 174
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 178
+              "line": 174
             },
             "status": "PRESENT"
           },
@@ -16618,7 +16625,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 27
+            "line": 55
           }
         },
         {
@@ -16626,7 +16633,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 41
+            "line": 89
           }
         },
         {
@@ -16634,7 +16641,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 12
+            "line": 24
           }
         },
         {
@@ -16642,7 +16649,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 61
+            "line": 149
           }
         },
         {
@@ -16650,7 +16657,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 56
+            "line": 144
           }
         },
         {
@@ -16658,7 +16665,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 50
+            "line": 114
           }
         },
         {
@@ -16666,7 +16673,23 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 13
+            "line": 31
+          }
+        },
+        {
+          "name": "InputGroupNumberField",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 131
+          }
+        },
+        {
+          "name": "InputGroupNumberFieldProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 33
           }
         },
         {
@@ -16674,7 +16697,47 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 11
+            "line": 17
+          }
+        },
+        {
+          "name": "InputGroupSelectTrigger",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 140
+          }
+        },
+        {
+          "name": "InputGroupSelectTriggerProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 34
+          }
+        },
+        {
+          "name": "InputGroupText",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 102
+          }
+        },
+        {
+          "name": "InputGroupTextarea",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 123
+          }
+        },
+        {
+          "name": "InputGroupTextareaProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/input-group.tsx",
+            "line": 32
           }
         }
       ],
@@ -16690,7 +16753,11 @@
         "exports": [
           "InputGroup",
           "InputGroupAddon",
+          "InputGroupText",
           "InputGroupInput",
+          "InputGroupTextarea",
+          "InputGroupNumberField",
+          "InputGroupSelectTrigger",
           "InputGroupButton"
         ],
         "keywords": [
@@ -16763,11 +16830,32 @@
             "descriptionEn": "A shared editing boundary with no extra field role.",
             "props": [
               {
+                "name": "loading",
+                "type": "boolean",
+                "default": "false",
+                "description": "组内内容正在取回或校验的事实：行尾出现与 Button 同一个忙碌标记，根节点标 aria-busy，并以礼貌的实时区域播报 locale 的「正在加载」。输入不被禁用；组件不发请求。",
+                "descriptionEn": "The fact that content in the group is being fetched or validated: the same busy mark as Button appears at the inline end, the root is marked aria-busy, and the locale's loading text is announced through a polite live region. Inputs stay enabled; the component sends no request."
+              },
+              {
                 "name": "render / ref / 原生属性",
                 "nameEn": "render / ref / native props",
                 "type": "useRender.ComponentProps<div>",
                 "description": "共同边界组合入口。",
                 "descriptionEn": "Composition props for the common boundary."
+              }
+            ]
+          },
+          {
+            "name": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+            "description": "Textarea、NumberField、SelectTrigger 的 unstyled 组合：成员保留原生语义与几何，边框与焦点、悬停、无效、禁用、只读的状态由组统一承担。",
+            "descriptionEn": "Unstyled compositions of Textarea, NumberField and SelectTrigger: members keep their native semantics and geometry while the group draws the border and the focus, hover, invalid, disabled and read-only states.",
+            "props": [
+              {
+                "name": "TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）",
+                "nameEn": "TextareaProps / NumberFieldProps / SelectTriggerProps (except unstyled)",
+                "type": "InputGroupTextareaProps / InputGroupNumberFieldProps / InputGroupSelectTriggerProps",
+                "description": "与独立使用时相同。数值成员内部用 NumberFieldGroup unstyled；选择成员的宽度随候选名称，需要占满剩余宽度时传 className=\"flex-1\"。",
+                "descriptionEn": "Same as standalone use. A number member holds NumberFieldGroup unstyled; a select member's width follows its candidate names, pass className=\"flex-1\" to fill the remaining width."
               }
             ]
           },
@@ -16791,11 +16879,31 @@
             "descriptionEn": "A static span by default, with no tabIndex, focus redirection or automatic name.",
             "props": [
               {
+                "name": "align",
+                "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+                "description": "附件相对成员的位置。省略时按 DOM 顺序在行内排列（与此前一致）；inline-* 把附件固定在行首/行尾；block-* 独占一行，置于成员之上/之下，高度不小于边界内高，用于多行成员的页眉与页脚。",
+                "descriptionEn": "Where the addon sits relative to the members. Omitted, it follows DOM order inline (unchanged); inline-* pins it to the line start/end; block-* takes a full row above/below the members with at least the inner height, for headers and footers of multiline members."
+              },
+              {
                 "name": "render / ref / 原生属性",
                 "nameEn": "render / ref / native props",
                 "type": "useRender.ComponentProps<span>",
                 "description": "单位、前缀、图标等静态内容的承载位。",
                 "descriptionEn": "A position for static content: units, prefixes, icons."
+              }
+            ]
+          },
+          {
+            "name": "InputGroupText",
+            "description": "附件内的静态文字（单位、分隔、计数）：只承担文字样式，不抢焦点。",
+            "descriptionEn": "Static text inside an addon (unit, separator, count): carries text styling only and never takes focus.",
+            "props": [
+              {
+                "name": "render / ref / 原生属性",
+                "nameEn": "render / ref / native props",
+                "type": "useRender.ComponentProps<span>",
+                "description": "文字承载位。",
+                "descriptionEn": "Carrier for the text."
               }
             ]
           },
@@ -16829,10 +16937,12 @@
           }
         ],
         "notes": [
+          "多个数值成员并置时（如区间），每个输入各自有可访问名称（aria-label），组的整体名称由外层 group 的 aria-labelledby 给出；分隔符用 InputGroupText，它对读屏是普通文字而非名称。",
           "FieldControl 注册组合时传 InputGroupInput nativeInput，避免重复注册。",
           "禁用输入不意味着禁用任意附属动作；应用应声明每个动作的真实状态。"
         ],
         "notesEn": [
+          "When several number members sit side by side (a range), each input has its own accessible name (aria-label) and the outer group supplies the collective name through aria-labelledby; the separator is an InputGroupText, plain text to assistive technology rather than a name.",
           "Use InputGroupInput nativeInput when FieldControl registers the composition, avoiding duplicate registration.",
           "Disabling the input does not disable arbitrary addon actions; the application declares each action's real state."
         ],
@@ -16842,11 +16952,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 27
+              "line": 55
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 27
+              "line": 55
             },
             "status": "PRESENT"
           },
@@ -16855,11 +16965,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 41
+              "line": 89
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 41
+              "line": 89
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "InputGroupText",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 102
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 102
             },
             "status": "PRESENT"
           },
@@ -16868,11 +16991,50 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 50
+              "line": 114
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 50
+              "line": 114
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "InputGroupTextarea",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 123
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 123
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "InputGroupNumberField",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 131
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 131
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "InputGroupSelectTrigger",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 140
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/input-group.tsx",
+              "line": 140
             },
             "status": "PRESENT"
           },
@@ -16881,11 +17043,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 61
+              "line": 149
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 61
+              "line": 149
             },
             "status": "PRESENT"
           }
@@ -20518,7 +20680,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 17
+            "line": 20
           }
         },
         {
@@ -20526,7 +20688,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 83
+            "line": 95
           }
         },
         {
@@ -20534,7 +20696,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 58
+            "line": 66
+          }
+        },
+        {
+          "name": "NumberFieldGroupProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/number-field.tsx",
+            "line": 61
           }
         },
         {
@@ -20542,7 +20712,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 93
+            "line": 105
           }
         },
         {
@@ -20550,7 +20720,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 65
+            "line": 77
           }
         },
         {
@@ -20559,7 +20729,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 103
+            "line": 135
           }
         },
         {
@@ -20568,6 +20738,22 @@
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
             "line": 12
+          }
+        },
+        {
+          "name": "NumberFieldScrubArea",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/number-field.tsx",
+            "line": 123
+          }
+        },
+        {
+          "name": "NumberFieldScrubAreaProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/number-field.tsx",
+            "line": 115
           }
         }
       ],
@@ -20586,6 +20772,7 @@
           "NumberFieldInput",
           "NumberFieldDecrement",
           "NumberFieldIncrement",
+          "NumberFieldScrubArea",
           "NumberFieldPrimitive"
         ],
         "keywords": [
@@ -20635,6 +20822,13 @@
                 "descriptionEn": "Native form semantics. Read-only values submit; disabled values do not."
               },
               {
+                "name": "unstyled",
+                "type": "boolean",
+                "default": "false",
+                "description": "交给 InputGroup 承担边框与状态时使用（见 InputGroupNumberField）：去掉默认宽度与只读提示，其余行为不变。",
+                "descriptionEn": "Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged."
+              },
+              {
                 "name": "locale / format",
                 "type": "Intl.LocalesArgument / Intl.NumberFormatOptions",
                 "description": "显式数字格式；未指定精度时不因聚焦/失焦丢弃外部数值精度。",
@@ -20644,8 +20838,8 @@
           },
           {
             "name": "NumberFieldGroup",
-            "description": "输入与两个步进共享的边界；render/ref/样式与状态透传。",
-            "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state."
+            "description": "输入与两个步进共享的边界；render/ref/样式与状态透传。unstyled 时由外层（InputGroup）画边框。",
+            "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border."
           },
           {
             "name": "NumberFieldInput",
@@ -20664,6 +20858,27 @@
             "name": "NumberFieldDecrement / NumberFieldIncrement",
             "description": "减少/增加原语复用 quiet Button；内建名称来自 locale，按钮不提交表单。",
             "descriptionEn": "Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons."
+          },
+          {
+            "name": "NumberFieldScrubArea",
+            "description": "按住并横向（或纵向）拖动调整数值的区域，通常包住标签。拖动是步进之外的补充，键盘与步进按钮仍是主路径；禁用与只读时不响应拖动，光标也不提示可拖。拖动期间指针被锁定并显示方向光标。",
+            "descriptionEn": "A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.",
+            "props": [
+              {
+                "name": "direction",
+                "type": "\"horizontal\" | \"vertical\"",
+                "default": "\"horizontal\"",
+                "description": "拖动方向。",
+                "descriptionEn": "Drag direction."
+              },
+              {
+                "name": "其余 Base UI ScrubArea 属性",
+                "nameEn": "Other Base UI ScrubArea props",
+                "type": "NumberFieldPrimitive.ScrubArea.Props",
+                "description": "pixelSensitivity、teleportDistance、render、className 等原语属性透传。",
+                "descriptionEn": "pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded."
+              }
+            ]
           },
           {
             "name": "NumberFieldPrimitive",
@@ -20766,11 +20981,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 17
+              "line": 20
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 17
+              "line": 20
             },
             "status": "PRESENT"
           },
@@ -20779,11 +20994,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 58
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 58
+              "line": 66
             },
             "status": "PRESENT"
           },
@@ -20792,11 +21007,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 65
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 65
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -20805,11 +21020,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 83
+              "line": 95
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 83
+              "line": 95
             },
             "status": "PRESENT"
           },
@@ -20818,11 +21033,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 93
+              "line": 105
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 93
+              "line": 105
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "NumberFieldScrubArea",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/number-field.tsx",
+              "line": 123
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/number-field.tsx",
+              "line": 123
             },
             "status": "PRESENT"
           },
@@ -20831,11 +21059,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 103
+              "line": 135
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 103
+              "line": 135
             },
             "status": "PRESENT"
           }
@@ -24806,7 +25034,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 75
+            "line": 43
           }
         },
         {
@@ -24814,7 +25042,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 119
+            "line": 87
           }
         },
         {
@@ -24822,7 +25050,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 118
+            "line": 86
           }
         },
         {
@@ -24830,7 +25058,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 144
+            "line": 112
           }
         },
         {
@@ -24838,7 +25066,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 143
+            "line": 111
           }
         },
         {
@@ -24847,7 +25075,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 148
+            "line": 116
           }
         },
         {
@@ -24863,7 +25091,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 109
+            "line": 77
           }
         },
         {
@@ -24871,7 +25099,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 108
+            "line": 76
           }
         },
         {
@@ -24879,7 +25107,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 124
+            "line": 92
           }
         },
         {
@@ -24887,7 +25115,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 123
+            "line": 91
           }
         },
         {
@@ -24895,7 +25123,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 135
+            "line": 103
           }
         },
         {
@@ -24903,7 +25131,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 134
+            "line": 102
           }
         },
         {
@@ -24911,7 +25139,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 114
+            "line": 82
           }
         },
         {
@@ -24919,7 +25147,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 113
+            "line": 81
           }
         }
       ],
@@ -25114,11 +25342,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 75
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 75
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -25127,11 +25355,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 109
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 109
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -25140,11 +25368,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 114
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 114
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -25153,11 +25381,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 119
+              "line": 87
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 119
+              "line": 87
             },
             "status": "PRESENT"
           },
@@ -25166,11 +25394,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 124
+              "line": 92
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 124
+              "line": 92
             },
             "status": "PRESENT"
           },
@@ -25179,11 +25407,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 135
+              "line": 103
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 135
+              "line": 103
             },
             "status": "PRESENT"
           },
@@ -25192,11 +25420,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 144
+              "line": 112
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 144
+              "line": 112
             },
             "status": "PRESENT"
           },
@@ -25205,11 +25433,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 148
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 148
+              "line": 116
             },
             "status": "PRESENT"
           }
@@ -26100,7 +26328,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 81
+            "line": 101
           }
         },
         {
@@ -26108,7 +26336,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 215
+            "line": 265
           }
         },
         {
@@ -26116,7 +26344,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 219
+            "line": 269
           }
         },
         {
@@ -26124,7 +26352,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 203
+            "line": 253
           }
         },
         {
@@ -26132,7 +26360,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 25
+            "line": 29
           }
         },
         {
@@ -26140,7 +26368,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 173
+            "line": 223
           }
         },
         {
@@ -26148,7 +26376,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 26
+            "line": 30
           }
         },
         {
@@ -26157,7 +26385,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 223
+            "line": 273
           }
         },
         {
@@ -26165,7 +26393,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -26173,7 +26401,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 105
+            "line": 129
           }
         },
         {
@@ -26181,7 +26409,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 23
+            "line": 24
           }
         },
         {
@@ -26189,7 +26417,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 147
+            "line": 175
           }
         },
         {
@@ -26197,7 +26425,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 24
+            "line": 28
           }
         }
       ],
@@ -26232,9 +26460,16 @@
         "api": [
           {
             "name": "Select",
-            "description": "单值状态与表单语义。",
-            "descriptionEn": "Single-value state and form semantics.",
+            "description": "单值（或 multiple 多值）状态与表单语义。",
+            "descriptionEn": "Single-value (or multiple) state and form semantics.",
             "props": [
+              {
+                "name": "multiple",
+                "type": "boolean",
+                "default": "false",
+                "description": "多选：值是数组，空数组是未选择。不带搜索；选择不关闭候选面，再选一次即取消。每个已选值在表单里各提交一项（同名多值）。触发器按候选顺序列出名称：至多 2 项用分隔符连接，更多时显示「第一项及其余 N 项」，让触发器始终回答「选了什么」而不是「选了几个」。没有独立的清除件，取消勾选或受控地置为 []。",
+                "descriptionEn": "Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that \"first and N more\", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to []."
+              },
               {
                 "name": "value / defaultValue",
                 "type": "Value | null",
@@ -26310,6 +26545,13 @@
                 "type": "ReactNode",
                 "description": "省略时提供 SelectValue；内含展开图标。",
                 "descriptionEn": "Defaults to SelectValue with a disclosure icon."
+              },
+              {
+                "name": "unstyled",
+                "type": "boolean",
+                "default": "false",
+                "description": "交给 InputGroup 画边框与状态时使用（见 InputGroupSelectTrigger）；触发器保留几何与原生语义。",
+                "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics."
               },
               {
                 "name": "render / ref / className / style / ARIA",
@@ -26411,8 +26653,8 @@
           },
           {
             "name": "SelectPrimitive",
-            "description": "完整 Base UI Select 原语出口；公共 Select 接口始终为单值。",
-            "descriptionEn": "The complete public Base UI Select primitive; public Select remains single-value."
+            "description": "完整 Base UI Select 原语出口。",
+            "descriptionEn": "The complete public Base UI Select primitive."
           }
         ],
         "keyboard": [
@@ -26436,6 +26678,12 @@
             "keysEn": "Typing",
             "description": "类型搜索；展开时高亮匹配项，关闭时原语可直接选择匹配值。",
             "descriptionEn": "Typeahead highlights matches while open; the closed primitive may select a matching value directly."
+          },
+          {
+            "keys": "Enter / Space（multiple）",
+            "keysEn": "Enter / Space (multiple)",
+            "description": "在高亮项上切换选中，候选面保持展开；Esc 关闭。",
+            "descriptionEn": "Toggle the highlighted item while the popup stays open; Esc closes."
           },
           {
             "keys": "Esc",
@@ -26529,11 +26777,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 81
+              "line": 101
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 81
+              "line": 101
             },
             "status": "PRESENT"
           },
@@ -26542,11 +26790,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 105
+              "line": 129
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 105
+              "line": 129
             },
             "status": "PRESENT"
           },
@@ -26555,11 +26803,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 147
+              "line": 175
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 147
+              "line": 175
             },
             "status": "PRESENT"
           },
@@ -26568,11 +26816,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 173
+              "line": 223
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 173
+              "line": 223
             },
             "status": "PRESENT"
           },
@@ -26581,11 +26829,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 203
+              "line": 253
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 203
+              "line": 253
             },
             "status": "PRESENT"
           },
@@ -26594,11 +26842,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 215
+              "line": 265
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 215
+              "line": 265
             },
             "status": "PRESENT"
           },
@@ -26607,11 +26855,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 219
+              "line": 269
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 219
+              "line": 269
             },
             "status": "PRESENT"
           },
@@ -26620,11 +26868,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 223
+              "line": 273
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 223
+              "line": 273
             },
             "status": "PRESENT"
           }
@@ -31057,7 +31305,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/textarea.tsx",
-            "line": 19
+            "line": 24
           }
         },
         {
@@ -31066,7 +31314,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/textarea.tsx",
-            "line": 76
+            "line": 88
           }
         },
         {
@@ -31142,6 +31390,19 @@
                 "type": "number",
                 "description": "浏览器执行的字符长度上限，不由计数文案实施限制。",
                 "descriptionEn": "Browser-enforced maximum text length; count text does not enforce it."
+              },
+              {
+                "name": "unstyled",
+                "type": "boolean",
+                "default": "false",
+                "description": "交给 InputGroup 画边框与状态时使用（见 InputGroupTextarea）：不画框、不显示只读提示，保留自动增高与原生编辑。",
+                "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay."
+              },
+              {
+                "name": "controlClassName",
+                "type": "string",
+                "description": "外层控制容器的样式入口；className 仍属于实际 textarea。",
+                "descriptionEn": "Styling entry for the outer control wrapper; className still belongs to the actual textarea."
               },
               {
                 "name": "render / ref / className / style",
@@ -31246,11 +31507,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/textarea.tsx",
-              "line": 19
+              "line": 24
             },
             "rootEntry": {
               "path": "packages/ui/src/components/textarea.tsx",
-              "line": 19
+              "line": 24
             },
             "status": "PRESENT"
           },
@@ -31259,11 +31520,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/textarea.tsx",
-              "line": 76
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/textarea.tsx",
-              "line": 76
+              "line": 88
             },
             "status": "PRESENT"
           }

@@ -1,7 +1,7 @@
 "use client";
 
 import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
-import { IconMinus, IconPlus } from "@tabler/icons-react";
+import { IconArrowsHorizontal, IconArrowsVertical, IconMinus, IconPlus } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
@@ -9,12 +9,15 @@ import { fillStateByData } from "../fill-state";
 import { Button } from "./button";
 import { Input } from "./input";
 
-export type NumberFieldProps = Omit<NumberFieldPrimitive.Root.Props, "allowOutOfRange"> & React.RefAttributes<HTMLDivElement>;
+export type NumberFieldProps = Omit<NumberFieldPrimitive.Root.Props, "allowOutOfRange"> & React.RefAttributes<HTMLDivElement> & {
+  /** 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。 */
+  unstyled?: boolean;
+};
 
 /** 直接编辑保留用户值；范围约束由原生校验呈现，步进仍服从范围。
  * 宽度：默认宽度落在根上（`--qy-number-width`，见下），所以要满宽就在 NumberField 上给 `className="w-full"`——
  * 与 Select 的「要拉满由调用方给 w-full」同一写法，不另设 `fullWidth` 属性；Group 恒占满根，二者不会各说各话。 */
-export function NumberField({ className, style, value: valueProp, defaultValue, onValueChange, inputRef, children, ...props }: NumberFieldProps) {
+export function NumberField({ className, style, unstyled = false, value: valueProp, defaultValue, onValueChange, inputRef, children, ...props }: NumberFieldProps) {
   const { messages } = useUILocale();
   const [uncontrolled, setUncontrolled] = React.useState<number | null>(defaultValue ?? null);
   const hiddenRef = React.useRef<HTMLInputElement | null>(null);
@@ -40,7 +43,7 @@ export function NumberField({ className, style, value: valueProp, defaultValue, 
       onValueChange?.(next, details);
       if (!details.isCanceled && valueProp === undefined) setUncontrolled(next);
     }}
-    className={state => cn("min-w-0 w-[min(100%,var(--qy-number-width))]", typeof className === "function" ? className(state) : className)}
+    className={state => cn("min-w-0", !unstyled && "w-[min(100%,var(--qy-number-width))]", typeof className === "function" ? className(state) : className)}
     style={state => ({
       // 几何只读填值控件角色层（用户裁决 2026-10-05）：跟随密度，不选档位。
       "--qy-number-height": "var(--qy-fill-height)",
@@ -51,13 +54,22 @@ export function NumberField({ className, style, value: valueProp, defaultValue, 
     } as React.CSSProperties)}
   >{children}
     {/* 只读说明与 Textarea、OtpField 同一件事、同一档字：值在边界里照常读，说明在边界外；只读本身由 input 的 readonly 向读屏表达，故 aria-hidden。 */}
-    {props.readOnly ? <span data-slot="number-field-readonly" aria-hidden="true" className="mt-(--qy-field-gap) block text-caption text-muted-foreground">{messages.readOnly}</span> : null}
+    {props.readOnly && !unstyled ? <span data-slot="number-field-readonly" aria-hidden="true" className="mt-(--qy-field-gap) block text-caption text-muted-foreground">{messages.readOnly}</span> : null}
   </NumberFieldPrimitive.Root>;
 }
 
-export function NumberFieldGroup({ className, ...props }: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>) {
+export type NumberFieldGroupProps = NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement> & {
+  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */
+  unstyled?: boolean;
+};
+
+export function NumberFieldGroup({ className, unstyled = false, ...props }: NumberFieldGroupProps) {
   return <NumberFieldPrimitive.Group data-slot="number-field-group" {...props} className={state => cn(
-    "flex w-full min-w-0 items-stretch rounded-(--qy-fill-radius) border border-input bg-surface-field text-foreground min-h-(--qy-number-height-narrow) sm:min-h-(--qy-number-height) pointer-coarse:min-h-(--qy-touch-target) transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring not-data-disabled:not-data-readonly:not-data-invalid:not-has-[input:focus-visible]:hover:border-border-strong data-invalid:border-destructive data-invalid:has-[input:focus-visible]:border-destructive-foreground", fillStateByData,
+    "flex w-full min-w-0 items-stretch",
+    unstyled
+      // 边线由外框承担：最小高度 = 外高 − 上下两道线（--qy-line-width），与 Input 的 unstyled 同一关系。
+      ? "min-h-[calc(var(--qy-number-height-narrow)-2*var(--qy-line-width))] sm:min-h-[calc(var(--qy-number-height)-2*var(--qy-line-width))] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2*var(--qy-line-width))]"
+      : ["rounded-(--qy-fill-radius) border border-input bg-surface-field text-foreground min-h-(--qy-number-height-narrow) sm:min-h-(--qy-number-height) pointer-coarse:min-h-(--qy-touch-target) transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) has-[input:focus-visible]:border-ring not-data-disabled:not-data-readonly:not-data-invalid:not-has-[input:focus-visible]:hover:border-border-strong data-invalid:border-destructive data-invalid:has-[input:focus-visible]:border-destructive-foreground", fillStateByData],
     typeof className === "function" ? className(state) : className,
   )} />;
 }
@@ -98,6 +110,26 @@ export function NumberFieldIncrement({ className, children, render, nativeButton
       render={typeof render === "function" ? buttonProps => render(buttonProps, state) : render}
     />}
   >{children ?? <IconPlus aria-hidden="true" />}</NumberFieldPrimitive.Increment>;
+}
+
+export type NumberFieldScrubAreaProps = NumberFieldPrimitive.ScrubArea.Props & React.RefAttributes<HTMLSpanElement>;
+
+/**
+ * 在标签（或任何文字）上按住拖动来改变数值：步进的另一种手势，不是另一个控件。
+ * 放在 NumberField 里，包住标签；禁用与只读时原语不响应拖动，这里同步把指针换回不可拖的样子。
+ * 拖动时系统指针被锁定而隐藏，所以自带一个方向箭头作为指针（图标尺寸读填值图标角色）。
+ * 触屏上手势由本组件接管（touch-none），所以只用在标签上，不要罩住整个字段。
+ */
+export function NumberFieldScrubArea({ className, direction = "horizontal", children, ...props }: NumberFieldScrubAreaProps) {
+  const Arrows = direction === "vertical" ? IconArrowsVertical : IconArrowsHorizontal;
+  return <NumberFieldPrimitive.ScrubArea data-slot="number-field-scrub-area" direction={direction} {...props}
+    className={state => cn("touch-none select-none", direction === "vertical" ? "cursor-ns-resize" : "cursor-ew-resize", "data-disabled:cursor-not-allowed data-readonly:cursor-default", typeof className === "function" ? className(state) : className)}
+  >
+    {children}
+    <NumberFieldPrimitive.ScrubAreaCursor data-slot="number-field-scrub-cursor" className="text-foreground">
+      <Arrows aria-hidden="true" className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" />
+    </NumberFieldPrimitive.ScrubAreaCursor>
+  </NumberFieldPrimitive.ScrubArea>;
 }
 
 export { NumberFieldPrimitive };

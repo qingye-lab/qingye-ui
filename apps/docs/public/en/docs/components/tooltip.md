@@ -54,7 +54,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
@@ -67,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
+Source SHA-256: 048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5
 
 Choose one value from a collapsible set of options.
 
@@ -37,7 +37,7 @@ Highlight marks position; selection changes the value. No selection does not cho
 - Matching text/control dimensions, bordered padding, role colors, and Portal containers.
 
 ## Current exports
-- Select: function; owner select; PASS; props: SelectProps<Value>
+- Select: function; owner select; PASS; props: SelectProps<Value, Multiple>
 - SelectGroup: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.Group>
 - SelectGroupLabel: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.GroupLabel>
 - SelectItem: function; owner select; PASS; props: SelectItemProps
@@ -57,7 +57,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Select
 - `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
 - `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
-- plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
+- plus 24 inherited (@base-ui/react 24); not expanded, see the installed declarations
 
 ### SelectGroup
 - no props declared by this library
@@ -77,7 +77,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
 ### SelectTrigger
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### SelectValue
@@ -91,14 +91,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
 - Context ItemLabels: without a provider default-value; provided by Select
+- Context MultipleState: without a provider default-value; provided by Select
 - Context SourceState: without a provider default-value; provided by Select
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
 
 ### Select
-Single-value state and form semantics.
+Single-value (or multiple) state and form semantics.
+- multiple: boolean; default false. Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that "first and N more", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to [].
 - value / defaultValue: Value | null. Controlled or actual initial value; null means no selection. Omitting an initial value does not choose the first item.
 - items: Record<string, ReactNode> | {value, label}[] | Group[]. Value-to-name mapping; an explicit empty-string candidate also needs a readable label. The trigger is as wide as the longest name, so choosing another item does not resize it.
 - onValueChange: (value, eventDetails) => void. Cancelable selection change; moving the highlight does not change the value.
@@ -113,6 +117,7 @@ Single-value state and form semantics.
 ### SelectTrigger
 A bordered selection entry matching Input's profile.
 - children: ReactNode. Defaults to SelectValue with a disclosure icon.
+- unstyled: boolean; default false. Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics.
 - render / ref / className / style / ARIA: Base UI composition. Retain actual trigger events, names, and styling entries.
 
 ### SelectValue
@@ -138,13 +143,14 @@ Value candidate; highlight marks position and a check marks selection.
 Semantic grouping and group names; the label is drawn from the same source as ComboboxGroupLabel and AutocompleteGroupLabel.
 
 ### SelectPrimitive
-The complete public Base UI Select primitive; public Select remains single-value.
+The complete public Base UI Select primitive.
 
 ## Keyboard
 - Tab: Reach the trigger.
 - Enter / Space / ↑ / ↓: Open candidates; arrows move the highlight while open and Enter/Space select.
 - Home / End: Reach the first/last candidate while open.
 - Typing: Typeahead highlights matches while open; the closed primitive may select a matching value directly.
+- Enter / Space (multiple): Toggle the highlighted item while the popup stays open; Esc closes.
 - Esc: Close and return to the trigger, retaining the original value.
 
 ## Source examples
@@ -312,6 +318,44 @@ export default function Demo() {
         </Field>
       ))}
     </div>
+  );
+}
+```
+
+### 多选
+Source: apps/docs/src/content/select/demos/04-multiple.tsx
+```tsx
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+
+export const meta = { title: "多选", titleEn: "Multiple" };
+
+const labels = [
+  { value: "design", label: "设计" },
+  { value: "frontend", label: "前端" },
+  { value: "backend", label: "后端" },
+  { value: "ops", label: "运维" },
+  { value: "docs", label: "文档" },
+];
+
+export default function Demo() {
+  return (
+    <FieldGroup className="grid w-full items-start sm:grid-cols-2">
+      <Field name="area">
+        <FieldLabel>负责范围</FieldLabel>
+        <Select multiple items={labels} defaultValue={["frontend", "docs"]}>
+          <SelectTrigger />
+          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>
+        </Select>
+      </Field>
+      <Field name="involved">
+        <FieldLabel>参与范围</FieldLabel>
+        <Select multiple items={labels} defaultValue={["design", "frontend", "backend", "docs"]}>
+          <SelectTrigger />
+          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>
+        </Select>
+      </Field>
+    </FieldGroup>
   );
 }
 ```

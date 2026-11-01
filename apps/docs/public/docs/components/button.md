@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa
+Source SHA-256: 60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4
 
 触发有明确对象与后果的动作；状态由调用方持有。
 

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
+Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
 
 Edit an optional number and adjust it by a declared step.
 
@@ -36,17 +36,20 @@ Direct edits outside the range remain intact for native range validation. Steppi
 ## Current exports
 - NumberField: function; owner number-field; PASS; props: NumberFieldProps
 - NumberFieldDecrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>
-- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>
+- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldGroupProps
+- NumberFieldGroupProps: type; owner number-field; PASS
 - NumberFieldIncrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>
 - NumberFieldInput: function; owner number-field; PASS; props: NumberFieldPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - NumberFieldPrimitive: reexport; owner number-field; UNVERIFIED
 - NumberFieldProps: type; owner number-field; PASS
+- NumberFieldScrubArea: function; owner number-field; PASS; props: NumberFieldScrubAreaProps
+- NumberFieldScrubAreaProps: type; owner number-field; PASS
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NumberField
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。
 - plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
 
 ### NumberFieldDecrement
@@ -54,7 +57,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ### NumberFieldGroup
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### NumberFieldIncrement
@@ -64,6 +67,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### NumberFieldInput
 - no props declared by this library
 - plus 308 inherited (@types/react 304, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldScrubArea
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -81,10 +88,11 @@ Primitive context for the numeric value and its editable text.
 - snapOnStep / smallStep / largeStep: boolean / number / number; default false / 0.1 / 10. Snapping and Alt/Shift step sizes are explicit independent options.
 - onValueCommitted: (value, details) => void. A blur or stepping commit reports the end of editing, not persistence.
 - name / form / required / disabled / readOnly: Base UI Root props. Native form semantics. Read-only values submit; disabled values do not.
+- unstyled: boolean; default false. Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged.
 - locale / format: Intl.LocalesArgument / Intl.NumberFormatOptions. Explicit number formatting. Without rounding options, focus and blur preserve external precision.
 
 ### NumberFieldGroup
-Shared boundary for the input and two steppers; forwards render, refs, styling, and state.
+Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border.
 
 ### NumberFieldInput
 Composes the native Input outlet while the number primitive registers Field once.
@@ -92,6 +100,11 @@ Composes the native Input outlet while the number primitive registers Field once
 
 ### NumberFieldDecrement / NumberFieldIncrement
 Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons.
+
+### NumberFieldScrubArea
+A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.
+- direction: "horizontal" | "vertical"; default "horizontal". Drag direction.
+- Other Base UI ScrubArea props: NumberFieldPrimitive.ScrubArea.Props. pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded.
 
 ### NumberFieldPrimitive
 The installed Base UI NumberField namespace.
@@ -146,6 +159,30 @@ export default function Demo() {
         </div>
       ))}
     </FieldGroup>
+  );
+}
+```
+
+### 拖动调值
+Source: apps/docs/src/content/number-field/demos/03-scrub.tsx
+```tsx
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput, NumberFieldScrubArea } from "@qingye_lab/ui/components/number-field";
+
+export const meta = { title: "拖动调值", titleEn: "Scrub to adjust" };
+
+export default function Demo() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-(--qy-field-group-gap) sm:grid-cols-3">
+      {([["可用", {}], ["只读", { readOnly: true }], ["禁用", { disabled: true }]] as const).map(([name, state]) => (
+        <NumberField key={name} defaultValue={12} min={0} max={100} {...state}>
+          <Field>
+            <NumberFieldScrubArea><FieldLabel>{`间距（${name}）`}</FieldLabel></NumberFieldScrubArea>
+            <NumberFieldGroup><NumberFieldInput /></NumberFieldGroup>
+          </Field>
+        </NumberField>
+      ))}
+    </div>
   );
 }
 ```

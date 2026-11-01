@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
+Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
 
 编辑备注、消息等多行文本。
 
@@ -41,7 +41,8 @@ Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Textarea
-- no props declared by this library
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -61,6 +62,8 @@ Written descriptions; the list above is the type-resolved fact.
 - aria-invalid: boolean | 'true' | 'false'. 调用方声明的错误事实；也可由 Field invalid 传入。
 - disabled / readOnly: boolean; default false. 禁用不参与 Tab/提交；只读仍可聚焦和提交，显示已有 locale 的只读文案。
 - maxLength: number. 浏览器执行的字符长度上限，不由计数文案实施限制。
+- unstyled: boolean; default false. 交给 InputGroup 画边框与状态时使用（见 InputGroupTextarea）：不画框、不显示只读提示，保留自动增高与原生编辑。
+- controlClassName: string. 外层控制容器的样式入口；className 仍属于实际 textarea。
 - render / ref / className / style: Base UI render / textarea ref / state-aware styling. 真实 textarea 的组合与样式入口；render 必须保留 textarea 语义、属性及事件。
 
 ### TextareaPrimitive

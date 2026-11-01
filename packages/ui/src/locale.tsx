@@ -79,6 +79,7 @@ export type UILocaleMessages = {
   transferMoveTo: (count: number, title: string) => string; transferMoved: (count: number, title: string) => string;
   transferEmpty: string; transferNoMatch: string;
   composerSubmit: string;
+  selectSeparator: string; selectMore: (rest: number) => string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -154,6 +155,7 @@ export const zhCN: UILocale = {
     transferMoveTo: (count, title) => `将所选 ${count.toLocaleString("zh-CN")} 项移到“${title}”`, transferMoved: (count, title) => `已移到“${title}” ${count.toLocaleString("zh-CN")} 项`,
     transferEmpty: "没有条目", transferNoMatch: "没有匹配项",
     composerSubmit: "发送",
+    selectSeparator: "、", selectMore: (rest) => `及其余 ${rest.toLocaleString("zh-CN")} 项`,
   },
 };
 

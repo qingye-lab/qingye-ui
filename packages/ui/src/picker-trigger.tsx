@@ -128,10 +128,10 @@ export function PickerFormValue({ slot, name, form, value, required, disabled, t
   />)}</>;
 }
 
-/** 多选的触发器最多点名几项；超出写「首项及其余 N 项」。预设：两个名字在常见触发器宽度内通常不被截断。TreeSelect、Cascader 共用，所以多选的读法一致。 */
-const NAMED = 2;
+/** 多选的触发器最多点名几项；超出写「首项及其余 N 项」。预设：两个名字在常见触发器宽度内通常不被截断。Select、TreeSelect、Cascader 共用，所以多选的读法一致。 */
+export const PICKER_NAMED = 2;
 /** 多选触发器的值文字；没有已选项返回 null（显示 placeholder）。 */
 export function pickerSummary(names: readonly string[], messages: Pick<UILocaleMessages, "treeSelectSeparator" | "treeSelectMore">): string | null {
   if (names.length === 0) return null;
-  return names.length <= NAMED ? names.join(messages.treeSelectSeparator) : messages.treeSelectMore(names[0]!, names.length - 1);
+  return names.length <= PICKER_NAMED ? names.join(messages.treeSelectSeparator) : messages.treeSelectMore(names[0]!, names.length - 1);
 }

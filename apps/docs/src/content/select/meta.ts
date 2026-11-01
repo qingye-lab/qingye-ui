@@ -7,7 +7,8 @@ export default {
   exports: ["Select", "SelectTrigger", "SelectValue", "SelectPopup", "SelectItem", "SelectGroup", "SelectGroupLabel", "SelectPrimitive"],
   keywords: ["dropdown", "combobox", "picker", "选择", "下拉", "下拉选择", "选项"],
   api: [
-    { name: "Select", description: "单值状态与表单语义。", descriptionEn: "Single-value state and form semantics.", props: [
+    { name: "Select", description: "单值（或 multiple 多值）状态与表单语义。", descriptionEn: "Single-value (or multiple) state and form semantics.", props: [
+      { name: "multiple", type: "boolean", default: "false", description: "多选：值是数组，空数组是未选择。不带搜索；选择不关闭候选面，再选一次即取消。每个已选值在表单里各提交一项（同名多值）。触发器按候选顺序列出名称：至多 2 项用分隔符连接，更多时显示「第一项及其余 N 项」，让触发器始终回答「选了什么」而不是「选了几个」。没有独立的清除件，取消勾选或受控地置为 []。", descriptionEn: "Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that \"first and N more\", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to []." },
       { name: "value / defaultValue", type: "Value | null", description: "受控值或真实初值，null 是未选择。省略初值不会选第一项。", descriptionEn: "Controlled or actual initial value; null means no selection. Omitting an initial value does not choose the first item." },
       { name: "items", type: "Record<string, ReactNode> | {value, label}[] | Group[]", description: "值到名称的映射；显式空字符串候选也要提供可读 label。触发器宽度由其中最长的名称决定，选另一项时不会伸缩。", descriptionEn: "Value-to-name mapping; an explicit empty-string candidate also needs a readable label. The trigger is as wide as the longest name, so choosing another item does not resize it." },
       { name: "onValueChange", type: "(value, eventDetails) => void", description: "选择变化，可取消；不因高亮移动而改变值。", descriptionEn: "Cancelable selection change; moving the highlight does not change the value." },
@@ -21,6 +22,7 @@ export default {
     ] },
     { name: "SelectTrigger", description: "有边框的选择入口，与 Input 同档。", descriptionEn: "A bordered selection entry matching Input's profile.", props: [
       { name: "children", type: "ReactNode", description: "省略时提供 SelectValue；内含展开图标。", descriptionEn: "Defaults to SelectValue with a disclosure icon." },
+      { name: "unstyled", type: "boolean", default: "false", description: "交给 InputGroup 画边框与状态时使用（见 InputGroupSelectTrigger）；触发器保留几何与原生语义。", descriptionEn: "Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics." },
       { name: "render / ref / className / style / ARIA", type: "Base UI composition", description: "保留真实触发器的事件、名称和样式入口。", descriptionEn: "Retain actual trigger events, names, and styling entries." },
     ] },
     { name: "SelectValue", description: "真实当前值名称与未选择占位。", descriptionEn: "The actual current value name and no-selection placeholder.", props: [
@@ -40,13 +42,14 @@ export default {
       { name: "children / render / ref / className / style", type: "Base UI Item props", description: "名称内容自动进入 ItemText，选中勾标单独呈现。", descriptionEn: "Name content enters ItemText automatically; the selection check is separate." },
     ] },
     { name: "SelectGroup / SelectGroupLabel", description: "语义分组与组名称；组名画法与 ComboboxGroupLabel、AutocompleteGroupLabel 同一来源。", descriptionEn: "Semantic grouping and group names; the label is drawn from the same source as ComboboxGroupLabel and AutocompleteGroupLabel." },
-    { name: "SelectPrimitive", description: "完整 Base UI Select 原语出口；公共 Select 接口始终为单值。", descriptionEn: "The complete public Base UI Select primitive; public Select remains single-value." },
+    { name: "SelectPrimitive", description: "完整 Base UI Select 原语出口。", descriptionEn: "The complete public Base UI Select primitive." },
   ],
   keyboard: [
     { keys: "Tab", description: "进入触发器。", descriptionEn: "Reach the trigger." },
     { keys: "Enter / Space / ↑ / ↓", description: "打开候选；展开后方向键移动高亮，Enter/Space 选择。", descriptionEn: "Open candidates; arrows move the highlight while open and Enter/Space select." },
     { keys: "Home / End", description: "展开时移动到首/尾候选。", descriptionEn: "Reach the first/last candidate while open." },
     { keys: "文字键", keysEn: "Typing", description: "类型搜索；展开时高亮匹配项，关闭时原语可直接选择匹配值。", descriptionEn: "Typeahead highlights matches while open; the closed primitive may select a matching value directly." },
+    { keys: "Enter / Space（multiple）", keysEn: "Enter / Space (multiple)", description: "在高亮项上切换选中，候选面保持展开；Esc 关闭。", descriptionEn: "Toggle the highlighted item while the popup stays open; Esc closes." },
     { keys: "Esc", description: "关闭并回到触发器，保留原值。", descriptionEn: "Close and return to the trigger, retaining the original value." },
   ],
   notes: ["FieldLabel 命名触发器，FieldError 关联错误；SelectGroupLabel 命名候选分组。", "null 是未选择，空字符串（\"\"）和 0 都是合法的候选值。选了值为 \"\" 的候选，触发器显示它的 label，不显示占位，data-placeholder 也不出现；null 才显示占位。用 \"\" 表示「不限」「无」这类真实选项时，要在 items 里给它可读的 label。注意原生表单会把 null 与 \"\" 都序列化为空字符串，服务端需要区分时用别的值，或在应用侧另存选择与否。", "只读保留当前值并在触发器上给出「只读」说明，禁用项不能选取。", "触发器默认不拉满容器；要拉满时给 SelectTrigger className=\"w-full\"。没有 items 时无法预知候选名称，宽度只随当前显示的内容。", "候选来自请求时：用 loading 表示请求中，用 error 放入失败说明与重试动作；没有子项且二者皆无才显示「没有可选项」。", "自身 Positioner 消费共享 popup 层级，父工作面内候选高于该工作面；positionerProps 保留调用方 style/ref/render。"], notesEn: ["FieldLabel names the trigger, FieldError associates errors, and SelectGroupLabel names candidate groups.","null is no selection; the empty string (\"\") and zero are both valid candidate values. Selecting a candidate whose value is \"\" shows its label in the trigger, not the placeholder, and data-placeholder is absent; only null shows the placeholder. When \"\" stands for a real option such as \"Any\" or \"None\", give it a readable label in items. Native forms serialize both null and \"\" as an empty string; when the server must tell them apart, use another value or keep the has-chosen fact in the application.","Read-only retains the current value and shows a read-only note on the trigger; disabled candidates cannot be selected.","The trigger does not fill its container by default; pass className=\"w-full\" to SelectTrigger to do so. Without items the candidate names are unknown, so the width follows only what is displayed.","For request-backed candidates, use loading while the request runs and error for the failure explanation and retry action; \"No options\" appears only with no children and neither state.","Its Positioner consumes shared popup layers; candidates inside a parent workspace sit above it. positionerProps retain caller styles/refs/render."],

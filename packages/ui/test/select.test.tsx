@@ -335,3 +335,61 @@ test("the trigger reserves room for every candidate without duplicating text or 
   expect(screen.getByRole("combobox", { name: "选项" })).toHaveTextContent("请选择");
   expect(screen.getByRole("combobox", { name: "选项" }).textContent).toBe("请选择");
 });
+
+test("multiple: choosing several values keeps the popup open, serializes each value and summarizes in candidate order", async () => {
+  const user = userEvent.setup();
+  const { container } = render(<form><Select multiple name="tags" items={items}><SelectTrigger aria-label="标签" /><SelectPopup><Options /></SelectPopup></Select></form>);
+  const trigger = screen.getByRole("combobox", { name: "标签" });
+  expect(trigger).toHaveTextContent("请选择");
+  await user.click(trigger);
+  await user.click(await screen.findByRole("option", { name: "Charlie" }));
+  await user.click(screen.getByRole("option", { name: "Alpha" }));
+  // 多选选完一项不关闭候选面，选项带勾（aria-selected）。
+  expect(screen.getByRole("option", { name: "Alpha" })).toHaveAttribute("aria-selected", "true");
+  expect(screen.getByRole("listbox")).toBeInTheDocument();
+  expect(new FormData(container.querySelector("form")!).getAll("tags").sort()).toEqual(["alpha", "charlie"]);
+  // 先点的 Charlie，后点的 Alpha：触发器按候选的次序说，而不是点击的先后。
+  expect(trigger).toHaveTextContent("Alpha、Charlie");
+});
+
+test("multiple: more than two values name the first and count the rest; localization follows the locale", () => {
+  const { rerender } = render(<Select multiple items={items} defaultValue={["alpha", "charlie", "delta"]}><SelectTrigger aria-label="标签" /></Select>);
+  expect(screen.getByRole("combobox")).toHaveTextContent("Alpha 及其余 2 项");
+  rerender(<UILocaleProvider locale={enUS}><Select multiple items={items} defaultValue={["alpha", "charlie", "delta"]}><SelectTrigger aria-label="标签" /></Select></UILocaleProvider>);
+  expect(screen.getByRole("combobox")).toHaveTextContent("Alpha and 2 more");
+});
+
+test("multiple: toggling a chosen option off and resetting a controlled value to empty return to the placeholder", async () => {
+  const user = userEvent.setup();
+  function Controlled() {
+    const [value, setValue] = useState<string[]>(["alpha"]);
+    return <><Select multiple items={items} value={value} onValueChange={setValue}><SelectTrigger aria-label="标签" /><SelectPopup><Options /></SelectPopup></Select><button type="button" onClick={() => setValue([])}>清空</button></>;
+  }
+  render(<Controlled />);
+  const trigger = screen.getByRole("combobox", { name: "标签" });
+  expect(trigger).toHaveTextContent("Alpha");
+  await user.click(trigger);
+  await user.click(await screen.findByRole("option", { name: "Charlie" }));
+  expect(trigger).toHaveTextContent("Alpha、Charlie");
+  await user.click(screen.getByRole("option", { name: "Alpha" }));
+  expect(trigger).toHaveTextContent("Charlie");
+  await user.click(screen.getByRole("option", { name: "Charlie" }));
+  expect(trigger).toHaveTextContent("请选择");
+  await user.keyboard("{Escape}");
+  await user.click(screen.getByRole("button", { name: "清空" }));
+  expect(trigger).toHaveTextContent("请选择");
+});
+
+test("multiple: the keyboard chooses and unchooses with Enter and keeps the popup open", async () => {
+  const user = userEvent.setup();
+  const { container } = render(<form><Select multiple name="tags" items={items}><SelectTrigger aria-label="标签" /><SelectPopup><Options /></SelectPopup></Select></form>);
+  const trigger = screen.getByRole("combobox", { name: "标签" });
+  trigger.focus();
+  await user.keyboard("{ArrowDown}");
+  await screen.findByRole("listbox");
+  await user.keyboard("{Home}{Enter}");
+  expect(screen.getByRole("listbox")).toBeInTheDocument();
+  expect(new FormData(container.querySelector("form")!).getAll("tags")).toEqual(["alpha"]);
+  await user.keyboard("{Enter}");
+  expect(new FormData(container.querySelector("form")!).getAll("tags")).toEqual([]);
+});

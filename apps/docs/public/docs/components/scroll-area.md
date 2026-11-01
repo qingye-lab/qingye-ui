@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
+Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
 
 真实原生滚动，或显式组合可拖动滚动条。
 

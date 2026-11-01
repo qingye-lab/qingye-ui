@@ -856,7 +856,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968
+Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
 
 Edit free text with optional suggestions.
 
@@ -910,6 +910,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Autocomplete
 - `items?`: `readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined`.
+- `loading?`: `boolean`. 候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。 输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`； 「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声—— 等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。
 - plus 32 inherited (@base-ui/react 32); not expanded, see the installed declarations
 
 ### AutocompleteClear
@@ -921,7 +922,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteEmpty
@@ -974,6 +975,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 - Context InControl: without a provider default-value; provided by AutocompleteControl
+- Context Loading: without a provider default-value; provided by Autocomplete
 - Context ReadOnly: without a provider default-value; provided by Autocomplete
 
 ### Curated API
@@ -984,6 +986,7 @@ A Base UI text-suggestion context fixed to list mode.
 - value / defaultValue / onValueChange: string / string / (value, details) => void. Controlled or uncontrolled free text. details.cancel() can reject edits or suggestion requests.
 - items / itemToStringValue / filter: readonly Value[] / Base UI public props. Provide flat suggestions, their text, and filtering. Define text for object suggestions. Group suggestions with the { value: label, items } shape and AutocompleteGroup.
 - name / form / required / disabled / readOnly: Base UI Root props. The actual input registers Field once and submits free text. Read-only submits; disabled is excluded.
+- loading: boolean; default false. The fact that suggestions are being fetched, using the same candidate status as ComboboxSelect: a busy mark appears at the end of the input, the input and list carry aria-busy, AutocompleteStatus announces the loading text, and AutocompleteEmpty stays silent meanwhile (waiting is not no results). Input stays usable; the component sends no request.
 - open / defaultOpen / onOpenChange: Base UI open props. Opening is controllable. Input, actions, and suggestions share one geometry that follows the density axis.
 
 #### AutocompleteInput / AutocompleteTrigger / AutocompleteClear
@@ -1025,7 +1028,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## Avatar
 
@@ -1574,7 +1577,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa
+Source SHA-256: 60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -3045,7 +3048,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxEmpty
@@ -6404,7 +6407,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
+Source SHA-256: 530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f
 
 Give an input and its markers, units or actions one editing boundary.
 
@@ -6412,6 +6415,7 @@ Give an input and its markers, units or actions one editing boundary.
 InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focus; use InputGroupButton for actions: it shares the outer boundary, draws no frame of its own, and keeps its own name and state. Clearing and password visibility are not built into Input; they are composed here, which is how SearchInput and PasswordInput are built.
 
 ### Notes
+- When several number members sit side by side (a range), each input has its own accessible name (aria-label) and the outer group supplies the collective name through aria-labelledby; the separator is an InputGroupText, plain text to assistive technology rather than a name.
 - Use InputGroupInput nativeInput when FieldControl registers the composition, avoiding duplicate registration.
 - Disabling the input does not disable arbitrary addon actions; the application declares each action's real state.
 
@@ -6438,17 +6442,24 @@ InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focu
 - InputGroupButtonProps: type; owner input-group; PASS
 - InputGroupInput: function; owner input-group; PASS; props: InputGroupInputProps
 - InputGroupInputProps: type; owner input-group; PASS
+- InputGroupNumberField: function; owner input-group; PASS; props: InputGroupNumberFieldProps
+- InputGroupNumberFieldProps: type; owner input-group; PASS
 - InputGroupProps: type; owner input-group; PASS
+- InputGroupSelectTrigger: function; owner input-group; PASS; props: InputGroupSelectTriggerProps
+- InputGroupSelectTriggerProps: type; owner input-group; PASS
+- InputGroupText: function; owner input-group; PASS; props: useRender.ComponentProps<"span">
+- InputGroupTextarea: function; owner input-group; PASS; props: InputGroupTextareaProps
+- InputGroupTextareaProps: type; owner input-group; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### InputGroup
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### InputGroupAddon
-- no props declared by this library
+- `align?`: `"inline-start" | "inline-end" | "block-start" | "block-end"`. 附件在边界里的位置。省略时按 DOM 顺序排布（既有行为）； `inline-start` / `inline-end` 固定在行首 / 行尾；`block-start` / `block-end` 独占一整行，在全部成员之上 / 之下。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### InputGroupButton
@@ -6466,6 +6477,22 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - plus 309 inherited (@types/react 303, @base-ui/react 6); not expanded, see the installed declarations
 
+### InputGroupNumberField
+- no props declared by this library
+- plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
+
+### InputGroupSelectTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
+
+### InputGroupText
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### InputGroupTextarea
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
+
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
@@ -6477,7 +6504,12 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### InputGroup
 A shared editing boundary with no extra field role.
+- loading: boolean; default false. The fact that content in the group is being fetched or validated: the same busy mark as Button appears at the inline end, the root is marked aria-busy, and the locale's loading text is announced through a polite live region. Inputs stay enabled; the component sends no request.
 - render / ref / native props: useRender.ComponentProps<div>. Composition props for the common boundary.
+
+#### InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger
+Unstyled compositions of Textarea, NumberField and SelectTrigger: members keep their native semantics and geometry while the group draws the border and the focus, hover, invalid, disabled and read-only states.
+- TextareaProps / NumberFieldProps / SelectTriggerProps (except unstyled): InputGroupTextareaProps / InputGroupNumberFieldProps / InputGroupSelectTriggerProps. Same as standalone use. A number member holds NumberFieldGroup unstyled; a select member's width follows its candidate names, pass className="flex-1" to fill the remaining width.
 
 #### InputGroupInput
 Input's unstyled composition with the group's size.
@@ -6485,7 +6517,12 @@ Input's unstyled composition with the group's size.
 
 #### InputGroupAddon
 A static span by default, with no tabIndex, focus redirection or automatic name.
+- align: "inline-start" | "inline-end" | "block-start" | "block-end". Where the addon sits relative to the members. Omitted, it follows DOM order inline (unchanged); inline-* pins it to the line start/end; block-* takes a full row above/below the members with at least the inner height, for headers and footers of multiline members.
 - render / ref / native props: useRender.ComponentProps<span>. A position for static content: units, prefixes, icons.
+
+#### InputGroupText
+Static text inside an addon (unit, separator, count): carries text styling only and never takes focus.
+- render / ref / native props: useRender.ComponentProps<span>. Carrier for the text.
 
 #### InputGroupButton
 An action inside the editing boundary: no frame of its own, filling the inner height; the icon shape is an inner-height square.
@@ -6508,7 +6545,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+6 more examples: see the component page and its Markdown file.
 
 ## InputModalityProvider
 
@@ -7739,7 +7776,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
+Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
 
 Edit an optional number and adjust it by a declared step.
 
@@ -7772,17 +7809,20 @@ Direct edits outside the range remain intact for native range validation. Steppi
 ### Current exports
 - NumberField: function; owner number-field; PASS; props: NumberFieldProps
 - NumberFieldDecrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>
-- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>
+- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldGroupProps
+- NumberFieldGroupProps: type; owner number-field; PASS
 - NumberFieldIncrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>
 - NumberFieldInput: function; owner number-field; PASS; props: NumberFieldPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - NumberFieldPrimitive: reexport; owner number-field; UNVERIFIED
 - NumberFieldProps: type; owner number-field; PASS
+- NumberFieldScrubArea: function; owner number-field; PASS; props: NumberFieldScrubAreaProps
+- NumberFieldScrubAreaProps: type; owner number-field; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NumberField
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。
 - plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
 
 ### NumberFieldDecrement
@@ -7790,7 +7830,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ### NumberFieldGroup
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### NumberFieldIncrement
@@ -7800,6 +7840,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### NumberFieldInput
 - no props declared by this library
 - plus 308 inherited (@types/react 304, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldScrubArea
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -7817,10 +7861,11 @@ Primitive context for the numeric value and its editable text.
 - snapOnStep / smallStep / largeStep: boolean / number / number; default false / 0.1 / 10. Snapping and Alt/Shift step sizes are explicit independent options.
 - onValueCommitted: (value, details) => void. A blur or stepping commit reports the end of editing, not persistence.
 - name / form / required / disabled / readOnly: Base UI Root props. Native form semantics. Read-only values submit; disabled values do not.
+- unstyled: boolean; default false. Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged.
 - locale / format: Intl.LocalesArgument / Intl.NumberFormatOptions. Explicit number formatting. Without rounding options, focus and blur preserve external precision.
 
 #### NumberFieldGroup
-Shared boundary for the input and two steppers; forwards render, refs, styling, and state.
+Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border.
 
 #### NumberFieldInput
 Composes the native Input outlet while the number primitive registers Field once.
@@ -7828,6 +7873,11 @@ Composes the native Input outlet while the number primitive registers Field once
 
 #### NumberFieldDecrement / NumberFieldIncrement
 Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons.
+
+#### NumberFieldScrubArea
+A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.
+- direction: "horizontal" | "vertical"; default "horizontal". Drag direction.
+- Other Base UI ScrubArea props: NumberFieldPrimitive.ScrubArea.Props. pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded.
 
 #### NumberFieldPrimitive
 The installed Base UI NumberField namespace.
@@ -7859,7 +7909,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## OtpField
 
@@ -8467,7 +8517,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
@@ -8485,7 +8535,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
@@ -9445,7 +9495,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
+Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -9889,7 +9939,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
+Source SHA-256: 048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5
 
 Choose one value from a collapsible set of options.
 
@@ -9923,7 +9973,7 @@ Highlight marks position; selection changes the value. No selection does not cho
 - Matching text/control dimensions, bordered padding, role colors, and Portal containers.
 
 ### Current exports
-- Select: function; owner select; PASS; props: SelectProps<Value>
+- Select: function; owner select; PASS; props: SelectProps<Value, Multiple>
 - SelectGroup: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.Group>
 - SelectGroupLabel: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.GroupLabel>
 - SelectItem: function; owner select; PASS; props: SelectItemProps
@@ -9943,7 +9993,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Select
 - `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
 - `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
-- plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
+- plus 24 inherited (@base-ui/react 24); not expanded, see the installed declarations
 
 ### SelectGroup
 - no props declared by this library
@@ -9963,7 +10013,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
 ### SelectTrigger
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### SelectValue
@@ -9977,14 +10027,18 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
 - Context ItemLabels: without a provider default-value; provided by Select
+- Context MultipleState: without a provider default-value; provided by Select
 - Context SourceState: without a provider default-value; provided by Select
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
 
 #### Select
-Single-value state and form semantics.
+Single-value (or multiple) state and form semantics.
+- multiple: boolean; default false. Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that "first and N more", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to [].
 - value / defaultValue: Value | null. Controlled or actual initial value; null means no selection. Omitting an initial value does not choose the first item.
 - items: Record<string, ReactNode> | {value, label}[] | Group[]. Value-to-name mapping; an explicit empty-string candidate also needs a readable label. The trigger is as wide as the longest name, so choosing another item does not resize it.
 - onValueChange: (value, eventDetails) => void. Cancelable selection change; moving the highlight does not change the value.
@@ -9999,6 +10053,7 @@ Single-value state and form semantics.
 #### SelectTrigger
 A bordered selection entry matching Input's profile.
 - children: ReactNode. Defaults to SelectValue with a disclosure icon.
+- unstyled: boolean; default false. Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics.
 - render / ref / className / style / ARIA: Base UI composition. Retain actual trigger events, names, and styling entries.
 
 #### SelectValue
@@ -10024,13 +10079,14 @@ Value candidate; highlight marks position and a check marks selection.
 Semantic grouping and group names; the label is drawn from the same source as ComboboxGroupLabel and AutocompleteGroupLabel.
 
 #### SelectPrimitive
-The complete public Base UI Select primitive; public Select remains single-value.
+The complete public Base UI Select primitive.
 
 ### Keyboard
 - Tab: Reach the trigger.
 - Enter / Space / ↑ / ↓: Open candidates; arrows move the highlight while open and Enter/Space select.
 - Home / End: Reach the first/last candidate while open.
 - Typing: Typeahead highlights matches while open; the closed primitive may select a matching value directly.
+- Enter / Space (multiple): Toggle the highlighted item while the popup stays open; Esc closes.
 - Esc: Close and return to the trigger, retaining the original value.
 
 ### Source example
@@ -10069,7 +10125,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## Separator
 
@@ -11688,7 +11744,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
+Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
 
 Edit multiline notes and messages.
 
@@ -11726,7 +11782,8 @@ Character counts describe the current value only. maxLength or application rules
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Textarea
-- no props declared by this library
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -11746,6 +11803,8 @@ A native textarea composable with Field.
 - aria-invalid: boolean | 'true' | 'false'. Caller-declared error fact, also available from Field invalid.
 - disabled / readOnly: boolean; default false. Disabled excludes tabbing/submission; read-only retains focus/submission and existing localized read-only text.
 - maxLength: number. Browser-enforced maximum text length; count text does not enforce it.
+- unstyled: boolean; default false. Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay.
+- controlClassName: string. Styling entry for the outer control wrapper; className still belongs to the actual textarea.
 - render / ref / className / style: Base UI render / textarea ref / state-aware styling. Actual textarea composition/styling; render must retain textarea semantics, attributes, and events.
 
 #### TextareaPrimitive
@@ -12856,7 +12915,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
@@ -12869,7 +12928,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 

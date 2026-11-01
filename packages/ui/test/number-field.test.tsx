@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
-import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "../src/components/number-field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput, NumberFieldScrubArea } from "../src/components/number-field";
 import { UILocaleProvider } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
 
@@ -142,4 +142,22 @@ test("readonly shows an aria-hidden note while the input stays readonly", () => 
   expect(note).toHaveAttribute("aria-hidden", "true");
   rerender(<NumberField defaultValue={2}>{parts}</NumberField>);
   expect(document.querySelector("[data-slot=number-field-readonly]")).toBeNull();
+});
+
+test("the scrub area wraps the label text and is presentational: the input keeps the accessible name and value", () => {
+  render(<NumberField defaultValue={5}><NumberFieldScrubArea><label htmlFor="scrub-n">数量</label></NumberFieldScrubArea><NumberFieldGroup><NumberFieldInput id="scrub-n" /></NumberFieldGroup></NumberField>);
+  expect(screen.getByRole("textbox", { name: "数量" })).toHaveValue("5");
+  expect(document.querySelector("[data-slot=number-field-scrub-area]")).toContainElement(screen.getByText("数量"));
+});
+
+test.each(["disabled", "readOnly"] as const)("%s: dragging the scrub area never changes the value", async state => {
+  const change = vi.fn();
+  render(<NumberField defaultValue={5} onValueChange={change} {...{ [state]: true }}><NumberFieldScrubArea><label htmlFor="scrub-s">数量</label></NumberFieldScrubArea><NumberFieldGroup><NumberFieldInput id="scrub-s" /></NumberFieldGroup></NumberField>);
+  const area = document.querySelector("[data-slot=number-field-scrub-area]")!;
+  fireEvent.pointerDown(area, { pointerId: 1, button: 0, clientX: 0, clientY: 0 });
+  fireEvent.pointerMove(area, { pointerId: 1, clientX: 80, clientY: 0, movementX: 80 });
+  fireEvent.pointerUp(area, { pointerId: 1 });
+  expect(change).not.toHaveBeenCalled();
+  expect(screen.getByRole("textbox")).toHaveValue("5");
+  if (state === "disabled") expect(area).toHaveAttribute("data-disabled");
 });

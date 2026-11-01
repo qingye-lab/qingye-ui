@@ -81,7 +81,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxEmpty
