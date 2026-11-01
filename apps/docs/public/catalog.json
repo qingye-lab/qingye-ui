@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2748,7 +2748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4135,7 +4135,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5099,7 +5099,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5660,7 +5660,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6845,7 +6845,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7765,7 +7765,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8982,7 +8982,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10090,24 +10090,6 @@
           "providers": [],
           "code": "import { useId } from \"react\";\nimport { Checkbox } from \"@qingye_lab/ui/components/checkbox\";\nimport { CheckboxGroup } from \"@qingye_lab/ui/components/checkbox-group\";\nimport { Field, FieldError, FieldGroup, FieldItem, FieldLabel, FieldTitle } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"状态\", titleEn: \"States\" };\nexport default function Demo() {\n  const id = useId();\n  return <FieldGroup className=\"grid sm:grid-cols-3\">\n    <Field><FieldTitle id={`${id}-disabled`}>禁用集合</FieldTitle><CheckboxGroup disabled defaultValue={[\"alpha\"]} aria-labelledby={`${id}-disabled`}><FieldItem><Checkbox value=\"alpha\" /><FieldLabel>设备离线</FieldLabel></FieldItem><FieldItem><Checkbox value=\"beta\" /><FieldLabel>同步失败</FieldLabel></FieldItem></CheckboxGroup></Field>\n    <Field><FieldTitle id={`${id}-readonly`}>只读项</FieldTitle><CheckboxGroup defaultValue={[\"alpha\"]} aria-labelledby={`${id}-readonly`}><FieldItem><Checkbox readOnly value=\"alpha\" /><FieldLabel>设备离线</FieldLabel></FieldItem><FieldItem><Checkbox value=\"beta\" /><FieldLabel>同步失败</FieldLabel></FieldItem></CheckboxGroup></Field>\n    <Field invalid><FieldTitle id={`${id}-invalid`}>受限范围</FieldTitle><CheckboxGroup aria-labelledby={`${id}-invalid`}><FieldItem><Checkbox value=\"alpha\" /><FieldLabel>设备离线</FieldLabel></FieldItem><FieldItem><Checkbox value=\"beta\" /><FieldLabel>同步失败</FieldLabel></FieldItem></CheckboxGroup><FieldError>至少选择一项</FieldError></Field>\n  </FieldGroup>;\n}\n",
           "sha256": "e68cd6fa1412a233871dcd088c5de05868d897367d602e42a5d6236e6b6e97d9"
-        },
-        {
-          "id": "transfer",
-          "title": "穿梭：分配权限",
-          "source": "apps/docs/src/content/checkbox-group/demos/03-transfer.tsx",
-          "imports": [
-            "@qingye_lab/ui/components/button",
-            "@qingye_lab/ui/components/checkbox",
-            "@qingye_lab/ui/components/checkbox-group",
-            "@qingye_lab/ui/components/field",
-            "@qingye_lab/ui/components/search-input",
-            "@qingye_lab/ui/locale",
-            "@tabler/icons-react",
-            "react"
-          ],
-          "providers": [],
-          "code": "import * as React from \"react\";\nimport { IconChevronLeft, IconChevronRight } from \"@tabler/icons-react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Checkbox } from \"@qingye_lab/ui/components/checkbox\";\nimport { CheckboxGroup } from \"@qingye_lab/ui/components/checkbox-group\";\nimport { Field, FieldItem, FieldLabel, FieldTitle } from \"@qingye_lab/ui/components/field\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"穿梭：分配权限\", titleEn: \"Transfer: assigning permissions\" };\n\nconst permissions = (en: boolean) => [\n  { id: \"view\", label: en ? \"View records\" : \"查看记录\" },\n  { id: \"edit\", label: en ? \"Edit records\" : \"编辑记录\" },\n  { id: \"export\", label: en ? \"Export records\" : \"导出记录\" },\n  { id: \"invite\", label: en ? \"Invite members\" : \"邀请成员\" },\n  { id: \"remove\", label: en ? \"Remove members\" : \"移除成员\" },\n  { id: \"webhook\", label: en ? \"Manage webhooks\" : \"管理回调地址\" },\n  { id: \"token\", label: en ? \"Create access tokens\" : \"创建访问令牌\" },\n  { id: \"billing\", label: en ? \"View billing\" : \"查看账单\" },\n];\ntype Item = ReturnType<typeof permissions>[number];\n\n/** 一侧的列表：名称（FieldTitle）、计数（作为描述）、搜索过滤、全选 + 逐项复选。\n * 全选只作用于「当前可见」的项（allValues = 可见项）：被过滤掉的项不会被一键带走。 */\nfunction Side({ title, items, checked, onCheckedChange, en }: { title: string; items: readonly Item[]; checked: string[]; onCheckedChange: (ids: string[]) => void; en: boolean }) {\n  const id = React.useId(); const [query, setQuery] = React.useState(\"\");\n  const visible = items.filter(item => item.label.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));\n  const visibleIds = visible.map(item => item.id); const picked = checked.filter(key => visibleIds.includes(key));\n  return <Field className=\"min-w-0\">\n    <div className=\"flex items-baseline justify-between gap-(--qy-field-gap)\">\n      <FieldTitle id={`${id}-title`}>{title}</FieldTitle>\n      <span id={`${id}-count`} className=\"text-support text-muted-foreground tabular-nums\">{en ? `${picked.length} of ${visible.length} selected` : `已选 ${picked.length} / ${visible.length}`}</span>\n    </div>\n    <SearchInput aria-label={en ? `Filter ${title.toLowerCase()}` : `筛选${title}`} value={query} onChange={event => setQuery(event.target.value)} />\n    <CheckboxGroup aria-labelledby={`${id}-title`} aria-describedby={`${id}-count`} value={picked} onValueChange={ids => onCheckedChange([...checked.filter(key => !visibleIds.includes(key)), ...ids])} allValues={visibleIds}\n      className=\"max-h-64 overflow-y-auto rounded-control border border-border p-(--qy-panel-padding-sm)\">\n      {visible.length === 0 ? <p className=\"m-0 text-support text-muted-foreground\">{items.length === 0 ? (en ? \"Nothing here\" : \"没有条目\") : (en ? \"No match\" : \"没有匹配项\")}</p> : <>\n        <FieldItem><Checkbox parent/><FieldLabel>{en ? \"Select all\" : \"全选\"}</FieldLabel></FieldItem>\n        {visible.map(item => <FieldItem key={item.id}><Checkbox value={item.id} /><FieldLabel>{item.label}</FieldLabel></FieldItem>)}\n      </>}\n    </CheckboxGroup>\n  </Field>;\n}\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const all = React.useMemo(() => permissions(en), [en]);\n  const [assigned, setAssigned] = React.useState<string[]>([\"view\"]);\n  const [pickedLeft, setPickedLeft] = React.useState<string[]>([]);\n  const [pickedRight, setPickedRight] = React.useState<string[]>([]);\n  const [status, setStatus] = React.useState(\"\");\n  const left = all.filter(item => !assigned.includes(item.id)); const right = all.filter(item => assigned.includes(item.id));\n  // 搜索过滤藏起来的已勾选项不属于「当前所选」：只移动勾选且仍在列表里的项。\n  const movableLeft = pickedLeft.filter(key => left.some(item => item.id === key));\n  const movableRight = pickedRight.filter(key => right.some(item => item.id === key));\n  const add = () => { if (!movableLeft.length) return; setAssigned([...assigned, ...movableLeft]); setPickedLeft([]); setStatus(en ? `Added ${movableLeft.length}; assigned ${assigned.length + movableLeft.length}` : `已添加 ${movableLeft.length} 项，已分配共 ${assigned.length + movableLeft.length} 项`); };\n  const remove = () => { if (!movableRight.length) return; setAssigned(assigned.filter(key => !movableRight.includes(key))); setPickedRight([]); setStatus(en ? `Removed ${movableRight.length}; assigned ${assigned.length - movableRight.length}` : `已移除 ${movableRight.length} 项，已分配共 ${assigned.length - movableRight.length} 项`); };\n  // 无可移动项时用 aria-disabled 而非 disabled：点完最后一批后焦点仍留在这颗按钮上，不掉到页面顶部。\n  return <div className=\"grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-(--qy-action-gap)\">\n    <Side title={en ? \"Available\" : \"可分配\"} items={left} checked={pickedLeft} onCheckedChange={setPickedLeft} en={en} />\n    <div className=\"flex flex-col gap-(--qy-action-gap)\">\n      <Button variant=\"bordered\" shape=\"icon\" aria-disabled={movableLeft.length === 0} aria-label={en ? \"Add selected to assigned\" : \"添加所选到已分配\"} onClick={add}><IconChevronRight aria-hidden=\"true\" className=\"rtl:rotate-180\" /></Button>\n      <Button variant=\"bordered\" shape=\"icon\" aria-disabled={movableRight.length === 0} aria-label={en ? \"Remove selected from assigned\" : \"从已分配移除所选\"} onClick={remove}><IconChevronLeft aria-hidden=\"true\" className=\"rtl:rotate-180\" /></Button>\n    </div>\n    <Side title={en ? \"Assigned\" : \"已分配\"} items={right} checked={pickedRight} onCheckedChange={setPickedRight} en={en} />\n    <div role=\"status\" className=\"sr-only\">{status}</div>\n  </div>;\n}\n",
-          "sha256": "4f4a0a997422e65e9d92f540b88ee38d2f6c32269839c62e23934d4afce17147"
         }
       ],
       "design": {
@@ -10254,6 +10236,475 @@
             ],
             "customization": [
               "field-gap within the group; each Checkbox exposes size and styling."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "chip",
+      "title": "标签片 Chip",
+      "description": "一枚可以被单独操作的小记号：可移除，或可开关。",
+      "category": "通用",
+      "source": "local",
+      "layer": "primitive",
+      "import": "@qingye_lab/ui/components/chip",
+      "exports": [
+        "Chip",
+        "ChipToggle"
+      ],
+      "docs": "/docs/components/chip",
+      "notes": [
+        "移除按钮的名称是「移除 X」，X 取记号文字，所以同一行里多个记号读屏时彼此可分。",
+        "ChipToggle 的名称不随按下与否变化，状态只由 aria-pressed 表达。",
+        "移除之后焦点会随被移除的节点一起消失：由调用方把焦点移到相邻记号或它所在的容器。"
+      ],
+      "keywords": [
+        "chip",
+        "tag",
+        "标签",
+        "筛选",
+        "条件",
+        "已选",
+        "移除",
+        "token",
+        "filter"
+      ],
+      "api": [
+        {
+          "name": "Chip",
+          "description": "可移除的记号：一段文字加一个移除按钮。不给 onRemove 就只是一段带底的文字。",
+          "descriptionEn": "A removable mark: text plus a remove button. Without onRemove it is only text on a surface.",
+          "props": [
+            {
+              "name": "children",
+              "type": "string",
+              "description": "记号上的文字，同时决定移除按钮的名称（「移除 X」）。",
+              "descriptionEn": "The text on the mark; it also names the remove button (\"Remove X\")."
+            },
+            {
+              "name": "onRemove",
+              "type": "(event) => void",
+              "description": "给了才出现移除按钮。点击、Enter、Space、Backspace、Delete 都调用它；移除后记号是否消失、焦点去哪里由调用方决定。",
+              "descriptionEn": "The remove button appears only when given. Click, Enter, Space, Backspace and Delete all call it; whether the chip disappears and where focus goes is up to the caller."
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "移除按钮不可操作，记号仍显示。",
+              "descriptionEn": "The remove button is inert; the mark still shows."
+            },
+            {
+              "name": "render / ref / className",
+              "type": "Base UI composition",
+              "description": "根部位 span 的组合入口。",
+              "descriptionEn": "Composition entry points of the root span."
+            }
+          ]
+        },
+        {
+          "name": "ChipToggle",
+          "description": "可开关的记号：按钮加 aria-pressed。属性与 Toggle 相同，只是固定为 sm 档。",
+          "descriptionEn": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
+          "props": [
+            {
+              "name": "pressed / defaultPressed",
+              "type": "boolean",
+              "description": "受控或初始的按下状态。",
+              "descriptionEn": "Controlled or initial pressed state."
+            },
+            {
+              "name": "onPressedChange",
+              "type": "(pressed: boolean, details) => void",
+              "description": "按下状态改变时调用。",
+              "descriptionEn": "Called when the pressed state changes."
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "不可操作；按下的事实保留。",
+              "descriptionEn": "Inert; the pressed fact is kept."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "Chip",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "children",
+                "optional": false,
+                "type": "string",
+                "doc": "记号上的文字，同时决定移除动作的名称（「移除 X」）。",
+                "declaredAt": "packages/ui/src/components/chip.tsx:27"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "doc": "禁用后移除按钮不可操作；记号本身仍显示。",
+                "declaredAt": "packages/ui/src/components/chip.tsx:31"
+              },
+              {
+                "name": "onRemove",
+                "optional": true,
+                "type": "(event: React.SyntheticEvent<HTMLElement>) => void",
+                "doc": "移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。",
+                "declaredAt": "packages/ui/src/components/chip.tsx:29"
+              }
+            ],
+            "inheritedCount": 279,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 278
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ChipToggle",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 292,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 283
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 9
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "Chip 的移除按钮、ChipToggle 各是一个停靠点；记号文字本身不可聚焦。",
+          "descriptionEn": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable."
+        },
+        {
+          "keys": "Enter / Space",
+          "description": "移除，或切换按下状态。",
+          "descriptionEn": "Remove, or toggle the pressed state."
+        },
+        {
+          "keys": "Backspace / Delete",
+          "description": "焦点在移除按钮上时移除该记号。",
+          "descriptionEn": "With focus on the remove button, remove the chip."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Chip",
+          "kind": "function",
+          "owner": "chip",
+          "module": "@qingye_lab/ui/components/chip",
+          "propsType": "ChipProps",
+          "signature": "Chip({ children, onRemove, disabled = false, className, render, ref, ...props }: ChipProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ChipProps",
+          "kind": "type",
+          "owner": "chip",
+          "module": "@qingye_lab/ui/components/chip",
+          "signature": "Omit<useRender.ComponentProps<\"span\">, \"children\" | \"onClick\"> & {\n  /** 记号上的文字，同时决定移除动作的名称（「移除 X」）。 */\n  children: string;\n  /** 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。 */\n  onRemove?: (event: React.SyntheticEvent<HTMLElement>) => void;\n  /** 禁用后移除按钮不可操作；记号本身仍显示。 */\n  disabled?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ChipToggle",
+          "kind": "function",
+          "owner": "chip",
+          "module": "@qingye_lab/ui/components/chip",
+          "propsType": "ChipToggleProps<Value>",
+          "signature": "ChipToggle(props: ChipToggleProps<Value>)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ChipToggleProps",
+          "kind": "type",
+          "owner": "chip",
+          "module": "@qingye_lab/ui/components/chip",
+          "signature": "Omit<ToggleProps<Value>, \"size\" | \"shape\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ChipProps",
+          "definition": "export type ChipProps = Omit<useRender.ComponentProps<\"span\">, \"children\" | \"onClick\"> & {\n  /** 记号上的文字，同时决定移除动作的名称（「移除 X」）。 */\n  children: string;\n  /** 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。 */\n  onRemove?: (event: React.SyntheticEvent<HTMLElement>) => void;\n  /** 禁用后移除按钮不可操作；记号本身仍显示。 */\n  disabled?: boolean;\n};"
+        },
+        {
+          "name": "ChipToggleProps",
+          "definition": "export type ChipToggleProps<Value extends string = string> = Omit<ToggleProps<Value>, \"size\" | \"shape\">;"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Chip",
+          "import": "@qingye_lab/ui/components/chip",
+          "owner": "chip",
+          "status": "PASS"
+        },
+        {
+          "name": "ChipToggle",
+          "import": "@qingye_lab/ui/components/chip",
+          "owner": "chip",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/toggle",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "removable",
+          "title": "可移除",
+          "source": "apps/docs/src/content/chip/demos/01-removable.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/chip",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Chip } from \"@qingye_lab/ui/components/chip\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"可移除\", titleEn: \"Removable\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const all = en ? [\"Design\", \"Engineering\", \"Operations\", \"Finance\"] : [\"设计\", \"工程\", \"运营\", \"财务\"];\n  const [items, setItems] = useState(all.slice(0, 3));\n  const next = all.find(item => !items.includes(item));\n  return <div className=\"flex flex-wrap items-center gap-(--qy-space-2)\">\n    {items.map(item => <Chip key={item} onRemove={() => setItems(items.filter(other => other !== item))}>{item}</Chip>)}\n    <Button variant=\"bordered\" size=\"sm\" aria-disabled={next === undefined || undefined} onClick={() => { if (next !== undefined) setItems([...items, next]); }}>{en ? \"Add\" : \"添加\"}</Button>\n  </div>;\n}\n",
+          "sha256": "7ef37709bf3afb8ecfa96f7eae85974a4a7da840a09d703f32b1e48e5890c7a8"
+        },
+        {
+          "id": "toggle",
+          "title": "可开关",
+          "source": "apps/docs/src/content/chip/demos/02-toggle.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/chip",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { ChipToggle } from \"@qingye_lab/ui/components/chip\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"可开关\", titleEn: \"Toggleable\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const options = en ? [\"Unread\", \"Starred\", \"Attachments\", \"Mentions\"] : [\"未读\", \"加星\", \"含附件\", \"提到我\"];\n  const [pressed, setPressed] = useState<string[]>([options[0]!]);\n  return <div role=\"group\" aria-label={en ? \"Filters\" : \"筛选\"} className=\"flex flex-wrap gap-(--qy-space-2)\">\n    {options.map(option => <ChipToggle key={option} pressed={pressed.includes(option)} onPressedChange={next => setPressed(next ? [...pressed, option] : pressed.filter(other => other !== option))}>{option}</ChipToggle>)}\n    <ChipToggle disabled>{en ? \"Unavailable\" : \"不可用\"}</ChipToggle>\n  </div>;\n}\n",
+          "sha256": "5b59559afe4e6d0cb8383b29a8de3505f309ceb633c145eeceb0976dc108dbf0"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "一组已选条件，每个都能单独去掉",
+          "一组筛选条件，每个都能单独开关"
+        ],
+        "avoid": [
+          "不可操作的状态标注用 Badge",
+          "在输入框内收下的值用 TagInput",
+          "互斥的几个选项用 RadioGroup 或 SegmentedControl"
+        ],
+        "composition": [
+          "多个 Chip 放进 flex-wrap 的行；ChipToggle 放进带名称的 group"
+        ],
+        "stateOwner": {
+          "library": [
+            "ChipToggle 的非受控按下状态、焦点"
+          ],
+          "application": [
+            "Chip 的集合（移除后是否保留）、筛选条件的实际含义、移除后的焦点去向"
+          ]
+        },
+        "responsive": [
+          "文字过长时截断，完整文字仍在 DOM；本批只做桌面检查"
+        ],
+        "customization": [
+          "className；Chip 的 render"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/chip.tsx",
+        "sha256": "ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。Chip 的两种形态不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，二者的读屏角色、键盘与名称规则都不同，所以是 Chip 与 ChipToggle 两个组件。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。",
+      "localized": {
+        "en": {
+          "title": "Chip",
+          "description": "A small mark that can be acted on by itself: removable, or toggleable.",
+          "category": "General",
+          "decisions": "Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. The two forms are not merged into one component with a mode: removing is a one-way action and toggling is a reversible state, and their roles, keyboard and naming rules differ, so there are two components, Chip and ChipToggle. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.",
+          "notes": [
+            "The remove button is named \"Remove X\" from the chip text, so several chips in one row are distinguishable to assistive technology.",
+            "A ChipToggle's name does not change with its pressed state; the state is carried only by aria-pressed.",
+            "Focus disappears with the removed node: the caller moves it to a neighbouring chip or to the container."
+          ],
+          "api": [
+            {
+              "name": "Chip",
+              "description": "A removable mark: text plus a remove button. Without onRemove it is only text on a surface.",
+              "descriptionEn": "A removable mark: text plus a remove button. Without onRemove it is only text on a surface.",
+              "props": [
+                {
+                  "name": "children",
+                  "type": "string",
+                  "description": "The text on the mark; it also names the remove button (\"Remove X\").",
+                  "descriptionEn": "The text on the mark; it also names the remove button (\"Remove X\")."
+                },
+                {
+                  "name": "onRemove",
+                  "type": "(event) => void",
+                  "description": "The remove button appears only when given. Click, Enter, Space, Backspace and Delete all call it; whether the chip disappears and where focus goes is up to the caller.",
+                  "descriptionEn": "The remove button appears only when given. Click, Enter, Space, Backspace and Delete all call it; whether the chip disappears and where focus goes is up to the caller."
+                },
+                {
+                  "name": "disabled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "The remove button is inert; the mark still shows.",
+                  "descriptionEn": "The remove button is inert; the mark still shows."
+                },
+                {
+                  "name": "render / ref / className",
+                  "type": "Base UI composition",
+                  "description": "Composition entry points of the root span.",
+                  "descriptionEn": "Composition entry points of the root span."
+                }
+              ]
+            },
+            {
+              "name": "ChipToggle",
+              "description": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
+              "descriptionEn": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
+              "props": [
+                {
+                  "name": "pressed / defaultPressed",
+                  "type": "boolean",
+                  "description": "Controlled or initial pressed state.",
+                  "descriptionEn": "Controlled or initial pressed state."
+                },
+                {
+                  "name": "onPressedChange",
+                  "type": "(pressed: boolean, details) => void",
+                  "description": "Called when the pressed state changes.",
+                  "descriptionEn": "Called when the pressed state changes."
+                },
+                {
+                  "name": "disabled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Inert; the pressed fact is kept.",
+                  "descriptionEn": "Inert; the pressed fact is kept."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable.",
+              "descriptionEn": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable."
+            },
+            {
+              "keys": "Enter / Space",
+              "description": "Remove, or toggle the pressed state.",
+              "descriptionEn": "Remove, or toggle the pressed state."
+            },
+            {
+              "keys": "Backspace / Delete",
+              "description": "With focus on the remove button, remove the chip.",
+              "descriptionEn": "With focus on the remove button, remove the chip."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "A set of chosen conditions, each of which can be dropped on its own.",
+              "A set of filters, each of which can be switched on or off."
+            ],
+            "avoid": [
+              "Use Badge for an inert status annotation.",
+              "Use TagInput for values collected inside an input.",
+              "Use RadioGroup or SegmentedControl for mutually exclusive options."
+            ],
+            "composition": [
+              "Place several Chips in a flex-wrap row; put ChipToggles in a named group."
+            ],
+            "stateOwner": {
+              "library": [
+                "A ChipToggle's uncontrolled pressed state and focus."
+              ],
+              "application": [
+                "The collection of Chips (whether a removed one is kept), what a filter actually means, and where focus goes after removal."
+              ]
+            },
+            "responsive": [
+              "Long text is truncated while the full text stays in the DOM; this batch checked desktop only."
+            ],
+            "customization": [
+              "className; the Chip render prop."
             ]
           },
           "providerGuidance": []
@@ -10502,7 +10953,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11584,7 +12035,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12846,7 +13297,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14004,7 +14455,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14552,7 +15003,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15102,7 +15553,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16686,7 +17137,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18161,7 +18612,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18781,7 +19232,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19331,7 +19782,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19800,7 +20251,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21125,7 +21576,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21947,7 +22398,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23380,7 +23831,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24968,7 +25419,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26045,7 +26496,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26980,7 +27431,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27935,7 +28386,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31307,7 +31758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -33139,7 +33590,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34964,7 +35415,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35447,7 +35898,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37012,7 +37463,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37516,7 +37967,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37890,7 +38341,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39218,7 +39669,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39612,7 +40063,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40421,7 +40872,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40648,6 +41099,452 @@
             ],
             "customization": [
               "Matching text line height, circular identity, theme surfaces/borders, and no added outer focus ring."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "rating",
+      "title": "评分 Rating",
+      "description": "在 1 到 max 之间给出一个整数分值，用一排星表示。",
+      "category": "表单",
+      "source": "local",
+      "layer": "primitive",
+      "import": "@qingye_lab/ui/components/rating",
+      "exports": [
+        "Rating"
+      ],
+      "docs": "/docs/components/rating",
+      "notes": [
+        "星的名称是「n 星」，组的名称是「评分」；读屏读到的是「评分，3 星，已选中」，不依赖颜色。",
+        "悬停时预览分值，只影响显示；点击前不改变值。",
+        "满星与空星靠形状区分，占位相同，状态变化不改变组件外形。"
+      ],
+      "keywords": [
+        "rating",
+        "评分",
+        "星",
+        "打分",
+        "star",
+        "评价"
+      ],
+      "api": [
+        {
+          "name": "Rating",
+          "description": "单选组语义的评分：每颗星是一个 radio，选中第 n 颗即分值 n。只读时是一幅图加「n / max」。",
+          "descriptionEn": "Rating with radio-group semantics: each star is a radio and choosing the nth means score n. Read-only, it is an image plus \"n / max\".",
+          "props": [
+            {
+              "name": "value / defaultValue",
+              "type": "number",
+              "default": "0",
+              "description": "分值，整数，0 表示未评分；范围 0..max，越界或非整数会抛 RangeError。",
+              "descriptionEn": "The score: an integer where 0 means unrated, within 0..max; out of range or non-integers throw a RangeError."
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: number) => void",
+              "description": "分值改变时调用；清除时为 0。",
+              "descriptionEn": "Called when the score changes; 0 on clearing."
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "default": "5",
+              "description": "最高分，也是星的个数；正整数。",
+              "descriptionEn": "The highest score and the number of stars; a positive integer."
+            },
+            {
+              "name": "allowClear",
+              "type": "boolean",
+              "default": "true",
+              "description": "再选当前分值即清除。关闭后评过分只能改不能撤。",
+              "descriptionEn": "Choosing the current score again clears it. Off, a score can be changed but not withdrawn."
+            },
+            {
+              "name": "readOnly",
+              "type": "boolean",
+              "default": "false",
+              "description": "不再是控件：渲染为 role=\"img\"（名称「评分 4 / 5」）加可见的「4 / 5」。",
+              "descriptionEn": "No longer a control: rendered as role=\"img\" (named \"Rating 4 of 5\") plus the visible \"4 / 5\"."
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "不可操作；不提交。",
+              "descriptionEn": "Inert; not submitted."
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "原生表单字段名；提交所选分值，未评分时不提交。",
+              "descriptionEn": "Native form field name; submits the chosen score and nothing when unrated."
+            },
+            {
+              "name": "aria-label / aria-labelledby",
+              "type": "string",
+              "description": "组的名称，默认「评分」；放进带 FieldLabel 的 Field 时由标签命名。",
+              "descriptionEn": "The group's name, \"Rating\" by default; in a Field with a FieldLabel the label names it."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "Rating",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "allowClear",
+                "optional": true,
+                "type": "boolean",
+                "doc": "再点一次当前分值就清除（回到 0）。默认开启；关闭后一旦评过分只能改不能撤。",
+                "declaredAt": "packages/ui/src/components/rating.tsx:18"
+              },
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "number",
+                "declaredAt": "packages/ui/src/components/rating.tsx:13"
+              },
+              {
+                "name": "max",
+                "optional": true,
+                "type": "number",
+                "doc": "最高分，也是星的个数；正整数，默认 5。",
+                "declaredAt": "packages/ui/src/components/rating.tsx:16"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "(value: number) => void",
+                "declaredAt": "packages/ui/src/components/rating.tsx:14"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "number",
+                "doc": "受控的分值，0 表示未评分；整数，范围 0..max。",
+                "declaredAt": "packages/ui/src/components/rating.tsx:12"
+              }
+            ],
+            "inheritedCount": 282,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 274
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 8
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "进入或离开整组；组内只有一个停靠点（已选的星，未评分时是第一颗）。",
+          "descriptionEn": "Enter or leave the whole group; it is one tab stop (the chosen star, or the first when unrated)."
+        },
+        {
+          "keys": "→ / ↓ / ← / ↑",
+          "description": "移到相邻的星并选中它。RTL 下左右方向相反。",
+          "descriptionEn": "Move to the neighbouring star and choose it. Left and right swap in RTL."
+        },
+        {
+          "keys": "Space",
+          "description": "选中当前的星；它已是当前分值且 allowClear 时清除。",
+          "descriptionEn": "Choose the focused star; clear it when it is the current score and allowClear is on."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Rating",
+          "kind": "function",
+          "owner": "rating",
+          "module": "@qingye_lab/ui/components/rating",
+          "propsType": "RatingProps",
+          "signature": "Rating({ value: valueProp, defaultValue = 0, onValueChange, max = 5, allowClear = true, readOnly = false, disabled = false, name, className, ref, \"aria-label\": ariaLabel, ...props }: RatingProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "RatingProps",
+          "kind": "type",
+          "owner": "rating",
+          "module": "@qingye_lab/ui/components/rating",
+          "signature": "Omit<RadioGroupPrimitive.Props<number>, \"value\" | \"defaultValue\" | \"onValueChange\" | \"children\" | \"render\"> & {\n  /** 受控的分值，0 表示未评分；整数，范围 0..max。 */\n  value?: number;\n  defaultValue?: number;\n  onValueChange?: (value: number) => void;\n  /** 最高分，也是星的个数；正整数，默认 5。 */\n  max?: number;\n  /** 再点一次当前分值就清除（回到 0）。默认开启；关闭后一旦评过分只能改不能撤。 */\n  allowClear?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "RatingProps",
+          "definition": "export type RatingProps = Omit<RadioGroupPrimitive.Props<number>, \"value\" | \"defaultValue\" | \"onValueChange\" | \"children\" | \"render\"> & {\n  /** 受控的分值，0 表示未评分；整数，范围 0..max。 */\n  value?: number;\n  defaultValue?: number;\n  onValueChange?: (value: number) => void;\n  /** 最高分，也是星的个数；正整数，默认 5。 */\n  max?: number;\n  /** 再点一次当前分值就清除（回到 0）。默认开启；关闭后一旦评过分只能改不能撤。 */\n  allowClear?: boolean;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Rating",
+          "import": "@qingye_lab/ui/components/rating",
+          "owner": "rating",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "InField",
+            "declaredAt": "packages/ui/src/labelable-scope.tsx:22",
+            "defaultValue": "false",
+            "withoutProvider": "default-value"
+          },
+          {
+            "name": "InFieldItem",
+            "declaredAt": "packages/ui/src/labelable-scope.tsx:20",
+            "defaultValue": "false",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "OptionScope"
+            ]
+          },
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
+          "@base-ui/react/radio",
+          "@base-ui/react/radio-group"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "basic",
+          "title": "评分",
+          "source": "apps/docs/src/content/rating/demos/01-basic.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/rating",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Rating } from \"@qingye_lab/ui/components/rating\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"评分\", titleEn: \"Score\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const [value, setValue] = useState(3);\n  return <Field name=\"score\">\n    <FieldLabel>{en ? \"Quality\" : \"质量\"}</FieldLabel>\n    <Rating value={value} onValueChange={setValue} />\n    <output className=\"text-support text-muted-foreground\" aria-live=\"polite\">{value} / 5</output>\n  </Field>;\n}\n",
+          "sha256": "ac206ea1b065a69cefb5637588012cd1bbd8920e965562e145a2ee77f84031bf"
+        },
+        {
+          "id": "states",
+          "title": "状态",
+          "source": "apps/docs/src/content/rating/demos/02-states.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/rating",
+            "@qingye_lab/ui/locale"
+          ],
+          "providers": [],
+          "code": "import { Rating } from \"@qingye_lab/ui/components/rating\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"状态\", titleEn: \"States\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  return <div className=\"flex flex-col gap-(--qy-space-3)\">\n    <div className=\"flex items-center gap-(--qy-space-3)\"><span className=\"w-24 text-support text-muted-foreground\">{en ? \"Read-only\" : \"只读\"}</span><Rating readOnly value={4} /></div>\n    <div className=\"flex items-center gap-(--qy-space-3)\"><span className=\"w-24 text-support text-muted-foreground\">{en ? \"Disabled\" : \"禁用\"}</span><Rating disabled defaultValue={2} /></div>\n    <div className=\"flex items-center gap-(--qy-space-3)\"><span className=\"w-24 text-support text-muted-foreground\">max = 10</span><Rating max={10} defaultValue={7} /></div>\n    <div className=\"flex items-center gap-(--qy-space-3)\"><span className=\"w-24 text-support text-muted-foreground\">{en ? \"No clearing\" : \"不可清除\"}</span><Rating allowClear={false} defaultValue={3} /></div>\n  </div>;\n}\n",
+          "sha256": "4a1aa4d17b90473ce0443cfd0606c9b66ca5563d270559f605208c3d8ec748bd"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "让人对一个对象打出有限档位的分",
+          "展示一个已有的评分结果（只读）"
+        ],
+        "avoid": [
+          "连续的数值用 Slider",
+          "两三个互斥的文字选项用 RadioGroup",
+          "是 / 否的判断用 Switch 或 Checkbox"
+        ],
+        "composition": [
+          "FieldLabel + Rating + FieldDescription + FieldError；只读展示可直接放在行内"
+        ],
+        "stateOwner": {
+          "library": [
+            "非受控分值、悬停预览、焦点"
+          ],
+          "application": [
+            "受控分值、评分的含义与提交、invalid"
+          ]
+        },
+        "responsive": [
+          "星的尺寸读填值控件的图标档，随密度；粗指针下命中区扩到触屏目标；本批只做桌面检查"
+        ],
+        "customization": [
+          "className；max；allowClear"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/rating.tsx",
+        "sha256": "a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "评分是单选组，不是滑块：分值是有限个互斥的整数，方向键移动即选中。半星没有提供——要更细的刻度就加大 max，而不是引入小数。只读时不保留单选语义，因为一串不能操作的 radio 对读屏是噪音；它是一个结论，所以读成一幅带分值的图。",
+      "localized": {
+        "en": {
+          "title": "Rating",
+          "description": "Give an integer score from 1 to max, shown as a row of stars.",
+          "category": "Forms",
+          "decisions": "Rating is a radio group, not a slider: the score is one of a finite set of mutually exclusive integers, and arrow keys choose as they move. Half stars are not offered: raise max for a finer scale instead of introducing fractions. Read-only does not keep radio semantics, since a row of inert radios is noise to a screen reader; it is a conclusion, so it reads as an image carrying the score.",
+          "notes": [
+            "Stars are named \"n stars\" and the group \"Rating\", so assistive technology reads \"Rating, 3 stars, checked\" without relying on colour.",
+            "Hover previews a score for display only; the value does not change before the click.",
+            "Filled and empty stars differ in shape and occupy the same space, so state changes never change the component's outline."
+          ],
+          "api": [
+            {
+              "name": "Rating",
+              "description": "Rating with radio-group semantics: each star is a radio and choosing the nth means score n. Read-only, it is an image plus \"n / max\".",
+              "descriptionEn": "Rating with radio-group semantics: each star is a radio and choosing the nth means score n. Read-only, it is an image plus \"n / max\".",
+              "props": [
+                {
+                  "name": "value / defaultValue",
+                  "type": "number",
+                  "default": "0",
+                  "description": "The score: an integer where 0 means unrated, within 0..max; out of range or non-integers throw a RangeError.",
+                  "descriptionEn": "The score: an integer where 0 means unrated, within 0..max; out of range or non-integers throw a RangeError."
+                },
+                {
+                  "name": "onValueChange",
+                  "type": "(value: number) => void",
+                  "description": "Called when the score changes; 0 on clearing.",
+                  "descriptionEn": "Called when the score changes; 0 on clearing."
+                },
+                {
+                  "name": "max",
+                  "type": "number",
+                  "default": "5",
+                  "description": "The highest score and the number of stars; a positive integer.",
+                  "descriptionEn": "The highest score and the number of stars; a positive integer."
+                },
+                {
+                  "name": "allowClear",
+                  "type": "boolean",
+                  "default": "true",
+                  "description": "Choosing the current score again clears it. Off, a score can be changed but not withdrawn.",
+                  "descriptionEn": "Choosing the current score again clears it. Off, a score can be changed but not withdrawn."
+                },
+                {
+                  "name": "readOnly",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "No longer a control: rendered as role=\"img\" (named \"Rating 4 of 5\") plus the visible \"4 / 5\".",
+                  "descriptionEn": "No longer a control: rendered as role=\"img\" (named \"Rating 4 of 5\") plus the visible \"4 / 5\"."
+                },
+                {
+                  "name": "disabled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Inert; not submitted.",
+                  "descriptionEn": "Inert; not submitted."
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "description": "Native form field name; submits the chosen score and nothing when unrated.",
+                  "descriptionEn": "Native form field name; submits the chosen score and nothing when unrated."
+                },
+                {
+                  "name": "aria-label / aria-labelledby",
+                  "type": "string",
+                  "description": "The group's name, \"Rating\" by default; in a Field with a FieldLabel the label names it.",
+                  "descriptionEn": "The group's name, \"Rating\" by default; in a Field with a FieldLabel the label names it."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Enter or leave the whole group; it is one tab stop (the chosen star, or the first when unrated).",
+              "descriptionEn": "Enter or leave the whole group; it is one tab stop (the chosen star, or the first when unrated)."
+            },
+            {
+              "keys": "→ / ↓ / ← / ↑",
+              "description": "Move to the neighbouring star and choose it. Left and right swap in RTL.",
+              "descriptionEn": "Move to the neighbouring star and choose it. Left and right swap in RTL."
+            },
+            {
+              "keys": "Space",
+              "description": "Choose the focused star; clear it when it is the current score and allowClear is on.",
+              "descriptionEn": "Choose the focused star; clear it when it is the current score and allowClear is on."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Continuity through change （进退相承）"
+            ],
+            "whenToUse": [
+              "Let a person give a score on a finite scale.",
+              "Show an existing rating (read-only)."
+            ],
+            "avoid": [
+              "Use Slider for continuous values.",
+              "Use RadioGroup for two or three mutually exclusive text options.",
+              "Use Switch or Checkbox for yes / no."
+            ],
+            "composition": [
+              "FieldLabel + Rating + FieldDescription + FieldError; the read-only display can sit inline."
+            ],
+            "stateOwner": {
+              "library": [
+                "Uncontrolled score, hover preview and focus."
+              ],
+              "application": [
+                "The controlled score, what the rating means and its submission, invalid."
+              ]
+            },
+            "responsive": [
+              "Star size reads the fill-control icon step and follows density; coarse pointers get the touch target; this batch checked desktop only."
+            ],
+            "customization": [
+              "className; max; allowClear."
             ]
           },
           "providerGuidance": []
@@ -41564,7 +42461,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42690,7 +43587,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44697,7 +45594,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46953,7 +47850,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47575,7 +48472,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48329,7 +49226,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48885,7 +49782,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49621,7 +50518,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50029,7 +50926,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50487,7 +51384,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52836,7 +53733,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53289,7 +54186,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54354,7 +55251,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54911,7 +55808,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55457,7 +56354,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56078,7 +56975,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58668,6 +59565,514 @@
       }
     },
     {
+      "name": "transfer",
+      "title": "穿梭框 Transfer",
+      "description": "把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。",
+      "category": "表单",
+      "source": "local",
+      "layer": "primitive",
+      "import": "@qingye_lab/ui/components/transfer",
+      "exports": [
+        "Transfer"
+      ],
+      "docs": "/docs/components/transfer",
+      "notes": [
+        "只有「勾选、当前可见（过了筛选）、未禁用」的条目会移动；被筛选隐藏的已勾选项不会被带走。",
+        "移动按钮在没有可移动条目时用 aria-disabled 而不是 disabled：它仍可聚焦，读屏仍能读到它的名字「将所选 n 项移到……」。",
+        "每次移动后用 role=\"status\" 的屏幕阅读器专用文字播报「已移到“已选” n 项」。",
+        "两侧各自是带名称的复选框组，计数「n / m」是它的描述；全选是父复选框，部分选中时显示不确定态。"
+      ],
+      "keywords": [
+        "transfer",
+        "穿梭框",
+        "穿梭",
+        "双栏",
+        "移动",
+        "选择",
+        "列表",
+        "dual list"
+      ],
+      "api": [
+        {
+          "name": "Transfer",
+          "description": "两个带复选框的列表加中间的移动按钮。每个条目只在其中一侧；value 决定哪些条目在右侧。",
+          "descriptionEn": "Two checkbox lists with move buttons between them. Each item is on exactly one side; value decides which are on the right.",
+          "props": [
+            {
+              "name": "items",
+              "type": "{ value: string; label: string; disabled?: boolean }[]",
+              "description": "全部条目。value 与 label 必须非空，value 在 items 内唯一，否则抛错。",
+              "descriptionEn": "All items. value and label must be non-empty and value unique within items, or it throws."
+            },
+            {
+              "name": "value / defaultValue",
+              "type": "string[]",
+              "default": "[]",
+              "description": "右侧（已选）条目的键，受控或非受控。",
+              "descriptionEn": "Keys of the items on the right (selected), controlled or uncontrolled."
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: string[], details: { direction: \"toTarget\" | \"toSource\"; moved: string[] }) => void",
+              "description": "移动发生时调用：新的完整键集合，以及本次的方向与被移动的键。移入的键追加在现有值之后。",
+              "descriptionEn": "Called when a move happens: the new full set of keys plus the direction and the keys moved. Keys moved in are appended after the current value."
+            },
+            {
+              "name": "titles",
+              "type": "[string, string]",
+              "default": "候选 / 已选",
+              "description": "两侧标题，同时是各自列表的可访问名称。",
+              "descriptionEn": "The two titles, which also name each list for assistive technology."
+            },
+            {
+              "name": "searchable",
+              "type": "boolean",
+              "default": "false",
+              "description": "每侧加一个筛选输入。全选、计数与移动只作用于筛选后可见的条目。",
+              "descriptionEn": "Adds a filter input to each side. Select all, the count and moving act on the visible, filtered items only."
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "description": "右侧每个键以同名隐藏字段随原生表单提交；表单重置时恢复默认值。",
+              "descriptionEn": "Each key on the right is submitted as a hidden field of this name; a form reset restores the default value."
+            },
+            {
+              "name": "disabled",
+              "type": "boolean",
+              "default": "false",
+              "description": "整个穿梭框不可操作，不提交。",
+              "descriptionEn": "The whole component is inert and is not submitted."
+            },
+            {
+              "name": "listClassName",
+              "type": "string",
+              "description": "列表区域的 className。默认两侧同高并固定，移动时版面不跳。",
+              "descriptionEn": "className for the list areas. By default both are the same fixed height so the layout does not jump when items move."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "Transfer",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "readonly string[]",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:28"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:37"
+              },
+              {
+                "name": "items",
+                "optional": false,
+                "type": "readonly TransferItem[]",
+                "doc": "全部候选项。每项属于左侧（候选）或右侧（已选），由 value 决定。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:25"
+              },
+              {
+                "name": "listClassName",
+                "optional": true,
+                "type": "string",
+                "doc": "列表区域的 className（默认固定高度，两侧同高，移动时版面不跳）。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:39"
+              },
+              {
+                "name": "name",
+                "optional": true,
+                "type": "string",
+                "doc": "给了 name，右侧每一项的键以同名隐藏字段随原生表单提交。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:36"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "(value: string[], details: TransferChangeDetails) => void",
+                "doc": "只在移动发生时调用，给出移动后的完整键集合与本次移动的方向、键。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:30"
+              },
+              {
+                "name": "searchable",
+                "optional": true,
+                "type": "boolean",
+                "doc": "每侧提供一个筛选输入。全选、计数与移动都只作用于筛选后可见的项。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:34"
+              },
+              {
+                "name": "titles",
+                "optional": true,
+                "type": "readonly [string, string]",
+                "doc": "两侧的标题，默认「候选」「已选」。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:32"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "readonly string[]",
+                "doc": "已选项的键（右侧），受控。顺序即移入的先后；显示时两侧都按 items 的顺序。",
+                "declaredAt": "packages/ui/src/components/transfer.tsx:27"
+              }
+            ],
+            "inheritedCount": 277,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 277
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "依次经过：左侧全选、筛选、各条目复选框、移动按钮、右侧同样的控件。",
+          "descriptionEn": "Passes through, in order: the left select-all, filter, item checkboxes, the move buttons, then the same controls on the right."
+        },
+        {
+          "keys": "Space",
+          "description": "切换当前复选框（条目或全选）。",
+          "descriptionEn": "Toggles the focused checkbox (an item or select all)."
+        },
+        {
+          "keys": "Enter（移动按钮）",
+          "description": "把所选条目移到另一侧；没有可移动条目时不动作。",
+          "descriptionEn": "On a move button: moves the checked items to the other side; does nothing when none can move."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Transfer",
+          "kind": "function",
+          "owner": "transfer",
+          "module": "@qingye_lab/ui/components/transfer",
+          "propsType": "TransferProps",
+          "signature": "Transfer({ items, value: valueProp, defaultValue = [], onValueChange, titles, searchable = false, name, disabled = false, listClassName, className, ref, ...props }: TransferProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TransferChangeDetails",
+          "kind": "type",
+          "owner": "transfer",
+          "module": "@qingye_lab/ui/components/transfer",
+          "signature": "{ direction: TransferDirection; moved: string[] }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TransferDirection",
+          "kind": "type",
+          "owner": "transfer",
+          "module": "@qingye_lab/ui/components/transfer",
+          "signature": "\"toTarget\" | \"toSource\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TransferItem",
+          "kind": "type",
+          "owner": "transfer",
+          "module": "@qingye_lab/ui/components/transfer",
+          "signature": "{\n  /** 稳定的键，在 items 内唯一；value 数组里放的就是它。 */\n  value: string;\n  label: string;\n  disabled?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TransferProps",
+          "kind": "type",
+          "owner": "transfer",
+          "module": "@qingye_lab/ui/components/transfer",
+          "signature": "Omit<React.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"children\"> & {\n  /** 全部候选项。每项属于左侧（候选）或右侧（已选），由 value 决定。 */\n  items: readonly TransferItem[];\n  /** 已选项的键（右侧），受控。顺序即移入的先后；显示时两侧都按 items 的顺序。 */\n  value?: readonly string[];\n  defaultValue?: readonly string[];\n  /** 只在移动发生时调用，给出移动后的完整键集合与本次移动的方向、键。 */\n  onValueChange?: (value: string[], details: TransferChangeDetails) => void;\n  /** 两侧的标题，默认「候选」「已选」。 */\n  titles?: readonly [string, string];\n  /** 每侧提供一个筛选输入。全选、计数与移动都只作用于筛选后可见的项。 */\n  searchable?: boolean;\n  /** 给了 name，右侧每一项的键以同名隐藏字段随原生表单提交。 */\n  name?: string;\n  disabled?: boolean;\n  /** 列表区域的 className（默认固定高度，两侧同高，移动时版面不跳）。 */\n  listClassName?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "TransferItem",
+          "definition": "export type TransferItem = {\n  /** 稳定的键，在 items 内唯一；value 数组里放的就是它。 */\n  value: string;\n  label: string;\n  disabled?: boolean;\n};"
+        },
+        {
+          "name": "TransferDirection",
+          "definition": "export type TransferDirection = \"toTarget\" | \"toSource\";"
+        },
+        {
+          "name": "TransferChangeDetails",
+          "definition": "export type TransferChangeDetails = { direction: TransferDirection; moved: string[] };"
+        },
+        {
+          "name": "TransferProps",
+          "definition": "export type TransferProps = Omit<React.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"children\"> & {\n  /** 全部候选项。每项属于左侧（候选）或右侧（已选），由 value 决定。 */\n  items: readonly TransferItem[];\n  /** 已选项的键（右侧），受控。顺序即移入的先后；显示时两侧都按 items 的顺序。 */\n  value?: readonly string[];\n  defaultValue?: readonly string[];\n  /** 只在移动发生时调用，给出移动后的完整键集合与本次移动的方向、键。 */\n  onValueChange?: (value: string[], details: TransferChangeDetails) => void;\n  /** 两侧的标题，默认「候选」「已选」。 */\n  titles?: readonly [string, string];\n  /** 每侧提供一个筛选输入。全选、计数与移动都只作用于筛选后可见的项。 */\n  searchable?: boolean;\n  /** 给了 name，右侧每一项的键以同名隐藏字段随原生表单提交。 */\n  name?: string;\n  disabled?: boolean;\n  /** 列表区域的 className（默认固定高度，两侧同高，移动时版面不跳）。 */\n  listClassName?: string;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Transfer",
+          "import": "@qingye_lab/ui/components/transfer",
+          "owner": "transfer",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@daypicker/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/checkbox",
+          "@base-ui/react/checkbox-group",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/input",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "basic",
+          "title": "基础",
+          "source": "apps/docs/src/content/transfer/demos/01-basic.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/transfer",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Transfer } from \"@qingye_lab/ui/components/transfer\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"基础\", titleEn: \"Basic\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const labels = en ? [\"Apple\", \"Banana\", \"Cherry\", \"Grape\", \"Lemon\", \"Mango\", \"Peach\", \"Pear\"] : [\"苹果\", \"香蕉\", \"樱桃\", \"葡萄\", \"柠檬\", \"芒果\", \"桃\", \"梨\"];\n  const items = labels.map((label, index) => ({ value: `k${index}`, label, disabled: index === 3 }));\n  const [value, setValue] = useState<string[]>([\"k2\", \"k5\"]);\n  return <div className=\"flex w-full max-w-xl flex-col gap-(--qy-space-3)\">\n    <Transfer items={items} value={value} onValueChange={setValue} />\n    <output className=\"text-support text-muted-foreground\" aria-live=\"polite\">{value.length} / {items.length}</output>\n  </div>;\n}\n",
+          "sha256": "04a5c2d20d28297d648480554cdebaead3472d813feb9d4545ec259b21bb7c72"
+        },
+        {
+          "id": "searchable",
+          "title": "筛选与表单",
+          "source": "apps/docs/src/content/transfer/demos/02-searchable.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/transfer",
+            "@qingye_lab/ui/locale"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Transfer } from \"@qingye_lab/ui/components/transfer\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"筛选与表单\", titleEn: \"Filter and form\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const labels = en\n    ? [\"Alder\", \"Birch\", \"Cedar\", \"Cypress\", \"Elm\", \"Fir\", \"Ginkgo\", \"Hazel\", \"Juniper\", \"Larch\", \"Maple\", \"Oak\"]\n    : [\"赤杨\", \"白桦\", \"雪松\", \"柏\", \"榆\", \"冷杉\", \"银杏\", \"榛\", \"杜松\", \"落叶松\", \"枫\", \"橡\"];\n  const items = labels.map((label, index) => ({ value: `t${index}`, label }));\n  return <Field name=\"trees\" className=\"w-full max-w-xl\">\n    <FieldLabel>{en ? \"Trees\" : \"树种\"}</FieldLabel>\n    <Transfer name=\"trees\" items={items} searchable defaultValue={[\"t1\"]} titles={en ? [\"Available\", \"Chosen\"] : [\"候选\", \"选中\"]} />\n    <FieldDescription>{en ? \"Select all and moving act on the filtered items only.\" : \"全选与移动只作用于筛选后的条目。\"}</FieldDescription>\n  </Field>;\n}\n",
+          "sha256": "b8c35135169a465a9a4ae2c9359f8f2a67ce9ceb4a28b97c3b61dd311193a437"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "进退相承",
+          "疏密有致"
+        ],
+        "whenToUse": [
+          "在两个互斥的集合之间分配一批条目",
+          "需要同时看到「已选」全貌并能逐项撤回"
+        ],
+        "avoid": [
+          "选一个或几个、不需要总览已选项时用 Select 或 Combobox",
+          "条目成千上万时用带搜索的 Combobox 或表格选择",
+          "只有开关含义的少量选项用 CheckboxGroup"
+        ],
+        "composition": [
+          "FieldLabel + Transfer + FieldDescription + FieldError",
+          "titles 取与业务一致的两个名词，而不是「左」「右」"
+        ],
+        "stateOwner": {
+          "library": [
+            "非受控的已选键、各侧临时勾选与筛选词、焦点"
+          ],
+          "application": [
+            "受控的已选键、条目来源、选择的含义与提交、invalid"
+          ]
+        },
+        "responsive": [
+          "三列：两侧等宽，中间按钮列按内容；窄容器内两侧收窄但不换行；本批只做桌面检查"
+        ],
+        "customization": [
+          "titles；listClassName；items 的 disabled"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/transfer.tsx",
+        "sha256": "84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "穿梭框解决的是「从一大批里挑出一小批并能回头调整」，所以两侧都是完整的列表，而不是一个下拉加一排标签。它的值只是右侧的键数组，勾选状态是临时的，不进入值。条目多时由应用先做筛选或分页，本组件不做虚拟滚动：固定高度的列表在几百项内足够，更大的数据量应换成 Combobox 或 Table 里的选择。",
+      "localized": {
+        "en": {
+          "title": "Transfer",
+          "description": "Move items between an available list and a selected list; the value is the keys on the selected side.",
+          "category": "Forms",
+          "decisions": "Transfer is for picking a small set out of a large one and being able to revise it, so both sides are full lists rather than a dropdown plus a row of tags. Its value is only the keys on the right; checks are transient and never enter the value. It does not virtualise: a fixed-height list is enough for a few hundred items, and larger sets belong in a Combobox or table selection.",
+          "notes": [
+            "Only items that are checked, currently visible (past the filter) and enabled move; checked items hidden by the filter are not carried along.",
+            "A move button uses aria-disabled rather than disabled when nothing can move, so it stays focusable and a screen reader can still read its name, \"Move n selected to …\".",
+            "After each move a screen-reader-only role=\"status\" announces \"n moved to “Selected”\".",
+            "Each side is a named checkbox group whose description is the count \"n / m\"; select all is the parent checkbox and shows the indeterminate state when partially checked."
+          ],
+          "api": [
+            {
+              "name": "Transfer",
+              "description": "Two checkbox lists with move buttons between them. Each item is on exactly one side; value decides which are on the right.",
+              "descriptionEn": "Two checkbox lists with move buttons between them. Each item is on exactly one side; value decides which are on the right.",
+              "props": [
+                {
+                  "name": "items",
+                  "type": "{ value: string; label: string; disabled?: boolean }[]",
+                  "description": "All items. value and label must be non-empty and value unique within items, or it throws.",
+                  "descriptionEn": "All items. value and label must be non-empty and value unique within items, or it throws."
+                },
+                {
+                  "name": "value / defaultValue",
+                  "type": "string[]",
+                  "default": "[]",
+                  "description": "Keys of the items on the right (selected), controlled or uncontrolled.",
+                  "descriptionEn": "Keys of the items on the right (selected), controlled or uncontrolled."
+                },
+                {
+                  "name": "onValueChange",
+                  "type": "(value: string[], details: { direction: \"toTarget\" | \"toSource\"; moved: string[] }) => void",
+                  "description": "Called when a move happens: the new full set of keys plus the direction and the keys moved. Keys moved in are appended after the current value.",
+                  "descriptionEn": "Called when a move happens: the new full set of keys plus the direction and the keys moved. Keys moved in are appended after the current value."
+                },
+                {
+                  "name": "titles",
+                  "type": "[string, string]",
+                  "default": "候选 / 已选",
+                  "description": "The two titles, which also name each list for assistive technology.",
+                  "descriptionEn": "The two titles, which also name each list for assistive technology."
+                },
+                {
+                  "name": "searchable",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Adds a filter input to each side. Select all, the count and moving act on the visible, filtered items only.",
+                  "descriptionEn": "Adds a filter input to each side. Select all, the count and moving act on the visible, filtered items only."
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "description": "Each key on the right is submitted as a hidden field of this name; a form reset restores the default value.",
+                  "descriptionEn": "Each key on the right is submitted as a hidden field of this name; a form reset restores the default value."
+                },
+                {
+                  "name": "disabled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "The whole component is inert and is not submitted.",
+                  "descriptionEn": "The whole component is inert and is not submitted."
+                },
+                {
+                  "name": "listClassName",
+                  "type": "string",
+                  "description": "className for the list areas. By default both are the same fixed height so the layout does not jump when items move.",
+                  "descriptionEn": "className for the list areas. By default both are the same fixed height so the layout does not jump when items move."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Passes through, in order: the left select-all, filter, item checkboxes, the move buttons, then the same controls on the right.",
+              "descriptionEn": "Passes through, in order: the left select-all, filter, item checkboxes, the move buttons, then the same controls on the right."
+            },
+            {
+              "keys": "Space",
+              "description": "Toggles the focused checkbox (an item or select all).",
+              "descriptionEn": "Toggles the focused checkbox (an item or select all)."
+            },
+            {
+              "keys": "Enter（移动按钮）",
+              "description": "On a move button: moves the checked items to the other side; does nothing when none can move.",
+              "descriptionEn": "On a move button: moves the checked items to the other side; does nothing when none can move."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Continuity through change （进退相承）",
+              "疏密有致"
+            ],
+            "whenToUse": [
+              "Allocate a batch of items between two mutually exclusive sets.",
+              "People need to see the whole selected set and withdraw items one by one."
+            ],
+            "avoid": [
+              "Use Select or Combobox to pick one or a few without an overview of the chosen set.",
+              "Use a searchable Combobox or table selection for thousands of items.",
+              "Use CheckboxGroup for a few on / off options."
+            ],
+            "composition": [
+              "FieldLabel + Transfer + FieldDescription + FieldError.",
+              "Make titles two nouns the task uses, not \"Left\" and \"Right\"."
+            ],
+            "stateOwner": {
+              "library": [
+                "Uncontrolled selected keys, per-side transient checks and filter text, focus."
+              ],
+              "application": [
+                "Controlled selected keys, where items come from, what the choice means and its submission, invalid."
+              ]
+            },
+            "responsive": [
+              "Three columns: equal sides, a content-sized button column; in narrow containers the sides shrink without wrapping; this batch checked desktop only."
+            ],
+            "customization": [
+              "titles; listClassName; per-item disabled."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
       "name": "tree",
       "title": "层级集合 Tree",
       "description": "稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。",
@@ -59004,7 +60409,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59539,7 +60944,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61361,7 +62766,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:162",
+            "declaredAt": "packages/ui/src/locale.tsx:171",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61695,6 +63100,7 @@
     "chart",
     "checkbox",
     "checkbox-group",
+    "chip",
     "code-block",
     "collapsible",
     "color-picker",
@@ -61745,6 +63151,7 @@
     "proportion",
     "prose",
     "radio-group",
+    "rating",
     "resizable",
     "scatter-chart",
     "scroll-area",
@@ -61775,6 +63182,7 @@
     "toggle-group",
     "toolbar",
     "tooltip",
+    "transfer",
     "tree",
     "tree-select",
     "typography",

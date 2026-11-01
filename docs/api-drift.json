@@ -10,9 +10,9 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 102,
+    "components": 105,
     "byStatus": {
-      "type-resolved": 102
+      "type-resolved": 105
     },
     "documentedButMissing": 0,
     "undocumented": 145,

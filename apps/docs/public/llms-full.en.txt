@@ -363,7 +363,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# Part 3. Components (102)
+# Part 3. Components (105)
 
 ## Accordion
 
@@ -2444,7 +2444,113 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+1 more examples: see the component page and its Markdown file.
+
+## Chip
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/chip
+Source: packages/ui/src/components/chip.tsx
+Source SHA-256: ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1
+
+A small mark that can be acted on by itself: removable, or toggleable.
+
+### Decision
+Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. The two forms are not merged into one component with a mode: removing is a one-way action and toggling is a reversible state, and their roles, keyboard and naming rules differ, so there are two components, Chip and ChipToggle. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.
+
+### Notes
+- The remove button is named "Remove X" from the chip text, so several chips in one row are distinguishable to assistive technology.
+- A ChipToggle's name does not change with its pressed state; the state is carried only by aria-pressed.
+- Focus disappears with the removed node: the caller moves it to a neighbouring chip or to the container.
+
+### Use and ownership
+- A set of chosen conditions, each of which can be dropped on its own.
+- A set of filters, each of which can be switched on or off.
+- Avoid: Use Badge for an inert status annotation.
+- Avoid: Use TagInput for values collected inside an input.
+- Avoid: Use RadioGroup or SegmentedControl for mutually exclusive options.
+- Library: A ChipToggle's uncontrolled pressed state and focus.
+- Application: The collection of Chips (whether a removed one is kept), what a filter actually means, and where focus goes after removal.
+
+### Composition
+- Place several Chips in a flex-wrap row; put ChipToggles in a named group.
+
+### Responsive behavior
+- Long text is truncated while the full text stays in the DOM; this batch checked desktop only.
+
+### Customization
+- className; the Chip render prop.
+
+### Current exports
+- Chip: function; owner chip; PASS; props: ChipProps
+- ChipProps: type; owner chip; PASS
+- ChipToggle: function; owner chip; PASS; props: ChipToggleProps<Value>
+- ChipToggleProps: type; owner chip; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Chip
+- `children`: `string`. 记号上的文字，同时决定移除动作的名称（「移除 X」）。
+- `disabled?`: `boolean`. 禁用后移除按钮不可操作；记号本身仍显示。
+- `onRemove?`: `(event: React.SyntheticEvent<HTMLElement>) => void`. 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
+
+### ChipToggle
+- no props declared by this library
+- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Chip
+A removable mark: text plus a remove button. Without onRemove it is only text on a surface.
+- children: string. The text on the mark; it also names the remove button ("Remove X").
+- onRemove: (event) => void. The remove button appears only when given. Click, Enter, Space, Backspace and Delete all call it; whether the chip disappears and where focus goes is up to the caller.
+- disabled: boolean; default false. The remove button is inert; the mark still shows.
+- render / ref / className: Base UI composition. Composition entry points of the root span.
+
+#### ChipToggle
+A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.
+- pressed / defaultPressed: boolean. Controlled or initial pressed state.
+- onPressedChange: (pressed: boolean, details) => void. Called when the pressed state changes.
+- disabled: boolean; default false. Inert; the pressed fact is kept.
+
+### Keyboard
+- Tab / Shift+Tab: Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable.
+- Enter / Space: Remove, or toggle the pressed state.
+- Backspace / Delete: With focus on the remove button, remove the chip.
+
+### Source example
+#### 可移除
+Source: apps/docs/src/content/chip/demos/01-removable.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Chip } from "@qingye_lab/ui/components/chip";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "可移除", titleEn: "Removable" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const all = en ? ["Design", "Engineering", "Operations", "Finance"] : ["设计", "工程", "运营", "财务"];
+  const [items, setItems] = useState(all.slice(0, 3));
+  const next = all.find(item => !items.includes(item));
+  return <div className="flex flex-wrap items-center gap-(--qy-space-2)">
+    {items.map(item => <Chip key={item} onRemove={() => setItems(items.filter(other => other !== item))}>{item}</Chip>)}
+    <Button variant="bordered" size="sm" aria-disabled={next === undefined || undefined} onClick={() => { if (next !== undefined) setItems([...items, next]); }}>{en ? "Add" : "添加"}</Button>
+  </div>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## CodeBlock
 
@@ -8406,6 +8512,107 @@ export default function Demo() {
 
 1 more examples: see the component page and its Markdown file.
 
+## Rating
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/rating
+Source: packages/ui/src/components/rating.tsx
+Source SHA-256: a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d
+
+Give an integer score from 1 to max, shown as a row of stars.
+
+### Decision
+Rating is a radio group, not a slider: the score is one of a finite set of mutually exclusive integers, and arrow keys choose as they move. Half stars are not offered: raise max for a finer scale instead of introducing fractions. Read-only does not keep radio semantics, since a row of inert radios is noise to a screen reader; it is a conclusion, so it reads as an image carrying the score.
+
+### Notes
+- Stars are named "n stars" and the group "Rating", so assistive technology reads "Rating, 3 stars, checked" without relying on colour.
+- Hover previews a score for display only; the value does not change before the click.
+- Filled and empty stars differ in shape and occupy the same space, so state changes never change the component's outline.
+
+### Use and ownership
+- Let a person give a score on a finite scale.
+- Show an existing rating (read-only).
+- Avoid: Use Slider for continuous values.
+- Avoid: Use RadioGroup for two or three mutually exclusive text options.
+- Avoid: Use Switch or Checkbox for yes / no.
+- Library: Uncontrolled score, hover preview and focus.
+- Application: The controlled score, what the rating means and its submission, invalid.
+
+### Composition
+- FieldLabel + Rating + FieldDescription + FieldError; the read-only display can sit inline.
+
+### Responsive behavior
+- Star size reads the fill-control icon step and follows density; coarse pointers get the touch target; this batch checked desktop only.
+
+### Customization
+- className; max; allowClear.
+
+### Current exports
+- Rating: function; owner rating; PASS; props: RatingProps
+- RatingProps: type; owner rating; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Rating
+- `allowClear?`: `boolean`. 再点一次当前分值就清除（回到 0）。默认开启；关闭后一旦评过分只能改不能撤。
+- `defaultValue?`: `number`.
+- `max?`: `number`. 最高分，也是星的个数；正整数，默认 5。
+- `onValueChange?`: `(value: number) => void`.
+- `value?`: `number`. 受控的分值，0 表示未评分；整数，范围 0..max。
+- plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Rating
+Rating with radio-group semantics: each star is a radio and choosing the nth means score n. Read-only, it is an image plus "n / max".
+- value / defaultValue: number; default 0. The score: an integer where 0 means unrated, within 0..max; out of range or non-integers throw a RangeError.
+- onValueChange: (value: number) => void. Called when the score changes; 0 on clearing.
+- max: number; default 5. The highest score and the number of stars; a positive integer.
+- allowClear: boolean; default true. Choosing the current score again clears it. Off, a score can be changed but not withdrawn.
+- readOnly: boolean; default false. No longer a control: rendered as role="img" (named "Rating 4 of 5") plus the visible "4 / 5".
+- disabled: boolean; default false. Inert; not submitted.
+- name: string. Native form field name; submits the chosen score and nothing when unrated.
+- aria-label / aria-labelledby: string. The group's name, "Rating" by default; in a Field with a FieldLabel the label names it.
+
+### Keyboard
+- Tab / Shift+Tab: Enter or leave the whole group; it is one tab stop (the chosen star, or the first when unrated).
+- → / ↓ / ← / ↑: Move to the neighbouring star and choose it. Left and right swap in RTL.
+- Space: Choose the focused star; clear it when it is the current score and allowClear is on.
+
+### Source example
+#### 评分
+Source: apps/docs/src/content/rating/demos/01-basic.tsx
+```tsx
+import { useState } from "react";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Rating } from "@qingye_lab/ui/components/rating";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "评分", titleEn: "Score" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const [value, setValue] = useState(3);
+  return <Field name="score">
+    <FieldLabel>{en ? "Quality" : "质量"}</FieldLabel>
+    <Rating value={value} onValueChange={setValue} />
+    <output className="text-support text-muted-foreground" aria-live="polite">{value} / 5</output>
+  </Field>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## Resizable
 
 Package: @qingye_lab/ui@5.2.0
@@ -11969,6 +12176,114 @@ export default function Demo() {
 ```
 
 3 more examples: see the component page and its Markdown file.
+
+## Transfer
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/transfer
+Source: packages/ui/src/components/transfer.tsx
+Source SHA-256: 84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159
+
+Move items between an available list and a selected list; the value is the keys on the selected side.
+
+### Decision
+Transfer is for picking a small set out of a large one and being able to revise it, so both sides are full lists rather than a dropdown plus a row of tags. Its value is only the keys on the right; checks are transient and never enter the value. It does not virtualise: a fixed-height list is enough for a few hundred items, and larger sets belong in a Combobox or table selection.
+
+### Notes
+- Only items that are checked, currently visible (past the filter) and enabled move; checked items hidden by the filter are not carried along.
+- A move button uses aria-disabled rather than disabled when nothing can move, so it stays focusable and a screen reader can still read its name, "Move n selected to …".
+- After each move a screen-reader-only role="status" announces "n moved to “Selected”".
+- Each side is a named checkbox group whose description is the count "n / m"; select all is the parent checkbox and shows the indeterminate state when partially checked.
+
+### Use and ownership
+- Allocate a batch of items between two mutually exclusive sets.
+- People need to see the whole selected set and withdraw items one by one.
+- Avoid: Use Select or Combobox to pick one or a few without an overview of the chosen set.
+- Avoid: Use a searchable Combobox or table selection for thousands of items.
+- Avoid: Use CheckboxGroup for a few on / off options.
+- Library: Uncontrolled selected keys, per-side transient checks and filter text, focus.
+- Application: Controlled selected keys, where items come from, what the choice means and its submission, invalid.
+
+### Composition
+- FieldLabel + Transfer + FieldDescription + FieldError.
+- Make titles two nouns the task uses, not "Left" and "Right".
+
+### Responsive behavior
+- Three columns: equal sides, a content-sized button column; in narrow containers the sides shrink without wrapping; this batch checked desktop only.
+
+### Customization
+- titles; listClassName; per-item disabled.
+
+### Current exports
+- Transfer: function; owner transfer; PASS; props: TransferProps
+- TransferChangeDetails: type; owner transfer; PASS
+- TransferDirection: type; owner transfer; PASS
+- TransferItem: type; owner transfer; PASS
+- TransferProps: type; owner transfer; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Transfer
+- `defaultValue?`: `readonly string[]`.
+- `disabled?`: `boolean`.
+- `items`: `readonly TransferItem[]`. 全部候选项。每项属于左侧（候选）或右侧（已选），由 value 决定。
+- `listClassName?`: `string`. 列表区域的 className（默认固定高度，两侧同高，移动时版面不跳）。
+- `name?`: `string`. 给了 name，右侧每一项的键以同名隐藏字段随原生表单提交。
+- `onValueChange?`: `(value: string[], details: TransferChangeDetails) => void`. 只在移动发生时调用，给出移动后的完整键集合与本次移动的方向、键。
+- `searchable?`: `boolean`. 每侧提供一个筛选输入。全选、计数与移动都只作用于筛选后可见的项。
+- `titles?`: `readonly [string, string]`. 两侧的标题，默认「候选」「已选」。
+- `value?`: `readonly string[]`. 已选项的键（右侧），受控。顺序即移入的先后；显示时两侧都按 items 的顺序。
+- plus 277 inherited (@types/react 277); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Transfer
+Two checkbox lists with move buttons between them. Each item is on exactly one side; value decides which are on the right.
+- items: { value: string; label: string; disabled?: boolean }[]. All items. value and label must be non-empty and value unique within items, or it throws.
+- value / defaultValue: string[]; default []. Keys of the items on the right (selected), controlled or uncontrolled.
+- onValueChange: (value: string[], details: { direction: "toTarget" | "toSource"; moved: string[] }) => void. Called when a move happens: the new full set of keys plus the direction and the keys moved. Keys moved in are appended after the current value.
+- titles: [string, string]; default 候选 / 已选. The two titles, which also name each list for assistive technology.
+- searchable: boolean; default false. Adds a filter input to each side. Select all, the count and moving act on the visible, filtered items only.
+- name: string. Each key on the right is submitted as a hidden field of this name; a form reset restores the default value.
+- disabled: boolean; default false. The whole component is inert and is not submitted.
+- listClassName: string. className for the list areas. By default both are the same fixed height so the layout does not jump when items move.
+
+### Keyboard
+- Tab / Shift+Tab: Passes through, in order: the left select-all, filter, item checkboxes, the move buttons, then the same controls on the right.
+- Space: Toggles the focused checkbox (an item or select all).
+- Enter（移动按钮）: On a move button: moves the checked items to the other side; does nothing when none can move.
+
+### Source example
+#### 基础
+Source: apps/docs/src/content/transfer/demos/01-basic.tsx
+```tsx
+import { useState } from "react";
+import { Transfer } from "@qingye_lab/ui/components/transfer";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "基础", titleEn: "Basic" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const labels = en ? ["Apple", "Banana", "Cherry", "Grape", "Lemon", "Mango", "Peach", "Pear"] : ["苹果", "香蕉", "樱桃", "葡萄", "柠檬", "芒果", "桃", "梨"];
+  const items = labels.map((label, index) => ({ value: `k${index}`, label, disabled: index === 3 }));
+  const [value, setValue] = useState<string[]>(["k2", "k5"]);
+  return <div className="flex w-full max-w-xl flex-col gap-(--qy-space-3)">
+    <Transfer items={items} value={value} onValueChange={setValue} />
+    <output className="text-support text-muted-foreground" aria-live="polite">{value.length} / {items.length}</output>
+  </div>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Tree
 

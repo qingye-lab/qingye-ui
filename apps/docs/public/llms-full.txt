@@ -708,7 +708,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# 第三部分 组件 (102)
+# 第三部分 组件 (105)
 
 ## 分组展开 Accordion
 
@@ -2789,7 +2789,113 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+1 more examples: see the component page and its Markdown file.
+
+## 标签片 Chip
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/chip
+Source: packages/ui/src/components/chip.tsx
+Source SHA-256: ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1
+
+一枚可以被单独操作的小记号：可移除，或可开关。
+
+### Decision
+Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。Chip 的两种形态不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，二者的读屏角色、键盘与名称规则都不同，所以是 Chip 与 ChipToggle 两个组件。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。
+
+### Notes
+- 移除按钮的名称是「移除 X」，X 取记号文字，所以同一行里多个记号读屏时彼此可分。
+- ChipToggle 的名称不随按下与否变化，状态只由 aria-pressed 表达。
+- 移除之后焦点会随被移除的节点一起消失：由调用方把焦点移到相邻记号或它所在的容器。
+
+### Use and ownership
+- 一组已选条件，每个都能单独去掉
+- 一组筛选条件，每个都能单独开关
+- Avoid: 不可操作的状态标注用 Badge
+- Avoid: 在输入框内收下的值用 TagInput
+- Avoid: 互斥的几个选项用 RadioGroup 或 SegmentedControl
+- Library: ChipToggle 的非受控按下状态、焦点
+- Application: Chip 的集合（移除后是否保留）、筛选条件的实际含义、移除后的焦点去向
+
+### Composition
+- 多个 Chip 放进 flex-wrap 的行；ChipToggle 放进带名称的 group
+
+### Responsive behavior
+- 文字过长时截断，完整文字仍在 DOM；本批只做桌面检查
+
+### Customization
+- className；Chip 的 render
+
+### Current exports
+- Chip: function; owner chip; PASS; props: ChipProps
+- ChipProps: type; owner chip; PASS
+- ChipToggle: function; owner chip; PASS; props: ChipToggleProps<Value>
+- ChipToggleProps: type; owner chip; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Chip
+- `children`: `string`. 记号上的文字，同时决定移除动作的名称（「移除 X」）。
+- `disabled?`: `boolean`. 禁用后移除按钮不可操作；记号本身仍显示。
+- `onRemove?`: `(event: React.SyntheticEvent<HTMLElement>) => void`. 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。
+- plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
+
+### ChipToggle
+- no props declared by this library
+- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Chip
+可移除的记号：一段文字加一个移除按钮。不给 onRemove 就只是一段带底的文字。
+- children: string. 记号上的文字，同时决定移除按钮的名称（「移除 X」）。
+- onRemove: (event) => void. 给了才出现移除按钮。点击、Enter、Space、Backspace、Delete 都调用它；移除后记号是否消失、焦点去哪里由调用方决定。
+- disabled: boolean; default false. 移除按钮不可操作，记号仍显示。
+- render / ref / className: Base UI composition. 根部位 span 的组合入口。
+
+#### ChipToggle
+可开关的记号：按钮加 aria-pressed。属性与 Toggle 相同，只是固定为 sm 档。
+- pressed / defaultPressed: boolean. 受控或初始的按下状态。
+- onPressedChange: (pressed: boolean, details) => void. 按下状态改变时调用。
+- disabled: boolean; default false. 不可操作；按下的事实保留。
+
+### Keyboard
+- Tab / Shift+Tab: Chip 的移除按钮、ChipToggle 各是一个停靠点；记号文字本身不可聚焦。
+- Enter / Space: 移除，或切换按下状态。
+- Backspace / Delete: 焦点在移除按钮上时移除该记号。
+
+### Source example
+#### 可移除
+Source: apps/docs/src/content/chip/demos/01-removable.tsx
+```tsx
+import { useState } from "react";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Chip } from "@qingye_lab/ui/components/chip";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "可移除", titleEn: "Removable" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const all = en ? ["Design", "Engineering", "Operations", "Finance"] : ["设计", "工程", "运营", "财务"];
+  const [items, setItems] = useState(all.slice(0, 3));
+  const next = all.find(item => !items.includes(item));
+  return <div className="flex flex-wrap items-center gap-(--qy-space-2)">
+    {items.map(item => <Chip key={item} onRemove={() => setItems(items.filter(other => other !== item))}>{item}</Chip>)}
+    <Button variant="bordered" size="sm" aria-disabled={next === undefined || undefined} onClick={() => { if (next !== undefined) setItems([...items, next]); }}>{en ? "Add" : "添加"}</Button>
+  </div>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 代码 CodeBlock
 
@@ -8751,6 +8857,107 @@ export default function Demo() {
 
 1 more examples: see the component page and its Markdown file.
 
+## 评分 Rating
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/rating
+Source: packages/ui/src/components/rating.tsx
+Source SHA-256: a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d
+
+在 1 到 max 之间给出一个整数分值，用一排星表示。
+
+### Decision
+评分是单选组，不是滑块：分值是有限个互斥的整数，方向键移动即选中。半星没有提供——要更细的刻度就加大 max，而不是引入小数。只读时不保留单选语义，因为一串不能操作的 radio 对读屏是噪音；它是一个结论，所以读成一幅带分值的图。
+
+### Notes
+- 星的名称是「n 星」，组的名称是「评分」；读屏读到的是「评分，3 星，已选中」，不依赖颜色。
+- 悬停时预览分值，只影响显示；点击前不改变值。
+- 满星与空星靠形状区分，占位相同，状态变化不改变组件外形。
+
+### Use and ownership
+- 让人对一个对象打出有限档位的分
+- 展示一个已有的评分结果（只读）
+- Avoid: 连续的数值用 Slider
+- Avoid: 两三个互斥的文字选项用 RadioGroup
+- Avoid: 是 / 否的判断用 Switch 或 Checkbox
+- Library: 非受控分值、悬停预览、焦点
+- Application: 受控分值、评分的含义与提交、invalid
+
+### Composition
+- FieldLabel + Rating + FieldDescription + FieldError；只读展示可直接放在行内
+
+### Responsive behavior
+- 星的尺寸读填值控件的图标档，随密度；粗指针下命中区扩到触屏目标；本批只做桌面检查
+
+### Customization
+- className；max；allowClear
+
+### Current exports
+- Rating: function; owner rating; PASS; props: RatingProps
+- RatingProps: type; owner rating; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Rating
+- `allowClear?`: `boolean`. 再点一次当前分值就清除（回到 0）。默认开启；关闭后一旦评过分只能改不能撤。
+- `defaultValue?`: `number`.
+- `max?`: `number`. 最高分，也是星的个数；正整数，默认 5。
+- `onValueChange?`: `(value: number) => void`.
+- `value?`: `number`. 受控的分值，0 表示未评分；整数，范围 0..max。
+- plus 282 inherited (@types/react 274, @base-ui/react 8); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Rating
+单选组语义的评分：每颗星是一个 radio，选中第 n 颗即分值 n。只读时是一幅图加「n / max」。
+- value / defaultValue: number; default 0. 分值，整数，0 表示未评分；范围 0..max，越界或非整数会抛 RangeError。
+- onValueChange: (value: number) => void. 分值改变时调用；清除时为 0。
+- max: number; default 5. 最高分，也是星的个数；正整数。
+- allowClear: boolean; default true. 再选当前分值即清除。关闭后评过分只能改不能撤。
+- readOnly: boolean; default false. 不再是控件：渲染为 role="img"（名称「评分 4 / 5」）加可见的「4 / 5」。
+- disabled: boolean; default false. 不可操作；不提交。
+- name: string. 原生表单字段名；提交所选分值，未评分时不提交。
+- aria-label / aria-labelledby: string. 组的名称，默认「评分」；放进带 FieldLabel 的 Field 时由标签命名。
+
+### Keyboard
+- Tab / Shift+Tab: 进入或离开整组；组内只有一个停靠点（已选的星，未评分时是第一颗）。
+- → / ↓ / ← / ↑: 移到相邻的星并选中它。RTL 下左右方向相反。
+- Space: 选中当前的星；它已是当前分值且 allowClear 时清除。
+
+### Source example
+#### 评分
+Source: apps/docs/src/content/rating/demos/01-basic.tsx
+```tsx
+import { useState } from "react";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Rating } from "@qingye_lab/ui/components/rating";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "评分", titleEn: "Score" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const [value, setValue] = useState(3);
+  return <Field name="score">
+    <FieldLabel>{en ? "Quality" : "质量"}</FieldLabel>
+    <Rating value={value} onValueChange={setValue} />
+    <output className="text-support text-muted-foreground" aria-live="polite">{value} / 5</output>
+  </Field>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## 分栏 Resizable
 
 Package: @qingye_lab/ui@5.2.0
@@ -12314,6 +12521,114 @@ export default function Demo() {
 ```
 
 3 more examples: see the component page and its Markdown file.
+
+## 穿梭框 Transfer
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/transfer
+Source: packages/ui/src/components/transfer.tsx
+Source SHA-256: 84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159
+
+把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。
+
+### Decision
+穿梭框解决的是「从一大批里挑出一小批并能回头调整」，所以两侧都是完整的列表，而不是一个下拉加一排标签。它的值只是右侧的键数组，勾选状态是临时的，不进入值。条目多时由应用先做筛选或分页，本组件不做虚拟滚动：固定高度的列表在几百项内足够，更大的数据量应换成 Combobox 或 Table 里的选择。
+
+### Notes
+- 只有「勾选、当前可见（过了筛选）、未禁用」的条目会移动；被筛选隐藏的已勾选项不会被带走。
+- 移动按钮在没有可移动条目时用 aria-disabled 而不是 disabled：它仍可聚焦，读屏仍能读到它的名字「将所选 n 项移到……」。
+- 每次移动后用 role="status" 的屏幕阅读器专用文字播报「已移到“已选” n 项」。
+- 两侧各自是带名称的复选框组，计数「n / m」是它的描述；全选是父复选框，部分选中时显示不确定态。
+
+### Use and ownership
+- 在两个互斥的集合之间分配一批条目
+- 需要同时看到「已选」全貌并能逐项撤回
+- Avoid: 选一个或几个、不需要总览已选项时用 Select 或 Combobox
+- Avoid: 条目成千上万时用带搜索的 Combobox 或表格选择
+- Avoid: 只有开关含义的少量选项用 CheckboxGroup
+- Library: 非受控的已选键、各侧临时勾选与筛选词、焦点
+- Application: 受控的已选键、条目来源、选择的含义与提交、invalid
+
+### Composition
+- FieldLabel + Transfer + FieldDescription + FieldError
+- titles 取与业务一致的两个名词，而不是「左」「右」
+
+### Responsive behavior
+- 三列：两侧等宽，中间按钮列按内容；窄容器内两侧收窄但不换行；本批只做桌面检查
+
+### Customization
+- titles；listClassName；items 的 disabled
+
+### Current exports
+- Transfer: function; owner transfer; PASS; props: TransferProps
+- TransferChangeDetails: type; owner transfer; PASS
+- TransferDirection: type; owner transfer; PASS
+- TransferItem: type; owner transfer; PASS
+- TransferProps: type; owner transfer; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Transfer
+- `defaultValue?`: `readonly string[]`.
+- `disabled?`: `boolean`.
+- `items`: `readonly TransferItem[]`. 全部候选项。每项属于左侧（候选）或右侧（已选），由 value 决定。
+- `listClassName?`: `string`. 列表区域的 className（默认固定高度，两侧同高，移动时版面不跳）。
+- `name?`: `string`. 给了 name，右侧每一项的键以同名隐藏字段随原生表单提交。
+- `onValueChange?`: `(value: string[], details: TransferChangeDetails) => void`. 只在移动发生时调用，给出移动后的完整键集合与本次移动的方向、键。
+- `searchable?`: `boolean`. 每侧提供一个筛选输入。全选、计数与移动都只作用于筛选后可见的项。
+- `titles?`: `readonly [string, string]`. 两侧的标题，默认「候选」「已选」。
+- `value?`: `readonly string[]`. 已选项的键（右侧），受控。顺序即移入的先后；显示时两侧都按 items 的顺序。
+- plus 277 inherited (@types/react 277); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Transfer
+两个带复选框的列表加中间的移动按钮。每个条目只在其中一侧；value 决定哪些条目在右侧。
+- items: { value: string; label: string; disabled?: boolean }[]. 全部条目。value 与 label 必须非空，value 在 items 内唯一，否则抛错。
+- value / defaultValue: string[]; default []. 右侧（已选）条目的键，受控或非受控。
+- onValueChange: (value: string[], details: { direction: "toTarget" | "toSource"; moved: string[] }) => void. 移动发生时调用：新的完整键集合，以及本次的方向与被移动的键。移入的键追加在现有值之后。
+- titles: [string, string]; default 候选 / 已选. 两侧标题，同时是各自列表的可访问名称。
+- searchable: boolean; default false. 每侧加一个筛选输入。全选、计数与移动只作用于筛选后可见的条目。
+- name: string. 右侧每个键以同名隐藏字段随原生表单提交；表单重置时恢复默认值。
+- disabled: boolean; default false. 整个穿梭框不可操作，不提交。
+- listClassName: string. 列表区域的 className。默认两侧同高并固定，移动时版面不跳。
+
+### Keyboard
+- Tab / Shift+Tab: 依次经过：左侧全选、筛选、各条目复选框、移动按钮、右侧同样的控件。
+- Space: 切换当前复选框（条目或全选）。
+- Enter（移动按钮）: 把所选条目移到另一侧；没有可移动条目时不动作。
+
+### Source example
+#### 基础
+Source: apps/docs/src/content/transfer/demos/01-basic.tsx
+```tsx
+import { useState } from "react";
+import { Transfer } from "@qingye_lab/ui/components/transfer";
+import { useUILocale } from "@qingye_lab/ui/locale";
+
+export const meta = { title: "基础", titleEn: "Basic" };
+
+export default function Demo() {
+  const { code } = useUILocale(); const en = code.startsWith("en");
+  const labels = en ? ["Apple", "Banana", "Cherry", "Grape", "Lemon", "Mango", "Peach", "Pear"] : ["苹果", "香蕉", "樱桃", "葡萄", "柠檬", "芒果", "桃", "梨"];
+  const items = labels.map((label, index) => ({ value: `k${index}`, label, disabled: index === 3 }));
+  const [value, setValue] = useState<string[]>(["k2", "k5"]);
+  return <div className="flex w-full max-w-xl flex-col gap-(--qy-space-3)">
+    <Transfer items={items} value={value} onValueChange={setValue} />
+    <output className="text-support text-muted-foreground" aria-live="polite">{value.length} / {items.length}</output>
+  </div>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 层级集合 Tree
 

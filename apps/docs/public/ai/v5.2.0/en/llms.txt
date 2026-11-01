@@ -27,6 +27,7 @@
 - [Chart](components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
+- [Chip](components/chip.md): A small mark that can be acted on by itself: removable, or toggleable.
 - [CodeBlock](components/code-block.md): Literal text with an optional title bar and actual copy results.
 - [Collapsible](components/collapsible.md): Reveal additional content for the same object.
 - [ColorPicker](components/color-picker.md): Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.
@@ -77,6 +78,7 @@
 - [Proportion](components/proportion.md): Which parts make up a whole and how much each takes.
 - [Prose](components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It only typesets by default, with no frame; give it a reading paper with framed when the article stands alone with no surface of its own.
 - [RadioGroup](components/radio-group.md): Choose one value from a small set of visible options.
+- [Rating](components/rating.md): Give an integer score from 1 to max, shown as a row of stars.
 - [Resizable](components/resizable.md): Draggable separators between two or more panels that change how the space is shared.
 - [ScatterChart](components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](components/scroll-area.md): Native scrolling with an optional composition of draggable scrollbars.
@@ -107,6 +109,7 @@
 - [ToggleGroup](components/toggle-group.md): A shared single or multiple set of toggles whose pressed fact persists.
 - [Toolbar](components/toolbar.md): Actual groups, arrow-key focus and operable actions.
 - [Tooltip](components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
+- [Transfer](components/transfer.md): Move items between an available list and a selected list; the value is the keys on the selected side.
 - [Tree](components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [TreeSelect](components/tree-select.md): Choose one node, or check several leaves, on a tree inside a popup.
 - [Typography](components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
