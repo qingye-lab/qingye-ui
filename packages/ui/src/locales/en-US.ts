@@ -71,5 +71,6 @@ export const enUS: UILocale = {
     transferSource: "Available", transferTarget: "Selected", transferSelectAll: "Select all", transferFilter: (title) => `Filter ${title.toLowerCase()}`,
     transferMoveTo: (count, title) => `Move ${count.toLocaleString("en-US")} selected to “${title}”`, transferMoved: (count, title) => `${count.toLocaleString("en-US")} moved to “${title}”`,
     transferEmpty: "No items", transferNoMatch: "No matches",
+    composerSubmit: "Send",
   },
 };

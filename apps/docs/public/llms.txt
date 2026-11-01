@@ -35,6 +35,7 @@
 - [颜色选择 ColorPicker](/docs/components/color-picker.md): 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 - [候选输入 Combobox](/docs/components/combobox.md): 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 - [命令面板 Command](/docs/components/command.md): 输入框加一张常开的命令列表，用来跳到某处或执行某事。
+- [对话输入框 Composer](/docs/components/composer.md): 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 - [异步确认 Confirm](/docs/components/confirm.md): 等待一次明确决定，再由调用方继续执行。
 - [确认动作 ConfirmAction](/docs/components/confirm-action.md): 确认具体对象、版本与变更，内容改变后重新阅读。
 - [上下文菜单 ContextMenu](/docs/components/context-menu.md): 当前对象的右键增强命令入口。

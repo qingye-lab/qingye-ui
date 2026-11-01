@@ -30,6 +30,7 @@ export * from "./components/collapsible";
 export * from "./components/color-picker";
 export * from "./components/combobox";
 export * from "./components/command";
+export * from "./components/composer";
 export * from "./components/confirm";
 export * from "./components/confirm-action";
 export * from "./components/context-menu";

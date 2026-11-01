@@ -10,12 +10,13 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 112,
+    "components": 113,
     "byStatus": {
-      "type-resolved": 112
+      "type-resolved": 112,
+      "type-resolved-with-drift": 1
     },
-    "documentedButMissing": 0,
-    "undocumented": 146,
+    "documentedButMissing": 1,
+    "undocumented": 151,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
     "uncheckedWrittenNames": 205,
@@ -28,7 +29,16 @@
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
-  "documentedButMissing": [],
+  "documentedButMissing": [
+    {
+      "component": "composer",
+      "part": "ComposerItem",
+      "prop": null,
+      "written": "ComposerItem",
+      "reason": "part-not-exported",
+      "meta": "apps/docs/src/content/composer/meta.ts:24"
+    }
+  ],
   "unresolved": [],
   "undocumented": [
     {
@@ -262,6 +272,41 @@
       "part": "CommandDialog",
       "prop": "query",
       "declaredAt": "packages/ui/src/components/command.tsx:66"
+    },
+    {
+      "component": "composer",
+      "part": "ComposerSubmit",
+      "prop": "className",
+      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "viaComponent": "button"
+    },
+    {
+      "component": "composer",
+      "part": "ComposerSubmit",
+      "prop": "data-slot",
+      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "viaComponent": "button"
+    },
+    {
+      "component": "composer",
+      "part": "ComposerSubmit",
+      "prop": "loading",
+      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "viaComponent": "button"
+    },
+    {
+      "component": "composer",
+      "part": "ComposerSubmit",
+      "prop": "tone",
+      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "viaComponent": "button"
+    },
+    {
+      "component": "composer",
+      "part": "ComposerSubmit",
+      "prop": "variant",
+      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "viaComponent": "button"
     },
     {
       "component": "context-menu",
