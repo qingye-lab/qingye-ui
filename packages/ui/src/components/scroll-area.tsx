@@ -16,38 +16,6 @@ export type ScrollAreaProps = useRender.ComponentProps<"div"> & {
 };
 
 /*
- * 竖向两端各自还有没有被切掉的内容。`useOverflowEdges`（hooks/use-scrollable.ts）只量横向，该文件不在本次改动范围，
- * 所以竖向在这里就近量：与横向同一套约定——偏移以起始端为 0，1px 容差吸收亚像素舍入；滚动、自身尺寸与内部内容变化都重量。
- */
-const noEdges: OverflowEdges = { start: false, end: false };
-function useVerticalEdges<T extends HTMLElement>(forwardedRef?: React.Ref<T>): [React.RefCallback<T>, OverflowEdges] {
-  const [element, setElement] = React.useState<T | null>(null);
-  const [edges, setEdges] = React.useState(noEdges);
-  const ref = React.useCallback((node: T | null) => {
-    setElement(node);
-    if (typeof forwardedRef === "function") forwardedRef(node);
-    else if (forwardedRef) (forwardedRef as React.MutableRefObject<T | null>).current = node;
-  }, [forwardedRef]);
-  React.useEffect(() => {
-    if (!element) { setEdges(noEdges); return; }
-    const measure = () => {
-      const max = element.scrollHeight - element.clientHeight, offset = element.scrollTop;
-      const next = max > 1 ? { start: offset > 1, end: offset < max - 1 } : noEdges;
-      setEdges(prev => prev.start === next.start && prev.end === next.end ? prev : next);
-    };
-    measure();
-    element.addEventListener("scroll", measure, { passive: true });
-    const resize = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(measure);
-    const observeChildren = () => { if (!resize) return; resize.disconnect(); resize.observe(element); for (const child of element.children) resize.observe(child); };
-    observeChildren();
-    const mutation = typeof MutationObserver === "undefined" ? undefined : new MutationObserver(() => { observeChildren(); measure(); });
-    mutation?.observe(element, { childList: true, subtree: true, characterData: true });
-    return () => { element.removeEventListener("scroll", measure); resize?.disconnect(); mutation?.disconnect(); };
-  }, [element]);
-  return [ref, edges];
-}
-
-/*
  * 渐隐宽度读 --qy-fill-height，与 TabsList 同一个预设（理由见 tabs.tsx：与一行同尺度、随密度变）；
  * 滚动区没有统一条目，取一个填值控件行高，是预设，不是推导。
  * 四端各一个宽度变量，没有被切掉的端为 0，该端渐变退化为不透明。
@@ -82,7 +50,7 @@ function PlainScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
 }
 
 function FadingScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
-  const [verticalRef, vertical] = useVerticalEdges<HTMLElement>(ref as React.Ref<HTMLElement> | undefined);
+  const [verticalRef, vertical] = useOverflowEdges<HTMLElement>(ref as React.Ref<HTMLElement> | undefined, "y");
   const [horizontalRef, horizontal] = useOverflowEdges<HTMLElement>(verticalRef);
   const [scrollRef, scrollable] = useScrollable<HTMLElement>(horizontalRef);
   return <ScrollAreaView {...props} ref={scrollRef} scrollable={scrollable} edges={{ x: horizontal, y: vertical }} />;

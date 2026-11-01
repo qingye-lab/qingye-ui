@@ -5,7 +5,7 @@ import * as React from "react";
 /*
  * 量一个元素的滚动几何：区域自身尺寸变化（容器缩放）与内部内容变化（折行、异步内容）都会重新量，
  * 所以同时观察元素和它的直接子元素；需要时连滚动也算一次变化。合并外部传入的 ref。
- * 首帧（含服务端渲染）用 empty，挂载后量一次。read 与 same 须是模块级常量，不随渲染变化。
+ * 首帧（含服务端渲染）用 empty，挂载后量一次。read 与 same 须是模块级常量，且在同一调用处不随渲染改变。
  */
 function useMeasured<T extends HTMLElement, V>(forwardedRef: React.Ref<T> | undefined, empty: V, read: (element: T) => V, same: (a: V, b: V) => boolean, onScroll: boolean): [React.RefCallback<T>, V] {
   const [element, setElement] = React.useState<T | null>(null);
@@ -42,16 +42,15 @@ export function useScrollable<T extends HTMLElement>(forwardedRef?: React.Ref<T>
 }
 
 /*
- * 横向滚动区的两端各自还有没有被切掉的内容。方向无关：滚动偏移以起始端为 0，RTL 下 scrollLeft 为负或为零，
- * 取绝对值后「离起始端多远」在两个方向含义一致。1px 容差吸收亚像素舍入，避免滚到头仍判为有内容。
+ * 滚动区某一轴的两端各自还有没有被切掉的内容。横轴方向无关：滚动偏移以起始端为 0，RTL 下 scrollLeft 为负或为零，
+ * 取绝对值后「离起始端多远」在两个方向含义一致；纵轴的起始端是顶端。1px 容差吸收亚像素舍入，避免滚到头仍判为有内容。
  */
 export type OverflowEdges = { start: boolean; end: boolean };
 const noEdges: OverflowEdges = { start: false, end: false };
-const readEdges = (element: HTMLElement): OverflowEdges => {
-  const max = element.scrollWidth - element.clientWidth, offset = Math.abs(element.scrollLeft);
-  return max > 1 ? { start: offset > 1, end: offset < max - 1 } : noEdges;
-};
+const edgesOf = (max: number, offset: number): OverflowEdges => max > 1 ? { start: offset > 1, end: offset < max - 1 } : noEdges;
+const readEdgesX = (element: HTMLElement) => edgesOf(element.scrollWidth - element.clientWidth, Math.abs(element.scrollLeft));
+const readEdgesY = (element: HTMLElement) => edgesOf(element.scrollHeight - element.clientHeight, element.scrollTop);
 const sameEdges = (a: OverflowEdges, b: OverflowEdges) => a.start === b.start && a.end === b.end;
-export function useOverflowEdges<T extends HTMLElement>(forwardedRef?: React.Ref<T>): [React.RefCallback<T>, OverflowEdges] {
-  return useMeasured(forwardedRef, noEdges, readEdges, sameEdges, true);
+export function useOverflowEdges<T extends HTMLElement>(forwardedRef?: React.Ref<T>, axis: "x" | "y" = "x"): [React.RefCallback<T>, OverflowEdges] {
+  return useMeasured(forwardedRef, noEdges, axis === "x" ? readEdgesX : readEdgesY, sameEdges, true);
 }
