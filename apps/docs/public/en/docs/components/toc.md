@@ -1,6 +1,6 @@
 # Toc
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
 Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d

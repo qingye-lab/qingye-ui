@@ -1,6 +1,6 @@
 # 链接 Link
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe

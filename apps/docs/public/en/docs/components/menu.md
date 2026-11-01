@@ -1,6 +1,6 @@
 # Menu
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2

@@ -1,6 +1,6 @@
 # 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
 Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c

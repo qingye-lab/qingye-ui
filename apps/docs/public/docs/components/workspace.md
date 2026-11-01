@@ -1,6 +1,6 @@
 # 工作面 Workspace
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
 Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269

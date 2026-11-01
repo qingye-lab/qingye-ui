@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
-Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
+Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
 
 为可独立识别的对象建立内容边界。
 
 ## Decision
-对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。Card 不设阴影档、纸面档或悬停抬升：它没有离开平面，阴影会伪造层级；整体底色与圆角在主题层改系统 token（圆角是 --qy-radius-panel）。
+对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。
 
 ## Notes
 - 标题用 Heading 或真实 h2/h3；内容与动作由 Stack、Inline 和原生结构组合。
@@ -54,7 +54,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Card
 面板表面、边界与圆角。不生成标题、内容槽、内边距或排列方式。
-- render: ReactElement | (props, state) => ReactElement. 组合为 article、section 或原生链接，完整保留事件与 ref。渲染为 a[href] 或 button 时，整卡有悬停与按下底色（与 Item 行入口同一反馈阶梯），按钮占满宽度、文字从行首起。
+- render: ReactElement | (props, state) => ReactElement. 组合为 article、section 或原生链接，完整保留事件与 ref。
 - className / style: string / CSSProperties. 消费端按对象关系组合布局与内缘；外部类最后合并。
 - 原生属性: ComponentPropsWithRef<"div">. 透传 id、aria-*、data-*、事件与 ref。
 

@@ -1,6 +1,6 @@
 # 标签片 Chip
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/chip
 Source: packages/ui/src/components/chip.tsx
 Source SHA-256: ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6

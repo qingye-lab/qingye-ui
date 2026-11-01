@@ -1,6 +1,6 @@
 # 时间输入 TimeField
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
 Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf

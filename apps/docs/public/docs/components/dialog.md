@@ -1,6 +1,6 @@
 # 对话框 Dialog
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f

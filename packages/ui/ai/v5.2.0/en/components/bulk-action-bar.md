@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
-Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
+Source SHA-256: 0ee64f6d87a9f5c4cdc29e90f2582d267f49a94e6a881bb72f3784cd8ff9a8af
 
 Shared actions with explicit targets, versions and scope.
 
@@ -12,7 +12,6 @@ Targets and scope are required; execution receives the current target/version sn
 
 ## Notes
 - The library displays versions without judging freshness; applications revalidate actual versions at execution.
-- Since 5.2.0: formatCount and summary rewrite the count text per object and add totals; omitting them behaves as before.
 
 ## Use and ownership
 - Shared actions for explicitly selected objects.
@@ -52,11 +51,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### BulkActionBar
 - `disabled?`: `boolean`.
 - `extent?`: `BulkActionExtent | undefined`.
-- `formatCount?`: `(count: number) => string`. 自定已选数量的文案（默认「已选 N 项」）。传函数而非量词：量词与名词的位置与单复数随语言和对象变化，由调用方按当前界面语言写完整句；入参是 extent.count（有 extent 时）或 targets.length。
 - `onClear?`: `(snapshot: BulkActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
 - `scope`: `string`.
 - `sticky?`: `boolean`.
-- `summary?`: `React.ReactNode`. 数量之后的补充摘要（如合计金额）。与数量同在 aria-describedby 引用的区域，读屏一并读出；不截断，放不下的是后面的对象清单。
 - `targets`: `readonly BulkActionTarget[]`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -113,8 +110,6 @@ Identifiable operation targets and scope.
 - targets / scope: readonly BulkActionTarget[] / string. Each target requires id, label and version; IDs are unique, version=0 is valid and scope is nonempty.
 - extent: { count: number; label: string }. An application-defined whole set (positive integer count, nonempty label); shows count and label instead of listing targets, targets may be empty, and the snapshot carries extent for the application to execute against its own query.
 - sticky: boolean. Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck).
-- formatCount: (count: number) => string. Customizes the selected-count text; the default reads "N selected". It receives extent.count when extent is present, otherwise targets.length. A function rather than a unit string, since measure word, noun placement and plurals vary by language and object: the caller writes the whole phrase for the current UI language.
-- summary: React.ReactNode. A supplementary summary after the count, such as a total amount or size. It lives in the same aria-describedby region as the count, so screen readers read both; it uses tabular numbers and is not truncated, the target list after it truncates first. The application computes the data; the library does not aggregate.
 - disabled / onClear: boolean / callback. Clear receives the current snapshot; it never cancels a service or clears application state itself.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -174,25 +169,5 @@ const page = [{ id: "a", label: "接入设备", version: 1 }, { id: "b", label: 
 export default function Demo() {
   const [extended, setExtended] = React.useState(false); const [result, setResult] = React.useState("未执行");
   return <Stack><BulkActionBar targets={extended ? [] : page} extent={extended ? { count: 1284, label: "符合当前筛选的全部条目" } : undefined} scope="本地筛选结果" onClear={() => setExtended(false)}>{!extended && <BulkActionBarExtend count={1284} onExtend={() => setExtended(true)} />}<BulkActionBarActions><BulkActionBarAction onExecute={snapshot => setResult(snapshot.extent ? `按应用持有的查询处理 ${snapshot.extent.count} 项` : `处理 ${snapshot.targets.length} 项`)}>标记</BulkActionBarAction><BulkActionBarClear /></BulkActionBarActions></BulkActionBar><output className="text-support">{result}</output></Stack>;
-}
-```
-
-### 量词与合计
-Source: apps/docs/src/content/bulk-action-bar/demos/04-summary.tsx
-```tsx
-import { BulkActionBar, BulkActionBarAction, BulkActionBarActions, BulkActionBarClear } from "@qingye_lab/ui/components/bulk-action-bar";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "量词与合计", titleEn: "Unit and total" } satisfies DemoMeta;
-
-const targets = [{ id: "a", label: "文件 A", version: 1, size: 12 }, { id: "b", label: "文件 B", version: 1, size: 30 }, { id: "c", label: "文件 C", version: 2, size: 8 }];
-
-export default function Demo() {
-  const total = targets.reduce((sum, target) => sum + target.size, 0);
-  return (
-    <BulkActionBar targets={targets} scope="当前文件夹所选文件" formatCount={count => `已选 ${count} 个文件`} summary={`共 ${total} MB`}>
-      <BulkActionBarActions><BulkActionBarAction onExecute={() => {}}>移动</BulkActionBarAction><BulkActionBarClear onClick={() => {}} /></BulkActionBarActions>
-    </BulkActionBar>
-  );
 }
 ```

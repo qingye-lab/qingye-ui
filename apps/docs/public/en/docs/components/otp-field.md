@@ -1,6 +1,6 @@
 # OtpField
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b

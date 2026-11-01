@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
+Source SHA-256: ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737
 
 原生二维关系与完整比较列。
 
@@ -75,7 +75,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
-- `fade?`: `"end" | boolean`. 横向溢出提示：还有内容的一端渐隐，滚到头的一端不渐隐。默认两端。 "end"：只渐隐末端——起始端有固定列（DataTable 的 pinned）时，固定列自己的末端线已说明「向起始端还有内容」， 渐隐不能再去淡化一列要保持不透明的固定列。false：不渐隐。
 - `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -108,7 +107,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### TableContainer
 表格的纸与横向滚动容器。
 - framed: boolean; default true. false：表格放在已有的一张纸上（Card、面板），不再铺线、底与圆角；贴着承载面的边放置，由承载面裁切圆角。
-- fade: boolean | 'end'; default true. 横向放不下时，还有内容的一侧渐隐（读 data-overflow-x-start / end，宽度同 ScrollArea 的 --qy-scroll-fade）；滚到头的一侧不渐隐。边框线与未加框时的焦点环不渐隐。'end' 只渐隐末端，用于有固定列的表（固定列不透明，起始端渐隐会把它变暗）；false 关闭。容器同时设 overscroll-behavior-x: contain，横向滚到头不带动整页。
 - tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default 按实测滚动与否. 内容真的超出（横向或纵向）时才可聚焦（tabIndex=0），用于键盘滚动，并成为具名区域：取 aria-label / aria-labelledby，否则沿用表的 caption 或 aria-label；放得下时不进 Tab 序列。ref 属于容器；显式传入的 tabIndex 优先。
 
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow

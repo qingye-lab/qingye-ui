@@ -1,6 +1,6 @@
 # 命令面板 Command
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
 Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71

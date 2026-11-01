@@ -1,6 +1,6 @@
 # Card
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae

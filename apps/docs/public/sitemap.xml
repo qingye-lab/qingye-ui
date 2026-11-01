@@ -861,6 +861,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/rating"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/relative-time</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/relative-time"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/relative-time"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/relative-time</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/relative-time"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/relative-time"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/resizable</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/resizable"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/resizable"/>

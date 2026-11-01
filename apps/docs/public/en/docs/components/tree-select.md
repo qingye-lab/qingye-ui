@@ -1,6 +1,6 @@
 # TreeSelect
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
 Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d

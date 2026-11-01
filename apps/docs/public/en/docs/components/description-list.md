@@ -1,6 +1,6 @@
 # DescriptionList
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0

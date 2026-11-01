@@ -1,6 +1,6 @@
 # FileTrigger
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/file-trigger
 Source: packages/ui/src/components/file-trigger.tsx
 Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4

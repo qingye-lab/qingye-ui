@@ -1,6 +1,6 @@
 # Textarea
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa

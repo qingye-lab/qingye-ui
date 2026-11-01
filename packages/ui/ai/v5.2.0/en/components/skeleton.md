@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
-Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
+Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 
 Hold the place and row count content will take until it arrives.
 
@@ -19,10 +19,10 @@ A skeleton says only that content is loading; it carries no progress, does not d
 - Application: When loading starts and ends, how a long wait is handled, the real shape of the content, and how failure and emptiness are handled.
 
 ## Composition
-- Skeleton wraps SkeletonLine / SkeletonBlock / SkeletonControl laid out like the real content; on arrival the whole is replaced and the page does not jump.
+- Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump.
 
 ## Responsive behavior
-- Width follows the container; express row width with className. Row height is one module; SkeletonControl height follows density (data-density) and matches an Input in the same environment.
+- Width follows the container; express row width with className. Row height is one module.
 
 ## Customization
 - className adjusts row width and block height; label names the object, e.g. “Loading members”.
@@ -31,8 +31,6 @@ A skeleton says only that content is loading; it carries no progress, does not d
 - Skeleton: function; owner skeleton; PASS; props: SkeletonProps
 - SkeletonBlock: function; owner skeleton; PASS; props: SkeletonBlockProps
 - SkeletonBlockProps: type; owner skeleton; PASS
-- SkeletonControl: function; owner skeleton; PASS; props: SkeletonControlProps
-- SkeletonControlProps: type; owner skeleton; PASS
 - SkeletonLine: function; owner skeleton; PASS; props: SkeletonLineProps
 - SkeletonLineProps: type; owner skeleton; PASS
 - SkeletonProps: type; owner skeleton; PASS
@@ -45,10 +43,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SkeletonBlock
-- no props declared by this library
-- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
-
-### SkeletonControl
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -77,10 +71,6 @@ The place of one text line, one module high; width comes from className.
 ### SkeletonBlock
 The place of a whole block (image, chart, table); height comes from className.
 - className: string; default h-[5 材]. Block height, e.g. h-40.
-
-### SkeletonControl
-The place of a value-filling control (input, select, button); height and radius follow the fill-control role, so it matches an Input in the same density, width comes from className.
-- className: string; default w-full. Width, e.g. w-24. Height follows density and is not set through className.
 
 ## Keyboard
 
@@ -170,28 +160,6 @@ export default function Demo() {
       <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
       <Button onClick={() => setRefreshing(true)} loading={refreshing} variant="bordered">刷新</Button>
     </Stack>
-  </Card>;
-}
-```
-
-### 与控件同高
-Source: apps/docs/src/content/skeleton/demos/04-control.tsx
-```tsx
-import { Card } from "@qingye_lab/ui/components/card";
-import { Skeleton, SkeletonControl, SkeletonLine } from "@qingye_lab/ui/components/skeleton";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "与控件同高", titleEn: "Same height as the control" } satisfies DemoMeta;
-
-export default function Demo() {
-  return <Card className="w-full max-w-md p-(--qy-panel-padding)">
-    <Skeleton label="正在加载表单" className="gap-(--qy-field-gap)">
-      <SkeletonLine className="w-1/4" />
-      <SkeletonControl />
-      <SkeletonLine className="w-1/3" />
-      <SkeletonControl />
-      <SkeletonControl className="w-24" />
-    </Skeleton>
   </Card>;
 }
 ```

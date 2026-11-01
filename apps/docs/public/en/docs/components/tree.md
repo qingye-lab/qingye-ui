@@ -1,6 +1,6 @@
 # Tree
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab

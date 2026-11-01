@@ -11,7 +11,6 @@ Enter an edge-aligned work surface and return to its entry point.
 Public swipeDirection controls the edge. Actual modality controls focus and background blocking; closing does not imply undo.
 
 ## Notes
-- The library has no width tiers: content decides a side drawer's width. A project that needs consistency defines one or two widths in its own composition and passes them through className.
 - To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.
 - Specify finalFocus when opening programmatically without a trigger.
 - For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.

@@ -1,6 +1,6 @@
 # 度量 Stat
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
+Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 
 Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -11,7 +11,6 @@ Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizont
 A chart only draws data. A known zero, an unknown value and a not-applicable value remain distinct: unavailable values form gaps and retain their actual names in the table. When the whole chart has no records, an unknown result or does not apply, the chart is not rendered and the caller puts Empty in its place. Plots do not replace reachable numbers. References (target bands and lines), context series and events help locate the data without being data: they are ink, not color, and their names are required and appear in the legend and the data table. Only a line may leave zero on the value axis; bars and areas encode by length or area, so truncating them misstates proportions. Status colors (series[].tone) are declared by the application; the component never guesses good from bad by value. A step (series[].interpolation: "step") says the value is held between two changes and is step-after: a record means "from this moment the value is this", and step-before would draw the change before it was observed; there are no smooth curves, which draw values the data does not contain. Share composition (bar-share / area-share) reads how a composition changes rather than how much: each row is normalised to its own sum, the value axis is fixed at 0–100% with ticks 0/25/50/75/100; a row with an unknown or not-applicable value, or a sum of zero, is not drawn at all (the whole is unavailable, so every share would be false) while its known original values stay in the data table; negative values throw. Value labels (valueLabels) are for single-series bar and bar-horizontal only, and once values are labelled the value-axis ticks and grid are no longer drawn (one fact is not said twice). Readouts and tables of stacked and share forms give a total; a row with a missing part is not totaled and the table says so.
 
 ## Notes
-- No entrance growth animation: motion only reports a real change, and data appearing for the first time is not a change; transitions on data updates have no defined values yet, so none is added.
 - Series are told apart by more than hue: each line series has its own marker shape (circle, square, triangle, diamond, cross, assigned in series order), the legend key matches the line, and the series name appears in the legend text, the hover readout and the data table. Bars, stacks and areas are filled forms and rely on a fixed series order: the legend, the left-to-right order of bars, the bottom-to-top order of stacks, the readout and the data table all share one order, with a 2px paper gap between segments; no texture is added to them.
 - With no rows Chart throws instead of drawing an empty frame. For a chart behind a request, compose it with AsyncContent and test emptiness first: `<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` holds only the Chart, an empty result is carried by Empty in its place, and loading or failure feedback follows the content; see "Request states and empty results".
 - null, NaN, Infinity and missing keys cannot stand for zero. Use explicit unknown or not-applicable values.
@@ -70,7 +69,6 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
-- ChartRange: type; owner chart; PASS
 - ChartReference: type; owner chart; PASS
 - ChartRow: type; owner chart; PASS
 - ChartSeries: type; owner chart; PASS
@@ -167,7 +165,7 @@ A named figure, shared axis units, distinct series shapes and a visible same-sou
 - aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required.
 - categoryLabel / valueLabel: string. Nonempty category axis name and shared value units; donut draws no axis lines, but both names still label the equivalent table and the center readout.
-- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step"; range?: { min: string; max: string } }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. range: { min, max } is for non-context line series only; min and max are keys of the row values (two different keys, present on every row and explicitly unknown if need be): when the line also has a spread at each point, it is drawn as a faint band of the same color under the line (opacity is a preset), the readout adds a "Range min–max" line, and the data table adds "minimum" and "maximum" columns after the series; a point with either end unavailable has no band; min greater than max, or either end outside valueDomain, throws; the line itself (the value at key) need not sit in the middle of the band. A lone series with a range still shows its legend so the faint band key pairs with the line. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
+- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
 - rows: readonly ChartRow[]. Stable ids, category names and values: finite numbers or explicitly named unknown/not-applicable values. ready requires actual records; donut requires exactly one row, with every part a known non-negative number.
 - contextLabel: string. Required when there are context series: the one legend entry that stands for them (a faint ink key plus this name), e.g. "Other rooms". Their individual names appear only in the equivalent table. Throws when missing.
 - references: ({ kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string })[]. References on the value axis: a target band or a reference line (horizontal for vertical charts, vertical for bar-horizontal). Drawn in ink behind the data; the value axis range includes them automatically. label is required and appears in the legend and in a note under the data table; a band needs from < to and finite values; a donut throws. With a band, the hover readout adds a line per value for its position against the target (above or below by how much, or within); with several bands only the first is used.
@@ -517,22 +515,5 @@ export default function Demo() {
       <Chart type="bar" label={en ? "Sync runs" : "同步次数"} categoryLabel={en ? "Date" : "日期"} valueLabel={en ? "Runs" : "次数"} series={[{ key: "count", label: en ? "Runs" : "次数" }]} rows={rows} />
     </AsyncContent>
   </Stack>;
-}
-```
-
-### 一条线的区间：均值与最低最高
-Source: apps/docs/src/content/chart/demos/21-spread-band.tsx
-```tsx
-import { Chart } from "@qingye_lab/ui/components/chart";
-export const meta = { title: "一条线的区间：均值与最低最高", titleEn: "A line with its spread: mean with minimum and maximum" };
-const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
-const mean = [24.1, 24.8, 25.6, 26.2, 25.4, 24.6, 23.9];
-const low = [22.0, 22.9, 23.4, 24.1, 23.2, 22.5, 21.8];
-const high = [26.3, 27.1, 28.0, 28.6, 27.9, 26.8, 26.0];
-export default function Demo() {
-  return <Chart type="line" className="w-full max-w-2xl" label="3 号蚕室日温" categoryLabel="日期" valueLabel="温度（℃）"
-    series={[{ key: "mean", label: "日均温", range: { min: "low", max: "high" } }]}
-    valueDomain={[20, 30]} formatValue={value => `${value} ℃`}
-    rows={days.map((day, index) => ({ id: day, label: day, values: { mean: mean[index]!, low: low[index]!, high: high[index]! } }))} />;
 }
 ```

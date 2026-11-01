@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663
+Source SHA-256: 2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2
 
 Edit one local date or choose it from a calendar.
 

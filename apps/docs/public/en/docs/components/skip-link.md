@@ -1,6 +1,6 @@
 # SkipLink
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/skip-link
 Source: packages/ui/src/components/skip-link.tsx
 Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e

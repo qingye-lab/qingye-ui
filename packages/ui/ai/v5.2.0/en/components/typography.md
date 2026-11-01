@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca
+Source SHA-256: 3f631d2cc01de8867c121b4787c811ab1207d12add9bf19d7c0b9525086f510f
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -56,7 +56,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Text
 - `numeric?`: `boolean`.
 - `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
-- `tone?`: `"default" | "muted"`. 墨色：default 沿用所在处的前景色；muted 用弱化前景（`text-muted-foreground`），做辅助说明。 没有 danger：错误文字属于 FieldError（功能纯粹，STANDARDS §1），Text 不单设红色。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -83,7 +82,6 @@ A real heading with independent outline level and visual step.
 Body copy, supporting text or numbers; defaults to p.
 - step: TextStep; default "body". For example reading, support, caption or metric; no additional ramp.
 - numeric: boolean; default false. Tabular figures; the application preserves unknown and empty values.
-- tone: "default" | "muted"; default "default". default inherits the surrounding foreground; muted uses the weakened foreground for supporting copy. There is no danger tone: error text belongs to FieldError.
 - render / ref / native props: useRender.ComponentProps<"p">. Render as span for inline text. Color inherits by default.
 
 ## Keyboard
@@ -118,7 +116,7 @@ export default function Demo() {
     <Heading level={3}>文字 Text</Heading>
     <Stack gap="field">
       <Text>正文 Body</Text>
-      <Text step="support" tone="muted">辅助 Support</Text>
+      <Text step="support" className="text-muted-foreground">辅助 Support</Text>
       <Text step="caption">附注 Caption</Text>
       <Text>中文标点：，。；！？ / Qingye UI</Text>
     </Stack>

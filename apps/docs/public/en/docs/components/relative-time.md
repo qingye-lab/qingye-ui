@@ -1,6 +1,6 @@
 # RelativeTime
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/relative-time
 Source: packages/ui/src/components/relative-time.tsx
 Source SHA-256: 6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6

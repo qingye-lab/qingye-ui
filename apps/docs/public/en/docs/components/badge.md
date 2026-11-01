@@ -1,6 +1,6 @@
 # Badge
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 66ce5024d8e432327ddecdc8ae5c1d05c62b636f6af042a2a8c895793156a326

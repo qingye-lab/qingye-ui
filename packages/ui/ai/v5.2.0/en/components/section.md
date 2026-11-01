@@ -30,7 +30,7 @@ A section groups by spacing and draws no line, fill or radius; the caller spaces
 - The title and actions share a row; when the title is too long the actions drop to the next row and the first row's midline stays.
 
 ## Customization
-- className, style, render and ref belong to each part; SectionTitle's level sets the outline and step sets the size, independently: a subsection inside a section is level={3} step="body-strong", one step below the section title.
+- className, style, render and ref belong to each part; change the heading level with SectionTitle's level, never its size.
 
 ## Current exports
 - Section: function; owner section; PASS; props: SectionProps
@@ -84,7 +84,6 @@ The title row: title at the left, actions at the right.
 ### SectionTitle
 The section title, built on Heading.
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. Document outline level, independent of the text step.
-- step: TextStep; default "heading". The text step. A subsection inside a section uses body-strong (14), one step below the section title's heading (16).
 - id / render / ref / Heading props: HeadingProps. A given id is the one the section links to; the text step defaults to heading (16/24).
 
 ### SectionActions
@@ -168,35 +167,5 @@ export default function Demo() {
       <Item><ItemContent><ItemTitle>核对桑叶入库单</ItemTitle></ItemContent></Item>
     </Section>
   </Stack>;
-}
-```
-
-### 区块里的小节
-Source: apps/docs/src/content/section/demos/04-subsection.tsx
-```tsx
-import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
-import { Stack } from "@qingye_lab/ui/components/layout";
-import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "区块里的小节", titleEn: "Subsections inside a section" } satisfies DemoMeta;
-
-const groups = [
-  { title: "网络", rows: [["地址", "10.2.14.31"], ["网关", "10.2.14.1"]] },
-  { title: "固件", rows: [["版本", "4.8.2"], ["更新于", "2026-10-28"]] },
-];
-
-export default function Demo() {
-  return <Section className="w-full max-w-lg">
-    <SectionHeader><SectionTitle>设备信息</SectionTitle></SectionHeader>
-    <Stack gap="panel">
-      {groups.map(group => <Section key={group.title}>
-        <SectionHeader><SectionTitle level={3} step="body-strong">{group.title}</SectionTitle></SectionHeader>
-        <DescriptionList>
-          {group.rows.map(([term, value]) => <DescriptionListItem key={term}><DescriptionListTerm>{term}</DescriptionListTerm><DescriptionListDetail>{value}</DescriptionListDetail></DescriptionListItem>)}
-        </DescriptionList>
-      </Section>)}
-    </Stack>
-  </Section>;
 }
 ```

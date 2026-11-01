@@ -1,6 +1,6 @@
 # 导航菜单 NavigationMenu
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4

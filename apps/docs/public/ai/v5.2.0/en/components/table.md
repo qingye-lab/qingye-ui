@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
+Source SHA-256: ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -75,7 +75,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
-- `fade?`: `"end" | boolean`. 横向溢出提示：还有内容的一端渐隐，滚到头的一端不渐隐。默认两端。 "end"：只渐隐末端——起始端有固定列（DataTable 的 pinned）时，固定列自己的末端线已说明「向起始端还有内容」， 渐隐不能再去淡化一列要保持不透明的固定列。false：不渐隐。
 - `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -108,7 +107,6 @@ Written descriptions; the list above is the type-resolved fact.
 ### TableContainer
 The table's surface and horizontal scroll container.
 - framed: boolean; default true. false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners.
-- fade: boolean | 'end'; default true. When the table overflows sideways, the side that still has content fades (driven by data-overflow-x-start / end; width is ScrollArea's --qy-scroll-fade); the side scrolled to its limit does not. The frame line and the unframed focus ring never fade. 'end' fades only the end side, for tables with pinned columns (pinned columns are opaque, so a start fade would dim them); false turns it off. The container also sets overscroll-behavior-x: contain so sideways scroll limits do not chain to the page.
 - tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default by measured overflow. Focusable (tabIndex=0) only while the content actually overflows horizontally or vertically, so the keyboard can scroll it; it then becomes a named region from aria-label / aria-labelledby, else the table's caption or aria-label. A container whose content fits stays out of the Tab sequence. Ref targets the container; an explicit tabIndex wins.
 
 ### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow

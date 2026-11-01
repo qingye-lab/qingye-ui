@@ -1,6 +1,6 @@
 # 分段控件 SegmentedControl
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09

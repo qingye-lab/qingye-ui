@@ -1,6 +1,6 @@
 # 头像组 AvatarGroup
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/avatar-group
 Source: packages/ui/src/components/avatar-group.tsx
 Source SHA-256: 806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51

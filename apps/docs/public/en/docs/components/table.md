@@ -1,6 +1,6 @@
 # Table
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a

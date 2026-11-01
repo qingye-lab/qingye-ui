@@ -1,6 +1,6 @@
 # Transfer
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
 Source SHA-256: 33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8

@@ -1,6 +1,6 @@
 # InputGroup
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c

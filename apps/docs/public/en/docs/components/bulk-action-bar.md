@@ -1,6 +1,6 @@
 # BulkActionBar
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680

@@ -1,6 +1,6 @@
 # Skeleton
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f

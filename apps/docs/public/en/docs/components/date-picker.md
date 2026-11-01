@@ -1,6 +1,6 @@
 # DatePicker
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663

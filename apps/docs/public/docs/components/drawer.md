@@ -1,6 +1,6 @@
 # 边缘工作面 Drawer
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
 Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652

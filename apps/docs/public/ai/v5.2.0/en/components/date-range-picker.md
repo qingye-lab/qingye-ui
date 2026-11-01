@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
+Source SHA-256: c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 

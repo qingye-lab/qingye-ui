@@ -1,6 +1,6 @@
 # 对话输入框 Composer
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
 Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726

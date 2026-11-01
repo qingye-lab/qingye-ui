@@ -1,6 +1,6 @@
 # 路径 Breadcrumb
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: fc48d9be8459b644e0133c7c3388e304dcc384b2d7052f80ea68e29057d6a7c0

@@ -1,6 +1,6 @@
 # 评分 Rating
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
 Source SHA-256: 280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd

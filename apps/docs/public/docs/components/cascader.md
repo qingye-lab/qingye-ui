@@ -1,6 +1,6 @@
 # 级联选择 Cascader
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
 Source SHA-256: 7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6

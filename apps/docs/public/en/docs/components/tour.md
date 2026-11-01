@@ -1,6 +1,6 @@
 # Tour
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
 Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b

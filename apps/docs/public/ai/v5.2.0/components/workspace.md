@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269
+Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -128,7 +128,7 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / children / native props: useRender.ComponentProps<div>. 以有名称的 quiet 按钮（md 或 sm）收尾时整组抵消它的横向留白，文字压在内容右缘。
 
 ### WorkspaceContent
-唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。它是定位祖先（relative），内容里的绝对定位元素不会越出滚动区。
+唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。
 - render / ref / children / native props: useRender.ComponentProps<main>. ref 指向滚动元素，跟随滚动的部件（目录、虚拟列表）从这里取容器。
 - transitionKey: React.Key. 换页的标识，通常传路由路径。变化时滚动回到顶部，内容重放一次进场；首次挂载不动。地址带 #锚点 时不动滚动，交给路由滚到锚点。键盘操作时不播进场，减少动效时只淡入。
 
@@ -327,7 +327,7 @@ export function RecordsWorkspace({ embedded = false, insideMain = false }: { emb
           <Stack gap="panel" className="p-(--qy-page-gutter)">
             <Inline gap="panel"><SearchInput aria-label="搜索采集记录" placeholder="搜索记录或负责人" value={query} onValueChange={next => {
               setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));
-            }} controlClassName="w-full sm:max-w-[calc(16*var(--qy-cai))]" />{selectedCount > 0 && <span className="text-support text-muted-foreground">已选 {selectedCount} 份（含其他页）</span>}</Inline>
+            }} controlClassName="w-full sm:max-w-[calc(16*var(--qy-cai))]" /><span className="text-support text-muted-foreground">已选 {selectedCount} 份（含其他页）</span></Inline>
             <div className={details ? "grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : "min-w-0"}>
               <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}
                 pagination={{ pageSizeOptions: [10, 20, 50], "aria-label": "采集记录分页" }}

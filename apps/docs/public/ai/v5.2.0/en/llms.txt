@@ -83,7 +83,6 @@
 - [Prose](components/prose.md): Typesets already-rendered Markdown or rich text: headings, paragraphs, lists, quotes, code and tables read existing text tiers and ink roles. It only typesets by default, with no frame; give it a reading paper with framed when the article stands alone with no surface of its own.
 - [RadioGroup](components/radio-group.md): Choose one value from a small set of visible options.
 - [Rating](components/rating.md): Give an integer score from 1 to max, shown as a row of stars.
-- [RelativeTime](components/relative-time.md): States a moment as "3 minutes ago" while keeping the exact time checkable; every instance shares one refresh timer.
 - [Resizable](components/resizable.md): Draggable separators between two or more panels that change how the space is shared.
 - [Result](components/result.md): The outcome of one action: a mark, a title, an explanation and where to go next.
 - [ScatterChart](components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.

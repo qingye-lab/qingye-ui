@@ -1,6 +1,6 @@
 # Section
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab

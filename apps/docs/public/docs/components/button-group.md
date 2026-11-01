@@ -1,6 +1,6 @@
 # 动作组 ButtonGroup
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb

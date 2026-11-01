@@ -1,6 +1,6 @@
 # 选择器 Select
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
+Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -39,7 +39,6 @@ Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
 
 ## Current exports
 - DataTable: function; owner data-table; PASS; props: DataTableProps<TData>
-- DataTableActivateEvent: type; owner data-table; PASS
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
@@ -68,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
-- `onRowActivate?`: `(row: Row<TData>, event: DataTableActivateEvent) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。
+- `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
 - `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
@@ -77,7 +76,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### DataTablePattern
-- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
+- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `columns`: `readonly DataTablePatternColumn<TData>[]`.
@@ -89,7 +88,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `mode?`: `"client" | "server"`.
 - `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
 - `pagination?`: `false | DataTablePatternPagination`.
-- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 "page"（当页）。"filtered"：全部筛选结果，跨过分页——只在 mode="client" 有效， * 因为只有客户端持有完整结果；mode="server" 传 "filtered" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
@@ -135,8 +134,8 @@ Written descriptions; the list above is the type-resolved fact.
 - data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. 列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；可选 size、minSize、maxSize（px）与 ellipsis。写了 size 的列定宽，没写的列平分剩余空间。稳定 getRowId 必填。
 - state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。
 - mode / pagination: client | server / false | DataTablePatternPagination. client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。
-- selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。scope 默认 page；filtered 让表头全选作用于全部筛选结果（跨页），仅 mode=client 可用——服务端调用方并不持有完整结果，用 mode=server 加 filtered 会在开发期抛错，请改用 BulkActionBar 的 extent / BulkActionBarExtend 让用户显式扩展到全部。
-- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。onActivate 的第二个参数是触发它的 React 鼠标或键盘事件，调用方可读 metaKey / ctrlKey / shiftKey 区分「在新标签页打开」之类的意图。
+- selection: { label, rowLabel, canSelect? }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。
+- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。
 - selectionAppearance: row | checkbox; default row. checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。
 - stickyHeader / stickyHeaderOffset: boolean / number | string. 表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。
@@ -147,9 +146,9 @@ Written descriptions; the list above is the type-resolved fact.
 原生二维集合。
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows，也不变暗。数据行悬停读悬停面，选中与活动行保持更深的选中面。error 摆在表格上方（role=alert），应用自带重试动作。
 - table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. 实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间，minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列的 maxSize 不约束宽度，需要上限就写 size。没有弹性列时表宽等于各列之和，组合表头取可见叶列之和。不内置拖拽调宽。
-- columnDef.meta.ellipsis: boolean; default false. 对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切；唯一例外是格里只有一个带 href 的链接：链接自己单行省略，真的被截断时聚焦或悬停同样以 Tooltip 显示全文，不新增 Tab 停靠点，链接的可访问名称不变。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。
+- columnDef.meta.ellipsis: boolean; default false. 对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。
 - columnDef.meta.numeric: boolean; default false. 数值列由列定义声明，不由内容猜：表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字。Pattern 的列配置同名。
-- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
+- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row，调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。有可见行标题列时，每一行的 aria-labelledby 指向该行所有行标题单元格，行的可访问名称即这些单元格的文字（多个行标题列按列序连接）。DataTableSelectionCell 用它给每个选择框命名为「选择“该行名称”」，没有行标题列时才用泛称。设置了 onRowActivate 却没有可见的行标题列时抛错。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -394,68 +393,5 @@ export default function Demo() {
   ];
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
   return <DataTable table={table} caption={english ? "Local collection (mixed widths) · 3 entries" : "本地集合（混合列宽）· 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
-}
-```
-
-### 省略列里的链接
-Source: apps/docs/src/content/data-table/demos/07-link-ellipsis.tsx
-```tsx
-import { DataTablePattern, type DataTablePatternColumn } from "@qingye_lab/ui/components/data-table";
-import { Link } from "@qingye_lab/ui/components/link";
-import { useUILocale } from "@qingye_lab/ui/locale";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "省略列里的链接", titleEn: "A link in an ellipsis column" } satisfies DemoMeta;
-
-type Entry = { id: string; name: string; path: string; count: number };
-export default function Demo() {
-  const english = useUILocale().code.startsWith("en");
-  const data: Entry[] = english ? [
-    { id: "overview", name: "Quarterly overview of every connected workshop and remote site", path: "#overview", count: 12 },
-    { id: "roles", name: "Roles", path: "#roles", count: 8 },
-    { id: "export", name: "Nightly export to the shared archive, including attachments", path: "#export", count: 3 },
-  ] : [
-    { id: "overview", name: "所有接入车间与远端站点的季度总览，包含各站点的在线与离线记录", path: "#overview", count: 12 },
-    { id: "roles", name: "角色", path: "#roles", count: 8 },
-    { id: "export", name: "每晚导出到共享归档的任务，含附件与历史版本", path: "#export", count: 3 },
-  ];
-  const columns: DataTablePatternColumn<Entry>[] = [
-    { id: "name", header: english ? "Name" : "名称", accessor: row => row.name, rowHeader: true, size: 220, ellipsis: true, cell: row => <Link href={row.path}>{row.name}</Link> },
-    { id: "count", header: english ? "Records" : "记录数", accessor: row => row.count, size: 96, numeric: true },
-  ];
-  return <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? "Entries" : "条目"} emptyContent={english ? "No entries" : "没有条目"} />;
-}
-```
-
-### 全选整个结果与修饰键
-Source: apps/docs/src/content/data-table/demos/08-filtered-scope.tsx
-```tsx
-import * as React from "react";
-import { DataTablePattern, type DataTablePatternColumn } from "@qingye_lab/ui/components/data-table";
-import { useUILocale } from "@qingye_lab/ui/locale";
-import type { DemoMeta } from "@/lib/types";
-
-export const meta = { title: "全选整个结果与修饰键", titleEn: "Select the whole result and modifier keys" } satisfies DemoMeta;
-
-type Entry = { id: string; name: string; count: number };
-const rows: Entry[] = Array.from({ length: 23 }, (_, index) => ({ id: `entry-${index + 1}`, name: `${String(index + 1).padStart(2, "0")}`, count: (index * 7) % 31 }));
-
-export default function Demo() {
-  const english = useUILocale().code.startsWith("en");
-  const [note, setNote] = React.useState("");
-  const columns: DataTablePatternColumn<Entry>[] = [
-    { id: "name", header: english ? "Name" : "名称", accessor: row => english ? `Entry ${row.name}` : `条目 ${row.name}`, rowHeader: true, sortable: true },
-    { id: "count", header: english ? "Records" : "记录数", accessor: row => row.count, numeric: true, size: 120 },
-  ];
-  return <div className="flex min-w-0 flex-col gap-(--qy-panel-gap)">
-    <DataTablePattern
-      data={rows} columns={columns} getRowId={row => row.id}
-      caption={english ? "Entries" : "条目"} emptyContent={english ? "No entries" : "没有条目"}
-      pagination={{ pageSizeOptions: [5, 10] }} defaultState={{ pagination: { page: 1, pageSize: 5 } }}
-      selection={{ label: english ? "Select entries" : "选择条目", rowLabel: row => english ? `Select Entry ${row.name}` : `选择条目 ${row.name}`, scope: "filtered" }}
-      activeRow={{ trigger: "row", onActivate: (row, event) => setNote(`${english ? "Activated" : "已激活"} ${row.name}${event.metaKey || event.ctrlKey ? (english ? " with Cmd/Ctrl" : "，按住了 Cmd / Ctrl") : event.shiftKey ? (english ? " with Shift" : "，按住了 Shift") : ""}`)}}
-    />
-    <p role="status" className="text-body text-muted-foreground">{note}</p>
-  </div>;
 }
 ```

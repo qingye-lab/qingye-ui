@@ -1,6 +1,6 @@
 # Result
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/result
 Source: packages/ui/src/components/result.tsx
 Source SHA-256: 68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e

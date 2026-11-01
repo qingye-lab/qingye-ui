@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -69674,8 +69674,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v5.2.0/llms.txt",
-    "components": "ai/v5.2.0/components"
+    "index": "ai/v5.3.0/llms.txt",
+    "components": "ai/v5.3.0/components"
   },
   "localized": {
     "en": {
@@ -69683,8 +69683,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v5.2.0/en/llms.txt",
-      "components": "ai/v5.2.0/en/components"
+      "index": "ai/v5.3.0/en/llms.txt",
+      "components": "ai/v5.3.0/en/components"
     }
   },
   "registry": {

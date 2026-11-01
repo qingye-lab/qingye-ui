@@ -1,6 +1,6 @@
 # 图片预览 ImagePreview
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/image-preview
 Source: packages/ui/src/components/image-preview.tsx
 Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e

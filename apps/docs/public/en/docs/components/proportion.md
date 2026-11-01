@@ -1,6 +1,6 @@
 # Proportion
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d

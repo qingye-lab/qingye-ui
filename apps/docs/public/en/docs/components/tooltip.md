@@ -1,6 +1,6 @@
 # Tooltip
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6

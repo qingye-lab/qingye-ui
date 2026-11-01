@@ -1,6 +1,6 @@
 # HoverCard
 
-Package: @qingye_lab/ui@5.2.0
+Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 4b6ea56ca364d46fe0fb8fbbd17cabed7ea198ed446cdcb08c75c06076ec499b

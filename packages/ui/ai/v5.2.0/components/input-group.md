@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c
+Source SHA-256: 76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260
 
 让输入与标记、单位或附属动作共用编辑边界。
 
