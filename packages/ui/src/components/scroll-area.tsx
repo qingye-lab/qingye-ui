@@ -4,21 +4,103 @@ import * as React from "react";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
-import { useScrollable } from "../hooks/use-scrollable";
+import { useOverflowEdges, useScrollable, type OverflowEdges } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 
-export type ScrollAreaProps = useRender.ComponentProps<"div">;
+export type ScrollAreaProps = useRender.ComponentProps<"div"> & {
+  /**
+   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。
+   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
+   */
+  fade?: boolean;
+};
+
+/*
+ * 竖向两端各自还有没有被切掉的内容。`useOverflowEdges`（hooks/use-scrollable.ts）只量横向，该文件不在本次改动范围，
+ * 所以竖向在这里就近量：与横向同一套约定——偏移以起始端为 0，1px 容差吸收亚像素舍入；滚动、自身尺寸与内部内容变化都重量。
+ */
+const noEdges: OverflowEdges = { start: false, end: false };
+function useVerticalEdges<T extends HTMLElement>(forwardedRef?: React.Ref<T>): [React.RefCallback<T>, OverflowEdges] {
+  const [element, setElement] = React.useState<T | null>(null);
+  const [edges, setEdges] = React.useState(noEdges);
+  const ref = React.useCallback((node: T | null) => {
+    setElement(node);
+    if (typeof forwardedRef === "function") forwardedRef(node);
+    else if (forwardedRef) (forwardedRef as React.MutableRefObject<T | null>).current = node;
+  }, [forwardedRef]);
+  React.useEffect(() => {
+    if (!element) { setEdges(noEdges); return; }
+    const measure = () => {
+      const max = element.scrollHeight - element.clientHeight, offset = element.scrollTop;
+      const next = max > 1 ? { start: offset > 1, end: offset < max - 1 } : noEdges;
+      setEdges(prev => prev.start === next.start && prev.end === next.end ? prev : next);
+    };
+    measure();
+    element.addEventListener("scroll", measure, { passive: true });
+    const resize = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(measure);
+    const observeChildren = () => { if (!resize) return; resize.disconnect(); resize.observe(element); for (const child of element.children) resize.observe(child); };
+    observeChildren();
+    const mutation = typeof MutationObserver === "undefined" ? undefined : new MutationObserver(() => { observeChildren(); measure(); });
+    mutation?.observe(element, { childList: true, subtree: true, characterData: true });
+    return () => { element.removeEventListener("scroll", measure); resize?.disconnect(); mutation?.disconnect(); };
+  }, [element]);
+  return [ref, edges];
+}
+
+/*
+ * 渐隐宽度读 --qy-fill-height，与 TabsList 同一个预设（理由见 tabs.tsx：与一行同尺度、随密度变）；
+ * 滚动区没有统一条目，取一个填值控件行高，是预设，不是推导。
+ * 四端各一个宽度变量，没有被切掉的端为 0，该端渐变退化为不透明。
+ * 两个方向的渐变用 mask-composite: intersect 叠成一张：任一方向透明处整体透明。mask 只取透明度，不引入颜色。
+ * 横向的物理方向随 rtl 翻转（起始端在右）；竖向无需翻转。
+ * scroll-padding 取同一个宽度，使键盘把焦点移到被切掉的内容时，浏览器把它滚进渐隐之内，焦点环不被遮。
+ * 渐隐只在有端点被切掉时才挂遮罩，不溢出的区域不付出遮罩的合成代价。
+ */
+const fadeClassName = [
+  "[--qy-scroll-fade:var(--qy-fill-height)] [--qy-scroll-fade-x-start:0px] [--qy-scroll-fade-x-end:0px] [--qy-scroll-fade-y-start:0px] [--qy-scroll-fade-y-end:0px]",
+  "data-overflow-x-start:[--qy-scroll-fade-x-start:var(--qy-scroll-fade)] data-overflow-x-end:[--qy-scroll-fade-x-end:var(--qy-scroll-fade)]",
+  "data-overflow-y-start:[--qy-scroll-fade-y-start:var(--qy-scroll-fade)] data-overflow-y-end:[--qy-scroll-fade-y-end:var(--qy-scroll-fade)]",
+  "scroll-p-(--qy-scroll-fade)",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-composite:intersect] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[-webkit-mask-composite:source-in]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_right,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+  "rtl:[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_left,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+].join(" ");
 
 /**
  * Real native scrolling; scrollbar visibility follows the user's platform settings.
  * 键盘要能滚动它，所以内容溢出时可聚焦（tabIndex 0，须由调用方给出可访问名称）；不溢出就不进入 Tab 序列。
  * 调用方显式给出 tabIndex 时以调用方为准。
+ * `fade` 开启时才挂测量两端的观察器；不开的区域与原来一样，只量是否溢出。
  */
-export function ScrollArea({ render, ref, className, tabIndex, ...props }: ScrollAreaProps) {
+export function ScrollArea({ fade = false, ...props }: ScrollAreaProps) {
+  return fade ? <FadingScrollArea {...props} /> : <PlainScrollArea {...props} />;
+}
+
+function PlainScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
   const [scrollRef, scrollable] = useScrollable<HTMLElement>(ref as React.Ref<HTMLElement> | undefined);
-  return useRender({ defaultTagName: "div", render, ref: scrollRef, props: mergeProps({
+  return <ScrollAreaView {...props} ref={scrollRef} scrollable={scrollable} />;
+}
+
+function FadingScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
+  const [verticalRef, vertical] = useVerticalEdges<HTMLElement>(ref as React.Ref<HTMLElement> | undefined);
+  const [horizontalRef, horizontal] = useOverflowEdges<HTMLElement>(verticalRef);
+  const [scrollRef, scrollable] = useScrollable<HTMLElement>(horizontalRef);
+  return <ScrollAreaView {...props} ref={scrollRef} scrollable={scrollable} edges={{ x: horizontal, y: vertical }} />;
+}
+
+type ScrollAreaViewProps = Omit<ScrollAreaProps, "fade" | "ref"> & {
+  ref: React.RefCallback<HTMLElement>;
+  scrollable: boolean;
+  edges?: { x: OverflowEdges; y: OverflowEdges };
+};
+function ScrollAreaView({ render, ref, className, tabIndex, scrollable, edges, ...props }: ScrollAreaViewProps) {
+  return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
     "data-slot": "scroll-area", ...(tabIndex !== undefined ? { tabIndex } : scrollable ? { tabIndex: 0 } : {}),
-    className: "min-w-0 max-w-full overflow-auto outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring",
+    ...(edges ? {
+      "data-overflow-x-start": edges.x.start ? "" : undefined, "data-overflow-x-end": edges.x.end ? "" : undefined,
+      "data-overflow-y-start": edges.y.start ? "" : undefined, "data-overflow-y-end": edges.y.end ? "" : undefined,
+    } : {}),
+    className: cn("min-w-0 max-w-full overflow-auto outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring", edges && fadeClassName),
   }, props, { className: cn(className) }) });
 }
 

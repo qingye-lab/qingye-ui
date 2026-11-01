@@ -20,6 +20,18 @@ export type OtpFieldProps = Omit<InputProps, "value" | "defaultValue" | "onValue
    * 码本身含连字符时传 `text => text` 保留。
    */
   normalizeValue?: (text: string) => string;
+  /**
+   * 分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。
+   * 分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。
+   */
+  groups?: readonly number[];
+  /**
+   * 已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type="text"`。
+   * 不用 `type="password"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议），
+   * 并让 `autocomplete="one-time-code"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。
+   * 代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。
+   */
+  mask?: boolean;
 };
 
 /** 默认归一化：空白（含不换行空格、全角空格）与各种连字符。选择，理由见 `normalizeValue`。 */
@@ -40,11 +52,12 @@ function segmentIndexAt(grid: HTMLElement, clientX: number): number | null {
 
 /** 一个可选择和复制的真实文本输入；分段只是呈现，长度完成不代表验证。 */
 export function OtpField({
-  length, value: valueProp, defaultValue = "", onValueChange, normalizeValue = stripSeparators,
+  length, value: valueProp, defaultValue = "", onValueChange, normalizeValue = stripSeparators, groups, mask = false, placeholder,
   className, controlClassName, ref, onChange, onSelect, onFocus, onBlur, onPaste, onCompositionStart, onCompositionEnd,
   "aria-describedby": describedBy, ...props
 }: OtpFieldProps) {
   if (!Number.isInteger(length) || length < 1) throw new Error("OtpField length must be a positive integer.");
+  if (groups && (groups.some(size => !Number.isInteger(size) || size < 1) || groups.reduce((sum, size) => sum + size, 0) !== length)) throw new Error("OtpField groups must be positive integers that sum to length.");
   const { messages } = useUILocale();
   const feedbackId = React.useId();
   const inputRef = React.useRef<HTMLInputElement | null>(null);
@@ -57,6 +70,12 @@ export function OtpField({
   const touchIndex = React.useRef<number | null>(null);
   const value = valueProp ?? uncontrolled;
   const characters = Array.from(value);
+  const cellCount = Math.max(length, characters.length);
+  // 每组的起点（第一组除外）：分隔画在这些格之前。
+  const groupStarts = new Set<number>();
+  if (groups) { let at = 0; for (const size of groups.slice(0, -1)) { at += size; groupStarts.add(at); } }
+  // 恰为一个 code point 的占位符是「每个空格里的提示」，画在格子里，不再交给透明的真实输入；其余写法照旧交给输入。
+  const cellPlaceholder = typeof placeholder === "string" && Array.from(placeholder).length === 1 ? placeholder : undefined;
   const countBefore = (offset: number) => Array.from(value.slice(0, offset)).length;
   const active = Math.min(countBefore(selection.start), Math.max(length, characters.length) - 1);
   const syncSelection = (input: HTMLInputElement) => setSelection({ start: input.selectionStart ?? 0, end: input.selectionEnd ?? 0 });
@@ -91,7 +110,8 @@ export function OtpField({
         RTL 页面里若分段随页面反向，格子顺序会与输入的先后、光标移动的方向相反。 */}
     <div data-slot="otp-field-segments" dir="ltr" className="group/otp relative grid w-fit max-w-full items-start gap-(--qy-field-gap)"
       style={{
-        gridTemplateColumns: `repeat(${Math.max(length, characters.length)}, minmax(0, 1fr))`,
+        // 分隔列取内容宽（短横），格列等分。
+        gridTemplateColumns: Array.from({ length: cellCount }, (_, index) => `${groupStarts.has(index) ? "auto " : ""}minmax(0, 1fr)`).join(" "),
         "--qy-otp-cell": "var(--qy-fill-height)",
         "--qy-otp-cell-narrow": "var(--qy-fill-height-narrow)",
       } as React.CSSProperties}
@@ -122,8 +142,11 @@ export function OtpField({
       {/* 容器比格子总宽窄时格子等比缩小：圆角取 min(控件圆角, 边长 × --qy-radius-ratio)——基础层 §4「比例而非常数」
           的同一条比例；固定 10px 在格宽缩到 14px 时会把格子压成圆（圆以标点，格子不是点）。
           items-start 让 aspect-square 按缩小后的宽度取高，而不是被网格拉成胶囊。 */}
-      {Array.from({ length: Math.max(length, characters.length) }, (_, index) => <span key={index}
-        data-slot="otp-field-segment" data-otp-index={index} aria-hidden="true"
+      {Array.from({ length: cellCount }, (_, index) => <React.Fragment key={index}>
+        {/* 分隔：2 分长、一道线粗的短横（预设：短横短于格宽的一半，读作连字符而不是缝），竖向取整行居中——
+            self-stretch 取的是格子撑出的行高，格子等比缩小时它跟着居中。两侧各有一个组内间隔（网格的 gap）。 */}
+        {groupStarts.has(index) && <span data-slot="otp-field-separator" aria-hidden="true" className="flex items-center justify-center self-stretch"><span className="block h-line w-(--qy-space-2) bg-muted-foreground" /></span>}
+        <span data-slot="otp-field-segment" data-otp-index={index} aria-hidden="true"
         data-active={index === active ? "" : undefined}
         data-selected={index >= countBefore(selection.start) && index < countBefore(selection.end) ? "" : undefined}
         className={cn(
@@ -132,8 +155,12 @@ export function OtpField({
           "group-not-has-[input:disabled]/otp:group-not-has-[input:read-only]/otp:group-not-has-[input:focus-visible]/otp:group-not-has-[input[aria-invalid=true]]/otp:group-hover/otp:border-border-strong",
           index === active && "group-has-[input:focus-visible]/otp:border-ring group-has-[input[aria-invalid=true]:focus-visible]/otp:border-destructive-foreground",
         )}
-      >{characters[index] ?? ""}</span>)}
-      <Input {...props} ref={setRef} type="text" value={value} unstyled
+      >{characters[index] === undefined
+        ? (cellPlaceholder && <span data-slot="otp-field-placeholder" className="text-muted-foreground">{cellPlaceholder}</span>)
+        // 遮蔽的圆点：圆以标点（基础层 §4），直径 2 分（预设，与分隔短横同长）；取当前文字色，随禁用、选中一起变。
+        : mask ? <span data-slot="otp-field-mask" className="block size-(--qy-space-2) rounded-full bg-current" /> : characters[index]}</span>
+      </React.Fragment>)}
+      <Input {...props} ref={setRef} type="text" value={value} unstyled placeholder={cellPlaceholder ? undefined : placeholder}
         data-slot={(props as { "data-slot"?: string })["data-slot"] ?? "otp-field-input"} autoComplete={props.autoComplete ?? "one-time-code"}
         aria-describedby={[describedBy, feedback ? feedbackId : undefined].filter(Boolean).join(" ") || undefined}
         controlClassName="absolute inset-0" className={state => cn("cursor-text opacity-0", typeof className === "function" ? className(state) : className)}

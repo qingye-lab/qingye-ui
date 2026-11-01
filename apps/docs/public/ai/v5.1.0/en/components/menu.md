@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e
+Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
 
 Temporary commands and choices related to the current task.
 
@@ -25,6 +25,7 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - MenuItem: One command; shared with ContextMenuItem.
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal: Trigger and floating parts owned by the same root.
 - MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger: Commands, true navigation, checked choices, radio choices and submenus.
+- MenuSwitchItem: A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive: Group semantics and the public primitive namespace.
 
 ## Responsive behavior
@@ -63,6 +64,8 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - MenuSubmenu: const; owner menu; UNVERIFIED
 - MenuSubmenuTrigger: function; owner menu; PASS; props: MenuSubmenuTriggerProps
 - MenuSubmenuTriggerProps: type; owner menu; PASS
+- MenuSwitchItem: function; owner menu; PASS; props: MenuSwitchItemProps
+- MenuSwitchItemProps: type; owner menu; PASS
 - MenuTrigger: function; owner menu; PASS; props: MenuTriggerProps
 - MenuTriggerProps: type; owner menu; PASS
 
@@ -134,6 +137,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### MenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### MenuTrigger
 - no props declared by this library
 - plus 294 inherited (@types/react 283, @base-ui/react 11); not expanded, see the installed declarations
@@ -170,6 +178,11 @@ Commands, true navigation, checked choices, radio choices and submenus.
 - markerPosition: start | end. Checkbox and radio items only: controls the logical marker position. Defaults to end, preserving existing appearance, state and keyboard semantics.
 - checked / value / onCheckedChange: Base UI choice props. Checkbox items read checked, radio items read value; choices follow caller facts and primitive cancellation.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+### MenuSwitchItem
+A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.
+- checked / defaultChecked / onCheckedChange / disabled / closeOnClick: Base UI CheckboxItem props. Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices.
+- size / inset: xs | sm | md | lg | xl / boolean. Same size steps and indent as MenuCheckboxItem.
 
 ### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 Group semantics and the public primitive namespace.
@@ -269,5 +282,26 @@ export default function Demo() {
       </AlertDialogPopup>
     </AlertDialog>
   </>;
+}
+```
+
+### 开关式勾选项
+Source: apps/docs/src/content/menu/demos/05-switch.tsx
+```tsx
+import * as React from "react";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuSwitchItem, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "开关式勾选项", titleEn: "Switch-style checked items" } satisfies DemoMeta;
+export default function Demo() {
+  const [muted, setMuted] = React.useState(false); const [pinned, setPinned] = React.useState(true);
+  return <Stack><Menu><MenuTrigger>通知设置</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+    <MenuSwitchItem checked={muted} onCheckedChange={setMuted} closeOnClick={false}>静音</MenuSwitchItem>
+    <MenuSwitchItem checked={pinned} onCheckedChange={setPinned} closeOnClick={false}>置顶</MenuSwitchItem>
+    <MenuSwitchItem disabled>同步到其他设备</MenuSwitchItem>
+    <MenuSeparator />
+    <MenuItem>全部标为已读</MenuItem>
+  </MenuPopup></MenuPositioner></MenuPortal></Menu>
+  <p className="m-0 text-body">静音：{muted ? "开" : "关"} · 置顶：{pinned ? "开" : "关"}</p></Stack>;
 }
 ```

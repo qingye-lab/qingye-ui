@@ -220,6 +220,11 @@
 .qy-drawer-popup[data-swipe-direction="up"]:is([data-starting-style], [data-ending-style]) { transform: translateY(-100%); }
 .qy-drawer-popup[data-swipe-direction="left"]:is([data-starting-style], [data-ending-style]) { transform: translateX(-100%); }
 .qy-drawer-popup[data-swipe-direction="right"]:is([data-starting-style], [data-ending-style]) { transform: translateX(100%); }
+/* inset 的面板离视口的边 --qy-space-2（见 drawer.tsx）：出屏位移是自身尺寸再加这一段，否则会在边上露出一条。 */
+.qy-drawer-popup[data-inset][data-swipe-direction="down"]:is([data-starting-style], [data-ending-style]) { transform: translateY(calc(100% + var(--qy-space-2))); }
+.qy-drawer-popup[data-inset][data-swipe-direction="up"]:is([data-starting-style], [data-ending-style]) { transform: translateY(calc(-100% - var(--qy-space-2))); }
+.qy-drawer-popup[data-inset][data-swipe-direction="left"]:is([data-starting-style], [data-ending-style]) { transform: translateX(calc(-100% - var(--qy-space-2))); }
+.qy-drawer-popup[data-inset][data-swipe-direction="right"]:is([data-starting-style], [data-ending-style]) { transform: translateX(calc(100% + var(--qy-space-2))); }
 :is(.qy-drawer-popup, .qy-drawer-backdrop)[data-ending-style] {
   transition-duration: var(--qy-duration-fast);
 }

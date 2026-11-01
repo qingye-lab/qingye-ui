@@ -3383,7 +3383,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
-Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
+Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
 
 A context-menu enhancement for commands on the current object.
 
@@ -3402,6 +3402,7 @@ Right click is an enhancement; applications also provide a visible Menu using th
 ### Composition
 - ContextMenu / ContextMenuTrigger: Root and focusable trigger region for the same object.
 - ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup: Floating parts belonging to the context root.
+- ContextMenuSwitchItem: A switch-style checked item sharing MenuSwitchItem's implementation.
 - ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger: Reuses this library's public Menu parts and sizes.
 - ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive: Groups, separators and public primitives.
 
@@ -3428,6 +3429,7 @@ Right click is an enhancement; applications also provide a visible Menu using th
 - ContextMenuSeparator: function; owner context-menu; PASS; props: MenuSeparatorProps
 - ContextMenuSubmenu: const; owner context-menu; UNVERIFIED
 - ContextMenuSubmenuTrigger: function; owner context-menu; PASS; props: MenuSubmenuTriggerProps
+- ContextMenuSwitchItem: function; owner context-menu; PASS; props: MenuSwitchItemProps
 - ContextMenuTrigger: function; owner context-menu; PASS; props: ContextMenuTriggerProps
 - ContextMenuTriggerProps: type; owner context-menu; PASS
 
@@ -3499,6 +3501,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### ContextMenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### ContextMenuTrigger
 - no props declared by this library
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
@@ -3520,6 +3527,10 @@ Root and focusable trigger region for the same object.
 #### ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup
 Floating parts belonging to the context root.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+#### ContextMenuSwitchItem
+A switch-style checked item sharing MenuSwitchItem's implementation.
+- checked / onCheckedChange / size / inset / disabled: MenuSwitchItemProps. Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state.
 
 #### ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger
 Reuses this library's public Menu parts and sizes.
@@ -3547,6 +3558,8 @@ export default function Demo() {
   return <Stack><Inline><ContextMenu><ContextMenuTrigger className="p-(--qy-panel-padding-sm) border border-border">接入设备 · {marked ? "已标记" : "未标记"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup><ContextMenuItem onClick={action}>{label}</ContextMenuItem></ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu><Menu><MenuTrigger>接入设备操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem onClick={action}>{label}</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline></Stack>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Copy button
 
@@ -4518,7 +4531,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: e79e156401236e2fe59b0372c1aa7744dc3a293167264bbd1f001674057b2a55
+Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
 
 Enter an edge-aligned work surface and return to its entry point.
 
@@ -4526,6 +4539,7 @@ Enter an edge-aligned work surface and return to its entry point.
 Public swipeDirection controls the edge. Actual modality controls focus and background blocking; closing does not imply undo.
 
 ### Notes
+- To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.
 - Specify finalFocus when opening programmatically without a trigger.
 - For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.
 - Applications handle drafts, saving, abandonment, and undo separately.
@@ -4598,6 +4612,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `backdropProps?`: `DrawerPrimitive.Backdrop.Props`.
 - `finalFocus?`: `DialogFocusTarget`.
 - `initialFocus?`: `DialogFocusTarget`.
+- `inset?`: `boolean`. 悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。 四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。
 - `portalProps?`: `Omit<DrawerPrimitive.Portal.Props, "keepMounted">`.
 - `viewportProps?`: `DrawerPrimitive.Viewport.Props`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
@@ -4626,9 +4641,11 @@ Actual open state, direction, and blocking mode.
 - open / defaultOpen / onOpenChange: DrawerPrimitive.Root.Props. Actual opening and cancelable requests; caller events run first and controlled refusal does not promote layers.
 - modal: boolean | "trap-focus"; default true. Full blocking, nonblocking, or focus trapping only. Only full blocking shows a backdrop and declares aria-modal.
 - swipeDirection: "down" | "up" | "left" | "right"; default "down". Exit direction and owning edge; retains public primitive gestures, snapPoints, and activeSnapPoint.
+- snapPoints / snapPoint / defaultSnapPoint / onSnapPointChange: DrawerPrimitive.Root.Props. Snap points: numbers 0 to 1 are fractions of the viewport height, numbers above 1 are pixels, and '148px' / '30rem' strings work too. Only effective when swipeDirection is down or up; the default is the first; the popup must be taller than the largest snap point (for example className="h-full"). The active snap point is caller-owned and may be controlled.
 
 #### DrawerPopup
 A composition of edge workspace, backdrop, and viewport.
+- inset: boolean; default false. Floating variant: all four sides sit --qy-space-2 from the viewport (the same distance Workspace keeps for its sidebar and surface), with four rounded corners (rounded-overlay, the Dialog step) and four borders; available in all four directions. Swipe-to-close, snap points, focus and keyboard are identical to the edge-attached form; the exit animation travel accounts for the gap.
 - initialFocus / finalFocus: DialogFocusTarget; default true. Defaults to the first control and trigger; callers may name meaningful focusable targets. false is not accepted.
 - portalProps / backdropProps / viewportProps: DrawerPrimitive part props. Forwards native Portal, render, refs, events, and styles. Caller style merges last and can override default layers.
 
@@ -4665,7 +4682,7 @@ export default function DrawerDemo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+5 more examples: see the component page and its Markdown file.
 
 ## Empty
 
@@ -6563,7 +6580,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e
+Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
 
 Temporary commands and choices related to the current task.
 
@@ -6585,6 +6602,7 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - MenuItem: One command; shared with ContextMenuItem.
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal: Trigger and floating parts owned by the same root.
 - MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger: Commands, true navigation, checked choices, radio choices and submenus.
+- MenuSwitchItem: A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive: Group semantics and the public primitive namespace.
 
 ### Responsive behavior
@@ -6623,6 +6641,8 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - MenuSubmenu: const; owner menu; UNVERIFIED
 - MenuSubmenuTrigger: function; owner menu; PASS; props: MenuSubmenuTriggerProps
 - MenuSubmenuTriggerProps: type; owner menu; PASS
+- MenuSwitchItem: function; owner menu; PASS; props: MenuSwitchItemProps
+- MenuSwitchItemProps: type; owner menu; PASS
 - MenuTrigger: function; owner menu; PASS; props: MenuTriggerProps
 - MenuTriggerProps: type; owner menu; PASS
 
@@ -6694,6 +6714,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### MenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### MenuTrigger
 - no props declared by this library
 - plus 294 inherited (@types/react 283, @base-ui/react 11); not expanded, see the installed declarations
@@ -6731,6 +6756,11 @@ Commands, true navigation, checked choices, radio choices and submenus.
 - checked / value / onCheckedChange: Base UI choice props. Checkbox items read checked, radio items read value; choices follow caller facts and primitive cancellation.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
+#### MenuSwitchItem
+A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.
+- checked / defaultChecked / onCheckedChange / disabled / closeOnClick: Base UI CheckboxItem props. Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices.
+- size / inset: xs | sm | md | lg | xl / boolean. Same size steps and indent as MenuCheckboxItem.
+
 #### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 Group semantics and the public primitive namespace.
 - value / defaultValue / onValueChange: Base UI MenuRadioGroup props. The radio group's current value lives on MenuRadioGroup.
@@ -6758,7 +6788,7 @@ export default function Demo() {
 }
 ```
 
-3 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## Meter
 
@@ -7256,7 +7286,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: ade6360692f110cf8a976f05a073188bed5ecd91fc5354409287bb8e1f8689ec
+Source SHA-256: d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b
 
 Present a fixed-length text value in segments.
 
@@ -7294,7 +7324,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### OtpField
 - `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
 - `defaultValue?`: `string`.
+- `groups?`: `readonly number[]`. 分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。 分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。
 - `length`: `number`. 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。
+- `mask?`: `boolean`. 已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type="text"`。 不用 `type="password"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议）， 并让 `autocomplete="one-time-code"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。 代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - `normalizeValue?`: `(text: string) => string`. 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`）， WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。 需要限定字符集时由调用方给出，例如 `text => text.replace(/\D/g, "")`； 码本身含连字符时传 `text => text` 保留。
 - `onValueChange?`: `(value: string, event: React.ChangeEvent<HTMLInputElement>) => void`.
@@ -7317,6 +7349,9 @@ Segmented presentation of Input with one Field registration.
 - value / defaultValue: string; default defaultValue: ''. Controlled or uncontrolled text; leading zeros remain.
 - onValueChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void. Requests a text change. A controlled caller may retain the previous value. During IME composition the text is echoed as typed; the length rule applies once composition ends.
 - normalizeValue: (text: string) => string; default strip whitespace and hyphens. Typed and pasted text is normalised first, then checked against length; the result is what is written. Codes often arrive grouped (123 456, 123-456) and WCAG 3.3.8 forbids refusing a paste, so whitespace and hyphens are stripped by default. Restrict the character set with text => text.replace(/\D/g, ""); pass text => text when the code itself contains hyphens.
+- groups: readonly number[]. Splits length into groups with a separator drawn between them, for example [3, 3]. The groups must be positive integers summing to length, otherwise it throws. Separators are decorative; assistive technology still meets one input and the value contains no separator.
+- placeholder: string. Exactly one character (counted in code points) is shown in every empty cell and gives way once filled; any other length is not drawn in the cells and only becomes the real input's placeholder attribute.
+- mask: boolean; default false. Filled cells show a dot instead of the character. Presentation only: the value, paste, form submission and the text read by assistive technology are unchanged. type=password is not used because browsers would treat it as a password to save, prompt password managers and break one-time-code autofill; a code needs shoulder-surfing cover, not password storage semantics.
 - inputMode / autoComplete: native input props; default autoComplete: 'one-time-code'. Choose inputMode for the character set. The input type remains text.
 - render / ref / className / style / ARIA / events: Input props. Applied to the real input. Render must retain input semantics, its controlled value, and events. The segments are fixed dir=ltr (a code is a digit or letter string) and do not mirror with the page.
 - controlClassName: string. Styles the segmented container's placement and layout.
@@ -7349,7 +7384,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## PageHeader
 
@@ -8617,11 +8652,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
+Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
 
 Native scrolling with an optional composition of draggable scrollbars.
 
 ### Notes
+- The fade mask covers the whole box, so the faded end of the native scrollbar inside it also dims; when a fully visible scrollbar is required, compose with ScrollAreaRoot or leave fade off.
 - Division of labor: use ScrollArea by default (one element, native scrollbars that follow platform settings); reach for ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner only when the design requires drawn scrollbars. Do not nest one inside the other; ScrollArea does not accept Scrollbar parts.
 - ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.
 - For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.
@@ -8664,7 +8700,7 @@ Native scrolling with an optional composition of draggable scrollbars.
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -8704,6 +8740,7 @@ Written descriptions; the list above is the type-resolved fact.
 An actual scrollable div; native scrollbars respect platform settings.
 - children: ReactNode. Complete content without windowing or hiding collection items.
 - style / className: div props. Consumer layout supplies height/maxHeight and width; overflow defaults to auto.
+- fade: boolean; default false. Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end.
 - tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.
 
@@ -8734,7 +8771,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## SearchInput
 

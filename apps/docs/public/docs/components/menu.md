@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e
+Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
 
 与当前任务相关的临时命令和选择。
 
@@ -25,6 +25,7 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - MenuItem：一条命令；与 ContextMenuItem 共用。
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal：触发器与同一 Root 所属的浮层。
 - MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：动作、真实导航、勾选、单选与下级命令。
+- MenuSwitchItem：开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive：组语义与底层公开原语。
 
 ## Responsive behavior
@@ -63,6 +64,8 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - MenuSubmenu: const; owner menu; UNVERIFIED
 - MenuSubmenuTrigger: function; owner menu; PASS; props: MenuSubmenuTriggerProps
 - MenuSubmenuTriggerProps: type; owner menu; PASS
+- MenuSwitchItem: function; owner menu; PASS; props: MenuSwitchItemProps
+- MenuSwitchItemProps: type; owner menu; PASS
 - MenuTrigger: function; owner menu; PASS; props: MenuTriggerProps
 - MenuTriggerProps: type; owner menu; PASS
 
@@ -134,6 +137,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### MenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### MenuTrigger
 - no props declared by this library
 - plus 294 inherited (@types/react 283, @base-ui/react 11); not expanded, see the installed declarations
@@ -170,6 +178,11 @@ Written descriptions; the list above is the type-resolved fact.
 - markerPosition: start | end. 仅勾选与单选项，控制实际标记的逻辑位置；默认 end 保持现有外观。状态与键盘语义不变。
 - checked / value / onCheckedChange: Base UI choice props. 勾选项读 checked，单选项读 value；选择由调用方事实与原语取消协议确认。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+### MenuSwitchItem
+开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
+- checked / defaultChecked / onCheckedChange / disabled / closeOnClick: Base UI CheckboxItem props. 与 MenuCheckboxItem 相同，含 details.cancel()；读屏听到的是「菜单项复选框，已勾选/未勾选」，槽是装饰（aria-hidden）。槽的几何与 Switch 一致（高一材、长两材、抓手等距内缩），固定在行尾，所以没有 markerPosition。适合立即生效的开关类设置；是一次性的选择用 MenuCheckboxItem。
+- size / inset: xs | sm | md | lg | xl / boolean. 与 MenuCheckboxItem 相同的尺寸档与缩进。
 
 ### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 组语义与底层公开原语。
@@ -269,5 +282,26 @@ export default function Demo() {
       </AlertDialogPopup>
     </AlertDialog>
   </>;
+}
+```
+
+### 开关式勾选项
+Source: apps/docs/src/content/menu/demos/05-switch.tsx
+```tsx
+import * as React from "react";
+import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuSwitchItem, MenuTrigger } from "@qingye_lab/ui/components/menu";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "开关式勾选项", titleEn: "Switch-style checked items" } satisfies DemoMeta;
+export default function Demo() {
+  const [muted, setMuted] = React.useState(false); const [pinned, setPinned] = React.useState(true);
+  return <Stack><Menu><MenuTrigger>通知设置</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+    <MenuSwitchItem checked={muted} onCheckedChange={setMuted} closeOnClick={false}>静音</MenuSwitchItem>
+    <MenuSwitchItem checked={pinned} onCheckedChange={setPinned} closeOnClick={false}>置顶</MenuSwitchItem>
+    <MenuSwitchItem disabled>同步到其他设备</MenuSwitchItem>
+    <MenuSeparator />
+    <MenuItem>全部标为已读</MenuItem>
+  </MenuPopup></MenuPositioner></MenuPortal></Menu>
+  <p className="m-0 text-body">静音：{muted ? "开" : "关"} · 置顶：{pinned ? "开" : "关"}</p></Stack>;
 }
 ```

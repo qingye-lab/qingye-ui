@@ -3,11 +3,12 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
+Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
 
 真实原生滚动，或显式组合可拖动滚动条。
 
 ## Notes
+- fade 的遮罩罩住整个盒子，所以盒内原生滚动条的被渐隐一端也会变淡；需要完整可见的滚动条时用 ScrollAreaRoot 组合，或不开 fade。
 - 分工：默认用 ScrollArea（一个元素，原生滚动条，尊重平台设置）；只有设计要求自绘滚动条时才用 ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner 组合。两者互不嵌套，ScrollArea 不接受 Scrollbar 子部件。
 - ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。
 - 需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。
@@ -50,7 +51,7 @@ Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -90,6 +91,7 @@ Written descriptions; the list above is the type-resolved fact.
 真实可滚动 div；原生滚动条尊重平台设置。
 - children: ReactNode. 完整内容，不窗口化或隐藏集合项。
 - style / className: div props. 消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。
+- fade: boolean; default false. 边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。
 - tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。
 
@@ -143,5 +145,19 @@ export default function Demo() {
     </ScrollAreaViewport>
     <ScrollAreaScrollbar keepMounted /><ScrollAreaScrollbar orientation="horizontal" keepMounted /><ScrollAreaCorner />
   </ScrollAreaRoot>;
+}
+```
+
+### 边缘渐隐
+Source: apps/docs/src/content/scroll-area/demos/04-fade.tsx
+```tsx
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { Stack } from "@qingye_lab/ui/components/layout";
+export const meta = { title: "边缘渐隐", titleEn: "Edge fade" };
+export default function Demo() {
+  return <Stack>
+    <ScrollArea fade aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
+    <ScrollArea fade aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
+  </Stack>;
 }
 ```

@@ -3,11 +3,12 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
+Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
 
 Native scrolling with an optional composition of draggable scrollbars.
 
 ## Notes
+- The fade mask covers the whole box, so the faded end of the native scrollbar inside it also dims; when a fully visible scrollbar is required, compose with ScrollAreaRoot or leave fade off.
 - Division of labor: use ScrollArea by default (one element, native scrollbars that follow platform settings); reach for ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner only when the design requires drawn scrollbars. Do not nest one inside the other; ScrollArea does not accept Scrollbar parts.
 - ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.
 - For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.
@@ -50,7 +51,7 @@ Native scrolling with an optional composition of draggable scrollbars.
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -90,6 +91,7 @@ Written descriptions; the list above is the type-resolved fact.
 An actual scrollable div; native scrollbars respect platform settings.
 - children: ReactNode. Complete content without windowing or hiding collection items.
 - style / className: div props. Consumer layout supplies height/maxHeight and width; overflow defaults to auto.
+- fade: boolean; default false. Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end.
 - tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.
 
@@ -143,5 +145,19 @@ export default function Demo() {
     </ScrollAreaViewport>
     <ScrollAreaScrollbar keepMounted /><ScrollAreaScrollbar orientation="horizontal" keepMounted /><ScrollAreaCorner />
   </ScrollAreaRoot>;
+}
+```
+
+### 边缘渐隐
+Source: apps/docs/src/content/scroll-area/demos/04-fade.tsx
+```tsx
+import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { Stack } from "@qingye_lab/ui/components/layout";
+export const meta = { title: "边缘渐隐", titleEn: "Edge fade" };
+export default function Demo() {
+  return <Stack>
+    <ScrollArea fade aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
+    <ScrollArea fade aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
+  </Stack>;
 }
 ```

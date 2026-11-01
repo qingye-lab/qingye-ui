@@ -27,6 +27,11 @@ export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, "initialFocus" 
   portalProps?: Omit<DrawerPrimitive.Portal.Props, "keepMounted">;
   backdropProps?: DrawerPrimitive.Backdrop.Props;
   viewportProps?: DrawerPrimitive.Viewport.Props;
+  /**
+   * 悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。
+   * 四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。
+   */
+  inset?: boolean;
 };
 // 页脚不随内容滚走（M22，结构与 DialogPopup 相同）：直接子级里有 DrawerContent 时，抽屉改为纵向 flex，
 // DrawerHeader / DrawerFooter 占本身高度，DrawerContent 吃掉剩余并在内部滚动；没有 DrawerContent 的写法仍是整面板滚动。
@@ -34,14 +39,18 @@ export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, "initialFocus" 
 // 非阻断的抽屉仍是占据整边的工作面，不降为贴着触发物的 shadow-raised）。
 // 抽屉贴着视口的一边：贴边那一侧没有圆角也没有线——它是从边上拉出来的，不是浮在空中的一张卡（应物象形）。
 const edges = { down: "inset-x-0 bottom-0 w-full rounded-b-none border-b-0", up: "inset-x-0 top-0 w-full rounded-t-none border-t-0", left: "inset-y-0 left-0 h-full w-fit rounded-s-none border-s-0", right: "inset-y-0 right-0 h-full w-fit rounded-e-none border-e-0" };
-export function DrawerPopup({ portalProps, backdropProps, viewportProps, className, ...props }: DrawerPopupProps) {
+// inset 的两个值各有来处，没有新取值：距视口的边 = --qy-space-2，与 Workspace 的侧栏、工作面离视口的边相同（workspace.tsx）——
+// 同样是「浮在视口里的一块面板」，离边的距离应一致；四角仍是 rounded-overlay，与 Dialog 同档（不再有贴边的一侧，所以没有要去掉的角）。
+// 关闭时的位移须再加上这段距离才能完全出屏，见 motion.css 的 [data-inset]。
+const insetEdges = { down: "inset-x-(--qy-space-2) bottom-(--qy-space-2) w-auto max-h-[calc(100%-2*var(--qy-space-2))]", up: "inset-x-(--qy-space-2) top-(--qy-space-2) w-auto max-h-[calc(100%-2*var(--qy-space-2))]", left: "inset-y-(--qy-space-2) left-(--qy-space-2) h-auto w-fit max-w-[calc(100%-2*var(--qy-space-2))]", right: "inset-y-(--qy-space-2) right-(--qy-space-2) h-auto w-fit max-w-[calc(100%-2*var(--qy-space-2))]" };
+export function DrawerPopup({ portalProps, backdropProps, viewportProps, className, inset = false, ...props }: DrawerPopupProps) {
   const modal = React.useContext(DrawerModality);
   const backdrop = useFloatingLayer("backdrop");
   const surface = useFloatingLayer(modal === false ? "popup" : "surface");
   return <DrawerPrimitive.Portal {...portalProps} keepMounted={false}>
     {modal === true && <DrawerPrimitive.Backdrop data-slot="drawer-backdrop" {...backdropProps} style={state => ({ ...backdrop, ...(typeof backdropProps?.style === "function" ? backdropProps.style(state) : backdropProps?.style) })} className={state => cn("qy-drawer-backdrop fixed inset-0 bg-overlay", typeof backdropProps?.className === "function" ? backdropProps.className(state) : backdropProps?.className)} />}
     <DrawerPrimitive.Viewport data-slot="drawer-viewport" {...viewportProps} style={state => ({ ...surface, ...(typeof viewportProps?.style === "function" ? viewportProps.style(state) : viewportProps?.style) })} className={state => cn("pointer-events-none fixed inset-0 min-w-0", typeof viewportProps?.className === "function" ? viewportProps.className(state) : viewportProps?.className)}>
-      <DrawerPrimitive.Popup data-slot="drawer-popup" {...props} aria-modal={modal === true ? true : undefined} className={state => cn("qy-drawer-popup pointer-events-auto absolute grid has-[>[data-slot=drawer-content]]:flex has-[>[data-slot=drawer-content]]:flex-col min-w-0 max-h-full max-w-full gap-(--qy-panel-gap) overflow-y-auto has-[>[data-slot=drawer-content]]:overflow-hidden overscroll-contain rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring", edges[state.swipeDirection], typeof className === "function" ? className(state) : className)} />
+      <DrawerPrimitive.Popup data-slot="drawer-popup" data-inset={inset ? "" : undefined} {...props} aria-modal={modal === true ? true : undefined} className={state => cn("qy-drawer-popup pointer-events-auto absolute grid has-[>[data-slot=drawer-content]]:flex has-[>[data-slot=drawer-content]]:flex-col min-w-0 max-h-full max-w-full gap-(--qy-panel-gap) overflow-y-auto has-[>[data-slot=drawer-content]]:overflow-hidden overscroll-contain rounded-overlay border border-border bg-surface-raised p-(--qy-panel-padding) text-foreground shadow-overlay outline-none focus-visible:border-ring", (inset ? insetEdges : edges)[state.swipeDirection], typeof className === "function" ? className(state) : className)} />
     </DrawerPrimitive.Viewport>
   </DrawerPrimitive.Portal>;
 }

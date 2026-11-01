@@ -3728,7 +3728,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
-Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
+Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
 
 当前对象的右键增强命令入口。
 
@@ -3747,6 +3747,7 @@ Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
 ### Composition
 - ContextMenu / ContextMenuTrigger：同一对象的 Root 与可聚焦触发区域。
 - ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup：上下文 Root 自己的浮层。
+- ContextMenuSwitchItem：开关式的勾选项，与 MenuSwitchItem 共用实现。
 - ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger：复用本库 Menu 的公开部位与尺寸。
 - ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive：组、分隔与公开原语。
 
@@ -3773,6 +3774,7 @@ Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
 - ContextMenuSeparator: function; owner context-menu; PASS; props: MenuSeparatorProps
 - ContextMenuSubmenu: const; owner context-menu; UNVERIFIED
 - ContextMenuSubmenuTrigger: function; owner context-menu; PASS; props: MenuSubmenuTriggerProps
+- ContextMenuSwitchItem: function; owner context-menu; PASS; props: MenuSwitchItemProps
 - ContextMenuTrigger: function; owner context-menu; PASS; props: ContextMenuTriggerProps
 - ContextMenuTriggerProps: type; owner context-menu; PASS
 
@@ -3844,6 +3846,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### ContextMenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### ContextMenuTrigger
 - no props declared by this library
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
@@ -3865,6 +3872,10 @@ Written descriptions; the list above is the type-resolved fact.
 #### ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup
 上下文 Root 自己的浮层。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
+
+#### ContextMenuSwitchItem
+开关式的勾选项，与 MenuSwitchItem 共用实现。
+- checked / onCheckedChange / size / inset / disabled: MenuSwitchItemProps. 语义仍是 menuitemcheckbox；槽是装饰，读屏只听到勾选状态。
 
 #### ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger
 复用本库 Menu 的公开部位与尺寸。
@@ -3892,6 +3903,8 @@ export default function Demo() {
   return <Stack><Inline><ContextMenu><ContextMenuTrigger className="p-(--qy-panel-padding-sm) border border-border">接入设备 · {marked ? "已标记" : "未标记"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup><ContextMenuItem onClick={action}>{label}</ContextMenuItem></ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu><Menu><MenuTrigger>接入设备操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem onClick={action}>{label}</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline></Stack>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 复制按钮 CopyButton
 
@@ -4863,7 +4876,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: e79e156401236e2fe59b0372c1aa7744dc3a293167264bbd1f001674057b2a55
+Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
 
 从边缘进入工作面，再返回入口。
 
@@ -4871,6 +4884,7 @@ Source SHA-256: e79e156401236e2fe59b0372c1aa7744dc3a293167264bbd1f001674057b2a55
 方向由公开 swipeDirection 决定；实际 modal 决定焦点与背景阻断，关闭不代表撤销。
 
 ### Notes
+- 从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。
 - 程序打开且无触发者时明确 finalFocus。
 - 长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。
 - 草稿、保存、放弃与撤销由应用分别处理。
@@ -4943,6 +4957,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `backdropProps?`: `DrawerPrimitive.Backdrop.Props`.
 - `finalFocus?`: `DialogFocusTarget`.
 - `initialFocus?`: `DialogFocusTarget`.
+- `inset?`: `boolean`. 悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。 四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。
 - `portalProps?`: `Omit<DrawerPrimitive.Portal.Props, "keepMounted">`.
 - `viewportProps?`: `DrawerPrimitive.Viewport.Props`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
@@ -4971,9 +4986,11 @@ Written descriptions; the list above is the type-resolved fact.
 - open / defaultOpen / onOpenChange: DrawerPrimitive.Root.Props. 实际开关与可取消请求；调用方事件先执行，受控拒绝不提升层级。
 - modal: boolean | "trap-focus"; default true. 完整阻断、非阻断或只困住焦点；只有完整阻断显示遮罩并声明 aria-modal。
 - swipeDirection: "down" | "up" | "left" | "right"; default "down". 退出方向与所在边缘，沿用原语手势、snapPoints 与 activeSnapPoint 公共 API。
+- snapPoints / snapPoint / defaultSnapPoint / onSnapPointChange: DrawerPrimitive.Root.Props. 停靠点：0 到 1 的数是视口高度的比例，大于 1 的数是像素，也可写 '148px' / '30rem'。只对 swipeDirection 为 down 或 up 的抽屉有效；默认停在第一个；面板必须比最高的停靠点更高（如 className="h-full"）。停靠点由调用方事实持有，可受控。
 
 #### DrawerPopup
 边缘工作面、遮罩与视口组合。
+- inset: boolean; default false. 悬浮式：四边离视口 --qy-space-2（与 Workspace 的侧栏、工作面离视口的边相同），四角圆（rounded-overlay，与 Dialog 同档）、四边有线；四个方向都可用。滑动关闭、吸附点、焦点与键盘与贴边时完全相同；关闭动画的出屏位移已把这段距离算入。
 - initialFocus / finalFocus: DialogFocusTarget; default true. 默认首个控件与触发者；可指定有意义的可聚焦目标，不接受 false。
 - portalProps / backdropProps / viewportProps: DrawerPrimitive 部位 Props. 原生 Portal、render/ref/事件与样式透传；调用方 style 后合并，可覆盖默认层级。
 
@@ -5010,7 +5027,7 @@ export default function DrawerDemo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+5 more examples: see the component page and its Markdown file.
 
 ## 空与未知 Empty
 
@@ -6908,7 +6925,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: 41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e
+Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
 
 与当前任务相关的临时命令和选择。
 
@@ -6930,6 +6947,7 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - MenuItem：一条命令；与 ContextMenuItem 共用。
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal：触发器与同一 Root 所属的浮层。
 - MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：动作、真实导航、勾选、单选与下级命令。
+- MenuSwitchItem：开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive：组语义与底层公开原语。
 
 ### Responsive behavior
@@ -6968,6 +6986,8 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - MenuSubmenu: const; owner menu; UNVERIFIED
 - MenuSubmenuTrigger: function; owner menu; PASS; props: MenuSubmenuTriggerProps
 - MenuSubmenuTriggerProps: type; owner menu; PASS
+- MenuSwitchItem: function; owner menu; PASS; props: MenuSwitchItemProps
+- MenuSwitchItemProps: type; owner menu; PASS
 - MenuTrigger: function; owner menu; PASS; props: MenuTriggerProps
 - MenuTriggerProps: type; owner menu; PASS
 
@@ -7039,6 +7059,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### MenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### MenuTrigger
 - no props declared by this library
 - plus 294 inherited (@types/react 283, @base-ui/react 11); not expanded, see the installed declarations
@@ -7076,6 +7101,11 @@ Written descriptions; the list above is the type-resolved fact.
 - checked / value / onCheckedChange: Base UI choice props. 勾选项读 checked，单选项读 value；选择由调用方事实与原语取消协议确认。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
+#### MenuSwitchItem
+开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
+- checked / defaultChecked / onCheckedChange / disabled / closeOnClick: Base UI CheckboxItem props. 与 MenuCheckboxItem 相同，含 details.cancel()；读屏听到的是「菜单项复选框，已勾选/未勾选」，槽是装饰（aria-hidden）。槽的几何与 Switch 一致（高一材、长两材、抓手等距内缩），固定在行尾，所以没有 markerPosition。适合立即生效的开关类设置；是一次性的选择用 MenuCheckboxItem。
+- size / inset: xs | sm | md | lg | xl / boolean. 与 MenuCheckboxItem 相同的尺寸档与缩进。
+
 #### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 组语义与底层公开原语。
 - value / defaultValue / onValueChange: Base UI MenuRadioGroup props. 单选组的当前值在 MenuRadioGroup 上。
@@ -7103,7 +7133,7 @@ export default function Demo() {
 }
 ```
 
-3 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## 测量 Meter
 
@@ -7601,7 +7631,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
-Source SHA-256: ade6360692f110cf8a976f05a073188bed5ecd91fc5354409287bb8e1f8689ec
+Source SHA-256: d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b
 
 分段呈现一个固定长度文本值。
 
@@ -7639,7 +7669,9 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### OtpField
 - `controlClassName?`: `string`. 编辑边界的样式入口；className / style / render 始终属于真实输入。
 - `defaultValue?`: `string`.
+- `groups?`: `readonly number[]`. 分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。 分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。
 - `length`: `number`. 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。
+- `mask?`: `boolean`. 已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type="text"`。 不用 `type="password"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议）， 并让 `autocomplete="one-time-code"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。 代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - `normalizeValue?`: `(text: string) => string`. 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`）， WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。 需要限定字符集时由调用方给出，例如 `text => text.replace(/\D/g, "")`； 码本身含连字符时传 `text => text` 保留。
 - `onValueChange?`: `(value: string, event: React.ChangeEvent<HTMLInputElement>) => void`.
@@ -7662,6 +7694,9 @@ Input 的分段呈现，Field 注册一次。
 - value / defaultValue: string; default defaultValue: ''. 受控或非受控文本，保留前导零。
 - onValueChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void. 请求文本变化；受控调用方拒绝更新时原值不变。输入法合成期间按输入原样回显，合成结束后才按长度校验。
 - normalizeValue: (text: string) => string; default 去掉空白与连字符. 键入与粘贴的文本先经它归一化，再按 length 校验；返回值就是写入的文本。验证码常以分组形式送达（123 456、123-456），WCAG 3.3.8 不允许靠拒绝粘贴来为难人，所以默认去掉分隔。限定字符集用 text => text.replace(/\D/g, "")；码本身含连字符时传 text => text。
+- groups: readonly number[]. 把 length 分成几组，组间画一条分隔线，如 [3, 3]。各组之和必须等于 length，且都是正整数，否则抛错。分隔线是装饰，读屏仍只遇到一个输入框；值里不含分隔符。
+- placeholder: string. 恰好一个字符（以 code point 计）时显示在每个空格里，填入字符后让位；其他长度不在格内显示，只作为真实输入框的 placeholder 属性。
+- mask: boolean; default false. 已填的格显示圆点而不是字符。只改呈现：值、粘贴、表单提交与读屏所读的文本不变。没有用 type=password——那会让浏览器把它当密码保存、触发密码管理器，并让 one-time-code 自动填充失效；验证码需要的是遮住旁人的视线，不是密码的存储语义。
 - inputMode / autoComplete: native input props; default autoComplete: 'one-time-code'. inputMode 由真实字符范围决定；type 始终 text，不自动转换为数值。
 - render / ref / className / style / ARIA / events: Input props. 全部属于真实 input；render 必须保持 input 语义、受控值和事件。分段本身固定 dir=ltr（验证码是数字或字母串），不随页面方向反转。
 - controlClassName: string. 调整分段容器的位置与布局。
@@ -7694,7 +7729,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## 页面标题 PageHeader
 
@@ -8962,11 +8997,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
+Source SHA-256: b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005
 
 真实原生滚动，或显式组合可拖动滚动条。
 
 ### Notes
+- fade 的遮罩罩住整个盒子，所以盒内原生滚动条的被渐隐一端也会变淡；需要完整可见的滚动条时用 ScrollAreaRoot 组合，或不开 fade。
 - 分工：默认用 ScrollArea（一个元素，原生滚动条，尊重平台设置）；只有设计要求自绘滚动条时才用 ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner 组合。两者互不嵌套，ScrollArea 不接受 Scrollbar 子部件。
 - ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。
 - 需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。
@@ -9009,7 +9045,7 @@ Source SHA-256: 0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -9049,6 +9085,7 @@ Written descriptions; the list above is the type-resolved fact.
 真实可滚动 div；原生滚动条尊重平台设置。
 - children: ReactNode. 完整内容，不窗口化或隐藏集合项。
 - style / className: div props. 消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。
+- fade: boolean; default false. 边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。
 - tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。
 - render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。
 
@@ -9079,7 +9116,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 搜索输入 SearchInput
 

@@ -15102,6 +15102,7 @@
         "ContextMenuGroupLabel",
         "ContextMenuSeparator",
         "ContextMenuCheckboxItem",
+        "ContextMenuSwitchItem",
         "ContextMenuRadioItem",
         "ContextMenuSubmenuTrigger",
         "ContextMenuPrimitive"
@@ -15147,6 +15148,19 @@
               "type": "Base UI part props",
               "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
               "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+            }
+          ]
+        },
+        {
+          "name": "ContextMenuSwitchItem",
+          "description": "开关式的勾选项，与 MenuSwitchItem 共用实现。",
+          "descriptionEn": "A switch-style checked item sharing MenuSwitchItem's implementation.",
+          "props": [
+            {
+              "name": "checked / onCheckedChange / size / inset / disabled",
+              "type": "MenuSwitchItemProps",
+              "description": "语义仍是 menuitemcheckbox；槽是装饰，读屏只听到勾选状态。",
+              "descriptionEn": "Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state."
             }
           ]
         },
@@ -15428,7 +15442,7 @@
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:78"
+                "declaredAt": "packages/ui/src/components/menu.tsx:99"
               },
               {
                 "name": "size",
@@ -15507,6 +15521,35 @@
             ]
           },
           {
+            "name": "ContextMenuSwitchItem",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "inset",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              },
+              {
+                "name": "size",
+                "optional": true,
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              }
+            ],
+            "inheritedCount": 285,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 273
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 12
+              }
+            ]
+          },
+          {
             "name": "ContextMenuTrigger",
             "status": "resolved",
             "ownProps": [],
@@ -15565,7 +15608,7 @@
             {
               "part": "ContextMenuRadioItem",
               "prop": "markerPosition",
-              "declaredAt": "packages/ui/src/components/menu.tsx:78",
+              "declaredAt": "packages/ui/src/components/menu.tsx:99",
               "viaComponent": "menu"
             },
             {
@@ -15761,6 +15804,17 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "ContextMenuSwitchItem",
+          "kind": "function",
+          "owner": "context-menu",
+          "module": "@qingye_lab/ui/components/context-menu",
+          "propsType": "MenuSwitchItemProps",
+          "signature": "ContextMenuSwitchItem(props: MenuSwitchItemProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "ContextMenuTrigger",
           "kind": "function",
           "owner": "context-menu",
@@ -15872,6 +15926,12 @@
           "status": "PASS"
         },
         {
+          "name": "ContextMenuSwitchItem",
+          "import": "@qingye_lab/ui/components/context-menu",
+          "owner": "context-menu",
+          "status": "PASS"
+        },
+        {
           "name": "ContextMenuRadioItem",
           "import": "@qingye_lab/ui/components/context-menu",
           "owner": "context-menu",
@@ -15932,6 +15992,19 @@
           "providers": [],
           "code": "import * as React from \"react\";\nimport { ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuPositioner, ContextMenuPopup, ContextMenuItem } from \"@qingye_lab/ui/components/context-menu\";\nimport { Menu, MenuTrigger, MenuPortal, MenuPositioner, MenuPopup, MenuItem } from \"@qingye_lab/ui/components/menu\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"可见入口与右键\", titleEn: \"Visible and context triggers\" } satisfies DemoMeta;\nexport default function Demo() {\n  const [marked, setMarked] = React.useState(false); const label = marked ? \"取消标记\" : \"标记\"; const action = () => setMarked(value => !value);\n  return <Stack><Inline><ContextMenu><ContextMenuTrigger className=\"p-(--qy-panel-padding-sm) border border-border\">接入设备 · {marked ? \"已标记\" : \"未标记\"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup><ContextMenuItem onClick={action}>{label}</ContextMenuItem></ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu><Menu><MenuTrigger>接入设备操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem onClick={action}>{label}</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline></Stack>;\n}\n",
           "sha256": "7cd72e8cb22f80bfaf28955ccc1249474dafdcfd5a2c2ebc8e62bf567f011d7f"
+        },
+        {
+          "id": "switch",
+          "title": "开关式勾选项",
+          "source": "apps/docs/src/content/context-menu/demos/02-switch.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/context-menu",
+            "react"
+          ],
+          "providers": [],
+          "code": "import * as React from \"react\";\nimport { ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuPositioner, ContextMenuPopup, ContextMenuSwitchItem } from \"@qingye_lab/ui/components/context-menu\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"开关式勾选项\", titleEn: \"Switch-style checked item\" } satisfies DemoMeta;\nexport default function Demo() {\n  const [muted, setMuted] = React.useState(false);\n  return <ContextMenu><ContextMenuTrigger className=\"p-(--qy-panel-padding-sm) border border-border\">接入设备 · {muted ? \"已静音\" : \"未静音\"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup>\n    <ContextMenuSwitchItem checked={muted} onCheckedChange={setMuted} closeOnClick={false}>静音</ContextMenuSwitchItem>\n  </ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu>;\n}\n",
+          "sha256": "20f3e0d91c15e96a2d4d8b79280bd452f46d29a76bf98cc656e3f59e113cd9bd"
         }
       ],
       "design": {
@@ -15949,6 +16022,7 @@
         "composition": [
           "ContextMenu / ContextMenuTrigger：同一对象的 Root 与可聚焦触发区域。",
           "ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup：上下文 Root 自己的浮层。",
+          "ContextMenuSwitchItem：开关式的勾选项，与 MenuSwitchItem 共用实现。",
           "ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger：复用本库 Menu 的公开部位与尺寸。",
           "ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive：组、分隔与公开原语。"
         ],
@@ -15969,7 +16043,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/context-menu.tsx",
-        "sha256": "576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34",
+        "sha256": "735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "右键不是唯一入口；应用同时提供可见 Menu，并复用同一组真实命令。",
@@ -16012,6 +16086,19 @@
                   "type": "Base UI part props",
                   "description": "Props and refs target actual elements; caller events and styles are preserved.",
                   "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+                }
+              ]
+            },
+            {
+              "name": "ContextMenuSwitchItem",
+              "description": "A switch-style checked item sharing MenuSwitchItem's implementation.",
+              "descriptionEn": "A switch-style checked item sharing MenuSwitchItem's implementation.",
+              "props": [
+                {
+                  "name": "checked / onCheckedChange / size / inset / disabled",
+                  "type": "MenuSwitchItemProps",
+                  "description": "Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state.",
+                  "descriptionEn": "Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state."
                 }
               ]
             },
@@ -16064,6 +16151,7 @@
             "composition": [
               "ContextMenu / ContextMenuTrigger: Root and focusable trigger region for the same object.",
               "ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup: Floating parts belonging to the context root.",
+              "ContextMenuSwitchItem: A switch-style checked item sharing MenuSwitchItem's implementation.",
               "ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger: Reuses this library's public Menu parts and sizes.",
               "ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive: Groups, separators and public primitives."
             ],
@@ -21117,6 +21205,7 @@
       ],
       "docs": "/docs/components/drawer",
       "notes": [
+        "从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。",
         "程序打开且无触发者时明确 finalFocus。",
         "长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。",
         "草稿、保存、放弃与撤销由应用分别处理。",
@@ -21155,6 +21244,12 @@
               "default": "\"down\"",
               "description": "退出方向与所在边缘，沿用原语手势、snapPoints 与 activeSnapPoint 公共 API。",
               "descriptionEn": "Exit direction and owning edge; retains public primitive gestures, snapPoints, and activeSnapPoint."
+            },
+            {
+              "name": "snapPoints / snapPoint / defaultSnapPoint / onSnapPointChange",
+              "type": "DrawerPrimitive.Root.Props",
+              "description": "停靠点：0 到 1 的数是视口高度的比例，大于 1 的数是像素，也可写 '148px' / '30rem'。只对 swipeDirection 为 down 或 up 的抽屉有效；默认停在第一个；面板必须比最高的停靠点更高（如 className=\"h-full\"）。停靠点由调用方事实持有，可受控。",
+              "descriptionEn": "Snap points: numbers 0 to 1 are fractions of the viewport height, numbers above 1 are pixels, and '148px' / '30rem' strings work too. Only effective when swipeDirection is down or up; the default is the first; the popup must be taller than the largest snap point (for example className=\"h-full\"). The active snap point is caller-owned and may be controlled."
             }
           ]
         },
@@ -21163,6 +21258,13 @@
           "description": "边缘工作面、遮罩与视口组合。",
           "descriptionEn": "A composition of edge workspace, backdrop, and viewport.",
           "props": [
+            {
+              "name": "inset",
+              "type": "boolean",
+              "default": "false",
+              "description": "悬浮式：四边离视口 --qy-space-2（与 Workspace 的侧栏、工作面离视口的边相同），四角圆（rounded-overlay，与 Dialog 同档）、四边有线；四个方向都可用。滑动关闭、吸附点、焦点与键盘与贴边时完全相同；关闭动画的出屏位移已把这段距离算入。",
+              "descriptionEn": "Floating variant: all four sides sit --qy-space-2 from the viewport (the same distance Workspace keeps for its sidebar and surface), with four rounded corners (rounded-overlay, the Dialog step) and four borders; available in all four directions. Swipe-to-close, snap points, focus and keyboard are identical to the edge-attached form; the exit animation travel accounts for the gap."
+            },
             {
               "name": "initialFocus / finalFocus",
               "type": "DialogFocusTarget",
@@ -21316,6 +21418,13 @@
                 "optional": true,
                 "type": "DialogFocusTarget",
                 "declaredAt": "packages/ui/src/components/drawer.tsx:26"
+              },
+              {
+                "name": "inset",
+                "optional": true,
+                "type": "boolean",
+                "doc": "悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。\n四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。",
+                "declaredAt": "packages/ui/src/components/drawer.tsx:34"
               },
               {
                 "name": "portalProps",
@@ -21494,7 +21603,7 @@
           "owner": "drawer",
           "module": "@qingye_lab/ui/components/drawer",
           "propsType": "DrawerPopupProps",
-          "signature": "DrawerPopup({ portalProps, backdropProps, viewportProps, className, ...props }: DrawerPopupProps)",
+          "signature": "DrawerPopup({ portalProps, backdropProps, viewportProps, className, inset = false, ...props }: DrawerPopupProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -21504,7 +21613,7 @@
           "kind": "type",
           "owner": "drawer",
           "module": "@qingye_lab/ui/components/drawer",
-          "signature": "Omit<DrawerPrimitive.Popup.Props, \"initialFocus\" | \"finalFocus\"> & {\n  initialFocus?: DialogFocusTarget; finalFocus?: DialogFocusTarget;\n  portalProps?: Omit<DrawerPrimitive.Portal.Props, \"keepMounted\">;\n  backdropProps?: DrawerPrimitive.Backdrop.Props;\n  viewportProps?: DrawerPrimitive.Viewport.Props;\n}",
+          "signature": "Omit<DrawerPrimitive.Popup.Props, \"initialFocus\" | \"finalFocus\"> & {\n  initialFocus?: DialogFocusTarget; finalFocus?: DialogFocusTarget;\n  portalProps?: Omit<DrawerPrimitive.Portal.Props, \"keepMounted\">;\n  backdropProps?: DrawerPrimitive.Backdrop.Props;\n  viewportProps?: DrawerPrimitive.Viewport.Props;\n  /**\n   * 悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。\n   * 四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。\n   */\n  inset?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -21558,7 +21667,7 @@
         },
         {
           "name": "DrawerPopupProps",
-          "definition": "export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, \"initialFocus\" | \"finalFocus\"> & {\n  initialFocus?: DialogFocusTarget; finalFocus?: DialogFocusTarget;\n  portalProps?: Omit<DrawerPrimitive.Portal.Props, \"keepMounted\">;\n  backdropProps?: DrawerPrimitive.Backdrop.Props;\n  viewportProps?: DrawerPrimitive.Viewport.Props;\n};"
+          "definition": "export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, \"initialFocus\" | \"finalFocus\"> & {\n  initialFocus?: DialogFocusTarget; finalFocus?: DialogFocusTarget;\n  portalProps?: Omit<DrawerPrimitive.Portal.Props, \"keepMounted\">;\n  backdropProps?: DrawerPrimitive.Backdrop.Props;\n  viewportProps?: DrawerPrimitive.Viewport.Props;\n  /**\n   * 悬浮式：四边都离视口一段距离，四角圆、四边有线，成为浮在页面上的一张面板而不是从边上拉出的一段。\n   * 四个方向都可用；滑动关闭、吸附点与不加 inset 时完全相同。\n   */\n  inset?: boolean;\n};"
         },
         {
           "name": "DrawerGroupProps",
@@ -21732,6 +21841,43 @@
           "providers": [],
           "code": "import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from \"@qingye_lab/ui/components/drawer\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\n\nexport const meta = { title: \"长内容\", titleEn: \"Long content\" };\n\nconst fields = Array.from({ length: 16 }, (_, index) => `条件 ${index + 1}`);\n\nexport default function Demo() {\n  return <Drawer swipeDirection=\"right\">\n    <DrawerTrigger>筛选条件</DrawerTrigger>\n    <DrawerPopup className=\"w-80\">\n      <DrawerHeader>\n        <DrawerTitle>筛选条件</DrawerTitle>\n        <DrawerDescription>填写后点击完成。</DrawerDescription>\n      </DrawerHeader>\n      <DrawerContent>\n        {fields.map(name => <Field key={name}><FieldLabel>{name}</FieldLabel><Input /></Field>)}\n      </DrawerContent>\n      <DrawerFooter><DrawerClose>完成</DrawerClose></DrawerFooter>\n    </DrawerPopup>\n  </Drawer>;\n}\n",
           "sha256": "b1cef167a8d784bedb734c48cc687f4ff0cd2a9a884279108b7d9ce96bf8e94c"
+        },
+        {
+          "id": "inset",
+          "title": "悬浮式",
+          "source": "apps/docs/src/content/drawer/demos/04-inset.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/drawer",
+            "@qingye_lab/ui/components/layout"
+          ],
+          "providers": [],
+          "code": "import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from \"@qingye_lab/ui/components/drawer\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"悬浮式\", titleEn: \"Inset\" };\nconst EDGES = [[\"right\", \"右侧\"], [\"left\", \"左侧\"], [\"up\", \"上方\"], [\"down\", \"下方\"]] as const;\nexport default function DrawerDemo() {\n  return <Inline gap=\"fields\">{EDGES.map(([direction, name]) => <Drawer key={direction} swipeDirection={direction}>\n    <DrawerTrigger>{name}</DrawerTrigger>\n    <DrawerPopup inset className={direction === \"left\" || direction === \"right\" ? \"w-80\" : undefined}>\n      <DrawerHeader><DrawerTitle>筛选条件</DrawerTitle><DrawerDescription>面板四边离开视口，关闭、滑动与焦点返回与贴边时相同。</DrawerDescription></DrawerHeader>\n      <DrawerContent>{Array.from({ length: 6 }, (_, index) => <p key={index} className=\"m-0 text-body\">条件 {index + 1}</p>)}</DrawerContent>\n      <DrawerFooter><DrawerClose>完成</DrawerClose></DrawerFooter>\n    </DrawerPopup>\n  </Drawer>)}</Inline>;\n}\n",
+          "sha256": "be9bae997a2a91a8fb73722ac37af5070fddddb105dc0cc6bc9354dd1952b8a0"
+        },
+        {
+          "id": "snap-points",
+          "title": "停靠点",
+          "source": "apps/docs/src/content/drawer/demos/05-snap-points.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/drawer",
+            "@qingye_lab/ui/components/layout",
+            "react"
+          ],
+          "providers": [],
+          "code": "import * as React from \"react\";\nimport { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from \"@qingye_lab/ui/components/drawer\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"停靠点\", titleEn: \"Snap points\" };\n// 停靠点只对 swipeDirection 为 down / up 的抽屉有效（原语限制）。\n// 面板须比最高的停靠点更高，所以让它占满视口高度（h-full）；第一个停靠点是初始停靠位置，1 表示全高。\nconst SNAPS = [\"200px\", 1] as const;\nconst names: Record<string, string> = { \"200px\": \"半开\", \"1\": \"全开\" };\nexport default function DrawerDemo() {\n  const [snap, setSnap] = React.useState<number | string | null>(SNAPS[0]);\n  return <Drawer snapPoints={[...SNAPS]} snapPoint={snap} onSnapPointChange={setSnap}>\n    <DrawerTrigger>查看明细</DrawerTrigger>\n    <DrawerPopup className=\"h-full\">\n      <DrawerHeader><DrawerTitle>明细</DrawerTitle></DrawerHeader>\n      <DrawerContent>{Array.from({ length: 24 }, (_, index) => <p key={index} className=\"m-0 text-body\">记录 {index + 1}</p>)}</DrawerContent>\n      <DrawerFooter><Inline gap=\"actions\"><Button variant=\"quiet\" onClick={() => setSnap(snap === 1 ? SNAPS[0] : 1)}>{snap === 1 ? \"收起\" : \"展开\"}（当前{names[String(snap)] ?? \"—\"}）</Button><DrawerClose>完成</DrawerClose></Inline></DrawerFooter>\n    </DrawerPopup>\n  </Drawer>;\n}\n",
+          "sha256": "d84820660462acac94ffad21ab388bbdc932541cb51a1e2ca33df1a6aac7739a"
+        },
+        {
+          "id": "swipe-area",
+          "title": "边缘滑出",
+          "source": "apps/docs/src/content/drawer/demos/06-swipe-area.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/drawer"
+          ],
+          "providers": [],
+          "code": "import { Drawer, DrawerClose, DrawerPopup, DrawerPrimitive, DrawerTitle, DrawerTrigger } from \"@qingye_lab/ui/components/drawer\";\nexport const meta = { title: \"边缘滑出\", titleEn: \"Swipe from the edge\" };\n// DrawerPrimitive.SwipeArea 是一条看不见的边缘热区：swipeDirection=\"left\" 的抽屉在左边，热区默认在相反方向的手势上——\n// 从左缘向右拖动即可拉出。热区本身不画任何东西，需要调用方给它位置与宽度；\n// 这里贴着视口左缘、宽 --qy-space-4（预设，足够指尖或指针命中又不盖住页面内容）。它不是控件，不进入 Tab 序列，所以仍保留可见的触发器。\nexport default function DrawerDemo() {\n  return <Drawer swipeDirection=\"left\">\n    <DrawerPrimitive.SwipeArea className=\"fixed inset-y-0 left-0 w-(--qy-space-4)\" />\n    <DrawerTrigger>打开导航</DrawerTrigger>\n    <DrawerPopup className=\"w-72\"><DrawerTitle>导航</DrawerTitle><DrawerClose>关闭</DrawerClose></DrawerPopup>\n  </Drawer>;\n}\n",
+          "sha256": "34ece1af26229f517244120bb9bf3a7874931a840b2883b54ee2401baa5b5449"
         }
       ],
       "design": {
@@ -21766,7 +21912,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/drawer.tsx",
-        "sha256": "e79e156401236e2fe59b0372c1aa7744dc3a293167264bbd1f001674057b2a55",
+        "sha256": "63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "方向由公开 swipeDirection 决定；实际 modal 决定焦点与背景阻断，关闭不代表撤销。",
@@ -21777,6 +21923,7 @@
           "category": "Overlays",
           "decisions": "Public swipeDirection controls the edge. Actual modality controls focus and background blocking; closing does not imply undo.",
           "notes": [
+            "To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.",
             "Specify finalFocus when opening programmatically without a trigger.",
             "For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.",
             "Applications handle drafts, saving, abandonment, and undo separately.",
@@ -21809,6 +21956,12 @@
                   "default": "\"down\"",
                   "description": "Exit direction and owning edge; retains public primitive gestures, snapPoints, and activeSnapPoint.",
                   "descriptionEn": "Exit direction and owning edge; retains public primitive gestures, snapPoints, and activeSnapPoint."
+                },
+                {
+                  "name": "snapPoints / snapPoint / defaultSnapPoint / onSnapPointChange",
+                  "type": "DrawerPrimitive.Root.Props",
+                  "description": "Snap points: numbers 0 to 1 are fractions of the viewport height, numbers above 1 are pixels, and '148px' / '30rem' strings work too. Only effective when swipeDirection is down or up; the default is the first; the popup must be taller than the largest snap point (for example className=\"h-full\"). The active snap point is caller-owned and may be controlled.",
+                  "descriptionEn": "Snap points: numbers 0 to 1 are fractions of the viewport height, numbers above 1 are pixels, and '148px' / '30rem' strings work too. Only effective when swipeDirection is down or up; the default is the first; the popup must be taller than the largest snap point (for example className=\"h-full\"). The active snap point is caller-owned and may be controlled."
                 }
               ]
             },
@@ -21817,6 +21970,13 @@
               "description": "A composition of edge workspace, backdrop, and viewport.",
               "descriptionEn": "A composition of edge workspace, backdrop, and viewport.",
               "props": [
+                {
+                  "name": "inset",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Floating variant: all four sides sit --qy-space-2 from the viewport (the same distance Workspace keeps for its sidebar and surface), with four rounded corners (rounded-overlay, the Dialog step) and four borders; available in all four directions. Swipe-to-close, snap points, focus and keyboard are identical to the edge-attached form; the exit animation travel accounts for the gap.",
+                  "descriptionEn": "Floating variant: all four sides sit --qy-space-2 from the viewport (the same distance Workspace keeps for its sidebar and surface), with four rounded corners (rounded-overlay, the Dialog step) and four borders; available in all four directions. Swipe-to-close, snap points, focus and keyboard are identical to the edge-attached form; the exit animation travel accounts for the gap."
+                },
                 {
                   "name": "initialFocus / finalFocus",
                   "type": "DialogFocusTarget",
@@ -31220,6 +31380,7 @@
         "MenuGroupLabel",
         "MenuSeparator",
         "MenuCheckboxItem",
+        "MenuSwitchItem",
         "MenuRadioGroup",
         "MenuRadioItem",
         "MenuSubmenuTrigger",
@@ -31327,6 +31488,25 @@
               "type": "Base UI part props",
               "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
               "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+            }
+          ]
+        },
+        {
+          "name": "MenuSwitchItem",
+          "description": "开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。",
+          "descriptionEn": "A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
+          "props": [
+            {
+              "name": "checked / defaultChecked / onCheckedChange / disabled / closeOnClick",
+              "type": "Base UI CheckboxItem props",
+              "description": "与 MenuCheckboxItem 相同，含 details.cancel()；读屏听到的是「菜单项复选框，已勾选/未勾选」，槽是装饰（aria-hidden）。槽的几何与 Switch 一致（高一材、长两材、抓手等距内缩），固定在行尾，所以没有 markerPosition。适合立即生效的开关类设置；是一次性的选择用 MenuCheckboxItem。",
+              "descriptionEn": "Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices."
+            },
+            {
+              "name": "size / inset",
+              "type": "xs | sm | md | lg | xl / boolean",
+              "description": "与 MenuCheckboxItem 相同的尺寸档与缩进。",
+              "descriptionEn": "Same size steps and indent as MenuCheckboxItem."
             }
           ]
         },
@@ -31595,7 +31775,7 @@
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:78"
+                "declaredAt": "packages/ui/src/components/menu.tsx:99"
               },
               {
                 "name": "size",
@@ -31670,6 +31850,35 @@
               {
                 "source": "@base-ui/react",
                 "count": 11
+              }
+            ]
+          },
+          {
+            "name": "MenuSwitchItem",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "inset",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              },
+              {
+                "name": "size",
+                "optional": true,
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              }
+            ],
+            "inheritedCount": 285,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 273
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 12
               }
             ]
           },
@@ -32024,6 +32233,27 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "MenuSwitchItem",
+          "kind": "function",
+          "owner": "menu",
+          "module": "@qingye_lab/ui/components/menu",
+          "propsType": "MenuSwitchItemProps",
+          "signature": "MenuSwitchItem({ size = \"md\", inset = false, className, children, ...props }: MenuSwitchItemProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "MenuSwitchItemProps",
+          "kind": "type",
+          "owner": "menu",
+          "module": "@qingye_lab/ui/components/menu",
+          "signature": "MenuPrimitive.CheckboxItem.Props & MenuSizing",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "MenuTrigger",
           "kind": "function",
           "owner": "menu",
@@ -32093,6 +32323,10 @@
         {
           "name": "MenuCheckboxItemProps",
           "definition": "export type MenuCheckboxItemProps = MenuPrimitive.CheckboxItem.Props & MenuSizing & { markerPosition?: MenuMarkerPosition };"
+        },
+        {
+          "name": "MenuSwitchItemProps",
+          "definition": "export type MenuSwitchItemProps = MenuPrimitive.CheckboxItem.Props & MenuSizing;"
         },
         {
           "name": "MenuRadioGroupProps",
@@ -32176,6 +32410,12 @@
         },
         {
           "name": "MenuCheckboxItem",
+          "import": "@qingye_lab/ui/components/menu",
+          "owner": "menu",
+          "status": "PASS"
+        },
+        {
+          "name": "MenuSwitchItem",
           "import": "@qingye_lab/ui/components/menu",
           "owner": "menu",
           "status": "PASS"
@@ -32301,6 +32541,20 @@
           "providers": [],
           "code": "import * as React from \"react\";\nimport { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogHeader, AlertDialogFooter, AlertDialogPopup, AlertDialogTitle } from \"@qingye_lab/ui/components/alert-dialog\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from \"@qingye_lab/ui/components/menu\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"危险命令\", titleEn: \"Danger command\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [confirming, setConfirming] = React.useState(false);\n  const [removed, setRemoved] = React.useState(false);\n  return <>\n    <Menu>\n      <MenuTrigger>{removed ? \"已移除\" : \"接入设备\"}</MenuTrigger>\n      <MenuPortal><MenuPositioner><MenuPopup>\n        <MenuItem>重命名</MenuItem>\n        <MenuItem>移到首位</MenuItem>\n        <MenuSeparator />\n        <MenuItem tone=\"danger\" disabled={removed} onClick={() => setConfirming(true)}>移除设备</MenuItem>\n      </MenuPopup></MenuPositioner></MenuPortal>\n    </Menu>\n    <AlertDialog open={confirming} onOpenChange={setConfirming}>\n      <AlertDialogPopup>\n        <AlertDialogHeader>\n          <AlertDialogTitle>移除接入设备？</AlertDialogTitle>\n          <AlertDialogDescription>移除后该设备需要重新配对才能再次接入。</AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogClose>保留</AlertDialogClose>\n          <AlertDialogClose render={<Button tone=\"danger\" />} onClick={() => setRemoved(true)}>移除</AlertDialogClose>\n        </AlertDialogFooter>\n      </AlertDialogPopup>\n    </AlertDialog>\n  </>;\n}\n",
           "sha256": "a47038c01eb2b056dbb8c5330df865a35ef8f34ea8deebe0c15f472c419ba260"
+        },
+        {
+          "id": "switch",
+          "title": "开关式勾选项",
+          "source": "apps/docs/src/content/menu/demos/05-switch.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/menu",
+            "react"
+          ],
+          "providers": [],
+          "code": "import * as React from \"react\";\nimport { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuSwitchItem, MenuTrigger } from \"@qingye_lab/ui/components/menu\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"开关式勾选项\", titleEn: \"Switch-style checked items\" } satisfies DemoMeta;\nexport default function Demo() {\n  const [muted, setMuted] = React.useState(false); const [pinned, setPinned] = React.useState(true);\n  return <Stack><Menu><MenuTrigger>通知设置</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>\n    <MenuSwitchItem checked={muted} onCheckedChange={setMuted} closeOnClick={false}>静音</MenuSwitchItem>\n    <MenuSwitchItem checked={pinned} onCheckedChange={setPinned} closeOnClick={false}>置顶</MenuSwitchItem>\n    <MenuSwitchItem disabled>同步到其他设备</MenuSwitchItem>\n    <MenuSeparator />\n    <MenuItem>全部标为已读</MenuItem>\n  </MenuPopup></MenuPositioner></MenuPortal></Menu>\n  <p className=\"m-0 text-body\">静音：{muted ? \"开\" : \"关\"} · 置顶：{pinned ? \"开\" : \"关\"}</p></Stack>;\n}\n",
+          "sha256": "aa86ea7e23e8d77f1ce410b294c0b8638a04188634346f3db18dc0e68ced2158"
         }
       ],
       "design": {
@@ -32320,6 +32574,7 @@
           "MenuItem：一条命令；与 ContextMenuItem 共用。",
           "MenuTrigger / MenuPositioner / MenuPopup / MenuPortal：触发器与同一 Root 所属的浮层。",
           "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：动作、真实导航、勾选、单选与下级命令。",
+          "MenuSwitchItem：开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。",
           "MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive：组语义与底层公开原语。"
         ],
         "stateOwner": {
@@ -32339,7 +32594,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/menu.tsx",
-        "sha256": "41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e",
+        "sha256": "b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用项聚焦，但禁止执行。",
@@ -32445,6 +32700,25 @@
               ]
             },
             {
+              "name": "MenuSwitchItem",
+              "description": "A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
+              "descriptionEn": "A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
+              "props": [
+                {
+                  "name": "checked / defaultChecked / onCheckedChange / disabled / closeOnClick",
+                  "type": "Base UI CheckboxItem props",
+                  "description": "Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices.",
+                  "descriptionEn": "Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices."
+                },
+                {
+                  "name": "size / inset",
+                  "type": "xs | sm | md | lg | xl / boolean",
+                  "description": "Same size steps and indent as MenuCheckboxItem.",
+                  "descriptionEn": "Same size steps and indent as MenuCheckboxItem."
+                }
+              ]
+            },
+            {
               "name": "MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive",
               "description": "Group semantics and the public primitive namespace.",
               "descriptionEn": "Group semantics and the public primitive namespace.",
@@ -32493,6 +32767,7 @@
               "MenuItem: One command; shared with ContextMenuItem.",
               "MenuTrigger / MenuPositioner / MenuPopup / MenuPortal: Trigger and floating parts owned by the same root.",
               "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger: Commands, true navigation, checked choices, radio choices and submenus.",
+              "MenuSwitchItem: A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
               "MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive: Group semantics and the public primitive namespace."
             ],
             "stateOwner": {
@@ -34908,6 +35183,25 @@
               "descriptionEn": "Typed and pasted text is normalised first, then checked against length; the result is what is written. Codes often arrive grouped (123 456, 123-456) and WCAG 3.3.8 forbids refusing a paste, so whitespace and hyphens are stripped by default. Restrict the character set with text => text.replace(/\\D/g, \"\"); pass text => text when the code itself contains hyphens."
             },
             {
+              "name": "groups",
+              "type": "readonly number[]",
+              "description": "把 length 分成几组，组间画一条分隔线，如 [3, 3]。各组之和必须等于 length，且都是正整数，否则抛错。分隔线是装饰，读屏仍只遇到一个输入框；值里不含分隔符。",
+              "descriptionEn": "Splits length into groups with a separator drawn between them, for example [3, 3]. The groups must be positive integers summing to length, otherwise it throws. Separators are decorative; assistive technology still meets one input and the value contains no separator."
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "description": "恰好一个字符（以 code point 计）时显示在每个空格里，填入字符后让位；其他长度不在格内显示，只作为真实输入框的 placeholder 属性。",
+              "descriptionEn": "Exactly one character (counted in code points) is shown in every empty cell and gives way once filled; any other length is not drawn in the cells and only becomes the real input's placeholder attribute."
+            },
+            {
+              "name": "mask",
+              "type": "boolean",
+              "default": "false",
+              "description": "已填的格显示圆点而不是字符。只改呈现：值、粘贴、表单提交与读屏所读的文本不变。没有用 type=password——那会让浏览器把它当密码保存、触发密码管理器，并让 one-time-code 自动填充失效；验证码需要的是遮住旁人的视线，不是密码的存储语义。",
+              "descriptionEn": "Filled cells show a dot instead of the character. Presentation only: the value, paste, form submission and the text read by assistive technology are unchanged. type=password is not used because browsers would treat it as a password to save, prompt password managers and break one-time-code autofill; a code needs shoulder-surfing cover, not password storage semantics."
+            },
+            {
               "name": "inputMode / autoComplete",
               "type": "native input props",
               "default": "autoComplete: 'one-time-code'",
@@ -34959,11 +35253,25 @@
                 "declaredAt": "packages/ui/src/components/otp-field.tsx:13"
               },
               {
+                "name": "groups",
+                "optional": true,
+                "type": "readonly number[]",
+                "doc": "分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。\n分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。",
+                "declaredAt": "packages/ui/src/components/otp-field.tsx:27"
+              },
+              {
                 "name": "length",
                 "optional": false,
                 "type": "number",
                 "doc": "文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。",
                 "declaredAt": "packages/ui/src/components/otp-field.tsx:11"
+              },
+              {
+                "name": "mask",
+                "optional": true,
+                "type": "boolean",
+                "doc": "已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type=\"text\"`。\n不用 `type=\"password\"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议），\n并让 `autocomplete=\"one-time-code\"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。\n代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。",
+                "declaredAt": "packages/ui/src/components/otp-field.tsx:34"
               },
               {
                 "name": "nativeInput",
@@ -35060,7 +35368,7 @@
           "owner": "otp-field",
           "module": "@qingye_lab/ui/components/otp-field",
           "propsType": "OtpFieldProps",
-          "signature": "OtpField({\n  length, value: valueProp, defaultValue = \"\", onValueChange, normalizeValue = stripSeparators,\n  className, controlClassName, ref, onChange, onSelect, onFocus, onBlur, onPaste, onCompositionStart, onCompositionEnd,\n  \"aria-describedby\": describedBy, ...props\n}: OtpFieldProps)",
+          "signature": "OtpField({\n  length, value: valueProp, defaultValue = \"\", onValueChange, normalizeValue = stripSeparators, groups, mask = false, placeholder,\n  className, controlClassName, ref, onChange, onSelect, onFocus, onBlur, onPaste, onCompositionStart, onCompositionEnd,\n  \"aria-describedby\": describedBy, ...props\n}: OtpFieldProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -35070,7 +35378,7 @@
           "kind": "type",
           "owner": "otp-field",
           "module": "@qingye_lab/ui/components/otp-field",
-          "signature": "Omit<InputProps, \"value\" | \"defaultValue\" | \"onValueChange\" | \"type\" | \"size\" | \"maxLength\"> & {\n  /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */\n  length: number;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;\n  /**\n   * 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。\n   * 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`），\n   * WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。\n   * 需要限定字符集时由调用方给出，例如 `text => text.replace(/\\D/g, \"\")`；\n   * 码本身含连字符时传 `text => text` 保留。\n   */\n  normalizeValue?: (text: string) => string;\n}",
+          "signature": "Omit<InputProps, \"value\" | \"defaultValue\" | \"onValueChange\" | \"type\" | \"size\" | \"maxLength\"> & {\n  /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */\n  length: number;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;\n  /**\n   * 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。\n   * 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`），\n   * WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。\n   * 需要限定字符集时由调用方给出，例如 `text => text.replace(/\\D/g, \"\")`；\n   * 码本身含连字符时传 `text => text` 保留。\n   */\n  normalizeValue?: (text: string) => string;\n  /**\n   * 分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。\n   * 分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。\n   */\n  groups?: readonly number[];\n  /**\n   * 已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type=\"text\"`。\n   * 不用 `type=\"password\"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议），\n   * 并让 `autocomplete=\"one-time-code\"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。\n   * 代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。\n   */\n  mask?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -35079,7 +35387,7 @@
       "types": [
         {
           "name": "OtpFieldProps",
-          "definition": "export type OtpFieldProps = Omit<InputProps, \"value\" | \"defaultValue\" | \"onValueChange\" | \"type\" | \"size\" | \"maxLength\"> & {\n  /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */\n  length: number;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;\n  /**\n   * 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。\n   * 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`），\n   * WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。\n   * 需要限定字符集时由调用方给出，例如 `text => text.replace(/\\D/g, \"\")`；\n   * 码本身含连字符时传 `text => text` 保留。\n   */\n  normalizeValue?: (text: string) => string;\n};"
+          "definition": "export type OtpFieldProps = Omit<InputProps, \"value\" | \"defaultValue\" | \"onValueChange\" | \"type\" | \"size\" | \"maxLength\"> & {\n  /** 文本容量，以 Unicode code point 计；由任务给出，不预设验证码长度。 */\n  length: number;\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void;\n  /**\n   * 键入与粘贴的文本先经过它，再按 `length` 校验；返回值就是写入的文本。\n   * 默认去掉空白与连字符：验证码常以分组形式送达（`123 456`、`123-456`），\n   * WCAG 3.3.8（可访问认证）要求不得靠拒绝粘贴来为难人。\n   * 需要限定字符集时由调用方给出，例如 `text => text.replace(/\\D/g, \"\")`；\n   * 码本身含连字符时传 `text => text` 保留。\n   */\n  normalizeValue?: (text: string) => string;\n  /**\n   * 分组，如 `[3, 3]`：组间画一道短横作分隔，读屏仍是一个输入。总和必须等于 `length`，否则抛错。\n   * 分隔只是呈现，不进入值；超出 `length` 的外部值多出的格归入最后一组，不再增加分隔。\n   */\n  groups?: readonly number[];\n  /**\n   * 已输入的格画成圆点。只改格子怎么画：值、粘贴与复制都不变，输入仍是 `type=\"text\"`。\n   * 不用 `type=\"password\"`：它会让浏览器与密码管理器把这格当凭据（提示保存、不再给出一次性验证码建议），\n   * 并让 `autocomplete=\"one-time-code\"` 失效；而这里真实输入本就透明地盖在格子上，遮蔽只需要换掉格子里画的东西。\n   * 代价要说明白：辅助技术读到的仍是真实文本，遮蔽是视觉上的防窥，不是保密。\n   */\n  mask?: boolean;\n};"
         }
       ],
       "usageImports": [
@@ -35152,6 +35460,19 @@
           "providers": [],
           "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <OtpField length={4} defaultValue=\"01\" />\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
           "sha256": "05cc4e1b75d0e60451a5beef1820ec2bf04b61f529e63fcd1ef9f1a18b1f42ce"
+        },
+        {
+          "id": "groups-mask",
+          "title": "分组、占位与遮蔽",
+          "source": "apps/docs/src/content/otp-field/demos/03-groups-mask.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/otp-field"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldDescription, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"分组、占位与遮蔽\", titleEn: \"Groups, placeholder and mask\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>验证码</FieldLabel><OtpField length={6} groups={[3, 3]} inputMode=\"numeric\" placeholder=\"·\" defaultValue=\"123\" /><FieldDescription>3 + 3 分组；读屏仍是一个输入框</FieldDescription></Field>\n    <Field><FieldLabel>序列号</FieldLabel><OtpField length={8} groups={[2, 3, 3]} placeholder=\"_\" /><FieldDescription>2 + 3 + 3 分组</FieldDescription></Field>\n    <Field><FieldLabel>恢复码</FieldLabel><OtpField length={6} mask inputMode=\"numeric\" defaultValue=\"4821\" /><FieldDescription>已输入的字符以圆点显示；值与粘贴不变</FieldDescription></Field>\n  </FieldGroup>;\n}\n",
+          "sha256": "f5e831aa2318ad7a014b6afa55a0e7c538e466fbf314f37a1b8f0233f977e675"
         }
       ],
       "design": {
@@ -35186,7 +35507,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "ade6360692f110cf8a976f05a073188bed5ecd91fc5354409287bb8e1f8689ec",
+        "sha256": "d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有一个真实文本输入，分段跟随它的光标与选择。前导零保留，长度填满只说明文本长度；核对、请求和结果归应用。",
@@ -35234,6 +35555,25 @@
                   "defaultEn": "strip whitespace and hyphens",
                   "description": "Typed and pasted text is normalised first, then checked against length; the result is what is written. Codes often arrive grouped (123 456, 123-456) and WCAG 3.3.8 forbids refusing a paste, so whitespace and hyphens are stripped by default. Restrict the character set with text => text.replace(/\\D/g, \"\"); pass text => text when the code itself contains hyphens.",
                   "descriptionEn": "Typed and pasted text is normalised first, then checked against length; the result is what is written. Codes often arrive grouped (123 456, 123-456) and WCAG 3.3.8 forbids refusing a paste, so whitespace and hyphens are stripped by default. Restrict the character set with text => text.replace(/\\D/g, \"\"); pass text => text when the code itself contains hyphens."
+                },
+                {
+                  "name": "groups",
+                  "type": "readonly number[]",
+                  "description": "Splits length into groups with a separator drawn between them, for example [3, 3]. The groups must be positive integers summing to length, otherwise it throws. Separators are decorative; assistive technology still meets one input and the value contains no separator.",
+                  "descriptionEn": "Splits length into groups with a separator drawn between them, for example [3, 3]. The groups must be positive integers summing to length, otherwise it throws. Separators are decorative; assistive technology still meets one input and the value contains no separator."
+                },
+                {
+                  "name": "placeholder",
+                  "type": "string",
+                  "description": "Exactly one character (counted in code points) is shown in every empty cell and gives way once filled; any other length is not drawn in the cells and only becomes the real input's placeholder attribute.",
+                  "descriptionEn": "Exactly one character (counted in code points) is shown in every empty cell and gives way once filled; any other length is not drawn in the cells and only becomes the real input's placeholder attribute."
+                },
+                {
+                  "name": "mask",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Filled cells show a dot instead of the character. Presentation only: the value, paste, form submission and the text read by assistive technology are unchanged. type=password is not used because browsers would treat it as a password to save, prompt password managers and break one-time-code autofill; a code needs shoulder-surfing cover, not password storage semantics.",
+                  "descriptionEn": "Filled cells show a dot instead of the character. Presentation only: the value, paste, form submission and the text read by assistive technology are unchanged. type=password is not used because browsers would treat it as a password to save, prompt password managers and break one-time-code autofill; a code needs shoulder-surfing cover, not password storage semantics."
                 },
                 {
                   "name": "inputMode / autoComplete",
@@ -41412,6 +41752,7 @@
       ],
       "docs": "/docs/components/scroll-area",
       "notes": [
+        "fade 的遮罩罩住整个盒子，所以盒内原生滚动条的被渐隐一端也会变淡；需要完整可见的滚动条时用 ScrollAreaRoot 组合，或不开 fade。",
         "分工：默认用 ScrollArea（一个元素，原生滚动条，尊重平台设置）；只有设计要求自绘滚动条时才用 ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner 组合。两者互不嵌套，ScrollArea 不接受 Scrollbar 子部件。",
         "ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。",
         "需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。",
@@ -41443,6 +41784,13 @@
               "type": "div props",
               "description": "消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。",
               "descriptionEn": "Consumer layout supplies height/maxHeight and width; overflow defaults to auto."
+            },
+            {
+              "name": "fade",
+              "type": "boolean",
+              "default": "false",
+              "description": "边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。",
+              "descriptionEn": "Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end."
             },
             {
               "name": "tabIndex",
@@ -41509,7 +41857,15 @@
           {
             "name": "ScrollArea",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "fade",
+                "optional": true,
+                "type": "boolean",
+                "doc": "边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。",
+                "declaredAt": "packages/ui/src/components/scroll-area.tsx:15"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -41649,7 +42005,7 @@
           "owner": "scroll-area",
           "module": "@qingye_lab/ui/components/scroll-area",
           "propsType": "ScrollAreaProps",
-          "signature": "ScrollArea({ render, ref, className, tabIndex, ...props }: ScrollAreaProps)",
+          "signature": "ScrollArea({ fade = false, ...props }: ScrollAreaProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -41710,7 +42066,7 @@
           "kind": "type",
           "owner": "scroll-area",
           "module": "@qingye_lab/ui/components/scroll-area",
-          "signature": "useRender.ComponentProps<\"div\">",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。\n   */\n  fade?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -41803,7 +42159,7 @@
       "types": [
         {
           "name": "ScrollAreaProps",
-          "definition": "export type ScrollAreaProps = useRender.ComponentProps<\"div\">;"
+          "definition": "export type ScrollAreaProps = useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。\n   */\n  fade?: boolean;\n};"
         },
         {
           "name": "ScrollAreaRootProps",
@@ -41937,6 +42293,18 @@
           "providers": [],
           "code": "import { ScrollAreaContent, ScrollAreaCorner, ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaViewport } from \"@qingye_lab/ui/components/scroll-area\";\n\nexport const meta = { title: \"双轴滚动条\", titleEn: \"Styled scrollbars on both axes\" };\nexport default function Demo() {\n  return <ScrollAreaRoot className=\"w-full max-w-sm\" style={{ height: \"calc(var(--qy-control-md) * 6)\" }} data-testid=\"styled-scroll-area\">\n    <ScrollAreaViewport aria-label=\"双轴完整条目\" role=\"region\">\n      <ScrollAreaContent><div style={{ minWidth: \"calc(var(--qy-control-md) * 16)\" }}>{Array.from({ length: 30 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1} · 这段内容保留完整宽度与原生文本选择。</div>)}</div></ScrollAreaContent>\n    </ScrollAreaViewport>\n    <ScrollAreaScrollbar keepMounted /><ScrollAreaScrollbar orientation=\"horizontal\" keepMounted /><ScrollAreaCorner />\n  </ScrollAreaRoot>;\n}\n",
           "sha256": "a9bf53e5539569568dafea6dc1b185cacde82851d6abc22282d4a6b9537e1ef4"
+        },
+        {
+          "id": "fade",
+          "title": "边缘渐隐",
+          "source": "apps/docs/src/content/scroll-area/demos/04-fade.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/scroll-area"
+          ],
+          "providers": [],
+          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"边缘渐隐\", titleEn: \"Edge fade\" };\nexport default function Demo() {\n  return <Stack>\n    <ScrollArea fade aria-label=\"完整条目\" role=\"region\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>\n    <ScrollArea fade aria-label=\"完整字符序列\" role=\"region\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>\n  </Stack>;\n}\n",
+          "sha256": "12d77908d76e762f8c401c2c363e041feb1ce13063271505db6a91f0404efc3b"
         }
       ],
       "design": {
@@ -41970,7 +42338,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c",
+        "sha256": "b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "localized": {
@@ -41979,6 +42347,7 @@
           "description": "Native scrolling with an optional composition of draggable scrollbars.",
           "category": "Utilities",
           "notes": [
+            "The fade mask covers the whole box, so the faded end of the native scrollbar inside it also dims; when a fully visible scrollbar is required, compose with ScrollAreaRoot or leave fade off.",
             "Division of labor: use ScrollArea by default (one element, native scrollbars that follow platform settings); reach for ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner only when the design requires drawn scrollbars. Do not nest one inside the other; ScrollArea does not accept Scrollbar parts.",
             "ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.",
             "For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.",
@@ -42002,6 +42371,13 @@
                   "type": "div props",
                   "description": "Consumer layout supplies height/maxHeight and width; overflow defaults to auto.",
                   "descriptionEn": "Consumer layout supplies height/maxHeight and width; overflow defaults to auto."
+                },
+                {
+                  "name": "fade",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end.",
+                  "descriptionEn": "Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end."
                 },
                 {
                   "name": "tabIndex",
