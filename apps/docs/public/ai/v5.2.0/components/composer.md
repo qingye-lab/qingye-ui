@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: 4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b
+Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 

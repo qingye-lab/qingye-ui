@@ -94,6 +94,7 @@ export function composerValueToText(value: ComposerValue, serializeToken: (token
  * 的片段会还原成令牌（长的优先），其余保持文字。换行统一为 "\n"。
  * 边界与触发规则（findComposerTrigger）一致：字面前一个字符不能是 ASCII 字母、数字、下划线或该触发字符，
  * 所以 a@b.com 里的「@b」不会被还原；字面若以这类字符结尾，后一个字符也不能是它们，「@Ann」不会吞掉「@Anna」的前半。
+ * 紧跟在已还原令牌之后的位置算作词首，与输入时令牌后可直接再触发一致，「@Ann@Bob」还原成两个令牌。
  * 纯文字本身无法区分「当时选中的令牌」与「碰巧打出的同样文字」，需要无损往返时保存片段数组，不要只存文字。
  */
 const WORD_CHAR = /[A-Za-z0-9_]/;
@@ -109,8 +110,9 @@ export function composerValueFromText(text: string, known: readonly ComposerToke
   const out: ComposerSegment[] = [];
   let buffer = "";
   let index = 0;
+  let afterToken = false;
   while (index < source.length) {
-    const previous = index > 0 ? source[index - 1]! : "";
+    const previous = index > 0 && !afterToken ? source[index - 1]! : "";
     const hit = candidates.find(({ token, literal }) => {
       if (!source.startsWith(literal, index)) return false;
       if (WORD_CHAR.test(previous) || previous === token.trigger) return false;
@@ -122,9 +124,11 @@ export function composerValueFromText(text: string, known: readonly ComposerToke
       buffer = "";
       out.push({ type: "token", trigger: hit.token.trigger, id: hit.token.id, label: hit.token.label });
       index += hit.literal.length;
+      afterToken = true;
     } else {
       buffer += source[index];
       index += 1;
+      afterToken = false;
     }
   }
   if (buffer) out.push({ type: "text", text: buffer });

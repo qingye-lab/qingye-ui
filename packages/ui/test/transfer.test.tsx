@@ -129,6 +129,21 @@ test("name submits the selected keys as repeated form fields", async () => {
   expect(data.getAll("fruit")).toEqual(["b", "a"]);
 });
 
+test("keys in value that no item has are not submitted", () => {
+  render(<form aria-label="f"><Transfer name="fruit" items={items} value={["gone", "b"]} /></form>);
+  expect(new FormData(screen.getByRole("form", { name: "f" }) as HTMLFormElement).getAll("fruit")).toEqual(["b"]);
+});
+
+test("the same move twice in a row is announced again", async () => {
+  const user = userEvent.setup();
+  render(<Transfer items={items} />);
+  await user.click(box("候选", "苹果")); await user.click(toTarget());
+  const first = screen.getByRole("status").textContent;
+  await user.click(box("候选", "香蕉")); await user.click(toTarget());
+  expect(screen.getByRole("status")).toHaveTextContent("已移到“已选” 1 项");
+  expect(screen.getByRole("status").textContent).not.toBe(first);
+});
+
 test("form reset restores the default value", async () => {
   const user = userEvent.setup();
   render(<form aria-label="f"><Transfer name="fruit" items={items} defaultValue={["b"]} /><button type="reset">重置</button></form>);

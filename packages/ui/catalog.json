@@ -16024,7 +16024,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/composer.tsx",
-        "sha256": "4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b",
+        "sha256": "cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "编辑区是 contenteditable，因为令牌必须是行内原子对象（整体删除、光标进不去、读屏读名字），原生文本框做不到。值是片段数组而不是字符串：令牌带稳定 id，应用不必从文字里反解。候选浮层按 combobox 模式接线，但编辑区的角色是 textbox（多行的 combobox 不存在）。消息列表与气泡不在库内。",
@@ -44721,7 +44721,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/rating.tsx",
-        "sha256": "00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d",
+        "sha256": "280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "评分是单选组，不是滑块：分值是有限个互斥的整数，方向键移动即选中。半星没有提供——要更细的刻度就加大 max，而不是引入小数。只读时不保留单选语义，因为一串不能操作的 radio 对读屏是噪音；它是一个结论，所以读成一幅带分值的图。",
@@ -64774,7 +64774,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tour.tsx",
-        "sha256": "2b2d6f7b97214df0371feb91848cbbaa00f3fc9e2133dbb55939529ec9dcbf2c",
+        "sha256": "8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "引导只指路，不替用户完成任务，也不阻断页面：遮罩不拦截指针，只有 Esc 是退出。找不到锚点的步骤会被跳过，「第 N / M 步」的 M 只数实际能走的步数；结束后是否不再提示由应用记录。",
@@ -65283,7 +65283,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/transfer.tsx",
-        "sha256": "84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159",
+        "sha256": "33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "穿梭框解决的是「从一大批里挑出一小批并能回头调整」，所以两侧都是完整的列表，而不是一个下拉加一排标签。它的值只是右侧的键数组，勾选状态是临时的，不进入值。条目多时由应用先做筛选或分页，本组件不做虚拟滚动：固定高度的列表在几百项内足够，更大的数据量应换成 Combobox 或 Table 里的选择。",
@@ -65535,7 +65535,7 @@
                 "optional": true,
                 "type": "(move: TreeMove) => boolean",
                 "doc": "在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。",
-                "declaredAt": "packages/ui/src/components/tree.tsx:53"
+                "declaredAt": "packages/ui/src/components/tree.tsx:55"
               },
               {
                 "name": "checkable",
@@ -65586,8 +65586,8 @@
                 "name": "draggable",
                 "optional": true,
                 "type": "boolean",
-                "doc": "允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\nTree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。",
-                "declaredAt": "packages/ui/src/components/tree.tsx:50"
+                "doc": "允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\nTree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。\nloadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点；\n要让这部分可移动，把取回的子项合并进 nodes 的 children。",
+                "declaredAt": "packages/ui/src/components/tree.tsx:52"
               },
               {
                 "name": "emptyContent",
@@ -65630,7 +65630,7 @@
                 "name": "onMove",
                 "optional": true,
                 "type": "(move: TreeMove, details: TreeMoveDetails) => void",
-                "declaredAt": "packages/ui/src/components/tree.tsx:51"
+                "declaredAt": "packages/ui/src/components/tree.tsx:53"
               },
               {
                 "name": "onSelectionChange",
@@ -65777,7 +65777,7 @@
           "kind": "type",
           "owner": "tree",
           "module": "@qingye_lab/ui/components/tree",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。\n   * loadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点；\n   * 要让这部分可移动，把取回的子项合并进 nodes 的 children。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -65806,7 +65806,7 @@
         },
         {
           "name": "TreeProps",
-          "definition": "export type TreeProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n};"
+          "definition": "export type TreeProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。\n   * loadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点；\n   * 要让这部分可移动，把取回的子项合并进 nodes 的 children。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n};"
         }
       ],
       "usageImports": [
@@ -65943,7 +65943,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tree.tsx",
-        "sha256": "39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a",
+        "sha256": "00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "expandedIds 与 selectedId 分开；加载与失败是组件自己看得见的事实，不当成「没有子项」；过滤只隐藏、不改变值与派生的勾选状态；拖放只报告、不持有数据。聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",

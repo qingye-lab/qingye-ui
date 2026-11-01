@@ -116,7 +116,7 @@ export function Transfer({ items, value: valueProp, defaultValue = [], onValueCh
   const [checkedTarget, setCheckedTarget] = React.useState<readonly string[]>([]);
   const [querySource, setQuerySource] = React.useState("");
   const [queryTarget, setQueryTarget] = React.useState("");
-  const [announcement, setAnnouncement] = React.useState("");
+  const [announcement, setAnnouncement] = React.useState({ text: "", count: 0 });
   const [sourceTitle, targetTitle] = titles ?? [messages.transferSource, messages.transferTarget];
   const rootRef = React.useRef<HTMLDivElement | null>(null);
   const setRoot = React.useCallback((node: HTMLDivElement | null) => {
@@ -127,6 +127,7 @@ export function Transfer({ items, value: valueProp, defaultValue = [], onValueCh
   const selected = new Set(value);
   const source = items.filter(item => !selected.has(item.value));
   const target = items.filter(item => selected.has(item.value));
+  const targetKeys = new Set(target.map(item => item.value));
 
   // 表单重置：非受控回到 defaultValue，临时勾选清空。
   const resetRef = React.useRef({ controlled: valueProp !== undefined, defaultValue });
@@ -158,7 +159,7 @@ export function Transfer({ items, value: valueProp, defaultValue = [], onValueCh
     if (valueProp === undefined) setUncontrolled(next);
     if (direction === "toTarget") setCheckedSource(checkedSource.filter(key => !moved.includes(key)));
     else setCheckedTarget(checkedTarget.filter(key => !moved.includes(key)));
-    setAnnouncement(messages.transferMoved(moved.length, direction === "toTarget" ? targetTitle : sourceTitle));
+    setAnnouncement(previous => ({ text: messages.transferMoved(moved.length, direction === "toTarget" ? targetTitle : sourceTitle), count: previous.count + 1 }));
     onValueChange?.(next, { direction, moved });
   };
 
@@ -178,7 +179,9 @@ export function Transfer({ items, value: valueProp, defaultValue = [], onValueCh
       </Button>
     </div>
     <TransferList title={targetTitle} items={target} checked={checkedTarget} onCheckedChange={setCheckedTarget} query={queryTarget} onQueryChange={setQueryTarget} searchable={searchable} disabled={disabled} listClassName={listClassName} />
-    {name !== undefined && value.map(key => <input key={key} type="hidden" name={name} value={key} disabled={disabled} />)}
-    <div role="status" className="sr-only">{announcement}</div>
+    {/* 只提交 items 里确有的键，按 value 的顺序：value 里残留的未知键不是用户选中的条目。 */}
+    {name !== undefined && value.filter(key => targetKeys.has(key)).map(key => <input key={key} type="hidden" name={name} value={key} disabled={disabled} />)}
+    {/* 同一句话连续出现时交替补一个零宽字符，让 live region 看到变化（与 Tree 相同）。 */}
+    <div role="status" className="sr-only">{announcement.text}{announcement.count % 2 === 0 ? "\u200b" : ""}</div>
   </div>;
 }

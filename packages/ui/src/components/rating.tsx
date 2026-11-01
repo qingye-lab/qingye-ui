@@ -47,9 +47,11 @@ export function Rating({ value: valueProp, defaultValue = 0, onValueChange, max 
   const icon = "size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)";
 
   if (readOnly) {
+    // 单选组专有的属性留给单选组，其余（style、data-*、aria-*、事件）照样落到只读的根上。
+    const { inputRef: _inputRef, required: _required, form, style, ...rootProps } = props;
     const summary = value === 0 ? messages.ratingNone : messages.ratingValue(value, max);
     // 只读时不渲染单选组，但 ref 与 id 仍落在同一个根上：调用方测量、定位或用 aria-describedby 指向它都不因只读而失效。
-    return <div data-slot="rating" data-readonly="" ref={ref} id={props.id} className={cn("inline-flex items-center gap-(--qy-space-2)", className)}>
+    return <div data-slot="rating" data-readonly="" {...(rootProps as React.ComponentProps<"div">)} style={typeof style === "function" ? undefined : style} ref={ref} className={cn("inline-flex items-center gap-(--qy-space-2)", className)}>
       <span role="img" aria-label={summary} className="inline-flex items-center gap-(--qy-space-1)">
         {stars.map(star => star <= value
           ? <IconStarFilled key={star} aria-hidden="true" className={cn(icon, "text-foreground")} />
@@ -57,7 +59,7 @@ export function Rating({ value: valueProp, defaultValue = 0, onValueChange, max 
       </span>
       {/* 图已经带着完整名称，可见的数字只给眼睛，避免读两遍。 */}
       <span aria-hidden="true" className="text-support-mobile text-muted-foreground tabular-nums sm:text-support">{value} / {max}</span>
-      {name !== undefined && value > 0 && <input type="hidden" name={name} value={value} disabled={disabled} />}
+      {name !== undefined && value > 0 && <input type="hidden" name={name} form={form} value={value} disabled={disabled} />}
     </div>;
   }
 
@@ -68,7 +70,7 @@ export function Rating({ value: valueProp, defaultValue = 0, onValueChange, max 
     aria-label={ariaLabel ?? (props["aria-labelledby"] ? undefined : messages.rating)}
     value={value}
     onValueChange={next => commit(next)}
-    onPointerLeave={() => setHovered(null)}
+    onPointerLeave={event => { setHovered(null); props.onPointerLeave?.(event); }}
     className={cn("inline-flex items-center gap-(--qy-space-1)", className)}
   >
     {stars.map(star => <OptionScope key={star}><RadioPrimitive.Root

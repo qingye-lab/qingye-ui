@@ -164,6 +164,10 @@ describe("Tree query", () => {
     expect(screen.getByText("无匹配")).toBeInTheDocument(); expect(screen.queryAllByRole("treeitem")).toHaveLength(0);
     rerender(<Tree aria-label="层级" nodes={tree} query="" emptyContent="无匹配" />); expect(screen.getAllByRole("treeitem")).toHaveLength(3);
   });
+  it("says nothing matched, not that the tree is empty, when a query filters everything out", () => {
+    render(<Tree aria-label="层级" nodes={tree} query="没有" />);
+    expect(document.querySelector("[data-slot=tree-empty]")).toHaveTextContent("没有匹配项");
+  });
   it("derives a branch's checked state from all its leaves, not just the visible ones", async () => {
     const user = userEvent.setup(); const onCheckedChange = vi.fn();
     render(<Tree aria-label="层级" nodes={tree} query="苹果" checkable defaultCheckedIds={["a1"]} onCheckedChange={onCheckedChange} />);
@@ -196,6 +200,14 @@ describe("Tree draggable", () => {
       dragTo(from, to, y)(); expect(document.querySelector("[data-slot=tree-drop]")).toBeNull();
     }
     expect(onMove).not.toHaveBeenCalled();
+  });
+  it("keeps loaded children out of moves: the caller does not own them", async () => {
+    const onMove = vi.fn(); const loadChildren = vi.fn(async () => [{ id: "x", label: "取回", isLeaf: true }]);
+    render(<Tree aria-label="层级" nodes={[{ id: "s", label: "源" }, { id: "b", label: "乙" }]} draggable loadChildren={loadChildren} defaultExpandedIds={["s"]} onMove={onMove} />);
+    await screen.findByRole("treeitem", { name: "取回" });
+    for (const [from, to, y] of [["取回", "乙", 5], ["乙", "取回", 5], ["乙", "源", 50]] as const) dragTo(from, to, y)();
+    expect(onMove).not.toHaveBeenCalled();
+    dragTo("乙", "源", 5)(); expect(onMove).toHaveBeenCalledWith({ nodeId: "b", targetId: "s", position: "before" }, expect.anything());
   });
   it("is not draggable unless asked, and a disabled node cannot be dragged", () => {
     const { unmount } = render(<Tree aria-label="层级" nodes={tree} />); expect(row("乙")).not.toHaveAttribute("draggable"); unmount();

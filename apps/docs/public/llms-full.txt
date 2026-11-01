@@ -3729,7 +3729,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: 4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b
+Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 
@@ -9380,7 +9380,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
-Source SHA-256: 00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d
+Source SHA-256: 280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd
 
 在 1 到 max 之间给出一个整数分值，用一排星表示。
 
@@ -13349,7 +13349,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: 2b2d6f7b97214df0371feb91848cbbaa00f3fc9e2133dbb55939529ec9dcbf2c
+Source SHA-256: 8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e
 
 依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。
 
@@ -13465,7 +13465,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
-Source SHA-256: 84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159
+Source SHA-256: 33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8
 
 把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。
 
@@ -13573,7 +13573,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a
+Source SHA-256: 00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab
 
 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 
@@ -13622,7 +13622,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `defaultFocusedId?`: `string | null`. 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。
 - `defaultSelectedId?`: `string | null`.
 - `disabled?`: `boolean`.
-- `draggable?`: `boolean`. 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。 Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。
+- `draggable?`: `boolean`. 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。 Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 loadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点； 要让这部分可移动，把取回的子项合并进 nodes 的 children。
 - `emptyContent?`: `React.ReactNode`.
 - `expandedIds?`: `readonly string[]`.
 - `loadChildren?`: `(node: TreeNode) => Promise<readonly TreeNode[]>`. 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。

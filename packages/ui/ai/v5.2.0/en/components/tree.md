@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a
+Source SHA-256: 00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
@@ -52,7 +52,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `defaultFocusedId?`: `string | null`. 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。
 - `defaultSelectedId?`: `string | null`.
 - `disabled?`: `boolean`.
-- `draggable?`: `boolean`. 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。 Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。
+- `draggable?`: `boolean`. 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。 Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 loadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点； 要让这部分可移动，把取回的子项合并进 nodes 的 children。
 - `emptyContent?`: `React.ReactNode`.
 - `expandedIds?`: `readonly string[]`.
 - `loadChildren?`: `(node: TreeNode) => Promise<readonly TreeNode[]>`. 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。

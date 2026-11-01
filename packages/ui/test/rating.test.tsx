@@ -117,6 +117,17 @@ test("name submits the chosen score with the form", async () => {
   expect(new FormData(form).get("score")).toBe("4");
 });
 
+test("readOnly keeps the caller's root props, and the interactive group keeps the caller's pointer-leave handler", async () => {
+  const { unmount } = render(<Rating readOnly value={2} aria-describedby="hint" data-test="r" style={{ marginTop: 3 }} />);
+  const root = document.querySelector("[data-slot=rating]")!;
+  expect(root).toHaveAttribute("aria-describedby", "hint"); expect(root).toHaveAttribute("data-test", "r"); expect(root).toHaveStyle({ marginTop: "3px" });
+  unmount();
+  const onPointerLeave = vi.fn(); const user = userEvent.setup();
+  render(<Rating onPointerLeave={onPointerLeave} />);
+  await user.hover(star(3)); await user.unhover(screen.getByRole("radiogroup"));
+  expect(onPointerLeave).toHaveBeenCalled();
+});
+
 test("readOnly with a name still submits the score", () => {
   render(<form aria-label="f"><Rating readOnly value={3} name="score" /></form>);
   expect(new FormData(screen.getByRole("form", { name: "f" }) as HTMLFormElement).get("score")).toBe("3");

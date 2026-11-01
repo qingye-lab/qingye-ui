@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
-Source SHA-256: 00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d
+Source SHA-256: 280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd
 
 Give an integer score from 1 to max, shown as a row of stars.
 

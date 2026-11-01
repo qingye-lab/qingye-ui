@@ -364,10 +364,11 @@ export function ComposerInput({
     const editor = editorRef.current;
     const { triggers: rules, blocked: isBlocked } = liveRef.current;
     if (!editor) return;
-    if (isBlocked || composing.current || rules.length === 0) { setActive(null); return; }
+    // 光标位置无论是否需要找触发都要记下，插入候选与外部写值都以它为准。
     const current = readSelection(editor);
+    if (current) selection.current = current;
+    if (isBlocked || composing.current || rules.length === 0) { setActive(null); return; }
     if (!current || current.start !== current.end) { setActive(null); return; }
-    selection.current = current;
     const match = findComposerTrigger(valueRef.current, current.start, rules.map((rule) => ({ char: rule.char, startOnly: rule.startOnly })));
     setActive((previous) => (previous && match && previous.index === match.index && previous.start === match.start && previous.end === match.end && previous.query === match.query ? previous : match));
   };
@@ -601,7 +602,7 @@ export function ComposerInput({
         // 增长上限：maxRows 行（预设 8，换算同上），且不超过视口一半（预设 50dvh）。超出后在内部滚动。
         "max-h-[min(calc(var(--qy-composer-max-rows)*var(--qy-fill-text-leading-narrow)+var(--qy-fill-height-narrow)-var(--qy-fill-text-leading-narrow)-2*var(--qy-line-width)),50dvh)] sm:max-h-[min(calc(var(--qy-composer-max-rows)*var(--qy-fill-text-leading)+var(--qy-fill-height)-var(--qy-fill-text-leading)-2*var(--qy-line-width)),50dvh)]",
         "data-empty:before:pointer-events-none data-empty:before:text-muted-foreground data-empty:before:content-[attr(data-placeholder)]",
-        "data-readonly:cursor-default",
+        "in-data-readonly:cursor-default",
         className,
       )}
     />

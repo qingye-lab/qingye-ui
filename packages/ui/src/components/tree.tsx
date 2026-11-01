@@ -46,14 +46,17 @@ export type TreeProps = Omit<useRender.ComponentProps<"div">, "children" | "drag
    * 筛选只是看不见一部分。空串等于不筛选。 */
   query?: string;
   /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。
-   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 */
+   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。
+   * loadChildren 取回的子项由 Tree 保管、不在 nodes 里，调用方无从改起，所以它们（及其后代）不参与移动，也不能放进已取回子项的节点；
+   * 要让这部分可移动，把取回的子项合并进 nodes 的 children。 */
   draggable?: boolean;
   onMove?: (move: TreeMove, details: TreeMoveDetails) => void;
   /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */
   canDrop?: (move: TreeMove) => boolean;
 };
 type Source = { state: "loading" } | { state: "error" } | { state: "ready"; nodes: readonly TreeNode[] };
-type Entry = { node: TreeNode; parent: string | null; level: number };
+/** held：节点位于 loadChildren 取回的子树里（不在调用方的 nodes 中）。 */
+type Entry = { node: TreeNode; parent: string | null; level: number; held: boolean };
 /** 键入搜索的累积窗口：两次按键相隔超过它就从头开始。**预设**——APG 的 Tree View 只要求「快速连续键入多个字符」，
  * 没有给出时长；500ms 是常见组件库（MUI、React Aria 同一量级）的惯例，不由本库的任何关系推出。 */
 export const TREE_TYPEAHEAD_MS = 500;
@@ -116,17 +119,17 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
   const all = new Map<string, Entry>(); const visible: Entry[] = []; const wanted: TreeNode[] = [];
   // 名称指向行内自己的标签，而不是 aria-label：treeitem 含下一级，aria-label 会与可见文字（含子项）不符（WCAG 2.5.3）。
   const idBase = React.useId(); const order = new Map<string, number>();
-  function index(list: readonly TreeNode[], parent: string | null, level: number, open: boolean) {
+  function index(list: readonly TreeNode[], parent: string | null, level: number, open: boolean, held: boolean) {
     for (const node of list) {
       if (!node.id.trim() || !node.label.trim() || all.has(node.id)) throw new Error("Tree requires unique, nonempty ids and labels.");
-      const entry = { node, parent, level }; order.set(node.id, all.size); all.set(node.id, entry);
+      const entry = { node, parent, level, held }; order.set(node.id, all.size); all.set(node.id, entry);
       const here = open && shown(node); if (here) visible.push(entry);
       const kids = kidsOf(node);
-      if (kids) index(kids, node.id, level + 1, here && isOpen(node));
+      if (kids) index(kids, node.id, level + 1, here && isOpen(node), held || !node.children);
       else if (here && expanded.includes(node.id) && lazy(node) && !sources[node.id]) wanted.push(node);
     }
   }
-  index(nodes, null, 1, true);
+  index(nodes, null, 1, true, false);
   const enabled = visible.filter(entry => !disabled && !entry.node.disabled);
   /** 分支的勾选态：只看启用的叶子后代。全禁用的子树里没有可操作的事实，退回看全部叶子，只为如实显示，不代表可以点它改变什么。 */
   function deriveChecked(node: TreeNode): TreeCheckedState {
@@ -201,6 +204,8 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     if (!draggable || disabled) return false;
     const source = all.get(move.nodeId); const target = all.get(move.targetId);
     if (!source || !target || source.node.disabled || target.node.disabled || move.nodeId === move.targetId) return false;
+    // 取回的子项不在 nodes 里，调用方改不了；放进已取回子项的节点，调用方写 children 会盖掉取回的那些。
+    if (source.held || target.held || (move.position === "inside" && !target.node.children && sources[move.targetId]?.state === "ready")) return false;
     // 不能放进自己的后代。
     for (let ancestor = target.parent; ancestor; ancestor = all.get(ancestor)?.parent ?? null) if (ancestor === move.nodeId) return false;
     // 位置不变的移动不算移动：已经紧挨着目标的前/后，或已经是目标的最后一个子项。
@@ -298,7 +303,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     });
   }
   const hintId = `${idBase}-hint`; const describedBy = [describedByProp, draggable ? hintId : undefined].filter(Boolean).join(" ") || undefined;
-  const element = useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-multiselectable": checkable || undefined, "aria-disabled": disabled || undefined, "aria-describedby": describedBy, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) { ownsFocus.current = false; setGrabbed(null); } onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: visible.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? messages.treeEmpty}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
+  const element = useRender({ defaultTagName: "div", render, ref: [root, ref ?? null], props: mergeProps({ "data-slot": "tree", role: "tree", "aria-multiselectable": checkable || undefined, "aria-disabled": disabled || undefined, "aria-describedby": describedBy, tabIndex: enabled.length === 0 ? 0 : undefined, className: cn("min-w-0 rounded-item text-body outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className), onFocusCapture(event: React.FocusEvent) { ownsFocus.current = true; onFocusCapture?.(event as React.FocusEvent<HTMLDivElement>); }, onBlurCapture(event: React.FocusEvent) { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) { ownsFocus.current = false; setGrabbed(null); } onBlurCapture?.(event as React.FocusEvent<HTMLDivElement>); }, children: visible.length === 0 ? <p data-slot="tree-empty" className="m-0 flex min-h-(--qy-row-default) items-center text-body text-muted-foreground wrap-anywhere">{emptyContent ?? (needle && nodes.length > 0 ? messages.treeNoMatch : messages.treeEmpty)}</p> : <ul role="none" className="m-0 min-w-0 list-none p-0">{renderNodes(nodes, 1)}</ul> }, props) });
   // 提示与播报放在树的外面（role="tree" 里只该有节点）；只在可移动时存在。
   return draggable ? <>{element}<span id={hintId} hidden>{messages.treeMoveHint}</span><div data-slot="tree-announcer" role="status" className="sr-only">{announcement.text}{announcement.count % 2 === 0 ? "​" : ""}</div></> : element;
 }

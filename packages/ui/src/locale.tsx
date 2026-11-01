@@ -58,7 +58,7 @@ export type UILocaleMessages = {
   selectWeek: string; selectMonth: string; selectQuarter: string; selectYear: string;
   // Tables
   selectedCount: (count: number) => string; sortAscending: string; sortDescending: string; selectRow: string;
-  filterUnapplied: string; bulkVersion: string; treeEmpty: string;
+  filterUnapplied: string; bulkVersion: string; treeEmpty: string; treeNoMatch: string;
   tableNoValue: string; selectAllMatching: (count: number) => string; selectAllScoped: (label: string, scope: "page" | "filtered") => string;
   confirmContentChanged: string; confirmReviewLatest: string;
   // Data display
@@ -138,7 +138,7 @@ export const zhCN: UILocale = {
     previousYear: "上一年", nextYear: "下一年", previousYears: "上一组年份", nextYears: "下一组年份", yearNavigation: "切换年份",
     selectWeek: "选择周", selectMonth: "选择月份", selectQuarter: "选择季度", selectYear: "选择年份",
     selectedCount: (count) => `已选 ${count.toLocaleString("zh-CN")} 项`, sortAscending: "升序", sortDescending: "降序", selectRow: "选择此行", selectRowNamed: (name) => `选择“${name}”`,
-    filterUnapplied: "条件尚未应用", bulkVersion: "版本", treeEmpty: "没有条目",
+    filterUnapplied: "条件尚未应用", bulkVersion: "版本", treeEmpty: "没有条目", treeNoMatch: "没有匹配项",
     tableNoValue: "无值", selectAllMatching: (count) => `选择全部 ${count.toLocaleString("zh-CN")} 项`, selectAllScoped: (label, scope) => `${label}（${scope === "page" ? "仅本页" : "全部筛选结果"}）`,
     confirmContentChanged: "对象、版本或变更已改变，请重新阅读。", confirmReviewLatest: "重新阅读",
     resize: "调整大小", copyCode: "复制代码", codeRegion: "代码", codeRegionNamed: (kind, firstLine) => `${kind}：${firstLine}`,

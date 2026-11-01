@@ -50,7 +50,7 @@ export const enUS: UILocale = {
     previousYear: "Previous year", nextYear: "Next year", previousYears: "Previous years", nextYears: "Next years", yearNavigation: "Change year",
     selectWeek: "Select week", selectMonth: "Select month", selectQuarter: "Select quarter", selectYear: "Select year",
     selectedCount: (count) => `${count.toLocaleString("en-US")} selected`, sortAscending: "Ascending", sortDescending: "Descending", selectRow: "Select row", selectRowNamed: (name) => `Select “${name}”`,
-    filterUnapplied: "Conditions not applied", bulkVersion: "Version", treeEmpty: "No items",
+    filterUnapplied: "Conditions not applied", bulkVersion: "Version", treeEmpty: "No items", treeNoMatch: "No matches",
     tableNoValue: "No value", selectAllMatching: (count) => `Select all ${count.toLocaleString("en-US")}`, selectAllScoped: (label, scope) => `${label} (${scope === "page" ? "this page only" : "all filtered results"})`,
     confirmContentChanged: "The object, version, or change has changed. Please review again.", confirmReviewLatest: "Review again",
     resize: "Resize", copyCode: "Copy code", codeRegion: "Code", codeRegionNamed: (kind, firstLine) => `${kind}: ${firstLine}`,

@@ -6,7 +6,7 @@ import {
   Composer, ComposerInput, ComposerSubmit, ComposerToolbar, composerValueFromText, composerValueToText, isComposerValueEmpty,
   parseComposerValue, type ComposerItem, type ComposerSegment, type ComposerTrigger,
 } from "../src/components/composer";
-import { writeSelection } from "../src/composer/dom";
+import { offsetToPoint, parseEditor, pointToOffset, writeSelection } from "../src/composer/dom";
 import { findComposerTrigger } from "../src/composer/model";
 import { UILocaleProvider } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
@@ -31,10 +31,26 @@ test("value helpers: serialize, restore, and tell empty from whitespace", () => 
   expect(composerValueFromText("mail a@Ann.com", [ann])).toEqual([{ type: "text", text: "mail a@Ann.com" }]);
   expect(composerValueFromText("@Anna", [ann])).toEqual([{ type: "text", text: "@Anna" }]);
   expect(composerValueFromText("@Ann, hi", [ann])).toEqual([ann, { type: "text", text: ", hi" }]);
+  const bob = { type: "token", trigger: "@", id: "u3", label: "Bob" } as const;
+  expect(composerValueFromText(composerValueToText([ann, bob]), [ann, bob])).toEqual([ann, bob]);
   expect(parseComposerValue("a")).toEqual([{ type: "text", text: "a" }]);
   expect(parseComposerValue(value)).toEqual(value);
   expect(isComposerValueEmpty([{ type: "text", text: " \n " }])).toBe(true);
   expect(isComposerValueEmpty([{ type: "token", trigger: "@", id: "u1", label: "林青" }])).toBe(false);
+});
+
+test("offsets count the newline that a browser-made block adds, the same way the value does", () => {
+  const root = document.createElement("div");
+  root.innerHTML = "ab<div>cd</div><div>ef</div>";
+  expect(composerValueToText(parseEditor(root))).toBe("ab\ncd\nef");
+  const [, first, second] = Array.from(root.childNodes);
+  expect(pointToOffset(root, first!.firstChild!, 1)).toBe(4);
+  expect(pointToOffset(root, second!.firstChild!, 2)).toBe(8);
+  expect(pointToOffset(root, root, 3)).toBe(8);
+  expect(offsetToPoint(root, 8)).toEqual({ node: root, offset: 3 });
+  const leading = document.createElement("div");
+  leading.innerHTML = "<div>cd</div>";
+  expect(pointToOffset(leading, leading.firstChild!.firstChild!, 2)).toBe(2);
 });
 
 test("trigger detection ignores mid-word characters and respects startOnly", () => {

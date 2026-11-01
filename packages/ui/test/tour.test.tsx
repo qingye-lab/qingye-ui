@@ -154,6 +154,21 @@ test("an initial step without an anchor moves on to the next available one", asy
   expect(onStepChange).toHaveBeenCalledWith(1);
 });
 
+test("anchors that appear or disappear while the tour is open are picked up again", async () => {
+  vi.spyOn(console, "warn").mockImplementation(() => {});
+  const onStepChange = vi.fn();
+  const early = document.createElement("button"); early.id = "early"; document.body.appendChild(early);
+  const gapped: TourStep[] = [{ target: byId("early"), title: "先到" }, { target: byId("late"), title: "迟到" }, steps[2]!];
+  render(<Page steps={gapped} onStepChange={onStepChange} />);
+  expect(await dialog("先到")).toHaveTextContent("第 1 / 2 步");
+  const late = document.createElement("button"); late.id = "late"; document.body.appendChild(late);
+  await waitFor(() => expect(screen.getByRole("dialog", { name: "先到" })).toHaveTextContent("第 1 / 3 步"));
+  early.remove();
+  expect(await dialog("迟到")).toHaveTextContent("第 1 / 2 步");
+  expect(onStepChange).toHaveBeenLastCalledWith(1);
+  late.remove();
+});
+
 test("when no anchor exists the tour ends instead of showing an empty popup", async () => {
   vi.spyOn(console, "warn").mockImplementation(() => {});
   const onOpenChange = vi.fn();

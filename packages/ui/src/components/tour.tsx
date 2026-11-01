@@ -186,6 +186,20 @@ export function Tour({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  // 引导期间页面会变：锚点可能晚于打开才渲染，也可能被移除或换成新节点。节点增删后在下一帧重新解析，
+  // 只看 childList（不看属性），浮层自身定位改样式不会引起重解析。
+  const [revision, setRevision] = React.useState(0);
+  React.useEffect(() => {
+    if (!open || typeof MutationObserver === "undefined") return;
+    let frame = 0;
+    const observer = new MutationObserver(() => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setRevision(value => value + 1));
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => { cancelAnimationFrame(frame); observer.disconnect(); };
+  }, [open]);
+
   // 解析所有锚点，缺失的步骤不进入可用表；当前步骤不可用时就近改道，全部不可用则结束。
   React.useLayoutEffect(() => {
     if (!open) return;
@@ -207,7 +221,7 @@ export function Tour({
     else requestOpen(false, "unavailable");
     // goTo / requestOpen 只读 latest 与受控标记，不是副作用的输入。
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, step, stepCount]);
+  }, [open, step, stepCount, revision]);
 
   const position = resolved.findIndex(item => item.index === step);
   const current = position >= 0 ? resolved[position] : undefined;

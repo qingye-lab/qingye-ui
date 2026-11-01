@@ -55,19 +55,23 @@ export function renderEditor(root: HTMLElement, value: ComposerValue, tokenClass
 /** 把 DOM 读回成值。 */
 export function parseEditor(root: HTMLElement): ComposerSegment[] {
   const out: ComposerSegment[] = [];
+  // 已读出的模型单位数：分块前补不补换行看它，与 measure 同一判据。
+  let units = 0;
   const walk = (parent: Node) => {
     const nodes = Array.from(parent.childNodes);
     nodes.forEach((node, index) => {
       if (isText(node)) {
         out.push({ type: "text", text: node.nodeValue ?? "" });
+        units += node.length;
       } else if (isTokenElement(node)) {
         out.push({ type: "token", trigger: node.getAttribute("data-trigger") ?? "", id: node.getAttribute("data-id") ?? "", label: node.getAttribute("data-label") ?? "" });
+        units += 1;
       } else if (isElement(node)) {
         if (node.tagName === "BR") {
           // 父节点里最后一个 <br> 是占位（哨兵或浏览器补的），不是换行。
-          if (index < nodes.length - 1) out.push({ type: "text", text: "\n" });
+          if (index < nodes.length - 1) { out.push({ type: "text", text: "\n" }); units += 1; }
         } else {
-          if (blockTags.has(node.tagName) && out.length > 0) out.push({ type: "text", text: "\n" });
+          if (blockTags.has(node.tagName) && units > 0) { out.push({ type: "text", text: "\n" }); units += 1; }
           walk(node);
         }
       }
@@ -77,15 +81,18 @@ export function parseEditor(root: HTMLElement): ComposerSegment[] {
   return normalizeComposerValue(out);
 }
 
-/** 一个节点所含的模型单位数，规则与 parseEditor 一致。 */
-function unitsOf(node: Node, isLastChild: boolean): number {
+/**
+ * 一个节点所含的模型单位数，规则与 parseEditor 一致。`before` 是它之前已有的单位数：
+ * 分块元素在前面已有内容时多出一个换行。
+ */
+function measure(node: Node, isLastChild: boolean, before: number): number {
   if (isText(node)) return node.length;
   if (isTokenElement(node)) return 1;
   if (isElement(node)) {
     if (node.tagName === "BR") return isLastChild ? 0 : 1;
-    let total = 0;
+    let total = blockTags.has(node.tagName) && before > 0 ? 1 : 0;
     const children = Array.from(node.childNodes);
-    children.forEach((child, index) => { total += unitsOf(child, index === children.length - 1); });
+    children.forEach((child, index) => { total += measure(child, index === children.length - 1, before + total); });
     return total;
   }
   return 0;
@@ -101,8 +108,9 @@ export function pointToOffset(root: HTMLElement, node: Node, offset: number): nu
       found = true;
       if (isText(current)) total += Math.min(offset, current.length);
       else {
+        if (current !== root && blockTags.has((current as HTMLElement).tagName) && total > 0) total += 1;
         const children = Array.from(current.childNodes);
-        for (let i = 0; i < Math.min(offset, children.length); i += 1) total += unitsOf(children[i]!, i === children.length - 1);
+        for (let i = 0; i < Math.min(offset, children.length); i += 1) total += measure(children[i]!, i === children.length - 1, total);
       }
       return;
     }
@@ -114,6 +122,7 @@ export function pointToOffset(root: HTMLElement, node: Node, offset: number): nu
     if (isText(current)) { total += current.length; return; }
     if (isElement(current)) {
       if (current.tagName === "BR") { total += isLast ? 0 : 1; return; }
+      if (current !== root && blockTags.has(current.tagName) && total > 0) total += 1;
       const children = Array.from(current.childNodes);
       children.forEach((child, index) => visit(child, index === children.length - 1));
     }
@@ -125,6 +134,7 @@ export function pointToOffset(root: HTMLElement, node: Node, offset: number): nu
 /** 模型偏移 → DOM 点。落在令牌前后时给出编辑区自身的子节点位置，永远不进入令牌内部。 */
 export function offsetToPoint(root: HTMLElement, offset: number): { node: Node; offset: number } {
   let remaining = Math.max(0, offset);
+  let consumed = 0;
   const children = Array.from(root.childNodes);
   for (let i = 0; i < children.length; i += 1) {
     const child = children[i]!;
@@ -132,17 +142,21 @@ export function offsetToPoint(root: HTMLElement, offset: number): { node: Node; 
     if (isText(child)) {
       if (remaining <= child.length) return { node: child, offset: remaining };
       remaining -= child.length;
+      consumed += child.length;
     } else if (isTokenElement(child)) {
       if (remaining === 0) return { node: root, offset: i };
       remaining -= 1;
+      consumed += 1;
     } else if (isElement(child) && child.tagName === "BR") {
       if (isLast) return { node: root, offset: i };
       if (remaining === 0) return { node: root, offset: i };
       remaining -= 1;
+      consumed += 1;
     } else {
-      const length = unitsOf(child, isLast);
+      const length = measure(child, isLast, consumed);
       if (remaining <= length) return { node: root, offset: remaining === 0 ? i : i + 1 };
       remaining -= length;
+      consumed += length;
     }
   }
   return { node: root, offset: children.length };
