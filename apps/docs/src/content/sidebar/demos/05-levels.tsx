@@ -16,7 +16,7 @@ export default function Demo() {
   return <div className="h-[calc(20*var(--qy-cai))]">
     <Workspace>
       <Sidebar>
-        <SidebarContent>
+        <SidebarContent aria-label="两级侧栏导航">
           <SidebarGroup>
             <SidebarLink render={<button type="button" onClick={() => setPage("collections")} />} active={page === "collections"} icon={<IconDatabase aria-hidden="true" />}>{t("集合", "Collections")}</SidebarLink>
             <SidebarSub defaultOpen>

@@ -3,12 +3,13 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import componentSummaries from "./vite-plugins/component-summaries.mjs";
+import designPrinciples from "./vite-plugins/design-principles.mjs";
 
 const ui = fileURLToPath(new URL("../../packages/ui/", import.meta.url));
 
 // The docs consume the library from source so edits hot-reload without a build.
 export default defineConfig({
-  plugins: [react(), tailwindcss(), componentSummaries(fileURLToPath(new URL("./src/content/", import.meta.url)))],
+  plugins: [react(), tailwindcss(), componentSummaries(fileURLToPath(new URL("./src/content/", import.meta.url))), designPrinciples(fileURLToPath(new URL("../../design.md", import.meta.url)))],
   resolve: {
     alias: [
       { find: /^@qingye_lab\/ui$/, replacement: `${ui}src/index.ts` },

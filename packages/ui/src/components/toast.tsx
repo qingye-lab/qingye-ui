@@ -147,7 +147,8 @@ function Notices({ position = "bottom-right", portalProps, anchored = false }: {
     <Toast.Portal {...portalProps}>
       <Toast.Viewport
         data-slot="toast-viewport"
-        aria-label={messages.notifications}
+        // 两个视口同时存在时（全局与就地），名称不同，读屏的地标列表里才分得开。
+        aria-label={anchored ? messages.anchoredNotifications : messages.notifications}
         aria-live="off"
         style={layer}
         className={anchored ? "outline-none" : cn(

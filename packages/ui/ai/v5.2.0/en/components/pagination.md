@@ -162,7 +162,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
+  return <PaginationPattern aria-label="分页：已知总数" totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
 }
 ```
 
@@ -175,7 +175,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页数较多", titleEn: "Many pages" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;
+  return <PaginationPattern aria-label="分页：折叠的页码" totalCount={120} defaultValue={{ page: 6, pageSize: 10 }} />;
 }
 ```
 
@@ -190,6 +190,6 @@ export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfie
 
 export default function Demo() {
   const [value, setValue] = React.useState<PaginationValue>({ page: 1, pageSize: 20 });
-  return <PaginationPattern totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
+  return <PaginationPattern aria-label="分页：总数未知" totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
 }
 ```

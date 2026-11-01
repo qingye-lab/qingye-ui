@@ -16,11 +16,15 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel
 import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface } from "@qingye_lab/ui/components/workspace";
 import { ACTIVITY, COLLECTIONS, findCollection } from "./data";
+import { useExampleEmbedded } from "../embedding";
 
 /* 应用外壳：库的 Workspace——侧栏（可收起成图标栏）+ 一张工作面（顶栏：位置、搜索、动态；内容区）。
  * 外壳自带跳过链接、侧栏与工作面之间的间隔和面的圆角线；这里只放内容。页面级操作经 WorkspaceHeaderPortal 进顶栏。 */
 
-export const BASE = "/examples/workspace";
+// 基址随这份文档所在的路由取：裸框（/frame/examples/…）是首页窗口与总览缩略里的 iframe，是独立的文档、各有一份模块，
+// 框里的链接与跳转要留在框里，不能跳到站点的 /examples/…（那会把整个站点连页头一起载进窗口）。服务端与测试里没有 window，取站点基址。
+const inFrame = typeof window !== "undefined" && /^(\/en)?\/frame\//.test(window.location.pathname);
+export const BASE = inFrame ? "/frame/examples/workspace" : "/examples/workspace";
 const at = (path = "") => `${BASE}${path}`;
 
 /** 站内跳转保留 URL 的语言前缀；<Link> 已自带，命令式跳转用这个。 */
@@ -62,6 +66,7 @@ function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (op
 }
 
 export function WorkspaceShell() {
+  const embedded = useExampleEmbedded();
   const { crumbs, section, sub } = useCrumbs();
   const scroller = React.useRef<HTMLElement | null>(null);
   const [searching, setSearching] = React.useState(false);
@@ -74,7 +79,9 @@ export function WorkspaceShell() {
   const link = (path: string) => <Link to={at(path)} />;
 
   return <Workspace>
-    <Sidebar className="shrink-0">
+    {/* 侧栏是一个有名字的区域（section → region 地标）：工作区的标识、导航与账户都在其中，不游离在地标之外。
+        不用 aside：侧栏里的主导航不是页面的补充内容（库在 Sidebar 根上的说明）；nav 仍是 SidebarContent 自己。 */}
+    <Sidebar className="shrink-0" render={<section aria-label="青野工作区" />}>
       {/* 顶：这是谁的工作区。印与名一行，与收起按钮同一条中线；收起时只留印，收起按钮落到印下。 */}
       <SidebarHeader>
         <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
@@ -137,7 +144,7 @@ export function WorkspaceShell() {
           </PopoverPopup>
         </Popover>
       </WorkspaceHeader>
-      <WorkspaceContent ref={scroller} id="main">
+      <WorkspaceContent ref={scroller} {...(embedded ? { render: <div /> } : { id: "main" })}>
         <Scroller.Provider value={scroller}><Outlet /></Scroller.Provider>
       </WorkspaceContent>
     </WorkspaceSurface>

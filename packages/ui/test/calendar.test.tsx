@@ -71,3 +71,12 @@ test("a caller-provided locale wins over the one derived from the UI locale", ()
   render(<UILocaleProvider locale={{ code: "de-DE", messages: enUS.messages }}><Calendar mode="single" defaultMonth={new Date(2026, 9)} locale={{ code: "en-US" }} weekStartsOn={0} /></UILocaleProvider>);
   expect(weekdays()[0]).toBe("Su");
 });
+
+test("month switching is a named group, not a navigation landmark, and a consumer's labelNav wins", () => {
+  const { unmount } = render(<Calendar mode="single" defaultMonth={new Date(2026, 9, 1)} />);
+  expect(screen.getByRole("group", { name: "切换月份" })).toBeInTheDocument();
+  expect(screen.queryByRole("navigation")).toBeNull();
+  unmount();
+  render(<Calendar mode="single" defaultMonth={new Date(2026, 9, 1)} labels={{ labelNav: () => "换月" }} />);
+  expect(screen.getByRole("group", { name: "换月" })).toBeInTheDocument();
+});

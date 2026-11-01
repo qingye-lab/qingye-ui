@@ -82,6 +82,27 @@ export function parseLocalDate(text: string): Date | undefined {
   return year >= 1 && date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day ? date : undefined;
 }
 
+/**
+ * 切换月份的那一组按钮：DayPicker 默认渲染成 <nav> 地标，每个日历、每个日期弹层都会往页面的地标列表里加一项无从区分的「导航栏」；
+ * 它不是站点导航，是这个日历里的一组控件，所以渲染成有名称的 group（div）——nav 元素上不允许改写成 group。
+ * 按钮、禁用与点击的处理与 DayPicker 自带的 Nav 相同：读同一份 components、classNames、styles、labels（名称是 labelNav，可由调用方覆写）。
+ */
+function CalendarNav({ onPreviousClick, onNextClick, previousMonth, nextMonth, ...props }: React.ComponentProps<typeof CalendarPrimitive.Nav>) {
+  // 名称读 DayPicker 的 labelNav：Calendar 默认给它「切换月份」，调用方在 labels 里覆写时以调用方为准。
+  const { components, classNames, styles, labels: { labelPrevious, labelNext, labelNav } } = CalendarPrimitive.useDayPicker();
+  const UI = CalendarPrimitive.UI;
+  const chevron = styles?.[UI.Chevron];
+  const chevronStyle = chevron ? { style: chevron } : {};
+  return <div {...(props as React.ComponentProps<"div">)} role="group" aria-label={labelNav()}>
+    <components.PreviousMonthButton type="button" className={classNames[UI.PreviousMonthButton]} style={styles?.[UI.PreviousMonthButton]} tabIndex={previousMonth ? undefined : -1} aria-disabled={previousMonth ? undefined : true} aria-label={labelPrevious(previousMonth)} onClick={event => { if (previousMonth) onPreviousClick?.(event); }}>
+      <components.Chevron {...(previousMonth ? {} : { disabled: true })} {...chevronStyle} className={classNames[UI.Chevron]} orientation="left" />
+    </components.PreviousMonthButton>
+    <components.NextMonthButton type="button" className={classNames[UI.NextMonthButton]} style={styles?.[UI.NextMonthButton]} tabIndex={nextMonth ? undefined : -1} aria-disabled={nextMonth ? undefined : true} aria-label={labelNext(nextMonth)} onClick={event => { if (nextMonth) onNextClick?.(event); }}>
+      <components.Chevron {...(nextMonth ? {} : { disabled: true })} {...chevronStyle} className={classNames[UI.Chevron]} orientation="right" />
+    </components.NextMonthButton>
+  </div>;
+}
+
 /** Mature date semantics with current control geometry and locally formatted names. */
 export function Calendar({ className, classNames, components, style, locale, formatters, labels, render, ref, ...props }: CalendarProps) {
   const { code, messages, ...resolved } = useUILocale() as ReturnType<typeof useUILocale> & { dir?: string };
@@ -122,9 +143,9 @@ export function Calendar({ className, classNames, components, style, locale, for
       outside: "text-muted-foreground", disabled: "opacity-disabled", hidden: "invisible", // 区间：两端实心，中段连续浅底；两端格子半格浅底，把实心端点接进中段。选中而非区间端点的中段日期不再用实心。
       range_middle: "bg-surface-selected [&>button]:bg-transparent! [&>button]:text-foreground! [&>button:hover]:bg-(--qy-surface-hover)!", range_start: "bg-linear-to-r from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-l", range_end: "bg-linear-to-l from-transparent from-50% to-surface-selected to-50% rtl:bg-linear-to-r", footer: "text-support text-muted-foreground", ...classNames,
     }}
-    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, ...components }}
+    components={{ Root: CalendarRoot, Chevron: CalendarChevron, Dropdown: CalendarDropdown, Nav: CalendarNav, ...components }}
     labels={{
-      labelNext: () => messages.nextMonth, labelPrevious: () => messages.previousMonth,
+      labelNext: () => messages.nextMonth, labelPrevious: () => messages.previousMonth, labelNav: () => messages.monthNavigation,
       labelMonthDropdown: () => messages.month, labelYearDropdown: () => messages.year,
       labelDayButton: (date, modifiers) => nameList.format([dateName(date), modifiers.today ? messages.today : "", modifiers.selected ? messages.selectedDate : ""].filter(Boolean)),
       labelGrid: date => new Intl.DateTimeFormat(code, { year: "numeric", month: "long" }).format(date),

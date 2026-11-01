@@ -138,7 +138,7 @@ export default function Demo() {
   const [leaf, setLeaf] = useState<string[] | null>(["zj", "hz", "xh"]);
   const [any, setAny] = useState<string[] | null>(null);
   return (
-    <div className="grid w-full grid-cols-2 items-start gap-(--qy-space-4)">
+    <div className="grid w-full sm:grid-cols-2 items-start gap-(--qy-space-4)">
       <Field>
         <FieldLabel>{english ? "Leaf only" : "只选到叶子"}</FieldLabel>
         <Cascader options={options} value={leaf} onValueChange={setLeaf} />

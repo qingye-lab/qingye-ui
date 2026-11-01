@@ -25,5 +25,5 @@ export default function Demo() {
     { accessorKey: "count", header: english ? "Records" : "记录数", size: 96, meta: { numeric: true } },
   ];
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
-  return <DataTable table={table} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
+  return <DataTable table={table} caption={english ? "Local collection (mixed widths) · 3 entries" : "本地集合（混合列宽）· 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
 }

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
-Source SHA-256: d1f5f5fb0d95dea7c5314b09fd04d8299d0b7e700d4acdabc7936087e899cb7d
+Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
 
 A search box over an always-open list of commands, for jumping somewhere or doing something.
 
@@ -108,13 +108,14 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 280 inherited (@types/react 280); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, react-dom, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context CountContext: without a provider default-value; provided by Command
 - Context GroupReport: without a provider nullable; provided by CommandGroup
 - Context StateContext: without a provider throws; provided by Command
+- Context StatusSlotContext: without a provider nullable; provided by Command
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.

@@ -98,7 +98,7 @@ export const meta = { title: "密度", titleEn: "Density" };
 // 填值控件只有一套几何，紧凑密度收紧容器，不改值文字（用户裁决 2026-10-05）。
 export default function Demo() {
   return (
-    <div className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+    <div className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>

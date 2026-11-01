@@ -77,3 +77,4 @@ export function ComponentSpecimen({ slug, name, className }: { slug: string; nam
       : <SpecimenPlaceholder />}
   </div>;
 }
+

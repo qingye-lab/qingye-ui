@@ -18,5 +18,5 @@ export default function Demo() {
     { accessorKey: "count", header: ({ column }) => <DataTableSortButton column={column}>{english ? "Records" : "记录数"}</DataTableSortButton>, size: 120, minSize: 100, sortDescFirst: false, meta: { numeric: true } },
   ] }];
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), autoResetAll: false });
-  return <DataTable table={table} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
+  return <DataTable table={table} caption={english ? "Local collection (instance) · 3 entries" : "本地集合（实例）· 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
 }

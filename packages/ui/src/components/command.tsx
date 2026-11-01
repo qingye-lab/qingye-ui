@@ -2,6 +2,7 @@
 
 import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { useUILocale } from "../locale";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, commandItemFrame, overlayItemClassName } from "../overlay-item";
@@ -49,6 +50,8 @@ type Report = (id: string, visible: boolean) => void;
 type CommandState = { query: string; filter: CommandFilter; ready: boolean; report: Report; onItemSelect: ((value: string) => void) | undefined };
 const StateContext = React.createContext<CommandState | null>(null);
 const CountContext = React.createContext(0);
+/** 空态的位置：Command 根在列表之后放一个槽，CommandEmpty 把自己（role="status"）传送过去（listbox 里只能有 option 与 group）。 */
+const StatusSlotContext = React.createContext<HTMLElement | null>(null);
 const GroupReport = React.createContext<Report | null>(null);
 function useCommandState(part: string): CommandState {
   const state = React.useContext(StateContext);
@@ -76,7 +79,8 @@ export function Command({ filter = defaultFilter, query: queryProp, defaultQuery
   // 条目的登记在挂载后才完整；此前不收组、不出空态，避免服务端输出与首帧误报「没有结果」。
   React.useEffect(() => setReady(true), []);
   const state = React.useMemo<CommandState>(() => ({ query: query.trim(), filter, ready, report, onItemSelect }), [query, filter, ready, report, onItemSelect]);
-  return <StateContext.Provider value={state}><CountContext.Provider value={count}>
+  const [statusSlot, setStatusSlot] = React.useState<HTMLElement | null>(null);
+  return <StateContext.Provider value={state}><CountContext.Provider value={count}><StatusSlotContext.Provider value={statusSlot}>
     <AutocompletePrimitive.Root inline open autoHighlight="always" keepHighlight value={query}
       onValueChange={(next, details) => {
         // 选中条目会让原语把条目文字填回输入框；命令不是「填值」，查询保持原样。
@@ -84,9 +88,9 @@ export function Command({ filter = defaultFilter, query: queryProp, defaultQuery
         if (queryProp === undefined) setInner(next);
         onQueryChange?.(next);
       }}>
-      <div data-slot="command" {...props} className={cn("flex min-h-0 min-w-0 flex-col gap-(--qy-field-gap)", className)}>{children}</div>
+      <div data-slot="command" {...props} className={cn("flex min-h-0 min-w-0 flex-col gap-(--qy-field-gap)", className)}>{children}<div data-slot="command-status-slot" ref={setStatusSlot} className="contents" /></div>
     </AutocompletePrimitive.Root>
-  </CountContext.Provider></StateContext.Provider>;
+  </StatusSlotContext.Provider></CountContext.Provider></StateContext.Provider>;
 }
 
 export type CommandInputProps = Omit<React.ComponentProps<typeof AutocompleteInput>, "value" | "defaultValue">;
@@ -133,12 +137,19 @@ export function CommandSeparator({ className, ...props }: CommandSeparatorProps)
 }
 
 export type CommandEmptyProps = React.ComponentProps<"div">;
-/** 没有任何条目匹配时的文字；省略 children 用内置缺省。元素常驻、内容变化，读屏才会播报。 */
+/**
+ * 没有任何条目匹配时的文字；省略 children 用内置缺省。
+ * 内容只渲染一次：作为 role="status" 常驻在 Command 根放在列表之后的槽里——listbox 的子元素只能是 option 与 group
+ * （aria-required-children），所以它不在列表之内；没有结果时列表是空的，文字就出现在结果本该出现的位置。
+ * children 可以带按钮等可操作内容（只有一份，可聚焦、读屏可见）。元素常驻、内容变化，读屏才会播报。
+ */
 export function CommandEmpty({ className, children, ...props }: CommandEmptyProps) {
   const { ready } = useCommandState("CommandEmpty");
   const count = React.useContext(CountContext);
+  const slot = React.useContext(StatusSlotContext);
   const { messages } = useUILocale();
-  return <div data-slot="command-empty" role="status" {...props} className={cn(candidateEmptyClassName, className)}>{ready && count === 0 ? children ?? messages.commandEmpty : null}</div>;
+  if (!slot) return null;
+  return createPortal(<div data-slot="command-empty" role="status" {...props} className={cn(candidateEmptyClassName, className)}>{ready && count === 0 ? children ?? messages.commandEmpty : null}</div>, slot);
 }
 
 /*

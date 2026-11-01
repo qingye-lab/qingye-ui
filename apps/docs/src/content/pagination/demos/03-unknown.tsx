@@ -6,5 +6,5 @@ export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfie
 
 export default function Demo() {
   const [value, setValue] = React.useState<PaginationValue>({ page: 1, pageSize: 20 });
-  return <PaginationPattern totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
+  return <PaginationPattern aria-label="分页：总数未知" totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
 }

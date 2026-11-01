@@ -1,0 +1,30 @@
+/*
+ * 工作区示例的版面（2026-10-30）。用间距成组：读数带、图、两栏，段与段之间 2 × 章内间隔；不画卡片。
+ * 读数带四列等分，列间 4 材；两栏 2 : 1，栏距 3 材。材数都是示例预设。
+ */
+.ws-overview { row-gap: calc(2 * var(--qy-section-gap)); }
+.ws-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--qy-section-gap) calc(4 * var(--qy-cai)); padding-top: var(--qy-field-group-gap); }
+/* 读数下的趋势线：与读数同宽，坐在读数带里，不另成卡片。 */
+.ws-trend { margin: 0; margin-top: auto; }
+.ws-metrics > [data-slot="stat"] { justify-content: start; }
+.ws-columns { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--qy-section-gap) calc(3 * var(--qy-cai)); align-items: start; }
+.ws-aside { display: grid; gap: calc(2 * var(--qy-section-gap)); }
+@media (width < 64rem) {
+  .ws-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ws-columns { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 设置：一栏表单，40 材以内，从内容区的起始缘排起；页题 title 档。成员表格需要比较列，放宽到 56 材。 */
+.ws-settings { max-inline-size: calc(40 * var(--qy-cai) + 2 * var(--qy-page-gutter)); }
+.ws-settings:has(table) { max-inline-size: calc(56 * var(--qy-cai) + 2 * var(--qy-page-gutter)); }
+.ws-page-title { margin: 0; font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); font-weight: var(--qy-text-title-weight); }
+
+/* 不铺纸的表（framed={false}）：首列文字有一个面板内缘；表向两侧伸出同样的距离，首列文字与区块标题落在同一条左缘（与首页的表同一规则）。 */
+:is(.ws-overview, .ws-settings) [data-slot="table-container"][data-framed="false"] { margin-inline: calc(-1 * var(--qy-panel-padding)); }
+
+/* 集合详情：概览标签是图与信息两栏（2 : 1）；设置与同步记录是一栏（40 材）；删除在一道线之下，与表单隔开。 */
+.ws-detail-overview { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--qy-section-gap) calc(3 * var(--qy-cai)); align-items: start; padding-top: var(--qy-field-group-gap); }
+.ws-column { max-inline-size: calc(40 * var(--qy-cai)); padding-top: var(--qy-field-group-gap); }
+.ws-danger { padding-top: var(--qy-section-gap); border-top: 1px solid var(--qy-border); }
+.ws-bleed [data-slot="table-container"][data-framed="false"] { margin-inline: calc(-1 * var(--qy-panel-padding)); }
+@media (width < 64rem) { .ws-detail-overview { grid-template-columns: minmax(0, 1fr); } }

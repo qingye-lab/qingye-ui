@@ -18,7 +18,7 @@ export type UILocaleMessages = {
   showOptions: string; clearSelection: string; remove: string;
   decrease: string; increase: string; numberInput: string;
   otpLengthExceeded: (length: number) => string; tagEmpty: string; removeTag: (tag: string) => string;
-  notifications: string; closeNotification: string;
+  notifications: string; anchoredNotifications: string; closeNotification: string;
   selectDate: string; clearDate: string; clearDateTime: string; clearDateRange: string; selectDateTime: string; time: string;
   dateIncomplete: string; dateOutOfRange: string;
   timeHour: string; timeMinute: string; timeSecond: string; timeDayPeriod: string; timeAm: string; timePm: string; timeEmpty: string; timeOutOfRange: string; timeIncomplete: string;
@@ -48,7 +48,7 @@ export type UILocaleMessages = {
   // Selection and input
   selectPlaceholder: string; addTag: string; tagExists: (tag: string) => string;
   // Dates
-  selectDateRange: string; today: string; previousMonth: string; nextMonth: string; month: string; year: string; selectedDate: string;
+  selectDateRange: string; today: string; previousMonth: string; nextMonth: string; monthNavigation: string; month: string; year: string; selectedDate: string;
   startDate: string; endDate: string; dateRangePresets: string;
   // Tables
   selectedCount: (count: number) => string; sortAscending: string; sortDescending: string; selectRow: string;
@@ -56,7 +56,7 @@ export type UILocaleMessages = {
   tableNoValue: string; selectAllMatching: (count: number) => string; selectAllScoped: (label: string, scope: "page" | "filtered") => string;
   confirmContentChanged: string; confirmReviewLatest: string;
   // Data display
-  resize: string; copyCode: string; codeRegion: string;
+  resize: string; copyCode: string; codeRegion: string; codeRegionNamed: (kind: string, firstLine: string) => string;
   alertToneLabel: (tone: "info" | "warning" | "danger" | "success") => string;
   statusLabel: (status: "online" | "offline" | "warning" | "error" | "info" | "neutral" | "pending" | "in-progress" | "unknown") => string;
   toc: string;
@@ -85,7 +85,7 @@ export const zhCN: UILocale = {
     showOptions: "展开选项", clearSelection: "清除选择", remove: "移除",
     decrease: "减少", increase: "增加", numberInput: "数值输入",
     otpLengthExceeded: (length) => `最多输入 ${length} 个字符；本次输入未添加`, tagEmpty: "请输入非空标签", removeTag: (tag) => `移除 ${tag}`,
-    notifications: "操作提示", closeNotification: "关闭提示",
+    notifications: "操作提示", anchoredNotifications: "就地提示", closeNotification: "关闭提示",
     selectDate: "选择日期", clearDate: "清除日期", clearDateTime: "清除日期和时间", clearDateRange: "清除日期范围", selectDateTime: "选择日期和时间", time: "时间",
     dateIncomplete: "日期未填完整", dateOutOfRange: "日期超出可选范围",
     timeHour: "时", timeMinute: "分", timeSecond: "秒", timeDayPeriod: "上午或下午", timeAm: "上午", timePm: "下午", timeEmpty: "未填", timeOutOfRange: "时间超出可选范围", timeIncomplete: "时间未填完整",
@@ -111,13 +111,13 @@ export const zhCN: UILocale = {
     clear: "清除", cancel: "取消", confirm: "确认", apply: "应用", reset: "重置", back: "返回", search: "搜索", expand: "展开", collapse: "收起",
     theme: "主题", lightTheme: "浅色", darkTheme: "深色", systemTheme: "跟随系统",
     selectPlaceholder: "请选择", addTag: "添加标签", tagExists: (tag) => `“${tag}”已添加`,
-    selectDateRange: "选择日期范围", today: "今天", previousMonth: "上个月", nextMonth: "下个月", month: "月份", year: "年份", selectedDate: "已选择",
+    selectDateRange: "选择日期范围", today: "今天", previousMonth: "上个月", nextMonth: "下个月", monthNavigation: "切换月份", month: "月份", year: "年份", selectedDate: "已选择",
     startDate: "开始日期", endDate: "结束日期", dateRangePresets: "常用范围",
     selectedCount: (count) => `已选 ${count.toLocaleString("zh-CN")} 项`, sortAscending: "升序", sortDescending: "降序", selectRow: "选择此行", selectRowNamed: (name) => `选择“${name}”`,
     filterUnapplied: "条件尚未应用", bulkVersion: "版本", treeEmpty: "没有条目",
     tableNoValue: "无值", selectAllMatching: (count) => `选择全部 ${count.toLocaleString("zh-CN")} 项`, selectAllScoped: (label, scope) => `${label}（${scope === "page" ? "仅本页" : "全部筛选结果"}）`,
     confirmContentChanged: "对象、版本或变更已改变，请重新阅读。", confirmReviewLatest: "重新阅读",
-    resize: "调整大小", copyCode: "复制代码", codeRegion: "代码",
+    resize: "调整大小", copyCode: "复制代码", codeRegion: "代码", codeRegionNamed: (kind, firstLine) => `${kind}：${firstLine}`,
     alertToneLabel: (tone) => ({ info: "提示：", warning: "警告：", danger: "危险：", success: "成功：" })[tone],
     statusLabel: (status) => ({ online: "在线", offline: "离线", warning: "警告", error: "异常", info: "提示", neutral: "未归类", pending: "等待中", "in-progress": "进行中", unknown: "结果未知" })[status],
     toc: "本页目录",

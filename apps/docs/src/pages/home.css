@@ -1,66 +1,143 @@
 /*
- * 首页只有三件事：总纲与定位、十五法的名录、开始使用。版面按理念自己的方法排。
+ * 首页（2026-10-30 第三稿「墨阶」）。
  *
- * 一张四栏网格贯穿全页，每栏 16 材（320px）：总纲每句五个全角字，在 64px 的字阶一字 64px，正好一栏，
- * 所以总纲三句各占一栏，其下每一行都落在总纲自己的句界上（以材为祖：几何出自一个基本量，不另立栏线）。
- * - 经营位置：总纲在最上，行首对齐版心左缘；定位在左，动作从第三栏（「合宜为度」之下）起，全页没有居中的东西。
- * - 疏密有致：间距只取基础层的几级，级差一眼可辨：
- *     组内 8（--qy-field-gap：组名与角色说明、名录各行之间）
- *     并列项之间 20（--qy-field-group-gap）
- *     章内收束 40（--qy-section-gap：总纲与定位之间）
- *     页面级 80、160（章间距的 2 倍、4 倍：两组之间 80，大段之间 160）。
- *   80 与 160 是首页的预设，不由别的关系推出。
- * - 布白有用：不画卡片、盒子、章节线、图标；段与段只靠空白分开。
- * - 材有美：字阶全部取自库的命名字阶（总纲 display-xl、组名与法名 display、定位与链接 reading、角色说明 support）。
- *   法名与组名同阶，靠字重分层：组名取字阶自带的粗，法名取常规（墨分五色的另一用法：不加字号，层级交给字重与墨色）。
- * - 同一行里字号不同的内容，按首行的行中线对齐，不按拉丁基线（本库的对齐规则）。
+ * 画面只靠尺度、墨与地：
+ *   海报   第一屏（视口高减页头，至多 40 材）。总纲三句细字重 128px，三行依次焦 88、浓 66、重 50；
+ *          说明与动作一小块，落在右下，与末行同一条下缘。大块与小块之比约 8:1。
+ *   示例   示例一段整幅铺一层清染（与站点同一种明暗，不翻转：窗口里的应用跟随站点明暗，翻转的底会让它像一张贴上去的截图），上下各 8 材。
+ *   总纲   三条名与释义：名列 16 材，释义 36 材以内。
+ *   开始   大号安装命令。
+ * 段间 8 材（taste 的 120–240 之间），段内用库的关系间距。上列材数、海报占满一屏、深地与名列宽都是首页预设。
+ * 不用：卡片、色块、阴影、渐变、入场与滚动动效、编号、眉题。
  */
 .home {
-  --home-col: calc(16 * var(--qy-cai));
+  --home-gap: calc(8 * var(--qy-cai));
+  /* 总纲的海报尺度是首页自己的预设，不改库的公共档：取 display-xl（64 / 20 分）的两倍字身（128px），
+   * 行高 1.7 倍（34 分 = 136px，字身的 1.06 倍，三行叠成一块），细字重 300（海报尺度下常规字重的笔画显得粗重）。 */
+  --home-motto-size: calc(var(--qy-text-display-xl-size) * 2);
+  --home-motto-leading: calc(var(--qy-text-display-xl-leading) * 1.7);
   color: var(--qy-foreground);
   outline: none;
-  padding-top: calc(4 * var(--qy-section-gap));
-  padding-bottom: calc(4 * var(--qy-section-gap));
   text-spacing-trim: trim-start;
 }
-:where(.home) :where(h1, h2, p, ul, li) { margin: 0; padding: 0; }
-.home ::selection { background: var(--qy-primary); color: var(--qy-primary-foreground); }
+:where(.home) :where(h1, h2, h3, p, dl, dt, dd, ul, li) { margin: 0; padding: 0; }
+.home p { text-wrap: pretty; }
+/* 章题与海报同一种声音：常规字重。粗字放在 40px 的汉字上显得笨重，层级已经由尺度给出。 */
+.home h2 { font-weight: var(--qy-weight-regular); }
 
-/* 四栏，每栏最宽 16 材；版心不足 64 材（视口窄于 85rem）时各栏同比收窄，不撑出横向滚动。 */
-.home-row { display: grid; grid-template-columns: repeat(4, minmax(0, var(--home-col))); }
-/* 各栏之间没有栏距：栏就是一句总纲的宽。较长的内容（英文长名）右侧留 20，不贴到下一栏。 */
-.home-methods > div, .home-names > li { padding-inline-end: var(--qy-field-group-gap); }
-
-/* ─── 总纲与定位 ───────────────────────────────────────── */
-/* 总纲三句各占一栏，一行不折。英文一句比一栏宽，三句各占一行。 */
-.home-motto { display: grid; grid-template-columns: repeat(3, var(--home-col)); }
-.home-motto span { white-space: nowrap; }
-:lang(en) .home-motto { grid-template-columns: minmax(0, 1fr); }
-:lang(en) .home-motto span { white-space: normal; }
-/* 版心放不下三栏（视口窄于 65rem = 3 × 20rem + 版心两侧 80px）时三句各占一行，不撑出横向滚动。 */
-@media (width < 65rem) {
-  .home-motto { grid-template-columns: minmax(0, 1fr); }
-  .home-motto span { white-space: normal; }
+/* ─── 海报 ─────────────────────────────────────────────── */
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: var(--home-gap);
+  row-gap: var(--qy-section-gap);
+  min-block-size: min(calc(100svh - var(--docs-header-height)), calc(40 * var(--qy-cai)));
+  padding-block: calc(5 * var(--qy-cai)) calc(4 * var(--qy-cai));
 }
-/* 定位与动作在同一行，彼此按行中线对齐；定位两行占一二栏，动作从第三栏起。 */
-.home-intro { margin-top: var(--qy-section-gap); align-items: center; }
-.home-intro-text { grid-column: 1 / 3; }
-.home-actions { grid-column: 3 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }
+/* 大块压住左上，小块在右下应答：总纲靠上，说明靠下。 */
+.home-motto { align-self: start; }
+.home-motto { font-size: var(--home-motto-size); line-height: var(--home-motto-leading); font-weight: 300; }
+.home-motto span { display: block; white-space: nowrap; }
+/* 墨分五色：三句的先后用墨的浓淡表达。字是不透明的墨与纸调和（与库的文字色同一写法），任何底上读出来都是同一级。 */
+.home-motto span:nth-child(1) { color: var(--qy-foreground); }
+.home-motto span:nth-child(2) { color: var(--qy-foreground-muted); }
+.home-motto span:nth-child(3) { color: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), var(--qy-paper)); }
+/* 右下的一小块：下缘与总纲末行的字身下缘对齐（减去末行行高多出的半个行距）。 */
+.home-intro {
+  display: grid;
+  justify-items: start;
+  gap: var(--qy-fen);
+  max-inline-size: calc(20 * var(--qy-cai));
+  padding-block-end: calc((var(--home-motto-leading) - var(--home-motto-size)) / 2);
+}
+.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); margin-top: var(--qy-field-group-gap); }
+/* 英文一句是三到四个词，按汉字的字身排会折成五行：取总纲字身的 0.6（约 77px），每句仍占一行。 */
+:lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.6); line-height: calc(var(--home-motto-leading) * 0.6); }
 
-/* ─── 器用六法 · 表达九法 ──────────────────────────────── */
-/* 组名在第一栏、角色说明在其下；法名在二至四栏，三个一排，各栏用同一条栏线（subgrid）。 */
-.home-methods { align-items: start; }
-.home-role { margin-top: var(--qy-field-gap); }
-.home-names { grid-column: 2 / -1; display: grid; grid-template-columns: subgrid; row-gap: var(--qy-field-gap); list-style: none; }
-.home-names > li { font-weight: var(--qy-weight-regular); }
-/* 法名是名录，不是行文里的链接：平时不画下划线，悬停与键盘聚焦时由库链接自己的规则显出（线随之而现，状态可见）。 */
-.home-names a { text-decoration-color: transparent; }
-.home-hero + .home-methods { margin-top: calc(4 * var(--qy-section-gap)); }
-.home-methods + .home-methods { margin-top: calc(2 * var(--qy-section-gap)); }
+/* ─── 示例 ─────────────────────────────────────────────── */
+/* 整幅一层清染（内嵌承载面，透明叠在页面底上）：用面的一级分出这一段，不画线、不翻转明暗。内容仍在站框里。 */
+.home-field {
+  padding-block: var(--home-gap);
+  background: var(--qy-surface-inset);
+}
+.home-field-head { display: grid; gap: var(--qy-field-gap); max-inline-size: var(--qy-prose-measure); margin-bottom: var(--qy-section-gap); }
+
+/* 窗口：一道线围出，顶栏与框之间同一道线；框内圆角由外框裁出。 */
+.home-window {
+  display: grid;
+  grid-template-rows: auto calc(38 * var(--qy-cai)) auto;
+  overflow: hidden;
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-panel);
+  background: var(--qy-surface);
+}
+.home-window-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  padding: var(--qy-field-gap);
+  border-bottom: 1px solid var(--qy-border);
+}
+.home-window-axes { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); }
+.home-dot { display: inline-block; inline-size: calc(2 * var(--qy-fen)); block-size: calc(2 * var(--qy-fen)); border-radius: 50%; margin-inline-end: var(--qy-fen); flex: none; }
+.home-window-frame { display: block; inline-size: 100%; block-size: 100%; border: 0; background: var(--qy-background); }
+.home-window-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--qy-fen) var(--qy-field-group-gap);
+  padding: var(--qy-field-gap) var(--qy-panel-padding-sm);
+  border-top: 1px solid var(--qy-border);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+}
+
+/* ─── 总纲 ─────────────────────────────────────────────── */
+.home-principles { padding-block-start: var(--home-gap); }
+.home-principle-list { display: grid; gap: calc(3 * var(--qy-cai)); margin-top: var(--qy-section-gap); }
+.home-principle {
+  display: grid;
+  grid-template-columns: minmax(0, calc(16 * var(--qy-cai))) minmax(0, calc(36 * var(--qy-cai)));
+  column-gap: calc(4 * var(--qy-cai));
+  align-items: baseline;
+}
+.home-principle dt {
+  font-size: var(--qy-text-display-size);
+  line-height: var(--qy-text-display-leading);
+  font-weight: var(--qy-weight-regular);
+}
+.home-principle dd { display: grid; gap: var(--qy-field-gap); }
+.home-principle-text { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
+.home-principle-source { font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
+.home-aside { display: block; font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); font-weight: var(--qy-weight-regular); color: var(--qy-foreground-muted); }
+.home-more { display: inline-block; margin-top: var(--qy-section-gap); font-size: var(--qy-text-reading-size); }
 
 /* ─── 开始使用 ─────────────────────────────────────────── */
-/* 标题、命令、链接三者行中线对齐。命令占二、三栏，右侧让出 40，与链接之间有一个章内的间隔。 */
-.home-methods + .home-start { margin-top: calc(4 * var(--qy-section-gap)); }
-.home-start { align-items: center; }
-.home-command { grid-column: 2 / 4; min-width: 0; padding-inline-end: var(--qy-section-gap); }
-.home-start-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--qy-field-group-gap); }
+.home-start { display: grid; justify-items: start; gap: var(--qy-section-gap); padding-block: var(--home-gap); }
+/* 命令是这一段的画面：代码字放大到 title 档；仍是库的 CodeBlock（复制、可访问名称不变）。 */
+.home-install { inline-size: min(100%, calc(32 * var(--qy-cai))); }
+.home-install pre, .home-install code { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); }
+.home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap) var(--qy-field-group-gap); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
+
+/* ─── 窄桌面与窄屏 ─────────────────────────────────────── */
+/* 两栏要放得下：一句总纲 640 + 栏距 160 + 说明 400 + 两侧留白 80 = 1280px（80rem）。不足时上下排。 */
+@media (width < 80rem) {
+  .home-hero { grid-template-columns: minmax(0, 1fr); align-items: start; min-block-size: 0; padding-block: calc(5 * var(--qy-cai)) var(--home-gap); }
+  .home-intro { padding-block-end: 0; }
+  .home-principle { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-field-gap); }
+}
+@media (width < 48rem) {
+  .home { --home-gap: calc(5 * var(--qy-cai)); }
+  /* 一句五字要放进窄屏（390 宽的版心 310px）：字身取总纲字身的 0.45（约 58px，五字 288px），行高同比。 */
+  .home-motto { font-size: calc(var(--home-motto-size) * 0.45); line-height: calc(var(--home-motto-leading) * 0.45); }
+  :lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.3); line-height: calc(var(--home-motto-leading) * 0.3); }
+  :lang(en) .home-motto span { white-space: normal; }
+  .home-hero { padding-block-start: calc(3 * var(--qy-cai)); }
+  .home-window { grid-template-rows: auto calc(30 * var(--qy-cai)) auto; }
+  .home-install pre, .home-install code { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
+}

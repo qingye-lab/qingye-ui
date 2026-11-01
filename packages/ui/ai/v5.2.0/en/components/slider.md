@@ -176,7 +176,7 @@ const control = <SliderControl><SliderTrack><SliderIndicator /><SliderThumb /></
 // 滑块的工作高度跟随填值控件角色层；抓手跟随标签文字，密度不改它。
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-section-gap)">
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-section-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>

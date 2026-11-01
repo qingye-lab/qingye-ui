@@ -11,7 +11,7 @@ function Picker() {
 
 export default function Demo() {
   return (
-    <FieldGroup className="grid w-full grid-cols-2 items-start gap-(--qy-field-group-gap)">
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
       {(["default", "compact"] as const).map((density) => (
         <div data-density={density} key={density}>
           <Field>

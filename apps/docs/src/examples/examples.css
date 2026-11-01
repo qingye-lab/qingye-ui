@@ -1,0 +1,121 @@
+/*
+ * 示例总览与查看（2026-10-30 重做）。
+ *
+ * 总览与首页同一种语言：大标题常规字重，每个示例一段——真实画面整幅占满站框（2:1），是这一段的主体；
+ * 其下一行说明三栏：名称与类型 16 材、说明与组件（正文行长以内）、动作在末端。段与段之间 8 材。
+ * 画面是裸框路由在 iframe 里按桌面宽 1440 渲染、缩放到画面实际宽度，载入前铺一层清染，载入后显出。
+ * 16 材、2:1、8 材与 1440 都是预设。
+ */
+.examples { padding-block: calc(5 * var(--qy-cai)) calc(8 * var(--qy-cai)); outline: none; }
+:where(.examples) :where(h1, h2, p, ul, li) { margin: 0; padding: 0; }
+:where(.examples) :where(ul) { list-style: none; }
+.examples h1, .examples h2 { font-weight: var(--qy-weight-regular); }
+.examples-head { display: grid; gap: var(--qy-field-gap); max-inline-size: var(--qy-prose-measure); }
+.examples-list { display: grid; gap: calc(8 * var(--qy-cai)); margin-top: calc(4 * var(--qy-cai)); }
+.examples-item { display: grid; gap: var(--qy-section-gap); }
+
+.examples-preview {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-panel);
+  background: var(--qy-surface-inset);
+  outline: none;
+}
+.examples-preview:focus-visible { box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring); }
+/* iframe 按桌面宽 1440 渲染（高随画面比例），再缩放到画面的实际宽度；比例由脚本按画面宽写入 --preview-scale。 */
+.examples-preview iframe {
+  position: absolute;
+  inset: 0;
+  inline-size: 1440px;
+  block-size: calc(100% / var(--preview-scale, 0.5));
+  border: 0;
+  transform: scale(var(--preview-scale, 0.5));
+  transform-origin: 0 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--qy-duration-base) var(--qy-ease-out);
+}
+.examples-preview[data-loaded] iframe { opacity: 1; }
+/* 悬停时画面整体铺一级悬停面，读来是「可以进去」；不放大、不加阴影。只在有悬停能力的指针上。 */
+.examples-preview::after { content: ""; position: absolute; inset: 0; background: transparent; transition: background-color var(--qy-duration-fast) var(--qy-ease-out); }
+@media (hover: hover) { .examples-preview:hover::after { background: var(--qy-surface-hover); } }
+@media (prefers-reduced-motion: reduce) { .examples-preview iframe { transition: none; } }
+
+.examples-caption {
+  display: grid;
+  grid-template-columns: minmax(0, calc(16 * var(--qy-cai))) minmax(0, var(--qy-prose-measure)) auto;
+  column-gap: calc(4 * var(--qy-cai));
+  row-gap: var(--qy-field-group-gap);
+  align-items: start;
+}
+.examples-name-block { display: grid; gap: var(--qy-fen); }
+.examples-about { display: grid; gap: var(--qy-field-group-gap); }
+.examples-uses { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-body-size); line-height: var(--qy-text-body-leading); }
+.examples-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: var(--qy-field-gap); }
+@media (width < 72rem) {
+  .examples-caption { grid-template-columns: minmax(0, 1fr); }
+  .examples-actions { justify-content: start; }
+}
+@media (width < 48rem) {
+  .examples-preview { aspect-ratio: 4 / 3; }
+  .examples-list { gap: calc(5 * var(--qy-cai)); }
+}
+
+/* 查看：栏在站框里，应用铺满宽度；栏与应用之间一道线，应用自己在框内滚动。 */
+.example-view { display: grid; grid-template-rows: auto minmax(0, 1fr); block-size: calc(100dvh - var(--docs-header-height, 0px)); }
+.example-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  padding-block: var(--qy-field-gap);
+}
+.example-uses { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); }
+.example-uses ul { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-gap); margin: 0; padding: 0; list-style: none; }
+.example-frame { min-block-size: 0; overflow: hidden; border-top: 1px solid var(--qy-border); background: var(--qy-background); }
+
+/* ─── 会议室预约 ─────────────────────────────────────── */
+/* 日常应用：一条顶栏，正文在页中——左侧步骤（同时是摘要），右侧当前这一步。正文 38 材（预设）。 */
+.booking { display: flex; flex-direction: column; block-size: 100%; overflow: auto; background: var(--qy-background); color: var(--qy-foreground); }
+.booking-bar { display: flex; align-items: center; gap: var(--qy-field-gap); min-block-size: var(--qy-row-default); padding: var(--qy-field-gap) var(--qy-panel-padding); border-bottom: 1px solid var(--qy-border); background: var(--qy-surface); }
+.booking-mark { display: inline-grid; place-items: center; inline-size: var(--qy-control-xs); block-size: var(--qy-control-xs); border-radius: var(--qy-radius-xs); background: var(--qy-primary); color: var(--qy-primary-foreground); font-size: var(--qy-text-support-size); font-weight: var(--qy-weight-semibold); }
+.booking-main {
+  display: grid;
+  grid-template-columns: calc(9 * var(--qy-cai)) minmax(0, calc(28 * var(--qy-cai))) minmax(calc(16 * var(--qy-cai)), calc(24 * var(--qy-cai)));
+  justify-content: center;
+  align-items: start;
+  gap: calc(3 * var(--qy-cai));
+  inline-size: 100%;
+  padding: calc(3 * var(--qy-cai)) var(--qy-panel-padding);
+  outline: none;
+}
+.booking-steps { position: sticky; top: calc(3 * var(--qy-cai)); padding-block-start: var(--qy-panel-padding); }
+.booking-panel { padding: var(--qy-panel-padding); border: 1px solid var(--qy-border); border-radius: var(--qy-radius-panel); background: var(--qy-surface); }
+.booking-stack { display: grid; gap: var(--qy-field-group-gap); }
+.booking-stack > h1 { outline: none; }
+.booking-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--qy-field-group-gap); align-items: start; }
+.booking-rooms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--qy-field-group-gap); }
+.booking-capacity { margin-inline-start: var(--qy-field-gap); color: var(--qy-foreground-muted); font-weight: var(--qy-weight-regular); }
+.booking-narrow { max-inline-size: calc(10 * var(--qy-cai)); }
+.booking-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--qy-field-gap); padding-top: var(--qy-field-gap); }
+/* 当天占用：库的 Heatmap，不铺纸（framed={false}），只陈述事实，不是一张卡。 */
+.booking-schedule { display: grid; gap: var(--qy-field-group-gap); align-content: start; padding-block-start: var(--qy-panel-padding); }
+@media (width < 80rem) {
+  .booking-main { grid-template-columns: calc(9 * var(--qy-cai)) minmax(0, calc(28 * var(--qy-cai))); }
+  .booking-schedule { grid-column: 2; }
+}
+@media (width < 48rem) {
+  .booking-main { grid-template-columns: minmax(0, 1fr); }
+  .booking-schedule { grid-column: auto; }
+  .booking-steps { position: static; }
+  .booking-row, .booking-rooms { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 示例名是去往示例的链接；与首页方法名同一做法：平时不画下划线，悬停与聚焦时显出。 */
+.examples-name { color: inherit; text-decoration: underline 1px transparent; text-underline-offset: 0.2em; border-radius: var(--qy-radius-xs); outline: none; transition: text-decoration-color var(--qy-duration-fast) var(--qy-ease-out); }
+.examples-name:hover { text-decoration-color: currentColor; }
+.examples-name:focus-visible { text-decoration-color: currentColor; box-shadow: inset 0 calc(-1 * var(--qy-focus-quiet-width)) 0 var(--qy-ring); }

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
-Source SHA-256: 7a498c39a975b7f1c6f86999f385d2da3c64d6bf77d572cdf64e0959a2a575ab
+Source SHA-256: b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50
 
 补充可恢复、非关键的操作事实，保持当前工作不中断。
 

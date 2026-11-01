@@ -49,6 +49,8 @@ test("a custom filter replaces the default", async () => {
   render(<Palette filter={(entry, query) => entry.value.startsWith(query)} />);
   await userEvent.type(screen.getByRole("combobox"), "出");
   expect(screen.getByRole("status")).toHaveTextContent("没有这个命令");
+  // 播报在 listbox 之外：listbox 只含 option 与 group（aria-required-children）。
+  expect(screen.getByRole("listbox").querySelector("[role=status]")).toBeNull();
   expect(screen.queryAllByRole("option")).toHaveLength(0);
 });
 
@@ -173,4 +175,11 @@ test("closeOnSelect={false} keeps the dialog open; Escape closes it; reopening s
   await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   await userEvent.click(screen.getByRole("button", { name: "打开" }));
   expect(await screen.findByRole("combobox")).toHaveValue("");
+});
+
+test("the empty state renders its children once, outside the listbox, so interactive content is not duplicated", async () => {
+  render(<Command defaultQuery="zzz"><CommandInput aria-label="搜索" /><CommandList aria-label="命令"><CommandItem value="a">a</CommandItem><CommandEmpty>没有结果 <button type="button">新建</button></CommandEmpty></CommandList></Command>);
+  expect(await screen.findByRole("status")).toHaveTextContent("没有结果");
+  expect(screen.getAllByRole("button", { name: "新建" })).toHaveLength(1);
+  expect(screen.getByRole("listbox").querySelector("[data-slot=command-empty], button")).toBeNull();
 });

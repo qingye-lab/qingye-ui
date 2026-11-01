@@ -25,8 +25,10 @@ test("direction follows the locale code, an explicit dir wins, and nesting inher
 
 test("without a platform text direction the minimal table decides, script subtag first", () => {
   const original = Intl.Locale.prototype;
-  vi.spyOn(original, "getTextInfo" as never).mockImplementation((() => ({})) as never);
-  vi.spyOn(original, "textInfo" as never, "get").mockImplementation((() => undefined) as never);
+  // 平台给方向的方式有两种：较新的 getTextInfo()，与较早的 textInfo 访问器（例如 Node 22 只有后者）。
+  // 只拦截当前平台真有的那一种——spyOn 一个不存在的属性会直接抛错，测试就没测到回退表。
+  if ("getTextInfo" in original) vi.spyOn(original, "getTextInfo" as never).mockImplementation((() => ({})) as never);
+  if ("textInfo" in original) vi.spyOn(original, "textInfo" as never, "get").mockImplementation((() => undefined) as never);
   expect(getLocaleDirection("ar")).toBe("rtl"); expect(getLocaleDirection("fa-IR")).toBe("rtl"); expect(getLocaleDirection("en")).toBe("ltr");
   expect(getLocaleDirection("ku-Arab")).toBe("rtl"); expect(getLocaleDirection("ku-Latn")).toBe("ltr"); expect(getLocaleDirection("ku")).toBe("ltr");
 });

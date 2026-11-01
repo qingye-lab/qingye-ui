@@ -101,7 +101,7 @@ export default function Demo() {
   const headings = useTocHeadings(containerRef);
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
-    <Toc items={headings} current={current} className="w-40 shrink-0" />
+    <Toc aria-label="示例文章目录" items={headings} current={current} className="w-40 shrink-0" />
     <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";

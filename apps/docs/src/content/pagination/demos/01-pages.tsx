@@ -4,5 +4,5 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
+  return <PaginationPattern aria-label="分页：已知总数" totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
 }
