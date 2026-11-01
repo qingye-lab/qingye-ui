@@ -59,6 +59,9 @@ export type UILocaleMessages = {
   toc: string;
   unreadCount: (count: number) => string;
   resultCount: (count: number) => string;
+  avatarGroupMore: (count: number, names: readonly string[]) => string;
+  imagePreviewPrevious: string; imagePreviewNext: string; imagePreviewPosition: (index: number, total: number) => string;
+  imagePreviewZoomIn: string; imagePreviewZoomOut: string; imagePreviewZoomFit: string; imagePreviewFailed: string;
   cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string;
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
@@ -119,6 +122,9 @@ export const zhCN: UILocale = {
     toc: "本页目录",
     unreadCount: (count) => `${count} 条未读`,
     resultCount: (count) => `找到 ${count} 项`,
+    avatarGroupMore: (count, names) => `另有 ${count} 位：${names.join("、")}`,
+    imagePreviewPrevious: "上一张", imagePreviewNext: "下一张", imagePreviewPosition: (index, total) => `第 ${index} 张，共 ${total} 张`,
+    imagePreviewZoomIn: "放大", imagePreviewZoomOut: "缩小", imagePreviewZoomFit: "适应窗口", imagePreviewFailed: "图片加载失败",
     cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,

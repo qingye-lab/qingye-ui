@@ -8,7 +8,7 @@ Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
 同一身份视觉样本的图片与回退。
 
 ## Decision
-不要虚构姓名或让 initials 代替可访问名称。
+不要虚构姓名或让 initials 代替可访问名称。头像本身不可交互；要点击，就用 Button（或链接）包住它：可访问名称仍来自头像的 label，焦点、键盘和禁用状态归外层，头像不加 tabindex、不加 onClick。要换名称时给外层 aria-label。一组相关的人用 AvatarGroup。
 
 ## Use and ownership
 - 需要一张有名称的身份图像或明确回退。
@@ -96,6 +96,28 @@ export default function Demo() {
     <Avatar label="李一鸣"><AvatarFallback>李</AvatarFallback></Avatar>
     <Avatar label="Wen Zhang"><AvatarFallback>W</AvatarFallback></Avatar>
     <Avatar label="有头像的成员"><AvatarImage src={sample} /><AvatarFallback>有</AvatarFallback></Avatar>
+  </Inline>;
+}
+```
+
+### 可点击的头像
+Source: apps/docs/src/content/avatar/demos/02-interactive.tsx
+```tsx
+import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Inline } from "@qingye_lab/ui/components/layout";
+import { Link } from "@qingye_lab/ui/components/link";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "可点击的头像", titleEn: "A clickable avatar" } satisfies DemoMeta;
+
+// 头像本身不可交互：点击是外层按钮或链接的事。名称来自头像的 label（读作「陈致远」），
+// 外层需要说明动作时再给 aria-label（此时它取代头像的名称）。
+export default function Demo() {
+  return <Inline gap="panel">
+    <Button variant="quiet" shape="icon"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></Button>
+    <Button variant="quiet" shape="icon" aria-label="打开李一鸣的资料"><Avatar label="李一鸣"><AvatarFallback>李</AvatarFallback></Avatar></Button>
+    <Link href="#profile" className="inline-flex rounded-full"><Avatar label="王一"><AvatarFallback>王</AvatarFallback></Avatar></Link>
   </Inline>;
 }
 ```

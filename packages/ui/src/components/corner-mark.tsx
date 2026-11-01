@@ -5,12 +5,36 @@ import { assertTone, type Tone } from "../tone";
 
 /** 与 Badge、StatusDot、Alert 同一组状态类别（tone.ts），另加不施彩的 neutral。 */
 export type CornerMarkTone = "neutral" | Tone;
+/** 钉在宿主的哪一角。用逻辑方向（start / end）：从右向左的排版里 end 自然落在左边，不必调用方判断。 */
+export type CornerMarkPlacement = "top-end" | "bottom-end" | "top-start" | "bottom-start";
+/** 宿主的外形：方形宿主（图标、按钮）钉在盒角；圆形宿主（头像）钉在圆周上，见下方定位说明。 */
+export type CornerMarkHostShape = "square" | "circle";
 /** `label` 是读屏听到的全部：计数写进去，并写真实数（「142 条未读」），不写截断后的「99+」——可见的数字只是它的缩写。 */
-type CornerMarkCommon = { children: React.ReactNode; tone?: CornerMarkTone; className?: string; wrapperClassName?: string };
+type CornerMarkCommon = { children: React.ReactNode; tone?: CornerMarkTone; placement?: CornerMarkPlacement; hostShape?: CornerMarkHostShape; className?: string; wrapperClassName?: string };
 export type CornerMarkProps = CornerMarkCommon & (
   | { count: number; max?: number; dot?: never; label: string }
   | { dot: true; count?: never; max?: never; label: string }
 );
+
+/* 四角的定位：角标自身盒的中心落在锚点上（translate 各 50%）。
+ * - 方形宿主：锚点是宿主盒的角。
+ * - 圆形宿主：盒角在圆外，角标会悬空脱开宿主。锚点改为圆周上 45° 的点：它到盒边的距离是 r(1-√2/2)，
+ *   占盒边长（2r）的 (1-√2/2)/2 ≈ 14.64%，所以 top / bottom / start / end 各取 14.64%。这是几何推出的比例，不是挑选的值。
+ * - RTL：start / end 随书写方向换边，水平位移的方向也必须随之反向（外移），所以每条都带 rtl: 反向。 */
+const placements: Record<CornerMarkHostShape, Record<CornerMarkPlacement, string>> = {
+  square: {
+    "top-end": "top-0 end-0 translate-x-1/2 -translate-y-1/2 rtl:-translate-x-1/2",
+    "bottom-end": "bottom-0 end-0 translate-x-1/2 translate-y-1/2 rtl:-translate-x-1/2",
+    "top-start": "top-0 start-0 -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2",
+    "bottom-start": "bottom-0 start-0 -translate-x-1/2 translate-y-1/2 rtl:translate-x-1/2",
+  },
+  circle: {
+    "top-end": "top-[14.64%] end-[14.64%] translate-x-1/2 -translate-y-1/2 rtl:-translate-x-1/2",
+    "bottom-end": "bottom-[14.64%] end-[14.64%] translate-x-1/2 translate-y-1/2 rtl:-translate-x-1/2",
+    "top-start": "top-[14.64%] start-[14.64%] -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2",
+    "bottom-start": "bottom-[14.64%] start-[14.64%] -translate-x-1/2 translate-y-1/2 rtl:translate-x-1/2",
+  },
+};
 
 /* 填充取各类别的文字色（-foreground），数字用纸色：-foreground 按「纸上 4.5:1」定明度，反过来纸色字压在它上面是同一对比。
  * danger 例外，用实底危险填充与它配对的 on-fill 字（Button solid danger 的同一对 token）。 */
@@ -32,6 +56,7 @@ const tones: Record<CornerMarkTone, string> = {
  * - 以材为祖：圆点边长复用 --qy-status-dot-size（2 分）；计数档外高 4 分，与 text-dense
  *   的行高相同，文字在盒内天然居中，不必再算一次纵向留白。
  * - 应物象形：圆以标点——角标只标记「有新东西」或「这是谁」，不是可操作的范围，取满圆。
+ * - 位置：默认右上（top-end）；placement 可换到四角，在线点常放右下。圆形宿主传 hostShape="circle"。
  * - 定位：四舍五入到整像素是「材有美」的要求。偏移量用角标自身盒的一半（translate 50%），
  *   盒边长来自材分（8px、16px，偶数），一半仍是整数，不会落在半像素上。
  * - 纸色圈：角标与宿主贴近时用一圈纸色隔开（ring-(--qy-surface)，2px，和图表标记点的纸色
@@ -41,7 +66,7 @@ const tones: Record<CornerMarkTone, string> = {
  *   没有脱离类别的彩色（NG10）。
  */
 export function CornerMark(props: CornerMarkProps) {
-  const { children, tone = "neutral", className, wrapperClassName, label } = props;
+  const { children, tone = "neutral", placement = "top-end", hostShape = "square", className, wrapperClassName, label } = props;
   const isDot = "dot" in props && props.dot === true;
   const count = "count" in props ? props.count : undefined;
   const max = "max" in props && props.max ? props.max : 99;
@@ -59,8 +84,10 @@ export function CornerMark(props: CornerMarkProps) {
         <span
           aria-hidden="true"
           data-slot="corner-mark-badge"
+          data-placement={placement}
           className={cn(
-            "absolute top-0 end-0 inline-flex shrink-0 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-dense numeric font-medium ring-2 ring-(--qy-surface)",
+            "absolute inline-flex shrink-0 items-center justify-center rounded-full text-dense numeric font-medium ring-2 ring-(--qy-surface)",
+            placements[hostShape][placement],
             isDot ? "size-(--qy-status-dot-size)" : "h-(--qy-glyph-box) min-w-(--qy-glyph-box) px-(--qy-space-1)",
             tones[tone],
             className,

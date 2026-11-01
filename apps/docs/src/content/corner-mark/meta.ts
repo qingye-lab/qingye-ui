@@ -22,8 +22,8 @@ export default {
   "api": [
     {
       "name": "CornerMark",
-      "description": "包裹宿主内容，角标钉在宿主的右上角。",
-      "descriptionEn": "Wraps the host content; the mark is pinned to the host's top-right corner.",
+      "description": "包裹宿主内容，角标钉在宿主的一角（默认行末上角）。",
+      "descriptionEn": "Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).",
       "props": [
         {
           "name": "count / max",
@@ -48,6 +48,13 @@ export default {
           "type": "\"neutral\" | \"success\" | \"danger\"",
           "description": "默认焦墨；success、danger 是已有语义类别，没有脱离类别的彩色。",
           "descriptionEn": "Defaults to ink; success and danger are existing semantic categories, never hue without meaning."
+        },
+        {
+          "name": "placement / hostShape",
+          "type": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\" / \"square\" | \"circle\"",
+          "default": "\"top-end\" / \"square\"",
+          "description": "角用逻辑方向（end 是行末，从右向左排版时自动在左），不用 left/right。宿主是圆形（头像）时设 hostShape=\"circle\"，角标落在圆周上 45° 的点，否则会悬在圆外。",
+          "descriptionEn": "Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape=\"circle\" so the mark sits on the circle at 45 degrees instead of floating outside it."
         },
         {
           "name": "className / wrapperClassName",
