@@ -41,6 +41,17 @@ test("opens as a named, described, non-modal dialog and reports the step positio
   expect(screen.getByRole("button", { name: "甲" }).closest("[aria-hidden=true]")).toBeNull();
 });
 
+test("a single step shows neither a position counter nor a previous button, and still finishes", async () => {
+  const user = userEvent.setup();
+  const onFinish = vi.fn();
+  render(<Page steps={[steps[0]!]} onFinish={onFinish} />);
+  const popup = await dialog("第一处");
+  expect(popup).not.toHaveTextContent("1 / 1");
+  expect(screen.queryByRole("button", { name: "上一步" })).toBeNull();
+  await user.click(screen.getByRole("button", { name: "完成" }));
+  expect(onFinish).toHaveBeenCalledOnce();
+});
+
 test("focus moves into the popup when it opens", async () => {
   render(<Page />);
   const popup = await dialog();

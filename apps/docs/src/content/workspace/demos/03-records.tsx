@@ -57,7 +57,7 @@ export function RecordsWorkspace({ embedded = false, insideMain = false }: { emb
           <Stack gap="panel" className="p-(--qy-page-gutter)">
             <Inline gap="panel"><SearchInput aria-label="搜索采集记录" placeholder="搜索记录或负责人" value={query} onValueChange={next => {
               setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));
-            }} controlClassName="w-full sm:max-w-[calc(16*var(--qy-cai))]" /><span className="text-support text-muted-foreground">已选 {selectedCount} 份（含其他页）</span></Inline>
+            }} controlClassName="w-full sm:max-w-[calc(16*var(--qy-cai))]" />{selectedCount > 0 && <span className="text-support text-muted-foreground">已选 {selectedCount} 份（含其他页）</span>}</Inline>
             <div className={details ? "grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]" : "min-w-0"}>
               <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}
                 pagination={{ pageSizeOptions: [10, 20, 50], "aria-label": "采集记录分页" }}

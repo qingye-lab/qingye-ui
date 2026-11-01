@@ -307,3 +307,16 @@ test("min and max bound period endpoints by overlap, and an out-of-bounds period
   expect(screen.getByRole("button", { name: "February 2026" })).toHaveAttribute("aria-disabled", "true");
   expect(screen.getByRole("button", { name: "October 2026" })).toHaveAttribute("aria-disabled", "true");
 });
+
+test("empty native ends show a locale hint each, and the caller's placeholder wins", () => {
+  const { container, rerender } = render(<UILocaleProvider locale={enUS}><DateRangePicker /></UILocaleProvider>);
+  const hints = () => Array.from(container.querySelectorAll("[data-slot=input-hint]")).map((node) => node.textContent);
+  expect(hints()).toEqual(["Start date", "End date"]);
+  rerender(<UILocaleProvider locale={enUS}><DateRangePicker inputProps={{ placeholder: "From" }} endInputProps={{ placeholder: "To" }} /></UILocaleProvider>);
+  expect(hints()).toEqual(["From", "To"]);
+});
+
+test("a filled native range carries no hint", () => {
+  const { container } = render(<UILocaleProvider locale={enUS}><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} /></UILocaleProvider>);
+  expect(container.querySelectorAll("[data-slot=input-hint]")).toHaveLength(0);
+});

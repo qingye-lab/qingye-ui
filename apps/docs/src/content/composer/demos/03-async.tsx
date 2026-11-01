@@ -15,7 +15,7 @@ const mention: ComposerTrigger = {
 
 export default function Demo() {
   return <Composer className="w-full">
-    <ComposerInput aria-label="消息" placeholder="@ 后稍候显示结果" triggers={[mention]} />
+    <ComposerInput aria-label="消息" placeholder="@ 提及" triggers={[mention]} />
     <ComposerToolbar><ComposerSubmit /></ComposerToolbar>
   </Composer>;
 }

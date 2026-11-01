@@ -261,13 +261,13 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
           if (event.currentTarget.contains(event.relatedTarget as Node | null)) return;
           setFocusWithin(false);
         }}>
-        <Input {...startRest} {...entryKind} onKeyDown={handleKeyDown("from")} form={form} disabled={disabled} readOnly={readOnly} ref={setStartRef} unstyled value={fromTyping.shown}
+        <Input {...startRest} {...entryKind} placeholder={startRest.placeholder ?? messages.startDate} onKeyDown={handleKeyDown("from")} form={form} disabled={disabled} readOnly={readOnly} ref={setStartRef} unstyled value={fromTyping.shown}
           {...named(wiring.id, messages.startDate)} {...(startRest["aria-label"] ? { "aria-label": startRest["aria-label"] } : {})} {...(startRest["aria-labelledby"] ? { "aria-labelledby": startRest["aria-labelledby"] } : {})} aria-invalid={invalid ? true : startRest["aria-invalid"]}
           controlClassName={cn("min-w-0 flex-1", startRest.controlClassName)} className={withHiddenIndicator(startRest.className)}
           onChange={handleEntry("from")} onBlur={handleBlur("from")}
           render={nameless(inputRender)} />
         <InputGroupAddon aria-hidden="true" className="px-0">—</InputGroupAddon>
-        <Input nativeInput {...endRest} {...entryKind} onKeyDown={handleKeyDown("to")} form={form} disabled={disabled} readOnly={readOnly} ref={setEndRef} id={endId} unstyled value={toTyping.shown}
+        <Input nativeInput {...endRest} {...entryKind} placeholder={endRest.placeholder ?? messages.endDate} onKeyDown={handleKeyDown("to")} form={form} disabled={disabled} readOnly={readOnly} ref={setEndRef} id={endId} unstyled value={toTyping.shown}
           {...named(endId, messages.endDate)} aria-describedby={endRest["aria-describedby"] ?? wiring.described} {...(endRest["aria-label"] ? { "aria-label": endRest["aria-label"] } : {})} {...(endRest["aria-labelledby"] ? { "aria-labelledby": endRest["aria-labelledby"] } : {})} aria-invalid={invalid ? true : endRest["aria-invalid"]}
           controlClassName={cn("min-w-0 flex-1", endRest.controlClassName)} className={withHiddenIndicator(endRest.className)}
           onChange={handleEntry("to")} onBlur={handleBlur("to")} />

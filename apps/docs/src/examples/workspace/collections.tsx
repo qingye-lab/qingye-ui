@@ -11,7 +11,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTitle } from "@q
 import { ItemLink } from "@qingye_lab/ui/components/item";
 import { SearchInput } from "@qingye_lab/ui/components/search-input";
 import { Inline } from "@qingye_lab/ui/components/layout";
-import { Pagination, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@qingye_lab/ui/components/select";
 import { Sparkline } from "@qingye_lab/ui/components/sparkline";
@@ -55,7 +55,6 @@ export default function Collections() {
   ], []);
 
   const table = useReactTable({ data: matched, columns, state: { sorting, rowSelection: selection, pagination }, onSortingChange: setSorting, onRowSelectionChange: setSelection, onPaginationChange: setPagination, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), getSortedRowModel: getSortedRowModel(), getPaginationRowModel: getPaginationRowModel() });
-  const page = pagination.pageIndex + 1; const totalPages = Math.max(1, table.getPageCount());
   const setPage = (n: number) => setPagination(value => ({ ...value, pageIndex: n - 1 }));
   const selected = COLLECTIONS.filter(item => selection[item.id]);
   const filter = (apply: () => void) => { apply(); setPage(1); };
@@ -90,13 +89,8 @@ export default function Collections() {
 
     <DataTable table={table} aria-label="集合" emptyContent={<span className="text-muted-foreground">没有匹配的集合 <Button variant="quiet" size="sm" onClick={() => filter(() => { setQuery(""); setScope("all"); setSource("全部来源"); })}>清除条件</Button></span>} />
 
-    {totalPages > 1 && <Pagination page={page} totalPages={totalPages} aria-label="集合分页" className="justify-self-end">
-      <PaginationList>
-        <PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(page - 1)} /></PaginationItem>
-        {Array.from({ length: totalPages }, (_, index) => index + 1).map(n => <PaginationItem key={n}><PaginationLink page={n} href={`#page-${n}`} onClick={event => { event.preventDefault(); setPage(n); }}>{n}</PaginationLink></PaginationItem>)}
-        <PaginationItem><PaginationNext disabled={page === totalPages} onClick={() => setPage(page + 1)} /></PaginationItem>
-      </PaginationList>
-    </Pagination>}
+    {/* 库的分页组合：只有一页时页码排不出现，范围摘要留着（筛到只剩几条时仍说得出一共几条）；一条都没有时表里已经说了，不再重复「共 0 条」。 */}
+    {matched.length > 0 && <PaginationPattern aria-label="集合分页" totalCount={matched.length} value={{ page: pagination.pageIndex + 1, pageSize: pagination.pageSize }} onValueChange={next => setPagination({ pageIndex: next.page - 1, pageSize: next.pageSize })} />}
 
     <Drawer swipeDirection="right" open={peek !== null} onOpenChange={open => { if (!open) setPeek(null); }}>
       {peek && <DrawerPopup className="w-[min(26rem,100vw)] content-start">

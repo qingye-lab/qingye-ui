@@ -94,7 +94,7 @@ function ExamplesIndex() {
     <main className="examples site-frame" id="main" tabIndex={-1}>
       <header className="examples-head">
         <Heading level={1} step="display-lg">{en ? "Examples" : "示例"}</Heading>
-        <Text className="text-muted-foreground" step="reading">{en ? "Complete applications built only from @qingye_lab/ui. They follow this site's light or dark mode; the data is local and nothing is sent anywhere." : "只用 @qingye_lab/ui 搭成的完整应用，明暗跟随本站。数据都在本地，不发送到任何地方。"}</Text>
+        <Text className="text-muted-foreground" step="reading">{en ? "Complete applications built only from @qingye_lab/ui, with local data." : "只用 @qingye_lab/ui 搭成的完整应用，数据都在本地。"}</Text>
       </header>
       <ul className="examples-list">
         {EXAMPLES.map((example, index) => (

@@ -287,9 +287,10 @@ export function Tour({
           <div className="grid gap-(--qy-panel-gap)" data-slot="tour-body">
             <div className="grid gap-(--qy-field-gap)">
               {/* 换步时读屏播报「第 N / M 步」；M 是实际可走的步数（缺失锚点的步骤不计）。 */}
-              <p aria-live="polite" className="text-label text-muted-foreground" data-slot="tour-progress">
+              {/* 只有一步时「第 1 / 1 步」没有告诉读者任何事：不出现（无事可做的部件不出现，与 PaginationPattern 同一条）。 */}
+              {view.total > 1 && <p aria-live="polite" className="text-label text-muted-foreground" data-slot="tour-progress">
                 {messages.tourProgress(view.position + 1, view.total)}
-              </p>
+              </p>}
               <PopoverTitle>{currentStep.title}</PopoverTitle>
               {currentStep.description != null && <PopoverDescription>{currentStep.description}</PopoverDescription>}
             </div>
@@ -300,10 +301,10 @@ export function Tour({
                 </Button>
               )}
               <div className="ms-auto flex items-center gap-(--qy-action-gap)">
-                {/* 第一步的「上一步」不可用但仍在原处：焦点在它上面时不会因换步而丢失。 */}
-                <Button variant="bordered" aria-disabled={view.position === 0} onClick={() => { const previous = resolved[position - 1]; if (previous) goTo(previous.index); }}>
+                {/* 多步时第一步的「上一步」不可用但仍在原处：焦点在它上面时不会因换步而丢失；只有一步时无处可退，整个按钮不出现。 */}
+                {view.total > 1 && <Button variant="bordered" aria-disabled={view.position === 0} onClick={() => { const previous = resolved[position - 1]; if (previous) goTo(previous.index); }}>
                   {messages.tourPrevious}
-                </Button>
+                </Button>}
                 {/* 同一个按钮在最后一步变成「完成」：焦点不丢，键盘连按 Enter 即可走完。 */}
                 <Button
                   ref={nextRef}

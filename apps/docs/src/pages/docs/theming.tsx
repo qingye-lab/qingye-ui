@@ -3,7 +3,7 @@ import { TableHeader } from "@qingye_lab/ui/components/table";
 import { Badge } from "@qingye_lab/ui/components/badge";
 import { Button } from "@qingye_lab/ui/components/button";
 import { Checkbox } from "@qingye_lab/ui/components/checkbox";
-import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldContent, FieldLabel } from "@qingye_lab/ui/components/field";
 import { Input } from "@qingye_lab/ui/components/input";
 import { Label } from "@qingye_lab/ui/components/label";
 import { Slider, SliderControl, SliderIndicator, SliderLabel, SliderThumb, SliderTrack, SliderValue } from "@qingye_lab/ui/components/slider";
@@ -162,10 +162,10 @@ function ThemeBench() {
             <FieldLabel>{en ? "Draft label" : "草稿名称"}</FieldLabel>
             <Input ref={input} value={draft} onChange={event => setDraft(event.target.value)} />
           </Field>
-          <Label>
+          <Field orientation="horizontal">
             <Checkbox checked={checked} onCheckedChange={setChecked} />
-            {en ? "Include label" : "包含名称"}
-          </Label>
+            <FieldContent><FieldLabel>{en ? "Include label" : "包含名称"}</FieldLabel></FieldContent>
+          </Field>
           <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
             <Button onClick={() => input.current?.focus()}>{en ? "Edit label" : "编辑名称"}</Button>
             <Button variant="quiet" onClick={() => { setDraft("A"); setChecked(true); }}>{en ? "Reset" : "重置"}</Button>

@@ -241,6 +241,8 @@
 
     /* ── 详情框 ── */
     &:is(details) { @apply rounded-item border border-border p-(--qy-panel-padding-sm); }
-    &:is(summary) { @apply cursor-pointer font-medium mb-(--qy-field-gap) marker:text-muted-foreground; }
+    /* 摘要与展开内容之间的组内间隔只在展开时存在：收起时摘要是块里唯一的内容，下方再留一份会让上下留白不等（实测收起态底部比顶部多一个组内间隔）。 */
+    &:is(summary) { @apply cursor-pointer font-medium marker:text-muted-foreground; }
+    &:is(details[open] > summary) { @apply mb-(--qy-field-gap); }
   }
 }

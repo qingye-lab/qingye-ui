@@ -6,6 +6,7 @@ import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { useInputFacts, useInputRef } from "../input-facts";
 import { useUILocale } from "../locale";
+import { nativeSegmentedTypes, useEmptyEntryHint } from "../native-entry-hint";
 import { cn } from "../utils";
 
 export type InputProps = Omit<InputPrimitive.Props, "size"> & React.RefAttributes<HTMLInputElement> & {
@@ -98,6 +99,7 @@ export function Input({
   unstyled = false,
   nativeInput = false,
   type = "text",
+  placeholder,
   ref,
   ...props
 }: InputProps): React.ReactElement {
@@ -106,8 +108,16 @@ export function Input({
   // 只读标记服从真实输入，含 Field 与原生 fieldset 带来的状态。
   const blocked = useInputFacts(inputRef, { disabled: Boolean(props.disabled), readOnly: Boolean(props.readOnly) }, { value: false, key: nativeInput });
 
+  // 平台日期 / 时间输入没有 placeholder：空态是浏览器自己的分段，样式无从设置。
+  // 这类输入的 `placeholder` 改由库画成一条提示（空、没有部分键入、未聚焦时），分段在此期间隐藏；其余类型照常交给原生 placeholder。
+  const segmented = nativeSegmentedTypes.has(type);
+  const hint = segmented && typeof placeholder === "string" && placeholder !== "" ? placeholder : undefined;
+  const hintShown = useEmptyEntryHint(inputRef, hint !== undefined, String(props.value ?? props.defaultValue ?? "") === "" && !props.autoFocus);
+
   const inputProps: InputPrimitive.Props & React.RefAttributes<HTMLInputElement> & { "data-slot": string } = {
     ...props,
+    ...(segmented ? {} : { placeholder }),
+    ...(hintShown ? { "data-hinted": "" } : {}),
     ref: setInputRef,
     type,
     // 原生字符宽度属性原样透传；它不参与呈现，几何来自填值控件角色层。
@@ -120,6 +130,10 @@ export function Input({
        * 改用外框同一个填值面，整个编辑边界只有一种底色；文字色同理回到前景色。 */
       "rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] autofill:shadow-[inset_0_0_0_100vmax_var(--qy-surface-field)] autofill:[-webkit-text-fill-color:var(--qy-foreground)]",
       textProfile,
+      // 分段日期 / 时间的数字按等宽排：每段位数固定，数字不随值抖动，上下行的同一段对齐（基础层 §7「需要纵向对齐的数」）。
+      segmented && "numeric",
+      // 提示出现时分段不可见（opacity 而非透明文字：Firefox 的分段与对比度检查都不受影响），输入本身照常可点、可聚焦。
+      "data-hinted:opacity-0",
       // 平台文件选择没有可设置的垂直对齐；行高取边框内高度让两段文字居中。按钮名称是动作，文件名是结果。
       type === "file" && "cursor-pointer text-muted-foreground leading-[calc(var(--qy-fill-height-narrow)-2*var(--qy-line-width))] sm:leading-[calc(var(--qy-fill-height)-2*var(--qy-line-width))] file:me-(--qy-fill-padding) file:cursor-pointer file:border-0 file:border-e file:border-solid file:border-border file:bg-transparent file:pe-(--qy-fill-padding) file:font-medium file:text-foreground file:[font-size:inherit]",
       typeof className === "function" ? className(state) : className,
@@ -148,6 +162,7 @@ export function Input({
       )}
     >
       {nativeInput ? <NativeInput {...inputProps} /> : <InputPrimitive {...inputProps} />}
+      {hintShown ? <span aria-hidden="true" data-slot="input-hint" className={cn("pointer-events-none col-start-1 row-start-1 w-0 min-w-full truncate px-(--qy-fill-padding) text-muted-foreground", textProfile)}>{hint}</span> : null}
       {blocked.readOnly && !unstyled ? <span data-slot="input-readonly" aria-hidden="true" className="col-start-2 row-start-1 pe-(--qy-fill-padding) text-caption text-muted-foreground">{messages.readOnly}</span> : null}
     </div>
   );

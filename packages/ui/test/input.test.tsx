@@ -188,3 +188,45 @@ test("the input carries a value and nothing else: no built-in action for search 
   // @ts-expect-error 显示密码不是输入框的属性。
   void (<Input visibilityToggle />);
 });
+
+test("an empty native date entry shows a hidden-from-AT hint until it is focused or filled", () => {
+  const { container } = render(<Input type="date" aria-label="日期" placeholder="选择日期" />);
+  const input = container.querySelector("input")!;
+  const hint = () => container.querySelector("[data-slot=input-hint]");
+  expect(hint()).toHaveTextContent("选择日期");
+  expect(hint()).toHaveAttribute("aria-hidden", "true");
+  // 提示不进入无障碍名称，也不是原生占位。
+  expect(input).not.toHaveAttribute("placeholder");
+  expect(input).toHaveAccessibleName("日期");
+  act(() => input.focus());
+  expect(hint()).toBeNull();
+  fireEvent.change(input, { target: { value: "2026-10-03" } });
+  act(() => input.blur());
+  expect(hint()).toBeNull();
+  fireEvent.change(input, { target: { value: "" } });
+  act(() => input.blur());
+  expect(hint()).toHaveTextContent("选择日期");
+});
+
+test("a half-typed native entry is never covered by the hint after blur", () => {
+  const { container } = render(<Input type="date" aria-label="日期" placeholder="选择日期" />);
+  const input = container.querySelector("input")!;
+  // jsdom 不实现分段输入；以 validity.badInput 模拟「有部分输入但没有完整值」。
+  Object.defineProperty(input, "validity", { configurable: true, value: { badInput: true } });
+  act(() => input.focus());
+  act(() => input.blur());
+  expect(container.querySelector("[data-slot=input-hint]")).toBeNull();
+});
+
+test("a native entry with a value or without a hint text carries no hint", () => {
+  const { container, rerender } = render(<Input type="date" aria-label="日期" placeholder="选择日期" defaultValue="2026-10-03" />);
+  expect(container.querySelector("[data-slot=input-hint]")).toBeNull();
+  rerender(<Input type="date" aria-label="日期" />);
+  expect(container.querySelector("[data-slot=input-hint]")).toBeNull();
+});
+
+test("a text input keeps the native placeholder and gets no overlay hint", () => {
+  const { container } = render(<Input aria-label="名称" placeholder="输入名称" />);
+  expect(screen.getByRole("textbox")).toHaveAttribute("placeholder", "输入名称");
+  expect(container.querySelector("[data-slot=input-hint]")).toBeNull();
+});

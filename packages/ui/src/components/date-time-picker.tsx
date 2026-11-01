@@ -95,7 +95,7 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
     children: <Popover open={editable && open} onOpenChange={next => { if (next) { setDateDraft(parseLocalDate(value?.split("T")[0] ?? "")); setTimeDraft(value?.split("T")[1] ?? ""); } setOpen(next); }}>
       {/* 基础层 §6：日期时间与日历入口共用一条编辑边界；格式长度固定，宽度随内容。 */}
       <InputGroup ref={boundaryRef} data-slot="date-time-picker-control" data-readonly={readOnlyNow ? "" : undefined} className="w-fit max-w-full flex-nowrap">
-        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={native.min} max={native.max} ref={setInputRef} type="datetime-local" name={name} form={form} disabled={disabled} readOnly={readOnly} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={withHiddenIndicator(inputRest.className)}
+        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={native.min} max={native.max} ref={setInputRef} type="datetime-local" placeholder={inputRest.placeholder ?? messages.selectDateTime} name={name} form={form} disabled={disabled} readOnly={readOnly} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)} className={withHiddenIndicator(inputRest.className)}
           onBlur={event => {
             onBlur?.(event);
             if (editable && typing.active && value && readNativeEntry(event.currentTarget) === "empty") change(undefined, event);

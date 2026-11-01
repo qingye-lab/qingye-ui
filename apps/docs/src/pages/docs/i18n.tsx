@@ -1,4 +1,4 @@
-import { Pagination, PaginationList, PaginationItem, PaginationPrevious, PaginationNext } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
 import { Tabs, TabsList, TabsTab } from "@qingye_lab/ui/components/tabs";
 import { CopyButton } from "@qingye_lab/ui/components/copy-button";
 import { Input } from "@qingye_lab/ui/components/input";
@@ -15,7 +15,7 @@ function LocalePreview() {
   const [language,setLanguage] = useState(en ? "en-US" : "zh-CN");
   const [page,setPage] = useState(1);
   const values = ["A", "B", "C"];
-  return <Stack className="mb-(--qy-space-module)" gap="panel"><Tabs value={language} onValueChange={value => setLanguage(String(value))}><TabsList aria-label={en ? "Built-in language" : "内置文案语言"}><TabsTab value="zh-CN">简体中文</TabsTab><TabsTab value="en-US">English</TabsTab></TabsList></Tabs><UILocaleProvider locale={language === "en-US" ? enUS : zhCN}><Stack lang={language} gap="fields"><Field><FieldLabel>{en ? "Editable content" : "可编辑内容"}</FieldLabel><Input defaultValue="A" /></Field><Inline><CopyButton value={values[page-1]!} /><output aria-live="polite">{values[page-1]}</output></Inline><Pagination page={page} totalPages={values.length}><PaginationList><PaginationItem><PaginationPrevious disabled={page === 1} onClick={() => setPage(value => value-1)} /></PaginationItem><PaginationItem><span className="numeric">{page} / {values.length}</span></PaginationItem><PaginationItem><PaginationNext disabled={page === values.length} onClick={() => setPage(value => value+1)} /></PaginationItem></PaginationList></Pagination></Stack></UILocaleProvider></Stack>;
+  return <Stack className="mb-(--qy-space-module)" gap="panel"><Tabs value={language} onValueChange={value => setLanguage(String(value))}><TabsList aria-label={en ? "Built-in language" : "内置文案语言"}><TabsTab value="zh-CN">简体中文</TabsTab><TabsTab value="en-US">English</TabsTab></TabsList></Tabs><UILocaleProvider locale={language === "en-US" ? enUS : zhCN}><Stack lang={language} gap="fields"><Field><FieldLabel>{en ? "Editable content" : "可编辑内容"}</FieldLabel><Input defaultValue="A" /></Field><Inline><CopyButton value={values[page-1]!} /><output aria-live="polite">{values[page-1]}</output></Inline><PaginationPattern totalCount={values.length} value={{ page, pageSize: 1 }} onValueChange={next => setPage(next.page)} /></Stack></UILocaleProvider></Stack>;
 }
 export default function I18nPage() {
   const en = useDocsLocale() === "en";

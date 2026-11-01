@@ -122,7 +122,7 @@ export function DatePicker(allProps: DatePickerProps) {
     // 只保留一个打开日历的入口。日期格式长度固定，边界宽度随内容，不拉满容器。
     children: <Popover open={editable && open} onOpenChange={setOpen}>
       <InputGroup ref={boundaryRef} data-slot="date-picker-control" data-readonly={readOnlyNow ? "" : undefined} className="w-fit max-w-full flex-nowrap">
-        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={period ? undefined : native.min} max={period ? undefined : native.max} type="date" name={period ? undefined : name} form={form} disabled={disabled} readOnly={readOnly} ref={setInputRef} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)}
+        <Input {...inputRest} aria-invalid={inputRest["aria-invalid"] ?? (invalidKind ? true : undefined)} min={period ? undefined : native.min} max={period ? undefined : native.max} type="date" placeholder={inputRest.placeholder ?? (period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate)} name={period ? undefined : name} form={form} disabled={disabled} readOnly={readOnly} ref={setInputRef} value={typing.shown} unstyled controlClassName={cn("min-w-0 flex-1", inputRest.controlClassName)}
           className={withHiddenIndicator(inputRest.className)}
           {...entryProps}
           {...(period ? { render: (elementProps: React.ComponentPropsWithRef<"input">, state: InputPrimitive.State) => <DraftSurface elementProps={elementProps} state={state} render={inputRender} onName={setFieldName} /> } : { render: inputRender })}
