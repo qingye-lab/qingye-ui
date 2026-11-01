@@ -83,6 +83,7 @@
 - [长文 Prose](components/prose.md): 给已渲染的 Markdown / 富文本排版：标题、段落、列表、引用、代码、表格读已有的文字档与墨阶。默认只排版、不带框；文章独自成篇、没有承载面时用 framed 给它一张阅读纸。
 - [单选组 RadioGroup](components/radio-group.md): 从同时可见的少量候选中取一个值。
 - [评分 Rating](components/rating.md): 在 1 到 max 之间给出一个整数分值，用一排星表示。
+- [相对时间 RelativeTime](components/relative-time.md): 把一个时刻说成「3 分钟前」，同时保留可核对的绝对时间；全部实例共用一个刷新计时器。
 - [分栏 Resizable](components/resizable.md): 两个或多个面板之间放可拖动的分隔条，调整各自占比。
 - [结果 Result](components/result.md): 一次操作的结局：标记、标题、说明与去向。
 - [两量关系 ScatterChart](components/scatter-chart.md): 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。

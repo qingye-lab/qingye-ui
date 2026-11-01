@@ -10,17 +10,17 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 113,
+    "components": 114,
     "byStatus": {
-      "type-resolved": 113
+      "type-resolved": 114
     },
     "documentedButMissing": 0,
-    "undocumented": 152,
+    "undocumented": 151,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 210,
+    "uncheckedWrittenNames": 212,
     "uncheckedByReason": {
-      "generic": 149,
+      "generic": 151,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -56,7 +56,7 @@
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "onClick",
-      "declaredAt": "packages/ui/src/components/bulk-action-bar.tsx:40"
+      "declaredAt": "packages/ui/src/components/bulk-action-bar.tsx:44"
     },
     {
       "component": "bulk-action-bar",
@@ -219,7 +219,7 @@
       "component": "chart",
       "part": "Chart",
       "prop": "events",
-      "declaredAt": "packages/ui/src/components/chart.tsx:98"
+      "declaredAt": "packages/ui/src/components/chart.tsx:102"
     },
     {
       "component": "command",
@@ -406,13 +406,13 @@
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeader",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:86"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:92"
     },
     {
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeaderOffset",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:88"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:94"
     },
     {
       "component": "data-table",
@@ -914,13 +914,6 @@
       "viaComponent": "typography"
     },
     {
-      "component": "section",
-      "part": "SectionTitle",
-      "prop": "step",
-      "declaredAt": "packages/ui/src/components/typography.tsx:61",
-      "viaComponent": "typography"
-    },
-    {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "className",
@@ -1034,7 +1027,7 @@
       "component": "sidebar",
       "part": "SidebarSub",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:280"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:298"
     },
     {
       "component": "theme-provider",
@@ -2144,6 +2137,13 @@
       "reason": "part-not-applicable"
     },
     {
+      "component": "relative-time",
+      "part": "RelativeTime",
+      "written": "ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
       "component": "resizable",
       "part": "ResizablePanelGroup",
       "written": "className / ref / div props",
@@ -2307,6 +2307,13 @@
     {
       "component": "sidebar",
       "part": "SidebarLink",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "sidebar",
+      "part": "SidebarButton",
       "written": "render / ref / native props",
       "token": "native props",
       "reason": "generic"

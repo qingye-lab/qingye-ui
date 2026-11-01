@@ -8,7 +8,7 @@ Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
 Confirmed task completion or an explicit indeterminate state.
 
 ## Decision
-Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.
+Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once). The move is feedback, not a completion fact.
 
 ## Notes
 - Stage a long task by what is known: submitted but uncountable uses value={null}, processing counts confirmed items, and afterwards an Alert states completion or partial failure, lists the failed items and offers a retry. The bar does not carry the outcome.

@@ -11,6 +11,7 @@ A state graphic and its visible name.
 Waiting, in-progress, and unknown results remain distinct facts.
 
 ## Notes
+- No breathing or blinking for urgent states: looping motion in the library only means in progress; urgency is carried by the category hue and the name.
 - Each state belongs to one fixed category: online is success, error is danger, warning and unknown are warning, and info, pending and in-progress are info; offline and neutral carry no hue. The same category has the same hue in Badge.
 - An unknown outcome needs the reader to verify it, so it is a warning: neither a failure nor a success. neutral is a state with no category; use label to say what it is.
 

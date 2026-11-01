@@ -11,6 +11,7 @@ Take over the work surface for an edit or decision, then return.
 Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.
 
 ## Notes
+- The library has no width tiers: content decides the width. A project that needs consistency defines one or two widths in its own composition and passes them through className.
 - Put long content in DialogPanel so the primary action stays visible in the footer; without DialogPanel the whole panel still scrolls.
 - Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.
 - The application owns drafts. Name closing, discarding, saving and undo separately.

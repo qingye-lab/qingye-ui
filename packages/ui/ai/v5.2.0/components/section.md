@@ -30,7 +30,7 @@ Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
 - 标题与操作同一行；标题长到放不下时操作落到下一行，第一行的中线不动。
 
 ## Customization
-- className、style、render 与 ref 属于各自的部件；标题层级用 SectionTitle 的 level，不改字号。
+- className、style、render 与 ref 属于各自的部件；大纲层级用 SectionTitle 的 level，字号用 step，两者互不牵动：区块里的小节写 level={3} step="body-strong"，比区块标题低一档。
 
 ## Current exports
 - Section: function; owner section; PASS; props: SectionProps
@@ -84,6 +84,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### SectionTitle
 区块标题，复用 Heading。
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. 文档大纲层级，独立于文字档。
+- step: TextStep; default "heading". 文字档。区块里的小节用 body-strong（14），比区块标题的 heading（16）低一档。
 - id / render / ref / Heading props: HeadingProps. 传入 id 时区块用它作关联；文字档默认 heading（16/24）。
 
 ### SectionActions
@@ -167,5 +168,35 @@ export default function Demo() {
       <Item><ItemContent><ItemTitle>核对桑叶入库单</ItemTitle></ItemContent></Item>
     </Section>
   </Stack>;
+}
+```
+
+### 区块里的小节
+Source: apps/docs/src/content/section/demos/04-subsection.tsx
+```tsx
+import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { Section, SectionHeader, SectionTitle } from "@qingye_lab/ui/components/section";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "区块里的小节", titleEn: "Subsections inside a section" } satisfies DemoMeta;
+
+const groups = [
+  { title: "网络", rows: [["地址", "10.2.14.31"], ["网关", "10.2.14.1"]] },
+  { title: "固件", rows: [["版本", "4.8.2"], ["更新于", "2026-10-28"]] },
+];
+
+export default function Demo() {
+  return <Section className="w-full max-w-lg">
+    <SectionHeader><SectionTitle>设备信息</SectionTitle></SectionHeader>
+    <Stack gap="panel">
+      {groups.map(group => <Section key={group.title}>
+        <SectionHeader><SectionTitle level={3} step="body-strong">{group.title}</SectionTitle></SectionHeader>
+        <DescriptionList>
+          {group.rows.map(([term, value]) => <DescriptionListItem key={term}><DescriptionListTerm>{term}</DescriptionListTerm><DescriptionListDetail>{value}</DescriptionListDetail></DescriptionListItem>)}
+        </DescriptionList>
+      </Section>)}
+    </Stack>
+  </Section>;
 }
 ```

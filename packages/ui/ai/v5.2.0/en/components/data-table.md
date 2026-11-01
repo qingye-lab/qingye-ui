@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
+Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -39,6 +39,7 @@ Configure data, columns and stable IDs with DataTablePattern; retain DataTable f
 
 ## Current exports
 - DataTable: function; owner data-table; PASS; props: DataTableProps<TData>
+- DataTableActivateEvent: type; owner data-table; PASS
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
@@ -67,7 +68,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
-- `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
+- `onRowActivate?`: `(row: Row<TData>, event: DataTableActivateEvent) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
 - `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
@@ -76,7 +77,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### DataTablePattern
-- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
+- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `columns`: `readonly DataTablePatternColumn<TData>[]`.
@@ -88,7 +89,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `mode?`: `"client" | "server"`.
 - `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
 - `pagination?`: `false | DataTablePatternPagination`.
-- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 "page"（当页）。"filtered"：全部筛选结果，跨过分页——只在 mode="client" 有效， * 因为只有客户端持有完整结果；mode="server" 传 "filtered" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
@@ -134,8 +135,8 @@ Configured sorting, page selection, active rows and pagination without issuing r
 - data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. Columns configure id, header, accessor, cell, sortable, rowHeader and numeric, with optional size/minSize/maxSize in pixels and ellipsis. Columns with size are fixed; columns without it share the remaining width. Stable getRowId is required.
 - state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1.
 - mode / pagination: client | server / false | DataTablePatternPagination. Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null.
-- selection: { label, rowLabel, canSelect? }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel.
-- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent.
+- selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel. scope defaults to page; filtered makes the header select-all act on all filtered results across pages. It requires mode=client: a server caller does not hold the full result, so mode=server with filtered throws in development; use BulkActionBar extent / BulkActionBarExtend to let the user extend to everything explicitly.
+- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent. The second onActivate argument is the React mouse or keyboard event that triggered it, so the caller can read metaKey / ctrlKey / shiftKey (for example to open in a new tab).
 - selectionAppearance: row | checkbox; default row. Checkbox mode removes only selected-row fill, retaining actual checkboxes and independent active-row emphasis.
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.
 - stickyHeader / stickyHeaderOffset: boolean / number | string. Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px.
@@ -146,9 +147,9 @@ Configured sorting, page selection, active rows and pagination without issuing r
 A native two-dimensional collection.
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy keeps valid rows without dimming them. Data rows take the hover surface on pointer hover; selected and active rows keep the deeper selected surface. error is placed above the table as role=alert and carries its own retry action.
 - table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in.
-- columnDef.meta.ellipsis: boolean; default false. Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible.
+- columnDef.meta.ellipsis: boolean; default false. Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped, with one exception: a cell holding a single link with an href. The link itself truncates to one line and, when actually truncated, shows the full text in a Tooltip on hover or focus, with no extra Tab stop and an unchanged accessible name. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible.
 - columnDef.meta.numeric: boolean; default false. A numeric column is declared by the column definition, never guessed from content: header and every cell share one alignment, at the inline end (left in RTL), with tabular figures. The Pattern column config uses the same name.
-- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row; the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
+- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row and the mouse or keyboard event that triggered it (modifier keys readable); the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
 - columnDef.meta.rowHeader: boolean. Actual row headers use th scope=row; comparison columns are never automatically hidden. With a visible row-header column, each row's aria-labelledby points at all of its row-header cells, so the row's accessible name is their text (several row-header columns join in column order). DataTableSelectionCell names each checkbox after this row, falling back to a generic name only without a row-header column. onRowActivate without a visible row-header column throws.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -393,5 +394,68 @@ export default function Demo() {
   ];
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
   return <DataTable table={table} caption={english ? "Local collection (mixed widths) · 3 entries" : "本地集合（混合列宽）· 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
+}
+```
+
+### 省略列里的链接
+Source: apps/docs/src/content/data-table/demos/07-link-ellipsis.tsx
+```tsx
+import { DataTablePattern, type DataTablePatternColumn } from "@qingye_lab/ui/components/data-table";
+import { Link } from "@qingye_lab/ui/components/link";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "省略列里的链接", titleEn: "A link in an ellipsis column" } satisfies DemoMeta;
+
+type Entry = { id: string; name: string; path: string; count: number };
+export default function Demo() {
+  const english = useUILocale().code.startsWith("en");
+  const data: Entry[] = english ? [
+    { id: "overview", name: "Quarterly overview of every connected workshop and remote site", path: "#overview", count: 12 },
+    { id: "roles", name: "Roles", path: "#roles", count: 8 },
+    { id: "export", name: "Nightly export to the shared archive, including attachments", path: "#export", count: 3 },
+  ] : [
+    { id: "overview", name: "所有接入车间与远端站点的季度总览，包含各站点的在线与离线记录", path: "#overview", count: 12 },
+    { id: "roles", name: "角色", path: "#roles", count: 8 },
+    { id: "export", name: "每晚导出到共享归档的任务，含附件与历史版本", path: "#export", count: 3 },
+  ];
+  const columns: DataTablePatternColumn<Entry>[] = [
+    { id: "name", header: english ? "Name" : "名称", accessor: row => row.name, rowHeader: true, size: 220, ellipsis: true, cell: row => <Link href={row.path}>{row.name}</Link> },
+    { id: "count", header: english ? "Records" : "记录数", accessor: row => row.count, size: 96, numeric: true },
+  ];
+  return <DataTablePattern data={data} columns={columns} getRowId={row => row.id} caption={english ? "Entries" : "条目"} emptyContent={english ? "No entries" : "没有条目"} />;
+}
+```
+
+### 全选整个结果与修饰键
+Source: apps/docs/src/content/data-table/demos/08-filtered-scope.tsx
+```tsx
+import * as React from "react";
+import { DataTablePattern, type DataTablePatternColumn } from "@qingye_lab/ui/components/data-table";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "全选整个结果与修饰键", titleEn: "Select the whole result and modifier keys" } satisfies DemoMeta;
+
+type Entry = { id: string; name: string; count: number };
+const rows: Entry[] = Array.from({ length: 23 }, (_, index) => ({ id: `entry-${index + 1}`, name: `${String(index + 1).padStart(2, "0")}`, count: (index * 7) % 31 }));
+
+export default function Demo() {
+  const english = useUILocale().code.startsWith("en");
+  const [note, setNote] = React.useState("");
+  const columns: DataTablePatternColumn<Entry>[] = [
+    { id: "name", header: english ? "Name" : "名称", accessor: row => english ? `Entry ${row.name}` : `条目 ${row.name}`, rowHeader: true, sortable: true },
+    { id: "count", header: english ? "Records" : "记录数", accessor: row => row.count, numeric: true, size: 120 },
+  ];
+  return <div className="flex min-w-0 flex-col gap-(--qy-panel-gap)">
+    <DataTablePattern
+      data={rows} columns={columns} getRowId={row => row.id}
+      caption={english ? "Entries" : "条目"} emptyContent={english ? "No entries" : "没有条目"}
+      pagination={{ pageSizeOptions: [5, 10] }} defaultState={{ pagination: { page: 1, pageSize: 5 } }}
+      selection={{ label: english ? "Select entries" : "选择条目", rowLabel: row => english ? `Select Entry ${row.name}` : `选择条目 ${row.name}`, scope: "filtered" }}
+      activeRow={{ trigger: "row", onActivate: (row, event) => setNote(`${english ? "Activated" : "已激活"} ${row.name}${event.metaKey || event.ctrlKey ? (english ? " with Cmd/Ctrl" : "，按住了 Cmd / Ctrl") : event.shiftKey ? (english ? " with Shift" : "，按住了 Shift") : ""}`)}}
+    />
+    <p role="status" className="text-body text-muted-foreground">{note}</p>
+  </div>;
 }
 ```

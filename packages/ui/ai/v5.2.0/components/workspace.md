@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
+Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -128,7 +128,7 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / children / native props: useRender.ComponentProps<div>. 以有名称的 quiet 按钮（md 或 sm）收尾时整组抵消它的横向留白，文字压在内容右缘。
 
 ### WorkspaceContent
-唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。
+唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。它是定位祖先（relative），内容里的绝对定位元素不会越出滚动区。
 - render / ref / children / native props: useRender.ComponentProps<main>. ref 指向滚动元素，跟随滚动的部件（目录、虚拟列表）从这里取容器。
 - transitionKey: React.Key. 换页的标识，通常传路由路径。变化时滚动回到顶部，内容重放一次进场；首次挂载不动。地址带 #锚点 时不动滚动，交给路由滚到锚点。键盘操作时不播进场，减少动效时只淡入。
 

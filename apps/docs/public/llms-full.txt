@@ -708,7 +708,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# 第三部分 组件 (113)
+# 第三部分 组件 (114)
 
 ## 分组展开 Accordion
 
@@ -1776,7 +1776,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
-Source SHA-256: 0ee64f6d87a9f5c4cdc29e90f2582d267f49a94e6a881bb72f3784cd8ff9a8af
+Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
 
 明确对象、版本与范围的共同动作。
 
@@ -1785,6 +1785,7 @@ targets 与 scope 必填；执行传递当前对象版本快照，零选择禁�
 
 ### Notes
 - 库显示对象版本而不推断新旧；应用在执行边界复核实际版本。
+- 自 5.2.0：新增 formatCount 与 summary，用于按对象改写数量文案、补充合计；不传时与此前一致。
 
 ### Use and ownership
 - 已明确选择对象的共同操作。
@@ -1824,9 +1825,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### BulkActionBar
 - `disabled?`: `boolean`.
 - `extent?`: `BulkActionExtent | undefined`.
+- `formatCount?`: `(count: number) => string`. 自定已选数量的文案（默认「已选 N 项」）。传函数而非量词：量词与名词的位置与单复数随语言和对象变化，由调用方按当前界面语言写完整句；入参是 extent.count（有 extent 时）或 targets.length。
 - `onClear?`: `(snapshot: BulkActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
 - `scope`: `string`.
 - `sticky?`: `boolean`.
+- `summary?`: `React.ReactNode`. 数量之后的补充摘要（如合计金额）。与数量同在 aria-describedby 引用的区域，读屏一并读出；不截断，放不下的是后面的对象清单。
 - `targets`: `readonly BulkActionTarget[]`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -1883,6 +1886,8 @@ Written descriptions; the list above is the type-resolved fact.
 - targets / scope: readonly BulkActionTarget[] / string. 每项 id/label/version 必填，id 唯一；version=0 合法；scope 非空。
 - extent: { count: number; label: string }. 应用定义的整个集合（count 为正整数、label 非空）；显示计数与 label 而不列对象，targets 可为空，快照带 extent，由应用按自己持有的查询执行。
 - sticky: boolean. 吸附在最近的滚动容器顶端（Workspace 中为 WorkspaceContent），不能放进带 overflow 的中间容器；吸住且有内容滚过时才出现分界线（data-stuck）。
+- formatCount: (count: number) => string. 自定已选数量的文案，默认「已选 N 项」。入参是 extent.count（有 extent 时）或 targets.length。传函数而非量词：量词与名词的位置、单复数随语言和对象变化，由调用方按当前界面语言写完整句，如「3 个订单」「3 orders selected」。
+- summary: React.ReactNode. 数量之后的补充摘要，如合计金额、总容量。与数量同在 aria-describedby 引用的区域，读屏一并读出；使用等宽数字、不截断，放不下时被截断的是后面的对象清单。数据由应用计算，库不汇总。
 - disabled / onClear: boolean / callback. 清除收到当前快照，不取消服务或自行清空应用状态。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -1915,7 +1920,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 按钮 Button
 
@@ -2249,12 +2254,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
-Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
+Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
 
 为可独立识别的对象建立内容边界。
 
 ### Decision
-对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。
+对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。Card 不设阴影档、纸面档或悬停抬升：它没有离开平面，阴影会伪造层级；整体底色与圆角在主题层改系统 token（圆角是 --qy-radius-panel）。
 
 ### Notes
 - 标题用 Heading 或真实 h2/h3；内容与动作由 Stack、Inline 和原生结构组合。
@@ -2300,7 +2305,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### Card
 面板表面、边界与圆角。不生成标题、内容槽、内边距或排列方式。
-- render: ReactElement | (props, state) => ReactElement. 组合为 article、section 或原生链接，完整保留事件与 ref。
+- render: ReactElement | (props, state) => ReactElement. 组合为 article、section 或原生链接，完整保留事件与 ref。渲染为 a[href] 或 button 时，整卡有悬停与按下底色（与 Item 行入口同一反馈阶梯），按钮占满宽度、文字从行首起。
 - className / style: string / CSSProperties. 消费端按对象关系组合布局与内缘；外部类最后合并。
 - 原生属性: ComponentPropsWithRef<"div">. 透传 id、aria-*、data-*、事件与 ref。
 
@@ -2493,7 +2498,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
+Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
 
 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
@@ -2501,6 +2506,7 @@ Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 图只画数据。已知0、未知和不适用的单个值分别成立：未知值形成gap，表格保留其真实名称。整张图没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。图形不替代可达数值。参照（目标带、参照线）、背景系列与事件只帮读者定位数据，自己不是数据：用墨不用色，名称必填并出现在图例与数据表。量轴只有折线可以不从零起，柱与面积的长度、面积编码一旦截断，比例就是假的。状态色（series[].tone）由应用声明，组件不从数值猜好坏。阶梯（series[].interpolation: "step"）表达值在两次变化之间保持不变，取 step-after：记录是「这一刻起变成了这个值」，step-before 会把变化画到观测之前；不提供平滑曲线，曲线在两点之间画出数据里没有的值。占比构成（bar-share / area-share）读的是构成怎样变而不是多少：各行内归一到该行之和，量轴固定 0–100%，刻度 0/25/50/75/100；含未知或不适用值、或和为 0 的行整行不画（整体不可得，每一部分的占比都会是假的），已知原值在数据表里如实列出；负值抛错。柱上标值（valueLabels）只给单系列的 bar 与 bar-horizontal，标了值就不再画量轴刻度与网格（同一事实不说两遍）。堆叠与占比的读数和数据表给出合计；含缺项的行不合计，数据表里写明缺项。
 
 ### Notes
+- 入场不画生长动画：动只交代真实变化，数据第一次出现并不是变化；数据更新时的过渡还没有定义取值，暂不加。
 - 系列的区分不只靠色相：折线的每个系列有自己的标记形状（圆、方、三角、菱形、叉，按系列顺序分配），图例的键与折线一致，图例文字、悬停读数和数据表里都有系列名。柱、堆叠与面积是填充形式，靠固定的系列顺序区分——图例、柱的左右次序、堆叠的上下次序、读数与数据表同一个次序，段间有 2px 纸色空隙；这类图不另加纹理。
 - 没有记录时 Chart 抛错而不画空框。请求中的图用 AsyncContent 组合：先判空再渲染，`<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` 里只放 Chart，空结果由 Empty 在原位承担，加载与失败的反馈在内容之后；见「请求状态与空结果」。
 - null、NaN、Infinity、缺失键不能表示0；用显式unknown或not-applicable表达。
@@ -2559,6 +2565,7 @@ Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
+- ChartRange: type; owner chart; PASS
 - ChartReference: type; owner chart; PASS
 - ChartRow: type; owner chart; PASS
 - ChartSeries: type; owner chart; PASS
@@ -2655,7 +2662,7 @@ figure名称、共同轴量纲、不同系列形态与同源可见Table。
 - aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
 - categoryLabel / valueLabel: string. 非空分类轴名与共享量纲/单位；donut 不画轴线，但两个名字仍用于等价数据表与中心读数的说明文字。
-- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
+- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step"; range?: { min: string; max: string } }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。range: { min, max } 只用于 line 的非背景系列，min、max 是 rows 中 values 的键（须为不同的键，每行都要有值，可显式未知）：这条线在每一点上还有一段区间时，画成同色的淡带垫在线下（浓度为预设），读数多一行“范围 min–max”，数据表在该系列后多“最小值”“最大值”两列；某点任一端不可得则该点无带；两端都已知时 min 大于 max、或越出 valueDomain 都抛错；线本身（key 的值）不要求落在区间正中。带区间的单系列仍显示图例，让淡带的键与线对上。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
 - rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。
 - contextLabel: string. 有背景系列时必填：图例里合成一项的名字（淡墨线键 + 此名），例如「其余蚕室」。背景系列各自的名字只出现在等价数据表。缺失抛错。
 - references: ({ kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string })[]. 量轴上的参照：目标带或参照线（纵向图是横带 / 横线，bar-horizontal 是竖带 / 竖线）。画成墨、在数据之后；量轴范围自动算入；label 必填，出现在图例与数据表下的表注；band 须 from < to，数值有限；donut 传入抛错。有带时悬停读数为每个数值多一行相对目标的位置（高于、低于多少，或在内）；多个带时只对第一个计算。
@@ -2685,7 +2692,7 @@ export default function Demo() {
 }
 ```
 
-19 more examples: see the component page and its Markdown file.
+20 more examples: see the component page and its Markdown file.
 
 ## 复选框 Checkbox
 
@@ -4473,7 +4480,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
+Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -4509,6 +4516,7 @@ Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
 
 ### Current exports
 - DataTable: function; owner data-table; PASS; props: DataTableProps<TData>
+- DataTableActivateEvent: type; owner data-table; PASS
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
@@ -4537,7 +4545,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
-- `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
+- `onRowActivate?`: `(row: Row<TData>, event: DataTableActivateEvent) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
 - `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
@@ -4546,7 +4554,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### DataTablePattern
-- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
+- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `columns`: `readonly DataTablePatternColumn<TData>[]`.
@@ -4558,7 +4566,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `mode?`: `"client" | "server"`.
 - `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
 - `pagination?`: `false | DataTablePatternPagination`.
-- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 "page"（当页）。"filtered"：全部筛选结果，跨过分页——只在 mode="client" 有效， * 因为只有客户端持有完整结果；mode="server" 传 "filtered" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
@@ -4604,8 +4612,8 @@ Written descriptions; the list above is the type-resolved fact.
 - data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. 列显式配置 id、header、accessor、cell、sortable、rowHeader、numeric；可选 size、minSize、maxSize（px）与 ellipsis。写了 size 的列定宽，没写的列平分剩余空间。稳定 getRowId 必填。
 - state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. sorting、pagination、rowSelection、activeRowId 共用快照；排序与回到第 1 页只通知一次。外部页码从 1 开始。
 - mode / pagination: client | server / false | DataTablePatternPagination. client 对完整数据排序切片并从 data.length 得到总数；server 只展示传入页，分页必须给 totalCount；未知 null 时还必须给 hasNextPage。
-- selection: { label, rowLabel, canSelect? }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。
-- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。
+- selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。scope 默认 page；filtered 让表头全选作用于全部筛选结果（跨页），仅 mode=client 可用——服务端调用方并不持有完整结果，用 mode=server 加 filtered 会在开发期抛错，请改用 BulkActionBar 的 extent / BulkActionBarExtend 让用户显式扩展到全部。
+- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。onActivate 的第二个参数是触发它的 React 鼠标或键盘事件，调用方可读 metaKey / ctrlKey / shiftKey 区分「在新标签页打开」之类的意图。
 - selectionAppearance: row | checkbox; default row. checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。
 - stickyHeader / stickyHeaderOffset: boolean / number | string. 表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。
@@ -4616,9 +4624,9 @@ Written descriptions; the list above is the type-resolved fact.
 原生二维集合。
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows，也不变暗。数据行悬停读悬停面，选中与活动行保持更深的选中面。error 摆在表格上方（role=alert），应用自带重试动作。
 - table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. 实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间，minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列的 maxSize 不约束宽度，需要上限就写 size。没有弹性列时表宽等于各列之和，组合表头取可见叶列之和。不内置拖拽调宽。
-- columnDef.meta.ellipsis: boolean; default false. 对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。
+- columnDef.meta.ellipsis: boolean; default false. 对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切；唯一例外是格里只有一个带 href 的链接：链接自己单行省略，真的被截断时聚焦或悬停同样以 Tooltip 显示全文，不新增 Tab 停靠点，链接的可访问名称不变。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。
 - columnDef.meta.numeric: boolean; default false. 数值列由列定义声明，不由内容猜：表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字。Pattern 的列配置同名。
-- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row，调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
+- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。有可见行标题列时，每一行的 aria-labelledby 指向该行所有行标题单元格，行的可访问名称即这些单元格的文字（多个行标题列按列序连接）。DataTableSelectionCell 用它给每个选择框命名为「选择“该行名称”」，没有行标题列时才用泛称。设置了 onRowActivate 却没有可见的行标题列时抛错。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -4670,7 +4678,7 @@ export default function Demo() {
 }
 ```
 
-5 more examples: see the component page and its Markdown file.
+7 more examples: see the component page and its Markdown file.
 
 ## 日期输入 DatePicker
 
@@ -5073,7 +5081,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
-Source SHA-256: 31a7f512ed6965e5f6b51a6e6a08f789f48cac1ed438d82f5b13d089e3fb546c
+Source SHA-256: 01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0
 
 名称和值的原生关系。
 
@@ -5193,6 +5201,7 @@ Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
 关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。
 
 ### Notes
+- 库不设宽度档位：宽度由内容决定。项目需要统一时，在自己的组合里定一到两档宽度，用 className 传入。
 - 长内容放进 DialogPanel：主操作在页脚始终可见；不用 DialogPanel 的写法仍是整面板滚动。
 - 不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。
 - 草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。
@@ -5368,6 +5377,7 @@ Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
 方向由公开 swipeDirection 决定；实际 modal 决定焦点与背景阻断，关闭不代表撤销。
 
 ### Notes
+- 库不设宽度档位：侧向抽屉的宽度由内容决定。项目需要统一时，在自己的组合里定一到两档宽度，用 className 传入。
 - 从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。
 - 程序打开且无触发者时明确 finalFocus。
 - 长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。
@@ -6260,7 +6270,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 表单 Form
 
@@ -7747,7 +7757,7 @@ Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
 表达真实范围内的测量值。
 
 ### Decision
-任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。
+任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。
 
 ### Use and ownership
 - 表达测量值及单位。
@@ -8461,12 +8471,14 @@ export default function Demo() {
 }
 ```
 
+1 more examples: see the component page and its Markdown file.
+
 ## 分页 Pagination
 
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac
+Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
 
 页位置、真实入口与明确的未知总数。
 
@@ -8474,7 +8486,9 @@ Source SHA-256: 7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac
 PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能改变结果的控件；页码与 pageSize 一次通知，总数下降时校正。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。
 
 ### Notes
+- 只有一页时 PaginationPattern 收起页窗，范围摘要和条数选择仍在这一行，内容不会跳；不放一排全部禁用的翻页按钮，因为它们不对应任何可做的事。
 - 标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。
+- 游标分页用 useCursorPagination：筛选或排序改变时调用 reset()。DataTablePattern 的服务端模式接受 totalCount: null 与 hasNextPage，排序变化会让它自己回到第 1 页，此时同时调用 reset() 清空游标。
 - 自 5.2.0：PaginationPattern 与 DataTablePattern 分页条改为一行布局与图标翻页按钮，属性不变；只有一页、0 条或游标首页无下一页时控件收起或整条不渲染，依赖这些按钮常驻的测试需按新行为更新。自定完整 UILocale 时补 paginationRange；paginationSummary 已弃用，下个主版本移除。
 
 ### Use and ownership
@@ -8485,6 +8499,7 @@ PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能�
 
 ### Composition
 - PaginationPattern：本地页动作的标准组合：上一页／下一页为带名称的图标按钮，页窗格数恒定，当前页以选中面标出。
+- useCursorPagination：游标分页的记忆：记住已走过的游标，可回到任一已读页。返回 { cursor, value, paginationProps, setNextCursor, reset }。cursor 是当前页应请求的游标，第 1 页恒为 null；value 是校正后的页码与条数。paginationProps 即 { value, onValueChange, totalCount: null, hasNextPage }，直接展开给 PaginationPattern；hasNextPage 表示「已登记下一页游标」，数据回来、登记之前整条不渲染，与总数未知的约定一致；条数改变时回到第 1 页，已登记的游标随之作废。setNextCursor(next, fromPage?) 在数据回来后登记下一页游标，null 或 undefined 表示这一页是末页；fromPage 缺省为当前页，请求在翻页后才返回时传发起请求时的页码，越过未登记页的结果被忽略；重新登记某页，其后已登记的一并作废；游标用 Object.is 比较，相同则不更新，可放心在 effect 里调用。reset() 用于筛选、排序改变了结果集：清空全部游标并回到第 1 页，条数不变，已在第 1 页时不通知。reset 或改条数之前发出、之后才返回的请求属于旧结果集，fromPage 拦不住，由请求层丢弃（如按筛选与条数作请求键）。
 - Pagination：有名称的 nav，不生成页码。
 - PaginationList / PaginationItem：ul / li 组织页面入口。
 - PaginationLink：a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现；每个页码按中等字重预留宽度，当前页进出时按钮不变宽。
@@ -8499,6 +8514,10 @@ PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能�
 - 品牌、明暗和密度分别配置，主题不改变权限或保存策略。
 
 ### Current exports
+- CursorPagination: type; owner pagination; PASS
+- CursorPaginationChangeDetails: type; owner pagination; PASS
+- CursorPaginationOptions: type; owner pagination; PASS
+- CursorPaginationProps: type; owner pagination; PASS
 - normalizePaginationValue: function; owner pagination; PASS; props: PaginationValue
 - Pagination: function; owner pagination; PASS; props: PaginationProps
 - PaginationChangeDetails: type; owner pagination; PASS
@@ -8518,6 +8537,7 @@ PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能�
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
 - PaginationValue: type; owner pagination; PASS
+- useCursorPagination: function; owner pagination; PASS; props: CursorPaginationOptions
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -8574,6 +8594,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `variant?`: `"solid" | "bordered" | "quiet"`.
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
+### useCursorPagination
+- `defaultValue?`: `PaginationValue`.
+- `onValueChange?`: `(value: PaginationValue, details: CursorPaginationChangeDetails) => void`.
+- `value?`: `PaginationValue`.
+
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
@@ -8590,6 +8615,10 @@ Written descriptions; the list above is the type-resolved fact.
 - totalCount / hasNextPage: number | null / boolean. 非负条数计算总页数，下降时校正当前页；只有一页时只留范围摘要，0 条时显示「共 0 条」。未知 null 时必须显式给 hasNextPage，不推断末页；第 1 页且无下一页时整条不渲染。
 - pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。总数不超过最小候选时，换条数不改变结果，控件不出现。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。
 - aria-label / render / ref / native nav props: PaginationProps. 转发到 nav；可访问页名、上一页／下一页图标按钮名称、范围摘要（paginationRange）与条数标签来自 locale。
+
+#### useCursorPagination
+游标分页的记忆：记住已走过的游标，可回到任一已读页。返回 { cursor, value, paginationProps, setNextCursor, reset }。cursor 是当前页应请求的游标，第 1 页恒为 null；value 是校正后的页码与条数。paginationProps 即 { value, onValueChange, totalCount: null, hasNextPage }，直接展开给 PaginationPattern；hasNextPage 表示「已登记下一页游标」，数据回来、登记之前整条不渲染，与总数未知的约定一致；条数改变时回到第 1 页，已登记的游标随之作废。setNextCursor(next, fromPage?) 在数据回来后登记下一页游标，null 或 undefined 表示这一页是末页；fromPage 缺省为当前页，请求在翻页后才返回时传发起请求时的页码，越过未登记页的结果被忽略；重新登记某页，其后已登记的一并作废；游标用 Object.is 比较，相同则不更新，可放心在 effect 里调用。reset() 用于筛选、排序改变了结果集：清空全部游标并回到第 1 页，条数不变，已在第 1 页时不通知。reset 或改条数之前发出、之后才返回的请求属于旧结果集，fromPage 拦不住，由请求层丢弃（如按筛选与条数作请求键）。
+- value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. 与 PaginationPattern 相同的受控／非受控写法。reason 另有 reset（调用 reset() 回到第 1 页时）。受控 value 的页码超出已读范围时校正到最远的已读页，并以 total-change 通知一次。游标始终由 hook 持有。
 
 #### Pagination
 有名称的 nav，不生成页码。
@@ -8629,7 +8658,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 密码输入 PasswordInput
 
@@ -8965,7 +8994,7 @@ Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
 表达可靠分母的任务进度或明确不定状态。
 
 ### Decision
-动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。
+动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）；过渡只是反馈，不提供完成事实。
 
 ### Notes
 - 长任务按事实分阶段：已提交但无法计数用 value={null}，处理中数已确认的项，结束后用 Alert 说明完成或部分失败，列出失败项并给「重试失败项」。进度条不承担结果说明。
@@ -9070,12 +9099,12 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
+Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
 
 一个整体由哪几部分组成，各占多少。
 
 ### Decision
-用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend="hidden" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。
+用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend="hidden" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。部分的数值变化时各段长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。
 
 ### Use and ownership
 - 一个整体的构成需要一眼看出。
@@ -9475,6 +9504,87 @@ export default function Demo() {
 ```
 
 1 more examples: see the component page and its Markdown file.
+
+## 相对时间 RelativeTime
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/relative-time
+Source: packages/ui/src/components/relative-time.tsx
+Source SHA-256: 6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6
+
+把一个时刻说成「3 分钟前」，同时保留可核对的绝对时间；全部实例共用一个刷新计时器。
+
+### Decision
+相对说法不精确到日历，需要核对的读者要看绝对时间：绝对时间在悬停提示和读屏文字里，不会只放在 title。传了 now 就不再刷新，不要在要随时间变化的界面里固定它。
+
+### Notes
+- 不足一分钟统一说“现在”，之后按分钟、小时、日、月、年向零截断；月按 30 日、年按 365 日近似（预设）。
+- 刷新按距离现在的远近分三档：一分钟内每 10 秒、一小时内每 30 秒、更久每 5 分钟（预设）。刷新只改文字，不设 aria-live，读屏不会因此播报。
+- value 无法解析成时间（无效的 Date、不是时间的字符串、NaN）会抛出带说明的错误。
+
+### Use and ownership
+- 列表、表格与说明里“多久以前发生”比“几点几分”更有用的时刻。
+- 同一界面多处出现的相对时间，需要同一套文案与刷新节奏。
+- Avoid: 需要精确核对的时刻（审计、截止日）单独写出绝对时间，不只靠相对说法。
+- Avoid: 不要为它再套一个 Tooltip 或自己写计时器。
+- Library: 相对文字、绝对时间、dateTime、共享计时器与档位。
+- Application: 要说明的时刻 value；测试或静态渲染时的固定参照 now。
+
+### Composition
+- 元素固定是 time，机器可读的 dateTime 由 value 给出；语言取自 UILocaleProvider。
+- 嵌在句子、表格单元格或描述列表里，字号字重跟随所在行。
+
+### Responsive behavior
+- 文字随所在行换行；悬停提示只给指针，触屏与键盘读者的绝对时间由读屏文字和页面语境承担。
+
+### Customization
+- className、ref、ARIA 与事件透传到 time；不提供 render，元素语义固定。
+
+### Current exports
+- RelativeTime: function; owner relative-time; PASS; props: RelativeTimeProps
+- RelativeTimeProps: type; owner relative-time; PASS
+- RelativeTimeValue: type; owner relative-time; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### RelativeTime
+- `now?`: `RelativeTimeValue`. 固定的参照时刻（同样接受三种写法）。给出后文字只由 value 与 now 决定，不随时间刷新：供测试与静态渲染。
+- `value`: `RelativeTimeValue`. 要说明的时刻：Date、ISO 8601 字符串，或毫秒时间戳。无法解析时抛错。
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### RelativeTime
+渲染 time：相对文字可见，绝对时间在悬停提示与仅读屏文字里。
+- value: Date | string | number. 要说明的时刻：Date、ISO 8601 字符串或毫秒时间戳，必填。
+- now: Date | string | number. 固定的参照时刻。给出后不自动刷新，供测试与静态渲染。
+- ref / 原生属性: React.ComponentProps<"time">. id、ARIA、data 属性与事件透传到 time 元素；dateTime 与 children 由组件给出。
+
+### Keyboard
+
+### Source example
+#### 远近不同的时刻
+Source: apps/docs/src/content/relative-time/demos/01-distances.tsx
+```tsx
+import { RelativeTime } from "@qingye_lab/ui/components/relative-time";
+import { Stack } from "@qingye_lab/ui/components/layout";
+export const meta = { title: "远近不同的时刻", titleEn: "Moments at different distances" };
+const loaded = Date.now();
+const offsets = [20 * 1000, 3 * 60_000, 5 * 3_600_000, 2 * 86_400_000, 40 * 86_400_000];
+export default function Demo() {
+  return <Stack gap="field" align="start">{offsets.map(offset => <RelativeTime key={offset} value={loaded - offset} />)}</Stack>;
+}
+```
+
+2 more examples: see the component page and its Markdown file.
 
 ## 分栏 Resizable
 
@@ -10071,7 +10181,7 @@ Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
 - 标题与操作同一行；标题长到放不下时操作落到下一行，第一行的中线不动。
 
 ### Customization
-- className、style、render 与 ref 属于各自的部件；标题层级用 SectionTitle 的 level，不改字号。
+- className、style、render 与 ref 属于各自的部件；大纲层级用 SectionTitle 的 level，字号用 step，两者互不牵动：区块里的小节写 level={3} step="body-strong"，比区块标题低一档。
 
 ### Current exports
 - Section: function; owner section; PASS; props: SectionProps
@@ -10125,6 +10235,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### SectionTitle
 区块标题，复用 Heading。
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. 文档大纲层级，独立于文字档。
+- step: TextStep; default "heading". 文字档。区块里的小节用 body-strong（14），比区块标题的 heading（16）低一档。
 - id / render / ref / Heading props: HeadingProps. 传入 id 时区块用它作关联；文字档默认 heading（16/24）。
 
 #### SectionActions
@@ -10158,7 +10269,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 分段控件 SegmentedControl
 
@@ -10640,7 +10751,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
+Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -10652,7 +10763,7 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 - 当前项用圆角的面标出，比悬停面深一级，并加中等字重：悬停是一级清染，当前是一级清墨，指针经过的行不会和当前项长得一样；字重是不靠颜色的第二信号。当前项不画线（用户裁决：直线与圆角面不在同一项上并用）；二级条目左侧的引导线只表达归属，当前项不加深它。
 - 二级入口的展开记号收起时朝内、展开时朝下，与 Tree 的分支同一画法；父项没有图标时，引导线从父项文字的起笔垂下。
 - 当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。
-- 末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。
+- 末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarButton（icon 放 Avatar，名称写在 MenuTrigger 的 children）。去往页面的条目用 SidebarLink，做一件事的用 SidebarButton，别把 button 写成 SidebarLink 的 render。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。
 - 收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。
 - 侧栏最多两级（SidebarSub 下一层），第三级不进侧栏：在 SidebarSub 里再放 SidebarSub 会在开发期直接抛错（与本库其他结构契约一致，而不是悄悄多缩进一层）。第三级放在内容区，用 Tabs 或页内次级导航承载，必要时用 Breadcrumb 交代位置。见「二级导航与内容区 Tabs」。
 - 带 SidebarGroupLabel 的 SidebarGroup 成为 role=group，名称取自标签；没有标签的分组只是排布。调用方自己给 aria-label 或 aria-labelledby 时以调用方为准。
@@ -10671,6 +10782,7 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 - SidebarFooter：末位槽，贴列底；放本人或账户入口。
 - SidebarContent / SidebarGroup / SidebarGroupLabel：原生 nav 与导航组。
 - SidebarLink：真实页面链接。
+- SidebarButton：不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type="button"。
 - SidebarSub / SidebarSubTrigger / SidebarSubContent：可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 
 ### Responsive behavior
@@ -10682,6 +10794,8 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 ### Current exports
 - createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
+- SidebarButton: function; owner sidebar; PASS; props: SidebarButtonProps
+- SidebarButtonProps: type; owner sidebar; PASS
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
@@ -10720,6 +10834,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarButton
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 291 inherited (@types/react 290, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarContent
 - no props declared by this library
@@ -10830,6 +10950,11 @@ Written descriptions; the list above is the type-resolved fact.
 - icon: ReactNode. 收起为 rail 时唯一可见的识别物；没有图标的条目收起后没有可展示的内容。名称（children）在 rail 下只是视觉隐藏（sr-only），可访问名称不变，并由 Tooltip 把名称重新摆给看得见的人。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
+#### SidebarButton
+不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type="button"。
+- icon / count / max: ReactNode / number / number. 与 SidebarLink 同一外观与同一收起行为：rail 下图标是唯一可见的识别物，名称视觉隐藏并由 Tooltip 摆出，count 钉在图标角上。没有 active，也不写 aria-current。
+- render / ref / native props: useRender.ComponentProps<"button">. 可作为 MenuTrigger、PopoverTrigger 的 render 目标：ref 与触发器给的 aria-expanded、aria-haspopup、onClick 都落在这个 button 上；名称写在触发器的 children。
+
 #### SidebarSub / SidebarSubTrigger / SidebarSubContent
 可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. 展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。
@@ -10857,7 +10982,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
-Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
+Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
 
 内容到达之前，先摆出它将占的位置与行数。
 
@@ -10873,10 +10998,10 @@ Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 - Application: 何时开始与结束、久等的处置、内容的真实形状、失败与为空的处置。
 
 ### Composition
-- Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。
+- Skeleton 包住一组 SkeletonLine / SkeletonBlock / SkeletonControl，摆成真实内容的版式；到达后整体换掉，版面不跳。
 
 ### Responsive behavior
-- 宽度由所在容器决定，行宽用 className 表达；行高固定为一材。
+- 宽度由所在容器决定，行宽用 className 表达；行高固定为一材；SkeletonControl 的高度跟随密度（data-density），与同环境的 Input 等高。
 
 ### Customization
 - className 调整行宽与块高；label 写明对象，如「正在加载成员」。
@@ -10885,6 +11010,8 @@ Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 - Skeleton: function; owner skeleton; PASS; props: SkeletonProps
 - SkeletonBlock: function; owner skeleton; PASS; props: SkeletonBlockProps
 - SkeletonBlockProps: type; owner skeleton; PASS
+- SkeletonControl: function; owner skeleton; PASS; props: SkeletonControlProps
+- SkeletonControlProps: type; owner skeleton; PASS
 - SkeletonLine: function; owner skeleton; PASS; props: SkeletonLineProps
 - SkeletonLineProps: type; owner skeleton; PASS
 - SkeletonProps: type; owner skeleton; PASS
@@ -10897,6 +11024,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SkeletonBlock
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SkeletonControl
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -10926,6 +11057,10 @@ Written descriptions; the list above is the type-resolved fact.
 整块内容（图、图表、表格）的位置；高度由 className 给出。
 - className: string; default h-[5 材]. 块高，例如 h-40。
 
+#### SkeletonControl
+填值控件（输入框、选择器）的位置；高与角取填值控件的角色，随密度与同环境的 Input 等高，宽度由 className 给出。
+- className: string; default w-full. 宽度，例如 w-24。高度跟随密度，不由 className 给出。
+
 ### Keyboard
 
 ### Source example
@@ -10951,7 +11086,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 跳转链接 SkipLink
 
@@ -11279,7 +11414,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab
+Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75
 
 数值、单位与说明分别提供。
 
@@ -11289,10 +11424,12 @@ dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用�
 ### Notes
 - 统计口径、更新时间和变化判断属于应用事实；说明可省略。
 - 未知和不适用的读数退为浓墨，不施彩，字号不变；文字由应用给出，不画成 0。没有可比较的数时不放变化量。
+- 读数变了，库不闪烁、不从旧值滚到新值：首次加载、轮询回写、换排序都会改值，哪一次值得提示只有应用知道。
 
 ### Use and ownership
 - 需要识别一个度量的名称、值和单位。
 - 页面顶部的概览读数用 size="lg"：只有读数本身按它在页面上的位置选大小。
+- 整页只围绕一个数时用 size="xl"，所以一页至多一个。
 - Avoid: 跨对象比较使用 Table；趋势图形由具备真实数据的应用组合。
 - Avoid: 同一排读数用同一个 size；没有 36 与 28 两档。
 - Library: 度量名称、值、单位与说明的语义关系。
@@ -11331,7 +11468,7 @@ dl/dt/dd 保留度量关系；零值不消失，未知和不适用必由应用�
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Stat
-- `size?`: `"md" | "lg"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg）；标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。
+- `size?`: `"md" | "lg" | "xl"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg，整页只围绕一个数时用 xl）； 标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。 xl 不另立字号，直接读 display-lg（40/48）：与 lg 的 32 相差 1.25 倍，满足相邻内容档至少 1.2 倍。
 - `state`: `"unknown" | "not-applicable" | "known"`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -11378,7 +11515,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Stat
 dl，状态必填。
 - state: "known" | "unknown" | "not-applicable". 应用确认的度量状态，不产生替代数值。unknown 和 not-applicable 的读数退为浓墨，记在 StatValue 的 data-state 上。
-- size: "md" | "lg"; default "md". 读数的尺寸档，记在根的 data-size 上。lg 把 StatValue 放大到 32/40（md 是 24/28），用于页面顶部的概览读数；标签、单位、说明与变化量的字号不随它变。
+- size: "md" | "lg" | "xl"; default "md". 读数的尺寸档，记在根的 data-size 上。lg 把 StatValue 放大到 32/40（md 是 24/28），用于页面顶部的概览读数；xl 读 display-lg 字阶（40/48），用于整页只围绕一个数的主读数，不另立字号与字重。标签、单位、说明与变化量的字号不随它变。
 - render / ref / native props: useRender.ComponentProps<dl>. 传入标题和值；属性属于实际 dl。
 
 #### StatLabel / StatValue / StatDescription
@@ -11404,7 +11541,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 状态 StatusDot
 
@@ -11419,6 +11556,7 @@ Source SHA-256: 460a2c7c93aa7bbf779ca0c9ad7e6f47f2d7fc13190afd17b95f4717319e3c74
 不把等待、进行中或结果未知混成同一事实。
 
 ### Notes
+- 不为紧急状态加呼吸或闪烁：库里的循环动画只表示进行中；紧急程度由类别色和名称表达。
 - 状态名对应固定的类别：在线是成功，异常是危险，警告和结果未知是警示，提示、等待中、进行中是信息；离线和 neutral 不施彩。同一类别在 Badge 里是同一色相。
 - 结果未知要读者去核实，归警示：它既不是失败，也不是成功。neutral 是没有归类的状态，用 label 写出它到底是什么。
 
@@ -11702,7 +11840,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737
+Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
 
 原生二维关系与完整比较列。
 
@@ -11774,6 +11912,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
+- `fade?`: `"end" | boolean`. 横向溢出提示：还有内容的一端渐隐，滚到头的一端不渐隐。默认两端。 "end"：只渐隐末端——起始端有固定列（DataTable 的 pinned）时，固定列自己的末端线已说明「向起始端还有内容」， 渐隐不能再去淡化一列要保持不透明的固定列。false：不渐隐。
 - `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -11806,6 +11945,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### TableContainer
 表格的纸与横向滚动容器。
 - framed: boolean; default true. false：表格放在已有的一张纸上（Card、面板），不再铺线、底与圆角；贴着承载面的边放置，由承载面裁切圆角。
+- fade: boolean | 'end'; default true. 横向放不下时，还有内容的一侧渐隐（读 data-overflow-x-start / end，宽度同 ScrollArea 的 --qy-scroll-fade）；滚到头的一侧不渐隐。边框线与未加框时的焦点环不渐隐。'end' 只渐隐末端，用于有固定列的表（固定列不透明，起始端渐隐会把它变暗）；false 关闭。容器同时设 overscroll-behavior-x: contain，横向滚到头不带动整页。
 - tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default 按实测滚动与否. 内容真的超出（横向或纵向）时才可聚焦（tabIndex=0），用于键盘滚动，并成为具名区域：取 aria-label / aria-labelledby，否则沿用表的 caption 或 aria-label；放得下时不进 Tab 序列。ref 属于容器；显式传入的 tabIndex 优先。
 
 #### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
@@ -13834,7 +13974,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: 3f631d2cc01de8867c121b4787c811ab1207d12add9bf19d7c0b9525086f510f
+Source SHA-256: bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca
 
 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。
 
@@ -13887,6 +14027,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Text
 - `numeric?`: `boolean`.
 - `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
+- `tone?`: `"default" | "muted"`. 墨色：default 沿用所在处的前景色；muted 用弱化前景（`text-muted-foreground`），做辅助说明。 没有 danger：错误文字属于 FieldError（功能纯粹，STANDARDS §1），Text 不单设红色。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -13913,6 +14054,7 @@ Written descriptions; the list above is the type-resolved fact.
 正文、辅助说明或数值；默认 p。
 - step: TextStep; default "body". 如 reading、support、caption、metric；不新增文字档。
 - numeric: boolean; default false. 等宽数字；未知与空值由应用如实呈现。
+- tone: "default" | "muted"; default "default". default 沿用所在处的前景色；muted 用弱化前景，做辅助说明。没有 danger：错误文字由 FieldError 承担。
 - render / ref / 原生属性: useRender.ComponentProps<"p">. 内联文字 render 成 span。颜色默认继承。
 
 ### Keyboard
@@ -14036,7 +14178,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
+Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 
@@ -14161,7 +14303,7 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / children / native props: useRender.ComponentProps<div>. 以有名称的 quiet 按钮（md 或 sm）收尾时整组抵消它的横向留白，文字压在内容右缘。
 
 #### WorkspaceContent
-唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。
+唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。它是定位祖先（relative），内容里的绝对定位元素不会越出滚动区。
 - render / ref / children / native props: useRender.ComponentProps<main>. ref 指向滚动元素，跟随滚动的部件（目录、虚拟列表）从这里取容器。
 - transitionKey: React.Key. 换页的标识，通常传路由路径。变化时滚动回到顶部，内容重放一次进场；首次挂载不动。地址带 #锚点 时不动滚动，交给路由滚到锚点。键盘操作时不播进场，减少动效时只淡入。
 

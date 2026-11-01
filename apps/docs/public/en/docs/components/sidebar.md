@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
+Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -15,7 +15,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - The current item is marked by a rounded surface one step deeper than the hover surface, plus medium weight: hover is one wash step, current is one ink step, so a row under the pointer never looks like the current one, and the weight is a second cue that does not rely on colour. The current item carries no line (user ruling: a straight line and a rounded surface are never combined on one item); the guide line beside a sub-level only expresses membership and the current item does not deepen it.
 - The sub-level chevron points inward when closed and down when open, the same mark as a Tree branch; when the parent has no icon, the guide line drops from the start of its text.
 - The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.
-- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
+- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarButton (an Avatar as icon, the name as the MenuTrigger's children). Items that go to a page use SidebarLink and items that do one thing use SidebarButton; do not render a button through SidebarLink. The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
 - In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.
 - A sidebar has at most two levels (one under SidebarSub); the third level does not go in the sidebar. A SidebarSub inside another SidebarSub throws during development (matching the library's other structural contracts, rather than quietly indenting one more level). Put the third level in the content area, carried by Tabs or an in-page secondary nav, with a Breadcrumb to say where you are. See "Sub-level navigation with Tabs in the content".
 - A SidebarGroup with a SidebarGroupLabel is a role=group named by that label; a group without one is only layout. A caller's aria-label or aria-labelledby takes precedence.
@@ -34,6 +34,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarFooter: The end slot, pinned to the bottom of the column; holds the account entry.
 - SidebarContent / SidebarGroup / SidebarGroupLabel: A native nav and navigation groups.
 - SidebarLink: A real page link.
+- SidebarButton: An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type="button".
 - SidebarSub / SidebarSubTrigger / SidebarSubContent: An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
 
 ## Responsive behavior
@@ -45,6 +46,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 ## Current exports
 - createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
+- SidebarButton: function; owner sidebar; PASS; props: SidebarButtonProps
+- SidebarButtonProps: type; owner sidebar; PASS
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
@@ -83,6 +86,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarButton
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 291 inherited (@types/react 290, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarContent
 - no props declared by this library
@@ -193,6 +202,11 @@ A real page link.
 - icon: ReactNode. The only visible identifier in the rail; a link without an icon has nothing to show once collapsed. The name (children) is only visually hidden (sr-only) in the rail — the accessible name is unchanged, and a Tooltip restores a sighted label.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
+### SidebarButton
+An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type="button".
+- icon / count / max: ReactNode / number / number. Same look and collapsed behaviour as SidebarLink: in the rail the icon is the only visible identifier, the name is visually hidden and a Tooltip restores it, and the count is pinned to the icon. There is no active and no aria-current.
+- render / ref / native props: useRender.ComponentProps<"button">. Works as the render target of MenuTrigger and PopoverTrigger: the ref and the trigger's aria-expanded, aria-haspopup and onClick all land on this button; the name goes in the trigger's children.
+
 ### SidebarSub / SidebarSubTrigger / SidebarSubContent
 An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover.
@@ -247,10 +261,10 @@ export default function Demo() {
 ### 标识与账户入口
 Source: apps/docs/src/content/sidebar/demos/03-identity.tsx
 ```tsx
-import { IconLayoutSidebar, IconListTree } from "@tabler/icons-react";
+import { IconLayoutSidebar, IconListTree, IconSearch } from "@tabler/icons-react";
 import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Sidebar, SidebarButton, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标识与账户入口", titleEn: "Identity and account entry" } satisfies DemoMeta;
 export default function Demo() {
@@ -262,13 +276,14 @@ export default function Demo() {
     </SidebarHeader>
     <SidebarContent aria-label="标识与账户导航" className="mt-(--qy-field-group-gap) flex-1">
       <SidebarGroup>
+        <SidebarButton icon={<IconSearch aria-hidden="true" />}>搜索</SidebarButton>
         <SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
         <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
       </SidebarGroup>
     </SidebarContent>
     <SidebarFooter>
       <Menu>
-        <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+        <MenuTrigger render={<SidebarButton icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} />}>陈致远</MenuTrigger>
         <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
           <MenuItem>账户</MenuItem>
           <MenuSeparator />

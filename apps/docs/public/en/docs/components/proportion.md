@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
+Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
 
 Which parts make up a whole and how much each takes.
 
 ## Decision
-Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend="hidden" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice.
+Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend="hidden" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice. When part values change each segment travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ## Use and ownership
 - The make-up of a whole should read at a glance.

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
+Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -15,7 +15,7 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 - 当前项用圆角的面标出，比悬停面深一级，并加中等字重：悬停是一级清染，当前是一级清墨，指针经过的行不会和当前项长得一样；字重是不靠颜色的第二信号。当前项不画线（用户裁决：直线与圆角面不在同一项上并用）；二级条目左侧的引导线只表达归属，当前项不加深它。
 - 二级入口的展开记号收起时朝内、展开时朝下，与 Tree 的分支同一画法；父项没有图标时，引导线从父项文字的起笔垂下。
 - 当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。
-- 末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。
+- 末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarButton（icon 放 Avatar，名称写在 MenuTrigger 的 children）。去往页面的条目用 SidebarLink，做一件事的用 SidebarButton，别把 button 写成 SidebarLink 的 render。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。
 - 收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。
 - 侧栏最多两级（SidebarSub 下一层），第三级不进侧栏：在 SidebarSub 里再放 SidebarSub 会在开发期直接抛错（与本库其他结构契约一致，而不是悄悄多缩进一层）。第三级放在内容区，用 Tabs 或页内次级导航承载，必要时用 Breadcrumb 交代位置。见「二级导航与内容区 Tabs」。
 - 带 SidebarGroupLabel 的 SidebarGroup 成为 role=group，名称取自标签；没有标签的分组只是排布。调用方自己给 aria-label 或 aria-labelledby 时以调用方为准。
@@ -34,6 +34,7 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 - SidebarFooter：末位槽，贴列底；放本人或账户入口。
 - SidebarContent / SidebarGroup / SidebarGroupLabel：原生 nav 与导航组。
 - SidebarLink：真实页面链接。
+- SidebarButton：不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type="button"。
 - SidebarSub / SidebarSubTrigger / SidebarSubContent：可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 
 ## Responsive behavior
@@ -45,6 +46,8 @@ Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
 ## Current exports
 - createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
+- SidebarButton: function; owner sidebar; PASS; props: SidebarButtonProps
+- SidebarButtonProps: type; owner sidebar; PASS
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
@@ -83,6 +86,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarButton
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 291 inherited (@types/react 290, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarContent
 - no props declared by this library
@@ -193,6 +202,11 @@ Written descriptions; the list above is the type-resolved fact.
 - icon: ReactNode. 收起为 rail 时唯一可见的识别物；没有图标的条目收起后没有可展示的内容。名称（children）在 rail 下只是视觉隐藏（sr-only），可访问名称不变，并由 Tooltip 把名称重新摆给看得见的人。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
+### SidebarButton
+不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type="button"。
+- icon / count / max: ReactNode / number / number. 与 SidebarLink 同一外观与同一收起行为：rail 下图标是唯一可见的识别物，名称视觉隐藏并由 Tooltip 摆出，count 钉在图标角上。没有 active，也不写 aria-current。
+- render / ref / native props: useRender.ComponentProps<"button">. 可作为 MenuTrigger、PopoverTrigger 的 render 目标：ref 与触发器给的 aria-expanded、aria-haspopup、onClick 都落在这个 button 上；名称写在触发器的 children。
+
 ### SidebarSub / SidebarSubTrigger / SidebarSubContent
 可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. 展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。
@@ -247,10 +261,10 @@ export default function Demo() {
 ### 标识与账户入口
 Source: apps/docs/src/content/sidebar/demos/03-identity.tsx
 ```tsx
-import { IconLayoutSidebar, IconListTree } from "@tabler/icons-react";
+import { IconLayoutSidebar, IconListTree, IconSearch } from "@tabler/icons-react";
 import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Sidebar, SidebarButton, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarLink, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "标识与账户入口", titleEn: "Identity and account entry" } satisfies DemoMeta;
 export default function Demo() {
@@ -262,13 +276,14 @@ export default function Demo() {
     </SidebarHeader>
     <SidebarContent aria-label="标识与账户导航" className="mt-(--qy-field-group-gap) flex-1">
       <SidebarGroup>
+        <SidebarButton icon={<IconSearch aria-hidden="true" />}>搜索</SidebarButton>
         <SidebarLink href="/components/sidebar" active icon={<IconLayoutSidebar aria-hidden="true" />}>侧栏导航</SidebarLink>
         <SidebarLink href="/components/tree" icon={<IconListTree aria-hidden="true" />}>层级集合</SidebarLink>
       </SidebarGroup>
     </SidebarContent>
     <SidebarFooter>
       <Menu>
-        <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+        <MenuTrigger render={<SidebarButton icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} />}>陈致远</MenuTrigger>
         <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
           <MenuItem>账户</MenuItem>
           <MenuSeparator />

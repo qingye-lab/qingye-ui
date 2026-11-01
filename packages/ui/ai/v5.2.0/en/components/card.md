@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
-Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
+Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
 
 Bound an independently identifiable object.
 
 ## Decision
-Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons.
+Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons. Card has no elevation steps, paper surfaces or hover lift: it never leaves the plane, and a shadow would fake a layer; change ground and radius through system tokens in the theme (radius is --qy-radius-panel).
 
 ## Notes
 - Use Heading or a real h2/h3, and compose content and actions with Stack, Inline and native structure.
@@ -54,7 +54,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Card
 Panel surface, boundary and radius. It supplies no title, content slots, padding or layout.
-- render: ReactElement | (props, state) => ReactElement. Compose an article, section or native link while retaining handlers and refs.
+- render: ReactElement | (props, state) => ReactElement. Compose an article, section or native link while retaining handlers and refs. Rendered as a[href] or button, the whole card gets hover and press surfaces (the same feedback ladder as Item row entries); a button fills the width with text starting at the line start.
 - className / style: string / CSSProperties. Compose layout and content inset for this object. Caller classes are merged last.
 - Native props: ComponentPropsWithRef<"div">. Forward id, aria-*, data-*, events and ref.
 

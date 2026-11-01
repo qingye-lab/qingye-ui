@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
-Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
+Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
 
 内容到达之前，先摆出它将占的位置与行数。
 
@@ -19,10 +19,10 @@ Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 - Application: 何时开始与结束、久等的处置、内容的真实形状、失败与为空的处置。
 
 ## Composition
-- Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。
+- Skeleton 包住一组 SkeletonLine / SkeletonBlock / SkeletonControl，摆成真实内容的版式；到达后整体换掉，版面不跳。
 
 ## Responsive behavior
-- 宽度由所在容器决定，行宽用 className 表达；行高固定为一材。
+- 宽度由所在容器决定，行宽用 className 表达；行高固定为一材；SkeletonControl 的高度跟随密度（data-density），与同环境的 Input 等高。
 
 ## Customization
 - className 调整行宽与块高；label 写明对象，如「正在加载成员」。
@@ -31,6 +31,8 @@ Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
 - Skeleton: function; owner skeleton; PASS; props: SkeletonProps
 - SkeletonBlock: function; owner skeleton; PASS; props: SkeletonBlockProps
 - SkeletonBlockProps: type; owner skeleton; PASS
+- SkeletonControl: function; owner skeleton; PASS; props: SkeletonControlProps
+- SkeletonControlProps: type; owner skeleton; PASS
 - SkeletonLine: function; owner skeleton; PASS; props: SkeletonLineProps
 - SkeletonLineProps: type; owner skeleton; PASS
 - SkeletonProps: type; owner skeleton; PASS
@@ -43,6 +45,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SkeletonBlock
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SkeletonControl
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -71,6 +77,10 @@ Written descriptions; the list above is the type-resolved fact.
 ### SkeletonBlock
 整块内容（图、图表、表格）的位置；高度由 className 给出。
 - className: string; default h-[5 材]. 块高，例如 h-40。
+
+### SkeletonControl
+填值控件（输入框、选择器）的位置；高与角取填值控件的角色，随密度与同环境的 Input 等高，宽度由 className 给出。
+- className: string; default w-full. 宽度，例如 w-24。高度跟随密度，不由 className 给出。
 
 ## Keyboard
 
@@ -160,6 +170,28 @@ export default function Demo() {
       <ul className="m-0 flex list-none flex-col p-0">{ROWS.map(row => <li className="flex h-(--qy-cai) items-center text-body" key={row}>{row}</li>)}</ul>
       <Button onClick={() => setRefreshing(true)} loading={refreshing} variant="bordered">刷新</Button>
     </Stack>
+  </Card>;
+}
+```
+
+### 与控件同高
+Source: apps/docs/src/content/skeleton/demos/04-control.tsx
+```tsx
+import { Card } from "@qingye_lab/ui/components/card";
+import { Skeleton, SkeletonControl, SkeletonLine } from "@qingye_lab/ui/components/skeleton";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "与控件同高", titleEn: "Same height as the control" } satisfies DemoMeta;
+
+export default function Demo() {
+  return <Card className="w-full max-w-md p-(--qy-panel-padding)">
+    <Skeleton label="正在加载表单" className="gap-(--qy-field-gap)">
+      <SkeletonLine className="w-1/4" />
+      <SkeletonControl />
+      <SkeletonLine className="w-1/3" />
+      <SkeletonControl />
+      <SkeletonControl className="w-24" />
+    </Skeleton>
   </Card>;
 }
 ```

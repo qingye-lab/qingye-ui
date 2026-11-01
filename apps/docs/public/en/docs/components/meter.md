@@ -8,7 +8,7 @@ Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
 A real measurement over a valid range.
 
 ## Decision
-Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue.
+Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ## Use and ownership
 - Present measured values and units.

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
+Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
 
 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
@@ -11,6 +11,7 @@ Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 图只画数据。已知0、未知和不适用的单个值分别成立：未知值形成gap，表格保留其真实名称。整张图没有记录、结果未知或不适用时不渲染图，由调用方在原位放 Empty。图形不替代可达数值。参照（目标带、参照线）、背景系列与事件只帮读者定位数据，自己不是数据：用墨不用色，名称必填并出现在图例与数据表。量轴只有折线可以不从零起，柱与面积的长度、面积编码一旦截断，比例就是假的。状态色（series[].tone）由应用声明，组件不从数值猜好坏。阶梯（series[].interpolation: "step"）表达值在两次变化之间保持不变，取 step-after：记录是「这一刻起变成了这个值」，step-before 会把变化画到观测之前；不提供平滑曲线，曲线在两点之间画出数据里没有的值。占比构成（bar-share / area-share）读的是构成怎样变而不是多少：各行内归一到该行之和，量轴固定 0–100%，刻度 0/25/50/75/100；含未知或不适用值、或和为 0 的行整行不画（整体不可得，每一部分的占比都会是假的），已知原值在数据表里如实列出；负值抛错。柱上标值（valueLabels）只给单系列的 bar 与 bar-horizontal，标了值就不再画量轴刻度与网格（同一事实不说两遍）。堆叠与占比的读数和数据表给出合计；含缺项的行不合计，数据表里写明缺项。
 
 ## Notes
+- 入场不画生长动画：动只交代真实变化，数据第一次出现并不是变化；数据更新时的过渡还没有定义取值，暂不加。
 - 系列的区分不只靠色相：折线的每个系列有自己的标记形状（圆、方、三角、菱形、叉，按系列顺序分配），图例的键与折线一致，图例文字、悬停读数和数据表里都有系列名。柱、堆叠与面积是填充形式，靠固定的系列顺序区分——图例、柱的左右次序、堆叠的上下次序、读数与数据表同一个次序，段间有 2px 纸色空隙；这类图不另加纹理。
 - 没有记录时 Chart 抛错而不画空框。请求中的图用 AsyncContent 组合：先判空再渲染，`<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` 里只放 Chart，空结果由 Empty 在原位承担，加载与失败的反馈在内容之后；见「请求状态与空结果」。
 - null、NaN、Infinity、缺失键不能表示0；用显式unknown或not-applicable表达。
@@ -69,6 +70,7 @@ Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
+- ChartRange: type; owner chart; PASS
 - ChartReference: type; owner chart; PASS
 - ChartRow: type; owner chart; PASS
 - ChartSeries: type; owner chart; PASS
@@ -165,7 +167,7 @@ figure名称、共同轴量纲、不同系列形态与同源可见Table。
 - aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
 - categoryLabel / valueLabel: string. 非空分类轴名与共享量纲/单位；donut 不画轴线，但两个名字仍用于等价数据表与中心读数的说明文字。
-- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
+- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step"; range?: { min: string; max: string } }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。range: { min, max } 只用于 line 的非背景系列，min、max 是 rows 中 values 的键（须为不同的键，每行都要有值，可显式未知）：这条线在每一点上还有一段区间时，画成同色的淡带垫在线下（浓度为预设），读数多一行“范围 min–max”，数据表在该系列后多“最小值”“最大值”两列；某点任一端不可得则该点无带；两端都已知时 min 大于 max、或越出 valueDomain 都抛错；线本身（key 的值）不要求落在区间正中。带区间的单系列仍显示图例，让淡带的键与线对上。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
 - rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。
 - contextLabel: string. 有背景系列时必填：图例里合成一项的名字（淡墨线键 + 此名），例如「其余蚕室」。背景系列各自的名字只出现在等价数据表。缺失抛错。
 - references: ({ kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string })[]. 量轴上的参照：目标带或参照线（纵向图是横带 / 横线，bar-horizontal 是竖带 / 竖线）。画成墨、在数据之后；量轴范围自动算入；label 必填，出现在图例与数据表下的表注；band 须 from < to，数值有限；donut 传入抛错。有带时悬停读数为每个数值多一行相对目标的位置（高于、低于多少，或在内）；多个带时只对第一个计算。
@@ -515,5 +517,22 @@ export default function Demo() {
       <Chart type="bar" label={en ? "Sync runs" : "同步次数"} categoryLabel={en ? "Date" : "日期"} valueLabel={en ? "Runs" : "次数"} series={[{ key: "count", label: en ? "Runs" : "次数" }]} rows={rows} />
     </AsyncContent>
   </Stack>;
+}
+```
+
+### 一条线的区间：均值与最低最高
+Source: apps/docs/src/content/chart/demos/21-spread-band.tsx
+```tsx
+import { Chart } from "@qingye_lab/ui/components/chart";
+export const meta = { title: "一条线的区间：均值与最低最高", titleEn: "A line with its spread: mean with minimum and maximum" };
+const days = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+const mean = [24.1, 24.8, 25.6, 26.2, 25.4, 24.6, 23.9];
+const low = [22.0, 22.9, 23.4, 24.1, 23.2, 22.5, 21.8];
+const high = [26.3, 27.1, 28.0, 28.6, 27.9, 26.8, 26.0];
+export default function Demo() {
+  return <Chart type="line" className="w-full max-w-2xl" label="3 号蚕室日温" categoryLabel="日期" valueLabel="温度（℃）"
+    series={[{ key: "mean", label: "日均温", range: { min: "low", max: "high" } }]}
+    valueDomain={[20, 30]} formatValue={value => `${value} ℃`}
+    rows={days.map((day, index) => ({ id: day, label: day, values: { mean: mean[index]!, low: low[index]!, high: high[index]! } }))} />;
 }
 ```

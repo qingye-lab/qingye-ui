@@ -11,6 +11,7 @@ Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
 方向由公开 swipeDirection 决定；实际 modal 决定焦点与背景阻断，关闭不代表撤销。
 
 ## Notes
+- 库不设宽度档位：侧向抽屉的宽度由内容决定。项目需要统一时，在自己的组合里定一到两档宽度，用 className 传入。
 - 从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。
 - 程序打开且无触发者时明确 finalFocus。
 - 长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。

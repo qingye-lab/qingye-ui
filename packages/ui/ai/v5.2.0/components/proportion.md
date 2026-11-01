@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
+Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
 
 一个整体由哪几部分组成，各占多少。
 
 ## Decision
-用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend="hidden" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。
+用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend="hidden" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。部分的数值变化时各段长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。
 
 ## Use and ownership
 - 一个整体的构成需要一眼看出。

@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T11:19:39.325Z",
-  "revision": "9387212c0134441470393aa3f37ca02826551665",
+  "generatedAt": "2026-11-01T13:08:28.962Z",
+  "revision": "6e9624eafae89c20ee5dc50c6a9e4c037dee8eb6",
   "fingerprint": {
-    "sha256": "ec292a37df1cc6c2d027ecf505c448635c23a4e3a15d1bc6618226d38d975ae1",
+    "sha256": "c9d24b77cb3f103b9b20888672bbeda0876373d5f31309df145cb4af36717f42",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -48,7 +48,7 @@
       },
       {
         "path": "apps/docs/src/content/bulk-action-bar/meta.ts",
-        "sha256": "57a36159a8d193b607cfd057754a6ce2d5a8fdaa97bc55f0b433e5de692f664e"
+        "sha256": "34f19579bcd0ffe7c01e8345269cf708c21c491a3005a89cb9d009e5f8ffdadf"
       },
       {
         "path": "apps/docs/src/content/button-group/meta.ts",
@@ -64,7 +64,7 @@
       },
       {
         "path": "apps/docs/src/content/card/meta.ts",
-        "sha256": "462cf49c348719298362953c4295fbdc6258761d8d0245034187f79f2665b358"
+        "sha256": "f8f1b36be99793e308b9d75925609ab56af56875723ce43bcf33b4e585dc122d"
       },
       {
         "path": "apps/docs/src/content/cascader/meta.ts",
@@ -72,7 +72,7 @@
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
-        "sha256": "e3a1b981139a903ef79e21272a0ab9cde5a54a4a266438cbfccbfe03c3e6b1ba"
+        "sha256": "09073dc64c4ef2fa1e50227adda71f238bee60a44040054d21ef9bfdfb20a450"
       },
       {
         "path": "apps/docs/src/content/checkbox-group/meta.ts",
@@ -132,7 +132,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "e89733194a8c01609884ded3403a47d9521ee4978c95f5be73cf896416a64d43"
+        "sha256": "ab360f8c6694b9de5b2efcb001af49f169227a62c99dd054770f8973e2638645"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -156,11 +156,11 @@
       },
       {
         "path": "apps/docs/src/content/dialog/meta.ts",
-        "sha256": "c572578c336c0ff2c882cae9e3a14c8c4be16e1367cf6aef9b9ae8a6a735cc00"
+        "sha256": "c3bf512ecb8a8a1bb76ab8161482f208c1fd93b67d9e150b6d7b115c69085d76"
       },
       {
         "path": "apps/docs/src/content/drawer/meta.ts",
-        "sha256": "500b57f1e7de1800e8d693031d669e1efb7ccdeb1a25a4efaa885f09f02606d8"
+        "sha256": "632529915fae1d2d9e85b1aa10a3d848ae3ad18cdacc3f1a8a19a2358c3c550a"
       },
       {
         "path": "apps/docs/src/content/empty/meta.ts",
@@ -244,7 +244,7 @@
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
-        "sha256": "36e966c65df49051892549a147f4fc51bc3603371f18254b4884a6148de13642"
+        "sha256": "7bc65aea900b39f5c450d3dc973c21362f4680ddb073d464a7a8e0af4a04bd18"
       },
       {
         "path": "apps/docs/src/content/native-select/meta.ts",
@@ -268,7 +268,7 @@
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "d664e4e234017cdf740fc8f3350b2d2a336c0048dec9d06b991553aa1ada9f9e"
+        "sha256": "f88897f1ce950ca51c5304022cd20f0cb18426c2b7073ffcac22a72867f58375"
       },
       {
         "path": "apps/docs/src/content/password-input/meta.ts",
@@ -284,11 +284,11 @@
       },
       {
         "path": "apps/docs/src/content/progress/meta.ts",
-        "sha256": "4fddc0c975a71a14433ffbcddd772c409447d833293da9c5e8295ec2d7a0e50c"
+        "sha256": "95fc8bbd3a185060482e546567fdd88ca7ea65fd91145f8cbb5d1ed1a204836c"
       },
       {
         "path": "apps/docs/src/content/proportion/meta.ts",
-        "sha256": "414c8d04efb4f65833c01bc291ebfaafff1c979184f1fc32f5fbfa1fcb194a03"
+        "sha256": "a5352461d93a0ccb3300ea48dd799b3d330bf9636c1beb3cb24d56079ceb991e"
       },
       {
         "path": "apps/docs/src/content/prose/meta.ts",
@@ -301,6 +301,10 @@
       {
         "path": "apps/docs/src/content/rating/meta.ts",
         "sha256": "7259ae8ecc37e76432e59debe34e9530b7812827d6e837595fbedd5a388e228e"
+      },
+      {
+        "path": "apps/docs/src/content/relative-time/meta.ts",
+        "sha256": "286242eeb320dfea8a3e316c601d4cc761289dce8eabc8b90ee5ca308dcf8fb8"
       },
       {
         "path": "apps/docs/src/content/resizable/meta.ts",
@@ -324,7 +328,7 @@
       },
       {
         "path": "apps/docs/src/content/section/meta.ts",
-        "sha256": "192aea7420933a33978dd0dae9d53d0ffe624e040d00065c53d98526466ba497"
+        "sha256": "1a66128ea9e707d00681aca6446b2c96a926daabc0bbac32643f339e47d87994"
       },
       {
         "path": "apps/docs/src/content/segmented-control/meta.ts",
@@ -344,11 +348,11 @@
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
-        "sha256": "11d96482b3251478f55f8ef04dfc594c24fcb6fb226fbdb48212d7c327a0149a"
+        "sha256": "d370381e76bf9cb6313996e2c7bdc3f01679a7d4a4c2c3cead13c778591d0d4d"
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
-        "sha256": "0ed995f03e84e04168cb27093b0094c96b9dfcee6eb7f9591f2a2287e572274f"
+        "sha256": "78682fbe420011c0812f66831189419d5209e9d294deb403f2773a38ef1c60de"
       },
       {
         "path": "apps/docs/src/content/skip-link/meta.ts",
@@ -364,11 +368,11 @@
       },
       {
         "path": "apps/docs/src/content/stat/meta.ts",
-        "sha256": "6207b2d9e118e14c5b4665346c3f519e6f5664ffbc5b830e5ae1941c5101f893"
+        "sha256": "516f67d54e0620363d5e19a0f1eb50d02f35a9f9f2542fbba6eed7aa4fc8be4f"
       },
       {
         "path": "apps/docs/src/content/status-dot/meta.ts",
-        "sha256": "f3558a073c3a76235ce071e246b1c8bd2c3a7240b0f6073b3b3fab960a08f34d"
+        "sha256": "2c529d43ad3504999e61f5b4d49736e5b37d59eb4efbdbb427445f4eac592cfc"
       },
       {
         "path": "apps/docs/src/content/steps/meta.ts",
@@ -380,7 +384,7 @@
       },
       {
         "path": "apps/docs/src/content/table/meta.ts",
-        "sha256": "e3ca840869077c973b927772dd5618f21676ca34168a414f44e3d353d7eafa75"
+        "sha256": "1664f111eb66f8b29ae6aa760d2703770cb324a72de555bc0b289a05b2950d19"
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
@@ -452,7 +456,7 @@
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
-        "sha256": "5cf4fa1bfd8d6221521dce4e2700d02ffcc4ba6669cdc1110ec035b426f55aeb"
+        "sha256": "75576585f02bd8f5311153e5d5ed68eec21feb9aacd9cfcd7dcf38e957568d4a"
       },
       {
         "path": "apps/docs/src/content/virtual-list/meta.ts",
@@ -460,7 +464,7 @@
       },
       {
         "path": "apps/docs/src/content/workspace/meta.ts",
-        "sha256": "8623ff4749c9e191f15fc5989a1864dc28beeb032849338080bc3962e5ea99c9"
+        "sha256": "af23a57474ba20acb9d468f0bdaf01d8a22436ba5bd9b6f2a1409ff954dbe8e9"
       },
       {
         "path": "apps/docs/src/lib/types.ts",
@@ -476,11 +480,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "af197a6f4c2d00fd19ef4b72b64c24caf9316f7a315ba3631d433010d591376a"
+        "sha256": "0b371d0342ae3b9aa474cf76bf2dffd48dc334f065097dbc46b5cd735823f921"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "98b1248c4eff3a0279be63d99f9ce56490978154e27f73286f1881b672152309"
+        "sha256": "687f3bb8a708edbc962cd11d6e47ea8fff9446fed293036e9b3c2519ed551bed"
       },
       {
         "path": "packages/ui/package.json",
@@ -528,7 +532,7 @@
       },
       {
         "path": "packages/ui/src/components/bulk-action-bar.tsx",
-        "sha256": "0ee64f6d87a9f5c4cdc29e90f2582d267f49a94e6a881bb72f3784cd8ff9a8af"
+        "sha256": "5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680"
       },
       {
         "path": "packages/ui/src/components/button-group.tsx",
@@ -544,7 +548,7 @@
       },
       {
         "path": "packages/ui/src/components/card.tsx",
-        "sha256": "1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1"
+        "sha256": "8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae"
       },
       {
         "path": "packages/ui/src/components/cascader.tsx",
@@ -552,7 +556,7 @@
       },
       {
         "path": "packages/ui/src/components/chart.tsx",
-        "sha256": "0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36"
+        "sha256": "08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75"
       },
       {
         "path": "packages/ui/src/components/checkbox-group.tsx",
@@ -612,7 +616,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929"
+        "sha256": "d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -632,7 +636,7 @@
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
-        "sha256": "31a7f512ed6965e5f6b51a6e6a08f789f48cac1ed438d82f5b13d089e3fb546c"
+        "sha256": "01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0"
       },
       {
         "path": "packages/ui/src/components/dialog.tsx",
@@ -748,7 +752,7 @@
       },
       {
         "path": "packages/ui/src/components/pagination.tsx",
-        "sha256": "7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac"
+        "sha256": "6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379"
       },
       {
         "path": "packages/ui/src/components/password-input.tsx",
@@ -768,7 +772,7 @@
       },
       {
         "path": "packages/ui/src/components/proportion.tsx",
-        "sha256": "beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb"
+        "sha256": "0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d"
       },
       {
         "path": "packages/ui/src/components/prose.tsx",
@@ -781,6 +785,10 @@
       {
         "path": "packages/ui/src/components/rating.tsx",
         "sha256": "280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd"
+      },
+      {
+        "path": "packages/ui/src/components/relative-time.tsx",
+        "sha256": "6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6"
       },
       {
         "path": "packages/ui/src/components/resizable.tsx",
@@ -824,11 +832,11 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54"
+        "sha256": "e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
-        "sha256": "2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871"
+        "sha256": "5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f"
       },
       {
         "path": "packages/ui/src/components/skip-link.tsx",
@@ -844,7 +852,7 @@
       },
       {
         "path": "packages/ui/src/components/stat.tsx",
-        "sha256": "18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab"
+        "sha256": "26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75"
       },
       {
         "path": "packages/ui/src/components/status-dot.tsx",
@@ -860,7 +868,7 @@
       },
       {
         "path": "packages/ui/src/components/table.tsx",
-        "sha256": "ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737"
+        "sha256": "2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a"
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
@@ -932,7 +940,7 @@
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
-        "sha256": "3f631d2cc01de8867c121b4787c811ab1207d12add9bf19d7c0b9525086f510f"
+        "sha256": "bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca"
       },
       {
         "path": "packages/ui/src/components/virtual-list.tsx",
@@ -940,11 +948,11 @@
       },
       {
         "path": "packages/ui/src/components/workspace.tsx",
-        "sha256": "6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e"
+        "sha256": "faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269"
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "7aa987c1684a3118da25532a9c410f2a647cc1d7c97acd22b6dc5813fe3bc992"
+        "sha256": "3ae93b19fb2e1dddc56ade4ef14040feb6108cfa3aab71196b8b87f343cf13d2"
       },
       {
         "path": "packages/ui/styles.css",
@@ -1086,10 +1094,10 @@
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 113,
-    "catalog": 113,
+    "components": 114,
+    "catalog": 114,
     "dist": 113,
-    "local": 113
+    "local": 114
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -3841,7 +3849,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 23
+            "line": 27
           }
         },
         {
@@ -3849,7 +3857,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 37
+            "line": 41
           }
         },
         {
@@ -3857,7 +3865,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 36
+            "line": 40
           }
         },
         {
@@ -3865,7 +3873,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 35
+            "line": 39
           }
         },
         {
@@ -3873,7 +3881,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 34
+            "line": 38
           }
         },
         {
@@ -3881,7 +3889,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 39
+            "line": 43
           }
         },
         {
@@ -3889,7 +3897,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 38
+            "line": 42
           }
         },
         {
@@ -3897,7 +3905,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 42
+            "line": 46
           }
         },
         {
@@ -3905,7 +3913,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/bulk-action-bar.tsx",
-            "line": 40
+            "line": 44
           }
         },
         {
@@ -3992,6 +4000,18 @@
                 "descriptionEn": "Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck)."
               },
               {
+                "name": "formatCount",
+                "type": "(count: number) => string",
+                "description": "自定已选数量的文案，默认「已选 N 项」。入参是 extent.count（有 extent 时）或 targets.length。传函数而非量词：量词与名词的位置、单复数随语言和对象变化，由调用方按当前界面语言写完整句，如「3 个订单」「3 orders selected」。",
+                "descriptionEn": "Customizes the selected-count text; the default reads \"N selected\". It receives extent.count when extent is present, otherwise targets.length. A function rather than a unit string, since measure word, noun placement and plurals vary by language and object: the caller writes the whole phrase for the current UI language."
+              },
+              {
+                "name": "summary",
+                "type": "React.ReactNode",
+                "description": "数量之后的补充摘要，如合计金额、总容量。与数量同在 aria-describedby 引用的区域，读屏一并读出；使用等宽数字、不截断，放不下时被截断的是后面的对象清单。数据由应用计算，库不汇总。",
+                "descriptionEn": "A supplementary summary after the count, such as a total amount or size. It lives in the same aria-describedby region as the count, so screen readers read both; it uses tabular numbers and is not truncated, the target list after it truncates first. The application computes the data; the library does not aggregate."
+              },
+              {
                 "name": "disabled / onClear",
                 "type": "boolean / callback",
                 "description": "清除收到当前快照，不取消服务或自行清空应用状态。",
@@ -4039,10 +4059,12 @@
           }
         ],
         "notes": [
-          "库显示对象版本而不推断新旧；应用在执行边界复核实际版本。"
+          "库显示对象版本而不推断新旧；应用在执行边界复核实际版本。",
+          "自 5.2.0：新增 formatCount 与 summary，用于按对象改写数量文案、补充合计；不传时与此前一致。"
         ],
         "notesEn": [
-          "The library displays versions without judging freshness; applications revalidate actual versions at execution."
+          "The library displays versions without judging freshness; applications revalidate actual versions at execution.",
+          "Since 5.2.0: formatCount and summary rewrite the count text per object and add totals; omitting them behaves as before."
         ],
         "design": {
           "methods": [
@@ -4099,11 +4121,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 23
+              "line": 27
             },
             "rootEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 23
+              "line": 27
             },
             "status": "PRESENT"
           },
@@ -4112,11 +4134,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 35
+              "line": 39
             },
             "rootEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 35
+              "line": 39
             },
             "status": "PRESENT"
           },
@@ -4125,11 +4147,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 37
+              "line": 41
             },
             "rootEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 37
+              "line": 41
             },
             "status": "PRESENT"
           },
@@ -4138,11 +4160,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 39
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 39
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -4151,11 +4173,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 42
+              "line": 46
             },
             "rootEntry": {
               "path": "packages/ui/src/components/bulk-action-bar.tsx",
-              "line": 42
+              "line": 46
             },
             "status": "PRESENT"
           }
@@ -5145,8 +5167,8 @@
               {
                 "name": "render",
                 "type": "ReactElement | (props, state) => ReactElement",
-                "description": "组合为 article、section 或原生链接，完整保留事件与 ref。",
-                "descriptionEn": "Compose an article, section or native link while retaining handlers and refs."
+                "description": "组合为 article、section 或原生链接，完整保留事件与 ref。渲染为 a[href] 或 button 时，整卡有悬停与按下底色（与 Item 行入口同一反馈阶梯），按钮占满宽度、文字从行首起。",
+                "descriptionEn": "Compose an article, section or native link while retaining handlers and refs. Rendered as a[href] or button, the whole card gets hover and press surfaces (the same feedback ladder as Item row entries); a button fills the width with text starting at the line start."
               },
               {
                 "name": "className / style",
@@ -5164,8 +5186,8 @@
             ]
           }
         ],
-        "decisions": "对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。",
-        "decisionsEn": "Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons.",
+        "decisions": "对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。Card 不设阴影档、纸面档或悬停抬升：它没有离开平面，阴影会伪造层级；整体底色与圆角在主题层改系统 token（圆角是 --qy-radius-panel）。",
+        "decisionsEn": "Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons. Card has no elevation steps, paper surfaces or hover lift: it never leaves the plane, and a shadow would fake a layer; change ground and radius through system tokens in the theme (radius is --qy-radius-panel).",
         "notes": [
           "标题用 Heading 或真实 h2/h3；内容与动作由 Stack、Inline 和原生结构组合。",
           "size、CardHeader/Title/Description/Action/Panel/Content/Footer 与 CardFrame* 已移除。",
@@ -5576,7 +5598,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 208
+            "line": 220
           }
         },
         {
@@ -5584,7 +5606,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 552
+            "line": 574
           }
         },
         {
@@ -5592,7 +5614,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 47
+            "line": 50
           }
         },
         {
@@ -5600,7 +5622,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 37
+            "line": 40
           }
         },
         {
@@ -5608,7 +5630,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 77
+            "line": 81
           }
         },
         {
@@ -5616,7 +5638,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 55
+            "line": 58
           }
         },
         {
@@ -5633,7 +5655,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 538
+            "line": 560
           }
         },
         {
@@ -5641,7 +5663,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 32
+            "line": 34
           }
         },
         {
@@ -5649,7 +5671,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 65
+            "line": 68
           }
         },
         {
@@ -5657,7 +5679,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 526
+            "line": 548
           }
         },
         {
@@ -5665,7 +5687,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 53
+            "line": 56
           }
         },
         {
@@ -5673,7 +5695,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 72
+            "line": 76
           }
         },
         {
@@ -5681,7 +5703,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 67
+            "line": 70
           }
         },
         {
@@ -5689,7 +5711,15 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 87
+            "line": 91
+          }
+        },
+        {
+          "name": "ChartRange",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/chart.tsx",
+            "line": 35
           }
         },
         {
@@ -5697,7 +5727,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 35
+            "line": 38
           }
         },
         {
@@ -5721,7 +5751,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 33
+            "line": 36
           }
         },
         {
@@ -5729,7 +5759,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 73
+            "line": 77
           }
         },
         {
@@ -5737,7 +5767,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 64
+            "line": 67
           }
         },
         {
@@ -5761,7 +5791,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 549
+            "line": 571
           }
         },
         {
@@ -5769,7 +5799,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 195
+            "line": 207
           }
         },
         {
@@ -5777,7 +5807,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 189
+            "line": 201
           }
         },
         {
@@ -5785,7 +5815,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 126
+            "line": 130
           }
         },
         {
@@ -5793,7 +5823,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 179
+            "line": 191
           }
         },
         {
@@ -5801,7 +5831,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 125
+            "line": 129
           }
         },
         {
@@ -5809,7 +5839,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 280
+            "line": 292
           }
         },
         {
@@ -5817,7 +5847,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 506
+            "line": 528
           }
         },
         {
@@ -5825,7 +5855,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 515
+            "line": 537
           }
         },
         {
@@ -5914,9 +5944,9 @@
               },
               {
                 "name": "series",
-                "type": "readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: \"linear\" | \"step\" }[]",
-                "description": "1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。",
-                "descriptionEn": "One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches."
+                "type": "readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: \"linear\" | \"step\"; range?: { min: string; max: string } }[]",
+                "description": "1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。range: { min, max } 只用于 line 的非背景系列，min、max 是 rows 中 values 的键（须为不同的键，每行都要有值，可显式未知）：这条线在每一点上还有一段区间时，画成同色的淡带垫在线下（浓度为预设），读数多一行“范围 min–max”，数据表在该系列后多“最小值”“最大值”两列；某点任一端不可得则该点无带；两端都已知时 min 大于 max、或越出 valueDomain 都抛错；线本身（key 的值）不要求落在区间正中。带区间的单系列仍显示图例，让淡带的键与线对上。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。",
+                "descriptionEn": "One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. range: { min, max } is for non-context line series only; min and max are keys of the row values (two different keys, present on every row and explicitly unknown if need be): when the line also has a spread at each point, it is drawn as a faint band of the same color under the line (opacity is a preset), the readout adds a \"Range min–max\" line, and the data table adds \"minimum\" and \"maximum\" columns after the series; a point with either end unavailable has no band; min greater than max, or either end outside valueDomain, throws; the line itself (the value at key) need not sit in the middle of the band. A lone series with a range still shows its legend so the faint band key pairs with the line. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches."
               },
               {
                 "name": "rows",
@@ -5983,6 +6013,7 @@
           }
         ],
         "notes": [
+          "入场不画生长动画：动只交代真实变化，数据第一次出现并不是变化；数据更新时的过渡还没有定义取值，暂不加。",
           "系列的区分不只靠色相：折线的每个系列有自己的标记形状（圆、方、三角、菱形、叉，按系列顺序分配），图例的键与折线一致，图例文字、悬停读数和数据表里都有系列名。柱、堆叠与面积是填充形式，靠固定的系列顺序区分——图例、柱的左右次序、堆叠的上下次序、读数与数据表同一个次序，段间有 2px 纸色空隙；这类图不另加纹理。",
           "没有记录时 Chart 抛错而不画空框。请求中的图用 AsyncContent 组合：先判空再渲染，`<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` 里只放 Chart，空结果由 Empty 在原位承担，加载与失败的反馈在内容之后；见「请求状态与空结果」。",
           "null、NaN、Infinity、缺失键不能表示0；用显式unknown或not-applicable表达。",
@@ -5997,6 +6028,7 @@
           "donut 超过5个部分或需要精确比较时改用 Proportion 或 bar/bar-horizontal；两个量的关系用 ScatterChart，两个类别维度上的量用 Heatmap——它们数据形状不同，是独立组件而不是 Chart 的 type。"
         ],
         "notesEn": [
+          "No entrance growth animation: motion only reports a real change, and data appearing for the first time is not a change; transitions on data updates have no defined values yet, so none is added.",
           "Series are told apart by more than hue: each line series has its own marker shape (circle, square, triangle, diamond, cross, assigned in series order), the legend key matches the line, and the series name appears in the legend text, the hover readout and the data table. Bars, stacks and areas are filled forms and rely on a fixed series order: the legend, the left-to-right order of bars, the bottom-to-top order of stacks, the readout and the data table all share one order, with a 2px paper gap between segments; no texture is added to them.",
           "With no rows Chart throws instead of drawing an empty frame. For a chart behind a request, compose it with AsyncContent and test emptiness first: `<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` holds only the Chart, an empty result is carried by Empty in its place, and loading or failure feedback follows the content; see \"Request states and empty results\".",
           "null, NaN, Infinity and missing keys cannot stand for zero. Use explicit unknown or not-applicable values.",
@@ -6099,11 +6131,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 552
+              "line": 574
             },
             "rootEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 552
+              "line": 574
             },
             "status": "PRESENT"
           }
@@ -11002,7 +11034,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 148
+            "line": 168
+          }
+        },
+        {
+          "name": "DataTableActivateEvent",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/data-table.tsx",
+            "line": 63
           }
         },
         {
@@ -11034,7 +11074,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 500
+            "line": 533
           }
         },
         {
@@ -11042,7 +11082,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 434
+            "line": 454
           }
         },
         {
@@ -11050,7 +11090,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 401
+            "line": 421
           }
         },
         {
@@ -11058,7 +11098,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 435
+            "line": 455
           }
         },
         {
@@ -11066,7 +11106,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 443
+            "line": 463
           }
         },
         {
@@ -11074,7 +11114,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 427
+            "line": 447
           }
         },
         {
@@ -11082,7 +11122,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 61
+            "line": 64
           }
         },
         {
@@ -11090,7 +11130,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 391
+            "line": 411
           }
         },
         {
@@ -11098,7 +11138,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 385
+            "line": 405
           }
         },
         {
@@ -11106,7 +11146,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 378
+            "line": 398
           }
         },
         {
@@ -11114,7 +11154,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 358
+            "line": 378
           }
         },
         {
@@ -11122,7 +11162,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 353
+            "line": 373
           }
         },
         {
@@ -11130,7 +11170,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 351
+            "line": 371
           }
         },
         {
@@ -11138,7 +11178,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 44
+            "line": 45
           }
         }
       ],
@@ -11196,15 +11236,15 @@
               },
               {
                 "name": "selection",
-                "type": "{ label, rowLabel, canSelect? }",
-                "description": "启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。",
-                "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel."
+                "type": "{ label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }",
+                "description": "启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。scope 默认 page；filtered 让表头全选作用于全部筛选结果（跨页），仅 mode=client 可用——服务端调用方并不持有完整结果，用 mode=server 加 filtered 会在开发期抛错，请改用 BulkActionBar 的 extent / BulkActionBarExtend 让用户显式扩展到全部。",
+                "descriptionEn": "Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel. scope defaults to page; filtered makes the header select-all act on all filtered results across pages. It requires mode=client: a server caller does not hold the full result, so mode=server with filtered throws in development; use BulkActionBar extent / BulkActionBarExtend to let the user extend to everything explicitly."
               },
               {
                 "name": "activeRow",
-                "type": "({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }",
-                "description": "默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。",
-                "descriptionEn": "By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent."
+                "type": "({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }",
+                "description": "默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。onActivate 的第二个参数是触发它的 React 鼠标或键盘事件，调用方可读 metaKey / ctrlKey / shiftKey 区分「在新标签页打开」之类的意图。",
+                "descriptionEn": "By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent. The second onActivate argument is the React mouse or keyboard event that triggered it, so the caller can read metaKey / ctrlKey / shiftKey (for example to open in a new tab)."
               },
               {
                 "name": "selectionAppearance",
@@ -11260,8 +11300,8 @@
                 "name": "columnDef.meta.ellipsis",
                 "type": "boolean",
                 "default": "false",
-                "description": "对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。",
-                "descriptionEn": "Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible."
+                "description": "对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切；唯一例外是格里只有一个带 href 的链接：链接自己单行省略，真的被截断时聚焦或悬停同样以 Tooltip 显示全文，不新增 Tab 停靠点，链接的可访问名称不变。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。",
+                "descriptionEn": "Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped, with one exception: a cell holding a single link with an href. The link itself truncates to one line and, when actually truncated, shows the full text in a Tooltip on hover or focus, with no extra Tab stop and an unchanged accessible name. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible."
               },
               {
                 "name": "columnDef.meta.numeric",
@@ -11272,9 +11312,9 @@
               },
               {
                 "name": "selectionAppearance / onRowActivate / virtualization",
-                "type": "row | checkbox / (row: Row<T>) => void / DataTableVirtualization",
-                "description": "选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row，调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。",
-                "descriptionEn": "Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row; the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws."
+                "type": "row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization",
+                "description": "选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。",
+                "descriptionEn": "Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row and the mouse or keyboard event that triggered it (modifier keys readable); the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws."
               },
               {
                 "name": "columnDef.meta.rowHeader",
@@ -11408,11 +11448,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 500
+              "line": 533
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 500
+              "line": 533
             },
             "status": "PRESENT"
           },
@@ -11421,11 +11461,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 148
+              "line": 168
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 148
+              "line": 168
             },
             "status": "PRESENT"
           },
@@ -11434,11 +11474,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 353
+              "line": 373
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 353
+              "line": 373
             },
             "status": "PRESENT"
           },
@@ -11447,11 +11487,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 378
+              "line": 398
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 378
+              "line": 398
             },
             "status": "PRESENT"
           },
@@ -11460,11 +11500,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 391
+              "line": 411
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 391
+              "line": 411
             },
             "status": "PRESENT"
           }
@@ -12421,7 +12461,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/description-list.tsx",
-            "line": 104
+            "line": 110
           }
         },
         {
@@ -12429,7 +12469,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/description-list.tsx",
-            "line": 103
+            "line": 109
           }
         },
         {
@@ -12461,7 +12501,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/description-list.tsx",
-            "line": 98
+            "line": 104
           }
         },
         {
@@ -12469,7 +12509,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/description-list.tsx",
-            "line": 97
+            "line": 103
           }
         }
       ],
@@ -12634,11 +12674,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/description-list.tsx",
-              "line": 98
+              "line": 104
             },
             "rootEntry": {
               "path": "packages/ui/src/components/description-list.tsx",
-              "line": 98
+              "line": 104
             },
             "status": "PRESENT"
           },
@@ -12647,11 +12687,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/description-list.tsx",
-              "line": 104
+              "line": 110
             },
             "rootEntry": {
               "path": "packages/ui/src/components/description-list.tsx",
-              "line": 104
+              "line": 110
             },
             "status": "PRESENT"
           }
@@ -12945,6 +12985,7 @@
           }
         ],
         "notes": [
+          "库不设宽度档位：宽度由内容决定。项目需要统一时，在自己的组合里定一到两档宽度，用 className 传入。",
           "长内容放进 DialogPanel：主操作在页脚始终可见；不用 DialogPanel 的写法仍是整面板滚动。",
           "不需要阻断时使用就地表单或 Popover；必须明确回应的危险决定使用 AlertDialog。",
           "草稿策略由应用持有。关闭、放弃草稿、保存和撤销分别命名。",
@@ -12954,6 +12995,7 @@
           "ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语keepMounted隔离缺陷。"
         ],
         "notesEn": [
+          "The library has no width tiers: content decides the width. A project that needs consistency defines one or two widths in its own composition and passes them through className.",
           "Put long content in DialogPanel so the primary action stays visible in the footer; without DialogPanel the whole panel still scrolls.",
           "Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.",
           "The application owns drafts. Name closing, discarding, saving and undo separately.",
@@ -13409,6 +13451,7 @@
           }
         ],
         "notes": [
+          "库不设宽度档位：侧向抽屉的宽度由内容决定。项目需要统一时，在自己的组合里定一到两档宽度，用 className 传入。",
           "从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。",
           "程序打开且无触发者时明确 finalFocus。",
           "长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。",
@@ -13418,6 +13461,7 @@
           "ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语保留Portal隔离缺陷。"
         ],
         "notesEn": [
+          "The library has no width tiers: content decides a side drawer's width. A project that needs consistency defines one or two widths in its own composition and passes them through className.",
           "To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.",
           "Specify finalFocus when opening programmatically without a trigger.",
           "For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.",
@@ -19651,8 +19695,8 @@
           "用量",
           "容量"
         ],
-        "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。",
-        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue.",
+        "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
         "design": {
           "methods": [
             "名实相符",
@@ -21598,6 +21642,38 @@
       "source": "packages/ui/src/components/pagination.tsx",
       "exports": [
         {
+          "name": "CursorPagination",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 205
+          }
+        },
+        {
+          "name": "CursorPaginationChangeDetails",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 192
+          }
+        },
+        {
+          "name": "CursorPaginationOptions",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 193
+          }
+        },
+        {
+          "name": "CursorPaginationProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 199
+          }
+        },
+        {
           "name": "normalizePaginationValue",
           "kind": "value",
           "source": {
@@ -21748,6 +21824,14 @@
             "path": "packages/ui/src/components/pagination.tsx",
             "line": 85
           }
+        },
+        {
+          "name": "useCursorPagination",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/pagination.tsx",
+            "line": 233
+          }
         }
       ],
       "metadata": {
@@ -21761,6 +21845,7 @@
         "source": "local",
         "exports": [
           "PaginationPattern",
+          "useCursorPagination",
           "Pagination",
           "PaginationList",
           "PaginationItem",
@@ -21853,6 +21938,19 @@
             ]
           },
           {
+            "name": "useCursorPagination",
+            "description": "游标分页的记忆：记住已走过的游标，可回到任一已读页。返回 { cursor, value, paginationProps, setNextCursor, reset }。cursor 是当前页应请求的游标，第 1 页恒为 null；value 是校正后的页码与条数。paginationProps 即 { value, onValueChange, totalCount: null, hasNextPage }，直接展开给 PaginationPattern；hasNextPage 表示「已登记下一页游标」，数据回来、登记之前整条不渲染，与总数未知的约定一致；条数改变时回到第 1 页，已登记的游标随之作废。setNextCursor(next, fromPage?) 在数据回来后登记下一页游标，null 或 undefined 表示这一页是末页；fromPage 缺省为当前页，请求在翻页后才返回时传发起请求时的页码，越过未登记页的结果被忽略；重新登记某页，其后已登记的一并作废；游标用 Object.is 比较，相同则不更新，可放心在 effect 里调用。reset() 用于筛选、排序改变了结果集：清空全部游标并回到第 1 页，条数不变，已在第 1 页时不通知。reset 或改条数之前发出、之后才返回的请求属于旧结果集，fromPage 拦不住，由请求层丢弃（如按筛选与条数作请求键）。",
+            "descriptionEn": "Cursor pagination memory: remembers the cursors already walked and allows returning to any read page. Returns { cursor, value, paginationProps, setNextCursor, reset }. cursor is what to request for the current page, null on page 1; value is the corrected page and page size. paginationProps is { value, onValueChange, totalCount: null, hasNextPage } to spread onto PaginationPattern; hasNextPage means a next-page cursor has been registered, so nothing renders before data arrives and registers it, consistent with unknown totals; a page-size change returns to page 1 and discards the registered cursors. setNextCursor(next, fromPage?) registers the next-page cursor once data arrives; null or undefined marks this page as the last. fromPage defaults to the current page; pass the originating page when the request returns after paging away, and results beyond an unregistered page are ignored. Re-registering a page invalidates the later ones. Cursors compare with Object.is, so an unchanged one is a no-op and safe to call in an effect. reset() is for filters or sorting changing the result set: it clears all cursors and returns to page 1, keeping the page size, with no notification when already on page 1. A request sent before reset or a page-size change that returns afterwards belongs to the old result set; fromPage cannot catch it, so drop it in the request layer (for example by keying requests on the filters and page size).",
+            "props": [
+              {
+                "name": "value / defaultValue / onValueChange",
+                "type": "PaginationValue / (value, { reason }) => void",
+                "description": "与 PaginationPattern 相同的受控／非受控写法。reason 另有 reset（调用 reset() 回到第 1 页时）。受控 value 的页码超出已读范围时校正到最远的已读页，并以 total-change 通知一次。游标始终由 hook 持有。",
+                "descriptionEn": "The same controlled/uncontrolled pattern as PaginationPattern. reason additionally includes reset (reset() returning to page 1). A controlled page beyond the read range is corrected to the furthest read page and emitted once as total-change. The cursors themselves are always held by the hook."
+              }
+            ]
+          },
+          {
             "name": "Pagination",
             "description": "有名称的 nav，不生成页码。",
             "descriptionEn": "A named nav without generated pages.",
@@ -21931,11 +22029,15 @@
           }
         ],
         "notes": [
+          "只有一页时 PaginationPattern 收起页窗，范围摘要和条数选择仍在这一行，内容不会跳；不放一排全部禁用的翻页按钮，因为它们不对应任何可做的事。",
           "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。",
+          "游标分页用 useCursorPagination：筛选或排序改变时调用 reset()。DataTablePattern 的服务端模式接受 totalCount: null 与 hasNextPage，排序变化会让它自己回到第 1 页，此时同时调用 reset() 清空游标。",
           "自 5.2.0：PaginationPattern 与 DataTablePattern 分页条改为一行布局与图标翻页按钮，属性不变；只有一页、0 条或游标首页无下一页时控件收起或整条不渲染，依赖这些按钮常驻的测试需按新行为更新。自定完整 UILocale 时补 paginationRange；paginationSummary 已弃用，下个主版本移除。"
         ],
         "notesEn": [
+          "With a single page, PaginationPattern drops the page window while the range summary and page-size select stay on the row, so content does not jump; it does not show a row of disabled page buttons, because they correspond to nothing the reader can do.",
           "The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.",
+          "For cursor pagination use useCursorPagination: call reset() when filters or sorting change. DataTablePattern server mode accepts totalCount: null with hasNextPage; a sorting change returns it to page 1 by itself, so call reset() at the same time to clear the cursors.",
           "Since 5.2.0: the PaginationPattern and DataTablePattern pager uses one row and icon page buttons with unchanged props; a single page, zero results or a cursor first page without a next page collapse controls or render nothing, so tests that relied on always-present buttons need updating. Custom complete UILocale objects add paginationRange; paginationSummary is deprecated and goes in the next major."
         ],
         "usageResolution": [
@@ -21949,6 +22051,19 @@
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
               "line": 135
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "useCursorPagination",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/pagination.tsx",
+              "line": 233
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/pagination.tsx",
+              "line": 233
             },
             "status": "PRESENT"
           },
@@ -22955,8 +23070,8 @@
           "百分比",
           "完成度"
         ],
-        "decisions": "动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。",
-        "decisionsEn": "Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.",
+        "decisions": "动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）；过渡只是反馈，不提供完成事实。",
+        "decisionsEn": "Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once). The move is feedback, not a completion fact.",
         "design": {
           "methods": [
             "名实相符",
@@ -23237,8 +23352,8 @@
           "构成",
           "占比"
         ],
-        "decisions": "用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend=\"hidden\" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。",
-        "decisionsEn": "Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend=\"hidden\" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice.",
+        "decisions": "用长度而不是角度表达比例，所以不提供饼图；与 Meter 同一条凹槽。两到五个部分按校验过的系列顺序取色，剩余是凹槽本身。图例给出名称、数值与百分比，是完整的文字等价物；legend=\"hidden\" 只把它从画面上移开（仅对辅助技术可见），不删。部分可以声明状态类别 tone：要么全有要么全无，同一类别不出现两次。部分的数值变化时各段长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+        "decisionsEn": "Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend=\"hidden\" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice. When part values change each segment travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
         "api": [
           {
             "name": "Proportion",
@@ -24120,6 +24235,198 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "relative-time",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/relative-time.tsx",
+      "exports": [
+        {
+          "name": "RelativeTime",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/relative-time.tsx",
+            "line": 100
+          }
+        },
+        {
+          "name": "RelativeTimeProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/relative-time.tsx",
+            "line": 9
+          }
+        },
+        {
+          "name": "RelativeTimeValue",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/relative-time.tsx",
+            "line": 8
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/relative-time/meta.ts",
+        "title": "相对时间 RelativeTime",
+        "titleEn": "RelativeTime",
+        "description": "把一个时刻说成「3 分钟前」，同时保留可核对的绝对时间；全部实例共用一个刷新计时器。",
+        "descriptionEn": "States a moment as \"3 minutes ago\" while keeping the exact time checkable; every instance shares one refresh timer.",
+        "category": "日期与时间",
+        "layer": "primitive",
+        "source": "local",
+        "exports": [
+          "RelativeTime"
+        ],
+        "keywords": [
+          "relative-time",
+          "time ago",
+          "timeago",
+          "relative time",
+          "相对时间",
+          "几分钟前",
+          "刚刚",
+          "时间",
+          "time"
+        ],
+        "decisions": "相对说法不精确到日历，需要核对的读者要看绝对时间：绝对时间在悬停提示和读屏文字里，不会只放在 title。传了 now 就不再刷新，不要在要随时间变化的界面里固定它。",
+        "decisionsEn": "A relative phrase is not calendar-exact, so a reader who must verify needs the absolute time: it is in the hover tooltip and the screen-reader text, never only in title. Passing now stops refreshing; do not pin it in a view that must follow the clock.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "随境取度"
+          ],
+          "whenToUse": [
+            "列表、表格与说明里“多久以前发生”比“几点几分”更有用的时刻。",
+            "同一界面多处出现的相对时间，需要同一套文案与刷新节奏。"
+          ],
+          "avoid": [
+            "需要精确核对的时刻（审计、截止日）单独写出绝对时间，不只靠相对说法。",
+            "不要为它再套一个 Tooltip 或自己写计时器。"
+          ],
+          "composition": [
+            "元素固定是 time，机器可读的 dateTime 由 value 给出；语言取自 UILocaleProvider。",
+            "嵌在句子、表格单元格或描述列表里，字号字重跟随所在行。"
+          ],
+          "stateOwner": {
+            "library": [
+              "相对文字、绝对时间、dateTime、共享计时器与档位。"
+            ],
+            "application": [
+              "要说明的时刻 value；测试或静态渲染时的固定参照 now。"
+            ]
+          },
+          "responsive": [
+            "文字随所在行换行；悬停提示只给指针，触屏与键盘读者的绝对时间由读屏文字和页面语境承担。"
+          ],
+          "customization": [
+            "className、ref、ARIA 与事件透传到 time；不提供 render，元素语义固定。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Moments in lists, tables and prose where \"how long ago\" matters more than the clock time.",
+            "Relative times that recur across a view and need one wording and one refresh cadence."
+          ],
+          "avoid": [
+            "Write the absolute time separately where exact checking matters (audits, deadlines); do not rely on the relative phrase alone.",
+            "Do not wrap it in another Tooltip or write your own timer."
+          ],
+          "composition": [
+            "The element is always time; the machine-readable dateTime comes from value; the language comes from UILocaleProvider.",
+            "Sits inside a sentence, table cell or description list and follows the row's size and weight."
+          ],
+          "stateOwner": {
+            "library": [
+              "Relative text, absolute time, dateTime, the shared timer and its tiers."
+            ],
+            "application": [
+              "The moment to describe (value); a fixed reference (now) for tests or static rendering."
+            ]
+          },
+          "responsive": [
+            "Text wraps with its row; the hover tooltip is for pointers, and touch or keyboard readers get the absolute time from the screen-reader text and page context."
+          ],
+          "customization": [
+            "className, ref, ARIA and events pass through to time; there is no render because the element's semantics are fixed."
+          ]
+        },
+        "notes": [
+          "不足一分钟统一说“现在”，之后按分钟、小时、日、月、年向零截断；月按 30 日、年按 365 日近似（预设）。",
+          "刷新按距离现在的远近分三档：一分钟内每 10 秒、一小时内每 30 秒、更久每 5 分钟（预设）。刷新只改文字，不设 aria-live，读屏不会因此播报。",
+          "value 无法解析成时间（无效的 Date、不是时间的字符串、NaN）会抛出带说明的错误。"
+        ],
+        "notesEn": [
+          "Under one minute reads \"now\"; after that the phrase truncates toward zero by minute, hour, day, month and year. A month is approximated as 30 days and a year as 365 days (presets).",
+          "Refreshing has three tiers by distance from now: every 10 seconds within a minute, every 30 seconds within an hour, every 5 minutes beyond (presets). Refreshing only changes the text and sets no aria-live, so nothing is announced.",
+          "A value that cannot be parsed as a time (an invalid Date, a non-time string, NaN) throws a descriptive error."
+        ],
+        "api": [
+          {
+            "name": "RelativeTime",
+            "description": "渲染 time：相对文字可见，绝对时间在悬停提示与仅读屏文字里。",
+            "descriptionEn": "Renders a time element: the relative text is visible; the absolute time is in the hover tooltip and the screen-reader-only text.",
+            "props": [
+              {
+                "name": "value",
+                "type": "Date | string | number",
+                "description": "要说明的时刻：Date、ISO 8601 字符串或毫秒时间戳，必填。",
+                "descriptionEn": "Required moment to describe: a Date, an ISO 8601 string or a millisecond timestamp."
+              },
+              {
+                "name": "now",
+                "type": "Date | string | number",
+                "description": "固定的参照时刻。给出后不自动刷新，供测试与静态渲染。",
+                "descriptionEn": "A fixed reference moment. When given, nothing refreshes; for tests and static rendering."
+              },
+              {
+                "name": "ref / 原生属性",
+                "nameEn": "ref / native props",
+                "type": "React.ComponentProps<\"time\">",
+                "description": "id、ARIA、data 属性与事件透传到 time 元素；dateTime 与 children 由组件给出。",
+                "descriptionEn": "id, ARIA, data attributes and events pass through to the time element; dateTime and children are set by the component."
+              }
+            ]
+          }
+        ],
+        "usageResolution": [
+          {
+            "name": "RelativeTime",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/relative-time.tsx",
+              "line": 100
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/relative-time.tsx",
+              "line": 100
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/relative-time/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",
@@ -25766,7 +26073,7 @@
             "标题与操作同一行；标题长到放不下时操作落到下一行，第一行的中线不动。"
           ],
           "customization": [
-            "className、style、render 与 ref 属于各自的部件；标题层级用 SectionTitle 的 level，不改字号。"
+            "className、style、render 与 ref 属于各自的部件；大纲层级用 SectionTitle 的 level，字号用 step，两者互不牵动：区块里的小节写 level={3} step=\"body-strong\"，比区块标题低一档。"
           ]
         },
         "designEn": {
@@ -25795,7 +26102,7 @@
             "The title and actions share a row; when the title is too long the actions drop to the next row and the first row's midline stays."
           ],
           "customization": [
-            "className, style, render and ref belong to each part; change the heading level with SectionTitle's level, never its size."
+            "className, style, render and ref belong to each part; SectionTitle's level sets the outline and step sets the size, independently: a subsection inside a section is level={3} step=\"body-strong\", one step below the section title."
           ]
         },
         "keywords": [
@@ -25846,6 +26153,13 @@
                 "default": "2",
                 "description": "文档大纲层级，独立于文字档。",
                 "descriptionEn": "Document outline level, independent of the text step."
+              },
+              {
+                "name": "step",
+                "type": "TextStep",
+                "default": "\"heading\"",
+                "description": "文字档。区块里的小节用 body-strong（14），比区块标题的 heading（16）低一档。",
+                "descriptionEn": "The text step. A subsection inside a section uses body-strong (14), one step below the section title's heading (16)."
               },
               {
                 "name": "id / render / ref / Heading props",
@@ -27281,6 +27595,22 @@
           }
         },
         {
+          "name": "SidebarButton",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/sidebar.tsx",
+            "line": 257
+          }
+        },
+        {
+          "name": "SidebarButtonProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/sidebar.tsx",
+            "line": 234
+          }
+        },
+        {
           "name": "SidebarChangeDetails",
           "kind": "type",
           "source": {
@@ -27398,7 +27728,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 243
+            "line": 246
           }
         },
         {
@@ -27406,7 +27736,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 231
+            "line": 232
           }
         },
         {
@@ -27422,7 +27752,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 288
+            "line": 306
           }
         },
         {
@@ -27430,7 +27760,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 339
+            "line": 357
           }
         },
         {
@@ -27438,7 +27768,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 328
+            "line": 346
           }
         },
         {
@@ -27446,7 +27776,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 280
+            "line": 298
           }
         },
         {
@@ -27454,7 +27784,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 315
+            "line": 333
           }
         },
         {
@@ -27462,7 +27792,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 279
+            "line": 297
           }
         },
         {
@@ -27518,6 +27848,7 @@
           "SidebarGroupLabel",
           "SidebarFooter",
           "SidebarLink",
+          "SidebarButton",
           "SidebarSub",
           "SidebarSubTrigger",
           "SidebarSubContent",
@@ -27643,6 +27974,25 @@
             ]
           },
           {
+            "name": "SidebarButton",
+            "description": "不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type=\"button\"。",
+            "descriptionEn": "An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type=\"button\".",
+            "props": [
+              {
+                "name": "icon / count / max",
+                "type": "ReactNode / number / number",
+                "description": "与 SidebarLink 同一外观与同一收起行为：rail 下图标是唯一可见的识别物，名称视觉隐藏并由 Tooltip 摆出，count 钉在图标角上。没有 active，也不写 aria-current。",
+                "descriptionEn": "Same look and collapsed behaviour as SidebarLink: in the rail the icon is the only visible identifier, the name is visually hidden and a Tooltip restores it, and the count is pinned to the icon. There is no active and no aria-current."
+              },
+              {
+                "name": "render / ref / native props",
+                "type": "useRender.ComponentProps<\"button\">",
+                "description": "可作为 MenuTrigger、PopoverTrigger 的 render 目标：ref 与触发器给的 aria-expanded、aria-haspopup、onClick 都落在这个 button 上；名称写在触发器的 children。",
+                "descriptionEn": "Works as the render target of MenuTrigger and PopoverTrigger: the ref and the trigger's aria-expanded, aria-haspopup and onClick all land on this button; the name goes in the trigger's children."
+              }
+            ]
+          },
+          {
             "name": "SidebarSub / SidebarSubTrigger / SidebarSubContent",
             "description": "可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。",
             "descriptionEn": "An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.",
@@ -27667,7 +28017,7 @@
           "当前项用圆角的面标出，比悬停面深一级，并加中等字重：悬停是一级清染，当前是一级清墨，指针经过的行不会和当前项长得一样；字重是不靠颜色的第二信号。当前项不画线（用户裁决：直线与圆角面不在同一项上并用）；二级条目左侧的引导线只表达归属，当前项不加深它。",
           "二级入口的展开记号收起时朝内、展开时朝下，与 Tree 的分支同一画法；父项没有图标时，引导线从父项文字的起笔垂下。",
           "当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。",
-          "末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。",
+          "末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarButton（icon 放 Avatar，名称写在 MenuTrigger 的 children）。去往页面的条目用 SidebarLink，做一件事的用 SidebarButton，别把 button 写成 SidebarLink 的 render。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。",
           "收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。",
           "侧栏最多两级（SidebarSub 下一层），第三级不进侧栏：在 SidebarSub 里再放 SidebarSub 会在开发期直接抛错（与本库其他结构契约一致，而不是悄悄多缩进一层）。第三级放在内容区，用 Tabs 或页内次级导航承载，必要时用 Breadcrumb 交代位置。见「二级导航与内容区 Tabs」。",
           "带 SidebarGroupLabel 的 SidebarGroup 成为 role=group，名称取自标签；没有标签的分组只是排布。调用方自己给 aria-label 或 aria-labelledby 时以调用方为准。",
@@ -27678,7 +28028,7 @@
           "The current item is marked by a rounded surface one step deeper than the hover surface, plus medium weight: hover is one wash step, current is one ink step, so a row under the pointer never looks like the current one, and the weight is a second cue that does not rely on colour. The current item carries no line (user ruling: a straight line and a rounded surface are never combined on one item); the guide line beside a sub-level only expresses membership and the current item does not deepen it.",
           "The sub-level chevron points inward when closed and down when open, the same mark as a Tree branch; when the parent has no icon, the guide line drops from the start of its text.",
           "The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.",
-          "The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.",
+          "The account entry at the end needs no part of its own: MenuTrigger renders a SidebarButton (an Avatar as icon, the name as the MenuTrigger's children). Items that go to a page use SidebarLink and items that do one thing use SidebarButton; do not render a button through SidebarLink. The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.",
           "In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.",
           "A sidebar has at most two levels (one under SidebarSub); the third level does not go in the sidebar. A SidebarSub inside another SidebarSub throws during development (matching the library's other structural contracts, rather than quietly indenting one more level). Put the third level in the content area, carried by Tabs or an in-page secondary nav, with a Breadcrumb to say where you are. See \"Sub-level navigation with Tabs in the content\".",
           "A SidebarGroup with a SidebarGroupLabel is a role=group named by that label; a group without one is only layout. A caller's aria-label or aria-labelledby takes precedence.",
@@ -27856,11 +28206,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 243
+              "line": 246
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 243
+              "line": 246
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "SidebarButton",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/sidebar.tsx",
+              "line": 257
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/sidebar.tsx",
+              "line": 257
             },
             "status": "PRESENT"
           },
@@ -27869,11 +28232,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 288
+              "line": 306
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 288
+              "line": 306
             },
             "status": "PRESENT"
           },
@@ -27882,11 +28245,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 315
+              "line": 333
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 315
+              "line": 333
             },
             "status": "PRESENT"
           },
@@ -27895,11 +28258,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 339
+              "line": 357
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 339
+              "line": 357
             },
             "status": "PRESENT"
           },
@@ -27951,7 +28314,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 29
+            "line": 33
           }
         },
         {
@@ -27959,7 +28322,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 46
+            "line": 50
           }
         },
         {
@@ -27971,11 +28334,27 @@
           }
         },
         {
+          "name": "SkeletonControl",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 57
+          }
+        },
+        {
+          "name": "SkeletonControlProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/skeleton.tsx",
+            "line": 10
+          }
+        },
+        {
           "name": "SkeletonLine",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/skeleton.tsx",
-            "line": 39
+            "line": 43
           }
         },
         {
@@ -28007,7 +28386,8 @@
         "exports": [
           "Skeleton",
           "SkeletonLine",
-          "SkeletonBlock"
+          "SkeletonBlock",
+          "SkeletonControl"
         ],
         "keywords": [
           "skeleton",
@@ -28036,7 +28416,7 @@
             "不确定形状或时间极短的等待，用按钮的 loading。"
           ],
           "composition": [
-            "Skeleton 包住一组 SkeletonLine / SkeletonBlock，摆成真实内容的版式；到达后整体换掉，版面不跳。"
+            "Skeleton 包住一组 SkeletonLine / SkeletonBlock / SkeletonControl，摆成真实内容的版式；到达后整体换掉，版面不跳。"
           ],
           "stateOwner": {
             "library": [
@@ -28047,7 +28427,7 @@
             ]
           },
           "responsive": [
-            "宽度由所在容器决定，行宽用 className 表达；行高固定为一材。"
+            "宽度由所在容器决定，行宽用 className 表达；行高固定为一材；SkeletonControl 的高度跟随密度（data-density），与同环境的 Input 等高。"
           ],
           "customization": [
             "className 调整行宽与块高；label 写明对象，如「正在加载成员」。"
@@ -28063,7 +28443,7 @@
             "A wait of unknown shape or very short duration uses a Button's loading."
           ],
           "composition": [
-            "Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump."
+            "Skeleton wraps SkeletonLine / SkeletonBlock / SkeletonControl laid out like the real content; on arrival the whole is replaced and the page does not jump."
           ],
           "stateOwner": {
             "library": [
@@ -28074,7 +28454,7 @@
             ]
           },
           "responsive": [
-            "Width follows the container; express row width with className. Row height is one module."
+            "Width follows the container; express row width with className. Row height is one module; SkeletonControl height follows density (data-density) and matches an Input in the same environment."
           ],
           "customization": [
             "className adjusts row width and block height; label names the object, e.g. “Loading members”."
@@ -28128,6 +28508,20 @@
                 "descriptionEn": "Block height, e.g. h-40."
               }
             ]
+          },
+          {
+            "name": "SkeletonControl",
+            "description": "填值控件（输入框、选择器）的位置；高与角取填值控件的角色，随密度与同环境的 Input 等高，宽度由 className 给出。",
+            "descriptionEn": "The place of a value-filling control (input, select, button); height and radius follow the fill-control role, so it matches an Input in the same density, width comes from className.",
+            "props": [
+              {
+                "name": "className",
+                "type": "string",
+                "default": "w-full",
+                "description": "宽度，例如 w-24。高度跟随密度，不由 className 给出。",
+                "descriptionEn": "Width, e.g. w-24. Height follows density and is not set through className."
+              }
+            ]
           }
         ],
         "usageResolution": [
@@ -28136,11 +28530,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 29
+              "line": 33
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 29
+              "line": 33
             },
             "status": "PRESENT"
           },
@@ -28149,11 +28543,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 39
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 39
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -28162,11 +28556,24 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 46
+              "line": 50
             },
             "rootEntry": {
               "path": "packages/ui/src/components/skeleton.tsx",
-              "line": 46
+              "line": 50
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "SkeletonControl",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 57
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/skeleton.tsx",
+              "line": 57
             },
             "status": "PRESENT"
           }
@@ -29086,7 +29493,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 27
+            "line": 31
           }
         },
         {
@@ -29094,7 +29501,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 63
+            "line": 67
           }
         },
         {
@@ -29102,7 +29509,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 52
+            "line": 56
           }
         },
         {
@@ -29110,7 +29517,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 48
+            "line": 52
           }
         },
         {
@@ -29118,7 +29525,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 47
+            "line": 51
           }
         },
         {
@@ -29126,7 +29533,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 33
+            "line": 37
           }
         },
         {
@@ -29134,7 +29541,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 32
+            "line": 36
           }
         },
         {
@@ -29166,7 +29573,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 44
+            "line": 48
           }
         },
         {
@@ -29174,7 +29581,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 43
+            "line": 47
           }
         },
         {
@@ -29182,7 +29589,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 39
+            "line": 43
           }
         },
         {
@@ -29190,7 +29597,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/stat.tsx",
-            "line": 38
+            "line": 42
           }
         }
       ],
@@ -29220,7 +29627,8 @@
           ],
           "whenToUse": [
             "需要识别一个度量的名称、值和单位。",
-            "页面顶部的概览读数用 size=\"lg\"：只有读数本身按它在页面上的位置选大小。"
+            "页面顶部的概览读数用 size=\"lg\"：只有读数本身按它在页面上的位置选大小。",
+            "整页只围绕一个数时用 size=\"xl\"，所以一页至多一个。"
           ],
           "avoid": [
             "跨对象比较使用 Table；趋势图形由具备真实数据的应用组合。",
@@ -29241,7 +29649,8 @@
         "designEn": {
           "whenToUse": [
             "Identify a metric's name, value, and unit.",
-            "Use size=\"lg\" for overview readings at the top of a page: only the reading itself is sized by its position."
+            "Use size=\"lg\" for overview readings at the top of a page: only the reading itself is sized by its position.",
+            "Use size=\"xl\" when the whole page is about one number, so at most one per page."
           ],
           "avoid": [
             "Use Table for cross-object comparison; applications with actual data compose trend graphics.",
@@ -29313,10 +29722,10 @@
               },
               {
                 "name": "size",
-                "type": "\"md\" | \"lg\"",
+                "type": "\"md\" | \"lg\" | \"xl\"",
                 "default": "\"md\"",
-                "description": "读数的尺寸档，记在根的 data-size 上。lg 把 StatValue 放大到 32/40（md 是 24/28），用于页面顶部的概览读数；标签、单位、说明与变化量的字号不随它变。",
-                "descriptionEn": "The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; the label, unit, description and change keep their size."
+                "description": "读数的尺寸档，记在根的 data-size 上。lg 把 StatValue 放大到 32/40（md 是 24/28），用于页面顶部的概览读数；xl 读 display-lg 字阶（40/48），用于整页只围绕一个数的主读数，不另立字号与字重。标签、单位、说明与变化量的字号不随它变。",
+                "descriptionEn": "The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; xl reads the display-lg step (40/48) for the one number a page is about, with no size or weight of its own. The label, unit, description and change keep their size."
               },
               {
                 "name": "render / ref / native props",
@@ -29355,11 +29764,13 @@
         ],
         "notes": [
           "统计口径、更新时间和变化判断属于应用事实；说明可省略。",
-          "未知和不适用的读数退为浓墨，不施彩，字号不变；文字由应用给出，不画成 0。没有可比较的数时不放变化量。"
+          "未知和不适用的读数退为浓墨，不施彩，字号不变；文字由应用给出，不画成 0。没有可比较的数时不放变化量。",
+          "读数变了，库不闪烁、不从旧值滚到新值：首次加载、轮询回写、换排序都会改值，哪一次值得提示只有应用知道。"
         ],
         "notesEn": [
           "Definitions, update times and changes are application facts; descriptions are optional.",
-          "An unknown or not-applicable reading steps back to medium ink with no hue and keeps its size; the application supplies the words, and it is never drawn as 0. Without a number to compare there is no change to show."
+          "An unknown or not-applicable reading steps back to medium ink with no hue and keeps its size; the application supplies the words, and it is never drawn as 0. Without a number to compare there is no change to show.",
+          "When a reading changes the library neither flashes nor rolls from the old value: first loads, polling write-backs and re-sorting all change values, and only the application knows which change deserves attention."
         ],
         "usageResolution": [
           {
@@ -29367,11 +29778,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 27
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 27
+              "line": 31
             },
             "status": "PRESENT"
           },
@@ -29380,11 +29791,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 33
+              "line": 37
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 33
+              "line": 37
             },
             "status": "PRESENT"
           },
@@ -29393,11 +29804,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 39
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 39
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -29406,11 +29817,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 44
+              "line": 48
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 44
+              "line": 48
             },
             "status": "PRESENT"
           },
@@ -29419,11 +29830,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 48
+              "line": 52
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 48
+              "line": 52
             },
             "status": "PRESENT"
           },
@@ -29432,11 +29843,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 63
+              "line": 67
             },
             "rootEntry": {
               "path": "packages/ui/src/components/stat.tsx",
-              "line": 63
+              "line": 67
             },
             "status": "PRESENT"
           }
@@ -29574,10 +29985,12 @@
           ]
         },
         "notes": [
+          "不为紧急状态加呼吸或闪烁：库里的循环动画只表示进行中；紧急程度由类别色和名称表达。",
           "状态名对应固定的类别：在线是成功，异常是危险，警告和结果未知是警示，提示、等待中、进行中是信息；离线和 neutral 不施彩。同一类别在 Badge 里是同一色相。",
           "结果未知要读者去核实，归警示：它既不是失败，也不是成功。neutral 是没有归类的状态，用 label 写出它到底是什么。"
         ],
         "notesEn": [
+          "No breathing or blinking for urgent states: looping motion in the library only means in progress; urgency is carried by the category hue and the name.",
           "Each state belongs to one fixed category: online is success, error is danger, warning and unknown are warning, and info, pending and in-progress are info; offline and neutral carry no hue. The same category has the same hue in Badge.",
           "An unknown outcome needs the reader to verify it, so it is a warning: neither a failure nor a success. neutral is a state with no category; use label to say what it is."
         ],
@@ -30178,7 +30591,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 76
+            "line": 111
           }
         },
         {
@@ -30186,7 +30599,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 100
+            "line": 135
           }
         },
         {
@@ -30194,7 +30607,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 99
+            "line": 134
           }
         },
         {
@@ -30202,7 +30615,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 81
+            "line": 116
           }
         },
         {
@@ -30210,7 +30623,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 79
+            "line": 114
           }
         },
         {
@@ -30218,7 +30631,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 128
+            "line": 163
           }
         },
         {
@@ -30226,7 +30639,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 127
+            "line": 162
           }
         },
         {
@@ -30234,7 +30647,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 47
+            "line": 77
           }
         },
         {
@@ -30242,7 +30655,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 25
+            "line": 26
           }
         },
         {
@@ -30250,7 +30663,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 104
+            "line": 139
           }
         },
         {
@@ -30258,7 +30671,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 103
+            "line": 138
           }
         },
         {
@@ -30266,7 +30679,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 124
+            "line": 159
           }
         },
         {
@@ -30274,7 +30687,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 96
+            "line": 131
           }
         },
         {
@@ -30282,7 +30695,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 84
+            "line": 119
           }
         },
         {
@@ -30290,7 +30703,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 118
+            "line": 153
           }
         },
         {
@@ -30298,7 +30711,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 75
+            "line": 110
           }
         },
         {
@@ -30306,7 +30719,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 108
+            "line": 143
           }
         },
         {
@@ -30314,7 +30727,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 107
+            "line": 142
           }
         }
       ],
@@ -30402,6 +30815,13 @@
                 "default": "true",
                 "description": "false：表格放在已有的一张纸上（Card、面板），不再铺线、底与圆角；贴着承载面的边放置，由承载面裁切圆角。",
                 "descriptionEn": "false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners."
+              },
+              {
+                "name": "fade",
+                "type": "boolean | 'end'",
+                "default": "true",
+                "description": "横向放不下时，还有内容的一侧渐隐（读 data-overflow-x-start / end，宽度同 ScrollArea 的 --qy-scroll-fade）；滚到头的一侧不渐隐。边框线与未加框时的焦点环不渐隐。'end' 只渐隐末端，用于有固定列的表（固定列不透明，起始端渐隐会把它变暗）；false 关闭。容器同时设 overscroll-behavior-x: contain，横向滚到头不带动整页。",
+                "descriptionEn": "When the table overflows sideways, the side that still has content fades (driven by data-overflow-x-start / end; width is ScrollArea's --qy-scroll-fade); the side scrolled to its limit does not. The frame line and the unframed focus ring never fade. 'end' fades only the end side, for tables with pinned columns (pinned columns are opaque, so a start fade would dim them); false turns it off. The container also sets overscroll-behavior-x: contain so sideways scroll limits do not chain to the page."
               },
               {
                 "name": "tabIndex / aria-label / render / ref / native props",
@@ -30498,11 +30918,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 47
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 47
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -30511,11 +30931,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 76
+              "line": 111
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 76
+              "line": 111
             },
             "status": "PRESENT"
           },
@@ -30524,11 +30944,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 81
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 81
+              "line": 116
             },
             "status": "PRESENT"
           },
@@ -30537,11 +30957,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 96
+              "line": 131
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 96
+              "line": 131
             },
             "status": "PRESENT"
           },
@@ -30550,11 +30970,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 100
+              "line": 135
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 100
+              "line": 135
             },
             "status": "PRESENT"
           },
@@ -30563,11 +30983,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 104
+              "line": 139
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 104
+              "line": 139
             },
             "status": "PRESENT"
           },
@@ -30576,11 +30996,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 108
+              "line": 143
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 108
+              "line": 143
             },
             "status": "PRESENT"
           },
@@ -30589,11 +31009,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 124
+              "line": 159
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 124
+              "line": 159
             },
             "status": "PRESENT"
           },
@@ -30602,11 +31022,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 128
+              "line": 163
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 128
+              "line": 163
             },
             "status": "PRESENT"
           }
@@ -35591,7 +36011,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/typography.tsx",
-            "line": 103
+            "line": 109
           }
         },
         {
@@ -35599,7 +36019,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/typography.tsx",
-            "line": 97
+            "line": 103
           }
         },
         {
@@ -35607,7 +36027,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/typography.tsx",
-            "line": 70
+            "line": 76
           }
         },
         {
@@ -35623,7 +36043,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/typography.tsx",
-            "line": 84
+            "line": 90
           }
         },
         {
@@ -35737,6 +36157,13 @@
                 "descriptionEn": "Tabular figures; the application preserves unknown and empty values."
               },
               {
+                "name": "tone",
+                "type": "\"default\" | \"muted\"",
+                "default": "\"default\"",
+                "description": "default 沿用所在处的前景色；muted 用弱化前景，做辅助说明。没有 danger：错误文字由 FieldError 承担。",
+                "descriptionEn": "default inherits the surrounding foreground; muted uses the weakened foreground for supporting copy. There is no danger tone: error text belongs to FieldError."
+              },
+              {
                 "name": "render / ref / 原生属性",
                 "nameEn": "render / ref / native props",
                 "type": "useRender.ComponentProps<\"p\">",
@@ -35819,11 +36246,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 70
+              "line": 76
             },
             "rootEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 70
+              "line": 76
             },
             "status": "PRESENT"
           },
@@ -35832,11 +36259,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 84
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 84
+              "line": 90
             },
             "status": "PRESENT"
           },
@@ -35845,11 +36272,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 103
+              "line": 109
             },
             "rootEntry": {
               "path": "packages/ui/src/components/typography.tsx",
-              "line": 103
+              "line": 109
             },
             "status": "PRESENT"
           }
@@ -36150,7 +36577,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 195
+            "line": 198
           }
         },
         {
@@ -36432,8 +36859,8 @@
           },
           {
             "name": "WorkspaceContent",
-            "description": "唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。",
-            "descriptionEn": "The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus.",
+            "description": "唯一的滚动容器，原生 main。放得下时 tabIndex=-1，只作焦点落点；内容溢出时 tabIndex=0，键盘可停下滚动，获焦时盒内一道细线。它是定位祖先（relative），内容里的绝对定位元素不会越出滚动区。",
+            "descriptionEn": "The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus. It is a positioning ancestor (relative), so absolutely positioned content cannot escape the scroll area.",
             "props": [
               {
                 "name": "render / ref / children / native props",
@@ -36573,11 +37000,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 195
+              "line": 198
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 195
+              "line": 198
             },
             "status": "PRESENT"
           },
@@ -39016,6 +39443,110 @@
             "line": 52
           },
           "context": "@layer base {\n  :root",
+          "complete": true
+        }
+      ]
+    },
+    {
+      "name": "--qy-index",
+      "definitions": [
+        {
+          "name": "--qy-index",
+          "value": "0",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 337
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(1))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "1",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 338
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(2))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "2",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 339
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(3))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "3",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 340
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(4))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "4",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 341
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(5))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "5",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 342
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(6))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "6",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 343
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(7))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "7",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 344
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(8))",
+          "complete": true
+        },
+        {
+          "name": "--qy-index",
+          "value": "8",
+          "references": [],
+          "source": {
+            "path": "packages/ui/motion.css",
+            "line": 345
+          },
+          "context": ":where([data-motion=\"stagger\"] > :nth-child(n + 9))",
           "complete": true
         }
       ]

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab
+Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75
 
 Values, units and explanations supplied independently.
 
@@ -13,10 +13,12 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 ## Notes
 - Definitions, update times and changes are application facts; descriptions are optional.
 - An unknown or not-applicable reading steps back to medium ink with no hue and keeps its size; the application supplies the words, and it is never drawn as 0. Without a number to compare there is no change to show.
+- When a reading changes the library neither flashes nor rolls from the old value: first loads, polling write-backs and re-sorting all change values, and only the application knows which change deserves attention.
 
 ## Use and ownership
 - Identify a metric's name, value, and unit.
 - Use size="lg" for overview readings at the top of a page: only the reading itself is sized by its position.
+- Use size="xl" when the whole page is about one number, so at most one per page.
 - Avoid: Use Table for cross-object comparison; applications with actual data compose trend graphics.
 - Avoid: Give one row of readings the same size; there are no 36 or 28 steps.
 - Library: Semantic relationships among metric names, values, units, and explanations.
@@ -55,7 +57,7 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Stat
-- `size?`: `"md" | "lg"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg）；标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。
+- `size?`: `"md" | "lg" | "xl"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg，整页只围绕一个数时用 xl）； 标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。 xl 不另立字号，直接读 display-lg（40/48）：与 lg 的 32 相差 1.25 倍，满足相邻内容档至少 1.2 倍。
 - `state`: `"unknown" | "not-applicable" | "known"`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -102,7 +104,7 @@ Change against a reference period (dd).
 ### Stat
 A dl with required state.
 - state: "known" | "unknown" | "not-applicable". An application-owned metric state that generates no replacement value. An unknown or not-applicable reading steps back to medium ink and is recorded as data-state on StatValue.
-- size: "md" | "lg"; default "md". The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; the label, unit, description and change keep their size.
+- size: "md" | "lg" | "xl"; default "md". The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; xl reads the display-lg step (40/48) for the one number a page is about, with no size or weight of its own. The label, unit, description and change keep their size.
 - render / ref / native props: useRender.ComponentProps<dl>. Supply labels and values; props reach the actual dl.
 
 ### StatLabel / StatValue / StatDescription
@@ -159,5 +161,16 @@ export default function Demo() {
     <Stat state="known" size="lg"><StatLabel>本周完成</StatLabel><StatValue>46<StatUnit>单</StatUnit></StatValue><StatDescription>较上周多 5 单</StatDescription></Stat>
     <Stat state="known" size="lg"><StatLabel>平均响应</StatLabel><StatValue>1.8<StatUnit>秒</StatUnit></StatValue><StatDescription>近 7 天</StatDescription></Stat>
   </Inline>;
+}
+```
+
+### 主读数
+Source: apps/docs/src/content/stat/demos/04-primary.tsx
+```tsx
+import { Stat, StatDescription, StatLabel, StatUnit, StatValue } from "@qingye_lab/ui/components/stat";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "主读数", titleEn: "Primary reading" } satisfies DemoMeta;
+export default function Demo() {
+  return <Stat state="known" size="xl"><StatLabel>机房温度</StatLabel><StatValue>23.6<StatUnit>℃</StatUnit></StatValue><StatDescription>3 分钟前上报</StatDescription></Stat>;
 }
 ```

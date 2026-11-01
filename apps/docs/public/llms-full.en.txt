@@ -363,7 +363,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# Part 3. Components (113)
+# Part 3. Components (114)
 
 ## Accordion
 
@@ -1431,7 +1431,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
-Source SHA-256: 0ee64f6d87a9f5c4cdc29e90f2582d267f49a94e6a881bb72f3784cd8ff9a8af
+Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
 
 Shared actions with explicit targets, versions and scope.
 
@@ -1440,6 +1440,7 @@ Targets and scope are required; execution receives the current target/version sn
 
 ### Notes
 - The library displays versions without judging freshness; applications revalidate actual versions at execution.
+- Since 5.2.0: formatCount and summary rewrite the count text per object and add totals; omitting them behaves as before.
 
 ### Use and ownership
 - Shared actions for explicitly selected objects.
@@ -1479,9 +1480,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### BulkActionBar
 - `disabled?`: `boolean`.
 - `extent?`: `BulkActionExtent | undefined`.
+- `formatCount?`: `(count: number) => string`. 自定已选数量的文案（默认「已选 N 项」）。传函数而非量词：量词与名词的位置与单复数随语言和对象变化，由调用方按当前界面语言写完整句；入参是 extent.count（有 extent 时）或 targets.length。
 - `onClear?`: `(snapshot: BulkActionSnapshot, event: React.MouseEvent<HTMLButtonElement>) => void`.
 - `scope`: `string`.
 - `sticky?`: `boolean`.
+- `summary?`: `React.ReactNode`. 数量之后的补充摘要（如合计金额）。与数量同在 aria-describedby 引用的区域，读屏一并读出；不截断，放不下的是后面的对象清单。
 - `targets`: `readonly BulkActionTarget[]`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -1538,6 +1541,8 @@ Identifiable operation targets and scope.
 - targets / scope: readonly BulkActionTarget[] / string. Each target requires id, label and version; IDs are unique, version=0 is valid and scope is nonempty.
 - extent: { count: number; label: string }. An application-defined whole set (positive integer count, nonempty label); shows count and label instead of listing targets, targets may be empty, and the snapshot carries extent for the application to execute against its own query.
 - sticky: boolean. Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck).
+- formatCount: (count: number) => string. Customizes the selected-count text; the default reads "N selected". It receives extent.count when extent is present, otherwise targets.length. A function rather than a unit string, since measure word, noun placement and plurals vary by language and object: the caller writes the whole phrase for the current UI language.
+- summary: React.ReactNode. A supplementary summary after the count, such as a total amount or size. It lives in the same aria-describedby region as the count, so screen readers read both; it uses tabular numbers and is not truncated, the target list after it truncates first. The application computes the data; the library does not aggregate.
 - disabled / onClear: boolean / callback. Clear receives the current snapshot; it never cancels a service or clears application state itself.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -1570,7 +1575,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## Button
 
@@ -1904,12 +1909,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
-Source SHA-256: 1c69a0bdf7495e7260d6db6632a18094b887056ce0cc38c7cf8cb3eac8ff36b1
+Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
 
 Bound an independently identifiable object.
 
 ### Decision
-Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons.
+Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons. Card has no elevation steps, paper surfaces or hover lift: it never leaves the plane, and a shadow would fake a layer; change ground and radius through system tokens in the theme (radius is --qy-radius-panel).
 
 ### Notes
 - Use Heading or a real h2/h3, and compose content and actions with Stack, Inline and native structure.
@@ -1955,7 +1960,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### Card
 Panel surface, boundary and radius. It supplies no title, content slots, padding or layout.
-- render: ReactElement | (props, state) => ReactElement. Compose an article, section or native link while retaining handlers and refs.
+- render: ReactElement | (props, state) => ReactElement. Compose an article, section or native link while retaining handlers and refs. Rendered as a[href] or button, the whole card gets hover and press surfaces (the same feedback ladder as Item row entries); a button fills the width with text starting at the line start.
 - className / style: string / CSSProperties. Compose layout and content inset for this object. Caller classes are merged last.
 - Native props: ComponentPropsWithRef<"div">. Forward id, aria-*, data-*, events and ref.
 
@@ -2148,7 +2153,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 0045037b3a78fcfe60a603236940eeb7db390345bd3e18ed5df6cbfd93450c36
+Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
 
 Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 
@@ -2156,6 +2161,7 @@ Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizont
 A chart only draws data. A known zero, an unknown value and a not-applicable value remain distinct: unavailable values form gaps and retain their actual names in the table. When the whole chart has no records, an unknown result or does not apply, the chart is not rendered and the caller puts Empty in its place. Plots do not replace reachable numbers. References (target bands and lines), context series and events help locate the data without being data: they are ink, not color, and their names are required and appear in the legend and the data table. Only a line may leave zero on the value axis; bars and areas encode by length or area, so truncating them misstates proportions. Status colors (series[].tone) are declared by the application; the component never guesses good from bad by value. A step (series[].interpolation: "step") says the value is held between two changes and is step-after: a record means "from this moment the value is this", and step-before would draw the change before it was observed; there are no smooth curves, which draw values the data does not contain. Share composition (bar-share / area-share) reads how a composition changes rather than how much: each row is normalised to its own sum, the value axis is fixed at 0–100% with ticks 0/25/50/75/100; a row with an unknown or not-applicable value, or a sum of zero, is not drawn at all (the whole is unavailable, so every share would be false) while its known original values stay in the data table; negative values throw. Value labels (valueLabels) are for single-series bar and bar-horizontal only, and once values are labelled the value-axis ticks and grid are no longer drawn (one fact is not said twice). Readouts and tables of stacked and share forms give a total; a row with a missing part is not totaled and the table says so.
 
 ### Notes
+- No entrance growth animation: motion only reports a real change, and data appearing for the first time is not a change; transitions on data updates have no defined values yet, so none is added.
 - Series are told apart by more than hue: each line series has its own marker shape (circle, square, triangle, diamond, cross, assigned in series order), the legend key matches the line, and the series name appears in the legend text, the hover readout and the data table. Bars, stacks and areas are filled forms and rely on a fixed series order: the legend, the left-to-right order of bars, the bottom-to-top order of stacks, the readout and the data table all share one order, with a 2px paper gap between segments; no texture is added to them.
 - With no rows Chart throws instead of drawing an empty frame. For a chart behind a request, compose it with AsyncContent and test emptiness first: `<AsyncContent status hasContent={rows.length > 0} emptyContent={<Empty />}>` holds only the Chart, an empty result is carried by Empty in its place, and loading or failure feedback follows the content; see "Request states and empty results".
 - null, NaN, Infinity and missing keys cannot stand for zero. Use explicit unknown or not-applicable values.
@@ -2214,6 +2220,7 @@ A chart only draws data. A known zero, an unknown value and a not-applicable val
 - ChartPlotData: type; owner chart; PASS
 - ChartProjectedSeries: type; owner chart; PASS
 - ChartProps: type; owner chart; PASS
+- ChartRange: type; owner chart; PASS
 - ChartReference: type; owner chart; PASS
 - ChartRow: type; owner chart; PASS
 - ChartSeries: type; owner chart; PASS
@@ -2310,7 +2317,7 @@ A named figure, shared axis units, distinct series shapes and a visible same-sou
 - aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required.
 - categoryLabel / valueLabel: string. Nonempty category axis name and shared value units; donut draws no axis lines, but both names still label the equivalent table and the center readout.
-- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step" }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
+- series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step"; range?: { min: string; max: string } }[]. One to five series in shared units (donut requires two to five; context series do not count). context: true is for line only: a faint ink hairline with no marker that takes no identity color or marker slot, at most 12; tone takes danger / warning / success / info, declared on every non-context series or none, with no repeated category (mixing or repeating throws). interpolation is linear (default) or step (a staircase, step-after: the value is held from that point to the next) and applies to line, area, area-stacked and area-share only, any other type throws; stacked and share areas share their boundaries, so every series must use the same one. range: { min, max } is for non-context line series only; min and max are keys of the row values (two different keys, present on every row and explicitly unknown if need be): when the line also has a spread at each point, it is drawn as a faint band of the same color under the line (opacity is a preset), the readout adds a "Range min–max" line, and the data table adds "minimum" and "maximum" columns after the series; a point with either end unavailable has no band; min greater than max, or either end outside valueDomain, throws; the line itself (the value at key) need not sit in the middle of the band. A lone series with a range still shows its legend so the faint band key pairs with the line. A single series takes the first color (text is ink, data is color) without a legend; two or more take the validated chart1..5 order with distinct marker shapes or legend swatches.
 - rows: readonly ChartRow[]. Stable ids, category names and values: finite numbers or explicitly named unknown/not-applicable values. ready requires actual records; donut requires exactly one row, with every part a known non-negative number.
 - contextLabel: string. Required when there are context series: the one legend entry that stands for them (a faint ink key plus this name), e.g. "Other rooms". Their individual names appear only in the equivalent table. Throws when missing.
 - references: ({ kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string })[]. References on the value axis: a target band or a reference line (horizontal for vertical charts, vertical for bar-horizontal). Drawn in ink behind the data; the value axis range includes them automatically. label is required and appears in the legend and in a note under the data table; a band needs from < to and finite values; a donut throws. With a band, the hover readout adds a line per value for its position against the target (above or below by how much, or within); with several bands only the first is used.
@@ -2340,7 +2347,7 @@ export default function Demo() {
 }
 ```
 
-19 more examples: see the component page and its Markdown file.
+20 more examples: see the component page and its Markdown file.
 
 ## Checkbox
 
@@ -4128,7 +4135,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
+Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -4164,6 +4171,7 @@ Configure data, columns and stable IDs with DataTablePattern; retain DataTable f
 
 ### Current exports
 - DataTable: function; owner data-table; PASS; props: DataTableProps<TData>
+- DataTableActivateEvent: type; owner data-table; PASS
 - DataTableColumnDef: type; owner data-table; PASS
 - DataTableColumnMeta: interface; owner data-table; PASS
 - DataTableInstance: type; owner data-table; PASS
@@ -4192,7 +4200,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `containerProps?`: `TableContainerProps`.
 - `emptyContent`: `React.ReactNode`.
 - `error?`: `React.ReactNode`. 取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role="alert"。 出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。
-- `onRowActivate?`: `(row: Row<TData>) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
+- `onRowActivate?`: `(row: Row<TData>, event: DataTableActivateEvent) => void`. Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。
 - `selectionAppearance?`: `"row" | "checkbox"`. Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口， 或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。
 - `stickyHeaderOffset?`: `number | string | undefined`. 见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。
@@ -4201,7 +4209,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### DataTablePattern
-- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
+- `activeRow?`: `({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }`. Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.
 - `busy?`: `boolean`.
 - `caption?`: `React.ReactNode`.
 - `columns`: `readonly DataTablePatternColumn<TData>[]`.
@@ -4213,7 +4221,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `mode?`: `"client" | "server"`.
 - `onStateChange?`: `(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void`.
 - `pagination?`: `false | DataTablePatternPagination`.
-- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean }`.
+- `selection?`: `{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 "page"（当页）。"filtered"：全部筛选结果，跨过分页——只在 mode="client" 有效， * 因为只有客户端持有完整结果；mode="server" 传 "filtered" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…`.
 - `selectionAppearance?`: `"row" | "checkbox"`.
 - `state?`: `DataTablePatternState`.
 - `stickyHeader?`: `boolean`. 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。
@@ -4259,8 +4267,8 @@ Configured sorting, page selection, active rows and pagination without issuing r
 - data / columns / getRowId / emptyContent: T[] / DataTablePatternColumn<T>[] / (row: T) => string / ReactNode. Columns configure id, header, accessor, cell, sortable, rowHeader and numeric, with optional size/minSize/maxSize in pixels and ellipsis. Columns with size are fixed; columns without it share the remaining width. Stable getRowId is required.
 - state / defaultState / onStateChange: DataTablePatternState / Partial<DataTablePatternState> / (state, details) => void. A shared snapshot contains sorting, pagination, rowSelection and activeRowId; sorting and reset to page 1 produce one notification. Public page numbers start at 1.
 - mode / pagination: client | server / false | DataTablePatternPagination. Client mode sorts/slices complete data and derives totals from data.length; server mode presents supplied rows and requires totalCount, plus explicit hasNextPage when null.
-- selection: { label, rowLabel, canSelect? }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel.
-- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent.
+- selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel. scope defaults to page; filtered makes the header select-all act on all filtered results across pages. It requires mode=client: a server caller does not hold the full result, so mode=server with filtered throws in development; use BulkActionBar extent / BulkActionBarExtend to let the user extend to everything explicitly.
+- activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent. The second onActivate argument is the React mouse or keyboard event that triggered it, so the caller can read metaKey / ctrlKey / shiftKey (for example to open in a new tab).
 - selectionAppearance: row | checkbox; default row. Checkbox mode removes only selected-row fill, retaining actual checkboxes and independent active-row emphasis.
 - virtualization: { height: number, estimateRowHeight: number, overscan?: number }. Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.
 - stickyHeader / stickyHeaderOffset: boolean / number | string. Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px.
@@ -4271,9 +4279,9 @@ Configured sorting, page selection, active rows and pagination without issuing r
 A native two-dimensional collection.
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy keeps valid rows without dimming them. Data rows take the hover surface on pointer hover; selected and active rows keep the deeper selected surface. error is placed above the table as role=alert and carries its own retry action.
 - table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in.
-- columnDef.meta.ellipsis: boolean; default false. Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible.
+- columnDef.meta.ellipsis: boolean; default false. Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped, with one exception: a cell holding a single link with an href. The link itself truncates to one line and, when actually truncated, shows the full text in a Tooltip on hover or focus, with no extra Tab stop and an unchanged accessible name. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible.
 - columnDef.meta.numeric: boolean; default false. A numeric column is declared by the column definition, never guessed from content: header and every cell share one alignment, at the inline end (left in RTL), with tabular figures. The Pattern column config uses the same name.
-- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row; the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
+- selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row and the mouse or keyboard event that triggered it (modifier keys readable); the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
 - columnDef.meta.rowHeader: boolean. Actual row headers use th scope=row; comparison columns are never automatically hidden. With a visible row-header column, each row's aria-labelledby points at all of its row-header cells, so the row's accessible name is their text (several row-header columns join in column order). DataTableSelectionCell names each checkbox after this row, falling back to a generic name only without a row-header column. onRowActivate without a visible row-header column throws.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -4325,7 +4333,7 @@ export default function Demo() {
 }
 ```
 
-5 more examples: see the component page and its Markdown file.
+7 more examples: see the component page and its Markdown file.
 
 ## DatePicker
 
@@ -4728,7 +4736,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
-Source SHA-256: 31a7f512ed6965e5f6b51a6e6a08f789f48cac1ed438d82f5b13d089e3fb546c
+Source SHA-256: 01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0
 
 Native relationships between names and values.
 
@@ -4848,6 +4856,7 @@ Take over the work surface for an edit or decision, then return.
 Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.
 
 ### Notes
+- The library has no width tiers: content decides the width. A project that needs consistency defines one or two widths in its own composition and passes them through className.
 - Put long content in DialogPanel so the primary action stays visible in the footer; without DialogPanel the whole panel still scrolls.
 - Use an inline form or Popover when interruption is unnecessary; use AlertDialog for an explicit consequential decision.
 - The application owns drafts. Name closing, discarding, saving and undo separately.
@@ -5023,6 +5032,7 @@ Enter an edge-aligned work surface and return to its entry point.
 Public swipeDirection controls the edge. Actual modality controls focus and background blocking; closing does not imply undo.
 
 ### Notes
+- The library has no width tiers: content decides a side drawer's width. A project that needs consistency defines one or two widths in its own composition and passes them through className.
 - To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.
 - Specify finalFocus when opening programmatically without a trigger.
 - For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.
@@ -5915,7 +5925,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## Form
 
@@ -7402,7 +7412,7 @@ Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
 A real measurement over a valid range.
 
 ### Decision
-Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue.
+Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ### Use and ownership
 - Present measured values and units.
@@ -8116,12 +8126,14 @@ export default function Demo() {
 }
 ```
 
+1 more examples: see the component page and its Markdown file.
+
 ## Pagination
 
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac
+Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
 
 Page position, real actions and explicit unknown totals.
 
@@ -8129,7 +8141,9 @@ Page position, real actions and explicit unknown totals.
 PaginationPattern renders one row of range summary, page window and page-size selection, showing only controls that can change the result; page and pageSize change in one notification and totals that decrease correct the page. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.
 
 ### Notes
+- With a single page, PaginationPattern drops the page window while the range summary and page-size select stay on the row, so content does not jump; it does not show a row of disabled page buttons, because they correspond to nothing the reader can do.
 - The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.
+- For cursor pagination use useCursorPagination: call reset() when filters or sorting change. DataTablePattern server mode accepts totalCount: null with hasNextPage; a sorting change returns it to page 1 by itself, so call reset() at the same time to clear the cursors.
 - Since 5.2.0: the PaginationPattern and DataTablePattern pager uses one row and icon page buttons with unchanged props; a single page, zero results or a cursor first page without a next page collapse controls or render nothing, so tests that relied on always-present buttons need updating. Custom complete UILocale objects add paginationRange; paginationSummary is deprecated and goes in the next major.
 
 ### Use and ownership
@@ -8140,6 +8154,7 @@ PaginationPattern renders one row of range summary, page window and page-size se
 
 ### Composition
 - PaginationPattern: Standard composition for local page actions.
+- useCursorPagination: Cursor pagination memory: remembers the cursors already walked and allows returning to any read page. Returns { cursor, value, paginationProps, setNextCursor, reset }. cursor is what to request for the current page, null on page 1; value is the corrected page and page size. paginationProps is { value, onValueChange, totalCount: null, hasNextPage } to spread onto PaginationPattern; hasNextPage means a next-page cursor has been registered, so nothing renders before data arrives and registers it, consistent with unknown totals; a page-size change returns to page 1 and discards the registered cursors. setNextCursor(next, fromPage?) registers the next-page cursor once data arrives; null or undefined marks this page as the last. fromPage defaults to the current page; pass the originating page when the request returns after paging away, and results beyond an unregistered page are ignored. Re-registering a page invalidates the later ones. Cursors compare with Object.is, so an unchanged one is a no-op and safe to call in an effect. reset() is for filters or sorting changing the result set: it clears all cursors and returns to page 1, keeping the page size, with no notification when already on page 1. A request sent before reset or a page-size change that returns afterwards belongs to the old result set; fromPage cannot catch it, so drop it in the request layer (for example by keying requests on the filters and page size).
 - Pagination: A named nav without generated pages.
 - PaginationList / PaginationItem: ul / li organize page actions.
 - PaginationLink: An anchor with aria-current=page for the current page.
@@ -8154,6 +8169,10 @@ PaginationPattern renders one row of range summary, page window and page-size se
 - Configure brand, light or dark mode, and density separately; themes do not change permissions or save policies.
 
 ### Current exports
+- CursorPagination: type; owner pagination; PASS
+- CursorPaginationChangeDetails: type; owner pagination; PASS
+- CursorPaginationOptions: type; owner pagination; PASS
+- CursorPaginationProps: type; owner pagination; PASS
 - normalizePaginationValue: function; owner pagination; PASS; props: PaginationValue
 - Pagination: function; owner pagination; PASS; props: PaginationProps
 - PaginationChangeDetails: type; owner pagination; PASS
@@ -8173,6 +8192,7 @@ PaginationPattern renders one row of range summary, page window and page-size se
 - PaginationPreviousProps: type; owner pagination; PASS
 - PaginationProps: type; owner pagination; PASS
 - PaginationValue: type; owner pagination; PASS
+- useCursorPagination: function; owner pagination; PASS; props: CursorPaginationOptions
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -8229,6 +8249,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `variant?`: `"solid" | "bordered" | "quiet"`.
 - plus 288 inherited (@types/react 285, @base-ui/react 3); not expanded, see the installed declarations
 
+### useCursorPagination
+- `defaultValue?`: `PaginationValue`.
+- `onValueChange?`: `(value: PaginationValue, details: CursorPaginationChangeDetails) => void`.
+- `value?`: `PaginationValue`.
+
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
@@ -8245,6 +8270,10 @@ Standard composition for local page actions.
 - totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. A single page leaves only the range summary; zero results read "0 results". null requires explicit hasNextPage and never invents a final page; page 1 without a next page renders nothing.
 - pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. When the total fits the smallest candidate the control is omitted, since changing it would not change the result. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it.
 - aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, previous/next icon-button names, the range summary (paginationRange) and page-size labels come from locale.
+
+#### useCursorPagination
+Cursor pagination memory: remembers the cursors already walked and allows returning to any read page. Returns { cursor, value, paginationProps, setNextCursor, reset }. cursor is what to request for the current page, null on page 1; value is the corrected page and page size. paginationProps is { value, onValueChange, totalCount: null, hasNextPage } to spread onto PaginationPattern; hasNextPage means a next-page cursor has been registered, so nothing renders before data arrives and registers it, consistent with unknown totals; a page-size change returns to page 1 and discards the registered cursors. setNextCursor(next, fromPage?) registers the next-page cursor once data arrives; null or undefined marks this page as the last. fromPage defaults to the current page; pass the originating page when the request returns after paging away, and results beyond an unregistered page are ignored. Re-registering a page invalidates the later ones. Cursors compare with Object.is, so an unchanged one is a no-op and safe to call in an effect. reset() is for filters or sorting changing the result set: it clears all cursors and returns to page 1, keeping the page size, with no notification when already on page 1. A request sent before reset or a page-size change that returns afterwards belongs to the old result set; fromPage cannot catch it, so drop it in the request layer (for example by keying requests on the filters and page size).
+- value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. The same controlled/uncontrolled pattern as PaginationPattern. reason additionally includes reset (reset() returning to page 1). A controlled page beyond the read range is corrected to the furthest read page and emitted once as total-change. The cursors themselves are always held by the hook.
 
 #### Pagination
 A named nav without generated pages.
@@ -8284,7 +8313,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## PasswordInput
 
@@ -8620,7 +8649,7 @@ Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
 Confirmed task completion or an explicit indeterminate state.
 
 ### Decision
-Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.
+Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once). The move is feedback, not a completion fact.
 
 ### Notes
 - Stage a long task by what is known: submitted but uncountable uses value={null}, processing counts confirmed items, and afterwards an Alert states completion or partial failure, lists the failed items and offers a retry. The bar does not carry the outcome.
@@ -8725,12 +8754,12 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
-Source SHA-256: beb1120e3dcc0c18e57b42da2124fef5cb4ca9c449f7dbf5ef31b932c76cbafb
+Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
 
 Which parts make up a whole and how much each takes.
 
 ### Decision
-Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend="hidden" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice.
+Length rather than angle carries the share, so there is no pie; it uses the same groove as Meter. Two to five parts take the validated series order, and the remainder is the groove itself. The legend states names, values and percentages as the full text equivalent; legend="hidden" only moves it off screen (assistive technology still reads it), it is never removed. Parts may declare a status tone: all or none, and no tone twice. When part values change each segment travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ### Use and ownership
 - The make-up of a whole should read at a glance.
@@ -9130,6 +9159,87 @@ export default function Demo() {
 ```
 
 1 more examples: see the component page and its Markdown file.
+
+## RelativeTime
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/relative-time
+Source: packages/ui/src/components/relative-time.tsx
+Source SHA-256: 6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6
+
+States a moment as "3 minutes ago" while keeping the exact time checkable; every instance shares one refresh timer.
+
+### Decision
+A relative phrase is not calendar-exact, so a reader who must verify needs the absolute time: it is in the hover tooltip and the screen-reader text, never only in title. Passing now stops refreshing; do not pin it in a view that must follow the clock.
+
+### Notes
+- Under one minute reads "now"; after that the phrase truncates toward zero by minute, hour, day, month and year. A month is approximated as 30 days and a year as 365 days (presets).
+- Refreshing has three tiers by distance from now: every 10 seconds within a minute, every 30 seconds within an hour, every 5 minutes beyond (presets). Refreshing only changes the text and sets no aria-live, so nothing is announced.
+- A value that cannot be parsed as a time (an invalid Date, a non-time string, NaN) throws a descriptive error.
+
+### Use and ownership
+- Moments in lists, tables and prose where "how long ago" matters more than the clock time.
+- Relative times that recur across a view and need one wording and one refresh cadence.
+- Avoid: Write the absolute time separately where exact checking matters (audits, deadlines); do not rely on the relative phrase alone.
+- Avoid: Do not wrap it in another Tooltip or write your own timer.
+- Library: Relative text, absolute time, dateTime, the shared timer and its tiers.
+- Application: The moment to describe (value); a fixed reference (now) for tests or static rendering.
+
+### Composition
+- The element is always time; the machine-readable dateTime comes from value; the language comes from UILocaleProvider.
+- Sits inside a sentence, table cell or description list and follows the row's size and weight.
+
+### Responsive behavior
+- Text wraps with its row; the hover tooltip is for pointers, and touch or keyboard readers get the absolute time from the screen-reader text and page context.
+
+### Customization
+- className, ref, ARIA and events pass through to time; there is no render because the element's semantics are fixed.
+
+### Current exports
+- RelativeTime: function; owner relative-time; PASS; props: RelativeTimeProps
+- RelativeTimeProps: type; owner relative-time; PASS
+- RelativeTimeValue: type; owner relative-time; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### RelativeTime
+- `now?`: `RelativeTimeValue`. 固定的参照时刻（同样接受三种写法）。给出后文字只由 value 与 now 决定，不随时间刷新：供测试与静态渲染。
+- `value`: `RelativeTimeValue`. 要说明的时刻：Date、ISO 8601 字符串，或毫秒时间戳。无法解析时抛错。
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### RelativeTime
+Renders a time element: the relative text is visible; the absolute time is in the hover tooltip and the screen-reader-only text.
+- value: Date | string | number. Required moment to describe: a Date, an ISO 8601 string or a millisecond timestamp.
+- now: Date | string | number. A fixed reference moment. When given, nothing refreshes; for tests and static rendering.
+- ref / native props: React.ComponentProps<"time">. id, ARIA, data attributes and events pass through to the time element; dateTime and children are set by the component.
+
+### Keyboard
+
+### Source example
+#### 远近不同的时刻
+Source: apps/docs/src/content/relative-time/demos/01-distances.tsx
+```tsx
+import { RelativeTime } from "@qingye_lab/ui/components/relative-time";
+import { Stack } from "@qingye_lab/ui/components/layout";
+export const meta = { title: "远近不同的时刻", titleEn: "Moments at different distances" };
+const loaded = Date.now();
+const offsets = [20 * 1000, 3 * 60_000, 5 * 3_600_000, 2 * 86_400_000, 40 * 86_400_000];
+export default function Demo() {
+  return <Stack gap="field" align="start">{offsets.map(offset => <RelativeTime key={offset} value={loaded - offset} />)}</Stack>;
+}
+```
+
+2 more examples: see the component page and its Markdown file.
 
 ## Resizable
 
@@ -9726,7 +9836,7 @@ A section groups by spacing and draws no line, fill or radius; the caller spaces
 - The title and actions share a row; when the title is too long the actions drop to the next row and the first row's midline stays.
 
 ### Customization
-- className, style, render and ref belong to each part; change the heading level with SectionTitle's level, never its size.
+- className, style, render and ref belong to each part; SectionTitle's level sets the outline and step sets the size, independently: a subsection inside a section is level={3} step="body-strong", one step below the section title.
 
 ### Current exports
 - Section: function; owner section; PASS; props: SectionProps
@@ -9780,6 +9890,7 @@ The title row: title at the left, actions at the right.
 #### SectionTitle
 The section title, built on Heading.
 - level: 1 | 2 | 3 | 4 | 5 | 6; default 2. Document outline level, independent of the text step.
+- step: TextStep; default "heading". The text step. A subsection inside a section uses body-strong (14), one step below the section title's heading (16).
 - id / render / ref / Heading props: HeadingProps. A given id is the one the section links to; the text step defaults to heading (16/24).
 
 #### SectionActions
@@ -9813,7 +9924,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## SegmentedControl
 
@@ -10295,7 +10406,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: 864f6f002a0eff2017e4734fba6a479f17e55b424e6cbeee7f6f97e0e7597b54
+Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -10307,7 +10418,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - The current item is marked by a rounded surface one step deeper than the hover surface, plus medium weight: hover is one wash step, current is one ink step, so a row under the pointer never looks like the current one, and the weight is a second cue that does not rely on colour. The current item carries no line (user ruling: a straight line and a rounded surface are never combined on one item); the guide line beside a sub-level only expresses membership and the current item does not deepen it.
 - The sub-level chevron points inward when closed and down when open, the same mark as a Tree branch; when the parent has no icon, the guide line drops from the start of its text.
 - The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.
-- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
+- The account entry at the end needs no part of its own: MenuTrigger renders a SidebarButton (an Avatar as icon, the name as the MenuTrigger's children). Items that go to a page use SidebarLink and items that do one thing use SidebarButton; do not render a button through SidebarLink. The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.
 - In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.
 - A sidebar has at most two levels (one under SidebarSub); the third level does not go in the sidebar. A SidebarSub inside another SidebarSub throws during development (matching the library's other structural contracts, rather than quietly indenting one more level). Put the third level in the content area, carried by Tabs or an in-page secondary nav, with a Breadcrumb to say where you are. See "Sub-level navigation with Tabs in the content".
 - A SidebarGroup with a SidebarGroupLabel is a role=group named by that label; a group without one is only layout. A caller's aria-label or aria-labelledby takes precedence.
@@ -10326,6 +10437,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarFooter: The end slot, pinned to the bottom of the column; holds the account entry.
 - SidebarContent / SidebarGroup / SidebarGroupLabel: A native nav and navigation groups.
 - SidebarLink: A real page link.
+- SidebarButton: An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type="button".
 - SidebarSub / SidebarSubTrigger / SidebarSubContent: An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
 
 ### Responsive behavior
@@ -10337,6 +10449,8 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 ### Current exports
 - createSidebarDrawerHandle: function; owner external; PASS
 - Sidebar: function; owner sidebar; PASS; props: SidebarProps
+- SidebarButton: function; owner sidebar; PASS; props: SidebarButtonProps
+- SidebarButtonProps: type; owner sidebar; PASS
 - SidebarChangeDetails: interface; owner sidebar; PASS
 - SidebarContent: function; owner sidebar; PASS; props: SidebarContentProps
 - SidebarContentProps: type; owner sidebar; PASS
@@ -10375,6 +10489,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `drawerHandle?`: `SidebarDrawerHandle`. 抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。
 - `onCollapsedChange?`: `(collapsed: boolean, details: SidebarChangeDetails) => void`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SidebarButton
+- `count?`: `number`.
+- `icon?`: `React.ReactNode`.
+- `max?`: `number`.
+- plus 291 inherited (@types/react 290, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SidebarContent
 - no props declared by this library
@@ -10485,6 +10605,11 @@ A real page link.
 - icon: ReactNode. The only visible identifier in the rail; a link without an icon has nothing to show once collapsed. The name (children) is only visually hidden (sr-only) in the rail — the accessible name is unchanged, and a Tooltip restores a sighted label.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
+#### SidebarButton
+An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type="button".
+- icon / count / max: ReactNode / number / number. Same look and collapsed behaviour as SidebarLink: in the rail the icon is the only visible identifier, the name is visually hidden and a Tooltip restores it, and the count is pinned to the icon. There is no active and no aria-current.
+- render / ref / native props: useRender.ComponentProps<"button">. Works as the render target of MenuTrigger and PopoverTrigger: the ref and the trigger's aria-expanded, aria-haspopup and onClick all land on this button; the name goes in the trigger's children.
+
 #### SidebarSub / SidebarSubTrigger / SidebarSubContent
 An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover.
@@ -10512,7 +10637,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
-Source SHA-256: 2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871
+Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
 
 Hold the place and row count content will take until it arrives.
 
@@ -10528,10 +10653,10 @@ A skeleton says only that content is loading; it carries no progress, does not d
 - Application: When loading starts and ends, how a long wait is handled, the real shape of the content, and how failure and emptiness are handled.
 
 ### Composition
-- Skeleton wraps SkeletonLine / SkeletonBlock laid out like the real content; on arrival the whole is replaced and the page does not jump.
+- Skeleton wraps SkeletonLine / SkeletonBlock / SkeletonControl laid out like the real content; on arrival the whole is replaced and the page does not jump.
 
 ### Responsive behavior
-- Width follows the container; express row width with className. Row height is one module.
+- Width follows the container; express row width with className. Row height is one module; SkeletonControl height follows density (data-density) and matches an Input in the same environment.
 
 ### Customization
 - className adjusts row width and block height; label names the object, e.g. “Loading members”.
@@ -10540,6 +10665,8 @@ A skeleton says only that content is loading; it carries no progress, does not d
 - Skeleton: function; owner skeleton; PASS; props: SkeletonProps
 - SkeletonBlock: function; owner skeleton; PASS; props: SkeletonBlockProps
 - SkeletonBlockProps: type; owner skeleton; PASS
+- SkeletonControl: function; owner skeleton; PASS; props: SkeletonControlProps
+- SkeletonControlProps: type; owner skeleton; PASS
 - SkeletonLine: function; owner skeleton; PASS; props: SkeletonLineProps
 - SkeletonLineProps: type; owner skeleton; PASS
 - SkeletonProps: type; owner skeleton; PASS
@@ -10552,6 +10679,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### SkeletonBlock
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### SkeletonControl
 - no props declared by this library
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -10581,6 +10712,10 @@ The place of one text line, one module high; width comes from className.
 The place of a whole block (image, chart, table); height comes from className.
 - className: string; default h-[5 材]. Block height, e.g. h-40.
 
+#### SkeletonControl
+The place of a value-filling control (input, select, button); height and radius follow the fill-control role, so it matches an Input in the same density, width comes from className.
+- className: string; default w-full. Width, e.g. w-24. Height follows density and is not set through className.
+
 ### Keyboard
 
 ### Source example
@@ -10606,7 +10741,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## SkipLink
 
@@ -10934,7 +11069,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
-Source SHA-256: 18ad0566f1f59726fcbb26b52e66937630be8699bf086134f2e623b70c57eaab
+Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75
 
 Values, units and explanations supplied independently.
 
@@ -10944,10 +11079,12 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 ### Notes
 - Definitions, update times and changes are application facts; descriptions are optional.
 - An unknown or not-applicable reading steps back to medium ink with no hue and keeps its size; the application supplies the words, and it is never drawn as 0. Without a number to compare there is no change to show.
+- When a reading changes the library neither flashes nor rolls from the old value: first loads, polling write-backs and re-sorting all change values, and only the application knows which change deserves attention.
 
 ### Use and ownership
 - Identify a metric's name, value, and unit.
 - Use size="lg" for overview readings at the top of a page: only the reading itself is sized by its position.
+- Use size="xl" when the whole page is about one number, so at most one per page.
 - Avoid: Use Table for cross-object comparison; applications with actual data compose trend graphics.
 - Avoid: Give one row of readings the same size; there are no 36 or 28 steps.
 - Library: Semantic relationships among metric names, values, units, and explanations.
@@ -10986,7 +11123,7 @@ dl/dt/dd preserve metric relationships; zero remains visible and the application
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Stat
-- `size?`: `"md" | "lg"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg）；标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。
+- `size?`: `"md" | "lg" | "xl"`. 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg，整页只围绕一个数时用 xl）； 标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。 xl 不另立字号，直接读 display-lg（40/48）：与 lg 的 32 相差 1.25 倍，满足相邻内容档至少 1.2 倍。
 - `state`: `"unknown" | "not-applicable" | "known"`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -11033,7 +11170,7 @@ Change against a reference period (dd).
 #### Stat
 A dl with required state.
 - state: "known" | "unknown" | "not-applicable". An application-owned metric state that generates no replacement value. An unknown or not-applicable reading steps back to medium ink and is recorded as data-state on StatValue.
-- size: "md" | "lg"; default "md". The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; the label, unit, description and change keep their size.
+- size: "md" | "lg" | "xl"; default "md". The reading's size step, recorded as data-size on the root. lg raises StatValue to 32/40 (md is 24/28) for overview readings at the top of a page; xl reads the display-lg step (40/48) for the one number a page is about, with no size or weight of its own. The label, unit, description and change keep their size.
 - render / ref / native props: useRender.ComponentProps<dl>. Supply labels and values; props reach the actual dl.
 
 #### StatLabel / StatValue / StatDescription
@@ -11059,7 +11196,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## StatusDot
 
@@ -11074,6 +11211,7 @@ A state graphic and its visible name.
 Waiting, in-progress, and unknown results remain distinct facts.
 
 ### Notes
+- No breathing or blinking for urgent states: looping motion in the library only means in progress; urgency is carried by the category hue and the name.
 - Each state belongs to one fixed category: online is success, error is danger, warning and unknown are warning, and info, pending and in-progress are info; offline and neutral carry no hue. The same category has the same hue in Badge.
 - An unknown outcome needs the reader to verify it, so it is a warning: neither a failure nor a success. neutral is a state with no category; use label to say what it is.
 
@@ -11357,7 +11495,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: ab0fe0cfb7686b1452ea27c13fafcea2e48a723be62693f7d41925e70b6f7737
+Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
 
 Native two-dimensional relationships with complete comparison columns.
 
@@ -11429,6 +11567,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 290 inherited (@types/react 289, @base-ui/react 1); not expanded, see the installed declarations
 
 ### TableContainer
+- `fade?`: `"end" | boolean`. 横向溢出提示：还有内容的一端渐隐，滚到头的一端不渐隐。默认两端。 "end"：只渐隐末端——起始端有固定列（DataTable 的 pinned）时，固定列自己的末端线已说明「向起始端还有内容」， 渐隐不能再去淡化一列要保持不透明的固定列。false：不渐隐。
 - `framed?`: `boolean`. false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
@@ -11461,6 +11600,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### TableContainer
 The table's surface and horizontal scroll container.
 - framed: boolean; default true. false places the table on an existing surface such as a Card, without its own line, fill, or radius. Set it flush with the host, which clips the corners.
+- fade: boolean | 'end'; default true. When the table overflows sideways, the side that still has content fades (driven by data-overflow-x-start / end; width is ScrollArea's --qy-scroll-fade); the side scrolled to its limit does not. The frame line and the unframed focus ring never fade. 'end' fades only the end side, for tables with pinned columns (pinned columns are opaque, so a start fade would dim them); false turns it off. The container also sets overscroll-behavior-x: contain so sideways scroll limits do not chain to the page.
 - tabIndex / aria-label / render / ref / native props: useRender.ComponentProps<div>; default by measured overflow. Focusable (tabIndex=0) only while the content actually overflows horizontally or vertically, so the keyboard can scroll it; it then becomes a named region from aria-label / aria-labelledby, else the table's caption or aria-label. A container whose content fits stays out of the Tab sequence. Ref targets the container; an explicit tabIndex wins.
 
 #### Table / TableCaption / TableHeader / TableBody / TableFooter / TableRow
@@ -13489,7 +13629,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
-Source SHA-256: 3f631d2cc01de8867c121b4787c811ab1207d12add9bf19d7c0b9525086f510f
+Source SHA-256: bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca
 
 Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
 
@@ -13542,6 +13682,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Text
 - `numeric?`: `boolean`.
 - `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
+- `tone?`: `"default" | "muted"`. 墨色：default 沿用所在处的前景色；muted 用弱化前景（`text-muted-foreground`），做辅助说明。 没有 danger：错误文字属于 FieldError（功能纯粹，STANDARDS §1），Text 不单设红色。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -13568,6 +13709,7 @@ A real heading with independent outline level and visual step.
 Body copy, supporting text or numbers; defaults to p.
 - step: TextStep; default "body". For example reading, support, caption or metric; no additional ramp.
 - numeric: boolean; default false. Tabular figures; the application preserves unknown and empty values.
+- tone: "default" | "muted"; default "default". default inherits the surrounding foreground; muted uses the weakened foreground for supporting copy. There is no danger tone: error text belongs to FieldError.
 - render / ref / native props: useRender.ComponentProps<"p">. Render as span for inline text. Color inherits by default.
 
 ### Keyboard
@@ -13691,7 +13833,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
+Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 
@@ -13816,7 +13958,7 @@ Page-level actions at the end of the row, under the same rule as SectionActions.
 - render / ref / children / native props: useRender.ComponentProps<div>. When a labelled quiet button (md or sm) ends the group, the group offsets its inline padding so the text meets the content's right edge.
 
 #### WorkspaceContent
-The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus.
+The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus. It is a positioning ancestor (relative), so absolutely positioned content cannot escape the scroll area.
 - render / ref / children / native props: useRender.ComponentProps<main>. The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it.
 - transitionKey: React.Key. Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion.
 

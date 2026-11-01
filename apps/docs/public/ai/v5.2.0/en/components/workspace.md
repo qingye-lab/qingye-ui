@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
+Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 
@@ -128,7 +128,7 @@ Page-level actions at the end of the row, under the same rule as SectionActions.
 - render / ref / children / native props: useRender.ComponentProps<div>. When a labelled quiet button (md or sm) ends the group, the group offsets its inline padding so the text meets the content's right edge.
 
 ### WorkspaceContent
-The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus.
+The only scroll container, a native main. With room to spare it has tabIndex=-1 and is only a focus target; when its content overflows it has tabIndex=0 so the keyboard can stop and scroll, with a thin inset line on focus. It is a positioning ancestor (relative), so absolutely positioned content cannot escape the scroll area.
 - render / ref / children / native props: useRender.ComponentProps<main>. The ref points at the scrolling element; scroll-following parts (a table of contents, a virtual list) take their container from it.
 - transitionKey: React.Key. Identifies the page, usually the route path. When it changes the content scrolls back to the top and replays its entrance; the first mount does neither. With a #anchor in the address the scroll is left to the router. The entrance is skipped during keyboard use and reduced to a fade under reduced motion.
 
