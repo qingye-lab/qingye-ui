@@ -108,6 +108,7 @@
 - [切换组 ToggleGroup](/docs/components/toggle-group.md): 关联一组单选或多选的切换按钮：选项保持切换状态。
 - [工具组 Toolbar](/docs/components/toolbar.md): 真实分组、方向键焦点与可执行操作。
 - [文字提示 Tooltip](/docs/components/tooltip.md): 悬停或聚焦时阅读快捷键、格式与短解释。
+- [新手引导 Tour](/docs/components/tour.md): 依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。
 - [层级集合 Tree](/docs/components/tree.md): 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 - [树形选择 TreeSelect](/docs/components/tree-select.md): 在弹层里的树上选一个节点，或勾选若干叶子。
 - [排版 Typography](/docs/components/typography.md): 标题层级、正文、辅助文字与数值共用已有文字档；语义标签与视觉档独立选择。

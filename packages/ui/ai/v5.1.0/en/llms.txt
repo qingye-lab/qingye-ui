@@ -107,6 +107,7 @@
 - [ToggleGroup](components/toggle-group.md): A shared single or multiple set of toggles whose pressed fact persists.
 - [Toolbar](components/toolbar.md): Actual groups, arrow-key focus and operable actions.
 - [Tooltip](components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
+- [Tour](components/tour.md): A non-modal, step-by-step guide that points at page elements one after another, with an optional spotlight.
 - [Tree](components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [TreeSelect](components/tree-select.md): Choose one node, or check several leaves, on a tree inside a popup.
 - [Typography](components/typography.md): Headings, body copy, supporting text and numbers use the existing text steps. Semantics and visual size are independent.
