@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T06:18:43.371Z",
-  "revision": "242bdb2b7c9f2d0e9e282ea8182f60cc7cc5a3af",
+  "generatedAt": "2026-11-01T07:56:40.633Z",
+  "revision": "8248669dba7e7cd77f7f9e2d8401b4738b6c31d6",
   "fingerprint": {
-    "sha256": "1bb5a13999ed946c39cab06265fef72ac5fed5bac85d728ddb31db4e15823a21",
+    "sha256": "e25fb7f5165f83bb09489dc5bc58ca531b947fa585df4f306266fc2ba2f1ccc7",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -540,7 +540,7 @@
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
-        "sha256": "71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0"
+        "sha256": "939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d"
       },
       {
         "path": "packages/ui/src/components/card.tsx",
@@ -4799,7 +4799,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 243
+            "line": 245
           }
         },
         {
@@ -5036,11 +5036,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 243
+              "line": 245
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 243
+              "line": 245
             },
             "status": "PRESENT"
           },

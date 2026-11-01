@@ -7386,7 +7386,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/calendar.tsx",
-        "sha256": "71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0",
+        "sha256": "939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。",

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0
+Source SHA-256: 939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
