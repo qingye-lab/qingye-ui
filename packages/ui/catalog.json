@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2748,7 +2748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3586,7 +3586,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4478,7 +4478,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5442,7 +5442,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6003,7 +6003,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7188,7 +7188,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7736,7 +7736,7 @@
     {
       "name": "cascader",
       "title": "级联选择 Cascader",
-      "description": "沿「根到叶」的路径选一个值，每一级的候选各占一列。",
+      "description": "沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。",
       "category": "表单",
       "source": "local",
       "layer": "primitive",
@@ -7749,6 +7749,7 @@
         "触发器的文字是完整路径，过长时用省略号截断，完整文字仍在 DOM 里，读屏读到全部。",
         "鼠标点父项只展开；selectParent 时父项同时成为值，弹层保持打开以便继续往下选。键盘上这是两个键：Enter 提交并关闭，→ 展开。",
         "焦点是真实 DOM 焦点（roving tabindex），每列是一个 listbox，名称是它的父项，第一列取触发器的名称。搜索结果例外：焦点留在输入里，用 aria-activedescendant。",
+        "多选时每列是 aria-multiselectable 的 listbox，勾选标记不进可访问树，选中状态由 aria-selected 表达；分支的部分已选通过一段描述告知读屏。",
         "选项上的 aria-haspopup 与 aria-expanded 表示「有下一列」与「下一列已展开」。",
         "候选的可见字号与高度与 Select 的候选项相同；每列宽度由内容决定，下限由留白、尾部标记与最小文字区推出，列多时候选面横向滚动。"
       ],
@@ -7776,16 +7777,23 @@
               "descriptionEn": "Candidates of the first column. A node is { value, label, disabled?, children?, isLeaf? }; values are unique under one parent. A node with children is a branch, otherwise a leaf (unless loadChildren is set)."
             },
             {
+              "name": "multiple",
+              "type": "boolean",
+              "default": "false",
+              "description": "为 true 时每一级都带勾选标记，值是若干条路径：叶子勾选或取消，分支的勾选是派生显示（全部启用的叶子后代已勾为选中，部分已勾为 mixed，并有「部分已选」的描述），点分支只展开，点它的标记才勾选其下全部启用的叶子；禁用的叶子保持原状，禁用的分支不可勾选。勾选不关闭弹层。触发器的呈现与 TreeSelect 多选相同，超过两项写成「首项及其余 N 项」。与 selectParent 互斥。",
+              "descriptionEn": "With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a \"Partly selected\" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads \"first and N more\". Mutually exclusive with selectParent."
+            },
+            {
               "name": "value / defaultValue",
-              "type": "string[] | null",
-              "description": "从根到所选节点的路径，null 是未选择；省略初值不会选第一项。路径里尚未加载的节点，触发器退回显示它的 value。",
-              "descriptionEn": "The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger."
+              "type": "string[] | null  (multiple: readonly (readonly string[])[])",
+              "description": "单选：从根到所选节点的路径，null 是未选择；省略初值不会选第一项。多选：已勾选的叶子路径的数组，空数组是未选择，顺序按候选树的顺序。路径里尚未加载的节点，触发器退回显示它的 value。",
+              "descriptionEn": "Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger."
             },
             {
               "name": "onValueChange",
-              "type": "(path: string[] | null, options: CascaderOption[]) => void",
-              "description": "提交了新的路径时调用；第二个参数是路径上各节点。提交相同路径不调用。",
-              "descriptionEn": "Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it."
+              "type": "(path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void)",
+              "description": "提交了新的值时调用；第二个参数是路径上各节点（多选是每条路径各一组）。提交相同的值不调用。",
+              "descriptionEn": "Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it."
             },
             {
               "name": "selectParent",
@@ -7804,8 +7812,8 @@
               "name": "searchable",
               "type": "boolean",
               "default": "false",
-              "description": "弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接）。只搜已知节点，未加载的分支不在其中。",
-              "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included."
+              "description": "弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接），匹配的文字加粗标出。只搜已知节点，未加载的分支不在其中。多选时只列叶子路径，每项带勾选标记，Enter 或点击勾选后弹层保持打开、焦点留在输入里。",
+              "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input."
             },
             {
               "name": "placeholder",
@@ -7824,8 +7832,8 @@
             {
               "name": "name / form",
               "type": "string",
-              "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；所以 value 里不应含 \"/\"。",
-              "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Values should therefore not contain \"/\"."
+              "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）；所以 value 里不应含 \"/\"。",
+              "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
             },
             {
               "name": "aria-label / aria-labelledby / id / className",
@@ -7850,122 +7858,128 @@
                 "name": "aria-describedby",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:48"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:43"
               },
               {
                 "name": "aria-invalid",
                 "optional": true,
                 "type": "\"true\" | \"false\" | boolean",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:49"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:44"
               },
               {
                 "name": "aria-label",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:46"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:41"
               },
               {
                 "name": "aria-labelledby",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:47"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:42"
               },
               {
                 "name": "className",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:45"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:40"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "string[] | null | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:28"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:50"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:38"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:33"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:43"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:38"
               },
               {
                 "name": "id",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:44"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:39"
               },
               {
                 "name": "loadChildren",
                 "optional": true,
                 "type": "((option: CascaderOption) => Promise<CascaderOption[]>) | undefined",
                 "doc": "展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:34"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:29"
+              },
+              {
+                "name": "multiple",
+                "optional": true,
+                "type": "false | undefined",
+                "declaredAt": "packages/ui/src/components/cascader.tsx:47"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "doc": "隐藏 input 的名称；提交值是路径各段用 \"/\" 连接，未选择提交空字符串。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:42"
+                "doc": "隐藏 input 的名称。单选提交路径各段用 \"/\" 连接（未选择提交空字符串）；多选每条已选路径一条同名值，未选择不提交。",
+                "declaredAt": "packages/ui/src/components/cascader.tsx:37"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((path: string[] | null, options: CascaderOption[]) => void) | undefined",
                 "doc": "提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:30"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:52"
               },
               {
                 "name": "options",
                 "optional": false,
                 "type": "readonly CascaderOption[]",
                 "doc": "第一列的候选；子项在 children 里，或由 loadChildren 按需取来。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:25"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:27"
               },
               {
                 "name": "placeholder",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:37"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:32"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:39"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:34"
               },
               {
                 "name": "required",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:40"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:35"
               },
               {
                 "name": "searchable",
                 "optional": true,
                 "type": "boolean",
-                "doc": "弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:36"
+                "doc": "弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径，命中的文字被标出（只搜已知的节点，未加载的分支不在其中）。",
+                "declaredAt": "packages/ui/src/components/cascader.tsx:31"
               },
               {
                 "name": "selectParent",
                 "optional": true,
                 "type": "boolean",
                 "doc": "默认只有叶子可提交；true 时任意层级都可以提交。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:32"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:54"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "string[] | null | undefined",
                 "doc": "从根到所选节点的路径；null 是未选择。省略初值不会选第一项。",
-                "declaredAt": "packages/ui/src/components/cascader.tsx:27"
+                "declaredAt": "packages/ui/src/components/cascader.tsx:49"
               }
             ],
             "inheritedCount": 0,
@@ -7978,12 +7992,12 @@
             {
               "part": "Cascader",
               "prop": "aria-describedby",
-              "declaredAt": "packages/ui/src/components/cascader.tsx:48"
+              "declaredAt": "packages/ui/src/components/cascader.tsx:43"
             },
             {
               "part": "Cascader",
               "prop": "aria-invalid",
-              "declaredAt": "packages/ui/src/components/cascader.tsx:49"
+              "declaredAt": "packages/ui/src/components/cascader.tsx:44"
             }
           ]
         }
@@ -8013,8 +8027,8 @@
         },
         {
           "keys": "Enter / Space",
-          "description": "可提交的项：提交并关闭，焦点回触发器；不可提交的分支：进入下一列。",
-          "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column."
+          "description": "可提交的项：提交并关闭，焦点回触发器；不可提交的分支：进入下一列。多选：勾选或取消勾选当前项（分支则勾选其下全部启用的叶子），弹层保持打开。",
+          "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open."
         },
         {
           "keys": "文字键",
@@ -8041,7 +8055,7 @@
           "owner": "cascader",
           "module": "@qingye_lab/ui/components/cascader",
           "propsType": "CascaderProps",
-          "signature": "Cascader({\n  options, value: valueProp, defaultValue = null, onValueChange, selectParent = false, loadChildren, searchable = false,\n  placeholder, disabled: disabledProp = false, readOnly = false, required = false, name: nameProp, form, id, className,\n  \"aria-label\": ariaLabel, \"aria-labelledby\": ariaLabelledBy, \"aria-describedby\": ariaDescribedBy, \"aria-invalid\": ariaInvalid,\n}: CascaderProps)",
+          "signature": "Cascader(props: CascaderProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -8061,7 +8075,7 @@
           "kind": "type",
           "owner": "cascader",
           "module": "@qingye_lab/ui/components/cascader",
-          "signature": "{\n  /** 第一列的候选；子项在 children 里，或由 loadChildren 按需取来。 */\n  options: readonly CascaderOption[];\n  /** 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。 */\n  value?: string[] | null | undefined;\n  defaultValue?: string[] | null | undefined;\n  /** 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。 */\n  onValueChange?: ((path: string[] | null, options: CascaderOption[]) => void) | undefined;\n  /** 默认只有叶子可提交；true 时任意层级都可以提交。 */\n  selectParent?: boolean | undefined;\n  /** 展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。 */\n  loadChildren?: ((option: CascaderOption) => Promise<CascaderOption[]>) | undefined;\n  /** 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。 */\n  searchable?: boolean | undefined;\n  placeholder?: React.ReactNode;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n  required?: boolean | undefined;\n  /** 隐藏 input 的名称；提交值是路径各段用 \"/\" 连接，未选择提交空字符串。 */\n  name?: string | undefined;\n  form?: string | undefined;\n  id?: string | undefined;\n  className?: string | undefined;\n  \"aria-label\"?: string | undefined;\n  \"aria-labelledby\"?: string | undefined;\n  \"aria-describedby\"?: string | undefined;\n  \"aria-invalid\"?: boolean | \"true\" | \"false\" | undefined;\n}",
+          "signature": "CascaderBaseProps & (CascaderSingleProps | CascaderMultipleProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -8074,7 +8088,7 @@
         },
         {
           "name": "CascaderProps",
-          "definition": "export type CascaderProps = {\n  /** 第一列的候选；子项在 children 里，或由 loadChildren 按需取来。 */\n  options: readonly CascaderOption[];\n  /** 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。 */\n  value?: string[] | null | undefined;\n  defaultValue?: string[] | null | undefined;\n  /** 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。 */\n  onValueChange?: ((path: string[] | null, options: CascaderOption[]) => void) | undefined;\n  /** 默认只有叶子可提交；true 时任意层级都可以提交。 */\n  selectParent?: boolean | undefined;\n  /** 展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。 */\n  loadChildren?: ((option: CascaderOption) => Promise<CascaderOption[]>) | undefined;\n  /** 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。 */\n  searchable?: boolean | undefined;\n  placeholder?: React.ReactNode;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n  required?: boolean | undefined;\n  /** 隐藏 input 的名称；提交值是路径各段用 \"/\" 连接，未选择提交空字符串。 */\n  name?: string | undefined;\n  form?: string | undefined;\n  id?: string | undefined;\n  className?: string | undefined;\n  \"aria-label\"?: string | undefined;\n  \"aria-labelledby\"?: string | undefined;\n  \"aria-describedby\"?: string | undefined;\n  \"aria-invalid\"?: boolean | \"true\" | \"false\" | undefined;\n};"
+          "definition": "export type CascaderProps = CascaderBaseProps & (CascaderSingleProps | CascaderMultipleProps);"
         }
       ],
       "usageImports": [
@@ -8121,7 +8135,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8184,6 +8198,20 @@
           "providers": [],
           "code": "import { Cascader, type CascaderOption } from \"@qingye_lab/ui/components/cascader\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"搜索路径\", titleEn: \"Search paths\" };\n\nconst zh: CascaderOption[] = [\n  { value: \"home\", label: \"家居\", children: [\n    { value: \"furniture\", label: \"家具\", children: [{ value: \"sofa\", label: \"沙发\" }, { value: \"table\", label: \"餐桌\" }, { value: \"bed\", label: \"床\" }] },\n    { value: \"lighting\", label: \"灯具\", children: [{ value: \"desk-lamp\", label: \"台灯\" }, { value: \"ceiling\", label: \"吸顶灯\" }] },\n  ] },\n  { value: \"digital\", label: \"数码\", children: [\n    { value: \"phone\", label: \"手机\", children: [{ value: \"case\", label: \"手机壳\" }, { value: \"charger\", label: \"充电器\" }] },\n    { value: \"audio\", label: \"音频\", children: [{ value: \"headphone\", label: \"耳机\" }, { value: \"speaker\", label: \"音箱\" }] },\n  ] },\n  { value: \"books\", label: \"图书\", children: [{ value: \"fiction\", label: \"文学\", children: [{ value: \"novel\", label: \"小说\" }, { value: \"poetry\", label: \"诗歌\" }] }] },\n];\nconst en: CascaderOption[] = [\n  { value: \"home\", label: \"Home\", children: [\n    { value: \"furniture\", label: \"Furniture\", children: [{ value: \"sofa\", label: \"Sofas\" }, { value: \"table\", label: \"Dining tables\" }, { value: \"bed\", label: \"Beds\" }] },\n    { value: \"lighting\", label: \"Lighting\", children: [{ value: \"desk-lamp\", label: \"Desk lamps\" }, { value: \"ceiling\", label: \"Ceiling lights\" }] },\n  ] },\n  { value: \"digital\", label: \"Digital\", children: [\n    { value: \"phone\", label: \"Phones\", children: [{ value: \"case\", label: \"Cases\" }, { value: \"charger\", label: \"Chargers\" }] },\n    { value: \"audio\", label: \"Audio\", children: [{ value: \"headphone\", label: \"Headphones\" }, { value: \"speaker\", label: \"Speakers\" }] },\n  ] },\n  { value: \"books\", label: \"Books\", children: [{ value: \"fiction\", label: \"Fiction\", children: [{ value: \"novel\", label: \"Novels\" }, { value: \"poetry\", label: \"Poetry\" }] }] },\n];\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  return (\n    <Field>\n      <FieldLabel>{english ? \"Category\" : \"类目\"}</FieldLabel>\n      <Cascader options={english ? en : zh} searchable name=\"category\" />\n    </Field>\n  );\n}\n",
           "sha256": "4c132aa6fd8f98656e7b7d3a0ddd96b0667894ba0b508324d8285ffd71a3943e"
+        },
+        {
+          "id": "multiple",
+          "title": "多选路径",
+          "source": "apps/docs/src/content/cascader/demos/04-multiple.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/cascader",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Cascader, type CascaderOption } from \"@qingye_lab/ui/components/cascader\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"多选路径\", titleEn: \"Multiple paths\" };\n\nconst zh: CascaderOption[] = [\n  { value: \"zj\", label: \"浙江\", children: [\n    { value: \"hz\", label: \"杭州\", children: [{ value: \"xh\", label: \"西湖区\" }, { value: \"yh\", label: \"余杭区\" }, { value: \"bj\", label: \"滨江区\", disabled: true }] },\n    { value: \"nb\", label: \"宁波\", children: [{ value: \"hs\", label: \"海曙区\" }, { value: \"jb\", label: \"江北区\" }] },\n  ] },\n  { value: \"js\", label: \"江苏\", children: [\n    { value: \"nj\", label: \"南京\", children: [{ value: \"gl\", label: \"鼓楼区\" }, { value: \"xw\", label: \"玄武区\" }] },\n  ] },\n  { value: \"xz\", label: \"西藏\" },\n];\nconst en: CascaderOption[] = [\n  { value: \"zj\", label: \"Zhejiang\", children: [\n    { value: \"hz\", label: \"Hangzhou\", children: [{ value: \"xh\", label: \"Xihu\" }, { value: \"yh\", label: \"Yuhang\" }, { value: \"bj\", label: \"Binjiang\", disabled: true }] },\n    { value: \"nb\", label: \"Ningbo\", children: [{ value: \"hs\", label: \"Haishu\" }, { value: \"jb\", label: \"Jiangbei\" }] },\n  ] },\n  { value: \"js\", label: \"Jiangsu\", children: [\n    { value: \"nj\", label: \"Nanjing\", children: [{ value: \"gl\", label: \"Gulou\" }, { value: \"xw\", label: \"Xuanwu\" }] },\n  ] },\n  { value: \"xz\", label: \"Tibet\" },\n];\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const [value, setValue] = useState<string[][]>([[\"zj\", \"hz\", \"xh\"]]);\n  return (\n    <Field>\n      <FieldLabel>{english ? \"Regions\" : \"覆盖地区\"}</FieldLabel>\n      <Cascader multiple searchable options={english ? en : zh} value={value} onValueChange={setValue} name=\"regions\" />\n    </Field>\n  );\n}\n",
+          "sha256": "2f7e43abbaf00ef542ab7ddcd8ceac2892e3a07d6c45dd9cfeb67c2bf4750999"
         }
       ],
       "design": {
@@ -8197,7 +8225,6 @@
         ],
         "avoid": [
           "只有一层候选用 Select，候选很多需过滤用 Combobox",
-          "需要多选路径时用 Tree 的勾选形态",
           "要并置比较的少量候选用 RadioGroup"
         ],
         "composition": [
@@ -8220,20 +8247,21 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/cascader.tsx",
-        "sha256": "9ceda3ccbb6f291761c0eee3440aa2c4be159331c7e39243f22e02022a424915",
+        "sha256": "7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
+      "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；多选的值只含叶子路径，分支的勾选是派生显示，与 Tree、TreeSelect 同一约定。加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
       "localized": {
         "en": {
           "title": "Cascader",
-          "description": "Choose one value along a root-to-leaf path, with each level's candidates in its own column.",
+          "description": "Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.",
           "category": "Forms",
-          "decisions": "What is chosen is a path, not the last node: leaves with the same name (a \"city district\" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for \"no children\".",
+          "decisions": "Multiple values hold leaf paths only and a branch's check is a derived display, the same convention as Tree and TreeSelect. What is chosen is a path, not the last node: leaves with the same name (a \"city district\" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for \"no children\".",
           "notes": [
             "The trigger text is the complete path, truncated with an ellipsis when long; the full text stays in the DOM so assistive technology reads all of it.",
             "A mouse click on a parent only expands it; with selectParent the parent also becomes the value and the popup stays open so you can continue downward. On the keyboard these are two keys: Enter submits and closes, → expands.",
             "Focus is real DOM focus (roving tabindex). Each column is a listbox named by its parent; the first column takes the trigger's name. Search results are the exception: focus stays in the input and aria-activedescendant points at the result.",
+            "In multiple mode each column is an aria-multiselectable listbox, the check marker stays outside the accessibility tree and aria-selected carries the state; a branch's partial state is given to assistive technology as a description.",
             "aria-haspopup and aria-expanded on an option mean \"has a next column\" and \"the next column is open\".",
             "Candidates share Select's text size and height. Column width follows content with a lower bound derived from padding, trailing marker and minimum text area; the popup scrolls horizontally when columns are many."
           ],
@@ -8250,16 +8278,23 @@
                   "descriptionEn": "Candidates of the first column. A node is { value, label, disabled?, children?, isLeaf? }; values are unique under one parent. A node with children is a branch, otherwise a leaf (unless loadChildren is set)."
                 },
                 {
+                  "name": "multiple",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a \"Partly selected\" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads \"first and N more\". Mutually exclusive with selectParent.",
+                  "descriptionEn": "With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a \"Partly selected\" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads \"first and N more\". Mutually exclusive with selectParent."
+                },
+                {
                   "name": "value / defaultValue",
-                  "type": "string[] | null",
-                  "description": "The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger.",
-                  "descriptionEn": "The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger."
+                  "type": "string[] | null  (multiple: readonly (readonly string[])[])",
+                  "description": "Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger.",
+                  "descriptionEn": "Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger."
                 },
                 {
                   "name": "onValueChange",
-                  "type": "(path: string[] | null, options: CascaderOption[]) => void",
-                  "description": "Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it.",
-                  "descriptionEn": "Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it."
+                  "type": "(path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void)",
+                  "description": "Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it.",
+                  "descriptionEn": "Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it."
                 },
                 {
                   "name": "selectParent",
@@ -8278,8 +8313,8 @@
                   "name": "searchable",
                   "type": "boolean",
                   "default": "false",
-                  "description": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included.",
-                  "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included."
+                  "description": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.",
+                  "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input."
                 },
                 {
                   "name": "placeholder",
@@ -8298,8 +8333,8 @@
                 {
                   "name": "name / form",
                   "type": "string",
-                  "description": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Values should therefore not contain \"/\".",
-                  "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Values should therefore not contain \"/\"."
+                  "description": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\".",
+                  "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
                 },
                 {
                   "name": "aria-label / aria-labelledby / id / className",
@@ -8335,8 +8370,8 @@
             },
             {
               "keys": "Enter / Space",
-              "description": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column.",
-              "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column."
+              "description": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open.",
+              "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open."
             },
             {
               "keys": "Typing",
@@ -8367,7 +8402,6 @@
             ],
             "avoid": [
               "Use Select for a single level and Combobox when many candidates need filtering.",
-              "Use Tree's checkable form for choosing several paths.",
               "Use RadioGroup for a few candidates that need side-by-side comparison."
             ],
             "composition": [
@@ -9338,7 +9372,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10858,7 +10892,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11309,7 +11343,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12391,7 +12425,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13653,7 +13687,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14811,7 +14845,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15359,7 +15393,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15909,7 +15943,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17581,7 +17615,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19124,7 +19158,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19744,7 +19778,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20294,7 +20328,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20763,7 +20797,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21286,7 +21320,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22619,7 +22653,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23462,7 +23496,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24946,7 +24980,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26534,7 +26568,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27611,7 +27645,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28546,7 +28580,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29430,7 +29464,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29800,7 +29834,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -33172,7 +33206,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35119,7 +35153,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36944,7 +36978,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37460,7 +37494,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39057,7 +39091,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39561,7 +39595,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39935,7 +39969,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41263,7 +41297,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41657,7 +41691,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42466,7 +42500,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42936,7 +42970,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44160,7 +44194,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44598,7 +44632,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45760,7 +45794,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47767,7 +47801,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50023,7 +50057,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50645,7 +50679,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50978,7 +51012,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51673,7 +51707,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52229,7 +52263,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52965,7 +52999,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53373,7 +53407,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53831,7 +53865,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56180,7 +56214,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56633,7 +56667,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -57698,7 +57732,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58211,7 +58245,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58762,7 +58796,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59308,7 +59342,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59929,7 +59963,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62835,7 +62869,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -63346,7 +63380,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -63575,7 +63609,8 @@
       ],
       "docs": "/docs/components/tree",
       "notes": [
-        "移除焦点节点回到可用节点；清空回到拥有焦点的容器，不抢走外部焦点。"
+        "移除焦点节点回到可用节点；清空回到拥有焦点的容器，不抢走外部焦点。",
+        "拖放只报告意图，不改数据：移动是否成立、节点放在哪里由调用方决定，所以同一套规则和同一个 onMove 服务指针与键盘两条路径。draggable 时 Enter 仍是选择，取起用 Ctrl/⌘+X，不抢占已有键。"
       ],
       "keywords": [
         "tree view",
@@ -63594,8 +63629,8 @@
             {
               "name": "nodes",
               "type": "readonly TreeNode[]",
-              "description": "id/label 必须非空且 id 全树唯一；disabled 与 children 显式提供。",
-              "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit."
+              "description": "id/label 必须非空且 id 全树唯一；disabled 与 children 显式提供。isLeaf 声明没有子项，使配了 loadChildren 时也不去加载它。",
+              "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit. isLeaf declares no children, so a node is not loaded even when loadChildren is set."
             },
             {
               "name": "expandedIds / defaultExpandedIds / onExpandedChange",
@@ -63634,6 +63669,24 @@
               "descriptionEn": "The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens."
             },
             {
+              "name": "loadChildren",
+              "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
+              "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。",
+              "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+            },
+            {
+              "name": "query",
+              "type": "string",
+              "description": "按标签过滤：保留匹配的节点及其全部祖先，其余隐藏，匹配的文字用 mark 标出，无匹配时显示 emptyContent。有匹配后代的分支被强制展开（此时它的展开开关不起作用，也不触发 onExpandedChange），清空 query 后回到原来的展开状态。过滤只隐藏：分支的勾选状态与级联仍按完整的树计算。传原始字符串即可，匹配不区分大小写并忽略首尾空白。",
+              "descriptionEn": "Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace."
+            },
+            {
+              "name": "draggable / onMove / canDrop",
+              "type": "boolean / (move: TreeMove, details: { event, reason: \"keyboard\" | \"pointer\" }) => void / (move: TreeMove) => boolean",
+              "description": "draggable 打开调整位置：指针拖放按落点在行内的位置报告 before（上四分之一）、after（下四分之一）或 inside（中间），并画出插入线；键盘用 Ctrl/⌘+X 取起、Alt+↑ / ↓ / Enter 放到当前节点之前 / 之后 / 之内。Tree 不持有数据，只通过 onMove({ nodeId, targetId, position }) 报告，调用方改 nodes。不能放到自身或自身子树里、不能是位置不变的移动、禁用的节点既不能拖也不能作目标；canDrop 返回 false 可进一步禁止。取起、放下、取消与不允许的位置都通过 role=status 的区域播报。",
+              "descriptionEn": "draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region."
+            },
+            {
               "name": "aria-label / aria-labelledby",
               "type": "string",
               "description": "必填其一：树的名称，落在 role=tree 的根上；缺失或为空时抛错。各节点的名称来自节点自己的 label。",
@@ -63659,104 +63712,138 @@
             "status": "resolved",
             "ownProps": [
               {
+                "name": "canDrop",
+                "optional": true,
+                "type": "(move: TreeMove) => boolean",
+                "doc": "在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。",
+                "declaredAt": "packages/ui/src/components/tree.tsx:53"
+              },
+              {
                 "name": "checkable",
                 "optional": true,
                 "type": "boolean",
                 "doc": "级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。",
-                "declaredAt": "packages/ui/src/components/tree.tsx:23"
+                "declaredAt": "packages/ui/src/components/tree.tsx:32"
               },
               {
                 "name": "checkedIds",
                 "optional": true,
                 "type": "readonly string[]",
                 "doc": "只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。",
-                "declaredAt": "packages/ui/src/components/tree.tsx:25"
+                "declaredAt": "packages/ui/src/components/tree.tsx:34"
               },
               {
                 "name": "defaultCheckedIds",
                 "optional": true,
                 "type": "readonly string[]",
-                "declaredAt": "packages/ui/src/components/tree.tsx:25"
+                "declaredAt": "packages/ui/src/components/tree.tsx:34"
               },
               {
                 "name": "defaultExpandedIds",
                 "optional": true,
                 "type": "readonly string[]",
-                "declaredAt": "packages/ui/src/components/tree.tsx:17"
+                "declaredAt": "packages/ui/src/components/tree.tsx:26"
               },
               {
                 "name": "defaultFocusedId",
                 "optional": true,
                 "type": "string | null",
                 "doc": "首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。",
-                "declaredAt": "packages/ui/src/components/tree.tsx:31"
+                "declaredAt": "packages/ui/src/components/tree.tsx:40"
               },
               {
                 "name": "defaultSelectedId",
                 "optional": true,
                 "type": "string | null",
-                "declaredAt": "packages/ui/src/components/tree.tsx:19"
+                "declaredAt": "packages/ui/src/components/tree.tsx:28"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tree.tsx:27"
+                "declaredAt": "packages/ui/src/components/tree.tsx:36"
+              },
+              {
+                "name": "draggable",
+                "optional": true,
+                "type": "boolean",
+                "doc": "允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\nTree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。",
+                "declaredAt": "packages/ui/src/components/tree.tsx:50"
               },
               {
                 "name": "emptyContent",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/tree.tsx:27"
+                "declaredAt": "packages/ui/src/components/tree.tsx:36"
               },
               {
                 "name": "expandedIds",
                 "optional": true,
                 "type": "readonly string[]",
-                "declaredAt": "packages/ui/src/components/tree.tsx:17"
+                "declaredAt": "packages/ui/src/components/tree.tsx:26"
+              },
+              {
+                "name": "loadChildren",
+                "optional": true,
+                "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
+                "doc": "展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。",
+                "declaredAt": "packages/ui/src/components/tree.tsx:43"
               },
               {
                 "name": "nodes",
                 "optional": false,
                 "type": "readonly TreeNode[]",
-                "declaredAt": "packages/ui/src/components/tree.tsx:16"
+                "declaredAt": "packages/ui/src/components/tree.tsx:25"
               },
               {
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "(ids: string[], details: TreeChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/tree.tsx:26"
+                "declaredAt": "packages/ui/src/components/tree.tsx:35"
               },
               {
                 "name": "onExpandedChange",
                 "optional": true,
                 "type": "(ids: string[], details: TreeChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/tree.tsx:18"
+                "declaredAt": "packages/ui/src/components/tree.tsx:27"
+              },
+              {
+                "name": "onMove",
+                "optional": true,
+                "type": "(move: TreeMove, details: TreeMoveDetails) => void",
+                "declaredAt": "packages/ui/src/components/tree.tsx:51"
               },
               {
                 "name": "onSelectionChange",
                 "optional": true,
                 "type": "(id: string | null, details: TreeChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/tree.tsx:20"
+                "declaredAt": "packages/ui/src/components/tree.tsx:29"
+              },
+              {
+                "name": "query",
+                "optional": true,
+                "type": "string",
+                "doc": "按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n筛选只是看不见一部分。空串等于不筛选。",
+                "declaredAt": "packages/ui/src/components/tree.tsx:47"
               },
               {
                 "name": "selectable",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tree.tsx:21"
+                "declaredAt": "packages/ui/src/components/tree.tsx:30"
               },
               {
                 "name": "selectedId",
                 "optional": true,
                 "type": "string | null",
-                "declaredAt": "packages/ui/src/components/tree.tsx:19"
+                "declaredAt": "packages/ui/src/components/tree.tsx:28"
               }
             ],
-            "inheritedCount": 280,
+            "inheritedCount": 279,
             "inheritedFrom": [
               {
                 "source": "@types/react",
-                "count": 279
+                "count": 278
               },
               {
                 "source": "@base-ui/react",
@@ -63787,6 +63874,12 @@
           "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
         },
         {
+          "keys": "Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc",
+          "keysEn": "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
+          "description": "仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。",
+          "descriptionEn": "Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced."
+        },
+        {
           "keys": "Enter / Space / 字首",
           "keysEn": "Enter / Space / Typeahead",
           "description": "单选当前节点，或键入标签开头定位：连续键入的字符（间隔 500ms 内，预设）累积成前缀；重复键入同一个字符则在以它开头的节点间循环。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。",
@@ -63800,7 +63893,7 @@
           "owner": "tree",
           "module": "@qingye_lab/ui/components/tree",
           "propsType": "TreeProps",
-          "signature": "Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedChange, selectedId, defaultSelectedId = null, onSelectionChange, selectable = true, checkable = false, checkedIds, defaultCheckedIds = [], onCheckedChange, disabled = false, emptyContent, defaultFocusedId = null, render, ref, className, onFocusCapture, onBlurCapture, ...props }: TreeProps)",
+          "signature": "Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedChange, selectedId, defaultSelectedId = null, onSelectionChange, selectable = true, checkable = false, checkedIds, defaultCheckedIds = [], onCheckedChange, disabled = false, emptyContent, defaultFocusedId = null, loadChildren, query, draggable = false, onMove, canDrop, render, ref, className, onFocusCapture, onBlurCapture, \"aria-describedby\": describedByProp, ...props }: TreeProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -63828,7 +63921,25 @@
           "kind": "type",
           "owner": "tree",
           "module": "@qingye_lab/ui/components/tree",
-          "signature": "boolean | \"mixed\"",
+          "signature": "CheckMarkState",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TreeMove",
+          "kind": "interface",
+          "owner": "tree",
+          "module": "@qingye_lab/ui/components/tree",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TreeMoveDetails",
+          "kind": "interface",
+          "owner": "tree",
+          "module": "@qingye_lab/ui/components/tree",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -63847,7 +63958,7 @@
           "kind": "type",
           "owner": "tree",
           "module": "@qingye_lab/ui/components/tree",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -63856,7 +63967,15 @@
       "types": [
         {
           "name": "TreeNode",
-          "definition": "export interface TreeNode { id: string; label: string; disabled?: boolean; children?: readonly TreeNode[] }"
+          "definition": "export interface TreeNode {\n  id: string; label: string; disabled?: boolean; children?: readonly TreeNode[];\n  /** 声明没有子项：即使提供了 loadChildren，也不再尝试加载。 */\n  isLeaf?: boolean;\n}"
+        },
+        {
+          "name": "TreeMove",
+          "definition": "export interface TreeMove { nodeId: string; targetId: string; position: \"before\" | \"after\" | \"inside\" }"
+        },
+        {
+          "name": "TreeMoveDetails",
+          "definition": "export interface TreeMoveDetails { event: React.SyntheticEvent; reason: \"keyboard\" | \"pointer\" }"
         },
         {
           "name": "TreeChangeDetails",
@@ -63864,11 +63983,11 @@
         },
         {
           "name": "TreeCheckedState",
-          "definition": "export type TreeCheckedState = boolean | \"mixed\";"
+          "definition": "export type TreeCheckedState = CheckMarkState;"
         },
         {
           "name": "TreeProps",
-          "definition": "export type TreeProps = Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n};"
+          "definition": "export type TreeProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"draggable\"> & {\n  nodes: readonly TreeNode[];\n  expandedIds?: readonly string[]; defaultExpandedIds?: readonly string[];\n  onExpandedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  selectedId?: string | null; defaultSelectedId?: string | null;\n  onSelectionChange?: (id: string | null, details: TreeChangeDetails) => void;\n  selectable?: boolean;\n  /** 级联多选模式：与 selectable 的单选高亮不组合（见组件源码顶部注释与文档 decisions）。 */\n  checkable?: boolean;\n  /** 只含叶子节点 id：分支的勾选只是显示派生，不是业务事实，不写回值，避免「选中一个分支」被多计成 N+1 项。 */\n  checkedIds?: readonly string[]; defaultCheckedIds?: readonly string[];\n  onCheckedChange?: (ids: string[], details: TreeChangeDetails) => void;\n  disabled?: boolean; emptyContent?: React.ReactNode;\n  /** 首次渲染时 roving 入口（tabIndex=0）所在的节点；默认是第一个可用节点。只是初值：之后焦点怎么走由用户决定。\n   * 节点不可见（祖先未展开）或不可用时退回到它最近的可见可用祖先，再退回第一个可用节点（与焦点节点被移除时同一条规则）。\n   * 弹层里的树（TreeSelect）靠它让进入时的焦点落在已选节点上；展开其祖先由调用方通过 expandedIds 负责。 */\n  defaultFocusedId?: string | null;\n  /** 展开一个没有 children 的非叶子节点时调用，返回它的子项；首次展开才取，失败（reject）显示可重试的错误。\n   * 取回的子项由 Tree 保管（按节点 id），调用方不必合并回 nodes；id 仍须全树唯一。取回为空数组即成为叶子。 */\n  loadChildren?: (node: TreeNode) => Promise<readonly TreeNode[]>;\n  /** 按名称筛选：只显示名称含它的节点（不分大小写）及这些节点的祖先，命中的文字被标出。筛选期间有命中后代的分支一律展开（展开钮此时不起作用，\n   * 也不触发 onExpandedChange），清空后回到 expandedIds 决定的展开状态。不改变勾选的派生：分支的勾选仍由它的全部叶子后代决定，\n   * 筛选只是看不见一部分。空串等于不筛选。 */\n  query?: string;\n  /** 允许拖动节点改变位置，同时开启键盘等价操作（Ctrl/⌘+X 取起，Alt+↑ / Alt+↓ / Alt+Enter 放到当前节点之前 / 之后 / 之中，Esc 取消）。\n   * Tree 不持有数据：只通过 onMove 报告一次移动，调用方改 nodes。禁用的节点既不能拖动也不能作为目标。 */\n  draggable?: boolean;\n  onMove?: (move: TreeMove, details: TreeMoveDetails) => void;\n  /** 在内置规则（不能放进自己或自己的后代、位置不变的移动无效）之外再收紧：返回 false 的移动不可放置。 */\n  canDrop?: (move: TreeMove) => boolean;\n};"
         }
       ],
       "usageImports": [
@@ -63899,7 +64018,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -63944,6 +64063,32 @@
           "providers": [],
           "code": "import * as React from \"react\";\nimport { Tree, type TreeNode } from \"@qingye_lab/ui/components/tree\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"级联勾选：成员权限\", titleEn: \"Cascading check: member permissions\" } satisfies DemoMeta;\n\n// 真实的权限结构：按区域分组，叶子是具体权限。「删除工作区」要求所有者身份，\n// 对当前成员禁用——它保留自己被授予的事实，不随上级勾选/取消改变。\nconst permissions: TreeNode[] = [\n  {\n    id: \"data\", label: \"工作区数据\", children: [\n      { id: \"data.view\", label: \"查看记录\" },\n      { id: \"data.edit\", label: \"编辑记录\" },\n      { id: \"data.delete\", label: \"删除工作区（仅所有者）\", disabled: true },\n    ],\n  },\n  {\n    id: \"members\", label: \"成员与权限\", children: [\n      { id: \"members.invite\", label: \"邀请成员\" },\n      { id: \"members.remove\", label: \"移除成员\" },\n    ],\n  },\n  {\n    id: \"integrations\", label: \"集成与密钥\", children: [\n      { id: \"integrations.webhooks\", label: \"管理回调地址\" },\n      { id: \"integrations.tokens\", label: \"创建访问令牌\" },\n    ],\n  },\n];\n\nconst LABELS: Record<string, string> = {\n  \"data.view\": \"查看记录\", \"data.edit\": \"编辑记录\", \"data.delete\": \"删除工作区\",\n  \"members.invite\": \"邀请成员\", \"members.remove\": \"移除成员\",\n  \"integrations.webhooks\": \"管理回调地址\", \"integrations.tokens\": \"创建访问令牌\",\n};\n\nexport default function Demo() {\n  const [checked, setChecked] = React.useState<string[]>([\"data.view\", \"data.delete\", \"members.invite\"]);\n  const granted = checked.filter(id => id !== \"data.delete\").map(id => LABELS[id]);\n  return <Stack>\n    <Tree\n      aria-label=\"成员权限\"\n      nodes={permissions}\n      checkable\n      defaultExpandedIds={[\"data\", \"members\", \"integrations\"]}\n      checkedIds={checked}\n      onCheckedChange={setChecked}\n    />\n    <output className=\"text-support text-muted-foreground\">{granted.length ? `已授予：${granted.join(\"、\")}` : \"未授予任何权限\"}</output>\n  </Stack>;\n}\n",
           "sha256": "39edb038244be98aec0bbb5c4aba642718584ec6f5106735bf7b9854c64f3cae"
+        },
+        {
+          "id": "lazy",
+          "title": "按需加载子项",
+          "source": "apps/docs/src/content/tree/demos/03-lazy.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/tree",
+            "react"
+          ],
+          "providers": [],
+          "code": "import * as React from \"react\";\nimport { Tree, type TreeNode } from \"@qingye_lab/ui/components/tree\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"按需加载子项\", titleEn: \"Load children on demand\" } satisfies DemoMeta;\n\nconst delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));\n\n// 根节点先给出；子项在第一次展开时才取。isLeaf 声明没有子项的节点，其余都当作可加载的分支。\nconst roots: TreeNode[] = [\n  { id: \"docs\", label: \"文档\" },\n  { id: \"images\", label: \"图片\" },\n  { id: \"readme\", label: \"说明.txt\", isLeaf: true },\n];\nconst children: Record<string, TreeNode[]> = {\n  docs: [{ id: \"docs.plan\", label: \"计划.md\", isLeaf: true }, { id: \"docs.notes\", label: \"笔记\", children: [{ id: \"docs.notes.a\", label: \"周一.md\" }] }],\n  images: [{ id: \"images.a\", label: \"封面.png\", isLeaf: true }, { id: \"images.b\", label: \"草图.png\", isLeaf: true }],\n};\n\nexport default function Demo() {\n  const failed = React.useRef(false);\n  return <Tree\n    aria-label=\"按需加载的目录\"\n    nodes={roots}\n    loadChildren={async node => {\n      await delay(700);\n      // 图片第一次取不到，重试后成功。\n      if (node.id === \"images\" && !failed.current) { failed.current = true; throw new Error(\"offline\"); }\n      return children[node.id] ?? [];\n    }}\n  />;\n}\n",
+          "sha256": "970dc101a32b9ebf4edde1d28022cc802e01177e699fa4a4a7bb289fab7276ac"
+        },
+        {
+          "id": "reorder",
+          "title": "拖动调整顺序",
+          "source": "apps/docs/src/content/tree/demos/04-reorder.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/tree",
+            "react"
+          ],
+          "providers": [],
+          "code": "import * as React from \"react\";\nimport { Tree, type TreeMove, type TreeNode } from \"@qingye_lab/ui/components/tree\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"拖动调整顺序\", titleEn: \"Drag to reorder\" } satisfies DemoMeta;\n\nconst initial: TreeNode[] = [\n  { id: \"intro\", label: \"简介\" },\n  { id: \"guide\", label: \"指南\", children: [{ id: \"guide.start\", label: \"开始\" }, { id: \"guide.config\", label: \"配置\" }] },\n  { id: \"api\", label: \"接口\" },\n  { id: \"log\", label: \"更新记录\" },\n];\n\n// 数据归调用方：Tree 只报告「谁移到哪里」，这里把它落到自己的数组上。\nfunction detach(list: readonly TreeNode[], id: string): { rest: TreeNode[]; found?: TreeNode | undefined } {\n  let found: TreeNode | undefined;\n  const rest: TreeNode[] = [];\n  for (const node of list) {\n    if (node.id === id) { found = node; continue; }\n    if (node.children) { const inner = detach(node.children, id); if (inner.found) found = inner.found; rest.push({ ...node, children: inner.rest }); } else rest.push(node);\n  }\n  return { rest, found };\n}\nfunction attach(list: readonly TreeNode[], move: TreeMove, node: TreeNode): TreeNode[] {\n  const out: TreeNode[] = [];\n  for (const item of list) {\n    const self = item.children ? { ...item, children: attach(item.children, move, node) } : item;\n    if (item.id !== move.targetId) { out.push(self); continue; }\n    if (move.position === \"before\") out.push(node, self);\n    else if (move.position === \"after\") out.push(self, node);\n    else out.push({ ...self, children: [...(self.children ?? []), node] });\n  }\n  return out;\n}\nfunction applyMove(list: readonly TreeNode[], move: TreeMove): TreeNode[] {\n  const { rest, found } = detach(list, move.nodeId);\n  return found ? attach(rest, move, found) : [...list];\n}\n\nexport default function Demo() {\n  const [nodes, setNodes] = React.useState(initial);\n  return <Tree aria-label=\"可调整顺序的目录\" nodes={nodes} draggable defaultExpandedIds={[\"guide\"]} onMove={move => setNodes(current => applyMove(current, move))} />;\n}\n",
+          "sha256": "6e6b1635d88ad1a88b092dbd16854b6191722bb915d5c7ee29fc33443dfe4650"
         }
       ],
       "design": {
@@ -63956,7 +64101,7 @@
           "真实层级需要键盘定位和独立选择。"
         ],
         "avoid": [
-          "平面比较用 DataTable；不内置懒加载或请求。收进触发器的选择用 TreeSelect。",
+          "平面比较用 DataTable；请求本身由调用方发起，Tree 只管理加载中与失败的状态。收进触发器的选择用 TreeSelect。",
           "同一棵树里混用 checkable 与 selectable 的点击语义：一次点击只承担一种意图。"
         ],
         "composition": [
@@ -63979,18 +64124,19 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tree.tsx",
-        "sha256": "beaccb8054cd33b7cb3b00282400c92e6e2a491c0c0821da4a0155dccb0a9e0b",
+        "sha256": "39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "expandedIds 与 selectedId 分开；聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
+      "decisions": "expandedIds 与 selectedId 分开；加载与失败是组件自己看得见的事实，不当成「没有子项」；过滤只隐藏、不改变值与派生的勾选状态；拖放只报告、不持有数据。聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
       "localized": {
         "en": {
           "title": "Tree",
           "description": "Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.",
           "category": "Navigation",
-          "decisions": "Expanded IDs and selected ID are separate; focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
+          "decisions": "Expanded IDs and selected ID are separate; loading and failure are facts the component sees for itself and are never taken for \"no children\"; filtering only hides and never changes the value or derived checks; dragging only reports and holds no data. focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
           "notes": [
-            "Removing a focused node finds an enabled fallback; clearing returns owned focus to the container without stealing outside focus."
+            "Removing a focused node finds an enabled fallback; clearing returns owned focus to the container without stealing outside focus.",
+            "Dragging reports intent and never changes data: whether a move holds and where the node lands is the caller's decision, so one set of rules and one onMove serve both the pointer and the keyboard. With draggable, Enter still selects; picking up uses Ctrl/Cmd+X so no existing key is taken."
           ],
           "api": [
             {
@@ -64001,8 +64147,8 @@
                 {
                   "name": "nodes",
                   "type": "readonly TreeNode[]",
-                  "description": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit.",
-                  "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit."
+                  "description": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit. isLeaf declares no children, so a node is not loaded even when loadChildren is set.",
+                  "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit. isLeaf declares no children, so a node is not loaded even when loadChildren is set."
                 },
                 {
                   "name": "expandedIds / defaultExpandedIds / onExpandedChange",
@@ -64041,6 +64187,24 @@
                   "descriptionEn": "The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens."
                 },
                 {
+                  "name": "loadChildren",
+                  "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
+                  "description": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands.",
+                  "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+                },
+                {
+                  "name": "query",
+                  "type": "string",
+                  "description": "Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace.",
+                  "descriptionEn": "Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace."
+                },
+                {
+                  "name": "draggable / onMove / canDrop",
+                  "type": "boolean / (move: TreeMove, details: { event, reason: \"keyboard\" | \"pointer\" }) => void / (move: TreeMove) => boolean",
+                  "description": "draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region.",
+                  "descriptionEn": "draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region."
+                },
+                {
                   "name": "aria-label / aria-labelledby",
                   "type": "string",
                   "description": "One is required: the name of the tree, on the role=tree root. A missing or blank name throws. Each item is named by its own label.",
@@ -64067,6 +64231,12 @@
               "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
             },
             {
+              "keys": "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
+              "keysEn": "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
+              "description": "Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced.",
+              "descriptionEn": "Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced."
+            },
+            {
               "keys": "Enter / Space / Typeahead",
               "keysEn": "Enter / Space / Typeahead",
               "description": "Select the current node, or type the start of a label to move: characters typed in quick succession (within 500ms, a preset) accumulate into a prefix, and repeating one character cycles through nodes starting with it. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select.",
@@ -64083,7 +64253,7 @@
               "An actual hierarchy needs keyboard positioning and independent selection."
             ],
             "avoid": [
-              "Use DataTable for flat comparison; no built-in lazy loading or requests. Use TreeSelect for a choice folded into a trigger.",
+              "Use DataTable for flat comparison; the caller makes the request and Tree only manages the loading and failed states. Use TreeSelect for a choice folded into a trigger.",
               "Mixing checkable and selectable click semantics on the same tree; one click carries one intent."
             ],
             "composition": [
@@ -64121,7 +64291,7 @@
       ],
       "docs": "/docs/components/tree-select",
       "notes": [
-        "不做搜索与异步加载：键入标签开头可跳转，节点由调用方一次给全。",
+        "不做异步加载：节点由调用方一次给全。默认键入标签开头可跳转；候选多时开 searchable 按标签过滤。",
         "触发器是 combobox，弹出的是 tree（aria-haspopup=\"tree\"）。多选时触发器列出已选叶子的名称，超过两项写成「首项及其余 N 项」，其余仍在树里可见。"
       ],
       "keywords": [
@@ -64159,6 +64329,13 @@
               "default": "false",
               "description": "为 true 时使用 Tree 的 checkable：勾选分支会勾上它启用的叶子，部分勾选显示 mixed，禁用的叶子保持原状。",
               "descriptionEn": "With true the Tree is checkable: checking a branch checks its enabled leaves, a partial state shows mixed, and disabled leaves keep their state."
+            },
+            {
+              "name": "searchable",
+              "type": "boolean",
+              "default": "false",
+              "description": "弹层顶部出现搜索输入，按标签过滤：保留匹配的节点及其祖先，匹配的分支自动展开，匹配的文字加粗标出；无匹配时显示 locale 的空状态。单选与多选都适用，过滤只隐藏，多选的勾选与级联仍按完整的树。匹配数通过 role=status 播报。",
+              "descriptionEn": "A search input appears at the top of the popup and filters by label: matching nodes and their ancestors stay, matching branches open automatically and the matched text is marked in bold; with no match the locale's empty state shows. It applies to single and multiple mode; filtering only hides, so multiple mode's checks and cascade still follow the full tree. The match count is announced through role=status."
             },
             {
               "name": "placeholder",
@@ -64203,98 +64380,105 @@
                 "name": "aria-describedby",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:26"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:30"
               },
               {
                 "name": "aria-invalid",
                 "optional": true,
                 "type": "\"true\" | \"false\" | boolean",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:27"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:31"
               },
               {
                 "name": "aria-label",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:24"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:28"
               },
               {
                 "name": "aria-labelledby",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:25"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:29"
               },
               {
                 "name": "className",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:23"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:27"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "string | null | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:33"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:37"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:16"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:20"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:21"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:25"
               },
               {
                 "name": "id",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:22"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:26"
               },
               {
                 "name": "multiple",
                 "optional": true,
                 "type": "false | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:30"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:34"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "隐藏 input 的名称。单选提交所选 id（未选择提交空字符串）；多选每个已选 id 一条同名值，未选择不提交。",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:20"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:24"
               },
               {
                 "name": "nodes",
                 "optional": false,
                 "type": "readonly TreeNode[]",
                 "doc": "沿用 Tree 的节点：id 全树唯一，label 非空；disabled 的节点不可选。",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:14"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:16"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((id: string | null, details: TreeSelectChangeDetails) => void) | undefined",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:34"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:38"
               },
               {
                 "name": "placeholder",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:15"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:19"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:17"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:21"
               },
               {
                 "name": "required",
                 "optional": true,
                 "type": "boolean",
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:22"
+              },
+              {
+                "name": "searchable",
+                "optional": true,
+                "type": "boolean",
+                "doc": "弹层顶部出现搜索输入：按名称筛选（不分大小写），保留命中节点的祖先并展开它们，命中的文字被标出。单选与多选都可用；只搜已知的节点。",
                 "declaredAt": "packages/ui/src/components/tree-select.tsx:18"
               },
               {
@@ -64302,7 +64486,7 @@
                 "optional": true,
                 "type": "string | null | undefined",
                 "doc": "所选节点的 id（分支也可以被选）；null 是未选择。省略初值不会选第一项。选中即提交并关闭弹层。",
-                "declaredAt": "packages/ui/src/components/tree-select.tsx:32"
+                "declaredAt": "packages/ui/src/components/tree-select.tsx:36"
               }
             ],
             "inheritedCount": 0,
@@ -64315,12 +64499,12 @@
             {
               "part": "TreeSelect",
               "prop": "aria-describedby",
-              "declaredAt": "packages/ui/src/components/tree-select.tsx:26"
+              "declaredAt": "packages/ui/src/components/tree-select.tsx:30"
             },
             {
               "part": "TreeSelect",
               "prop": "aria-invalid",
-              "declaredAt": "packages/ui/src/components/tree-select.tsx:27"
+              "declaredAt": "packages/ui/src/components/tree-select.tsx:31"
             }
           ]
         }
@@ -64341,6 +64525,12 @@
           "keys": "Enter / Space",
           "description": "单选：选中并关闭，焦点回触发器。多选：Space 勾选或取消勾选，弹层保持打开。",
           "descriptionEn": "Single: choose and close with focus back on the trigger. Multiple: Space checks or unchecks and the popup stays open."
+        },
+        {
+          "keys": "搜索中 ↓ / Esc",
+          "keysEn": "In search ↓ / Esc",
+          "description": "输入框在树之上：↓ 进入树的入口节点；Esc 关闭并回到触发器。",
+          "descriptionEn": "The input sits above the tree: ↓ enters the tree at its entry node; Esc closes and returns to the trigger."
         },
         {
           "keys": "Esc",
@@ -64402,6 +64592,7 @@
       "dependencies": {
         "runtime": [
           "@base-ui/react",
+          "@daypicker/react",
           "@tabler/icons-react",
           "class-variance-authority",
           "clsx",
@@ -64434,7 +64625,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -64446,6 +64637,7 @@
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
           "@base-ui/react/field",
+          "@base-ui/react/input",
           "@base-ui/react/internals/field-root-context",
           "@base-ui/react/internals/labelable-provider",
           "@base-ui/react/merge-props",
@@ -64485,6 +64677,22 @@
           "providers": [],
           "code": "import { useState } from \"react\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport type { TreeNode } from \"@qingye_lab/ui/components/tree\";\nimport { TreeSelect } from \"@qingye_lab/ui/components/tree-select\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"勾选多选\", titleEn: \"Checkable\" };\n\nconst organizations = (english: boolean): TreeNode[] => [\n  { id: \"east\", label: english ? \"East region\" : \"华东区\", children: [\n    { id: \"east.sh\", label: english ? \"Shanghai\" : \"上海分公司\" },\n    { id: \"east.hz\", label: english ? \"Hangzhou\" : \"杭州分公司\" },\n    { id: \"east.nj\", label: english ? \"Nanjing\" : \"南京分公司\" },\n  ] },\n  { id: \"south\", label: english ? \"South region\" : \"华南区\", children: [\n    { id: \"south.gz\", label: english ? \"Guangzhou\" : \"广州分公司\" },\n    { id: \"south.sz\", label: english ? \"Shenzhen\" : \"深圳分公司\", disabled: true },\n  ] },\n  { id: \"hq\", label: english ? \"Headquarters\" : \"总部\" },\n];\n\nexport default function Demo() {\n  const { code } = useUILocale();\n  const english = code.startsWith(\"en\");\n  const [value, setValue] = useState<string[]>([\"east.sh\", \"east.hz\"]);\n  return (\n    <Field className=\"w-full max-w-xs\">\n      <FieldLabel>{english ? \"Organizations\" : \"适用组织\"}</FieldLabel>\n      <TreeSelect multiple nodes={organizations(english)} value={value} onValueChange={setValue} />\n    </Field>\n  );\n}\n",
           "sha256": "3353b8b02ac39f483e1b76f4c111026e4045c77161d7ec57ec32c875fdabe29f"
+        },
+        {
+          "id": "searchable",
+          "title": "搜索",
+          "source": "apps/docs/src/content/tree-select/demos/03-searchable.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/tree",
+            "@qingye_lab/ui/components/tree-select",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { TreeNode } from \"@qingye_lab/ui/components/tree\";\nimport { TreeSelect } from \"@qingye_lab/ui/components/tree-select\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"搜索\", titleEn: \"Search\" };\n\nconst organizations = (english: boolean): TreeNode[] => [\n  { id: \"east\", label: english ? \"East region\" : \"华东区\", children: [\n    { id: \"east.sh\", label: english ? \"Shanghai\" : \"上海分公司\" },\n    { id: \"east.hz\", label: english ? \"Hangzhou\" : \"杭州分公司\" },\n    { id: \"east.nj\", label: english ? \"Nanjing\" : \"南京分公司\" },\n  ] },\n  { id: \"south\", label: english ? \"South region\" : \"华南区\", children: [\n    { id: \"south.gz\", label: english ? \"Guangzhou\" : \"广州分公司\" },\n    { id: \"south.sz\", label: english ? \"Shenzhen\" : \"深圳分公司\" },\n  ] },\n  { id: \"north\", label: english ? \"North region\" : \"华北区\", children: [\n    { id: \"north.bj\", label: english ? \"Beijing\" : \"北京分公司\" },\n    { id: \"north.tj\", label: english ? \"Tianjin\" : \"天津分公司\" },\n  ] },\n  { id: \"hq\", label: english ? \"Headquarters\" : \"总部\" },\n];\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const [single, setSingle] = useState<string | null>(null);\n  const [multiple, setMultiple] = useState<string[]>([]);\n  const nodes = organizations(english);\n  return (\n    <Stack className=\"w-full max-w-xs\">\n      <Field>\n        <FieldLabel>{english ? \"Organization\" : \"所属组织\"}</FieldLabel>\n        <TreeSelect searchable nodes={nodes} value={single} onValueChange={setSingle} />\n      </Field>\n      <Field>\n        <FieldLabel>{english ? \"Organizations\" : \"适用组织\"}</FieldLabel>\n        <TreeSelect searchable multiple nodes={nodes} value={multiple} onValueChange={setMultiple} />\n      </Field>\n    </Stack>\n  );\n}\n",
+          "sha256": "f6efc8a235383842c12da62cc136cf62ee8988724cc5cfee83e74f4d9053fcee"
         }
       ],
       "design": {
@@ -64497,7 +64705,7 @@
           "候选天然成层、值是其中某个节点或若干叶子：部门、组织、类目"
         ],
         "avoid": [
-          "只有一层候选用 Select，候选很多需过滤用 Combobox",
+          "只有一层候选用 Select，候选很多需过滤用 Combobox（候选成层时用 searchable）",
           "沿一条路径逐级选择、要把整条路径作为值时用 Cascader",
           "树本身就是页面内容、不需要收进触发器时直接用 Tree"
         ],
@@ -64521,18 +64729,18 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tree-select.tsx",
-        "sha256": "f2cb98548353bc2311412e049c1a47d3cd3d4053425ba1d996fdbabfe0ab9009",
+        "sha256": "c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "单选的值是节点 id，分支也可以被选；多选的值只含叶子 id，分支的勾选是派生显示，与 Tree 的 checkable 同一约定，所以「勾一个分支」不会被多计成 N+1 项。展开状态由 TreeSelect 持有并在每次打开时按已选节点重算，因为弹层关闭会卸载 Tree。",
+      "decisions": "单选的值是节点 id，分支也可以被选；多选的值只含叶子 id，分支的勾选是派生显示，与 Tree 的 checkable 同一约定，所以「勾一个分支」不会被多计成 N+1 项。搜索只隐藏节点，不改变值：多选的勾选状态仍从完整的树派生。展开状态由 TreeSelect 持有并在每次打开时按已选节点重算，因为弹层关闭会卸载 Tree。",
       "localized": {
         "en": {
           "title": "TreeSelect",
           "description": "Choose one node, or check several leaves, on a tree inside a popup.",
           "category": "Forms",
-          "decisions": "The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.",
+          "decisions": "Search only hides nodes and never changes the value: multiple mode derives its checks from the full tree. The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.",
           "notes": [
-            "No search and no async loading: typing the start of a label jumps to it, and the caller provides all nodes at once.",
+            "No async loading: the caller provides all nodes at once. Typing the start of a label jumps to it; turn on searchable to filter by label when candidates are many.",
             "The trigger is a combobox and the popup a tree (aria-haspopup=\"tree\"). In multiple mode the trigger lists the checked leaves; beyond two it reads \"first and N more\", and the rest stay visible in the tree."
           ],
           "api": [
@@ -64559,6 +64767,13 @@
                   "default": "false",
                   "description": "With true the Tree is checkable: checking a branch checks its enabled leaves, a partial state shows mixed, and disabled leaves keep their state.",
                   "descriptionEn": "With true the Tree is checkable: checking a branch checks its enabled leaves, a partial state shows mixed, and disabled leaves keep their state."
+                },
+                {
+                  "name": "searchable",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "A search input appears at the top of the popup and filters by label: matching nodes and their ancestors stay, matching branches open automatically and the matched text is marked in bold; with no match the locale's empty state shows. It applies to single and multiple mode; filtering only hides, so multiple mode's checks and cascade still follow the full tree. The match count is announced through role=status.",
+                  "descriptionEn": "A search input appears at the top of the popup and filters by label: matching nodes and their ancestors stay, matching branches open automatically and the matched text is marked in bold; with no match the locale's empty state shows. It applies to single and multiple mode; filtering only hides, so multiple mode's checks and cascade still follow the full tree. The match count is announced through role=status."
                 },
                 {
                   "name": "placeholder",
@@ -64607,6 +64822,12 @@
               "descriptionEn": "Single: choose and close with focus back on the trigger. Multiple: Space checks or unchecks and the popup stays open."
             },
             {
+              "keys": "In search ↓ / Esc",
+              "keysEn": "In search ↓ / Esc",
+              "description": "The input sits above the tree: ↓ enters the tree at its entry node; Esc closes and returns to the trigger.",
+              "descriptionEn": "The input sits above the tree: ↓ enters the tree at its entry node; Esc closes and returns to the trigger."
+            },
+            {
               "keys": "Esc",
               "description": "Close and return to the trigger, retaining the value.",
               "descriptionEn": "Close and return to the trigger, retaining the value."
@@ -64622,7 +64843,7 @@
               "Candidates that naturally nest and the value is one node or several leaves: departments, organizations, categories."
             ],
             "avoid": [
-              "Use Select for a single level and Combobox when many candidates need filtering.",
+              "Use Select for a single level and Combobox when many flat candidates need filtering (use searchable when they nest).",
               "Use Cascader when choosing level by level and the whole path is the value.",
               "Use Tree directly when the tree is itself page content and need not fold into a trigger."
             ],
@@ -66256,7 +66477,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "declaredAt": "packages/ui/src/locale.tsx:188",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [

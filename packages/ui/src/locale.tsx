@@ -67,10 +67,12 @@ export type UILocaleMessages = {
   avatarGroupMore: (count: number, names: readonly string[]) => string;
   imagePreviewPrevious: string; imagePreviewNext: string; imagePreviewPosition: (index: number, total: number) => string;
   imagePreviewZoomIn: string; imagePreviewZoomOut: string; imagePreviewZoomFit: string; imagePreviewFailed: string;
-  cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string;
+  cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string; cascaderPartial: string;
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
+  treeLoadFailed: string; treeRetry: string;
+  treeMoveHint: string; treeMovePicked: (name: string) => string; treeMoved: (name: string, target: string, position: "before" | "after" | "inside") => string; treeMoveCancelled: string; treeMoveInvalid: string;
   // Rating, Transfer
   rating: string; ratingStar: (score: number) => string; ratingValue: (score: number, max: number) => string; ratingNone: string;
   transferSource: string; transferTarget: string; transferSelectAll: string; transferFilter: (title: string) => string;
@@ -138,9 +140,14 @@ export const zhCN: UILocale = {
     avatarGroupMore: (count, names) => `另有 ${count} 位：${names.join("、")}`,
     imagePreviewPrevious: "上一张", imagePreviewNext: "下一张", imagePreviewPosition: (index, total) => `第 ${index} 张，共 ${total} 张`,
     imagePreviewZoomIn: "放大", imagePreviewZoomOut: "缩小", imagePreviewZoomFit: "适应窗口", imagePreviewFailed: "图片加载失败",
-    cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
+    cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级", cascaderPartial: "部分已选",
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
+    treeLoadFailed: "加载失败", treeRetry: "重试",
+    treeMoveHint: "可移动节点：按 Ctrl 或 ⌘ 加 X 取起，移到目标后按 Alt 加 ↑ 放在前面、Alt 加 ↓ 放在后面、Alt 加 Enter 放入其中，Esc 取消。",
+    treeMovePicked: name => `已取起「${name}」`,
+    treeMoved: (name, target, position) => position === "inside" ? `已将「${name}」移入「${target}」` : `已将「${name}」移到「${target}」${position === "before" ? "之前" : "之后"}`,
+    treeMoveCancelled: "已取消移动", treeMoveInvalid: "不能放在这里",
     rating: "评分", ratingStar: (score) => `${score} 星`, ratingValue: (score, max) => `评分 ${score} / ${max}`, ratingNone: "未评分",
     transferSource: "候选", transferTarget: "已选", transferSelectAll: "全选", transferFilter: (title) => `筛选${title}`,
     transferMoveTo: (count, title) => `将所选 ${count.toLocaleString("zh-CN")} 项移到“${title}”`, transferMoved: (count, title) => `已移到“${title}” ${count.toLocaleString("zh-CN")} 项`,

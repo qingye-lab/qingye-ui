@@ -207,13 +207,13 @@
       "component": "cascader",
       "part": "Cascader",
       "prop": "aria-describedby",
-      "declaredAt": "packages/ui/src/components/cascader.tsx:48"
+      "declaredAt": "packages/ui/src/components/cascader.tsx:43"
     },
     {
       "component": "cascader",
       "part": "Cascader",
       "prop": "aria-invalid",
-      "declaredAt": "packages/ui/src/components/cascader.tsx:49"
+      "declaredAt": "packages/ui/src/components/cascader.tsx:44"
     },
     {
       "component": "chart",
@@ -1010,13 +1010,13 @@
       "component": "tree-select",
       "part": "TreeSelect",
       "prop": "aria-describedby",
-      "declaredAt": "packages/ui/src/components/tree-select.tsx:26"
+      "declaredAt": "packages/ui/src/components/tree-select.tsx:30"
     },
     {
       "component": "tree-select",
       "part": "TreeSelect",
       "prop": "aria-invalid",
-      "declaredAt": "packages/ui/src/components/tree-select.tsx:27"
+      "declaredAt": "packages/ui/src/components/tree-select.tsx:31"
     },
     {
       "component": "workspace",

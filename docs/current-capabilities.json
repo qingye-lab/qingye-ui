@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:23:57.800Z",
-  "revision": "39d6de0405819776194f7dd6c0357c38d3eb315d",
+  "generatedAt": "2026-11-01T05:26:43.826Z",
+  "revision": "aa91bcea848bbf239397dfde9e2ad536758828a1",
   "fingerprint": {
-    "sha256": "491095e7b2ff13cf01537c09ceee8656c139547811e702c012ed0c9e2430fb7c",
+    "sha256": "95d18bca108b2a6e41f62624a584e47d07ef2045e42b363f3f76dae629a512d9",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -68,7 +68,7 @@
       },
       {
         "path": "apps/docs/src/content/cascader/meta.ts",
-        "sha256": "ec4b48daf211886a343024176dcd27f47ed30db9688c4f77adc83a6a4a220d3a"
+        "sha256": "47368938e741b1dafce2b496e5e6c4e466b8ca6db3abcbd970094a06c623e013"
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
@@ -440,11 +440,11 @@
       },
       {
         "path": "apps/docs/src/content/tree-select/meta.ts",
-        "sha256": "c8d4ad293e96b813dbf4d4bb0d7296c88e08c99cda9a0b76dbd2b27c1c91159f"
+        "sha256": "04a562664e04f07118ba704e6deca8226824ca83047bd22fc2f5431fcea1ecd3"
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
-        "sha256": "91ec1c9cb9419990f1b679373a6eef97a612218271e2c58c27bd17ba1db6fb94"
+        "sha256": "22e21dd620b617265ded04fe5b88e6434f3f3cabc37ea98738603125ebb5c72f"
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
@@ -472,7 +472,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "c4ea5cd25d452518b430924ec9be7787fa75adc44e41c83659aa4ed7f787dbaa"
+        "sha256": "8f064b8b459e5e56d21f2ba0396abbd3dd82cca5df660f088bb1819da8a9f578"
       },
       {
         "path": "packages/ui/motion.css",
@@ -544,7 +544,7 @@
       },
       {
         "path": "packages/ui/src/components/cascader.tsx",
-        "sha256": "9ceda3ccbb6f291761c0eee3440aa2c4be159331c7e39243f22e02022a424915"
+        "sha256": "7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6"
       },
       {
         "path": "packages/ui/src/components/chart.tsx",
@@ -916,11 +916,11 @@
       },
       {
         "path": "packages/ui/src/components/tree-select.tsx",
-        "sha256": "f2cb98548353bc2311412e049c1a47d3cd3d4053425ba1d996fdbabfe0ab9009"
+        "sha256": "c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d"
       },
       {
         "path": "packages/ui/src/components/tree.tsx",
-        "sha256": "beaccb8054cd33b7cb3b00282400c92e6e2a491c0c0821da4a0155dccb0a9e0b"
+        "sha256": "39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a"
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
@@ -5246,7 +5246,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/cascader.tsx",
-            "line": 86
+            "line": 108
           }
         },
         {
@@ -5254,7 +5254,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/cascader.tsx",
-            "line": 14
+            "line": 16
           }
         },
         {
@@ -5262,7 +5262,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/cascader.tsx",
-            "line": 23
+            "line": 66
           }
         }
       ],
@@ -5270,8 +5270,8 @@
         "path": "apps/docs/src/content/cascader/meta.ts",
         "title": "级联选择 Cascader",
         "titleEn": "Cascader",
-        "description": "沿「根到叶」的路径选一个值，每一级的候选各占一列。",
-        "descriptionEn": "Choose one value along a root-to-leaf path, with each level's candidates in its own column.",
+        "description": "沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。",
+        "descriptionEn": "Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.",
         "category": "表单",
         "layer": "primitive",
         "source": "local",
@@ -5302,16 +5302,23 @@
                 "descriptionEn": "Candidates of the first column. A node is { value, label, disabled?, children?, isLeaf? }; values are unique under one parent. A node with children is a branch, otherwise a leaf (unless loadChildren is set)."
               },
               {
+                "name": "multiple",
+                "type": "boolean",
+                "default": "false",
+                "description": "为 true 时每一级都带勾选标记，值是若干条路径：叶子勾选或取消，分支的勾选是派生显示（全部启用的叶子后代已勾为选中，部分已勾为 mixed，并有「部分已选」的描述），点分支只展开，点它的标记才勾选其下全部启用的叶子；禁用的叶子保持原状，禁用的分支不可勾选。勾选不关闭弹层。触发器的呈现与 TreeSelect 多选相同，超过两项写成「首项及其余 N 项」。与 selectParent 互斥。",
+                "descriptionEn": "With true every level carries a check marker and the value is several paths: a leaf checks or unchecks, and a branch's check is a derived display (every enabled leaf below checked is selected, some checked is mixed, with a \"Partly selected\" description). Clicking a branch only expands it; clicking its marker checks all enabled leaves below, disabled leaves keep their state and a disabled branch cannot be checked. Checking does not close the popup. The trigger reads like TreeSelect's multiple mode, beyond two it reads \"first and N more\". Mutually exclusive with selectParent."
+              },
+              {
                 "name": "value / defaultValue",
-                "type": "string[] | null",
-                "description": "从根到所选节点的路径，null 是未选择；省略初值不会选第一项。路径里尚未加载的节点，触发器退回显示它的 value。",
-                "descriptionEn": "The path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. A path segment that is not loaded yet falls back to its value in the trigger."
+                "type": "string[] | null  (multiple: readonly (readonly string[])[])",
+                "description": "单选：从根到所选节点的路径，null 是未选择；省略初值不会选第一项。多选：已勾选的叶子路径的数组，空数组是未选择，顺序按候选树的顺序。路径里尚未加载的节点，触发器退回显示它的 value。",
+                "descriptionEn": "Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger."
               },
               {
                 "name": "onValueChange",
-                "type": "(path: string[] | null, options: CascaderOption[]) => void",
-                "description": "提交了新的路径时调用；第二个参数是路径上各节点。提交相同路径不调用。",
-                "descriptionEn": "Called when a new path is submitted; the second argument is the nodes on the path. Submitting the same path does not call it."
+                "type": "(path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void)",
+                "description": "提交了新的值时调用；第二个参数是路径上各节点（多选是每条路径各一组）。提交相同的值不调用。",
+                "descriptionEn": "Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it."
               },
               {
                 "name": "selectParent",
@@ -5330,8 +5337,8 @@
                 "name": "searchable",
                 "type": "boolean",
                 "default": "false",
-                "description": "弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接）。只搜已知节点，未加载的分支不在其中。",
-                "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator. Only known nodes are searched, so unloaded branches are not included."
+                "description": "弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接），匹配的文字加粗标出。只搜已知节点，未加载的分支不在其中。多选时只列叶子路径，每项带勾选标记，Enter 或点击勾选后弹层保持打开、焦点留在输入里。",
+                "descriptionEn": "A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input."
               },
               {
                 "name": "placeholder",
@@ -5350,8 +5357,8 @@
               {
                 "name": "name / form",
                 "type": "string",
-                "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；所以 value 里不应含 \"/\"。",
-                "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Values should therefore not contain \"/\"."
+                "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）；所以 value 里不应含 \"/\"。",
+                "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
               },
               {
                 "name": "aria-label / aria-labelledby / id / className",
@@ -5387,8 +5394,8 @@
           },
           {
             "keys": "Enter / Space",
-            "description": "可提交的项：提交并关闭，焦点回触发器；不可提交的分支：进入下一列。",
-            "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column."
+            "description": "可提交的项：提交并关闭，焦点回触发器；不可提交的分支：进入下一列。多选：勾选或取消勾选当前项（分支则勾选其下全部启用的叶子），弹层保持打开。",
+            "descriptionEn": "On a submittable item, submit and close with focus back on the trigger; on a branch that cannot be submitted, enter the next column. Multiple: check or uncheck the current item (for a branch, all enabled leaves below) and the popup stays open."
           },
           {
             "keys": "文字键",
@@ -5412,6 +5419,7 @@
           "触发器的文字是完整路径，过长时用省略号截断，完整文字仍在 DOM 里，读屏读到全部。",
           "鼠标点父项只展开；selectParent 时父项同时成为值，弹层保持打开以便继续往下选。键盘上这是两个键：Enter 提交并关闭，→ 展开。",
           "焦点是真实 DOM 焦点（roving tabindex），每列是一个 listbox，名称是它的父项，第一列取触发器的名称。搜索结果例外：焦点留在输入里，用 aria-activedescendant。",
+          "多选时每列是 aria-multiselectable 的 listbox，勾选标记不进可访问树，选中状态由 aria-selected 表达；分支的部分已选通过一段描述告知读屏。",
           "选项上的 aria-haspopup 与 aria-expanded 表示「有下一列」与「下一列已展开」。",
           "候选的可见字号与高度与 Select 的候选项相同；每列宽度由内容决定，下限由留白、尾部标记与最小文字区推出，列多时候选面横向滚动。"
         ],
@@ -5419,11 +5427,12 @@
           "The trigger text is the complete path, truncated with an ellipsis when long; the full text stays in the DOM so assistive technology reads all of it.",
           "A mouse click on a parent only expands it; with selectParent the parent also becomes the value and the popup stays open so you can continue downward. On the keyboard these are two keys: Enter submits and closes, → expands.",
           "Focus is real DOM focus (roving tabindex). Each column is a listbox named by its parent; the first column takes the trigger's name. Search results are the exception: focus stays in the input and aria-activedescendant points at the result.",
+          "In multiple mode each column is an aria-multiselectable listbox, the check marker stays outside the accessibility tree and aria-selected carries the state; a branch's partial state is given to assistive technology as a description.",
           "aria-haspopup and aria-expanded on an option mean \"has a next column\" and \"the next column is open\".",
           "Candidates share Select's text size and height. Column width follows content with a lower bound derived from padding, trailing marker and minimum text area; the popup scrolls horizontally when columns are many."
         ],
-        "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
-        "decisionsEn": "What is chosen is a path, not the last node: leaves with the same name (a \"city district\" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for \"no children\".",
+        "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；多选的值只含叶子路径，分支的勾选是派生显示，与 Tree、TreeSelect 同一约定。加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
+        "decisionsEn": "Multiple values hold leaf paths only and a branch's check is a derived display, the same convention as Tree and TreeSelect. What is chosen is a path, not the last node: leaves with the same name (a \"city district\" in different provinces) are told apart by their path, so the value, the form and the callback all use the path. Whether a branch can be submitted is decided by selectParent, not by whether it has children; loading and failure are facts the component sees for itself and are never taken for \"no children\".",
         "design": {
           "methods": [
             "名实相符",
@@ -5435,7 +5444,6 @@
           ],
           "avoid": [
             "只有一层候选用 Select，候选很多需过滤用 Combobox",
-            "需要多选路径时用 Tree 的勾选形态",
             "要并置比较的少量候选用 RadioGroup"
           ],
           "composition": [
@@ -5462,7 +5470,6 @@
           ],
           "avoid": [
             "Use Select for a single level and Combobox when many candidates need filtering.",
-            "Use Tree's checkable form for choosing several paths.",
             "Use RadioGroup for a few candidates that need side-by-side comparison."
           ],
           "composition": [
@@ -5489,11 +5496,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/cascader.tsx",
-              "line": 86
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/cascader.tsx",
-              "line": 86
+              "line": 108
             },
             "status": "PRESENT"
           }
@@ -34185,7 +34192,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree-select.tsx",
-            "line": 71
+            "line": 73
           }
         },
         {
@@ -34193,7 +34200,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree-select.tsx",
-            "line": 10
+            "line": 12
           }
         },
         {
@@ -34201,7 +34208,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree-select.tsx",
-            "line": 44
+            "line": 48
           }
         }
       ],
@@ -34254,6 +34261,13 @@
                 "descriptionEn": "With true the Tree is checkable: checking a branch checks its enabled leaves, a partial state shows mixed, and disabled leaves keep their state."
               },
               {
+                "name": "searchable",
+                "type": "boolean",
+                "default": "false",
+                "description": "弹层顶部出现搜索输入，按标签过滤：保留匹配的节点及其祖先，匹配的分支自动展开，匹配的文字加粗标出；无匹配时显示 locale 的空状态。单选与多选都适用，过滤只隐藏，多选的勾选与级联仍按完整的树。匹配数通过 role=status 播报。",
+                "descriptionEn": "A search input appears at the top of the popup and filters by label: matching nodes and their ancestors stay, matching branches open automatically and the matched text is marked in bold; with no match the locale's empty state shows. It applies to single and multiple mode; filtering only hides, so multiple mode's checks and cascade still follow the full tree. The match count is announced through role=status."
+              },
+              {
                 "name": "placeholder",
                 "type": "ReactNode",
                 "default": "locale.selectPlaceholder",
@@ -34300,21 +34314,27 @@
             "descriptionEn": "Single: choose and close with focus back on the trigger. Multiple: Space checks or unchecks and the popup stays open."
           },
           {
+            "keys": "搜索中 ↓ / Esc",
+            "keysEn": "In search ↓ / Esc",
+            "description": "输入框在树之上：↓ 进入树的入口节点；Esc 关闭并回到触发器。",
+            "descriptionEn": "The input sits above the tree: ↓ enters the tree at its entry node; Esc closes and returns to the trigger."
+          },
+          {
             "keys": "Esc",
             "description": "关闭并回到触发器，保留原值。",
             "descriptionEn": "Close and return to the trigger, retaining the value."
           }
         ],
         "notes": [
-          "不做搜索与异步加载：键入标签开头可跳转，节点由调用方一次给全。",
+          "不做异步加载：节点由调用方一次给全。默认键入标签开头可跳转；候选多时开 searchable 按标签过滤。",
           "触发器是 combobox，弹出的是 tree（aria-haspopup=\"tree\"）。多选时触发器列出已选叶子的名称，超过两项写成「首项及其余 N 项」，其余仍在树里可见。"
         ],
         "notesEn": [
-          "No search and no async loading: typing the start of a label jumps to it, and the caller provides all nodes at once.",
+          "No async loading: the caller provides all nodes at once. Typing the start of a label jumps to it; turn on searchable to filter by label when candidates are many.",
           "The trigger is a combobox and the popup a tree (aria-haspopup=\"tree\"). In multiple mode the trigger lists the checked leaves; beyond two it reads \"first and N more\", and the rest stay visible in the tree."
         ],
-        "decisions": "单选的值是节点 id，分支也可以被选；多选的值只含叶子 id，分支的勾选是派生显示，与 Tree 的 checkable 同一约定，所以「勾一个分支」不会被多计成 N+1 项。展开状态由 TreeSelect 持有并在每次打开时按已选节点重算，因为弹层关闭会卸载 Tree。",
-        "decisionsEn": "The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.",
+        "decisions": "单选的值是节点 id，分支也可以被选；多选的值只含叶子 id，分支的勾选是派生显示，与 Tree 的 checkable 同一约定，所以「勾一个分支」不会被多计成 N+1 项。搜索只隐藏节点，不改变值：多选的勾选状态仍从完整的树派生。展开状态由 TreeSelect 持有并在每次打开时按已选节点重算，因为弹层关闭会卸载 Tree。",
+        "decisionsEn": "Search only hides nodes and never changes the value: multiple mode derives its checks from the full tree. The single value is a node id and a branch can be chosen; the multiple value holds leaf ids only, and a branch's check is a derived display, the same convention as Tree's checkable, so checking one branch is never miscounted as N+1 items. TreeSelect owns the expansion and recomputes it from the chosen nodes on every open, because closing the popup unmounts the Tree.",
         "design": {
           "methods": [
             "名实相符",
@@ -34325,7 +34345,7 @@
             "候选天然成层、值是其中某个节点或若干叶子：部门、组织、类目"
           ],
           "avoid": [
-            "只有一层候选用 Select，候选很多需过滤用 Combobox",
+            "只有一层候选用 Select，候选很多需过滤用 Combobox（候选成层时用 searchable）",
             "沿一条路径逐级选择、要把整条路径作为值时用 Cascader",
             "树本身就是页面内容、不需要收进触发器时直接用 Tree"
           ],
@@ -34352,7 +34372,7 @@
             "Candidates that naturally nest and the value is one node or several leaves: departments, organizations, categories."
           ],
           "avoid": [
-            "Use Select for a single level and Combobox when many candidates need filtering.",
+            "Use Select for a single level and Combobox when many flat candidates need filtering (use searchable when they nest).",
             "Use Cascader when choosing level by level and the whole path is the value.",
             "Use Tree directly when the tree is itself page content and need not fold into a trigger."
           ],
@@ -34380,11 +34400,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tree-select.tsx",
-              "line": 71
+              "line": 73
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tree-select.tsx",
-              "line": 71
+              "line": 73
             },
             "status": "PRESENT"
           }
@@ -34423,7 +34443,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 67
+            "line": 74
           }
         },
         {
@@ -34431,7 +34451,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 40
+            "line": 59
           }
         },
         {
@@ -34439,7 +34459,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 12
+            "line": 21
           }
         },
         {
@@ -34447,7 +34467,23 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 14
+            "line": 23
+          }
+        },
+        {
+          "name": "TreeMove",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tree.tsx",
+            "line": 19
+          }
+        },
+        {
+          "name": "TreeMoveDetails",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tree.tsx",
+            "line": 20
           }
         },
         {
@@ -34455,7 +34491,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 11
+            "line": 13
           }
         },
         {
@@ -34463,7 +34499,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 15
+            "line": 24
           }
         }
       ],
@@ -34479,8 +34515,8 @@
         "exports": [
           "Tree"
         ],
-        "decisions": "expandedIds 与 selectedId 分开；聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
-        "decisionsEn": "Expanded IDs and selected ID are separate; focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
+        "decisions": "expandedIds 与 selectedId 分开；加载与失败是组件自己看得见的事实，不当成「没有子项」；过滤只隐藏、不改变值与派生的勾选状态；拖放只报告、不持有数据。聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
+        "decisionsEn": "Expanded IDs and selected ID are separate; loading and failure are facts the component sees for itself and are never taken for \"no children\"; filtering only hides and never changes the value or derived checks; dragging only reports and holds no data. focus never selects, and hidden nodes do not automatically clear selection. Checkable and selectable clicks do not combine: when checkable is true, row clicks and Space toggle the check instead of selecting, so one click never carries two conflicting intents. checkedIds holds only leaf ids; a branch's checked state is a derived display (true / false / mixed) and is never written back into the value, so checking one branch cannot be miscounted as N+1 items. Cascade only touches enabled leaves: a disabled node keeps the checked fact it was given and cascade from an ancestor never changes it; a branch displays as fully checked once every one of its enabled leaf descendants is checked, even with unchecked disabled descendants remaining.",
         "keywords": [
           "tree view",
           "hierarchy",
@@ -34498,8 +34534,8 @@
               {
                 "name": "nodes",
                 "type": "readonly TreeNode[]",
-                "description": "id/label 必须非空且 id 全树唯一；disabled 与 children 显式提供。",
-                "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit."
+                "description": "id/label 必须非空且 id 全树唯一；disabled 与 children 显式提供。isLeaf 声明没有子项，使配了 loadChildren 时也不去加载它。",
+                "descriptionEn": "IDs and labels must be nonempty; IDs are unique across the tree. Disabled and children are explicit. isLeaf declares no children, so a node is not loaded even when loadChildren is set."
               },
               {
                 "name": "expandedIds / defaultExpandedIds / onExpandedChange",
@@ -34538,6 +34574,24 @@
                 "descriptionEn": "The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens."
               },
               {
+                "name": "loadChildren",
+                "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
+                "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。",
+                "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+              },
+              {
+                "name": "query",
+                "type": "string",
+                "description": "按标签过滤：保留匹配的节点及其全部祖先，其余隐藏，匹配的文字用 mark 标出，无匹配时显示 emptyContent。有匹配后代的分支被强制展开（此时它的展开开关不起作用，也不触发 onExpandedChange），清空 query 后回到原来的展开状态。过滤只隐藏：分支的勾选状态与级联仍按完整的树计算。传原始字符串即可，匹配不区分大小写并忽略首尾空白。",
+                "descriptionEn": "Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace."
+              },
+              {
+                "name": "draggable / onMove / canDrop",
+                "type": "boolean / (move: TreeMove, details: { event, reason: \"keyboard\" | \"pointer\" }) => void / (move: TreeMove) => boolean",
+                "description": "draggable 打开调整位置：指针拖放按落点在行内的位置报告 before（上四分之一）、after（下四分之一）或 inside（中间），并画出插入线；键盘用 Ctrl/⌘+X 取起、Alt+↑ / ↓ / Enter 放到当前节点之前 / 之后 / 之内。Tree 不持有数据，只通过 onMove({ nodeId, targetId, position }) 报告，调用方改 nodes。不能放到自身或自身子树里、不能是位置不变的移动、禁用的节点既不能拖也不能作目标；canDrop 返回 false 可进一步禁止。取起、放下、取消与不允许的位置都通过 role=status 的区域播报。",
+                "descriptionEn": "draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region."
+              },
+              {
                 "name": "aria-label / aria-labelledby",
                 "type": "string",
                 "description": "必填其一：树的名称，落在 role=tree 的根上；缺失或为空时抛错。各节点的名称来自节点自己的 label。",
@@ -34553,10 +34607,12 @@
           }
         ],
         "notes": [
-          "移除焦点节点回到可用节点；清空回到拥有焦点的容器，不抢走外部焦点。"
+          "移除焦点节点回到可用节点；清空回到拥有焦点的容器，不抢走外部焦点。",
+          "拖放只报告意图，不改数据：移动是否成立、节点放在哪里由调用方决定，所以同一套规则和同一个 onMove 服务指针与键盘两条路径。draggable 时 Enter 仍是选择，取起用 Ctrl/⌘+X，不抢占已有键。"
         ],
         "notesEn": [
-          "Removing a focused node finds an enabled fallback; clearing returns owned focus to the container without stealing outside focus."
+          "Removing a focused node finds an enabled fallback; clearing returns owned focus to the container without stealing outside focus.",
+          "Dragging reports intent and never changes data: whether a move holds and where the node lands is the caller's decision, so one set of rules and one onMove serve both the pointer and the keyboard. With draggable, Enter still selects; picking up uses Ctrl/Cmd+X so no existing key is taken."
         ],
         "design": {
           "methods": [
@@ -34568,7 +34624,7 @@
             "真实层级需要键盘定位和独立选择。"
           ],
           "avoid": [
-            "平面比较用 DataTable；不内置懒加载或请求。收进触发器的选择用 TreeSelect。",
+            "平面比较用 DataTable；请求本身由调用方发起，Tree 只管理加载中与失败的状态。收进触发器的选择用 TreeSelect。",
             "同一棵树里混用 checkable 与 selectable 的点击语义：一次点击只承担一种意图。"
           ],
           "stateOwner": {
@@ -34591,7 +34647,7 @@
             "An actual hierarchy needs keyboard positioning and independent selection."
           ],
           "avoid": [
-            "Use DataTable for flat comparison; no built-in lazy loading or requests. Use TreeSelect for a choice folded into a trigger.",
+            "Use DataTable for flat comparison; the caller makes the request and Tree only manages the loading and failed states. Use TreeSelect for a choice folded into a trigger.",
             "Mixing checkable and selectable click semantics on the same tree; one click carries one intent."
           ],
           "stateOwner": {
@@ -34621,6 +34677,12 @@
             "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
           },
           {
+            "keys": "Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc",
+            "keysEn": "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
+            "description": "仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。",
+            "descriptionEn": "Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced."
+          },
+          {
             "keys": "Enter / Space / 字首",
             "keysEn": "Enter / Space / Typeahead",
             "description": "单选当前节点，或键入标签开头定位：连续键入的字符（间隔 500ms 内，预设）累积成前缀；重复键入同一个字符则在以它开头的节点间循环。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。",
@@ -34633,11 +34695,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 67
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 67
+              "line": 74
             },
             "status": "PRESENT"
           }
@@ -43904,7 +43966,7 @@
     },
     {
       "name": "--qy-control-xs",
-      "componentSourceOccurrences": 5,
+      "componentSourceOccurrences": 6,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },

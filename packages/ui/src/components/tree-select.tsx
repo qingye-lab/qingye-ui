@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useCandidateStatus } from "../candidate-status";
 import { useUILocale } from "../locale";
-import { PickerFormValue, PickerTrigger, usePickerField } from "../picker-trigger";
+import { PickerFormValue, PickerTrigger, pickerSummary, usePickerField } from "../picker-trigger";
+import { Input } from "./input";
 import { Popover, PopoverPopup } from "./popover";
 import { Tree, type TreeChangeDetails, type TreeNode } from "./tree";
 
@@ -12,6 +14,8 @@ export type TreeSelectChangeDetails = TreeChangeDetails;
 type TreeSelectBaseProps = {
   /** 沿用 Tree 的节点：id 全树唯一，label 非空；disabled 的节点不可选。 */
   nodes: readonly TreeNode[];
+  /** 弹层顶部出现搜索输入：按名称筛选（不分大小写），保留命中节点的祖先并展开它们，命中的文字被标出。单选与多选都可用；只搜已知的节点。 */
+  searchable?: boolean | undefined;
   placeholder?: React.ReactNode;
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
@@ -43,9 +47,6 @@ type TreeSelectMultipleProps = {
 };
 export type TreeSelectProps = TreeSelectBaseProps & (TreeSelectSingleProps | TreeSelectMultipleProps);
 
-/** 多选的触发器最多点名几项；超出写「首项及其余 N 项」。预设：两个名字在常见触发器宽度内通常不被截断。 */
-const NAMED = 2;
-
 type Index = { labels: Map<string, string>; parents: Map<string, string | null>; leaves: string[] };
 function indexNodes(nodes: readonly TreeNode[]): Index {
   const index: Index = { labels: new Map(), parents: new Map(), leaves: [] };
@@ -66,11 +67,12 @@ function indexNodes(nodes: readonly TreeNode[]): Index {
  *
  * 触发器与表单值和 Cascader 共用（picker-trigger.tsx），所以外观、Field 接入与 required 行为同 Select；
  * 弹层里就是库的 Tree，键盘（方向键、字首跳转）与勾选语义（mixed、禁用叶子）完全由它承担。
- * 触发器是 combobox，弹出的是 tree（aria-haspopup="tree"）。不做搜索（Tree 已有字首跳转）与异步加载。
+ * 触发器是 combobox，弹出的是 tree（aria-haspopup="tree"）。searchable 时弹层顶部多一个搜索输入，把 query 交给 Tree 筛选；
+ * 输入里按 ↓ 进入树。不做异步加载。
  */
 export function TreeSelect(props: TreeSelectProps) {
   const {
-    nodes, placeholder, disabled: disabledProp = false, readOnly = false, required = false, name: nameProp, form, id, className,
+    nodes, searchable = false, placeholder, disabled: disabledProp = false, readOnly = false, required = false, name: nameProp, form, id, className,
     "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, "aria-describedby": ariaDescribedBy, "aria-invalid": ariaInvalid,
   } = props;
   const multiple = props.multiple === true;
@@ -87,6 +89,7 @@ export function TreeSelect(props: TreeSelectProps) {
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [entryId, setEntryId] = React.useState<string | null>(null);
+  const [query, setQuery] = React.useState("");
   const triggerRef = React.useRef<HTMLButtonElement | null>(null);
 
   const selectedSet = new Set(selection);
@@ -98,9 +101,13 @@ export function TreeSelect(props: TreeSelectProps) {
 
   // ── 展示 ──
   const names = (multiple ? ordered(selection) : selection).map(item => index.labels.get(item) ?? item);
-  const text = names.length === 0 ? null
-    : names.length <= NAMED ? names.join(messages.treeSelectSeparator)
-    : messages.treeSelectMore(names[0]!, names.length - 1);
+  const text = pickerSummary(names, messages);
+
+  // ── 搜索：命中数只给读屏；没有命中的文字是 Tree 的空状态 ──
+  const needle = searchable ? query.trim().toLocaleLowerCase() : "";
+  let matches = 0;
+  if (needle) for (const label of index.labels.values()) if (label.toLocaleLowerCase().includes(needle)) matches += 1;
+  const status = useCandidateStatus({ count: needle ? matches : undefined });
 
   // ── 弹层状态 ──
   // 进入时的位置：单选是所选节点；多选是树里第一个已勾选的叶子；都没有则交给 Tree 的默认入口（第一个可用节点）。
@@ -113,6 +120,7 @@ export function TreeSelect(props: TreeSelectProps) {
     }
     setExpanded([...ancestors]);
     setEntryId(known[0] ?? null);
+    setQuery("");
   }
   function changeOpen(next: boolean) {
     if (next && (disabled || readOnly)) return;
@@ -141,8 +149,22 @@ export function TreeSelect(props: TreeSelectProps) {
         text={text} placeholder={placeholder ?? messages.selectPlaceholder}
       />
       <PopoverPopup data-slot="tree-select-popup" role="group" align="start" className="min-w-(--anchor-width)">
+        {searchable && <div data-slot="tree-select-search" className="mb-(--qy-overlay-inset)">
+          <Input
+            nativeInput value={query} aria-label={messages.search}
+            onValueChange={setQuery}
+            onKeyDown={event => {
+              if (event.key !== "ArrowDown" || event.defaultPrevented || event.nativeEvent.isComposing) return;
+              // 进入树：落在它的 roving 入口（筛选后若原入口被隐藏，Tree 已退到第一个可见节点）。
+              const entry = event.currentTarget.closest<HTMLElement>('[data-slot="tree-select-popup"]')?.querySelector<HTMLElement>('[role="treeitem"][tabindex="0"]');
+              if (entry) { event.preventDefault(); entry.focus(); }
+            }}
+          />
+          <div role="status" className={status.className}>{status.content}</div>
+        </div>}
         <Tree
           nodes={nodes} aria-label={ariaLabel} aria-labelledby={labelledBy}
+          {...(needle ? { query: needle, emptyContent: messages.selectEmpty } : {})}
           expandedIds={expanded} onExpandedChange={ids => setExpanded(ids)} defaultFocusedId={entryId}
           {...(multiple
             ? {

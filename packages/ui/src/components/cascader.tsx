@@ -3,9 +3,11 @@
 import { IconCheck, IconChevronLeft, IconChevronRight, IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
 import { useCandidateStatus } from "../candidate-status";
+import { CheckMarker, type CheckMarkState } from "../check-marker";
+import { highlightMatch } from "../highlight";
 import { useUILocale, useUIDirection } from "../locale";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
-import { PickerFormValue, PickerTrigger, usePickerField } from "../picker-trigger";
+import { PickerFormValue, PickerTrigger, pickerSummary, usePickerField } from "../picker-trigger";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -20,25 +22,18 @@ export type CascaderOption = {
   isLeaf?: boolean;
 };
 
-export type CascaderProps = {
+type CascaderBaseProps = {
   /** 第一列的候选；子项在 children 里，或由 loadChildren 按需取来。 */
   options: readonly CascaderOption[];
-  /** 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。 */
-  value?: string[] | null | undefined;
-  defaultValue?: string[] | null | undefined;
-  /** 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。 */
-  onValueChange?: ((path: string[] | null, options: CascaderOption[]) => void) | undefined;
-  /** 默认只有叶子可提交；true 时任意层级都可以提交。 */
-  selectParent?: boolean | undefined;
   /** 展开一个没有 children 的非叶子节点时调用；失败（reject）显示可重试的错误。 */
   loadChildren?: ((option: CascaderOption) => Promise<CascaderOption[]>) | undefined;
-  /** 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径（只搜已知的节点，未加载的分支不在其中）。 */
+  /** 弹层顶部出现搜索输入；输入后改为一列扁平的匹配路径，命中的文字被标出（只搜已知的节点，未加载的分支不在其中）。 */
   searchable?: boolean | undefined;
   placeholder?: React.ReactNode;
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
   required?: boolean | undefined;
-  /** 隐藏 input 的名称；提交值是路径各段用 "/" 连接，未选择提交空字符串。 */
+  /** 隐藏 input 的名称。单选提交路径各段用 "/" 连接（未选择提交空字符串）；多选每条已选路径一条同名值，未选择不提交。 */
   name?: string | undefined;
   form?: string | undefined;
   id?: string | undefined;
@@ -48,15 +43,42 @@ export type CascaderProps = {
   "aria-describedby"?: string | undefined;
   "aria-invalid"?: boolean | "true" | "false" | undefined;
 };
+type CascaderSingleProps = {
+  multiple?: false | undefined;
+  /** 从根到所选节点的路径；null 是未选择。省略初值不会选第一项。 */
+  value?: string[] | null | undefined;
+  defaultValue?: string[] | null | undefined;
+  /** 提交了新的路径时调用；第二个参数是路径上各节点的候选对象（尚未取到的节点缺省）。 */
+  onValueChange?: ((path: string[] | null, options: CascaderOption[]) => void) | undefined;
+  /** 默认只有叶子可提交；true 时任意层级都可以提交。 */
+  selectParent?: boolean | undefined;
+};
+type CascaderMultipleProps = {
+  multiple: true;
+  /** 已勾选的叶子路径（与 Tree 的 checkedIds 同一约定：分支的勾选由叶子派生，不进值）。每一级都有勾选框；勾选不关闭弹层。 */
+  value?: readonly (readonly string[])[] | undefined;
+  defaultValue?: readonly (readonly string[])[] | undefined;
+  /** paths 按树的顺序（不在已知树里的路径原样保留在末尾）；第二个参数是各条路径上的候选对象。 */
+  onValueChange?: ((paths: string[][], options: CascaderOption[][]) => void) | undefined;
+  /** 多选里每一级都能勾选，父级由叶子派生，所以没有「父级可提交」的选择。 */
+  selectParent?: undefined;
+};
+export type CascaderProps = CascaderBaseProps & (CascaderSingleProps | CascaderMultipleProps);
 
 type Source = { state: "loading" } | { state: "error" } | { state: "ready"; options: CascaderOption[] };
 type Column = { parentPath: string[]; parent: CascaderOption | null; items: readonly CascaderOption[] | null; status: "loading" | "error" | null };
 type Result = { path: string[]; chain: CascaderOption[]; label: string; disabled: boolean };
+type Leaf = { path: string[]; disabled: boolean };
 
 const keyOf = (path: readonly string[]) => JSON.stringify(path);
 const samePath = (a: readonly string[], b: readonly string[]) => a.length === b.length && a.every((segment, index) => segment === b[index]);
 // 类型搜索的缓冲时长：预设，与 Tree 的类型搜索同值（500ms，常见的连击间隔）。
 const TYPEAHEAD_MS = 500;
+
+function toPaths(multiple: boolean, value: unknown): readonly (readonly string[])[] {
+  if (value === undefined || value === null) return [];
+  return multiple ? value as readonly (readonly string[])[] : (value as readonly string[]).length > 0 ? [value as readonly string[]] : [];
+}
 
 /** 在 labels 里找下一个以 buffer 开头的项；同一字符连按则在同首字符的项间循环。找不到返回 -1。 */
 function typeaheadIndex(labels: readonly string[], from: number, buffer: string): number {
@@ -83,11 +105,14 @@ const columnMinWidth = "min-w-[calc(var(--qy-fill-padding)*2+var(--qy-fill-icon)
  * 真实焦点跟着选项走，读屏自然读出该列的名称（父项的 label）与选项本身。
  * 搜索模式例外：焦点留在输入里（输入是 combobox，匹配路径是它控制的 listbox），用 aria-activedescendant。
  */
-export function Cascader({
-  options, value: valueProp, defaultValue = null, onValueChange, selectParent = false, loadChildren, searchable = false,
-  placeholder, disabled: disabledProp = false, readOnly = false, required = false, name: nameProp, form, id, className,
-  "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, "aria-describedby": ariaDescribedBy, "aria-invalid": ariaInvalid,
-}: CascaderProps) {
+export function Cascader(props: CascaderProps) {
+  const {
+    options, loadChildren, searchable = false,
+    placeholder, disabled: disabledProp = false, readOnly = false, required = false, name: nameProp, form, id, className,
+    "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, "aria-describedby": ariaDescribedBy, "aria-invalid": ariaInvalid,
+  } = props;
+  const multiple = props.multiple === true;
+  const selectParent = props.multiple !== true && props.selectParent === true;
   const { messages } = useUILocale();
   const dir = useUIDirection();
   const uid = React.useId();
@@ -96,9 +121,11 @@ export function Cascader({
   const { fieldRoot, disabled, name, invalid, describedBy, labelledBy } = usePickerField({
     owner: "Cascader", ariaLabel, ariaLabelledBy, ariaDescribedBy, ariaInvalid, disabled: disabledProp, name: nameProp,
   });
-  const controlled = valueProp !== undefined;
-  const [innerValue, setInnerValue] = React.useState<string[] | null>(defaultValue ?? null);
-  const value = controlled ? (valueProp ?? null) : innerValue;
+  // 单选与多选统一成「已选路径的列表」，只在对外的边界上换回各自的形状（同 TreeSelect）。
+  const controlled = props.value !== undefined;
+  const [inner, setInner] = React.useState<readonly (readonly string[])[]>(() => toPaths(multiple, props.defaultValue));
+  const paths = controlled ? toPaths(multiple, props.value) : inner;
+  const value: readonly string[] | null = multiple ? null : paths[0] ?? null;
   const [open, setOpen] = React.useState(false);
   const [expanded, setExpanded] = React.useState<string[]>([]);
   const [current, setCurrent] = React.useState<{ col: number; value: string } | null>(null);
@@ -143,6 +170,60 @@ export function Cascader({
     return { chain, complete: true };
   }
 
+  // ── 多选：叶子路径是事实，父级的勾选态由叶子派生 ──
+  const checkedKeys = new Set(paths.map(keyOf));
+  /** 一个节点之下（含自身）的叶子；被禁用的分支下的叶子一律算禁用。还没取到子项的分支没有叶子可勾。 */
+  function leavesUnder(option: CascaderOption, path: string[]): Leaf[] {
+    const kids = childrenOf(option, path);
+    if (kids && kids.length > 0) return kids.flatMap(kid => leavesUnder(kid, [...path, kid.value])).map(leaf => option.disabled ? { ...leaf, disabled: true } : leaf);
+    return hasChildren(option, path) ? [] : [{ path, disabled: Boolean(option.disabled) }];
+  }
+  /** 勾选态只看启用的叶子；全部禁用时退回看全部，只为如实显示，不代表可以改变什么。 */
+  function checkState(option: CascaderOption, path: string[]): CheckMarkState {
+    const leaves = leavesUnder(option, path);
+    const enabledLeaves = leaves.filter(leaf => !leaf.disabled);
+    const pool = enabledLeaves.length > 0 ? enabledLeaves : leaves;
+    if (pool.length === 0) return false;
+    const count = pool.filter(leaf => checkedKeys.has(keyOf(leaf.path))).length;
+    return count === 0 ? false : count === pool.length ? true : "mixed";
+  }
+  /** 值按树的顺序；不在已知树里的路径（例如还没加载的分支下的）保留在末尾，不被静默丢掉。 */
+  function ordered(list: readonly (readonly string[])[]): string[][] {
+    const wanted = new Set(list.map(keyOf));
+    const known: string[][] = [];
+    const visit = (items: readonly CascaderOption[], prefix: string[]) => {
+      for (const item of items) {
+        const path = [...prefix, item.value];
+        const kids = childrenOf(item, path);
+        if (kids && kids.length > 0) visit(kids, path); else if (!hasChildren(item, path)) known.push(path);
+      }
+    };
+    visit(options, []);
+    const knownKeys = new Set(known.map(keyOf));
+    return [...known.filter(path => wanted.has(keyOf(path))), ...list.filter(path => !knownKeys.has(keyOf(path))).map(path => [...path])];
+  }
+  function commitPaths(next: string[][]) {
+    if (!controlled) setInner(next);
+    fieldRoot.setFilled(next.length > 0);
+    if (props.multiple === true) props.onValueChange?.(next, next.map(path => walk(path).chain));
+  }
+  /** 勾选或取消一个节点：叶子翻转自己；分支把全部启用的叶子一起置为「未全选则全选，否则全清」。还没取到子项的分支没有叶子，点它只是展开。 */
+  function toggle(col: number, option: CascaderOption) {
+    if (disabled || readOnly || option.disabled) return;
+    const path = [...expanded.slice(0, col), option.value];
+    const enabledLeaves = leavesUnder(option, path).filter(leaf => !leaf.disabled);
+    if (enabledLeaves.length === 0) { if (hasChildren(option, path) && !childrenOf(option, path)) expandAt(col, option); return; }
+    const select = checkState(option, path) !== true;
+    const touched = new Set(enabledLeaves.map(leaf => keyOf(leaf.path)));
+    const kept = paths.filter(item => !touched.has(keyOf(item)));
+    commitPaths(ordered(select ? [...kept, ...enabledLeaves.map(leaf => leaf.path)] : kept));
+  }
+  function toggleResult(result: Result) {
+    if (disabled || readOnly || result.disabled) return;
+    const key = keyOf(result.path);
+    commitPaths(ordered(checkedKeys.has(key) ? paths.filter(item => keyOf(item) !== key) : [...paths, result.path]));
+  }
+
   function load(path: string[], option: CascaderOption) {
     if (!loadChildren) return;
     const key = keyOf(path);
@@ -155,12 +236,14 @@ export function Cascader({
   }
 
   // ── 展示：触发器里的路径 ──
-  const shown = value ? (() => { const { chain } = walk(value); return value.map((segment, index) => chain[index]?.label ?? segment).join(separator); })() : "";
+  const labelOfPath = (path: readonly string[]) => { const { chain } = walk(path); return path.map((segment, index) => chain[index]?.label ?? segment).join(separator); };
+  const orderedPaths = multiple ? ordered(paths) : [];
+  const text = multiple ? pickerSummary(orderedPaths.map(labelOfPath), messages) : value ? labelOfPath(value) : null;
   const ownedSubmitValue = value ? value.join("/") : "";
 
   // ── 弹层状态 ──
   function prepare() {
-    const path = value ?? [];
+    const path = (multiple ? ordered(paths)[0] : value) ?? [];
     const next: string[] = [];
     const seen: string[] = [];
     let list: readonly CascaderOption[] | undefined = options;
@@ -186,9 +269,9 @@ export function Cascader({
   }
   function commit(path: string[], close: boolean) {
     if (!value || !samePath(value, path)) {
-      if (!controlled) setInnerValue(path);
+      if (!controlled) setInner([path]);
       fieldRoot.setFilled(true);
-      onValueChange?.(path, walk(path).chain);
+      if (props.multiple !== true) props.onValueChange?.(path, walk(path).chain);
     }
     if (close) changeOpen(false);
   }
@@ -251,9 +334,11 @@ export function Cascader({
   }
   // 鼠标点选项：叶子提交并关闭；父项只展开，selectParent 时父项同时成为值，弹层保持打开以便继续往下选。
   // 键盘上相同的两件事分在两个键上：Enter / Space 提交，右方向键展开。
+  // 多选里点叶子是勾选/取消、不关闭弹层；点分支只展开（勾选分支点它的勾选框，或在键盘上按 Enter / Space）。
   function click(col: number, option: CascaderOption) {
     const path = [...expanded.slice(0, col), option.value];
     if (option.disabled) return;
+    if (multiple) { if (hasChildren(option, path)) expandAt(col, option); else toggle(col, option); return; }
     if (!hasChildren(option, path)) { commit(path, true); return; }
     expandAt(col, option);
     if (selectParent) commit(path, false);
@@ -274,7 +359,8 @@ export function Cascader({
       if (col > 0) { const parentKey = expanded[col - 1]!; setExpanded(expanded.slice(0, col - 1)); focusOption(col - 1, parentKey); }
     } else if (event.key === "Enter" || event.key === " ") {
       const path = [...expanded.slice(0, col), option.value];
-      if (!option.disabled) { if (submittable(option, path)) commit(path, true); else enterNext(col, option); }
+      if (multiple) toggle(col, option);
+      else if (!option.disabled) { if (submittable(option, path)) commit(path, true); else enterNext(col, option); }
     } else if (event.key.length === 1 && !event.nativeEvent.isComposing) {
       const now = Date.now();
       const buffer = (now - typed.current.time > TYPEAHEAD_MS ? "" : typed.current.text) + event.key.toLocaleLowerCase();
@@ -287,6 +373,7 @@ export function Cascader({
 
   // ── 搜索：已知节点的扁平路径 ──
   const searching = searchable && query.trim() !== "";
+  const needleText = query.trim().toLocaleLowerCase();
   const results: Result[] = [];
   if (searching) {
     const needle = query.trim().toLocaleLowerCase();
@@ -319,7 +406,9 @@ export function Cascader({
     else if (event.key === "Enter" && searching) {
       event.preventDefault();
       const result = results[activeResult];
-      if (result && !result.disabled) commit(result.path, true);
+      if (!result) return;
+      // 多选里选中即切换、弹层保持打开，焦点留在输入里，可以接着挑下一项。
+      if (multiple) toggleResult(result); else if (!result.disabled) commit(result.path, true);
     }
   }
 
@@ -333,7 +422,7 @@ export function Cascader({
         ref={triggerRef} slot="cascader" id={id} className={className} popup="listbox" open={open} onRequestOpen={() => changeOpen(true)}
         disabled={disabled} readOnly={readOnly} required={required} invalid={invalid}
         ariaLabel={ariaLabel} labelledBy={labelledBy} describedBy={describedBy}
-        text={value ? shown : null} placeholder={placeholder ?? messages.selectPlaceholder}
+        text={text} placeholder={placeholder ?? messages.selectPlaceholder}
       />
       {/* 弹层沿用 Popover 的面板、边界与入退场；内边距由列自己留，所以视口去掉面板内边距，横向可滚动。 */}
       <PopoverPopup
@@ -353,43 +442,50 @@ export function Cascader({
         </div>}
         {searching ? <div className="min-h-0 overflow-y-auto overscroll-contain p-(--qy-overlay-inset)">
           <div role="status" className={status.className}>{status.content}</div>
-          <div id={`${uid}-results`} role="listbox" aria-label={ariaLabel} aria-labelledby={labelledBy} data-slot="cascader-results" className="flex flex-col">
+          <div id={`${uid}-results`} role="listbox" aria-multiselectable={multiple || undefined} aria-label={ariaLabel} aria-labelledby={labelledBy} data-slot="cascader-results" className="flex flex-col">
             {results.map((result, index) => <div
               key={keyOf(result.path)} id={`${uid}-r${index}`} role="option" data-slot="cascader-result"
-              aria-selected={value !== null && samePath(value, result.path)} aria-disabled={result.disabled || undefined}
+              aria-selected={multiple ? checkedKeys.has(keyOf(result.path)) : value !== null && samePath(value, result.path)} aria-disabled={result.disabled || undefined}
               data-highlighted={index === activeResult ? "" : undefined} data-disabled={result.disabled ? "" : undefined}
-              onClick={() => { if (!result.disabled) commit(result.path, true); }}
+              onClick={() => { if (multiple) toggleResult(result); else if (!result.disabled) commit(result.path, true); }}
               onMouseMove={() => setActive(index)}
               // 点选项不要把焦点从输入上抢走：提交后弹层关闭，焦点由 Popover 还给触发器。
               onMouseDown={event => event.preventDefault()}
-              className={cn(overlayItemClassName, candidateItemClassName, "aria-selected:bg-surface-selected aria-selected:font-medium")}
-            >{result.label}</div>)}
+              className={cn(overlayItemClassName, candidateItemClassName, multiple && "flex items-center gap-(--qy-action-gap)", "aria-selected:bg-surface-selected aria-selected:font-medium")}
+            >
+              {multiple && <CheckMarker state={checkedKeys.has(keyOf(result.path))} dim={result.disabled} />}
+              <span className="min-w-0 whitespace-normal wrap-break-word">{highlightMatch(result.label, needleText)}</span>
+            </div>)}
             {results.length === 0 && <div data-slot="cascader-empty" className={candidateEmptyClassName}>{messages.selectEmpty}</div>}
           </div>
         </div> : <div ref={rowRef} data-slot="cascader-columns" className="flex min-h-0 overflow-x-auto overscroll-contain">
           <span id={`${uid}-branch`} hidden>{messages.cascaderBranch}</span>
+          <span id={`${uid}-partial`} hidden>{messages.cascaderPartial}</span>
           {columns.map((column, col) => <div key={keyOf(column.parentPath)} data-slot="cascader-column" className={cn("flex shrink-0 flex-col overflow-y-auto overscroll-contain max-w-(--available-width) not-first:border-s not-first:border-border", columnMinWidth)}>
-            {column.items ? <div role="listbox" {...columnName(column, col)} className="flex flex-col p-(--qy-overlay-inset)">
+            {column.items ? <div role="listbox" aria-multiselectable={multiple || undefined} {...columnName(column, col)} className="flex flex-col p-(--qy-overlay-inset)">
               {column.items.map((item, index) => {
                 const path = [...expanded.slice(0, col), item.value];
                 const parent = hasChildren(item, path);
                 const isOpen = parent && expanded[col] === item.value && expanded.length > col;
-                const isSelected = value !== null && value.length > col && samePath(value.slice(0, col + 1), path);
+                const state = multiple ? checkState(item, path) : false;
+                const isSelected = multiple ? state === true : value !== null && value.length > col && samePath(value.slice(0, col + 1), path);
                 return <div
                   key={item.value} role="option" data-slot="cascader-option" data-col={col} data-key={item.value}
                   tabIndex={tabStop && tabStop.col === col && tabStop.value === item.value ? 0 : -1}
                   aria-selected={isSelected} aria-disabled={item.disabled || undefined} data-disabled={item.disabled ? "" : undefined}
                   // option 不支持 aria-expanded / aria-haspopup（ARIA 1.2）；展开只是视觉上的「走到哪条分支」，用 data 属性画。
                   // 有下级由描述告诉读屏（名称仍只是选项文字）；视觉上由尾部的方向记号表达。
-                  data-expanded={isOpen ? "" : undefined} aria-describedby={parent ? `${uid}-branch` : undefined}
+                  data-expanded={isOpen ? "" : undefined} aria-describedby={[parent ? `${uid}-branch` : undefined, state === "mixed" ? `${uid}-partial` : undefined].filter(Boolean).join(" ") || undefined}
                   onFocus={() => setCurrent({ col, value: item.value })}
                   onClick={() => click(col, item)}
                   onKeyDown={event => onOptionKeyDown(event, col, column.items!, index)}
                   // 高亮（键盘位置）与悬停同一种面；展开中的父项保留这个面，让人看出当前走到哪条分支。
-                  className={cn("grid grid-cols-[minmax(0,1fr)_auto] items-center", overlayItemClassName, candidateItemClassName, "hover:bg-accent focus-visible:bg-accent data-expanded:bg-accent aria-selected:bg-surface-selected aria-selected:font-medium")}
+                  className={cn("grid items-center", multiple ? "grid-cols-[auto_minmax(0,1fr)_auto] gap-x-(--qy-action-gap)" : "grid-cols-[minmax(0,1fr)_auto]", overlayItemClassName, candidateItemClassName, "hover:bg-accent focus-visible:bg-accent data-expanded:bg-accent aria-selected:bg-surface-selected aria-selected:font-medium")}
                 >
+                  {/* 勾选框只管勾选：点它切换，点行的其余部分在分支上是展开。键盘上整行是同一个目标（Enter / Space 勾选）。 */}
+                  {multiple && <CheckMarker state={state} dim={Boolean(item.disabled)} onClick={event => { event.stopPropagation(); toggle(col, item); }} />}
                   <span className="min-w-0 whitespace-normal wrap-break-word">{item.label}</span>
-                  <span aria-hidden="true" className={trailingSlot}>{parent ? <Forward className="size-full" /> : isSelected ? <IconCheck className="size-full" /> : null}</span>
+                  <span aria-hidden="true" className={trailingSlot}>{parent ? <Forward className="size-full" /> : !multiple && isSelected ? <IconCheck className="size-full" /> : null}</span>
                 </div>;
               })}
             </div> : column.status === "error"
@@ -404,7 +500,7 @@ export function Cascader({
         </div>}
       </PopoverPopup>
     </Popover>
-    {/* 表单值：路径各段用 "/" 连接。 */}
-    <PickerFormValue slot="cascader" name={name} form={form} value={ownedSubmitValue} required={required} disabled={disabled} triggerRef={triggerRef} />
+    {/* 表单值：路径各段用 "/" 连接；多选每条路径一条。 */}
+    <PickerFormValue slot="cascader" name={name} form={form} value={multiple ? orderedPaths.map(path => path.join("/")) : ownedSubmitValue} required={required} disabled={disabled} triggerRef={triggerRef} />
   </>;
 }
