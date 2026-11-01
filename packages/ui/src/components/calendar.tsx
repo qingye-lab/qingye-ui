@@ -170,6 +170,8 @@ export function Calendar({ className, classNames, components, style, locale, for
   // 大小不表达重要性（用户裁决 2026-10-05）。单元格宽度另由 --qy-calendar-cell 定。
   const dayButton = cn(buttonVariants({ shape: "icon", variant: "quiet" }), cellGeometry, selectedSolid, todayMark);
   const rootStyle = { "--qy-calendar-cell": "var(--qy-fill-height)", "--qy-calendar-cell-narrow": "var(--qy-fill-height-narrow)", ...style } as React.CSSProperties;
+  // 非按天只有单选与区间（2026-11-01 裁决：周、月、季、年的多选不是常见形态，需要时用区间）；传入 multiple 抛错，而不是悄悄改成单选或退回按天多选。
+  if (granularity !== "day" && (props as PickProps).mode === "multiple") throw new Error(`Calendar granularity="${granularity}" supports mode="single" or mode="range" only; received mode="multiple".`);
 
   // 周以外的非按天粒度：不画日期网格，换成月 / 季 / 年的格子（见 period-grid.tsx）。
   if (granularity === "month" || granularity === "quarter" || granularity === "year") {

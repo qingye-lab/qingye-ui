@@ -202,3 +202,9 @@ test("week range extends from the first week start to the last week end", async 
   const range = onSelect.mock.calls[0]![0] as { from: Date; to: Date };
   expect([range.from.getDate(), range.to.getDate()]).toEqual([2, 22]);
 });
+
+test("non-day granularity refuses multiple selection instead of quietly changing it", () => {
+  vi.spyOn(console, "error").mockImplementation(() => {});
+  for (const granularity of ["week", "month"] as const) expect(() => render(<Calendar granularity={granularity} mode="multiple" />)).toThrow('supports mode="single" or mode="range" only');
+  vi.restoreAllMocks();
+});

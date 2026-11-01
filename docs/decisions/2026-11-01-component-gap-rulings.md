@@ -67,7 +67,7 @@ Avatar 的尺寸是身份图像的显示大小，Stat 的尺寸是读数字号�
 | CornerMark `hostShape` | 保留 | 与成熟库「角标按宿主形状偏移」的做法一致（如徽标的 overlap 选项） | 不改 |
 | 无法识别的日期 | DatePicker 周期文字解析不了时报 `dateInvalid`（「无法识别的日期」），未填完整仍是 `dateIncomplete`；DateRangePicker 的 `onInvalid` 新增原因 `unrecognized` | 原生 `ValidityState` 也把「没填完」与「填了但认不出」（badInput）分开 | `date-picker.tsx`、`date-range-picker.tsx` |
 | 周期区间的天数与禁用 | 非按天时 `calendarProps.min` / `max` 按规范后的整段（首个周期起点到末个周期最后一天）计算天数；`excludeDisabled` 按周期判断：范围不得跨过整个被禁用的周期，周期里还有可选的日子就可选 | 与按天时同一条规则，只把单位换成周期，不另设一套 | `date-range-picker.tsx` 与测试 |
-| 非按天的多选 | 不提供 | 周、月、季、年的多选在成熟库里都不是常见形态，需要时用区间 | 文档说明 |
+| 非按天的多选 | 不提供；传入 `mode="multiple"` 抛错，不悄悄改成单选或退回按天多选 | 周、月、季、年的多选在成熟库里都不是常见形态，需要时用区间 | Calendar 文档说明与 `calendar.tsx` 守卫、测试 |
 | DateTimePicker 粒度 | 不接 `granularity` | 有时间就必然精确到天 | 不改 |
 | 宽松的 ISO 输入（如 `2026-W44`） | 保留 | 粘贴来的标准写法应能识别 | 不改 |
 | ScrollArea 渐隐 | 渐隐止于原生滚动条之前，滚动条所在条带整条不透明（实测条带宽度，覆盖式滚动条为 0） | 滚动条是操作部件，不应随内容一起变淡 | `scroll-area.tsx`、`hooks/use-scrollable.ts` |
@@ -87,4 +87,4 @@ Avatar 的尺寸是身份图像的显示大小，Stat 的尺寸是读数字号�
 | 5 小能力补丁 | OtpField、ScrollArea 渐隐、Drawer 离边、MenuSwitchItem / ContextMenuSwitchItem `10c412b`；CornerMark 角位 `7b88375`；Cascader 多选、TreeSelect 搜索、Tree 按需加载与拖拽 `52b2921`；NumberField 拖动调值、忙碌标记（`src/busy-mark.tsx`）与 Autocomplete `loading` `a142e3a` |
 | 6 整件第二档 | Composer `653fe54`；Tour `ab95dc5`；Chip `add2380`；Result、SkipLink `7b88375` |
 | 主 agent 裁决的示例 | Card 嵌套组合（Card 示例「嵌套」）；可点击的头像（Avatar 示例「可点击的头像」） |
-| 待裁决项 | `bd6ca2b` |
+| 待裁决项 | `bd6ca2b`；收尾核对时补上「非按天的多选」的运行时守卫（此前文档写了不支持，代码却在月、季、年时按单选处理、在周时退回按天多选） |
