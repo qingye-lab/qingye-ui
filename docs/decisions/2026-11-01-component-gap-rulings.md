@@ -37,5 +37,11 @@
 5. 小能力补丁：OtpField 分组、逐格占位与遮蔽输入；NumberField 拖动调值；ScrollArea 边缘渐隐（复用
    `useOverflowEdges`）；Drawer 离边浮起形态；Menu 与 ContextMenu 的开关式勾选项；CornerMark 其他角位；
    Cascader 多选；TreeSelect 搜索；Tree 按需加载与拖拽；InputGroupAddon 忙碌标记与 Autocomplete `loading`。
-6. 整件缺失第二档：Composer、Tour、Chip、Result、SkipLink、面积图、堆叠柱状图。
-7. 待核实：Avatar、Toggle、SegmentedControl、Stat 仍带 `size`，是否与「填充控件跟随密度」冲突。
+6. 整件缺失第二档：Composer、Tour、Chip、Result、SkipLink。（初稿列入的面积图、堆叠柱状图经核实
+   已由 `chart.tsx` 的 `area`、`area-stacked`、`bar-stacked` 等类型覆盖，删除。）
+
+## 核实结论
+
+Avatar、Toggle、SegmentedControl、Stat 仍带 `size`，**不与密度裁决冲突**。2026-10-05 裁决删除
+`size` 的范围是填值控件与勾选类；Toggle 与 SegmentedControl 属于 Button 派生，按同一裁决保留五档；
+Avatar 的尺寸是身份图像的显示大小，Stat 的尺寸是读数字号档，都不是「控件本身随内容放大」。
