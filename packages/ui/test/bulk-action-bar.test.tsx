@@ -17,6 +17,23 @@ describe("BulkActionBar", () => {
     expect(screen.getByText("已选 1,284 项")).toBeInTheDocument(); expect(screen.getByText("符合当前筛选的全部订单")).toBeInTheDocument(); expect(screen.getByRole("group")).toHaveAttribute("data-extent");
     fireEvent.click(screen.getByRole("button", { name: "操作" })); expect(execute.mock.calls[0]?.[0]).toEqual({ targets: [], scope: "订单筛选结果", extent: { count: 1284, label: "符合当前筛选的全部订单" } });
   });
+  it("formats the count with a caller function and reads the summary together with it", () => {
+    const format = vi.fn((count: number) => `${count} orders selected`);
+    render(<BulkActionBar targets={[{ id: "a", label: "A", version: 1 }, { id: "b", label: "B", version: 1 }]} scope="范围" formatCount={format} summary="合计 ¥120"><BulkActionBarAction onExecute={() => {}}>操作</BulkActionBarAction></BulkActionBar>);
+    expect(format).toHaveBeenCalledWith(2);
+    const group = screen.getByRole("group", { name: "范围" });
+    const described = document.getElementById(group.getAttribute("aria-describedby")!)!;
+    expect(described).toHaveTextContent("2 orders selected");
+    expect(described).toHaveTextContent("合计 ¥120");
+    expect(screen.queryByText("已选 2 项")).toBeNull();
+  });
+  it("passes the extent count to formatCount and omits the summary when absent", () => {
+    const format = vi.fn((count: number) => `共 ${count} 单`);
+    render(<BulkActionBar targets={[]} extent={{ count: 1284, label: "全部订单" }} scope="范围" formatCount={format} />);
+    expect(format).toHaveBeenCalledWith(1284);
+    expect(screen.getByText("共 1284 单")).toBeInTheDocument();
+    expect(document.querySelector("[data-slot='bulk-action-bar-summary']")).toBeNull();
+  });
   it("rejects an invalid extent", () => {
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     for (const extent of [{ count: 0, label: "全部" }, { count: 1.5, label: "全部" }, { count: 3, label: " " }]) expect(() => render(<BulkActionBar targets={[]} extent={extent} scope="范围" />)).toThrow(); spy.mockRestore();

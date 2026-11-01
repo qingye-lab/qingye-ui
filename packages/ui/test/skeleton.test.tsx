@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
-import { Skeleton, SkeletonBlock, SkeletonLine } from "../src/components/skeleton";
+import { Skeleton, SkeletonBlock, SkeletonControl, SkeletonLine } from "../src/components/skeleton";
 import { UILocaleProvider } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
 
@@ -10,6 +10,15 @@ test("one status says it is loading; the shapes are hidden from assistive techno
   expect(status).toHaveTextContent("正在加载");
   expect(status).toHaveAttribute("aria-busy", "true");
   expect(container.querySelectorAll('[data-slot^="skeleton-"][aria-hidden="true"]')).toHaveLength(3);
+});
+
+test("a control-shaped placeholder is hidden from assistive technology and takes the caller's props", () => {
+  render(<Skeleton><SkeletonControl data-testid="c" id="field" className="w-24" /></Skeleton>);
+  const control = screen.getByTestId("c");
+  expect(control).toHaveAttribute("aria-hidden", "true");
+  expect(control).toHaveAttribute("data-slot", "skeleton-control");
+  expect(control).toHaveAttribute("id", "field");
+  expect(screen.getByRole("status")).toHaveTextContent("正在加载");
 });
 
 test("the name follows the locale and a caller's object-specific label wins", () => {

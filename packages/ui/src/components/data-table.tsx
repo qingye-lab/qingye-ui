@@ -28,7 +28,8 @@ export interface DataTableColumnMeta {
   numeric?: boolean;
   /**
    * 对非交互文字启用单行省略。完整文字始终在 DOM 里，读屏读到全文（省略只是视觉）；
-   * 真的被截断时，该格可获得键盘焦点并用 Tooltip 显示全文（悬停、聚焦均可）。含控件的内容不裁切。
+   * 真的被截断时，该格可获得键盘焦点并用 Tooltip 显示全文（悬停、聚焦均可）。含控件的内容不裁切；
+   * 例外：格里唯一的控件是一个链接（a[href]）时，链接本身单行截断，被截断时悬停或聚焦链接显示全文（不新增 Tab 停靠点）。
    */
   ellipsis?: boolean;
   /** 固定在行内起点（RTL 下为右侧）。只允许从第一列起连续的前导列，否则抛错；其宽度由表头单元格实测，后一个固定列接在前一个之后。 */
@@ -58,6 +59,8 @@ const pinFill = { head: "[background-image:linear-gradient(var(--qy-surface-inse
 /* 末端的线：面无法划出范围时才出现（骨法用笔）——横向滚动后其它列从固定列下面经过才画；线宽读 w-line，色读 border。伪元素不占布局，出现与否不挪动单元格。 */
 const pinEdge = "after:pointer-events-none after:absolute after:inset-y-0 after:end-0 after:w-line after:bg-border after:content-[''] after:opacity-0 data-scrolled:after:opacity-100";
 const pinClass = (fill: keyof typeof pinFill, edge: boolean) => cn("sticky bg-surface", pinFill[fill], edge && pinEdge);
+/** 触发行激活的鼠标或键盘事件：调用方据此识别 Cmd / Ctrl / Shift（在新标签页打开、多选等）。 */
+export type DataTableActivateEvent = React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
 export type DataTableProps<TData> = Omit<TableProps, "children"> & {
   table: TableInstance<TData>;
   caption?: React.ReactNode;
@@ -75,8 +78,11 @@ export type DataTableProps<TData> = Omit<TableProps, "children"> & {
   activeRowId?: string | null;
   /** Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain. */
   selectionAppearance?: "row" | "checkbox";
-  /** Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。 */
-  onRowActivate?: (row: Row<TData>) => void;
+  /**
+   * Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。
+   * 第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。
+   */
+  onRowActivate?: (row: Row<TData>, event: DataTableActivateEvent) => void;
   virtualization?: DataTableVirtualization;
   containerProps?: TableContainerProps;
   /**
@@ -101,31 +107,45 @@ function isRowInteraction(event: React.MouseEvent<HTMLTableRowElement> | React.K
  * 原生 title 键盘与触屏都读不到；放得下的格不占 Tab 序列，也不弹重复的提示。
  * 比较过的另一条路是放弃截断改为折行：折行对触屏也成立，所以它是单元格的默认（见 table.tsx 的 wrap-anywhere）；
  * 省略是列的显式选择（固定行高、窄列里的次要文字），那一条路径上用 Tooltip 补全，触屏上仍只有聚焦这一条路（预设：Base UI 提示不响应触摸）。
- * 不裁切含控件的内容，也不用取值函数的原始值替换控件的可访问名称。
+ * 含控件的内容不裁切，也不用取值函数的原始值替换控件的可访问名称。
+ * 唯一的例外是「单元格里只有一个链接、没有别的控件」（数据里最常见的一种：名称本身就是去处）：
+ * 链接本身单行截断，被截断时悬停或聚焦这个链接显示全文。链接本来就是停靠点，单元格不再另成停靠点（Tab 序列不增加），
+ * 链接的可访问名称不变（全文本来就在 DOM 里）。提示挂在包住链接的那一层上而不是链接上：
+ * 链接是调用方渲染的（可能是路由组件），库拿不到它的元素去当触发器；Base UI 的触发器监听悬停与（冒泡上来的）聚焦，
+ * 而包装层收缩到链接的宽度（inline-flex），所以悬停的范围就是链接本身，提示也锚在链接上。
+ * 链接的点击不是行激活（它是控件，见 isRowInteraction）。
  */
 function EllipsisContent({ children }: { children: React.ReactNode }) {
   const element = React.useRef<HTMLDivElement | null>(null);
   const [text, setText] = React.useState<string | null>(null);
   const [clipped, setClipped] = React.useState(false);
+  const [link, setLink] = React.useState(false);
   const setElement = React.useCallback((node: HTMLElement | null) => { element.current = node as HTMLDivElement | null; }, []);
   React.useLayoutEffect(() => {
     const node = element.current;
     if (!node) return;
+    let observed: Element | null = null;
     const read = () => {
-      // 空值没有可供补全的文字，含控件的内容不裁切：都不提示。
-      const value = node.querySelector(interactiveContent) || node.querySelector("[data-slot=data-table-empty]") ? null : node.textContent ?? "";
+      const controls = node.querySelectorAll(interactiveContent);
+      const anchor = controls.length === 1 && controls[0]!.matches("a[href]") ? controls[0]! : null;
+      // 空值没有可供补全的文字；含其它控件的内容（或不止一个控件）不裁切：都不提示。
+      const value = (controls.length > 0 && !anchor) || node.querySelector("[data-slot=data-table-empty]") ? null : node.textContent ?? "";
+      setLink(anchor !== null);
       setText(value);
-      setClipped(value !== null && node.scrollWidth > node.clientWidth);
+      // 链接内容被截断的是链接自己；其它文字被截断的是这一层。
+      const measured = anchor ?? node;
+      setClipped(value !== null && measured.scrollWidth > measured.clientWidth);
+      if (resize && observed !== anchor) { if (observed) resize.unobserve(observed); observed = anchor; if (anchor) resize.observe(anchor); }
     };
-    read();
-    const mutations = new MutationObserver(read);
-    mutations.observe(node, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["href", "tabindex", "contenteditable", "role", "controls", "data-row-activate-ignore"] });
     // 列宽变化（拖动、窗口缩放）会改变「是否放得下」。
     const resize = typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(read);
     resize?.observe(node);
+    read();
+    const mutations = new MutationObserver(read);
+    mutations.observe(node, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["href", "tabindex", "contenteditable", "role", "controls", "data-row-activate-ignore"] });
     return () => { mutations.disconnect(); resize?.disconnect(); };
   }, [children]);
-  return <Tooltip><TooltipTrigger ref={setElement} disabled={!clipped} render={<div data-slot="data-table-cell-content" tabIndex={clipped ? 0 : undefined} data-clipped={clipped || undefined} className={cn("min-w-0 outline-none", text !== null && "truncate", clipped && "rounded-marker focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} />}>{children}</TooltipTrigger>{clipped && <TooltipPopup>{text}</TooltipPopup>}</Tooltip>;
+  return <Tooltip><TooltipTrigger ref={setElement} disabled={!clipped} render={<div data-slot="data-table-cell-content" tabIndex={clipped && !link ? 0 : undefined} data-clipped={clipped || undefined} className={cn("min-w-0 outline-none", text !== null && !link && "truncate", link && "inline-flex max-w-full [&_a[href]]:inline-block [&_a[href]]:max-w-full [&_a[href]]:min-w-0 [&_a[href]]:truncate [&_a[href]]:align-top", clipped && !link && "rounded-marker focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} />}>{children}</TooltipTrigger>{clipped && <TooltipPopup>{text}</TooltipPopup>}</Tooltip>;
 }
 function hasColumnDimensions<TData>(definitions: readonly Partial<ColumnDef<TData, unknown>>[]): boolean {
   return definitions.some(column => column.size !== undefined || column.minSize !== undefined || column.maxSize !== undefined || ("columns" in column && column.columns && hasColumnDimensions(column.columns)));
@@ -302,10 +322,10 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
     // 悬停只给数据行：宽表横向阅读时，它帮读者把眼睛对准同一行（比较任务保留必要的二维关系）。
     const cells = row.getVisibleCells();
     const labelledBy = hasRowHeader ? cells.flatMap((cell, cellIndex) => (cell.column.columnDef.meta as DataTableColumnMeta | undefined)?.rowHeader ? [`${rowHeaderId}-${index}-${cellIndex}`] : []).join(" ") || undefined : undefined;
-    return <TableRow key={row.id} aria-labelledby={labelledBy} ref={virtualization ? virtualizer.measureElement : undefined} data-index={virtualization ? index : undefined} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} data-active={row.id === activeRowId || undefined} aria-current={row.id === activeRowId ? "true" : undefined} aria-rowindex={virtualization ? headerGroups.length + index + 1 : undefined} tabIndex={onRowActivate ? row.id === tabStopId ? 0 : -1 : virtualization ? -1 : undefined} className={cn("group/row", filled ? "bg-surface-selected" : "hover:bg-accent", (onRowActivate || virtualization) && "outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} onClick={event => { if (!event.defaultPrevented && isRowInteraction(event)) onRowActivate?.(row); }} onKeyDown={event => {
+    return <TableRow key={row.id} aria-labelledby={labelledBy} ref={virtualization ? virtualizer.measureElement : undefined} data-index={virtualization ? index : undefined} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} data-active={row.id === activeRowId || undefined} aria-current={row.id === activeRowId ? "true" : undefined} aria-rowindex={virtualization ? headerGroups.length + index + 1 : undefined} tabIndex={onRowActivate ? row.id === tabStopId ? 0 : -1 : virtualization ? -1 : undefined} className={cn("group/row", filled ? "bg-surface-selected" : "hover:bg-accent", (onRowActivate || virtualization) && "outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} onClick={event => { if (!event.defaultPrevented && isRowInteraction(event)) onRowActivate?.(row, event); }} onKeyDown={event => {
       if (event.target !== event.currentTarget) return;
       navigate(event, index);
-      if (onRowActivate && !event.defaultPrevented && !event.repeat && !event.altKey && !event.ctrlKey && !event.metaKey && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onRowActivate(row); }
+      if (onRowActivate && !event.defaultPrevented && !event.repeat && !event.altKey && !event.ctrlKey && !event.metaKey && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onRowActivate(row, event); }
     }}>{cells.map((cell, cellIndex) => {
       const meta = cell.column.columnDef.meta as DataTableColumnMeta | undefined;
       const content = flexRender(cell.column.columnDef.cell, cell.getContext());
@@ -321,7 +341,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
     {/* 等待记号叠在纸的顶缘：绝对定位，不占布局，旧数据行不动、不变暗；它在容器之外，横向滚动时不随内容移走。 */}
     <div className="relative min-w-0 rounded-panel">
     {busy && <Progress value={null} aria-label={messages.loading} data-slot="data-table-busy" className={cn("pointer-events-none absolute z-[2] block overflow-hidden rounded-t-panel", containerProps?.framed === false ? "inset-x-0 top-0" : "inset-x-(--qy-line-width) top-(--qy-line-width)")}><ProgressTrack className="rounded-none bg-transparent"><ProgressIndicator /></ProgressTrack></Progress>}
-    <TableContainer data-slot="data-table-container" {...containerProps} {...(virtualization ? { tabIndex: containerProps?.tabIndex ?? 0 } : {})} className={cn(virtualization && "overflow-auto", containerProps?.className)} style={virtualization ? { ...containerProps?.style, height: virtualization.height } : containerProps?.style} onWheel={event => { containerProps?.onWheel?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onTouchStart={event => { containerProps?.onTouchStart?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onKeyDown={event => { containerProps?.onKeyDown?.(event); if (event.target === event.currentTarget) navigate(event); }}><Table data-slot="data-table" data-selection-appearance={selectionAppearance} aria-busy={busy} aria-rowcount={virtualization ? headerGroups.length + Math.max(1, rows.length) : undefined} {...props} className={cn(className)} style={{ ...tableWidth, ...style }} onFocusCapture={event => {
+    <TableContainer data-slot="data-table-container" fade={pinnedIds.length > 0 ? "end" : true} {...containerProps} {...(virtualization ? { tabIndex: containerProps?.tabIndex ?? 0 } : {})} className={cn(virtualization && "overflow-auto", containerProps?.className)} style={virtualization ? { ...containerProps?.style, height: virtualization.height } : containerProps?.style} onWheel={event => { containerProps?.onWheel?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onTouchStart={event => { containerProps?.onTouchStart?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onKeyDown={event => { containerProps?.onKeyDown?.(event); if (event.target === event.currentTarget) navigate(event); }}><Table data-slot="data-table" data-selection-appearance={selectionAppearance} aria-busy={busy} aria-rowcount={virtualization ? headerGroups.length + Math.max(1, rows.length) : undefined} {...props} className={cn(className)} style={{ ...tableWidth, ...style }} onFocusCapture={event => {
     onFocusCapture?.(event);
     const row = event.target instanceof Element ? event.target.closest<HTMLTableRowElement>("tr[data-row-id]") : null;
     if (onRowActivate && row && body.current?.contains(row)) setRovingId(row.dataset.rowId!);
@@ -449,14 +469,27 @@ export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<"div
   defaultState?: Partial<DataTablePatternState>;
   onStateChange?: (state: DataTablePatternState, details: DataTablePatternChangeDetails) => void;
   pagination?: false | DataTablePatternPagination;
-  selection?: { label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean };
+  selection?: {
+    label: string;
+    rowLabel: (row: TData) => string;
+    canSelect?: (row: TData) => boolean;
+    /**
+     * 表头全选的范围，默认 "page"（当页）。"filtered"：全部筛选结果，跨过分页——只在 mode="client" 有效，
+     * 因为只有客户端持有完整结果；mode="server" 传 "filtered" 会抛错，服务端分页的全量选择用 BulkActionBar 的 extent / BulkActionBarExtend，
+     * 由应用向服务端确认范围，而不是由这一页的行猜。全选框的名称随范围改变（「仅本页」／「全部筛选结果」）。
+     */
+    scope?: "page" | "filtered";
+  };
   selectionAppearance?: DataTableProps<TData>["selectionAppearance"];
   virtualization?: DataTableVirtualization;
   /** 表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。 */
   stickyHeader?: boolean;
   stickyHeaderOffset?: DataTableProps<TData>["stickyHeaderOffset"];
   /** Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection. */
-  activeRow?: ({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & { onActivate?: (row: TData) => void };
+  activeRow?: ({ trigger?: "cell"; columnId: string } | { trigger: "row"; columnId?: never }) & {
+    /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */
+    onActivate?: (row: TData, event: DataTableActivateEvent) => void;
+  };
   caption?: React.ReactNode;
   emptyContent: React.ReactNode;
   busy?: boolean;
@@ -482,14 +515,14 @@ function PatternColumnCell<TData>(context: CellContext<TData, unknown>) {
   const { config, activeRow, state, update } = context.column.columnDef.meta as PatternColumnMeta<TData>;
   const { messages } = useUILocale(); const value = context.getValue();
   const content = config.cell ? config.cell(context.row.original, value) : value == null || value === "" ? config.empty ?? <span data-slot="data-table-empty"><span aria-hidden="true" className="text-muted-foreground">—</span><span className="sr-only">{messages.tableNoValue}</span></span> : String(value);
-  return activeRow?.trigger !== "row" && activeRow?.columnId === config.id ? <Button data-slot="data-table-activate" variant="quiet" size="sm" className="-mx-(--qy-control-sm-padding) font-normal text-body sm:text-body" aria-current={context.row.id === state.activeRowId ? "true" : undefined} onClick={() => {
+  return activeRow?.trigger !== "row" && activeRow?.columnId === config.id ? <Button data-slot="data-table-activate" variant="quiet" size="sm" className="-mx-(--qy-control-sm-padding) font-normal text-body sm:text-body" aria-current={context.row.id === state.activeRowId ? "true" : undefined} onClick={event => {
     update(previous => ({ ...previous, activeRowId: context.row.id }), "active-row");
-    activeRow.onActivate?.(context.row.original);
+    activeRow.onActivate?.(context.row.original, event);
   }}>{content}</Button> : content;
 }
 function PatternSelectionHeader<TData>({ table, column }: HeaderContext<TData, unknown>) {
   const { selection } = column.columnDef.meta as PatternSelectionMeta<TData>;
-  return <DataTableSelectAll table={table} scope="page" aria-label={selection.label} />;
+  return <DataTableSelectAll table={table} scope={selection.scope ?? "page"} aria-label={selection.label} />;
 }
 function PatternSelectionCell<TData>({ row, column }: CellContext<TData, unknown>) {
   const { selection } = column.columnDef.meta as PatternSelectionMeta<TData>;
@@ -513,6 +546,7 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
   };
   if (!getRowId) throw new Error("DataTablePattern requires an explicit stable getRowId.");
   if (columns.length === 0 || new Set(columns.map(column => column.id)).size !== columns.length || columns.some(column => !column.id || column.id === "__qy_selection")) throw new Error("DataTablePattern requires distinct nonempty column IDs; __qy_selection is reserved.");
+  if (selection?.scope === "filtered" && mode === "server") throw new Error("DataTablePattern selection.scope \"filtered\" requires mode=\"client\": a server page holds only part of the result. Select a server-side result in full with BulkActionBar's extent / BulkActionBarExtend instead.");
   if (activeRow && activeRow.trigger !== "row" && !columns.some(column => column.id === activeRow.columnId)) throw new Error("DataTablePattern activeRow.columnId must identify a configured column.");
   const definitions: ColumnDef<TData, unknown>[] = columns.map(column => ({
     id: column.id,
@@ -543,9 +577,9 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     }, "pagination"),
   });
   return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", className)}>
-    <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: row => {
+    <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
       update(previous => ({ ...previous, activeRowId: row.id }), "active-row");
-      activeRow.onActivate?.(row.original);
+      activeRow.onActivate?.(row.original, event);
     } } : {})} />
     {pagination && <PaginationPattern busy={busy} value={source.pagination} onValueChange={next => update(previous => ({ ...previous, pagination: next }), "pagination")} {...(totalCount === null ? { totalCount: null, hasNextPage: pagination.hasNextPage! } : { totalCount })} {...(pagination.pageSizeOptions ? { pageSizeOptions: pagination.pageSizeOptions } : {})} {...(pagination["aria-label"] ? { "aria-label": pagination["aria-label"] } : {})} />}
   </div>;

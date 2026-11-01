@@ -17,7 +17,7 @@ export default {
     "ProgressPrimitive"
   ],
   "keywords": ["progress", "progress bar", "loading", "percent", "进度条", "加载", "百分比", "完成度"],
-  "decisions": "动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。", decisionsEn: "Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell.",
+  "decisions": "动画和时间不能提供完成事实；0 与 null 不同。离散的量用 segments 分格：空隙是遮罩切出的透明缝，不画底色；值必须落在格边界上，不显示半格。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）；过渡只是反馈，不提供完成事实。", decisionsEn: "Animation and time establish no completion fact. Zero differs from null. A discrete quantity uses segments: the gaps are transparent cuts made by a mask, not a painted color, and the value must sit on a cell boundary, never half a cell. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once). The move is feedback, not a completion fact.",
   "design": {
     "methods": [
       "名实相符",

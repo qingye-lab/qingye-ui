@@ -16,14 +16,14 @@ export default {
       description: "面板表面、边界与圆角。不生成标题、内容槽、内边距或排列方式。",
       descriptionEn: "Panel surface, boundary and radius. It supplies no title, content slots, padding or layout.",
       props: [
-        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "组合为 article、section 或原生链接，完整保留事件与 ref。", descriptionEn: "Compose an article, section or native link while retaining handlers and refs." },
+        { name: "render", type: "ReactElement | (props, state) => ReactElement", description: "组合为 article、section 或原生链接，完整保留事件与 ref。渲染为 a[href] 或 button 时，整卡有悬停与按下底色（与 Item 行入口同一反馈阶梯），按钮占满宽度、文字从行首起。", descriptionEn: "Compose an article, section or native link while retaining handlers and refs. Rendered as a[href] or button, the whole card gets hover and press surfaces (the same feedback ladder as Item row entries); a button fills the width with text starting at the line start." },
         { name: "className / style", type: "string / CSSProperties", description: "消费端按对象关系组合布局与内缘；外部类最后合并。", descriptionEn: "Compose layout and content inset for this object. Caller classes are merged last." },
         { name: "原生属性", nameEn: "Native props", type: "ComponentPropsWithRef<\"div\">", description: "透传 id、aria-*、data-*、事件与 ref。", descriptionEn: "Forward id, aria-*, data-*, events and ref." },
       ],
     },
   ],
-  decisions: "对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。",
-  decisionsEn: "Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons.",
+  decisions: "对象无需独立识别、排序或操作时，用标题与间距组织内容。整张 Card 是链接时，内部不能再嵌套按钮或其他链接。Card 不设阴影档、纸面档或悬停抬升：它没有离开平面，阴影会伪造层级；整体底色与圆角在主题层改系统 token（圆角是 --qy-radius-panel）。",
+  decisionsEn: "Use headings and spacing when content has no independent identity, ordering or actions. A Card rendered as a link cannot contain other links or buttons. Card has no elevation steps, paper surfaces or hover lift: it never leaves the plane, and a shadow would fake a layer; change ground and radius through system tokens in the theme (radius is --qy-radius-panel).",
   notes: [
     "标题用 Heading 或真实 h2/h3；内容与动作由 Stack、Inline 和原生结构组合。",
     "size、CardHeader/Title/Description/Action/Panel/Content/Footer 与 CardFrame* 已移除。",

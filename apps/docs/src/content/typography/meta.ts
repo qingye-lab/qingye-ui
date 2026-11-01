@@ -20,6 +20,7 @@ export default {
     { name: "Text", description: "正文、辅助说明或数值；默认 p。", descriptionEn: "Body copy, supporting text or numbers; defaults to p.", props: [
       { name: "step", type: "TextStep", default: '"body"', description: "如 reading、support、caption、metric；不新增文字档。", descriptionEn: "For example reading, support, caption or metric; no additional ramp." },
       { name: "numeric", type: "boolean", default: "false", description: "等宽数字；未知与空值由应用如实呈现。", descriptionEn: "Tabular figures; the application preserves unknown and empty values." },
+      { name: "tone", type: "\"default\" | \"muted\"", default: '"default"', description: "default 沿用所在处的前景色；muted 用弱化前景，做辅助说明。没有 danger：错误文字由 FieldError 承担。", descriptionEn: "default inherits the surrounding foreground; muted uses the weakened foreground for supporting copy. There is no danger tone: error text belongs to FieldError." },
       { name: "render / ref / 原生属性", nameEn: "render / ref / native props", type: "useRender.ComponentProps<\"p\">", description: "内联文字 render 成 span。颜色默认继承。", descriptionEn: "Render as span for inline text. Color inherits by default." },
     ] },
   ],

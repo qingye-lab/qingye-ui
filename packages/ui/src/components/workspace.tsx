@@ -186,6 +186,9 @@ export type WorkspaceContentProps = useRender.ComponentProps<"main"> & {
 /**
  * 内容区：外壳里唯一的滚动容器，默认 `<main>`。内缘由页面自己给（整幅的表格要贴边），取页边距 `--qy-page-gutter` 时与顶栏标题同一条左缘。
  *
+ * 它是定位祖先（`relative`）：唯一的滚动区若不是，内容里的绝对定位元素（读屏专用的 sr-only 文字、角标）会越过它去相对 body 定位，
+ * 落到滚动区之外而撑出整页滚动条。`relative` 不建层叠上下文，对吸顶（sticky 相对滚动区）、fixed 浮层与门户里的弹层都没有影响。
+ *
  * 焦点与 TableContainer 的可滚动容器同一条规则（基础层 §15，**约束**：WCAG 2.1.1 键盘可滚动）：
  * 内容放得下时 `tabIndex={-1}`——不在 Tab 顺序里，只作跳转链接与换页后焦点的落点；内容真的溢出时 `tabIndex={0}`，
  * 键盘能停在这里用方向键滚动，没有可聚焦子项的长页面也读得完。可滚动由实测决定（scrollHeight 对 clientHeight），
@@ -237,6 +240,6 @@ export function WorkspaceContent({ id, render, className, ref, tabIndex, transit
   }, [transitionKey]);
   return useRender({
     defaultTagName: "main", render, ref: [element, ref ?? null],
-    props: mergeProps({ "data-slot": "workspace-content", id: actualId, tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
+    props: mergeProps({ "data-slot": "workspace-content", id: actualId, tabIndex: tabIndex ?? (scrollable ? 0 : -1), className: cn("relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props),
   });
 }

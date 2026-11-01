@@ -63,7 +63,13 @@ export type HeadingProps = useRender.ComponentProps<"h2"> & TypeProps & {
   /** Document outline, independent of the visual text step. */
   level?: 1 | 2 | 3 | 4 | 5 | 6;
 };
-export type TextProps = useRender.ComponentProps<"p"> & TypeProps;
+export type TextProps = useRender.ComponentProps<"p"> & TypeProps & {
+  /**
+   * 墨色：default 沿用所在处的前景色；muted 用弱化前景（`text-muted-foreground`），做辅助说明。
+   * 没有 danger：错误文字属于 FieldError（功能纯粹，STANDARDS §1），Text 不单设红色。
+   */
+  tone?: "default" | "muted";
+};
 
 const capacity = "m-0 min-w-0 max-w-full whitespace-normal wrap-anywhere";
 
@@ -81,11 +87,11 @@ export function Heading({ level = 2, step = "heading", numeric = false, classNam
 }
 
 /** Body, supporting copy or numeric content; language tracking stays in utilities.css. */
-export function Text({ step = "body", numeric = false, className, render, ...props }: TextProps) {
+export function Text({ step = "body", numeric = false, tone = "default", className, render, ...props }: TextProps) {
   const defaultProps = {
     "data-slot": "text",
     "data-step": step,
-    className: cn(capacity, steps[step], balancedSteps.has(step) && "text-balance", numeric && "numeric", className),
+    className: cn(capacity, steps[step], balancedSteps.has(step) && "text-balance", numeric && "numeric", tone === "muted" && "text-muted-foreground", className),
   };
   return useRender({
     defaultTagName: "p",

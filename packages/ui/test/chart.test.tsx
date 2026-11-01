@@ -338,3 +338,51 @@ test("the default stays framed and self-titled; unframed without an outside name
   expect(figure).toHaveAttribute("data-framed", "false");
   expect(figure.querySelector("figcaption")).toHaveTextContent("本周同步次数");
 });
+
+const spreadRows: readonly ChartRow[] = [
+  { id: "d1", label: "周一", values: { mean: 24, lo: 22, hi: 27 } },
+  { id: "d2", label: "周二", values: { mean: 25, lo: 23.5, hi: 28 } },
+  { id: "d3", label: "周三", values: { mean: 26, lo: { state: "unknown", label: "未测" }, hi: 29 } },
+];
+const spread = { key: "mean", label: "均温", range: { min: "lo", max: "hi" } };
+const spreadProps = { type: "line", categoryLabel: "日", valueLabel: "温度", rows: spreadRows, label: "区间图" } as const;
+
+test("a series range is for the line form only, takes two distinct keys and rejects an inverted or out-of-domain band", () => {
+  expect(() => render(<Chart {...spreadProps} type="bar" series={[spread]} />)).toThrow(/range.*line/);
+  expect(() => render(<Chart {...spreadProps} series={[{ ...spread, range: { min: "lo", max: "lo" } }]} />)).toThrow(/different keys/);
+  expect(() => render(<Chart {...spreadProps} series={[{ ...spread, range: { min: "lo", max: "" } }]} />)).toThrow(/min and max keys/);
+  expect(() => render(<Chart {...spreadProps} series={[{ key: "lo", label: "背景", context: true, range: { min: "lo", max: "hi" } }, spread]} contextLabel="其余" />)).toThrow(/context series cannot declare a range/);
+  expect(() => render(<Chart {...spreadProps} series={[{ ...spread, range: { min: "hi", max: "lo" } }]} rows={spreadRows.slice(0, 2)} />)).toThrow(/min 27 greater than max 22/);
+  expect(() => render(<Chart {...spreadProps} series={[spread]} rows={spreadRows.slice(0, 2)} valueDomain={[23, 28]} />)).toThrow(/outside valueDomain/);
+  expect(() => render(<Chart {...spreadProps} series={[{ ...spread, range: { min: "lo", max: "missing" } }]} />)).toThrow(/missing/);
+});
+
+test("a range projects both ends beside the series, with an unknown end left as a gap, and keeps a legend entry for a lone series", () => {
+  const plot = vi.fn((_projection: ChartPlotData) => <div />);
+  render(<Chart {...spreadProps} series={[spread]} renderPlot={plot} />);
+  const projection = plot.mock.calls[0]![0];
+  const range = projection.series[0]!.range!;
+  expect(projection.data.map(record => [record[range.min], record[range.max]])).toEqual([[22, 27], [23.5, 28], [null, 29]]);
+  // 带的键要靠图例认出属于哪条线：单系列带区间时仍有图例，名称是系列名。
+  expect(screen.getByRole("list")).toHaveTextContent("均温");
+});
+
+test("the equivalent data table lists each range end as its own column, naming an unknown end", () => {
+  render(<Chart {...spreadProps} series={[spread]} formatValue={value => `${value} ℃`} renderPlot={() => <div />} />);
+  openTable();
+  const table = screen.getByRole("table", { name: "区间图" });
+  expect(within(table).getAllByRole("columnheader").map(cell => cell.textContent)).toEqual(["日", "均温", "均温最小值", "均温最大值"]);
+  const row = within(table).getAllByRole("row")[1]!;
+  expect(within(row).getAllByRole("cell").map(cell => cell.textContent)).toEqual(["24 ℃", "22 ℃", "27 ℃"]);
+  const last = within(table).getAllByRole("row")[3]!;
+  expect(within(last).getByRole("cell", { name: "未测" })).toHaveAttribute("data-state", "unknown");
+});
+
+test("the readout gives the range beside the value in the same format, and omits it when an end is unavailable", () => {
+  const series: ChartProjectedSeries[] = [{ key: "mean", label: "均温", dataKey: "s0", color: "red", marker: "circle", context: false, range: { min: "s0-min", max: "s0-max" } }];
+  const { rerender } = render(<ReadoutTooltip active label="周一" series={series} format={value => `${value} ℃`} payload={[{ dataKey: "s0", value: 24, payload: { id: "d1", "s0-min": 22, "s0-max": 27 } }]} />);
+  expect(screen.getByText("24 ℃")).toBeVisible();
+  expect(screen.getByText("范围 22 ℃–27 ℃")).toBeVisible();
+  rerender(<ReadoutTooltip active label="周三" series={series} format={value => `${value} ℃`} payload={[{ dataKey: "s0", value: 26, payload: { id: "d3", "s0-min": null, "s0-max": 29 } }]} />);
+  expect(screen.queryByText(/范围/)).toBeNull();
+});

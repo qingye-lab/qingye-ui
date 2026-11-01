@@ -188,3 +188,102 @@ export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 1
     </Select>}
   </Pagination>;
 }
+
+export type CursorPaginationChangeDetails = { reason: PaginationChangeDetails["reason"] | "reset" };
+export type CursorPaginationOptions = {
+  value?: PaginationValue;
+  defaultValue?: PaginationValue;
+  onValueChange?: (value: PaginationValue, details: CursorPaginationChangeDetails) => void;
+};
+/** 可直接展开给 PaginationPattern 的属性；总数恒为未知，下一页是否存在由已登记的游标决定。 */
+export type CursorPaginationProps = {
+  value: PaginationValue;
+  onValueChange: (value: PaginationValue, details: PaginationChangeDetails) => void;
+  totalCount: null;
+  hasNextPage: boolean;
+};
+export type CursorPagination<C> = {
+  /** 当前页应请求的游标；第 1 页恒为 null（从头开始）。 */
+  cursor: C | null;
+  /** 当前页码与条数；与 paginationProps.value 相同，方便取 pageSize 发请求。 */
+  value: PaginationValue;
+  paginationProps: CursorPaginationProps;
+  /**
+   * 数据回来后登记「下一页」的游标。next 为 null 或 undefined 表示这一页就是末页。
+   * fromPage 缺省为当前页；请求在翻页后才返回时传入发起请求时的页码，迟到的结果不会登记到错的页。
+   * 重新登记某页的下一页游标，其后已登记的游标一并作废（它们是从旧游标走出来的）。
+   * reset 或改条数之前发出、之后才返回的请求属于旧结果集，fromPage 拦不住，由请求层丢弃（如按筛选与条数作请求键）。
+   */
+  setNextCursor: (next: C | null | undefined, fromPage?: number) => void;
+  /** 筛选、排序等改变了结果集：清空全部游标并回到第 1 页（条数不变）。 */
+  reset: () => void;
+};
+
+const noCursors: readonly never[] = [];
+
+/**
+ * 游标分页的记忆：游标只能顺着上一页的结果往后走，所以「第 N 页对应哪个游标」必须有人记。
+ * 记法由约束直接决定——第 N 页的游标只在第 N-1 页的数据返回时才知道，因此按页顺序登记，第 1 页无游标（null）。
+ * 已登记的游标即「已读页」：可回到任一已读页，不能越过未登记的页，也就没有页码跳转。
+ *
+ * 受控与非受控同 PaginationPattern：传 `value` 受控（`onValueChange` 通知），否则用 `defaultValue` 自持。游标本身始终由 hook 持有。
+ * 条数改变时游标作废（游标只对原条数有效）；`value` 的页码超出已读范围（例如重新挂载后地址里还留着第 3 页）时，
+ * 校正到最远的已读页并以 `total-change` 通知一次——与 PaginationPattern 校正越界页同一约定。
+ */
+export function useCursorPagination<C = string>({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange }: CursorPaginationOptions = {}): CursorPagination<C> {
+  const [internalValue, setInternalValue] = React.useState(defaultValue);
+  const [store, setStore] = React.useState<{ pageSize: number; cursors: readonly C[] }>({ pageSize: defaultValue.pageSize, cursors: noCursors });
+  const source = normalizePaginationValue(value ?? internalValue, null);
+  // 条数不同的游标不属于当前条数；effect 落地前的这一次渲染也按空处理。
+  const known = store.pageSize === source.pageSize ? store.cursors : noCursors;
+  const current: PaginationValue = { page: Math.min(source.page, known.length + 1), pageSize: source.pageSize };
+  const latest = React.useRef({ source, current, value, onValueChange });
+  latest.current = { source, current, value, onValueChange };
+
+  const commit = React.useCallback((next: PaginationValue, details: CursorPaginationChangeDetails) => {
+    const state = latest.current;
+    if (state.value === undefined) setInternalValue(next);
+    state.onValueChange?.(next, details);
+  }, []);
+
+  React.useEffect(() => {
+    if (store.pageSize !== source.pageSize) setStore({ pageSize: source.pageSize, cursors: noCursors });
+  }, [store.pageSize, source.pageSize]);
+
+  const correction = React.useRef<string | null>(null);
+  React.useEffect(() => {
+    if (source.page === current.page) { correction.current = null; return; }
+    const key = `${source.page}:${source.pageSize}:${current.page}`;
+    if (correction.current === key) return;
+    correction.current = key;
+    commit(current, { reason: "total-change" });
+  }, [source.page, source.pageSize, current.page, current, commit]);
+
+  const setNextCursor = React.useCallback((next: C | null | undefined, fromPage?: number) => {
+    const { current: now } = latest.current;
+    const from = fromPage ?? now.page;
+    setStore(previous => {
+      const base = previous.pageSize === now.pageSize ? previous.cursors : noCursors;
+      // 只能登记已读页的下一页；越过未登记的页说明这是迟到或错位的结果。
+      if (!Number.isInteger(from) || from < 1 || from > base.length + 1) return previous;
+      const kept = base.slice(0, from - 1);
+      if (next === null || next === undefined) return base.length === kept.length ? previous : { pageSize: now.pageSize, cursors: kept };
+      if (base.length >= from && Object.is(base[from - 1], next)) return previous;
+      return { pageSize: now.pageSize, cursors: [...kept, next] };
+    });
+  }, []);
+
+  const reset = React.useCallback(() => {
+    const { source: now } = latest.current;
+    setStore(previous => previous.cursors.length === 0 && previous.pageSize === now.pageSize ? previous : { pageSize: now.pageSize, cursors: noCursors });
+    if (now.page !== 1) commit({ page: 1, pageSize: now.pageSize }, { reason: "reset" });
+  }, [commit]);
+
+  return {
+    cursor: current.page === 1 ? null : known[current.page - 2] as C,
+    value: current,
+    paginationProps: { value: current, onValueChange: commit, totalCount: null, hasNextPage: known.length >= current.page },
+    setNextCursor,
+    reset,
+  };
+}

@@ -118,6 +118,63 @@ describe("DataTable", () => {
         expect(screen.getAllByRole("button", { name: "完整操作名称" })[0]!.parentElement).not.toHaveAttribute("tabindex");
       } finally { restore(); }
     });
+    describe("a single link", () => {
+      const linkDefinitions: ColumnDef<RecordItem>[] = [
+        { accessorKey: "label", header: "名称", size: 160, meta: { rowHeader: true, ellipsis: true }, cell: () => <a href="#detail">{text}</a> },
+        { accessorKey: "count", header: "操作", size: 120, meta: { ellipsis: true }, cell: () => <><a href="#one">第一个链接</a><a href="#two">第二个链接</a></> },
+      ];
+      it("adds no Tab stop and keeps the link's accessible name, whether or not it is truncated", async () => {
+        const user = userEvent.setup();
+        const restore = overflow(300, 100);
+        try {
+          render(<AdvancedFixture definitions={linkDefinitions} />);
+          const link = screen.getAllByRole("link", { name: text })[0]!;
+          expect(link.closest("[data-slot=data-table-cell-content]")).not.toHaveAttribute("tabindex");
+          const stops: Element[] = [];
+          for (let step = 0; step < 20; step++) { await user.tab(); if (document.activeElement === document.body) break; stops.push(document.activeElement!); }
+          expect(stops.filter(stop => stop === link)).toHaveLength(1);
+          expect(stops.every(stop => stop.matches("a[href]") || !stop.closest("td"))).toBe(true);
+        } finally { restore(); }
+      });
+      it("shows the full text in a tooltip when the truncated link is focused", async () => {
+        const user = userEvent.setup();
+        const restore = overflow(300, 100);
+        try {
+          render(<AdvancedFixture definitions={linkDefinitions} />);
+          const link = screen.getAllByRole("link", { name: text })[0]!;
+          for (let step = 0; step < 20 && document.activeElement !== link; step++) await user.tab();
+          expect(link).toHaveFocus();
+          expect(await screen.findByRole("tooltip")).toHaveTextContent(text);
+        } finally { restore(); }
+      });
+      it("shows the tooltip on hover and shows none while the link fits", async () => {
+        const user = userEvent.setup();
+        let restore = overflow(300, 100);
+        try {
+          const { unmount } = render(<AdvancedFixture definitions={linkDefinitions} />);
+          await user.hover(screen.getAllByRole("link", { name: text })[0]!);
+          expect(await screen.findByRole("tooltip")).toHaveTextContent(text);
+          unmount();
+        } finally { restore(); }
+        restore = overflow(100, 300);
+        try {
+          render(<AdvancedFixture definitions={linkDefinitions} />);
+          await user.hover(screen.getAllByRole("link", { name: text })[0]!);
+          expect(screen.queryByRole("tooltip")).toBeNull();
+        } finally { restore(); }
+      });
+      it("leaves a cell with several controls unclipped and without a tooltip", async () => {
+        const user = userEvent.setup();
+        const restore = overflow(300, 100);
+        try {
+          render(<AdvancedFixture definitions={linkDefinitions} />);
+          const first = screen.getAllByRole("link", { name: "第一个链接" })[0]!;
+          expect(first.parentElement).not.toHaveAttribute("tabindex");
+          await user.hover(first);
+          expect(screen.queryByRole("tooltip")).toBeNull();
+        } finally { restore(); }
+      });
+    });
     it("still activates the row when the truncated text is clicked", async () => {
       const user = userEvent.setup();
       const onRowActivate = vi.fn();
@@ -152,7 +209,7 @@ describe("DataTable", () => {
     </> }]} />);
     const row = screen.getByRole("rowheader", { name: "A" }).closest("tr")!;
     await user.click(screen.getByRole("rowheader", { name: "A" }));
-    expect(activated).toHaveBeenLastCalledWith(expect.objectContaining({ id: "a", original: items[0] }));
+    expect(activated).toHaveBeenLastCalledWith(expect.objectContaining({ id: "a", original: items[0] }), expect.objectContaining({ type: "click" }));
     row.focus();
     await user.keyboard("{Enter} ");
     expect(activated).toHaveBeenCalledTimes(3);
@@ -317,7 +374,7 @@ describe("DataTable", () => {
     await user.keyboard("{ArrowDown}"); expect(rows()[1]).toHaveFocus(); expect(rows().map(row => row.getAttribute("tabindex"))).toEqual(["-1", "0", "-1"]);
     await user.keyboard("{End}"); expect(rows()[2]).toHaveFocus(); await user.keyboard("{ArrowDown}"); expect(rows()[2]).toHaveFocus();
     await user.keyboard("{Home}"); expect(rows()[0]).toHaveFocus(); await user.keyboard("{ArrowUp}"); expect(rows()[0]).toHaveFocus();
-    await user.keyboard("{ArrowDown}{Enter}"); expect(activated).toHaveBeenLastCalledWith(expect.objectContaining({ id: "b" }));
+    await user.keyboard("{ArrowDown}{Enter}"); expect(activated).toHaveBeenLastCalledWith(expect.objectContaining({ id: "b" }), expect.objectContaining({ key: "Enter" }));
     await user.tab(); expect(rows().some(row => row === document.activeElement)).toBe(false);
     await user.tab({ shift: true }); expect(rows()[1]).toHaveFocus();
     rerender(<AdvancedFixture onRowActivate={activated} activeRowId="c" data={[items[2]!, items[0]!]} />);

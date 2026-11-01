@@ -322,12 +322,51 @@
 }
 
 /*
- * Staggered children. Set `--qy-index` on each child; the delay is capped so
- * a long list never crawls in.
+ * Staggered children. The parent only declares `data-motion="stagger"`; the
+ * children number themselves by position: the first child is 0, the second 1,
+ * and so on, so each arrives one `--qy-stagger` after the one before it. The
+ * delay is capped at index 8 (the ninth child and every later one share it), so a
+ * long list never crawls in. Eight steps of 40ms keep the whole entry under
+ * a third of a second; the cap is a preset, the one-after-another order is the
+ * relation (the reader meets the content in reading order).
+ *
+ * The numbers are written inside `:where()`, so they carry zero specificity: a
+ * child that sets its own `--qy-index` (inline style or any class) overrides its
+ * position, for a list whose arrival order is not its document order.
  */
+:where([data-motion="stagger"] > :nth-child(1)) { --qy-index: 0; }
+:where([data-motion="stagger"] > :nth-child(2)) { --qy-index: 1; }
+:where([data-motion="stagger"] > :nth-child(3)) { --qy-index: 2; }
+:where([data-motion="stagger"] > :nth-child(4)) { --qy-index: 3; }
+:where([data-motion="stagger"] > :nth-child(5)) { --qy-index: 4; }
+:where([data-motion="stagger"] > :nth-child(6)) { --qy-index: 5; }
+:where([data-motion="stagger"] > :nth-child(7)) { --qy-index: 6; }
+:where([data-motion="stagger"] > :nth-child(8)) { --qy-index: 7; }
+:where([data-motion="stagger"] > :nth-child(n + 9)) { --qy-index: 8; }
+
 [data-motion="stagger"] > * {
   animation: qy-rise-in var(--qy-duration-base) var(--qy-ease-out) backwards;
   animation-delay: calc(var(--qy-stagger) * min(var(--qy-index, 0), 8));
+}
+
+/*
+ * Readout bars (Progress, Meter, Proportion): when the value changes the filled
+ * length travels to its new length instead of jumping. The length is the fact
+ * the reader tracks, so the move is feedback, not decoration: --qy-duration-base
+ * (the same period as a section arriving), --qy-ease-out. The first render has no
+ * previous length, so nothing animates on mount. Reduced motion drops width and
+ * flex-grow from every [data-slot]'s transition-property (section 4), so the new
+ * length lands at once. An indeterminate band owns its own animation and is left out.
+ *
+ * Width stays width rather than a transform: Base UI writes the length as an
+ * inline `width: N%`, and a scaleX would stretch the rounded end. The bar is one
+ * small element on an overflow-clipped track, so the layout cost is nil.
+ */
+:is([data-slot="progress-indicator"], [data-slot="meter-indicator"]):not(.qy-progress-indeterminate) {
+  transition: width var(--qy-duration-base) var(--qy-ease-out);
+}
+:is([data-slot="proportion-segment"], [data-slot="proportion-rest"]) {
+  transition: flex-grow var(--qy-duration-base) var(--qy-ease-out);
 }
 
 /* --- 3. Keyboard input is immediate -------------------------------------- */
@@ -335,7 +374,7 @@
   transition-duration: 0s !important;
 }
 
-:root[data-ui-input="keyboard"] [data-motion] {
+:root[data-ui-input="keyboard"] :is([data-motion], [data-motion="stagger"] > *) {
   animation: none;
 }
 
@@ -409,7 +448,7 @@
     animation: none;
   }
 
-  [data-motion] {
+  :is([data-motion], [data-motion="stagger"] > *) {
     animation-name: qy-fade-in !important;
     animation-delay: 0s !important;
   }

@@ -42,6 +42,18 @@ export default {
           "descriptionEn": "Sticks to the nearest scroll container (WorkspaceContent in a Workspace); do not place it inside an intermediate overflow container. The divider appears only while stuck with content scrolling beneath (data-stuck)."
         },
         {
+          "name": "formatCount",
+          "type": "(count: number) => string",
+          "description": "自定已选数量的文案，默认「已选 N 项」。入参是 extent.count（有 extent 时）或 targets.length。传函数而非量词：量词与名词的位置、单复数随语言和对象变化，由调用方按当前界面语言写完整句，如「3 个订单」「3 orders selected」。",
+          "descriptionEn": "Customizes the selected-count text; the default reads \"N selected\". It receives extent.count when extent is present, otherwise targets.length. A function rather than a unit string, since measure word, noun placement and plurals vary by language and object: the caller writes the whole phrase for the current UI language."
+        },
+        {
+          "name": "summary",
+          "type": "React.ReactNode",
+          "description": "数量之后的补充摘要，如合计金额、总容量。与数量同在 aria-describedby 引用的区域，读屏一并读出；使用等宽数字、不截断，放不下时被截断的是后面的对象清单。数据由应用计算，库不汇总。",
+          "descriptionEn": "A supplementary summary after the count, such as a total amount or size. It lives in the same aria-describedby region as the count, so screen readers read both; it uses tabular numbers and is not truncated, the target list after it truncates first. The application computes the data; the library does not aggregate."
+        },
+        {
           "name": "disabled / onClear",
           "type": "boolean / callback",
           "description": "清除收到当前快照，不取消服务或自行清空应用状态。",
@@ -89,10 +101,12 @@ export default {
     }
   ],
   "notes": [
-    "库显示对象版本而不推断新旧；应用在执行边界复核实际版本。"
+    "库显示对象版本而不推断新旧；应用在执行边界复核实际版本。",
+    "自 5.2.0：新增 formatCount 与 summary，用于按对象改写数量文案、补充合计；不传时与此前一致。"
   ],
   "notesEn": [
-    "The library displays versions without judging freshness; applications revalidate actual versions at execution."
+    "The library displays versions without judging freshness; applications revalidate actual versions at execution.",
+    "Since 5.2.0: formatCount and summary rewrite the count text per object and add totals; omitting them behaves as before."
   ],
   "design": {
     "methods": [

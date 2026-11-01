@@ -161,7 +161,7 @@ export const SECTIONS: Section[] = [
       { entry: "--qy-ease-out", measure: raw("ease-out"), rel: { zh: "进入与反馈", en: "Entry and feedback" }, src: ["preset"] },
       { entry: "--qy-ease-in-out", measure: raw("ease-in-out"), rel: { zh: "原位往返", en: "Back and forth in place" }, src: ["preset"] },
       { entry: "--qy-ease-drawer", measure: raw("ease-drawer"), rel: { zh: "抽屉", en: "Drawer" }, src: ["preset"] },
-      { entry: "--qy-stagger", measure: raw("stagger"), rel: { zh: "内容错峰", en: "Content stagger" }, src: ["preset"] },
+      { entry: "--qy-stagger", measure: raw("stagger"), rel: { zh: "内容错峰（子元素按位置自动编号，上限 8）", en: "Content stagger (children numbered by position, capped at 8)" }, src: ["preset"] },
     ],
   },
 ];

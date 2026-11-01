@@ -9,12 +9,16 @@ import { useRender } from "@base-ui/react/use-render";
 import { cn } from "../utils";
 
 export type StatState = "known" | "unknown" | "not-applicable";
-export type StatSize = "md" | "lg";
+export type StatSize = "md" | "lg" | "xl";
 /** 读数的尺寸与数值状态只有 StatValue 需要知道；用上下文传递，不靠后代选择器去猜祖先的 data-size / data-state。 */
 const StatContext = React.createContext<{ size: StatSize; state: StatState }>({ size: "md", state: "known" });
 export type StatProps = useRender.ComponentProps<"dl"> & {
   state: StatState;
-  /** 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg）；标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。 */
+  /**
+   * 读数的尺寸档。只有读数本身按它在页面上的位置选大小（概览顶部的数字用 lg，整页只围绕一个数时用 xl）；
+   * 标签、单位、说明与变化量的字号不随它变（屋有大小，人无大小）。
+   * xl 不另立字号，直接读 display-lg（40/48）：与 lg 的 32 相差 1.25 倍，满足相邻内容档至少 1.2 倍。
+   */
   size?: StatSize;
 };
 /**
@@ -38,7 +42,7 @@ export function StatLabel({ render, className, ...props }: StatLabelProps) {
 export type StatValueProps = useRender.ComponentProps<"dd">;
 export function StatValue({ render, className, ...props }: StatValueProps) {
   const { size, state } = React.useContext(StatContext);
-  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", "data-state": state, className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) wrap-anywhere", size === "lg" ? "text-metric-lg" : "text-metric", state !== "known" && "text-muted-foreground", className) }, props) });
+  return useRender({ defaultTagName: "dd", render, props: mergeProps({ "data-slot": "stat-value", "data-state": state, className: cn("m-0 flex min-w-0 flex-wrap items-baseline gap-(--qy-field-gap) wrap-anywhere", size === "xl" ? "text-display-lg" : size === "lg" ? "text-metric-lg" : "text-metric", state !== "known" && "text-muted-foreground", className) }, props) });
 }
 export type StatUnitProps = useRender.ComponentProps<"span">;
 export function StatUnit({ render, className, ...props }: StatUnitProps) {

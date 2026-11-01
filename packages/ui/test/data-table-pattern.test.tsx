@@ -14,6 +14,49 @@ const getRowId = (row: Entry) => row.id;
 const selection = { label: "选择当页", rowLabel: (row: Entry) => `选择 ${row.label}` };
 
 describe("DataTablePattern", () => {
+  it("passes the triggering event to activation so the caller can read modifier keys", async () => {
+    const user = userEvent.setup();
+    const activated = vi.fn();
+    render(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" activeRow={{ trigger: "row", onActivate: activated }} />);
+    await user.keyboard("{Meta>}");
+    await user.click(screen.getByRole("rowheader", { name: "Beta" }));
+    await user.keyboard("{/Meta}");
+    expect(activated).toHaveBeenLastCalledWith(data[1], expect.objectContaining({ type: "click", metaKey: true }));
+    const row = screen.getByRole("rowheader", { name: "Gamma" }).closest("tr")!;
+    row.focus();
+    await user.keyboard("{Shift>}{Enter}{/Shift}");
+    expect(activated).toHaveBeenLastCalledWith(data[2], expect.objectContaining({ type: "keydown", key: "Enter", shiftKey: true }));
+  });
+
+  it("passes the event from the activation button as well", async () => {
+    const user = userEvent.setup();
+    const activated = vi.fn();
+    render(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" activeRow={{ columnId: "label", onActivate: activated }} />);
+    await user.keyboard("{Control>}");
+    await user.click(screen.getByRole("button", { name: "Alpha" }));
+    await user.keyboard("{/Control}");
+    expect(activated).toHaveBeenCalledExactlyOnceWith(data[0], expect.objectContaining({ ctrlKey: true }));
+  });
+
+  it("selects every filtered result across pages when the scope is filtered, and only the current page by default", async () => {
+    const user = userEvent.setup();
+    const changed = vi.fn();
+    const { rerender } = render(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" pagination={{}} defaultState={{ pagination: { page: 1, pageSize: 1 } }} selection={{ ...selection, scope: "filtered" }} onStateChange={changed} />);
+    const all = screen.getByRole("checkbox", { name: /选择当页/ });
+    expect(all).toHaveAccessibleName(expect.stringContaining("全部筛选结果"));
+    await user.click(all);
+    expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { a: true, b: true, c: true } }), { reason: "selection" });
+    rerender(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" pagination={{}} defaultState={{ pagination: { page: 1, pageSize: 1 } }} selection={selection} onStateChange={changed} />);
+    expect(screen.getByRole("checkbox", { name: /选择当页/ })).toHaveAccessibleName(expect.stringContaining("仅本页"));
+  });
+
+  it("refuses a filtered select-all scope in server mode and points at the bulk action bar", () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      expect(() => render(<DataTablePattern mode="server" data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" pagination={{ totalCount: 3 }} selection={{ ...selection, scope: "filtered" }} />)).toThrow("BulkActionBar");
+    } finally { error.mockRestore(); }
+  });
+
   it("configures actual client sorting/pagination and keeps zero values", async () => {
     const user = userEvent.setup();
     render(<DataTablePattern data={data} columns={columns} getRowId={getRowId} emptyContent="没有条目" pagination={{}} defaultState={{ pagination: { page: 2, pageSize: 1 } }} />);
@@ -64,7 +107,7 @@ describe("DataTablePattern", () => {
     const activate = screen.getByRole("button", { name: "Beta" });
     activate.focus();
     await user.keyboard("{Enter}");
-    expect(activated).toHaveBeenCalledExactlyOnceWith(data[1]);
+    expect(activated).toHaveBeenCalledExactlyOnceWith(data[1], expect.anything());
     expect(activate).toHaveAttribute("aria-current", "true");
     expect(activate).toHaveFocus();
     expect(activate.closest("tr")).toHaveAttribute("data-active", "true");
@@ -142,7 +185,7 @@ describe("DataTablePattern", () => {
     expect(activated).not.toHaveBeenCalled();
     expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { b: true }, activeRowId: null }), { reason: "selection" });
     await user.click(screen.getByRole("rowheader", { name: "Beta" }));
-    expect(activated).toHaveBeenCalledExactlyOnceWith(data[1]);
+    expect(activated).toHaveBeenCalledExactlyOnceWith(data[1], expect.anything());
     const row = screen.getByRole("rowheader", { name: "Beta" }).closest("tr")!;
     expect(row).toHaveAttribute("aria-current", "true");
     expect(changed).toHaveBeenLastCalledWith(expect.objectContaining({ rowSelection: { b: true }, activeRowId: "b" }), { reason: "active-row" });

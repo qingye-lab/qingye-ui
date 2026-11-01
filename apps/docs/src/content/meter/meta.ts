@@ -17,7 +17,7 @@ export default {
     "MeterPrimitive"
   ],
   "keywords": ["meter", "gauge", "measure", "level", "仪表", "度量", "用量", "容量"],
-  "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue.",
+  "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
   "design": {
     "methods": [
       "名实相符",

@@ -228,7 +228,10 @@ export function SidebarGroupLabel({ id, render, className, ...props }: SidebarGr
   React.useLayoutEffect(() => { setLabelId?.(actualId); return () => setLabelId?.(current => current === actualId ? null : current); }, [actualId, setLabelId]);
   return useRender({ defaultTagName: "p", render, props: mergeProps({ "data-slot": "sidebar-group-label", id: actualId, className: cn("m-0 flex min-w-0 items-center gap-(--qy-control-content-gap) px-(--qy-control-sm-padding) text-support text-muted-foreground wrap-anywhere", context.collapsed ? "sr-only" : "min-h-(--qy-fill-height)", className) }, props) });
 }
-export type SidebarLinkProps = useRender.ComponentProps<"a"> & { active?: boolean; icon?: React.ReactNode; count?: number; max?: number };
+type SidebarItemExtras = { icon?: React.ReactNode; count?: number; max?: number };
+export type SidebarLinkProps = useRender.ComponentProps<"a"> & SidebarItemExtras & { active?: boolean };
+/** 不跳转页面的条目：与 SidebarLink 同一外观，没有 active / aria-current（见 SidebarButton）。 */
+export type SidebarButtonProps = useRender.ComponentProps<"button"> & SidebarItemExtras;
 /**
  * icon 与 children（名称）分属两段：rail 下图标是唯一可见的识别物，名称切到 sr-only——
  * 可访问名称仍来自这段文字，不是新增 aria-label；悬停或聚焦时用 Tooltip 把名称重新摆出来，
@@ -240,7 +243,22 @@ export type SidebarLinkProps = useRender.ComponentProps<"a"> & { active?: boolea
  * 角，数字换成 CornerMark 钉在图标右上角，CornerMark 自己的 label 走 messages.unreadCount，
  * 调用方不需要为同一个数字另写一遍无障碍文案。
  */
-export function SidebarLink({ active = false, icon, count, max, render, className, children, ...props }: SidebarLinkProps) {
+export function SidebarLink({ active = false, ...props }: SidebarLinkProps) { return useSidebarItem("a", active, props); }
+/**
+ * 条目的另一种形态：点它是做一件事（打开账户菜单、搜索），不是去往一个页面。原生 `<button type="button">`，
+ * 外观、收起态（rail 只剩图标、名称切到 sr-only 并以 Tooltip 摆出）、count 与 SidebarLink 完全相同——两者共用同一段实现；
+ * 差别只在语义：没有 `active`，也不写 `aria-current`（「当前页」只属于链接）。部位名仍是 `sidebar-link`（同一个条目部位，
+ * 强制颜色下的禁用态等样式规则按这个名字写；button 与 a 的区别由元素本身和 type 表达）。
+ *
+ * 作为触发器时 `render={<SidebarButton … />}` 交给 MenuTrigger / PopoverTrigger，ref 与触发器给的全部属性
+ * （aria-expanded、aria-haspopup、onClick）都落到这个 button 上；名称写在触发器的 children。
+ * 在抽屉里它沿用 SidebarLink 的规则：触发浮层的（带 aria-haspopup）不关抽屉，其余点击后关闭，要留着用 preventBaseUIHandler。
+ */
+export function SidebarButton(props: SidebarButtonProps) { return useSidebarItem("button", false, props); }
+function useSidebarItem(
+  tag: "a" | "button", active: boolean,
+  { icon, count, max, render, className, children, ...props }: (SidebarLinkProps | SidebarButtonProps) & SidebarItemExtras,
+) {
   const context = useSidebar();
   const inSub = React.useContext(InSubPanel);
   const { messages } = useUILocale();
@@ -265,7 +283,7 @@ export function SidebarLink({ active = false, icon, count, max, render, classNam
   const label = <span data-slot="sidebar-link-label" className={cn("min-w-0 flex-1 wrap-anywhere", context.collapsed && "sr-only")}>{children}</span>;
   // 抽屉里点了去往新页面的条目就关闭抽屉（客户端路由的链接常会 preventDefault 再自行跳转，所以不看 defaultPrevented；调用方要留着抽屉，用 preventBaseUIHandler）；条目若是浮层的触发器（如账户菜单，带 aria-haspopup），点它是为了打开浮层，不关。
   const closeDrawer = context.closeDrawer && props["aria-haspopup"] === undefined ? context.closeDrawer : null;
-  const element = useRender({ defaultTagName: "a", render, props: mergeProps({ "data-slot": "sidebar-link", "aria-current": active ? "page" : undefined, className: frame, children: <>{hostedIcon}{label}{trailingCount}</>, onClick(event: React.MouseEvent<HTMLElement> & { baseUIHandlerPrevented?: boolean }) { if (!event.baseUIHandlerPrevented) closeDrawer?.(); } }, props) });
+  const element = useRender({ defaultTagName: tag, render, props: mergeProps({ "data-slot": "sidebar-link", ...(tag === "button" ? { type: "button" } : { "aria-current": active ? "page" : undefined }), className: frame, children: <>{hostedIcon}{label}{trailingCount}</>, onClick(event: React.MouseEvent<HTMLElement> & { baseUIHandlerPrevented?: boolean }) { if (!event.baseUIHandlerPrevented) closeDrawer?.(); } }, props) });
   if (!icon) return element;
   // Tooltip 包装始终挂载，只用 disabled 切换是否可开，不随 collapsed 整段换 DOM 结构——
   // 展开态文字已经可见，提示没有新信息（NG1），所以只在收起时允许打开；但如果直接按

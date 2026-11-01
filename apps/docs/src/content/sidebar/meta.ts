@@ -18,6 +18,7 @@ export default {
     "SidebarGroupLabel",
     "SidebarFooter",
     "SidebarLink",
+    "SidebarButton",
     "SidebarSub",
     "SidebarSubTrigger",
     "SidebarSubContent",
@@ -137,6 +138,25 @@ export default {
       ]
     },
     {
+      "name": "SidebarButton",
+      "description": "不去往页面的条目：账户菜单入口、搜索等“做一件事”的入口。原生 button，type=\"button\"。",
+      "descriptionEn": "An item that does not go to a page: an account-menu entry, search, anything that does one thing. A native button with type=\"button\".",
+      "props": [
+        {
+          "name": "icon / count / max",
+          "type": "ReactNode / number / number",
+          "description": "与 SidebarLink 同一外观与同一收起行为：rail 下图标是唯一可见的识别物，名称视觉隐藏并由 Tooltip 摆出，count 钉在图标角上。没有 active，也不写 aria-current。",
+          "descriptionEn": "Same look and collapsed behaviour as SidebarLink: in the rail the icon is the only visible identifier, the name is visually hidden and a Tooltip restores it, and the count is pinned to the icon. There is no active and no aria-current."
+        },
+        {
+          "name": "render / ref / native props",
+          "type": "useRender.ComponentProps<\"button\">",
+          "description": "可作为 MenuTrigger、PopoverTrigger 的 render 目标：ref 与触发器给的 aria-expanded、aria-haspopup、onClick 都落在这个 button 上；名称写在触发器的 children。",
+          "descriptionEn": "Works as the render target of MenuTrigger and PopoverTrigger: the ref and the trigger's aria-expanded, aria-haspopup and onClick all land on this button; the name goes in the trigger's children."
+        }
+      ]
+    },
+    {
       "name": "SidebarSub / SidebarSubTrigger / SidebarSubContent",
       "description": "可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。",
       "descriptionEn": "An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.",
@@ -161,7 +181,7 @@ export default {
     "当前项用圆角的面标出，比悬停面深一级，并加中等字重：悬停是一级清染，当前是一级清墨，指针经过的行不会和当前项长得一样；字重是不靠颜色的第二信号。当前项不画线（用户裁决：直线与圆角面不在同一项上并用）；二级条目左侧的引导线只表达归属，当前项不加深它。",
     "二级入口的展开记号收起时朝内、展开时朝下，与 Tree 的分支同一画法；父项没有图标时，引导线从父项文字的起笔垂下。",
     "当前项是选中面（--qy-sidebar-current = --qy-surface-selected）：墨的透明叠合，叠在侧栏自己的底上总深一级，项目改 --qy-sidebar 时不必另设。",
-    "末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarLink，SidebarLink 再 render 为 button（icon 放 Avatar，名称写在 MenuTrigger 的 children）。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。",
+    "末位的账户入口不另设部件：MenuTrigger 的 render 交给 SidebarButton（icon 放 Avatar，名称写在 MenuTrigger 的 children）。去往页面的条目用 SidebarLink，做一件事的用 SidebarButton，别把 button 写成 SidebarLink 的 render。名称是按钮的可访问名称，所以 Avatar 加 aria-hidden；收起时只剩头像，名称由 Tooltip 摆出。",
     "收起的窄轨里，二级子级与条目名称的浮层朝内联结束侧（inline-end）打开：ltr 在右，rtl 在左；窄轨二级入口与展开态一样把传入的 aria-*、data-*、事件交给触发元素。侧栏本身贴哪一边由应用的布局决定，切换按钮的图标在 rtl 下水平镜像。",
     "侧栏最多两级（SidebarSub 下一层），第三级不进侧栏：在 SidebarSub 里再放 SidebarSub 会在开发期直接抛错（与本库其他结构契约一致，而不是悄悄多缩进一层）。第三级放在内容区，用 Tabs 或页内次级导航承载，必要时用 Breadcrumb 交代位置。见「二级导航与内容区 Tabs」。",
     "带 SidebarGroupLabel 的 SidebarGroup 成为 role=group，名称取自标签；没有标签的分组只是排布。调用方自己给 aria-label 或 aria-labelledby 时以调用方为准。",
@@ -172,7 +192,7 @@ export default {
     "The current item is marked by a rounded surface one step deeper than the hover surface, plus medium weight: hover is one wash step, current is one ink step, so a row under the pointer never looks like the current one, and the weight is a second cue that does not rely on colour. The current item carries no line (user ruling: a straight line and a rounded surface are never combined on one item); the guide line beside a sub-level only expresses membership and the current item does not deepen it.",
     "The sub-level chevron points inward when closed and down when open, the same mark as a Tree branch; when the parent has no icon, the guide line drops from the start of its text.",
     "The current item uses the selected surface (--qy-sidebar-current = --qy-surface-selected): a translucent ink wash that always sits one step darker than the sidebar's own ground, so a project that changes --qy-sidebar need not set it.",
-    "The account entry at the end needs no part of its own: MenuTrigger renders a SidebarLink, and the SidebarLink renders a button (an Avatar as icon, the name as the MenuTrigger's children). The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.",
+    "The account entry at the end needs no part of its own: MenuTrigger renders a SidebarButton (an Avatar as icon, the name as the MenuTrigger's children). Items that go to a page use SidebarLink and items that do one thing use SidebarButton; do not render a button through SidebarLink. The name is the button's accessible name, so the Avatar is aria-hidden; in the rail only the avatar remains and a Tooltip restores the name.",
     "In the collapsed rail, the sub-level and item-name overlays open toward the inline end: right in ltr, left in rtl. The rail's sub-level entry forwards passed aria-*, data-*, and events to its trigger just as the expanded one does. The application's layout decides which edge the sidebar sits on; the toggle icon mirrors horizontally in rtl.",
     "A sidebar has at most two levels (one under SidebarSub); the third level does not go in the sidebar. A SidebarSub inside another SidebarSub throws during development (matching the library's other structural contracts, rather than quietly indenting one more level). Put the third level in the content area, carried by Tabs or an in-page secondary nav, with a Breadcrumb to say where you are. See \"Sub-level navigation with Tabs in the content\".",
     "A SidebarGroup with a SidebarGroupLabel is a role=group named by that label; a group without one is only layout. A caller's aria-label or aria-labelledby takes precedence.",

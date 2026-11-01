@@ -3,6 +3,7 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
+import { useOverflowEdges, useScrollbarGutter } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 
 /*
@@ -25,7 +26,35 @@ const cellX = "px-[calc(var(--qy-panel-gap)/2)] first:ps-(--qy-panel-padding) la
 export type TableContainerProps = useRender.ComponentProps<"div"> & {
   /** false：表格放在已有的一张纸上（Card、面板），不再铺第二张——没有线、底与圆角，由承载它的纸给出。 */
   framed?: boolean;
+  /**
+   * 横向溢出提示：还有内容的一端渐隐，滚到头的一端不渐隐。默认两端。
+   * "end"：只渐隐末端——起始端有固定列（DataTable 的 pinned）时，固定列自己的末端线已说明「向起始端还有内容」，
+   * 渐隐不能再去淡化一列要保持不透明的固定列。false：不渐隐。
+   */
+  fade?: boolean | "end";
 };
+/*
+ * 横向溢出的渐隐（做法同 ScrollArea 的 fade：data-overflow-x-* + 只取透明度的遮罩，宽度读同一个 --qy-scroll-fade，
+ * 取 --qy-fill-height，预设，理由见 scroll-area.tsx）。这里只有横向一轴。
+ * 遮罩五层，自上而下：竖向滚动条条带、横向滚动条条带（均以 add 并上去，滚动条本身不随渐隐变淡）、横向渐变（只铺在滚动条之外，
+ * clip 到内边框盒）、边框盒、内缘盒。后两层以 exclude 叠成一圈「线带」，再并入前面的结果：
+ * 遮罩作用于元素自己画的一切，包括它的边框与焦点线，而线是范围与焦点的标记，不是内容，不能随内容一起渐隐。
+ * 线带 = 边框盒减去「内缘盒」；内缘盒是内边框盒再向内缩一圈 --qy-table-band：framed 时为 0（线带恰是边框），
+ * 无边框的 framed={false} 时取焦点细线的宽度（它的焦点线画在盒内的 inset ring，宽度读 --qy-focus-quiet-width）。
+ * 渐隐会连同这张纸自己的底（bg-surface）一起变淡，露出纸后面的底；纸与底只差一档清染，所以接受（预设），不另造不被遮罩的底。
+ * scroll-padding 取同一宽度，使键盘把焦点移向被切掉的内容时，浏览器把它滚进渐隐之内，不被遮。
+ * overscroll-behavior-x: contain：横向滚到头不把滚动链交给外层（浏览器的「后退」手势或外层横向滚动区）。
+ */
+const fadeClassName = [
+  "[--qy-scroll-fade:var(--qy-fill-height)] [--qy-scroll-fade-x-start:0px] [--qy-scroll-fade-x-end:0px]",
+  "data-overflow-x-start:[--qy-scroll-fade-x-start:var(--qy-scroll-fade)] data-overflow-x-end:[--qy-scroll-fade-x-end:var(--qy-scroll-fade)]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-composite:add,add,add,exclude,add] [&[data-overflow-x-start],&[data-overflow-x-end]]:[-webkit-mask-composite:source-over,source-over,source-over,xor,source-over] [&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-repeat:no-repeat]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-origin:border-box,border-box,border-box,border-box,padding-box] [&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-clip:border-box,border-box,padding-box,border-box,padding-box]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-size:var(--qy-scrollbar-y)_100%,100%_var(--qy-scrollbar-x),calc(100%-var(--qy-scrollbar-y))_calc(100%-var(--qy-scrollbar-x)),100%_100%,calc(100%-2*var(--qy-table-band))_calc(100%-2*var(--qy-table-band))]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-position:right_top,left_bottom,left_top,left_top,center] rtl:[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-position:left_top,left_bottom,right_top,left_top,center]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-image:linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor),linear-gradient(to_right,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%),linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor)]",
+  "rtl:[&[data-overflow-x-start],&[data-overflow-x-end]]:[mask-image:linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor),linear-gradient(to_left,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%),linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor)]",
+].join(" ");
 /**
  * 表格的纸。内容真的超出时（横向或纵向）才可以获得焦点，用于键盘滚动（WCAG 2.1.1）；放得下时不进 Tab 序列——
  * 一张不能滚动的表多一个停靠点，只是让键盘用户多按一次 Tab。焦点让已有的清墨线加深为焦墨，不另画一圈。
@@ -43,12 +72,15 @@ export type TableContainerProps = useRender.ComponentProps<"div"> & {
  * 于是吸顶表头（TableHeader sticky）越过它，吸在外面最近的滚动区——页面，或 Workspace 的内容区。
  * 真溢出时换回 overflow-x: auto，表头只能吸在这张表自己的滚动区里（横向滚动容器的 y 轴也算滚动）。
  * 服务端与首帧按「放得下」输出 clip；客户端在首次绘制前测量，真溢出的宽表在可交互之前已换成可滚动。
+ * 横向还有内容的一端渐隐（fade），渐隐的两端由滚动位置实测（首帧无渐隐，挂载后量一次）。
  */
-export function TableContainer({ framed = true, render, className, ref, ...props }: TableContainerProps) {
+export function TableContainer({ framed = true, fade = true, render, className, ref, ...props }: TableContainerProps) {
   const element = React.useRef<HTMLDivElement | null>(null);
   const [scrollable, setScrollable] = React.useState(false);
   const [tableName, setTableName] = React.useState<{ labelledby?: string | undefined; label?: string | undefined }>({});
   const generated = React.useId();
+  const [gutterRef, gutter] = useScrollbarGutter<HTMLDivElement>(ref);
+  const [edgesRef, edges] = useOverflowEdges<HTMLDivElement>(gutterRef);
   React.useLayoutEffect(() => {
     const node = element.current; if (!node) return;
     const measure = () => {
@@ -69,8 +101,11 @@ export function TableContainer({ framed = true, render, className, ref, ...props
   const named = props["aria-label"] != null || props["aria-labelledby"] != null;
   const borrowed = scrollable && !named ? tableName : {};
   const region = scrollable && (named || borrowed.labelledby !== undefined || borrowed.label !== undefined);
+  const fading = fade !== false;
   // relative：容器是单元格里绝对定位内容（sr-only 等）的定位参照。否则它们以容器外的祖先为参照，逃出横向滚动的裁剪，把整页撑宽。
-  return useRender({ defaultTagName: "div", render, ref: [element, ref ?? null], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined, className: cn("relative min-w-0 max-w-full outline-none", scrollable ? "overflow-x-auto" : "overflow-clip", framed ? "rounded-panel border border-border bg-surface focus-visible:border-ring" : "focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
+  return useRender({ defaultTagName: "div", render, ref: [element, edgesRef], props: mergeProps({ "data-slot": "table-container", "data-framed": framed, tabIndex: scrollable ? 0 : undefined, role: region ? "region" : undefined, "aria-labelledby": borrowed.labelledby, "aria-label": borrowed.labelledby === undefined ? borrowed.label : undefined,
+    ...(fading ? { "data-overflow-x-start": fade === true && edges.start ? "" : undefined, "data-overflow-x-end": edges.end ? "" : undefined, style: { "--qy-scrollbar-y": `${gutter.y}px`, "--qy-scrollbar-x": `${gutter.x}px` } as React.CSSProperties } : {}),
+    className: cn("relative min-w-0 max-w-full overscroll-x-contain outline-none", scrollable ? "overflow-x-auto" : "overflow-clip", fading && fadeClassName, fading && (fade === true ? "scroll-px-(--qy-scroll-fade)" : "scroll-pe-(--qy-scroll-fade)"), framed ? "[--qy-table-band:0px] rounded-panel border border-border bg-surface focus-visible:border-ring" : "[--qy-table-band:var(--qy-focus-quiet-width)] focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", className) }, props) });
 }
 export type TableProps = useRender.ComponentProps<"table">;
 export function Table({ render, className, ...props }: TableProps) {

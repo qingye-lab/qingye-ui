@@ -79,6 +79,7 @@ export * from "./components/proportion";
 export * from "./components/prose";
 export * from "./components/radio-group";
 export * from "./components/rating";
+export * from "./components/relative-time";
 export * from "./components/resizable";
 export * from "./components/result";
 export * from "./components/scatter-chart";

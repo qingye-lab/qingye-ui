@@ -49,9 +49,10 @@ describe("Table", () => {
       } finally { restore(); }
     });
     it("follows the container as its size changes", () => {
-      let notify = () => {};
+      const callbacks: Array<() => void> = [];
+      const notify = () => callbacks.forEach(callback => callback());
       const original = globalThis.ResizeObserver;
-      globalThis.ResizeObserver = class { constructor(callback: () => void) { notify = callback; } observe() {} unobserve() {} disconnect() {} } as unknown as typeof ResizeObserver;
+      globalThis.ResizeObserver = class { constructor(callback: () => void) { callbacks.push(callback); } observe() {} unobserve() {} disconnect() {} } as unknown as typeof ResizeObserver;
       try {
         render(<TableContainer aria-label="随尺寸"><Table /></TableContainer>);
         expect(screen.getByLabelText("随尺寸")).not.toHaveAttribute("tabindex");
@@ -62,6 +63,49 @@ describe("Table", () => {
         act(() => notify());
         expect(screen.getByLabelText("随尺寸")).not.toHaveAttribute("tabindex");
       } finally { globalThis.ResizeObserver = original; }
+    });
+  });
+  describe("overflow fade", () => {
+    function geometry(scroll: number, client: number, left: number) {
+      const a = vi.spyOn(HTMLElement.prototype, "scrollWidth", "get").mockReturnValue(scroll);
+      const b = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(client);
+      const c = vi.spyOn(HTMLElement.prototype, "scrollLeft", "get").mockReturnValue(left);
+      return () => { a.mockRestore(); b.mockRestore(); c.mockRestore(); };
+    }
+    it("marks only the side that still has content, and nothing when the table fits", () => {
+      let restore = geometry(900, 300, 0);
+      try {
+        const { unmount } = render(<TableContainer aria-label="起点"><Table /></TableContainer>);
+        const container = screen.getByLabelText("起点");
+        expect(container).toHaveAttribute("data-overflow-x-end"); expect(container).not.toHaveAttribute("data-overflow-x-start");
+        unmount();
+      } finally { restore(); }
+      restore = geometry(900, 300, 200);
+      try {
+        const { unmount } = render(<TableContainer aria-label="中段"><Table /></TableContainer>);
+        const container = screen.getByLabelText("中段");
+        expect(container).toHaveAttribute("data-overflow-x-start"); expect(container).toHaveAttribute("data-overflow-x-end");
+        unmount();
+      } finally { restore(); }
+      restore = geometry(300, 300, 0);
+      try {
+        render(<TableContainer aria-label="放得下"><Table /></TableContainer>);
+        const container = screen.getByLabelText("放得下");
+        expect(container).not.toHaveAttribute("data-overflow-x-start"); expect(container).not.toHaveAttribute("data-overflow-x-end");
+      } finally { restore(); }
+    });
+    it("fades only the end side with fade=\"end\" and not at all with fade={false}", () => {
+      const restore = geometry(900, 300, 200);
+      try {
+        const { unmount } = render(<TableContainer fade="end" aria-label="仅末端"><Table /></TableContainer>);
+        const container = screen.getByLabelText("仅末端");
+        expect(container).not.toHaveAttribute("data-overflow-x-start"); expect(container).toHaveAttribute("data-overflow-x-end");
+        unmount();
+        render(<TableContainer fade={false} aria-label="不渐隐"><Table /></TableContainer>);
+        const plain = screen.getByLabelText("不渐隐");
+        expect(plain).not.toHaveAttribute("data-overflow-x-start"); expect(plain).not.toHaveAttribute("data-overflow-x-end");
+        expect(plain).toHaveAttribute("tabindex", "0");
+      } finally { restore(); }
     });
   });
   it("marks a sticky header for the caller to observe", () => {

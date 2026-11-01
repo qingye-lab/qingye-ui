@@ -91,7 +91,13 @@ export function DescriptionListItem({ render, className, ...props }: Description
   // inline：名称叠值，块自成一格，没有名列可继承。
   const classes = layout === "inline"
     ? "grid min-w-0 content-start gap-y-(--qy-field-gap)"
-    : cn("grid min-w-0 gap-x-(--qy-field-gap) gap-y-(--qy-field-gap)", paired ? "col-span-2 grid-cols-subgrid" : "sm:col-span-2 sm:grid-cols-subgrid");
+    : cn(
+      "grid min-w-0 gap-y-(--qy-field-gap)",
+      // 多列成对：根的轨道在「名 值 名 值」之间处处等距，若条目也沿用根的列间距，名称到值就与组到组一样远，两者分不出谁和谁成对
+      // （design.md「用关系成组」）；所以条目自己收紧到一个字段间隔，让间距的差异承担成组。
+      // 单列没有「组与组」可混淆：条目在 sm 起沿用根的列间距（不写 gap-x 即继承子网格所跨轨道的间距），最长的名称与值才隔得开。
+      paired ? "col-span-2 grid-cols-subgrid gap-x-(--qy-field-gap)" : "sm:col-span-2 sm:grid-cols-subgrid",
+    );
   return useRender({ defaultTagName: "div", render, props: mergeProps({ "data-slot": "description-list-item", className: cn(classes, className) }, props) });
 }
 export type DescriptionListTermProps = useRender.ComponentProps<"dt">;

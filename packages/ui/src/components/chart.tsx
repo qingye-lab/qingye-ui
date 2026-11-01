@@ -2,7 +2,7 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Text as RechartsText, Tooltip, usePlotArea, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, Pie, PieChart, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Text as RechartsText, Tooltip, usePlotArea, XAxis, YAxis } from "recharts";
 import * as React from "react";
 import { Button } from "./button";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
@@ -24,13 +24,16 @@ export type ChartSeries = { key: string; label: string };
  * - context：背景系列，只用于 line——同一量的“其余”若干条，淡墨细线，不占身份色与标记；见下方「背景系列」。
  * - tone：系列的状态类别；非背景系列要么全部声明、要么都不声明，且不得重复。
  * - interpolation：只用于 line、area、area-stacked、area-share；见 ChartInterpolation。
+ * - range：只用于 line 的非背景系列——这一条线在每一点上还有一段区间（如多次测量的最小、最大值），min / max 是 rows 里 values 的键，
+ *   画成同色的淡带垫在线下，读数与数据表各多出区间的两端；见 RANGE_FILL_OPACITY。线本身仍是该系列 key 的值（均值、中位数等），不要求落在区间正中。
  */
 /**
  * 两点之间怎么连：linear 直线；step 阶梯，值从该点起保持到下一点（step-after）。
  * 阶梯表达“值在两次变化之间保持不变”（设定值、阈值、库存）；不提供平滑曲线——曲线在两点之间画出数据里没有的值。
  */
 export type ChartInterpolation = "linear" | "step";
-export type ChartSeriesInput = ChartSeries & { context?: boolean; tone?: Tone; interpolation?: ChartInterpolation };
+export type ChartRange = { min: string; max: string };
+export type ChartSeriesInput = ChartSeries & { context?: boolean; tone?: Tone; interpolation?: ChartInterpolation; range?: ChartRange };
 /** 参照：量轴上的一个范围（带）或一个位置（线）。是墨不是色，名称必填并出现在图例与数据表。 */
 export type ChartReference = { kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string };
 /** 事件：落在类别轴某一行上的一件事；给 tone 时用类别色，否则用墨。 */
@@ -64,10 +67,11 @@ const AREA_WASH = 28; // 预设：堆叠面积的淡色带里颜料占 28%，其
 export type ChartType = "line" | "bar" | "area" | "area-stacked" | "bar-horizontal" | "bar-stacked" | "bar-share" | "area-share" | "donut";
 export type ChartMarker = "circle" | "square" | "triangle" | "diamond" | "cross";
 /** context 系列不画标记：marker 对它是占位（取第一个形状），读取时以 context 为准。 */
-export type ChartProjectedSeries = ChartSeries & { dataKey: string; color: string; marker: ChartMarker; context: boolean; tone?: Tone; interpolation?: ChartInterpolation };
+export type ChartProjectedSeries = ChartSeries & { dataKey: string; color: string; marker: ChartMarker; context: boolean; tone?: Tone; interpolation?: ChartInterpolation; range?: ChartRange };
 /**
  * 同源投影。bar-share / area-share 的 data 里是占比（0–1，该行各系列加总为 1；该行含未知值、不适用值或和为 0 时整行为 null，不画），
  * 原值在 raw（与 data 同序）；valueLabels 为真时由图形把格式化后的值标在柱的数据端。
+ * 带 range 的系列：投影后的 range.min / range.max 是 data 里区间两端的键（与 dataKey 同一套 series0…命名；该点两端有一端不可得时对应值为 null）。
  */
 export type ChartPlotData = { type: ChartType; data: Record<string, string | number | null>[]; series: readonly ChartProjectedSeries[]; categoryLabel: string; valueLabel: string; total?: number; references?: readonly ChartReference[]; events?: readonly ChartEvent[]; valueDomain?: readonly [number, number]; raw?: Record<string, number | null>[]; valueLabels?: boolean };
 export type ChartStyle = React.CSSProperties & {
@@ -126,6 +130,14 @@ export const PLOT_PRESETS: ChartStyle = { "--qy-chart-plot-height": "calc(10 * v
 export const MARKERS: readonly ChartMarker[] = ["circle", "square", "triangle", "diamond", "cross"];
 const BAR_CATEGORY_GAP = "24%"; // 预设：类别带里柱组之间的留白，占类别带的比例（比例不是长度，不随分走）
 const AREA_FILL_OPACITY = 0.1; // 预设：单系列与多系列半透叠放面积的淡面浓度
+/*
+ * 区间带：一条线在每一点上的上下界，画成与该系列同色的一块淡染，垫在线与标记之下。
+ * - 同色：带属于这条线，不另取色（色是身份；一条线只有一个身份）。淡：它是线的不确定范围，不是另一个数据，不能与线争位。
+ * - 不描边：带的边界由染色本身给出（一个范围一种机制，同参照带）；线与带之间已有足色 2px 线分开。
+ * - 浓度 0.14 是预设：试过 0.1（与面积图的淡面同值）在浅色纸上与网格线的墨色相近，读不出是一块带；0.14 在浅深两色下都能与纸分开又不压过线。
+ *   图例的键同取此值，所以只改这一处。
+ */
+const RANGE_FILL_OPACITY = 0.14;
 /*
  * 参照、背景系列与事件（用户批准 2026-10-12）：它们帮读者定位数据，自己不是数据，所以用墨不用色（NG10）。
  * - 参照带：8% 墨的染（--qy-surface-strong，清；静止的面，不借用悬停面）。画在网格之上、数据之下；带只是一块淡染，不描边（一个范围一种机制）。
@@ -196,7 +208,7 @@ export function LegendKey({ series, type }: { series: ChartProjectedSeries; type
   const { mark, keyWidth, stroke, hairline } = useChartGeometry();
   const mid = mark / 2;
   if (type === "line" && series.context) return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible" style={{ color: series.color }}><path d={`M0 ${mid}H${keyWidth}`} stroke="currentColor" strokeWidth={hairline} strokeLinecap="round" /></svg>;
-  if (type === "line") return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible" style={{ color: series.color }}><path d={`M0 ${mid}H${keyWidth}`} stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" /><svg x={(keyWidth - mark) / 2} y={0} width={mark} height={mark} viewBox={`0 0 ${mark} ${mark}`} fill="currentColor" overflow="visible"><MarkerShape marker={series.marker} /></svg></svg>;
+  if (type === "line") return <svg aria-hidden="true" width={keyWidth} height={mark} viewBox={`0 0 ${keyWidth} ${mark}`} className="shrink-0 overflow-visible" style={{ color: series.color }}>{series.range && <rect x={0} y={0} width={keyWidth} height={mark} fill="currentColor" fillOpacity={RANGE_FILL_OPACITY} />}<path d={`M0 ${mid}H${keyWidth}`} stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" /><svg x={(keyWidth - mark) / 2} y={0} width={mark} height={mark} viewBox={`0 0 ${mark} ${mark}`} fill="currentColor" overflow="visible"><MarkerShape marker={series.marker} /></svg></svg>;
   return <span data-slot="legend-key" aria-hidden="true" className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: series.color }} />;
 }
 /** 参照的键：带是同色的一块染，线是同样的一线宽虚线。 */
@@ -260,7 +272,7 @@ function StackedBarShape({ x = 0, y = 0, width = 0, height = 0, fill, isBase, is
     : `M${x},${top}H${x + width}V${bottom}H${x}Z`;
   return <path d={d} fill={fill} />;
 }
-type TooltipEntry = { dataKey?: string | number; value?: number | string | null; color?: string; payload?: { id?: string } };
+type TooltipEntry = { dataKey?: string | number; value?: number | string | null; color?: string; payload?: { id?: string; [key: string]: unknown } };
 type ChartBand = Extract<ChartReference, { kind: "band" }>;
 /** 数值相对目标带的位置：高于、低于还是在内，以及差多少（带的两端含在内）。 */
 function bandPosition(value: number, band: ChartBand) {
@@ -289,6 +301,9 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
       if (!item || item.context) return null;
       const known = typeof entry.value === "number";
       const place = known && band ? bandPosition(entry.value as number, band) : undefined;
+      // 区间：两端都已知才写；有一端不可得时读数不猜（数据表里有各自的状态）。格式与线上的读数同一个 format。
+      const low = item.range ? entry.payload?.[item.range.min] : undefined, high = item.range ? entry.payload?.[item.range.max] : undefined;
+      const rangeText = typeof low === "number" && typeof high === "number" ? messages.chartRange(nodeText(format(low, item.key, String(label)), new Intl.NumberFormat(code).format(low)), nodeText(format(high, item.key, String(label)), new Intl.NumberFormat(code).format(high))) : undefined;
       // 占比类：图上的量是占比，读数给“原值（占比）”。没有画的行（含未知值或和为 0）没有图形可悬停，读数不出现，已知原值在数据表里。
       const raw = share?.raw(rowId, item.key);
       const reading = share ? (known && raw !== null && raw !== undefined ? messages.proportionShare(raw, share.percent.format(entry.value as number)) : "—") : known ? format(entry.value as number, item.key, String(label)) : "—";
@@ -299,6 +314,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
           <span className="text-body-strong numeric">{reading}</span>
           <span className="min-w-0 text-muted-foreground wrap-anywhere">{item.label}</span>
         </div>
+        {rangeText && <div data-slot="chart-range" className="col-start-2 text-dense text-muted-foreground numeric wrap-anywhere">{rangeText}</div>}
         {place && band && <div className="col-start-2 text-dense text-muted-foreground numeric wrap-anywhere">{messages.chartBandPosition(place.position, nodeText(format(place.amount, item.key, String(label)), new Intl.NumberFormat(code).format(place.amount)), band.label)}</div>}
       </div>;
     })}
@@ -407,7 +423,7 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   const labelled = valueLabels === true && (type === "bar" || horizontal);
   // 网格只画需要的方向：数值轴是纵轴时画横线，数值轴是横轴（横向柱）时画竖线。标了值的柱不再画网格（NG1）。
   const grid = labelled ? null : <CartesianGrid vertical={horizontal} horizontal={!horizontal} stroke="var(--qy-border)" strokeWidth={geo.hairline} />;
-  const values = data.flatMap(row => series.map(item => row[item.dataKey])).filter((value): value is number => typeof value === "number");
+  const values = data.flatMap(row => series.flatMap(item => [row[item.dataKey], ...(item.range ? [row[item.range.min], row[item.range.max]] : [])])).filter((value): value is number => typeof value === "number");
   const valueFormatter = (value: string | number) => typeof value === "number" ? (share && percentTick ? percentTick.format(value) : number.format(value)) : value;
   const band = references.find((reference): reference is ChartBand => reference.kind === "band");
   const eventsOf = (rowId: string) => events.filter(event => event.rowId === rowId);
@@ -479,11 +495,13 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
       {eventMarks}
     </AreaChart></ResponsiveContainer>;
   }
-  return <ResponsiveContainer width="100%" height="100%"><LineChart data={data} accessibilityLayer={false}>
+  // LineChart 只认线；区间带是面（Area），要同图并存须用 ComposedChart。没有区间时仍是 LineChart，不改变既有折线的构造。
+  const Chart2D = series.some(item => item.range) ? ComposedChart : LineChart;
+  return <ResponsiveContainer width="100%" height="100%"><Chart2D data={data} accessibilityLayer={false}>
     {grid}{categoryAxis}{valueAxis}{tooltip}{referenceMarks}
     <LineSeries data={data} series={series} />
     {eventMarks}
-  </LineChart></ResponsiveContainer>;
+  </Chart2D></ResponsiveContainer>;
 }
 /*
  * 折线的系列。标记的疏密：相邻两点的间距小于两个标记宽（2 × mark，默认 16px，两个 8px 的标记并排连一圈纸色都放不下）时，
@@ -499,7 +517,11 @@ function LineSeries({ data, series }: { data: ChartPlotData["data"]; series: rea
   const dense = spacing < 2 * mark;
   const last = new Map(series.map(item => { let found = -1; data.forEach((record, index) => { if (typeof record[item.dataKey] === "number") found = index; }); return [item.dataKey, found] as const; }));
   const ordered = [...series.filter(item => item.context), ...series.filter(item => !item.context)];
-  return <>{ordered.map(item => item.context
+  // 区间带先画，垫在所有线之下；一端不可得的点没有带（gap），与线的未知值同一规则。
+  const bands = series.filter(item => item.range && !item.context);
+  return <>{bands.map(item => <Area key={`${item.key}-range`} dataKey={(record: Record<string, string | number | null>) => { const low = record[item.range!.min], high = record[item.range!.max]; return typeof low === "number" && typeof high === "number" ? [low, high] : null; }} name={item.label} type={curveOf(item)}
+      stroke="none" fill={item.color} fillOpacity={RANGE_FILL_OPACITY} tooltipType="none" legendType="none" connectNulls={false} isAnimationActive={false} dot={false} activeDot={false} />)}
+    {ordered.map(item => item.context
     ? <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={hairline} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={false} />
     : <Line key={item.key} dataKey={item.dataKey} name={item.label} type={curveOf(item)} stroke={item.color} strokeWidth={stroke} strokeLinejoin="round" strokeLinecap="round" connectNulls={false} isAnimationActive={false} activeDot={false} dot={({ cx, cy, index }) => cx === undefined || cy === undefined || (dense && index !== last.get(item.dataKey)) ? <g key={index} /> : <Marker key={index} color={item.color} marker={item.marker} cx={cx} cy={cy} />} />)}</>;
 }
@@ -596,6 +618,14 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
     if (item.interpolation !== "linear" && item.interpolation !== "step") throw new RangeError("Chart series interpolation must be \"linear\" or \"step\".");
     if (!STEP_TYPES.has(type)) throw new RangeError(`Chart series interpolation is for line, area, area-stacked and area-share only; "${type}" shows each category's own value, and nothing is held between categories.`);
   });
+  // 区间：只有折线（位置编码）能把一段区间画成线后的一块带；柱与面积的长度、面积已经在编码量本身。背景系列只是背景，没有自己的区间。
+  series.forEach(item => {
+    if (item.range === undefined) return;
+    if (type !== "line") throw new RangeError(`Chart series range is for type "line" only; "${type}" encodes by length, area or angle, and a band on it would be read as another quantity.`);
+    if (item.context) throw new RangeError("Chart context series cannot declare a range; background is a plain faint line.");
+    if (!isName(item.range.min) || !isName(item.range.max)) throw new Error(`Chart series "${item.label}" range requires nonempty min and max keys naming the row values of the band's two ends; received ${received(item.range)}.`);
+    if (item.range.min === item.range.max) throw new RangeError(`Chart series "${item.label}" range min and max must be different keys; one value is a point, not a band.`);
+  });
   // 堆叠与占比的面：各带共用同一条边界，一条阶梯、一条直线叠在一起边界对不上，必须同一种。
   if ((type === "area-stacked" || type === "area-share") && new Set(series.map(item => item.interpolation ?? "linear")).size > 1) throw new RangeError("Chart stacked areas share their boundaries, so every series must use the same interpolation.");
   // 柱上标值：只给单系列的 bar 与 bar-horizontal。
@@ -628,12 +658,13 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
     const outside = references.some(reference => (reference.kind === "band" ? [reference.from, reference.to] : [reference.value]).some(value => value < min || value > max));
     if (outside) throw new RangeError("Chart references fall outside valueDomain; a clipped reference no longer matches its name.");
   }
-  const single = identityCount === 1 && !contextCount && !references.length;
+  // 单系列且没有别的要说明时不画图例；带区间的线要靠图例键认出“这块淡染属于这条线”，所以带区间时仍画。
+  const single = identityCount === 1 && !contextCount && !references.length && !series.some(item => item.range);
   // 次序：身份色与标记形状按非背景系列自己的次序取（背景系列不占名额）；声明了 tone 则取类别色。
   let identity = 0;
   const projected: ChartProjectedSeries[] = series.map((item, index) => {
     const dataKey = `series${index}`;
-    const shape = item.interpolation ? { interpolation: item.interpolation } : {};
+    const shape = { ...(item.interpolation ? { interpolation: item.interpolation } : {}), ...(item.range && !item.context ? { range: { min: `${dataKey}-min`, max: `${dataKey}-max` } } : {}) };
     if (item.context) return { key: item.key, label: item.label, dataKey, color: CONTEXT_COLOR, marker: MARKERS[0]!, context: true, ...shape };
     const order = identity++;
     return { key: item.key, label: item.label, dataKey, color: item.tone ? toneColor[item.tone] : `var(--qy-chart-${order + 1})`, marker: MARKERS[order]!, context: false, ...(item.tone ? { tone: item.tone } : {}), ...shape };
@@ -643,7 +674,7 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
   const data = rows.map(row => {
     const record: Record<string, string | number | null> = { id: row.id, category: row.label };
     const rawRow: Record<string, number | null> = {};
-    projected.forEach(item => {
+    projected.forEach((item, seriesIndex) => {
       const value = readValue(row, item.key);
       if (type === "donut" && (typeof value !== "number" || value < 0)) throw new RangeError("Chart type \"donut\" requires every part's value to be a known, non-negative number; an unavailable or negative share has no wedge to draw. When the whole is unavailable, render Empty in place of the chart.");
       if (share && typeof value === "number" && value < 0) throw new RangeError(`Chart type "${type}" requires non-negative values: a share is a part of the row's sum, and a negative part has no share of the whole. Use a bar for values that cross zero.`);
@@ -651,6 +682,15 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
       if (typeof value === "number" && !share) numeric = true;
       rawRow[item.dataKey] = typeof value === "number" ? value : null;
       record[item.dataKey] = rawRow[item.dataKey]!;
+      // 区间两端：与线同样必须有值（可显式未知）；两端都已知时下界不得大于上界，否则带是倒的，名实不符。
+      const input = series[seriesIndex]?.range;
+      if (item.range && input) {
+        const low = readValue(row, input.min), high = readValue(row, input.max);
+        if (typeof low === "number" && typeof high === "number" && low > high) throw new RangeError(`Chart range of "${item.label}" at "${row.label}" has min ${low} greater than max ${high}.`);
+        for (const end of [low, high]) if (typeof end === "number" && valueDomain && (end < valueDomain[0] || end > valueDomain[1])) throw new RangeError(`Chart range value ${end} of "${row.label}" falls outside valueDomain [${valueDomain[0]}, ${valueDomain[1]}]; cutting the data off would misstate it.`);
+        record[item.range.min] = typeof low === "number" ? low : null;
+        record[item.range.max] = typeof high === "number" ? high : null;
+      }
     });
     // 占比：整行的值都已知、和大于 0 才画，各系列除以该行之和；否则整行不画（见 SHARE_TICKS 处的说明）。
     if (share) {
@@ -727,12 +767,16 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
     {isDonut && <div className="flex justify-center">{donutLegend}</div>}
     {!isDonut && <div data-slot="chart-category-axis" className="sr-only">{categoryLabel}</div>}
     {dataView.open && <div id={dataView.id} data-slot="chart-data" className="grid min-w-0 gap-(--qy-field-gap)">
-      <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => <TableHead key={item.key} numeric>{item.label}</TableHead>)}{stacks && <TableHead numeric>{messages.chartTotal}</TableHead>}{events.length > 0 && <TableHead>{messages.chartEvent}</TableHead>}</TableRow></TableHeader><TableBody>{rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map((item, seriesIndex) => {
+      <TableContainer><Table aria-label={label}><TableHeader><TableRow><TableHead>{categoryLabel}</TableHead>{series.map(item => item.range ? [<TableHead key={item.key} numeric>{item.label}</TableHead>, <TableHead key={`${item.key}-min`} numeric>{messages.chartRangeMin(item.label)}</TableHead>, <TableHead key={`${item.key}-max`} numeric>{messages.chartRangeMax(item.label)}</TableHead>] : <TableHead key={item.key} numeric>{item.label}</TableHead>)}{stacks && <TableHead numeric>{messages.chartTotal}</TableHead>}{events.length > 0 && <TableHead>{messages.chartEvent}</TableHead>}</TableRow></TableHeader><TableBody>{rows.map((row, rowIndex) => <TableRow key={row.id}><TableHead scope="row">{row.label}</TableHead>{series.map((item, seriesIndex) => {
         const value = readValue(row, item.key);
         // 占比类：已知值写“原值（占比）”；该行没有算出占比（含不可得的值或和为 0）时只写原值。
         const fraction = share ? data[rowIndex]![projected[seriesIndex]!.dataKey] : null;
         const cell = typeof value !== "number" ? value.label : typeof fraction === "number" ? messages.proportionShare(plain(value, item, row), percent.format(fraction)) : formatValue?.(value, item, row) ?? number.format(value);
-        return <TableCell key={item.key} numeric className="whitespace-nowrap" data-state={typeof value === "number" ? "known" : value.state}>{cell}</TableCell>;
+        const main = <TableCell key={item.key} numeric className="whitespace-nowrap" data-state={typeof value === "number" ? "known" : value.state}>{cell}</TableCell>;
+        if (!item.range) return main;
+        // 区间的两端各一列，写法同线上的值：已知写格式化值，不可得写它的名称。
+        const ends = [item.range.min, item.range.max].map(end => { const edge = readValue(row, end); return <TableCell key={`${item.key}-${end}`} numeric className="whitespace-nowrap" data-state={typeof edge === "number" ? "known" : edge.state}>{typeof edge === "number" ? formatValue?.(edge, item, row) ?? number.format(edge) : edge.label}</TableCell>; });
+        return [main, ...ends];
       })}{stacks && (() => { const sum = totalOf(row); return <TableCell data-slot="chart-total-cell" numeric className="whitespace-nowrap" data-state={sum === null ? "unknown" : "known"}>{sum === null ? messages.chartTotalPartial : sum}</TableCell>; })()}{events.length > 0 && <TableCell data-slot="chart-event-cell" className="whitespace-nowrap">{eventsByRow(row.id).map((event, index) => <span key={index} className="block">{event.label}</span>)}</TableCell>}</TableRow>)}</TableBody></Table></TableContainer>
       {references.length > 0 && <ul data-slot="chart-references" aria-label={messages.chartReferences} className={legendClassName}>{references.map((reference, index) => <li key={index} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span>{reference.label}</span><span className="numeric">{referenceText(reference)}</span></li>)}</ul>}
     </div>}

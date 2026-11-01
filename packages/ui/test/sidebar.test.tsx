@@ -6,8 +6,9 @@ import { UILocaleProvider } from "../src/locale";
 import { Avatar, AvatarFallback } from "../src/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from "../src/components/menu";
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTrigger } from "../src/components/drawer";
+import { Popover, PopoverPopup, PopoverTrigger } from "../src/components/popover";
 import { Workspace, WorkspaceHeader } from "../src/components/workspace";
-import { createSidebarDrawerHandle, Sidebar, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
+import { createSidebarDrawerHandle, Sidebar, SidebarButton, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "../src/components/sidebar";
 const dot = <span aria-hidden="true">●</span>;
 describe("Sidebar", () => {
   it("names the nav by default, lets the caller override, and keeps the toggle name fixed while aria-expanded changes", async () => {
@@ -128,6 +129,40 @@ describe("Sidebar", () => {
     expect(screen.getByRole("button", { name: "陈致远" })).toBe(trigger);
     await user.click(screen.getByRole("button", { name: "陈致远" }));
     expect(await screen.findByRole("menuitem", { name: "退出登录" })).toBeInTheDocument();
+  });
+  it("renders SidebarButton as a plain button without a current-page claim, and keeps its name in the rail", () => {
+    const onClick = vi.fn();
+    const tree = (collapsed: boolean) => <Sidebar collapsed={collapsed}><SidebarContent><SidebarButton icon={dot} onClick={onClick} count={3}>搜索</SidebarButton></SidebarContent></Sidebar>;
+    const { rerender } = render(tree(false));
+    const button = screen.getByRole("button", { name: /搜索/ });
+    expect(button.tagName).toBe("BUTTON");
+    expect(button).toHaveAttribute("type", "button");
+    expect(button).not.toHaveAttribute("aria-current");
+    expect(screen.queryByRole("link")).toBeNull();
+    rerender(tree(true));
+    expect(screen.getByRole("button", { name: /搜索/ })).toBe(button);
+    button.click();
+    expect(onClick).toHaveBeenCalledOnce();
+  });
+  it("lets SidebarButton be the render target of MenuTrigger and PopoverTrigger with ref and aria-expanded on the button", async () => {
+    const user = userEvent.setup();
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<Sidebar><SidebarFooter>
+      <Menu><MenuTrigger render={<SidebarButton ref={ref} icon={dot} />}>账户</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem>退出登录</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu>
+      <Popover><PopoverTrigger render={<SidebarButton icon={dot} />}>通知</PopoverTrigger><PopoverPopup>没有新通知</PopoverPopup></Popover>
+    </SidebarFooter></Sidebar>);
+    const menu = screen.getByRole("button", { name: "账户" });
+    expect(ref.current).toBe(menu);
+    expect(menu).toHaveAttribute("aria-expanded", "false");
+    await user.click(menu);
+    expect(await screen.findByRole("menuitem", { name: "退出登录" })).toBeInTheDocument();
+    expect(menu).toHaveAttribute("aria-expanded", "true");
+    await user.keyboard("{Escape}");
+    const popover = screen.getByRole("button", { name: "通知" });
+    expect(popover).toHaveAttribute("aria-expanded", "false");
+    await user.click(popover);
+    expect(await screen.findByText("没有新通知")).toBeInTheDocument();
+    expect(popover).toHaveAttribute("aria-expanded", "true");
   });
   it("makes a labelled group a named group and leaves an unlabelled one as plain layout", () => {
     render(<Sidebar><SidebarContent><SidebarGroup><SidebarGroupLabel>导航</SidebarGroupLabel><SidebarLink href="#a">A</SidebarLink></SidebarGroup><SidebarGroup data-testid="plain"><SidebarLink href="#b">B</SidebarLink></SidebarGroup></SidebarContent></Sidebar>);

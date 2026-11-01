@@ -39,6 +39,8 @@ export const enUS: UILocale = {
     sparklineNavigation: "Use Left and Right arrows to inspect points, Home or End for the first or last; press Enter or Space to show or dismiss the reading.",
     chartEvent: "Event", chartReferences: "References", chartBandPosition: (position, amount, label) => position === "within" ? `Within ${label}` : `${amount} ${position === "above" ? "above" : "below"} ${label}`,
     chartTotal: "Total", chartTotalPartial: "Part missing, not totaled", chartShareAxis: valueLabel => `Share of ${valueLabel}`,
+    chartRange: (min, max) => `Range ${min}–${max}`, chartRangeMin: label => `${label} minimum`, chartRangeMax: label => `${label} maximum`,
+    relativeTimeAbsolute: absolute => ` (${absolute})`,
     steps: "Steps", stepComplete: "Completed", stepCurrent: "Current", stepUpcoming: "Not started", stepError: "Error", timeline: "Timeline",
     tourPrevious: "Previous", tourNext: "Next", tourFinish: "Done", tourSkip: "Skip", tourProgress: (current, total) => `Step ${current} of ${total}`,
     clear: "Clear", cancel: "Cancel", confirm: "Confirm", apply: "Apply", reset: "Reset", back: "Back", search: "Search", expand: "Expand", collapse: "Collapse",

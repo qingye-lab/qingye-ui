@@ -12,7 +12,7 @@ import { CornerMark } from "@qingye_lab/ui/components/corner-mark";
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
 import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Sidebar, SidebarButton, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
 import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface } from "@qingye_lab/ui/components/workspace";
 import { ACTIVITY, COLLECTIONS, findCollection } from "./data";
@@ -107,7 +107,7 @@ export function WorkspaceShell() {
       {/* 底：我是谁。点开是本人的命令。 */}
       <SidebarFooter>
         <Menu>
-          <MenuTrigger render={<SidebarLink icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} render={<button type="button" />} />}>陈致远</MenuTrigger>
+          <MenuTrigger render={<SidebarButton icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} />}>陈致远</MenuTrigger>
           <MenuPortal><MenuPositioner side="top" align="start"><MenuPopup>
             <MenuItem render={link("/settings/members")}>成员与角色</MenuItem>
             <MenuItem render={link("/help")}>帮助</MenuItem>

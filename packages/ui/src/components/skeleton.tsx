@@ -7,6 +7,7 @@ import { cn } from "../utils";
 export type SkeletonProps = useRender.ComponentProps<"div"> & { label?: string };
 export type SkeletonLineProps = useRender.ComponentProps<"div">;
 export type SkeletonBlockProps = useRender.ComponentProps<"div">;
+export type SkeletonControlProps = useRender.ComponentProps<"div">;
 
 /*
  * 骨架屏（2026-10-09 按 design.md 重做）：内容尚未到达时，把将到之物的位置与形状摆出来，
@@ -24,6 +25,9 @@ export type SkeletonBlockProps = useRender.ComponentProps<"div">;
  *   唯一的动是内容到达时的原位淡入，由调用方挂载真内容时承担。
  * - 已有内容刷新时保留仍然有效的工作面：骨架只用于首次到达，不用于覆盖已有内容的刷新。
  * 不提供独立的转圈图形：图形不单独成为状态（见 StatusDot）。
+ * - 与控件同尺寸：输入框、选择器这类填值控件到达后占的是控件外高，不是一材。SkeletonControl 的高与角
+ *   取填值控件的角色（`--qy-fill-height`、`--qy-fill-radius`）并沿用控件的窄屏/粗指针换档，所以随 `data-density`
+ *   变化，且与同环境的 Input 等高：到达后原位替换、不跳位。它是一条条状的小面，墨取与 SkeletonLine 相同的清墨 8%。
  * 预设（无关系可推）：整块的默认高度 5 材。
  */
 export function Skeleton({ label, className, children, render, ref, ...props }: SkeletonProps) {
@@ -46,5 +50,12 @@ export function SkeletonLine({ className, render, ref, ...props }: SkeletonLineP
 export function SkeletonBlock({ className, render, ref, ...props }: SkeletonBlockProps) {
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({ "aria-hidden": true, "data-slot": "skeleton-block" }, props, {
     className: cn("h-[calc(5*var(--qy-cai))] w-full rounded-panel bg-surface-inset", className),
+  }) });
+}
+
+/** 填值控件（输入框、选择器）的位置；按钮有自己的尺寸档，不用它占位。与同环境、同密度的控件等高，宽度由调用方的 className 给出（默认占满）。 */
+export function SkeletonControl({ className, render, ref, ...props }: SkeletonControlProps) {
+  return useRender({ defaultTagName: "div", render, ref, props: mergeProps({ "aria-hidden": true, "data-slot": "skeleton-control" }, props, {
+    className: cn("h-(--qy-fill-height-narrow) w-full rounded-(--qy-fill-radius) bg-(--qy-surface-strong) sm:h-(--qy-fill-height) pointer-coarse:h-(--qy-touch-target)", className),
   }) });
 }

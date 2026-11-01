@@ -7,7 +7,7 @@ export default function Demo() {
     <Heading level={3}>文字 Text</Heading>
     <Stack gap="field">
       <Text>正文 Body</Text>
-      <Text step="support" className="text-muted-foreground">辅助 Support</Text>
+      <Text step="support" tone="muted">辅助 Support</Text>
       <Text step="caption">附注 Caption</Text>
       <Text>中文标点：，。；！？ / Qingye UI</Text>
     </Stack>
